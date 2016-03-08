@@ -49,9 +49,12 @@ button,
 select,
 html,
 textarea,
-input{
+input,
+h1, h2, h3, h4, h5, h6{
     font-family: 'Open Sans', Arial, sans-serif;
 }
+
+
 
 .checkbox,
 .radio{
@@ -1224,6 +1227,10 @@ md-backdrop{
 md-dialog md-dialog-content {
     overflow: hidden;
     padding: 0;
+}
+
+md-dialog.create-app-dialog{
+    width: 600px;
 }
 
 md-dialog.create-app-dialog,
