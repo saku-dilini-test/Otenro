@@ -112,6 +112,7 @@ module.exports.routes = {
       'POST /edit/addThirdNavigation':'edit/commerce/ThirdNavigationController.addThirdNavi',
       'POST /edit/deleteThirdNavi':'edit/commerce/ThirdNavigationController.deleteThirdNavi',
       'POST /edit/updateThirdNaviImage':'edit/commerce/ThirdNavigationController.updateThirdNaviImage',
+      'POST /edit/updateThirdNavi' : 'edit/commerce/ThirdNavigationController.updateThirdNavi',
       'POST /edit/deleteItem' : 'edit/commerce/MainNavigationController.deleteItem',
       'POST /edit/setCurrency': 'edit/setting/CurrencyController.setCurrency',
 

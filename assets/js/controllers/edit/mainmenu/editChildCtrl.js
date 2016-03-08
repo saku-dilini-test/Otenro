@@ -10,10 +10,10 @@
     function EditChildCtrl($scope, $mdDialog,$rootScope,child,mainMenuService,commerceService,$auth,SERVER_URL) {
 
         $scope.child=child;
-        //$scope.imageURL= SERVER_URL+
-        //    "api/edit/viewImages?userId="+$auth.getPayload().sub
-        //    +"&appId="+$rootScope.appId+"&"
-        //    +new Date().getTime();
+        $scope.imageURL= SERVER_URL+
+            "edit/viewImages?userId="+$auth.getPayload().id
+            +"&appId="+$rootScope.appId+"&"
+            +new Date().getTime();
 
         commerceService.getMainMenuList()
             .success(function (result) {
@@ -33,7 +33,7 @@
                     alert("success", 'Awsome! ', 'Category has been Updated.!');
                       return mainMenuService.showMainMenuDialog();
                 }).error(function(err) {
-                    alert('warning', "Unable to Updated", err.message);
+                    alert('warning', "Unable to Updated");
                 })
 
         };

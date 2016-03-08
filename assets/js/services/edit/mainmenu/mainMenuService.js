@@ -49,12 +49,7 @@
                     }
                 }).then(function(answer) {
 
-                }).error(function (error) {
-                        toastr.error('Cant Load :', 'Error', {
-                            closeButton: true
-                        });
                 });
-
             },
 
             showChildDialog: function(child){
@@ -67,7 +62,7 @@
                     }
                 }).then(function(answer) {
 
-                }, function() {
+                },function() {
 
                 });
 

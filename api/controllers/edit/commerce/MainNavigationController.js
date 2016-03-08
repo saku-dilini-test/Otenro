@@ -79,7 +79,7 @@ module.exports = {
         }if(req.body.mainId){
             SecondNavigation.destroy({ id : req.body.id}).exec(function (err) {
                 if (err) return callback("Error while deleting " + err.message);
-                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/categories/'+ req.body.imageUrl;
+                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/'+ req.body.imageUrl;
                 fs.unlink(filePath, function (err) {
                     if (err) throw err;
                     res.send(200,{message:'Deleted Second Navigation'});
@@ -89,7 +89,7 @@ module.exports = {
         }if(req.body.childId){
             ThirdNavigation.destroy({ id : req.body.id}).exec(function (err) {
                 if (err) return callback("Error while deleting " + err.message);
-                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/products/'+ req.body.imageUrl;
+                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/'+ req.body.imageUrl;
                 fs.unlink(filePath, function (err) {
                     if (err) throw err;
                     res.send(200,{message:'Deleted Third Navigation'});

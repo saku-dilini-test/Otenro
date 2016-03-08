@@ -6,7 +6,7 @@ mobileApp.controller('categoryController', function($scope, $rootScope, $transla
     $scope.serviceApi = serviceApi;
     $scope.imageURL = serviceApi
         +"templates/viewImages?userId="
-        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=categories/";
+        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi/";
 
     $http.get(SERVER_URL + '/templates/getSpecificChild?appId='+$rootScope.appId+'&mainId='+$routeParams.id)
         .success(function(data) {

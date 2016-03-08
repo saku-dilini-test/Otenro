@@ -14,10 +14,10 @@
     function EditSubChildCtrl($scope, $mdDialog,$rootScope,subChild,mainMenuService,commerceService,$auth,SERVER_URL) {
 
         $scope.subChild=subChild;
-        //$scope.imageURL= SERVER_URL+
-        //    "api/edit/viewImages?userId="+$auth.getPayload().sub
-        //    +"&appId="+$rootScope.appId+"&"
-        //    +new Date().getTime();
+        $scope.imageURL= SERVER_URL+
+            "edit/viewImages?userId="+$auth.getPayload().id
+            +"&appId="+$rootScope.appId+"&"
+            +new Date().getTime();
 
         commerceService.getCategoryList()
             .success(function (result) {
@@ -37,7 +37,7 @@
                     alert("success", 'Awsome! ', 'Category has been Updated.!');
                     return mainMenuService.showMainMenuDialog();
                 }).error(function(err) {
-                    alert('warning', "Unable to Updated", err.message);
+                    alert('warning', "Unable to Updated");
                 })
 
         };
