@@ -26,51 +26,36 @@
             fontSize : 11
         };
 
+        $scope.fontFamilyList = ["Arial","Tahoma","Dingbats","Ubuntu Light","URW Chancery L","UnPilgi"];
+
         stylesService.getAppSettings({'appId':$rootScope.appId}).success(function (data) {
             var appSettings = data.appSettings;
-            if(typeof appSettings != 'undefined') {
-                $scope.backgroundColor = appSettings.backgroundColor;
-                $scope.navigationBarColor = appSettings.navigationBarColor;
-                $scope.footerColor = appSettings.footerColor;
-                $scope.buttonColor = appSettings.buttonColor;
-            }else{
-                $scope.backgroundColor = "#F9F9F9";
-                $scope.navigationBarColor = "#F9F9F9";
-                $scope.FooterColor = "#F9F9F9";
-                $scope.buttonColor = "#F9F9F9";
-            }
+            $scope.backgroundColor = appSettings.backgroundColor;
+            $scope.navigationBarColor = appSettings.navigationBarColor;
+            $scope.footerColor = appSettings.footerColor;
+            $scope.buttonColor = appSettings.buttonColor;
+            $scope.headerFontFamilyProp = {
+                "value": appSettings.headerFontFamily,
+                "values": $scope.fontFamilyList
+            };
+            $scope.contentFontFamilyProp = {
+                "value": appSettings.contentFontFamily,
+                "values": $scope.fontFamilyList
+            };
+            $scope.footerFontFamilyProp = {
+                "value": appSettings.footerFontFamily,
+                "values": $scope.fontFamilyList
+            };
+            $scope.buttonFontFamilyProp = {
+                "value": appSettings.buttonFontFamily,
+                "values": $scope.fontFamilyList
+            };
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
                 closeButton: true
             });
         });
 
-        // Starting Typography Changes ------------------------
-        $scope.fontFamilyList = ["Arial","Tahoma","Dingbats","Ubuntu Light","URW Chancery L","UnPilgi"];
-        // Header Font Family
-        $scope.selectedHeaderFontFamily = "Arial";
-        $scope.headerFontFamilyProp = {
-            "value": $scope.selectedHeaderFontFamily,
-            "values": $scope.fontFamilyList
-        };
-        // Content Font Family
-        $scope.selectedContentFontFamily = "Arial";
-        $scope.contentFontFamilyProp = {
-            "value": $scope.selectedContentFontFamily,
-            "values": $scope.fontFamilyList
-        };
-        // Footer Font Family
-        $scope.selectedFooterFontFamily = "Arial";
-        $scope.footerFontFamilyProp = {
-            "value": $scope.selectedFooterFontFamily,
-            "values": $scope.fontFamilyList
-        };
-        // Button Font Family
-        $scope.selectedButtonFontFamily = "Arial";
-        $scope.buttonFontFamilyProp = {
-            "value": $scope.selectedButtonFontFamily,
-            "values": $scope.fontFamilyList
-        };
         $scope.styleFontFamilyChange = function (data,type) {
             var styleFontFamily = data;
             if(type == 'headerFont') {

@@ -30,7 +30,17 @@ module.exports = {
             templateId : req.body.templateId,
             userId : userId,
             status : "DRAFT",
-            appSettings:{ appCurrency : "Rs." }
+            appSettings:{
+                appCurrency : "Rs.",
+                backgroundColor : "#FFFFFF",
+                navigationBarColor : "#FFFFFF",
+                footerColor : "#FFFFFF",
+                buttonColor : "#FFFFFF",
+                headerFontFamily : "Arial",
+                contentFontFamily : "Arial",
+                footerFontFamily : "Arial",
+                buttonFontFamily : "Arial"
+            }
         };
 
 
