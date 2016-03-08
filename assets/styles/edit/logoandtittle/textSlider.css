@@ -13,7 +13,6 @@ input.slider.slider {
   -webkit-appearance: none;
   float: none;
   margin: 0 105px;
-  color: lightblue;
   width: 250px
 }
 
@@ -89,4 +88,3 @@ div.fontSize {
 div.size{
   display: inline-block;
 }
-

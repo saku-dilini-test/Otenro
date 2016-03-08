@@ -54,8 +54,6 @@ h1, h2, h3, h4, h5, h6{
     font-family: 'Open Sans', Arial, sans-serif;
 }
 
-
-
 .checkbox,
 .radio{
     margin-bottom: 0;
@@ -190,7 +188,7 @@ input[type='number'] + .me-percentage-placeholder{
     position: absolute;
     color: #CECECE;
     font-size: 16px;
-    top: 31px;
+    top: 26px;
 }
 
 .me-add-input{
@@ -218,6 +216,10 @@ input[type='number'] + .me-percentage-placeholder{
 
 .me-percentage-input{
     padding-right: 25px !important;
+}
+
+.me-xs-input{
+    width: 90px !important;
 }
 
 .me-percentage-placeholder{
@@ -596,10 +598,6 @@ a.md-button:hover:not([disabled]),
 }
 
 /****************/
-.shipping-options{
-    margin: 30px 0;
-}
-
 .shipping-options a{
     text-decoration: none;
     padding: 20px;
@@ -672,14 +670,14 @@ legend{
 
 .col-2{
     float: left;
-    margin-right: 43px;
+    margin-right: 41px;
     width: 280px;
 }
 
 .col-3{
     float: left;
-    margin-right: 24px;
-    width: 185px;
+    margin-right: 20px;
+    width: 187px;
 }
 
 .col-4{
@@ -837,7 +835,7 @@ table{
 .me-simple-table th{
     background-color: #fff;
     color: #747474;
-    padding: 10px 20px;
+    padding: 8px 20px;
 }
 
 .me-simple-table td{
@@ -855,6 +853,10 @@ table{
 
 .simple-column{
     width: 240px;
+}
+
+.order-columns{
+    width: 180px
 }
 
 /* Billing and Account Table */
@@ -1010,6 +1012,7 @@ md-checkbox.md-checked .md-icon {
 /* Select Override */
 md-select{
     margin: 0;
+    height: 32px;
     background-color: #FFF;
 }
 
@@ -1130,6 +1133,10 @@ md-dialog{
     max-height: 86%;
 }
 
+.md-dialog-l{
+     width: 900px !important;
+}
+
 .md-dialog-header{
     background-color: #F5F6F4;
     padding: 25px 40px;
@@ -1162,7 +1169,8 @@ md-dialog{
     font-weight: 300;
     height: 28px;
     line-height: 28px;
-    padding-right: 7px;
+    padding-left: 35px;
+    padding-right: 10px;
     text-align: right;
 }
 
@@ -1171,22 +1179,15 @@ md-dialog{
 }
 
 .md-dialog-header .md-dialog-header-nav li a.return-to-app{
-    width: 145px;
     background: #E9E8E9 url("/images/back-icon.png") no-repeat 10px center;
 }
 
 .md-dialog-header .md-dialog-header-nav li a.logout{
-    width: 85px;
     background: #E9E8E9 url("/images/logout-icon.png") no-repeat 10px center;
 }
 
 .md-dialog-header .md-dialog-header-nav li a.add-new-item{
-    width: 138px;
     background: #E9E8E9 url("/images/menu-add-icon.png") no-repeat 10px center;
-}
-
-.md-dialog-header .md-dialog-header-nav li a.add-shipping-options{
-    width: 150px;
 }
 
 .md-dialog-main{
@@ -1195,6 +1196,21 @@ md-dialog{
     overflow-y: scroll;
     padding: 25px 40px 0;
     position: relative;
+}
+
+.md-dialog-main .file-upload-wrapper{
+    border-bottom: 1px solid #E5E4E2;
+    margin-bottom: 20px;
+}
+
+.md-dialog-main .file-upload-wrapper .file-upload-msg{
+    color: #808080;
+    float: left;
+    font-size: 14px;
+    font-weight: 300;
+    padding-top: 8px;
+    width: 260px;
+    text-transform: inherit;
 }
 
 .md-dialog-buttons{
@@ -1230,7 +1246,7 @@ md-dialog md-dialog-content {
 }
 
 md-dialog.create-app-dialog{
-    width: 600px;
+	width: 600px;
 }
 
 md-dialog.create-app-dialog,
@@ -1239,6 +1255,7 @@ md-dialog.create-app-dialog md-dialog-content{
     overflow: initial;
 }
 
+/* styles-dialog-content */
 md-dialog-content.styles-dialog-content md-icon{
     display: none;
 }
@@ -1250,13 +1267,10 @@ md-dialog-content.styles-dialog-content{
 md-dialog-content.styles-dialog-content md-tabs md-tab-content:nth-of-type(3){
     height: 190px;
 }
+/*************************/
 
 .menu-dialog md-dialog-content{
     padding: 0;
-}
-
-.menu-dialog md-dialog-content .menu-section{
-    padding: 17px;
 }
 
 md-dialog .dialog-controls {
@@ -1503,7 +1517,7 @@ md-dialog .md-actions .md-button {
     margin-left: -212px;
     padding: 20px;
     position: absolute;
-    top: 10px;
+    top: 110px;
     width: 424px;
     -moz-box-shadow: 0 0 8px 5px #BBB;
     -webkit-box-shadow: 0 0 8px 5px #BBB;
@@ -1512,13 +1526,13 @@ md-dialog .md-actions .md-button {
 
 .google-map-wrapper{
     position:relative;
-    width: 575px;
+    width: 600px;
     height: 300px;
 }
 
 .google-map-container{
     position:absolute;
-    width: 583px;
+    width: 600px;
     height: 300px;
 }
 
@@ -1529,4 +1543,25 @@ md-dialog .md-actions .md-button {
 
 .forgot-password-page label{
     font-size: 0.775em;
+}
+
+.logo-upload-section{
+    float: left;
+    margin-left: 50px;
+}
+
+.product-view,
+.category-view{
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+}
+
+.product-view:last-child,
+.category-view:last-child{
+    border-bottom: none;
+}
+
+.fie-upload-text-gap{
+    margin-bottom: 14px;
 }
