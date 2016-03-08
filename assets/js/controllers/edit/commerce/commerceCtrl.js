@@ -53,14 +53,6 @@
                 })
 
         }
-        if (typeof $scope.inventoryList === 'undefined') {
-                    commerceService.getInventoryList()
-                        .success(function (result) {
-                            $scope.inventoryList = result;
-                        }).error(function (error) {
-                            alert("Inventory Loading Error : " + error);
-                        })
-                }
 
         if (typeof $scope.ordersList === 'undefined') {
             commerceService.getOrderList()

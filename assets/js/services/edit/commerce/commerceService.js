@@ -113,7 +113,7 @@
             },
             showInventoryDialog: function() {
                 return $mdDialog.show({
-                    controller: 'CommerceCtrl',
+                    controller: 'InventoryCtrl',
                     templateUrl: 'user/edit/commerce/manageInventoryView.html',
                     clickOutsideToClose: true
                 }).then(function(answer) {
@@ -194,9 +194,6 @@
                 }, function() {
                     //$scope.status = 'You cancelled the dialog.';
                 });
-            },
-            getInventoryList: function(){
-                return $http.get(SERVER_URL+ 'edit/getInventoryList?appId='+$rootScope.appId);
             },
             getMainMenuList: function(){
                 return $http.get(SERVER_URL+ 'edit/getMainNavigation?appId='+$rootScope.appId);
