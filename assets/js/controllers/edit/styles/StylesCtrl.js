@@ -29,6 +29,8 @@
         $scope.fontFamilyList = ["Arial","Tahoma","Dingbats","Ubuntu Light","URW Chancery L","UnPilgi"];
         $scope.fontSizeList = [8,9,10,12,14,18];
         $scope.fontWeightList = ["normal","bold","bolder","lighter"];
+        $scope.buttonBorderWidthList = ['0px','1px','2px','3px','4px','5px'];
+        $scope.buttonBorderRadiusList = ['0px','1px','2px','3px','4px','5px'];
 
         stylesService.getAppSettings({'appId':$rootScope.appId}).success(function (data) {
             var appSettings = data.appSettings;
@@ -75,6 +77,14 @@
             $scope.footerFontWeightProp = {
                 "value": appSettings.footerFontWeight,
                 "values": $scope.fontWeightList
+            };
+            $scope.buttonBorderWidthProp = {
+                "value": appSettings.buttoBorderWidth,
+                "values": $scope.buttonBorderWidthList
+            };
+            $scope.buttonBorderRadiusProp = {
+                "value": $scope.selectedButtoBorderRadius,
+                "values": $scope.buttonBorderRadiusList
             };
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
@@ -164,14 +174,6 @@
                 });
         };
 
-        // Button Border width List
-        $scope.buttonBorderWidthList = ['0px','1px','2px','3px','4px','5px'];
-        // Button Border width
-        $scope.selectedButtoBorderWidth = '0px';
-        $scope.buttonBorderWidthProp = {
-            "value": $scope.selectedButtoBorderWidth,
-            "values": $scope.buttonBorderWidthList
-        };
         $scope.styleButtonBorderWidthChange = function (data) {
             var styleButtonBorderWidth = data;
             var styleButtonBorderWidthData = {
@@ -190,14 +192,6 @@
                 });
         };
 
-        // Button Border Radius List
-        $scope.buttonBorderRadiusList = ['0px','1px','2px','3px','4px','5px'];
-        // Button Border Radius
-        $scope.selectedButtoBorderRadius = '0px';
-        $scope.buttonBorderRadiusProp = {
-            "value": $scope.selectedButtoBorderRadius,
-            "values": $scope.buttonBorderRadiusList
-        };
         $scope.styleButtonBorderRadiusChange = function (data) {
             var styleButtonBorderRadius = data;
             var styleButtonBorderRadiusData = {

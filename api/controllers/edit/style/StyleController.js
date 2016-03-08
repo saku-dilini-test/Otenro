@@ -452,8 +452,6 @@ module.exports = {
         var type = req.body.type;
         var colorTypeCss = '';
 
-        console.log(styleColor);
-
         var query = { id : appId };
 
         Application.findOne(query).exec(function(err, app) {
@@ -473,19 +471,16 @@ module.exports = {
                 colorTypeCss = ".made-easy-button-setting";
             }
 
-
             Application.update(query,app).exec(function(err, appUpdate) {
                 if (err) res.send(err);
-                    console.log("color"+colorTypeCss);
-                    updateFile(mainCssFile, [{
-                        rule: colorTypeCss,
-                        target: "background-color",
-                        replacer: styleColor
-                    }],function (err) {
-                        console.log((err));
-                    });
 
-
+                updateFile(mainCssFile, [{
+                    rule: colorTypeCss,
+                    target: "background-color",
+                    replacer: styleColor
+                }],function (err) {
+                    console.log((err));
+                });
                 res.send(appUpdate);
 
             });
@@ -558,6 +553,15 @@ module.exports = {
 
             Application.update(query,app).exec(function(err, appUpdate) {
                 if (err) res.send(err);
+
+                updateFile(mainCssFile, [{
+                    rule: fontFamilyCss,
+                    target: "font-family",
+                    replacer: styleFontFamily
+                }], function (err) {
+                    console.log((err));
+                });
+
                 res.send(appUpdate);
             });
 
@@ -591,13 +595,6 @@ module.exports = {
             })
         }
 
-        updateFile(mainCssFile, [{
-            rule: fontFamilyCss,
-            target: "font-family",
-            replacer: styleFontFamily
-        }], function (err) {
-            console.log((err));
-        });
     },
     /**
      * Update header, content and footer font Size given appId with common function
@@ -629,6 +626,13 @@ module.exports = {
 
             Application.update(query,app).exec(function(err, appUpdate) {
                 if (err) res.send(err);
+                    updateFile(mainCssFile, [{
+                        rule: fontSizeCss,
+                        target: "font-size",
+                        replacer: styleFontSize
+                    }], function (err) {
+                        console.log((err));
+                    });
                 res.send(appUpdate);
             });
 
@@ -663,13 +667,6 @@ module.exports = {
             })
         }
 
-        updateFile(mainCssFile, [{
-            rule: fontSizeCss,
-            target: "font-size",
-            replacer: styleFontSize
-        }], function (err) {
-            console.log((err));
-        });
     },
 
     /**
@@ -701,6 +698,15 @@ module.exports = {
 
             Application.update(query,app).exec(function(err, appUpdate) {
                 if (err) res.send(err);
+
+                updateFile(mainCssFile, [{
+                    rule: fontWeightCss,
+                    target: "font-weight",
+                    replacer: styleFontWeight
+                }], function (err) {
+                    console.log((err));
+                });
+
                 res.send(appUpdate);
             });
 
@@ -733,13 +739,6 @@ module.exports = {
             })
         }
 
-        updateFile(mainCssFile, [{
-            rule: fontWeightCss,
-            target: "font-weight",
-            replacer: styleFontWeight
-        }], function (err) {
-            console.log((err));
-        });
     },
 
     /**
