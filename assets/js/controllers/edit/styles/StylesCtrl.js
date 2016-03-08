@@ -79,11 +79,11 @@
                 "values": $scope.fontWeightList
             };
             $scope.buttonBorderWidthProp = {
-                "value": appSettings.buttoBorderWidth,
+                "value": appSettings.buttonBorderWidth,
                 "values": $scope.buttonBorderWidthList
             };
             $scope.buttonBorderRadiusProp = {
-                "value": $scope.selectedButtoBorderRadius,
+                "value": appSettings.buttonBorderRadius,
                 "values": $scope.buttonBorderRadiusList
             };
         }).error(function (err) {

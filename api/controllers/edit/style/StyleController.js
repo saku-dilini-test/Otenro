@@ -749,13 +749,27 @@ module.exports = {
         var appId = req.body.appId;
         var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
         var buttonBorderWidth = req.body.styleButtonBorderWidth;
-        var data = {'appSettings.buttonBorderWidth' : buttonBorderWidth}
         var buttonBorderWidthCss = '.made-easy-button-setting';
 
         var query = {id:appId};
-        Application.update(query,data).exec(function(err, app) {
+
+        Application.findOne(query).exec(function(err, app) {
             if (err) res.send(err);
-            res.send(app);
+            app.appSettings.buttonBorderWidth = buttonBorderWidth;
+            Application.update(query, app).exec(function (err, appUpdate) {
+                if (err) res.send(err);
+
+                updateFile(mainCssFile, [{
+                    rule: buttonBorderWidthCss,
+                    target: "border-width",
+                    replacer: buttonBorderWidth
+                }], function (err) {
+                    console.log((err));
+                });
+
+                res.send(appUpdate);
+            });
+
         });
 
         /**
@@ -785,14 +799,6 @@ module.exports = {
                 });
             })
         }
-
-        updateFile(mainCssFile, [{
-            rule: buttonBorderWidthCss,
-            target: "border-width",
-            replacer: buttonBorderWidth
-        }], function (err) {
-            console.log((err));
-        });
 
     },
 
@@ -800,18 +806,34 @@ module.exports = {
      * Update button border Radius function
      */
     addStyleButtonBorderRadius : function(req,res){
+        console.log(req.body);
         var userId = req.userId;
         var appId = req.body.appId;
         var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
         var buttonBorderRadius = req.body.styleButtonBorderRadius;
-        var data = {'appSettings.buttonBorderRadius' : buttonBorderRadius}
         var buttonBorderRadiusCss = '.made-easy-button-setting';
 
         var query = {id:appId};
-        Application.update(query,data).exec(function(err, app) {
+
+        Application.findOne(query).exec(function(err, app) {
             if (err) res.send(err);
-            res.send(app);
+            app.appSettings.buttonBorderRadius = buttonBorderRadius;
+            Application.update(query, app).exec(function (err, appUpdate) {
+                if (err) res.send(err);
+
+                updateFile(mainCssFile, [{
+                    rule: buttonBorderRadiusCss,
+                    target: "border-radius",
+                    replacer: buttonBorderRadius
+                }], function (err) {
+                    console.log((err));
+                });
+
+                res.send(appUpdate);
+            });
+
         });
+
 
         /**
          * update css file with new changes
@@ -841,13 +863,6 @@ module.exports = {
             })
         }
 
-        updateFile(mainCssFile, [{
-            rule: buttonBorderRadiusCss,
-            target: "border-radius",
-            replacer: buttonBorderRadius
-        }], function (err) {
-            console.log((err));
-        });
     },
     /**
      * Update Fonts given appId
