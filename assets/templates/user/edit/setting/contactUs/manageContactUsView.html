@@ -1,0 +1,183 @@
+<md-dialog aria-label="ADD CONTACT US INFO" style="height: 600px">
+    <md-dialog-content class="reset-padding">
+        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+            <md-tab>
+                <md-tab-label>Basic Information</md-tab-label>
+                <md-tab-body>
+                    <section class="af-wrapper">
+                        <form class="af-form " name="basicInfoForm">
+                            <!-- Address | Tel Phone | Email | Web Site -->
+                            <legend>Basic Information</legend>
+                            <fieldset>
+                                <!-- Address -->
+                                <label>Address</label>
+                                <input type="text" ng-model="basicInfo.address" required />
+                            </fieldset>
+                            <fieldset>
+                                <!-- Telephone -->
+                                <label>Telephone</label>
+                                <input type="text" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" ui-mask="(999) 999-9999"  required />
+                            </fieldset>
+                            <fieldset class="text-right">
+                                <button class="me-default-button" ng-click="addBasicInfo(basicInfo)">Submit</button>
+                            </fieldset>
+                        </form>
+                    </section>
+                </md-tab-body>
+            </md-tab>
+
+            <md-tab>
+                <md-tab-label>Web Information</md-tab-label>
+                <md-tab-body>
+                    <section class="af-wrapper">
+                        <form class="af-form " name="webInfoForm">
+                            <legend>Web Information</legend>
+                            <fieldset>
+                                <!-- Email -->
+                                <label>Email</label>
+                                <input type="email" ng-model="webInfo.email">
+                            </fieldset>
+                            <fieldset>
+                                <!-- Web Site -->
+                                <label>Website</label>
+                                <input type="url"  ng-model="webInfo.webSite" />
+                            </fieldset>
+                            <fieldset class="text-right">
+                                <button class="me-default-button" ng-click="addWebInfo(webInfo)">Submit</button>
+                            </fieldset>
+                        </form>
+                    </section>
+                </md-tab-body>
+            </md-tab>
+
+            <md-tab>
+                <md-tab-label>Google Map</md-tab-label>
+                <md-tab-body>
+                    <section class="af-wrapper">
+                        <h1>Google Map</h1>
+                        <form class="af-form" name="googleMap">
+                            <div class="google-map-wrapper">
+                                <div class="google-map-container">
+                                    <ui-gmap-google-map  center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+                                        <ui-gmap-marker ng-repeat="mp in map.markers" coords="mp.coords" icon="mp.icon" idkey="mp.id"></ui-gmap-marker>
+                                    </ui-gmap-google-map>
+
+                                </div>
+                            </div>
+                            <fieldset>
+                                 {{map.markers[0].coords.latitude}}
+                                <br />
+                                 {{map.markers[0].coords.longitude}}
+                            </fieldset>
+                            <fieldset class="text-right">
+                                <button class="me-default-button" ng-click="addGoogleMap(googleMap)">Submit</button>
+                            </fieldset>
+                        </form>
+                    </section>
+                </md-tab-body>
+            </md-tab>
+
+            <md-tab>
+                <md-tab-label>Opening Hours</md-tab-label>
+                <md-tab-body>
+                    <section class="af-wrapper">
+                        <!-- Input Table as Open Hours  -->
+                        <h1>Opening Hours</h1>
+                        <table class="me-hours-table">
+                            <thead>
+                                <tr>
+                                    <th>Days</th>
+                                    <th>Hours</th>
+                                    <th>Minutes</th>
+                                    <th>&nbsp;</th>
+                                    <th>Hours</th>
+                                    <th>Minutes</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Week Days
+                                    </td>
+                                    <td>
+                                        <input type="number"  min="0" max="12"  ng-model="openHours.weekDaysOpenHour" ng-required/>
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" max="55" step="5" ng-model="openHours.weekDaysOpenMinute" ng-required/>
+                                    </td>
+                                    <td>
+                                        AM
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" max="12" step="1" ng-model="openHours.weekDaysCloseHour" ng-required />
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" max="55" step="5" ng-model="openHours.weekDaysCloseMinute"ng-required/>
+                                    </td>
+                                    <td>
+                                        PM
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Saturday
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" max="12" step="1" ng-model="openHours.saturdayOpenHour" ng-required/>
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" max="55" step="5" ng-model="openHours.saturdayOpenMinute" ng-required/>
+                                    </td>
+                                    <td>AM</td>
+                                    <td>
+                                        <input type="number" min="0" max="12" step="1" ng-model="openHours.saturdayCloseHour" ng-required/>
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" max="55" step="5" ng-model="openHours.saturdayCloseMinute" ng-required/>
+                                    </td>
+                                    <td>
+                                        PM
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Sunday
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" max="12" step="1" ng-model="openHours.sundayOpenHour" ng-required/>
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" max="55" step="5" ng-model="openHours.sundayOpenMinute" ng-required/>
+                                    </td>
+                                    <td>
+                                        AM
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" max="12" step="1" ng-model="openHours.sundayCloseHour" ng-required/>
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" max="55" step="5" ng-model="openHours.sundayCloseMinute" ng-required/>
+                                    </td>
+                                    <td>
+                                        PM
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <form class="af-form" name="contantUsForm">
+                            <fieldset class="text-right">
+                                <button class="me-default-button" ng-click="addOpenHoursInfo(openHours)">Submit</button>
+                            </fieldset>
+                        </form>
+                    </section>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+
+    <div class="dialog-controls clearfix">
+        <button class="md-button" ng-click="answer('cancel')">Cancel</button>
+        <button class="md-button" ng-disabled="!contantUsForm.$valid" ng-click="answer()">Ok</button>
+    </div>
+</md-dialog>

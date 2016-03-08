@@ -1,0 +1,90 @@
+<md-dialog aria-label="ADD STYLES">
+    <md-dialog-content ng-style="{'background-color': backgroundColor}" class="styles-dialog-content reset-padding">
+        <md-tabs class="my-tabs" md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+            <md-tab>
+                <md-tab-label>Header Image</md-tab-label>
+                <md-tab-body>
+                    <div class="itemsContainer header-image">
+                        <div class="imageOver">
+                            <div class="buttonContain">
+                                <div class="img-up">
+                                    <label for="file-input" class="add-image-label">
+                                        <span>Add Image</span>
+                                    </label>
+                                    <input id="file-input" type="file"  me-file-read="headerImg" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image">
+
+                            <img ng-src="{{headerImg}}" ng-model="headerImg" width="100" height="50" alt="Header Preview" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-right">
+                        <button class="me-default-button" ng-click="addHeaderImage(headerImg)">Submit</button>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Background Image</md-tab-label>
+                <md-tab-body>
+                    <div class="itemsContainer bg-image">
+                        <div class="imageOver2">
+                            <div class="buttonContain2">
+                                <div class="img-up2" >
+                                    <label for="file-input2" class="add-image-label">
+                                        <span> Add Image </span>
+                                    </label>
+                                    <input id="file-input2" type="file"  me-file-read="backgroundImg" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image2">
+                            {{backgroundImg}}
+                            <img src="{{backgroundImg}}" ng-model="backgroundImg" width="275" height="200" alt="Background Preview"/>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="text-right">
+                        <button class="me-default-button" ng-click="addBackgroundImage(backgroundImg)">Submit</button>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Background Color</md-tab-label>
+                <md-tab-body >
+                    <div>
+                        <color-picker ng-model="backgroundColor" color-picker-format="'hex'" class="colorPicker"></color-picker>
+                    </div>
+                    <br />
+                    <div class="text-right">
+                        <button class="me-default-button" ng-click="addBackgroundColor(backgroundColor)">Submit</button>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Fonts</md-tab-label>
+                <md-tab-body>
+                    <label>Font Titles</label>
+                    <md-select placeholder="Fonts" ng-model="fonts.font" md-on-open="loadFonts()">
+                        <md-option ng-value="font" ng-repeat="font in reqFonts">{{font}}</md-option>
+                    </md-select>
+                    <br/><br/>
+
+                    <label>Font Size Slider</label>
+                    <input class="slider" min="8" max="30" ng-model="fonts.fontSize" type="range" />
+                    <h3 ng-style="{'font-family': fonts.font, 'font-size': fonts.fontSize + 'px'}">Text is</h3>
+                    <div class="text-right">
+                        <button class="me-default-button" ng-click="addFonts(fonts)">Submit</button>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+
+    <div class="dialog-controls clearfix">
+        <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+    </div>
+</md-dialog>
+

@@ -1,0 +1,110 @@
+.tablet {
+    position: relative;
+    background: url(../../../../images/tablet.jpg) no-repeat;
+    background-size: 100% 100%;
+    width: 200%;
+    height:100%;
+    padding-top: 58%;
+    border-radius: 1em;
+    float: none;
+
+}
+
+.tabPower {
+    position: absolute;
+    background: #F2F2F2;
+    width: 13%;
+    height: .5%;
+    top: -.5%;
+    right: 12%;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+}
+
+.tabLock {
+    position: absolute;
+    background: #F2F2F2;
+    width: 1%;
+    height: 5%;
+    top: 12.5%;
+    left: -1%;
+    border-top-left-radius: .5em;
+    border-bottom-left-radius: .5em;
+}
+
+.tabVolume {
+    position: absolute;
+    background: #F2F2F2;
+    width: 1%;
+    height: 4%;
+    top: 23%;
+    left: -1%;
+    border-top-left-radius: .5em;
+    border-bottom-left-radius: .5em;
+}
+
+.tabVolume.down {
+    top: 31%;
+}
+
+.tabCamera {
+    position: absolute;
+    top: 4%;
+    left: 48.5%;
+    background: transparent;
+    width: 3%;
+    height: 0;
+    padding-top: 3%;
+    border-radius: 50%;
+}
+
+.tabSpeaker {
+    position: absolute;
+    top: 7%;
+    left: 42.5%;
+    background: transparent;
+    width: 15%;
+    height: 0;
+    padding-top: 3%;
+    border-radius: 1em;
+}
+
+.tabScreen {
+    animation: 5s ease 0s alternate none infinite running lighten;
+    height: 70.7%;
+    left: 8.5%;
+    position: absolute;
+    top: 14.1%;
+    width: 81.8%;
+}
+
+.screen iframe{
+    border: none;
+}
+
+.tabappViewClass{
+    height: 100%;
+    width: 105%;
+    margin-top: -8px;
+    margin-left: 5px;
+}
+
+.tabButton {
+    position: absolute;
+    bottom: 2.75%;
+    left: 42.5%;
+    background: transparent;
+    width: 15%;
+    height: 0;
+    padding-top: 15%;
+    border-radius: 50%;
+}
+
+.tabSquare {
+    position: absolute;
+    top: 27.5%;
+    left: 27.5%;
+    border-radius: .3em;
+    width: 45%;
+    height: 45%;
+}

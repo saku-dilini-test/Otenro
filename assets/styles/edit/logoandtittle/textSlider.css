@@ -1,0 +1,92 @@
+input.slider {
+  line-height: 100%;
+  font-size: 14px;
+  color: black;
+}
+
+input.slider.small-letter, .text-size-slider .big-letter {
+  font-weight: bold;
+  color: black;
+}
+
+input.slider.slider {
+  -webkit-appearance: none;
+  float: none;
+  margin: 0 105px;
+  color: lightblue;
+  width: 250px
+}
+
+input.slider.slider:focus {
+  outline: double;
+}
+
+input.slider.slider::-webkit-slider-thumb {
+  border: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  background-color: lightblue;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-top: -6px;
+}
+
+input.slider.slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  background:lightblue;
+  border: 0;
+}
+
+#addStyles {
+  font-family: Calibr i;
+  margin-left: 1cm;
+}
+
+label.header {
+  font-family: "Comic Sans MS";
+  font-weight: bold;
+  color: #151515;
+  display: inline-block;
+  text-align: left;
+}
+
+label.background {
+  font-family: "Comic Sans MS";
+  font-weight: bold;
+  color: #151515;
+  display: inline-block;
+  text-align: left;
+}
+
+label.fontTitles {
+  font-family: "Comic Sans MS";
+  font-weight: bold;
+  color: #151515;
+  display: inline-block;
+  text-align: left;
+}
+
+div.fontSize {
+  font-family: "Comic Sans MS";
+  font-weight: bold;
+  color: #151515;
+  display: inline-block;
+  float: left;
+}
+
+#fontDropDown {
+  display: inline-block;
+  float: left;
+}
+
+#preview {
+  float:none;
+}
+
+div.size{
+  display: inline-block;
+}
+

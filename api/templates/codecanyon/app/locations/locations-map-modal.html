@@ -1,0 +1,31 @@
+﻿<div class="modal">
+    <ion-header-bar>
+        <h1 class="title">Map Content</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeModal()"><i class="icon ion-close-circled"></i></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list card">
+
+            <div class="item item-avatar">
+                <img ng-src="app/data/images/{{vm.activeLocation.image}}">
+                <h2>{{vm.activeLocation.location_name}}</h2>
+            </div>
+
+            <div class="item item-image">
+                <img ng-src="{{vm.activeLocationMap}}">
+            </div>
+
+            <div class="item item-icon-left energized" href="#">
+                <i class="icon ion-iphone"></i>
+                {{vm.activeLocation.phone}}
+            </div>
+            <div class="item item-icon-left energized" href="#">
+                <i class="icon ion-ios-home"></i>
+                {{vm.activeLocation.city}}, {{vm.activeLocation.state}} {{vm.activeLocation.zip}}
+            </div>
+
+        </div>
+    </ion-content>
+</div>

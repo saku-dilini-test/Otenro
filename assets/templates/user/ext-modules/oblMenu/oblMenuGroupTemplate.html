@@ -1,0 +1,11 @@
+<li class="obl-selectable-item" ng-click="clicked()">
+    <div class="obl-noselect">
+        {{label}}
+    </div>
+</li>
+<div ng-show="isOpen" class="obl-subitem-section">
+    <a href="javascript:void(0);" ng-click="back()" class="obl-menu-back">
+        <img src="images/arrow-icon.svg" alt="Arrow Icon" />
+    </a>
+    <ul ng-transclude></ul>
+</div>

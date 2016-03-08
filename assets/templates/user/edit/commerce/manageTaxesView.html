@@ -1,0 +1,42 @@
+<md-dialog aria-label="Taxes">
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>taxes</h1>
+            <ul class="md-dialog-header-nav clearfix">
+                <li>
+                    <a class="add-new-item" ng-click="addTaxOption()">Add Tax Option </a>
+                </li>
+            </ul>
+        </div>
+        <div class="md-dialog-main clearfix">
+            <fieldset>
+                <label>tax details</label>
+                <img src="../../../images/question-mark.svg" width="12" height="12">
+            </fieldset>
+            <table class="me-simple-table">
+                <thead>
+                    <th class="simple-column">country</th>
+                    <th class="simple-column">amount</th>
+                    <th>&nbsp;</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>sri lanka</td>
+                        <td>10%</td>
+                        <td><a href="javascript:void(0);">delete</a></td>
+                    </tr>
+                    <tr>
+                        <td>usa</td>
+                        <td>7.45%</td>
+                        <td><a href="javascript:void(0);">delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

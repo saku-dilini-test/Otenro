@@ -1,0 +1,55 @@
+<div class="me-guest">
+  <div class="me-guest-area" id="in" ng-submit="submit()" name="register" novalidate>
+    <form accept-charset="UTF-8" role="form">
+      <legend>
+        <!--{{"login.form.title" | translate}}-->
+        Login Form
+      </legend>
+      <fieldset>
+        <label>user name </label>
+        <img src="../../../images/question-mark.svg" width="12" height="12">
+        <input name="email" type="text" ng-model="user.email" required>
+        <p class="help-block" ng-show="register.email.$dirty && register.email.$invalid">
+          <!--{{"login.error.email.required" | translate}}-->
+          Email required
+        </p>
+      </fieldset>
+      <fieldset>
+        <label>password </label>
+        <img src="../../../images/question-mark.svg" width="12" height="12">
+        <input name="password" type="password" value="" ng-model="user.password" required />
+      </fieldset>
+      <fieldset>
+        <label class="font-size-12 reset-margin">
+          <a class="me-guest-reset-link" ui-sref="forgetPassword">forget password?</a>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label class="font-size-12 reset-margin">
+          not an existing member
+          <a class="me-guest-reset-link" ui-sref="anon.register">sign up</a>
+          here or login with
+        </label>
+      </fieldset>
+      <fieldset>
+        <input class="me-guest-social" ng-click="authenticate('facebook')" type="image" src="images/facebook-icon.png" />
+        <input class="me-guest-social" ng-click="authenticate('google')" type="image" src="images/google-plus-icon.png" />
+      </fieldset>
+      <fieldset>
+        <div class="checkbox me-guest-remember">
+          <label>
+            <input name="remember" type="checkbox" value="Remember Me"> Remember Me
+          </label>
+        </div>
+      </fieldset>
+      <fieldset class="reset-margin text-right">
+        <input type="button" class="me-default-button" name="cancel" value="Cancel" />
+        <button ng-disabled="register.$invalid" type="submit" class="me-default-button">
+          <!--{{"login.button.title" | translate}}-->
+          login
+        </button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+

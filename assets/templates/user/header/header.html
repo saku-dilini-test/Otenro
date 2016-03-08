@@ -1,0 +1,19 @@
+
+<div class="obl-dashboard-wrapper" ng-controller="HeaderController" ng-show="auth.isAuthenticated()">
+    <div class="obl-dashboard-header clearfix">
+        <h2 ng-hide="welcome"> MY APPS</h2>
+        <p ng-hide="welcome">select a template you like to work on</p>
+        <h2 ng-show="welcome">select a template</h2>
+        <div class="obl-dashboard-settings">
+            <button class="user-settings-button" ng-click="profileView()" type="button">
+                <img src="images/user-icon.svg" alt="User Logo" />
+            </button>
+        </div>
+        <ul  ng-show="welcome" class="template-categories" >
+            <li><a href="javascript:void(0);">business</a></li>
+            <li><a href="javascript:void(0);">portfolio</a></li>
+            <li><a href="javascript:void(0);">media</a></li>
+        </ul>
+    </div>
+
+</div>

@@ -1,0 +1,114 @@
+<md-dialog aria-label="User Profile">
+    <md-dialog-content>
+        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+            <md-tab>
+                <md-tab-label>View Profile</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>User Profile</h1>
+                        <ul class="md-dialog-header-nav clearfix">
+                            <li>
+                                <a ng-click="redirectToDashboard()" class="return-to-app">Return to app view</a>
+                            </li>
+                            <li>
+                                <a ng-click="redirectToLogin()" class="logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md-dialog-main">
+                        <div class="clearfix">
+                            <fieldset class="col-2">
+                                <label>First name</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input type="text" name="fname" ng-model="userEdit.firstName" required />
+                            </fieldset>
+                            <fieldset class="col-2 reset-margin-right">
+                                <label>Last name</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input type="text" name="lname" ng-model="userEdit.lastName" required />
+                            </fieldset>
+                        </div>
+                        <fieldset>
+                            <label>Email</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12">
+                            <input type="text" name="email" ng-model="userEdit.email" required />
+                        </fieldset>
+                        <div class="clearfix">
+                            <fieldset class="col-2">
+                                <label>password</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input type="password" name="password" required ng-model="userEdit.password" />
+                            </fieldset>
+                            <fieldset class="col-2 reset-margin-right">
+                                <label>confirm password</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input type="password" name="confirmPassword"  required />
+                            </fieldset>
+                        </div>
+                        <fieldset>
+                            <label>Account type</label>
+                            <md-select ng-model="userEdit.accountType">
+                                <md-option value="Basic">Basic</md-option>
+                                <md-option value="Advanced">Advanced</md-option>
+                            </md-select>
+                        </fieldset>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="close()">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="editUserProfile(userEdit)">next</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Edit billing account</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>Edit billing account</h1>
+                    </div>
+                    <div class="md-dialog-main">
+                        <div class="clearfix">
+                            <fieldset class="col-2">
+                                <label>First name</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input type="text" name="name" ng-model="userEdit.name" required />
+                            </fieldset>
+                            <fieldset class="col-2 reset-margin-right">
+                                <label>Last name</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input type="text" name="name" ng-model="playStoreData.name" required />
+                            </fieldset>
+                        </div>
+                        <fieldset>
+                            <label>Billing Address</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12">
+                            <input type="text" name="name" ng-model="playStoreData.name" required />
+                        </fieldset>
+                        <fieldset>
+                            <label>Credit card number</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12">
+                            <input type="text" name="name" ng-model="playStoreData.name" required />
+                        </fieldset>
+                        <fieldset>
+                            <label>Card type</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12">
+                            <input type="text" name="name" ng-model="playStoreData.name" required />
+                        </fieldset>
+                        <fieldset>
+                            <label>CVS code</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12">
+                            <input type="text" name="name" ng-model="playStoreData.name" required />
+                        </fieldset>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="close()">cancel</md-button>
+                            <md-button class="me-default-button">save</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+</md-dialog>

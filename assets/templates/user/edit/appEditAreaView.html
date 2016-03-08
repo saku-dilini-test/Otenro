@@ -1,0 +1,379 @@
+<div class="mdapp-wrapper" ng-class="{menuCollapsed : expand}" >
+    <div class="mdapp-nav">
+        <a href="javascript:void(0);" ng-click='clicked()' class="area-expander">
+            <img src="images/menu-icon.png" alt="Menu Icon" />
+        </a>
+        <obl-framework title="MadeEasy" subtitle="ME" icon-file="" class="navigation">
+            <obl-menu>
+
+                <obl-menu-group label="Commerce" icon="fa-pencil-square-o">
+
+                    <obl-menu-group label="Products" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Products" icon="fa fa-file-image-o" click-title="products"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Categories" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Categories" icon="fa fa-file-image-o" click-title="category"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Orders" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Orders" icon="fa fa-file-image-o" click-title="orders"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Inventory" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Inventory" icon="fa fa-file-image-o" click-title="inventory"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Shipping" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Shipping" icon="fa fa-file-image-o" click-title="shipping"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Taxes" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Taxes" icon="fa fa-file-image-o" click-title="taxes"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="E-mail Settings" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="E-mail Settings" icon="fa fa-file-image-o" click-title="emailSettings"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Store Settings" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Store Settings" icon="fa fa-file-image-o" click-title="storeSettings"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Payment Activities" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Payment Activities" icon="fa fa-file-image-o" click-title="paymentActivities"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="IPG Integration" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="IPG Integration" icon="fa fa-file-image-o" click-title="IPGIntegration"></obl-menu-button>
+                    </obl-menu-group>
+
+                </obl-menu-group>
+
+
+                <obl-menu-group label="Design" icon="fa-pencil-square-o">
+
+                    <obl-menu-group label="Templates" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Templates" icon="fa fa-file-image-o" click-title="templates"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-button label="Navigation" icon="fa-pencil-square-o" class="md-sub-menu" click-title="navigation">
+                    </obl-menu-button>
+
+                    <obl-menu-group label="Logo and Title" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Logo and Title" icon="fa fa-file-image-o" click-title="logoAndTitle"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group  label="Styles" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Styles" icon="fa fa-file-image-o" click-title="styles"></obl-menu-button>
+                        <div class="styles-settings" ng-controller="StylesCtrl">
+                            <div class="color-settings" >
+                                <h1>Color</h1>
+                                <div class="color-setting clearfix">
+                                    <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="true" ng-model="backgroundColor" type="text" style="background-color: {{backgroundColor}}; color: {{backgroundColor}};" >
+                                    </button>
+                                    <div class="color-section">Background</div>
+                                </div>
+                                <div class="color-setting clearfix">
+                                    <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="true" ng-model="navigationBarColor" type="text" style="background-color: {{navigationBarColor}}; color: {{navigationBarColor}};">
+                                    </button>
+                                    <div class="color-section">Navigation Bar</div>
+                                </div>
+                                <div class="color-setting clearfix">
+                                    <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="true" ng-model="footerColor" type="text" style="background-color: {{footerColor}}; color: {{footerColor}};">
+                                    </button>
+                                    <div class="color-section">Footer</div>
+                                </div>
+                            </div>
+                            <div class="other-settings">
+                                <h1>Background Image</h1>
+                                <div class="other-setting">
+                                    <md-checkbox md-no-ink ng-model="editBackgroundImage" aria-label="Apply Background Image">
+                                        Apply Background Image
+                                    </md-checkbox>
+                                    <div ng-show="editBackgroundImage">
+                                        <obl-menu-button label="Edit image" icon="fa fa-file-image-o" click-title="styleEditBackgroundImage"></obl-menu-button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="other-settings">
+                                <h1>Typography</h1>
+                                <div class="other-setting">
+                                    <h2>Header Font</h2>
+                                    <div class="">
+                                        <select ng-model="headerFontFamilyProp.value" ng-options="v for v in headerFontFamilyProp.values" ng-change="styleFontFamilyChange(headerFontFamilyProp.value,'headerFont')">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="other-setting">
+                                    <h2>Font Size</h2>
+                                    <select ng-model="headerFontSizeProp.value" ng-options="v for v in headerFontSizeProp.values" ng-change="styleFontSizeChange(headerFontSizeProp.value,'headerFont')">
+                                    </select>
+                                </div>
+                                <div class="other-setting">
+                                    <h2>Font Weight</h2>
+                                    <select ng-model="headerFontWeightProp.value" ng-options="v for v in headerFontWeightProp.values" ng-change="styleFontWeightChange(headerFontWeightProp.value,'headerFont')">
+                                    </select>
+                                </div>
+                                <div class="other-setting">
+                                    <h2>Content Font</h2>
+                                    <div class="">
+                                        <select ng-model="contentFontFamilyProp.value" ng-options="v for v in contentFontFamilyProp.values" ng-change="styleFontFamilyChange(contentFontFamilyProp.value,'contentFont')">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="other-setting">
+                                    <h2>Font Size</h2>
+                                    <select ng-model="contentFontSizeProp.value" ng-options="v for v in contentFontSizeProp.values" ng-change="styleFontSizeChange(contentFontSizeProp.value,'contentFont')">
+                                    </select>
+                                </div>
+                                <div class="other-setting">
+                                    <h2>Font Weight</h2>
+                                    <select ng-model="contentFontWeightProp.value" ng-options="v for v in contentFontWeightProp.values" ng-change="styleFontWeightChange(contentFontWeightProp.value,'contentFont')">
+                                    </select>
+                                </div>
+                                <div class="other-setting">
+                                    <h2>Footer Font</h2>
+                                    <div class="">
+                                        <select ng-model="footerFontFamilyProp.value" ng-options="v for v in footerFontFamilyProp.values" ng-change="styleFontFamilyChange(footerFontFamilyProp.value,'footerFont')">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="other-setting">
+                                    <h2>Font Size</h2>
+                                    <select ng-model="footerFontSizeProp.value" ng-options="v for v in footerFontSizeProp.values" ng-change="styleFontSizeChange(footerFontSizeProp.value,'footerFont')">
+                                    </select>
+                                </div>
+                                <div class="other-setting">
+                                    <h2>Font Weight</h2>
+                                    <select ng-model="footerFontWeightProp.value" ng-options="v for v in footerFontWeightProp.values" ng-change="styleFontWeightChange(footerFontWeightProp.value,'footerFont')">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="other-settings">
+                                <h1>Button</h1>
+                                <div class="color-setting clearfix">
+                                    <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="true" ng-model="buttonColor" type="text" style="background-color: {{buttonColor}}; color: {{buttonColor}};">
+                                    </button>
+                                    <div class="color-section">Button Color</div>
+                                </div>
+                                <div class="other-setting">
+                                    <h2>Font Type</h2>
+                                    <select ng-model="buttonFontFamilyProp.value" ng-options="v for v in buttonFontFamilyProp.values" ng-change="styleFontFamilyChange(buttonFontFamilyProp.value,'buttonFont')">
+                                    </select>
+                                </div>
+                                <div class="other-setting">
+                                    <h2>Border size</h2>
+                                    <select ng-model="buttonBorderWidthProp.value" ng-options="v for v in buttonBorderWidthProp.values" ng-change="styleButtonBorderWidthChange(buttonBorderWidthProp.value)">
+                                    </select>
+                                </div>
+                                <div class="other-setting">
+                                    <h2>Border Radius</h2>
+                                    <select ng-model="buttonBorderRadiusProp.value" ng-options="v for v in buttonBorderRadiusProp.values" ng-change="styleButtonBorderRadiusChange(buttonBorderRadiusProp.value)">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Checkout Page Style" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Checkout Page Style" icon="fa fa-file-image-o" click-title="checkoutPageStyle"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Locked Pages" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Locked Pages" icon="fa fa-file-image-o" click-title="lockedPages"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Announcement Bar" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Announcement Bar" icon="fa fa-file-image-o" click-title="announcementBar"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Made Easy Badge" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Made Easy Badge" icon="fa fa-file-image-o" click-title="madeEasyBadge"></obl-menu-button>
+                    </obl-menu-group>
+
+                </obl-menu-group>
+
+
+                <obl-menu-group label="Engage" icon="fa-pencil-square-o">
+
+                    <obl-menu-group label="Users" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Users" icon="fa fa-file-image-o" click-title="users"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Promotions & Sales" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Promotions & Sales" icon="fa fa-file-image-o" click-title="promotionsAndSales"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="E-mail Marketing" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="E-mail Marketing" icon="fa fa-file-image-o" click-title="emailMarketing"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Pop up Messages" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Pop up Messages" icon="fa fa-file-image-o" click-title="popUpMessages"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Push Messages" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Push Messages" icon="fa fa-file-image-o" click-title="pushMessages"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Geofenced Messages" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Geofenced Messages" icon="fa fa-file-image-o" click-title="geofencedMessages"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Social Lock" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Social Lock" icon="fa fa-file-image-o" click-title="socialLock"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Detection Tools" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Detection Tools" icon="fa fa-file-image-o" click-title="detectionTools"></obl-menu-button>
+                    </obl-menu-group>
+
+                </obl-menu-group>
+
+
+                <obl-menu-group label="Analytics" icon="fa-pencil-square-o">
+
+                    <obl-menu-group label="Sales" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Sales" icon="fa fa-file-image-o" click-title="sales"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Traffic" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Traffic" icon="fa fa-file-image-o" click-title="traffic"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Mobile" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Mobile" icon="fa fa-file-image-o" click-title="mobile"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="App" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="App" icon="fa fa-file-image-o" click-title="app"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Popular Content" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Popular Content" icon="fa fa-file-image-o" click-title="popularContent"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Search Engine Queries" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Search Engine Queries" icon="fa fa-file-image-o" click-title="searchEngineQueries"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Site Search" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Site Search" icon="fa fa-file-image-o" click-title="siteSearch"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="World Map" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="World Map" icon="fa fa-file-image-o" click-title="worldMap"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Analytics Integration" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Analytics Integration" icon="fa fa-file-image-o" click-title="analyticsIntegration"></obl-menu-button>
+                    </obl-menu-group>
+
+                </obl-menu-group>
+
+
+                <obl-menu-group label="Publish" icon="fa-pencil-square-o">
+
+                    <obl-menu-group label="Website" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="Website" icon="fa fa-file-image-o" click-title="website"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Mobile App" icon="fa-pencil-square-o" class="md-sub-menu">
+                        <obl-menu-button label="App Store" icon="fa fa-file-image-o" click-title="appStore"></obl-menu-button>
+                        <obl-menu-button label="Google Play" icon="fa fa-file-image-o" click-title="googlePlay"></obl-menu-button>
+                    </obl-menu-group>
+
+                </obl-menu-group>
+
+
+                <obl-menu-group label="Settings" icon="fa-cogs">
+
+                    <obl-menu-group label="Currency" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
+                        <obl-menu-button label="Currency" icon="fa-cogs" click-title="currency"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Contact Us" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
+                        <obl-menu-button label="Contact Us" icon="fa fa-file-image-o" click-title="contactUs"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Basic Info" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
+                        <obl-menu-button label="Basic Info" icon="fa-cogs" click-title="basicInfo"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Domain" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
+                        <obl-menu-button label="Domain" icon="fa-cogs" click-title="domain"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Users" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
+                        <obl-menu-button label="Users" icon="fa-cogs" click-title="users"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="SEO" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
+                        <obl-menu-button label="SEO" icon="fa-cogs" click-title="seo"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Social Media" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
+                        <obl-menu-button label="Social Media" icon="fa-cogs" click-title="socialMedia"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Billing" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
+                        <obl-menu-button label="Billing" icon="fa-cogs" click-title="billing"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Security" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
+                        <obl-menu-button label="Security" icon="fa-cogs" click-title="security"></obl-menu-button>
+                    </obl-menu-group>
+
+                    <obl-menu-group label="Backup" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
+                        <obl-menu-button label="Backup" icon="fa-cogs" click-title="backup"></obl-menu-button>
+                    </obl-menu-group>
+
+                </obl-menu-group>
+
+
+                <obl-menu-group label="Help" icon="fa-pencil-square-o"></obl-menu-group>
+
+            </obl-menu>
+        </obl-framework>
+        <!--<div ng-transclude></div>-->
+    </div>
+    <div class="mdapp-content">
+        <div class="mdapp-device-selector clearfix">
+            <div class="mobile-area">
+                <p>Mobile App</p>
+                <a class="mobile-icon" href ng-click="tabletView=false" ng-class="{'current-device': !tabletView}"></a>
+                <a class="tablet-icon" href ng-click="tabletView=true" ng-class="{'current-device': tabletView}"></a>
+            </div>
+
+            <div class="website-area">
+                <div class="pull-left">
+                    <p>Website</p>
+                    <a href="javascript:void(0);" class="desktop-icon size-fix"></a>
+                    <a href="javascript:void(0);" class="tablet-icon"></a>
+                </div>
+                <div class="download-section">
+                    <a href ng-click="buildSource()" class="download-link">Download</a>
+                </div>
+
+            </div>
+
+            <div class="user-area">
+                <button class="user-settings-button" ng-click="profileView()" type="button">
+                    <img src="images/user-icon.svg" alt="User Logo" />
+                </button>
+            </div>
+
+        </div>
+
+        <div class="mobile-preview" ng-class="tabletView ? 'tabletView' : '!tabletView'" >
+            <div class="mobile-wrapper" >
+                <div class="mobile-simulator" overflow="scroll">
+                    <me-iphone ng-show="!tabletView" tmp-url="{{appTemplateUrl}}"></me-iphone>
+                    <me-tablet ng-show="tabletView" tmp-url="{{appTemplateUrl}}" ></me-tablet>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

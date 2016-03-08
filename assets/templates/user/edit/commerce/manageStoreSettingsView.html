@@ -1,0 +1,299 @@
+<md-dialog aria-label="Store Settings">
+    <md-dialog-content>
+        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+            <md-tab>
+                <md-tab-label>general</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>general</h1>
+                    </div>
+                    <div class="md-dialog-main">
+                        <form class="clearfix" novalidate>
+                            <fieldset class="col-2">
+                                <label>select a currency</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <md-select ng-model="someVal">
+                                    <md-option value="option1">option 1</md-option>
+                                    <md-option value="option2">option 2</md-option>
+                                </md-select>
+                            </fieldset>
+                            <fieldset class="col-2 reset-margin-right">
+                                <label>measurement standard</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <md-select ng-model="someVal">
+                                    <md-option value="option1">option 1</md-option>
+                                    <md-option value="option2">option 2</md-option>
+                                </md-select>
+                            </fieldset>
+                            <fieldset class="col-2">
+                                <label>next order number </label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <input type="text" name="name" required />
+                            </fieldset>
+                            <fieldset class="col-2 reset-margin-right">
+                                <label>express checkout</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <div class="on-off-switch">
+                                    <input type="checkbox" name="on-off-switch" class="on-off-switch-checkbox" id="on-off-switch-1" checked>
+                                    <label class="on-off-switch-label" for="on-off-switch-1">
+                                        <span class="on-off-switch-inner"></span>
+                                        <span class="on-off-switch-switch"></span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <label>select site type</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <md-select ng-model="someVal">
+                                    <md-option value="option1">option 1</md-option>
+                                    <md-option value="option2">option 2</md-option>
+                                </md-select>
+                            </fieldset>
+                            <fieldset>
+                                <label>allow madeeasy to promote</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <div class="on-off-switch">
+                                    <input type="checkbox" name="on-off-switch" class="on-off-switch-checkbox" id="on-off-switch-2" checked>
+                                    <label class="on-off-switch-label" for="on-off-switch-2">
+                                        <span class="on-off-switch-inner"></span>
+                                        <span class="on-off-switch-switch"></span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <label>address</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <textarea rows="2"></textarea>
+                            </fieldset>
+                            <br />
+                            <h1>business hours</h1>
+                            <table class="me-hours-table">
+                                <thead>
+                                    <th>Day</th>
+                                    <th>Open from</th>
+                                    <th>Open till</th>
+                                    <th>Status</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Sunday</td>
+                                        <td>9.00 am</td>
+                                        <td>5.00 pm</td>
+                                        <td>Open</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Monday</td>
+                                        <td>9.00 am</td>
+                                        <td>5.00 pm</td>
+                                        <td>Open</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tuesday</td>
+                                        <td>9.00 am</td>
+                                        <td>5.00 pm</td>
+                                        <td>Open</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Wednesday</td>
+                                        <td>9.00 am</td>
+                                        <td>5.00 pm</td>
+                                        <td>Open</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
+                            <fieldset>
+                                <label>select language</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <md-select ng-model="someVal">
+                                    <md-option value="option1">option 1</md-option>
+                                    <md-option value="option2">option 2</md-option>
+                                </md-select>
+                            </fieldset>
+                            <fieldset>
+                                <label>time and region</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <md-select ng-model="someVal">
+                                    <md-option value="option1">option 1</md-option>
+                                    <md-option value="option2">option 2</md-option>
+                                </md-select>
+                            </fieldset>
+                            <fieldset>
+                                <label>connect a domain</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <input type="text" name="name" required />
+                            </fieldset>
+                            <fieldset>
+                                <label>search engine description</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <textarea rows="2"></textarea>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button">next</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>policies</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>policies</h1>
+                    </div>
+                    <div class="md-dialog-main">
+                        <form class="clearfix" novalidate>
+                            <fieldset>
+                                <label>return policy</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <textarea rows="2"></textarea>
+                            </fieldset>
+                            <fieldset>
+                                <label>terms and conditions</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <textarea rows="2"></textarea>
+                            </fieldset>
+                            <fieldset>
+                                <label>privacy policy</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <textarea rows="2"></textarea>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button">next</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>social media</md-tab-label>
+                <md-tab-body >
+                    <div class="md-dialog-header">
+                        <h1>social media</h1>
+                    </div>
+                    <div class="md-dialog-main">
+                        <label>social media integration</label>
+                        <ul class="social-connect">
+                            <li>
+                                <a href="javascript:void(0);" class="facebook-connect">connect to facebook</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="google-connect">connect to google plus</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="twitter-connect">connect to twitter</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="tumbler-connect">connect to tumbler</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="pinterest-connect">connect to pinterest</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button">next</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>users</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>users</h1>
+                        <ul class="md-dialog-header-nav clearfix">
+                            <li>
+                                <a class="add-new-item" ng-click="addNewUser()">Add New User</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md-dialog-main">
+                        <label>current users</label>
+                        <div class="users-section">
+                            <div class="user-profile user-profile-selected clearfix">
+                                <ul class="users-list">
+                                    <li class="clearfix">
+                                        <img src="../images/user-profile.png" alt="User Profile Image" />
+                                        <h1>senduran</h1>
+                                        <p>system admin</p>
+                                    </li>
+                                </ul>
+                                <ol class="breadcrumb">
+                                    <li><a href="javascript:void(0);">Edit</a></li>
+                                    <li><a href="javascript:void(0);">Delete</a></li>
+                                </ol>
+                            </div>
+                            <div class="user-profile clearfix">
+                                <ul class="users-list">
+                                    <li class="clearfix">
+                                        <img src="../images/user-profile.png" alt="User Profile Image" />
+                                        <h1>rakitha</h1>
+                                        <p>system user</p>
+                                    </li>
+                                </ul>
+                                <ol class="breadcrumb">
+                                    <li><a href="javascript:void(0);">Edit</a></li>
+                                    <li><a href="javascript:void(0);">Delete</a></li>
+                                </ol>
+                            </div>
+                            <div class="user-profile clearfix">
+                                <ul class="users-list">
+                                    <li class="clearfix">
+                                        <img src="../images/user-profile.png" alt="User Profile Image" />
+                                        <h1>ishan</h1>
+                                        <p>system user</p>
+                                    </li>
+                                </ul>
+                                <ol class="breadcrumb">
+                                    <li><a href="javascript:void(0);">Edit</a></li>
+                                    <li><a href="javascript:void(0);">Delete</a></li>
+                                </ol>
+                            </div>
+                            <div class="user-profile clearfix">
+                                <ul class="users-list">
+                                    <li class="clearfix">
+                                        <img src="../images/user-profile.png" alt="User Profile Image" />
+                                        <h1>rakitha</h1>
+                                        <p>system user</p>
+                                    </li>
+                                </ul>
+                                <ol class="breadcrumb">
+                                    <li><a href="javascript:void(0);">Edit</a></li>
+                                    <li><a href="javascript:void(0);">Delete</a></li>
+                                </ol>
+                            </div>
+                            <div class="user-profile clearfix">
+                                <ul class="users-list">
+                                    <li class="clearfix">
+                                        <img src="../images/user-profile.png" alt="User Profile Image" />
+                                        <h1>ishan</h1>
+                                        <p>system user</p>
+                                    </li>
+                                </ul>
+                                <ol class="breadcrumb">
+                                    <li><a href="javascript:void(0);">Edit</a></li>
+                                    <li><a href="javascript:void(0);">Delete</a></li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button">back</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+</md-dialog>

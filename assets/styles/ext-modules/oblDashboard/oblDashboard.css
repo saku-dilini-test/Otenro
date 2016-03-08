@@ -1,0 +1,184 @@
+.obl-dashboard-wrapper{
+    background-color: #F2F2F2;
+}
+
+.obl-dashboard-header{
+    border-bottom: 1px solid #DBDBDB;
+    min-height: 80px;
+    padding: 30px 50px 20px 50px;
+}
+
+.obl-dashboard-header h2{
+    color: #959595;
+    float: left;
+    font-size: 20px;
+    font-weight: 400;
+    height: 39px;
+    letter-spacing: 1px;
+    line-height: 60px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.obl-dashboard-header p{
+    color: #959595;
+    float: left;
+    font-size: 12px;
+    height: 39px;
+    letter-spacing: 1px;
+    line-height: 67px;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    width: 82%;
+}
+
+.obl-dashboard-header .template-categories li{
+    float: left;
+    display: inline;
+    margin: 4px 25px 0 0;
+}
+
+.obl-dashboard-header .template-categories li a,
+.obl-dashboard-settings .dropdown-menu li a{
+    color: #959595;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 5px 20px;
+}
+
+.obl-dashboard-settings{
+    float: right;
+    margin-right: 10px;
+}
+
+.obl-dashboard-settings .dropdown-menu li{
+    margin-bottom: 5px;
+}
+
+.obl-dashboard-settings button{
+    border: none;
+    padding: 0;
+    height: 39px;
+}
+
+.obl-dashboard-settings .dropdown-menu{
+    float: none;
+    left: -48px;
+    min-width: 130px;
+    top: 44px;
+    padding: 10px 0;
+}
+
+.obl-dashboard-header .template-categories{
+    float: right;
+    margin: 0 350px 0 0;
+    padding: 0;
+    height: 39px;
+    line-height: 58px;
+}
+
+.obl-dashboard-apps{
+    width: 1024px;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+.obl-mobile-app{
+    float: left;
+    width: 161px;
+    height: 266px;
+    margin-right: 283px;
+    position: relative;
+    background: url(../../../images/mobile-app-bg.png) no-repeat;
+}
+
+.obl-mobile-app img{
+    left: 5px;
+    position: absolute;
+    top: 28px;
+}
+
+.obl-app-templates{
+    margin: 0;
+    padding: 0;
+}
+
+.obl-app-templates li{
+    display: inline;
+    float: left;
+    margin-right: 263px;
+}
+
+.obl-app-templates li a{
+    display: block;
+    width: 161px;
+    height: 266px;
+    position: relative;
+    background: url(../../../images/mobile-app-bg.png) no-repeat;
+}
+
+.obl-app-templates li a img{
+    height: auto;
+    left: 4px;
+    position: absolute;
+    top: 28px;
+    width: 102px;
+}
+
+.me-dialog-phone-view{
+    float: left;
+    height: 99mm;
+    overflow: hidden;
+    padding-left: 0;
+    width: 180px;
+}
+
+.me-dialog-phone-view .iphone{
+     background: url(../../../../images/iphone-small-bg.png) no-repeat;
+}
+
+.me-dialog-form-view{
+    width: 360px;
+    float: left;
+    padding: 45px 0 0 15px;
+}
+
+.me-dialog-form-view h1{
+    margin-bottom: 10px;
+}
+
+.create-app-wrapper{
+    padding: 30px;
+}
+
+.app-description{
+     color: #7F7F7F;
+}
+
+.obl-widget-header{
+    position: relative;
+    color: white;
+    background-color: #F6F6F6;
+    font-size: 18px;
+    border-bottom: 1px solid black;
+    min-height: 30px;
+    padding: 8px;
+    padding-top: 4px;
+    padding-bottom: 2px;
+}
+
+.obl-widget-header-buttons{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.obl-widget-header-buttons .btn{
+    margin: 4px;
+    margin-top: 3px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}

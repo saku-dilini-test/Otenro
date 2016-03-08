@@ -1,0 +1,9 @@
+1) Run Gulp task for the modules(Creates the template.js within each modules)
+    buildMenuTemplateCache
+    buildDashboardTemplateCache
+    buildFrameworkTemplateCache
+2) Run 'buildJavaScript' to create 'oblFramework.js'
+3) Run 'buildCSS' to create 'oblFramework.css'
+
+Add 'oblFramework.js' and 'oblFramework.css' files to index.html
+

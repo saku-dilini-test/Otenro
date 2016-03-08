@@ -1,0 +1,148 @@
+<md-dialog aria-label="Add Shipping Option">
+    <md-dialog-content>
+        <md-tabs class="shipping-options-tabs" md-center-tabs="false" md-selected="selectedTab" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+            <md-tab>
+                <md-tab-label>shipping options</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>shipping options</h1>
+                    </div>
+                    <div class="md-dialog-main">
+                        <div class="shipping-options">
+                            <a href="javascript:void(0);" ng-click="moveToFlatRateOption()">
+                                <h1>flat rate</h1>
+                                <label>define a change for every order and a flat fee for every item</label>
+                            </a>
+                            <a href="javascript:void(0);" ng-click="moveToWeightBasedOption()">
+                                <h1>weight based</h1>
+                                <label>cost will depend on the total weight of the purchase</label>
+                            </a>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="shippingOptionParams.secondLocked">
+                <md-tab-label>flat rates</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>flat rates</h1>
+                    </div>
+                    <div class="md-dialog-main clearfix">
+                        <fieldset>
+                            <label>option name</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12" />
+                            <input type="text" name="name" required />
+                        </fieldset>
+                        <div class="clearfix">
+                            <fieldset class="col-2">
+                                <label>preorder fee </label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <input type="text" name="name" required />
+                            </fieldset>
+                            <fieldset class="col-2 reset-margin-right">
+                                <label>fee per items</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <input type="text" name="name" required />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button">save</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="shippingOptionParams.thirdLocked">
+                <md-tab-label>weight based</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>weight based</h1>
+                    </div>
+                    <div class="md-dialog-main clearfix">
+                        <fieldset>
+                            <label>option name</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12" />
+                            <input type="text" name="name" required />
+                        </fieldset>
+                        <fieldset class="reset-margin">
+                            <label>weight ranges</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12" />
+                        </fieldset>
+                        <table class="me-simple-table">
+                            <thead>
+                                <th class="simple-column">weight (kg)</th>
+                                <th class="simple-column">cost</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0.00 to 1.00</td>
+                                    <td>$1.00</td>
+                                </tr>
+                                <tr>
+                                    <td>1.00 to 2.00</td>
+                                    <td>$1.50</td>
+                                </tr>
+                                <tr>
+                                    <td>2.00 onwards</td>
+                                    <td>$4.50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <fieldset>
+                            <button class="me-default-button me-plus-button reset-margin">add weight range <span class="me-plus-icon">+</span></button>
+                        </fieldset>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button">save</md-button
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="shippingOptionParams.countrySelectionLocked">
+                <md-tab-label>country restrictions</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>country restrictions</h1>
+                    </div>
+                    <div class="md-dialog-main clearfix">
+                        <form class="clearfix" novalidate>
+                            <fieldset class="reset-margin">
+                                <label>control where you ship to</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <md-radio-group ng-model="data.group" class="country-restrictions">
+                                    <md-radio-button value="world">
+                                        ship to the rest of the world
+                                        <span class="restrictions-options-text">
+                                            Make this shipping options available to the rest of the world.
+                                            Wherever your other options do not allow.
+                                        </span>
+                                    </md-radio-button>
+                                    <md-radio-button value="allowed">
+                                        countries allowed
+                                        <span class="restrictions-options-text">
+                                            Make this shipping options available to the rest of the world.
+                                            Wherever your other options do not allow.
+                                        </span>
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </fieldset>
+                            <fieldset ng-show="data.group == 'allowed'">
+                                <input class="me-add-input new-country-text-box" type="text" name="name" placeholder="ADD NEW COUNTRY" required />
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button">save</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+</md-dialog>

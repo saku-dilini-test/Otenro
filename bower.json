@@ -1,0 +1,40 @@
+{
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.4.9",
+    "font-awesome": "^4.5.0",
+    "satellizer": "^0.13.4",
+    "angular-toastr": "^1.7.0",
+    "bootstrap": "^3.3.6",
+    "angular-animate": "~1.4.4",
+    "angular-ui-router": "ui-router#^0.2.18",
+    "angular-messages": "^1.5.0",
+    "angular-cookies": "^1.5.0",
+    "angular-color-picker": "angularjs-color-picker#~0.6.5",
+    "angular-dynamic-locale": "~0.1.27",
+    "angular-gridster": "~0.13.5",
+    "angular-hammer": "monospaced/angular-hammer#~1.2.4",
+    "angular-material": "~0.10.1",
+    "angular-permission": "~0.3.1",
+    "angular-route": "~1.4.4",
+    "angular-translate": "~2.7.2",
+    "ng-file-upload": "~7.0.13",
+    "angular-bootstrap-colorpicker": "^3.0.24",
+    "angular-ui-tree": "^2.15.0",
+    "ngRepeatReorder": "~0.1.1",
+    "ng-dialog": "^0.5.7",
+    "ngDialog": "~0.5.1",
+    "tweenlite": "~1.11.5",
+    "angular-ui-mask": "^1.8.1"
+  },
+  "name": "meV2",
+  "version": "0.0.0",
+  "author": "udeshikaperera",
+  "private": true
+}

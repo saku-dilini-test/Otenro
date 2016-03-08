@@ -1,0 +1,41 @@
+<md-dialog aria-label="PUSH MESSAGE">
+    <md-dialog-content class="reset-margin">
+        <h1>push message</h1><br />
+        <table class="me-checkbox-table">
+            <thead>
+                <th class="checkbox-column"><input type="checkbox" /></th>
+                <th>date</th>
+                <th class="message-column">message</th>
+                <th>status</th>
+                <th>scheduled</th>
+                <th>&nbsp;</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="checkbox-row"><input type="checkbox" /></td>
+                    <td>11/20/15</td>
+                    <td>25% off on item</td>
+                    <td class="status-sent">sent</td>
+                    <td>11/20/15</td>
+                    <td><a href="javascript:void(0);">more</a></td>
+                </tr>
+                <tr>
+                    <td class="checkbox-row"><input type="checkbox" /></td>
+                    <td>12/15/15</td>
+                    <td>store wide sale</td>
+                    <td class="status-pending">pending</td>
+                    <td>12/15/15</td>
+                    <td><a href="javascript:void(0);">more</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <br /><br /><br />
+        <form>
+            <fieldset class="text-right">
+                <md-button class="me-default-button">cancel</md-button>
+                <md-button class="me-default-button" ng-click="sendPushMessage()">create new message</md-button>
+            </fieldset>
+        </form>
+
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,23 @@
+<md-dialog aria-label="EDIT IMAGE" style="height: 600px">
+    <md-dialog-content>
+        <section class="af-wrapper">
+            <h1>Change Image</h1><br/>
+            <form class="af-form" name="productForm" novalidate>
+                <fieldset>
+                    <div class="me-file-upload regular">
+                        <div class="upload-wrapper">
+                            <input  type="file" ngf-select ng-model="newImageFile" name="newImageFile" accept="image/*" required />
+                            <span>Browse</span>
+                        </div>
+                    </div>
+                    <img ng-show="newImageFile != null" ngf-src="newImageFile" width="164" height="164" />
+                </fieldset>
+            </form>
+        </section>
+    </md-dialog-content>
+
+    <div class="dialog-controls clearfix">
+        <md-button ng-click="answer('cancel')">Cancel</md-button>
+        <md-button ng-click="updateImage(newImageFile)">Update</md-button>
+    </div>
+</md-dialog>

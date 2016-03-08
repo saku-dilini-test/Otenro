@@ -1,0 +1,64 @@
+<md-dialog aria-label="Email Settings">
+    <md-dialog-content>
+        <form novalidate>
+            <div class="md-dialog-header">
+                <h1>e-mail settings</h1>
+            </div>
+            <div class="md-dialog-main">
+                <fieldset>
+                    <label>from email</label>
+                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                    <input type="text" name="name" required />
+                </fieldset>
+                <fieldset>
+                    <label>reply to email</label>
+                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                    <input type="text" name="name" required />
+                </fieldset>
+                <fieldset>
+                    <label>alert email</label>
+                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                    <input type="text" name="name" required />
+                </fieldset>
+                <fieldset>
+                    <label>alert at</label>
+                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                    <input type="text" name="name" class="col-4-1 reset-inline" required />
+                    <span class="percentage-mark">%</span>
+                </fieldset>
+                <fieldset>
+                    <label>order confirm email</label>
+                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                    <textarea rows="4"></textarea>
+                </fieldset>
+                <fieldset>
+                    <label>order fulfilled email</label>
+                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                    <textarea rows="4"></textarea>
+                </fieldset>
+                <fieldset>
+                    <label>order refund email</label>
+                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                    <textarea rows="4"></textarea>
+                </fieldset>
+                <fieldset>
+                    <label>header</label>
+                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                    <textarea rows="2"></textarea>
+                </fieldset>
+                <fieldset>
+                    <label>footer</label>
+                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                    <textarea rows="2"></textarea>
+                </fieldset>
+            </div>
+            <div class="md-dialog-buttons">
+                <div class="inner-section">
+                    <md-button class="me-default-button" ng-click="hide()">next</md-button>
+                    <md-button class="me-default-button" ng-click="hide()">cancel</md-button>
+                    <md-button class="me-default-button" ng-click="hide()">send text email</md-button>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>

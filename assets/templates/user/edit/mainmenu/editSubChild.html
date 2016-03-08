@@ -1,0 +1,44 @@
+<md-dialog aria-label="Edit Child Menu" style="height: 600px">
+    <md-dialog-content>
+        <section class="af-wrapper">
+            <h1>Edit Sub Child Menu</h1><br/>
+            <form class="af-form" name="catForm" novalidate>
+                <fieldset>
+                    <label for="input-title">Name</label>
+                    <input type="text" name="name" ng-model="subChild.name" id="input-title" required />
+                    <i ng-show="catForm.name.$error.required">*required</i>
+                </fieldset>
+                <fieldset>
+                    <label for="input-price">Price</label>
+                    <input type="number" name="price" for="Price" ng-model="subChild.price" id="input-price" required />
+                </fieldset>
+                <fieldset>
+                    <label>Main Menu</label>
+                    <md-select class="" placeholder="Select Main Menu" ng-model="subChild.childId">
+                        <md-option ng-value="child.id" ng-repeat="child in childs">{{child.name}}</md-option>
+                    </md-select>
+                </fieldset>
+                <!--class="profile-image-section"-->
+                <fieldset class="profile-image-section">
+                    <label class="reset-inline">Sub Child Menu Image</label>
+                    <a class="feature01 reset-margin">
+                        <span class="overlay01">
+                            <span class="caption01">
+                                <input type="button" class="me-default-button" ng-click="editSubChildImage(subChild.imageUrl,subChild)" value="Change Image" />
+                            </span>
+                        </span>
+                        <img ng-src="{{imageURL}}&img=products/{{subChild.imageUrl}}" width="120" height="120" />
+                    </a>
+                </fieldset>
+                <fieldset class="text-right reset-margin">
+                    <button class="me-default-button" ng-disabled="!catForm.$valid" ng-click="updateSubChild(subChild)"> Edit </button>
+                </fieldset>
+            </form>
+        </section>
+    </md-dialog-content>
+
+    <div class="dialog-controls clearfix">
+        <md-button ng-click="cancelSubChild()">Cancel</md-button>
+        <md-button ng-click="childSubFinish()">Ok</md-button>
+    </div>
+</md-dialog>

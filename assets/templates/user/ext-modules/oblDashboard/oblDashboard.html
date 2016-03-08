@@ -1,0 +1,23 @@
+<div class="obl-dashboard-wrapper">
+    <div class="obl-dashboard-header clearfix">
+        <h2>{{title}}</h2>
+        <p>select a template you like to work on</p>
+        <div class="obl-dashboard-settings">
+            <button class="user-settings-button" ng-click="profileView()" type="button">
+                <img src="images/user-icon.svg" alt="User Logo" />
+            </button>
+        </div>
+    </div>
+    <div class="obl-dashboard-apps">
+        <div gridster="gridsterOpts">
+            <ul class="clearfix">
+                <li class="obl-dashboard-createApp">
+                    <button type="button" ui-sref="welcomeTemplates"></button>
+                </li>
+                <li gridster-item="item" ng-repeat="item in widgets">
+                    <obl-widget-body></obl-widget-body>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

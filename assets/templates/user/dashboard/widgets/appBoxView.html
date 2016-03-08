@@ -1,0 +1,17 @@
+<div class="me-app-box-widget">
+    <div class="me-app-box-heading">
+        <img class="me-app-header-icon" ng-src="{{item.appIcon}}">
+        <span class="me-app-title">{{item.appName}}</span>
+    </div>
+    <div class="me-app-box-body" ng-click="goToEdit()">
+        <div class="me-app-name">
+            {{item.appName}}
+        </div>
+        <div class="me-app-box-view">
+            <img class="me-app-icon" height="183" width="103" ng-src="http://localhost:3000/api/edit/viewImagesIn?img={{item.appIcon}}"></div>
+            <div class="me-app-details">
+
+            </div>
+        </div>
+    </div>
+</div>

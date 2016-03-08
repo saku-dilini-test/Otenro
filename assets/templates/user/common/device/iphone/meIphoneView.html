@@ -1,0 +1,17 @@
+<div class="iphone">
+    <div class="power"></div>
+    <div class="lock"></div>
+    <div class="volume up"></div>
+    <div class="volume down"></div>
+    <div class="camera"></div>
+    <div class="speaker"></div>
+    <div class="screen">
+        <div id="appView" class="appViewClass">
+            <iframe ng-show="!!tmpUrl" ng-src="{{editTemplateUrl}}" height="100%" width="100%"></iframe>
+            <img ng-show="!!imgSrc" ng-src="{{imgSrc}}" style="width:150px;" />
+        </div>
+    </div>
+    <div class="button">
+        <div class="square"></div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<md-dialog aria-label="Add Product Category">
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>Add Category</h1>
+        </div>
+        <form name="catForm" novalidate>
+            <div class="md-dialog-main">
+                <fieldset>
+                    <label for="input-title">Name</label>
+                    <input type="text" name="name" ng-model="category.name" id="input-title" required />
+                    <i ng-show="catForm.name.$error.required">*required</i>
+                </fieldset>
+                <fieldset>
+                    <label for="input-title">Description</label>
+                    <input type="text" name="desc" ng-model="category.desc" id="input-des" required />
+                    <i ng-show="catForm.desc.$error.required">*required</i>
+                </fieldset>
+                <fieldset>
+                    <label>Main Menu</label>
+                    <md-select class="" placeholder="Select Main Menu" ng-model="category.mainId" required>
+                        <md-option ng-value="mainMenu.id" ng-repeat="mainMenu in mainMenus">{{mainMenu.name}}</md-option>
+                    </md-select>
+                </fieldset>
+                <fieldset class="profile-image-section">
+                    <label class="reset-inline">Category Image</label>
+                    <a class="feature01 reset-margin">
+                        <span class="overlay01">
+                            <span class="caption01">
+                                 <input type="button" class="me-default-button" ngf-select ng-model="picFile" ngf-accept="image/*" value="Add Image" required />
+                            </span>
+                        </span>
+                        <img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />
+                        <img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
+                    </a>
+                    <i ng-show="catForm.file.$error.required">*required</i>
+                </fieldset>
+                <fieldset class="text-right">
+                    <button class="me-default-button" ng-disabled="!catForm.$valid" ng-click="addCategory(picFile,category)">Add Category</button>
+                </fieldset>
+            </div>
+            <div class="md-dialog-buttons">
+                <div class="inner-section">
+                    <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                    <md-button class="me-default-button" ng-click="addCatFinish()">ok</md-button>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>

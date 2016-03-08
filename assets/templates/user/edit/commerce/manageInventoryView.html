@@ -1,0 +1,103 @@
+<md-dialog aria-label="Inventory" style="width:900px">
+    <md-dialog-content>
+        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+            <md-tab>
+                <md-tab-label>all orders</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <div class="md-dialog-header-nav clearfix">
+                            <h1 class="pull-left">all items</h1>
+                            <fieldset class="col-3 pull-right reset-margin">
+                                <input type="text" required="" class="me-search-input" name="name">
+                                <input type="submit" value="search" class="me-search-button">
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="md-dialog-main">
+                        <table class="me-checkbox-table">
+                            <thead>
+                                <th class="checkbox-column"><input type="checkbox" /></th>
+                                <th class="id-column">sku#</th>
+                                <th class="item-name-column">item name</th>
+                                <th>qty</th>
+                                <th>price</th>
+                                <th>sale</th>
+                                <th>sale price</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="inventory in inventoryList">
+                                    <td class="checkbox-row"><input type="checkbox" /></td>
+                                    <td>{{inventory.sku}}</td>
+                                    <td>{{inventory.name}}</td>
+                                    <td>{{inventory.quantity}}</td>
+                                    <td>{{inventory.price}}</td>
+                                    <td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()">{{inventory.sale}}</a></td>
+                                    <td class="sale-yes">{{inventory.discount}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                            <md-button class="me-default-button">export as csv</md-button>
+                            <md-button class="me-default-button">refunded</md-button>
+                            <md-button class="me-default-button">fulfilled</md-button>
+                        </div>
+                    </div>
+
+                    <div class="mini-light-box" ng-show="miniLightBoxShow">
+                        <h1>On sale</h1><br />
+                        <form class="clearfix" novalidate>
+                            <fieldset class="inline-checkboxes">
+                                <md-radio-group ng-model="data.group2">
+                                    <md-radio-button value="yes">yes</md-radio-button>
+                                    <md-radio-button value="no">no</md-radio-button>
+                                </md-radio-group>
+                            </fieldset>
+                            <fieldset class="option-2-section">
+                                <label>price</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input type="text" name="name" class="me-dollar-input" required />
+                                <span class="me-dollar-placeholder">$</span>
+                            </fieldset>
+                            <fieldset class="option-2-mid text-center">
+                                <label>or</label>
+                            </fieldset>
+                            <fieldset class="option-2-section">
+                                <label>percentage</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input type="text" name="name" class="me-percentage-input" required />
+                                <span class="me-percentage-placeholder">%</span>
+                            </fieldset>
+                            <fieldset class="text-right reset-margin">
+                                <button class="me-default-button" ng-click="closeMiniLightBox()">cancel</button>
+                                <button class="me-default-button">save</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>orders fulfilled</md-tab-label>
+                <md-tab-body>
+
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>orders unfulfilled</md-tab-label>
+                <md-tab-body >
+
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>orders refunded</md-tab-label>
+                <md-tab-body>
+
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+</md-dialog>
