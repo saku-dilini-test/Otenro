@@ -6,11 +6,12 @@
     function LogoAndTittleCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,logoAndTittleService,ME_APP_SERVER,$auth) {
 
 
-        //$scope.headerImg = ME_APP_SERVER+'temp/' +$auth.getPayload().sub+'/templates/'+$rootScope.appId+'/img/header.jpg?time='+new Date().getTime();
-        //$scope.fonts = {
-        //    font : 'Arial',
-        //    fontSize : 11
-        //};
+        $scope.thumbPic = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/header.jpg?time='+new Date().getTime();
+        console.log($scope.thumbPic);
+        $scope.fonts = {
+            font : 'Arial',
+            fontSize : 11
+        };
 
         $scope.addLogoImage = function(headerImg) {
             console.log('eee');
