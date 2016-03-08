@@ -1,8 +1,10 @@
-<md-dialog aria-label="ADD CURRENCY" style="height: 600px">
+<md-dialog aria-label="Add Currency">
     <md-dialog-content>
-        <section class="af-wrapper">
-            <form class="af-form clearfix" name="productForm" novalidate>
-                <legend>Currency</legend>
+        <div class="md-dialog-header">
+            <h1>Add Currency</h1>
+        </div>
+        <div class="md-dialog-main">
+            <form name="productForm" novalidate>
                 <fieldset>
                     <label>Currency list</label>
                     <select ng-model="selectedOption" placeholder="Select Currency" ng-options="cur as cur.currency for cur in currencyList">
@@ -12,11 +14,12 @@
                    <input type="submit" class="me-default-button" ng-click='addCurrency()' value="Set Currency" />
                </fieldset>
             </form>
-        </section>
+        </div>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                <md-button class="me-default-button" ng-click="answer()">Ok</md-button>
+            </div>
+        </div>
     </md-dialog-content>
-
-    <div class="dialog-controls clearfix">
-        <md-button ng-click="answer('cancel')">Cancel</md-button>
-        <md-button ng-click="answer()">Ok</md-button>
-    </div>
 </md-dialog>

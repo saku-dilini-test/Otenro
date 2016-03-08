@@ -1,8 +1,10 @@
-<md-dialog aria-label="Edit Child Menu" style="height: 600px">
+<md-dialog aria-label="Edit Child Menu">
     <md-dialog-content>
-        <section class="af-wrapper">
-            <h1>Edit Child Menu</h1><br/>
-            <form class="af-form" name="catForm" novalidate>
+        <div class="md-dialog-header">
+            <h1>Edit Child Menu</h1>
+        </div>
+        <div class="md-dialog-main">
+            <form name="catForm" novalidate>
                 <fieldset>
                     <label for="input-title">Name</label>
                     <input type="text" name="name" ng-model="child.name" id="input-title" required />
@@ -16,30 +18,30 @@
                 <fieldset>
                     <label>Main Menu</label>
                     <md-select class="" placeholder="Select Main Menu" ng-model="child.mainId">
-                        <md-option ng-value="mainMenu.id" ng-repeat="mainMenu in mainMenus">{{mainMenu.name}}</md-option>
+                        <md-option ng-value="mainMenu._id" ng-repeat="mainMenu in mainMenus">{{mainMenu.name}}</md-option>
                     </md-select>
                 </fieldset>
-                <!--class="profile-image-section"-->
                 <fieldset class="profile-image-section">
                     <label class="reset-inline">Child Menu Image</label>
                     <a class="feature01 reset-margin">
-                            <span class="overlay01">
-                                <span class="caption01">
-                                    <input type="button" ng-click="editChildImage(child.imageUrl,child)" value="Change Image" class="me-default-button" />
-                                </span>
+                        <span class="overlay01">
+                            <span class="caption01">
+                                <input type="button" ng-click="editChildImage(child.imageUrl,child)" value="Change Image" class="me-default-button" />
                             </span>
+                        </span>
                         <img ng-src="{{imageURL}}&img=categories/{{child.imageUrl}}" width="120" height="120" />
                     </a>
                 </fieldset>
-                <fieldset class="text-right reset-margin">
+                <fieldset class="text-right">
                     <button class="me-default-button" ng-disabled="!catForm.$valid" ng-click="updateChild(child)">Edit</button>
                 </fieldset>
             </form>
-        </section>
+        </div>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="cancelChild()">Cancel</md-button>
+                <md-button class="me-default-button" ng-click="childFinish()">Ok</md-button>
+            </div>
+        </div>
     </md-dialog-content>
-
-    <div class="dialog-controls clearfix">
-        <md-button ng-click="cancelChild()">Cancel</md-button>
-        <md-button ng-click="childFinish()">Ok</md-button>
-    </div>
 </md-dialog>

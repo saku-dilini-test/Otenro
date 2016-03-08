@@ -1,37 +1,44 @@
-<md-dialog aria-label="ADD STYLES" style="height:500px">
-    <md-dialog-content ng-style="{'background-color': backgroundColor}" class="styles-dialog-content reset-padding">
-        <md-tabs class="my-tabs" md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+<md-dialog aria-label="Logo and Title">
+    <md-dialog-content ng-style="{'background-color': backgroundColor}">
+        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
             <md-tab>
                 <md-tab-label>Header Image</md-tab-label>
                 <md-tab-body>
-                    <div class="itemsContainer header-image">
-                        <div class="imageOver">
-                            <div class="buttonContain">
-                                <div class="img-up">
-                                    <label for="file-input" class="add-image-label">
-                                        <span>Add Image</span>
-                                    </label>
-                                 <input id="file-input" type="button" ngf-validate="{size: {min: 10, max: '2MB'}, width: {min: 100, max:180}, height: {min: 100, max: 40}
+                    <div class="md-dialog-header">
+                        <h1>Logo and Title</h1>
+                    </div>
+                    <div class="md-dialog-main clearfix">
+                        <div class="itemsContainer header-image pull-left">
+                            <div class="imageOver">
+                                <div class="buttonContain">
+                                    <div class="img-up">
+                                        <label for="file-input" class="add-image-label">
+                                            <span>Add Image</span>
+                                        </label>
+                                        <input id="file-input" type="button" ngf-validate="{size: {min: 10, max: '2MB'}, width: {min: 100, max:180}, height: {min: 100, max: 40}
                 ratio: '2x1', duration: {min: '10s', max: '5m'}, pattern: '.jpg'}" class="me-default-button" ngf-select ng-model="picFile" value="Add Image" required />
+                                    </div>
                                 </div>
                             </div>
+                            <div class="image">
+                                <img ng-show="picFile != null" ngf-src="picFile" width="100" height="50" />
+                                <img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
+                            </div>
                         </div>
-                        <div class="image">
-                            <img ng-show="picFile != null" ngf-src="picFile" width="100" height="50" />
-                            <img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
+                        <div class="logo-upload-section">
+                            <md-button class="me-default-button reset-margin" ng-click="addLogoImages('ss')">Submit</md-button>
                         </div>
-                        <!--<md-button class="me-default-button" ng-click="addLogoImages(picFile)">Submit</md-button>-->
                     </div>
-                    <br />
-                    <md-button class="me-default-button" ng-click="addLogoImages('ss')">Submit</md-button>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="addLogoImage(picFile)">Submit</md-button>
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                        </div>
+                    </div>
                 </md-tab-body>
             </md-tab>
         </md-tabs>
     </md-dialog-content>
-
-    <div class="dialog-controls clearfix">
-        <md-button class="me-default-button" ng-click="addLogoImage(picFile)">Submit</md-button>
-        <md-button class="me-default-button" ng-click="hide()">Close</md-button>
-    </div>
 </md-dialog>
+<!--<md-button class="me-default-button" ng-click="addLogoImages(picFile)">Submit</md-button>-->
 

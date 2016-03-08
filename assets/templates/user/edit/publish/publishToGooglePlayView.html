@@ -1,125 +1,124 @@
-<md-dialog aria-label="GOOGLE PLAY" style="width: 811px;">
-    <md-dialog-content class="reset-padding reset-margin">
-        <md-tabs class="my-tabs" md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+<md-dialog aria-label="Google Play">
+    <md-dialog-content>
+        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
             <md-tab>
                 <md-tab-label>general</md-tab-label>
                 <md-tab-body>
-                    <h1>general</h1><br />
-                    <fieldset>
-                        <label>title name</label>
-                        <img src="../../../images/question-mark.svg" width="12" height="12">
-                        <input type="text" name="name" ng-model="playStoreData.name" required />
-                    </fieldset>
-                    <div class="clearfix">
-                        <!--<fieldset class="col-4">-->
-                            <!--<label class="reset-inline">logo</label>-->
-                            <!--<div class="me-file-upload small">-->
-                                <!--<div class="upload-wrapper">-->
-                                    <!--<input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*" required />-->
-                                    <!--<img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />-->
-                                    <!--<img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</fieldset>-->
-                        <fieldset class="col-4">
-                            <label class="reset-inline">logo</label>
-                            <a class="feature01 reset-margin">
-                        <span class="overlay01">
-                            <span class="caption01">
-                                 <input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*" value="Add Image" required />
-                            </span>
-                        </span>
-                                <img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />
-                                <img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
-                            </a>
-                        </fieldset>
-                        <fieldset class="col-4 col-4-1">
-                            <label class="reset-inline">splash screen</label>
-                            <div class="me-file-upload text-right medium">
-                                <div class="upload-wrapper">
-                                    <input type="file" />
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-4 col-4-1">
-                            <label class="reset-inline invisible">splash screen</label>
-                            <div class="me-file-upload text-right medium">
-                                <div class="upload-wrapper">
-                                    <input type="file" />
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-4 col-4-1">
-                            <label class="reset-inline invisible">splash screen</label>
-                            <div class="me-file-upload text-right medium">
-                                <div class="upload-wrapper">
-                                    <input type="file" />
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset class="col-4 col-4-1 reset-margin">
-                            <label class="reset-inline invisible">splash screen</label>
-                            <div class="me-file-upload text-right medium">
-                                <div class="upload-wrapper">
-                                    <input type="file" />
-                                </div>
-                            </div>
-                        </fieldset>
+                    <div class="md-dialog-header">
+                        <h1>general</h1>
                     </div>
-                    <div class="clearfix">
+                    <div class="md-dialog-main">
                         <fieldset>
-                            <label>spring board name</label>
+                            <label>title name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" required />
+                            <input type="text" name="name" ng-model="playStoreData.name" required />
                         </fieldset>
-                        <fieldset class="col-3">
-                            <label>language</label>
-                            <md-select ng-model="someVal1">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
-                        </fieldset>
-                        <fieldset class="col-3">
-                            <label>primary category</label>
-                            <md-select ng-model="someVal2">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
-                        </fieldset>
-                        <fieldset class="col-3 reset-margin-right">
-                            <label>secondary category</label>
-                            <md-select ng-model="someVal3">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
-                        </fieldset>
+                        <div class="clearfix">
+                            <fieldset class="col-4 profile-image-section">
+                                <label class="reset-inline">logo</label>
+                                <a class="feature01 reset-margin">
+                                    <span class="overlay01">
+                                        <span class="caption01">
+                                             <input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*" value="Add Image" required />
+                                        </span>
+                                    </span>
+                                    <img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />
+                                    <img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
+                                </a>
+                            </fieldset>
+
+                            <div class="pull-right">
+                                <label class="reset-inline">splash screen</label>
+                                <div class="clearfix">
+                                    <fieldset class="col-4-1">
+                                        <div class="me-file-upload text-right medium">
+                                            <div class="upload-wrapper">
+                                                <input type="file" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset class="col-4-1">
+                                        <div class="me-file-upload text-right medium">
+                                            <div class="upload-wrapper">
+                                                <input type="file" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset class="col-4-1">
+                                        <div class="me-file-upload text-right medium">
+                                            <div class="upload-wrapper">
+                                                <input type="file" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset class="col-4-1 reset-margin">
+                                        <div class="me-file-upload text-right medium">
+                                            <div class="upload-wrapper">
+                                                <input type="file" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <fieldset>
+                                <label>spring board name</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input type="text" name="name" required />
+                            </fieldset>
+                            <fieldset class="col-3">
+                                <label>language</label>
+                                <md-select ng-model="someVal1">
+                                    <md-option value="Basic">Basic</md-option>
+                                    <md-option value="Advanced">Advanced</md-option>
+                                </md-select>
+                            </fieldset>
+                            <fieldset class="col-3">
+                                <label>primary category</label>
+                                <md-select ng-model="someVal2">
+                                    <md-option value="Basic">Basic</md-option>
+                                    <md-option value="Advanced">Advanced</md-option>
+                                </md-select>
+                            </fieldset>
+                            <fieldset class="col-3 reset-margin-right">
+                                <label>secondary category</label>
+                                <md-select ng-model="someVal3">
+                                    <md-option value="Basic">Basic</md-option>
+                                    <md-option value="Advanced">Advanced</md-option>
+                                </md-select>
+                            </fieldset>
+                        </div>
+                        <div class="clearfix">
+                            <fieldset>
+                                <label>description</label>
+                                <textarea rows="2"></textarea>
+                            </fieldset>
+                            <fieldset>
+                                <label>keywords</label>
+                                <textarea rows="2"></textarea>
+                            </fieldset>
+                        </div>
                     </div>
-                    <div class="clearfix">
-                        <fieldset>
-                            <label>description</label>
-                            <textarea rows="2"></textarea>
-                        </fieldset>
-                        <fieldset>
-                            <label>keywords</label>
-                            <textarea rows="2"></textarea>
-                        </fieldset>
-                        <fieldset class="text-right">
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
                             <md-button class="me-default-button">cancel</md-button>
                             <md-button class="me-default-button"  ng-click="addGooglePlayInfo(picFile,playStoreData)">next</md-button>
-                        </fieldset>
+                        </div>
                     </div>
                 </md-tab-body>
             </md-tab>
             <md-tab>
                 <md-tab-label>promotions</md-tab-label>
                 <md-tab-body>
-                    <h1>promotions</h1><br />
-                    <label>
-                        please note that the images below have to be screenshots of the app itself, and have to be taken from specified device.
-                        images not meeting required resolution will be resized.
-                    </label>
-                    <br/><br/>
-                    <div class="clearfix">
+                    <div class="md-dialog-header">
+                        <h1>promotions</h1>
+                        <label class="font-size-12">
+                            please note that the images below have to be screenshots of the app itself, and have to be taken from specified device.
+                            images not meeting required resolution will be resized.
+                        </label>
+                    </div>
+                    <div class="md-dialog-main clearfix">
                         <fieldset class="col-4">
                             <label class="reset-inline">iphone 5</label>
                             <div class="me-file-upload medium">
@@ -152,13 +151,26 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <fieldset class="text-right">
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
                             <md-button class="me-default-button">cancel</md-button>
                             <md-button class="me-default-button">save</md-button>
-                        </fieldset>
+                        </div>
                     </div>
                 </md-tab-body>
             </md-tab>
         </md-tabs>
     </md-dialog-content>
 </md-dialog>
+
+<!--<fieldset class="col-4">-->
+<!--<label class="reset-inline">logo</label>-->
+<!--<div class="me-file-upload small">-->
+<!--<div class="upload-wrapper">-->
+<!--<input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*" required />-->
+<!--<img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />-->
+<!--<img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />-->
+<!--</div>-->
+<!--</div>-->
+<!--</fieldset>-->
