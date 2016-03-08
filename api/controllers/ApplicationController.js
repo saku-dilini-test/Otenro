@@ -43,6 +43,9 @@ module.exports = {
                 headerFontSize : 10,
                 contentFontSize : 10,
                 footerFontSize : 10,
+                headerFontWeight : "normal",
+                contentFontWeight : "normal",
+                footerFontWeight : "normal"
             }
         };
 

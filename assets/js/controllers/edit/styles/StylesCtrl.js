@@ -28,6 +28,7 @@
 
         $scope.fontFamilyList = ["Arial","Tahoma","Dingbats","Ubuntu Light","URW Chancery L","UnPilgi"];
         $scope.fontSizeList = [8,9,10,12,14,18];
+        $scope.fontWeightList = ["normal","bold","bolder","lighter"];
 
         stylesService.getAppSettings({'appId':$rootScope.appId}).success(function (data) {
             var appSettings = data.appSettings;
@@ -63,7 +64,18 @@
                 "value": appSettings.footerFontSize,
                 "values": $scope.fontSizeList
             };
-
+            $scope.headerFontWeightProp = {
+                "value": appSettings.headerFontWeight,
+                "values": $scope.fontWeightList
+            };
+            $scope.contentFontWeightProp = {
+                "value": appSettings.contentFontWeight,
+                "values": $scope.fontWeightList
+            };
+            $scope.footerFontWeightProp = {
+                "value": appSettings.footerFontWeight,
+                "values": $scope.fontWeightList
+            };
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
                 closeButton: true
@@ -126,26 +138,6 @@
                 });
         };
 
-        // Font weight
-        $scope.fontWeightList = ["normal","bold","bolder","lighter"];
-        // Header Font Weight
-        $scope.selectedHeaderFontWeight = "normal";
-        $scope.headerFontWeightProp = {
-            "value": $scope.selectedHeaderFontWeight,
-            "values": $scope.fontWeightList
-        };
-        // Content Font Weight
-        $scope.selectedContentFontWeight = "normal";
-        $scope.contentFontWeightProp = {
-            "value": $scope.selectedContentFontWeight,
-            "values": $scope.fontWeightList
-        };
-        // Footer Font Weight
-        $scope.selectedFooterFontWeight = "normal";
-        $scope.footerFontWeightProp = {
-            "value": $scope.selectedFooterFontWeight,
-            "values": $scope.fontWeightList
-        };
         $scope.styleFontWeightChange = function (data,type) {
             var styleFontWeight = data;
             if(type == 'headerFont') {
