@@ -237,7 +237,15 @@
             };
             stylesService.addHeaderImage($scope.headerImgData)
                 .success(function (res) {
-                    toastr.success({title: "Successfully Update Header Image"});
+                   toastr.success('Successfully change HeaderImage', 'Message', {
+                        closeButton: true
+                    })
+                    .error(function (res) {
+                           console.log(res);
+                       toastr.error('Cant Change Image', 'Waring', {
+                           closeButton: true
+                    });
+                   });
                 });
         };
 
@@ -248,7 +256,16 @@
             };
             stylesService.addBackgroundImage($scope.backgroundImgData)
                 .success(function (res) {
-                    toastr.success({title: "Successfully Update Background Image"});
+                    toastr.success('Successfully change backgroundImage', 'Message', {
+                        closeButton: true
+                    });
+                })
+                .error
+            (function (res) {
+                    console.log(res);
+                    toastr.error('Cant Change Image', 'Waring', {
+                        closeButton: true
+                    });
                 });
         };
 

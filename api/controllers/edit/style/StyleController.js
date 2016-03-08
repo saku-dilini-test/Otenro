@@ -9,7 +9,8 @@ var sizeOf = require('image-size'),
     fs = require('fs-extra'),
     config = require('../../../services/config'),
     im = require('imagemagick'),
-    easyimg = require('easyimage');
+    easyimg = require('easyimage'),
+    lwip = require('lwip');
 
 module.exports = {
 
@@ -327,7 +328,7 @@ module.exports = {
             return response;
         }
         try{
-            mkpath(config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'header.jpg', 0777, function (err) {
+            mkpath(config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'background.jpg', 0777, function (err) {
             })
         }
         catch(e){
@@ -349,17 +350,24 @@ module.exports = {
                     if(err){
                         return console.dir(err);
                     }
-                    im.resize({
-                        srcPath:backgroundImage,
-                        dstPath: backgroundExist,
-                        width: backgroundDimensions.width,
-                        height: backgroundDimensions.height
-                    }, function(err, stdout, stderr){
-                        if (err) throw err;
-                        console.log('resized image to fit within ' + backgroundDimensions.width + ' and ' + backgroundDimensions.height);
+
+                    fs.unlink(backgroundExist, function (err) {
+                        if (err) return err;
                     });
 
-                    console.log("success");
+                    lwip.open(backgroundImage, function(err, image) {
+                        if (err) throw err;
+                        image.resize(backgroundDimensions.width,backgroundDimensions.height, function(err, rzdImg) {
+                            rzdImg.writeFile(backgroundExist, function(err) {
+                                if (err) throw err;
+
+                                fs.unlink(backgroundImage, function (err) {
+                                    if (err) return console.error(err);
+                                    res.send('ok');
+                                });
+                            });
+                        });
+                    });
                 });
             });
         }
@@ -925,13 +933,7 @@ module.exports = {
 
     addLogoImage: function(req,res) {
 
-
-
-
-        var appId = req.body.appId;
-        //var path = req.files.file.path;
-        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/';
-        //var dePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId + '/img/headertemp.jpg';
+        var dePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId + '/img/headertemp.jpg';
         var headerExist = config.ME_SERVER + req.userId + '/templates/' + req.body.appId + '/img/header.jpg';
         var headerDimensions = sizeOf(headerExist);
 
@@ -945,99 +947,27 @@ module.exports = {
 
             fs.unlink(headerExist, function (err) {
                 if (err) return console.error(err);
-                console.log("success!");
-                console.log('test');
 
-                fs.rename(uploadedFiles[0].fd, dePath+'headertemp.jpg', function (err) {
+                fs.rename(uploadedFiles[0].fd,dePath, function (err) {
                     if (err) return res.send(err);
 
-                    im.resize({
-                        srcPath:dePath+'headertemp.jpg',
-                        dstPath: headerExist,
-                        width: headerDimensions.width
-                    }, function(err, stdout, stderr){
-                        if (err) console.log(err + 'ff');
+                    lwip.open(dePath, function(err, image) {
+                        if (err) throw err;
 
-                        fs.unlink(dePath+'headertemp.jpg', function (err) {
-                            if (err) return console.error(err);
-                            console.log("success!");
-                            console.log('test');
-                            res.send('ok');
+                        image.resize(headerDimensions.width,headerDimensions.height, function(err, rzdImg) {
+                            rzdImg.writeFile(headerExist, function(err) {
+                                if (err) throw err;
+
+                                fs.unlink(dePath, function (err) {
+                                    if (err) return console.error(err);
+                                    res.send('ok');
+                                });
+                            });
                         });
-                        console.log('resized image to fit within ' + headerDimensions.width + ' and ' + headerDimensions.height);
                     });
-
                 });
-
             });
-
-
         });
 
-        //
-        //fs.stat(path, function (err, stat) {
-        //    if (err == null) {
-        //
-        //
-        //        //fs.unlink(dePath, function(err) {
-        //        //    if (err) return console.error(err);
-        //        //    console.log("success!");
-        //        //    console.log('test');
-        //        //});
-        //
-        //        fs.move(path, dePath, function (err) {
-        //            if (err) return console.error(err);
-        //            console.log("success!");
-        //            console.log('test');
-        //            fs.stat(dePath, function (err, stat) {
-        //                if (err == null) {
-        //                    console.log('found');
-        //                }
-        //                if (err.code == 'ENOENT') {
-        //                    console.log('Some other error: ', err.code);
-        //                }
-        //            });
-        //            //im.resize({
-        //            //    srcPath:dePath,
-        //            //    dstPath: headerExist,
-        //            //    width: 300
-        //            //
-        //            //}, function(err, stdout, stderr){
-        //            //    if (err) console.log(err + 'ff');
-        //            //    console.log('resized image to fit within ' + headerDimensions.width + ' and ' + headerDimensions.height);
-        //            //});
-        //        })
-        //    } else if (err.code == 'ENOENT') {
-        //        fs.writeFile('log.txt', 'Some log\n');
-        //    } else {
-        //        console.log('Some other error: ', err.code);
-        //    }
-        //});
-
-        console.log(headerDimensions.height);
-
-        //fs.stat(dePath, function(err, stat) {
-        //    if (err == null) {
-        //        console.log('found');
-        //    }
-        //    if (err.code == 'ENOENT') {
-        //        console.log('Some other error: ', err.code);
-        //    }
-        //});
-        console.log(dePath);
-        //im.identify(dePath, function(err, features){
-        //    if (err) throw err;
-        //    console.log(features);
-        //    // { format: 'JPEG', width: 3904, height: 2622, depth: 8 }
-        //});
-
-        //var data = {
-        //    appIcon:dePath+fileName
-        //};
-        //var query = {_id:appId};
-        //Application.update(query,data).exec(function(err, appProduct) {
-        //    if (err) res.send(err);
-        //});
-        //res.send('ok');
     }
 };
