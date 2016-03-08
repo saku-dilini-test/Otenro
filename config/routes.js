@@ -62,6 +62,7 @@ module.exports.routes = {
        * */
 
       'POST /edit/addStyles': 'edit/style/StyleController.addStyles',
+      'POST /edit/getAppSettings': 'edit/style/StyleController.getAppSettings',
       'POST /edit/addStyleImage/addHeaderImage': 'edit/style/StyleController.addHeaderImage',
       'POST /edit/addStyleImage/addBackgroundImage': 'edit/style/StyleController.addBackgroundImage',
       'POST /edit/addStyleColor': 'edit/style/StyleController.addStyleColor',

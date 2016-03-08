@@ -226,6 +226,20 @@ module.exports = {
     },
 
     /**
+     *  Return appSetting given appId
+     */
+    getAppSettings: function(req, res) {
+        var appId = req.body.appId;
+        var searchApp = {
+            id : appId
+        };
+        Application.findOne(searchApp, function(err, apps) {
+            if (err) return done(err);
+            res.send(apps);
+        });
+    },
+
+    /**
      * Update header image given appId
      */
 

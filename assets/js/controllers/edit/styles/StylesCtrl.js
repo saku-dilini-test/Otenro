@@ -21,13 +21,29 @@
 
         $scope.headerImg = ME_APP_SERVER +'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/header.jpg?time='+new Date().getTime();
         $scope.backgroundImg = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/background.jpg?time='+new Date().getTime();
-        $scope.backgroundColor = "#F9F9F9";
-        $scope.navigationBarColor = "#F9F9F9";
-        $scope.FooterColor = "#F9F9F9";
         $scope.fonts = {
             font : 'Arial',
             fontSize : 11
         };
+
+        stylesService.getAppSettings({'appId':$rootScope.appId}).success(function (data) {
+            var appSettings = data.appSettings;
+            if(typeof appSettings != 'undefined') {
+                $scope.backgroundColor = appSettings.backgroundColor;
+                $scope.navigationBarColor = appSettings.navigationBarColor;
+                $scope.footerColor = appSettings.footerColor;
+                $scope.buttonColor = appSettings.buttonColor;
+            }else{
+                $scope.backgroundColor = "#F9F9F9";
+                $scope.navigationBarColor = "#F9F9F9";
+                $scope.FooterColor = "#F9F9F9";
+                $scope.buttonColor = "#F9F9F9";
+            }
+        }).error(function (err) {
+            toastr.error(err.error, 'Error', {
+                closeButton: true
+            });
+        });
 
         // Starting Typography Changes ------------------------
         $scope.fontFamilyList = ["Arial","Tahoma","Dingbats","Ubuntu Light","URW Chancery L","UnPilgi"];
