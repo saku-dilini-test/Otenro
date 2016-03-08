@@ -117,24 +117,6 @@
                 });
         };
 
-        $scope.updateProduct= function(){
-            var prams={
-                subChildList : $scope.products,
-                appId : $rootScope.appId
-            };
-            commerceService.updateProductList(prams)
-                .success(function() {
-                    toastr.success('ThirdNavigation has been Updated.!', 'Awsome! ', {
-                        closeButton: true
-                    });
-                    $mdDialog.hide();
-                }).error(function(err) {
-                    toastr.error('Unable to Updated', 'Warning', {
-                        closeButton: true
-                    });
-                })
-        };
-
 
         $scope.deleteCategory=function($index){
             var prams={
@@ -170,46 +152,11 @@
         };
 
 
-        $scope.deleteProduct=function($index){
-            if (confirm("Do want delete it .? ") == true){
-                var prams={
-                    productId : $scope.products[$index]._id,
-                    appId : $rootScope.appId,
-                    imageUrl : $scope.products[$index].imageUrl
-                };
-                $scope.products.splice($index, 1);
-                commerceService.deleteProductData(prams)
-                    .success(function() {
-                        toastr.success('Third Navigation has been Deleted', 'Deleted', {
-                            closeButton: true
-                        });
-                    }).error(function(err) {
-                        toastr.error('Unable to Updated', 'Warning', {
-                            closeButton: true
-                        });
-                    })
-            }
-
-        };
-
         $scope.editCat=function(imageUrl,$id){
            return commerceService.showCommerceImageEditDialog(imageUrl,$id);
         };
-
-        $scope.editProImage=function(imageUrl,$proId){
-           return commerceService.showCommerceProImageEditDialog(imageUrl,$proId);
-        };
-
-        $scope.addNewPro=function(){
-           return commerceService.showCommerceAddProDialog();
-        };
-
         $scope.catListChange=function($index){
            $scope.products[$index].categoryId=$scope.categoryIdList[$index];
-        };
-
-        $scope.addProFinish=function(){
-            return commerceService.showAddProductsDialog('products');
         };
 
         $scope.addNewCat=function(){
@@ -265,6 +212,7 @@
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
+
         $scope.answer = function() {
             $mdDialog.hide();
         };
