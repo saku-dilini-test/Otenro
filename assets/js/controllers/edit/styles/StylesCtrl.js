@@ -27,6 +27,7 @@
         };
 
         $scope.fontFamilyList = ["Arial","Tahoma","Dingbats","Ubuntu Light","URW Chancery L","UnPilgi"];
+        $scope.fontSizeList = [8,9,10,12,14,18];
 
         stylesService.getAppSettings({'appId':$rootScope.appId}).success(function (data) {
             var appSettings = data.appSettings;
@@ -50,6 +51,19 @@
                 "value": appSettings.buttonFontFamily,
                 "values": $scope.fontFamilyList
             };
+            $scope.headerFontSizeProp = {
+                "value": appSettings.headerFontSize,
+                "values": $scope.fontSizeList
+            };
+            $scope.contentFontSizeProp = {
+                "value": appSettings.contentFontSize,
+                "values": $scope.fontSizeList
+            };
+            $scope.footerFontSizeProp = {
+                "value": appSettings.footerFontSize,
+                "values": $scope.fontSizeList
+            };
+
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
                 closeButton: true
@@ -85,26 +99,6 @@
                 });
         };
 
-        // Font Size
-        $scope.fontSizeList = [8,9,10,12,14,18];
-        // Header Font Size
-        $scope.selectedHeaderFontSize = 10;
-        $scope.headerFontSizeProp = {
-            "value": $scope.selectedHeaderFontSize,
-            "values": $scope.fontSizeList
-        };
-        // Content Font Family
-        $scope.selectedContentFontSize = 10;
-        $scope.contentFontSizeProp = {
-            "value": $scope.selectedContentFontSize,
-            "values": $scope.fontSizeList
-        };
-        // Footer Font Size
-        $scope.selectedFooterFontSize = 10;
-        $scope.footerFontSizeProp = {
-            "value": $scope.selectedFooterFontSize,
-            "values": $scope.fontSizeList
-        };
         $scope.styleFontSizeChange = function (data,type) {
             var styleFontSize = data;
             if(type == 'headerFont') {

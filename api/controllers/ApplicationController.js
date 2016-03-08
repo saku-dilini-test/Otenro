@@ -39,7 +39,10 @@ module.exports = {
                 headerFontFamily : "Arial",
                 contentFontFamily : "Arial",
                 footerFontFamily : "Arial",
-                buttonFontFamily : "Arial"
+                buttonFontFamily : "Arial",
+                headerFontSize : 10,
+                contentFontSize : 10,
+                footerFontSize : 10,
             }
         };
 
