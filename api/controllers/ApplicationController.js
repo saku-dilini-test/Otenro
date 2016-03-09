@@ -45,7 +45,9 @@ module.exports = {
                 footerFontSize : 10,
                 headerFontWeight : "normal",
                 contentFontWeight : "normal",
-                footerFontWeight : "normal"
+                footerFontWeight : "normal",
+                buttonBorderWidth : "0px",
+                buttonBorderRadius : "0px"
             }
         };
 
