@@ -24,16 +24,16 @@
                         <a class="feature01 reset-margin">
                         <span class="overlay01">
                             <span class="caption01">
-                                <input class="me-default-button commerce-tab" type="button" ng-click="editProImage(showProduct.imageUrl,showProduct._id)" value="Change Image" />
+                                <input class="me-default-button commerce-tab" type="button" ng-click="editProImage(showProduct.imageUrl,showProduct.id)" value="Change Image" />
                             </span>
                         </span>
-                            <img ng-src="{{imageURL}}&img=products/{{showProduct.imageUrl}}" width="120" height="120" />
+                            <img ng-src="{{imageURL}}&img=thirdNavi/{{showProduct.imageUrl}}" width="120" height="120" />
                         </a>
                     </fieldset>
                     <fieldset>
                         <label>Child</label>
                         <md-select class="" placeholder="Select Main Menu" ng-model="showProduct.childId">
-                            <md-option ng-value="child._id" ng-repeat="child in categories">{{child.name}}</md-option>
+                            <md-option ng-value="child.id" ng-repeat="child in categories">{{child.name}}</md-option>
                         </md-select>
                     </fieldset>
                     <fieldset>

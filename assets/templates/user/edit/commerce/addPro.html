@@ -16,7 +16,7 @@
                 <fieldset>
                     <label>Child</label>
                     <md-select class="" placeholder="Select Child Menu" ng-model="product.childId" required>
-                        <md-option ng-value="child._id" ng-repeat="child in categories">{{child.name}}</md-option>
+                        <md-option ng-value="child.id" ng-repeat="child in categories">{{child.name}}</md-option>
                     </md-select>
                 </fieldset>
                 <fieldset class="profile-image-section">

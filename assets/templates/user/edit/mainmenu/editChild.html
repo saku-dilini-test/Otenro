@@ -18,7 +18,7 @@
                 <fieldset>
                     <label>Main Menu</label>
                     <md-select class="" placeholder="Select Main Menu" ng-model="child.mainId">
-                        <md-option ng-value="mainMenu._id" ng-repeat="mainMenu in mainMenus">{{mainMenu.name}}</md-option>
+                        <md-option ng-value="mainMenu.id" ng-repeat="mainMenu in mainMenus">{{mainMenu.name}}</md-option>
                     </md-select>
                 </fieldset>
                 <fieldset class="profile-image-section">
@@ -29,7 +29,7 @@
                                 <input type="button" ng-click="editChildImage(child.imageUrl,child)" value="Change Image" class="me-default-button" />
                             </span>
                         </span>
-                        <img ng-src="{{imageURL}}&img=categories/{{child.imageUrl}}" width="120" height="120" />
+                        <img ng-src="{{imageURL}}&img=secondNavi/{{child.imageUrl}}" width="120" height="120" />
                     </a>
                 </fieldset>
                 <fieldset class="text-right">

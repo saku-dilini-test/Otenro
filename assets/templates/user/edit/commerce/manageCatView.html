@@ -22,7 +22,7 @@
                     <fieldset>
                         <label>Main Menu</label>
                         <md-select class="" placeholder="Select Main Menu" ng-model="showCategory.mainId">
-                            <md-option ng-value="mainMenu._id" ng-repeat="mainMenu in mainMenus">{{mainMenu.name}}</md-option>
+                            <md-option ng-value="mainMenu.id" ng-repeat="mainMenu in mainMenus">{{mainMenu.name}}</md-option>
                         </md-select>
                     </fieldset>
                     <fieldset class="profile-image-section">
@@ -30,10 +30,10 @@
                         <a class="feature01 reset-margin">
                             <span class="overlay01">
                                 <span class="caption01">
-                                    <input class="me-default-button commerce-tab" type="button" ng-click="editCat(showCategory.imageUrl,showCategory._id)" value="Change Image" />
+                                    <input class="me-default-button commerce-tab" type="button" ng-click="editCat(showCategory.imageUrl,showCategory.id)" value="Change Image" />
                                 </span>
                             </span>
-                            <img ng-src="{{imageURL}}&img=categories/{{showCategory.imageUrl}}" width="120" height="120" />
+                            <img ng-src="{{imageURL}}&img=secondNavi/{{showCategory.imageUrl}}" width="120" height="120" />
                         </a>
                     </fieldset>
                     <fieldset>
