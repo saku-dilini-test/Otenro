@@ -177,6 +177,10 @@
             $scope.selectedTab = 2;
         };
 
+        $scope.nextStep = function(current) {
+            $scope.selectedTab = current;
+        };
+
         $scope.openMiniLightBox = function(){
             $scope.miniLightBoxShow = true;
         };
