@@ -1,92 +1,89 @@
-<md-dialog aria-label="ADD MAIN MENU" style="height: 600px">
-    <!--<md-dialog-content>-->
-    <!--<div class="menu-section">-->
-    <!--<form class="af-form" id="af-form" novalidate>-->
-    <!--<legend>Manage Main Menu</legend>-->
-
-    <!--<div class="fontTitles" ng-repeat="showMainmenu  in mainMenu ">-->
-    <!--<input type ='text' value = "{{showMainmenu.menuName}}" />-->
-    <!--</div>-->
-
-    <!--<div id="names" class="form-inline" role="form">-->
-    <!--&lt;!&ndash;- tabindex logic is +1 due to 0 start of $index and then add on to start at the correct point, make sure to use tabindex='{{players.length + offset}}' on everything that gets focus after this-&ndash;&gt;-->
-    <!--<div class="add-icon-area">-->
-    <!--<input type='text' ng-model='tempplayer.tempName' tabindex='{{menuItems.length + 1}}' placeholder='Enter a name...' />-->
-    <!--<ui-iconpicker ng-model="tempplayer.tempIcon"></ui-iconpicker>-->
-    <!--<button class="me-default-button" ng-disabled="!tempplayer.tempName" ng-click="updateNames()">Add Menu</button>-->
-    <!--</div>-->
-
-    <!--<div class="form-group has-feedback transition edit-icon-form" ng-repeat-reorder='name in menuItems' ng-repeat-reorder-handle="i.fa.fa-bars">-->
-    <!--<div class="edit-icon-area">-->
-    <!--<fieldset class="field-set-half">-->
-    <!--<input type='text' tabindex='{{$index + 1}}' ng-change='checkForNameDelete($index)' ng-model='name.menuName' ng-class="{'last-player': $index == menuItems.length-1}" />-->
-    <!--</fieldset>-->
-    <!--<fieldset class="field-set-half">-->
-    <!--<input type='text' tabindex='{{$index + 1}}' ng-change='checkForNameDelete($index)' ng-model='name.link' ng-class="{'last-player': $index == menuItems.length-1}" />-->
-    <!--</fieldset>-->
-    <!--<ui-iconpicker value={{name.icon}} ng-model="name.icon"></ui-iconpicker>-->
-    <!--<button class="me-default-button" ng-click="deleteMainMenu(name,$index)">Delete</button>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</form>-->
-    <!--</div>-->
-    <!--</md-dialog-content>-->
-
+<md-dialog aria-label="Menu Tree">
     <md-dialog-content>
-        <div class="menu-section">
-            <form class="af-form" id="af-form" novalidate>
-                <legend>Menus</legend>
-                <input type="button" class="menu-add-button" ng-click="addMenu()" value="Add New Menu">
-                <script type="text/ng-template" id="nodes_renderer1.html">
-                    <div ui-tree-handle class="tree-node tree-node-content">
-                        <div class="tree-node-content clearfix">
-                            <a class="btn btn-xs" data-nodrag ng-click="toggle(this)">
-                                <span class="glyphicon" ng-class="{'btn-expand': collapsed, 'btn-hide': !collapsed}"></span>
-                            </a>
+        <form novalidate>
+            <div class="md-dialog-header">
+                <h1>Menus</h1>
+                <ul class="md-dialog-header-nav clearfix">
+                    <li>
+                        <a class="add-new-item" ng-click="addMenu()">Add New Menu</a>
+                    </li>
+                </ul>
+            </div>
+            <script type="text/ng-template" id="nodes_renderer1.html">
+                <div ui-tree-handle class="tree-node tree-node-content">
+                    <div class="tree-node-content clearfix">
+                        <a class="menu-toggle" data-nodrag ng-click="toggle(this)">
+                            <span ng-class="{'btn-expand': collapsed, 'btn-hide': !collapsed}"></span>
+                        </a>
+                        <!-- Change the text box width into 370px and programmatically reduce it by 20px -->
+                        <input type="text" ng-model="node.name" class="menu-add-input" />
+                        <input type="button" value="Edit" ng-hide="node.link" data-nodrag ng-click="edit(this)" class="btn-edit">
 
-                            <!-- Change the text box width into 370px and programmatically reduce it by 20px -->
-                            <input type="text" ng-model="node.menuName" class="menu-add-input" />
+                        <div class="menu-controls">
+                            <a class="btn-delete" data-nodrag ng-click="removes(this)"></a>
 
-                            <input type="button" value="Edit" ng-hide="node.link" data-nodrag ng-click="edit(this)" class="btn-edit">
-
-                            <div class="menu-controls">
-                                <a class="btn btn-delete btn-xs" data-nodrag ng-click="removes(this)">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
-                                <a class="btn btn-add-sub btn-xs reset-margin-right" data-nodrag ng-click="newSubItem(this)">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                            </div>
-                            <button class="pull-right btn-icon-picker btn-xs dropdown-toggle" type="button">
-                                <i class="glyphicon glyphicon-asterisk"></i>
-                                <span class="caret"></span>
-                            </button>
+                            <a class="btn-add-sub reset-margin-right" data-nodrag ng-click="newSubItem(this)"></a>
                         </div>
+
+                        <button class="pull-right btn-icon-picker btn-xs dropdown-toggle" type="button">
+                            <i class="glyphicon glyphicon-asterisk"></i>
+                            <span class="caret"></span>
+                        </button>
                     </div>
-                    <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-                        <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer1.html'"></li>
-                    </ol>
-                </script>
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div ui-tree id="tree1-root">
-                            <ol ui-tree-nodes="" ng-model="menuItems">
-                                <li ng-repeat="node in menuItems" ui-tree-node ng-include="'nodes_renderer1.html'"></li>
-                                <!--<li><input type="button" class="btn btn-primary " ng-click="getTree1()" value="Insert"></li>-->
-                            </ol>
-
-                        </div>
-                    </div>
-
                 </div>
-            </form>
-        </div>
+                <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer1.html'"></li>
+                </ol>
+            </script>
+            <div class="md-dialog-main">
+                <div ui-tree id="tree1-root">
+                    <ol ui-tree-nodes="" ng-model="menuItems">
+                        <li ng-repeat="node in menuItems" ui-tree-node ng-include="'nodes_renderer1.html'"></li>
+                    </ol>
+                </div>
+            </div>
+            <div class="md-dialog-buttons">
+                <div class="inner-section">
+                    <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
+                    <md-button class="me-default-button" ng-click="saveMainMenu()">Save</md-button>
+                </div>
+            </div>
+        </form>
     </md-dialog-content>
-
-    <div class="dialog-controls clearfix">
-        <md-button ng-click="cancel()">Cancel</md-button>
-        <md-button ng-click="saveMainMenu()">Save</md-button>
-    </div>
 </md-dialog>
+
+<!--<li><input type="button" class="btn btn-primary " ng-click="getTree1()" value="Insert"></li>-->
+
+<!--<md-dialog-content>-->
+<!--<div class="menu-section">-->
+<!--<form class="af-form" id="af-form" novalidate>-->
+<!--<legend>Manage Main Menu</legend>-->
+
+<!--<div class="fontTitles" ng-repeat="showMainmenu  in mainMenu ">-->
+<!--<input type ='text' value = "{{showMainmenu.menuName}}" />-->
+<!--</div>-->
+
+<!--<div id="names" class="form-inline" role="form">-->
+<!--&lt;!&ndash;- tabindex logic is +1 due to 0 start of $index and then add on to start at the correct point, make sure to use tabindex='{{players.length + offset}}' on everything that gets focus after this-&ndash;&gt;-->
+<!--<div class="add-icon-area">-->
+<!--<input type='text' ng-model='tempplayer.tempName' tabindex='{{menuItems.length + 1}}' placeholder='Enter a name...' />-->
+<!--<ui-iconpicker ng-model="tempplayer.tempIcon"></ui-iconpicker>-->
+<!--<button class="me-default-button" ng-disabled="!tempplayer.tempName" ng-click="updateNames()">Add Menu</button>-->
+<!--</div>-->
+
+<!--<div class="form-group has-feedback transition edit-icon-form" ng-repeat-reorder='name in menuItems' ng-repeat-reorder-handle="i.fa.fa-bars">-->
+<!--<div class="edit-icon-area">-->
+<!--<fieldset class="field-set-half">-->
+<!--<input type='text' tabindex='{{$index + 1}}' ng-change='checkForNameDelete($index)' ng-model='name.menuName' ng-class="{'last-player': $index == menuItems.length-1}" />-->
+<!--</fieldset>-->
+<!--<fieldset class="field-set-half">-->
+<!--<input type='text' tabindex='{{$index + 1}}' ng-change='checkForNameDelete($index)' ng-model='name.link' ng-class="{'last-player': $index == menuItems.length-1}" />-->
+<!--</fieldset>-->
+<!--<ui-iconpicker value={{name.icon}} ng-model="name.icon"></ui-iconpicker>-->
+<!--<button class="me-default-button" ng-click="deleteMainMenu(name,$index)">Delete</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+<!--</md-dialog-content>-->

@@ -2,12 +2,10 @@
     position: relative;
     background: url(../../../../images/tablet.jpg) no-repeat;
     background-size: 100% 100%;
-    width: 200%;
-    height:100%;
-    padding-top: 58%;
+    width: 549px;
+    height: 395px;
     border-radius: 1em;
     float: none;
-
 }
 
 .tabPower {

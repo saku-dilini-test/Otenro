@@ -1,7 +1,9 @@
-<md-dialog aria-label="PUSH MESSAGE SEND">
-    <md-dialog-content class="reset-margin">
-        <h1>push message</h1><br />
-        <form>
+<md-dialog aria-label="Push Message Send">
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>push message</h1>
+        </div>
+        <div class="md-dialog-main">
             <fieldset>
                 <label>Message</label>
                 <textarea rows="3"></textarea>
@@ -9,9 +11,7 @@
             <fieldset class="text-right">
                 <md-button class="me-default-button">send message now</md-button>
             </fieldset>
-        </form>
-        <hr />
-        <form>
+            <hr />
             <fieldset>
                 <label>Scheduled Message</label>
             </fieldset>
@@ -45,10 +45,12 @@
                     </md-select>
                 </fieldset>
             </div>
-            <fieldset class="text-right">
+        </div>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
                 <md-button class="me-default-button">cancel</md-button>
                 <md-button class="me-default-button">save</md-button>
-            </fieldset>
-        </form>
+            </div>
+        </div>
     </md-dialog-content>
 </md-dialog>
