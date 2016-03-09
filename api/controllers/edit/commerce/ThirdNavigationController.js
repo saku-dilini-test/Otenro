@@ -67,18 +67,6 @@ module.exports = {
             });
         });
     },
-
-    deleteThirdNavi : function(req,res){
-
-        ThirdNavigation.destroy({ id : req.body.productId}, function (err) {
-            if (err) return err;
-            var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/'+ req.body.imageUrl;
-            fs.unlink(filePath, function (err) {
-                if (err) throw err;
-            });
-        });
-    },
-
     updateThirdNaviImage : function(req,res){
 
         var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/'+ req.body.imageUrl;

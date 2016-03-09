@@ -78,7 +78,6 @@ module.exports.routes = {
       'POST /edit/buildSource' : 'EditController.buildSource',
 
       //'POST /edit/updateCategory' : '',
-      //'POST /edit/updateProduct': '',
       //'POST /edit/checkCategory': '',
       //'POST /edit/deleteCategory': '',
       //'POST /edit/deleteProduct': '',
@@ -111,7 +110,6 @@ module.exports.routes = {
       'POST /edit/updateSecondNavi':'edit/commerce/SecondNavigationController.updateSecondNavi',
       'POST /edit/addSubChild' : 'edit/commerce/ThirdNavigationController.addNewNavi',
       'POST /edit/addThirdNavigation':'edit/commerce/ThirdNavigationController.addThirdNavi',
-      'POST /edit/deleteThirdNavi':'edit/commerce/ThirdNavigationController.deleteThirdNavi',
       'POST /edit/updateThirdNaviImage':'edit/commerce/ThirdNavigationController.updateThirdNaviImage',
       'POST /edit/updateThirdNavi' : 'edit/commerce/ThirdNavigationController.updateThirdNavi',
       'POST /edit/deleteItem' : 'edit/commerce/MainNavigationController.deleteItem',
