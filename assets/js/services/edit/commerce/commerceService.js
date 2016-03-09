@@ -30,28 +30,16 @@
 
                 });
             },
-            showCommerceProImageEditDialog: function(imageUrl,proId) {
-                return $mdDialog.show({
-                    controller: 'proEditImageCtrl',
-                    templateUrl: 'user/edit/commerce/proEditImage.html',
-                    clickOutsideToClose: true,
-                    locals : {
-                        imageUrl : imageUrl,
-                        proId : proId
-                    }
-                }).then(function(answer) {
+             showAddProductsDialog: function() {
+                            return $mdDialog.show({
+                                controller: 'CommerceCtrl',
+                                templateUrl: 'user/edit/commerce/addPro.html',
+                                clickOutsideToClose: true
+                            }).then(function(answer) {
 
-                });
-            },
-            showCommerceAddProDialog: function() {
-                return $mdDialog.show({
-                    controller: 'CommerceCtrl',
-                    templateUrl: 'user/edit/commerce/addPro.html',
-                    clickOutsideToClose: true
-                }).then(function(answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
-                });
-            },
+                                //$scope.status = 'You said the information was "' + answer + '".';
+                            });
+                        },
             addCategory: function(file,category){
                 console.log(file);
                 //$http.post(SERVER_URL+ 'edit/deleteProduct',data)
@@ -103,16 +91,7 @@
                     file: file
                 });
             },
-            showAddProductsDialog: function() {
-                return $mdDialog.show({
-                    controller: 'CommerceCtrl',
-                    templateUrl: 'user/edit/commerce/manageProdView.html',
-                    clickOutsideToClose: true
-                }).then(function(answer) {
 
-                    //$scope.status = 'You said the information was "' + answer + '".';
-                });
-            },
             showCommerceAddCatDialog: function(){
                 return $mdDialog.show({
                     controller: 'CommerceCtrl',
@@ -134,7 +113,7 @@
             },
             showInventoryDialog: function() {
                 return $mdDialog.show({
-                    controller: 'CommerceCtrl',
+                    controller: 'InventoryCtrl',
                     templateUrl: 'user/edit/commerce/manageInventoryView.html',
                     clickOutsideToClose: true
                 }).then(function(answer) {
@@ -216,9 +195,6 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-            getInventoryList: function(){
-                return $http.get(SERVER_URL+ 'edit/getInventoryList?appId='+$rootScope.appId);
-            },
             getMainMenuList: function(){
                 return $http.get(SERVER_URL+ 'edit/getMainNavigation?appId='+$rootScope.appId);
             },
@@ -234,6 +210,7 @@
             getOrderList: function(){
                 return $http.get(SERVER_URL+ 'edit/getOrders?appId='+$rootScope.appId);
             },
+
             updateProductList : function(data){
                 return $http.post(SERVER_URL+ 'edit/updateThirdNavi',data);
             },
@@ -242,9 +219,6 @@
             },
             deleteCategoryData : function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteSecondNavi',data);
-            },
-            deleteProductData : function(data){
-                return $http.post(SERVER_URL+ 'edit/deleteThirdNavi',data);
             }
             //editStyles: function(fontData) {
             //    return $http.post(SERVER_URL + 'api/edit/addStyles', fontData);
