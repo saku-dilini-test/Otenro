@@ -4,9 +4,9 @@
  (function() {
     'use strict';
     angular.module("appEdit").controller("InventoryCtrl", [
-    '$scope', 'inventoryService','$rootScope','SERVER_URL','$auth',
+    '$scope', 'inventoryService','commerceService','$rootScope','SERVER_URL','$auth',
     InventoryCtrl]);
-    function InventoryCtrl($scope, inventoryService,$rootScope,SERVER_URL,$auth) {
+    function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth) {
 
     $scope.userId=$auth.getPayload().sub;
             $scope.appId=$rootScope.appId;
@@ -30,5 +30,10 @@
                              alert("Inventory Loading Error : " + error);
                          })
             }
+             $scope.gotoedit = function(item){
+
+                             return commerceService.showAddProductsDialog(item);
+//                        $state.go('user.editApp',{appId: item.id});
+                    }
     }
     })();

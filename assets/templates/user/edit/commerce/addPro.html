@@ -7,20 +7,23 @@
             <div class="md-dialog-main">
                 <fieldset>
                     <label for="input-name">Name</label>
-                    <input type="text" name="fullname" ng-model="product.name" id="input-name" required />
+                    <input type="text" name="fullname" ng-model="product.name" id="input-name" required/>
+                    <i ng-show="productForm.fullname.$error.required">*required</i>
                 </fieldset>
                 <fieldset>
                     <label for="input-price">Price</label>
-                    <input type="text" name="price" for="Price" ng-model="product.price" id="input-price" required />
+                    <input type="number" name="price" for="Price" ng-model="product.price" id="input-price" required/>
+                    <i ng-show="productForm.price.$error.required">*required</i>
                 </fieldset>
                 <fieldset>
                     <label>Child</label>
-                    <md-select class="" placeholder="Select Child Menu" ng-model="product.childId" required>
+                    <md-select class="" placeholder="Select Child Menu" name="child" ng-model="product.childId" required>
                         <md-option ng-value="child.id" ng-repeat="child in categories">{{child.name}}</md-option>
                     </md-select>
+                    <i ng-show="productForm.child.$error.required">*required</i>
                 </fieldset>
                 <fieldset class="profile-image-section">
-                    <label class="reset-inline fie-upload-text-gap">Product Image</label>
+                    <label class="reset-inline">Product Image</label>
                     <a class="feature01 reset-margin">
                         <span class="overlay01">
                             <span class="caption01">
