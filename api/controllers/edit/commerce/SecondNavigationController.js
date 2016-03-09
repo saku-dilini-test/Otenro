@@ -51,7 +51,7 @@ module.exports = {
 
         var imagePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId + '/img/'+ 'default.jpg';
         var fileName = Date.now()+ '.jpg';
-        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/categories/';
+        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
 
         fs.readFile(imagePath, function (err, data) {
             if (err) throw err;

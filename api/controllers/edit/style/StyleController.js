@@ -351,18 +351,19 @@ module.exports = {
                         return console.dir(err);
                     }
 
-                    fs.unlink(backgroundExist, function (err) {
-                        if (err) return err;
-                    });
-
                     lwip.open(backgroundImage, function(err, image) {
-                        if (err) throw err;
+                        if (err)  return res.send(500, err);
+
+                        fs.unlink(backgroundExist, function (err) {
+                            if (err)  return res.send(500, err);
+                        });
+
                         image.resize(backgroundDimensions.width,backgroundDimensions.height, function(err, rzdImg) {
                             rzdImg.writeFile(backgroundExist, function(err) {
-                                if (err) throw err;
+                                if (err)  return res.send(500, err);
 
                                 fs.unlink(backgroundImage, function (err) {
-                                    if (err) return console.error(err);
+                                    if (err)  return res.send(500, err);
                                     res.send('ok');
                                 });
                             });
@@ -933,7 +934,8 @@ module.exports = {
 
     addLogoImage: function(req,res) {
 
-        var dePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId + '/img/headertemp.jpg';
+
+        var dePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId + '/img/';
         var headerExist = config.ME_SERVER + req.userId + '/templates/' + req.body.appId + '/img/header.jpg';
         var headerDimensions = sizeOf(headerExist);
 
@@ -944,22 +946,21 @@ module.exports = {
         },function (err, uploadedFiles) {
             if (err) return res.send(500, err);
 
+            fs.rename(uploadedFiles[0].fd,dePath+'headertemp.jpg', function (err) {
+                if (err) return res.send(err);
 
-            fs.unlink(headerExist, function (err) {
-                if (err) return console.error(err);
+                lwip.open(dePath+'headertemp.jpg', function(err, image) {
+                    if (err) return res.send(500, err);
 
-                fs.rename(uploadedFiles[0].fd,dePath, function (err) {
-                    if (err) return res.send(err);
-
-                    lwip.open(dePath, function(err, image) {
-                        if (err) throw err;
+                    fs.unlink(headerExist, function (err) {
+                        if (err) return console.error(err);
 
                         image.resize(headerDimensions.width,headerDimensions.height, function(err, rzdImg) {
                             rzdImg.writeFile(headerExist, function(err) {
-                                if (err) throw err;
+                                if (err) return res.send(500, err);
 
-                                fs.unlink(dePath, function (err) {
-                                    if (err) return console.error(err);
+                                fs.unlink(dePath+'headertemp.jpg', function (err) {
+                                    if (err) return res.send(500, err);
                                     res.send('ok');
                                 });
                             });
@@ -968,6 +969,5 @@ module.exports = {
                 });
             });
         });
-
     }
 };

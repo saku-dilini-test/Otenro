@@ -25,7 +25,7 @@ module.exports = {
 
         var imagePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId + '/img/'+ 'default.jpg';
         var fileName = Date.now()+ '.jpg';
-        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/products/';
+        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
 
         fs.readFile(imagePath, function (err, data) {
             if (err) throw err;
@@ -98,6 +98,25 @@ module.exports = {
             });
         });
 
+    },
+
+    updateThirdNavi :function(req,res){
+
+        if(req.body.subChildList){
+            var sChildList=req.body.subChildList;
+            for (var i = 0; i < sChildList.length; i++) {
+                ThirdNavigation.update({id :sChildList[i].id},sChildList[i]).exec(function(err) {
+                    if (err) res.send(err);
+                });
+            }
+            res.send('ok');
+
+        }else{
+            ThirdNavigation.update({id :req.body.id},req.body).exec(function(err) {
+                if (err) res.send(err);
+                res.send('ok');
+            });
+        }
     }
 
 

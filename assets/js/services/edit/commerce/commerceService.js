@@ -235,7 +235,7 @@
                 return $http.get(SERVER_URL+ 'edit/getOrders?appId='+$rootScope.appId);
             },
             updateProductList : function(data){
-                return $http.post(SERVER_URL+ 'edit/updateProduct',data);
+                return $http.post(SERVER_URL+ 'edit/updateThirdNavi',data);
             },
             checkCategory : function(data){
                 return $http.post(SERVER_URL+ 'edit/checkSecondNavi',data);

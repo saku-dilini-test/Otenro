@@ -20,9 +20,16 @@
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function(data, status, headers, config) {
-                    alert("success", 'Awsome! ', 'Genaral info has been added');
-                }).error(function(data, status, headers, config) {
+                    //alert("success", 'Awsome! ', 'Genaral info has been added');
+                    toastr.success('Change Header Image', 'Awsome!', {
+                        closeButton: true
+                    });
+                }).error(function(err) {
+                    console.log(err);
                     //alert('warning', "Unable to get templates", err.message);
+                    toastr.error('Unable to change ', 'Error', {
+                        closeButton: true
+                    });
                 })
         };
 
