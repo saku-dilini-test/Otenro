@@ -227,6 +227,20 @@ module.exports = {
     },
 
     /**
+     *  Return appSetting given appId
+     */
+    getAppSettings: function(req, res) {
+        var appId = req.body.appId;
+        var searchApp = {
+            id : appId
+        };
+        Application.findOne(searchApp, function(err, apps) {
+            if (err) return done(err);
+            res.send(apps);
+        });
+    },
+
+    /**
      * Update header image given appId
      */
 
@@ -447,8 +461,6 @@ module.exports = {
         var type = req.body.type;
         var colorTypeCss = '';
 
-        console.log(styleColor);
-
         var query = { id : appId };
 
         Application.findOne(query).exec(function(err, app) {
@@ -468,19 +480,16 @@ module.exports = {
                 colorTypeCss = ".made-easy-button-setting";
             }
 
-
             Application.update(query,app).exec(function(err, appUpdate) {
                 if (err) res.send(err);
-                    console.log("color"+colorTypeCss);
-                    updateFile(mainCssFile, [{
-                        rule: colorTypeCss,
-                        target: "background-color",
-                        replacer: styleColor
-                    }],function (err) {
-                        console.log((err));
-                    });
 
-
+                updateFile(mainCssFile, [{
+                    rule: colorTypeCss,
+                    target: "background-color",
+                    replacer: styleColor
+                }],function (err) {
+                    console.log((err));
+                });
                 res.send(appUpdate);
 
             });
@@ -553,6 +562,15 @@ module.exports = {
 
             Application.update(query,app).exec(function(err, appUpdate) {
                 if (err) res.send(err);
+
+                updateFile(mainCssFile, [{
+                    rule: fontFamilyCss,
+                    target: "font-family",
+                    replacer: styleFontFamily
+                }], function (err) {
+                    console.log((err));
+                });
+
                 res.send(appUpdate);
             });
 
@@ -586,13 +604,6 @@ module.exports = {
             })
         }
 
-        updateFile(mainCssFile, [{
-            rule: fontFamilyCss,
-            target: "font-family",
-            replacer: styleFontFamily
-        }], function (err) {
-            console.log((err));
-        });
     },
     /**
      * Update header, content and footer font Size given appId with common function
@@ -624,6 +635,13 @@ module.exports = {
 
             Application.update(query,app).exec(function(err, appUpdate) {
                 if (err) res.send(err);
+                    updateFile(mainCssFile, [{
+                        rule: fontSizeCss,
+                        target: "font-size",
+                        replacer: styleFontSize
+                    }], function (err) {
+                        console.log((err));
+                    });
                 res.send(appUpdate);
             });
 
@@ -658,13 +676,6 @@ module.exports = {
             })
         }
 
-        updateFile(mainCssFile, [{
-            rule: fontSizeCss,
-            target: "font-size",
-            replacer: styleFontSize
-        }], function (err) {
-            console.log((err));
-        });
     },
 
     /**
@@ -696,6 +707,15 @@ module.exports = {
 
             Application.update(query,app).exec(function(err, appUpdate) {
                 if (err) res.send(err);
+
+                updateFile(mainCssFile, [{
+                    rule: fontWeightCss,
+                    target: "font-weight",
+                    replacer: styleFontWeight
+                }], function (err) {
+                    console.log((err));
+                });
+
                 res.send(appUpdate);
             });
 
@@ -728,13 +748,6 @@ module.exports = {
             })
         }
 
-        updateFile(mainCssFile, [{
-            rule: fontWeightCss,
-            target: "font-weight",
-            replacer: styleFontWeight
-        }], function (err) {
-            console.log((err));
-        });
     },
 
     /**
@@ -745,13 +758,27 @@ module.exports = {
         var appId = req.body.appId;
         var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
         var buttonBorderWidth = req.body.styleButtonBorderWidth;
-        var data = {'appSettings.buttonBorderWidth' : buttonBorderWidth}
         var buttonBorderWidthCss = '.made-easy-button-setting';
 
         var query = {id:appId};
-        Application.update(query,data).exec(function(err, app) {
+
+        Application.findOne(query).exec(function(err, app) {
             if (err) res.send(err);
-            res.send(app);
+            app.appSettings.buttonBorderWidth = buttonBorderWidth;
+            Application.update(query, app).exec(function (err, appUpdate) {
+                if (err) res.send(err);
+
+                updateFile(mainCssFile, [{
+                    rule: buttonBorderWidthCss,
+                    target: "border-width",
+                    replacer: buttonBorderWidth
+                }], function (err) {
+                    console.log((err));
+                });
+
+                res.send(appUpdate);
+            });
+
         });
 
         /**
@@ -781,14 +808,6 @@ module.exports = {
                 });
             })
         }
-
-        updateFile(mainCssFile, [{
-            rule: buttonBorderWidthCss,
-            target: "border-width",
-            replacer: buttonBorderWidth
-        }], function (err) {
-            console.log((err));
-        });
 
     },
 
@@ -796,18 +815,34 @@ module.exports = {
      * Update button border Radius function
      */
     addStyleButtonBorderRadius : function(req,res){
+        console.log(req.body);
         var userId = req.userId;
         var appId = req.body.appId;
         var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
         var buttonBorderRadius = req.body.styleButtonBorderRadius;
-        var data = {'appSettings.buttonBorderRadius' : buttonBorderRadius}
         var buttonBorderRadiusCss = '.made-easy-button-setting';
 
         var query = {id:appId};
-        Application.update(query,data).exec(function(err, app) {
+
+        Application.findOne(query).exec(function(err, app) {
             if (err) res.send(err);
-            res.send(app);
+            app.appSettings.buttonBorderRadius = buttonBorderRadius;
+            Application.update(query, app).exec(function (err, appUpdate) {
+                if (err) res.send(err);
+
+                updateFile(mainCssFile, [{
+                    rule: buttonBorderRadiusCss,
+                    target: "border-radius",
+                    replacer: buttonBorderRadius
+                }], function (err) {
+                    console.log((err));
+                });
+
+                res.send(appUpdate);
+            });
+
         });
+
 
         /**
          * update css file with new changes
@@ -837,13 +872,6 @@ module.exports = {
             })
         }
 
-        updateFile(mainCssFile, [{
-            rule: buttonBorderRadiusCss,
-            target: "border-radius",
-            replacer: buttonBorderRadius
-        }], function (err) {
-            console.log((err));
-        });
     },
     /**
      * Update Fonts given appId

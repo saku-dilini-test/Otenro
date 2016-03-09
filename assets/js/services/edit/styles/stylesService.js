@@ -66,7 +66,10 @@
             },
             addFonts: function(Data){
                 return $http.post(SERVER_URL + 'edit/addFonts',Data);
-            }
+            },
+            getAppSettings:function(Data){
+                return $http.post(SERVER_URL+ 'edit/getAppSettings',Data);
+            },
         };
     }
 })();

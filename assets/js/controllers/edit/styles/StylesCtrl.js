@@ -21,40 +21,77 @@
 
         $scope.headerImg = ME_APP_SERVER +'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/header.jpg?time='+new Date().getTime();
         $scope.backgroundImg = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/background.jpg?time='+new Date().getTime();
-        $scope.backgroundColor = "#F9F9F9";
-        $scope.navigationBarColor = "#F9F9F9";
-        $scope.FooterColor = "#F9F9F9";
         $scope.fonts = {
             font : 'Arial',
             fontSize : 11
         };
 
-        // Starting Typography Changes ------------------------
         $scope.fontFamilyList = ["Arial","Tahoma","Dingbats","Ubuntu Light","URW Chancery L","UnPilgi"];
-        // Header Font Family
-        $scope.selectedHeaderFontFamily = "Arial";
-        $scope.headerFontFamilyProp = {
-            "value": $scope.selectedHeaderFontFamily,
-            "values": $scope.fontFamilyList
-        };
-        // Content Font Family
-        $scope.selectedContentFontFamily = "Arial";
-        $scope.contentFontFamilyProp = {
-            "value": $scope.selectedContentFontFamily,
-            "values": $scope.fontFamilyList
-        };
-        // Footer Font Family
-        $scope.selectedFooterFontFamily = "Arial";
-        $scope.footerFontFamilyProp = {
-            "value": $scope.selectedFooterFontFamily,
-            "values": $scope.fontFamilyList
-        };
-        // Button Font Family
-        $scope.selectedButtonFontFamily = "Arial";
-        $scope.buttonFontFamilyProp = {
-            "value": $scope.selectedButtonFontFamily,
-            "values": $scope.fontFamilyList
-        };
+        $scope.fontSizeList = [8,9,10,12,14,18];
+        $scope.fontWeightList = ["normal","bold","bolder","lighter"];
+        $scope.buttonBorderWidthList = ['0px','1px','2px','3px','4px','5px'];
+        $scope.buttonBorderRadiusList = ['0px','1px','2px','3px','4px','5px'];
+
+        stylesService.getAppSettings({'appId':$rootScope.appId}).success(function (data) {
+            var appSettings = data.appSettings;
+            $scope.backgroundColor = appSettings.backgroundColor;
+            $scope.navigationBarColor = appSettings.navigationBarColor;
+            $scope.footerColor = appSettings.footerColor;
+            $scope.buttonColor = appSettings.buttonColor;
+            $scope.headerFontFamilyProp = {
+                "value": appSettings.headerFontFamily,
+                "values": $scope.fontFamilyList
+            };
+            $scope.contentFontFamilyProp = {
+                "value": appSettings.contentFontFamily,
+                "values": $scope.fontFamilyList
+            };
+            $scope.footerFontFamilyProp = {
+                "value": appSettings.footerFontFamily,
+                "values": $scope.fontFamilyList
+            };
+            $scope.buttonFontFamilyProp = {
+                "value": appSettings.buttonFontFamily,
+                "values": $scope.fontFamilyList
+            };
+            $scope.headerFontSizeProp = {
+                "value": appSettings.headerFontSize,
+                "values": $scope.fontSizeList
+            };
+            $scope.contentFontSizeProp = {
+                "value": appSettings.contentFontSize,
+                "values": $scope.fontSizeList
+            };
+            $scope.footerFontSizeProp = {
+                "value": appSettings.footerFontSize,
+                "values": $scope.fontSizeList
+            };
+            $scope.headerFontWeightProp = {
+                "value": appSettings.headerFontWeight,
+                "values": $scope.fontWeightList
+            };
+            $scope.contentFontWeightProp = {
+                "value": appSettings.contentFontWeight,
+                "values": $scope.fontWeightList
+            };
+            $scope.footerFontWeightProp = {
+                "value": appSettings.footerFontWeight,
+                "values": $scope.fontWeightList
+            };
+            $scope.buttonBorderWidthProp = {
+                "value": appSettings.buttonBorderWidth,
+                "values": $scope.buttonBorderWidthList
+            };
+            $scope.buttonBorderRadiusProp = {
+                "value": appSettings.buttonBorderRadius,
+                "values": $scope.buttonBorderRadiusList
+            };
+        }).error(function (err) {
+            toastr.error(err.error, 'Error', {
+                closeButton: true
+            });
+        });
+
         $scope.styleFontFamilyChange = function (data,type) {
             var styleFontFamily = data;
             if(type == 'headerFont') {
@@ -84,26 +121,6 @@
                 });
         };
 
-        // Font Size
-        $scope.fontSizeList = [8,9,10,12,14,18];
-        // Header Font Size
-        $scope.selectedHeaderFontSize = 10;
-        $scope.headerFontSizeProp = {
-            "value": $scope.selectedHeaderFontSize,
-            "values": $scope.fontSizeList
-        };
-        // Content Font Family
-        $scope.selectedContentFontSize = 10;
-        $scope.contentFontSizeProp = {
-            "value": $scope.selectedContentFontSize,
-            "values": $scope.fontSizeList
-        };
-        // Footer Font Size
-        $scope.selectedFooterFontSize = 10;
-        $scope.footerFontSizeProp = {
-            "value": $scope.selectedFooterFontSize,
-            "values": $scope.fontSizeList
-        };
         $scope.styleFontSizeChange = function (data,type) {
             var styleFontSize = data;
             if(type == 'headerFont') {
@@ -131,26 +148,6 @@
                 });
         };
 
-        // Font weight
-        $scope.fontWeightList = ["normal","bold","bolder","lighter"];
-        // Header Font Weight
-        $scope.selectedHeaderFontWeight = "normal";
-        $scope.headerFontWeightProp = {
-            "value": $scope.selectedHeaderFontWeight,
-            "values": $scope.fontWeightList
-        };
-        // Content Font Weight
-        $scope.selectedContentFontWeight = "normal";
-        $scope.contentFontWeightProp = {
-            "value": $scope.selectedContentFontWeight,
-            "values": $scope.fontWeightList
-        };
-        // Footer Font Weight
-        $scope.selectedFooterFontWeight = "normal";
-        $scope.footerFontWeightProp = {
-            "value": $scope.selectedFooterFontWeight,
-            "values": $scope.fontWeightList
-        };
         $scope.styleFontWeightChange = function (data,type) {
             var styleFontWeight = data;
             if(type == 'headerFont') {
@@ -177,14 +174,6 @@
                 });
         };
 
-        // Button Border width List
-        $scope.buttonBorderWidthList = ['0px','1px','2px','3px','4px','5px'];
-        // Button Border width
-        $scope.selectedButtoBorderWidth = '0px';
-        $scope.buttonBorderWidthProp = {
-            "value": $scope.selectedButtoBorderWidth,
-            "values": $scope.buttonBorderWidthList
-        };
         $scope.styleButtonBorderWidthChange = function (data) {
             var styleButtonBorderWidth = data;
             var styleButtonBorderWidthData = {
@@ -203,14 +192,6 @@
                 });
         };
 
-        // Button Border Radius List
-        $scope.buttonBorderRadiusList = ['0px','1px','2px','3px','4px','5px'];
-        // Button Border Radius
-        $scope.selectedButtoBorderRadius = '0px';
-        $scope.buttonBorderRadiusProp = {
-            "value": $scope.selectedButtoBorderRadius,
-            "values": $scope.buttonBorderRadiusList
-        };
         $scope.styleButtonBorderRadiusChange = function (data) {
             var styleButtonBorderRadius = data;
             var styleButtonBorderRadiusData = {
