@@ -124,7 +124,7 @@ h1, h2, h3, h4, h5, h6{
 ******************************************************/
 h1{
     color: #747474;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 300;
     letter-spacing: 2px;
     padding-bottom: 8px;
@@ -374,7 +374,7 @@ a.md-button:hover:not([disabled]),
 .me-file-upload.medium,
 .me-file-upload.medium .upload-wrapper,
 .me-file-upload.medium .upload-wrapper input{
-    height: 125px;
+    height: 120px;
     width: 80px;
 }
 
@@ -1139,7 +1139,7 @@ md-dialog{
 
 .md-dialog-header{
     background-color: #F5F6F4;
-    padding: 25px 40px;
+    padding: 20px 40px;
 }
 
 .md-dialog-header h1{
@@ -1564,4 +1564,10 @@ md-dialog .md-actions .md-button {
 
 .fie-upload-text-gap{
     margin-bottom: 14px;
+}
+
+.logo-upload{
+    margin: 0;
+    border: 1px solid #ECECEC;
+    background: #FFF url("../images/plus-mark.png") no-repeat scroll center center;
 }
