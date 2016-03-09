@@ -1,11 +1,11 @@
-mobileApp.controller('contactController', function($scope,$translate, $rootScope,$http, $window) {
+mobileApp.controller('contactController', function($scope,$translate, $rootScope, appService,$http, $window) {
 
 	$scope.pageClass 		= 'slideLeft';
 	$rootScope.appTitle	 	=  $translate.instant('load.contact.Title');
-	$scope.serviceApi		=  serviceApi;
-	$scope.GetServiceApi	=  GetServiceApi;
+	$scope.serviceApi		=  $rootScope.serviceApi;
+	$scope.GetServiceApi	=  $rootScope.GetServiceApi;
 	$scope.appName 			= $rootScope.appName;
-
+    var SERVER_URL = $rootScope.SERVER_URL;
 	$scope.imageURL = "img/header.jpg";
     $scope.marker="";
 	$http.get(SERVER_URL + '/templates/getContactUs?appId='+$rootScope.appId)

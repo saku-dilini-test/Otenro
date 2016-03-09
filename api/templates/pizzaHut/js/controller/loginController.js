@@ -1,12 +1,12 @@
 mobileApp.controller('loginController', function($scope, $rootScope, $translate, appService, $window) {
     $scope.pageClass 		= 'slideLeft';
 	//$rootScope.appTitle	= $translate.instant('load.promo.Title');
-	$scope.serviceApi		= serviceApi;
-	$scope.GetServiceApi	= GetServiceApi;
+	$scope.serviceApi		= $rootScope.serviceApi;
+	$scope.GetServiceApi	= $rootScope.GetServiceApi;
 	$scope.login			= {};
 	$rootScope.header		= false;
 	$rootScope.nav	   		= false;
-
+    var GetServiceApi = $rootScope.GetServiceApi;
 	$scope.getLogin  = function() {
 		var requestParams = {
 			"token": token,

@@ -2,9 +2,9 @@ var mobileApp = angular.module('mobileApp', ['ngRoute', 'ngAnimate', 'pascalprec
 //Set your token database
 var token = 'a8B6c4D4e8F0';
 //Set url service app
-var serviceApi = 'http://localhost:1337/';
-var GetServiceApi = 'http://localhost:1337/';
-var SERVER_URL = 'http://localhost:1337';
+//var serviceApi = 'http://localhost:3000/';
+//var GetServiceApi = 'http://localhost:3000/';
+//var SERVER_URL = 'http://localhost:3000';
 
 mobileApp.run(function($rootScope, $timeout, $translate, $location, appService,readMadeEasy) {
     $rootScope.footerBadge = 0;
@@ -111,6 +111,14 @@ mobileApp.run(function($rootScope, $timeout, $translate, $location, appService,r
             $rootScope.appName = data.name;
         });
     }
+    if (typeof $rootScope.serviceApi === 'undefined'){
+
+          readMadeEasy.readFile().success(function(data){
+              $rootScope.serviceApi = data.serviceApi.host+":"+data.serviceApi.port + "/";
+              $rootScope.GetServiceApi = data.serviceApi.host+":"+data.serviceApi.port + "/";
+              $rootScope.SERVER_URL = data.serviceApi.host+":"+data.serviceApi.port;
+          });
+    }
 
 });
 
@@ -201,7 +209,7 @@ mobileApp.config(function($routeProvider) {
             controller: 'ordersController',
             activePage: 'orders'
         })
-        .when('/promo', {
+        .when('/promo/:id/:title', {
             templateUrl: 'tpl/promo.html',
             controller: 'promoController',
             activePage: 'promo'
@@ -226,7 +234,7 @@ mobileApp.config(function($routeProvider) {
             controller: 'accountController',
             activePage: 'account'
         })
-        .when('/bestSeller', {
+        .when('/bestSeller/:id/:title', {
             templateUrl: 'tpl/bestSeller.html',
             controller: 'bestSellerController',
             activePage: 'about'

@@ -1,11 +1,12 @@
-mobileApp.controller('menuController', function($scope, $rootScope,$routeParams, $location, $http) {
+mobileApp.controller('menuController', function($scope, $rootScope, appService, $routeParams, $location, $http) {
     $scope.pageClass = 'slideLeft';
     $rootScope.appTitle = $routeParams.title;
     $rootScope.itemcategory = $routeParams.category;
-    $scope.serviceApi = serviceApi;
-    $scope.GetServiceApi = GetServiceApi;
+    $scope.serviceApi = $rootScope.serviceApi;
+    $scope.GetServiceApi = $rootScope.GetServiceApi;
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
+	var SERVER_URL = $rootScope.SERVER_URL;
 
     var appId ={
         "appId" : $rootScope.appId

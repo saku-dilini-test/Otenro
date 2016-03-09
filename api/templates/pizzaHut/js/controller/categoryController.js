@@ -3,10 +3,11 @@ mobileApp.controller('categoryController', function($scope, $rootScope, $transla
     $rootScope.appTitle = $routeParams.title; //$translate.instant('load.category.Title');
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
-    $scope.serviceApi = serviceApi;
-    $scope.imageURL = serviceApi
+    $scope.serviceApi = $rootScope.serviceApi;
+    $scope.imageURL = $rootScope.serviceApi
         +"templates/viewImages?userId="
-        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi/";
+        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi";
+    	var SERVER_URL = $rootScope.SERVER_URL;
 
     $http.get(SERVER_URL + '/templates/getSpecificChild?appId='+$rootScope.appId+'&mainId='+$routeParams.id)
         .success(function(data) {

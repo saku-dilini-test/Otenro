@@ -61,7 +61,8 @@ module.exports = {
                 var madeEasyFileContent = {
                     name : appName,
                     appId : app.id,
-                    userId : userId
+                    userId : userId,
+                    serviceApi: config.server
                 };
                 fs.outputJson(madeEasyFilePath,madeEasyFileContent, function (err) {
                     if(err) return console.error(err);

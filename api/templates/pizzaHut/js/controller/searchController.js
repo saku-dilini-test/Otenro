@@ -1,8 +1,9 @@
 mobileApp.controller('searchController', function($scope, $rootScope, $translate, appService, $location) {
     $scope.pageClass 		= 'slideLeft';
 	$rootScope.appTitle	 	= $translate.instant('load.search.Title');;
-	$scope.serviceApi		= serviceApi;
-	$scope.GetServiceApi	= GetServiceApi;
+	$scope.serviceApi		= $rootScope.serviceApi;
+	$scope.GetServiceApi	= $rootScope.GetServiceApi;
+	var GetServiceApi = $rootScope.GetServiceApi;
 	
 	
 	$scope.getSearch = function() {

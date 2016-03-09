@@ -1,7 +1,7 @@
 mobileApp.controller('favoritesController', function($scope, $rootScope) {
     $scope.pageClass 		= 'slideLeft';
 	$rootScope.appTitle	 	= 'Favorites';
-	$scope.serviceApi		= serviceApi;
+	$scope.serviceApi		= $rootScope.serviceApi;
 	$scope.saved 			= localStorage.getItem('appLocalStorage');
 	$scope.appLocalStorage 	= JSON.parse($scope.saved);
 	
@@ -15,7 +15,7 @@ mobileApp.controller('favoritesController', function($scope, $rootScope) {
 mobileApp.controller('ordersController', function($scope, $rootScope) {
     $scope.pageClass 		= 'slideLeft';
 	$rootScope.appTitle	 	= 'Historical Orders';
-	$scope.serviceApi		= serviceApi;
+	$scope.serviceApi		= $rootScope.serviceApi;
 	$scope.saved 			= localStorage.getItem('appLocalStorage');
 	$scope.appLocalStorage 	= JSON.parse($scope.saved);
 });

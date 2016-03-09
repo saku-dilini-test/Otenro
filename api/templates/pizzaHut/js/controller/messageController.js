@@ -2,8 +2,9 @@ mobileApp.controller('messageController', function($scope, $translate, appServic
     $scope.pageClass 		= 'slideLeft';
 	$rootScope.appTitle	 	= $translate.instant('load.message.Title');
 	$scope.message	 		= {};
-	$scope.serviceApi		= serviceApi;
-	$scope.GetServiceApi	= GetServiceApi;
+	$scope.serviceApi		= $rootScope.serviceApi;
+	$scope.GetServiceApi	= $rootScope.GetServiceApi;
+	var GetServiceApi = $rootScope.GetServiceApi;
 	
 	$scope.sendMessage  = function() {
 		var requestParams = {

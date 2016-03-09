@@ -2,10 +2,11 @@ var mobileApp = angular.module('mobileApp', ['ngRoute', 'ngAnimate', 'pascalprec
 //Set your token database
 var token = 'a8B6c4D4e8F0';
 //Set url service app
-var serviceApi = 'http://deliveryapp.zz.mu/admin/';
-var GetServiceApi = serviceApi + 'index.php/';
-var SERVER_URL = 'http://localhost:3000';
-mobileApp.run(function($rootScope, $timeout, $translate, $location, appService) {
+//var serviceApi = 'http://localhost:3000/';
+//var GetServiceApi = 'http://localhost:3000/';
+//var SERVER_URL = 'http://localhost:3000';
+
+mobileApp.run(function($rootScope, $timeout, $translate, $location, appService,readMadeEasy) {
     $rootScope.footerBadge = 0;
     $rootScope.startPage = 0;
 
@@ -47,7 +48,7 @@ mobileApp.run(function($rootScope, $timeout, $translate, $location, appService) 
 
     $rootScope.back = function() {
         window.history.back();
-    }
+    };
 
     $rootScope.dataCart = {
         items: []
@@ -82,13 +83,42 @@ mobileApp.run(function($rootScope, $timeout, $translate, $location, appService) 
         });
     };
 
-    if (typeof $rootScope.setting === 'undefined') {
-        appService.HttpRequest('GET', GetServiceApi + 'service/get_setting?token=' + token).success(function(data) {
-            $rootScope.setting = data;
-            $rootScope.tax = parseInt(data[0].setting_tax);
-            $rootScope.shipping = parseInt(data[0].setting_delivery_fee);
+//    if (typeof $rootScope.setting === 'undefined') {
+//        appService.HttpRequest('GET', GetServiceApi + 'service/get_setting?token=' + token).success(function(data) {
+//            $rootScope.setting = data;
+//            $rootScope.tax = parseInt(data[0].setting_tax);
+//            $rootScope.shipping = parseInt(data[0].setting_delivery_fee);
+//        });
+//    }
+
+    if (typeof $rootScope.appId === 'undefined'){
+
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.appId = data.appId;
         });
     }
+
+    if (typeof $rootScope.userId === 'undefined'){
+
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.userId = data.userId;
+        });
+    }
+    if (typeof $rootScope.appName === 'undefined'){
+
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.appName = data.name;
+        });
+    }
+    if (typeof $rootScope.serviceApi === 'undefined'){
+
+          readMadeEasy.readFile().success(function(data){
+              $rootScope.serviceApi = data.serviceApi.host+":"+data.serviceApi.port + "/";
+              $rootScope.GetServiceApi = data.serviceApi.host+":"+data.serviceApi.port + "/";
+              $rootScope.SERVER_URL = data.serviceApi.host+":"+data.serviceApi.port;
+          });
+    }
+
 });
 
 mobileApp.directive('whenScrolled', function() {
@@ -138,7 +168,7 @@ mobileApp.config(function($routeProvider) {
             controller: 'detailController',
             activePage: 'detail'
         })
-        .when('/category', {
+        .when('/category/:id/:title', {
             templateUrl: 'tpl/category.html',
             controller: 'categoryController',
             activePage: 'category'
@@ -178,7 +208,7 @@ mobileApp.config(function($routeProvider) {
             controller: 'ordersController',
             activePage: 'orders'
         })
-        .when('/promo', {
+        .when('/promo/:id/:title', {
             templateUrl: 'tpl/promo.html',
             controller: 'promoController',
             activePage: 'promo'
@@ -203,7 +233,7 @@ mobileApp.config(function($routeProvider) {
             controller: 'accountController',
             activePage: 'account'
         })
-        .when('/bestSeller', {
+        .when('/bestSeller/:id/:title', {
             templateUrl: 'tpl/bestSeller.html',
             controller: 'bestSellerController',
             activePage: 'about'

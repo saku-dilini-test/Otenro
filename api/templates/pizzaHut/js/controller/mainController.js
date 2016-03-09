@@ -1,9 +1,11 @@
-mobileApp.controller('mainController', function($scope, $rootScope, $q,$http,$location) {
+mobileApp.controller('mainController', function($scope, $rootScope, appService, $q,$http,$location) {
     $scope.pageClass 		= 'slideLeft';
 	$rootScope.appTitle		= '<img src="img/header.jpg">';
 	//$rootScope.appTitle	 = 'Home';
-	$scope.serviceApi		= serviceApi;
-	$scope.GetServiceApi	= GetServiceApi;
+	$scope.serviceApi		= $rootScope.serviceApi;
+	$scope.GetServiceApi	= $rootScope.GetServiceApi;
+    var GetServiceApi = $rootScope.GetServiceApi;
+    var SERVER_URL = $rootScope.SERVER_URL;
 
 	$scope.LoadMoreData = function() {
 		alert(1);

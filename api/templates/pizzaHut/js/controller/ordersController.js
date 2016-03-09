@@ -1,11 +1,11 @@
 mobileApp.controller('ordersController', function($scope, $rootScope, $translate, appService, $location) {
     $scope.pageClass 			= 'slideLeft';
 	$rootScope.appTitle 		= $translate.instant('load.orders.Title');
-	$scope.serviceApi			= serviceApi;
-	$scope.GetServiceApi		= GetServiceApi;
+	$scope.serviceApi			= $rootScope.serviceApi;
+	$scope.GetServiceApi		= $rootScope.GetServiceApi;
 	$scope.saved 				= localStorage.getItem('appLocalStorageUser');
 	$scope.appLocalStorageUser 	= JSON.parse($scope.saved);
-	
+	var GetServiceApi = $rootScope.GetServiceApi;
 	if(localStorage.getItem('appLocalStorageUser')!==null){
 
 		$scope.loadData = function() {
