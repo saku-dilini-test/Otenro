@@ -280,15 +280,16 @@
 }
 
 .btn-edit{
-    border-top: none;
-    border-bottom: none;
-    border-left: 1px solid #e3e2e3;
-    border-right: 1px solid #e3e2e3;
     background-color: transparent;
+    border: medium none;
     color: #c5c5c5;
+    font-size: 12px;
     height: 38px;
     line-height: 38px;
-    width: 100px;
+    position: absolute;
+    right: 190px;
+    text-transform: uppercase;
+    width: 90px;
 }
 
 .btn-icon-picker{
@@ -365,6 +366,7 @@ tr.angular-ui-tree-empty {
 
 .tree-node-content {
     padding: 0 10px 0 0;
+    position: relative;
 }
 
 .tree-handle {
