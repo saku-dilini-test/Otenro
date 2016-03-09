@@ -18,11 +18,11 @@
                 <fieldset>
                     <label>Main Menu</label>
                     <md-select class="" placeholder="Select Main Menu" ng-model="category.mainId" required>
-                        <md-option ng-value="mainMenu.id" ng-repeat="mainMenu in mainMenus">{{mainMenu.name}}</md-option>
+                        <md-option ng-value="mainMenu._id" ng-repeat="mainMenu in mainMenus">{{mainMenu.name}}</md-option>
                     </md-select>
                 </fieldset>
                 <fieldset class="profile-image-section">
-                    <label class="reset-inline">Category Image</label>
+                    <label class="reset-inline fie-upload-text-gap">Category Image</label>
                     <a class="feature01 reset-margin">
                         <span class="overlay01">
                             <span class="caption01">

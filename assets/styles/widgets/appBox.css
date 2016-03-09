@@ -15,6 +15,10 @@
     display: none !important;
 }
 
+.gridster-item-resizable-handler{
+    display: none;
+}
+
 .obl-dashboard-apps ul li{
     float: left !important;
     margin-right: 125px !important;
@@ -43,7 +47,8 @@
 }
 
 .me-app-box-body{
-    height: 266px;
+	cursor: pointer;
+	height: 266px;
 }
 
 .me-app-box-view{

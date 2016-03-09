@@ -20,6 +20,7 @@ var cssFilesToInject = [
   'vendor/**/*.css',
   'styles/ext-modules/oblFrameWork/oblFramework.css',
   'styles/ext-modules/oblDashboard/oblDashboard.css',
+
   'styles/widgets/appBox.css',
   'styles/common/device/iphone/iphone.css',
   'styles/common/device/tablet/tablet.css',
@@ -27,9 +28,14 @@ var cssFilesToInject = [
   'styles/edit/logoandtittle/textSlider.css',
   'styles/edit/appEditArea.css',
   'styles/welcome/welcomeApp.css',
-  'styles/buildkit.css',
+  'styles/common/device/devices.min.css',
+  'styles/edit/setting/contactUs/contactUsDialog.css',
+  'styles/edit/styles/textSlider.css',
+  'styles/treeSource/angular-ui-tree.css',
+
   'styles/app.css',
-  'styles/**/*.css'
+  'styles/bootstrap.css',
+  'styles/buildkit.css'
 ];
 
 

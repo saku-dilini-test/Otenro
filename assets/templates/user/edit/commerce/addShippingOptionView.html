@@ -1,6 +1,6 @@
 <md-dialog aria-label="Add Shipping Option">
     <md-dialog-content>
-        <md-tabs class="shipping-options-tabs" md-center-tabs="false" md-selected="selectedTab" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+        <md-tabs md-center-tabs="false" md-selected="selectedTab" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
             <md-tab>
                 <md-tab-label>shipping options</md-tab-label>
                 <md-tab-body>
@@ -59,6 +59,11 @@
                 <md-tab-body>
                     <div class="md-dialog-header">
                         <h1>weight based</h1>
+                        <ul class="md-dialog-header-nav clearfix">
+                            <li>
+                                <a class="add-new-item" href="javascript:void(0);">Add Weight Range</a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="md-dialog-main clearfix">
                         <fieldset>
@@ -90,14 +95,11 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <fieldset>
-                            <button class="me-default-button me-plus-button reset-margin">add weight range <span class="me-plus-icon">+</span></button>
-                        </fieldset>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button">cancel</md-button>
-                            <md-button class="me-default-button">save</md-button
+                            <md-button class="me-default-button">save</md-button>
                         </div>
                     </div>
                 </md-tab-body>

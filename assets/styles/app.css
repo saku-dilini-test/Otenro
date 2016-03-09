@@ -1,91 +1,19 @@
 /*********************************/
-/***********Already here**********/
-/*********************************/
-/*
-.span-3 {
-    width: 277px;
-}
-
-.form-group.btn {
-    border: 1px solid #CCC;
-    border-top-radius: 4px;
-    border-bottom-radius: 0;
-    width: 208px !important;
-}
-
-.form-group, {
-    float: left;
-    clear: left;
-    width: 240px;
-}
-
-input.form-control {
-    margin-bottom: 0;
-    border-radius: 0;
-    border: 1px solid #CCC;
-    border-top: none;
-    padding-right: 20px;
-}
-
-.row .form-group:first-child input.form-control {
-    border-top: 1px solid #CCC;
-    border-top-radius: 4px;
-}
-
-.row .form-group:last-child input.form-control {
-    border-bottom-radius: 4px;
-}
-
-.ng-repeat-reorder-parent, [ng-repeat-reorder]{
-    z-index: 10;
-    position: relative;
-}
-
-[ng-repeat-reorder].dragging{
-    z-index: 11;
-    position: absolute;
-}
-
-.form-group.dragging input {
-    border: 1px solid #CCC;
-}
-
-.form-group.dragging-after input {
-    background-color: green;
-    border-top: 1px solid #CCC;
-}
-
-.form-group.dragging-before input {
-    background-color: red;
-}
-
-#names > div:first-child{
-    border-bottom-left-radius: none;
-    border-bottom-right-radius: none;
-}
-
-.active-drag-below {
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-}
-*/
-/*********************************/
 /*********Thusitha's CSS**********/
 /*********************************/
 a.feature01{
     display: block;
-    border: 1px solid #dfd0cb;
-    border-width: 0 1px 1px 0;
-    margin: 0px 20px 1em 20px;
     float: left;
     position: relative;
     text-decoration: none;
+    height: 122px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
 }
 
 a.feature01:hover{
-    border-color: #000;
+    border-color: #ECECEC;
 }
 
 a.feature01:hover .overlay01{
@@ -122,7 +50,11 @@ a.feature01:hover .caption01{
 }
 
 a.feature01 img {
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
     display: block;
+    height: auto;
 }
 
 .itemsContainer {
@@ -229,11 +161,11 @@ a.feature01 img {
 }
 
 /********************************************/
-
 .colorpicker-visible,
 .colorpicker-visible .dropdown-menu {
   display: block !important;
 }
+
 colorpicker-saturation {
   display: block;
   width: 100px;
@@ -242,6 +174,7 @@ colorpicker-saturation {
   cursor: crosshair;
   float: left;
 }
+
 colorpicker-saturation i {
   display: block;
   height: 7px;
@@ -253,6 +186,7 @@ colorpicker-saturation i {
   left: 0;
   margin: -4px 0 0 -4px;
 }
+
 colorpicker-saturation i::after {
   content: '';
   display: block;
@@ -261,6 +195,7 @@ colorpicker-saturation i::after {
   border: 1px solid #fff;
   border-radius: 5px;
 }
+
 colorpicker-hue,
 colorpicker-alpha {
   width: 15px;
@@ -270,6 +205,7 @@ colorpicker-alpha {
   margin-left: 4px;
   margin-bottom: 4px;
 }
+
 colorpicker-hue i,
 colorpicker-alpha i {
   display: block;
@@ -282,62 +218,76 @@ colorpicker-alpha i {
   width: 100%;
   margin-top: -1px;
 }
+
 colorpicker-hue {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAABkCAMAAABw8qpSAAABLFBMVEUA/z8AuP//JAAA/33/3AAA/1ABAv8A/7r/AH7/jgD2AP8A//j/AEHmAP/XAP/HAP+4AP//ALyoAP+aAP+JAP97AP9rAP9cAP9MAP8+AP8tAP8fAP8PAP8ATv//AG7/cAD/vgD/APoAmv//ADH/AKwB/wMA5//4Eg4AL///AOr/UQD/nwAA/27/7AAA/+kAe/8Ayf8A/5sA/zEA/6z/ABEAEP8A/17/MgAA/9n/ACL/gAD/AJ0AXP8Aqv//AMoA/yHqFBb/zAD/AGD/ANsA9//1/wDk/wDV/wDF/wC3/wD/AI2m/wD/FACY/wCI/wB5/wBp/wD/YgBb/wBK/wA8/wAs/wAd/wAN/wAAPv8A/xH/AFAAi///rQAA/8r/+gAA1///QwAAH/8Abf8A/43c/JNGAAAAiUlEQVR4AQXBg2EDAAAAsMy2bds2ttp2+/8PTby79mDLsKJPq/oFPdk24dWXAxsGjRg1ZtykKdNmzJozb8GiJct63WjYl7fiWdOZkk0vOpyr2fVtyKl7FX2uXGjpcuxWDy69KdiRk5WRlpIUFxMVERLw78+vH1Unun1YV3ZkwKM1CYfq7nQK22sD03ITV2Aqp0IAAAAASUVORK5CYII=");
 }
+
 colorpicker-alpha {
   display: none;
 }
+
 colorpicker-alpha,
 .colorpicker-color {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAABkCAMAAACIElGlAAADAFBMVEUAAADT09PT09P////T09P////e3t7q6urT09Px8fHT09P////////T09PT09P////////T09PT09P////////////T09PT09P////////////T09P////T09PT09PT09P////T09PT09P////////////////T09P////T09PT09P////T09PT09PT09PT09PT09PT09P////T09P////T09PT09P////////////T09P////T09P////////////T09PT09P////T09P////////////////////T09P////////T09PT09P////////////////////////T09PT09P////////////////////////T09PT09P////T09PT09P////////T09P////////////T09P////////T09P////T09P////T09P////T09PT09PT09PT09P////T09PT09PT09PT09PT09PT09P////T09P////T09PT09P////////////T09PT09PT09P////T09PT09PT09PT09PT09PT09PT09P////////////////T09PT09P////////////T09P////////T09P////T09PT09PT09P////////T09P////////T09P////T09PT09P////////////////T09PT09PT09PT09P////T09PT09PT09PT09PT09PT09PT09P////T09P////T09PT09PT09PT09PT09P////////////////////////////////////T09P////T09P////T09P////T09PT09P////////////T09P////T09P////T09P////////////T09PT09P////////////////T09PT09P////T09P////T09PT09P////T09P////T09PT09P////T09PT09PT09PT09P////T09PT09P////////////T09PT09P////T09P////////T09MQsm1FAAABAHRSTlMAgJN8/vcDAfcCnJyGaZmZlomGk4yJOmM/eTxs8wY0YDFC7HNdLx18n5/7aUvzCcW9+qKiK8P0ZiltRwfdw/n8Px3WduJjItj78ss5PDHUNELbwP5wplA2FglEVwvkqNarCs4Z7b2sDLgQ0xNdyLrr0eLLUeW1Vs5TWQLwjPI3ZvQGdvxFyFrAeevaLCLvGd0kpRskGyf4qK605xKvFrGyDRHnBYMEkJaDkIBvB/gpH99O6CrbIC4nH3Lg2SXp4A7Qul/GDEgPSlMQ6LjqFU0SjyCCj5V/gnBN7xglL3O70WBU7gjFFEfft0sPTo1ndRipwXr2yRemWRVENq+ytbGuxGaWGQAAAnpJREFUeNpNxmdcDHAAxvEHOWXvmXX23ntv2XvvMg/Z44x0KaRBSnfcKSqlnYZKp1QqGpT20KZh783/eePj+3vzw3/q/AM9iURPTy6XS+RwcXNzcZMQTE1dTE3bE7y9S0u9xxD600rCGtpI2ErOsbGxzoiMrIqscnaOi4vDdnp4XYSrguwxQSb7KpMllycnl2MFaTSaTxrY5NrY5BoKb2BnZ2doZ29vb2OPSdSd4Bcc7OcXGhqamgqrYCsrq+mEiEtC3gUBDg55Dg53IkQYSYG+gb6+GEqB5wV0o5D8/JAQdKK5hA40n3BS+L6c0JJmE+ZQW8JEak1YQJ0Jq+jbaQEPnotGE+IrK+Pj+xKqU6pTUrIDAgKysZ+WEY5QQkJxcQIO0WrCUbL4YmFhgZ3UlVAUHR1d1JEwjVoRRpDJKxMTE/ShBoRR1I6whLyyvLyyUFAQFhbWhTCFFArFawXOCu/bEHpQLYKnZ0aGZw2CR1qah0dmpqurK+pTU0ILakJoTi+PC7j5RHTrqQg1qRkh3T3d3b0xoSE1ItSleoSe1IswmIYQPl8UlhLWkaOj41tHbKENBLX6j1qt/KFUKnFN+Onk9NvJCQdJpfqlUqGiIjExcRthN91/JsJmGkhYRO/OCBhHwwgxMWUxZQMIu8j8o7m5OfbRLMJh2kTYQ1FRhYVR2EHzCOtpMmEG3SUsJEvLoKAg2Prb2tqOJYSH+/uH33shwlTaS1hLBwhX6AYX2tuiRwStVntOa5yUZJwEqbREKjUi5Bjl5BhZW1uXWOMYGRBOnNDX1zfoxz1FwwkfSJfgo6vr41P7soBBNJ7Qm2YSzHTMzMwmEHRoMf0Fm5mYOUrzNBYAAAAASUVORK5CYII=");
 }
+
 .colorpicker {
   top: 0;
   left: 0;
   z-index: 9999;
   display: none;
 }
+
 .colorpicker colorpicker-hue,
 .colorpicker colorpicker-alpha,
 .colorpicker colorpicker-saturation {
   position: relative;
 }
+
 .colorpicker input {
   width: 100px;
   font-size: 11px;
   color: #000;
   background-color: #fff;
 }
+
 .colorpicker.alpha {
   min-width: 140px;
 }
+
 .colorpicker.alpha colorpicker-alpha {
   display: block;
 }
+
 .colorpicker.dropdown {
   position: absolute;
 }
+
 .colorpicker.colorpicker-fixed-position {
   position: fixed;
 }
+
 .colorpicker .dropdown-menu::after,
 .colorpicker .dropdown-menu::before {
   content: '';
   display: inline-block;
   position: absolute;
 }
+
 .colorpicker .dropdown-menu::after {
   clear: both;
   border: 6px solid transparent;
   top: -5px;
   left: 7px;
 }
+
 .colorpicker .dropdown-menu::before {
   border: 7px solid transparent;
   top: -6px;
   left: 6px;
 }
+
 .colorpicker .dropdown-menu {
   position: static;
   top: 0;
@@ -346,38 +296,45 @@ colorpicker-alpha,
   padding: 4px;
   margin-top: 0;
 }
+
 .colorpicker-position-top .dropdown-menu::after {
   border-top: 6px solid #fff;
   border-bottom: 0;
   top: auto;
   bottom: -5px;
 }
+
 .colorpicker-position-top .dropdown-menu::before {
   border-top: 7px solid rgba(0, 0, 0, 0.2);
   border-bottom: 0;
   top: auto;
   bottom: -6px;
 }
+
 .colorpicker-position-right .dropdown-menu::after {
   border-right: 6px solid #fff;
   border-left: 0;
   top: 11px;
   left: -5px;
 }
+
 .colorpicker-position-right .dropdown-menu::before {
   border-right: 7px solid rgba(0, 0, 0, 0.2);
   border-left: 0;
   top: 10px;
   left: -6px;
 }
+
 .colorpicker-position-bottom .dropdown-menu::after {
   border-bottom: 6px solid #fff;
   border-top: 0;
 }
+
 .colorpicker-position-bottom .dropdown-menu::before {
   border-bottom: 7px solid rgba(0, 0, 0, 0.2);
   border-top: 0;
 }
+
 .colorpicker-position-left .dropdown-menu::after {
   border-left: 6px solid #fff;
   border-right: 0;
@@ -385,6 +342,7 @@ colorpicker-alpha,
   left: auto;
   right: -5px;
 }
+
 .colorpicker-position-left .dropdown-menu::before {
   border-left: 7px solid rgba(0, 0, 0, 0.2);
   border-right: 0;
@@ -392,6 +350,7 @@ colorpicker-alpha,
   left: auto;
   right: -6px;
 }
+
 colorpicker-preview {
   display: block;
   height: 10px;
