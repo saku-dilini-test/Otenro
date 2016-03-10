@@ -30,11 +30,14 @@
 
                 });
             },
-             showAddProductsDialog: function() {
+             showAddProductsDialog: function(item) {
                             return $mdDialog.show({
-                                controller: 'CommerceCtrl',
+                                controller: 'ProductCtrl',
                                 templateUrl: 'user/edit/commerce/addPro.html',
-                                clickOutsideToClose: true
+                                clickOutsideToClose: true,
+                                locals : {
+                                            item : item,
+                                          }
                             }).then(function(answer) {
 
                                 //$scope.status = 'You said the information was "' + answer + '".';

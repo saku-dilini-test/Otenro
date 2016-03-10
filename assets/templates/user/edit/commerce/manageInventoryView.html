@@ -1,4 +1,4 @@
-<md-dialog aria-label="Inventory" class="md-dialog-l">
+<md-dialog aria-label="Inventory" style="width:900px">
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
             <md-tab>
@@ -7,7 +7,7 @@
                     <div class="md-dialog-header">
                         <div class="md-dialog-header-nav clearfix">
                             <h1 class="pull-left">all items</h1>
-                            <fieldset class="col-2 pull-right reset-margin">
+                            <fieldset class="col-3 pull-right reset-margin">
                                 <input type="text" required="" class="me-search-input" name="name">
                                 <input type="submit" value="search" class="me-search-button">
                             </fieldset>
@@ -29,7 +29,7 @@
                                 <tr ng-repeat="inventory in inventoryList">
                                     <td class="checkbox-row"><input type="checkbox" /></td>
                                     <td>{{inventory.sku}}</td>
-                                    <td>{{inventory.name}}</td>
+                                    <td><a href="" ng-click="gotoedit(inventory)">{{inventory.name}}</a></td>
                                     <td>{{inventory.quantity}}</td>
                                     <td>{{inventory.price}}</td>
                                     <td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()">{{inventory.sale}}</a></td>

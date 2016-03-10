@@ -96,18 +96,18 @@
 
         };
 
-        $scope.addProducts = function(file,product) {
-            commerceService.addProduct(file,product).
-                success(function(data) {
-                    toastr.success('New Product has been added.', 'Awsome!', {
-                        closeButton: true
-                    });
-                }).error(function(err) {
-                    toastr.error('Unable to Add', 'Warning', {
-                        closeButton: true
-                    });
-                });
-        };
+//        $scope.addProducts = function(file,product) {
+//            commerceService.addProduct(file,product).
+//                success(function(data) {
+//                    toastr.success('New Product has been added.', 'Awsome!', {
+//                        closeButton: true
+//                    });
+//                }).error(function(err) {
+//                    toastr.error('Unable to Add', 'Warning', {
+//                        closeButton: true
+//                    });
+//                });
+//        };
 
 
         $scope.deleteCategory=function($index){
