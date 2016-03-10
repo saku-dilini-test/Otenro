@@ -165,9 +165,9 @@ input[type='number'],
 input[type='password'],
 textarea,
 select{
-    -moz-box-shadow: 0 0 5px 2px #CCC;
-    -webkit-box-shadow: 0 0 5px 2px #CCC;
-    box-shadow: 0 0 5px 2px #CCC;
+    -moz-box-shadow: 0 0 5px 2px #ededed;
+    -webkit-box-shadow: 0 0 5px 2px #ededed;
+    box-shadow: 0 0 5px 2px #ededed;
     border: none;
     background-color: #FFF;
     color: #747474;
@@ -177,7 +177,8 @@ select{
     letter-spacing: 2px;
     line-height: 30px;
     padding-left: 10px;
-    text-shadow: 1px 0 1px #fff;
+    resize: none;
+    text-shadow: 1px 0 1px #FFF;
     width: 100%;
 }
 
@@ -911,6 +912,9 @@ table{
 /******************************************************
 *********************MD Overriding*********************
 ******************************************************/
+.md-dialog-is-showing{
+    top:0 !important;
+}
 
 /* Button Override */
 a.md-button[disabled],
@@ -1016,9 +1020,9 @@ md-select{
 .md-select-value{
     border: medium none !important;
     padding: 0 !important;
-    -moz-box-shadow: 0 0 5px 2px #CCC;
-    -webkit-box-shadow: 0 0 5px 2px #CCC;
-    box-shadow: 0 0 5px 2px #CCC;
+    -moz-box-shadow: 0 0 5px 2px #EDEDED;
+    -webkit-box-shadow: 0 0 5px 2px #EDEDED;
+    box-shadow: 0 0 5px 2px #EDEDED;
 }
 
 .md-select-value span{
@@ -1568,4 +1572,9 @@ md-dialog .md-actions .md-button {
     margin: 0;
     border: 1px solid #ECECEC;
     background: #FFF url("../images/plus-mark.png") no-repeat scroll center center;
+}
+
+#toast-container > .toast-success {
+    background-image: none;
+    background-color: green;
 }

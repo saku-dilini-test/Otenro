@@ -161,6 +161,10 @@ a.feature01 img {
 }
 
 /********************************************/
+.colorpicker{
+    left: 75px !important;
+}
+
 .colorpicker-visible,
 .colorpicker-visible .dropdown-menu {
   display: block !important;
