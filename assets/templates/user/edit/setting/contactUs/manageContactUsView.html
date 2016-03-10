@@ -1,4 +1,4 @@
-<md-dialog aria-label="Add Contact Us Info">
+<md-dialog aria-label="Contact Us">
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
             <md-tab>
@@ -7,7 +7,7 @@
                     <div class="md-dialog-header">
                         <h1>Basic Information</h1>
                     </div>
-                    <form name="basicInfoForm">
+                    <form name="basicInfoForm" novalidate>
                         <div class="md-dialog-main">
                             <!-- Address | Tel Phone | Email | Web Site -->
                             <fieldset>
@@ -20,10 +20,14 @@
                                 <label>Telephone</label>
                                 <input type="text" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" ui-mask="(999) 999-9999"  required />
                             </fieldset>
+                            <fieldset class="text-right">
+                                <button class="me-default-button" ng-click="addBasicInfo(basicInfo)">Submit</button>
+                            </fieldset>
                         </div>
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
-                                <button class="me-default-button" ng-click="addBasicInfo(basicInfo)">Submit</button>
+                                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                                <md-button class="me-default-button" ng-click="nextStep(1)">Next</md-button>
                             </div>
                         </div>
                     </form>
@@ -36,22 +40,26 @@
                     <div class="md-dialog-header">
                         <h1>Web Information</h1>
                     </div>
-                    <form name="webInfoForm">
+                    <form name="webInfoForm" novalidate>
                         <div class="md-dialog-main">
                             <fieldset>
                                 <!-- Email -->
                                 <label>Email</label>
-                                <input type="email" ng-model="webInfo.email">
+                                <input type="email" ng-model="webInfo.email" required />
                             </fieldset>
                             <fieldset>
                                 <!-- Web Site -->
                                 <label>Website</label>
-                                <input type="url"  ng-model="webInfo.webSite" />
+                                <input type="url"  ng-model="webInfo.webSite" required />
+                            </fieldset>
+                            <fieldset class="text-right">
+                                <button class="me-default-button" ng-click="addWebInfo(webInfo)">Submit</button>
                             </fieldset>
                         </div>
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
-                                <button class="me-default-button" ng-click="addWebInfo(webInfo)">Submit</button>
+                                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                                <md-button class="me-default-button" ng-click="nextStep(2)">Next</md-button>
                             </div>
                         </div>
                     </form>
@@ -64,7 +72,7 @@
                     <div class="md-dialog-header">
                         <h1>Google Map</h1>
                     </div>
-                    <form name="googleMap">
+                    <form name="googleMap" novalidate>
                         <div class="md-dialog-main">
                             <div class="google-map-wrapper">
                                 <div class="google-map-container">
@@ -78,10 +86,14 @@
                                 <br />
                                 {{map.markers[0].coords.longitude}}
                             </fieldset>
+                            <fieldset class="text-right">
+                                <button class="me-default-button" ng-click="addGoogleMap(googleMap)">Submit</button>
+                            </fieldset>
                         </div>
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
-                                <button class="me-default-button" ng-click="addGoogleMap(googleMap)">Submit</button>
+                                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                                <md-button class="me-default-button" ng-click="nextStep(3)">Next</md-button>
                             </div>
                         </div>
                     </form>
@@ -178,12 +190,16 @@
                             </tr>
                             </tbody>
                         </table>
+                        <fieldset class="text-right">
+                            <form name="contantUsForm novalidate">
+                                <button class="me-default-button" ng-click="addOpenHoursInfo(openHours)">Submit</button>
+                            </form>
+                        </fieldset>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <form name="contantUsForm">
-                                <button class="me-default-button" ng-click="addOpenHoursInfo(openHours)">Submit</button>
-                            </form>
+                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                            <md-button class="me-default-button">Finish</md-button>
                         </div>
                     </div>
                 </md-tab-body>

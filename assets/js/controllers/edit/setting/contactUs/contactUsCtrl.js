@@ -158,6 +158,10 @@
             });
         };
 
+        $scope.nextStep = function(current) {
+            $scope.activeTabIndex = current;
+        };
+
         $scope.hide = function() {
             $mdDialog.hide();
         };
