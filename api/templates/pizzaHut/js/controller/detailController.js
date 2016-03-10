@@ -1,15 +1,13 @@
 mobileApp.controller('detailController', function($scope, $rootScope,$http, $translate, appService, $routeParams, $filter) {
     $scope.pageClass 		= 'slideLeft';
-	$scope.serviceApi		= $rootScope.serviceApi;
-	$scope.GetServiceApi	= $rootScope.GetServiceApi;
+	$scope.serviceApi		= serviceApi;
+	$scope.GetServiceApi	= GetServiceApi;
 	$rootScope.appTitle 	= $routeParams.title;
 	$rootScope.itemID		= $routeParams.id;
 	$scope.itemCount		= 1;
 	$rootScope.favoritesNav = true;
 	$scope.userId=$rootScope.userId;
 	$scope.appId=$rootScope.appId;
-	var SERVER_URL = $rootScope.SERVER_URL;
-
 
 	var requestParams = {
         "token": token,

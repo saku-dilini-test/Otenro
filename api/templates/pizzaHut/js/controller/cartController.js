@@ -1,12 +1,11 @@
 mobileApp.controller('cartController', function($scope, $rootScope, $translate, $window, appService, $location) {
     $scope.pageClass 			= 'slideLeft';
-	$scope.serviceApi			= $rootScope.serviceApi;
+	$scope.serviceApi			= serviceApi;
 	$scope.GetServiceApi		= GetServiceApi;
 	$rootScope.appTitle 		= $translate.instant('load.cart.Title');
 	$rootScope.footerCheckout	= false;
 	$scope.saved 				= localStorage.getItem('appLocalStorageUser');
 	$scope.appLocalStorageUser 	= JSON.parse($scope.saved);
-	var GetServiceApi = $rootScope.GetServiceApi;
 
 	if($location.path() == '/provideDetail'){
 		$rootScope.appTitle  	= $translate.instant('load.cart.ProvideDetail');

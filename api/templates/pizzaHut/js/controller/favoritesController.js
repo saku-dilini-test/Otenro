@@ -1,13 +1,13 @@
 mobileApp.controller('favoritesController', function($scope, $rootScope) {
     $scope.pageClass 		= 'slideLeft';
 	$rootScope.appTitle	 	= 'Favorites';
-	$scope.serviceApi		= $rootScope.serviceApi;
+	$scope.serviceApi		= serviceApi;
 	$scope.saved 			= localStorage.getItem('appLocalStorage');
 	$scope.appLocalStorage 	= JSON.parse($scope.saved);
-	
+
 	$scope.goRemoveFavorites  = function(index) {
 		$scope.appLocalStorage  = JSON.parse(localStorage.getItem('appLocalStorage'));
-		$scope.appLocalStorage.splice(index,1); 
+		$scope.appLocalStorage.splice(index,1);
 		localStorage.setItem('appLocalStorage', JSON.stringify($scope.appLocalStorage));
 	}
 });
@@ -15,7 +15,7 @@ mobileApp.controller('favoritesController', function($scope, $rootScope) {
 mobileApp.controller('ordersController', function($scope, $rootScope) {
     $scope.pageClass 		= 'slideLeft';
 	$rootScope.appTitle	 	= 'Historical Orders';
-	$scope.serviceApi		= $rootScope.serviceApi;
+	$scope.serviceApi		= serviceApi;
 	$scope.saved 			= localStorage.getItem('appLocalStorage');
 	$scope.appLocalStorage 	= JSON.parse($scope.saved);
 });

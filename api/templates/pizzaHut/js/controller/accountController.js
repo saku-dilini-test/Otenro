@@ -1,12 +1,10 @@
 mobileApp.controller('accountController', function($scope, $translate, $rootScope) {
     $scope.pageClass 			= 'slideLeft';
 	$rootScope.appTitle	 		= $translate.instant('load.account.Title');
-	$scope.serviceApi			= $rootScope.serviceApi;
-	$scope.GetServiceApi		= $rootScope.GetServiceApi;
+	$scope.serviceApi			= serviceApi;
+	$scope.GetServiceApi		= GetServiceApi;
 	$scope.saved 				= localStorage.getItem('appLocalStorageUser');
 	$scope.appLocalStorageUser 	= JSON.parse($scope.saved);
-
-	var GetServiceApi = $rootScope.GetServiceApi;
 
 	$scope.goChange  = function() {
 

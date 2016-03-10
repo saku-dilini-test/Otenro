@@ -3,8 +3,7 @@ mobileApp.controller('registerController', function($scope, $translate, $rootSco
     $scope.pageClass 		= 'slideLeft';
 	$rootScope.appTitle	 	= $translate.instant('load.register.Title');
     $scope.register 		= {};
-	$scope.GetServiceApi	= $rootScope.GetServiceApi;
-	var GetServiceApi = $rootScope.GetServiceApi;
+	$scope.GetServiceApi	= GetServiceApi;
 	
 	$scope.getLocation  = function() {
         $window.navigator.geolocation.getCurrentPosition(function(position) {
