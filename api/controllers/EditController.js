@@ -38,9 +38,9 @@ module.exports = {
 
         fs.readFile(moveConfigFile, 'utf-8',
             function(err, data) {
-                if(err) return res.negotiate(err);
+                //if(err) return res.negotiate(err)
 
-                if(!data){
+                if(!data || err ){
                     fs.copy(srcPath, copyDirPath, function (err) {
                         if (err) return res.negotiate(err);
                         //Success
