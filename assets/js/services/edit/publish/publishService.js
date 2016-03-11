@@ -32,13 +32,19 @@
             },
             addGooglePlayInfo: function(file,playStoreData){
                 return Upload.upload({
-                    url: SERVER_URL + 'api/edit/addGooglePlayInfo',
+                    url: SERVER_URL + 'edit/setPublishDetails',
                     fields: {
-                        'appId':$rootScope.appId
+                        'appId':$rootScope.appId,
+                        'name': playStoreData.name,
+                        'springBoardName':playStoreData.springBoardName
                     },
                     file: file
                 });
             },
+//addGooglePlayInfo: function(file,playStoreData){
+//console.log('playStoreData.name '+playStoreData.name);
+//                 return $http.post(SERVER_URL+ 'edit/setPublishDetails'+ playStoreData   );
+//            },
         };
     }
 })();

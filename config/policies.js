@@ -52,6 +52,9 @@ module.exports.policies = {
   'edit/commerce/ThirdNavigationController': {
     '*': ['jwtAuth']
   },
+  'edit/publish/publishDetailController':{
+   '*': ['jwtAuth']
+  },
 
   'template/TemplateController': {
     //'*': ['jwtAuth'],
@@ -61,7 +64,8 @@ module.exports.policies = {
     getSubChildById : true,
     getCurrency : true,
     viewImages : true,
-    getThirdBySecondId : true
+    getThirdBySecondId : true,
+    setPublishDetails: true
   }
 
 	// Here's an example of mapping some policies to run before

@@ -116,6 +116,7 @@ module.exports.routes = {
       'POST /edit/setCurrency': 'edit/setting/CurrencyController.setCurrency',
 
       'GET /edit/getContactUs' :'edit/setting/ContactUsController.getContactUs',
+      'POST /edit/setPublishDetails' :'edit/publish/publishDetailController.setPublishDetails',
 
 
       /***
