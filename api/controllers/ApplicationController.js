@@ -5,8 +5,8 @@
  */
 
 var fs = require('fs-extra'),
-    config = require('../services/config');
-
+    config = require('../services/config'),
+    ip = require("ip");
 module.exports = {
 
     designApps : function(req,res){
@@ -66,7 +66,25 @@ module.exports = {
                 };
                 fs.outputJson(madeEasyFilePath,madeEasyFileContent, function (err) {
                     if(err) return console.error(err);
-                })
+                });
+
+                fs.readFile(tempAppDirPath + app.id +'/js/constantsService.js', 'utf-8',
+                    function(err, data) {
+                        if (err) return res.negotiate(err);
+                        fs.writeFile(tempAppDirPath + app.id +'/js/constantsService.js', data.replace("localhost", ip.address()),'utf-8',function(err) {
+                            if (err) return res.negotiate(err);
+                        });
+                    });
+
+                fs.readFile(tempAppDirPath + app.id +'/js/app.js', 'utf-8',
+                    function(err, data) {
+                        if (err) return res.negotiate(err);
+                        data=data.replace("localhost", ip.address());
+                        data=data.replace("localhost", ip.address());
+                        fs.writeFile(tempAppDirPath + app.id +'/js/app.js', data.replace("localhost", ip.address()),'utf-8',function(err) {
+                            if (err) return res.negotiate(err);
+                        });
+                    });
 
             });
             /**
