@@ -2,9 +2,9 @@ var mobileApp = angular.module('mobileApp', ['ngRoute', 'ngAnimate', 'pascalprec
 //Set your token database
 var token = 'a8B6c4D4e8F0';
 //Set url service app
-var serviceApi = 'http://localhost:1337/';
-var GetServiceApi = 'http://localhost:1337/';
-var SERVER_URL = 'http://localhost:1337';
+var serviceApi = 'http://localhost:port/';
+var GetServiceApi = 'http://localhost:port/';
+var SERVER_URL = 'http://localhost:port';
 
 mobileApp.run(function($rootScope, $timeout, $translate, $location, appService,readMadeEasy) {
     $rootScope.footerBadge = 0;

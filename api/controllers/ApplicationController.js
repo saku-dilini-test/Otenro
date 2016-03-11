@@ -5,8 +5,7 @@
  */
 
 var fs = require('fs-extra'),
-    config = require('../services/config'),
-    ip = require("ip");
+    config = require('../services/config');
 module.exports = {
 
     designApps : function(req,res){
@@ -23,6 +22,8 @@ module.exports = {
         var tempAppDirPath = config.ME_SERVER + userId + '/templates/';
         var templatePath = sails.config.appPath + '/api/templates/' + templateName;
         var appName = req.body.appName;
+        var serverTmp="http://localhost:port";
+        var serverOrg=config.server.host+':'+config.server.port;
 
         var application ={
             appName : req.body.appName,
@@ -71,7 +72,7 @@ module.exports = {
                 fs.readFile(tempAppDirPath + app.id +'/js/constantsService.js', 'utf-8',
                     function(err, data) {
                         if (err) return res.negotiate(err);
-                        fs.writeFile(tempAppDirPath + app.id +'/js/constantsService.js', data.replace("localhost", ip.address()),'utf-8',function(err) {
+                        fs.writeFile(tempAppDirPath + app.id +'/js/constantsService.js', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
                             if (err) return res.negotiate(err);
                         });
                     });
@@ -79,9 +80,9 @@ module.exports = {
                 fs.readFile(tempAppDirPath + app.id +'/js/app.js', 'utf-8',
                     function(err, data) {
                         if (err) return res.negotiate(err);
-                        data=data.replace("localhost", ip.address());
-                        data=data.replace("localhost", ip.address());
-                        fs.writeFile(tempAppDirPath + app.id +'/js/app.js', data.replace("localhost", ip.address()),'utf-8',function(err) {
+                        data=data.replace(serverTmp,serverOrg);
+                        data=data.replace(serverTmp,serverOrg);
+                        fs.writeFile(tempAppDirPath + app.id +'/js/app.js', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
                             if (err) return res.negotiate(err);
                         });
                     });
