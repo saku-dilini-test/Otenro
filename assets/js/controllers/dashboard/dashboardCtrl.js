@@ -9,9 +9,10 @@
 (function() {
     'use strict';
     angular.module('app')
-        .controller('DashboardCtrl', ['$scope','dashboardService','toastr','$state', DashboardCtrl]);
+        .controller('DashboardCtrl', ['$scope','dashboardService','toastr','$state','ME_APP_SERVER',
+            'mySharedService', DashboardCtrl]);
 
-    function DashboardCtrl($scope, dashboardService,toastr,$state) {
+    function DashboardCtrl($scope, dashboardService,toastr,$state,ME_APP_SERVER,mySharedService) {
 
         dashboardService.getAllApps().success(function (data) {
             $scope.widgets=data;
@@ -22,6 +23,11 @@
         });
 
         $scope.goToEdit = function(item){
+            console.log(item);
+            var url= ME_APP_SERVER+'temp/'+item.userId
+                +'/templates/'+item.id+'/#/?time='+new Date().getTime();
+            console.log(url);
+            mySharedService.prepForBroadcast(url);
             $state.go('user.editApp',{appId: item.id});
         }
     }

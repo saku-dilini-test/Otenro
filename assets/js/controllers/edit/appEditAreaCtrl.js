@@ -3,17 +3,28 @@
  */
 (function(){
     angular.module('appEdit').controller('AppEditAreaCtrl',[
-        '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER','toastr',
+        '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER','toastr','mySharedService','$interval',
         AppEditAreaCtrl]);
 
-    function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,toastr){
+    function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,toastr,mySharedService,$interval){
 
         $rootScope.bodyClass = 'appEdit';
 
         $scope.appId = $stateParams.appId;
         $rootScope.appId = $stateParams.appId;
-        $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                +'/templates/'+$stateParams.appId;
+        $scope.appTemplateUrl=mySharedService.url;
+        //$scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+        //                        +'/templates/'+$stateParams.appId;
+
+        $scope.$on('handleBroadcast', function() {
+            console.log("appEditArea");
+            setTimeout(function () {
+                $scope.$apply(function () {
+                    $scope.appTemplateUrl=mySharedService.url;
+                    $scope.tmpUrl=mySharedService.url;
+                });
+            }, 2000);
+        });
 
         console.log($scope.appTemplateUrl);
         $scope.buildSource = function () {
@@ -35,6 +46,14 @@
 
         $scope.profileView = function() {
            return userProfileService.showUserProfileDialog();
-        }
+        };
+
+        $scope.thumbPic = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/header.jpg?time='+new Date().getTime();
+
+        $scope.fonts = {
+            font : 'Arial',
+            fontSize : 11
+        };
+
     }
 })();

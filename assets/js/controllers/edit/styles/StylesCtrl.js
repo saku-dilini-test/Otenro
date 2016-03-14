@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("StylesCtrl",
-        ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','stylesService','ME_APP_SERVER','$auth',StylesCtrl]);
+        ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','stylesService','ME_APP_SERVER','$auth','mySharedService',StylesCtrl]);
 
-    function StylesCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,stylesService,ME_APP_SERVER,$auth) {
+    function StylesCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,stylesService,ME_APP_SERVER,$auth,mySharedService) {
 
         $scope.loadFonts = function() {
             // Use timeout to simulate a 650ms request.
@@ -237,6 +237,12 @@
             };
             stylesService.addBackgroundImage($scope.backgroundImgData)
                 .success(function (res) {
+
+                    console.log("success");
+                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                        +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
+                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
+
                     toastr.success('Successfully change backgroundImage', 'Message', {
                         closeButton: true
                     });

@@ -48,7 +48,7 @@
         }
     }
 
-    function DialogController($scope, $mdDialog,$auth,$state,initialData,welcomeTemplatesResource) {
+    function DialogController($scope, $mdDialog,$auth,$state,initialData,welcomeTemplatesResource,mySharedService,ME_APP_SERVER) {
         $scope.selectedTemplate = initialData.selectedTemplateUrl;
 
         $scope.getFile = function () {
@@ -71,7 +71,13 @@
                     };
             console.log(appParams);
             if ($auth.isAuthenticated()) {
+
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
+
+                    var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                        +'/templates/'+data.data.appId+'/#/?time='+new Date().getTime();
+
+                    mySharedService.prepForBroadcast(url);
                     $state.go('user.editApp',{appId:data.data.appId});
                 });
             }else{

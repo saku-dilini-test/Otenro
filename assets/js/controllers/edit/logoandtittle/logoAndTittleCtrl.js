@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("LogoAndTittleCtrl",
-        ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','logoAndTittleService','ME_APP_SERVER','$auth',LogoAndTittleCtrl]);
+        ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','logoAndTittleService','ME_APP_SERVER','$auth','mySharedService',LogoAndTittleCtrl]);
 
-    function LogoAndTittleCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,logoAndTittleService,ME_APP_SERVER,$auth) {
+    function LogoAndTittleCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,logoAndTittleService,ME_APP_SERVER,$auth,mySharedService) {
 
 
         $scope.thumbPic = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/header.jpg?time='+new Date().getTime();
@@ -14,13 +14,16 @@
         };
 
         $scope.addLogoImage = function(headerImg) {
-            console.log('eee');
             logoAndTittleService.addLogoImage(headerImg)
                 .progress(function(evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function(data, status, headers, config) {
-                    //alert("success", 'Awsome! ', 'Genaral info has been added');
+
+                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                        +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
+                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
+
                     toastr.success('Change Header Image', 'Awsome!', {
                         closeButton: true
                     });

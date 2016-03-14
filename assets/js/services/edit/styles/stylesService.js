@@ -36,7 +36,6 @@
                 return $http.post(SERVER_URL + 'edit/addStyleImage/addHeaderImage', Data);
             },
             addBackgroundImage: function(Data){
-                console.log(Data);
                 return $http.post(SERVER_URL + 'edit/addStyleImage/addBackgroundImage', Data);
             },
             // add background, navigation bar and footer color common function

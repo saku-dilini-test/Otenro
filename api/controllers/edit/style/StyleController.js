@@ -9,8 +9,8 @@ var sizeOf = require('image-size'),
     fs = require('fs-extra'),
     config = require('../../../services/config'),
     im = require('imagemagick'),
-    easyimg = require('easyimage');
-    //lwip = require('lwip');
+    easyimg = require('easyimage'),
+    lwip = require('lwip');
 
 module.exports = {
 
@@ -365,24 +365,23 @@ module.exports = {
                         return console.dir(err);
                     }
 
-//                    lwip.open(backgroundImage, function(err, image) {
-//                        if (err)  return res.send(500, err);
-//
-//                        fs.unlink(backgroundExist, function (err) {
-//                            if (err)  return res.send(500, err);
-//                        });
-//
-//                        image.resize(backgroundDimensions.width,backgroundDimensions.height, function(err, rzdImg) {
-//                            rzdImg.writeFile(backgroundExist, function(err) {
-//                                if (err)  return res.send(500, err);
-//
-//                                fs.unlink(backgroundImage, function (err) {
-//                                    if (err)  return res.send(500, err);
-//                                    res.send('ok');
-//                                });
-//                            });
-//                        });
-//                    });
+                    lwip.open(backgroundImage, function(err, image) {
+                        if (err)  return res.send(500, err);
+
+                        fs.unlink(backgroundExist, function (err) {
+                            if (err)  return res.send(500, err);
+                        });
+                        image.resize(backgroundDimensions.width,backgroundDimensions.height, function(err, rzdImg) {
+                            rzdImg.writeFile(backgroundExist, function(err) {
+                                if (err)  return res.send(500, err);
+
+                                fs.unlink(backgroundImage, function (err) {
+                                    if (err)  return res.send(500, err);
+                                    res.send('ok');
+                                });
+                            });
+                        });
+                    });
                 });
             });
         }
@@ -977,24 +976,24 @@ module.exports = {
             fs.rename(uploadedFiles[0].fd,dePath+'headertemp.jpg', function (err) {
                 if (err) return res.send(err);
 
-//                lwip.open(dePath+'headertemp.jpg', function(err, image) {
-//                    if (err) return res.send(500, err);
-//
-//                    fs.unlink(headerExist, function (err) {
-//                        if (err) return console.error(err);
-//
-//                        image.resize(headerDimensions.width,headerDimensions.height, function(err, rzdImg) {
-//                            rzdImg.writeFile(headerExist, function(err) {
-//                                if (err) return res.send(500, err);
-//
-//                                fs.unlink(dePath+'headertemp.jpg', function (err) {
-//                                    if (err) return res.send(500, err);
-//                                    res.send('ok');
-//                                });
-//                            });
-//                        });
-//                    });
-//                });
+                lwip.open(dePath+'headertemp.jpg', function(err, image) {
+                    if (err) return res.send(500, err);
+
+                    fs.unlink(headerExist, function (err) {
+                        if (err) return console.error(err);
+
+                        image.resize(headerDimensions.width,headerDimensions.height, function(err, rzdImg) {
+                            rzdImg.writeFile(headerExist, function(err) {
+                                if (err) return res.send(500, err);
+
+                                fs.unlink(dePath+'headertemp.jpg', function (err) {
+                                    if (err) return res.send(500, err);
+                                    res.send('ok');
+                                });
+                            });
+                        });
+                    });
+                });
             });
         });
     }
