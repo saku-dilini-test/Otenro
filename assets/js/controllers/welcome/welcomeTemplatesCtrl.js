@@ -75,7 +75,7 @@
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
 
                     var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                        +'/templates/'+data.data.appId+'/#/?time='+new Date().getTime();
+                        +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
                     $state.go('user.editApp',{appId:data.data.appId});

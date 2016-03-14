@@ -266,12 +266,8 @@
         </div>
         <div class="device-preview" ng-class="tabletView ? 'tabletView' : '!tabletView'">
             <div class="device-simulator" overflow="scroll">
-                <!--<my-component ng-model="appTemplateUrl">-->
-                    {{appTemplateUrl}}
                     <me-tablet ng-show="tabletView" tmp-url="{{appTemplateUrl}}"></me-tablet>
                     <me-iphone ng-show="!tabletView" tmp-url="{{appTemplateUrl}}"></me-iphone>
-                <!--</my-component>-->
-
             </div>
         </div>
     </div>

@@ -23,10 +23,10 @@
         });
 
         $scope.goToEdit = function(item){
-            console.log(item);
+
             var url= ME_APP_SERVER+'temp/'+item.userId
-                +'/templates/'+item.id+'/#/?time='+new Date().getTime();
-            console.log(url);
+                +'/templates/'+item.id+'/?'+new Date().getTime();
+
             mySharedService.prepForBroadcast(url);
             $state.go('user.editApp',{appId: item.id});
         }

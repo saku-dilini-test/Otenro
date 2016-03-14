@@ -16,17 +16,6 @@
         //$scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
         //                        +'/templates/'+$stateParams.appId;
 
-        $scope.$on('handleBroadcast', function() {
-            console.log("appEditArea");
-            setTimeout(function () {
-                $scope.$apply(function () {
-                    $scope.appTemplateUrl=mySharedService.url;
-                    $scope.tmpUrl=mySharedService.url;
-                });
-            }, 2000);
-        });
-
-        console.log($scope.appTemplateUrl);
         $scope.buildSource = function () {
             appEditResource.buildApp({appId: $stateParams.appId})
                 .success(function(data) {
