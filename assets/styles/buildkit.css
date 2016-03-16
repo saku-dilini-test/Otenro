@@ -1216,9 +1216,38 @@ md-dialog{
     position: relative;
 }
 
+.md-dialog-full{
+    height: 322px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: relative;
+    padding: 20px 0;
+}
+
+.products-options a{
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px 0 10px 45px;
+}
+
+.products-options a:hover{
+    background-color: #f4f5f4;
+    text-decoration: none;
+}
+
+.products-options a h1{
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.products-options a label{
+    font-size: 11px;
+    text-transform: inherit;
+}
+
 .md-dialog-main .file-upload-wrapper{
     border-bottom: 1px solid #E5E4E2;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .md-dialog-main .file-upload-wrapper .file-upload-msg{
@@ -1239,7 +1268,7 @@ md-dialog{
 .uploaded-section .uploaded-new-image{
     border-right: 1px solid #e5e4e2;
     float: left;
-    width: 177px;
+    width: 175px;
 }
 
 .uploaded-section .uploaded-new-image img{
@@ -1262,10 +1291,6 @@ md-dialog{
     float: right;
     padding-left: 20px;
     width: 420px;
-}
-
-.uploaded-section .uploaded-old-images .old-images{
-
 }
 
 .uploaded-section .uploaded-old-images .old-images img{
@@ -1344,8 +1369,8 @@ md-dialog-content.styles-dialog-content{
 md-dialog-content.styles-dialog-content md-tabs md-tab-content:nth-of-type(3){
     height: 190px;
 }
-/*************************/
 
+/*************************/
 .menu-dialog md-dialog-content{
     padding: 0;
 }
