@@ -6,5 +6,7 @@ module.exports = {
     server: {
         host : 'http://localhost',
         port : 1337
-    }
+    },
+
+    ME_PORT :8081
 };
