@@ -1242,12 +1242,17 @@ md-dialog{
     width: 177px;
 }
 
+.uploaded-section .uploaded-new-image img{
+    border: 1px solid #888;
+}
+
 .uploaded-section .me-upload-image-button{
-    background-color: #dedfe0;
+    background-color: #DEDFE0;
     border: medium none;
     color: #666;
     font-size: 10px;
     height: 35px;
+    margin-top: 3px;
     text-align: center;
     text-transform: uppercase;
     width: 150px;
@@ -1265,11 +1270,15 @@ md-dialog{
 
 .uploaded-section .uploaded-old-images .old-images img{
     float: left;
-    margin: 0 20px 20px 0;
+    margin: 0 26px 26px 0;
+    border: none;
+    box-shadow: 0 0 2px 1px #CCC;
+    -moz-box-shadow: 0 0 2px 1px #CCC;
+    -webkit-box-shadow: 0 0 2px 1px #CCC;
 }
 
-.uploaded-section .uploaded-old-images .old-images img:nth-of-type(3n){
-    margin: 0 0 20px 0;
+.uploaded-section .uploaded-old-images .old-images img:nth-of-type(4n){
+    margin: 0 0 26px 0;
 }
 
 .uploaded-section .me-upload-image-button{
