@@ -165,9 +165,9 @@ input[type='number'],
 input[type='password'],
 textarea,
 select{
-    -moz-box-shadow: 0 0 5px 2px #ededed;
-    -webkit-box-shadow: 0 0 5px 2px #ededed;
-    box-shadow: 0 0 5px 2px #ededed;
+    -moz-box-shadow: 0 0 5px 2px #F5F6F4;
+    -webkit-box-shadow: 0 0 2px 3px #F5F6F4;
+    box-shadow: 0 0 2px 3px #F5F6F4;
     border: none;
     background-color: #FFF;
     color: #747474;
@@ -1020,9 +1020,9 @@ md-select{
 .md-select-value{
     border: medium none !important;
     padding: 0 !important;
-    -moz-box-shadow: 0 0 5px 2px #EDEDED;
-    -webkit-box-shadow: 0 0 5px 2px #EDEDED;
-    box-shadow: 0 0 5px 2px #EDEDED;
+    -moz-box-shadow: 0 0 5px 2px #F5F6F4;
+    -webkit-box-shadow: 0 0 5px 2px #F5F6F4;
+    box-shadow: 0 0 5px 2px #F5F6F4;
 }
 
 .md-select-value span{

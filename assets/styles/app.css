@@ -124,6 +124,7 @@ a.feature01 img {
     z-index: 101;
     width: 275px;
     height: 200px;
+    cursor: pointer;
 }
 
 .image{
@@ -135,16 +136,14 @@ a.feature01 img {
 }
 
 .imageOver2 .buttonContain2{
-    position : absolute;
-    display:none;
-    color: #58ffc6;
-    height:30px;
-    width:100%;
-    z-index:100;
-    bottom :0;
+    position: absolute;
+    display: none;
+    color: #58FFC6;
+    height: 30px;
+    width: 100%;
+    z-index: 100;
+    bottom: 1px;
     text-align: center;
-    text-indent: 8px;
-    background: rgb(255,255,255);
     background: rgba(255, 255, 255, 0.75);
 }
 
@@ -154,6 +153,16 @@ a.feature01 img {
 
 .buttonContain2 .img-up2 input{
     display: none
+}
+
+.bg-image-upload{
+    height: 30px;
+    left: 0;
+    line-height: 30px;
+    margin: 0;
+    position: absolute;
+    top: -1px;
+    width: 100%;
 }
 
 .angular-google-map-container {
