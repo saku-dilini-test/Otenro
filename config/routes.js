@@ -128,6 +128,13 @@ module.exports.routes = {
       'POST /templates/getMainMenu' :'template/TemplateController.getMainMenu',
       'GET /templates/getCurrency' :'template/TemplateController.getCurrency',
       'GET /templates/viewImages'  : 'template/TemplateController.viewImages',
-      'POST /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId'
+      'POST /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
+
+      /***
+       * MobileViewer Data
+       **/
+
+      'GET /mobile/allApps' : 'mobileViewer/MobileController.allApps',
+      'GET /mobile/meServerUrl' : 'mobileViewer/MobileController.meServerUrl'
 
 };

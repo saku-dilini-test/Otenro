@@ -62,6 +62,10 @@ module.exports.policies = {
     getCurrency : true,
     viewImages : true,
     getThirdBySecondId : true
+  },
+
+  'mobileViewer/MobileController' : {
+    '*': ['jwtAuth']
   }
 
 	// Here's an example of mapping some policies to run before
