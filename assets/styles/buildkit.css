@@ -325,6 +325,22 @@ a.md-button:hover:not([disabled]),
     filter: alpha(opacity=0);
 }
 
+.me-file-upload.rounded,
+.me-file-upload.rounded .upload-wrapper,
+.me-file-upload.rounded .upload-wrapper input{
+    background-color: #dedfe0;
+    background-image: none;
+    border: medium none;
+    border-radius: 2px;
+    color: #666;
+    font-size: 11px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    width: 100px;
+    text-transform: capitalize;
+}
+
 .me-file-upload.regular,
 .me-file-upload.regular .upload-wrapper,
 .me-file-upload.regular .upload-wrapper input{
@@ -1208,11 +1224,61 @@ md-dialog{
 .md-dialog-main .file-upload-wrapper .file-upload-msg{
     color: #808080;
     float: left;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 300;
-    padding-top: 8px;
-    width: 260px;
+    margin-bottom: 20px;
+    padding-top: 4px;
     text-transform: inherit;
+    width: 260px;
+}
+
+.uploaded-section{
+    margin-top: 10px;
+}
+
+.uploaded-section .uploaded-new-image{
+    border-right: 1px solid #e5e4e2;
+    float: left;
+    width: 177px;
+}
+
+.uploaded-section .me-upload-image-button{
+    background-color: #dedfe0;
+    border: medium none;
+    color: #666;
+    font-size: 10px;
+    height: 35px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 150px;
+}
+
+.uploaded-section .uploaded-old-images{
+    float: right;
+    padding-left: 20px;
+    width: 420px;
+}
+
+.uploaded-section .uploaded-old-images .old-images{
+
+}
+
+.uploaded-section .uploaded-old-images .old-images img{
+    float: left;
+    margin: 0 20px 20px 0;
+}
+
+.uploaded-section .uploaded-old-images .old-images img:nth-of-type(3n){
+    margin: 0 0 20px 0;
+}
+
+.uploaded-section .me-upload-image-button{
+    display: block;
+}
+
+.uploaded-section p{
+    color: #808080;
+    font-size: 12px;
 }
 
 .md-dialog-buttons{

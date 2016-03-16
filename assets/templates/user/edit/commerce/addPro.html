@@ -126,19 +126,35 @@
                     </div>
                     <div class="md-dialog-main">
                         <div class="file-upload-wrapper clearfix">
-                            <p class="file-upload-msg">Browse an image for the Category</p>
+                            <p class="file-upload-msg">Upload your product images</p>
                             <div class="pull-left">
-                                <div class="me-file-upload regular">
+                                <div class="me-file-upload rounded">
                                     <div class="upload-wrapper">
-                                        <input type="file" required="" accept="image/*" name="newImageFile" ng-model="newImageFile" ngf-select="" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" aria-invalid="true" style="">
-                                        <span>Browse</span>
+                                        <input type="file" accept="image/*" aria-invalid="true" required />
+                                        <span>Browse Images</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <img src="#" width="120" height="120" />
-                        <br/> <br/>
-                        <button class="me-default-button">Upload</button>
+                        <div class="uploaded-section clearfix">
+                            <div class="uploaded-new-image">
+                                <p>Browsed Image</p>
+                                <img src="#" width="150" height="150" />
+                                <button class="me-upload-image-button">Upload Image</button>
+                            </div>
+                            <div class="uploaded-old-images">
+                                <p>Uploaded Product Images</p>
+                                <div class="old-images clearfix">
+                                    <img src="#" width="120" height="120" />
+                                    <img src="#" width="120" height="120" />
+                                    <img src="#" width="120" height="120" />
+                                    <img src="#" width="120" height="120" />
+                                    <img src="#" width="120" height="120" />
+                                    <img src="#" width="120" height="120" />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
