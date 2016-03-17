@@ -790,6 +790,11 @@ table{
     color: #C6C6C6;
 }
 
+.me-checkbox-table md-checkbox{
+    line-height: normal;
+    margin: 0 !important;
+}
+
 .checkbox-column,
 .checkbox-row{
     padding: 10px !important;
