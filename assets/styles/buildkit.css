@@ -608,17 +608,6 @@ a.md-button:hover:not([disabled]),
     background: url(../images/paypal.png) no-repeat;
 }
 
-/****************/
-.shipping-options a{
-    text-decoration: none;
-    padding: 15px;
-    display: block;
-}
-
-.shipping-options a:hover{
-    background-color: #EEE;
-}
-
 /************************************/
 .country-restrictions md-radio-button{
     margin: 20px 0;
