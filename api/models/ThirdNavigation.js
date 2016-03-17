@@ -34,6 +34,9 @@ module.exports = {
         discount : {
             type: 'string'
         },
+        type : {
+            type: 'string'
+        },
         createdDate: {
             type: 'string'
         }

@@ -1,7 +1,7 @@
 mobileApp.controller('mainController', function($scope, $rootScope, $q,$http,$location) {
     $scope.pageClass 		= 'slideLeft';
-	$rootScope.appTitle		= '<img ng-src="img/header.jpg?time='+new Date().getTime()+'">';
-	//$rootScope.appTitle	 = 'Home';
+	$rootScope.appTitle		= '<img src="img/header.jpg?time='+new Date().getTime()+'">';
+
 	$scope.serviceApi		= serviceApi;
 	$scope.GetServiceApi	= GetServiceApi;
 

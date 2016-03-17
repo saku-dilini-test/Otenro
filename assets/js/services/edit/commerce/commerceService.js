@@ -89,6 +89,7 @@
                         price: product.price,
                         childId: product.childId,
                         desc: product.desc,
+                        type : product.type,
                         discount: product.discount
                     },
                     file: file
