@@ -15,12 +15,12 @@
           Email required
         </p>
       </fieldset>
-      <fieldset>
+      <fieldset class="password-area">
         <label>Password</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12">
         <input name="password" type="password" ng-model="user.password" compare-to="user.password_confirm" required>
       </fieldset>
-      <fieldset>
+      <fieldset class="password-area reset-margin-right">
         <label> Confirm Password</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
         <input name="password_confirm" ng-model="user.password_confirm" type="password" />

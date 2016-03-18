@@ -119,14 +119,21 @@ h1, h2, h3, h4, h5, h6{
 /******************************************************
 ****************Headers and Text boxes*****************
 ******************************************************/
-h1{
+h1, h2{
     color: #747474;
-    font-size: 22px;
     font-weight: 300;
     letter-spacing: 2px;
     padding-bottom: 8px;
     margin: 0;
     text-transform: uppercase;
+}
+
+h1{
+   font-size: 22px;
+}
+
+h2{
+    font-size: 15px;
 }
 
 p{
@@ -438,11 +445,11 @@ a.md-button:hover:not([disabled]),
 
 /*************/
 .on-off-switch{
-    position: relative;
-    width: 90px;
     margin: 3px 0;
-    -webkit-user-select:none;
-    -moz-user-select:none;
+    position: relative;
+    width: 60px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
     -ms-user-select: none;
 }
 
@@ -468,16 +475,16 @@ a.md-button:hover:not([disabled]),
 
 .on-off-switch-inner:before,
 .on-off-switch-inner:after{
+ box-sizing: border-box;
+    color: white;
     display: block;
     float: left;
-    width: 50%;
-    height: 30px;
-    padding: 0;
-    line-height: 30px;
-    font-size: 14px;
-    color: white;
+    font-size: 12px;
     font-weight: 600;
-    box-sizing: border-box;
+    height: 22px;
+    line-height: 22px;
+    padding: 0;
+    width: 50%;
 }
 
 .on-off-switch-inner:before{
@@ -496,17 +503,17 @@ a.md-button:hover:not([disabled]),
 }
 
 .on-off-switch-switch{
-    background: #FFFFFF;
-    border: none;
+    background: #ffffff none repeat scroll 0 0;
+    border: medium none;
     border-radius: 20px;
     bottom: 0;
     display: block;
-    margin: 6px;
+    margin: 5px;
     position: absolute;
-    right: 56px;
+    right: 38px;
     top: 0;
     transition: all 0.3s ease-in 0s;
-    width: 20px;
+    width: 13px;
 }
 
 .on-off-switch-checkbox:checked + .on-off-switch-label .on-off-switch-inner{
@@ -1062,7 +1069,8 @@ md-select-menu md-option[selected]:focus{
 .md-select-value .md-select-icon::after {
     right: 8px;
     top: 6px;
-    content: url(../images/dropdown-icon.png);
+    content: url(../images/arrow-down.png);
+    transform: none;
 }
 
 md-option{
@@ -1495,7 +1503,7 @@ md-dialog .md-actions .md-button {
 .me-guest{
     width: 100%;
     height: 100vh;
-    background-color: rgba(33, 33, 33, 0.78);
+    background-color: rgba(33, 33, 33, 0.48);
     position: relative;
 }
 
@@ -1535,7 +1543,13 @@ md-dialog .md-actions .md-button {
 }
 
 .me-guest-remember input[type='checkbox']{
-   display: inline-block;
+    display: inline-block;
+}
+
+.password-area{
+    float: left;
+    margin-right: 4%;
+    width: 48%;
 }
 
 /******************************************************
