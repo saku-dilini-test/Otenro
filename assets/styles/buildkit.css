@@ -162,9 +162,9 @@ input[type='number'],
 input[type='password'],
 textarea,
 select{
-    -moz-box-shadow: 0 0 5px 2px #F5F6F4;
-    -webkit-box-shadow: 0 0 2px 3px #F5F6F4;
-    box-shadow: 0 0 2px 3px #F5F6F4;
+    -moz-box-shadow: 0 0 5px 2px #d8d8d8;
+    -webkit-box-shadow: 0 0 5px 2px #d8d8d8;
+    box-shadow: 0 0 5px 2px #d8d8d8;
     border: none;
     background-color: #FFF;
     color: #747474;
@@ -1027,9 +1027,9 @@ md-select{
 .md-select-value{
     border: medium none !important;
     padding: 0 !important;
-    -moz-box-shadow: 0 0 5px 2px #F5F6F4;
-    -webkit-box-shadow: 0 0 5px 2px #F5F6F4;
-    box-shadow: 0 0 5px 2px #F5F6F4;
+    -moz-box-shadow: 0 0 5px 2px #d8d8d8;
+    -webkit-box-shadow: 0 0 5px 2px #d8d8d8;
+    box-shadow: 0 0 5px 2px #d8d8d8;
 }
 
 .md-select-value span{
@@ -1263,16 +1263,17 @@ md-dialog{
 }
 
 .uploaded-section .uploaded-new-image img{
-    border: 1px solid #888;
+    border: 1px solid #e5e4e2;
+    border-radius: 4px 4px 0 0;
 }
 
 .uploaded-section .me-upload-image-button{
-    background-color: #DEDFE0;
+    background-color: #bdbdbd;
     border: medium none;
+    border-radius: 0 0 4px 4px;
     color: #666;
     font-size: 10px;
     height: 35px;
-    margin-top: 3px;
     text-align: center;
     text-transform: uppercase;
     width: 150px;
@@ -1534,7 +1535,7 @@ md-dialog .md-actions .md-button {
 }
 
 .me-guest-remember input[type='checkbox']{
-   margin-top: 1px;
+   display: inline-block;
 }
 
 /******************************************************

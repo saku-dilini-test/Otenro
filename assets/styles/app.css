@@ -88,15 +88,13 @@ a.feature01 img {
 }
 
 .imageOver .buttonContain{
-    position : absolute;
-    display:none;
-    color: #58ffc6;
-    height:20px;
-    width:100%;
-    z-index:100;
-    bottom :0;
+    position: absolute;
+    display: none;
+    height: 20px;
+    width: 100%;
+    z-index: 100;
+    bottom : 0;
     text-indent: 8px;
-    background: rgb(255,255,255);
     background: rgba(255, 255, 255, 0.75);
 }
 
@@ -105,8 +103,8 @@ a.feature01 img {
 }
 
 .add-image-label{
-    cursor:pointer;
-    font-size:10px;
+    cursor: pointer;
+    font-size: 10px;
     font-weight:bold;
     text-align: center;
 }
@@ -138,11 +136,10 @@ a.feature01 img {
 .imageOver2 .buttonContain2{
     position: absolute;
     display: none;
-    color: #58FFC6;
     height: 30px;
     width: 100%;
     z-index: 100;
-    bottom: 1px;
+    bottom: 0;
     text-align: center;
     background: rgba(255, 255, 255, 0.75);
 }
