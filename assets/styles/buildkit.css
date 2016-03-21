@@ -6,18 +6,15 @@
     padding: 0;
 }
 
+/* Remove border (outline) around text/input boxes in Chrome */
+*:focus {
+    outline: none;
+}
+
 body{
     background-color: #F2F2F2;
     font-family: 'Open Sans', sans-serif;
     color: #666;
-}
-
-.guest{
-    background-color: rgba(33, 33, 33, 0.78);
-}
-
-.appEdit{
-    background: #F2F2F2 url(../images/app-edit-bg.png) repeat-y;
 }
 
 input:required,
@@ -122,14 +119,21 @@ h1, h2, h3, h4, h5, h6{
 /******************************************************
 ****************Headers and Text boxes*****************
 ******************************************************/
-h1{
+h1, h2{
     color: #747474;
-    font-size: 22px;
     font-weight: 300;
     letter-spacing: 2px;
     padding-bottom: 8px;
     margin: 0;
     text-transform: uppercase;
+}
+
+h1{
+   font-size: 22px;
+}
+
+h2{
+    font-size: 15px;
 }
 
 p{
@@ -165,9 +169,9 @@ input[type='number'],
 input[type='password'],
 textarea,
 select{
-    -moz-box-shadow: 0 0 5px 2px #F5F6F4;
-    -webkit-box-shadow: 0 0 2px 3px #F5F6F4;
-    box-shadow: 0 0 2px 3px #F5F6F4;
+    -moz-box-shadow: 0 0 5px 2px #d8d8d8;
+    -webkit-box-shadow: 0 0 5px 2px #d8d8d8;
+    box-shadow: 0 0 5px 2px #d8d8d8;
     border: none;
     background-color: #FFF;
     color: #747474;
@@ -441,11 +445,11 @@ a.md-button:hover:not([disabled]),
 
 /*************/
 .on-off-switch{
-    position: relative;
-    width: 90px;
     margin: 3px 0;
-    -webkit-user-select:none;
-    -moz-user-select:none;
+    position: relative;
+    width: 60px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
     -ms-user-select: none;
 }
 
@@ -471,16 +475,16 @@ a.md-button:hover:not([disabled]),
 
 .on-off-switch-inner:before,
 .on-off-switch-inner:after{
+ box-sizing: border-box;
+    color: white;
     display: block;
     float: left;
-    width: 50%;
-    height: 30px;
-    padding: 0;
-    line-height: 30px;
-    font-size: 14px;
-    color: white;
+    font-size: 12px;
     font-weight: 600;
-    box-sizing: border-box;
+    height: 22px;
+    line-height: 22px;
+    padding: 0;
+    width: 50%;
 }
 
 .on-off-switch-inner:before{
@@ -499,17 +503,17 @@ a.md-button:hover:not([disabled]),
 }
 
 .on-off-switch-switch{
-    background: #FFFFFF;
-    border: none;
+    background: #ffffff none repeat scroll 0 0;
+    border: medium none;
     border-radius: 20px;
     bottom: 0;
     display: block;
-    margin: 6px;
+    margin: 5px;
     position: absolute;
-    right: 56px;
+    right: 38px;
     top: 0;
     transition: all 0.3s ease-in 0s;
-    width: 20px;
+    width: 13px;
 }
 
 .on-off-switch-checkbox:checked + .on-off-switch-label .on-off-switch-inner{
@@ -609,17 +613,6 @@ a.md-button:hover:not([disabled]),
 
 .payment-method li .paypal{
     background: url(../images/paypal.png) no-repeat;
-}
-
-/****************/
-.shipping-options a{
-    text-decoration: none;
-    padding: 15px;
-    display: block;
-}
-
-.shipping-options a:hover{
-    background-color: #EEE;
 }
 
 /************************************/
@@ -788,6 +781,11 @@ table{
 
 .me-checkbox-table td a{
     color: #C6C6C6;
+}
+
+.me-checkbox-table md-checkbox{
+    line-height: normal;
+    margin: 0 !important;
 }
 
 .checkbox-column,
@@ -1036,9 +1034,9 @@ md-select{
 .md-select-value{
     border: medium none !important;
     padding: 0 !important;
-    -moz-box-shadow: 0 0 5px 2px #F5F6F4;
-    -webkit-box-shadow: 0 0 5px 2px #F5F6F4;
-    box-shadow: 0 0 5px 2px #F5F6F4;
+    -moz-box-shadow: 0 0 5px 2px #d8d8d8;
+    -webkit-box-shadow: 0 0 5px 2px #d8d8d8;
+    box-shadow: 0 0 5px 2px #d8d8d8;
 }
 
 .md-select-value span{
@@ -1071,7 +1069,8 @@ md-select-menu md-option[selected]:focus{
 .md-select-value .md-select-icon::after {
     right: 8px;
     top: 6px;
-    content: url(../images/dropdown-icon.png);
+    content: url(../images/arrow-down.png);
+    transform: none;
 }
 
 md-option{
@@ -1216,9 +1215,38 @@ md-dialog{
     position: relative;
 }
 
+.md-dialog-full{
+    height: 322px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: relative;
+    padding: 20px 0;
+}
+
+.products-options a{
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px 0 10px 45px;
+}
+
+.products-options a:hover{
+    background-color: #f4f5f4;
+    text-decoration: none;
+}
+
+.products-options a h1{
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.products-options a label{
+    font-size: 11px;
+    text-transform: inherit;
+}
+
 .md-dialog-main .file-upload-wrapper{
     border-bottom: 1px solid #E5E4E2;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .md-dialog-main .file-upload-wrapper .file-upload-msg{
@@ -1239,20 +1267,21 @@ md-dialog{
 .uploaded-section .uploaded-new-image{
     border-right: 1px solid #e5e4e2;
     float: left;
-    width: 177px;
+    width: 175px;
 }
 
 .uploaded-section .uploaded-new-image img{
-    border: 1px solid #888;
+    border: 1px solid #e5e4e2;
+    border-radius: 4px 4px 0 0;
 }
 
 .uploaded-section .me-upload-image-button{
-    background-color: #DEDFE0;
+    background-color: #bdbdbd;
     border: medium none;
+    border-radius: 0 0 4px 4px;
     color: #666;
     font-size: 10px;
     height: 35px;
-    margin-top: 3px;
     text-align: center;
     text-transform: uppercase;
     width: 150px;
@@ -1262,10 +1291,6 @@ md-dialog{
     float: right;
     padding-left: 20px;
     width: 420px;
-}
-
-.uploaded-section .uploaded-old-images .old-images{
-
 }
 
 .uploaded-section .uploaded-old-images .old-images img{
@@ -1344,8 +1369,8 @@ md-dialog-content.styles-dialog-content{
 md-dialog-content.styles-dialog-content md-tabs md-tab-content:nth-of-type(3){
     height: 190px;
 }
-/*************************/
 
+/*************************/
 .menu-dialog md-dialog-content{
     padding: 0;
 }
@@ -1477,6 +1502,8 @@ md-dialog .md-actions .md-button {
 ******************************************************/
 .me-guest{
     width: 100%;
+    height: 100vh;
+    background-color: rgba(33, 33, 33, 0.48);
     position: relative;
 }
 
@@ -1498,6 +1525,7 @@ md-dialog .md-actions .md-button {
     background-color: #F9F9F9 !important;
     color: #0099FF !important;
     margin: 0 !important;
+    cursor: pointer;
 }
 
 .me-guest-social{
@@ -1515,7 +1543,13 @@ md-dialog .md-actions .md-button {
 }
 
 .me-guest-remember input[type='checkbox']{
-   margin-top: 1px;
+    display: inline-block;
+}
+
+.password-area{
+    float: left;
+    margin-right: 4%;
+    width: 48%;
 }
 
 /******************************************************

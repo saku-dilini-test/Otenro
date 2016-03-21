@@ -9,6 +9,7 @@
 .mdapp-nav{
     text-align: right;
     min-height: 762px;
+    height: 100vh;
     position: absolute;
     left: 0;
     top: 0;
@@ -204,7 +205,6 @@
 /********************************
 *************Menu Tree***********
 ********************************/
-
 .tree-node-content a{
     border-radius: 0;
     -moz-border-radius: 0;
@@ -309,12 +309,13 @@
 }
 
 .btn-icon-picker .caret{
+    margin-bottom: 9px;
     margin-left: 12px;
 }
 
 .glyphicon{
     font-size: 20px;
-    line-height: normal;
+    line-height: 2em !important;
     top: 6px;
 }
 
@@ -347,7 +348,6 @@ tr.angular-ui-tree-empty {
     color: #FFF !important;
 }
 
-
 /* --- Tree --- */
 .tree-node {
     border: 1px solid #f1f1f2;
@@ -364,6 +364,7 @@ tr.angular-ui-tree-empty {
     line-height: 32px !important;
     width: auto !important;
     margin-top: 3px;
+    box-shadow: none;
 }
 
 .nodrop {
@@ -380,10 +381,6 @@ tr.angular-ui-tree-empty {
     background: #428bca;
     color: #FFF;
     margin-right: 10px;
-}
-
-.angular-ui-tree-handle:hover {
-
 }
 
 .angular-ui-tree-placeholder {
@@ -403,7 +400,6 @@ tr.angular-ui-tree-empty {
 }
 
 /********************************/
-
 .md-button{
     transition: none;
 }
@@ -422,7 +418,6 @@ a.md-button:hover:not([disabled]),
 /********************************
 *********Styles Settings*********
 ********************************/
-
 .styles-settings{
     height: 542px;
     margin: 10px 0;
@@ -513,17 +508,10 @@ a.md-button:hover:not([disabled]),
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
     color: #666;
-    font-size: 0.85em;
+    font-size: 0.65em;
     font-weight: 600;
     padding: 0 7px;
     text-shadow: none;
-    transform: none;
-    transition: none 0s ease 0s;
-}
-
-.edit-bg-wrapper .obl-selectable-item:hover{
-    color: #666;
-    background-color: transparent;
     transform: none;
     transition: none 0s ease 0s;
 }
@@ -532,6 +520,13 @@ a.md-button:hover:not([disabled]),
     background-color: transparent;
     border: 1px solid #666;
     color: #666;
+    transform: none;
+    transition: none 0s ease 0s;
+}
+
+.edit-bg-wrapper .obl-selectable-item:hover{
+    color: #666;
+    background-color: transparent;
     transform: none;
     transition: none 0s ease 0s;
 }

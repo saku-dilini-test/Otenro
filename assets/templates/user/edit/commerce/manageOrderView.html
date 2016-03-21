@@ -16,7 +16,9 @@
                     <div class="md-dialog-main">
                         <table class="me-checkbox-table">
                             <thead>
-                                <th class="checkbox-column"><input type="checkbox" /></th>
+                                <th class="checkbox-column">
+                                    <md-checkbox md-no-ink ng-model="" aria-label="Check all"></md-checkbox>
+                                </th>
                                 <th>orders</th>
                                 <th class="order-columns">date</th>
                                 <th class="order-columns">customer</th>
@@ -25,7 +27,9 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="order in ordersList">
-                                <td class="checkbox-row"><input type="checkbox" /></td>
+                                <td class="checkbox-row">
+                                    <md-checkbox md-no-ink ng-model="" aria-label="Check one item"></md-checkbox>
+                                </td>
                                 <td># {{order.orderId}}</td>
                                 <td>{{order.date}}</td>
                                 <td>{{order.customer}}</td>

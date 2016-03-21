@@ -52,11 +52,14 @@
                                 <md-option value="Advanced">Advanced</md-option>
                             </md-select>
                         </fieldset>
+                        <fieldset class="text-right">
+                            <md-button class="me-default-button" ng-click="editUserProfile(userEdit)">Save</md-button>
+                        </fieldset>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="close()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="editUserProfile(userEdit)">next</md-button>
+                            <md-button class="me-default-button" ng-click="close()">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>

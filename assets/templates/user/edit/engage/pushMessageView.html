@@ -2,6 +2,11 @@
     <md-dialog-content>
         <div class="md-dialog-header">
             <h1>push message</h1>
+            <ul class="md-dialog-header-nav clearfix">
+                <li>
+                    <a class="add-new-item" ng-click="sendPushMessage()">Add New Message</a>
+                </li>
+            </ul>
         </div>
         <div class="md-dialog-main">
             <table class="me-checkbox-table">
@@ -36,7 +41,7 @@
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button">cancel</md-button>
-                <md-button class="me-default-button" ng-click="sendPushMessage()">create new message</md-button>
+
             </div>
         </div>
     </md-dialog-content>
