@@ -273,6 +273,9 @@
                         toastr.success( type ,'Color Successfully Update ', {
                             closeButton: true
                         });
+                        var tempUrl = mySharedService.url;
+                        mySharedService.prepForBroadcast(tempUrl, '/#/#updateCss='+new Date().getTime());
+
                     }).error(function(err) {
                         toastr.error( type , 'Unable to update ', {
                             closeButton: true
