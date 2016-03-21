@@ -31,6 +31,7 @@ module.exports = {
             templateId : req.body.templateId,
             userId : userId,
             status : "DRAFT",
+            displayImage: req.body.templateUrl,
             appSettings:{
                 appCurrency : "Rs.",
                 backgroundColor : "#FFFFFF",
