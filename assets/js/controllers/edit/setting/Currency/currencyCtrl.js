@@ -12,10 +12,9 @@ currencyService
             {currency:"USD", currID:'1', sign:'$'},
             {currency:"SLR", currID:'2', sign:'Rs.'},
             {currency:"EUR", currID:'3', sign:'€'}];
-        $scope.selectedOption = $scope.currencyList[1];
         $scope.addCurrency = function() {
             var reqParams={
-                currency:$scope.selectedOption.sign,
+                currency:$scope.selectedOption.currency.sign,
                 appId: $rootScope.appId
         };
             currencyService.setCurrency(reqParams).
