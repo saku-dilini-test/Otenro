@@ -415,6 +415,15 @@ a.md-button:hover:not([disabled]),
     background-color: #CCC;
 }
 
+.menu-group-header{
+    font-size: 24px;
+    font-weight: 300;
+    position: absolute;
+    text-align: center;
+    top: 35px;
+    width: 100%;
+}
+
 /********************************
 *********Styles Settings*********
 ********************************/
