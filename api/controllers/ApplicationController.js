@@ -33,6 +33,7 @@ module.exports = {
             status : "DRAFT",
             appSettings:{
                 appCurrency : "Rs.",
+                appCurrencyName: "SLR",
                 backgroundColor : "#FFFFFF",
                 navigationBarColor : "#FFFFFF",
                 footerColor : "#FFFFFF",
