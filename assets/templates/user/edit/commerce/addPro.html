@@ -7,8 +7,8 @@
                     <div class="md-dialog-header">
                         <h1>Choose Product Type</h1>
                     </div>
-                    <div class="md-dialog-main">
-                        <div class="shipping-options">
+                    <div class="md-dialog-full">
+                        <div class="products-options">
                             <a ng-click='addType("Physical")' href="javascript:void(0);">
                                 <h1>Physical</h1>
                                 <label>An item that is shipped to your customers</label>
@@ -44,7 +44,7 @@
                                     <label for="input-name">Name</label>
                                     <input type="text" name="fullname" ng-model="product.name" id="input-name" required />
                                 </fieldset>
-                                <fieldset class="col-2">
+                                <fieldset class="col-2 reset-margin-right">
                                     <label for="input-price">Price</label>
                                     <input type="text" name="price" for="Price" ng-model="product.price" id="input-price" required />
                                 </fieldset>
@@ -54,23 +54,27 @@
                                         <md-option ng-value="child.id" ng-repeat="child in categories">{{child.name}}</md-option>
                                     </md-select>
                                 </fieldset>
-                                <!--<fieldset class="col-2 profile-image-section">-->
-                                    <!--<label class="reset-inline fie-upload-text-gap">Product Image</label>-->
-                                    <!--<a class="feature01 reset-margin">-->
-                                        <!--<span class="overlay01">-->
-                                            <!--<span class="caption01">-->
-                                                 <!--<input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*" value="Add Image" required />-->
-                                            <!--</span>-->
-                                        <!--</span>-->
-                                        <!--<img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />-->
-                                        <!--<img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />-->
-                                    <!--</a>-->
-                                <!--</fieldset>-->
                             </div>
-                            <!--<fieldset class="text-right">-->
-                                <!--<input type="submit" class="me-default-button" ng-disabled="!productForm.$valid" ng-click="addProducts(picFile,product)" value="Add Product" />-->
-                            <!--</fieldset>-->
+                            <fieldset class="text-right">
+                                <input type="submit" class="me-default-button" value="Save" />
+                            </fieldset>
                         </div>
+                        <!--<fieldset class="col-2 profile-image-section">-->
+                            <!--<label class="reset-inline fie-upload-text-gap">Product Image</label>-->
+                            <!--<a class="feature01 reset-margin">-->
+                                <!--<span class="overlay01">-->
+                                    <!--<span class="caption01">-->
+                                         <!--<input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*" value="Add Image" required />-->
+                                    <!--</span>-->
+                                <!--</span>-->
+                                <!--<img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />-->
+                                <!--<img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />-->
+                            <!--</a>-->
+                        <!--</fieldset>-->
+
+                        <!--<fieldset class="text-right">-->
+                            <!--<input type="submit" class="me-default-button" ng-disabled="!productForm.$valid" ng-click="addProducts(picFile,product)" value="Add Product" />-->
+                        <!--</fieldset>-->
                     </form>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
