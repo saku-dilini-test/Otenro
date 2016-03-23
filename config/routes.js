@@ -95,7 +95,6 @@ module.exports.routes = {
       'POST /edit/addGoogleMapInfo' : 'edit/setting/ContactUsController.addGoogleMapInfo',
       'POST /edit/addOpenHoursInfo' : 'edit/setting/ContactUsController.addOpenHoursInfo',
 
-      'GET /edit/getInventoryList': 'edit/commerce/InventoryController.getInventoryList',
       'GET /edit/getMainNavigation': 'edit/commerce/MainNavigationController.getMainNavigation',
       'GET /edit/getSecondNavigation': 'edit/commerce/SecondNavigationController.getSecondNavigation',
       'GET /edit/getThirdNavigation': 'edit/commerce/ThirdNavigationController.getThirdNavigation',
@@ -118,6 +117,12 @@ module.exports.routes = {
       'GET /edit/getContactUs' :'edit/setting/ContactUsController.getContactUs',
 
 
+      /**
+       *InventoryController
+       */
+      'GET /edit/getInventoryList': 'edit/commerce/InventoryController.getInventoryList',
+      'POST /edit/updateInventory': 'edit/commerce/InventoryController.updateInventory',
+
       /***
        * Template Data
        ***/
@@ -136,5 +141,7 @@ module.exports.routes = {
 
       'GET /mobile/allApps' : 'mobileViewer/MobileController.allApps',
       'GET /mobile/meServerUrl' : 'mobileViewer/MobileController.meServerUrl'
+
+
 
 };

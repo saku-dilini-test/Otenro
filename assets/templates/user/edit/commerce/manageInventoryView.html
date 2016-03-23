@@ -18,7 +18,7 @@
                         <table class="me-checkbox-table">
                             <thead>
                                 <th class="checkbox-column">
-                                    <md-checkbox md-no-ink ng-model="" aria-label="Check all"></md-checkbox>
+                                    <md-checkbox md-no-ink  aria-label="Check all"></md-checkbox>
                                 </th>
                                 <th class="id-column">sku#</th>
                                 <th class="item-name-column">item name</th>
@@ -30,14 +30,14 @@
                             <tbody>
                                 <tr ng-repeat="inventory in inventoryList">
                                     <td class="checkbox-row">
-                                        <md-checkbox md-no-ink ng-model="" aria-label="Check one item"></md-checkbox>
+                                        <md-checkbox md-no-ink  aria-label="Check one item"></md-checkbox>
                                     </td>
-                                    <td>{{inventory.sku}}</td>
+                                    <td><input type="text" ng-model="inventory.sku" /></td>
                                     <td><a href="" ng-click="gotoedit(inventory)">{{inventory.name}}</a></td>
-                                    <td>{{inventory.quantity}}</td>
-                                    <td>{{inventory.price}}</td>
-                                    <td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()">{{inventory.sale}}</a></td>
-                                    <td class="sale-yes">{{inventory.discount}}</td>
+                                    <td><input type="number" ng-model="inventory.quantity" /></td>
+                                    <td><input type="number" ng-model="inventory.price" /></td>
+                                    <td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()"><input type="number" ng-model="inventory.sale"/></a></td>
+                                    <td class="sale-yes"><input type="number" ng-model="inventory.discount" /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -48,7 +48,7 @@
                             <md-button class="me-default-button" ng-click="hide()">Close</md-button>
                             <md-button class="me-default-button">export as csv</md-button>
                             <md-button class="me-default-button">refunded</md-button>
-                            <md-button class="me-default-button">fulfilled</md-button>
+                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">fulfilled</md-button>
                         </div>
                     </div>
 

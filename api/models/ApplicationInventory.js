@@ -18,19 +18,22 @@ module.exports = {
             type: 'string'
         },
         price : {
-            type : 'string'
+            type : 'integer'
         },
         quantity : {
-            type : 'string'
+            type : 'integer'
         },
         sale : {
-            type : 'string'
+            type : 'integer'
         },
         sku : {
             type : 'string'
         },
+        product : {
+            model : 'thirdnavigation'
+        },
         discount : {
-            type : 'string'
+            type : 'integer'
         },
         createAt: {
             type: 'date'
