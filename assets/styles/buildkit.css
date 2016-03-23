@@ -1294,6 +1294,7 @@ md-dialog{
 }
 
 .uploaded-section .uploaded-old-images .old-images img{
+    cursor: pointer;
     float: left;
     margin: 0 26px 26px 0;
     border: none;

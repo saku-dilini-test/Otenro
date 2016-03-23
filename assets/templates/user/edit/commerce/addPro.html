@@ -179,11 +179,10 @@
                         <div class="uploaded-section clearfix">
                             <div class="uploaded-new-image">
                                 <p>Browsed Image</p>
-                                <img ng-if="picFile == null" ng-src="../../../images/large-placeholder.png" width="150" height="150" />
+                                <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150" height="150" />
                                 <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" />
+
                                 <button class="me-upload-image-button" ng-click="addImage(picFile)">Upload Image</button>
-                                <img src="../../../images/medium-placeholder.png" width="150" height="150" />
-                                <button class="me-upload-image-button">Upload Image</button>
                             </div>
                             <div class="uploaded-old-images">
                                 <p>Uploaded Product Images</p>
