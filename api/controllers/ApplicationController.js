@@ -17,13 +17,13 @@ module.exports = {
 
     viewTemplate : function(req,res){
 
-        var templateName = req.body.templateName;
-        var userId = req.userId;
-        var tempAppDirPath = config.ME_SERVER + userId + '/templates/';
-        var templatePath = sails.config.appPath + '/api/templates/' + templateName;
-        var appName = req.body.appName;
-        var serverTmp="http://localhost:port";
-        var serverOrg=config.server.host+':'+config.server.port;
+        var templateName = req.body.templateName,
+            userId = req.userId,
+            tempAppDirPath = config.ME_SERVER + userId + '/templates/',
+            templatePath = sails.config.appPath + '/api/templates/' + templateName,
+            appName = req.body.appName,
+            serverTmp="http://localhost:port",
+            serverOrg=config.server.host+':'+config.server.port;
 
         var application ={
             appName : req.body.appName,
@@ -33,8 +33,10 @@ module.exports = {
             status : "DRAFT",
             displayImage: req.body.templateUrl,
             appSettings:{
-                appCurrency : "Rs.",
-                appCurrencyName: "SLR",
+              appCurrency:{
+                          sign : "Rs.",
+                          currency: "SLR",
+                          },
                 backgroundColor : "#FFFFFF",
                 navigationBarColor : "#FFFFFF",
                 footerColor : "#FFFFFF",

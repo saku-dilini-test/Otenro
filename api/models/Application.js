@@ -103,12 +103,18 @@ module.exports = {
             //backImg:{
             //    type: 'string'
             //},
-            //appCurrency:{
+//            appCurrency:{
+//            type: 'json'
+            //currency:{
             //    type: 'string'
             //},
-            //appCurrencyName:{
-                        //    type: 'string'
-                        //}
+            //currID:{
+            //    type: 'string'
+            //},
+//            sign:{
+//               type: 'string'
+//            }
+//            }
         }
     }
 };
