@@ -34,6 +34,7 @@ module.exports = {
             displayImage: req.body.templateUrl,
             appSettings:{
                 appCurrency : "Rs.",
+                appCurrencyName: "SLR",
                 backgroundColor : "#FFFFFF",
                 navigationBarColor : "#FFFFFF",
                 footerColor : "#FFFFFF",

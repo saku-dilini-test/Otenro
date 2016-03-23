@@ -113,6 +113,7 @@ module.exports.routes = {
       'POST /edit/updateThirdNavi' : 'edit/commerce/ThirdNavigationController.updateThirdNavi',
       'POST /edit/deleteItem' : 'edit/commerce/MainNavigationController.deleteItem',
       'POST /edit/setCurrency': 'edit/setting/CurrencyController.setCurrency',
+      'GET /edit/getCurrency': 'edit/setting/CurrencyController.getCurrency',
 
       'GET /edit/getContactUs' :'edit/setting/ContactUsController.getContactUs',
 

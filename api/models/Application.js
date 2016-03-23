@@ -105,7 +105,10 @@ module.exports = {
             //},
             //appCurrency:{
             //    type: 'string'
-            //}
+            //},
+            //appCurrencyName:{
+                        //    type: 'string'
+                        //}
         }
     }
 };
