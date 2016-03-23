@@ -31,8 +31,10 @@ module.exports = {
             templateId : req.body.templateId,
             userId : userId,
             status : "DRAFT",
+            displayImage: req.body.templateUrl,
             appSettings:{
                 appCurrency : "Rs.",
+                appCurrencyName: "SLR",
                 backgroundColor : "#FFFFFF",
                 navigationBarColor : "#FFFFFF",
                 footerColor : "#FFFFFF",

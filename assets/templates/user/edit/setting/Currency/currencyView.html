@@ -10,8 +10,8 @@
                     <!--<select ng-model="selectedOption" placeholder="Select Currency" ng-options="cur as cur.currency for cur in currencyList">
                     </select>-->
 
-                    <md-select placeholder="Select Currency" ng-model="selectedOption.currID">
-                        <md-option ng-value="oneCurrency.currID" ng-repeat="oneCurrency in currencyList">{{oneCurrency.currency}}</md-option>
+                    <md-select ng-model="selectedOption.currency">
+                        <md-option ng-value="oneCurrency" ng-selected="{{oneCurrency.currency}}" ng-repeat="oneCurrency in currencyList" >{{oneCurrency.currency}}</md-option>
                     </md-select>
 
                 </fieldset>

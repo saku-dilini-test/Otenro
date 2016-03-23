@@ -8,21 +8,34 @@ currencyService
         '$scope', '$rootScope', '$mdDialog', 'toastr', 'currencyService',
         currencyCtrl]);
     function currencyCtrl($scope,$rootScope,$mdDialog,toastr, currencyService) {
+ console.log($rootScope.appId);
+
+     currencyService.getCurrency().
+        success(function(data){
+        $scope.existingCurrency = data[0].appSettings.appCurrencyName;
+        }).error(function(err){
+            alert("MainMenu Loading Error : " + err);
+        });
+
         $scope.currencyList=[
             {currency:"USD", currID:'1', sign:'$'},
             {currency:"SLR", currID:'2', sign:'Rs.'},
             {currency:"EUR", currID:'3', sign:'€'}];
-        $scope.selectedOption = $scope.currencyList[1];
+
+
         $scope.addCurrency = function() {
             var reqParams={
-                currency:$scope.selectedOption.sign,
+                currencySign:$scope.selectedOption.currency.sign,
+                currency:$scope.selectedOption.currency.currency,
                 appId: $rootScope.appId
         };
             currencyService.setCurrency(reqParams).
                 success(function(data) {
-                    alert("success", 'Awsome! ', ' New Product has been added.!');
+                     toastr.success(' Currency has been added.!', {
+                                                closeButton: true
+                                            });
                 }).error(function(err) {
-                    alert('warning', "Unable to get templates", err.message);
+                    toastr.error(' warning',"Unable to get templates", {closeButton: true});
                 });
         };
         $scope.hide = function() {

@@ -223,6 +223,10 @@
             },
             deleteCategoryData : function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteSecondNavi',data);
+            },
+
+            updateInventory : function(data){
+                return $http.post(SERVER_URL+ 'edit/updateInventory',data);
             }
             //editStyles: function(fontData) {
             //    return $http.post(SERVER_URL + 'api/edit/addStyles', fontData);

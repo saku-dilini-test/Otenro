@@ -10,7 +10,8 @@ module.exports = {
 
         var data = {
             appSettings:{
-                'appCurrency': req.body.currency
+                'appCurrency': req.body.currencySign,
+                'appCurrencyName': req.body.currency
             }
         };
 
@@ -22,6 +23,18 @@ module.exports = {
                 message: "Successfully added the currency!!!"
             });
         });
-    }
+    },
+     getCurrency : function(req,res){
+ var appId = req.param('appId');
+ console.log(appId);
+        var searchApp = {
+            id: appId
+        };
+             Application.find(searchApp, function(err, app) {
+                        if (err) return done(err);
+                        res.send(app);
+                        console.log("app "+ app);
+                    });
+        }
 
 };

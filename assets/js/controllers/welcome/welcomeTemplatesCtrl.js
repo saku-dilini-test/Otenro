@@ -16,7 +16,7 @@
     function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService) {
         welcomeTemplatesResource.getTemplates().success(function(data){
             $scope.templates = data;
-        });
+            });
 
         $scope.open = function(templateId, templateUrl, templateName) {
 
@@ -67,7 +67,8 @@
             var appParams = {
                         'appName': $scope.appName,
                         'templateId': initialData.selectedTemplateId,
-                        'templateName': initialData.selectedTemplateName
+                        'templateName': initialData.selectedTemplateName,
+                        'templateUrl':initialData.selectedTemplateUrl
                     };
             console.log(appParams);
             if ($auth.isAuthenticated()) {

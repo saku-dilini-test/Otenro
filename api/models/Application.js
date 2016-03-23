@@ -27,6 +27,10 @@ module.exports = {
             type: 'string'
 
         },
+        displayImage: {
+            type: 'string'
+            
+        },
         templateId:{
             type: 'string',
             required: true
@@ -101,7 +105,10 @@ module.exports = {
             //},
             //appCurrency:{
             //    type: 'string'
-            //}
+            //},
+            //appCurrencyName:{
+                        //    type: 'string'
+                        //}
         }
     }
 };
