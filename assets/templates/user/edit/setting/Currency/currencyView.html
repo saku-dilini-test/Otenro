@@ -9,7 +9,7 @@
                     <label>Currency list</label>
                     <select class="form-control"
                             ng-model="oneCurrency.currency"
-                            ng-options=" oneCurrency.currency for oneCurrency in currencyList">
+                            ng-options=" oneCurrency.sign as oneCurrency.currency for oneCurrency in currencyList">
                     </select>
                 </fieldset>
                <fieldset class="text-right reset-margin">

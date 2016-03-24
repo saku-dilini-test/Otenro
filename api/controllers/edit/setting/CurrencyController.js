@@ -12,7 +12,6 @@ module.exports = {
          appSettings:{
             appCurrency:{
                 'currency': req.body.currency,
-                'currID': req.body.currID,
                 'sign': req.body.currencySign
             }
          }
@@ -36,14 +35,14 @@ module.exports = {
         Application.find(searchApp, function(err, app) {
             if (err) return done(err);
             var currency = app[0].appSettings.appCurrency
-                res.send(currency)
+            res.send(currency)
         });
     },
 
     getAllCurrency: function(req,res){
-         Currency.find().exec(function(err, template) {
+         Currency.find().exec(function(err, app) {
               if (err) res.send(err);
-              res.send(template);
+              res.send(app);
          });
     }
 };

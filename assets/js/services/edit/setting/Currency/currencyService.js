@@ -26,7 +26,6 @@ sending the selected currency to the backend
                 return $http.get(SERVER_URL + 'edit/getCurrency?appId='+$rootScope.appId);
             },
             getAllCurrency: function(){
-            console.log("Service");
                 return $http.get(SERVER_URL + 'edit/getAllCurrency');
             },
         };
