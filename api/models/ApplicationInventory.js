@@ -42,11 +42,11 @@ module.exports = {
     seedData : [
         {
             name : 'perfume',
-            price: 'Rs 1500',
+            price: 1500,
             quantity: '100',
-            sale: 'YES',
+            sale: 1000,
             sku: '#1536',
-            discount: 'Rs 1000'
+            discount: 10
         }
     ]
 };
