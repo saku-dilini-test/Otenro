@@ -31,7 +31,6 @@
                 });
             },
             addGooglePlayInfo: function(file,playStoreData){
-            console.log("file "+file);
                 return Upload.upload({
                     url: SERVER_URL + 'edit/setPublishDetails',
                     fields: {
@@ -47,6 +46,18 @@
                     }
 
                 });
+            },
+            getAllLanguages:function(){
+                return $http.get(SERVER_URL + 'edit/getAllLanguages');
+            },
+            getExistingData:function(){
+                return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId);
+            },
+            getAllPrimaryCategories:function(){
+                 return $http.get(SERVER_URL + 'edit/getAllPrimaryCategories?appId='+$rootScope.appId);
+             },
+            getAllSecondaryCategories:function(){
+                return $http.get(SERVER_URL + 'edit/getAllSecondaryCategories?appId='+$rootScope.appId);
             },
 //addGooglePlayInfo: function(file,playStoreData){
 //console.log('playStoreData.name '+playStoreData.name);

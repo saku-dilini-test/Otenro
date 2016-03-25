@@ -16,7 +16,10 @@ module.exports.bootstrap = function(cb) {
   async.series([
     Template.seed,
     ApplicationInventory.seed,
-    Currency.seed
+    Currency.seed,
+    Languages.seed,
+    PrimaryCategory.seed,
+    SecondaryCategory.seed
   ], cb);
 
 };

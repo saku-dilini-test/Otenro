@@ -69,24 +69,24 @@
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>language</label>
-                                <md-select ng-model="playStoreData.language">
-                                    <md-option value="Basic">Basic</md-option>
-                                    <md-option value="Advanced">Advanced</md-option>
-                                </md-select>
+                                    <select class="form-control"
+                                            ng-model="playStoreData.language"
+                                            ng-options="languages.language as languages.language for languages in languageList">
+                                    </select>
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>primary category</label>
-                                <md-select ng-model="playStoreData.primaryCat">
-                                    <md-option value="Basic">Basic</md-option>
-                                    <md-option value="Advanced">Advanced</md-option>
-                                </md-select>
+                                <select class="form-control"
+                                        ng-model="playStoreData.primaryCat"
+                                        ng-options="catList.category as catList.category for catList in primaryCatList">
+                                </select>
                             </fieldset>
                             <fieldset class="col-3 reset-margin-right">
                                 <label>secondary category</label>
-                                <md-select ng-model="playStoreData.secondaryCat">
-                                    <md-option value="Basic">Basic</md-option>
-                                    <md-option value="Advanced">Advanced</md-option>
-                                </md-select>
+                                <select class="form-control"
+                                        ng-model="playStoreData.secondaryCat"
+                                        ng-options="secondaryCat.category as secondaryCat.category for secondaryCat in secondaryCatList">
+                                </select>
                             </fieldset>
                         </div>
                         <div class="clearfix">
