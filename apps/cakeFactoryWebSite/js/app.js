@@ -6,10 +6,6 @@ animateApp.constant('SERVER_URL', "http://localhost:1339/");
 // will be shared by all views (instead of creating fresh ones for each view).
 animateApp.factory("DataService", function (SERVER_URL,$http) {
 
-    // create store
-
-    var myStore = new store();
-
     // create shopping cart
     var myCart = new shoppingCart("AngularStore");
 
@@ -49,7 +45,6 @@ animateApp.factory("DataService", function (SERVER_URL,$http) {
 
     // return data object with store and cart
     return {
-        store: myStore,
         cart: myCart
     };
 });
