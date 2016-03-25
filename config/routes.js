@@ -118,6 +118,7 @@ module.exports.routes = {
 
 
       'GET /edit/getContactUs' :'edit/setting/ContactUsController.getContactUs',
+      'POST /edit/setPublishDetails' :'edit/publish/publishDetailController.setPublishDetails',
 
 
       /**
