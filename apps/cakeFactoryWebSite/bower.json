@@ -1,0 +1,16 @@
+{
+  "name": "The English Cake Company",
+  "authors": [
+    "amilaonbit <amilaonbit@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "angular": "^1.5.1",
+    "angular-route": "^1.5.1",
+    "bootstrap": "^3.3.6"
+  }
+}
