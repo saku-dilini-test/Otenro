@@ -10,7 +10,7 @@
         $scope.$on('handleBroadcast', function() {
             setTimeout(function () {
                 $scope.$apply(function () {
-                    $scope.tmpUrl = mySharedService.url + mySharedService.updateInfo;
+                    $scope.tmpUrl=mySharedService.url + mySharedService.updateInfo;
                     $scope.editTemplateUrl =  $sce.trustAsResourceUrl($scope.tmpUrl);
                 });
             },1000);

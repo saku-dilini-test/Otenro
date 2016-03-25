@@ -18,7 +18,8 @@
 
 
 
-        if (typeof $scope.categories === 'undefined') {
+        if (typeof $scope.categories === 'undefined' ) {
+
             commerceService.getCategoryList()
                 .success(function (result) {
                     $scope.categories = result;
@@ -27,6 +28,18 @@
                         closeButton: true
                     });
                 })
+        }
+
+        if(typeof $scope.mainMenu == 'undefined'){
+            commerceService.getMainMenuList()
+                .success(function (result) {
+                    $scope.mainMenu = result;
+                }).error(function (error) {
+                    toastr.error('Loading Error', 'Warning', {
+                        closeButton: true
+                    });
+                })
+
         }
 
         $scope.addType=function(type){
@@ -60,8 +73,7 @@
         };
 
         $scope.setImage = function(img){
-            console.log(img);
-            console.log('Call');
+
             if(img == undefined){
                 toastr.error('Upload Image', 'Warning', {
                     closeButton: true
@@ -83,6 +95,19 @@
             $scope.tmpImage=im;
         };
 
+        $scope.setChild=function(main){
+
+            var childList=$scope.categories;
+            var newChild=[];
+            for(var i=0 ; i < childList.length ; i++){
+                if(childList[i].mainId == main) newChild.push(childList[i]);
+            }
+            $scope.child=newChild;
+        };
+
+        $scope.deleteImg=function(index){
+            $scope.tmpImage[index]=null;
+        };
         $scope.addImage = function(img){
             $scope.mainImg=img;
             toastr.success('added Image', 'message', {

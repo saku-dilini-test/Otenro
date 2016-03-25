@@ -15,7 +15,8 @@ module.exports.bootstrap = function(cb) {
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   async.series([
     Template.seed,
-    ApplicationInventory.seed
+    ApplicationInventory.seed,
+    Currency.seed
   ], cb);
 
 };

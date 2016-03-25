@@ -62,6 +62,12 @@ module.exports = {
         });
     },
 
+    /**
+     * Get existing currency for the mobile app.
+     *
+     * @param req
+     * @param res
+     */
     getCurrency : function(req,res){
         var appId = req.param('appId');
         var searchApp = {
@@ -69,7 +75,8 @@ module.exports = {
         };
         Application.findOne(searchApp).exec(function(err, app) {
             if (err) return done(err);
-            res.json(app);
+             var currency = app.appSettings.appCurrency
+             res.send(currency)
         });
 
     },

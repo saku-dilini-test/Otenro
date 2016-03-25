@@ -22,6 +22,12 @@ sending the selected currency to the backend
             setCurrency: function(reqParams){
                 return $http.post(SERVER_URL + 'edit/setCurrency',reqParams);
             },
+            getCurrency: function(){
+                return $http.get(SERVER_URL + 'edit/getCurrency?appId='+$rootScope.appId);
+            },
+            getAllCurrency: function(){
+                return $http.get(SERVER_URL + 'edit/getAllCurrency');
+            },
         };
     }
 })();

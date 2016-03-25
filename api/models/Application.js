@@ -27,6 +27,10 @@ module.exports = {
             type: 'string'
 
         },
+        displayImage: {
+            type: 'string'
+            
+        },
         templateId:{
             type: 'string',
             required: true
@@ -99,9 +103,18 @@ module.exports = {
             //backImg:{
             //    type: 'string'
             //},
-            //appCurrency:{
+//            appCurrency:{
+//            type: 'json'
+            //currency:{
             //    type: 'string'
-            //}
+            //},
+            //currID:{
+            //    type: 'string'
+            //},
+//            sign:{
+//               type: 'string'
+//            }
+//            }
         }
     }
 };

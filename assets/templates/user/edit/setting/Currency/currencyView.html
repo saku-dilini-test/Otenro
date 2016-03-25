@@ -7,13 +7,10 @@
             <form name="productForm" novalidate>
                 <fieldset>
                     <label>Currency list</label>
-                    <!--<select ng-model="selectedOption" placeholder="Select Currency" ng-options="cur as cur.currency for cur in currencyList">
-                    </select>-->
-
-                    <md-select placeholder="Select Currency" ng-model="selectedOption.currID">
-                        <md-option ng-value="oneCurrency.currID" ng-repeat="oneCurrency in currencyList">{{oneCurrency.currency}}</md-option>
-                    </md-select>
-
+                    <select class="form-control"
+                            ng-model="oneCurrency.currency"
+                            ng-options=" oneCurrency.sign as oneCurrency.currency for oneCurrency in currencyList">
+                    </select>
                 </fieldset>
                <fieldset class="text-right reset-margin">
                    <input type="submit" class="me-default-button" ng-click='addCurrency()' value="Set Currency" />

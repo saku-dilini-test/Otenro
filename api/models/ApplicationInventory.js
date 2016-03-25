@@ -18,19 +18,22 @@ module.exports = {
             type: 'string'
         },
         price : {
-            type : 'string'
+            type : 'integer'
         },
         quantity : {
-            type : 'string'
+            type : 'integer'
         },
         sale : {
-            type : 'string'
+            type : 'integer'
         },
         sku : {
             type : 'string'
         },
+        product : {
+            model : 'thirdnavigation'
+        },
         discount : {
-            type : 'string'
+            type : 'integer'
         },
         createAt: {
             type: 'date'
@@ -39,11 +42,11 @@ module.exports = {
     seedData : [
         {
             name : 'perfume',
-            price: 'Rs 1500',
+            price: 1500,
             quantity: '100',
-            sale: 'YES',
+            sale: 1000,
             sku: '#1536',
-            discount: 'Rs 1000'
+            discount: 10
         }
     ]
 };

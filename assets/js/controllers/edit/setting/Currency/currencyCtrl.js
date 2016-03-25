@@ -5,25 +5,44 @@ currencyService
 (function() {
     'use strict';
     angular.module("appEdit").controller("currencyCtrl", [
-        '$scope', '$rootScope', '$mdDialog', 'toastr', 'currencyService',
+        '$scope', '$rootScope', '$mdDialog','toastr', 'currencyService',
         currencyCtrl]);
     function currencyCtrl($scope,$rootScope,$mdDialog,toastr, currencyService) {
-        $scope.currencyList=[
-            {currency:"USD", currID:'1', sign:'$'},
-            {currency:"SLR", currID:'2', sign:'Rs.'},
-            {currency:"EUR", currID:'3', sign:'€'}];
-        $scope.selectedOption = $scope.currencyList[1];
+
+         currencyService.getAllCurrency().
+           success(function(data){
+               $scope.currencyList = data;
+           }).error(function(err){
+               alert("MainMenu Loading Error : " + err);
+           });
+
+         currencyService.getCurrency().
+            success(function(data){
+                $scope.existingCurrency = data;
+                $scope.oneCurrency = {currency : $scope.existingCurrency.sign};
+            }).error(function(err){
+                alert("MainMenu Loading Error : " + err);
+            });
+
         $scope.addCurrency = function() {
+            for(var i=0; i<$scope.currencyList.length; i++){
+                if($scope.oneCurrency.currency == $scope.currencyList[i].sign){
+                    $scope.options = $scope.currencyList[i];
+                }
+            }
             var reqParams={
-                currency:$scope.selectedOption.sign,
+                currencySign:$scope.options.sign,
+                currency:$scope.options.currency,
                 appId: $rootScope.appId
-        };
-            currencyService.setCurrency(reqParams).
-                success(function(data) {
-                    alert("success", 'Awsome! ', ' New Product has been added.!');
-                }).error(function(err) {
-                    alert('warning', "Unable to get templates", err.message);
-                });
+            };
+        currencyService.setCurrency(reqParams).
+            success(function(data) {
+                     toastr.success(' Currency has been added.!', {
+                                                closeButton: true
+                                            });
+            }).error(function(err) {
+                    toastr.error(' warning',"Unable to get templates", {closeButton: true});
+            });
         };
         $scope.hide = function() {
             $mdDialog.hide();

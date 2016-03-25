@@ -25,7 +25,7 @@ mobileApp.controller('detailController', function($scope, $rootScope,$http, $tra
 
 	$http.get(SERVER_URL + '/templates/getCurrency?appId='+$rootScope.appId).success(function(data) {
 		//alert(templates);
-		$scope.requestCurrency = data.appSettings.appCurrency;
+		$scope.requestCurrency = data.appSettings.appCurrency.sign;
 	}).error(function(err) {
 		alert('warning', "Unable to get templates", err.message);
 	});
