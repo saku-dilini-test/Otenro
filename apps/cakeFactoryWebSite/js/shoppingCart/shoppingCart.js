@@ -25,7 +25,7 @@ function shoppingCart(cartName) {
 
 // load items from local storage
 shoppingCart.prototype.loadItems = function () {
-    var items = localStorage != null ? localStorage[this.cartName + "_items"] : null;
+    var items = localStorage != null ? localStorage[this.cartName + "_items"] : null;    
     if (items != null && JSON != null) {
         try {
             var items = JSON.parse(items);
@@ -127,6 +127,7 @@ shoppingCart.prototype.saveDeliveryCharges = function (charges) {
 // get delivery charges from local storage
 shoppingCart.prototype.getDeliveryCharges = function () {    
     if (localStorage != null && JSON != null) {
+        console.log('xxxxxxx');
         var deliveryCharges = localStorage['deliveryCharges'];
         if(deliveryCharges){
             return localStorage['deliveryCharges'];
@@ -134,6 +135,13 @@ shoppingCart.prototype.getDeliveryCharges = function () {
             return 0;
         }
     }
+}
+
+// get the total price with delivery fee
+shoppingCart.prototype.getTotalPriceWithDeliveryCharges = function (sku) {
+    var subtotal = this.getTotalPrice;
+    var deliveryFee = this.getDeliveryCharges;
+    return subtotal+deliveryFee;
 }
 
 
@@ -173,6 +181,14 @@ shoppingCart.prototype.getOneDoller = function () {
         }else{
             return 1;
         }
+    }
+}
+
+// get shopping cart from local storage
+shoppingCart.prototype.getShoppingCart = function () {
+    if (localStorage != null && JSON != null) {
+        var cartsItem = localStorage[this.cartName + "_items"]        
+        return this.items;
     }
 }
 
@@ -326,7 +342,7 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         business: parms.merchantID,
         upload: "1",
         rm: "2",
-        no_shipping : "1",
+        no_shipping : "1",        
         charset: "utf-8"
     };
 
@@ -340,13 +356,14 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         data["item_number_" + ctr] = item.sku;
         data["item_name_" + ctr] = item.name;
         data["quantity_" + ctr] = item.quantity;
-        data["amount_" + ctr] = item.price.toFixed(2);
-    }    
-    console.log(data);
+        data["amount_" + ctr] = (item.price / this.oneDoller).toFixed(2);
+    }       
 
+    data["notify_url"] = "http://192.168.8.155:8080/#/paymentInfo";
+    console.log(data);
     // build form
     var form = $('<form/></form>');
-    form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
+    form.attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");
     form.attr("method", "POST");
     form.attr("style", "display:none;");
     this.addFormFields(form, data);
@@ -354,7 +371,7 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
     $("body").append(form);
 
     // submit form
-    this.clearCart = clearCart == null || clearCart;
+    //this.clearCart = clearCart == null || clearCart;
     form.submit();
     form.remove();
 }
@@ -399,7 +416,7 @@ shoppingCart.prototype.checkoutGoogle = function (parms, clearCart) {
 
 // check out using Stripe
 // for details see:
-// https://stripe.com/docs/checkout
+// https:///docs/checkout
 shoppingCart.prototype.checkoutStripe = function (parms, clearCart) {
 
     // global data

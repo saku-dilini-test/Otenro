@@ -1,6 +1,5 @@
 <div class="other-page-header home-pg"></div>
 <div ng-include=" 'views/navigation.html' "></div>
-
 <!---start-content-->
 <div class="container-fluid">
     <div class="row">
@@ -12,27 +11,29 @@
             <br/>
             <h1>{{product.name}}</h1>
             <p>{{product.description}}</p>
-            <div class="radio">
-                <label>
-                    <div class="col-md-2">
-                    <input type="radio" name="selectCakeQuantity" ng-model="cakeType" value="full"> 
-                    </div>
-                    <div class="col-md-4">
-                        {{product.quantity}}
-                    </div>
-                    <div class="col-md-4">
-                        Rs : {{product.price}}
-                    </div>
-                </label>
+
+            <div class="table-responsive">
+              <table class="table me-cart-view-table">
+                    <tr> 
+                        <td>
+                            <div class="radio">
+                                <input type="radio" name="selectCakeQuantity" ng-model="cakeType" value="full">
+                                <label>{{product.quantity}}</label>
+                            </div>
+                        </td>                        
+                        <td class="text-right">Rs : {{product.price}}</td>
+                    </tr>
+                     <tr> 
+                        <td>
+                            <div class="radio">
+                                <input type="radio" name="selectCakeQuantity" ng-model="cakeType" value="slice">
+                                <label>Per Slice</label>
+                            </div>
+                        </td>                        
+                        <td class="text-right">Rs : {{product.perSlicePrice}}</td>
+                    </tr>
+              </table>
             </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="selectCakeQuantity" ng-model="cakeType" value="slice">
-                    <div >
-                        Per Slice Rs : {{product.perSlicePrice}}
-                    </div> 
-                </label>
-            </div>  
             <!-- full -->
             <div ng-if="cakeType == 'full'">  
                 <form class="form-inline">
@@ -43,63 +44,114 @@
 
                     <button 
                         class="btn kkcc-btn-success" 
-                        ng-click="cart.addItem(product.itemCode, product.name, product.price / oneDoller, cakeFullQuantity)">
+                        ng-click="cart.addItem(product.itemCode, product.name, product.price , cakeFullQuantity)">
                         <i class="icon-shopping-cart icon-white" /> add to cart
-                    </button>   
-                    <br/>                 
-     <!--                <button 
-                        class="btn kkcc-btn-danger" 
-                        ng-click="cart.addItem(product.itemCode, product.name, product.price / oneDoller, -10000)"
-                        ng-disabled="cart.getTotalCount(product.itemCode) < 1">
-                        <i class="icon-trash icon-white" /> remove from cart
-                    </button> -->
-                    <button 
-                        class="btn " 
-                        onclick="window.location.href='#'">
-                        <i class="icon-chevron-left" /> back to store
-                    </button>                    
+                    </button>                           
                 </form>
             </div>
             <!-- slice -->
             <div ng-if="cakeType == 'slice'">    
-                <div>
-                    Quantity : <input type="text" class="form-control" ng-model="cakeSliceQuantity">
-                </div>                          
-                <div class="span4">                            
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label>Quantity : </label>
+                        <input type="text" class="form-control" ng-model="cakeSliceQuantity">
+                    </div>      
                     <button 
                         class="btn kkcc-btn-success" 
-                        ng-click="cart.addItem(product.itemCode, product.name+' - Slice', product.perSlicePrice / oneDoller, cakeSliceQuantity)">
+                        ng-click="cart.addItem(product.itemCode, product.name+' - Slice', product.perSlicePrice, cakeSliceQuantity)">
                         <i class="icon-shopping-cart icon-white" /> add to cart
-                    </button>
-                    <button 
-                        class="btn btn-danger" 
-                        ng-click="cart.addItem(product.itemCode, product.name, product.price / oneDoller, -10000)"
-                        ng-disabled="cart.getTotalCount(product.itemCode) < 1">
-                        <i class="icon-trash icon-white" /> remove from cart
-                    </button>
-                    <button 
-                        class="btn " 
-                        onclick="window.location.href='#'">
-                        <i class="icon-chevron-left" /> back to store
-                    </button>                    
-                </div>
+                    </button>            
+                </form>
             </div>
-            <!-- product info -->
+                  <!-- items -->
             <table class="table table-bordered">
-                 <tr class="well">
-                    <td class="tdRight" colspan="6" >
-                        <i class="icon-shopping-cart" />
-                        <b>{{cart.getTotalCount()}}</b> items, <b>{{cart.getTotalPrice() | currency}}</b>
-                        <span ng-show="cart.getTotalCount(product.itemCode) > 0"><br />this item is in the cart</span>          
-                    </td>
-                    <td class="tdRight" colspan="6" >
-                        <a href="#shoppingCart" title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
-                        View Shopping Cart 
-                        </a>
+
+                <!-- header -->
+                <tr class="well">
+                    <td></td>
+                    <td><b>Item</b></td>
+                    <td class="tdCenter"><b>Quantity</b></td>
+                    <td class="tdRight"><b>Price</b></td>                    
+                </tr>
+
+                <!-- empty cart message -->
+                <tr ng-hide="cart.getTotalCount() > 0" >
+                    <td class="tdCenter" colspan="4">
+                        Your cart is empty.
                     </td>
                 </tr>
-            </table>
 
+                <!-- cart items -->
+                <tr ng-repeat="item in cart.items | orderBy:'name'">
+                    <td>
+                        <button 
+                            class="btn btn-danger" type="button"                             
+                            ng-click="cart.addItem(item.sku, item.name, item.price, -1000)">x</button>
+                    </td>
+                    <td>{{item.name}}</td>
+                    <td class="tdCenter">
+                        <div class="input-append">
+                            <!-- use type=tel instead of  to prevent spinners -->
+                            <input
+                                class="text-center" type="tel" 
+                                ng-model="item.quantity" 
+                                ng-change="cart.saveItems()" />
+                            <button 
+                                class="btn btn-success" type="button" 
+                                ng-disabled="item.quantity >= 1000"
+                                ng-click="cart.addItem(item.sku, item.name, item.price, +1)">+</button>
+                            <button 
+                                class="btn btn-inverse" type="button" 
+                                ng-disabled="item.quantity <= 1"
+                                ng-click="cart.addItem(item.sku, item.name, item.price, -1)">-</button>
+                        </div>
+                    </td>
+                    <td class="tdRight">Rs {{item.price * item.quantity}}</td>       
+                </tr>
+
+                <!-- footer -->
+                <tr class="well">
+                    <td></td>
+                    <td><b>Total</b></td>
+                    <td class="tdCenter"><b>{{cart.getTotalCount()}}</b></td>
+                    <td class="tdRight"><b>RS {{cart.getTotalPrice()}}</b></td>                   
+                </tr>
+            </table>
+            <button 
+                class="btn btn kkcc-btn-success" 
+                onclick="window.location.href='#delivery'"
+                ng-disabled="cart.getTotalCount() < 1">
+                <i class="icon-chevron-left" /> checkout
+            </button>   
+
+        </div>
+        <div>            
+            {{product.categoryCode}}
+        </div>
+        <div class="col-md-12">
+                <div class="main">
+                    <div class="wrap">
+                        <div class="menu_list">
+                            <div class="section group">  
+                                <div style="width:100%; font-weight:600; height:40px; color:#D4C4A1; font-size:36px; padding-bottom:20px;">{{catdt}}</div>
+                                <div class="group">                 
+                                    <div style="padding-bottom:10px; margin:10px 70px 40px 0; border-bottom:#BDAC7C thin dotted; float:left" ng-repeat="oneProduct in allProductsReqCategory">
+                                        <a href="#detail/{{oneProduct.id}}"> 
+                                            <img class="catdiv" ng-src="{{SERVER_URL}}{{oneProduct.logoUrl}}" />
+                                        </a>
+                                        
+                                        <li>
+                                            <a href="#detail/{{oneProduct.id}}">
+                                                <span class="item_name">{{oneProduct.name}}</span>
+                                                <span class="price">Rs {{oneProduct.price}}</span>
+                                            </a>
+                                        </li>
+                                    </div>      
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
         </div>
     </div>      
 </div>

@@ -2,6 +2,9 @@
     <div class="row-fluid">
         <div class="span8">
 
+        <div>
+            Our Service 
+        </div>
         <!-- Delivery Option  -->
          <div class="text-info">
             <input type="radio" ng-change="selectDeliveryOption('pickUp')" ng-model="deliveryOption" value="pickUp"> Pick up
@@ -47,13 +50,20 @@
                 delivery address : {{deliveryAddress}}<br>
                 submit button : {{isSubmitButtonDisableValue}} -->
                 <!-- delivery Charges : {{deliveryCharges}} -->
-                <button
-                    class="btn btn-block btn-primary"
+                <button 
+                    class="btn kkcc-btn-success"
+                    onclick="window.location.href='#/shoppingCart'"
+                    ng-model="isSubmitButtonDisableValue"
+                    ng-disabled="isSubmitButtonDisableValue">
+                    <i class="icon-chevron-left" /> Submit                    
+                </button>   
+              <!--   <button
+                    class="btn btn-block kkcc-btn-success"
                     ng-click="cart.checkout('PayPal')"
                     ng-model="isSubmitButtonDisableValue"
                     ng-disabled="isSubmitButtonDisableValue">
                     <i class="icon-ok icon-white" /> Submit
-                </button>
+                </button> -->
             </div>
 
         </div>
