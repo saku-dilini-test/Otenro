@@ -13,12 +13,12 @@
 					<div class="clear"></div>
 				</div>
 				
-				<div id="menu-id" class="menu">
+				<div id="menu-id" class="menu" ng-controller="navigationController">
 					<ul>
-						<li class="active"><a href="#/">Home</a></li>
-						<li><a href="#/about">About</a></li>
-						<li><a href="#/services">Services</a></li>
-						<li><a href="#/contact">Contact</a></li>
+						<li ng-class="{active:isActive('/')}"><a href="#/">Home</a></li>
+						<li ng-class="{active:isActive('/about')}"><a href="#/about">About</a></li>
+						<li ng-class="{active:isActive('/services')}"><a href="#/services">Services</a></li>
+						<li ng-class="{active:isActive('/contact')}"><a href="#/contact">Contact</a></li>
 						<div class="clear"></div>
 					</ul>
 				</div>

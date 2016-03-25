@@ -12,8 +12,21 @@ angular.module('animateApp')
         
         $http.get(SERVER_URL+"products/getProductsDetails",{params:{id:productId}})
             .then(function (response) {            
-                $scope.product = response.data.result;   
-                console.log($scope.product);
+                $scope.product = response.data.result;                   
+                var categoryCode = $scope.product.categoryCode;
+                $http.get(SERVER_URL+"products/getProductsByCategory",{params:{categoryCode:categoryCode}})
+                    .then(function (response2) {            
+                        var allProductsReqCategory = response2.data.result;
+                        var index;
+                        for(var i=0;i < allProductsReqCategory.length ;i++) {
+                            if(allProductsReqCategory[i]['id'] == productId){                             
+                                index = i;
+                                break;
+                            }                            
+                        }
+                        allProductsReqCategory.splice(index, 1);                         
+                        $scope.allProductsReqCategory = allProductsReqCategory;
+                    });  
             });    
 
         $http.get(SERVER_URL+"products/oneUSD")

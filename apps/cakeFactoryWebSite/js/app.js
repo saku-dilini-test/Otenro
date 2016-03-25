@@ -1,14 +1,10 @@
 var animateApp = angular.module('animateApp', ['ngRoute']);
 
-animateApp.constant('SERVER_URL', "http://192.168.8.155:1339/");
+animateApp.constant('SERVER_URL', "http://localhost:1339/");
 
 // create a data service that provides a store and a shopping cart that
 // will be shared by all views (instead of creating fresh ones for each view).
 animateApp.factory("DataService", function (SERVER_URL,$http) {
-
-    // create store
-
-    var myStore = new store();
 
     // create shopping cart
     var myCart = new shoppingCart("AngularStore");
@@ -18,7 +14,7 @@ animateApp.factory("DataService", function (SERVER_URL,$http) {
     // shopping cart with PayPal, you have to create a merchant account with 
     // PayPal. You can do that here:
     // https://www.paypal.com/webapps/mpp/merchant
-    myCart.addCheckoutParameters("PayPal", "perera.n.u-facilitator@gmail.com");
+    myCart.addCheckoutParameters("PayPal", "amilaonbit-facilitator@gmail.com");
 
     // enable Google Wallet checkout
     // note: the second parameter identifies the merchant; in order to use the 
@@ -49,7 +45,6 @@ animateApp.factory("DataService", function (SERVER_URL,$http) {
 
     // return data object with store and cart
     return {
-        store: myStore,
         cart: myCart
     };
 });

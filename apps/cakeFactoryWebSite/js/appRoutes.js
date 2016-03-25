@@ -30,11 +30,15 @@ angular.module('animateApp')
         	})
             .when('/shoppingCart', {
                 templateUrl: 'views/shoppingCart.html',
-                controller: 'detailCtrl'
+                controller: 'shoppingCartCtrl'
             })
             .when('/delivery', {
                 templateUrl: 'views/delivery.html',
                 controller: 'locationCtrl'
+            })
+            .when('/paymentInfo', {
+                templateUrl: 'views/paymentInfo.html',
+                controller: 'paymentInfoCtrl'
             });
 
 });

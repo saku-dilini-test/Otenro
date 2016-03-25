@@ -1,0 +1,73 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="The English Cake Company">
+  <ion-content class="padding">
+    <div class="list card">
+
+      <div class="item item-header">
+        <h2>{{product.name}}</h2>
+      </div>
+
+      <div class="item item-body">
+        <img class="full-image" src="{{SERVER_URL}}{{product.logoUrl}}">
+        <p>
+            {{product.description}}
+        </p>
+      </div>
+
+      <div class="item item-divider">
+        <div class="padding-vertical">
+          <table width="100%">
+          <tbody>
+            <tr>
+
+              <td><span>{{product.quantity}}</span></td>
+              <td><ion-radio ng-repeat="item in choice"
+                             ng-value="item.value"
+                             ng-model="data.choice">
+                {{ item.text }}
+              </ion-radio>
+              </td>
+              <td class="text-align-right">{{product.price | currency:"Rs. " }} <br><br><br>{{product.perSlicePrice | currency:"Rs. " }}</td><br >
+            </tr>
+          </tbody>
+          </table>
+        </div>
+
+        <label class="item item-input qty-container">
+          <span class="input-label">Qty</span>
+          <input type="tel" ng-model="product.qty" class="qty-input-box">
+        </label>
+        <button class="button button-full button-buy" ng-click="buy(data.choice)">Buy</button>
+      </div>
+
+      <ul class="social-links">
+        <li>
+            <a href="#">
+              <i class="icon ion-social-facebook"></i>
+            </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="icon ion-social-googleplus"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="icon ion-social-twitter"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="icon ion-social-pinterest"></i>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </ion-content>
+</ion-view>

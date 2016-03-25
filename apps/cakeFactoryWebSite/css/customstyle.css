@@ -65,7 +65,7 @@ header.carousel .fill {
 .price {
     display: block;
     font-size: 50px;
-    line-height: 50px;
+    line-height: 52px;
 }
 
 .price sup {
@@ -144,7 +144,7 @@ footer {
 }
 
 .white-bg{
-	background-color: #FFFfff;
+	background-color: #FFF;
 }
 
 .other-page-header{
@@ -365,7 +365,7 @@ float: right;
 
 /*price font*/
 .price{
-    font-size: 12px;
+    font-size: 14px;
 }
 
 
@@ -373,10 +373,6 @@ float: right;
  width: 230px;
  height: 200px;
 
-}
-
-.about_desc h2{
-    font-size:2em;
 }
 
 /*Home Page Product Details*/

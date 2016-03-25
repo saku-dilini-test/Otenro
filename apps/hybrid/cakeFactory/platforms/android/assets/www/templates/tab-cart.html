@@ -1,0 +1,37 @@
+<ion-view view-title="The English Cake Company">
+  <ion-content class="padding">
+  	<h1>Shopping Cart</h1>
+	<div class="list">
+
+	    <div class="item padding-small" ng-repeat="cartItem in cartItems">
+	      <table class="items-table">
+	      	<tbody>
+	      		<tr>
+					<td><h2>{{cartItem.name}}</h2><td>
+					<td class="text-align-right font-size-12">{{cartItem.price | currency:"Rs." }}</td>
+	      		</tr>
+	      	</tbody>
+	      </table>
+	      <span class="font-size-14">{{cartItem.pieces}} pieces</span>
+	      <div class="text-align-right">
+	      	<button class="cart-button button-assertive reset-padding" ng-click="removeItem($index)">Remove</button>
+	  	  </div>
+	    </div>
+	    <div class="item padding-small">
+	      <table class="items-table">
+	      	<tbody>
+	      		<tr>
+					<td><h2>Total</h2><td>
+					<td class="text-align-right font-size-12 font-bold"><span>{{getTotal()| currency:"Rs. "}}</span></td>
+	      		</tr>
+	      	</tbody>
+	      </table>
+	    </div>
+	    <a class="button button-small button-energized add-more" href="#/tab/menu">Add More</a>
+	    <div class="text-align-right">
+	    	 <a href="#/pickup/{{getTotal()}}" class="button button-buy">Pick Up</a>
+	    	 <a href="#/delivery/{{getTotal()}}" class="button button-buy dark">Delivery</a>
+	    </div>
+	</div>
+  </ion-content>
+</ion-view>

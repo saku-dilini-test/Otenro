@@ -1,0 +1,340 @@
+/* Empty. Add your own CSS if you like */
+.reset-margin{margin: 0 !important;}
+.reset-padding{padding: 0 !important;}
+
+.padding-small{padding: 5px !important}
+
+.text-align-left{text-align: left !important;}
+.text-align-right{text-align: right !important;}
+.text-align-center{text-align: center !important;}
+.text-align-justify{text-align: justify !important; line-height: 22px;}
+
+.font-size-12{font-size: 12px;}
+.font-size-14{font-size: 14px;}
+
+.font-bold{font-weight: bold !important;}
+
+.dark{ background-color: #5d3a23 !important;}
+
+@font-face {
+    font-family: 'allerbold';
+    src: url('../fonts/aller_bd-webfont.eot');
+    src: url('../fonts/aller_bd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/aller_bd-webfont.woff2') format('woff2'),
+         url('../fonts/aller_bd-webfont.woff') format('woff'),
+         url('../fonts/aller_bd-webfont.ttf') format('truetype'),
+         url('../fonts/aller_bd-webfont.svg#allerbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ambleregular';
+    src: url('../fonts/amble-regular-webfont.eot');
+    src: url('../fonts/amble-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/amble-regular-webfont.woff2') format('woff2'),
+         url('../fonts/amble-regular-webfont.woff') format('woff'),
+         url('../fonts/amble-regular-webfont.ttf') format('truetype'),
+         url('../fonts/amble-regular-webfont.svg#ambleregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+	font-family: "ambleregular";
+	color: #8C8061;
+    background-color: #5d3a23;
+}
+
+h1{
+	color: #8f8042;
+	font-family: "allerbold";
+	font-size: 1.8em;
+	text-transform: uppercase;
+}
+
+h2{
+	color: #bda954;
+	font-family: "allerbold";
+	margin-bottom: 0.5em;
+	text-transform: capitalize;
+}
+
+a.item {
+    color: #8c8061;
+    display: block;
+    font-family: "ambleregular";
+    font-size: 1.2em;
+}
+
+p{
+	font-family: "ambleregular";
+    color: #8c8061;
+    font-size: 1em;
+    line-height: 1.8em;
+    padding: 5px 0;
+}
+
+.default-title, .previous-title{
+    color: #5d3a23;
+}
+
+.bar-stable .button .icon{
+    color: #beac7c;
+}
+
+.category .item h2{
+	font-size: 1.5em;
+}
+
+.category a {
+	text-align: right;
+}
+
+.product h2{
+	font-size: 1.2em;
+}
+
+.item-divider, .item p {
+	color: #8C8061;
+}
+
+.tabs{
+    border-top: 1px solid #bda954;
+}
+
+ion-tabs.tabs-color-active-positive .tab-item {
+    color: #FFF;
+}
+
+ion-tabs.tabs-color-active-positive .tab-item.tab-item-active,
+ion-tabs.tabs-color-active-positive .tab-item.active,
+ion-tabs.tabs-color-active-positive .tab-item.activated {
+    color: #5d3a23;
+}
+
+table {
+	width: 100%;
+}
+
+.tabs{
+    background-color: #BEAC7C;
+    border-top: 1px solid #beac7c;
+}
+
+.tabs-striped .tabs {
+  background-color: #beac7c;
+}
+.tab-nav tabs{
+  background-color: #BEAC7C;
+}
+
+.items-table td{
+    color: #5d3a23;
+}
+
+.button.button-buy {
+    background-color: #857240;
+    border-color: #8f8042;
+    color: #fff;
+    font-size: 14px;
+    line-height: 36px;
+    min-height: 36px;
+}
+
+.button.button-buy + button, .button.button-buy + a{
+    margin-left: 10px;
+}
+
+.cart-button{
+    border: none;
+    color: red;
+    background-color: transparent;
+}
+
+.bar.bar-stable {
+	background-color: #5d3a23;
+	border-color: #1D1810;
+}
+
+.bar.bar-stable .title {
+	color: #beac7c;
+}
+
+.social-links{
+    padding: 3px 0px !important;
+    background-color: transparent;
+    text-align: center;
+}
+
+.social-links li{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.social-links li:last-child{
+    margin-right: 0;
+}
+
+.social-links a{
+    background-color: #857240;
+    color: white;
+    display: block;
+    font-size: 1.5em;
+    height: 40px;
+    line-height: 42px;
+    text-align: center;
+    width: 40px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+
+.social-links a:hover{
+    background-color: #A5946A;
+}
+
+.home-wrapper{
+    background-color: #5D3A23;
+}
+
+.home-wrapper .banner{
+    margin: 0 auto;
+    width: 100%;
+}
+
+.home-wrapper .home-menu{
+    margin: 7px 20px;
+}
+
+.home-wrapper .home-menu a{
+    background-color: #BEAC7C;
+    color: #5D3A23;
+    border-color: #1d1810;
+    padding: 13px 54px 13px 13px;
+}
+
+.home-wrapper .home-menu a:first-child{
+     border-radius: 5px 5px 0 0;
+     -moz-border-radius: 5px 5px 0 0;
+     -webkit-border-radius: 5px 5px 0 0;
+}
+
+.home-wrapper .home-menu a:last-child{
+    border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+}
+
+.home-wrapper .home-menu a i{
+    color: #1d1810;
+}
+
+.copy-right{
+    font-size: 12px;
+    text-align: center;
+}
+
+.input-label {
+    color: #beac7c;
+}
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"]{
+    color: #5d3a23;
+}
+
+.add-more{
+    margin: 20px 0;
+}
+
+.promotions{
+    margin: 15px 20px 30px 20px;
+}
+
+.promo-button{
+    background-color: #ffc900 !important;
+    border-color: #ffc900 !important;
+    font-size: 14px;
+    line-height: 30px;
+    min-height: 30px;
+    width: 100%;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.qty-container{
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+}
+
+.input-label{
+    width: 25%;
+}
+
+.qty-input-box{
+    background-color: white !important;
+    flex: 0 0 auto !important;
+    margin-right: 20px !important;
+    padding: 0 11px !important;
+    width: 23% !important;
+}
+
+.our-promise{
+    font-size: 14px;
+    padding: 12px 0;
+    text-align: center;
+    border-top: thin dotted #bdac7c;
+    border-bottom: thin dotted #bdac7c;
+}
+
+.ask{
+    color: #ffc900;
+    text-decoration: none;
+}
+
+.services{
+     margin-bottom: 12px;
+}
+
+.services, .services .item{
+    background-color: white !important;
+    border-color: white !important;
+    padding: 0 !important;
+
+}
+
+.services .item-divider{
+    font-size: 16px !important;
+    color: #8f8042 !important;
+    font-family: "allerbold";
+    top: -1px;
+}
+
+.services .item{
+    font-size: 14px;
+    color: #8c8061;
+    line-height: 1.8em;
+}
+
+.delivery-info-table td{
+    font-size: 14px;
+    color: #8c8061;
+    border: 1px solid #8c8061;
+    padding: 3px;
+}

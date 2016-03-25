@@ -1,17 +1,22 @@
-﻿<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span8">
+﻿<div class="other-page-header home-pg"></div>
+<div ng-include=" 'views/navigation.html' "></div>
+
+<div class="delivery-page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="services_desc">
+                <h2>Shopping Cart</h2>
+            </div>
 
             <!-- items -->
-            <table class="table table-bordered">
+            <table class="table table-bordered tbl-shopping-cart">
 
                 <!-- header -->
-                <tr class="well">
+                <tr>
                     <td></td>
                     <td><b>Item</b></td>
                     <td class="tdCenter"><b>Quantity</b></td>
-                    <td class="tdRight"><b>Price</b></td>
-                    <td />
+                    <td class="tdRight"><b>Price</b></td>                    
                 </tr>
 
                 <!-- empty cart message -->
@@ -46,53 +51,61 @@
                                 ng-click="cart.addItem(item.sku, item.name, item.price, -1)">-</button>
                         </div>
                     </td>
-                    <td class="tdRight">{{item.price * item.quantity | currency}}</td>
-                    <td class="tdCenter" title="remove from cart">
-                        <a href="" ng-click="cart.addItem(item.sku, item.name, item.price, -10000000)">
-                            <i class="icon-remove" />
-                        </a>
+                    <td class="tdRight">Rs {{item.price * item.quantity}}</td>              
+                </tr>
+             
+                <!-- footer -->
+                <tr>
+                    <td></td>
+                    <td><b>
+                        <div ng-if="!(cart.getDeliveryCharges() > 0)">Total</div>
+                        <div ng-if="cart.getDeliveryCharges() > 0">Sub Total
+                        </div>
+                        </b>
                     </td>
+                    <td class="tdCenter"><b>{{cart.getTotalCount()}}</b></td>
+                    <td class="tdRight"><b>RS {{cart.getTotalPrice()}}</b></td>                   
+                </tr>
+                <!-- delivery charges -->
+                <tr ng-if="cart.getDeliveryCharges() > 0">
+                    <td>
+                    </td>
+                    <td>
+                        Delivery Charges :  
+                    <td/>             
+                    <td> 
+                        <b>Rs {{cart.getDeliveryCharges()}}</b> 
+                    </td>
+                <tr>
+
+                <tr class="well" ng-if="cart.getDeliveryCharges() > 0">
+                    <td></td>
+                    <td><b>Total with delivery Charges</b></td>
+                    <td class="tdCenter"></b></td>
+                    <td class="tdRight"><b>RS {{cart.getTotalPriceWithDeliveryCharges()}}</b></td>
                 </tr>
 
-                <!-- footer -->
-                <tr class="well">
-                    <td><b>Total</b></td>
-                    <td class="tdCenter"><b>{{cart.getTotalCount()}}</b></td>
-                    <td class="tdRight"><b>{{cart.getTotalPrice() | currency}}</b></td>
-                    <td />
-                </tr>
             </table>
         </div>
 
         <!-- buttons -->
-        <div class="span4">
-            <p class="text-info">
-                <button 
-                    class="btn btn-block" 
-                    onclick="window.location.href='#'">
-                    <i class="icon-chevron-left" /> back to store
-                    <!-- <a href="#shoppingCart" title="go to shopping cart" ng-disabled=""> -->
-                </button>
-                <button 
-                    class="btn btn-block btn-danger" 
-                    ng-click="cart.clearItems()" 
-                    ng-disabled="cart.getTotalCount() < 1" >
-                    <i class="icon-trash icon-white" /> clear cart
-                </button>
-                          
-            </p>
-
-            <br/><br/>
-
-            <p class="text-info">
-
-                <div ng-if="true">
-                    <button 
-                        class="btn btn-block btn-primary"
-                        onclick="window.location.href='#/delivery'"
+        <div>
+            <p class="text-info clearfix">
+                <div ng-if="true" class="pull-right">
+                      <button
+                        class="btn kkcc-btn-success"
+                        ng-click="cart.checkout('PayPal')"
+                        ng-model="isSubmitButtonDisableValue"
                         ng-disabled="cart.getTotalCount() < 1">
-                        <i class="icon-chevron-left" /> check out using Paypal                    
-                    </button>  
+                        <i class="icon-ok icon-white" /> Submit
+                    </button>
+                </div>
+                <div ng-if="cart.getTotalCount() < 1" class="pull-left">
+                    <button 
+                    class="btn " 
+                    onclick="window.location.href='#'">
+                    <i class="icon-chevron-left" /> Back to Store
+                    </button>
                 </div>
                 <div ng-if="false">
                     <button

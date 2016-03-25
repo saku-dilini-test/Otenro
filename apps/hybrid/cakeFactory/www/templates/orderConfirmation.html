@@ -1,0 +1,32 @@
+<ion-view view-title="The English Cake Company">
+  <ion-content class="padding">
+    <h1>Order Confirmation</h1>
+
+    <div class="list">
+      <div >
+        Total Amount : {{totalAmount}}
+      </div>
+      <div>
+        Customer Name : {{customerName}}
+      </div>
+      <div>
+        Customer Contact No : {{customerContactNo}}
+      </div>
+      <div ng-show="{{isBranch}}">
+        Pick Up Branch : {{pickupBranch}}
+      </div>
+      <div ng-hide="{{isBranch}}">
+        Delivery Address : {{deliveryAddress}}
+      </div>
+      <div>
+        Order Processed Time : {{orderProcessedTime}}
+      </div>
+      <div>
+        Order Processed Id : {{orderProcessedId}}
+      </div>
+      <div>
+      <a href="#/tab/menu" class="button">OK</a>
+        </div>
+    </div>
+  </ion-content>
+</ion-view>
