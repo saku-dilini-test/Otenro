@@ -296,7 +296,7 @@ li{
 /**** Items-desc *****/
 .items_desc{
 	background:#F7F3E2;
-	padding:50px 0;
+	padding: 50px 0 20px;
 }
 .section {
 	clear: both;
