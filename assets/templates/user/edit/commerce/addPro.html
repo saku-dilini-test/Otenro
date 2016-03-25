@@ -49,9 +49,15 @@
                                     <input type="text" name="price" for="Price" ng-model="product.price" id="input-price" required />
                                 </fieldset>
                                 <fieldset class="col-2">
+                                    <label>Main</label>
+                                    <md-select class="" placeholder="Select Main Menu" ng-model="product.mainId" ng-change="setChild(product.mainId)" required>
+                                        <md-option ng-value="main.id" ng-repeat="main in mainMenu">{{main.name}}</md-option>
+                                    </md-select>
+                                </fieldset>
+                                <fieldset class="col-2">
                                     <label>Child</label>
                                     <md-select class="" placeholder="Select Child Menu" ng-model="product.childId" required>
-                                        <md-option ng-value="child.id" ng-repeat="child in categories">{{child.name}}</md-option>
+                                        <md-option ng-value="child.id" ng-repeat="child in child">{{child.name}}</md-option>
                                     </md-select>
                                 </fieldset>
                             </div>
@@ -191,30 +197,46 @@
                             <div class="uploaded-old-images">
                                 <p>Uploaded Product Images</p>
                                 <div class="old-images clearfix">
-
-                                    <img ng-click="setImage()" ng-if="tmpImage[0] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                    <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"  width="80" height="80" />
-
-                                    <img ng-click="setImage()" ng-if="tmpImage[1] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                    <img ng-click="setImage(1)" ng-if="tmpImage[1] !== null" ngf-src="tmpImage[1]" width="80" height="80" />
-
-                                    <img ng-click="setImage()" ng-if="tmpImage[2] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                    <img ng-click="setImage(2)" ng-if="tmpImage[2] !== null" ngf-src="tmpImage[2]" width="80" height="80" />
-
-                                    <img ng-click="setImage()" ng-if="tmpImage[3] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                    <img ng-click="setImage(3)" ng-if="tmpImage[3] !== null" ngf-src="tmpImage[3]" width="80" height="80" />
-
-                                    <img ng-click="setImage()" ng-if="tmpImage[4] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                    <img ng-click="setImage(4)" ng-if="tmpImage[4] !== null" ngf-src="tmpImage[4]" width="80" height="80" />
-
-                                    <img ng-click="setImage()" ng-if="tmpImage[5] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                    <img ng-click="setImage(5)" ng-if="tmpImage[5] !== null" ngf-src="tmpImage[5]" width="80" height="80" />
-
-                                    <img ng-click="setImage()" ng-if="tmpImage[6] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                    <img ng-click="setImage(6)" ng-if="tmpImage[6] !== null" ngf-src="tmpImage[6]" width="80" height="80" />
-
-                                    <img ng-click="setImage()" ng-if="tmpImage[7] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                    <img ng-click="setImage(7)" ng-if="tmpImage[7] !== null" ngf-src="tmpImage[7]" width="80" height="80" />
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteImg(0)" value='delete' class="image-delete-button" />
+                                        <img ng-click="setImage()" ng-if="tmpImage[0] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
+                                        <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"  width="80" height="80" />
+                                    </div>
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteImg(1)" value='delete' class="image-delete-button" />
+                                        <img ng-click="setImage()" ng-if="tmpImage[1] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
+                                        <img ng-click="setImage(1)" ng-if="tmpImage[1] !== null" ngf-src="tmpImage[1]" width="80" height="80" />
+                                    </div>
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteImg(2)" value='delete' class="image-delete-button" />
+                                        <img ng-click="setImage()" ng-if="tmpImage[2] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
+                                        <img ng-click="setImage(2)" ng-if="tmpImage[2] !== null" ngf-src="tmpImage[2]" width="80" height="80" />
+                                    </div>
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteImg(3)" value='delete' class="image-delete-button" />
+                                        <img ng-click="setImage()" ng-if="tmpImage[3] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
+                                        <img ng-click="setImage(3)" ng-if="tmpImage[3] !== null" ngf-src="tmpImage[3]" width="80" height="80" />
+                                    </div>
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteImg(4)" value='delete' class="image-delete-button" />
+                                        <img ng-click="setImage()" ng-if="tmpImage[4] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
+                                        <img ng-click="setImage(4)" ng-if="tmpImage[4] !== null" ngf-src="tmpImage[4]" width="80" height="80" />
+                                    </div>
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteImg(5)" value='delete' class="image-delete-button" />
+                                        <img ng-click="setImage()" ng-if="tmpImage[5] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
+                                        <img ng-click="setImage(5)" ng-if="tmpImage[5] !== null" ngf-src="tmpImage[5]" width="80" height="80" />
+                                    </div>
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteImg(6)" value='delete' class="image-delete-button" />
+                                        <img ng-click="setImage()" ng-if="tmpImage[6] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
+                                        <img ng-click="setImage(6)" ng-if="tmpImage[6] !== null" ngf-src="tmpImage[6]" width="80" height="80" />
+                                    </div>
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteImg(7)" value='delete' class="image-delete-button" />
+                                        <img ng-click="setImage()" ng-if="tmpImage[7] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
+                                        <img ng-click="setImage(7)" ng-if="tmpImage[7] !== null" ngf-src="tmpImage[7]" width="80" height="80" />
+                                    </div>
                                 </div>
                             </div>
                         </div>

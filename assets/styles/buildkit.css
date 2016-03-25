@@ -1293,18 +1293,35 @@ md-dialog{
     width: 420px;
 }
 
-.uploaded-section .uploaded-old-images .old-images img{
-    cursor: pointer;
+.uploaded-old-images .old-images .old-image{
     float: left;
     margin: 0 26px 26px 0;
+    position: relative;
+}
+
+.uploaded-old-images .old-images .old-image:nth-of-type(4n){
+    margin: 0 0 26px 0;
+}
+
+.uploaded-old-images .old-images .old-image img{
+    cursor: pointer;
     border: none;
     box-shadow: 0 0 2px 1px #CCC;
     -moz-box-shadow: 0 0 2px 1px #CCC;
     -webkit-box-shadow: 0 0 2px 1px #CCC;
 }
 
-.uploaded-section .uploaded-old-images .old-images img:nth-of-type(4n){
-    margin: 0 0 26px 0;
+.uploaded-old-images .old-images .old-image .image-delete-button{
+    position: absolute;
+    border: none;
+    background: url("/images/menu-delete-icon.png") no-repeat;
+    width: 17px;
+    height: 17px;
+    display: block;
+    text-indent: -999999px;
+    top: -9px;
+    right: -7px;
+    z-index: 5;
 }
 
 .uploaded-section .me-upload-image-button{
