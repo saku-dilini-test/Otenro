@@ -14,6 +14,8 @@
 
 
         $scope.addGooglePlayInfo = function(file, playStoreData) {
+          console.log(playStoreData);
+          console.log(file);
             publishService.addGooglePlayInfo(file,playStoreData)
 //                .progress(function(evt) {
 //                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);

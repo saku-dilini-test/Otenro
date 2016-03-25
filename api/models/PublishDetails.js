@@ -18,8 +18,26 @@ module.exports = {
         springBoardName:{
             type: 'string'
         },
+        language:{
+            type: 'string'
+        },
+        primaryCategory:{
+            type: 'string'
+        },
+        secondaryCategory:{
+            type: 'string'
+        },
+        description:{
+            type: 'string'
+        },
+        keywords:{
+            type: 'string'
+        },
+        file:{
+            type:'string'
+        },
         createdDate:{
             type: 'date'
-        }
+        },
     }
 };

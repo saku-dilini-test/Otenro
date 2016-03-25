@@ -69,21 +69,21 @@
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>language</label>
-                                <md-select ng-model="someVal1">
+                                <md-select ng-model="playStoreData.language">
                                     <md-option value="Basic">Basic</md-option>
                                     <md-option value="Advanced">Advanced</md-option>
                                 </md-select>
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>primary category</label>
-                                <md-select ng-model="someVal2">
+                                <md-select ng-model="playStoreData.primaryCat">
                                     <md-option value="Basic">Basic</md-option>
                                     <md-option value="Advanced">Advanced</md-option>
                                 </md-select>
                             </fieldset>
                             <fieldset class="col-3 reset-margin-right">
                                 <label>secondary category</label>
-                                <md-select ng-model="someVal3">
+                                <md-select ng-model="playStoreData.secondaryCat">
                                     <md-option value="Basic">Basic</md-option>
                                     <md-option value="Advanced">Advanced</md-option>
                                 </md-select>
@@ -92,11 +92,11 @@
                         <div class="clearfix">
                             <fieldset>
                                 <label>description</label>
-                                <textarea rows="2"></textarea>
+                                <textarea ng-model="playStoreData.desc" rows="2"></textarea>
                             </fieldset>
                             <fieldset>
                                 <label>keywords</label>
-                                <textarea rows="2"></textarea>
+                                <textarea ng-model="playStoreData.keywords" rows="2"></textarea>
                             </fieldset>
                         </div>
                     </div>

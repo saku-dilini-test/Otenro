@@ -31,14 +31,21 @@
                 });
             },
             addGooglePlayInfo: function(file,playStoreData){
+            console.log("file "+file);
                 return Upload.upload({
                     url: SERVER_URL + 'edit/setPublishDetails',
                     fields: {
                         'appId':$rootScope.appId,
                         'name': playStoreData.name,
-                        'springBoardName':playStoreData.springBoardName
-                    },
-                    file: file
+                        'springBoardName':playStoreData.springBoardName,
+                        'language':playStoreData.language,
+                        'primaryCategory':playStoreData.primaryCat,
+                        'secondaryCategory':playStoreData.secondaryCat,
+                        'description':playStoreData.desc,
+                        'keywords':playStoreData.keywords,
+                         file: file
+                    }
+
                 });
             },
 //addGooglePlayInfo: function(file,playStoreData){
