@@ -55,7 +55,22 @@
                 toastr.error('select image', 'Warning', {
                     closeButton: true
                 });
-            }else{
+                return;
+            }if(product.childId == null || product.name ==null || product.price){
+                $scope.selectedTab =1;
+                toastr.error('Fill all the fields', 'Warning', {
+                    closeButton: true
+                });
+                return;
+            }
+            if(product.type == null){
+                $scope.selectedTab =0;
+                toastr.error('Choose type', 'Warning', {
+                    closeButton: true
+                });
+                return;
+            }
+            else{
                 console.log('true');
                 commerceService.addProduct(file,product,item.id).
                     success(function(data) {
