@@ -171,8 +171,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
     $urlRouterProvider.otherwise('/');
 
   })
-  .constant('SERVER_URL', "http://192.168.8.155:1339/")
-  //.constant('SERVER_URL', "http://onbitlabs.com:1338/")
+  //.constant('SERVER_URL', "http://192.168.8.155:1339/")
+  .constant('SERVER_URL', "http://onbitlabs.com:1338/")
   .constant('shopSettings',{
 
   payPalSandboxId :'Aar8HZzvc5NztVWodTBpOiOod9wWrBDrJUjyvRr4WsxcCD28xYig7oecfYsqxQUDu5QHptPpSALirxZD',
