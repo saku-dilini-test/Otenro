@@ -126,20 +126,25 @@ li{
 }
 
 .menu li a{
-	 font-family: 'ambleregular';
-	 color:#FFF;
-	 font-size:1.2em;
-	 padding:22px 25px;
-	 display: block;
-	 text-transform:uppercase;
-	 text-align:center;
-	 -webkit-transition: all 0.5s ease-in-out;
+	font-family: 'ambleregular';
+	color:#FFF;
+	font-size:1.2em;
+	padding:22px 25px;
+	display: block;
+	text-transform:uppercase;
+	text-align:center;
+	-webkit-transition: all 0.5s ease-in-out;
 	-moz-transition: all 0.5s ease-in-out;
 	-o-transition: all 0.5s ease-in-out;
-	transition: all 0.5s ease-in-out;	
+	transition: all 0.5s ease-in-out;
 }
 
-.menu li a:hover,.menu li.active a{
+.menu li a:hover{
+	text-decoration: none;
+}
+
+.menu li a:hover,
+.menu li.active a{
 	background:#1D1810;	
 	color:#BEAC7C;
 }
