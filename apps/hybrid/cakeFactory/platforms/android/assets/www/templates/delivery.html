@@ -1,0 +1,50 @@
+<ion-view view-title="The English Cake Company">
+	<ion-content class="padding">
+		<h1>Delivery</h1>
+		<form class="contact-form" name="contactForm" novalidate>
+			<div class="list">
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label" >Name</span>
+			    <input type="text" name="customerName" ng-model="delivery.name" required>
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Telephone</span>
+                <br>
+			      <span> +94 </span>
+            <input type="number" ng-minlength="1" ng-maxlength="9" name="customerNumber" ng-model="delivery.contactNo" required>
+			  </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Delivery Location
+          </div>
+          <select required ng-model="delivery.location" ng-change="addDeliveryFee(delivery.location.deliveryCharge)"
+                  ng-options="location as
+                  location.locationName +' Rs '+location.deliveryCharge
+                  for location in deliveryLocations">
+            <option value="">-- Select Location --</option>
+          </select>
+			  </label>
+        <label class="item item-input item-stacked-label" ng-show="isVisibleAddress">
+          <span class="input-label" >Address</span>
+          <input type="text" name="deliveryAddress" ng-model="delivery.address" required>
+        </label>
+			</div>
+			<div>
+        <label>
+            Total Amount
+        </label>
+        <span>{{delivery.usdAmount| currency}}</span>
+      </div>
+      <div ng-show="isVisibleAddress">
+        <label>
+          Total Amount with Delivery Fee
+        </label>
+        <span>{{delivery.usdAmountWithDeliveryFee | currency}}</span>
+      </div>
+			<div class="text-align-right">
+	    	 	<a ui-sref="tab.cart" class="button button-buy">Back</a>
+	    	 	<a href="" class="button button-buy dark" ng-disabled="contactForm.$invalid" ng-click="payNow()">Pay</a>
+      </div>
+		</form>
+	</ion-content>
+</ion-view>

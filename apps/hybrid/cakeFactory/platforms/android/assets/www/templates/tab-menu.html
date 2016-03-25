@@ -1,0 +1,23 @@
+<ion-view view-title="The English Cake Company">
+  <ion-content class="padding">
+	<h1>Welcome</h1>
+	<p class="text-align-justify font-size-14">
+		There is nothing like The English Cake Company anywhere with its wide range of cakes,
+		puddings and savouries, all home-made with only natural ingredients using the best ingredients available.
+ 		We only make the things we like, just the way we like to eat them... that’s why everyone loves them.
+	</p>
+
+	<div class="list card category" ng-repeat="category in categories">
+	  <div class="item item-header">
+		<h2>{{category.name}}</h2>
+	  </div>
+	  <div class="item item-image">
+		<img ng-src="{{SERVER_URL}}{{category.logoUrl}}">
+	  </div>
+	  <a class="item item-icon-right positive" href="#/tab/menu/{{category.categoryCode}}">
+		<i class="icon ion-ios-arrow-right"></i>
+		View Products
+	  </a>
+	</div>
+  </ion-content>
+</ion-view>
