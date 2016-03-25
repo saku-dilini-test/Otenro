@@ -97,3 +97,11 @@ tbody{
 /*=================================================
 ||				Release 1 : Bug Fixing
 ==================================================*/
+.map-container{
+	width:100%;
+	height:350px;
+}
+
+.contact-button-wrapper{
+	width: 96%;
+}

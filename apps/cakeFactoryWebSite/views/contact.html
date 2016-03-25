@@ -1,117 +1,117 @@
 <div class="other-page-header contact-pg"></div>
 
 <div ng-include=" 'views/navigation.html' "></div>
-        <!-- <div ng-include=" 'contact/contactnew.html' "></div> -->
-        <div class="main" style="background-color: #ffffff;" >
-		<div class="wrap">
-			<div class="contact_desc">
-				<div class="contact-form">
-					<h2>Contact Us</h2>
-					<p>
-						<span>
-							Your comments and feedback are highly appreciated as these enable us to maintain our high standards by 
-							letting us know what is working well and what may need to be improved. <br/><br/>
-							Please take a moment to let us know what you think about our products / service / anything else.
-						</span>
+
+<div class="main white-bg">
+	<div class="wrap">
+		<div class="contact_desc">
+			<div class="contact-form">
+				<h2>Contact Us</h2>
+				<p>
+					<span>
+						Your comments and feedback are highly appreciated as these enable us to maintain our high standards by
+						letting us know what is working well and what may need to be improved. <br/><br/>
+						Please take a moment to let us know what you think about our products / service / anything else.
+					</span>
+				</p>
+				<br/>
+				<form method="post"  action="" class="left_form" name="contact" >
+					<div>
+						<span><label>Name</label></span>
+						<span><input name="userName" type="text" class="textbox" ng-model="contactForm.name"></span>
+					</div>
+					<div ng-class="{'has-error':contact.userEmail.$invalid && contact.userEmail.$dirty}">
+					<span><label>Email</label></span>
+					<span><input name="userEmail" type="text" class="textbox" ng-model="contactForm.email" required ></span>
+					<span class="help-block has-error" ng-if="contact.userEmail.$dirty">
+					<span ng-show="contact.userEmail.$error.required">Email address is required.</span>
+					<span ng-show="contact.userEmail.$error.email">Not a valid email address.</span>
+					</span>
+					</div>
+					<div>
+						<span><label>Phone</label></span>
+						<span><input name="userPhone" type="text" class="textbox" ng-model="contactForm.phone"></span>
+					</div>
+				</form>
+				<form class="right_form">
+					<div>
+						<span><label>Subject</label></span>
+						<span><textarea name="userMsg" rows="35" ng-model="contactForm.msg"> </textarea></span>
+					</div>
+					<div class="contact-button-wrapper">
+						<span><input ng-click='submitContactForm(contactForm)' type="submit" value="Submit"  href="#" class="myButton" /></span>
+					</div>
+				</form>
+				<div class="clear"></div>
+			</div>
+			<div class="content_bottom">
+				<div class="company_address">
+					<h2>Get in Touch With Us</h2>
+					<p>2 Sulaiman Terrace,</p>
+					<p>Jawatta Road,</p>
+					<p>Colombo 5.</p>
+					<div class="seperator"></div>
+					<p>Mon-Thu: 8.30am till 9pm</p>
+					<p>Fri-Sun: 8.30am till 10pm</p>
+					<div class="seperator"></div>
+					<p>The Cakery : 0112501344</p>
+					<p>HOTLINE: 077 297 4726</p>
+					<div class="seperator"></div>
+					<p>Email:
+						<span><a href="#">orders@tecclk.com</a></span>
 					</p>
-					<br/>
-					<form method="post"  action="" class="left_form" name="contact" >
-						<div>
-							<span><label>Name</label></span>
-							<span><input name="userName" type="text" class="textbox" ng-model="contactForm.name"></span>
-						</div>
-						<div ng-class="{'has-error':contact.userEmail.$invalid && contact.userEmail.$dirty}">
-						<span><label>Email</label></span>
-						<span><input name="userEmail" type="text" class="textbox" ng-model="contactForm.email" required ></span>
-						<span class="help-block has-error" ng-if="contact.userEmail.$dirty">
-				        <span ng-show="contact.userEmail.$error.required">Email address is required.</span>
-				        <span ng-show="contact.userEmail.$error.email">Not a valid email address.</span>
-				        </span>
-						</div>
-						<div>
-							<span><label>Phone</label></span>
-							<span><input name="userPhone" type="text" class="textbox" ng-model="contactForm.phone"></span>
-						</div>
-					</form>
-					<form class="right_form">
-						<div>					    	
-							<span><label>Subject</label></span>
-							<span><textarea name="userMsg" rows="35" ng-model="contactForm.msg"> </textarea></span>
-						</div>
-						<div>
-							<span><input  ng-click='submitContactForm(contactForm)' type="submit" value="Submit"  href="#"class="myButton" ></span>
-						</div>
-					</form>
-					<div class="clear"></div>
+					<p>Follow on:
+						<span><a href="https://www.facebook.com/TheEnglishCakeCompany" target="_blank">Facebook</a></span>,
+						<span><a href="https://twitter.com/tecclk" target="_blank">Twitter</a></span>
+					</p>
+
+					<!--
+					<p class="fbicon"></p>Like us
+					<a href="#"><img class="fbicon"  alt="Facebook"></a>
+					Like us
+
+					<a href="#"><img src="../styles/images/social_icon/btn_facebook.png" alt="Twitter"></a>
+					Follow us
+					-->
+
 				</div>
-				<div class="content_bottom">
-					<div class="company_address">
-						<h2>Get in Touch With Us</h2>
-						<p>2 Sulaiman Terrace,</p>
-						<p>Jawatta Road,</p>
-						<p>Colombo 5.</p>
-						<div class="seperator"></div>
-						<p>Mon-Thu: 8.30am till 9pm</p>
-						<p>Fri-Sun: 8.30am till 10pm</p>
-						<div class="seperator"></div>
-						<p>The Cakery : 0112501344</p>
-						<p>HOTLINE: 077 297 4726</p>
-						<div class="seperator"></div>
-						<p>Email: <span><a href="#">orders@tecclk.com  </span></a></p>
-						<!-- <p>Follow on: 
-
-							<span><a href="https://www.facebook.com/TheEnglishCakeCompany" target="_blank">Facebook</a></span>, 
-							<span><a href="https://twitter.com/tecclk" target="_blank">Twitter</a></span>
-						</p>
-
- -->
-                        <p class="fbicon"></p>Like us
-                        <a href="#"><img class="fbicon"  alt="Facebook"></a>
-                        Like us
-                  
-                        <a href="#"><img src="../styles/images/social_icon/btn_facebook.png" alt="Twitter"></a>
-                        Follow us
-                  
-
+				<div class="contact_info">
+					<h2>Find Us Here</h2>
+					<div class="tcmap">
+						<div id="googleMap" class="map-container"></div>
 					</div>
-					<div class="contact_info">
-						<h2>Find Us Here</h2>
-						<div class="tcmap">
-							<!-- <div id="googleMap" style="width:100%; height:350px;"></div> -->
-							<div id="googleMap" style="width:100%; height:350px;"></div>
-						</div>
-					</div>
-					<div class="clear"></div>
-				</div>	
-			</div>  
-		</div>        	    
-	</div>        
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+</div>
 
-	<!-- Google Map -->
-			<script>
-			var myCenter=new google.maps.LatLng(6.8929988,79.8661994);
-			var marker;
+<!-- Google Map -->
+<script>
+	var myCenter=new google.maps.LatLng(6.8929988,79.8661994);
+	var marker;
 
-			function initialize()
-			{
-			var mapProp = {
-			  center:myCenter,
-			  zoom:16,
-			  mapTypeId:google.maps.MapTypeId.ROADMAP
-			  };
+	function initialize()
+	{
+	var mapProp = {
+	  center:myCenter,
+	  zoom:16,
+	  mapTypeId:google.maps.MapTypeId.ROADMAP
+	  };
 
-			var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+	var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
-			var marker=new google.maps.Marker({
-			  position:myCenter,
-			  animation:google.maps.Animation.BOUNCE
-			  });
+	var marker=new google.maps.Marker({
+	  position:myCenter,
+	  animation:google.maps.Animation.BOUNCE
+	  });
 
-			marker.setMap(map);
-			}
+	marker.setMap(map);
+	}
 
-			google.maps.event.addDomListener(window, 'load', initialize);
-			</script>
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 <!-- Google map ends  -->
 
     
