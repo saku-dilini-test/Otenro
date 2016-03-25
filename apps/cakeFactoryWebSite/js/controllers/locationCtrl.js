@@ -5,7 +5,7 @@
 angular.module('animateApp')
 	.controller('locationCtrl', function($scope, $http,SERVER_URL,DataService) {
 		$scope.deliveryOption = "pickUp"
-		$scope.isSubmitButtonDisableValue = 'true';		
+		$scope.isSubmitButtonDisableValue = 'true';
 		$scope.cart = DataService.cart;
 
 		$http.get(SERVER_URL+"locations/getBranchLocations")
@@ -29,7 +29,7 @@ angular.module('animateApp')
 			$scope.isSubmitButtonDisableValue = $scope.cart.isSubmitButtonDisable();			
 		}
 
-		$scope.saveLocationName = function(location){			
+		$scope.saveLocationName = function(location){
 			if(!location){
 				$scope.cart.saveLocationName('');
 				$scope.cart.saveDeliveryCharges(0);
