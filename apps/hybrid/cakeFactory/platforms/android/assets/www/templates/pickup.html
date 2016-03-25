@@ -1,0 +1,39 @@
+<ion-view view-title="The English Cake Company">
+	<ion-content class="padding">
+		<h1>Pick Up</h1>
+		<form class="contact-form" name="customerPickupForm" novalidate>
+			<div class="list">
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Name</span>
+			    <input type="text" name="customerName" ng-model="pickup.name" required>
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Telephone</span>
+          <br>
+          <span> +94 </span>
+          <input type="number" ng-minlength="1" ng-maxlength="9" name="customerNumber" ng-model="pickup.contactNo" required>
+			  </label>
+			  <label class="item item-input item-select">
+			    <div class="input-label">
+			      Branches
+			    </div>
+			    <select required ng-model="pickup.branch">
+            <option ng-repeat="branch in branchLocations" value="{{branch.locationName}}">
+              {{branch.locationName}}
+            </option>
+			    </select>
+			  </label>
+        <div>
+          <label>
+            Total Amount
+          </label>
+          <span>{{pickup.usdAmount| currency}}</span>
+        </div>
+			</div>
+			<div class="text-align-right">
+	    	 	<a ui-sref="tab.cart" class="button button-buy">Back</a>
+	    	 	<a href="" class="button button-buy dark" ng-disabled="customerPickupForm.$invalid" ng-click="payNow()">Pay</a>
+	    	</div>
+		</form>
+	</ion-content>
+</ion-view>
