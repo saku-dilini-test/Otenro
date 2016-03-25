@@ -56,7 +56,7 @@
                     closeButton: true
                 });
                 return;
-            }if(product.childId == null || product.name ==null || product.price){
+            }if(product.childId == null || product.name ==null || product.price==null){
                 $scope.selectedTab =1;
                 toastr.error('Fill all the fields', 'Warning', {
                     closeButton: true
