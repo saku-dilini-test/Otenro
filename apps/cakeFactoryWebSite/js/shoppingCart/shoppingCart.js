@@ -127,7 +127,6 @@ shoppingCart.prototype.saveDeliveryCharges = function (charges) {
 // get delivery charges from local storage
 shoppingCart.prototype.getDeliveryCharges = function () {    
     if (localStorage != null && JSON != null) {
-        console.log('xxxxxxx');
         var deliveryCharges = localStorage['deliveryCharges'];
         if(deliveryCharges){
             return localStorage['deliveryCharges'];
@@ -138,10 +137,11 @@ shoppingCart.prototype.getDeliveryCharges = function () {
 }
 
 // get the total price with delivery fee
-shoppingCart.prototype.getTotalPriceWithDeliveryCharges = function (sku) {
-    var subtotal = this.getTotalPrice;
-    var deliveryFee = this.getDeliveryCharges;
-    return subtotal+deliveryFee;
+shoppingCart.prototype.getTotalPriceWithDeliveryCharges = function () {
+    var subtotal = parseInt(this.getTotalPrice());
+    var deliveryFee = parseInt(this.getDeliveryCharges());
+    var total = subtotal + deliveryFee;
+    return total;
 }
 
 
@@ -197,7 +197,7 @@ shoppingCart.prototype.isSubmitButtonDisable = function () {
     if (localStorage != null && JSON != null) {
         var currentDeliveryOption = this.getCurretDeliveryOption();        
         if(currentDeliveryOption == 'pickUp'){
-            var currentBranch = this.getBranchName();            
+            var currentBranch = this.getBranchName();
             if(currentBranch == 'undefined' || currentBranch == ''){   
                 return true;
             }else{                
