@@ -9,5 +9,11 @@ angular.module('animateApp')
             .then(function (response) {            
                 $scope.allCategories = response.data.result;            
             });
+    })
+    .controller('navigationController', function($scope, $location) {
+        //Set selected state of navigation
+        $scope.isActive = function(route) {
+            return route === $location.path();
+        }
     });
 })();
