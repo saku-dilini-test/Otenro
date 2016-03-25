@@ -13,7 +13,7 @@ angular.module('animateApp')
 		for(var i=0; i < data.length; i++){
 			shoppingCart[i] = data[i];
 		}
-		// data['oneDoller'] = $scope.cart.getOneDoller();	
+
 		shoppingCart['cartLength']	 = data.length;
 		shoppingCart['pickUpBranch'] = $scope.cart.getBranchName();
 		shoppingCart['deliveryCharge'] = $scope.cart.getDeliveryCharges();
