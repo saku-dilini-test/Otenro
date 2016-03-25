@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span8">
+
+        <!-- Delivery Option  -->
+         <div class="text-info">
+            <input type="radio" ng-change="selectDeliveryOption('pickUp')" ng-model="deliveryOption" value="pickUp"> Pick up
+            <input type="radio" ng-change="selectDeliveryOption('delivery')" ng-model="deliveryOption" value="delivery"> Delivery                                       
+          
+            <!-- PickUp -->
+            <div ng-if="deliveryOption == 'pickUp'">
+                <ul class="delivery-form-controls">
+                    <li>
+                        <label>Pick Up Branch</label>
+                        <select ng-model="selectedBranch" 
+                        ng-options="branch.locationName for branch in branchLocations"
+                        ng-change="saveBranchName(selectedBranch.locationName)"
+                        >
+                            <option value="">-- Select Branch --</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <!-- Delivery -->
+            <div ng-if="deliveryOption == 'delivery'">
+                <ul class="delivery-form-controls">
+                    <li>
+                        <label>Delivery Location</label>
+                        <select ng-model="selectedLocation" 
+                        ng-options="location.locationName+'  Rs: '+location.deliveryCharge+'.00' for location in deliveryLocations"
+                        ng-change="saveLocationName(selectedLocation)"
+                        >
+                            <option value="">-- Select Location --</option>
+                        </select>             
+                    </li>
+                    <li class="delivery-address-section">
+                        <label>Address</label>
+                        <textarea ng-model="deliveryAddress" ng-change="saveDeliveryAddress(deliveryAddress)" rows="3"></textarea>
+                    </li>
+                </ul>
+            </div>
+            <!-- Submit Delivery Option-->
+            <div>
+               <!--  selected Delivery Option : {{deliveryOption}}<br>
+                selected Branch Name : {{selectedBranch}}<br>
+                selected Location Name : {{selectedLocation}}<br>
+                delivery address : {{deliveryAddress}}<br>
+                submit button : {{isSubmitButtonDisableValue}} -->
+                <!-- delivery Charges : {{deliveryCharges}} -->
+                <button
+                    class="btn btn-block btn-primary"
+                    ng-click="cart.checkout('PayPal')"
+                    ng-model="isSubmitButtonDisableValue"
+                    ng-disabled="isSubmitButtonDisableValue">
+                    <i class="icon-ok icon-white" /> Submit
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

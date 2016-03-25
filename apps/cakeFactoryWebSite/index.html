@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="animateApp">
+<head lang="en">
+
+	<title>The English Cake Company</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Load dependencies CSS -->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/dist/css/bootstrap.css" >
+
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css"  media="all" />
+	<link href="css/slider.css" rel="stylesheet" type="text/css"  media="all" />
+    <link href="css/customstyle.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/about.css" rel="stylesheet" type="text/css">   
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">		
+
+</head>
+
+<div ng-include=" 'views/social.html' "></div>
+
+
+<body >
+    <!-- inject our views using ng-view -->
+	<!-- each angular controller applies a different class here -->
+	<div  ng-view></div>
+   
+	<!-- Load dependencies js -->	
+	<script type="text/javascript" src="libs/angular/angular.js"></script>
+	<script type="text/javascript" src="libs/angular-route/angular-route.js"></script>		
+	<script type="text/javascript" src="libs/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="libs/bootstrap/dist/js/bootstrap.js"></script>	
+	<!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script> -->
+
+	<!-- Custom js  -->
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/appRoutes.js"></script>
+	
+	<!-- Shopping Cart js -->
+	<script type="text/javascript" src="js/shoppingCart/product.js" ></script>
+    <script type="text/javascript" src="js/shoppingCart/store.js" ></script>
+    <script type="text/javascript" src="js/shoppingCart/shoppingCart.js"></script>
+
+    <!-- Custom Controller -->
+	<script type="text/javascript" src="js/controllers/homeCtrl.js"></script>
+	<script type="text/javascript" src="js/controllers/productCtrl.js"></script>
+	<script type="text/javascript" src="js/controllers/detailCtrl.js"></script>
+	<script type="text/javascript" src="js/controllers/contactCtrl.js"></script>
+	<script type="text/javascript" src="js/controllers/aboutCtrl.js"></script>
+	<script type="text/javascript" src="js/controllers/locationCtrl.js"></script>
+		
+</body>
+<div ng-include=" 'views/footer.html' "></div>
+</html>

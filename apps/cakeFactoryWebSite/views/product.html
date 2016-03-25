@@ -1,0 +1,29 @@
+<div class="other-page-header home-pg"></div>
+<div ng-include=" 'views/navigation.html' "></div>
+<div style="background-color: #ffffff;">
+	
+	<div class="main">
+		<div class="wrap">
+			<div class="menu_list">
+				<div class="section group">  
+					<div style="width:100%; font-weight:600; height:40px; color:#D4C4A1; font-size:36px; padding-bottom:20px;">{{catdt}}</div>
+					<div class="group">					
+						<div style="padding-bottom:10px; margin:10px 70px 40px 0; border-bottom:#BDAC7C thin dotted; float:left" ng-repeat="oneProduct in allProductsReqCategory">
+							<a href="#detail/{{oneProduct.id}}"> 
+								<img class="catdiv" ng-src="{{SERVER_URL}}{{oneProduct.logoUrl}}" />
+							</a>
+							
+							<li>
+								<a href="#detail/{{oneProduct.id}}">
+									<span class="item_name">{{oneProduct.name}}</span>
+									<span class="price">Rs {{oneProduct.price}}</span>
+								</a>
+							</li>
+						</div>		
+					</div>
+				</div>
+			</div>
+		</div>		    
+	</div>
+
+</div>
