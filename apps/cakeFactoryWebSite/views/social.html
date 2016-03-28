@@ -1,7 +1,6 @@
-		<div class="sign-in-container">
-			<div id="fbLogin" class="fb-link">Sign in with facebook</div>
-			<div id="googleLogin" class="g-signin2 google-link" data-onsuccess="onSignIn" data-theme="dark"></div>
-			<div class="logOut-link" id="logOutFB">Log Out</div>
-			<div class="logOut-link" id="logOutGoogle" onclick="signOut();">Log Out</div>
-
-		</div>
+<div class="sign-in-container" ng-Controller="socialLoginCtrl">
+	<div id="fbLogin" ng-click="authenticate('facebook')" class="fb-link">Sign in with facebook</div>
+	<div id="googleLogin" class="g-signin2 google-link" data-onsuccess="onSignIn" data-theme="dark"></div>
+	<div class="logOut-link" id="logOutFB">Log Out</div>
+	<div class="logOut-link" id="logOutGoogle" onclick="signOut();">Log Out </div>
+</div>
