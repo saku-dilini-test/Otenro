@@ -33,7 +33,14 @@ angular.module('animateApp')
             .then(function (response) {
                 $scope.oneDoller = response.data.result;  
                 $scope.cart.saveOneDoller($scope.oneDoller);                
-        });       
+        });
+
+        $scope.saveItems = function(item){
+            if(item.quantity == 0){
+                $scope.cart.addItem(item.sku, item.name, item.price, -1000);
+            }
+            $scope.cart.saveItems();
+        };
        
     });
 })();

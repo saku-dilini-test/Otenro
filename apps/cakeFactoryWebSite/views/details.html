@@ -89,16 +89,6 @@
                                     class="form-control qty-input" type="number"
                                     ng-model="item.quantity"
                                     ng-change="cart.saveItems()" />
-                                <!--
-                                <button
-                                    class="btn btn-success" type="button"
-                                    ng-disabled="item.quantity >= 1000"
-                                    ng-click="cart.addItem(item.sku, item.name, item.price, +1)">+</button>
-                                <button
-                                    class="btn btn-inverse" type="button"
-                                    ng-disabled="item.quantity <= 1"
-                                    ng-click="cart.addItem(item.sku, item.name, item.price, -1)">-</button>
-                                -->
                             </div>
                         </td>
                         <td class="tdRight">Rs {{item.price * item.quantity}}</td>
@@ -109,11 +99,18 @@
                         <td></td>
                         <td><b>Total</b></td>
                         <td class="tdCenter"><b>{{cart.getTotalCount()}}</b></td>
-                        <td class="tdRight"><b>RS {{cart.getTotalPrice()}}</b></td>
+                        <td class="tdRight"><b>Rs {{cart.getTotalPrice()}}</b></td>
                     </tr>
                 </table>
 
                 <div class="clearfix">
+                    <div class="pull-left">
+                        <button
+                                class="btn "
+                                onclick="window.location.href='#'">
+                            <i class="icon-chevron-left" /> Back to Store
+                        </button>
+                    </div>
                     <button class="btn btn kkcc-btn-success pull-right" onclick="window.location.href='#delivery'" ng-disabled="cart.getTotalCount() < 1">
                         Checkout
                     </button>
@@ -121,17 +118,16 @@
 
             </div>
 
-            <div>
-                {{product.categoryCode}}
-            </div>
         </div>
     </div>
     <div>
         <div class="main">
             <div class="wrap">
-                <div class="menu_list">
+                <div class="services_desc">
+                    <h2>{{product.categoryCode}}</h2>
+                </div>
+                <div class="menu_list reset-padding">
                     <div class="section group">
-                        <div class="category-name">{{catdt}}</div>
                         <div class="group">
                             <div class="product-tile" ng-repeat="oneProduct in allProductsReqCategory">
                                 <a href="#detail/{{oneProduct.id}}">
