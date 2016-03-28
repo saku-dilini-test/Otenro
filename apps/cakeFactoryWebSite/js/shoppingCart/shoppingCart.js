@@ -359,11 +359,11 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         data["amount_" + ctr] = (item.price / this.oneDoller).toFixed(2);
     }       
 
-    data["notify_url"] = "http://192.168.8.155:8080/#/paymentInfo";
+    data["notify_url"] = "http://verticalmedia.lk/ECC/cakeFactoryWebSite/#/paymentInfo.html";
     console.log(data);
     // build form
     var form = $('<form/></form>');
-    form.attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");
+    form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
     form.attr("method", "POST");
     form.attr("style", "display:none;");
     this.addFormFields(form, data);
