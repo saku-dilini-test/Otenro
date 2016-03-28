@@ -99,7 +99,7 @@
                         <td></td>
                         <td><b>Total</b></td>
                         <td class="tdCenter"><b>{{cart.getTotalCount()}}</b></td>
-                        <td class="tdRight"><b>RS {{cart.getTotalPrice()}}</b></td>
+                        <td class="tdRight"><b>Rs {{cart.getTotalPrice()}}</b></td>
                     </tr>
                 </table>
 
@@ -126,9 +126,8 @@
                 <div class="services_desc">
                     <h2>{{product.categoryCode}}</h2>
                 </div>
-                <div class="menu_list">
+                <div class="menu_list reset-padding">
                     <div class="section group">
-                        <div class="category-name">{{catdt}}</div>
                         <div class="group">
                             <div class="product-tile" ng-repeat="oneProduct in allProductsReqCategory">
                                 <a href="#detail/{{oneProduct.id}}">
