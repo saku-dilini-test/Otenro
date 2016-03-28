@@ -58,7 +58,8 @@ module.exports.routes = {
   'GET /locations/getBranchLocations': 'LocationController.getBranchLocations',
   'GET /locations/getDeliveryLocations': 'LocationController.getDeliveryLocations',
   'POST /user/create' : 'UserController.create',
-  'POST /payment/saveShoppingCart' : 'PaymentController.saveShoppingCart'
+  'POST /payment/saveShoppingCart' : 'PaymentController.saveShoppingCart',
+  'POST /payment/saveShoppingCartWeb' : 'PaymentController.saveShoppingCartWeb'
 
 
 };
