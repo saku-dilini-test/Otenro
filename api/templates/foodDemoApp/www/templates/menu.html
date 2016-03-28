@@ -9,8 +9,8 @@
         </button>
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
-        <button class="button button-icon ion-ios-cart-outline">
-        </button>
+        <a ui-sref="app.cart" class="button button-icon ion-ios-cart-outline">
+        </a>
       </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent" align="left"></ion-nav-view>
@@ -18,21 +18,27 @@
 
   <ion-side-menu side="left">
     <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
+      <h1 class="title">Hello, User</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close href="#/app/login">
+        <ion-item menu-close ui-sref="app.about">
+          About
+        </ion-item>
+        <ion-item menu-close ui-sref="app.foods">
+          Foods
+        </ion-item>
+        <ion-item menu-close ui-sref="app.cart">
+          Cart
+        </ion-item>
+        <ion-item menu-close ui-sref="app.order">
+          Order
+        </ion-item>
+        <ion-item menu-close ui-sref="app.login">
           Login
         </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Search
-        </ion-item>
-        <ion-item menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item menu-close href="#/app/playlists">
-          Playlists
+        <ion-item menu-close ui-sref="app.register">
+          Register
         </ion-item>
       </ion-list>
     </ion-content>
