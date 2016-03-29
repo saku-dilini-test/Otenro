@@ -23,129 +23,133 @@
 module.exports.routes = {
 
 
-      // Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, etc. depending on your
-      // default view engine) your home page.
-      //
-      // (Alternatively, remove this and add an `index.html` file in your `assets` directory)
-      '/': {view: 'homepage'},
+    // Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, etc. depending on your
+    // default view engine) your home page.
+    //
+    // (Alternatively, remove this and add an `index.html` file in your `assets` directory)
+    '/': {view: 'homepage'},
 
 
-      // Custom routes here...
+    // Custom routes here...
 
 
-      // If a request to a URL doesn't match any of the custom routes above,
-      // it is matched against Sails route blueprints.  See `config/blueprints.js`
-      // for configuration options and examples.
+    // If a request to a URL doesn't match any of the custom routes above,
+    // it is matched against Sails route blueprints.  See `config/blueprints.js`
+    // for configuration options and examples.
 
-      /***
-       *
-       * User Authentication
-       *
-       * */
+    /***
+     *
+     * User Authentication
+     *
+     * */
 
-      'POST /auth/editUserProfile': 'UserController.editUserProfile',
-      'POST /auth/google': 'AuthController.googleAuth',
-      'POST /auth/facebook': 'AuthController.facebookAuth',
-
-
-      /***
-       * Application Data
-       * */
-
-      'POST /app/dashboard/allApps': 'DashboardController.allApps',
-      'POST /app/designApps': 'ApplicationController.designApps',
-      'POST /app/viewTemplate': 'ApplicationController.viewTemplate',
-
-      /***
-       * Edit Data
-       *
-       * */
-
-      'POST /edit/addStyles': 'edit/style/StyleController.addStyles',
-      'POST /edit/getAppSettings': 'edit/style/StyleController.getAppSettings',
-      'POST /edit/addStyleImage/addHeaderImage': 'edit/style/StyleController.addHeaderImage',
-      'POST /edit/addStyleImage/addBackgroundImage': 'edit/style/StyleController.addBackgroundImage',
-      'POST /edit/addStyleColor': 'edit/style/StyleController.addStyleColor',
-      'POST /edit/addLogoImage': 'edit/style/StyleController.addLogoImage',
-      // 'POST /edit/addBackgroundColor' : 'style/StyleController.addBackgroundColor',
-      'POST /edit/addStyleFontFamily': 'edit/style/StyleController.addStyleFontFamily',
-      'POST /edit/addStyleFontSize': 'edit/style/StyleController.addStyleFontSize',
-      'POST /edit/addStyleFontWeight': 'edit/style/StyleController.addStyleFontWeight',
-      'POST /edit/addStyleButtonBorderWidth': 'edit/style/StyleController.addStyleButtonBorderWidth',
-      'POST /edit/addStyleButtonBorderRadius': 'edit/style/StyleController.addStyleButtonBorderRadius',
-      'POST /edit/addFonts': 'edit/style/StyleController.addFonts',
-      'GET /edit/viewImages': 'EditController.viewImages',
-      'POST /edit/buildSource' : 'EditController.buildSource',
-
-      //'POST /edit/updateCategory' : '',
-      //'POST /edit/checkCategory': '',
-      //'POST /edit/deleteCategory': '',
-      //'POST /edit/deleteProduct': '',
-      'POST /edit/addSecondNavigation': 'edit/commerce/SecondNavigationController.addSecondNavigation',
-      'POST /edit/checkSecondNavi': 'edit/commerce/SecondNavigationController.checkNavi',
-      'POST /edit/deleteSecondNavi' : 'edit/commerce/SecondNavigationController.deleteSecondNavi',
-      'POST /edit/updateSecondNaviImage' : 'edit/commerce/SecondNavigationController.updateSecondNaviImage',
-      //'POST /edit/updateProductImage': '',
-      //'POST /edit/updateCategoryImage': '',
-      //'POST /edit/addProducts': '
-      //
-      'POST /edit/addContactUs ': 'edit/setting/ContactUsController.addContactUs',
-      'POST /edit/addBasicInfo' : 'edit/setting/ContactUsController.addBasicInfo',
-      'POST /edit/addWebInfo' : 'edit/setting/ContactUsController.addWebInfo',
-      'POST /edit/addGoogleMapInfo' : 'edit/setting/ContactUsController.addGoogleMapInfo',
-      'POST /edit/addOpenHoursInfo' : 'edit/setting/ContactUsController.addOpenHoursInfo',
-
-      'GET /edit/getMainNavigation': 'edit/commerce/MainNavigationController.getMainNavigation',
-      'GET /edit/getSecondNavigation': 'edit/commerce/SecondNavigationController.getSecondNavigation',
-      'GET /edit/getThirdNavigation': 'edit/commerce/ThirdNavigationController.getThirdNavigation',
-      'GET /edit/getOrders': 'edit/commerce/OrderController.getOrders',
+    'POST /auth/editUserProfile': 'UserController.editUserProfile',
+    'POST /auth/google': 'AuthController.googleAuth',
+    'POST /auth/facebook': 'AuthController.facebookAuth',
 
 
-      'POST /edit/saveMainMenu' :'edit/commerce/MainNavigationController.saveMainMenu',
-      //'POST /templates/specificSecondNavi' : 'edit/commerce/MainNavigationController',
-      //'POST /templates/specificThirdNavi': 'edit/commerce/MainNavigationController',
-      'POST /edit/addNewMenu' : 'edit/commerce/MainNavigationController.addNewNavi',
-      'POST /edit/addChildMenu' : 'edit/commerce/SecondNavigationController.addNewNavi',
-      'POST /edit/updateSecondNavi':'edit/commerce/SecondNavigationController.updateSecondNavi',
-      'POST /edit/addSubChild' : 'edit/commerce/ThirdNavigationController.addNewNavi',
-      'POST /edit/addThirdNavigation':'edit/commerce/ThirdNavigationController.addThirdNavi',
-      'POST /edit/updateThirdNaviImage':'edit/commerce/ThirdNavigationController.updateThirdNaviImage',
-      'POST /edit/updateThirdNavi' : 'edit/commerce/ThirdNavigationController.updateThirdNavi',
-      'POST /edit/deleteItem' : 'edit/commerce/MainNavigationController.deleteItem',
-      'POST /edit/setCurrency': 'edit/setting/CurrencyController.setCurrency',
-      'GET /edit/getCurrency': 'edit/setting/CurrencyController.getCurrency',
-      'GET /edit/getAllCurrency': 'edit/setting/CurrencyController.getAllCurrency',
+    /***
+     * Application Data
+     * */
+
+    'POST /app/dashboard/allApps': 'DashboardController.allApps',
+    'POST /app/designApps': 'ApplicationController.designApps',
+    'POST /app/viewTemplate': 'ApplicationController.viewTemplate',
+
+    /***
+     * Edit Data
+     *
+     * */
+
+    'POST /edit/addStyles': 'edit/style/StyleController.addStyles',
+    'POST /edit/getAppSettings': 'edit/style/StyleController.getAppSettings',
+    'POST /edit/addStyleImage/addHeaderImage': 'edit/style/StyleController.addHeaderImage',
+    'POST /edit/addStyleImage/addBackgroundImage': 'edit/style/StyleController.addBackgroundImage',
+    'POST /edit/addStyleColor': 'edit/style/StyleController.addStyleColor',
+    'POST /edit/addLogoImage': 'edit/style/StyleController.addLogoImage',
+    // 'POST /edit/addBackgroundColor' : 'style/StyleController.addBackgroundColor',
+    'POST /edit/addStyleFontFamily': 'edit/style/StyleController.addStyleFontFamily',
+    'POST /edit/addStyleFontSize': 'edit/style/StyleController.addStyleFontSize',
+    'POST /edit/addStyleFontWeight': 'edit/style/StyleController.addStyleFontWeight',
+    'POST /edit/addStyleButtonBorderWidth': 'edit/style/StyleController.addStyleButtonBorderWidth',
+    'POST /edit/addStyleButtonBorderRadius': 'edit/style/StyleController.addStyleButtonBorderRadius',
+    'POST /edit/addFonts': 'edit/style/StyleController.addFonts',
+    'GET /edit/viewImages': 'EditController.viewImages',
+    'POST /edit/buildSource': 'EditController.buildSource',
+
+    //'POST /edit/updateCategory' : '',
+    //'POST /edit/checkCategory': '',
+    //'POST /edit/deleteCategory': '',
+    //'POST /edit/deleteProduct': '',
+    'POST /edit/addSecondNavigation': 'edit/commerce/SecondNavigationController.addSecondNavigation',
+    'POST /edit/checkSecondNavi': 'edit/commerce/SecondNavigationController.checkNavi',
+    'POST /edit/deleteSecondNavi': 'edit/commerce/SecondNavigationController.deleteSecondNavi',
+    'POST /edit/updateSecondNaviImage': 'edit/commerce/SecondNavigationController.updateSecondNaviImage',
+    //'POST /edit/updateProductImage': '',
+    //'POST /edit/updateCategoryImage': '',
+    //'POST /edit/addProducts': '
+    //
+    'POST /edit/addContactUs ': 'edit/setting/ContactUsController.addContactUs',
+    'POST /edit/addBasicInfo': 'edit/setting/ContactUsController.addBasicInfo',
+    'POST /edit/addWebInfo': 'edit/setting/ContactUsController.addWebInfo',
+    'POST /edit/addGoogleMapInfo': 'edit/setting/ContactUsController.addGoogleMapInfo',
+    'POST /edit/addOpenHoursInfo': 'edit/setting/ContactUsController.addOpenHoursInfo',
+
+    'GET /edit/getMainNavigation': 'edit/commerce/MainNavigationController.getMainNavigation',
+    'GET /edit/getSecondNavigation': 'edit/commerce/SecondNavigationController.getSecondNavigation',
+    'GET /edit/getThirdNavigation': 'edit/commerce/ThirdNavigationController.getThirdNavigation',
+    'GET /edit/getOrders': 'edit/commerce/OrderController.getOrders',
 
 
-      'GET /edit/getContactUs' :'edit/setting/ContactUsController.getContactUs',
-      'POST /edit/setPublishDetails' :'edit/publish/publishDetailController.setPublishDetails',
+    'POST /edit/saveMainMenu': 'edit/commerce/MainNavigationController.saveMainMenu',
+    //'POST /templates/specificSecondNavi' : 'edit/commerce/MainNavigationController',
+    //'POST /templates/specificThirdNavi': 'edit/commerce/MainNavigationController',
+    'POST /edit/addNewMenu': 'edit/commerce/MainNavigationController.addNewNavi',
+    'POST /edit/addChildMenu': 'edit/commerce/SecondNavigationController.addNewNavi',
+    'POST /edit/updateSecondNavi': 'edit/commerce/SecondNavigationController.updateSecondNavi',
+    'POST /edit/addSubChild': 'edit/commerce/ThirdNavigationController.addNewNavi',
+    'POST /edit/addThirdNavigation': 'edit/commerce/ThirdNavigationController.addThirdNavi',
+    'POST /edit/updateThirdNaviImage': 'edit/commerce/ThirdNavigationController.updateThirdNaviImage',
+    'POST /edit/updateThirdNavi': 'edit/commerce/ThirdNavigationController.updateThirdNavi',
+    'POST /edit/deleteItem': 'edit/commerce/MainNavigationController.deleteItem',
+    'POST /edit/setCurrency': 'edit/setting/CurrencyController.setCurrency',
+    'GET /edit/getCurrency': 'edit/setting/CurrencyController.getCurrency',
+    'GET /edit/getAllCurrency': 'edit/setting/CurrencyController.getAllCurrency',
 
 
-      /**
-       *InventoryController
-       */
-      'GET /edit/getInventoryList': 'edit/commerce/InventoryController.getInventoryList',
-      'POST /edit/updateInventory': 'edit/commerce/InventoryController.updateInventory',
+    'GET /edit/getContactUs': 'edit/setting/ContactUsController.getContactUs',
+    'POST /edit/setPublishDetails': 'edit/publish/publishDetailController.setPublishDetails',
 
-      /***
-       * Template Data
-       ***/
 
-      'GET /templates/getContactUs' :'template/TemplateController.getContactUs',
-      'GET /templates/getSpecificChild':'template/TemplateController.getSpecificChild',
-      'GET /templates/getProductById' : 'template/TemplateController.getSubChildById',
-      'POST /templates/getMainMenu' :'template/TemplateController.getMainMenu',
-      'GET /templates/getCurrency' :'template/TemplateController.getCurrency',
-      'GET /templates/viewImages'  : 'template/TemplateController.viewImages',
-      'POST /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
+    /**
+     *InventoryController
+     */
+    'GET /edit/getInventoryList': 'edit/commerce/InventoryController.getInventoryList',
+    'POST /edit/updateInventory': 'edit/commerce/InventoryController.updateInventory',
 
-      /***
-       * MobileViewer Data
-       **/
+    /**
+     * ShippingController
+     */
+    'POST /edit/insertFlatRateData': 'edit/commerce/ShippingController.insertFlatRateData',
 
-      'GET /mobile/allApps' : 'mobileViewer/MobileController.allApps',
-      'GET /mobile/meServerUrl' : 'mobileViewer/MobileController.meServerUrl'
+    /***
+     * Template Data
+     ***/
 
+    'GET /templates/getContactUs': 'template/TemplateController.getContactUs',
+    'GET /templates/getSpecificChild': 'template/TemplateController.getSpecificChild',
+    'GET /templates/getProductById': 'template/TemplateController.getSubChildById',
+    'POST /templates/getMainMenu': 'template/TemplateController.getMainMenu',
+    'GET /templates/getCurrency': 'template/TemplateController.getCurrency',
+    'GET /templates/viewImages': 'template/TemplateController.viewImages',
+    'POST /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
+
+    /***
+     * MobileViewer Data
+     **/
+
+    'GET /mobile/allApps': 'mobileViewer/MobileController.allApps',
+    'GET /mobile/meServerUrl': 'mobileViewer/MobileController.meServerUrl'
 
 
 };

@@ -109,6 +109,23 @@
 //                });
 //        };
 
+        $scope.insertFlatRates = function (flatRates) {
+
+            flatRates.appId = $rootScope.appId;
+            console.log(flatRates);
+            commerceService.insertFlatRateData(flatRates)
+                .success(function (result) {
+                    toastr.success('Successfully Saved ', 'Saved', {
+                        closeButton: true
+                    });
+                }).error(function (error) {
+                toastr.error('Loading Error', 'Warning', {
+                    closeButton: true
+                });
+            })
+
+
+        };
 
         $scope.deleteCategory=function($index){
             var prams={

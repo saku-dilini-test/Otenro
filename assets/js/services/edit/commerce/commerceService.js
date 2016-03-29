@@ -227,10 +227,12 @@
 
             updateInventory : function(data){
                 return $http.post(SERVER_URL+ 'edit/updateInventory',data);
+            },
+
+            insertFlatRateData : function(data){
+                return $http.post(SERVER_URL+ 'edit/insertFlatRateData',data);
             }
-            //editStyles: function(fontData) {
-            //    return $http.post(SERVER_URL + 'api/edit/addStyles', fontData);
-            //}
+
         };
     }
 })();
