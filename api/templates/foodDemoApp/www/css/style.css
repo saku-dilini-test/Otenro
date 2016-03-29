@@ -1,0 +1,17 @@
+/* Empty. Add your own CSS if you like */
+
+.bar.bar-white{
+  background-color: #fff;
+  background-image: none;
+  border-color: #fff;
+  color: #444;
+}
+
+.button-toggle{
+  box-shadow: none;
+  color: #444;
+}
+
+.button-clear.button-clear {
+    color: #444;
+}
