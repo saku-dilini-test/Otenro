@@ -49,9 +49,9 @@ module.exports = {
             templateFilesPath:'templates/pizzaNew'
         },
         {
-            template_name : 'foodDeliver',
+            template_name : 'foodDemoApp',
             imageUrl : 'foodDeliver/foodDeliver.png',
-            templateFilesPath:'templates/foodDeliver'
+            templateFilesPath:'templates/foodDemoApp'
         }
     ]
 };
