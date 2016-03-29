@@ -12,6 +12,9 @@
 module.exports = function(grunt) {
 
 	grunt.config.set('uglify', {
+		options: {
+			mangle: false  // this is compulsory option for the minify angular code
+		},
 		dist: {
 			src: ['.tmp/public/concat/production.js'],
 			dest: '.tmp/public/min/production.min.js'
