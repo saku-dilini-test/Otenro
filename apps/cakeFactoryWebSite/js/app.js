@@ -1,51 +1,8 @@
-var animateApp = angular.module('animateApp', ['ngRoute']);
+var cakeApp = angular.module('animateApp', ['ngRoute','satellizer']);
 
-animateApp.constant('SERVER_URL', "http://localhost:1339/");
+//cakeApp.constant('SERVER_URL', "http://192.168.8.155:1337/");    // local development
+//cakeApp.constant('SERVER_URL', "http://192.168.8.155:1338/");  // local production
+cakeApp.constant('SERVER_URL', "http://onbitlabs.com:1338/");  // live production
 
-// create a data service that provides a store and a shopping cart that
-// will be shared by all views (instead of creating fresh ones for each view).
-animateApp.factory("DataService", function (SERVER_URL,$http) {
 
-    // create shopping cart
-    var myCart = new shoppingCart("AngularStore");
-
-    // enable PayPal checkout
-    // note: the second parameter identifies the merchant; in order to use the 
-    // shopping cart with PayPal, you have to create a merchant account with 
-    // PayPal. You can do that here:
-    // https://www.paypal.com/webapps/mpp/merchant
-    myCart.addCheckoutParameters("PayPal", "83N3LGMQY22WQ");
-
-    // enable Google Wallet checkout
-    // note: the second parameter identifies the merchant; in order to use the 
-    // shopping cart with Google Wallet, you have to create a merchant account with 
-    // Google. You can do that here:
-    // https://developers.google.com/commerce/wallet/digital/training/getting-started/merchant-setup
-    myCart.addCheckoutParameters("Google", "xxxxxxx",
-        {
-            ship_method_name_1: "UPS Next Day Air",
-            ship_method_price_1: "20.00",
-            ship_method_currency_1: "USD",
-            ship_method_name_2: "UPS Ground",
-            ship_method_price_2: "15.00",
-            ship_method_currency_2: "USD"
-        }
-    );
-
-    // enable Stripe checkout
-    // note: the second parameter identifies your publishable key; in order to use the 
-    // shopping cart with Stripe, you have to create a merchant account with 
-    // Stripe. You can do that here:
-    // https://manage.stripe.com/register
-    myCart.addCheckoutParameters("Stripe", "pk_test_xxxx",
-        {
-            chargeurl: "https://localhost:1234/processStripe.aspx"
-        }
-    );
-
-    // return data object with store and cart
-    return {
-        cart: myCart
-    };
-});
 
