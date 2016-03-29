@@ -50,7 +50,7 @@ module.exports = {
         },
         {
             template_name : 'foodDeliver',
-            imageUrl : 'resturant/image.png',
+            imageUrl : 'foodDeliver/foodDeliver.png',
             templateFilesPath:'templates/foodDeliver'
         }
     ]
