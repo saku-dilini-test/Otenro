@@ -10,25 +10,16 @@
  
 				    $scope.login = function() {		
 
-				    	// if username == abc && pasword == 123 go to foods page 
-				    	if($scope.data.username == 'abc' && $scope.data.password == '123'){
-				    		$state.go('app.foods');				  
-				    	}else{
-				    		$ionicPopup.alert({
-				        		    title: 'Login failed!',
-				        		    template: 'Please check your credentials!'
-					            });	
-				    	}
-				        // $http.post("http://localhost:1339/user/create",{user_id : $scope.data.username})
-				        // 	.then(function(res){				        		
-				        // 		$state.go('app.foods');				  
-				        // 	},
-				        // 	function(err){				        		
-				        // 		$ionicPopup.alert({
-				        // 		    title: 'Login failed!',
-				        // 		    template: 'Please check your credentials!'
-					    //   	});			        		
-				        // })
+						$http.post("http://localhost:1337/templatesAuth/authenticate",{email : $scope.data.username})
+							.then(function(res){
+								$state.go('app.foods');
+							},
+							function(err){
+								$ionicPopup.alert({
+									title: 'Login failed!',
+									template: 'Please check your credentials!'
+								});
+							})
 				    }
 
 					$scope.singUp = function(){

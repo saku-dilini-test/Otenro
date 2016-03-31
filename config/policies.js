@@ -68,6 +68,12 @@ module.exports.policies = {
     setPublishDetails: true
   },
 
+  'template/TemplateAuthController': {
+    //'*': ['jwtAuth'],
+    authenticate : true,
+    register: true
+  },
+
   'mobileViewer/MobileController' : {
     '*': ['jwtAuth']
   }

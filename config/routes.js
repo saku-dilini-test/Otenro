@@ -145,6 +145,12 @@ module.exports.routes = {
     'POST /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
 
     /***
+     * Template Auth Controller
+     */
+    'POST /templatesAuth/authenticate': 'template/TemplateAuthController.authenticate',
+    'POST /templatesAuth/register': 'template/TemplateAuthController.register',
+
+    /***
      * MobileViewer Data
      **/
 
