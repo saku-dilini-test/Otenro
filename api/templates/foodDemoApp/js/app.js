@@ -43,7 +43,8 @@ angular.module('foodDemoApp', ['ionic', 'foodDemoApp.controllers'])
       url: '/register',
       views: {
         'menuContent': {
-          templateUrl: 'templates/register.html'
+          templateUrl: 'templates/register.html',
+          controller: 'registerCtrl'
         }
       }
   })

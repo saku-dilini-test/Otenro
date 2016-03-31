@@ -1,5 +1,34 @@
 <ion-view view-title="Register">
-  <ion-content>
-    <h1>Register</h1>
+  <ion-content class="padding">
+    <form name="signUpForm">
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">User Name</span>
+          <input type="text" placeholder="" ng-model="data.username" ng-required="true">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Email Address</span>
+          <input type="email" placeholder="" ng-model="data.email" ng-required="true">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Password</span>
+          <input type="password" placeholder="" ng-model="data.password" ng-required="true">
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Gender</span>
+          <ion-radio ng-model="data.gender" ng-required="true" ng-value="'male'">Male</ion-radio>
+          <ion-radio ng-model="data.gender" ng-required="true" ng-value="'female'">Female</ion-radio>
+        </label>
+        <button class="button button-block button-calm" ng-click="signUpForm.$valid && singUp()">
+          Sign up
+        </button>
+        <button class="button button-block button-calm" ng-click="">
+          Twitter
+        </button>
+        <button class="button button-block button-calm" ng-click="">
+          facebook
+        </button>
+      </div>
+    </form>
   </ion-content>
 </ion-view>
