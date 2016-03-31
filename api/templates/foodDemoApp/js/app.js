@@ -1,28 +1,43 @@
-// Ionic Starter App
+var mobileApp=angular.module('foodDemoApp', ['ionic']);
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-var mobileApp = angular.module('foodDemoApp', ['ionic'])
+var serviceApi = 'http://localhost:1337/';
+var GetServiceApi = 'http://localhost:1337/';
+var SERVER_URL = 'http://localhost:1337';
 
-.run(function($ionicPlatform) {
+mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
+
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
 
     }
     if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
   });
-})
+    if (typeof $rootScope.appId === 'undefined'){
 
-.config(function($stateProvider, $urlRouterProvider) {
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.appId = data.appId;
+        });
+    }
+
+    if (typeof $rootScope.userId === 'undefined'){
+
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.userId = data.userId;
+        });
+    }
+    if (typeof $rootScope.appName === 'undefined'){
+
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.appName = data.name;
+        });
+    }
+});
+
+mobileApp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
   .state('app', {
@@ -43,8 +58,7 @@ var mobileApp = angular.module('foodDemoApp', ['ionic'])
       url: '/register',
       views: {
         'menuContent': {
-          templateUrl: 'templates/register.html',
-          controller: 'registerCtrl'
+          templateUrl: 'templates/register.html'
         }
       }
   })
@@ -91,6 +105,5 @@ var mobileApp = angular.module('foodDemoApp', ['ionic'])
     }
   });
 
-  // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
 });

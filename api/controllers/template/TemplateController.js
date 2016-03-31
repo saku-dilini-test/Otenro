@@ -75,7 +75,7 @@ module.exports = {
         };
         Application.findOne(searchApp).exec(function(err, app) {
             if (err) return done(err);
-             var currency = app.appSettings.appCurrency
+             var currency = app.appSettings.appCurrency;
              res.send(currency)
         });
 
@@ -86,10 +86,16 @@ module.exports = {
         var searchApp = {
             childId: req.body.category
         };
-        ThirdNavigation.find(searchApp).exec(function(err, app) {
-            if (err) return done(err);
-            res.json(app);
+        var secondSearch={};
+
+        if(req.body.appId){
+            secondSearch.appId =req.body.appId;
+        }
+        ThirdNavigation.find().where({ $or : [searchApp,secondSearch]}).exec(function(err, app) {
+           if (err) return done(err);
+             res.json(app);
         });
+
 
     },
 

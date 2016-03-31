@@ -1,24 +1,33 @@
-<ion-content class="padding">
-	<form name="loginForm">
-		<div class="list list-inset">
-			<label class="item item-input">
-			    <input type="text" placeholder="Username" ng-model="data.username" ng-required="true">
-			</label>
-			<label class="item item-input">
-			    <input type="password" placeholder="Password" ng-model="data.password" ng-required="true">
-			</label>
-		</div>
-		<button class="button button-block button-calm" ng-click="loginForm.$valid && login()">
-			Login
-		</button>
-		<button class="button button-block button-calm" ng-click="">
-			Twitter
-		</button>
-		<button class="button button-block button-calm" ng-click="">
-			facebook
-		</button>
-		<button class="button button-block button-calm" ng-click="singUp()">
-			Create Account
-		</button>
-	</form> 
+<ion-content style="background: url(img/login_background.png) center; background-size: cover;">
+	<!--<h1>Login</h1>-->
+	<div class="login">
+		<form name="loginForm">
+			<div class="card">
+				<div class="item item-text-wrap">
+					<div style="text-align: center; color: #006666"><h1>Login</h1></div>
+					<label class="item item-input item-stacked-label">
+						<span class="input-label">Username</span>
+						<input type="text" placeholder="Username" ng-model="data.username" ng-required="true">
+					</label>
+					<label class="item item-input item-stacked-label">
+						<span class="input-label">Password</span>
+						<input type="password" placeholder="Password" ng-model="data.password" ng-required="true">
+					</label>
+					<label class="item item-input item-stacked-label">
+						<button class="button button-block button-positive" ng-click="loginForm.$valid && login()">
+							Login
+						</button>
+					</label>
+				</div>
+			</div>
+			<div class="panel">
+
+				<a class="social-button">Twitter Account</a>
+				<a class="social-button">Facebook Account</a>
+
+				<br>
+				<div class="create-account-btm">Create Your Account</div>
+			</div>
+		</form>
+	</div>
 </ion-content>

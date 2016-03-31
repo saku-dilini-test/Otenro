@@ -2,16 +2,31 @@
  * Created by amila on 3/31/16.
  */
 
-mobileApp.controller('foodCtrl', function($scope,$stateParams) {
-    $scope.foods = [
-        { title: 'food 1', description: 'description 1', id: 1 },
-        { title: 'food 2', description: 'description 2', id: 2 },
-        { title: 'food 3', description: 'description 3', id: 3 },
-        { title: 'food 4', description: 'description 4', id: 4 },
-        { title: 'food 5', description: 'description 5', id: 5 },
-        { title: 'food 6', description: 'description 6', id: 6 }
-    ];
+mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http) {
 
-    $scope.foodInfo = $stateParams.foodId;
+    $scope.userId=$rootScope.userId;
+    $scope.appId=$rootScope.appId;
+    $scope.imageURL = serviceApi
+                +"templates/viewImages?userId="
+                +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+
+    var requestParams={
+        appId : $rootScope.appId
+    };
+
+    $http.post(SERVER_URL + '/templates/getProductsByCatId', requestParams).success(function(data) {
+          $scope.foods = data;
+    }).error(function(err) {
+        alert('warning', "Unable to get templates", err.message);
+    });
+
+    if($stateParams.foodId){
+        $http.get(SERVER_URL + '/templates/getProductById?productId='+$stateParams.foodId)
+             .success(function(data) {
+                  $scope.foodInfo = data[0];
+             }).error(function(err) {
+                 alert('warning', "Unable to get Product", err.message);
+          });
+    }
 
 });
