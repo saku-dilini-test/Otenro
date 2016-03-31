@@ -8,9 +8,12 @@
 				controller: ['$scope','$http','$state','$ionicPopup', function($scope,$http,$state,$ionicPopup) {
 			   		$scope.data = {};
  
-				    $scope.login = function() {		
-
-						$http.post("http://localhost:1337/templatesAuth/authenticate",{email : $scope.data.username})
+				    $scope.login = function() {
+						var data = {
+							email : $scope.data.username,
+							password : $scope.data.password
+						};
+						$http.post("http://localhost:1337/templatesAuth/authenticate",data)
 							.then(function(res){
 								$state.go('app.foods');
 							},
