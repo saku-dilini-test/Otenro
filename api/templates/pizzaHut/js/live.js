@@ -51,6 +51,8 @@ var QueryString = function () {
 // Time interval 
 var timeIntervel = 1000;
 
+  var updateMainCss = "css/main.css";
+
 // end Edit
 
   var headers = { "Etag": 1, "Last-Modified": 1, "Content-Length": 1, "Content-Type": 1 },
@@ -108,10 +110,18 @@ var timeIntervel = 1000;
       // track local css urls
       for (var i = 0; i < links.length && active.css; i++) {
         var link = links[i], rel = link.getAttribute("rel"), href = link.getAttribute("href", 2);
-        if (href && rel && rel.match(new RegExp("stylesheet", "i")) && isLocal(href)) {
-          uris.push(href);
-          currentLinkElements[href] = link;
+
+        // only update main css file
+        if(href == updateMainCss){
+          if (href && rel && rel.match(new RegExp("stylesheet", "i")) && isLocal(href)) {
+            uris.push(href);
+            currentLinkElements[href] = link;
+          }
         }
+        //if (href && rel && rel.match(new RegExp("stylesheet", "i")) && isLocal(href)) {
+        //  uris.push(href);
+        //  currentLinkElements[href] = link;
+        //}
       }
 
       // initialize the resources info
