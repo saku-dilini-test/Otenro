@@ -94,29 +94,13 @@ module.exports = {
 
     },
 
-    getThirdBySecondId : function(req,res){
-
-        var searchApp = {
-            childId: req.body.category
-        };
-        var secondSearch={};
-
-        if(req.body.appId){
-            secondSearch.appId =req.body.appId;
-        }
-        ThirdNavigation.find().where({ $or : [searchApp,secondSearch]}).exec(function(err, app) {
-           if (err) return done(err);
-             res.json(app);
-        });
-    },
-
     /**
      * return all third navigation for given app Id & second navigation Id
      *
      * @param req
      * @param res
      */
-    getThirdBySecondIdForGetRequest : function(req,res){
+    getThirdBySecondId : function(req,res){
         var appId = req.param('appId');
         var childId = req.param('childId');
         var searchApp = {

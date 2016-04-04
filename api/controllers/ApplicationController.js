@@ -96,119 +96,267 @@ module.exports = {
              * Add Main Navigation
              */
 
-            var mainNavi=[{
-                "name" : "Promo",
-                "link" : "promo",
-                "appId" : app.id,
-                "icon"  : "glyphicon glyphicon-cloud"
-            },
-                {
-                    "name" : "Category",
-                    "link" : "category",
-                    "appId" :  app.id,
-                    "icon"  : "glyphicon glyphicon-cloud"
+            /**
+             * If Only foodDemoApp Category & Product Feed to DB
+             */
+            if(templateName == 'foodDemoApp'){
+                var secondNavi = [{
+                    "imageUrl": "category_61_5327.jpg",
+                    "appId": app.id,
+                    "name": "Salads",
+                    "description": "Salads description"
                 },
-                {
-                    "name" : "Best Seller",
-                    "link" : "bestSeller",
-                    "appId" : app.id,
-                    "icon"  : "glyphicon glyphicon-cloud"
-                },
-                {
-                    "name" : "Contact Us",
-                    "link" : "contact",
-                    "appId" : app.id,
-                    "icon"  : "glyphicon glyphicon-cloud"
-                }
-            ];
+                    {
+                        "imageUrl": "melko-21290330.jpg",
+                        "appId": app.id,
+                        "name": "Deserts",
+                        "description": "Deserts description"
+                    },
+                    {
+                        "imageUrl": "category_61_5327.jpg",
+                        "appId": app.id,
+                        "name": "Beverages",
+                        "description": "Beverages description"
+                    }];
+                var thirdNaviSalads = [
+                    {
+                        "appId": app.id,
+                        "name": "Chicken Caesar Salad",
+                        "price": 100,
+                        "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "Garden Salad",
+                        "price": 200,
+                        "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "Pasta Salad",
+                        "price": 300,
+                        "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "Egg Salad",
+                        "price": 400,
+                        "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+                        "createdDate": Date.now()
+                    }];
+                var thirdNaviDeserts = [
+                    {
+                        "appId": app.id,
+                        "name": "Tiramisu",
+                        "price": 100,
+                        "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "Caramal Pudding",
+                        "price": 200,
+                        "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "Chocolate Ice Cream Sunday",
+                        "price": 300,
+                        "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "Chocolate Muse",
+                        "price": 400,
+                        "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "Apple Crumble Pie",
+                        "price": 500,
+                        "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+                        "createdDate": Date.now()
+                    }];
+                var thirdNaviBeverages = [
+                    {
+                        "appId": app.id,
+                        "name": "Espresso Shot",
+                        "price": 100,
+                        "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "Mocha Frapachino",
+                        "price": 200,
+                        "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "Chocolate Milk Shake",
+                        "price": 300,
+                        "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "Pina colada",
+                        "price": 400,
+                        "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+                        "createdDate": Date.now()
+                    }];
 
-            var secondNavi =[{
-                "imageUrl" : "category_61_5327.jpg",
-                "appId" : app.id,
-                "name" : "Hot",
-                "desc" : "Hot description"
-            },
-                {
-                    "imageUrl" : "melko-21290330.jpg",
-                    "appId" : app.id,
-                    "name" : "Low",
-                    "desc" : "Low description"
-                }];
+                /**
+                 * Add Second Navigation
+                 *
+                 */
+                for (var i = 0; i < secondNavi.length; i++) {
+                    SecondNavigation.create(secondNavi[i]).exec(function (err, secondN) {
+                        if (err) return err;
 
-            var thirdNavi1 =[
-                {
-                    "appId" : app.id,
-                    "name" : "Low price ",
-                    "price" : 100,
-                    "imageUrl" : "article-0-1A9F1DAA000005DC-669_634x447.jpg",
-                    "createdDate" : Date.now()
-                },
-                {
-                    "appId" : app.id,
-                    "name" : "High price ",
-                    "price" : 200,
-                    "imageUrl" : "OOMPizza-Pepperoni-300x233.jpg",
-                    "createdDate" : Date.now()
-                }
-            ];
-            var thirdNavi2 =[
-                {
-                    "appId" : app.id,
-                    "name" : "Low price ",
-                    "price" : 100,
-                    "imageUrl" : "pizza.jpg",
-                    "createdDate" : Date.now()
-                },
-                {
-                    "appId" : app.id,
-                    "name" : "High price ",
-                    "price" : 200,
-                    "imageUrl" : "melko-21290330.jpg",
-                    "createdDate" : Date.now()
-                }
-            ];
+                        /**
+                         * Add Third Navigation
+                         */
+                        var tempNaviListName ='';
+                        if(secondN.name == 'Salads'){
+                            tempNaviListName = thirdNaviSalads;
+                        }else if(secondN.name == 'Deserts'){
+                            tempNaviListName = thirdNaviDeserts;
+                        }else if(secondN.name == 'Beverages'){
+                            tempNaviListName = thirdNaviBeverages;
+                        }
 
-            for(var i=0 ; i < mainNavi.length ; i++){
-                MainNavigation.create(mainNavi[i]).exec(function(err,mainN){
-                    if(err) return err;
-                    /**
-                     * Add Second Navigation
-                     *
-                     */
-
-                    if(mainN.name == "Category"){
-                        for(var j=0 ; j < secondNavi.length ; j++){
-                            secondNavi[j].mainId =mainN.id;
-                            SecondNavigation.create(secondNavi[j]).exec(function(err,secondN){
-                                if(err) return err;
-
-                                /**
-                                 * Add Third Navigation
-                                 */
-
-                                if(j == 0){
-                                    for(var z=0 ; z < thirdNavi1.length ; z++){
-                                        thirdNavi1[z].childId = secondN.id;
-
-                                        ThirdNavigation.create(thirdNavi1[z]).exec(function(err,thirdN){
-                                            if(err) return err;
-                                        });
-                                    }
-                                }else{
-                                    for(var z=0 ; z < thirdNavi2.length ; z++){
-                                        thirdNavi2[z].childId = secondN.id;
-                                        ThirdNavigation.create(thirdNavi2[z]).exec(function(err,thirdN){
-                                            if(err) return err;
-                                        });
-
-                                    }
-                                }
+                        for(var j = 0;j <tempNaviListName.length; j++) {
+                            tempNaviListName[j].childId = secondN.id;
+                            ThirdNavigation.create(tempNaviListName[j]).exec(function (err, thirdN) {
+                                if (err) return err;
                             });
                         }
-                    }
-                });
-            }
+                    });
+                }
 
+
+            }else {
+                var mainNavi = [{
+                    "name": "Promo",
+                    "link": "promo",
+                    "appId": app.id,
+                    "icon": "glyphicon glyphicon-cloud"
+                },
+                    {
+                        "name": "Category",
+                        "link": "category",
+                        "appId": app.id,
+                        "icon": "glyphicon glyphicon-cloud"
+                    },
+                    {
+                        "name": "Best Seller",
+                        "link": "bestSeller",
+                        "appId": app.id,
+                        "icon": "glyphicon glyphicon-cloud"
+                    },
+                    {
+                        "name": "Contact Us",
+                        "link": "contact",
+                        "appId": app.id,
+                        "icon": "glyphicon glyphicon-cloud"
+                    }
+                ];
+
+                var secondNavi = [{
+                    "imageUrl": "category_61_5327.jpg",
+                    "appId": app.id,
+                    "name": "Hot",
+                    "desc": "Hot description"
+                },
+                    {
+                        "imageUrl": "melko-21290330.jpg",
+                        "appId": app.id,
+                        "name": "Low",
+                        "desc": "Low description"
+                    }];
+
+                var thirdNavi1 = [
+                    {
+                        "appId": app.id,
+                        "name": "Low price ",
+                        "price": 100,
+                        "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "High price ",
+                        "price": 200,
+                        "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+                        "createdDate": Date.now()
+                    }
+                ];
+                var thirdNavi2 = [
+                    {
+                        "appId": app.id,
+                        "name": "Low price ",
+                        "price": 100,
+                        "imageUrl": "pizza.jpg",
+                        "createdDate": Date.now()
+                    },
+                    {
+                        "appId": app.id,
+                        "name": "High price ",
+                        "price": 200,
+                        "imageUrl": "melko-21290330.jpg",
+                        "createdDate": Date.now()
+                    }
+                ];
+
+                for (var i = 0; i < mainNavi.length; i++) {
+                    MainNavigation.create(mainNavi[i]).exec(function (err, mainN) {
+                        if (err) return err;
+                        /**
+                         * Add Second Navigation
+                         *
+                         */
+
+                        if (mainN.name == "Category") {
+                            for (var j = 0; j < secondNavi.length; j++) {
+                                secondNavi[j].mainId = mainN.id;
+                                SecondNavigation.create(secondNavi[j]).exec(function (err, secondN) {
+                                    if (err) return err;
+
+                                    /**
+                                     * Add Third Navigation
+                                     */
+
+                                    if (j == 0) {
+                                        for (var z = 0; z < thirdNavi1.length; z++) {
+                                            thirdNavi1[z].childId = secondN.id;
+
+                                            ThirdNavigation.create(thirdNavi1[z]).exec(function (err, thirdN) {
+                                                if (err) return err;
+                                            });
+                                        }
+                                    } else {
+                                        for (var z = 0; z < thirdNavi2.length; z++) {
+                                            thirdNavi2[z].childId = secondN.id;
+                                            ThirdNavigation.create(thirdNavi2[z]).exec(function (err, thirdN) {
+                                                if (err) return err;
+                                            });
+
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            }
             res.send({
                 appId: app.id,
                 message: "New Application is created!!"
