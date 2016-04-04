@@ -39,14 +39,27 @@ module.exports = {
 
         var appId = req.param('appId');
         var mainId=req.param('mainId');
-        var searchApp = {
-            appId: appId,
-            mainId : mainId
-        };
-        SecondNavigation.find(searchApp).exec(function(err, app) {
-            if (err) return done(err);
-            res.send(app);
-        });
+        /**
+         *  If main Id undefined, return all second navigation
+         */
+        if(typeof mainId == 'undefined'){
+            var searchApp = {
+                appId: appId
+            };
+            SecondNavigation.find(searchApp).exec(function(err, app) {
+                if (err) return done(err);
+                res.send(app);
+            });
+        }else {
+            var searchApp = {
+                appId: appId,
+                mainId: mainId
+            };
+            SecondNavigation.find(searchApp).exec(function (err, app) {
+                if (err) return done(err);
+                res.send(app);
+            });
+        }
     },
 
     getSubChildById : function(req,res){
@@ -94,6 +107,25 @@ module.exports = {
         ThirdNavigation.find().where({ $or : [searchApp,secondSearch]}).exec(function(err, app) {
            if (err) return done(err);
              res.json(app);
+        });
+    },
+
+    /**
+     * return all third navigation for given app Id & second navigation Id
+     *
+     * @param req
+     * @param res
+     */
+    getThirdBySecondIdForGetRequest : function(req,res){
+        var appId = req.param('appId');
+        var childId = req.param('childId');
+        var searchApp = {
+            appId: appId,
+            childId : childId
+        };
+        ThirdNavigation.find().where(searchApp).exec(function(err, app) {
+            if (err) return done(err);
+            res.json(app);
         });
 
 

@@ -70,8 +70,18 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
         }
       }
    })
+
+  .state('app.category', {
+          url: '/category',
+          views: {
+              'menuContent': {
+                  templateUrl: 'templates/category.html',
+                  controller: 'categoryCtrl'
+              }
+          }
+      })
    .state('app.foods', {
-     url: '/foods',
+     url: '/category/:categoryId',
      views: {
        'menuContent': {
          templateUrl: 'templates/foods.html',

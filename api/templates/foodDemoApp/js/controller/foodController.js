@@ -10,14 +10,10 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http) 
                 +"templates/viewImages?userId="
                 +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
 
-    var requestParams={
-        appId : $rootScope.appId
-    };
-
-    $http.post(SERVER_URL + '/templates/getProductsByCatId', requestParams).success(function(data) {
+    $http.get(SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
           $scope.foods = data;
     }).error(function(err) {
-        alert('warning', "Unable to get templates", err.message);
+        alert('warning', "Unable to get Products Selected Category", err.message);
     });
 
     if($stateParams.foodId){
