@@ -142,8 +142,8 @@ module.exports.routes = {
     'POST /templates/getMainMenu': 'template/TemplateController.getMainMenu',
     'GET /templates/getCurrency': 'template/TemplateController.getCurrency',
     'GET /templates/viewImages': 'template/TemplateController.viewImages',
-    'POST /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
-    'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondIdForGetRequest',
+    'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
+
     /***
      * Template Auth Controller
      */

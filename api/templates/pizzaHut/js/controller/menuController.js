@@ -15,7 +15,7 @@ mobileApp.controller('menuController', function($scope, $rootScope,$routeParams,
         "category": $rootScope.itemcategory
     };
 
-    $http.post(SERVER_URL + '/templates/getProductsByCatId', requestParams).success(function(data) {
+    $http.get(SERVER_URL + '/templates/getProductsByCatId?appId='+$rootScope.appId+'&childId='+$rootScope.itemcategory).success(function(data) {
         $scope.requestData = data;
     }).error(function(err) {
         alert('warning', "Unable to get templates", err.message);
