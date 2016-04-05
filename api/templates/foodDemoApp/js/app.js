@@ -110,7 +110,8 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
     url: '/cart',
     views: {
       'menuContent': {
-        templateUrl: 'templates/cart.html'
+        templateUrl: 'templates/cart.html',
+          controller: 'cartCtrl'
       }
     }
   });

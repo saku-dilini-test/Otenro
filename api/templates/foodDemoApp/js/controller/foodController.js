@@ -2,7 +2,7 @@
  * Created by amila on 3/31/16.
  */
 
-mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http) {
+mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state) {
 
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
@@ -23,6 +23,20 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http) 
              }).error(function(err) {
                  alert('warning', "Unable to get Product", err.message);
           });
+    }
+
+    $scope.addToCart = function(){
+
+        $rootScope.cart.cartItems.push({
+            id: $scope.foodInfo.id,
+            name: $scope.foodInfo.name,
+            qty: 1,
+            price: $scope.foodInfo.price
+        });
+        $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
+        console.log($rootScope.cart);
+        $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+        $state.go('app.cart');
     }
 
 });
