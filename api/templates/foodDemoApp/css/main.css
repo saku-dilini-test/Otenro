@@ -52,4 +52,37 @@
   margin-top:40%;
 }
 
+/** ----------- Start Custom update Css Class ---------- **/
 
+.made-easy-backgroundColor{
+  background-color: inherit;
+}
+.made-easy-navigationBarColor{
+  background-color: inherit;
+}
+.made-easy-footerColor{
+  background-color: inherit;
+}
+.made-easy-header-font{
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+.made-easy-content-font{
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+.made-easy-footer-font{
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+.made-easy-button-setting{
+  background-color: inherit;
+  font-family: inherit;
+  border-width: inherit;
+  border-radius: inherit;
+}
+
+/** ----------- End Custom update Css Class ---------- **/
