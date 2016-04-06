@@ -60,7 +60,7 @@ module.exports = {
 
   register: function(req, res) {
 
-    User.create({email: req.body.email, password: req.body.password}).exec(function(err, user) {
+    User.create({firstName:req.body.fname,lastName:req.body.lname, email: req.body.email, password: req.body.password}).exec(function(err, user) {
       if (err) {
         return res.negotiate(err);
       }
