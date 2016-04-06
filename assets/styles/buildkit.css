@@ -1546,9 +1546,23 @@ md-dialog .md-actions .md-button {
     cursor: pointer;
 }
 
-.me-guest-social{
+.me-guest-fb-login{
     width: 30px;
+    height: 30px;
     margin-right: 10px;
+    border: 0;
+    background-size: 100%; /* To fill the dimensions of container (button), or */
+    background-size: 30px auto; /* to specify dimensions explicitly */
+    background-image: url(/images/facebook-icon.png);
+}
+.me-guest-google-login{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border: 0;
+    background-size: 100%; /* To fill the dimensions of container (button), or */
+    background-size: 30px auto; /* to specify dimensions explicitly */
+    background-image: url(/images/google-plus-icon.png);
 }
 
 .me-guest-remember{
