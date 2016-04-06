@@ -7,7 +7,7 @@
 
         $scope.authSignUp = function () {
             Auth.register($scope.user).success(function () {
-                toastr.success('Successfully register ', 'Congratulations ! ', {closeButton: true});
+                toastr.success('Successfully registered ', 'Congratulations ! ', {closeButton: true});
                 $state.go('user.dashboard');
 
             }).catch(function onError() {
