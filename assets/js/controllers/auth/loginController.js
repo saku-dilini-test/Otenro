@@ -18,6 +18,9 @@
         });
       });
     };
+    $scope.cancel = function () {
+      $state.go('user.welcome');
+    }
 
     $scope.authenticate = function(provider) {
       $auth.authenticate(provider);
