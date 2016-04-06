@@ -10,14 +10,29 @@
     'use strict';
     angular.module('app')
         .controller('userProfileCtrl',
-      ['$scope', 'userProfileResource', 'userProfileService','Auth','$state','$mdDialog',
+      ['$scope', 'userProfileResource', 'userProfileService','Auth','$state','$mdDialog','toastr',
             userProfileCtrl
         ]);
 
-    function userProfileCtrl($scope, userProfileResource, userProfileService,Auth,$state,$mdDialog) {
+    function userProfileCtrl($scope, userProfileResource, userProfileService,Auth,$state,$mdDialog,toastr) {
+
+
+        userProfileResource.getUserProfile().success(function (data) {
+            $scope.userEditData=data;
+            console.log($scope.userEdit);
+        }).error(function (err) {
+            toastr.error(err.error, 'Error', {
+                closeButton: true
+            });
+        });
+
         $scope.editUserProfile = function(params){
+            console.log(params);
             userProfileResource.editUserProfile(params).then(function(data){
-                console.log(data);
+                $mdDialog.hide();
+                toastr.success('Successfully Changed', 'Success', {
+                    closeButton: true
+                });
             });
         };
         $scope.redirectToDashboard = function() {

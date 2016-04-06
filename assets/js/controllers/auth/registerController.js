@@ -5,8 +5,8 @@
 
     function RegisterController($scope, $state, Auth, toastr) {
 
-        $scope.authSignUp = function () {
-            Auth.register($scope.user).success(function () {
+        $scope.authSignUp = function (user) {
+            Auth.register(user).success(function () {
                 toastr.success('Successfully register ', 'Congratulations ! ', {closeButton: true});
                 $state.go('user.dashboard');
 
