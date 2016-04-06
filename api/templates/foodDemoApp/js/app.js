@@ -102,9 +102,19 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
     url: '/order',
     views: {
       'menuContent': {
-        templateUrl: 'templates/order.html'
+          templateUrl: 'templates/order.html',
+          controller: 'orderCtrl'
       }
     }
+  })
+  .state('app.payment', {
+      url: '/payment',
+      views: {
+          'menuContent': {
+              templateUrl: 'templates/payment.html',
+              controller: 'paymentCtrl'
+          }
+      }
   })
   .state('app.cart', {
     url: '/cart',

@@ -1,21 +1,21 @@
 <ion-view view-title="Cart">
   <ion-content>
     <h4>Shopping Cart Item List</h4>
-    <div class="">
+    <div class="item item-stacked-label">
       <div class="row">
         <div class="col col-50">Item</div>
         <div class="col">Qty</div>
         <div class="col">Price</div>
       </div>
     </div>
-    <div ng-repeat="item in cartItems" >
+    <div class="item item-stacked-label" ng-repeat="item in cartItems" >
       <div class="row">
         <div class="col col-50">{{item.name}}</div>
         <div class="col">{{item.qty}}</div>
         <div class="col">{{item.price}}</div>
       </div>
     </div>
-    <div class="">
+    <div class="item item-stacked-label">
       <div class="row">
         <div class="col col-50">Total</div>
         <div class="col"></div>
@@ -42,8 +42,8 @@
       </div>
     </ui>
     <div class="panel">
-      <a class="social-button">Perchase</a>
-      <a class="social-button">Delivery</a>
+      <a class="social-button" ui-sref="app.payment">Perchase</a>
+      <a class="social-button" ui-sref="app.order">Delivery</a>
     </div>
   </ion-content>
 </ion-view>
