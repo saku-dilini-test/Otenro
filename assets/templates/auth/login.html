@@ -40,7 +40,7 @@
         </div>
       </fieldset>
       <fieldset class="reset-margin text-right">
-        <input type="button" class="me-default-button" name="cancel" value="Cancel" />
+        <input type="button" class="me-default-button" ng-model="cancel" ng-click="cancel()" name="cancel" value="Cancel" />
         <button ng-disabled="register.$invalid" type="submit" class="me-default-button">
           <!--{{"login.button.title" | translate}}-->
           login
