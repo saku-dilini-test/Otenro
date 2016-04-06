@@ -14,5 +14,13 @@ module.exports = {
             if (err) res.send(err);
         });
         res.send('ok');
+    },
+    getUserProfile : function(req,res){
+
+        var query = {id:req.userId};
+        User.find(query, function(err, user) {
+            if (err) return done(err);
+            res.send(user);
+        });
     }
 };

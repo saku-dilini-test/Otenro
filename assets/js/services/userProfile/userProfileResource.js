@@ -9,6 +9,9 @@
         return{
             editUserProfile:function(appParams){
                  return $http.post(SERVER_URL +'auth/editUserProfile', appParams);
+            },
+            getUserProfile:function(appParams){
+                return $http.post(SERVER_URL +'user/getUserProfile', appParams);
             }
         }
     }

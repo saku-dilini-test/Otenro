@@ -15,12 +15,12 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="md-dialog-main">
+                    <div class="md-dialog-main" ng-repeat="userEdit in userEditData">
                         <div class="clearfix">
                             <fieldset class="col-2">
-                                <label>First name</label>
+                                <label>First ndame</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="fname" ng-model="userEdit.firstName" required />
+                                <input type="text" name="fname"  ng-model="userEdit.firstName" required />
                             </fieldset>
                             <fieldset class="col-2 reset-margin-right">
                                 <label>Last name</label>
@@ -31,7 +31,7 @@
                         <fieldset>
                             <label>Email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="email" ng-model="userEdit.email" required />
+                            <input type="text" name="email" disabled ng-model="userEdit.email" required />
                         </fieldset>
                         <div class="clearfix">
                             <fieldset class="col-2">
@@ -59,7 +59,6 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="close()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="close()">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
