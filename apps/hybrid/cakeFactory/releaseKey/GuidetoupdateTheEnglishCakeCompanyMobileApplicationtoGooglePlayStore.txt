@@ -1,17 +1,17 @@
 ﻿Guide to update The English Cake Company Mobile Application to Google Play Store
-Before update apk you have to complete Step 00 to 05 skipping step 02 
+Before update apk you have to complete Step 00 to 05 skipping step 02
 Step 00 : Copy this file ( my-release-key.keystore ) to ‘platforms/android/build/outputs/apk’
 
 
 http://ionicframework.com/docs/guide/publishing.html
 According to above ionic article
 Step 01 : create android release apk
-        config.xml -- Update version “0.0.1”  (* This should change according release vertion) 
+        config.xml -- Update version “0.0.1”  (* This should change according release vertion)
 $ cordova build --release android
 
 
-Step 02 : Let’s generate our private key (release key) using the keytool 
-        (*Only this key is allowed to feature update of application)  
+Step 02 : Let’s generate our private key (release key) using the keytool
+        (*Only this key is allowed to feature update of application)
         Using follow command already created release key as my-release-key.keystore
 $ keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
 Follow information are added to release key
@@ -31,7 +31,7 @@ What is the name of your State or Province?
    Colombo-05
 What is the two-letter country code for this unit?
    LK
-Is     
+Is
    CN=Yohan Galapitage,
    OU=The English Cake Company,
    O=The English Cake Company,
@@ -51,14 +51,14 @@ Step 04: Zip apk run zipalign
 
 
         /path/to/Android/sdk/build-tools/VERSION/zipalign.
-        
+
 $ zipalign -v 4 android-release-unsigned.apk android.apk
 or
 $ ./zipalign -v 4 android-release-unsigned.apk android.apk
 
 
 Final apk -> android.apk
-        AppID = com.ionicframework.cakefactory759878
+        AppID = com.onbitlabs.english.cake.company
 Step 05:
 Publish Application
 https://play.google.com/apps/publish/signup/
