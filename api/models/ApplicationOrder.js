@@ -21,6 +21,12 @@ module.exports = {
         customerName : {
             type : 'string'
         },
+        telNumber : {
+            type : 'integer'
+        },
+        deliveryAddress : {
+            type : 'string'
+        },
         paymentStatus : {
             type : 'string'
         },

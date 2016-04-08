@@ -151,6 +151,11 @@ module.exports.routes = {
     'POST /templatesAuth/register': 'template/TemplateAuthController.register',
 
     /***
+     * Template Order Controller
+     */
+    'POST /templatesOrder/saveOrder' : 'template/TemplateOrderController.saveOrder',
+
+    /***
      * MobileViewer Data
      **/
 
