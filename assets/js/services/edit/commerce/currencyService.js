@@ -10,7 +10,7 @@ sending the selected currency to the backend
             showCurrencyDialog: function() {
                 return $mdDialog.show({
                     controller: 'currencyCtrl',
-                    templateUrl: 'user/edit/setting/Currency/currencyView.html',
+                    templateUrl: 'user/edit/commerce/Currency/currencyView.html',
                     clickOutsideToClose: true
                 }).then(function(answer) {
 
