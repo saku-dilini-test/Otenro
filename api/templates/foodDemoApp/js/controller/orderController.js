@@ -3,7 +3,7 @@
  */
 
 
-mobileApp.controller('orderCtrl', function($scope,$rootScope,$http,$state) {
+mobileApp.controller('orderCtrl', function($scope,$rootScope,$http,$state,constants) {
 
     $scope.header = "Place an Order";
 
@@ -21,7 +21,7 @@ mobileApp.controller('orderCtrl', function($scope,$rootScope,$http,$state) {
             cart : $scope.cart
         }
 
-        $http.post(SERVER_URL+"/templatesOrder/saveOrder",data)
+        $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",data)
             .then(function(res){
                 if(res.data == 'ok'){
                     $rootScope.cart.cartItems = [];

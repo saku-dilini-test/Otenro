@@ -3,16 +3,16 @@
  */
 
 
-mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state) {
+mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,constants) {
     $scope.data = {};
     $scope.singUp = function() {
         var data = {
             email : $scope.data.email,
             password : $scope.data.password
         };
-        $http.post("http://localhost:1337/templatesAuth/register",data)
+        $http.post(constants.SERVER_URL+"/templatesAuth/register",data)
             .then(function(res){
-                $state.go('app.foods');
+                $state.go('app.category');
             },
             function(err){
                 $ionicPopup.alert({

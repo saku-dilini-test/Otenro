@@ -5,7 +5,7 @@
 		.directive('oblLogin',function(){
 			return {
 				templateUrl:'js/directives/obl-Login/obl-Login.html',
-				controller: ['$scope','$http','$state','$ionicPopup', function($scope,$http,$state,$ionicPopup) {
+				controller: ['$scope','$http','$state','$ionicPopup','constants', function($scope,$http,$state,$ionicPopup,constants) {
 			   		$scope.data = {};
  
 				    $scope.login = function() {
@@ -13,9 +13,9 @@
 							email : $scope.data.username,
 							password : $scope.data.password
 						};
-						$http.post("http://localhost:1337/templatesAuth/authenticate",data)
+						$http.post(constants.SERVER_URL+"/templatesAuth/authenticate",data)
 							.then(function(res){
-								$state.go('app.foods');
+								$state.go('app.category');
 							},
 							function(err){
 								$ionicPopup.alert({

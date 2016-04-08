@@ -1,8 +1,8 @@
 var mobileApp=angular.module('foodDemoApp', ['ionic']);
 
-var serviceApi = 'http://localhost:1337/';
-var GetServiceApi = 'http://localhost:1337/';
-var SERVER_URL = 'http://localhost:1337';
+//var serviceApi = 'http://localhost:1337/';
+//var GetServiceApi = 'http://localhost:1337/';
+//var SERVER_URL = 'http://localhost:1337';
 
 mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy) {
   $ionicPlatform.ready(function() {
@@ -58,7 +58,8 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       url: '/register',
       views: {
         'menuContent': {
-          templateUrl: 'templates/register.html'
+          templateUrl: 'templates/register.html',
+            controller: 'registerCtrl'
         }
       }
   })
