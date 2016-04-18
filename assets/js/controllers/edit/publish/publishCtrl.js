@@ -39,15 +39,14 @@
 
        publishService.getExistingData().
             success(function(data){
+            console.log(data);
                 $scope.existingLanguage = data;
                  if($scope.existingLanguage.length == 0){
                         $scope.playStoreData ={language: $scope.defaultLanguage.language};
                  }
                  else{
-
-                 var ex = $scope.existingLanguage[0].file.replace('"blobUrl":','');
-                 var y = ex.replace('{"','');
-                 var z = y.replace('"}','');
+                 console.log($scope.existingLanguage[0].file);
+                 $scope.thumbPic = $scope.existingLanguage[0].file;
 
                         $scope.playStoreData = {
                             language : $scope.existingLanguage[0].language,

@@ -5,8 +5,11 @@ var fs = require('fs-extra');
 module.exports = {
 
     setPublishDetails: function(req,res){
+    var ex = req.body.file.replace('{"blobUrl":"','');
+    var y = ex.replace('"}','');
 
         var details = req.body;
+        details.file = y;
 
             PublishDetails.update({appId :req.body.appId},details).exec(function(err,app) {
                 if (err) res.send(err);
