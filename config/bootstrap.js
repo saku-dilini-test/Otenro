@@ -17,7 +17,10 @@ module.exports.bootstrap = function(cb) {
     Template.seed,
     ApplicationInventory.seed,
     Currency.seed,
-    AppInitialData.seed
+    AppInitialData.seed,
+    Languages.seed,
+    PrimaryCategory.seed,
+    SecondaryCategory.seed
   ], cb);
 
 };

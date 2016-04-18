@@ -36,10 +36,28 @@
                     fields: {
                         'appId':$rootScope.appId,
                         'name': playStoreData.name,
-                        'springBoardName':playStoreData.springBoardName
-                    },
-                    file: file
+                        'springBoardName':playStoreData.springBoardName,
+                        'language':playStoreData.language,
+                        'primaryCategory':playStoreData.primaryCat,
+                        'secondaryCategory':playStoreData.secondaryCat,
+                        'description':playStoreData.desc,
+                        'keywords':playStoreData.keywords,
+                         file: file
+                    }
+
                 });
+            },
+            getAllLanguages:function(){
+                return $http.get(SERVER_URL + 'edit/getAllLanguages');
+            },
+            getExistingData:function(){
+                return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId);
+            },
+            getAllPrimaryCategories:function(){
+                 return $http.get(SERVER_URL + 'edit/getAllPrimaryCategories?appId='+$rootScope.appId);
+             },
+            getAllSecondaryCategories:function(){
+                return $http.get(SERVER_URL + 'edit/getAllSecondaryCategories?appId='+$rootScope.appId);
             },
 //addGooglePlayInfo: function(file,playStoreData){
 //console.log('playStoreData.name '+playStoreData.name);
