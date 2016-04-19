@@ -25,6 +25,11 @@ module.exports = {
             serverTmp="http://localhost:port",
             serverOrg=config.server.host+':'+config.server.port;
 
+        var loginPath = '/#/';
+        if(templateName == 'foodDemoApp'){
+            loginPath = '/#/app/login';
+        }
+
         var application ={
             appName : req.body.appName,
             appTempPath :tempAppDirPath,
@@ -53,6 +58,9 @@ module.exports = {
                 footerFontWeight : "normal",
                 buttonBorderWidth : "0px",
                 buttonBorderRadius : "0px"
+            },
+            appUpdateLocationSetting : {
+                loginUrl : loginPath
             }
         };
 

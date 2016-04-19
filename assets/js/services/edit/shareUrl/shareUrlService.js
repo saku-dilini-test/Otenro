@@ -8,8 +8,9 @@
 
         sharedService.url = '';
 
-        sharedService.prepForBroadcast = function(url,updateInfo) {
+        sharedService.prepForBroadcast = function(url,updateLocationOfApp,updateInfo) {
             this.url = url;
+            this.updateLocationOfApp = updateLocationOfApp;
             this.updateInfo = updateInfo;
             this.broadcastItem();
         };
