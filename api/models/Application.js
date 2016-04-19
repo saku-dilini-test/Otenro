@@ -115,6 +115,9 @@ module.exports = {
 //               type: 'string'
 //            }
 //            }
+        },
+        appUpdateLocationSetting : {
+            type : 'json'
         }
     }
 };

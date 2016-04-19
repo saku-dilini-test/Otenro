@@ -34,6 +34,9 @@
 
         stylesService.getAppSettings({'appId':$rootScope.appId}).success(function (data) {
             var appSettings = data.appSettings;
+
+            $scope.appUpdateLocation = data.appUpdateLocationSetting;
+
             $scope.backgroundColor = appSettings.backgroundColor;
             $scope.navigationBarColor = appSettings.navigationBarColor;
             $scope.footerColor = appSettings.footerColor;
@@ -274,7 +277,7 @@
                             closeButton: true
                         });
                         var tempUrl = mySharedService.url;
-                        mySharedService.prepForBroadcast(tempUrl, '/#/#updateCss='+new Date().getTime());
+                        mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
 
                     }).error(function(err) {
                         toastr.error( type , 'Unable to update ', {
