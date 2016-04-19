@@ -7,17 +7,17 @@
                     <div class="md-dialog-header">
                         <h1>Choose Product Type</h1>
                     </div>
-                    <div class="md-dialog-full">
+                    <div id="Navigation" class="md-dialog-full">
                         <div class="products-options">
-                            <a ng-click='addType("Physical")' href="javascript:void(0);">
+                            <a ng-click='addType("Physical");selectedLink = "Physical"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Physical'}">
                                 <h1>Physical</h1>
                                 <label>An item that is shipped to your customers</label>
                             </a>
-                            <a ng-click='addType("Digital")' href="javascript:void(0);">
+                            <a ng-click='addType("Digital");selectedLink = "Digital"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Digital'}">
                                 <h1>Digital</h1>
                                 <label>Content that is downloaded</label>
                             </a>
-                            <a ng-click='addType("Service ")' href="javascript:void(0);">
+                            <a ng-click='addType("Service");selectedLink = "Service"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Service'}">
                                 <h1>Services</h1>
                                 <label>Provide a Service</label>
                             </a>
@@ -44,10 +44,7 @@
                                     <label for="input-name">Name</label>
                                     <input type="text" name="fullname" ng-model="product.name" id="input-name" required />
                                 </fieldset>
-                                <fieldset class="col-2 reset-margin-right">
-                                    <label for="input-price">Price</label>
-                                    <input type="text" name="price" for="Price" ng-model="product.price" id="input-price" required />
-                                </fieldset>
+
                                 <fieldset class="col-2">
                                     <label>Main</label>
                                     <md-select class="" placeholder="Select Main Menu" ng-model="product.mainId" ng-change="setChild(product.mainId)" required>
@@ -154,7 +151,7 @@
                                 <p>Add Pricing</p>
                                 <fieldset>
                                     <p>Product Price</p>
-                                    <input type="text" name="name" class="me-xs-input reset-inline" required />
+                                    <input type="text" name="name" ng-model="product.price" id="input-price" class="me-xs-input reset-inline" required />
                                 </fieldset>
                             </div>
                         </div>

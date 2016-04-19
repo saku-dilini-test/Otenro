@@ -1228,12 +1228,13 @@ md-dialog{
     margin-bottom: 15px;
     padding: 10px 0 10px 45px;
 }
-
 .products-options a:hover{
     background-color: #f4f5f4;
     text-decoration: none;
 }
-
+.selected {
+background-color: #f4f5f4;
+}
 .products-options a h1{
     font-size: 20px;
     text-transform: capitalize;
