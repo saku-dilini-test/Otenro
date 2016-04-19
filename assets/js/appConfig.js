@@ -27,13 +27,13 @@
 
 
             $authProvider.google({
-                clientId: '894432502234-30r2t0424l55eqv3je0ofbc259k613vc.apps.googleusercontent.com',
+                clientId: '309371575528-rk2otjp9ousus98pl6mtcmuo7s7b4nbl.apps.googleusercontent.com',
                 authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
                 redirectUri: window.location.origin
             });
 
             $authProvider.facebook({
-                clientId: '1751523961745182',
+                clientId: '1722286804691721',
                 //redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host + '/'
                 redirectUri : window.location.origin+'/'
             });

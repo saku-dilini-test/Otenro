@@ -89,7 +89,7 @@ module.exports = {
     // Get OAuth2 client
     GoogleAPIsOAuth2v2.getAccessToken({
       clientId: req.body.clientId,
-      clientSecret: 'eFUwrxuPW-VixgMnAuf4oNyf',
+      clientSecret: 'Fw5L2CjhaKvyaGlqTCn_0yMs',
       redirectUrl: req.body.redirectUri,
       code: req.body.code
     }).exec({
@@ -111,7 +111,7 @@ module.exports = {
     console.log(req.body);
     Facebook.getAccessToken({
       appId: req.body.clientId,
-      appSecret: 'a6446363712ca1f3b4991f5ea00d8103',
+      appSecret: '37979a269047f2006004b60d77e4ecec',
       code: req.body.code,
       callbackUrl: req.body.redirectUri
     }).exec({

@@ -32,7 +32,16 @@
     };
 
     $scope.authenticate = function(provider) {
-      $auth.authenticate(provider);
+      $auth.authenticate(provider).then(function(response){
+      toastr.success('Successfully login ', 'Message', {
+             closeButton: true
+      });
+               $state.go('user.dashboard');
+      }).catch(function(response){
+      toastr.error('Invalid email/password combination.', 'Error', {
+             closeButton: true
+      });
+      })
     };
 
   }
