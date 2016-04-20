@@ -53,15 +53,11 @@
             mainId : product.mainId,
             childId : product.childId
             };
-            console.log(ids.childId);
              commerceService.getVariants(ids.childId).
                     success(function(data) {
                      toastr.success('Successfully saved', 'Awsome!', {
                          closeButton: true
                      });
-                     console.log(data);
-                     console.log(data[0]);
-                     console.log(data[0]);
 
                     $scope.variants=[{
                         type: "cloth",
@@ -77,6 +73,11 @@
                         });
                     });
         },
+
+        $scope.myUpdateHandler = function(newValue) {
+          // check your console
+          console.log('value of your model is now: ' + newValue);
+        };
 
         $scope.addProducts = function(file,product) {
 
