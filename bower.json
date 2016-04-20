@@ -31,7 +31,8 @@
     "ng-dialog": "^0.5.7",
     "ngDialog": "~0.5.1",
     "tweenlite": "~1.11.5",
-    "angular-ui-mask": "^1.8.1"
+    "angular-ui-mask": "^1.8.1",
+    "ng-inline-edit": "^0.7.0"
   },
   "name": "meV2",
   "version": "0.0.0",
