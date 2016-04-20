@@ -61,9 +61,9 @@
 
                     $scope.variants=[{
                         type: "cloth",
-                        name: data.name,
+                        name: data[0].name,
                         size: "10",
-                        price: data.price,
+                        price: data[0].price,
                         qty: "1"
                     }];
                     console.log($scope.variants.name);
