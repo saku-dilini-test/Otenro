@@ -105,6 +105,19 @@ module.exports = {
                 res.send('ok');
             });
         }
+    },
+
+    getVariants: function(req,res){
+    var appId = req.param('appId');
+    var childId = req.param('childId');
+            var searchApp = {
+                appId: appId,
+                childId: childId
+            };
+        PriceAndVariants.find(searchApp, function(err, app) {
+        if (err) return done(err);
+           res.send(app);
+        });
     }
 
 

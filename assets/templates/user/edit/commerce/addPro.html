@@ -59,7 +59,7 @@
                                 </fieldset>
                             </div>
                             <fieldset class="text-right">
-                                <input type="submit" class="me-default-button" value="Save" />
+                                <input type="submit" ng-click="idDetails(product)" class="me-default-button" value="Save" />
                             </fieldset>
                         </div>
                         <!--<fieldset class="col-2 profile-image-section">-->
@@ -90,7 +90,7 @@
             <md-tab>
                 <md-tab-label>Price & Variants</md-tab-label>
                 <md-tab-body>
-                    <!--
+
                     <div class="md-dialog-header">
                         <h1>Price & Variants</h1>
                     </div>
@@ -99,22 +99,50 @@
                             <thead>
                                 <th>Product Type</th>
                                 <th>Product Name</th>
-                                <th>Weight</th>
+                                <th>
+                                    <select>
+                                        <option>weight</option>
+                                        <option>size</option>
+                                    </select>
+                                </th>
                                 <th>Price</th>
+                                <th>Qty</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Cloths</td>
-                                    <td>Levis</td>
-                                    <td>130grms</td>
-                                    <td>$12.95</td>
+
+                                <tr ng-repeat="data in variants">
+                                    <td
+                                       inline-edit="data.type"
+                                       inline-edit-callback="myUpdateHandler(newValue)"
+                                       inline-edit-btn-edit=""
+                                       inline-edit-on-blur="save"
+                                       inline-edit-on-click></td>
+                                    <td
+                                       inline-edit="data.name"
+                                       inline-edit-callback="myUpdateHandler(newValue)"
+                                       inline-edit-btn-edit=""
+                                       inline-edit-on-blur="save"
+                                       inline-edit-on-click></td>
+                                    <td
+                                       inline-edit="data.size"
+                                       inline-edit-callback="myUpdateHandler(newValue)"
+                                       inline-edit-btn-edit=""
+                                       inline-edit-on-blur="save"
+                                       inline-edit-on-click></td>
+                                    <td
+                                       inline-edit="data.price"
+                                       inline-edit-callback="myUpdateHandler(newValue)"
+                                       inline-edit-btn-edit=""
+                                       inline-edit-on-blur="save"
+                                       inline-edit-on-click></td>
+                                    <td
+                                       inline-edit="data.qty"
+                                       inline-edit-callback="myUpdateHandler(newValue)"
+                                       inline-edit-btn-edit=""
+                                       inline-edit-on-blur="save"
+                                       inline-edit-on-click></td>
                                 </tr>
-                                <tr>
-                                    <td>Monday</td>
-                                    <td>Christmas Cake</td>
-                                    <td>130grms</td>
-                                    <td>$5.00</td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -124,44 +152,44 @@
                             <md-button class="me-default-button" ng-click="nextStep(3)">Next</md-button>
                         </div>
                     </div>
-                    -->
 
-                    <div class="md-dialog-header">
-                        <h1>Pricing & Uploads</h1>
-                    </div>
-                    <div class="md-dialog-main">
-                        <div class="file-upload-wrapper clearfix">
-                            <p class="file-upload-msg">Select a product to upload</p>
-                            <div class="pull-left">
-                                <div class="me-file-upload rounded">
-                                    <div class="upload-wrapper">
-                                        <input type="file" accept="image/*" aria-invalid="true" required />
-                                        <span>Select Product</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="uploaded-section clearfix">
-                            <div class="uploaded-new-image">
-                                <p>Selected Product</p>
-                                <img src="../../../images/medium-placeholder.png" width="150" height="150" />
-                                <button class="me-upload-image-button">Upload Product</button>
-                            </div>
-                            <div class="uploaded-old-images">
-                                <p>Add Pricing</p>
-                                <fieldset>
-                                    <p>Product Price</p>
-                                    <input type="text" name="name" ng-model="product.price" id="input-price" class="me-xs-input reset-inline" required />
-                                </fieldset>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="md-dialog-buttons">
-                        <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep(3)">Next</md-button>
-                        </div>
-                    </div>
+
+                    <!--<div class="md-dialog-header">-->
+                        <!--<h1>Pricing & Uploads</h1>-->
+                    <!--</div>-->
+                    <!--<div class="md-dialog-main">-->
+                        <!--<div class="file-upload-wrapper clearfix">-->
+                            <!--<p class="file-upload-msg">Select a product to upload</p>-->
+                            <!--<div class="pull-left">-->
+                                <!--<div class="me-file-upload rounded">-->
+                                    <!--<div class="upload-wrapper">-->
+                                        <!--<input type="file" accept="image/*" aria-invalid="true" required />-->
+                                        <!--<span>Select Product</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="uploaded-section clearfix">-->
+                            <!--<div class="uploaded-new-image">-->
+                                <!--<p>Selected Product</p>-->
+                                <!--<img src="../../../images/medium-placeholder.png" width="150" height="150" />-->
+                                <!--<button class="me-upload-image-button">Upload Product</button>-->
+                            <!--</div>-->
+                            <!--<div class="uploaded-old-images">-->
+                                <!--<p>Add Pricing</p>-->
+                                <!--<fieldset>-->
+                                    <!--<p>Product Price</p>-->
+                                    <!--<input type="text" name="name" ng-model="product.price" id="input-price" class="me-xs-input reset-inline" required />-->
+                                <!--</fieldset>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="md-dialog-buttons">-->
+                        <!--<div class="inner-section">-->
+                            <!--<md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>-->
+                            <!--<md-button class="me-default-button" ng-click="nextStep(3)">Next</md-button>-->
+                        <!--</div>-->
+                    <!--</div>-->
 
                 </md-tab-body>
             </md-tab>

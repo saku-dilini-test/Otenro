@@ -41,14 +41,43 @@
                 })
 
         }
-
-        $scope.addType=function(type){
+        $scope.addType=function(type,id){
             $scope.product.type = type;
             toastr.success(type, 'Choose', {
                 closeButton: true
             });
         };
-        
+
+        $scope.idDetails = function(product){
+        var ids={
+            mainId : product.mainId,
+            childId : product.childId
+            };
+            console.log(ids.childId);
+             commerceService.getVariants(ids.childId).
+                    success(function(data) {
+                     toastr.success('Successfully saved', 'Awsome!', {
+                         closeButton: true
+                     });
+                     console.log(data);
+                     console.log(data[0]);
+                     console.log(data[0]);
+
+                    $scope.variants=[{
+                        type: "cloth",
+                        name: data.name,
+                        size: "10",
+                        price: data.price,
+                        qty: "1"
+                    }];
+                    console.log($scope.variants.name);
+                    }).error(function(err) {
+                        toastr.error('Saving detals was not Successful', 'Warning', {
+                            closeButton: true
+                        });
+                    });
+        },
+
         $scope.addProducts = function(file,product) {
 
             if(file == null){
@@ -71,7 +100,6 @@
                 return;
             }
             else{
-                console.log('true');
                 commerceService.addProduct(file,product,item.id).
                     success(function(data) {
                         toastr.success('New Product has been added.', 'Awsome!', {

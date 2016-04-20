@@ -227,7 +227,7 @@ module.exports = {
                                     if (err) return err;
 
                                     /**
-                                     * Add Third Navigation
+                                     * Add Third NavigatThirdNavigation.jsion
                                      */
 
                                     if (j == 0) {
@@ -237,6 +237,9 @@ module.exports = {
                                             ThirdNavigation.create(thirdNavi1[z]).exec(function (err, thirdN) {
                                                 if (err) return err;
                                             });
+                                            PriceAndVariants.create(thirdNavi1[z]).exec(function (err, thirdN) {
+                                                if (err) return err;
+                                            });
                                         }
                                     } else {
                                         for (var z = 0; z < thirdNavi2.length; z++) {
@@ -244,6 +247,9 @@ module.exports = {
                                             ThirdNavigation.create(thirdNavi2[z]).exec(function (err, thirdN) {
                                                 if (err) return err;
                                             });
+                                             PriceAndVariants.create(thirdNavi2[z]).exec(function (err, thirdN) {
+                                                if (err) return err;
+                                             });
 
                                         }
                                     }

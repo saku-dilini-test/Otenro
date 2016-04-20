@@ -80,6 +80,7 @@
                     file: file
                 });
             },
+
             addProduct: function(file,product){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addThirdNavigation',
@@ -198,6 +199,9 @@
                 }, function() {
                     //$scope.status = 'You cancelled the dialog.';
                 });
+            },
+            getVariants:function(idDetails){
+                return $http.get(SERVER_URL+ 'edit/getVariants?appId='+$rootScope.appId+'&childId='+idDetails);
             },
             getMainMenuList: function(){
                 return $http.get(SERVER_URL+ 'edit/getMainNavigation?appId='+$rootScope.appId);

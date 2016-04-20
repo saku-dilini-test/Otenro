@@ -36,7 +36,8 @@ angular.module('app', [
   'colorpicker.module',
   'ui.tree',
   'ui.mask',
-  'uiGmapgoogle-maps'
+  'uiGmapgoogle-maps',
+  'angularInlineEdit'
 
 
 ]).run(function($rootScope, $state, $auth,Auth) {
