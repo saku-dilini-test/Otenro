@@ -9,10 +9,10 @@
                 <img src="images/user-icon.svg" alt="User Logo" />
             </button>
         </div>
-        <ul  ng-show="welcome" class="template-categories" >
-            <li><a href="javascript:void(0);">business</a></li>
-            <li><a href="javascript:void(0);">portfolio</a></li>
-            <li><a href="javascript:void(0);">media</a></li>
+        <ul  ng-show="welcome" class="template-categories"  >
+            <li ng-repeat="item in category">
+                <a ng-click="getCategoryData();" >{{item.category_name}}</a>
+            </li>
         </ul>
     </div>
 

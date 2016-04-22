@@ -3,9 +3,9 @@
   'use strict';
   angular.module('app')
     .controller('HeaderController', ['$scope', 'Auth', 'CurrentUser',
-        'userProfileService','$location',HeaderController]);
+        'userProfileService','$location','dashboardService','toastr',HeaderController]);
 
-    function HeaderController($scope, Auth, CurrentUser,userProfileService,$location) {
+    function HeaderController($scope, Auth, CurrentUser,userProfileService,$location,dashboardService,toastr) {
 
       $scope.welcome=false;
       var location=$location.url();
@@ -20,6 +20,19 @@
       $scope.profileView = function () {
         return userProfileService.showUserProfileDialog();
       }
+
+
+      dashboardService.getAllCategory().success(function (data) {
+        $scope.category=data;
+      }).error(function (err) {
+        toastr.error(err.error, 'Error', {
+          closeButton: true
+        });
+      });
+      $scope.getCategoryData = function(){
+
+      }
+
     }
 })();
 

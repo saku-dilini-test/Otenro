@@ -53,6 +53,7 @@ module.exports.routes = {
      * */
 
     'POST /app/dashboard/allApps': 'DashboardController.allApps',
+    'POST /api/dashboard/getAllCategory': 'DashboardController.getAllCategory',
     'POST /app/designApps': 'ApplicationController.designApps',
     'POST /app/viewTemplate': 'ApplicationController.viewTemplate',
 
