@@ -27,10 +27,13 @@ module.exports = {
        weight:{
        type : 'string',
        },
+       size:{
+       type : 'string',
+       },
        price: {
        type : 'string',
        },
-       qty: {
+       quantity: {
        type : 'string',
        }
     }

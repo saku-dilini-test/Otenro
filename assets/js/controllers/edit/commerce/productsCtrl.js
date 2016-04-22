@@ -6,10 +6,11 @@
 
     function ProductCtrl($scope, $mdDialog,toastr, commerceService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER,item) {
 
-        var type,name,size,price,qty;
+        var size,weight;
         var variants;
         $scope.tmpImage =[ null , null , null, null, null, null, null, null];
         $scope.mainImg =null;
+        $scope.selection = "weight";
 
         $scope.product={
             //name:item.name,
@@ -50,31 +51,38 @@
         };
 
         $scope.nextStep2 = function(current,product){
-        var ids={
-            mainId : product.mainId,
-            childId : product.childId
-            };
-             commerceService.getVariants(ids.childId).
-                    success(function(data) {
-                     toastr.success('Successfully saved', 'Awsome!', {
-                         closeButton: true
-                     });
-                    $scope.selectedTab = current;
-
-                    $scope.variants=[{
-                        type: "cloth",
-                        name: data[0].name,
-                        size: "10",
-                        price: data[0].price,
-                        qty: "1"
-                    }];
-                    console.log($scope.variants.name);
-                    }).error(function(err) {
-                        toastr.error('Saving detals was not Successful', 'Warning', {
-                            closeButton: true
-                        });
+        if(product.name == "" || product.mainId == null || product.childId == null){
+         toastr.error('Fill all the fields', 'Warning', {
+                           closeButton: true
                     });
-        },
+        }
+        else{
+          var ids={
+              mainId : product.mainId,
+              childId : product.childId
+              };
+               commerceService.getVariants(ids.childId).
+                      success(function(data) {
+                       toastr.success('Successfully saved', 'Awsome!', {
+                           closeButton: true
+                       });
+                      $scope.selectedTab = current;
+
+                      $scope.variants=[{
+                          type: "cloth",
+                          name: data[0].name,
+                          sizeOrweight: "10",
+                          price: data[0].price,
+                          qty: "1"
+                      }];
+                      }).error(function(err) {
+                          toastr.error('Saving detals was not Successful', 'Warning', {
+                              closeButton: true
+                          });
+                      });
+        }
+        };
+
         $scope.typeUpdateHandler = function(newValue) {
           $scope.variants[0].type = newValue;
         };
@@ -91,7 +99,7 @@
             $scope.variants[0].qty = newValue;
         };
 
-        $scope.nextStep3 = function(current) {
+        $scope.nextStep3 = function(current,selection) {
         if($scope.variants[0].type == "" || $scope.variants[0].name == "" || $scope.variants[0].size == "" || $scope.variants[0].price == "" || $scope.variants[0].qty == ""){
             toastr.error('Fill all the fields', 'Warning', {
                    closeButton: true
@@ -103,6 +111,12 @@
             });
         }
         else{
+                if(selection == "weight"){
+                 weight = $scope.variants[0].sizeOrweight;
+                }
+                else{
+                size = $scope.variants[0].sizeOrweight;
+                }
               $scope.selectedTab = current;
             }
         };
@@ -129,7 +143,17 @@
                 return;
             }
             else{
-                commerceService.addProduct(file,product,item.id).
+            variants = {
+                 appId: $rootScope.appId,
+                 childId: product.childId,
+                 proType: $scope.variants[0].type,
+                 name: $scope.variants[0].name,
+                 size: size,
+                 weight: weight,
+                 price: $scope.variants[0].price,
+                 quantity: $scope.variants[0].qty
+            };
+                commerceService.addProduct(file,product,variants,item.id).
                     success(function(data) {
                         toastr.success('New Product has been added.', 'Awsome!', {
                             closeButton: true
@@ -140,15 +164,7 @@
                             closeButton: true
                         });
                     });
-               variants = {
-                    appId: $rootScope.appId,
-                    childId: product.childId,
-                    type: $scope.variants[0].type,
-                    name: $scope.variants[0].name,
-                    size: $scope.variants[0].size,
-                    price: $scope.variants[0].price,
-                    qty: $scope.variants[0].qty
-               };
+
                 commerceService.addPriceandVariants(variants).
                 success(function(data) {
                     toastr.success('New Product has been added.', 'Awsome!', {
