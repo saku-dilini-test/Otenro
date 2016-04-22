@@ -21,7 +21,8 @@ module.exports = {
         {
             template_name : 'codecanyon',
             imageUrl : 'resturant/codecanyon.png',
-            templateFilesPath:'templates/codecanyon'
+            templateFilesPath:'templates/codecanyon',
+            category:'business'
         },
         //{
         // template_name : 'tokoyoapp',

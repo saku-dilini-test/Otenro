@@ -44,7 +44,7 @@ module.exports.sockets = {
   //
   //
   //
-  //// Use this option to set the datastore socket.io will use to manage rooms/sockets/subscriptions:
+  //// Use this option to set the data store socket.io will use to manage rooms/sockets/subscriptions:
   //// default: memory
   //
   //adapter: 'memory',

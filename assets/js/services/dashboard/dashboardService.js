@@ -12,6 +12,9 @@
             },
             getTemplatesData:function(appParams){
                 return $http.post(SERVER_URL + 'api/dashboard/getTemplatesData', appParams);
+            },
+            getAllCategory:function(appParams){
+                return $http.post(SERVER_URL +'api/dashboard/getAllCategory', appParams);
             }
         }
     }

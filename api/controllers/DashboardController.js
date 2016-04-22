@@ -19,5 +19,13 @@ module.exports = {
             if (err) return done(err);
             res.send(apps);
         });
+    },
+    getAllCategory: function (req,res) {
+
+        TemplateCategory.find().exec(function(err, category) {
+            if (err) res.send(err);
+            res.send(category);
+        });
+
     }
 };
