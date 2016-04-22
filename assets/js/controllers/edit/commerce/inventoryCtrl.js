@@ -26,7 +26,7 @@
 //                             discount: 0
 
 //                             }
-                             console.log("result "+result);
+                             console.log("result "+result[0]);
                          }).error(function (error) {
                              alert("Inventory Loading Error : " + error);
                          })

@@ -203,6 +203,9 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+            getUpdates:function(id){
+                   return $http.get(SERVER_URL+ 'edit/getUpdates?ObjectId='+id);
+            },
             getVariants:function(idDetails){
                 return $http.get(SERVER_URL+ 'edit/getVariants?appId='+$rootScope.appId+'&childId='+idDetails);
             },
