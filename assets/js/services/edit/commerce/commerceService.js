@@ -203,6 +203,10 @@
             getVariants:function(idDetails){
                 return $http.get(SERVER_URL+ 'edit/getVariants?appId='+$rootScope.appId+'&childId='+idDetails);
             },
+            addPriceandVariants:function(variants){
+            console.log(variants);
+                return $http.post(SERVER_URL+ 'edit/updateVariants',variants);
+            },
             getMainMenuList: function(){
                 return $http.get(SERVER_URL+ 'edit/getMainNavigation?appId='+$rootScope.appId);
             },

@@ -58,9 +58,9 @@
                                     </md-select>
                                 </fieldset>
                             </div>
-                            <fieldset class="text-right">
-                                <input type="submit" ng-click="idDetails(product)" class="me-default-button" value="Save" />
-                            </fieldset>
+                            <!--<fieldset class="text-right">-->
+                                <!--<input type="submit" ng-click="idDetails(product)" class="me-default-button" value="Save" />-->
+                            <!--</fieldset>-->
                         </div>
                         <!--<fieldset class="col-2 profile-image-section">-->
                             <!--<label class="reset-inline fie-upload-text-gap">Product Image</label>-->
@@ -82,7 +82,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep(2)">Next</md-button>
+                            <md-button class="me-default-button" ng-click="nextStep2(2,product)">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -113,31 +113,31 @@
                                 <tr ng-repeat="data in variants">
                                     <td
                                        inline-edit="data.type"
-                                       inline-edit-callback="myUpdateHandler(newValue)"
+                                       inline-edit-callback="typeUpdateHandler(newValue)"
                                        inline-edit-btn-edit=""
                                        inline-edit-on-blur="save"
                                        inline-edit-on-click></td>
                                     <td
                                        inline-edit="data.name"
-                                       inline-edit-callback="myUpdateHandler(newValue)"
+                                       inline-edit-callback="nameUpdateHandler(newValue)"
                                        inline-edit-btn-edit=""
                                        inline-edit-on-blur="save"
                                        inline-edit-on-click></td>
                                     <td
                                        inline-edit="data.size"
-                                       inline-edit-callback="myUpdateHandler(newValue)"
+                                       inline-edit-callback="sizeUpdateHandler(newValue)"
                                        inline-edit-btn-edit=""
                                        inline-edit-on-blur="save"
                                        inline-edit-on-click></td>
                                     <td
                                        inline-edit="data.price"
-                                       inline-edit-callback="myUpdateHandler(newValue)"
+                                       inline-edit-callback="priceUpdateHandler(newValue)"
                                        inline-edit-btn-edit=""
                                        inline-edit-on-blur="save"
                                        inline-edit-on-click></td>
                                     <td
                                        inline-edit="data.qty"
-                                       inline-edit-callback="myUpdateHandler(newValue)"
+                                       inline-edit-callback="qtyUpdateHandler(newValue)"
                                        inline-edit-btn-edit=""
                                        inline-edit-on-blur="save"
                                        inline-edit-on-click></td>
@@ -149,7 +149,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep(3)">Next</md-button>
+                            <md-button class="me-default-button" ng-click="nextStep3(3,data)">Next</md-button>
                         </div>
                     </div>
 

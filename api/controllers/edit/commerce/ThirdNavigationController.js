@@ -118,6 +118,22 @@ module.exports = {
         if (err) return done(err);
            res.send(app);
         });
+    },
+
+    updateVariants: function(req,res){
+        console.log(req.body);
+                var searchApp = {
+                    appId: req.body.appId
+                };
+        PriceAndVariants.find(searchApp, function(err, app){
+             if (err) return done(err);
+             else
+             PriceAndVariants.update({childId: req.body.childId},req.body).exec(function(err){
+                             if (err) res.send(err);
+                             res.send('ok');
+             });
+
+        })
     }
 
 

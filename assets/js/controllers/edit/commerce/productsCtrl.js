@@ -6,7 +6,8 @@
 
     function ProductCtrl($scope, $mdDialog,toastr, commerceService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER,item) {
 
-
+        var type,name,size,price,qty;
+        var variants;
         $scope.tmpImage =[ null , null , null, null, null, null, null, null];
         $scope.mainImg =null;
 
@@ -48,7 +49,7 @@
             });
         };
 
-        $scope.idDetails = function(product){
+        $scope.nextStep2 = function(current,product){
         var ids={
             mainId : product.mainId,
             childId : product.childId
@@ -58,6 +59,7 @@
                      toastr.success('Successfully saved', 'Awsome!', {
                          closeButton: true
                      });
+                    $scope.selectedTab = current;
 
                     $scope.variants=[{
                         type: "cloth",
@@ -73,10 +75,36 @@
                         });
                     });
         },
+        $scope.typeUpdateHandler = function(newValue) {
+          $scope.variants[0].type = newValue;
+        };
+        $scope.nameUpdateHandler = function(newValue) {
+            $scope.variants[0].name = newValue;
+        };
+        $scope.sizeUpdateHandler = function(newValue) {
+            $scope.variants[0].size = newValue;
+        };
+        $scope.priceUpdateHandler = function(newValue) {
+            $scope.variants[0].price = newValue;
+        };
+        $scope.qtyUpdateHandler = function(newValue) {
+            $scope.variants[0].qty = newValue;
+        };
 
-        $scope.myUpdateHandler = function(newValue) {
-          // check your console
-          console.log('value of your model is now: ' + newValue);
+        $scope.nextStep3 = function(current) {
+        if($scope.variants[0].type == "" || $scope.variants[0].name == "" || $scope.variants[0].size == "" || $scope.variants[0].price == "" || $scope.variants[0].qty == ""){
+            toastr.error('Fill all the fields', 'Warning', {
+                   closeButton: true
+            });
+        }
+        else if($scope.variants[0].size == "0" || $scope.variants[0].price == "0" || $scope.variants[0].qty == "0"){
+            toastr.error('Cannot be 0', 'Warning', {
+                  closeButton: true
+            });
+        }
+        else{
+              $scope.selectedTab = current;
+            }
         };
 
         $scope.addProducts = function(file,product) {
@@ -86,7 +114,7 @@
                     closeButton: true
                 });
                 return;
-            }if(product.childId == null || product.name ==null || product.price==null){
+            }if(product.childId == null || product.name ==null){
                 $scope.selectedTab =1;
                 toastr.error('Fill all the fields', 'Warning', {
                     closeButton: true
@@ -112,6 +140,26 @@
                             closeButton: true
                         });
                     });
+               variants = {
+                    appId: $rootScope.appId,
+                    childId: product.childId,
+                    type: $scope.variants[0].type,
+                    name: $scope.variants[0].name,
+                    size: $scope.variants[0].size,
+                    price: $scope.variants[0].price,
+                    qty: $scope.variants[0].qty
+               };
+                commerceService.addPriceandVariants(variants).
+                success(function(data) {
+                    toastr.success('New Product has been added.', 'Awsome!', {
+                        closeButton: true
+                    });
+                    $mdDialog.hide();
+                }).error(function(err) {
+                    toastr.error('Unable to Add', 'Warning', {
+                        closeButton: true
+                    });
+                });
             }
 
         };
