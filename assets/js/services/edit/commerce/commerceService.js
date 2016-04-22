@@ -81,13 +81,16 @@
                 });
             },
 
-            addProduct: function(file,product){
+            addProduct: function(file,product,variants){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addThirdNavigation',
                     fields: {
                         appId:$rootScope.appId,
                         name: product.name,
-                        price: product.price,
+                        price: variants.price,
+                        size: variants.size,
+                        weight: variants.weight,
+                        quantity: variants.quantity,
                         childId: product.childId,
                         desc: product.desc,
                         type : product.type,
