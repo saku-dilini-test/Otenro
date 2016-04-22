@@ -121,7 +121,6 @@ module.exports = {
     },
 
     updateVariants: function(req,res){
-        console.log(req.body);
                 var searchApp = {
                     appId: req.body.appId
                 };
