@@ -51,7 +51,7 @@
         };
 
         $scope.nextStep2 = function(current,product){
-        if(product.name == "" || product.mainId == null || product.childId == null){
+        if(product.name == null || product.mainId == null || product.childId == null){
          toastr.error('Fill all the fields', 'Warning', {
                            closeButton: true
                     });
@@ -67,10 +67,10 @@
                            closeButton: true
                        });
                       $scope.selectedTab = current;
-
+console.log($scope.product.type);
                       $scope.variants=[{
-                          type: "cloth",
-                          name: data[0].name,
+                          type: $scope.product.type,
+                          name: product.name,
                           sizeOrweight: "10",
                           price: data[0].price,
                           qty: "1"

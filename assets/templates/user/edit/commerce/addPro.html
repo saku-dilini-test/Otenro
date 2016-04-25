@@ -112,17 +112,9 @@
 
                                 <tr ng-repeat="data in variants">
                                     <td
-                                       inline-edit="data.type"
-                                       inline-edit-callback="typeUpdateHandler(newValue)"
-                                       inline-edit-btn-edit=""
-                                       inline-edit-on-blur="save"
-                                       inline-edit-on-click></td>
+                                       ng-model="data.type">{{data.type}}</td>
                                     <td
-                                       inline-edit="data.name"
-                                       inline-edit-callback="nameUpdateHandler(newValue)"
-                                       inline-edit-btn-edit=""
-                                       inline-edit-on-blur="save"
-                                       inline-edit-on-click></td>
+                                       ng-model="data.name">{{data.name}}</td>
                                     <td
                                        inline-edit="data.sizeOrweight"
                                        inline-edit-callback="sizeUpdateHandler(newValue)"
