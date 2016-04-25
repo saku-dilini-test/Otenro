@@ -76,58 +76,73 @@
 
              contactUsService.addContactUs(contactInfo)
                 .success(function(data, status, headers, config) {
-                     console.log('Update AppId : ' + data);
-                     alert('Successfully save Contact Us Data ..... !');
+                toastr.success('Successfully save Contact Us Data ..... !', 'Awsome!', {
+                                        closeButton: true
+                                    });
                  }).error(function(data, status, headers, config) {
-                     //alert('warning', "Unable to get templates", err.message);
+                      toastr.error('Unable to Add', 'Warning', {
+                                             closeButton: true
+                      });
                  })
         };
 
-        $scope.addBasicInfo = function(basicInfo) {
+        $scope.addBasicInfo = function(current,basicInfo) {
             var basicInfoResponse = {
                 'appId': $rootScope.appId,
                 'address': basicInfo.address,
                 'telPhone': basicInfo.telPhone
             };
+            $scope.activeTabIndex = current;
 
             contactUsService.saveBasicInfo(basicInfoResponse)
             .success(function(data, status, headers, config) {
-                 console.log('Updated AppId : ' + data.appId);
-                 alert('Basic info saved successfully');
+            toastr.success('Basic info saved successfully', 'Awsome!', {
+                closeButton: true
+            });
             }).error(function(data, status, headers, config) {
-                 alert('Basic info saving error : ' + err.message);
+                toastr.error('Basic info saving error', {
+                                   closeButton: true
+                });
             });
         };
 
-        $scope.addWebInfo = function(webInfo) {
+        $scope.addWebInfo = function(current,webInfo) {
             var webInfoResponse = {
                 'appId': $rootScope.appId,
                 'email': webInfo.email,
                 'webSite': webInfo.webSite
             };
+            $scope.activeTabIndex = current;
 
             contactUsService.saveWebInfo(webInfoResponse)
             .success(function(data, status, headers, config) {
-                 console.log('Updated AppId : ' + data.appId);
-                 alert('Web info saved successfully');
+            toastr.success('Web info saved successfully', 'Awsome!', {
+                closeButton: true
+            });
             }).error(function(data, status, headers, config) {
-                 alert('Web info saving error : ' + err.message);
+                toastr.error('Web info saving error', {
+                                   closeButton: true
+                });
             });
         };
 
-        $scope.addGoogleMap = function(googleMapInfo) {
-            console.log($scope.map.markers);
+        $scope.addGoogleMap = function(current,googleMapInfo) {
             var googleMapInfoResponse = {
                 'appId': $rootScope.appId,
                 'coords': $scope.map.markers[0].coords
             };
 
+            $scope.activeTabIndex = current;
+
             contactUsService.saveGoogleMapInfo(googleMapInfoResponse)
                 .success(function(data, status, headers, config) {
-                    console.log('Updated AppId : ' + data.appId);
-                    alert('Google Map Info saved successfully');
+                toastr.success('Google Map Info saved successfully', 'Awsome!', {
+                    closeButton: true
+                });
                 }).error(function(data, status, headers, config) {
-                    alert('Google Map Info saving error : ' + err.message);
+                    toastr.error('Google Map Info saving error', {
+                             closeButton: true
+                    });
                 });
         };
 
@@ -150,11 +165,14 @@
 
             contactUsService.saveOpenHoursInfo(openHoursResponse)
             .success(function(data, status, headers, config) {
-                    console.log(data);
-                 console.log('Updated AppId : '+ data.appId);
-                 alert('Open hours information saved successfully');
+            toastr.success('Open hours information saved successfully', 'Awsome!', {
+                closeButton: true
+            });
+                 $mdDialog.hide();
             }).error(function(data, status, headers, config) {
-                 alert('Open hours info saving error : ' + err.message);
+                 toastr.error('Open hours info saving error', {
+                          closeButton: true
+                 });
             });
         };
 

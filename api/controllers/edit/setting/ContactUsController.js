@@ -13,6 +13,7 @@ module.exports = {
             appId: req.body.appId
         };
 
+
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
             if (app.length == 0) {
                 ApplicationContactUs.create(data).exec(function (err, appContactUs) {
@@ -64,7 +65,6 @@ module.exports = {
     },
     addWebInfo: function (req, res) {
 
-        console.log(req.body);
         var data = req.body;
         var searchApp = {
             appId: req.body.appId
@@ -149,7 +149,6 @@ module.exports = {
         };
         ApplicationContactUs.findOne(searchApp).exec(function (err, app) {
             if (err) return done(err);
-            console.log(app);
             res.send(app);
         });
     }
