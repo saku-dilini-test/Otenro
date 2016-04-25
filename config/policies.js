@@ -71,7 +71,8 @@ module.exports.policies = {
   'template/TemplateAuthController': {
     //'*': ['jwtAuth'],
     authenticate : true,
-    register: true
+    register: true,
+    facebookAuth : true
   },
 
   'mobileViewer/MobileController' : {
