@@ -1,4 +1,4 @@
-mobileApp.controller('loginController', function($scope, $rootScope, $translate, appService, $window) {
+mobileApp.controller('loginController', function($scope, $rootScope, $translate, appService, $window,$auth,$location) {
     $scope.pageClass 		= 'slideLeft';
 	//$rootScope.appTitle	= $translate.instant('load.promo.Title');
 	$scope.serviceApi		= serviceApi;
@@ -39,4 +39,16 @@ mobileApp.controller('loginController', function($scope, $rootScope, $translate,
 			});
 		}
 	}
+
+	$scope.authenticate = function(provider) {
+		$auth.authenticate(provider).then(function(data){
+			if(typeof data.data.token != 'undefined'){
+				$location.path('/cart');
+			}else{
+				alert('Facebook Login error');
+			}
+		},function(err){
+			alert('Facebook Login error');
+		});
+	};
 });

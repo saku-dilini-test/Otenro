@@ -1,4 +1,4 @@
-var mobileApp = angular.module('mobileApp', ['ngRoute', 'ngAnimate', 'pascalprecht.translate', 'ngCookies', 'ngSanitize']);//ui-iconpicker
+var mobileApp = angular.module('mobileApp', ['ngRoute', 'ngAnimate', 'pascalprecht.translate', 'ngCookies', 'ngSanitize','satellizer']);//ui-iconpicker
 //Set your token database
 var token = 'a8B6c4D4e8F0';
 //Set url service app
@@ -125,7 +125,7 @@ mobileApp.directive('whenScrolled', function() {
     };
 });
 
-mobileApp.config(['$translateProvider', function($translateProvider) {
+mobileApp.config(['$translateProvider','$authProvider', function($translateProvider,$authProvider) {
     // Register a loader for the static files
     // So, the module will search missing translation tables under the specified urls.
     // Those urls are [prefix][langKey][suffix].
@@ -135,6 +135,22 @@ mobileApp.config(['$translateProvider', function($translateProvider) {
     });
     // Tell the module what language to use by default
     $translateProvider.preferredLanguage('en_US');
+
+    $authProvider.baseUrl = SERVER_URL;
+    // facebook
+    $authProvider.facebook({
+        clientId: '262852717382326',
+        url: '/templatesAuth/facebook'
+    });
+
+    // google
+    $authProvider.google({
+        clientId: '528602483901-opricfuv2v6iumlilavvljhi9maf1l9f.apps.googleusercontent.com',
+        authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
+        redirectUri: window.location.origin ,
+        url: '/templatesAuth/google'
+    });
+
 }])
 
 .controller('ctrl', ['$scope', '$translate', function($scope, $translate) {

@@ -156,6 +156,8 @@ module.exports.routes = {
      */
     'POST /templatesAuth/authenticate': 'template/TemplateAuthController.authenticate',
     'POST /templatesAuth/register': 'template/TemplateAuthController.register',
+    'POST /templatesAuth/facebook': 'template/TemplateAuthController.facebookAuth',
+    'POST /templatesAuth/google': 'template/TemplateAuthController.googleAuth',
 
     /***
      * Template Order Controller
