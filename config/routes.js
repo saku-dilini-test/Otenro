@@ -90,7 +90,7 @@ module.exports.routes = {
     //'POST /edit/updateCategoryImage': '',
     //'POST /edit/addProducts': '
     //
-    'POST /edit/addContactUs ': 'edit/setting/ContactUsController.addContactUs',
+    'POST /edit/addContactUs': 'edit/setting/ContactUsController.addContactUs',
     'POST /edit/addBasicInfo': 'edit/setting/ContactUsController.addBasicInfo',
     'POST /edit/addWebInfo': 'edit/setting/ContactUsController.addWebInfo',
     'POST /edit/addGoogleMapInfo': 'edit/setting/ContactUsController.addGoogleMapInfo',
