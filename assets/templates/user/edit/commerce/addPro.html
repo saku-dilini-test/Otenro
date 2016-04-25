@@ -100,9 +100,9 @@
                                 <th>Product Type</th>
                                 <th>Product Name</th>
                                 <th>
-                                    <select>
-                                        <option>weight</option>
-                                        <option>size</option>
+                                    <select ng-model="selection">
+                                        <option value="weight">weight</option>
+                                        <option value="size">size</option>
                                     </select>
                                 </th>
                                 <th>Price</th>
@@ -124,7 +124,7 @@
                                        inline-edit-on-blur="save"
                                        inline-edit-on-click></td>
                                     <td
-                                       inline-edit="data.size"
+                                       inline-edit="data.sizeOrweight"
                                        inline-edit-callback="sizeUpdateHandler(newValue)"
                                        inline-edit-btn-edit=""
                                        inline-edit-on-blur="save"
@@ -149,7 +149,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep3(3,data)">Next</md-button>
+                            <md-button class="me-default-button" ng-click="nextStep3(3,selection)">Next</md-button>
                         </div>
                     </div>
 

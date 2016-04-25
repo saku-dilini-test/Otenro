@@ -133,6 +133,20 @@ module.exports = {
              });
 
         })
+    },
+    getUpdates: function(req,res){
+        var id = req.param('ObjectId');
+        ThirdNavigation.find(id, function(err, app) {
+           if (err) return done(err);
+           res.send(app);
+        });
+    },
+    getChild: function(req,res){
+     var id = req.param("childId");
+      SecondNavigation.find(id, function(err, app){
+       if (err) return done(err);
+         res.send(app);
+     })
     }
 
 
