@@ -167,10 +167,58 @@ module.exports = {
             },
             // OK.
             success: function ( result){
-                console.log(result);
-                console.log("In");
-                req.token = result.id_token;
-                res.status(200).json({user : { email : "user.email" , sub : "user.id" },token :'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU2Y2JmYzIxOTZiMmVlY2EyNzdkNjViMSIsImVtYWlsIjoidGh1c2l0aHphcHBzQGdtYWlsLmNvbSIsImlhdCI6MTQ1NjQ4NDU3NH0.h10893CkxOcB3frk22FdT3ixfRTfgjfAiNNAUO5DhWo'});
+                var googleToken = result.access_token;
+                request.get('https://www.googleapis.com/plus/v1/people/me?access_token='+googleToken, function (error, response, body) {
+                    if (error) return res.negotiate(error);
+
+                    var data = JSON.parse(body);
+                    if(data.id){
+                        AppUser.findOne({googleId: data.id}, function foundUser(err, appUser) {
+                            if (err) return res.negotiate(err);
+                            if(!appUser){
+                                var googleEmail = data.emails[0].value;
+                                var googleName = data.displayName;
+                                AppUser.create({email: googleEmail, name : googleName , googleId : data.id}).exec(function(err, newAppUser) {
+                                    if (err) return res.negotiate(err);
+                                    JWT.encode({
+                                        secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                                        payload: {
+                                            id :  newAppUser.id,
+                                            email:  newAppUser.email
+                                        },
+                                        algorithm: 'HS256'
+                                    }).exec({
+                                        error: function (err){
+                                            return res.negotiate(err);
+                                        },
+                                        success: function (result){
+                                            res.status(200).json({user : {email: newAppUser.email, sub: newAppUser.id},token : result });
+                                        }
+                                    });
+                                });
+                            } else {
+                                console.log(appUser);
+                                JWT.encode({
+                                    secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                                    payload: {
+                                        id :  appUser.id,
+                                        email:  appUser.email
+                                    },
+                                    algorithm: 'HS256'
+                                }).exec({
+                                    error: function (err){
+                                        return res.negotiate(err);
+                                    },
+                                    success: function (result){
+                                        res.status(200).json({user : {email: appUser.email, sub: appUser.id},token : result });
+                                    }
+                                });
+                            }
+                        });
+                    }else{
+                        return res.negotiate('error');
+                    }
+                });
             }
         });
     },
