@@ -18,9 +18,15 @@ module.exports = {
             type: 'string',
             required: true
         },
+        mainId:{
+            type : 'string',
+        },
         childId: {
             type : 'string',
             required: true
+        },
+        proType:{
+            type : 'string',
         },
         price : {
             type : 'integer'

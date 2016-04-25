@@ -5,28 +5,12 @@
         ProductCtrl]);
 
     function ProductCtrl($scope, $mdDialog,toastr, commerceService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER,item) {
-//console.log(item.product);
-//commerceService.getUpdates(item.product)
-//                .success(function (result) {
-//                console.log(result[0]);
-////                    $scope.product = result[0];
-//                }).error(function (error) {
-//                    toastr.error('Loading Error', 'Warning', {
-//                        closeButton: true
-//                    });
-//                });
-$scope.variants=[{
-                  type: "cloth",
-                  name: item.name,
-                  sizeOrweight: "10",
-                  price: item.price,
-                  qty: item.quantity
-                }];
         var size,weight;
         var variants;
         $scope.tmpImage =[ null , null , null, null, null, null, null, null];
         $scope.mainImg =null;
         $scope.selection = "weight";
+        $scope.userId=$auth.getPayload().id;
 
         $scope.product={
             //name:item.name,
@@ -59,7 +43,7 @@ $scope.variants=[{
                 })
 
         }
-        $scope.addType=function(type,id){
+        $scope.addType=function(type){
             $scope.product.type = type;
             toastr.success(type, 'Choose', {
                 closeButton: true
@@ -67,7 +51,7 @@ $scope.variants=[{
         };
 
         $scope.nextStep2 = function(current,product){
-        if(product.name == "" || product.mainId == null || product.childId == null){
+        if(product.name == null || product.mainId == null || product.childId == null){
          toastr.error('Fill all the fields', 'Warning', {
                            closeButton: true
                     });
@@ -83,10 +67,10 @@ $scope.variants=[{
                            closeButton: true
                        });
                       $scope.selectedTab = current;
-
+console.log($scope.product.type);
                       $scope.variants=[{
-                          type: "cloth",
-                          name: data[0].name,
+                          type: $scope.product.type,
+                          name: product.name,
                           sizeOrweight: "10",
                           price: data[0].price,
                           qty: "1"
@@ -136,6 +120,50 @@ $scope.variants=[{
               $scope.selectedTab = current;
             }
         };
+        if( item[0] == undefined){
+             commerceService.getUpdates(item.product)
+                     .success(function (result) {
+                     console.log(result[0]);
+                         $scope.product = result[0];
+                         $scope.selectedLink = $scope.product.type;
+                         $scope.picFile ="templates/viewImages?img=thirdNavi/" + result[0].imageUrl + "&userId="+$scope.userId+"&appId="+$rootScope.appId;
+                         if(result[0].size != null){
+                              $scope.variants=[{
+                                type: result[0].proType,
+                                name: item.name,
+                                sizeOrweight: result[0].size,
+                                price: item.price,
+                                qty: item.quantity
+                              }];
+                         }
+                         else{
+                         $scope.variants=[{
+                               type: result[0].proType,
+                               name: item.name,
+                               sizeOrweight: result[0].weight,
+                               price: item.price,
+                               qty: item.quantity
+                             }];
+                         }
+                         commerceService.getChild(result[0].childId)
+                          .success(function (data) {
+                           $scope.child = data;
+//                           $scope.child = data[0];
+//                           $scope.child = data[0].name;
+                          }).error(function (error) {
+                              toastr.error('Loading Error', 'Warning', {
+                                  closeButton: true
+                              });
+                          });
+
+
+
+                     }).error(function (error) {
+                         toastr.error('Loading Error', 'Warning', {
+                             closeButton: true
+                         });
+                     });
+             }
 
         $scope.addProducts = function(file,product) {
 

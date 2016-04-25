@@ -44,7 +44,6 @@
                             });
                         },
             addCategory: function(file,category){
-                console.log(file);
                 //$http.post(SERVER_URL+ 'edit/deleteProduct',data)
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addSecondNavigation',
@@ -86,7 +85,9 @@
                     url: SERVER_URL + 'edit/addThirdNavigation',
                     fields: {
                         appId:$rootScope.appId,
+                        mainId:product.mainId,
                         name: product.name,
+                        proType: variants.proType,
                         price: variants.price,
                         size: variants.size,
                         weight: variants.weight,
@@ -203,6 +204,9 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+            getChild:function(childId){
+             return $http.get(SERVER_URL+ 'edit/getChild?childId='+childId);
+            },
             getUpdates:function(id){
                    return $http.get(SERVER_URL+ 'edit/getUpdates?ObjectId='+id);
             },
@@ -210,7 +214,6 @@
                 return $http.get(SERVER_URL+ 'edit/getVariants?appId='+$rootScope.appId+'&childId='+idDetails);
             },
             addPriceandVariants:function(variants){
-            console.log(variants);
                 return $http.post(SERVER_URL+ 'edit/updateVariants',variants);
             },
             getMainMenuList: function(){
