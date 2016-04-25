@@ -5,7 +5,23 @@
         ProductCtrl]);
 
     function ProductCtrl($scope, $mdDialog,toastr, commerceService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER,item) {
-
+//console.log(item.product);
+//commerceService.getUpdates(item.product)
+//                .success(function (result) {
+//                console.log(result[0]);
+////                    $scope.product = result[0];
+//                }).error(function (error) {
+//                    toastr.error('Loading Error', 'Warning', {
+//                        closeButton: true
+//                    });
+//                });
+$scope.variants=[{
+                  type: "cloth",
+                  name: item.name,
+                  sizeOrweight: "10",
+                  price: item.price,
+                  qty: item.quantity
+                }];
         var size,weight;
         var variants;
         $scope.tmpImage =[ null , null , null, null, null, null, null, null];

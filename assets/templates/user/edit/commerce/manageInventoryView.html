@@ -33,7 +33,7 @@
                                         <md-checkbox md-no-ink  aria-label="Check one item"></md-checkbox>
                                     </td>
                                     <td><input type="text" ng-model="inventory.sku" /></td>
-                                    <td><a href="" ng-click="gotoedit(inventory)">{{inventory.name}}</a></td>
+                                    <td><a href="" ng-model="inventory.name" ng-click="gotoedit(inventory)">{{inventory.name}}</a></td>
                                     <td><input type="number" ng-model="inventory.quantity" /></td>
                                     <td><input type="number" ng-model="inventory.price" /></td>
                                     <td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()"><input type="number" ng-model="inventory.sale"/></a></td>
