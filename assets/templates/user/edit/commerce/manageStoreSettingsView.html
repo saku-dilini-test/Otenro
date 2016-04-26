@@ -1,6 +1,6 @@
 <md-dialog aria-label="Store Settings">
     <md-dialog-content>
-        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+        <md-tabs md-center-tabs="false" md-selected="selectedTab" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
             <md-tab>
                 <md-tab-label>general</md-tab-label>
                 <md-tab-body>
@@ -12,15 +12,15 @@
                             <fieldset class="col-2">
                                 <label>select a currency</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <md-select ng-model="someVal">
-                                    <md-option value="option1">option 1</md-option>
-                                    <md-option value="option2">option 2</md-option>
-                                </md-select>
+                                <select class="form-control"
+                                        ng-model="storeSettings.currency"
+                                        ng-options=" oneCurrency.sign as oneCurrency.currency for oneCurrency in currencyList">
+                                </select>
                             </fieldset>
                             <fieldset class="col-2 reset-margin-right">
                                 <label>measurement standard</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <md-select ng-model="someVal">
+                                <md-select ng-model="storeSettings.measurementStandards">
                                     <md-option value="option1">option 1</md-option>
                                     <md-option value="option2">option 2</md-option>
                                 </md-select>
@@ -28,13 +28,13 @@
                             <fieldset class="col-2">
                                 <label>next order number </label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="name" required />
+                                <input type="text" ng-model="storeSettings.orderNumber" name="name" required />
                             </fieldset>
                             <fieldset class="col-2 reset-margin-right">
                                 <label>express checkout</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <div class="on-off-switch">
-                                    <input type="checkbox" name="on-off-switch" class="on-off-switch-checkbox" id="on-off-switch-1" checked>
+                                    <input type="checkbox" ng-model="storeSettings.expressCheckout" name="on-off-switch" class="on-off-switch-checkbox" id="on-off-switch-1" >
                                     <label class="on-off-switch-label" for="on-off-switch-1">
                                         <span class="on-off-switch-inner"></span>
                                         <span class="on-off-switch-switch"></span>
@@ -44,7 +44,7 @@
                             <fieldset>
                                 <label>select site type</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <md-select ng-model="someVal">
+                                <md-select ng-model="storeSettings.siteType">
                                     <md-option value="option1">option 1</md-option>
                                     <md-option value="option2">option 2</md-option>
                                 </md-select>
@@ -53,7 +53,7 @@
                                 <label>allow madeeasy to promote</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <div class="on-off-switch">
-                                    <input type="checkbox" name="on-off-switch" class="on-off-switch-checkbox" id="on-off-switch-2" checked>
+                                    <input type="checkbox" ng-model="storeSettings.allowPromote" name="on-off-switch" class="on-off-switch-checkbox" id="on-off-switch-2">
                                     <label class="on-off-switch-label" for="on-off-switch-2">
                                         <span class="on-off-switch-inner"></span>
                                         <span class="on-off-switch-switch"></span>
@@ -63,7 +63,7 @@
                             <fieldset>
                                 <label>address</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <textarea rows="2"></textarea>
+                                <textarea rows="2" ng-model="storeSettings.address" ></textarea>
                             </fieldset>
                             <br />
                             <h2>business hours</h2>
@@ -105,7 +105,7 @@
                             <fieldset>
                                 <label>select language</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <md-select ng-model="someVal">
+                                <md-select ng-model="storeSettings.language">
                                     <md-option value="option1">option 1</md-option>
                                     <md-option value="option2">option 2</md-option>
                                 </md-select>
@@ -113,7 +113,7 @@
                             <fieldset>
                                 <label>time and region</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <md-select ng-model="someVal">
+                                <md-select ng-model="storeSettings.timeAndRegion">
                                     <md-option value="option1">option 1</md-option>
                                     <md-option value="option2">option 2</md-option>
                                 </md-select>
@@ -121,22 +121,19 @@
                             <fieldset>
                                 <label>connect a domain</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="name" required />
+                                <input type="text" ng-model="storeSettings.connectDomain" name="name" required />
                             </fieldset>
                             <fieldset>
                                 <label>search engine description</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea rows="2"></textarea>
-                            </fieldset>
-                            <fieldset class="text-right">
-                                <input type="submit" class="me-default-button" value="save" />
+                                <textarea ng-model="storeSettings.searchEngineDesc" rows="2"></textarea>
                             </fieldset>
                         </form>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep(1)">next</md-button>
+                            <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="saveStoreSettings(1,storeSettings)">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -152,27 +149,24 @@
                             <fieldset>
                                 <label>return policy</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea rows="2"></textarea>
+                                <textarea rows="2" ng-model="policies.returnPolicy"></textarea>
                             </fieldset>
                             <fieldset>
                                 <label>terms and conditions</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea rows="2"></textarea>
+                                <textarea rows="2" ng-model="policies.termsAndCondition"></textarea>
                             </fieldset>
                             <fieldset>
                                 <label>privacy policy</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea rows="2"></textarea>
-                            </fieldset>
-                            <fieldset class="text-right">
-                                <input type="submit" class="me-default-button" value="save" />
+                                <textarea rows="2" ng-model="policies.privacyPolicy"></textarea>
                             </fieldset>
                         </form>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button">cancel</md-button>
-                            <md-button class="me-default-button">next</md-button>
+                            <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="savePolicies(2,policies)">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -205,8 +199,8 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button">cancel</md-button>
-                            <md-button class="me-default-button">next</md-button>
+                            <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="nextStep(3)">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -294,8 +288,8 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button">cancel</md-button>
-                            <md-button class="me-default-button">back</md-button>
+                            <md-button class="me-default-button" ng-click="answer()">Finish</md-button>
+                            <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
                         </div>
                     </div>
                 </md-tab-body>

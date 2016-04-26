@@ -61,6 +61,15 @@ module.exports.routes = {
     'POST /api/dashboard/getAllCategory': 'DashboardController.getAllCategory',
     'POST /app/designApps': 'ApplicationController.designApps',
     'POST /app/viewTemplate': 'ApplicationController.viewTemplate',
+     /***
+         * Store Settings Data
+         *
+         * */
+     'POST /edit/saveStoreSettings': 'edit/commerce/UserSettingsController.saveStoreSettings',
+     'POST /edit/savePolicies': 'edit/commerce/UserSettingsController.savePolicies',
+     'GET /edit/showStoreSettings': 'edit/commerce/UserSettingsController.showStoreSettings',
+     'GET /edit/showPolicies': 'edit/commerce/UserSettingsController.showPolicies',
+
 
     /***
      * Edit Data
@@ -122,8 +131,8 @@ module.exports.routes = {
     'GET /edit/getVariants': 'edit/commerce/ThirdNavigationController.getVariants',
     'POST /edit/updateVariants': 'edit/commerce/ThirdNavigationController.updateVariants',
     'POST /edit/deleteItem': 'edit/commerce/MainNavigationController.deleteItem',
-    'POST /edit/setCurrency': 'edit/setting/CurrencyController.setCurrency',
-    'GET /edit/getCurrency': 'edit/setting/CurrencyController.getCurrency',
+//    'POST /edit/setCurrency': 'edit/setting/CurrencyController.setCurrency',
+//    'GET /edit/getCurrency': 'edit/setting/CurrencyController.getCurrency',
     'GET /edit/getAllCurrency': 'edit/setting/CurrencyController.getAllCurrency',
 
 

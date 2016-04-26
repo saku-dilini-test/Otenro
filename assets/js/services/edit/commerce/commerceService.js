@@ -204,6 +204,18 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+            showPolicies:function(appId){
+                return $http.get(SERVER_URL+ 'edit/showPolicies?appId='+appId);
+            },
+            savePolicies:function(appParams){
+                return $http.post(SERVER_URL+ 'edit/savePolicies',appParams);
+            },
+            showStoreSettings:function(appId){
+                return $http.get(SERVER_URL+ 'edit/showStoreSettings?appId='+appId);
+            },
+            saveStoreSettings: function(appParams){
+                return $http.post(SERVER_URL+ 'edit/saveStoreSettings',appParams);
+            },
             getChild:function(childId){
              return $http.get(SERVER_URL+ 'edit/getChild?childId='+childId);
             },
