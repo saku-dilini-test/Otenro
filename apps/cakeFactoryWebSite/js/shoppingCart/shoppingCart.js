@@ -63,6 +63,9 @@ shoppingCart.prototype.selectDeliveryOption = function (option) {
         localStorage['branchName'] = '';
         localStorage['locationName'] = '';
         localStorage['deliveryAddress'] = '';
+        localStorage['deliveryAddress'] = '';
+        localStorage['currentCity'] = '';
+        localStorage['currentContactNumber'] = 0;
         localStorage['deliveryCharges'] = 0;
         this.deliveryCharge = 0;
     }
@@ -164,6 +167,44 @@ shoppingCart.prototype.getDeliveryAddress = function () {
     }
 }
 
+// save delivery address to local storage
+shoppingCart.prototype.saveCurrentCity = function (name) {
+    if (localStorage != null && JSON != null) {
+        localStorage['currentCity'] = name;
+    }
+}
+
+// get delivery address from local storage
+shoppingCart.prototype.getCurrentCity = function () {
+    if (localStorage != null && JSON != null) {
+        var currentCity = localStorage['currentCity'];
+        if(currentCity){
+            return localStorage['currentCity'];
+        }else{
+            return '';
+        }
+    }
+}
+
+// save delivery address to local storage
+shoppingCart.prototype.saveCurrentContactNumber = function (name) {
+    if (localStorage != null && JSON != null) {
+        localStorage['currentContactNumber'] = name;
+    }
+}
+
+// get delivery address from local storage
+shoppingCart.prototype.getCurrentContactNumber = function () {
+    if (localStorage != null && JSON != null) {
+        var currentCity = localStorage['currentContactNumber'];
+        if(currentCity){
+            return localStorage['currentContactNumber'];
+        }else{
+            return '';
+        }
+    }
+}
+
 // save one Doller to local storage
 shoppingCart.prototype.saveOneDoller = function (oneDoller) {    
     if (localStorage != null && JSON != null) {
@@ -206,10 +247,16 @@ shoppingCart.prototype.isSubmitButtonDisable = function () {
         }else if(currentDeliveryOption == 'delivery'){
             var currentLocation = this.getLocationName();
             var currentAddress = this.getDeliveryAddress();
+            var currentCity = this.getCurrentCity();
+            var currentContactNumber = this.getCurrentContactNumber();
             if(currentLocation == 'undefined' || currentLocation == ''){                
                 return true;
             }else {
-                if(currentAddress == 'undefined' || currentAddress == ''){
+                if(currentAddress == 'undefined' || currentAddress == '') {
+                    return true;
+                }else if(currentCity == 'undefined' || currentCity == ''){
+                    return true;
+                }else if(currentContactNumber == 'undefined' || currentContactNumber == 'null'){
                     return true;
                 }else{
                     return false;

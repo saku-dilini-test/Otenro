@@ -47,13 +47,14 @@ angular.module('animateApp')
 		}
 
 		$scope.saveDeliveryAddress = function(address){
-			var tempAddresss = address.line01 +','+ address.line02 +','+ address.city+','+address.contactNumber;
+			var tempAddresss = address.line01 +''+ address.line02;
+			var tempCity = address.city;
+			var tempContactNumber = address.contactNumber;
 			$scope.cart.saveDeliveryAddress(tempAddresss);
-			if(address.line01 && address.city && address.contactNumber) {
-				$scope.isSubmitButtonDisableValue = $scope.cart.isSubmitButtonDisable();
-			}else{
-				$scope.isSubmitButtonDisableValue = true;
-			}
+			$scope.cart.saveCurrentCity(tempCity);
+			$scope.cart.saveCurrentContactNumber(tempContactNumber);
+			$scope.isSubmitButtonDisableValue = $scope.cart.isSubmitButtonDisable();
+
 		}
 
 
