@@ -12,6 +12,12 @@
             },
             getUserProfile:function(appParams){
                 return $http.post(SERVER_URL +'user/getUserProfile', appParams);
+            },
+            editBillingDetails: function(appParams){
+                return $http.post(SERVER_URL +'user/editBillingDetails', appParams);
+            },
+            getBillingDetails: function(appParams){
+                return $http.get(SERVER_URL+ 'user/getBillingDetails?userId='+ appParams);
             }
         }
     }

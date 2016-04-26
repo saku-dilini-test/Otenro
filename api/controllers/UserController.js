@@ -22,5 +22,34 @@ module.exports = {
             if (err) return done(err);
             res.send(user);
         });
+    },
+    editBillingDetails : function(req,res){
+        var data = req.body;
+        var query = {userId:req.body.userId};
+        BillingDetails.update(query,data).exec(function(err,user) {
+               if (err) res.send(err);
+               if (user.length == 0) {
+                   BillingDetails.create(data).exec(function (err, app) {
+                       if (err) res.send(err);
+
+                       res.send({
+                           app: app,
+                           message: "New Contact Us Record Create Success !"
+                       });
+                   });
+               } else {
+                   res.send({
+                       app: user,
+                       message: "Contact Us Record Update Success !"
+                   });
+               }
+        });
+    },
+    getBillingDetails : function(req,res){
+        var query = {userId:req.param('userId')};
+          BillingDetails.find(query, function(err, user) {
+            if (err) return done(err);
+            res.send(user);
+        });
     }
 };
