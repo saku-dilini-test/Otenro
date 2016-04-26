@@ -1,6 +1,5 @@
 <div class="sign-in-container" ng-Controller="socialLoginCtrl">
-	<div id="fbLogin" ng-click="authenticate('facebook')" class="fb-link">Sign in with facebook</div>
-	<div id="googleLogin" class="g-signin2 google-link" data-onsuccess="onSignIn" data-theme="dark"></div>
-	<div class="logOut-link" id="logOutFB">Log Out</div>
-	<div class="logOut-link" id="logOutGoogle" onclick="signOut();">Log Out </div>
+	<div id="fbLogin" ng-if="fb_button" ng-click="authenticate('facebook')" class="fb-link">Sign in with facebook</div>
+	<div id="googleLogin" ng-if="google_button" ng-click="authenticate('google')" class="g-signin2 google-link" data-onsuccess="onSignIn" data-theme="dark"></div>
+	<div class="logOut-link" ng-if="logout_button" id="logOutGoogle" ng-click="logOut()">Log Out </div>
 </div>

@@ -38,17 +38,24 @@ angular.module('animateApp')
 			if(!location){
 				$scope.cart.saveLocationName('');
 				$scope.cart.saveDeliveryCharges(0);
-													
+
 			}else{
 				$scope.cart.saveLocationName(location.locationName);
-				$scope.cart.saveDeliveryCharges(location.deliveryCharge);						
+				$scope.cart.saveDeliveryCharges(location.deliveryCharge);
 			}
 			$scope.isSubmitButtonDisableValue = $scope.cart.isSubmitButtonDisable();
 		}
-		$scope.saveDeliveryAddress = function(name){
-			$scope.cart.saveDeliveryAddress(name);			
-			$scope.isSubmitButtonDisableValue = $scope.cart.isSubmitButtonDisable();
+
+		$scope.saveDeliveryAddress = function(address){
+			var tempAddresss = address.line01 +','+ address.line02 +','+ address.city+','+address.contactNumber;
+			$scope.cart.saveDeliveryAddress(tempAddresss);
+			if(address.line01 && address.city && address.contactNumber) {
+				$scope.isSubmitButtonDisableValue = $scope.cart.isSubmitButtonDisable();
+			}else{
+				$scope.isSubmitButtonDisableValue = true;
+			}
 		}
+
 
 	});	
 })();

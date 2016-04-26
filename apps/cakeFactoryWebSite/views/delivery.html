@@ -43,8 +43,14 @@
                             </select>
                         </li>
                         <li class="delivery-address-section">
-                            <label>Address</label>
-                            <textarea ng-model="deliveryAddress" ng-change="saveDeliveryAddress(deliveryAddress)" rows="3"></textarea>
+                            <label>Address Line 01</label>
+                            <input type="text" class="form-control" ng-model="deliveryAddress.line01" ng-change="saveDeliveryAddress(deliveryAddress)" >
+                            <label>Address Line 02</label>
+                            <input type="text" class="form-control" ng-model="deliveryAddress.line02" ng-change="saveDeliveryAddress(deliveryAddress)">
+                            <label>City</label>
+                            <input type="text" class="form-control" ng-model="deliveryAddress.city" ng-change="saveDeliveryAddress(deliveryAddress)">
+                            <label>Contact Number</label>
+                            <input type="number" class="form-control" ng-model="deliveryAddress.contactNumber" ng-change="saveDeliveryAddress(deliveryAddress)">
                         </li>
                     </ul>
                 </div>
