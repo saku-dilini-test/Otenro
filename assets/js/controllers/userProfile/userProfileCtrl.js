@@ -10,11 +10,11 @@
     'use strict';
     angular.module('app')
         .controller('userProfileCtrl',
-      ['$scope', 'userProfileResource', 'userProfileService','Auth','$state','$mdDialog','toastr',
+      ['$scope', 'userProfileResource', 'userProfileService','Auth','$auth','$state','$mdDialog','toastr',
             userProfileCtrl
         ]);
 
-    function userProfileCtrl($scope, userProfileResource, userProfileService,Auth,$state,$mdDialog,toastr) {
+    function userProfileCtrl($scope, userProfileResource, userProfileService,Auth,$auth,$state,$mdDialog,toastr) {
 
 
         userProfileResource.getUserProfile().success(function (data) {
@@ -25,9 +25,16 @@
                 closeButton: true
             });
         });
+        userProfileResource.getBillingDetails($auth.getPayload().id).success(function (data) {
+              $scope.billingEdit=data[0];
+              console.log($scope.billingEdit);
+                }).error(function (err) {
+                    toastr.error(err.error, 'Error', {
+                        closeButton: true
+                    });
+                });
 
         $scope.editUserProfile = function(params){
-            console.log(params);
             userProfileResource.editUserProfile(params).then(function(data){
                 $mdDialog.hide();
                 toastr.success('Successfully Changed', 'Success', {
@@ -35,6 +42,15 @@
                 });
             });
         };
+        $scope.saveBillings = function(billingEdit){
+            billingEdit.userId = $auth.getPayload().id;
+            userProfileResource.editBillingDetails(billingEdit).then(function(data){
+                 toastr.success('Successfully Changed', 'Success', {
+                     closeButton: true
+                 });
+                 $mdDialog.hide();
+            })
+        }
         $scope.redirectToDashboard = function() {
             return userProfileService.gotoDashboard();
         };

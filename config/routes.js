@@ -47,6 +47,11 @@ module.exports.routes = {
     'POST /auth/google': 'AuthController.googleAuth',
     'POST /auth/facebook': 'AuthController.facebookAuth',
 
+    /***
+    * Billing Data
+    * */
+    'POST /user/editBillingDetails': 'UserController.editBillingDetails',
+    'GET /user/getBillingDetails': 'UserController.getBillingDetails',
 
     /***
      * Application Data

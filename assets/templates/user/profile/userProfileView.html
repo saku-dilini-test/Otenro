@@ -18,7 +18,7 @@
                     <div class="md-dialog-main" ng-repeat="userEdit in userEditData">
                         <div class="clearfix">
                             <fieldset class="col-2">
-                                <label>First ndame</label>
+                                <label>First name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <input type="text" name="fname"  ng-model="userEdit.firstName" required />
                             </fieldset>
@@ -74,39 +74,39 @@
                             <fieldset class="col-2">
                                 <label>First name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="name" ng-model="userEdit.name" required />
+                                <input type="text" name="name" ng-model="billingEdit.fname" required />
                             </fieldset>
                             <fieldset class="col-2 reset-margin-right">
                                 <label>Last name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="name" ng-model="playStoreData.name" required />
+                                <input type="text" name="name" ng-model="billingEdit.lname" required />
                             </fieldset>
                         </div>
                         <fieldset>
                             <label>Billing Address</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" ng-model="playStoreData.name" required />
+                            <input type="text" name="name" ng-model="billingEdit.address" required />
                         </fieldset>
                         <fieldset class="col-2">
                             <label>Credit card number</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" ng-model="playStoreData.name" required />
+                            <input type="text" name="name" ng-model="billingEdit.ccnumber" required />
                         </fieldset>
                         <fieldset class="col-2 reset-margin-right">
                             <label>Card type</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" ng-model="playStoreData.name" required />
+                            <input type="text" name="name" ng-model="billingEdit.ctype" required />
                         </fieldset>
                         <fieldset>
                             <label>CVS code</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" class="me-xs-input reset-inline" ng-model="playStoreData.name" required />
+                            <input type="text" name="name" ng-pattern="/[0-9]+/" ui-mask="9999" class="me-xs-input reset-inline" ng-model="billingEdit.cvs" required />
                         </fieldset>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="close()">cancel</md-button>
-                            <md-button class="me-default-button">save</md-button>
+                            <md-button class="me-default-button" ng-click="saveBillings(billingEdit)">save</md-button>
                         </div>
                     </div>
                 </md-tab-body>
