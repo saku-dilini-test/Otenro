@@ -60,7 +60,9 @@ module.exports.routes = {
   'POST /user/create' : 'UserController.create',
   'POST /payment/saveShoppingCart' : 'PaymentController.saveShoppingCart',
   'POST /payment/saveShoppingCartWeb' : 'PaymentController.saveShoppingCartWeb',
-  'POST /contactUs/create' : 'ContactUsController.create'
+  'POST /contactUs/create' : 'ContactUsController.create',
+  'POST /facebookAuth' : 'UserController.facebookAuth',
+  'POST /googleAuth' : 'UserController.googleAuth'
 
 
 };
