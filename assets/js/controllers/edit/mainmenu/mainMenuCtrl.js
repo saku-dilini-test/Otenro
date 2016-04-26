@@ -185,7 +185,7 @@
                         nodes: []
                     });
                 }).success(function(data) {
-                    toastr.success("Successfully add new navigation", 'Message', {
+                    toastr.success("Successfully added new navigation", 'Message', {
                         closeButton: true
                     });
                 }).error(function(err) {
