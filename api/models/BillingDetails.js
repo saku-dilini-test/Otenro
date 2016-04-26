@@ -21,10 +21,10 @@ attributes: {
        address:{
           type: 'string'
        },
-       ccnumber:{
+       creditCardNumber:{
           type: 'string'
        },
-       ctype:{
+       cardType:{
           type: 'string'
        },
        cvs:{
