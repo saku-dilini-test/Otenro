@@ -72,7 +72,8 @@ module.exports.policies = {
     //'*': ['jwtAuth'],
     authenticate : true,
     register: true,
-    facebookAuth : true
+    facebookAuth : true,
+    googleAuth: true
   },
 
   'mobileViewer/MobileController' : {
