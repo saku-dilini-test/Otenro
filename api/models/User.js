@@ -82,5 +82,24 @@ module.exports = {
     });
 
   }
+
+  ,
+
+  beforeUpdate : function(values, next) {
+    console.log("value"+values);
+    Passwords.encryptPassword({
+      password: values.password,
+      difficulty: 10
+    }).exec({
+      error: function(err) {
+        return res.negotiate(err);
+      },
+      success: function(hash) {
+        values.password = hash;
+        next();
+      }
+    });
+
+  }
 };
 
