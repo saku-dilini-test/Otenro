@@ -1,10 +1,10 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("CommerceCtrl", [
-        '$scope', '$mdDialog', 'toastr','commerceService','$rootScope','SERVER_URL','$auth','ME_APP_SERVER',
+        '$scope', '$mdDialog', 'toastr','commerceService','currencyService','$rootScope','SERVER_URL','$auth','ME_APP_SERVER',
         CommerceCtrl]);
 
-    function CommerceCtrl($scope, $mdDialog,toastr, commerceService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER) {
+    function CommerceCtrl($scope, $mdDialog,toastr, commerceService,currencyService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER) {
         $scope.selectedTab = 0;
         $scope.miniLightBoxShow = false;
         $scope.shippingOptionParams = {
@@ -64,7 +64,6 @@
         }
 
         $scope.addCategory = function(file, category) {
-            console.log(category );
             commerceService.addCategory(file,category)
                 .progress(function(evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
@@ -159,6 +158,66 @@
                     });
                 })
         };
+
+         currencyService.getAllCurrency().
+                   success(function(data){
+                       $scope.currencyList = data;
+                   }).error(function(err){
+                       alert("MainMenu Loading Error : " + err);
+                   });
+
+         $scope.saveStoreSettings = function(current,storeSettings){
+
+         for(var i=0; i<$scope.currencyList.length; i++){
+                                 if($scope.storeSettings.currency == $scope.currencyList[i].sign){
+                                     $scope.options = $scope.currencyList[i];
+                                 }
+                             }
+         storeSettings.currencySign=$scope.options.sign,
+         storeSettings.currency=$scope.options.currency,
+         storeSettings.userId = $scope.userId;
+         storeSettings.appId = $rootScope.appId;
+
+         commerceService.saveStoreSettings(storeSettings).
+            success(function(data){
+             toastr.success(' Store Settings has been added.!', {
+                    closeButton: true
+                });
+                $scope.selectedTab = current;
+            }).error(function(err){
+                toastr.error(' warning',"Unable to get templates", {closeButton: true});
+            })
+            $scope.selectedTab = current;
+         };
+
+            commerceService.showStoreSettings($rootScope.appId).
+            success(function(data){
+                $scope.storeSettings = data[0];
+                $scope.storeSettings.currency = data[0].currencySign;
+            }).error(function(err){
+                toastr.error(' warning',"Unable to get Store Settings", {closeButton: true});
+            });
+
+        $scope.savePolicies = function(current,policies){
+                 policies.userId = $scope.userId;
+                 policies.appId = $rootScope.appId;
+            commerceService.savePolicies(policies).
+            success(function(data){
+            toastr.success(' Store Settings has been added.!', {
+                closeButton: true
+            });
+             $scope.selectedTab = current;
+            }).error(function(err){
+                toastr.error(' warning',"Unable to get Store Settings", {closeButton: true});
+            })
+        };
+
+        commerceService.showPolicies($scope.appId).
+            success(function(data){
+                $scope.policies = data[0];
+            }).error(function(err){
+                toastr.error(' warning',"Unable to get Store Settings", {closeButton: true});
+            })
 
 
         $scope.editCat=function(imageUrl,$id){
