@@ -32,12 +32,6 @@ module.exports = {
     accountType:  {
       type: 'string'
     },
-    billingName: {
-      type: 'string'
-    },
-    billingAddress:  {
-      type: 'string'
-    },
     picture: {
       type: 'string'
     },
