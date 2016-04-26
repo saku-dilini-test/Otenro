@@ -422,7 +422,7 @@ module.exports = {
     {
       name: 'CHOCOLATE PUDDLE PUDDING',
       itemCode:'SKU TECC21',
-      price: '4000',
+      price: '400',
       description: 'Baked chocolate sponge with a hot chocolate sauce',
       quantity:'Pre Glass',
       perSlicePrice:'0',

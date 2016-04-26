@@ -37,7 +37,7 @@ module.exports = {
 
     Facebook.getAccessToken({
       appId: req.body.clientId,
-      appSecret: '50f38010361357de390b5cfcdf06dbb0',
+      appSecret: 'a8ac09ea90c0bd49b0ac150ef88473ae',
       code: req.body.code,
       callbackUrl: req.body.redirectUri
     }).exec({
@@ -47,22 +47,17 @@ module.exports = {
       },
       // OK.
       success: function ( result){
-        console.log(result.token);
         // get facebook Id & email
         request.get('https://graph.facebook.com/v2.6/me?fields=id,email,name&access_token='+result.token, function (error, response, body) {
           if (error) return res.negotiate(error);
 
           var data = JSON.parse(body);
-          console.log(body);
           if(data.id){
             User.findOne({facebookId: data.id}, function foundUser(err, appUser) {
               if (err) return res.negotiate(err);
-              console.log(appUser);
               if(!appUser){
-                console.log('xxxx');
                 User.create({email: data.email, name : data.name, facebookId : data.id}).exec(function(err, newAppUser) {
                   if (err) return res.negotiate(err);
-                  console.log(newAppUser);
                   JWT.encode({
                     secret: '17ca644f4f3be572ec33711a40a5b8b4',
                     payload: {
@@ -108,7 +103,7 @@ module.exports = {
     // Get OAuth2 client
     GoogleAPIsOAuth2v2.getAccessToken({
       clientId: req.body.clientId,
-      clientSecret: 'MNzK1winvmWZTtT8S4QCCpky',
+      clientSecret: '31hmUuzjCeCwYJs3w0B2srSg',
       redirectUrl: req.body.redirectUri,
       code: req.body.code
     }).exec({

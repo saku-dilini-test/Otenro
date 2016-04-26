@@ -1,0 +1,25 @@
+<div class="other-page-header home-pg"></div>
+<div ng-include=" 'views/navigation.html' "></div>
+<div class="page-wrapper white-bg">	
+	<div class="container">
+		<div class="cont  services_desc">
+			<h2>Welcome</h2>
+			<p><span>
+					There is nothing like The English Cake Company anywhere with its wide range of cakes, 
+					puddings and savories, all home-made with only natural ingredients using the best ingredients available. 
+					We only make the things we like, just the way we like to eat them…… that’s why everyone loves them.			
+				</span>
+			</p>
+			</div>
+		<div class="row">
+			<div> 
+				<div class="col-md-3 col-sm-6" ng-repeat="oneCategory in allCategories">
+				<h3>{{oneCategory.name}}</h3>						
+					<a href="#product/{{oneCategory.categoryCode}}">						
+						<img class="img-responsive img-portfolio img-hover" ng-src="{{SERVER_URL}}{{oneCategory.logoUrl}}" />
+					</a>
+				</div>
+			</div>		
+		</div>
+	</div>
+</div>

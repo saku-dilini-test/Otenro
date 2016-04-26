@@ -1,0 +1,27 @@
+<div class="other-page-header home-pg"></div>
+<div ng-include=" 'views/navigation.html' "></div>
+
+<div class="white-bg">
+	<div class="main">
+		<div class="wrap">
+			<div class="menu_list">
+				<div class="section group">  
+					<div class="category-name">{{categoryId}}</div>
+					<div class="group">					
+						<div class="product-tile" ng-repeat="oneProduct in allProductsReqCategory">
+							<a href="#detail/{{oneProduct.id}}"> 
+								<img class="catdiv" ng-src="{{SERVER_URL}}{{oneProduct.logoUrl}}" />
+							</a>
+							<li>
+								<a href="#detail/{{oneProduct.id}}">
+									<span class="item_name">{{oneProduct.name}}</span>
+									<span class="price">Rs {{oneProduct.price}}</span>
+								</a>
+							</li>
+						</div>		
+					</div>
+				</div>
+			</div>
+		</div>		    
+	</div>
+</div>

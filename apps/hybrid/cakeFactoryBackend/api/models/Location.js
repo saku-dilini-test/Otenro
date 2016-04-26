@@ -65,28 +65,12 @@ module.exports = {
       deliveryCharge : 400
     },
     {
-      locationName: 'Nugegoda',
+      locationName: 'Jawatta',
       branch: true,
     },
     {
-      locationName: 'Kohuwala',
+      locationName: 'Palawatta',
       branch: true,
-    },
-    {
-      locationName: 'Kalubowila',
-      branch: true,
-    },
-    {
-      locationName: 'Moratuwa',
-      branch: true,
-    },
-    {
-      locationName: 'Kotte',
-      branch: true
-    },
-    {
-      locationName: 'Kollupitiya',
-      branch: true
     }
   ]
 };
