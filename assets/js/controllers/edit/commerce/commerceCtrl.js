@@ -6,6 +6,34 @@
 
     function CommerceCtrl($scope, $mdDialog,toastr, commerceService,currencyService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER) {
         $scope.selectedTab = 0;
+        $scope.status = "Closed";
+        $scope.amPm = "am";
+
+        $scope.openHours = [
+        {day:'Sunday',
+        open: '5.00',
+        close: '9.00'},
+        {day:'Monday',
+        open:'5.00',
+        close: '9.00'},
+        {day:'Tuesday',
+        open:'5.00',
+        close: '9.00'},
+        {day:'Wednesday',
+        open:'5.00',
+        close: '9.00'},
+        {day:'Thursday',
+        open:'5.00',
+        close: '9.00'},
+        {day:'Friday',
+        open:'5.00',
+        close: '9.00'},
+        {day:'Saturday',
+        open:'5.00',
+        close: '9.00'},
+        {day:'Sunday',
+        open:'5.00',
+        close: '9.00'}];
         $scope.miniLightBoxShow = false;
         $scope.shippingOptionParams = {
               secondLocked:  true,
@@ -166,7 +194,7 @@
                        alert("MainMenu Loading Error : " + err);
                    });
 
-         $scope.saveStoreSettings = function(current,storeSettings){
+         $scope.saveStoreSettings = function(current,storeSettings,openHours){
 
          for(var i=0; i<$scope.currencyList.length; i++){
                                  if($scope.storeSettings.currency == $scope.currencyList[i].sign){
@@ -177,6 +205,7 @@
          storeSettings.currency=$scope.options.currency,
          storeSettings.userId = $scope.userId;
          storeSettings.appId = $rootScope.appId;
+         storeSettings.OpenHours = openHours;
 
          commerceService.saveStoreSettings(storeSettings).
             success(function(data){

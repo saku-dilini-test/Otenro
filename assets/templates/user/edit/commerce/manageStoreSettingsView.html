@@ -75,30 +75,38 @@
                                     <th>Status</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Sunday</td>
-                                        <td>9.00 am</td>
-                                        <td>5.00 pm</td>
-                                        <td>Open</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Monday</td>
-                                        <td>9.00 am</td>
-                                        <td>5.00 pm</td>
-                                        <td>Open</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tuesday</td>
-                                        <td>9.00 am</td>
-                                        <td>5.00 pm</td>
-                                        <td>Open</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Wednesday</td>
-                                        <td>9.00 am</td>
-                                        <td>5.00 pm</td>
-                                        <td>Open</td>
-                                    </tr>
+                                <tr ng-repeat="data in openHours">
+                                    <td ng-model="data.day">{{data.day}}</td>
+                                    <td ng-if="status == 'Closed'">_ _ _ _</td>
+                                    <td ng-if="status != 'Closed'"
+                                        inline-edit="data.open"
+                                        inline-edit-callback="OpenHoursUpdateHandler(newValue)"
+                                        inline-edit-btn-edit=""
+                                        inline-edit-on-blur="save"
+                                        inline-edit-on-click>
+                                    <select ng-model="amPm">
+                                        <option value="am">am</option>
+                                        <option value="pm">pm</option>
+                                    </select>
+                                    </td>
+                                <td ng-if="status == 'Closed'">_ _ _ _</td>
+                                <td ng-if="status != 'Closed'"
+                                    inline-edit="data.close"
+                                    inline-edit-callback="OpenHoursUpdateHandler(newValue)"
+                                    inline-edit-btn-edit=""
+                                    inline-edit-on-blur="save"
+                                    inline-edit-on-click>
+                                  <select ng-model="amPm">
+                                      <option value="am">am</option>
+                                      <option value="pm">pm</option>
+                                  </select>
+                                </td>
+                                <td><select ng-model="status">-->
+                                        <option value="Open">Open</option>
+                                        <option value="Closed">Closed</option>
+                                        </select>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                             <br />
@@ -133,7 +141,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="saveStoreSettings(1,storeSettings)">next</md-button>
+                            <md-button class="me-default-button" ng-click="saveStoreSettings(1,storeSettings,openHours)">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
