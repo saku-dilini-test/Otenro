@@ -74,5 +74,33 @@ module.exports = {
         }
 
         res.send({message : 'ok'});
+    },
+
+    updateInventoryProducts : function(req,res){
+
+        var body=req.body;
+        console.log(body.header.OrdersDate);
+        var lng=body.length;
+        for(var i=0 ; i < lng ; i++){
+
+            var inventory={
+                id : body[i].id,
+                name : body[i].name,
+                price: body[i].price,
+                quantity: body[i].quantity,
+                sale: body[i].sale,
+                sku: body[i].sku,
+                discount: body[i].discount,
+                product : body[i]
+            };
+
+            ApplicationInventory.update({ id :inventory.id },inventory).exec(function(err,r){
+                if (err) return done(err);
+
+            });
+
+        }
+
+        res.send({message : 'ok'});
     }
 };

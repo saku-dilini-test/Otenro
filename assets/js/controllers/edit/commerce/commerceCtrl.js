@@ -318,6 +318,24 @@
             $mdDialog.hide();
         };
 
+        $scope.manageEmailSettings = function(email){
+
+            commerceService.manageEmailSettings( email)
+                .success(function(data) {
+                    $mdDialog.hide();
+                    console.log(data);
+                    toastr.success('Email Settings has been changed ', 'Success', {
+                        closeButton: true
+                    });
+
+                }).error(function(err) {
+                toastr.error('Unable to Delete', 'Warning', {
+                    closeButton: true
+                });
+            })
+
+        };
+
 
     }
 })();
