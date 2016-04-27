@@ -59,21 +59,10 @@
             },
             privacyPolicy:{
                  type: 'string'
+            },
+            OpenHours:{
+                type: 'json'
             }
 
             }
      };
-//     seedData: [
-//             {
-//                 currency : 'SLR',
-//                 sign : 'Rs.'
-//             },
-//             {
-//                 currency : 'USD',
-//                 sign : '$'
-//             },
-//             {
-//                 currency : 'EUR',
-//                 sign : '€'
-//             },
-//     ]
