@@ -231,6 +231,14 @@
 
             insertFlatRateData : function(data){
                 return $http.post(SERVER_URL+ 'edit/insertFlatRateData',data);
+            },
+
+            manageEmailSettings : function(data){
+                return $http.post(SERVER_URL+ 'edit/manageEmailSettings',data);
+            },
+
+            getEmailSettings : function(data){
+                return $http.post(SERVER_URL+ 'edit/getEmailSettings',data);
             }
 
         };

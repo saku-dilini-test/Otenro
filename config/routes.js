@@ -134,6 +134,14 @@ module.exports.routes = {
      */
     'GET /edit/getInventoryList': 'edit/commerce/InventoryController.getInventoryList',
     'POST /edit/updateInventory': 'edit/commerce/InventoryController.updateInventory',
+    'POST /edit/checkout': 'edit/commerce/InventoryController.updateInventoryProducts',
+
+    /**
+     * EmailController
+     */
+
+    'POST /edit/manageEmailSettings': 'edit/commerce/EmailController.manageEmailSettings',
+    'POST /edit/getEmailSettings': 'edit/commerce/EmailController.getEmailSettings',
 
     /**
      * ShippingController

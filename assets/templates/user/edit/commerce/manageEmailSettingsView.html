@@ -8,54 +8,54 @@
                 <fieldset>
                     <label>from email</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <input type="text" name="name" required />
+                    <input type="text" name="name" required ng-model="email.fromEmail" />
                 </fieldset>
                 <fieldset>
                     <label>reply to email</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <input type="text" name="name" required />
+                    <input type="text" name="name" required ng-model="email.replyToEmail" />
                 </fieldset>
                 <fieldset>
                     <label>alert email</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <input type="text" name="name" required />
+                    <input type="text" name="name" required ng-model="email.alertEmail" />
                 </fieldset>
                 <fieldset>
                     <label>alert at</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <input type="text" name="name" class="me-xs-input reset-inline" required />
+                    <input type="text" name="name" class="me-xs-input reset-inline" required ng-model="email.alertAt" />
                     <span class="percentage-mark">%</span>
                 </fieldset>
                 <fieldset>
                     <label>order confirm email</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <textarea rows="4"></textarea>
+                    <textarea rows="4" ng-model="email.orderConfirmedEmail"></textarea>
                 </fieldset>
                 <fieldset>
                     <label>order fulfilled email</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <textarea rows="4"></textarea>
+                    <textarea rows="4" ng-model="email.orderFulfilledEmail"></textarea>
                 </fieldset>
                 <fieldset>
                     <label>order refund email</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <textarea rows="4"></textarea>
+                    <textarea rows="4" ng-model="email.orderRefundEmail"></textarea>
                 </fieldset>
                 <fieldset>
                     <label>header</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <textarea rows="2"></textarea>
+                    <textarea rows="2" ng-model="email.header"></textarea>
                 </fieldset>
                 <fieldset>
                     <label>footer</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <textarea rows="2"></textarea>
+                    <textarea rows="2" ng-model="email.footer"></textarea>
                 </fieldset>
             </div>
             <div class="md-dialog-buttons">
                 <div class="inner-section">
                     <md-button class="me-default-button" ng-click="hide()">cancel</md-button>
-                    <md-button class="me-default-button" ng-click="hide()">send text email</md-button>
+                    <md-button class="me-default-button" ng-click="manageEmailSettings(email)">send text email</md-button>
                 </div>
             </div>
         </form>
