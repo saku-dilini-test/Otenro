@@ -70,8 +70,8 @@
                             <table class="me-hours-table">
                                 <thead>
                                     <th>Day</th>
-                                    <th>Open from</th>
-                                    <th>Open till</th>
+                                    <th colspan="2">Open from</th>
+                                    <th colspan="2">Open till</th>
                                     <th>Status</th>
                                 </thead>
                                 <tbody>
@@ -83,8 +83,8 @@
                                         inline-edit-callback="OpenHoursUpdateHandler(newValue)"
                                         inline-edit-btn-edit=""
                                         inline-edit-on-blur="save"
-                                        inline-edit-on-click>
-                                    <select ng-model="amPm">
+                                        inline-edit-on-click></td>
+                                    <td ng-if="status != 'Closed'"><select ng-model="amPm">
                                         <option value="am">am</option>
                                         <option value="pm">pm</option>
                                     </select>
@@ -95,8 +95,8 @@
                                     inline-edit-callback="OpenHoursUpdateHandler(newValue)"
                                     inline-edit-btn-edit=""
                                     inline-edit-on-blur="save"
-                                    inline-edit-on-click>
-                                  <select ng-model="amPm">
+                                    inline-edit-on-click></td>
+                                  <td ng-if="status != 'Closed'"><select ng-model="amPm">
                                       <option value="am">am</option>
                                       <option value="pm">pm</option>
                                   </select>
