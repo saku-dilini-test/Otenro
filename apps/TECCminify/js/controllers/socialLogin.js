@@ -18,10 +18,10 @@
                         $scope.google_button = false;
                         $scope.logout_button = true;
                     }else{
-                        alert('Facebook Login error');
+                        alert(provider+' Login error');
                     }
                 },function(err){
-                    alert('Facebook Login error');
+                    alert(provider+' Login error');
                 });
 
 
