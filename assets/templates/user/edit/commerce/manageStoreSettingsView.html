@@ -84,6 +84,7 @@
                                         inline-edit-btn-edit=""
                                         inline-edit-on-blur="save"
                                         inline-edit-on-click></td>
+                                    <td ng-if="status == 'Closed'"></td>
                                     <td ng-if="status != 'Closed'"><select ng-model="amPm">
                                         <option value="am">am</option>
                                         <option value="pm">pm</option>
@@ -96,6 +97,7 @@
                                     inline-edit-btn-edit=""
                                     inline-edit-on-blur="save"
                                     inline-edit-on-click></td>
+                                  <td ng-if="status == 'Closed'"></td>
                                   <td ng-if="status != 'Closed'"><select ng-model="amPm">
                                       <option value="am">am</option>
                                       <option value="pm">pm</option>
