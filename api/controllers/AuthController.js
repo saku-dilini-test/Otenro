@@ -7,7 +7,8 @@
 var JWT = require('machinepack-jwt'),
     Passwords = require('machinepack-passwords'),
     GoogleAPIsOAuth2v2 = require('machinepack-googleapisoauth2v2'),
-    Facebook = require('machinepack-facebook');
+    Facebook = require('machinepack-facebook'),
+    request = require('request');
 
 module.exports = {
 
@@ -85,11 +86,89 @@ module.exports = {
     });
   },
 
+  facebookAuth : function(req,res){
+
+    Facebook.getAccessToken({
+      appId: req.body.clientId,
+      appSecret: 'ad82fde6a6570d7172e19d6cf8008cf7',
+      code: req.body.code,
+      callbackUrl: req.body.redirectUri
+    }).exec({
+      // An unexpected error occurred.
+      error: function (err){
+        return res.negotiate(err);
+      },
+      // OK.
+      success: function ( result){
+        // get facebook Id & email
+        request.get('https://graph.facebook.com/v2.6/me?fields=id,email,name&access_token='+result.token, function (error, response, body) {
+          if (error) return res.negotiate(error);
+
+          var data = JSON.parse(body);
+          var facebookId = data.id;
+          var facebookEmail = data.email;
+          var facebookName = data.name;
+          var nameArray = facebookName.split(" ");
+          var firstName = nameArray[0];
+          var lastName = nameArray[1];
+          if(facebookId){
+            User.findOne({facebookId: facebookId}, function foundUser(err, foundUser) {
+              if (err) return res.negotiate(err);
+              if(!foundUser){
+                User.create({
+                  firstName: firstName,
+                  lastName: lastName,
+                  email: facebookEmail,
+                  facebookId : facebookId
+                }).exec(function(err, newUser) {
+                  if (err) return res.negotiate(err);
+                  JWT.encode({
+                    secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                    payload: {
+                      id :  newUser.id,
+                      email:  newUser.email
+                    },
+                    algorithm: 'HS256'
+                  }).exec({
+                    error: function (err){
+                      return res.negotiate(err);
+                    },
+                    success: function (result){
+                      res.status(200).json({user : {email: newUser.email, sub: newUser.id},token : result });
+                    }
+                  });
+                });
+              } else {
+                JWT.encode({
+                  secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                  payload: {
+                    id :  foundUser.id,
+                    email:  foundUser.email
+                  },
+                  algorithm: 'HS256'
+                }).exec({
+                  error: function (err){
+                    return res.negotiate(err);
+                  },
+                  success: function (result){
+                    res.status(200).json({user : {email: foundUser.email, sub: foundUser.id},token : result });
+                  }
+                });
+              }
+            });
+          }else{
+            return res.negotiate('error');
+          }
+        });
+      }
+    });
+  },
+
   googleAuth : function(req,res){
     // Get OAuth2 client
     GoogleAPIsOAuth2v2.getAccessToken({
       clientId: req.body.clientId,
-      clientSecret: 'Fw5L2CjhaKvyaGlqTCn_0yMs',
+      clientSecret: 'TDx0_Lo35DliON3LKt7hWJFu',
       redirectUrl: req.body.redirectUri,
       code: req.body.code
     }).exec({
@@ -99,33 +178,68 @@ module.exports = {
       },
       // OK.
       success: function ( result){
-        console.log(result);
-        console.log("In");
-        req.token = result.id_token;
-        res.status(200).json({user : { email : "user.email" , sub : "user.id" },token :'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU2Y2JmYzIxOTZiMmVlY2EyNzdkNjViMSIsImVtYWlsIjoidGh1c2l0aHphcHBzQGdtYWlsLmNvbSIsImlhdCI6MTQ1NjQ4NDU3NH0.h10893CkxOcB3frk22FdT3ixfRTfgjfAiNNAUO5DhWo'});
-      }
-    });
-  },
+        var googleToken = result.access_token;
+        request.get('https://www.googleapis.com/plus/v1/people/me?access_token='+googleToken, function (error, response, body) {
+          if (error) return res.negotiate(error);
 
-  facebookAuth : function(req,res){
-    console.log(req.body);
-    Facebook.getAccessToken({
-      appId: req.body.clientId,
-      appSecret: '37979a269047f2006004b60d77e4ecec',
-      code: req.body.code,
-      callbackUrl: req.body.redirectUri
-    }).exec({
-      // An unexpected error occurred.
-      error: function (err){
-        console.log(err);
-      },
-      // OK.
-      success: function ( result){
-        console.log(result);
-        req.token = result.token;
-        //res.status(200).json({token : result.token });
-        res.status(200).json({user : { email : "user.email" , sub : "user.id" },token :'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU2Y2JmYzIxOTZiMmVlY2EyNzdkNjViMSIsImVtYWlsIjoidGh1c2l0aHphcHBzQGdtYWlsLmNvbSIsImlhdCI6MTQ1NjQ4NDU3NH0.h10893CkxOcB3frk22FdT3ixfRTfgjfAiNNAUO5DhWo'});
+          var data = JSON.parse(body);
+          var googleId = data.id;
+          var googleEmail = data.emails[0].value;
+          var googleName = data.displayName;
+          var nameArray = googleName.split(" ");
+          var firstName = nameArray[0];
+          var lastName = nameArray[1];
+          if(googleId){
+            User.findOne({googleId: googleId}, function foundUser(err, foundUser) {
+              if (err) return res.negotiate(err);
 
+              if(!foundUser){
+                User.create({
+                  firstName: firstName,
+                  lastName: lastName,
+                  email: googleEmail,
+                  googleId : googleId
+                }).exec(function(err, newUser) {
+
+                  if (err) return res.negotiate(err);
+                  JWT.encode({
+                    secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                    payload: {
+                      id :  newUser.id,
+                      email:  newUser.email
+                    },
+                    algorithm: 'HS256'
+                  }).exec({
+                    error: function (err){
+                      return res.negotiate(err);
+                    },
+                    success: function (result){
+                      res.status(200).json({user : {email: newUser.email, sub: newUser.id},token : result });
+                    }
+                  });
+                });
+              } else {
+                JWT.encode({
+                  secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                  payload: {
+                    id :  foundUser.id,
+                    email:  foundUser.email
+                  },
+                  algorithm: 'HS256'
+                }).exec({
+                  error: function (err){
+                    return res.negotiate(err);
+                  },
+                  success: function (result){
+                    res.status(200).json({user : {email: foundUser.email, sub: foundUser.id},token : result });
+                  }
+                });
+              }
+            });
+          }else{
+            return res.negotiate('error');
+          }
+        });
       }
     });
   }

@@ -61,19 +61,27 @@ module.exports = {
   },
 
   beforeCreate : function(values, next) {
-    console.log("value"+values);
-    Passwords.encryptPassword({
-      password: values.password,
-      difficulty: 10
-    }).exec({
-      error: function(err) {
-        return res.negotiate(err);
-      },
-      success: function(hash) {
-        values.password = hash;
-        next();
-      }
-    });
+    console.log(values);
+    var facebookId = values['facebookId'];
+    var googleId = values['googleId'];
+    if(facebookId || googleId){
+      console.log('facebook Id : '+facebookId);
+      console.log('googleId : '+googleId);
+      next();
+    }else {
+      Passwords.encryptPassword({
+        password: values.password,
+        difficulty: 10
+      }).exec({
+        error: function (err) {
+          return res.negotiate(err);
+        },
+        success: function (hash) {
+          values.password = hash;
+          next();
+        }
+      });
+    }
 
   }
 
