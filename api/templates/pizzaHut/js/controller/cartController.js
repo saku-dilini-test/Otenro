@@ -112,6 +112,7 @@ mobileApp.controller('cartController', function($scope, $rootScope, $translate, 
 			}
 
 			requestParams.appId = $rootScope.appId;
+			requestParams.cart = JSON.stringify($rootScope.dataCart.items);
 
 			appService.HttpRequest('POST',GetServiceApi+'edit/checkout', requestParams).success(function(data) {
 				alert($translate.instant('load.cart.alertOrders'));
