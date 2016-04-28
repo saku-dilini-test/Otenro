@@ -1,11 +1,17 @@
-<ion-view view-title="Foods">
+<ion-view view-title="{{menuName}}">
   <ion-content>
       <div class="list">
         <a class="item item-thumbnail-left" ng-repeat="food in foods" href="#/app/foods/{{food.id}}">
           <img ng-src="{{imageURL}}/{{food.imageUrl}}">
-          <h2>{{food.name}}</h2>
+            <div class="padding">
+            <div class="cart">
+          <h3>{{food.name}}</h3>
+            <hr>
           <p>{{food.description}}</p>
           <p>{{food.price}}</p>
+
+            </div>
+            </div>
         </a>
       </div>
   </ion-content>

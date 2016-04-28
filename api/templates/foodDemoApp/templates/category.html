@@ -1,11 +1,11 @@
-<ion-view view-title="Category">
+<ion-view view-title="Menu">
     <ion-content>
         <div class="list">
-            <a class="item item-thumbnail-left" ng-repeat="category in categories" href="#/app/category/{{category.id}}">
+            <a class="item item-thumbnail-left" ng-repeat="category in categories" href="#/app/category/{{category.id}}/{{category.name}}">
                 <img ng-src="{{imageURL}}/{{category.imageUrl}}">
                 <h2>{{category.name}}</h2>
+                <hr>
                 <p>{{category.description}}</p>
-                <p>{{category.price}}</p>
             </a>
         </div>
     </ion-content>

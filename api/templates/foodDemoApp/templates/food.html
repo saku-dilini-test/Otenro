@@ -1,20 +1,68 @@
-<ion-view view-title="">
+<ion-view view-title="{{foodInfo.name}}">
   <ion-content style="background: url({{imageURL}}/{{foodInfo.imageUrl}}) center; background-size: cover;">
-
+<center>
     <div class="food">
       <div class="panel">
         <div class="card">
           <div class="item item-text-wrap">
-            <div style="text-align: center; color: #006666"><h1>{{foodInfo.name}}</h1></div>
-            <p>Description : {{foodInfo.desc}}</p>
-            <p>Price : {{foodInfo.price}}</p>
-            <p>Discount : {{foodInfo.discount}}</p>
-            <button class="button button-small button-balanced" ng-click="addToCart()">
-              Add To Cart
+
+            <div ng-show="!(buyOption)">
+              <div style="text-align: center; color: #006666"><h3>{{foodInfo.name}}</h3></div>
+              <hr>
+            <p>{{foodInfo.description}}</p>
+              <br>
+              <div ng-click="viewBuyOption(true)">
+                >
+              </div>
+            </div>
+            <div ng-show="buyOption">
+              <div style="text-align: center; color: #006666"><h3>--Size --</h3></div>
+              <hr>
+              <div class="row">
+                <div class="col">Size</div>
+                <div class="col">Price</div>
+                <div class="col">Qty</div>
+              </div>
+              <div class="row">
+                <div class="col">Large</div>
+                <div class="col">Rs {{foodInfo.price}}</div>
+                <div class="col">
+                  <input style="width: 30px">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">Medium</div>
+                <div class="col">Rs {{foodInfo.price}}</div>
+                <div class="col">
+                  <input style="width: 30px">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">Small</div>
+                <div class="col">Rs {{foodInfo.price}}</div>
+                <div class="col">
+                  <input style="width: 30px">
+                </div>
+              </div>
+              <br>
+              <div ng-click="viewBuyOption(false)">
+                <
+              </div >
+            </div>
+            <br>
+
+            <button class="button button-small button-calm" ng-click="addToCart()">
+              Buy
             </button>
+            <br>
+            <br>
+            <p>Rs : {{foodInfo.price}}</p>
+
           </div>
         </div>
       </div>
     </div>
+  </center>
+
   </ion-content>
 </ion-view>
