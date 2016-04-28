@@ -27,15 +27,14 @@
 
 
             $authProvider.google({
-                clientId: '309371575528-rk2otjp9ousus98pl6mtcmuo7s7b4nbl.apps.googleusercontent.com',
+                clientId: '170821583873-i8ud07kd4tqj8bh3u3lgl9d0aisvpbq4.apps.googleusercontent.com',
                 authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
-                redirectUri: window.location.origin
+                redirectUri: window.location.origin+'/auth/google'
             });
 
             $authProvider.facebook({
-                clientId: '1722286804691721',
-                //redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host + '/'
-                redirectUri : window.location.origin+'/'
+                clientId: '459707740889740',
+                redirectUri : window.location.origin+'/auth/facebook'
             });
         });
 })();
