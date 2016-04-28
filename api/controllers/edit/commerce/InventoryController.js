@@ -79,7 +79,7 @@ module.exports = {
     updateInventoryProducts : function(req,res){
 
         var body=req.body;
-        console.log(body.header.OrdersDate);
+        console.log(body.cart);
         var lng=body.length;
         for(var i=0 ; i < lng ; i++){
 
