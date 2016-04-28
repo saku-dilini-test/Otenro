@@ -68,6 +68,9 @@ module.exports.routes = {
      'POST /edit/saveStoreSettings': 'edit/commerce/UserSettingsController.saveStoreSettings',
      'POST /edit/savePolicies': 'edit/commerce/UserSettingsController.savePolicies',
      'GET /edit/showStoreSettings': 'edit/commerce/UserSettingsController.showStoreSettings',
+     'GET /edit/getAllSiteType': 'edit/commerce/UserSettingsController.getAllSiteType',
+     'GET /edit/getAllMeasurementType': 'edit/commerce/UserSettingsController.getAllMeasurementType',
+     'GET /edit/getAllTimeAndRegion': 'edit/commerce/UserSettingsController.getAllTimeAndRegion',
      'GET /edit/showPolicies': 'edit/commerce/UserSettingsController.showPolicies',
 
 

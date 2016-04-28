@@ -270,7 +270,16 @@
 
             getEmailSettings : function(data){
                 return $http.post(SERVER_URL+ 'edit/getEmailSettings',data);
-            }
+            },
+            getAllSiteType: function(){
+                return $http.get(SERVER_URL + 'edit/getAllSiteType');
+            },
+            getAllMeasurementType: function(){
+                return $http.get(SERVER_URL + 'edit/getAllMeasurementType');
+            },
+            getAllTimeAndRegion: function(){
+                return $http.get(SERVER_URL + 'edit/getAllTimeAndRegion');
+            },
 
         };
     }

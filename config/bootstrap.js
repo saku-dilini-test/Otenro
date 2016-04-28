@@ -20,7 +20,11 @@ module.exports.bootstrap = function(cb) {
     AppInitialData.seed,
     Languages.seed,
     PrimaryCategory.seed,
-    SecondaryCategory.seed
+    SecondaryCategory.seed,
+    SiteType.seed,
+    TimeAndRegion.seed,
+    MeasurementStandard.seed
+
   ], cb);
 
 };
