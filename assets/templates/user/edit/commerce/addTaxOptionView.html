@@ -13,13 +13,20 @@
                 <fieldset>
                     <label>tax amount</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12" />
-                    <input type="text" name="email" required />
+                    <input type="number" name="email" required />
                 </fieldset>
                 <fieldset>
-                    <md-radio-group ng-model="data.group2">
-                        <md-radio-button value="charges">Apply to Shipping Charges</md-radio-button>
-                        <md-radio-button value="services">Apply to Services</md-radio-button>
-                    </md-radio-group>
+                    <!--<md-radio-group ng-model="data.group2">-->
+                        <!--<md-radio-button value="charges">Apply to Shipping Charges</md-radio-button>-->
+                        <!--<md-radio-button value="services">Apply to Services</md-radio-button>-->
+                    <!--</md-radio-group>-->
+
+                    <md-checkbox ng-model="charges" aria-label="charges">
+                        Apply to Shipping Charges
+                    </md-checkbox>
+                    <md-checkbox ng-model="services" aria-label="services">
+                        Apply to Services
+                    </md-checkbox>
                 </fieldset>
             </div>
             <div class="md-dialog-buttons">

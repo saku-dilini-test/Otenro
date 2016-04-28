@@ -17,27 +17,40 @@
         <img src="../../../images/question-mark.svg" width="12" height="12" />
         <input name="email" type="email" ng-model="user.email" required/>
         <p class="help-block" ng-show="register.email.$dirty && register.email.$invalid">
-          Email required
+          Enter a proper email
         </p>
       </fieldset>
+
       <fieldset class="password-area">
         <label>Password</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12">
-        <input name="password" type="password" ng-model="user.password" compare-to="user.password_confirm" required>
+        <input  name="password" type="password" ng-model="user.password" ng-minlength="7" compare-to="user.password_confirm" required>
+        <span class="help-block " ng-show="register.password.$error.minlength">
+           <span ng-show="register.password.$error.minlength">Password should have at least 7 characters.</span>
+        </span>
+
       </fieldset>
+
       <fieldset class="password-area reset-margin-right">
         <label> Confirm Password</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
-        <input name="password_confirm" ng-model="user.password_confirm" type="password" />
+        <input  name="password_confirm" ng-model="user.password_confirm" type="password" />
         <p class="help-block" ng-show="user.password_confirm.$dirty && user.password_confirm.$invalid">
           Please match the password.
         </p>
 
+
         <span class="help-block " ng-show="register.password_confirm.$dirty">
+
             <span ng-show="register.password.$error.compareTo">Password must match.</span>
             <span ng-show="register.password_confirm.$error.required">Confirmation password is required.</span>
         </span>
       </fieldset>
+      <br>
+      <br/>
+      <br>
+      <br/>
+      <br>
       <br/>
       <fieldset class="text-right reset-margin">
         <input type="button" class="me-default-button" ng-model="cancel" ng-click="cancel()" name="cancel" value="Cancel" />
