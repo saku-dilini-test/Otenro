@@ -1,9 +1,5 @@
 var mobileApp=angular.module('foodDemoApp', ['ionic']);
 
-//var serviceApi = 'http://localhost:1337/';
-//var GetServiceApi = 'http://localhost:1337/';
-//var SERVER_URL = 'http://localhost:1337';
-
 mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy) {
   $ionicPlatform.ready(function() {
 
@@ -63,15 +59,33 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
         }
       }
   })
-  .state('app.about', {
-      url: '/about',
+  .state('app.aboutUs', {
+      url: '/aboutUs',
       views: {
         'menuContent': {
-          templateUrl: 'templates/about.html'
+          templateUrl: 'templates/aboutUs.html',
+            controller: 'aboutUsCtrl'
         }
       }
    })
-
+      .state('app.contactUs', {
+          url: '/contactUs',
+          views: {
+              'menuContent': {
+                  templateUrl: 'templates/contactUs.html',
+                  controller: 'contactUsCtrl'
+              }
+          }
+      })
+      .state('app.terms', {
+          url: '/terms',
+          views: {
+              'menuContent': {
+                  templateUrl: 'templates/terms.html',
+                  controller: 'termsCtrl'
+              }
+          }
+      })
   .state('app.category', {
           url: '/category',
           views: {
@@ -82,7 +96,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           }
       })
    .state('app.foods', {
-     url: '/category/:categoryId',
+     url: '/category/:categoryId/:categoryName',
      views: {
        'menuContent': {
          templateUrl: 'templates/foods.html',
