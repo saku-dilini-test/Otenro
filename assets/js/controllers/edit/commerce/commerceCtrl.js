@@ -241,12 +241,20 @@
                     });
 
                 }).error(function(err) {
-                toastr.error('Unable to Delete', 'Warning', {
+                toastr.error('Unable to Create', 'Warning', {
                     closeButton: true
                 });
             })
 
         };
+
+            commerceService.getEmailSettings()
+                .success(function (result) {
+                    $scope.email = result;
+                }).error(function (error) {
+                alert("MainMenu Loading Error : " + error);
+            })
+
 
 
     }
