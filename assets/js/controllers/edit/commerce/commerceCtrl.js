@@ -1,10 +1,10 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("CommerceCtrl", [
-        '$scope', '$mdDialog', 'toastr','commerceService','currencyService','$rootScope','SERVER_URL','$auth','ME_APP_SERVER',
+        '$scope', '$mdDialog', 'toastr','commerceService','currencyService','publishService','$rootScope','SERVER_URL','$auth','ME_APP_SERVER',
         CommerceCtrl]);
 
-    function CommerceCtrl($scope, $mdDialog,toastr, commerceService,currencyService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER) {
+    function CommerceCtrl($scope, $mdDialog,toastr, commerceService,currencyService,publishService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER) {
         $scope.selectedTab = 0;
         $scope.status = "Closed";
         $scope.amPm = "am";
@@ -187,12 +187,42 @@
                 })
         };
 
+        $scope.storeSettings={
+                    language: "English",
+                    timeAndRegion: "Option1"
+                };
+
+         publishService.getAllLanguages().
+                   success(function(data){
+                       $scope.languageList = data;
+                   }).error(function(err){
+                       alert("MainMenu Loading Error : " + err);
+                   });
+
          currencyService.getAllCurrency().
                    success(function(data){
                        $scope.currencyList = data;
                    }).error(function(err){
                        alert("MainMenu Loading Error : " + err);
                    });
+         commerceService.getAllSiteType().
+            success(function(data){
+                $scope.siteTypeList = dat);
+            }).error(function(err){
+                alert("MainMenu Loading Error : " + err);
+         });
+         commerceService.getAllMeasurementType().
+                     success(function(data);
+                         $scope.measurementTypeList = data;
+                     }).error(function(err){
+                         alert("MainMenu Loading Error : " + err);
+                  });
+         commerceService.getAllTimeAndRegion().
+            success(function(data);
+                $scope.timeAndRegionList = data;
+            }).error(function(err){
+                alert("MainMenu Loading Error : " + err);
+         });
 
          $scope.saveStoreSettings = function(current,storeSettings,openHours){
 

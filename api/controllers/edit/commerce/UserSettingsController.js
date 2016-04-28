@@ -38,6 +38,24 @@ module.exports = {
             res.send(app);
         });
     },
+    getAllSiteType: function(req,res){
+        SiteType.find().exec(function(err, app) {
+             if (err) res.send(err);
+             res.send(app);
+        });
+    },
+    getAllMeasurementType: function(req,res){
+           MeasurementStandard.find().exec(function(err, app) {
+                if (err) res.send(err);
+                res.send(app);
+           });
+    },
+    getAllTimeAndRegion: function(req,res){
+            TimeAndRegion.find().exec(function(err, app) {
+                 if (err) res.send(err);
+                 res.send(app);
+            });
+    },
     savePolicies: function(req,res){
         var data = req.body;
         var query = {appId:req.body.appId};

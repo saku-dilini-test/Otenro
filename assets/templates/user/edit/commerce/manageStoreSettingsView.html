@@ -20,10 +20,10 @@
                             <fieldset class="col-1 reset-margin-right">
                                 <label>measurement standard</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <md-select ng-model="storeSettings.measurementStandards">
-                                    <md-option value="option1">option 1</md-option>
-                                    <md-option value="option2">option 2</md-option>
-                                </md-select>
+                                <select class="form-control"
+                                        ng-model="storeSettings.measurementStandard"
+                                        ng-options="measurementStandards.measurementStandard as measurementStandards.measurementStandard for measurementStandards in measurementTypeList">
+                                </select>
                             </fieldset>
                             <fieldset class="col-2">
                                 <label>next order number </label>
@@ -44,10 +44,10 @@
                             <fieldset>
                                 <label>select site type</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <md-select ng-model="storeSettings.siteType">
-                                    <md-option value="option1">option 1</md-option>
-                                    <md-option value="option2">option 2</md-option>
-                                </md-select>
+                                <select class="form-control"
+                                        ng-model="storeSettings.siteType"
+                                        ng-options="siteTypes.siteType as siteTypes.siteType for siteTypes in siteTypeList">
+                                </select>
                             </fieldset>
                             <fieldset>
                                 <label>allow madeeasy to promote</label>
@@ -115,18 +115,18 @@
                             <fieldset>
                                 <label>select language</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <md-select ng-model="storeSettings.language">
-                                    <md-option value="option1">option 1</md-option>
-                                    <md-option value="option2">option 2</md-option>
-                                </md-select>
+                                <select class="form-control"
+                                        ng-model="storeSettings.language"
+                                        ng-options="languages.language as languages.language for languages in languageList">
+                                </select>
                             </fieldset>
                             <fieldset>
                                 <label>time and region</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <md-select ng-model="storeSettings.timeAndRegion">
-                                    <md-option value="option1">option 1</md-option>
-                                    <md-option value="option2">option 2</md-option>
-                                </md-select>
+                                <select class="form-control"
+                                        ng-model="storeSettings.timeAndRegion"
+                                        ng-options="timeAndRegions.timeAndRegion as timeAndRegions.timeAndRegion for timeAndRegions in timeAndRegionList">
+                                </select>
                             </fieldset>
                             <fieldset>
                                 <label>connect a domain</label>
