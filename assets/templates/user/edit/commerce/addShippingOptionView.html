@@ -2,10 +2,10 @@
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="selectedTab" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
             <md-tab>
-                <md-tab-label>shipping options</md-tab-label>
+                <md-tab-label>shipping types</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
-                        <h1>shipping options</h1>
+                        <h1>shipping types</h1>
                     </div>
                     <div class="md-dialog-full">
                         <div class="products-options">
@@ -37,12 +37,12 @@
                             <fieldset class="col-2">
                                 <label>Per order fee </label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="name" required ng-model="flatRates.preOrderFee"  />
+                                <input type="NUMBER" name="name" required ng-model="flatRates.preOrderFee"  />
                             </fieldset>
                             <fieldset class="col-2 reset-margin-right">
                                 <label>fee per items</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="name" required ng-model="flatRates.feePerItem" />
+                                <input type="NUMBER" name="name" required ng-model="flatRates.feePerItem" />
                             </fieldset>
                         </div>
                     </div>
