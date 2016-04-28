@@ -25,7 +25,13 @@ module.exports = {
             type : 'string',
             required: true
         },
-        proType:{
+        briefDesc:{
+            type : 'string',
+        },
+        detailedDesc:{
+            type : 'string',
+        },
+        sku:{
             type : 'string',
         },
         price : {

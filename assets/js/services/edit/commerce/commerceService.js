@@ -86,8 +86,10 @@
                     fields: {
                         appId:$rootScope.appId,
                         mainId:product.mainId,
+                        briefDesc:product.briefDesc,
+                        detailedDesc: product.detailedDesc,
                         name: product.name,
-                        proType: variants.proType,
+                        sku: variants.sku,
                         price: variants.price,
                         size: variants.size,
                         weight: variants.weight,

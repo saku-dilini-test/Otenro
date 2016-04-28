@@ -44,7 +44,14 @@
                                     <label for="input-name">Name</label>
                                     <input type="text" name="fullname" ng-model="product.name" id="input-name" required />
                                 </fieldset>
-
+                                <fieldset class="col-2">
+                                    <label for="input-name">Brief Description</label>
+                                    <input type="text" name="briefDesc" ng-model="product.briefDesc" id="input-briefDesc" required />
+                                </fieldset>
+                                <fieldset class="col-2">
+                                    <label for="input-name">Detailed Description</label>
+                                    <input type="text" name="detailedDesc" ng-model="product.detailedDesc" id="input-detailedDesc" required />
+                                </fieldset>
                                 <fieldset class="col-2">
                                     <label>Main</label>
                                     <md-select class="" placeholder="Select Main Menu" ng-model="product.mainId" ng-change="setChild(product.mainId)" required>
@@ -112,7 +119,11 @@
 
                                 <tr ng-repeat="data in variants">
                                     <td
-                                       ng-model="data.type">{{data.type}}</td>
+                                       inline-edit="data.sku"
+                                       inline-edit-callback="skuUpdateHandler(newValue)"
+                                       inline-edit-btn-edit=""
+                                       inline-edit-on-blur="save"
+                                       inline-edit-on-click></td>
                                     <td
                                        ng-model="data.name">{{data.name}}</td>
                                     <td

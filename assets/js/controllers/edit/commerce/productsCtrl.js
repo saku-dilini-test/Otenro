@@ -69,7 +69,7 @@
                       $scope.selectedTab = current;
 console.log($scope.product.type);
                       $scope.variants=[{
-                          type: $scope.product.type,
+                          sku: "#1",
                           name: product.name,
                           sizeOrweight: "10",
                           price: data[0].price,
@@ -100,7 +100,7 @@ console.log($scope.product.type);
         };
 
         $scope.nextStep3 = function(current,selection) {
-        if($scope.variants[0].type == "" || $scope.variants[0].name == "" || $scope.variants[0].size == "" || $scope.variants[0].price == "" || $scope.variants[0].qty == ""){
+        if($scope.variants[0].sku == "" || $scope.variants[0].name == "" || $scope.variants[0].size == "" || $scope.variants[0].price == "" || $scope.variants[0].qty == ""){
             toastr.error('Fill all the fields', 'Warning', {
                    closeButton: true
             });
@@ -129,7 +129,7 @@ console.log($scope.product.type);
                          $scope.picFile ="templates/viewImages?img=thirdNavi/" + result[0].imageUrl + "&userId="+$scope.userId+"&appId="+$rootScope.appId;
                          if(result[0].size != null){
                               $scope.variants=[{
-                                type: result[0].proType,
+                                sku: result[0].sku,
                                 name: item.name,
                                 sizeOrweight: result[0].size,
                                 price: item.price,
@@ -138,7 +138,7 @@ console.log($scope.product.type);
                          }
                          else{
                          $scope.variants=[{
-                               type: result[0].proType,
+                               sku: result[0].sku,
                                name: item.name,
                                sizeOrweight: result[0].weight,
                                price: item.price,
@@ -166,7 +166,6 @@ console.log($scope.product.type);
              }
 
         $scope.addProducts = function(file,product) {
-
             if(file == null){
                 toastr.error('select image', 'Warning', {
                     closeButton: true
@@ -190,7 +189,9 @@ console.log($scope.product.type);
             variants = {
                  appId: $rootScope.appId,
                  childId: product.childId,
-                 proType: $scope.variants[0].type,
+                 briefDesc:product.briefDesc,
+                 detailedDesc: product.detailedDesc,
+                 sku: $scope.variants[0].sku,
                  name: $scope.variants[0].name,
                  size: size,
                  weight: weight,
