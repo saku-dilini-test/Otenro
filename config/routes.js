@@ -180,6 +180,7 @@ module.exports.routes = {
     'GET /templates/getCurrency': 'template/TemplateController.getCurrency',
     'GET /templates/viewImages': 'template/TemplateController.viewImages',
     'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
+    'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
 
     /***
      * Template Auth Controller
