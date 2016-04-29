@@ -35,6 +35,18 @@ module.exports = {
         });
     },
 
+    getTermsAndConditions : function(req,res){
+
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId
+        };
+        ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
+            if (err) return err;
+            res.json(app);
+        });
+    },
+
     getSpecificChild :function(req,res){
 
         var appId = req.param('appId');
