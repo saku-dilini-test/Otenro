@@ -207,7 +207,7 @@
                    });
          commerceService.getAllSiteType().
             success(function(data){
-                $scope.siteTypeList = dat);
+                $scope.siteTypeList = data;
             }).error(function(err){
                 alert("MainMenu Loading Error : " + err);
          });
