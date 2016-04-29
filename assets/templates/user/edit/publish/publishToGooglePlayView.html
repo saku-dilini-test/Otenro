@@ -28,33 +28,41 @@
                             </fieldset>
 
                             <div class="pull-right">
-                                <label class="reset-inline">splash screen</label>
+                                <label class="reset-inline">Screen Shots</label>
                                 <div class="clearfix">
                                     <fieldset class="col-4-1">
                                         <div class="me-file-upload text-right medium">
                                             <div class="upload-wrapper">
-                                                <input type="file" />
+                                                <input type="file" ngf-select ng-model="splash.splash1"/>
+                                                <img ng-show="splash.splash1 != null" ngf-src="splash.splash1" width="80" height="120" />
+                                                <img ng-show="splash.splash1 == null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="80" height="120" />
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset class="col-4-1">
                                         <div class="me-file-upload text-right medium">
                                             <div class="upload-wrapper">
-                                                <input type="file" />
+                                                <input type="file" ngf-select ng-model="splash.splash2"/>
+                                                <img ng-show="splash.splash2 != null" ngf-src="splash.splash2" width="80" height="120" />
+                                                <img ng-show="splash.splash2 == null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="80" height="120" />
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset class="col-4-1">
                                         <div class="me-file-upload text-right medium">
                                             <div class="upload-wrapper">
-                                                <input type="file" />
+                                                <input type="file" ngf-select ng-model="splash.splash3"/>
+                                                <img ng-show="splash.splash3 != null" ngf-src="splash.splash3" width="80" height="120" />
+                                                <img ng-show="splash.splash3 == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="80" height="120" />
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset class="col-4-1 reset-margin">
                                         <div class="me-file-upload text-right medium">
                                             <div class="upload-wrapper">
-                                                <input type="file" />
+                                                <input type="file" ngf-select ng-model="splash.splash4"/>
+                                                <img ng-show="splash.splash4 != null" ngf-src="splash.splash4" width="80" height="120" />
+                                                <img ng-show="splash.splash4 == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="80" height="120" />
                                             </div>
                                         </div>
                                     </fieldset>
@@ -103,7 +111,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button">cancel</md-button>
-                            <md-button class="me-default-button"  ng-click="addGooglePlayInfo(picFile,playStoreData)">next</md-button>
+                            <md-button class="me-default-button"  ng-click="addGooglePlayInfo(picFile,playStoreData,splash)">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>

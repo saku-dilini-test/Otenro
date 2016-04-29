@@ -11,6 +11,23 @@ module.exports = {
         var details = req.body;
         details.file = y;
 
+        var splash1ex = req.body.splash1.replace('{"blobUrl":"','');
+        var splash1y = splash1ex.replace('"}','');
+        details.splash1 = splash1y;
+
+        var splash2ex = req.body.splash2.replace('{"blobUrl":"','');
+        var splash2y = splash2ex.replace('"}','');
+        details.splash2 = splash2y;
+
+        var splash3ex = req.body.splash3.replace('{"blobUrl":"','');
+        var splash3y = splash3ex.replace('"}','');
+        details.splash3 = splash3y;
+
+        var splash4ex = req.body.splash4.replace('{"blobUrl":"','');
+        var splash4y = splash4ex.replace('"}','');
+        details.splash4 = splash4y;
+
+
             PublishDetails.update({appId :req.body.appId},details).exec(function(err,app) {
                 if (err) res.send(err);
 
