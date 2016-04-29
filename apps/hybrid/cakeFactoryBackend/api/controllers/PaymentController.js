@@ -299,19 +299,19 @@ module.exports = {
           "</html>";
         var emailDetails = {
           from: "onbilabsttest@gmail.com",
-          to: "amilaonbit@gmail.com",
+          to: "amilaonbit@gmail.com",  // here should change
           cc: "",
           subject: "[PayPal] New Order ",
           attachment: [
             {data: emailBody, alternative: true},
           ]
         };
-         //server.send(emailDetails, function (err, message) {
-         //  sails.log.info(err || message);
-         //  if (err) {
-         //    return res.status(err.status).json({err: err.message});
-         //  }
-         //});
+         server.send(emailDetails, function (err, message) {
+           sails.log.info(err || message);
+           if (err) {
+             return res.status(err.status).json({err: err.message});
+           }
+         });
         return res.json(200, {result: 'success'});
       }
     });

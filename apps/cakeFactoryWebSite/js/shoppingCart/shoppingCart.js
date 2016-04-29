@@ -406,7 +406,7 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         data["amount_" + ctr] = (item.price / this.oneDoller).toFixed(2);
     }       
 
-    data["notify_url"] = "http://verticalmedia.lk/ECC/cakeFactoryWebSite/#/paymentInfo.html";
+    data["notify_url"] = "http://tecclk.com/#/paymentInfo.html";
     console.log(data);
     // build form
     var form = $('<form/></form>');
