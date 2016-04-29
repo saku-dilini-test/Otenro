@@ -206,22 +206,22 @@
                        alert("MainMenu Loading Error : " + err);
                    });
          commerceService.getAllSiteType().
-            success(function(data){
-                $scope.siteTypeList = dat);
-            }).error(function(err){
-                alert("MainMenu Loading Error : " + err);
+                   success(function(data){
+                       $scope.siteTypeList = data;
+                   }).error(function(err){
+                       alert("MainMenu Loading Error : " + err);
          });
          commerceService.getAllMeasurementType().
-                     success(function(data);
-                         $scope.measurementTypeList = data;
-                     }).error(function(err){
-                         alert("MainMenu Loading Error : " + err);
-                  });
+                   success(function(data){
+                       $scope.measurementTypeList = data;
+                   }).error(function(err){
+                       alert("MainMenu Loading Error : " + err);
+         });
          commerceService.getAllTimeAndRegion().
-            success(function(data);
-                $scope.timeAndRegionList = data;
-            }).error(function(err){
-                alert("MainMenu Loading Error : " + err);
+                   success(function(data){
+                       $scope.timeAndRegionList = data;
+                   }).error(function(err){
+                       alert("MainMenu Loading Error : " + err);
          });
 
          $scope.saveStoreSettings = function(current,storeSettings,openHours){
