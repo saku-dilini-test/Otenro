@@ -30,7 +30,7 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-            addGooglePlayInfo: function(file,playStoreData){
+            addGooglePlayInfo: function(file,playStoreData,splash){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/setPublishDetails',
                     fields: {
@@ -42,7 +42,12 @@
                         'secondaryCategory':playStoreData.secondaryCat,
                         'description':playStoreData.desc,
                         'keywords':playStoreData.keywords,
-                         file: file
+                         file: file,
+                         splash1:splash.splash1,
+                         splash2:splash.splash2,
+                         splash3:splash.splash3,
+                         splash4:splash.splash4
+
                     }
 
                 });

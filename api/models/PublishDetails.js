@@ -36,6 +36,18 @@ module.exports = {
         file:{
             type:'string'
         },
+        splash1:{
+            type:'string'
+        },
+        splash2:{
+            type:'string'
+        },
+        splash3:{
+            type:'string'
+        },
+        splash4:{
+            type:'string'
+        },
         createdDate:{
             type: 'date'
         },
