@@ -11,8 +11,6 @@
                     return stylesService.showStyleDialog(clickTitle);
                 if ('logoAndTitle' == clickTitle)
                     return logoAndTittleService.showLogoAndTittleDialog(clickTitle);
-                if ('category' == clickTitle)
-                    return commerceService.showCommerceDialog(clickTitle);
                 if ('navigation' == clickTitle)
                     return mainMenuService.showMainMenuDialog(clickTitle);
                 if ('products' == clickTitle)

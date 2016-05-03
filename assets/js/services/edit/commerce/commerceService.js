@@ -8,28 +8,6 @@
 
     function commerceService($mdDialog, $http,$rootScope,Upload,SERVER_URL,toastr) {
         return {
-            showCommerceDialog: function() {
-                return $mdDialog.show({
-                    controller: 'CommerceCtrl',
-                    templateUrl: 'user/edit/commerce/manageCatView.html',
-                    clickOutsideToClose: true
-                }).then(function(answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
-                });
-            },
-            showCommerceImageEditDialog: function(imageUrl,catId) {
-                return $mdDialog.show({
-                    controller: 'catEditImageCtrl',
-                    templateUrl: 'user/edit/commerce/categoryImageEdit.html',
-                    clickOutsideToClose: true,
-                    locals : {
-                        imageUrl : imageUrl,
-                        catId : catId
-                    }
-                }).then(function(answer) {
-
-                });
-            },
              showAddProductsDialog: function(item) {
                             return $mdDialog.show({
                                 controller: 'ProductCtrl',
@@ -43,19 +21,6 @@
                                 //$scope.status = 'You said the information was "' + answer + '".';
                             });
                         },
-            addCategory: function(file,category){
-                //$http.post(SERVER_URL+ 'edit/deleteProduct',data)
-                return Upload.upload({
-                    url: SERVER_URL + 'edit/addSecondNavigation',
-                    fields: {
-                        'appId':$rootScope.appId,
-                        'name': category.name,
-                        'desc': category.desc,
-                        'mainId' : category.mainId
-                    },
-                    file : file
-                });
-            },
             updateProductImage: function(file,imageUrl,proId,appId){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/updateThirdNaviImage',
@@ -100,17 +65,6 @@
                         discount: product.discount
                     },
                     file: file
-                });
-            },
-
-            showCommerceAddCatDialog: function(){
-                return $mdDialog.show({
-                    controller: 'CommerceCtrl',
-                    templateUrl: 'user/edit/commerce/addCat.html',
-                    clickOutsideToClose: true
-                }).then(function(answer) {
-
-                    //$scope.status = 'You said the information was "' + answer + '".';
                 });
             },
             showOrderDialog: function() {
@@ -235,9 +189,6 @@
             },
             getCategoryList: function(){
                 return $http.get(SERVER_URL+ 'edit/getSecondNavigation?appId='+$rootScope.appId);
-            },
-            updateCategoryList : function(data){
-                return $http.post(SERVER_URL+ 'edit/updateSecondNavi',data);
             },
             getProductList: function(){
                 return $http.get(SERVER_URL+ 'edit/getThirdNavigation?appId='+$rootScope.appId);
