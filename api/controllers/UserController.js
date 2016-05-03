@@ -18,7 +18,7 @@ module.exports = {
     getUserProfile : function(req,res){
 
         var query = {id:req.userId};
-        User.find(query, function(err, user) {
+        User.findOne(query, function(err, user) {
             if (err) return done(err);
             res.send(user);
         });
@@ -47,7 +47,7 @@ module.exports = {
     },
     getBillingDetails : function(req,res){
         var query = {userId:req.param('userId')};
-          BillingDetails.find(query, function(err, user) {
+          BillingDetails.findOne(query, function(err, user) {
             if (err) return done(err);
             res.send(user);
         });

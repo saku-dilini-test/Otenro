@@ -18,16 +18,30 @@
 
 
         userProfileResource.getUserProfile().success(function (data) {
-            $scope.userEditData=data;
-            console.log($scope.userEdit);
+            $scope.userEdit = data;
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
                 closeButton: true
             });
         });
+
+        $scope.activeTabIndex = 0;
+        $scope.viewProfile = "View Profile";
+        $scope.viewBilling = "View billing account";
+        $scope.goToEditView = function (index){
+            $scope.viewProfile = "";
+            $scope.viewBilling = "";
+            $scope.activeTabIndex = index;
+        }
+
+        $scope.backToView = function (index){
+            $scope.viewProfile = "View Profile";
+            $scope.viewBilling = "View billing account";
+            $scope.activeTabIndex = index;
+        }
+
         userProfileResource.getBillingDetails($auth.getPayload().id).success(function (data) {
-              $scope.billingEdit=data[0];
-              console.log($scope.billingEdit);
+              $scope.billingEdit= data;
                 }).error(function (err) {
                     toastr.error(err.error, 'Error', {
                         closeButton: true
@@ -48,7 +62,7 @@
                  toastr.success('Successfully Changed', 'Success', {
                      closeButton: true
                  });
-                 $mdDialog.hide();
+                $scope.backToView(1);
             })
         }
         $scope.redirectToDashboard = function() {

@@ -2,10 +2,10 @@
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
             <md-tab>
-                <md-tab-label>View Profile</md-tab-label>
+                <md-tab-label>{{viewProfile}}</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
-                        <h1>User Profile</h1>
+                        <h1 >Hello {{userEdit.firstName}}</h1>
                         <ul class="md-dialog-header-nav clearfix">
                             <li>
                                 <a ng-click="redirectToDashboard()" class="return-to-app">Return to app view</a>
@@ -15,7 +15,84 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="md-dialog-main" ng-repeat="userEdit in userEditData">
+                    <div class="md-dialog-main">
+                        <div class="clearfix">
+                            <fieldset class="col-2">
+                                <label>Name </label>
+                                <br>
+                                {{userEdit.firstName}} {{userEdit.lastName}}
+                            </fieldset>
+                        </div>
+                        <fieldset>
+                            <label>Email</label>
+                            <br>
+                            {{userEdit.email}}
+                        </fieldset>
+                        <fieldset >
+                            <label>Account type</label>
+                            <br>
+                            {{userEdit.accountType}}
+                        </fieldset>
+                        <fieldset class="text-right">
+                            <md-button class="me-default-button" ng-click="close()">Close</md-button>
+                            <md-button class="me-default-button" ng-click="goToEditView(2)">Edit Profile</md-button>
+                        </fieldset>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <!-- Start billing view-->
+            <md-tab>
+                <md-tab-label>{{viewBilling}}</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>billing account</h1>
+                        <ul class="md-dialog-header-nav clearfix">
+                            <li>
+                                <a ng-click="redirectToDashboard()" class="return-to-app">Return to app view</a>
+                            </li>
+                            <li>
+                                <a ng-click="redirectToLogin()" class="logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md-dialog-main">
+                        <div class="clearfix">
+                            <fieldset>
+                                <label>Billing Name</label>
+                                <br>
+                                {{billingEdit.fname}}
+                            </fieldset>
+                            <fieldset>
+                                <label>Billing Address</label>
+                                <br>
+                                {{billingEdit.address}}
+                            </fieldset>
+                        </div>
+                        <div class="md-dialog-buttons">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="close()">Close</md-button>
+                                <md-button class="me-default-button" ng-click="goToEditView(3)">Edit Billing Account</md-button>
+                            </div>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <!-- Start profile edit view-->
+            <md-tab>
+                <md-tab-label></md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1 >Edit Profile</h1>
+                        <ul class="md-dialog-header-nav clearfix">
+                            <li>
+                                <a ng-click="redirectToDashboard()" class="return-to-app">Return to app view</a>
+                            </li>
+                            <li>
+                                <a ng-click="redirectToLogin()" class="logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="md-dialog-main">
                         <div class="clearfix">
                             <fieldset class="col-2">
                                 <label>First name</label>
@@ -35,12 +112,19 @@
                         </fieldset>
                         <div class="clearfix">
                             <fieldset class="col-2">
-                                <label>password</label>
+                                <label>Current Password</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input type="password" name="password" required ng-model="userEdit.currentPassword" />
+                            </fieldset>
+                        </div>
+                        <div class="clearfix">
+                            <fieldset class="col-2">
+                                <label>Password</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <input type="password" name="password" required ng-model="userEdit.password" />
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
-                                <label>confirm password</label>
+                                <label>Confirm Password</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <input type="password" name="confirmPassword"  required />
                             </fieldset>
@@ -53,29 +137,25 @@
                             </md-select>
                         </fieldset>
                         <fieldset class="text-right">
+                            <md-button class="me-default-button" ng-click="backToView(0)">Cancel</md-button>
                             <md-button class="me-default-button" ng-click="editUserProfile(userEdit)">Save</md-button>
-                            <md-button class="me-default-button" ng-click="close()">cancel</md-button>
                         </fieldset>
                     </div>
                 </md-tab-body>
             </md-tab>
+            <!-- Start billing edit view-->
             <md-tab>
-                <md-tab-label>Edit billing account</md-tab-label>
+                <md-tab-label></md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
                         <h1>Edit billing account</h1>
                     </div>
                     <div class="md-dialog-main">
                         <div class="clearfix">
-                            <fieldset class="col-2">
-                                <label>First name</label>
+                            <fieldset >
+                                <label>Billing Name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <input type="text" name="name" ng-model="billingEdit.fname" required />
-                            </fieldset>
-                            <fieldset class="col-2 reset-margin-right">
-                                <label>Last name</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="name" ng-model="billingEdit.lname" required />
                             </fieldset>
                         </div>
                         <fieldset>
@@ -98,11 +178,12 @@
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <input type="text" name="name" ng-pattern="/[0-9]+/" ui-mask="9999" class="me-xs-input reset-inline" ng-model="billingEdit.cvs" required />
                         </fieldset>
-                    </div>
-                    <div class="md-dialog-buttons">
-                        <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="close()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="saveBillings(billingEdit)">save</md-button>
+
+                        <div class="md-dialog-buttons">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="backToView(1)">cancel</md-button>
+                                <md-button class="me-default-button" ng-click="saveBillings(billingEdit)">save</md-button>
+                            </div>
                         </div>
                     </div>
                 </md-tab-body>
