@@ -91,38 +91,6 @@
                 })
         }
 
-        $scope.addCategory = function(file, category) {
-            commerceService.addCategory(file,category)
-                .progress(function(evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-                }).success(function(data, status, headers, config) {
-                    $scope.categories.push({name: name,categoryDesc: category.desc,imageUrl: data.appId.imageUrl});
-                    //toaster.success("Successfully added");
-                    alert("success", 'Awsome! ', ' New Category has been added.!');
-                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-                    return commerceService.showCommerceDialog('category');
-                }).error(function(data, status, headers, config) {
-                    //alert('warning', "Unable to get templates", err.message);
-                })
-        };
-
-        $scope.updateCategory= function(){
-            var prams={
-                childList : $scope.categories,
-                appId : $rootScope.appId
-            };
-
-            commerceService.updateCategoryList(prams)
-                .success(function() {
-                    alert("success", 'Awsome! ', 'Category has been Updated.!');
-                    $mdDialog.hide();
-                }).error(function(err) {
-                    alert('warning', "Unable to Updated", err.message);
-                })
-
-        };
-
 //        $scope.addProducts = function(file,product) {
 //            commerceService.addProduct(file,product).
 //                success(function(data) {
@@ -284,14 +252,6 @@
         };
         $scope.catListChange=function($index){
            $scope.products[$index].categoryId=$scope.categoryIdList[$index];
-        };
-
-        $scope.addNewCat=function(){
-            return commerceService.showCommerceAddCatDialog();
-        };
-
-        $scope.addCatFinish=function(){
-            return commerceService.showCommerceDialog('category');
         };
 
         $scope.moveToFlatRateOption=function(){
