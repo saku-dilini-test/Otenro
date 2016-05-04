@@ -12,7 +12,10 @@
                 return $mdDialog.show({
                     controller: 'PublishCtrl',
                     templateUrl: 'user/edit/publish/publishToAppStoreView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals : {
+                      item : 'AppStore',
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
@@ -23,7 +26,10 @@
                 return $mdDialog.show({
                     controller: 'PublishCtrl',
                     templateUrl: 'user/edit/publish/publishToGooglePlayView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals : {
+                      item : 'GooglePlay',
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
@@ -35,6 +41,7 @@
                     url: SERVER_URL + 'edit/setPublishDetails',
                     fields: {
                         'appId':$rootScope.appId,
+                        'category':playStoreData.category,
                         'name': playStoreData.name,
                         'springBoardName':playStoreData.springBoardName,
                         'language':playStoreData.language,
@@ -42,6 +49,10 @@
                         'secondaryCategory':playStoreData.secondaryCat,
                         'description':playStoreData.desc,
                         'keywords':playStoreData.keywords,
+                        'copyrights':playStoreData.copyrights,
+                        'marketingUrl':playStoreData.marketingUrl,
+                        'privacyPolicyUrl':playStoreData.privacyPolicyUrl,
+                        'supportUrl':playStoreData.supportUrl,
                          file: file,
                          splash1:splash.splash1,
                          splash2:splash.splash2,
@@ -55,9 +66,12 @@
             getAllLanguages:function(){
                 return $http.get(SERVER_URL + 'edit/getAllLanguages');
             },
-            getExistingData:function(){
-                return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId);
+            getExistingData:function(category){
+                return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId+'&category='+category);
             },
+            getExistingDataAppStore:function(category){
+                            return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId+'&category='+category);
+                        },
             getAllPrimaryCategories:function(){
                  return $http.get(SERVER_URL + 'edit/getAllPrimaryCategories?appId='+$rootScope.appId);
              },

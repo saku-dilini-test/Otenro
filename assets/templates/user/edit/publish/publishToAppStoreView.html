@@ -11,7 +11,7 @@
                         <fieldset>
                             <label>title name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" required />
+                            <input type="text" name="name" ng-model="appStoreData.name" required />
                         </fieldset>
                         <div class="clearfix">
                             <fieldset class="col-4 profile-image-section">
@@ -32,28 +32,36 @@
                                     <fieldset class="col-4-1">
                                         <div class="me-file-upload text-right medium">
                                             <div class="upload-wrapper">
-                                                <input type="file" />
+                                                <input type="file" ngf-select ng-model="publishSplash.splash1"/>
+                                                <img ng-show="publishSplash.splash1 != null" ngf-src="publishSplash.splash1" width="80" height="120" />
+                                                <img ng-show="publishSplash.splash1 == null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="80" height="120" />
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset class="col-4-1">
                                         <div class="me-file-upload text-right medium">
                                             <div class="upload-wrapper">
-                                                <input type="file" />
+                                                <input type="file" ngf-select ng-model="publishSplash.splash2"/>
+                                                <img ng-show="publishSplash.splash2 != null" ngf-src="publishSplash.splash2" width="80" height="120" />
+                                                <img ng-show="publishSplash.splash2 == null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="80" height="120" />
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset class="col-4-1">
                                         <div class="me-file-upload text-right medium">
                                             <div class="upload-wrapper">
-                                                <input type="file" />
+                                                <input type="file" ngf-select ng-model="publishSplash.splash3"/>
+                                                <img ng-show="publishSplash.splash3 != null" ngf-src="publishSplash.splash3" width="80" height="120" />
+                                                <img ng-show="publishSplash.splash3 == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="80" height="120" />
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset class="col-4-1 reset-margin">
                                         <div class="me-file-upload text-right medium">
                                             <div class="upload-wrapper">
-                                                <input type="file" />
+                                                <input type="file" ngf-select ng-model="publishSplash.splash4"/>
+                                                <img ng-show="publishSplash.splash4 != null" ngf-src="publishSplash.splash4" width="80" height="120" />
+                                                <img ng-show="publishSplash.splash4 == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="80" height="120" />
                                             </div>
                                         </div>
                                     </fieldset>
@@ -64,65 +72,65 @@
                             <fieldset>
                                 <label>spring board name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="name" required />
+                                <input type="text" name="name" ng-model="appStoreData.springBoardName" required />
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>language</label>
-                                <md-select ng-model="someVal1">
-                                    <md-option value="Basic">Basic</md-option>
-                                    <md-option value="Advanced">Advanced</md-option>
-                                </md-select>
+                                <select class="form-control"
+                                        ng-model="appStoreData.language"
+                                        ng-options="languages.language as languages.language for languages in languageList">
+                                </select>
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>primary category</label>
-                                <md-select ng-model="someVal2">
-                                    <md-option value="Basic">Basic</md-option>
-                                    <md-option value="Advanced">Advanced</md-option>
-                                </md-select>
+                                <select class="form-control"
+                                        ng-model="appStoreData.primaryCat"
+                                        ng-options="catList.category as catList.category for catList in primaryCatList">
+                                </select>
                             </fieldset>
                             <fieldset class="col-3 reset-margin-right">
                                 <label>secondary category</label>
-                                <md-select ng-model="someVal3">
-                                    <md-option value="Basic">Basic</md-option>
-                                    <md-option value="Advanced">Advanced</md-option>
-                                </md-select>
+                                <select class="form-control"
+                                        ng-model="appStoreData.secondaryCat"
+                                        ng-options="secondaryCat.category as secondaryCat.category for secondaryCat in secondaryCatList">
+                                </select>
                             </fieldset>
                         </div>
                         <div class="clearfix">
                             <fieldset>
                                 <label>description</label>
-                                <textarea rows="2"></textarea>
+                                <textarea ng-model="appStoreData.desc" rows="2"></textarea>
                             </fieldset>
                             <fieldset>
                                 <label>keywords</label>
-                                <textarea rows="2"></textarea>
+                                <textarea ng-model="appStoreData.keywords" rows="2"></textarea>
                             </fieldset>
                             <fieldset class="col-2">
                                 <label>support url</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="supportUrl" required />
+                                <input type="text" ng-model="appStoreData.supportUrl" name="supportUrl" required />
                             </fieldset>
                             <fieldset class="col-2 reset-margin-right">
                                 <label>marketing url</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="marketingUrl" required />
+                                <input type="text" ng-model="appStoreData.marketingUrl" name="marketingUrl" required />
                             </fieldset>
                             <fieldset class="col-2">
                                 <label>privacy policy url</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="privacyPolicyUrl" required />
+                                <input type="text" ng-model="appStoreData.privacyPolicyUrl" name="privacyPolicyUrl" required />
                             </fieldset>
                             <fieldset class="col-2 reset-margin-right">
                                 <label>copyrights</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="copyrights" required />
+                                <input type="text" ng-model="appStoreData.copyrights" name="copyrights" required />
                             </fieldset>
                         </div>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button">cancel</md-button>
-                            <md-button class="me-default-button">next</md-button>
+                            <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="addAppStoreInfo(picFile,appStoreData,publishSplash)">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
