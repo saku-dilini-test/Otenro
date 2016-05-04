@@ -53,6 +53,11 @@ module.exports = {
             template_name : 'foodDemoApp',
             imageUrl : 'foodDeliver/foodDeliver.png',
             templateFilesPath:'templates/foodDemoApp'
+        },
+        {
+            template_name : 'hkRising',
+            imageUrl : 'hkRising/hkRising.png',
+            templateFilesPath:'templates/hkRising'
         }
     ]
 };
