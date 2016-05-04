@@ -177,6 +177,7 @@ module.exports.routes = {
     'GET /templates/getCurrency': 'template/TemplateController.getCurrency',
     'GET /templates/viewImages': 'template/TemplateController.viewImages',
     'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
+    'POST /templates/deletePreviewTemp': 'template/TemplateController.deletePreviewTemp',
 
     /***
      * Template Auth Controller

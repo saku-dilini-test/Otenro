@@ -17,7 +17,7 @@
             },
             'preferredLocale': 'en_US'
         })
-        .constant('ME_APP_SERVER','http://localhost:8081/')
+        .constant('ME_APP_SERVER','http://localhost:8080/')
         .config(function($urlRouterProvider,$httpProvider, $authProvider, SERVER_URL) {
 
             $authProvider.baseUrl = SERVER_URL;

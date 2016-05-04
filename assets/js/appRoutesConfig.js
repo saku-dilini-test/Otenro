@@ -45,7 +45,19 @@ angular.module('app')
           },
           controller : 'AppEditAreaCtrl',
           templateUrl : 'user/edit/appEditAreaView.html'
-       });
+
+       }).state('user.livePreview',{
+            url :'/livePreview',
+            params: {
+                userId:null,
+                appId: null,
+                tempUrl:null,
+                tempName:null,
+            },
+            controller: 'livePreviewCtrl',
+            templateUrl : 'user/welcome/LivePreview.html'
+        })
+        ;
 
     $urlRouterProvider.otherwise('/');
 

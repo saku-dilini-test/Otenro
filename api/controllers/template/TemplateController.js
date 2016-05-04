@@ -7,6 +7,9 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var fs = require('fs-extra');
+
+
 module.exports = {
 
     getMainMenu : function(req,res){
@@ -117,5 +120,29 @@ module.exports = {
 
     viewImages : function(req,res){
        res.sendfile(config.ME_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
+    },
+
+
+
+    deletePreviewTemp : function(req,res){
+       var appId = req.param('appId');
+        var userId = req.param('userId');
+
+
+
+        console.log("run run");
+        fs.remove(config.ME_SERVER+ userId +'/templates/'+appId+'/', function (err) {
+
+            if (err) {
+                console.error(err);
+            }
+        });
+
+        Application.destroy({ id : appId}).exec(function (err) {
+            if (err) return callback("Error while deleting " + err.message);
+            res.send(200,{message:'Deleted Main Navigation'});
+        });
     }
+
+
 };

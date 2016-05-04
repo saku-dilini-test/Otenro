@@ -8,10 +8,11 @@
     function HeaderController($scope, Auth, CurrentUser,userProfileService,$location,dashboardService,toastr) {
 
       $scope.welcome=false;
+      $scope.livePreview=false;
+
       var location=$location.url();
-      if(location == "/"){
+      if(location == "/") {
         console.log("welcome");
-        $scope.welcome=true;
       }
 
       $scope.auth = Auth;

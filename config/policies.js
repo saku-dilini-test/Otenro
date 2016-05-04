@@ -65,7 +65,8 @@ module.exports.policies = {
     getCurrency : true,
     viewImages : true,
     getThirdBySecondId : true,
-    setPublishDetails: true
+    setPublishDetails: true,
+    deletePreviewTemp:true,
   },
 
   'template/TemplateAuthController': {
