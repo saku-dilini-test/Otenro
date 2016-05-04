@@ -1,63 +1,181 @@
-<md-dialog aria-label="Email Settings">
+<md-dialog aria-label="Inventory" style="width:900px">
     <md-dialog-content>
-        <form novalidate>
-            <div class="md-dialog-header">
-                <h1>e-mail settings</h1>
-            </div>
-            <div class="md-dialog-main">
-                <fieldset>
-                    <label>from email</label>
-                    <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <input type="text" name="name" required ng-model="email.fromEmail" />
-                </fieldset>
-                <fieldset>
-                    <label>reply to email</label>
-                    <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <input type="text" name="name" required ng-model="email.replyToEmail" />
-                </fieldset>
-                <fieldset>
-                    <label>alert email</label>
-                    <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <input type="text" name="name" required ng-model="email.alertEmail" />
-                </fieldset>
-                <fieldset>
-                    <label>alert at</label>
-                    <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <input type="text" name="name" class="me-xs-input reset-inline" required ng-model="email.alertAt" />
-                    <span class="percentage-mark">%</span>
-                </fieldset>
-                <fieldset>
-                    <label>order confirm email</label>
-                    <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <textarea rows="4" ng-model="email.orderConfirmedEmail"></textarea>
-                </fieldset>
-                <fieldset>
-                    <label>order fulfilled email</label>
-                    <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <textarea rows="4" ng-model="email.orderFulfilledEmail"></textarea>
-                </fieldset>
-                <fieldset>
-                    <label>order refund email</label>
-                    <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <textarea rows="4" ng-model="email.orderRefundEmail"></textarea>
-                </fieldset>
-                <fieldset>
-                    <label>header</label>
-                    <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <textarea rows="2" ng-model="email.header"></textarea>
-                </fieldset>
-                <fieldset>
-                    <label>footer</label>
-                    <img src="../../../images/question-mark.svg" width="12" height="12">
-                    <textarea rows="2" ng-model="email.footer"></textarea>
-                </fieldset>
-            </div>
-            <div class="md-dialog-buttons">
-                <div class="inner-section">
-                    <md-button class="me-default-button" ng-click="hide()">cancel</md-button>
-                    <md-button class="me-default-button" ng-click="manageEmailSettings(email)">send text email</md-button>
-                </div>
-            </div>
-        </form>
+        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+            <md-tab>
+                <md-tab-label>Email Delivery</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <div class="md-dialog-header-nav clearfix">
+                            <h1 class="pull-left">E-Mail settings</h1>
+
+                        </div>
+                    </div>
+
+                    <div class="md-dialog-main">
+                        <fieldset>
+                            <label>from email</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12">
+                            <input type="text" name="name" required ng-model="email.fromEmail" />
+                        </fieldset>
+                        <fieldset>
+                            <label>reply to email</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12">
+                            <input type="text" name="name" required ng-model="email.replyToEmail" />
+                        </fieldset>
+                        <fieldset>
+                            <label>alert email</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12">
+                            <input type="text" name="name" required ng-model="email.alertEmail" />
+                        </fieldset>
+                        <fieldset>
+                        <label>alert at</label>
+                        <img src="../../../images/question-mark.svg" width="12" height="12">
+                        <input type="text" name="name" class="me-xs-input reset-inline" required ng-model="email.alertAt" />
+                        <span class="percentage-mark">%</span>
+                        </fieldset>
+
+                    </div>
+
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">Next</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Header and Footer</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <div class="md-dialog-header-nav clearfix">
+                            <h1 class="pull-left">E-Mail settings</h1>
+
+                        </div>
+                    </div>
+                    <div class="md-dialog-main">
+                        <fieldset>
+                            <label>Header</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12">
+                            <textarea rows="4" ng-model="email.header"></textarea>
+                        </fieldset>
+                        <fieldset>
+                            <label>footer</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12">
+                            <textarea rows="4" ng-model="email.footer"></textarea>
+                        </fieldset>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">Finish</md-button>
+                        </div>
+                    </div>
+
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Order Confirmation</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <div class="md-dialog-header-nav clearfix">
+                            <h1 class="pull-left">E-Mail settings</h1>
+
+                        </div>
+                    </div>
+                    <div class="md-dialog-main">
+                    <fieldset>
+                        <label>order confirm email</label>
+                        <img src="../../../images/question-mark.svg" width="12" height="12">
+                        <textarea rows="4" ng-model="email.orderConfirmedEmail"></textarea>
+                    </fieldset>
+                        <md-button class="me-default-button" ng-click="hide()">Test E-mail </md-button>
+                        </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">Next</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Order Fulfill</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <div class="md-dialog-header-nav clearfix">
+                            <h1 class="pull-left">E-Mail settings</h1>
+
+                        </div>
+                    </div>
+                    <div class="md-dialog-main">
+                    <fieldset>
+                        <label>order fulfilled email</label>
+                        <img src="../../../images/question-mark.svg" width="12" height="12">
+                        <textarea rows="4" ng-model="email.orderFulfilledEmail"></textarea>
+                    </fieldset>
+                        <md-button class="me-default-button" ng-click="hide()">Test E-mail </md-button>
+                        </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">Next</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Order Refund</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <div class="md-dialog-header-nav clearfix">
+                            <h1 class="pull-left">E-Mail settings</h1>
+
+                        </div>
+                    </div>
+                    <div class="md-dialog-main">
+                    <fieldset>
+                        <label>order refund email</label>
+                        <img src="../../../images/question-mark.svg" width="12" height="12">
+                        <textarea rows="4" ng-model="email.orderRefundEmail"></textarea>
+                    </fieldset>
+                        <md-button class="me-default-button" ng-click="hide()">Test E-mail </md-button>
+                        </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">Next</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Alert Message</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <div class="md-dialog-header-nav clearfix">
+                            <h1 class="pull-left">E-Mail settings</h1>
+
+                        </div>
+                    </div>
+                    <div class="md-dialog-main">
+                    <fieldset>
+                        <label>alert email</label>
+                        <img src="../../../images/question-mark.svg" width="12" height="12">
+                        <textarea rows="4" ng-model="email.orderAlertEmail"></textarea>
+                    </fieldset>
+                        <md-button class="me-default-button" ng-click="hide()">Test E-mail </md-button>
+                        </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
+                            <md-button class="me-default-button" ng-click="manageEmailSettings(email)">Finish</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+
+
+        </md-tabs>
     </md-dialog-content>
 </md-dialog>

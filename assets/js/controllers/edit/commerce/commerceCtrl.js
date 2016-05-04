@@ -319,7 +319,7 @@
         };
 
         $scope.manageEmailSettings = function(email){
-
+            console.log(email);
             commerceService.manageEmailSettings( email)
                 .success(function(data) {
                     $mdDialog.hide();
@@ -336,12 +336,12 @@
 
         };
 
-            commerceService.getEmailSettings()
-                .success(function (result) {
-                    $scope.email = result;
-                }).error(function (error) {
-                alert("MainMenu Loading Error : " + error);
-            })
+            //commerceService.getEmailSettings()
+            //    .success(function (result) {
+            //        $scope.email = result;
+            //    }).error(function (error) {
+            //    alert("MainMenu Loading Error : " + error);
+            //});
 
 
 

@@ -8,7 +8,7 @@ module.exports = {
 
     manageEmailSettings : function(req,res){
 
-        //console.log(req);
+        console.log(req.body);
 
         var appId = req.param('appId');
         var saveData = req.body;
