@@ -1,0 +1,37 @@
+<div ng-include=" 'user/header/header.html' "></div>
+    <div class="obl-dashboard-apps">
+        <fieldset class="text-left">
+            <h1>Rum Punch</h1>
+        </fieldset>
+        <fieldset class="text-left">
+            <label class="font-size-12  reset-margin" >
+                Rum Punch is favored by many businesses.
+                It is easy to customise
+            </label>
+        </fieldset>
+        <br>
+
+        </br>
+        <br>
+
+        </br>
+        <ul class="grid obl-app-templates clearfix">
+            <fieldset class="text-left">
+                <button class="me-default-button" ng-click="deleteFile(userId,appId)">
+                    Cancel
+                </button>
+                <button class="me-default-button" ng-click='open(appId,tempUrl,tempName)'>
+                    Continue
+                </button>
+            </fieldset>
+        </ul>
+    </div>
+    <div class="mdapp-content">
+        <div class="device-preview" ng-class="tabletView ? 'tabletView' : '!tabletView'">
+            <div class="device-simulator" overflow="scroll">
+                <me-tablet ng-show="tabletView" tmp-url="{{appTemplateUrl}}"></me-tablet>
+                <me-iphone ng-show="!tabletView" tmp-url="{{appTemplateUrl}}"></me-iphone>
+            </div>
+        </div>
+    </div>
+</div>
