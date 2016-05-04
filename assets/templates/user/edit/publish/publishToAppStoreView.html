@@ -7,6 +7,7 @@
                     <div class="md-dialog-header">
                         <h1>general</h1>
                     </div>
+                    <form name="appStoreForm" novalidate>
                     <div class="md-dialog-main">
                         <fieldset>
                             <label>title name</label>
@@ -108,17 +109,20 @@
                             <fieldset class="col-2">
                                 <label>support url</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" ng-model="appStoreData.supportUrl" name="supportUrl" required />
+                                <input type="url" ng-model="appStoreData.supportUrl" name="supportUrl" required />
+                                <span class="error" style="color:red" ng-show="appStoreForm.supportUrl.$error.url">Not valid url!</span>
                             </fieldset>
                             <fieldset class="col-2 reset-margin-right">
                                 <label>marketing url</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" ng-model="appStoreData.marketingUrl" name="marketingUrl" required />
+                                <input type="url" ng-model="appStoreData.marketingUrl" name="marketingUrl" required />
+                                <span class="error" style="color:red" ng-show="appStoreForm.marketingUrl.$error.url">Not valid url!</span>
                             </fieldset>
                             <fieldset class="col-2">
                                 <label>privacy policy url</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" ng-model="appStoreData.privacyPolicyUrl" name="privacyPolicyUrl" required />
+                                <input type="url" ng-model="appStoreData.privacyPolicyUrl" name="privacyPolicyUrl" required />
+                                <span class="error" style="color:red" ng-show="appStoreForm.privacyPolicyUrl.$error.url">Not valid url!</span>
                             </fieldset>
                             <fieldset class="col-2 reset-margin-right">
                                 <label>copyrights</label>
@@ -127,6 +131,7 @@
                             </fieldset>
                         </div>
                     </div>
+                    </form>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
