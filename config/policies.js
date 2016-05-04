@@ -66,6 +66,7 @@ module.exports.policies = {
     viewImages : true,
     getThirdBySecondId : true,
     setPublishDetails: true,
+    deletePreviewTemp:true,
     getTermsAndConditions: true
   },
 

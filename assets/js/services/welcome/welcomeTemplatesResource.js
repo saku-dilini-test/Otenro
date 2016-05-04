@@ -14,7 +14,13 @@
             },
             createApp:function(appParams){
                 return $http.post(SERVER_URL + 'app/viewTemplate', appParams);
-            }
+            },
+            deletePreviewTemp : function(appParams){
+                return $http.post(SERVER_URL + 'templates/deletePreviewTemp',appParams);
+            },
+            createPreview:function(appParams){
+                return $http.post(SERVER_URL + 'app/preview', appParams);
+            },
         }
     }
 })();

@@ -3,7 +3,7 @@
     <div class="obl-dashboard-apps">
         <ul class="grid obl-app-templates clearfix">
             <li ng-repeat="template in templates">
-                <a href="javascript:void(0);" ng-click="open(template.id,template.imageUrl,template.template_name)">
+                <a ng-click="viewApp(template.id,template.imageUrl,template.template_name)" >
                     <img ng-src="images/templates/{{template.imageUrl}}" />
                 </a>
             </li>
