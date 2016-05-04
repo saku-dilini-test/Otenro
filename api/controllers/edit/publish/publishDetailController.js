@@ -27,8 +27,11 @@ module.exports = {
         var splash4y = splash4ex.replace('"}','');
         details.splash4 = splash4y;
 
-
-            PublishDetails.update({appId :req.body.appId},details).exec(function(err,app) {
+            var searchApp = {
+                appId :req.body.appId,
+                category: req.body.category
+            }
+            PublishDetails.update(searchApp,details).exec(function(err,app) {
                 if (err) res.send(err);
 
                 if (app.length == 0) {
@@ -70,8 +73,10 @@ module.exports = {
 
     getLanguage : function(req,res){
         var appId = req.param('appId');
+        var category = req.param('category');
         var searchApp = {
-            appId: appId
+            appId: appId,
+            category: category
         };
         PublishDetails.find(searchApp, function(err, app) {
             if (err) return done(err);

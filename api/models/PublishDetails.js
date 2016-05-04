@@ -12,6 +12,9 @@ module.exports = {
             type: 'string',
             required: true
         },
+        category :{
+            type: 'string'
+        },
         name:{
             type: 'string'
         },
@@ -47,6 +50,18 @@ module.exports = {
         },
         splash4:{
             type:'string'
+        },
+        copyrights:{
+            type: 'string'
+        },
+        marketingUrl:{
+            type: 'string'
+        },
+        privacyPolicyUrl:{
+            type: 'string'
+        },
+        supportUrl:{
+            type: 'string'
         },
         createdDate:{
             type: 'date'
