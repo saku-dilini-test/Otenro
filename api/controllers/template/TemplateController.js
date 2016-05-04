@@ -140,7 +140,7 @@ module.exports = {
 
         Application.destroy({ id : appId}).exec(function (err) {
             if (err) return callback("Error while deleting " + err.message);
-            res.send(200,{message:'Deleted Main Navigation'});
+            res.send(200,{message:'Deleted Application'});
         });
     }
 
