@@ -84,7 +84,7 @@ module.exports = {
             id: productId
         };
 
-        ThirdNavigation.find(searchApp).exec(function(err, app) {
+        ThirdNavigation.findOne(searchApp).exec(function(err, app) {
             if (err) return done(err);
             res.json(app);
         });

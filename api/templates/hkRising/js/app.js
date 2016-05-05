@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,readMadeEasy,$rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,6 +19,28 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    if (typeof $rootScope.appId === 'undefined'){
+
+      readMadeEasy.readFile().success(function(data){
+        $rootScope.appId = data.appId;
+        console.log(data);
+      });
+    }
+
+    if (typeof $rootScope.userId === 'undefined'){
+
+      readMadeEasy.readFile().success(function(data){
+        $rootScope.userId = data.userId;
+      });
+    }
+    if (typeof $rootScope.appName === 'undefined'){
+
+      readMadeEasy.readFile().success(function(data){
+        $rootScope.appName = data.name;
+      });
+    }
+
   });
 })
 
@@ -58,7 +80,33 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-
+      .state('app.secondNavi', {
+        url: '/secondNavi',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/secondNavi.html',
+            controller: 'secondNaviCtrl'
+          }
+        }
+      })
+      .state('app.thirdNavi', {
+        url: '/thirdNavi/:secondNavId',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/thirdNavi.html',
+            controller: 'thirdNaviCtrl'
+          }
+        }
+      })
+      .state('app.thirdNaviView', {
+        url: '/thirdNaviView/:thirdNaviId',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/thirdNaviView.html',
+            controller: 'thirdNaviCtrl'
+          }
+        }
+      })
   //.state('app.single', {
   //  url: '/playlists/:playlistId',
   //  views: {

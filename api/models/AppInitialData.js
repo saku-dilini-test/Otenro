@@ -128,6 +128,58 @@ module.exports = {
 
       ]
 
+    },
+    {
+      templateName : 'hkRising',
+      secondNavi : [
+        {
+          attribute : {
+            "name": "Hotel"
+          },
+          thirdNavi : []
+        },
+        {
+          attribute : {
+            "name": "Shopping"
+          },
+          thirdNavi : []
+        },
+        {
+          attribute : {
+            "name": "Food",
+          },
+          thirdNavi : []
+        },
+        {
+          attribute : {
+            "name": "Activity"
+          },
+          thirdNavi : [
+            {
+              "name": "Train ride round the city",
+              "desc": "Hogshead wench long boat no prey, no pay pressgang trysail piracy capstan heave to barkadeer pillage.",
+              "imageUrl": "ionic.png"
+            },
+            {
+              "name": "Great budda statue",
+              "desc": "",
+              "imageUrl": "ionic.png"
+            },
+            {
+              "name": "Boat racing in the river",
+              "desc": "",
+              "imageUrl": "ionic.png"
+            },
+            {
+              "name": "Boat ride in a river nearby",
+              "desc": "Hogshead wench long boat no prey, no pay pressgang trysail piracy capstan heave to barkadeer pillage. Hogshead wench long boat no prey, no pay pressgang trysail piracy capstan heave to",
+              "imageUrl": "ionic.png"
+            }
+          ]
+        }
+
+      ]
+
     }
 
   ]

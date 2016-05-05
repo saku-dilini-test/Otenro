@@ -74,7 +74,7 @@ module.exports = {
 
         fs.copy(templatePath, tempAppDirPath + app.id, function(err) {
             if (err) return console.error(err);
-            var madeEasyFilePath = tempAppDirPath +'/'+app.id+'/madeEasy.Project';
+            var madeEasyFilePath = tempAppDirPath +app.id+'/madeEasy.Project';
             var madeEasyFileContent = {
                 name : appName,
                 appId : app.id,
@@ -111,11 +111,11 @@ module.exports = {
         /**
          * If Only foodDemoApp Category & Product Feed to DB
          */
-        if(templateName == 'foodDemoApp'){
+        if(templateName == 'foodDemoApp') {
             var searchAppInitialData = {
-                'templateName' : 'foodDemoApp'
+                'templateName': 'foodDemoApp'
             }
-            AppInitialData.findOne(searchAppInitialData, function(err, appInitData) {
+            AppInitialData.findOne(searchAppInitialData, function (err, appInitData) {
                 if (err) return done(err);
 
                 /**
@@ -142,6 +142,41 @@ module.exports = {
                     });
                 }
             });
+
+            /**
+             * If Only hkRising Details Feed to DB
+             */
+        }else if(templateName == 'hkRising'){
+                var searchAppInitialData = {
+                    'templateName' : 'hkRising'
+                }
+                AppInitialData.findOne(searchAppInitialData, function(err, appInitData) {
+                    if (err) return done(err);
+
+                    /**
+                     * add Second Navigation
+                     */
+                    var secondNaviList = appInitData.secondNavi;
+                    for (var i = 0; i < secondNaviList.length; i++) {
+                        var scondNaviAttribute = secondNaviList[i].attribute;
+                        scondNaviAttribute.appId = app.id;
+                        var thirdNaviList = secondNaviList[i].thirdNavi;
+                        SecondNavigation.create(scondNaviAttribute).exec(function (err, secondN) {
+                            if (err) return err;
+
+                            /**
+                             * Add Third Navigation
+                             */
+                            for (var j = 0; j < thirdNaviList.length; j++) {
+                                thirdNaviList[j].appId = app.id;
+                                thirdNaviList[j].childId = secondN.id;
+                                ThirdNavigation.create(thirdNaviList[j]).exec(function (err, thirdN) {
+                                    if (err) return err;
+                                });
+                            }
+                        });
+                    }
+                });
 
         }else {
             var mainNavi = [{
