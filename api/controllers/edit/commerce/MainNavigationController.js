@@ -22,6 +22,7 @@ module.exports = {
     saveMainMenu : function(req,res){
         var menuItems = req.body.menuItems;
         var appId = req.body.appId;
+        var topLevel = req.body.topLevel;
 
         var setFunction=function( x , length , data){
             if(x < length){
@@ -55,7 +56,39 @@ module.exports = {
             }
         };
 
-        setFunction(0,menuItems.length,menuItems);
+        var setFunctionSecondNavi =function( x , length , data){
+            if(x < length){
+                var childNodes = data[x].nodes;
+                SecondNavigation.update({ id : data[x].id , appId : appId },data[x],function(err,parent){
+
+                    if(parent.n === 0 || childNodes.length == 0){
+                        x++;
+                        setFunctionSecondNavi(x,length,data);
+                    }
+                    for(var i=0 ; i < childNodes.length ; i++){
+
+                        ThirdNavigation.update({ id : childNodes[i].id ,appId : appId },childNodes[i],function(err,child){
+
+                        });
+                        if(i == childNodes.length-1 ){
+                            x++;
+                            setFunctionSecondNavi(x,length,data);
+                        }
+                    }
+                });
+            }else{
+                res.send('ok');
+            }
+        };
+
+        /**
+         * if top Level == second Navigation
+         */
+        if(topLevel == 'secondNavi') {
+            setFunctionSecondNavi(0, menuItems.length, menuItems);
+        }else {
+            setFunction(0,menuItems.length,menuItems);
+        }
     },
 
     addNewNavi : function(req,res){

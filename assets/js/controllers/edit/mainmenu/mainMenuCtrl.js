@@ -9,6 +9,8 @@
             appId:$rootScope.appId
         };
 
+        $scope.topLevel  = '';
+
         commerceService.getMainMenuList()
             .success(function (result) {
                 if(result){
@@ -40,6 +42,23 @@
                                                 }
                                             }
                                             $scope.menuItems= result;
+
+                                            /**
+                                             * If null main menu collection
+                                             */
+                                            if(result.length == 0 && secondResult.length != 0){
+                                                for(var i=0 ; i < secondResult.length ; i++) {
+                                                    secondResult[i].nodes=[];
+                                                    for(var j=0 ;j < thirdResult.length ;j++){
+                                                        if(secondResult[i].id == thirdResult[j].childId){
+                                                            thirdResult[j].nodes=[];
+                                                            secondResult[i].nodes.push(thirdResult[j]);
+                                                        }
+                                                    }
+                                                }
+                                                $scope.menuItems= secondResult;
+                                                $scope.topLevel  = 'secondNavi';  // This should comes DB
+                                            }
                                             //console.log("Result "+JSON.stringify(result));
                                         }
 
@@ -101,7 +120,8 @@
         $scope.saveMainMenu = function() {
             var dataPrams = {
                 menuItems : $scope.menuItems,
-                appId:$rootScope.appId
+                appId:$rootScope.appId,
+                topLevel : $scope.topLevel
             };
             mainMenuService.saveMainMenu(dataPrams).success(function(data) {
                 $scope.mainMenu = data;
