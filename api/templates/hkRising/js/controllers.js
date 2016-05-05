@@ -53,4 +53,37 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+})
+
+    .controller('secondNaviCtrl', function($scope,$http,constants,$rootScope) {
+      $scope.appId = $rootScope.appId;
+
+      $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$rootScope.appId)
+          .success(function(data) {
+            $scope.secondNaviList = data;
+            console.log(data);
+          }).error(function(err) {
+            alert('loading err');
+          });
+    })
+
+    .controller('thirdNaviCtrl', function($scope,$http,constants,$rootScope,$stateParams) {
+
+      $scope.appId = $rootScope.appId;
+
+      $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.secondNavId).success(function(data) {
+        $scope.thirdNaviList = data;
+        console.log(data);
+      }).error(function(err) {
+        alert('loading err');
+      });
+
+      $http.get(constants.SERVER_URL + '/templates/getProductById?productId='+$stateParams.thirdNaviId)
+          .success(function(data) {
+            $scope.selectedThridNavi = data;
+            console.log(data);
+          }).error(function(err) {
+            alert('loading err');
+          });
+
+    });

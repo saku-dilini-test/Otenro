@@ -1,0 +1,22 @@
+<ion-view view-title="ThirdNavi">
+    <ion-content>
+        <div ng-repeat="thirdNavi in thirdNaviList">
+            <div class="card">
+                <a href="#/app/thirdNaviView/{{thirdNavi.id}}">
+                    <div class="row" href="#/app/aboutus">
+                        <div class="col">
+                            <div class="item item-image">
+                                <img src="img/{{thirdNavi.imageUrl}}">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="item item-text-wrap">
+                                {{thirdNavi.name}}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
