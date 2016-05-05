@@ -6,8 +6,17 @@
 
     function CommerceCtrl($scope, $mdDialog,toastr, commerceService,currencyService,publishService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER) {
         $scope.selectedTab = 0;
-        $scope.status = "Closed";
         $scope.amPm = "am";
+
+        $scope.statusList =[
+        {id: 'Closed', status : "Closed"},{id:'Closed', status : "Open"}
+        ];
+                $scope.storeSettings={
+                            status:$scope.statusList[0].id
+        //                    language: "English",
+        //                    timeAndRegion: "Option1",
+                        };
+
 
         $scope.openHours = [
         {day:'Sunday',
@@ -155,11 +164,6 @@
                 })
         };
 
-        $scope.storeSettings={
-                    language: "English",
-                    timeAndRegion: "Option1"
-                };
-
          publishService.getAllLanguages().
                    success(function(data){
                        $scope.languageList = data;
@@ -193,6 +197,14 @@
          });
 
          $scope.saveStoreSettings = function(current,storeSettings,openHours){
+         console.log(openHours);
+         console.log(storeSettings);
+
+         if(openHours == 'undefined' || storeSettings.orderNumber == null || storeSettings.address == null || storeSettings.connectDomain == null ||
+         storeSettings.searchEngineDesc == null){
+            toastr.error(' warning',"Please fill all the fields", {closeButton: true});
+         }
+         else{
 
          for(var i=0; i<$scope.currencyList.length; i++){
                                  if($scope.storeSettings.currency == $scope.currencyList[i].sign){
@@ -215,6 +227,7 @@
                 toastr.error(' warning',"Unable to get templates", {closeButton: true});
             })
             $scope.selectedTab = current;
+            }
          };
 
             commerceService.showStoreSettings($rootScope.appId).
@@ -226,17 +239,22 @@
             });
 
         $scope.savePolicies = function(current,policies){
-                 policies.userId = $scope.userId;
-                 policies.appId = $rootScope.appId;
-            commerceService.savePolicies(policies).
-            success(function(data){
-            toastr.success(' Store Settings has been added.!', {
-                closeButton: true
-            });
-             $scope.selectedTab = current;
-            }).error(function(err){
-                toastr.error(' warning',"Unable to get Store Settings", {closeButton: true});
-            })
+                 if(policies.returnPolicy == null || policies.termsAndCondition == null || policies.privacyPolicy == null){
+                    toastr.error(' warning',"Please fill all the fields", {closeButton: true});
+                 }
+                 else{
+                    policies.userId = $scope.userId;
+                    policies.appId = $rootScope.appId;
+                    commerceService.savePolicies(policies).
+                    success(function(data){
+                    toastr.success(' Store Settings has been added.!', {
+                        closeButton: true
+                    });
+                     $scope.selectedTab = current;
+                    }).error(function(err){
+                        toastr.error(' warning',"Unable to get Store Settings", {closeButton: true});
+                    })
+                 }
         };
 
         commerceService.showPolicies($scope.appId).
