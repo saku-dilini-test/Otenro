@@ -45,9 +45,6 @@
         }
         $scope.addType=function(type){
             $scope.product.type = type;
-            toastr.success(type, 'Choose', {
-                closeButton: true
-            });
         };
 
         $scope.nextStep2 = function(current,product){
@@ -236,18 +233,6 @@ console.log($scope.product.type);
             }
         };
 
-        $scope.changeImage =function(){
-
-            var im=$scope.tmpImage;
-            for(var i=0 ; i < im.length ; i++){
-                if(im[i] == null) {
-                    im[i] = $scope.picFile;
-                    break;
-                }
-            }
-            $scope.tmpImage=im;
-        };
-
         $scope.setChild=function(main){
 
             var childList=$scope.categories;
@@ -262,6 +247,14 @@ console.log($scope.product.type);
             $scope.tmpImage[index]=null;
         };
         $scope.addImage = function(img){
+        var im=$scope.tmpImage;
+                    for(var i=0 ; i < im.length ; i++){
+                        if(im[i] == null) {
+                            im[i] = $scope.picFile;
+                            break;
+                        }
+                    }
+                    $scope.tmpImage=im;
             $scope.mainImg=img;
             toastr.success('added Image', 'message', {
                 closeButton: true
