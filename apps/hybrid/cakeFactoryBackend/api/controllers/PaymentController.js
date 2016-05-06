@@ -13,6 +13,8 @@ var server  = email.server.connect({
   ssl:     true
 });
 
+var orderEmail = 'orders@tecclk.com';
+
 module.exports = {
   create: function (req, res) {
     var data = req.body;
@@ -288,7 +290,7 @@ module.exports = {
             "<li>Total Amount With Delivery Charges: Rs. " + total + "</li>";
         }
         var emailBody = "<html>" +
-          "<h4>" + "Your Payment Success" +"</h4>" +
+          "<h4>" + "New order details" +"</h4>" +
           "<h4>Order Details</h4>" +
           "<ul>" +
           itemsHtml +
@@ -299,7 +301,7 @@ module.exports = {
           "</html>";
         var emailDetails = {
           from: "onbilabsttest@gmail.com",
-          to: "amilaonbit@gmail.com",  // here should change
+          to: orderEmail,
           cc: "",
           subject: "[PayPal] New Order ",
           attachment: [
