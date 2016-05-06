@@ -197,8 +197,8 @@ $scope.empty=[
                        alert("MainMenu Loading Error : " + err);
          });
 
-         $scope.saveStoreSettings = function(current,storeSettings,openHours,empty){
-console.log(empty);
+         $scope.saveStoreSettings = function(current,storeSettings,openHours){
+console.log(openHours);
 //         if(openHours == 'undefined' || storeSettings.orderNumber == null || storeSettings.address == null || storeSettings.connectDomain == null ||
 //         storeSettings.searchEngineDesc == null){
 //            toastr.error(' warning',"Please fill all the fields", {closeButton: true});
