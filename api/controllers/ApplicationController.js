@@ -23,7 +23,7 @@ module.exports = {
 
         var templateName = req.body.templateName,
             userId = req.userId,
-            templateCategory = req.body.tempCategory,
+            templateCategory = req.body.templateCategory,
             userId = req.body.userId,
             tempAppDirPath = config.ME_SERVER + userId + '/templates/',
             templatePath = sails.config.appPath + '/api/templates/' + templateName,

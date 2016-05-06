@@ -17,7 +17,7 @@
         welcomeTemplatesResource.getTemplates().success(function(data){
            $scope.templates = data;
         });
-        $scope.viewApp = function(templateId, templateUrl, templateName) {
+        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory) {
 
 
 
@@ -27,6 +27,7 @@
                     'templateId': templateId,
                     'templateName': templateName,
                     'templateUrl':templateUrl,
+                    'templateCategory' : templateCategory,
                     'userId':$auth.getPayload().id
                 };
 
@@ -36,7 +37,7 @@
                             +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
-                    $state.go('anon.livePreview',{userId :$auth.getPayload().id,appId: data.data.appId,tempUrl:templateUrl,tempName:templateName});
+                    $state.go('anon.livePreview',{userId :$auth.getPayload().id,appId: data.data.appId,tempUrl:templateUrl,tempName:templateName,tempCategory:templateCategory});
 
                 });
 
@@ -46,16 +47,18 @@
                     'templateId': templateId,
                     'templateName': templateName,
                     'templateUrl':templateUrl,
+                    'templateCategory' : templateCategory,
                     'userId':'unknownUser'
                 };
 
+                console.log(appParams);
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
 
                     var url= ME_APP_SERVER+'temp/unknownUser'
                        +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
-                    $state.go('anon.livePreview',{userId :'unknownUser',appId: data.data.appId,tempUrl:templateUrl,tempName:templateName});
+                    $state.go('anon.livePreview',{userId :'unknownUser',appId: data.data.appId,tempUrl:templateUrl,tempName:templateName,tempCategory:templateCategory});
 
                 });
             }

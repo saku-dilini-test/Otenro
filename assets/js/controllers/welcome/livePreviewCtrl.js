@@ -38,7 +38,7 @@
             });
         };
 
-        $scope.open = function(templateId, templateUrl, templateName) {
+        $scope.open = function(templateId, templateUrl, templateName,templateCategory) {
             if ($auth.isAuthenticated()) {
                 $scope.deleteFile($stateParams.userId, $stateParams.appId);
 
@@ -52,7 +52,8 @@
                             return $q.all({
                                 selectedTemplateUrl: templateUrl,
                                 selectedTemplateId: templateId,
-                                selectedTemplateName: templateName
+                                selectedTemplateName: templateName,
+                                selectedTemplateCategory : templateCategory
                             })
                         }]
                     },
