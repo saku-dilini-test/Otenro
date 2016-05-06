@@ -108,21 +108,10 @@
                                 <td>
                                     <select
                                             ng-model="data.status"
-                                            ng-options="statuses.status for statuses in statusList" ng-init="status=statusList[0]">
+                                            ng-options="statuses.status for statuses in statusList" ng-init="data.status=statusList[0]">
                                     </select>
                                     </td>
                                 </tr>
-                                <!--<tr ng-if="status.status == 'Closed'" ng-repeat="status in empty">-->
-                                    <!--<td ng-model="data.day">{{data.day}}</td>-->
-                                    <!--<td ng-if="status.status == 'Closed'" ng-model="status.status">_ _ _ _</td>-->
-                                    <!--<td ng-if="status.status == 'Closed'" ng-model="status.status"></td>-->
-                                    <!--<td ng-if="status.status == 'Closed'" ng-model="status.status">_ _ _ _</td>-->
-                                    <!--<td ng-if="status.status == 'Closed'"></td>-->
-                                    <!--<td ng-if="status.status != 'Closed'"><select ng-model="amPm">-->
-                                        <!--<option value="am">am</option>-->
-                                        <!--<option value="pm">pm</option>-->
-                                    <!--</select>-->
-                                <!--</tr>-->
                                 </tbody>
                             </table>
                             <br />
@@ -131,7 +120,7 @@
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <select class="form-control"
                                         ng-model="storeSettings.language"
-                                        ng-options="languages.language as languages.language for languages in languageList" ng-init="storeSettings.language = languageList[0].language">
+                                        ng-options="languages.language for languages in languageList" ng-init="storeSettings.language = languageList[0].language">
                                 </select>
                             </fieldset>
                             <fieldset>

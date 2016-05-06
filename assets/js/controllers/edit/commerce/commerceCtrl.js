@@ -10,7 +10,6 @@
         $scope.statusList =[
         {status : "Closed"},{status : "Open"}
         ];
-       // $scope.status = $scope.statusList[0].status;
 
 
 //                $scope.storeSettings={
@@ -18,9 +17,6 @@
 //        //                    language: "English",
 //        //                    timeAndRegion: "Option1",
 //                        };
-$scope.empty=[
-{status:''}
-];
 
         $scope.openHours = [
         {day:'Sunday',
