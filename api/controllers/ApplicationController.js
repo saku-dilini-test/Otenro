@@ -20,9 +20,8 @@ module.exports = {
     },
 
     viewTemplate : function(req,res){
-        console.log("userId 111111 " + req.body.userId);
         var templateName = req.body.templateName,
-            userId = typeof req.userId ==='undefined'?'unknownUser':req.userId,
+            userId = req.body.userId,
             tempAppDirPath = config.ME_SERVER + userId + '/templates/',
             templatePath = sails.config.appPath + '/api/templates/' + templateName,
             appName = req.body.appName,

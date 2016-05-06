@@ -137,7 +137,7 @@ module.exports = {
 
 
     deletePreviewTemp : function(req,res){
-        var appId = req.param('appId');
+        var appId  = req.param('appId');
         var userId = req.param('userId');
 
         Application.destroy({ id : appId}).exec(function (err) {
@@ -156,7 +156,7 @@ module.exports = {
         });
         ThirdNavigation.destroy({ id : appId}).exec(function (err) {
             if (err) return callback("Error while deleting " + err.message);
-            res.send(200,{message:'Deleted Application'});
+
         });
 
         console.log("run run");
@@ -167,6 +167,7 @@ module.exports = {
             }
         });
 
+        res.send(200,{message:'Deleted Application'});
 
 
     }

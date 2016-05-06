@@ -45,8 +45,8 @@ angular.module('app', [
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
     if (!Auth.authorize(toState.data.access)){
-       event.preventDefault();
-        $state.go('user.welcome');
+        event.preventDefault();
+        $state.go('anon.welcome');
     }
   });
 });
