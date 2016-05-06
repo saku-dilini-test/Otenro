@@ -178,7 +178,17 @@ angular.module('starter.controllers', [])
 
   })
 
-  .controller('PromosCtrl', function ($scope) {})
+  .controller('PromosCtrl', function ($scope,promotionResources) {
+
+    $scope.promotionList = promotionResources.getPromotionList()
+      .success(function (data) {
+        console.log(data);
+        $scope.promotionList = data.result[0];
+      })
+      .error(function (err) {
+        console.log(err);
+      })
+  })
 
   .controller('TabCtrl',function($scope,$rootScope){
     $scope.itemsSize = $rootScope.cart.cartSize;

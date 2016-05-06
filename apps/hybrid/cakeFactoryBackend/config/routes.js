@@ -62,7 +62,8 @@ module.exports.routes = {
   'POST /payment/saveShoppingCartWeb' : 'PaymentController.saveShoppingCartWeb',
   'POST /contactUs/create' : 'ContactUsController.create',
   'POST /facebookAuth' : 'UserController.facebookAuth',
-  'POST /googleAuth' : 'UserController.googleAuth'
+  'POST /googleAuth' : 'UserController.googleAuth',
+  'GET /getPromotionList' : 'PromotionController.getPromotionList'
 
 
 };
