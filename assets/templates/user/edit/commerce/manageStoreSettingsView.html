@@ -78,51 +78,51 @@
                                 <tbody>
                                 <tr ng-repeat="data in openHours">
                                     <td ng-model="data.day">{{data.day}}</td>
-                                    <!--<td ng-if="status.status == 'Closed'" ng-model="data.status">_ _ _ _</td>-->
-                                    <td name="open" ng-if="status.status != 'Closed'"
+                                    <td ng-if="data.status.status == 'Closed'">_ _ _ _</td>
+                                    <td name="open" ng-if="data.status.status != 'Closed'"
                                         inline-edit="data.open"
                                         inline-edit-callback="OpenHoursUpdateHandler(newValue)"
                                         inline-edit-btn-edit=""
                                         inline-edit-on-blur="save"
                                         inline-edit-on-click>
                                     </td>
-                                    <!--<td ng-if="status.status == 'Closed'" ng-model="amPm"></td>-->
-                                    <td ng-if="status.status != 'Closed'"><select ng-model="amPm">
+                                    <td ng-if="data.status.status == 'Closed'" ng-model="amPm"></td>
+                                    <td ng-if="data.status.status != 'Closed'"><select ng-model="amPm">
                                         <option value="am">am</option>
                                         <option value="pm">pm</option>
                                     </select>
                                     </td>
-                                <!--<td ng-if="status.status == 'Closed'" ng-model="data.status">_ _ _ _</td>-->
-                                <td ng-if="status.status != 'Closed'"
+                                <td ng-if="data.status.status == 'Closed'">_ _ _ _</td>
+                                <td ng-if="data.status.status != 'Closed'"
                                     inline-edit="data.close"
                                     inline-edit-callback="OpenHoursUpdateHandler(newValue)"
                                     inline-edit-btn-edit=""
                                     inline-edit-on-blur="save"
                                     inline-edit-on-click></td>
-                                  <!--<td ng-if="status.status == 'Closed'"></td>-->
-                                  <td ng-if="status.status != 'Closed'"><select ng-model="amPm">
+                                  <td ng-if="data.status.status == 'Closed'"></td>
+                                  <td ng-if="data.status.status != 'Closed'"><select ng-model="amPm">
                                       <option value="am">am</option>
                                       <option value="pm">pm</option>
                                   </select>
                                 </td>
                                 <td>
                                     <select
-                                            ng-model="status"
+                                            ng-model="data.status"
                                             ng-options="statuses.status for statuses in statusList" ng-init="status=statusList[0]">
                                     </select>
                                     </td>
                                 </tr>
-                                <tr ng-if="status.status == 'Closed'" ng-repeat="status in empty">
-                                    <td ng-model="data.day">{{data.day}}</td>
-                                    <td ng-if="status.status == 'Closed'" ng-model="status.status">_ _ _ _</td>
-                                    <td ng-if="status.status == 'Closed'" ng-model="status.status"></td>
-                                    <td ng-if="status.status == 'Closed'" ng-model="status.status">_ _ _ _</td>
-                                    <td ng-if="status.status == 'Closed'"></td>
-                                    <td ng-if="status.status != 'Closed'"><select ng-model="amPm">
-                                        <option value="am">am</option>
-                                        <option value="pm">pm</option>
-                                    </select>
-                                </tr>
+                                <!--<tr ng-if="status.status == 'Closed'" ng-repeat="status in empty">-->
+                                    <!--<td ng-model="data.day">{{data.day}}</td>-->
+                                    <!--<td ng-if="status.status == 'Closed'" ng-model="status.status">_ _ _ _</td>-->
+                                    <!--<td ng-if="status.status == 'Closed'" ng-model="status.status"></td>-->
+                                    <!--<td ng-if="status.status == 'Closed'" ng-model="status.status">_ _ _ _</td>-->
+                                    <!--<td ng-if="status.status == 'Closed'"></td>-->
+                                    <!--<td ng-if="status.status != 'Closed'"><select ng-model="amPm">-->
+                                        <!--<option value="am">am</option>-->
+                                        <!--<option value="pm">pm</option>-->
+                                    <!--</select>-->
+                                <!--</tr>-->
                                 </tbody>
                             </table>
                             <br />
@@ -157,7 +157,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="saveStoreSettings(1,storeSettings,openHours,empty)">next</md-button>
+                            <md-button class="me-default-button" ng-click="saveStoreSettings(1,storeSettings,openHours)">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
