@@ -14,7 +14,7 @@
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <select class="form-control"
                                         ng-model="storeSettings.currency"
-                                        ng-options=" oneCurrency.sign as oneCurrency.currency for oneCurrency in currencyList">
+                                        ng-options=" oneCurrency.sign as oneCurrency.currency for oneCurrency in currencyList" ng-init="storeSettings.currency=currencyList[0].currency">
                                 </select>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
@@ -78,45 +78,50 @@
                                 <tbody>
                                 <tr ng-repeat="data in openHours">
                                     <td ng-model="data.day">{{data.day}}</td>
-                                    <td ng-if="status == 'Closed'">_ _ _ _</td>
-                                    <td name="open" ng-if="status != 'Closed'"
+                                    <!--<td ng-if="status.status == 'Closed'" ng-model="data.status">_ _ _ _</td>-->
+                                    <td name="open" ng-if="status.status != 'Closed'"
                                         inline-edit="data.open"
                                         inline-edit-callback="OpenHoursUpdateHandler(newValue)"
                                         inline-edit-btn-edit=""
                                         inline-edit-on-blur="save"
-                                        inline-edit-on-click ng-pattern="/^[0-2][0-3]:[0-5][0-9]$/" >
-                                        <span ng-show="storeSettingsForm.open.$error.pattern">Not a valid number!</span>
+                                        inline-edit-on-click>
                                     </td>
-                                    <td ng-if="status == 'Closed'"></td>
-                                    <td ng-if="status != 'Closed'"><select ng-model="amPm">
+                                    <!--<td ng-if="status.status == 'Closed'" ng-model="amPm"></td>-->
+                                    <td ng-if="status.status != 'Closed'"><select ng-model="amPm">
                                         <option value="am">am</option>
                                         <option value="pm">pm</option>
                                     </select>
                                     </td>
-                                <td ng-if="status == 'Closed'">_ _ _ _</td>
-                                <td ng-if="status != 'Closed'"
+                                <!--<td ng-if="status.status == 'Closed'" ng-model="data.status">_ _ _ _</td>-->
+                                <td ng-if="status.status != 'Closed'"
                                     inline-edit="data.close"
                                     inline-edit-callback="OpenHoursUpdateHandler(newValue)"
                                     inline-edit-btn-edit=""
                                     inline-edit-on-blur="save"
                                     inline-edit-on-click></td>
-                                  <td ng-if="status == 'Closed'"></td>
-                                  <td ng-if="status != 'Closed'"><select ng-model="amPm">
+                                  <!--<td ng-if="status.status == 'Closed'"></td>-->
+                                  <td ng-if="status.status != 'Closed'"><select ng-model="amPm">
                                       <option value="am">am</option>
                                       <option value="pm">pm</option>
                                   </select>
                                 </td>
                                 <td>
-                                    <!--<select ng-init="storeSettings.status=Closed" ng-model="storeSettings.status">-->
-                                        <!--<option value="Open">Open</option>-->
-                                        <!--<option value="Closed">Closed</option>-->
-                                        <!--</select>-->
-                                    <!--<div>Selected Colors: {{status }}</div>-->
                                     <select
                                             ng-model="status"
-                                            ng-options="statuses.id as statuses.status for statuses in statusList">
+                                            ng-options="statuses.status for statuses in statusList" ng-init="status=statusList[0]">
                                     </select>
                                     </td>
+                                </tr>
+                                <tr ng-if="status.status == 'Closed'" ng-repeat="status in empty">
+                                    <td ng-model="data.day">{{data.day}}</td>
+                                    <td ng-if="status.status == 'Closed'" ng-model="status.status">_ _ _ _</td>
+                                    <td ng-if="status.status == 'Closed'" ng-model="status.status"></td>
+                                    <td ng-if="status.status == 'Closed'" ng-model="status.status">_ _ _ _</td>
+                                    <td ng-if="status.status == 'Closed'"></td>
+                                    <td ng-if="status.status != 'Closed'"><select ng-model="amPm">
+                                        <option value="am">am</option>
+                                        <option value="pm">pm</option>
+                                    </select>
                                 </tr>
                                 </tbody>
                             </table>
@@ -126,7 +131,7 @@
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <select class="form-control"
                                         ng-model="storeSettings.language"
-                                        ng-options="languages.language as languages.language for languages in languageList">
+                                        ng-options="languages.language as languages.language for languages in languageList" ng-init="storeSettings.language = languageList[0].language">
                                 </select>
                             </fieldset>
                             <fieldset>
@@ -152,7 +157,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="saveStoreSettings(1,storeSettings,openHours)">next</md-button>
+                            <md-button class="me-default-button" ng-click="saveStoreSettings(1,storeSettings,openHours,empty)">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>

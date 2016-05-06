@@ -7,16 +7,20 @@
     function CommerceCtrl($scope, $mdDialog,toastr, commerceService,currencyService,publishService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER) {
         $scope.selectedTab = 0;
         $scope.amPm = "am";
-
         $scope.statusList =[
-        {id: 'Closed', status : "Closed"},{id:'Closed', status : "Open"}
+        {status : "Closed"},{status : "Open"}
         ];
-                $scope.storeSettings={
-                            status:$scope.statusList[0].id
-        //                    language: "English",
-        //                    timeAndRegion: "Option1",
-                        };
+       // $scope.status = $scope.statusList[0].status;
 
+
+//                $scope.storeSettings={
+//                            status:$scope.statusList[0].id
+//        //                    language: "English",
+//        //                    timeAndRegion: "Option1",
+//                        };
+$scope.empty=[
+{status:''}
+];
 
         $scope.openHours = [
         {day:'Sunday',
@@ -38,9 +42,6 @@
         open:'5.00',
         close: '9.00'},
         {day:'Saturday',
-        open:'5.00',
-        close: '9.00'},
-        {day:'Sunday',
         open:'5.00',
         close: '9.00'}];
         $scope.miniLightBoxShow = false;
@@ -196,15 +197,13 @@
                        alert("MainMenu Loading Error : " + err);
          });
 
-         $scope.saveStoreSettings = function(current,storeSettings,openHours){
-         console.log(openHours);
-         console.log(storeSettings);
-
-         if(openHours == 'undefined' || storeSettings.orderNumber == null || storeSettings.address == null || storeSettings.connectDomain == null ||
-         storeSettings.searchEngineDesc == null){
-            toastr.error(' warning',"Please fill all the fields", {closeButton: true});
-         }
-         else{
+         $scope.saveStoreSettings = function(current,storeSettings,openHours,empty){
+console.log(empty);
+//         if(openHours == 'undefined' || storeSettings.orderNumber == null || storeSettings.address == null || storeSettings.connectDomain == null ||
+//         storeSettings.searchEngineDesc == null){
+//            toastr.error(' warning',"Please fill all the fields", {closeButton: true});
+//         }
+//         else{
 
          for(var i=0; i<$scope.currencyList.length; i++){
                                  if($scope.storeSettings.currency == $scope.currencyList[i].sign){
@@ -227,7 +226,7 @@
                 toastr.error(' warning',"Unable to get templates", {closeButton: true});
             })
             $scope.selectedTab = current;
-            }
+//            }
          };
 
             commerceService.showStoreSettings($rootScope.appId).
