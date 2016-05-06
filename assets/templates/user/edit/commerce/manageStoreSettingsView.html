@@ -106,7 +106,7 @@
                                   </select>
                                 </td>
                                 <td>
-                                    <select
+                                    <select class="form-control"
                                             ng-model="data.status"
                                             ng-options="statuses.status for statuses in statusList" ng-init="data.status=statusList[0]">
                                     </select>
@@ -120,7 +120,7 @@
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <select class="form-control"
                                         ng-model="storeSettings.language"
-                                        ng-options="languages.language for languages in languageList" ng-init="storeSettings.language = languageList[0].language">
+                                        ng-options="languages.language for languages in languageList" ng-init="storeSettings.language=languageList[0]">
                                 </select>
                             </fieldset>
                             <fieldset>
