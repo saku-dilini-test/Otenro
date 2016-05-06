@@ -9,6 +9,9 @@
         return {
             buildApp: function(params){
                 return  $http.post(SERVER_URL + 'edit/buildSource',params);
+            },
+            getSelectedApp: function(params){
+                return  $http.post(SERVER_URL + 'edit/getSelectedApp',params);
             }
         }
     }

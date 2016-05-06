@@ -40,6 +40,9 @@ module.exports = {
             type: 'string'
 
         },
+        templateCategory : {
+            type: 'string'
+        },
         appSettings:{
             type : 'json'
             //header:{

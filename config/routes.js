@@ -94,6 +94,7 @@ module.exports.routes = {
     'POST /edit/addFonts': 'edit/style/StyleController.addFonts',
     'GET /edit/viewImages': 'EditController.viewImages',
     'POST /edit/buildSource': 'EditController.buildSource',
+    'GET /edit/getSelectedApp' : 'EditController.getSelectedApp',
 
     //'POST /edit/updateCategory' : '',
     //'POST /edit/checkCategory': '',

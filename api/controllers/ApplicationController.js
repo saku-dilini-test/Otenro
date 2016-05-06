@@ -20,9 +20,10 @@ module.exports = {
     },
 
     viewTemplate : function(req,res){
-        console.log("userId 111111 " + req.body.userId);
+
         var templateName = req.body.templateName,
-            userId = typeof req.userId ==='undefined'?'unknownUser':req.userId,
+            userId = req.userId,
+            templateCategory = req.body.tempCategory,
             tempAppDirPath = config.ME_SERVER + userId + '/templates/',
             templatePath = sails.config.appPath + '/api/templates/' + templateName,
             appName = req.body.appName,
@@ -34,8 +35,6 @@ module.exports = {
             loginPath = '/#/app/login';
         }
 
-        console.log("userId " + userId);
-
         var application ={
             appName : req.body.appName,
             appTempPath :tempAppDirPath,
@@ -43,6 +42,7 @@ module.exports = {
             userId : userId,
             status : "DRAFT",
             displayImage: req.body.templateUrl,
+            templateCategory : templateCategory,
             appSettings:{
                 appCurrency:{
                     sign : "Rs.",

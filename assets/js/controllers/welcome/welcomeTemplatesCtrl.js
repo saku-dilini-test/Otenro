@@ -18,32 +18,29 @@
            $scope.templates = data;
         });
 
-        alert("wel come");
-
-        $scope.viewApp = function(templateId, templateUrl, templateName) {
+        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory) {
 
             var appParams = {
                 'appName': 'preview',
                 'templateId': templateId,
                 'templateName': templateName,
-                'templateUrl':templateUrl
+                'templateUrl':templateUrl,
+                'templateCategory' : templateCategory
             };
             console.log(appParams);
-            //if ($auth.isAuthenticated()) {
+            if ($auth.isAuthenticated()) {
 
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
 
-                    console.log("111111111111");
-
-                    var url= ME_APP_SERVER+'temp/unknownUser'
+                    var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
                         +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
-                    $state.go('user.livePreview',{userId :'unknownUser',appId: data.data.appId,tempUrl:templateUrl,tempName:templateName});
+                    $state.go('user.livePreview',{userId :$auth.getPayload().id,appId: data.data.appId,tempUrl:templateUrl,tempName:templateName,tempCategory:templateCategory});
                 });
-            //}else{
-                //$state.go('anon.login');
-           // }
+            }else{
+                $state.go('anon.login');
+            }
         }
     }
 

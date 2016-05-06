@@ -15,6 +15,9 @@ module.exports = {
         },
         templateFilesPath:{
             type: 'string'
+        },
+        templateCategory :{
+            type: 'string'
         }
     },
     seedData: [
@@ -22,7 +25,7 @@ module.exports = {
             template_name : 'codecanyon',
             imageUrl : 'resturant/codecanyon.png',
             templateFilesPath:'templates/codecanyon',
-            category:'business'
+            templateCategory:'business'
         },
         //{
         // template_name : 'tokoyoapp',
@@ -57,7 +60,8 @@ module.exports = {
         {
             template_name : 'hkRising',
             imageUrl : 'hkRising/hkRising.png',
-            templateFilesPath:'templates/hkRising'
+            templateFilesPath:'templates/hkRising',
+            templateCategory:'media'
         }
     ]
 };
