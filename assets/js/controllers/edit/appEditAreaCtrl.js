@@ -16,6 +16,15 @@
         //$scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
         //                        +'/templates/'+$stateParams.appId;
 
+        appEditResource.getSelectedApp({appId: $stateParams.appId})
+            .success(function(data) {
+                if(data.templateCategory == 'media') {
+                    $scope.isAppMediaCategory = true;
+                }
+            }).error(function(err) {
+
+            });
+
         $scope.buildSource = function () {
             appEditResource.buildApp({appId: $stateParams.appId})
                 .success(function(data) {

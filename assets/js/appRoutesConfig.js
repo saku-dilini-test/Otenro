@@ -53,6 +53,7 @@ angular.module('app')
                 appId: null,
                 tempUrl:null,
                 tempName:null,
+                tempCategory: null
             },
             controller: 'livePreviewCtrl',
             templateUrl : 'user/welcome/LivePreview.html'

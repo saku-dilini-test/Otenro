@@ -18,13 +18,14 @@
             $scope.templates = data;
         });
 
-        $scope.viewApp = function(templateId, templateUrl, templateName) {
+        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory) {
 
             var appParams = {
                 'appName': 'preview',
                 'templateId': templateId,
                 'templateName': templateName,
-                'templateUrl':templateUrl
+                'templateUrl':templateUrl,
+                'templateCategory' : templateCategory
             };
             console.log(appParams);
             if ($auth.isAuthenticated()) {
@@ -35,7 +36,7 @@
                         +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
-                    $state.go('user.livePreview',{userId :$auth.getPayload().id,appId: data.data.appId,tempUrl:templateUrl,tempName:templateName});
+                    $state.go('user.livePreview',{userId :$auth.getPayload().id,appId: data.data.appId,tempUrl:templateUrl,tempName:templateName,tempCategory:templateCategory});
                 });
             }else{
                 $state.go('anon.login');

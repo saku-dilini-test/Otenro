@@ -23,6 +23,7 @@
         $scope.appId = $stateParams.appId;
         $scope.tempUrl = $stateParams.tempUrl;
         $scope.tempName = $stateParams.tempName;
+        $scope.tempCategory = $stateParams.tempCategory;
         $scope.appTemplateUrl=mySharedService.url;
 
         $scope.deleteFile = function(userId,appId) {
@@ -37,7 +38,7 @@
             });
         };
 
-        $scope.open = function(templateId, templateUrl, templateName) {
+        $scope.open = function(templateId, templateUrl, templateName,tempCategory) {
 
             $scope.deleteFile($stateParams.userId, $stateParams.appId);
 
@@ -51,7 +52,8 @@
                         return $q.all({
                             selectedTemplateUrl: templateUrl,
                             selectedTemplateId : templateId,
-                            selectedTemplateName:  templateName
+                            selectedTemplateName:  templateName,
+                            selectedTemplateCategory: tempCategory
                         })
                     }]
                 },
@@ -91,7 +93,8 @@
                 'appName': $scope.appName,
                 'templateId': initialData.selectedTemplateId,
                 'templateName': initialData.selectedTemplateName,
-                'templateUrl':initialData.selectedTemplateUrl
+                'templateUrl':initialData.selectedTemplateUrl,
+                'templateCategory' : initialData.selectedTemplateCategory
 
             };
             console.log(appParams);

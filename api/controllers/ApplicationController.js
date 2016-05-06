@@ -23,6 +23,7 @@ module.exports = {
 
         var templateName = req.body.templateName,
             userId = req.userId,
+            templateCategory = req.body.tempCategory,
             tempAppDirPath = config.ME_SERVER + userId + '/templates/',
             templatePath = sails.config.appPath + '/api/templates/' + templateName,
             appName = req.body.appName,
@@ -41,6 +42,7 @@ module.exports = {
             userId : userId,
             status : "DRAFT",
             displayImage: req.body.templateUrl,
+            templateCategory : templateCategory,
             appSettings:{
                 appCurrency:{
                     sign : "Rs.",

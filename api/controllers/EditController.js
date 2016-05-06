@@ -18,6 +18,17 @@ module.exports = {
 
     },
 
+    getSelectedApp : function(req,res){
+        var appId = req.param('appId');
+        var searchApp = {
+            id: appId
+        };
+        Application.findOne(searchApp).exec(function (err, app) {
+            if (err) return res.negotiate(err);
+            res.json(app);
+        });
+    },
+
     viewImages : function(req,res){
         res.sendfile(config.ME_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
     },
