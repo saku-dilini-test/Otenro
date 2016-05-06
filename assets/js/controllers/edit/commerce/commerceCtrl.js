@@ -10,7 +10,6 @@
         $scope.statusList =[
         {status : "Closed"},{status : "Open"}
         ];
-       // $scope.status = $scope.statusList[0].status;
 
 
 //                $scope.storeSettings={
@@ -18,9 +17,6 @@
 //        //                    language: "English",
 //        //                    timeAndRegion: "Option1",
 //                        };
-$scope.empty=[
-{status:''}
-];
 
         $scope.openHours = [
         {day:'Sunday',
@@ -198,12 +194,11 @@ $scope.empty=[
          });
 
          $scope.saveStoreSettings = function(current,storeSettings,openHours){
-console.log(openHours);
-//         if(openHours == 'undefined' || storeSettings.orderNumber == null || storeSettings.address == null || storeSettings.connectDomain == null ||
-//         storeSettings.searchEngineDesc == null){
-//            toastr.error(' warning',"Please fill all the fields", {closeButton: true});
-//         }
-//         else{
+         if(openHours == 'undefined' || storeSettings.orderNumber == null || storeSettings.address == null || storeSettings.connectDomain == null ||
+         storeSettings.searchEngineDesc == null){
+            toastr.error(' warning',"Please fill all the fields", {closeButton: true});
+         }
+         else{
 
          for(var i=0; i<$scope.currencyList.length; i++){
                                  if($scope.storeSettings.currency == $scope.currencyList[i].sign){
@@ -226,7 +221,7 @@ console.log(openHours);
                 toastr.error(' warning',"Unable to get templates", {closeButton: true});
             })
             $scope.selectedTab = current;
-//            }
+            }
          };
 
             commerceService.showStoreSettings($rootScope.appId).
