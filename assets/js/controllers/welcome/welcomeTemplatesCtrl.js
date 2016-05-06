@@ -17,30 +17,49 @@
         welcomeTemplatesResource.getTemplates().success(function(data){
            $scope.templates = data;
         });
+        $scope.viewApp = function(templateId, templateUrl, templateName) {
 
-        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory) {
 
-            var appParams = {
-                'appName': 'preview',
-                'templateId': templateId,
-                'templateName': templateName,
-                'templateUrl':templateUrl,
-                'templateCategory' : templateCategory
-            };
-            console.log(appParams);
+
             if ($auth.isAuthenticated()) {
+                var appParams = {
+                    'appName': 'preview',
+                    'templateId': templateId,
+                    'templateName': templateName,
+                    'templateUrl':templateUrl,
+                    'userId':$auth.getPayload().id
+                };
 
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
 
                     var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                        +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                            +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
-                    $state.go('user.livePreview',{userId :$auth.getPayload().id,appId: data.data.appId,tempUrl:templateUrl,tempName:templateName,tempCategory:templateCategory});
+                    $state.go('anon.livePreview',{userId :$auth.getPayload().id,appId: data.data.appId,tempUrl:templateUrl,tempName:templateName});
+
                 });
+
             }else{
-                $state.go('anon.login');
+                var appParams = {
+                    'appName': 'preview',
+                    'templateId': templateId,
+                    'templateName': templateName,
+                    'templateUrl':templateUrl,
+                    'userId':'unknownUser'
+                };
+
+                welcomeTemplatesResource.createApp(appParams).then(function(data){
+
+                    var url= ME_APP_SERVER+'temp/unknownUser'
+                       +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+
+                    mySharedService.prepForBroadcast(url);
+                    $state.go('anon.livePreview',{userId :'unknownUser',appId: data.data.appId,tempUrl:templateUrl,tempName:templateName});
+
+                });
             }
+
         }
     }
 

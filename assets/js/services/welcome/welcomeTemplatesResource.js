@@ -12,8 +12,8 @@
             getTemplates:function(){
                 return $http.post(SERVER_URL + 'app/designApps');
             },
-            createApp:function(appParams){
-                return $http.post(SERVER_URL + 'app/viewTemplate', appParams);
+            createApp:function(tempAppParams){
+                return $http.post(SERVER_URL + 'app/viewTemplate', tempAppParams);
             },
             deletePreviewTemp : function(appParams){
                 return $http.post(SERVER_URL + 'templates/deletePreviewTemp',appParams);
