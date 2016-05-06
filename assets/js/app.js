@@ -42,11 +42,11 @@ angular.module('app', [
 
 ]).run(function($rootScope, $state, $auth,Auth) {
 
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
-      if (!Auth.authorize(toState.data.access)){
-        event.preventDefault();
-        $state.go('anon.login');
-      }
-    });
+    if (!Auth.authorize(toState.data.access)){
+       event.preventDefault();
+        $state.go('user.welcome');
+    }
   });
+});

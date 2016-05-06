@@ -15,8 +15,10 @@
 
     function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,ME_APP_SERVER,$auth) {
         welcomeTemplatesResource.getTemplates().success(function(data){
-            $scope.templates = data;
+           $scope.templates = data;
         });
+
+        alert("wel come");
 
         $scope.viewApp = function(templateId, templateUrl, templateName) {
 
@@ -27,19 +29,21 @@
                 'templateUrl':templateUrl
             };
             console.log(appParams);
-            if ($auth.isAuthenticated()) {
+            //if ($auth.isAuthenticated()) {
 
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
 
-                    var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                    console.log("111111111111");
+
+                    var url= ME_APP_SERVER+'temp/unknownUser'
                         +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
-                    $state.go('user.livePreview',{userId :$auth.getPayload().id,appId: data.data.appId,tempUrl:templateUrl,tempName:templateName});
+                    $state.go('user.livePreview',{userId :'unknownUser',appId: data.data.appId,tempUrl:templateUrl,tempName:templateName});
                 });
-            }else{
-                $state.go('anon.login');
-            }
+            //}else{
+                //$state.go('anon.login');
+           // }
         }
     }
 

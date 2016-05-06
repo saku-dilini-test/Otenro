@@ -137,10 +137,27 @@ module.exports = {
 
 
     deletePreviewTemp : function(req,res){
-       var appId = req.param('appId');
+        var appId = req.param('appId');
         var userId = req.param('userId');
 
+        Application.destroy({ id : appId}).exec(function (err) {
+            if (err) return callback("Error while deleting " + err.message);
 
+        });
+
+        MainNavigation.destroy({ id : appId}).exec(function (err) {
+            if (err) return callback("Error while deleting " + err.message);
+
+        });
+
+        SecondNavigation.destroy({ id : appId}).exec(function (err) {
+            if (err) return callback("Error while deleting " + err.message);
+
+        });
+        ThirdNavigation.destroy({ id : appId}).exec(function (err) {
+            if (err) return callback("Error while deleting " + err.message);
+            res.send(200,{message:'Deleted Application'});
+        });
 
         console.log("run run");
         fs.remove(config.ME_SERVER+ userId +'/templates/'+appId+'/', function (err) {
@@ -150,10 +167,8 @@ module.exports = {
             }
         });
 
-        Application.destroy({ id : appId}).exec(function (err) {
-            if (err) return callback("Error while deleting " + err.message);
-            res.send(200,{message:'Deleted Application'});
-        });
+
+
     }
 
 

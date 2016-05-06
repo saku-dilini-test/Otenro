@@ -20,9 +20,9 @@ module.exports = {
     },
 
     viewTemplate : function(req,res){
-
+        console.log("userId 111111 " + req.body.userId);
         var templateName = req.body.templateName,
-            userId = req.userId,
+            userId = typeof req.userId ==='undefined'?'unknownUser':req.userId,
             tempAppDirPath = config.ME_SERVER + userId + '/templates/',
             templatePath = sails.config.appPath + '/api/templates/' + templateName,
             appName = req.body.appName,
@@ -33,6 +33,8 @@ module.exports = {
         if(templateName == 'foodDemoApp'){
             loginPath = '/#/app/login';
         }
+
+        console.log("userId " + userId);
 
         var application ={
             appName : req.body.appName,
@@ -74,7 +76,7 @@ module.exports = {
 
         fs.copy(templatePath, tempAppDirPath + app.id, function(err) {
             if (err) return console.error(err);
-            var madeEasyFilePath = tempAppDirPath +'/'+app.id+'/madeEasy.Project';
+            var madeEasyFilePath = tempAppDirPath +app.id+'/madeEasy.Project';
             var madeEasyFileContent = {
                 name : appName,
                 appId : app.id,
