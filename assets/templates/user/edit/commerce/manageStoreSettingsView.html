@@ -71,39 +71,20 @@
                             <table class="me-hours-table">
                                 <thead>
                                     <th>Day</th>
-                                    <th colspan="2">Open from</th>
-                                    <th colspan="2">Open till</th>
+                                    <th colspan="1">Open from</th>
+                                    <th colspan="1">Open till</th>
                                     <th>Status</th>
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="data in openHours">
                                     <td ng-model="data.day">{{data.day}}</td>
                                     <td ng-if="data.status.status == 'Closed'">_ _ _ _</td>
-                                    <td name="open" ng-if="data.status.status != 'Closed'"
-                                        inline-edit="data.open"
-                                        inline-edit-callback="OpenHoursUpdateHandler(newValue)"
-                                        inline-edit-btn-edit=""
-                                        inline-edit-on-blur="save"
-                                        inline-edit-on-click>
-                                    </td>
-                                    <td ng-if="data.status.status == 'Closed'" ng-model="amPm"></td>
-                                    <td ng-if="data.status.status != 'Closed'"><select ng-model="amPm">
-                                        <option value="am">am</option>
-                                        <option value="pm">pm</option>
-                                    </select>
+                                    <td ng-if="data.status.status != 'Closed'" ng-model="data.open">
+                                        <input name="open" type="time" ng-model="data.open" placeholder="HH:mm:ss" min="00:00:00" max="12:00:00" required/>
                                     </td>
                                 <td ng-if="data.status.status == 'Closed'">_ _ _ _</td>
-                                <td ng-if="data.status.status != 'Closed'"
-                                    inline-edit="data.close"
-                                    inline-edit-callback="OpenHoursUpdateHandler(newValue)"
-                                    inline-edit-btn-edit=""
-                                    inline-edit-on-blur="save"
-                                    inline-edit-on-click></td>
-                                  <td ng-if="data.status.status == 'Closed'"></td>
-                                  <td ng-if="data.status.status != 'Closed'"><select ng-model="amPm">
-                                      <option value="am">am</option>
-                                      <option value="pm">pm</option>
-                                  </select>
+                                <td ng-if="data.status.status != 'Closed'" ng-model="data.close">
+                                    <input name="close" type="time" ng-model="data.close" placeholder="HH:mm:ss" required/>
                                 </td>
                                 <td>
                                     <select class="form-control"
@@ -120,7 +101,7 @@
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <select class="form-control"
                                         ng-model="storeSettings.language"
-                                        ng-options="languages.language for languages in languageList" ng-init="storeSettings.language=languageList[0]">
+                                        ng-options="languages.language as languages.language for languages in languageList" ng-init="storeSettings.language = languageList[0].language">
                                 </select>
                             </fieldset>
                             <fieldset>
