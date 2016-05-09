@@ -99,6 +99,7 @@
                     <div class="md-dialog-header">
                         <h1>Opening Hours</h1>
                     </div>
+                    <form name="openingHours" novalidate>
                     <!-- Input Table as Open Hours  -->
                     <div class="md-dialog-main">
                         <table class="me-hours-table">
@@ -119,8 +120,17 @@
                                     Week Days
                                 </td>
                                 <td>
-                                    <input type="number" min="0" max="12" step="1" ng-model="openHours.weekDaysOpenHour" ng-required />
+                                    <input type="time" name="weekDaysOpenHour" min="00:00" max="20:00" step="1" ng-model="openHours.weekDaysOpenHour" required />
+                                    <div ng-messages="openingHours.weekDaysOpenHour.$error" ng-if="openingHours.weekDaysOpenHour.$dirty">
+                                        <div ng-message="required">This field is required</div>
+                                        <div ng-message="minlength">Message must be over 100 characters</div>
+                                        <div ng-message="maxlength">Message must not exceed 1000 characters</div>
+                                        <div ng-message-exp="['minlength', 'maxlength']">
+                                            Your email must be between 5 and 100 characters long
+                                        </div>
+                                    </div>
                                 </td>
+
                                 <td>
                                     <input type="number" min="00" max="55" step="5" ng-model="openHours.weekDaysOpenMinute" ng-required />
                                 </td>
@@ -164,6 +174,7 @@
                                 </td>
                                 <td>
                                     <input type="number" min="0" max="12" step="1" ng-model="openHours.sundayOpenHour" ng-required />
+                                    <span class="error" ng-show="openingHours.input.$error.number">Not valid number!</span>
                                 </td>
                                 <td>
                                     <input type="number" min="00" max="55" step="5" ng-model="openHours.sundayOpenMinute" ng-required />
@@ -184,6 +195,7 @@
                             </tbody>
                         </table>
                     </div>
+                        </form>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
