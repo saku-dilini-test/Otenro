@@ -15,7 +15,7 @@
                 <form class="pull-right" name="productForm" novalidate>
                     <div class="me-file-upload regular">
                         <div class="upload-wrapper">
-                            <input type="file" ngf-select ng-model="picFile" name="newImageFile" accept="image/*" required />
+                            <input type="file" ngf-select ng-model="article.picFile" name="newImageFile" accept="image/*" required />
                             <span>Upload Image</span>
                         </div>
                     </div>
@@ -23,19 +23,19 @@
                 <br>
                 <img ng-show="picFile != null" ngf-src="picFile" width="50" height="50" />
                 <img ng-show="picFile != null" ngf-src="picFile" width="50" height="50" />
-                <img ng-show="picFile != null" ngf-src="picFile" width="50" height="50" />
+                <img ng-show="article.picFile != null" ngf-src="article.picFile" width="50" height="50" />
             </fieldset>
 
             <fieldset class="col-1 reset-margin-right">
                 <label>Preview</label>
                 <div class="image">
-                    <img ng-show="picFile != null" ngf-src="picFile" width="250" height="150" />
+                    <img ng-show="picFile != null" ngf-src="article.picFile" width="250" height="150" />
                 </div>
             </fieldset>
 
             <fieldset>
                 <label>Text</label>
-                <textarea rows="4" cols="50" ng-model="article.description">
+                <textarea rows="4" cols="50" ng-model="article.desc">
                 </textarea>
             </fieldset>
 

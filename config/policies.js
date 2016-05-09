@@ -58,6 +58,10 @@ module.exports.policies = {
    '*': ['jwtAuth']
   },
 
+  'edit/article/articleController':{
+    '*': ['jwtAuth']
+  },
+
   'template/TemplateController': {
     //'*': ['jwtAuth'],
     getMainMenu : true,

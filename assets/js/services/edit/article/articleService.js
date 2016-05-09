@@ -4,10 +4,10 @@
 
 (function() {
     angular.module('appEdit').service('articleService', [
-        '$mdDialog', articleService
+        '$mdDialog','$http','SERVER_URL', articleService
     ]);
 
-    function articleService($mdDialog) {
+    function articleService($mdDialog,$http,SERVER_URL) {
         return {
             showPublishArticleDialog: function() {
                 return $mdDialog.show({
@@ -17,6 +17,9 @@
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 });
+            },
+            publishArticle : function(data){
+                return $http.post(SERVER_URL+ 'edit/publishArticle',data);
             }
         };
     }
