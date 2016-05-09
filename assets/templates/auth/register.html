@@ -16,9 +16,9 @@
         <label> Email </label>
         <img src="../../../images/question-mark.svg" width="12" height="12" />
         <input name="email" type="email" ng-model="user.email" required/>
-        <p class="help-block" ng-show="register.email.$dirty && register.email.$invalid">
+        <span class="help-block" ng-show="register.email.$dirty && register.email.$invalid">
           Enter a proper email
-        </p>
+        </span>
       </fieldset>
 
       <fieldset class="password-area">
