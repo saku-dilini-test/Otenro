@@ -75,7 +75,10 @@
 				</div>
 				<div class="contact_info">
 					<h2>Find Us Here</h2>
-					<div id="googleMap" class="gMap" ng-controller="mapCtrl"></div>
+					<!--<div id="googleMap" class="gMap" ng-controller="mapCtrl"></div>-->
+					<static-gmap size="750x400"
+								 markers="{ color: 'red', label: 'The English Cake Company', coords: [6.8929988, 79.8661994] }"
+								 sensor="false" zoom="16"></static-gmap>
 				</div>
 				<div class="clear"></div>
 			</div>

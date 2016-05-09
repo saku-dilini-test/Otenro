@@ -11,6 +11,7 @@
   "dependencies": {
     "angular": "^1.5.1",
     "angular-route": "^1.5.1",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "angular-google-staticmaps": "^0.3.0"
   }
 }
