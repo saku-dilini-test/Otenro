@@ -10,9 +10,12 @@
 
     function ArticleCtrl($scope, $mdDialog) {
 
-        $scope.publishArticle = function(){
+        $scope.publishArticle = function(article){
             console.log('function is working');
+            console.log(article);
         }
+
+        $scope.picFile = 'images/google.png';
 
         $scope.answer = function() {
 
