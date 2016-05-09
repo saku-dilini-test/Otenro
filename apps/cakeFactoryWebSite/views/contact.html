@@ -29,8 +29,12 @@
 					</span>
 					</div>
 					<div>
-						<span><label>Phone</label></span>
-						<span><input name="userPhone" type="number" class="textbox" ng-model="contactForm.phone"></span>
+						<span><lable>Phone Number</lable></span>
+						<input type="number" name="phone" ng-model="contactForm.phone"
+							   ➥ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/" />
+						<span class="error-message" ng-show="contact.phone.$dirty
+						&& contact.phone.$invalid">The phone number field should be
+							of 10 digits</span>
 					</div>
 				</form>
 				<form class="right_form">
