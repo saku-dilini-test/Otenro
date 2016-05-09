@@ -785,7 +785,7 @@ ul.dishes_list li a:hover{
 	color:#8C8061;;
 	padding-bottom:5px;
 }
-.contact-form input[type="text"],.contact-form textarea{
+.contact-form input[type="text"], input[type="email"], input[type="number"], .contact-form textarea{
 		    padding:10px;
 			display:block;
 			width:96%;
