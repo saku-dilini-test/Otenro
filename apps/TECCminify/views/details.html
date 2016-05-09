@@ -22,7 +22,7 @@
                             </td>
                             <td class="text-right">Rs : {{product.price}}</td>
                         </tr>
-                         <tr>
+                      <tr ng-if="!(product.perSlicePrice == 0)">
                             <td>
                                 <label class="radio">
                                     <input type="radio" name="selectCakeQuantity" ng-model="cakeType" value="slice">
