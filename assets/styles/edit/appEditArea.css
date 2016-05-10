@@ -21,7 +21,7 @@
     transition: 0.4s linear;
 }
 
-.mdapp-content{
+.mdapp-content-livePreview{
     min-height: 762px;
     background-color: #F2F2F2;
    /* padding-left: 270px;*/
@@ -31,6 +31,15 @@
     transition: 0.4s linear;
     margin-top: -500px;
     margin-left: inherit;
+}
+.mdapp-content{
+    min-height: 762px;
+    background-color: #F2F2F2;
+    padding-left: 270px;
+    -webkit-transition: 0.4s linear;
+    -moz-transition: 0.4s linear;
+    -o-transition: 0.4s linear;
+    transition: 0.4s linear;
 }
 
 .mdapp-nav .logo{
@@ -167,12 +176,15 @@
     width: 40px !important;
 }
 
-.device-preview{
-    /*padding-top: 22px;*/
+.device-preview-livePreview{
+    padding-top: 22px;
     width: 100%;
     margin: 0 auto;
-        /*margin-left:100px;*/
-        padding: 50px 0;
+    padding: 50px 0;
+}
+.device-preview{
+    padding-top: 22px;
+    width: 100%;
 }
 
 .device-simulator{
@@ -180,8 +192,6 @@
     margin: 0 auto;
     padding: 15px;
     width: 320px;
-   /* margin-top: -500px;
-    margin-left: inherit;*/
 }
 
 .tabletView .device-simulator{
