@@ -35,13 +35,25 @@
         if(typeof $scope.mainMenu == 'undefined'){
             commerceService.getMainMenuList()
                 .success(function (result) {
+                    if(result == ''){
+                        commerceService.getCategoryList()
+                        .success(function (secondResult) {
+                            $scope.mainMenu = secondResult;
+                        }).error(function (error) {
+                            toastr.error('Loading Error', 'Warning', {
+                                closeButton: true
+                            });
+                        })
+                    }
+                    else{
                     $scope.mainMenu = result;
+                    }
+
                 }).error(function (error) {
                     toastr.error('Loading Error', 'Warning', {
                         closeButton: true
                     });
                 })
-
         }
         $scope.addType=function(type){
             $scope.product.type = type;
@@ -64,7 +76,6 @@
                            closeButton: true
                        });
                       $scope.selectedTab = current;
-console.log($scope.product.type);
                       $scope.variants=[{
                           sku: "#1",
                           name: product.name,
@@ -120,7 +131,6 @@ console.log($scope.product.type);
         if( item[0] == undefined){
              commerceService.getUpdates(item.product)
                      .success(function (result) {
-                     console.log(result[0]);
                          $scope.product = result[0];
                          $scope.selectedLink = $scope.product.type;
                          $scope.picFile ="templates/viewImages?img=thirdNavi/" + result[0].imageUrl + "&userId="+$scope.userId+"&appId="+$rootScope.appId;
@@ -234,12 +244,25 @@ console.log($scope.product.type);
         };
 
         $scope.setChild=function(main){
-
             var childList=$scope.categories;
             var newChild=[];
-            for(var i=0 ; i < childList.length ; i++){
-                if(childList[i].mainId == main) newChild.push(childList[i]);
-            }
+                if( childList[0].mainId == undefined){
+                commerceService.getProductList()
+                .success(function (thirdResult) {
+                    for(var j=0; j<thirdResult.length; j++){
+                    if(thirdResult[j].childId == main) newChild.push(thirdResult[j]);
+                    }
+                }).error(function (error) {
+                    toastr.error('Loading Error', 'Warning', {
+                        closeButton: true
+                    });
+                })
+                }
+                else{
+                   for(var i=0 ; i < childList.length ; i++){
+                   if(childList[i].mainId == main) newChild.push(childList[i]);
+                   }
+                }
             $scope.child=newChild;
         };
 
