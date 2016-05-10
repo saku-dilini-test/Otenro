@@ -1,7 +1,7 @@
 <!--<div ng-include=" 'user/header/header.html' "></div>-->
-    <div class="obl-dashboard-apps">
+    <div class="obl-dashboard-apps-livePreview">
         <fieldset class="text-left">
-            <h1>Rum Punch</h1>
+            <h1 id="livePreviewH1">Rum Punch</h1>
         </fieldset>
         <fieldset class="text-left">
             <label class="font-size-12  reset-margin" >
@@ -25,8 +25,8 @@
             </fieldset>
         </ul>
     </div>
-    <div class="mdapp-content">
-        <div class="device-preview" ng-class="tabletView ? 'tabletView' : '!tabletView'">
+    <div class="mdapp-content-livePreview">
+        <div class="device-preview-livePreview" ng-class="tabletView ? 'tabletView' : '!tabletView'">
             <div class="device-simulator" overflow="scroll">
                 <me-tablet ng-show="tabletView" tmp-url="{{appTemplateUrl}}"></me-tablet>
                 <me-iphone ng-show="!tabletView" tmp-url="{{appTemplateUrl}}"></me-iphone>

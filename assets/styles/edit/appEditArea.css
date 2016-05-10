@@ -21,6 +21,17 @@
     transition: 0.4s linear;
 }
 
+.mdapp-content-livePreview{
+    min-height: 762px;
+    background-color: #F2F2F2;
+   /* padding-left: 270px;*/
+    -webkit-transition: 0.4s linear;
+    -moz-transition: 0.4s linear;
+    -o-transition: 0.4s linear;
+    transition: 0.4s linear;
+    margin-top: -500px;
+    margin-left: inherit;
+}
 .mdapp-content{
     min-height: 762px;
     background-color: #F2F2F2;
@@ -165,6 +176,12 @@
     width: 40px !important;
 }
 
+.device-preview-livePreview{
+    padding-top: 22px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 50px 0;
+}
 .device-preview{
     padding-top: 22px;
     width: 100%;
