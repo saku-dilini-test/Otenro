@@ -4,10 +4,10 @@
 
 (function() {
     angular.module('appEdit').service('articleService', [
-        '$mdDialog','$http','SERVER_URL', articleService
+        '$mdDialog','$http','Upload','SERVER_URL', articleService
     ]);
 
-    function articleService($mdDialog,$http,SERVER_URL) {
+    function articleService($mdDialog,$http,Upload,SERVER_URL) {
         return {
             showPublishArticleDialog: function() {
                 return $mdDialog.show({
@@ -20,7 +20,18 @@
             },
             publishArticle : function(data){
                 return $http.post(SERVER_URL+ 'edit/publishArticle',data);
-            }
+            },
+            publishArticle: function(file,title,desc,appId){
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/publishArticle',
+                    fields: {
+                        'title' : title,
+                        'desc' : desc,
+                        'appId' : appId
+                    },
+                    file: file
+                });
+            },
         };
     }
 })();

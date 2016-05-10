@@ -86,4 +86,23 @@ angular.module('starter.controllers', [])
             alert('loading err');
           });
 
+        /**
+         * Related Article Collections
+         */
+      $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$scope.appId)
+          .success(function(data) {
+              console.log(data);
+            $scope.thirdNaviList = data;
+          }).error(function(err) {
+            alert('loading err');
+          });
+
+        $http.get(constants.SERVER_URL + '/templates/getArticleById?articleId='+$stateParams.articleId)
+            .success(function(data) {
+                console.log(data);
+                $scope.selectedThridNavi = data;
+            }).error(function(err) {
+                alert('loading err');
+            });
+
     });
