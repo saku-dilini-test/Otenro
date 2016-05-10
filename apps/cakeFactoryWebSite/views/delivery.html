@@ -50,7 +50,16 @@
                             <label>City</label>
                             <input type="text" class="form-control" ng-model="deliveryAddress.city" ng-change="saveDeliveryAddress(deliveryAddress)">
                             <label>Contact Number</label>
-                            <input type="number" class="form-control" ng-model="deliveryAddress.contactNumber" ng-change="saveDeliveryAddress(deliveryAddress)">
+                            <div>
+                                <br>
+                                <form name="delivery" >
+                                <input class="form-control" type="text" name="phone" ng-model="deliveryAddress.contactNumber"
+                                       ➥ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/" ng-change="saveDeliveryAddress(deliveryAddress)"/>
+						<span class="error-message" ng-show="delivery.phone.$dirty
+						&& delivery.phone.$invalid" >The phone number field should be
+							of 10 digits</span>
+                                </form>
+                            </div>
                         </li>
                     </ul>
                 </div>

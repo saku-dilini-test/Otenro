@@ -2,7 +2,8 @@
     "use strict";
 angular.module('animateApp')
     .controller('mapCtrl', function($scope) {
-        var mapOptions = {
+
+               var mapOptions = {
             zoom: 15,
             center: new google.maps.LatLng(6.8929988, 79.8661994),
             mapTypeId: google.maps.MapTypeId.ROADMAP
