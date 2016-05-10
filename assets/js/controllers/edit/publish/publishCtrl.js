@@ -17,11 +17,18 @@
         };
 
         publishService.getAllLanguages().
-           success(function(data){
-               $scope.languageList = data;
-           }).error(function(err){
-               alert("MainMenu Loading Error : " + err);
-           });
+        success(function(data){
+            $scope.languageList = data;
+        }).error(function(err){
+            alert("MainMenu Loading Error : " + err);
+        });
+
+        publishService.getAllRatings().
+        success(function(data){
+            $scope.contentRatingList = data;
+        }).error(function(err){
+            alert("MainMenu Loading Error : " + err);
+        });
 
         publishService.getAllPrimaryCategories().
            success(function(data){

@@ -23,7 +23,8 @@ module.exports.bootstrap = function(cb) {
     SecondaryCategory.seed,
     SiteType.seed,
     TimeAndRegion.seed,
-    MeasurementStandard.seed
+    MeasurementStandard.seed,
+    ContentRating.seed
 
   ], cb);
 

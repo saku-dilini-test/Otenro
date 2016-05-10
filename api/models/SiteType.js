@@ -13,10 +13,19 @@
      },
      seedData: [
              {
-                 siteType : 'Option1',
+                 siteType : 'Ecommerce',
              },
              {
-                 siteType : 'Option2',
+                 siteType : 'Business',
+             },
+             {
+                 siteType : 'NGO',
+             },
+             {
+                 siteType : 'Media',
+             },
+             {
+                siteType : 'Artist',
              }
      ]
  };

@@ -152,59 +152,59 @@
                     <div class="md-dialog-main clearfix">
                         <fieldset class="col-3">
                             <label>cartoon violence</label>
-                            <md-select ng-model="someVal1">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
+                            <select
+                                    ng-model="contentRating.cartoonViolence"
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                            </select>
                         </fieldset>
                         <fieldset class="col-3">
                             <label>realistic violence</label>
-                            <md-select ng-model="someVal2">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
+                            <select
+                                    ng-model="contentRating.realisticViolence"
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                            </select>
                         </fieldset>
                         <fieldset class="col-3 reset-margin-right">
                             <label>sexual or nudity</label>
-                            <md-select ng-model="someVal3">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
+                            <select
+                                    ng-model="contentRating.nudityViolence"
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                            </select>
                         </fieldset>
                         <fieldset class="col-3">
                             <label>alcohol, tobacco</label>
-                            <md-select ng-model="someVal4">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
+                            <select
+                                    ng-model="contentRating.alcoholViolence"
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                            </select>
                         </fieldset>
                         <fieldset class="col-3">
                             <label>mature topics</label>
-                            <md-select ng-model="someVal5">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
+                            <select
+                                    ng-model="contentRating.matureViolence"
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                            </select>
                         </fieldset>
                         <fieldset class="col-3 reset-margin-right">
                             <label>simulated gambling</label>
-                            <md-select ng-model="someVal6">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
+                            <select
+                                    ng-model="contentRating.gamblingViolence"
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                            </select>
                         </fieldset>
                         <fieldset class="col-3">
                             <label>profanity</label>
-                            <md-select ng-model="someVal7">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
+                            <select
+                                    ng-model="contentRating.profanityViolence"
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                            </select>
                         </fieldset>
                         <fieldset class="col-3">
                             <label>horror/fear</label>
-                            <md-select ng-model="someVal8">
-                                <md-option value="Basic">Basic</md-option>
-                                <md-option value="Advanced">Advanced</md-option>
-                            </md-select>
+                            <select
+                                    ng-model="contentRating.horrorViolence"
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                            </select>
                         </fieldset>
                     </div>
                     <div class="md-dialog-buttons">
