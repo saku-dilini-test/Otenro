@@ -99,7 +99,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       })
       .state('app.thirdNaviView', {
-        url: '/thirdNaviView/:thirdNaviId',
+        //url: '/thirdNaviView/:thirdNaviId',
+        url: '/thirdNaviView/:articleId',
         views: {
           'menuContent': {
             templateUrl: 'templates/thirdNaviView.html',

@@ -73,7 +73,9 @@ module.exports.policies = {
     getThirdBySecondId : true,
     setPublishDetails: true,
     deletePreviewTemp:true,
-    getTermsAndConditions: true
+    getTermsAndConditions: true,
+    getArticles : true,
+    getArticleById : true
   },
 
   'template/TemplateAuthController': {

@@ -130,6 +130,40 @@ module.exports = {
 
     },
 
+    /**
+     * Template Category Function Start
+     *
+     * Given App Id return all article collections
+     * @param req
+     * @param res
+     */
+
+    getArticles : function(req,res) {
+
+        var appId = req.param('appId');
+        console.log(appId);
+        var searchApp = {
+            appId: appId
+        };
+        Article.find().where(searchApp).exec(function (err, result) {
+            if (err) return done(err);
+            console.log(result);
+            res.json(result);
+        });
+    },
+
+    getArticleById : function(req,res) {
+
+        var id = req.param('articleId');
+        var searchApp = {
+            id : id
+        };
+        Article.findOne().where(searchApp).exec(function (err, artilce) {
+            if (err) return done(err);
+            res.json(artilce);
+        });
+    },
+
     viewImages : function(req,res){
        res.sendfile(config.ME_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
     },

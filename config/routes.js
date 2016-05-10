@@ -187,6 +187,13 @@ module.exports.routes = {
     'POST /templates/deletePreviewTemp': 'template/TemplateController.deletePreviewTemp',
     'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
 
+    /**
+     * Template Data for App Category Media
+     */
+
+    'GET /templates/getArticles' : 'template/TemplateController.getArticles',
+    'GET /templates/getArticleById' : 'template/TemplateController.getArticleById',
+
     /***
      * Template Auth Controller
      */

@@ -15,34 +15,50 @@
                 <form class="pull-right" name="productForm" novalidate>
                     <div class="me-file-upload regular">
                         <div class="upload-wrapper">
-                            <input type="file" ngf-select ng-model="article.picFile" name="newImageFile" accept="image/*" required />
-                            <span>Upload Image</span>
+                            <input type="button" ngf-select ng-model="picFile" ngf-accept="image/*" aria-invalid="true" ngf-change="addImage(picFile)" required />
+                            <span >Upload Images</span>
                         </div>
                     </div>
                 </form>
                 <br>
-                <img ng-show="picFile != null" ngf-src="picFile" width="50" height="50" />
-                <img ng-show="picFile != null" ngf-src="picFile" width="50" height="50" />
-                <img ng-show="article.picFile != null" ngf-src="article.picFile" width="50" height="50" />
+                <br>
+                <br>
+                <div class="uploaded-old-images">
+
+                    <div class="old-images clearfix">
+                        <div class="old-image">
+                            <input type="button" ng-click="deleteImg(0)" value='delete' class="image-delete-button" />
+                        <img ng-click="setImage()" ng-if="tmpImage[0] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
+                        <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"  width="80" height="80" />
+                        </div>
+                            <div class="old-image">
+                                <input type="button" ng-click="deleteImg(1)" value='delete' class="image-delete-button" />
+                        <img ng-click="setImage()" ng-if="tmpImage[1] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
+                        <img ng-click="setImage(1)" ng-if="tmpImage[1] !== null" ngf-src="tmpImage[1]"  width="80" height="80" />
+                       </div>
+                        </div>
+                    </div>
             </fieldset>
 
             <fieldset class="col-1 reset-margin-right">
                 <label>Preview</label>
-                <div class="image">
-                    <img ng-show="picFile != null" ngf-src="article.picFile" width="250" height="150" />
+                <br>
+                <div class="image pull-left">
+                    <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150" height="150" />
+                    <img ng-if="picFile != null" ngf-src="picFile" width="250" height="150" />
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="pull-left">
                 <label>Text</label>
-                <textarea rows="4" cols="50" ng-model="article.desc">
+                <textarea rows="4" cols="60" ng-model="article.desc">
                 </textarea>
             </fieldset>
 
             <div class="md-dialog-buttons">
                 <div class="inner-section">
                     <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                    <md-button class="me-default-button" ng-click="publishArticle(article)">Publish</md-button>
+                    <md-button class="me-default-button" ng-click="publishArticle(mainImg,article)">Publish</md-button>
                 </div>
             </div>
         </div>
