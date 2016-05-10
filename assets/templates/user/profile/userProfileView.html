@@ -93,6 +93,7 @@
                         </ul>
                     </div>
                     <div class="md-dialog-main">
+                        <form class="form-signin" accept-charset="UTF-8" role="form" name="editProfile">
                         <div class="clearfix">
                             <fieldset class="col-2">
                                 <label>First name</label>
@@ -121,12 +122,18 @@
                             <fieldset class="col-2">
                                 <label>Password</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="password" name="password" required ng-model="userEdit.password" />
+                                <input type="password" name="password" ng-model="userEdit.password" ng-minlength="7" compare-to="userEdit.confirmPassword" required/>
+                                <span class="help-block " ng-show="editProfile.password.$error.minlength">
+                                    <span ng-show="editProfile.password.$error.minlength">Password should have at least 7 characters.</span>
+                                </span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Confirm Password</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="password" name="confirmPassword"  required />
+                                <input type="password" name="confirmPassword" ng-model="userEdit.confirmPassword" required />
+                                <span class="help-block " ng-show="editProfile.confirmPassword.$dirty">
+                                    <span ng-show="editProfile.password.$error.compareTo">Password must match.</span>
+                                </span>
                             </fieldset>
                         </div>
                         <fieldset >
@@ -140,6 +147,7 @@
                             <md-button class="me-default-button" ng-click="backToView(0)">Cancel</md-button>
                             <md-button class="me-default-button" ng-click="editUserProfile(userEdit)">Save</md-button>
                         </fieldset>
+                        </form>
                     </div>
                 </md-tab-body>
             </md-tab>
