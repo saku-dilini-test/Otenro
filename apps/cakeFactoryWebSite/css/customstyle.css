@@ -320,6 +320,22 @@ float: right;
     text-transform: uppercase;
     padding-bottom:5px;
 }
+
+.services_desc h3{
+    color:#8F8042;
+    font-family: 'Aller_Bd';
+    font-size:1.2em;
+    text-transform: uppercase;
+    padding-bottom:5px;
+}
+
+.contact_desc h3 {
+    color: #8F8042;
+    margin: 5px 0 10px 0;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-family: 'Aller_Bd';
+}
 .services_desc p{
     font-size: 0.85em;
     padding: 5px 0;
