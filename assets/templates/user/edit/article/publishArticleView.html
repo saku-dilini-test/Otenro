@@ -1,0 +1,50 @@
+<md-dialog aria-label="publish-article">
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>publishing an article</h1>
+        </div>
+
+        <div class="md-dialog-main clearfix">
+
+            <fieldset>
+                <label>Title</label>
+                <input type="text" name="title" ng-model="article.title" required />
+            </fieldset>
+            <fieldset class="col-2">
+                <label>Images</label>
+                <form class="pull-right" name="productForm" novalidate>
+                    <div class="me-file-upload regular">
+                        <div class="upload-wrapper">
+                            <input type="file" ngf-select ng-model="article.picFile" name="newImageFile" accept="image/*" required />
+                            <span>Upload Image</span>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <img ng-show="picFile != null" ngf-src="picFile" width="50" height="50" />
+                <img ng-show="picFile != null" ngf-src="picFile" width="50" height="50" />
+                <img ng-show="article.picFile != null" ngf-src="article.picFile" width="50" height="50" />
+            </fieldset>
+
+            <fieldset class="col-1 reset-margin-right">
+                <label>Preview</label>
+                <div class="image">
+                    <img ng-show="picFile != null" ngf-src="article.picFile" width="250" height="150" />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <label>Text</label>
+                <textarea rows="4" cols="50" ng-model="article.desc">
+                </textarea>
+            </fieldset>
+
+            <div class="md-dialog-buttons">
+                <div class="inner-section">
+                    <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                    <md-button class="me-default-button" ng-click="publishArticle(article)">Publish</md-button>
+                </div>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

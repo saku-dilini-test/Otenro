@@ -2,9 +2,9 @@
  * Created by udeshikaperera on 31/08/2015.
  */
 (function() {
-    angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService', 'commerceService', 'mainMenuService', 'currencyService', 'publishService', 'engageService', 'logoAndTittleService', dialogService]);
+    angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService', 'commerceService','articleService','mainMenuService', 'currencyService', 'publishService', 'engageService', 'logoAndTittleService', dialogService]);
 
-    function dialogService(stylesService, contactUsService, commerceService, mainMenuService, currencyService, publishService, engageService, logoAndTittleService) {
+    function dialogService(stylesService, contactUsService, commerceService, articleService ,mainMenuService, currencyService, publishService, engageService, logoAndTittleService) {
         return {
             showDialog: function(clickTitle) {
                 if ('styles' == clickTitle)
@@ -41,6 +41,8 @@
                     return engageService.showProfileDialog(clickTitle);
                 if ('styleEditBackgroundImage' == clickTitle)
                     return stylesService.showStyleEditBackgorundImageDialog(clickTitle);
+                if ('publishArticle' == clickTitle)
+                    return articleService.showPublishArticleDialog(clickTitle);
             }
         }
     }

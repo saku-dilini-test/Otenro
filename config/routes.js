@@ -147,8 +147,11 @@ module.exports.routes = {
       'GET /edit/getAllPrimaryCategories' :'edit/publish/publishDetailController.getAllPrimaryCategories',
       'GET /edit/getAllSecondaryCategories' :'edit/publish/publishDetailController.getAllSecondaryCategories',
 
+    /**
+     * Edit / Article Data
+     */
 
-
+    'POST /edit/publishArticle' : 'edit/article/articleController.publishArticle',
 
 
     /**
