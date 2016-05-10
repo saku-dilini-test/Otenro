@@ -66,6 +66,9 @@
             getAllLanguages:function(){
                 return $http.get(SERVER_URL + 'edit/getAllLanguages');
             },
+            getAllRatings:function(){
+                return $http.get(SERVER_URL + 'edit/getAllRatings');
+            },
             getExistingData:function(category){
                 return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId+'&category='+category);
             },

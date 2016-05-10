@@ -85,4 +85,11 @@ module.exports = {
         });
     },
 
+    getContentRatings : function(req,res){
+        ContentRating.find().exec(function(err, app) {
+                if (err) res.send(err);
+                res.send(app);
+        });
+    }
+
 }

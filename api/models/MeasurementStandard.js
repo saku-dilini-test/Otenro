@@ -13,10 +13,10 @@
      },
      seedData: [
              {
-                 measurementStandard : 'Option1',
+                 measurementStandard : 'Metric',
              },
              {
-                 measurementStandard : 'Option2',
+                 measurementStandard : 'Imperial',
              }
      ]
  };

@@ -143,6 +143,7 @@ module.exports.routes = {
       'GET /edit/getContactUs' :'edit/setting/ContactUsController.getContactUs',
       'POST /edit/setPublishDetails' :'edit/publish/publishDetailController.setPublishDetails',
       'GET /edit/getAllLanguages' :'edit/publish/publishDetailController.getAllLanguages',
+      'GET /edit/getAllRatings' :'edit/publish/publishDetailController.getContentRatings',
       'GET /edit/getLanguage' :'edit/publish/publishDetailController.getLanguage',
       'GET /edit/getAllPrimaryCategories' :'edit/publish/publishDetailController.getAllPrimaryCategories',
       'GET /edit/getAllSecondaryCategories' :'edit/publish/publishDetailController.getAllSecondaryCategories',
