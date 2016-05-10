@@ -131,6 +131,13 @@ h1, h2{
 h1{
    font-size: 22px;
 }
+#livePreviewH1{
+   font-size: 62px;
+   font-weight: 600;
+   border-bottom-style: groove;
+   width: 350px;
+}
+
 
 h2{
     font-size: 15px;

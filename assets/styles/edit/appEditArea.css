@@ -24,11 +24,13 @@
 .mdapp-content{
     min-height: 762px;
     background-color: #F2F2F2;
-    padding-left: 270px;
+   /* padding-left: 270px;*/
     -webkit-transition: 0.4s linear;
     -moz-transition: 0.4s linear;
     -o-transition: 0.4s linear;
     transition: 0.4s linear;
+    margin-top: -500px;
+    margin-left: inherit;
 }
 
 .mdapp-nav .logo{
@@ -166,8 +168,11 @@
 }
 
 .device-preview{
-    padding-top: 22px;
+    /*padding-top: 22px;*/
     width: 100%;
+    margin: 0 auto;
+        /*margin-left:100px;*/
+        padding: 50px 0;
 }
 
 .device-simulator{
@@ -175,6 +180,8 @@
     margin: 0 auto;
     padding: 15px;
     width: 320px;
+   /* margin-top: -500px;
+    margin-left: inherit;*/
 }
 
 .tabletView .device-simulator{
