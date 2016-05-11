@@ -60,13 +60,15 @@ shoppingCart.prototype.selectDeliveryOption = function (option) {
         if(option == 'delivery'){
             localStorage['deliveryOption'] = option;
         }
-        localStorage['branchName'] = '';
-        localStorage['locationName'] = '';
-        localStorage['deliveryAddress'] = '';
-        localStorage['deliveryAddress'] = '';
-        localStorage['currentCity'] = '';
-        localStorage['currentContactNumber'] = 0;
+
+        localStorage['pickUpBranch'] = '';
         localStorage['deliveryCharges'] = 0;
+        localStorage['deliveryLocation'] = '';
+        localStorage['deliveryAddress_01'] = '';
+        localStorage['deliveryAddress_02'] = '';
+        localStorage['name'] = '';
+        localStorage['city'] = '';
+        localStorage['telPhone'] = 0;
         this.deliveryCharge = 0;
     }
 }
@@ -84,16 +86,16 @@ shoppingCart.prototype.getCurretDeliveryOption = function () {
 // save branch name to local storage
 shoppingCart.prototype.saveBranchName = function (name) {
     if (localStorage != null && JSON != null) {
-        localStorage['branchName'] = name;
+        localStorage['pickUpBranch'] = name;
     }
 }
 
 // get branch name from local storage
 shoppingCart.prototype.getBranchName = function () {
     if (localStorage != null && JSON != null) {
-        var branchName = localStorage['branchName'];
+        var branchName = localStorage['pickUpBranch'];
         if(branchName){
-            return localStorage['branchName'];
+            return localStorage['pickUpBranch'];
         }else{
             return '';
         }
@@ -103,16 +105,16 @@ shoppingCart.prototype.getBranchName = function () {
 // save location name to local storage
 shoppingCart.prototype.saveLocationName = function (name) {
     if (localStorage != null && JSON != null) {
-        localStorage['locationName'] = name;
+        localStorage['deliveryLocation'] = name;
     }
 }
 
 // get branch name from local storage
 shoppingCart.prototype.getLocationName = function () {
     if (localStorage != null && JSON != null) {
-        var locationName = localStorage['locationName'];
+        var locationName = localStorage['deliveryLocation'];
         if(locationName){
-            return localStorage['locationName'];
+            return localStorage['deliveryLocation'];
         }else{
             return '';
         }
@@ -149,18 +151,18 @@ shoppingCart.prototype.getTotalPriceWithDeliveryCharges = function () {
 
 
 // save delivery address to local storage
-shoppingCart.prototype.saveDeliveryAddress = function (name) {    
+shoppingCart.prototype.saveDeliveryAddress_01 = function (name) {
     if (localStorage != null && JSON != null) {
-        localStorage['deliveryAddress'] = name;
+        localStorage['deliveryAddress_01'] = name;
     }
 }
 
 // get delivery address from local storage
-shoppingCart.prototype.getDeliveryAddress = function () {
+shoppingCart.prototype.getDeliveryAddress_01 = function () {
     if (localStorage != null && JSON != null) {
-        var deliveryAddress = localStorage['deliveryAddress'];
+        var deliveryAddress = localStorage['deliveryAddress_01'];
         if(deliveryAddress){
-            return localStorage['deliveryAddress'];
+            return localStorage['deliveryAddress_01'];
         }else{
             return '';
         }
@@ -168,18 +170,56 @@ shoppingCart.prototype.getDeliveryAddress = function () {
 }
 
 // save delivery address to local storage
-shoppingCart.prototype.saveCurrentCity = function (name) {
+shoppingCart.prototype.saveDeliveryAddress_02 = function (name) {
     if (localStorage != null && JSON != null) {
-        localStorage['currentCity'] = name;
+        localStorage['deliveryAddress_02'] = name;
     }
 }
 
 // get delivery address from local storage
-shoppingCart.prototype.getCurrentCity = function () {
+shoppingCart.prototype.getDeliveryAddress_02 = function () {
     if (localStorage != null && JSON != null) {
-        var currentCity = localStorage['currentCity'];
+        var deliveryAddress = localStorage['deliveryAddress_02'];
+        if(deliveryAddress){
+            return localStorage['deliveryAddress_02'];
+        }else{
+            return '';
+        }
+    }
+}
+
+// save name to local storage
+shoppingCart.prototype.saveName = function (name) {
+    if (localStorage != null && JSON != null) {
+        localStorage['name'] = name;
+    }
+}
+
+// get name from local storage
+shoppingCart.prototype.getName = function () {
+    if (localStorage != null && JSON != null) {
+        var currentCity = localStorage['name'];
         if(currentCity){
-            return localStorage['currentCity'];
+            return localStorage['name'];
+        }else{
+            return '';
+        }
+    }
+}
+
+// save city to local storage
+shoppingCart.prototype.saveCity = function (name) {
+    if (localStorage != null && JSON != null) {
+        localStorage['city'] = name;
+    }
+}
+
+// get city from local storage
+shoppingCart.prototype.getCity = function () {
+    if (localStorage != null && JSON != null) {
+        var currentCity = localStorage['city'];
+        if(currentCity){
+            return localStorage['city'];
         }else{
             return '';
         }
@@ -187,18 +227,18 @@ shoppingCart.prototype.getCurrentCity = function () {
 }
 
 // save delivery address to local storage
-shoppingCart.prototype.saveCurrentContactNumber = function (name) {
+shoppingCart.prototype.saveTelPhone = function (name) {
     if (localStorage != null && JSON != null) {
-        localStorage['currentContactNumber'] = name;
+        localStorage['telPhone'] = name;
     }
 }
 
 // get delivery address from local storage
-shoppingCart.prototype.getCurrentContactNumber = function () {
+shoppingCart.prototype.getTelPhone = function () {
     if (localStorage != null && JSON != null) {
-        var currentCity = localStorage['currentContactNumber'];
+        var currentCity = localStorage['telPhone'];
         if(currentCity){
-            return localStorage['currentContactNumber'];
+            return localStorage['telPhone'];
         }else{
             return '';
         }
@@ -228,43 +268,9 @@ shoppingCart.prototype.getOneDoller = function () {
 // get shopping cart from local storage
 shoppingCart.prototype.getShoppingCart = function () {
     if (localStorage != null && JSON != null) {
-        var cartsItem = localStorage[this.cartName + "_items"]        
+        var cartsItem = localStorage[this.cartName + "_items"];
+        console.log(cartsItem);
         return this.items;
-    }
-}
-
-// get is submitButton true 
-shoppingCart.prototype.isSubmitButtonDisable = function () {    
-    if (localStorage != null && JSON != null) {
-        var currentDeliveryOption = this.getCurretDeliveryOption();        
-        if(currentDeliveryOption == 'pickUp'){
-            var currentBranch = this.getBranchName();
-            if(currentBranch == 'undefined' || currentBranch == ''){   
-                return true;
-            }else{                
-                return false; 
-            }            
-        }else if(currentDeliveryOption == 'delivery'){
-            var currentLocation = this.getLocationName();
-            var currentAddress = this.getDeliveryAddress();
-            var currentCity = this.getCurrentCity();
-            var currentContactNumber = this.getCurrentContactNumber();
-            if(currentLocation == 'undefined' || currentLocation == ''){                
-                return true;
-            }else {
-                if(currentAddress == 'undefined' || currentAddress == '') {
-                    return true;
-                }else if(currentCity == 'undefined' || currentCity == ''){
-                    return true;
-                }else if(currentContactNumber == 'undefined' || currentContactNumber == 'null'){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-        }else{
-            return true;
-        }
     }
 }
 

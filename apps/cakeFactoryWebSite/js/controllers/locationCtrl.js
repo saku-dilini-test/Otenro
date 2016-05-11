@@ -3,11 +3,9 @@
     "use strict";
 
 angular.module('animateApp')
-	.controller('locationCtrl', function($scope, $http,SERVER_URL,DataService) {
+	.controller('locationCtrl', function($scope, $http,SERVER_URL,DataService,$location) {
 		$scope.deliveryOption = "pickUp"
-		$scope.isSubmitButtonDisableValue = 'true';
 		$scope.cart = DataService.cart;
-		var i = 0;
 
 		$http.get(SERVER_URL+"locations/getBranchLocations")
 			.then(function (response) {           
@@ -21,17 +19,11 @@ angular.module('animateApp')
 		
 		$scope.selectDeliveryOption = function(option){					
 			$scope.cart.selectDeliveryOption(option);
-			$scope.isSubmitButtonDisableValue = $scope.cart.isSubmitButtonDisable();
 		}
 
 		$scope.saveBranchName = function(name){
 			$scope.cart.saveBranchName(name);			
-			$scope.selectedBranch = $scope.cart.getBranchName();				
-			$scope.isSubmitButtonDisableValue = $scope.cart.isSubmitButtonDisable();
-			i = i +1;
-			if(i == 1) {
-				$scope.isSubmitButtonDisableValue = false;
-			}
+			$scope.selectedBranch = $scope.cart.getBranchName();
 		}
 
 		$scope.saveLocationName = function(location){
@@ -43,19 +35,20 @@ angular.module('animateApp')
 				$scope.cart.saveLocationName(location.locationName);
 				$scope.cart.saveDeliveryCharges(location.deliveryCharge);
 			}
-			$scope.isSubmitButtonDisableValue = $scope.cart.isSubmitButtonDisable();
 		}
 
 		$scope.saveDeliveryAddress = function(address){
-			var tempAddresss = address.line01 +''+ address.line02;
-			var tempCity = address.city;
-			var tempContactNumber = address.contactNumber;
-			$scope.cart.saveDeliveryAddress(tempAddresss);
-			$scope.cart.saveCurrentCity(tempCity);
-			$scope.cart.saveCurrentContactNumber(tempContactNumber);
-			$scope.isSubmitButtonDisableValue = $scope.cart.isSubmitButtonDisable();
+			$scope.cart.saveDeliveryAddress_01(address.line01);
+			$scope.cart.saveDeliveryAddress_02(address.line02);
+			$scope.cart.saveName(address.name);
+			$scope.cart.saveCity(address.city);
+			$scope.cart.saveTelPhone(address.contactNumber);
 
 		}
+
+		$scope.goShoppingCart = function () {
+			$location.path('/shoppingCart');
+		};
 
 
 	});	

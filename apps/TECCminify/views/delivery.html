@@ -8,7 +8,7 @@
                 <h2>Our Service</h2>
             </div>
             <!-- Delivery Option  -->
-             <div class="text-info">
+            <div class="text-info">
                 <label>
                     <input type="radio" ng-change="selectDeliveryOption('pickUp')" ng-model="deliveryOption" value="pickUp"> Pick up
                 </label>
@@ -18,76 +18,77 @@
 
                 <!-- PickUp -->
                 <div ng-if="deliveryOption == 'pickUp'" class="delivery-option">
-                    <ul class="delivery-form-controls">
-                        <li>
-                            <label>Pick Up Branch</label>
-                            <select ng-model="selectedBranch"
-                            ng-options="branch.locationName for branch in branchLocations"
-                            ng-change="saveBranchName(selectedBranch.locationName)"
-                            >
-                                <option value="">-- Select Branch --</option>
-                            </select>
-                        </li>
-                    </ul>
+                    <form name="pickUpForm">
+                        <ul class="delivery-form-controls">
+                            <li>
+                                <label>Pick Up Branch</label>
+                                <select ng-model="selectedBranch"
+                                        ng-options="branch.locationName for branch in branchLocations"
+                                        ng-change="saveBranchName(selectedBranch.locationName)"
+                                        required>
+                                    <option value="">-- Select Branch --</option>
+                                </select>
+                            </li>
+                            <li class="delivery-address-section">
+                                <label>Name</label>
+                                <input type="text" class="form-control" ng-model="deliveryAddress.name" ng-change="saveDeliveryAddress(deliveryAddress)" required>
+                                <label>Contact Number</label>
+                                <input class="form-control" type="text" name="phone" ng-model="deliveryAddress.contactNumber"
+                                       ➥ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/"
+                                       ng-change="saveDeliveryAddress(deliveryAddress)" required>
+                            <span class="error-message"
+                                  ng-show="pickUpForm.phone.$dirty
+                                            && pickUpForm.phone.$invalid" >
+                                            The phone number field should be of 10 digits
+                            </span>
+                            </li>
+                        </ul>
+                        <button ng-disabled="!(pickUpForm.$valid)"
+                                ng-click="pickUpForm.$valid && goShoppingCart()"
+                                class="btn kkcc-btn-success">
+                            Submit
+                        </button>
+                    </form>
                 </div>
                 <!-- Delivery -->
                 <div ng-if="deliveryOption == 'delivery'" class="delivery-option">
-                    <ul class="delivery-form-controls">
-                        <form name="delivery" >
-                        <li>
-                            <label>Delivery Location</label>
-                            <select ng-model="selectedLocation"
-                            ng-options="location.locationName+'  Rs: '+location.deliveryCharge+'.00' for location in deliveryLocations"
-                            ng-change="saveLocationName(selectedLocation)"
-                            >
-                                <option value="">-- Select Location --</option>
-                            </select>
-                        </li>
-                        <li class="delivery-address-section">
-                            <label>Address Line 01</label>
-                            <input type="text" class="form-control" ng-model="deliveryAddress.line01" ng-change="saveDeliveryAddress(deliveryAddress)" >
-                            <label>Address Line 02</label>
-                            <input type="text" class="form-control" ng-model="deliveryAddress.line02" ng-change="saveDeliveryAddress(deliveryAddress)">
-                            <label>City</label>
-                            <input type="text" class="form-control" ng-model="deliveryAddress.city" ng-change="saveDeliveryAddress(deliveryAddress)">
-                            <label>Contact Number</label>
-                            <div>
-                                <br>
-                                <!--<form name="delivery" >-->
-                                    <input class="form-control" type="text" name="phone" ng-model="deliveryAddress.contactNumber"
-                                           ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/" ng-change="saveDeliveryAddress(deliveryAddress)"/>
-						<span class="error-message" ng-show="phone.$dirty
-						&& phone.$invalid" >The phone number field should be
-							of 10 digits</span>
-                                <!--</form>-->
-                            </div>
-                        </li>
-                        </form>
-                    </ul>
-                </div>
-                <!-- Submit Delivery Option-->
-                <div>
-                   <!--  selected Delivery Option : {{deliveryOption}}<br>
-                    selected Branch Name : {{selectedBranch}}<br>
-                    selected Location Name : {{selectedLocation}}<br>
-                    delivery address : {{deliveryAddress}}<br>
-                    submit button : {{isSubmitButtonDisableValue}} -->
-                    <!-- delivery Charges : {{deliveryCharges}} -->
-                    <button
-                        class="btn kkcc-btn-success"
-                        onclick="window.location.href='#/shoppingCart'"
-                        ng-model="isSubmitButtonDisableValue"
-                        ng-disabled="isSubmitButtonDisableValue">
-                        <i class="icon-chevron-left" /> Submit
-                    </button>
-                    <!--
-                    <button
-                        class="btn btn-block kkcc-btn-success"
-                        ng-click="cart.checkout('PayPal')"
-                        ng-model="isSubmitButtonDisableValue"
-                        ng-disabled="isSubmitButtonDisableValue">
-                        <i class="icon-ok icon-white" /> Submit
-                    </button> -->
+                    <form name="deliveryForm">
+                        <ul class="delivery-form-controls">
+                            <li>
+                                <label>Delivery Location</label>
+                                <select ng-model="selectedLocation"
+                                        ng-options="location.locationName+'  Rs: '+location.deliveryCharge+'.00' for location in deliveryLocations"
+                                        ng-change="saveLocationName(selectedLocation)"
+                                        required>
+                                    <option value="">-- Select Location --</option>
+                                </select>
+                            </li>
+                            <li class="delivery-address-section">
+                                <label>Name</label>
+                                <input type="text" class="form-control" ng-model="deliveryAddress.name" ng-change="saveDeliveryAddress(deliveryAddress)" required>
+                                <label>Address Line 01</label>
+                                <input type="text" class="form-control" ng-model="deliveryAddress.line01" ng-change="saveDeliveryAddress(deliveryAddress)" required>
+                                <label>Address Line 02</label>
+                                <input type="text" class="form-control" ng-model="deliveryAddress.line02" ng-change="saveDeliveryAddress(deliveryAddress)" required>
+                                <label>City</label>
+                                <input type="text" class="form-control" ng-model="deliveryAddress.city" ng-change="saveDeliveryAddress(deliveryAddress)" required>
+                                <label>Contact Number</label>
+                                <input class="form-control" type="text" name="phone" ng-model="deliveryAddress.contactNumber"
+                                       ➥ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/"
+                                       ng-change="saveDeliveryAddress(deliveryAddress)" required>
+                            <span class="error-message"
+                                  ng-show="deliveryForm.phone.$dirty
+                                            && deliveryForm.phone.$invalid" >
+                                            The phone number field should be of 10 digits
+                            </span>
+                            </li>
+                        </ul>
+                        <button ng-disabled="!(deliveryForm.$valid)"
+                                ng-click="deliveryForm.$valid && goShoppingCart()"
+                                class="btn kkcc-btn-success">
+                            Submit
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
