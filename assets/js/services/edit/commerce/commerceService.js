@@ -178,9 +178,9 @@
             getUpdates:function(id){
                    return $http.get(SERVER_URL+ 'edit/getUpdates?ObjectId='+id);
             },
-            getVariants:function(idDetails){
-                return $http.get(SERVER_URL+ 'edit/getVariants?appId='+$rootScope.appId+'&childId='+idDetails);
-            },
+//            getVariants:function(idDetails){
+//                return $http.get(SERVER_URL+ 'edit/getVariants?appId='+$rootScope.appId+'&childId='+idDetails);
+//            },
             addPriceandVariants:function(variants){
                 return $http.post(SERVER_URL+ 'edit/updateVariants',variants);
             },

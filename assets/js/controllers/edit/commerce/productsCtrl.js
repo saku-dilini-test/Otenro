@@ -66,28 +66,14 @@
                     });
         }
         else{
-          var ids={
-              mainId : product.mainId,
-              childId : product.childId
-              };
-               commerceService.getVariants(ids.childId).
-                      success(function(data) {
-                       toastr.success('Successfully saved', 'Awsome!', {
-                           closeButton: true
-                       });
                       $scope.selectedTab = current;
                       $scope.variants=[{
                           sku: "#1",
                           name: product.name,
                           sizeOrweight: "10",
-                          price: data[0].price,
+                          price: "100",
                           qty: "1"
                       }];
-                      }).error(function(err) {
-                          toastr.error('Saving detals was not Successful', 'Warning', {
-                              closeButton: true
-                          });
-                      });
         }
         };
 
@@ -107,7 +93,7 @@
             $scope.variants[0].qty = newValue;
         };
 
-        $scope.nextStep3 = function(current,selection) {
+        $scope.nextStep3 = function(current,selection,variants) {
         if($scope.variants[0].sku == "" || $scope.variants[0].name == "" || $scope.variants[0].size == "" || $scope.variants[0].price == "" || $scope.variants[0].qty == ""){
             toastr.error('Fill all the fields', 'Warning', {
                    closeButton: true
@@ -120,10 +106,11 @@
         }
         else{
                 if(selection == "weight"){
-                 weight = $scope.variants[0].sizeOrweight;
+                 weight = variants[0].sizeOrweight;
                 }
                 else{
-                size = $scope.variants[0].sizeOrweight;
+                size = variants[0].sizeOrweight;
+                console.log(size);
                 }
               $scope.selectedTab = current;
             }
