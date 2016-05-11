@@ -253,70 +253,78 @@ module.exports = {
    */
   saveShoppingCartWeb: function(req,res){
 
-    var data = req.body;
-    var email = req.body.email;
-    data['order_proccessed_Time'] = moment().format('YYYY-MM-DD  h:mm:ss a');
-    Payment.create(data).exec(function (err, payment) {
-      if (err) {
-        return res.status(err.status).json({err: err.message});
-      }
-      if (payment) {
-        var itemsHtml = "";
-        var total = 0;
-        var optionType = '';
-        var deliveryOption = '';
-        var viewAmount = '';
-        if(payment.pickUpBranch != ''){
-          optionType = 'Pick Up';
-          deliveryOption = "<ul>Pick Up Branch : "+payment.pickUpBranch+"</ul>";
+    var cartLength = req.body.cartLength;
+    if(cartLength > 0) {
+      var data = req.body;
+      var email = req.body.email;
+      data['order_proccessed_Time'] = moment().format('YYYY-MM-DD  h:mm:ss a');
+      Payment.create(data).exec(function (err, payment) {
+        if (err) {
+          return res.status(err.status).json({err: err.message});
         }
-        if(payment.deliveryCharge != 0){
-          optionType = 'Delivery';
-          deliveryOption = "<ul>Delivery Location : "+payment.deliveryLocation+"</ul>"+
-            "<ul>Delivery Address : "+payment.deliveryAddress+"</ul>";
+        if (payment) {
+          var itemsHtml = "";
+          var total = 0;
+          var optionType = '';
+          var deliveryOption = '';
+          var viewAmount = '';
+          if (payment.pickUpBranch != '') {
+            optionType = 'Pick Up';
+            deliveryOption = "<ul>Pick Up Branch : " + payment.pickUpBranch + "</ul>"+
+                "<ul> Customer Name : "+payment.name + "</ul>"+
+                "<ul> Contact Number : "+payment.telPhone + "</ul>";
+          }
+          if (payment.deliveryCharge != 0) {
+            optionType = 'Delivery';
+            deliveryOption = "<ul>Delivery Location : " + payment.deliveryLocation + "</ul>" +
+              "<ul>Customer Name : "+payment.name + "</ul>"+
+              "<ul>Contact Number : "+payment.telPhone + "</ul>"+
+              "<ul>Delivery Address : " + payment.deliveryAddress_01 +","+payment.deliveryAddress_02+", "+ payment.city+"</ul>";
+          }
+          for (var i = 0; i < payment.cartLength; i++) {
+            var j = i.toString(payment.j);
+            itemsHtml += "<li>Product Name: " + payment[j]['name'] + "</li>" +
+              "<li>Quantity: " + payment[j]['quantity'] + "</li>" +
+              "<li>Price : " + payment[j]['price'] + "</li>" +
+              "---------------------------------------------------------";
+            total += (payment[j]['quantity']) * (payment[j]['price']);
+          }
+          viewAmount = "<li>Total Amount : Rs. " + total + "</li>";
+          if (payment.deliveryCharge != 0) {
+            total += Number(payment.deliveryCharge);
+            viewAmount += "---------------------------------------------------------" +
+              "<li>Total Amount With Delivery Charges: Rs. " + total + "</li>";
+          }
+          var emailBody = "<html>" +
+            "<h4>" + "New " + optionType + " Order" + "</h4>" +
+            "<h4>Order Details</h4>" +
+            "<ul>" +
+            itemsHtml +
+            viewAmount +
+            "</ul>" +
+            "<h4>Delivery Option : " + optionType + "</h4>" +
+            deliveryOption +
+            "</html>";
+          var emailDetails = {
+            from: "onbilabsttest@gmail.com",
+            to: orderEmail,
+            cc: '',
+            bcc: '',
+            subject: "New " + optionType + " Order",
+            attachment: [
+              {data: emailBody, alternative: true},
+            ]
+          };
+          server.send(emailDetails, function (err, message) {
+            sails.log.info(err || message);
+            if (err) {
+              return res.status(err.status).json({err: err.message});
+            }
+            console.log('Email has sent & Payment Id ' + payment.id);
+          });
+          return res.json(200, {result: 'success'});
         }
-        for (var i = 0; i < payment.cartLength; i++) {
-          var j = i.toString(payment.j);
-          itemsHtml +=  "<li>Product Name: " + payment[j]['name'] + "</li>" +
-            "<li>Quantity: " + payment[j]['quantity'] + "</li>" +
-            "<li>Price : " + payment[j]['price'] + "</li>" +
-            "---------------------------------------------------------";
-          total += (payment[j]['quantity'])*(payment[j]['price']);
-        }
-        viewAmount = "<li>Total Amount : Rs. " + total + "</li>";
-        if(payment.deliveryCharge != 0){
-          total += Number(payment.deliveryCharge);
-          viewAmount += "---------------------------------------------------------"+
-            "<li>Total Amount With Delivery Charges: Rs. " + total + "</li>";
-        }
-        var emailBody = "<html>" +
-          "<h4>" + "New order details" +"</h4>" +
-          "<h4>Order Details</h4>" +
-          "<ul>" +
-          itemsHtml +
-          viewAmount+
-          "</ul>" +
-          "<h4>Delivery Option : "+optionType+"</h4>" +
-          deliveryOption+
-          "</html>";
-        var emailDetails = {
-          from: "onbilabsttest@gmail.com",
-          to: orderEmail,
-          cc: "",
-          subject: "[PayPal] New Order ",
-          attachment: [
-            {data: emailBody, alternative: true},
-          ]
-        };
-         server.send(emailDetails, function (err, message) {
-           sails.log.info(err || message);
-           if (err) {
-             return res.status(err.status).json({err: err.message});
-           }
-         });
-        return res.json(200, {result: 'success'});
-      }
-    });
-
+      });
+    }
   }
 };
