@@ -135,13 +135,14 @@ module.exports = {
                         /**
                          * Add Third Navigation
                          */
-                        for (var j = 0; j < thirdNaviList.length; j++) {
-                            thirdNaviList[j].appId = app.id;
-                            thirdNaviList[j].childId = secondN.id;
-                            ThirdNavigation.create(thirdNaviList[j]).exec(function (err, thirdN) {
-                                if (err) return err;
-                            });
-                        }
+//                        if (i == 0) {
+                            for (var j = 0; j < thirdNaviList.length; j++) {
+                                thirdNaviList[j].appId = app.id;
+                                thirdNaviList[j].childId = secondN.id;
+                                ThirdNavigation.create(thirdNaviList[j]).exec(function (err, thirdN) {
+                                    if (err) return err;
+                                });
+                            }
                     });
                 }
             });
@@ -279,9 +280,9 @@ module.exports = {
                                         ThirdNavigation.create(thirdNavi1[z]).exec(function (err, thirdN) {
                                             if (err) return err;
                                         });
-                                        PriceAndVariants.create(thirdNavi1[z]).exec(function (err, thirdN) {
-                                            if (err) return err;
-                                        });
+//                                        PriceAndVariants.create(thirdNavi1[z]).exec(function (err, thirdN) {
+//                                            if (err) return err;
+//                                        });
                                     }
                                 } else {
                                     for (var z = 0; z < thirdNavi2.length; z++) {
@@ -289,9 +290,9 @@ module.exports = {
                                         ThirdNavigation.create(thirdNavi2[z]).exec(function (err, thirdN) {
                                             if (err) return err;
                                         });
-                                        PriceAndVariants.create(thirdNavi2[z]).exec(function (err, thirdN) {
-                                            if (err) return err;
-                                        });
+//                                        PriceAndVariants.create(thirdNavi2[z]).exec(function (err, thirdN) {
+//                                            if (err) return err;
+//                                        });
 
                                     }
                                 }

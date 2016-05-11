@@ -107,30 +107,38 @@ module.exports = {
         }
     },
 
-    getVariants: function(req,res){
-    var appId = req.param('appId');
-    var childId = req.param('childId');
-            var searchApp = {
-                appId: appId,
-                childId: childId
-            };
-        PriceAndVariants.find(searchApp, function(err, app) {
-        if (err) return done(err);
-           res.send(app);
-        });
-    },
+//    getVariants: function(req,res){
+//    var appId = req.param('appId');
+//    var childId = req.param('childId');
+//            var searchApp = {
+//                appId: appId,
+//                childId: childId
+//            };
+//            console.log(searchApp);
+//        PriceAndVariants.find(searchApp, function(err, app) {
+//        if (err) return done(err);
+//           res.send(app);
+//        });
+//    },
 
     updateVariants: function(req,res){
                 var searchApp = {
                     appId: req.body.appId
                 };
         PriceAndVariants.find(searchApp, function(err, app){
-             if (err) return done(err);
-             else
+
+             if (err) {return done(err);}
+             else if(app == ""){
+                 PriceAndVariants.create(req.body).exec(function (err, thirdN) {
+                     if (err) return err;
+                 });
+             }
+             else{
              PriceAndVariants.update({childId: req.body.childId},req.body).exec(function(err){
                              if (err) res.send(err);
                              res.send('ok');
              });
+            }
 
         })
     },
