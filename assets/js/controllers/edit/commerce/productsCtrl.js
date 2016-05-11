@@ -55,8 +55,9 @@
                     });
                 })
         }
-        $scope.addType=function(type){
+        $scope.addType=function(type,current){
             $scope.product.type = type;
+            $scope.selectedTab = current;
         };
 
         $scope.nextStep2 = function(current,product){
