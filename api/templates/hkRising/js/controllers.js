@@ -55,6 +55,10 @@ angular.module('starter.controllers', [])
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
+    .controller('HomeCtrl', function($scope,$http,constants,$rootScope) {
+
+    })
+
     .controller('secondNaviCtrl', function($scope,$http,constants,$rootScope) {
       $scope.appId = $rootScope.appId;
 
@@ -67,32 +71,14 @@ angular.module('starter.controllers', [])
           });
     })
 
-    .controller('thirdNaviCtrl', function($scope,$http,constants,$rootScope,$stateParams) {
+    .controller('articleCtrl', function($scope,$http,constants,$rootScope,$stateParams) {
 
       $scope.appId = $rootScope.appId;
 
-      $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.secondNavId).success(function(data) {
-        $scope.thirdNaviList = data;
-        console.log(data);
-      }).error(function(err) {
-        alert('loading err');
-      });
-
-      $http.get(constants.SERVER_URL + '/templates/getProductById?productId='+$stateParams.thirdNaviId)
-          .success(function(data) {
-            $scope.selectedThridNavi = data;
-            console.log(data);
-          }).error(function(err) {
-            alert('loading err');
-          });
-
-        /**
-         * Related Article Collections
-         */
       $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$scope.appId)
           .success(function(data) {
               console.log(data);
-            $scope.thirdNaviList = data;
+            $scope.artilceList = data;
           }).error(function(err) {
             alert('loading err');
           });
@@ -100,7 +86,7 @@ angular.module('starter.controllers', [])
         $http.get(constants.SERVER_URL + '/templates/getArticleById?articleId='+$stateParams.articleId)
             .success(function(data) {
                 console.log(data);
-                $scope.selectedThridNavi = data;
+                $scope.selectedArticle = data;
             }).error(function(err) {
                 alert('loading err');
             });
