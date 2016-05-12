@@ -227,7 +227,7 @@ module.exports = {
 
         var emailDetails = {
           from: "onbilabsttest@gmail.com",
-          to: email,
+          to: orderEmail,
           cc: "",
           subject: "[PayPal] New Order ",
           attachment: [
