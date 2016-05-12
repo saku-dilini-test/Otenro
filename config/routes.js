@@ -59,6 +59,8 @@ module.exports.routes = {
 
     'POST /app/dashboard/allApps': 'DashboardController.allApps',
     'POST /api/dashboard/getAllCategory': 'DashboardController.getAllCategory',
+    'POST /api/dashboard/getSelectedCategory': 'DashboardController.getSelectedCategory',
+    'POST /api/dashboard/getSelectedCategoryDashboard': 'DashboardController.getSelectedCategoryDashboard',
     'POST /app/designApps': 'ApplicationController.designApps',
     'POST /app/viewTemplate': 'ApplicationController.viewTemplate',
      /***

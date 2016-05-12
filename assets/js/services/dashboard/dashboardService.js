@@ -15,6 +15,12 @@
             },
             getAllCategory:function(appParams){
                 return $http.post(SERVER_URL +'api/dashboard/getAllCategory', appParams);
+            },
+            getSelectedCategory:function(appParams){
+                return $http.post(SERVER_URL +'api/dashboard/getSelectedCategory', appParams);
+            },
+            getSelectedCategoryDashboard:function(appParams){
+                return $http.post(SERVER_URL +'api/dashboard/getSelectedCategoryDashboard', appParams);
             }
         }
     }

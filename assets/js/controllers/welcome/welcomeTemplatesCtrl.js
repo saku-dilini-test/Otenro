@@ -9,13 +9,13 @@
     'use strict';
     angular.module('app')
         .controller('WelcomeTemplatesCtrl',
-      ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER','$auth',
+      ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER','$auth','$rootScope',
             WelcomeTemplatesCtrl
         ]);
 
-    function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,ME_APP_SERVER,$auth) {
+    function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,ME_APP_SERVER,$auth,$rootScope) {
         welcomeTemplatesResource.getTemplates().success(function(data){
-           $scope.templates = data;
+            $rootScope.templates = data;
         });
         $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory) {
 
