@@ -22,7 +22,7 @@
                                              <input type="button" class="me-default-button" ngf-select ng-model="picFile" ngf-accept="image/*" value="Add Image" required />
                                         </span>
                                     </span>
-                                    <img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />
+                                    <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />
                                     <img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
                                 </a>
                             </fieldset>
@@ -83,7 +83,7 @@
                                     </select>
                             </fieldset>
                             <fieldset class="col-3">
-                                <label>primary category</label>
+                                <label>category</label>
                                 <select class="form-control"
                                         ng-model="playStoreData.primaryCat"
                                         ng-options="catList.category as catList.category for catList in primaryCatList">
