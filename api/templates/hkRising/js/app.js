@@ -58,7 +58,28 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/home',
     views: {
       'menuContent': {
-        templateUrl: 'templates/home.html'
+        templateUrl: 'templates/home.html',
+        controller: 'HomeCtrl'
+      }
+    }
+  })
+
+  .state('app.home.active', {
+    url: '/active',
+    views: {
+      'tabContent': {
+        templateUrl: 'templates/article.html',
+        controller: 'articleCtrl'
+      }
+    }
+  })
+
+  .state('app.home.hotels', {
+    url: '/hotels',
+    views: {
+      'tabContent': {
+        templateUrl: 'templates/article.html',
+        controller: 'articleCtrl'
       }
     }
   })
@@ -80,31 +101,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-      .state('app.secondNavi', {
-        url: '/secondNavi',
+      .state('app.articleView', {
+        url: '/articleView/:articleId',
         views: {
           'menuContent': {
-            templateUrl: 'templates/secondNavi.html',
-            controller: 'secondNaviCtrl'
-          }
-        }
-      })
-      .state('app.thirdNavi', {
-        url: '/thirdNavi/:secondNavId',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/thirdNavi.html',
-            controller: 'thirdNaviCtrl'
-          }
-        }
-      })
-      .state('app.thirdNaviView', {
-        //url: '/thirdNaviView/:thirdNaviId',
-        url: '/thirdNaviView/:articleId',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/thirdNaviView.html',
-            controller: 'thirdNaviCtrl'
+            templateUrl: 'templates/articleView.html',
+            controller: 'articleCtrl'
           }
         }
       })

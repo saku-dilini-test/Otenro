@@ -1,19 +1,19 @@
-<ion-view view-title="ThirdNavi">
+<ion-view hide-back-button="true" view-title="HONG KONG RISE UP">
     <ion-content>
-        <div ng-repeat="thirdNavi in thirdNaviList">
+        <ion-nav-buttons side="left">
+        </ion-nav-buttons>
+        <div ng-repeat="article in artilceList">
             <div class="card">
-                <a href="#/app/thirdNaviView/{{thirdNavi.id}}">
-                    <div class="row" href="#/app/aboutus">
+                <a href="#/app/articleView/{{article.id}}">
+                    <div class="row">
                         <div class="col">
                             <div class="item item-image">
-                                <!--<img src="img/{{thirdNavi.imageUrl}}">-->
-                                <img src="img/article/{{thirdNavi.imageUrl}}">
+                                <img src="img/article/{{article.imageUrl}}">
                             </div>
                         </div>
                         <div class="col">
                             <div class="item item-text-wrap">
-                                <!--{{thirdNavi.name}}-->
-                                {{thirdNavi.title}}
+                                {{article.title}}
                             </div>
                         </div>
                     </div>

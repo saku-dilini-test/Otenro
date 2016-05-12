@@ -1,32 +1,33 @@
-<ion-view view-title="Home">
+<ion-view hide-back-button="true" view-title="HONG KONG RISE UP">
   <ion-content>
-    <div class="row">
-      <div class="item item-image hk-top-image">
-        <img src="img/hkRising.png">
-      </div>
-    </div>
-    <div class="row">
-      <ion-tabs class="tabs-positive tabs-icon-top hk-home-tabs">
-        <ion-tab title="HOTELS"
-                 icon-on="ion-ios-filing"
-                 icon-off="ion-ios-filing-outline"></ion-tab>
-        <ion-tab title="ACTIVITIES"
-                 icon-on="ion-ios-filing"
-                 icon-off="ion-ios-filing-outline"></ion-tab>
-        <ion-tab title="SHOPPING"
-                 icon-on="ion-ios-filing"
-                 icon-off="ion-ios-filing-outline">
-          <ion-nav-view>kjhjkh</ion-nav-view>
-        </ion-tab>
-        <ion-tab title="FOODS"
-                 icon-on="ion-ios-filing"
-                 icon-off="ion-ios-filing-outline"></ion-tab>
-      </ion-tabs>
-    </div>
 
-    <!--<div class="item item-text-wrap">-->
-      <!--<h2>About US</h2>-->
-      <!--This is a basic Card which contains an item that has wrapping text.-->
-    <!--</div>-->
+      <br>
+      <br>
+      <br>
+
+      <ion-nav-view name="tabContent"></ion-nav-view>
+
+      <ion-tabs class="tabs-positive">
+
+          <a class="tab-item" href="#/app/home/hotels">
+              Hotels
+          </a>
+
+          <a class="tab-item  active" href="#/app/home/active">
+              Active
+          </a>
+
+          <a class="tab-item" href="#/app/home/shopping">
+              Shopping
+          </a>
+
+          <a class="tab-item" href="#/app/home/foods">
+              Foods
+          </a>
+      </ion-tabs>
+
+
+
+
   </ion-content>
 </ion-view>
