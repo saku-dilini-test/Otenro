@@ -57,7 +57,7 @@ module.exports = {
                           "</html>";
           var emailDetails = {
             from: "onbilabsttest@gmail.com",
-            to: 'amilaonbit@gmail.com',
+            to: orderEmail,
             cc: "",
             subject: "[PayPal] New Order for - "+payment.deliveryDetails.name,
             attachment:
@@ -118,7 +118,7 @@ module.exports = {
                         "</html>";
         var emailDetails = {
           from: "onbilabsttest@gmail.com",
-          to: 'amilaonbit@gmail.com',
+          to: orderEmail,
           cc: "",
           subject: "[PayPal] New Order for - "+payment.pickupDetails.name,
           attachment:
@@ -227,7 +227,7 @@ module.exports = {
 
         var emailDetails = {
           from: "onbilabsttest@gmail.com",
-          to: email,
+          to: orderEmail,
           cc: "",
           subject: "[PayPal] New Order ",
           attachment: [
