@@ -10,17 +10,20 @@
             </label>
         </fieldset>
         <br>
-
+        <fieldset>
+            <label class="font-size-12"> Name</label>
+            <input type="text" ng-model="appName" />
+        </fieldset>
         </br>
         <br>
         </br>
         <ul class="grid obl-app-templates clearfix">
             <fieldset class="text-left">
                 <button class="me-default-button" ng-click="deleteFile(userId,appId)">
-                    Cancel
+                    Back
                 </button>
-                <button class="me-default-button" ng-click='open(appId,tempUrl,tempName,tempCategory)'>
-                    Continue
+                <button class="me-default-button" ng-click="answer('useful',appId,tempUrl,tempName,tempCategory)">
+                    Get Started
                 </button>
             </fieldset>
         </ul>
