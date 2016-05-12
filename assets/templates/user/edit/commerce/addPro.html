@@ -9,24 +9,18 @@
                     </div>
                     <div id="Navigation" class="md-dialog-full">
                         <div class="products-options">
-                            <a ng-click='addType("Physical");selectedLink = "Physical"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Physical'}">
+                            <a ng-click='addType("Physical",1);selectedLink = "Physical"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Physical'}">
                                 <h1>Physical</h1>
                                 <label>An item that is shipped to your customers</label>
                             </a>
-                            <a ng-click='addType("Digital");selectedLink = "Digital"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Digital'}">
+                            <a ng-click='addType("Digital",1);selectedLink = "Digital"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Digital'}">
                                 <h1>Digital</h1>
                                 <label>Content that is downloaded</label>
                             </a>
-                            <a ng-click='addType("Service");selectedLink = "Service"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Service'}">
+                            <a ng-click='addType("Service",1);selectedLink = "Service"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Service'}">
                                 <h1>Services</h1>
                                 <label>Provide a Service</label>
                             </a>
-                        </div>
-                    </div>
-                    <div class="md-dialog-buttons">
-                        <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep(1)">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -51,6 +45,10 @@
                                 <fieldset class="col-2">
                                     <label for="input-name">Detailed Description</label>
                                     <input type="text" name="detailedDesc" ng-model="product.detailedDesc" id="input-detailedDesc" required />
+                                </fieldset>
+                                <fieldset class="col-2">
+                                    <label for="input-name">SKU</label>
+                                    <input type="text" name="sku" ng-pattern="/[0-9]+/" ui-mask="9999999999" ng-model="product.sku" id="input-sku" required />
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label>Main</label>
@@ -118,12 +116,7 @@
                             <tbody>
 
                                 <tr ng-repeat="data in variants">
-                                    <td
-                                       inline-edit="data.sku"
-                                       inline-edit-callback="skuUpdateHandler(newValue)"
-                                       inline-edit-btn-edit=""
-                                       inline-edit-on-blur="save"
-                                       inline-edit-on-click></td>
+                                    <td ng-model="data.sku">{{data.sku}}</td>
                                     <td
                                        ng-model="data.name">{{data.name}}</td>
                                     <td
@@ -138,12 +131,7 @@
                                        inline-edit-btn-edit=""
                                        inline-edit-on-blur="save"
                                        inline-edit-on-click></td>
-                                    <td
-                                       inline-edit="data.qty"
-                                       inline-edit-callback="qtyUpdateHandler(newValue)"
-                                       inline-edit-btn-edit=""
-                                       inline-edit-on-blur="save"
-                                       inline-edit-on-click></td>
+                                    <td ><input type="number" name="quantity"  ng-model="data.qty" /></td>
                                 </tr>
 
                             </tbody>

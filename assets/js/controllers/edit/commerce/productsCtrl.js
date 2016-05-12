@@ -55,8 +55,9 @@
                     });
                 })
         }
-        $scope.addType=function(type){
+        $scope.addType=function(type,current){
             $scope.product.type = type;
+            $scope.selectedTab = current;
         };
 
         $scope.nextStep2 = function(current,product){
@@ -68,11 +69,11 @@
         else{
                       $scope.selectedTab = current;
                       $scope.variants=[{
-                          sku: "#1",
+                          sku: product.sku,
                           name: product.name,
                           sizeOrweight: "10",
                           price: "100",
-                          qty: "1"
+                          qty: "001"
                       }];
         }
         };
