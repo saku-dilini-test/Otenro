@@ -13,19 +13,73 @@
      },
      seedData: [
              {
-                 category : 'Coffees'
+                 category : 'Books'
              },
              {
-                 category : 'Movies'
+                 category : 'Business'
              },
              {
-                 category : 'Food and Drink'
+                 category : 'Catalogs'
              },
              {
-                 category : 'Games'
+                 category : 'Education'
              },
              {
-                category : 'Books'
+                category : 'Entertainment'
+             },
+             {
+                category: 'Finance'
+             },
+             {
+                category: 'Food & Drink'
+             },
+             {
+                category: 'Games'
+             },
+             {
+                category: 'Health & Fitness'
+             },
+             {
+                category: 'Lifestyle'
+             },
+             {
+                category: 'Medical'
+             },
+             {
+                category: 'Music'
+             },
+             {
+                category: 'Navigation'
+             },
+             {
+                category: 'News'
+             },
+             {
+                category: 'Photo & video'
+             },
+             {
+                category: 'Productivity'
+             },
+             {
+                category: 'References'
+             },
+             {
+                category: 'Shopping'
+             },
+             {
+                category: 'Social Networking'
+             },
+             {
+                category: 'Sports'
+             },
+             {
+                category: 'Travel'
+             },
+             {
+                category: 'Utilities'
+             },
+             {
+                category: 'Weather'
              }
      ]
  };
