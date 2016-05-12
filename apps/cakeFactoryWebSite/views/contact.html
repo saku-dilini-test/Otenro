@@ -15,35 +15,37 @@
 					</span>
 				</p>
 				<br/>
-				<form method="post"  action="" class="left_form" name="contact" >
-					<div>
-						<span><label>Name</label></span>
-						<span><input name="userName" type="text" class="textbox" ng-model="contactForm.name"></span>
+				<form name="contactUsComment">
+					<div method="post"  action="" class="left_form" name="contact" >
+						<div>
+							<span><label>Name</label></span>
+							<span><input name="userName" type="text" class="textbox" ng-model="contactForm.name" required></span>
+						</div>
+						<div ng-class="{'has-error':contactUsComment.userEmail.$invalid && contactUsComment.userEmail.$dirty}">
+						<span><label>Email</label></span>
+						<span><input name="userEmail" type="email" class="textbox" ng-model="contactForm.email"></span>
+						<span class="help-block has-error" ng-if="contactUsComment.userEmail.$dirty">
+						<span ng-show="contactUsComment.userEmail.$error.required">Email address is required.</span>
+						<span ng-show="contactUsComment.userEmail.$error.email">Not a valid email address.</span>
+						</span>
+						</div>
+						<div>
+							<span><lable>Phone Number</lable></span>
+							<input type="number" name="phone" ng-model="contactUsComment.phone"
+								   ➥ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/"/>
+							<span ng-show="contactUsComment.phone.$dirty
+							&& contactUsComment.phone.$invalid">The phone number field should be
+								of 10 digits</span>
+						</div>
 					</div>
-					<div ng-class="{'has-error':contact.userEmail.$invalid && contact.userEmail.$dirty}">
-					<span><label>Email</label></span>
-					<span><input name="userEmail" type="email" class="textbox" ng-model="contactForm.email" required ></span>
-					<span class="help-block has-error" ng-if="contact.userEmail.$dirty">
-					<span ng-show="contact.userEmail.$error.required">Email address is required.</span>
-					<span ng-show="contact.userEmail.$error.email">Not a valid email address.</span>
-					</span>
-					</div>
-					<div>
-						<span><lable>Phone Number</lable></span>
-						<input type="number" name="phone" ng-model="contactForm.phone"
-							   ➥ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/" />
-						<span ng-show="contact.phone.$dirty
-						&& contact.phone.$invalid">The phone number field should be
-							of 10 digits</span>
-					</div>
-				</form>
-				<form class="right_form">
-					<div>
-						<span><label>Subject</label></span>
-						<span><textarea name="userMsg" rows="35" ng-model="contactForm.msg"> </textarea></span>
-					</div>
-					<div class="contact-button-wrapper">
-						<span><input ng-click='submitContactForm(contactForm)' type="submit" value="Submit"  class="myButton" /></span>
+					<div class="right_form">
+						<div>
+							<span><label>Comments</label></span>
+							<span><textarea name="userMsg" rows="35" ng-model="contactForm.msg" required> </textarea></span>
+						</div>
+						<div class="contact-button-wrapper">
+							<span><input ng-click='submitContactForm(contactForm)' type="submit" value="Submit"  class="myButton" /></span>
+						</div>
 					</div>
 				</form>
 				<div class="clear"></div>
@@ -52,7 +54,7 @@
 				<div class="company_address">
 					<h2>Get in Touch With Us</h2>
 					<h3>Address</h3>
-					<p>2 Sulaiman Terrace,</p>
+					<p>2, Sulaiman Terrace,</p>
 					<p>Jawatta Road,</p>
 					<p>Colombo 5.</p>
 					<div class="seperator"></div>
