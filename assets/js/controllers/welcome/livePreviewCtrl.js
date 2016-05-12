@@ -9,12 +9,13 @@
     'use strict';
     angular.module('app')
         .controller('livePreviewCtrl',
-        ['$scope', 'welcomeTemplatesResource', 'userProfileService','$stateParams','$mdDialog','mySharedService','$http','$state','$auth',
+        ['$scope', 'welcomeTemplatesResource', 'userProfileService','$stateParams','$mdDialog','mySharedService','$http','$state','ME_APP_SERVER',
+        '$auth',
             livePreviewCtrl
         ]);
 
 
-    function livePreviewCtrl($scope,welcomeTemplatesResource, userProfileService,$stateParams,$mdDialog,mySharedService,$http,$state,$auth) {
+    function livePreviewCtrl($scope,welcomeTemplatesResource, userProfileService,$stateParams,$mdDialog,mySharedService,$http,$state,ME_APP_SERVER,$auth) {
         welcomeTemplatesResource.getTemplates().success(function(data){
             $scope.templates = data;
         });
@@ -38,40 +39,34 @@
             });
         };
 
-        $scope.open = function(templateId, templateUrl, templateName,templateCategory) {
-            if ($auth.isAuthenticated()) {
-                $scope.deleteFile($stateParams.userId, $stateParams.appId);
+        $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory) {
+                if ($auth.isAuthenticated()) {
+                       $scope.deleteFile($stateParams.userId, $stateParams.appId);
+                    var tempAppParams = {
+                        'appName': $scope.appName,
+                        'templateId': templateId,
+                        'templateName': templateName,
+                        'templateUrl':templateUrl,
+                        'templateCategory' : templateCategory,
+                        'userId':$auth.getPayload().id
 
-                $mdDialog.show({
-                    controller: DialogController,
-                    templateUrl: 'user/welcome/startAppWindowView.html',
-                    parent: angular.element(document.body),
-                    //targetEvent: ev,
-                    resolve: {
-                        initialData: ["$q", function ($q) {
-                            return $q.all({
-                                selectedTemplateUrl: templateUrl,
-                                selectedTemplateId: templateId,
-                                selectedTemplateName: templateName,
-                                selectedTemplateCategory : templateCategory
-                            })
-                        }]
-                    },
-                    clickOutsideToClose: true
-                })
-                    .then(function (answer) {
-                        $scope.status = 'You said the information was "' + answer + '".';
-                    }, function () {
-                        $scope.status = 'You cancelled the dialog.';
-                    });
-            }else{
-                $state.go('anon.login');
-            }
-            ;
-            $scope.profileView = function () {
-                return userProfileService.showUserProfileDialog();
-            }
-        }
+                    };
+                        welcomeTemplatesResource.createApp(tempAppParams).then(function(data){
+
+                            var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+
+                            mySharedService.prepForBroadcast(url);
+                            $state.go('user.editApp',{appId:data.data.appId});
+                        });
+                    $mdDialog.hide(answer);
+                }else{
+                    $state.go('anon.login');
+                }
+                $scope.profileView = function () {
+                    return userProfileService.showUserProfileDialog();
+                }
+        };
     }
 
     function DialogController($scope, $mdDialog,$auth,$state,initialData,welcomeTemplatesResource,mySharedService,ME_APP_SERVER) {
@@ -90,27 +85,5 @@
             $mdDialog.cancel();
         };
 
-
-        $scope.answer = function(answer) {
-
-            var tempAppParams = {
-                'appName': $scope.appName,
-                'templateId': initialData.selectedTemplateId,
-                'templateName': initialData.selectedTemplateName,
-                'templateUrl':initialData.selectedTemplateUrl,
-                'templateCategory' : initialData.selectedTemplateCategory,
-                'userId':$auth.getPayload().id
-
-            };
-                welcomeTemplatesResource.createApp(tempAppParams).then(function(data){
-
-                    var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                        +'/templates/'+data.data.appId+'/?'+new Date().getTime();
-
-                    mySharedService.prepForBroadcast(url);
-                    $state.go('user.editApp',{appId:data.data.appId});
-                });
-            $mdDialog.hide(answer);
-        };
     };
 })();
