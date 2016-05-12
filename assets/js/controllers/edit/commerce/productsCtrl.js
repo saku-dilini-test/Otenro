@@ -69,11 +69,11 @@
         else{
                       $scope.selectedTab = current;
                       $scope.variants=[{
-                          sku: "#1",
+                          sku: product.sku,
                           name: product.name,
                           sizeOrweight: "10",
                           price: "100",
-                          qty: "1"
+                          qty: "001"
                       }];
         }
         };

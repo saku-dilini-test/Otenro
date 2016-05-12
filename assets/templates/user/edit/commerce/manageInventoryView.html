@@ -13,18 +13,18 @@
                             </fieldset>
                         </div>
                     </div>
-
                     <div class="md-dialog-main">
+                        <form class="allItems" novalidate>
+
                         <table class="me-checkbox-table">
                             <thead>
                                 <th class="checkbox-column">
                                     <md-checkbox md-no-ink  aria-label="Check all"></md-checkbox>
                                 </th>
-                                <th class="id-column">sku#</th>
+                                <th>sku#</th>
                                 <th class="item-name-column">item name</th>
-                                <th>qty</th>
+                                <th class="id-column">qty</th>
                                 <th>price</th>
-                                <th>sale</th>
                                 <th>sale price</th>
                             </thead>
                             <tbody>
@@ -32,23 +32,22 @@
                                     <td class="checkbox-row">
                                         <md-checkbox md-no-ink  aria-label="Check one item"></md-checkbox>
                                     </td>
-                                    <td><input type="text" ng-model="inventory.sku" /></td>
+                                    <td ng-model="inventory.sku">{{inventory.sku}}</td>
                                     <td><a href="" ng-model="inventory.name" ng-click="gotoedit(inventory)">{{inventory.name}}</a></td>
-                                    <td><input type="number" ng-model="inventory.quantity" /></td>
+                                    <td><input type="number" name="quantity" ng-model="inventory.quantity" /></td>
                                     <td><input type="number" ng-model="inventory.price" /></td>
-                                    <td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()"><input type="number" ng-model="inventory.sale"/></a></td>
+                                    <!--<td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()"><input type="number" ng-model="inventory.sale"/></a></td>-->
                                     <td class="sale-yes"><input type="number" ng-model="inventory.discount" /></td>
                                 </tr>
                             </tbody>
                         </table>
+                            </form>
                     </div>
 
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
                             <md-button class="me-default-button">export as csv</md-button>
-                            <md-button class="me-default-button">refunded</md-button>
-                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">fulfilled</md-button>
+                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">save</md-button>
                         </div>
                     </div>
 
@@ -82,24 +81,6 @@
                             </fieldset>
                         </form>
                     </div>
-                </md-tab-body>
-            </md-tab>
-            <md-tab>
-                <md-tab-label>orders fulfilled</md-tab-label>
-                <md-tab-body>
-
-                </md-tab-body>
-            </md-tab>
-            <md-tab>
-                <md-tab-label>orders unfulfilled</md-tab-label>
-                <md-tab-body >
-
-                </md-tab-body>
-            </md-tab>
-            <md-tab>
-                <md-tab-label>orders refunded</md-tab-label>
-                <md-tab-body>
-
                 </md-tab-body>
             </md-tab>
         </md-tabs>
