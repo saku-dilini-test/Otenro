@@ -191,6 +191,8 @@ select{
     resize: none;
     text-shadow: 1px 0 1px #FFF;
     width: 100%;
+    float: left;
+    margin-right: -10px;
 }
 
 input[type='text'] + .me-dollar-placeholder,
