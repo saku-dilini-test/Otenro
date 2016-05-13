@@ -37,7 +37,8 @@ angular.module('app', [
   'ui.tree',
   'ui.mask',
   'uiGmapgoogle-maps',
-  'angularInlineEdit'
+  'angularInlineEdit',
+  'ui.bootstrap.datetimepicker'
 
 
 ]).run(function($rootScope, $state, $auth,Auth) {
