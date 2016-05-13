@@ -43,6 +43,8 @@
                     return stylesService.showStyleEditBackgorundImageDialog(clickTitle);
                 if ('publishArticle' == clickTitle)
                     return articleService.showPublishArticleDialog(clickTitle);
+                if ('previewArticles' == clickTitle)
+                    return articleService.showPreviewArticslesDilog(clickTitle);
             }
         }
     }

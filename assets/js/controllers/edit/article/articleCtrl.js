@@ -1,14 +1,74 @@
 /**
  * Created by amila on 5/9/16.
+ *
+ * Note : If you call Article Controller, You should define "initialData"
+ *
  */
 
 
 (function() {
     'use strict';
     angular.module("appEdit").controller("ArticleCtrl", [
-        '$scope','$mdDialog','$auth','$rootScope','articleService','toastr','ME_APP_SERVER',ArticleCtrl]);
+        '$scope','$mdDialog','$auth','$rootScope','articleService','toastr','ME_APP_SERVER','initialData',ArticleCtrl]);
 
-    function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,ME_APP_SERVER) {
+    function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,ME_APP_SERVER,initialData) {
+
+        $scope.appId = $rootScope.appId;
+        $scope.tmpImage = [ null , null];
+        $scope.mainImg = null;
+        $scope.isNewArticle = false;
+
+        if(initialData == 'publishArticle'){
+            $scope.isNewArticle = true;
+
+        }else if(initialData == 'previewArticles'){
+            articleService.getArticleList($scope.appId)
+                .success(function (data) {
+                    $scope.articleList = data;
+                }).error(function (error) {
+                    toastr.error('ArticlesLoading Error', 'Message', {
+                        closeButton: true
+                    });
+                })
+        }else{
+            $scope.article = initialData;
+            $scope.serverImg = initialData.imageUrl;
+            $scope.mainImg = initialData.imageUrl;
+            $scope.picFile = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/article/'+initialData.imageUrl;
+        }
+
+        $scope.addImage = function(img){
+            var im = $scope.tmpImage;
+            for(var i=0 ; i < im.length ; i++){
+                if(im[i] == null) {
+                    im[i] = $scope.picFile;
+                    break;
+                }
+            }
+            $scope.tmpImage = im;
+            $scope.mainImg = img;
+            toastr.success('added Image', 'Message', {
+                closeButton: true
+            });
+        };
+
+        $scope.deleteImg = function(index){
+            $scope.tmpImage[index] = null;
+        };
+
+        $scope.setImage = function(img){
+
+            if(img == undefined){
+                toastr.error('Set Image', 'Warning', {
+                    closeButton: true
+                });
+            }else{
+                $scope.picFile = $scope.tmpImage[img];
+                $scope.mainImg = $scope.tmpImage[img];
+            }
+        };
+
+
 
         $scope.publishArticle = function(file,article){
 
@@ -41,7 +101,12 @@
             }
             else {
 
-                articleService.publishArticle(file, article.title, article.desc, $rootScope.appId)
+                var isImageUpdate = true;
+                if($scope.mainImg == $scope.serverImg){
+                    isImageUpdate = false;
+                }
+
+                articleService.publishArticle(file,article.id,article.title, article.desc, $rootScope.appId,$scope.isNewArticle,isImageUpdate)
                     .progress(function (evt) {
                         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                         console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
@@ -49,7 +114,8 @@
                         toastr.success('Successfully Publish Article ', 'Saved', {
                             closeButton: true
                         });
-                        $mdDialog.hide();
+
+                        articleService.showPreviewArticslesDilog('previewArticles');
                     }).error(function (error) {
                         toastr.error('Article Publish Error', 'Warning', {
                             closeButton: true
@@ -59,40 +125,24 @@
 
         }
 
-        $scope.tmpImage = [ null , null];
-        $scope.mainImg = null;
+        $scope.editArticle = function(article){
+            articleService.showPublishArticleDialog(article);
 
-        $scope.addImage = function(img){
-            var im = $scope.tmpImage;
-            for(var i=0 ; i < im.length ; i++){
-                if(im[i] == null) {
-                    im[i] = $scope.picFile;
-                    break;
-                }
-            }
-            $scope.tmpImage = im;
-            $scope.mainImg = img;
-            toastr.success('added Image', 'message', {
-                closeButton: true
-            });
-        };
+        }
 
-        $scope.deleteImg = function(index){
-            $scope.tmpImage[index] = null;
-        };
+        $scope.deleteArticle = function(index,article){
 
-        $scope.setImage = function(img){
-
-            if(img == undefined){
-                toastr.error('Set Image', 'Warning', {
-                    closeButton: true
+            $scope.articleList.splice(index, 1);
+            articleService.deleteArticle(article).success(function(data) {
+                    toastr.success(data.message, 'Message', {
+                        closeButton: true
+                    });
+                }).error(function(err) {
+                    toastr.error(err, 'Warning', {
+                        closeButton: true
+                    });
                 });
-            }else{
-                $scope.picFile = $scope.tmpImage[img];
-            }
-        };
-
-        $scope.thumbPic = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/default.jpg';
+        }
 
         $scope.answer = function() {
             $mdDialog.hide();

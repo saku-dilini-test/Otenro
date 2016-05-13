@@ -1,0 +1,36 @@
+<md-dialog aria-label="publish-article">
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>previews articles</h1>
+        </div>
+
+        <div class="md-dialog-main clearfix">
+
+            <table class="table">
+                <thead>
+                <th>Title</th>
+                <th>Publish Date</th>
+                <th>Action</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="article in articleList">
+                    <td>{{article.title}}</td>
+                    <td>{{article.createdAt}}</td>
+                    <td>
+                        <a data-ng-click="editArticle(article)">Edit</a> /
+                        <a data-ng-click="deleteArticle($index,article)">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+            <div class="md-dialog-buttons">
+                <div class="inner-section">
+                    <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                    <md-button class="me-default-button" ng-click="answer('cancel')">OK</md-button>
+                </div>
+            </div>
+
+    </md-dialog-content>
+</md-dialog>

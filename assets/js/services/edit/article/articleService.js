@@ -4,34 +4,51 @@
 
 (function() {
     angular.module('appEdit').service('articleService', [
-        '$mdDialog','$http','Upload','SERVER_URL', articleService
+        '$mdDialog','$http','$rootScope','Upload','SERVER_URL', articleService
     ]);
 
-    function articleService($mdDialog,$http,Upload,SERVER_URL) {
+    function articleService($mdDialog,$http,$rootScope,Upload,SERVER_URL) {
         return {
-            showPublishArticleDialog: function() {
+            showPublishArticleDialog: function(data) {
                 return $mdDialog.show({
                     controller: 'ArticleCtrl',
                     templateUrl: 'user/edit/article/publishArticleView.html',
-                    clickOutsideToClose: true
-                }).then(function(answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
+                    clickOutsideToClose: true,
+                    locals : {
+                        initialData : data
+                    }
                 });
             },
-            publishArticle : function(data){
-                return $http.post(SERVER_URL+ 'edit/publishArticle',data);
+            showPreviewArticslesDilog: function(data) {
+                return $mdDialog.show({
+                    controller: 'ArticleCtrl',
+                    templateUrl: 'user/edit/article/previewArticles.html',
+                    clickOutsideToClose: true,
+                    locals : {
+                        initialData : data
+                    }
+                });
             },
-            publishArticle: function(file,title,desc,appId){
+            publishArticle: function(file,id,title,desc,appId,isNewArticle,isImageUpdate){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/publishArticle',
                     fields: {
+                        'id' : id,
                         'title' : title,
                         'desc' : desc,
-                        'appId' : appId
+                        'appId' : appId,
+                        'isNewArticle' : isNewArticle,
+                        'isImageUpdate' : isImageUpdate
                     },
                     file: file
                 });
             },
+            getArticleList: function(){
+                return $http.get(SERVER_URL+ 'edit/getArticles?appId='+$rootScope.appId);
+            },
+            deleteArticle: function(data){
+                return $http.post(SERVER_URL+ 'edit/deleteArticle',data);
+            }
         };
     }
 })();

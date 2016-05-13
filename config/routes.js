@@ -151,9 +151,9 @@ module.exports.routes = {
     /**
      * Edit / Article Data
      */
-
+    'GET /edit/getArticles' :'edit/article/articleController.getArticles',
     'POST /edit/publishArticle' : 'edit/article/articleController.publishArticle',
-
+    'POST /edit/deleteArticle' : 'edit/article/articleController.deleteArticle',
 
     /**
      *InventoryController
