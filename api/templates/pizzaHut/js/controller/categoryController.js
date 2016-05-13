@@ -11,7 +11,6 @@ mobileApp.controller('categoryController', function($scope, $rootScope, $transla
     $http.get(SERVER_URL + '/templates/getSpecificChild?appId='+$rootScope.appId+'&mainId='+$routeParams.id)
         .success(function(data) {
             $scope.requestCategory = data;
-            console.log(data);
         }).error(function(err) {
             alert('warning', "Unable to get templates", err.message);
         });

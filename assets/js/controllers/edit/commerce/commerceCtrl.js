@@ -6,7 +6,6 @@
 
     function CommerceCtrl($scope, $mdDialog,toastr, commerceService,currencyService,publishService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER) {
         $scope.selectedTab = 0;
-        $scope.amPm = "am";
         $scope.statusList =[
         {status : "Closed"},{status : "Open"}
         ];
@@ -19,27 +18,13 @@
 //                        };
 
         $scope.openHours = [
-        {day:'Sunday',
-        open: '5.00',
-        close: '9.00'},
-        {day:'Monday',
-        open:'5.00',
-        close: '9.00'},
-        {day:'Tuesday',
-        open:'5.00',
-        close: '9.00'},
-        {day:'Wednesday',
-        open:'5.00',
-        close: '9.00'},
-        {day:'Thursday',
-        open:'5.00',
-        close: '9.00'},
-        {day:'Friday',
-        open:'5.00',
-        close: '9.00'},
-        {day:'Saturday',
-        open:'5.00',
-        close: '9.00'}];
+        {day:'Sunday'},
+        {day:'Monday'},
+        {day:'Tuesday'},
+        {day:'Wednesday'},
+        {day:'Thursday'},
+        {day:'Friday'},
+        {day:'Saturday'}];
         $scope.miniLightBoxShow = false;
         $scope.shippingOptionParams = {
               secondLocked:  true,
@@ -194,22 +179,34 @@
          });
 
          $scope.saveStoreSettings = function(current,storeSettings,openHours){
-         if(openHours == 'undefined' || storeSettings.orderNumber == null || storeSettings.address == null || storeSettings.connectDomain == null ||
+         console.log(storeSettings.measurementStandard);
+         if(storeSettings.orderNumber == null || storeSettings.address == null ||
          storeSettings.searchEngineDesc == null){
             toastr.error(' warning',"Please fill all the fields", {closeButton: true});
          }
          else{
 
          for(var i=0; i<$scope.currencyList.length; i++){
-                                 if($scope.storeSettings.currency == $scope.currencyList[i].sign){
-                                     $scope.options = $scope.currencyList[i];
-                                 }
-                             }
+             if($scope.storeSettings.currency == $scope.currencyList[i].sign){
+                 $scope.options = $scope.currencyList[i];
+             }
+         }
          storeSettings.currencySign=$scope.options.sign,
          storeSettings.currency=$scope.options.currency,
          storeSettings.userId = $scope.userId;
          storeSettings.appId = $rootScope.appId;
          storeSettings.OpenHours = openHours;
+
+          var reqParams={
+              currencySign:$scope.options.sign,
+              currency:$scope.options.currency,
+              appId: $rootScope.appId
+          };
+          currencyService.setCurrency(reqParams).
+          success(function(data) {
+          }).error(function(err) {
+                  toastr.error(' warning',"Unable to get templates", {closeButton: true});
+          });
 
          commerceService.saveStoreSettings(storeSettings).
             success(function(data){
@@ -228,6 +225,7 @@
             success(function(data){
                 $scope.storeSettings = data[0];
                 $scope.storeSettings.currency = data[0].currencySign;
+                $scope.openHours = [data[0].openHours];
             }).error(function(err){
                 toastr.error(' warning',"Unable to get Store Settings", {closeButton: true});
             });
