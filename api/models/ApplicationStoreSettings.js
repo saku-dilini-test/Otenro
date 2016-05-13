@@ -21,11 +21,11 @@
             currencySign:{
                type: 'string'
             },
-            measurementStandards:{
+            measurementStandard:{
                 type: 'string'
             },
             orderNumber:{
-                type: 'string'
+                type: 'integer'
             },
             expressCheckout:{
                  type: 'boolean'
