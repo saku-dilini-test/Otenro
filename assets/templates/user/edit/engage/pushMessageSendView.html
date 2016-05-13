@@ -16,40 +16,21 @@
                 <label>Scheduled Message</label>
             </fieldset>
             <div class="clearfix">
-                <fieldset class="col-4">
-                    <label>month</label>
-                    <md-select ng-model="someVal1">
-                        <md-option value="Basic">Basic</md-option>
-                        <md-option value="Advanced">Advanced</md-option>
-                    </md-select>
-                </fieldset>
-                <fieldset class="col-4">
-                    <label>day</label>
-                    <md-select ng-model="someVal2">
-                        <md-option value="Basic">Basic</md-option>
-                        <md-option value="Advanced">Advanced</md-option>
-                    </md-select>
-                </fieldset>
-                <fieldset class="col-4">
-                    <label>year</label>
-                    <md-select ng-model="someVal3">
-                        <md-option value="Basic">Basic</md-option>
-                        <md-option value="Advanced">Advanced</md-option>
-                    </md-select>
-                </fieldset>
-                <fieldset class="col-4 reset-margin">
-                    <label>time</label>
-                    <md-select ng-model="someVal4">
-                        <md-option value="Basic">Basic</md-option>
-                        <md-option value="Advanced">Advanced</md-option>
-                    </md-select>
-                </fieldset>
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-group"><input type="text" class="form-control" data-ng-model="data.dateDropDownInput">
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                <md-button class="me-default-button">save</md-button>
+                <md-button class="me-default-button" ng-click="save(data)">save</md-button>
             </div>
         </div>
     </md-dialog-content>

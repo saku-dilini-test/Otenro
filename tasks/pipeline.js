@@ -35,6 +35,7 @@ var cssFilesToInject = [
 
   'styles/app.css',
   'styles/bootstrap.css',
+  '/vendor/angular-bootstrap-datetimepicker/src/css/datetimepicker.css',
   'styles/buildkit.css'
 ];
 
@@ -49,6 +50,8 @@ var jsFilesToInject = [
   'js/dependencies/angular.1.3.js',
   'vendor/jquery/jquery.js',
   'vendor/angular/angular.js',
+  'vendor/bootstrap/bootstrap.js',
+  'vendor/momentjs/moment.js',
   'vendor/**/*.js',
 
   // Dependencies like jQuery, or Angular are brought in here
