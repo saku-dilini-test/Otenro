@@ -1,21 +1,30 @@
 <div class="me-guest" >
-  <div class="me-guest-area" >
+  <div class="me-guest-area" novalidate>
     <form class="form-signin" accept-charset="UTF-8" role="form" name="register">
       <legend>Register</legend>
       <fieldset>
         <label>First Name</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
         <input type="text" name="fname" ng-model="user.fname"  required/>
+        <span class="help-block" ng-show="register.fname.$error.required">
+          *
+        </span>
       </fieldset>
       <fieldset>
         <label>Last Name</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
         <input type="text" name="fname" ng-model="user.lname"  required/>
+        <span class="help-block" ng-show="register.fname.$error.required">
+          *
+        </span>
       </fieldset>
       <fieldset>
         <label> Email </label>
         <img src="../../../images/question-mark.svg" width="12" height="12" />
         <input name="email" type="email" ng-model="user.email" required/>
+        <span class="help-block" ng-show="register.fname.$error.required">
+          *
+        </span>
         <span class="help-block" ng-show="register.email.$dirty && register.email.$invalid">
           Enter a proper email
         </span>
@@ -25,6 +34,9 @@
         <label>Password</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12">
         <input  name="password" type="password" ng-model="user.password" ng-minlength="7" compare-to="user.password_confirm" required>
+        <span class="help-block" ng-show="register.fname.$error.required">
+          *
+        </span>
         <span class="help-block " ng-show="register.password.$error.minlength">
            <span ng-show="register.password.$error.minlength">Password should have at least 7 characters.</span>
         </span>
@@ -35,15 +47,16 @@
         <label> Confirm Password</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
         <input  name="password_confirm" ng-model="user.password_confirm" type="password" />
+        <span class="help-block" ng-show="register.fname.$error.required">
+          *
+        </span>
         <p class="help-block" ng-show="user.password_confirm.$dirty && user.password_confirm.$invalid">
           Please match the password.
         </p>
 
-
         <span class="help-block " ng-show="register.password_confirm.$dirty">
 
             <span ng-show="register.password.$error.compareTo">Password must match.</span>
-            <span ng-show="register.password_confirm.$error.required">Confirmation password is required.</span>
         </span>
       </fieldset>
       <br>
