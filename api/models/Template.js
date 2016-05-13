@@ -25,7 +25,7 @@ module.exports = {
             template_name : 'codecanyon',
             imageUrl : 'resturant/codecanyon.png',
             templateFilesPath:'templates/codecanyon',
-            templateCategory:'business'
+            templateCategory:'1'
         },
         //{
         // template_name : 'tokoyoapp',
@@ -40,28 +40,32 @@ module.exports = {
         {
             template_name : 'pizzaHut',
             imageUrl : 'resturant/pizzHut.png',
-            templateFilesPath:'templates/pizzaHut'
+            templateFilesPath:'templates/pizzaHut',
+            templateCategory:'2'
         },
         {
             template_name : 'florist',
             imageUrl : 'resturant/florist.png',
-            templateFilesPath:'templates/florist'
+            templateFilesPath:'templates/florist',
+            templateCategory:'3'
         },
         {
             template_name : 'pizzaNew',
             imageUrl : 'resturant/pizzNew.png',
-            templateFilesPath:'templates/pizzaNew'
+            templateFilesPath:'templates/pizzaNew',
+            templateCategory:'3'
         },
         {
             template_name : 'foodDemoApp',
             imageUrl : 'foodDeliver/foodDeliver.png',
-            templateFilesPath:'templates/foodDemoApp'
+            templateFilesPath:'templates/foodDemoApp',
+            templateCategory:'2'
         },
         {
             template_name : 'hkRising',
             imageUrl : 'hkRising/hkRising.png',
             templateFilesPath:'templates/hkRising',
-            templateCategory:'media'
+            templateCategory:'3'
         }
     ]
 };

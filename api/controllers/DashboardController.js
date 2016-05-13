@@ -30,15 +30,24 @@ module.exports = {
     },
     getSelectedCategory: function(req,res){
         var categoryId = req.body.id;
-        var searchApp = {
-            categoryId: categoryId
-        };
+        if (categoryId == null){
 
-        console.log(searchApp);
-        Template.find(searchApp, function(err, apps) {
-            if (err) return done(err);
-            res.send(apps);
-        });
+            Template.find().exec(function(err, apps) {
+                if (err) res.send(err);
+                res.send(apps);
+            });
+        }else{
+            var searchApp = {
+                templateCategory: categoryId
+            };
+
+            console.log(searchApp);
+            Template.find(searchApp, function(err, apps) {
+                if (err) return done(err);
+                res.send(apps);
+            });
+        }
+
     },
     getSelectedCategoryDashboard: function(req,res){
         var categoryId = req.body.id;
@@ -49,7 +58,7 @@ module.exports = {
             };
         }else{
             var searchApp = {
-                categoryId: categoryId,
+                templateCategory: categoryId,
                 userId: userId
             };
         }
