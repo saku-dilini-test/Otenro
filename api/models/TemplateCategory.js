@@ -10,20 +10,20 @@ module.exports = {
         category_name:{
             type: 'string'
         },
-        imageUrl: {
+        templateCategory: {
             type: 'string'
         }
     },
     seedData: [
         {
             category_name : 'Business',
-            imageUrl : 'resturant/codecanyon.png'
-        },{
-            category_name : 'Port Folio',
-            imageUrl : 'resturant/codecanyon.png'
-        },{
+            templateCategory : '1'
+            },{
+                category_name : 'Port Folio',
+                templateCategory : '2'
+            },{
             category_name : 'Media',
-            imageUrl : 'resturant/codecanyon.png'
+            templateCategory : '3'
         }
 
     ]

@@ -13,7 +13,7 @@
         <ul  class="template-categories"  >
             <li><a ng-click="getCategoryData();" >All</a></li>
             <li ng-repeat="item in category">
-                <a ng-click="getCategoryData(item.id);" >{{item.category_name}}</a>
+                <a ng-click="getCategoryData(item.templateCategory);" >{{item.category_name}}</a>
             </li>
         </ul>
     </div>

@@ -31,7 +31,7 @@ module.exports = {
     getSelectedCategory: function(req,res){
         var categoryId = req.body.id;
         var searchApp = {
-            categoryId: categoryId
+            templateCategory: categoryId
         };
 
         console.log(searchApp);
@@ -49,7 +49,7 @@ module.exports = {
             };
         }else{
             var searchApp = {
-                categoryId: categoryId,
+                templateCategory: categoryId,
                 userId: userId
             };
         }
