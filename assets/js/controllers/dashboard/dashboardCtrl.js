@@ -10,12 +10,12 @@
     'use strict';
     angular.module('app')
         .controller('DashboardCtrl', ['$scope','dashboardService','toastr','$state','ME_APP_SERVER',
-            'mySharedService', DashboardCtrl]);
+            'mySharedService','$rootScope', DashboardCtrl]);
 
-    function DashboardCtrl($scope, dashboardService,toastr,$state,ME_APP_SERVER,mySharedService) {
+    function DashboardCtrl($scope, dashboardService,toastr,$state,ME_APP_SERVER,mySharedService,$rootScope) {
 
         dashboardService.getAllApps().success(function (data) {
-            $scope.widgets=data;
+            $rootScope.widgets=data;
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
                 closeButton: true
