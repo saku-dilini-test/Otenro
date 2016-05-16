@@ -18,7 +18,11 @@
 
         appEditResource.getSelectedApp({appId: $stateParams.appId})
             .success(function(data) {
-                if(data.templateCategory == 'media') {
+                /**
+                 * TODO : This should change later according type of template category
+                 * @type {boolean}
+                 */
+                if(data.templateCategory == "3") {
                     $scope.isAppMediaCategory = true;
                 }
             }).error(function(err) {
