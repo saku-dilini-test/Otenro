@@ -71,17 +71,21 @@ angular.module('starter.controllers', [])
           });
     })
 
-    .controller('articleCtrl', function($scope,$http,constants,$rootScope,$stateParams) {
+    .controller('articleCtrl', function($scope,$http,constants,$rootScope,$stateParams,$timeout) {
 
       $scope.appId = $rootScope.appId;
 
-      $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$scope.appId)
-          .success(function(data) {
-              console.log(data);
-            $scope.artilceList = data;
-          }).error(function(err) {
-            alert('loading err');
-          });
+        $scope.getArticleList = function(){
+            $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$rootScope.appId)
+                .success(function(data) {
+                    $scope.artilceList = data;
+                }).error(function(err) {
+                    alert('loading err');
+                });
+        }
+        $timeout( function(){
+            $scope.getArticleList();
+        }, 1000);
 
         $http.get(constants.SERVER_URL + '/templates/getArticleById?articleId='+$stateParams.articleId)
             .success(function(data) {
