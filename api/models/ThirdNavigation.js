@@ -23,7 +23,7 @@ module.exports = {
         },
         childId: {
             type : 'string',
-            required: true
+//            required: true
         },
         briefDesc:{
             type : 'string',

@@ -130,6 +130,7 @@ module.exports = {
                 var secondNaviList = appInitData.secondNavi;
                 for (var i = 0; i < secondNaviList.length; i++) {
                     var scondNaviAttribute = secondNaviList[i].attribute;
+                    scondNaviAttribute.templateName = appInitData.templateName;
                     scondNaviAttribute.appId = app.id;
                     var thirdNaviList = secondNaviList[i].thirdNavi;
                     SecondNavigation.create(scondNaviAttribute).exec(function (err, secondN) {

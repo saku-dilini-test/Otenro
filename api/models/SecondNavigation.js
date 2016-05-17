@@ -14,6 +14,9 @@ module.exports = {
         name : {
             type: 'string'
         },
+        templateName:{
+            type: 'string'
+        },
         appId  : {
             type: 'string',
             //required: true
