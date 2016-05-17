@@ -35,6 +35,9 @@ module.exports = {
         if(templateName == 'foodDemoApp'){
             loginPath = '/#/app/login';
         }
+        if(templateName == 'hkRising'){
+            loginPath = '/#/app/home/active';
+        }
 
         var application ={
             appName : req.body.appName,
