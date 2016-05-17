@@ -88,7 +88,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/aboutus',
       views: {
         'menuContent': {
-          templateUrl: 'templates/aboutus.html'
+          templateUrl: 'templates/aboutus.html',
+          controller: 'aboutUsCtrl'
         }
       }
     })
@@ -96,8 +97,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/contactus',
       views: {
         'menuContent': {
-          templateUrl: 'templates/contactus.html'
-          //controller: 'PlaylistsCtrl'
+          templateUrl: 'templates/contactus.html',
+          controller: 'contactUsCtrl'
         }
       }
     })
