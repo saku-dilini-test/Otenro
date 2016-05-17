@@ -38,7 +38,7 @@ angular.module('app', [
   'ui.mask',
   'uiGmapgoogle-maps',
   'angularInlineEdit',
-  'ui.bootstrap.datetimepicker'
+  'ADM-dateTimePicker'
 
 
 ]).run(function($rootScope, $state, $auth,Auth) {

@@ -35,7 +35,6 @@ var cssFilesToInject = [
 
   'styles/app.css',
   'styles/bootstrap.css',
-  '/vendor/angular-bootstrap-datetimepicker/src/css/datetimepicker.css',
   'styles/buildkit.css'
 ];
 
