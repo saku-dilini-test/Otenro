@@ -319,11 +319,75 @@
             $mdDialog.hide();
         };
 
-        $scope.manageEmailSettings = function(email){
+        $scope.saveEmailDeliInfo = function(email){
             console.log(email);
-            commerceService.manageEmailSettings( email)
+            commerceService.saveEmailDeliInfo( email)
                 .success(function(data) {
-                    $mdDialog.hide();
+                    console.log(data);
+                    toastr.success('Email Settings has been changed ', 'Success', {
+                        closeButton: true
+                    });
+
+                }).error(function(err) {
+                toastr.error('Unable to Create', 'Warning', {
+                    closeButton: true
+                });
+            })
+
+        };
+        $scope.saveEmailHandF = function(email){
+            console.log(email);
+            commerceService.saveEmailHandF( email)
+                .success(function(data) {
+                    console.log(data);
+                    toastr.success('Email Settings has been changed ', 'Success', {
+                        closeButton: true
+                    });
+
+                }).error(function(err) {
+                toastr.error('Unable to Create', 'Warning', {
+                    closeButton: true
+                });
+            })
+
+        };
+
+        $scope.saveEmailOConfirm = function(email){
+            console.log(email);
+            commerceService.saveEmailOConfirm( email)
+                .success(function(data) {
+                    console.log(data);
+                    toastr.success('Email Settings has been changed ', 'Success', {
+                        closeButton: true
+                    });
+
+                }).error(function(err) {
+                toastr.error('Unable to Create', 'Warning', {
+                    closeButton: true
+                });
+            })
+
+        };
+        $scope.saveEmailOFullFilled = function(email){
+            console.log(email);
+            commerceService.saveEmailOFullfilled( email)
+                .success(function(data) {
+                    console.log(data);
+                    toastr.success('Email Settings has been changed ', 'Success', {
+                        closeButton: true
+                    });
+
+                }).error(function(err) {
+                toastr.error('Unable to Create', 'Warning', {
+                    closeButton: true
+                });
+            })
+
+        };
+        $scope.saveEmailOrderRefund = function(email){
+            console.log(email);
+            commerceService.saveEmailOFullfilled( email)
+                .success(function(data) {
                     console.log(data);
                     toastr.success('Email Settings has been changed ', 'Success', {
                         closeButton: true

@@ -6,7 +6,69 @@
 
 module.exports = {
 
-    manageEmailSettings : function(req,res){
+    saveEmailDeliInfo : function(req,res){
+
+        console.log(req.body);
+
+        var appId = req.param('appId');
+        var saveData = req.body;
+        saveData.appId = appId;
+
+        UserEmail.create(saveData).exec(function(err, appProduct) {
+            if (err) res.send(err);
+            res.send({
+                message: "Email Settings has been added"
+            });
+        });
+    },
+    saveEmailHandF : function(req,res){
+
+        console.log(req.body);
+
+        var appId = req.param('appId');
+        var saveData = req.body;
+        saveData.appId = appId;
+
+        UserEmail.create(saveData).exec(function(err, appProduct) {
+            if (err) res.send(err);
+            res.send({
+                message: "Email Settings has been added"
+            });
+        });
+    },
+
+    saveEmailOConfirm : function(req,res){
+
+        console.log(req.body);
+
+        var appId = req.param('appId');
+        var saveData = req.body;
+        saveData.appId = appId;
+
+        UserEmail.create(saveData).exec(function(err, appProduct) {
+            if (err) res.send(err);
+            res.send({
+                message: "Email Settings has been added"
+            });
+        });
+    },
+
+    saveEmailOFullFilled : function(req,res){
+
+        console.log(req.body);
+
+        var appId = req.param('appId');
+        var saveData = req.body;
+        saveData.appId = appId;
+
+        UserEmail.create(saveData).exec(function(err, appProduct) {
+            if (err) res.send(err);
+            res.send({
+                message: "Email Settings has been added"
+            });
+        });
+    },
+    saveEmailOrderRefund : function(req,res){
 
         console.log(req.body);
 

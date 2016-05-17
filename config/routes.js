@@ -168,8 +168,12 @@ module.exports.routes = {
      * EmailController
      */
 
-    'POST /edit/manageEmailSettings': 'edit/commerce/EmailController.manageEmailSettings',
+    'POST /edit/saveEmailDeliInfo': 'edit/commerce/EmailController.saveEmailDeliInfo',
     'POST /edit/getEmailSettings': 'edit/commerce/EmailController.getEmailSettings',
+    'POST /edit/saveEmailHandF': 'edit/commerce/EmailController.saveEmailHandF',
+    'POST /edit/saveEmailOConfirm': 'edit/commerce/EmailController.saveEmailOConfirm',
+    'POST /edit/saveEmailOFullFilled': 'edit/commerce/EmailController.saveEmailOFullFilled',
+    'POST /edit/saveEmailOrderRefund': 'edit/commerce/EmailController.saveEmailOrderRefund',
 
     /**
      * ShippingController
