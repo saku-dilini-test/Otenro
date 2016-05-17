@@ -179,7 +179,7 @@
          });
 
          $scope.saveStoreSettings = function(current,storeSettings,openHours){
-         console.log(storeSettings.measurementStandard);
+         console.log(openHours);
          if(storeSettings.orderNumber == null || storeSettings.address == null ||
          storeSettings.searchEngineDesc == null){
             toastr.error(' warning',"Please fill all the fields", {closeButton: true});
@@ -224,6 +224,7 @@
             commerceService.showStoreSettings($rootScope.appId).
             success(function(data){
                 $scope.storeSettings = data[0];
+                console.log(data[0].openHours);
                 $scope.storeSettings.currency = data[0].currencySign;
                 $scope.openHours = [data[0].openHours];
             }).error(function(err){
