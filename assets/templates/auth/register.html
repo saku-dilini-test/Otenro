@@ -46,11 +46,11 @@
       <fieldset class="password-area reset-margin-right">
         <label> Confirm Password</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
-        <input  name="passwordConfirm" ng-model="user.password_confirm" type="password" />
-        <span class="help-block" ng-show="register.password.$error.required">
+        <input  name="password_confirm" ng-model="user.password_confirm" type="password" required/>
+        <span class="help-block" ng-show="register.password_confirm.$error.required">
           *
         </span>
-        <span class="help-block " ng-show="register.passwordConfirm.$dirty">
+        <span class="help-block " ng-show="register.password_confirm.$dirty">
             <span ng-show="register.password.$error.compareTo">Password must match.</span>
         </span>
       </fieldset>

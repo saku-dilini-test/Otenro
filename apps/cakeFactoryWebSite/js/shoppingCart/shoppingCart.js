@@ -331,7 +331,6 @@ shoppingCart.prototype.clearItems = function () {
 
 // define checkout parameters
 shoppingCart.prototype.addCheckoutParameters = function (serviceName, merchantID, options) {
-
     // check parameters
     if (serviceName != "PayPal" && serviceName != "Google" && serviceName != "Stripe") {
         throw "serviceName must be 'PayPal' or 'Google' or 'Stripe'.";
@@ -404,8 +403,12 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         data["item_name_" + ctr] = item.name;
         data["quantity_" + ctr] = item.quantity;
         data["amount_" + ctr] = (item.price / this.oneDoller).toFixed(2);
-    }       
-
+    }
+    console.log("JLJKJLJJKJLJ")
+    console.log("JLJKJLJJKJLJ")
+    console.log("JLJKJLJJKJLJ "+ JSON.stringify(parms.options));
+    console.log("JLJKJLJJKJLJ")
+    console.log("JLJKJLJJKJLJ")
     data["notify_url"] = "http://tecclk.com/#/paymentInfo.html";
     console.log(data);
     // build form

@@ -22,9 +22,9 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ProductDetailCtrl',
-  function ($scope,SERVER_URL,categoryProductResources, $stateParams,$state,$rootScope) {
+  function ($scope,SERVER_URL,categoryProductResources, $stateParams,$state,$rootScope,DataService) {
     $scope.SERVER_URL = SERVER_URL;
-
+    $scope.paypalCart = DataService.cart;
     $scope.product =  categoryProductResources.productsDetails($stateParams.productId)
       .success(function (data) {
         $scope.product = data.result;
@@ -53,7 +53,14 @@ angular.module('starter.controllers', [])
         pieces: $scope.product.qty,
         price:Price
       });
+      //$scope.saveItems = function(item){
+      //  if(item.quantity == 0){
+      //    $scope.cart.addItem(item.sku, item.name, item.price, -1000);
+      //  }
+      //  $scope.cart.saveItems();
+      //};
       $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
+
       $state.go('tab.cart')
     }
 })
@@ -95,66 +102,71 @@ angular.module('starter.controllers', [])
         $scope.delivery = {usdAmount:totalAmountUSD};
         $scope.deliveryLocations = initialData.deliveryLocations.data.result;
         $scope.payNow = function(){
+          window.open('https://www.paypal.com/cgi-bin/webscr','_system','location=yes');
 
-        PaypalService.initPaymentUI().then(function () {
-            PaypalService.makePayment($scope.delivery.usdAmountWithDeliveryFee,"Total Amount").
-                then(function (response) {
-                    alert("Transaction is successful");
-                    paymentResources.paymentDetails({
-                        deliveryDetails:$scope.delivery,
-                        response:response.response,
-                        client:response.client,
-                        response_type:response.response_type,
-                        shoppingCart:$rootScope.cart.cartItems
-                    }).then(function(response){
-                      if(response.data.status == 'Success') {
-                        var cartArrayLength = $rootScope.cart.cartItems.length;
-                        $rootScope.cart.cartItems.splice(0,cartArrayLength);
-                        $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-                        $state.go("orderConfirmation", {orderId: response.data.result.response.id});
-                      }else{
-                        alert("Transaction error");
-                      }
-                    },function(error){
-                      alert("Transaction error");
-                    });
-                }, function (error) {
-                    alert("Transaction Canceled");
-                });
-      });
+      //  PaypalService.initPaymentUI().then(function () {
+      //      PaypalService.makePayment($scope.delivery.usdAmountWithDeliveryFee,"Total Amount").
+      //          then(function (response) {
+      //              alert("Transaction is successful");
+      //              paymentResources.paymentDetails({
+      //                  deliveryDetails:$scope.delivery,
+      //                  response:response.response,
+      //                  client:response.client,
+      //                  response_type:response.response_type,
+      //                  shoppingCart:$rootScope.cart.cartItems
+      //              }).then(function(response){
+      //                if(response.data.status == 'Success') {
+      //                  var cartArrayLength = $rootScope.cart.cartItems.length;
+      //                  $rootScope.cart.cartItems.splice(0,cartArrayLength);
+      //                  $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
+      //                  $state.go("orderConfirmation", {orderId: response.data.result.response.id});
+      //                }else{
+      //                  alert("Transaction error");
+      //                }
+      //              },function(error){
+      //                alert("Transaction error");
+      //              });
+      //          }, function (error) {
+      //              alert("Transaction Canceled");
+      //          });
+      //});
     }
   })
-  .controller('PickupCtrl', function ($scope,$rootScope,PaypalService,paymentResources,$state,initialData) {
+  .controller('PickupCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService) {
     var totalAmountUSD = initialData.totalAmount.data.usd;
     $scope.pickup = {usdAmount:totalAmountUSD};
+    $scope.cart = DataService.cart;
     $scope.branchLocations = initialData.branchLocations.data.result;
     $scope.payNow = function(){
-      PaypalService.initPaymentUI().then(function () {
-        PaypalService.makePayment(totalAmountUSD,"Total Amount").
-          then(function (response) {
-            alert("Transaction is successful");
-            paymentResources.pickupPaymentDetails({
-              pickupDetails:$scope.pickup,
-              response:response.response,
-              client:response.client,
-              response_type:response.response_type,
-              shoppingCart:$rootScope.cart.cartItems
-            }).then(function(response){
-                if(response.data.status == 'Success') {
-                  var cartArrayLength = $rootScope.cart.cartItems.length;
-                  $rootScope.cart.cartItems.splice(0,cartArrayLength);
-                  $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-                  $state.go("orderConfirmation", {orderId: response.data.result.response.id});
-                }else{
-                  alert("Transaction error");
-                }
-            },function(error){
-              alert("Transaction error");
-            });
-          }, function (error) {
-            alert("Transaction Canceled");
-          });
-      });
+      //window.open('https://www.paypal.com/cgi-bin/webscr','_system','location=yes');
+      $scope.cart.checkout('PayPal');
+      // global data
+      //PaypalService.initPaymentUI().then(function () {
+      //  PaypalService.makePayment(totalAmountUSD,"Total Amount").
+      //    then(function (response) {
+      //      alert("Transaction is successful");
+      //      paymentResources.pickupPaymentDetails({
+      //        pickupDetails:$scope.pickup,
+      //        response:response.response,
+      //        client:response.client,
+      //        response_type:response.response_type,
+      //        shoppingCart:$rootScope.cart.cartItems
+      //      }).then(function(response){
+      //          if(response.data.status == 'Success') {
+      //            var cartArrayLength = $rootScope.cart.cartItems.length;
+      //            $rootScope.cart.cartItems.splice(0,cartArrayLength);
+      //            $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
+      //            $state.go("orderConfirmation", {orderId: response.data.result.response.id});
+      //          }else{
+      //            alert("Transaction error");
+      //          }
+      //      },function(error){
+      //        alert("Transaction error");
+      //      });
+      //    }, function (error) {
+      //      alert("Transaction Canceled");
+      //    });
+      //});
     }
   })
 
