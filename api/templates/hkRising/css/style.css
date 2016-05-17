@@ -144,12 +144,15 @@
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
-
+    display: -moz-flex;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-direction: normal;
     -webkit-box-orient: horizontal;
-
+    -webkit-flex-direction: horizontal;
+    -moz-flex-direction: horizontal;
+    -ms-flex-direction: horizontal;
+    flex-direction: horizontal;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     -webkit-justify-content: center;
@@ -185,4 +188,15 @@
 .bar {
     border: none;
     background-image: none !important;
+    background-position: none !important;
+    background-size: none !important;
+    background-repeat: none !important;
+}
+
+.item-complex .item-content, .item-radio .item-content {
+    position: relative;
+    z-index: 2;
+    padding: 16px 49px 16px 16px;
+    border: none;
+    background-color: transparent;
 }

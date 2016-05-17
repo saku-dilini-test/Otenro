@@ -71,6 +71,26 @@ angular.module('starter.controllers', [])
           });
     })
 
+    .controller('contactUsCtrl', function($scope,$http,constants,$rootScope) {
+
+        $scope.appId = $rootScope.appId;
+
+        $http.get( constants.SERVER_URL + '/templates/getContactUs?appId='+$scope.appId).success(function(data) {
+            $scope.email = data.email;
+
+        }).error(function(err) {
+            alert('warning', "Unable to get contact us info", err.message);
+        });
+
+
+    })
+
+    .controller('aboutUsCtrl', function($scope) {
+
+        $scope.aboutUs = "This about us content should come backend";
+
+    })
+
     .controller('articleCtrl', function($scope,$http,constants,$rootScope,$stateParams,$timeout) {
 
       $scope.appId = $rootScope.appId;
