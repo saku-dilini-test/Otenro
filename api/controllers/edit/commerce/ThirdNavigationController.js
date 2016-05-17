@@ -45,7 +45,6 @@ module.exports = {
     addThirdNavi : function(req,res){
 
         var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
-        console.log(req.body);
         req.file('file').upload({
             dirname: require('path').resolve(dePath)
         },function (err, uploadedFiles) {

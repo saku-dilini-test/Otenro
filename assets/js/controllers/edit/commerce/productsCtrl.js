@@ -39,6 +39,9 @@
                         commerceService.getCategoryList()
                         .success(function (secondResult) {
                             $scope.mainMenu = secondResult;
+                            if(secondResult[0].templateName == 'foodDemoApp'){
+                                $scope.show = false;
+                            }
                         }).error(function (error) {
                             toastr.error('Loading Error', 'Warning', {
                                 closeButton: true
@@ -61,20 +64,39 @@
         };
 
         $scope.nextStep2 = function(current,product){
-        if(product.name == null || product.mainId == null || product.childId == null){
-         toastr.error('Fill all the fields', 'Warning', {
-                           closeButton: true
-                    });
+        if($scope.categories[0].templateName == "foodDemoApp"){
+             if(product.name == null || product.mainId == null){
+              toastr.error('Fill all the fields', 'Warning', {
+                                closeButton: true
+                         });
+             }
+             else{
+                  $scope.selectedTab = current;
+                  $scope.variants=[{
+                      sku: product.sku,
+                      name: product.name,
+                      sizeOrweight: "10",
+                      price: "100",
+                      qty: "001"
+                  }];
+             }
         }
         else{
-                      $scope.selectedTab = current;
-                      $scope.variants=[{
-                          sku: product.sku,
-                          name: product.name,
-                          sizeOrweight: "10",
-                          price: "100",
-                          qty: "001"
-                      }];
+            if(product.name == null || product.mainId == null || product.childId == null){
+             toastr.error('Fill all the fields', 'Warning', {
+                               closeButton: true
+                        });
+            }
+            else{
+                          $scope.selectedTab = current;
+                          $scope.variants=[{
+                              sku: product.sku,
+                              name: product.name,
+                              sizeOrweight: "10",
+                              price: "100",
+                              qty: "001"
+                          }];
+            }
         }
         };
 
@@ -111,7 +133,6 @@
                 }
                 else{
                 size = variants[0].sizeOrweight;
-                console.log(size);
                 }
               $scope.selectedTab = current;
             }
@@ -161,12 +182,73 @@
              }
 
         $scope.addProducts = function(file,product) {
+        if($scope.categories[0].templateName == "foodDemoApp"){
+            if(file == null){
+                   toastr.error('select image', 'Warning', {
+                       closeButton: true
+                   });
+                   return;
+            }
+            if(product.name == null){
+                   $scope.selectedTab =1;
+                   toastr.error('Fill all the fields', 'Warning', {
+                       closeButton: true
+                   });
+                   return;
+            }
+            if(product.type == null){
+                   $scope.selectedTab =0;
+                   toastr.error('Choose type', 'Warning', {
+                       closeButton: true
+                   });
+                   return;
+            }
+            else{
+               variants = {
+                    appId: $rootScope.appId,
+                    childId: product.mainId,
+                    briefDesc:product.briefDesc,
+                    detailedDesc: product.detailedDesc,
+                    sku: $scope.variants[0].sku,
+                    name: $scope.variants[0].name,
+                    size: size,
+                    weight: weight,
+                    price: $scope.variants[0].price,
+                    quantity: $scope.variants[0].qty
+               };
+                   commerceService.addProduct(file,product,variants,item.id).
+                       success(function(data) {
+                           toastr.success('New Product has been added.', 'Awsome!', {
+                               closeButton: true
+                           });
+                           $mdDialog.hide();
+                       }).error(function(err) {
+                           toastr.error('Unable to Add', 'Warning', {
+                               closeButton: true
+                           });
+                       });
+
+                   commerceService.addPriceandVariants(variants).
+                   success(function(data) {
+                       toastr.success('New Product has been added.', 'Awsome!', {
+                           closeButton: true
+                       });
+                       $mdDialog.hide();
+                   }).error(function(err) {
+                       toastr.error('Unable to Add', 'Warning', {
+                           closeButton: true
+                       });
+                   });
+            }
+        }
+        else{
             if(file == null){
                 toastr.error('select image', 'Warning', {
                     closeButton: true
                 });
                 return;
-            }if(product.childId == null || product.name ==null){
+            }
+            if(product.childId == null || product.name ==null){
                 $scope.selectedTab =1;
                 toastr.error('Fill all the fields', 'Warning', {
                     closeButton: true
@@ -216,6 +298,7 @@
                         closeButton: true
                     });
                 });
+            }
             }
 
         };

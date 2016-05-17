@@ -59,7 +59,7 @@
                         size: variants.size,
                         weight: variants.weight,
                         quantity: variants.quantity,
-                        childId: product.childId,
+                        childId: variants.childId,
                         desc: product.desc,
                         type : product.type,
                         discount: product.discount
