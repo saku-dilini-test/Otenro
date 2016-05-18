@@ -88,8 +88,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/aboutus',
       views: {
         'menuContent': {
-          templateUrl: 'templates/aboutus.html',
-          controller: 'aboutUsCtrl'
+          templateUrl: 'templates/aboutus.html'
         }
       }
     })
@@ -97,8 +96,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/contactus',
       views: {
         'menuContent': {
-          templateUrl: 'templates/contactus.html',
-          controller: 'contactUsCtrl'
+          templateUrl: 'templates/contactus.html'
+          //controller: 'PlaylistsCtrl'
         }
       }
     })
@@ -123,5 +122,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   //)
   ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home/active');
+  $urlRouterProvider.otherwise('/app/home');
 });

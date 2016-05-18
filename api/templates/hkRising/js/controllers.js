@@ -71,48 +71,48 @@ angular.module('starter.controllers', [])
           });
     })
 
-    .controller('contactUsCtrl', function($scope,$http,constants,$rootScope) {
-
-        $scope.appId = $rootScope.appId;
-
-        $http.get( constants.SERVER_URL + '/templates/getContactUs?appId='+$scope.appId).success(function(data) {
-            $scope.email = data.email;
-
-        }).error(function(err) {
-            alert('warning', "Unable to get contact us info", err.message);
-        });
-
-
-    })
-
-    .controller('aboutUsCtrl', function($scope) {
-
-        $scope.aboutUs = "This about us content should come backend";
-
-    })
-
-    .controller('articleCtrl', function($scope,$http,constants,$rootScope,$stateParams,$timeout) {
+    .controller('articleCtrl', function($scope,$http,constants,$rootScope,$stateParams) {
 
       $scope.appId = $rootScope.appId;
 
-        $scope.getArticleList = function(){
-            $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$rootScope.appId)
-                .success(function(data) {
-                    $scope.artilceList = data;
-                }).error(function(err) {
-                    alert('loading err');
-                });
-        }
-        $timeout( function(){
-            $scope.getArticleList();
-        }, 1000);
+    $scope.artilceList = [
+    {
+      "title" : "Water",
+      "desc" : "This is water Image ",
+      "imageUrl" : "default.jpg"
+    },
+    {
+      "title" : "Animal",
+      "desc" : "This is Animal Image",
+      "imageUrl" : "a.jpg"
+    },
+    {
+      "title" : "Water",
+      "desc" : "This is water Image ",
+      "imageUrl" : "c.png"
+    }    
+    ]
 
-        $http.get(constants.SERVER_URL + '/templates/getArticleById?articleId='+$stateParams.articleId)
-            .success(function(data) {
-                console.log(data);
-                $scope.selectedArticle = data;
-            }).error(function(err) {
-                alert('loading err');
-            });
+    $scope.selectedArticle = {
+      "title" : "Water",
+      "desc" : "This is water Image ",
+      "imageUrl" : "default.jpg"
+    };
+
+      // $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$scope.appId)
+      //     .success(function(data) {
+      //         console.log(data);
+      //       $scope.artilceList = data;
+      //     }).error(function(err) {
+      //       alert('loading err');
+      //     });
+
+      //   $http.get(constants.SERVER_URL + '/templates/getArticleById?articleId='+$stateParams.articleId)
+      //       .success(function(data) {
+      //           console.log(data);
+      //           $scope.selectedArticle = data;
+      //       }).error(function(err) {
+      //           alert('loading err');
+      //       });
 
     });
