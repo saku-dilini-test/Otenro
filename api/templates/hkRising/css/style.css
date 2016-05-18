@@ -90,6 +90,7 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !i
     overflow:hidden;
 	width:42.8%;
 	float:left;
+	border-radius: 5px !important;
 }
 
 .card2 {
@@ -101,12 +102,15 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !i
 	padding-top: 1px;
     padding-bottom: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	margin-top:30px;
 }
 .card2, .list-inset {
     overflow: hidden;
     margin: 10px 7px;
     border-radius: 2px;
     background-color: #fff;
+	margin-top:40px;
+	border-radius:10px;
 }
 .item-text-wrap2 .item, .item-text-wrap2 .item-content2, .item-text-wrap2, .item-text-wrap2 h1, .item-text-wrap2 h2, .item-text-wrap2 h3, .item-text-wrap2 h4, .item-text-wrap2 h5, .item-text-wrap2 h6, .item-text-wrap2 p, .item-complexw.item-text-wrapw .item-contentw, .item-body2 h1, .item-body2 h2, .item-body2 h3, .item-body2 h4, .item-body2 h5, .item-body2 h6, .item-body2 p {
     overflow: visible;
@@ -143,10 +147,11 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !i
 
 .bar.bar-stable .title {
 	padding-top:20px;
-    color: #CC9 !important;
+    color:#C0A954 !important;
 	background-color:transparent !important;
 	height:100px;
 	font-weight:800 !important;
+	font-size: 3.8vw;
 }
 
 .tabs {
@@ -223,6 +228,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
     flex: 1;
     display: block;
     width: 100%;
+	border-radius: 10px !important;
 }
 
 .tab-item2 {
@@ -243,4 +249,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
     font-weight: 600;
     font-size: 14px;
     font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
-	color:#FFF;
+	color:#FFF;}
+	
+	.bar-stable .button.button-clear {
+    border-color: transparent;
+	background-image:url(../img/menu.png);
+	background-size: 100% 100%;
+	width: 30px;
+	height:5px;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.bar .title {
+    
+    line-height: 30px;
+}
+
+.item-image {
+    border-radius: 10px 10px 0 0;
+}
+
