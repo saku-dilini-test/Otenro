@@ -1,27 +1,27 @@
-<ion-view hide-back-button="true" view-title="HONG KONG RISE UP">
-    <ion-content>
+<ion-view hide-back-button="true" view-title="{{appName}}">
+    <ion-content class="made-easy-backgroundColor">
         <ion-nav-buttons side="left">
         </ion-nav-buttons>
-        
+
         <div style="padding-right:20px; width:100%; margin-left:5%;">
         <div ng-repeat="article in artilceList">
-        
-         
-         
+
+
+
             <div class="card">
                 <a href="#/app/articleView/{{article.id}}">
-               
+
                     <div class="row2">
                         <div class="col2">
                             <div class="item item-image">
                                 <img src="img/article/{{article.imageUrl}}">
-                                
+
                                  <div class="item item-text-wrap">
                                 {{article.title}}
                             </div>
                             </div></div>
                         </div>
-                       
+
                     </div>
                 </a>
             </div>

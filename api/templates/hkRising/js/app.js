@@ -24,6 +24,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
       readMadeEasy.readFile().success(function(data){
         $rootScope.appId = data.appId;
+        $rootScope.appName = data.name;
         console.log(data);
       });
     }
@@ -83,6 +84,24 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   })
+      .state('app.home.shopping', {
+        url: '/shopping',
+        views: {
+          'tabContent': {
+            templateUrl: 'templates/article.html',
+            controller: 'articleCtrl'
+          }
+        }
+      })
+      .state('app.home.foods', {
+        url: '/foods',
+        views: {
+          'tabContent': {
+            templateUrl: 'templates/article.html',
+            controller: 'articleCtrl'
+          }
+        }
+      })
 
   .state('app.aboutus', {
       url: '/aboutus',

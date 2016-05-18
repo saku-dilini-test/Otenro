@@ -29,11 +29,12 @@
                     }
                 });
             },
-            publishArticle: function(file,id,title,desc,appId,isNewArticle,isImageUpdate){
+            publishArticle: function(file,id,categoryId,title,desc,appId,isNewArticle,isImageUpdate){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/publishArticle',
                     fields: {
                         'id' : id,
+                        'categoryId' : categoryId,
                         'title' : title,
                         'desc' : desc,
                         'appId' : appId,

@@ -7,6 +7,13 @@
         <div class="md-dialog-main clearfix">
 
             <fieldset>
+                <label>Article Category</label>
+                    <select ng-model="articleCat.value"
+                            ng-options="v for v in articleCat.values"
+                            ng-change="changeArticleCat(articleCat.value)">
+                    </select>
+            </fieldset>
+            <fieldset>
                 <label>Title</label>
                 <input type="text" name="title" ng-model="article.title" required />
             </fieldset>
