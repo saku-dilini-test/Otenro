@@ -8,7 +8,7 @@
                     </div>
                     <div class="item item-text-wrap2">
                         <div style="width:100%; font-size:30px;"><h2>{{selectedArticle.title}}</h2></div>
-                        <div style="width:100%; font-weight:300 ; margin-top:40px;">{{selectedArticle.desc}}</div>
+                        <div ng-bind-html="selectedArticle.desc" style="width:100%; font-weight:300 ; margin-top:40px;"></div>
                     </div>
                 </div>
                 

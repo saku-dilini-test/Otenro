@@ -38,7 +38,8 @@ angular.module('app', [
   'ui.mask',
   'uiGmapgoogle-maps',
   'angularInlineEdit',
-  'ADM-dateTimePicker'
+  'ADM-dateTimePicker',
+    'angularTrix'
 
 
 ]).run(function($rootScope, $state, $auth,Auth) {
