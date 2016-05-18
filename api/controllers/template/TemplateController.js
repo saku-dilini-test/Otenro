@@ -141,9 +141,11 @@ module.exports = {
     getArticles : function(req,res) {
 
         var appId = req.param('appId');
+        var categoryId = req.param('categoryId');
         console.log(appId);
         var searchApp = {
-            appId: appId
+            appId: appId,
+            categoryId : categoryId
         };
         Article.find().where(searchApp).exec(function (err, result) {
             if (err) return done(err);

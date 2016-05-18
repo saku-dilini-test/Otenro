@@ -162,26 +162,15 @@ module.exports = {
                     if (err) return done(err);
 
                     /**
-                     * add Second Navigation
+                     * add Article Category for hkRising Application
+                     * Append appId
                      */
-                    var secondNaviList = appInitData.secondNavi;
-                    for (var i = 0; i < secondNaviList.length; i++) {
-                        var scondNaviAttribute = secondNaviList[i].attribute;
-                        scondNaviAttribute.appId = app.id;
-                        var thirdNaviList = secondNaviList[i].thirdNavi;
-                        SecondNavigation.create(scondNaviAttribute).exec(function (err, secondN) {
-                            if (err) return err;
 
-                            /**
-                             * Add Third Navigation
-                             */
-                            for (var j = 0; j < thirdNaviList.length; j++) {
-                                thirdNaviList[j].appId = app.id;
-                                thirdNaviList[j].childId = secondN.id;
-                                ThirdNavigation.create(thirdNaviList[j]).exec(function (err, thirdN) {
-                                    if (err) return err;
-                                });
-                            }
+                    var articleCategoryList = appInitData.articleCategory;
+                    for (var j = 0; j < articleCategoryList.length; j++) {
+                        articleCategoryList[j].appId = app.id;
+                        ArticleCategory.create(articleCategoryList[j]).exec(function (err, articleCategory) {
+                            if (err) return err;
                         });
                     }
                 });

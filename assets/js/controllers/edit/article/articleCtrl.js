@@ -21,6 +21,11 @@
         if(initialData == 'publishArticle'){
             $scope.isNewArticle = true;
 
+            $scope.seletedCategoryId = null;
+            $scope.articleCat = {
+                "values":  ['Active','Hotels','Shopping','Foods'] // TODO : Article Category List should come DB
+            };
+
         }else if(initialData == 'previewArticles'){
             articleService.getArticleList($scope.appId)
                 .success(function (data) {
@@ -35,6 +40,13 @@
             $scope.serverImg = initialData.imageUrl;
             $scope.mainImg = initialData.imageUrl;
             $scope.picFile = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/article/'+initialData.imageUrl;
+
+            $scope.seletedCategoryId = initialData.categoryId;
+
+            $scope.articleCat = {
+                "value" : initialData.categoryId,
+                "values":  ['Active','Hotels','Shopping','Foods'] // TODO : Article Category List come DB
+            };
         }
 
         $scope.addImage = function(img){
@@ -51,6 +63,10 @@
                 closeButton: true
             });
         };
+
+        $scope.changeArticleCat = function(catId){
+            $scope.seletedCategoryId = catId;
+        }
 
         $scope.deleteImg = function(index){
             $scope.tmpImage[index] = null;
@@ -71,6 +87,12 @@
 
 
         $scope.publishArticle = function(file,article){
+            if($scope.seletedCategoryId == null){
+                toastr.error('Selected Category', 'Warning', {
+                    closeButton: true
+                });
+                return;
+            }
 
             if(typeof article == 'undefined'){
                 toastr.error('Fill blanks', 'Warning', {
@@ -106,7 +128,7 @@
                     isImageUpdate = false;
                 }
 
-                articleService.publishArticle(file,article.id,article.title, article.desc, $rootScope.appId,$scope.isNewArticle,isImageUpdate)
+                articleService.publishArticle(file,article.id,$scope.seletedCategoryId,article.title, article.desc, $rootScope.appId,$scope.isNewArticle,isImageUpdate)
                     .progress(function (evt) {
                         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                         console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);

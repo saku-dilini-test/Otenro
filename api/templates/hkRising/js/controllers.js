@@ -57,10 +57,22 @@ angular.module('starter.controllers', [])
 
     .controller('HomeCtrl', function($scope,$http,constants,$rootScope) {
 
+        $scope.appName = $rootScope.appName;
+
+        $scope.getArticleList = function(categoryId){
+            $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$rootScope.appId+"&categoryId="+categoryId)
+                .success(function(data) {
+                    $scope.artilceList = data;
+                }).error(function(err) {
+                    alert('loading err');
+                });
+        }
+
     })
 
     .controller('secondNaviCtrl', function($scope,$http,constants,$rootScope) {
       $scope.appId = $rootScope.appId;
+        $scope.appName = $rootScope.appName;
 
       $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$rootScope.appId)
           .success(function(data) {
@@ -74,6 +86,7 @@ angular.module('starter.controllers', [])
     .controller('contactUsCtrl', function($scope,$http,constants,$rootScope) {
 
         $scope.appId = $rootScope.appId;
+        $scope.appName = $rootScope.appName;
 
         $http.get( constants.SERVER_URL + '/templates/getContactUs?appId='+$scope.appId).success(function(data) {
             $scope.email = data.email;
@@ -85,8 +98,9 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('aboutUsCtrl', function($scope) {
+    .controller('aboutUsCtrl', function($scope,$rootScope) {
 
+        $scope.appName = $rootScope.appName;
         $scope.aboutUs = "This about us content should come backend";
 
     })
@@ -94,18 +108,8 @@ angular.module('starter.controllers', [])
     .controller('articleCtrl', function($scope,$http,constants,$rootScope,$stateParams,$timeout) {
 
       $scope.appId = $rootScope.appId;
+        $scope.appName = $rootScope.appName;
 
-        $scope.getArticleList = function(){
-            $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$rootScope.appId)
-                .success(function(data) {
-                    $scope.artilceList = data;
-                }).error(function(err) {
-                    alert('loading err');
-                });
-        }
-        $timeout( function(){
-            $scope.getArticleList();
-        }, 1000);
 
         $http.get(constants.SERVER_URL + '/templates/getArticleById?articleId='+$stateParams.articleId)
             .success(function(data) {

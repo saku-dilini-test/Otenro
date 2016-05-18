@@ -14,6 +14,9 @@ module.exports = {
     },
     secondNavi : {
       type : 'array'
+    },
+    articleCategory : {
+      type : 'array'
     }
   },
   seedData: [
@@ -131,51 +134,18 @@ module.exports = {
     },
     {
       templateName : 'hkRising',
-      secondNavi : [
+      articleCategory : [
         {
-          attribute : {
-            "name": "Hotel"
-          },
-          thirdNavi : []
+          "name": "Hotel"
         },
         {
-          attribute : {
-            "name": "Shopping"
-          },
-          thirdNavi : []
-        },
-        {
-          attribute : {
-            "name": "Food",
-          },
-          thirdNavi : []
-        },
-        {
-          attribute : {
             "name": "Activity"
-          },
-          thirdNavi : [
-            {
-              "name": "Train ride round the city",
-              "desc": "Hogshead wench long boat no prey, no pay pressgang trysail piracy capstan heave to barkadeer pillage.",
-              "imageUrl": "ionic.png"
-            },
-            {
-              "name": "Great budda statue",
-              "desc": "",
-              "imageUrl": "ionic.png"
-            },
-            {
-              "name": "Boat racing in the river",
-              "desc": "",
-              "imageUrl": "ionic.png"
-            },
-            {
-              "name": "Boat ride in a river nearby",
-              "desc": "Hogshead wench long boat no prey, no pay pressgang trysail piracy capstan heave to barkadeer pillage. Hogshead wench long boat no prey, no pay pressgang trysail piracy capstan heave to",
-              "imageUrl": "ionic.png"
-            }
-          ]
+        },
+        {
+            "name": "Shopping",
+        },
+        {
+            "name": "Food"
         }
 
       ]
