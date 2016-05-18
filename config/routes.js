@@ -180,6 +180,12 @@ module.exports.routes = {
      */
     'POST /edit/insertFlatRateData': 'edit/commerce/ShippingController.insertFlatRateData',
 
+    /**
+    * EngageController
+    */
+    'POST /edit/sendPushMessage': 'edit/engage/EngageController.sendPushMessage',
+    'GET /edit/getMessageDetails': 'edit/engage/EngageController.getMessageDetails',
+
     /***
      * Template Data
      ***/

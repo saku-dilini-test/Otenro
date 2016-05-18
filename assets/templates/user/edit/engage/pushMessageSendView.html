@@ -6,23 +6,23 @@
         <div class="md-dialog-main">
             <fieldset>
                 <label>Message</label>
-                <textarea rows="3"></textarea>
+                <textarea ng-model="pushMessage.message" rows="3"></textarea>
             </fieldset>
             <fieldset class="text-right">
-                <md-button class="me-default-button">send message now</md-button>
+                <md-button class="me-default-button" ng-click="sendMsgNow(pushMessage)">send message now</md-button>
             </fieldset>
             <hr />
             <fieldset>
-                <label>Scheduled Message</label>
+                <label>Schedule Message</label>
             </fieldset>
             <div class="clearfix">
-                <adm-dtp ng-model='date'></adm-dtp>
+                <adm-dtp ng-model='pushMessage.date'></adm-dtp>
             </div>
         </div>
         <div class="md-dialog-buttons">
             <div class="inner-section">
-                <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                <md-button class="me-default-button" ng-click="save(date)">save</md-button>
+                <md-button class="me-default-button" ng-click="back()">cancel</md-button>
+                <md-button class="me-default-button" ng-click="save(pushMessage)">save</md-button>
             </div>
         </div>
     </md-dialog-content>

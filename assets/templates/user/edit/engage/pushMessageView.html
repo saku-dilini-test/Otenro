@@ -11,7 +11,7 @@
         <div class="md-dialog-main">
             <table class="me-checkbox-table">
                 <thead>
-                    <th class="checkbox-column"><input type="checkbox" /></th>
+                    <!--<th class="checkbox-column"><input type="checkbox" /></th>-->
                     <th>date</th>
                     <th class="message-column">message</th>
                     <th>status</th>
@@ -19,20 +19,12 @@
                     <th>&nbsp;</th>
                 </thead>
                 <tbody>
-                <tr>
-                    <td class="checkbox-row"><input type="checkbox" /></td>
-                    <td>11/20/15</td>
-                    <td>25% off on item</td>
-                    <td class="status-sent">sent</td>
-                    <td>11/20/15</td>
-                    <td><a href="javascript:void(0);">more</a></td>
-                </tr>
-                <tr>
-                    <td class="checkbox-row"><input type="checkbox" /></td>
-                    <td>12/15/15</td>
-                    <td>store wide sale</td>
-                    <td class="status-pending">pending</td>
-                    <td>12/15/15</td>
+                <tr ng-repeat="data in pushedMessages">
+                    <!--<td class="checkbox-row"><input type="checkbox" /></td>-->
+                    <td ng-model="data.createdDate">{{data.createdDate}}</td>
+                    <td ng-model="data.message">{{data.message}}</td>
+                    <td ng-model="data.status" ng-class="{'status-sent': data.status == 'sent', 'status-pending': data.status == 'pending'}">{{data.status}}</td>
+                    <td ng-model="data.date">{{data.date}}</td>
                     <td><a href="javascript:void(0);">more</a></td>
                 </tr>
                 </tbody>
@@ -40,7 +32,7 @@
         </div>
         <div class="md-dialog-buttons">
             <div class="inner-section">
-                <md-button class="me-default-button">cancel</md-button>
+                <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
 
             </div>
         </div>

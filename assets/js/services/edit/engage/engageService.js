@@ -3,10 +3,10 @@
  **/
 (function() {
     angular.module('appEdit').service('engageService', [
-        '$mdDialog', '$http', 'SERVER_URL','$q', engageService
+        '$mdDialog', '$http', '$rootScope', 'SERVER_URL','$q', engageService
     ]);
 
-    function engageService($mdDialog, $http, SERVER_URL, $q) {
+    function engageService($mdDialog, $http, $rootScope, SERVER_URL, $q) {
         return {
             showPushMessageDialog: function() {
                 return $mdDialog.show({
@@ -29,6 +29,12 @@
                 }, function() {
                     //$scope.status = 'You cancelled the dialog.';
                 });
+            },
+            sendPushMessage: function(data){
+                return $http.post(SERVER_URL+ 'edit/sendPushMessage',data);
+            },
+            getMessageDetails: function(userId){
+                return $http.get(SERVER_URL + 'edit/getMessageDetails?userId='+userId+'&appId='+$rootScope.appId);
             }
         };
     }
