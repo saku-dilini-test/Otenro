@@ -154,6 +154,18 @@ module.exports = {
         });
     },
 
+    getArticleCategoryByAppId : function(req,res) {
+
+    var appId = req.param('appId');
+    var searchApp = {
+        appId: appId,
+    };
+        ArticleCategory.find().where(searchApp).exec(function (err, result) {
+            if (err) return done(err);
+            res.json(result);
+    });
+},
+
     getArticleById : function(req,res) {
 
         var id = req.param('articleId');

@@ -9,26 +9,11 @@
       <ion-nav-view class="made-easy-backgroundColor" name="tabContent"></ion-nav-view>
 
       <ion-tabs class="tabs-positive2 tabs2">
-
-          <a class="tab-item" href="#/app/home/hotels"
-             ng-click="getArticleList('Hotels')">
-              Hotels
-          </a>
-
-          <a class="tab-item  active" href="#/app/home/active"
-             ng-click="getArticleList('Active')">
-              Active
-          </a>
-
-          <a class="tab-item" href="#/app/home/shopping"
-             ng-click="getArticleList('Shopping')">
-              Shopping
-          </a>
-
-          <a class="tab-item" href="#/app/home/foods"
-             ng-click="getArticleList('Foods')">
-              Foods
-          </a>
+          <div ng-repeat="category in articleCategoryList">
+              <a class="tab-item" ng-href="#/app/home/{{category.id}}">
+                  {{category.name}}
+              </a>
+          </div>
       </ion-tabs>
 
 

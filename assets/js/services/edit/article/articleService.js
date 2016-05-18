@@ -85,11 +85,15 @@
             deleteArticle: function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteArticle',data);
             },
+            getArticleCategoryByAppId : function(){
+
+                return $http.get(SERVER_URL+ 'templates/getArticleCategoryByAppId?appId='+$rootScope.appId);
+            },
             addCategory:function(data){
                 return $http.post(SERVER_URL+ 'edit/addCategory',data);
             },
             deleteCategory:function(data){
-                return $http.post(SERVER_URL+ 'edit/addCategory',data);
+                return $http.post(SERVER_URL+ 'edit/deleteCategory',data);
             }
         };
     }

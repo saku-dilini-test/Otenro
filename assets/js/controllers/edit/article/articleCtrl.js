@@ -34,8 +34,19 @@
 
             $scope.seletedCategoryId = null;
             $scope.articleCat = {
-                "values":  ['Active','Hotels','Shopping','Foods'] // TODO : Article Category List should come DB
+                "values":  null
             };
+            articleService.getArticleCategoryByAppId()
+                .success(function (data) {
+                    $scope.articleCat = {
+                        "values":  data
+                    };
+                }).error(function (error) {
+                    toastr.error('Articles Category List Loading Error', 'Message', {
+                        closeButton: true
+                    });
+                })
+
 
         }else if(initialData == 'previewArticles'){
             articleService.getArticleList($scope.appId)
@@ -54,10 +65,17 @@
 
             $scope.seletedCategoryId = initialData.categoryId;
 
-            $scope.articleCat = {
-                "value" : initialData.categoryId,
-                "values":  ['Active','Hotels','Shopping','Foods'] // TODO : Article Category List come DB
-            };
+            articleService.getArticleCategoryByAppId()
+                .success(function (data) {
+                    $scope.articleCat = {
+                        "value" : initialData.categoryId,
+                        "values":  data
+                    };
+                }).error(function (error) {
+                    toastr.error('Articles Category List Loading Error', 'Message', {
+                        closeButton: true
+                    });
+                })
         }
 
         $scope.addImage = function(img){
@@ -199,6 +217,23 @@
         $scope.addCategory = function(data){
             data.appId = $rootScope.appId;
             articleService.addCategory(data)
+                .success(function (data) {
+                    toastr.success('ArticlesLoading Error', 'Message', {
+                        closeButton: true
+                    });
+                }).error(function (error) {
+                toastr.error('ArticlesLoading Error', 'Message', {
+                    closeButton: true
+                });
+            })
+        };
+        $scope.deleteCategory = function(data){
+
+            var dataDelete = {
+                id : data
+            };
+           // console.log(dataDelete);
+            articleService.deleteCategory(dataDelete)
                 .success(function (data) {
                     toastr.success('ArticlesLoading Error', 'Message', {
                         closeButton: true

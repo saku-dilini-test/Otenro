@@ -64,6 +64,22 @@ module.exports = {
             res.send(result);
         });
     },
+    /**
+     * return collection of article given appId
+     *
+     * @param req appId
+     * @param res collection articles for given appId
+     */
+    deleteCategory : function(req,res){
+
+        var id = req.body;
+        console.log(req.body);
+
+        ArticleCategory.destroy({ _id : {$type:id}}).exec(function(err,result) {
+            if (err) return done(err);
+            res.send(result);
+        });
+    },
 
     /**
      *

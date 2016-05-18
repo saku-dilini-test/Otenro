@@ -9,7 +9,7 @@
             <fieldset>
                 <label>Article Category</label>
                     <select ng-model="articleCat.value"
-                            ng-options="v for v in articleCat.values"
+                            ng-options="v.id as v.name for v in articleCat.values"
                             ng-change="changeArticleCat(articleCat.value)">
                     </select>
             </fieldset>

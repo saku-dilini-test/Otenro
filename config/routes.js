@@ -206,6 +206,7 @@ module.exports.routes = {
      * Template Data for App Category Media
      */
 
+    'GET /templates/getArticleCategoryByAppId' : 'template/TemplateController.getArticleCategoryByAppId',
     'GET /templates/getArticles' : 'template/TemplateController.getArticles',
     'GET /templates/getArticleById' : 'template/TemplateController.getArticleById',
 
