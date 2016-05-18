@@ -55,7 +55,7 @@ angular.module('starter.controllers', [])
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
-    .controller('HomeCtrl', function($scope,$http,constants,$rootScope) {
+    .controller('HomeCtrl', function($scope,$http,constants,$rootScope,$timeout) {
 
         $scope.appName = $rootScope.appName;
 
@@ -67,6 +67,13 @@ angular.module('starter.controllers', [])
                     alert('loading err');
                 });
         }
+        $scope.changeAppName = function(){
+            $scope.appName = $rootScope.appName;
+        }
+        $timeout( function(){
+            $scope.changeAppName();
+        }, 2000);
+
 
     })
 
@@ -110,6 +117,13 @@ angular.module('starter.controllers', [])
       $scope.appId = $rootScope.appId;
         $scope.appName = $rootScope.appName;
 
+
+        $scope.changeAppName = function(){
+            $scope.appName = $rootScope.appName;
+        }
+        $timeout( function(){
+            $scope.changeAppName();
+        }, 2000);
 
         $http.get(constants.SERVER_URL + '/templates/getArticleById?articleId='+$stateParams.articleId)
             .success(function(data) {
