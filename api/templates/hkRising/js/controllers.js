@@ -120,6 +120,24 @@ angular.module('starter.controllers', [])
 
         $scope.changeAppName = function(){
             $scope.appName = $rootScope.appName;
+
+            if($stateParams.categoryId == 'firstMenu'){
+                $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId='+$rootScope.appId)
+                    .success(function(catList) {
+                        if(catList.length > 0){
+                            var firstCat = catList[0];
+                            $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$rootScope.appId+"&categoryId="+firstCat.id)
+                                .success(function(data) {
+                                    $scope.artilceList = data;
+                                }).error(function(err) {
+                                    alert('loading err');
+                                });
+                        }
+                }).error(function(err) {
+                    alert('loading err');
+                });
+            }
+
         }
         $timeout( function(){
             $scope.changeAppName();
