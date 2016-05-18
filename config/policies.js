@@ -75,7 +75,9 @@ module.exports.policies = {
     deletePreviewTemp:true,
     getTermsAndConditions: true,
     getArticles : true,
-    getArticleById : true
+    getArticleById : true,
+    getArticleCategoryByAppId : true
+
   },
 
   'template/TemplateAuthController': {

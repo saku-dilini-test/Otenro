@@ -49,6 +49,10 @@
             },
             deleteArticle: function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteArticle',data);
+            },
+            getArticleCategoryByAppId : function(){
+
+                return $http.get(SERVER_URL+ 'templates/getArticleCategoryByAppId?appId='+$rootScope.appId);
             }
         };
     }

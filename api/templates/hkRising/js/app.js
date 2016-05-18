@@ -65,8 +65,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.home.active', {
-    url: '/active',
+  .state('app.home.categoryId', {
+    url: '/:categoryId',
     views: {
       'tabContent': {
         templateUrl: 'templates/article.html',
@@ -75,33 +75,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.home.hotels', {
-    url: '/hotels',
-    views: {
-      'tabContent': {
-        templateUrl: 'templates/article.html',
-        controller: 'articleCtrl'
-      }
-    }
-  })
-      .state('app.home.shopping', {
-        url: '/shopping',
-        views: {
-          'tabContent': {
-            templateUrl: 'templates/article.html',
-            controller: 'articleCtrl'
-          }
-        }
-      })
-      .state('app.home.foods', {
-        url: '/foods',
-        views: {
-          'tabContent': {
-            templateUrl: 'templates/article.html',
-            controller: 'articleCtrl'
-          }
-        }
-      })
 
   .state('app.aboutus', {
       url: '/aboutus',

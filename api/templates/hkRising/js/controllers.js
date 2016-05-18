@@ -55,21 +55,22 @@ angular.module('starter.controllers', [])
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
-    .controller('HomeCtrl', function($scope,$http,constants,$rootScope,$timeout) {
+    .controller('HomeCtrl', function($scope,$http,constants,$rootScope,$timeout,$state) {
 
         $scope.appName = $rootScope.appName;
 
-        $scope.getArticleList = function(categoryId){
-            $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$rootScope.appId+"&categoryId="+categoryId)
+
+        $scope.changeAppName = function(){
+            $scope.appName = $rootScope.appName;
+
+            $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId='+$rootScope.appId)
                 .success(function(data) {
-                    $scope.artilceList = data;
+                    $scope.articleCategoryList = data;
                 }).error(function(err) {
                     alert('loading err');
                 });
         }
-        $scope.changeAppName = function(){
-            $scope.appName = $rootScope.appName;
-        }
+
         $timeout( function(){
             $scope.changeAppName();
         }, 2000);
@@ -117,7 +118,6 @@ angular.module('starter.controllers', [])
       $scope.appId = $rootScope.appId;
         $scope.appName = $rootScope.appName;
 
-
         $scope.changeAppName = function(){
             $scope.appName = $rootScope.appName;
         }
@@ -127,8 +127,14 @@ angular.module('starter.controllers', [])
 
         $http.get(constants.SERVER_URL + '/templates/getArticleById?articleId='+$stateParams.articleId)
             .success(function(data) {
-                console.log(data);
                 $scope.selectedArticle = data;
+            }).error(function(err) {
+                alert('loading err');
+            });
+
+        $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$rootScope.appId+"&categoryId="+$stateParams.categoryId)
+            .success(function(data) {
+                $scope.artilceList = data;
             }).error(function(err) {
                 alert('loading err');
             });

@@ -23,8 +23,19 @@
 
             $scope.seletedCategoryId = null;
             $scope.articleCat = {
-                "values":  ['Active','Hotels','Shopping','Foods'] // TODO : Article Category List should come DB
+                "values":  null
             };
+            articleService.getArticleCategoryByAppId()
+                .success(function (data) {
+                    $scope.articleCat = {
+                        "values":  data
+                    };
+                }).error(function (error) {
+                    toastr.error('Articles Category List Loading Error', 'Message', {
+                        closeButton: true
+                    });
+                })
+
 
         }else if(initialData == 'previewArticles'){
             articleService.getArticleList($scope.appId)
@@ -43,10 +54,17 @@
 
             $scope.seletedCategoryId = initialData.categoryId;
 
-            $scope.articleCat = {
-                "value" : initialData.categoryId,
-                "values":  ['Active','Hotels','Shopping','Foods'] // TODO : Article Category List come DB
-            };
+            articleService.getArticleCategoryByAppId()
+                .success(function (data) {
+                    $scope.articleCat = {
+                        "value" : initialData.categoryId,
+                        "values":  data
+                    };
+                }).error(function (error) {
+                    toastr.error('Articles Category List Loading Error', 'Message', {
+                        closeButton: true
+                    });
+                })
         }
 
         $scope.addImage = function(img){
