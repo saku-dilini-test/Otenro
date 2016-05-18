@@ -1,7 +1,9 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function ($scope,$rootScope) {
+.controller('HomeCtrl', function ($scope,$rootScope,initialData,DataService) {
     $rootScope.cart = {cartItems:[],cartSize:0,totalPrice:0};
+    $rootScope.oneUSD = initialData.oneUSD.data.result;
+    DataService.cart.clearItems();
 })
 
 .controller('MenuCtrl', function ($scope, SERVER_URL,initialData) {
@@ -42,22 +44,27 @@ angular.module('starter.controllers', [])
     };
     $scope.buy = function(data){
       var value = data;
+      var usdPrice,Price;
       if(value == 1){
         Price = $scope.product.qty * $scope.product.price;
+        usdPrice = $scope.product.price/$rootScope.oneUSD;
       }
       else{
         Price = $scope.product.qty * $scope.product.perSlicePrice;
+        usdPrice = $scope.product.perSlicePrice/$rootScope.oneUSD;
       }
       $rootScope.cart.cartItems.push({
         name: $scope.product.name,
         pieces: $scope.product.qty,
-        price:Price
+        price:Price,
+        itemCode:$scope.product.itemCode
       });
-      //$scope.saveItems = function(item){
-      //  if(item.quantity == 0){
-      //    $scope.cart.addItem(item.sku, item.name, item.price, -1000);
-      //  }
-      //  $scope.cart.saveItems();
+      if($scope.product.qty == 0){
+        $scope.paypalCart.addItem($scope.product.itemCode, $scope.product.name, usdPrice, -1000);
+      }
+      $scope.paypalCart.addItem($scope.product.itemCode, $scope.product.name,usdPrice, $scope.product.qty);
+
+        $scope.paypalCart.saveItems();
       //};
       $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
 
@@ -67,8 +74,9 @@ angular.module('starter.controllers', [])
 
 .controller('AboutCtrl', function ($scope) {})
 
-.controller('CartCtrl', function ($scope,$rootScope) {
+.controller('CartCtrl', function ($scope,$rootScope,DataService) {
     $scope.cartItems = $rootScope.cart.cartItems;
+    $scope.paypalCart = DataService.cart;
 
     $scope.getTotal = function(){
       var total = 0;
@@ -80,57 +88,34 @@ angular.module('starter.controllers', [])
       return total;
     };
 
-    $scope.removeItem = function(index){
+    $scope.removeItem = function(index,cartItem){
       $scope.cartItems.splice(index, 1);
       $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
+      $scope.paypalCart.addItem(cartItem.itemCode, cartItem.name, cartItem.price, -1000);
     }
 })
 
 .controller('ContactCtrl', function ($scope) {})
 
-.controller('DeliveryCtrl', function ($scope,$rootScope,PaypalService,paymentResources,$state,initialData) {
+.controller('DeliveryCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService) {
         var totalAmountUSD = initialData.totalAmount.data.usd;
         var oneUSD = initialData.oneUSD.data.result;
         $scope.isVisibleAddress = false;
+        $scope.paypalCart = DataService.cart;
+
         $scope.addDeliveryFee = function(amount){
           $scope.delivery.usdAmountWithDeliveryFee = totalAmountUSD + (amount / oneUSD );
+          $scope.paypalCart.saveDeliveryCharges(amount/oneUSD);
           $scope.isVisibleAddress = true;
           if(typeof amount == 'undefined'){
             $scope.isVisibleAddress = false;
           }
-        }
+        };
         $scope.delivery = {usdAmount:totalAmountUSD};
         $scope.deliveryLocations = initialData.deliveryLocations.data.result;
         $scope.payNow = function(){
-          window.open('https://www.paypal.com/cgi-bin/webscr','_system','location=yes');
-
-      //  PaypalService.initPaymentUI().then(function () {
-      //      PaypalService.makePayment($scope.delivery.usdAmountWithDeliveryFee,"Total Amount").
-      //          then(function (response) {
-      //              alert("Transaction is successful");
-      //              paymentResources.paymentDetails({
-      //                  deliveryDetails:$scope.delivery,
-      //                  response:response.response,
-      //                  client:response.client,
-      //                  response_type:response.response_type,
-      //                  shoppingCart:$rootScope.cart.cartItems
-      //              }).then(function(response){
-      //                if(response.data.status == 'Success') {
-      //                  var cartArrayLength = $rootScope.cart.cartItems.length;
-      //                  $rootScope.cart.cartItems.splice(0,cartArrayLength);
-      //                  $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-      //                  $state.go("orderConfirmation", {orderId: response.data.result.response.id});
-      //                }else{
-      //                  alert("Transaction error");
-      //                }
-      //              },function(error){
-      //                alert("Transaction error");
-      //              });
-      //          }, function (error) {
-      //              alert("Transaction Canceled");
-      //          });
-      //});
-    }
+          $scope.paypalCart.checkout('PayPal');
+        }
   })
   .controller('PickupCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService) {
     var totalAmountUSD = initialData.totalAmount.data.usd;
@@ -138,35 +123,7 @@ angular.module('starter.controllers', [])
     $scope.cart = DataService.cart;
     $scope.branchLocations = initialData.branchLocations.data.result;
     $scope.payNow = function(){
-      //window.open('https://www.paypal.com/cgi-bin/webscr','_system','location=yes');
       $scope.cart.checkout('PayPal');
-      // global data
-      //PaypalService.initPaymentUI().then(function () {
-      //  PaypalService.makePayment(totalAmountUSD,"Total Amount").
-      //    then(function (response) {
-      //      alert("Transaction is successful");
-      //      paymentResources.pickupPaymentDetails({
-      //        pickupDetails:$scope.pickup,
-      //        response:response.response,
-      //        client:response.client,
-      //        response_type:response.response_type,
-      //        shoppingCart:$rootScope.cart.cartItems
-      //      }).then(function(response){
-      //          if(response.data.status == 'Success') {
-      //            var cartArrayLength = $rootScope.cart.cartItems.length;
-      //            $rootScope.cart.cartItems.splice(0,cartArrayLength);
-      //            $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-      //            $state.go("orderConfirmation", {orderId: response.data.result.response.id});
-      //          }else{
-      //            alert("Transaction error");
-      //          }
-      //      },function(error){
-      //        alert("Transaction error");
-      //      });
-      //    }, function (error) {
-      //      alert("Transaction Canceled");
-      //    });
-      //});
     }
   })
 

@@ -25,7 +25,7 @@ function shoppingCart(cartName) {
 
 // load items from local storage
 shoppingCart.prototype.loadItems = function () {
-    var items = localStorage != null ? localStorage[this.cartName + "_items"] : null;    
+    var items = localStorage != null ? localStorage[this.cartName + "_items"] : null;
     if (items != null && JSON != null) {
         try {
             var items = JSON.parse(items);
@@ -55,7 +55,7 @@ shoppingCart.prototype.saveItems = function () {
 shoppingCart.prototype.selectDeliveryOption = function (option) {
     if (localStorage != null && JSON != null) {
         if(option == 'pickUp'){
-            localStorage['deliveryOption'] = option;            
+            localStorage['deliveryOption'] = option;
         }
         if(option == 'delivery'){
             localStorage['deliveryOption'] = option;
@@ -75,8 +75,8 @@ shoppingCart.prototype.getCurretDeliveryOption = function () {
     if (localStorage != null && JSON != null) {
         var currentDeliveyOption = localStorage['deliveryOption'];
         if(!currentDeliveyOption){
-            this.selectDeliveryOption('pickUp');            
-        }        
+            this.selectDeliveryOption('pickUp');
+        }
         return localStorage['deliveryOption'];
     }
 }
@@ -124,11 +124,11 @@ shoppingCart.prototype.saveDeliveryCharges = function (charges) {
     if (localStorage != null && JSON != null) {
         localStorage['deliveryCharges'] = charges;
         this.deliveryCharge = charges;
-    }    
+    }
 }
 
 // get delivery charges from local storage
-shoppingCart.prototype.getDeliveryCharges = function () {    
+shoppingCart.prototype.getDeliveryCharges = function () {
     if (localStorage != null && JSON != null) {
         var deliveryCharges = localStorage['deliveryCharges'];
         if(deliveryCharges){
@@ -149,7 +149,7 @@ shoppingCart.prototype.getTotalPriceWithDeliveryCharges = function () {
 
 
 // save delivery address to local storage
-shoppingCart.prototype.saveDeliveryAddress = function (name) {    
+shoppingCart.prototype.saveDeliveryAddress = function (name) {
     if (localStorage != null && JSON != null) {
         localStorage['deliveryAddress'] = name;
     }
@@ -206,7 +206,7 @@ shoppingCart.prototype.getCurrentContactNumber = function () {
 }
 
 // save one Doller to local storage
-shoppingCart.prototype.saveOneDoller = function (oneDoller) {    
+shoppingCart.prototype.saveOneDoller = function (oneDoller) {
     if (localStorage != null && JSON != null) {
         localStorage['oneDoller'] = oneDoller;
         this.oneDoller = oneDoller;
@@ -228,28 +228,28 @@ shoppingCart.prototype.getOneDoller = function () {
 // get shopping cart from local storage
 shoppingCart.prototype.getShoppingCart = function () {
     if (localStorage != null && JSON != null) {
-        var cartsItem = localStorage[this.cartName + "_items"]        
+        var cartsItem = localStorage[this.cartName + "_items"]
         return this.items;
     }
 }
 
-// get is submitButton true 
-shoppingCart.prototype.isSubmitButtonDisable = function () {    
+// get is submitButton true
+shoppingCart.prototype.isSubmitButtonDisable = function () {
     if (localStorage != null && JSON != null) {
-        var currentDeliveryOption = this.getCurretDeliveryOption();        
+        var currentDeliveryOption = this.getCurretDeliveryOption();
         if(currentDeliveryOption == 'pickUp'){
             var currentBranch = this.getBranchName();
-            if(currentBranch == 'undefined' || currentBranch == ''){   
+            if(currentBranch == 'undefined' || currentBranch == ''){
                 return true;
-            }else{                
-                return false; 
-            }            
+            }else{
+                return false;
+            }
         }else if(currentDeliveryOption == 'delivery'){
             var currentLocation = this.getLocationName();
             var currentAddress = this.getDeliveryAddress();
             var currentCity = this.getCurrentCity();
             var currentContactNumber = this.getCurrentContactNumber();
-            if(currentLocation == 'undefined' || currentLocation == ''){                
+            if(currentLocation == 'undefined' || currentLocation == ''){
                 return true;
             }else {
                 if(currentAddress == 'undefined' || currentAddress == '') {
@@ -388,7 +388,7 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         business: parms.merchantID,
         upload: "1",
         rm: "2",
-        no_shipping : "1",        
+        no_shipping : "1",
         charset: "utf-8"
     };
 
@@ -397,7 +397,7 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         var item = this.items[i];
         var ctr = i + 1;
         if(i == 0 ){
-            data["shipping_" + ctr] = (this.deliveryCharge / this.oneDoller).toFixed(2);            
+            data["shipping_" + ctr] = (this.deliveryCharge / this.oneDoller).toFixed(2);
         }
         data["item_number_" + ctr] = item.sku;
         data["item_name_" + ctr] = item.name;
@@ -433,7 +433,7 @@ shoppingCart.prototype.checkoutGoogle = function (parms, clearCart) {
     // item data
     for (var i = 0; i < this.items.length; i++) {
         var item = this.items[i];
-        var ctr = i + 1;  
+        var ctr = i + 1;
         data["item_name_" + ctr] = item.sku;
         data["item_description_" + ctr] = item.name;
         data["item_price_" + ctr] = item.price.toFixed(2);
