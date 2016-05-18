@@ -45,6 +45,8 @@
                     return articleService.showPublishArticleDialog(clickTitle);
                 if ('previewArticles' == clickTitle)
                     return articleService.showPreviewArticslesDilog(clickTitle);
+                if ('categories' == clickTitle)
+                    return articleService.showCategoriesDialog(clickTitle);
             }
         }
     }

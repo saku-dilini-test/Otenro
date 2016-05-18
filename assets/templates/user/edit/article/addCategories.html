@@ -1,0 +1,19 @@
+<md-dialog aria-label="Push Message Send">
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>Add Category</h1>
+        </div>
+        <div class="md-dialog-main">
+            <fieldset>
+                <label>Category</label>
+                <input type="text" ng-model="cat.name" >
+            </fieldset>
+        </div>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="back()">cancel</md-button>
+                <md-button class="me-default-button" ng-click="addCategory(cat)">Add</md-button>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

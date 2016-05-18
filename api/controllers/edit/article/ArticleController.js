@@ -28,6 +28,42 @@ module.exports = {
             res.send(result);
         });
     },
+    /**
+     * return collection of article given appId
+     *
+     * @param req appId
+     * @param res collection articles for given appId
+     */
+    getCategoryList : function(req,res){
+
+        var appId = req.param('appId');
+        var searchQuery = {
+            appId : appId
+        };
+
+        ArticleCategory.find(searchQuery).exec(function(err,result) {
+            if (err) return done(err);
+            res.send(result);
+        });
+    },
+
+    /**
+     * return collection of article given appId
+     *
+     * @param req appId
+     * @param res collection articles for given appId
+     */
+    addCategory : function(req,res){
+
+        var appId = req.param('appId');
+        var data = req.body;
+        data.appId = appId;
+
+        ArticleCategory.create(data).exec(function(err,result) {
+            if (err) return done(err);
+            res.send(result);
+        });
+    },
 
     /**
      *

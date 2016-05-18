@@ -18,6 +18,17 @@
         $scope.mainImg = null;
         $scope.isNewArticle = false;
 
+
+        articleService.getCategoryList($scope.appId)
+            .success(function (data) {
+                console.log(data);
+                $scope.categoryList = data;
+            }).error(function (error) {
+            toastr.error('ArticlesLoading Error', 'Message', {
+                closeButton: true
+            });
+        });
+
         if(initialData == 'publishArticle'){
             $scope.isNewArticle = true;
 
@@ -169,6 +180,35 @@
         $scope.answer = function() {
             $mdDialog.hide();
         };
+
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+
+        $scope.addCategoryDialog = function(data){
+            return articleService.addCategoryDialog(data);
+        };
+
+        $scope.editCategoryDialog = function(data){
+            return articleService.editCategoryDialog(data);
+        };
+
+        $scope.addCategory = function(data){
+            data.appId = $rootScope.appId;
+            articleService.addCategory(data)
+                .success(function (data) {
+                    toastr.success('ArticlesLoading Error', 'Message', {
+                        closeButton: true
+                    });
+                }).error(function (error) {
+                toastr.error('ArticlesLoading Error', 'Message', {
+                    closeButton: true
+                });
+            })
+        }
 
     }
 })();
