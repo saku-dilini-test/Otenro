@@ -179,6 +179,7 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !i
     justify-content: center;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+    overflow-x: scroll;
 	
     background: -moz-linear-gradient(top, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0) 100%) !important; 
 background: -webkit-linear-gradient(top, rgba(0,0,0,0.70) 0%,rgba(0,0,0,0) 100%) !important;
