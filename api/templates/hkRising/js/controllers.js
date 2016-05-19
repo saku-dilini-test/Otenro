@@ -136,6 +136,13 @@ angular.module('starter.controllers', [])
                 }).error(function(err) {
                     alert('loading err');
                 });
+            }else {
+                $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$rootScope.appId+"&categoryId="+$stateParams.categoryId)
+                    .success(function(data) {
+                        $scope.artilceList = data;
+                    }).error(function(err) {
+                        alert('loading err');
+                    });
             }
 
         }

@@ -9,9 +9,9 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("ArticleCtrl", [
-        '$scope','$mdDialog','$auth','$rootScope','articleService','toastr','ME_APP_SERVER','initialData',ArticleCtrl]);
+        '$scope','$mdDialog','$auth','$rootScope','articleService','toastr','ME_APP_SERVER','mySharedService','initialData',ArticleCtrl]);
 
-    function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,ME_APP_SERVER,initialData) {
+    function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,ME_APP_SERVER,mySharedService,initialData) {
 
         $scope.appId = $rootScope.appId;
         $scope.tmpImage = [ null , null];
@@ -154,6 +154,12 @@
                         toastr.success('Successfully Publish Article ', 'Saved', {
                             closeButton: true
                         });
+
+                        var catId = result.categoryId;
+                        $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                            +'/templates/'+$rootScope.appId+'' +
+                            '#/app/home/'+catId+'?'+new Date().getTime();
+                        mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
                         articleService.showPreviewArticslesDilog('previewArticles');
                     }).error(function (error) {
