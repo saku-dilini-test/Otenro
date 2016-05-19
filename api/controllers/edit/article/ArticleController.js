@@ -105,7 +105,7 @@ module.exports = {
                 article.imageUrl = newFileName;
                 Article.create(article).exec(function(err, result) {
                     if (err) res.send(err);
-                    res.send('ok');
+                    res.send({categoryId : article.categoryId});
                 });
             });
         }else if(article.isImageUpdate == 'false'){
@@ -114,7 +114,7 @@ module.exports = {
             Article.update(updateQuery,data).exec(function(err, result) {
                 if (err) res.send(err);
                 console.log(result);
-                res.send('ok');
+                res.send({categoryId : article.categoryId});
             });
 
         }else if(article.isImageUpdate == 'true'){
@@ -134,7 +134,7 @@ module.exports = {
                 Article.update(updateQuery,data).exec(function(err, result) {
                     if (err) res.send(err);
                     console.log(result);
-                    res.send('ok');
+                    res.send({categoryId : article.categoryId});
                 });
             });
         }
