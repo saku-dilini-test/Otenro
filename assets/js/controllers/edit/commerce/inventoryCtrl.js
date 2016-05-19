@@ -18,7 +18,7 @@
                 if (typeof $scope.inventoryList === 'undefined') {
                      inventoryService.getInventoryList()
                          .success(function (result) {
-                            console.log(result);
+
                              $scope.inventoryList = result;
 //                             $scope.inventoryList={
 //                             quantity:0,
