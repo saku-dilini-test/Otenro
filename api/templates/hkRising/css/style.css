@@ -248,7 +248,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
     text-overflow: ellipsis;
     white-space: nowrap;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 3.5vw;
 	padding-left: 10px;
     padding-right: 10px;
     font-family: "-apple-system", "Helvetica Neue",    "Roboto", "Segoe UI", sans-serif;
