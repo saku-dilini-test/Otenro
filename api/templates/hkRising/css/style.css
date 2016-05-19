@@ -71,9 +71,11 @@
     overflow: visible;
     white-space: normal;
     font-weight: 600;
+    font-size: 5.2vw;
+    height: 40px;
 	color:#CC9;
 	float:left;
-	margin-top:-50px;
+	margin-top:-40px;
 	width:100%;
 	border:none !important; 
 	 background: -moz-linear-gradient(top, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0) 100%) !important; 
