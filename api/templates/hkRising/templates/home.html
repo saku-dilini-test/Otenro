@@ -1,4 +1,4 @@
-<ion-view hide-back-button="true" view-title="HONG KONG RISE UP">
+<ion-view hide-back-button="true" view-title="{{appName}}">
   <ion-content>
 
       <br>
@@ -6,27 +6,16 @@
       <br>
       <div class="header"></div>
 
-    <ion-nav-view name="tabContent"></ion-nav-view>
-      
+      <ion-nav-view class="made-easy-backgroundColor" name="tabContent"></ion-nav-view>
+
       <ion-tabs class="tabs-positive2 tabs2">
-      
-          <a class="tab-item2" href="#/app/home/hotels">
-              Hotels
-          </a>
-
-          <a class="tab-item2"  "active" href="#/app/home/active">
-              Active
-          </a>
-
-          <a class="tab-item2" href="#/app/home/shopping">
-              Shopping
-          </a>
-
-          <a class="tab-item2" href="#/app/home/foods">
-              Foods
-          </a>
-         
+          <div ng-repeat="category in articleCategoryList">
+              <a class="tab-item" ng-href="#/app/home/{{category.id}}">
+                  {{category.name}}
+              </a>
+          </div>
       </ion-tabs>
+
 
 
 

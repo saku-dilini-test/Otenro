@@ -55,12 +55,32 @@ angular.module('starter.controllers', [])
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
-    .controller('HomeCtrl', function($scope,$http,constants,$rootScope) {
+    .controller('HomeCtrl', function($scope,$http,constants,$rootScope,$timeout,$state) {
+
+        $scope.appName = $rootScope.appName;
+
+
+        $scope.changeAppName = function(){
+            $scope.appName = $rootScope.appName;
+
+            $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId='+$rootScope.appId)
+                .success(function(data) {
+                    $scope.articleCategoryList = data;
+                }).error(function(err) {
+                    alert('loading err');
+                });
+        }
+
+        $timeout( function(){
+            $scope.changeAppName();
+        }, 2000);
+
 
     })
 
     .controller('secondNaviCtrl', function($scope,$http,constants,$rootScope) {
       $scope.appId = $rootScope.appId;
+        $scope.appName = $rootScope.appName;
 
       $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$rootScope.appId)
           .success(function(data) {
@@ -71,48 +91,70 @@ angular.module('starter.controllers', [])
           });
     })
 
-    .controller('articleCtrl', function($scope,$http,constants,$rootScope,$stateParams) {
+    .controller('contactUsCtrl', function($scope,$http,constants,$rootScope) {
+
+        $scope.appId = $rootScope.appId;
+        $scope.appName = $rootScope.appName;
+
+        $http.get( constants.SERVER_URL + '/templates/getContactUs?appId='+$scope.appId).success(function(data) {
+            $scope.email = data.email;
+
+        }).error(function(err) {
+            alert('warning', "Unable to get contact us info", err.message);
+        });
+
+
+    })
+
+    .controller('aboutUsCtrl', function($scope,$rootScope) {
+
+        $scope.appName = $rootScope.appName;
+        $scope.aboutUs = "This about us content should come backend";
+
+    })
+
+    .controller('articleCtrl', function($scope,$http,constants,$rootScope,$stateParams,$timeout) {
 
       $scope.appId = $rootScope.appId;
+        $scope.appName = $rootScope.appName;
 
-    $scope.artilceList = [
-    {
-      "title" : "Water",
-      "desc" : "This is water Image ",
-      "imageUrl" : "default.jpg"
-    },
-    {
-      "title" : "Animal",
-      "desc" : "This is Animal Image",
-      "imageUrl" : "a.jpg"
-    },
-    {
-      "title" : "Water",
-      "desc" : "This is water Image ",
-      "imageUrl" : "c.png"
-    }    
-    ]
+        $scope.changeAppName = function(){
+            $scope.appName = $rootScope.appName;
 
-    $scope.selectedArticle = {
-      "title" : "Water",
-      "desc" : "This is water Image ",
-      "imageUrl" : "default.jpg"
-    };
+            if($stateParams.categoryId == 'firstMenu'){
+                $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId='+$rootScope.appId)
+                    .success(function(catList) {
+                        if(catList.length > 0){
+                            var firstCat = catList[0];
+                            $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$rootScope.appId+"&categoryId="+firstCat.id)
+                                .success(function(data) {
+                                    $scope.artilceList = data;
+                                }).error(function(err) {
+                                    alert('loading err');
+                                });
+                        }
+                }).error(function(err) {
+                    alert('loading err');
+                });
+            }
 
-      // $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$scope.appId)
-      //     .success(function(data) {
-      //         console.log(data);
-      //       $scope.artilceList = data;
-      //     }).error(function(err) {
-      //       alert('loading err');
-      //     });
+        }
+        $timeout( function(){
+            $scope.changeAppName();
+        }, 2000);
 
-      //   $http.get(constants.SERVER_URL + '/templates/getArticleById?articleId='+$stateParams.articleId)
-      //       .success(function(data) {
-      //           console.log(data);
-      //           $scope.selectedArticle = data;
-      //       }).error(function(err) {
-      //           alert('loading err');
-      //       });
+        $http.get(constants.SERVER_URL + '/templates/getArticleById?articleId='+$stateParams.articleId)
+            .success(function(data) {
+                $scope.selectedArticle = data;
+            }).error(function(err) {
+                alert('loading err');
+            });
+
+        $http.get(constants.SERVER_URL + '/templates/getArticles?appId='+$rootScope.appId+"&categoryId="+$stateParams.categoryId)
+            .success(function(data) {
+                $scope.artilceList = data;
+            }).error(function(err) {
+                alert('loading err');
+            });
 
     });

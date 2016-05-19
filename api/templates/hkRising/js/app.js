@@ -24,6 +24,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
       readMadeEasy.readFile().success(function(data){
         $rootScope.appId = data.appId;
+        $rootScope.appName = data.name;
         console.log(data);
       });
     }

@@ -158,6 +158,7 @@ module.exports.routes = {
     'POST /edit/deleteArticle' : 'edit/article/articleController.deleteArticle',
     'POST /edit/addCategory' : 'edit/article/articleController.addCategory',
     'GET /edit/getCategoryList' : 'edit/article/articleController.getCategoryList',
+    'POST /edit/deleteCategory' : 'edit/article/articleController.deleteCategory',
 
     /**
      *InventoryController
