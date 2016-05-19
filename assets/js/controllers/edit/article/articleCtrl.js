@@ -241,9 +241,9 @@
         $scope.deleteCategory = function(data){
 
             var dataDelete = {
-                id : data
+                catId : data
             };
-           // console.log(dataDelete);
+            console.log(dataDelete);
             articleService.deleteCategory(dataDelete)
                 .success(function (data) {
                     toastr.success('Successfully Delete Article Category', 'Message', {

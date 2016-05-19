@@ -72,11 +72,14 @@ module.exports = {
      */
     deleteCategory : function(req,res){
 
-        var id = req.body.id;
+        var id = req.body.catId;
         console.log(req.body);
+        var deleteQuery = {
+            id : id
+        }
 
-        ArticleCategory.destroy({ '_id' : {$type:id}}).exec(function(err,result) {
-           // if (err) return done(err);
+        ArticleCategory.destroy(deleteQuery).exec(function(err,result) {
+           if (err) return res.send(err);
             res.send(result);
         });
     },
