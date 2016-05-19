@@ -225,6 +225,10 @@ module.exports.routes = {
     'POST /templatesOrder/saveOrder' : 'template/TemplateOrderController.saveOrder',
 
     /***
+    * Template Inventory Controller
+    */
+    'POST /templatesInventory/updateInventory' : 'template/TemplateOrderController.updateInventory',
+    /***
      * MobileViewer Data
      **/
 

@@ -12,7 +12,6 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
         +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi";
 
     $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$scope.appId).success(function(data) {
-        console.log(data);
         $scope.categories = data;
     }).error(function(err) {
         alert('warning', "Unable to get categories", err.message);
