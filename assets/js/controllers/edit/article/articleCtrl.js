@@ -223,12 +223,17 @@
         $scope.addCategory = function(data){
             data.appId = $rootScope.appId;
             articleService.addCategory(data)
-                .success(function (data) {
-                    toastr.success('ArticlesLoading Error', 'Message', {
+                .success(function (result) {
+                    toastr.success('Successfully Added Article Category', 'Message', {
                         closeButton: true
                     });
+                    var catId = result.id;
+                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                        +'/templates/'+$rootScope.appId+'' +
+                        '#/app/home/'+catId+'?'+new Date().getTime();
+                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (error) {
-                toastr.error('ArticlesLoading Error', 'Message', {
+                toastr.error('Article Category Adding Error', 'Message', {
                     closeButton: true
                 });
             })
@@ -241,11 +246,15 @@
            // console.log(dataDelete);
             articleService.deleteCategory(dataDelete)
                 .success(function (data) {
-                    toastr.success('ArticlesLoading Error', 'Message', {
+                    toastr.success('Successfully Delete Article Category', 'Message', {
                         closeButton: true
                     });
+                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                        +'/templates/'+$rootScope.appId+'' +
+                        '#/app/home/firstMenu?'+new Date().getTime();
+                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (error) {
-                toastr.error('ArticlesLoading Error', 'Message', {
+                toastr.error('Article Category Delete Error', 'Message', {
                     closeButton: true
                 });
             })
