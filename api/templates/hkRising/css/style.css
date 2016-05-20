@@ -15,7 +15,10 @@
 
 
 /* Custom Css for  */
-
+  .pane{
+      overflow-y: scroll;
+      overflow-x: hidden;
+  }
 .pane, .view {
     height: 750px;  /* This should may change only Test */
 }
