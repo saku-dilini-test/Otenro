@@ -64,7 +64,7 @@ module.exports.routes = {
   'POST /facebookAuth' : 'UserController.facebookAuth',
   'POST /googleAuth' : 'UserController.googleAuth',
   'GET /getPromotionList' : 'PromotionController.getPromotionList',
-  'POST /paypalResponse': 'PaymentController.getPaypalResponse'
+  'GET /paypalResponse': 'PromotionController.getPromotionList'
 
 
 };
