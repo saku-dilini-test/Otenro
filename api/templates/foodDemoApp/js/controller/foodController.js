@@ -11,6 +11,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
 
     $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
+    console.log("foods "+data);
           $scope.foods = data;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
@@ -19,7 +20,8 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     if($stateParams.foodId){
         $http.get(constants.SERVER_URL + '/templates/getProductById?productId='+$stateParams.foodId)
              .success(function(data) {
-                  $scope.foodInfo = data[0];
+                  $scope.foodInfo = data;
+                  console.log("foodInfo "+data.id);
              }).error(function(err) {
                  alert('warning', "Unable to get Product", err.message);
           });

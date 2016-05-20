@@ -48,7 +48,7 @@
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label for="input-name">SKU</label>
-                                    <input type="text" name="sku" ng-pattern="/[0-9]+/" ui-mask="9999999999" ng-model="product.sku" id="input-sku" required />
+                                    <input type="number" name="sku" ng-model="product.sku" id="input-sku" required />
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label>Main</label>
@@ -116,7 +116,11 @@
                             <tbody>
 
                                 <tr ng-repeat="data in variants">
-                                    <td ng-model="data.sku">{{data.sku}}</td>
+                                    <td inline-edit="data.sku"
+                                        inline-edit-callback="skuUpdateHandler(newValue)"
+                                        inline-edit-btn-edit=""
+                                        inline-edit-on-blur="save"
+                                        inline-edit-on-click></td>
                                     <td
                                        ng-model="data.name">{{data.name}}</td>
                                     <td
@@ -131,7 +135,11 @@
                                        inline-edit-btn-edit=""
                                        inline-edit-on-blur="save"
                                        inline-edit-on-click></td>
-                                    <td ><input type="number" name="quantity" placeholder="{{data.qty}}"  ng-model="data.qty"/></td>
+                                    <td inline-edit="data.qty"
+                                        inline-edit-callback="priceUpdateHandler(newValue)"
+                                        inline-edit-btn-edit=""
+                                        inline-edit-on-blur="save"
+                                        inline-edit-on-click></td>
                                 </tr>
 
                             </tbody>

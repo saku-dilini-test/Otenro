@@ -12,16 +12,16 @@
     </div>
     <div class="item item-stacked-label" ng-repeat="item in cartItems" >
       <div class="row">
-        <div class="col col-50">{{item.name}}</div>
-        <div class="col">{{item.qty}}</div>
-        <div class="col">{{item.price}}</div>
+        <div class="col" ng-model="item.name" style="size;">{{item.name}}</div>
+        <div class="col" ng-model="item.qty" >{{item.qty}}</div>
+        <div class="col" ng-model="item.price" >{{item.price}}</div>
       </div>
     </div>
     <div class="item item-stacked-label">
       <div class="row">
         <div class="col col-50">Total</div>
         <div class="col"></div>
-        <div class="col">{{getTotal()}}</div>
+        <div class="col" ng-model="total" >{{getTotal()}}</div>
       </div>
     </div>
 
@@ -45,7 +45,7 @@
     </ui>
     <div class="panel2">
       <a class="social-button" >Perchase</a>
-      <a class="social-button" >Delivery</a>
+      <a class="social-button" ng-click="deliver(cartItems)" >Delivery</a>
     </div>
      </div></div>
   </ion-content></div>

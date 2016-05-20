@@ -33,6 +33,12 @@ module.exports = {
         fulfillmentStatus : {
             type : 'string'
         },
+        item:{
+            type: 'json'
+        },
+        amount:{
+            type: 'string'
+        },
         createAt: {
             type: 'date'
         }
