@@ -22,6 +22,6 @@ module.exports = {
   },
   paypalResponse : function(req,res){
           return res.json(200, {success: 'recieved'});
-          console.log("successssssssssssssssss "+ res.body);
+          sails.log.debug("successssssssssssssssss "+ res.body);
   }
 };
