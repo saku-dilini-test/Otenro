@@ -13,8 +13,8 @@ var server  = email.server.connect({
   ssl:     true
 });
 
-var orderEmail = 'orders@tecclk.com';
-
+//var orderEmail = 'orders@tecclk.com';
+var orderEmail = 'sallayshamila@gmail.com'
 module.exports = {
   create: function (req, res) {
     var data = req.body;
@@ -326,5 +326,10 @@ module.exports = {
         }
       });
     }
+  },
+
+  getPaypalResponse: function(req,res){
+
+      console.log("response data "+ req.body);
   }
 };

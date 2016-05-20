@@ -403,12 +403,13 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         data["item_name_" + ctr] = item.name;
         data["quantity_" + ctr] = item.quantity;
         data["amount_" + ctr] = (item.price / this.oneDoller).toFixed(2);
+        data["registerId" + ctr] = "DEV-3f2f320a-53f3-4ca0-89a4-5868091497d8";
     }
     data["notify_url"] = "http://tecclk.com/#/paymentInfo.html";
     console.log(data);
     // build form
     var form = $('<form/></form>');
-    form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
+    form.attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");
     form.attr("method", "POST");
     form.attr("style", "display:none;");
     this.addFormFields(form, data);
