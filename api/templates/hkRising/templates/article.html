@@ -1,7 +1,8 @@
 <ion-view hide-back-button="true" view-title="{{appName}}">
     <ion-content class="made-easy-backgroundColor">
         <ion-nav-buttons side="left">
-        </ion-nav-buttons>
+        </ion-nav-buttons>v
+        <div class="holder">
         <div ng-repeat="article in artilceList">
             <div class="card">
                 <a href="#/app/articleView/{{article.id}}">
@@ -13,7 +14,7 @@
                                  <div class="item item-text-wrap">
                                 {{article.title}}
                             </div>
-                            </div>
+                            </div></div>
                         </div>
 
                     </div>
