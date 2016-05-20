@@ -71,13 +71,16 @@
     overflow: visible;
     white-space: normal;
     font-weight: 600;
-    font-size: 5.2vw;
+    font-size: 3.8vw;
+    line-height: 3.8vw;
     height: 40px;
 	color:#CC9;
 	float:left;
-	margin-top:-40px;
+	margin-top:-60px;
 	width:100%;
-	border:none !important; 
+	border:none !important;
+    height: 40px;
+    padding:30px 5px 10px 5px;
 	 background: -moz-linear-gradient(top, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0) 100%) !important; 
 background: -webkit-linear-gradient(top, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !important;
 background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !important; 
@@ -135,8 +138,6 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !i
     bottom: 0;
     z-index: 0;
     overflow: hidden;
-    min-height: 100%;
-    max-height: 100vh;
     width: 275px;
 	background-image:url(../img/menu_bg.jpg) ;
 	background-size:100% 100%;
@@ -144,7 +145,7 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !i
 
 .header {
 	width:100%;
-	height:90vw;
+	height:250px;
 	background-image:url(../img/header.jpg);
 	margin-top:-110px;
 	background-size: cover;
@@ -156,8 +157,8 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !i
     background-color:transparent !important;
     height:100px;
     font-weight:800 !important;
-    font-size: 5.5vw;
-    width: 60%;
+    font-size: 15px;
+    width: 88%;
 }
 
 .tabs {
@@ -192,9 +193,6 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.20) 0%,rgba(0,0,0,0) 100%) !
     z-index: 5;
     width: 100%;
     height: 49px;
-    border-style: solid;
-    border-top-width: 1px;
-    background-size: 0;
     line-height: 49px;
 }
 
@@ -290,3 +288,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
     
     padding: 0px !important;
 	}
+.holder{
+    padding-right:20px;
+    width: 100%;
+    margin-left:4.8%;
+}
