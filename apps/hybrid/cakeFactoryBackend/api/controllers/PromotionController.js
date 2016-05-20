@@ -22,5 +22,6 @@ module.exports = {
   },
   paypalResponse : function(req,res){
           return res.json(200, {success: 'recieved'});
+          console.log("success "+ res.body);
      }
 };
