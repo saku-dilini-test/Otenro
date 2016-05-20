@@ -19,5 +19,8 @@ module.exports = {
         return res.json(200, {success: 'Success', result: result});
       }
     })
-  }
+  },
+  paypalResponse : function(req,res){
+          return res.json(200, {success: 'recieved'});
+     }
 };
