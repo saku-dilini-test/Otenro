@@ -21,7 +21,9 @@ module.exports = {
     })
   },
   paypalResponse : function(req,res){
-            sails.log.debug('successssssssssssssssss ',req.body);
+
+      var data = req.body;
+            sails.log.debug('successssssssssssssssss ',JSON.stringify(data));
           return res.json(200, {success: 'recieved'});
   }
 };
