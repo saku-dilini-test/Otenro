@@ -294,3 +294,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
     margin-left:4.8%;
     overflow-y: scroll;
 }
+
+.scroll-bar-indicator
+{
+    display: none;
+}
