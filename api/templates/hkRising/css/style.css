@@ -102,7 +102,7 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !i
 .card2 {
     overflow: hidden;
     border-radius: 2px;
-    background-color: #fff;
+    background-color: #fffcef;
     margin-top: -50px;
     border-radius: 10px;
 }
@@ -156,13 +156,14 @@ background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !i
     background-color:transparent !important;
     font-weight:800 !important;
     font-size: 16px;
+    height: 50px;
     left: 41px;
     right: 41px;
     text-align: center;
 }
 
 .tabs {
-    margin-top: 52px;
+    margin-top: 57px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -298,7 +299,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
     overflow-y: scroll;
 }
 
-.scroll-bar-indicator
+.ion-scroll
 {
     display: none;
 }
