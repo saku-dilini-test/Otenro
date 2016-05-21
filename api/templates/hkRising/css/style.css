@@ -299,6 +299,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
     width: 100%;
     margin-left:6.8%;
     overflow-y: scroll;
+    padding-bottom: 40px;
 }
 .ion-scroll
 {
