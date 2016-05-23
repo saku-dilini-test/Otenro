@@ -75,9 +75,9 @@
                   $scope.variants=[{
                       sku: product.sku,
                       name: product.name,
-                      sizeOrweight: "0",
-                      price: "0",
-                      qty: "0"
+                      sizeOrweight: 0,
+                      price: 0,
+                      qty: 0
                   }];
              }
         }

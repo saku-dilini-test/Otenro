@@ -15,7 +15,7 @@
                 <tbody>
                 <tr ng-repeat="article in articleList">
                     <td>{{article.title}}</td>
-                    <td>{{article.createdAt}}</td>
+                    <td>{{article.createdDate}}</td>
                     <td>
                         <a data-ng-click="editArticle(article)">Edit</a> /
                         <a data-ng-click="deleteArticle($index,article)">Delete</a>

@@ -51,6 +51,15 @@
         }else if(initialData == 'previewArticles'){
             articleService.getArticleList($scope.appId)
                 .success(function (data) {
+
+                    for(var i=0; i<data.length; i++){
+                        var date = new Date(data[i].createdAt);
+                        $scope.displayDate = date.toLocaleString();
+                        $scope.year = date.getFullYear();
+                        $scope.month = date.getMonth()+1;
+                        $scope.date = date.getDate();
+                        data[i].createdDate = $scope.year+"-"+$scope.month+"-"+$scope.date;
+                    }
                     $scope.articleList = data;
                 }).error(function (error) {
                     toastr.error('ArticlesLoading Error', 'Message', {

@@ -25,7 +25,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         $http.get(constants.SERVER_URL + '/templates/getProductById?productId='+$stateParams.foodId)
              .success(function(data) {
                   $scope.foodInfo = data;
-                  console.log("foodInfo "+data.id);
              }).error(function(err) {
                  alert('warning', "Unable to get Product", err.message);
           });
