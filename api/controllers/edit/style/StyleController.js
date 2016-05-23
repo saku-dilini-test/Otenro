@@ -451,6 +451,7 @@ module.exports = {
     //},
     /**
      * Update Background Color , Navigation Bar , Footer and Button given appId with common function
+     * also Update Header , Content & Footer Color given appId also integrated
      */
     addStyleColor : function(req,res){
         var userId = req.userId;
@@ -464,7 +465,8 @@ module.exports = {
 
         Application.findOne(query).exec(function(err, app) {
             if (err) res.send(err);
-            console.log(app);
+
+            // here update background-color in Css class
             if(type == 'backgroundColor'){
                 app.appSettings.backgroundColor= styleColor;
                 colorTypeCss = ".made-easy-backgroundColor";
@@ -478,17 +480,44 @@ module.exports = {
                 app.appSettings.buttonColor = styleColor  ;
                 colorTypeCss = ".made-easy-button-setting";
             }
+            // here update color in Css class
+            else if(type == 'headerFontColor') {
+                app.appSettings.headerFontColor = styleColor;
+                colorTypeCss = ".made-easy-header-font";
+            }
+            else if(type == 'contentFontColor') {
+                app.appSettings.contentFontColor = styleColor;
+                colorTypeCss = ".made-easy-content-font";
+            }
+            else if(type == 'footerFontColor') {
+                app.appSettings.footerFontColor = styleColor;
+                colorTypeCss = ".made-easy-footer-font";
+            }
 
             Application.update(query,app).exec(function(err, appUpdate) {
                 if (err) res.send(err);
 
-                updateFile(mainCssFile, [{
-                    rule: colorTypeCss,
-                    target: "background-color",
-                    replacer: styleColor
-                }],function (err) {
-                    console.log((err));
-                });
+                // here update color in Css class
+                if(type == 'headerFontColor' || type == 'contentFontColor' || type == 'footerFontColor'){
+                    updateFile(mainCssFile, [{
+                        rule: colorTypeCss,
+                        target: "color",
+                        replacer: styleColor
+                    }], function (err) {
+                        console.log((err));
+                    });
+
+                }else
+                // here update background-color in Css class
+                {
+                    updateFile(mainCssFile, [{
+                        rule: colorTypeCss,
+                        target: "background-color",
+                        replacer: styleColor
+                    }], function (err) {
+                        console.log((err));
+                    });
+                }
                 res.send(appUpdate);
 
             });

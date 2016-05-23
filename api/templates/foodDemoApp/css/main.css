@@ -80,16 +80,19 @@
   background-color: inherit;
 }
 .made-easy-header-font{
+    color : inherit;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
 }
 .made-easy-content-font{
+    color : inherit;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
 }
 .made-easy-footer-font{
+    color : inherit;
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
@@ -100,6 +103,8 @@
   border-width: inherit;
   border-radius: inherit;
 }
+
+/** ----------- End Custom update Css Class ---------- **/
 h7 {
   font-family: Helvetica, sans-serif;
   font-size: 35px !important;

@@ -40,6 +40,9 @@
             $scope.backgroundColor = appSettings.backgroundColor;
             $scope.navigationBarColor = appSettings.navigationBarColor;
             $scope.footerColor = appSettings.footerColor;
+            $scope.headerFontColor = appSettings.headerFontColor;
+            $scope.contentFontColor = appSettings.contentFontColor;
+            $scope.footerFontColor = appSettings.footerFontColor;
             $scope.buttonColor = appSettings.buttonColor;
             $scope.headerFontFamilyProp = {
                 "value": appSettings.headerFontFamily,
