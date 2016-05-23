@@ -14,24 +14,27 @@
 
   <!-- ionic/angularjs js -->
   <script src="./lib/ionic/js/ionic.bundle.js"></script>
+  <script src="./lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script></head>
 
   <!-- cordova script (this will be a 404 during development) -->
   <script src="./cordova.js"></script>
   <script src="./lib/ionic/js/angular-ui/angular-ui-router.js"></script>
-  <script src="./js/paypal-mobile-js-helper.js"></script>
-  <script src="./js/cdv-plugin-paypal-mobile-sdk.js"></script>
+  <script src="./lib/jquery/dist/jquery.js"></script>
 
   <!-- your app's js -->
   <script src="./js/app.js"></script>
-  <script src="./js/services/payPalService.js"></script>
+  <script src="./js/services/shoppingCart.js"></script>
   <script src="./js/services.js"></script>
+  <script src="./js/services/dataService.js"></script>
   <script src="./js/controllers.js"></script>
   <script src="./js/dashResource.js"></script>
   <script src="./js/categoryResource.js"></script>
   <script src="./js/categoryProductResource.js"></script>
   <script src="./js/services/paymentService.js"></script>
+  <script src="./js/services/promotionService.js"></script>
 
-</head>
+
+
 <body ng-app="starter" class="platform-android platform-cordova platform-webview">
 <!--
   The nav bar that will be updated as we navigate between views.

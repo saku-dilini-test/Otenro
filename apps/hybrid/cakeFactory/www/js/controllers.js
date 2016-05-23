@@ -95,7 +95,25 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('ContactCtrl', function ($scope) {})
+.controller('ContactCtrl', function ($scope,$interval) {
+
+    $scope.openBrowser = function() {
+      var url = 'http://google.com';
+      var ref = window.open(url, '_blank', 'location=no');
+
+      $interval(callAtInterval, 5000);
+
+      function callAtInterval() {
+        //console.log(ref);
+        var domException = new DOMException(ref);
+        console.log(domException);
+        //console.log(url);
+
+        //ref.close();
+      }
+
+    }
+  })
 
 .controller('DeliveryCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService) {
         var totalAmountUSD = initialData.totalAmount.data.usd;

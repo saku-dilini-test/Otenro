@@ -28,6 +28,9 @@
           },
           getDeliveryLocations:function(){
             return $http.get(SERVER_URL+ 'locations/getDeliveryLocations')
+          },
+          saveToken : function(token){
+            return $http.post(SERVER_URL+'saveToken',{token:token})
           }
         }
     }

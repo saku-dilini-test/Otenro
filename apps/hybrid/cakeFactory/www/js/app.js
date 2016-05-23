@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 'starter.services'])
 
-  .run(function($ionicPlatform) {
+  .run(function($ionicPlatform,$rootScope,paymentResources) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -20,6 +20,35 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         // org.apache.cordova.statusbar required
         StatusBar.styleLightContent();
       }
+
+      var push = new Ionic.Push({
+        "debug": true
+      });
+      console.log('xxxxxxxx');
+      push.register(function(token) {
+        console.log("Device token:",token.token);
+        push.saveToken(token);  // persist the token in the Ionic Platform
+
+
+        $rootScope.tokenId = token.token;
+
+        paymentResources.saveToken($rootScope.tokenId)
+          .success(function(data){
+            console.log(data);
+            localStorage['token'] = data.token;
+          }).error(function(err){
+            console.log(err);
+          });
+        //$http.post('http://192.168.8.155:1337/saveToken',{token: token.token})
+        //  .success(function(data) {
+        //    console.log('response come');
+        //    $rootScope.tokenId.abc = data;
+        //  }).error(function(err) {
+        //    alert('come err');
+        //    $rootScope.tokenId.abc = err;
+        //  });
+
+      });
     });
   })
 
@@ -180,8 +209,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     $urlRouterProvider.otherwise('/');
 
   })
-  //.constant('SERVER_URL', "http://192.168.8.155:1339/")
-  .constant('SERVER_URL', "http://onbitlabs.com:1338/")
+  .constant('SERVER_URL', "http://192.168.8.155:1337/")
+  //.constant('SERVER_URL', "http://onbitlabs.com:1338/")
   .constant('shopSettings',{
 
   payPalMerchantPrivacyPolicyURL : 'http://onbitlabs.com:1338/ur_to_policy',

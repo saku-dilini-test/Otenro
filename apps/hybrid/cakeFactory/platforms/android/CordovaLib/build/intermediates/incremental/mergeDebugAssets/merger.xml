@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/amila/Onbit_Work/madeEasy/apps/hybrid/cakeFactory/platforms/android/CordovaLib/assets"/></dataSet><dataSet config="debug"><source path="/home/amila/Onbit_Work/madeEasy/apps/hybrid/cakeFactory/platforms/android/CordovaLib/src/debug/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/amila/Onbit_Work/Otenro/apps/hybrid/cakeFactory/platforms/android/CordovaLib/assets"/></dataSet><dataSet config="debug"><source path="/home/amila/Onbit_Work/Otenro/apps/hybrid/cakeFactory/platforms/android/CordovaLib/src/debug/assets"/></dataSet></merger>

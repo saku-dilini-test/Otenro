@@ -389,7 +389,9 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         upload: "1",
         rm: "2",
         no_shipping : "1",
-        charset: "utf-8"
+        charset: "utf-8",
+        "return" : "http://192.168.8.155:1337/payPalRedirect",
+        "custom" : localStorage['token']
     };
 
     // item data
@@ -405,7 +407,7 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         data["amount_" + ctr] = (item.price / this.oneDoller).toFixed(2);
         data["registerId" + ctr] = "DEV-3f2f320a-53f3-4ca0-89a4-5868091497d8";
     }
-    data["notify_url"] = "http://tecclk.com/#/paymentInfo.html";
+
     console.log(data);
     // build form
     var form = $('<form/></form>');

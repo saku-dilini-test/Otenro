@@ -14,7 +14,8 @@ var server  = email.server.connect({
 });
 
 //var orderEmail = 'orders@tecclk.com';
-var orderEmail = 'sallayshamila@gmail.com'
+var orderEmail = 'amilaonbit@gmail.com';
+
 module.exports = {
   create: function (req, res) {
     var data = req.body;
@@ -328,8 +329,128 @@ module.exports = {
     }
   },
 
-  getPaypalResponse: function(req,res){
+  saveToken : function(req,res){
+    console.log(req.body);
+    console.log('xxxxxxx');
+    var data = req.body;
 
-      console.log("response data "+ req.body);
+
+
+
+    //DeviceToken.create(data).exec(function (err, token) {
+    //  if (err) {
+    //    return res.status(err.status).json({err: err.message});
+    //  }
+    //  console.log('yyyyy');
+    //  console.log(token);
+    return res.json(req.body);
+    //
+    //});
+
+    // Define relevant info
+    var jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNDkwMzRjMy1jMzJhLTQ1OWItYmJmZi1iNzhhYzYxNmRkZWIifQ.jG8XAsTDo_NAIaz6qsMGF1OrpQWeCetD-UAQMMmv-Bo";
+    var tokens = [req.body.token];
+    //var profile = 'fake_push_profile';
+    var profile = 'live_app';
+
+    //return res.json({data:'xxxxxx'});
+
+// Build the request object
+//    var options = {
+//      method: 'POST',
+//      url: 'https://api.ionic.io/push/notifications',
+//      headers: {
+//        'Content-Type': 'application/json',
+//        'Authorization': 'Bearer ' + jwt
+//      },
+    var  testData = {
+        "tokens": tokens,
+        "profile": profile,
+        "notification": {
+          "title": "Hi",
+          "message": "Hello world!",
+          "android": {
+            "title": "Hey",
+            "message": "Hello Android! xxx"
+          },
+          "ios": {
+            "title": "Howdy",
+            "message": "Hello iOS!"
+          }
+        }
+      }
+    //};
+    testData = JSON.stringify(testData);
+    request.post({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + jwt
+      },
+      url:'https://api.ionic.io/push/notifications',
+      body: testData
+      },function(err,httpResponse,body){ /*
+       ... */
+        //console.log(err);
+        //console.log(httpResponse);
+        console.log(body);
+      })
+
+
+
+  },
+  payPalRedirect : function(req,res){
+    console.log(req.headers);
+    console.log(req.param('tx'));
+
+    res.json({transactionID : req.param('tx'), token : req.param('cm') });
+
+    var jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNDkwMzRjMy1jMzJhLTQ1OWItYmJmZi1iNzhhYzYxNmRkZWIifQ.jG8XAsTDo_NAIaz6qsMGF1OrpQWeCetD-UAQMMmv-Bo";
+    var tokens = req.param('cm');
+    var profile = 'fake_push_profile';
+    //var profile = 'live_app';
+
+    //return res.json({data:'xxxxxx'});
+
+// Build the request object
+//    var options = {
+//      method: 'POST',
+//      url: 'https://api.ionic.io/push/notifications',
+//      headers: {
+//        'Content-Type': 'application/json',
+//        'Authorization': 'Bearer ' + jwt
+//      },
+    var  testData = {
+      "tokens": tokens,
+      "profile": profile,
+      "notification": {
+        "title": "Hi",
+        "message": "Hello world!",
+        "android": {
+          "title": "Hey",
+          "message": "Hello Android! xxx"
+        },
+        "ios": {
+          "title": "Howdy",
+          "message": "Hello iOS!"
+        }
+      }
+    }
+    //};
+    testData = JSON.stringify(testData);
+    request.post({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + jwt
+      },
+      url:'https://api.ionic.io/push/notifications',
+      body: testData
+    },function(err,httpResponse,body){ /*
+     ... */
+      //console.log(err);
+      //console.log(httpResponse);
+      console.log(body);
+    })
+
   }
 };
+

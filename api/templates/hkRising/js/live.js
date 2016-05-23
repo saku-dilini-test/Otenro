@@ -49,7 +49,7 @@ var QueryString = function () {
 }();
 
 // Time interval 
-var timeIntervel = 1000;
+var timeIntervel = 5000;
 
   var updateMainCss = "css/main.css";
 
@@ -267,7 +267,7 @@ var timeIntervel = 1000;
 var MainFunction = {
   readUrl: function () {       
     
-    //console.log(window.location.href);   
+    console.log(window.location.href);
     var cssUpdate = ((window.location.hash.substring(2)).replace('#','')).split('='); 
     var urlTimeStamp = cssUpdate[1];
     //console.log(urlTimeStamp);
