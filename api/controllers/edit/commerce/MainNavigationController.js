@@ -96,7 +96,7 @@ module.exports = {
         var mainMenu = req.body;
         mainMenu.icon ="glyphicon glyphicon-cloud";
 
-        MainNavigation.create(mainMenu).exec(function(err,newMenu) {
+        SecondNavigation.create(mainMenu).exec(function(err,newMenu) {
             res.json(newMenu);
         });
     },
