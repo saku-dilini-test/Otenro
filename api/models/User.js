@@ -53,6 +53,12 @@ module.exports = {
     role:  {
       type: 'string'
     },
+    address:{
+        type: 'string'
+    },
+    phone:{
+        type: 'string'
+    },
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;

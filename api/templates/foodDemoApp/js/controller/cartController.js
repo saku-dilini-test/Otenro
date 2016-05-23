@@ -2,7 +2,7 @@
  * Created by amila on 4/5/16.
  */
 
-mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,constants) {
+mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,constants) {
 
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
@@ -28,11 +28,17 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,constants) {
     $scope.deliver = function(deliverItems){
 
     $scope.amount = $scope.getTotal();
+    console.log(localStorage.getItem('appLocalStorageUser'));
+    if(localStorage.getItem('appLocalStorageUser')!==null){
+        $scope.saved 				= localStorage.getItem('appLocalStorageUser');
+    	$scope.appLocalStorageUser 	= JSON.parse($scope.saved);
          var data = {
                     appId : $rootScope.appId,
-                    customerName : "Thilini",
+                    customerName : $scope.appLocalStorageUser.name,
                     item : deliverItems,
-                    amount : $scope.amount
+                    amount : $scope.amount,
+                    deliveryAddress : $scope.appLocalStorageUser.address,
+                    telNumber : $scope.appLocalStorageUser.phone
          }
          $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",data)
          .then(function(res){
@@ -48,6 +54,10 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,constants) {
          function(err){
             console.log(err);
          });
+    }
+    else{
+        $state.go('app.login');
+    }
     }
 
 });

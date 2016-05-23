@@ -15,6 +15,16 @@
 						};
 						$http.post(constants.SERVER_URL+"/templatesAuth/authenticate",data)
 							.then(function(res){
+							var requestParams = {
+                            	"token": res.data.token,
+                            	"email": data.email,
+                            	"password": data.password,
+                            	"name": res.data.user.name,
+                            	"phone": res.data.user.phoneNumber,
+                            	"address": res.data.user.address,
+                            	"type": 'internal'
+                            };
+                            localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
 								$state.go('app.category');
 							},
 							function(err){
