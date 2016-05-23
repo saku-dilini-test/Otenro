@@ -20,24 +20,29 @@ module.exports = {
         });
     },
     updateInventory : function(req,res){
+
+    var obj = [];
         var data = req.body;
+
+        for(i=0; i<data.length; i++){
         var searchApp = {
-            id : data.id
+            id: data[i].id,
+            quantity: data[i].qty
         }
-        ApplicationInventory.find(searchApp).exec(function(err, app) {
-            if (err) return done(err);
-            var quantity = {
-            id: searchApp.id,
-            quantity:app[0].quantity - data.quantity
+            ApplicationInventory.find({id:data[i].id}).exec(function(err, app) {
+                if (err) return done(err);
 
-            }
-        ApplicationInventory.update({id:searchApp.id},quantity).exec(function(err,r){
-            if (err) res.send(err);
-            res.send(r);
+                var quantity = {
+                    quantity:app[0].quantity - searchApp.quantity
+                }
+                ApplicationInventory.update({id:searchApp.id},quantity).exec(function(err,r){
+                    if (err) res.send(err);
+                    obj.push(r);
 
-        });
-
-        });
+                });
+            });
+        }
+        res.send(obj);
     }
 
 };

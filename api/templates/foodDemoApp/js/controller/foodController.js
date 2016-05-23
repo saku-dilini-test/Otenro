@@ -11,8 +11,12 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
 
     $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
-    console.log("foods "+data);
-          $scope.foods = data;
+    $scope.foods = data;
+        for(i=0; i<data.length; i++){
+            if(data[i].discount){
+            $scope.foods[i].price = data[i].discount;
+            }
+        }
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
