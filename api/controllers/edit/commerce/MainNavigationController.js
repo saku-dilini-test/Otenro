@@ -93,10 +93,10 @@ module.exports = {
 
     addNewNavi : function(req,res){
 
-        var mainMenu = req.body;
-        mainMenu.icon ="glyphicon glyphicon-cloud";
+        var secondNavigationMenu = req.body;
+        secondNavigationMenu.icon ="glyphicon glyphicon-cloud";
 
-        MainNavigation.create(mainMenu).exec(function(err,newMenu) {
+        SecondNavigation.create(secondNavigationMenu).exec(function(err,newMenu) {
             res.json(newMenu);
         });
     },
