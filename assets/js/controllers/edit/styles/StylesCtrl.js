@@ -120,6 +120,9 @@
                         closeButton: true
                     });
 
+                    var tempUrl = mySharedService.url;
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+
                 }).error(function(err) {
                     toastr.error( type ,'Unable to update', {
                         closeButton: true
@@ -146,6 +149,9 @@
                     toastr.success( type , 'Size Successfully Update ',{
                         closeButton: true
                     });
+
+                    var tempUrl = mySharedService.url;
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
                 }).error(function(err) {
                     toastr.error( type , 'Unable to update ', {
                         closeButton: true
@@ -173,6 +179,10 @@
                     toastr.success( type , 'Weight Successfully Update ',{
                         closeButton: true
                     });
+
+                    var tempUrl = mySharedService.url;
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+
                 }).error(function(err) {
                     toastr.error( type , 'Unable to update  ', {
                         closeButton: true
@@ -191,6 +201,10 @@
                     toastr.success('Button Border Width Successfully Update', {
                         closeButton: true
                     });
+
+                    var tempUrl = mySharedService.url;
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+
                 }).error(function(err) {
                     toastr.error('Unable to update Button Border Width', {
                         closeButton: true
@@ -209,6 +223,9 @@
                     toastr.success('Button Border Radius Successfully Update', {
                         closeButton: true
                     });
+
+                    var tempUrl = mySharedService.url;
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
 
                 }).error(function(err) {
                     toastr.error('Unable to update Button Border Radius', {
@@ -289,17 +306,6 @@
                     });
         });
 
-        $scope.addBackgroundColor = function(bgcolor){
-            $scope.backgroundColorData = {
-                appId: $rootScope.appId,
-                backgroundColor: bgcolor
-            };
-            stylesService.addBackgroundColor($scope.backgroundColorData)
-                .success(function(res){
-                    toastr.success({title: "Successfully Update Background Color"});
-                })
-        };
-
         $scope.addFonts = function(fonts){
             $scope.fontsData = {
                 appId: $rootScope.appId,
@@ -309,6 +315,10 @@
             stylesService.addFonts($scope.fontsData)
                 .success(function(res){
                     toastr.success({title: "Successfully Update Fonts"});
+
+                    var tempUrl = mySharedService.url;
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+
                 })
         };
 

@@ -36,7 +36,7 @@ module.exports = {
             loginPath = '/#/app/login';
         }
         if(templateName == 'hkRising'){
-            loginPath = '/#/app/home/active';
+            loginPath = '/#/app/home/firstMenu';
         }
 
         var application ={
