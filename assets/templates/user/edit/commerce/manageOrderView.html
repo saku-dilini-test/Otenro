@@ -31,10 +31,10 @@
                                     <md-checkbox md-no-ink ng-model="" aria-label="Check one item"></md-checkbox>
                                 </td>
                                 <!--<td># {{order.orderId}}</td>-->
-                                <td>{{order.createdAt}}</td>
+                                <td>{{order.createdDate}}</td>
                                 <td>{{order.customerName}}</td>
-                                <td>{{order.paymentStatus}}</td>
-                                <td>{{order.fulfillmentStatus}}</td>
+                                <td ng-model="order.paymentStatus" ng-class="{'status-sent': order.paymentStatus == 'sent', 'status-pending': order.paymentStatus == 'Pending'}">{{order.paymentStatus}}</td>
+                                <td ng-model="order.fulfillmentStatus" ng-class="{'status-sent': order.fulfillmentStatus == 'sent', 'status-pending': order.fulfillmentStatus == 'Pending'}">{{order.fulfillmentStatus}}</td>
                             </tr>
                             </tbody>
                         </table>

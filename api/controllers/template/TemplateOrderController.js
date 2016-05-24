@@ -24,24 +24,19 @@ module.exports = {
     var obj = [];
         var data = req.body;
 
-        for(i=0; i<data.length; i++){
-        var searchApp = {
-            id: data[i].id,
-            quantity: data[i].qty
-        }
-            ApplicationInventory.find({id:data[i].id}).exec(function(err, app) {
-                if (err) return done(err);
+    data.forEach(function(details){
+        ApplicationInventory.find({id:details.id}).exec(function(err, app) {
+                        if (err) return done(err);
+                        var quantity = {
+                            quantity:app[0].quantity - details.qty
+                        }
+                        ApplicationInventory.update({id:details.id},quantity).exec(function(err,r){
+                            if (err) res.send(err);
+                            obj.push(r);
 
-                var quantity = {
-                    quantity:app[0].quantity - searchApp.quantity
-                }
-                ApplicationInventory.update({id:searchApp.id},quantity).exec(function(err,r){
-                    if (err) res.send(err);
-                    obj.push(r);
-
-                });
-            });
-        }
+                        });
+                    });
+    })
         res.send(obj);
     }
 

@@ -76,6 +76,14 @@
         if (typeof $scope.ordersList === 'undefined') {
             commerceService.getOrderList()
                 .success(function (result) {
+                    for(var i=0; i<result.length; i++){
+                        var date = new Date(result[i].createdAt);
+                        $scope.displayDate = date.toLocaleString();
+                        $scope.year = date.getFullYear();
+                        $scope.month = date.getMonth()+1;
+                        $scope.date = date.getDate();
+                        result[i].createdDate = $scope.year+"-"+$scope.month+"-"+$scope.date;
+                    }
                     $scope.ordersList = result;
                 }).error(function (error) {
                     alert("Orders List Loading Error : " + error);

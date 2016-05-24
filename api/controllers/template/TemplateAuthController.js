@@ -14,7 +14,7 @@ module.exports = {
 
     authenticate : function(req, res) {
 
-        User.findOne({
+        AppUser.findOne({
             email: req.body.email
         }, function foundUser(err, user) {
             if (err) return res.negotiate(err);
@@ -59,7 +59,7 @@ module.exports = {
     },
 
     register: function(req, res) {
-        User.create({email: req.body.email, password: req.body.password, address: req.body.address, phone: req.body.phone, name: req.body.name}).exec(function(err, user) {
+        AppUser.create({email: req.body.email, password: req.body.password, address: req.body.address, phone: req.body.phone, name: req.body.name}).exec(function(err, user) {
             if (err) {
                 return res.negotiate(err);
             }

@@ -43,12 +43,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         $scope.buyOption = opt;
     }
 
-    $scope.addToCart = function(){
-
+    $scope.addToCart = function(quantity){
         $rootScope.cart.cartItems.push({
             id: $scope.foodInfo.id,
             name: $scope.foodInfo.name,
-            qty: 1,
+            qty: quantity,
             price: $scope.foodInfo.price
         });
         $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;

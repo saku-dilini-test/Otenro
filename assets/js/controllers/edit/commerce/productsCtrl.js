@@ -250,7 +250,6 @@
                            closeButton: true
                        });
                    });
-
             }
         }
         else{
