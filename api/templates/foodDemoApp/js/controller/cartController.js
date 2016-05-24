@@ -11,12 +11,24 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,constan
 
     $scope.getTotal = function(){
         var total = 0;
+        var amount = 0;
         for(var i = 0; i < $scope.cartItems.length; i++){
             var product = $scope.cartItems[i];
-            total += (product.price);
+            amount = product.price * product.qty;
+            total += (amount);
         }
         $rootScope.cart.totalPrice = total;
         return total;
+    };
+
+    $scope.getTotalQuantity = function(){
+        var quantity = 0;
+        for(var i =0; i<$scope.cartItems.length; i++){
+            var product = $scope.cartItems[i];
+            quantity += product.qty;
+        }
+        $rootScope.cart.totalQuantity = quantity;
+        return quantity;
     };
 
     $scope.removeItem = function(index){

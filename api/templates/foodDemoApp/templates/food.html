@@ -4,6 +4,8 @@
     <div class="food">
       <div class="panel">
         <div class="card">
+          <div class="item item-text-wrap" style="background: url({{imageURL}}/{{foodInfo.imageUrl}}) center; height:200px; background-size: cover;">
+            </div>
           <div class="item item-text-wrap">
 
             <div ng-show="!(buyOption)">
@@ -48,10 +50,14 @@
               </div >
             </div>
             <br>
-
-            <button class="button button-small button-calm" ng-click="addToCart()">
-              Buy
-            </button>
+            <div class="row">
+                <div class="col2" style="color:#009ddb; font-size:12px;">Qty</div>
+                <div class="col2"><input type="number" ng-model="quantity" style="width:50px"></div>
+                <div class="col2"><button class="button button-small button-calm" ng-click="addToCart(quantity)">
+                  Buy
+                </button></div>
+              </div>
+            </div>
             <br>
             <br>
             <p>{{currency.sign}}  : {{foodInfo.price}}</p>
