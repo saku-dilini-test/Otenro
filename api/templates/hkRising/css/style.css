@@ -1,16 +1,16 @@
 /* Empty. Add your own CSS if you like */
 .image-size{
-    height: 24% !important;
+  height: 24% !important;
 }
 
 .hk-home-tabs{
-    width: 100%;
-    margin-top: 400px;
+  width: 100%;
+  margin-top: 400px;
 }
 
 .hk-top-image{
-    width: 100%;
-    height: 400px !important;
+  width: 100%;
+  height: 400px !important;
 }
 
 
@@ -34,9 +34,9 @@
     font-size: 16px;
     font-weight:600;
     padding-left:20px;
-}
+    }
 
-.list2 {
+    .list2 {
     position: relative;
     padding-top: 1px;
     padding-bottom: 1px;
@@ -53,13 +53,13 @@
 }
 
 .tabs2 {
-    border-color: #000 !important;
+        border-color: #000 !important;
     background-color: #000 !important;
     color: #fff;
 }
 
 .tabs-positive2 {
-    border-color: #000 !important;
+     border-color: #000 !important;
     background-color: #000 !important;
     color: #fff;
 }
@@ -78,9 +78,9 @@
     border:none !important;
     height: 40px;
     padding:30px 5px 10px 5px;
-    background: -moz-linear-gradient(top, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0) 100%) !important;
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !important;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !important;
+     background: -moz-linear-gradient(top, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0) 100%) !important;
+background: -webkit-linear-gradient(top, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !important;
+background: linear-gradient(to bottom, rgba(0,0,0,0.0) 0%,rgba(0,0,0,0) 100%) !important;
 }
 
 .card {
@@ -183,8 +183,8 @@
     overflow-x: scroll;
 
     background: -moz-linear-gradient(top, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0) 100%) !important;
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0.20) 0%,rgba(0,0,0,0) 100%) !important;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.20) 0%,rgba(0,0,0,0) 100%) !important;
+background: -webkit-linear-gradient(top, rgba(0,0,0,0.20) 0%,rgba(0,0,0,0) 100%) !important;
+background: linear-gradient(to bottom, rgba(0,0,0,0.20) 0%,rgba(0,0,0,0) 100%) !important;
 
     color: #000 !important;
     position: static !important;
@@ -197,16 +197,16 @@
 
 .bar.bar-stable {
     height: 100px;
-    background: -moz-linear-gradient(top, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0) 100%) !important; /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0.20) 0%,rgba(0,0,0,0) 100%) !important; /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(0,0,0,0.20) 0%,rgba(0,0,0,0) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */ /* or transparent, or background:none */
+  background: -moz-linear-gradient(top, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0) 100%) !important; /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0.20) 0%,rgba(0,0,0,0) 100%) !important; /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(0,0,0,0.20) 0%,rgba(0,0,0,0) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */ /* or transparent, or background:none */
 }
 .scroll-content {
-    overflow: visible !important;
-    height: 100vh;
-    background-color: transparent !important;
-    margin-top:-50px;
+  overflow: visible !important;
+  height: 100vh;
+  background-color: transparent !important;
+  margin-top:-50px;
 }
 
 .bar {
@@ -217,7 +217,7 @@
     background-repeat: none !important;}
 
 
-.row2 {
+    .row2 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -293,7 +293,7 @@
 
     padding: 0px !important;
     height: 100%;
-}
+    }
 .holder{
     padding-right:20px;
     width: 100%;
@@ -312,5 +312,5 @@
     padding-bottom: 120px;
     overflow-y: scroll;
     overflow-x:hidden;
-    background-color: transparent !important;
+     background-color: transparent !important;
 }
