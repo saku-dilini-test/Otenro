@@ -100,6 +100,14 @@
                                     <select ng-model="headerFontWeightProp.value" ng-options="v for v in headerFontWeightProp.values" ng-change="styleFontWeightChange(headerFontWeightProp.value,'headerFont')">
                                     </select>
                                 </div>
+                                <br>
+                                <div class="color-setting">
+                                    <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="headerFontColor" type="text" style="background-color: {{headerFontColor}}; color: {{headerFontColor}};" >
+                                    </button>
+                                    <div class="color-section">Header Font Color</div>
+                                </div>
+                                <br>
+                                <br>
                                 <div class="other-setting">
                                     <h2>Content Font</h2>
                                     <div class="">
@@ -117,6 +125,14 @@
                                     <select ng-model="contentFontWeightProp.value" ng-options="v for v in contentFontWeightProp.values" ng-change="styleFontWeightChange(contentFontWeightProp.value,'contentFont')">
                                     </select>
                                 </div>
+                                <br>
+                                <div class="color-setting">
+                                    <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="contentFontColor" type="text" style="background-color: {{contentFontColor}}; color: {{contentFontColor}};" >
+                                    </button>
+                                    <div class="color-section">Content Font Color</div>
+                                </div>
+                                <br>
+                                <br>
                                 <div class="other-setting">
                                     <h2>Footer Font</h2>
                                     <div class="">
@@ -134,6 +150,14 @@
                                     <select ng-model="footerFontWeightProp.value" ng-options="v for v in footerFontWeightProp.values" ng-change="styleFontWeightChange(footerFontWeightProp.value,'footerFont')">
                                     </select>
                                 </div>
+                                <br>
+                                <div class="color-setting">
+                                    <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="footerFontColor" type="text" style="background-color: {{footerFontColor}}; color: {{footerFontColor}};" >
+                                    </button>
+                                    <div class="color-section">Footer Font Color</div>
+                                </div>
+                                <br>
+                                <br>
                             </div>
                             <div class="other-settings">
                                 <h1>Button</h1>
