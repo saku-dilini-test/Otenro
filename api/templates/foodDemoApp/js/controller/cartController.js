@@ -57,7 +57,10 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,constan
              data.id = $rootScope.cart.cartItems[0].id;
              $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",deliverItems)
              .then(function(res){
-                 console.log("updating "+res);
+                 $rootScope.cart.cartItems = [];
+                 $rootScope.cart.cartSize = 0;
+                 $rootScope.cart.totalPrice = 0;
+                 $rootScope.cart.totalQuantity = 0;
              },
              function(err){
                 console.log(err);
