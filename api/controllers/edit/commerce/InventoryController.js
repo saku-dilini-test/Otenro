@@ -52,7 +52,6 @@ module.exports = {
 
         var body=req.body;
         var lng=body.length;
-        console.log(body);
         for(var i=0 ; i < lng ; i++){
 
             var inventory={

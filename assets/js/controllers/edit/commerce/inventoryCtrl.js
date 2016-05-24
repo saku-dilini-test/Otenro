@@ -40,7 +40,6 @@
 
 
             $scope.fulfill =function(inventory){
-                console.log(inventory);
                 commerceService.updateInventory(inventory)
                     .success(function (result) {
                         toastr.success('Updated', 'Success', {

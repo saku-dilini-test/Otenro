@@ -1,10 +1,10 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
-        '$scope', '$mdDialog', 'toastr','commerceService','$rootScope','SERVER_URL','$auth','ME_APP_SERVER','item',
+        '$scope', '$mdDialog', 'toastr','commerceService','$rootScope','inventoryService','SERVER_URL','$auth','ME_APP_SERVER','item',
         ProductCtrl]);
 
-    function ProductCtrl($scope, $mdDialog,toastr, commerceService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER,item) {
+    function ProductCtrl($scope, $mdDialog,toastr, commerceService,$rootScope,inventoryService,SERVER_URL,$auth,ME_APP_SERVER,item) {
         var size,weight;
         var variants;
         $scope.tmpImage =[ null , null , null, null, null, null, null, null];
@@ -75,9 +75,9 @@
                   $scope.variants=[{
                       sku: product.sku,
                       name: product.name,
-                      sizeOrweight: "0",
-                      price: "0",
-                      qty: "0"
+                      sizeOrweight: 0,
+                      price: 0,
+                      qty: 0
                   }];
              }
         }
@@ -92,9 +92,9 @@
                           $scope.variants=[{
                               sku: product.sku,
                               name: product.name,
-                              sizeOrweight: "0",
-                              price: "0",
-                              qty: "0"
+                              sizeOrweight: 0,
+                              price: 0,
+                              qty: 0
                           }];
             }
         }
@@ -218,10 +218,21 @@
                };
                    commerceService.addProduct(file,product,variants,item.id).
                        success(function(data) {
-                           toastr.success('New Product has been added.', 'Awsome!', {
+                       toastr.success('New Product has been added.', 'Awsome!', {
+                           closeButton: true
+                       });
+                       $mdDialog.hide();
+                       inventoryService.getInventoryList()
+                       .success(function (result) {
+                            toastr.success('New Product has been added to the inventory.', 'Awsome!', {
+                                closeButton: true
+                            });
+                            $mdDialog.hide();
+                       }).error(function(err) {
+                           toastr.error('Unable to Add', 'Warning', {
                                closeButton: true
                            });
-                           $mdDialog.hide();
+                       });
                        }).error(function(err) {
                            toastr.error('Unable to Add', 'Warning', {
                                closeButton: true
@@ -239,6 +250,7 @@
                            closeButton: true
                        });
                    });
+
             }
         }
         else{

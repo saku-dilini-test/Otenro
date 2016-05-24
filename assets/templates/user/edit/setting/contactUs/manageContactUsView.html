@@ -43,13 +43,13 @@
                                 <!-- Email -->
                                 <label>Email</label>
                                 <input type="email" name="email" ng-model="webInfo.email" required />
-                                <span class="error" style="color:red" ng-show="webInfoForm.email.$error.email">Not valid email!</span>
+                                <span class="error" ng-show="webInfoForm.email.$error.email">Invalid email!</span>
                             </fieldset>
                             <fieldset>
                                 <!-- Web Site -->
                                 <label>Website</label>
                                 <input type="url" name="website" ng-model="webInfo.webSite" required />
-                                <span class="error" style="color:red" ng-show="webInfoForm.website.$error.url">Not valid url!</span>
+                                <span class="error" ng-show="webInfoForm.website.$error.url">Invalid url!</span>
                             </fieldset>
                         </div>
                         <div class="md-dialog-buttons">

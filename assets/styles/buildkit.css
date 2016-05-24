@@ -170,9 +170,9 @@ label{
 }
 
 input[type='text'],
-input[type='email'],
-input[type='url'],
 input[type='number'],
+/*input[type='email'],
+input[type='url'],*/
 input[type='password'],
 textarea,
 select{
@@ -192,6 +192,27 @@ select{
     text-shadow: 1px 0 1px #FFF;
     width: 100%;
     float: left;
+    margin-right: -10px;
+}
+
+input[type='email'],
+input[type='url']
+{
+    -moz-box-shadow: 0 0 5px 2px #d8d8d8;
+    -webkit-box-shadow: 0 0 5px 2px #d8d8d8;
+    box-shadow: 0 0 5px 2px #d8d8d8;
+    border: none;
+    background-color: #FFF;
+    color: #747474;
+    font-size: 14px;
+    font-weight: 400;
+    height: 30px;
+    letter-spacing: 2px;
+    line-height: 30px;
+    padding-left: 10px;
+    resize: none;
+    text-shadow: 1px 0 1px #FFF;
+    width: 100%;
     margin-right: -10px;
 }
 
