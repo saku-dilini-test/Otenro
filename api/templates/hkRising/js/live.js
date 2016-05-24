@@ -49,7 +49,7 @@ var QueryString = function () {
 }();
 
 // Time interval 
-var timeIntervel = 5000;
+var timeIntervel = 1000;
 
   var updateMainCss = "css/main.css";
 
