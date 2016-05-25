@@ -83,6 +83,16 @@ module.exports = {
             res.send(result);
         });
     },
+    editCategory : function(req,res){
+        var editQuery = {
+            appId : req.body.appId,
+            id:req.body.id
+        }
+        ArticleCategory.update(editQuery,{"name":req.body.name}).exec(function(err,result) {
+            if (err) return done(err);
+            res.send(result);
+        });
+    },
 
     /**
      *

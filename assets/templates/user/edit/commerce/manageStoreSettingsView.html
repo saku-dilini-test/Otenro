@@ -12,18 +12,16 @@
                             <fieldset class="col-2">
                                 <label>select a currency</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <select class="form-control"
-                                        ng-model="storeSettings.currency"
-                                        ng-options=" oneCurrency.sign as oneCurrency.currency for oneCurrency in currencyList" ng-init="storeSettings.currency=currencyList[0].currency">
-                                </select>
+                                <md-select class="" placeholder="{{currencyPlaceHolder}}" ng-model="storeSettings.currency" required>
+                                    <md-option ng-value="oneCurrency.sign" ng-repeat="oneCurrency in currencyList">{{oneCurrency.currency}}</md-option>
+                                </md-select>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>measurement standard</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <select class="form-control"
-                                        ng-model="storeSettings.measurementStandard"
-                                        ng-options="measurementStandards.measurementStandard as measurementStandards.measurementStandard for measurementStandards in measurementTypeList">
-                                </select>
+                                <md-select class="" placeholder="{{measurementStandardsPlaceHolder}}" ng-model="storeSettings.measurementStandard" required>
+                                    <md-option ng-value="measurementStandards.measurementStandard" ng-repeat="measurementStandards in measurementTypeList">{{measurementStandards.measurementStandard}}</md-option>
+                                </md-select>
                             </fieldset>
                             <fieldset class="col-2">
                                 <label>next order number </label>
@@ -45,10 +43,13 @@
                             <fieldset>
                                 <label>select site type</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <select class="form-control"
-                                        ng-model="storeSettings.siteType"
-                                        ng-options="siteTypes.siteType as siteTypes.siteType for siteTypes in siteTypeList">
-                                </select>
+                                <!--<select class="form-control"-->
+                                        <!--ng-model="storeSettings.siteType"-->
+                                        <!--ng-options="siteTypes.siteType as siteTypes.siteType for siteTypes in siteTypeList">-->
+                                <!--</select>-->
+                                <md-select class="" placeholder="{{siteTypesPlaceHolder}}" ng-model="storeSettings.siteType" required>
+                                    <md-option ng-value="siteTypes.siteType" ng-repeat="siteTypes in siteTypeList">{{siteTypes.siteType}}</md-option>
+                                </md-select>
                             </fieldset>
                             <fieldset>
                                 <label>allow madeeasy to promote</label>
@@ -78,19 +79,18 @@
                                 <tbody>
                                 <tr ng-repeat="data in openHours">
                                     <td ng-model="data.day">{{data.day}}</td>
-                                    <td ng-if="data.status.status == 'Closed'">_ _ _ _</td>
-                                    <td ng-if="data.status.status != 'Closed'" ng-model="data.open">
+                                    <td ng-if="data.status != 'Open'">_ _ _ _</td>
+                                    <td ng-if="data.status == 'Open'" ng-model="data.open">
                                         <input name="open" type="time" ng-model="data.open" placeholder="HH:mm:ss" min="00:00:00" max="12:00:00" required/>
                                     </td>
-                                <td ng-if="data.status.status == 'Closed'">_ _ _ _</td>
-                                <td ng-if="data.status.status != 'Closed'" ng-model="data.close">
+                                <td ng-if="data.status != 'Open'">_ _ _ _</td>
+                                <td ng-if="data.status == 'Open'" ng-model="data.close">
                                     <input name="close" type="time" ng-model="data.close" placeholder="HH:mm:ss" required/>
                                 </td>
                                 <td>
-                                    <select class="form-control"
-                                            ng-model="data.status"
-                                            ng-options="statuses.status for statuses in statusList" ng-init="data.status=statusList[0]">
-                                    </select>
+                                    <md-select class="" placeholder="{{statusPlaceHolder}}" ng-model="data.status" required>
+                                        <md-option ng-value="statuses.status" ng-repeat="statuses in statusList">{{statuses.status}}</md-option>
+                                    </md-select>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -99,18 +99,16 @@
                             <fieldset>
                                 <label>select language</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <select class="form-control"
-                                        ng-model="storeSettings.language"
-                                        ng-options="languages.language as languages.language for languages in languageList" ng-init="storeSettings.language = languageList[0].language">
-                                </select>
+                                <md-select class="" placeholder="{{languagesPlaceHolder}}" ng-model="storeSettings.language" required>
+                                    <md-option ng-value="languages.language" ng-repeat="languages in languageList">{{languages.language}}</md-option>
+                                </md-select>
                             </fieldset>
                             <fieldset>
                                 <label>time and region</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <select class="form-control"
-                                        ng-model="storeSettings.timeAndRegion"
-                                        ng-options="timeAndRegions.timeAndRegion as timeAndRegions.timeAndRegion for timeAndRegions in timeAndRegionList">
-                                </select>
+                                <md-select class="" placeholder="{{timeAndRegionsPlaceHolder}}" ng-model="storeSettings.timeAndRegion" required>
+                                    <md-option ng-value="timeAndRegions.timeAndRegion" ng-repeat="timeAndRegions in timeAndRegionList">{{timeAndRegions.timeAndRegion}}</md-option>
+                                </md-select>
                             </fieldset>
                             <fieldset>
                                 <label>search engine description</label>

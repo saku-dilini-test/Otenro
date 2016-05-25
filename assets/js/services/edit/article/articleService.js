@@ -94,6 +94,9 @@
             },
             deleteCategory:function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteCategory',data);
+            },
+            editCategory:function(data){
+                return $http.post(SERVER_URL+ 'edit/editCategory',data);
             }
         };
     }

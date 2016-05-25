@@ -17,6 +17,9 @@
         $scope.tmpImage = [ null , null];
         $scope.mainImg = null;
         $scope.isNewArticle = false;
+        $scope.cat = initialData;
+
+        console.log("catName " + $scope.catName);
 
 
         articleService.getCategoryList($scope.appId)
@@ -107,7 +110,7 @@
         }
 
         $scope.deleteImg = function(index){
-            $scope.tmpImage[index] = null;
+            $scope.picFile = null;
         };
 
         $scope.setImage = function(img){
@@ -268,6 +271,24 @@
                 });
             })
         }
+
+        $scope.editCategory = function(data){
+            articleService.editCategory(data)
+                .success(function (result) {
+                    toastr.success('Successfully Edit Article Category', 'Message', {
+                        closeButton: true
+                    });
+                    var catId = result.id;
+                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                        +'/templates/'+$rootScope.appId+'' +
+                        '#/app/home/'+catId+'?'+new Date().getTime();
+                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                }).error(function (error) {
+                toastr.error('Article Category Adding Error', 'Message', {
+                    closeButton: true
+                });
+            })
+        };
 
     }
 })();
