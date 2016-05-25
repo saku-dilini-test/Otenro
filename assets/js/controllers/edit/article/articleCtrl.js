@@ -110,7 +110,7 @@
         }
 
         $scope.deleteImg = function(index){
-            $scope.tmpImage[index] = null;
+            $scope.picFile = null;
         };
 
         $scope.setImage = function(img){
