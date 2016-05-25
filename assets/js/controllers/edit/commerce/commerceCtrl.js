@@ -9,14 +9,13 @@
         $scope.statusList =[
         {status : "Closed"},{status : "Open"}
         ];
-
-
-//                $scope.storeSettings={
-//                            status:$scope.statusList[0].id
-//        //                    language: "English",
-//        //                    timeAndRegion: "Option1",
-//                        };
-
+        $scope.data ={ status : "Closed"};
+        $scope.statusPlaceHolder = "Closed";
+        $scope.currencyPlaceHolder = "USD";
+        $scope.measurementStandardsPlaceHolder = "Metric";
+        $scope.siteTypesPlaceHolder = "Ecommerce";
+        $scope.languagesPlaceHolder = "English (United Kingdom)";
+        $scope.timeAndRegionsPlaceHolder = "(UTC-12:00) International Date Line West";
         $scope.openHours = [
         {day:'Sunday'},
         {day:'Monday'},
@@ -187,7 +186,6 @@
          });
 
          $scope.saveStoreSettings = function(current,storeSettings,openHours){
-         console.log(openHours);
          if(storeSettings.orderNumber == null || storeSettings.address == null ||
          storeSettings.searchEngineDesc == null){
             toastr.error(' warning',"Please fill all the fields", {closeButton: true});
@@ -198,6 +196,9 @@
              if($scope.storeSettings.currency == $scope.currencyList[i].sign){
                  $scope.options = $scope.currencyList[i];
              }
+         }
+         for(var i=0; i<openHours.length; i++){
+            openHours[i].status = openHours[i].status;
          }
          storeSettings.currencySign=$scope.options.sign,
          storeSettings.currency=$scope.options.currency,
@@ -232,8 +233,13 @@
             commerceService.showStoreSettings($rootScope.appId).
             success(function(data){
                 $scope.storeSettings = data[0];
-                console.log(data[0].OpenHours);
                 $scope.storeSettings.currency = data[0].currencySign;
+                for(var i=0; i<data[0].OpenHours.length; i++){
+                    var open = new Date(data[0].OpenHours[i].open);
+                    var close = new Date(data[0].OpenHours[i].close);
+                    data[0].OpenHours[i].open = open;
+                    data[0].OpenHours[i].close = close;
+                }
                 $scope.openHours = data[0].OpenHours;
             }).error(function(err){
                 toastr.error(' warning',"Unable to get Store Settings", {closeButton: true});
