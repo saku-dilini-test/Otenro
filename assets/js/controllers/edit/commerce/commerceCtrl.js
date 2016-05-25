@@ -232,9 +232,9 @@
             commerceService.showStoreSettings($rootScope.appId).
             success(function(data){
                 $scope.storeSettings = data[0];
-                console.log(data[0].openHours);
+                console.log(data[0].OpenHours);
                 $scope.storeSettings.currency = data[0].currencySign;
-                $scope.openHours = [data[0].openHours];
+                $scope.openHours = data[0].OpenHours;
             }).error(function(err){
                 toastr.error(' warning',"Unable to get Store Settings", {closeButton: true});
             });
