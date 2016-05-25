@@ -56,6 +56,14 @@ angular.module('animateApp')
             .when('/paymentInfo', {
                 templateUrl: 'views/paymentInfo.html',
                 controller: 'paymentInfoCtrl'
+            })
+            .when('/mobileOrderConform', {
+                templateUrl: 'views/mobileOrderConform.html',
+                controller: 'mobileOrderCtrl'
+            })
+            .when('/mobilePaymentInfo', {
+                templateUrl: 'views/mobilePaymentInfo.html',
+                controller: 'mobilePaymentInfoCtrl'
             });
 
 });

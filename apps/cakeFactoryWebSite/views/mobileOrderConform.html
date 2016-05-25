@@ -1,0 +1,71 @@
+
+<div class="delivery-page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="services_desc">
+                <h2>Shopping Cart</h2>
+            </div>
+
+            <!-- items -->
+            <table class="table table-bordered tbl-shopping-cart">
+
+                <!-- header -->
+                <tr>
+                    <td><b>Item</b></td>
+                    <td class="tdCenter"><b>Quantity</b></td>
+                    <td class="tdRight"><b>Price</b></td>
+                </tr>
+
+                <!-- empty cart message -->
+                <tr ng-hide="cart.getTotalCount() > 0" >
+                    <td class="tdCenter" colspan="4">
+                        Your cart is empty.
+                    </td>
+                </tr>
+
+                <!-- cart items -->
+                <tr ng-repeat="item in cart.items | orderBy:'name'">
+                    <td>{{item.name}}</td>
+                    <td >{{item.quantity}}</td>
+                    <td class="tdRight">Rs {{item.price * item.quantity}}</td>
+                </tr>
+                <!-- footer -->
+                <tr>
+                    <td><b>
+                        <div ng-if="!(cart.getDeliveryCharges() > 0)">Total</div>
+                        <div ng-if="cart.getDeliveryCharges() > 0">Sub Total
+                        </div>
+                    </b>
+                    </td>
+                    <td class="tdCenter"><b>{{cart.getTotalCount()}}</b></td>
+                    <td class="tdRight"><b>Rs {{cart.getTotalPrice()}}</b></td>
+                </tr>
+                <!-- delivery charges -->
+
+                <tr ng-if="cart.getDeliveryCharges() > 0">
+                    <td>
+                        Delivery Charges :
+                    <td/>
+                    <td>
+                        <b>Rs {{cart.getDeliveryCharges()}}</b>
+                    </td>
+                <tr>
+
+                <tr class="" ng-if="cart.getDeliveryCharges() > 0">
+                    <td><b>Total with delivery Charges</b></td>
+                    <td class="tdCenter"></b></td>
+                    <td class="tdRight"><b>Rs {{cart.getTotalPriceWithDeliveryCharges()}}</b></td>
+                </tr>
+
+            </table>
+        </div>
+
+        <!-- buttons -->
+
+        <p class="text-info clearfix">
+        <button class="btn kkcc-btn-success pull-right" ng-click="conform()">Conform</button>
+        </p>
+
+    </div>
+</div>
+

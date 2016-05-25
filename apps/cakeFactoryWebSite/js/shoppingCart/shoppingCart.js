@@ -373,6 +373,9 @@ shoppingCart.prototype.checkout = function (serviceName, clearCart) {
         case "PayPal":
             this.checkoutPayPal(parms, clearCart);
             break;
+        case "PayPalByMobile":
+            this.checkoutPayPalByMobile(parms, clearCart);
+            break;
         case "Google":
             this.checkoutGoogle(parms, clearCart);
             break;
@@ -383,6 +386,53 @@ shoppingCart.prototype.checkout = function (serviceName, clearCart) {
             throw "Unknown checkout service: " + parms.serviceName;
     }
 }
+
+shoppingCart.prototype.setOneDoller = function(amount){
+    this.oneDoller = amount;
+}
+
+shoppingCart.prototype.checkoutPayPalByMobile = function (parms, clearCart) {
+
+    // global data
+    var data = {
+        cmd: "_cart",
+        business: parms.merchantID,
+        upload: "1",
+        rm: "2",
+        no_shipping : "1",
+        charset: "utf-8",
+        "return" : "http://tecclk.com/#/mobilePaymentInfo"
+    };
+
+    // item data
+    for (var i = 0; i < this.items.length; i++) {
+        var item = this.items[i];
+        var ctr = i + 1;
+        if(i == 0 ){
+            data["shipping_" + ctr] = (this.deliveryCharge / this.oneDoller).toFixed(2);
+        }
+        data["item_number_" + ctr] = item.sku;
+        data["item_name_" + ctr] = item.name;
+        data["quantity_" + ctr] = item.quantity;
+        data["amount_" + ctr] = (item.price / this.oneDoller).toFixed(2);
+    }
+
+
+    // build form
+    var form = $('<form/></form>');
+    form.attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");
+    form.attr("method", "POST");
+    form.attr("style", "display:none;");
+    this.addFormFields(form, data);
+    this.addFormFields(form, parms.options);
+    $("body").append(form);
+
+    // submit form
+    //this.clearCart = clearCart == null || clearCart;
+    form.submit();
+    form.remove();
+}
+
 
 // check out using PayPal
 // for details see:
