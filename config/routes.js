@@ -157,6 +157,7 @@ module.exports.routes = {
     'POST /edit/publishArticle' : 'edit/article/articleController.publishArticle',
     'POST /edit/deleteArticle' : 'edit/article/articleController.deleteArticle',
     'POST /edit/addCategory' : 'edit/article/articleController.addCategory',
+    'POST /edit/editCategory' : 'edit/article/articleController.editCategory',
     'GET /edit/getCategoryList' : 'edit/article/articleController.getCategoryList',
     'POST /edit/deleteCategory' : 'edit/article/articleController.deleteCategory',
 

@@ -10,9 +10,21 @@ module.exports = {
 
         var data = req.body;
         var query = {id:req.userId};
-        User.update(query,data).exec(function(err,user) {
-            if (err) res.send(err);
-        });
+        console.log("req.body.lastName  " + req.body.lastName );
+
+        if (typeof req.body.currentPassword==='undefined'||typeof req.body.password==='undefined'
+            || typeof req.body.confirmPassword==='undefined'){
+
+            User.update(query, { "firstName" : req.body.firstName ,
+                "lastName" : req.body.lastName , "email" : req.body.email,
+                "accountType" : req.body.accountType }).exec(function(err,user) {
+                if (err) res.send(err);
+            });
+        }else {
+            User.update(query,data).exec(function(err,user) {
+                if (err) res.send(err);
+            });
+        }
         res.send('ok');
     },
     getUserProfile : function(req,res){
