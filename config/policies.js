@@ -59,7 +59,8 @@ module.exports.policies = {
   },
 
   'edit/article/articleController':{
-    '*': ['jwtAuth']
+    '*': ['jwtAuth'],
+    editCategory:true
   },
 
   'template/TemplateController': {
