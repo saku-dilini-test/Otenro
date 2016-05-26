@@ -7,10 +7,11 @@
     "use strict";
 
     angular.module('animateApp')
-        .controller('mobileOrderCtrl', function($scope, $http,$routeParams,SERVER_URL,DataService,$location) {
+        .controller('mobileOrderCtrl',['$scope', '$http','$routeParams','SERVER_URL','DataService','$location', function($scope, $http,$routeParams,SERVER_URL,DataService,$location) {
             $scope.SERVER_URL = SERVER_URL;
             $scope.cart = DataService.cart;
             var cartInfo = JSON.parse($location.search().cartInfo);
+
             $scope.cart.items = cartInfo.cart;
             $scope.cart.saveDeliveryCharges(cartInfo.deliveryCharge);
             $scope.cart.setOneDoller(cartInfo.oneDoller);
@@ -24,9 +25,10 @@
                 $scope.cart.saveLocationName(cartInfo.userInfo.location.locationName);
                 $scope.cart.saveDeliveryAddress_01(cartInfo.userInfo.address);
             }
+            console.log($scope.cart);
             $scope.conform = function(){
                 $scope.cart.checkout('PayPal','Mobile');
             }
 
-        });
+        }]);
 })();

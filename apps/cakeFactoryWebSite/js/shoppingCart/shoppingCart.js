@@ -351,7 +351,7 @@ shoppingCart.prototype.addCheckoutParameters = function (serviceName, merchantID
 }
 
 // check out
-shoppingCart.prototype.checkout = function (serviceName, clearCart) {
+shoppingCart.prototype.checkout = function (serviceName,type,clearCart) {
 
     // select serviceName if we have to
     if (serviceName == null) {
@@ -371,7 +371,11 @@ shoppingCart.prototype.checkout = function (serviceName, clearCart) {
     }
     switch (parms.serviceName) {
         case "PayPal":
-            this.checkoutPayPal(parms, clearCart);
+            if(type == 'Mobile') {
+                this.checkoutPayPalByMobile(parms, clearCart);
+            }else{
+                this.checkoutPayPal(parms, clearCart);
+            }
             break;
         case "PayPalByMobile":
             this.checkoutPayPalByMobile(parms, clearCart);
@@ -420,7 +424,7 @@ shoppingCart.prototype.checkoutPayPalByMobile = function (parms, clearCart) {
 
     // build form
     var form = $('<form/></form>');
-    form.attr("action", "https://www.sandbox.paypal.com/cgi-bin/webscr");
+    form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
     form.attr("method", "POST");
     form.attr("style", "display:none;");
     this.addFormFields(form, data);

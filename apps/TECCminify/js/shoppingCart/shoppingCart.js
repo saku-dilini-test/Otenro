@@ -25,7 +25,7 @@ function shoppingCart(cartName) {
 
 // load items from local storage
 shoppingCart.prototype.loadItems = function () {
-    var items = localStorage != null ? localStorage[this.cartName + "_items"] : null;    
+    var items = localStorage != null ? localStorage[this.cartName + "_items"] : null;
     if (items != null && JSON != null) {
         try {
             var items = JSON.parse(items);
@@ -55,7 +55,7 @@ shoppingCart.prototype.saveItems = function () {
 shoppingCart.prototype.selectDeliveryOption = function (option) {
     if (localStorage != null && JSON != null) {
         if(option == 'pickUp'){
-            localStorage['deliveryOption'] = option;            
+            localStorage['deliveryOption'] = option;
         }
         if(option == 'delivery'){
             localStorage['deliveryOption'] = option;
@@ -77,8 +77,8 @@ shoppingCart.prototype.getCurretDeliveryOption = function () {
     if (localStorage != null && JSON != null) {
         var currentDeliveyOption = localStorage['deliveryOption'];
         if(!currentDeliveyOption){
-            this.selectDeliveryOption('pickUp');            
-        }        
+            this.selectDeliveryOption('pickUp');
+        }
         return localStorage['deliveryOption'];
     }
 }
@@ -126,11 +126,11 @@ shoppingCart.prototype.saveDeliveryCharges = function (charges) {
     if (localStorage != null && JSON != null) {
         localStorage['deliveryCharges'] = charges;
         this.deliveryCharge = charges;
-    }    
+    }
 }
 
 // get delivery charges from local storage
-shoppingCart.prototype.getDeliveryCharges = function () {    
+shoppingCart.prototype.getDeliveryCharges = function () {
     if (localStorage != null && JSON != null) {
         var deliveryCharges = localStorage['deliveryCharges'];
         if(deliveryCharges){
@@ -246,7 +246,7 @@ shoppingCart.prototype.getTelPhone = function () {
 }
 
 // save one Doller to local storage
-shoppingCart.prototype.saveOneDoller = function (oneDoller) {    
+shoppingCart.prototype.saveOneDoller = function (oneDoller) {
     if (localStorage != null && JSON != null) {
         localStorage['oneDoller'] = oneDoller;
         this.oneDoller = oneDoller;
@@ -351,7 +351,7 @@ shoppingCart.prototype.addCheckoutParameters = function (serviceName, merchantID
 }
 
 // check out
-shoppingCart.prototype.checkout = function (serviceName, clearCart) {
+shoppingCart.prototype.checkout = function (serviceName,type, clearCart) {
 
     // select serviceName if we have to
     if (serviceName == null) {
@@ -371,7 +371,11 @@ shoppingCart.prototype.checkout = function (serviceName, clearCart) {
     }
     switch (parms.serviceName) {
         case "PayPal":
-            this.checkoutPayPal(parms, clearCart);
+            if(type == 'Mobile') {
+                this.checkoutPayPalByMobile(parms, clearCart);
+            }else{
+                this.checkoutPayPal(parms, clearCart);
+            }
             break;
         case "Google":
             this.checkoutGoogle(parms, clearCart);
@@ -384,6 +388,53 @@ shoppingCart.prototype.checkout = function (serviceName, clearCart) {
     }
 }
 
+shoppingCart.prototype.setOneDoller = function(amount){
+    this.oneDoller = amount;
+}
+
+shoppingCart.prototype.checkoutPayPalByMobile = function (parms, clearCart) {
+
+    // global data
+    var data = {
+        cmd: "_cart",
+        business: parms.merchantID,
+        upload: "1",
+        rm: "2",
+        no_shipping : "1",
+        charset: "utf-8",
+        "return" : "http://tecclk.com/#/mobilePaymentInfo"
+    };
+
+    // item data
+    for (var i = 0; i < this.items.length; i++) {
+        var item = this.items[i];
+        var ctr = i + 1;
+        if(i == 0 ){
+            data["shipping_" + ctr] = (this.deliveryCharge / this.oneDoller).toFixed(2);
+        }
+        data["item_number_" + ctr] = item.sku;
+        data["item_name_" + ctr] = item.name;
+        data["quantity_" + ctr] = item.quantity;
+        data["amount_" + ctr] = (item.price / this.oneDoller).toFixed(2);
+    }
+
+
+    // build form
+    var form = $('<form/></form>');
+    form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
+    form.attr("method", "POST");
+    form.attr("style", "display:none;");
+    this.addFormFields(form, data);
+    this.addFormFields(form, parms.options);
+    $("body").append(form);
+
+    // submit form
+    //this.clearCart = clearCart == null || clearCart;
+    form.submit();
+    form.remove();
+}
+
+
 // check out using PayPal
 // for details see:
 // www.paypal.com/cgi-bin/webscr?cmd=p/pdn/howto_checkout-outside
@@ -395,7 +446,7 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         business: parms.merchantID,
         upload: "1",
         rm: "2",
-        no_shipping : "1",        
+        no_shipping : "1",
         charset: "utf-8"
     };
 
@@ -404,13 +455,13 @@ shoppingCart.prototype.checkoutPayPal = function (parms, clearCart) {
         var item = this.items[i];
         var ctr = i + 1;
         if(i == 0 ){
-            data["shipping_" + ctr] = (this.deliveryCharge / this.oneDoller).toFixed(2);            
+            data["shipping_" + ctr] = (this.deliveryCharge / this.oneDoller).toFixed(2);
         }
         data["item_number_" + ctr] = item.sku;
         data["item_name_" + ctr] = item.name;
         data["quantity_" + ctr] = item.quantity;
         data["amount_" + ctr] = (item.price / this.oneDoller).toFixed(2);
-    }       
+    }
 
     data["notify_url"] = "http://tecclk.com/#/paymentInfo.html";
     console.log(data);
@@ -441,7 +492,7 @@ shoppingCart.prototype.checkoutGoogle = function (parms, clearCart) {
     // item data
     for (var i = 0; i < this.items.length; i++) {
         var item = this.items[i];
-        var ctr = i + 1;  
+        var ctr = i + 1;
         data["item_name_" + ctr] = item.sku;
         data["item_description_" + ctr] = item.name;
         data["item_price_" + ctr] = item.price.toFixed(2);
