@@ -51,8 +51,8 @@
   border-radius:4px;
 }
 
-.food .panel {
-  margin-top:40%;
+.panel {
+  margin-top:4%;
 }
 
 /** ----------- Start Custom update Css Class ---------- **/
@@ -181,7 +181,8 @@ margin-bottom: 20px;}
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left:10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius:5px; }
   .card2 .item2 {
     border-left: 0;
     border-right: 0;
