@@ -513,7 +513,7 @@ module.exports = {
                     updateFile(mainCssFile, [{
                         rule: colorTypeCss,
                         target: "background-color",
-                        replacer: styleColor
+                        replacer: styleColor + " "+"!important"
                     }], function (err) {
                         console.log((err));
                     });
