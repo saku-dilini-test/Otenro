@@ -666,7 +666,7 @@ module.exports = {
                     updateFile(mainCssFile, [{
                         rule: fontSizeCss,
                         target: "font-size",
-                        replacer: styleFontSize
+                        replacer: styleFontSize +'px'
                     }], function (err) {
                         console.log((err));
                     });
@@ -899,7 +899,6 @@ module.exports = {
                 });
             })
         }
-
     },
     /**
      * Update Fonts given appId

@@ -26,7 +26,7 @@
             fontSize : 11
         };
 
-        $scope.fontFamilyList = ["Arial","Tahoma","Dingbats","Ubuntu Light","URW Chancery L","UnPilgi"];
+        $scope.fontFamilyList = ["Arial","Tahoma","Dingbats","Ubuntu Light","URW Chancery L"];
         $scope.fontSizeList = [8,9,10,12,14,18];
         $scope.fontWeightList = ["normal","bold","bolder","lighter"];
         $scope.buttonBorderWidthList = ['0px','1px','2px','3px','4px','5px'];
