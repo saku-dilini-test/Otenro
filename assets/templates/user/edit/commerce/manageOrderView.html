@@ -8,17 +8,18 @@
                         <div class="md-dialog-header-nav clearfix">
                             <h1 class="pull-left">orders</h1>
                             <fieldset class="col-2 pull-right reset-margin">
-                                <input type="text" required="" class="me-search-input" name="name">
+                                <input type="text" required="" ng-model="search" class="me-search-input" name="name">
                                 <input type="submit" value="search" class="me-search-button">
                             </fieldset>
                         </div>
                     </div>
                     <div class="md-dialog-main">
+                        <form class="allItems" novalidate>
                         <table class="me-checkbox-table">
                             <thead>
-                                <th class="checkbox-column">
-                                    <md-checkbox md-no-ink ng-model="" aria-label="Check all"></md-checkbox>
-                                </th>
+                                <!--<th class="checkbox-column">-->
+                                    <!--<md-checkbox md-no-ink ng-model="" aria-label="Check all"></md-checkbox>-->
+                                <!--</th>-->
                                 <!--<th>orders</th>-->
                                 <th class="order-columns">date</th>
                                 <th class="order-columns">customer</th>
@@ -26,10 +27,10 @@
                                 <th>fulfillment status</th>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="order in ordersList">
-                                <td class="checkbox-row">
-                                    <md-checkbox md-no-ink ng-model="" aria-label="Check one item"></md-checkbox>
-                                </td>
+                            <tr dir-paginate="order in ordersList | filter:search | itemsPerPage: pageSize" current-page="currentPage">
+                                <!--<td class="checkbox-row">-->
+                                    <!--<md-checkbox md-no-ink ng-model="" aria-label="Check one item"></md-checkbox>-->
+                                <!--</td>-->
                                 <!--<td># {{order.orderId}}</td>-->
                                 <td>{{order.createdDate}}</td>
                                 <td>{{order.customerName}}</td>
@@ -38,6 +39,8 @@
                             </tr>
                             </tbody>
                         </table>
+                        </form>
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">

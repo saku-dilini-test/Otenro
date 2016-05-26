@@ -6,6 +6,8 @@
 
     function CommerceCtrl($scope, $mdDialog,toastr, commerceService,currencyService,publishService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER) {
         $scope.selectedTab = 0;
+        $scope.currentPage = 2;
+        $scope.pageSize = 5;
         $scope.statusList =[
         {status : "Closed"},{status : "Open"}
         ];
