@@ -39,7 +39,8 @@ angular.module('app', [
   'uiGmapgoogle-maps',
   'angularInlineEdit',
   'ADM-dateTimePicker',
-  'angularTrix'
+  'angularTrix',
+  'angularUtils.directives.dirPagination'
 
 
 ]).run(function($rootScope, $state, $auth,Auth) {

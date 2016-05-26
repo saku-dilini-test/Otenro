@@ -8,7 +8,7 @@
                         <div class="md-dialog-header-nav clearfix">
                             <h1 class="pull-left">all items</h1>
                             <fieldset class="col-2 pull-right reset-margin">
-                                <input type="text" required="" class="me-search-input" name="name">
+                                <input type="text" required="" ng-model="search" class="me-search-input" name="name">
                                 <input type="submit" value="search" class="me-search-button">
                             </fieldset>
                         </div>
@@ -28,7 +28,7 @@
                                 <th>sale price</th>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="inventory in inventoryList">
+                                <tr dir-paginate="inventory in inventoryList | filter:search | itemsPerPage: pageSize" current-page="currentPage">
                                     <td class="checkbox-row">
                                         <md-checkbox md-no-ink  aria-label="Check one item"></md-checkbox>
                                     </td>
@@ -42,6 +42,8 @@
                             </tbody>
                         </table>
                             </form>
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+
                     </div>
 
                     <div class="md-dialog-buttons">
@@ -50,7 +52,6 @@
                             <md-button class="me-default-button" ng-click="fulfill(inventoryList)">save</md-button>
                         </div>
                     </div>
-
                     <div class="mini-light-box" ng-show="miniLightBoxShow">
                         <h1>On sale</h1><br />
                         <form class="clearfix" novalidate>

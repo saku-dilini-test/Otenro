@@ -7,7 +7,8 @@
     '$scope', 'inventoryService','commerceService','$rootScope','SERVER_URL','$auth','toastr',
     InventoryCtrl]);
     function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth,toastr) {
-
+            $scope.currentPage = 1;
+            $scope.pageSize = 5;
             $scope.userId=$auth.getPayload().sub;
             $scope.appId=$rootScope.appId;
             $scope.SERVER_URL = SERVER_URL;
