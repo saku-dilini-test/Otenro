@@ -7,11 +7,14 @@
           <div class="item item-text-wrap">
 
             <div ng-show="!(buyOption)">
-              <div style="text-align: center; color: #006666">
-                <h3>{{foodInfo.name}}</h3></div>
+              <div style="text-align: center; color: #006666"><h3>{{foodInfo.name}}</h3></div>
               <hr>
             <p>{{foodInfo.description}}</p>
               <br>
+              <p>{{foodInfo.detailedDesc}}</p>
+              <div ng-click="viewBuyOption(true)">
+                >
+              </div>
             </div>
             <div ng-show="buyOption">
               <div style="text-align: center; color: #006666"><h3>--Size --</h3></div>
@@ -23,21 +26,21 @@
               </div>
               <div class="row">
                 <div class="col">Large</div>
-                <div class="col">{{currency.sign}}  :  {{foodInfo.price}}</div>
+                <div class="col">Rs {{foodInfo.price}}</div>
                 <div class="col">
                   <input style="width: 30px">
                 </div>
               </div>
               <div class="row">
                 <div class="col">Medium</div>
-                <div class="col">{{currency.sign}}  : {{foodInfo.price}}</div>
+                <div class="col">Rs {{foodInfo.price}}</div>
                 <div class="col">
                   <input style="width: 30px">
                 </div>
               </div>
               <div class="row">
                 <div class="col">Small</div>
-                <div class="col">{{currency.sign}}  : {{foodInfo.price}}</div>
+                <div class="col">Rs {{foodInfo.price}}</div>
                 <div class="col">
                   <input style="width: 30px">
                 </div>
@@ -48,17 +51,13 @@
               </div >
             </div>
             <br>
-            <div class="row">
-                <div class="col2" style="color:#009ddb; font-size:12px;">Qty</div>
-                <div class="col2"><input type="number" ng-model="quantity" style="width:50px"></div>
-                <div class="col2"><button class="button button-small button-calm" ng-click="addToCart(quantity)">
-                  Buy
-                </button></div>
-              </div>
-            </div>
+
+            <button class="button button-small button-calm" ng-click="addToCart()">
+              Buy
+            </button>
             <br>
             <br>
-            <p>{{currency.sign}}  : {{foodInfo.price}}</p>
+            <p>Rs : {{foodInfo.price}}</p>
 
           </div>
         </div>
