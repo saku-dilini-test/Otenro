@@ -3,16 +3,20 @@
    <div class="card">
    <div class="box_inner">
     <h4>Shopping Cart Item List</h4>
-       <div class="row">
-           <div class="col2" >Item</div>
-           <div class="col2">Qty</div>
-           <div class="col2">Price</div>
-       </div>
-       <div class="row" ng-repeat="item in cartItems">
-           <div class="col2" ng-model="item.name">{{item.name}}</div>
-           <div class="col2" ng-model="item.qty">{{item.qty}}</div>
-           <div class="col2" ng-model="item.price">{{item.price}}</div>
-       </div>
+    <div class="item item-stacked-label">
+      <div class="row2">
+        <div class="col2 col-51">Item</div>
+        <div class="col2">Qty</div>
+        <div class="col2">Price</div>
+      </div>
+    </div>
+    <div class="item item-stacked-label" ng-repeat="item in cartItems" >
+      <div class="row">
+        <div class="col" ng-model="item.name" >{{item.name}}</div>
+        <div class="col" ng-model="item.qty" >{{item.qty}}</div>
+        <div class="col" ng-model="item.price" >{{item.price}}</div>
+      </div>
+    </div>
     <div class="item item-stacked-label">
       <div class="row">
         <div class="col col-50">Total</div>
@@ -41,7 +45,7 @@
       </div>
     </ui>
     <div class="panel2">
-      <a class="social-button" >Take Away</a>
+      <a class="social-button" >Purchase</a>
       <a class="social-button" ng-click="deliver(cartItems)" >Delivery</a>
     </div>
      </div></div>

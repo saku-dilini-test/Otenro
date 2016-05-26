@@ -47,3 +47,240 @@
     overflow: hidden;
     padding: 10px 18px;
 }
+
+.card .item, .list-inset .item, .padding > .list .item, .padding-horizontal > .list .item {
+    margin-right: 0;
+    margin-left: 0;
+	border-color:transparent !important;
+	margin-bottom:10px;
+}
+
+.card .item.item-input input {
+    padding-right: 44px;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #666;}
+
+
+.login_title{
+	color:#75A3B8;
+	font-size:16px;
+font-weight: 600;
+font-family:"Times New Roman", Times, serif;
+line-height: 1.2;
+text-align:center;
+padding-bottom:20px;}
+
+.card {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	border-radius:6px !important;
+}
+
+.button.button-positive {
+    border-color: transparent;
+    background-color: #75a3b8 !important;
+	width:100%;}
+.panel .create-account-btm {
+    width: 58%;
+    font-size: 4.0vw;
+}
+.panel .social-button-fb{
+	background-color:#2A68B0;}
+
+.panel .social-button {
+	background-color:#00BAFF;
+}
+.item-complex .item-content, .item-radio .item-content {
+    position: relative;
+    z-index: 2;
+    padding: 16px 49px 16px 16px;
+    background-color: #fff;
+    border-color:transparent !important ;
+}
+
+.item-complex {
+    padding: 0;
+	border-color:transparent !important ;
+	font-size:14px;
+	color:#AFAFAF;
+	padding-left:40px;
+}
+
+.setting{
+	font-family:"Times New Roman", Times, serif;
+	padding-left:40px;
+	font-size:20px;
+	color:#75A3B8;
+	border-color:transparent !important;
+	}
+
+
+	.item {
+
+    border-style:none !important;
+}
+.item2{
+
+    border-style:solid!important;
+}
+
+.bar.bar-stable .title {
+    color: #75A3B8 !important;
+	font-family:"Times New Roman", Times, serif;
+}
+
+.bar .title.title-left {
+    text-align: left;
+	color: #75A3B8 !important;
+	font-family:"Times New Roman", Times, serif;
+}
+.cards{
+	max-width: 100%;
+margin: 50px auto;
+padding-right: 1em;
+margin:15px;
+border-radius:5px;
+-webkit-box-shadow: 2px 4px 5px 0px rgba(50, 50, 50, 0.25);
+-moz-box-shadow:    2px 4px 5px 0px rgba(50, 50, 50, 0.25);
+box-shadow:         2px 4px 5px 0px rgba(50, 50, 50, 0.25);
+}
+
+.item h2{
+	color: #75A3B8 !important;
+	font-family:"Times New Roman", Times, serif;
+	font-weight:600;
+	}
+
+.item-thumbnail-left > img:first-child {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    max-width: 80px;
+    max-height: 80px;
+    width: 100%;
+    height: 100%;
+	border-radius:5px !important;
+}
+
+hr{
+	color:#CCC;
+}
+
+.item p:last-child {
+    margin-bottom: 0;
+	color:#929292 !important;
+	text-align: left;
+}
+
+h4, .h4 {
+    font-size: 18px;
+font-weight: 500;
+color: #999;
+font-family: "Times New Roman", Times, serif;
+text-align: center;
+border-bottom: solid;
+border-width: thin;
+padding-bottom: 10px;
+}
+
+label {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 1.2;
+	color:#666;
+}
+
+.row2 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 5px;
+    width: 100%;
+	color:#CCC;
+	font-size:10px;
+}
+
+.panel2 .social-button {
+    background:#70A1B3;
+    padding: 8.5px 17px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    font-family: Helvetica, sans-serif;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.panel2{
+margin: 0;
+padding: 0;
+border: 0;
+vertical-align: middle;
+font: inherit;
+font-size: 100%;
+padding: 2px;
+text-align: center;
+	}
+
+
+h2:first-child{
+	font-family:"Times New Roman", Times, serif;
+	border-bottom:solid;
+	border-width:thin;
+	border-bottom-color:#CCC;
+	padding-bottom:10px;
+	color:#73A3B9;
+	margin:5px;
+	font-size:20px;
+}
+
+.card .item:first-child {
+	color:#666;
+    font-size: 14px;
+}
+
+.card .item{
+	font-size:14px;
+	color:#666;
+    margin-right: 0;
+    margin-left: 0;
+    border-color: transparent !important;
+    margin-bottom: 10px;
+}
+
+.panel .create-account-btm2 {
+  background-color: #FFBF0A; /* Green */
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius:4px;
+  width:100%;
+}
+
+h3:first-child{
+font-family:"Times New Roman", Times, serif;
+	border-bottom:solid;
+	border-width:thin;
+	border-bottom-color:#CCC;
+	padding-bottom:10px;
+	color:#73A3B9;
+	margin:5px;
+	font-size:20px;
+	text-align:center;
+}
+
+p{
+	color:#666;
+	text-align:center;
+}
