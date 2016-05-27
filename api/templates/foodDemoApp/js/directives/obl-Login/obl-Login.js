@@ -5,7 +5,7 @@
 		.directive('oblLogin',function(){
 			return {
 				templateUrl:'js/directives/obl-Login/obl-Login.html',
-				controller: ['$scope','$http','$state','$ionicPopup','constants', function($scope,$http,$state,$ionicPopup,constants) {
+				controller: ['$scope','$http','$state','$ionicPopup','constants','$auth', function($scope,$http,$state,$ionicPopup,constants,$auth) {
 			   		$scope.data = {};
  
 				    $scope.login = function() {
@@ -34,6 +34,19 @@
 								});
 							})
 				    }
+
+					$scope.authenticate = function(provider) {
+						$auth.authenticate(provider).then(function(res){
+							if(typeof res.data.token != 'undefined'){
+								$state.go('app.category');
+							}else{
+								alert(provider+' Login error');
+							}
+						},function(err){
+							alert(provider+' Login error');
+						});
+					};
+
 
 					$scope.singUp = function(){
 						$state.go('app.register');
