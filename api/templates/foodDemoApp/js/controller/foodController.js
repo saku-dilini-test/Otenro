@@ -39,10 +39,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.menuName = $stateParams.categoryName;
 
-    $scope.viewBuyOption = function(opt){
-        $scope.buyOption = opt;
-    }
-
     $scope.addToCart = function(quantity){
             if($scope.foodInfo.discount){
                 $scope.foodInfo.price = $scope.foodInfo.discount;
