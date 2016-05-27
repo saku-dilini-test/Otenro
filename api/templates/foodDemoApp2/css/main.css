@@ -1,0 +1,277 @@
+.social-login {
+  position: fixed;
+  bottom: 0;
+}
+
+.login {
+
+}
+
+.login .panel{
+  text-align: center;
+}
+
+.panel .social-button {
+  padding: 8.5px 17px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  font-family: Helvetica, sans-serif;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.panel .social-button-fb{
+  padding: 8.5px 17px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: white;
+  margin-right:2px;
+  margin-left: 20px;
+  font-size: 14px;
+  font-family: Helvetica, sans-serif;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.panel .create-account-btm {
+  background-color: #FFBF0A; /* Green */
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 35px;
+  cursor: pointer;
+  border-radius:4px;
+}
+
+.panel {
+  margin-top:4%;
+}
+
+/** ----------- Start Custom update Css Class ---------- **/
+
+.made-easy-backgroundColor{
+  background-color: #b22727;
+}
+.made-easy-navigationBarColor{
+  background-color: #312626;
+}
+.made-easy-footerColor{
+  background-color: #4e6dde;
+}
+.made-easy-header-font{
+  color:#4e6dde;
+  font-family: URW Chancery L;
+  font-size: 12;
+  font-weight: bolder;
+}
+.made-easy-content-font{
+  color:#4e6dde;
+  font-family: Ubuntu Light;
+  font-size: 12;
+  font-weight: lighter;
+}
+.made-easy-footer-font{
+  color:#4e6dde;
+  font-family: Ubuntu Light;
+  font-size: 12;
+  font-weight: bolder;
+}
+.made-easy-button-setting{
+  background-color: #2e62be;
+  font-family: Ubuntu Light;
+  border-width: 3px;
+  border-radius: 3px;
+}
+
+
+/* ------------------- */
+
+h7 {
+  font-family: Helvetica, sans-serif;
+  font-size: 35px !important;
+  font-weight: 300;
+  color:#666 !important;
+}
+.badge2{
+	background-color: transparent;
+color: #AAAAAA;
+z-index: 1;
+display: inline-block;
+margin-right:-28px;
+margin-top:-30px;
+padding: 3px 8px;
+min-width: 10px;
+border-radius: 10px;
+vertical-align: baseline;
+text-align: center;
+white-space: nowrap;
+font-weight: bold;
+font-size: 14px;
+line-height: 16px;}
+
+.box_inner{
+	padding:10px;
+	margin-bottom:20px;
+	background-color:transparent;
+}
+
+.list2{
+	position: relative;
+padding-top: 1px;
+padding-bottom: 1px;
+padding-left: 0;
+margin-bottom: 20px;}
+
+
+
+
+	
+.col-76 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 75%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 75%;
+    -ms-flex: 0 0 75%;
+    flex: 0 0 75%;
+    max-width: 74%;
+}
+
+.col2 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: block;
+    padding: 5px;
+    width: 100%;
+	font-weight:600;}
+	
+	.col-51 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 50%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 50%;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;}
+	
+	
+/**
+ * Cards and Inset Lists
+ * --------------------------------------------------
+ * A card and list-inset are close to the same thing, except a card as a box shadow.
+ */
+.card2,
+.list-inset {
+  overflow: hidden;
+  margin: 20px 10px;
+  border-radius: 2px;
+  background-color: #fff; }
+
+.card2 {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left:10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius:5px;
+  background-image:url(../img/pay_out.png);
+  background-size:cover;
+   }
+  .card2 .item2 {
+    border-left: 0;
+    border-right: 0;
+	margin-left: -1px; }
+  .card2 .item2:first-child {
+    border-top: 0; }
+  .card2 .item2:last-child {
+    border-bottom: 0; }
+
+.padding .card2, .padding .list-inset {
+  margin-left: 0;
+  margin-right: 0; }
+
+.card2 .item2:first-child,
+.list-inset .item2:first-child,
+.padding > .list .item2:first-child {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px; }
+  .card2 .item2:first-child .item2-content,
+  .list-inset .item2:first-child .item2-content,
+  .padding > .list .item2:first-child .item2-content {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px; }
+
+.card2 .item2:last-child,
+.list-inset .item2:last-child,
+.padding > .list .item2:last-child {
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px; }
+  .card2 .item2:last-child .item2-content,
+  .list-inset .item2:last-child .item2-content,
+  .padding > .list .item2:last-child .item2-content {
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px; }
+
+.card2 .item2:last-child,
+.list-inset .item2:last-child {
+  margin-bottom: -1px; }
+
+.card2 .item2,
+.list-inset .item2,
+.padding > .list .item2,
+.padding-horizontal > .list .item2 {
+ }
+  .card2 .item2.item2-input input,
+  .list-inset .item2.item2-input input,
+  .padding > .list .item2.item2-input input,
+  .padding-horizontal > .list .item2.item2-input input {
+    padding-right: 44px; 
+	border-width: 1px;
+border-style: solid;
+border-color:transparent;
+border-radius:4px;
+width:100%;
+padding:5px;
+	}
+
+.padding-left > .list .item2 {
+  margin-left: 0; }
+
+.padding-right > .list .item2 {
+  margin-right: 0; }
+  
+  .button.button-positive {
+    border-color: transparent;
+    background-color: #387ef5;
+    color: #fff;
+    /*width: 30%;
+    margin-left: 34%;
+	margin-top: 30px;*/
+
+}
+.input-label {
+  max-width: 200px;
+  width: 35%;
+  color: #444;
+  font-size: 16px; }
+
+  .item-stacked-label .input-label, .item-stacked-label .icon {
+  display: inline;
+      padding: 4px 0 0 0px;
+      vertical-align: middle; }
+
+/**
+ * Badges
+ * --------------------------------------------------
+ */
+	
+/** ----------- End Custom update Css Class ---------- **/

@@ -1,0 +1,52 @@
+<ion-view view-title="Filter">
+  <ion-content style="background: url(img/bg.png) center; background-size: cover;">
+   <div class="card">
+   <div class="box_inner">
+    <h4>Shopping Cart Item List</h4>
+    <div class="item item-stacked-label">
+      <div class="row2">
+        <div class="col2 col-51">Item</div>
+        <div class="col2">Qty</div>
+        <div class="col2">Price</div>
+      </div>
+    </div>
+    <div class="item item-stacked-label" ng-repeat="item in cartItems" >
+      <div class="row">
+        <div class="col" ng-model="item.name" style="size;">{{item.name}}</div>
+        <div class="col" ng-model="item.qty" >{{item.qty}}</div>
+        <div class="col" ng-model="item.price" >{{item.price}}</div>
+      </div>
+    </div>
+    <div class="item item-stacked-label">
+      <div class="row">
+        <div class="col col-50">Total</div>
+        <div class="col"></div>
+        <div class="col" ng-model="total" >{{getTotal()}}</div>
+      </div>
+    </div>
+
+    <ui class="list2">
+      <div class="row2">
+        <div class="col col-76">
+          Delivery Charges with in City Limits
+        </div>
+        <div class="col">
+          Rs 150
+        </div>
+      </div>
+      <div class="row2">
+        <div class="col col-76">
+          Delivery Charges for off city Limits
+        </div>
+        <div class="col">
+          Rs 50 per Km
+        </div>
+      </div>
+    </ui>
+    <div class="panel2">
+      <a class="social-button" >Perchase</a>
+      <a class="social-button" ng-click="deliver(cartItems)" >Delivery</a>
+    </div>
+     </div></div>
+  </ion-content></div>
+</ion-view>
