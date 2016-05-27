@@ -105,7 +105,47 @@ angular.module('starter.controllers', [])
         $scope.appName = $rootScope.appName;
 
         $http.get(constants.SERVER_URL + '/templates/getContactUs?appId=' + $scope.appId).success(function (data) {
+            $scope.address = data.address;
             $scope.email = data.email;
+            $scope.webSite = data.webSite;
+            $scope.telPhone = data.telPhone;
+            $scope.coords =data.coords;
+            $scope.googleMap = data;
+
+            if(!data.coords){
+                $scope.coords={
+                    latitude : 6.9320204155752050,
+                    longitude: 79.8890950584107031
+                };
+            }
+
+            $scope.map= {
+                center: $scope.coords,
+                zoom: 11,
+                markers: [{
+                    id: Date.now(),
+                    coords:$scope.coords
+                }],
+                events: {
+                    click: function(map, eventName, originalEventArgs) {
+                        var e = originalEventArgs[0];
+                        var lat = e.latLng.lat(),
+                            lon = e.latLng.lng();
+                        var marker = {
+                            id: Date.now(),
+                            coords: {
+                                latitude: lat,
+                                longitude: lon
+                            }
+                        };
+                        $scope.map.markers=[];
+                        $scope.map.markers.push(marker);
+                        $scope.$apply();
+                    }
+                }
+            };
+
+
             $ionicLoading.hide();
 
         }).error(function (err) {
