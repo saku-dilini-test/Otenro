@@ -17,7 +17,7 @@
         $scope.tmpImage = [ null , null];
         $scope.mainImg = null;
         $scope.isNewArticle = false;
-        $scope.cat = initialData;
+        $scope.edit_Category = initialData;
 
         console.log("catName " + $scope.catName);
 
