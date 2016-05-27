@@ -31,8 +31,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     if($stateParams.foodId){
         $http.get(constants.SERVER_URL + '/templates/getProductById?productId='+$stateParams.foodId)
              .success(function(data) {
-                  $scope.foodInfo = data;
-             }).error(function(err) {
+                $scope.foodInfo = data;
+                if(data.discount){
+                    $scope.foodInfo.price = $scope.foodInfo.discount;
+                }
+            }).error(function(err) {
                  alert('warning', "Unable to get Product", err.message);
           });
     }
