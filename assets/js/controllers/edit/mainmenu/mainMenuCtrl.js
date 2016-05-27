@@ -47,15 +47,6 @@
                                              * If null main menu collection
                                              */
                                             if(result.length == 0 && secondResult.length != 0){
-                                                for(var i=0 ; i < secondResult.length ; i++) {
-                                                    secondResult[i].nodes=[];
-                                                    for(var j=0 ;j < thirdResult.length ;j++){
-                                                        if(secondResult[i].id == thirdResult[j].childId){
-                                                            thirdResult[j].nodes=[];
-                                                            secondResult[i].nodes.push(thirdResult[j]);
-                                                        }
-                                                    }
-                                                }
                                                 $scope.menuItems= secondResult;
                                                 $scope.topLevel  = 'secondNavi';  // This should comes DB
                                             }
