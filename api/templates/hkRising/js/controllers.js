@@ -171,6 +171,13 @@ angular.module('starter.controllers', [])
         $scope.changeAppName = function () {
             $scope.appName = $rootScope.appName;
 
+            $scope.appId = $rootScope.appId;
+            $scope.userId = $rootScope.userId;
+
+            $scope.imageURL = constants.SERVER_URL
+                +"/templates/viewImages?userId="
+                +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=article";
+
             if ($stateParams.categoryId == 'firstMenu') {
                 $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId=' + $rootScope.appId)
                     .success(function (catList) {
