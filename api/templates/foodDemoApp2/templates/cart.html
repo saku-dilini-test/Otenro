@@ -20,7 +20,7 @@
     <div class="item item-stacked-label">
       <div class="row">
         <div class="col col-50">Total</div>
-        <div class="col"></div>
+        <div class="col" ng-model="quantity">{{getTotalQuantity()}}</div>
         <div class="col" ng-model="total" >{{getTotal()}}</div>
       </div>
     </div>
@@ -44,7 +44,7 @@
       </div>
     </ui>
     <div class="panel2">
-      <a class="social-button" >Perchase</a>
+      <a class="social-button" >Purchase</a>
       <a class="social-button" ng-click="deliver(cartItems)" >Delivery</a>
     </div>
      </div></div>

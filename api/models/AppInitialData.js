@@ -200,6 +200,78 @@ module.exports = {
 
     },
     {
+      templateName : 'foodDemoApp2',
+      secondNavi : [
+        {
+          attribute : {
+            "imageUrl": "shirt_x.png",
+            "name": "Shirt",
+            "description": "Shirt description"
+          },
+          thirdNavi : [
+            {
+              "name": "Shirt x",
+              "price": 250,
+              "briefDesc" : "Shirt x brief des",
+              "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
+              "imageUrl": "shirt_x.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "Shirt y",
+              "price": 350,
+              "briefDesc" : "Shirt y brief des",
+              "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "imageUrl": "shirt_y.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "Shirt z",
+              "price": 450,
+              "briefDesc" : "Shirt z brief des",
+              "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
+              "imageUrl": "shirt_z.png",
+              "createdDate": Date.now()
+            }
+          ]
+        },
+        {
+          attribute : {
+            "imageUrl": "short_x.png",
+            "name": "Short",
+            "description": "Short description"
+          },
+          thirdNavi : [
+            {
+              "name": "Short x",
+              "price": 250,
+              "briefDesc" : "Short x brief des",
+              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "imageUrl": "short_x.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "Short y",
+              "price": 350,
+              "briefDesc" : "Short y brief des",
+              "detailedDesc" : "Short y details description. Short y details description. Short y details description",
+              "imageUrl": "short_x.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "Short z",
+              "price": 450,
+              "briefDesc" : "Short z brief des",
+              "detailedDesc" : "Short z details description. Short z details description. Short z details description",
+              "imageUrl": "short_x.png",
+              "createdDate": Date.now()
+            }
+          ]
+        }
+      ]
+
+    },
+    {
       templateName : 'hkRising',
       articleCategory : [
         {

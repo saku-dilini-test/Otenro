@@ -122,7 +122,7 @@ module.exports = {
          */
         if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2') {
             var searchAppInitialData = {
-                'templateName': 'foodDemoApp'
+                'templateName': templateName
             }
             AppInitialData.findOne(searchAppInitialData, function (err, appInitData) {
                 if (err) return done(err);

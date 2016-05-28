@@ -1,42 +1,42 @@
 <ion-view view-title="Register">
-  <ion-content style="background: url(img/bg.png) center; background-size: cover;">
-    <div class="login">
+  <ion-content style="background: url(img/background.jpg) center; background-size: cover;" class="padding">
       
+    <div class="card">
+      <h3>Create Your Account</h3>
       <form name="signUpForm">
-      
-        <div class="card">
-          <div class="item item-text-wrap">
-          <div class="login_title">CREATE AN ACCOUNT</div>
-          
-          <label class="item-input item-stacked-label">
-            
-            <input type="text" placeholder="User Name" ng-model="data.username" ng-required="true">
+        <div class="list">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">User Name</span>
+            <input type="text" placeholder="" ng-model="data.name" ng-required="true">
           </label>
           <label class="item item-input item-stacked-label">
-            
-            <input type="email" placeholder="Email Address" ng-model="data.email" ng-required="true">
+            <span class="input-label">Email Address</span>
+            <input type="email" placeholder="" ng-model="data.email" ng-required="true">
           </label>
           <label class="item item-input item-stacked-label">
-            
-            <input type="password" placeholder="Password" ng-model="data.password" ng-required="true">
+            <span class="input-label">Password</span>
+            <input type="password" placeholder="" ng-model="data.password" ng-required="true">
           </label>
           <label class="item item-input item-stacked-label">
-            <span class="input-label" style="padding-bottom:30px; font-weight:600; font-size:12px">Gender</span>
-            <ion-radio ng-model="data.gender" ng-required="true" ng-value="'male'">Male</ion-radio>
-            <ion-radio ng-model="data.gender" ng-required="true" ng-value="'female'">Female</ion-radio>
+            <span class="input-label">Address</span>
+            <input type="text" placeholder="" ng-model="data.address" ng-required="true">
+          </label>
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Phone Number</span>
+            <input type="number" placeholder="" ng-model="data.phone" ng-required="true">
           </label>
           <button class="button button-block button-assertive" ng-click="signUpForm.$valid && singUp()">
             Sign up
           </button>
           <div class="row">
             <div class="col">
-              <button class="button button-block button-calm" ng-click="">
-                Twitter
+              <button class="button button-block button-calm" ng-click="authenticate('google')">
+                Google
               </button>
             </div>
             <div class="col">
-              <button class="button button-block button-positive" ng-click="">
-                facebook
+              <button class="button button-block button-positive" ng-click="authenticate('facebook')">
+                Facebook
               </button>
             </div>
           </div>
