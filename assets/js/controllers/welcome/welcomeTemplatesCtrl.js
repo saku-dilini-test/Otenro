@@ -9,11 +9,11 @@
     'use strict';
     angular.module('app')
         .controller('WelcomeTemplatesCtrl',
-      ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER','$auth','$rootScope',
+      ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER','$auth','$rootScope','$timeout',
             WelcomeTemplatesCtrl
         ]);
 
-    function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,ME_APP_SERVER,$auth,$rootScope) {
+    function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,ME_APP_SERVER,$auth,$rootScope,$timeout) {
         welcomeTemplatesResource.getTemplates().success(function(data){
             $rootScope.templates = data;
         });
@@ -37,7 +37,20 @@
                             +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
-                    $state.go('anon.livePreview',{userId :$auth.getPayload().id,appId: data.data.appId,tempUrl:templateUrl,tempName:templateName,tempCategory:templateCategory});
+                    $scope.goLivePreview = function() {
+                        $state.go('anon.livePreview', {
+                            userId: 'unknownUser',
+                            appId: data.data.appId,
+                            tempUrl: templateUrl,
+                            tempName: templateName,
+                            tempCategory: templateCategory
+                        });
+
+                    }
+
+                    $timeout(function () {
+                        $scope.goLivePreview();
+                    }, 1000);
 
                 });
 
@@ -58,8 +71,18 @@
                        +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
-                    $state.go('anon.livePreview',{userId :'unknownUser',appId: data.data.appId,tempUrl:templateUrl,tempName:templateName,tempCategory:templateCategory});
-
+                    $scope.goLivePreview = function() {
+                        $state.go('anon.livePreview', {
+                            userId: 'unknownUser',
+                            appId: data.data.appId,
+                            tempUrl: templateUrl,
+                            tempName: templateName,
+                            tempCategory: templateCategory
+                        });
+                    }
+                    $timeout(function () {
+                        $scope.goLivePreview();
+                    }, 1000);
                 });
             }
 
