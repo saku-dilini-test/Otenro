@@ -18,6 +18,9 @@ mobileApp.controller('contactUsCtrl', function($scope,$rootScope,$http,constants
         alert('warning', "Unable to get contact us info", err.message);
     });
 
+    $scope.email = "kapila@gmail.com";
+    $scope.telPhone = "077 45658555";
+    $scope.address = "No 488 , Kotte Road, Kotte";
 
     $scope.singUp = function(){
         $state.go('app.register');

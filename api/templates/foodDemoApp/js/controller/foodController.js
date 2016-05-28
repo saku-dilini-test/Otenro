@@ -46,6 +46,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             if($scope.foodInfo.discount){
                 $scope.foodInfo.price = $scope.foodInfo.discount;
             }
+
         $rootScope.cart.cartItems.push({
             id: $scope.foodInfo.id,
             name: $scope.foodInfo.name,
