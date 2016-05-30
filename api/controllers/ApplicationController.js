@@ -162,19 +162,24 @@ module.exports = {
                 }
                 AppInitialData.findOne(searchAppInitialData, function(err, appInitData) {
                     if (err) return done(err);
-
-                    /**
-                     * add Article Category for hkRising Application
-                     * Append appId
-                     */
-
                     var articleCategoryList = appInitData.articleCategory;
-                    for (var j = 0; j < articleCategoryList.length; j++) {
-                        articleCategoryList[j].appId = app.id;
-                        ArticleCategory.create(articleCategoryList[j]).exec(function (err, articleCategory) {
-                            if (err) return err;
-                        });
-                    }
+                    articleCategoryList.forEach(function (articleCategory) {
+                        var articleCategoryattribute = articleCategory.attribute;
+                        articleCategoryattribute.appId = app.id;
+                        var articalList = articleCategory.article;
+
+                        ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+
+                            articalList.forEach(function (article) {
+                                var articalAttribute = article;
+                                    articalAttribute.appId = app.id;
+                                articalAttribute.categoryId = articleCategory.id;
+                                Article.create(articalAttribute).exec(function (err, artical) {
+                                    if (err) return err;
+                                });
+                            });
+                        })
+                    })
                 });
 
         }else {
