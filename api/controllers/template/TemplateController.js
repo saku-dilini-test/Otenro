@@ -142,14 +142,14 @@ module.exports = {
 
         var appId = req.param('appId');
         var categoryId = req.param('categoryId');
-        console.log(appId);
+        //console.log(appId);
         var searchApp = {
             appId: appId,
             categoryId : categoryId
         };
         Article.find().where(searchApp).exec(function (err, result) {
             if (err) return done(err);
-            console.log(result);
+            //console.log(result);
             res.json(result);
         });
     },
