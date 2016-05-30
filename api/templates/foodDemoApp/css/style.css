@@ -334,3 +334,12 @@ color: #73A3B9;
 margin: 5px;
 font-size: 20px;
 text-align: center;}
+
+.showName {
+max-width: 100%;
+text-align:left;
+}
+.hideName {
+max-width: 50%;
+text-align:left;
+}

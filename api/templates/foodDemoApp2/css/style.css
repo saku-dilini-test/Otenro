@@ -237,7 +237,7 @@ label {
     text-decoration: none;
     vertical-align: middle;
     cursor: pointer;
-    margin-right: 12px;
+    /*margin-right: 12px;*/
 }
 
 .panel2{

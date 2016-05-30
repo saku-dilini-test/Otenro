@@ -39,7 +39,7 @@
                         commerceService.getCategoryList()
                         .success(function (secondResult) {
                             $scope.mainMenu = secondResult;
-                            if(secondResult[0].templateName == 'foodDemoApp'){
+                            if(secondResult[0].templateName == 'foodDemoApp' || secondResult[0].templateName == 'foodDemoApp2'){
                                 $scope.show = false;
                             }
                         }).error(function (error) {
@@ -64,7 +64,7 @@
         };
 
         $scope.nextStep2 = function(current,product){
-        if($scope.categories[0].templateName == "foodDemoApp"){
+        if($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "foodDemoApp2"){
              if(product.name == null || product.mainId == null){
               toastr.error('Fill all the fields', 'Warning', {
                                 closeButton: true
@@ -182,7 +182,7 @@
              }
 
         $scope.addProducts = function(file,product) {
-        if($scope.categories[0].templateName == "foodDemoApp"){
+        if($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "foodDemoApp2"){
             if(file == null){
                    toastr.error('select image', 'Warning', {
                        closeButton: true
