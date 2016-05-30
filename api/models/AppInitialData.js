@@ -243,7 +243,7 @@ module.exports = {
               "price": 450,
               "briefDesc" : "Shirt z brief des",
               "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
-              "imageUrl": "shirt_z.png",
+              "imageUrl": "shirt_z.jpg",
               "createdDate": Date.now()
             }
           ]
@@ -262,27 +262,44 @@ module.exports = {
               "detailedDesc" : "Short x details description. Short x details description. Short x details description",
               "imageUrl": "short_x.png",
               "createdDate": Date.now()
-            },
+            }
+//            ,
+//            {
+//              "name": "Short y",
+//              "price": 350,
+//              "briefDesc" : "Short y brief des",
+//              "detailedDesc" : "Short y details description. Short y details description. Short y details description",
+//              "imageUrl": "short_x.png",
+//              "createdDate": Date.now()
+//            },
+//            {
+//              "name": "Short z",
+//              "price": 450,
+//              "briefDesc" : "Short z brief des",
+//              "detailedDesc" : "Short z details description. Short z details description. Short z details description",
+//              "imageUrl": "short_x.png",
+//              "createdDate": Date.now()
+//            }
+          ]
+        },
+        {
+          attribute : {
+            "imageUrl": "cloth3.png",
+            "name": "Suits",
+            "description": "Short description"
+          },
+          thirdNavi : [
             {
-              "name": "Short y",
-              "price": 350,
-              "briefDesc" : "Short y brief des",
-              "detailedDesc" : "Short y details description. Short y details description. Short y details description",
-              "imageUrl": "short_x.png",
-              "createdDate": Date.now()
-            },
-            {
-              "name": "Short z",
-              "price": 450,
-              "briefDesc" : "Short z brief des",
-              "detailedDesc" : "Short z details description. Short z details description. Short z details description",
-              "imageUrl": "short_x.png",
+              "name": "Beach Suit",
+              "price": 250,
+              "briefDesc" : "Short x brief des",
+              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "imageUrl": "cloth3.png",
               "createdDate": Date.now()
             }
           ]
         }
-      ]
-
+        ]
     },
     {
       templateName : 'hkRising',
