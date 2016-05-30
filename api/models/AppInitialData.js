@@ -34,24 +34,32 @@ module.exports = {
               "name": "Chicken Caesar Salad",
               "price": 100,
               "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             },
             {
               "name": "Garden Salad",
               "price": 200,
               "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             },
             {
               "name": "Pasta Salad",
               "price": 300,
               "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             },
             {
               "name": "Egg Salad",
               "price": 400,
               "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             }
           ]
@@ -67,30 +75,40 @@ module.exports = {
               "name": "Tiramisu",
               "price": 100,
               "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             },
             {
               "name": "Caramal Pudding",
               "price": 200,
               "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             },
             {
               "name": "Chocolate Ice Cream Sunday",
               "price": 300,
               "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             },
             {
               "name": "Chocolate Muse",
               "price": 400,
               "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             },
             {
               "name": "Apple Crumble Pie",
               "price": 500,
               "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             }
           ]
@@ -106,18 +124,24 @@ module.exports = {
               "name": "Espresso Shot",
               "price": 100,
               "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             },
             {
               "name": "Mocha Frapachino",
               "price": 200,
               "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             },
             {
               "name": "Chocolate Milk Shake",
               "price": 300,
               "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
             },
             {
