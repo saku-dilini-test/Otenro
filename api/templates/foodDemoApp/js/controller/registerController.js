@@ -3,7 +3,7 @@
  */
 
 
-mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,constants) {
+mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,$auth,constants) {
     $scope.data = {};
     $scope.singUp = function() {
     $scope.appLocalStorageUser  = JSON.parse(localStorage.getItem('appLocalStorageUser'));
@@ -36,4 +36,17 @@ mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,co
                 });
             });
     }
+
+    $scope.authenticate = function(provider) {
+        $auth.authenticate(provider).then(function(res){
+            if(typeof res.data.token != 'undefined'){
+                $state.go('app.category');
+            }else{
+                alert(provider+' Login error');
+            }
+        },function(err){
+            alert(provider+' Login error');
+        });
+    };
+
 });

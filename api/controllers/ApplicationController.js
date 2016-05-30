@@ -32,7 +32,7 @@ module.exports = {
             serverOrg=config.server.host+':'+config.server.port;
 
         var loginPath = '/#/';
-        if(templateName == 'foodDemoApp'){
+        if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2'){
             loginPath = '/#/app/login';
         }
         if(templateName == 'hkRising'){
@@ -118,11 +118,11 @@ module.exports = {
          */
 
         /**
-         * If Only foodDemoApp Category & Product Feed to DB
+         * If Only foodDemoApp or foodDemoApp2 Category & Product Feed to DB
          */
-        if(templateName == 'foodDemoApp') {
+        if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2') {
             var searchAppInitialData = {
-                'templateName': 'foodDemoApp'
+                'templateName': templateName
             }
             AppInitialData.findOne(searchAppInitialData, function (err, appInitData) {
                 if (err) return done(err);

@@ -1,0 +1,33 @@
+<ion-content style="background: url(img/background.jpg) center; background-size: cover;">
+	<!--<h1>Login</h1>-->
+	<div class="login">
+		<form name="loginForm">
+			<div class="card">
+				<div class="item item-text-wrap">
+					<div class="login_title">ENTER LOGIN DETAILS</div>
+					<label class="item item-input item-stacked-label">
+						
+						<input type="text" placeholder="Username" ng-model="data.username" ng-required="true">
+					</label>
+					<label class="item item-input item-stacked-label">
+						
+						<input type="password" placeholder="Password" ng-model="data.password" ng-required="true">
+					</label>
+					<label class="item item-input item-stacked-label">
+						<button class="button button-block button-positive" ng-click="loginForm.$valid && login()">
+							Login
+						</button>
+					</label>
+				</div>
+			</div>
+			<div class="panel">
+
+				<a class="social-button">Twitter</a>
+				<a class="social-button-fb">Facebook</a>
+
+				<br>
+				<div class="create-account-btm" ng-click="singUp()">Create Your Account</div>
+			</div>
+		</form>
+	</div>
+</ion-content>

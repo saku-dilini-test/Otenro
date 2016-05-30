@@ -62,6 +62,12 @@ module.exports = {
             templateCategory:'2'
         },
         {
+            template_name : 'foodDemoApp2',
+            imageUrl : 'foodDeliver2/foodDeliver2.png',
+            templateFilesPath:'templates/foodDemoApp2',
+            templateCategory:'2'
+        },
+        {
             template_name : 'hkRising',
             imageUrl : 'hkRising/hkRising.png',
             templateFilesPath:'templates/hkRising',

@@ -1,5 +1,4 @@
 <ion-content style="background: url(img/background.jpg) center; background-size: cover;">
-	<!--<h1>Login</h1>-->
 	<div class="login">
 		<form name="loginForm">
 			<div class="card">
@@ -22,9 +21,8 @@
 			</div>
 			<div class="panel">
 
-				<a class="social-button">Twitter</a>
-				<a class="social-button-fb">Facebook</a>
-
+				<a class="social-button" ng-click="authenticate('google')"> Google</a>
+				<a class="social-button-fb" ng-click="authenticate('facebook')" >Facebook</a>
 				<br>
 				<div class="create-account-btm" ng-click="singUp()">Create Your Account</div>
 			</div>

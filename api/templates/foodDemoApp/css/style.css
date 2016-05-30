@@ -135,6 +135,7 @@ padding-bottom:20px;}
     text-align: left;
 	color: #75A3B8 !important;
 	font-family:"Times New Roman", Times, serif;
+	width: 100%;
 }
 .cards{
 	max-width: 100%;
@@ -151,6 +152,8 @@ box-shadow:         2px 4px 5px 0px rgba(50, 50, 50, 0.25);
 	color: #75A3B8 !important;
 	font-family:"Times New Roman", Times, serif;
 	font-weight:600;
+	padding-bottom: 10px;
+    border-bottom: solid thin RGBA(117, 163, 184, 0.29);
 	}
 
 .item-thumbnail-left > img:first-child {
@@ -172,6 +175,13 @@ hr{
     margin-bottom: 0;
 	color:#929292 !important;
 	text-align: left;
+}
+
+.bar .buttons-right span {
+    margin-left: 18px !important;
+    display: inherit;
+    padding-right: 10px !important;
+
 }
 
 h4, .h4 {
@@ -284,3 +294,43 @@ p{
 	color:#666;
 	text-align:center;
 }
+
+.item-thumbnail-left{
+	border-radius:5px;
+	}
+
+.ng-binding{
+	text-align:left;
+	padding:8px;
+	}
+
+.button-calm {
+	border-color: transparent;
+    background-color: #75a3b8 !important;
+    width: 100%;
+	}
+
+	.padding .card, .padding .list-inset {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.contact {
+	text-align:center;
+}
+
+.about_us{
+	text-align:center;
+	padding:8px;}
+
+h2, .h2 {
+
+	font-family: "Times New Roman", Times, serif;
+border-bottom: solid;
+border-width: thin;
+border-bottom-color: #CCC;
+padding-bottom: 10px;
+color: #73A3B9;
+margin: 5px;
+font-size: 20px;
+text-align: center;}

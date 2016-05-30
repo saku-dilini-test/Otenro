@@ -1,0 +1,33 @@
+<ion-view view-title="{{foodInfo.name}}">
+  <ion-content style="background: url(img/background.jpg) center; background-size: cover;">
+
+<div class="food">
+  <div class="panel">
+    <div class="card">
+     <div class="header_image">
+       <img ng-src="{{imageURL}}/{{foodInfo.imageUrl}}" width="100%" height="auto"/>
+     </div>
+      <div class="item item-text-wrap">
+
+        <div style="text-align: center; color: #006666"><h3>{{foodInfo.name}}</h3></div>
+        <p>{{foodInfo.detailedDesc}}</p>
+
+
+        <div class="row">
+            <div class="col2" style="color:#009ddb; font-size:12px;">Qty</div>
+            <div class="col2"><input type="number" ng-model="quantity" style="width:50px"></div>
+            <div class="col2"><button class="button button-small button-calm" ng-click="addToCart(quantity)">
+              Buy
+            </button></div>
+          </div>
+        </div>
+        <br>
+        <p>{{currency.sign}}  : {{foodInfo.price}}</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </ion-content>
+</ion-view>

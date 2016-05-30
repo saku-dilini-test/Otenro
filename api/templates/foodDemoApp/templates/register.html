@@ -1,5 +1,6 @@
 <ion-view view-title="Register">
-  <ion-content class="padding">
+  <ion-content style="background: url(img/background.jpg) center; background-size: cover;" class="padding">
+
     <div class="card">
       <h3>Create Your Account</h3>
       <form name="signUpForm">
@@ -29,13 +30,13 @@
           </button>
           <div class="row">
             <div class="col">
-              <button class="button button-block button-calm" ng-click="">
-                Twitter
+              <button class="button button-block button-calm" ng-click="authenticate('google')">
+                Google
               </button>
             </div>
             <div class="col">
-              <button class="button button-block button-positive" ng-click="">
-                facebook
+              <button class="button button-block button-positive" ng-click="authenticate('facebook')">
+                Facebook
               </button>
             </div>
           </div>
