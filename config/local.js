@@ -28,7 +28,7 @@
  */
 
 module.exports = {
-
+    hookTimeout: 30000, // 30 seconds
   /***************************************************************************
    * Your SSL certificate and key, if you want to be able to serve HTTP      *
    * responses over https:// and/or use websockets over the wss:// protocol  *
