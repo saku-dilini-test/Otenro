@@ -50,7 +50,7 @@ module.exports.http = {
     // bodyParser: require('skipper')
 
     myRequestLogger: function (req, res, next) {
-      console.log("Requested :::::: ", req.method, req.url);
+      //console.log("Requested :::::: ", req.method, req.url);
       return next();
     }
   },
