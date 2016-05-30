@@ -73,7 +73,7 @@ module.exports = {
     deleteCategory : function(req,res){
 
         var id = req.body.catId;
-        console.log(req.body);
+        //console.log(req.body);
         var deleteQuery = {
             id : id
         }
@@ -126,7 +126,7 @@ module.exports = {
             var data = article;
             Article.update(updateQuery,data).exec(function(err, result) {
                 if (err) res.send(err);
-                console.log(result);
+                //console.log(result);
                 res.send({categoryId : article.categoryId});
             });
 
@@ -146,7 +146,7 @@ module.exports = {
                 var data = article;
                 Article.update(updateQuery,data).exec(function(err, result) {
                     if (err) res.send(err);
-                    console.log(result);
+                    //console.log(result);
                     res.send({categoryId : article.categoryId});
                 });
             });
