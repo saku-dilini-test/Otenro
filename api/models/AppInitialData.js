@@ -322,7 +322,7 @@ module.exports = {
             "Opening times: daily, 10am-7pm" +
             "Payment type: credit cards accepted" +
             "Reservations: recommended",
-            "imageUrl":"ocean park.png",
+            "imageUrl":"oceanpark.png",
             "categoryId":"0",
           },
           {
@@ -353,7 +353,7 @@ module.exports = {
             "Address: Temple Street, Yau Ma Tei, Kowloon" +
             "Getting there: MTR Yau Ma Tei Station, Exit C, turn onto Temple Street at Man Ming Lane; or, " +
             "MTR Jordan Station, Exit A. Turn right onto Jordan Road and then take another right onto Temple Street.",
-            "imageUrl":"1881 heritage.png",
+            "imageUrl":"1881heritage.png",
             "categoryId":"0",
           },
           {
@@ -370,7 +370,7 @@ module.exports = {
             "Prices: upper deck: HK$2.50; over 65s, free; children 3-12, HK$1.50; 2 and under, free. Lower deck: HK$2; over 65s, free; children 3-12, HK$1.40; 2 and under, free. Octopus cards accepted" +
             "Opening times: daily, 6.30am-11.30pm" +
             "Payment type: credit cards not accepted",
-            "imageUrl":"star ferry.png",
+            "imageUrl":"starferry.png",
             "categoryId":"0",
           },
           {
@@ -404,7 +404,7 @@ module.exports = {
             "Opening times: Mon, Wed-Fri, 10am-6pm; Sat, Sun, public holidays, 10am-7pm" +
             "Payment type: credit cards not accepted" +
             "Reservations: Not possible",
-            "imageUrl":"history musium.png",
+            "imageUrl":"historymusium.png",
             "categoryId":"0",
           },
 
@@ -424,7 +424,7 @@ module.exports = {
               "You can find the latest designs and limited edition releases from all over " +
               "the world.Address: Fa Yuen Street, Mong Kok, Kowloon " +
               "Getting there: MTR Mong Kok Station, Exit D3. Walk along Argyle Street to Fa Yuen Street.",
-              "imageUrl":"sneaker street.png",
+              "imageUrl":"sneakerstreet.png",
               "categoryId":"0",
             },
             {
@@ -432,7 +432,7 @@ module.exports = {
               "desc": "Find brand new and second hand electronic devices at bargain prices at this popular street market. " +
               "You can also uncover antique watches, old coins, and other relics.Address: Apliu Street, Sham Shui Po, Kowloon" +
               " Getting there: MTR Sham Shui Po Station, Exit C2",
-              "imageUrl":"apliu street flee market.png",
+              "imageUrl":"apliustreetfleemarket.png",
               "categoryId":"0",
             },
             {
@@ -465,7 +465,7 @@ module.exports = {
               "Website: www.1881heritage.com" +
               "Getting there: MTR Tsim Sha Tsui Station Exit E, walk towards Salisbury Road, " +
               "turn right, take subway (pedestrian tunnel) next to YMCA to 1881 Heritage.",
-              "imageUrl":"1881 heritage.png",
+              "imageUrl":"1881heritage.png",
               "categoryId":"0",
             },
             {
@@ -484,7 +484,7 @@ module.exports = {
               "Getting there: MTR Tsim Sha Tsui Station, Exit E. Walk towards Salisbury Road, " +
               "then turn right and take the subway (pedestrian tunnel) located next to the " +
               "YMCA to the Hong Kong Cultural Centre. Turn right again and walk straight ahead towards the waterfront",
-              "imageUrl":"apliu street flee market.png",
+              "imageUrl":"apliustreetfleemarket.png",
               "categoryId":"0",
             }
           ]
