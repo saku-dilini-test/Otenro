@@ -131,18 +131,20 @@ module.exports = {
                  * add Second Navigation
                  */
                 var secondNaviList = appInitData.secondNavi;
-                for (var i = 0; i < secondNaviList.length; i++) {
-                    var scondNaviAttribute = secondNaviList[i].attribute;
-                    scondNaviAttribute.templateName = appInitData.templateName;
-                    scondNaviAttribute.appId = app.id;
-                    var thirdNaviList = secondNaviList[i].thirdNavi;
+                secondNaviList.forEach(function(secondNavi){
+                var scondNaviAttribute = secondNavi.attribute;
+                scondNaviAttribute.templateName = appInitData.templateName;
+                scondNaviAttribute.appId = app.id;
+                var thirdNaviList = secondNavi.thirdNavi;
+                console.log("thirdNaviList");
+                console.log(thirdNaviList);
                     SecondNavigation.create(scondNaviAttribute).exec(function (err, secondN) {
                         if (err) return err;
-
                         /**
-                         * Add Third Navigation
-                         */
-//                        if (i == 0) {
+                        * Add Third Navigation
+                        */
+                        console.log("in");
+                        console.log(thirdNaviList.length);
                             for (var j = 0; j < thirdNaviList.length; j++) {
                                 thirdNaviList[j].appId = app.id;
                                 thirdNaviList[j].childId = secondN.id;
@@ -151,7 +153,8 @@ module.exports = {
                                 });
                             }
                     });
-                }
+
+                    })
             });
 
             /**
