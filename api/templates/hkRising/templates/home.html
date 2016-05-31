@@ -4,13 +4,13 @@
       <br>
       <br>
       <br>
-      <div class="header"></div>
+      <div class="header animated fadeInLeft"></div>
 
       <ion-nav-view class="made-easy-backgroundColor" name="tabContent"></ion-nav-view>
 
       <ion-tabs class="tabs-positive2 tabs2">
           <div ng-repeat="category in articleCategoryList">
-              <a class="tab-item tab-item2" ng-href="#/app/home/{{category.id}}">
+              <a class="tab-item tab-item2 animated lightSpeedIn" ng-href="#/app/home/{{category.id}}">
                   {{category.name}}
               </a>
           </div>
