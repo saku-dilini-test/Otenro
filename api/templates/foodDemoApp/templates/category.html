@@ -1,7 +1,7 @@
 <ion-view view-title="Menu">
     <ion-content style="background: url(img/background.jpg) center; background-size: cover;">
             <a ng-repeat="category in categories" href="#/app/category/{{category.id}}/{{category.name}}">
-                <div class="cards">
+                <div class="cards animated bounceInRight">
                     <div class= "item item-thumbnail-left">
                         <img ng-src="{{imageURL}}/{{category.imageUrl}}">
                         <h2>{{category.name}}</h2>
