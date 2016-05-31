@@ -147,7 +147,7 @@ module.exports = {
             appId: appId,
             categoryId : categoryId
         };
-        Article.find().where(searchApp).exec(function (err, result) {
+        Article.find({ select: ['appId','title','imageUrl','categoryId']}).where(searchApp).exec(function (err, result) {
             if (err) return done(err);
             //console.log(result);
             res.json(result);
@@ -207,7 +207,7 @@ module.exports = {
 
         });
 
-        console.log("run run");
+        //console.log("run run");
         fs.remove(config.ME_SERVER+ userId +'/templates/'+appId+'/', function (err) {
 
             if (err) {
