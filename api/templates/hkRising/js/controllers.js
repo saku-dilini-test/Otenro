@@ -76,7 +76,7 @@ angular.module('starter.controllers', [])
 
         $timeout(function () {
             $scope.changeAppName();
-        }, 2000);
+        }, 1000);
 
 
     })
@@ -163,11 +163,17 @@ angular.module('starter.controllers', [])
 
     .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading,initialData) {
 
-        console.log(initialData);
-
         $ionicLoading.show({
             template: '<ion-spinner icon="lines" ></ion-spinner>'
         });
+        var getInitialData = initialData.selectedArticle;
+        if(getInitialData){
+            $scope.selectedArticle = getInitialData.data;
+            $ionicLoading.hide();
+        }
+        $scope.imageURL = initialData.imageURL;
+
+
         $scope.appId = $rootScope.appId;
         $scope.appName = $rootScope.appName;
 
@@ -210,22 +216,6 @@ angular.module('starter.controllers', [])
         }
         $timeout(function () {
             $scope.changeAppName();
-        }, 2000);
-
-        $http.get(constants.SERVER_URL + '/templates/getArticleById?articleId=' + $stateParams.articleId)
-            .success(function (data) {
-                $ionicLoading.hide();
-                $scope.selectedArticle = data;
-            }).error(function (err) {
-            alert('loading err');
-        });
-
-        $http.get(constants.SERVER_URL + '/templates/getArticles?appId=' + $rootScope.appId + "&categoryId=" + $stateParams.categoryId)
-            .success(function (data) {
-                $ionicLoading.hide();
-                $scope.artilceList = data;
-            }).error(function (err) {
-            alert('loading err');
-        });
+        }, 1000);
 
     });

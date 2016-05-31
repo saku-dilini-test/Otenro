@@ -78,9 +78,9 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
     resolve:{
       initialData : ['$q',
         function($q){
-          return $q.all({
-            data : null
-          })
+            return $q.all({
+              imageURL : null
+            })
         }
       ]
     }
@@ -115,9 +115,10 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
         },
         resolve:{
           initialData : ['$q','articleResource','$stateParams',
-            function($q){
+            function($q,articleResource,$stateParams){
               return $q.all({
-                data : null
+                selectedArticle : articleResource.selectedArticle($stateParams.articleId),
+                imageURL : articleResource.getImageUrl()
               })
             }
           ]
