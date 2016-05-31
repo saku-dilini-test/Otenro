@@ -161,7 +161,10 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading) {
+    .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading,initialData) {
+
+        console.log(initialData);
+
         $ionicLoading.show({
             template: '<ion-spinner icon="lines" ></ion-spinner>'
         });
