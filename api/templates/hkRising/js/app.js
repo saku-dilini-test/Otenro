@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
 
 .run(function($ionicPlatform,readMadeEasy,$rootScope) {
   $ionicPlatform.ready(function() {
@@ -74,6 +74,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         templateUrl: 'templates/article.html',
         controller: 'articleCtrl'
       }
+    },
+    resolve:{
+      initialData : ['$q',
+        function($q){
+            return $q.all({
+              imageURL : null
+            })
+        }
+      ]
     }
   })
 
@@ -103,19 +112,19 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             templateUrl: 'templates/articleView.html',
             controller: 'articleCtrl'
           }
+        },
+        resolve:{
+          initialData : ['$q','articleResource','$stateParams',
+            function($q,articleResource,$stateParams){
+              return $q.all({
+                selectedArticle : articleResource.selectedArticle($stateParams.articleId),
+                imageURL : articleResource.getImageUrl()
+              })
+            }
+          ]
         }
-      })
-  //.state('app.single', {
-  //  url: '/playlists/:playlistId',
-  //  views: {
-  //    'menuContent': {
-  //      templateUrl: 'templates/playlist.html',
-  //      controller: 'PlaylistCtrl'
-  //    }
-  //  }
-  //}
-  //)
-  ;
+      });
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home/firstMenu');
 });
