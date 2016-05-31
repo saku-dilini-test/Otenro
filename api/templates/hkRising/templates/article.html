@@ -1,25 +1,26 @@
 <ion-view hide-back-button="true" view-title="{{appName}}">
-    <ion-content class="made-easy-backgroundColor">
+    <ion-content class="made-easy-backgroundColor" lazy-scroll>
         <ion-nav-buttons side="left">
         </ion-nav-buttons>
         <div class="holder">
-        <div ng-repeat="article in artilceList">
-            <div class="card">
-                <a href="#/app/articleView/{{article.id}}">
-                    <div class="row2">
-                        <div class="col2">
-                            <div class="item item-image">
-                                <img ng-src="{{imageURL}}/{{article.imageUrl}}">
-                                <ion-spinner icon="lines"></ion-spinner>
-                                 <div class="item item-text-wrap">
-                                <div class="made-easy-header-font">{{article.title}}
-                            </div>
-                            </div></div>
-                        </div>
+            <ion-content lazy-scroll>
+                <div ng-repeat="article in artilceList">
+                    <div class="card">
+                        <a href="#/app/articleView/{{article.id}}">
+                            <div class="row2">
+                                <div class="col2">
+                                    <div class="item item-image">
+                              <img image-lazy-src="{{imageURL}}/{{article.imageUrl}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="-100">
+                                         <div class="item item-text-wrap">
+                                        <div class="made-easy-header-font">{{article.title}}
+                                    </div>
+                                    </div></div>
+                                </div>
 
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-        </div>
+                </div>
+            </ion-content>
     </ion-content>
 </ion-view>
