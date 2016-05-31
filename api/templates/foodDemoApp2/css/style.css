@@ -144,7 +144,8 @@ padding-bottom:20px;}
 }
 .cards{
 	max-width: 100%;
-margin: 50px auto;
+    margin: 20px auto;
+    margin-bottom: 5px;
 border-radius:5px;
 -webkit-box-shadow: 2px 4px 5px 0px rgba(50, 50, 50, 0.25);
 -moz-box-shadow:    2px 4px 5px 0px rgba(50, 50, 50, 0.25);
