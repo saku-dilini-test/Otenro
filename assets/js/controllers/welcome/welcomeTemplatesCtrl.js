@@ -39,7 +39,7 @@
                     mySharedService.prepForBroadcast(url);
                     $scope.goLivePreview = function() {
                         $state.go('anon.livePreview', {
-                            userId: 'unknownUser',
+                            userId: $auth.getPayload().id,
                             appId: data.data.appId,
                             tempUrl: templateUrl,
                             tempName: templateName,
