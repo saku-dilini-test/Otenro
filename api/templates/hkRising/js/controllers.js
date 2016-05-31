@@ -169,7 +169,6 @@ angular.module('starter.controllers', [])
         var getInitialData = initialData.selectedArticle;
         if(getInitialData){
             $scope.selectedArticle = getInitialData.data;
-            $ionicLoading.hide();
         }
         $scope.imageURL = initialData.imageURL;
 
@@ -194,8 +193,10 @@ angular.module('starter.controllers', [])
                             var firstCat = catList[0];
                             $http.get(constants.SERVER_URL + '/templates/getArticles?appId=' + $rootScope.appId + "&categoryId=" + firstCat.id)
                                 .success(function (data) {
-                                    $ionicLoading.hide();
                                     $scope.artilceList = data;
+                                    $timeout(function () {
+                                        $ionicLoading.hide();
+                                    }, 2000);
                                 }).error(function (err) {
                                 alert('loading err');
                             });
@@ -206,8 +207,10 @@ angular.module('starter.controllers', [])
             } else {
                 $http.get(constants.SERVER_URL + '/templates/getArticles?appId=' + $rootScope.appId + "&categoryId=" + $stateParams.categoryId)
                     .success(function (data) {
-                        $ionicLoading.hide();
                         $scope.artilceList = data;
+                        $timeout(function () {
+                            $ionicLoading.hide();
+                        }, 2000);
                     }).error(function (err) {
                     alert('loading err');
                 });
