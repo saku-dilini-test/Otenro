@@ -225,7 +225,6 @@
                     link : data.link,
                     icon : data.icon,
                     appId : data.appId,
-                    nodes : []
                 });
             }).success(function(data) {
                 toastr.success("Successfully added new navigation", 'Message', {

@@ -29,26 +29,26 @@ module.exports = {
                 var mainNodes = data[x].nodes;
                 MainNavigation.update({ id : data[x].id , appId : appId },data[x],function(err,main){
 
-                    if(main.n === 0 || mainNodes.length == 0){
+//                    if(main.n === 0 || mainNodes.length == 0){
                         x++;
                         setFunction(x,length,data);
-                    }
-                    for(var i=0 ; i < mainNodes.length ; i++){
-
-                        var childNodes = mainNodes[i].nodes;
-                        SecondNavigation.update({ id : mainNodes[i].id ,appId : appId },mainNodes[i],function(err,child){
-
-                            for(var j=0 ; j < childNodes.length ; j++) {
-                                ThirdNavigation.update({id: childNodes[j].id, appId: appId}, childNodes[j], function (err, subchild) {
-                                    console.log(subchild);
-                                });
-                            }
-                        });
-                        if(i == mainNodes.length-1 ){
-                            x++;
-                            setFunction(x,length,data);
-                        }
-                    }
+//                    }
+//                    for(var i=0 ; i < mainNodes.length ; i++){
+//
+//                        var childNodes = mainNodes[i].nodes;
+//                        SecondNavigation.update({ id : mainNodes[i].id ,appId : appId },mainNodes[i],function(err,child){
+//
+//                            for(var j=0 ; j < childNodes.length ; j++) {
+//                                ThirdNavigation.update({id: childNodes[j].id, appId: appId}, childNodes[j], function (err, subchild) {
+//                                    console.log(subchild);
+//                                });
+//                            }
+//                        });
+//                        if(i == mainNodes.length-1 ){
+//                            x++;
+//                            setFunction(x,length,data);
+//                        }
+//                    }
 
                 });
             }else{
@@ -61,20 +61,20 @@ module.exports = {
                 var childNodes = data[x].nodes;
                 SecondNavigation.update({ id : data[x].id , appId : appId },data[x],function(err,parent){
 
-                    if(parent.n === 0 || childNodes.length == 0){
+//                    if(parent.n === 0 || childNodes.length == 0){
                         x++;
                         setFunctionSecondNavi(x,length,data);
-                    }
-                    for(var i=0 ; i < childNodes.length ; i++){
-
-                        ThirdNavigation.update({ id : childNodes[i].id ,appId : appId },childNodes[i],function(err,child){
-
-                        });
-                        if(i == childNodes.length-1 ){
-                            x++;
-                            setFunctionSecondNavi(x,length,data);
-                        }
-                    }
+//                    }
+//                    for(var i=0 ; i < childNodes.length ; i++){
+//
+//                        ThirdNavigation.update({ id : childNodes[i].id ,appId : appId },childNodes[i],function(err,child){
+//
+//                        });
+//                        if(i == childNodes.length-1 ){
+//                            x++;
+//                            setFunctionSecondNavi(x,length,data);
+//                        }
+//                    }
                 });
             }else{
                 res.send('ok');
