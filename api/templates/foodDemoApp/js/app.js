@@ -31,7 +31,9 @@ mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy) {
             $rootScope.appName = data.name;
         });
     }
-});
+}).config(function($ionicConfigProvider) {
+    $ionicConfigProvider.views.forwardCache(true);
+})
 
 mobileApp.config(['$authProvider','constants', function($authProvider,constants) {
 
