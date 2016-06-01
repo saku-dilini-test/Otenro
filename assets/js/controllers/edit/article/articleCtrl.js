@@ -18,6 +18,7 @@
         $scope.mainImg = null;
         $scope.isNewArticle = false;
         $scope.edit_Category = initialData;
+        $scope.pageSize = 5;
 
         console.log("catName " + $scope.catName);
 

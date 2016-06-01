@@ -1,11 +1,17 @@
 <md-dialog aria-label="publish-article">
     <md-dialog-content>
+        <md-tab-body>
         <div class="md-dialog-header">
-            <h1>previews articles</h1>
+            <div class="md-dialog-header-nav clearfix">
+            <h1 class="pull-left">previews articles</h1>
+            <fieldset class="col-2 pull-right reset-margin">
+                <input type="text" required="" ng-model="search" class="me-search-input" name="name">
+                <input type="submit" value="search" class="me-search-button">
+            </fieldset>
         </div>
 
         <div class="md-dialog-main clearfix">
-
+            <form class="allItems" novalidate>
             <table class="table">
                 <thead>
                 <th>Title</th>
@@ -13,7 +19,7 @@
                 <th>Action</th>
                 </thead>
                 <tbody>
-                <tr ng-repeat="article in articleList">
+                <tr dir-paginate="article in articleList | filter:search | itemsPerPage: pageSize">
                     <td>{{article.title}}</td>
                     <td>{{article.createdDate}}</td>
                     <td>
@@ -23,6 +29,8 @@
                 </tr>
                 </tbody>
             </table>
+            </form>
+            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
         </div>
 
             <div class="md-dialog-buttons">
@@ -31,6 +39,7 @@
                     <md-button class="me-default-button" ng-click="answer('cancel')">OK</md-button>
                 </div>
             </div>
+        </md-tab-body>
 
     </md-dialog-content>
 </md-dialog>
