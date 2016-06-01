@@ -3,6 +3,8 @@
  *
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
+var fs = require('fs-extra'),
+    config = require('../../../services/config');
 
 module.exports = {
 
@@ -101,5 +103,27 @@ module.exports = {
         }
 
         res.send({message : 'ok'});
-    }
+    },
+    deleteThirdNavigation : function(req,res){
+            var appId = req.body.appId;
+            var deleteQuery = {
+                 id : req.body.id
+            }
+            var searchApp = {
+                id : req.body.id
+            };
+            ThirdNavigation.find(searchApp).exec(function(err, app) {
+                if(err) return done(err);
+                var imageUrl = app[0].imageUrl;
+                ThirdNavigation.destroy(deleteQuery).exec(function (err) {
+                    if (err) return done(err);
+                    var filePath = config.ME_SERVER + req.body.userId + '/templates/' + appId+ '/img/thirdNavi/'+ imageUrl;
+                    fs.unlink(filePath, function (err) {
+                        if (err) return done(err);
+                        res.send(200,{message:'Deleted Article'});
+                    });
+                });
+
+            });
+        }
 };

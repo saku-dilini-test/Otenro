@@ -244,6 +244,9 @@
             getAllTimeAndRegion: function(){
                 return $http.get(SERVER_URL + 'edit/getAllTimeAndRegion');
             },
+            deleteProducts: function(data){
+                return $http.post(SERVER_URL+ 'edit/deleteThirdNavigation',data);
+            }
 
         };
     }
