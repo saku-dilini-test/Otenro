@@ -26,6 +26,7 @@
                                 <th class="id-column">qty</th>
                                 <th>price</th>
                                 <th>sale price</th>
+                                <th>Action</th>
                             </thead>
                             <tbody>
                                 <tr dir-paginate="inventory in inventoryList | filter:search | itemsPerPage: pageSize" current-page="currentPage">
@@ -38,6 +39,7 @@
                                     <td><input type="number" ng-model="inventory.price" /></td>
                                     <!--<td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()"><input type="number" ng-model="inventory.sale"/></a></td>-->
                                     <td class="sale-yes"><input style="color:red" type="number" ng-model="inventory.discount" /></td>
+                                    <td><br ><a class="btn-delete" data-nodrag ng-click="deletePro($index,inventory)"></a></td>
                                 </tr>
                             </tbody>
                         </table>

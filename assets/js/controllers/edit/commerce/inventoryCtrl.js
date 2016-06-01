@@ -9,7 +9,7 @@
     function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth,toastr) {
             $scope.currentPage = 1;
             $scope.pageSize = 5;
-            $scope.userId=$auth.getPayload().sub;
+            $scope.userId=$auth.getPayload().id;
             $scope.appId=$rootScope.appId;
             $scope.SERVER_URL = SERVER_URL;
             $scope.imageURL = SERVER_URL+
@@ -27,7 +27,6 @@
 //                             discount: 0
 
 //                             }
-                             console.log("result "+result[0]);
                          }).error(function (error) {
                              alert("Inventory Loading Error : " + error);
                          })
@@ -54,6 +53,20 @@
 
                     })
 
+            };
+
+            $scope.deletePro = function(index,inventory){
+                $scope.inventoryList.splice(index, 1);
+                inventory.userId = $scope.userId;
+                commerceService.deleteProducts(inventory).success(function(data) {
+                    toastr.success(data.message, 'Message', {
+                        closeButton: true
+                    });
+                }).error(function(err) {
+                    toastr.error(err, 'Warning', {
+                        closeButton: true
+                    });
+                });
             }
     }
     })();
