@@ -25,7 +25,7 @@ module.exports.models = {
    *                                                                          *
    ***************************************************************************/
 
-  migrate: 'safe',
+  migrate: 'alter',
 
   seed: function (callback) {
     var self = this;
