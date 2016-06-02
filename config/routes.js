@@ -174,10 +174,8 @@ module.exports.routes = {
 
     'POST /edit/saveEmailDeliInfo': 'edit/commerce/EmailController.saveEmailDeliInfo',
     'POST /edit/getEmailSettings': 'edit/commerce/EmailController.getEmailSettings',
-    'POST /edit/saveEmailHandF': 'edit/commerce/EmailController.saveEmailHandF',
-    'POST /edit/saveEmailOConfirm': 'edit/commerce/EmailController.saveEmailOConfirm',
-    'POST /edit/saveEmailOFullFilled': 'edit/commerce/EmailController.saveEmailOFullFilled',
-    'POST /edit/saveEmailOrderRefund': 'edit/commerce/EmailController.saveEmailOrderRefund',
+    'POST /edit/updateEmailSettings': 'edit/commerce/EmailController.updateEmailSettings',
+    'POST /edit/sendTestEmail': 'edit/commerce/EmailController.sendTestEmail',
 
     /**
      * ShippingController

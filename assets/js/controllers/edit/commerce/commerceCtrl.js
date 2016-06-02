@@ -335,7 +335,9 @@
             $mdDialog.hide();
         };
 
-        $scope.saveEmailDeliInfo = function(email){
+        $scope.saveEmailDeliInfo = function (email) {
+
+            email.appId = $rootScope.appId;
             console.log(email);
             commerceService.saveEmailDeliInfo( email)
                 .success(function(data) {
@@ -351,16 +353,36 @@
             })
 
         };
-        $scope.saveEmailHandF = function(email){
+        $scope.updateEmailSettings = function (email) {
+            email.appId = $rootScope.appId;
             console.log(email);
-            commerceService.saveEmailHandF( email)
-                .success(function(data) {
+            commerceService.updateEmailSettings(email)
+                .success(function (data) {
                     console.log(data);
                     toastr.success('Email Settings has been changed ', 'Success', {
                         closeButton: true
                     });
 
-                }).error(function(err) {
+                }).error(function (err) {
+                toastr.error('Unable to Create', 'Warning', {
+                    closeButton: true
+                });
+            })
+
+        };
+        $scope.testEmail = function(type){
+            var sendType = {
+                type:type
+            }
+            sendType.appId = $rootScope.appId;
+            commerceService.sendTestEmail(sendType)
+                .success(function (data) {
+                    console.log(data + 'asds');
+                    toastr.success('Email Settings has been changed ', 'Success', {
+                        closeButton: true
+                    });
+
+                }).error(function (err) {
                 toastr.error('Unable to Create', 'Warning', {
                     closeButton: true
                 });
@@ -368,62 +390,12 @@
 
         };
 
-        $scope.saveEmailOConfirm = function(email){
-            console.log(email);
-            commerceService.saveEmailOConfirm( email)
-                .success(function(data) {
-                    console.log(data);
-                    toastr.success('Email Settings has been changed ', 'Success', {
-                        closeButton: true
-                    });
-
-                }).error(function(err) {
-                toastr.error('Unable to Create', 'Warning', {
-                    closeButton: true
-                });
-            })
-
-        };
-        $scope.saveEmailOFullFilled = function(email){
-            console.log(email);
-            commerceService.saveEmailOFullfilled( email)
-                .success(function(data) {
-                    console.log(data);
-                    toastr.success('Email Settings has been changed ', 'Success', {
-                        closeButton: true
-                    });
-
-                }).error(function(err) {
-                toastr.error('Unable to Create', 'Warning', {
-                    closeButton: true
-                });
-            })
-
-        };
-        $scope.saveEmailOrderRefund = function(email){
-            console.log(email);
-            commerceService.saveEmailOFullfilled( email)
-                .success(function(data) {
-                    console.log(data);
-                    toastr.success('Email Settings has been changed ', 'Success', {
-                        closeButton: true
-                    });
-
-                }).error(function(err) {
-                toastr.error('Unable to Create', 'Warning', {
-                    closeButton: true
-                });
-            })
-
-        };
-
-            //commerceService.getEmailSettings()
-            //    .success(function (result) {
-            //        $scope.email = result;
-            //    }).error(function (error) {
-            //    alert("MainMenu Loading Error : " + error);
-            //});
-
+        //commerceService.getEmailSettings()
+        //    .success(function (result) {
+        //        $scope.email = result;
+        //    }).error(function (error) {
+        //    alert("MainMenu Loading Error : " + error);
+        //});
 
 
     }
