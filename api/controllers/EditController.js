@@ -37,19 +37,16 @@ module.exports = {
 
         var userId = req.userId;
         var appId = req.body.appId;
-        var copyDir = userId + '/build/' + appId;
-        var copyDirPath = config.ME_SERVER + copyDir + '/madeEasyApp';
-        //var platFormPath = 'platforms';
-        var selectedTemplatePath = config.ME_SERVER + userId + '/templates/' + appId;
-        var wwwPath = copyDirPath + '/www/';
-        var configFile = copyDirPath + '/www/config.xml';
-        var moveConfigFile = copyDirPath + '/config.xml';
-        var appIconFile = copyDirPath + '/www/res/android/icon/icon.jpg';
-        var srcPath = sails.config.appPath + '/api/src/hybrid';
+        var copyDirPath = config.ME_SERVER + userId + '/build/' + appId + '/';
+        var wwwPath = copyDirPath + 'www/';
+        var moveConfigFile = copyDirPath + 'config.xml';
+        var selectedTemplatePath = config.ME_SERVER + userId + '/templates/' + appId +'/';
+        var configFile = copyDirPath + 'www/config.xml';
+        var appIconFile = copyDirPath + 'www/res/android/icon/icon.jpg';
+        var srcPath = sails.config.appPath + '/api/src/hybrid/';
 
         fs.readFile(moveConfigFile, 'utf-8',
             function(err, data) {
-                //if(err) return res.negotiate(err)
 
                 if(!data || err ){
                     fs.copy(srcPath, copyDirPath, function (err) {
@@ -57,7 +54,7 @@ module.exports = {
                         //Success
                         var removeDirArray = ['www'];
                         for (var i = 0; i < removeDirArray.length; i++) {
-                            var removeDirPath = copyDirPath + '/' + removeDirArray[i];
+                            var removeDirPath = copyDirPath + removeDirArray[i] + '/';
                             fs.remove(removeDirPath, function (err) {
                                 if (err) return res.negotiate(err);
 
@@ -148,9 +145,9 @@ module.exports = {
                             if (err) return res.negotiate(err);
                         });
 
-                        fs.writeFile(appIconFile, icon, 'base64', function(err) {
-                            if (err) return res.negotiate(err);
-                        });
+                        //fs.writeFile(appIconFile, icon, 'base64', function(err) {
+                        //    if (err) return res.negotiate(err);
+                        //});
 
 
                         BuildVersion.create({
