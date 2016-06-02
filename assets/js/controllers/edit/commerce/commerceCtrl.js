@@ -1,10 +1,64 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("CommerceCtrl", [
-        '$scope', '$mdDialog', 'toastr','commerceService','currencyService','publishService','$rootScope','SERVER_URL','$auth','ME_APP_SERVER',
+        '$scope', '$mdDialog', 'toastr','commerceService','currencyService','publishService','$rootScope','SERVER_URL','$auth','ME_APP_SERVER', '$interval', '$q',
         CommerceCtrl]);
 
-    function CommerceCtrl($scope, $mdDialog,toastr, commerceService,currencyService,publishService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER) {
+    function CommerceCtrl($scope, $mdDialog,toastr, commerceService,currencyService,publishService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER,$interval,$q) {
+
+
+
+        var fakeI18n = function( title ){
+            var deferred = $q.defer();
+            $interval( function() {
+                deferred.resolve( 'col: ' + title );
+            }, 1000, 1);
+            return deferred.promise;
+        };
+
+        $scope.gridOptions = {
+            exporterMenuCsv: true,
+            enableGridMenu: true,
+            gridMenuTitleFilter: fakeI18n,
+            columnDefs: [
+                { name: 'date' },
+                { name: 'customer', enableHiding: false },
+                { name: 'payment_status' },
+                { name: 'fulfillment_status' }
+            ],
+            gridMenuCustomItems: [
+                {
+                    title: 'Rotate Grid',
+                    action: function ($event) {
+                        this.grid.element.toggleClass('rotated');
+                    },
+                    order: 210
+                }
+            ],
+            onRegisterApi: function( gridApi ){
+                $scope.gridApi = gridApi;
+
+                // interval of zero just to allow the directive to have initialized
+                $interval( function() {
+                    gridApi.core.addToGridMenu( gridApi.grid, [{ title: 'Dynamic item', order: 100}]);
+                }, 0, 1);
+
+                gridApi.core.on.columnVisibilityChanged( $scope, function( changedColumn ){
+                    $scope.columnChanged = { name: changedColumn.colDef.name, visible: changedColumn.colDef.visible };
+                });
+            }
+        };
+
+        $scope.myData = [
+            {date: new Date(), customer: "Riki",payment_status :"pending",fulfillment_status:"close"},
+            {date: new Date(), customer: "jon",payment_status :"pending",fulfillment_status:"close"},
+            {date: new Date(), customer: "kal",payment_status :"pending",fulfillment_status:"close"}
+
+        ];
+
+        $scope.gridOptions.data = $scope.myData;
+
+
         $scope.selectedTab = 0;
         $scope.currentPage = 2;
         $scope.pageSize = 5;
@@ -232,20 +286,20 @@
             }
          };
 
-            commerceService.showStoreSettings($rootScope.appId).
-            success(function(data){
-                $scope.storeSettings = data[0];
-                $scope.storeSettings.currency = data[0].currencySign;
-                for(var i=0; i<data[0].OpenHours.length; i++){
-                    var open = new Date(data[0].OpenHours[i].open);
-                    var close = new Date(data[0].OpenHours[i].close);
-                    data[0].OpenHours[i].open = open;
-                    data[0].OpenHours[i].close = close;
-                }
-                $scope.openHours = data[0].OpenHours;
-            }).error(function(err){
-                toastr.error(' warning',"Unable to get Store Settings", {closeButton: true});
-            });
+            // commerceService.showStoreSettings($rootScope.appId).
+            // success(function(data){
+            //     $scope.storeSettings = data[0];
+            //     $scope.storeSettings.currency = data[0].currencySign;
+            //     for(var i=0; i<data[0].OpenHours.length; i++){
+            //         var open = new Date(data[0].OpenHours[i].open);
+            //         var close = new Date(data[0].OpenHours[i].close);
+            //         data[0].OpenHours[i].open = open;
+            //         data[0].OpenHours[i].close = close;
+            //     }
+            //     $scope.openHours = data[0].OpenHours;
+            // }).error(function(err){
+            //     toastr.error(' warning',"Unable to get Store Settings", {closeButton: true});
+            // });
 
         $scope.savePolicies = function(current,policies){
                  if(policies.returnPolicy == null || policies.termsAndCondition == null || policies.privacyPolicy == null){
@@ -416,6 +470,8 @@
             })
 
         };
+
+
 
             //commerceService.getEmailSettings()
             //    .success(function (result) {
