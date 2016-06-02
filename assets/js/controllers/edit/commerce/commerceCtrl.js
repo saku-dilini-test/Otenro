@@ -303,6 +303,8 @@
             $scope.selectedTab = current;
         };
 
+
+
         $scope.openMiniLightBox = function(){
             $scope.miniLightBoxShow = true;
         };
@@ -335,11 +337,17 @@
             $mdDialog.hide();
         };
 
-        $scope.saveEmailDeliInfo = function(email){
+        $scope.saveEmailDeliInfo = function (email,type) {
+
+            email.appId = $rootScope.appId;
             console.log(email);
             commerceService.saveEmailDeliInfo( email)
                 .success(function(data) {
                     console.log(data);
+                    if(type == "next"){
+                        var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
+                        $scope.selectedIndex = index;
+                    }
                     toastr.success('Email Settings has been changed ', 'Success', {
                         closeButton: true
                     });
@@ -351,79 +359,56 @@
             })
 
         };
-        $scope.saveEmailHandF = function(email){
+        $scope.nextStep1 = function() {
+
+        };
+        $scope.updateEmailSettings = function (email,type) {
+            email.appId = $rootScope.appId;
             console.log(email);
-            commerceService.saveEmailHandF( email)
-                .success(function(data) {
+            commerceService.updateEmailSettings(email)
+                .success(function (data) {
                     console.log(data);
+                    if(type == "next"){
+                        var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
+                        $scope.selectedIndex = index;
+                    }
                     toastr.success('Email Settings has been changed ', 'Success', {
                         closeButton: true
                     });
 
-                }).error(function(err) {
+                }).error(function (err) {
                 toastr.error('Unable to Create', 'Warning', {
                     closeButton: true
                 });
             })
 
         };
-
-        $scope.saveEmailOConfirm = function(email){
-            console.log(email);
-            commerceService.saveEmailOConfirm( email)
-                .success(function(data) {
-                    console.log(data);
-                    toastr.success('Email Settings has been changed ', 'Success', {
+        $scope.testEmail = function(type){
+            var sendType = {
+                type:type
+            }
+            sendType.appId = $rootScope.appId;
+            commerceService.sendTestEmail(sendType)
+                .success(function (data) {
+                    console.log(data + 'asds');
+                    toastr.success('Test Email has been Sent ', 'Success', {
                         closeButton: true
                     });
 
-                }).error(function(err) {
-                toastr.error('Unable to Create', 'Warning', {
-                    closeButton: true
-                });
-            })
-
-        };
-        $scope.saveEmailOFullFilled = function(email){
-            console.log(email);
-            commerceService.saveEmailOFullfilled( email)
-                .success(function(data) {
-                    console.log(data);
-                    toastr.success('Email Settings has been changed ', 'Success', {
-                        closeButton: true
-                    });
-
-                }).error(function(err) {
-                toastr.error('Unable to Create', 'Warning', {
-                    closeButton: true
-                });
-            })
-
-        };
-        $scope.saveEmailOrderRefund = function(email){
-            console.log(email);
-            commerceService.saveEmailOFullfilled( email)
-                .success(function(data) {
-                    console.log(data);
-                    toastr.success('Email Settings has been changed ', 'Success', {
-                        closeButton: true
-                    });
-
-                }).error(function(err) {
-                toastr.error('Unable to Create', 'Warning', {
+                }).error(function (err) {
+                toastr.error('Unable to Send', 'Warning', {
                     closeButton: true
                 });
             })
 
         };
 
-            //commerceService.getEmailSettings()
-            //    .success(function (result) {
-            //        $scope.email = result;
-            //    }).error(function (error) {
-            //    alert("MainMenu Loading Error : " + error);
-            //});
-
+        //commerceService.getEmailSettings()
+        //    .success(function (result) {
+        //        $scope.email = result;
+        //    }).error(function (error) {
+        //    alert("MainMenu Loading Error : " + error);
+        //});
 
 
     }
