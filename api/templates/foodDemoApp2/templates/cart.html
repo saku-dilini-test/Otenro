@@ -8,13 +8,15 @@
         <div class="col2 col-51">Item</div>
         <div class="col2">Qty</div>
         <div class="col2">Price</div>
+        <div class="col2"></div>
       </div>
     </div>
     <div class="item item-stacked-label" ng-repeat="item in cartItems" >
       <div class="row">
-        <div class="col" ng-model="item.name" style="size;">{{item.name}}</div>
+        <div class="col" ng-model="item.name" >{{item.name}}</div>
         <div class="col" ng-model="item.qty" >{{item.qty}}</div>
         <div class="col" ng-model="item.price" >{{item.price}}</div>
+        <div class="col" ng-click="removeItem(index)">X</div>
       </div>
     </div>
     <div class="item item-stacked-label">
