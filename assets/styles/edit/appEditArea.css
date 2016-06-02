@@ -560,3 +560,13 @@ a.md-button:hover:not([disabled]),
 .edit-bg-wrapper obl-menu-button:hover{
     background-color: transparent;
 }
+/*Styles for text edit*/
+trix-editor ul li {
+    list-style-type: disc;
+}
+trix-editor ol li {
+    list-style-type: decimal;
+}
+trix-editor {
+    padding: 4px 20px;
+}
