@@ -215,23 +215,15 @@
                 return $http.post(SERVER_URL+ 'edit/insertFlatRateData',data);
             },
 
-            saveEmailDeliInfo : function(data){
-                return $http.post(SERVER_URL+ 'edit/saveEmailDeliInfo',data);
+            saveEmailDeliInfo: function (data) {
+                return $http.post(SERVER_URL + 'edit/saveEmailDeliInfo', data);
             },
-            saveEmailHandF : function(data){
-                return $http.post(SERVER_URL+ 'edit/saveEmailHandF',data);
+            updateEmailSettings: function (data) {
+                return $http.post(SERVER_URL + 'edit/updateEmailSettings', data);
             },
-
-            saveEmailOConfirm : function(data){
-                return $http.post(SERVER_URL+ 'edit/saveEmailOConfirm',data);
+            sendTestEmail: function (data) {
+                return $http.post(SERVER_URL + 'edit/sendTestEmail', data);
             },
-            saveEmailOFullFilled : function(data){
-                return $http.post(SERVER_URL+ 'edit/saveEmailOFullFilled',data);
-            },
-            saveEmailOrderRefund : function(data){
-                return $http.post(SERVER_URL+ 'edit/saveEmailOrderRefund',data);
-            },
-
             getEmailSettings : function(data){
                 return $http.post(SERVER_URL+ 'edit/getEmailSettings',data);
             },

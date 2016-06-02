@@ -22,10 +22,10 @@ module.exports = {
         alertAt:{
             type: 'string'
         },
-        orderConfirmEmail:{
+        orderConfirmedEmail:{
             type: 'string'
         },
-        orderFulFilled:{
+        orderFulfilledEmail:{
             type: 'string'
         },
         orderRefundEmail:{
