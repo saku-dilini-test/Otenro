@@ -561,9 +561,12 @@ a.md-button:hover:not([disabled]),
     background-color: transparent;
 }
 /*Styles for text edit*/
-ul li {
+trix-editor ul li {
     list-style-type: disc;
 }
-ol li {
+trix-editor ol li {
     list-style-type: decimal;
+}
+trix-editor {
+    padding: 4px 20px;
 }
