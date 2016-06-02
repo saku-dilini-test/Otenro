@@ -1,6 +1,6 @@
 <md-dialog aria-label="Inventory" style="width:900px">
     <md-dialog-content>
-        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false"
+        <md-tabs md-center-tabs="false" md-selected="selectedIndex" md-no-ink="true" md-autoselect="false"
                  md-dynamic-height="true">
             <md-tab>
                 <md-tab-label>Email Delivery</md-tab-label>
@@ -46,10 +46,10 @@
 
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
-                                <md-button class="me-default-button" ng-click="saveEmailDeliInfo(emailDel)">Save
+                                <md-button class="me-default-button" ng-click="saveEmailDeliInfo(emailDel,'save')">Save
                                 </md-button>
                                 <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                                <md-button class="me-default-button" ng-click="fulfill(inventoryList)">Next</md-button>
+                                <md-button class="me-default-button" ng-click="saveEmailDeliInfo(emailDel,'next')">Next</md-button>
                             </div>
 
                         </div>
@@ -79,10 +79,10 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(emailHF)">Save
+                            <md-button class="me-default-button" ng-click="updateEmailSettings(emailHF,'save')">Save
                             </md-button>
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">Next</md-button>
+                            <md-button class="me-default-button" ng-click="updateEmailSettings(emailHF,'next')">Next</md-button>
                         </div>
                     </div>
 
@@ -107,10 +107,10 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(OConfirm)">Save
+                            <md-button class="me-default-button" ng-click="updateEmailSettings(OConfirm,'save')">Save
                             </md-button>
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">Next</md-button>
+                            <md-button class="me-default-button" ng-click="updateEmailSettings(OConfirm,'next')">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -134,10 +134,10 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(Ofulfilled)">Save
+                            <md-button class="me-default-button" ng-click="updateEmailSettings(Ofulfilled,'save')">Save
                             </md-button>
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">Next</md-button>
+                            <md-button class="me-default-button" ng-click="updateEmailSettings(Ofulfilled,'next')">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -161,10 +161,10 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(ORefund)">Save
+                            <md-button class="me-default-button" ng-click="updateEmailSettings(ORefund,'save')">Save
                             </md-button>
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">Finish</md-button>
+                            <md-button class="me-default-button" ng-click="updateEmailSettings(ORefund,'next')">Finish</md-button>
                         </div>
                     </div>
                 </md-tab-body>

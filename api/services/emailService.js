@@ -28,7 +28,7 @@ module.exports = {
             if (err) return done(err);
 
             // var apps = JSON.stringify(app);
-            console.log(app[0].orderRefundEmail);
+            console.log(app);
             for (var i = 0; i < app.length; i++) {
 
                 var mBody;

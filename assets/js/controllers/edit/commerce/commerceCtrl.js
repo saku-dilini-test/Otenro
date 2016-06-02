@@ -303,6 +303,8 @@
             $scope.selectedTab = current;
         };
 
+
+
         $scope.openMiniLightBox = function(){
             $scope.miniLightBoxShow = true;
         };
@@ -335,13 +337,17 @@
             $mdDialog.hide();
         };
 
-        $scope.saveEmailDeliInfo = function (email) {
+        $scope.saveEmailDeliInfo = function (email,type) {
 
             email.appId = $rootScope.appId;
             console.log(email);
             commerceService.saveEmailDeliInfo( email)
                 .success(function(data) {
                     console.log(data);
+                    if(type == "next"){
+                        var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
+                        $scope.selectedIndex = index;
+                    }
                     toastr.success('Email Settings has been changed ', 'Success', {
                         closeButton: true
                     });
@@ -353,12 +359,19 @@
             })
 
         };
-        $scope.updateEmailSettings = function (email) {
+        $scope.nextStep1 = function() {
+
+        };
+        $scope.updateEmailSettings = function (email,type) {
             email.appId = $rootScope.appId;
             console.log(email);
             commerceService.updateEmailSettings(email)
                 .success(function (data) {
                     console.log(data);
+                    if(type == "next"){
+                        var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
+                        $scope.selectedIndex = index;
+                    }
                     toastr.success('Email Settings has been changed ', 'Success', {
                         closeButton: true
                     });
@@ -378,12 +391,12 @@
             commerceService.sendTestEmail(sendType)
                 .success(function (data) {
                     console.log(data + 'asds');
-                    toastr.success('Email Settings has been changed ', 'Success', {
+                    toastr.success('Test Email has been Sent ', 'Success', {
                         closeButton: true
                     });
 
                 }).error(function (err) {
-                toastr.error('Unable to Create', 'Warning', {
+                toastr.error('Unable to Send', 'Warning', {
                     closeButton: true
                 });
             })
