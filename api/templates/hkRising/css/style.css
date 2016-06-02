@@ -118,7 +118,7 @@
 .item-text-wrap2 .item, .item-text-wrap2 .item-content2, .item-text-wrap2, .item-text-wrap2 h1, .item-text-wrap2 h2, .item-text-wrap2 h3, .item-text-wrap2 h4, .item-text-wrap2 h5, .item-text-wrap2 h6, .item-text-wrap2 p, .item-complexw.item-text-wrapw .item-contentw, .item-body2 h1, .item-body2 h2, .item-body2 h3, .item-body2 h4, .item-body2 h5, .item-body2 h6, .item-body2 p {
     overflow: visible;
     white-space: normal;
-    font-weight: 600;
+    font-weight: 100;
     color: #e7c67f;
     text-align: center;
     border-width: 0px;
