@@ -40,7 +40,8 @@ angular.module('app', [
   'angularInlineEdit',
   'ADM-dateTimePicker',
   'angularTrix',
-  'angularUtils.directives.dirPagination'
+  'angularUtils.directives.dirPagination',
+  'ui.grid'
 
 
 ]).run(function($rootScope, $state, $auth,Auth) {
