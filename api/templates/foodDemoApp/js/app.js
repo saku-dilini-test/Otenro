@@ -160,7 +160,19 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           controller: 'cartCtrl'
       }
     }
-  });
+  })
+  .state('app.deliverDetails', {
+      url: '/deliverDetails',
+      params:{
+        item: null
+      },
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/deliverDetails.html',
+            controller: 'cartCtrl'
+        }
+      }
+    });
 
   $urlRouterProvider.otherwise('/app/login');
 });

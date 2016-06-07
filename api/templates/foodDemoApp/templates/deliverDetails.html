@@ -1,0 +1,25 @@
+<ion-view view-title="Deliver Details">
+    <ion-content style="background: url(img/background.jpg) center; background-size: cover;">
+        <div class="card animated zoomIn">
+            <div class="box_inner">
+                <h4>Deliver Details</h4>
+                <div class="item item-stacked-label">
+                    <div class="row2">
+                        <div>Name</div>
+                        <input type="text" ng-model="details.name" placeholder="{{details.name}}" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">
+                    </div>
+                    <div class="row2">
+                        <div>Address</div>
+                        <input type="text" ng-model="details.address" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">
+                    </div>
+                    <div class="row2">
+                        <div>Contact number</div>
+                        <input type="number" ng-model="details.number" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">
+                    </div>
+                </div>
+                <div class="panel2">
+                    <a class="social-button" ng-click="deliver(details)" >Deliver</a>
+                </div>
+            </div></div>
+    </ion-content></div>
+</ion-view>
