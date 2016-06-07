@@ -12,10 +12,13 @@
         <p class="animated zoomIn">{{foodInfo.detailedDesc}}</p>
 
         <div class="row">
-            <div class="col2" style="color:#009ddb; font-size:12px;">Qty</div>
+            <div class="col2" style="color:#75a3b8; font-size:12px;">Qty</div>
             <div class="col2"><input type="number" ng-model="quantity" style="width:50px"></div>
-            <div class="col2"><button class="button button-small button-calm" ng-click="addToCart(quantity)">
+            <div class="col2" ng-if="foodInfo.buy == 'enable'"><button class="button button-small button-calm" ng-click="addToCart(quantity)">
               Buy
+            </button></div>
+            <div class="col2" ng-if="foodInfo.buy == 'disable'"><button class="button button-small button-calm" ng-disabled="true">
+              Sold Out
             </button></div>
           </div>
         </div>
