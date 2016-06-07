@@ -35,6 +35,12 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 if(data.discount){
                     $scope.foodInfo.price = $scope.foodInfo.discount;
                 }
+                if($scope.foodInfo.quantity === undefined){
+                    $scope.foodInfo.buy = "disable";
+                }
+                else{
+                    $scope.foodInfo.buy = "enable";
+                }
             }).error(function(err) {
                  alert('warning', "Unable to get Product", err.message);
           });
