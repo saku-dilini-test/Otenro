@@ -1,9 +1,9 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("MainMenuCtrl", ['$scope', '$mdDialog', '$rootScope', 'mainMenuService','$http',
-        'commerceService','toastr','mySharedService', MainMenuCtrl]);
+        'commerceService','toastr','mySharedService','ME_APP_SERVER','$auth', MainMenuCtrl]);
 
-    function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,mySharedService) {
+    function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,mySharedService,ME_APP_SERVER,$auth) {
 
         $scope.tmpImage = [ null , null];
         $scope.mainImg = null;
@@ -256,6 +256,10 @@
                     appId : data.appId,
                 });
             }).success(function(data) {
+                $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                    +'/templates/'+$rootScope.appId+'' +
+                    '#/app/home/'+data.id+'?'+new Date().getTime();
+                mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 toastr.success("Successfully added new navigation", 'Message', {
                     closeButton: true
                 });
