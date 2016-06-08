@@ -10,14 +10,14 @@
                }
            }
        ])
-    }).constant('SERVER_URL', 'http://192.168.8.50:1337/')
+    }).constant('SERVER_URL', 'http://localhost:1337/')
         .constant('LOCALES', {
             'locales': {
                 'en_US': 'English'
             },
             'preferredLocale': 'en_US'
         })
-        .constant('ME_APP_SERVER','http://192.168.8.50:8081/')
+        .constant('ME_APP_SERVER','http://localhost:8080/')
         .config(function($urlRouterProvider,$httpProvider, $authProvider, SERVER_URL) {
 
             $authProvider.baseUrl = SERVER_URL;

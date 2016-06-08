@@ -93,11 +93,24 @@ module.exports = {
 
     addNewNavi : function(req,res){
 
-        var secondNavigationMenu = req.body;
-        secondNavigationMenu.icon ="glyphicon glyphicon-cloud";
+        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
+        
+        req.file('file').upload({
+            dirname: require('path').resolve(dePath)
+        },function (err, uploadedFiles) {
+            if (err) return res.send(500, err);
 
-        SecondNavigation.create(secondNavigationMenu).exec(function(err,newMenu) {
-            res.json(newMenu);
+            var newFileName=Date.now()+'.png';
+            fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
+                if (err) return res.send(err);
+            });
+
+            var secondNavi =req.body;
+            secondNavi.imageUrl = newFileName;
+            SecondNavigation.create(secondNavi).exec(function(err, newMenu) {
+                if (err) res.send(err);
+                res.json(newMenu);
+            });
         });
     },
 

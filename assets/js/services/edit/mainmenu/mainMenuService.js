@@ -3,10 +3,10 @@
  */
 (function() {
     angular.module('appEdit').service('mainMenuService', [
-        '$mdDialog', '$http', 'SERVER_URL','$q','$rootScope','toastr', mainMenuService
+        '$mdDialog', '$http', 'SERVER_URL','$q','$rootScope','toastr','Upload', mainMenuService
     ]);
 
-    function mainMenuService($mdDialog, $http, SERVER_URL,$q,$rootScope,toastr) {
+    function mainMenuService($mdDialog, $http, SERVER_URL,$q,$rootScope,toastr,Upload) {
         return {
 
             showMainMenuDialog: function() {
@@ -67,6 +67,20 @@
                 });
 
             },
+            showAddMenuDialog: function(menu){
+                return $mdDialog.show({
+                    controller: 'MainMenuCtrl',
+                    templateUrl: 'user/edit/mainmenu/addMenu.html',
+                    clickOutsideToClose: true,
+                    locals : {
+                        menu : menu
+                    }
+                }).then(function(answer) {
+
+                },function() {
+
+                });
+            },
 
             showChildImageDialog: function(imageUrl,child){
                 return $mdDialog.show({
@@ -102,8 +116,16 @@
             getProduct: function(Data){
                 return $http.post(SERVER_URL+ 'edit/specificThirdNavi?appId='+$rootScope.appId,Data);
             },
-            addMenu: function(Data){
-                return $http.post(SERVER_URL+ 'edit/addNewMenu',Data);
+
+            addMenu: function(file,appId,name){
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/addNewMenu',
+                    fields: {
+                        'appId' : appId,
+                        'name' : name,
+                    },
+                    file: file
+                });
             },
             addChild: function(Data){
                 return $http.post(SERVER_URL+ 'edit/addChildMenu',Data);
