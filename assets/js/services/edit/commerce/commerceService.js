@@ -238,6 +238,9 @@
             },
             deleteProducts: function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteThirdNavigation',data);
+            },
+            updateOrders: function(data){
+                return $http.post(SERVER_URL+ 'edit/updateOrders',data)
             }
 
         };
