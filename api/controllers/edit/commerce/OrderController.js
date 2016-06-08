@@ -15,6 +15,17 @@ module.exports = {
             if (err) return done(err);
             res.send(app);
         });
-    }
+    },
+    updateOrders : function(req,res){
+    var data = req.body;
+    var obj = [];
+    data.forEach(function(orders){
+        ApplicationOrder.update({id: orders.id}, orders).exec(function(err,order){
+            if (err) return done(err);
+            obj.push(order);
+        })
+    })
+        res.send(obj);
 
+    }
 };

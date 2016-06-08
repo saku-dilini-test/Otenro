@@ -6,7 +6,9 @@
 
     function CommerceCtrl($scope, $mdDialog,toastr, commerceService,currencyService,publishService,$rootScope,SERVER_URL,$auth,ME_APP_SERVER,$interval,$q) {
 
-
+        $scope.refund =[];
+        $scope.unfulfilled =[];
+        $scope.fulfill =[];
 
         var fakeI18n = function( title ){
             var deferred = $q.defer();
@@ -16,15 +18,20 @@
             return deferred.promise;
         };
 
-        $scope.gridOptions = {
+        $scope.gridOptions1 = {
+            enableRowSelection: true,
+            enableSelectAll: true,
+            enableRowHeaderSelection: true,
+            selectionRowHeaderWidth: 35,
+            rowHeight: 35,
             exporterMenuCsv: true,
             enableGridMenu: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
-                { name: 'date' },
-                { name: 'customer', enableHiding: false },
-                { name: 'payment_status' },
-                { name: 'fulfillment_status' }
+                { name: 'createdDate' },
+                { name: 'customerName', enableHiding: false },
+                { name: 'paymentStatus' },
+                { name: 'fulfillmentStatus' }
             ],
             gridMenuCustomItems: [
                 {
@@ -35,29 +42,127 @@
                     order: 210
                 }
             ],
-            onRegisterApi: function( gridApi ){
-                $scope.gridApi = gridApi;
+            onRegisterApi: function( gridApi1 ){
+                $scope.gridApi1 = gridApi1;
 
                 // interval of zero just to allow the directive to have initialized
                 $interval( function() {
-                    gridApi.core.addToGridMenu( gridApi.grid, [{ title: 'Dynamic item', order: 100}]);
+                    gridApi1.core.addToGridMenu( gridApi1.grid, [{ title: 'Dynamic item', order: 100}]);
                 }, 0, 1);
 
-                gridApi.core.on.columnVisibilityChanged( $scope, function( changedColumn ){
+                gridApi1.core.on.columnVisibilityChanged( $scope, function( changedColumn ){
                     $scope.columnChanged = { name: changedColumn.colDef.name, visible: changedColumn.colDef.visible };
                 });
+                 gridApi1.selection.on.rowSelectionChanged($scope,function(row){
+                 });
+
+                 gridApi1.selection.on.rowSelectionChangedBatch($scope,function(rows){
+                 });
             }
         };
+         $scope.gridOptions2 = {
+             enableRowHeaderSelection: false,
+             exporterMenuCsv: true,
+             enableGridMenu: true,
+             gridMenuTitleFilter: fakeI18n,
+             columnDefs: [
+                 { name: 'createdDate' },
+                 { name: 'customerName', enableHiding: false },
+                 { name: 'paymentStatus' },
+                 { name: 'fulfillmentStatus' }
+             ],
+             gridMenuCustomItems: [
+                 {
+                     title: 'Rotate Grid',
+                     action: function ($event) {
+                         this.grid.element.toggleClass('rotated');
+                     },
+                     order: 210
+                 }
+             ],
+             onRegisterApi: function( gridsApi2 ){
+                 $scope.gridsApi2 = gridsApi2;
 
-        $scope.myData = [
-            {date: new Date(), customer: "Riki",payment_status :"pending",fulfillment_status:"close"},
-            {date: new Date(), customer: "jon",payment_status :"pending",fulfillment_status:"close"},
-            {date: new Date(), customer: "kal",payment_status :"pending",fulfillment_status:"close"}
+                 // interval of zero just to allow the directive to have initialized
+                 $interval( function() {
+                     gridsApi2.core.addToGridMenu( gridsApi2.grid, [{ title: 'Dynamic item', order: 100}]);
+                 }, 0, 1);
 
-        ];
+                 gridsApi2.core.on.columnVisibilityChanged( $scope, function( changedColumn ){
+                     $scope.columnChanged = { name: changedColumn.colDef.name, visible: changedColumn.colDef.visible };
+                 });
+             }
+         };
 
-        $scope.gridOptions.data = $scope.myData;
+         $scope.gridOptions3 = {
+             enableRowHeaderSelection: false,
+             exporterMenuCsv: true,
+             enableGridMenu: true,
+             gridMenuTitleFilter: fakeI18n,
+             columnDefs: [
+                 { name: 'createdDate' },
+                 { name: 'customerName', enableHiding: false },
+                 { name: 'paymentStatus' },
+                 { name: 'fulfillmentStatus' }
+             ],
+             gridMenuCustomItems: [
+                 {
+                     title: 'Rotate Grid',
+                     action: function ($event) {
+                         this.grid.element.toggleClass('rotated');
+                     },
+                     order: 210
+                 }
+             ],
+             onRegisterApi: function( gridsApi3 ){
+                 $scope.gridsApi3 = gridsApi3;
 
+                 // interval of zero just to allow the directive to have initialized
+                 $interval( function() {
+                     gridsApi3.core.addToGridMenu( gridsApi3.grid, [{ title: 'Dynamic item', order: 100}]);
+                 }, 0, 1);
+
+                 gridsApi3.core.on.columnVisibilityChanged( $scope, function( changedColumn ){
+                     $scope.columnChanged = { name: changedColumn.colDef.name, visible: changedColumn.colDef.visible };
+                 });
+             }
+         };
+
+         $scope.gridOptions4 = {
+             enableRowHeaderSelection: false,
+             exporterMenuCsv: true,
+             enableGridMenu: true,
+             gridMenuTitleFilter: fakeI18n,
+             columnDefs: [
+                 { name: 'createdDate' },
+                 { name: 'customerName', enableHiding: false },
+                 { name: 'paymentStatus' },
+                 { name: 'fulfillmentStatus' }
+             ],
+             gridMenuCustomItems: [
+                 {
+                     title: 'Rotate Grid',
+                     action: function ($event) {
+                         this.grid.element.toggleClass('rotated');
+                     },
+                     order: 210
+                 }
+             ],
+             onRegisterApi: function( gridsApi4 ){
+                 $scope.gridsApi4 = gridsApi4;
+
+                 // interval of zero just to allow the directive to have initialized
+                 $interval( function() {
+                     gridsApi4.core.addToGridMenu( gridsApi4.grid, [{ title: 'Dynamic item', order: 100}]);
+                 }, 0, 1);
+
+                 gridsApi4.core.on.columnVisibilityChanged( $scope, function( changedColumn ){
+                     $scope.columnChanged = { name: changedColumn.colDef.name, visible: changedColumn.colDef.visible };
+                 });
+             }
+         };
+
+         $scope.gridOptions1.multiSelect = true;
 
         $scope.selectedTab = 0;
         $scope.currentPage = 2;
@@ -127,23 +232,38 @@
                 })
 
         }
+         if (typeof $scope.ordersList === 'undefined') {
+                    commerceService.getOrderList()
+                        .success(function (result) {
+                            for(var i=0; i<result.length; i++){
+                                var date = new Date(result[i].createdAt);
+                                $scope.displayDate = date.toLocaleString();
+                                $scope.year = date.getFullYear();
+                                $scope.month = date.getMonth()+1;
+                                $scope.date = date.getDate();
+                                result[i].createdDate = $scope.year+"-"+$scope.month+"-"+$scope.date;
+                            }
+                            $scope.ordersList = result;
+                            for(var i=0; i<$scope.ordersList.length; i++){
+                                if($scope.ordersList[i].paymentStatus == "refunded"){
+                                $scope.refund.push($scope.ordersList[i]);
+                                }
+                                else if($scope.ordersList[i].paymentStatus == "Pending"){
+                                $scope.unfulfilled.push($scope.ordersList[i]);
+                                }
+                                else if($scope.ordersList[i].paymentStatus == "successful"){
+                                $scope.fulfill.push($scope.ordersList[i]);
+                                }
+                            }
 
-        if (typeof $scope.ordersList === 'undefined') {
-            commerceService.getOrderList()
-                .success(function (result) {
-                    for(var i=0; i<result.length; i++){
-                        var date = new Date(result[i].createdAt);
-                        $scope.displayDate = date.toLocaleString();
-                        $scope.year = date.getFullYear();
-                        $scope.month = date.getMonth()+1;
-                        $scope.date = date.getDate();
-                        result[i].createdDate = $scope.year+"-"+$scope.month+"-"+$scope.date;
-                    }
-                    $scope.ordersList = result;
-                }).error(function (error) {
-                    alert("Orders List Loading Error : " + error);
-                })
-        }
+                            $scope.gridOptions1.data = $scope.ordersList;
+                            $scope.gridOptions2.data = $scope.fulfill;
+                            $scope.gridOptions3.data = $scope.unfulfilled;
+                            $scope.gridOptions4.data = $scope.refund;
+                        }).error(function (error) {
+                            alert("Orders List Loading Error : " + error);
+                        })
+                }
 
 //        $scope.addProducts = function(file,product) {
 //            commerceService.addProduct(file,product).
@@ -454,6 +574,47 @@
             })
 
         };
+
+        $scope.refunded = function(){
+            $scope.selectedRow = $scope.gridApi1.selection.getSelectedRows();
+            for(var i=0; i<$scope.selectedRow.length; i++){
+                $scope.selectedRow[i].paymentStatus = "refunded";
+                $scope.refund.push($scope.selectedRow[i]);
+                $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.selectedRow[i]),1);
+            }
+            $scope.gridOptions3.data = $scope.unfulfilled;
+            commerceService.updateOrders($scope.selectedRow)
+                .success(function(data){
+                    toastr.success('Status changed to refunded ', 'Success', {
+                        closeButton: true
+                    });
+                })
+                .error(function(err){
+                    toastr.error('could not change the status', 'Warning', {
+                        closeButton: true
+                    });
+                })
+        };
+        $scope.fulfilled = function(){
+            $scope.row = $scope.gridApi1.selection.getSelectedRows();
+            for(var i=0; i<$scope.row.length; i++){
+                $scope.row[i].paymentStatus = "successful";
+                $scope.fulfill.push($scope.row[i]);
+                $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.row[i]),1);
+            }
+            $scope.gridOptions3.data = $scope.unfulfilled;
+            commerceService.updateOrders($scope.row)
+                .success(function(data){
+                   toastr.success('Status changed to fulfilled ', 'Success', {
+                       closeButton: true
+                   });
+                })
+                .error(function(err){
+                    toastr.error('could not change the status', 'Warning', {
+                        closeButton: true
+                    });
+                })
+        }
 
         //commerceService.getEmailSettings()
         //    .success(function (result) {

@@ -41,7 +41,8 @@ angular.module('app', [
   'ADM-dateTimePicker',
   'angularTrix',
   'angularUtils.directives.dirPagination',
-  'ui.grid'
+  'ui.grid',
+  'ui.grid.selection'
 
 
 ]).run(function($rootScope, $state, $auth,Auth) {

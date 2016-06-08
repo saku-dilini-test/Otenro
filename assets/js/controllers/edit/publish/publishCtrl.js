@@ -82,7 +82,7 @@
         $scope.addGooglePlayInfo = function(file, playStoreData, splash) {
 
         if(file == null || playStoreData.name == null || playStoreData.springBoardName == null || playStoreData.language == null ||
-        playStoreData.primaryCat == null || playStoreData.secondaryCat == null || playStoreData.desc == null  ||
+        playStoreData.primaryCat == null || playStoreData.desc == null  ||
         playStoreData.keywords == null || splash.splash1 == null || splash.splash2 == null || splash.splash3 == null || splash.splash4 == null){
                     toastr.error('Fill all the fields', 'Warning', {
                           closeButton: true
