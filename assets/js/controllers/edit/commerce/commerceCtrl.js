@@ -164,13 +164,6 @@
 
          $scope.gridOptions1.multiSelect = true;
 
-        $scope.myData = [
-            {date: new Date(), customer: "Riki",payment_status :"pending",fulfillment_status:"close"},
-            {date: new Date(), customer: "jon",payment_status :"pending",fulfillment_status:"close"},
-            {date: new Date(), customer: "kal",payment_status :"pending",fulfillment_status:"close"}
-
-        ];
-
         $scope.selectedTab = 0;
         $scope.currentPage = 2;
         $scope.pageSize = 5;
