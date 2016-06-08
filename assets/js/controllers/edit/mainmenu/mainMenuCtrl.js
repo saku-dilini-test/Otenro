@@ -1,10 +1,13 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("MainMenuCtrl", ['$scope', '$mdDialog', '$rootScope', 'mainMenuService','$http',
-        'commerceService','toastr', MainMenuCtrl]);
+        'commerceService','toastr','mySharedService', MainMenuCtrl]);
 
-    function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr) {
+    function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,mySharedService) {
 
+        $scope.tmpImage = [ null , null];
+        $scope.mainImg = null;
+        
         var reqData = {
             appId:$rootScope.appId
         };
@@ -212,15 +215,41 @@
 
         };
 
-        $scope.addMenu = function(){
-            var params={
-                name : "New menu",
-                link : "new menu",
-                appId : $rootScope.appId
-            };
-            mainMenuService.addMenu(params).success(function(data) {
+        $scope.newMenu = function () {
+            mainMenuService.showAddMenuDialog();
+        };
+
+        $scope.addImage = function(img){
+            var im = $scope.tmpImage;
+            for(var i=0 ; i < im.length ; i++){
+                if(im[i] == null) {
+                    im[i] = $scope.picFile;
+                    break;
+                }
+            }
+            $scope.tmpImage = im;
+            $scope.mainImg = img;
+            toastr.success('added Image', 'Message', {
+                closeButton: true
+            });
+        };
+
+        $scope.setImage = function(img){
+
+            if(img == undefined){
+                toastr.error('Set Image', 'Warning', {
+                    closeButton: true
+                });
+            }else{
+                $scope.picFile = $scope.tmpImage[img];
+                $scope.mainImg = $scope.tmpImage[img];
+            }
+        };
+
+        $scope.addMenu = function(file,menu){
+            mainMenuService.addMenu(file,$rootScope.appId,menu.name).success(function(data) {
                 $scope.menuItems.push({
-                    id : data.id,
+                    id :   data.id,
                     name : data.name,
                     link : data.link,
                     icon : data.icon,
