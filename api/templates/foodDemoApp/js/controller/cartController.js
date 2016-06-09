@@ -2,7 +2,7 @@
  * Created by amila on 4/5/16.
  */
 
-mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,constants) {
+mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants) {
 
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
@@ -67,6 +67,11 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                 $rootScope.cart.cartSize = 0;
                 $rootScope.cart.totalPrice = 0;
                 $rootScope.cart.totalQuantity = 0;
+                var alertPopup = $ionicPopup.alert({
+                       title: 'Order complete',
+                       template: 'Success',
+                       cssClass: 'ionicPopUp'
+                     });
             },
             function(err){
                console.log(err);
