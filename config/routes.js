@@ -137,6 +137,7 @@ module.exports.routes = {
     'GET /edit/getUpdates': 'edit/commerce/ThirdNavigationController.getUpdates',
 //    'GET /edit/getVariants': 'edit/commerce/ThirdNavigationController.getVariants',
     'POST /edit/updateVariants': 'edit/commerce/ThirdNavigationController.updateVariants',
+    'POST /edit/addVariants': 'edit/commerce/ThirdNavigationController.addVariants',
     'POST /edit/deleteItem': 'edit/commerce/MainNavigationController.deleteItem',
     'POST /edit/setCurrency': 'edit/setting/CurrencyController.setCurrency',
 //    'GET /edit/getCurrency': 'edit/setting/CurrencyController.getCurrency',

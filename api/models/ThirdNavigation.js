@@ -31,21 +31,6 @@ module.exports = {
         detailedDesc:{
             type : 'string',
         },
-        sku:{
-            type : 'string',
-        },
-        price : {
-            type : 'integer'
-        },
-        size: {
-            type: 'string'
-        },
-        weight :{
-            type: 'string'
-        },
-        quantity :{
-            type: 'string'
-        },
         desc: {
             type: 'string'
         },

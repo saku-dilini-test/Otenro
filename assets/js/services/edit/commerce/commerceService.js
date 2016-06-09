@@ -45,7 +45,7 @@
                 });
             },
 
-            addProduct: function(file,product,variants){
+            addProduct: function(file,product){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addThirdNavigation',
                     fields: {
@@ -54,12 +54,7 @@
                         briefDesc:product.briefDesc,
                         detailedDesc: product.detailedDesc,
                         name: product.name,
-                        sku: variants.sku,
-                        price: variants.price,
-                        size: variants.size,
-                        weight: variants.weight,
-                        quantity: variants.quantity,
-                        childId: variants.childId,
+                        childId: product.mainId,
                         desc: product.desc,
                         type : product.type,
                         discount: product.discount
@@ -182,7 +177,7 @@
 //                return $http.get(SERVER_URL+ 'edit/getVariants?appId='+$rootScope.appId+'&childId='+idDetails);
 //            },
             addPriceandVariants:function(variants){
-                return $http.post(SERVER_URL+ 'edit/updateVariants',variants);
+                return $http.post(SERVER_URL+ 'edit/addVariants',variants);
             },
             getMainMenuList: function(){
                 return $http.get(SERVER_URL+ 'edit/getMainNavigation?appId='+$rootScope.appId);
