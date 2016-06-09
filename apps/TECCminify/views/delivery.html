@@ -8,7 +8,7 @@
                 <h2>Our Service</h2>
             </div>
             <!-- Delivery Option  -->
-            <div class="text-info">
+             <div class="text-info">
                 <label>
                     <input type="radio" ng-change="selectDeliveryOption('pickUp')" ng-model="deliveryOption" value="pickUp"> Pick up
                 </label>
@@ -41,8 +41,20 @@
                                             && pickUpForm.phone.$invalid" >
                                             The phone number field should be of 10 digits
                             </span>
-                            </li>
-                        </ul>
+                        </li>
+                        <li>
+                            <label style="width: 100%">Pick Up  Date : {{ setPickUpDate}}</label>
+                            <label style="width: 100%">Pick Up Time : {{ setPickUpTime}}</label>
+                            <datetimepicker ng-model="pickUpDate.date"
+                                            min-date = "{{minDate}}"
+                                            data-datetimepicker-config="{ minuteStep : 15 }"
+                                            ng-change="savePickUpDate(pickUpDate.date)" required></datetimepicker>
+                        </li>
+                        <li>
+                            <label>Comment</label>
+                            <textarea name="comment" style="width:100%"  rows="3" ng-model="comment" ng-change="saveComment(comment)"></textarea>
+                        </li>
+                    </ul>
                         <button ng-disabled="!(pickUpForm.$valid)"
                                 ng-click="pickUpForm.$valid && goShoppingCart()"
                                 class="btn kkcc-btn-success">
@@ -82,6 +94,10 @@
                                             The phone number field should be of 10 digits
                             </span>
                             </li>
+                        <li>
+                            <label>Comment</label>
+                            <textarea name="comment" style="width:100%"  rows="3" ng-model="comment" ng-change="saveComment(comment)"> </textarea>
+                        </li>
                         </ul>
                         <button ng-disabled="!(deliveryForm.$valid)"
                                 ng-click="deliveryForm.$valid && goShoppingCart()"

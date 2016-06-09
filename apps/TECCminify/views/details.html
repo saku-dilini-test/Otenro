@@ -16,16 +16,16 @@
                         <tr>
                             <td>
                                 <label class="radio">
-                                    <input type="radio" name="selectCakeQuantity" ng-model="cakeType" value="full">
+                                    <input type="radio" name="selectCakeQuantity" ng-model="cakeType.type" value="full">
                                     <span class="options-labels">{{product.quantity}}</span>
                                 </label>
                             </td>
                             <td class="text-right">Rs : {{product.price}}</td>
                         </tr>
-                        <tr ng-if="!(product.perSlicePrice == 0)">
-                            <td >
+                         <tr ng-if="!(product.perSlicePrice == 0)">
+                            <td>
                                 <label class="radio">
-                                    <input type="radio" name="selectCakeQuantity" ng-model="cakeType" value="slice">
+                                    <input type="radio" name="selectCakeQuantity" ng-model="cakeType.type" value="slice">
                                     <span class="options-labels">Per Slice</span>
                                 </label>
                             </td>
@@ -34,7 +34,7 @@
                     </table>
                 </div>
                 <!-- full -->
-                <div ng-if="cakeType == 'full'">
+                <div ng-if="cakeType.type == 'full'">
                     <form class="form-inline">
                         <div class="form-group">
                             <label class="qty-label">Quantity : </label>
@@ -46,7 +46,7 @@
                     </form>
                 </div>
                 <!-- slice -->
-                <div ng-if="cakeType == 'slice'">
+                <div ng-if="cakeType.type == 'slice'">
                     <form class="form-inline">
                         <div class="form-group">
                             <label class="qty-label">Quantity : </label>
@@ -57,7 +57,7 @@
                         </button>
                     </form>
                 </div>
-                <!-- items -->
+                      <!-- items -->
                 <table class="table table-bordered tbl-shopping-cart">
                     <!-- header -->
                     <tr>

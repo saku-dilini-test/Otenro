@@ -245,6 +245,63 @@ shoppingCart.prototype.getTelPhone = function () {
     }
 }
 
+// save pickUpDate to local storage
+shoppingCart.prototype.savePickUpDate = function (name) {
+    if (localStorage != null && JSON != null) {
+        localStorage['pickUpDate'] = name;
+    }
+}
+
+// get pickUpDate from local storage
+shoppingCart.prototype.getPickUpDate = function () {
+    if (localStorage != null && JSON != null) {
+        var pickUpDate = localStorage['pickUpDate'];
+        if(pickUpDate){
+            return localStorage['pickUpDate'];
+        }else{
+            return '';
+        }
+    }
+}
+
+// save pickUpTime to local storage
+shoppingCart.prototype.savePickUpTime = function (time) {
+    if (localStorage != null && JSON != null) {
+        localStorage['pickUpTime'] = time;
+    }
+}
+
+// get pickUpTime from local storage
+shoppingCart.prototype.getPickUpTime = function () {
+    if (localStorage != null && JSON != null) {
+        var pickUpTime = localStorage['pickUpTime'];
+        if(pickUpTime){
+            return localStorage['pickUpTime'];
+        }else{
+            return '';
+        }
+    }
+}
+
+// save comment to local storage
+shoppingCart.prototype.saveComment = function (name) {
+    if (localStorage != null && JSON != null) {
+        localStorage['comment'] = name;
+    }
+}
+
+// get comment from local storage
+shoppingCart.prototype.getComment = function () {
+    if (localStorage != null && JSON != null) {
+        var comment = localStorage['comment'];
+        if(comment){
+            return localStorage['comment'];
+        }else{
+            return '';
+        }
+    }
+}
+
 // save one Doller to local storage
 shoppingCart.prototype.saveOneDoller = function (oneDoller) {
     if (localStorage != null && JSON != null) {

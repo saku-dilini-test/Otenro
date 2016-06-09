@@ -5,14 +5,16 @@ angular.module('animateApp')
     .controller('detailCtrl',['$scope','$http','$routeParams','SERVER_URL','DataService', function($scope, $http,$routeParams,SERVER_URL,DataService) {
         $scope.SERVER_URL = SERVER_URL;
         $scope.cart = DataService.cart;
-         $scope.cakeType = 'full'
+        $scope.cakeType = {
+            type : 'full'
+        };
         $scope.cakeFullQuantity = 1;
         $scope.cakeSliceQuantity = 1;
         var productId = $routeParams.productId;    
         
         $http.get(SERVER_URL+"products/getProductsDetails",{params:{id:productId}})
             .then(function (response) {            
-                $scope.product = response.data.result;                   
+                $scope.product = response.data.result;
                 var categoryCode = $scope.product.categoryCode;
                 $http.get(SERVER_URL+"products/getProductsByCategory",{params:{categoryCode:categoryCode}})
                     .then(function (response2) {            
@@ -41,7 +43,7 @@ angular.module('animateApp')
             }
             $scope.cart.saveItems();
         };
-       
+
     }]);
 })();
 
