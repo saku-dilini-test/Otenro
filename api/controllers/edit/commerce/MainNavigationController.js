@@ -115,32 +115,80 @@ module.exports = {
     },
 
     deleteItem : function (req,res) {
-
-        if(req.body.icon){
+    MainNavigation.find({id: req.body.id}).exec(function(err,main){
+        if (err) res.send(err);
+        if (main != ""){
             MainNavigation.destroy({ id : req.body.id}).exec(function (err) {
                 if (err) return callback("Error while deleting " + err.message);
                 res.send(200,{message:'Deleted Main Navigation'});
-            });
-
-        }if(req.body.mainId){
-            SecondNavigation.destroy({ id : req.body.id}).exec(function (err) {
-                if (err) return callback("Error while deleting " + err.message);
-                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/'+ req.body.imageUrl;
-                fs.unlink(filePath, function (err) {
-                    if (err) throw err;
-                    res.send(200,{message:'Deleted Second Navigation'});
-                });
-            });
-
-        }if(req.body.childId){
-            ThirdNavigation.destroy({ id : req.body.id}).exec(function (err) {
-                if (err) return callback("Error while deleting " + err.message);
-                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/'+ req.body.imageUrl;
-                fs.unlink(filePath, function (err) {
-                    if (err) throw err;
-                    res.send(200,{message:'Deleted Third Navigation'});
-                });
-            });
+            })
         }
+        else {
+            SecondNavigation.find({id: req.body.id}).exec(function(err,second){
+                if (err) res.send(err);
+                if (second != ""){
+                    SecondNavigation.destroy({ id : req.body.id}).exec(function (err) {
+                        if (err) return callback("Error while deleting " + err.message);
+                        ThirdNavigation.find({childId: req.body.id}).exec(function(err,child){
+                            if (err) return callback("Error while deleting " + err.message);
+                            if (child){
+                            child.forEach(function(product){
+                                ThirdNavigation.destroy({ childId : req.body.id}).exec(function (err) {
+                                    if (err) return callback("Error while deleting " + err.message);
+                                })
+                            })
+                            }
+                            res.send(200,{message:'Deleted Main Navigation'});
+                        })
+                    })
+                }
+                else{
+                    ThirdNavigation.find({id: req.body.id}).exec(function(err,third){
+                        if (err) res.send(err);
+                        if (third !=""){
+                            ThirdNavigation.destroy({ id : req.body.id}).exec(function (err) {
+                                if (err) return callback("Error while deleting " + err.message);
+                                res.send(200,{message:'Deleted Main Navigation'});
+                            })
+                        }
+                    })
+                }
+            })
+        }
+    })
+
+
+//        if(req.body.icon){
+//        console.log("1");
+//            MainNavigation.destroy({ id : req.body.id}).exec(function (err) {
+//            console.log("1");
+//                if (err) return callback("Error while deleting " + err.message);
+//                res.send(200,{message:'Deleted Main Navigation'});
+//            });
+//
+//        }if(req.body.mainId){
+//        console.log("2");
+//            SecondNavigation.destroy({ id : req.body.id}).exec(function (err) {
+//            console.log("1");
+//                if (err) return callback("Error while deleting " + err.message);
+//                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/'+ req.body.imageUrl;
+//                fs.unlink(filePath, function (err) {
+//                    if (err) throw err;
+//                    res.send(200,{message:'Deleted Second Navigation'});
+//                });
+//            });
+//
+//        }if(req.body.childId){
+//        console.log("3");
+//            ThirdNavigation.destroy({ id : req.body.id}).exec(function (err) {
+//            console.log("1");
+//                if (err) return callback("Error while deleting " + err.message);
+//                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/'+ req.body.imageUrl;
+//                fs.unlink(filePath, function (err) {
+//                    if (err) throw err;
+//                    res.send(200,{message:'Deleted Third Navigation'});
+//                });
+//            });
+//        }
     }
 };

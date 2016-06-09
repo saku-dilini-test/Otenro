@@ -131,23 +131,36 @@
         };
 
         $scope.removes = function (scope) {
-            var nodeData = scope.$modelValue;
-            if(nodeData.nodes.length > 0){
-                toastr.error('Cant delete Sub levels available :', 'Warning', {
-                    closeButton: true
-                });
-            }else{
-                mainMenuService.deleteData(nodeData).success(function(data) {
-                    scope.remove();
-                    toastr.success(data.message, 'Message', {
-                        closeButton: true
+           return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+                    this.confirm = function click(){
+                    $mdDialog.hide();
+                    var nodeData = scope.$modelValue;
+                    mainMenuService.deleteData(nodeData).success(function(data) {
+                        return mainMenuService.showMainMenuDialog();
+                        scope.remove();
+                    }).error(function(err) {
+                    console.log(err);
+                        $mdDialog.hide();
                     });
-                }).error(function(err) {
-                    toastr.error(err, 'Warning', {
-                        closeButton: true
-                    });
-                });
-            }
+                    },
+                    this.cancel = function click(){
+                        $mdDialog.hide();
+                        return mainMenuService.showMainMenuDialog();
+                    }
+                },
+                template: '<md-dialog class="stickyDialog" style="width:initial" data-type="{{::dialogCtrl.thing.title}}">'+
+                '<md-content style="text-align:center">'+
+                'Deleting category will delete all the products under that category!</md-content>'+
+                '<div class="md-dialog-buttons">'+
+                                 '<div class="inner-section">'+
+                                     '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">Cancel</md-button>'+
+                                     '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Ok</md-button>'+
+                                 '</div>'+
+                             '</div></md-dialog>'
+            })
+
         };
 
         $scope.toggle = function (scope) {
