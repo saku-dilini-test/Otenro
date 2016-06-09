@@ -555,23 +555,58 @@
             })
 
         };
+        var prams={
+            appId : $rootScope.appId
+        };
+        commerceService.getEmailSettings(prams)
+            .success(function (result) {
+                $scope.email = result;
+                console.log(result);
+            }).error(function (error) {
+            alert("MainMenu Loading Error : " + error);
+        });
         $scope.testEmail = function(type){
             var sendType = {
                 type:type
             }
-            sendType.appId = $rootScope.appId;
-            commerceService.sendTestEmail(sendType)
-                .success(function (data) {
-                    console.log(data + 'asds');
-                    toastr.success('Test Email has been Sent ', 'Success', {
-                        closeButton: true
-                    });
 
-                }).error(function (err) {
-                toastr.error('Unable to Send', 'Warning', {
-                    closeButton: true
-                });
-            })
+
+            sendType.appId = $rootScope.appId;
+                    for (var i = 0; i < $scope.email.length; i++) {
+                        if ((type == "Order confirm") && (typeof $scope.email[0].orderConfirmedEmail === 'undefined')) {
+                            console.log('ss');
+                            toastr.error('Save before test the Email ', 'Warning', {
+                                closeButton: true
+                            });
+
+                        } else if ((type == "Order Fulfilled") && (typeof $scope.email[0].orderFulfilledEmail === 'undefined')) {
+                            console.log('sas' + result.orderFulfilledEmail);
+                            toastr.error('Save before test the Email', 'Warning', {
+                                closeButton: true
+                            });
+
+                        } else if ((type == "Order Refund") && (typeof $scope.email[0].orderRefundEmail === 'undefined')) {
+                            console.log('saas');
+                            toastr.error('Save before test the Email ', 'Warning', {
+                                closeButton: true
+                            });
+
+                        } else {
+                            commerceService.sendTestEmail(sendType)
+                                .success(function (data) {
+                                    toastr.success('Test Email has been Sent ', 'Success', {
+                                        closeButton: true
+                                    });
+
+                                }).error(function (err) {
+                                toastr.error('Unable to Send', 'Warning', {
+                                    closeButton: true
+                                });
+                            })
+                        }
+                    }
+
+
 
         };
 
@@ -614,14 +649,9 @@
                         closeButton: true
                     });
                 })
-        }
+        };
 
-        //commerceService.getEmailSettings()
-        //    .success(function (result) {
-        //        $scope.email = result;
-        //    }).error(function (error) {
-        //    alert("MainMenu Loading Error : " + error);
-        //});
+
 
 
     }
