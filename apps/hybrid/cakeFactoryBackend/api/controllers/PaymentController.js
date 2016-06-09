@@ -13,7 +13,8 @@ var server  = email.server.connect({
   ssl:     true
 });
 
-var orderEmail = 'orders@tecclk.com';
+//var orderEmail = 'orders@tecclk.com';
+var orderEmail = 'amilaonbit@gmail.com';
 
 module.exports = {
   create: function (req, res) {
@@ -281,6 +282,16 @@ module.exports = {
               "<ul>Contact Number : "+payment.telPhone + "</ul>"+
               "<ul>Delivery Address : " + payment.deliveryAddress_01 +","+payment.deliveryAddress_02+", "+ payment.city+"</ul>";
           }
+          if (payment.pickUpDate != ''){
+            deliveryOption = deliveryOption + "<ul> Pick Up Date : "+ payment.pickUpDate + "</ul>";
+          }
+          if (payment.pickUpTime != ''){
+            deliveryOption = deliveryOption + "<ul> Pick Up Time : "+ payment.pickUpTime + "</ul>";
+          }
+
+          if (payment.comment != ''){
+            deliveryOption = deliveryOption + "<ul> Comment : "+ payment.comment + "</ul>";
+          }
           for (var i = 0; i < payment.cartLength; i++) {
             var j = i.toString(payment.j);
             itemsHtml += "<li>Product Name: " + payment[j]['name'] + "</li>" +
@@ -320,9 +331,10 @@ module.exports = {
             if (err) {
               return res.status(err.status).json({err: err.message});
             }
+            return res.json(200, {result: 'success'});
             console.log('Email has sent & Payment Id ' + payment.id);
           });
-          return res.json(200, {result: 'success'});
+
         }
       });
     }
