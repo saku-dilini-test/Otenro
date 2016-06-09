@@ -17,8 +17,8 @@ var server  = email.server.connect({
 });
 
 
-//var orderEmail = 'orders@tecclk.com';
-var orderEmail = 'amilaonbit@gmail.com';
+var orderEmail = 'orders@tecclk.com';
+//var orderEmail = 'amilaonbit@gmail.com';
 
 module.exports = {
 

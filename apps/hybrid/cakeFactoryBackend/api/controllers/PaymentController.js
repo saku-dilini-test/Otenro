@@ -13,8 +13,8 @@ var server  = email.server.connect({
   ssl:     true
 });
 
-//var orderEmail = 'orders@tecclk.com';
-var orderEmail = 'amilaonbit@gmail.com';
+var orderEmail = 'orders@tecclk.com';
+//var orderEmail = 'amilaonbit@gmail.com';
 
 module.exports = {
   create: function (req, res) {
