@@ -46,6 +46,34 @@ angular.module('animateApp')
 
 		}
 
+		$scope.savePickUpDate = function(date){
+			var pickDate = date.getDate() + ' - ' + ( date.getMonth() + 1 ) + ' - ' + date.getFullYear();
+			$scope.setPickUpDate = pickDate;
+			$scope.cart.savePickUpDate(pickDate);
+
+			var pickTime = formatAMPM(date);
+			$scope.setPickUpTime = pickTime;
+			$scope.cart.savePickUpTime(pickTime);
+		}
+
+		function formatAMPM(date) {
+			var hours = date.getHours();
+			var minutes = date.getMinutes();
+			var ampm = hours >= 12 ? 'PM' : 'AM';
+			hours = hours % 12;
+			hours = hours ? hours : 12; // the hour '0' should be '12'
+			minutes = minutes < 10 ? '0'+minutes : minutes;
+			var strTime = hours + ':' + minutes + ' ' + ampm;
+			return strTime;
+		}
+
+		$scope.minDate = new Date(2016, 8, 22);
+
+
+		$scope.saveComment = function(comment){
+			$scope.comment = comment;
+			$scope.cart.saveComment(comment);
+		}
 		$scope.goShoppingCart = function () {
 			$location.path('/shoppingCart');
 		};
