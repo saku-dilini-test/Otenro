@@ -75,9 +75,9 @@
                   $scope.variants=[{
                       sku: product.sku,
                       name: product.name,
-                      sizeOrweight: 0,
+                      size: 0,
                       price: 0,
-                      qty: 0
+                      quantity: 0
                   }];
              }
         }
@@ -92,12 +92,23 @@
                           $scope.variants=[{
                               sku: product.sku,
                               name: product.name,
-                              sizeOrweight: 0,
+                              size: 0,
                               price: 0,
-                              qty: 0
+                              quantity: 0
                           }];
             }
         }
+        };
+
+        $scope.addVariants = function(product) {
+            $scope.inserted = {
+                sku: 0,
+                name: product.name,
+                size: 0,
+                price: 0,
+                quantity: 0
+            };
+            $scope.variants.push($scope.inserted);
         };
 
         $scope.typeUpdateHandler = function(newValue) {
@@ -112,27 +123,27 @@
         $scope.priceUpdateHandler = function(newValue) {
             $scope.variants[0].price = newValue;
         };
-        $scope.qtyUpdateHandler = function(newValue) {
-            $scope.variants[0].qty = newValue;
+        $scope.quantityUpdateHandler = function(newValue) {
+            $scope.variants[0].quantity = newValue;
         };
 
         $scope.nextStep3 = function(current,selection,variants) {
-        if($scope.variants[0].sku == "" || $scope.variants[0].name == "" || $scope.variants[0].size == "" || $scope.variants[0].price == "" || $scope.variants[0].qty == ""){
+        if($scope.variants[0].sku == "" || $scope.variants[0].name == "" || $scope.variants[0].size == "" || $scope.variants[0].price == "" || $scope.variants[0].quantity == ""){
             toastr.error('Fill all the fields', 'Warning', {
                    closeButton: true
             });
         }
-        else if($scope.variants[0].size == "0" || $scope.variants[0].price == "0" || $scope.variants[0].qty == "0"){
+        else if($scope.variants[0].size == "0" || $scope.variants[0].price == "0" || $scope.variants[0].quantity == "0"){
             toastr.error('Cannot be 0', 'Warning', {
                   closeButton: true
             });
         }
         else{
                 if(selection == "weight"){
-                 weight = variants[0].sizeOrweight;
+                 weight = variants[0].size;
                 }
                 else{
-                size = variants[0].sizeOrweight;
+                size = variants[0].size;
                 }
               $scope.selectedTab = current;
             }
@@ -147,18 +158,18 @@
                               $scope.variants=[{
                                 sku: result[0].sku,
                                 name: item.name,
-                                sizeOrweight: result[0].size,
+                                size: result[0].size,
                                 price: item.price,
-                                qty: item.quantity
+                                quantity: item.quantity
                               }];
                          }
                          else{
                          $scope.variants=[{
                                sku: result[0].sku,
                                name: item.name,
-                               sizeOrweight: result[0].weight,
+                               size: result[0].weight,
                                price: item.price,
-                               qty: item.quantity
+                               quantity: item.quantity
                              }];
                          }
                          commerceService.getChild(result[0].childId)
@@ -204,20 +215,28 @@
                    return;
             }
             else{
-               variants = {
-                    appId: $rootScope.appId,
-                    childId: product.mainId,
-                    briefDesc:product.briefDesc,
-                    detailedDesc: product.detailedDesc,
-                    sku: $scope.variants[0].sku,
-                    name: $scope.variants[0].name,
-                    size: size,
-                    weight: weight,
-                    price: $scope.variants[0].price,
-                    quantity: $scope.variants[0].qty
-               };
-                   commerceService.addProduct(file,product,variants,item.id).
+                   commerceService.addProduct(file,product,item.id).
                        success(function(data) {
+
+                       var  variantsList =  $scope.variants;
+                       variantsList.forEach(function (variants) {
+
+                           var variantsAttribute = variants;
+                           variantsAttribute.appId = $rootScope.appId;
+                           variantsAttribute.childId = product.mainId;
+                           commerceService.addPriceandVariants(variantsAttribute).
+                           success(function(data) {
+                               toastr.success('New Price and Variants has been added.', 'Awsome!', {
+                                   closeButton: true
+                               });
+                               $mdDialog.hide();
+                           }).error(function(err) {
+                               toastr.error('Unable to Add', 'Warning', {
+                                   closeButton: true
+                               });
+                           });
+                       });
+
                        toastr.success('New Product has been added.', 'Awsome!', {
                            closeButton: true
                        });
@@ -238,18 +257,6 @@
                                closeButton: true
                            });
                        });
-
-                   commerceService.addPriceandVariants(variants).
-                   success(function(data) {
-                       toastr.success('New Product has been added.', 'Awsome!', {
-                           closeButton: true
-                       });
-                       $mdDialog.hide();
-                   }).error(function(err) {
-                       toastr.error('Unable to Add', 'Warning', {
-                           closeButton: true
-                       });
-                   });
             }
         }
         else{
@@ -284,7 +291,7 @@
                  size: size,
                  weight: weight,
                  price: $scope.variants[0].price,
-                 quantity: $scope.variants[0].qty
+                 quantity: $scope.variants[0].quantity
             };
                 commerceService.addProduct(file,product,variants,item.id).
                     success(function(data) {

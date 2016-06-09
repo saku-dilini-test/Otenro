@@ -117,15 +117,14 @@
 
                                 <tr ng-repeat="data in variants">
                                     <td><input type="number" ng-model="data.sku"></td>
-                                    <td
-                                       ng-model="data.name">{{data.name}}</td>
-                                    <td><input type="number" ng-model="data.sizeOrweight"></td>
+                                    <td  ng-model="data.name">{{data.name}}</td>
+                                    <td><input type="number" ng-model="data.size"></td>
                                     <td><input type="number" ng-model="data.price"></td>
-                                    <td><input type="number" ng-model="data.qty"></td>
+                                    <td><input type="number" ng-model="data.quantity"></td>
                                 </tr>
-
                             </tbody>
                         </table>
+                        <button class="btn btn-default" ng-click="addVariants(product)">+</button>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">

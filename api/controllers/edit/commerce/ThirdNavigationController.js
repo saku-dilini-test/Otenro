@@ -141,6 +141,21 @@ module.exports = {
 
         })
     },
+    
+    addVariants : function (req,res){
+        var priceAndVariants = req.body;
+
+        PriceAndVariants.create(priceAndVariants).exec(function(err, priceAndVariants) {
+            if (err){
+                console.log(err);
+                res.send(err);
+            }else{
+                res.send(priceAndVariants);
+            }
+        });
+        
+    },
+    
     getUpdates: function(req,res){
         var id = req.param('ObjectId');
         ThirdNavigation.find(id, function(err, app) {
