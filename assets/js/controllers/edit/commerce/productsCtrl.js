@@ -11,6 +11,7 @@
         $scope.mainImg =null;
         $scope.selection = "weight";
         $scope.userId=$auth.getPayload().id;
+        $scope.isDigital = false;
 
         $scope.product={
             //name:item.name,
