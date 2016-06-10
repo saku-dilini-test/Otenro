@@ -58,9 +58,16 @@
                     });
                 })
         }
+        
         $scope.addType=function(type,current){
+
             $scope.product.type = type;
             $scope.selectedTab = current;
+            if ($scope.product.type == 'Digital' ){
+                $scope.isDigital = true;
+            }else {
+                $scope.isDigital = false;
+            }
         };
 
         $scope.nextStep2 = function(current,product){

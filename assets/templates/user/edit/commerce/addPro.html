@@ -25,8 +25,9 @@
                     </div>
                 </md-tab-body>
             </md-tab>
+
+
             <md-tab>
-                <md-tab-label>Add Details</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
                         <h1>Add Product</h1>
@@ -92,7 +93,10 @@
                     </div>
                 </md-tab-body>
             </md-tab>
-            <md-tab>
+
+
+            <md-tab-label>Add Details</md-tab-label>
+            <md-tab ng-if="isDigital==false">
                 <md-tab-label>Price & Variants</md-tab-label>
                 <md-tab-body>
 
@@ -132,45 +136,49 @@
                             <md-button class="me-default-button" ng-click="nextStep3(3,selection,variants)">Next</md-button>
                         </div>
                     </div>
+                </md-tab-body>
+            </md-tab>
 
-
-                    <!--<div class="md-dialog-header">-->
-                        <!--<h1>Pricing & Uploads</h1>-->
-                    <!--</div>-->
-                    <!--<div class="md-dialog-main">-->
-                        <!--<div class="file-upload-wrapper clearfix">-->
-                            <!--<p class="file-upload-msg">Select a product to upload</p>-->
-                            <!--<div class="pull-left">-->
-                                <!--<div class="me-file-upload rounded">-->
-                                    <!--<div class="upload-wrapper">-->
-                                        <!--<input type="file" accept="image/*" aria-invalid="true" required />-->
-                                        <!--<span>Select Product</span>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="uploaded-section clearfix">-->
-                            <!--<div class="uploaded-new-image">-->
-                                <!--<p>Selected Product</p>-->
-                                <!--<img src="../../../images/medium-placeholder.png" width="150" height="150" />-->
-                                <!--<button class="me-upload-image-button">Upload Product</button>-->
-                            <!--</div>-->
-                            <!--<div class="uploaded-old-images">-->
-                                <!--<p>Add Pricing</p>-->
-                                <!--<fieldset>-->
-                                    <!--<p>Product Price</p>-->
-                                    <!--<input type="text" name="name" ng-model="product.price" id="input-price" class="me-xs-input reset-inline" required />-->
-                                <!--</fieldset>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="md-dialog-buttons">-->
-                        <!--<div class="inner-section">-->
-                            <!--<md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>-->
-                            <!--<md-button class="me-default-button" ng-click="nextStep(3)">Next</md-button>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
+            <md-tab ng-if="isDigital==true">
+                <md-tab-label>Pricing & Upload</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>Pricing & Uploads</h1>
+                    </div>
+                    <div class="md-dialog-main">
+                        <div class="file-upload-wrapper clearfix">
+                            <p class="file-upload-msg">Select a product to upload</p>
+                            <div class="pull-left">
+                                <div class="me-file-upload rounded">
+                                    <div class="upload-wrapper">
+                                        <input type="file" accept="image/*" aria-invalid="true" required/>
+                                        <span>Select Product</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uploaded-section clearfix">
+                            <div class="uploaded-new-image">
+                                <p>Selected Product</p>
+                                <img src="../../../images/medium-placeholder.png" width="150" height="150"/>
+                                <button class="me-upload-image-button">Upload Product</button>
+                            </div>
+                            <div class="uploaded-old-images">
+                                <p>Add Pricing</p>
+                                <fieldset>
+                                    <p>Product Price</p>
+                                    <input type="text" name="name" ng-model="product.price" id="input-price"
+                                           class="me-xs-input reset-inline" required/>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                            <md-button class="me-default-button" ng-click="nextStep(3)">Next</md-button>
+                        </div>
+                    </div>
                 </md-tab-body>
             </md-tab>
             <md-tab>
@@ -185,8 +193,9 @@
                             <div class="pull-left">
                                 <div class="me-file-upload rounded">
                                     <div class="upload-wrapper">
-                                        <input type="button" ngf-select ng-model="picFile" ngf-accept="image/*" aria-invalid="true" ngf-change="changeImage()" required />
-                                        <span >Browse Images</span>
+                                        <input type="button" ngf-select ng-model="picFile" ngf-accept="image/*"
+                                               aria-invalid="true" ngf-change="changeImage()" required/>
+                                        <span>Browse Images</span>
                                     </div>
                                 </div>
                             </div>
@@ -194,53 +203,79 @@
                         <div class="uploaded-section clearfix">
                             <div class="uploaded-new-image">
                                 <p>Browsed Image</p>
-                                <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150" height="150" />
-                                <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" />
+                                <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                     height="150"/>
+                                <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150"/>
 
-                                <button class="me-upload-image-button" ng-click="addImage(picFile)">Upload Image</button>
+                                <button class="me-upload-image-button" ng-click="addImage(picFile)">Upload Image
+                                </button>
                             </div>
                             <div class="uploaded-old-images">
                                 <p>Uploaded Product Images</p>
                                 <div class="old-images clearfix">
                                     <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(0)" value='delete' class="image-delete-button" />
-                                        <img ng-click="setImage()" ng-if="tmpImage[0] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                        <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"  width="80" height="80" />
+                                        <input type="button" ng-click="deleteImg(0)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="tmpImage[0] == null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
+                                             width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(1)" value='delete' class="image-delete-button" />
-                                        <img ng-click="setImage()" ng-if="tmpImage[1] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                        <img ng-click="setImage(1)" ng-if="tmpImage[1] !== null" ngf-src="tmpImage[1]" width="80" height="80" />
+                                        <input type="button" ng-click="deleteImg(1)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="tmpImage[1] == null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-click="setImage(1)" ng-if="tmpImage[1] !== null" ngf-src="tmpImage[1]"
+                                             width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(2)" value='delete' class="image-delete-button" />
-                                        <img ng-click="setImage()" ng-if="tmpImage[2] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                        <img ng-click="setImage(2)" ng-if="tmpImage[2] !== null" ngf-src="tmpImage[2]" width="80" height="80" />
+                                        <input type="button" ng-click="deleteImg(2)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="tmpImage[2] == null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-click="setImage(2)" ng-if="tmpImage[2] !== null" ngf-src="tmpImage[2]"
+                                             width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(3)" value='delete' class="image-delete-button" />
-                                        <img ng-click="setImage()" ng-if="tmpImage[3] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                        <img ng-click="setImage(3)" ng-if="tmpImage[3] !== null" ngf-src="tmpImage[3]" width="80" height="80" />
+                                        <input type="button" ng-click="deleteImg(3)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="tmpImage[3] == null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-click="setImage(3)" ng-if="tmpImage[3] !== null" ngf-src="tmpImage[3]"
+                                             width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(4)" value='delete' class="image-delete-button" />
-                                        <img ng-click="setImage()" ng-if="tmpImage[4] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                        <img ng-click="setImage(4)" ng-if="tmpImage[4] !== null" ngf-src="tmpImage[4]" width="80" height="80" />
+                                        <input type="button" ng-click="deleteImg(4)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="tmpImage[4] == null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-click="setImage(4)" ng-if="tmpImage[4] !== null" ngf-src="tmpImage[4]"
+                                             width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(5)" value='delete' class="image-delete-button" />
-                                        <img ng-click="setImage()" ng-if="tmpImage[5] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                        <img ng-click="setImage(5)" ng-if="tmpImage[5] !== null" ngf-src="tmpImage[5]" width="80" height="80" />
+                                        <input type="button" ng-click="deleteImg(5)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="tmpImage[5] == null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-click="setImage(5)" ng-if="tmpImage[5] !== null" ngf-src="tmpImage[5]"
+                                             width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(6)" value='delete' class="image-delete-button" />
-                                        <img ng-click="setImage()" ng-if="tmpImage[6] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                        <img ng-click="setImage(6)" ng-if="tmpImage[6] !== null" ngf-src="tmpImage[6]" width="80" height="80" />
+                                        <input type="button" ng-click="deleteImg(6)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="tmpImage[6] == null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-click="setImage(6)" ng-if="tmpImage[6] !== null" ngf-src="tmpImage[6]"
+                                             width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(7)" value='delete' class="image-delete-button" />
-                                        <img ng-click="setImage()" ng-if="tmpImage[7] == null" src="../../../images/small-placeholder.png" width="80" height="80" />
-                                        <img ng-click="setImage(7)" ng-if="tmpImage[7] !== null" ngf-src="tmpImage[7]" width="80" height="80" />
+                                        <input type="button" ng-click="deleteImg(7)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="tmpImage[7] == null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-click="setImage(7)" ng-if="tmpImage[7] !== null" ngf-src="tmpImage[7]"
+                                             width="80" height="80"/>
                                     </div>
                                 </div>
                             </div>
@@ -249,7 +284,8 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="addProducts(mainImg,product)"  >Finish</md-button>
+                            <md-button class="me-default-button" ng-click="addProducts(mainImg,product)">Finish
+                            </md-button>
                         </div>
                     </div>
                 </md-tab-body>
