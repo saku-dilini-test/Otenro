@@ -19,11 +19,15 @@
                 $scope.cart.saveBranchName(cartInfo.userInfo.branch);
                 $scope.cart.saveName(cartInfo.userInfo.name);
                 $scope.cart.saveTelPhone(cartInfo.userInfo.contactNo);
+                $scope.cart.saveComment(cartInfo.userInfo.comment);
+                $scope.cart.savePickUpDate(cartInfo.userInfo.date);
+                $scope.cart.savePickUpTime(cartInfo.userInfo.time);
             }else{
                 $scope.cart.saveName(cartInfo.userInfo.name);
                 $scope.cart.saveTelPhone(cartInfo.userInfo.contactNo);
                 $scope.cart.saveLocationName(cartInfo.userInfo.location.locationName);
                 $scope.cart.saveDeliveryAddress_01(cartInfo.userInfo.address);
+                $scope.cart.saveComment(cartInfo.userInfo.comment);
             }
             console.log($scope.cart);
             $scope.conform = function(){
