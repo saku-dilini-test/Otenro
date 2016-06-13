@@ -9,16 +9,19 @@
         var variants;
         $scope.tmpImage =[ null , null , null, null, null, null, null, null];
         $scope.mainImg =null;
+
+        $scope.tmpFile = [ null , null];
+        $scope.mainFile = null;
+        
         $scope.selection = "weight";
         $scope.userId=$auth.getPayload().id;
+        $scope.isDigital = false;
 
         $scope.product={
             //name:item.name,
             //price:item.price
         };
         $scope.thumbPic = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/thirdNavi/default.jpg';
-
-
 
         if (typeof $scope.categories === 'undefined' ) {
 
@@ -58,9 +61,16 @@
                     });
                 })
         }
+        
         $scope.addType=function(type,current){
+
             $scope.product.type = type;
             $scope.selectedTab = current;
+            if ($scope.product.type == 'Digital' ){
+                $scope.isDigital = true;
+            }else {
+                $scope.isDigital = false;
+            }
         };
 
         $scope.nextStep2 = function(current,product){
@@ -85,19 +95,35 @@
             if(product.name == null || product.mainId == null || product.childId == null){
              toastr.error('Fill all the fields', 'Warning', {
                                closeButton: true
-                        });
+             });
             }
             else{
-                          $scope.selectedTab = current;
-                          $scope.variants=[{
-                              sku: product.sku,
-                              name: product.name,
-                              size: 0,
-                              price: 0,
-                              quantity: 0
-                          }];
+              $scope.selectedTab = current;
+              $scope.variants=[{
+                  sku: product.sku,
+                  name: product.name,
+                  size: 0,
+                  price: 0,
+                  quantity: 0
+              }];
             }
         }
+        };
+        
+        $scope.nextStep3Digital = function (current,product,variants) {
+            if(variants.price == null){
+                toastr.error('Fill all the fields', 'Warning', {
+                    closeButton: true
+                });
+            }else {
+                $scope.selectedTab = current;
+                $scope.variants=[{
+                    sku: product.sku,
+                    name: product.name,
+                    price: variants.price
+                }];
+
+            }
         };
 
         $scope.addVariants = function(product) {
@@ -192,7 +218,7 @@
                      });
              }
 
-        $scope.addProducts = function(file,product) {
+        $scope.addProducts = function(file,product ,productFile) {
         if($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "foodDemoApp2"){
             if(file == null){
                    toastr.error('select image', 'Warning', {
@@ -215,16 +241,15 @@
                    return;
             }
             else{
-                   commerceService.addProduct(file,product,item.id).
+                   commerceService.addProduct(file,product,item.id,productFile).
                        success(function(data) {
 
                        var  variantsList =  $scope.variants;
                        variantsList.forEach(function (variants) {
-
                            var variantsAttribute = variants;
                            variantsAttribute.appId = $rootScope.appId;
                            variantsAttribute.childId = product.mainId;
-                           commerceService.addPriceandVariants(variantsAttribute).
+                           commerceService.addPriceandVariants(variantsAttribute,productFile).
                            success(function(data) {
                                toastr.success('New Price and Variants has been added.', 'Awsome!', {
                                    closeButton: true
@@ -369,6 +394,38 @@
                     $scope.tmpImage=im;
             $scope.mainImg=img;
             toastr.success('added Image', 'message', {
+                closeButton: true
+            });
+        };
+
+
+
+        $scope.setFile = function(file){
+            if(file == undefined){
+                toastr.error('Upload File', 'Warning', {
+                    closeButton: true
+                });
+            }else{
+                $scope.File=$scope.tmpFile[file];
+            }
+        };
+        
+
+        $scope.deleteFile=function(index){
+            $scope.tmpFile[index]=null;
+        };
+        
+        $scope.addFile = function(file){
+            var fi=$scope.tmpFile;
+            for(var i=0 ; i < fi.length ; i++){
+                if(fi[i] == null) {
+                    fi[i] = $scope.File;
+                    break;
+                }
+            }
+            $scope.tmpFile=fi;
+            $scope.mainFile=file;
+            toastr.success('added File', 'message', {
                 closeButton: true
             });
         };

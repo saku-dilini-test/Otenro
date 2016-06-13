@@ -42,6 +42,10 @@ module.exports = {
        
        quantity: {
        type : 'string',
-       }
+       },
+       fileUrl: {
+          type : 'string',
+       },
+
     }
 }
