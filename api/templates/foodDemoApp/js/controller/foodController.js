@@ -12,7 +12,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
     $scope.foods = data;
-        for(i=0; i<data.length; i++){
+        for(var i=0; i<data.length; i++){
             if(data[i].discount){
             $scope.foods[i].price = data[i].discount;
             }
