@@ -11,7 +11,7 @@
 			    <span class="input-label">Telephone</span>
                 <br>
 			      <span> +94 </span>
-            <input type="number" ng-minlength="1" ng-maxlength="9" name="customerNumber" ng-model="delivery.contactNo" required>
+            <input type="number" ng-minlength="9" ng-maxlength="10" name="customerNumber" ng-model="delivery.contactNo" required>
 			  </label>
         <label class="item item-input item-select">
           <div class="input-label">
@@ -28,8 +28,13 @@
           <span class="input-label" >Address</span>
           <input type="text" name="deliveryAddress" ng-model="delivery.address" required>
         </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Comment</span>
+          <input type="text" name="deliveryComment" ng-model="delivery.comment">
+        </label>
 			</div>
 			<div>
+        <br>
         <label>
             Total Amount
         </label>

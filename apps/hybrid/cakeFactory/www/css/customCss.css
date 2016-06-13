@@ -1,0 +1,66 @@
+
+.selected_date_full {
+  background-color: #523E07 !important;
+}
+
+.ion-chevron-right:before{
+  color : #523E07 !important;
+}
+
+.ion-chevron-left:before{
+  color : #523E07 !important;
+}
+
+.prev_btn_section  {
+  color: #beac7c !important;
+}
+
+.next_btn_section {
+  color: #beac7c !important;
+}
+
+.month_select {
+  border-bottom-color: #5D4608 !important;
+}
+
+.year_select {
+  border-bottom-color: #5D4608 !important;
+}
+
+.month_select:after {
+  color: #523E07 !important;
+}
+
+.year_select:after {
+  color: #523E07 !important;
+}
+
+
+.selected_date {
+  background-color: #6D5105 !important;
+}
+
+.today {
+  background-color: #E8DAB5;
+  border: #E8DAB5 !important;
+}
+
+.button_today {
+  background-color: #634E17 !important;
+}
+.button_set{
+  background-color: #634E17 !important;
+}
+.button_close {
+  background-color: #634E17 !important;
+}
+
+
+.heading {
+  background-color: #523E07 !important;
+}
+
+
+.pickup-disable {
+  background-color: #ffffff !important;
+}

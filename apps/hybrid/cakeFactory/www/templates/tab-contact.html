@@ -1,29 +1,39 @@
 <ion-view view-title="The English Cake Company">
 	<ion-content class="padding">
 		<h1>Contact Us</h1>
-		<form class="contact-form">
+		<form class="contact-form" name="contactForm">
 			<div class="list">
 			  <label class="item item-input item-stacked-label">
 			    <span class="input-label">Name</span>
-			    <input type="text" placeholder="john">
+			    <input type="text" name="contactForm.name" ng-model="contact.name" placeholder="john" required>
 			  </label>
 			  <label class="item item-input item-stacked-label">
 			    <span class="input-label">Email</span>
-			    <input type="text" placeholder="john@gmail.com">
+			    <input type="email" name="contactForm.email" ng-model="contact.email" placeholder="john@gmail.com" required>
 			  </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Title</span>
+          <input type="text" name="contactForm.title" ng-model="contact.title" placeholder="Title of comment" required>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Upload Image (Optional)</span>
+          <br>
+          <button class="button button-buy" ng-click="upload()">Pick Image</button>
+          <p>{{selectImage}}</p>
+        </label>
 			  <label class="item item-input item-stacked-label">
 			    <span class="input-label">Comments</span>
-			     <textarea rows="6" placeholder="Your comments..."></textarea>
+			     <textarea name="contactForm.msg" rows="6" ng-model="contact.msg" placeholder="Your comments..." required></textarea>
 			  </label>
 			</div>
-			<button class="button button-full button-buy">Send</button>
+			<button class="button button-full button-buy" ng-disabled="contactForm.$invalid" ng-click="submitContactForm(selectImage,contact)">Send</button>
 		</form>
 
 		<h1 class="font-size-14">Address</h1>
 
 		<p>
 			2, Sulaiman Terrace,<br/>
-			Jawatte road,<br/> 
+			Jawatte road,<br/>
 			Colombo 5<br/>
 			Sri Lanka<br/>
 		</p>
@@ -40,12 +50,12 @@
 		<ul class="social-links text-align-left">
 			<li>
 				<a href="https://www.facebook.com/TheEnglishCakeCompany" target="_blank">
-				  <i class="icon ion-social-facebook"></i>    
+				  <i class="icon ion-social-facebook"></i>
 				</a>
 			</li>
 			<li>
 				<a href="https://twitter.com/tecclk" target="_blank">
-				  <i class="icon ion-social-twitter"></i>   
+				  <i class="icon ion-social-twitter"></i>
 				</a>
 			</li>
 		</ul>

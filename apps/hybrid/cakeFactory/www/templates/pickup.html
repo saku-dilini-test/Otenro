@@ -11,7 +11,7 @@
 			    <span class="input-label">Telephone</span>
           <br>
           <span> +94 </span>
-          <input type="number" ng-minlength="1" ng-maxlength="9" name="customerNumber" ng-model="pickup.contactNo" required>
+          <input type="number" ng-minlength="9" ng-maxlength="10" name="customerNumber" ng-model="pickup.contactNo" required>
 			  </label>
 			  <label class="item item-input item-select">
 			    <div class="input-label">
@@ -23,7 +23,20 @@
             </option>
 			    </select>
 			  </label>
+        <label class="item item-input item-stacked-label" ng-click="openDatePicker()">
+          <span class="input-label">Pick Up Date</span>
+          <input ng-disabled="true" class="pickup-disable" type="text" placeholder="DD - MM - YYYY" name="customerPickupDate" ng-model="pickup.date" required>
+        </label>
+        <label class="item item-input item-stacked-label" ng-click="openDateTime()">
+          <span class="input-label">Pick Up Time</span>
+          <input ng-disabled="true" class="pickup-disable" type="text" placeholder="-- : --  --" name="customerPickupTime" ng-model="pickup.time" required>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Comment</span>
+          <input type="text" name="customerComment" ng-model="pickup.comment">
+        </label>
         <div>
+          <br>
           <label>
             Total Amount
           </label>

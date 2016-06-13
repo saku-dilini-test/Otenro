@@ -27,6 +27,10 @@
             shoppingCart['name'] = $scope.cart.getName();
             shoppingCart['city'] = $scope.cart.getCity();
             shoppingCart['telPhone'] = $scope.cart.getTelPhone();
+            shoppingCart['comment'] = $scope.cart.getComment();
+            shoppingCart['pickUpDate'] = $scope.cart.getPickUpDate();
+            shoppingCart['pickUpTime'] = $scope.cart.getPickUpTime();
+
             $http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)
                 .then(function (response) {
                     if(response.data.result == 'success'){
@@ -40,6 +44,9 @@
                         localStorage['name'] = '';
                         localStorage['city'] = '';
                         localStorage['telPhone'] = 0;
+                        localStorage['comment'] = '';
+                        localStorage['pickUpDate'] = '';
+                        localStorage['pickUpTime'] = '';
                     }
                 });
 

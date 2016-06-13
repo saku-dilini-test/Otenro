@@ -5,7 +5,16 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 'starter.services'])
+angular.module('starter',
+  [
+    'ionic',
+    'ionic.service.core',
+    'starter.controllers',
+    'starter.services',
+    'ionic-datepicker',
+    'ionic-timepicker',
+    'ngCordova'
+])
 
   .run(function($ionicPlatform,$rootScope,paymentResources) {
     $ionicPlatform.ready(function() {
@@ -23,7 +32,34 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
     });
   })
 
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider,ionicDatePickerProvider,ionicTimePickerProvider) {
+
+    var datePickerObj = {
+      inputDate: new Date(),
+      setLabel: 'Set',
+      todayLabel: 'Today',
+      closeLabel: 'Close',
+      mondayFirst: false,
+      weeksList: ["S", "M", "T", "W", "T", "F", "S"],
+      monthsList: ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
+      templateType: 'popup',
+      showTodayButton: true,
+      dateFormat: 'dd MMMM yyyy',
+      closeOnSelect: false,
+      disableWeekdays: []
+    };
+
+    ionicDatePickerProvider.configDatePicker(datePickerObj);
+
+
+    var timePickerObj = {
+      format: 12,
+      step: 15,
+      setLabel: 'Set',
+      closeLabel: 'Close'
+    };
+
+    ionicTimePickerProvider.configTimePicker(timePickerObj);
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router

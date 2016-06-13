@@ -95,8 +95,56 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('ContactCtrl', function ($scope,$interval) {
+.controller('ContactCtrl', function ($scope,$location,$http,SERVER_URL,$state,$stateParams,$timeout, $cordovaFileTransfer) {
 
+    $scope.contact = {name:'',email:'',title:'',msg:''};
+    $scope.selectImage = '';
+
+    $scope.upload = function() {
+      fileChooser.open(function(uri) {
+        $scope.selectImage = uri;
+      });
+    }
+
+    $scope.submitContactForm = function(file,data) {
+      if(file != ''){
+        var reqData = {name : data.name,email : data.email,title : data.title,msg : data.msg,
+          imageUrl : 'image.jpg'
+        };
+        var options = {
+          fileKey: "file",
+          fileName: "ionic.png",
+          chunkedMode: false,
+          mimeType: "image/png",
+          params : reqData
+        };
+        $cordovaFileTransfer.upload(SERVER_URL+'contactUs/create', file , options).then(function(result) {
+          $timeout( function(){
+            $scope.contact.name = '';
+            $scope.contact.email = '';
+            $scope.contact.title = '';
+            $scope.contact.msg = '';
+            $scope.selectImage = '';
+          }, 1000);
+        }, function(err) {
+        }, function (progress) {
+        });
+
+      }else{
+        var reqData = data;
+        reqData['imageUrl'] = 'null';
+        $http.post(SERVER_URL+'contactUs/create',reqData)
+          .success(function(data) {
+            $timeout( function(){
+              $scope.contact.name = '';
+              $scope.contact.email = '';
+              $scope.contact.title = '';
+              $scope.contact.msg = '';
+            }, 1000);
+          }).error(function(err) {
+          });
+      }
+    }
   })
 
 .controller('DeliveryCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService,$location,$timeout,ORDER_URL) {
@@ -120,11 +168,10 @@ angular.module('starter.controllers', [])
           $scope.cartInfo = $scope.cart.getCartInfo();
           $scope.cartInfo.oneDoller = $rootScope.cart.oneDoller;
           $scope.cartInfo.userInfo = $scope.delivery;
-          console.log($scope.cartInfo);
           var cartInfo = JSON.stringify($scope.cartInfo);
           {
             // Open in external browser
-            window.open(ORDER_URL+'cartInfo='+cartInfo,'_system');
+            window.open(ORDER_URL+'cartInfo='+cartInfo,'_system','location=no');
           };
           $scope.changePath = function(){
             $scope.cart.clearItems();
@@ -141,19 +188,76 @@ angular.module('starter.controllers', [])
           }, 3000);
         }
   })
-  .controller('PickupCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService,$location,$timeout,ORDER_URL) {
+  .controller('PickupCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService,$location,$timeout,ORDER_URL,ionicDatePicker,ionicTimePicker) {
     var totalAmountUSD = initialData.totalAmount.data.usd;
     $scope.pickup = {usdAmount:totalAmountUSD};
     $scope.cart = DataService.cart;
 
-    console.log($scope.cart.oneDoller);
     $scope.branchLocations = initialData.branchLocations.data.result;
+
+    var startDate = (new Date()).valueOf();
+    var endDate = startDate + 31536000000;
+    var ipObj1 = {
+      callback: function (val) {  //Mandatory
+        console.log(val);
+        var date = new Date(val);
+        var pickDate = date.getDate() + ' - ' + ( date.getMonth() + 1 ) + ' - ' + date.getFullYear();
+        console.log(pickDate);
+        $scope.pickup.date = pickDate;
+
+      },
+      from: new Date(), //Optional
+      to : new Date(endDate),
+      mondayFirst: true,          //Optional
+      closeOnSelect: false,       //Optional
+      templateType: 'popup'       //Optional
+    };
+
+    $scope.openDatePicker = function(){
+      var currentDate = (new Date()).valueOf();
+      console.log(currentDate);
+      console.log(currentDate = currentDate + 40000000000)
+      ionicDatePicker.openDatePicker(ipObj1);
+    };
+
+
+    var ipObj2 = {
+      callback: function (val) {      //Mandatory
+        if (typeof (val) === 'undefined') {
+          console.log('Time not selected');
+        } else {
+          var selectedTime = new Date(val * 1000);
+          var pickTime = formatAMPM(selectedTime);
+          $scope.pickup.time = pickTime;
+
+          function formatAMPM(date) {
+            var hours = date.getUTCHours();
+            var minutes = date.getUTCMinutes();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0'+minutes : minutes;
+            var strTime = hours + ':' + minutes + ' ' + ampm;
+            return strTime;
+          }
+
+        }
+      },
+      inputTime: 36000,   //Optional
+      format: 12,         //Optional
+      step: 15,           //Optional
+      setLabel: 'Set Time'    //Optional
+    };
+
+    $scope.openDateTime = function() {
+
+      ionicTimePicker.openTimePicker(ipObj2);
+    }
+
     $scope.payNow = function(){
-      //$scope.cart.checkoutPayPal('PayPal');
       $scope.cartInfo = $scope.cart.getCartInfo();
       $scope.cartInfo.oneDoller = $rootScope.cart.oneDoller;
       $scope.cartInfo.userInfo = $scope.pickup;
-        console.log($scope.cartInfo);
       var cartInfo = JSON.stringify($scope.cartInfo);
       window.open(ORDER_URL+'cartInfo='+cartInfo,'_system','location=no');
       $scope.changePath = function(){
