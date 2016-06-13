@@ -151,8 +151,9 @@
                             <div class="pull-left">
                                 <div class="me-file-upload rounded">
                                     <div class="upload-wrapper">
-                                        <input type="file" accept="image/*" aria-invalid="true" required/>
-                                        <span>Select Product</span>
+                                        <input type="button" ngf-select ng-model="File" ngf-accept="*"
+                                               aria-invalid="true" ngf-change="changeImage()" required/>
+                                        <span>select product</span>
                                     </div>
                                 </div>
                             </div>
@@ -160,27 +161,34 @@
                         <div class="uploaded-section clearfix">
                             <div class="uploaded-new-image">
                                 <p>Selected Product</p>
-                                <img src="../../../images/medium-placeholder.png" width="150" height="150"/>
-                                <button class="me-upload-image-button">Upload Product</button>
+                                <img ng-if="File == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                     height="150"/>
+                                <img ng-if="File != null" ngf-src="File" width="150" height="150"/>
+
+                                <button class="me-upload-image-button" ng-click="addFile(File)">Upload Image
+                                </button>
                             </div>
                             <div class="uploaded-old-images">
-                                <p>Add Pricing</p>
-                                <fieldset>
-                                    <p>Product Price</p>
-                                    <input type="text" name="name" ng-model="product.price" id="input-price"
-                                           class="me-xs-input reset-inline" required/>
-                                </fieldset>
+                                    <p>Add Pricing</p>
+                                    <fieldset>
+                                        <p>Product Price</p>
+                                        <input type="number" name="name" ng-model="variants.price" id="input-price"
+                                               class="me-xs-input reset-inline" required/>
+                                    </fieldset>
                             </div>
                         </div>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep(3)">Next</md-button>
+                            <md-button class="me-default-button" ng-click="nextStep3Digital(3,product,variants)">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
             </md-tab>
+
+
+
             <md-tab>
                 <md-tab-label>Upload Image</md-tab-label>
                 <md-tab-body>
@@ -284,7 +292,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="addProducts(mainImg,product)">Finish
+                            <md-button class="me-default-button" ng-click="addProducts(mainImg,product,mainFile)">Finish
                             </md-button>
                         </div>
                     </div>

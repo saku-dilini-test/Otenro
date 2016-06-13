@@ -176,8 +176,17 @@
 //            getVariants:function(idDetails){
 //                return $http.get(SERVER_URL+ 'edit/getVariants?appId='+$rootScope.appId+'&childId='+idDetails);
 //            },
-            addPriceandVariants:function(variants){
-                return $http.post(SERVER_URL+ 'edit/addVariants',variants);
+            addPriceandVariants:function(variants,file){
+                if (file!== null){
+                    return Upload.upload({
+                        url: SERVER_URL + 'edit/addVariants',
+                        fields : variants,
+                        file:file
+                    });
+                }else {
+                    return $http.post(SERVER_URL+ 'edit/addVariants',variants);
+                }
+
             },
             getMainMenuList: function(){
                 return $http.get(SERVER_URL+ 'edit/getMainNavigation?appId='+$rootScope.appId);
