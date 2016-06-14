@@ -193,16 +193,16 @@ module.exports = {
 
         });
 
-        MainNavigation.destroy({ id : appId}).exec(function (err) {
+        MainNavigation.destroy({ appId : appId}).exec(function (err) {
             if (err) return callback("Error while deleting " + err.message);
 
         });
 
-        SecondNavigation.destroy({ id : appId}).exec(function (err) {
+        SecondNavigation.destroy({ appId : appId}).exec(function (err) {
             if (err) return callback("Error while deleting " + err.message);
 
         });
-        ThirdNavigation.destroy({ id : appId}).exec(function (err) {
+        ThirdNavigation.destroy({ appId : appId}).exec(function (err) {
             if (err) return callback("Error while deleting " + err.message);
 
         });
