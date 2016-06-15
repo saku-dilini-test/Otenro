@@ -14,6 +14,9 @@ module.exports = {
         appId : {
             type: 'string'
         },
+        childId : {
+            type: 'string'
+        },
         name  : {
             type: 'string'
         },

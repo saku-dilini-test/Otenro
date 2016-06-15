@@ -249,6 +249,7 @@
                            var variantsAttribute = variants;
                            variantsAttribute.appId = $rootScope.appId;
                            variantsAttribute.childId = product.mainId;
+                           variantsAttribute.productId = data.appId.id;
                            commerceService.addPriceandVariants(variantsAttribute,productFile).
                            success(function(data) {
                                toastr.success('New Price and Variants has been added.', 'Awsome!', {
@@ -329,7 +330,6 @@
                             closeButton: true
                         });
                     });
-
                 commerceService.addPriceandVariants(variants).
                 success(function(data) {
                     toastr.success('New Product has been added.', 'Awsome!', {

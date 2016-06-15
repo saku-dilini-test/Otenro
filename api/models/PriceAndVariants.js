@@ -14,34 +14,36 @@ module.exports = {
        type: 'string',
        required: true
        },
-       
+       productId: {
+       type: 'string'
+       },
        childId: {
        type : 'string',
        required: true
        },
-       
+
        proType:{
        type : 'string',
        },
-       
+
        name: {
        type : 'string',
        },
-       
+
        weight:{
        type : 'string',
        },
-       
+
        size:{
        type : 'string',
        },
-       
+
        price: {
-       type : 'string',
+       type : 'integer',
        },
-       
+
        quantity: {
-       type : 'string',
+       type : 'integer',
        },
        fileUrl: {
           type : 'string',

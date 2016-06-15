@@ -19,14 +19,7 @@
                 if (typeof $scope.inventoryList === 'undefined') {
                      inventoryService.getInventoryList()
                          .success(function (result) {
-
                              $scope.inventoryList = result;
-//                             $scope.inventoryList={
-//                             quantity:0,
-//                             sale: 0,
-//                             discount: 0
-
-//                             }
                          }).error(function (error) {
                              alert("Inventory Loading Error : " + error);
                          })

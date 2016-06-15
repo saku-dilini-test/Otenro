@@ -33,14 +33,28 @@ module.exports = {
                                 x++;
                                 setFunction(x,length,data ,obj);
                             }
-                            obj.push(update);
-                            x++;
-                            setFunction(x,length,data ,obj);
-
+                            var query = {
+                                productId: data[x].id
+                            }
+                            PriceAndVariants.find(query).exec(function(err,variants){
+                                if(err){
+                                    console.log(err);
+                                }
+                                if(variants != ""){
+                                    update.variant = variants[0];
+                                    obj.push(update);
+                                    x++;
+                                    setFunction(x,length,data ,obj);
+                                }
+                                else{
+                                    obj.push(update);
+                                    x++;
+                                    setFunction(x,length,data ,obj);
+                                }
+                            })
                         });
 
                     }else{
-
                         return res.send(obj);
                     }
                 };
