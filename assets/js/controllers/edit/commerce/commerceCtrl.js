@@ -10,6 +10,9 @@
         $scope.unfulfilled =[];
         $scope.fulfill =[];
 
+
+
+
         var fakeI18n = function( title ){
             var deferred = $q.defer();
             $interval( function() {
@@ -19,6 +22,7 @@
         };
 
         $scope.gridOptions1 = {
+
             enableRowSelection: true,
             enableSelectAll: true,
             enableRowHeaderSelection: true,
@@ -27,8 +31,10 @@
             exporterMenuCsv: true,
             enableGridMenu: true,
             gridMenuTitleFilter: fakeI18n,
+            rowTemplate: rowTemplate(),
             columnDefs: [
-                { name: 'createdDate' },
+                {name : 'id' ,visible:true},
+                { name: 'createdDate', },
                 { name: 'customerName', enableHiding: false },
                 { name: 'paymentStatus' },
                 { name: 'fulfillmentStatus' }
@@ -42,6 +48,7 @@
                     order: 210
                 }
             ],
+            //data : [{"createdDate": "2016/10/16","customerName":"ABC","paymentStatus": "pending","fulfillmentStatus": "Enersol"}],
             onRegisterApi: function( gridApi1 ){
                 $scope.gridApi1 = gridApi1;
 
@@ -59,7 +66,33 @@
                  gridApi1.selection.on.rowSelectionChangedBatch($scope,function(rows){
                  });
             }
+
         };
+
+
+        function rowTemplate() {
+            return '<div ng-dblclick="grid.appScope.rowDblClick(row)" >' +
+                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+                '</div>';
+        }
+
+        $scope.rowDblClick = function(row) {
+
+            $mdDialog.show({
+                clickOutsideToClose: true,
+                templateUrl: 'user/edit/commerce/OrderDetailsView.html',
+                controller: function DialogController($scope, $mdDialog) {
+                    $scope.oderData = row;
+                    $scope.closeDialog = function() {
+                        $mdDialog.hide();
+                    }
+                }
+            });
+
+        };
+
+
+
          $scope.gridOptions2 = {
              enableRowHeaderSelection: false,
              exporterMenuCsv: true,
@@ -126,7 +159,10 @@
                      $scope.columnChanged = { name: changedColumn.colDef.name, visible: changedColumn.colDef.visible };
                  });
              }
+
          };
+
+
 
          $scope.gridOptions4 = {
              enableRowHeaderSelection: false,
@@ -263,7 +299,7 @@
                         }).error(function (error) {
                             alert("Orders List Loading Error : " + error);
                         })
-                }
+         }
 
 //        $scope.addProducts = function(file,product) {
 //            commerceService.addProduct(file,product).
@@ -650,9 +686,5 @@
                     });
                 })
         };
-
-
-
-
     }
 })();

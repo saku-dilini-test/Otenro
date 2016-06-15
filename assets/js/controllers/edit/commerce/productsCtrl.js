@@ -241,7 +241,7 @@
                    return;
             }
             else{
-                   commerceService.addProduct(file,product,item.id,productFile).
+                   commerceService.addProduct(file,product,item.id).
                        success(function(data) {
 
                        var  variantsList =  $scope.variants;

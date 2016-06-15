@@ -1,0 +1,62 @@
+<md-dialog aria-label="Add Shipping Option">
+    <md-dialog-content>
+
+        <div class="md-dialog-main clearfix">
+            <fieldset>
+                <label><h1>{{oderData.entity.customerName}}</h1></label>
+            </fieldset>
+            <table class="me-simple-table">
+                <thead>
+                <th class="simple-column">Date Ordererd</th>
+                <th class="simple-column">Order Status</th>
+                <th class="simple-column">Order Fullfilment Date</th>
+                <th>&nbsp;</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td> {{ oderData.entity.createdAt | date:'MM/dd/yyyy' }}</td>
+                    <td>{{oderData.entity.fulfillmentStatus}}</td>
+                    <td>-</td>
+                </tr>
+                </tbody>
+            </table>
+            <fieldset>
+                <p>Adress</p>
+                <p>{{oderData.entity.deliveryAddress}}</p>
+            </fieldset>
+
+            <fieldset>
+                <p>Refunds</p>
+                <p>Non Refundable</p>
+            </fieldset>
+
+            <fieldset>
+                <p>Orderded Product list</p>
+            </fieldset>
+
+            <table class="me-simple-table">
+                <thead>
+                <th class="simple-column">Product</th>
+                <th class="simple-column">Indivigual Price</th>
+                <th class="simple-column">Qty</th>
+                <th class="simple-column">Price</th>
+                <th>&nbsp;</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{oderData.entity.item[0].name}}</td>
+                    <td>{{oderData.entity.item[0].price}}</td>
+                    <td>{{(oderData.entity.item).length}}</td>
+                    <td>{{oderData.entity.amount}} </td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>{{oderData.entity.amount}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </md-dialog-content>
+</md-dialog>
