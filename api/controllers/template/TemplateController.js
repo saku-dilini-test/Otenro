@@ -83,10 +83,18 @@ module.exports = {
         var searchApp = {
             id: productId
         };
-
+        var thirdNavi = [];
         ThirdNavigation.findOne(searchApp).exec(function(err, app) {
             if (err) return done(err);
-            res.json(app);
+            PriceAndVariants.findOne({productId: app.id}).exec(function(err, variants){
+             if (err) console.log(err);
+             if(variants != undefined){
+                app.price = variants.price;
+                app.quantity = variants.quantity;
+                app.size = variants.size;
+             }
+             res.json(app);
+            })
         });
     },
 
@@ -122,9 +130,38 @@ module.exports = {
             appId: appId,
             childId : childId
         };
+        var thirdNavi = [];
         ThirdNavigation.find().where(searchApp).exec(function(err, app) {
             if (err) return done(err);
-            res.json(app);
+            var setFunction=function(x,length, data ,obj){
+                if(x<length){
+                     PriceAndVariants.find({productId: data[x].id}).exec(function(err,variants){
+                        if(err){
+                            console.log(e);
+                            x++;
+                            setFunction(x,length,data ,obj);
+                        }
+                        if(variants != ""){
+                            data[x].price = variants[0].price;
+                            data[x].quantity = variants[0].quantity;
+                            data[x].size = variants[0].size;
+                            obj.push(data[x]);
+                            x++;
+                            setFunction(x,length,data ,obj)
+                        }
+                        else{
+                            obj.push(data[x]);
+                            x++;
+                            setFunction(x,length,data,obj);
+                        }
+                     })
+                }
+                else{
+                    return res.send(obj);
+                }
+            }
+            setFunction(0,app.length,app,thirdNavi);
+
         });
 
 
