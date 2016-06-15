@@ -33,7 +33,7 @@
             gridMenuTitleFilter: fakeI18n,
             rowTemplate: rowTemplate(),
             columnDefs: [
-                {name : 'id' ,visible:true},
+                {name : 'id' ,visible:false},
                 { name: 'createdDate', },
                 { name: 'customerName', enableHiding: false },
                 { name: 'paymentStatus' },
