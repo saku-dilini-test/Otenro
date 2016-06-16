@@ -23,15 +23,17 @@ module.exports = {
 
     var obj = [];
         var data = req.body;
+        console.log(data);
 
     data.forEach(function(details){
-        ApplicationInventory.find({id:details.id}).exec(function(err, app) {
+        PriceAndVariants.find({productId:details.id}).exec(function(err, app) {
                         if (err) return done(err);
                         var quantity = {
                             quantity:app[0].quantity - details.qty
                         }
-                        ApplicationInventory.update({id:details.id},quantity).exec(function(err,r){
-                            if (err) res.send(err);
+                        console.log(quantity)
+                        PriceAndVariants.update({productId:details.id},quantity).exec(function(err,r){
+                            if (err) return done(err);
                             obj.push(r);
 
                         });
