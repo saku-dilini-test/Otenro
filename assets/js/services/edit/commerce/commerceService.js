@@ -56,6 +56,7 @@
                         name: product.name,
                         childId: product.mainId,
                         desc: product.desc,
+                        sku: product.sku,
                         type : product.type,
                         discount: product.discount
                     },

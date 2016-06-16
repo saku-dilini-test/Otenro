@@ -20,10 +20,8 @@ module.exports = {
 
             ThirdNavigation.find(searchApp).exec(function(err, app) {
                 if (err) return done(err);
-
                 var setFunction=function(x,length, data ,obj){
                     if(x<length){
-
                         data[x].product=data[x];
 
                         ApplicationInventory.findOrCreate({id :data[x].id},data[x]).exec(function(e,update){
@@ -65,24 +63,43 @@ module.exports = {
     },
 
     updateInventory : function(req,res){
-
         var body=req.body;
         var lng=body.length;
         for(var i=0 ; i < lng ; i++){
-
-            var inventory={
-                id : body[i].id,
-                name : body[i].name,
-                price: body[i].price,
-                quantity: body[i].quantity,
-                sale: body[i].sale,
-                sku: body[i].sku,
-                discount: body[i].discount,
-                product : body[i]
-            };
-
+            var inventory;
+            if(body[i].variant == undefined){
+                inventory = {
+                   appId: body[i].appId,
+                   id : body[i].id,
+                   childId: body[i].childId,
+                   name : body[i].name,
+//                   price: body[i].variant.price,
+//                   quantity: body[i].variant.quantity,
+                   sale: body[i].sale,
+                   sku: body[i].sku,
+                   discount: body[i].discount,
+                   product : body[i]
+                }
+            }
+            else{
+                 inventory={
+                    appId: body[i].appId,
+                    id : body[i].id,
+                    childId: body[i].childId,
+                    name : body[i].name,
+                    price: body[i].variant.price,
+                    quantity: body[i].variant.quantity,
+                    sale: body[i].sale,
+                    sku: body[i].sku,
+                    discount: body[i].discount,
+                    product : body[i]
+                 };
+            }
             ApplicationInventory.update({ id :inventory.id },inventory).exec(function(err,r){
                 if (err) return done(err);
+                PriceAndVariants.update({ productId : r[0].id}, {price : inventory.price}).exec(function(err,variants){
+                    if (err) return done(err);
+                })
 
             });
 
