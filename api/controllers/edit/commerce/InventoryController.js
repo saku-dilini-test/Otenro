@@ -94,10 +94,14 @@ module.exports = {
                     discount: body[i].discount,
                     product : body[i]
                  };
+                 var variant = {
+                    price : inventory.price,
+                    quantity : inventory.quantity,
+                 }
             }
             ApplicationInventory.update({ id :inventory.id },inventory).exec(function(err,r){
                 if (err) return done(err);
-                PriceAndVariants.update({ productId : r[0].id}, {price : inventory.price}).exec(function(err,variants){
+                PriceAndVariants.update({ productId : r[0].id}, variant).exec(function(err,variants){
                     if (err) return done(err);
                 })
 
