@@ -33,6 +33,7 @@ module.exports = {
             {
               "name": "Grilled Chicken Salad",
               "price": 100,
+              "quantity": 100,
               "imageUrl": "grilled_chicken_salad.png",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
@@ -41,6 +42,7 @@ module.exports = {
             {
               "name": "Spicy Thai Salad with Grilled Chicken",
               "price": 200,
+              "quantity": 200,
               "imageUrl": "spicy thai salad with grilled chicken.png",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
@@ -78,6 +80,7 @@ module.exports = {
             {
               "name": "Chocolate Fudge Brownie with Vanila Ice Cream",
               "price": 100,
+              "quantity": 100,
               "imageUrl": "chocolate Fudge brownie with vanila ice cream.png",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
@@ -135,6 +138,7 @@ module.exports = {
             {
               "name": "Grilled Garlic Lamb Chops",
               "price": 100,
+              "quantity": 100,
               "imageUrl": "grilled garlic lamb chops.png",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
@@ -143,6 +147,7 @@ module.exports = {
             {
               "name": "Beef Stake with Smashed Potatoes",
               "price": 200,
+              "quantity": 200,
               "imageUrl": "beef stake with smashed potatoes.png",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
@@ -151,6 +156,7 @@ module.exports = {
             {
               "name": "BBQ Pork Ribs",
               "price": 300,
+              "quantity": 300,
               "imageUrl": "bbq pork ribs.png",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
@@ -159,6 +165,7 @@ module.exports = {
             {
               "name": "Pina Colada",
               "price": 400,
+              "quantity": 400,
               "briefDesc" : "Pina Colada brief des",
               "detailedDesc" : "Pina Colada details description. Pina Colada details description. Pina Colada details description",
               "imageUrl": "bg.png",

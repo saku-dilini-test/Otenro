@@ -144,8 +144,20 @@ module.exports = {
                             for (var j = 0; j < thirdNaviList.length; j++) {
                                 thirdNaviList[j].appId = app.id;
                                 thirdNaviList[j].childId = secondN.id;
+
                                 ThirdNavigation.create(thirdNaviList[j]).exec(function (err, thirdN) {
                                     if (err) return err;
+                                    var x = {
+                                        appId : app.id,
+                                        childId : secondN.id,
+                                        name : thirdN.name,
+                                        productId : thirdN.id,
+                                        quantity : thirdN.quantity,
+                                        price : thirdN.price
+                                    }
+                                    PriceAndVariants.create(x).exec(function (err, vvv){
+                                        if (err) console.log(err);
+                                    })
                                 });
                             }
                     });
