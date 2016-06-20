@@ -22,21 +22,27 @@
                  * TODO : This should change later according type of template category
                  * @type {boolean}
                  */
-                if(data.templateCategory == "3") {
-                    $scope.isAppMediaCategory = true;
+                if(data.templateCategory == "2") {
+                    $scope.firstMenuLabel = 'Commerce';
 
-                    dashboardService.getTemplateMetaData(data.templateCategory)
-                        .success(function(data) {
-                            $scope.buttonArray = data;
-                            $scope.menuButtonView =
+                }
+                if(data.templateCategory == "3") {
+                    $scope.firstMenuLabel = 'Article';
+
+                }
+                dashboardService.getTemplateMetaData(data.templateCategory)
+                    .success(function(data) {
+                        $scope.buttonArray = data;
+                        $scope.menuButtonView =
+                            '<obl-menu-group label="{{firstMenuLabel}}" icon="fa-pencil-square-o">'+
                                 '<div data-ng-repeat="btn in buttonArray" >' +
                                     '<obl-menu-button label="{{btn.menuTitle}}" icon="fa fa-file-image-o"  menu-function="{{btn.menuFunction}}">' +
                                     '</obl-menu-button>'+
-                                '</div>';
-                        }).error(function(err) {
+                                '</div>' +
+                            '<obl-menu-group>';
+                    }).error(function(err) {
 
-                        });
-                }
+                    });
             }).error(function(err) {
 
             });

@@ -5,29 +5,8 @@
         </a>
         <obl-framework title="MadeEasy" subtitle="ME" icon-file="" class="navigation">
             <obl-menu>
-                <div ng-if="!(isAppMediaCategory)">
-
-                    <obl-menu-group label="Commerce" icon="fa-pencil-square-o">
-                        <obl-menu-button label="Products" icon="fa fa-file-image-o" click-title="products"></obl-menu-button>
-                        <obl-menu-button label="Orders" icon="fa fa-file-image-o" click-title="orders"></obl-menu-button>
-                        <obl-menu-button label="Inventory" icon="fa fa-file-image-o" click-title="inventory"></obl-menu-button>
-                        <obl-menu-button label="Shipping" icon="fa fa-file-image-o" click-title="shipping"></obl-menu-button>
-                        <obl-menu-button label="Taxes" icon="fa fa-file-image-o" click-title="taxes"></obl-menu-button>
-                        <obl-menu-button label="E-mail Settings" icon="fa fa-file-image-o" click-title="emailSettings"></obl-menu-button>
-                        <obl-menu-button label="Store Settings" icon="fa fa-file-image-o" click-title="storeSettings"></obl-menu-button>
-                        <obl-menu-button label="Payment Activities" icon="fa fa-file-image-o" click-title="paymentActivities"></obl-menu-button>
-                        <obl-menu-button label="IPG Integration" icon="fa fa-file-image-o" click-title="IPGIntegration"></obl-menu-button>
-                    </obl-menu-group>
-
-                </div>
-
-                <div ng-if="isAppMediaCategory">
-
-                    <obl-menu-group label="Articles" icon="fa-pencil-square-o">
                         <div bind-html-compile="menuButtonView"></div>
-                    </obl-menu-group>
 
-                </div>
 
 
                 <obl-menu-group label="Design" icon="fa-pencil-square-o">

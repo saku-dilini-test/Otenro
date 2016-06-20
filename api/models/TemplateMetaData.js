@@ -28,6 +28,8 @@ module.exports = {
     }
   },
   seedData: [
+
+      // data for template category 2, menuButtonId Start 1001
     {
       templateCategoryId : '3',
       templateId : '1',
@@ -115,8 +117,81 @@ module.exports = {
       menuTitle  : 'Site Settings',
       menuFunction : '',
       menuButtonId : '1010'
-    }
+    },
 
+    // data for template category 2, menuButtonId Start 1501
+    {
+      templateCategoryId : '2',
+      templateId : '2',
+      menuType : 'MenuButton',
+      menuTitle  : 'Products',
+      menuFunction : 'products.showAddProductsDialog',
+      menuButtonId : '1501'
+    },
+    {
+      templateCategoryId : '2',
+      templateId : '2',
+      menuType : 'MenuButton',
+      menuTitle  : 'orders',
+      menuFunction : 'commerce.showOrderDialog',
+      menuButtonId : '1502'
+    },
+    {
+      templateCategoryId : '2',
+      templateId : '2',
+      menuType : 'MenuButton',
+      menuTitle  : 'Inventory',
+      menuFunction : 'inventory.showInventoryDialog',
+      menuButtonId : '1503'
+    },
+    {
+      templateCategoryId : '2',
+      templateId : '2',
+      menuType : 'MenuButton',
+      menuTitle  : 'Shipping',
+      menuFunction : 'commerce.showShippingDialog',
+      menuButtonId : '1504'
+    },
+    {
+      templateCategoryId : '2',
+      templateId : '2',
+      menuType : 'MenuButton',
+      menuTitle  : 'Taxes',
+      menuFunction : 'commerce.showTaxesDialog',
+      menuButtonId : '1505'
+    },
+    {
+      templateCategoryId : '2',
+      templateId : '2',
+      menuType : 'MenuButton',
+      menuTitle  : 'E-mail Settings',
+      menuFunction : 'commerce.showEmailSettingsDialog',
+      menuButtonId : '1506'
+    },
+    {
+      templateCategoryId : '2',
+      templateId : '2',
+      menuType : 'MenuButton',
+      menuTitle  : 'Store Settings',
+      menuFunction : 'commerce.showStoreSettingsDialog',
+      menuButtonId : '1507'
+    },
+    {
+      templateCategoryId : '2',
+      templateId : '2',
+      menuType : 'MenuButton',
+      menuTitle  : 'Payment Activities',
+      menuFunction : '',
+      menuButtonId : '1508'
+    },
+    {
+      templateCategoryId : '2',
+      templateId : '2',
+      menuType : 'MenuButton',
+      menuTitle  : 'IPG Ingegration',
+      menuFunction : '',
+      menuButtonId : '1509'
+    }
 
   ]
 };

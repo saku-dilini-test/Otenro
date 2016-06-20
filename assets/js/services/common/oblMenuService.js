@@ -2,9 +2,12 @@
  * Created by amila on 6/20/16.
  */
 (function() {
-    angular.module('appEdit').service('oblMenuService', ['stylesService', 'contactUsService', 'commerceService','articleService','mainMenuService', 'currencyService', 'publishService', 'engageService', 'logoAndTittleService', oblMenuService]);
+    angular.module('appEdit').service('oblMenuService', ['stylesService', 'contactUsService', 'commerceService',
+        'articleService','mainMenuService', 'currencyService', 'publishService', 'engageService', 'logoAndTittleService'
+        , oblMenuService]);
 
-    function oblMenuService(stylesService, contactUsService, commerceService, articleService ,mainMenuService, currencyService, publishService, engageService, logoAndTittleService) {
+    function oblMenuService(stylesService, contactUsService, commerceService, articleService ,mainMenuService,
+                            currencyService, publishService, engageService, logoAndTittleService) {
         return {
             setOblMenuService : function(data) {
 
@@ -21,8 +24,37 @@
                         if(ctrlFun == 'previewArticles'){
                             return articleService.showPreviewArticslesDilog(ctrlFun);
                         }
-                    }else{
-                        console.log('Note : else part not defined ');
+                    }
+
+
+                    if(ctrl == 'products'){
+                        if(ctrlFun == 'showAddProductsDialog'){
+                            return commerceService.showAddProductsDialog(ctrl);
+                        }
+                    }
+
+                    if(ctrl == 'commerce') {
+                        if (ctrlFun == 'showOrderDialog') {
+                            return commerceService.showOrderDialog();
+                        }
+                        if (ctrlFun == 'showShippingDialog') {
+                            return commerceService.showShippingDialog();
+                        }
+                        if (ctrlFun == 'showTaxesDialog') {
+                            return commerceService.showTaxesDialog();
+                        }
+                        if (ctrlFun == 'showEmailSettingsDialog') {
+                            return commerceService.showEmailSettingsDialog();
+                        }
+                        if (ctrlFun == 'showStoreSettingsDialog') {
+                            return commerceService.showStoreSettingsDialog();
+                        }
+                    }
+
+                    if(ctrl == 'inventory'){
+                        if(ctrlFun == 'showInventoryDialog'){
+                            return commerceService.showInventoryDialog();
+                        }
                     }
 
                 }else{
