@@ -69,6 +69,21 @@ module.exports = {
             if (err) return done(err);
             res.send(apps);
         });
+    },
+    /**
+     * return template meta data collections for given template category Id
+     * @param req
+     * @param res
+     */
+    getTemplateMetaData : function (req,res) {
+        var templateCategoryId = req.param('templateCategoryId');
+        var searchQuery = {
+            templateCategoryId : templateCategoryId
+        };
+        TemplateMetaData.find(searchQuery, function(err, result) {
+            if (err) return done(err);
+            res.send(result);
+        });
     }
 
 };

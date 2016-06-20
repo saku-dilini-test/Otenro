@@ -4,11 +4,11 @@
 (function(){
     "use strict";
     angular.module('oblMenu').controller('OblMenuCtrl',[
-        '$scope','$rootScope','dialogService',
+        '$scope','$rootScope','dialogService','oblMenuService',
         OblMenuCtrl
     ]);
 
-    function OblMenuCtrl($scope,$rootScope,dialogService){
+    function OblMenuCtrl($scope,$rootScope,dialogService,oblMenuService){
 
         $scope.showMenu = true;
 
@@ -26,6 +26,10 @@
 
         this.showAlert = function(clickTitle) {
             dialogService.showDialog(clickTitle);
+        };
+
+        this.goOblMenuService = function(data){
+            oblMenuService.setOblMenuService(data);
         };
 
         $scope.$on('obl-menu-show',function(evt, data){

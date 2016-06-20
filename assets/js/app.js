@@ -42,7 +42,8 @@ angular.module('app', [
   'angularTrix',
   'angularUtils.directives.dirPagination',
   'ui.grid',
-  'ui.grid.selection'
+  'ui.grid.selection',
+  'angular-bind-html-compile'
 
 
 ]).run(function($rootScope, $state, $auth,Auth) {

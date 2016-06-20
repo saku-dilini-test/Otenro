@@ -25,7 +25,8 @@ module.exports.bootstrap = function(cb) {
     TimeAndRegion.seed,
     MeasurementStandard.seed,
     ContentRating.seed,
-    TemplateCategory.seed
+    TemplateCategory.seed,
+    TemplateMetaData.seed
 
   ], cb);
 

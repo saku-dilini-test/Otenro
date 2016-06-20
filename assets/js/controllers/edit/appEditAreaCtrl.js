@@ -3,10 +3,10 @@
  */
 (function(){
     angular.module('appEdit').controller('AppEditAreaCtrl',[
-        '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER','toastr','mySharedService','$interval',
+        '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER','toastr','mySharedService','$interval','dashboardService',
         AppEditAreaCtrl]);
 
-    function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,toastr,mySharedService,$interval){
+    function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,toastr,mySharedService,$interval,dashboardService){
 
         $rootScope.bodyClass = 'appEdit';
 
@@ -24,6 +24,18 @@
                  */
                 if(data.templateCategory == "3") {
                     $scope.isAppMediaCategory = true;
+
+                    dashboardService.getTemplateMetaData(data.templateCategory)
+                        .success(function(data) {
+                            $scope.buttonArray = data;
+                            $scope.menuButtonView =
+                                '<div data-ng-repeat="btn in buttonArray" >' +
+                                    '<obl-menu-button label="{{btn.menuTitle}}" icon="fa fa-file-image-o"  menu-function="{{btn.menuFunction}}">' +
+                                    '</obl-menu-button>'+
+                                '</div>';
+                        }).error(function(err) {
+
+                        });
                 }
             }).error(function(err) {
 
