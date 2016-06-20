@@ -10,12 +10,13 @@
     angular.module('app')
         .controller('livePreviewCtrl',
         ['$scope', 'welcomeTemplatesResource', 'userProfileService','$stateParams','$mdDialog','mySharedService','$http','$state','ME_APP_SERVER',
-        '$auth',
+        '$auth','toastr',
             livePreviewCtrl
         ]);
 
 
-    function livePreviewCtrl($scope,welcomeTemplatesResource, userProfileService,$stateParams,$mdDialog,mySharedService,$http,$state,ME_APP_SERVER,$auth) {
+    function livePreviewCtrl($scope,welcomeTemplatesResource, userProfileService,$stateParams,$mdDialog,mySharedService,
+    $http,$state,ME_APP_SERVER,$auth,toastr) {
         welcomeTemplatesResource.getTemplates().success(function(data){
             $scope.templates = data;
         });
@@ -40,6 +41,12 @@
         };
 
         $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory) {
+        if($scope.appName== null){
+            toastr.error('Please enter the app name', 'Warning', {
+                  closeButton: true
+            });
+        }
+        else{
                 if ($auth.isAuthenticated()) {
                        $scope.deleteFile($stateParams.userId, $stateParams.appId);
                     var tempAppParams = {
@@ -62,6 +69,7 @@
                     $mdDialog.hide(answer);
                 }else{
                     $state.go('anon.login');
+                }
                 }
                 $scope.profileView = function () {
                     return userProfileService.showUserProfileDialog();

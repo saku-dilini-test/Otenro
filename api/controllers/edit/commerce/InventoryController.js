@@ -64,7 +64,6 @@ module.exports = {
 
     updateInventory : function(req,res){
         var body=req.body;
-        console.log(body);
         var lng=body.length;
         for(var i=0 ; i < lng ; i++){
             var inventory;
