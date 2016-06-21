@@ -72,6 +72,12 @@ module.exports = {
             imageUrl : 'hkRising/hkRising.png',
             templateFilesPath:'templates/hkRising',
             templateCategory:'3'
+        },
+        {
+            template_name : 'fashionApp',
+            imageUrl : 'fashionApp/fashionApp.png',
+            templateFilesPath:'templates/fashionApp',
+            templateCategory:'2'
         }
     ]
 };
