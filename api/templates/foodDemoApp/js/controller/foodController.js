@@ -52,10 +52,10 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     console.log(quantity);
     if(quantity == null){
     var alertPopup = $ionicPopup.alert({
-                           title: 'Please enter a quantity',
-                           template: 'Warning!!!',
-                           cssClass: 'ionicPopUp'
-                         });
+      title: 'Please enter a quantity',
+      template: 'Warning!!!',
+      cssClass: 'ionicPopUp'
+    });
     }
     else{
             if($scope.foodInfo.discount){

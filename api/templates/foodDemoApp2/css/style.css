@@ -303,7 +303,7 @@ font-family:"Times New Roman", Times, serif;
 	color:#73A3B9;
 	margin:5px;
 	font-size:20px;
-	text-align:center;	
+	text-align:center;
 }
 
 p{
@@ -380,4 +380,24 @@ input[type="text"]	{
 img {
     width: 100%;
     border-radius: 5px 5px 0 0;
+}
+.popup-body{
+    text-align:center;
+    color:#70A1B3;
+}
+.popup-title {
+  font-family:"Times New Roman", Times, serif;
+  	border-bottom:solid;
+  	border-width:thin;
+  	border-bottom-color:#CCC;
+  	padding-bottom:10px;
+  	color:#73A3B9;
+  	margin:5px;
+  	font-size:20px;
+  	text-align:center; }
+.popup-buttons{
+    text-align: center;
+    position: relative;
+    left: 30%;
+    width: 20%;
 }

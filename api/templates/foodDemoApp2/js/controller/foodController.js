@@ -2,7 +2,7 @@
  * Created by amila on 3/31/16.
  */
 
-mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,constants) {
+mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants) {
 
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
@@ -43,6 +43,14 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.menuName = $stateParams.categoryName;
 
     $scope.addToCart = function(quantity){
+    if(quantity == null){
+        var alertPopup = $ionicPopup.alert({
+          title: 'Please enter a quantity',
+          template: 'Warning!!!',
+          cssClass: 'ionicPopUp'
+        });
+    }
+    else{
             if($scope.foodInfo.discount){
                 $scope.foodInfo.price = $scope.foodInfo.discount;
             }
@@ -56,6 +64,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
         $scope.parentobj.cartSize = $rootScope.cart.cartSize;
         $state.go('app.cart');
+     }
     }
 
 });

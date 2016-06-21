@@ -2,7 +2,7 @@
  * Created by amila on 4/5/16.
  */
 
-mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,constants) {
+mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$ionicPopup,constants) {
 
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
