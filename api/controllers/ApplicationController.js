@@ -147,17 +147,6 @@ module.exports = {
 
                                 ThirdNavigation.create(thirdNaviList[j]).exec(function (err, thirdN) {
                                     if (err) return err;
-                                    var x = {
-                                        appId : app.id,
-                                        childId : secondN.id,
-                                        name : thirdN.name,
-                                        productId : thirdN.id,
-                                        quantity : thirdN.quantity,
-                                        price : thirdN.price
-                                    }
-                                    PriceAndVariants.create(x).exec(function (err, vvv){
-                                        if (err) console.log(err);
-                                    })
                                 });
                             }
                     });

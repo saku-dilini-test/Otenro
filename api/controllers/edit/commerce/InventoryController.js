@@ -32,9 +32,14 @@ module.exports = {
                                 setFunction(x,length,data ,obj);
                             }
                             var query = {
-                                productId: data[x].id
+                                productId: data[x].id,
+                                appId: data[x].appId,
+                                childId: data[x].childId,
+                                name: data[x].name,
+                                price: data[x].price,
+                                quantity: data[x].quantity
                             }
-                            PriceAndVariants.find(query).exec(function(err,variants){
+                            PriceAndVariants.findOrCreate({ productId : data[x].id},query).exec(function(err,variants){
                                 if(err){
                                     console.log(err);
                                 }

@@ -241,10 +241,16 @@
                    return;
             }
             else{
-                   commerceService.addProduct(file,product,item.id).
+            variants = {
+                 size: size,
+                 weight: weight,
+                 price: $scope.variants[0].price,
+                 quantity: $scope.variants[0].quantity
+            };
+                   commerceService.addProduct(file,product,item.id,variants).
                        success(function(data) {
 
-                       var  variantsList =  $scope.variants;
+                        var  variantsList =  $scope.variants;
                        variantsList.forEach(function (variants) {
                            var variantsAttribute = variants;
                            variantsAttribute.appId = $rootScope.appId;

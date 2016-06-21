@@ -45,7 +45,7 @@
                 });
             },
 
-            addProduct: function(file,product){
+            addProduct: function(file,product,id,variants){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addThirdNavigation',
                     fields: {
@@ -57,6 +57,8 @@
                         childId: product.mainId,
                         desc: product.desc,
                         sku: product.sku,
+                        price: variants.price,
+                        quantity: variants.quantity,
                         type : product.type,
                         discount: product.discount
                     },
