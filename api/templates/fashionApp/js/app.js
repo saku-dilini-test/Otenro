@@ -92,21 +92,12 @@ angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdM
 						controller: 'CommentsController as commentsCtrl'
 					}
 				}
-			})
-			.state('app.slideshow', {
-				url: '/slideshow/:forceShow',
-				views: {
-					'menuContent': {
-						templateUrl: 'templates/slideshow.html',
-						controller: 'SlideshowController as slideshowCtrl'
-					}
-				}
 			});
 
 		// if none of the above states are matched, use this as the fallback
 		$urlRouterProvider.otherwise(function($injector, $location) {
 			var state = $injector.get('$state');
-			state.go('app.slideshow', {'forceShow': false});
+			state.go('app.categories', {'forceShow': false});
 			return $location.path();
 		});
 	}
