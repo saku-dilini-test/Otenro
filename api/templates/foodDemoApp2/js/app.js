@@ -92,6 +92,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           }
       })
   .state('app.category', {
+          cache: false,
           url: '/category',
           views: {
               'menuContent': {
@@ -101,6 +102,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           }
       })
    .state('app.foods', {
+     cache: false,
      url: '/category/:categoryId/:categoryName',
      views: {
        'menuContent': {
@@ -110,6 +112,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
      }
    })
    .state('app.food', {
+     cache: false,
      url: '/foods/:foodId',
      views: {
        'menuContent': {
@@ -144,7 +147,19 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           controller: 'cartCtrl'
       }
     }
-  });
+  })
+  .state('app.deliverDetails', {
+      url: '/deliverDetails',
+      params:{
+        item: null
+      },
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/deliverDetails.html',
+            controller: 'cartCtrl'
+        }
+      }
+    });
 
   $urlRouterProvider.otherwise('/app/login');
 });

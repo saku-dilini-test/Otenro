@@ -48,19 +48,16 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.menuName = $stateParams.categoryName;
 
-    $scope.addToCart = function(quantity){
-    console.log(quantity);
+    $scope.addToCart = function(quantity,price){
     if(quantity == null){
     var alertPopup = $ionicPopup.alert({
-                           title: 'Please enter a quantity',
-                           template: 'Warning!!!',
-                           cssClass: 'ionicPopUp'
-                         });
+      title: 'Please enter a quantity',
+      template: 'Warning!!!',
+      cssClass: 'ionicPopUp'
+    });
     }
     else{
-            if($scope.foodInfo.discount){
-                $scope.foodInfo.price = $scope.foodInfo.discount;
-            }
+         $scope.foodInfo.price = price;
 
         $rootScope.cart.cartItems.push({
             id: $scope.foodInfo.id,
