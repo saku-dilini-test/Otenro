@@ -21,6 +21,9 @@
             },
             getSelectedCategoryDashboard:function(appParams){
                 return $http.post(SERVER_URL +'api/dashboard/getSelectedCategoryDashboard', appParams);
+            },
+            getTemplateMetaData:function(templateCategoryId){
+                return $http.get(SERVER_URL +'api/getTemplateMetaData?templateCategoryId='+templateCategoryId);
             }
         }
     }

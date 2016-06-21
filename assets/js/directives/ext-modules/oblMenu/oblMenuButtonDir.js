@@ -10,7 +10,8 @@
             scope: {
                 label: "@",
                 icon: "@",
-                clickTitle:"@"
+                clickTitle:"@",
+                menuFunction : "@"
             },
             templateUrl:"user/ext-modules/oblMenu/oblMenuButtonTemplate.html",
             link:function(scope, el,attrs,ctrl){
@@ -19,7 +20,13 @@
                     evt.preventDefault();
                     scope.$apply(function(){
                         ctrl.setActiveElement(el);
-                        ctrl.showAlert(scope.clickTitle);
+                        if(scope.clickTitle){
+                            ctrl.showAlert(scope.clickTitle);
+                        }
+                        if(scope.menuFunction){
+                            ctrl.goOblMenuService(scope.menuFunction);
+                        }
+
                     });
                 })
             }

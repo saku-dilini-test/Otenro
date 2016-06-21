@@ -69,6 +69,33 @@ module.exports = {
             if (err) return done(err);
             res.send(apps);
         });
+    },
+    /**
+     * return template meta data collections for given template category Id
+     * menulable also retun for related template category
+     * @param req
+     * @param res
+     */
+    getTemplateMetaData : function (req,res) {
+        var templateCategoryId = req.param('templateCategoryId');
+        var searchQuery = {
+            templateCategoryId : templateCategoryId
+        };
+        var firstMenuLabel = '';
+        if(templateCategoryId == '2'){
+            firstMenuLabel = 'Commerce'
+        }
+        if(templateCategoryId == '3'){
+            firstMenuLabel = 'Article'
+        }
+        var response = {
+                firstMenuLabel : firstMenuLabel
+        }
+        TemplateMetaData.find(searchQuery, function(err, result) {
+            if (err) return done(err);
+            response['btnArray'] = result;
+            res.send(response);
+        });
     }
 
 };
