@@ -77,7 +77,7 @@ module.exports = {
             template_name : 'fashionApp',
             imageUrl : 'fashionApp/fashionApp.png',
             templateFilesPath:'templates/fashionApp',
-            templateCategory:'2'
+            templateCategory:'3'
         }
     ]
 };
