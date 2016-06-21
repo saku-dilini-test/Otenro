@@ -6,7 +6,9 @@ angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdM
 .run([
 	'$ionicPlatform',
 	'$window',
-	function($ionicPlatform, $window) {
+		'$rootScope',
+		'readMadeEasy',
+	function($ionicPlatform, $window,$rootScope,readMadeEasy) {
 		$ionicPlatform.ready(function() {
 			// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 			// for form inputs)
@@ -20,6 +22,26 @@ angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdM
 			}
 
 			$window.localStorage.setItem('showIntro', true);
+
+			if (typeof $rootScope.appId === 'undefined'){
+
+				readMadeEasy.readFile().success(function(data){
+					$rootScope.appId = data.appId;
+				});
+			}
+
+			if (typeof $rootScope.userId === 'undefined'){
+
+				readMadeEasy.readFile().success(function(data){
+					$rootScope.userId = data.userId;
+				});
+			}
+			if (typeof $rootScope.appName === 'undefined'){
+
+				readMadeEasy.readFile().success(function(data){
+					$rootScope.appName = data.name;
+				});
+			}
 		});
 	}
 ])
