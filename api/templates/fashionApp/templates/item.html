@@ -4,7 +4,7 @@
 		<ion-content>
 			<ion-item class="ion-item">
 				<div class="item-image">
-					<img data-ng-src="{{itemCtrl.item.img}}">
+					<img data-ng-src="img/article/{{itemCtrl.item.imageUrl}}">
 					<h1 data-ng-bind-html="itemCtrl.item.title|trustHtml"></h1>
 				</div>
 				<div class="item-content article-content">
@@ -19,7 +19,7 @@
 						<div class="col"><a data-ui-sref="app.comments({itemId: itemCtrl.item.id})">Comments</a></div>
 					</div>
 					<div class="row">
-						<div class="col" data-ng-bind-html="itemCtrl.item.description|trustHtml"></div>
+						<div class="col" data-ng-bind-html="itemCtrl.item.desc|trustHtml"></div>
 					</div>
 					<srf-social-share data-config="itemCtrl.share"></srf-social-share>
 				</div>

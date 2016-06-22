@@ -215,6 +215,22 @@ module.exports = {
         });
     },
 
+    /**
+     * Return Article Collection for given category ID
+     * @param req
+     * @param res
+     */
+    getArticleByCategoryId : function(req,res) {
+
+        var categoryId = req.param('categoryId');
+        var searchApp = {
+            categoryId : categoryId
+        };
+        Article.find().where(searchApp).exec(function (err, result) {
+            if (err) return done(err);
+            res.json(result);
+        });
+    },
     getArticleById : function(req,res) {
 
         var id = req.param('articleId');

@@ -517,6 +517,15 @@ module.exports = {
             "desc": "Ocean park opened in 1977, is a ",
             "imageUrl":"Article_00001.jpg",
             "categoryId":"0"
+          },
+          {
+            "title": "Clock Tower",
+            "desc": "TThe Clock Tower is a landmark in Hong Kong. It is located on the southern shore of Tsim Sha Tsui, Kowloon. It is the only remnant of the original site of the " +
+            "former Kowloon Station on the Kowloon-Canton Railway. Officially named Former " +
+            "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
+            "Built out of red bricks and granite",
+            "imageUrl":"Article_00003.jpg",
+            "categoryId":"0"
           }
         ]
       },
@@ -528,7 +537,9 @@ module.exports = {
           article : [
             {
               "title": "Sneaker Street",
-              "desc": "Some say it is the greates",
+              "desc": "Some say it is the greates Kowloon-Canton Railway. Officially named Former " +
+              "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
+              "Built out of red bricks and granite",
               "imageUrl":"Article_00002.jpg",
               "categoryId":"0"
             }
@@ -542,7 +553,9 @@ module.exports = {
           article : [
             {
               "title": "1881 Heritage",
-              "desc": "The Former Marine Police Headquarters Compound",
+              "desc": "The Former Marine Police Headquarters Compound Kowloon-Canton Railway. Officially named Former " +
+              "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
+              "Built out of red bricks and granite",
               "imageUrl":"Article_00003.jpg",
               "categoryId":"0"
             }
@@ -556,8 +569,18 @@ module.exports = {
           article : [
             {
               "title": "Sneaker Street",
-              "desc": "Some say it is the greatest gathering of sneakers, Fa Yuen street is ",
+              "desc": "Some say it is the greatest gathering of sneakers, Fa Yuen street is Kowloon-Canton Railway. Officially named Former " +
+              "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
+              "Built out of red bricks and granite ",
               "imageUrl":"Article_00004.jpg",
+              "categoryId":"0"
+            },
+            {
+              "title": "1881 Heritage",
+              "desc": "The Former Marine Police Headquarters Compound Kowloon-Canton Railway. Officially named Former " +
+              "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
+              "Built out of red bricks and granite",
+              "imageUrl":"Article_00003.jpg",
               "categoryId":"0"
             }
           ]

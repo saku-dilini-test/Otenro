@@ -5,8 +5,8 @@
 			<ion-list>
 				<ion-item class="category-ion-item" data-ui-sref="app.item({itemId: item.id})" data-ng-repeat="item in categoryCtrl.items track by $index">
 					<div class="row row-wrap category-items">
-						<div data-ng-if="item.img" class="category-item-image col col-33">
-							<img data-ng-src="{{item.img}}" alt="{{item.title}}" />
+						<div data-ng-if="item.imageUrl" class="category-item-image col col-33">
+							<img data-ng-src="img/article/{{item.imageUrl}}" alt="{{item.title}}" />
 						</div>
 						<div class="category-item-tools col" data-ng-class="{'col-66' : item.img}">
 							<h3 data-ng-bind-html="item.title|trustHtml"></h3>

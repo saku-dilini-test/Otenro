@@ -38,16 +38,22 @@ angular
 			}
 
 			function getItems(params) {
-				return $http.get(routesCfg.wpItems.all(sharedObjects.generateSearchParams(params)))
+				//return $http.get(routesCfg.wpItems.all(sharedObjects.generateSearchParams(params)))
+				//	.then(function(items) {
+				//		return _prepItemsData(items.data);
+				//	});
+				return $http.get(routesCfg.wpItems.all(params))
 					.then(function(items) {
-						return _prepItemsData(items.data);
+						// _transformItemData(items.data);
+						return items.data;
 					});
 			}
 
 			function getItemById(itemId) {
 				return $http.get(routesCfg.wpItems.single(itemId))
 					.then(function(item) {
-						return _transformItemData(item.data);
+						//return _transformItemData(item.data);
+						return item.data;
 					});
 			}
 

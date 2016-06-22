@@ -76,6 +76,7 @@ module.exports.policies = {
     deletePreviewTemp:true,
     getTermsAndConditions: true,
     getArticles : true,
+    getArticleByCategoryId : true,
     getArticleById : true,
     getArticleCategoryByAppId : true,
     getArticleCategoryById : true

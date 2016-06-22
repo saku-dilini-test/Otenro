@@ -213,6 +213,7 @@ module.exports.routes = {
     'GET /templates/getArticleCategoryByAppId' : 'template/TemplateController.getArticleCategoryByAppId',
     'GET /templates/getArticleCategoryById' : 'template/TemplateController.getArticleCategoryById',
     'GET /templates/getArticles' : 'template/TemplateController.getArticles',
+    'GET /templates/getArticleByCategoryId' : 'template/TemplateController.getArticleByCategoryId',
     'GET /templates/getArticleById' : 'template/TemplateController.getArticleById',
 
     /***

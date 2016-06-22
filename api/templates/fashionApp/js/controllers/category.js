@@ -16,18 +16,19 @@ angular
 		function ($q, $stateParams, itemsSvc, categoriesSvc, $scope, $rootScope, appConfig) {
 			'use strict';
 
-			var vm = this,
-				noMoreItemsAvailable = false;
+			var vm = this;
+			vm.noMoreItemsAvailable = false;
 
 
 			vm.items = [];
 			vm.loadData = loadData;
 
 			function loadData() {
-				itemsSvc.getItems({
-					'filters': {'cat': parseInt($stateParams.categoryId, 10)},
-					'params': {'offset': vm.items.length, 'per_page': appConfig.maxItemsPaging}
-				}).then(setItems);
+				//itemsSvc.getItems({
+				//	'filters': {'cat': parseInt($stateParams.categoryId, 10)},
+				//	'params': {'offset': vm.items.length, 'per_page': appConfig.maxItemsPaging}
+				//}).then(setItems);
+				itemsSvc.getItems($stateParams.categoryId).then(setItems);
 			}
 
 			categoriesSvc.getCategory($stateParams.categoryId).then(setCategory);
@@ -40,7 +41,9 @@ angular
 				if (response.length === 0) {
 					vm.noMoreItemsAvailable = true;
 				} else {
-					vm.items = vm.items.concat(response);
+					//vm.items = vm.items.concat(response);
+					vm.noMoreItemsAvailable = true;
+					vm.items = response;
 				}
 				$scope.$broadcast('scroll.infiniteScrollComplete');
 			}

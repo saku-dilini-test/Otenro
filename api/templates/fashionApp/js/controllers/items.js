@@ -27,7 +27,7 @@ angular
 			});
 
 
-			itemsSvc.getItemById(parseInt($stateParams.itemId, 10))
+			itemsSvc.getItemById($stateParams.itemId)
 				.then(setItems)
 				.then(getCategory)
 				.then(setCategory)
@@ -42,7 +42,7 @@ angular
 			}
 
 			function getCategory(response) {
-				return categoriesSvc.getCategory(response.category)
+				return categoriesSvc.getCategory(response.categoryId)
 			}
 
 			function setCategory(response) {
