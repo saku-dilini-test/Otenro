@@ -13,6 +13,9 @@ module.exports = {
     },
     appId : {
       type: 'string'
+    },
+    imageUrl : {
+      type : 'string'
     }
   }
 };

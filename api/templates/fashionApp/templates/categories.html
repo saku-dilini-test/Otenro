@@ -5,7 +5,7 @@
 				<div class="row row-wrap row-no-padding category-items">
 					<ion-item class="col col-50" data-ng-repeat="category in categoriesCtrl.categories track by $index" data-ui-sref="app.category({categoryId: category.id})">
 						<div class="item-image">
-							<img data-ng-if="category.img" data-ng-src="{{category.img}}" alt="{{category.name}}" />
+							<img data-ng-if="category.imageUrl" data-ng-src="img/category/{{category.imageUrl}}" alt="{{category.name}}" />
 							<h3>{{category.name}}</h3>
 						</div>
 					</ion-item>

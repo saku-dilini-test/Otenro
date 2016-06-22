@@ -1,8 +1,9 @@
+(function(angular, undefined) {
+    angular
+        .module('invisionApp')
 
-(function() {
-    angular.module('invisionApp').constant('constants', {
-        SERVER_URL: 'http://localhost:port'
-    })
-})();
+        .constant('constants', {
+            SERVER_URL: 'http://localhost:port'
+        })
 
-
+})(window.angular);

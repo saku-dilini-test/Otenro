@@ -8,7 +8,9 @@ angular
 	.controller('CategoriesController', [
 		'categoriesService',
 		'$ionicLoading',
-		function (categoriesSvc, $ionicLoading) {
+		'$rootScope',
+		'$timeout',
+		function (categoriesSvc, $ionicLoading,$rootScope,$timeout) {
 			'use strict';
 
 			var vm = this;
@@ -21,15 +23,20 @@ angular
 				showDelay: 0
 			});
 
-			categoriesSvc.getCategories()
-				.then(setCategories)
-				.finally(function(){
-					$ionicLoading.hide();
-				});
-
 			function setCategories(categories) {
 				vm.categories = categories;
 			}
+
+			function goToGetCategories() {
+				categoriesSvc.getCategories($rootScope.appId)
+					.then(setCategories)
+					.finally(function(){
+						$ionicLoading.hide();
+					});
+			}
+			$timeout(function () {
+				goToGetCategories();
+			}, 1000);
 
 		}
 	]);

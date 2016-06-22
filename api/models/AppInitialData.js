@@ -498,6 +498,66 @@ module.exports = {
         }
 
       ]
+    },
+    {
+      templateName : 'fashionApp',
+      articleCategory : [{
+        attribute : {
+          "name": "FEATURED CATEGORY",
+          "imageUrl" : 'CatImg_00001.jpg'
+        },
+        article : [
+          {
+            "title": "Ocean Park",
+            "desc": "Ocean park opened in 1977, is a ",
+            "imageUrl":"Article_00001.jpg",
+            "categoryId":"0"
+          }
+        ]
+      },
+        {
+          attribute : {
+            "name": "FASHION",
+            "imageUrl" : 'CatImg_00002.jpg'
+          },
+          article : [
+            {
+              "title": "Sneaker Street",
+              "desc": "Some say it is the greates",
+              "imageUrl":"Article_00002.jpg",
+              "categoryId":"0"
+            }
+          ]
+        },
+        {
+          attribute : {
+            "name": "SCIENCE",
+            "imageUrl" : 'CatImg_00003.jpg'
+          },
+          article : [
+            {
+              "title": "1881 Heritage",
+              "desc": "The Former Marine Police Headquarters Compound",
+              "imageUrl":"Article_00003.jpg",
+              "categoryId":"0"
+            }
+          ]
+        },
+        {
+          attribute : {
+            "name": "Auto",
+            "imageUrl" : 'CatImg_00004.jpg'
+          },
+          article : [
+            {
+              "title": "Sneaker Street",
+              "desc": "Some say it is the greatest gathering of sneakers, Fa Yuen street is ",
+              "imageUrl":"Article_00004.jpg",
+              "categoryId":"0"
+            }
+          ]
+        }
+      ]
     }
 
   ]

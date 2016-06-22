@@ -77,7 +77,8 @@ module.exports.policies = {
     getTermsAndConditions: true,
     getArticles : true,
     getArticleById : true,
-    getArticleCategoryByAppId : true
+    getArticleCategoryByAppId : true,
+    getArticleCategoryById : true
 
   },
 

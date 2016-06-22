@@ -23,8 +23,8 @@ angular
 				return preparedData;
 			}
 
-			function getCategories() {
-				return $http.get(routesCfg.wpCategories.all())
+			function getCategories(params) {
+				return $http.get(routesCfg.wpCategories.all(params))
 					.then(function(response) {
 						return prepCategoriesData(response.data);
 					});

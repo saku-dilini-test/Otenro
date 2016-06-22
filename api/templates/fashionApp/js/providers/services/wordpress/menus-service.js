@@ -16,17 +16,15 @@ angular
 
 				for (var index = 0, dLength = data.length; index < dLength; index++) {
 
-					if (data[index].object === 'category') {
-						data[index].sref = 'app.category({categoryId:' + data[index].object_id + '})';
-					}
+					data[index].sref = 'app.category({categoryId:"'+ data[index].id +'"})';
 
-					if (data[index].object === 'page') {
-						data[index].sref = 'app.page({pageId:' + data[index].object_id + '})';
-					}
-
-					if (data[index].object === 'custom') {
-						data[index].sref = data[index].description;
-					}
+					//if (data[index].object === 'page') {
+					//	data[index].sref = 'app.page({pageId:' + data[index].object_id + '})';
+					//}
+                    //
+					//if (data[index].object === 'custom') {
+					//	data[index].sref = data[index].description;
+					//}
 
 					preparedData.push(data[index]);
 				}
@@ -34,8 +32,8 @@ angular
 				return preparedData;
 			}
 
-			function getMenuByLocation(location) {
-				return $http.get(routesCfg.wpMenus.byLocation(location))
+			function getMenuByLocation(id) {
+				return $http.get(routesCfg.wpMenus.byAppId(id))
 					.then(function(response) {
 						return prepMenuData(response.data);
 					});
