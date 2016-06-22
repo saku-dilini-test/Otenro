@@ -13,10 +13,18 @@ angular
 		'commentsService',
 		'$ionicLoading',
 		'sharedObjects',
-		function ($q, $stateParams, itemsSvc, categoriesSvc, commentsSvc, $ionicLoading, sharedObjects) {
+		'constants',
+		'$rootScope',
+		function ($q, $stateParams, itemsSvc, categoriesSvc, commentsSvc, $ionicLoading,
+				  sharedObjects, constants, $rootScope) {
 			'use strict';
 
 			var vm = this;
+
+			vm.imageUrl =
+				constants.SERVER_URL
+				+"/templates/viewImages?userId="
+				+$rootScope.userId+"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article";
 
 			$ionicLoading.show({
 				content: 'Loading',

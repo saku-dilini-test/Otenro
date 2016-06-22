@@ -4,7 +4,7 @@
 		<ion-content>
 			<ion-item class="ion-item">
 				<div class="item-image">
-					<img data-ng-src="img/article/{{itemCtrl.item.imageUrl}}">
+					<img data-ng-src="{{itemCtrl.imageUrl}}/{{itemCtrl.item.imageUrl}}">
 					<h1 data-ng-bind-html="itemCtrl.item.title|trustHtml"></h1>
 				</div>
 				<div class="item-content article-content">
