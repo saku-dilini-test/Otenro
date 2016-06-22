@@ -155,11 +155,11 @@ module.exports = {
             });
 
             /**
-             * If Only hkRising Details Feed to DB
+             * If hkRising or fashionApp Details Feed to DB
              */
-        }else if(templateName == 'hkRising'){
+        }else if(templateName == 'hkRising' || templateName == 'fashionApp'){
                 var searchAppInitialData = {
-                    'templateName' : 'hkRising'
+                    'templateName' : templateName
                 }
                 AppInitialData.findOne(searchAppInitialData, function(err, appInitData) {
                     if (err) return done(err);

@@ -203,6 +203,18 @@ module.exports = {
     });
 },
 
+    getArticleCategoryById : function(req,res) {
+
+        var id = req.param('categoryId');
+        var searchApp = {
+            id : id
+        };
+        ArticleCategory.findOne().where(searchApp).exec(function (err, artilce) {
+            if (err) return done(err);
+            res.json(artilce);
+        });
+    },
+
     getArticleById : function(req,res) {
 
         var id = req.param('articleId');

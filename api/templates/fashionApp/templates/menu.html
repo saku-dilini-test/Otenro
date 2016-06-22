@@ -11,8 +11,17 @@
 	<ion-side-menu side="left" class="full-page-bckg-menu" data-ng-controller="PrimaryMenuController as menuCtrl">
 		<ion-content>
 			<ion-list>
+				<ion-item menu-close data-ui-sref="app.categories">
+					Home
+				</ion-item>
 				<ion-item menu-close data-ng-repeat="link in menuCtrl.menu track by $index" data-ui-sref="{{link.sref}}">
-					{{link.title}}
+					{{link.name}}
+				</ion-item>
+				<ion-item menu-close data-ui-sref="app.page({pageId : 'help'})">
+					Help
+				</ion-item>
+				<ion-item menu-close data-ui-sref="app.page({pageId : 'termsAndCondition'})">
+					Terms & Conditions
 				</ion-item>
 			</ion-list>
 		</ion-content>

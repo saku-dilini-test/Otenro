@@ -11,8 +11,9 @@ angular
 		'itemsService',
 		'categoriesService',
 		'$scope',
+		'$rootScope',
 		'appConfig',
-		function ($q, $stateParams, itemsSvc, categoriesSvc, $scope, appConfig) {
+		function ($q, $stateParams, itemsSvc, categoriesSvc, $scope, $rootScope, appConfig) {
 			'use strict';
 
 			var vm = this,
@@ -29,7 +30,7 @@ angular
 				}).then(setItems);
 			}
 
-			categoriesSvc.getCategory(parseInt($stateParams.categoryId, 10)).then(setCategory);
+			categoriesSvc.getCategory($stateParams.categoryId).then(setCategory);
 
 			function setCategory(response) {
 				vm.category = response;

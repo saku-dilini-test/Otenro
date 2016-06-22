@@ -8,13 +8,20 @@ angular
 	.controller('PrimaryMenuController', [
 		'menusService',
 		'appConfig',
-		function (menusSvc, appConfig) {
+		'$timeout',
+		'$rootScope',
+		function (menusSvc, appConfig,$timeout,$rootScope) {
 			'use strict';
 
 			var vm = this;
 
-			menusSvc.getMenuByLocation(appConfig.menuLocation)
-				.then(setMenu);
+			function goToGetCategories() {
+				menusSvc.getMenuByLocation($rootScope.appId)
+					.then(setMenu);
+			}
+			$timeout(function () {
+				goToGetCategories();
+			}, 1000);
 
 			function setMenu(menu) {
 				vm.menu = menu;

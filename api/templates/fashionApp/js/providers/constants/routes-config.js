@@ -8,20 +8,21 @@ angular
 	.constant('routesConfig', (function () {
 		'use strict';
 
-		var siteURL = 'http://invision.surfit.mobi/';
+		var siteURL = 'http://localhost:1337/';
 
 		var rootRoutesConfig = {
-			wpMenu: siteURL + 'wp-json/wp-api-menus/v2/',
+			wpMenu: siteURL + 'templates/getArticleCategoryByAppId?appId=',  // OK
 			wpComments: siteURL + 'wp-json/wp/v2/comments',
-			wpCategories: siteURL + 'wp-json/wp/v2/categories',
+			wpCategories: siteURL + 'templates/getArticleCategoryByAppId?appId=', // OK
+			wpCategoriesById: siteURL + 'templates/getArticleCategoryById?categoryId=', // OK
 			wpItems: siteURL + 'wp-json/wp/v2/posts',
 			wpPages: siteURL + 'wp-json/wp/v2/pages'
 		};
 
 		var routesConfig = {
 			wpMenus: {
-				byLocation: function (location) {
-					return rootRoutesConfig.wpMenu + 'menu-locations/' + location;
+				byAppId: function (id) {
+					return rootRoutesConfig.wpMenu + id;
 				}
 			},
 			wpComments: {
@@ -33,11 +34,11 @@ angular
 				}
 			},
 			wpCategories: {
-				all: function () {
-					return rootRoutesConfig.wpCategories;
+				all: function (appId) {
+					return rootRoutesConfig.wpCategories + appId;
 				},
 				single: function (id) {
-					return rootRoutesConfig.wpCategories + '/' + id;
+					return rootRoutesConfig.wpCategoriesById + id;
 				}
 			},
 			wpItems: {
