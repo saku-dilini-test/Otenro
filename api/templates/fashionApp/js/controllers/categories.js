@@ -10,7 +10,8 @@ angular
 		'$ionicLoading',
 		'$rootScope',
 		'$timeout',
-		function (categoriesSvc, $ionicLoading,$rootScope,$timeout) {
+		'constants',
+		function (categoriesSvc, $ionicLoading,$rootScope,$timeout,constants) {
 			'use strict';
 
 			var vm = this;
@@ -24,6 +25,12 @@ angular
 			});
 
 			function setCategories(categories) {
+
+				vm.imageUrl =
+					constants.SERVER_URL
+					+"/templates/viewImages?userId="
+					+$rootScope.userId+"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=category";
+
 				vm.categories = categories;
 			}
 

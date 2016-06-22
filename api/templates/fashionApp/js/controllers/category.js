@@ -13,7 +13,8 @@ angular
 		'$scope',
 		'$rootScope',
 		'appConfig',
-		function ($q, $stateParams, itemsSvc, categoriesSvc, $scope, $rootScope, appConfig) {
+		'constants',
+		function ($q, $stateParams, itemsSvc, categoriesSvc, $scope, $rootScope, appConfig,constants) {
 			'use strict';
 
 			var vm = this;
@@ -22,6 +23,11 @@ angular
 
 			vm.items = [];
 			vm.loadData = loadData;
+
+			vm.imageUrl =
+				constants.SERVER_URL
+				+"/templates/viewImages?userId="
+				+$rootScope.userId+"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article";
 
 			function loadData() {
 				//itemsSvc.getItems({
