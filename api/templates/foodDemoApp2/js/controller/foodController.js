@@ -49,7 +49,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.menuName = $stateParams.categoryName;
 
     $scope.addToCart = function(quantity,price){
-    console.log(price);
     if(quantity == null){
         var alertPopup = $ionicPopup.alert({
           title: 'Please enter a quantity',
