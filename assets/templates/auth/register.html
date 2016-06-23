@@ -5,7 +5,7 @@
       <fieldset>
         <label>First Name</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
-        <input type="text" name="fname" ng-model="user.fname"  required/>
+        <input type="text" name="fname" ng-model="user.fname" ng-enter ="authSignUp(user);"  required/>
         <span class="help-block" ng-show="register.fname.$error.required">
           *
         </span>
@@ -13,7 +13,7 @@
       <fieldset>
         <label>Last Name</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
-        <input type="text" name="lname" ng-model="user.lname"  required/>
+        <input type="text" name="lname" ng-model="user.lname" ng-enter ="authSignUp(user);" required/>
         <span class="help-block" ng-show="register.lname.$error.required">
           *
         </span>
@@ -21,7 +21,7 @@
       <fieldset>
         <label> Email </label>
         <img src="../../../images/question-mark.svg" width="12" height="12" />
-        <input name="email" type="email" style="float:left;" ng-model="user.email" required/>
+        <input name="email" type="email" style="float:left;" ng-model="user.email" ng-enter ="authSignUp(user);" required/>
         <span class="help-block" ng-show="register.email.$error.required">
           *
         </span>
@@ -33,7 +33,7 @@
       <fieldset class="password-area">
         <label>Password</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12">
-        <input  name="password" type="password" ng-model="user.password" ng-minlength="7" compare-to="user.password_confirm" required>
+        <input  name="password" ng-enter ="authSignUp(user);" type="password" ng-model="user.password" ng-minlength="7" compare-to="user.password_confirm" required>
         <span class="help-block" ng-show="register.password.$error.required">
           *
         </span>
@@ -46,7 +46,7 @@
       <fieldset class="password-area reset-margin-right">
         <label> Confirm Password</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
-        <input  name="password_confirm" ng-model="user.password_confirm" type="password" required/>
+        <input  name="password_confirm" ng-enter ="authSignUp(user);" ng-model="user.password_confirm" type="password" required/>
         <span class="help-block" ng-show="register.password_confirm.$error.required">
           *
         </span>
