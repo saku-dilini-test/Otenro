@@ -260,8 +260,6 @@
             };
             stylesService.addBackgroundImage($scope.backgroundImgData)
                 .success(function (res) {
-
-                    console.log("success");
                     $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
                         +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
@@ -272,7 +270,6 @@
                 })
                 .error
             (function (res) {
-                    console.log(res);
                     toastr.error('Cant Change Image', 'Waring', {
                         closeButton: true
                     });
