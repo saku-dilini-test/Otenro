@@ -81,7 +81,7 @@ module.exports = {
         },
         {
             template_name : 'clothingApp',
-            imageUrl : 'clothingApp/clothingApp.png',
+            imageUrl : 'clothingApp/clothing.jpg',
             templateFilesPath:'templates/clothingApp',
             templateCategory:'1'
         }
