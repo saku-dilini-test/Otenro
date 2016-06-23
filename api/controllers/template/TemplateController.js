@@ -247,7 +247,31 @@ module.exports = {
        res.sendfile(config.ME_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
     },
 
-
+    /**
+     * return two dummy comments json object for every request
+     *
+     * @param req
+     * @param res
+     */
+    getCommentsDummy : function(req,res) {
+        var response = [
+            {
+                author : {
+                    avatar : 'img/comments/M9.png',
+                    name : 'M9 Train'
+                },
+                description : 'The Alstom Prima or the Class M9 '
+            },
+            {
+                author : {
+                    avatar : 'img/comments/S12.png',
+                    name : 'S12 Train'
+                },
+                description : 'There will be two S12 (Luxury) sets '
+            }
+        ];
+        res.json(response);
+    },
 
     deletePreviewTemp : function(req,res){
         var appId  = req.param('appId');
