@@ -114,6 +114,22 @@ angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdM
 						controller: 'CommentsController as commentsCtrl'
 					}
 				}
+			})
+			.state('app.help', {
+				url: '/help',
+				views: {
+					'menuContent': {
+						templateUrl: 'templates/help.html'
+					}
+				}
+			})
+			.state('app.terms', {
+				url: '/terms',
+				views: {
+					'menuContent': {
+						templateUrl: 'templates/termsAndCondition.html'
+					}
+				}
 			});
 
 		// if none of the above states are matched, use this as the fallback

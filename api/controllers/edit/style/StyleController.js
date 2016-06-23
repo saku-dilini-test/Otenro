@@ -314,13 +314,10 @@ module.exports = {
      * Update background image given appId
      */
     addBackgroundImage : function(req,res){
-        console.log("AddBackGroundImage");
-        console.log("AppId"+req.body.appId);
         var userId = req.userId;
         var appId = req.body.appId;
         var backImg = req.body.backgroundImg;
         var data = backImg;
-        var backgroundImage = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'backgroundTemp.jpg';
         var backgroundExist = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'background.jpg';
         var backgroundDimensions = sizeOf(backgroundExist);
 
@@ -355,7 +352,9 @@ module.exports = {
         if(typeof data != "undefined"){
 
             var backgroundimageBuffer = decodeBase64Image(data);
+            var type = backgroundimageBuffer.type.replace('image/','');
 
+            var backgroundImage = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'backgroundTemp.'+ type;
             fs.readFile(backgroundExist, function (err, data){
                 if(err){
                     return console.dir(err);

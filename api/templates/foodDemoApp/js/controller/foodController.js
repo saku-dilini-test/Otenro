@@ -4,6 +4,7 @@
 
 mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants) {
 
+    $rootScope.timestamp = new Date().getTime();
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
     $scope.imageURL = constants.SERVER_URL

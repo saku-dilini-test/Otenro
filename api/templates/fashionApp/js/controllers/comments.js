@@ -22,9 +22,14 @@ angular
 				showDelay: 0
 			});
 
-			commentsSvc.getComments({
-				'params': {'post': parseInt($stateParams.itemId, 10)}
-			}).then(setComments)
+			//commentsSvc.getComments({
+			//	'params': {'post': parseInt($stateParams.itemId, 10)}
+			//}).then(setComments)
+			//	.finally(function(){
+			//		$ionicLoading.hide();
+			//	});
+
+			commentsSvc.getComments().then(setComments)
 				.finally(function(){
 					$ionicLoading.hide();
 				});

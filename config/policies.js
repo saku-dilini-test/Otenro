@@ -79,7 +79,8 @@ module.exports.policies = {
     getArticleByCategoryId : true,
     getArticleById : true,
     getArticleCategoryByAppId : true,
-    getArticleCategoryById : true
+    getArticleCategoryById : true,
+    getCommentsDummy : true
 
   },
 

@@ -12,12 +12,12 @@ angular
 
 		var rootRoutesConfig = {
 			wpMenuByAppId: siteURL + 'templates/getArticleCategoryByAppId?appId=',  // OK
-			wpComments: siteURL + 'wp-json/wp/v2/comments',
+			wpComments: siteURL + 'templates/getCommentsDummy', // This part still discussion mode, but get dummy from server
 			wpCategoriesByAppId: siteURL + 'templates/getArticleCategoryByAppId?appId=', // OK
 			wpCategoriesById: siteURL + 'templates/getArticleCategoryById?categoryId=', // OK
 			wpItemsByCatId : siteURL + 'templates/getArticleByCategoryId?categoryId=', // OK
 			wpItemById : siteURL + 'templates/getArticleById?articleId=', // OK
-			wpPages: siteURL + 'wp-json/wp/v2/pages'
+			wpPages: siteURL + '' // This part discussion mode yet
 		};
 
 		var routesConfig = {
@@ -27,11 +27,8 @@ angular
 				}
 			},
 			wpComments: {
-				all: function (params) {
-					return rootRoutesConfig.wpComments + params;
-				},
-				single: function (id) {
-					return rootRoutesConfig.wpComments + '/' + id;
+				all: function () {
+					return rootRoutesConfig.wpComments;
 				}
 			},
 			wpCategories: {
