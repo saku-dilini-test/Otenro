@@ -78,6 +78,12 @@ module.exports = {
             imageUrl : 'fashionApp/fashionApp.png',
             templateFilesPath:'templates/fashionApp',
             templateCategory:'3'
+        },
+        {
+            template_name : 'clothingApp',
+            imageUrl : 'clothingApp/clothingApp.png',
+            templateFilesPath:'templates/clothingApp',
+            templateCategory:'1'
         }
     ]
 };

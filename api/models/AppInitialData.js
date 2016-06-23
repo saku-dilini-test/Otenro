@@ -314,6 +314,118 @@ module.exports = {
         ]
     },
     {
+      templateName : 'clothingApp',
+      secondNavi : [
+        {
+          attribute : {
+            "imageUrl": "a.png",
+            "name": "Shirt",
+            "description": "Shirt description"
+          },
+          thirdNavi : [
+            {
+              "name": "Shirt x",
+              "price": 250,
+              "quantity": 250,
+              "briefDesc" : "Shirt x brief des",
+              "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
+              "imageUrl": "a.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "Shirt y",
+              "price": 350,
+              "quantity": 350,
+              "briefDesc" : "Shirt y brief des",
+              "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "imageUrl": "b.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "Shirt z",
+              "price": 450,
+              "quantity": 450,
+              "briefDesc" : "Shirt z brief des",
+              "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
+              "imageUrl": "c.jpg",
+              "createdDate": Date.now()
+            }
+          ]
+        },{
+          attribute : {
+            "imageUrl": "c.png",
+            "name": "Shirt",
+            "description": "Shirt description"
+          },
+          thirdNavi : [
+            {
+              "name": "Shirt x",
+              "price": 250,
+              "quantity": 250,
+              "briefDesc" : "Shirt x brief des",
+              "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
+              "imageUrl": "a.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "Shirt y",
+              "price": 350,
+              "quantity": 350,
+              "briefDesc" : "Shirt y brief des",
+              "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "imageUrl": "b.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "Shirt z",
+              "price": 450,
+              "quantity": 450,
+              "briefDesc" : "Shirt z brief des",
+              "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
+              "imageUrl": "c.jpg",
+              "createdDate": Date.now()
+            }
+          ]
+        },
+        {
+          attribute : {
+            "imageUrl": "d.png",
+            "name": "Short",
+            "description": "Short description"
+          },
+          thirdNavi : [
+            {
+              "name": "Short x",
+              "price": 250,
+              "quantity": 250,
+              "briefDesc" : "Short x brief des",
+              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "imageUrl": "e.jpg",
+              "createdDate": Date.now()
+            }
+          ]
+        },
+        {
+          attribute : {
+            "imageUrl": "cloth3.png",
+            "name": "Suits",
+            "description": "Short description"
+          },
+          thirdNavi : [
+            {
+              "name": "Beach Suit",
+              "price": 250,
+              "quantity": 250,
+              "briefDesc" : "Short x brief des",
+              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "imageUrl": "cloth3.png",
+              "createdDate": Date.now()
+            }
+          ]
+        }
+        ]
+    },
+    {
       templateName : 'hkRising',
       articleCategory : [{
         attribute : {

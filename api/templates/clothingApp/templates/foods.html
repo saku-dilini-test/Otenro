@@ -1,0 +1,12 @@
+
+<ion-view view-title="{{menuName}}">
+    <ion-content style="background: url(img/background.jpg) center; background-size: cover;">
+           <a ng-repeat="food in foods" href="#/app/foods/{{food.id}}"> 
+           <div class="cards animated zoomIn">
+                <div style="width:100%; height:auto;"><img ng-src="img/thirdNavi/{{food.imageUrl}}"></div>
+                <div style="text-align:center"><h2>{{food.name}}</h2></div>
+                <div style="text-align:left;"><p>{{food.description}}</p></div>
+                <p>{{food.price}}</p></div>
+            </a>
+    </ion-content>
+</ion-view>

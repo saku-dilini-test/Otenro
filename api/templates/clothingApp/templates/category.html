@@ -1,0 +1,15 @@
+<ion-view view-title="Menu">
+    <ion-content style="background: url(img/background.jpg) center; background-size: cover;">
+           <a ng-repeat="category in categories" href="#/app/category/{{category.id}}/{{category.name}}">
+               <div style="text-align:center;">
+               <div class="cards animated zoomIn">
+                    <div style="width:100%; height:auto;">
+                        <img ng-src="img/secondNavi/{{category.imageUrl}}">
+                    </div>
+                    <h2>{{category.name}}</h2>
+                    <p>{{category.description}}</p>
+               </div>
+               </div>
+           </a>
+    </ion-content>
+</ion-view>
