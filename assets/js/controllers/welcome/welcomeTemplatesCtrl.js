@@ -64,7 +64,6 @@
                     'userId':'unknownUser'
                 };
 
-                console.log(appParams);
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
 
                     var url= ME_APP_SERVER+'temp/unknownUser'
