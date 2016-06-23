@@ -150,15 +150,20 @@
                         return mainMenuService.showMainMenuDialog();
                     }
                 },
-                template: '<md-dialog class="stickyDialog" style="width:initial" data-type="{{::dialogCtrl.thing.title}}">'+
-                '<md-content style="text-align:center">'+
-                'Deleting category will delete all the products under that category!</md-content>'+
-                '<div class="md-dialog-buttons">'+
-                                 '<div class="inner-section">'+
-                                     '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">Cancel</md-button>'+
-                                     '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Ok</md-button>'+
-                                 '</div>'+
-                             '</div></md-dialog>'
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                                '<md-content >' +
+                                '<div class="md-dialog-header">' +
+                                    '<h1>Deleting category </h1>' +
+                '                </div> <br>'+
+                                    ' <div style="text-align:center"><lable> Deleting category will delete all the products under that category! </lable></div>' +
+                                    '<br><br><div class="md-dialog-buttons">'+
+                                         '<div class="inner-section">'+
+                                             '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">Cancel</md-button>'+
+                                             '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Ok</md-button>'+
+                                         '</div>'+
+                                    '</div>' +
+                                '</md-content>' +
+                         '</md-dialog>'
             })
 
         };
@@ -274,8 +279,10 @@
                     '#/app/home/'+data.id+'?'+new Date().getTime();
                 mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 toastr.success("Successfully added new navigation", 'Message', {
-                    closeButton: true
+                    closeButton: true,
+
                 });
+                $mdDialog.hide();
             }).error(function(err) {
                 toastr.error(err.message, 'Warning', {
                     closeButton: true
