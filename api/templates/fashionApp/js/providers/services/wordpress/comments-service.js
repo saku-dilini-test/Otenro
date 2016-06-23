@@ -34,10 +34,14 @@ angular
 				};
 			}
 
-			function getComments(params) {
-				return $http.get(routesCfg.wpComments.all(sharedObjects.generateSearchParams(params)))
+			function getComments() {
+				//return $http.get(routesCfg.wpComments.all(sharedObjects.generateSearchParams(params)))
+				//	.then(function(comments) {
+				//		return _prepCommentsData(comments.data);
+				//	});
+				return $http.get(routesCfg.wpComments.all())
 					.then(function(comments) {
-						return _prepCommentsData(comments.data);
+						return comments.data;
 					});
 			}
 

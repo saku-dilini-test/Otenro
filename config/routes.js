@@ -215,6 +215,7 @@ module.exports.routes = {
     'GET /templates/getArticles' : 'template/TemplateController.getArticles',
     'GET /templates/getArticleByCategoryId' : 'template/TemplateController.getArticleByCategoryId',
     'GET /templates/getArticleById' : 'template/TemplateController.getArticleById',
+    'GET /templates/getCommentsDummy' : 'template/TemplateController.getCommentsDummy',
 
     /***
      * Template Auth Controller
