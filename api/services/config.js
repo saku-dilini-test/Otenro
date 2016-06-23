@@ -1,10 +1,10 @@
 
 module.exports = {
 
-    ME_SERVER: '/home/madhuranga/meServer/temp/',
+    ME_SERVER: '/home/prasanna/Desktop/meServer/temp/',
 
     server: {
-        host : 'http://192.168.8.50',
+        host : 'http://localhost',
         port : 1337
     },
 
