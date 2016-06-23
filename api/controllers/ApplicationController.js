@@ -120,7 +120,7 @@ module.exports = {
         /**
          * If Only foodDemoApp or foodDemoApp2 Category & Product Feed to DB
          */
-        if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2') {
+        if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2' || templateName == 'clothingApp') {
             var searchAppInitialData = {
                 'templateName': templateName
             }
