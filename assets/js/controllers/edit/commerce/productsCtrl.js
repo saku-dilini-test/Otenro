@@ -219,7 +219,7 @@
              }
 
         $scope.addProducts = function(file,product ,productFile) {
-        if($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "foodDemoApp2"){
+        if($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "clothingApp" || $scope.categories[0].templateName == "foodDemoApp2"){
             if(file == null){
                    toastr.error('select image', 'Warning', {
                        closeButton: true
