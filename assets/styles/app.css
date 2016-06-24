@@ -360,6 +360,9 @@ colorpicker-alpha,
   left: auto;
   right: -6px;
 }
+.fieldset-default-size {
+    width:250px;
+}
 
 colorpicker-preview {
   display: block;

@@ -8,33 +8,32 @@
                     <div class="md-dialog-header">
                         <div class="md-dialog-header-nav clearfix">
                             <h1 class="pull-left">E-Mail settings</h1>
-
                         </div>
                     </div>
                     <form name="emailDeliveryForm" novalidate>
                         <div class="md-dialog-main">
-                            <fieldset>
+                            <fieldset class="fieldset-default-size">
                                 <label>from email</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="email" name="fromEmail" required ng-model="emailDel.fromEmail"/>
+                                <input  type="email" name="fromEmail" required ng-model="emailDel.fromEmail"/>
                                 <span class="error"
                                       ng-show="emailDeliveryForm.fromEmail.$error.email">Invalid url</span>
-                            </fieldset>
-                            <fieldset>
+                            </fieldset >
+                            <fieldset class="fieldset-default-size">
                                 <label>reply to email</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <input type="email" name="replyToEmail" required ng-model="emailDel.replyToEmail"/>
                                 <span class="error"
                                       ng-show="emailDeliveryForm.replyToEmail.$error.email">Invalid url</span>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="fieldset-default-size">
                                 <label>alert email</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <input type="email" name="alertEmail" required ng-model="emailDel.alertEmail"/>
                                 <span class="error"
                                       ng-show="emailDeliveryForm.alertEmail.$error.email">Invalid url</span>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="fieldset-default-size">
                                 <label>alert at</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <input type="text" name="alertAt" class="me-xs-input reset-inline" required
