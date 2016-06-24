@@ -36,9 +36,9 @@
                             <fieldset class="fieldset-default-size">
                                 <label>alert at</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="alertAt" class="me-xs-input reset-inline" required
+                                <input type="input" name="alertAt" class="me-xs-input reset-inline" required
                                        ng-model="emailDel.alertAt"/>
-                                <span class="percentage-mark">%</span>
+                               <!-- <span>%</span>-->
                             </fieldset>
 
                         </div>
@@ -102,7 +102,8 @@
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <trix-editor angular-trix rows="4" ng-model="OConfirm.orderConfirmedEmail"></trix-editor>
                         </fieldset>
-                        <md-button class="me-default-button" ng-click="testEmail('Order confirm')">Test E-mail</md-button>
+                        <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order confirm')">Test E-mail</md-button>
+
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
@@ -129,7 +130,7 @@
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <trix-editor angular-trix rows="4" ng-model="Ofulfilled.orderFulfilledEmail"></trix-editor>
                         </fieldset>
-                        <md-button class="me-default-button" ng-click="testEmail('Order Fulfilled')">Test E-mail</md-button>
+                        <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order Fulfilled')">Test E-mail</md-button>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
@@ -156,7 +157,7 @@
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <trix-editor angular-trix rows="4" ng-model="ORefund.orderRefundEmail"></trix-editor>
                         </fieldset>
-                        <md-button class="me-default-button" ng-click="testEmail('Order Refund')">Test E-mail</md-button>
+                        <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order Refund')">Test E-mail</md-button>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">

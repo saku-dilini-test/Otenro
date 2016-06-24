@@ -364,6 +364,76 @@ colorpicker-alpha,
     width:250px;
 }
 
+.fieldset-default-size {
+    width:250px;
+}
+
+.icon {
+    position: relative;
+    width:16px;
+    height:16px;
+    margin: 16px;
+}
+
+.icon-plus {
+    background-color: #E9E9E9;
+    border-radius:8px;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top:0;
+    left:0;
+}
+
+.icon-plus:after {
+    background-color: #fff;
+    width: 8px;
+    height: 2px;
+    border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    position: absolute;
+    top:7px;
+    left: 4px;
+    content:"";
+}
+.icon-plus:before {
+    background-color: #fff;
+    width: 2px;
+    height: 8px;
+    border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    position: absolute;
+    top:4px;
+    left: 7px;
+    content:"";
+}
+
+.icon-disc{
+    background-color: #000;
+    border-radius:8px;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top:0;
+    left:0;
+}
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 colorpicker-preview {
   display: block;
   height: 10px;
