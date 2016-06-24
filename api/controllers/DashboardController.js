@@ -9,54 +9,54 @@
 
 module.exports = {
 
-    allApps: function(req, res) {
+    allApps: function (req, res) {
 
         var userId = req.userId;
         var searchApp = {
             userId: userId
         };
-        Application.find(searchApp, function(err, apps) {
+        Application.find(searchApp, function (err, apps) {
             if (err) return done(err);
             res.send(apps);
         });
     },
-    getAllCategory: function (req,res) {
+    getAllCategory: function (req, res) {
 
-        TemplateCategory.find().exec(function(err, category) {
+        TemplateCategory.find().exec(function (err, category) {
             if (err) res.send(err);
             res.send(category);
         });
 
     },
-    getSelectedCategory: function(req,res){
+    getSelectedCategory: function (req, res) {
         var categoryId = req.body.id;
-        if (categoryId == null){
+        if (categoryId == null) {
 
-            Template.find().exec(function(err, apps) {
+            Template.find().exec(function (err, apps) {
                 if (err) res.send(err);
                 res.send(apps);
             });
-        }else{
+        } else {
             var searchApp = {
                 templateCategory: categoryId
             };
 
             console.log(searchApp);
-            Template.find(searchApp, function(err, apps) {
+            Template.find(searchApp, function (err, apps) {
                 if (err) return done(err);
                 res.send(apps);
             });
         }
 
     },
-    getSelectedCategoryDashboard: function(req,res){
+    getSelectedCategoryDashboard: function (req, res) {
         var categoryId = req.body.id;
         var userId = req.userId;
-        if(categoryId == null){
+        if (categoryId == null) {
             var searchApp = {
                 userId: userId
             };
-        }else{
+        } else {
             var searchApp = {
                 templateCategory: categoryId,
                 userId: userId
@@ -65,7 +65,7 @@ module.exports = {
 
 
         console.log(searchApp);
-        Application.find(searchApp, function(err, apps) {
+        Application.find(searchApp, function (err, apps) {
             if (err) return done(err);
             res.send(apps);
         });
@@ -76,22 +76,25 @@ module.exports = {
      * @param req
      * @param res
      */
-    getTemplateMetaData : function (req,res) {
+    getTemplateMetaData: function (req, res) {
         var templateCategoryId = req.param('templateCategoryId');
         var searchQuery = {
-            templateCategoryId : templateCategoryId
+            templateCategoryId: templateCategoryId
         };
         var firstMenuLabel = '';
-        if(templateCategoryId == '2'){
+        if (templateCategoryId == '2') {
             firstMenuLabel = 'Commerce'
         }
-        if(templateCategoryId == '3'){
+        if (templateCategoryId == '3') {
             firstMenuLabel = 'Article'
         }
-        var response = {
-                firstMenuLabel : firstMenuLabel
+        if (templateCategoryId == '1') {
+            firstMenuLabel = 'Commerce'
         }
-        TemplateMetaData.find(searchQuery, function(err, result) {
+        var response = {
+            firstMenuLabel: firstMenuLabel
+        }
+        TemplateMetaData.find(searchQuery, function (err, result) {
             if (err) return done(err);
             response['btnArray'] = result;
             res.send(response);
