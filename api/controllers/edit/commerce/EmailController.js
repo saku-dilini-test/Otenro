@@ -8,6 +8,7 @@ module.exports = {
 
     saveEmailDeliInfo : function(req,res){
 
+
         console.log(req.body);
         var appId = req.param('appId');
         var saveData = req.body;

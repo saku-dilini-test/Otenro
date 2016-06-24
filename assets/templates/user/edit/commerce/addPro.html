@@ -41,11 +41,13 @@
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label for="input-name">Brief Description</label>
-                                    <input type="text" name="briefDesc" ng-model="product.briefDesc" id="input-briefDesc" required />
+                                    <textarea rows="4" cols="50" ng-model="product.briefDesc"></textarea>
+                               <!--     <input type="text" name="briefDesc" ng-model="product.briefDesc" id="input-briefDesc" required />-->
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label for="input-name">Detailed Description</label>
-                                    <input type="text" name="detailedDesc" ng-model="product.detailedDesc" id="input-detailedDesc" required />
+                                    <textarea rows="4" cols="50" ng-model="product.detailedDesc"></textarea>
+                                    <!--<input type="text" name="detailedDesc" ng-model="product.detailedDesc" id="input-detailedDesc" required />-->
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label for="input-name">SKU</label>
@@ -128,7 +130,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-default" ng-click="addVariants(product)">+</button>
+                        <div class="icon icon-plus" ng-click="addVariants(product)">
+                        </div>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
