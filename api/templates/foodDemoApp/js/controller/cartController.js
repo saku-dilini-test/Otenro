@@ -65,6 +65,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             .then(function(res){
                 $rootScope.cart.cartItems = [];
                 $rootScope.cart.cartSize = 0;
+                $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                 $rootScope.cart.totalPrice = 0;
                 $rootScope.cart.totalQuantity = 0;
                 var alertPopup = $ionicPopup.alert({

@@ -49,6 +49,7 @@
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addThirdNavigation',
                     fields: {
+                        id:id,
                         appId:$rootScope.appId,
                         mainId:product.mainId,
                         briefDesc:product.briefDesc,
@@ -57,6 +58,8 @@
                         childId: product.mainId,
                         desc: product.desc,
                         sku: product.sku,
+                        size: variants.size,
+                        weight: variants.weight,
                         price: variants.price,
                         quantity: variants.quantity,
                         type : product.type,
