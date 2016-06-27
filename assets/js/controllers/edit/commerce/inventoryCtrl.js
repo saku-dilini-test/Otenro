@@ -25,7 +25,6 @@
                          })
             }
              $scope.gotoedit = function(item){
-
                  return commerceService.showAddProductsDialog(item);
 //               $state.go('user.editApp',{appId: item.id});
              };

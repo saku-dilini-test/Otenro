@@ -57,6 +57,17 @@ module.exports = {
 
             var thirdN =req.body;
             thirdN.imageUrl = newFileName;
+            if(typeof thirdN.id != 'undefined'){
+                ThirdNavigation.update({id:thirdN.id},thirdN).exec(function(err, appProduct) {
+                    if (err) res.send(err);
+                    res.send({
+                        appId: appProduct,
+                        message: "New Navigation is created!!"
+                    });
+                });
+            }
+            else{
+
             ThirdNavigation.create(thirdN).exec(function(err, appProduct) {
                 if (err) res.send(err);
                 res.send({
@@ -64,6 +75,7 @@ module.exports = {
                     message: "New Navigation is created!!"
                 });
             });
+            }
         });
     },
     updateThirdNaviImage : function(req,res){

@@ -32,19 +32,19 @@ module.exports = {
             type : 'string',
         },
         sku:{
-            type : 'string',
+            type : 'integer',
         },
         price : {
             type : 'integer'
         },
         size: {
-            type: 'string'
+            type: 'integer'
         },
         weight :{
-            type: 'string'
+            type: 'integer'
         },
         quantity :{
-            type: 'string'
+            type: 'integer'
         },
         desc: {
             type: 'string'

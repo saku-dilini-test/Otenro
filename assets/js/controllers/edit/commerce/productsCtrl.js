@@ -81,14 +81,26 @@
                          });
              }
              else{
-                  $scope.selectedTab = current;
-                  $scope.variants=[{
-                      sku: product.sku,
-                      name: product.name,
-                      size: 0,
-                      price: 0,
-                      quantity: 0
-                  }];
+                if(typeof item != 'string'){
+                   $scope.selectedTab = current;
+                   $scope.variants=[{
+                       sku: product.sku,
+                       name: product.name,
+                       size: item.size,
+                       price: item.price,
+                       quantity: item.quantity
+                   }];
+                }
+                else{
+                     $scope.selectedTab = current;
+                     $scope.variants=[{
+                         sku: product.sku,
+                         name: product.name,
+                         size: 0,
+                         price: 0,
+                         quantity: 0
+                     }];
+                }
              }
         }
         else{
@@ -174,13 +186,14 @@
               $scope.selectedTab = current;
             }
         };
-        if( item[0] == undefined){
+        if(typeof item != 'string'){
              commerceService.getUpdates(item.product)
                      .success(function (result) {
                          $scope.product = result[0];
                          $scope.selectedLink = $scope.product.type;
                          $scope.picFile ="templates/viewImages?img=thirdNavi/" + result[0].imageUrl + "&userId="+$scope.userId+"&appId="+$rootScope.appId;
                          if(result[0].size != null){
+                         item.size = result[0].size;
                               $scope.variants=[{
                                 sku: result[0].sku,
                                 name: item.name,
@@ -190,6 +203,7 @@
                               }];
                          }
                          else{
+                         item.size = result[0].weight;
                          $scope.variants=[{
                                sku: result[0].sku,
                                name: item.name,
