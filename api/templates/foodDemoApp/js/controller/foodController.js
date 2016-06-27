@@ -59,12 +59,13 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     }
     else{
          $scope.foodInfo.price = price;
-
+          var total = quantity * price;
         $rootScope.cart.cartItems.push({
             id: $scope.foodInfo.id,
             name: $scope.foodInfo.name,
             qty: quantity,
-            price: $scope.foodInfo.price
+            price: $scope.foodInfo.price,
+            total:total
         });
         $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
         $scope.parentobj.cartSize = $rootScope.cart.cartSize;
