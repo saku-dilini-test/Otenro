@@ -13,8 +13,8 @@ angular
 		'$scope',
 		'$rootScope',
 		'appConfig',
-		'constants',
-		function ($q, $stateParams, itemsSvc, categoriesSvc, $scope, $rootScope, appConfig,constants) {
+		'routesConfig',
+		function ($q, $stateParams, itemsSvc, categoriesSvc, $scope, $rootScope, appConfig,routesConfig) {
 			'use strict';
 
 			var vm = this;
@@ -25,7 +25,7 @@ angular
 			vm.loadData = loadData;
 
 			vm.imageUrl =
-				constants.SERVER_URL
+				routesConfig.wpUrl.SERVER_URL()
 				+"/templates/viewImages?userId="
 				+$rootScope.userId+"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article";
 
