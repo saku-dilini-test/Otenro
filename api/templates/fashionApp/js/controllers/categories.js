@@ -10,8 +10,8 @@ angular
 		'$ionicLoading',
 		'$rootScope',
 		'$timeout',
-		'constants',
-		function (categoriesSvc, $ionicLoading,$rootScope,$timeout,constants) {
+		'routesConfig',
+		function (categoriesSvc, $ionicLoading,$rootScope,$timeout,routesConfig) {
 			'use strict';
 
 			var vm = this;
@@ -27,7 +27,7 @@ angular
 			function setCategories(categories) {
 
 				vm.imageUrl =
-					constants.SERVER_URL
+					routesConfig.wpUrl.SERVER_URL()
 					+"/templates/viewImages?userId="
 					+$rootScope.userId+"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=category";
 
