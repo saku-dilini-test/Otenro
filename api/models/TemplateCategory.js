@@ -1,31 +1,25 @@
 /**
- * Template.js
- * @docs        :: http://sailsjs.org/#!documentation/models
+ *
+ * Template Category.js
+ *
+ *
+ *
+ * Created by amila on 6/27/16.
  */
 
 module.exports = {
 
-    schema: true,
-    attributes: {
-        category_name:{
-            type: 'string'
+        PortFolio : {
+                ID : '1',
+                Name : 'PortFolio'
         },
-        templateCategory: {
-            type: 'string'
-        }
-    },
-    seedData: [
-        {
-            category_name : 'Business',
-            templateCategory : '1'
-            },{
-                category_name : 'Port Folio',
-                templateCategory : '2'
-            },{
-            category_name : 'Media',
-            templateCategory : '3'
+        Business : {
+                ID : '2',
+                Name : 'Business'
+        },
+        Media : {
+                ID : '3',
+                Name : 'Media'
         }
 
-    ]
 };
-

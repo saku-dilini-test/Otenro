@@ -3,6 +3,8 @@
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 
+var TemplateCategory =  require('./TemplateCategory.js');
+
 module.exports = {
 
     schema: true,
@@ -59,31 +61,31 @@ module.exports = {
             template_name : 'foodDemoApp',
             imageUrl : 'foodDeliver/foodDeliver.png',
             templateFilesPath:'templates/foodDemoApp',
-            templateCategory:'2'
+            templateCategory: TemplateCategory.Business.ID
         },
         {
             template_name : 'foodDemoApp2',
             imageUrl : 'foodDeliver2/foodDeliver2.png',
             templateFilesPath:'templates/foodDemoApp2',
-            templateCategory:'2'
-        },
-        {
-            template_name : 'hkRising',
-            imageUrl : 'hkRising/hkRising.png',
-            templateFilesPath:'templates/hkRising',
-            templateCategory:'3'
-        },
-        {
-            template_name : 'fashionApp',
-            imageUrl : 'fashionApp/fashionApp.png',
-            templateFilesPath:'templates/fashionApp',
-            templateCategory:'3'
+            templateCategory: TemplateCategory.Business.ID
         },
         {
             template_name : 'clothingApp',
             imageUrl : 'clothingApp/clothing.jpg',
             templateFilesPath:'templates/clothingApp',
-            templateCategory:'1'
+            templateCategory: TemplateCategory.Business.ID
+        },
+        {
+            template_name : 'hkRising',
+            imageUrl : 'hkRising/hkRising.png',
+            templateFilesPath:'templates/hkRising',
+            templateCategory: TemplateCategory.Media.ID
+        },
+        {
+            template_name : 'fashionApp',
+            imageUrl : 'fashionApp/fashionApp.png',
+            templateFilesPath:'templates/fashionApp',
+            templateCategory: TemplateCategory.Media.ID
         }
     ]
 };

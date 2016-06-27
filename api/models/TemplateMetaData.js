@@ -5,6 +5,8 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
+var TemplateCategory =  require('./TemplateCategory.js');
+
 module.exports = {
 
   attributes: {
@@ -29,9 +31,9 @@ module.exports = {
   },
   seedData: [
 
-      // data for template category 2, menuButtonId Start 1001
+    // data for media category
     {
-      templateCategoryId : '3',
+      templateCategoryId : TemplateCategory.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Publish Article',
@@ -39,7 +41,7 @@ module.exports = {
       menuButtonId : '1001'
     },
     {
-      templateCategoryId : '3',
+      templateCategoryId : TemplateCategory.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Preview Article',
@@ -47,7 +49,7 @@ module.exports = {
       menuButtonId : '1002'
     },
     {
-      templateCategoryId : '3',
+      templateCategoryId : TemplateCategory.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Featured',
@@ -55,7 +57,7 @@ module.exports = {
       menuButtonId : '1003'
     },
     {
-      templateCategoryId : '3',
+      templateCategoryId : TemplateCategory.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Secondary',
@@ -63,7 +65,7 @@ module.exports = {
       menuButtonId : '1004'
     },
     {
-      templateCategoryId : '3',
+      templateCategoryId : TemplateCategory.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Ads',
@@ -71,7 +73,7 @@ module.exports = {
       menuButtonId : '1004'
     },
     {
-      templateCategoryId : '3',
+      templateCategoryId : TemplateCategory.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Subscriptions',
@@ -79,7 +81,7 @@ module.exports = {
       menuButtonId : '1005'
     },
     {
-      templateCategoryId : '3',
+      templateCategoryId : TemplateCategory.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'View Controls',
@@ -87,7 +89,7 @@ module.exports = {
       menuButtonId : '1006'
     },
     {
-      templateCategoryId : '3',
+      templateCategoryId : TemplateCategory.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Payment Activities',
@@ -95,7 +97,7 @@ module.exports = {
       menuButtonId : '1007'
     },
     {
-      templateCategoryId : '3',
+      templateCategoryId : TemplateCategory.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'IPG Integration',
@@ -103,7 +105,7 @@ module.exports = {
       menuButtonId : '1008'
     },
     {
-      templateCategoryId : '3',
+      templateCategoryId : TemplateCategory.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Communication',
@@ -111,7 +113,7 @@ module.exports = {
       menuButtonId : '1009'
     },
     {
-      templateCategoryId : '3',
+      templateCategoryId : TemplateCategory.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Site Settings',
@@ -119,9 +121,9 @@ module.exports = {
       menuButtonId : '1010'
     },
 
-    // data for template category 2, menuButtonId Start 1501
+    // data for business category
     {
-      templateCategoryId : '2',
+      templateCategoryId : TemplateCategory.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Products',
@@ -129,7 +131,7 @@ module.exports = {
       menuButtonId : '1501'
     },
     {
-      templateCategoryId : '2',
+      templateCategoryId : TemplateCategory.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'orders',
@@ -137,7 +139,7 @@ module.exports = {
       menuButtonId : '1502'
     },
     {
-      templateCategoryId : '2',
+      templateCategoryId : TemplateCategory.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Inventory',
@@ -145,7 +147,7 @@ module.exports = {
       menuButtonId : '1503'
     },
     {
-      templateCategoryId : '2',
+      templateCategoryId : TemplateCategory.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Shipping',
@@ -153,7 +155,7 @@ module.exports = {
       menuButtonId : '1504'
     },
     {
-      templateCategoryId : '2',
+      templateCategoryId : TemplateCategory.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Taxes',
@@ -161,7 +163,7 @@ module.exports = {
       menuButtonId : '1505'
     },
     {
-      templateCategoryId : '2',
+      templateCategoryId : TemplateCategory.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'E-mail Settings',
@@ -169,7 +171,7 @@ module.exports = {
       menuButtonId : '1506'
     },
     {
-      templateCategoryId : '2',
+      templateCategoryId : TemplateCategory.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Store Settings',
@@ -177,7 +179,7 @@ module.exports = {
       menuButtonId : '1507'
     },
     {
-      templateCategoryId : '2',
+      templateCategoryId : TemplateCategory.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Payment Activities',
@@ -185,81 +187,8 @@ module.exports = {
       menuButtonId : '1508'
     },
     {
-      templateCategoryId : '2',
+      templateCategoryId : TemplateCategory.Business.ID,
       templateId : '2',
-      menuType : 'MenuButton',
-      menuTitle  : 'IPG Ingegration',
-      menuFunction : '',
-      menuButtonId : '1509'
-    },
-      //Clothing app
-    {
-      templateCategoryId : '1',
-      templateId : '3',
-      menuType : 'MenuButton',
-      menuTitle  : 'Products',
-      menuFunction : 'products.showAddProductsDialog',
-      menuButtonId : '1501'
-    },
-    {
-      templateCategoryId : '1',
-      templateId : '3',
-      menuType : 'MenuButton',
-      menuTitle  : 'orders',
-      menuFunction : 'commerce.showOrderDialog',
-      menuButtonId : '1502'
-    },
-    {
-      templateCategoryId : '1',
-      templateId : '3',
-      menuType : 'MenuButton',
-      menuTitle  : 'Inventory',
-      menuFunction : 'inventory.showInventoryDialog',
-      menuButtonId : '1503'
-    },
-    {
-      templateCategoryId : '1',
-      templateId : '3',
-      menuType : 'MenuButton',
-      menuTitle  : 'Shipping',
-      menuFunction : 'commerce.showShippingDialog',
-      menuButtonId : '1504'
-    },
-    {
-      templateCategoryId : '1',
-      templateId : '3',
-      menuType : 'MenuButton',
-      menuTitle  : 'Taxes',
-      menuFunction : 'commerce.showTaxesDialog',
-      menuButtonId : '1505'
-    },
-    {
-      templateCategoryId : '1',
-      templateId : '3',
-      menuType : 'MenuButton',
-      menuTitle  : 'E-mail Settings',
-      menuFunction : 'commerce.showEmailSettingsDialog',
-      menuButtonId : '1506'
-    },
-    {
-      templateCategoryId : '1',
-      templateId : '3',
-      menuType : 'MenuButton',
-      menuTitle  : 'Store Settings',
-      menuFunction : 'commerce.showStoreSettingsDialog',
-      menuButtonId : '1507'
-    },
-    {
-      templateCategoryId : '1',
-      templateId : '3',
-      menuType : 'MenuButton',
-      menuTitle  : 'Payment Activities',
-      menuFunction : '',
-      menuButtonId : '1508'
-    },
-    {
-      templateCategoryId : '1',
-      templateId : '3',
       menuType : 'MenuButton',
       menuTitle  : 'IPG Ingegration',
       menuFunction : '',
