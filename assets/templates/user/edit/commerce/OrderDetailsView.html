@@ -43,11 +43,11 @@
                 <th>&nbsp;</th>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{oderData.entity.item[0].name}}</td>
-                    <td>{{oderData.entity.item[0].price}}</td>
-                    <td>{{(oderData.entity.item).length}}</td>
-                    <td>{{oderData.entity.amount}} </td>
+                <tr ng-repeat="orders in oderData.entity.item">
+                    <td>{{orders.name}}</td>
+                    <td>{{orders.price}}</td>
+                    <td>{{orders.qty}}</td>
+                    <td>{{orders.total}} </td>
                 </tr>
                 <tr>
                     <td>Total</td>

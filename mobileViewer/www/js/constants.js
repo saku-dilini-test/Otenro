@@ -15,4 +15,4 @@ angular.module('starter')
     public: 'public_role'
   })
 
-  .constant('SERVER_URL', 'http://192.168.8.159:1337/');
+  .constant('SERVER_URL', 'http://192.168.8.157:1337/');
