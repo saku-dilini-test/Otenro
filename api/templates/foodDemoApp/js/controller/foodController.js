@@ -3,7 +3,7 @@
  */
 
 mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants) {
-
+    $scope.buyQuantity=0;
     $rootScope.timestamp = new Date().getTime();
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
@@ -33,15 +33,23 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         $http.get(constants.SERVER_URL + '/templates/getProductById?productId='+$stateParams.foodId)
              .success(function(data) {
                 $scope.foodInfo = data;
+
+                 $scope.productVariants=data.variants;
+
+                 var count = 0;
+                 for (var i=0; i< data.variants.length; i++) {
+                      count = count + data.variants[i].quantity;
+                 }
+                 if (count <= 0){
+                     $scope.foodInfo.buy = "disable";
+                 }else {
+                     $scope.foodInfo.buy = "enable";
+                 }
+
                 if(data.discount){
                     $scope.foodInfo.price = $scope.foodInfo.discount;
                 }
-                if($scope.foodInfo.quantity === undefined){
-                    $scope.foodInfo.buy = "disable";
-                }
-                else{
-                    $scope.foodInfo.buy = "enable";
-                }
+
             }).error(function(err) {
                  alert('warning', "Unable to get Product", err.message);
           });
@@ -49,28 +57,44 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.menuName = $stateParams.categoryName;
 
-    $scope.addToCart = function(quantity,price){
-    if(quantity == null){
-    var alertPopup = $ionicPopup.alert({
-      title: 'Please enter a quantity',
-      template: 'Warning!!!',
-      cssClass: 'ionicPopUp'
-    });
-    }
-    else{
-         $scope.foodInfo.price = price;
-          var total = quantity * price;
-        $rootScope.cart.cartItems.push({
-            id: $scope.foodInfo.id,
-            name: $scope.foodInfo.name,
-            qty: quantity,
-            price: $scope.foodInfo.price,
-            total:total
-        });
-        $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-        $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-        $state.go('app.cart');
-     }
+
+    $scope.addToCart = function() {
+        var quantity = 0;
+        var price = 0;
+        var total = 0;
+        var totalQuantity = 0;
+
+        for (var i=0; i< $scope.productVariants.length; i++) {
+            if (typeof $scope.productVariants[i].buyQuantity == 'undefined'){
+                totalQuantity = totalQuantity + 0;
+            }else {
+                totalQuantity = totalQuantity + $scope.productVariants[i].buyQuantity;
+                quantity = $scope.productVariants[i].buyQuantity;
+                price = $scope.productVariants[i].price;
+                total =  total + (quantity * price);
+            }
+        }
+
+        if(totalQuantity == 0){
+             var alertPopup = $ionicPopup.alert({
+                 title: 'Please enter a quantity',
+                 template: 'Warning!!!',
+                 cssClass: 'ionicPopUp'
+             });
+         }
+         else{
+             $scope.foodInfo.price = price;
+             $rootScope.cart.cartItems.push({
+                 id: $scope.foodInfo.id,
+                 name: $scope.foodInfo.name,
+                 qty: totalQuantity,
+                 price: $scope.foodInfo.price,
+                 total : total
+             });
+             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
+             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+             $state.go('app.cart');
+        }
     }
 
 });

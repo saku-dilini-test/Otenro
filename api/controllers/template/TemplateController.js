@@ -86,12 +86,14 @@ module.exports = {
         var thirdNavi = [];
         ThirdNavigation.findOne(searchApp).exec(function(err, app) {
             if (err) return done(err);
-            PriceAndVariants.findOne({productId: app.id}).exec(function(err, variants){
+            PriceAndVariants.find({productId: app.id}).exec(function(err, variants){
              if (err) console.log(err);
              if(variants != undefined){
-                app.price = variants.price;
+                /*app.price = variants.price;
                 app.quantity = variants.quantity;
-                app.size = variants.size;
+                app.size = variants.size;*/
+                 app.variants = variants;
+                 console.log( "variants " + JSON.stringify(variants));
              }
              res.json(app);
             })
