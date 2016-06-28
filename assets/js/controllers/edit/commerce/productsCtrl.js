@@ -12,7 +12,7 @@
 
         $scope.tmpFile = [ null , null];
         $scope.mainFile = null;
-        
+
         $scope.selection = "weight";
         $scope.userId=$auth.getPayload().id;
         $scope.isDigital = false;
@@ -61,7 +61,7 @@
                     });
                 })
         }
-        
+
         $scope.addType=function(type,current){
 
             $scope.product.type = type;
@@ -121,7 +121,7 @@
             }
         }
         };
-        
+
         $scope.nextStep3Digital = function (current,product,variants) {
             if(variants.price == null){
                 toastr.error('Fill all the fields', 'Warning', {
@@ -429,12 +429,12 @@
                 $scope.File=$scope.tmpFile[file];
             }
         };
-        
+
 
         $scope.deleteFile=function(index){
             $scope.tmpFile[index]=null;
         };
-        
+
         $scope.addFile = function(file){
             var fi=$scope.tmpFile;
             for(var i=0 ; i < fi.length ; i++){
