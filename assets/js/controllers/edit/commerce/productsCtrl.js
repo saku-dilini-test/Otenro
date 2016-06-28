@@ -12,7 +12,7 @@
 
         $scope.tmpFile = [ null , null];
         $scope.mainFile = null;
-        
+
         $scope.selection = "weight";
         $scope.userId=$auth.getPayload().id;
         $scope.isDigital = false;
@@ -61,7 +61,7 @@
                     });
                 })
         }
-        
+
         $scope.addType=function(type,current){
 
             $scope.product.type = type;
@@ -81,14 +81,26 @@
                          });
              }
              else{
-                  $scope.selectedTab = current;
-                  $scope.variants=[{
-                      sku: product.sku,
-                      name: product.name,
-                      size: "",
-                      price: 0,
-                      quantity: 0
-                  }];
+                if(typeof item != 'string'){
+                   $scope.selectedTab = current;
+                   $scope.variants=[{
+                       sku: product.sku,
+                       name: product.name,
+                       size: item.size,
+                       price: item.price,
+                       quantity: item.quantity
+                   }];
+                }
+                else{
+                     $scope.selectedTab = current;
+                     $scope.variants=[{
+                         sku: product.sku,
+                         name: product.name,
+                         size: 0,
+                         price: 0,
+                         quantity: 0
+                     }];
+                }
              }
         }
         else{
@@ -109,7 +121,7 @@
             }
         }
         };
-        
+
         $scope.nextStep3Digital = function (current,product,variants) {
             if(variants.price == null){
                 toastr.error('Fill all the fields', 'Warning', {
@@ -130,7 +142,7 @@
             $scope.inserted = {
                 sku: 0,
                 name: product.name,
-                size: "",
+                size: 0,
                 price: 0,
                 quantity: 0
             };
@@ -174,13 +186,14 @@
               $scope.selectedTab = current;
             }
         };
-        if( item[0] == undefined){
+        if(typeof item != 'string'){
              commerceService.getUpdates(item.product)
                      .success(function (result) {
                          $scope.product = result[0];
                          $scope.selectedLink = $scope.product.type;
                          $scope.picFile ="templates/viewImages?img=thirdNavi/" + result[0].imageUrl + "&userId="+$scope.userId+"&appId="+$rootScope.appId;
                          if(result[0].size != null){
+                         item.size = result[0].size;
                               $scope.variants=[{
                                 sku: result[0].sku,
                                 name: item.name,
@@ -190,6 +203,7 @@
                               }];
                          }
                          else{
+                         item.size = result[0].weight;
                          $scope.variants=[{
                                sku: result[0].sku,
                                name: item.name,
@@ -219,7 +233,7 @@
              }
 
         $scope.addProducts = function(file,product ,productFile) {
-        if($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "foodDemoApp2"){
+        if($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "clothingApp" || $scope.categories[0].templateName == "foodDemoApp2"){
             if(file == null){
                    toastr.error('select image', 'Warning', {
                        closeButton: true
@@ -415,12 +429,12 @@
                 $scope.File=$scope.tmpFile[file];
             }
         };
-        
+
 
         $scope.deleteFile=function(index){
             $scope.tmpFile[index]=null;
         };
-        
+
         $scope.addFile = function(file){
             var fi=$scope.tmpFile;
             for(var i=0 ; i < fi.length ; i++){
