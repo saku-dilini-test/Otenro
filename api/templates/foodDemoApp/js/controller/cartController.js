@@ -14,7 +14,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         var amount = 0;
         for(var i = 0; i < $scope.cartItems.length; i++){
             var product = $scope.cartItems[i];
-            amount = product.price * product.qty;
+            amount = product.total;
             total += (amount);
         }
         $rootScope.cart.totalPrice = total;
