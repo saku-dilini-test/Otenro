@@ -2,9 +2,9 @@
  * Created by udeshikaperera on 31/08/2015.
  */
 (function() {
-    angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService', 'commerceService','articleService','mainMenuService', 'currencyService', 'publishService', 'engageService', 'logoAndTittleService', dialogService]);
+    angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService', 'commerceService','articleService','mainMenuService', 'currencyService', 'publishService', 'engageService', 'logoAndTittleService','aboutUsService', dialogService]);
 
-    function dialogService(stylesService, contactUsService, commerceService, articleService ,mainMenuService, currencyService, publishService, engageService, logoAndTittleService) {
+    function dialogService(stylesService, contactUsService, commerceService, articleService ,mainMenuService, currencyService, publishService, engageService, logoAndTittleService,aboutUsService) {
         return {
             showDialog: function(clickTitle) {
                 if ('styles' == clickTitle)
@@ -17,6 +17,8 @@
                     return commerceService.showAddProductsDialog(clickTitle);
                 if ('contactUs' == clickTitle)
                     return contactUsService.showContactUsDialog(clickTitle);
+                if ('aboutUs' == clickTitle)
+                    return aboutUsService.showAboutUsDialog(clickTitle);
                 if ('currency' == clickTitle)
                     return currencyService.showCurrencyDialog(clickTitle);
                 if ('orders' == clickTitle)
