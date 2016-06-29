@@ -213,14 +213,7 @@
         $scope.siteTypesPlaceHolder = "Ecommerce";
         $scope.languagesPlaceHolder = "English (United Kingdom)";
         $scope.timeAndRegionsPlaceHolder = "(UTC-12:00) International Date Line West";
-        $scope.openHours = [
-        {day:'Sunday'},
-        {day:'Monday'},
-        {day:'Tuesday'},
-        {day:'Wednesday'},
-        {day:'Thursday'},
-        {day:'Friday'},
-        {day:'Saturday'}];
+        $scope.openHours = {};
         $scope.miniLightBoxShow = false;
         $scope.shippingOptionParams = {
               secondLocked:  true,
@@ -409,14 +402,27 @@
                  $scope.options = $scope.currencyList[i];
              }
          }
-         for(var i=0; i<openHours.length; i++){
-            openHours[i].status = openHours[i].status;
-         }
+              alert("openHours " + JSON.stringify(openHours));
+             var openHoursData= {
+                 'weekDaysOpenHour': openHours.weekDaysOpenHour,
+                 'weekDaysOpenMinute': openHours.weekDaysOpenMinute,
+                 'weekDaysCloseHour': openHours.weekDaysCloseHour,
+                 'weekDaysCloseMinute': openHours.weekDaysCloseMinute,
+                 'saturdayOpenHour': openHours.saturdayOpenHour,
+                 'saturdayOpenMinute': openHours.saturdayOpenMinute,
+                 'saturdayCloseHour': openHours.saturdayCloseHour,
+                 'saturdayCloseMinute': openHours.saturdayCloseMinute,
+                 'sundayOpenHour': openHours.sundayOpenHour,
+                 'sundayOpenMinute': openHours.sundayOpenMinute,
+                 'sundayCloseHour': openHours.sundayCloseHour,
+                 'sundayCloseMinute': openHours.sundayCloseMinute
+             };
+
          storeSettings.currencySign=$scope.options.sign,
          storeSettings.currency=$scope.options.currency,
          storeSettings.userId = $scope.userId;
          storeSettings.appId = $rootScope.appId;
-         storeSettings.OpenHours = openHours;
+         storeSettings.OpenHours = openHoursData;
 
           var reqParams={
               currencySign:$scope.options.sign,
@@ -446,12 +452,6 @@
             success(function(data){
                 $scope.storeSettings = data[0];
                 $scope.storeSettings.currency = data[0].currencySign;
-                for(var i=0; i<data[0].OpenHours.length; i++){
-                    var open = new Date(data[0].OpenHours[i].open);
-                    var close = new Date(data[0].OpenHours[i].close);
-                    data[0].OpenHours[i].open = open;
-                    data[0].OpenHours[i].close = close;
-                }
                 $scope.openHours = data[0].OpenHours;
             }).error(function(err){
                 toastr.error(' warning',"Unable to get Store Settings", {closeButton: true});
