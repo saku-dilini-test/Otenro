@@ -1,0 +1,36 @@
+    <md-dialog aria-label="About Us">
+        <md-dialog-content>
+            <form novalidate>
+                <div class="md-dialog-header">
+                    <h1>About Us</h1>
+                </div>
+                <div class="md-dialog-main">
+                    <fieldset>
+                        <label>Heading</label>
+                        <img src="../../../images/question-mark.svg" width="12" height="12" />
+                        <input type="text" name="username" ng-model="about.header" required  />
+                    </fieldset>
+                    <fieldset>
+                        <label>Content</label>
+                        <img src="../../../images/question-mark.svg" width="12" height="12">
+                        <trix-editor angular-trix rows="4" ng-model="about.content"></trix-editor>
+                    </fieldset>
+                </div>
+                <div class="md-dialog-buttons">
+                    <div class="inner-section">
+                        <fieldset class="text-right reset-margin">
+                            <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="addAboutUs(about)">add</md-button>
+                        </fieldset>
+                    </div>
+                </div>
+            </form>
+    </md-dialog-content>
+
+    <!--
+    <div class="dialog-controls clearfix">
+        <button class="md-button" ng-click="answer('cancel')">Cancel</button>
+        <button class="md-button" ng-disabled="!contantUsForm.$valid" ng-click="answer()">Ok</button>
+    </div>
+    -->
+</md-dialog>
