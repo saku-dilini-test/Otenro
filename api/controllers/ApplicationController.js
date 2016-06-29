@@ -39,6 +39,10 @@ module.exports = {
             loginPath = '/#/app/home/firstMenu';
         }
 
+        if(templateName == 'fashionApp'){
+            loginPath = '/#/app/categories';
+        }
+
         var application ={
             appName : req.body.appName,
             appTempPath :tempAppDirPath,
