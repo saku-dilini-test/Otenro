@@ -30,7 +30,7 @@ module.exports = {
             type : 'integer'
         },
         sku : {
-            type : 'integer'
+            type : 'String'
         },
         product : {
             model : 'thirdnavigation'
