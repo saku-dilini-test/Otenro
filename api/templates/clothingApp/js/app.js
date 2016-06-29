@@ -1,4 +1,4 @@
-var mobileApp=angular.module('foodDemoApp', ['ionic']);
+var mobileApp=angular.module('foodDemoApp', ['ionic','satellizer']);
 
 mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy) {
   $ionicPlatform.ready(function() {
@@ -31,12 +31,28 @@ mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy) {
             $rootScope.appName = data.name;
         });
     }
-})
-.config(function($ionicConfigProvider) {
+}).config(function($ionicConfigProvider) {
     $ionicConfigProvider.views.forwardCache(true);
 })
 
+mobileApp.config(['$authProvider','constants', function($authProvider,constants) {
 
+    $authProvider.baseUrl = constants.SERVER_URL;
+    // facebook
+    $authProvider.facebook({
+        clientId: '262852717382326',
+        url: '/templatesAuth/facebook'
+    });
+
+    // google
+    $authProvider.google({
+        clientId: '528602483901-opricfuv2v6iumlilavvljhi9maf1l9f.apps.googleusercontent.com',
+        authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
+        redirectUri: window.location.origin ,
+        url: '/templatesAuth/google'
+    });
+
+}])
 
 mobileApp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider

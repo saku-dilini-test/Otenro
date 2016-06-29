@@ -18,37 +18,4 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
           alert('warning', "Unable to get categories", err.message);
       });
 
-    // $scope.categories = [
-    //{
-    //    "id" : 1,
-    //    "imageUrl": "a.png",
-    //    "name": "Shirt",
-    //    "description": "Shirt description"
-    //},
-    //{
-    //    "id" : 2,
-    //    "imageUrl": "b.png",
-    //    "name": "Shirt",
-    //    "description": "Shirt description"
-    //},
-    //{
-    //    "id" : 3,
-    //    "imageUrl": "c.png",
-    //    "name": "Shirt",
-    //    "description": "Shirt description"
-    //},
-    //{
-    //    "id" : 4,
-    //    "imageUrl": "d.png",
-    //    "name": "Shirt",
-    //    "description": "Shirt description"
-    //},
-    //{
-    //    "id" : 5,
-    //    "imageUrl": "e.png",
-    //    "name": "Shirt",
-    //    "description": "Shirt description"
-    //}
-    //];
-
 });

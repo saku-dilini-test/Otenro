@@ -1,6 +1,5 @@
 <ion-view view-title="{{foodInfo.name}}">
-  <ion-content style="background: url(img/background.jpg) center; background-size: cover;">
-
+  <ion-content style="background: url(img/background.jpg?revision={{timestamp}}) center; background-size: cover;">
 <div class="food">
   <div class="panel">
     <div class="card">
@@ -9,25 +8,33 @@
      </div>
       <div class="item item-text-wrap">
 
-        <div class="animated rubberBand" style="text-align: center; color: #006666"><h3>{{foodInfo.name}}</h3></div>
+          <div class="animated rubberBand" style="text-align: center; color: #006666"><h3>{{foodInfo.name}}</h3></div>
         <p class="animated zoomIn">{{foodInfo.detailedDesc}}</p>
 
 
-        <div class="row">
-            <div class="col2" style="color:#009ddb; font-size:12px;">Qty</div>
-            <div class="col2"><input type="number" ng-model="quantity" style="width:50px"></div>
-            <div class="col2"><button class="button made-easy-button-setting button-small button-calm " ng-click="addToCart(quantity)">
-              Buy
-            </button></div>
+          <div class="row">
+              <div class="col2 font-size:12px ">Size</div>
+              <div class="col2 font-size:12px">Price</div>
+              <div class="col2 font-size:12px">Qty</div>
           </div>
-        </div>
-        <br>
-        <p>{{currency.sign}}  : {{foodInfo.price}}</p>
-
-      </div>
-    </div>
-  </div>
+          <div ng-repeat="variant in productVariants" >
+            <div class="row" ng-if="variant.quantity > 0">
+                <div class="col2 font-size:12px " ng-model="variant.size">{{variant.size}}</div>
+                <div class="col2 font-size:12px" ng-model="variant.price">{{currency.sign}} : {{variant.price}}</div>
+                <div class="col2"><input type="number"  style="width:50px"  ng-model="variant.buyQuantity"></div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col2" ng-if="foodInfo.buy == 'enable'"><button class="button button-small button-calm" ng-click="addToCart(variant)">
+                     Buy
+                   </button>
+              </div>
+          </div>
+       <br>
+     </div>
+   </div>
+ </div>
 </div>
 
-  </ion-content>
+ </ion-content>
 </ion-view>
