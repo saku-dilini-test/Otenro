@@ -1,10 +1,10 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("aboutUsCtrl", [
-        '$scope', '$rootScope', '$mdDialog', 'toastr', 'aboutUsService',
+        '$scope', '$rootScope', '$mdDialog', 'toastr','ME_APP_SERVER','mySharedService','$auth', 'aboutUsService',
         aboutUsCtrl]);
 
-    function aboutUsCtrl($scope, $rootScope, $mdDialog, toastr, aboutUsService) {
+    function aboutUsCtrl($scope, $rootScope, $mdDialog, toastr,ME_APP_SERVER, mySharedService,$auth, aboutUsService) {
 
         $scope.coords = "";
 
@@ -61,6 +61,10 @@
                     toastr.success('Successfully save About Us Data ..... !', 'Awsome!', {
                         closeButton: true
                     });
+                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                        +'/templates/'+$rootScope.appId+'' +
+                        '#/app/aboutUs';
+                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (data, status, headers, config) {
                 toastr.error('Unable to Add', 'Warning', {
                     closeButton: true
