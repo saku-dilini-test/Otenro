@@ -85,7 +85,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
          }
          else{
              $scope.foodInfo.price = price;
-
              $rootScope.cart.cartItems.push({
                  id: $scope.foodInfo.id,
                  name: $scope.foodInfo.name,
