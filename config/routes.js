@@ -48,8 +48,8 @@ module.exports.routes = {
     'POST /auth/facebook': 'AuthController.facebookAuth',
 
     /***
-    * Billing Data
-    * */
+     * Billing Data
+     * */
     'POST /user/editBillingDetails': 'UserController.editBillingDetails',
     'GET /user/getBillingDetails': 'UserController.getBillingDetails',
 
@@ -63,18 +63,18 @@ module.exports.routes = {
     'POST /api/dashboard/getSelectedCategoryDashboard': 'DashboardController.getSelectedCategoryDashboard',
     'POST /app/designApps': 'ApplicationController.designApps',
     'POST /app/viewTemplate': 'ApplicationController.viewTemplate',
-    'GET /api/getTemplateMetaData' : 'DashboardController.getTemplateMetaData',
-     /***
-         * Store Settings Data
-         *
-         * */
-     'POST /edit/saveStoreSettings': 'edit/commerce/UserSettingsController.saveStoreSettings',
-     'POST /edit/savePolicies': 'edit/commerce/UserSettingsController.savePolicies',
-     'GET /edit/showStoreSettings': 'edit/commerce/UserSettingsController.showStoreSettings',
-     'GET /edit/getAllSiteType': 'edit/commerce/UserSettingsController.getAllSiteType',
-     'GET /edit/getAllMeasurementType': 'edit/commerce/UserSettingsController.getAllMeasurementType',
-     'GET /edit/getAllTimeAndRegion': 'edit/commerce/UserSettingsController.getAllTimeAndRegion',
-     'GET /edit/showPolicies': 'edit/commerce/UserSettingsController.showPolicies',
+    'GET /api/getTemplateMetaData': 'DashboardController.getTemplateMetaData',
+    /***
+     * Store Settings Data
+     *
+     * */
+    'POST /edit/saveStoreSettings': 'edit/commerce/UserSettingsController.saveStoreSettings',
+    'POST /edit/savePolicies': 'edit/commerce/UserSettingsController.savePolicies',
+    'GET /edit/showStoreSettings': 'edit/commerce/UserSettingsController.showStoreSettings',
+    'GET /edit/getAllSiteType': 'edit/commerce/UserSettingsController.getAllSiteType',
+    'GET /edit/getAllMeasurementType': 'edit/commerce/UserSettingsController.getAllMeasurementType',
+    'GET /edit/getAllTimeAndRegion': 'edit/commerce/UserSettingsController.getAllTimeAndRegion',
+    'GET /edit/showPolicies': 'edit/commerce/UserSettingsController.showPolicies',
 
 
     /***
@@ -97,7 +97,7 @@ module.exports.routes = {
     'POST /edit/addFonts': 'edit/style/StyleController.addFonts',
     'GET /edit/viewImages': 'EditController.viewImages',
     'POST /edit/buildSource': 'EditController.buildSource',
-    'GET /edit/getSelectedApp' : 'EditController.getSelectedApp',
+    'GET /edit/getSelectedApp': 'EditController.getSelectedApp',
 
     //'POST /edit/updateCategory' : '',
     //'POST /edit/checkCategory': '',
@@ -116,6 +116,9 @@ module.exports.routes = {
     'POST /edit/addWebInfo': 'edit/setting/ContactUsController.addWebInfo',
     'POST /edit/addGoogleMapInfo': 'edit/setting/ContactUsController.addGoogleMapInfo',
     'POST /edit/addOpenHoursInfo': 'edit/setting/ContactUsController.addOpenHoursInfo',
+
+
+    'POST /edit/addAboutUs': 'edit/setting/AboutUsController.addAboutUs',
 
     'GET /edit/getMainNavigation': 'edit/commerce/MainNavigationController.getMainNavigation',
     'GET /edit/getSecondNavigation': 'edit/commerce/SecondNavigationController.getSecondNavigation',
@@ -145,24 +148,24 @@ module.exports.routes = {
     'GET /edit/getAllCurrency': 'edit/setting/CurrencyController.getAllCurrency',
 
 
-      'GET /edit/getContactUs' :'edit/setting/ContactUsController.getContactUs',
-      'POST /edit/setPublishDetails' :'edit/publish/publishDetailController.setPublishDetails',
-      'GET /edit/getAllLanguages' :'edit/publish/publishDetailController.getAllLanguages',
-      'GET /edit/getAllRatings' :'edit/publish/publishDetailController.getContentRatings',
-      'GET /edit/getLanguage' :'edit/publish/publishDetailController.getLanguage',
-      'GET /edit/getAllPrimaryCategories' :'edit/publish/publishDetailController.getAllPrimaryCategories',
-      'GET /edit/getAllSecondaryCategories' :'edit/publish/publishDetailController.getAllSecondaryCategories',
+    'GET /edit/getContactUs': 'edit/setting/ContactUsController.getContactUs',
+    'POST /edit/setPublishDetails': 'edit/publish/publishDetailController.setPublishDetails',
+    'GET /edit/getAllLanguages': 'edit/publish/publishDetailController.getAllLanguages',
+    'GET /edit/getAllRatings': 'edit/publish/publishDetailController.getContentRatings',
+    'GET /edit/getLanguage': 'edit/publish/publishDetailController.getLanguage',
+    'GET /edit/getAllPrimaryCategories': 'edit/publish/publishDetailController.getAllPrimaryCategories',
+    'GET /edit/getAllSecondaryCategories': 'edit/publish/publishDetailController.getAllSecondaryCategories',
 
     /**
      * Edit / Article Data
      */
-    'GET /edit/getArticles' :'edit/article/articleController.getArticles',
-    'POST /edit/publishArticle' : 'edit/article/articleController.publishArticle',
-    'POST /edit/deleteArticle' : 'edit/article/articleController.deleteArticle',
-    'POST /edit/addCategory' : 'edit/article/articleController.addCategory',
-    'POST /edit/editCategory' : 'edit/article/articleController.editCategory',
-    'GET /edit/getCategoryList' : 'edit/article/articleController.getCategoryList',
-    'POST /edit/deleteCategory' : 'edit/article/articleController.deleteCategory',
+    'GET /edit/getArticles': 'edit/article/articleController.getArticles',
+    'POST /edit/publishArticle': 'edit/article/articleController.publishArticle',
+    'POST /edit/deleteArticle': 'edit/article/articleController.deleteArticle',
+    'POST /edit/addCategory': 'edit/article/articleController.addCategory',
+    'POST /edit/editCategory': 'edit/article/articleController.editCategory',
+    'GET /edit/getCategoryList': 'edit/article/articleController.getCategoryList',
+    'POST /edit/deleteCategory': 'edit/article/articleController.deleteCategory',
 
     /**
      *InventoryController
@@ -187,8 +190,8 @@ module.exports.routes = {
     'POST /edit/insertFlatRateData': 'edit/commerce/ShippingController.insertFlatRateData',
 
     /**
-    * EngageController
-    */
+     * EngageController
+     */
     'POST /edit/sendPushMessage': 'edit/engage/EngageController.sendPushMessage',
     'GET /edit/getMessageDetails': 'edit/engage/EngageController.getMessageDetails',
 
@@ -210,12 +213,12 @@ module.exports.routes = {
      * Template Data for App Category Media
      */
 
-    'GET /templates/getArticleCategoryByAppId' : 'template/TemplateController.getArticleCategoryByAppId',
-    'GET /templates/getArticleCategoryById' : 'template/TemplateController.getArticleCategoryById',
-    'GET /templates/getArticles' : 'template/TemplateController.getArticles',
-    'GET /templates/getArticleByCategoryId' : 'template/TemplateController.getArticleByCategoryId',
-    'GET /templates/getArticleById' : 'template/TemplateController.getArticleById',
-    'GET /templates/getCommentsDummy' : 'template/TemplateController.getCommentsDummy',
+    'GET /templates/getArticleCategoryByAppId': 'template/TemplateController.getArticleCategoryByAppId',
+    'GET /templates/getArticleCategoryById': 'template/TemplateController.getArticleCategoryById',
+    'GET /templates/getArticles': 'template/TemplateController.getArticles',
+    'GET /templates/getArticleByCategoryId': 'template/TemplateController.getArticleByCategoryId',
+    'GET /templates/getArticleById': 'template/TemplateController.getArticleById',
+    'GET /templates/getCommentsDummy': 'template/TemplateController.getCommentsDummy',
 
     /***
      * Template Auth Controller
@@ -228,12 +231,12 @@ module.exports.routes = {
     /***
      * Template Order Controller
      */
-    'POST /templatesOrder/saveOrder' : 'template/TemplateOrderController.saveOrder',
+    'POST /templatesOrder/saveOrder': 'template/TemplateOrderController.saveOrder',
 
     /***
-    * Template Inventory Controller
-    */
-    'POST /templatesInventory/updateInventory' : 'template/TemplateOrderController.updateInventory',
+     * Template Inventory Controller
+     */
+    'POST /templatesInventory/updateInventory': 'template/TemplateOrderController.updateInventory',
     /***
      * MobileViewer Data
      **/
