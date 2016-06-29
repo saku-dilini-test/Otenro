@@ -155,9 +155,28 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('aboutUsCtrl', function ($scope, $rootScope, $ionicLoading) {
+    .controller('aboutUsCtrl', function ($scope, $rootScope, $http,$ionicLoading, constants) {
         $scope.appName = $rootScope.appName;
         $scope.aboutUs = "A guide to things to see and do in Hong Kong. This is a demo app built using Otenro. Please visit www.otenro.com for further information.";
+
+        var data = {
+            appId: $rootScope.appId
+        }
+
+        $http.post(constants.SERVER_URL + "/edit/getAboutUsData", data)
+            .success(function (data) {
+                    console.log(data);
+                    $scope.header = data.header;
+                    $scope.content = data.content;
+                    //$state.go('app.category');
+                },
+                function (err) {
+                    $ionicPopup.alert({
+                        title: 'About us Data loading error!',
+                        template: 'Please check your connection!'
+                    });
+                });
+
 
     })
 
