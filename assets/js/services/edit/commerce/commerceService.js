@@ -58,8 +58,6 @@
                         childId: product.mainId,
                         desc: product.desc,
                         sku: product.sku,
-                        size: variants.size,
-                        weight: variants.weight,
                         price: variants.price,
                         quantity: variants.quantity,
                         type : product.type,
