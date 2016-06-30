@@ -120,6 +120,7 @@ module.exports.routes = {
 
     'POST /edit/addAboutUs': 'edit/setting/AboutUsController.addAboutUs',
     'POST /edit/getAboutUsData': 'edit/setting/AboutUsController.getAboutUsData',
+    'GET /edit/getAboutUsData': 'edit/setting/AboutUsController.getAboutUsData',
 
     'GET /edit/getMainNavigation': 'edit/commerce/MainNavigationController.getMainNavigation',
     'GET /edit/getSecondNavigation': 'edit/commerce/SecondNavigationController.getSecondNavigation',

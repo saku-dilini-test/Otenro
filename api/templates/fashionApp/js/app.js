@@ -123,6 +123,15 @@ angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdM
 					}
 				}
 			})
+			.state('app.aboutus', {
+				url: '/aboutus',
+				views: {
+					'menuContent': {
+						templateUrl: 'templates/aboutUs.html',
+						controller: 'AboutUsController as aboutUsCtrl'
+					}
+				}
+			})
 			.state('app.terms', {
 				url: '/terms',
 				views: {
