@@ -128,6 +128,15 @@
     margin-bottom: 20px;
 }
 
+/* ----- Terms Page ----- */
+.made-easy-terms {
+    background: url(../img/background.jpg) center;
+    background-size: cover;
+}
+.made-easy-terms .content {
+    text-align: center;
+}
+
 /*------- Button Setting ------- */
 .made-easy-button-create-account {
     background-color: #FFBF0A;
