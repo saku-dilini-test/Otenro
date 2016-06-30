@@ -92,6 +92,58 @@
 }
 
 
+/* ----- Contact Us Page ----- */
+.made-easy-contactUs {
+    background: url(../img/background.jpg) center;
+    background-size: cover;
+}
+.made-easy-contactUs .header{}
+.made-easy-contactUs .header .header-image {
+    width: 100%;
+    height: auto;
+}
+.made-easy-contactUs .content {
+    text-align: center;
+}
+.made-easy-contactUs .content .last {
+    margin-bottom: 20px;
+}
+.made-easy-contactUs .bottom {
+    margin-top: 2.5%;
+}
+
+/* ----- About Us Page ----- */
+.made-easy-aboutUs {
+    background: url(../img/background.jpg) center;
+    background-size: cover;
+}
+.made-easy-aboutUs .header{}
+.made-easy-aboutUs .header .header-image {
+    width: 100%;
+    height: auto;
+}
+.made-easy-aboutUs .content {
+    text-align: center;
+    padding: 8px;
+}
+.made-easy-aboutUs .content .last {
+    margin-bottom: 20px;
+}
+
+/*------- Button Setting ------- */
+.made-easy-button-create-account {
+    background-color: #FFBF0A;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius:4px;
+    width: 94%;
+    margin: 10px;
+}
+
 /* ------------------- */
 
 h7 {

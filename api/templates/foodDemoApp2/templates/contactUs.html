@@ -1,23 +1,25 @@
 <ion-view view-title="Contact Us">
-    <ion-content style="background: url(img/background.jpg) center; background-size: cover;">
+    <ion-content class="made-easy-contactUs">
         <div class="card animated bounceInDown">
-        <div class="header_image"><img src="img/contact.jpg" width="100%" height="auto"/></div>
-            <h2 style="text-align: center;">Contact Us</h2>
-            <div class="list">
-                <div class="contact">
+            <div class="header">
+                <div class="header-image">
+                    <img src="img/contactUs.jpg"/>
+                </div>
+            </div>
+            <div class="content made-easy-content-font">
+                <div>
                     Email : {{email}}
                 </div>
-                <div class="contact">
-                    Telphone : {{telPhone}}
+                <div>
+                    Tel phone : {{telPhone}}
                 </div>
-                <div class="contact" style="margin-bottom:20px;">
+                <div class="last">
                     Address : {{address}}
                 </div>
             </div>
         </div>
-        <div class="panel">
-            <br>
-            <div class="create-account-btm2" ng-click="singUp()">Call Now</div>
+        <div class="bottom">
+            <div class="made-easy-button-create-account" ng-click="singUp()">Call Now</div>
         </div>
     </ion-content>
 </ion-view>
