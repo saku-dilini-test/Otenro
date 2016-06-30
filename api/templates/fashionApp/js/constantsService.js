@@ -20,6 +20,7 @@
                 wpCategoriesById: siteURL + '/templates/getArticleCategoryById?categoryId=', // OK
                 wpItemsByCatId : siteURL + '/templates/getArticleByCategoryId?categoryId=', // OK
                 wpItemById : siteURL + '/templates/getArticleById?articleId=', // OK
+                wpAboutUs : siteURL + '/edit/getAboutUsData?appId=', // OK
                 wpPages: siteURL + '', // This part discussion mode yet,
                 wpServerUrl : siteURL
             };
@@ -33,6 +34,11 @@
                 wpComments: {
                     all: function () {
                         return rootRoutesConfig.wpComments;
+                    }
+                },
+                wpAboutUs: {
+                    aboutUs: function (appId) {
+                        return rootRoutesConfig.wpAboutUs + appId;
                     }
                 },
                 wpCategories: {
