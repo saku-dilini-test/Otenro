@@ -24,7 +24,11 @@
             },
             getTemplateMetaData:function(templateCategoryId){
                 return $http.get(SERVER_URL +'api/getTemplateMetaData?templateCategoryId='+templateCategoryId);
-            }
+            },
+            getApplicationData : function(appId){
+                console.log("appId appId appId " + appId)
+            return  $http.get(SERVER_URL + 'edit/getApplicationData?appId='+appId);
+        }
         }
     }
 })();

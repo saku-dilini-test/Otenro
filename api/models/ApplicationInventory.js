@@ -48,7 +48,7 @@ module.exports = {
             price: 1500,
             quantity: '100',
             sale: 1000,
-            sku: '#1536',
+            sku: '1536',
             discount: 10
         }
     ]

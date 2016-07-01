@@ -699,7 +699,6 @@ module.exports = {
         }
       ]
     }
-
   ]
 };
 

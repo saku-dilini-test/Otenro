@@ -313,5 +313,15 @@ module.exports = {
         });
          });
 
-    }
+    },
+
+    getApplicationData :function(req,res){
+    Application.findOne({'id':req.param('appId')}).exec(function(err, application) {
+        if (err) {
+            res.send(err);
+        }else {
+            res.json(application);
+        }
+
+    })}
 };

@@ -1,9 +1,9 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("MainMenuCtrl", ['$scope', '$mdDialog', '$rootScope', 'mainMenuService','$http',
-        'commerceService','toastr','mySharedService','ME_APP_SERVER','$auth', MainMenuCtrl]);
+        'commerceService','toastr','mySharedService','ME_APP_SERVER','$auth','dashboardService', MainMenuCtrl]);
 
-    function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,mySharedService,ME_APP_SERVER,$auth) {
+    function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,mySharedService,ME_APP_SERVER,$auth,dashboardService) {
 
         $scope.tmpImage = [ null , null];
         $scope.mainImg = null;
@@ -234,8 +234,20 @@
         };
 
         $scope.newMenu = function () {
-            mainMenuService.showAddMenuDialog();
+            dashboardService. getApplicationData($rootScope.appId).success(function(data) {
+               if(data.templateCategory=='2'){
+                   mainMenuService.showAddMenuDialog();
+               }else if (data.templateCategory=='3') {
+                   mainMenuService.showAddCategoryDialog();
+               }
+           }).success(function(data) {
+           }).error(function(err) {
+               toastr.error(err.message, 'Warning', {
+                   closeButton: true
+               });
+           });
         };
+
 
         $scope.addImage = function(img){
             var im = $scope.tmpImage;
@@ -265,6 +277,7 @@
         };
 
         $scope.addMenu = function(file,menu){
+
             mainMenuService.addMenu(file,$rootScope.appId,menu.name).success(function(data) {
                 $scope.menuItems.push({
                     id :   data.id,
@@ -272,6 +285,7 @@
                     link : data.link,
                     icon : data.icon,
                     appId : data.appId,
+
                 });
             }).success(function(data) {
                 $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
@@ -289,6 +303,31 @@
                 });
             });
         };
+
+        $scope.addNewCategory = function(file,menu){
+
+            mainMenuService.addNewCategory(file,$rootScope.appId,menu.name).success(function(data) {
+                $scope.menuItems.push({
+                    id :   data.id,
+                    name : data.name,
+                    appId : data.appId,
+                });
+            }).success(function(data) {
+                $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                    +'/templates/'+$rootScope.appId+'' +
+                    '#/app/home/'+data.id+'?'+new Date().getTime();
+                mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                toastr.success("Successfully added new navigation", 'Message', {
+                    closeButton: true,
+
+                });
+                $mdDialog.hide();
+            }).error(function(err) {
+                toastr.error(err.message, 'Warning', {
+                    closeButton: true
+                });
+            });
+        }
 
         $scope.edit = function(scope){
             var nodeData = scope.$modelValue;

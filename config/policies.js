@@ -27,7 +27,8 @@ module.exports.policies = {
   'ApplicationController': {
     //'*': ['jwtAuth']
     designApps :true,
-    viewTemplate:true
+    viewTemplate:true,
+    getApplicationData:true,
   },
 
   'DashboardController': {

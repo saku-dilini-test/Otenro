@@ -1,0 +1,45 @@
+<md-dialog aria-label="Edit Child Menu">
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>Add Menu</h1>
+        </div>
+        <div class="md-dialog-main">
+            <form name="catForm">
+                <fieldset>
+                    <label for="input-title">Name</label>
+                    <input type="text" name="name" ng-model="menu.name" id="input-title" required />
+                    <i ng-show="catForm.name.$error.required"></i>
+                </fieldset>
+                <br>
+                <fieldset class="col-2">
+                    <div class="file-upload-wrapper clearfix">
+                        <p class="file-upload-msg">Select a image to upload</p>
+                        <div class="pull-left">
+                            <div class="me-file-upload rounded">
+                                <div class="upload-wrapper">
+                                    <input type="button" ngf-select ng-model="picFile" ngf-accept="image/*"
+                                           aria-invalid="true" ngf-change="addImage(picFile)" required/>
+                                    <span>select image</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploaded-section clearfix">
+                        <div class="uploaded-new-image">
+                            <p>Selected image</p>
+                            <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                 height="150"/>
+                            <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150"  required />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
+                <md-button class="me-default-button" ng-click="addNewCategory(mainImg,menu)">Ok</md-button>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>
