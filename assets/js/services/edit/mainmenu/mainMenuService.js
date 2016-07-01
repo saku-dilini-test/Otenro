@@ -81,6 +81,20 @@
 
                 });
             },
+            showAddCategoryDialog: function(menu){
+                return $mdDialog.show({
+                    controller: 'MainMenuCtrl',
+                    templateUrl: 'user/edit/mainmenu/addCategory.html',
+                    clickOutsideToClose: true,
+                    locals : {
+                        menu : menu
+                    }
+                }).then(function(answer) {
+
+                },function() {
+
+                });
+            },
 
             showChildImageDialog: function(imageUrl,child){
                 return $mdDialog.show({
@@ -120,6 +134,16 @@
             addMenu: function(file,appId,name){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addNewMenu',
+                    fields: {
+                        'appId' : appId,
+                        'name' : name,
+                    },
+                    file: file
+                });
+            },
+            addNewCategory:function(file,appId,name){
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/addNewCategory',
                     fields: {
                         'appId' : appId,
                         'name' : name,

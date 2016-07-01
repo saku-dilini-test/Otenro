@@ -114,6 +114,32 @@ module.exports = {
         });
     },
 
+    addNewCategory : function (req,res) {
+        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
+
+        req.file('file').upload({
+            dirname: require('path').resolve(dePath)
+        },function (err, uploadedFiles) {
+            if (err) return res.send(500, err);
+
+            var newFileName=Date.now()+'.png';
+            fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
+                if (err) return res.send(err);
+            });
+
+            var articleCategoryattribute =req.body;
+                articleCategoryattribute.imageUrl = newFileName;
+            ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+                if (err){
+                    res.send(err) 
+                }else{
+                    res.json(articleCategory);
+                }
+
+            });
+        });
+    },
+
     deleteItem : function (req,res) {
     MainNavigation.find({id: req.body.id}).exec(function(err,main){
         if (err) res.send(err);

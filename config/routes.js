@@ -81,7 +81,7 @@ module.exports.routes = {
      * Edit Data
      *
      * */
-
+    'GET /edit/getApplicationData': 'ApplicationController.getApplicationData',
     'POST /edit/addStyles': 'edit/style/StyleController.addStyles',
     'POST /edit/getAppSettings': 'edit/style/StyleController.getAppSettings',
     'POST /edit/addStyleImage/addHeaderImage': 'edit/style/StyleController.addHeaderImage',
@@ -128,6 +128,7 @@ module.exports.routes = {
     //'POST /templates/specificSecondNavi' : 'edit/commerce/MainNavigationController',
     //'POST /templates/specificThirdNavi': 'edit/commerce/MainNavigationController',
     'POST /edit/addNewMenu': 'edit/commerce/MainNavigationController.addNewNavi',
+    'POST /edit/addNewCategory': 'edit/commerce/MainNavigationController.addNewCategory',
     'POST /edit/addChildMenu': 'edit/commerce/SecondNavigationController.addNewNavi',
     'POST /edit/updateSecondNavi': 'edit/commerce/SecondNavigationController.updateSecondNavi',
     'POST /edit/addSubChild': 'edit/commerce/ThirdNavigationController.addNewNavi',
