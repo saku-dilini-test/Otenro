@@ -696,6 +696,54 @@ module.exports = {
               "categoryId":"0"
             }
           ]
+        },
+        {
+          attribute : {
+            "name": "Environement",
+            "imageUrl" : 'CatImg_00005.jpg'
+          },
+          article : [
+            {
+              "title": "Sneaker Street",
+              "desc": "Some say it is the greatest gathering of sneakers, Fa Yuen street is Kowloon-Canton Railway. Officially named Former " +
+              "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
+              "Built out of red bricks and granite ",
+              "imageUrl":"Article_00005.jpg",
+              "categoryId":"0"
+            },
+            {
+              "title": "1881 Heritage",
+              "desc": "The Former Marine Police Headquarters Compound Kowloon-Canton Railway. Officially named Former " +
+              "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
+              "Built out of red bricks and granite",
+              "imageUrl":"Article_00005.jpg",
+              "categoryId":"0"
+            }
+          ]
+        },
+        {
+          attribute : {
+            "name": "Sport",
+            "imageUrl" : 'CatImg_00006.jpg'
+          },
+          article : [
+            {
+              "title": "Sneaker Street",
+              "desc": "Some say it is the greatest gathering of sneakers, Fa Yuen street is Kowloon-Canton Railway. Officially named Former " +
+              "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
+              "Built out of red bricks and granite ",
+              "imageUrl":"Article_00006.jpg",
+              "categoryId":"0"
+            },
+            {
+              "title": "1881 Heritage",
+              "desc": "The Former Marine Police Headquarters Compound Kowloon-Canton Railway. Officially named Former " +
+              "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
+              "Built out of red bricks and granite",
+              "imageUrl":"Article_00006.jpg",
+              "categoryId":"0"
+            }
+          ]
         }
       ]
     }
