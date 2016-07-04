@@ -1262,6 +1262,9 @@ md-dialog{
     background-color: #f4f5f4;
     text-decoration: none;
 }
+.product-name-column {
+    width: 150px;
+}
 .selected {
 background-color: #f4f5f4;
 }
