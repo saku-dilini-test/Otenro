@@ -285,10 +285,30 @@ input[type='number'] + .me-percentage-placeholder{
     border-radius: 0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
+}
+.me-default-button-preview{
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #666;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.75em;
+    font-weight: 600;
+    height: 37px;
+    line-height: 35px;
+    letter-spacing: 3px;
+    padding: 0 10px 0 13px;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
     float: left;
 }
 
-.me-default-button:hover{
+.me-default-button:hover,
+.me-default-button-preview:hover{
     text-decoration: none;
     border: 1px solid #666;
     color: #666;
