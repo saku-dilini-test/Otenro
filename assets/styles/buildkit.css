@@ -285,6 +285,7 @@ input[type='number'] + .me-percentage-placeholder{
     border-radius: 0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
+    float: left;
 }
 
 .me-default-button:hover{
