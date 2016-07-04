@@ -711,6 +711,12 @@ legend{
     width: 280px;
 }
 
+.col-2-product{
+    float: left;
+    margin-right: 41px;
+    width: 100%;
+}
+
 .col-3{
     float: left;
     margin-right: 20px;
