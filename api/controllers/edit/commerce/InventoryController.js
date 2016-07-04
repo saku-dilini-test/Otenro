@@ -72,26 +72,26 @@ module.exports = {
         var lng=body.length;
         for(var i=0 ; i < lng ; i++){
             var inventory;
-            if(body[i].variant == undefined){
-                inventory = {
-                   appId: body[i].appId,
-                   id : body[i].id,
-                   childId: body[i].childId,
-                   name : body[i].name,
-                   sale: body[i].sale,
-                   sku: body[i].sku,
-                   discount: body[i].discount,
-                   product : body[i]
-                }
-            }
-            else{
+//            if(body[i].variant == undefined){
+//                inventory = {
+//                   appId: body[i].appId,
+//                   id : body[i].id,
+//                   childId: body[i].childId,
+//                   name : body[i].name,
+//                   sale: body[i].sale,
+//                   sku: body[i].sku,
+//                   discount: body[i].discount,
+//                   product : body[i]
+//                }
+//            }
+//            else{
                  inventory={
                     appId: body[i].appId,
                     id : body[i].id,
                     childId: body[i].childId,
                     name : body[i].name,
-                    price: body[i].variant.price,
-                    quantity: body[i].variant.quantity,
+                    price: body[i].price,
+                    quantity: body[i].quantity,
                     sale: body[i].sale,
                     sku: body[i].sku,
                     discount: body[i].discount,
@@ -101,7 +101,7 @@ module.exports = {
                     price : inventory.price,
                     quantity : inventory.quantity,
                  }
-            }
+//            }
             ApplicationInventory.update({ id :inventory.id },inventory).exec(function(err,r){
                 if (err) return done(err);
                 PriceAndVariants.update({ productId : r[0].id}, variant).exec(function(err,variants){

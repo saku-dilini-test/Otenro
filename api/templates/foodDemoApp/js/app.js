@@ -147,6 +147,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
     }
   })
   .state('app.payment', {
+      cache: false,
       url: '/payment',
       views: {
           'menuContent': {
@@ -156,6 +157,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       }
   })
   .state('app.cart', {
+    cache: false,
     url: '/cart',
     views: {
       'menuContent': {
@@ -165,6 +167,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
     }
   })
   .state('app.deliverDetails', {
+      cache: false,
       url: '/deliverDetails',
       params:{
         item: null

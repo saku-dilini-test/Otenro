@@ -35,10 +35,10 @@
                                     </td>
                                     <td ng-model="inventory.sku">{{inventory.sku}}</td>
                                     <td><a href="" ng-model="inventory.name" ng-click="gotoedit(inventory)">{{inventory.name}}</a></td>
-                                    <td><input type="number" name="quantity" ng-model="inventory.quantity" /></td>
-                                    <td><input type="number" ng-model="inventory.price" /></td>
+                                    <td><input type="number" min="0" name="quantity" ng-model="inventory.quantity" /></td>
+                                    <td><input type="number" min="0" ng-model="inventory.price" /></td>
                                     <!--<td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()"><input type="number" ng-model="inventory.sale"/></a></td>-->
-                                    <td class="sale-yes"><input style="color:red" type="number" ng-model="inventory.discount" /></td>
+                                    <td class="sale-yes"><input style="color:red" type="number" min="0" ng-model="inventory.discount" /></td>
                                     <td><br ><a class="btn-delete" data-nodrag ng-click="deletePro($index,inventory)"></a></td>
                                 </tr>
                             </tbody>
