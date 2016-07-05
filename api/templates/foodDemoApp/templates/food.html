@@ -20,7 +20,8 @@
                 <div class="col2 font-size:12px" ng-model="variant.price">{{currency.sign}} : {{variant.price}}</div>
                 <div class="col2"><input type="number"  style="width:50px"  ng-model="variant.buyQuantity"></div>
             </div>
-          </div>
+          <p class="animated zoomIn" style="color:red" ng-if="variant.buyQuantity > variant.quantity && variant.quantity != 1">Please enter a quantity of {{variant.quantity}} or less.</p>
+          <p class="animated zoomIn" style="color:red" ng-if="variant.buyQuantity > variant.quantity && variant.quantity == 1">Please enter a quantity of {{variant.quantity}}.</p>
           <div class="row">
               <div class="col2" ng-if="foodInfo.buy == 'enable'"><button class="button button-small button-calm" ng-click="addToCart(variant)">
                      Buy
