@@ -91,6 +91,33 @@
   border-radius: 3px;
 }
 
+/* ----- Second Navigation Page ----- */
+.made-easy-second-navigation {
+    background: url(../img/background.jpg) center;
+    background-size: cover;
+}
+
+/* ----- Third Navigation Page ----- */
+.made-easy-third-navigation {
+    background: url(../img/background.jpg) center;
+    background-size: cover;
+}
+
+/* ----- View Page ----- */
+.made-easy-view {
+    background: url(../img/background.jpg) center;
+    background-size: cover;
+}
+.made-easy-view .item-name {
+    text-align: center;
+    color: #006666;
+}
+.made-easy-view .item-buy-quantity{
+    width: 50px;
+}
+.made-easy-view .item-error-message{
+    color: red;
+}
 
 /* ----- Contact Us Page ----- */
 .made-easy-contactUs {

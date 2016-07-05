@@ -1,12 +1,18 @@
-
 <ion-view view-title="{{menuName}}">
-    <ion-content style="background: url(img/background.jpg) center; background-size: cover;">
-           <a ng-repeat="food in foods" href="#/app/foods/{{food.id}}"> 
+    <ion-content class="made-easy-third-navigation">
+       <a ng-repeat="food in foods" href="#/app/foods/{{food.id}}">
            <div class="cards animated zoomIn">
-                <div style="width:100%; height:auto;"><img ng-src="{{imageURL}}/{{food.imageUrl}}"></div>
-                <div style="text-align:center"><h2>{{food.name}}</h2></div>
-                <div style="text-align:left;"><p>{{food.briefDesc}}</p></div>
-                <p>{{currency.sign}} : {{food.price}}</p></div>
-            </a>
+               <div class="header">
+                   <div class="header-image">
+                       <img ng-src="{{imageURL}}/{{food.imageUrl}}">
+                   </div>
+               </div>
+               <div class="content">
+                   <h2>{{food.name}}</h2>
+                   <p>{{food.briefDesc}}</p>
+                   <p>{{currency.sign}} : {{food.price}}</p>
+               </div>
+           </div>
+        </a>
     </ion-content>
 </ion-view>
