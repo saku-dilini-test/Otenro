@@ -1,0 +1,21 @@
+<ion-view view-title="Home">    
+  <ion-content class="padding" >  
+    <div class="cards cards-home" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">
+        <img src="img/item/{{item.imgUrl}}" width="70%">
+        <h3>{{item.name}}  {{item.price}}</h3>
+        <p>{{item.description}}</p>     
+
+        <button ng-disabled="!(isEnableLeftButton)" ng-click="onSwipeLeft()" class="button">Left</button>
+        <button ng-disabled="!(isEnableRightButton)" ng-click="onSwipeRight()" class="button">Right</button>
+
+
+        <br>  
+        <br>
+        <br>  
+        <button>ORDER NOW</button>
+        <br>
+        <br>
+        <button>GO TO MENU</button>
+    </div>
+  </ion-content>
+</ion-view>
