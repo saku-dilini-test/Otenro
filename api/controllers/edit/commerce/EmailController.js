@@ -11,14 +11,30 @@ module.exports = {
 
         console.log(req.body);
         var appId = req.param('appId');
+        var searchApp = {
+            appId: appId
+        };
         var saveData = req.body;
         saveData.appId = appId;
 
-        UserEmail.create(saveData).exec(function(err, appProduct) {
-            if (err) res.send(err);
-            res.send({
-                message: "Email Settings has been added"
-            });
+        UserEmail.update(searchApp, saveData).exec(function (err, app) {
+            if (app.length == 0) {
+                UserEmail.create(saveData).exec(function (err, appAboutUs) {
+                    if (err) res.send(err);
+
+                    res.send({
+                        appId: appAboutUs.appId,
+
+
+                        message: "Email Settings has been added !"
+                    });
+                });
+            } else {
+                res.send({
+                    appId: req.body.appId,
+                    message: "Email Settings has been Updated !"
+                });
+            }
         });
     },
     updateEmailSettings : function(req,res){
