@@ -3,7 +3,7 @@
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 
-var TemplateCategory =  require('./TemplateCategory.js');
+var TemplateCategoryDetails =  require('./TemplateCategoryDetails.js');
 
 module.exports = {
 
@@ -61,31 +61,31 @@ module.exports = {
             template_name : 'foodDemoApp',
             imageUrl : 'foodDeliver/foodDeliver.png',
             templateFilesPath:'templates/foodDemoApp',
-            templateCategory: TemplateCategory.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
             template_name : 'foodDemoApp2',
             imageUrl : 'foodDeliver2/foodDeliver2.png',
             templateFilesPath:'templates/foodDemoApp2',
-            templateCategory: TemplateCategory.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
             template_name : 'clothingApp',
             imageUrl : 'clothingApp/clothing.jpg',
             templateFilesPath:'templates/clothingApp',
-            templateCategory: TemplateCategory.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
             template_name : 'hkRising',
             imageUrl : 'hkRising/hkRising.png',
             templateFilesPath:'templates/hkRising',
-            templateCategory: TemplateCategory.Media.ID
+            templateCategory: TemplateCategoryDetails.Media.ID
         },
         {
             template_name : 'fashionApp',
             imageUrl : 'fashionApp/fashionApp.png',
             templateFilesPath:'templates/fashionApp',
-            templateCategory: TemplateCategory.Media.ID
+            templateCategory: TemplateCategoryDetails.Media.ID
         }
     ]
 };
