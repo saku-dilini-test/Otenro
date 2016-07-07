@@ -1,25 +1,30 @@
 /**
- *
- * Template Category.js
- *
- *
- *
- * Created by amila on 6/27/16.
+ * Template.js
+ * @docs        :: http://sailsjs.org/#!documentation/models
  */
 
 module.exports = {
 
-        PortFolio : {
-                ID : '1',
-                Name : 'PortFolio'
+    schema: true,
+    attributes: {
+        category_name: {
+            type: 'string'
         },
-        Business : {
-                ID : '2',
-                Name : 'Business'
-        },
-        Media : {
-                ID : '3',
-                Name : 'Media'
+        imageUrl: {
+            type: 'string'
+        }
+    },
+    seedData: [
+        {
+            category_name: 'Business',
+            imageUrl: 'resturant/codecanyon.png'
+        }, {
+            category_name: 'Port Folio',
+            imageUrl: 'resturant/codecanyon.png'
+        }, {
+            category_name: 'Media',
+            imageUrl: 'resturant/codecanyon.png'
         }
 
+    ]
 };
