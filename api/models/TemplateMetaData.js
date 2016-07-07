@@ -5,7 +5,7 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-var TemplateCategory =  require('./TemplateCategory.js');
+var TemplateCategoryDetails =  require('./TemplateCategoryDetails.js');
 
 module.exports = {
 
@@ -33,7 +33,7 @@ module.exports = {
 
     // data for media category
     {
-      templateCategoryId : TemplateCategory.Media.ID,
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Publish Article',
@@ -41,7 +41,7 @@ module.exports = {
       menuButtonId : '1001'
     },
     {
-      templateCategoryId : TemplateCategory.Media.ID,
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Preview Article',
@@ -49,7 +49,7 @@ module.exports = {
       menuButtonId : '1002'
     },
     {
-      templateCategoryId : TemplateCategory.Media.ID,
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Featured',
@@ -57,7 +57,7 @@ module.exports = {
       menuButtonId : '1003'
     },
     {
-      templateCategoryId : TemplateCategory.Media.ID,
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Secondary',
@@ -65,7 +65,7 @@ module.exports = {
       menuButtonId : '1004'
     },
     {
-      templateCategoryId : TemplateCategory.Media.ID,
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Ads',
@@ -73,7 +73,7 @@ module.exports = {
       menuButtonId : '1004'
     },
     {
-      templateCategoryId : TemplateCategory.Media.ID,
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Subscriptions',
@@ -81,7 +81,7 @@ module.exports = {
       menuButtonId : '1005'
     },
     {
-      templateCategoryId : TemplateCategory.Media.ID,
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'View Controls',
@@ -89,7 +89,7 @@ module.exports = {
       menuButtonId : '1006'
     },
     {
-      templateCategoryId : TemplateCategory.Media.ID,
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Payment Activities',
@@ -97,7 +97,7 @@ module.exports = {
       menuButtonId : '1007'
     },
     {
-      templateCategoryId : TemplateCategory.Media.ID,
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'IPG Integration',
@@ -105,7 +105,7 @@ module.exports = {
       menuButtonId : '1008'
     },
     {
-      templateCategoryId : TemplateCategory.Media.ID,
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Communication',
@@ -113,7 +113,7 @@ module.exports = {
       menuButtonId : '1009'
     },
     {
-      templateCategoryId : TemplateCategory.Media.ID,
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Site Settings',
@@ -123,7 +123,7 @@ module.exports = {
 
     // data for business category
     {
-      templateCategoryId : TemplateCategory.Business.ID,
+      templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Add a product',
@@ -131,7 +131,7 @@ module.exports = {
       menuButtonId : '1501'
     },
     {
-      templateCategoryId : TemplateCategory.Business.ID,
+      templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'orders',
@@ -139,7 +139,7 @@ module.exports = {
       menuButtonId : '1502'
     },
     {
-      templateCategoryId : TemplateCategory.Business.ID,
+      templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Inventory',
@@ -147,7 +147,7 @@ module.exports = {
       menuButtonId : '1503'
     },
     {
-      templateCategoryId : TemplateCategory.Business.ID,
+      templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Shipping',
@@ -155,7 +155,7 @@ module.exports = {
       menuButtonId : '1504'
     },
     {
-      templateCategoryId : TemplateCategory.Business.ID,
+      templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Taxes',
@@ -163,7 +163,7 @@ module.exports = {
       menuButtonId : '1505'
     },
     {
-      templateCategoryId : TemplateCategory.Business.ID,
+      templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'E-mail Settings',
@@ -171,7 +171,7 @@ module.exports = {
       menuButtonId : '1506'
     },
     {
-      templateCategoryId : TemplateCategory.Business.ID,
+      templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Store Settings',
@@ -179,7 +179,7 @@ module.exports = {
       menuButtonId : '1507'
     },
     {
-      templateCategoryId : TemplateCategory.Business.ID,
+      templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Payment Activities',
@@ -187,7 +187,7 @@ module.exports = {
       menuButtonId : '1508'
     },
     {
-      templateCategoryId : TemplateCategory.Business.ID,
+      templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'IPG Ingegration',
