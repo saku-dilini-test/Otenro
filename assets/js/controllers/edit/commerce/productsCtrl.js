@@ -96,7 +96,6 @@
                      $scope.variants=[{
                          sku: product.sku,
                          name: product.name,
-                         size: 0,
                          price: 0,
                          quantity: 0
                      }];
@@ -114,7 +113,6 @@
               $scope.variants=[{
                   sku: product.sku,
                   name: product.name,
-                  size: 0,
                   price: 0,
                   quantity: 0
               }];
@@ -142,7 +140,6 @@
             $scope.inserted = {
                 sku: 0,
                 name: product.name,
-                size: 0,
                 price: 0,
                 quantity: 0
             };
