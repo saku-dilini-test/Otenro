@@ -82,6 +82,12 @@ module.exports = {
             templateCategory: TemplateCategoryDetails.Media.ID
         },
         {
+            template_name : 'ECommerceApp',
+            imageUrl : 'ECommerceApp/ECommerceApp.png',
+            templateFilesPath:'templates/ECommerceApp',
+            templateCategory: TemplateCategoryDetails.Media.ID
+        },
+        {
             template_name : 'fashionApp',
             imageUrl : 'fashionApp/fashionApp.png',
             templateFilesPath:'templates/fashionApp',
