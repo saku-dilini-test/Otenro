@@ -1,0 +1,15 @@
+<ion-view view-title="Our Stores">
+  <ion-content class="made-easy-aboutUs">      
+      <div class="cards cards-ourStores">
+          <div class="google-map-area"> Map Here </div>
+          <div ng-repeat="store in stores">
+              <p>{{store.name}}</p>
+              <address>{{store.address}}</address>                  
+          </div>          
+      </div>
+      <div class="cards cards-social-share">
+            <button>Share On Facebook</button>
+            <button>Share on Twitter</button>
+      </div>
+  </ion-content>
+</ion-view>

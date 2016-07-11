@@ -1,0 +1,73 @@
+/** ----------- Start Custom update Css Class ---------- **/
+
+.made-easy-backgroundColor{
+    background-color: inherit;
+}
+.made-easy-navigationBarColor{
+    background-color: inherit;
+}
+.made-easy-footerColor{
+    background-color: inherit;
+}
+.made-easy-header-font{
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+.made-easy-content-font{
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+.made-easy-footer-font{
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+.made-easy-button-setting{
+    background-color: inherit;
+    font-family: inherit;
+    border-width: inherit;
+    border-radius: inherit;
+}
+
+
+/* ----- Contact Us Page ----- */
+.made-easy-contactUs {
+    background: url(../img/background.jpg) center;
+    background-size: cover;
+}
+.made-easy-contactUs .header{}
+.made-easy-contactUs .header .header-image {
+    width: 100%;
+    height: auto;
+}
+.made-easy-contactUs .content {
+    text-align: center;
+}
+.made-easy-contactUs .content .last {
+    margin-bottom: 20px;
+}
+.made-easy-contactUs .bottom {
+    margin-top: 2.5%;
+}
+
+/* ----- Our Stores Page ----- */
+.made-easy-aboutUs {
+    background: url(../img/background.jpg) center;
+    background-size: cover;
+}
+.made-easy-aboutUs .header{}
+.made-easy-aboutUs .header .header-image {
+    width: 100%;
+    height: auto;
+}
+.made-easy-aboutUs .content {
+    text-align: center;
+    padding: 8px;
+}
+.made-easy-aboutUs .content .last {
+    margin-bottom: 20px;
+}
+
+/* ------------------- */
