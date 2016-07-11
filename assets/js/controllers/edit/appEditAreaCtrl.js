@@ -3,10 +3,10 @@
  */
 (function(){
     angular.module('appEdit').controller('AppEditAreaCtrl',[
-        '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER','toastr','mySharedService','$interval','dashboardService',
+        '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER','toastr','mySharedService','$interval','dashboardService','$mdDialog',
         AppEditAreaCtrl]);
 
-    function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,toastr,mySharedService,$interval,dashboardService){
+    function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,toastr,mySharedService,$interval,dashboardService,$mdDialog){
 
         $rootScope.bodyClass = 'appEdit';
 
@@ -70,6 +70,32 @@
         $scope.fonts = {
             font : 'Arial',
             fontSize : 11
+        };
+
+        $scope.temporaryMessage = function (scope) {
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+
+                    this.confirm = function click(){
+                        $mdDialog.hide();
+                    }
+                },
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                '<md-content >' +
+                '<div class="md-dialog-header">' +
+                '<h1>Coming soon !!!!!</h1>' +
+                '                </div> <br>'+
+                ' <div style="text-align:center"><lable> This Feature will be coming soon! </lable></div>' +
+                '<br><br><div class="md-dialog-buttons">'+
+                '<div class="inner-section">'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Ok</md-button>'+
+                '</div>'+
+                '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
+
         };
 
     }
