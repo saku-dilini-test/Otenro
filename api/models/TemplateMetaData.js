@@ -190,7 +190,7 @@ module.exports = {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
-      menuTitle  : 'IPG Ingegration',
+      menuTitle  : 'IPG Integration',
       menuFunction : '',
       menuButtonId : '1509'
     }
