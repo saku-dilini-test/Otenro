@@ -19,6 +19,12 @@
     $http,$state,ME_APP_SERVER,$auth,toastr) {
         welcomeTemplatesResource.getTemplates().success(function(data){
             $scope.templates = data;
+            for(var i = 0; i < data.length ; i++){
+                if(data[i].template_name == $stateParams.tempName){
+                    $scope.templateViewName = data[i].templateViewName;
+                    $scope.templateViewDesc = data[i].templateViewDesc;
+                }
+            }
         });
 
         $scope.userId = $stateParams.userId;

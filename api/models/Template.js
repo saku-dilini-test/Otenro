@@ -12,6 +12,12 @@ module.exports = {
         template_name:{
             type: 'string'
         },
+        templateViewName: {
+            type: 'string'
+        },
+        templateViewDesc: {
+            type: 'string'
+        },
         imageUrl: {
             type: 'string'
         },
@@ -25,6 +31,8 @@ module.exports = {
     seedData: [
         {
             template_name : 'codecanyon',
+            templateViewName : 'Rum codecanyon',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'resturant/codecanyon.png',
             templateFilesPath:'templates/codecanyon',
             templateCategory:'1'
@@ -41,54 +49,72 @@ module.exports = {
         // },
         {
             template_name : 'pizzaHut',
+            templateViewName : 'Rum Pizza',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'resturant/pizzHut.png',
             templateFilesPath:'templates/pizzaHut',
             templateCategory:'2'
         },
         {
             template_name : 'florist',
+            templateViewName : 'Rum Florist',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'resturant/florist.png',
             templateFilesPath:'templates/florist',
             templateCategory:'3'
         },
         {
             template_name : 'pizzaNew',
+            templateViewName : 'Rum PizzaNew',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'resturant/pizzNew.png',
             templateFilesPath:'templates/pizzaNew',
             templateCategory:'3'
         },
         {
             template_name : 'foodDemoApp',
+            templateViewName : 'Rum Food',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'foodDeliver/foodDeliver.png',
             templateFilesPath:'templates/foodDemoApp',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
             template_name : 'foodDemoApp2',
+            templateViewName : 'Rum Food2',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'foodDeliver2/foodDeliver2.png',
             templateFilesPath:'templates/foodDemoApp2',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
             template_name : 'clothingApp',
+            templateViewName : 'Rum Cloth',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'clothingApp/clothing.jpg',
             templateFilesPath:'templates/clothingApp',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
             template_name : 'hkRising',
+            templateViewName : 'Rum Rising',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'hkRising/hkRising.png',
             templateFilesPath:'templates/hkRising',
             templateCategory: TemplateCategoryDetails.Media.ID
         },
         {
             template_name : 'ECommerceApp',
+            templateViewName : 'Rum ECommerce',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'ECommerceApp/ECommerceApp.png',
             templateFilesPath:'templates/ECommerceApp',
             templateCategory: TemplateCategoryDetails.Media.ID
         },
         {
             template_name : 'fashionApp',
+            templateViewName : 'Rum Fashion',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'fashionApp/fashionApp.png',
             templateFilesPath:'templates/fashionApp',
             templateCategory: TemplateCategoryDetails.Media.ID
