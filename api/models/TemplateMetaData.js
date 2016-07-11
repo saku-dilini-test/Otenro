@@ -134,7 +134,7 @@ module.exports = {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
-      menuTitle  : 'orders',
+      menuTitle  : 'Orders',
       menuFunction : 'commerce.showOrderDialog',
       menuButtonId : '1502'
     },
