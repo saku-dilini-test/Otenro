@@ -15,7 +15,6 @@
     font-weight: 400;
     height: 39px;
     letter-spacing: 1px;
-    line-height: 60px;
     margin: 0;
     text-transform: uppercase;
 }
@@ -23,14 +22,13 @@
 .obl-dashboard-header p{
     color: #959595;
     float: left;
-    font-size: 12px;
+    font-size: 19px;
     height: 39px;
     letter-spacing: 1px;
-    line-height: 67px;
     margin: 0;
     text-align: center;
     text-transform: uppercase;
-    width: 82%;
+    width: 83.7%;
 }
 
 .obl-dashboard-header .template-categories li{
@@ -74,10 +72,11 @@
 
 .obl-dashboard-header .template-categories{
     float: right;
-    margin: 0 350px 0 0;
+    margin: 28px 29.8% 0 0;
     padding: 0;
     height: 39px;
     line-height: 58px;
+    font-weight: 800 !important;
 }
 
 .obl-dashboard-apps{
