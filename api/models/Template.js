@@ -85,12 +85,6 @@ module.exports = {
             template_name : 'ECommerceApp',
             imageUrl : 'ECommerceApp/ECommerceApp.png',
             templateFilesPath:'templates/ECommerceApp',
-            templateCategory: TemplateCategory.Media.ID
-        },
-        {
-            template_name : 'ECommerceApp',
-            imageUrl : 'ECommerceApp/ECommerceApp.png',
-            templateFilesPath:'templates/ECommerceApp',
             templateCategory: TemplateCategoryDetails.Media.ID
         },
         {
