@@ -22,7 +22,7 @@
                         <div class="menu-controls">
                             <a class="btn-delete" data-nodrag ng-click="removes(this)"></a>
 
-                            <a class="btn-add-sub reset-margin-right" data-nodrag ng-click="newSubItem(this)"></a>
+                            <a class="btn-add-sub reset-margin-right" ng-if="topLevel != 'secondNavi'" data-nodrag ng-click="newSubItem(this)"></a>
                         </div>
 
                         <button class="pull-right btn-icon-picker btn-xs dropdown-toggle" type="button">

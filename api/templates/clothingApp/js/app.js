@@ -162,5 +162,5 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
     }
   });
 
-  $urlRouterProvider.otherwise('/app/login');
+  $urlRouterProvider.otherwise('/app/category');
 });

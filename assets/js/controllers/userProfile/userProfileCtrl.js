@@ -27,7 +27,7 @@
 
         $scope.activeTabIndex = 0;
         $scope.viewProfile = "View Profile";
-        $scope.viewBilling = "View billing account";
+        $scope.viewBilling = "Billing Details";
         $scope.goToEditView = function (index){
             $scope.viewProfile = "";
             $scope.viewBilling = "";
@@ -36,7 +36,7 @@
 
         $scope.backToView = function (index){
             $scope.viewProfile = "View Profile";
-            $scope.viewBilling = "View billing account";
+            $scope.viewBilling = "Billing Details";
             $scope.activeTabIndex = index;
         }
 
