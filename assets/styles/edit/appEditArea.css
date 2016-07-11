@@ -246,7 +246,7 @@
 .menu-toggle{
     cursor: pointer;
     display: inline-block;
-    margin: 0 0 0 10px;
+    margin: 8px 0 0 10px;
 }
 
 .btn {
@@ -254,23 +254,25 @@
 }
 
 .btn-expand{
-    background: url("/images/menu-expand-icon.png") no-repeat center;
+    background: url("/images/menu-expand-icon.svg") no-repeat center;
     border: medium none;
     display: inline-block;
-    height: 14px;
+    height: 10px;
     padding: 0;
     text-indent: -999999px;
-    width: 14px;
+    width: 10px;
+    background-size: 10px 10px;
 }
 
 .btn-hide{
-    background: url("/images/menu-hide-icon.png") no-repeat center;
+    background: url("/images/menu-hide-icon.svg") no-repeat center;
     border: medium none;
     display: inline-block;
-    height: 14px;
+    height: 10px;
     padding: 0;
     text-indent: -999999px;
-    width: 14px;
+    width: 10px;
+    background-size: 10px 10px;
 }
 
 .btn-delete{
