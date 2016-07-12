@@ -25,6 +25,7 @@
             });
         });
 
+        $scope.accountType = "Beta";
         $scope.activeTabIndex = 0;
         $scope.viewProfile = "Profile";
         $scope.viewBilling = "View billing account";
