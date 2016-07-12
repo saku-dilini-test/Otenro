@@ -13,7 +13,7 @@ var server  = email.server.connect({
   ssl:     true
 });
 
-var orderEmail = 'orders@tecclk.com';
+var orderEmail = 'galapitage@gmail.com';
 //var orderEmail = 'amilaonbit@gmail.com';
 
 module.exports = {
