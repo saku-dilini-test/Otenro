@@ -1253,11 +1253,11 @@ md-dialog{
 }
 
 .md-dialog-header .md-dialog-header-nav li a.return-to-app{
-    background: #E9E8E9 url("/images/back-icon.png") no-repeat 10px center;
+    background: #E9E8E9 url("/images/back.png") no-repeat 10px center;
 }
 
 .md-dialog-header .md-dialog-header-nav li a.logout{
-    background: #E9E8E9 url("/images/logout-icon.png") no-repeat 10px center;
+    background: #E9E8E9 url("/images/logout.png") no-repeat 10px center;
 }
 
 .md-dialog-header .md-dialog-header-nav li a.add-new-item{

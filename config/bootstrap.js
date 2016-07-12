@@ -26,7 +26,8 @@ module.exports.bootstrap = function(cb) {
     MeasurementStandard.seed,
     ContentRating.seed,
     TemplateCategory.seed,
-    TemplateMetaData.seed
+    TemplateMetaData.seed,
+    AccountType.seed
 
   ], cb);
 
