@@ -122,6 +122,11 @@ module.exports.routes = {
     'POST /edit/getAboutUsData': 'edit/setting/AboutUsController.getAboutUsData',
     'GET /edit/getAboutUsData': 'edit/setting/AboutUsController.getAboutUsData',
 
+
+    'POST /edit/addPolicies': 'edit/setting/PoliciesController.addPolicies',
+    'POST /edit/getPoliciesData': 'edit/setting/PoliciesController.getPoliciesData',
+    'GET /edit/getPoliciesData': 'edit/setting/PoliciesController.getPoliciesData',
+
     'GET /edit/getMainNavigation': 'edit/commerce/MainNavigationController.getMainNavigation',
     'GET /edit/getSecondNavigation': 'edit/commerce/SecondNavigationController.getSecondNavigation',
     'GET /edit/getThirdNavigation': 'edit/commerce/ThirdNavigationController.getThirdNavigation',
