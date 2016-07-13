@@ -12,14 +12,14 @@ var host,link;
 var server  = email.server.connect({
   user:    "orders@verticalmedia.lk",
   password :"YDUyfsdhduis**S&f83-2",
-  host     :"verticalmedia.lk",
+  host     :"localhost",   // This should be as 'verticalmedia.lk' when local testing
   ssl     :  false,
   port    : '25'
 });
 
 
-//var orderEmail = 'galapitage@gmail.com';
-var orderEmail = 'amila@onbitlabs.com';
+var orderEmail = 'galapitage@gmail.com';
+//var orderEmail = 'amila@onbitlabs.com';
 
 module.exports = {
 
@@ -103,6 +103,7 @@ module.exports = {
           ]
         };
         server.send(emailDetails, function (err, message) {
+          sails.log(err || message);
           sails.log('Contact Us email send by Id : '+contact.id);
         });
         return res.json(200, {result: contact});
