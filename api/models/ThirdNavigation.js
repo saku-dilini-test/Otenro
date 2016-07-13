@@ -25,9 +25,6 @@ module.exports = {
             type : 'string',
 //            required: true
         },
-        briefDesc:{
-            type : 'string',
-        },
         detailedDesc:{
             type : 'string',
         },
