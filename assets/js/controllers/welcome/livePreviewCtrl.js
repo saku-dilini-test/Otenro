@@ -10,29 +10,31 @@
     angular.module('app')
         .controller('livePreviewCtrl',
         ['$scope', 'welcomeTemplatesResource', 'userProfileService','$stateParams','$mdDialog','mySharedService','$http','$state','ME_APP_SERVER',
-        '$auth','toastr',
+        '$auth','toastr','$cookieStore','$cookies',
             livePreviewCtrl
         ]);
 
 
     function livePreviewCtrl($scope,welcomeTemplatesResource, userProfileService,$stateParams,$mdDialog,mySharedService,
-    $http,$state,ME_APP_SERVER,$auth,toastr) {
+    $http,$state,ME_APP_SERVER,$auth,toastr,$cookieStore,$cookies) {
         welcomeTemplatesResource.getTemplates().success(function(data){
-            $scope.templates = data;
-            for(var i = 0; i < data.length ; i++){
-                if(data[i].template_name == $stateParams.tempName){
-                    $scope.templateViewName = data[i].templateViewName;
-                    $scope.templateViewDesc = data[i].templateViewDesc;
+            $cookies.temp = data;
+            $scope.templates = $cookies.temp;
+
+            for(var i = 0; i < $scope.templates.length ; i++){
+                if($scope.templates[i].template_name == $cookieStore.get('tempName')){
+                    $scope.templateViewName = $scope.templates[i].templateViewName;
+                    $scope.templateViewDesc = $scope.templates[i].templateViewDesc;
                 }
             }
         });
 
-        $scope.userId = $stateParams.userId;
-        $scope.appId = $stateParams.appId;
-        $scope.tempUrl = $stateParams.tempUrl;
-        $scope.tempName = $stateParams.tempName;
-        $scope.tempCategory = $stateParams.tempCategory;
-        $scope.appTemplateUrl=mySharedService.url;
+        $scope.userId = $cookieStore.get('userId');
+        $scope.appId = $cookieStore.get('appId');
+        $scope.tempUrl = $cookieStore.get('tempUrl');
+        $scope.tempName = $cookieStore.get('tempName');
+        $scope.tempCategory = $cookieStore.get('tempCategory');
+         $scope.appTemplateUrl = $cookieStore.get('url');
 
         $scope.deleteFile = function(userId,appId) {
 
@@ -54,7 +56,7 @@
         }
         else{
                 if ($auth.isAuthenticated()) {
-                       $scope.deleteFile($stateParams.userId, $stateParams.appId);
+                       $scope.deleteFile($scope.userId, $scope.appId);
                     var tempAppParams = {
                         'appName': $scope.appName,
                         'templateId': templateId,
