@@ -211,11 +211,7 @@
         $scope.timeAndRegionsPlaceHolder = "(UTC-12:00) International Date Line West";
         $scope.openHours = {};
         $scope.miniLightBoxShow = false;
-        $scope.shippingOptionParams = {
-            secondLocked: true,
-            thirdLocked: true,
-            countrySelectionLocked: true
-        };
+
         $scope.userId = $auth.getPayload().id;
         $scope.appId = $rootScope.appId;
         $scope.SERVER_URL = SERVER_URL;
@@ -303,23 +299,7 @@
 //                });
 //        };
 
-        $scope.insertFlatRates = function (flatRates) {
 
-            flatRates.appId = $rootScope.appId;
-            console.log(flatRates);
-            commerceService.insertFlatRateData(flatRates)
-                .success(function (result) {
-                    toastr.success('Successfully Saved ', 'Saved', {
-                        closeButton: true
-                    });
-                }).error(function (error) {
-                toastr.error('Loading Error', 'Warning', {
-                    closeButton: true
-                });
-            })
-
-
-        };
 
         $scope.deleteCategory = function ($index) {
             var prams = {
@@ -477,23 +457,6 @@
             $scope.products[$index].categoryId = $scope.categoryIdList[$index];
         };
 
-        $scope.moveToFlatRateOption = function () {
-            $scope.shippingOptionParams = {
-                secondLocked: false,
-                thirdLocked: true,
-                countrySelectionLocked: false
-            };
-            $scope.selectedTab = 1;
-        };
-
-        $scope.moveToWeightBasedOption = function () {
-            $scope.shippingOptionParams = {
-                secondLocked: true,
-                thirdLocked: false,
-                countrySelectionLocked: false
-            };
-            $scope.selectedTab = 2;
-        };
 
         $scope.nextStep = function (current) {
             $scope.selectedTab = current;
@@ -507,9 +470,6 @@
             $scope.miniLightBoxShow = false;
         };
 
-        $scope.addShippingOption = function () {
-            return commerceService.showAddShippingOptionDialog();
-        };
 
         $scope.addTaxOption = function () {
             return commerceService.showAddTaxOptionDialog();

@@ -86,22 +86,19 @@
             },
             showShippingDialog: function() {
                 return $mdDialog.show({
-                    controller: 'CommerceCtrl',
+                    controller: 'ShippingCtrl',
                     templateUrl: 'user/edit/commerce/manageShippingView.html',
                     clickOutsideToClose: true
                 }).then(function(answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
                 });
             },
             showAddShippingOptionDialog: function() {
                 return $mdDialog.show({
-                    controller: 'CommerceCtrl',
+                    controller: 'ShippingCtrl',
                     templateUrl: 'user/edit/commerce/addShippingOptionView.html',
                     clickOutsideToClose: true
                 }).then(function(answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
-                    //$scope.status = 'You cancelled the dialog.';
                 });
             },
             showTaxesDialog: function() {
@@ -219,8 +216,14 @@
                 return $http.post(SERVER_URL+ 'edit/updateInventory',data);
             },
 
+            getShippingInfo : function(){
+                return $http.get(SERVER_URL+ 'edit/getShippingInfo?appId='+$rootScope.appId);
+            },
             insertFlatRateData : function(data){
                 return $http.post(SERVER_URL+ 'edit/insertFlatRateData',data);
+            },
+            deleteShippingInfo : function(data){
+                return $http.post(SERVER_URL+ 'edit/deleteShippingInfo',data);
             },
 
             saveEmailDeliInfo: function (data) {

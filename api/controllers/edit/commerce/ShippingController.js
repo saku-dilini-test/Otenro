@@ -11,22 +11,42 @@
 module.exports = {
 
     insertFlatRateData : function(req,res){
-        var appId = req.param('appId');
-        var saveData = {
-            appId: appId,
-            shippingOption:'FlatRate',
-            feePerItem: req.param('feePerItem'),
-            optionName: req.param('optionName'),
-            preOrderFee: req.param('preOrderFee')
-        };
+        var saveData = req.body;
+        ShippingDetails.create(saveData).exec(function(err, result) {
+            if (err) return res.send(err);
+            return res.send(200,{message:'Create Shipping Collection'});
+        });
+    },
 
-        console.log(saveData);
-        ShippingDetails.create(saveData).exec(function(err, appProduct) {
-            if (err) res.send(err);
-            res.send({
-                appId: appProduct,
-                message: "New Navigation is created!!"
-            });
+    /**
+     * return Shipping Details collections for given app Id
+     * @param req
+     * @param res
+     */
+    getShippingInfo : function(req,res){
+        var appId = req.param('appId');
+        var searchQuery = {
+            appId: appId
+        };
+        ShippingDetails.find(searchQuery).exec(function(err, result) {
+            if (err) return res.send(err);
+            return res.send(result);
+        });
+    },
+
+
+    /**
+     * delete Shipping Details collections for given Shipping Details Id
+     * @param req
+     * @param res
+     */
+    deleteShippingInfo : function(req,res){
+        var deleteQuery = {
+            id : req.body.id
+        }
+        ShippingDetails.destroy(deleteQuery).exec(function(err, result) {
+            if (err) return res.send(err);
+            return res.send(200,{message:'Deleted Shipping Collection'});
         });
     }
 

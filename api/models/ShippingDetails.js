@@ -29,6 +29,9 @@ module.exports = {
         feePerItem:{
             type: 'string'
         },
+        weightRanges : {
+            type : 'json'
+        },
         createdDate:{
             type: 'date'
         }
