@@ -18,8 +18,8 @@ var server  = email.server.connect({
 });
 
 
-var orderEmail = 'galapitage@gmail.com';
-//var orderEmail = 'amilaonbit@gmail.com';
+//var orderEmail = 'galapitage@gmail.com';
+var orderEmail = 'amila@onbitlabs.com';
 
 module.exports = {
 
@@ -59,7 +59,7 @@ module.exports = {
             var emailDetails = {
               from: "orders@verticalmedia.lk",
               to: orderEmail,
-              cc: '',
+              cc: "onbilabsttest@gmail.com",
               bcc: '',
               subject: "New Contact Request : "+contact.title,
               attachment: [
@@ -95,7 +95,7 @@ module.exports = {
         var emailDetails = {
           from: "orders@verticalmedia.lk",
           to: orderEmail,
-          cc: 'onbilabsttest@gmail.com',
+          cc: "onbilabsttest@gmail.com",
           bcc: '',
           subject: "New Contact Request : "+contact.title,
           attachment: [

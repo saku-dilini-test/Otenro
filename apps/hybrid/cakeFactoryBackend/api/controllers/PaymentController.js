@@ -7,11 +7,10 @@ var email = require("../../node_modules/emailjs/email"),
 
 var host,link;
 var server  = email.server.connect({
-  user:    "orders@verticalmedia.lk",
-  password :"YDUyfsdhduis**S&f83-2",
-  host     :"verticalmedia.lk",
-  ssl     :  false,
-  port    : '25'
+  user:    "onbilabsttest@gmail.com",
+  password:"onbitlabs",
+  host:    "smtp.gmail.com",
+  ssl:     true
 });
 
 var orderEmail = 'galapitage@gmail.com';
@@ -318,9 +317,9 @@ module.exports = {
             deliveryOption +
             "</html>";
           var emailDetails = {
-            from: "orders@verticalmedia.lk",
+            from: "onbilabsttest@gmail.com",
             to: orderEmail,
-            cc: 'onbilabsttest@gmail.com',
+            cc: '',
             bcc: '',
             subject: "New " + optionType + " Order",
             attachment: [
