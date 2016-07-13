@@ -20,9 +20,8 @@
 }
 
 .obl-dashboard-apps ul li{
-    float: left !important;
-    margin-right: 125px !important;
-    margin-bottom: 100px !important;
+    margin-right: 5px !important;
+    margin-bottom: 20px !important;
     outline: none;
 }
 
