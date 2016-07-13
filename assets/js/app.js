@@ -43,7 +43,8 @@ angular.module('app', [
   'angularUtils.directives.dirPagination',
   'ui.grid',
   'ui.grid.selection',
-  'angular-bind-html-compile'
+  'angular-bind-html-compile',
+  'ngCsv'
 
 
 ]).run(function($rootScope, $state, $auth,Auth) {

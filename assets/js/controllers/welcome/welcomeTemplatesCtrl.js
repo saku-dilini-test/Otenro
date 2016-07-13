@@ -9,11 +9,13 @@
     'use strict';
     angular.module('app')
         .controller('WelcomeTemplatesCtrl',
-      ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER','$auth','$rootScope','$timeout',
+      ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER',
+      '$auth','$rootScope','$timeout','$cookieStore',
             WelcomeTemplatesCtrl
         ]);
 
-    function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,ME_APP_SERVER,$auth,$rootScope,$timeout) {
+    function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,
+    ME_APP_SERVER,$auth,$rootScope,$timeout,$cookieStore) {
         welcomeTemplatesResource.getTemplates().success(function(data){
             $rootScope.templates = data;
         });
@@ -38,6 +40,11 @@
 
                     mySharedService.prepForBroadcast(url);
                     $scope.goLivePreview = function() {
+                    $cookieStore.put('userId',$auth.getPayload().id);
+                    $cookieStore.put('appId',data.data.appId);
+                    $cookieStore.put('tempUrl',templateUrl);
+                    $cookieStore.put('tempName',templateName);
+                    $cookieStore.put('tempCategory',templateCategory);
                         $state.go('anon.livePreview', {
                             userId: $auth.getPayload().id,
                             appId: data.data.appId,

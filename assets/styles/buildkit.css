@@ -1255,11 +1255,13 @@ md-dialog{
 }
 
 .md-dialog-header .md-dialog-header-nav li a.return-to-app{
-    background: #E9E8E9 url("/images/back-icon.png") no-repeat 10px center;
+    background: #E9E8E9 url("/images/back-icon.svg") no-repeat 10px center;
+    background-size: 20px 20px;
 }
 
 .md-dialog-header .md-dialog-header-nav li a.logout{
-    background: #E9E8E9 url("/images/logout-icon.png") no-repeat 10px center;
+    background: #E9E8E9 url("/images/logout.svg") no-repeat 10px center;
+    background-size: 20px 20px;
 }
 
 .md-dialog-header .md-dialog-header-nav li a.add-new-item{
@@ -1779,6 +1781,12 @@ md-dialog .md-actions .md-button {
 }
 
 #toast-container > .toast-success {
-    background-image: none;
-    background-color: green;
+    background-image: url(/images/done.svg)!important;
+    background-color: #e9e9e9;
+    color: black;
+}
+#toast-container > .toast-error {
+    background-image: url(/images/!.svg)!important;;
+    background-color: #e9e9e9;
+    color: black;
 }

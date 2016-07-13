@@ -89,6 +89,15 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
         }
       }
    })
+      .state('app.policies', {
+          url: '/policies',
+          views: {
+              'menuContent': {
+                  templateUrl: 'templates/policies.html',
+                  controller: 'policiesCtrl'
+              }
+          }
+      })
       .state('app.contactUs', {
           url: '/contactUs',
           views: {
