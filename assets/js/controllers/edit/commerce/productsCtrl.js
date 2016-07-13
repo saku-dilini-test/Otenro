@@ -327,7 +327,6 @@
             variants = {
                  appId: $rootScope.appId,
                  childId: product.childId,
-                 briefDesc:product.briefDesc,
                  detailedDesc: product.detailedDesc,
                  sku: $scope.variants[0].sku,
                  name: $scope.variants[0].name,

@@ -52,7 +52,6 @@
                         id:id,
                         appId:$rootScope.appId,
                         mainId:product.mainId,
-                        briefDesc:product.briefDesc,
                         detailedDesc: product.detailedDesc,
                         name: product.name,
                         childId: product.mainId,
