@@ -1779,6 +1779,12 @@ md-dialog .md-actions .md-button {
 }
 
 #toast-container > .toast-success {
-    background-image: none;
-    background-color: green;
+    background-image: url(/images/done.svg)!important;
+    background-color: #e9e9e9;
+    color: black;
+}
+#toast-container > .toast-error {
+    background-image: url(/images/!.svg)!important;;
+    background-color: #e9e9e9;
+    color: black;
 }
