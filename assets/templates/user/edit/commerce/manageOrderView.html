@@ -15,37 +15,37 @@
                     </div>
                     <div class="md-dialog-main">
                         <form class="allItems" novalidate>
-                        <!--<table class="me-checkbox-table">
-                            <thead>
-                                &lt;!&ndash;<th class="checkbox-column">&ndash;&gt;
-                                    &lt;!&ndash;<md-checkbox md-no-ink ng-model="" aria-label="Check all"></md-checkbox>&ndash;&gt;
-                                &lt;!&ndash;</th>&ndash;&gt;
-                                &lt;!&ndash;<th>orders</th>&ndash;&gt;
-                                <th class="order-columns">date</th>
-                                <th class="order-columns">customer</th>
-                                <th>payment status</th>
-                                <th>fulfillment status</th>
-                            </thead>
-                            <tbody>
-                            <tr dir-paginate="order in ordersList | filter:search | itemsPerPage: pageSize" current-page="currentPage">
-                                &lt;!&ndash;<td class="checkbox-row">&ndash;&gt;
-                                    &lt;!&ndash;<md-checkbox md-no-ink ng-model="" aria-label="Check one item"></md-checkbox>&ndash;&gt;
-                                &lt;!&ndash;</td>&ndash;&gt;
-                                &lt;!&ndash;<td># {{order.orderId}}</td>&ndash;&gt;
-                                <td>{{order.createdDate}}</td>
-                                <td>{{order.customerName}}</td>
-                                <td ng-model="order.paymentStatus" ng-class="{'status-sent': order.paymentStatus == 'sent', 'status-pending': order.paymentStatus == 'Pending'}">{{order.paymentStatus}}</td>
-                                <td ng-model="order.fulfillmentStatus" ng-class="{'status-sent': order.fulfillmentStatus == 'sent', 'status-pending': order.fulfillmentStatus == 'Pending'}">{{order.fulfillmentStatus}}</td>
-                            </tr>
-                            </tbody>
-                        </table>-->
+                            <!--<table class="me-checkbox-table">
+                                <thead>
+                                    &lt;!&ndash;<th class="checkbox-column">&ndash;&gt;
+                                        &lt;!&ndash;<md-checkbox md-no-ink ng-model="" aria-label="Check all"></md-checkbox>&ndash;&gt;
+                                    &lt;!&ndash;</th>&ndash;&gt;
+                                    &lt;!&ndash;<th>orders</th>&ndash;&gt;
+                                    <th class="order-columns">date</th>
+                                    <th class="order-columns">customer</th>
+                                    <th>payment status</th>
+                                    <th>fulfillment status</th>
+                                </thead>
+                                <tbody>
+                                <tr dir-paginate="order in ordersList | filter:search | itemsPerPage: pageSize" current-page="currentPage">
+                                    &lt;!&ndash;<td class="checkbox-row">&ndash;&gt;
+                                        &lt;!&ndash;<md-checkbox md-no-ink ng-model="" aria-label="Check one item"></md-checkbox>&ndash;&gt;
+                                    &lt;!&ndash;</td>&ndash;&gt;
+                                    &lt;!&ndash;<td># {{order.orderId}}</td>&ndash;&gt;
+                                    <td>{{order.createdDate}}</td>
+                                    <td>{{order.customerName}}</td>
+                                    <td ng-model="order.paymentStatus" ng-class="{'status-sent': order.paymentStatus == 'sent', 'status-pending': order.paymentStatus == 'Pending'}">{{order.paymentStatus}}</td>
+                                    <td ng-model="order.fulfillmentStatus" ng-class="{'status-sent': order.fulfillmentStatus == 'sent', 'status-pending': order.fulfillmentStatus == 'Pending'}">{{order.fulfillmentStatus}}</td>
+                                </tr>
+                                </tbody>
+                            </table>-->
                             <div id="grid1" ui-grid="gridOptions1" ui-grid-exporter ui-grid-selection class="grid"></div>
                         </form>
                         <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button">export as csv</md-button>
+                            <md-button ng-csv="ordersList" filename="orders.csv" class="me-default-button">export as csv</md-button>
                             <md-button class="me-default-button" ng-click="refunded()">refunded</md-button>
                             <md-button class="me-default-button" ng-click="fulfilled($index)">fulfilled</md-button>
                         </div>
