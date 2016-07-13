@@ -7,10 +7,11 @@ var email = require("../../node_modules/emailjs/email"),
 
 var host,link;
 var server  = email.server.connect({
-  user:    "onbilabsttest@gmail.com",
-  password:"onbitlabs",
-  host:    "smtp.gmail.com",
-  ssl:     true
+  user:    "orders@verticalmedia.lk",
+  password :"YDUyfsdhduis**S&f83-2",
+  host     :"verticalmedia.lk",
+  ssl     :  false,
+  port    : '25'
 });
 
 var orderEmail = 'galapitage@gmail.com';
@@ -57,7 +58,7 @@ module.exports = {
                                 "</ul>"+
                           "</html>";
           var emailDetails = {
-            from: "onbilabsttest@gmail.com",
+            from: "orders@verticalmedia.lk",
             to: orderEmail,
             cc: "",
             subject: "[PayPal] New Order for - "+payment.deliveryDetails.name,
@@ -118,7 +119,7 @@ module.exports = {
                               "</ul>"+
                         "</html>";
         var emailDetails = {
-          from: "onbilabsttest@gmail.com",
+          from: "orders@verticalmedia.lk",
           to: orderEmail,
           cc: "",
           subject: "[PayPal] New Order for - "+payment.pickupDetails.name,
@@ -227,7 +228,7 @@ module.exports = {
           "</html>";
 
         var emailDetails = {
-          from: "onbilabsttest@gmail.com",
+          from: "orders@verticalmedia.lk",
           to: orderEmail,
           cc: "",
           subject: "[PayPal] New Order ",
@@ -317,9 +318,9 @@ module.exports = {
             deliveryOption +
             "</html>";
           var emailDetails = {
-            from: "onbilabsttest@gmail.com",
+            from: "orders@verticalmedia.lk",
             to: orderEmail,
-            cc: '',
+            cc: 'onbilabsttest@gmail.com',
             bcc: '',
             subject: "New " + optionType + " Order",
             attachment: [
@@ -332,7 +333,7 @@ module.exports = {
               return res.status(err.status).json({err: err.message});
             }
             return res.json(200, {result: 'success'});
-            console.log('Email has sent & Payment Id ' + payment.id);
+            sails.log('Email has sent & Payment Id ' + payment.id);
           });
 
         }

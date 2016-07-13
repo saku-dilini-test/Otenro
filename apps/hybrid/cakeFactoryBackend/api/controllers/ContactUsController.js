@@ -10,10 +10,11 @@ var fs = require('fs-extra'),
 
 var host,link;
 var server  = email.server.connect({
-  user:    "onbilabsttest@gmail.com",
-  password:"onbitlabs",
-  host:    "smtp.gmail.com",
-  ssl:     true
+  user:    "orders@verticalmedia.lk",
+  password :"YDUyfsdhduis**S&f83-2",
+  host     :"verticalmedia.lk",
+  ssl     :  false,
+  port    : '25'
 });
 
 
@@ -56,7 +57,7 @@ module.exports = {
               "<ul>"+contact.msg+"</ul>"+
               "</html>";
             var emailDetails = {
-              from: "onbilabsttest@gmail.com",
+              from: "orders@verticalmedia.lk",
               to: orderEmail,
               cc: '',
               bcc: '',
@@ -92,9 +93,9 @@ module.exports = {
           "<ul>"+contact.msg+"</ul>"+
           "</html>";
         var emailDetails = {
-          from: "onbilabsttest@gmail.com",
+          from: "orders@verticalmedia.lk",
           to: orderEmail,
-          cc: '',
+          cc: 'onbilabsttest@gmail.com',
           bcc: '',
           subject: "New Contact Request : "+contact.title,
           attachment: [
