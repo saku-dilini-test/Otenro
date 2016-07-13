@@ -47,7 +47,7 @@
         $scope.buildSource = function () {
             appEditResource.buildApp({appId: $stateParams.appId})
                 .success(function(data) {
-                    toastr.success('Successfully Build ', 'Congratulation!', {
+                    toastr.success('Successfully Build ', 'Congratulations!', {
                         closeButton: true
                     });
                 }).error(function(err) {
