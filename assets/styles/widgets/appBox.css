@@ -33,9 +33,9 @@ background-size: 230px 480px;
 .obl-dashboard-createApp button{
      border: none;
 width: 230px;
-height: 480px;
+height: 475px;;
 background: url(/images/addTemplate_bg.svg) no-repeat;
-background-size: 230px 480px;
+background-size: 230px 475px;
 }
 
 .me-app-box-heading{
@@ -50,7 +50,7 @@ background-size: 230px 480px;
 .me-app-box-view{
     left: 20px;
 position: absolute;
-top: 65px;
+top: 75px;
 }
 
 .me-app-name{
