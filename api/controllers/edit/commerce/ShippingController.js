@@ -10,12 +10,28 @@
 
 module.exports = {
 
-    insertFlatRateData : function(req,res){
-        var saveData = req.body;
-        ShippingDetails.create(saveData).exec(function(err, result) {
-            if (err) return res.send(err);
-            return res.send(200,{message:'Create Shipping Collection'});
-        });
+    /**
+     * update Shipping Details collections for given Shipping Details Id
+     * If not create new shipping collections
+     * @param req
+     * @param res
+     */
+    updateShippingInfo : function(req,res){
+        var searchQuery = {
+            id : req.body.id
+        };
+        var updateData = req.body;
+        if(typeof req.body.id != 'undefined'){
+            ShippingDetails.update(searchQuery,updateData,function(err,main) {
+                if (err) return res.send(err);
+                return res.send(200, {message: 'Update Shipping Collection'});
+            });
+        }else{
+            ShippingDetails.create(updateData).exec(function (err, result) {
+                if (err) return res.send(err);
+                return res.send(200, {message: 'Create Shipping Collection'});
+            });
+        }
     },
 
     /**
@@ -43,7 +59,7 @@ module.exports = {
     deleteShippingInfo : function(req,res){
         var deleteQuery = {
             id : req.body.id
-        }
+        };
         ShippingDetails.destroy(deleteQuery).exec(function(err, result) {
             if (err) return res.send(err);
             return res.send(200,{message:'Deleted Shipping Collection'});
