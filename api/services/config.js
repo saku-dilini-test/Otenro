@@ -1,7 +1,7 @@
 
 module.exports = {
 
-    ME_SERVER: '/Users/rakitha/meServer/temp/',
+    ME_SERVER: '/Users/udeshikaperera/meServer/temp',
 
     server: {
         host : 'http://localhost',
