@@ -31,11 +31,15 @@
                         if(data.firstMenuLabel){
                             $scope.menuButtonView =
                                 '<obl-menu-group label="{{firstMenuLabel}}" icon="fa-pencil-square-o">'+
-                                    '<div data-ng-repeat="btn in buttonArray" >' +
-                                        '<obl-menu-button label="{{btn.menuTitle}}" icon="fa fa-file-image-o"  menu-function="{{btn.menuFunction}}">' +
+                                    '<div ng-repeat="btn in buttonArray" >' +
+                                        '<obl-menu-button ng-if="btn.menuTitle !=\'Site Settings\' " label="{{btn.menuTitle}}" icon="fa fa-file-image-o"  menu-function="{{btn.menuFunction}}">' +
                                         '</obl-menu-button>'+
-                                    '</div>' +
-                                '<obl-menu-group>';
+                                        '<obl-menu-group ng-if="btn.menuTitle ==\'Site Settings\' " label="{{btn.menuTitle}}" icon="fa-pencil-square-o"  class="md-sub-menu">' +
+                                         '<obl-menu-button label="Contact Us" icon="fa fa-file-image-o" click-title="contactUs"></obl-menu-button>'+
+                                         '</obl-menu-button>'+
+                                        '</obl-menu-group>'+
+                                         '</div>'+
+                                '</obl-menu-group>';
                         }
                     }).error(function(err) {
 
