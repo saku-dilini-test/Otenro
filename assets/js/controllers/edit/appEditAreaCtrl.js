@@ -32,16 +32,13 @@
                             $scope.menuButtonView =
                                 '<obl-menu-group label="{{firstMenuLabel}}" icon="fa-pencil-square-o">'+
                                     '<div ng-repeat="btn in buttonArray" >' +
-//                                      '<div ng-if="btn.menuTitle !=\'Site Settings\' ">'+
                                         '<obl-menu-button ng-if="btn.menuTitle !=\'Site Settings\' " label="{{btn.menuTitle}}" icon="fa fa-file-image-o"  menu-function="{{btn.menuFunction}}">' +
                                         '</obl-menu-button>'+
-//                                       '<div ng-if="btn.menuTitle ==\'Site Settings\' ">'+
-                                        '<obl-menu-group ng-if="btn.menuTitle ==\'Site Settings\' " label="Site Settings" icon="fa-pencil-square-o"  class="md-sub-menu">' +
+                                        '<obl-menu-group ng-if="btn.menuTitle ==\'Site Settings\' " label="{{btn.menuTitle}}" icon="fa-pencil-square-o"  class="md-sub-menu">' +
                                          '<obl-menu-button label="Contact Us" icon="fa fa-file-image-o" click-title="contactUs"></obl-menu-button>'+
                                          '</obl-menu-button>'+
                                         '</obl-menu-group>'+
                                          '</div>'+
-//                                    '</div>' +
                                 '</obl-menu-group>';
                         }
                     }).error(function(err) {
