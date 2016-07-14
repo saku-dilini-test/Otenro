@@ -24,10 +24,13 @@ module.exports = {
             type: 'string'
         },
         preOrderFee:{
-            type: 'string'
+            type: 'integer'
         },
         feePerItem:{
-            type: 'string'
+            type: 'integer'
+        },
+        weightRanges : {
+            type : 'json'
         },
         createdDate:{
             type: 'date'

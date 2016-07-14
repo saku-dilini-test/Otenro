@@ -195,7 +195,9 @@ module.exports.routes = {
     /**
      * ShippingController
      */
-    'POST /edit/insertFlatRateData': 'edit/commerce/ShippingController.insertFlatRateData',
+    'GET /edit/getShippingInfo': 'edit/commerce/ShippingController.getShippingInfo',
+    'POST /edit/updateShippingInfo': 'edit/commerce/ShippingController.updateShippingInfo',
+    'POST /edit/deleteShippingInfo': 'edit/commerce/ShippingController.deleteShippingInfo',
 
     /**
      * EngageController

@@ -17,19 +17,15 @@
                 <thead>
                     <th class="simple-column">option name</th>
                     <th class="simple-column">shipping type</th>
+                    <th class="simple-column">edit</th>
                     <th class="simple-column">delete</th>
-                    <th>&nbsp;</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Name 1</td>
-                        <td>weight based</td>
-                        <td><a href="javascript:void(0);">delete</a></td>
-                    </tr>
-                    <tr>
-                        <td>Name 2</td>
-                        <td>Fixed rate</td>
-                        <td><a href="javascript:void(0);">delete</a></td>
+                    <tr ng-repeat="item in items">
+                        <td>{{item.optionName}}</td>
+                        <td>{{item.shippingOption}}</td>
+                        <td><img width="25" src="../../../images/edit-icon.svg" ng-click="editShippingInfo(item)"></td>
+                        <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteShippingInfo($index,item)"></td>
                     </tr>
                 </tbody>
             </table>

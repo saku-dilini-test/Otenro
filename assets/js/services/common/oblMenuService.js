@@ -3,11 +3,13 @@
  */
 (function() {
     angular.module('appEdit').service('oblMenuService', ['stylesService', 'contactUsService', 'commerceService',
-        'articleService','mainMenuService', 'currencyService', 'publishService', 'engageService', 'logoAndTittleService'
+        'shippingService','articleService','mainMenuService', 'currencyService', 'publishService',
+        'engageService', 'logoAndTittleService'
         , oblMenuService]);
 
-    function oblMenuService(stylesService, contactUsService, commerceService, articleService ,mainMenuService,
-                            currencyService, publishService, engageService, logoAndTittleService) {
+    function oblMenuService(stylesService, contactUsService, commerceService,shippingService,
+                            articleService ,mainMenuService,currencyService, publishService,
+                            engageService, logoAndTittleService) {
         return {
             setOblMenuService : function(data) {
 
@@ -38,7 +40,7 @@
                             return commerceService.showOrderDialog();
                         }
                         if (ctrlFun == 'showShippingDialog') {
-                            return commerceService.showShippingDialog();
+                            return shippingService.showShippingDialog();
                         }
                         if (ctrlFun == 'showTaxesDialog') {
                             return commerceService.showTaxesDialog();
