@@ -3,12 +3,13 @@
 }
 
 .gridster-item{
-    width: 161px !important;
-    height: 266px !important;
-    background: url(/images/mobile-app-bg.png) no-repeat right;
-    position: relative !important;
-    left: 0 !important;
-    top: 0 !important;
+    width: 230px !important;
+	height: 480px !important;
+background: url(/images/Phone_bg.svg) no-repeat right;
+position: relative !important;
+left: 0 !important;
+top: 0 !important;
+background-size: 230px 480px;
 }
 
 .gridster-preview-holder{
@@ -20,25 +21,21 @@
 }
 
 .obl-dashboard-apps ul li{
-    margin-right: 5px !important;
-    margin-bottom: 20px !important;
+    margin-right: 2.3% !important;
+    margin-bottom: 40px !important;
     outline: none;
+	float: left;
 }
 
-.obl-dashboard-apps ul li:nth-of-type(4n){
-    margin-right: 0 !important;
-}
 
-.obl-dashboard-createApp{
-    width: 161px;
-    height: 266px;
-}
+
 
 .obl-dashboard-createApp button{
-    border: none;
-    width: 161px;
-    height: 266px;
-    background: url(/images/create-app-bg.png) no-repeat;
+     border: none;
+width: 230px;
+height: 480px;
+background: url(/images/addTemplate_bg.svg) no-repeat;
+background-size: 230px 480px;
 }
 
 .me-app-box-heading{
@@ -51,9 +48,9 @@
 }
 
 .me-app-box-view{
-    left: 3px;
-    position: absolute;
-    top: 27px;
+    left: 20px;
+position: absolute;
+top: 65px;
 }
 
 .me-app-name{
@@ -61,7 +58,6 @@
     color: #AAA;
     font-size: 12px;
     font-weight: 300;
-    left: -24px;
     position: absolute;
     text-align: center;
     text-shadow: 0 0 0 #999;
