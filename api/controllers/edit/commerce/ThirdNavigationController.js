@@ -58,12 +58,26 @@ module.exports = {
             var thirdN =req.body;
             thirdN.imageUrl = newFileName;
             if(typeof thirdN.id != 'undefined'){
+            var query = {
+                productId: thirdN.id,
+                appId: thirdN.appId,
+                childId: thirdN.childId,
+                name: thirdN.name,
+                price: thirdN.price,
+                quantity: thirdN.quantity
+            }
                 ThirdNavigation.update({id:thirdN.id},thirdN).exec(function(err, appProduct) {
                     if (err) res.send(err);
                     res.send({
                         appId: appProduct,
                         message: "New Navigation is created!!"
                     });
+                });
+                ApplicationInventory.update({id:thirdN.id},thirdN).exec(function(err, appProduct) {
+                    if (err) console.log(err);
+                });
+                PriceAndVariants.update({id:thirdN.id},query).exec(function(err, appProduct) {
+                    if (err) console.log(err);
                 });
             }
             else{

@@ -54,7 +54,7 @@
                         mainId:product.mainId,
                         detailedDesc: product.detailedDesc,
                         name: product.name,
-                        childId: product.mainId,
+                        childId: variants.childId,
                         desc: product.desc,
                         sku: product.sku,
                         price: variants.price,

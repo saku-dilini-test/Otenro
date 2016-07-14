@@ -230,7 +230,8 @@
              }
 
         $scope.addProducts = function(file,product ,productFile) {
-        if($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "clothingApp" || $scope.categories[0].templateName == "foodDemoApp2"){
+        if($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "clothingApp"
+        || $scope.categories[0].templateName == "foodDemoApp2" ){
             if(file == null){
                    toastr.error('select image', 'Warning', {
                        closeButton: true
@@ -256,7 +257,8 @@
                  size: size,
                  weight: weight,
                  price: $scope.variants[0].price,
-                 quantity: $scope.variants[0].quantity
+                 quantity: $scope.variants[0].quantity,
+                 childId: product.mainId
             };
                    commerceService.addProduct(file,product,item.id,variants).
                        success(function(data) {
@@ -335,7 +337,7 @@
                  price: $scope.variants[0].price,
                  quantity: $scope.variants[0].quantity
             };
-                commerceService.addProduct(file,product,variants,item.id).
+                commerceService.addProduct(file,product,item.id,variants).
                     success(function(data) {
                         toastr.success('New Product has been added.', 'Awsome!', {
                             closeButton: true
