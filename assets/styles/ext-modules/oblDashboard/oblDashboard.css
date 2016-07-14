@@ -84,8 +84,8 @@
        width: 95%;
     margin: 0 auto;
     padding: 50px 18px;
+	padding-left: 2.5%;
     text-align: center;
-    margin-left: 100px;
 }
 }
 .obl-dashboard-apps-livePreview{
@@ -123,18 +123,19 @@
 
 .obl-app-templates li a{
    display: block;
-   width: 320px;
-   height: 520px;
+   width: 230px;
+   height: 480px;
    position: relative;
    background:url(../../../images/Phone_bg.svg) no-repeat;
-   background-size: 320px 510px !important;
+   background-size: 230px 444px !important;
 }
 
 .obl-app-templates li a img{
     height: auto;
     position: absolute;
-    top: 55px;
-    width: 190px;
+    top: 61px;
+    width: 189px;
+	height:330px;
     left: 21px;
 }
 
