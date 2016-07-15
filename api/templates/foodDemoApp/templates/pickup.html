@@ -6,15 +6,17 @@
                     <img src="img/contactUs.jpg" width="100%"/>
                 </div>
             </div>
+
             <div class="content made-easy-content-font">
                 <div ng-repeat="pickupData in pickup" >
-                        <div class="col2 font-size:12px " ng-model="pickupData.locationName"> location : {{pickupData.locationName}}</div>
-                        <div class="col2 font-size:12px" ng-model="pickupData.number"> number : {{pickupData.number}}</div>
-                        <div class="col2 font-size:12px" ng-model="pickupData.city"> city : {{pickupData.city}}</div>
-                        <br>
+                        <div ng-if="pickupData.locationName" class="col2 font-size:12px " ng-model="pickupData.locationName">{{pickupData.locationName}}</div>
+                        <div ng-if="pickupData.postalCode" class="col2 font-size:12px" ng-model="pickupData.postalCode">{{pickupData.postalCode}},</div>
+                        <div ng-if="pickupData.number" class="col2 font-size:12px" ng-model="pickupData.number">{{pickupData.number}},</div>
+                        <div ng-if="pickupData.streetAddress" class="col2 font-size:12px" ng-model="pickupData.streetAddress">{{pickupData.streetAddress}},</div>
+                        <div ng-if="pickupData.city" class="col2 font-size:12px" ng-model="pickupData.city">{{pickupData.city}},</div>
+                        <div ng-if="pickupData.country" class="col2 font-size:12px" ng-model="pickupData.country"> {{pickupData.country}}</div>
+                        <br> <br>
                 </div>
-
-
             </div>
     </ion-content>
 </ion-view>
