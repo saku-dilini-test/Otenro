@@ -37,6 +37,8 @@
 
             $scope.appUpdateLocation = data.appUpdateLocationSetting;
 
+            $scope.editBackgroundImage = appSettings.isApplyBGImage;
+            $scope.isApplyBGImage = appSettings.isApplyBGImage;
             $scope.backgroundColor = appSettings.backgroundColor;
             $scope.navigationBarColor = appSettings.navigationBarColor;
             $scope.footerColor = appSettings.footerColor;
@@ -250,6 +252,30 @@
                            closeButton: true
                     });
                    });
+                });
+        };
+
+        // --/-- When user click check box, apply existing background.jpg as background image
+        $scope.applyBackgroundImage = function(isApply){
+            var isApplyUpdate = isApply;
+            if($scope.isApplyBGImage == null){
+                isApplyUpdate = true;
+            }
+            var requestData = {
+                appId: $rootScope.appId,
+                isApplyBGImage : isApplyUpdate
+            };
+            stylesService.applyBackgroundImage(requestData)
+                .success(function (res) {
+                    var tempUrl = mySharedService.url;
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    toastr.success('Successfully Apply backgroundImage', 'Message', {
+                        closeButton: true
+                    });
+                }).error(function (res) {
+                    toastr.error('Cant Apply Image', 'Waring', {
+                        closeButton: true
+                    });
                 });
         };
 

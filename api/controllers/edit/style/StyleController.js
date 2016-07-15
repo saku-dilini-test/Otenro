@@ -310,6 +310,77 @@ module.exports = {
             });
         }
     },
+
+    /**
+     * Apply background image for given appId
+     * @param req
+     * @param res
+     */
+    applyBackgroundImage : function(req,res){
+        var userId = req.userId;
+        var appId = req.body.appId;
+        var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
+        var isApplyBGImage = req.body.isApplyBGImage;
+        var findQuery = { id : appId };
+
+        Application.findOne(findQuery).exec(function(err, app) {
+            if (err) res.send(err);
+
+            app.appSettings.isApplyBGImage = isApplyBGImage;
+            Application.update(findQuery,app).exec(function(err, appUpdate) {
+                if (err) return res.send(err);
+
+                if(isApplyBGImage == true){
+                    updateFile(mainCssFile, [{
+                        rule: 'made-easy-background',
+                        target: "background",
+                        replacer: "url(../img/background.jpg) center"
+                    }], function (err) {
+                        console.log((err));
+                    });
+                }else{
+                    updateFile(mainCssFile, [{
+                        rule: 'made-easy-background',
+                        target: "background",
+                        replacer: 'null'
+                    }], function (err) {
+                        console.log((err));
+                    });
+                }
+                res.send(appUpdate);
+            });
+
+        });
+
+        /**
+         * update css file with new changes
+         *
+         */
+        function updateFile(filename, replacements) {
+            return new Promise(function(resolve) {
+                fs.readFile(filename, 'utf-8', function(err, data) {
+                    var regex, replaceStr;
+                    if (err) {
+                        throw (err);
+                    } else {
+                        for (var i = 0; i < replacements.length; i++) {
+                            regex = new RegExp("(\\" + replacements[i].rule + "\\s*{[^}]*" + replacements[i].target + "\\s*:\\s*)([^\\n;}]+)([\\s*;}])");
+                            replaceStr = "$1" + replacements[i].replacer + "$3";
+                            data = data.replace(regex, replaceStr);
+                        }
+                    }
+                    fs.writeFile(filename, data, 'utf-8', function(err) {
+                        if (err) {
+                            throw (err);
+                        } else {
+                            resolve();
+                        }
+                    });
+                });
+            })
+        }
+    },
+
     /**
      * Update background image given appId
      */
@@ -468,7 +539,7 @@ module.exports = {
             // here update background-color in Css class
             if(type == 'backgroundColor'){
                 app.appSettings.backgroundColor= styleColor;
-                colorTypeCss = ".made-easy-backgroundColor";
+                colorTypeCss = ".made-easy-background";  // color & image use same class
             }else if(type == 'navigationBarColor'){
                 app.appSettings.navigationBarColor= styleColor;
                 colorTypeCss = ".made-easy-navigationBarColor";

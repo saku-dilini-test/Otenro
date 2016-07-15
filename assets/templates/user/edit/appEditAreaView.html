@@ -41,7 +41,9 @@
                             <div class="other-settings">
                                 <h1>Background Image</h1>
                                 <div class="other-setting">
-                                    <md-checkbox md-no-ink ng-model="editBackgroundImage" aria-label="Apply Background Image">
+                                    <md-checkbox md-no-ink ng-model="editBackgroundImage"
+                                                 aria-label="Apply Background Image"
+                                            ng-change="applyBackgroundImage(editBackgroundImage)">
                                         Apply Background Image
                                     </md-checkbox>
                                     <div ng-show="editBackgroundImage" class="edit-bg-wrapper">
