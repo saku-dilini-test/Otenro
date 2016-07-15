@@ -32,8 +32,30 @@ module.exports = {
         weightRanges : {
             type : 'json'
         },
+        locationName : {
+            type: 'string'
+        },
+        number : {
+            type :'integer'
+        },
+        streetAddress : {
+            type : 'string'
+        },
+        city : {
+            type: 'string'
+        },
+        country : {
+            type: 'string'
+        },
+        postalCode : {
+            type: 'string'
+        },
+        cost : {
+            type :'integer'
+        },
         createdDate:{
             type: 'date'
         }
+
     }
 };

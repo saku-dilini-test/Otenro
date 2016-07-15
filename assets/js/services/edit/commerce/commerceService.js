@@ -12,7 +12,7 @@
                             return $mdDialog.show({
                                 controller: 'ProductCtrl',
                                 templateUrl: 'user/edit/commerce/addPro.html',
-                                clickOutsideToClose: true,
+                                clickOutsideToClose: false,
                                 locals : {
                                             item : item,
                                           }

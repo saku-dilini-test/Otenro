@@ -1,0 +1,20 @@
+<ion-view view-title="Pick Up">
+    <ion-content class="made-easy-contactUs">
+        <div class="card animated bounceInUp">
+            <div class="header">
+                <div class="header-image">
+                    <img src="img/contactUs.jpg" width="100%"/>
+                </div>
+            </div>
+            <div class="content made-easy-content-font">
+                <div ng-repeat="pickupData in pickup" >
+                        <div class="col2 font-size:12px " ng-model="pickupData.locationName"> location : {{pickupData.locationName}}</div>
+                        <div class="col2 font-size:12px" ng-model="pickupData.number"> number : {{pickupData.number}}</div>
+                        <div class="col2 font-size:12px" ng-model="pickupData.city"> city : {{pickupData.city}}</div>
+                        <br>
+                </div>
+
+
+            </div>
+    </ion-content>
+</ion-view>
