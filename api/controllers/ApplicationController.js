@@ -56,6 +56,7 @@ module.exports = {
                     sign : "Rs.",
                     currency: "SLR",
                 },
+                isApplyBGImage : true,
                 backgroundColor : "#FFFFFF",
                 navigationBarColor : "#FFFFFF",
                 footerColor : "#FFFFFF",
