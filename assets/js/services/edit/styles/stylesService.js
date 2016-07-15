@@ -35,6 +35,9 @@
             addHeaderImage: function(Data){
                 return $http.post(SERVER_URL + 'edit/addStyleImage/addHeaderImage', Data);
             },
+            applyBackgroundImage : function(Data){
+                return $http.post(SERVER_URL + 'edit/applyStyleImage/applyBackgroundImage', Data);
+            },
             addBackgroundImage: function(Data){
                 return $http.post(SERVER_URL + 'edit/addStyleImage/addBackgroundImage', Data);
             },
