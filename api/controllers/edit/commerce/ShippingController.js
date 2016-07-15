@@ -51,6 +51,19 @@ module.exports = {
     },
 
 
+    getShippingPickupInfo  : function(req,res){
+        var appId = req.param('appId');
+        var searchQuery = {
+            appId: appId,
+            shippingOption : 'Pick up'
+        };
+        ShippingDetails.find(searchQuery).exec(function(err, result) {
+            if (err) return res.send(err);
+            return res.send(result);
+        });
+    },
+
+
     /**
      * delete Shipping Details collections for given Shipping Details Id
      * @param req

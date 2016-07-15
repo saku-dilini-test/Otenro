@@ -118,6 +118,10 @@ module.exports.routes = {
     'POST /edit/addOpenHoursInfo': 'edit/setting/ContactUsController.addOpenHoursInfo',
 
 
+
+
+
+
     'POST /edit/addAboutUs': 'edit/setting/AboutUsController.addAboutUs',
     'POST /edit/getAboutUsData': 'edit/setting/AboutUsController.getAboutUsData',
     'GET /edit/getAboutUsData': 'edit/setting/AboutUsController.getAboutUsData',
@@ -198,7 +202,8 @@ module.exports.routes = {
     'GET /edit/getShippingInfo': 'edit/commerce/ShippingController.getShippingInfo',
     'POST /edit/updateShippingInfo': 'edit/commerce/ShippingController.updateShippingInfo',
     'POST /edit/deleteShippingInfo': 'edit/commerce/ShippingController.deleteShippingInfo',
-
+    'GET /edit/getShippingPickupInfo': 'edit/commerce/ShippingController.getShippingPickupInfo',
+    
     /**
      * EngageController
      */

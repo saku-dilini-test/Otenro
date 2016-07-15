@@ -15,13 +15,15 @@
         // --/-- enable & disable tabs --/--
         // --/-- Common function for enable disable tabs
         // --/-- Parameter : (Selected-Tab number,1-tab boolean,2-tab boolean,3-tab boolean,4-tab boolean)
-        function  enableDisableTabs(selectedTab,tab1,tab2,tab3,tab4) {
+        function  enableDisableTabs(selectedTab,tab1,tab2,tab3,tab4,tab5) {
             $scope.selectedTab = selectedTab;
             $scope.shippingOptionParams = {
                 firstLocked : tab1,
                 secondLocked: tab2,
                 thirdLocked: tab3,
-                countrySelectionLocked: tab4
+                countrySelectionLocked: tab4,
+                pickup : tab5
+                
             };
         }
 
@@ -93,6 +95,42 @@
                     })
             }
         };
+
+        $scope.insertPickup = function (pickup) {
+            if(typeof pickup == 'undefined'){
+                toastr.error('Fill all the fields', 'Warning', {
+                    closeButton: true
+                });
+            }else if(typeof pickup.locationName == 'undefined'
+                || typeof pickup.streetAddress == 'undefined'
+                || typeof pickup.number == 'undefined'
+                || typeof pickup.city == 'undefined'
+                || typeof pickup.country == 'undefined'
+                || typeof pickup.postalCode == 'undefined'
+                || typeof pickup.cost == 'undefined'){
+                toastr.error('Fill all the fields', 'Warning', {
+                    closeButton: true
+                });
+            }else{
+                pickup.appId = $rootScope.appId;
+                pickup.shippingOption = 'Pick up';
+                shippingService.updateShippingInfo(pickup)
+                    .success(function (result) {
+                        toastr.success('Successfully Saved ', 'Saved', {
+                            closeButton: true
+                        });
+                        enableDisableTabs(4,true,false,true,false);
+                    }).error(function (error) {
+                    toastr.error('Loading Error', 'Warning', {
+                        closeButton: true
+                    });
+                })
+            }
+        };
+
+        $scope.clearFields = function () {
+            $scope.pickup = null;
+        }
 
         // --/-- insert Weight Base type shipping collection --/--
         $scope.insertWeightBase = function (shipping) {

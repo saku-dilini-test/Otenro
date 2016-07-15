@@ -142,6 +142,65 @@
                     </div>
                 </md-tab-body>
             </md-tab>
+            <md-tab ng-disabled="shippingOptionParams.pickup">
+                <md-tab-label>pick up</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>pick up</h1>
+                    </div>
+                    <div class="md-dialog-main clearfix">
+                        <fieldset>
+                            <label>Location Name</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12" />
+                            <input type="text" name="name" required ng-model="pickup.locationName" />
+                        </fieldset>
+                        <div class="clearfix">
+                            <fieldset class="col-2">
+                                <label>Number</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <input type="NUMBER" name="name" required ng-model="pickup.number"  />
+                            </fieldset>
+                            <fieldset class="col-1 reset-margin-right">
+                                <label>street Address</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <input type="text" name="name" required ng-model="pickup.streetAddress" />
+                            </fieldset>
+                            <fieldset class="col-2">
+                                <label>City</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <input type="text" name="name" required ng-model="pickup.city" />
+                            </fieldset>
+                            <fieldset class="col-1 reset-margin-right">
+                                <label>Country</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <input type="text" name="name" required ng-model="pickup.country" />
+                            </fieldset>
+                            <fieldset class="col-1 reset-margin-right">
+                                <label>postal code</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <input type="text" name="name" required ng-model="pickup.postalCode" />
+                            </fieldset>
+                            <fieldset class="col-1 reset-margin-right">
+                                <label>Cost(optional)</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <input type="number" name="name" required ng-model="pickup.cost" />
+                            </fieldset>
+                        </div>
+                        <div  float="left" class="icon icon-plus" ng-click="clearFields()" role="button" tabindex="0">
+                        </div>
+                        <div>
+                            add more locations
+                        </div>
+
+                        <div class="md-dialog-buttons">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="backToShippingView()">cancel</md-button>
+                                <md-button class="me-default-button" ng-click="insertPickup(pickup);">save</md-button>
+                            </div>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
         </md-tabs>
     </md-dialog-content>
 </md-dialog>
