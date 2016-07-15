@@ -1,6 +1,7 @@
 <md-dialog aria-label="Manage Products">
     <md-dialog-content>
-        <md-tabs md-center-tabs="false" md-selected="selectedTab" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+        <md-tabs md-center-tabs="false" md-selected="selectedTab" md-no-ink="true" md-autoselect="false"
+                 md-dynamic-height="true">
             <md-tab>
                 <md-tab-label>Product Type</md-tab-label>
                 <md-tab-body>
@@ -9,15 +10,18 @@
                     </div>
                     <div id="Navigation" class="md-dialog-full">
                         <div class="products-options">
-                            <a ng-click='addType("Physical",1);selectedLink = "Physical"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Physical'}">
+                            <a ng-click='addType("Physical",1);selectedLink = "Physical"' href="javascript:void(0);"
+                               ng-class="{'selected': selectedLink === 'Physical'}">
                                 <h1>Physical</h1>
                                 <label>An item that is shipped to your customers</label>
                             </a>
-                            <a ng-click='addType("Digital",1);selectedLink = "Digital"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Digital'}">
+                            <a ng-click='addType("Digital",1);selectedLink = "Digital"' href="javascript:void(0);"
+                               ng-class="{'selected': selectedLink === 'Digital'}">
                                 <h1>Digital</h1>
                                 <label>Content that is downloaded</label>
                             </a>
-                            <a ng-click='addType("Service",1);selectedLink = "Service"' href="javascript:void(0);" ng-class="{'selected': selectedLink === 'Service'}">
+                            <a ng-click='addType("Service",1);selectedLink = "Service"' href="javascript:void(0);"
+                               ng-class="{'selected': selectedLink === 'Service'}">
                                 <h1>Services</h1>
                                 <label>Provide a Service</label>
                             </a>
@@ -37,13 +41,9 @@
                             <div class="clearfix">
                                 <fieldset class="col-2-product">
                                     <label for="input-name">Name</label>
-                                    <input type="text" name="fullname" ng-model="product.name" id="input-name" required />
+                                    <input type="text" name="fullname" ng-model="product.name" id="input-name"
+                                           required/>
                                 </fieldset>
-                                <!--<fieldset class="col-2-product">-->
-                                    <!--<label for="input-name">Brief Description (Only 100 characters)</label>-->
-                                    <!--<textarea rows="1" cols="50" ng-model="product.briefDesc" maxlength="100"></textarea>-->
-                               <!--&lt;!&ndash;     <input type="text" name="briefDesc" ng-model="product.briefDesc" id="input-briefDesc" required />&ndash;&gt;-->
-                                <!--</fieldset>-->
                                 <fieldset class="col-2-product">
                                     <label for="input-name">Description</label>
                                     <textarea rows="4" cols="50" ng-model="product.detailedDesc"></textarea>
@@ -51,40 +51,44 @@
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label for="input-name">SKU</label>
-                                    <input type="number" name="sku" ng-model="product.sku" id="input-sku" required />
+                                    <input type="number" name="sku" ng-model="product.sku" id="input-sku" required/>
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label>Category</label>
-                                    <md-select class="" placeholder="Select Main Menu" ng-model="product.mainId" ng-change="setChild(product.mainId)" required>
-                                        <md-option ng-value="main.id" ng-repeat="main in mainMenu">{{main.name}}</md-option>
+                                    <md-select class="" placeholder="Select Main Menu" ng-model="product.mainId"
+                                               ng-change="setChild(product.mainId)" required>
+                                        <md-option ng-value="main.id" ng-repeat="main in mainMenu">{{main.name}}
+                                        </md-option>
                                     </md-select>
                                 </fieldset>
                                 <fieldset ng-hide="show == false" class="col-2">
                                     <label>Sub Category</label>
-                                    <md-select class="" placeholder="Select Child Menu" ng-model="product.childId" required>
-                                        <md-option ng-value="child.id" ng-repeat="child in child">{{child.name}}</md-option>
+                                    <md-select class="" placeholder="Select Child Menu" ng-model="product.childId"
+                                               required>
+                                        <md-option ng-value="child.id" ng-repeat="child in child">{{child.name}}
+                                        </md-option>
                                     </md-select>
                                 </fieldset>
                             </div>
                             <!--<fieldset class="text-right">-->
-                                <!--<input type="submit" ng-click="idDetails(product)" class="me-default-button" value="Save" />-->
+                            <!--<input type="submit" ng-click="idDetails(product)" class="me-default-button" value="Save" />-->
                             <!--</fieldset>-->
                         </div>
                         <!--<fieldset class="col-2 profile-image-section">-->
-                            <!--<label class="reset-inline fie-upload-text-gap">Product Image</label>-->
-                            <!--<a class="feature01 reset-margin">-->
-                                <!--<span class="overlay01">-->
-                                    <!--<span class="caption01">-->
-                                         <!--<input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*" value="Add Image" required />-->
-                                    <!--</span>-->
-                                <!--</span>-->
-                                <!--<img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />-->
-                                <!--<img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />-->
-                            <!--</a>-->
+                        <!--<label class="reset-inline fie-upload-text-gap">Product Image</label>-->
+                        <!--<a class="feature01 reset-margin">-->
+                        <!--<span class="overlay01">-->
+                        <!--<span class="caption01">-->
+                        <!--<input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*" value="Add Image" required />-->
+                        <!--</span>-->
+                        <!--</span>-->
+                        <!--<img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />-->
+                        <!--<img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />-->
+                        <!--</a>-->
                         <!--</fieldset>-->
 
                         <!--<fieldset class="text-right">-->
-                            <!--<input type="submit" class="me-default-button" ng-disabled="!productForm.$valid" ng-click="addProducts(picFile,product)" value="Add Product" />-->
+                        <!--<input type="submit" class="me-default-button" ng-disabled="!productForm.$valid" ng-click="addProducts(picFile,product)" value="Add Product" />-->
                         <!--</fieldset>-->
                     </form>
                     <div class="md-dialog-buttons">
@@ -108,26 +112,26 @@
                     <div class="md-dialog-main">
                         <table class="me-hours-table">
                             <thead>
-                                <th>Sku</th>
-                                <th class="product-name-column">Product Name</th>
-                                <th>
-                                    <select ng-model="selection">
-                                        <option value="weight">weight</option>
-                                        <option value="size">size</option>
-                                    </select>
-                                </th>
-                                <th>Price</th>
-                                <th>Qty</th>
+                            <th>Sku</th>
+                            <th class="product-name-column">Product Name</th>
+                            <th>
+                                <select ng-model="selection">
+                                    <option value="weight">weight</option>
+                                    <option value="size">size</option>
+                                </select>
+                            </th>
+                            <th>Price</th>
+                            <th>Qty</th>
                             </thead>
                             <tbody>
 
-                                <tr ng-repeat="data in variants">
-                                    <td><input type="number" ng-model="data.sku"></td>
-                                    <td  ng-model="data.name">{{data.name}}</td>
-                                    <td><input type="text" ng-model="data.size"></td>
-                                    <td><input type="number" ng-model="data.price"></td>
-                                    <td><input type="number" ng-model="data.quantity"></td>
-                                </tr>
+                            <tr ng-repeat="data in variants">
+                                <td><input type="number" ng-model="data.sku"></td>
+                                <td ng-model="data.name">{{data.name}}</td>
+                                <td><input type="text" ng-model="data.size"></td>
+                                <td><input type="number" ng-model="data.price"></td>
+                                <td><input type="number" ng-model="data.quantity"></td>
+                            </tr>
                             </tbody>
                         </table>
                         <div class="icon icon-plus" ng-click="addVariants(product)">
@@ -136,7 +140,8 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep3(3,selection,variants)">Next</md-button>
+                            <md-button class="me-default-button" ng-click="nextStep3(3,selection,variants)">Next
+                            </md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -172,24 +177,24 @@
                                 </button>
                             </div>
                             <div class="uploaded-old-images">
-                                    <p>Add Pricing</p>
-                                    <fieldset>
-                                        <p>Product Price</p>
-                                        <input type="number" name="name" ng-model="variants.price" id="input-price"
-                                               class="me-xs-input reset-inline" required/>
-                                    </fieldset>
+                                <p>Add Pricing</p>
+                                <fieldset>
+                                    <p>Product Price</p>
+                                    <input type="number" name="name" ng-model="variants.price" id="input-price"
+                                           class="me-xs-input reset-inline" required/>
+                                </fieldset>
                             </div>
                         </div>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep3Digital(3,product,variants)">Next</md-button>
+                            <md-button class="me-default-button" ng-click="nextStep3Digital(3,product,variants)">Next
+                            </md-button>
                         </div>
                     </div>
                 </md-tab-body>
             </md-tab>
-
 
 
             <md-tab>
