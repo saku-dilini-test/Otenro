@@ -56,8 +56,10 @@
 
 /** ----------- Start Custom update Css Class ---------- **/
 
-.made-easy-backgroundColor{
-  background-color: #b22727;
+.made-easy-background{
+    background-color: #b22727;
+    background: url(../img/background.jpg) center;
+    background-size: cover;
 }
 .made-easy-navigationBarColor{
   background-color: #312626;
@@ -91,10 +93,7 @@
 }
 
 /* ----- Second Navigation Page ----- */
-.made-easy-second-navigation {
-    background: url(../img/background.jpg) center;
-    background-size: cover;
-}
+.made-easy-second-navigation {}
 .made-easy-second-navigation .header .header-image{
     width: 100%;
     height: auto;
@@ -104,10 +103,7 @@
 }
 
 /* ----- Third Navigation Page ----- */
-.made-easy-third-navigation {
-    background: url(../img/background.jpg) center;
-    background-size: cover;
-}
+.made-easy-third-navigation {}
 .made-easy-third-navigation .header .header-image{
     width: 100%;
     height: auto;
@@ -117,10 +113,7 @@
 }
 
 /* ----- View Page ----- */
-.made-easy-view {
-    background: url(../img/background.jpg) center;
-    background-size: cover;
-}
+.made-easy-view {}
 .made-easy-view .item-name {
     text-align: center;
     color: #006666;
@@ -130,10 +123,7 @@
 }
 
 /* ----- Contact Us Page ----- */
-.made-easy-contactUs {
-    background: url(../img/background.jpg) center;
-    background-size: cover;
-}
+.made-easy-contactUs {}
 .made-easy-contactUs .header{}
 .made-easy-contactUs .header .header-image {
     width: 100%;
@@ -150,10 +140,7 @@
 }
 
 /* ----- About Us Page ----- */
-.made-easy-aboutUs {
-    background: url(../img/background.jpg) center;
-    background-size: cover;
-}
+.made-easy-aboutUs {}
 .made-easy-aboutUs .header{}
 .made-easy-aboutUs .header .header-image {
     width: 100%;
@@ -167,10 +154,7 @@
 }
 
 /* ----- Terms Page ----- */
-.made-easy-terms {
-    background: url(../img/background.jpg) center;
-    background-size: cover;
-}
+.made-easy-terms {}
 .made-easy-terms .content {
     text-align: center;
 }
