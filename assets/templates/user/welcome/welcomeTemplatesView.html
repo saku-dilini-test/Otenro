@@ -4,7 +4,11 @@
         <ul class="grid obl-app-templates clearfix">
             <li ng-repeat="template in templates">
                 <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory)" >
-                    <img ng-src="images/templates/{{template.imageUrl}}" />
+                <div ng-init="imgsrc=template.imageUrl"
+                     ng-mouseover="imgsrc=template.gifImageUrl"
+                     ng-mouseout="imgsrc=template.imageUrl">
+                    <img ng-src="images/templates/{{imgsrc}}" />
+                </div>
                 </a>
             </li>
         </ul>

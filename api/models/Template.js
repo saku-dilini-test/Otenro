@@ -18,6 +18,9 @@ module.exports = {
         templateViewDesc: {
             type: 'string'
         },
+        gifImageUrl:{
+            type: 'string'
+        },
         imageUrl: {
             type: 'string'
         },
@@ -75,6 +78,7 @@ module.exports = {
             template_name : 'foodDemoApp',
             templateViewName : 'Food App',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
+            gifImageUrl : 'foodDeliver/foodapp.gif',
             imageUrl : 'foodDeliver/foodDeliver.png',
             templateFilesPath:'templates/foodDemoApp',
             templateCategory: TemplateCategoryDetails.Business.ID
@@ -83,6 +87,7 @@ module.exports = {
             template_name : 'foodDemoApp2',
             templateViewName : 'Cloth Temp',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
+            gifImageUrl : 'foodDeliver2/clothing.gif',
             imageUrl : 'foodDeliver2/foodDeliver2.png',
             templateFilesPath:'templates/foodDemoApp2',
             templateCategory: TemplateCategoryDetails.Business.ID
@@ -91,6 +96,7 @@ module.exports = {
             template_name : 'clothingApp',
             templateViewName : 'Cloth Template',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
+            gifImageUrl : 'clothingApp/clothing-2.gif',
             imageUrl : 'clothingApp/clothing.jpg',
             templateFilesPath:'templates/clothingApp',
             templateCategory: TemplateCategoryDetails.Business.ID
@@ -99,6 +105,7 @@ module.exports = {
             template_name : 'hkRising',
             templateViewName : 'Hong KongRising',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
+            gifImageUrl : 'hkRising/hkRising.gif',
             imageUrl : 'hkRising/hkRising.png',
             templateFilesPath:'templates/hkRising',
             templateCategory: TemplateCategoryDetails.Media.ID
