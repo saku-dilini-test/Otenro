@@ -196,6 +196,7 @@ module.exports.routes = {
     'POST /edit/getEmailSettings': 'edit/commerce/EmailController.getEmailSettings',
     'POST /edit/updateEmailSettings': 'edit/commerce/EmailController.updateEmailSettings',
     'POST /edit/sendTestEmail': 'edit/commerce/EmailController.sendTestEmail',
+    'POST /edit/updateHeaderFooterSettings': 'edit/commerce/EmailController.updateHeaderFooterSettings',
 
     /**
      * ShippingController

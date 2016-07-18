@@ -300,7 +300,6 @@
 //        };
 
 
-
         $scope.deleteCategory = function ($index) {
             var prams = {
                 categoryID: $scope.categories[$index].id,
@@ -520,6 +519,27 @@
             email.appId = $rootScope.appId;
             console.log(email);
             commerceService.updateEmailSettings(email)
+                .success(function (data) {
+                    console.log(data);
+                    if (type == "next") {
+                        var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
+                        $scope.selectedIndex = index;
+                    }
+                    toastr.success('Email Settings has been changed ', 'Success', {
+                        closeButton: true
+                    });
+
+                }).error(function (err) {
+                toastr.error('Unable to Create', 'Warning', {
+                    closeButton: true
+                });
+            })
+
+        };
+        $scope.updateHeaderFooterSettings = function (picFileHeader, picFileFooter, email, type) {
+            email.appId = $rootScope.appId;
+            console.log(email);
+            commerceService.updateHeaderFooterSettings(picFileHeader, picFileFooter, email)
                 .success(function (data) {
                     console.log(data);
                     if (type == "next") {
