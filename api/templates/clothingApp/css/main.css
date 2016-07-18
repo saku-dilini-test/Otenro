@@ -57,8 +57,10 @@
 
 /** ----------- Start Custom update Css Class ---------- **/
 
-.made-easy-backgroundColor{
-  background-color: #b22727;
+.made-easy-background{
+    background-color: #10b23e;
+    background: url(../img/background.jpg) center;
+    background-size: cover;
 }
 .made-easy-navigationBarColor{
   background-color: #312626;
@@ -89,6 +91,84 @@
   border-radius: 3px;
 }
 
+/* ----- Second Navigation Page ----- */
+.made-easy-second-navigation {}
+.made-easy-second-navigation .header-image {
+    width: 100%;
+    height: auto;
+}
+
+/* ----- Third Navigation Page ----- */
+.made-easy-third-navigation {}
+.made-easy-third-navigation .header-image {
+    width: 100%;
+    height: auto;
+}
+
+/* ----- View Page ----- */
+.made-easy-view {}
+.made-easy-view .item-name {
+    text-align: center;
+    color: #006666;
+}
+.made-easy-view .item-buy-quantity{
+    width: 50px;
+}
+.made-easy-view .item-error-message{
+    color: red;
+}
+
+/* ----- Contact Us Page ----- */
+.made-easy-contactUs {}
+.made-easy-contactUs .header{}
+.made-easy-contactUs .header .header-image {
+    width: 100%;
+    height: auto;
+}
+.made-easy-contactUs .content {
+    text-align: center;
+}
+.made-easy-contactUs .content .last {
+    margin-bottom: 20px;
+}
+.made-easy-contactUs .bottom {
+    margin-top: 2.5%;
+}
+
+/* ----- About Us Page ----- */
+.made-easy-aboutUs {}
+.made-easy-aboutUs .header{}
+.made-easy-aboutUs .header .header-image {
+    width: 100%;
+    height: auto;
+}
+.made-easy-aboutUs .content {
+    text-align: center;
+    padding: 8px;
+}
+.made-easy-aboutUs .content .last {
+    margin-bottom: 20px;
+}
+
+/* ----- Terms Page ----- */
+.made-easy-terms {}
+.made-easy-terms .content {
+    text-align: center;
+}
+
+/*------- Button Setting ------- */
+.made-easy-button-create-account {
+    background-color: #FFBF0A;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius:4px;
+    width: 94%;
+    margin: 10px;
+}
 
 /* ------------------- */
 

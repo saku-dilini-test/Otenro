@@ -35,6 +35,11 @@ module.exports = {
         if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2'){
             loginPath = '/#/app/login';
         }
+
+        if(templateName == 'clothingApp'){
+            loginPath = '/#/app/category';
+        }
+
         if(templateName == 'hkRising'){
             loginPath = '/#/app/home/firstMenu';
         }
