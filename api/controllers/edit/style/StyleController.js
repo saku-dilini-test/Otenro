@@ -332,7 +332,7 @@ module.exports = {
 
                 if(isApplyBGImage == true){
                     updateFile(mainCssFile, [{
-                        rule: 'made-easy-background',
+                        rule: 'made-easy-background-image',
                         target: "background",
                         replacer: "url(../img/background.jpg) center"
                     }], function (err) {
@@ -340,7 +340,7 @@ module.exports = {
                     });
                 }else{
                     updateFile(mainCssFile, [{
-                        rule: 'made-easy-background',
+                        rule: 'made-easy-background-image',
                         target: "background",
                         replacer: 'null'
                     }], function (err) {
@@ -539,7 +539,7 @@ module.exports = {
             // here update background-color in Css class
             if(type == 'backgroundColor'){
                 app.appSettings.backgroundColor= styleColor;
-                colorTypeCss = ".made-easy-background";  // color & image use same class
+                colorTypeCss = ".made-easy-background-color";
             }else if(type == 'navigationBarColor'){
                 app.appSettings.navigationBarColor= styleColor;
                 colorTypeCss = ".made-easy-navigationBarColor";

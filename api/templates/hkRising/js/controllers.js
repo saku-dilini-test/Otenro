@@ -43,20 +43,6 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('PlaylistsCtrl', function ($scope) {
-        $scope.playlists = [
-            {title: 'Reggae', id: 1},
-            {title: 'Chill', id: 2},
-            {title: 'Dubstep', id: 3},
-            {title: 'Indie', id: 4},
-            {title: 'Rap', id: 5},
-            {title: 'Cowbell', id: 6}
-        ];
-    })
-
-    .controller('PlaylistCtrl', function ($scope, $stateParams) {
-    })
-
     .controller('HomeCtrl', function ($scope, $http, constants, $rootScope, $timeout, $state, $ionicLoading) {
 
         $scope.appName = $rootScope.appName;
@@ -79,22 +65,6 @@ angular.module('starter.controllers', [])
         }, 1000);
 
 
-    })
-
-    .controller('secondNaviCtrl', function ($scope, $http, constants, $rootScope, $ionicLoading) {
-        $scope.appId = $rootScope.appId;
-        $scope.appName = $rootScope.appName;
-        $ionicLoading.show({
-            template: '<ion-spinner icon="lines" ></ion-spinner>'
-        });
-        $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId=' + $rootScope.appId)
-            .success(function (data) {
-                $ionicLoading.hide();
-                $scope.secondNaviList = data;
-                console.log(data);
-            }).error(function (err) {
-            alert('loading err');
-        });
     })
 
     .controller('contactUsCtrl', function ($scope, $http, constants, $rootScope, $ionicLoading) {
