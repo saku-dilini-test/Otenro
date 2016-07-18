@@ -1,13 +1,15 @@
 <ion-view view-title="About Us">
-  <ion-content class="made-easy-background made-easy-aboutUs">
-    <div class="card animated bounceInDown">
-        <div class="header_image">
-            <img src="img/about_us.jpg" width="100%" height="auto"/>
+    <ion-content class="made-easy-background made-easy-aboutUs">
+        <div class="card animated bounceInDown">
+            <div class="header">
+                <div class="header-image">
+                    <img src="img/aboutUs.jpg" width="100%"/>
+                </div>
+            </div>
+            <div class="content">
+                <div class="made-easy-header-font" ng-bind-html="header"></div>
+                <div class="made-easy-content-font" ng-bind-html="content"></div>
+            </div>
         </div>
-        <div class="about_us" style="text-align: center">
-            <div class="made-easy-header-font" ng-bind-html="header"></div>
-            <div class="made-easy-content-font" ng-bind-html="content"></div>
-        </div>
-    </div>
-  </ion-content>
+    </ion-content>
 </ion-view>

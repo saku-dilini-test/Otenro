@@ -93,9 +93,17 @@
 
 /* ----- Second Navigation Page ----- */
 .made-easy-second-navigation {}
+.made-easy-second-navigation .header-image {
+    width: 100%;
+    height: auto;
+}
 
 /* ----- Third Navigation Page ----- */
 .made-easy-third-navigation {}
+.made-easy-third-navigation .header-image {
+    width: 100%;
+    height: auto;
+}
 
 /* ----- View Page ----- */
 .made-easy-view {}

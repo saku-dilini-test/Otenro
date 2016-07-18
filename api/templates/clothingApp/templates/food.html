@@ -1,40 +1,57 @@
 <ion-view view-title="{{foodInfo.name}}">
     <ion-content class="made-easy-background made-easy-view">
-<div class="food">
-  <div class="panel">
-    <div class="card">
-     <div class="header_image animated bounceInRight">
-       <img ng-src="{{imageURL}}/{{foodInfo.imageUrl}}" width="100%" height="auto"/>
-     </div>
-      <div class="item item-text-wrap">
-
-          <div class="animated rubberBand" style="text-align: center; color: #006666"><h3>{{foodInfo.name}}</h3></div>
-        <p class="animated zoomIn">{{foodInfo.detailedDesc}}</p>
-
-
-          <div class="row">
-              <div class="col2 font-size:12px ">Size</div>
-              <div class="col2 font-size:12px">Price</div>
-              <div class="col2 font-size:12px">Qty</div>
-          </div>
-          <div ng-repeat="variant in productVariants" >
-            <div class="row" ng-if="variant.quantity > 0">
-                <div class="col2 font-size:12px " ng-model="variant.size">{{variant.size}}</div>
-                <div class="col2 font-size:12px" ng-model="variant.price">{{currency.sign}} : {{variant.price}}</div>
-                <div class="col2"><input type="number"  style="width:50px"  ng-model="variant.buyQuantity"></div>
+        <div class="food">
+            <div class="panel">
+                <div class="card">
+                    <div class="header_image animated bounceInRight">
+                        <img ng-src="{{imageURL}}/{{foodInfo.imageUrl}}" width="100%" height="auto"/>
+                    </div>
+                </div>
+                    <div class="item item-text-wrap">
+                        <div class="animated rubberBand item-name">
+                            <h3>{{foodInfo.name}}</h3>
+                        </div>
+                        <p class="animated zoomIn">{{foodInfo.detailedDesc}}</p>
+                        <div class="row">
+                            <div class="col2 font-size:12px ">Size</div>
+                            <div class="col2 font-size:12px">Price</div>
+                            <div class="col2 font-size:12px">Qty</div>
+                        </div>
+                        <div class="row">
+                            <select ng-model="selectedVariant"
+                              ng-options="variant.size  for variant in foodInfo.variants"
+                              ng-change="changeVariant(selectedVariant)">
+                            </select>
+                            <div class="col2 font-size:12px">
+                                {{currency.sign}} : {{selectedVariant.price}}
+                            </div>
+                            <div class="col2">
+                                <input type="number"
+                                 class="item-buy-quantity"
+                                 ng-model="selectedVariant.buyQuantity">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="animated zoomIn item-error-message"
+                                ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity != 1">
+                                Please enter a quantity of {{selectedVariant.quantity}} or less.
+                            </p>
+                            <p class="animated zoomIn item-error-message"
+                               ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
+                                Please enter a quantity of {{selectedVariant.quantity}}.
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="col2">
+                                <button class="button button-small button-calm"
+                                        ng-disabled="isBuyBtnDisable"
+                                        ng-click="addToCart()">
+                                    Buy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="row">
-              <div class="col2" ng-if="foodInfo.buy == 'enable'"><button class="button button-small button-calm" ng-click="addToCart(variant)">
-                     Buy
-                   </button>
-              </div>
-          </div>
-       <br>
-     </div>
-   </div>
- </div>
-</div>
-
- </ion-content>
+    </ion-content>
 </ion-view>
