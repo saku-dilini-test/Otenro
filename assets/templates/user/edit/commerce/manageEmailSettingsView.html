@@ -69,19 +69,65 @@
                             <label>Header</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <trix-editor angular-trix rows="4" ng-model="emailHF.header"></trix-editor>
+                            <div class="file-upload-wrapper clearfix">
+                                <p class="file-upload-msg">Upload your product images</p>
+                                <div class="pull-left">
+                                    <div class="me-file-upload rounded">
+                                        <div class="upload-wrapper">
+                                            <input type="button" ngf-select ng-model="picFileHeader" ngf-accept="image/*"
+                                                   aria-invalid="true" ngf-change="changeImage()" required/>
+                                            <span>Browse Images</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uploaded-section clearfix">
+                                <div class="uploaded-new-image">
+                                    <p>Browsed Image</p>
+                                    <img ng-if="picFileHeader == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                         height="150"/>
+                                    <img ng-if="picFileHeader != null" ngf-src="picFileHeader" width="150" height="150"/>
+
+                                    <button class="me-upload-image-button" ng-click="addImage(picFileHeader)">Upload Image
+                                    </button>
+                                </div>
+                                </div>
                         </fieldset>
                         <fieldset>
                             <label>footer</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <trix-editor angular-trix rows="4" ng-model="emailHF.footer"></trix-editor>
+                            <div class="file-upload-wrapper clearfix">
+                                <p class="file-upload-msg">Upload your product images</p>
+                                <div class="pull-left">
+                                    <div class="me-file-upload rounded">
+                                        <div class="upload-wrapper">
+                                            <input type="button" ngf-select ng-model="picFileFooter" ngf-accept="image/*"
+                                                   aria-invalid="true" ngf-change="changeImage()" required/>
+                                            <span>Browse Images</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uploaded-section clearfix">
+                                <div class="uploaded-new-image">
+                                    <p>Browsed Image</p>
+                                    <img ng-if="picFileFooter == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                         height="150"/>
+                                    <img ng-if="picFileFooter != null" ngf-src="picFileFooter" width="150" height="150"/>
+
+                                    <button class="me-upload-image-button" ng-click="addImage(picFileFooter)">Upload Image
+                                    </button>
+                                </div>
+                            </div>
                         </fieldset>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(emailHF,'save')">Save
+                            <md-button class="me-default-button" ng-click="updateHeaderFooterSettings(picFileHeader,picFileFooter,emailHF,,'save')">Save
                             </md-button>
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(emailHF,'next')">Next</md-button>
+                            <md-button class="me-default-button" ng-click="updateHeaderFooterSettings(picFileHeader,picFileFooter,emailHF,'next')">Next</md-button>
                         </div>
                     </div>
 

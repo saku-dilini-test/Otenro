@@ -205,6 +205,13 @@
             updateEmailSettings: function (data) {
                 return $http.post(SERVER_URL + 'edit/updateEmailSettings', data);
             },
+            updateHeaderFooterSettings: function (fileHeader,fileFooter, data) {
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/updateHeaderFooterSettings',
+                    fields: data,
+                    file: fileHeader
+                });
+            },
             sendTestEmail: function (data) {
                 return $http.post(SERVER_URL + 'edit/sendTestEmail', data);
             },

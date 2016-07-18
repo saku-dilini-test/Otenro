@@ -4,6 +4,8 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 var sentMails = require('../../../services/emailService');
+var fs = require('fs-extra'),
+    config = require('../../../services/config');
 module.exports = {
 
     saveEmailDeliInfo : function(req,res){
@@ -49,6 +51,33 @@ module.exports = {
             if (err) return done(err);
             res.send({
                 message: "Email Settings has been added"
+            });
+        });
+    },
+    updateHeaderFooterSettings : function(req,res){
+
+        var dePath= '/assets/images/';
+        req.file('file').upload({
+            dirname: require('path').resolve(dePath)
+        },function (err, uploadedFiles) {
+
+            var newFileName=Date.now()+'.png';
+            fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
+                if (err) return res.send(err);
+            });
+
+
+            console.log(req.body);
+            var appId = req.param('appId');
+            console.log(appId);
+            var saveData = req.body;
+
+
+            UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
+                if (err) return done(err);
+                res.send({
+                    message: "Email Settings has been added"
+                });
             });
         });
     },
