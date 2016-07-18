@@ -1,41 +1,25 @@
 <ion-view view-title="{{appName}}">
-  <ion-content class="made-easy-backgroundColor">
-      <div class="card2">
-          <div class="item item-image animated fadeInLeft">
-              <img class="full-image" src="img/background.jpg">
-          </div>
-          <div class="item item-text-wrap2">
-              <div class="made-easy-header-font">Contact Us</div>
-              <div class="animated bounceInUp">
-                  <div class="made-easy-content-font">
-                      Address : {{address}}
-                  </div>
-                  <div class="made-easy-content-font">
-                      Tel : {{telPhone}}
-                  </div>
-                  <div class="made-easy-content-font">
-                      E-mail : {{email}}
-                  </div>
-                  <div class="made-easy-content-font">
-                      Web : {{webSite}}
-                  </div>
-              </div>
-              <!--<div class="md-dialog-main">-->
-                      <!--<div class="google-map-wrapper">-->
-                          <!--<div class="google-map-container">-->
-                              <!--<ui-gmap-google-map  center="map.center" zoom="map.zoom" draggable="true" events="map.events">-->
-                                  <!--<ui-gmap-marker ng-repeat="mp in map.markers" coords="{{map.markers[0].coords}}" icon="mp.icon" idkey="mp.id"></ui-gmap-marker>-->
-                              <!--</ui-gmap-google-map>-->
-                          <!--</div>-->
-                      <!--</div>-->
-      <!--&lt;!&ndash;                <fieldset>-->
-                          <!--{{map.markers[0].coords.latitude}}-->
-                          <!--<br />-->
-                          <!--{{map.markers[0].coords.longitude}}-->
-                      <!--</fieldset>&ndash;&gt;-->
-              <!--</div>-->
-          </div>
-      </div>
-  </ion-content>
+    <ion-content class="made-easy-contactUs made-easy-background-color">
+        <div class="content made-easy-background-color">
+            <div class="background-image made-easy-background-image"></div>
+            <div class="item item-text-wrap2 made-easy-background-color">
+                <div class="made-easy-header-font">Contact Us</div>
+                <div class="animated bounceInUp">
+                    <div class="made-easy-content-font">
+                        Address : {{address}}
+                    </div>
+                    <div class="made-easy-content-font">
+                        Tel : {{telPhone}}
+                    </div>
+                    <div class="made-easy-content-font">
+                        E-mail : {{email}}
+                    </div>
+                    <div class="made-easy-content-font">
+                        Web : {{webSite}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
 
