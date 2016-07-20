@@ -56,8 +56,11 @@
 
 /** ----------- Start Custom update Css Class ---------- **/
 
-.made-easy-background{
-    background-color: #b22727;
+.made-easy-background-color {
+    background-color: #b22727 !important;
+}
+
+.made-easy-background-image{
     background: url(../img/background.jpg) center;
     background-size: cover;
 }
