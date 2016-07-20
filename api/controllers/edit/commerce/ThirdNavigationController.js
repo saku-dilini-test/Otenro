@@ -43,17 +43,17 @@ module.exports = {
     },
 
     addThirdNavi : function(req,res){
-
-        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
+        var dePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
         req.file('file').upload({
             dirname: require('path').resolve(dePath)
-        },function (err, uploadedFiles) {
+        }, function (err, uploadedFiles) {
             if (err) return res.send(500, err);
 
             var newFileName=Date.now()+'.png';
             fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
                 if (err) return res.send(err);
             });
+
 
             var thirdN =req.body;
             thirdN.imageUrl = newFileName;
@@ -66,6 +66,7 @@ module.exports = {
                 price: thirdN.price,
                 quantity: thirdN.quantity
             }
+
                 ThirdNavigation.update({id:thirdN.id},thirdN).exec(function(err, appProduct) {
                     if (err) res.send(err);
                     res.send({
@@ -81,8 +82,7 @@ module.exports = {
                 });
             }
             else{
-
-            ThirdNavigation.create(thirdN).exec(function(err, appProduct) {
+                ThirdNavigation.create(thirdN).exec(function(err, appProduct) {
                 if (err) res.send(err);
                 res.send({
                     appId: appProduct,
