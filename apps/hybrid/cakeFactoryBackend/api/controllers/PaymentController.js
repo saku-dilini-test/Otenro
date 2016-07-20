@@ -320,7 +320,7 @@ module.exports = {
           var emailDetails = {
             from: "orders@verticalmedia.lk",
             to: orderEmail,
-            cc: 'onbilabsttest@gmail.com',
+            cc: 'orders@verticalmedia.lk',
             bcc: '',
             subject: "New " + optionType + " Order",
             attachment: [

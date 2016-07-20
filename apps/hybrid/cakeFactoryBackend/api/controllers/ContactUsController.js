@@ -59,7 +59,7 @@ module.exports = {
             var emailDetails = {
               from: "orders@verticalmedia.lk",
               to: orderEmail,
-              cc: "onbilabsttest@gmail.com",
+              cc: "orders@verticalmedia.lk",
               bcc: '',
               subject: "New Contact Request : "+contact.title,
               attachment: [
@@ -95,7 +95,7 @@ module.exports = {
         var emailDetails = {
           from: "orders@verticalmedia.lk",
           to: orderEmail,
-          cc: "onbilabsttest@gmail.com",
+          cc: "orders@verticalmedia.lk",
           bcc: '',
           subject: "New Contact Request : "+contact.title,
           attachment: [
