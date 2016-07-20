@@ -22,7 +22,7 @@
                 secondLocked: tab2,
                 thirdLocked: tab3,
                 countrySelectionLocked: tab4,
-                pickup : tab5
+                pickupLocked : tab5
                 
             };
         }
@@ -38,9 +38,13 @@
         }
         // --/-- add new shipping collection mode
         else if($scope.initialData == 'newShippingOption'){
-            enableDisableTabs(0,false,true,true,true);
+            enableDisableTabs(0,false,true,true,true,true);
+
             $scope.moveToFlatRateOption = function () {
-                enableDisableTabs(1,false,false,true,true);
+                enableDisableTabs(1,false,false,true,true,true);
+            };
+            $scope.moveToPickupOption = function () {
+                enableDisableTabs(3,false,false,true,true,false);
             };
             $scope.moveToWeightBasedOption = function () {
                 $scope.weightRate = {
@@ -49,21 +53,21 @@
                 $scope.addNewWeightRange = function(){
                     $scope.weightRate.weightRanges.push({startWeight : '',endWeight : '',cost : ''})
                 };
-                enableDisableTabs(2,false,true,false,true);
+                enableDisableTabs(2,false,true,false,true,true);
             };
         }
         // --/-- shipping collection editable mode
         else{
             if($scope.initialData.shippingOption == 'Flat Rate'){
                 $scope.flatRates = $scope.initialData;
-                enableDisableTabs(1,true,false,true,true);
+                enableDisableTabs(1,true,false,true,true,true);
             }
             if($scope.initialData.shippingOption == 'Weight Base'){
                 $scope.weightRate = $scope.initialData;
                 $scope.addNewWeightRange = function(){
                     $scope.weightRate.weightRanges.push({startWeight : '',endWeight : '',cost : ''})
                 };
-                enableDisableTabs(2,true,true,false,true);
+                enableDisableTabs(2,true,true,false,true,true);
             }
         }
 
@@ -87,7 +91,7 @@
                         toastr.success('Successfully Saved ', 'Saved', {
                             closeButton: true
                         });
-                        enableDisableTabs(3,true,false,true,false);
+                        enableDisableTabs(3,true,false,true,true,false);
                     }).error(function (error) {
                         toastr.error('Loading Error', 'Warning', {
                             closeButton: true
@@ -109,7 +113,7 @@
                         toastr.success('Successfully Saved ', 'Saved', {
                             closeButton: true
                         });
-                        enableDisableTabs(4,true,false,true,false);
+                        enableDisableTabs(3,true,false,true,false,true);
                     }).error(function (error) {
                     toastr.error('Loading Error', 'Warning', {
                         closeButton: true
@@ -140,7 +144,7 @@
                         toastr.success('Successfully Saved ', 'Saved', {
                             closeButton: true
                         });
-                        enableDisableTabs(3,true,true,false,false);
+                        enableDisableTabs(3,true,true,false,true,false);
                     }).error(function (error) {
                         toastr.error('Loading Error', 'Warning', {
                             closeButton: true
