@@ -568,6 +568,7 @@
             alert("MainMenu Loading Error : " + error);
         });
         $scope.testEmail = function (type) {
+            console.log('d');
             var sendType = {
                 type: type
             }

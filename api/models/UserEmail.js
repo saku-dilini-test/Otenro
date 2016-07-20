@@ -34,6 +34,12 @@ module.exports = {
         header:{
             type: 'string'
         },
+        imageHeader:{
+            type: 'string'
+        },
+        imageFooter:{
+            type: 'string'
+        },
         footer:{
             type: 'string'
         }
