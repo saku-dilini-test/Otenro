@@ -4,9 +4,9 @@
  (function() {
     'use strict';
     angular.module("appEdit").controller("InventoryCtrl", [
-    '$scope', 'inventoryService','commerceService','$rootScope','SERVER_URL','$auth','toastr',
+    '$scope', 'inventoryService','commerceService','$rootScope','SERVER_URL','$auth','toastr','$mdDialog',
     InventoryCtrl]);
-    function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth,toastr) {
+    function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth,toastr,$mdDialog) {
             $scope.currentPage = 1;
             $scope.pageSize = 5;
             $scope.userId=$auth.getPayload().id;
@@ -47,18 +47,49 @@
 
             };
 
-            $scope.deletePro = function(index,inventory){
-                $scope.inventoryList.splice(index, 1);
-                inventory.userId = $scope.userId;
-                commerceService.deleteProducts(inventory).success(function(data) {
-                    toastr.success(data.message, 'Message', {
-                        closeButton: true
-                    });
-                }).error(function(err) {
-                    toastr.error(err, 'Warning', {
-                        closeButton: true
-                    });
-                });
-            }
+
+
+        $scope.deletePro = function (index,inventory) {
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+                    this.confirm = function click(){
+                        $scope.inventoryList.splice(index, 1);
+                        inventory.userId = $scope.userId;
+                        commerceService.deleteProducts(inventory).success(function(data) {
+                            toastr.success("product deleted", 'Message', {
+                                closeButton: true
+                            });
+                            $mdDialog.hide();
+                            return commerceService.showInventoryDialog();
+                        }).error(function(err) {
+                            toastr.error(err, 'Warning', {
+                                closeButton: true
+                            });
+                            $mdDialog.hide();
+                        });
+                    },
+                        this.cancel = function click(){
+                            $mdDialog.hide();
+                            return commerceService.showInventoryDialog();
+                        }
+                },
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                '<md-content >' +
+                '<div class="md-dialog-header">' +
+                '<h1>Deleting Product </h1>' +
+                '                </div> <br>'+
+                ' <div style="text-align:center"><lable> Deleting product will delete this product ! </lable></div>' +
+                '<br><br><div class="md-dialog-buttons">'+
+                '<div class="inner-section">'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">Cancel</md-button>'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Ok</md-button>'+
+                '</div>'+
+                '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
+
+        };
     }
     })();
