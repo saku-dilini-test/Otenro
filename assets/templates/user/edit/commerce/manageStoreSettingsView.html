@@ -247,6 +247,34 @@
                 </md-tab-body>
             </md-tab>
             <md-tab>
+                <md-tab-label>About Us</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>About Us</h1>
+                    </div>
+                    <div class="md-dialog-main">
+                        <fieldset>
+                            <label>Heading</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12" />
+                            <input type="text" name="username" ng-model="about.header" required  />
+                        </fieldset>
+                        <fieldset>
+                            <label>Content</label>
+                            <img src="../../../images/question-mark.svg" width="12" height="12">
+                            <trix-editor angular-trix rows="4" ng-model="about.content"></trix-editor>
+                        </fieldset>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <fieldset class="text-right reset-margin">
+                                <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                                <md-button class="me-default-button" ng-click="addAboutUs(3,about)">Next</md-button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
                 <md-tab-label>social media</md-tab-label>
                 <md-tab-body >
                     <div class="md-dialog-header">

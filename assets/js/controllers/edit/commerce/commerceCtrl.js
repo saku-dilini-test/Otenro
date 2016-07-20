@@ -1,10 +1,10 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("CommerceCtrl", [
-        '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope', 'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q',
+        '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope', 'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService',
         CommerceCtrl]);
 
-    function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope, SERVER_URL, $auth, ME_APP_SERVER, $interval, $q) {
+    function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope, SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService) {
 
         $scope.refund = [];
         $scope.unfulfilled = [];
@@ -414,6 +414,26 @@
                 })
                 $scope.selectedTab = current;
             }
+        };
+
+        $scope.addAboutUs = function (current,aboutUs) {
+
+            aboutUs.appId = $rootScope.appId;
+            aboutUsService.addAboutUs(aboutUs)
+                .success(function (data, status, headers, config) {
+                    toastr.success('Successfully save About Us Data ..... !', 'Awsome!', {
+                        closeButton: true
+                    });
+                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                        +'/templates/'+$rootScope.appId+'' +
+                        '#/app/aboutUs';
+                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                    $scope.selectedTab = current;
+                }).error(function (data, status, headers, config) {
+                toastr.error('Unable to Add', 'Warning', {
+                    closeButton: true
+                });
+            })
         };
 
         commerceService.showStoreSettings($rootScope.appId).success(function (data) {
