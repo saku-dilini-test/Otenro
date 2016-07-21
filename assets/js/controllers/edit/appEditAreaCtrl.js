@@ -3,10 +3,12 @@
  */
 (function(){
     angular.module('appEdit').controller('AppEditAreaCtrl',[
-        '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER','toastr','mySharedService','$interval','dashboardService','$mdDialog',
+        '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER',
+        'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookies','$cookieStore',
         AppEditAreaCtrl]);
 
-    function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,toastr,mySharedService,$interval,dashboardService,$mdDialog){
+    function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
+    toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookies,$cookieStore){
 
         $rootScope.bodyClass = 'appEdit';
 
@@ -16,7 +18,10 @@
         //$scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
         //                        +'/templates/'+$stateParams.appId;
 
-        appEditResource.getSelectedApp({appId: $stateParams.appId})
+
+        $scope.id = $cookieStore.get('AppId');
+
+        appEditResource.getSelectedApp({appId: $scope.id})
             .success(function(data) {
                 /**
                  * TODO : This should change later according type of template category
@@ -25,7 +30,6 @@
 
                 dashboardService.getTemplateMetaData(data.templateCategory)
                     .success(function(data) {
-                        console.log(data);
                         $scope.buttonArray = data.btnArray;
                         $scope.firstMenuLabel = data.firstMenuLabel;
                         if(data.firstMenuLabel){

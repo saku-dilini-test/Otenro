@@ -72,6 +72,7 @@
                                 +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                             mySharedService.prepForBroadcast(url);
+                            $cookieStore.put('AppId', data.data.appId);
                             $state.go('user.editApp',{appId:data.data.appId});
                         });
                     $mdDialog.hide(answer);
@@ -82,7 +83,9 @@
                 $scope.profileView = function () {
                     return userProfileService.showUserProfileDialog();
                 }
+                $cookieStore.remove('appId');
         };
+
     }
 
     function DialogController($scope, $mdDialog,$auth,$state,initialData,welcomeTemplatesResource,mySharedService,ME_APP_SERVER) {
