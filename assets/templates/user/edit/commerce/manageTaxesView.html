@@ -15,27 +15,24 @@
             </fieldset>
             <table class="me-simple-table">
                 <thead>
-                    <th class="simple-column">country</th>
-                    <th class="simple-column">amount</th>
-                    <th class="simple-column">delete</th>
-                    <th>&nbsp;</th>
+                    <th class="simple-column">Country</th>
+                    <th class="simple-column">Amount</th>
+                    <th class="simple-column">Edit</th>
+                    <th class="simple-column">Delete</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>sri lanka</td>
-                        <td>10%</td>
-                        <td><a href="javascript:void(0);">delete</a></td>
-                    </tr>
-                    <tr>
-                        <td>usa</td>
-                        <td>7.45%</td>
-                        <td><a href="javascript:void(0);">delete</a></td>
-                    </tr>
+                <tr ng-repeat="item in items">
+                    <td>{{item.country}}</td>
+                    <td>{{item.taxAmount}} %</td>
+                    <td><img width="25" src="../../../images/edit-icon.svg" ng-click="editTaxInfo(item)"></td>
+                    <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteTaxInfo($index,item)"></td>
+                </tr>
                 </tbody>
             </table>
         </div>
         <div class="md-dialog-buttons">
             <div class="inner-section">
+                <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
             </div>
         </div>
     </md-dialog-content>

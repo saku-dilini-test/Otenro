@@ -3,12 +3,12 @@
  */
 (function() {
     angular.module('appEdit').service('oblMenuService', ['stylesService', 'contactUsService', 'commerceService',
-        'shippingService','articleService','mainMenuService', 'currencyService', 'publishService',
+        'shippingService','taxService','articleService','mainMenuService', 'currencyService', 'publishService',
         'engageService', 'logoAndTittleService'
         , oblMenuService]);
 
     function oblMenuService(stylesService, contactUsService, commerceService,shippingService,
-                            articleService ,mainMenuService,currencyService, publishService,
+                            taxService,articleService ,mainMenuService,currencyService, publishService,
                             engageService, logoAndTittleService) {
         return {
             setOblMenuService : function(data) {
@@ -42,9 +42,6 @@
                         if (ctrlFun == 'showShippingDialog') {
                             return shippingService.showShippingDialog();
                         }
-                        if (ctrlFun == 'showTaxesDialog') {
-                            return commerceService.showTaxesDialog();
-                        }
                         if (ctrlFun == 'showEmailSettingsDialog') {
                             return commerceService.showEmailSettingsDialog();
                         }
@@ -56,6 +53,12 @@
                     if(ctrl == 'inventory'){
                         if(ctrlFun == 'showInventoryDialog'){
                             return commerceService.showInventoryDialog();
+                        }
+                    }
+
+                    if(ctrl == 'tax'){
+                        if (ctrlFun == 'showTaxesDialog') {
+                            return taxService.showTaxesDialog();
                         }
                     }
 

@@ -205,6 +205,13 @@ module.exports.routes = {
     'POST /edit/updateShippingInfo': 'edit/commerce/ShippingController.updateShippingInfo',
     'POST /edit/deleteShippingInfo': 'edit/commerce/ShippingController.deleteShippingInfo',
     'GET /edit/getShippingPickupInfo': 'edit/commerce/ShippingController.getShippingPickupInfo',
+
+    /**
+     * TaxController
+     */
+    'GET /edit/getTaxInfo': 'edit/commerce/TaxController.getTaxInfo',
+    'POST /edit/updateTaxInfo': 'edit/commerce/TaxController.updateTaxInfo',
+    'POST /edit/deleteTaxInfo': 'edit/commerce/TaxController.deleteTaxInfo',
     
     /**
      * EngageController

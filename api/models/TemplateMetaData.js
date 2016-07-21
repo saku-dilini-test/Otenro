@@ -159,7 +159,7 @@ module.exports = {
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Taxes',
-      menuFunction : 'commerce.showTaxesDialog',
+      menuFunction : 'tax.showTaxesDialog',
       menuButtonId : '1505'
     },
     {
