@@ -66,23 +66,21 @@ module.exports = {
             dirname: require('path').resolve(dePath)
         },function (err, uploadedFiles) {
 
-            var newFileName=Date.now()+'.png';
+            var newFileName=Date.now()+uploadedFiles[0].filename;
             fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
                 if (err) return res.send(err);
             });
-            // var newFileName2=Date.now()+'.png';
-            // fs.rename(uploadedFiles[1].fd, dePath+'/'+newFileName2, function (err) {
-            //     if (err) return res.send(err);
-            // });
+            var newFileName2=Date.now()+uploadedFiles[1].filename;
+            fs.rename(uploadedFiles[1].fd, dePath+'/'+newFileName2, function (err) {
+                if (err) return res.send(err);
+            });
 
 
-            console.log(req.body);
             var appId = req.param('appId');
-            console.log(appId);
             var saveData = req.body;
             saveData.imageHeader = newFileName;
-            saveData.imageFooter = newFileName;
-console.log(saveData);
+            saveData.imageFooter = newFileName2;
+            console.log(saveData);
 
             UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
                 if (err) return done(err);
