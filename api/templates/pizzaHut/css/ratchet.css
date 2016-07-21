@@ -158,12 +158,12 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
-  cursor: pointer;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 button[disabled],
 html input[disabled] {
-  cursor: default;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 button::-moz-focus-inner,
@@ -373,7 +373,7 @@ p {
   text-align: center;
   white-space: nowrap;
   vertical-align: top;
-  cursor: pointer;
+  cursor: url(../img/cursor.cur), auto;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 3px;

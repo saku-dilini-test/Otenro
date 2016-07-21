@@ -1,24 +1,29 @@
 /* Empty. Add your own CSS if you like */
-
+.cursor-body{
+    cursor: url(../img/cursor.cur), auto;
+}
 .bar.bar-white{
   background-color: #fff;
   background-image: none;
   border-color: #fff;
   color: #444;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .button-toggle{
   box-shadow: none;
   color: #444;
+  cursor:url(../img/cursor.cur), auto;
 }
 
 .button-clear.button-clear {
     color: #444;
+    cursor:url(../img/cursor.cur), auto;
 }
 
 .panel .fblogin {
     color: rgb(255, 255, 255);
-    cursor: pointer;
+    cursor: url(../img/cursor.cur), auto;;
     display: block;
     float: left;
     top: 40px;
@@ -81,7 +86,9 @@ padding-bottom:20px;}
 .button.button-positive {
     border-color: transparent;
     background-color: #75a3b8 !important;
-	width:100%;}
+	width:100%;
+	cursor:url(../img/cursor.cur), auto;
+}
 .panel .create-account-btm {
     width: 58%;
     font-size: 4.0vw;
@@ -125,10 +132,14 @@ padding-bottom:20px;}
 
     border-style:solid!important;
 }
+.bar .bar-header{
+cursor: url(../img/cursor.cur), auto;
+}
 
 .bar.bar-stable .title {
     color: #75A3B8 !important;
 	font-family:"Times New Roman", Times, serif;
+	cursor: url(../img/cursor.cur), auto;
 }
 
 .bar .title.title-left {
@@ -136,6 +147,7 @@ padding-bottom:20px;}
 	color: #75A3B8 !important;
 	font-family:"Times New Roman", Times, serif;
 	width: 100%;
+	cursor: url(../img/cursor.cur), auto;
 }
 .cards{
 	max-width: 100%;
@@ -166,6 +178,7 @@ background-color: white;
     width: 100%;
     height: 100%;
 	border-radius:5px !important;
+	cursor: url(../img/cursor.cur), auto;
 }
 
 hr{
@@ -182,6 +195,7 @@ hr{
     margin-left: 18px !important;
     display: inherit;
     padding-right: 10px !important;
+    cursor: url(../img/cursor.cur), auto;
 
 }
 
@@ -227,7 +241,7 @@ label {
     font-family: Helvetica, sans-serif;
     text-decoration: none;
     vertical-align: middle;
-    cursor: pointer;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .panel2{
@@ -274,7 +288,7 @@ h2:first-child{
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  cursor: pointer;
+  cursor: url(../img/cursor.cur), auto;;
   border-radius:4px;
   width:100%;
 }
@@ -298,6 +312,7 @@ p{
 
 .item-thumbnail-left{
 	border-radius:5px;
+	cursor: url(../img/cursor.cur), auto;
 	}
 
 .ng-binding{
@@ -309,6 +324,7 @@ p{
 	border-color: transparent;
     background-color: #75a3b8 !important;
     width: 100%;
+    cursor:url(../img/cursor.cur), auto;
 	}
 
 	.padding .card, .padding .list-inset {
@@ -350,5 +366,7 @@ text-align:left;
     position: relative;
     left: 30%;
     width: 20%;
+    cursor:url(../img/cursor.cur), auto;
 }
+
 
