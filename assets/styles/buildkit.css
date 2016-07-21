@@ -1312,6 +1312,10 @@ background-color: #f4f5f4;
 .md-dialog-main .file-upload-wrapper{
     border-bottom: 1px solid #E5E4E2;
     margin-bottom: 15px;
+	width: 65%;
+    margin-top: 10px;
+	float:left;
+}
 }
 
 .md-dialog-main .file-upload-wrapper .file-upload-msg{
@@ -1330,15 +1334,19 @@ background-color: #f4f5f4;
 }
 
 .uploaded-section .uploaded-new-image{
-    border-right: 1px solid #e5e4e2;
     float: left;
     width: 175px;
+	margin-top:-9.2%;
+	margin-left: 10%;
+	margin-bottom:2%;
 }
 
 .uploaded-section .uploaded-new-image img{
     border: 1px solid #e5e4e2;
     border-radius: 4px 4px 0 0;
 }
+
+
 
 .uploaded-section .me-upload-image-button{
     background-color: #bdbdbd;
