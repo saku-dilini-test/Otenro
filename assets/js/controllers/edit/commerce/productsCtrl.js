@@ -17,6 +17,30 @@
         $scope.userId = $auth.getPayload().id;
         $scope.isDigital = false;
 
+
+
+
+
+        $scope.myImage='';
+        $scope.myCroppedImage='';
+
+        $scope.cropeImage = function () {
+            var handleFileSelect=function(evt) {
+                var file=evt.currentTarget.files[0];
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $scope.$apply(function($scope){
+                        $scope.myImage=evt.target.result;
+                        $scope.picFile =  $scope.myImage
+                    });
+                };
+                reader.readAsDataURL(file);
+            };
+            angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+        }
+
+
+
         $scope.product = {
             //name:item.name,
             //price:item.price

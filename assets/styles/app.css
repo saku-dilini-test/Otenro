@@ -12,6 +12,13 @@ a.feature01{
     -webkit-border-radius: 2px;
 }
 
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:500px;
+    height:350px;
+}
+
 a.feature01:hover{
     border-color: #ECECEC;
 }
