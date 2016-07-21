@@ -441,3 +441,21 @@ colorpicker-preview {
   clear: both;
   background-position: 0 100%;
 }
+
+trix-editor {
+  color: #111;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  margin: 0;
+  padding: 4px 8px;
+  min-height: 120px;
+  outline: none; 
+  Width: 65%;
+  float:left;
+  }
+ 
+  trix-toolbar {
+    display: block;
+    width: 65%;
+    margin-bottom: 2%;
+}
