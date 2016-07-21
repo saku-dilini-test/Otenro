@@ -39,7 +39,9 @@
                                     <td><input type="number" min="0" ng-model="inventory.price" /></td>
                                     <!--<td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()"><input type="number" ng-model="inventory.sale"/></a></td>-->
                                     <td class="sale-yes"><input style="color:red" type="number" min="0" ng-model="inventory.discount" /></td>
-                                    <td><br ><a class="btn-delete" data-nodrag ng-click="deletePro($index,inventory)"></a></td>
+                                    <td>
+                                        <img width="25" src="../../../images/delete-icon-inventory.svg" ng-click="deletePro($index,inventory)">
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
