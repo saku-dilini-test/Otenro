@@ -209,7 +209,7 @@
                 return Upload.upload({
                     url: SERVER_URL + 'edit/updateHeaderFooterSettings',
                     fields: data,
-                    file: fileHeader
+                    file: [fileHeader,fileFooter]
                 });
             },
             sendTestEmail: function (data) {

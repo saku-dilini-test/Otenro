@@ -4,6 +4,7 @@
 
 var request = require('request'),
     email = require("../../node_modules/emailjs/email");
+var path = require('path');
 
 var server = email.server.connect({
     user: "onbilabsttest@gmail.com",
@@ -23,6 +24,8 @@ module.exports = {
             appId: data.appId
         };
         console.log(searchApp);
+        var appRoot = path.resolve();
+        var dePath= appRoot + '/assets/images/';
 
         UserEmail.find(searchApp).exec(function (err, app) {
             if (err) return done(err);
@@ -32,6 +35,8 @@ module.exports = {
             for (var i = 0; i < app.length; i++) {
 
                 var mBody;
+
+
                 if ((data.type == "Order confirm") && (typeof app[0].orderConfirmedEmail !== 'undefined')) {
 
                     mBody = app[0].orderConfirmedEmail;
@@ -46,8 +51,9 @@ module.exports = {
                     console.log("Save Data Before Test Mail.");
                     return "ddd";
                     //return res.status("Save Data Before Test The Mail.");
-
                 }
+                mBody = app[0].header + app[0].footer + "<img src='"+dePath + app[0].imageHeader+"' >";
+
                 console.log(app[0]);
                 var emailDetails = {
                     text: "",

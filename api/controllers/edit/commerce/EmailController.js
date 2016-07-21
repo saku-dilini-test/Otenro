@@ -6,6 +6,7 @@
 var sentMails = require('../../../services/emailService');
 var fs = require('fs-extra'),
     config = require('../../../services/config');
+var path = require('path');
 module.exports = {
 
     saveEmailDeliInfo : function(req,res){
@@ -56,22 +57,30 @@ module.exports = {
     },
     updateHeaderFooterSettings : function(req,res){
 
-        var dePath= '/assets/images/';
+        var appRoot = path.resolve();
+        var dePath= appRoot + '/assets/images/';
+
+        console.log(dePath);
+
         req.file('file').upload({
             dirname: require('path').resolve(dePath)
         },function (err, uploadedFiles) {
 
-            var newFileName=Date.now()+'.png';
+            var newFileName=Date.now()+uploadedFiles[0].filename;
             fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
+                if (err) return res.send(err);
+            });
+            var newFileName2=Date.now()+uploadedFiles[1].filename;
+            fs.rename(uploadedFiles[1].fd, dePath+'/'+newFileName2, function (err) {
                 if (err) return res.send(err);
             });
 
 
-            console.log(req.body);
             var appId = req.param('appId');
-            console.log(appId);
             var saveData = req.body;
-
+            saveData.imageHeader = newFileName;
+            saveData.imageFooter = newFileName2;
+            console.log(saveData);
 
             UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
                 if (err) return done(err);
