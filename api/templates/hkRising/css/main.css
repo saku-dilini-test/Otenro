@@ -43,6 +43,7 @@
     font-family: inherit;
     border-width: inherit;
     border-radius: inherit;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 /* ----- Second Navigation Page ----- */
@@ -125,10 +126,28 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    cursor: pointer;
+    cursor: url(../img/cursor.cur), auto;
     border-radius:4px;
     width: 94%;
     margin: 10px;
 }
 
+ion-view{
+    cursor: url(../img/cursor.cur), auto;
+}
+
+ion-content{
+    cursor: url(../img/cursor.cur), auto;
+}
+
+ion-nav-buttons{
+    cursor: url(../img/cursor.cur), auto;
+}
+
+ion-header-bar{
+    cursor: url(../img/cursor.cur), auto;
+}
+a[href]:hover{
+    cursor: url(../img/cursor.cur), auto;
+}
 /** ----------- End Custom update Css Class ---------- **/

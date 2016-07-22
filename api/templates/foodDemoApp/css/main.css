@@ -22,7 +22,7 @@
   font-family: Helvetica, sans-serif;
   text-decoration: none;
   vertical-align: middle;
-  cursor: pointer;
+  cursor: url(../img/cursor.cur), auto;;
 }
 .panel .social-button-fb{
   padding: 8.5px 17px;
@@ -36,9 +36,17 @@
   font-family: Helvetica, sans-serif;
   text-decoration: none;
   vertical-align: middle;
-  cursor: pointer;
+  cursor:url(../img/cursor.cur), auto;
 }
-
+ion-content{
+cursor:url(../img/cursor.cur), auto;
+}
+ion-nav-buttons{
+cursor:url(../img/cursor.cur), auto;
+}
+a{
+    cursor:url(../img/cursor.cur), auto;
+}
 .panel .create-account-btm {
   background-color: #FFBF0A; /* Green */
   border: none;
@@ -47,12 +55,13 @@
   text-decoration: none;
   display: inline-block;
   margin-top: 35px;
-  cursor: pointer;
+  cursor:url(../img/cursor.cur), auto;;
   border-radius:4px;
 }
 
 .panel {
   margin-top:4%;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 /** ----------- Start Custom update Css Class ---------- **/
@@ -60,7 +69,6 @@
 .made-easy-background-color {
     background-color: #10b23e !important;
 }
-
 .made-easy-background-image{
     background: url(../img/background.jpg) center;
     background-size: cover;
@@ -94,6 +102,8 @@
   font-family: Ubuntu Light;
   border-width: 3px;
   border-radius: 3px;
+  cursor:url(../img/cursor.cur), auto;
+
 }
 
 /* ----- Second Navigation Page ----- */
@@ -161,7 +171,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    cursor: pointer;
+    cursor: url(../img/cursor.cur), auto;;
     border-radius:4px;
     width: 94%;
     margin: 10px;
@@ -176,7 +186,7 @@ h7 {
   color:#666 !important;
 }
 .badge2{
-	background-color: transparent;
+background-color: transparent;
 color: #AAAAAA;
 z-index: 1;
 display: inline-block;
@@ -190,8 +200,15 @@ text-align: center;
 white-space: nowrap;
 font-weight: bold;
 font-size: 14px;
-line-height: 16px;}
+line-height: 16px;
+cursor:url(../img/cursor.cur), auto;}
 
+.buttons .buttons-right .header-item{
+    cursor:url(../img/cursor.cur), auto;
+}
+.title-left{
+    cursor:url(../img/cursor.cur), auto;
+}
 .box_inner{
 	padding:10px;
 	margin-bottom:20px;
@@ -325,6 +342,7 @@ padding:5px;
     border-color: transparent;
     background-color: #387ef5;
     color: #fff;
+    cursor:url(../img/cursor.cur), auto;
     /*width: 30%;
     margin-left: 34%;
 	margin-top: 30px;*/
@@ -345,5 +363,7 @@ padding:5px;
  * Badges
  * --------------------------------------------------
  */
-	
+	a[href]:hover{
+        cursor: url(../img/cursor.cur), auto;
+    }
 /** ----------- End Custom update Css Class ---------- **/
