@@ -83,29 +83,6 @@
                     //$scope.status = 'You said the information was "' + answer + '".';
                 });
             },
-
-            showTaxesDialog: function () {
-                return $mdDialog.show({
-                    controller: 'CommerceCtrl',
-                    templateUrl: 'user/edit/commerce/manageTaxesView.html',
-                    clickOutsideToClose: true
-                }).then(function (answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
-                }, function () {
-                    //$scope.status = 'You cancelled the dialog.';
-                });
-            },
-            showAddTaxOptionDialog: function () {
-                return $mdDialog.show({
-                    controller: 'CommerceCtrl',
-                    templateUrl: 'user/edit/commerce/addTaxOptionView.html',
-                    clickOutsideToClose: true
-                }).then(function (answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
-                }, function () {
-                    //$scope.status = 'You cancelled the dialog.';
-                });
-            },
             showEmailSettingsDialog: function () {
                 return $mdDialog.show({
                     controller: 'CommerceCtrl',
