@@ -15,7 +15,7 @@
 		  font-size: 1.25em;
 		  margin-left: 8px;
 		  text-align: center;
-		  cursor: pointer;
+		  cursor: url(../img/cursor.cur), auto;
 		}
 		.toggler.active {
 		  color: #000;
@@ -37,6 +37,7 @@
 		  border-radius: 2px;
 		  background: white;
 		  box-shadow: 0 2px 1px rgba(170, 170, 170, 0.25);
+		  cursor: url(../img/cursor.cur), auto;
 		}
 
 		.cards-name {
@@ -60,20 +61,24 @@
 		  padding: 0;
 		  font-size: 14px;
 		  line-height: 40px;
+		  cursor: url(../img/cursor.cur), auto;
 		}
 		.list .cards-item .pulls-right {
 		  position: absolute;
 		  right: 0;
 		  top: 0;
+		  cursor: url(../img/cursor.cur), auto;
 		}
 		@media screen and (max-width: 800px) {
 		  .list .cards-item .stage:not(.active) {
 			display: none;
+			cursor: url(../img/cursor.cur), auto;
 		  }
 		}
 		@media screen and (max-width: 700px) {
 		  .list .cards-item .cards-progress-bg {
 			display: none;
+			cursor: url(../img/cursor.cur), auto;
 		  }
 		}
 		@media screen and (max-width: 600px) {
@@ -81,6 +86,7 @@
 			position: static;
 			line-height: 20px;
 			padding-bottom: 10px;
+			cursor: url(../img/cursor.cur), auto;
 		  }
 		}
 		.list .cards-country,
@@ -154,6 +160,7 @@
 		  height: 200px;
 		  width: 48%;
 		  margin: 10px;
+		  cursor: url(../img/cursor.cur), auto;
 		}
 		
 		@media screen and (max-width: 500px) {
@@ -162,6 +169,7 @@
 			width: auto;
 			height: 300px;
 			margin: 10px auto;
+			cursor: url(../img/cursor.cur), auto;
 		  }
 		}
 
@@ -181,6 +189,7 @@
 			  vertical-align: top;
 			  width: 45.5%;
 			  margin: 10px;
+			  cursor: url(../img/cursor.cur), auto;
 		  }
 		}
 		@media screen and (min-width: 700px) {
@@ -190,6 +199,7 @@
 			  vertical-align: top;
 			  width: 45.5%;
 			  margin: 10px;
+			  cursor: url(../img/cursor.cur), auto;
 		  }
 		}
 		@media screen and (min-width: 800px) {
@@ -199,6 +209,7 @@
 			  vertical-align: top;
 			  width: 45.5%;
 			  margin: 10px;
+			  cursor: url(../img/cursor.cur), auto;
 		  }
 		}
 		@media screen and (min-width: 900px) {
@@ -208,6 +219,7 @@
 		  vertical-align: top;
 		  width: 47.5%;
 		  margin: 10px;
+		  cursor: url(../img/cursor.cur), auto;
 		  }
 		}
 
@@ -218,6 +230,7 @@
 		  vertical-align: top;
 		  width: 47.5%;
 		  margin: 10px;
+		  cursor: url(../img/cursor.cur), auto;
 		  }
 		}
 
@@ -229,6 +242,7 @@
 		  vertical-align: top;
 		  width: 31.5%;
 		  margin: 10px;
+		  cursor: url(../img/cursor.cur), auto;
 		  }
 		}		
 		.grid .cards-name {
@@ -610,7 +624,7 @@
 }
 */
 
-label[for] { cursor: pointer; }
+label[for] { cursor: url(../img/cursor.cur), auto; }
 
 #promo-view input[type="checkbox"] { display: none; }
 
@@ -648,3 +662,7 @@ input[type="checkbox"]:checked + .lightbox {
 }
 
 input[type="checkbox"]:checked ~ .grids { opacity: .125; }
+
+a[href]:hover{
+    cursor: url(../img/cursor.cur), auto;
+}

@@ -5,20 +5,23 @@
   background-image: none;
   border-color: #fff;
   color: #444;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .button-toggle{
   box-shadow: none;
   color: #444;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .button-clear.button-clear {
     color: #444;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .panel .fblogin {
     color: rgb(255, 255, 255);
-    cursor: pointer;
+    cursor: url(../img/cursor.cur), auto;
     display: block;
     float: left;
     top: 40px;
@@ -87,6 +90,7 @@ padding-bottom:20px;}
     background-color: #75a3b8 !important;
 	width:100%;
 	border-radius:0px !important;
+	cursor: url(../img/cursor.cur), auto;
 	}
 .panel .create-account-btm {
     width: 58%;
@@ -135,12 +139,14 @@ padding-bottom:20px;}
 .bar.bar-stable .title {
     color: #75A3B8 !important;
 	font-family:"Times New Roman", Times, serif;
+	cursor: url(../img/cursor.cur), auto;
 }
 
 .bar .title.title-left {
     text-align: left;
 	color: #75A3B8 !important;
 	width: 100%;
+	cursor: url(../img/cursor.cur), auto;
 }
 .cards{
 	max-width: 100%;
@@ -192,7 +198,8 @@ hr{
     margin-left: 18px !important;
     display: inherit;
     padding-right: 10px !important;
-	
+    cursor: url(../img/cursor.cur), auto;
+
 }
 
 h4, .h4 {
@@ -237,7 +244,7 @@ label {
     font-family: Helvetica, sans-serif;
     text-decoration: none;
     vertical-align: middle;
-    cursor: pointer;
+    cursor: url(../img/cursor.cur), auto;
     /*margin-right: 12px;*/
 }
 
@@ -287,7 +294,7 @@ h2:first-child{
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  cursor: pointer;
+  cursor: url(../img/cursor.cur), auto;
   border-radius:4px;
       width: 94%;
     margin: 10px;
@@ -325,6 +332,7 @@ p{
     background-color: #75a3b8 !important;
     width: 100%;
 	border-radius:0px !important;
+	cursor: url(../img/cursor.cur), auto;
 	}
 	
 	.padding .card, .padding .list-inset {
@@ -369,6 +377,7 @@ input[type="text"]	{
 	margin-left:7px;
 	text-align:center;
 	border-radius:0px !important;
+	cursor: url(../img/cursor.cur), auto;
 }
 
 .menu-left {
