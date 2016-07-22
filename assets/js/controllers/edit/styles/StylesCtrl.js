@@ -1,9 +1,13 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("StylesCtrl",
-        ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','stylesService','ME_APP_SERVER','$auth','mySharedService',StylesCtrl]);
+        ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','stylesService','ME_APP_SERVER','$auth',
+        'mySharedService','$cookieStore',StylesCtrl]);
 
-    function StylesCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,stylesService,ME_APP_SERVER,$auth,mySharedService) {
+    function StylesCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,stylesService,ME_APP_SERVER,$auth,mySharedService,
+    $cookieStore) {
+
+        var appId = $cookieStore.get('AppId');
 
         $scope.loadFonts = function() {
             // Use timeout to simulate a 650ms request.
@@ -19,8 +23,8 @@
             }, 650);
         };
 
-        $scope.headerImg = ME_APP_SERVER +'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/header.jpg?time='+new Date().getTime();
-        $scope.backgroundImg = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/background.jpg?time='+new Date().getTime();
+        $scope.headerImg = ME_APP_SERVER +'temp/' +$auth.getPayload().id+'/templates/'+appId+'/img/header.jpg?time='+new Date().getTime();
+        $scope.backgroundImg = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+appId+'/img/background.jpg?time='+new Date().getTime();
         $scope.fonts = {
             font : 'Arial',
             fontSize : 11
@@ -32,7 +36,8 @@
         $scope.buttonBorderWidthList = ['0px','1px','2px','3px','4px','5px'];
         $scope.buttonBorderRadiusList = ['0px','1px','2px','3px','4px','5px'];
 
-        stylesService.getAppSettings({'appId':$rootScope.appId}).success(function (data) {
+
+        stylesService.getAppSettings({'appId':appId}).success(function (data) {
             var appSettings = data.appSettings;
 
             $scope.appUpdateLocation = data.appUpdateLocationSetting;
@@ -112,7 +117,7 @@
                 $scope.selectedButtonFontFamily = data;
             }
             var styleFontFamilyData = {
-                appId : $rootScope.appId,
+                appId : appId,
                 styleFontFamily : styleFontFamily,
                 type : type
             };
@@ -142,7 +147,7 @@
                 $scope.selectedFooterFontSize = data;
             }
             var styleFontSizeData = {
-                appId : $rootScope.appId,
+                appId : appId,
                 styleFontSize : styleFontSize,
                 type : type
             };
@@ -172,7 +177,7 @@
                 $scope.selectedFooterFontWeight = data;
             }
             var styleFontWeightData = {
-                appId : $rootScope.appId,
+                appId : appId,
                 styleFontWeight : styleFontWeight,
                 type : type
             };
@@ -195,7 +200,7 @@
         $scope.styleButtonBorderWidthChange = function (data) {
             var styleButtonBorderWidth = data;
             var styleButtonBorderWidthData = {
-                appId : $rootScope.appId,
+                appId : appId,
                 styleButtonBorderWidth : styleButtonBorderWidth
             };
             stylesService.addStyleButtonBorderWidth(styleButtonBorderWidthData)
@@ -217,7 +222,7 @@
         $scope.styleButtonBorderRadiusChange = function (data) {
             var styleButtonBorderRadius = data;
             var styleButtonBorderRadiusData = {
-                appId : $rootScope.appId,
+                appId : appId,
                 styleButtonBorderRadius : styleButtonBorderRadius
             };
             stylesService.addStyleButtonBorderRadius(styleButtonBorderRadiusData)
@@ -238,7 +243,7 @@
 
         $scope.addHeaderImage = function(headerImg) {
             $scope.headerImgData = {
-                appId: $rootScope.appId,
+                appId: appId,
                 headerImg: headerImg
             };
             stylesService.addHeaderImage($scope.headerImgData)
@@ -262,7 +267,7 @@
                 isApplyUpdate = true;
             }
             var requestData = {
-                appId: $rootScope.appId,
+                appId: appId,
                 isApplyBGImage : isApplyUpdate
             };
             stylesService.applyBackgroundImage(requestData)
@@ -281,13 +286,13 @@
 
         $scope.addBackgroundImage = function(backgroundImg) {
             $scope.backgroundImgData = {
-                appId: $rootScope.appId,
+                appId: appId,
                 backgroundImg: backgroundImg
             };
             stylesService.addBackgroundImage($scope.backgroundImgData)
                 .success(function (res) {
                     $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                        +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
+                        +'/templates/'+appId+'/?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
                     toastr.success('Successfully change backgroundImage', 'Message', {
@@ -309,7 +314,7 @@
             var type = colorObject.name;
 
                var styleColorData = {
-                    appId : $rootScope.appId,
+                    appId : appId,
                     styleColor : colorValue,
                     type : type
                 };
@@ -331,7 +336,7 @@
 
         $scope.addFonts = function(fonts){
             $scope.fontsData = {
-                appId: $rootScope.appId,
+                appId: appId,
                 font: fonts.font,
                 fontSize: fonts.fontSize
             };

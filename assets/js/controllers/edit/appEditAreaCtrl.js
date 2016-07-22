@@ -14,7 +14,10 @@
 
         $scope.appId = $stateParams.appId;
         $rootScope.appId = $stateParams.appId;
-        $scope.appTemplateUrl=mySharedService.url;
+
+        var tempUrl = $cookieStore.get('url');
+
+        $scope.appTemplateUrl=tempUrl;
         //$scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
         //                        +'/templates/'+$stateParams.appId;
 
