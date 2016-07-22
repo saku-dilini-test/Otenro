@@ -43,6 +43,7 @@
     font-family: inherit;
     border-width: inherit;
     border-radius: inherit;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 /* ----- Second Navigation Page ----- */
@@ -130,5 +131,9 @@
     width: 94%;
     margin: 10px;
 }
+
+a[href]:hover{
+        cursor: url(../img/cursor.cur), auto;
+    }
 
 /** ----------- End Custom update Css Class ---------- **/

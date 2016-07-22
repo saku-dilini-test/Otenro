@@ -158,12 +158,12 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
-  cursor: pointer;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 button[disabled],
 html input[disabled] {
-  cursor: default;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 button::-moz-focus-inner,
@@ -276,6 +276,7 @@ a:active {
 
 .bar-nav ~ .content {
   padding-top: 44px;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .bar-header-secondary ~ .content {
@@ -373,7 +374,7 @@ p {
   text-align: center;
   white-space: nowrap;
   vertical-align: top;
-  cursor: pointer;
+  cursor: url(../img/cursor.cur), auto;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -528,6 +529,7 @@ input[type="button"] {
 
 .bar-nav {
   top: 0;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .title {
@@ -542,6 +544,7 @@ input[type="button"] {
   color: #000;
   text-align: center;
   white-space: nowrap;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .title a {
@@ -1093,6 +1096,7 @@ select {
   border-top-right-radius: 12px;
   -webkit-box-shadow: none;
           box-shadow: none;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .popover .table-view {

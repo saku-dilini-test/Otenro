@@ -24,10 +24,12 @@ a:active {
 
 .content {
   background-color: #f2f2f2;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .bar-nav ~ .content {
   padding-top: 50px;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .bar-header-secondary ~ .content {
@@ -518,6 +520,7 @@ textarea,
 }
 .popover .bar-nav ~ .table-view {
   padding-top: 50px;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .popover .table-view {
@@ -619,4 +622,7 @@ textarea,
 .icon-up:before,
 .icon-up-nav:before {
   content: '\e809';
+}
+div{
+    cursor: url(../img/cursor.cur), auto;
 }

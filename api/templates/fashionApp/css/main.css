@@ -32,5 +32,20 @@
   border-width: inherit;
   border-radius: inherit;
 }
+ion-view{
+    cursor: url(../img/cursor.cur), auto;
+}
+ion-content{
+    cursor: url(../img/cursor.cur), auto;
+}
+ion-pane{
+    cursor: url(../img/cursor.cur), auto;
+}
+ion-list{
+    cursor: url(../img/cursor.cur), auto;
+}
+ion-nav-title{
+    cursor: url(../img/cursor.cur), auto;
+}
 
 /** ----------- End Custom update Css Class ---------- **/

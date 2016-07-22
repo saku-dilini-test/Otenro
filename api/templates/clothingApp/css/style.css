@@ -10,15 +10,17 @@
 .button-toggle{
   box-shadow: none;
   color: #444;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .button-clear.button-clear {
     color: #444;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .panel .fblogin {
     color: rgb(255, 255, 255);
-    cursor: pointer;
+    cursor: url(../img/cursor.cur), auto;;
     display: block;
     float: left;
     top: 40px;
@@ -87,6 +89,7 @@ padding-bottom:20px;}
     background-color: #b8a468 !important;
 	width:100%;
 	border-radius:5px !important;
+	cursor: url(../img/cursor.cur), auto;
 	}
 .panel .create-account-btm {
     width: 58%;
@@ -136,12 +139,14 @@ padding-bottom:20px;}
 .bar.bar-stable .title {
     color: #75A3B8 !important;
 	font-family:"Times New Roman", Times, serif;
+	cursor: url(../img/cursor.cur), auto;
 }
 
 .bar .title.title-left {
     text-align: left;
 	color: #b8a468 !important;
 	width: 100%;
+	cursor: url(../img/cursor.cur), auto;
 }
 .cards{
 	max-width: 100%;
@@ -193,7 +198,7 @@ hr{
     margin-left: 18px !important;
     display: inherit;
     padding-right: 10px !important;
-	
+	cursor: url(../img/cursor.cur), auto;
 }
 
 h4, .h4 {
@@ -237,7 +242,7 @@ label {
     font-family: Helvetica, sans-serif;
     text-decoration: none;
     vertical-align: middle;
-    cursor: pointer;
+    cursor: url(../img/cursor.cur), auto;;
     /*margin-right: 12px;*/
 }
 
@@ -290,7 +295,7 @@ h2:first-child{
   color:#FFF !important;
   font-weight:700;
   display: inline-block;
-  cursor: pointer;
+  cursor: url(../img/cursor.cur), auto;;
   border-radius:4px;
       width: 94%;
     margin: 10px;
@@ -328,6 +333,7 @@ p{
     background-color: #75a3b8 !important;
     width: 100%;
 	border-radius:0px !important;
+	cursor: url(../img/cursor.cur), auto;
 	}
 	
 	.padding .card, .padding .list-inset {
@@ -377,6 +383,7 @@ text-align: center;
 border-radius: 5 !important;
 margin-left: 7px;
 margin-right: 20px;
+cursor: url(../img/cursor.cur), auto;
 }
 
 .menu-left {
@@ -401,6 +408,7 @@ img {
 }
 .bar .button.back-button, .bar button.back-button {
     color: rgba(184, 164, 104, 0.72);
+    cursor: url(../img/cursor.cur), auto;
 }
 
 h1, .h1, h2, .h2, h3, .h3 {
