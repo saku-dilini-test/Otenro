@@ -46,6 +46,11 @@
             },
 
             addProduct: function (file, product, id, variants) {
+
+                var imageBase64 = file;
+                var blob = new Blob([imageBase64], {type: 'image/png'});
+                var fileUpload = new File([blob], 'imageFileName.png');
+
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addThirdNavigation',
                     fields: {
@@ -62,7 +67,7 @@
                         type: product.type,
                         discount: product.discount
                     },
-                    file: file
+                    file: fileUpload
                 });
             },
             showOrderDialog: function () {
