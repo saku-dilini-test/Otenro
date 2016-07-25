@@ -198,6 +198,7 @@ module.exports.routes = {
     'POST /edit/updateEmailSettings': 'edit/commerce/EmailController.updateEmailSettings',
     'POST /edit/sendTestEmail': 'edit/commerce/EmailController.sendTestEmail',
     'POST /edit/updateHeaderFooterSettings': 'edit/commerce/EmailController.updateHeaderFooterSettings',
+    'GET /edit/viewImages': 'edit/commerce/EmailController.viewImages',
 
     /**
      * ShippingController

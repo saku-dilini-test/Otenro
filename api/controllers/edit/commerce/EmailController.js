@@ -121,6 +121,12 @@ module.exports = {
         });
         console.log(msg);
         res.send("asd");
-    }
+    },
+    viewImages : function(req,res){
+
+        var appRoot = path.resolve();
+        var dePath= appRoot + '/assets/images/';
+        res.sendfile(dePath+req.param('image'));
+    },
 
 };
