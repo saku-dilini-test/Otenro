@@ -313,6 +313,9 @@ border-top: 1px solid rgba(0, 0, 0, 0.2);}
         ion-item{
             cursor: url(../img/cursor.cur), auto;
         }
+        .item[ng-click]:hover{
+            cursor: url(../img/cursor.cur), auto;
+        }
     /* close commented backslash hack */
 
       

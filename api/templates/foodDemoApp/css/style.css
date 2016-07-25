@@ -331,6 +331,9 @@ p{
     margin-left: 0;
     margin-right: 0;
 }
+.button-block{
+    cursor: url(../img/cursor.cur), auto;
+}
 
 .contact {
 	text-align:center;

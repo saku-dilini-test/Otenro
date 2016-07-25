@@ -268,6 +268,7 @@ a:active {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   background-color: #fff;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .content > * {
@@ -561,10 +562,12 @@ input[type="button"] {
   color: #000;
   text-align: center;
   white-space: nowrap;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .title a {
   color: inherit;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .bar-tab {
@@ -682,10 +685,12 @@ input[type="button"] {
 }
 .bar .title .icon {
   padding: 0;
+  cursor: url(../img/cursor.cur), auto;
 }
 .bar .title .icon.icon-caret {
   top: 4px;
   margin-left: -5px;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .bar input[type="search"] {
@@ -842,6 +847,7 @@ input[type="button"] {
 .table-view .media,
 .table-view .media-body {
   overflow: hidden;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .table-view .media-object.pull-left {

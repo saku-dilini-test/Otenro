@@ -614,6 +614,7 @@
   display: inline-block; 
   background-color: #d9534f; 
   padding: 1px 8px 1px;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 /** Image Box **/

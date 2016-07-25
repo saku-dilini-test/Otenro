@@ -108,6 +108,7 @@ p {
 
 .btn .badge {
   background-color: rgba(0, 0, 0, .15);
+  cursor: url(../img/cursor.cur), auto;
 }
 .btn .badge.badge-inverted {
   background-color: transparent;
