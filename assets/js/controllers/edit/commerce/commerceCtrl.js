@@ -600,10 +600,6 @@
             commerceService.getEmailSettings(prams)
                 .success(function (result) {
                     $scope.email = result;
-                    console.log(result);
-                }).error(function (error) {
-                alert("MainMenu Loading Error : " + error);
-            });
 
             sendType.appId = $rootScope.appId;
             console.log($scope.email);
@@ -615,7 +611,7 @@
                     });
 
                 } else if ((type == "Order Fulfilled") && (typeof $scope.email[0].orderFulfilledEmail === 'undefined')) {
-                    console.log('sas' + result.orderFulfilledEmail);
+
                     toastr.error('Save before test the Email', 'Warning', {
                         closeButton: true
                     });
@@ -640,7 +636,9 @@
                     })
                 }
             }
-
+                }).error(function (error) {
+                alert("MainMenu Loading Error : " + error);
+            });
 
         };
 
