@@ -37,6 +37,7 @@ module.exports = {
             templateViewName : 'Del Mar',
             templateViewDesc : 'A simple elegant template that can be customised into what you want.',
             imageUrl : 'resturant/codecanyon.png',
+            gifImageUrl: 'resturant/codecanyon1.png',
             templateFilesPath:'templates/codecanyon',
             templateCategory:'1'
         },
@@ -55,6 +56,7 @@ module.exports = {
             templateViewName : 'Pizza Hut',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'resturant/pizzHut.png',
+            gifImageUrl :'resturant/pizza.png',
             templateFilesPath:'templates/pizzaHut',
             templateCategory:'2'
         },
@@ -63,6 +65,7 @@ module.exports = {
             templateViewName : 'Aloha',
             templateViewDesc : 'Colourful, lively and vivid.',
             imageUrl : 'resturant/florist.png',
+            gifImageUrl : 'resturant/florist1.png',
             templateFilesPath:'templates/florist',
             templateCategory:'3'
         },
@@ -78,7 +81,7 @@ module.exports = {
             template_name : 'foodDemoApp',
             templateViewName : 'Café El Jafe',
             templateViewDesc : 'Artesian',
-            gifImageUrl : 'foodDeliver/foodapp.gif',
+            gifImageUrl : 'foodDeliver/food.png',
             imageUrl : 'foodDeliver/foodDeliver.png',
             templateFilesPath:'templates/foodDemoApp',
             templateCategory: TemplateCategoryDetails.Business.ID
@@ -87,7 +90,7 @@ module.exports = {
             template_name : 'foodDemoApp2',
             templateViewName : 'Dirty Diana',
             templateViewDesc : 'Glamorous yet subtle. Suited for your boutique store.',
-            gifImageUrl : 'foodDeliver2/clothing.gif',
+            gifImageUrl : 'foodDeliver2/clothing.png',
             imageUrl : 'foodDeliver2/foodDeliver2.png',
             templateFilesPath:'templates/foodDemoApp2',
             templateCategory: TemplateCategoryDetails.Business.ID
@@ -96,7 +99,7 @@ module.exports = {
             template_name : 'clothingApp',
             templateViewName : 'Cloth Template',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
-            gifImageUrl : 'clothingApp/clothing-2.gif',
+            gifImageUrl : 'clothingApp/clothing2.png',
             imageUrl : 'clothingApp/clothing.jpg',
             templateFilesPath:'templates/clothingApp',
             templateCategory: TemplateCategoryDetails.Business.ID
@@ -105,7 +108,7 @@ module.exports = {
             template_name : 'hkRising',
             templateViewName : 'Rising',
             templateViewDesc : 'Reporters, writers, bloggers - keep your readers informed.',
-            gifImageUrl : 'hkRising/hkRising.gif',
+            gifImageUrl : 'hkRising/hkRising1.png',
             imageUrl : 'hkRising/hkRising.png',
             templateFilesPath:'templates/hkRising',
             templateCategory: TemplateCategoryDetails.Media.ID
@@ -115,6 +118,7 @@ module.exports = {
             templateViewName : 'ECommerce Template',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             imageUrl : 'ECommerceApp/ECommerceApp.png',
+            gifImageUrl : 'ECommerceApp/ecommerce.png',
             templateFilesPath:'templates/ECommerceApp',
             templateCategory: TemplateCategoryDetails.Media.ID
         },
@@ -123,6 +127,7 @@ module.exports = {
             templateViewName : 'Viola',
             templateViewDesc : 'Customise this template to be anything you want it to be.',
             imageUrl : 'fashionApp/fashionApp.png',
+            gifImageUrl : 'fashionApp/fashion.png',
             templateFilesPath:'templates/fashionApp',
             templateCategory: TemplateCategoryDetails.Media.ID
         }

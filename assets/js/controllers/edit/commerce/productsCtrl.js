@@ -187,6 +187,7 @@
         };
 
         $scope.nextStep3 = function (current, selection, variants) {
+        $scope.variant = variants;
             if ($scope.variants[0].sku == "" || $scope.variants[0].name == "" || $scope.variants[0].size == "" || $scope.variants[0].price == "" || $scope.variants[0].quantity == "") {
                 toastr.error('Fill all the fields', 'Warning', {
                     closeButton: true
@@ -287,13 +288,19 @@
 
                     var variantsList = $scope.variants;
                     variantsList.forEach(function (variants) {
-                        var variantsAttribute = variants;
+                        variants.childId = product.mainId;
+                    });
+                    var variantsAttribute;
 
-                        commerceService.addProduct(file, product, item.id, variants).success(function (data) {
+                        commerceService.addProduct(file, product, item.id, variantsList).success(function (data) {
+                        variantsList.forEach(function (variantsAttribute) {
                             variantsAttribute.appId = $rootScope.appId;
                             variantsAttribute.childId = product.mainId;
                             variantsAttribute.productId = data.appId.id;
 
+                            commerceService.addToInventory(variantsAttribute).success(function(invnrty){
+                                $scope.invntry = invnrty;
+                            variantsAttribute.id = $scope.invntry.id;
                             commerceService.addPriceandVariants(variantsAttribute, productFile).success(function (data) {
                                 toastr.success('New Price and Variants has been added.', 'Awsome!', {
                                     closeButton: true
@@ -304,28 +311,43 @@
                                     closeButton: true
                                 });
                             });
+                            }).error(function(err){
+                                console.log(err);
+                            });
+                            });
+
+//                            for(var i=0; i<variantsList.length; i++){
+//                                variantsList[i].appId = $rootScope.appId;
+//                                variantsList[i].childId = product.mainId;
+//                                variantsList[i].productId = data.appId.id;
+//                                commerceService.addToInventory(variantsList[i]).success(function(invnrty){
+//                                    console.log(invnrty);
+//                                }).error(function(err){
+//                                    console.log(err);
+//                                })
+//                            }
                         }).error(function (err) {
                             toastr.error('Unable to Add', 'Warning', {
                                 closeButton: true
                             });
                         });
-                    });
+                   // });
 
                     toastr.success('New Product has been added.', 'Awsome!', {
                         closeButton: true
                     });
                     $mdDialog.hide();
-                    inventoryService.getInventoryList()
-                        .success(function (result) {
-                            toastr.success('New Product has been added to the inventory.', 'Awsome!', {
-                                closeButton: true
-                            });
-                            $mdDialog.hide();
-                        }).error(function (err) {
-                        toastr.error('Unable to Add', 'Warning', {
-                            closeButton: true
-                        });
-                    });
+//                    inventoryService.getInventoryList()
+//                        .success(function (result) {
+//                            toastr.success('New Product has been added to the inventory.', 'Awsome!', {
+//                                closeButton: true
+//                            });
+//                            $mdDialog.hide();
+//                        }).error(function (err) {
+//                        toastr.error('Unable to Add', 'Warning', {
+//                            closeButton: true
+//                        });
+//                    });
 
                 }
             }

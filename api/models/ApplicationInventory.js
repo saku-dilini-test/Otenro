@@ -32,6 +32,9 @@ module.exports = {
         sku : {
             type : 'String'
         },
+        productId:{
+            type: 'string'
+        },
         product : {
             model : 'thirdnavigation'
         },
@@ -42,16 +45,16 @@ module.exports = {
             type: 'date'
         }
     },
-    seedData : [
-        {
-            name : 'perfume',
-            price: 1500,
-            quantity: '100',
-            sale: 1000,
-            sku: '1536',
-            discount: 10
-        }
-    ]
+//    seedData : [
+//        {
+//            name : 'perfume',
+//            price: 1500,
+//            quantity: '100',
+//            sale: 1000,
+//            sku: '1536',
+//            discount: 10
+//        }
+//    ]
 };
 
 
