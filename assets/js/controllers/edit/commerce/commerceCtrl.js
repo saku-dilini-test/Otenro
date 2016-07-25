@@ -594,6 +594,9 @@
                 type: type
             }
 
+            var prams = {
+                appId: $rootScope.appId
+            };
             commerceService.getEmailSettings(prams)
                 .success(function (result) {
                     $scope.email = result;
