@@ -25,7 +25,7 @@ module.exports = {
         };
         console.log(searchApp);
         var appRoot = path.resolve();
-        var dePath= appRoot + '/assets/images/';
+        var dePath = appRoot + '/assets/images/';
 
         UserEmail.find(searchApp).exec(function (err, app) {
             if (err) return done(err);
@@ -33,7 +33,6 @@ module.exports = {
             // var apps = JSON.stringify(app);
             console.log(app);
             for (var i = 0; i < app.length; i++) {
-
 
 
                 if ((data.type == "Order confirm") && (typeof app[0].orderConfirmedEmail !== 'undefined')) {
@@ -166,10 +165,13 @@ module.exports = {
                     '                <tr>' +
                     '                    <td align="center" valign="top" style="padding: 15px 0;" class="logo">' +
                     '                        <a href="" target="_blank">' +
-                    '                            <img alt="Logo" src="http://www.simatosolutions.com:1340/edit/viewImages?image='+ app[0].imageHeader+'" width="60" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">' +
+                    '                            <img alt="Logo" src="http://www.simatosolutions.com:1340/edit/viewImages?image=' + app[0].imageHeader + '" width="60" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">' +
                     '                        </a>' +
                     '                    </td>' +
                     '                </tr>' +
+                    '<tr>' +
+                    '                                            <td align="center"  class="padding">' + app[0].header + '</td>' +
+                    '                                        </tr>' +
                     '            </table>' +
                     '            <!--[if (gte mso 9)|(IE)]>' +
                     '            </td>' +
@@ -195,10 +197,10 @@ module.exports = {
                     '                                    <!-- COPY -->' +
                     '                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">' +
                     '                                        <tr>' +
-                    '                                            <td align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333; padding-top: 30px;" class="padding">'+data.type+'</td>' +
+                    '                                            <td align="center" style="font-size: 25px; font-family: Helvetica, Arial, sans-serif; color: #333333; padding-top: 30px;" class="padding">' + data.type + '</td>' +
                     '                                        </tr>' +
                     '                                        <tr>' +
-                    '                                            <td align="center" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding">'+body+'</td>' +
+                    '                                            <td align="center" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding">' + body + '</td>' +
                     '                                        </tr>' +
                     '                                    </table>' +
                     '                                </td>' +
@@ -210,7 +212,7 @@ module.exports = {
                     '                <tr>' +
                     '                    <td align="center" valign="top" style="padding: 15px 0;" class="logo">' +
                     '                        <a href="http://litmus.com" target="_blank">' +
-                    '                            <img alt="Logo" src="http://www.simatosolutions.com:1340/edit/viewImages?image='+ app[0].imageFooter+'" width="60" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">' +
+                    '                            <img alt="Logo" src="http://www.simatosolutions.com:1340/edit/viewImages?image=' + app[0].imageFooter + '" width="60" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">' +
                     '                        </a>' +
                     '                    </td>' +
                     '                </tr>' +
@@ -239,7 +241,7 @@ module.exports = {
                     '            <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="max-width: 500px;" class="responsive-table">' +
                     '                <tr>' +
                     '                    <td align="center" style="font-size: 12px; line-height: 18px; font-family: Helvetica, Arial, sans-serif; color:#666666;">' +
-                    '                        1234 Main Street, Anywhere, 488,Sri Lanka' +
+                    '                        ' + app[0].footer +
                     '                        <br>' +
                     '                        <a href="http://litmus.com" target="_blank" style="color: #666666; text-decoration: none;">Unsubscribe</a>' +
                     '                        <span style="font-family: Arial, sans-serif; font-size: 12px; color: #444444;">  |  </span>' +
@@ -258,7 +260,6 @@ module.exports = {
                     '' +
                     '</body>' +
                     '</html>';
-
 
 
                 console.log(app[0]);
