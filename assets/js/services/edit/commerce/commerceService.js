@@ -59,11 +59,12 @@
                         mainId: product.mainId,
                         detailedDesc: product.detailedDesc,
                         name: product.name,
-                        childId: variants.childId,
+                        childId: variants[0].childId,
+                        variants: variants,
                         desc: product.desc,
-                        sku: variants.sku,
-                        price: variants.price,
-                        quantity: variants.quantity,
+                        //sku: variants.sku,
+                       // price: variants.price,
+                        //quantity: variants.quantity,
                         type: product.type,
                         discount: product.discount
                     },
@@ -153,6 +154,10 @@
                     return $http.post(SERVER_URL + 'edit/addVariants', variants);
                 }
 
+            },
+            addToInventory: function (inventry){
+            console.log(inventry);
+               return $http.post(SERVER_URL + 'edit/addToInventory', inventry);
             },
             getMainMenuList: function () {
                 return $http.get(SERVER_URL + 'edit/getMainNavigation?appId=' + $rootScope.appId);

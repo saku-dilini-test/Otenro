@@ -28,21 +28,24 @@ module.exports = {
         detailedDesc:{
             type : 'string',
         },
-        sku:{
-            type : 'integer',
+        variants:{
+            type: 'string'
         },
-        price : {
-            type : 'integer'
-        },
-        size: {
-            type: 'integer'
-        },
-        weight :{
-            type: 'integer'
-        },
-        quantity :{
-            type: 'integer'
-        },
+//        sku:{
+//            type : 'integer',
+//        },
+//        price : {
+//            type : 'integer'
+//        },
+//        size: {
+//            type: 'integer'
+//        },
+//        weight :{
+//            type: 'integer'
+//        },
+//        quantity :{
+//            type: 'integer'
+//        },
         desc: {
             type: 'string'
         },

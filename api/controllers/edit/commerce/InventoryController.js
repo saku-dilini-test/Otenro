@@ -11,8 +11,9 @@ module.exports = {
 
     getInventoryList:function(req, res) {
 
-
             var inventory=[];
+            var priceAndVariants=[];
+            var obj=[];
             var appId = req.param('appId');
             var searchApp = {
                 appId: appId
@@ -20,50 +21,54 @@ module.exports = {
 
             ThirdNavigation.find(searchApp).exec(function(err, app) {
                 if (err) return done(err);
-                var setFunction=function(x,length, data ,obj){
-                    if(x<length){
-                        data[x].product=data[x];
 
-                        ApplicationInventory.findOrCreate({id :data[x].id},data[x]).exec(function(e,update){
-                            if(e){
-
-                                console.log(e);
-                                x++;
-                                setFunction(x,length,data ,obj);
-                            }
-                            var query = {
-                                productId: data[x].id,
-                                appId: data[x].appId,
-                                childId: data[x].childId,
-                                name: data[x].name,
-                                price: data[x].price,
-                                quantity: data[x].quantity
-                            }
-                            PriceAndVariants.findOrCreate({ productId : data[x].id},query).exec(function(err,variants){
-                                if(err){
-                                    console.log(err);
-                                }
-                                if(variants != ""){
-                                    update.variant = variants[0];
-                                    obj.push(update);
-                                    x++;
-                                    setFunction(x,length,data ,obj);
-                                }
-                                else{
-                                    obj.push(update);
-                                    x++;
-                                    setFunction(x,length,data ,obj);
-                                }
+                app.forEach(function(appData){
+                var query = {
+                    productId: appData.id,
+                    appId: appData.appId,
+                    childId: appData.childId,
+                    name: appData.name,
+                    price: appData.price,
+                    quantity: appData.quantity
+                }
+                var id = appData.id;
+                appData.product = appData;
+                appData.productId = appData.id;
+                var appInvn = appData;
+                    ApplicationInventory.find({productId: appData.id}).exec(function(e,fff){
+                        if(e) console.log(e);
+                        if(fff == ''){
+                            ApplicationInventory.create(appInvn).exec(function(e,aaa){
+                                if(e) console.log(e);
+                                query.id = aaa.id;
+                                PriceAndVariants.create(query).exec(function(er,bbb){
+                                    if(er) console.log(er);
+                                })
                             })
-                        });
+                        }
+                    })
+                })
+                });
 
-                    }else{
-                        return res.send(obj);
+
+                ApplicationInventory.find(searchApp).exec(function(e,foundInvntry){
+                if(e) console.log(e);
+                inventory = foundInvntry;
+                })
+                PriceAndVariants.find(searchApp).exec(function(err,variantsdata){
+                    if(err){console.log(err)}
+                    priceAndVariants = variantsdata;
+                    for(var i=0; i<priceAndVariants.length; i++){
+                    inventory.forEach(function(data){
+                        if(data.id == priceAndVariants[i].id){
+                            data.variant = priceAndVariants[i];
+                        }
+                    })
                     }
-                };
+                    obj.push(inventory);
+                    res.send(obj[0]);
 
-                setFunction(0,app.length,app,inventory);
-            });
+                })
 
     },
 

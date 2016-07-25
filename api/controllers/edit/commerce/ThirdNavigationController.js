@@ -200,7 +200,15 @@ module.exports = {
                });
            }
     },
-    
+
+    addToInventory: function(req,res){
+    var inventoryData = req.body;
+        ApplicationInventory.create(inventoryData).exec(function(err,invntry){
+            if(err) console.log(err);
+            res.send(invntry);
+        })
+    },
+
     getUpdates: function(req,res){
         var id = req.param('ObjectId');
         ThirdNavigation.find(id, function(err, app) {
