@@ -65,19 +65,17 @@ module.exports = {
         });
     },
     /**
-     * return collection of article given appId
+     * delete collection of article category given Id
      *
-     * @param req appId
-     * @param res collection articles for given appId
+     * @param req Id
+     * @param res result
      */
     deleteCategory : function(req,res){
 
-        var id = req.body.catId;
-        //console.log(req.body);
+        var id = req.body.id;
         var deleteQuery = {
             id : id
-        }
-
+        };
         ArticleCategory.destroy(deleteQuery).exec(function(err,result) {
            if (err) return res.send(err);
             res.send(result);
@@ -87,7 +85,7 @@ module.exports = {
         var editQuery = {
             appId : req.body.appId,
             id:req.body.id
-        }
+        };
         ArticleCategory.update(editQuery,{"name":req.body.name}).exec(function(err,result) {
             if (err) return done(err);
             res.send(result);

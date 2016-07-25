@@ -1,80 +1,223 @@
 (function() {
     'use strict';
-    angular.module("appEdit").controller("MainMenuCtrl", ['$scope', '$mdDialog', '$rootScope', 'mainMenuService','$http',
-        'commerceService','toastr','mySharedService','ME_APP_SERVER','$auth','dashboardService', MainMenuCtrl]);
+    angular.module("appEdit").controller("MainMenuCtrl", ['$scope', '$mdDialog', '$rootScope',
+        'mainMenuService','$http','commerceService','toastr','mySharedService','ME_APP_SERVER','$auth'
+        ,'dashboardService','articleService','SERVER_URL','initialData', MainMenuCtrl]);
 
-    function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,mySharedService,ME_APP_SERVER,$auth,dashboardService) {
+    function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
+                          mySharedService,ME_APP_SERVER,$auth,dashboardService,articleService,SERVER_URL,initialData) {
+
 
         $scope.tmpImage = [ null , null];
         $scope.mainImg = null;
-        
-        var reqData = {
-            appId:$rootScope.appId
+        $scope.topLevel  = '';
+        $scope.tempplayer = "";
+
+        // ----- Config -----
+        $scope.initialData = initialData;
+        var tempCatBusiness = 2;
+        var tempCatMedia = 3;
+        $scope.templateCategory = '';
+
+        console.log(initialData);
+
+        // Main Menu view
+        if($scope.initialData == null ) {
+            // check ID of templateCategory and load related collection to navigation
+            dashboardService.getApplicationData($rootScope.appId)
+                .success(function (data) {
+                    console.log(data);
+                    $scope.templateCategory = data.templateCategory;
+                    // Business Template Category
+                    if (data.templateCategory == tempCatBusiness) {
+                        commerceService.getCategoryList()
+                            .success(function (secondNaviList) {
+                                $scope.menuItems = secondNaviList;
+                            }).error(function (error) {
+                                toastr.error('Menu Loading Error', 'Warning', {closeButton: true});
+                            });
+                    }   // Media Template Category
+                    else if (data.templateCategory == tempCatMedia) {
+                        articleService.getCategoryList()
+                            .success(function (catList) {
+                                $scope.menuItems = catList;
+                            }).error(function (err) {
+                                toastr.error('Menu Loading Error', 'Warning', {closeButton: true});
+                            });
+                    } else {
+                        // Not defined yet  | Other Template Category Here
+                    }
+                }).error(function (err) {
+                    toastr.error(err.message, 'Warning', {
+                        closeButton: true
+                    });
+                });
+        }else if($scope.initialData){
+            $scope.templateCategory = $scope.initialData.templateCategory;
+            if($scope.initialData.menu == 'addNewMenuNavigation'){
+
+            }else if($scope.initialData.menu == 'addNewMenuCategory'){
+
+            }else if($scope.initialData.menu){
+                var imgLocation = '';
+                if($scope.templateCategory == tempCatBusiness){
+                    imgLocation = "img=secondNavi";
+                }
+                if($scope.templateCategory == tempCatMedia){
+                    imgLocation = "img=category";
+                }
+
+                $scope.menu = $scope.initialData.menu;
+                $scope.serverImage = $scope.menu.imageUrl;
+                $scope.mainImg = $scope.menu.imageUrl;
+                $scope.picFile =  SERVER_URL+"edit/viewImages?userId="+$auth.getPayload().id
+                    +"&appId="+$rootScope.appId+"&" + imgLocation +'/'+ $scope.menu.imageUrl;
+            }
+        }
+        // Add New Menu
+        $scope.goToAddNewMenuItemView = function () {
+            if($scope.templateCategory == tempCatBusiness){
+                mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',$scope.templateCategory);
+            }else if($scope.templateCategory == tempCatMedia){
+                mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory',$scope.templateCategory);
+            }
         };
 
-        $scope.topLevel  = '';
-
-        commerceService.getMainMenuList()
-            .success(function (result) {
-                if(result){
-                    commerceService.getCategoryList()
-                        .success(function (secondResult) {
-                            if(secondResult){
-                                commerceService.getProductList()
-                                    .success(function (thirdResult) {
-                                        if(thirdResult){
-
-                                            for(var z=0; z< result.length ; z++){
-                                                result[z].nodes=[];
-                                                for(var i=0 ; i < secondResult.length ; i++) {
-                                                    if( result[z].id == secondResult[i].mainId ){
-                                                      if(thirdResult){
-                                                          secondResult[i].nodes=[];
-                                                            for(var j=0 ;j < thirdResult.length ;j++){
-                                                                if(secondResult[i].id == thirdResult[j].childId){
-                                                                     thirdResult[j].nodes=[];
-                                                                     secondResult[i].nodes.push(thirdResult[j]);
-                                                                }
-                                                            }
-                                                            result[z].nodes.push(secondResult[i]);
-                                                      }else{
-                                                          result[z].nodes.push(secondResult[i]);
-                                                      }
-                                                    }
-
-                                                }
-                                            }
-                                            $scope.menuItems= result;
-
-                                            /**
-                                             * If null main menu collection
-                                             */
-                                            if(result.length == 0 && secondResult.length != 0){
-                                                $scope.menuItems= secondResult;
-                                                $scope.topLevel  = 'secondNavi';  // This should comes DB
-                                            }
-                                            //console.log("Result "+JSON.stringify(result));
-                                        }
-
-                                    }).error(function (error) {
-                                        toastr.error('Sub child Loading Error :', 'Error', {
-                                            closeButton: true
-                                        });
-                                    });
-                            }
-                        }).error(function (error) {
-                            toastr.error('Child Loading Error :', 'Error', {
-                                closeButton: true
+        // Edit Menu
+        $scope.goToEditMenuItemView = function(item){
+            if($scope.templateCategory == tempCatBusiness){
+                mainMenuService.showEditMenuNavigationDialog(item,$scope.templateCategory);
+            }else if($scope.templateCategory == tempCatMedia){
+                mainMenuService.showEditMenuCategoryDialog(item,$scope.templateCategory);
+            }
+        };
+        // Delete Menu
+        $scope.deleteMenuItem = function(item){
+            var childOfMenu = '';
+            if($scope.templateCategory == tempCatBusiness){
+                childOfMenu = 'Product';
+            }
+            if($scope.templateCategory == tempCatMedia){
+                childOfMenu = 'Article';
+            }
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+                    this.confirm = function click(){
+                        if($scope.templateCategory == tempCatBusiness){
+                            mainMenuService.deleteData(item).success(function(data) {
+                                $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                    +'/templates/'+$rootScope.appId+'' +
+                                    '#/app/update?'+new Date().getTime();
+                                mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                                return mainMenuService.showMainMenuDialog();
+                            }).error(function(err) {
+                                $mdDialog.hide();
                             });
-                        });
-                }
-            }).error(function (error) {
-                toastr.error('Main Loading Error :', 'Error', {
+                        }
+                        if($scope.templateCategory == tempCatMedia){
+                            articleService.deleteCategory(item).success(function(data) {
+                                $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                    +'/templates/'+$rootScope.appId+'' +
+                                    '#/app/update?'+new Date().getTime();
+                                mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                                return mainMenuService.showMainMenuDialog();
+                            }).error(function(err) {
+                                $mdDialog.hide();
+                            });
+                        }
+                    },
+                        this.cancel = function click(){
+                            $mdDialog.hide();
+                            return mainMenuService.showMainMenuDialog();
+                        }
+                },
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                '<md-content >' +
+                '<div class="md-dialog-header">' +
+                '<h1>Deleting category </h1>' +
+                '                </div> <br>'+
+                ' <div style="text-align:center">' +
+                '<lable> Deleting category will delete all the ' + childOfMenu +
+                ' under that category! </lable></div>' +
+                '<br><br><div class="md-dialog-buttons">'+
+                '<div class="inner-section">'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">Cancel</md-button>'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Ok</md-button>'+
+                '</div>'+
+                '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
+        };
+
+        // Add menu navigation
+        $scope.addMenuNavigation = function(file,menu){
+
+            if($scope.initialData.menu == 'addNewMenuNavigation'){
+                mainMenuService.addMenu(file,$rootScope.appId,menu.name).success(function(data) {
+                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                        +'/templates/'+$rootScope.appId+'' +
+                        '#/app/home/'+data.id+'?'+new Date().getTime();
+                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                    toastr.success("Successfully added new Category", 'Message', {closeButton: true});
+                    $mdDialog.hide();
+                    mainMenuService.showMainMenuDialog();
+                }).error(function(err) {
+                    toastr.error(err.message, 'Warning', {
+                        closeButton: true
+                    });
+                });
+            }
+
+            if($scope.mainImg == $scope.serverImage){
+                mainMenuService.updateSecondNavi(menu).success(function(data) {
+                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                        +'/templates/'+$rootScope.appId+'' +
+                        '#/app/home/'+data.id+'?'+new Date().getTime();
+                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                    toastr.success("Successfully Update new Category", 'Message', {closeButton: true});
+                    $mdDialog.hide();
+                    mainMenuService.showMainMenuDialog();
+                }).error(function(err) {
+                    toastr.error(err.message, 'Warning', {
+                        closeButton: true
+                    });
+                });
+            }
+            if($scope.mainImg != $scope.serverImage){
+                console.log('imageUpdate true');
+            }
+
+
+        };
+        // Add menu category
+        $scope.addNewCategory = function(file,menu){
+
+            mainMenuService.addNewCategory(file,$rootScope.appId,menu.name)
+                .success(function(data) {
+                    console.log(data);
+                $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                    +'/templates/'+$rootScope.appId+'' +
+                    '#/app/home/'+data.id+'?'+new Date().getTime();
+                mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                toastr.success("Successfully added new Category", 'Message', {closeButton: true});
+                $mdDialog.hide();
+                    mainMenuService.showMainMenuDialog();
+            }).error(function(err) {
+                toastr.error(err.message, 'Warning', {
                     closeButton: true
                 });
             });
+        };
 
-        $scope.tempplayer = "";
+        // change image
+        $scope.changeImage = function(img){
+            $scope.mainImg = img;
+        };
+
+
+        // TODO : may be change later
 
         $scope.updateNames = function (){
             if($scope.tempplayer === "") return;
@@ -233,22 +376,6 @@
 
         };
 
-        $scope.newMenu = function () {
-            dashboardService. getApplicationData($rootScope.appId).success(function(data) {
-               if(data.templateCategory=='2'){
-                   mainMenuService.showAddMenuDialog();
-               }else if (data.templateCategory=='3') {
-                   mainMenuService.showAddCategoryDialog();
-               }
-           }).success(function(data) {
-           }).error(function(err) {
-               toastr.error(err.message, 'Warning', {
-                   closeButton: true
-               });
-           });
-        };
-
-
         $scope.addImage = function(img){
             var im = $scope.tmpImage;
             for(var i=0 ; i < im.length ; i++){
@@ -264,80 +391,6 @@
             });
         };
 
-        $scope.setImage = function(img){
-
-            if(img == undefined){
-                toastr.error('Set Image', 'Warning', {
-                    closeButton: true
-                });
-            }else{
-                $scope.picFile = $scope.tmpImage[img];
-                $scope.mainImg = $scope.tmpImage[img];
-            }
-        };
-
-        $scope.addMenu = function(file,menu){
-
-            mainMenuService.addMenu(file,$rootScope.appId,menu.name).success(function(data) {
-                $scope.menuItems.push({
-                    id :   data.id,
-                    name : data.name,
-                    link : data.link,
-                    icon : data.icon,
-                    appId : data.appId,
-
-                });
-            }).success(function(data) {
-                $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                    +'/templates/'+$rootScope.appId+'' +
-                    '#/app/home/'+data.id+'?'+new Date().getTime();
-                mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                toastr.success("Successfully added new navigation", 'Message', {
-                    closeButton: true,
-
-                });
-                $mdDialog.hide();
-            }).error(function(err) {
-                toastr.error(err.message, 'Warning', {
-                    closeButton: true
-                });
-            });
-        };
-
-        $scope.addNewCategory = function(file,menu){
-
-            mainMenuService.addNewCategory(file,$rootScope.appId,menu.name).success(function(data) {
-                $scope.menuItems.push({
-                    id :   data.id,
-                    name : data.name,
-                    appId : data.appId,
-                });
-            }).success(function(data) {
-                $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                    +'/templates/'+$rootScope.appId+'' +
-                    '#/app/home/'+data.id+'?'+new Date().getTime();
-                mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                toastr.success("Successfully added new navigation", 'Message', {
-                    closeButton: true,
-
-                });
-                $mdDialog.hide();
-            }).error(function(err) {
-                toastr.error(err.message, 'Warning', {
-                    closeButton: true
-                });
-            });
-        }
-
-        $scope.edit = function(scope){
-            var nodeData = scope.$modelValue;
-            console.log( nodeData);
-            if(nodeData.mainId){
-                return mainMenuService.showChildDialog(nodeData);
-            }else{
-                return mainMenuService.showSubChildDialog(nodeData);
-            }
-        };
 
         $scope.hide = function() {
             $mdDialog.hide();
