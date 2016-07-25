@@ -209,7 +209,7 @@
             }
         };
         if (typeof item != 'string') {
-            commerceService.getUpdates(item.product)
+            commerceService.getUpdates(item.productId)
                 .success(function (result) {
                     $scope.product = result[0];
                     $scope.selectedLink = $scope.product.type;
