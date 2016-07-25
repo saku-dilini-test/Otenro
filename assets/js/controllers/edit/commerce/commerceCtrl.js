@@ -580,6 +580,7 @@
         var prams = {
             appId: $rootScope.appId
         };
+
         commerceService.getEmailSettings(prams)
             .success(function (result) {
                 $scope.email = result;
@@ -593,8 +594,16 @@
                 type: type
             }
 
+            commerceService.getEmailSettings(prams)
+                .success(function (result) {
+                    $scope.email = result;
+                    console.log(result);
+                }).error(function (error) {
+                alert("MainMenu Loading Error : " + error);
+            });
 
             sendType.appId = $rootScope.appId;
+            console.log($scope.email);
             for (var i = 0; i < $scope.email.length; i++) {
                 if ((type == "Order confirm") && (typeof $scope.email[0].orderConfirmedEmail === 'undefined')) {
                     console.log('ss');
