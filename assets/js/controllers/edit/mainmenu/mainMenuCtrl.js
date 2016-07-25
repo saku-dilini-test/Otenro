@@ -186,7 +186,25 @@
                 });
             }
             if($scope.mainImg != $scope.serverImage){
-                console.log('imageUpdate true');
+                commerceService.updateCategoryImage(file,menu.imageUrl,menu.id,$rootScope.appId).progress(function(evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                }).success(function(data, status, headers, config) {
+                    mainMenuService.updateSecondNavi(menu).success(function(data) {
+                        $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                            +'/templates/'+$rootScope.appId+'' +
+                            '#/app/home/'+data.id+'?'+new Date().getTime();
+                        mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                        toastr.success("Successfully Update new Category", 'Message', {closeButton: true});
+                        $mdDialog.hide();
+                        mainMenuService.showMainMenuDialog();
+                    }).error(function(err) {
+                        toastr.error(err.message, 'Warning', {
+                            closeButton: true
+                        });
+                    });
+                }).error(function(err) {
+                })
             }
 
 
@@ -194,21 +212,43 @@
         // Add menu category
         $scope.addNewCategory = function(file,menu){
 
-            mainMenuService.addNewCategory(file,$rootScope.appId,menu.name)
-                .success(function(data) {
-                    console.log(data);
-                $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                    +'/templates/'+$rootScope.appId+'' +
-                    '#/app/home/'+data.id+'?'+new Date().getTime();
-                mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                toastr.success("Successfully added new Category", 'Message', {closeButton: true});
-                $mdDialog.hide();
-                    mainMenuService.showMainMenuDialog();
-            }).error(function(err) {
-                toastr.error(err.message, 'Warning', {
-                    closeButton: true
-                });
-            });
+            if($scope.initialData.menu == 'addNewMenuCategory') {
+                mainMenuService.addNewCategory(file, $rootScope.appId, menu.name)
+                    .success(function (data) {
+                        $scope.appTemplateUrl = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
+                            + '/templates/' + $rootScope.appId + '' +
+                            '#/app/home/' + data.id + '?' + new Date().getTime();
+                        mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                        toastr.success("Successfully added new Category", 'Message', {closeButton: true});
+                        $mdDialog.hide();
+                        mainMenuService.showMainMenuDialog();
+                    }).error(function (err) {
+                        toastr.error(err.message, 'Warning', {
+                            closeButton: true
+                        });
+                    });
+            }
+            if($scope.mainImg == $scope.serverImage){
+                articleService.editCategory(menu)
+                    .success(function (data) {
+                        $scope.appTemplateUrl = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
+                            + '/templates/' + $rootScope.appId + '' +
+                            '#/app/home/' + data.id + '?' + new Date().getTime();
+                        mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                        toastr.success("Successfully added new Category", 'Message', {closeButton: true});
+                        $mdDialog.hide();
+                        mainMenuService.showMainMenuDialog();
+                    }).error(function (err) {
+                        toastr.error(err.message, 'Warning', {
+                            closeButton: true
+                        });
+                    });
+            }
+
+            // TODO : This part need to develop according template config
+            if($scope.mainImg != $scope.serverImage){
+                console.log('imageUpdate true');
+            }
         };
 
         // change image
