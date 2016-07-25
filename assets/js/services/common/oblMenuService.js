@@ -42,6 +42,9 @@
                         if (ctrlFun == 'showShippingDialog') {
                             return shippingService.showShippingDialog();
                         }
+                        if (ctrlFun == 'showTaxesDialog') {
+                            return commerceService.showTaxesDialog();
+                        }
                         if (ctrlFun == 'showEmailSettingsDialog') {
                             return commerceService.showEmailSettingsDialog();
                         }
@@ -53,12 +56,6 @@
                     if(ctrl == 'inventory'){
                         if(ctrlFun == 'showInventoryDialog'){
                             return commerceService.showInventoryDialog();
-                        }
-                    }
-
-                    if(ctrl == 'tax'){
-                        if (ctrlFun == 'showTaxesDialog') {
-                            return taxService.showTaxesDialog();
                         }
                     }
 

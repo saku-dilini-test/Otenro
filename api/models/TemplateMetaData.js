@@ -53,7 +53,7 @@ module.exports = {
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Featured',
-      menuFunction : '',
+      menuFunction : 'commerce.showComingSoonDialog',
       menuButtonId : '1003'
     },
     {
@@ -61,7 +61,7 @@ module.exports = {
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Secondary',
-      menuFunction : '',
+      menuFunction : 'commerce.showComingSoonDialog',
       menuButtonId : '1004'
     },
     {
@@ -69,7 +69,7 @@ module.exports = {
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Ads',
-      menuFunction : '',
+      menuFunction : 'commerce.showComingSoonDialog',
       menuButtonId : '1004'
     },
     {
@@ -77,7 +77,7 @@ module.exports = {
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Subscriptions',
-      menuFunction : '',
+      menuFunction : 'commerce.showComingSoonDialog',
       menuButtonId : '1005'
     },
     {
@@ -85,7 +85,7 @@ module.exports = {
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'View Controls',
-      menuFunction : '',
+      menuFunction : 'commerce.showComingSoonDialog',
       menuButtonId : '1006'
     },
     {
@@ -93,7 +93,7 @@ module.exports = {
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Payment Activities',
-      menuFunction : '',
+      menuFunction : 'commerce.showComingSoonDialog',
       menuButtonId : '1007'
     },
     {
@@ -101,7 +101,7 @@ module.exports = {
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'IPG Integration',
-      menuFunction : '',
+      menuFunction : 'commerce.showComingSoonDialog',
       menuButtonId : '1008'
     },
     {
@@ -109,7 +109,7 @@ module.exports = {
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Communication',
-      menuFunction : '',
+      menuFunction : 'commerce.showComingSoonDialog',
       menuButtonId : '1009'
     },
     {
@@ -117,7 +117,7 @@ module.exports = {
       templateId : '1',
       menuType : 'MenuButton',
       menuTitle  : 'Site Settings',
-      menuFunction : '',
+      menuFunction : 'commerce.showComingSoonDialog',
       menuButtonId : '1010'
     },
 
@@ -183,7 +183,7 @@ module.exports = {
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'Payment Activities',
-      menuFunction : '',
+      menuFunction : 'commerce.showComingSoonDialog',
       menuButtonId : '1508'
     },
     {
@@ -191,7 +191,7 @@ module.exports = {
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'IPG Integration',
-      menuFunction : '',
+      menuFunction : 'commerce.showComingSoonDialog',
       menuButtonId : '1509'
     }
 
