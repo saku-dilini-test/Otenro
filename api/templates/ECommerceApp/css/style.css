@@ -82,5 +82,8 @@
 .button{
     cursor: url(../img/cursor.cur), auto;
 }
+button{
+    cursor: url(../img/cursor.cur), auto;
+}
 
 
