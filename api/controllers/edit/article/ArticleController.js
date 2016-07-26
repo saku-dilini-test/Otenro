@@ -92,6 +92,27 @@ module.exports = {
         });
     },
 
+    updateCategoryImage : function(req,res){
+
+        var filePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/'+ req.body.imageUrl;
+        var desPath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
+
+        req.file('file').upload({
+            dirname: require('path').resolve(desPath)
+        },function (err, uploadedFiles) {
+            if (err) return res.send(500, err);
+
+            fs.unlink(filePath, function (err) {
+                if (err) return console.error(err);
+            });
+
+            fs.rename(uploadedFiles[0].fd, desPath+req.body.imageUrl, function (err) {
+                if (err) return res.send(err);
+                res.json({ok:true});
+            });
+        });
+    },
+
     /**
      *
      * @param req : AppId, file , userId, article-title , article-desc
