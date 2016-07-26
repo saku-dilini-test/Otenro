@@ -511,9 +511,14 @@
         };
 
         $scope.saveEmailDeliInfo = function (email, type) {
-
+            if(email == undefined || email.fromEmail == undefined || email.replyToEmail == undefined
+             || email.alertEmail == undefined || email.alertAt == undefined){
+                toastr.error('Fill the all fields','Warning',{
+                    closeButton: true
+                });
+            }
+            else{
             email.appId = $rootScope.appId;
-            console.log(email);
             commerceService.saveEmailDeliInfo(email)
                 .success(function (data) {
                     console.log(data);
@@ -530,7 +535,7 @@
                     closeButton: true
                 });
             })
-
+            }
         };
         $scope.nextStep1 = function () {
 

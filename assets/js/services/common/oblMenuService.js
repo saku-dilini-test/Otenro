@@ -59,6 +59,12 @@
                         }
                     }
 
+                    if(ctrl == 'tax'){
+                        if (ctrlFun == 'showTaxesDialog') {
+                            return taxService.showTaxesDialog();
+                        }
+                    }
+
                 }else{
                     console.log('Note : data are undefined');
                 }
