@@ -478,18 +478,24 @@
         };
 
         $scope.addFile = function (file) {
-            var fi = $scope.tmpFile;
-            for (var i = 0; i < fi.length; i++) {
-                if (fi[i] == null) {
-                    fi[i] = $scope.File;
-                    break;
+            if (typeof file == 'undefined') {
+                toastr.error('First select image and then upload image', 'Message', {
+                    closeButton: true
+                });
+            } else {
+                var fi = $scope.tmpFile;
+                for (var i = 0; i < fi.length; i++) {
+                    if (fi[i] == null) {
+                        fi[i] = $scope.File;
+                        break;
+                    }
                 }
+                $scope.tmpFile = fi;
+                $scope.mainFile = file;
+                toastr.success('added file', 'message', {
+                    closeButton: true
+                });
             }
-            $scope.tmpFile = fi;
-            $scope.mainFile = file;
-            toastr.success('added File', 'message', {
-                closeButton: true
-            });
         };
 
         $scope.nextStep = function (current) {
