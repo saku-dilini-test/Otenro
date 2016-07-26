@@ -103,6 +103,8 @@
                     toastr.error('Fill all the fields', 'Warning', {
                         closeButton: true
                     });
+                }else if(!(product.sku > 0)){
+                    toastr.error('Sku Should be Positive', 'Warning', {closeButton: true});
                 }
                 else {
                     if (typeof item != 'string') {
@@ -197,6 +199,9 @@
                 toastr.error('Cannot be 0', 'Warning', {
                     closeButton: true
                 });
+            }
+            else if (!($scope.variants[0].sku > 0)) {
+                toastr.error('Sku Should be Positive', 'Warning', {closeButton: true});
             }
             else {
                 if (selection == "weight") {
