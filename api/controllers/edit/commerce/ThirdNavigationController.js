@@ -170,12 +170,10 @@ module.exports = {
     
     addVariants : function (req,res){
         var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
-
            if (typeof req.body.quantity !== 'undefined'){
                var priceAndVariantsAttribute =req.body;
                PriceAndVariants.create(priceAndVariantsAttribute).exec(function(err, priceAndVariants) {
                    if (err){
-                       console.log(err);
                        res.send(err);
                    }else{
                        res.send(priceAndVariants);
@@ -187,11 +185,9 @@ module.exports = {
                },function (err, uploadedFiles) {
                    if (err) return res.send(500, err);
                    var priceAndVariantsAttribute =req.body;
-
                        priceAndVariantsAttribute.fileUrl = uploadedFiles[0].fd.split("/").pop();
                        PriceAndVariants.create(priceAndVariantsAttribute).exec(function(err, priceAndVariants) {
                            if (err){
-                               console.log(err);
                                res.send(err);
                            }else{
                                res.send(priceAndVariants);

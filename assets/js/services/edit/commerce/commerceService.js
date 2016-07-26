@@ -156,7 +156,6 @@
 
             },
             addToInventory: function (inventry){
-            console.log(inventry);
                return $http.post(SERVER_URL + 'edit/addToInventory', inventry);
             },
             getMainMenuList: function () {
