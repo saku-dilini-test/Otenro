@@ -316,16 +316,6 @@
                             });
                             });
 
-//                            for(var i=0; i<variantsList.length; i++){
-//                                variantsList[i].appId = $rootScope.appId;
-//                                variantsList[i].childId = product.mainId;
-//                                variantsList[i].productId = data.appId.id;
-//                                commerceService.addToInventory(variantsList[i]).success(function(invnrty){
-//                                    console.log(invnrty);
-//                                }).error(function(err){
-//                                    console.log(err);
-//                                })
-//                            }
                         }).error(function (err) {
                             toastr.error('Unable to Add', 'Warning', {
                                 closeButton: true
@@ -373,37 +363,42 @@
                     return;
                 }
                 else {
-                    variants = {
-                        appId: $rootScope.appId,
-                        childId: product.childId,
-                        detailedDesc: product.detailedDesc,
-                        sku: $scope.variants[0].sku,
-                        name: $scope.variants[0].name,
-                        size: size,
-                        weight: weight,
-                        price: $scope.variants[0].price,
-                        quantity: $scope.variants[0].quantity
-                    };
-                    commerceService.addProduct(file, product, item.id, variants).success(function (data) {
-                        toastr.success('New Product has been added.', 'Awsome!', {
-                            closeButton: true
-                        });
-                        $mdDialog.hide();
-                    }).error(function (err) {
-                        toastr.error('Unable to Add', 'Warning', {
-                            closeButton: true
-                        });
-                    });
-                    commerceService.addPriceandVariants(variants).success(function (data) {
-                        toastr.success('New Product has been added.', 'Awsome!', {
-                            closeButton: true
-                        });
-                        $mdDialog.hide();
-                    }).error(function (err) {
-                        toastr.error('Unable to Add', 'Warning', {
-                            closeButton: true
-                        });
-                    });
+
+                var variantsList = $scope.variants;
+                variantsList.forEach(function (variants) {
+                    variants.childId = product.childId;
+                });
+                var variantsAttribute;
+
+                   commerceService.addProduct(file, product, item.id, variantsList).success(function (data) {
+                   variantsList.forEach(function (variantsAttribute) {
+                       variantsAttribute.appId = $rootScope.appId;
+                       variantsAttribute.childId = product.mainId;
+                       variantsAttribute.productId = data.appId.id;
+
+                       commerceService.addToInventory(variantsAttribute).success(function(invnrty){
+                           $scope.invntry = invnrty;
+                       variantsAttribute.id = $scope.invntry.id;
+                       commerceService.addPriceandVariants(variantsAttribute, productFile).success(function (data) {
+                           toastr.success('New Price and Variants has been added.', 'Awsome!', {
+                               closeButton: true
+                           });
+                           $mdDialog.hide();
+                       }).error(function (err) {
+                           toastr.error('Unable to Add', 'Warning', {
+                               closeButton: true
+                           });
+                       });
+                       }).error(function(err){
+                           console.log(err);
+                       });
+                       });
+
+                   }).error(function (err) {
+                       toastr.error('Unable to Add', 'Warning', {
+                           closeButton: true
+                       });
+                   });
                 }
             }
 
