@@ -29,17 +29,17 @@
     font-family: inherit;
     border-width: inherit;
     border-radius: inherit;
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 
 ion-nav-back-button{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 ion-nav-bar{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 ion-nav-view{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 
 
@@ -52,7 +52,7 @@ ion-nav-view{
 .made-easy-contactUs .header .header-image {
     width: 100%;
     height: auto;
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 .made-easy-contactUs .content {
     text-align: center;
@@ -68,32 +68,32 @@ ion-nav-view{
 .made-easy-aboutUs {
     background: url(../img/background.jpg) center;
     background-size: cover;
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 .made-easy-aboutUs .header{}
 .made-easy-aboutUs .header .header-image {
     width: 100%;
     height: auto;
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 .made-easy-aboutUs .content {
     text-align: center;
     padding: 8px;
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 .made-easy-aboutUs .content .last {
     margin-bottom: 20px;
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 
 ion-view{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 ion-content{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 a[href]:hover{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 
 /* ------------------- */

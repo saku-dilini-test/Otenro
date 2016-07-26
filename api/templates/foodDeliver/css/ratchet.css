@@ -142,18 +142,18 @@ textarea {
   margin: 0;
   font: inherit;
   color: inherit;
-  cursor: url(../img/cursor.cur), auto;
+  cursor: url(../img/Mouse_point.png), auto;
 }
 
 button {
   overflow: visible;
-  cursor: url(../img/cursor.cur), auto;
+  cursor: url(../img/Mouse_point.png), auto;
 }
 
 button,
 select {
   text-transform: none;
-  cursor: url(../img/cursor.cur), auto;
+  cursor: url(../img/Mouse_point.png), auto;
 }
 
 button,
@@ -161,7 +161,7 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
-  cursor: url(../img/cursor.cur), auto;
+  cursor: url(../img/Mouse_point.png), auto;
 }
 
 button[disabled],
@@ -376,7 +376,7 @@ p {
   text-align: center;
   white-space: nowrap;
   vertical-align: top;
-  cursor: url(../img/cursor.cur), auto;
+  cursor: url(../img/Mouse_point.png), auto;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -853,7 +853,7 @@ button,
 select {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 17px;
-  cursor: url(../img/cursor.cur), auto;
+  cursor: url(../img/Mouse_point.png), auto;
 }
 
 select,
