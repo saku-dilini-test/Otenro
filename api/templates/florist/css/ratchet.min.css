@@ -126,11 +126,11 @@ button, select {
 
 button, html input[type=button], input[type=reset], input[type=submit] {
     -webkit-appearance: button;
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 
 button[disabled], html input[disabled] {
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 
 button::-moz-focus-inner, input::-moz-focus-inner {
@@ -329,7 +329,7 @@ p {
     text-align: center;
     white-space: nowrap;
     vertical-align: top;
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 3px

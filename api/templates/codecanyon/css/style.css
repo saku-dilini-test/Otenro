@@ -39,15 +39,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .gem-ion-content {color: #
         .gem-label.danger, .gem-danger {background: #E74C3C;}
         .gem-label.success, .gem-success {background: #27AE60;}
         .gem-label.primary, .gem-primary {background: #428bca;}
-        .button {margin-right: 7px; cursor: url(../img/cursor.cur), auto;}
-        .item .button {font-size: 13px; padding: 3px 17px; cursor: url(../img/cursor.cur), auto;}
-        .button, .button.gem-default, .button.gem-outline, .button.gem-warning, .button.gem-primary, .button.gem-danger, .button.gem-success {color: #fff; padding: 3px 17px; /*border: none;*/ border-radius: 3px; cursor: url(../img/cursor.cur), auto;}
-        .button-rounded {border-radius: 35px; padding-left: 30px; padding-right: 30px;cursor: url(../img/cursor.cur), auto;}
-        .button.gem-outline {border: 1px solid rgba(0, 0, 0, 0.3); color: #333;cursor: url(../img/cursor.cur), auto;}
-        .button-outline.button-outline {border-color: #eaeaea;cursor: url(../img/cursor.cur), auto;}
-        .button-outline.button-outline.gem-white {color: #fff;cursor: url(../img/cursor.cur), auto;}
-        .button-borderless {border:none;cursor: url(../img/cursor.cur), auto;}
-        .button-action {margin:0 !Important; padding-top: 10px; padding-bottom: 10px; text-transform: uppercase;cursor: url(../img/cursor.cur), auto;}
+        .button {margin-right: 7px; cursor: url(../img/Mouse_point.png), auto;}
+        .item .button {font-size: 13px; padding: 3px 17px; cursor: url(../img/Mouse_point.png), auto;}
+        .button, .button.gem-default, .button.gem-outline, .button.gem-warning, .button.gem-primary, .button.gem-danger, .button.gem-success {color: #fff; padding: 3px 17px; /*border: none;*/ border-radius: 3px; cursor: url(../img/Mouse_point.png), auto;}
+        .button-rounded {border-radius: 35px; padding-left: 30px; padding-right: 30px;cursor: url(../img/Mouse_point.png), auto;}
+        .button.gem-outline {border: 1px solid rgba(0, 0, 0, 0.3); color: #333;cursor: url(../img/Mouse_point.png), auto;}
+        .button-outline.button-outline {border-color: #eaeaea;cursor: url(../img/Mouse_point.png), auto;}
+        .button-outline.button-outline.gem-white {color: #fff;cursor: url(../img/Mouse_point.png), auto;}
+        .button-borderless {border:none;cursor: url(../img/Mouse_point.png), auto;}
+        .button-action {margin:0 !Important; padding-top: 10px; padding-bottom: 10px; text-transform: uppercase;cursor: url(../img/Mouse_point.png), auto;}
         .gem-color-default {color:#95A5A6;}
         .gem-color-success {color:#27AE60;}
         .gem-color-warning {color:#F39C12;}
@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .gem-ion-content {color: #
 /*Login Screen*/
 .gem-splash_background {background:#222224 url('../img/gemionic/background.jpg');}
 .gem-form {margin: 25% 3%;}
-.gem-form .button {margin: 15px 5px;cursor: url(../img/cursor.cur), auto;}
+.gem-form .button {margin: 15px 5px;cursor: url(../img/Mouse_point.png), auto;}
 .gem-form .item.item-input,  .gem-form .item.item-input .input-label, .gem-form .item {background: none;}
 .gem-bar-clear {background: none;}
 .gem-splash-logo { text-align: center; margin: 20% 0 0 0;}
@@ -245,7 +245,7 @@ border-top: 1px solid rgba(0, 0, 0, 0.2);}
     /*Profile Version 3*/
     .profile-stats.profile-3 {margin: 0; text-align: center; padding: 10px;}
     .profile-feed .title {/*border-top:1px solid #ccc;*/ border-bottom:1px solid #ccc; position: relative; padding:10px 15px; }
-    .profile-feed .title .gem-more-button {position: absolute; right: 10px; top: 10px;cursor: url(../img/cursor.cur), auto;}
+    .profile-feed .title .gem-more-button {position: absolute; right: 10px; top: 10px;cursor: url(../img/Mouse_point.png), auto;}
 
     /*Profile Edit*/
     .profile-separator-title, .separator-title {background: #e4e4e4; padding: 5px 15px;}
@@ -268,7 +268,7 @@ border-top: 1px solid rgba(0, 0, 0, 0.2);}
     Invite Friend List
     .list.gem-list {}
     .list.gem-list .gem-circle {border-radius: 500px;}
-    .list.gem-list .item-avatar .button {top: 16px;cursor: url(../img/cursor.cur), auto;}
+    .list.gem-list .item-avatar .button {top: 16px;cursor: url(../img/Mouse_point.png), auto;}
     .list.gem-list .item-avatar {padding-bottom: 4px;}
     /*.list.gem-list .item-avatar {margin: 4px 0 4px 0; font-size: 25px;}*/
 
@@ -286,35 +286,35 @@ border-top: 1px solid rgba(0, 0, 0, 0.2);}
     .clearfix { display: block; }
 
     a[href]:hover{
-            cursor: url(../img/cursor.cur), auto;
+            cursor: url(../img/Mouse_point.png), auto;
         }
 
         .modal{
-            cursor: url(../img/cursor.cur), auto;
+            cursor: url(../img/Mouse_point.png), auto;
         }
         ion-content{
-            cursor: url(../img/cursor.cur), auto;
+            cursor: url(../img/Mouse_point.png), auto;
         }
         ion-header-bar{
-            cursor: url(../img/cursor.cur), auto;
+            cursor: url(../img/Mouse_point.png), auto;
         }
         ion-view{
-            cursor: url(../img/cursor.cur), auto;
+            cursor: url(../img/Mouse_point.png), auto;
         }
         ion-side-menus{
-            cursor: url(../img/cursor.cur), auto;
+            cursor: url(../img/Mouse_point.png), auto;
         }
         ion-side-menu-content{
-            cursor: url(../img/cursor.cur), auto;
+            cursor: url(../img/Mouse_point.png), auto;
         }
         ion-list{
-            cursor: url(../img/cursor.cur), auto;
+            cursor: url(../img/Mouse_point.png), auto;
         }
         ion-item{
-            cursor: url(../img/cursor.cur), auto;
+            cursor: url(../img/Mouse_point.png), auto;
         }
         .item[ng-click]:hover{
-            cursor: url(../img/cursor.cur), auto;
+            cursor: url(../img/Mouse_point.png), auto;
         }
     /* close commented backslash hack */
 

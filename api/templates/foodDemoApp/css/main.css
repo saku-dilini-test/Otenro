@@ -22,7 +22,7 @@
   font-family: Helvetica, sans-serif;
   text-decoration: none;
   vertical-align: middle;
-  cursor: url(../img/cursor.cur), auto;;
+  cursor: url(../img/Mouse_point.png), auto;;
 }
 .panel .social-button-fb{
   padding: 8.5px 17px;
@@ -36,16 +36,16 @@
   font-family: Helvetica, sans-serif;
   text-decoration: none;
   vertical-align: middle;
-  cursor:url(../img/cursor.cur), auto;
+  cursor:url(../img/Mouse_point.png), auto;
 }
 ion-content{
-cursor:url(../img/cursor.cur), auto;
+cursor:url(../img/Mouse_point.png), auto;
 }
 ion-nav-buttons{
-cursor:url(../img/cursor.cur), auto;
+cursor:url(../img/Mouse_point.png), auto;
 }
 a{
-    cursor:url(../img/cursor.cur), auto;
+    cursor:url(../img/Mouse_point.png), auto;
 }
 .panel .create-account-btm {
   background-color: #FFBF0A; /* Green */
@@ -55,13 +55,13 @@ a{
   text-decoration: none;
   display: inline-block;
   margin-top: 35px;
-  cursor:url(../img/cursor.cur), auto;;
+  cursor:url(../img/Mouse_point.png), auto;;
   border-radius:4px;
 }
 
 .panel {
   margin-top:4%;
-  cursor: url(../img/cursor.cur), auto;
+  cursor: url(../img/Mouse_point.png), auto;
 }
 
 /** ----------- Start Custom update Css Class ---------- **/
@@ -102,7 +102,7 @@ a{
   font-family: Ubuntu Light;
   border-width: 3px;
   border-radius: 3px;
-  cursor:url(../img/cursor.cur), auto;
+  cursor:url(../img/Mouse_point.png), auto;
 
 }
 
@@ -171,7 +171,7 @@ a{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    cursor: url(../img/cursor.cur), auto;;
+    cursor: url(../img/Mouse_point.png), auto;;
     border-radius:4px;
     width: 94%;
     margin: 10px;
@@ -201,13 +201,13 @@ white-space: nowrap;
 font-weight: bold;
 font-size: 14px;
 line-height: 16px;
-cursor:url(../img/cursor.cur), auto;}
+cursor:url(../img/Mouse_point.png), auto;}
 
 .buttons .buttons-right .header-item{
-    cursor:url(../img/cursor.cur), auto;
+    cursor:url(../img/Mouse_point.png), auto;
 }
 .title-left{
-    cursor:url(../img/cursor.cur), auto;
+    cursor:url(../img/Mouse_point.png), auto;
 }
 .box_inner{
 	padding:10px;
@@ -224,7 +224,7 @@ margin-bottom: 20px;}
 
 
 
-	
+
 .col-76 {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 75%;
@@ -235,7 +235,7 @@ margin-bottom: 20px;}
     max-width: 74%;
 }
 .col{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 
 .col2 {
@@ -249,7 +249,7 @@ margin-bottom: 20px;}
     padding: 5px;
     width: 100%;
 	font-weight:600;}
-	
+
 	.col-51 {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 50%;
@@ -258,8 +258,8 @@ margin-bottom: 20px;}
     -ms-flex: 0 0 50%;
     flex: 0 0 50%;
     max-width: 50%;}
-	
-	
+
+
 /**
  * Cards and Inset Lists
  * --------------------------------------------------
@@ -326,7 +326,7 @@ margin-bottom: 20px;}
   .list-inset .item2.item2-input input,
   .padding > .list .item2.item2-input input,
   .padding-horizontal > .list .item2.item2-input input {
-    padding-right: 44px; 
+    padding-right: 44px;
 	border-width: 1px;
 border-style: solid;
 border-color:#CCC;
@@ -340,12 +340,12 @@ padding:5px;
 
 .padding-right > .list .item2 {
   margin-right: 0; }
-  
+
   .button.button-positive {
     border-color: transparent;
     background-color: #387ef5;
     color: #fff;
-    cursor:url(../img/cursor.cur), auto;
+    cursor:url(../img/Mouse_point.png), auto;
     /*width: 30%;
     margin-left: 34%;
 	margin-top: 30px;*/
@@ -367,6 +367,6 @@ padding:5px;
  * --------------------------------------------------
  */
 	a[href]:hover{
-        cursor: url(../img/cursor.cur), auto;
+        cursor: url(../img/Mouse_point.png), auto;
     }
 /** ----------- End Custom update Css Class ---------- **/

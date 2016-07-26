@@ -33,19 +33,19 @@
   border-radius: inherit;
 }
 ion-view{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 ion-content{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 ion-pane{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 ion-list{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 ion-nav-title{
-    cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/Mouse_point.png), auto;
 }
 
 /** ----------- End Custom update Css Class ---------- **/
