@@ -13,7 +13,10 @@
                 return $mdDialog.show({
                     controller: 'MainMenuCtrl',
                     templateUrl: 'user/edit/mainmenu/mainMenuManView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals : {
+                        initialData : null
+                    }
                 }).then(function(answer) {
 
                     //$scope.status = 'You said the information was "' + answer + '".';
@@ -67,13 +70,16 @@
                 });
 
             },
-            showAddMenuDialog: function(menu){
+            showEditMenuNavigationDialog: function(data,id){
                 return $mdDialog.show({
                     controller: 'MainMenuCtrl',
-                    templateUrl: 'user/edit/mainmenu/addMenu.html',
+                    templateUrl: 'user/edit/mainmenu/editMenuNavigation.html',
                     clickOutsideToClose: true,
                     locals : {
-                        menu : menu
+                        initialData : {
+                            menu : data,
+                            templateCategory : id
+                        }
                     }
                 }).then(function(answer) {
 
@@ -81,13 +87,16 @@
 
                 });
             },
-            showAddCategoryDialog: function(menu){
+            showEditMenuCategoryDialog: function(data,id){
                 return $mdDialog.show({
                     controller: 'MainMenuCtrl',
-                    templateUrl: 'user/edit/mainmenu/addCategory.html',
+                    templateUrl: 'user/edit/mainmenu/editMenuCategory.html',
                     clickOutsideToClose: true,
                     locals : {
-                        menu : menu
+                        initialData : {
+                            menu : data,
+                            templateCategory : id
+                        }
                     }
                 }).then(function(answer) {
 
@@ -159,6 +168,9 @@
             },
             deleteData : function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteItem',data);
+            },
+            updateSecondNavi : function(data) {
+                return $http.post(SERVER_URL+ 'edit/updateSecondNavi',data)
             }
 
         };
