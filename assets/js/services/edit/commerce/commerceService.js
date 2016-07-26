@@ -55,6 +55,7 @@
                     url: SERVER_URL + 'edit/addThirdNavigation',
                     fields: {
                         id: id,
+                        productId: product.id,
                         appId: $rootScope.appId,
                         mainId: product.mainId,
                         detailedDesc: product.detailedDesc,

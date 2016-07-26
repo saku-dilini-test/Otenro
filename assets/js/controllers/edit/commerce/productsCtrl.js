@@ -291,12 +291,12 @@
                         variants.childId = product.mainId;
                     });
                     var variantsAttribute;
-
                         commerceService.addProduct(file, product, item.id, variantsList).success(function (data) {
                         variantsList.forEach(function (variantsAttribute) {
                             variantsAttribute.appId = $rootScope.appId;
                             variantsAttribute.childId = product.mainId;
                             variantsAttribute.productId = data.appId.id;
+                            variantsAttribute.id = item.id;
 
                             commerceService.addToInventory(variantsAttribute).success(function(invnrty){
                                 $scope.invntry = invnrty;
@@ -371,6 +371,7 @@
                 var variantsAttribute;
 
                    commerceService.addProduct(file, product, item.id, variantsList).success(function (data) {
+
                    variantsList.forEach(function (variantsAttribute) {
                        variantsAttribute.appId = $rootScope.appId;
                        variantsAttribute.childId = product.mainId;

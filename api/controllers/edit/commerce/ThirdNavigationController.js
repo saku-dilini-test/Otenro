@@ -63,22 +63,14 @@ module.exports = {
                 appId: thirdN.appId,
                 childId: thirdN.childId,
                 name: thirdN.name,
-                price: thirdN.price,
-                quantity: thirdN.quantity
+                variants:thirdN.variants
             }
-
-                ThirdNavigation.update({id:thirdN.id},thirdN).exec(function(err, appProduct) {
+                ThirdNavigation.update({id:thirdN.productId},thirdN).exec(function(err, appProduct) {
                     if (err) res.send(err);
                     res.send({
-                        appId: appProduct,
+                        appId: appProduct[0],
                         message: "New Navigation is created!!"
                     });
-                });
-                ApplicationInventory.update({id:thirdN.id},thirdN).exec(function(err, appProduct) {
-                    if (err) console.log(err);
-                });
-                PriceAndVariants.update({id:thirdN.id},query).exec(function(err, appProduct) {
-                    if (err) console.log(err);
                 });
             }
             else{
@@ -88,7 +80,7 @@ module.exports = {
                     appId: appProduct,
                     message: "New Navigation is created!!"
                 });
-            });
+                });
             }
         });
     },
@@ -172,13 +164,32 @@ module.exports = {
         var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
            if (typeof req.body.quantity !== 'undefined'){
                var priceAndVariantsAttribute =req.body;
-               PriceAndVariants.create(priceAndVariantsAttribute).exec(function(err, priceAndVariants) {
-                   if (err){
-                       res.send(err);
-                   }else{
-                       res.send(priceAndVariants);
-                   }
-               });
+               PriceAndVariants.find({id: priceAndVariantsAttribute.id}).exec(function(err,found){
+                    if(err) res.send(err);
+                    var query = {
+                        name: priceAndVariantsAttribute.name,
+                        childId: priceAndVariantsAttribute.childId
+                    };
+                    if(found != ''){
+                        PriceAndVariants.update({productId: priceAndVariantsAttribute.productId},query).exec(function(e,updt){
+                            if(e) res.send(e);
+                        })
+                        PriceAndVariants.update({id: priceAndVariantsAttribute.id},priceAndVariantsAttribute).exec(function(err,variants){
+                            if(err) res.send(err);
+                            res.send(variants);
+                        })
+                    }
+                    else{
+                        PriceAndVariants.create(priceAndVariantsAttribute).exec(function(err, priceAndVariants) {
+                            if (err){
+                                res.send(err);
+                            }else{
+                                res.send(priceAndVariants);
+                            }
+                        });
+                    }
+               })
+
            }else {
                req.file('file').upload({
                    dirname: require('path').resolve(dePath)
@@ -199,10 +210,30 @@ module.exports = {
 
     addToInventory: function(req,res){
     var inventoryData = req.body;
-        ApplicationInventory.create(inventoryData).exec(function(err,invntry){
-            if(err) console.log(err);
-            res.send(invntry);
-        })
+    ApplicationInventory.find({id: inventoryData.id}).exec(function(e,found){
+        if(e) res.send(e);
+        var query = {
+            name: inventoryData.name,
+            childId: inventoryData.childId,
+        };
+        if(found  != ''){
+
+            ApplicationInventory.update({productId: inventoryData.productId},query).exec(function(e,updt){
+                 if(e) res.send(e);
+            });
+            ApplicationInventory.update({id: inventoryData.id},inventoryData).exec(function(err,inventry){
+                if(err) res.send(err);
+                res.send(inventry[0]);
+            });
+        }
+        else{
+            ApplicationInventory.create(inventoryData).exec(function(err,invntry){
+                if(err) console.log(err);
+                res.send(invntry);
+            })
+        }
+    })
+
     },
 
     getUpdates: function(req,res){
