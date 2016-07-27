@@ -1,8 +1,12 @@
 
 /** ----------- Start Custom update Css Class ---------- **/
 
-.made-easy-backgroundColor{
-  background-color: inherit;
+.made-easy-background-color {
+    background-color: #10b23e !important;
+}
+.made-easy-background-image{
+    background: url(../img/background.jpg) center;
+    background-size: cover;
 }
 .made-easy-navigationBarColor{
   background-color: inherit;
@@ -11,14 +15,16 @@
   background-color: inherit;
 }
 .made-easy-header-font{
-  color: inherit;
-  padding-top:inherit;
-  font-weight: inherit;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
 }
 .made-easy-content-font{
-  color: inherit;
-  font-size: inherit;
-  font-weight: inherit;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
 }
 .made-easy-footer-font{
   color: inherit;
@@ -32,6 +38,43 @@
   border-width: inherit;
   border-radius: inherit;
 }
+
+/* ----- View Page ----- */
+.made-easy-view {}
+.made-easy-view .item-desc {
+    text-align: center;
+}
+
+
+
+/* ----- About Us Page ----- */
+.made-easy-aboutUs {}
+.made-easy-aboutUs .header{}
+.made-easy-aboutUs .header .header-image {
+    width: 100%;
+    height: auto;
+}
+.made-easy-aboutUs .content {
+    text-align: center;
+    padding: 8px;
+}
+.made-easy-aboutUs .content .last {
+    margin-bottom: 20px;
+}
+
+/* ----- Terms Page ----- */
+.made-easy-terms {}
+.made-easy-terms .content {
+    text-align: center;
+}
+
+
+/* ----- Help Page ------ */
+.made-easy-help {}
+.made-easy-help .content{
+    text-align: center;
+}
+
 ion-view{
     cursor: url(../img/Mouse_point.png), auto;
 }
