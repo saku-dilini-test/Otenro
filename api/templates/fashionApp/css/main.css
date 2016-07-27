@@ -15,7 +15,7 @@
   background-color: inherit;
 }
 .made-easy-header-font{
-    color: inherit;
+    color: #00ff00;
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
@@ -92,3 +92,18 @@ ion-nav-title{
 }
 
 /** ----------- End Custom update Css Class ---------- **/
+
+
+.item-image .title {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    padding: 15px;
+    /*color: #fff;*/
+    font-size: 1.38462em;
+    line-height: 25px;
+    text-align: left;
+    z-index: 3;
+    width: 100%;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
