@@ -12,6 +12,9 @@
             $scope.userId=$auth.getPayload().id;
             $scope.appId=$rootScope.appId;
             $scope.SERVER_URL = SERVER_URL;
+            $scope.isValideForm = true;
+
+
             $scope.imageURL = SERVER_URL+
                 "api/edit/viewImages?userId="+$scope.userId
                 +"&appId="+$scope.appId+"&"
@@ -32,19 +35,38 @@
 
 
             $scope.fulfill =function(inventory){
-                commerceService.updateInventory(inventory)
-                    .success(function (result) {
-                        toastr.success('Updated', 'Success', {
-                            closeButton: true
-                        });
-                        $scope.mainMenus = result;
-                    }).error(function (error) {
+                var inventoryList = inventory;
+
+
+                inventoryList.forEach(function (inventory) {
+                    var inventoryAttribute = inventory;
+                    if (inventoryAttribute.quantity < 0 || inventoryAttribute.quantity == null
+                         ||inventoryAttribute.price < 0 || inventoryAttribute.price == null
+                         ||inventoryAttribute.discount < 0){
+                         $scope.isValideForm =  false;
+                     }
+                });
+                if ($scope.isValideForm==false){
+                    toastr.error('Please fill valid data', 'Warning', {
+                        closeButton: true
+                    });
+                    $scope.isValideForm =  true;
+                }
+                else if ($scope.isValideForm==true){
+
+                    commerceService.updateInventory(inventory)
+                        .success(function (result) {
+                            toastr.success('Updated', 'Success', {
+                                closeButton: true
+                            });
+                            $scope.mainMenus = result;
+                        }).error(function (error) {
                         toastr.error('Fail add', 'Warning', {
                             closeButton: true
                         });
 
                     })
-
+                }
             };
 
 
