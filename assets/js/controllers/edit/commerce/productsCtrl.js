@@ -103,6 +103,8 @@
                     toastr.error('Fill all the fields', 'Warning', {
                         closeButton: true
                     });
+                }else if(!(product.sku > 0)){
+                    toastr.error('Sku Should be Positive', 'Warning', {closeButton: true});
                 }
                 else {
                     if (typeof item != 'string') {
@@ -197,6 +199,9 @@
                 toastr.error('Cannot be 0', 'Warning', {
                     closeButton: true
                 });
+            }
+            else if (!($scope.variants[0].sku > 0)) {
+                toastr.error('Sku Should be Positive', 'Warning', {closeButton: true});
             }
             else {
                 if (selection == "weight") {
@@ -474,18 +479,24 @@
         };
 
         $scope.addFile = function (file) {
-            var fi = $scope.tmpFile;
-            for (var i = 0; i < fi.length; i++) {
-                if (fi[i] == null) {
-                    fi[i] = $scope.File;
-                    break;
+            if (typeof file == 'undefined') {
+                toastr.error('First select image and then upload image', 'Message', {
+                    closeButton: true
+                });
+            } else {
+                var fi = $scope.tmpFile;
+                for (var i = 0; i < fi.length; i++) {
+                    if (fi[i] == null) {
+                        fi[i] = $scope.File;
+                        break;
+                    }
                 }
+                $scope.tmpFile = fi;
+                $scope.mainFile = file;
+                toastr.success('added file', 'message', {
+                    closeButton: true
+                });
             }
-            $scope.tmpFile = fi;
-            $scope.mainFile = file;
-            toastr.success('added File', 'message', {
-                closeButton: true
-            });
         };
 
         $scope.nextStep = function (current) {
