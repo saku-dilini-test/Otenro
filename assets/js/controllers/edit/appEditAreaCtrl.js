@@ -22,9 +22,9 @@
         //                        +'/templates/'+$stateParams.appId;
 
 
-        $scope.id = $cookieStore.get('AppId');
+//        $scope.id = $cookieStore.get('AppId');
 
-        appEditResource.getSelectedApp({appId: $scope.id})
+        appEditResource.getSelectedApp({appId: $scope.appId})
             .success(function(data) {
                 /**
                  * TODO : This should change later according type of template category

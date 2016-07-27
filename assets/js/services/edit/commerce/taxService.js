@@ -4,10 +4,10 @@
 
 (function() {
     angular.module('appEdit').service('taxService', [
-        '$mdDialog', '$http', '$rootScope', 'SERVER_URL', taxService
+        '$mdDialog', '$http', '$rootScope', 'SERVER_URL','$cookieStore', taxService
     ]);
 
-    function taxService($mdDialog, $http, $rootScope, SERVER_URL) {
+    function taxService($mdDialog, $http, $rootScope, SERVER_URL, $cookieStore) {
 
         return {
 

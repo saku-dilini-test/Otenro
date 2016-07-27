@@ -51,7 +51,7 @@ angular.module('app')
             }
           })
       .state('user.editApp',{
-          url :'/appedit',
+          url :'/appedit/:appId',
           params: {
                 appId: null
           },

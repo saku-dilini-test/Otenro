@@ -10,7 +10,6 @@
             templateUrl:'user/dashboard/widgets/appBoxView.html',
             link: function(scope, el ,attr){
                 scope.goToEdit = function(){
-                    console.log(scope.item);
                     $state.go('user.editApp',{appId:scope.item._id});
                 }
             }

@@ -5,10 +5,13 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("taxCtrl", [
-        '$scope','$mdDialog','toastr', 'taxService', '$rootScope','initialData', ShippingCtrl]);
+        '$scope','$mdDialog','toastr', 'taxService', '$rootScope','initialData','$cookieStore',
+        'LocalService', '$injector',ShippingCtrl]);
 
-    function ShippingCtrl($scope, $mdDialog, toastr, taxService, $rootScope,initialData) {
+    function ShippingCtrl($scope, $mdDialog, toastr, taxService, $rootScope,initialData,$cookieStore,
+            LocalService,$injector) {
 
+            var appId = $rootScope.appId;
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
 
