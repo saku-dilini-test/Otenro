@@ -31,7 +31,20 @@ module.exports = {
             serverTmp="http://localhost:port",
             serverOrg=config.server.host+':'+config.server.port;
 
-        var loginPath = '/#/';
+        var loginPath = '/#/',
+            isApplyStyle =  {
+                color : {
+                    backgroundColor: true,
+                    footerColor: true,
+                    navigationColor: true
+                },
+                typography : {
+                    header : true,
+                    content : true,
+                    footer : true
+                },
+                button : true
+            };
         if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2'){
             loginPath = '/#/app/login';
         }
@@ -46,6 +59,19 @@ module.exports = {
 
         if(templateName == 'fashionApp'){
             loginPath = '/#/app/categories';
+            isApplyStyle = {
+                color : {
+                    backgroundColor: true,
+                    navigationColor: true,
+                    footerColor: false
+                },
+                typography : {
+                    header : true,
+                    content : true,
+                    footer : false
+                },
+                button : false
+            }
         }
 
         var application ={
@@ -62,6 +88,7 @@ module.exports = {
                     currency: "SLR",
                 },
                 isApplyBGImage : true,
+                isApplyStyle : isApplyStyle,
                 backgroundColor : "#FFFFFF",
                 navigationBarColor : "#FFFFFF",
                 footerColor : "#FFFFFF",

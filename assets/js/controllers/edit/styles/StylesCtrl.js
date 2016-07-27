@@ -44,6 +44,7 @@
 
             $scope.editBackgroundImage = appSettings.isApplyBGImage;
             $scope.isApplyBGImage = appSettings.isApplyBGImage;
+            $scope.isApplyStyle = appSettings.isApplyStyle;
             $scope.backgroundColor = appSettings.backgroundColor;
             $scope.navigationBarColor = appSettings.navigationBarColor;
             $scope.footerColor = appSettings.footerColor;
