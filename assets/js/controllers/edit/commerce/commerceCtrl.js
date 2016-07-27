@@ -344,6 +344,7 @@
 
         currencyService.getAllCurrency().success(function (data) {
             $scope.currencyList = data;
+
         }).error(function (err) {
             alert("MainMenu Loading Error : " + err);
         });
@@ -365,9 +366,13 @@
 
         $scope.saveStoreSettings = function (current, storeSettings, openHours) {
 
-            if (storeSettings.orderNumber == null || storeSettings.address == '' ||
-                storeSettings.searchEngineDesc == '') {
+            if (!storeSettings){
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
+            }else if (!storeSettings.orderNumber|| !storeSettings.address ||
+                !storeSettings.searchEngineDesc) {
+                toastr.error(' warning', "Please fill all the fields", {closeButton: true});
+            }else if (!storeSettings.currency){
+                toastr.error(' warning', "Please select a currency", {closeButton: true});
             }
             else {
 
@@ -422,7 +427,7 @@
 
         $scope.addAboutUs = function (current,storeSettings) {
             if (storeSettings!=null){
-                if (storeSettings.header == '' || storeSettings.content == '') {
+                if (!storeSettings.header  || !storeSettings.content) {
                     toastr.error(' warning', "Please fill all the fields", {closeButton: true});
                 }else{
 
@@ -459,7 +464,7 @@
 
         $scope.savePolicies = function (current, storeSettings) {
 
-            if (storeSettings.returnPolicy == '' || storeSettings.termsAndCondition == '' || storeSettings.privacyPolicy == '') {
+            if (!storeSettings.returnPolicy|| !storeSettings.termsAndCondition|| !storeSettings.privacyPolicy) {
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
             }
             else {
