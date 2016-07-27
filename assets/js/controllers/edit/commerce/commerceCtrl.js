@@ -1,10 +1,10 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("CommerceCtrl", [
-        '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope', 'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService',
+        '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope', 'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','comingSoonService',
         CommerceCtrl]);
 
-    function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope, SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService) {
+    function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope, SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService) {
 
         $scope.refund = [];
         $scope.unfulfilled = [];
@@ -66,7 +66,10 @@
             }
 
         };
-
+        
+        $scope.tempUnavailable = function () {
+            comingSoonService.showComingSoonDialogWithCallBackFunction('commerceService','showStoreSettingsDialog');
+        };
 
         function rowTemplate() {
             return '<div ng-dblclick="grid.appScope.rowDblClick(row)" >' +
@@ -372,7 +375,7 @@
                         $scope.options = $scope.currencyList[i];
                     }
                 }
-                alert("openHours " + JSON.stringify(openHours));
+
                 var openHoursData = {
                     'weekDaysOpenHour': openHours.weekDaysOpenHour,
                     'weekDaysOpenMinute': openHours.weekDaysOpenMinute,
@@ -405,7 +408,7 @@
                 });
 
                 commerceService.saveStoreSettings(storeSettings).success(function (data) {
-                    toastr.success(' Store Settings has been added.!', {
+                    toastr.success('Successfully Added', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
