@@ -38,13 +38,16 @@
 
         // --/-- add new tax collection --/--
         $scope.addNewTaxOption = function (taxInfo) {
-            console.log(taxInfo);
-            if(typeof taxInfo.country == 'undefined'
-                || typeof taxInfo.taxAmount == 'undefined'){
-                toastr.error('Fill the empty fields', 'Warning', {
+            if(typeof taxInfo.country == 'undefined'){
+                toastr.error('Fill the Country field', 'Message', {
                     closeButton: true
                 });
-            }else{
+            }else if(typeof taxInfo.taxAmount == 'undefined'){
+                toastr.error('Tax Amount should be a between 0 - 100', 'Message', {
+                    closeButton: true
+                });
+            }
+            else{
                 taxInfo.appId = $rootScope.appId;
                 taxService.updateTaxInfo(taxInfo)
                     .success(function (result) {
@@ -53,7 +56,7 @@
                         });
                         $scope.backToTaxesView();
                     }).error(function (error) {
-                        toastr.error('Loading Error', 'Warning', {
+                        toastr.error('Saving Error', 'Message', {
                             closeButton: true
                         });
                     })
