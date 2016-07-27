@@ -1,37 +1,51 @@
 /** ----------- Start Custom update Css Class ---------- **/
-
-.made-easy-backgroundColor{
-    background-color: inherit;
+.made-easy-background-color {
+    background-color: #10b23e !important;
+}
+.made-easy-background-image{
+    background: url(../img/background.jpg) center;
+    background-size: cover;
+}
+.made-easy-background-color {
+    background-color: #ffffff;
+    background-size: cover;
 }
 .made-easy-navigationBarColor{
-    background-color: inherit;
+    background-color: #EAD004;
 }
 .made-easy-footerColor{
-    background-color: inherit;
+    background-color: #EAD004;
 }
 .made-easy-header-font{
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
+    color:black;
+    font-family: Ubuntu Light;
+    font-size: 14;
+    font-weight: bold;
 }
 .made-easy-content-font{
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
+    color: black;
+    font-family: Ubuntu Light;
+    font-size: 12;
+    font-weight: lighter;
 }
 .made-easy-footer-font{
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
+    color: #B2BEB5;
+    font-family: Ubuntu Light;
+    font-size: 12;
+    font-weight: lighter;
 }
 .made-easy-button-setting{
     background-color: inherit;
-    font-family: inherit;
+    font-family: Ubuntu Light;
     border-width: inherit;
     border-radius: inherit;
     cursor: url(../img/Mouse_point.png), auto;
 }
-
+.button.disabled, .button[disabled] {
+    opacity: .4;
+    cursor: default !important;
+    pointer-events: none;
+}
 ion-nav-back-button{
     cursor: url(../img/Mouse_point.png), auto;
 }
@@ -45,7 +59,6 @@ ion-nav-view{
 
 /* ----- Contact Us Page ----- */
 .made-easy-contactUs {
-    background: url(../img/background.jpg) center;
     background-size: cover;
 }
 .made-easy-contactUs .header{}
@@ -66,8 +79,6 @@ ion-nav-view{
 
 /* ----- Our Stores Page ----- */
 .made-easy-aboutUs {
-    background: url(../img/background.jpg) center;
-    background-size: cover;
     cursor: url(../img/Mouse_point.png), auto;
 }
 .made-easy-aboutUs .header{}

@@ -73,6 +73,23 @@ module.exports = {
                 button : false
             }
         }
+        if(templateName == 'ECommerceApp'){
+            loginPath = '/#/tab/home';
+            isApplyStyle = {
+                color : {
+                    backgroundColor: true,
+                    navigationColor: true,
+                    footerColor: true
+                },
+                typography : {
+                    header : true,
+                    content : true,
+                    footer : true
+                },
+                button : true
+            }
+
+        }
 
         var application ={
             appName : req.body.appName,

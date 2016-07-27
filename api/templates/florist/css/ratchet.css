@@ -742,14 +742,8 @@ input[type="button"] {
 }
 
 .card {
-  margin: 10px;
   overflow: hidden;
-  background-image:url(../img/background.jpg);
-  background-repeat:repeat; 
-  border: 1px solid ivory ;
   overflow:hidden;
-    margin-bottom:100px;
- 
 }
 
 .card .table-view {

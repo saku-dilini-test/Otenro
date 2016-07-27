@@ -1,4 +1,4 @@
-<ion-view view-title="Items">
+<ion-view class="made-easy-header-font made-easy-background-color made-easy-background-image" view-title="Items">
   <ion-content class="padding">      
       <div ng-repeat="item in itemList" >
           <a href="#/tab/item/{{item.id}}">
@@ -10,8 +10,8 @@
                   </div>
               </div>    
               
-              <h3>{{item.name}}</h3>
-              <p>{{item.description}}</p>        
+              <h3 class="made-easy-header-font">{{item.name}}</h3>
+              <p class="made-easy-content-font">{{item.description}}</p>
               <p>+details</p>
           </div>
         </a>
