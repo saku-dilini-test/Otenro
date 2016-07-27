@@ -180,6 +180,7 @@ module.exports.routes = {
     'POST /edit/editCategory': 'edit/article/articleController.editCategory',
     'GET /edit/getCategoryList': 'edit/article/articleController.getCategoryList',
     'POST /edit/deleteCategory': 'edit/article/articleController.deleteCategory',
+    'POST /edit/updateCategoryImage': 'edit/article/articleController.updateCategoryImage',
 
     /**
      *InventoryController

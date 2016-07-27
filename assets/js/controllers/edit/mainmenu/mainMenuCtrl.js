@@ -2,10 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("MainMenuCtrl", ['$scope', '$mdDialog', '$rootScope',
         'mainMenuService','$http','commerceService','toastr','mySharedService','ME_APP_SERVER','$auth'
-        ,'dashboardService','articleService','SERVER_URL','initialData', MainMenuCtrl]);
+        ,'dashboardService','articleService','initialData', MainMenuCtrl]);
 
     function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
-                          mySharedService,ME_APP_SERVER,$auth,dashboardService,articleService,SERVER_URL,initialData) {
+                          mySharedService,ME_APP_SERVER,$auth,dashboardService,articleService,initialData) {
 
 
         $scope.tmpImage = [ null , null];
@@ -61,17 +61,17 @@
             }else if($scope.initialData.menu){
                 var imgLocation = '';
                 if($scope.templateCategory == tempCatBusiness){
-                    imgLocation = "img=secondNavi";
+                    imgLocation = "secondNavi";
                 }
                 if($scope.templateCategory == tempCatMedia){
-                    imgLocation = "img=category";
+                    imgLocation = "category";
                 }
 
                 $scope.menu = $scope.initialData.menu;
                 $scope.serverImage = $scope.menu.imageUrl;
                 $scope.mainImg = $scope.menu.imageUrl;
-                $scope.picFile =  SERVER_URL+"edit/viewImages?userId="+$auth.getPayload().id
-                    +"&appId="+$rootScope.appId+"&" + imgLocation +'/'+ $scope.menu.imageUrl;
+                $scope.picFile = ME_APP_SERVER+'temp/' +$auth.getPayload().id+
+                    '/templates/'+$rootScope.appId+'/img/'+imgLocation+'/'+ $scope.menu.imageUrl;
             }
         }
         // Add New Menu
@@ -239,15 +239,29 @@
                         $mdDialog.hide();
                         mainMenuService.showMainMenuDialog();
                     }).error(function (err) {
-                        toastr.error(err.message, 'Warning', {
-                            closeButton: true
-                        });
+                        toastr.error(err.message, 'Warning', {closeButton: true});
                     });
             }
-
-            // TODO : This part need to develop according template config
             if($scope.mainImg != $scope.serverImage){
                 console.log('imageUpdate true');
+                articleService.updateCategoryImage(file,menu.imageUrl,$rootScope.appId).progress(function(evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                }).success(function(data, status, headers, config) {
+                    articleService.editCategory(menu)
+                        .success(function (data) {
+                            $scope.appTemplateUrl = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
+                                + '/templates/' + $rootScope.appId + '' +
+                                '#/app/home/' + data.id + '?' + new Date().getTime();
+                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                            toastr.success("Successfully Edit Category", 'Message', {closeButton: true});
+                            $mdDialog.hide();
+                            mainMenuService.showMainMenuDialog();
+                        }).error(function (err) {
+                            toastr.error(err.message, 'Warning', {closeButton: true});
+                        });
+                }).error(function(err) {
+                })
             }
         };
 

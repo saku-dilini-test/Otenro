@@ -75,6 +75,16 @@
                 });
             },
 
+            updateCategoryImage: function (file, imageUrl, appId) {
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/updateCategoryImage',
+                    fields: {
+                        'imageUrl': imageUrl,
+                        'appId': appId
+                    },
+                    file: file
+                });
+            },
 
             getArticleList: function(){
                 return $http.get(SERVER_URL+ 'edit/getArticles?appId='+$rootScope.appId);
