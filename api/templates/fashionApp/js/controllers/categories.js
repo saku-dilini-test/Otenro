@@ -15,6 +15,7 @@ angular
 			'use strict';
 
 			var vm = this;
+			vm.appName = $rootScope.appName;
 
 			$ionicLoading.show({
 				content: 'Loading',
