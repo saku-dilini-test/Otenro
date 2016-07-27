@@ -1,7 +1,7 @@
 <ion-view>
 	<ion-nav-title>{{categoryCtrl.category.name}}</ion-nav-title>
 	<ion-pane>
-		<ion-content class="made-easy-backgroundColor">
+		<ion-content class="made-easy-background-image made-easy-background-color">
 			<ion-list>
 				<ion-item class="category-ion-item" data-ui-sref="app.item({itemId: item.id})" data-ng-repeat="item in categoryCtrl.items track by $index">
 					<div class="row row-wrap category-items">
@@ -11,10 +11,10 @@
 						</div>
 						<div class="category-item-tools col" data-ng-class="{'col-66' : item.img}">
 							<h3 data-ng-bind-html="item.title|trustHtml"></h3>
-							<div class="row">
-								<div class="col col-40"><i class="icon ion-radio-waves"></i>{{item.source}}</div>
-								<div class="col col-60 right-align item-category"><i class="icon ion-clock"></i>{{item.date | date:'MMM d, y'}}</div>
-							</div>
+							<!--<div class="row">-->
+								<!--<div class="col col-40"><i class="icon ion-radio-waves"></i>{{item.source}}</div>-->
+								<!--<div class="col col-60 right-align item-category"><i class="icon ion-clock"></i>{{item.date | date:'MMM d, y'}}</div>-->
+							<!--</div>-->
 						</div>
 					</div>
 				</ion-item>
