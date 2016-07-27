@@ -448,7 +448,8 @@
         });
 
         $scope.savePolicies = function (current, policies) {
-            if (policies.returnPolicy == null || policies.termsAndCondition == null || policies.privacyPolicy == null) {
+
+            if (policies.returnPolicy == '' || policies.termsAndCondition == '' || policies.privacyPolicy == '') {
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
             }
             else {
@@ -466,7 +467,7 @@
         };
 
         commerceService.showPolicies($scope.appId).success(function (data) {
-            $scope.policies = data[0];
+            $scope.policies = data[0].policies;
         }).error(function (err) {
             toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
         })
