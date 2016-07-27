@@ -21,13 +21,16 @@ module.exports = {
             type: 'string'
         },
         price : {
-            type : 'integer'
+            type : 'integer',
+            defaultsTo : 0
         },
         quantity : {
-            type : 'integer'
+            type : 'integer',
+            defaultsTo : 0
         },
         sale : {
-            type : 'integer'
+            type : 'integer',
+            defaultsTo : 0
         },
         sku : {
             type : 'String'
@@ -40,6 +43,7 @@ module.exports = {
         },
         discount : {
             type : 'integer'
+
         },
         createAt: {
             type: 'date'
