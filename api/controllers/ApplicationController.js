@@ -47,14 +47,53 @@ module.exports = {
             };
         if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2'){
             loginPath = '/#/app/login';
+            isApplyStyle = {
+                color : {
+                    backgroundColor: true,
+                    navigationColor: false,
+                    footerColor: false
+                },
+                typography : {
+                    header : true,
+                    content : true,
+                    footer : false
+                },
+                button : false
+            }
         }
 
         if(templateName == 'clothingApp'){
             loginPath = '/#/app/category';
+            isApplyStyle = {
+                color : {
+                    backgroundColor: true,
+                    navigationColor: false,
+                    footerColor: false
+                },
+                typography : {
+                    header : true,
+                    content : true,
+                    footer : false
+                },
+                button : false
+            }
         }
 
         if(templateName == 'hkRising'){
             loginPath = '/#/app/home/firstMenu';
+            isApplyStyle = {
+                color : {
+                    backgroundColor: true,
+                    navigationColor: false,
+                    footerColor: false
+                },
+                typography : {
+                    header : true,
+                    content : true,
+                    footer : false
+                },
+                button : false
+            }
         }
 
         if(templateName == 'fashionApp'){
@@ -89,6 +128,21 @@ module.exports = {
                 button : true
             }
 
+        }
+        if(templateName == 'pizzaHut'){
+            isApplyStyle = {
+                color : {
+                    backgroundColor: true,
+                    navigationColor: true,
+                    footerColor: false
+                },
+                typography : {
+                    header : true,
+                    content : true,
+                    footer : false
+                },
+                button : false
+            }
         }
 
         var application ={

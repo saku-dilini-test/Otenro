@@ -3,7 +3,7 @@
     showData.productName)" class="cards-item">
         <img class="media-object pull-left" width="64" height="64" ng-src="{{serviceApi}}templates/viewImages?img=thirdNavi/{{showData.imageUrl }}&userId={{userId}}&appId={{appId}}">
         <span class="cards-name">
-		  {{showData.name}}
+		  <div class="made-easy-header-font">{{showData.name}}</div>
 		</span>
         <div class="pulls-right">
             <span class="cards-progress">
@@ -14,7 +14,7 @@
             </span>
             </span>
             <span class="cards-end-date pull-left">
-			{{showData.name}}&nbsp;&nbsp;
+			  <div class="made-easy-content-font">{{showData.name}}</div>&nbsp;&nbsp;
 		   </span>
             <span class="cards-stage" ng-if=" showData.menu_disc!=0">-{{showData.menu_disc}}%
 		  </span>

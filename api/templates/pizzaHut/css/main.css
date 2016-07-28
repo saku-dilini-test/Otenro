@@ -12,8 +12,13 @@
 		.made-easy-themeColor{
 			color: inherit;
 		}
-		.made-easy-backgroundColor{
-			background-color: inherit;
+		/** ----------- Start Custom update Css Class ---------- **/
+		.made-easy-background-color {
+			background-color: #10b23e !important;
+		}
+		.made-easy-background-image{
+			background: url(../img/background.jpg) center;
+			background-size: cover;
 		}
 		.made-easy-navigationBarColor{
 			background-color: inherit;
@@ -22,11 +27,13 @@
 			background-color: inherit;
 		}
 		.made-easy-header-font{
+			color : #0835ff;
 			font-family: inherit;
 			font-size: inherit;
 			font-weight: inherit;
 		}
 		.made-easy-content-font{
+			color : #62ff00;
 			font-family: inherit;
 			font-size: inherit;
 			font-weight: inherit;
