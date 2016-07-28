@@ -144,6 +144,21 @@ module.exports = {
                 button : false
             }
         }
+        if(templateName == 'florist'){
+            isApplyStyle = {
+                color : {
+                    backgroundColor: false,
+                    navigationColor: true,
+                    footerColor: true
+                },
+                typography : {
+                    header : true,
+                    content : true,
+                    footer : true
+                },
+                button : false
+            }
+        }
 
         var application ={
             appName : req.body.appName,
