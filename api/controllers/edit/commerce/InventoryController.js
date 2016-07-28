@@ -150,10 +150,10 @@ module.exports = {
     deleteThirdNavigation : function(req,res){
             var appId = req.body.appId;
             var deleteQuery = {
-                 id : req.body.id
+                 id : req.body.variant.productId
             }
             var searchApp = {
-                id : req.body.id
+                id : req.body.variant.productId
             };
             ThirdNavigation.find(searchApp).exec(function(err, app) {
                 if(err) return done(err);
