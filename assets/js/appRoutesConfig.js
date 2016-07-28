@@ -20,7 +20,7 @@ angular.module('app')
             templateUrl : 'user/welcome/welcomeTemplatesView.html'
 
       }).state('anon.livePreview',{
-            url :'/livePreview',
+            url :'/livePreview/:userId/:appId/:tempUrl/:tempName/:tempCategory',
             params: {
                 userId:null,
                 appId: null,
