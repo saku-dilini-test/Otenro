@@ -39,7 +39,7 @@
     font-family: Ubuntu Light;
     border-width: inherit;
     border-radius: inherit;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .button.disabled, .button[disabled] {
     opacity: .4;
@@ -47,13 +47,13 @@
     pointer-events: none;
 }
 ion-nav-back-button{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 ion-nav-bar{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 ion-nav-view{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 
@@ -65,7 +65,7 @@ ion-nav-view{
 .made-easy-contactUs .header .header-image {
     width: 100%;
     height: auto;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-contactUs .content {
     text-align: center;
@@ -79,32 +79,32 @@ ion-nav-view{
 
 /* ----- Our Stores Page ----- */
 .made-easy-aboutUs {
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-aboutUs .header{}
 .made-easy-aboutUs .header .header-image {
     width: 100%;
     height: auto;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-aboutUs .content {
     text-align: center;
     padding: 8px;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-aboutUs .content .last {
     margin-bottom: 20px;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 ion-view{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 ion-content{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 a[href]:hover{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 /* ------------------- */

@@ -22,7 +22,7 @@
   font-family: Helvetica, sans-serif;
   text-decoration: none;
   vertical-align: middle;
-  cursor: url(../img/Mouse_point.png), auto;;
+  cursor: url(../img/cursor.cur), auto;;
 }
 .panel .social-button-fb{
   padding: 8.5px 17px;
@@ -36,16 +36,16 @@
   font-family: Helvetica, sans-serif;
   text-decoration: none;
   vertical-align: middle;
-  cursor:url(../img/Mouse_point.png), auto;
+  cursor:url(../img/cursor.cur), auto;
 }
 ion-content{
-cursor:url(../img/Mouse_point.png), auto;
+cursor:url(../img/cursor.cur), auto;
 }
 ion-nav-buttons{
-cursor:url(../img/Mouse_point.png), auto;
+cursor:url(../img/cursor.cur), auto;
 }
 a{
-    cursor:url(../img/Mouse_point.png), auto;
+    cursor:url(../img/cursor.cur), auto;
 }
 .panel .create-account-btm {
   background-color: #FFBF0A; /* Green */
@@ -55,13 +55,13 @@ a{
   text-decoration: none;
   display: inline-block;
   margin-top: 35px;
-  cursor:url(../img/Mouse_point.png), auto;;
+  cursor:url(../img/cursor.cur), auto;;
   border-radius:4px;
 }
 
 .panel {
   margin-top:4%;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 /** ----------- Start Custom update Css Class ---------- **/
@@ -101,7 +101,7 @@ a{
   font-family: Ubuntu Light;
   border-width: 3px;
   border-radius: 3px;
-  cursor:url(../img/Mouse_point.png), auto;
+  cursor:url(../img/cursor.cur), auto;
 
 }
 
@@ -170,7 +170,7 @@ a{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    cursor: url(../img/Mouse_point.png), auto;;
+    cursor: url(../img/cursor.cur), auto;;
     border-radius:4px;
     width: 94%;
     margin: 10px;
@@ -200,13 +200,13 @@ white-space: nowrap;
 font-weight: bold;
 font-size: 14px;
 line-height: 16px;
-cursor:url(../img/Mouse_point.png), auto;}
+cursor:url(../img/cursor.cur), auto;}
 
 .buttons .buttons-right .header-item{
-    cursor:url(../img/Mouse_point.png), auto;
+    cursor:url(../img/cursor.cur), auto;
 }
 .title-left{
-    cursor:url(../img/Mouse_point.png), auto;
+    cursor:url(../img/cursor.cur), auto;
 }
 .box_inner{
 	padding:10px;
@@ -234,7 +234,7 @@ margin-bottom: 20px;}
     max-width: 74%;
 }
 .col{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .col2 {
@@ -344,7 +344,7 @@ padding:5px;
     border-color: transparent;
     background-color: #387ef5;
     color: #fff;
-    cursor:url(../img/Mouse_point.png), auto;
+    cursor:url(../img/cursor.cur), auto;
     /*width: 30%;
     margin-left: 34%;
 	margin-top: 30px;*/
@@ -366,6 +366,6 @@ padding:5px;
  * --------------------------------------------------
  */
 	a[href]:hover{
-        cursor: url(../img/Mouse_point.png), auto;
+        cursor: url(../img/cursor.cur), auto;
     }
 /** ----------- End Custom update Css Class ---------- **/

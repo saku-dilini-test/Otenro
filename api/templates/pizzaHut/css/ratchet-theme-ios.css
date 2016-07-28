@@ -148,12 +148,12 @@ p {
 
 .bar-nav .btn-link {
   color: #007aff;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 .bar-nav .btn-link:active {
   color: #007aff;
   opacity: .6;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .badge.badge-inverted {
@@ -375,7 +375,7 @@ textarea,
 
 .popover .bar-nav {
   border-bottom: 1px solid rgba(0, 0, 0, .15);
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .popover .table-view {

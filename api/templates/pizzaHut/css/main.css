@@ -660,7 +660,7 @@
 }
 */
 
-label[for] { cursor: url(../img/Mouse_point.png), auto;; }
+label[for] { cursor: url(../img/cursor.cur), auto;; }
 
 #promo-view input[type="checkbox"] { display: none; }
 
@@ -700,5 +700,5 @@ input[type="checkbox"]:checked + .lightbox {
 input[type="checkbox"]:checked ~ .grids { opacity: .125; }
 
 a[href]:hover{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }

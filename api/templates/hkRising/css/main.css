@@ -43,7 +43,7 @@
     font-family: inherit;
     border-width: inherit;
     border-radius: inherit;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 /* ----- Second Navigation Page ----- */
@@ -133,7 +133,7 @@
 }
 
 a[href]:hover{
-        cursor: url(../img/Mouse_point.png), auto;
+        cursor: url(../img/cursor.cur), auto;
     }
 
 /** ----------- End Custom update Css Class ---------- **/

@@ -6,7 +6,7 @@
 .hk-home-tabs {
     width: 100%;
     margin-top: 400px;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .hk-top-image {
@@ -18,7 +18,7 @@
 
 .bar.bar-stable2 {
     color: #444;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .item2 {
@@ -56,14 +56,14 @@
     border-color: #000 !important;
     background-color: #000 !important;
     color: #fff;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .tabs-positive2 {
     border-color: #000 !important;
     background-color: #000 !important;
     color: #fff;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .item-text-wrap .item, .item-text-wrap .item-content, .item-text-wrap, .item-text-wrap h1, .item-text-wrap h2, .item-text-wrap h3, .item-text-wrap2 h4, .item-text-wrap h5, .item-text-wrap h6, .item-text-wrap p, .item-complex.item-text-wrap .item-content, .item-body h1, .item-body h2, .item-body h3, .item-body h4, .item-body h5, .item-body h6, .item-body p {
@@ -83,7 +83,7 @@
     background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0) 100%) !important;
     background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0) 100%) !important;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0) 100%) !important;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .card {
@@ -129,7 +129,7 @@
     margin-top: 10px;
     background-color: #FFF;
     padding-bottom: 100px;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .menu {
@@ -162,7 +162,7 @@
     left: 41px;
     right: 41px;
     text-align: center;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .tabs {
@@ -199,7 +199,7 @@
     width: 100%;
     height: 49px;
     line-height: 49px;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .bar.bar-stable {
@@ -208,7 +208,7 @@
     background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0) 100%) !important; /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0) 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6000000', endColorstr='#00000000', GradientType=0); /* IE6-9 */ /* or transparent, or background:none */
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .scroll-content {
@@ -271,7 +271,7 @@
     padding-right: 10px;
     font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
     color: #FFF;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .bar-stable .button.button-clear {
@@ -283,17 +283,17 @@
     margin-top: 15px;
     margin-left: 10px;
     background-repeat: no-repeat;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .bar .title {
     line-height: 30px;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .item-image {
     border-radius: 10px 10px 0 0;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .row {
@@ -316,7 +316,7 @@
     overflow-y: scroll;
     padding-bottom: 40px;
     background: transparent !important;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .made-easy-backgroundColor {
