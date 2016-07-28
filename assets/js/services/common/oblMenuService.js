@@ -62,7 +62,6 @@
                             return commerceService.showInventoryDialog();
                         }
                     }
-
                     if(ctrl == 'tax'){
                         if (ctrlFun == 'showTaxesDialog') {
                             return taxService.showTaxesDialog();
