@@ -376,6 +376,10 @@
             }
             else {
 
+            storeSettings.address = storeSettings.address1 + ',' + storeSettings.address2 + ',' + storeSettings.address3
+                                    + ',' + storeSettings.address4;
+
+
                 for (var i = 0; i < $scope.currencyList.length; i++) {
                     if ($scope.storeSettings.currency == $scope.currencyList[i].sign) {
                         $scope.options = $scope.currencyList[i];
