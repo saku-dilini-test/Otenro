@@ -58,7 +58,7 @@
                 };
 
                 var blob = dataURItoBlob(file);
-                var fileUpload = new File([blob], 'imageFileName.png');
+                var UploadFile = new File([blob], 'imageFileName.png');
 
 
 
@@ -80,7 +80,7 @@
                         type: product.type,
                         discount: product.discount
                     },
-                    file: fileUpload
+                    file: UploadFile
                 });
             },
             showOrderDialog: function () {
