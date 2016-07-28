@@ -69,7 +69,8 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             });
         }else{
             $rootScope.cart.cartItems.push({
-                id: $scope.foodInfo.id,
+                id: $scope.selectedVariant.id,
+                productId: $scope.selectedVariant.productId,
                 name: $scope.foodInfo.name,
                 qty: $scope.selectedVariant.buyQuantity,
                 price: $scope.selectedVariant.price,
