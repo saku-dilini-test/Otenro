@@ -4,12 +4,12 @@
 (function() {
     angular.module('appEdit').service('oblMenuService', ['stylesService', 'contactUsService', 'commerceService',
         'shippingService','taxService','articleService','mainMenuService', 'currencyService', 'publishService',
-        'engageService', 'logoAndTittleService'
+        'engageService', 'logoAndTittleService','comingSoonService'
         , oblMenuService]);
 
     function oblMenuService(stylesService, contactUsService, commerceService,shippingService,
                             taxService,articleService ,mainMenuService,currencyService, publishService,
-                            engageService, logoAndTittleService) {
+                            engageService, logoAndTittleService,comingSoonService) {
         return {
             setOblMenuService : function(data) {
 
@@ -49,7 +49,11 @@
                             return commerceService.showEmailSettingsDialog();
                         }
                         if (ctrlFun == 'showStoreSettingsDialog') {
+
                             return commerceService.showStoreSettingsDialog();
+                        }
+                        if (ctrlFun == 'showComingSoonDialog'){
+                            return comingSoonService.showComingSoonDialog();
                         }
                     }
 
