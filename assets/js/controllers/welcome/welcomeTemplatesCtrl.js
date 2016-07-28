@@ -10,12 +10,12 @@
     angular.module('app')
         .controller('WelcomeTemplatesCtrl',
       ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER',
-      '$auth','$rootScope','$timeout','$cookieStore',
+      '$auth','$rootScope','$timeout',
             WelcomeTemplatesCtrl
         ]);
 
     function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,
-    ME_APP_SERVER,$auth,$rootScope,$timeout,$cookieStore) {
+    ME_APP_SERVER,$auth,$rootScope,$timeout) {
         welcomeTemplatesResource.getTemplates().success(function(data){
             $rootScope.templates = data;
         });
@@ -40,11 +40,6 @@
 
                     mySharedService.prepForBroadcast(url);
                     $scope.goLivePreview = function() {
-                    $cookieStore.put('userId',$auth.getPayload().id);
-                    $cookieStore.put('appId',data.data.appId);
-                    $cookieStore.put('tempUrl',templateUrl);
-                    $cookieStore.put('tempName',templateName);
-                    $cookieStore.put('tempCategory',templateCategory);
                         $state.go('anon.livePreview', {
                             userId: $auth.getPayload().id,
                             appId: data.data.appId,

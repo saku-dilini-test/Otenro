@@ -4,7 +4,7 @@
 
 .bar.bar-stable {    
     background-color: #EAD004;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 /* -- Tab Bar --- */
 
@@ -14,12 +14,12 @@
     background-color: #EAD004;
     padding-top: 3%;
     border-width: thick;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .tabs-color-active-positive .tab-item.tab-item-active, .tabs-color-active-positive .tab-item.active, .tabs-color-active-positive .tab-item.activated {
     background-color: #EAD004;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 
@@ -44,7 +44,7 @@
 .cards-category{
     width: 40%;
     background-color: azure;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .cards-items{	
     width: 40%;
@@ -71,19 +71,19 @@
     width: 90%;
     height: 50px;
     background-color: azure;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .item[ng-click]:hover{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .icon{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .button{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 button{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 

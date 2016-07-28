@@ -22,19 +22,19 @@
             $scope.templates = $cookies.temp;
 
             for(var i = 0; i < $scope.templates.length ; i++){
-                if($scope.templates[i].template_name == $cookieStore.get('tempName')){
+                if($scope.templates[i].template_name == $stateParams.tempName){
                     $scope.templateViewName = $scope.templates[i].templateViewName;
                     $scope.templateViewDesc = $scope.templates[i].templateViewDesc;
                 }
             }
         });
 
-        $scope.userId = $cookieStore.get('userId');
-        $scope.appId = $cookieStore.get('appId');
-        $scope.tempUrl = $cookieStore.get('tempUrl');
-        $scope.tempName = $cookieStore.get('tempName');
-        $scope.tempCategory = $cookieStore.get('tempCategory');
-         $scope.appTemplateUrl = $cookieStore.get('url');
+        $scope.userId = $stateParams.userId;
+        $scope.appId = $stateParams.appId;
+        $scope.tempUrl = $stateParams.tempUrl;
+        $scope.tempName = $stateParams.tempName;
+        $scope.tempCategory = $stateParams.tempCategory;
+        $scope.appTemplateUrl = $cookieStore.get('url');
 
         $scope.deleteFile = function(userId,appId) {
 
@@ -47,6 +47,17 @@
                 $state.go('anon.welcome');
             });
         };
+        $scope.successDeleteFile = function(userId,appId) {
+
+            var appParams = {
+                'userId': userId,
+                'appId': appId
+            };
+
+            welcomeTemplatesResource.deletePreviewTemp(appParams).then(function(data) {
+
+            });
+        };
 
         $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory) {
         if($scope.appName== null){
@@ -56,7 +67,7 @@
         }
         else{
                 if ($auth.isAuthenticated()) {
-                       $scope.deleteFile($scope.userId, $scope.appId);
+                       $scope.successDeleteFile($scope.userId, $scope.appId);
                     var tempAppParams = {
                         'appName': $scope.appName,
                         'templateId': templateId,
@@ -72,7 +83,6 @@
                                 +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                             mySharedService.prepForBroadcast(url);
-                            $cookieStore.put('AppId', data.data.appId);
                             $state.go('user.editApp',{appId:data.data.appId});
                         });
                     $mdDialog.hide(answer);
@@ -83,7 +93,6 @@
                 $scope.profileView = function () {
                     return userProfileService.showUserProfileDialog();
                 }
-                $cookieStore.remove('appId');
         };
 
     }

@@ -7,13 +7,13 @@
 
 }
 ion-view{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 ion-content{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 ion-side-menu-content{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .login .panel{
   text-align: center;
@@ -29,7 +29,7 @@ ion-side-menu-content{
   font-family: Helvetica, sans-serif;
   text-decoration: none;
   vertical-align: middle;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 .panel .social-button-fb{
   padding: 8.5px 17px;
@@ -43,7 +43,7 @@ ion-side-menu-content{
   font-family: Helvetica, sans-serif;
   text-decoration: none;
   vertical-align: middle;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .panel .create-account-btm {
@@ -54,7 +54,7 @@ ion-side-menu-content{
   text-decoration: none;
   display: inline-block;
   margin-top: 35px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
   border-radius:4px;
 }
 
@@ -101,7 +101,7 @@ ion-side-menu-content{
   font-family: Ubuntu Light;
   border-width: 3px;
   border-radius: 3px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 /* ----- Second Navigation Page ----- */
@@ -109,11 +109,11 @@ ion-side-menu-content{
 .made-easy-second-navigation .header .header-image{
     width: 100%;
     height: auto;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-second-navigation .content {
     text-align: center;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 /* ----- Third Navigation Page ----- */
@@ -121,11 +121,11 @@ ion-side-menu-content{
 .made-easy-third-navigation .header .header-image{
     width: 100%;
     height: auto;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-third-navigation .content {
     text-align: right;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 /* ----- View Page ----- */
@@ -144,15 +144,15 @@ ion-side-menu-content{
 .made-easy-contactUs .header .header-image {
     width: 100%;
     height: auto;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-contactUs .content {
     text-align: center;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-contactUs .content .last {
     margin-bottom: 20px;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-contactUs .bottom {
     margin-top: 25%;
@@ -164,22 +164,22 @@ ion-side-menu-content{
 .made-easy-aboutUs .header .header-image {
     width: 100%;
     height: auto;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-aboutUs .content {
     text-align: center;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-aboutUs .content .last {
     margin-bottom: 20px;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 /* ----- Terms Page ----- */
 .made-easy-terms {}
 .made-easy-terms .content {
     text-align: center;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 /*------- Button Setting ------- */
@@ -190,7 +190,7 @@ ion-side-menu-content{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
     border-radius:4px;
     width: 94%;
     margin: 10px;
@@ -316,7 +316,7 @@ margin-bottom: 20px;}
   .padding > .list .item2:first-child .item2-content {
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
-    cursor: url(../img/Mouse_point.png), auto;}
+    cursor: url(../img/cursor.cur), auto;}
 
 .card2 .item2:last-child,
 .list-inset .item2:last-child,
@@ -328,7 +328,7 @@ margin-bottom: 20px;}
   .padding > .list .item2:last-child .item2-content {
     border-bottom-right-radius: 2px;
     border-bottom-left-radius: 2px;
-    cursor: url(../img/Mouse_point.png), auto;}
+    cursor: url(../img/cursor.cur), auto;}
 
 .card2 .item2:last-child,
 .list-inset .item2:last-child {
@@ -362,7 +362,7 @@ padding:5px;
     border-color: transparent;
     background-color: #387ef5;
     color: #fff;
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
     /*width: 30%;
     margin-left: 34%;
 	margin-top: 30px;*/
@@ -384,6 +384,6 @@ padding:5px;
  * --------------------------------------------------
  */
 a[href]:hover{
-    cursor: url(../img/Mouse_point.png), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 /** ----------- End Custom update Css Class ---------- **/

@@ -160,12 +160,12 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 button[disabled],
 html input[disabled] {
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 button::-moz-focus-inner,
@@ -268,7 +268,7 @@ a:active {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   background-color: #fff;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .content > * {
@@ -303,22 +303,22 @@ a:active {
 
 .content-padded {
   margin: 10px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .pull-left {
   float: left;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .pull-right {
   float: right;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .pull-center {
   float: center;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .clearfix:before, .clearfix:after {
@@ -380,7 +380,7 @@ p {
   text-align: center;
   white-space: nowrap;
   vertical-align: top;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -562,12 +562,12 @@ input[type="button"] {
   color: #000;
   text-align: center;
   white-space: nowrap;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .title a {
   color: inherit;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .bar-tab {
@@ -629,11 +629,11 @@ input[type="button"] {
 }
 .bar .btn.pull-right {
   margin-left: 10px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 .bar .btn.pull-left {
   margin-right: 10px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .bar .btn-link {
@@ -657,19 +657,19 @@ input[type="button"] {
 
 .bar .btn-nav.pull-left {
   margin-left: -5px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 .bar .btn-nav.pull-left .icon-left-nav {
   margin-right: -3px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 .bar .btn-nav.pull-right {
   margin-right: -5px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 .bar .btn-nav.pull-right .icon-right-nav {
   margin-left: -3px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .bar .icon {
@@ -685,12 +685,12 @@ input[type="button"] {
 }
 .bar .title .icon {
   padding: 0;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 .bar .title .icon.icon-caret {
   top: 4px;
   margin-left: -5px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .bar input[type="search"] {
@@ -841,16 +841,16 @@ input[type="button"] {
 .table-view .media,
 .table-view .media-body {
   overflow: hidden;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .table-view .media-object.pull-left {
   margin-right: 10px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 .table-view .media-object.pull-right {
   margin-left: 10px;
-  cursor: url(../img/Mouse_point.png), auto;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 .table-view-cell > .btn,

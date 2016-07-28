@@ -4,11 +4,11 @@
 (function(){
     angular.module('appEdit').controller('AppEditAreaCtrl',[
         '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER',
-        'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookies','$cookieStore',
+        'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore',
         AppEditAreaCtrl]);
 
     function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
-    toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookies,$cookieStore){
+    toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore){
 
         $rootScope.bodyClass = 'appEdit';
 
@@ -21,8 +21,6 @@
         //$scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
         //                        +'/templates/'+$stateParams.appId;
 
-
-//        $scope.id = $cookieStore.get('AppId');
 
         appEditResource.getSelectedApp({appId: $scope.appId})
             .success(function(data) {

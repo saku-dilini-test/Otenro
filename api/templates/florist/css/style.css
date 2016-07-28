@@ -51,7 +51,7 @@ input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance: none !important;
 	background-color: #fff;
 	border-radius: 100%;
-	cursor: url(../img/Mouse_point.png), auto;
+	cursor: url(../img/cursor.cur), auto;
 	height: 30px;
 	width: 30px;
 	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
