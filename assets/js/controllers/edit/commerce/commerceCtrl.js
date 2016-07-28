@@ -344,6 +344,7 @@
 
         currencyService.getAllCurrency().success(function (data) {
             $scope.currencyList = data;
+
         }).error(function (err) {
             alert("MainMenu Loading Error : " + err);
         });
@@ -364,9 +365,14 @@
         });
 
         $scope.saveStoreSettings = function (current, storeSettings, openHours) {
-            if (storeSettings.orderNumber == null || storeSettings.address == null ||
-                storeSettings.searchEngineDesc == null) {
+
+            if (!storeSettings){
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
+            }else if (!storeSettings.orderNumber|| !storeSettings.address ||
+                !storeSettings.searchEngineDesc) {
+                toastr.error(' warning', "Please fill all the fields", {closeButton: true});
+            }else if (!storeSettings.currency){
+                toastr.error(' warning', "Please select a currency", {closeButton: true});
             }
             else {
 
@@ -419,24 +425,33 @@
             }
         };
 
-        $scope.addAboutUs = function (current,aboutUs) {
+        $scope.addAboutUs = function (current,storeSettings) {
+            if (storeSettings!=null){
+                if (!storeSettings.header  || !storeSettings.content) {
+                    toastr.error(' warning', "Please fill all the fields", {closeButton: true});
+                }else{
 
-            aboutUs.appId = $rootScope.appId;
-            aboutUsService.addAboutUs(aboutUs)
-                .success(function (data, status, headers, config) {
-                    toastr.success('Successfully save About Us Data ..... !', 'Awsome!', {
-                        closeButton: true
-                    });
-                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                        +'/templates/'+$rootScope.appId+'' +
-                        '#/app/aboutUs';
-                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                    $scope.selectedTab = current;
-                }).error(function (data, status, headers, config) {
-                toastr.error('Unable to Add', 'Warning', {
-                    closeButton: true
-                });
-            })
+                    storeSettings.appId = $rootScope.appId;
+                    commerceService.saveStoreSettings(storeSettings)
+                        .success(function (data, status, headers, config) {
+                            toastr.success('Successfully save About Us Data ..... !', 'Awsome!', {
+                                closeButton: true
+                            });
+                            $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                +'/templates/'+$rootScope.appId+'' +
+                                '#/app/aboutUs';
+                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                            $scope.selectedTab = current;
+                        }).error(function (data, status, headers, config) {
+                        toastr.error('Unable to Add', 'Warning', {
+                            closeButton: true
+                        });
+                    })
+                }
+            }else {
+                $scope.selectedTab = current;
+            }
+
         };
 
         commerceService.showStoreSettings($rootScope.appId).success(function (data) {
@@ -447,15 +462,15 @@
             toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
         });
 
-        $scope.savePolicies = function (current, policies) {
+        $scope.savePolicies = function (current, storeSettings) {
 
-            if (policies.returnPolicy == '' || policies.termsAndCondition == '' || policies.privacyPolicy == '') {
+            if (!storeSettings.returnPolicy|| !storeSettings.termsAndCondition|| !storeSettings.privacyPolicy) {
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
             }
             else {
-                policies.userId = $scope.userId;
-                policies.appId = $rootScope.appId;
-                commerceService.savePolicies(policies).success(function (data) {
+                storeSettings.userId = $scope.userId;
+                storeSettings.appId = $rootScope.appId;
+                commerceService.savePolicies(storeSettings).success(function (data) {
                     toastr.success(' Store Settings has been added.!', {
                         closeButton: true
                     });
@@ -466,11 +481,12 @@
             }
         };
 
-        commerceService.showPolicies($scope.appId).success(function (data) {
-            $scope.policies = data[0].policies;
+        /*commerceService.showPolicies($scope.appId).success(function (data) {
+            alert("data " + JSON.stringify(data[0]));
+            $scope.policies = data[0];
         }).error(function (err) {
             toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
-        })
+        })*/
 
 
         $scope.editCat = function (imageUrl, $id) {

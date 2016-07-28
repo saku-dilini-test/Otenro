@@ -62,6 +62,12 @@
             },
             OpenHours:{
                 type: 'json'
+            },
+            header:{
+                 type: 'string'
+            },
+            content:{
+             type: 'string'
             }
 
             }
