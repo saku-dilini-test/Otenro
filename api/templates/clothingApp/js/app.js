@@ -98,6 +98,15 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
               }
           }
       })
+      .state('app.pickup', {
+          url: '/pickup',
+          views: {
+              'menuContent': {
+                  templateUrl: 'templates/pickup.html',
+                  controller: 'pickupCtrl'
+              }
+          }
+      })
       .state('app.terms', {
           url: '/terms',
           views: {
@@ -160,7 +169,20 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           controller: 'cartCtrl'
       }
     }
-  });
+  })
+  .state('app.deliverDetails', {
+      cache: false,
+      url: '/deliverDetails',
+      params:{
+        item: null
+      },
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/deliverDetails.html',
+            controller: 'cartCtrl'
+        }
+      }
+    });
 
   $urlRouterProvider.otherwise('/app/category');
 });
