@@ -47,6 +47,17 @@
                 $state.go('anon.welcome');
             });
         };
+        $scope.successDeleteFile = function(userId,appId) {
+
+            var appParams = {
+                'userId': userId,
+                'appId': appId
+            };
+
+            welcomeTemplatesResource.deletePreviewTemp(appParams).then(function(data) {
+
+            });
+        };
 
         $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory) {
         if($scope.appName== null){
@@ -56,7 +67,7 @@
         }
         else{
                 if ($auth.isAuthenticated()) {
-                       $scope.deleteFile($scope.userId, $scope.appId);
+                       $scope.successDeleteFile($scope.userId, $scope.appId);
                     var tempAppParams = {
                         'appName': $scope.appName,
                         'templateId': templateId,
