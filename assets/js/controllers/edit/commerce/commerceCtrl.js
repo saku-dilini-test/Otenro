@@ -669,6 +669,12 @@
 
         $scope.refunded = function () {
             $scope.selectedRow = $scope.gridApi1.selection.getSelectedRows();
+            if($scope.selectedRow.length == 0){
+                toastr.error('Select a row', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else{
             for (var i = 0; i < $scope.selectedRow.length; i++) {
                 $scope.selectedRow[i].paymentStatus = "refunded";
                 $scope.refund.push($scope.selectedRow[i]);
@@ -686,9 +692,16 @@
                         closeButton: true
                     });
                 })
+            }
         };
         $scope.fulfilled = function () {
             $scope.row = $scope.gridApi1.selection.getSelectedRows();
+            if($scope.row.length == 0){
+                toastr.error('Select a row', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else{
             for (var i = 0; i < $scope.row.length; i++) {
                 $scope.row[i].paymentStatus = "successful";
                 $scope.fulfill.push($scope.row[i]);
@@ -706,6 +719,7 @@
                         closeButton: true
                     });
                 })
+            }
         };
     }
 })();
