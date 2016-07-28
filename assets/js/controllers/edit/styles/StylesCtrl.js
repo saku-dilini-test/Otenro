@@ -2,12 +2,11 @@
     'use strict';
     angular.module("appEdit").controller("StylesCtrl",
         ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','stylesService','ME_APP_SERVER','$auth',
-        'mySharedService','$cookieStore',StylesCtrl]);
+        'mySharedService',StylesCtrl]);
 
-    function StylesCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,stylesService,ME_APP_SERVER,$auth,mySharedService,
-    $cookieStore) {
+    function StylesCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,stylesService,ME_APP_SERVER,$auth,mySharedService) {
 
-        var appId = $cookieStore.get('AppId');
+        var appId = $rootScope.appId;
 
         $scope.loadFonts = function() {
             // Use timeout to simulate a 650ms request.
