@@ -32,15 +32,15 @@ module.exports = {
         }
     },
     seedData: [
-        {
-            template_name : 'codecanyon',
-            templateViewName : 'Del Mar',
-            templateViewDesc : 'A simple elegant template that can be customised into what you want.',
-            imageUrl : 'resturant/codecanyon.png',
-            gifImageUrl: 'resturant/codecanyon1.png',
-            templateFilesPath:'templates/codecanyon',
-            templateCategory:'1'
-        },
+        //{
+        //    template_name : 'codecanyon',
+        //    templateViewName : 'Del Mar',
+        //    templateViewDesc : 'A simple elegant template that can be customised into what you want.',
+        //    imageUrl : 'resturant/codecanyon.png',
+        //    gifImageUrl: 'resturant/codecanyon1.png',
+        //    templateFilesPath:'templates/codecanyon',
+        //    templateCategory:'1'
+        //},
         //{
         // template_name : 'tokoyoapp',
         // imageUrl : 'resturant/tokoyoapp.png',
@@ -69,14 +69,14 @@ module.exports = {
             templateFilesPath:'templates/florist',
             templateCategory:'3'
         },
-        {
-            template_name : 'pizzaNew',
-            templateViewName : 'Hell’s kitchen',
-            templateViewDesc : 'A template crafted with café’s and restaurants in mind.',
-            imageUrl : 'resturant/pizzNew.png',
-            templateFilesPath:'templates/pizzaNew',
-            templateCategory:'3'
-        },
+        //{
+        //    template_name : 'pizzaNew',
+        //    templateViewName : 'Hell’s kitchen',
+        //    templateViewDesc : 'A template crafted with café’s and restaurants in mind.',
+        //    imageUrl : 'resturant/pizzNew.png',
+        //    templateFilesPath:'templates/pizzaNew',
+        //    templateCategory:'3'
+        //},
         {
             template_name : 'foodDemoApp',
             templateViewName : 'Café El Jafe',
