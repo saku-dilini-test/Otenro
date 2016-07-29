@@ -105,48 +105,7 @@
                     </div>
                 </md-tab-body>
             </md-tab>
-            <md-tab ng-disabled="shippingOptionParams.countrySelectionLocked">
-                <md-tab-label>country restrictions</md-tab-label>
-                <md-tab-body>
-                    <div class="md-dialog-header">
-                        <h1>country restrictions</h1>
-                    </div>
-                    <div class="md-dialog-main clearfix">
-                        <form class="clearfix" novalidate>
-                            <fieldset class="reset-margin">
-                                <label>control where you ship to</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <md-radio-group ng-model="data.group" class="country-restrictions">
-                                    <md-radio-button value="world">
-                                        ship to the rest of the world
-                                        <span class="restrictions-options-text">
-                                            Make this shipping options available to the rest of the world.
-                                            Wherever your other options do not allow.
-                                        </span>
-                                    </md-radio-button>
-                                    <md-radio-button value="allowed">
-                                        countries allowed
-                                        <span class="restrictions-options-text">
-                                            Make this shipping options available to the rest of the world.
-                                            Wherever your other options do not allow.
-                                        </span>
-                                    </md-radio-button>
-                                </md-radio-group>
-                            </fieldset>
-                            <fieldset ng-show="data.group == 'allowed'">
-                                <input class="me-add-input new-country-text-box" type="text" name="name" placeholder="ADD NEW COUNTRY" required />
-                            </fieldset>
-                        </form>
-                    </div>
-                    <div class="md-dialog-buttons">
-                        <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="backToShippingView()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateCountryRestriction()">save</md-button>
-                        </div>
-                    </div>
-                </md-tab-body>
-            </md-tab>
-            <md-tab ng-disabled="shippingOptionParams.pickup">
+            <md-tab ng-disabled="shippingOptionParams.pickupLocked">
                 <md-tab-label>pick up</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -190,11 +149,11 @@
                                 <input type="number" name="name" required ng-model="pickup.cost" />
                             </fieldset>
                         </div>
-                        <div  float="left" class="icon icon-plus" ng-click="clearFields()" role="button" tabindex="0">
+                        <!--<div  float="left" class="icon icon-plus" ng-click="addPickUpLocations(pickup)" role="button" tabindex="0">
                         </div>
                         <div>
                             add more locations
-                        </div>
+                        </div>-->
 
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
@@ -205,6 +164,48 @@
                     </div>
                 </md-tab-body>
             </md-tab>
+            <md-tab ng-disabled="shippingOptionParams.countrySelectionLocked">
+                <md-tab-label>country restrictions</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>country restrictions</h1>
+                    </div>
+                    <div class="md-dialog-main clearfix">
+                        <form class="clearfix" novalidate>
+                            <fieldset class="reset-margin">
+                                <label>control where you ship to</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <md-radio-group ng-model="data.group" class="country-restrictions">
+                                    <md-radio-button value="world">
+                                        ship to the rest of the world
+                                        <span class="restrictions-options-text">
+                                            Make this shipping options available to the rest of the world.
+                                            Wherever your other options do not allow.
+                                        </span>
+                                    </md-radio-button>
+                                    <md-radio-button value="allowed">
+                                        countries allowed
+                                        <span class="restrictions-options-text">
+                                            Make this shipping options available to the rest of the world.
+                                            Wherever your other options do not allow.
+                                        </span>
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </fieldset>
+                            <fieldset ng-show="data.group == 'allowed'">
+                                <input class="me-add-input new-country-text-box" type="text" name="name" placeholder="ADD NEW COUNTRY" required />
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="backToShippingView()">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="updateCountryRestriction()">save</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+
         </md-tabs>
     </md-dialog-content>
 </md-dialog>

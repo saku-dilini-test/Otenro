@@ -15,15 +15,14 @@
         // --/-- enable & disable tabs --/--
         // --/-- Common function for enable disable tabs
         // --/-- Parameter : (Selected-Tab number,1-tab boolean,2-tab boolean,3-tab boolean,4-tab boolean)
-        function  enableDisableTabs(selectedTab,tab1,tab2,tab3,tab4,tab5) {
+        function  disableTabs(selectedTab,tab1,tab2,tab3,tab4,tab5) {
             $scope.selectedTab = selectedTab;
             $scope.shippingOptionParams = {
                 firstLocked : tab1,
                 secondLocked: tab2,
                 thirdLocked: tab3,
-                countrySelectionLocked: tab4,
-                pickupLocked : tab5
-                
+                pickupLocked : tab5,
+                countrySelectionLocked: tab4
             };
         }
 
@@ -38,14 +37,12 @@
         }
         // --/-- add new shipping collection mode
         else if($scope.initialData == 'newShippingOption'){
-            enableDisableTabs(0,false,true,true,true,true);
+                disableTabs(0,false,true,true,true,true);
 
             $scope.moveToFlatRateOption = function () {
-                enableDisableTabs(1,false,false,true,true,true);
+                disableTabs(1,false,false,true,true,true);
             };
-            $scope.moveToPickupOption = function () {
-                enableDisableTabs(3,false,false,true,true,false);
-            };
+
             $scope.moveToWeightBasedOption = function () {
                 $scope.weightRate = {
                     weightRanges : [{startWeight : 0.1, endWeight : '',cost : ''}]
@@ -53,21 +50,29 @@
                 $scope.addNewWeightRange = function(){
                     $scope.weightRate.weightRanges.push({startWeight : '',endWeight : '',cost : ''})
                 };
-                enableDisableTabs(2,false,true,false,true,true);
+                disableTabs(2,false,true,false,true,true);
+            };
+
+            $scope.moveToPickupOption = function () {
+                disableTabs(3,false,true,true,true,false);
             };
         }
         // --/-- shipping collection editable mode
         else{
             if($scope.initialData.shippingOption == 'Flat Rate'){
                 $scope.flatRates = $scope.initialData;
-                enableDisableTabs(1,true,false,true,true,true);
+                disableTabs(1,true,false,true,true,true);
             }
             if($scope.initialData.shippingOption == 'Weight Base'){
                 $scope.weightRate = $scope.initialData;
                 $scope.addNewWeightRange = function(){
                     $scope.weightRate.weightRanges.push({startWeight : '',endWeight : '',cost : ''})
                 };
-                enableDisableTabs(2,true,true,false,true,true);
+                disableTabs(2,true,true,false,true,true);
+            }
+            if($scope.initialData.shippingOption == 'Pick up'){
+                $scope.pickup = $scope.initialData;
+                disableTabs(3,true,true,true,true,false);
             }
         }
 
@@ -91,7 +96,7 @@
                         toastr.success('Successfully Saved ', 'Saved', {
                             closeButton: true
                         });
-                        enableDisableTabs(3,true,false,true,true,false);
+                        disableTabs(3,true,false,true,true,false);
                     }).error(function (error) {
                         toastr.error('Loading Error', 'Warning', {
                             closeButton: true
@@ -108,12 +113,13 @@
             }else{
                 pickup.appId = $rootScope.appId;
                 pickup.shippingOption = 'Pick up';
+                pickup.optionName = pickup.locationName;
                 shippingService.updateShippingInfo(pickup)
                     .success(function (result) {
                         toastr.success('Successfully Saved ', 'Saved', {
                             closeButton: true
                         });
-                        enableDisableTabs(3,true,false,true,false,true);
+                        disableTabs(3,true,false,true,false,true);
                     }).error(function (error) {
                     toastr.error('Loading Error', 'Warning', {
                         closeButton: true
@@ -121,6 +127,7 @@
                 })
             }
         };
+        
 
         $scope.clearFields = function () {
             $scope.pickup = null;
@@ -144,7 +151,7 @@
                         toastr.success('Successfully Saved ', 'Saved', {
                             closeButton: true
                         });
-                        enableDisableTabs(3,true,true,false,true,false);
+                        disableTabs(3,true,true,false,true,false);
                     }).error(function (error) {
                         toastr.error('Loading Error', 'Warning', {
                             closeButton: true
