@@ -32,16 +32,20 @@
             </md-tab>
             <md-tab ng-disabled="shippingOptionParams.secondLocked">
                 <md-tab-label>flat rate</md-tab-label>
+
                 <md-tab-body>
                     <div class="md-dialog-header">
                         <h1>flat rate</h1>
                     </div>
+
                     <div class="md-dialog-main clearfix">
+                        <form name="flatRate" novalidate>
                         <fieldset>
                             <label>option name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="name" required ng-model="flatRates.optionName" />
+                            <input type="text" name="optionName" ng-pattern="/^[a-zA-Z0-9]*$/" required ng-model="flatRates.optionName" />
                         </fieldset>
+                        <span ng-show="flatRate.optionName.$error.pattern">No symbols</span>
                         <div class="clearfix">
                             <fieldset class="col-2">
                                 <label>Per order fee </label>
@@ -54,6 +58,7 @@
                                 <input type="number" name="name" required ng-model="flatRates.feePerItem" />
                             </fieldset>
                         </div>
+                            </form>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
@@ -69,11 +74,14 @@
                     <div class="md-dialog-header">
                         <h1>Weight based</h1>
                     </div>
+                    <form name="weightBased" novalidate>
                     <div class="md-dialog-main clearfix">
                         <fieldset>
                             <label>option name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="name" ng-model="weightRate.optionName" />
+                            <input type="text" name="name" ng-pattern="/^[a-zA-Z0-9]*$/" ng-model="weightRate.optionName" />
+                            <br />
+                            <span ng-show="weightBased.name.$error.pattern">No symbols</span>
                         </fieldset>
                         <fieldset class="reset-margin">
                             <label>weight ranges</label>
@@ -97,6 +105,7 @@
                         </table>
                         <div class="icon icon-plus" ng-click="addNewWeightRange()"></div>
                     </div>
+                    </form>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="backToShippingView()">cancel</md-button>
@@ -107,10 +116,12 @@
             </md-tab>
             <md-tab ng-disabled="shippingOptionParams.pickupLocked">
                 <md-tab-label>pick up</md-tab-label>
+
                 <md-tab-body>
                     <div class="md-dialog-header">
                         <h1>pick up</h1>
                     </div>
+                    <form name="pickUp" novalidate>
                     <div class="md-dialog-main clearfix">
                         <fieldset>
                             <label>Location Name</label>
@@ -121,27 +132,37 @@
                             <fieldset class="col-2">
                                 <label>Number</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="name" required ng-model="pickup.number"  />
+                                <input type="number" ng-pattern="/^[a-zA-Z0-9]*$/" name="number" required ng-model="pickup.number"  />
+                                <br />
+                                <span ng-show="pickUp.number.$error.pattern">Numbers only</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>street Address</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="name" required ng-model="pickup.streetAddress" />
+                                <input type="text" ng-pattern="/^[a-zA-Z0-9]*$/" name="streetAddress" required ng-model="pickup.streetAddress" />
+                                <br />
+                                <span ng-show="pickUp.streetAddress.$error.pattern">No symbols</span>
                             </fieldset>
                             <fieldset class="col-2">
                                 <label>City</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="name" required ng-model="pickup.city" />
+                                <input type="text" ng-pattern="/^[a-zA-Z0-9]*$/" name="city" required ng-model="pickup.city" />
+                                <br />
+                                <span ng-show="pickUp.city.$error.pattern">No symbols</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Country</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="name" required ng-model="pickup.country" />
+                                <input type="text" name="country" ng-pattern="/^[a-zA-Z]*$/" required ng-model="pickup.country" />
+                                <br />
+                                <span ng-show="pickUp.country.$error.pattern">Characters only</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>postal code</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="name" required ng-model="pickup.postalCode" />
+                                <input type="text" ng-pattern="/^[a-zA-Z0-9]*$/" name="postalCode" required ng-model="pickup.postalCode" />
+                                <br />
+                                <span ng-show="pickUp.postalCode.$error.pattern">No symbols</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Cost(optional)</label>
@@ -162,6 +183,7 @@
                             </div>
                         </div>
                     </div>
+                    </form>
                 </md-tab-body>
             </md-tab>
             <md-tab ng-disabled="shippingOptionParams.countrySelectionLocked">
