@@ -368,11 +368,10 @@
 
             if (!storeSettings){
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
-            }else if (!storeSettings.orderNumber|| !storeSettings.address ||
-                !storeSettings.searchEngineDesc) {
-                toastr.error(' warning', "Please fill all the fields", {closeButton: true});
-            }else if (!storeSettings.currency){
-                toastr.error(' warning', "Please select a currency", {closeButton: true});
+            }else if (!storeSettings.orderNumber) {
+                toastr.error(' warning', "Please fill order number field", {closeButton: true});
+            }else if (!storeSettings.searchEngineDesc){
+                toastr.error(' warning', "Please fill searchEngine Description field", {closeButton: true});
             }
             else {
 
@@ -386,20 +385,23 @@
                     }
                 }
 
-                var openHoursData = {
-                    'weekDaysOpenHour': openHours.weekDaysOpenHour,
-                    'weekDaysOpenMinute': openHours.weekDaysOpenMinute,
-                    'weekDaysCloseHour': openHours.weekDaysCloseHour,
-                    'weekDaysCloseMinute': openHours.weekDaysCloseMinute,
-                    'saturdayOpenHour': openHours.saturdayOpenHour,
-                    'saturdayOpenMinute': openHours.saturdayOpenMinute,
-                    'saturdayCloseHour': openHours.saturdayCloseHour,
-                    'saturdayCloseMinute': openHours.saturdayCloseMinute,
-                    'sundayOpenHour': openHours.sundayOpenHour,
-                    'sundayOpenMinute': openHours.sundayOpenMinute,
-                    'sundayCloseHour': openHours.sundayCloseHour,
-                    'sundayCloseMinute': openHours.sundayCloseMinute
-                };
+                var openHoursData = {};
+                if(typeof openHours != 'undefined'){
+                    openHoursData = {
+                        'weekDaysOpenHour': openHours.weekDaysOpenHour,
+                        'weekDaysOpenMinute': openHours.weekDaysOpenMinute,
+                        'weekDaysCloseHour': openHours.weekDaysCloseHour,
+                        'weekDaysCloseMinute': openHours.weekDaysCloseMinute,
+                        'saturdayOpenHour': openHours.saturdayOpenHour,
+                        'saturdayOpenMinute': openHours.saturdayOpenMinute,
+                        'saturdayCloseHour': openHours.saturdayCloseHour,
+                        'saturdayCloseMinute': openHours.saturdayCloseMinute,
+                        'sundayOpenHour': openHours.sundayOpenHour,
+                        'sundayOpenMinute': openHours.sundayOpenMinute,
+                        'sundayCloseHour': openHours.sundayCloseHour,
+                        'sundayCloseMinute': openHours.sundayCloseMinute
+                    };
+                }
 
                 storeSettings.currencySign = $scope.options.sign,
                     storeSettings.currency = $scope.options.currency,
@@ -462,6 +464,22 @@
             $scope.storeSettings = data[0];
             $scope.storeSettings.currency = data[0].currencySign;
             $scope.openHours = data[0].OpenHours;
+            if(typeof data[0].address != 'undefined'){
+                var fullAddress = data[0].address;
+                var separateAddressArray = fullAddress.split(",");
+                if(typeof separateAddressArray[0] != 'undefined'){
+                    $scope.storeSettings.address1 = separateAddressArray[0]
+                }
+                if(typeof separateAddressArray[1] != 'undefined'){
+                    $scope.storeSettings.address2 = separateAddressArray[1]
+                }
+                if(typeof separateAddressArray[2] != 'undefined'){
+                    $scope.storeSettings.address3 = separateAddressArray[2]
+                }
+                if(typeof separateAddressArray[3] != 'undefined'){
+                    $scope.storeSettings.address4 = separateAddressArray[3]
+                }
+            }
         }).error(function (err) {
             toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
         });

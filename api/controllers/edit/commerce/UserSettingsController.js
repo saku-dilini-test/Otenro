@@ -35,7 +35,11 @@ module.exports = {
             };
         ApplicationStoreSettings.find(searchApp, function(err, app) {
             if (err) return done(err);
-            res.send(app);
+            if(app.length == 0){
+                res.send([{currencySign : '$'}]);
+            }else{
+                res.send(app);
+            }
         });
     },
     getAllSiteType: function(req,res){
