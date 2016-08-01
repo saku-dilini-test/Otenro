@@ -8,6 +8,26 @@
 
         var appId = $rootScope.appId;
 
+        $scope.myImage='';
+        $scope.myCroppedImage='';
+        $scope.picFile='';
+
+        $scope.cropImage = function () {
+            var handleFileSelect=function(evt) {
+                var file=evt.currentTarget.files[0];
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $scope.$apply(function($scope){
+                        $scope.myImage=evt.target.result;
+                        $scope.picFile =  $scope.myImage
+                    });
+                };
+                reader.readAsDataURL(file);
+            };
+            angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+        }
+
+
         $scope.loadFonts = function() {
             // Use timeout to simulate a 650ms request.
             return $timeout(function () {

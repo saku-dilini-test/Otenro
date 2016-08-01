@@ -24,7 +24,7 @@
         $scope.myImage='';
         $scope.myCroppedImage='';
 
-        $scope.cropeImage = function () {
+        $scope.cropImage = function () {
             var handleFileSelect=function(evt) {
                 var file=evt.currentTarget.files[0];
                 var reader = new FileReader();

@@ -8,6 +8,8 @@
 
     function mainMenuService($mdDialog, $http, SERVER_URL,$q,$rootScope,toastr,Upload) {
         return {
+            
+            
 
             showMainMenuDialog: function() {
                 return $mdDialog.show({
@@ -141,23 +143,50 @@
             },
 
             addMenu: function(file,appId,name){
+                var dataURItoBlob = function(dataURI) {
+                    var binary = atob(dataURI.split(',')[1]);
+                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+                    var array = [];
+                    for(var i = 0; i < binary.length; i++) {
+                        array.push(binary.charCodeAt(i));
+                    }
+                    return new Blob([new Uint8Array(array)], {type: mimeString});
+                };
+
+                var blob = dataURItoBlob(file);
+                var UploadFile = new File([blob], 'imageFileName.png');
+
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addNewMenu',
                     fields: {
                         'appId' : appId,
                         'name' : name,
                     },
-                    file: file
+                    file: UploadFile
                 });
             },
             addNewCategory:function(file,appId,name){
+                
+                var dataURItoBlob = function(dataURI) {
+                    var binary = atob(dataURI.split(',')[1]);
+                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+                    var array = [];
+                    for(var i = 0; i < binary.length; i++) {
+                        array.push(binary.charCodeAt(i));
+                    }
+                    return new Blob([new Uint8Array(array)], {type: mimeString});
+                };
+
+                var blob = dataURItoBlob(file);
+                var UploadFile = new File([blob], 'imageFileName.png');
+
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addNewCategory',
                     fields: {
                         'appId' : appId,
                         'name' : name,
                     },
-                    file: file
+                    file: UploadFile
                 });
             },
             addChild: function(Data){

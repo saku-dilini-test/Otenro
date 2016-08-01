@@ -106,6 +106,8 @@ module.exports = {
                 if (err) return console.error(err);
             });
 
+            console.log("req.body.imageUrl " + req.body.imageUrl);
+
             fs.rename(uploadedFiles[0].fd, desPath+req.body.imageUrl, function (err) {
                 if (err) return res.send(err);
                 res.json({ok:true});
