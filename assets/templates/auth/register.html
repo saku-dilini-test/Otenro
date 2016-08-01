@@ -33,12 +33,18 @@
       <fieldset class="password-area">
         <label>Password</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12">
-        <input  name="password" ng-enter ="authSignUp(user);" type="password" ng-model="user.password" ng-minlength="7" compare-to="user.password_confirm" required>
+        <input  name="password" ng-enter ="authSignUp(user);" type="password"
+                ng-model="user.password" ng-minlength="7" compare-to="user.password_confirm"
+                ng-pattern="passwordRegularExpression"
+                required>
         <span class="help-block" ng-show="register.password.$error.required">
           *
         </span>
         <span class="help-block " ng-show="register.password.$error.minlength">
            <span ng-show="register.password.$error.minlength">Password should have at least 7 characters.</span>
+        </span>
+        <span class="help-block " ng-show="!(register.password.$error.minlength) && register.password.$error.pattern">
+           <span >Password should have at least one lower or Upper letter and one number</span>
         </span>
 
       </fieldset>

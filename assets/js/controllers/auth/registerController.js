@@ -19,6 +19,8 @@
         $scope.cancel = function () {
             $state.go('anon.login');
         }
+
+        $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
     }
 })();
 
