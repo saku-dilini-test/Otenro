@@ -1,6 +1,6 @@
 <md-dialog aria-label="Add Tax Option">
     <md-dialog-content>
-        <form novalidate>
+        <form name="taxOption" novalidate>
             <div class="md-dialog-header">
                 <h1>Add Tax Option</h1>
             </div>
@@ -8,7 +8,9 @@
                 <fieldset>
                     <label>country</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12" />
-                    <input type="text" name="taxCountry" ng-model="tax.country" required />
+                    <input type="text" ng-pattern="/^[a-zA-Z]*$/" name="taxCountry" ng-model="tax.country" required />
+                    <br />
+                    <span ng-show="taxOption.taxCountry.$error.pattern">Characters only</span>
                 </fieldset>
                 <fieldset>
                     <label>tax amount</label>
