@@ -4,30 +4,61 @@
             <md-tab>
                 <md-tab-label>Background Image</md-tab-label>
                 <md-tab-body>
+
                     <div class="md-dialog-header">
                         <h1>Background Image</h1>
                     </div>
                     <div class="md-dialog-main">
-                        <div class="itemsContainer bg-image">
-                            <div class="imageOver2">
-                                <div class="buttonContain2">
-                                    <div class="img-up2" >
-                                        <label for="file-input2" class="add-image-label bg-image-upload">
-                                            <span> Add Image </span>
-                                        </label>
-                                        <input id="file-input2" type="file"  me-file-read="backgroundImg" />
+                        <fieldset class="col-2">
+
+
+                        <!--<div class="md-dialog-main">
+                            <div class="itemsContainer bg-image">
+                                <div class="imageOver2">
+                                    <div class="buttonContain2">
+                                        <div class="img-up2" >
+                                            <label for="file-input2" class="add-image-label bg-image-upload">
+                                                <span> Add Image </span>
+                                            </label>
+                                            <input id="file-input2" type="file"  me-file-read="backgroundImg" />
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="image2">
+                                    <img src="{{backgroundImg}}" ng-model="backgroundImg" width="275" height="200" alt="Background Preview"/>
+                                </div>
                             </div>
-                            <div class="image2">
-                                <img src="{{backgroundImg}}" ng-model="backgroundImg" width="275" height="200" alt="Background Preview"/>
+                        </div>-->
+
+
+
+
+
+                       <div class="file-upload-wrapper clearfix">
+                            <p class="file-upload-msg">Crop your image</p>
+                            <div class="pull-left">
+                                <input  class="pull-left" type="file" ng-click = "cropImage()" id="fileInput" />
+                            </div>
+                            <div class="cropArea">
+                                <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
                             </div>
                         </div>
-                    </div>
+
+                        <div class="uploaded-section pull-left clearfix">
+                            <div class="uploaded-new-image">
+                                <br>
+                                <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                     height="150" style="display:none" />
+                                <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
+                            </div>
+                        </div>
+
+                    </fieldset>
+                        </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="hide()">Close</md-button>
-                            <button class="me-default-button" ng-click="addBackgroundImage(backgroundImg)">Submit</button>
+                            <button class="me-default-button" ng-click="addBackgroundImage(picFile)">Submit</button>
                         </div>
                     </div>
                 </md-tab-body>

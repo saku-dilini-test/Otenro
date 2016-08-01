@@ -12,7 +12,7 @@
                 </fieldset>
                 <br>
                 <fieldset class="col-2">
-                    <div class="file-upload-wrapper clearfix">
+                    <!--<div class="file-upload-wrapper clearfix">
                         <p class="file-upload-msg">Select a image to upload</p>
                         <div class="pull-left">
                             <div class="me-file-upload rounded">
@@ -31,7 +31,45 @@
                                  height="150"/>
                             <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150"  required />
                         </div>
-                    </div>
+                    </div>-->
+
+
+
+                        <div class="file-upload-wrapper clearfix">
+                            <p class="file-upload-msg">Crop your image</p>
+                            <div class="pull-left">
+                                <input  class="pull-left" type="file" ng-click = "cropImage()" id="fileInput" />
+                            </div>
+                            <div class="cropArea">
+                                <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
+                            </div>
+                        </div>
+
+                        <div class="uploaded-section pull-left clearfix">
+                            <div class="uploaded-new-image">
+                                <br>
+                                <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                     height="150" style="display:none" />
+                                <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
+
+                                <button class="me-upload-image-button" ng-click="addImage(picFile)">Upload Image
+                                </button>
+                            </div>
+                            <div class="uploaded-old-images">
+                                <p>Uploaded Images</p>
+                                <div class="old-images clearfix">
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteImg(0)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="tmpImage[0] == null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
+                                             width="80" height="80"/>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
                 </fieldset>
             </form>
         </div>
