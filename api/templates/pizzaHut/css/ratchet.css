@@ -153,7 +153,7 @@ select {
   text-transform: none;
 }
 
-button,
+button, .btn
 html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
@@ -365,19 +365,20 @@ p {
 .btn {
   position: relative;
   display: inline-block;
-  padding: 6px 8px 7px;
+  padding: 6px 12px;
   margin-bottom: 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1;
   color: #333;
   text-align: center;
   white-space: nowrap;
-  vertical-align: top;
+  vertical-align: middle;
   cursor: url(../img/cursor.cur), auto;
   background-color: white;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 4px;
+  -webkit-user-select:none;
 }
 .btn:active, .btn.active {
   color: inherit;
@@ -454,6 +455,7 @@ p {
   padding: 15px 0;
   margin-bottom: 10px;
   font-size: 18px;
+  cursor: url(../img/cursor.cur), auto;
 }
 
 input[type="submit"],
