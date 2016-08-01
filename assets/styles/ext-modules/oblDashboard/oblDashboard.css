@@ -88,12 +88,7 @@
     text-align: center;
 }
 }
-.obl-dashboard-apps-livePreview{
-    width: 234px;
-    margin: 0 auto;
-    margin-left:100px;
-    padding: 50px 0;
-}
+
 
 .obl-mobile-app{
     float: left;
@@ -198,3 +193,9 @@
 	Width:35%;
 	padding:30px;
 }
+/*.obl-dashboard-apps-livePreview{
+    width: 35%;
+    margin: 0 auto;
+    margin-left:100px;
+    padding: 50px 0;
+}*/
