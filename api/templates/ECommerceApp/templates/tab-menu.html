@@ -1,20 +1,24 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="Menu">
-  <ion-content class="padding">      
-      <div ng-repeat="category in categoryList" >
-            <a href="#/tab/menu/{{category.id}}">
+    <ion-content class="padding">
+        <div ng-repeat="category in categoryList" >
+            <a href="#/tab/menu/{{category.id}}/{{category.name}}">
                 <div class="cards cards-category">
-          
-                  <div class="header">
-                      <div class="header-image">
-                            <img ng-src="img/category/{{category.imgUrl}}" width="100%">              
-                      </div>
-                  </div>    
+                    <div class="header">
+                        <div class="header-image">
+                            <img ng-src="img/secondNavi/{{category.imageUrl}}" width="100%">
+                        </div>
+                    </div>
 
-                  <h3 class="made-easy-header-font">{{category.name}}</h3>
-                  <p class="made-easy-content-font">{{category.description}}</p>
-                  <p>+details</p>
-             </div>
-          </a>
-      </div>        
-  </ion-content>
+                    <div class="made-easy-header-font">
+                        <p>{{category.name}}</p>
+                    </div>
+
+                    <div class="made-easy-content-font">
+                        <p>{{category.description}}</p>
+                        <p>+details</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </ion-content>
 </ion-view>

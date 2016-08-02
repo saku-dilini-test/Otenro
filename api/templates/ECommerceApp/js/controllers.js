@@ -1,42 +1,43 @@
 angular.module('starter.controllers', [])
 
-.controller('HomeCtrl', function($scope) {
+.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices) {
 
-    // This is dummy data, should come from db 
-    $scope.itemList = [
-        {
-            id :1,    
-            name : 'Water Pizza',
-            imgUrl : 'item_01.png',
-            price : '12.5$',
-            description : 'Pizza description'
-        },
-        {
-            id: 2,
-            name : 'Color Pizza',
-            imgUrl : 'item_02.png',
-            price : '15.5$',
-            description : 'Pizza description'
-        },
-        {
-            id: 3,
-            name : 'Apple Pizza',
-            imgUrl : 'item_03.png',
-            price : '11.5$',
-            description : 'Pizza description'
-        }  
-        ];
-    
+    $ionicLoading.show({
+        template: '<ion-spinner icon="lines"  class="spinner-energized" ></ion-spinner>'
+    });
+
+    // After 1000 ms execute
+    $timeout(function () {
+        getAllItemByAppId();
+    }, 1000);
+
+    // get all items function
+    function getAllItemByAppId() {
+        appServices.getAllItemByAppId()
+            .success(function (data) {
+                $ionicLoading.hide();
+                /**  Swipe Function Configuration  **/
+                $scope.itemList = data;
+                $scope.startIndex = 0;
+                $scope.leftIndex = 0;
+                $scope.rightIndex = $scope.itemList.length-1;
+                $scope.isEnableLeftButton = false;
+                $scope.isEnableRightButton = true;
+                if($scope.rightIndex == -1){
+                    $scope.isEnableRightButton = false;
+                }
+                // initial set as 0 index
+                $scope.setItem(0);
+            }).error(function (err) {
+                $ionicLoading.hide();
+                alert('Items Loading error');
+            });
+    }
+
     /* ----- Swipe Function start ----- */
-    // Configuration 
-    $scope.startIndex = 0;
-    $scope.leftIndex = 0;
-    $scope.rightIndex = $scope.itemList.length-1;
-    $scope.isEnableLeftButton = false;
-    $scope.isEnableRightButton = true;
-    if($scope.rightIndex == -1){
-        $scope.isEnableRightButton = false;
-    }    
+    // Configuration
+        /** Configuration has inside getAllItemByAppId function  **/
+
     // view item 
     $scope.item = {};  
     // item set function     
@@ -45,8 +46,7 @@ angular.module('starter.controllers', [])
             $scope.item = $scope.itemList[id];
         }        
     }
-    // initial set as 0 index 
-    $scope.setItem(0);
+
     // left swipe function 
     $scope.onSwipeLeft = function(){        
         if($scope.startIndex > $scope.leftIndex)
@@ -56,7 +56,7 @@ angular.module('starter.controllers', [])
         if($scope.startIndex == $scope.leftIndex){
             $scope.isEnableLeftButton = false;
         }    
-    }   
+    };
     // Right swipe function 
     $scope.onSwipeRight = function(){        
         if($scope.startIndex < $scope.rightIndex)
@@ -66,57 +66,48 @@ angular.module('starter.controllers', [])
         if($scope.startIndex == $scope.rightIndex){
             $scope.isEnableRightButton = false;
         }                    
-    }
+    };
     /* ----- Eng Swipe Fucntion  ----- */
 })
 
-.controller('MenuCtrl', function($scope) {
-    
-    // This is dummy data, should come from db
-    $scope.categoryList = [
-        {
-            id : 1,
-            name : 'ZTC Pizza',    
-            imgUrl : 'category_01.png',
-            description : 'Pizza description'
-        },
-        {
-            id : 2,
-            name : 'XYZ Pizza',        
-            imgUrl : 'category_02.png',
-            description : 'Pizza description'
-        }
-    ];
+.controller('MenuCtrl', function($scope,appServices) {
+
+    // get all menu by app Id
+    appServices.getAllMenuByAppId()
+        .success(function (data) {
+            $scope.categoryList = data;
+        }).error(function (err) {
+            alert('Menu Loading error');
+        });
 })
 
-.controller('ItemsCtrl', function($scope) {
-    
-    // This is dummy data, should come from db
-    $scope.itemList = [
-        {
-            id: 1,
-            name : 'NTK Pizza',    
-            imgUrl : 'item_01.png',
-            description : 'Pizza description'
-        },
-        {   id : 2,
-            name : 'LLMB Pizza',        
-            imgUrl : 'item_02.png',
-            description : 'Pizza description'
-        }
-    ];    
-    
+.controller('ItemsCtrl', function($scope,$stateParams,appServices) {
+
+    // set select Menu Name
+    $scope.menuName = $stateParams.menuName;
+
+    // set select Menu Id
+    var menuId = $stateParams.menuId;
+    // get all item by menu Id
+    appServices.getAllItemsByMenuId(menuId)
+        .success(function (data) {
+            $scope.itemList = data;
+        }).error(function (err) {
+            alert('Items Loading error');
+        });
 })
 
-.controller('ItemCtrl', function($scope) {
-    
-    // This is dummy data, should come from db
-    $scope.item =  {
-            id : 1,
-            name : 'LLMB Pizza',    
-            imgUrl : 'item_01.png',
-            description : 'Pizza description'
-        };
+.controller('ItemCtrl', function($scope,$stateParams,appServices) {
+
+    // set select Menu Id
+    var itemId = $stateParams.itemId;
+    // get item by Id
+    appServices.getItemById(itemId)
+        .success(function (data) {
+            $scope.item = data;
+        }).error(function (err) {
+            alert('Item Loading error');
+        });
 })
 
 .controller('OurStoresCtrl', function($scope) {
@@ -134,11 +125,16 @@ angular.module('starter.controllers', [])
     ]
 })
 
-.controller('ContactUsCtrl', function($scope) {
-    
-    // This is dummy data, should come from db
-    $scope.address = "No 488, Kotte Road, Kotte";
-    $scope.telPhone = "011-45-55-568";
-    $scope.email = "info@deliveryLanka.com";
-    $scope.webSite = "deliveryLanka.com";
+.controller('ContactUsCtrl', function($scope,appServices) {
+
+    // get item by Id
+    appServices.getContactUsByAppId()
+        .success(function (data) {
+            $scope.address = data.address;
+            $scope.telPhone = data.telPhone;
+            $scope.email = data.email;
+            $scope.webSite = data.webSite;
+        }).error(function (err) {
+            alert('Contact Us Loading error');
+        });
 });

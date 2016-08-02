@@ -426,6 +426,67 @@ module.exports = {
         ]
     },
     {
+      templateName : 'ECommerceApp',
+      secondNavi : [
+        {
+          attribute : {
+            "name": "Large Pizza",
+            "imageUrl": "category_01.png",
+            "description": "Shirt description"
+          },
+          thirdNavi : [
+            {
+              "name": "Masala Pizza",
+              "price": 250,
+              "quantity": 250,
+              "imageUrl": "item_01.png",
+              "briefDesc" : "Masala brief des",
+              "detailedDesc" : "Masala Pizza, details description. details description",
+              "createdDate": Date.now()
+            },
+            {
+              "name" : "New Pizza",
+              "price" : 300,
+              "quantity" : 100,
+              "imageUrl" : "item_02.png",
+              "briefDesc" : "New Pizza brief des",
+              "detailedDesc" : "New Pizza, details description. details description",
+              "createdDate": Date.now()
+            }
+
+          ]
+        },
+        {
+          attribute : {
+            "name": "Indian Pizza",
+            "imageUrl": "category_02.png",
+            "description": "Shirt description"
+          },
+          thirdNavi : [
+            {
+              "name": "Indian Pizza",
+              "price": 350,
+              "quantity": 100,
+              "imageUrl": "item_01.png",
+              "briefDesc" : "Indian brief des",
+              "detailedDesc" : "Indian Pizza, details description. details description",
+              "createdDate": Date.now()
+            },
+            {
+              "name" : "New Pizza",
+              "price" : 225,
+              "quantity" : 15,
+              "imageUrl" : "item_02.png",
+              "briefDesc" : "New Pizza brief des",
+              "detailedDesc" : "New Pizza, details description. details description",
+              "createdDate": Date.now()
+            }
+
+          ]
+        }
+      ]
+    },
+    {
       templateName : 'hkRising',
       articleCategory : [{
         attribute : {

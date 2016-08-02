@@ -1,21 +1,27 @@
-<ion-view class="made-easy-header-font made-easy-background-color made-easy-background-image" view-title="Home">
-  <ion-content class="padding" >  
-    <div class="cards cards-home" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">
-        <img src="img/item/{{item.imgUrl}}" width="70%">
-        <h3 class="made-easy-header-font">{{item.name}}  {{item.price}}</h3>
-        <p class="made-easy-content-font">{{item.description}}</p>
+<ion-view class="made-easy-background-color made-easy-background-image" view-title="Home">
+    <ion-content class="padding" >
 
-        <button class="made-easy-button-setting" ng-disabled="!(isEnableLeftButton)" ng-click="onSwipeLeft()" class="button">Left</button>
-        <button class="made-easy-button-setting" ng-disabled="!(isEnableRightButton)" ng-click="onSwipeRight()" class="button">Right</button>
+        <div class="cards cards-home" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">
 
+            <img src="img/thirdNavi/{{item.imageUrl}}" width="70%">
 
-        <br>  
-        <br>
-        <br>  
-        <button class="made-easy-button-setting">ORDER NOW</button>
-        <br>
-        <br>
-        <button class="made-easy-button-setting">GO TO MENU</button>
-    </div>
-  </ion-content>
+            <div class="made-easy-header-font">
+                <p>{{item.name}}</p>
+                <p>{{item.price}}</p>
+            </div>
+
+            <div class="made-easy-content-font">
+                <p>{{item.description}}</p>
+            </div>
+
+            <button ng-disabled="!(isEnableLeftButton)" ng-click="onSwipeLeft()" class="button">Left</button>
+            <button ng-disabled="!(isEnableRightButton)" ng-click="onSwipeRight()" class="button">Right</button>
+
+            <br>
+            <br>
+            <button>ORDER NOW</button>
+            <br>
+            <br>
+        </div>
+    </ion-content>
 </ion-view>

@@ -228,6 +228,7 @@ module.exports.routes = {
 
     'GET /templates/getContactUs': 'template/TemplateController.getContactUs',
     'GET /templates/getSpecificChild': 'template/TemplateController.getSpecificChild',
+    'GET /templates/getProductsByAppId': 'template/TemplateController.getSubChildsByAppId',
     'GET /templates/getProductById': 'template/TemplateController.getSubChildById',
     'POST /templates/getMainMenu': 'template/TemplateController.getMainMenu',
     'GET /templates/getCurrency': 'template/TemplateController.getCurrency',
@@ -235,6 +236,7 @@ module.exports.routes = {
     'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
     'POST /templates/deletePreviewTemp': 'template/TemplateController.deletePreviewTemp',
     'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
+
 
     /**
      * Template Data for App Category Media

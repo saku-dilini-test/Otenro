@@ -1,13 +1,8 @@
-// Ionic Starter App
+// ---  app js  ----
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic','starter.services','starter.controllers'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,readMadeEasy,$rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,6 +15,27 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    if (typeof $rootScope.appId === 'undefined'){
+
+      readMadeEasy.readFile().success(function(data){
+        $rootScope.appId = data.appId;
+      });
+    }
+
+    if (typeof $rootScope.userId === 'undefined'){
+
+      readMadeEasy.readFile().success(function(data){
+        $rootScope.userId = data.userId;
+      });
+    }
+    if (typeof $rootScope.appName === 'undefined'){
+
+      readMadeEasy.readFile().success(function(data){
+        $rootScope.appName = data.name;
+      });
+    }
+
   });
 })
 
@@ -52,7 +68,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
     .state('tab.items', {
-    url: '/menu/:menuId',
+    url: '/menu/:menuId/:menuName',
     views: {
       'tab-menu': {
         templateUrl: 'templates/tab-items.html',
