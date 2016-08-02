@@ -40,7 +40,8 @@
     "angular-bind-html-compile": "^1.2.1",
     "ng-csv": "^0.3.6",
     "ng-img-crop": "ngImgCrop#0.3.2",
-    "ngCroppie": "*"
+    "ngCroppie": "*",
+    "angular-loading-bar": "^0.9.0"
   },
   "name": "meV2",
   "version": "0.0.0",
