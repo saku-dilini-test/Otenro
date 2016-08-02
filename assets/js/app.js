@@ -45,7 +45,8 @@ angular.module('app', [
   'ui.grid.selection',
   'angular-bind-html-compile',
   'ngCsv',
-  'ngImgCrop'
+  'ngImgCrop',
+  'angular-loading-bar'
 
 
 ]).run(function($rootScope, $state, $auth,Auth) {

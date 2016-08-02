@@ -1,4 +1,4 @@
-var mobileApp = angular.module('mobileApp', ['ngRoute', 'ngAnimate', 'pascalprecht.translate', 'ngCookies', 'ngSanitize']);
+var mobileApp = angular.module('mobileApp', ['angular-loading-bar','ngRoute', 'ngAnimate', 'pascalprecht.translate', 'ngCookies', 'ngSanitize']);
 //Set your token database
 var token = 'a8B6c4D4e8F0';
 //Set url service app

@@ -24,6 +24,7 @@
     <!-- ui-iconpicker CSS -->
     <link rel="stylesheet" href="//rawgithub.com/justin-lau/ui-iconpicker/v0.1.4/dist/styles/ui-iconpicker.min.css">
     <link rel="stylesheet" href="css/ratchet.css">
+    <link rel='stylesheet' href='lib/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
     <!-- JS -->
     <script type="text/javascript" src="cordova.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
@@ -45,6 +46,7 @@
     <script src="lib/translate/service/translate.js"></script>
     <script src="lib/translate/directive/translate.js"></script>
     <script src="lib/translate/filter/translate.js"></script>
+    <script type='text/javascript' src='lib/angular-loading-bar/build/loading-bar.min.js'></script>
 
     <script src="lib/map/angular-google-maps.min.js?sensor=false"></script>
 
@@ -90,6 +92,7 @@
 </head>
 
 <body ng-app="mobileApp">
+    <ion-spinner icon="android"></ion-spinner>
     <header ng-show="header" class="bar bar-nav">
         <a ng-show="backNav" class="icon icon-left-nav pull-left" ng-click="back()"></a>
         <a ng-show="reloadNav" class="icon icon-refresh pull-right" href ng-click="goReload()"></a>
