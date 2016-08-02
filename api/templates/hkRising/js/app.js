@@ -46,6 +46,8 @@ angular.module('starter', ['ionic', 'ionicLazyLoad','starter.services','starter.
 })
 .config(function($ionicConfigProvider) {
   $ionicConfigProvider.views.forwardCache(true);
+  $ionicConfigProvider.backButton.previousTitleText(false).text('');
+  $ionicConfigProvider.backButton.text("Back");
 })
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
