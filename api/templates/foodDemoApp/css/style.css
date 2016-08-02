@@ -148,6 +148,8 @@ cursor: url(../img/cursor.cur), auto;
 	font-family:"Times New Roman", Times, serif;
 	width: 100%;
 	cursor: url(../img/cursor.cur), auto;
+	margin-top: 20px;
+    margin-left: -45px;
 }
 .cards{
 	max-width: 100%;
