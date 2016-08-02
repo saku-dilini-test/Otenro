@@ -3,7 +3,7 @@
     <div class="cards cards-home" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">
         <img src="img/item/{{item.imgUrl}}" width="70%">
         <h3 class="made-easy-header-font">{{item.name}}  {{item.price}}</h3>
-        <p>{{item.description}}</p>     
+        <p class="made-easy-content-font">{{item.description}}</p>
 
         <button class="made-easy-button-setting" ng-disabled="!(isEnableLeftButton)" ng-click="onSwipeLeft()" class="button">Left</button>
         <button class="made-easy-button-setting" ng-disabled="!(isEnableRightButton)" ng-click="onSwipeRight()" class="button">Right</button>

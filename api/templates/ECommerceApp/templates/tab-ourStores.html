@@ -1,15 +1,17 @@
-<ion-view class="made-easy-header-font made-easy-background-color made-easy-background-image" view-title="Our Stores">
+<ion-view class="made-easy-background-color made-easy-background-image" view-title="Our Stores">
   <ion-content class="made-easy-aboutUs">      
       <div class="cards cards-ourStores">
           <div class="google-map-area"> Map Here </div>
           <div ng-repeat="store in stores">
-              <p>{{store.name}}</p>
-              <address>{{store.address}}</address>                  
+              <div class="made-easy-content-font">
+                <p>{{store.name}}</p>
+                <address>{{store.address}}</address>
+              </div>
           </div>          
       </div>
       <div class="cards cards-social-share">
-            <button class="made-easy-button-setting">Share On Facebook</button>
-            <button class="made-easy-button-setting">Share on Twitter</button>
+            <button >Share On Facebook</button>
+            <button >Share on Twitter</button>
       </div>
   </ion-content>
 </ion-view>

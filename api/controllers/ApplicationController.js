@@ -118,14 +118,14 @@ module.exports = {
                 color : {
                     backgroundColor: true,
                     navigationColor: true,
-                    footerColor: true
+                    footerColor: false
                 },
                 typography : {
                     header : true,
                     content : true,
-                    footer : true
+                    footer : false
                 },
-                button : true
+                button : false
             }
 
         }
