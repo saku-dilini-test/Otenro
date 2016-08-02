@@ -120,7 +120,7 @@ module.exports = {
             imageUrl : 'ECommerceApp/ECommerceApp.png',
             gifImageUrl : 'ECommerceApp/ecommerce.png',
             templateFilesPath:'templates/ECommerceApp',
-            templateCategory: TemplateCategoryDetails.Media.ID
+            templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
             template_name : 'fashionApp',

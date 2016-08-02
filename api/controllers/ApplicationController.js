@@ -243,7 +243,8 @@ module.exports = {
         /**
          * If Only foodDemoApp or foodDemoApp2 Category & Product Feed to DB
          */
-        if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2' || templateName == 'clothingApp') {
+        if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2' || templateName == 'clothingApp'
+            || templateName == 'ECommerceApp') {
             var searchAppInitialData = {
                 'templateName': templateName
             }

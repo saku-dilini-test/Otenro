@@ -77,6 +77,25 @@ module.exports = {
         }
     },
 
+    /**
+     * return subChild Collections for given app Id
+     * (third Navigation)
+     * @param req
+     * @param res
+     */
+    getSubChildsByAppId : function(req,res){
+
+        var appId = req.param('appId');
+        var searchApp = {
+            appId : appId
+        };
+
+        ThirdNavigation.find(searchApp).exec(function(err, app) {
+            if (err) return done(err);
+            res.json(app);
+        });
+    },
+
     getSubChildById : function(req,res){
 
         var productId = req.param('productId');
