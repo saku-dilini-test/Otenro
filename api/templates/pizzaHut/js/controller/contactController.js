@@ -5,6 +5,7 @@ mobileApp.controller('contactController', function($scope,$translate, $rootScope
 	$scope.serviceApi		=  serviceApi;
 	$scope.GetServiceApi	=  GetServiceApi;
 	$scope.appName 			= $rootScope.appName;
+	$scope.appId = $rootScope.appId;
 
 	$scope.imageURL = "img/header.jpg";
     $scope.marker="";
