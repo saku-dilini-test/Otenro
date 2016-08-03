@@ -8,6 +8,7 @@ var fs = require('fs-extra'),
     config = require('../services/config'),
     xml2js = require('xml2js');
 
+
 module.exports = {
 
     designApps : function(req,res){
@@ -49,6 +50,7 @@ module.exports = {
             function(err, data) {
 
                 if(!data || err ){
+
                     fs.copy(srcPath, copyDirPath, function (err) {
                         if (err) return res.negotiate(err);
                         //Success
@@ -69,13 +71,15 @@ module.exports = {
                                         if (err) return res.negotiate(err);
                                         replaceAppNameNIcon(app.appName, app.appIcon);
                                     });
+
+
+
                                 });
                             })
                         }
                     });
 
                 }else{
-
                     var parser = new xml2js.Parser(),
                         xmlBuilder = new xml2js.Builder();
 
@@ -100,7 +104,9 @@ module.exports = {
                                     version : version
                                 }).exec(function(err,build){
                                     if (err) return res.negotiate(err);
-                                    if(build) res.json('ok');
+                                    if(build) {
+                                        buildApkFile(copyDirPath);
+                                    }
                                 });
                             });
                         });
@@ -156,7 +162,9 @@ module.exports = {
                             version : result.widget['$'].version
                         }).exec(function(err,build){
                             if (err) return res.negotiate(err);
-                            if(build) res.json('ok');
+                            if(build) {
+                                buildApkFile(copyDirPath);
+                            }
                         });
                     });
                 }
@@ -180,5 +188,37 @@ module.exports = {
             return array[0]+"."+array[1]+"."+array[2];
         }
 
+
+        function buildApkFile(appPath) {
+            var shell = require('shelljs');
+            var path = require('path');
+            var mime = require('mime');
+
+            shell.cd(appPath);
+            shell.exec('ionic build android', {async: true}, function (code, stdout, stderr) {
+                console.log('Exit code:', code);
+                console.log('Program output:', stdout);
+                console.log('Program stderr:', stderr);
+                console.log('Exit code:', code);
+                if (code==0){
+                    var file = appPath + '/platforms/android/build/outputs/apk/android-debug.apk';
+
+                    var filename = path.basename(file);
+                    var mimetype = mime.lookup(file);
+
+                    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                    res.setHeader('Content-type', mimetype);
+
+                    var filestream = fs.createReadStream(file);
+                    filestream.pipe(res);
+                    /*res.json('ok');*/
+                }else{
+                    if (stderr) return res.negotiate(stderr);
+                }
+                shell.code;
+            });
+
+
+        }
     }
 };

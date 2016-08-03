@@ -1,244 +1,85 @@
-var mobileApp = angular.module('mobileApp', ['ngRoute', 'ngAnimate', 'pascalprecht.translate', 'ngCookies', 'ngSanitize']);//ui-iconpicker
-//Set your token database
-var token = 'a8B6c4D4e8F0';
-//Set url service app
-var serviceApi = 'http://localhost:1337/';
-var GetServiceApi = 'http://localhost:1337/';
-var SERVER_URL = 'http://localhost:1337';
+// Ionic Starter App
 
-mobileApp.run(function($rootScope, $timeout, $translate, $location, appService,readMadeEasy) {
-    $rootScope.footerBadge = 0;
-    $rootScope.startPage = 0;
+// angular.module is a global place for creating, registering and retrieving Angular modules
+// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires'
+// 'starter.services' is found in services.js
+// 'starter.controllers' is found in controllers.js
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-    FastClick.attach(document.body);
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.disableScroll(true);
 
-    $rootScope.$on('$routeChangeStart', function() {
-        $rootScope.loading = true;
-    });
-
-    $rootScope.$on('$routeChangeSuccess', function() {
-        $timeout(function() {
-            $rootScope.loading = false;
-        }, 1000);
-
-        $rootScope.headerSecondary = true;
-        $rootScope.footerSecondary = true;
-        $rootScope.favoritesNav = false;
-        $rootScope.detailTotal = true;
-        $rootScope.header = true;
-        $rootScope.nav = true;
-
-        if ($rootScope.startPage <= 1) {
-            $rootScope.backNav = false;
-        } else {
-            $rootScope.backNav = true;
-        }
-
-        if ($location.path() != '/') {
-            $rootScope.backNav = true;
-        }
-        $rootScope.startPage++;
-    });
-
-    $rootScope.$on('$routeChangeError', function() {
-        $timeout(function() {
-            $rootScope.loading = false;
-        }, 1000);
-    });
-
-    $rootScope.back = function() {
-        window.history.back();
-    };
-
-    $rootScope.dataCart = {
-        items: []
-    };
-
-    $rootScope.go = function(path) {
-        $location.path(path);
-    };
-
-    //Phonegap action
-    $rootScope.goExit = function() {
-        if (navigator.app) {
-            navigator.app.exitApp();
-        } else if (navigator.device) {
-            navigator.device.exitApp();
-        }
-    };
-
-    $rootScope.goURL = function(url) {
-        navigator.app.loadUrl(url, {
-            openExternal: true
-        });
-        return false;
-    };
-
-    $rootScope.goShare = function() {
-        window.plugins.socialsharing.available(function(isAvailable) {
-            if (isAvailable) {
-                // message, subject, image and link
-                window.plugins.socialsharing.share($translate.instant('config.share.Massage'), $translate.instant('config.share.Subject'), null, $translate.instant('config.share.Link'));
-            }
-        });
-    };
-
-    //if (typeof $rootScope.setting === 'undefined') {
-    //    appService.HttpRequest('GET', GetServiceApi + 'service/get_setting?token=' + token).success(function(data) {
-    //        $rootScope.setting = data;
-    //        $rootScope.tax = parseInt(data[0].setting_tax);
-    //        $rootScope.shipping = parseInt(data[0].setting_delivery_fee);
-    //    });
-    //}
-
-    if (typeof $rootScope.appId === 'undefined'){
-
-        readMadeEasy.readFile().success(function(data){
-            $rootScope.appId = data.appId;
-            console.log(data);
-        });
     }
-
-    if (typeof $rootScope.userId === 'undefined'){
-
-        readMadeEasy.readFile().success(function(data){
-            $rootScope.userId = data.userId;
-        });
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
     }
-    if (typeof $rootScope.appName === 'undefined'){
+  });
+})
 
-        readMadeEasy.readFile().success(function(data){
-            $rootScope.appName = data.name;
-        });
+.config(function($stateProvider, $urlRouterProvider) {
+
+  // Ionic uses AngularUI Router which uses the concept of states
+  // Learn more here: https://github.com/angular-ui/ui-router
+  // Set up the various states which the app can be in.
+  // Each state's controller can be found in controllers.js
+  $stateProvider
+
+  // setup an abstract state for the tabs directive
+    .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  })
+
+  // Each tab has its own nav history stack:
+
+  .state('tab.dash', {
+    url: '/dash',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-dash.html',
+        controller: 'DashCtrl'
+      }
     }
+  })
 
-});
+  .state('tab.chats', {
+      url: '/chats',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/tab-chats.html',
+          controller: 'ChatsCtrl'
+        }
+      }
+    })
+    .state('tab.chat-detail', {
+      url: '/chats/:chatId',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chat-detail.html',
+          controller: 'ChatDetailCtrl'
+        }
+      }
+    })
 
-mobileApp.directive('whenScrolled', function() {
-    return function(scope, elm, attr) {
-        var raw = elm[0];
-        elm.bind('scroll', function() {
-            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
-                scope.$apply(attr.whenScrolled);
-            }
-        });
-    };
-});
+  .state('tab.account', {
+    url: '/account',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/tab-account.html',
+        controller: 'AccountCtrl'
+      }
+    }
+  });
 
-mobileApp.config(['$translateProvider', function($translateProvider) {
-    // Register a loader for the static files
-    // So, the module will search missing translation tables under the specified urls.
-    // Those urls are [prefix][langKey][suffix].
-    $translateProvider.useStaticFilesLoader({
-        prefix: 'l10n/',
-        suffix: '.json'
-    });
-    // Tell the module what language to use by default
-    $translateProvider.preferredLanguage('en_US');
-}])
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/tab/dash');
 
-.controller('ctrl', ['$scope', '$translate', function($scope, $translate) {
-    $scope.setLang = function(langKey) {
-        // You can change the language during runtime
-        $translate.use(langKey);
-    };
-}]);
-
-mobileApp.config(function($routeProvider) {
-    $routeProvider
-        .when('/', {
-            templateUrl: 'tpl/home.html',
-            controller: 'mainController',
-            activePage: 'home'
-        })
-        .when('/menu/:category/:title', {
-            templateUrl: 'tpl/menu.html',
-            controller: 'menuController',
-            activePage: 'menu'
-        })
-        .when('/detail/:id/:title', {
-            templateUrl: 'tpl/detail.html',
-            controller: 'detailController',
-            activePage: 'detail'
-        })
-        .when('/category/:id/:title', {
-            templateUrl: 'tpl/category.html',
-            controller: 'categoryController',
-            activePage: 'category'
-        })
-        .when('/search', {
-            templateUrl: 'tpl/search.html',
-            controller: 'searchController',
-            activePage: 'search'
-        })
-        .when('/cart', {
-            templateUrl: 'tpl/cart.html',
-            controller: 'cartController',
-            activePage: 'cart'
-        })
-        .when('/provideDetail', {
-            templateUrl: 'tpl/provideDetail.html',
-            controller: 'cartController',
-            activePage: 'cart'
-        })
-        .when('/favorites', {
-            templateUrl: 'tpl/favorites.html',
-            controller: 'favoritesController',
-            activePage: 'favorites'
-        })
-        .when('/contact', {
-            templateUrl: 'tpl/contact.html',
-            controller: 'contactController',
-            activePage: 'contact'
-        })
-        .when('/message', {
-            templateUrl: 'tpl/message.html',
-            controller: 'messageController',
-            activePage: 'message'
-        })
-        .when('/orders', {
-            templateUrl: 'tpl/orders.html',
-            controller: 'ordersController',
-            activePage: 'orders'
-        })
-        .when('/promo', {
-            templateUrl: 'tpl/promo.html',
-            controller: 'promoController',
-            activePage: 'promo'
-        })
-        .when('/promoDetail/:id/:title', {
-            templateUrl: 'tpl/promoDetail.html',
-            controller: 'promoDetailController',
-            activePage: 'promoDetail'
-        })
-        .when('/register', {
-            templateUrl: 'tpl/register.html',
-            controller: 'registerController',
-            activePage: 'register'
-        })
-        .when('/login', {
-            templateUrl: 'tpl/login.html',
-            controller: 'loginController',
-            activePage: 'login'
-        })
-        .when('/account', {
-            templateUrl: 'tpl/account.html',
-            controller: 'accountController',
-            activePage: 'account'
-        })
-        .when('/bestSeller', {
-            templateUrl: 'tpl/bestSeller.html',
-            controller: 'bestSellerController',
-            activePage: 'about'
-        })
-        .when('/more', {
-            templateUrl: 'tpl/more.html',
-            controller: 'moreController',
-            activePage: 'more'
-        });
-});
-
-//navCtrl definition
-mobileApp.controller('navCtrl', function($scope, $route) {
-    $scope.$route = $route;
 });
