@@ -155,18 +155,56 @@ module.exports = {
             var searchApp = {
                 id : req.body.variant.productId
             };
-            ThirdNavigation.find(searchApp).exec(function(err, app) {
+            ApplicationInventory.find({productId: req.body.variant.productId}).exec(function(err, appInventory) {
                 if(err) return done(err);
-                var imageUrl = app[0].imageUrl;
-                ThirdNavigation.destroy(deleteQuery).exec(function (err) {
-                    if (err) return done(err);
-                    var filePath = config.ME_SERVER + req.body.userId + '/templates/' + appId+ '/img/thirdNavi/'+ imageUrl;
-                    fs.unlink(filePath, function (err) {
-                        if (err) return done(err);
-                        res.send(200,{message:'Deleted Article'});
-                    });
-                });
+                if(appInventory.length == 1){
+                    ApplicationInventory.find({id: req.body.id}).exec(function(err, inventory){
+                        if(err) return done(err);
+                        ApplicationInventory.destroy({id: req.body.id}).exec(function(err, dlte){
+                            if(err) return done(err);
 
-            });
+                        PriceAndVariants.find({id: req.body.id}).exec(function(err, variants){
+                            if(err) return done(err);
+                          PriceAndVariants.destroy({id: req.body.id}).exec(function(err, dlteV){
+                            if(err) return done(err);
+
+                            ThirdNavigation.find(searchApp).exec(function(err, app){
+                                if(err) return done(err);
+                                var imageUrl = app[0].imageUrl;
+                            ThirdNavigation.destroy(deleteQuery).exec(function (err) {
+                                if (err) return done(err);
+                                var filePath = config.ME_SERVER + req.body.userId + '/templates/' + appId+ '/img/thirdNavi/'+ imageUrl;
+                                fs.unlink(filePath, function (err) {
+                                    if (err) return done(err);
+                                    res.send(200,{message:'Deleted Article'});
+                                });
+                            });
+                            })
+                          })
+                    })
+                    })
+
+                    });
+
+                }
+                else{
+                    ApplicationInventory.find({id: req.body.id}).exec(function(err, inventory){
+                        if(err) return done(err);
+                        ApplicationInventory.destroy({id: req.body.id}).exec(function(err, dlte){
+                            if(err) return done(err);
+
+                    PriceAndVariants.find({id: req.body.id}).exec(function(err, variants){
+                        if(err) return done(err);
+                          PriceAndVariants.destroy({id: req.body.id}).exec(function(err, dlteV){
+                            if(err) return done(err);
+                            res.send(200,{message:'Deleted Article'})
+                          })
+                    })
+                    })
+
+                    });
+
+                }
+            })
         }
 };
