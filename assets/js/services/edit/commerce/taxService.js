@@ -53,6 +53,9 @@
             },
             deleteTaxInfo : function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteTaxInfo',data);
+            },
+            getAllCountry:function(){
+                return $http.get(SERVER_URL+ 'edit/getAllCountry');
             }
         }
 
