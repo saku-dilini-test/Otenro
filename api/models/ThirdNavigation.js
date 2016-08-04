@@ -29,7 +29,7 @@ module.exports = {
             type : 'string',
         },
         variants:{
-            type: 'string'
+            type: 'json'
         },
 //        sku:{
 //            type : 'integer',

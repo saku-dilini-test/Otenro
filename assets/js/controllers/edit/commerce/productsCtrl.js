@@ -218,23 +218,25 @@
                 .success(function (result) {
                     $scope.product = result[0];
                     $scope.selectedLink = $scope.product.type;
-                    $scope.picFile = "templates/viewImages?img=thirdNavi/" + result[0].imageUrl + "&userId=" + $scope.userId + "&appId=" + $rootScope.appId;
-                    if (result[0].size != null) {
-                        item.size = result[0].size;
+                    $scope.product.sku = item.sku;
+                    $scope.tmpImage[0] = ME_APP_SERVER + 'temp/' + $auth.getPayload().id + '/templates/' + $rootScope.appId + '/img/thirdNavi/' + result[0].imageUrl;
+                    var variantsList = result[0].variants;
+                    if (variantsList[0].size != null) {
+                        item.size = variantsList[0].size;
                         $scope.variants = [{
-                            sku: result[0].sku,
+                            sku: item.sku,
                             name: item.name,
-                            size: result[0].size,
+                            size: variantsList[0].size,
                             price: item.price,
                             quantity: item.quantity
                         }];
                     }
                     else {
-                        item.size = result[0].weight;
+                        item.size = variantsList[0].weight;
                         $scope.variants = [{
-                            sku: result[0].sku,
+                            sku: item.sku,
                             name: item.name,
-                            size: result[0].weight,
+                            size: variantsList[0].weight,
                             price: item.price,
                             quantity: item.quantity
                         }];
