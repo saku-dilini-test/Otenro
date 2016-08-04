@@ -1,6 +1,6 @@
 // ---  app js  ----
 
-angular.module('starter', ['ionic','starter.services','starter.controllers'])
+var mobileApp = angular.module('starter', ['ionic','satellizer','starter.services','starter.controllers'])
 
 .run(function($ionicPlatform,readMadeEasy,$rootScope) {
   $ionicPlatform.ready(function() {
@@ -45,8 +45,32 @@ angular.module('starter', ['ionic','starter.services','starter.controllers'])
     .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'templates/tabs.html',
+        controller: 'AppCtrl'
   })
+      .state('login', {
+        url: '/login',
+        templateUrl: 'templates/login.html'
+      })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'templates/register.html',
+        controller: 'RegisterCtrl'
+      })
+      .state('cart', {
+        url: '/cart',
+        templateUrl: 'templates/cart.html',
+        controller: 'CartCtrl'
+      })
+      .state('deliverDetails', {
+        cache: false,
+        url: '/deliverDetails',
+        params:{
+          item: null
+        },
+        templateUrl: 'templates/deliverDetails.html',
+        controller: 'CartCtrl'
+      })
 
   // Each tab has its own nav history stack:
   .state('tab.home', {
@@ -77,7 +101,8 @@ angular.module('starter', ['ionic','starter.services','starter.controllers'])
     }
   })
   .state('tab.item', {
-    url: '/item/:itemId',
+        cache: false,
+    url: '/item/:itemId/:itemName',
     views: {
       'tab-menu': {
         templateUrl: 'templates/tab-item.html',

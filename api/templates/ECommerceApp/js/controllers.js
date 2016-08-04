@@ -1,5 +1,14 @@
 angular.module('starter.controllers', [])
 
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$rootScope) {
+
+    $rootScope.cart = {cartItems:[],cartSize:0,totalPrice:0};
+
+    $scope.parentobj = {};
+    $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+
+})
+
 .controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices) {
 
     $ionicLoading.show({
@@ -97,7 +106,10 @@ angular.module('starter.controllers', [])
         });
 })
 
-.controller('ItemCtrl', function($scope,$stateParams,appServices) {
+.controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices) {
+
+    // set select Item Name
+        $scope.itemName = $stateParams.itemName;
 
     // set select Menu Id
     var itemId = $stateParams.itemId;
@@ -105,9 +117,53 @@ angular.module('starter.controllers', [])
     appServices.getItemById(itemId)
         .success(function (data) {
             $scope.item = data;
+            $scope.productVariants = data.variants;
+            if(data.variants.length > 0){
+                $scope.selectedVariant = data.variants[0];
+                if($scope.selectedVariant.quantity > 0 ){
+                    $scope.isBuyBtnDisable = false;
+                }else{
+                    $scope.isBuyBtnDisable = true;
+                }
+            }
         }).error(function (err) {
             alert('Item Loading error');
         });
+
+    // variant change function
+    $scope.changeVariant = function(variant){
+        $scope.selectedVariant = variant;
+        if(variant.quantity > 0 ){
+            $scope.isBuyBtnDisable = false;
+        }else{
+            $scope.isBuyBtnDisable = true;
+        }
+    };
+
+    // item add function for cart
+    $scope.addToCart = function() {
+        if($scope.selectedVariant.buyQuantity == null){
+            $ionicPopup.alert({
+                title: 'Please enter a quantity',
+                template: 'Warning!!!',
+                cssClass: 'ionicPopUp'
+            });
+        }else{
+        $rootScope.cart.cartItems.push({
+            id: $scope.selectedVariant.id,
+            productId: $scope.selectedVariant.productId,
+            name: $scope.item.name,
+            qty:$scope.selectedVariant.buyQuantity,
+            price: $scope.selectedVariant.price,
+            total : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.price
+
+        });
+        $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
+        $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+        $state.go('cart');
+        }
+    }
+
 })
 
 .controller('OurStoresCtrl', function($scope) {
