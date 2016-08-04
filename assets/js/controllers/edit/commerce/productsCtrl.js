@@ -17,6 +17,9 @@
         $scope.userId = $auth.getPayload().id;
         $scope.isDigital = false;
 
+        $scope.maxLengthDesc = 100;
+        $scope.maxLengthName = 15;
+        $scope.maxLengthSku = 10;
 
 
 
