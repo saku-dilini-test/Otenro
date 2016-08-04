@@ -215,6 +215,7 @@ module.exports.routes = {
     'GET /edit/getTaxInfo': 'edit/commerce/TaxController.getTaxInfo',
     'POST /edit/updateTaxInfo': 'edit/commerce/TaxController.updateTaxInfo',
     'POST /edit/deleteTaxInfo': 'edit/commerce/TaxController.deleteTaxInfo',
+    'GET /edit/getAllCountry': 'edit/commerce/TaxController.getAllCountry',
     
     /**
      * EngageController
