@@ -1,8 +1,8 @@
-mobileApp.controller('detailController', function($scope, $rootScope,$http, $translate, appService, $routeParams, $filter) {
+mobileApp.controller('detailController', function($scope, $rootScope,$http, $translate, appService, $routeParams, $filter, constants) {
     $scope.pageClass 		= 'slideLeft';
 	$scope.serviceApi		= serviceApi;
 	$scope.GetServiceApi	= GetServiceApi;
-	$rootScope.appTitle 	= $routeParams.title;
+//	$rootScope.appTitle 	= $routeParams.title;
 	$rootScope.itemID		= $routeParams.id;
 	$scope.itemCount		= 1;
 	$rootScope.favoritesNav = true;
@@ -18,17 +18,22 @@ mobileApp.controller('detailController', function($scope, $rootScope,$http, $tra
 		.success(function(data) {
 			//alert(templates);
 			$scope.requestDetail = data;
-			//console.log(data);
+			$rootScope.appTitle 	= $scope.requestDetail.name;
+//			console.log(data);
 		}).error(function(err) {
 			alert('warning', "Unable to get Product", err.message);
 		});
 
 	$http.get(SERVER_URL + '/templates/getCurrency?appId='+$rootScope.appId).success(function(data) {
 		//alert(templates);
-		$scope.requestCurrency = data.appSettings.appCurrency.sign;
+		$scope.currency = data;
 	}).error(function(err) {
 		alert('warning', "Unable to get templates", err.message);
 	});
+
+	$scope.imageURL = constants.SERVER_URL
+                    +"/templates/viewImages?userId="
+                    +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
 
 	$rootScope.goFavorites  = function() {
 		$rootScope.favoritesNav = false;

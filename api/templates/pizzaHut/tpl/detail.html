@@ -1,25 +1,44 @@
-<span ng-repeat="showData in requestDetail">
+<span>
 	<div class="profile-box">
-		<div class="profile-cover-image-blur">
-			<img ng-src="{{serviceApi}}templates/viewImages?img=thirdNavi/{{showData.imageUrl}}&userId={{userId}}&appId={{appId}}" onerror="this.src='img/250x250.gif'" />
-		</div>
-		<div class="profile-picture">
-			<img ng-src="{{serviceApi}}templates/viewImages?img=thirdNavi/{{showData.imageUrl}}&userId={{userId}}&appId={{appId}}" onerror="this.src='img/250x250.gif'"/>
+		<div >
+			<img ng-src="{{imageURL}}/{{requestDetail.imageUrl}}" width="100%" height="auto"/>
 		</div>
 		<div class="profile-content">
-			<h3>{{showData.name}}</h3>
-			<h4>
-				{{showData.price | currency:requestCurrency }}
-				 <span class="badge badge-negative" ng-if="showData.menu_disc!=0">
-					-{{showData.discount}}%
-				</span>
-			</h4>
-			<ul ng-show="detailTotal" class="table-view">
-			  <li class="table-view-divider">Total : {{itemCount*showData.price | currency:requestCurrency}}</li>
-			</ul>
-			<p>
-				{{showData.desc}}
-			</p>
+			<div class="animated rubberBand item-name" >
+				<div class="made-easy-header-font">{{requestDetail.name}}</div>
+			</div>
+			<div class="animated zoomIn">
+				<div class="made-easy-content-font">{{requestDetail.detailedDesc}}</div>
+			</div>
+			<div class="row">
+				<div class="col2 font-size:12px ">Size</div>
+				<div class="col2 font-size:12px">Price</div>
+				<div class="col2 font-size:12px">Qty</div>
+			</div>
+			<div class="row">
+				<select ng-model="selectedVariant"
+						ng-options="variant.size  for variant in requestDetail.variants"
+						ng-change="changeVariant(selectedVariant)">
+				</select>
+				<div style="font-size:12px; width:1000px;">
+					{{currency.sign}} : {{selectedVariant.price}}
+				</div>
+					<div>
+					<input type="number"
+						   class="item-buy-quantity"
+						   ng-model="selectedVariant.buyQuantity">
+				</div>
+			</div>
+			<div class="row">
+				<p class="animated zoomIn item-error-message"
+				   ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity != 1">
+					Please enter a quantity of {{selectedVariant.quantity}} or less.
+				</p>
+				<p class="animated zoomIn item-error-message"
+				   ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
+					Please enter a quantity of {{selectedVariant.quantity}}.
+				</p>
+			</div>
 		</div>
 	</div>
 	<div ng-show="footerSecondary" class="bar bar-standard bar-footer-secondary">
