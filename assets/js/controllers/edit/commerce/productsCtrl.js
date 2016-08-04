@@ -69,7 +69,8 @@
                         commerceService.getCategoryList()
                             .success(function (secondResult) {
                                 $scope.mainMenu = secondResult;
-                                if (secondResult[0].templateName == 'foodDemoApp' || secondResult[0].templateName == 'foodDemoApp2') {
+                                if (secondResult[0].templateName == 'foodDemoApp' || secondResult[0].templateName == 'foodDemoApp2'
+                                    || secondResult[0].templateName == 'clothingApp' || secondResult[0].templateName == 'ECommerceApp') {
                                     $scope.show = false;
                                 }
                             }).error(function (error) {
@@ -101,7 +102,8 @@
         };
 
         $scope.nextStep2 = function (current, product) {
-            if ($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "foodDemoApp2") {
+            if ($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "foodDemoApp2"
+                || $scope.categories[0].templateName == "clothingApp" || $scope.categories[0].templateName == "ECommerceApp") {
                 if (product.name == null || product.mainId == null) {
                     toastr.error('Fill all the fields', 'Warning', {
                         closeButton: true
@@ -263,7 +265,7 @@
 
         $scope.addProducts = function (file, product, productFile) {
             if ($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "clothingApp"
-                || $scope.categories[0].templateName == "foodDemoApp2") {
+                || $scope.categories[0].templateName == "foodDemoApp2" || $scope.categories[0].templateName == "ECommerceApp") {
                 if (file == null) {
                     toastr.error('select image', 'Warning', {
                         closeButton: true
