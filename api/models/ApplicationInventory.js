@@ -33,7 +33,7 @@ module.exports = {
             defaultsTo : 0
         },
         sku : {
-            type : 'String'
+            type : 'integer'
         },
         productId:{
             type: 'string'
