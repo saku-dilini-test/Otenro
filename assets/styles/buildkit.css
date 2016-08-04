@@ -1273,9 +1273,18 @@ md-dialog{
     overflow-x: hidden;
     overflow-y: scroll;
     padding: 25px 40px 0;
-    position: relative;
 }
-
+.md-dialog-main1{
+    height: 322px;
+    /*overflow-x: hidden;
+    overflow-y: scroll;*/
+    padding: 25px 40px 0;
+    position: relative;
+    display: inline-block;
+}
+.scrolling{
+   height:200px;
+}
 .md-dialog-full{
     height: 322px;
     overflow-x: hidden;
