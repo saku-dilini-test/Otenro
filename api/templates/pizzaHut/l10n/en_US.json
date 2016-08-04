@@ -109,8 +109,12 @@
 	"Share" 		: "Share App",
 	"Contact" 		: "Contact",
 	"About" 		: "About Us",
-	"Logout"	 	: "Logout"
+	"Logout"	 	: "Logout",
+	"AboutUs"	 	: "About Us"
 		},
+  "aboutUs": {
+	  "Title" 		: "About Us"
+	},
   "contact" : {
 	"Title" 		: "Contact Us",
 	"Desc" 			: "Opening Hours",

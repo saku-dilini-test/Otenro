@@ -247,6 +247,11 @@ mobileApp.config(function($routeProvider) {
             controller: 'bestSellerController',
             activePage: 'about'
         })
+        .when('/aboutUs', {
+            templateUrl: 'tpl/aboutUs.html',
+            controller: 'aboutUsController',
+            activePage: 'about'
+        })
         .when('/more', {
             templateUrl: 'tpl/more.html',
             controller: 'moreController',
