@@ -90,7 +90,7 @@ module.exports = {
 
     Facebook.getAccessToken({
       appId: req.body.clientId,
-      appSecret: 'ad82fde6a6570d7172e19d6cf8008cf7',
+      appSecret: '7e805de281e9ec8c3a842a5b964f181b',
       code: req.body.code,
       callbackUrl: req.body.redirectUri
     }).exec({
