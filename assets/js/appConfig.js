@@ -33,8 +33,9 @@
             });
 
             $authProvider.facebook({
-                clientId: '459707740889740',
-                redirectUri : window.location.origin+'/auth/facebook'
+                clientId: '1585938975033935',
+               /* redirectUri : window.location.origin+'/auth/facebook'*/
+                redirectUri : 'http://simatosolutions.com:1340'+'/auth/facebook'
             });
         });
 })();
