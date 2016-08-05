@@ -28,8 +28,8 @@
                                 <th>sale price</th>
                                 <th>Action</th>
                             </thead>
-                            <tbody>
-                                <tr dir-paginate="inventory in inventoryList | filter:search | itemsPerPage: pageSize" current-page="currentPage">
+                            <tbody class="scrolling">
+                                <tr  dir-paginate="inventory in inventoryList | filter:search | itemsPerPage: pageSize" current-page="currentPage">
                                     <td class="checkbox-row">
                                         <md-checkbox md-no-ink  aria-label="Check one item"></md-checkbox>
                                     </td>
