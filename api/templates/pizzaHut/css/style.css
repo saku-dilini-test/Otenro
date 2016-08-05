@@ -45,6 +45,10 @@
     padding: 5px;
     width: 100%;
 }
+.ui-notification.error{
+    color: #8C8C8C;
+    background-color: #e34343;
+}
 input[type="range"] {
 	-webkit-appearance: none !important;
 	width: 100%;
