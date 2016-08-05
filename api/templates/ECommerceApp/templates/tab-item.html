@@ -1,19 +1,57 @@
-<ion-view class="made-easy-background-color made-easy-background-image" view-title="{{item.name}}">
+<ion-view class="made-easy-background-color made-easy-background-image" view-title="{{itemName}}">
     <ion-content class="padding">
         <div class="cards cards-item">
             <div class="header">
                 <div class="header-image">
-                    <img ng-src="img/thirdNavi/{{item.imageUrl}}" width="100%">
+                    <!--<img ng-src="img/thirdNavi/{{item.imageUrl}}" width="100%">-->
                 </div>
             </div>
 
-            <div class="made-easy-header-font">
-                <p>{{item.name}}</p>
-                <p>{{item.price}}</p>
-            </div>
-
-            <div class="made-easy-content-font">
-                <p>{{item.detailedDesc}}</p>
+            <div class="item item-text-wrap">
+                <div class="animated rubberBand item-name" >
+                    <div class="made-easy-header-font">{{item.name}}</div>
+                </div>
+                <div class="animated zoomIn">
+                    <div class="made-easy-content-font">{{item.detailedDesc}}</div>
+                </div>
+                <div class="row">
+                    <div class="col2 font-size:12px ">Size</div>
+                    <div class="col2 font-size:12px">Price</div>
+                    <div class="col2 font-size:12px">Qty</div>
+                </div>
+                <div class="row">
+                    <select ng-model="selectedVariant"
+                            ng-options="variant.size  for variant in foodInfo.variants"
+                            ng-change="changeVariant(selectedVariant)">
+                    </select>
+                    <div class="col2 font-size:12px">
+                        {{currency.sign}} : {{selectedVariant.price}}
+                    </div>
+                    <div class="col2">
+                        <input type="number"
+                               class="item-buy-quantity"
+                               ng-model="selectedVariant.buyQuantity">
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="animated zoomIn item-error-message"
+                       ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity != 1">
+                        Please enter a quantity of {{selectedVariant.quantity}} or less.
+                    </p>
+                    <p class="animated zoomIn item-error-message"
+                       ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
+                        Please enter a quantity of {{selectedVariant.quantity}}.
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col2">
+                        <button class="button button-small button-calm"
+                                ng-disabled="isBuyBtnDisable"
+                                ng-click="addToCart()">
+                            Buy
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
   </ion-content>
