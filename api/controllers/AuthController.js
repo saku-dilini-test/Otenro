@@ -168,7 +168,7 @@ module.exports = {
     // Get OAuth2 client
     GoogleAPIsOAuth2v2.getAccessToken({
       clientId: req.body.clientId,
-      clientSecret: 'TDx0_Lo35DliON3LKt7hWJFu',
+      clientSecret: '7yjf7X5bH9lOQtBWD4M8I7Nc',
       redirectUrl: req.body.redirectUri,
       code: req.body.code
     }).exec({
