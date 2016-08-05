@@ -8,6 +8,7 @@
         var size, weight;
         var variants;
         $scope.tmpImage = [null, null, null, null, null, null, null, null];
+        $scope.tmpImageIndex = [];
         $scope.mainImg = null;
 
         $scope.tmpFile = [null, null];
@@ -224,7 +225,12 @@
                     $scope.product = result[0];
                     $scope.selectedLink = $scope.product.type;
                     $scope.product.sku = item.sku;
-                    $scope.tmpImage[0] = ME_APP_SERVER + 'temp/' + $auth.getPayload().id + '/templates/' + $rootScope.appId + '/img/thirdNavi/' + result[0].imageUrl;
+                    $scope.tmpImageIndex = result[0].tempImageArray;
+                    for(var i = 0; i < result[0].tempImageArray.length; i++){
+                        if(result[0].tempImageArray[i].img != null) {
+                            $scope.tmpImage[i] = ME_APP_SERVER + 'temp/' + $auth.getPayload().id + '/templates/' + $rootScope.appId + '/img/thirdNavi/' + result[0].tempImageArray[i].img;
+                        }
+                    }
                     var variantsList = result[0].variants;
                     if (variantsList[0].size != null) {
                         item.size = variantsList[0].size;
@@ -303,7 +309,8 @@
                         variants.childId = product.mainId;
                     });
                     var variantsAttribute;
-                        commerceService.addProduct(file, product, item.id, variantsList).success(function (data) {
+                    var tempImageArray = $scope.tmpImageIndex;
+                        commerceService.addProduct(file, product, item.id, variantsList,tempImageArray).success(function (data) {
                         variantsList.forEach(function (variantsAttribute) {
                             variantsAttribute.appId = $rootScope.appId;
                             variantsAttribute.childId = product.mainId;
@@ -453,20 +460,39 @@
 
         $scope.deleteImg = function (index) {
             $scope.tmpImage[index] = null;
+            $scope.tmpImageIndex[index].img = null;
         };
         $scope.addImage = function (img) {
             var im = $scope.tmpImage;
-            for (var i = 0; i < im.length; i++) {
-                if (im[i] == null) {
-                    im[i] = $scope.picFile;
+            var isPossibleAddImage = false;
+            for(var i=0; i < im.length; i++){
+                if(im[i] == null){
+                    isPossibleAddImage = true;
                     break;
                 }
             }
-            $scope.tmpImage = im;
-            $scope.mainImg = img;
-            toastr.success('added Image', 'message', {
-                closeButton: true
-            });
+            if(isPossibleAddImage){
+                for (var i = 0; i < im.length; i++) {
+                    if (im[i] == null) {
+                        im[i] = $scope.picFile;
+                        commerceService.addProductImages($scope.picFile)
+                            .success(function(data){
+                                $scope.tmpImageIndex[i] =  { img : ''};
+                                $scope.tmpImageIndex[i]['img'] = data.fileName;
+                            });
+                        break;
+                    }
+                }
+                $scope.tmpImage = im;
+                $scope.mainImg = img;
+                toastr.success('added Image', 'message', {
+                    closeButton: true
+                });
+            }else{
+                toastr.error('Maximum 8 image only', 'Message', {
+                    closeButton: true
+                });
+            }
         };
 
 

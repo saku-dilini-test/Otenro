@@ -148,6 +148,7 @@ module.exports.routes = {
     'POST /edit/updateSecondNavi': 'edit/commerce/SecondNavigationController.updateSecondNavi',
     'POST /edit/addSubChild': 'edit/commerce/ThirdNavigationController.addNewNavi',
     'POST /edit/addThirdNavigation': 'edit/commerce/ThirdNavigationController.addThirdNavi',
+    'POST /edit/addThirdNavigationImages': 'edit/commerce/ThirdNavigationController.addThirdNaviImages',
     'POST /edit/updateThirdNaviImage': 'edit/commerce/ThirdNavigationController.updateThirdNaviImage',
     'POST /edit/updateThirdNavi': 'edit/commerce/ThirdNavigationController.updateThirdNavi',
     'GET /edit/getChild': 'edit/commerce/ThirdNavigationController.getChild',
