@@ -15,15 +15,17 @@
                                 <h1>Physical</h1>
                                 <label>An item that is shipped to your customers</label>
                             </a>
-                            <a ng-click='addType("Digital",1);selectedLink = "Digital"' href="javascript:void(0);"
+                            <a  href="javascript:void(0);"
                                ng-class="{'selected': selectedLink === 'Digital'}">
                                 <h1>Digital</h1>
                                 <label>Content that is downloaded</label>
+                                 [Coming Soon]
                             </a>
-                            <a ng-click='addType("Service",1);selectedLink = "Service"' href="javascript:void(0);"
+                            <a href="javascript:void(0);"
                                ng-class="{'selected': selectedLink === 'Service'}">
                                 <h1>Services</h1>
                                 <label>Provide a Service</label>
+                                [Coming Soon]
                             </a>
                         </div>
                     </div>
@@ -134,7 +136,6 @@
                     <div class="md-dialog-header">
                         <h1>Price & Variants</h1>
                     </div>
-                    <form name="priceAndVariantsForm" novalidate>
                     <div class="md-dialog-main">
                         <table class="me-hours-table">
                             <thead>

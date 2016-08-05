@@ -14,6 +14,14 @@
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
 
+
+        taxService.getAllCountry().success(function (data) {
+            $scope.countryList = data;
+
+        }).error(function (err) {
+            alert("MainMenu Loading Error : " + err);
+        });
+
         // --/-- view tax collections mode
         if($scope.initialData == null){
             taxService.getTaxInfo().

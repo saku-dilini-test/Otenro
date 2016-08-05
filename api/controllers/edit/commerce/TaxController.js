@@ -62,6 +62,14 @@ module.exports = {
             if (err) return res.send(err);
             return res.send(200,{message:'Deleted Tax Collection'});
         });
+    },
+
+    getAllCountry : function(req,res){
+        Country.find().exec(function(err, result) {
+            if (err) return res.send(err);
+            return res.send(result);
+        }); 
+        
     }
 
 };
