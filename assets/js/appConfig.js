@@ -27,7 +27,7 @@
 
 
             $authProvider.google({
-                clientId: '170821583873-i8ud07kd4tqj8bh3u3lgl9d0aisvpbq4.apps.googleusercontent.com',
+                clientId: '785964528512-5e4oip645g34auvif9gnfmk90akd6v55.apps.googleusercontent.com',
                 authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
                 redirectUri: window.location.origin+'/auth/google'
             });
