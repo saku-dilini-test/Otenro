@@ -52,6 +52,9 @@ module.exports = {
         imageUrl: {
             type: 'string'
         },
+        tempImageArray : {
+            type : 'json'
+        },
         discount : {
             type: 'string'
         },

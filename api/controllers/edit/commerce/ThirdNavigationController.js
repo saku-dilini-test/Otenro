@@ -84,6 +84,26 @@ module.exports = {
             }
         });
     },
+    /**
+     * ThirdNavigation uploaded images are copy to img/thirdNavi folder
+     * Return : image name
+     * @param req
+     * @param res
+     */
+    addThirdNaviImages : function(req,res){
+        var dePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
+        req.file('file').upload({
+            dirname: require('path').resolve(dePath)
+        }, function (err, uploadedFiles) {
+            if (err) return res.send(500, err);
+
+            var newFileName = Date.now()+'.png';
+            fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
+                if (err) return res.send(err);
+                res.send({fileName : newFileName});
+            });
+        });
+    },
     updateThirdNaviImage : function(req,res){
 
         var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/'+ req.body.imageUrl;

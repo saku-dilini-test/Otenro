@@ -58,7 +58,7 @@
                 });
             },
 
-            addProduct: function (file, product, id, variants) {
+            addProduct: function (file, product, id, variants, tempImageArray) {
 
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
@@ -91,7 +91,33 @@
                        // price: variants.price,
                         //quantity: variants.quantity,
                         type: product.type,
-                        discount: product.discount
+                        discount: product.discount,
+                        tempImageArray : tempImageArray
+                    },
+                    file: UploadFile
+                });
+            },
+            // When upload third Navigation images send to server to update
+            addProductImages: function (file,id) {
+
+                var dataURItoBlob = function(dataURI) {
+                    var binary = atob(dataURI.split(',')[1]);
+                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+                    var array = [];
+                    for(var i = 0; i < binary.length; i++) {
+                        array.push(binary.charCodeAt(i));
+                    }
+                    return new Blob([new Uint8Array(array)], {type: mimeString});
+                };
+
+                var blob = dataURItoBlob(file);
+                var UploadFile = new File([blob], 'imageFileName.png');
+
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/addThirdNavigationImages',
+                    fields: {
+                        id: id,
+                        appId: $rootScope.appId
                     },
                     file: UploadFile
                 });
