@@ -1207,6 +1207,7 @@ md-dialog{
     -webkit-border-radius: 0;
     background-color: #FFF;
     max-height: 86%;
+    border-radius:4px;
 }
 
 .md-dialog-l{
@@ -1257,11 +1258,13 @@ md-dialog{
 .md-dialog-header .md-dialog-header-nav li a.return-to-app{
     background: #E9E8E9 url("/images/back-icon.svg") no-repeat 10px center;
     background-size: 20px 20px;
+    border-radius: 4px;
 }
 
 .md-dialog-header .md-dialog-header-nav li a.logout{
     background: #E9E8E9 url("/images/logout.svg") no-repeat 10px center;
     background-size: 20px 20px;
+    border-radius: 4px;
 }
 
 .md-dialog-header .md-dialog-header-nav li a.add-new-item{
@@ -1270,7 +1273,7 @@ md-dialog{
 
 .md-dialog-main{
     height: 322px;
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
     overflow-y: scroll;
     padding: 25px 40px 0;
 }
@@ -1336,6 +1339,7 @@ background-color: #f4f5f4;
     padding-top: 4px;
     text-transform: inherit;
     width: 260px;
+    
 }
 
 .uploaded-section{
@@ -1372,7 +1376,7 @@ background-color: #f4f5f4;
 .uploaded-section .uploaded-old-images{
     float: right;
     padding-left: 20px;
-    width: 420px;
+    width: 100%;
 }
 
 .uploaded-old-images .old-images .old-image{
@@ -1382,7 +1386,7 @@ background-color: #f4f5f4;
 }
 
 .uploaded-old-images .old-images .old-image:nth-of-type(4n){
-    margin: 0 0 26px 0;
+    margin: 0 26px 26px 0;
 }
 
 .uploaded-old-images .old-images .old-image img{
@@ -1391,6 +1395,7 @@ background-color: #f4f5f4;
     box-shadow: 0 0 2px 1px #CCC;
     -moz-box-shadow: 0 0 2px 1px #CCC;
     -webkit-box-shadow: 0 0 2px 1px #CCC;
+    border-radius: 4px;
 }
 
 .uploaded-old-images .old-images .old-image .image-delete-button{
@@ -1413,6 +1418,7 @@ background-color: #f4f5f4;
 .uploaded-section p{
     color: #808080;
     font-size: 12px;
+    padding-bottom: 10px; 
 }
 
 .md-dialog-buttons{

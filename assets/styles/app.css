@@ -15,8 +15,16 @@ a.feature01{
 .cropArea {
     background: #E4E4E4;
     overflow: hidden;
-    width:500px;
+    width:620px;
     height:350px;
+    border-radius:4px;
+}
+
+.md-dialog-main .file-upload-wrapper2{
+    margin-bottom: 15px;
+	width: 100%;
+    margin-top: 10px;
+	float:left;
 }
 
 a.feature01:hover{
@@ -486,4 +494,29 @@ trix-editor {
   width: 150px;
   height: 150px;
   border: 3px solid #29d;
+}
+
+.pull-left {
+    float: left !important;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.uploaded-section .uploaded-new-image2 {
+    width: 175px;
+    margin-top: -5%;
+    margin-left: 40%;
+    margin-bottom: 6%;
+}
+
+.uploaded-section .me-upload-image-button2 {
+    background-color: #bdbdbd;
+    border: medium none;
+    border-radius:4px;
+    color: #666;
+    font-size: 10px;
+    height: 35px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 150px;
 }
