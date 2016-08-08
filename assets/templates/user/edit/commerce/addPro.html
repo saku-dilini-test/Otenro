@@ -48,11 +48,9 @@
                             <div class="clearfix">
                                 <fieldset class="col-2-product">
                                     <label for="input-name">Name</label>
-                                    <input type="text" name="fullname" ng-model="product.name" id="input-name" ng-pattern="/^[A-Za-z0-9\s]*$/"
+                                    <input type="text" name="fullname" ng-model="product.name" id="input-name"
                                            ng-maxlength="15" required/>
-                                <br >
-                                <span ng-show="productForm.fullname.$error.pattern">Symbols cannot be included in the product name</span>
-                                <br />
+
                                     <div  ng-hide="productForm.fullname.$error.maxlength">
                                         <span>Characters left: {{maxLengthName - product.name.length}}</span>
                                     </div>

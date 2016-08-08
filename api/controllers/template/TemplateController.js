@@ -105,7 +105,9 @@ module.exports = {
         var thirdNavi = [];
         ThirdNavigation.findOne(searchApp).exec(function(err, app) {
             if (err) return done(err);
-            PriceAndVariants.find({productId: app.id}).exec(function(err, variants){
+            var query =  PriceAndVariants.find({productId: app.id});
+            query.sort('id ASC');
+            query.exec(function(err, variants){
              if (err) console.log(err);
              if(variants != undefined){
                 /*app.price = variants.price;
