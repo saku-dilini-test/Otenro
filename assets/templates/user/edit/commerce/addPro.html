@@ -48,22 +48,26 @@
                             <div class="clearfix">
                                 <fieldset class="col-2-product">
                                     <label for="input-name">Name</label>
-                                    <input type="text" name="fullname" ng-model="product.name" id="input-name"
-                                           ng-maxlength="15" required/>
+                                    <input type="text"  name="fullname" ng-model="product.name" id="input-name"  >
 
-                                    <div  ng-hide="productForm.fullname.$error.maxlength">
+                                    <div ng-hide="product.name.length > maxLengthName">
                                         <span>Characters left: {{maxLengthName - product.name.length}}</span>
                                     </div>
-                                <span ng-show="productForm.fullname.$error.maxlength">Too lengthy</span>
+                                    <div  ng-show="product.name.length > maxLengthName">
+                                        <span>Characters left: </span> <span style="color: #ff0404 "> {{maxLengthName - product.name.length}} </span>
+                                    </div>
                                 </fieldset>
                                 <fieldset class="col-2-product">
                                     <label for="input-name">Description</label>
-                                    <textarea name="description" rows="4" cols="50" ng-maxlength="100" ng-model="product.detailedDesc"></textarea>
-                                    <div id="characters" ng-hide="productForm.description.$error.maxlength">
+                                    <textarea name="description" rows="4" cols="50"  ng-model="product.detailedDesc"></textarea>
+
+                                    <div ng-hide="product.detailedDesc.length > maxLengthDesc">
                                         <span>Characters left: {{maxLengthDesc - product.detailedDesc.length}}</span>
                                     </div>
+                                    <div  ng-show="product.detailedDesc.length > maxLengthDesc">
+                                        <span>Characters left: </span> <span style="color: #ff0404 "> {{maxLengthDesc - product.detailedDesc.length}} </span>
+                                    </div>
                                     <br />
-                                    <span ng-show="productForm.description.$error.maxlength">Too lengthy</span>
                                     <!--<input type="text" name="detailedDesc" ng-model="product.detailedDesc" id="input-detailedDesc" required />-->
                                 </fieldset>
                                 <fieldset class="col-2">
