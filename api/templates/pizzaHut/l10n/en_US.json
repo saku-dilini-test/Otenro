@@ -91,7 +91,6 @@
 	"btnLocation" 	: "Get Location"
 		},
   "register" : {
-	"UserName" 		: "User Name",
 	"Title" 		: "Register",
 	"inputEmail" 	: "Email",
 	"inputPassword" : "Password",

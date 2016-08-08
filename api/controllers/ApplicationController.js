@@ -325,12 +325,6 @@ module.exports = {
                     "link": "bestSeller",
                     "appId": app.id,
                     "icon": "glyphicon glyphicon-cloud"
-                },
-                {
-                    "name": "Contact Us",
-                    "link": "contact",
-                    "appId": app.id,
-                    "icon": "glyphicon glyphicon-cloud"
                 }
             ];
 

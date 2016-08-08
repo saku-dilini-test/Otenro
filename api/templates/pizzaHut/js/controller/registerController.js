@@ -38,7 +38,6 @@ mobileApp.controller('registerController', function($scope, $translate, $rootSco
 		
 		var requestParams = {
 			"token": token,
-			"userName": $scope.register.userName,
 			"email": $scope.register.email,
 			"password": $scope.register.password,
 			"name": $scope.register.name,
@@ -48,7 +47,7 @@ mobileApp.controller('registerController', function($scope, $translate, $rootSco
 			"type": 'internal'
 		};
 
-		if(typeof $scope.register.userName === 'undefined' && typeof $scope.register.email === 'undefined' && typeof $scope.register.password === 'undefined' && typeof $scope.register.name === 'undefined' && typeof $scope.register.phone === 'undefined' && typeof $scope.register.street === 'undefined'){
+		if(typeof $scope.register.email === 'undefined' && typeof $scope.register.password === 'undefined' && typeof $scope.register.name === 'undefined' && typeof $scope.register.phone === 'undefined' && typeof $scope.register.street === 'undefined'){
 			alert('This input form not complete!');
 		}else{
 			if($scope.register.confirm == $scope.register.password){
