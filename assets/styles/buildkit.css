@@ -60,7 +60,10 @@ h1, h2, h3, h4, h5, h6{
 .radio label{
     min-height: 15px;
 }
-
+.set-register{
+    margin-left: 50%;
+    display: inline;
+}
 .reset-margin{
     margin: 0 !important;
 }
