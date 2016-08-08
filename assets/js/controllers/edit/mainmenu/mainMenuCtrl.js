@@ -37,8 +37,6 @@
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         }
 
-        console.log(initialData);
-
         // Main Menu view
         if($scope.initialData == null ) {
             // check ID of templateCategory and load related collection to navigation
@@ -84,10 +82,11 @@
                 if($scope.templateCategory == tempCatMedia){
                     imgLocation = "category";
                 }
-
                 $scope.menu = $scope.initialData.menu;
                 $scope.serverImage = $scope.menu.imageUrl;
                 $scope.mainImg = $scope.menu.imageUrl;
+                $scope.tmpImage[0] = ME_APP_SERVER + 'temp/' + $auth.getPayload().id + '/templates/'
+                                     + $rootScope.appId + '/img/'+imgLocation+'/' + $scope.menu.imageUrl;
                 $scope.picFile = ME_APP_SERVER+'temp/' +$auth.getPayload().id+
                     '/templates/'+$rootScope.appId+'/img/'+imgLocation+'/'+ $scope.menu.imageUrl;
             }
@@ -108,6 +107,15 @@
             }else if($scope.templateCategory == tempCatMedia){
                 mainMenuService.showEditMenuCategoryDialog(item,$scope.templateCategory);
             }
+        };
+        $scope.setImage = function (img) {
+                    if (img == undefined) {
+                        toastr.error('Upload Image', 'Warning', {
+                            closeButton: true
+                        });
+                    } else {
+                        $scope.picFile = $scope.tmpImage[img];
+                    }
         };
         // Delete Menu
         $scope.deleteMenuItem = function(item){
