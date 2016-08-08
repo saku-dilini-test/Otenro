@@ -168,15 +168,26 @@
             }
         };
 
-        $scope.addVariants = function (product) {
-            $scope.inserted = {
-                sku: 0,
-                name: product.name,
-                price: 0,
-                quantity: 0
-            };
-            $scope.variants.push($scope.inserted);
+        $scope.addVariants = function (product,index,variants) {
+                if(variants[index].sku == 0 || variants[index].price == 0 || variants[index].quantity == 0
+                    || variants[index].size == ""){
+                    toastr.error('Fill all the existing fields before adding a new field', 'Warning', {
+                                        closeButton: true
+                    });
+                }
+                else{
+                    $scope.inserted = {
+                        sku: 0,
+                        name: product.name,
+                        price: 0,
+                        quantity: 0
+                    };
+                    $scope.variants.push($scope.inserted);
+                }
         };
+        $scope.deletePro = function (index,variants) {
+            $scope.variants.splice(index, 1);
+        }
 
         $scope.typeUpdateHandler = function (newValue) {
             $scope.variants[0].type = newValue;
