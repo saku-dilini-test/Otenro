@@ -9,4 +9,14 @@ mobileApp.controller('appCtrl', function($scope, $ionicModal, $timeout,$rootScop
     $scope.parentobj = {};
     $scope.parentobj.cartSize = $rootScope.cart.cartSize;
 
+    // show & hide menu icon button
+    $scope.showMenu = true;
+    $scope.$on('hideMenu', function(){
+        $scope.showMenu = false;
+    });
+    $scope.$on('$stateChangeStart', function(){
+        $scope.showMenu = true;
+    });
+
+
 });
