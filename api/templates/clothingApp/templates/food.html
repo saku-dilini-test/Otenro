@@ -4,7 +4,11 @@
             <div class="panel">
                 <div class="card">
                     <div class="header_image animated bounceInRight">
-                        <img ng-src="{{imageURL}}/{{foodInfo.imageUrl}}" width="100%" height="auto"/>
+                        <ion-slides options="sliderOptions" slider="sliderDelegate" >
+                            <ion-slide-page ng-repeat="image in images">
+                                <img ng-src="{{imageURL}}/{{image.img}}" >
+                            </ion-slide-page>
+                        </ion-slides>
                     </div>
                 </div>
                     <div class="item item-text-wrap">

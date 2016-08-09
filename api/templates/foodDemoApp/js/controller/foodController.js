@@ -30,12 +30,18 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
-    
 
+    $scope.sliderOptions = {
+          initialSlide: 0,
+          direction: 'horizontal', //or vertical
+          speed: 300 //0.3s transition
+        };
+    $scope.sliderDelegate = null;
     if($stateParams.foodId){
         $http.get(constants.SERVER_URL + '/templates/getProductById?productId='+$stateParams.foodId)
              .success(function(data) {
                 $scope.foodInfo = data;
+                $scope.images = $scope.foodInfo.tempImageArray;
                 $scope.productVariants = data.variants;
 
                 if(data.variants.length > 0){
@@ -51,6 +57,9 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                  alert('warning', "Unable to get Product", err.message);
           });
     }
+        $scope.slideChanged = function(index) {
+            $scope.slideIndex = index;
+          };
 
     $scope.menuName = $stateParams.categoryName;
 

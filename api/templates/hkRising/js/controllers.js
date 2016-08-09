@@ -168,6 +168,12 @@ angular.module('starter.controllers', [])
         $ionicLoading.show({
             template: '<ion-spinner icon="lines" ></ion-spinner>'
         });
+        $scope.sliderOptions = {
+              initialSlide: 0,
+              direction: 'horizontal', //or vertical
+              speed: 300 //0.3s transition
+            };
+        $scope.sliderDelegate = null;
         var getInitialData = initialData.selectedArticle;
         if(getInitialData){
             $scope.$emit('hideMenu',{});

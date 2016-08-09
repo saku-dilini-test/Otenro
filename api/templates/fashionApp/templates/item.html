@@ -5,7 +5,12 @@
 			<div class="content">
 				<ion-item class="ion-item">
 					<div class="item-image">
-						<img data-ng-src="{{itemCtrl.imageUrl}}/{{itemCtrl.item.imageUrl}}">
+						<ion-slides options="sliderOptions" slider="sliderDelegate" >
+							<ion-slide-page >
+								<img ng-src="{{itemCtrl.imageUrl}}/{{itemCtrl.item.imageUrl}}" >
+							</ion-slide-page>
+						</ion-slides>
+						<!--<img data-ng-src="{{itemCtrl.imageUrl}}/{{itemCtrl.item.imageUrl}}">-->
 						<div class="made-easy-header-font">
 							<!--<h1 data-ng-bind-html="itemCtrl.item.title|trustHtml"></h1>-->
 							<div class="title" data-ng-bind-html="itemCtrl.item.title|trustHtml"></div>

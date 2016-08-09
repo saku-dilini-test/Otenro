@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+ion-slides {
+    width: 200px;
+    height: 150px;
+    display: block;
+}
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    max-height: 100%;
+}

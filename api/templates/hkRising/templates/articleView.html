@@ -4,7 +4,11 @@
             <div class="row">
                 <div class="col">
                     <div class="item item-image animated bounceInRight">
-                        <img ng-src="{{imageURL}}/{{selectedArticle.imageUrl}}">
+                        <ion-slides options="sliderOptions" slider="sliderDelegate" >
+                            <ion-slide-page >
+                                <img ng-src="{{imageURL}}/{{selectedArticle.imageUrl}}" >
+                            </ion-slide-page>
+                        </ion-slides>
                     </div>
                     <div class="item item-text-wrap2">
                         <div class="made-easy-header-font animated rubberBand" style="font-weight:800;">{{selectedArticle.title}}</div>

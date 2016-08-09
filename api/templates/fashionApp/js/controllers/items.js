@@ -20,6 +20,12 @@ angular
 			'use strict';
 
 			var vm = this;
+            vm.sliderOptions = {
+                  initialSlide: 0,
+                  direction: 'horizontal', //or vertical
+                  speed: 300 //0.3s transition
+                };
+            vm.sliderDelegate = null;
 
 			vm.imageUrl =
 				routesConfig.wpUrl.SERVER_URL()

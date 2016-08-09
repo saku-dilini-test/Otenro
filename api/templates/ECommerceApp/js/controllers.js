@@ -110,13 +110,19 @@ angular.module('starter.controllers', [])
 
     // set select Item Name
         $scope.itemName = $stateParams.itemName;
-
+        $scope.sliderOptions = {
+          initialSlide: 0,
+          direction: 'horizontal', //or vertical
+          speed: 300 //0.3s transition
+        };
+        $scope.sliderDelegate = null;
     // set select Menu Id
     var itemId = $stateParams.itemId;
     // get item by Id
     appServices.getItemById(itemId)
         .success(function (data) {
             $scope.item = data;
+            $scope.images = data.tempImageArray;
             $scope.productVariants = data.variants;
             if(data.variants.length > 0){
                 $scope.selectedVariant = data.variants[0];
