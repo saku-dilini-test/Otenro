@@ -455,20 +455,30 @@
             }
 
         };
-
+        $scope.deleteImg = function (index) {
+            $scope.tmpImage[index] = null;
+        };
         $scope.addImage = function(img){
             var im = $scope.tmpImage;
+            var isPossibleAddImage = false;
             for(var i=0 ; i < im.length ; i++){
                 if(im[i] == null) {
-                    im[i] = $scope.picFile;
+                    isPossibleAddImage = true;
                     break;
                 }
             }
-            $scope.tmpImage = im;
-            $scope.mainImg = img;
-            toastr.success('added Image', 'Message', {
-                closeButton: true
-            });
+            if(isPossibleAddImage){
+                    for (var i = 0; i < im.length; i++) {
+                        if (im[i] == null) {
+                            im[i] = $scope.picFile;
+                        }
+                    }
+                    $scope.tmpImage = im;
+                        $scope.mainImg = img;
+                        toastr.success('added Image', 'message', {
+                            closeButton: true
+                    });
+            }
         };
 
 
