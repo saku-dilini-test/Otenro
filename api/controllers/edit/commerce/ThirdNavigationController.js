@@ -117,10 +117,14 @@ module.exports = {
             fs.unlink(filePath, function (err) {
                 if (err) return console.error(err);
             });
-            fs.rename(uploadedFiles[0].fd, desPath+req.body.imageUrl, function (err) {
-                if (err) return res.send(err);
-                res.json({ok:true});
-            });
+            if (typeof req.body.imageUrl != "undefined") {
+                fs.rename(uploadedFiles[0].fd, desPath + req.body.imageUrl, function (err) {
+                    if (err) return res.send(err);
+                    res.json({ok: true});
+                });
+            }else {
+                res.json({ok: true});
+            }
         });
 
     },
