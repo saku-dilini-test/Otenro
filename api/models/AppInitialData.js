@@ -35,6 +35,11 @@ module.exports = {
               "price": 100,
               "quantity": 100,
               "imageUrl": "grilled_chicken_salad.png",
+              "tempImageArray" : [
+                {
+                  "img" : "grilled_chicken_salad.png"
+                }
+              ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
@@ -44,6 +49,11 @@ module.exports = {
               "price": 200,
               "quantity": 200,
               "imageUrl": "spicy thai salad with grilled chicken.png",
+              "tempImageArray" : [
+                {
+                  "img" : "spicy thai salad with grilled chicken.png"
+                }
+              ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
@@ -82,6 +92,11 @@ module.exports = {
               "price": 100,
               "quantity": 100,
               "imageUrl": "chocolate Fudge brownie with vanila ice cream.png",
+              "tempImageArray" : [
+                {
+                  "img" : "chocolate Fudge brownie with vanila ice cream.png"
+                }
+              ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
@@ -140,6 +155,11 @@ module.exports = {
               "price": 100,
               "quantity": 100,
               "imageUrl": "grilled garlic lamb chops.png",
+              "tempImageArray" : [
+                {
+                  "img" : "grilled garlic lamb chops.png"
+                }
+              ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
@@ -149,6 +169,11 @@ module.exports = {
               "price": 200,
               "quantity": 200,
               "imageUrl": "beef stake with smashed potatoes.png",
+              "tempImageArray" : [
+                {
+                  "img" : "beef stake with smashed potatoes.png"
+                }
+              ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
@@ -158,6 +183,11 @@ module.exports = {
               "price": 300,
               "quantity": 300,
               "imageUrl": "bbq pork ribs.png",
+              "tempImageArray" : [
+                {
+                  "img" : "bbq pork ribs.png"
+                }
+              ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "createdDate": Date.now()
@@ -168,6 +198,11 @@ module.exports = {
               "quantity": 400,
               "briefDesc" : "Pina Colada brief des",
               "detailedDesc" : "Pina Colada details description. Pina Colada details description. Pina Colada details description",
+              "tempImageArray" : [
+                {
+                  "img" : "bg.png"
+                }
+              ],
               "imageUrl": "bg.png",
               "createdDate": Date.now()
             }
@@ -236,6 +271,11 @@ module.exports = {
               "briefDesc" : "Shirt x brief des",
               "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
               "imageUrl": "shirt_x.png",
+              "tempImageArray" : [
+                {
+                  "img" : "shirt_x.png"
+                }
+              ],
               "createdDate": Date.now()
             },
             {
@@ -244,6 +284,11 @@ module.exports = {
               "quantity": 350,
               "briefDesc" : "Shirt y brief des",
               "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "tempImageArray" : [
+                {
+                  "img" : "shirt_y.png"
+                }
+              ],
               "imageUrl": "shirt_y.png",
               "createdDate": Date.now()
             },
@@ -253,7 +298,12 @@ module.exports = {
               "quantity": 450,
               "briefDesc" : "Shirt z brief des",
               "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
-              "imageUrl": "shirt_z.jpg",
+              "tempImageArray" : [
+                {
+                  "img" : "shirt_z.png"
+                }
+              ],
+              "imageUrl": "shirt_z.png",
               "createdDate": Date.now()
             }
           ]
@@ -271,6 +321,11 @@ module.exports = {
               "quantity": 250,
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "tempImageArray" : [
+                {
+                  "img" : "short_x.png"
+                }
+              ],
               "imageUrl": "short_x.png",
               "createdDate": Date.now()
             }
@@ -306,6 +361,11 @@ module.exports = {
               "quantity": 250,
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "tempImageArray" : [
+                {
+                  "img" : "cloth3.png"
+                }
+              ],
               "imageUrl": "cloth3.png",
               "createdDate": Date.now()
             }
@@ -329,6 +389,11 @@ module.exports = {
               "quantity": 250,
               "briefDesc" : "Shirt x brief des",
               "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
+              "tempImageArray" : [
+                {
+                  "img" : "a.png"
+                }
+              ],
               "imageUrl": "a.png",
               "createdDate": Date.now()
             },
@@ -338,6 +403,11 @@ module.exports = {
               "quantity": 350,
               "briefDesc" : "Shirt y brief des",
               "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "tempImageArray" : [
+                {
+                  "img" : "b.png"
+                }
+              ],
               "imageUrl": "b.png",
               "createdDate": Date.now()
             },
@@ -347,7 +417,12 @@ module.exports = {
               "quantity": 450,
               "briefDesc" : "Shirt z brief des",
               "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
-              "imageUrl": "c.jpg",
+              "tempImageArray" : [
+                {
+                  "img" : "c.png"
+                }
+              ],
+              "imageUrl": "c.png",
               "createdDate": Date.now()
             }
           ]
@@ -364,6 +439,11 @@ module.exports = {
               "quantity": 250,
               "briefDesc" : "Shirt x brief des",
               "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
+              "tempImageArray" : [
+                {
+                  "img" : "a.png"
+                }
+              ],
               "imageUrl": "a.png",
               "createdDate": Date.now()
             },
@@ -373,6 +453,11 @@ module.exports = {
               "quantity": 350,
               "briefDesc" : "Shirt y brief des",
               "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "tempImageArray" : [
+                {
+                  "img" : "b.png"
+                }
+              ],
               "imageUrl": "b.png",
               "createdDate": Date.now()
             },
@@ -382,7 +467,12 @@ module.exports = {
               "quantity": 450,
               "briefDesc" : "Shirt z brief des",
               "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
-              "imageUrl": "c.jpg",
+              "tempImageArray" : [
+                {
+                  "img" : "c.png"
+                }
+              ],
+              "imageUrl": "c.png",
               "createdDate": Date.now()
             }
           ]
@@ -400,7 +490,12 @@ module.exports = {
               "quantity": 250,
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Short x details description. Short x details description. Short x details description",
-              "imageUrl": "e.jpg",
+              "tempImageArray" : [
+                {
+                  "img" : "e.png"
+                }
+              ],
+              "imageUrl": "e.png",
               "createdDate": Date.now()
             }
           ]
@@ -418,6 +513,11 @@ module.exports = {
               "quantity": 250,
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "tempImageArray" : [
+                {
+                  "img" : "cloth3.png"
+                }
+              ],
               "imageUrl": "cloth3.png",
               "createdDate": Date.now()
             }
@@ -439,6 +539,11 @@ module.exports = {
               "name": "Masala Pizza",
               "price": 250,
               "quantity": 250,
+              "tempImageArray" : [
+                {
+                  "img" : "item_01.png"
+                }
+              ],
               "imageUrl": "item_01.png",
               "briefDesc" : "Masala brief des",
               "detailedDesc" : "Masala Pizza, details description. details description",
@@ -448,7 +553,12 @@ module.exports = {
               "name" : "New Pizza",
               "price" : 300,
               "quantity" : 100,
-              "imageUrl" : "item_02.png",
+              "tempImageArray" : [
+                {
+                  "img" : "item_02.png"
+                }
+              ],
+              "imageUrl": "item_02.png",
               "briefDesc" : "New Pizza brief des",
               "detailedDesc" : "New Pizza, details description. details description",
               "createdDate": Date.now()
@@ -467,6 +577,11 @@ module.exports = {
               "name": "Indian Pizza",
               "price": 350,
               "quantity": 100,
+              "tempImageArray" : [
+                {
+                  "img" : "item_01.png"
+                }
+              ],
               "imageUrl": "item_01.png",
               "briefDesc" : "Indian brief des",
               "detailedDesc" : "Indian Pizza, details description. details description",
@@ -476,7 +591,12 @@ module.exports = {
               "name" : "New Pizza",
               "price" : 225,
               "quantity" : 15,
-              "imageUrl" : "item_02.png",
+              "tempImageArray" : [
+                {
+                  "img" : "item_02.png"
+                }
+              ],
+              "imageUrl": "item_02.png",
               "briefDesc" : "New Pizza brief des",
               "detailedDesc" : "New Pizza, details description. details description",
               "createdDate": Date.now()
