@@ -3,6 +3,9 @@
  */
 
 mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants) {
+
+    $scope.$emit('hideMenu',{});
+
     $scope.buyQuantity=0;
     $rootScope.timestamp = new Date().getTime();
     $scope.userId=$rootScope.userId;
