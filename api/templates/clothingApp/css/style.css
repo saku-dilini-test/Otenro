@@ -418,3 +418,14 @@ h1, .h1, h2, .h2, h3, .h3 {
 	text-align: center;
     padding-top: 10px;
 }
+ion-slides {
+    width: 200px;
+    height: 150px;
+    display: block;
+}
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    max-height: 100%;
+}

@@ -3,6 +3,11 @@
         <div class="cards cards-item">
             <div class="header">
                 <div class="header-image">
+                    <ion-slides options="sliderOptions" slider="sliderDelegate" >
+                        <ion-slide-page ng-repeat="image in images">
+                            <img ng-src="img/thirdNavi/{{image.img}}" >
+                        </ion-slide-page>
+                    </ion-slides>
                     <!--<img ng-src="img/thirdNavi/{{item.imageUrl}}" width="100%">-->
                 </div>
             </div>
