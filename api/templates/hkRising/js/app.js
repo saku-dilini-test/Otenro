@@ -70,6 +70,7 @@ angular.module('starter', ['ionic', 'ionicLazyLoad','starter.services','starter.
   })
 
   .state('app.home.categoryId', {
+        cache: false,
     url: '/:categoryId',
     views: {
       'tabContent': {
@@ -108,6 +109,7 @@ angular.module('starter', ['ionic', 'ionicLazyLoad','starter.services','starter.
       }
     })
       .state('app.articleView', {
+        cache: false,
         url: '/articleView/:articleId',
         views: {
           'menuContent': {
