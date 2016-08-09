@@ -14,7 +14,7 @@
         $scope.tmpFile = [null, null];
         $scope.mainFile = null;
 
-        $scope.selection = "weight";
+        $scope.selection = "size";
         $scope.userId = $auth.getPayload().id;
         $scope.isDigital = false;
 

@@ -5,13 +5,13 @@ angular.module('animateApp')
         $authProvider.baseUrl = SERVER_URL;
         // facebook
         $authProvider.facebook({
-            clientId: '262852717382326',
+            clientId: '1585938975033935',
             url: '/facebookAuth'
         });
 
         // google
         $authProvider.google({
-            clientId: '528602483901-opricfuv2v6iumlilavvljhi9maf1l9f.apps.googleusercontent.com',
+            clientId: '785964528512-5e4oip645g34auvif9gnfmk90akd6v55.apps.googleusercontent.com1585938975033935',
             authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
             redirectUri: window.location.origin ,
             url: '/googleAuth'

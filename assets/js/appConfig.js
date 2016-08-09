@@ -25,7 +25,7 @@
             $authProvider.loginUrl = '/auth/authenticate';
             $authProvider.baseUrl = SERVER_URL;
 
-
+        
             $authProvider.google({
                 clientId: '785964528512-5e4oip645g34auvif9gnfmk90akd6v55.apps.googleusercontent.com',
                 authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
