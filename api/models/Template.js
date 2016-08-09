@@ -60,15 +60,6 @@ module.exports = {
             templateFilesPath:'templates/pizzaHut',
             templateCategory:'2'
         },
-        {
-            template_name : 'florist',
-            templateViewName : 'Aloha',
-            templateViewDesc : 'Colourful, lively and vivid.',
-            imageUrl : 'resturant/florist.png',
-            gifImageUrl : 'resturant/florist1.png',
-            templateFilesPath:'templates/florist',
-            templateCategory:'3'
-        },
         //{
         //    template_name : 'pizzaNew',
         //    templateViewName : 'Hell’s kitchen',
