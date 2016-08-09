@@ -1,6 +1,19 @@
 angular.module('starter.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicLoading) {
+    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicLoading,$ionicHistory) {
+
+        // show & hide menu icon button
+        $scope.showMenu = true;
+        $scope.$on('hideMenu', function(){
+            $scope.showMenu = false;
+        });
+        $scope.$on('$stateChangeStart', function(){
+            $scope.showMenu = true;
+        });
+
+        $scope.goBack = function(){
+            $ionicHistory.goBack();
+        };
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -157,6 +170,7 @@ angular.module('starter.controllers', [])
         });
         var getInitialData = initialData.selectedArticle;
         if(getInitialData){
+            $scope.$emit('hideMenu',{});
             $scope.selectedArticle = getInitialData.data;
         }
         $scope.imageURL = initialData.imageURL;
