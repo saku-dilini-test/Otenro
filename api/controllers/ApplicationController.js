@@ -346,6 +346,11 @@ module.exports = {
                     "appId": app.id,
                     "name": "Low price ",
                     "price": 100,
+                    "tempImageArray" : [
+                        {
+                            "img" : "article-0-1A9F1DAA000005DC-669_634x447.jpg"
+                        }
+                    ],
                     "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
                     "createdDate": Date.now()
                 },
@@ -353,6 +358,11 @@ module.exports = {
                     "appId": app.id,
                     "name": "High price ",
                     "price": 200,
+                    "tempImageArray" : [
+                        {
+                            "img" : "OOMPizza-Pepperoni-300x233.jpg"
+                        }
+                    ],
                     "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
                     "createdDate": Date.now()
                 }
@@ -362,6 +372,11 @@ module.exports = {
                     "appId": app.id,
                     "name": "Low price ",
                     "price": 100,
+                    "tempImageArray" : [
+                        {
+                            "img" : "pizza.jpg"
+                        }
+                    ],
                     "imageUrl": "pizza.jpg",
                     "createdDate": Date.now()
                 },
@@ -369,6 +384,11 @@ module.exports = {
                     "appId": app.id,
                     "name": "High price ",
                     "price": 200,
+                    "tempImageArray" : [
+                        {
+                            "img" : "melko-21290330.jpg"
+                        }
+                    ],
                     "imageUrl": "melko-21290330.jpg",
                     "createdDate": Date.now()
                 }
