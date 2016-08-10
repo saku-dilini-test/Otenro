@@ -8,7 +8,7 @@
                           mySharedService,ME_APP_SERVER,$auth,dashboardService,articleService,initialData) {
 
 
-        $scope.tmpImage = [ null , null];
+        $scope.tmpImage = [ null ];
         $scope.mainImg = null;
         $scope.topLevel  = '';
         $scope.tempplayer = "";
@@ -478,6 +478,11 @@
                         toastr.success('added Image', 'message', {
                             closeButton: true
                     });
+            }
+            else{
+                toastr.error('Only one image', 'Message', {
+                    closeButton: true
+                });
             }
         };
 
