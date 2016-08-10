@@ -19,7 +19,6 @@
         $scope.isNewArticle = false;
         $scope.edit_Category = initialData;
         $scope.pageSize = 5;
-
         console.log("catName " + $scope.catName);
 
 
@@ -44,7 +43,6 @@
 
         articleService.getCategoryList($scope.appId)
             .success(function (data) {
-                console.log(data);
                 $scope.categoryList = data;
             }).error(function (error) {
             toastr.error('ArticlesLoading Error', 'Message', {
@@ -94,6 +92,7 @@
             $scope.serverImg = initialData.imageUrl;
             $scope.mainImg = initialData.imageUrl;
             $scope.picFile = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/article/'+initialData.imageUrl;
+            $scope.tmpImage[0] = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/article/'+initialData.imageUrl;
 
             $scope.seletedCategoryId = initialData.categoryId;
 
