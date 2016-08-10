@@ -14,7 +14,7 @@
     function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,ME_APP_SERVER,mySharedService,initialData) {
 
         $scope.appId = $rootScope.appId;
-        $scope.tmpImage = [ null , null];
+        $scope.tmpImage = [ null ];
         $scope.mainImg = null;
         $scope.isNewArticle = false;
         $scope.edit_Category = initialData;
