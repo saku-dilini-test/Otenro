@@ -3,7 +3,7 @@
         <div class="md-dialog-header">
             <h1>publish an article</h1>
         </div>
-
+        <form name="articleForm" novalidate>
         <div class="md-dialog-main clearfix">
 
             <fieldset>
@@ -15,8 +15,10 @@
             </fieldset>
             <fieldset>
                 <label>Title</label>
-                <input type="text" name="title" ng-model="article.title" required />
+                <input type="text" name="title" ng-maxlength="35" ng-model="article.title" required />
+
             </fieldset>
+            <span ng-show="articleForm.title.$error.maxlength">Too lengthy</span></td>
             <fieldset class="col-2">
                <!-- <div class="md-dialog-header">
                     <h1>Upload Image</h1>
@@ -65,7 +67,7 @@
                 <trix-editor angular-trix ng-model="article.desc"></trix-editor>
             </fieldset>
         </div>
-
+        </form>
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
