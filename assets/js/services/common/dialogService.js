@@ -18,6 +18,8 @@
                     return comingSoonService.showComingSoonDialog();
                 if ('announcementBar'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
+                if ('madeEasyBadge'==clickTitle)
+                    return comingSoonService.showComingSoonDialog();
                 if ('users'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('promotionsAndSales'==clickTitle)
