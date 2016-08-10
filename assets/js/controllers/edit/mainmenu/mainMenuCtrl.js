@@ -473,7 +473,7 @@
                             im[i] = $scope.picFile;
                         }
                     }
-                    $scope.tmpImage = im;
+                        $scope.tmpImage = im;
                         $scope.mainImg = img;
                         toastr.success('added Image', 'message', {
                             closeButton: true

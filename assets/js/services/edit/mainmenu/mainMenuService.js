@@ -166,7 +166,7 @@
                 });
             },
             addNewCategory:function(file,appId,name){
-                
+
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
