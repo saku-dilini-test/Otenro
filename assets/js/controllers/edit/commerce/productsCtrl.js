@@ -115,7 +115,7 @@
                 else {
                     if (typeof item != 'string') {
                         $scope.selectedTab = current;
-                        $scope.variants = [{
+                        $scope.variantsList = [{
                             sku: product.sku,
                             name: product.name,
                             size: item.size,
@@ -125,7 +125,7 @@
                     }
                     else {
                         $scope.selectedTab = current;
-                        $scope.variants = [{
+                        $scope.variantsList = [{
                             sku: product.sku,
                             name: product.name,
                             price: 0,
@@ -142,7 +142,7 @@
                 }
                 else {
                     $scope.selectedTab = current;
-                    $scope.variants = [{
+                    $scope.variantsList = [{
                         sku: product.sku,
                         name: product.name,
                         price: 0,
@@ -159,7 +159,7 @@
                 });
             } else {
                 $scope.selectedTab = current;
-                $scope.variants = [{
+                $scope.variantsList = [{
                     sku: product.sku,
                     name: product.name,
                     price: variants.price
@@ -169,8 +169,10 @@
         };
 
         $scope.addVariants = function (product,index,variants) {
-                if(variants[index].sku == 0 || variants[index].price == 0 || variants[index].quantity == 0
-                    || variants[index].size == ""){
+
+            console.log(variants);
+                if(variants.sku == 0 || variants.price == 0 || variants.quantity == 0
+                    || variants.size == ""){
                     toastr.error('Fill all the existing fields before adding a new field', 'Warning', {
                                         closeButton: true
                     });
@@ -182,11 +184,11 @@
                         price: 0,
                         quantity: 0
                     };
-                    $scope.variants.push($scope.inserted);
+                    $scope.variantsList.push($scope.inserted);
                 }
         };
         $scope.deletePro = function (index,variants) {
-            $scope.variants.splice(index, 1);
+            $scope.variantsList.splice(index, 1);
         }
 
         $scope.typeUpdateHandler = function (newValue) {
@@ -243,6 +245,9 @@
                         }
                     }
                     var variantsList = result[0].variants;
+                    $scope.variantsList = variantsList;
+                    console.log(variantsList);
+
                     if (variantsList[0].size != null) {
                         item.size = variantsList[0].size;
                         $scope.variants = [{
@@ -315,7 +320,7 @@
                     };
 
 
-                    var variantsList = $scope.variants;
+                    var variantsList = $scope.variantsList;
                     variantsList.forEach(function (variants) {
                         variants.childId = product.mainId;
                     });
@@ -394,7 +399,7 @@
                 }
                 else {
 
-                var variantsList = $scope.variants;
+                var variantsList = $scope.variantsList;
                 variantsList.forEach(function (variants) {
                     variants.childId = product.childId;
                 });
