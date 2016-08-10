@@ -110,6 +110,7 @@
         }
 
         $scope.addImage = function(img){
+
             var im = $scope.tmpImage;
             im[0] = $scope.picFile;
             $scope.tmpImage = im;
