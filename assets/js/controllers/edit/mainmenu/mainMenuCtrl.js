@@ -211,7 +211,7 @@
                     });
                 });
             }
-            if($scope.mainImg != $scope.serverImage){
+            if($scope.mainImg != $scope.serverImage && !($scope.initialData.menu == 'addNewMenuNavigation')){
                 commerceService.updateCategoryImage(file,menu.imageUrl,menu.id,$rootScope.appId).progress(function(evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
@@ -268,7 +268,7 @@
                         toastr.error(err.message, 'Warning', {closeButton: true});
                     });
             }
-            if($scope.mainImg != $scope.serverImage){
+            if($scope.mainImg != $scope.serverImage && !($scope.initialData.menu == 'addNewMenuCategory')){
                 console.log('imageUpdate true');
                 articleService.updateCategoryImage(file,menu.imageUrl,$rootScope.appId).progress(function(evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
