@@ -467,18 +467,20 @@
             if(typeof data[0].address != 'undefined'){
                 var fullAddress = data[0].address;
                 var separateAddressArray = fullAddress.split(",");
-                if(typeof separateAddressArray[0] != 'undefined'){
+                console.log(separateAddressArray);
+                if(separateAddressArray[0] != "undefined"){
                     $scope.storeSettings.address1 = separateAddressArray[0]
                 }
-                if(typeof separateAddressArray[1] != 'undefined'){
+                if(separateAddressArray[1] != "undefined"){
                     $scope.storeSettings.address2 = separateAddressArray[1]
                 }
-                if(typeof separateAddressArray[2] != 'undefined'){
+                if(separateAddressArray[2] != "undefined"){
                     $scope.storeSettings.address3 = separateAddressArray[2]
                 }
-                if(typeof separateAddressArray[3] != 'undefined'){
+                if(separateAddressArray[3] != "undefined"){
                     $scope.storeSettings.address4 = separateAddressArray[3]
                 }
+
             }
         }).error(function (err) {
             toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
