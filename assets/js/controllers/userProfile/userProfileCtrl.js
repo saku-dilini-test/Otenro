@@ -41,13 +41,16 @@
             $scope.activeTabIndex = index;
         }
 
-        userProfileResource.getBillingDetails($auth.getPayload().id).success(function (data) {
-              $scope.billingEdit= data;
-                }).error(function (err) {
-                    toastr.error(err.error, 'Error', {
-                        closeButton: true
-                    });
+        if (typeof $auth.getPayload().id !== 'undefined' ){
+            userProfileResource.getBillingDetails($auth.getPayload().id).success(function (data) {
+                $scope.billingEdit= data;
+            }).error(function (err) {
+                toastr.error(err.error, 'Error', {
+                    closeButton: true
                 });
+            });
+        }
+
 
         $scope.editUserProfile = function(params){
             userProfileResource.editUserProfile(params).then(function(data){

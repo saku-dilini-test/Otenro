@@ -19,42 +19,11 @@ module.exports = {
                 appId: appId
             };
 
-            ThirdNavigation.find(searchApp).exec(function(err, app) {
-                if (err) return done(err);
-
-                app.forEach(function(appData){
-                var query = {
-                    productId: appData.id,
-                    appId: appData.appId,
-                    childId: appData.childId,
-                    name: appData.name,
-                    price: appData.price,
-                    quantity: appData.quantity
-                }
-                var id = appData.id;
-                appData.product = appData;
-                appData.productId = appData.id;
-                var appInvn = appData;
-                    ApplicationInventory.find({productId: appData.id}).exec(function(e,fff){
-                        if(e) console.log(e);
-                        if(fff == ''){
-                            ApplicationInventory.create(appInvn).exec(function(e,aaa){
-                                if(e) console.log(e);
-                                query.id = aaa.id;
-                                PriceAndVariants.create(query).exec(function(er,bbb){
-                                    if(er) console.log(er);
-                                })
-                            })
-                        }
-                    })
-                })
-                });
-
-
                 ApplicationInventory.find(searchApp).exec(function(e,foundInvntry){
                 if(e) console.log(e);
                 inventory = foundInvntry;
                 })
+
                 PriceAndVariants.find(searchApp).exec(function(err,variantsdata){
                     if(err){console.log(err)}
                     priceAndVariants = variantsdata;
@@ -70,6 +39,47 @@ module.exports = {
 
                 })
 
+    },
+
+    createInventoryLis : function (req,res) {
+
+
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId
+        };
+
+        ThirdNavigation.find(searchApp).exec(function(err, app) {
+            if (err) return done(err);
+
+            app.forEach(function(appData){
+                var query = {
+                    productId: appData.id,
+                    appId: appData.appId,
+                    childId: appData.childId,
+                    name: appData.name,
+                    price: appData.price,
+                    quantity: appData.quantity
+                }
+                var id = appData.id;
+                appData.product = appData;
+                appData.productId = appData.id;
+                var appInvn = appData;
+                ApplicationInventory.find({productId: appData.id}).exec(function(e,fff){
+                    if(e) console.log(e);
+                    if(fff == ''){
+                        ApplicationInventory.create(appInvn).exec(function(e,aaa){
+                            if(e) console.log(e);
+                            query.id = aaa.id;
+                            PriceAndVariants.create(query).exec(function(er,bbb){
+                                if(er) console.log(er);
+                            })
+                        })
+                    }
+                })
+            })
+            res.send("ok");
+        });
     },
 
     updateInventory : function(req,res){
@@ -108,9 +118,9 @@ module.exports = {
                  }
 //            }
             ApplicationInventory.update({ id :inventory.id },inventory).exec(function(err,r){
-                if (err) return done(err);
+                if (err) return send(err);
                 PriceAndVariants.update({ productId : r[0].id}, variant).exec(function(err,variants){
-                    if (err) return done(err);
+                    if (err) return send(err);
                 })
 
             });
