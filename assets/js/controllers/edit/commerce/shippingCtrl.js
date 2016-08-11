@@ -47,7 +47,7 @@
 
             $scope.moveToWeightBasedOption = function () {
                 $scope.weightRate = {
-                    weightRanges : [{startWeight : 0.1, endWeight : '',cost : ''}]
+                    weightRanges : [{startWeight : '', endWeight : '',cost : ''}]
                 };
                 $scope.addNewWeightRange = function(){
                     $scope.weightRate.weightRanges.push({startWeight : '',endWeight : '',cost : ''})
