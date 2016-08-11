@@ -177,7 +177,11 @@
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Cost(optional)</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="number" name="name" required ng-model="pickup.cost" />
+                                <input type="number" name="cost" ng-maxlength="8" ng-pattern="/^\d{0,5}(?:\.\d{1,2})?$/" required ng-model="pickup.cost" />
+                                <br />
+                                <span ng-show="pickUp.cost.$error.pattern">No symbols and do not exceed character limit of 5</span>
+                                <br />
+                                <span ng-show="pickUp.cost.$error.maxlength">Maximum two decimal places only</span>
                             </fieldset>
                         </div>
                         <!--<div  float="left" class="icon icon-plus" ng-click="addPickUpLocations(pickup)" role="button" tabindex="0">
