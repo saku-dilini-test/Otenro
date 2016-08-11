@@ -72,7 +72,7 @@
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label for="input-name">SKU</label>
-                                    <input type="number" name="sku" ng-model="product.sku" id="input-sku"
+                                    <input type="text" name="sku" ng-model="product.sku" id="input-sku"
                                            ng-pattern="/^\d*[1-9]\d*$/" required/>
                                     <br />
                                     <div ng-hide="product.sku.length > maxLengthSku">
