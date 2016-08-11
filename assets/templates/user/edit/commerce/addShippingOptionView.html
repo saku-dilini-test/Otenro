@@ -126,7 +126,9 @@
                         <fieldset>
                             <label>Location Name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="name" required ng-model="pickup.locationName" />
+                            <input type="text" name="locationName" ng-pattern="/^[a-zA-Z0-9_ ]*$/" required ng-model="pickup.locationName" />
+                            <br />
+                            <span ng-show="pickUp.locationName.$error.pattern">Numbers only</span>
                         </fieldset>
                         <div class="clearfix">
                             <fieldset class="col-2">
