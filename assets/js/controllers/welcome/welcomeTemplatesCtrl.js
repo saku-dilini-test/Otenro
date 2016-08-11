@@ -16,14 +16,21 @@
 
     function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,
     ME_APP_SERVER,$auth,$rootScope,$timeout) {
+
+        if ($auth.isAuthenticated()) {
+            $scope.isAuthenticated = true;
+        }
         welcomeTemplatesResource.getTemplates().success(function(data){
-            $rootScope.templates = data;
+                $rootScope.templates = data;
         });
+  
         $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory) {
 
 
 
+
             if ($auth.isAuthenticated()) {
+               
                 var appParams = {
                     'appName': 'preview',
                     'templateId': templateId,
