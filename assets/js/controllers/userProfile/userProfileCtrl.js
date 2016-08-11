@@ -20,9 +20,9 @@
         userProfileResource.getUserProfile().success(function (data) {
             $scope.userEdit = data;
         }).error(function (err) {
-            toastr.error(err.error, 'Error', {
+            /*toastr.error(err.error, 'Error', {
                 closeButton: true
-            });
+            });*/
         });
 
         $scope.accountType = "Beta";
