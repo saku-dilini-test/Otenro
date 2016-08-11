@@ -95,11 +95,19 @@
                             <tbody>
                                 <tr ng-repeat="data in weightRate.weightRanges">
                                     <td class="weight-rate">
-                                        <input type="number" ng-model="data.startWeight">
+                                        <input type="number" name="weightField_{{$index}}" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.startWeight">
+                                        <br />
+                                        <span ng-show="weightBased['weightField_'+$index].$error.pattern">No symbols</span>
+                                        <br />
                                             to
-                                        <input type="number" ng-model="data.endWeight">
+                                        <input type="number" name="endWeight_{{$index}}" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.endWeight">
+                                        <br />
+                                        <span ng-show="weightBased['endWeight_'+$index].$error.pattern">No symbols</span>
                                     </td>
-                                    <td><input type="number" ng-model="data.cost"></td>
+                                    <td><input type="number" name="cost_{{$index}}" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.cost">
+                                    <br />
+                                        <span ng-show="weightBased['cost_'+$index].$error.pattern">No symbols</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
