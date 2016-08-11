@@ -1,0 +1,17 @@
+
+<div ng-if="isAuthenticated" ng-include=" 'user/header/header.html' "></div>
+<div class="obl-dashboard-wrapper">
+    <div class="obl-dashboard-apps">
+        <ul class="grid obl-app-templates clearfix">
+            <li ng-repeat="template in templates">
+                <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory)" >
+                    <div ng-init="imgSrc=template.imageUrl"
+                         ng-mouseover="imgSrc=template.gifImageUrl"
+                         ng-mouseout="imgSrc=template.imageUrl">
+                        <img ng-src="images/templates/{{imgSrc}}" />
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

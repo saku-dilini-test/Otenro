@@ -36,7 +36,12 @@ angular.module('app')
             controller : 'DashboardCtrl',
             templateUrl : 'user/dashboard/dashboard.html'//
 
-      }).state('anon.register', {
+      }).state('user.templates',{
+            url :'/templates',
+            controller : 'TemplatesCtrl',
+            templateUrl : 'user/welcome/Templates.html'
+
+        }).state('anon.register', {
             url: '/register',
             templateUrl: 'auth/register.html',
             controller: 'RegisterController'
