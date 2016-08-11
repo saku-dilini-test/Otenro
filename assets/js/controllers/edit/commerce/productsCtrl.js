@@ -208,18 +208,17 @@
         };
 
         $scope.nextStep3 = function (current, selection, variants) {
-        $scope.variant = variants;
-            if ($scope.variants[0].sku == "" || $scope.variants[0].name == "" || $scope.variants[0].size == "" || $scope.variants[0].price == "" || $scope.variants[0].quantity == "") {
+            if (variants[0].sku == "" || variants[0].name == "" || variants[0].size == "" || variants[0].price == "" || variants[0].quantity == "") {
                 toastr.error('Fill all the fields', 'Warning', {
                     closeButton: true
                 });
             }
-            else if ($scope.variants[0].size == "0" || $scope.variants[0].price == "0" || $scope.variants[0].quantity == "0") {
+            else if (variants[0].size == "0" || variants[0].price == "0" || variants[0].quantity == "0") {
                 toastr.error('Cannot be 0', 'Warning', {
                     closeButton: true
                 });
             }
-            else if (!($scope.variants[0].sku > 0)) {
+            else if (!(variants[0].sku > 0)) {
                 toastr.error('Sku Should be Positive', 'Warning', {closeButton: true});
             }
             else {
@@ -314,8 +313,8 @@
                     variants = {
                         size: size,
                         weight: weight,
-                        price: $scope.variants[0].price,
-                        quantity: $scope.variants[0].quantity,
+                        price: $scope.variantsList[0].price,
+                        quantity: $scope.variantsList[0].quantity,
                         childId: product.mainId
                     };
 
