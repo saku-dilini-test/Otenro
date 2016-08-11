@@ -1,5 +1,19 @@
-
 <div ng-if="isAuthenticated" ng-include=" 'user/header/header.html' "></div>
+<div ng-if="nonAuthenticated">
+    <div class="obl-dashboard-wrapper">
+        <div class="obl-dashboard-header clearfix">
+            <h2 ng-hide="welcome"> MY APPS</h2>
+            <p  ng-hide="welcome">Select the app you would like to work on</p>
+            <h2 ng-show="welcome">select a app</h2>
+
+            <div class="obl-dashboard-settings">
+                <button class="user-settings-button" ng-click="profileView()" type="button">
+                    <img src="images/user-icon.svg" alt="User Logo" />
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="obl-dashboard-wrapper">
     <div class="obl-dashboard-apps">
         <ul class="grid obl-app-templates clearfix">

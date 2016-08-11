@@ -1,3 +1,4 @@
+
 /**
  * @ngdoc function
  * @name appBuilderApp.controller:WelcometemplatesCtrl
@@ -8,38 +9,27 @@
 (function() {
     'use strict';
     angular.module('app')
-        .controller('WelcomeTemplatesCtrl',
-      ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER',
-      '$auth','$rootScope','$timeout',
-            WelcomeTemplatesCtrl
-        ]);
+        .controller('TemplatesCtrl',
+            ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER',
+                '$auth','$rootScope','$timeout',
+                TemplatesCtrl
+            ]);
 
-    function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,
-    ME_APP_SERVER,$auth,$rootScope,$timeout) {
+    function TemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,
+                                  ME_APP_SERVER,$auth,$rootScope,$timeout) {
 
         if ($auth.isAuthenticated()) {
             $scope.isAuthenticated = true;
-            $state.go('user.dashboard');
-        }else {
-            $scope.nonAuthenticated = true;
         }
 
-
-        $scope.profileView = function () {
-            return userProfileService.showUserProfileDialog();
-        }
 
         welcomeTemplatesResource.getTemplates().success(function(data){
-                $rootScope.templates = data;
+            $rootScope.templates = data;
         });
-  
+
         $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory) {
-
-
-
-
             if ($auth.isAuthenticated()) {
-               
+
                 var appParams = {
                     'appName': 'preview',
                     'templateId': templateId,
@@ -52,7 +42,7 @@
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
 
                     var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                            +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                        +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
                     $scope.goLivePreview = function() {
@@ -85,7 +75,7 @@
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
 
                     var url= ME_APP_SERVER+'temp/unknownUser'
-                       +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                        +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
                     $scope.goLivePreview = function() {

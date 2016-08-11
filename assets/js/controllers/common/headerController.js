@@ -7,6 +7,8 @@
 
     function HeaderController($scope, Auth, CurrentUser,userProfileService,$location,dashboardService,toastr,$rootScope) {
 
+
+
       $scope.welcome=false;
       $scope.livePreview=false;
 
