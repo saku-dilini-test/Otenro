@@ -143,13 +143,13 @@ cursor: url(../img/cursor.cur), auto;
 }
 
 .bar .title.title-left {
-    text-align: left;
+    /*text-align: left;*/
 	color: #75A3B8 !important;
 	font-family:"Times New Roman", Times, serif;
 	width: 100%;
 	cursor: url(../img/cursor.cur), auto;
-	margin-top: 20px;
-    margin-left: -45px;
+	/*margin-top: 20px;
+    margin-left: -45px;*/
 }
 .cards{
 	max-width: 100%;
