@@ -237,7 +237,9 @@
                                 </md-radio-group>
                             </fieldset>
                             <fieldset ng-show="data.group == 'allowed'">
-                                <input class="me-add-input new-country-text-box" type="text" name="name" placeholder="ADD NEW COUNTRY" required />
+                                <md-select class=""  ng-model="country" required>
+                                    <md-option ng-value="oneCountry.countryName" ng-repeat="oneCountry in countryList">{{oneCountry.countryName}}</md-option>
+                                </md-select>
                             </fieldset>
                         </form>
                     </div>

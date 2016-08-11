@@ -5,9 +5,9 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("ShippingCtrl", [
-        '$scope', 'toastr', 'shippingService', '$rootScope','initialData', ShippingCtrl]);
+        '$scope', 'toastr', 'shippingService', '$rootScope','taxService','initialData', ShippingCtrl]);
 
-    function ShippingCtrl($scope, toastr, shippingService, $rootScope,initialData) {
+    function ShippingCtrl($scope, toastr, shippingService, $rootScope,taxService,initialData) {
 
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
@@ -182,7 +182,12 @@
                     });
                 })
         };
+        taxService.getAllCountry().success(function (data) {
+            $scope.countryList = data;
 
+        }).error(function (err) {
+            alert("MainMenu Loading Error : " + err);
+        });
         $scope.updateCountryRestriction = function(){
             // This part should change according requirement
             $scope.backToShippingView();
