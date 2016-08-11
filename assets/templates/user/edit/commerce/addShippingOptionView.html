@@ -159,9 +159,7 @@
                             <fieldset class="col-1 reset-margin-right">
                                 <label>street Address</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" ng-pattern="/^[a-zA-Z0-9]*$/" name="streetAddress" required ng-model="pickup.streetAddress" />
-                                <br />
-                                <span ng-show="pickUp.streetAddress.$error.pattern">No symbols</span>
+                                <input type="text" name="streetAddress" required ng-model="pickup.streetAddress" />
                             </fieldset>
                             <fieldset class="col-2">
                                 <label>City</label>
