@@ -50,12 +50,20 @@
                             <fieldset class="col-2">
                                 <label>Per order fee </label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="number" name="name" required ng-model="flatRates.preOrderFee"  />
+                                <input type="number" name="preOrderFee" ng-maxlength="8" ng-pattern="/^\d{0,5}(?:\.\d{1,2})?$/" required ng-model="flatRates.preOrderFee"  />
+                                <br />
+                                <span ng-show="flatRate.preOrderFee.$error.pattern">No symbols and do not exceed character limit of 5</span>
+                                <br />
+                                <span ng-show="flatRate.preOrderFee.$error.maxlength">Maximum two decimal places only</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Per item fee</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="number" name="name" required ng-model="flatRates.feePerItem" />
+                                <input type="number" name="feePerItem" ng-maxlength="8" ng-pattern="/^\d{0,5}(?:\.\d{1,2})?$/" required ng-model="flatRates.feePerItem" />
+                                <br />
+                                <span ng-show="flatRate.feePerItem.$error.pattern">No symbols and do not exceed character limit of 5</span>
+                                <br />
+                                <span ng-show="flatRate.feePerItem.$error.maxlength">Maximum two decimal places only</span>
                             </fieldset>
                         </div>
                             </form>
@@ -95,11 +103,19 @@
                             <tbody>
                                 <tr ng-repeat="data in weightRate.weightRanges">
                                     <td class="weight-rate">
-                                        <input type="number" ng-model="data.startWeight">
+                                        <input type="number" name="weightField_{{$index}}" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.startWeight">
+                                        <br />
+                                        <span ng-show="weightBased['weightField_'+$index].$error.pattern">No symbols</span>
+                                        <br />
                                             to
-                                        <input type="number" ng-model="data.endWeight">
+                                        <input type="number" name="endWeight_{{$index}}" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.endWeight">
+                                        <br />
+                                        <span ng-show="weightBased['endWeight_'+$index].$error.pattern">No symbols</span>
                                     </td>
-                                    <td><input type="number" ng-model="data.cost"></td>
+                                    <td><input type="number" name="cost_{{$index}}" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.cost">
+                                    <br />
+                                        <span ng-show="weightBased['cost_'+$index].$error.pattern">No symbols</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -169,7 +185,11 @@
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Cost(optional)</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="number" name="name" required ng-model="pickup.cost" />
+                                <input type="number" name="cost" ng-maxlength="8" ng-pattern="/^\d{0,5}(?:\.\d{1,2})?$/" required ng-model="pickup.cost" />
+                                <br />
+                                <span ng-show="pickUp.cost.$error.pattern">No symbols and do not exceed character limit of 5</span>
+                                <br />
+                                <span ng-show="pickUp.cost.$error.maxlength">Maximum two decimal places only</span>
                             </fieldset>
                         </div>
                         <!--<div  float="left" class="icon icon-plus" ng-click="addPickUpLocations(pickup)" role="button" tabindex="0">
