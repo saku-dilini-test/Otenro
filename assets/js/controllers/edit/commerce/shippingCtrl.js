@@ -5,9 +5,9 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("ShippingCtrl", [
-        '$scope', 'toastr', 'shippingService', '$rootScope','initialData', ShippingCtrl]);
+        '$scope', 'toastr', 'shippingService', '$rootScope','taxService','initialData', ShippingCtrl]);
 
-    function ShippingCtrl($scope, toastr, shippingService, $rootScope,initialData) {
+    function ShippingCtrl($scope, toastr, shippingService, $rootScope,taxService,initialData) {
 
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
@@ -47,7 +47,7 @@
 
             $scope.moveToWeightBasedOption = function () {
                 $scope.weightRate = {
-                    weightRanges : [{startWeight : 0.1, endWeight : '',cost : ''}]
+                    weightRanges : [{startWeight : '', endWeight : '',cost : ''}]
                 };
                 $scope.addNewWeightRange = function(){
                     $scope.weightRate.weightRanges.push({startWeight : '',endWeight : '',cost : ''})
@@ -182,7 +182,12 @@
                     });
                 })
         };
+        taxService.getAllCountry().success(function (data) {
+            $scope.countryList = data;
 
+        }).error(function (err) {
+            alert("MainMenu Loading Error : " + err);
+        });
         $scope.updateCountryRestriction = function(){
             // This part should change according requirement
             $scope.backToShippingView();
