@@ -87,9 +87,11 @@
                         <fieldset>
                             <label>option name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="name" ng-pattern="/^[a-zA-Z0-9]*$/" ng-model="weightRate.optionName" />
+                            <input type="text" name="name" ng-maxlength="25"  ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="weightRate.optionName" />
                             <br />
                             <span ng-show="weightBased.name.$error.pattern">No symbols</span>
+                            <br />
+                            <span ng-show="weightBased.name.$error.maxlength">Maximum length exceeded</span>
                         </fieldset>
                         <fieldset class="reset-margin">
                             <label>weight ranges</label>
