@@ -132,7 +132,7 @@
                             <fieldset class="col-2">
                                 <label>Number</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="number" ng-pattern="/^[a-zA-Z0-9]*$/" name="number" required ng-model="pickup.number"  />
+                                <input type="number"  ng-pattern="/^[a-zA-Z0-9]*$/" name="number" required ng-model="pickup.number"  />
                                 <br />
                                 <span ng-show="pickUp.number.$error.pattern">Numbers only</span>
                             </fieldset>

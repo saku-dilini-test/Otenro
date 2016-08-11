@@ -36,7 +36,7 @@ module.exports = {
             type: 'string'
         },
         number : {
-            type :'string'
+            type :'integer'
         },
         streetAddress : {
             type : 'string'
