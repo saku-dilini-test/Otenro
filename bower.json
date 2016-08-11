@@ -41,7 +41,8 @@
     "ng-csv": "^0.3.6",
     "ng-img-crop": "ngImgCrop#0.3.2",
     "ngCroppie": "*",
-    "angular-loading-bar": "^0.9.0"
+    "angular-loading-bar": "^0.9.0",
+    "angular-disable-all": "^0.0.2"
   },
   "name": "meV2",
   "version": "0.0.0",

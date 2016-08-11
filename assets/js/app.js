@@ -46,7 +46,8 @@ angular.module('app', [
   'angular-bind-html-compile',
   'ngCsv',
   'ngImgCrop',
-  'angular-loading-bar'
+  'angular-loading-bar',
+  'disableAll'
 
 
 ]).run(function($rootScope, $state, $auth,Auth) {

@@ -105,23 +105,25 @@
                             <tbody>
                                 <tr ng-repeat="data in weightRate.weightRanges">
                                     <td class="weight-rate">
-                                        <input type="number" name="weightField_{{$index}}" ng-pattern="/^\d{0,5}(?:\.\d{1,3})?$/" ng-model="data.startWeight">
+                                        <input type="number" name="weightField_{{$index}}" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.startWeight" required>
                                         <br />
                                         <span ng-show="weightBased['weightField_'+$index].$error.pattern">Enter a valid weight value</span>
                                         <br />
                                             to
-                                        <input type="number" name="endWeight_{{$index}}" ng-pattern="/^\d{0,5}(?:\.\d{1,3})?$/" ng-model="data.endWeight">
+                                        <input type="number" name="endWeight_{{$index}}" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.endWeight" required>
                                         <br />
                                         <span ng-show="weightBased['endWeight_'+$index].$error.pattern">Enter a valid weight value</span>
                                     </td>
-                                    <td><input type="number" name="cost_{{$index}}" ng-pattern="/^\d{0,5}(?:\.\d{1,2})?$/" ng-model="data.cost">
+                                    <td><input type="number" name="cost_{{$index}}" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.cost" required>
                                     <br />
                                         <span ng-show="weightBased['cost_'+$index].$error.pattern">Enter a valid price value</span>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="icon icon-plus" ng-click="addNewWeightRange()"></div>
+                        <div disable-all="weightBased.$invalid">
+                        <div class="icon icon-plus"  ng-click="addNewWeightRange()"></div>
+                        </div>
                     </div>
                     </form>
                     <div class="md-dialog-buttons">
