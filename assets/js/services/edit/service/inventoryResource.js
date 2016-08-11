@@ -11,9 +11,12 @@
     function inventoryService( $http,$rootScope,SERVER_URL) {
         return {
 
-         getInventoryList: function(){
-                        return $http.get(SERVER_URL+ 'edit/getInventoryList?appId='+$rootScope.appId);
-                    },
+         createInventory: function(){
+                        return $http.get(SERVER_URL+ 'edit/createInventory?appId='+$rootScope.appId);
+         },
+            getInventoryList: function(){
+                return $http.get(SERVER_URL+ 'edit/getInventoryList?appId='+$rootScope.appId);
+            },
         }
     }
 })();

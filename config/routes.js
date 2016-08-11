@@ -187,6 +187,7 @@ module.exports.routes = {
      *InventoryController
      */
     'GET /edit/getInventoryList': 'edit/commerce/InventoryController.getInventoryList',
+    'GET /edit/createInventory': 'edit/commerce/InventoryController.createInventoryLis',
     'POST /edit/updateInventory': 'edit/commerce/InventoryController.updateInventory',
     'POST /edit/checkout': 'edit/commerce/InventoryController.updateInventoryProducts',
     'POST /edit/deleteThirdNavigation': 'edit/commerce/InventoryController.deleteThirdNavigation',

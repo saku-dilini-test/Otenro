@@ -19,10 +19,16 @@
                 "api/edit/viewImages?userId="+$scope.userId
                 +"&appId="+$scope.appId+"&"
                 +new Date().getTime();
+        
+        
                 if (typeof $scope.inventoryList === 'undefined') {
-                     inventoryService.getInventoryList()
+                     inventoryService.createInventory()
                          .success(function (result) {
-                             $scope.inventoryList = result;
+                             inventoryService.getInventoryList().success(function (result) {
+                                 $scope.inventoryList = result;
+                             }).error(function (error) {
+                                 alert("Inventory Loading Error : " + error);
+                             })
                          }).error(function (error) {
                              alert("Inventory Loading Error : " + error);
                          })
