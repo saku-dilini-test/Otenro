@@ -1,4 +1,5 @@
-<div ng-include=" 'user/header/header.html' "></div>
+
+<div ng-if="auth.isAuthenticated()" ng-include=" 'user/header/header.html' "></div>
 <div class="obl-dashboard-wrapper">
     <div class="obl-dashboard-apps">
         <ul class="grid obl-app-templates clearfix">
