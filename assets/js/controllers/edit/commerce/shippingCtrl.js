@@ -12,6 +12,8 @@
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
 
+
+
         // --/-- enable & disable tabs --/--
         // --/-- Common function for enable disable tabs
         // --/-- Parameter : (Selected-Tab number,1-tab boolean,2-tab boolean,3-tab boolean,4-tab boolean)
@@ -111,6 +113,7 @@
                     closeButton: true
                 });
             }else{
+
                 pickup.appId = $rootScope.appId;
                 pickup.shippingOption = 'Pick up';
                 pickup.optionName = pickup.locationName;
