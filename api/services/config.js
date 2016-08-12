@@ -1,12 +1,11 @@
-
 module.exports = {
 
-    ME_SERVER: '/Users/udeshikaperera/meServer/temp/',
+    ME_SERVER: sails.config.ME_SERVER,
 
     server: {
-        host : 'http://localhost',
-        port : 1337
+        host : sails.config.HOST_URL,
+        port : sails.config.port
     },
 
-    ME_PORT :8080
+    ME_PORT : sails.config.ME_SERVER_PORT
 };
