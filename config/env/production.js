@@ -25,14 +25,21 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 1338,
+  port: 1340,
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
    ***************************************************************************/
 
   log: {
-    level: "debug"
-  }
+    level: "silent"
+  },
+  
+  /** ****** Custom Config ****** **/
+  // HOST URL 
+  HOST_URL : 'http://simatosolutions.com',
+  // ME SERVER Config 
+  ME_SERVER : '/home/git/meAppServer/',
+  ME_SERVER_PORT : 8082
 
 };
