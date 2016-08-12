@@ -6,14 +6,13 @@
 
     function contactUsCtrl($scope,$rootScope,$mdDialog,toastr, contactUsService) {
 
+        // --- Config ----
         $scope.coords ="";
-
         contactUsService.getContactUsInfo().success(function(result){
             //  if(result.appId == $rootScope.appId) {
             $scope.basicInfo = result;
             $scope.webInfo = result;
             $scope.googleMap = result;
-            $scope.openHours = result;
             $scope.coords =result.coords;
 
             if(!result.coords){
@@ -52,142 +51,104 @@
         }).error(function (error) {
                 alert("Contact Us information Loading Error : " + error);
         });
+        // init loading 1st tab active and other disable
+        disableTabs(1,false,true,true);
 
-        $scope.addContactUs = function(contactUs) {
-             var contactInfo = {
-                 'appId': $rootScope.appId,
-                 'address': contactUs.address,
-                 'telPhone': contactUs.telPhone,
-                 'email': contactUs.email,
-                 'webSite': contactUs.webSite,
-                 'weekDaysOpenHour': contactUs.weekDaysOpenHour,
-                 'weekDaysOpenMinute': contactUs.weekDaysOpenMinute,
-                 'weekDaysCloseHour': contactUs.weekDaysCloseHour,
-                 'weekDaysCloseMinute': contactUs.weekDaysCloseMinute,
-                 'saturdayOpenHour': contactUs.saturdayOpenHour,
-                 'saturdayOpenMinute': contactUs.saturdayOpenMinute,
-                 'saturdayCloseHour': contactUs.saturdayCloseHour,
-                 'saturdayCloseMinute': contactUs.saturdayCloseMinute,
-                 'sundayOpenHour': contactUs.sundayOpenHour,
-                 'sundayOpenMinute': contactUs.sundayOpenMinute,
-                 'sundayCloseHour': contactUs.sundayCloseHour,
-                 'sundayCloseMinute': contactUs.sundayCloseMinute
-             };
-
-             contactUsService.addContactUs(contactInfo)
-                .success(function(data, status, headers, config) {
-                toastr.success('Successfully save Contact Us Data ..... !', 'Awsome!', {
-                                        closeButton: true
-                                    });
-                 }).error(function(data, status, headers, config) {
-                      toastr.error('Unable to Add', 'Warning', {
-                                             closeButton: true
-                      });
-                 })
-        };
-
-        $scope.addBasicInfo = function(current,basicInfo) {
-            var basicInfoResponse = {
-                'appId': $rootScope.appId,
-                'address': basicInfo.address,
-                'telPhone': basicInfo.telPhone
+        // --/-- enable & disable tabs --/--
+        // --/-- Common function for enable disable tabs
+        // --/-- Parameter : (Active-Tab number,1-tab boolean,2-tab boolean,3-tab boolean)
+        // --/-- 1 - basic info, 2 - web info, 3 - google map
+        function  disableTabs(activeTab,tab1,tab2,tab3) {
+            $scope.activeTabIndex = activeTab;
+            $scope.contactUsTabs = {
+                basicInfo : tab1,
+                webInfo: tab2,
+                googleMap: tab3
             };
-            $scope.activeTabIndex = current;
+        }
 
-            contactUsService.saveBasicInfo(basicInfoResponse)
-            .success(function(data, status, headers, config) {
-            toastr.success('Basic info saved successfully', 'Awsome!', {
-                closeButton: true
-            });
-            }).error(function(data, status, headers, config) {
-                toastr.error('Basic info saving error', {
-                                   closeButton: true
+
+        // Save Basic Information and move to Web Information
+        $scope.addBasicInfo = function(basicInfo) {
+            if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
+                toastr.error('Basic Information not update', { closeButton: true});
+                // go next tab
+                disableTabs(2,true,false,true);
+            }else{
+                if(typeof basicInfo.address == 'undefined'){
+                    toastr.error('Address Not Update', { closeButton: true});
+                }
+                if(typeof basicInfo.telPhone == 'undefined'){
+                    toastr.error('Tel phone Not Update', { closeButton: true});
+                }
+                var basicInfoResponse = {
+                    'appId': $rootScope.appId,
+                    'address': basicInfo.address,
+                    'telPhone': basicInfo.telPhone
+                };
+                contactUsService.saveBasicInfo(basicInfoResponse)
+                    .success(function(data, status, headers, config) {
+                        toastr.success('Basic Info saved successfully', 'Awsome!', {closeButton: true});
+                        // go next tab
+                        disableTabs(2,true,false,true);
+                    }).error(function(data, status, headers, config) {
+                    toastr.error('Basic info saving error', { closeButton: true});
                 });
-            });
+            }
         };
 
-        $scope.addWebInfo = function(current,webInfo) {
-            var webInfoResponse = {
-                'appId': $rootScope.appId,
-                'email': webInfo.email,
-                'webSite': webInfo.webSite
-            };
-            $scope.activeTabIndex = current;
-
-            contactUsService.saveWebInfo(webInfoResponse)
-            .success(function(data, status, headers, config) {
-            toastr.success('Web info saved successfully', 'Awsome!', {
-                closeButton: true
-            });
-            }).error(function(data, status, headers, config) {
-                toastr.error('Web info saving error', {
-                                   closeButton: true
+        // Save Web Information and move to Google Map
+        $scope.addWebInfo = function(webInfo) {
+            if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
+                toastr.error('Web Information not update', { closeButton: true});
+                // go next tab
+                disableTabs(3,true,true,false);
+            }else{
+                if(typeof webInfo.email == 'undefined'){
+                    toastr.error('Email Not Update', { closeButton: true});
+                }
+                if(typeof webInfo.webSite == 'undefined'){
+                    toastr.error('Web Site Not Update', { closeButton: true});
+                }
+                var webInfoResponse = {
+                    'appId': $rootScope.appId,
+                    'email': webInfo.email,
+                    'webSite': webInfo.webSite
+                };
+                contactUsService.saveWebInfo(webInfoResponse)
+                    .success(function(data, status, headers, config) {
+                        toastr.success('Web info saved successfully', 'Awsome!', {closeButton: true});
+                        // to next tab
+                        disableTabs(3,true,true,false);
+                    }).error(function(data, status, headers, config) {
+                        toastr.error('Web info saving error', {closeButton: true});
                 });
-            });
+            }
         };
 
+        // Save Google Map information
         $scope.addGoogleMap = function(current,googleMapInfo) {
             var googleMapInfoResponse = {
                 'appId': $rootScope.appId,
                 'coords': $scope.map.markers[0].coords
             };
-
-            $scope.activeTabIndex = current;
-
             contactUsService.saveGoogleMapInfo(googleMapInfoResponse)
                 .success(function(data, status, headers, config) {
-                toastr.success('Google Map Info saved successfully', 'Awsome!', {
-                    closeButton: true
-                });
+                    toastr.success('Google Map Info saved successfully', 'Awsome!', {closeButton: true});
+                    // finished and back to 1st tab
+                    disableTabs(1,false,true,true);
                 }).error(function(data, status, headers, config) {
-                    toastr.error('Google Map Info saving error', {
-                             closeButton: true
-                    });
+                    toastr.error('Google Map Info saving error', {closeButton: true});
                 });
         };
 
-        $scope.addOpenHoursInfo = function(openHours) {
-            var openHoursResponse = {
-                'appId': $rootScope.appId,
-                'weekDaysOpenHour': openHours.weekDaysOpenHour,
-                'weekDaysOpenMinute': openHours.weekDaysOpenMinute,
-                'weekDaysCloseHour': openHours.weekDaysCloseHour,
-                'weekDaysCloseMinute': openHours.weekDaysCloseMinute,
-                'saturdayOpenHour': openHours.saturdayOpenHour,
-                'saturdayOpenMinute': openHours.saturdayOpenMinute,
-                'saturdayCloseHour': openHours.saturdayCloseHour,
-                'saturdayCloseMinute': openHours.saturdayCloseMinute,
-                'sundayOpenHour': openHours.sundayOpenHour,
-                'sundayOpenMinute': openHours.sundayOpenMinute,
-                'sundayCloseHour': openHours.sundayCloseHour,
-                'sundayCloseMinute': openHours.sundayCloseMinute
-            };
-
-            contactUsService.saveOpenHoursInfo(openHoursResponse)
-            .success(function(data, status, headers, config) {
-            toastr.success('Open hours information saved successfully', 'Awsome!', {
-                closeButton: true
-            });
-                 $mdDialog.hide();
-            }).error(function(data, status, headers, config) {
-                 toastr.error('Open hours info saving error', {
-                          closeButton: true
-                 });
-            });
-        };
-
-        $scope.nextStep = function(current) {
-            $scope.activeTabIndex = current;
-        };
-
+        // button function
         $scope.hide = function() {
             $mdDialog.hide();
         };
-
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
-
         $scope.answer = function() {
             $mdDialog.hide();
         };

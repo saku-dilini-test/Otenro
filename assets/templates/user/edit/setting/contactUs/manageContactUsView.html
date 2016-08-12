@@ -1,15 +1,15 @@
     <md-dialog aria-label="Contact Us">
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
-            <md-tab>
+            <md-tab ng-disabled="contactUsTabs.basicInfo">
                 <md-tab-label>Basic Information</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
                         <h1>Basic Information</h1>
                     </div>
+                    <!-- Address | Tel Phone -->
                     <form name="basicInfoForm" novalidate>
                         <div class="md-dialog-main">
-                            <!-- Address | Tel Phone | Email | Web Site -->
                             <fieldset>
                                 <!-- Address -->
                                 <label>Address</label>
@@ -18,25 +18,26 @@
                             <fieldset>
                                 <!-- Telephone -->
                                 <label>Telephone</label>
-                                <input type="text" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" ui-mask="(999) 999-9999"  required />
+                                <input type="text" name="telPhone" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" ui-mask="(999) 999-9999"  required />
                             </fieldset>
                         </div>
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                                <md-button class="me-default-button" ng-click="addBasicInfo(1,basicInfo)">Next</md-button>
+                                <md-button class="me-default-button" ng-click="addBasicInfo(basicInfo)">Next</md-button>
                             </div>
                         </div>
                     </form>
                 </md-tab-body>
             </md-tab>
 
-            <md-tab>
+            <md-tab ng-disabled="contactUsTabs.webInfo">
                 <md-tab-label>Web Information</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
                         <h1>Web Information</h1>
                     </div>
+                    <!-- Email | Web site -->
                     <form name="webInfoForm" novalidate>
                         <div class="md-dialog-main">
                             <fieldset>
@@ -55,14 +56,14 @@
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                                <md-button class="me-default-button" ng-click="addWebInfo(2,webInfo)">Next</md-button>
+                                <md-button class="me-default-button" ng-click="addWebInfo(webInfo)">Next</md-button>
                             </div>
                         </div>
                     </form>
                 </md-tab-body>
             </md-tab>
 
-            <md-tab>
+            <md-tab ng-disabled="contactUsTabs.googleMap">
                 <md-tab-label>Google Map</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -86,7 +87,7 @@
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                                <md-button class="me-default-button" ng-click="addGoogleMap(3,googleMap)">Next</md-button>
+                                <md-button class="me-default-button" ng-click="addGoogleMap(3,googleMap)">Finished</md-button>
                             </div>
                         </div>
                     </form>
