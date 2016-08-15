@@ -15,7 +15,9 @@
         ]);
 
     function userProfileCtrl($scope, userProfileResource, CurrentUser, userProfileService,Auth,$auth,$state,$mdDialog,toastr) {
+
         $scope.password = false;
+        $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
         userProfileResource.getUserProfile().success(function (data) {
             $scope.userEdit = data;
         }).error(function (err) {
