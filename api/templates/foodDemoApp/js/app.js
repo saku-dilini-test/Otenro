@@ -65,6 +65,9 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
   })
   .state('app.login', {
       url: '/login',
+      params:{
+        item: null
+      },
       views: {
         'menuContent': {
           templateUrl: 'templates/login.html'
@@ -73,6 +76,9 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
   })
   .state('app.register', {
       url: '/register',
+      params:{
+        item: null
+      },
       views: {
         'menuContent': {
           templateUrl: 'templates/register.html',

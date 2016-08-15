@@ -43,7 +43,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                  $state.go('app.deliverDetails',{item:deliverItems});
             }
             else{
-                $state.go('app.login');
+                $scope.status = 'delivery'
+                $state.go('app.login',{item:$scope.status});
             }
     }
     $scope.deliver = function(deliverDetails){

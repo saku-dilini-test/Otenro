@@ -5,7 +5,8 @@
 		.directive('oblLogin',function(){
 			return {
 				templateUrl:'js/directives/obl-Login/obl-Login.html',
-				controller: ['$scope','$http','$state','$ionicPopup','constants','$auth', function($scope,$http,$state,$ionicPopup,constants,$auth) {
+				controller: ['$scope','$http','$state','$stateParams','$ionicPopup','constants','$auth',
+				function($scope,$http,$state,$stateParams,$ionicPopup,constants,$auth) {
 			   		$scope.data = {};
  
 				    $scope.login = function() {
@@ -25,7 +26,11 @@
                             	"type": 'internal'
                             };
                             localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
-								$state.go('app.category');
+								if($stateParams.item == 'delivery'){
+                                    $state.go('app.cart');
+                                }else{
+                                    $state.go('app.category');
+                                }
 							},
 							function(err){
 								$ionicPopup.alert({
@@ -38,7 +43,11 @@
 					$scope.authenticate = function(provider) {
 						$auth.authenticate(provider).then(function(res){
 							if(typeof res.data.token != 'undefined'){
-								$state.go('app.category');
+								if($stateParams.item == 'delivery'){
+                                    $state.go('app.cart');
+                                }else{
+                                    $state.go('app.category');
+                                }
 							}else{
 								alert(provider+' Login error');
 							}
@@ -49,7 +58,11 @@
 
 
 					$scope.singUp = function(){
-						$state.go('app.register');
+						if($stateParams.item == 'delivery'){
+                            $state.go('app.register',{item:$stateParams.item});
+                        }else{
+                            $state.go('app.register');
+                        }
 					}
 				}],
 				restrict: 'ASE',
