@@ -93,7 +93,7 @@
                         </ul>
                     </div>
                     <div class="md-dialog-main">
-                        <form class="form-signin" accept-charset="UTF-8" role="form" name="editProfile">
+                        <form class="form-signin" accept-charset="UTF-8" role="form" name="editProfile" novalidate>
                         <div class="clearfix">
                             <fieldset class="col-2">
                                 <label>First name</label>
@@ -116,21 +116,27 @@
                                 <label>Current Password</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <input type="password" name="password"  ng-model="userEdit.currentPassword" />
+                                    <br />
+                                <span ng-show="password">Please enter valid current password</span>
                             </fieldset>
                         </div>
                         <div class="clearfix">
                             <fieldset class="col-2">
                                 <label>Password</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="password" name="password" ng-model="userEdit.password" ng-minlength="7" compare-to="userEdit.confirmPassword" />
+                                <input type="password" name="password" ng-model="userEdit.password" ng-pattern="passwordRegularExpression"
+                                       ng-minlength="7" compare-to="userEdit.confirmPassword" required>
                                 <span class="help-block " ng-show="editProfile.password.$error.minlength">
                                     <span ng-show="editProfile.password.$error.minlength">Password should have at least 7 characters.</span>
+                                </span>
+                                <span class="help-block " ng-show="!(editProfile.password.$error.minlength) && editProfile.password.$error.pattern">
+                                    <span >Password should have at least one lower or Upper letter and one number</span>
                                 </span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Confirm Password</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="password" name="confirmPassword" ng-model="userEdit.confirmPassword"  />
+                                <input type="password" name="confirmPassword" ng-model="userEdit.confirmPassword"  required>
                                 <span class="help-block " ng-show="editProfile.confirmPassword.$dirty">
                                     <span ng-show="editProfile.password.$error.compareTo">Password must match.</span>
                                 </span>
@@ -145,7 +151,7 @@
                         </fieldset>
                         <fieldset class="text-right">
                             <md-button class="me-default-button" ng-click="backToView(0)">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="editUserProfile(userEdit)">Save</md-button>
+                            <md-button class="me-default-button" ng-disabled="editProfile.$invalid" ng-click="editUserProfile(userEdit)">Save</md-button>
                         </fieldset>
                         </form>
                     </div>

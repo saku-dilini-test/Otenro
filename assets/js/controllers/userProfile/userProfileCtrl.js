@@ -10,13 +10,14 @@
     'use strict';
     angular.module('app')
         .controller('userProfileCtrl',
-      ['$scope', 'userProfileResource', 'userProfileService','Auth','$auth','$state','$mdDialog','toastr',
+      ['$scope', 'userProfileResource', 'CurrentUser', 'userProfileService','Auth','$auth','$state','$mdDialog','toastr',
             userProfileCtrl
         ]);
 
-    function userProfileCtrl($scope, userProfileResource, userProfileService,Auth,$auth,$state,$mdDialog,toastr) {
+    function userProfileCtrl($scope, userProfileResource, CurrentUser, userProfileService,Auth,$auth,$state,$mdDialog,toastr) {
 
-
+        $scope.password = false;
+        $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
         userProfileResource.getUserProfile().success(function (data) {
             $scope.userEdit = data;
         }).error(function (err) {
@@ -53,12 +54,25 @@
 
 
         $scope.editUserProfile = function(params){
-            userProfileResource.editUserProfile(params).then(function(data){
-                $mdDialog.hide();
-                toastr.success('Successfully Changed', 'Success', {
-                    closeButton: true
+            $scope.user={
+                email : params.email,
+                password : params.currentPassword
+            }
+            Auth.login($scope.user).success(function() {
+                userProfileResource.editUserProfile(params).then(function(data){
+                    $mdDialog.hide();
+                    toastr.success('Successfully Changed', 'Success', {
+                        closeButton: true
+                    });
                 });
-            });
+            }).error(function(err) {
+                $scope.password = true;
+                console.log(err);
+                toastr.error('Invalid email/password combination.', 'Error', {
+                  closeButton: true
+                });
+            })
+
         };
         $scope.saveBillings = function(billingEdit){
             billingEdit.userId = $auth.getPayload().id;
