@@ -23,8 +23,8 @@
                 firstLocked : tab1,
                 secondLocked: tab2,
                 thirdLocked: tab3,
-                pickupLocked : tab5,
-                countrySelectionLocked: tab4
+                pickupLocked : tab4,
+                countrySelectionLocked: tab5
             };
         }
 
@@ -56,7 +56,7 @@
             };
 
             $scope.moveToPickupOption = function () {
-                disableTabs(3,false,true,true,true,false);
+                disableTabs(3,false,true,true,false,true);
             };
         }
         // --/-- shipping collection editable mode
@@ -74,7 +74,7 @@
             }
             if($scope.initialData.shippingOption == 'Pick up'){
                 $scope.pickup = $scope.initialData;
-                disableTabs(3,true,true,true,true,false);
+                disableTabs(3,true,true,true,false,true);
             }
         }
 
@@ -98,7 +98,7 @@
                         toastr.success('Successfully Saved ', 'Saved', {
                             closeButton: true
                         });
-                        disableTabs(3,true,false,true,true,false);
+                        disableTabs(4,true,false,true,true,false);
                     }).error(function (error) {
                         toastr.error('Loading Error', 'Warning', {
                             closeButton: true
@@ -122,7 +122,7 @@
                         toastr.success('Successfully Saved ', 'Saved', {
                             closeButton: true
                         });
-                        disableTabs(3,true,false,true,false,true);
+                        disableTabs(4,true,true,true,false,false);
                     }).error(function (error) {
                     toastr.error('Loading Error', 'Warning', {
                         closeButton: true
