@@ -43,7 +43,7 @@
                         <fieldset>
                             <label>option name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="optionName" ng-pattern="/^[a-zA-Z0-9]*$/" required ng-model="flatRates.optionName" />
+                            <input type="text" name="optionName" ng-pattern="/^[a-zA-Z0-9_ ]*$/" required ng-model="flatRates.optionName" />
                         </fieldset>
                         <span ng-show="flatRate.optionName.$error.pattern">No symbols</span>
                         <div class="clearfix">
@@ -173,7 +173,7 @@
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Country</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="country" ng-pattern="/^[a-zA-Z]*$/" required ng-model="pickup.country" />
+                                <input type="text" name="country" ng-pattern="/^[a-zA-Z_ ]*$/" required ng-model="pickup.country" />
                                 <br />
                                 <span ng-show="pickUp.country.$error.pattern">Characters only</span>
                             </fieldset>
