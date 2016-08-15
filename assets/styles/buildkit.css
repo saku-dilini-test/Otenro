@@ -153,7 +153,18 @@ p{
     text-shadow: 0 0 0 #999;
     text-transform: capitalize;
 }
-
+.desc{
+    border: medium none;
+    color: #7F7F7F;
+    display: inline-block;
+    font-size: 0.875em;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    text-align: left;
+    text-transform: uppercase;
+    margin-left: -330px;
+}
 label{
     border: medium none;
     color: #7F7F7F;
