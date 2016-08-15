@@ -188,7 +188,9 @@
         }).error(function (err) {
             alert("MainMenu Loading Error : " + err);
         });
-        $scope.updateCountryRestriction = function(){
+        $scope.updateCountryRestriction = function(radio,country){
+            console.log(radio);
+            console.log(country);
             // This part should change according requirement
             $scope.backToShippingView();
         };
