@@ -94,9 +94,14 @@ module.exports = {
         var response = {
             firstMenuLabel: firstMenuLabel
         }
-        TemplateMetaData.find(searchQuery, function (err, result) {
+
+
+        var Query = TemplateMetaData.find(searchQuery);
+            Query.sort('templateCategoryId,orderId ASC');
+
+        Query.exec(function callBack(err,results){
             if (err) return done(err);
-            response['btnArray'] = result;
+            response['btnArray'] = results;
             res.send(response);
         });
     }

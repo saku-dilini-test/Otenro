@@ -38,6 +38,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Publish Article',
       menuFunction : 'article.publishArticle',
+      orderId : "1",
       menuButtonId : '1001'
     },
     {
@@ -46,6 +47,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Preview Article',
       menuFunction : 'article.previewArticles',
+      orderId : "2",
       menuButtonId : '1002'
     },
     {
@@ -54,6 +56,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Featured',
       menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "3",
       menuButtonId : '1003'
     },
     {
@@ -62,6 +65,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Secondary',
       menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "4",
       menuButtonId : '1004'
     },
     {
@@ -70,6 +74,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Ads',
       menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "5",
       menuButtonId : '1004'
     },
     {
@@ -78,6 +83,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Subscriptions',
       menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "6",
       menuButtonId : '1005'
     },
     {
@@ -86,6 +92,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'View Controls',
       menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "7",
       menuButtonId : '1006'
     },
     {
@@ -94,6 +101,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Payment Activities',
       menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "8",
       menuButtonId : '1007'
     },
     {
@@ -102,6 +110,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'IPG Integration',
       menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "9",
       menuButtonId : '1008'
     },
     {
@@ -110,6 +119,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Communication',
       menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "10",
       menuButtonId : '1009'
     },
     {
@@ -118,6 +128,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Site Settings',
       menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "11",
       menuButtonId : '1010'
     },
 
@@ -128,6 +139,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Add a product',
       menuFunction : 'products.showAddProductsDialog',
+      orderId : "12",
       menuButtonId : '1501'
     },
     {
@@ -136,6 +148,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Orders',
       menuFunction : 'commerce.showOrderDialog',
+      orderId : "13",
       menuButtonId : '1502'
     },
     {
@@ -144,6 +157,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Inventory',
       menuFunction : 'inventory.showInventoryDialog',
+      orderId : "14",
       menuButtonId : '1503'
     },
     {
@@ -152,6 +166,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Shipping',
       menuFunction : 'commerce.showShippingDialog',
+      orderId : "15",
       menuButtonId : '1504'
     },
     {
@@ -160,6 +175,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Taxes',
       menuFunction : 'tax.showTaxesDialog',
+      orderId : "16",
       menuButtonId : '1505'
     },
     {
@@ -168,6 +184,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'E-mail Settings',
       menuFunction : 'commerce.showEmailSettingsDialog',
+      orderId : "17",
       menuButtonId : '1506'
     },
     {
@@ -176,6 +193,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Store Settings',
       menuFunction : 'commerce.showStoreSettingsDialog',
+      orderId : "18",
       menuButtonId : '1507'
     },
     {
@@ -184,6 +202,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Payment Activities',
       menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "19",
       menuButtonId : '1508'
     },
     {
@@ -192,6 +211,7 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'IPG Integration',
       menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "20",
       menuButtonId : '1509'
     }
 
