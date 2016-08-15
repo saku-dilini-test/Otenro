@@ -1,7 +1,7 @@
 <md-dialog aria-label="IOS Store">
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
-            <md-tab>
+            <md-tab ng-disabled="publishToAppStore.general">
                 <md-tab-label>general</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -20,7 +20,8 @@
                                 <a class="feature01 logo-upload">
                                     <span class="overlay01">
                                         <span class="caption01">
-                                             <input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*" value="Add Image" required />
+                                             <input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*"
+                                                    value="Upload Image" required />
                                         </span>
                                     </span>
                                     <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />
@@ -140,7 +141,7 @@
                     </div>
                 </md-tab-body>
             </md-tab>
-            <md-tab>
+            <md-tab ng-disabled="publishToAppStore.contentRating">
                 <md-tab-label>content rating</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -209,13 +210,13 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button">cancel</md-button>
-                            <md-button class="me-default-button">next</md-button>
+                            <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="contentRating()">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
             </md-tab>
-            <md-tab>
+            <md-tab ng-disabled="publishToAppStore.information">
                 <md-tab-label>app review information</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -255,13 +256,13 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
                             <md-button class="me-default-button">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
             </md-tab>
-            <md-tab>
+            <md-tab ng-disabled="publishToAppStore.promotions">
                 <md-tab-label>promotions</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -307,7 +308,7 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
                             <md-button class="me-default-button">back</md-button>
                         </div>
                     </div>

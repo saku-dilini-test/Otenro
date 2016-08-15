@@ -15,7 +15,16 @@
         $scope.defaultLanguage={
             language: "English"
         };
-
+        disableTabs(1,false,true,true,true);
+        function  disableTabs(activeTab,tab1,tab2,tab3,tab4) {
+            $scope.activeTabIndex = activeTab;
+            $scope.publishToAppStore = {
+                general : tab1,
+                contentRating: tab2,
+                information: tab3,
+                promotions: tab4
+            };
+        }
         publishService.getAllLanguages().
         success(function(data){
             $scope.languageList = data;
@@ -154,15 +163,19 @@
                 appStoreData.category = 'AppStore';
                 publishService.addGooglePlayInfo(file,appStoreData,publishSplash)
                 .success(function(data, status, headers, config) {
+                disableTabs(1,true,false,true,true);
                 toastr.success('Genaral info has been added', 'Saved', {
-                                        closeButton: true
-                                    });
+                    closeButton: true
+                });
                 }).error(function(data, status, headers, config) {
                     toastr.error('Error while saving data', 'Warning', {
                           closeButton: true
                     });
                 })
             }
+        }
+        $scope.contentRating = function(){
+            disableTabs(2,true,true,false,true);
         }
     }
 })();
