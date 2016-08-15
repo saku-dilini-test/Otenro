@@ -21,9 +21,9 @@
         $scope.maxLengthDesc = 100;
         $scope.maxLengthName = 15;
         $scope.maxLengthSku = 10;
+        $scope.enableTab = "true";
 
-
-
+        
 
         $scope.myImage='';
         $scope.myCroppedImage='';
@@ -103,6 +103,7 @@
         };
 
         $scope.nextStep2 = function (current, product) {
+            $scope.enableTab = "false";
             if ($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "foodDemoApp2"
                 || $scope.categories[0].templateName == "clothingApp" || $scope.categories[0].templateName == "ECommerceApp") {
                 if (product.name == null || product.mainId == null) {
@@ -331,6 +332,7 @@
                             variantsAttribute.childId = product.mainId;
                             variantsAttribute.productId = data.appId.id;
                             variantsAttribute.id = item.id;
+                            variantsAttribute.selection = product.selection;
 
                             commerceService.addToInventory(variantsAttribute).success(function(invnrty){
                                 $scope.invntry = invnrty;
@@ -410,6 +412,7 @@
                        variantsAttribute.appId = $rootScope.appId;
                        variantsAttribute.childId = product.mainId;
                        variantsAttribute.productId = data.appId.id;
+                       variantsAttribute.selection = product.selection;
 
                        commerceService.addToInventory(variantsAttribute).success(function(invnrty){
                            $scope.invntry = invnrty;

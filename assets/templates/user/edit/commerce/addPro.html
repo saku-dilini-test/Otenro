@@ -1,8 +1,8 @@
 <md-dialog aria-label="Manage Products">
     <md-dialog-content>
-        <md-tabs md-center-tabs="false" md-selected="selectedTab" md-no-ink="true" md-autoselect="false"
+        <md-tabs  md-no-ink-bar ="false"  md-no-bar  md-center-tabs="false" md-selected="selectedTab"  md-autoselect="false"
                  md-dynamic-height="true">
-            <md-tab>
+            <md-tab >
                 <md-tab-label>Product Type</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -132,7 +132,7 @@
 
 
             <md-tab-label>Add Details</md-tab-label>
-            <md-tab ng-if="isDigital==false" md-no-select-click ="true" >
+            <md-tab ng-if="isDigital==false" md-no-select-click ="true" ng-disabled=enableTab >
                 <md-tab-label>Price & Variants</md-tab-label>
                 <md-tab-body>
 
@@ -146,7 +146,7 @@
                             <th width="12%">Sku</th>
                             <th class="product-name-column" width="25%">Product Name</th>
                             <th width="19%">
-                                <select ng-model="selection">
+                                <select ng-model="product.selection">
                                     <option value="size">size</option>
                                     <option value="weight">weight</option>
 
