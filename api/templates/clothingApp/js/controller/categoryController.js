@@ -3,7 +3,28 @@
  */
 
 
-mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants) {
+mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants,readMadeEasy) {
+
+    if (typeof $rootScope.appId === 'undefined'){
+
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.appId = data.appId;
+        });
+    }
+
+    if (typeof $rootScope.userId === 'undefined'){
+
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.userId = data.userId;
+        });
+    }
+    if (typeof $rootScope.appName === 'undefined'){
+
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.appName = data.name;
+        });
+    }
+
 
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;

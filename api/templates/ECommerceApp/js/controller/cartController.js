@@ -4,7 +4,28 @@
 
 //(function() {
 //    angular.module('starter', [])
-mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants) {
+mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy) {
+
+            if (typeof $rootScope.appId === 'undefined'){
+
+                readMadeEasy.readFile().success(function(data){
+                    $rootScope.appId = data.appId;
+                });
+            }
+
+            if (typeof $rootScope.userId === 'undefined'){
+
+                readMadeEasy.readFile().success(function(data){
+                    $rootScope.userId = data.userId;
+                });
+            }
+            if (typeof $rootScope.appName === 'undefined'){
+
+                readMadeEasy.readFile().success(function(data){
+                    $rootScope.appName = data.name;
+                });
+            }
+
 
             $scope.userId = $rootScope.userId;
             $scope.appId = $rootScope.appId;
@@ -85,6 +106,8 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                                     template: 'Success',
                                     cssClass: 'ionicPopUp'
                                 });
+
+                                    $scope.details = null;
                             },
                             function (err) {
                                 console.log(err);

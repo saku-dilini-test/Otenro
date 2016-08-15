@@ -11,7 +11,7 @@ angular
 		'$rootScope',
 		'$timeout',
 		'routesConfig',
-		function (categoriesSvc, $ionicLoading,$rootScope,$timeout,routesConfig) {
+		function (categoriesSvc, $ionicLoading,$rootScope,$timeout,routesConfig,readMadeEasy) {
 			'use strict';
 
 			var vm = this;
@@ -26,6 +26,27 @@ angular
 			});
 
 			function setCategories(categories) {
+
+				if (typeof $rootScope.appId === 'undefined'){
+
+					readMadeEasy.readFile().success(function(data){
+						$rootScope.appId = data.appId;
+					});
+				}
+
+				if (typeof $rootScope.userId === 'undefined'){
+
+					readMadeEasy.readFile().success(function(data){
+						$rootScope.userId = data.userId;
+					});
+				}
+				if (typeof $rootScope.appName === 'undefined'){
+
+					readMadeEasy.readFile().success(function(data){
+						$rootScope.appName = data.name;
+					});
+				}
+
 
 				vm.imageUrl =
 					routesConfig.wpUrl.SERVER_URL()

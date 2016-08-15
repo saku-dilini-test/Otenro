@@ -3,10 +3,30 @@
  */
 
 
-mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants) {
+mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants,readMadeEasy) {
 
-    $scope.userId=$rootScope.userId;
-    $scope.appId=$rootScope.appId;
+
+    if (typeof $rootScope.appId === 'undefined'){
+
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.appId = data.appId;
+        });
+    }
+
+    if (typeof $rootScope.userId === 'undefined'){
+
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.userId = data.userId;
+        });
+    }
+    if (typeof $rootScope.appName === 'undefined'){
+
+        readMadeEasy.readFile().success(function(data){
+            $rootScope.appName = data.name;
+        });
+    }
+
+
     $scope.imageURL = constants.SERVER_URL
         +"/templates/viewImages?userId="
         +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi";
