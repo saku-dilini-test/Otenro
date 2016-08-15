@@ -64,7 +64,11 @@
 
             <fieldset class="pull-left">
                 <label>Text</label>
-                <trix-editor angular-trix ng-model="article.desc"></trix-editor>
+                <trix-editor class="textEditor" name="editorText" ng-maxlength="200" angular-trix ng-model="article.desc"></trix-editor>
+                <label class="desc">Description</label>
+            </fieldset>
+            <fieldset style="margin-bottom:0px;">
+            <span ng-show="articleForm.editorText.$error.maxlength">Too lengthy</span></td>
             </fieldset>
         </div>
         </form>
