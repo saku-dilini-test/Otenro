@@ -3,7 +3,7 @@
  */
 
 
-mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,$auth,constants) {
+mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,$stateParams,$auth,constants) {
     $scope.data = {};
     $scope.singUp = function() {
     $scope.appLocalStorageUser  = JSON.parse(localStorage.getItem('appLocalStorageUser'));
@@ -27,7 +27,11 @@ mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,$a
             };
             		localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
             		console.log(localStorage.getItem('appLocalStorageUser'));
-                $state.go('app.category');
+                if($stateParams.item == 'delivery'){
+                    $state.go('app.cart');
+                }else{
+                    $state.go('app.category');
+                }
             },
             function(err){
                 $ionicPopup.alert({
@@ -40,7 +44,11 @@ mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,$a
     $scope.authenticate = function(provider) {
         $auth.authenticate(provider).then(function(res){
             if(typeof res.data.token != 'undefined'){
-                $state.go('app.category');
+                if($stateParams.item == 'delivery'){
+                    $state.go('app.cart');
+                }else{
+                    $state.go('app.category');
+                }
             }else{
                 alert(provider+' Login error');
             }
