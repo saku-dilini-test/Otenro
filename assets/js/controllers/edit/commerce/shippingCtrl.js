@@ -63,6 +63,10 @@
         else{
             if($scope.initialData.shippingOption == 'Flat Rate'){
                 $scope.flatRates = $scope.initialData;
+                $scope.data ={
+                    group : $scope.initialData.selection
+                }
+                $scope.country = $scope.initialData.countryRestriction;
                 disableTabs(1,true,false,true,true,true);
             }
             if($scope.initialData.shippingOption == 'Weight Base'){
@@ -70,10 +74,18 @@
                 $scope.addNewWeightRange = function(){
                     $scope.weightRate.weightRanges.push({startWeight : '',endWeight : '',cost : ''})
                 };
+                $scope.data ={
+                    group : $scope.initialData.selection
+                }
+                $scope.country = $scope.initialData.countryRestriction;
                 disableTabs(2,true,true,false,true,true);
             }
             if($scope.initialData.shippingOption == 'Pick up'){
                 $scope.pickup = $scope.initialData;
+                $scope.data ={
+                    group : $scope.initialData.selection
+                }
+                $scope.country = $scope.initialData.countryRestriction;
                 disableTabs(3,true,true,true,false,true);
             }
         }
@@ -93,17 +105,8 @@
             }else{
                 shipping.appId = $rootScope.appId;
                 shipping.shippingOption = 'Flat Rate';
-                shippingService.updateShippingInfo(shipping)
-                    .success(function (result) {
-                        toastr.success('Successfully Saved ', 'Saved', {
-                            closeButton: true
-                        });
-                        disableTabs(4,true,false,true,true,false);
-                    }).error(function (error) {
-                        toastr.error('Loading Error', 'Warning', {
-                            closeButton: true
-                        });
-                    })
+                $scope.shipping = shipping;
+                disableTabs(4,true,false,true,true,false);
             }
         };
 
@@ -117,17 +120,8 @@
                 pickup.appId = $rootScope.appId;
                 pickup.shippingOption = 'Pick up';
                 pickup.optionName = pickup.locationName;
-                shippingService.updateShippingInfo(pickup)
-                    .success(function (result) {
-                        toastr.success('Successfully Saved ', 'Saved', {
-                            closeButton: true
-                        });
-                        disableTabs(4,true,true,true,false,false);
-                    }).error(function (error) {
-                    toastr.error('Loading Error', 'Warning', {
-                        closeButton: true
-                    });
-                })
+                disableTabs(4,true,true,true,false,false);
+                $scope.shipping = pickup;
             }
         };
         
@@ -149,17 +143,8 @@
             }else {
                 shipping.appId = $rootScope.appId;
                 shipping.shippingOption = 'Weight Base';
-                shippingService.updateShippingInfo(shipping)
-                    .success(function (result) {
-                        toastr.success('Successfully Saved ', 'Saved', {
-                            closeButton: true
-                        });
-                        disableTabs(3,true,true,false,true,false);
-                    }).error(function (error) {
-                        toastr.error('Loading Error', 'Warning', {
-                            closeButton: true
-                        });
-                    });
+                $scope.shipping = shipping;
+                disableTabs(3,true,true,false,true,false);
             }
         };
 
@@ -189,10 +174,23 @@
             alert("MainMenu Loading Error : " + err);
         });
         $scope.updateCountryRestriction = function(radio,country){
-            console.log(radio);
-            console.log(country);
-            // This part should change according requirement
-            $scope.backToShippingView();
+            $scope.shipping.selection = radio.group;
+            $scope.shipping.countryRestriction = country;
+            shippingService.updateShippingInfo($scope.shipping)
+            .success(function (result) {
+                toastr.success('Successfully Saved ', 'Saved', {
+                    closeButton: true
+                });
+                $scope.shipping = null;
+                // This part should change according requirement
+                $scope.backToShippingView();
+            }).error(function (error) {
+                toastr.error('Loading Error', 'Warning', {
+                    closeButton: true
+                });
+            })
+
+
         };
 
         // ---  Open dialog ----------

@@ -53,6 +53,12 @@ module.exports = {
         cost : {
             type :'integer'
         },
+        countryRestriction: {
+            type : 'string'
+        },
+        selection : {
+            type : 'string'
+        },
         createdDate:{
             type: 'date'
         }
