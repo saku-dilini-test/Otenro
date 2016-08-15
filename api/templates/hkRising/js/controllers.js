@@ -163,7 +163,7 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading,initialData) {
+    .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading,initialData,readMadeEasy) {
 
         $ionicLoading.show({
             template: '<ion-spinner icon="lines" ></ion-spinner>'
@@ -182,13 +182,31 @@ angular.module('starter.controllers', [])
         $scope.imageURL = initialData.imageURL;
 
 
-        $scope.appId = $rootScope.appId;
-        $scope.appName = $rootScope.appName;
+
 
         $scope.changeAppName = function () {
-            $scope.appName = $rootScope.appName;
+            if (typeof $rootScope.appId === 'undefined'){
+
+                readMadeEasy.readFile().success(function(data){
+                    $rootScope.appId = data.appId;
+                });
+            }
+
+            if (typeof $rootScope.userId === 'undefined'){
+
+                readMadeEasy.readFile().success(function(data){
+                    $rootScope.userId = data.userId;
+                });
+            }
+            if (typeof $rootScope.appName === 'undefined'){
+
+                readMadeEasy.readFile().success(function(data){
+                    $rootScope.appName = data.name;
+                });
+            }
 
             $scope.appId = $rootScope.appId;
+            $scope.appName = $rootScope.appName;
             $scope.userId = $rootScope.userId;
 
             $scope.imageURL = constants.SERVER_URL
