@@ -173,7 +173,10 @@
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Country</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="country" ng-pattern="/^[a-zA-Z_ ]*$/" required ng-model="pickup.country" />
+                                <!--<input type="text" name="country" ng-pattern="/^[a-zA-Z_ ]*$/" required ng-model="pickup.country" />-->
+                                <md-select class=""  ng-model="pickup.country" required>
+                                    <md-option ng-value="oneCountry.countryName" ng-repeat="oneCountry in countryList">{{oneCountry.countryName}}</md-option>
+                                </md-select>
                                 <br />
                                 <span ng-show="pickUp.country.$error.pattern">Characters only</span>
                             </fieldset>
