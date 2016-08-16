@@ -32,6 +32,7 @@
                 toastr.success('Successfully Saved ', 'Saved', {
                     closeButton: true
                 });
+                return engageService.showPushMessageDialog();
               })
               .error(function(err){
                toastr.error('Error while Saving', 'Warning', {
@@ -49,6 +50,7 @@
                     toastr.success('Successfully Saved ', 'Saved', {
                         closeButton: true
                     });
+                    return engageService.showPushMessageDialog();
                   })
                   .error(function(err){
                     toastr.error('Error while Saving', 'Warning', {
