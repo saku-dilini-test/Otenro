@@ -21,7 +21,7 @@
                         <div class="menu-group-header">Styles</div>
                         <div class="styles-settings" ng-controller="StylesCtrl">
                             <div class="color-settings" >
-                                <h1>Color</h1>
+                                <h1>Background</h1>
                                 <div ng-if="isApplyStyle.color.backgroundColor" class="color-setting clearfix">
                                     <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="backgroundColor" type="text" style="background-color: {{backgroundColor}}; color: {{backgroundColor}};" >
                                     </button>
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="other-settings">
-                                <h1>Background Image</h1>
+                                <!--<h1>Background Image</h1>-->
                                 <div class="other-setting">
                                     <md-checkbox md-no-ink ng-model="editBackgroundImage"
                                                  aria-label="Apply Background Image"
@@ -136,7 +136,7 @@
                                 </div>
                             </div>
                             <div class="other-settings">
-                                <h1>Button</h1>
+                                <h1 ng-if="isApplyStyle.button">Button</h1>
                                 <div ng-if="isApplyStyle.button">
                                     <div class="color-setting clearfix">
                                         <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="buttonColor" type="text" style="background-color: {{buttonColor}}; color: {{buttonColor}};">
