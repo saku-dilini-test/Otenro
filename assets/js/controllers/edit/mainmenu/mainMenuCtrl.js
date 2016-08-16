@@ -460,30 +460,13 @@
         };
         $scope.addImage = function(img){
             var im = $scope.tmpImage;
-            var isPossibleAddImage = false;
-            for(var i=0 ; i < im.length ; i++){
-                if(im[i] == null) {
-                    isPossibleAddImage = true;
-                    break;
-                }
-            }
-            if(isPossibleAddImage){
-                    for (var i = 0; i < im.length; i++) {
-                        if (im[i] == null) {
-                            im[i] = $scope.picFile;
-                        }
-                    }
-                        $scope.tmpImage = im;
-                        $scope.mainImg = img;
-                        toastr.success('added Image', 'message', {
-                            closeButton: true
-                    });
-            }
-            else{
-                toastr.error('Only one image', 'Message', {
-                    closeButton: true
-                });
-            }
+
+            im[0] = $scope.picFile;
+            $scope.tmpImage = im;
+            $scope.mainImg = img;
+            toastr.success('added Image', 'message', {
+               closeButton: true
+            });
         };
 
 
