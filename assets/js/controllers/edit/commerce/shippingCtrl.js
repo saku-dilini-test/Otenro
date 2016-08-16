@@ -112,9 +112,15 @@
 
         $scope.insertPickup = function (pickup) {
             if(typeof pickup == 'undefined'){
-                toastr.error('Fill at least one field', 'Warning', {
+                toastr.error('Fill all the fields', 'Warning', {
                     closeButton: true
                 });
+            }
+            else if(typeof pickup.number == 'undefined' || typeof pickup.streetAddress == 'undefined' || typeof pickup.city == 'undefined'
+                    || typeof pickup.country == 'undefined' || typeof pickup.country == 'undefined' || typeof pickup.cost == 'undefined'){
+                        toastr.error('Fill all the fields', 'Warning', {
+                            closeButton: true
+                        });
             }else{
 
                 pickup.appId = $rootScope.appId;
