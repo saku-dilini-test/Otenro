@@ -140,6 +140,12 @@
                 toastr.error('Fill all the fields', 'Warning', {
                     closeButton: true
                 });
+            }
+            else if(shipping.weightRanges[0].startWeight == '' || shipping.weightRanges[0].endWeight == ''
+                    || shipping.weightRanges[0].cost == ''){
+                        toastr.error('Fill all the fields', 'Warning', {
+                            closeButton: true
+                        });
             }else {
                 shipping.appId = $rootScope.appId;
                 shipping.shippingOption = 'Weight Base';
