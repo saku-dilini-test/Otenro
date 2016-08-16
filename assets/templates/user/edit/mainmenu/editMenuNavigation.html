@@ -4,10 +4,12 @@
             <h1>Add Menu</h1>
         </div>
         <div class="md-dialog-main">
-            <form name="catForm">
+            <form name="catForm" novalidate>
                 <fieldset>
                     <label for="input-title">Name</label>
-                    <input type="text" name="name" ng-model="menu.name" id="input-title" required />
+                    <input type="text" name="name" ng-model="menu.name" ng-maxlength="35" id="input-title" required />
+                    <br >
+                    <span ng-show="catForm.name.$error.maxlength">Too lengthy</span>
                     <i ng-show="catForm.name.$error.required"></i>
                 </fieldset>
                 <br>
