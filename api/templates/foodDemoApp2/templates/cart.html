@@ -19,6 +19,12 @@
         <div class="col"><a ng-click="removeItem(index)">x</a></div>
       </div>
     </div>
+    <div ng-hide="hide" class="item item-stacked-label">
+        <div class="row">
+            <div class="col col-50">Tax%</div>
+            <div class="col" ng-model="tax" >{{tax}}</div>
+        </div>
+    </div>
     <div class="item item-stacked-label">
       <div class="row">
         <div class="col col-50">Total</div>
