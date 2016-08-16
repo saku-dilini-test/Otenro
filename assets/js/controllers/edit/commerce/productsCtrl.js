@@ -126,12 +126,20 @@
                     }
                     else {
                         $scope.selectedTab = current;
-                        $scope.variantsList = [{
-                            sku: product.sku,
-                            name: product.name,
-                            price: 0,
-                            quantity: 0
-                        }];
+                        $scope.variantsList = (localStorage.getItem('variantsList')!==null) ? JSON.parse(localStorage.getItem('variantsList')) :
+                            [{
+                                sku: product.sku,
+                                name: product.name,
+                                price: 0,
+                                quantity: 0
+                            }];
+                        localStorage.setItem('variantsList', JSON.stringify($scope.variantsList));
+                        // $scope.variantsList = [{
+                        //     sku: product.sku,
+                        //     name: product.name,
+                        //     price: 0,
+                        //     quantity: 0
+                        // }];
                     }
                 }
             }
@@ -143,12 +151,20 @@
                 }
                 else {
                     $scope.selectedTab = current;
-                    $scope.variantsList = [{
-                        sku: product.sku,
-                        name: product.name,
-                        price: 0,
-                        quantity: 0
-                    }];
+                    $scope.variantsList = (localStorage.getItem('variantsList')!==null) ? JSON.parse(localStorage.getItem('variantsList')) :
+                        [{
+                            sku: product.sku,
+                            name: product.name,
+                            price: 0,
+                            quantity: 0
+                        }];
+                    localStorage.setItem('variantsList', JSON.stringify($scope.variantsList));
+                    // $scope.variantsList = [{
+                    //     sku: product.sku,
+                    //     name: product.name,
+                    //     price: 0,
+                    //     quantity: 0
+                    // }];
                 }
             }
         };
@@ -171,7 +187,6 @@
 
         $scope.addVariants = function (product,index,variants) {
 
-            console.log(variants);
                 if(variants.sku == 0 || variants.price == 0 || variants.quantity == 0
                     || variants.size == ""){
                     toastr.error('Fill all the existing fields before adding a new field', 'Warning', {
@@ -209,6 +224,8 @@
         };
 
         $scope.nextStep3 = function (current, selection, variants) {
+
+            localStorage.setItem('variantsList', JSON.stringify($scope.variantsList));
             if (variants[0].sku == "" || variants[0].name == "" || variants[0].size == "" || variants[0].price == "" || variants[0].quantity == "") {
                 toastr.error('Fill all the fields', 'Warning', {
                     closeButton: true
@@ -288,6 +305,7 @@
         }
 
         $scope.addProducts = function (file, product, productFile) {
+            localStorage.removeItem('variantsList');
             if ($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "clothingApp"
                 || $scope.categories[0].templateName == "foodDemoApp2" || $scope.categories[0].templateName == "ECommerceApp") {
                 if (file == null) {
