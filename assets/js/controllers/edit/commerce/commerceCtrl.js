@@ -370,9 +370,10 @@
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
             }else if (!storeSettings.orderNumber) {
                 toastr.error(' warning', "Please fill order number field", {closeButton: true});
-            }else if (!storeSettings.searchEngineDesc){
-                toastr.error(' warning', "Please fill searchEngine Description field", {closeButton: true});
             }
+//            else if (!storeSettings.searchEngineDesc){
+//                toastr.error(' warning', "Please fill searchEngine Description field", {closeButton: true});
+//            }
             else {
 
             storeSettings.address = storeSettings.address1 + ',' + storeSettings.address2 + ',' + storeSettings.address3
@@ -447,7 +448,8 @@
                                 +'/templates/'+$rootScope.appId+'' +
                                 '#/app/aboutUs';
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                            $scope.selectedTab = current;
+//                            $scope.selectedTab = current;
+                            $mdDialog.hide();
                         }).error(function (data, status, headers, config) {
                         toastr.error('Unable to Add', 'Warning', {
                             closeButton: true
