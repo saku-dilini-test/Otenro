@@ -160,8 +160,8 @@
                             <tbody>
 
                             <tr ng-repeat="data in variantsList">
-                                <td><input name="sku_{{$index}}" type="text" ng-pattern="/^\d*[1-9\.]\d*$/" maxlength="10" ng-model="data.sku">
-                                <span ng-show="priceAndVariantsForm['sku_' + $index].$error.pattern">Positive numbers only</span>
+                                <td><input name="sku_{{$index}}" type="text" ng-pattern="/^\d*[0-9\.]\d*$/" maxlength="10" ng-model="data.sku">
+                                <span ng-show="priceAndVariantsForm['sku_' + $index].$error.pattern">Positive numbers only</span></td>
                                 <td ng-model="data.name">{{data.name}}</td>
                                 <td><input type="text" name="size_{{$index}}" maxlength="8" ng-model="data.size">
                                     <span ng-show="priceAndVariantsForm['size_' + $index].$error.maxlength">Maximum value exceeded</span><br />
