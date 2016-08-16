@@ -481,6 +481,13 @@
             $scope.tmpImageIndex[index].img = null;
         };
         $scope.addImage = function (img) {
+
+            if($scope.myImage == null){
+                 toastr.error('Please choose an image', 'Message', {
+                     closeButton: true
+                 });
+            }
+            else{
             var im = $scope.tmpImage;
             var isPossibleAddImage = false;
             for(var i=0; i < im.length; i++){
@@ -503,6 +510,7 @@
                 }
                 $scope.tmpImage = im;
                 $scope.mainImg = img;
+                $scope.myImage=null;
                 toastr.success('added Image', 'message', {
                     closeButton: true
                 });
@@ -510,6 +518,7 @@
                 toastr.error('Maximum 8 image only', 'Message', {
                     closeButton: true
                 });
+            }
             }
         };
 
