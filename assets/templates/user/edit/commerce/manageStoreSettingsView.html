@@ -26,8 +26,9 @@
                             <fieldset class="col-2">
                                 <label>next order number </label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="number" ng-model="storeSettings.orderNumber" name="number" required />
+                                <input type="number" ng-maxlength="6" ng-model="storeSettings.orderNumber" name="number" required />
                                 <span class="error" ng-show="storeSettingsForm.number.$error.number">Not valid number!</span>
+                                <span class="error" ng-show="storeSettingsForm.number.$error.maxlength">Too lengthy</span>
                             </fieldset>
                             <!--<fieldset class="col-2 reset-margin-right">-->
                                 <!--<label>express checkout</label>-->
@@ -232,21 +233,27 @@
                         <h1>policies</h1>
                     </div>
                     <div class="md-dialog-main">
-                        <form class="clearfix" novalidate>
+                        <form name="policies" class="clearfix" novalidate>
                             <fieldset>
                                 <label>return policy</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea rows="2" ng-model="storeSettings.returnPolicy"></textarea>
+                                <textarea name="returnPolicy" rows="2" ng-maxlength="100" ng-model="storeSettings.returnPolicy"></textarea>
+                                <br />
+                                <span ng-show="policies.returnPolicy.$error.maxlength">Too lengthy</span>
                             </fieldset>
                             <fieldset>
                                 <label>terms and conditions</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea rows="2" ng-model="storeSettings.termsAndCondition"></textarea>
+                                <textarea name="termsAndCondition" rows="2" ng-maxlength="100" ng-model="storeSettings.termsAndCondition"></textarea>
+                                <br />
+                                <span ng-show="policies.termsAndCondition.$error.maxlength">Too lengthy</span>
                             </fieldset>
                             <fieldset>
                                 <label>privacy policy</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea rows="2" ng-model="storeSettings.privacyPolicy"></textarea>
+                                <textarea name="privacyPolicy" rows="2" ng-maxlength="100"  ng-model="storeSettings.privacyPolicy"></textarea>
+                                <br />
+                                <span ng-show="policies.privacyPolicy.$error.maxlength">Too lengthy</span>
                             </fieldset>
                         </form>
                     </div>
@@ -265,16 +272,22 @@
                         <h1>About Us</h1>
                     </div>
                     <div class="md-dialog-main">
+                        <form name="aboutUs" novalidate>
                         <fieldset>
                             <label>Heading</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="username" ng-model="storeSettings.header" required  />
+                            <input type="text" name="heading" ng-maxlength="10" ng-model="storeSettings.header" required  />
+                            <br />
+                            <span ng-show="aboutUs.heading.$error.maxlength">Too lengthy</span>
                         </fieldset>
                         <fieldset>
                             <label>Content</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <textarea rows="4" ng-model="storeSettings.content"></textarea>
+                            <textarea rows="4" name="content" ng-maxlength="100" ng-model="storeSettings.content"></textarea>
+                            <br />
+                            <span ng-show="aboutUs.content.$error.maxlength">Too lengthy</span>
                         </fieldset>
+                        </form>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
