@@ -211,7 +211,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="contentRating()">next</md-button>
+                            <md-button class="me-default-button" ng-click="contentRatings(contentRating)">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -222,42 +222,56 @@
                     <div class="md-dialog-header">
                         <h1>app review information</h1>
                     </div>
+                    <form name="appreview" novalidate>
                     <div class="md-dialog-main clearfix">
                         <fieldset class="col-2">
                             <label>first name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" required />
+                            <input type="text" ng-model="appReview.firstName" name="name" required />
                         </fieldset>
                         <fieldset class="col-2 reset-margin-right">
                             <label>last name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" required />
+                            <input type="text" ng-model="appReview.lastName" name="name" required />
                         </fieldset>
                         <fieldset class="col-2">
                             <label>email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" required />
+                            <input type="email" ng-model="appReview.email" name="emailName" required />
+                            <span class="help-block" ng-show="appreview.emailName.$error.email">
+                                Enter a proper email
+                            </span>
                         </fieldset>
                         <fieldset class="col-2 reset-margin-right">
                             <label>phone number</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" required />
+                            <input type="number" ng-model="appReview.phoneNumber" name="name" required />
                         </fieldset>
                         <fieldset class="col-2">
                             <label>demo account user</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" required />
+                            <input type="text" ng-model="appReview.demoAccountUser" name="name" required />
                         </fieldset>
                         <fieldset class="col-2 reset-margin-right">
                             <label>demo account password</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" required />
+                            <input type="password" ng-model="appReview.demoAccountPassword" name="password"
+                                   ng-minlength="7"
+                                     ng-pattern="passwordRegularExpression"
+                                   required/>
+                            <span class="help-block " ng-show="appreview.password.$error.minlength">
+                             <span ng-show="appreview.password.$error.minlength">Password should have at least 7 characters.</span>
+                            </span>
+                            <span class="help-block " ng-show="!(appreview.password.$error.minlength) && appreview.password.$error.pattern">
+                               <span >Password should have at least one lower or Upper letter and one number</span>
+                            </span>
                         </fieldset>
                     </div>
+                    </form>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                            <md-button class="me-default-button">next</md-button>
+                            <md-button class="me-default-button" ng-click="appReviewInfo(appReview)">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>

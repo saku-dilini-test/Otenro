@@ -4,6 +4,8 @@
 
     function PublishCtrl($scope, $mdDialog, item, toastr, $rootScope, publishService, $http, SERVER_URL) {
 
+        $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
+
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -121,6 +123,24 @@
                          }
                          else{
                          $scope.thumbPic = $scope.existingData[0].file;
+                                $scope.appReview = {
+                                    firstName : $scope.existingData[0].firstName,
+                                    lastName : $scope.existingData[0].lastName,
+                                    email : $scope.existingData[0].email,
+                                    phoneNumber : $scope.existingData[0].phoneNumber,
+                                    demoAccountUser : $scope.existingData[0].demoAccountUser,
+                                    demoAccountPassword : $scope.existingData[0].password,
+                                }
+                                $scope.contentRating = {
+                                    cartoonViolence : $scope.existingData[0].cartoonViolence,
+                                    realisticViolence : $scope.existingData[0].realisticViolence,
+                                    nudityViolence : $scope.existingData[0].nudityViolence,
+                                    alcoholViolence : $scope.existingData[0].alcoholViolence,
+                                    matureViolence : $scope.existingData[0].matureViolence,
+                                    gamblingViolence : $scope.existingData[0].gamblingViolence,
+                                    profanityViolence : $scope.existingData[0].profanityViolence,
+                                    horrorViolence : $scope.existingData[0].horrorViolence
+                                }
 
                                 $scope.appStoreData = {
                                     language : $scope.existingData[0].language,
@@ -172,8 +192,33 @@
                 })
             }
         }
-        $scope.contentRating = function(){
-            disableTabs(2,false,false,false,false);
+        $scope.contentRatings = function(contentRating){
+            contentRating.category = 'AppStore';
+            publishService.addContentRating(contentRating)
+            .success(function(data){
+                disableTabs(2,false,false,false,false);
+                toastr.success('Genaral info has been added', 'Saved', {
+                    closeButton: true
+                });
+            }).error(function(err){
+                toastr.error('Error while saving data', 'Warning', {
+                      closeButton: true
+                });
+            })
+        }
+        $scope.appReviewInfo = function(appReview){
+            appReview.category = 'AppStore';
+            publishService.addAppReviewInformation(appReview)
+            .success(function(data){
+                disableTabs(3,false,false,false,false);
+                toastr.success('Genaral info has been added', 'Saved', {
+                    closeButton: true
+                });
+            }).error(function(err){
+                toastr.error('Error while saving data', 'Warning', {
+                      closeButton: true
+                });
+            })
         }
     }
 })();

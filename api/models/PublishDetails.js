@@ -1,6 +1,6 @@
 
 
-
+var Passwords = require('machinepack-passwords');
 module.exports = {
 
     schema: true,
@@ -63,8 +63,75 @@ module.exports = {
         supportUrl:{
             type: 'string'
         },
+        alcoholViolence:{
+            type: 'string'
+        },
+        cartoonViolence:{
+            type: 'string'
+        },
+        gamblingViolence:{
+            type: 'string'
+        },
+        horrorViolence:{
+            type: 'string'
+        },
+        matureViolence:{
+            type: 'string'
+        },
+        nudityViolence:{
+            type: 'string'
+        },
+        profanityViolence:{
+            type: 'string'
+        },
+        realisticViolence:{
+            type: 'string'
+        },
+        firstName : {
+            type : 'string'
+        },
+        lastName : {
+            type : 'string'
+        },
+        email : {
+            type : 'string'
+        },
+        phoneNumber :{
+            type : 'integer'
+        },
+        demoAccountUser : {
+            type : 'string'
+        },
+        password: {
+            type : 'string'
+        },
         createdDate:{
             type: 'date'
         },
+        toJSON: function() {
+          var obj = this.toObject();
+          delete obj.password;
+          return obj;
+        }
+    },
+
+    beforeUpdate : function(values, next) {
+      if (typeof values.password !== 'undefined'){
+        console.log("value"+values);
+        Passwords.encryptPassword({
+          password: values.password,
+          difficulty: 10
+        }).exec({
+          error: function(err) {
+            return res.negotiate(err);
+          },
+          success: function(hash) {
+            values.password = hash;
+            next();
+          }
+        });
+     }else {
+        next();
+      }
     }
 };
