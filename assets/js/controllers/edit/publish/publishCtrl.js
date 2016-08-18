@@ -121,6 +121,7 @@
                          }
                          else{
                          $scope.thumbPic = $scope.existingData[0].file;
+                         $scope.serverImage = $scope.existingData[0].file;
 
                                 $scope.appStoreData = {
                                     language : $scope.existingData[0].language,
@@ -149,6 +150,7 @@
                     });
         }
         $scope.addAppStoreInfo = function(file,appStoreData,publishSplash) {
+            if(file == null && $scope.serverImage == $scope.thumbPic){
             if(appStoreData.name == null || appStoreData.springBoardName == null || appStoreData.language == null ||
                     appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.desc == null  ||
                     appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
@@ -157,6 +159,32 @@
                                       closeButton: true
                                 });
                     }
+                    else{
+                        appStoreData.category = 'AppStore';
+                        file = $scope.thumbPic;
+                        publishService.addGooglePlayInfo(file,appStoreData,publishSplash)
+                        .success(function(data, status, headers, config) {
+                        disableTabs(1,true,false,true,true);
+                        toastr.success('Genaral info has been added', 'Saved', {
+                            closeButton: true
+                        });
+                        }).error(function(data, status, headers, config) {
+                            toastr.error('Error while saving data', 'Warning', {
+                                  closeButton: true
+                            });
+                        })
+                    }
+            }
+            else{
+            if(file == null || appStoreData.name == null || appStoreData.springBoardName == null || appStoreData.language == null ||
+              appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.desc == null  ||
+              appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
+              appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null || publishSplash.splash1 == null ||
+              publishSplash.splash2 == null || publishSplash.splash3 == null || publishSplash.splash4 == null){
+                        toastr.error('Fill all the fields', 'Warning', {
+                              closeButton: true
+                        });
+              }
             else{
                 appStoreData.category = 'AppStore';
                 publishService.addGooglePlayInfo(file,appStoreData,publishSplash)
@@ -170,6 +198,7 @@
                           closeButton: true
                     });
                 })
+            }
             }
         }
         $scope.contentRating = function(){
