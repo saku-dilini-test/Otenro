@@ -32,11 +32,14 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
         +"/templates/viewImages?userId="
         +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi";
 
+    readMadeEasy.readFile().success(function(data){
+        $rootScope.appId = data.appId;
 
       $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$scope.appId).success(function(data) {
           $scope.categories = data;
       }).error(function(err) {
           alert('warning', "Unable to get categories", err.message);
       });
+    });
 
 });
