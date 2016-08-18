@@ -294,7 +294,7 @@
                 .success(function (res) {
                     var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
-                    toastr.success('Successfully Apply backgroundImage', 'Message', {
+                    toastr.success('Background image successfully updated', 'Message', {
                         closeButton: true
                     });
                 }).error(function (res) {
