@@ -33,7 +33,7 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
         +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi";
 
     readMadeEasy.readFile().success(function(data){
-        $rootScope.appId = data.appId;
+        $scope.appId = data.appId;
 
       $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$scope.appId).success(function(data) {
           $scope.categories = data;
