@@ -71,9 +71,6 @@ module.exports = {
                                         if (err) return res.negotiate(err);
                                         replaceAppNameNIcon(app.appName, app.appIcon);
                                     });
-
-
-
                                 });
                             })
                         }
@@ -98,16 +95,24 @@ module.exports = {
                                     if (err) return res.negotiate(err);
                                 });
 
-                                BuildVersion.create({
-                                    appId: appId,
-                                    previousVersion: preVersion,
-                                    version : version
-                                }).exec(function(err,build){
+                                var searchApp = {
+                                    id: appId
+                                };
+                                Application.findOne(searchApp).exec(function (err, app) {
                                     if (err) return res.negotiate(err);
-                                    if(build) {
-                                        buildApkFile(copyDirPath);
-                                    }
+                                    BuildVersion.create({
+                                        appId: appId,
+                                        previousVersion: preVersion,
+                                        version : version
+                                    }).exec(function(err,build){
+                                        if (err) return res.negotiate(err);
+                                        if(build) {
+                                            buildApkFile(copyDirPath,app.appName);
+                                        }
+                                    });
                                 });
+
+
                             });
                         });
 
@@ -163,7 +168,7 @@ module.exports = {
                         }).exec(function(err,build){
                             if (err) return res.negotiate(err);
                             if(build) {
-                                buildApkFile(copyDirPath);
+                                buildApkFile(copyDirPath,appName);
                             }
                         });
                     });
@@ -189,29 +194,63 @@ module.exports = {
         }
 
 
-        function buildApkFile(appPath) {
+        function buildApkFile(appPath,appName) {
             var shell = require('shelljs');
             var path = require('path');
             var mime = require('mime');
 
             shell.cd(appPath);
             shell.exec('ionic build android', {async: true}, function (code, stdout, stderr) {
-                console.log('Exit code:', code);
-                console.log('Program output:', stdout);
-                console.log('Program stderr:', stderr);
-                console.log('Exit code:', code);
                 if (code==0){
-                    var file = appPath + '/platforms/android/build/outputs/apk/android-debug.apk';
+                    /*shell.exec('cordova plugin rm cordova-plugin-console', {async: true}, function (code1, stdout, stderr) {
+                        if (code1==0){*/
+                            shell.exec('cordova build --release android', {async: true}, function (code2, stdout, stderr) {
+                                if (code2==0){
+                                            shell.mv('-n', 'my-release-key.keystore', appPath + '/platforms/android/build/outputs/apk/');
+                                            shell.cd(appPath + '/platforms/android/build/outputs/apk/');
+                                            shell.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg ' +
+                                                'SHA1 -keystore my-release-key.keystore android-release-unsigned.apk ' +
+                                                'alias_name -storepass abcd1234 -keypass abcd1234 ', {async: true}, function (code4, stdout, stderr) {
+                                                if (code4==0){
+                                                    fs.stat(appPath + '/platforms/android/build/outputs/apk/'+appName+'.apk', function(err, fileStat) {
+                                                        if (err) {
+                                                            if (err.code == 'ENOENT') {
+                                                                console.log('Does not exist.');
+                                                            }
+                                                        } else {
+                                                            if (fileStat.isFile()) {
+                                                                fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/'+appName+'.apk');
+                                                            } else if (fileStat.isDirectory()) {
+                                                                console.log('Directory found.');
+                                                            }
+                                                        }
+                                                    });
 
-                    var filename = path.basename(file);
-                    var mimetype = mime.lookup(file);
 
-                    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-                    res.setHeader('Content-type', mimetype);
+                                                    shell.exec('zipalign -v 4 android-release-unsigned.apk '+appName+'.apk', {async: true}, function (code5, stdout, stderr) {
+                                                        if (code5==0){
+                                                            res.json('ok');
+                                                        }else{
+                                                            if (stderr) return res.negotiate(stderr);
+                                                        }
+                                                        shell.code;
+                                                    });
+                                                }else{
+                                                    if (stderr) return res.negotiate(stderr);
+                                                }
+                                                shell.code;
+                                            });
+                                }else{
+                                    if (stderr) return res.negotiate(stderr);
+                                }
+                                shell.code;
+                            });
+                    /*    }else{
+                            if (stderr) return res.negotiate(stderr);
+                        }
+                        shell.code;
+                    });*/
 
-                    var filestream = fs.createReadStream(file);
-                    filestream.pipe(res);
-                    /*res.json('ok');*/
                 }else{
                     if (stderr) return res.negotiate(stderr);
                 }
@@ -222,3 +261,14 @@ module.exports = {
         }
     }
 };
+
+/* var file = appPath + '/platforms/android/build/outputs/apk/android-debug.apk';
+
+ var filename = path.basename(file);
+ var mimetype = mime.lookup(file);
+
+ res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+ res.setHeader('Content-type', mimetype);
+
+ var filestream = fs.createReadStream(file);
+ filestream.pipe(res);*/
