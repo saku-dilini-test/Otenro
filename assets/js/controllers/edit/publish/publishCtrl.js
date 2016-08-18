@@ -149,12 +149,10 @@
                     });
         }
         $scope.addAppStoreInfo = function(file,appStoreData,publishSplash) {
-
-            if(file == null || appStoreData.name == null || appStoreData.springBoardName == null || appStoreData.language == null ||
+            if(appStoreData.name == null || appStoreData.springBoardName == null || appStoreData.language == null ||
                     appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.desc == null  ||
                     appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
-                    appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null || publishSplash.splash1 == null ||
-                    publishSplash.splash2 == null || publishSplash.splash3 == null || publishSplash.splash4 == null){
+                    appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null){
                                 toastr.error('Fill all the fields', 'Warning', {
                                       closeButton: true
                                 });
