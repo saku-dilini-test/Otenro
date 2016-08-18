@@ -20,15 +20,21 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $scope.getTotal = function(){
         var total = 0;
         var amount = 0;
+        var tax = 0;
         for(var i = 0; i < $scope.cartItems.length; i++){
             var product = $scope.cartItems[i];
             amount = product.total;
             total += (amount);
         }
-        tax = total * $scope.tax/100
-        total = total + tax;
-        $rootScope.cart.totalPrice = total;
-        return total;
+        tax = total * $scope.tax/100;
+        if(tax > 0){
+            total = total + tax;
+            $rootScope.cart.totalPrice = total;
+            return total;
+        }else{
+            $rootScope.cart.totalPrice = total;
+            return total;
+        }
     };
 
     $scope.getTotalQuantity = function(){

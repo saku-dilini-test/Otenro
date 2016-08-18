@@ -10,7 +10,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $scope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;
     $http.get(constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId).success(function(data) {
-        if(data == ''){
+        console.log(data);
+        if(data == []){
             $scope.hide = true;
         }else{
             $scope.tax = data[0].taxAmount;
@@ -26,10 +27,15 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             amount = product.total;
             total += (amount);
         }
-        tax = total * $scope.tax/100
-        total = total + tax;
-        $rootScope.cart.totalPrice = total;
-        return total;
+        tax = total * $scope.tax/100;
+        if(tax > 0){
+            total = total + tax;
+            $rootScope.cart.totalPrice = total;
+            return total;
+        }else{
+            $rootScope.cart.totalPrice = total;
+            return total;
+        }
     };
 
     $scope.getTotalQuantity = function(){
