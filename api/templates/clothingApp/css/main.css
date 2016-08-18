@@ -78,18 +78,21 @@ ion-content{
 }
 .made-easy-header-font{
   color:#B8A47F;
-  padding-top:10px;
+  font-family: Ubuntu Light;
+  font-size : 10px;
   font-weight: bolder;
+  padding-top:10px;
 }
 .made-easy-content-font{
   color:#787878;
-  font-size: 12;
+  font-family: Ubuntu Light;
+  font-size: 12px;
   font-weight: lighter;
 }
 .made-easy-footer-font{
   color:#4e6dde;
   font-family: Ubuntu Light;
-  font-size: 12;
+  font-size: 12px;
   font-weight: bolder;
 }
 .made-easy-button-setting{
