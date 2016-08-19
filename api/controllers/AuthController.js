@@ -61,28 +61,32 @@ module.exports = {
 
   register: function(req, res) {
 
-    User.create({firstName:req.body.fname,lastName:req.body.lname, email: req.body.email, password: req.body.password}).exec(function(err, user) {
-      if (err) {
-        return res.negotiate(err);
-      }
-      if (user) {
-        JWT.encode({
-          secret: '17ca644f4f3be572ec33711a40a5b8b4',
-          payload: {
-            id :  user.id,
-            email:  user.email
-          },
-          algorithm: 'HS256'
-        }).exec({
-          error: function (err){
-            return err;
-          },
-          success: function (result){
-            console.log(result);
-            res.status(200).json({user : { email : user.email , sub : user.id  },token : result });
-          }
-        });
-      }
+    User.findOne({email: req.body.email}, function foundUser(err, user) {
+      if (err) return res.negotiate(err);
+      if (user) return res.status(409).json({error: 'already exists'});
+          User.create({firstName:req.body.fname,lastName:req.body.lname, email: req.body.email, password: req.body.password}).exec(function(err, user) {
+            if (err) {
+              return res.negotiate(err);
+            }
+            if (user) {
+              JWT.encode({
+                secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                payload: {
+                  id :  user.id,
+                  email:  user.email
+                },
+                algorithm: 'HS256'
+              }).exec({
+                error: function (err){
+                  return err;
+                },
+                success: function (result){
+                  console.log(result);
+                  res.status(200).json({user : { email : user.email , sub : user.id  },token : result });
+                }
+              });
+            }
+          });
     });
   },
 
