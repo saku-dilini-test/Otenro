@@ -252,6 +252,7 @@
         };
 
         $scope.nextStep3 = function (current, selection, variants) {
+            $scope.selection = selection;
 
             localStorage.setItem('variantsList', JSON.stringify($scope.variantsList));
             if (variants[0].sku == "" || variants[0].name == "" || variants[0].size == "" || variants[0].price == "" || variants[0].quantity == "") {
@@ -370,6 +371,7 @@
                     variantsList.forEach(function (variants) {
                         variants.childId = product.mainId;
                     });
+                    //product.selection = $scope.selection;
                     var variantsAttribute;
                     var tempImageArray = $scope.tmpImageIndex;
                         commerceService.addProduct(file, product, item.id, variantsList,tempImageArray).success(function (data) {
@@ -451,7 +453,6 @@
                     variants.childId = product.childId;
                 });
                 var variantsAttribute;
-
                    commerceService.addProduct(file, product, item.id, variantsList).success(function (data) {
 
                    variantsList.forEach(function (variantsAttribute) {
