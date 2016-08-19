@@ -18,8 +18,9 @@
         $scope.userId = $auth.getPayload().id;
         $scope.isDigital = false;
 
-        $scope.maxLengthDesc = 100;
+        // Maximum Product Name, Des and Sku Length Defined
         $scope.maxLengthName = 15;
+        $scope.maxLengthDesc = 100;
         $scope.maxLengthSku = 10;
         $scope.enableTab = "true";
 
@@ -103,6 +104,33 @@
         };
 
         $scope.nextStep2 = function (current, product) {
+            // Validate, Product Name maximum characters length
+            var productName = product.name;
+            if(productName.length > $scope.maxLengthName){
+                toastr.error('Product Name, maximum characters length is exceed. ' +
+                    'Maximum characters length is : '+$scope.maxLengthName, 'Warning',
+                    {closeButton: true}
+                );
+                return;
+            }
+            // Validate, Product Details Desc maximum characters length
+            var productDetailedDesc = product.detailedDesc;
+            if(productDetailedDesc.length > $scope.maxLengthDesc){
+                toastr.error('Product Description, maximum characters length is exceed. ' +
+                    'Maximum characters length is : '+$scope.maxLengthDesc, 'Warning',
+                    {closeButton: true}
+                );
+                return;
+            }
+            // Validate, Product SKU maximum number length
+            var productSku = product.sku;
+            if((typeof productSku != 'undefined') && (productSku.length > $scope.maxLengthSku)){
+                toastr.error('Product SKU, maximum number length is exceed. ' +
+                    'Maximum number length is : '+$scope.maxLengthSku, 'Warning',
+                    {closeButton: true}
+                );
+                return;
+            }
             $scope.enableTab = "false";
             if ($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "foodDemoApp2"
                 || $scope.categories[0].templateName == "clothingApp" || $scope.categories[0].templateName == "ECommerceApp") {
