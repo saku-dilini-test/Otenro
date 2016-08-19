@@ -5,12 +5,11 @@
 
 mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants,readMadeEasy) {
 
-
-
     if (typeof $rootScope.appId === 'undefined'){
 
         readMadeEasy.readFile().success(function(data){
             $rootScope.appId = data.appId;
+            console.log("appId " + $rootScope.appId);
         });
     }
 
@@ -18,29 +17,30 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
 
         readMadeEasy.readFile().success(function(data){
             $rootScope.userId = data.userId;
+            console.log("userId " + $rootScope.userId);
         });
     }
     if (typeof $rootScope.appName === 'undefined'){
 
         readMadeEasy.readFile().success(function(data){
             $rootScope.appName = data.name;
+            console.log("$rootScope.appName " + $rootScope.appName);
         });
     }
+
+
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
     $scope.imageURL = constants.SERVER_URL
         +"/templates/viewImages?userId="
-        +$scope.userId +"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi";
+        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi";
+
 
     $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$scope.appId).success(function(data) {
         $scope.categories = data;
+        console.log("$scope.categories  " + $scope.categories );
     }).error(function(err) {
         alert('warning', "Unable to get categories", err.message);
     });
-
-    //$scope.categories = [{
-    //    "name": "Salads",
-    //    "description": "Salads description"
-    //}]
 
 });
