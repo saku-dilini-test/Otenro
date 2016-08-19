@@ -1,4 +1,4 @@
-mobileApp.controller('mainController', function($scope, $rootScope, $q,$http,$location) {
+mobileApp.controller('mainController', function($scope, $rootScope, $q,$http,$location,readMadeEasy) {
     $scope.pageClass 		= 'slideLeft';
 	$rootScope.appTitle		= '<img src="img/header.jpg?time='+new Date().getTime()+'">';
 
@@ -10,16 +10,18 @@ mobileApp.controller('mainController', function($scope, $rootScope, $q,$http,$lo
 	};
 
 
-	var paramsID = {
-		appId: $rootScope.appId
 
-	};
+	readMadeEasy.readFile().success(function(appData){
+		var paramsID = {
+			appId: appData.appId
 
+		};
 	$http.post(SERVER_URL + '/templates/getMainMenu', paramsID)
 		.success(function(data) {
 			$scope.menuList = data;
 		}).error(function(err) {
 			alert('warning', "Unable to get Menus", err.message);
+		});
 		});
 
 	$scope.link=function(menuId,menuName){
