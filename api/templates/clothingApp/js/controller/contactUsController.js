@@ -2,7 +2,7 @@
  * Created by amila on 4/28/16.
  */
 
-mobileApp.controller('contactUsCtrl', function($scope,$rootScope,$http,constants,$state) {
+mobileApp.controller('contactUsCtrl', function($scope,$rootScope,$http,constants) {
 
     $scope.appId = $rootScope.appId;
 
@@ -12,13 +12,10 @@ mobileApp.controller('contactUsCtrl', function($scope,$rootScope,$http,constants
         $scope.webSite = data.webSite;
         $scope.telPhone = data.telPhone;
         $scope.coords =data.coords;
-        $scope.googleMap = data;;
+        $scope.googleMap = data;
 
     }).error(function(err) {
         alert('warning', "Unable to get contact us info", err.message);
     });
 
-    $scope.singUp = function(){
-        $state.go('app.register');
-    }
 });
