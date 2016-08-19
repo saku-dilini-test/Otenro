@@ -183,7 +183,7 @@
                      !appReviewInformation.lastName||!appReviewInformation.email||!appReviewInformation.phoneNumber||
                      !appReviewInformation.demoUserFirstName||!appReviewInformation.demoUserPassword){
 
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please Fill all the fields with valid  data', 'Warning', {
                     closeButton: true
                 });
             }else {

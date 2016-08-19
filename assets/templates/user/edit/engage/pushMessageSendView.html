@@ -16,7 +16,8 @@
                 <label>Schedule Message</label>
             </fieldset>
             <div class="clearfix">
-                <adm-dtp ng-model='pushMessage.date'></adm-dtp>
+                <adm-dtp ng-model='pushMessage.date' options='{calType: "gregorian", default: today}'></adm-dtp>
+               <!-- <input type="date" ng-model='pushMessage.date'>-->
             </div>
         </div>
         <div class="md-dialog-buttons">
