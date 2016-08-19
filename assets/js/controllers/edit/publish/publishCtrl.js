@@ -250,7 +250,7 @@
             })
         }
 
-        $scope.addAppReviewInformation = function(appReviewInformation){
+        /*$scope.addAppReviewInformation = function(appReviewInformation){
             if(!appReviewInformation||!appReviewInformation.firstName||
                      !appReviewInformation.lastName||!appReviewInformation.email||!appReviewInformation.phoneNumber||
                      !appReviewInformation.demoUserFirstName||!appReviewInformation.demoUserPassword){
@@ -261,6 +261,6 @@
             }else {
                 disableTabs(3,true,true,true,false);
             }
-        }
+        }*/
     }
 })();
