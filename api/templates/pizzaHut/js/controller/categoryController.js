@@ -27,15 +27,18 @@ mobileApp.controller('categoryController', function($scope, $rootScope, $transla
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
     $scope.serviceApi = serviceApi;
+
+    readMadeEasy.readFile().success(function(appData){
     $scope.imageURL = serviceApi
         +"templates/viewImages?userId="
-        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi/";
+        +appData.userId+"&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi/";
 
-    $http.get(SERVER_URL + '/templates/getSpecificChild?appId='+$rootScope.appId+'&mainId='+$routeParams.id)
+    $http.get(SERVER_URL + '/templates/getSpecificChild?appId='+appData.appId+'&mainId='+$routeParams.id)
         .success(function(data) {
             $scope.requestCategory = data;
         }).error(function(err) {
             alert('warning', "Unable to get templates", err.message);
+        });
         });
 
 });

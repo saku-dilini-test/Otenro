@@ -63,6 +63,42 @@
 
                 });
             },
+            addContentRating: function(contentRating){
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/setContentRating',
+                    fields: {
+                        'appId':$rootScope.appId,
+                        'category':contentRating.category,
+                        'alcoholViolence':contentRating.alcoholViolence,
+                        'cartoonViolence': contentRating.cartoonViolence,
+                        'gamblingViolence':contentRating.gamblingViolence,
+                        'horrorViolence':contentRating.horrorViolence,
+                        'matureViolence':contentRating.matureViolence,
+                        'nudityViolence':contentRating.nudityViolence,
+                        'profanityViolence':contentRating.profanityViolence,
+                        'realisticViolence':contentRating.realisticViolence,
+                    }
+
+                });
+            },
+            addAppReviewInformation: function(appReview){
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/setAppReviewInformation',
+                    fields: {
+                        'appId':$rootScope.appId,
+                        'category':appReview.category,
+                        'firstName':appReview.firstName,
+                        'lastName': appReview.lastName,
+                        'email':appReview.email,
+                        'phoneNumber':appReview.phoneNumber,
+                        'demoAccountUser':appReview.demoAccountUser,
+                        'password':appReview.demoAccountPassword
+                    }
+
+                });
+            },
+
+
             getAllLanguages:function(){
                 return $http.get(SERVER_URL + 'edit/getAllLanguages');
             },

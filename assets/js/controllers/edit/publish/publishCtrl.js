@@ -4,6 +4,8 @@
 
     function PublishCtrl($scope, $mdDialog, item, toastr, $rootScope, publishService, $http, SERVER_URL) {
 
+        $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
+
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -121,6 +123,25 @@
                          }
                          else{
                          $scope.thumbPic = $scope.existingData[0].file;
+                         $scope.serverImage = $scope.existingData[0].file;
+                                $scope.appReview = {
+                                    firstName : $scope.existingData[0].firstName,
+                                    lastName : $scope.existingData[0].lastName,
+                                    email : $scope.existingData[0].email,
+                                    phoneNumber : $scope.existingData[0].phoneNumber,
+                                    demoAccountUser : $scope.existingData[0].demoAccountUser,
+                                    demoAccountPassword : $scope.existingData[0].password,
+                                }
+                                $scope.contentRating = {
+                                    cartoonViolence : $scope.existingData[0].cartoonViolence,
+                                    realisticViolence : $scope.existingData[0].realisticViolence,
+                                    nudityViolence : $scope.existingData[0].nudityViolence,
+                                    alcoholViolence : $scope.existingData[0].alcoholViolence,
+                                    matureViolence : $scope.existingData[0].matureViolence,
+                                    gamblingViolence : $scope.existingData[0].gamblingViolence,
+                                    profanityViolence : $scope.existingData[0].profanityViolence,
+                                    horrorViolence : $scope.existingData[0].horrorViolence
+                                }
 
                                 $scope.appStoreData = {
                                     language : $scope.existingData[0].language,
@@ -149,6 +170,7 @@
                     });
         }
         $scope.addAppStoreInfo = function(file,appStoreData,publishSplash) {
+            if(file == null && $scope.serverImage == $scope.thumbPic){
             if(appStoreData.name == null || appStoreData.springBoardName == null || appStoreData.language == null ||
                     appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.desc == null  ||
                     appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
@@ -157,6 +179,32 @@
                                       closeButton: true
                                 });
                     }
+                    else{
+                        appStoreData.category = 'AppStore';
+                        file = $scope.thumbPic;
+                        publishService.addGooglePlayInfo(file,appStoreData,publishSplash)
+                        .success(function(data, status, headers, config) {
+                        disableTabs(1,true,false,true,true);
+                        toastr.success('Genaral info has been added', 'Saved', {
+                            closeButton: true
+                        });
+                        }).error(function(data, status, headers, config) {
+                            toastr.error('Error while saving data', 'Warning', {
+                                  closeButton: true
+                            });
+                        })
+                    }
+            }
+            else{
+            if(file == null || appStoreData.name == null || appStoreData.springBoardName == null || appStoreData.language == null ||
+              appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.desc == null  ||
+              appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
+              appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null || publishSplash.splash1 == null ||
+              publishSplash.splash2 == null || publishSplash.splash3 == null || publishSplash.splash4 == null){
+                        toastr.error('Fill all the fields', 'Warning', {
+                              closeButton: true
+                        });
+              }
             else{
                 appStoreData.category = 'AppStore';
                 publishService.addGooglePlayInfo(file,appStoreData,publishSplash)
@@ -171,9 +219,35 @@
                     });
                 })
             }
+            }
         }
-        $scope.contentRating = function(){
-            disableTabs(2,false,false,false,false);
+        $scope.contentRatings = function(contentRating){
+            contentRating.category = 'AppStore';
+            publishService.addContentRating(contentRating)
+            .success(function(data){
+                disableTabs(2,false,false,false,false);
+                toastr.success('Genaral info has been added', 'Saved', {
+                    closeButton: true
+                });
+            }).error(function(err){
+                toastr.error('Error while saving data', 'Warning', {
+                      closeButton: true
+                });
+            })
+        }
+        $scope.appReviewInfo = function(appReview){
+            appReview.category = 'AppStore';
+            publishService.addAppReviewInformation(appReview)
+            .success(function(data){
+                disableTabs(3,false,false,false,false);
+                toastr.success('Genaral info has been added', 'Saved', {
+                    closeButton: true
+                });
+            }).error(function(err){
+                toastr.error('Error while saving data', 'Warning', {
+                      closeButton: true
+                });
+            })
         }
     }
 })();

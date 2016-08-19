@@ -26,16 +26,17 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
         });
     }
 
-
+    readMadeEasy.readFile().success(function(appData){
     $scope.imageURL = constants.SERVER_URL
         +"/templates/viewImages?userId="
-        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi";
+        +appData.userId+"&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
 
 
-     $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$scope.appId).success(function(data) {
+     $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+appData.appId).success(function(data) {
          $scope.categories = data;
      }).error(function(err) {
          alert('warning', "Unable to get categories", err.message);
+     });
      });
 
 });
