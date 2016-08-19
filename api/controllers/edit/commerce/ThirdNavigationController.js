@@ -56,6 +56,7 @@ module.exports = {
 
 
             var thirdN =req.body;
+            //console.log(thirdN);
             thirdN.imageUrl = newFileName;
             if(typeof thirdN.id != 'undefined'){
             var query = {

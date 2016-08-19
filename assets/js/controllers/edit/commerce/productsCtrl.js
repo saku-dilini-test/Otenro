@@ -371,7 +371,7 @@
                     variantsList.forEach(function (variants) {
                         variants.childId = product.mainId;
                     });
-                    //product.selection = $scope.selection;
+                    product.selection = $scope.selection;
                     var variantsAttribute;
                     var tempImageArray = $scope.tmpImageIndex;
                         commerceService.addProduct(file, product, item.id, variantsList,tempImageArray).success(function (data) {

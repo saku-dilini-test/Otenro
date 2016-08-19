@@ -11,7 +11,9 @@ angular
 		'$rootScope',
 		'$timeout',
 		'routesConfig',
-		function (categoriesSvc, $ionicLoading,$rootScope,$timeout,routesConfig,readMadeEasy) {
+		'readMadeEasy',
+		'$scope',
+		function (categoriesSvc, $ionicLoading,$rootScope,$timeout,routesConfig,readMadeEasy,$scope) {
 			'use strict';
 
 			var vm = this;
@@ -65,7 +67,7 @@ angular
 					.finally(function(){
 						$ionicLoading.hide();
 					});
-				});
+					});
 			}
 			$timeout(function () {
 				goToGetCategories();
