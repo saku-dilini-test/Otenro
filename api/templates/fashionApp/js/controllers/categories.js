@@ -47,21 +47,25 @@ angular
 					});
 				}
 
-
+				readMadeEasy.readFile().success(function(data){
+					$scope.userId = data.userId;
+					$scope.appId = data.appId;
 				vm.imageUrl =
 					routesConfig.wpUrl.SERVER_URL()
 					+"/templates/viewImages?userId="
-					+$rootScope.userId+"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=category";
-
+					+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category";
+				});
 				vm.categories = categories;
 			}
 
 			function goToGetCategories() {
-				categoriesSvc.getCategories($rootScope.appId)
+				readMadeEasy.readFile().success(function(data){
+				categoriesSvc.getCategories(data.appId)
 					.then(setCategories)
 					.finally(function(){
 						$ionicLoading.hide();
 					});
+				});
 			}
 			$timeout(function () {
 				goToGetCategories();

@@ -5,20 +5,20 @@
 
     function appServices($rootScope,$http,constants){
         return {
-            getAllMenuByAppId: function () {
-                return $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$rootScope.appId);
+            getAllMenuByAppId: function (appId) {
+                return $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+appId);
             },
-            getAllItemByAppId: function () {
-                return $http.get(constants.SERVER_URL + '/templates/getProductsByAppId?appId='+$rootScope.appId);
+            getAllItemByAppId: function (appId) {
+                return $http.get(constants.SERVER_URL + '/templates/getProductsByAppId?appId='+appId);
             },
-            getAllItemsByMenuId: function (menuId) {
-                return $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$rootScope.appId+'&childId='+menuId);
+            getAllItemsByMenuId: function (menuId,appId) {
+                return $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+appId+'&childId='+menuId);
             },
             getItemById: function (itemId) {
                 return $http.get(constants.SERVER_URL + '/templates/getProductById?productId='+itemId);
             },
-            getContactUsByAppId: function () {
-                return $http.get(constants.SERVER_URL + '/templates/getContactUs?appId='+$rootScope.appId);
+            getContactUsByAppId: function (appId) {
+                return $http.get(constants.SERVER_URL + '/templates/getContactUs?appId='+appId);
             }
         }
     }

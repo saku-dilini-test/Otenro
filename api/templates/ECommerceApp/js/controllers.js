@@ -9,7 +9,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices) {
+.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy) {
 
     $ionicLoading.show({
         template: '<ion-spinner icon="lines"  class="spinner-energized" ></ion-spinner>'
@@ -22,7 +22,8 @@ angular.module('starter.controllers', [])
 
     // get all items function
     function getAllItemByAppId() {
-        appServices.getAllItemByAppId()
+        readMadeEasy.readFile().success(function(appData){
+        appServices.getAllItemByAppId(appData.appId)
             .success(function (data) {
                 $ionicLoading.hide();
                 /**  Swipe Function Configuration  **/
@@ -40,7 +41,8 @@ angular.module('starter.controllers', [])
             }).error(function (err) {
                 $ionicLoading.hide();
                 alert('Items Loading error');
-            });
+            }); 
+        });
     }
 
     /* ----- Swipe Function start ----- */
@@ -79,18 +81,20 @@ angular.module('starter.controllers', [])
     /* ----- Eng Swipe Fucntion  ----- */
 })
 
-.controller('MenuCtrl', function($scope,appServices) {
+.controller('MenuCtrl', function($scope,appServices,readMadeEasy) {
 
     // get all menu by app Id
-    appServices.getAllMenuByAppId()
+    readMadeEasy.readFile().success(function(appData){
+    appServices.getAllMenuByAppId(appData.appId)
         .success(function (data) {
             $scope.categoryList = data;
         }).error(function (err) {
             alert('Menu Loading error');
         });
+        });
 })
 
-.controller('ItemsCtrl', function($scope,$stateParams,appServices) {
+.controller('ItemsCtrl', function($scope,$stateParams,appServices,readMadeEasy) {
 
     // set select Menu Name
     $scope.menuName = $stateParams.menuName;
@@ -98,11 +102,13 @@ angular.module('starter.controllers', [])
     // set select Menu Id
     var menuId = $stateParams.menuId;
     // get all item by menu Id
-    appServices.getAllItemsByMenuId(menuId)
+    readMadeEasy.readFile().success(function(appData){
+    appServices.getAllItemsByMenuId(menuId,appData.appId)
         .success(function (data) {
             $scope.itemList = data;
         }).error(function (err) {
             alert('Items Loading error');
+        });
         });
 })
 
@@ -187,10 +193,11 @@ angular.module('starter.controllers', [])
     ]
 })
 
-.controller('ContactUsCtrl', function($scope,appServices) {
+.controller('ContactUsCtrl', function($scope,appServices,readMadeEasy) {
 
     // get item by Id
-    appServices.getContactUsByAppId()
+    readMadeEasy.readFile().success(function(appData){
+    appServices.getContactUsByAppId(appData.appId)
         .success(function (data) {
             $scope.address = data.address;
             $scope.telPhone = data.telPhone;
@@ -198,5 +205,6 @@ angular.module('starter.controllers', [])
             $scope.webSite = data.webSite;
         }).error(function (err) {
             alert('Contact Us Loading error');
+        });
         });
 });
