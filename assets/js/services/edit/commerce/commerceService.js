@@ -59,7 +59,7 @@
             },
 
             addProduct: function (file, product, id, variants, tempImageArray) {
-
+                
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -74,10 +74,10 @@
                 var UploadFile = new File([blob], 'imageFileName.png');
 
 
-
+               
                 return Upload.upload({
                     url: SERVER_URL + 'edit/addThirdNavigation',
-                    fields: {
+                    fields:{
                         id: id,
                         productId: product.id,
                         appId: $rootScope.appId,
@@ -87,13 +87,14 @@
                         childId: variants[0].childId,
                         variants: variants,
                         desc: product.desc,
+                        selection: product.selection,
                         //sku: variants.sku,
-                       // price: variants.price,
+                        // price: variants.price,
                         //quantity: variants.quantity,
                         type: product.type,
                         discount: product.discount,
                         tempImageArray : tempImageArray
-                    },
+                    } ,
                     file: UploadFile
                 });
             },

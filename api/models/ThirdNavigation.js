@@ -52,6 +52,9 @@ module.exports = {
         imageUrl: {
             type: 'string'
         },
+        selection: {
+            type: 'string'
+        },
         tempImageArray : {
             type : 'json'
         },
