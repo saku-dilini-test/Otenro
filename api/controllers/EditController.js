@@ -36,8 +36,12 @@ module.exports = {
 
     buildSource : function(req,res){
 
-        var userId = req.userId;
-        var appId = req.body.appId;
+
+        /*var userId = req.userId;*!/*/
+        /*var appId = req.body.appId;*/
+        /*console.log("userId " + userId);*/
+        var userId = req.param('userId');
+        var appId = req.param('appId');
         var copyDirPath = config.ME_SERVER + userId + '/build/' + appId + '/';
         var wwwPath = copyDirPath + 'www/';
         var moveConfigFile = copyDirPath + 'config.xml';
@@ -225,11 +229,19 @@ module.exports = {
                                                             }
                                                         }
                                                     });
-
-
                                                     shell.exec('zipalign -v 4 android-release-unsigned.apk '+appName+'.apk', {async: true}, function (code5, stdout, stderr) {
                                                         if (code5==0){
-                                                            res.json('ok');
+                                                             var file = appPath + '/platforms/android/build/outputs/apk/'+appName+'.apk';
+
+                                                             var filename = path.basename(file);
+                                                             var mimetype = mime.lookup(file);
+
+                                                             res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                                                             res.setHeader('Content-type', mimetype);
+
+                                                             var filestream = fs.createReadStream(file);
+                                                             filestream.pipe(res);
+                                                            /*res.json('ok');*/
                                                         }else{
                                                             if (stderr) return res.negotiate(stderr);
                                                         }
@@ -262,13 +274,3 @@ module.exports = {
     }
 };
 
-/* var file = appPath + '/platforms/android/build/outputs/apk/android-debug.apk';
-
- var filename = path.basename(file);
- var mimetype = mime.lookup(file);
-
- res.setHeader('Content-disposition', 'attachment; filename=' + filename);
- res.setHeader('Content-type', mimetype);
-
- var filestream = fs.createReadStream(file);
- filestream.pipe(res);*/
