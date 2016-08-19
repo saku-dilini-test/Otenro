@@ -249,5 +249,18 @@
                 });
             })
         }
+
+        $scope.addAppReviewInformation = function(appReviewInformation){
+            if(!appReviewInformation||!appReviewInformation.firstName||
+                     !appReviewInformation.lastName||!appReviewInformation.email||!appReviewInformation.phoneNumber||
+                     !appReviewInformation.demoUserFirstName||!appReviewInformation.demoUserPassword){
+
+                toastr.error('Please Fill all the fields with valid  data', 'Warning', {
+                    closeButton: true
+                });
+            }else {
+                disableTabs(3,true,true,true,false);
+            }
+        }
     }
 })();

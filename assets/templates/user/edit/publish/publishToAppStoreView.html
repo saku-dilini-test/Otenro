@@ -1,6 +1,7 @@
 <md-dialog aria-label="IOS Store">
     <md-dialog-content>
-        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
+        <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false"
+                 md-dynamic-height="true">
             <md-tab ng-disabled="publishToAppStore.general">
                 <md-tab-label>general</md-tab-label>
                 <md-tab-body>
@@ -8,135 +9,152 @@
                         <h1>general</h1>
                     </div>
                     <form name="appStoreForm" novalidate>
-                    <div class="md-dialog-main">
-                        <fieldset>
-                            <label>title name</label>
-                            <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" ng-model="appStoreData.name" required />
-                        </fieldset>
-                        <div class="clearfix">
-                            <fieldset class="col-4 profile-image-section">
-                                <label class="reset-inline">Product Image</label>
-                                <a class="feature01 logo-upload">
+                        <div class="md-dialog-main">
+                            <fieldset>
+                                <label>title name</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input type="text" name="name" ng-model="appStoreData.name" required/>
+                            </fieldset>
+                            <div class="clearfix">
+                                <fieldset class="col-4 profile-image-section">
+                                    <label class="reset-inline">Product Image</label>
+                                    <a class="feature01 logo-upload">
                                     <span class="overlay01">
                                         <span class="caption01">
-                                             <input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*"
-                                                    value="Upload Image" required />
+                                             <input type="button" class="me-default-button" ngf-select
+                                                    ng-model="picFile" ngf-accept="image/*"
+                                                    value="Upload Image" required/>
                                         </span>
                                     </span>
-                                    <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />
-                                    <img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
-                                </a>
-                            </fieldset>
-                            <div class="pull-right">
-                                <label class="reset-inline">Screen Shots</label>
-                                <div class="clearfix">
-                                    <fieldset class="col-4-1">
-                                        <div class="me-file-upload text-right medium">
-                                            <div class="upload-wrapper">
-                                                <input type="file" ngf-select ng-model="publishSplash.splash1"/>
-                                                <img ng-show="publishSplash.splash1 != null" ngf-src="publishSplash.splash1" width="80" height="120" />
-                                                <img ng-show="publishSplash.splash1 == null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="80" height="120" />
+                                        <img ng-show="picFile != null" ngf-src="picFile"
+                                             style="width:120px; height:120px;"/>
+                                        <img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic"
+                                             width="120" height="120"/>
+                                    </a>
+                                </fieldset>
+                                <div class="pull-right">
+                                    <label class="reset-inline">Screen Shots</label>
+                                    <div class="clearfix">
+                                        <fieldset class="col-4-1">
+                                            <div class="me-file-upload text-right medium">
+                                                <div class="upload-wrapper">
+                                                    <input type="file" ngf-select ng-model="publishSplash.splash1"/>
+                                                    <img ng-show="publishSplash.splash1 != null"
+                                                         ngf-src="publishSplash.splash1" width="80" height="120"/>
+                                                    <img ng-show="publishSplash.splash1 == null" ng-src="{{thumbPic1}}"
+                                                         ng-model="thumbPic1" width="80" height="120"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset class="col-4-1">
-                                        <div class="me-file-upload text-right medium">
-                                            <div class="upload-wrapper">
-                                                <input type="file" ngf-select ng-model="publishSplash.splash2"/>
-                                                <img ng-show="publishSplash.splash2 != null" ngf-src="publishSplash.splash2" width="80" height="120" />
-                                                <img ng-show="publishSplash.splash2 == null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="80" height="120" />
+                                        </fieldset>
+                                        <fieldset class="col-4-1">
+                                            <div class="me-file-upload text-right medium">
+                                                <div class="upload-wrapper">
+                                                    <input type="file" ngf-select ng-model="publishSplash.splash2"/>
+                                                    <img ng-show="publishSplash.splash2 != null"
+                                                         ngf-src="publishSplash.splash2" width="80" height="120"/>
+                                                    <img ng-show="publishSplash.splash2 == null" ng-src="{{thumbPic2}}"
+                                                         ng-model="thumbPic2" width="80" height="120"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset class="col-4-1">
-                                        <div class="me-file-upload text-right medium">
-                                            <div class="upload-wrapper">
-                                                <input type="file" ngf-select ng-model="publishSplash.splash3"/>
-                                                <img ng-show="publishSplash.splash3 != null" ngf-src="publishSplash.splash3" width="80" height="120" />
-                                                <img ng-show="publishSplash.splash3 == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="80" height="120" />
+                                        </fieldset>
+                                        <fieldset class="col-4-1">
+                                            <div class="me-file-upload text-right medium">
+                                                <div class="upload-wrapper">
+                                                    <input type="file" ngf-select ng-model="publishSplash.splash3"/>
+                                                    <img ng-show="publishSplash.splash3 != null"
+                                                         ngf-src="publishSplash.splash3" width="80" height="120"/>
+                                                    <img ng-show="publishSplash.splash3 == null" ng-src="{{thumbPic3}}"
+                                                         ng-model="thumbPic3" width="80" height="120"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset class="col-4-1 reset-margin">
-                                        <div class="me-file-upload text-right medium">
-                                            <div class="upload-wrapper">
-                                                <input type="file" ngf-select ng-model="publishSplash.splash4"/>
-                                                <img ng-show="publishSplash.splash4 != null" ngf-src="publishSplash.splash4" width="80" height="120" />
-                                                <img ng-show="publishSplash.splash4 == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="80" height="120" />
+                                        </fieldset>
+                                        <fieldset class="col-4-1 reset-margin">
+                                            <div class="me-file-upload text-right medium">
+                                                <div class="upload-wrapper">
+                                                    <input type="file" ngf-select ng-model="publishSplash.splash4"/>
+                                                    <img ng-show="publishSplash.splash4 != null"
+                                                         ngf-src="publishSplash.splash4" width="80" height="120"/>
+                                                    <img ng-show="publishSplash.splash4 == null" ng-src="{{thumbPic4}}"
+                                                         ng-model="thumbPic4" width="80" height="120"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </fieldset>
+                                        </fieldset>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="clearfix">
+                                <fieldset>
+                                    <label>spring board name</label>
+                                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                                    <input type="text" name="name" ng-model="appStoreData.springBoardName" required/>
+                                </fieldset>
+                                <fieldset class="col-3">
+                                    <label>language</label>
+                                    <select class="form-control"
+                                            ng-model="appStoreData.language"
+                                            ng-options="languages.language as languages.language for languages in languageList">
+                                    </select>
+                                </fieldset>
+                                <fieldset class="col-3">
+                                    <label>primary category</label>
+                                    <select class="form-control"
+                                            ng-model="appStoreData.primaryCat"
+                                            ng-options="catList.category as catList.category for catList in primaryCatList">
+                                    </select>
+                                </fieldset>
+                                <fieldset class="col-3 reset-margin-right">
+                                    <label>secondary category</label>
+                                    <select class="form-control"
+                                            ng-model="appStoreData.secondaryCat"
+                                            ng-options="secondaryCat.category as secondaryCat.category for secondaryCat in secondaryCatList">
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="clearfix">
+                                <fieldset>
+                                    <label>description</label>
+                                    <textarea ng-model="appStoreData.desc" rows="2"></textarea>
+                                </fieldset>
+                                <fieldset>
+                                    <label>keywords</label>
+                                    <textarea ng-model="appStoreData.keywords" rows="2"></textarea>
+                                </fieldset>
+                                <fieldset class="col-2">
+                                    <label>support url</label>
+                                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                                    <input type="url" ng-model="appStoreData.supportUrl" name="supportUrl" required/>
+                                    <span class="error" ng-show="appStoreForm.supportUrl.$error.url">Invalid url</span>
+                                </fieldset>
+                                <fieldset class="col-2 reset-margin-right">
+                                    <label>marketing url</label>
+                                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                                    <input type="url" ng-model="appStoreData.marketingUrl" name="marketingUrl"
+                                           required/>
+                                    <span class="error"
+                                          ng-show="appStoreForm.marketingUrl.$error.url">Invalid url</span>
+                                </fieldset>
+                                <fieldset class="col-2">
+                                    <label>privacy policy url</label>
+                                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                                    <input type="url" ng-model="appStoreData.privacyPolicyUrl" name="privacyPolicyUrl"
+                                           required/>
+                                    <span class="error"
+                                          ng-show="appStoreForm.privacyPolicyUrl.$error.url">Invalid url</span>
+                                </fieldset>
+                                <fieldset class="col-2 reset-margin-right">
+                                    <label>copyrights</label>
+                                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                                    <input type="text" ng-model="appStoreData.copyrights" name="copyrights" required/>
+                                </fieldset>
+                            </div>
                         </div>
-                        <div class="clearfix">
-                            <fieldset>
-                                <label>spring board name</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="name" ng-model="appStoreData.springBoardName" required />
-                            </fieldset>
-                            <fieldset class="col-3">
-                                <label>language</label>
-                                <select class="form-control"
-                                        ng-model="appStoreData.language"
-                                        ng-options="languages.language as languages.language for languages in languageList">
-                                </select>
-                            </fieldset>
-                            <fieldset class="col-3">
-                                <label>primary category</label>
-                                <select class="form-control"
-                                        ng-model="appStoreData.primaryCat"
-                                        ng-options="catList.category as catList.category for catList in primaryCatList">
-                                </select>
-                            </fieldset>
-                            <fieldset class="col-3 reset-margin-right">
-                                <label>secondary category</label>
-                                <select class="form-control"
-                                        ng-model="appStoreData.secondaryCat"
-                                        ng-options="secondaryCat.category as secondaryCat.category for secondaryCat in secondaryCatList">
-                                </select>
-                            </fieldset>
-                        </div>
-                        <div class="clearfix">
-                            <fieldset>
-                                <label>description</label>
-                                <textarea ng-model="appStoreData.desc" rows="2"></textarea>
-                            </fieldset>
-                            <fieldset>
-                                <label>keywords</label>
-                                <textarea ng-model="appStoreData.keywords" rows="2"></textarea>
-                            </fieldset>
-                            <fieldset class="col-2">
-                                <label>support url</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="url" ng-model="appStoreData.supportUrl" name="supportUrl" required />
-                                <span class="error" ng-show="appStoreForm.supportUrl.$error.url">Invalid url</span>
-                            </fieldset>
-                            <fieldset class="col-2 reset-margin-right">
-                                <label>marketing url</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="url" ng-model="appStoreData.marketingUrl" name="marketingUrl" required />
-                                <span class="error" ng-show="appStoreForm.marketingUrl.$error.url">Invalid url</span>
-                            </fieldset>
-                            <fieldset class="col-2">
-                                <label>privacy policy url</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="url" ng-model="appStoreData.privacyPolicyUrl" name="privacyPolicyUrl" required />
-                                <span class="error" ng-show="appStoreForm.privacyPolicyUrl.$error.url">Invalid url</span>
-                            </fieldset>
-                            <fieldset class="col-2 reset-margin-right">
-                                <label>copyrights</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" ng-model="appStoreData.copyrights" name="copyrights" required />
-                            </fieldset>
-                        </div>
-                    </div>
                     </form>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="addAppStoreInfo(picFile,appStoreData,publishSplash)">next</md-button>
+                            <md-button class="me-default-button"
+                                       ng-click="addAppStoreInfo(picFile,appStoreData,publishSplash)">next
+                            </md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -150,6 +168,7 @@
                             for each content description choose the level of frequency that best describe your app.
                         </label>
                     </div>
+                    <form name="contentRatingForm" novalidate>
                     <div class="md-dialog-main clearfix">
                         <fieldset class="col-3">
                             <label>cartoon violence</label>
@@ -282,7 +301,8 @@
                     <div class="md-dialog-header">
                         <h1>promotions</h1>
                         <label class="font-size-12">
-                            please note that the images below have to be screenshots of the app itself, and have to be taken from specified device.
+                            please note that the images below have to be screenshots of the app itself, and have to be
+                            taken from specified device.
                             images not meeting required resolution will be resized.
                         </label>
                     </div>
@@ -291,7 +311,7 @@
                             <label class="reset-inline">iphone 5</label>
                             <div class="me-file-upload medium">
                                 <div class="upload-wrapper">
-                                    <input type="file" />
+                                    <input type="file"/>
                                 </div>
                             </div>
                         </fieldset>
@@ -299,7 +319,7 @@
                             <label class="reset-inline">iphone 5s</label>
                             <div class="me-file-upload medium">
                                 <div class="upload-wrapper">
-                                    <input type="file" />
+                                    <input type="file"/>
                                 </div>
                             </div>
                         </fieldset>
@@ -307,7 +327,7 @@
                             <label class="reset-inline">iphone 6</label>
                             <div class="me-file-upload medium">
                                 <div class="upload-wrapper">
-                                    <input type="file" />
+                                    <input type="file"/>
                                 </div>
                             </div>
                         </fieldset>
@@ -315,7 +335,7 @@
                             <label class="reset-inline">iphone 6s</label>
                             <div class="me-file-upload medium">
                                 <div class="upload-wrapper">
-                                    <input type="file" />
+                                    <input type="file"/>
                                 </div>
                             </div>
                         </fieldset>
