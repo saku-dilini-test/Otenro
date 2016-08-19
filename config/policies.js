@@ -36,8 +36,9 @@ module.exports.policies = {
   },
 
   'EditController': {
-    '*': ['jwtAuth'],
-    viewImages : true
+  /*'*': ['jwtAuth'],*/
+    viewImages : true,
+    buildApkFile : true,
   },
 
   'edit/style/StyleController': {

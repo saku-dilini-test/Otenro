@@ -14,6 +14,7 @@
 
         $scope.appId = $stateParams.appId;
         $rootScope.appId = $stateParams.appId;
+        $scope.userId = $auth.getPayload().id;
 
         var tempUrl = $cookieStore.get('url');
 
