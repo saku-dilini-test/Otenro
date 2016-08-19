@@ -3,7 +3,7 @@
     angular.module("appEdit").controller("PublishCtrl", ['$scope', '$mdDialog','item','toastr', '$rootScope', 'publishService', '$http', 'SERVER_URL', PublishCtrl]);
 
     function PublishCtrl($scope, $mdDialog, item, toastr, $rootScope, publishService, $http, SERVER_URL) {
-
+     
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -176,6 +176,19 @@
         }
         $scope.contentRating = function(){
             disableTabs(2,true,true,false,true);
+        }
+        
+        $scope.addAppReviewInformation = function(appReviewInformation){
+            if(!appReviewInformation||!appReviewInformation.firstName||
+                     !appReviewInformation.lastName||!appReviewInformation.email||!appReviewInformation.phoneNumber||
+                     !appReviewInformation.demoUserFirstName||!appReviewInformation.demoUserPassword){
+
+                toastr.error('Fill all the fields', 'Warning', {
+                    closeButton: true
+                });
+            }else {
+                disableTabs(3,true,true,true,false);
+            }
         }
     }
 })();
