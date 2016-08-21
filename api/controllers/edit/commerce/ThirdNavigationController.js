@@ -235,6 +235,7 @@ module.exports = {
 
     addToInventory: function(req,res){
     var inventoryData = req.body;
+        console.log(inventoryData);
     ApplicationInventory.find({id: inventoryData.id}).exec(function(e,found){
         if(e) res.send(e);
         var query = {

@@ -193,6 +193,7 @@ module.exports.routes = {
     'POST /edit/updateInventory': 'edit/commerce/InventoryController.updateInventory',
     'POST /edit/checkout': 'edit/commerce/InventoryController.updateInventoryProducts',
     'POST /edit/deleteThirdNavigation': 'edit/commerce/InventoryController.deleteThirdNavigation',
+    'GET /edit/getInventoryListByProductId': 'edit/commerce/InventoryController.getInventoryListByProductId',
 
     /**
      * EmailController
