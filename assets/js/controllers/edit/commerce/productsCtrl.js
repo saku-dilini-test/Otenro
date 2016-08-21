@@ -104,6 +104,7 @@
         };
 
         $scope.nextStep2 = function (current, product) {
+            console.log(product);
             // Validate, Product Name maximum characters length
             var productName = product.name;
             if(productName.length > $scope.maxLengthName){
@@ -144,13 +145,21 @@
                 else {
                     if (typeof item != 'string') {
                         $scope.selectedTab = current;
-                        $scope.variantsList = [{
-                            sku: product.sku,
-                            name: product.name,
-                            size: item.size,
-                            price: item.price,
-                            quantity: item.quantity
-                        }];
+
+                            for( var k = 0; k < $scope.variantsList.length; ++k ) {
+                                if( $scope.oldsku == $scope.variantsList[k]['sku'] ) {
+                                    $scope.variantsList[k]['sku'] = product.sku;
+                                }
+                            }
+
+                        console.log($scope.variantsList);
+                        // $scope.variantsList[element] = {
+                        //     sku: product.sku,
+                        //     name: product.name,
+                        //     size: item.size,
+                        //     price: item.price,
+                        //     quantity: item.quantity
+                        // };
                     }
                     else {
                         $scope.selectedTab = current;
@@ -195,6 +204,7 @@
                     // }];
                 }
             }
+            console.log($scope.variantsList);
         };
 
         $scope.nextStep3Digital = function (current, product, variants) {
@@ -284,6 +294,7 @@
                     $scope.product = result[0];
                     $scope.selectedLink = $scope.product.type;
                     $scope.product.sku = item.sku;
+                    $scope.oldsku = $scope.product.sku;
                     $scope.tmpImageIndex = result[0].tempImageArray;
                     for(var i = 0; i < result[0].tempImageArray.length; i++){
                         if(result[0].tempImageArray[i].img != null) {
@@ -292,7 +303,7 @@
                     }
                     var variantsList = result[0].variants;
                     $scope.variantsList = variantsList;
-                    console.log(variantsList);
+                    console.log($scope.variantsList);
 
                     if (variantsList[0].size != null) {
                         item.size = variantsList[0].size;

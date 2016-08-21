@@ -41,6 +41,14 @@ module.exports = {
 
     },
 
+    getInventoryListByProductId : function (req,res) {
+        var pId = req.param('pId');
+        ApplicationInventory.find({productId: pId}).exec(function(e,invntry){
+            if(e) console.log(e);
+            res.send(invntry);
+        })
+    },
+
     createInventoryLis : function (req,res) {
 
 

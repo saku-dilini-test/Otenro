@@ -16,6 +16,10 @@
          },
             getInventoryList: function(){
                 return $http.get(SERVER_URL+ 'edit/getInventoryList?appId='+$rootScope.appId);
+            }
+            ,
+            getInventoryListByProductId: function(pId){
+                return $http.get(SERVER_URL+ 'edit/getInventoryListByProductId?pId='+$rootScope.appId);
             },
         }
     }
