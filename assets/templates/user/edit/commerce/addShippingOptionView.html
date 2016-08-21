@@ -43,10 +43,15 @@
                         <fieldset>
                             <label>option name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="optionName" ng-maxlength="20" ng-pattern="/^[a-zA-Z0-9_ ]*$/" required ng-model="flatRates.optionName" />
+                            <input type="text" name="optionName"  ng-pattern="/^[a-zA-Z0-9_ ]*$/" required ng-model="flatRates.optionName" />
                         </fieldset>
                         <span ng-show="flatRate.optionName.$error.pattern">No symbols</span>
-                        <span ng-show="flatRate.optionName.$error.maxlength">Too lengthy</span>
+                            <div ng-hide="flatRates.optionName.length > maxFlatRate">
+                                <span>Characters left: {{maxFlatRate - flatRates.optionName.length}}</span>
+                            </div>
+                            <div  ng-show="flatRates.optionName.length > maxFlatRate">
+                                <span>Characters left: </span> <span style="color: #ff0404 "> {{maxFlatRate - flatRates.optionName.length}} </span>
+                            </div>
                         <div class="clearfix">
                             <fieldset class="col-2">
                                 <label>Per order fee </label>
@@ -88,11 +93,15 @@
                         <fieldset>
                             <label>option name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="name" ng-maxlength="25"  ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="weightRate.optionName" />
+                            <input type="text" name="name"  ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="weightRate.optionName" />
                             <br />
                             <span ng-show="weightBased.name.$error.pattern">No symbols</span>
-                            <br />
-                            <span ng-show="weightBased.name.$error.maxlength">Maximum length exceeded</span>
+                            <div ng-hide="weightRate.optionName.length > maxWeightRate">
+                                <span>Characters left: {{maxWeightRate - weightRate.optionName.length}}</span>
+                            </div>
+                            <div  ng-show="weightRate.optionName.length > maxWeightRate">
+                                <span>Characters left: </span> <span style="color: #ff0404 "> {{maxWeightRate - weightRate.optionName.length}} </span>
+                            </div>
                         </fieldset>
                         <fieldset class="reset-margin">
                             <label>weight ranges</label>
@@ -150,9 +159,14 @@
                         <fieldset>
                             <label>Location Name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="locationName" ng-maxlength="15" required ng-model="pickup.locationName" />
+                            <input type="text" name="locationName"  required ng-model="pickup.locationName" />
                             <br />
-                            <span ng-show="pickUp.locationName.$error.maxlength">Too lengthy</span>
+                            <div ng-hide="pickup.locationName.length > maxPickup">
+                                <span>Characters left: {{maxPickup - pickup.locationName.length}}</span>
+                            </div>
+                            <div  ng-show="pickup.locationName.length > maxPickup">
+                                <span>Characters left: </span> <span style="color: #ff0404 "> {{maxPickup - pickup.locationName.length}} </span>
+                            </div>
                         </fieldset>
                         <div class="clearfix">
                             <fieldset class="col-2">
@@ -161,19 +175,29 @@
                                 <input type="number" ng-maxlength="10" ng-pattern="/^[a-zA-Z0-9]*$/" name="number" required ng-model="pickup.number"  />
                                 <br />
                                 <span ng-show="pickUp.number.$error.pattern">Numbers only</span>
-                                <span ng-show="pickUp.number.$error.maxlength">Too lengthy</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>street Address</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <input type="text" name="streetAddress" required ng-model="pickup.streetAddress" />
+                                <div ng-hide="pickup.streetAddress.length > maxPickup">
+                                    <span>Characters left: {{maxPickup - pickup.streetAddress.length}}</span>
+                                </div>
+                                <div  ng-show="pickup.streetAddress.length > maxPickup">
+                                    <span>Characters left: </span> <span style="color: #ff0404 "> {{maxPickup - pickup.streetAddress.length}} </span>
+                                </div>
                             </fieldset>
                             <fieldset class="col-2">
                                 <label>City</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" ng-maxlength="15" name="city" required ng-model="pickup.city" />
+                                <input type="text"  name="city" required ng-model="pickup.city" />
+                                <div ng-hide="pickup.city.length > maxPickup">
+                                    <span>Characters left: {{maxPickup - pickup.city.length}}</span>
+                                </div>
+                                <div  ng-show="pickup.city.length > maxPickup">
+                                    <span>Characters left: </span> <span style="color: #ff0404 "> {{maxPickup - pickup.city.length}} </span>
+                                </div>
                                 <br />
-                                <span ng-show="pickUp.city.$error.maxlength">Too lengthy</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Country</label>
@@ -191,7 +215,6 @@
                                 <input type="text" ng-maxlength="6" ng-pattern="/^[a-zA-Z0-9]*$/" name="postalCode" required ng-model="pickup.postalCode" />
                                 <br />
                                 <span ng-show="pickUp.postalCode.$error.pattern">No symbols</span>
-                                <span ng-show="pickUp.postalCode.$error.maxlength">Too lengthy</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Cost(optional)</label>
