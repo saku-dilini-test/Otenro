@@ -11,6 +11,11 @@
         $scope.fulfill = [];
 
 
+
+        $scope.maxReturnPolicy = 100;
+        $scope.maxTermsAndCondition = 100;
+        $scope.maxPrivacyPolicy = 100;
+
         var fakeI18n = function (title) {
             var deferred = $q.defer();
             $interval(function () {
@@ -489,6 +494,39 @@
         });
 
         $scope.savePolicies = function (current, storeSettings) {
+            
+            // Validate, Return Policy maximum characters length
+            var returnPolicy = storeSettings.returnPolicy;
+            if((typeof returnPolicy != 'undefined') &&
+                (returnPolicy.length > $scope.maxReturnPolicy)){
+                toastr.error('Return Policy, maximum characters length is exceed. ' +
+                    'Maximum characters length is : '+$scope.maxReturnPolicy, 'Warning',
+                    {closeButton: true}
+                );
+                return;
+            }
+
+            // Validate, Terms And Condition maximum characters length
+            var termsAndCondition = storeSettings.termsAndCondition;
+            if((typeof termsAndCondition != 'undefined') &&
+                (termsAndCondition.length > $scope.maxTermsAndCondition)){
+                toastr.error('Terms And Condition, maximum characters length is exceed. ' +
+                    'Maximum characters length is : '+$scope.maxTermsAndCondition, 'Warning',
+                    {closeButton: true}
+                );
+                return;
+            }
+            
+            // Validate, Privacy Policy maximum characters length
+            var privacyPolicy = storeSettings.privacyPolicy;
+            if((typeof privacyPolicy != 'undefined') &&
+                (privacyPolicy.length > $scope.maxPrivacyPolicy)){
+                toastr.error('Privacy Policy, maximum characters length is exceed. ' +
+                    'Maximum characters length is : '+$scope.maxPrivacyPolicy, 'Warning',
+                    {closeButton: true}
+                );
+                return;
+            }
 
             if (!storeSettings.returnPolicy|| !storeSettings.termsAndCondition|| !storeSettings.privacyPolicy) {
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
