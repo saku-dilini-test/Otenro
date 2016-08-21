@@ -7,8 +7,13 @@
             </div>
         </div>
         <div class="content">
-            <div class="made-easy-header-font" ng-bind-html="header"></div>
-            <div class="made-easy-content-font" ng-bind-html="content"></div>
+
+            <div ng-if="privacyPolicy" class="made-easy-header-font">privacyPolicy</div>
+            <div ng-if="privacyPolicy" class="made-easy-content-font" ng-bind-html="privacyPolicy"></div>
+             <br>
+            <div ng-if="returnPolicy" class="made-easy-content-font">ReturnPolicy</div>
+            <div ng-if="returnPolicy" class="made-easy-content-font" ng-bind-html="returnPolicy"></div>
+
         </div>
     </div>
   </ion-content>

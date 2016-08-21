@@ -42,9 +42,9 @@ module.exports = {
         var searchApp = {
             appId: appId
         };
-        ApplicationPolicies.findOne(searchApp).exec(function (err, app) {
-            if (err) return done(err);
-            res.send(app);
+        ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
+            if (err) return err;
+            res.json(app);
         });
     }
 };

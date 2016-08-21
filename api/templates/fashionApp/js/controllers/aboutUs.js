@@ -27,10 +27,13 @@
 				var appId = $rootScope.appId;
 				pagesService.getAboutUs(appId).then(setAboutUs)
 					.finally(function(){
+						console.log("setAboutUs  " + JSON.stringify(setAboutUs));
 						$ionicLoading.hide();
 					});
 
+
 				function setAboutUs(response) {
+					console.log("response  " + JSON.stringify(response));
 					$scope.header = response.header;
 					$scope.content = response.content;
 					console.log(response.content);

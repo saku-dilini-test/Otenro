@@ -37,14 +37,15 @@ module.exports = {
     },
 
     getAboutUsData: function (req, res) {
-
+        console.log("req.param('appId') " + req.param('appId'));
         var appId = req.param('appId');
         var searchApp = {
             appId: appId
         };
-        ApplicationAboutUs.findOne(searchApp).exec(function (err, app) {
-            if (err) return done(err);
-            res.send(app);
+        ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
+            if (err) return err;
+
+            res.json(app);
         });
     }
 };
