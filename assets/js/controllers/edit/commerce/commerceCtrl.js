@@ -15,6 +15,8 @@
         $scope.maxReturnPolicy = 100;
         $scope.maxTermsAndCondition = 100;
         $scope.maxPrivacyPolicy = 100;
+        $scope.maxAboutUsHeader = 20;
+        $scope.maxAboutUsContent = 100;
 
         var fakeI18n = function (title) {
             var deferred = $q.defer();
@@ -438,6 +440,28 @@
         };
 
         $scope.addAboutUs = function (current,storeSettings) {
+
+            // Validate, About Us Header maximum characters length
+            var header = storeSettings.header;
+            if((typeof header != 'undefined') &&
+                (header.length > $scope.maxAboutUsHeader)){
+                toastr.error('About Us Header, maximum characters length is exceed. ' +
+                    'Maximum characters length is : '+$scope.maxAboutUsHeader, 'Warning',
+                    {closeButton: true}
+                );
+                return;
+            }
+            // Validate, About Us Content maximum characters length
+            var content = storeSettings.content;
+            if((typeof content != 'undefined') &&
+                (content.length > $scope.maxAboutUsContent)){
+                toastr.error('About Us Content, maximum characters length is exceed. ' +
+                    'Maximum characters length is : '+$scope.maxAboutUsContent, 'Warning',
+                    {closeButton: true}
+                );
+                return;
+            }
+
             if (storeSettings!=null){
                 if (!storeSettings.header  || !storeSettings.content) {
                     toastr.error(' warning', "Please fill all the fields", {closeButton: true});
