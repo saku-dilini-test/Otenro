@@ -37,7 +37,42 @@ module.exports = {
             res.json(app);
         });
     },
+    /**
+     * Return Application Store Setting Collection for Given App Id
+     * It has About Us 
+     * @param req
+     * @param res
+     */
+    getAboutUs : function(req,res){
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId
+        };
+        console.log(searchApp);
+        ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
+            if (err) return err;
+            res.json(app);
+        });
+    },
 
+    /**
+     * Return Application Store Setting Collection for Given App Id
+     * It has policies
+     * @param req
+     * @param res
+     */
+    getPolicies : function(req,res){
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId
+        };
+        console.log(searchApp);
+        ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
+            if (err) return err;
+            res.json(app);
+        });
+    },
+    
     getTermsAndConditions : function(req,res){
 
         var appId = req.param('appId');

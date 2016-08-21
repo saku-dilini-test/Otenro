@@ -240,6 +240,8 @@ module.exports.routes = {
     'GET /templates/viewImages': 'template/TemplateController.viewImages',
     'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
     'POST /templates/deletePreviewTemp': 'template/TemplateController.deletePreviewTemp',
+    'GET /templates/getAboutUs': 'template/TemplateController.getAboutUs',
+    'GET /templates/getPolicies': 'template/TemplateController.getPolicies',
     'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
 
 

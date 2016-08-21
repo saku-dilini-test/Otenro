@@ -76,6 +76,8 @@ module.exports.policies = {
     getThirdBySecondId : true,
     setPublishDetails: true,
     deletePreviewTemp:true,
+    getAboutUs: true,
+    getPolicies: true,
     getTermsAndConditions: true,
     getArticles : true,
     getArticleByCategoryId : true,
