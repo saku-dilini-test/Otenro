@@ -681,12 +681,17 @@
                         toastr.success('Email Settings has been changed ', 'Success', {
                             closeButton: true
                         });
+                        if ($scope.selectedIndex==5){
+                            $mdDialog.hide();
+                        }
+
 
                     }).error(function (err) {
-                    toastr.error('Unable to Create', 'Warning', {
-                        closeButton: true
-                    });
-                })
+                        toastr.error('Unable to Create', 'Warning', {
+                            closeButton: true
+                        });
+                        $mdDialog.hide();
+                    })
             }
 
         };
