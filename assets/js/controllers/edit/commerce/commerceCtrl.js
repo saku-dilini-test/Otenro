@@ -587,45 +587,65 @@
 
         };
         $scope.updateEmailSettings = function (email, type) {
-            email.appId = $rootScope.appId;
-            console.log(email);
-            commerceService.updateEmailSettings(email)
-                .success(function (data) {
-                    console.log(data);
-                    if (type == "next") {
-                        var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
-                        $scope.selectedIndex = index;
-                    }
-                    toastr.success('Email Settings has been changed ', 'Success', {
-                        closeButton: true
-                    });
 
-                }).error(function (err) {
-                toastr.error('Unable to Create', 'Warning', {
+            console.log(email);
+            if(email == undefined){
+                toastr.error('Fill the all fields','Warning',{
                     closeButton: true
                 });
-            })
+            }
+            else {
+                email.appId = $rootScope.appId;
+                commerceService.updateEmailSettings(email)
+                    .success(function (data) {
+                        console.log(data);
+                        if (type == "next") {
+                            var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
+                            $scope.selectedIndex = index;
+                        }
+                        toastr.success('Email Settings has been changed ', 'Success', {
+                            closeButton: true
+                        });
+
+                    }).error(function (err) {
+                    toastr.error('Unable to Create', 'Warning', {
+                        closeButton: true
+                    });
+                })
+            }
 
         };
         $scope.updateHeaderFooterSettings = function (picFileHeader, picFileFooter, email, type) {
-            email.appId = $rootScope.appId;
-            console.log(email);
-            commerceService.updateHeaderFooterSettings(picFileHeader, picFileFooter, email)
-                .success(function (data) {
-                    console.log(data);
-                    if (type == "next") {
-                        var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
-                        $scope.selectedIndex = index;
-                    }
-                    toastr.success('Email Settings has been changed ', 'Success', {
-                        closeButton: true
-                    });
 
-                }).error(function (err) {
-                toastr.error('Unable to Create', 'Warning', {
+            console.log(email);
+            if(email == undefined || email.footer == undefined || email.header == undefined ){
+                toastr.error('Fill the all fields','Warning',{
                     closeButton: true
                 });
-            })
+            }else if(picFileHeader == null || picFileFooter == null){
+                toastr.error('select header and footer image', 'Warning', {
+                    closeButton: true
+                });
+                return;
+            } else{
+                email.appId = $rootScope.appId;
+                commerceService.updateHeaderFooterSettings(picFileHeader, picFileFooter, email)
+                    .success(function (data) {
+                        console.log(data);
+                        if (type == "next") {
+                            var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
+                            $scope.selectedIndex = index;
+                        }
+                        toastr.success('Email Settings has been changed ', 'Success', {
+                            closeButton: true
+                        });
+
+                    }).error(function (err) {
+                    toastr.error('Unable to Create', 'Warning', {
+                        closeButton: true
+                    });
+                })
+            }
 
         };
         var prams = {

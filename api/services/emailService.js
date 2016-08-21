@@ -265,7 +265,7 @@ module.exports = {
                 console.log(app[0]);
                 var emailDetails = {
                     text: "",
-                    from: "onbilabsttest@gmail.com",
+                    from: app[0].fromEmail,
                     to: app[0].fromEmail,
                     cc: "",
                     subject: data.type,
