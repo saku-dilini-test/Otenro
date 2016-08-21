@@ -26,10 +26,14 @@
                             <fieldset class="col-2">
                                 <label>next order number </label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="number" ng-maxlength="6" ng-model="storeSettings.orderNumber" name="number" required />
+                                <input type="number" ng-model="storeSettings.orderNumber"
+                                       ng-pattern="/^\d*[1-9]\d*$/" name="number" required />
+                                <br>
                                 <span class="error" ng-show="storeSettingsForm.number.$error.number">Not valid number!</span>
-                                <span class="error" ng-show="storeSettingsForm.number.$error.maxlength">Too lengthy</span>
+                                <span ng-show="storeSettingsForm.number.$error.pattern">Positive numbers only</span>
                             </fieldset>
+                            <br>
+                            <br>
                             <!--<fieldset class="col-2 reset-margin-right">-->
                                 <!--<label>express checkout</label>-->
                                 <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->

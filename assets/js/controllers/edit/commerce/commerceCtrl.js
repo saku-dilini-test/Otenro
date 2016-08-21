@@ -10,6 +10,8 @@
         $scope.unfulfilled = [];
         $scope.fulfill = [];
 
+        // min characters length of NextOrderNumber in product
+        $scope.minLengthNextOrderNumber = 8;
 
         var fakeI18n = function (title) {
             var deferred = $q.defer();
@@ -365,6 +367,17 @@
         });
 
         $scope.saveStoreSettings = function (current, storeSettings, openHours) {
+
+            // Validate, Next Order Number characters min length
+            var orderNumber = storeSettings.orderNumber;
+            if(typeof orderNumber != 'undefined'){
+                orderNumber = orderNumber.toString();
+                if(orderNumber.length <= $scope.minLengthNextOrderNumber) {
+                    toastr.error('Next Order Number length should be more than '+
+                        $scope.minLengthNextOrderNumber , 'Warning',{closeButton: true});
+                    return;
+                }
+            }
 
             if (!storeSettings){
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
