@@ -10,13 +10,13 @@
         $scope.unfulfilled = [];
         $scope.fulfill = [];
 
-        // min characters length of NextOrderNumber in product
-        $scope.minLengthNextOrderNumber = 8;
-
-
+        // Characters length config
+        $scope.maxLengthNextOrderNumber = 8; // max characters length of NextOrderNumber in product
+        // Policy
         $scope.maxReturnPolicy = 100;
         $scope.maxTermsAndCondition = 100;
         $scope.maxPrivacyPolicy = 100;
+        // About us
         $scope.maxAboutUsHeader = 20;
         $scope.maxAboutUsContent = 100;
 
@@ -375,13 +375,13 @@
 
         $scope.saveStoreSettings = function (current, storeSettings, openHours) {
 
-            // Validate, Next Order Number characters min length
+            // Validate, Next Order Number characters max length
             var orderNumber = storeSettings.orderNumber;
             if(typeof orderNumber != 'undefined'){
                 orderNumber = orderNumber.toString();
-                if(orderNumber.length <= $scope.minLengthNextOrderNumber) {
-                    toastr.error('Next Order Number length should be more than '+
-                        $scope.minLengthNextOrderNumber , 'Warning',{closeButton: true});
+                if(orderNumber.length >= $scope.maxLengthNextOrderNumber) {
+                    toastr.error('Next Order Number length should be less than '+
+                        $scope.maxLengthNextOrderNumber , 'Warning',{closeButton: true});
                     return;
                 }
             }
