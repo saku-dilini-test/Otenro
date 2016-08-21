@@ -169,7 +169,8 @@
                                 <span ng-show="priceAndVariantsForm['price_' + $index].$error.pattern">Invalid price value</span><br /></td>
                                 <!--<span ng-show="priceAndVariantsForm['price_' + $index].$error.maxlength">Too lengthy</span></td>-->
 
-                                <td><input name="qty_{{$index}}" type="text" maxlength="8" ng-model="data.quantity">
+                                <td><input name="qty_{{$index}}" type="text" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.quantity">
+                                    <span ng-show="priceAndVariantsForm['qty_' + $index].$error.pattern">Invalid qty value</span><br /></td>
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
                                 <td><div class="icon icon-plus" ng-click="addVariants(product,$index,data)"></div></td>
                                 <td><img width="25" src="../../../images/delete-icon-inventory.svg" ng-click="deletePro($index,data)">
