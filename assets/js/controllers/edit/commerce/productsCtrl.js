@@ -233,7 +233,7 @@
                 }
                 else{
                     $scope.inserted = {
-                        sku: 0,
+                        sku: null,
                         name: product.name,
                         price: 0,
                         quantity: 0
@@ -295,6 +295,10 @@
                     $scope.selectedLink = $scope.product.type;
                     $scope.product.sku = item.sku;
                     $scope.oldsku = $scope.product.sku;
+                    if($scope.product.sku!==undefined){
+                        $scope.product.checked = true;
+                    }
+
                     $scope.tmpImageIndex = result[0].tempImageArray;
                     for(var i = 0; i < result[0].tempImageArray.length; i++){
                         if(result[0].tempImageArray[i].img != null) {
