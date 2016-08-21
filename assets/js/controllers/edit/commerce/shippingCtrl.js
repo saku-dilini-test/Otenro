@@ -12,6 +12,9 @@
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
 
+        $scope.maxFlatRate = 20;
+        $scope.maxWeightRate = 20;
+        $scope.maxPickup = 20;
 
 
         // --/-- enable & disable tabs --/--
@@ -102,6 +105,10 @@
                 toastr.error('Fill all the fields', 'Warning', {
                     closeButton: true
                 });
+            }else if(shipping.optionName.length > $scope.maxFlatRate){
+                toastr.error('Option name should be less than 20 letters.', 'Warning', {
+                    closeButton: true
+                });
             }else{
                 shipping.appId = $rootScope.appId;
                 shipping.shippingOption = 'Flat Rate';
@@ -121,6 +128,10 @@
                         toastr.error('Fill all the fields', 'Warning', {
                             closeButton: true
                         });
+            }else if(pickup.locationName.length > $scope.maxPickup){
+                toastr.error('Location name should be less than 20 letters.', 'Warning', {
+                    closeButton: true
+                });
             }else{
 
                 pickup.appId = $rootScope.appId;
@@ -144,6 +155,10 @@
                 });
             }else if(typeof shipping.optionName == 'undefined'){
                 toastr.error('Fill all the fields', 'Warning', {
+                    closeButton: true
+                });
+            }else if(shipping.optionName.length > $scope.maxWeightRate){
+                toastr.error('Option name should be less than 20 letters.', 'Warning', {
                     closeButton: true
                 });
             }
