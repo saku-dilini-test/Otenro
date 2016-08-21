@@ -64,13 +64,15 @@
                         .success(function (result) {
                             toastr.success('Updated', 'Success', {
                                 closeButton: true
+
                             });
                             $scope.mainMenus = result;
+                            $mdDialog.hide();
                         }).error(function (error) {
                         toastr.error('Fail add', 'Warning', {
                             closeButton: true
                         });
-
+                        $mdDialog.hide();
                     })
                 }
             };
