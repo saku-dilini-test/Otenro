@@ -241,9 +241,8 @@
                             <fieldset>
                                 <label>return policy</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea name="returnPolicy" rows="2" ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="storeSettings.returnPolicy"></textarea>
+                                <textarea name="returnPolicy" rows="2" ng-model="storeSettings.returnPolicy"></textarea>
                                 <br />
-                                <span ng-show="policies.returnPolicy.$error.pattern">No symbols</span>
                                 <div ng-hide="storeSettings.returnPolicy.length > maxReturnPolicy">
                                     <span>Characters left: {{maxReturnPolicy - storeSettings.returnPolicy.length}}</span>
                                 </div>
@@ -254,9 +253,8 @@
                             <fieldset>
                                 <label>terms and conditions</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea name="termsAndCondition" rows="2" ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="storeSettings.termsAndCondition"></textarea>
+                                <textarea name="termsAndCondition" rows="2" ng-model="storeSettings.termsAndCondition"></textarea>
                                 <br />
-                                <span ng-show="policies.termsAndCondition.$error.pattern">No symbols</span>
                                 <div ng-hide="storeSettings.termsAndCondition.length > maxTermsAndCondition">
                                     <span>Characters left: {{maxTermsAndCondition - storeSettings.termsAndCondition.length}}</span>
                                 </div>
@@ -267,9 +265,8 @@
                             <fieldset>
                                 <label>privacy policy</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea name="privacyPolicy" rows="2" ng-pattern="/^[a-zA-Z0-9_ ]*$/"  ng-model="storeSettings.privacyPolicy"></textarea>
+                                <textarea name="privacyPolicy" rows="2"  ng-model="storeSettings.privacyPolicy"></textarea>
                                 <br />
-                                <span ng-show="policies.privacyPolicy.$error.pattern">No symbols</span>
                                 <div ng-hide="storeSettings.privacyPolicy.length > maxPrivacyPolicy">
                                     <span>Characters left: {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}}</span>
                                 </div>
@@ -311,9 +308,8 @@
                         <fieldset>
                             <label>Content</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <textarea rows="4" name="content" ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="storeSettings.content"></textarea>
+                            <textarea rows="4" name="content" ng-model="storeSettings.content"></textarea>
                             <br />
-                            <span ng-show="aboutUs.content.$error.pattern">No symbols</span>
                             <div ng-hide="storeSettings.content.length > maxAboutUsContent">
                                 <span>Characters left: {{maxAboutUsContent - storeSettings.content.length}}</span>
                             </div>
