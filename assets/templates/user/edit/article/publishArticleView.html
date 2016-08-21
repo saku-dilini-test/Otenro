@@ -15,8 +15,15 @@
             </fieldset>
             <fieldset>
                 <label>Title</label>
-                <input type="text" name="title" ng-maxlength="35" ng-model="article.title" required />
-
+                <input type="text" name="title" ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="article.title" required />
+                <br />
+                <span ng-show="articleForm.title.$error.pattern">No symbols</span>
+                <div ng-hide="article.title.length > maxArticleTitle">
+                    <span>Characters left: {{maxArticleTitle - article.title.length}}</span>
+                </div>
+                <div  ng-show="article.title.length > maxArticleTitle">
+                    <span>Characters left: </span> <span style="color: #ff0404 "> {{maxArticleTitle - article.title.length}} </span>
+                </div>
             </fieldset>
             <span ng-show="articleForm.title.$error.maxlength">Too lengthy</span></td>
             <fieldset class="col-2">

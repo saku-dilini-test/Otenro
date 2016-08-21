@@ -21,6 +21,9 @@
         $scope.pageSize = 5;
         console.log("catName " + $scope.catName);
 
+        // Characters length config (Article)
+        $scope.maxArticleTitle = 20;
+        $scope.maxArticleDesc = 200;
 
         $scope.myImage='';
         $scope.myCroppedImage='';
