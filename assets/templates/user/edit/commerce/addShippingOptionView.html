@@ -56,20 +56,16 @@
                             <fieldset class="col-2">
                                 <label>Per order fee </label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="number" name="preOrderFee" ng-maxlength="8" ng-pattern="/^\d{0,5}(?:\.\d{1,2})?$/" required ng-model="flatRates.preOrderFee"  />
+                                <input type="number" name="preOrderFee" ng-pattern="/^\d+(.\d{1,2})?$/" required ng-model="flatRates.preOrderFee"  />
                                 <br />
-                                <span ng-show="flatRate.preOrderFee.$error.pattern">Only Positive numbers and do not exceed character limit of 5</span>
-                                <br />
-                                <span ng-show="flatRate.preOrderFee.$error.maxlength">Maximum two decimal places only</span>
+                                <span ng-show="flatRate.preOrderFee.$error.pattern">Only Positive numbers and Maximum two decimal places only</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Per item fee</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="number" name="feePerItem" ng-maxlength="8" ng-pattern="/^\d{0,5}(?:\.\d{1,2})?$/" required ng-model="flatRates.feePerItem" />
+                                <input type="number" name="feePerItem" ng-pattern="/^\d+(.\d{1,2})?$/" required ng-model="flatRates.feePerItem" />
                                 <br />
-                                <span ng-show="flatRate.feePerItem.$error.pattern">Only Positive numbers and do not exceed character limit of 5</span>
-                                <br />
-                                <span ng-show="flatRate.feePerItem.$error.maxlength">Maximum two decimal places only</span>
+                                <span ng-show="flatRate.feePerItem.$error.pattern">Only Positive numbers and Maximum two decimal places only</span>
                             </fieldset>
                         </div>
                             </form>
