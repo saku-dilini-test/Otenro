@@ -111,21 +111,18 @@
                             <tbody>
                                 <tr ng-repeat="data in weightRate.weightRanges">
                                     <td class="weight-rate">
-                                        <input type="number" name="weightField_{{$index}}" ng-maxlength="7" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.startWeight" required>
+                                        <input type="number" name="weightField_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/" ng-model="data.startWeight" required>
                                         <br />
-                                        <span ng-show="weightBased['weightField_'+$index].$error.pattern">Enter a valid weight value</span>
-                                        <span ng-show="weightBased['weightField_'+$index].$error.maxlength">Exceeded the maximum weight</span>
+                                        <span ng-show="weightBased['weightField_'+$index].$error.pattern">Positive Numbers Only</span>
                                         <br />
                                             to
-                                        <input type="number" name="endWeight_{{$index}}" ng-maxlength="7" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.endWeight" required>
+                                        <input type="number" name="endWeight_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/" ng-model="data.endWeight" required>
                                         <br />
-                                        <span ng-show="weightBased['endWeight_'+$index].$error.pattern">Enter a valid weight value</span>
-                                        <span ng-show="weightBased['endWeight_'+$index].$error.maxlength">Exceeded the maximum weight</span>
+                                        <span ng-show="weightBased['endWeight_'+$index].$error.pattern">Positive Number Only</span>
                                     </td>
-                                    <td><input type="number" name="cost_{{$index}}" ng-maxlength="7" ng-pattern="/^[^-+][0-9\.]*$/" ng-model="data.cost" required>
+                                    <td><input type="number" name="cost_{{$index}}" ng-pattern="/^\d+(.\d{1,2})?$/" ng-model="data.cost" required>
                                     <br />
-                                        <span ng-show="weightBased['cost_'+$index].$error.pattern">Enter a valid price value</span>
-                                        <span ng-show="weightBased['cost_'+$index].$error.maxlength">Exceeded the maximum cost</span>
+                                        <span ng-show="weightBased['cost_'+$index].$error.pattern">Only Positive numbers and Maximum two decimal places only</span>
                                     </td>
                                 </tr>
                             </tbody>
