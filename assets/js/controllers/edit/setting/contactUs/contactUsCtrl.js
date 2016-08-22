@@ -1,10 +1,12 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("contactUsCtrl", [
-        '$scope','$rootScope','$mdDialog', 'toastr','contactUsService',
+        '$scope','$rootScope','$mdDialog', 'toastr','contactUsService','uiGmapGoogleMapApi',
         contactUsCtrl]);
 
-    function contactUsCtrl($scope,$rootScope,$mdDialog,toastr, contactUsService) {
+    function contactUsCtrl($scope,$rootScope,$mdDialog,toastr, contactUsService,uiGmapGoogleMapApi) {
+
+
 
         // --- Config ----
         $scope.coords ="";
@@ -21,7 +23,7 @@
                     longitude: 79.8890950584107031
                 };
             }
-
+            uiGmapGoogleMapApi.then(function(maps) {
             $scope.map= {
                 center: $scope.coords,
                 zoom: 11,
@@ -47,6 +49,7 @@
                             }
                         }
                     };
+            });
                // }
         }).error(function (error) {
                 alert("Contact Us information Loading Error : " + error);
