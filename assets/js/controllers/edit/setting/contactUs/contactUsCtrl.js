@@ -76,14 +76,14 @@
             if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
                 toastr.error('Basic Information not update', { closeButton: true});
                 // go next tab
-                disableTabs(2,true,false,true);
-            }else{
-                if(typeof basicInfo.address == 'undefined'){
-                    toastr.error('Address Not Update', { closeButton: true});
-                }
-                if(typeof basicInfo.telPhone == 'undefined'){
-                    toastr.error('Tel phone Not Update', { closeButton: true});
-                }
+                disableTabs(1,false,true,true);
+            }else if(typeof basicInfo.address == 'undefined'){
+                toastr.error('Address Not Update', { closeButton: true});
+            }
+            else if(typeof basicInfo.telPhone == 'undefined'){
+                toastr.error('Tel phone Not Update', { closeButton: true});
+            }
+            else{
                 var basicInfoResponse = {
                     'appId': $rootScope.appId,
                     'address': basicInfo.address,
