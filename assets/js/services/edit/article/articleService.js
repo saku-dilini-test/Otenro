@@ -60,7 +60,8 @@
                 });
             },
             publishArticle: function(file,id,categoryId,title,desc,appId,isNewArticle,isImageUpdate){
-
+                var UploadFile = '';
+                if(isImageUpdate == true){
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -70,9 +71,9 @@
                     }
                     return new Blob([new Uint8Array(array)], {type: mimeString});
                 };
-
                 var blob = dataURItoBlob(file);
-                var UploadFile = new File([blob], 'imageFileName.png');
+                UploadFile = new File([blob], 'imageFileName.png');
+                }
 
                 return Upload.upload({
                     url: SERVER_URL + 'edit/publishArticle',
