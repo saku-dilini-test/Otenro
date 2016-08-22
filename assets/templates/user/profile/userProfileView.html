@@ -98,12 +98,16 @@
                             <fieldset class="col-2">
                                 <label>First name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="fname"  ng-model="userEdit.firstName" required />
+                                <input type="text" name="fname" ng-maxlength="20" ng-model="userEdit.firstName" required />
+                                <br />
+                                <span ng-show="editProfile.fname.$error.maxlength">Too lengthy</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Last name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="lname" ng-model="userEdit.lastName" required />
+                                <input type="text" name="lname" ng-maxlength="20" ng-model="userEdit.lastName" required />
+                                <br />
+                                <span ng-show="editProfile.lname.$error.maxlength">Too lengthy</span>
                             </fieldset>
                         </div>
                         <fieldset>
