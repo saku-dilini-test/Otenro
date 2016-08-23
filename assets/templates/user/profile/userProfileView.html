@@ -169,22 +169,27 @@
                         <h1>Edit billing account</h1>
                     </div>
                     <div class="md-dialog-main">
+                        <form class="form-signin" accept-charset="UTF-8" role="form" name="editBilling" novalidate>
                         <div class="clearfix">
                             <fieldset >
                                 <label>Billing Name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="name" ng-model="billingEdit.fname" required />
+                                <input type="text" name="fname" ng-maxlength="20" ng-model="billingEdit.fname" required />
+                                <br />
+                                <span ng-show="editBilling.fname.$error.maxlength">Too lengthy</span>
                             </fieldset>
                         </div>
                         <fieldset>
                             <label>Billing Address</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" ng-model="billingEdit.address" required />
+                            <input type="text" name="address" ng-maxlength="20" ng-model="billingEdit.address" required />
+                            <br />
+                            <span ng-show="editBilling.address.$error.maxlength">Too lengthy</span>
                         </fieldset>
                         <fieldset class="col-2">
                             <label>Credit card number</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" ng-model="billingEdit.creditCardNumber" required />
+                            <input type="number" name="name" ng-model="billingEdit.creditCardNumber" required />
                         </fieldset>
                         <fieldset class="col-2 reset-margin-right">
                             <label>Card type</label>
@@ -203,6 +208,7 @@
                                 <md-button class="me-default-button" ng-click="saveBillings(billingEdit)">save</md-button>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </md-tab-body>
             </md-tab>
