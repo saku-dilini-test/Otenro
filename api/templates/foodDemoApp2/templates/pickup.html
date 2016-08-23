@@ -1,0 +1,23 @@
+<ion-view view-title="Pick Up">
+    <ion-content class="made-easy-background-image made-easy-background-color made-easy-contactUs">
+        <div class="card animated zoomIn">
+            <div class="header">
+                <div class="header-image">
+                    <img src="img/contactUs.jpg" width="100%"/>
+                </div>
+            </div>
+
+            <div class="content made-easy-content-font">
+                <div ng-repeat="pickupData in pickup" >
+                        <div ng-if="pickupData.locationName" class="col2 font-size:12px " ng-model="pickupData.locationName">{{pickupData.locationName}}</div>
+                        <div ng-if="pickupData.postalCode" class="col2 font-size:12px" ng-model="pickupData.postalCode">{{pickupData.postalCode}},</div>
+                        <div ng-if="pickupData.number" class="col2 font-size:12px" ng-model="pickupData.number">{{pickupData.number}},</div>
+                        <div ng-if="pickupData.streetAddress" class="col2 font-size:12px" ng-model="pickupData.streetAddress">{{pickupData.streetAddress}},</div>
+                        <div ng-if="pickupData.city" class="col2 font-size:12px" ng-model="pickupData.city">{{pickupData.city}},</div>
+                        <div ng-if="pickupData.country" class="col2 font-size:12px" ng-model="pickupData.country"> {{pickupData.country}}</div>
+                        <br> <br>
+                </div>
+            </div>
+            </div>
+    </ion-content>
+</ion-view>

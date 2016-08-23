@@ -63,6 +63,14 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                 $state.go('app.login',{item:$scope.status});
             }
     }
+    $scope.pickup = function () {
+        if(localStorage.getItem('appLocalStorageUser')!==null){
+            $state.go('app.pickup');
+        }
+        else{
+            $state.go('app.login');
+        }
+    }
     $scope.deliver = function(deliverDetails){
             $scope.amount = $scope.getTotal();
 
