@@ -87,11 +87,13 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       }
   })
   .state('app.aboutUs', {
+      cache: false,
       url: '/aboutUs',
       views: {
         'menuContent': {
           templateUrl: 'templates/aboutUs.html',
-            controller: 'aboutUsCtrl'
+            controller: 'aboutUsCtrl',
+            cache: false,
         }
       }
    })
