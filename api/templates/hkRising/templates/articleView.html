@@ -3,7 +3,7 @@
         <div class="card2">
             <div class="row">
                 <div class="col">
-                    <div class="item item-image animated bounceInRight">
+                    <div class="item item-image animated zoomIn">
                         <ion-slides options="sliderOptions" slider="sliderDelegate" >
                             <ion-slide-page >
                                 <img ng-src="{{imageURL}}/{{selectedArticle.imageUrl}}" >
@@ -11,7 +11,7 @@
                         </ion-slides>
                     </div>
                     <div class="item item-text-wrap2">
-                        <div class="made-easy-header-font animated rubberBand" >{{selectedArticle.title}}</div>
+                        <div class="made-easy-header-font animated zoomIn" >{{selectedArticle.title}}</div>
                         <br>
                         <div ng-bind-html="selectedArticle.desc" class="made-easy-content-font animated zoomIn"></div>
                     </div>
