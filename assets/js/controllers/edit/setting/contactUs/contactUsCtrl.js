@@ -138,8 +138,8 @@
             contactUsService.saveGoogleMapInfo(googleMapInfoResponse)
                 .success(function(data, status, headers, config) {
                     toastr.success('Google Map Info saved successfully', 'Awsome!', {closeButton: true});
-                    // finished and back to 1st tab
-                    disableTabs(1,false,true,true);
+                    // If Successfully finished and popup window close
+                    $mdDialog.hide();
                 }).error(function(data, status, headers, config) {
                     toastr.error('Google Map Info saving error', {closeButton: true});
                 });
