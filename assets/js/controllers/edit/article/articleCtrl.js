@@ -167,6 +167,14 @@
                 return;
             }
 
+            // If article title not undefined, check maximum letter length is exceed
+            if((typeof article.title != 'undefined') && (article.title.length > $scope.maxArticleTitle)){
+                toastr.error('Article Title should be less than '+$scope.maxArticleTitle+' letters.',
+                    'Warning', {closeButton: true}
+                );
+                return;
+            }
+
             if(file == null){
                 toastr.error('Select image', 'Warning', {
                     closeButton: true
