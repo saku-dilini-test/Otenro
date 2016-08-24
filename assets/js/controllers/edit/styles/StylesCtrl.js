@@ -314,7 +314,7 @@
                     $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
                         +'/templates/'+appId+'/?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
-
+                    $mdDialog.hide();
                     toastr.success('Successfully change backgroundImage', 'Message', {
                         closeButton: true
                     });
