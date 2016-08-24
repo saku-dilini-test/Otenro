@@ -19,6 +19,9 @@
             },
             getContactUsByAppId: function (appId) {
                 return $http.get(constants.SERVER_URL + '/templates/getContactUs?appId='+appId);
+            },
+            getCurrencyByAppId: function (appId) {
+                return $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+appId);
             }
         }
     }

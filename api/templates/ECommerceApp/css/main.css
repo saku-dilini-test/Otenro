@@ -142,3 +142,14 @@ a[href]:hover{
     width: 58%;
     font-size: 4.0vw;
 }
+.col2 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: block;
+    padding: 5px;
+    width: 100%;
+	font-weight:600;}
