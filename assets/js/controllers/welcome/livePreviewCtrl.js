@@ -10,13 +10,13 @@
     angular.module('app')
         .controller('livePreviewCtrl',
         ['$scope', 'welcomeTemplatesResource', 'userProfileService','$stateParams','$mdDialog','mySharedService','$http','$state','ME_APP_SERVER',
-        '$auth','toastr','$cookieStore','$cookies',
+        '$auth','toastr','$cookieStore','$cookies','$interval','$q',
             livePreviewCtrl
         ]);
 
 
     function livePreviewCtrl($scope,welcomeTemplatesResource, userProfileService,$stateParams,$mdDialog,mySharedService,
-    $http,$state,ME_APP_SERVER,$auth,toastr,$cookieStore,$cookies) {
+    $http,$state,ME_APP_SERVER,$auth,toastr,$cookieStore,$cookies,$interval,$q) {
         welcomeTemplatesResource.getTemplates().success(function(data){
             $cookies.temp = data;
             $scope.templates = $cookies.temp;
@@ -28,6 +28,18 @@
                 }
             }
         });
+
+        var loginFunction = function(){
+            var deferred = $q.defer();
+            $state.go('anon.login');
+            $interval(function () {
+                if ($auth.isAuthenticated()) {
+                    var id = $auth.getPayload().id;
+                    deferred.resolve(id);
+                }
+                })
+            return deferred.promise;
+        }
 
         $scope.userId = $stateParams.userId;
         $scope.appId = $stateParams.appId;
@@ -87,7 +99,27 @@
                         });
                     $mdDialog.hide(answer);
                 }else{
-                    $state.go('anon.login');
+                    loginFunction().then(function(id){
+                        $scope.successDeleteFile($scope.userId, $scope.appId);
+                        var tempAppParams = {
+                            'appName': $scope.appName,
+                            'templateId': templateId,
+                            'templateName': templateName,
+                            'templateUrl':templateUrl,
+                            'templateCategory' : templateCategory,
+                            'userId':$auth.getPayload().id
+                        };
+                        welcomeTemplatesResource.createApp(tempAppParams).then(function(data){
+
+                            var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+
+                            mySharedService.prepForBroadcast(url);
+                            $state.go('user.editApp',{appId:data.data.appId});
+                        });
+                        $mdDialog.hide(answer);
+                    });
+
                 }
                 }
                 $scope.profileView = function () {
