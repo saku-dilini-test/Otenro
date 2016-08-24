@@ -738,8 +738,28 @@
 
         commerceService.getEmailSettings(prams)
             .success(function (result) {
-                $scope.email = result;
-                console.log(result);
+                $scope.email = result[0];
+                $scope.emailDel = {
+                    fromEmail :$scope.email.fromEmail,
+                    replyToEmail :$scope.email.replyToEmail,
+                    alertEmail :$scope.email.alertEmail,
+                    alertAt :$scope.email.alertAt
+                };
+                $scope.emailHF = {
+                    header : $scope.email.header,
+                    footer : $scope.email.footer
+                }
+                $scope.picFileFooter = 'images/'+$scope.email.imageFooter
+                $scope.picFileHeader = 'images/'+$scope.email.imageHeader
+                $scope.OConfirm = {
+                    orderConfirmedEmail : $scope.email.orderConfirmedEmail
+                }
+                $scope.Ofulfilled = {
+                    orderFulfilledEmail : $scope.email.orderFulfilledEmail
+                }
+                $scope.ORefund = {
+                    orderRefundEmail : $scope.email.orderRefundEmail
+                }
             }).error(function (error) {
             alert("MainMenu Loading Error : " + error);
         });
