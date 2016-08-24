@@ -66,8 +66,8 @@
 
 
 
-            $scope.fulfill =function(inventory){
-                var inventoryList = inventory;
+            $scope.fulfill =function(inventoryList){
+                var inventoryList = inventoryList;
 
 
                 inventoryList.forEach(function (inventory) {
@@ -86,7 +86,7 @@
                 }
                 else if ($scope.isValideForm==true){
 
-                    commerceService.updateInventory(inventory)
+                    commerceService.updateInventory(inventoryList)
                         .success(function (result) {
                             toastr.success('Updated', 'Success', {
                                 closeButton: true
