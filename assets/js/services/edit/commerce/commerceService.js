@@ -16,11 +16,15 @@
                     resolve:{
                         productService:'productService',
                         initialData:['productService','$q', function(productService,$q){
+                            console.log("::P::PPP::PP:P:P "+ item.sku);
                             if('products'== item) {
-                                item= {'id':'0'};
+                                item= {'pId':'0'};
                             }
                             return $q.all({
-                                product:productService.get({'productId':item.id}).$promise
+                                product:productService.get({'productId':item.pId}).$promise.then(function(product){
+                                    product.sku = item.sku;
+                                    return product;
+                                })
                             });
                         }]
                     }

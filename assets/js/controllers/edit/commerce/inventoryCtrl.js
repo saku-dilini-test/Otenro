@@ -15,17 +15,14 @@
             $scope.isValideForm = true;
             $scope.inventoryList = [];
         for(var i =0; i < initialData.inventoryList.length;i++){
-            var productInventory = initialData.inventoryList[0].variants;
-            console.log("????????????")
-            console.log("????????????")
-            console.log("???????????? "+ JSON.stringify(initialData.inventoryList[i].variants));
-            console.log("????????????")
-            var variants = initialData.inventoryList[i].variants;
+            var product = initialData.inventoryList[i];
+            var variants = product.variants;
             if(variants){
                 for(var x=0;x < variants.length; x++){
-                    //console.log("XXXXXX "+ JSON.stringify(variants[x]));
-                    //var toJson = JSON.parse(variants[x])
-                    $scope.inventoryList.push(variants[x]);
+                    var variant = variants[x];
+                    variant.pId = product.id;
+                    console.log(JSON.stringify(variant));
+                    $scope.inventoryList.push(variant);
                 }
             }
         }
@@ -67,6 +64,10 @@
 
 
             $scope.fulfill =function(inventoryList){
+                console.log("&*&*&*&*&*&&*")
+                console.log("&*&*&*&*&*&&*")
+                console.log("&*&*&*&*&*&&* "+ JSON.stringify(inventoryList));
+                console.log("&*&*&*&*&*&&*")
                 var inventoryList = inventoryList;
 
 
