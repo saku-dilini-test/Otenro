@@ -6,8 +6,9 @@
 
     function contactUsCtrl($scope,$rootScope,$mdDialog,toastr, contactUsService,uiGmapGoogleMapApi) {
 
-
-
+        // --/-- Characters length config
+        $scope.maxBasicInfoAddress = 20;
+        
         // --- Config ----
         $scope.coords ="";
         contactUsService.getContactUsInfo().success(function(result){
@@ -73,6 +74,15 @@
 
         // Save Basic Information and move to Web Information
         $scope.addBasicInfo = function(basicInfo) {
+
+            // If defined basic information address , Check length
+            if((typeof basicInfo.address != 'undefined') && (basicInfo.address.length > $scope.maxBasicInfoAddress)){
+                toastr.error('Address should be less than '+$scope.maxBasicInfoAddress+' letters.',
+                    'Warning',{closeButton: true}
+                );
+                return;
+            }
+
             if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
                 toastr.error('Basic Information not update', { closeButton: true});
                 // go next tab
