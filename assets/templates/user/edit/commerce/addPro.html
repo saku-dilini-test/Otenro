@@ -36,17 +36,15 @@
                     <div class="md-dialog-header">
                         <h1>Add Product</h1>
                     </div>
-                    <form name="productForm" novalidate>
+                    <md-content layout-padding>
+                    <form name="productForm">
                         <div class="md-dialog-main">
                             <div class="clearfix">
 
-                                <md-input-container class="md-block">
+                                <md-input-container class="md-block" flex="50">
                                     <label>Name</label>
-                                    <input md-maxlength="15"
-                                           required
-                                           name="name"
-                                           ng-model="product.name">
-                                    <div ng-messages="productForm.name.$error">
+                                    <input required md-maxlength="15"  name="name" ng-model="product.name">
+                                    <div ng-messages="productForm.name.$error" ng-show="productForm.name.$dirty">
                                         <div ng-message="required">Name is required.</div>
                                         <div ng-message="md-maxlength">The description must be less than 15 characters long.</div>
                                     </div>
@@ -59,7 +57,7 @@
                                                required
                                                rows="4" cols="50"
                                                ng-model="product.detailedDesc"></textarea>
-                                    <div ng-messages="productForm.detailedDesc.$error">
+                                    <div ng-messages="productForm.detailedDesc.$error" ng-show="productForm.detailedDesc.$dirty">
                                         <div ng-message="required">Description is required.</div>
                                         <div ng-message="md-maxlength">The description must be less than 100 characters long.</div>
                                     </div>
@@ -73,7 +71,7 @@
                                            ng-model="product.sku"
                                            ng-pattern="/^\d*[1-9]\d*$/"
                                            ng-readonly="product.checked">
-                                    <div ng-messages="productForm.sku.$error">
+                                    <div ng-messages="productForm.sku.$error" ng-show="productForm.sku.$dirty">
                                         <div ng-message="required">SKU is required.</div>
                                         <div ng-message="md-maxlength">The SKU must be less than 10 characters long.</div>
                                         <div ng-message="pattern" class="my-message">That doesn't look like a valid SKU</div>
@@ -110,6 +108,7 @@
                             </div>
                         </div>
                     </form>
+                    </md-content>
                 </md-tab-body>
             </md-tab>
 
@@ -357,6 +356,7 @@
             </md-tab>
         </md-tabs>
     </md-dialog-content>
+
 
     <!--
     <div class="dialog-controls clearfix">
