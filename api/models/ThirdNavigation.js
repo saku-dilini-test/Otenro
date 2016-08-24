@@ -11,9 +11,7 @@ module.exports = {
 
     attributes: {
 
-        name : {
-            type: 'string'
-        },
+
         appId  : {
             type: 'string',
             required: true
@@ -25,27 +23,15 @@ module.exports = {
             type : 'string',
 //            required: true
         },
+        name : {
+            type: 'string'
+        },
         detailedDesc:{
             type : 'string',
         },
         variants:{
             type: 'json'
         },
-//        sku:{
-//            type : 'integer',
-//        },
-//        price : {
-//            type : 'integer'
-//        },
-//        size: {
-//            type: 'integer'
-//        },
-//        weight :{
-//            type: 'integer'
-//        },
-//        quantity :{
-//            type: 'integer'
-//        },
         desc: {
             type: 'string'
         },

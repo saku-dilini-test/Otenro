@@ -8,37 +8,18 @@ var fs = require('fs-extra'),
 
 module.exports = {
 
-
+    /**
+     * Retrieve Inventory for give appId
+     * @param req
+     * @param res
+     */
     getInventoryList:function(req, res) {
+        var appId = req.param('appId');
 
-            var inventory=[];
-            var priceAndVariants=[];
-            var obj=[];
-            var appId = req.param('appId');
-            var searchApp = {
-                appId: appId
-            };
-
-                ApplicationInventory.find(searchApp).exec(function(e,foundInvntry){
-                if(e) console.log(e);
-                inventory = foundInvntry;
-                })
-
-                PriceAndVariants.find(searchApp).exec(function(err,variantsdata){
-                    if(err){console.log(err)}
-                    priceAndVariants = variantsdata;
-                    for(var i=0; i<priceAndVariants.length; i++){
-                    inventory.forEach(function(data){
-                        if(data.id == priceAndVariants[i].id){
-                            data.variant = priceAndVariants[i];
-                        }
-                    })
-                    }
-                    obj.push(inventory);
-                    res.send(obj[0]);
-
-                })
-
+        ThirdNavigation.find({select: ['name','variants'],where:{appId:appId}}).exec(function(err,inventoryList){
+            if(err)sails.log.debug("Error has occurred while retrieving Inventory for the AppID :"+ appId);
+           res.send(inventoryList);
+        });
     },
 
     getInventoryListByProductId : function (req,res) {

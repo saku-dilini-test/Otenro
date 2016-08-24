@@ -15,45 +15,53 @@
                     </div>
                     <div class="md-dialog-main">
                         <form class="allItems" novalidate>
-
-                        <table class="me-checkbox-table">
-                            <thead>
-                                <th class="checkbox-column">
-                                    <md-checkbox md-no-ink  aria-label="Check all"></md-checkbox>
-                                </th>
-                                <th>sku#</th>
-                                <th class="item-name-column">item name</th>
-                                <th class="id-column">qty</th>
-                                <th>price</th>
-                                <th>sale price</th>
-                                <th>Delete</th>
-                            </thead>
-                            <tbody class="scrolling">
-                                <tr  dir-paginate="inventory in inventoryList | filter:search | itemsPerPage: pageSize" current-page="currentPage">
-                                    <td class="checkbox-row">
-                                        <md-checkbox md-no-ink  aria-label="Check one item"></md-checkbox>
-                                    </td>
-                                    <td ng-model="inventory.sku">{{inventory.sku}}</td>
-                                    <td><a href="" ng-model="inventory.name" ng-click="gotoedit(inventory)">{{inventory.name}}</a></td>
-                                    <td><input type="number" min="0" name="quantity" ng-model="inventory.quantity" /></td>
-                                    <td><input type="number" min="0" ng-model="inventory.price" /></td>
-                                    <!--<td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()"><input type="number" ng-model="inventory.sale"/></a></td>-->
-                                    <td class="sale-yes"><input style="color:red" type="number"  ng-model="inventory.discount"/></td>
-                                    <td>
-                                        <img width="25" src="../../../images/delete-icon-inventory.svg" ng-click="deletePro($index,inventory)">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <!--<tree-grid tree-data="tree_data"></tree-grid>-->
+                        <!--<table class="me-checkbox-table">-->
+                            <!--<thead>-->
+                                <!--<th class="checkbox-column">-->
+                                    <!--<md-checkbox md-no-ink  aria-label="Check all"></md-checkbox>-->
+                                <!--</th>-->
+                                <!--<th>sku#</th>-->
+                                <!--<th class="item-name-column">item name</th>-->
+                                <!--<th class="id-column">qty</th>-->
+                                <!--<th>price</th>-->
+                                <!--<th>sale price</th>-->
+                                <!--<th>Delete</th>-->
+                            <!--</thead>-->
+                            <tree-grid tree-data="inventoryList" col-defs= "col_defs"></tree-grid>
+                            <!--<tbody class="scrolling">-->
+                                <!--<tr  dir-paginate="inventory in inventoryList | filter:search | itemsPerPage: pageSize" current-page="currentPage">-->
+                                    <!--<td class="checkbox-row">-->
+                                        <!--<md-checkbox md-no-ink  aria-label="Check one item"></md-checkbox>-->
+                                    <!--</td>-->
+                                    <!--<td ng-model="inventory.name">{{inventory.sku}}</td>-->
+                                    <!--<td>-->
+                                        <!--<a href="" ng-model="inventory.name" ng-click="goToEditProductWindow(inventory)">{{inventory.name}}</a>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<input type="text"  name="quantity" ng-model="inventory.quantity" />-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<input type="text" ng-model="inventory.price" />-->
+                                    <!--</td>-->
+                                    <!--&lt;!&ndash;<td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()"><input type="number" ng-model="inventory.sale"/></a></td>&ndash;&gt;-->
+                                    <!--<td class="sale-yes">-->
+                                        <!--<input style="color:red" type="text"  ng-model="inventory.discount"/></td>-->
+                                    <!--<td>-->
+                                        <!--<img width="25" src="../../../images/delete-icon-inventory.svg" ng-click="deletePro($index,inventory)">-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
                             </form>
-                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+                        <!--<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>-->
 
                     </div>
 
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button ng-csv="inventoryList" filename="products.csv"  class="me-default-button">export as csv</md-button>
-                            <md-button class="me-default-button" ng-click="fulfill(inventoryList)">save</md-button>
+                            <md-button class="me-default-button" ng-click="updateInventory()">save</md-button>
                         </div>
                     </div>
                     <div class="mini-light-box" ng-show="miniLightBoxShow">
