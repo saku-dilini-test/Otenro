@@ -20,7 +20,12 @@
                         method:'GET',
                         url:SERVER_URL+ 'edit/thirdNavigation/getById/:productId',
                         params:{productId:'@productId'}
-                    }
+                    },
+                    'updateInventory':{
+                        method:'POST',
+                        url:SERVER_URL+ 'edit/thirdNavigation/updateInventory/:inventoryList',
+                        params:{inventoryList:'@inventoryList'}
+                    },
                 });
         }
     }

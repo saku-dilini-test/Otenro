@@ -113,6 +113,24 @@ module.exports = {
             res.send(product);
         })
     },
+
+    /**
+     * Update inventory
+     * @param req
+     * @param res
+     */
+    updateInventory: function(req,res){
+        var inventoryList = req.body.inventoryList;
+        for(var i = 0; inventoryList.length; i++ ){
+            var product = inventoryList[i]
+            var query = {'id': product.id};
+            ThirdNavigation.update(query,{"variants":product.variants}).exec(function(err,updatedProduct){
+                if(err) sails.log.error(new Error("Error while Updating Inventory of ID : "+ product.id));
+                sails.log.debug("Successfully updated Product ID :" + JSON.stringify(updatedProduct));
+            });
+        }
+        res.ok({'status':"Success"});
+    },
     /**
      * ThirdNavigation uploaded images are copy to img/thirdNavi folder
      * Return : image name
