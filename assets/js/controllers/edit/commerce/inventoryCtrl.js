@@ -4,36 +4,62 @@
  (function() {
     'use strict';
     angular.module("appEdit").controller("InventoryCtrl", [
-    '$scope', 'inventoryService','commerceService','$rootScope','SERVER_URL','$auth','toastr','$mdDialog',
+    '$scope', 'inventoryService','commerceService','$rootScope','SERVER_URL','$auth','toastr','$mdDialog','initialData',
     InventoryCtrl]);
-    function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth,toastr,$mdDialog) {
+    function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth,toastr,$mdDialog,initialData) {
             $scope.currentPage = 1;
             $scope.pageSize = 5;
             $scope.userId=$auth.getPayload().id;
             $scope.appId=$rootScope.appId;
             $scope.SERVER_URL = SERVER_URL;
             $scope.isValideForm = true;
+            $scope.inventoryList = [];
+        for(var i =0; i < initialData.inventoryList.length;i++){
+            var productInventory = initialData.inventoryList[0].variants;
+            console.log("????????????")
+            console.log("????????????")
+            console.log("???????????? "+ JSON.stringify(initialData.inventoryList[i].variants));
+            console.log("????????????")
+            var variants = initialData.inventoryList[i].variants;
+            if(variants){
+                for(var x=0;x < variants.length; x++){
+                    //console.log("XXXXXX "+ JSON.stringify(variants[x]));
+                    //var toJson = JSON.parse(variants[x])
+                    $scope.inventoryList.push(variants[x]);
+                }
+            }
+        }
 
-
+            console.log("LLLLLLLLLLLLL")
+            console.log("LLLLLLLLLLLLL")
+            //console.log("LLLLLLLLLLLLL" + JSON.stringify(initialData))
+            //console.log("LLLLLLLLLLLLL "+ JSON.stringify(inventoryList))
+            console.log("LLLLLLLLLLLLL")
+            console.log("LLLLLLLLLLLLL")
+            console.log("LLLLLLLLLLLLL")
             $scope.imageURL = SERVER_URL+
                 "api/edit/viewImages?userId="+$scope.userId
                 +"&appId="+$scope.appId+"&"
                 +new Date().getTime();
         
-        
-                if (typeof $scope.inventoryList === 'undefined') {
-                     inventoryService.createInventory()
-                         .success(function (result) {
-                             inventoryService.getInventoryList().success(function (result) {
-                                 $scope.inventoryList = result;
-                             }).error(function (error) {
-                                 alert("Inventory Loading Error : " + error);
-                             })
-                         }).error(function (error) {
-                             alert("Inventory Loading Error : " + error);
-                         })
-            }
-             $scope.gotoedit = function(item){
+            //
+            //    if (typeof $scope.inventoryList === 'undefined') {
+            //         inventoryService.createInventory()
+            //             .success(function (result) {
+            //                 inventoryService.getInventoryList().success(function (result) {
+            //                     $scope.inventoryList = result;
+            //                 }).error(function (error) {
+            //                     alert("Inventory Loading Error : " + error);
+            //                 })
+            //             }).error(function (error) {
+            //                 alert("Inventory Loading Error : " + error);
+            //             })
+            //}
+             $scope.goToEditProductWindow = function(item){
+                 console.log('KLKLKLKLKLKL')
+                 console.log('KLKLKLKLKLKL '+ JSON.stringify(item) )
+                 console.log('KLKLKLKLKLKL')
+                 console.log('KLKLKLKLKLKL')
                  return commerceService.showAddProductsDialog(item);
 //               $state.go('user.editApp',{appId: item.id});
              };
@@ -78,7 +104,12 @@
             };
 
 
-
+        /**
+         * Delete a product from the inventory.
+         * @param index
+         * @param inventory
+         * @returns {*}
+         */
         $scope.deletePro = function (index,inventory) {
             return $mdDialog.show({
                 controllerAs: 'dialogCtrl',

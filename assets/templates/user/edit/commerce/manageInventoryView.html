@@ -15,7 +15,7 @@
                     </div>
                     <div class="md-dialog-main">
                         <form class="allItems" novalidate>
-
+                            <!--<tree-grid tree-data="tree_data"></tree-grid>-->
                         <table class="me-checkbox-table">
                             <thead>
                                 <th class="checkbox-column">
@@ -33,12 +33,19 @@
                                     <td class="checkbox-row">
                                         <md-checkbox md-no-ink  aria-label="Check one item"></md-checkbox>
                                     </td>
-                                    <td ng-model="inventory.sku">{{inventory.sku}}</td>
-                                    <td><a href="" ng-model="inventory.name" ng-click="gotoedit(inventory)">{{inventory.name}}</a></td>
-                                    <td><input type="number" min="0" name="quantity" ng-model="inventory.quantity" /></td>
-                                    <td><input type="number" min="0" ng-model="inventory.price" /></td>
+                                    <td ng-model="inventory.name">{{inventory.sku}}</td>
+                                    <td>
+                                        <a href="" ng-model="inventory.name" ng-click="goToEditProductWindow(inventory)">{{inventory.name}}</a>
+                                    </td>
+                                    <td>
+                                        <input type="text"  name="quantity" ng-model="inventory.quantity" />
+                                    </td>
+                                    <td>
+                                        <input type="text" ng-model="inventory.price" />
+                                    </td>
                                     <!--<td><a href="javascript:void(0);" class="sale-yes" ng-click="openMiniLightBox()"><input type="number" ng-model="inventory.sale"/></a></td>-->
-                                    <td class="sale-yes"><input style="color:red" type="number"  ng-model="inventory.discount"/></td>
+                                    <td class="sale-yes">
+                                        <input style="color:red" type="text"  ng-model="inventory.discount"/></td>
                                     <td>
                                         <img width="25" src="../../../images/delete-icon-inventory.svg" ng-click="deletePro($index,inventory)">
                                     </td>

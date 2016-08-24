@@ -2,6 +2,7 @@
     <md-dialog-content>
         <md-tabs  md-no-ink-bar ="false"  md-no-bar  md-center-tabs="false" md-selected="selectedTab"  md-autoselect="false"
                  md-dynamic-height="true">
+            <!--Add Product Tab 1 content -->
             <md-tab >
                 <md-tab-label>Product Type</md-tab-label>
                 <md-tab-body>
@@ -10,23 +11,15 @@
                     </div>
                     <div id="Navigation" class="md-dialog-full">
                         <div class="products-options">
-                            <a ng-click='addType("Physical",1);selectedLink = "Physical"' href="javascript:void(0);"
-                               ng-class="{'selected': selectedLink === 'Physical'}">
-                                <h1>Physical</h1>
-                                <label>An item that is shipped to your customers</label>
-                            </a>
-                            <a  href="javascript:void(0);"
-                               ng-class="{'selected': selectedLink === 'Digital'}">
-                                <h1>Digital</h1>
-                                <label>Content that is downloaded</label>
-                                 [Coming Soon]
-                            </a>
-                            <a href="javascript:void(0);"
-                               ng-class="{'selected': selectedLink === 'Service'}">
-                                <h1>Services</h1>
-                                <label>Provide a Service</label>
-                                [Coming Soon]
-                            </a>
+                            <md-list flex>
+                                <md-list-item class="md-3-line" ng-repeat="type in productTypes" ng-click="addType(type,1)">
+                                    <div class="md-list-item-text" layout="column">
+                                        <h1>{{type.type}}</h1>
+                                        <h4>{{type.description}}</h4>
+                                        <p>{{type.status}}</p>
+                                    </div>
+                                </md-list-item>
+                            </md-list>
                         </div>
                     </div>
                     <div class="md-dialog-buttons">
@@ -37,7 +30,7 @@
                 </md-tab-body>
             </md-tab>
 
-
+            <!-- Add Product Tab 2 content -->
             <md-tab>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -46,96 +39,85 @@
                     <form name="productForm" novalidate>
                         <div class="md-dialog-main">
                             <div class="clearfix">
-                                <fieldset class="col-2-product">
-                                    <label for="input-name">Name</label>
-                                    <input type="text"  name="fullname" ng-model="product.name" id="input-name"  >
 
-                                    <div ng-hide="product.name.length > maxLengthName">
-                                        <span>Characters left: {{maxLengthName - product.name.length}}</span>
+                                <md-input-container class="md-block">
+                                    <label>Name</label>
+                                    <input md-maxlength="15"
+                                           required
+                                           name="name"
+                                           ng-model="product.name">
+                                    <div ng-messages="productForm.name.$error">
+                                        <div ng-message="required">Name is required.</div>
+                                        <div ng-message="md-maxlength">The description must be less than 15 characters long.</div>
                                     </div>
-                                    <div  ng-show="product.name.length > maxLengthName">
-                                        <span>Characters left: </span> <span style="color: #ff0404 "> {{maxLengthName - product.name.length}} </span>
-                                    </div>
-                                </fieldset>
-                                <fieldset class="col-2-product">
-                                    <label for="input-name">Description</label>
-                                    <textarea name="description" rows="4" cols="50"  ng-model="product.detailedDesc"></textarea>
+                                </md-input-container>
 
-                                    <div ng-hide="product.detailedDesc.length > maxLengthDesc">
-                                        <span>Characters left: {{maxLengthDesc - product.detailedDesc.length}}</span>
+                                <md-input-container class="md-block">
+                                    <label>Description</label>
+                                    <textarea  md-maxlength="100"
+                                               name="detailedDesc"
+                                               required
+                                               rows="4" cols="50"
+                                               ng-model="product.detailedDesc"></textarea>
+                                    <div ng-messages="productForm.detailedDesc.$error">
+                                        <div ng-message="required">Description is required.</div>
+                                        <div ng-message="md-maxlength">The description must be less than 100 characters long.</div>
                                     </div>
-                                    <div  ng-show="product.detailedDesc.length > maxLengthDesc">
-                                        <span>Characters left: </span> <span style="color: #ff0404 "> {{maxLengthDesc - product.detailedDesc.length}} </span>
+                                </md-input-container>
+
+                                <md-input-container class="md-block">
+                                    <label>SKU</label>
+                                    <input md-maxlength="10"
+                                           required
+                                           name="sku"
+                                           ng-model="product.sku"
+                                           ng-pattern="/^\d*[1-9]\d*$/"
+                                           ng-readonly="product.checked">
+                                    <div ng-messages="productForm.sku.$error">
+                                        <div ng-message="required">SKU is required.</div>
+                                        <div ng-message="md-maxlength">The SKU must be less than 10 characters long.</div>
+                                        <div ng-message="pattern" class="my-message">That doesn't look like a valid SKU</div>
                                     </div>
-                                    <br />
-                                    <!--<input type="text" name="detailedDesc" ng-model="product.detailedDesc" id="input-detailedDesc" required />-->
-                                </fieldset>
-                                <fieldset class="col-2">
-                                    <label for="input-name">SKU</label>
-                                    <input type="text"  name="sku" ng-model="product.sku" id="input-sku"
-                                           ng-pattern="/^\d*[1-9]\d*$/" ng-readonly="product.checked" required/>
-                                    <br />
-                                    <div ng-hide="product.sku.length > maxLengthSku">
-                                        <span>Characters left: {{maxLengthSku - product.sku.length}}</span>
-                                    </div>
-                                    <div  ng-show="product.sku.length > maxLengthSku">
-                                        <span>Characters left: </span> <span style="color: #ff0404 "> {{maxLengthSku - product.sku.length}} </span>
-                                    </div>
-                                    <span ng-show="productForm.sku.$error.pattern">Positive numbers only</span>
-                                </fieldset>
-                                <fieldset class="col-2">
-                                    <label>Category</label>
-                                    <md-select class="" placeholder="Select Main Menu" ng-model="product.mainId"
-                                               ng-change="setChild(product.mainId)" required>
+                                </md-input-container>
+                                <md-input-container>
+                                    <label>Main Menu</label>
+                                    <md-select
+                                            md-no-asterisk = flase
+                                            placeholder="Select Main Menu"
+                                            ng-model="product.mainId"
+                                            ng-change="setChild(product.mainId)"
+                                            required>
                                         <md-option ng-value="main.id" ng-repeat="main in mainMenu">{{main.name}}
                                         </md-option>
                                     </md-select>
-                                </fieldset>
-                                <fieldset ng-hide="show == false" class="col-2">
+                                </md-input-container>
+
+                                <!--Disabled for now-->
+                                <md-input-container ng-hide="show == false">
                                     <label>Sub Category</label>
                                     <md-select class="" placeholder="Select Child Menu" ng-model="product.childId"
-                                               required>
+                                               >
                                         <md-option ng-value="child.id" ng-repeat="child in child">{{child.name}}
                                         </md-option>
                                     </md-select>
-                                </fieldset>
+                                </md-input-container>
                             </div>
-                            <!--<fieldset class="text-right">-->
-                            <!--<input type="submit" ng-click="idDetails(product)" class="me-default-button" value="Save" />-->
-                            <!--</fieldset>-->
                         </div>
-                        <!--<fieldset class="col-2 profile-image-section">-->
-                        <!--<label class="reset-inline fie-upload-text-gap">Product Image</label>-->
-                        <!--<a class="feature01 reset-margin">-->
-                        <!--<span class="overlay01">-->
-                        <!--<span class="caption01">-->
-                        <!--<input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*" value="Add Image" required />-->
-                        <!--</span>-->
-                        <!--</span>-->
-                        <!--<img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />-->
-                        <!--<img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />-->
-                        <!--</a>-->
-                        <!--</fieldset>-->
-
-                        <!--<fieldset class="text-right">-->
-                        <!--<input type="submit" class="me-default-button" ng-disabled="!productForm.$valid" ng-click="addProducts(picFile,product)" value="Add Product" />-->
-                        <!--</fieldset>-->
+                        <div class="md-dialog-buttons">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                                <md-button class="me-default-button" ng-disabled="productForm.$invalid" type="submit"ng-click="generalDetails(product,2)">Next</md-button>
+                            </div>
+                        </div>
                     </form>
-                    <div class="md-dialog-buttons">
-                        <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep2(2,product)">Next</md-button>
-                        </div>
-                    </div>
                 </md-tab-body>
             </md-tab>
 
-
+            <!--Product Variants Tab-->
             <md-tab-label>Add Details</md-tab-label>
             <md-tab ng-if="isDigital==false" md-no-select-click ="true" ng-disabled=enableTab >
                 <md-tab-label>Price & Variants</md-tab-label>
                 <md-tab-body>
-
                     <div class="md-dialog-header">
                         <h1>Price & Variants</h1>
                     </div>
@@ -158,11 +140,36 @@
                             </thead>
                             <tbody>
 
-                            <tr ng-repeat="data in variantsList">
-                                <td><input name="sku_{{$index}}"  type="text" ng-pattern="/^\d*[0-9\.]\d*$/" maxlength="10" ng-model="data.sku">
-                                <span ng-show="priceAndVariantsForm['sku_' + $index].$error.pattern">Positive numbers only</span></td>
+                            <tr ng-repeat="data in product.variants">
+                                <td>
+                                    <md-input-container>
+                                        <input md-maxlength="10"
+                                               required
+                                               name="sku_{{$index}}"
+                                               ng-model="data.sku"
+                                               ng-pattern="/^\d*[1-9]\d*$/"
+                                               ng-readonly="product.checked">
+                                        <div ng-messages="priceAndVariantsForm['sku_'+$index].$error">
+                                            <div ng-message="required">SKU is required.</div>
+                                            <div ng-message="md-maxlength">Must be less than 10 characters.</div>
+                                            <div ng-message="pattern" class="my-message">That doesn't look like a valid SKU</div>
+                                        </div>
+                                    </md-input-container>
+                                </td>
                                 <td ng-model="data.name">{{data.name}}</td>
-                                <td><input type="text" name="size_{{$index}}" maxlength="8" ng-model="data.size">
+                                <td>
+                                    <!--<md-input-container>-->
+                                        <!--<input md-maxlength="8"-->
+                                               <!--required-->
+                                               <!--type="text"-->
+                                               <!--name="size_{{$index}}"-->
+                                               <!--ng-model="data.size">-->
+                                        <!--<div ng-messages="priceAndVariantsForm['size_'+$index].$error">-->
+                                            <!--<div ng-message="required">Size/Wight is required.</div>-->
+                                            <!--<div ng-message="md-maxlength">Must be less than 8 characters.</div>-->
+                                        <!--</div>-->
+                                    <!--</md-input-container>-->
+                                    <input type="text" name="size_{{$index}}" maxlength="8" ng-model="data.size">
                                     <span ng-show="priceAndVariantsForm['size_' + $index].$error.maxlength">Maximum value exceeded</span><br />
                                 </td>
                                 <td><input name="price_{{$index}}" type="text" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price">
@@ -172,8 +179,8 @@
                                 <td><input name="qty_{{$index}}" type="number" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.quantity">
                                     <span ng-show="priceAndVariantsForm['qty_' + $index].$error.pattern">Invalid qty value</span><br /></td>
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
-                                <td><div class="icon icon-plus" ng-click="addVariants(product,$index,data)"></div></td>
-                                <td><img width="25" src="../../../images/delete-icon-inventory.svg" ng-click="deletePro($index,data)">
+                                <td><div class="icon icon-plus" ng-click="addVariant(product,$index,data)"></div></td>
+                                <td><img width="25" src="../../../images/delete-icon-inventory.svg" ng-click="deleteVariant($index,data)">
                                 </td>
                             </tr>
                             </tbody>
@@ -183,7 +190,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep3(3,selection,variantsList)">Next
+                            <md-button class="me-default-button" ng-click="addProductVariants(selection,variantsList,3)">Next
                             </md-button>
                         </div>
                     </div>
@@ -342,7 +349,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="addProducts(mainImg,product,mainFile)">Finish
+                            <md-button class="me-default-button" ng-click="addProducts(mainImg,mainFile)">Finish
                             </md-button>
                         </div>
                     </div>
