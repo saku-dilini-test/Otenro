@@ -48,14 +48,8 @@ module.exports = {
      * @param res
      */
     addThirdNavigation : function(req,res){
-        console.log("<><><><>")
-        console.log("<><><><>")
-        console.log("<><><><> "+ JSON.stringify(req.body.product));
-        console.log("<><><><>")
         ThirdNavigation.create(req.body.product).exec(function(error,thirdNav){
             if(error)sails.log.error(new Error("Error while creating a new Third Navigation :"+ error));
-
-            console.log("&*&*&*&*&*&")
             res.json(thirdNav);
         });
         //var dePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
