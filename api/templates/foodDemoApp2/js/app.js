@@ -144,7 +144,10 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
    })
    .state('app.food', {
      cache: false,
-     url: '/foods/:foodId',
+     url: '/foods',
+     params:{
+        item: null
+     },
      views: {
        'menuContent': {
          templateUrl: 'templates/food.html',

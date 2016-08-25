@@ -43,25 +43,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.sliderDelegate = null;
     if($stateParams.item){
         $scope.foodInfo = $stateParams.item;
-
-//        $http.get(constants.SERVER_URL + '/templates/getProductById?productId='+$stateParams.foodId)
-//             .success(function(data) {
-//                $scope.foodInfo = data;
-//                $scope.images = $scope.foodInfo.tempImageArray;
-//                $scope.productVariants = data.variants;
-//
-//                if(data.variants.length > 0){
-//                    $scope.selectedVariant = data.variants[0];
-//                    if($scope.selectedVariant.quantity > 0 ){
-//                        $scope.isBuyBtnDisable = false;
-//                    }else{
-//                        $scope.isBuyBtnDisable = true;
-//                    }
-//                }
-//
-//            }).error(function(err) {
-//                 alert('warning', "Unable to get Product", err.message);
-//          });
     }
         $scope.slideChanged = function(index) {
             $scope.slideIndex = index;

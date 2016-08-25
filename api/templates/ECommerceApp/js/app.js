@@ -101,8 +101,11 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     }
   })
   .state('tab.item', {
-        cache: false,
-    url: '/item/:itemId/:itemName',
+    cache: false,
+    url: '/item',
+    params:{
+       item: null
+    },
     views: {
       'tab-menu': {
         templateUrl: 'templates/tab-item.html',
