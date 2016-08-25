@@ -44,7 +44,8 @@
     "angular-loading-bar": "^0.9.0",
     "angular-disable-all": "^0.0.2",
     "angular-resource": "^1.5.8",
-    "simple-grid": "angular-simple-grid#^0.4.0"
+    "simple-grid": "angular-simple-grid#^0.4.0",
+    "angular-bootstrap-grid-tree": "^0.4.0"
   },
   "name": "meV2",
   "version": "0.0.0",
