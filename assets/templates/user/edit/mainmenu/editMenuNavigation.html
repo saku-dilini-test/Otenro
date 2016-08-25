@@ -8,10 +8,11 @@
 
                 <fieldset>
                     <label for="input-title">Name</label>
-                    <input maxlength="35"  type="text" name="name" ng-model="menu.name" ng-maxlength="35" id="input-title" required />
-                    <br >
-                    <span ng-show="catForm.name.$error.maxlength">Too lengthy</span>
-                    <i ng-show="catForm.name.$error.required"></i>
+                    <input type="text" name="name" id="input-title" ng-model="menu.name" ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxMenuNavigation}}"/>
+                    <br>
+                    <span ng-show="catForm.name.$error.pattern">No symbols</span>
+                    <br>
+                    <span>Characters left: {{maxMenuNavigation - menu.name.length}}</span>
                 </fieldset>
                 <br>
                 <fieldset class="col-2">

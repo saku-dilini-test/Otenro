@@ -8,11 +8,17 @@
                     <div class="md-dialog-header">
                         <h1>general</h1>
                     </div>
+                    <form name="generalForm" novalidate>
                     <div class="md-dialog-main">
                         <fieldset>
                             <label>title name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" ng-model="playStoreData.name" required />
+                            <input type="text" name="name" ng-model="playStoreData.name"
+                                   ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxName}}"/>
+                            <br>
+                            <span ng-show="generalForm.name.$error.pattern">No symbols</span>
+                            <br>
+                            <span>Characters left: {{maxName - playStoreData.name.length}}</span>
                         </fieldset>
                         <div class="clearfix">
                             <fieldset class="col-4 profile-image-section">
@@ -74,7 +80,12 @@
                             <fieldset>
                                 <label>spring board name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="name" ng-model="playStoreData.springBoardName" required />
+                                <input type="text" name="springBoardName" ng-model="playStoreData.springBoardName"
+                                       ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxSpringBoardName}}"/>
+                                <br>
+                                <span ng-show="generalForm.springBoardName.$error.pattern">No symbols</span>
+                                <br>
+                                <span>Characters left: {{maxSpringBoardName - playStoreData.springBoardName.length}}</span>
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>language</label>
@@ -94,11 +105,15 @@
                         <div class="clearfix">
                             <fieldset>
                                 <label>description</label>
-                                <textarea ng-model="playStoreData.desc" rows="2"></textarea>
+                                <textarea ng-model="playStoreData.desc" rows="2" maxlength="{{maxDesc}}"></textarea>
+                                <br>
+                                <span>Characters left: {{maxDesc - playStoreData.desc.length}}</span>
                             </fieldset>
                             <fieldset>
                                 <label>keywords</label>
-                                <textarea ng-model="playStoreData.keywords" rows="2"></textarea>
+                                <textarea ng-model="playStoreData.keywords" rows="2" maxlength="{{maxKeywords}}"></textarea>
+                                <br>
+                                <span>Characters left: {{maxKeywords - playStoreData.keywords.length}}</span>
                             </fieldset>
                         </div>
                     </div>
@@ -108,6 +123,7 @@
                             <md-button class="me-default-button"  ng-click="addGooglePlayInfo(picFile,playStoreData,splash)">next</md-button>
                         </div>
                     </div>
+                    </form>
                 </md-tab-body>
             </md-tab>
             <md-tab>

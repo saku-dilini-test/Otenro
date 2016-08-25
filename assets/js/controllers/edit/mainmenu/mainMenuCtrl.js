@@ -19,6 +19,10 @@
         var tempCatMedia = 3;
         $scope.templateCategory = '';
 
+        // max character length defined
+        $scope.maxMenuNavigation = 20;
+        $scope.maxMenuCategory = 20;
+
         $scope.myImage='';
         $scope.myCroppedImage='';
 
@@ -68,13 +72,18 @@
                         closeButton: true
                     });
                 });
-        }else if($scope.initialData){
+        }   // Menu-Navigation or Menu-Category (Article Category) -> Add / Update
+        else if($scope.initialData){
+            // Config
             $scope.templateCategory = $scope.initialData.templateCategory;
+            // Add new Menu Navigation
             if($scope.initialData.menu == 'addNewMenuNavigation'){
 
-            }else if($scope.initialData.menu == 'addNewMenuCategory'){
+            }  // Add New Menu Category
+            else if($scope.initialData.menu == 'addNewMenuCategory'){
 
-            }else if($scope.initialData.menu){
+            }  // Update Menu-Navigation or Menu-Category
+            else if($scope.initialData.menu){
                 var imgLocation = '';
                 if($scope.templateCategory == tempCatBusiness){
                     imgLocation = "secondNavi";
@@ -180,7 +189,16 @@
         // Add menu navigation
         $scope.addMenuNavigation = function(file,menu){
 
+            console.log(menu);
+            // If menu undefined || menu.name undefined or empty, pop up error message
+            if((typeof menu == 'undefined') || (typeof menu.name == 'undefined') || menu.name == ''){
+                toastr.error('Fill the Name Field', 'Warning', {closeButton: true});
+                return;
+            }
+
+            // If Add new Menu Navigation
             if($scope.initialData.menu == 'addNewMenuNavigation'){
+                //console.log("Add new Menu Navigation ");
                 mainMenuService.addMenu(file,$rootScope.appId,menu.name).success(function(data) {
                     $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
                         +'/templates/'+$rootScope.appId+'' +
@@ -196,7 +214,9 @@
                 });
             }
 
+            // if Only Update Menu Name
             if($scope.mainImg == $scope.serverImage){
+                //console.log("Only Update Menu Name ");
                 mainMenuService.updateSecondNavi(menu).success(function(data) {
                     $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
                         +'/templates/'+$rootScope.appId+'' +
@@ -211,7 +231,10 @@
                     });
                 });
             }
+
+            // If Update Both Menu name and Image
             if($scope.mainImg != $scope.serverImage && !($scope.initialData.menu == 'addNewMenuNavigation')){
+                //console.log("If Update Both Menu name and Image");
                 commerceService.updateCategoryImage(file,menu.imageUrl,menu.id,$rootScope.appId).progress(function(evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
@@ -238,6 +261,12 @@
         // Add menu category
         $scope.addNewCategory = function(file,menu){
 
+            // If menu undefined || menu.name undefined or empty, pop up error message
+            if((typeof menu == 'undefined') || (typeof menu.name == 'undefined') || menu.name == ''){
+                toastr.error('Fill the Name Field', 'Warning', {closeButton: true});
+                return;
+            }
+            
             if($scope.initialData.menu == 'addNewMenuCategory') {
                 mainMenuService.addNewCategory(file, $rootScope.appId, menu.name)
                     .success(function (data) {

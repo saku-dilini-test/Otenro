@@ -4,7 +4,14 @@
 
     function PublishCtrl($scope, $mdDialog, item, toastr, $rootScope, publishService, $http, SERVER_URL) {
 
+        // config
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
+        // max character length defined
+        $scope.maxName = 20;
+        $scope.maxSpringBoardName = 20;
+        $scope.maxDesc = 100;
+        $scope.maxKeywords = 100;
+
 
         $scope.hide = function() {
             $mdDialog.hide();
