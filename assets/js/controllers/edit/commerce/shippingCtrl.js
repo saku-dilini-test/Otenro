@@ -119,7 +119,6 @@
 
         // --/-- insert Pickup Base type shipping collection --/--
         $scope.insertPickup = function (pickup) {
-            console.log(pickup);
             if(typeof pickup == 'undefined'){
                 toastr.error('Fill all the fields', 'Warning', {
                     closeButton: true
