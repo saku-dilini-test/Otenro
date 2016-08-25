@@ -26,11 +26,13 @@
                 },
                 {
                     field:'quantity',
-                    displayName:'Quantity'
+                    displayName:'Quantity',
+                    cellTemplate:"<input type='text' width='40' ng-model='row.branch[col.field]'/>"
                 },
                 {
                     field:'price',
-                    displayName:'Price'
+                    displayName:'Price',
+                    cellTemplate:"<input type='text' width='40' ng-model='row.branch[col.field]'/>"
                 }
             ];
 
