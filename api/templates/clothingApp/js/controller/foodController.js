@@ -68,6 +68,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 id: $scope.foodInfo.id,
                 name: $scope.foodInfo.name,
                 qty: $scope.selectedVariant.buyQuantity,
+                sku: $scope.selectedVariant.sku,
                 price: $scope.selectedVariant.price,
                 total : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.price
             });
