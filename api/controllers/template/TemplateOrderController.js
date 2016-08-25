@@ -20,8 +20,8 @@ module.exports = {
         });
     },
     updateInventory : function(req,res){
-
-    var obj = [];
+    /*Manually updating the relevant quantity in the ThirdNavigation*/
+        var obj = [];
         var data = req.body[0];
         ThirdNavigation.find({id: data.id}).exec(function(err, app){
             if(err) res.send(err);
@@ -32,12 +32,12 @@ module.exports = {
                         if(err) res.send(err);
                         obj.push(thirdNavi)
                     })
-                    }
-
                 }
-             res.send(obj);
 
-            })
+            }
+            res.send(obj);
+
+        })
     }
 
 };
