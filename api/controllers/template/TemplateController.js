@@ -191,34 +191,35 @@ module.exports = {
         var thirdNavi = [];
         ThirdNavigation.find().where(searchApp).exec(function(err, app) {
             if (err) return done(err);
-            var setFunction=function(x,length, data ,obj){
-                if(x<length){
-                     PriceAndVariants.find({productId: data[x].id}).exec(function(err,variants){
-                        if(err){
-                            console.log(e);
-                            x++;
-                            setFunction(x,length,data ,obj);
-                        }
-                        if(variants != ""){
-                            data[x].price = variants[0].price;
-                            data[x].quantity = variants[0].quantity;
-                            data[x].size = variants[0].size;
-                            obj.push(data[x]);
-                            x++;
-                            setFunction(x,length,data ,obj)
-                        }
-                        else{
-                            obj.push(data[x]);
-                            x++;
-                            setFunction(x,length,data,obj);
-                        }
-                     })
-                }
-                else{
-                    return res.send(obj);
-                }
-            }
-            setFunction(0,app.length,app,thirdNavi);
+            return res.send(app);
+//            var setFunction=function(x,length, data ,obj){
+//                if(x<length){
+//                     PriceAndVariants.find({productId: data[x].id}).exec(function(err,variants){
+//                        if(err){
+//                            console.log(e);
+//                            x++;
+//                            setFunction(x,length,data ,obj);
+//                        }
+//                        if(variants != ""){
+//                            data[x].price = variants[0].price;
+//                            data[x].quantity = variants[0].quantity;
+//                            data[x].size = variants[0].size;
+//                            obj.push(data[x]);
+//                            x++;
+//                            setFunction(x,length,data ,obj)
+//                        }
+//                        else{
+//                            obj.push(data[x]);
+//                            x++;
+//                            setFunction(x,length,data,obj);
+//                        }
+//                     })
+//                }
+//                else{
+//                    return res.send(obj);
+//                }
+//            }
+//            setFunction(0,app.length,app,thirdNavi);
 
         });
 
