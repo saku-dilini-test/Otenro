@@ -48,14 +48,8 @@ module.exports = {
      * @param res
      */
     addThirdNavigation : function(req,res){
-        console.log("<><><><>")
-        console.log("<><><><>")
-        console.log("<><><><> "+ JSON.stringify(req.body.product));
-        console.log("<><><><>")
         ThirdNavigation.create(req.body.product).exec(function(error,thirdNav){
             if(error)sails.log.error(new Error("Error while creating a new Third Navigation :"+ error));
-
-            console.log("&*&*&*&*&*&")
             res.json(thirdNav);
         });
         //var dePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
@@ -112,6 +106,24 @@ module.exports = {
             if(err) sails.log.error(new Error("Error while retrieving Product by ID : "+ req.param('productId')));
             res.send(product);
         })
+    },
+
+    /**
+     * Update inventory
+     * @param req
+     * @param res
+     */
+    updateInventory: function(req,res){
+        var inventoryList = req.body.inventoryList;
+        for(var i = 0; inventoryList.length; i++ ){
+            var product = inventoryList[i]
+            var query = {'id': product.id};
+            ThirdNavigation.update(query,{"variants":product.variants}).exec(function(err,updatedProduct){
+                if(err) sails.log.error(new Error("Error while Updating Inventory of ID : "+ product.id));
+                sails.log.debug("Successfully updated Product ID :" + JSON.stringify(updatedProduct));
+            });
+        }
+        res.ok({'status':"Success"});
     },
     /**
      * ThirdNavigation uploaded images are copy to img/thirdNavi folder
