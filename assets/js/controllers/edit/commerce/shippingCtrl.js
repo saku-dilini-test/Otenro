@@ -117,14 +117,16 @@
             }
         };
 
+        // --/-- insert Pickup Base type shipping collection --/--
         $scope.insertPickup = function (pickup) {
             if(typeof pickup == 'undefined'){
                 toastr.error('Fill all the fields', 'Warning', {
                     closeButton: true
                 });
             }
-            else if(typeof pickup.number == 'undefined' || typeof pickup.streetAddress == 'undefined' || typeof pickup.city == 'undefined'
-                    || typeof pickup.country == 'undefined' || typeof pickup.country == 'undefined' || typeof pickup.cost == 'undefined'){
+            else if(typeof pickup.number == 'undefined' || typeof pickup.streetAddress == 'undefined'
+                || typeof pickup.city == 'undefined' || typeof pickup.country == 'undefined'
+                || typeof pickup.country == 'undefined' || typeof pickup.cost == 'undefined'){
                         toastr.error('Fill all the fields', 'Warning', {
                             closeButton: true
                         });
@@ -132,7 +134,16 @@
                 toastr.error('Location name should be less than 20 letters.', 'Warning', {
                     closeButton: true
                 });
-            }else{
+            }else if(pickup.city.length > $scope.maxPickup){
+                toastr.error('City should be less than '+$scope.maxPickup+' letters.', 'Warning', {
+                    closeButton: true
+                });
+            }else if(pickup.streetAddress.length > $scope.maxPickup){
+                toastr.error('Street Address should be less than '+$scope.maxPickup+' letters.', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else{
 
                 pickup.appId = $rootScope.appId;
                 pickup.shippingOption = 'Pick up';
