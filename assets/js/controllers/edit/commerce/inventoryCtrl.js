@@ -17,22 +17,32 @@
             $scope.col_defs =[
                 {
                     field:'sku',
-                    displayName:'SKU'
+                    displayName:'SKU',
+                    cellTemplate: "<div ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>",
+                    cellTemplateScope: {
+                        click: function(data) {
+                            // go to product edit view
+                            $scope.goToEditProductWindow(data);
+                        }
+                    }
                 },
                 {
                     field:'size',
                     displayName:'Size',
-                    cellTemplate:"<input type='text' width='40' ng-model='row.branch[col.field]'/>"
+                    cellTemplate:   "<div ng-if='row.branch.size !== undefined'>" +
+                                    "<input type='text' width='40' ng-model='row.branch[col.field]'/></div>"
                 },
                 {
                     field:'quantity',
                     displayName:'Quantity',
-                    cellTemplate:"<input type='text' width='40' ng-model='row.branch[col.field]'/>"
+                    cellTemplate:   "<div ng-if='row.branch.quantity !== undefined'>" +
+                                    "<input type='text' width='40' ng-model='row.branch[col.field]'/></div>"
                 },
                 {
                     field:'price',
                     displayName:'Price',
-                    cellTemplate:"<input type='text' width='40' ng-model='row.branch[col.field]'/>"
+                    cellTemplate:   "<div ng-if='row.branch.price !== undefined'>"+
+                                    "<input type='text' width='40' ng-model='row.branch[col.field]'/></div>"
                 }
             ];
 
@@ -40,6 +50,17 @@
         for(var i = 0; i <  initialData.inventoryList.length; i++){
             if(productList[i].hasOwnProperty("variants")){
                 productList[i]["children"] = productList[i]["variants"];
+
+                // This part may be change later according platform integration
+                // -- start -- inject product id to child array
+                var productID = productList[i]['id'];
+                var tempChildArray = productList[i]['children'];
+                for(var j = 0; j < tempChildArray.length; j++){
+                    tempChildArray[j]['id'] = productID;
+                }
+                productList[i]['children'] = tempChildArray;
+                // -- end -- inject product id to child array
+
                 delete productList[i]["variants"];
             }
         }

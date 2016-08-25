@@ -18,10 +18,10 @@
                         initialData:['productService','$q', function(productService,$q){
                             console.log("::P::PPP::PP:P:P "+ item.sku);
                             if('products'== item) {
-                                item= {'pId':'0'};
+                                item= {'id':'0'};
                             }
                             return $q.all({
-                                product:productService.get({'productId':item.pId}).$promise.then(function(product){
+                                product:productService.get({'productId':item.id}).$promise.then(function(product){
                                     product.sku = item.sku;
                                     return product;
                                 })
