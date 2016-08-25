@@ -94,7 +94,7 @@ angular.module('starter.controllers', [])
         });
 })
 
-.controller('ItemsCtrl', function($scope,$stateParams,appServices,readMadeEasy) {
+.controller('ItemsCtrl', function($scope,$stateParams,$state,appServices,readMadeEasy) {
 
     // set select Menu Name
     $scope.menuName = $stateParams.menuName;
@@ -110,6 +110,10 @@ angular.module('starter.controllers', [])
             alert('Items Loading error');
         });
         });
+
+    $scope.navigateFood = function(item){
+        $state.go('tab.item',{item:item})
+    }
 })
 
 .controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices) {
@@ -123,24 +127,24 @@ angular.module('starter.controllers', [])
         };
         $scope.sliderDelegate = null;
     // set select Menu Id
-    var itemId = $stateParams.itemId;
+    $scope.item = $stateParams.item;
     // get item by Id
-    appServices.getItemById(itemId)
-        .success(function (data) {
-            $scope.item = data;
-            $scope.images = data.tempImageArray;
-            $scope.productVariants = data.variants;
-            if(data.variants.length > 0){
-                $scope.selectedVariant = data.variants[0];
-                if($scope.selectedVariant.quantity > 0 ){
-                    $scope.isBuyBtnDisable = false;
-                }else{
-                    $scope.isBuyBtnDisable = true;
-                }
-            }
-        }).error(function (err) {
-            alert('Item Loading error');
-        });
+//    appServices.getItemById(itemId)
+//        .success(function (data) {
+//            $scope.item = data;
+//            $scope.images = data.tempImageArray;
+//            $scope.productVariants = data.variants;
+//            if(data.variants.length > 0){
+//                $scope.selectedVariant = data.variants[0];
+//                if($scope.selectedVariant.quantity > 0 ){
+//                    $scope.isBuyBtnDisable = false;
+//                }else{
+//                    $scope.isBuyBtnDisable = true;
+//                }
+//            }
+//        }).error(function (err) {
+//            alert('Item Loading error');
+//        });
 
     // variant change function
     $scope.changeVariant = function(variant){
