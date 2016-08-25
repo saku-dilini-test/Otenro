@@ -47,17 +47,48 @@ module.exports = {
      * @param req
      * @param res
      */
-    addThirdNavigation : function(req,res){
-        console.log("<><><><>")
-        console.log("<><><><>")
-        console.log("<><><><> "+ JSON.stringify(req.body.product));
-        console.log("<><><><>")
-        ThirdNavigation.create(req.body.product).exec(function(error,thirdNav){
-            if(error)sails.log.error(new Error("Error while creating a new Third Navigation :"+ error));
 
-            console.log("&*&*&*&*&*&")
-            res.json(thirdNav);
-        });
+
+    addThirdNavigation : function(req,res){
+
+            /*var  finelImages = [];
+            var  tmpImage = req.body.productImages;
+
+            for (var i=0; i<tmpImage.length; i++) {
+
+                var imgeFileName = i+new Date()+".png"
+
+                var data = tmpImage[i].replace(/^data:image\/\w+;base64,/, "");
+                var buf = new Buffer(data, 'base64');
+
+                fs.writeFile(config.ME_SERVER + req.userId + '/templates/' +
+                             req.body.product.appId+ '/img/thirdNavi/'+imgeFileName, buf);
+
+                finelImages.push(imgeFileName);
+                imgeFileName = '';
+
+            }*/
+
+
+
+            var product = req.body.product;
+               /* product.tempImageArray = finelImages;
+                finelImages = null;*/
+
+
+            ThirdNavigation.create(product).exec(function(error,thirdNav){
+                if(error)sails.log.error(new Error("Error while creating a new Third Navigation :"+ error));
+
+                console.log("&*&*&*&*&*&")
+                res.json(thirdNav);
+            });
+
+
+
+
+
+
+
         //var dePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
         //req.file('file').upload({
         //    dirname: require('path').resolve(dePath)
@@ -99,6 +130,39 @@ module.exports = {
         //        });
         //    }
         //});
+    },
+
+
+    addProductImages: function (req,res) {
+
+        var  finelImages = [];
+        var  tmpImage = req.body.productImages;
+        var  product =  req.body.product;
+             product.tempImageArray = [];
+
+        for (var i=0; i<tmpImage.length; i++) {
+
+            var imgeFileName = i+new Date()+".png"
+
+            var data = tmpImage[i].replace(/^data:image\/\w+;base64,/, "");
+            var buf = new Buffer(data, 'base64');
+
+            fs.writeFile(config.ME_SERVER + req.userId + '/templates/' +
+                req.body.product.appId +'/img/thirdNavi/'+imgeFileName, buf, function(err) {
+                if(err) {
+                    if (err) res.send(err);
+                }
+            });
+            product.tempImageArray.push({img:imgeFileName});
+            finelImages = null;
+       }
+
+        ThirdNavigation.create(product).exec(function(error,thirdNav){
+            if(error)sails.log.error(new Error("Error while creating a new Third Navigation :"+ error));
+
+            console.log("&*&*&*&*&*&")
+            res.json(thirdNav);
+        });
     },
 
     /**
@@ -303,7 +367,7 @@ module.exports = {
        if (err) return done(err);
          res.send(app);
      })
-    }
 
+    }
 
 };

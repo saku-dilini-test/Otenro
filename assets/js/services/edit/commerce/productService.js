@@ -13,13 +13,20 @@
                     'add':{
                         method:'POST',
                         url:SERVER_URL+ 'edit/thirdNavigation/add/:product',
-                        params:{product:'@product'}
+                        params:{product:'@product',productImages:'@productImages'}
+                       
                     },
                     'delete':{method:'DELETE'},
                     'get':{
                         method:'GET',
                         url:SERVER_URL+ 'edit/thirdNavigation/getById/:productId',
                         params:{productId:'@productId'}
+                    },
+                    'addProductImages':{
+                        method:'POST',
+                        url:SERVER_URL+ 'edit/thirdNavigation/addProductImages/',
+                        params:{productImages:'@productImages'}
+
                     }
                 });
         }

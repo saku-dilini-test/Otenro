@@ -69,6 +69,11 @@
                 });
             },
 
+
+            addImages: function (appParams) {
+                return $http.post(SERVER_URL + 'edit/thirdNavigation/addProductImages', appParams);
+            },
+
             addProduct: function (file, product, id, variants, tempImageArray) {
                 //console.log(product);
                 //var dataURItoBlob = function(dataURI) {
@@ -111,10 +116,7 @@
             },
             // When upload third Navigation images send to server to update
             addProductImages: function (file,id) {
-                console.log("KLKLKLKL")
-                console.log("KLKLKLKL")
-                console.log("KLKLKLKL "+ id)
-                console.log("KLKLKLKL")
+                
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];

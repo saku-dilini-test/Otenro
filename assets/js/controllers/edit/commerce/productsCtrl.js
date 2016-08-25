@@ -17,7 +17,8 @@
         }
 
 
-        $scope.tmpImage = [null, null, null, null, null, null, null, null];
+        $scope.tmpImage = [];
+        $scope.finelImages = [];
         $scope.tmpImageIndex = [];
         $scope.mainImg = null;
 
@@ -268,12 +269,23 @@
 //        }
 
         $scope.addProducts = function () {
-            productService.add({'product':$scope.product}).$promise.then(function (data) {
-                toastr.success('New Product has been added to the inventory.', 'Awesome!', {
-                    closeButton: true
-                });
-                $mdDialog.hide();
-            });
+
+
+               commerceService.addImages({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
+                   toastr.success('New Product has been added to the inventory.', 'Awsome!', {
+                       closeButton: true
+                   });
+                   $mdDialog.hide();
+               }).error(function (err) {
+                   toastr.error('Unable to Add', 'Warning', {
+                       closeButton: true
+                   });
+                   $mdDialog.hide();
+
+               });
+
+
+
             //console.log("<>><>><><><><> "+ JSON.stringify(productFile))
 //            if ($scope.categories[0].templateName == "foodDemoApp" || $scope.categories[0].templateName == "clothingApp"
 //                || $scope.categories[0].templateName == "foodDemoApp2" || $scope.categories[0].templateName == "ECommerceApp") {
@@ -463,11 +475,11 @@
             $scope.child = newChild;
         };
 
-        $scope.deleteImg = function (index) {
+       /* $scope.deleteImg = function (index) {
             $scope.tmpImage[index] = null;
             $scope.tmpImageIndex[index].img = null;
-        };
-        $scope.addImage = function (img) {
+        };*/
+        /*$scope.addImage = function (img) {
             console.log("KLKLKLKLK")
             console.log("KLKLKLKLK "+ JSON.stringify(img));
             console.log("KLKLKLKLK")
@@ -508,6 +520,15 @@
                 });
             }
             }
+        };*/
+
+        $scope.addImage = function (img) {
+            $scope.tmpImage.push(img);
+            $scope.myImage=null;
+        };
+
+        $scope.deleteImg = function (index) {
+            $scope.tmpImage.splice(index, 1);
         };
 
 
