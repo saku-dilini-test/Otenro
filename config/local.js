@@ -80,6 +80,12 @@ module.exports = {
    * 'development' environment.                                              *
    ***************************************************************************/
 
-    environment: process.env.NODE_ENV || 'development'
+    //environment: process.env.NODE_ENV || 'development',
+
+    // HOST URL
+    //HOST_URL : 'http://localhost',
+    // ME SERVER Config
+    ME_SERVER : '/home/amila/Desktop/meServer/temp/',
+    //ME_SERVER_PORT : 8080
 
 };
