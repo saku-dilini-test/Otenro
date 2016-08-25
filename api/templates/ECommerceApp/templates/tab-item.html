@@ -26,15 +26,14 @@
                 </div>
                 <div class="row">
                     <select ng-model="selectedVariant"
-                            ng-options="variant.size  for variant in foodInfo.variants"
+                            ng-options="variant.size  for variant in item.variants"
                             ng-change="changeVariant(selectedVariant)">
                     </select>
                     <div class="col2 font-size:12px">
                         {{currency.sign}} : {{selectedVariant.price}}
                     </div>
                     <div class="col2">
-                        <input type="number"
-                               class="item-buy-quantity"
+                        <input type="number" style="width: 50px;" min="1"
                                ng-model="selectedVariant.buyQuantity">
                     </div>
                 </div>

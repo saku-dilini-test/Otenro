@@ -112,7 +112,7 @@ angular.module('starter.controllers', [])
         });
 })
 
-.controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices) {
+.controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices,readMadeEasy) {
 
     // set select Item Name
         $scope.itemName = $stateParams.itemName;
@@ -140,6 +140,14 @@ angular.module('starter.controllers', [])
             }
         }).error(function (err) {
             alert('Item Loading error');
+        });
+    readMadeEasy.readFile().success(function(appData){
+    appServices.getCurrencyByAppId(appData.appId)
+        .success(function(data){
+            $scope.currency = data;
+        }).error(function(err){
+          alert('Currency Loading error');
+        })
         });
 
     // variant change function
