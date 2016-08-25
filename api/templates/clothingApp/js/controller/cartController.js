@@ -12,6 +12,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $http.get(constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId).success(function(data) {
         if(data == ''){
             $scope.hide = true;
+            $scope.tax = 0;
         }else{
             $scope.tax = data[0].taxAmount;
             $scope.hide = false;
