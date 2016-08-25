@@ -69,14 +69,14 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                 }
             }
 
-            $scope.pickup = function () {
-                //if (localStorage.getItem('appLocalStorageUser') !== null) {
-                //    $state.go('app.pickup');
-                //}
-                //else {
-                //    $state.go('app.login');
-                //}
-            }
+             $scope.pickup = function () {
+                 if(localStorage.getItem('appLocalStorageUser')!==null){
+                     $state.go('pickup');
+                 }
+                 else{
+                     $state.go('login');
+                 }
+             }
 
 
             $scope.deliver = function (deliverDetails) {

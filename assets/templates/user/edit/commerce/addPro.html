@@ -1,4 +1,4 @@
-<md-dialog aria-label="Manage Products">
+<md-dialog aria-label="Manage Products" style="width:800px">
     <md-dialog-content>
         <md-tabs  md-no-ink-bar ="false"  md-no-bar  md-center-tabs="false" md-selected="selectedTab"  md-autoselect="false"
                  md-dynamic-height="true">
@@ -124,24 +124,24 @@
                     <div class="md-dialog-main">
                         <table class="me-hours-table">
                             <thead>
-                            <th width="12%">Sku</th>
-                            <th class="product-name-column" width="25%">Product Name</th>
-                            <th width="19%">
+                            <th >Sku</th>
+                            <th class="product-name-column">Product Name</th>
+                            <th width="18%">
                                 <select ng-model="selection">
                                     <option value="Size" ng-selected="true">size</option>
                                     <option value="Weight">weight</option>
                                 </select>
                             </th>
-                            <th width="15%">Price</th>
-                            <th width="15%">Qty</th>
-                            <th>Add New</th>
-                            <th>Delete</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th width="13%" style="text-align: center;" >Add New</th>
+                            <th>&nbsp;</th>
                             </thead>
                             <tbody>
 
                             <tr ng-repeat="data in product.variants">
                                 <td>
-                                    <md-input-container>
+                                    <md-input-container style="width: 115px;">
                                         <input md-maxlength="10"
                                                required
                                                name="sku_{{$index}}"
@@ -178,15 +178,15 @@
                                 <td><input name="qty_{{$index}}" type="number" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.quantity">
                                     <span ng-show="priceAndVariantsForm['qty_' + $index].$error.pattern">Invalid qty value</span><br /></td>
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
-                                <td><div class="icon icon-plus" ng-click="addVariant(product,$index,data)"></div></td>
-                                <td><img width="25" src="../../../images/delete-icon-inventory.svg" ng-click="deleteVariant($index,data)">
+                                <td><div style="background-color:#808080;margin:auto" class="icon icon-plus" ng-click="addVariant(product,$index,data)"></div></td>
+                                <td><img style="height:16px" src="../../../images/delete-icon.png" ng-click="deleteVariant($index,data)">
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                     </form>
-                    <div class="md-dialog-buttons">
+                    <div class="md-dialog-buttons" style="padding:0 39px">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
                             <md-button class="me-default-button" ng-click="addProductVariants(selection,variantsList,3)">Next

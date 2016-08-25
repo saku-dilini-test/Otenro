@@ -33,10 +33,17 @@
 							return response.data;
 						});
 				}
+				function getContactUs(appId) {
+                	return $http.get(routesCfg.wpAboutUs.aboutUs(appId))
+                		.then(function(response) {
+                			return response.data;
+                		});
+                }
 
 				return {
 					getPageById: getPageById,
-					getAboutUs: getAboutUs
+					getAboutUs: getAboutUs,
+					getContactUs: getContactUs,
 				};
 			}
 		]);

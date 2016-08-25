@@ -385,20 +385,24 @@
                     return;
                 }
             }
-
+            storeSettings.address = storeSettings.address1 + ',' + storeSettings.address2 + ',' + storeSettings.address3
+                                                + ',' + storeSettings.address4;
+            console.log(storeSettings);
             if (!storeSettings){
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
             }else if (!storeSettings.orderNumber) {
                 toastr.error(' warning', "Please fill order number field", {closeButton: true});
             }
-//            else if (!storeSettings.searchEngineDesc){
-//                toastr.error(' warning', "Please fill searchEngine Description field", {closeButton: true});
-//            }
+            else if (!storeSettings.address1){
+                toastr.error(' warning', "Please fill address field", {closeButton: true});
+            }
+            else if (!openHours.saturdayCloseHour || !openHours.saturdayCloseMinute || !openHours.saturdayOpenHour
+                    ||!openHours.saturdayOpenMinute || !openHours.sundayOpenHour || !openHours.sundayOpenMinute
+                    ||!openHours.sundayCloseHour || !openHours.sundayCloseMinute || !openHours.weekDaysOpenHour
+                    ||!openHours.weekDaysOpenMinute || !openHours.weekDaysCloseHour || !openHours.weekDaysCloseMinute){
+                toastr.error(' warning', "Please fill openHours field", {closeButton: true});
+            }
             else {
-
-            storeSettings.address = storeSettings.address1 + ',' + storeSettings.address2 + ',' + storeSettings.address3
-                                    + ',' + storeSettings.address4;
-
 
                 for (var i = 0; i < $scope.currencyList.length; i++) {
                     if ($scope.storeSettings.currency == $scope.currencyList[i].sign) {
@@ -734,8 +738,28 @@
 
         commerceService.getEmailSettings(prams)
             .success(function (result) {
-                $scope.email = result;
-                console.log(result);
+                $scope.email = result[0];
+                $scope.emailDel = {
+                    fromEmail :$scope.email.fromEmail,
+                    replyToEmail :$scope.email.replyToEmail,
+                    alertEmail :$scope.email.alertEmail,
+                    alertAt :$scope.email.alertAt
+                };
+                $scope.emailHF = {
+                    header : $scope.email.header,
+                    footer : $scope.email.footer
+                }
+                $scope.picFileFooter = 'images/'+$scope.email.imageFooter
+                $scope.picFileHeader = 'images/'+$scope.email.imageHeader
+                $scope.OConfirm = {
+                    orderConfirmedEmail : $scope.email.orderConfirmedEmail
+                }
+                $scope.Ofulfilled = {
+                    orderFulfilledEmail : $scope.email.orderFulfilledEmail
+                }
+                $scope.ORefund = {
+                    orderRefundEmail : $scope.email.orderRefundEmail
+                }
             }).error(function (error) {
             alert("MainMenu Loading Error : " + error);
         });

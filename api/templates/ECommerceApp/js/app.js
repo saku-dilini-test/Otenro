@@ -71,6 +71,11 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
         templateUrl: 'templates/deliverDetails.html',
         controller: 'CartCtrl'
       })
+      .state('pickup', {
+          url: '/pickup',
+          templateUrl: 'templates/pickup.html',
+          controller: 'pickupCtrl'
+      })
 
   // Each tab has its own nav history stack:
   .state('tab.home', {

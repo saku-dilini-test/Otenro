@@ -18,7 +18,7 @@
             'preferredLocale': 'en_US'
         })
         .constant('ME_APP_SERVER','http://localhost:8080/')
-        .config(function($urlRouterProvider,$httpProvider, $authProvider, SERVER_URL) {
+        .config(function($urlRouterProvider,$httpProvider, $authProvider, SERVER_URL,uiGmapGoogleMapApiProvider) {
 
             $authProvider.baseUrl = SERVER_URL;
             $authProvider.loginRedirect = '/dashboard';
@@ -36,6 +36,12 @@
                 clientId: '1585938975033935',
                /* redirectUri : window.location.origin+'/auth/facebook'*/
                 redirectUri : 'http://simatosolutions.com:1340'+'/auth/facebook'
+            });
+
+            uiGmapGoogleMapApiProvider.configure({
+                key: 'AIzaSyB3zB_AXyBODCmnpBIsJ0xyg_xH9iBnsCk',
+                v: '3.17',
+                libraries: 'weather,geometry,visualization'
             });
         });
 })();

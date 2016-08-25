@@ -25,17 +25,19 @@
 				});
 
 				var appId = $rootScope.appId;
-				pagesService.getAboutUs(appId).then(setAboutUs)
+				pagesService.getContactUs(appId).then(setContactUs)
 					.finally(function(){
 						console.log("setAboutUs  " + JSON.stringify(setAboutUs));
 						$ionicLoading.hide();
 					});
 
-				function setAboutUs(response) {
+				function setContactUs(response) {
 					console.log("response  " + JSON.stringify(response));
-					$scope.header = response.header;
-					$scope.content = response.content;
-					console.log(response.content);
+//					$scope.header = response.header;
+//					$scope.content = response.content;
+					$scope.email = response.email;
+					$scope.address = response.address;
+					$scope.telPhone = response.telPhone;
 				}
 
 			}

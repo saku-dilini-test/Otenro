@@ -3,11 +3,12 @@
         <div class="md-dialog-header">
             <h1>Add Menu</h1>
         </div>
+        <form name="catForm" novalidate>
         <div class="md-dialog-main">
-            <form name="catForm" novalidate>
+
                 <fieldset>
                     <label for="input-title">Name</label>
-                    <input type="text" name="name" ng-model="menu.name" ng-maxlength="35" id="input-title" required />
+                    <input maxlength="35"  type="text" name="name" ng-model="menu.name" ng-maxlength="35" id="input-title" required />
                     <br >
                     <span ng-show="catForm.name.$error.maxlength">Too lengthy</span>
                     <i ng-show="catForm.name.$error.required"></i>
@@ -73,7 +74,7 @@
                             </div>
 
                 </fieldset>
-            </form>
+
         </div>
         <div class="md-dialog-buttons">
             <div class="inner-section">
@@ -81,5 +82,7 @@
                 <md-button class="me-default-button" ng-click="addMenuNavigation(mainImg,menu)">Save</md-button>
             </div>
         </div>
+        </form>
     </md-dialog-content>
+
 </md-dialog>
