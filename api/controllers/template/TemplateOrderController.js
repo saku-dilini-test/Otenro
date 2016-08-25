@@ -20,27 +20,24 @@ module.exports = {
         });
     },
     updateInventory : function(req,res){
+    /*Manually updating the relevant quantity in the ThirdNavigation*/
+        var obj = [];
+        var data = req.body[0];
+        ThirdNavigation.find({id: data.id}).exec(function(err, app){
+            if(err) res.send(err);
+            for(var i =0; i<app[0].variants.length; i++){
+                if(app[0].variants[i].sku == data.sku){
+                    app[0].variants[i].quantity = app[0].variants[i].quantity - data.qty;
+                    ThirdNavigation.update({id:data.id},app[0]).exec(function(err,thirdNavi){
+                        if(err) res.send(err);
+                        obj.push(thirdNavi)
+                    })
+                }
 
-    var obj = [];
-        var data = req.body;
-        console.log(data);
-    data.forEach(function(details){
-        PriceAndVariants.find({id:details.id}).exec(function(err, app) {
-                        if (err) return done(err);
-                        console.log(app);
-                        var quantity = {
-                            quantity:app[0].quantity - details.qty
-                        }
-                        PriceAndVariants.update({id:details.id},quantity).exec(function(err,r){
-                            if (err) return done(err);
-                            ApplicationInventory.update({id:details.id},quantity).exec(function(err,inventory){
-                                if (err) return done(err);
-                                obj.push(inventory);
-                            })
-                        });
-                    });
-    })
-        res.send(obj);
+            }
+            res.send(obj);
+
+        })
     }
 
 };

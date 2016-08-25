@@ -13,7 +13,17 @@
                             <fieldset>
                                 <!-- Address -->
                                 <label>Address</label>
-                                <input type="text" ng-model="basicInfo.address" required />
+                                <input type="text" name="address" ng-model="basicInfo.address" ng-pattern="/^[a-zA-Z0-9_ ]*$/" required />
+                                <span ng-show="basicInfoForm.address.$error.pattern">No symbols</span>
+                                <div ng-hide="basicInfo.address.length > maxBasicInfoAddress">
+                                    <span>Characters left: {{maxBasicInfoAddress - basicInfo.address.length}}</span>
+                                </div>
+                                <div  ng-show="basicInfo.address.length > maxBasicInfoAddress">
+                                    <span>Characters left: </span>
+                                    <span style="color: #ff0404 ">
+                                        {{maxBasicInfoAddress - basicInfo.address.length}}
+                                    </span>
+                                </div>
                             </fieldset>
                             <fieldset>
                                 <!-- Telephone -->

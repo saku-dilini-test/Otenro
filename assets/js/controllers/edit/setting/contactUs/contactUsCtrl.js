@@ -1,11 +1,14 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("contactUsCtrl", [
-        '$scope','$rootScope','$mdDialog', 'toastr','contactUsService',
+        '$scope','$rootScope','$mdDialog', 'toastr','contactUsService','uiGmapGoogleMapApi',
         contactUsCtrl]);
 
-    function contactUsCtrl($scope,$rootScope,$mdDialog,toastr, contactUsService) {
+    function contactUsCtrl($scope,$rootScope,$mdDialog,toastr, contactUsService,uiGmapGoogleMapApi) {
 
+        // --/-- Characters length config
+        $scope.maxBasicInfoAddress = 20;
+        
         // --- Config ----
         $scope.coords ="";
         contactUsService.getContactUsInfo().success(function(result){
@@ -21,7 +24,7 @@
                     longitude: 79.8890950584107031
                 };
             }
-
+            uiGmapGoogleMapApi.then(function(maps) {
             $scope.map= {
                 center: $scope.coords,
                 zoom: 11,
@@ -47,6 +50,7 @@
                             }
                         }
                     };
+            });
                // }
         }).error(function (error) {
                 alert("Contact Us information Loading Error : " + error);
@@ -70,17 +74,26 @@
 
         // Save Basic Information and move to Web Information
         $scope.addBasicInfo = function(basicInfo) {
+
+            // If defined basic information address , Check length
+            if((typeof basicInfo.address != 'undefined') && (basicInfo.address.length > $scope.maxBasicInfoAddress)){
+                toastr.error('Address should be less than '+$scope.maxBasicInfoAddress+' letters.',
+                    'Warning',{closeButton: true}
+                );
+                return;
+            }
+
             if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
                 toastr.error('Basic Information not update', { closeButton: true});
                 // go next tab
-                disableTabs(2,true,false,true);
-            }else{
-                if(typeof basicInfo.address == 'undefined'){
-                    toastr.error('Address Not Update', { closeButton: true});
-                }
-                if(typeof basicInfo.telPhone == 'undefined'){
-                    toastr.error('Tel phone Not Update', { closeButton: true});
-                }
+                disableTabs(1,false,true,true);
+            }else if(typeof basicInfo.address == 'undefined'){
+                toastr.error('Address Not Update', { closeButton: true});
+            }
+            else if(typeof basicInfo.telPhone == 'undefined'){
+                toastr.error('Tel phone Not Update', { closeButton: true});
+            }
+            else{
                 var basicInfoResponse = {
                     'appId': $rootScope.appId,
                     'address': basicInfo.address,
@@ -135,8 +148,8 @@
             contactUsService.saveGoogleMapInfo(googleMapInfoResponse)
                 .success(function(data, status, headers, config) {
                     toastr.success('Google Map Info saved successfully', 'Awsome!', {closeButton: true});
-                    // finished and back to 1st tab
-                    disableTabs(1,false,true,true);
+                    // If Successfully finished and popup window close
+                    $mdDialog.hide();
                 }).error(function(data, status, headers, config) {
                     toastr.error('Google Map Info saving error', {closeButton: true});
                 });

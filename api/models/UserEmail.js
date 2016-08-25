@@ -13,7 +13,7 @@ module.exports = {
         fromEmail: {
             type: 'string'
         },
-        replayToEmail:{
+        replyToEmail:{
             type: 'string'
         },
         alertEmail:{

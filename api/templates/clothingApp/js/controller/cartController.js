@@ -12,6 +12,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $http.get(constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId).success(function(data) {
         if(data == ''){
             $scope.hide = true;
+            $scope.tax = 0;
         }else{
             $scope.tax = data[0].taxAmount;
             $scope.hide = false;
@@ -63,7 +64,14 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                 $state.go('app.login',{item:$scope.status});
             }
     }
-
+    $scope.pickup = function () {
+        if(localStorage.getItem('appLocalStorageUser')!==null){
+            $state.go('app.pickup');
+        }
+        else{
+            $state.go('app.login');
+        }
+    }
     $scope.pickup = function () {
         if(localStorage.getItem('appLocalStorageUser')!==null){
             $state.go('app.pickup');

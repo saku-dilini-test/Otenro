@@ -21,6 +21,7 @@
                 wpItemsByCatId : siteURL + '/templates/getArticleByCategoryId?categoryId=', // OK
                 wpItemById : siteURL + '/templates/getArticleById?articleId=', // OK
                 wpAboutUs : siteURL + '/edit/getAboutUsData?appId=', // OK
+                wpAboutUs : siteURL + '/edit/getContactUs?appId=', // OK
                 wpPages: siteURL + '', // This part discussion mode yet,
                 wpServerUrl : siteURL
             };

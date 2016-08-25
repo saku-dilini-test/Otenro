@@ -126,25 +126,8 @@ angular.module('starter.controllers', [])
           speed: 300 //0.3s transition
         };
         $scope.sliderDelegate = null;
-    // set select Menu Id
-    $scope.item = $stateParams.item;
-    // get item by Id
-//    appServices.getItemById(itemId)
-//        .success(function (data) {
-//            $scope.item = data;
-//            $scope.images = data.tempImageArray;
-//            $scope.productVariants = data.variants;
-//            if(data.variants.length > 0){
-//                $scope.selectedVariant = data.variants[0];
-//                if($scope.selectedVariant.quantity > 0 ){
-//                    $scope.isBuyBtnDisable = false;
-//                }else{
-//                    $scope.isBuyBtnDisable = true;
-//                }
-//            }
-//        }).error(function (err) {
-//            alert('Item Loading error');
-//        });
+        $scope.item = $stateParams.item;
+
 
     // variant change function
     $scope.changeVariant = function(variant){
@@ -166,10 +149,10 @@ angular.module('starter.controllers', [])
             });
         }else{
         $rootScope.cart.cartItems.push({
-            id: $scope.selectedVariant.id,
-            productId: $scope.selectedVariant.productId,
+            id: $scope.foodInfo.id,
             name: $scope.item.name,
             qty:$scope.selectedVariant.buyQuantity,
+            sku: $scope.selectedVariant.sku,
             price: $scope.selectedVariant.price,
             total : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.price
 

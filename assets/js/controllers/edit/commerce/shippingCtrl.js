@@ -173,12 +173,16 @@
                     closeButton: true
                 });
             }
-            else if(shipping.weightRanges[0].startWeight == '' || shipping.weightRanges[0].endWeight == ''
-                    || shipping.weightRanges[0].cost == ''){
-                        toastr.error('Fill all the fields', 'Warning', {
-                            closeButton: true
-                        });
-            }else {
+            // Only Check Weight in WeightRanges Array '0' index values
+            else if(typeof shipping.weightRanges[0].startWeight == 'undefined'
+                    || typeof shipping.weightRanges[0].endWeight == 'undefined'){
+                        toastr.error('Fill the Weight Ranges', 'Warning', {closeButton: true});
+            }
+            // Only Check Cost in WeightRanges Array '0' index values
+            else if(typeof shipping.weightRanges[0].cost == 'undefined'){
+                toastr.error('Fill the Weight Cost', 'Warning', {closeButton: true});
+            }
+            else {
                 shipping.appId = $rootScope.appId;
                 shipping.shippingOption = 'Weight Base';
                 $scope.shipping = shipping;
