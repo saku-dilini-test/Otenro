@@ -140,19 +140,19 @@ module.exports = {
         var thirdNavi = [];
         ThirdNavigation.findOne(searchApp).exec(function(err, app) {
             if (err) return done(err);
-            var query =  PriceAndVariants.find({productId: app.id});
-            query.sort('id ASC');
-            query.exec(function(err, variants){
-             if (err) console.log(err);
-             if(variants != undefined){
+            //var query =  PriceAndVariants.find({productId: app.id});
+           // query.sort('id ASC');
+           // query.exec(function(err, variants){
+             //if (err) console.log(err);
+            // if(variants != undefined){
                 /*app.price = variants.price;
                 app.quantity = variants.quantity;
                 app.size = variants.size;*/
-                 app.variants = variants;
-                 console.log( "variants " + JSON.stringify(variants));
-             }
+              //   app.variants = variants;
+              //   console.log( "variants " + JSON.stringify(variants));
+           //  }
              res.json(app);
-            })
+           // })
         });
     },
 

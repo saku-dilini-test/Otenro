@@ -5,6 +5,7 @@
  */
 var fs = require('fs-extra'),
     config = require('../../../services/config');
+var path = require('path');
 module.exports = {
 
     getThirdNavigation : function(req,res){
@@ -95,7 +96,9 @@ module.exports = {
         //});
     },
 
-
+    
+    
+    //add or update products
     addProduct: function (req,res) {
 
         var randomstring = require("randomstring");
@@ -103,32 +106,55 @@ module.exports = {
         var  finelImages = [];
         var  tmpImage = req.body.productImages;
         var  product =  req.body.product;
-             product.tempImageArray = [];
+
+        if ( typeof product.tempImageArray == 'undefined'){
+             product.tempImageArray=[];
+        }
+
 
         for (var i=0; i<tmpImage.length; i++) {
+            console.log("tmpImage[i] " + i + " " + tmpImage[i]);
 
-            var imgeFileName = randomstring.generate()+".png";
+            if (!tmpImage[i].match("8080")){
+                var imgeFileName = randomstring.generate()+".png";
 
-            var data = tmpImage[i].replace(/^data:image\/\w+;base64,/, "");
-            var buf = new Buffer(data, 'base64');
-
-            fs.writeFile(config.ME_SERVER + req.userId + '/templates/' +
-                req.body.product.appId +'/img/thirdNavi/'+imgeFileName, buf, function(err) {
-                if(err) {
-                    if (err) res.send(err);
-                }
-            });
-            product.tempImageArray.push({img:imgeFileName});
-            product.imageUrl = imgeFileName;
-            finelImages = null;
+                var data = tmpImage[i].replace(/^data:image\/\w+;base64,/, "");
+                var buf = new Buffer(data, 'base64');
+                fs.writeFile(config.ME_SERVER + req.userId + '/templates/' +
+                    req.body.product.appId +'/img/thirdNavi/'+imgeFileName, buf, function(err) {
+                    if(err) {
+                        if (err) res.send(err);
+                    }
+                });
+                product.tempImageArray.push({img:imgeFileName});
+                product.imageUrl = imgeFileName;
+                finelImages = null;
+            }
        }
 
-        ThirdNavigation.create(product).exec(function(error,thirdNav){
-            if(error)sails.log.error(new Error("Error while creating a new Third Navigation :"+ error));
 
-            console.log("&*&*&*&*&*&")
-            res.json(thirdNav);
-        });
+        var searchQuery = {
+            id : req.body.product.id
+        };
+
+        if(typeof req.body.product.id != 'undefined'){
+            delete product["id"];
+            ThirdNavigation.update(searchQuery,product,function(err,main) {
+                if (err) return res.send(err);
+                return res.send(200, {message: 'Update Shipping Collection'});
+            });
+        }else{
+            ThirdNavigation.create(product).exec(function (err, result) {
+                if (err) return res.send(err);
+                return res.send(200, {message: 'Create Shipping Collection'});
+            });
+        }
+    },
+
+    //viewImages of the product
+    viewProductImages : function(req,res){
+        console.log("req.body.path+req.body.imageName " + req.body.path+req.body.imageName);
+        res.sendfile(req.body.path+req.body.imageName);
     },
 
     /**

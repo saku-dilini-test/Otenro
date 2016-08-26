@@ -1,7 +1,7 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="{{menuName}}">
     <ion-content class="padding">
         <div ng-repeat="item in itemList" >
-            <a href=" " ng-click="navigateFood(item)">
+            <a  ui-sref="tab.item({item:item})">
                 <div class="cards cards-items">
                     <div class="header">
                         <div class="header-image">
