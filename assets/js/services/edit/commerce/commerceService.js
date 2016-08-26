@@ -3,21 +3,32 @@
  */
 (function () {
     angular.module('appEdit').service('commerceService', [
-        '$mdDialog', '$http', '$rootScope', 'Upload', 'SERVER_URL', 'toastr', commerceService
+        '$mdDialog', '$http', '$rootScope', 'Upload', 'SERVER_URL', 'toastr','inventoryService', commerceService
     ]);
 
-    function commerceService($mdDialog, $http, $rootScope, Upload, SERVER_URL, toastr) {
+    function commerceService($mdDialog, $http, $rootScope, Upload, SERVER_URL, inventoryService) {
         return {
             showAddProductsDialog: function (item) {
                 return $mdDialog.show({
                     controller: 'ProductCtrl',
                     templateUrl: 'user/edit/commerce/addPro.html',
                     clickOutsideToClose: true,
-                    locals: {
-                        item: item,
+                    resolve:{
+                        productService:'productService',
+                        initialData:['productService','$q', function(productService,$q){
+                            console.log("::P::PPP::PP:P:P "+ item.sku);
+                            if('products'== item) {
+                                item= {'id':'0'};
+                            }
+                            return $q.all({
+                                product:productService.get({'productId':item.id}).$promise.then(function(product){
+                                    product.sku = item.sku;
+                                    return product;
+                                })
+                            });
+                        }]
                     }
                 }).then(function (answer) {
-
                     //$scope.status = 'You said the information was "' + answer + '".';
                 });
             },
@@ -58,25 +69,30 @@
                 });
             },
 
+
+            addImages: function (appParams) {
+                return $http.post(SERVER_URL + 'edit/thirdNavigation/addProductImages', appParams);
+            },
+
             addProduct: function (file, product, id, variants, tempImageArray) {
                 //console.log(product);
-                var dataURItoBlob = function(dataURI) {
-                    var binary = atob(dataURI.split(',')[1]);
-                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-                    var array = [];
-                    for(var i = 0; i < binary.length; i++) {
-                        array.push(binary.charCodeAt(i));
-                    }
-                    return new Blob([new Uint8Array(array)], {type: mimeString});
-                };
+                //var dataURItoBlob = function(dataURI) {
+                //    var binary = atob(dataURI.split(',')[1]);
+                //    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+                //    var array = [];
+                //    for(var i = 0; i < binary.length; i++) {
+                //        array.push(binary.charCodeAt(i));
+                //    }
+                //    return new Blob([new Uint8Array(array)], {type: mimeString});
+                //};
 
-                var blob = dataURItoBlob(file);
-                var UploadFile = new File([blob], 'imageFileName.png');
-
+                //var blob = dataURItoBlob(file);
+                //var UploadFile = new File([blob], 'imageFileName.png');
+                //
 
                
                 return Upload.upload({
-                    url: SERVER_URL + 'edit/addThirdNavigation',
+                    url: SERVER_URL + 'edit/thirdNavigation',
                     fields:{
                         id: id,
                         productId: product.id,
@@ -100,7 +116,7 @@
             },
             // When upload third Navigation images send to server to update
             addProductImages: function (file,id) {
-
+                
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -136,7 +152,15 @@
                 return $mdDialog.show({
                     controller: 'InventoryCtrl',
                     templateUrl: 'user/edit/commerce/manageInventoryView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    resolve:{
+                        inventoryService:'inventoryService',
+                        initialData:['inventoryService','$q', function(inventoryService,$q){
+                            return $q.all({
+                                inventoryList:inventoryService.query({appId:$rootScope.appId}).$promise
+                            });
+                        }]
+                    }
                 }).then(function (answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 });

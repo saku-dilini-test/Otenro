@@ -1,6 +1,6 @@
 <ion-view view-title="{{menuName}}">
   <ion-content class="made-easy-background-image made-easy-background-color made-easy-third-navigation">
-        <a ng-repeat="food in foods" href="#/app/foods/{{food.id}}">
+        <a ng-repeat="food in foods" href=" " ng-click="navigateFood(food)">
            <div class="cards animated bounceInRight">
            <div class= "item item-thumbnail-left" >
               <img ng-src="{{imageURL}}/{{food.imageUrl}}">

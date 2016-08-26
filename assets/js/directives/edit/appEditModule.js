@@ -8,5 +8,7 @@
         'color.picker',
         'ngMaterial',
         'ngAnimate',
-        'toastr']);
+        'toastr',
+        'ngResource',
+        'treeGrid']);
 })();

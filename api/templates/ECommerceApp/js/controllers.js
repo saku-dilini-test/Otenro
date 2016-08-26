@@ -94,7 +94,7 @@ angular.module('starter.controllers', [])
         });
 })
 
-.controller('ItemsCtrl', function($scope,$stateParams,appServices,readMadeEasy) {
+.controller('ItemsCtrl', function($scope,$stateParams,$state,appServices,readMadeEasy) {
 
     // set select Menu Name
     $scope.menuName = $stateParams.menuName;
@@ -110,6 +110,10 @@ angular.module('starter.controllers', [])
             alert('Items Loading error');
         });
         });
+
+    $scope.navigateFood = function(item){
+        $state.go('tab.item',{item:item})
+    }
 })
 
 .controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices,readMadeEasy) {
@@ -174,6 +178,7 @@ angular.module('starter.controllers', [])
             productId: $scope.selectedVariant.productId,
             name: $scope.item.name,
             qty:$scope.selectedVariant.buyQuantity,
+            sku: $scope.selectedVariant.sku,
             price: $scope.selectedVariant.price,
             total : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.price
 
