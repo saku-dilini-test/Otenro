@@ -276,18 +276,27 @@
 //        }
 
         $scope.addProducts = function () {
-               commerceService.addProduct({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
-                   toastr.success('New Product has been added to the inventory.', 'Awsome!', {
-                       closeButton: true
-                   });
-                   $mdDialog.hide();
-               }).error(function (err) {
-                   toastr.error('Unable to Add', 'Warning', {
-                       closeButton: true
-                   });
-                   $mdDialog.hide();
+              if ($scope.tmpImage.length<=0){
+                  toastr.error('Please add at least one image', 'Warning', {
+                      closeButton: true
+                  });
+              }else {
 
-               });
+                  commerceService.addProduct({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
+                      toastr.success('New Product has been added to the inventory.', 'Awsome!', {
+                          closeButton: true
+                      });
+                      $mdDialog.hide();
+                  }).error(function (err) {
+                      toastr.error('Unable to Add', 'Warning', {
+                          closeButton: true
+                      });
+                      $mdDialog.hide();
+
+                  });
+
+              }
+
         };
 
 
@@ -536,7 +545,7 @@
 
         $scope.deleteImg = function (index) {
             $scope.tmpImage.splice(index, 1);
-            if ($scope.product.tempImageArray){
+            if ($scope.product.tempImageArray.length > 0){
                 $scope.product.tempImageArray.splice(index, 1);
             }
             console.log( $scope.product.tempImageArray.length);
