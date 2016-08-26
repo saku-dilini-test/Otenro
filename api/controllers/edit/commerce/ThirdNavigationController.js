@@ -98,7 +98,7 @@ module.exports = {
 
     
     
-    //add products
+    //add or update products
     addProduct: function (req,res) {
 
         var randomstring = require("randomstring");
