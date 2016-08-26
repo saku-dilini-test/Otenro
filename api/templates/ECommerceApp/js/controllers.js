@@ -127,7 +127,7 @@ angular.module('starter.controllers', [])
         };
         $scope.sliderDelegate = null;
     // set select Menu Id
-    var itemId = $stateParams.itemId;
+    var itemId = $stateParams.item.id;
     // get item by Id
     appServices.getItemById(itemId)
         .success(function (data) {
