@@ -43,7 +43,10 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.sliderDelegate = null;
     if($stateParams.item){
         $scope.foodInfo = $stateParams.item;
+        $scope.images = $stateParams.item.tempImageArray;
     }
+
+
         $scope.slideChanged = function(index) {
             $scope.slideIndex = index;
           };
