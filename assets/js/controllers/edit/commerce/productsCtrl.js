@@ -7,17 +7,24 @@
     function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService, $rootScope,  $auth, ME_APP_SERVER,initialData) {
         var size, weight;
         var variants;
-        console.log(">?>?>?>?>>?")
-        console.log(">?>?>?>?>>?")
-        console.log(">?>?>?>?>>? "+JSON.stringify( initialData.product))
-        console.log(">?>?>?>?>>?" + initialData.product.id)
+
+        $scope.tmpImage = [];
         $scope.product = initialData.product;
-        if(!initialData.product.id){
-            $scope.product = {'appId':$rootScope.appId};
+        if (initialData.product.tempImageArray){
+
+            for (var i=0; i<initialData.product.tempImageArray.length; i++) {
+                console.log(initialData.product.tempImageArray[i].img);
+               $scope.tmpImage.push(ME_APP_SERVER + 'temp/' + $auth.getPayload().id + '/templates/' + $rootScope.appId +
+                                    '/img/thirdNavi/' + initialData.product.tempImageArray[i].img);
+            }
         }
 
 
-        $scope.tmpImage = [];
+        if(!initialData.product.id){
+            $scope.product = {'appId':$rootScope.appId}
+        }
+
+
         $scope.finelImages = [];
         $scope.tmpImageIndex = [];
         $scope.mainImg = null;
@@ -529,6 +536,10 @@
 
         $scope.deleteImg = function (index) {
             $scope.tmpImage.splice(index, 1);
+            if ($scope.product.tempImageArray){
+                $scope.product.tempImageArray.splice(index, 1);
+            }
+            console.log( $scope.product.tempImageArray.length);
         };
 
 
