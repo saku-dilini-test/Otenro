@@ -43,7 +43,10 @@
                     displayName:'Price',
                     cellTemplate:   "<div ng-if='row.branch.price !== undefined'>"+
                                     "<input type='text' width='40' ng-model='row.branch[col.field]'/></div>"
-                }
+                },
+                {
+                    cellTemplate:   "<div><img style='height:16px;cursor:pointer' src='../../../images/delete-icon.png'></div>"
+                },
             ];
 
         var productList =  initialData.inventoryList;
