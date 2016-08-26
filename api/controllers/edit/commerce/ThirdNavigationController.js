@@ -96,7 +96,9 @@ module.exports = {
     },
 
 
-    addProductImages: function (req,res) {
+    addProduct: function (req,res) {
+
+        var randomstring = require("randomstring");
 
         var  finelImages = [];
         var  tmpImage = req.body.productImages;
@@ -105,7 +107,7 @@ module.exports = {
 
         for (var i=0; i<tmpImage.length; i++) {
 
-            var imgeFileName = i+new Date()+".png"
+            var imgeFileName = randomstring.generate()+".png";
 
             var data = tmpImage[i].replace(/^data:image\/\w+;base64,/, "");
             var buf = new Buffer(data, 'base64');
@@ -117,6 +119,7 @@ module.exports = {
                 }
             });
             product.tempImageArray.push({img:imgeFileName});
+            product.imageUrl = imgeFileName;
             finelImages = null;
        }
 

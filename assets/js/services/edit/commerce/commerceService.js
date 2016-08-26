@@ -68,54 +68,17 @@
                     file: UploadFile
                 });
             },
-
-
-            addImages: function (appParams) {
-                return $http.post(SERVER_URL + 'edit/thirdNavigation/addProductImages', appParams);
+            
+            
+            //add product service
+            addProduct: function (appParams) {
+                return $http.post(SERVER_URL + 'edit/thirdNavigation/addProduct', appParams);
             },
 
-            addProduct: function (file, product, id, variants, tempImageArray) {
-                //console.log(product);
-                //var dataURItoBlob = function(dataURI) {
-                //    var binary = atob(dataURI.split(',')[1]);
-                //    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-                //    var array = [];
-                //    for(var i = 0; i < binary.length; i++) {
-                //        array.push(binary.charCodeAt(i));
-                //    }
-                //    return new Blob([new Uint8Array(array)], {type: mimeString});
-                //};
-
-                //var blob = dataURItoBlob(file);
-                //var UploadFile = new File([blob], 'imageFileName.png');
-                //
-
-               
-                return Upload.upload({
-                    url: SERVER_URL + 'edit/thirdNavigation',
-                    fields:{
-                        id: id,
-                        productId: product.id,
-                        appId: $rootScope.appId,
-                        mainId: product.mainId,
-                        detailedDesc: product.detailedDesc,
-                        name: product.name,
-                        childId: variants[0].childId,
-                        variants: variants,
-                        desc: product.desc,
-                        selection: product.selection,
-                        //sku: variants.sku,
-                        // price: variants.price,
-                        //quantity: variants.quantity,
-                        type: product.type,
-                        discount: product.discount,
-                        tempImageArray : tempImageArray
-                    } ,
-                    file: UploadFile
-                });
-            },
+            
+            
             // When upload third Navigation images send to server to update
-            addProductImages: function (file,id) {
+            /*addProductImages: function (file,id) {
                 
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
@@ -138,7 +101,9 @@
                     },
                     file: UploadFile
                 });
-            },
+            },*/
+
+
             showOrderDialog: function () {
                 return $mdDialog.show({
                     controller: 'CommerceCtrl',

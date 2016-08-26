@@ -269,9 +269,7 @@
 //        }
 
         $scope.addProducts = function () {
-
-
-               commerceService.addImages({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
+               commerceService.addProduct({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
                    toastr.success('New Product has been added to the inventory.', 'Awsome!', {
                        closeButton: true
                    });
@@ -283,6 +281,8 @@
                    $mdDialog.hide();
 
                });
+        };
+
 
 
 
@@ -439,7 +439,7 @@
 //                }
 //            }
 
-        };
+
 
         $scope.setImage = function (img) {
 
