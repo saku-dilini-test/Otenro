@@ -16,7 +16,6 @@
                         params:{product:'@product',productImages:'@productImages'}
 
                     },
-                    'delete':{method:'DELETE'},
                     'get':{
                         method:'GET',
                         url:SERVER_URL+ 'edit/thirdNavigation/getById/:productId',
@@ -33,6 +32,11 @@
                         url:SERVER_URL+ 'edit/thirdNavigation/updateInventory/:inventoryList',
                         params:{inventoryList:'@inventoryList'}
                     },
+                    'delete':{
+                        method:'POST',
+                        url:SERVER_URL+ 'edit/deleteThirdNavigation/:item',
+                        params:{item:'@item'}
+                    }
                 });
         }
     }

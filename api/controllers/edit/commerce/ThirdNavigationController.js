@@ -48,57 +48,6 @@ module.exports = {
      * @param req
      * @param res
      */
-    addThirdNavigation : function(req,res){
-        ThirdNavigation.create(req.body.product).exec(function(error,thirdNav){
-            if(error)sails.log.error(new Error("Error while creating a new Third Navigation :"+ error));
-            res.json(thirdNav);
-        });
-        //var dePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
-        //req.file('file').upload({
-        //    dirname: require('path').resolve(dePath)
-        //}, function (err, uploadedFiles) {
-        //    if (err) return res.send(500, err);
-        //
-        //    var newFileName=Date.now()+'.png';
-        //    fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
-        //        if (err) return res.send(err);
-        //    });
-        //
-        //
-        //    var thirdN =req.body;
-        //    //console.log(thirdN);
-        //    thirdN.imageUrl = newFileName;
-        //    if(typeof thirdN.id != 'undefined'){
-        //    var query = {
-        //        productId: thirdN.id,
-        //        appId: thirdN.appId,
-        //        childId: thirdN.childId,
-        //        name: thirdN.name,
-        //        variants:thirdN.variants
-        //    }
-        //        ThirdNavigation.update({id:thirdN.productId},thirdN).exec(function(err, appProduct) {
-        //            if (err) res.send(err);
-        //            res.send({
-        //                appId: appProduct[0],
-        //                message: "New Navigation is created!!"
-        //            });
-        //        });
-        //    }
-        //    else{
-        //        ThirdNavigation.create(thirdN).exec(function(err, appProduct) {
-        //        if (err) res.send(err);
-        //        res.send({
-        //            appId: appProduct,
-        //            message: "New Navigation is created!!"
-        //        });
-        //        });
-        //    }
-        //});
-    },
-
-    
-    
-    //add or update products
     addProduct: function (req,res) {
 
         var randomstring = require("randomstring");
@@ -155,6 +104,10 @@ module.exports = {
     viewProductImages : function(req,res){
         console.log("req.body.path+req.body.imageName " + req.body.path+req.body.imageName);
         res.sendfile(req.body.path+req.body.imageName);
+        ThirdNavigation.create(product).exec(function(error,thirdNav){
+            if(error)sails.log.error(new Error("Error while creating a new Third Navigation :"+ error));
+            res.json(thirdNav);
+        });
     },
 
     /**
@@ -177,8 +130,8 @@ module.exports = {
      */
     updateInventory: function(req,res){
         var inventoryList = req.body.inventoryList;
-        for(var i = 0; inventoryList.length; i++ ){
-            var product = inventoryList[i]
+        for(var i = 0; i < inventoryList.length; i++ ){
+            var product = inventoryList[i];
             var query = {'id': product.id};
             ThirdNavigation.update(query,{"variants":product.variants}).exec(function(err,updatedProduct){
                 if(err) sails.log.error(new Error("Error while Updating Inventory of ID : "+ product.id));
@@ -187,6 +140,55 @@ module.exports = {
         }
         res.ok({'status':"Success"});
     },
+
+    /**
+     * Delete Product or variant.
+     * @param req
+     * @param res
+     */
+    deleteProductOrVariant: function(req,res){
+        var item = req.body.item;
+        var query = {'id':item.id};
+        //Variant of a Product
+        if(item.sku){
+            ThirdNavigation.findOne(query).exec(function(err,product){
+                if(err) sails.log.error(new Error("Error while retrieving Product by ID : "+ item.id));
+                var deleteVariants = product.variants;
+
+                for(var i=0; i < deleteVariants.length;i++){
+                    //Check variants sku against the deleting item
+                    if(deleteVariants[i].sku==item.sku){
+                        var index = deleteVariants.indexOf(deleteVariants[i]);
+                        deleteVariants.splice(index, 1);
+                    }
+                }
+                //If Variants has one or more elements
+                if(0 < deleteVariants.length){
+                    ThirdNavigation.update(query,product).exec(function(err,item){
+                        if(err) sails.log.error(new Error("Error while deleting a Variant from a product : "+
+                            JSON.stringify(product)));
+                        sails.log.info("Product update Successfully!!");
+                        res.ok({'status':"Success"});
+                    });
+                }else{
+                    //Product is deleted if there is no variants in the Variants array
+                    ThirdNavigation.destroy(query).exec(function(err,deletedItem){
+                        if(err) sails.log.error(new Error("Error while deleting the Product by ID : "+ item.id));
+                        sails.log.info("Successfully Delete the Product"+ JSON.stringify(deletedItem));
+                        res.ok({'status':"Success"});
+                    })
+                }
+            });
+        }else{
+            //When User delete the whole product
+            ThirdNavigation.destroy(query).exec(function(err,deletedItem){
+                if(err) sails.log.error(new Error("Error while deleting the Product by ID : "+ item.id));
+                sails.log.info("Successfully Delete the Product"+ JSON.stringify(deletedItem));
+                res.ok({'status':"Success"});
+            });
+        }
+    },
+
     /**
      * ThirdNavigation uploaded images are copy to img/thirdNavi folder
      * Return : image name

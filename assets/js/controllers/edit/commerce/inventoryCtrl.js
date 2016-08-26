@@ -45,7 +45,14 @@
                                     "<input type='text' width='40' ng-model='row.branch[col.field]'/></div>"
                 },
                 {
-                    cellTemplate:   "<div><img style='height:16px;cursor:pointer' src='../../../images/delete-icon.png'></div>"
+                    cellTemplate:   "<div><img style='height:16px;cursor:pointer'" +
+                                    " ng-click='cellTemplateScope.click(row.branch)' src='../../../images/delete-icon.png'></div>",
+                    cellTemplateScope: {
+                        click: function(data) {
+                            // go to product delete view
+                            $scope.deletePro(data);
+                        }
+                    }
                 },
             ];
 
@@ -159,24 +166,19 @@
          * @param inventory
          * @returns {*}
          */
-        $scope.deletePro = function (index,inventory) {
+        $scope.deletePro = function (item,inventory) {
             return $mdDialog.show({
                 controllerAs: 'dialogCtrl',
                 controller: function($mdDialog){
                     this.confirm = function click(){
-                        $scope.inventoryList.splice(index, 1);
-                        inventory.userId = $scope.userId;
-                        commerceService.deleteProducts(inventory).success(function(data) {
-                            toastr.success("product deleted", 'Message', {
+                        var itemIndex = $scope.inventoryList.indexOf(item);
+                        $scope.inventoryList.splice(itemIndex, 1);
+                        productService.delete({item:item}).$promise.then(function(result){
+                            toastr.success("Product successfully deleted", 'Message', {
                                 closeButton: true
                             });
                             $mdDialog.hide();
                             return commerceService.showInventoryDialog();
-                        }).error(function(err) {
-                            toastr.error(err, 'Warning', {
-                                closeButton: true
-                            });
-                            $mdDialog.hide();
                         });
                     },
                         this.cancel = function click(){
