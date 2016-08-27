@@ -70,16 +70,16 @@
             },
             
             
-            //add product service
-            addProduct: function (appParams) {
-                return $http.post(SERVER_URL + 'edit/thirdNavigation/addProduct', appParams);
+            //service of  add or update product
+            addOrUpdateProducts: function (appParams) {
+                return $http.post(SERVER_URL + 'edit/thirdNavigation/addOrUpdateProduct', appParams);
             },
 
-            
-            
+
+
             // When upload third Navigation images send to server to update
             /*addProductImages: function (file,id) {
-                
+
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];

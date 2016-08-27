@@ -38,7 +38,6 @@ module.exports = {
                 ThirdNavigation.create(subChild).exec(function(err, menu) {
                     res.json(menu);
                 });
-
             });
         });
     },
@@ -96,10 +95,14 @@ module.exports = {
         //});
     },
 
-    
-    
-    //add or update products
-    addProduct: function (req,res) {
+
+
+    /**
+     * add or update product
+     * @param req
+     * @param res
+     */
+    addOrUpdateProduct: function (req,res) {
 
         var randomstring = require("randomstring");
 
@@ -113,9 +116,8 @@ module.exports = {
 
 
         for (var i=0; i<tmpImage.length; i++) {
-            console.log("tmpImage[i] " + i + " " + tmpImage[i]);
 
-            if (!tmpImage[i].match("8080")){
+            if (!tmpImage[i].match("http")){
                 var imgeFileName = randomstring.generate()+".png";
 
                 var data = tmpImage[i].replace(/^data:image\/\w+;base64,/, "");
@@ -131,7 +133,6 @@ module.exports = {
                 finelImages = null;
             }
        }
-
 
         var searchQuery = {
             id : req.body.product.id
@@ -150,13 +151,8 @@ module.exports = {
             });
         }
     },
-
-    //viewImages of the product
-    viewProductImages : function(req,res){
-        console.log("req.body.path+req.body.imageName " + req.body.path+req.body.imageName);
-        res.sendfile(req.body.path+req.body.imageName);
-    },
-
+    
+    
     /**
      * Get ThridNaviagation(Product) Object by Id
      * @param req

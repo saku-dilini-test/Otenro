@@ -275,14 +275,18 @@
 //            });
 //        }
 
-        $scope.addProducts = function () {
+
+        /**
+         * add or update product
+         */
+        $scope.addOrUpdateProducts = function () {
               if ($scope.tmpImage.length<=0){
                   toastr.error('Please add at least one image', 'Warning', {
                       closeButton: true
                   });
               }else {
 
-                  commerceService.addProduct({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
+                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
                       toastr.success('New Product has been added to the inventory.', 'Awsome!', {
                           closeButton: true
                       });
@@ -539,7 +543,9 @@
         };*/
 
         $scope.addImage = function (img) {
-            $scope.tmpImage.push(img);
+            if($scope.tmpImage.length < 8){
+                $scope.tmpImage.push(img);
+            }
             $scope.myImage=null;
         };
 
@@ -548,7 +554,6 @@
             if ($scope.product.tempImageArray.length > 0){
                 $scope.product.tempImageArray.splice(index, 1);
             }
-            console.log( $scope.product.tempImageArray.length);
         };
 
 
