@@ -59,8 +59,10 @@
                             <fieldset>
                                 <!-- Web Site -->
                                 <label>Website</label>
-                                <input type="url" name="website" ng-model="webInfo.webSite" required />
-                                <span class="error" ng-show="webInfoForm.website.$error.url">Invalid url!</span>
+                                <input type="text" name="website" ng-model="webInfo.webSite"
+                                       ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" required />
+                                <br/>
+                                <span class="error" ng-show="webInfoForm.website.$error.pattern">Invalid url!</span>
                             </fieldset>
                         </div>
                         <div class="md-dialog-buttons">
