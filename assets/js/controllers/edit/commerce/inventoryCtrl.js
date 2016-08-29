@@ -57,23 +57,7 @@
             ];
 
         var productList =  initialData.inventoryList;
-
-        $scope.exportArray= [{
-            'name':'Name',
-            'Price':'Price',
-            'Quantity':'Quantity',
-            'Sale':'Sale Price',
-            'Created':'Created Date',
-        }];
-        angular.forEach(productList, function(value, key) {
-            $scope.exportArray.push({
-                'name' : value.name,
-                'price' : value.price,
-                'quantity' : value.quantity,
-                'sale' : value.sale,
-                'createdAt' : value.createdAt
-            });
-        });
+        $scope.exportArray = [];
         
         for(var i = 0; i <  initialData.inventoryList.length; i++){
             if(productList[i].hasOwnProperty("variants")){
@@ -85,6 +69,7 @@
                 var tempChildArray = productList[i]['children'];
                 for(var j = 0; j < tempChildArray.length; j++){
                     tempChildArray[j]['id'] = productID;
+                    $scope.exportArray.push(tempChildArray[j]);
                 }
                 productList[i]['children'] = tempChildArray;
                 // -- end -- inject product id to child array
@@ -92,6 +77,26 @@
                 delete productList[i]["variants"];
             }
         }
+        $scope.exportArrayN= [{
+            'name':'Name',
+            'sku':'SKU',
+            'Price':'Price',
+            'Quantity':'Quantity',
+            'size':'Size'
+
+        }];
+        angular.forEach($scope.exportArray, function(value, key) {
+            $scope.exportArrayN.push({
+
+                'name' : value.name,
+                'sku' : value.sku,
+                'price' : value.price,
+                'quantity' : value.quantity,
+                'size' : value.size
+
+            });
+        });
+        console.log($scope.exportArrayN);
         $scope.inventoryList = productList;
 
             console.log("LLLLLLLLLLLLL")
