@@ -57,6 +57,24 @@
             ];
 
         var productList =  initialData.inventoryList;
+
+        $scope.exportArray= [{
+            'name':'Name',
+            'Price':'Price',
+            'Quantity':'Quantity',
+            'Sale':'Sale Price',
+            'Created':'Created Date',
+        }];
+        angular.forEach(productList, function(value, key) {
+            $scope.exportArray.push({
+                'name' : value.name,
+                'price' : value.price,
+                'quantity' : value.quantity,
+                'sale' : value.sale,
+                'createdAt' : value.createdAt
+            });
+        });
+        
         for(var i = 0; i <  initialData.inventoryList.length; i++){
             if(productList[i].hasOwnProperty("variants")){
                 productList[i]["children"] = productList[i]["variants"];
