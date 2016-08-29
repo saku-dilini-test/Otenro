@@ -352,6 +352,7 @@ module.exports = {
                         }
                     ],
                     "variants":[{
+                      "name": "Low price ",
                       'sku': "1111",
                       'size': "11",
                       'price': "11",
@@ -370,6 +371,7 @@ module.exports = {
                         }
                     ],
                     "variants":[{
+                      "name": "Low price ",
                       'sku': "1111",
                       'size': "11",
                       'price': "11",
@@ -390,6 +392,7 @@ module.exports = {
                         }
                     ],
                     "variants":[{
+                      "name": "Low price ",
                       'sku': "1111",
                       'size': "11",
                       'price': "11",
@@ -408,6 +411,7 @@ module.exports = {
                         }
                     ],
                     "variants":[{
+                      "name": "Low price ",
                       'sku': "1111",
                       'size': "11",
                       'price': "11",

@@ -43,6 +43,7 @@ module.exports = {
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
+                'name': "Grilled Chicken Salad",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -63,6 +64,7 @@ module.exports = {
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
+                'name': "Spicy Thai Salad with Grilled Chicken",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -112,6 +114,7 @@ module.exports = {
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
+                "name": "Chocolate Fudge Brownie with Vanila Ice Cream",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -181,6 +184,7 @@ module.exports = {
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
+                "name": "Grilled Garlic Lamb Chops",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -201,6 +205,7 @@ module.exports = {
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
+                "name": "Beef Stake with Smashed Potatoes",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -221,6 +226,7 @@ module.exports = {
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
+                "name": "BBQ Pork Ribs",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -240,6 +246,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Pina Colada",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -319,6 +326,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Shirt x",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -338,6 +346,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Shirt y",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -358,6 +367,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Shirt z",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -387,6 +397,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Short x",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -433,6 +444,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Beach Suit",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -467,6 +479,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Shirt x",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -487,6 +500,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Shirt y",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -507,6 +521,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Shirt z",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -535,6 +550,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Shirt x",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -555,6 +571,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Shirt y",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -575,6 +592,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Shirt z",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -604,6 +622,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Short x",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -633,6 +652,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Beach Suit",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -665,6 +685,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Masala Pizza",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -685,6 +706,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name" : "New Pizza",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -715,6 +737,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name": "Indian Pizza",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
@@ -735,6 +758,7 @@ module.exports = {
                 }
               ],
               "variants":[{
+                "name" : "New Pizza",
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
