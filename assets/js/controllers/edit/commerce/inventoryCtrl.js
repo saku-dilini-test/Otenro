@@ -29,20 +29,43 @@
                 {
                     field:'size',
                     displayName:'Size',
-                    cellTemplate:   "<div ng-if='row.branch.size !== undefined'>" +
-                                    "<input type='text' width='40' ng-model='row.branch[col.field]'/></div>"
+                    cellTemplate:   "<div ng-if='row.level == 2'>" +
+                                       "<ng-form name='sizeForm'>"+
+                                            "<md-input-container>"+
+                                                "<input name='size' ng-model='row.branch[col.field]' required/>"+
+                                                "<div ng-messages='sizeForm.size.$error'>"+
+                                                    "<div ng-message='required'>This is required!</div>"+
+                                               "</div>"+
+                                           "</md-input-container>"+
+                                       "</form></div>"
+
                 },
                 {
                     field:'quantity',
                     displayName:'Quantity',
-                    cellTemplate:   "<div ng-if='row.branch.quantity !== undefined'>" +
-                                    "<input type='text' width='40' ng-model='row.branch[col.field]'/></div>"
+                    cellTemplate:   "<div ng-if='row.level == 2'>" +
+                                       "<ng-form name='quantityForm'>"+
+                                            "<md-input-container>"+
+                                                "<input name='quantity' ng-model='row.branch[col.field]' required/>"+
+                                                "<div ng-messages='quantityForm.quantity.$error'>"+
+                                                    "<div ng-message='required'>This is required!</div>"+
+                                               "</div>"+
+                                           "</md-input-container>"+
+                                       "</ng-form></div>"
                 },
                 {
                     field:'price',
                     displayName:'Price',
-                    cellTemplate:   "<div ng-if='row.branch.price !== undefined'>"+
-                                    "<input type='text' width='40' ng-model='row.branch[col.field]'/></div>"
+                    cellTemplate:  "<div ng-if='row.level == 2'>" +
+                                       "<ng-form name='priceForm'>"+
+                                            "<md-input-container>"+
+                                                "<input name='price' ng-model='row.branch[col.field]' required/>"+
+                                                "<div ng-messages='priceForm.price.$error'>"+
+                                                    "<div ng-message='required'>This is required!</div>"+
+                                               "</div>"+
+                                           "</md-input-container>"+
+                                       "</ng-form></div>"
+
                 },
                 {
                     cellTemplate:   "<div><img style='height:16px;cursor:pointer' src='../../../images/delete-icon.png'></div>"
