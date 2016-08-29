@@ -548,11 +548,10 @@
         $scope.addImage = function (img) {
             $scope.picFile = null;
             $scope.myImage=null;
-
-            if($scope.tmpImage.length < 8 && img){
+            if($scope.tmpImage.length < 8 && img && angular.element('#fileInput').val()!=''){
                 $scope.tmpImage.push(img);
-                img = null;
                 angular.element('#fileInput').val(null);
+
             }
         };
 
