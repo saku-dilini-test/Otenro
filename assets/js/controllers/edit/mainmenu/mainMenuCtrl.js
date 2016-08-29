@@ -239,6 +239,8 @@
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function(data, status, headers, config) {
+                    // update image name set to imageUrl in menu collection
+                    menu.imageUrl = data.imageUrl;
                     mainMenuService.updateSecondNavi(menu).success(function(data) {
                         $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
                             +'/templates/'+$rootScope.appId+'' +
@@ -303,6 +305,8 @@
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function(data, status, headers, config) {
+                    // update image name set to imageUrl in menu collection
+                    menu.imageUrl = data.imageUrl;
                     articleService.editCategory(menu)
                         .success(function (data) {
                             $scope.appTemplateUrl = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
