@@ -42,12 +42,16 @@ module.exports = {
         });
     },
 
+
+
+
+
     /**
-     * Create new ThirNavigation(Product) Object
+     * add or update product
      * @param req
      * @param res
      */
-    addProduct: function (req,res) {
+    addOrUpdateProduct: function (req,res) {
 
         var randomstring = require("randomstring");
 
@@ -96,8 +100,8 @@ module.exports = {
             });
         }
     },
-
-
+    
+    
     /**
      * Get ThridNaviagation(Product) Object by Id
      * @param req
