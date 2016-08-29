@@ -116,13 +116,16 @@
         };
 
         $scope.cropImage = function () {
+
             var handleFileSelect=function(evt) {
+
                 var file=evt.currentTarget.files[0];
                 var reader = new FileReader();
+
                 reader.onload = function (evt) {
                     $scope.$apply(function($scope){
                         $scope.myImage=evt.target.result;
-                        $scope.picFile =  $scope.myImage
+                        $scope.picFile =  $scope.myImage;
                     });
                 };
                 reader.readAsDataURL(file);
@@ -275,14 +278,18 @@
 //            });
 //        }
 
-        $scope.addProducts = function () {
+
+        /**
+         * add or update product
+         */
+        $scope.addOrUpdateProducts = function () {
               if ($scope.tmpImage.length<=0){
                   toastr.error('Please add at least one image', 'Warning', {
                       closeButton: true
                   });
               }else {
 
-                  commerceService.addProduct({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
+                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
                       toastr.success('New Product has been added to the inventory.', 'Awsome!', {
                           closeButton: true
                       });
@@ -539,16 +546,21 @@
         };*/
 
         $scope.addImage = function (img) {
-            $scope.tmpImage.push(img);
+            $scope.picFile = null;
             $scope.myImage=null;
+
+            if($scope.tmpImage.length < 8 && img){
+                $scope.tmpImage.push(img);
+                img = null;
+                angular.element('#fileInput').val(null);
+            }
         };
 
         $scope.deleteImg = function (index) {
             $scope.tmpImage.splice(index, 1);
-            if ($scope.product.tempImageArray.length > 0){
+            if ($scope.product.tempImageArray&&$scope.product.tempImageArray.length > 0){
                 $scope.product.tempImageArray.splice(index, 1);
             }
-            console.log( $scope.product.tempImageArray.length);
         };
 
 

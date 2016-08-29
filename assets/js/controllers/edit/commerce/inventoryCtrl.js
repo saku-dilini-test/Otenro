@@ -29,20 +29,43 @@
                 {
                     field:'size',
                     displayName:'Size',
-                    cellTemplate:   "<div ng-if='row.branch.size !== undefined'>" +
-                                    "<input type='text' width='40' ng-model='row.branch[col.field]'/></div>"
+                    cellTemplate:   "<div ng-if='row.level == 2'>" +
+                                       "<ng-form name='sizeForm'>"+
+                                            "<md-input-container>"+
+                                                "<input name='size' ng-model='row.branch[col.field]' required/>"+
+                                                "<div ng-messages='sizeForm.size.$error'>"+
+                                                    "<div ng-message='required'>This is required!</div>"+
+                                               "</div>"+
+                                           "</md-input-container>"+
+                                       "</form></div>"
+
                 },
                 {
                     field:'quantity',
                     displayName:'Quantity',
-                    cellTemplate:   "<div ng-if='row.branch.quantity !== undefined'>" +
-                                    "<input type='text' width='40' ng-model='row.branch[col.field]'/></div>"
+                    cellTemplate:   "<div ng-if='row.level == 2'>" +
+                                       "<ng-form name='quantityForm'>"+
+                                            "<md-input-container>"+
+                                                "<input name='quantity' ng-model='row.branch[col.field]' required/>"+
+                                                "<div ng-messages='quantityForm.quantity.$error'>"+
+                                                    "<div ng-message='required'>This is required!</div>"+
+                                               "</div>"+
+                                           "</md-input-container>"+
+                                       "</ng-form></div>"
                 },
                 {
                     field:'price',
                     displayName:'Price',
-                    cellTemplate:   "<div ng-if='row.branch.price !== undefined'>"+
-                                    "<input type='text' width='40' ng-model='row.branch[col.field]'/></div>"
+                    cellTemplate:  "<div ng-if='row.level == 2'>" +
+                                       "<ng-form name='priceForm'>"+
+                                            "<md-input-container>"+
+                                                "<input name='price' ng-model='row.branch[col.field]' required/>"+
+                                                "<div ng-messages='priceForm.price.$error'>"+
+                                                    "<div ng-message='required'>This is required!</div>"+
+                                               "</div>"+
+                                           "</md-input-container>"+
+                                       "</ng-form></div>"
+
                 },
                 {
                     cellTemplate:   "<div><img style='height:16px;cursor:pointer'" +
@@ -57,6 +80,8 @@
             ];
 
         var productList =  initialData.inventoryList;
+        $scope.exportArray = [];
+        
         for(var i = 0; i <  initialData.inventoryList.length; i++){
             if(productList[i].hasOwnProperty("variants")){
                 productList[i]["children"] = productList[i]["variants"];
@@ -67,6 +92,7 @@
                 var tempChildArray = productList[i]['children'];
                 for(var j = 0; j < tempChildArray.length; j++){
                     tempChildArray[j]['id'] = productID;
+                    $scope.exportArray.push(tempChildArray[j]);
                 }
                 productList[i]['children'] = tempChildArray;
                 // -- end -- inject product id to child array
@@ -74,6 +100,26 @@
                 delete productList[i]["variants"];
             }
         }
+        $scope.exportArrayN= [{
+            'name':'Name',
+            'sku':'SKU',
+            'Price':'Price',
+            'Quantity':'Quantity',
+            'size':'Size'
+
+        }];
+        angular.forEach($scope.exportArray, function(value, key) {
+            $scope.exportArrayN.push({
+
+                'name' : value.name,
+                'sku' : value.sku,
+                'price' : value.price,
+                'quantity' : value.quantity,
+                'size' : value.size
+
+            });
+        });
+        console.log($scope.exportArrayN);
         $scope.inventoryList = productList;
 
             console.log("LLLLLLLLLLLLL")

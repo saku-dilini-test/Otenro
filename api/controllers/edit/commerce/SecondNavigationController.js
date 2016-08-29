@@ -132,9 +132,12 @@ module.exports = {
 
             console.log("req.body.imageUrl, " + req.body.imageUrl);
             if (typeof req.body.imageUrl != "undefined") {
-                fs.rename(uploadedFiles[0].fd, desPath + req.body.imageUrl, function (err) {
+                // Create new img file name using date.now() 
+                var fileName = Date.now() + '.jpg';
+                fs.rename(uploadedFiles[0].fd, desPath + fileName , function (err) {
                     if (err) return res.send(err);
-                    res.json({ok: true});
+                    // New img file name send back to update to menu collection 
+                    res.json({ok: true,imageUrl : fileName});
                 });
             }else {
                 res.json({ok: true});
