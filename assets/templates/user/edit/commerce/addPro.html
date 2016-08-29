@@ -52,16 +52,14 @@
 
                                 <md-input-container class="md-block">
                                     <label>Description</label>
-                                    <textarea  md-maxlength="100"
-                                               name="detailedDesc"
-                                               required
-                                               rows="4" cols="50"
-                                               ng-model="product.detailedDesc"></textarea>
+                                    <textarea type="area" required  md-maxlength="100" name="detailedDesc" rows="4"  ng-model="product.detailedDesc" > </textarea>
+
                                     <div ng-messages="productForm.detailedDesc.$error" ng-show="productForm.detailedDesc.$dirty">
                                         <div ng-message="required">Description is required.</div>
                                         <div ng-message="md-maxlength">The description must be less than 100 characters long.</div>
                                     </div>
                                 </md-input-container>
+
 
                                 <md-input-container class="md-block">
                                     <label>SKU</label>
@@ -77,6 +75,7 @@
                                         <div ng-message="pattern" class="my-message">That doesn't look like a valid SKU</div>
                                     </div>
                                 </md-input-container>
+
                                 <md-input-container>
                                     <label>Main Menu</label>
                                     <md-select
@@ -125,7 +124,7 @@
                         <table class="me-hours-table">
                             <thead>
                             <th >Sku</th>
-                            <th class="product-name-column">Product Name</th>
+                            <th width="25%">Product Name</th>
                             <th width="18%">
                                 <select ng-model="selection">
                                     <option value="Size" ng-selected="true">size</option>
@@ -133,8 +132,8 @@
                                 </select>
                             </th>
                             <th>Price</th>
-                            <th>Qty</th>
-                            <th width="13%" style="text-align: center;" >Add New</th>
+                            <th>Quantity</th>
+                            <th width="13%" style="text-align: center;" >New</th>
                             <th>&nbsp;</th>
                             </thead>
                             <tbody>
@@ -148,7 +147,7 @@
                                                ng-model="data.sku"
                                                ng-pattern="/^\d*[1-9]\d*$/"
                                                ng-readonly="product.checked">
-                                        <div ng-messages="priceAndVariantsForm['sku_'+$index].$error">
+                                        <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                             <div ng-message="required">SKU is required.</div>
                                             <div ng-message="md-maxlength">Must be less than 10 characters.</div>
                                             <div ng-message="pattern" class="my-message">That doesn't look like a valid SKU</div>
@@ -168,15 +167,33 @@
                                             <!--<div ng-message="md-maxlength">Must be less than 8 characters.</div>-->
                                         <!--</div>-->
                                     <!--</md-input-container>-->
-                                    <input type="text" name="size_{{$index}}" maxlength="8" ng-model="data.size">
-                                    <span ng-show="priceAndVariantsForm['size_' + $index].$error.maxlength">Maximum value exceeded</span><br />
+                                  <md-input-container>
+                                    <input class="product-name-column-input" name="size_{{$index}}" md-maxlength="8" ng-model="data.size" required>
+                                      <div ng-messages="priceAndVariantsForm['size_' + $index].$error">
+                                          <div ng-message="md-maxlength">Maximum value exceeded</div>
+
+                                      </div>
+
+                                  </md-input-container>
                                 </td>
-                                <td><input name="price_{{$index}}" type="text" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price">
-                                <span ng-show="priceAndVariantsForm['price_' + $index].$error.pattern">Invalid price value</span><br /></td>
+                                <td>
+                                  <md-input-container>
+                                    <input class="product-name-column-input" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required>
+                                      <div ng-messages="priceAndVariantsForm['price_' + $index].$error">
+                                          <div ng-message="pattern">Invalid price value</div>
+                                      </div>
+
+                                  </md-input-container>
                                 <!--<span ng-show="priceAndVariantsForm['price_' + $index].$error.maxlength">Too lengthy</span></td>-->
 
-                                <td><input name="qty_{{$index}}" type="number" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.quantity">
-                                    <span ng-show="priceAndVariantsForm['qty_' + $index].$error.pattern">Invalid qty value</span><br /></td>
+                                <td>
+                                  <md-input-container>
+                                    <input class="product-name-column-input" name="qty_{{$index}}"  ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.quantity" required>
+                                      <div ng-messages="priceAndVariantsForm['qty_' + $index].$error">
+                                          <div ng-message="pattern">Invalid quantity</div>
+                                      </div>
+
+                                  </md-input-container>
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
                                 <td><div style="background-color:#808080;margin:auto" class="icon icon-plus" ng-click="addVariant(product,$index,data)"></div></td>
                                 <td><img style="height:16px" src="../../../images/delete-icon.png" ng-click="deleteVariant($index,data)">
@@ -185,14 +202,14 @@
                             </tbody>
                         </table>
                     </div>
-                    </form>
-                    <div class="md-dialog-buttons" style="padding:0 39px">
-                        <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="addProductVariants(selection,variantsList,3)">Next
-                            </md-button>
+                        <div class="md-dialog-buttons" style="padding:0 39px">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                                <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid" class="me-default-button" ng-click="addProductVariants(selection,variantsList,3)">Next</md-button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+
                 </md-tab-body>
             </md-tab>
 

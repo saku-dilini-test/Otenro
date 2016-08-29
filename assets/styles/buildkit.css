@@ -191,10 +191,6 @@ input[type='url'],*/
 input[type='password'],
 textarea,
 select{
-    -moz-box-shadow: 0 0 5px 2px #d8d8d8;
-    -webkit-box-shadow: 0 0 5px 2px #d8d8d8;
-    box-shadow: 0 0 5px 2px #d8d8d8;
-    border: none;
     background-color: #FFF;
     color: #747474;
     font-size: 14px;
@@ -1319,8 +1315,8 @@ md-dialog{
     background-color: #f4f5f4;
     text-decoration: none;
 }
-.product-name-column {
-    width: 150px;
+.product-name-column-input {
+    width: 70px;
 }
 .selected {
 background-color: #f4f5f4;
