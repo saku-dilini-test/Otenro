@@ -38,7 +38,6 @@ module.exports = {
                 ThirdNavigation.create(subChild).exec(function(err, menu) {
                     res.json(menu);
                 });
-
             });
         });
     },
@@ -62,9 +61,8 @@ module.exports = {
 
 
         for (var i=0; i<tmpImage.length; i++) {
-            console.log("tmpImage[i] " + i + " " + tmpImage[i]);
 
-            if (!tmpImage[i].match("8080")){
+            if (!tmpImage[i].match("http")){
                 var imgeFileName = randomstring.generate()+".png";
 
                 var data = tmpImage[i].replace(/^data:image\/\w+;base64,/, "");
@@ -80,7 +78,6 @@ module.exports = {
                 finelImages = null;
             }
        }
-
 
         var searchQuery = {
             id : req.body.product.id
@@ -100,15 +97,6 @@ module.exports = {
         }
     },
 
-    //viewImages of the product
-    viewProductImages : function(req,res){
-        console.log("req.body.path+req.body.imageName " + req.body.path+req.body.imageName);
-        res.sendfile(req.body.path+req.body.imageName);
-        ThirdNavigation.create(product).exec(function(error,thirdNav){
-            if(error)sails.log.error(new Error("Error while creating a new Third Navigation :"+ error));
-            res.json(thirdNav);
-        });
-    },
 
     /**
      * Get ThridNaviagation(Product) Object by Id
