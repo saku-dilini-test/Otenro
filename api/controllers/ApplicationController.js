@@ -351,6 +351,12 @@ module.exports = {
                             "img" : "article-0-1A9F1DAA000005DC-669_634x447.jpg"
                         }
                     ],
+                    "variants":[{
+                      'sku': "1111",
+                      'size': "11",
+                      'price': "11",
+                      'quantity': 11
+                    }],
                     "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
                     "createdDate": Date.now()
                 },
@@ -363,6 +369,12 @@ module.exports = {
                             "img" : "OOMPizza-Pepperoni-300x233.jpg"
                         }
                     ],
+                    "variants":[{
+                      'sku': "1111",
+                      'size': "11",
+                      'price': "11",
+                      'quantity': 11
+                    }],
                     "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
                     "createdDate": Date.now()
                 }
@@ -377,6 +389,12 @@ module.exports = {
                             "img" : "pizza.jpg"
                         }
                     ],
+                    "variants":[{
+                      'sku': "1111",
+                      'size': "11",
+                      'price': "11",
+                      'quantity': 11
+                    }],
                     "imageUrl": "pizza.jpg",
                     "createdDate": Date.now()
                 },
@@ -389,6 +407,12 @@ module.exports = {
                             "img" : "melko-21290330.jpg"
                         }
                     ],
+                    "variants":[{
+                      'sku': "1111",
+                      'size': "11",
+                      'price': "11",
+                      'quantity': 11
+                    }],
                     "imageUrl": "melko-21290330.jpg",
                     "createdDate": Date.now()
                 }

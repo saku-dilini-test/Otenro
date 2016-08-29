@@ -42,6 +42,12 @@ module.exports = {
               ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "createdDate": Date.now()
             },
             {
@@ -56,6 +62,12 @@ module.exports = {
               ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "createdDate": Date.now()
             }
 //            {
@@ -99,6 +111,12 @@ module.exports = {
               ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "createdDate": Date.now()
             }
 //            {
@@ -162,6 +180,12 @@ module.exports = {
               ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "createdDate": Date.now()
             },
             {
@@ -176,6 +200,12 @@ module.exports = {
               ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "createdDate": Date.now()
             },
             {
@@ -190,6 +220,12 @@ module.exports = {
               ],
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "createdDate": Date.now()
             },
             {
@@ -203,6 +239,12 @@ module.exports = {
                   "img" : "bg.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "bg.png",
               "createdDate": Date.now()
             }
@@ -276,6 +318,12 @@ module.exports = {
                   "img" : "shirt_x.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "createdDate": Date.now()
             },
             {
@@ -289,6 +337,12 @@ module.exports = {
                   "img" : "shirt_y.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "shirt_y.png",
               "createdDate": Date.now()
             },
@@ -303,6 +357,12 @@ module.exports = {
                   "img" : "shirt_z.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "shirt_z.png",
               "createdDate": Date.now()
             }
@@ -326,6 +386,12 @@ module.exports = {
                   "img" : "short_x.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "short_x.png",
               "createdDate": Date.now()
             }
@@ -366,6 +432,12 @@ module.exports = {
                   "img" : "cloth3.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "cloth3.png",
               "createdDate": Date.now()
             }
@@ -394,6 +466,12 @@ module.exports = {
                   "img" : "a.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "a.png",
               "createdDate": Date.now()
             },
@@ -408,6 +486,12 @@ module.exports = {
                   "img" : "b.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "b.png",
               "createdDate": Date.now()
             },
@@ -422,6 +506,12 @@ module.exports = {
                   "img" : "c.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "c.png",
               "createdDate": Date.now()
             }
@@ -444,6 +534,12 @@ module.exports = {
                   "img" : "a.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "a.png",
               "createdDate": Date.now()
             },
@@ -458,6 +554,12 @@ module.exports = {
                   "img" : "b.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "b.png",
               "createdDate": Date.now()
             },
@@ -472,6 +574,12 @@ module.exports = {
                   "img" : "c.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "c.png",
               "createdDate": Date.now()
             }
@@ -495,6 +603,12 @@ module.exports = {
                   "img" : "e.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "e.png",
               "createdDate": Date.now()
             }
@@ -518,6 +632,12 @@ module.exports = {
                   "img" : "cloth3.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "cloth3.png",
               "createdDate": Date.now()
             }
@@ -544,6 +664,12 @@ module.exports = {
                   "img" : "item_01.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "item_01.png",
               "briefDesc" : "Masala brief des",
               "detailedDesc" : "Masala Pizza, details description. details description",
@@ -558,6 +684,12 @@ module.exports = {
                   "img" : "item_02.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "item_02.png",
               "briefDesc" : "New Pizza brief des",
               "detailedDesc" : "New Pizza, details description. details description",
@@ -582,6 +714,12 @@ module.exports = {
                   "img" : "item_01.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "item_01.png",
               "briefDesc" : "Indian brief des",
               "detailedDesc" : "Indian Pizza, details description. details description",
@@ -596,6 +734,12 @@ module.exports = {
                   "img" : "item_02.png"
                 }
               ],
+              "variants":[{
+                'sku': "1111",
+                'size': "11",
+                'price': "11",
+                'quantity': 11
+              }],
               "imageUrl": "item_02.png",
               "briefDesc" : "New Pizza brief des",
               "detailedDesc" : "New Pizza, details description. details description",
