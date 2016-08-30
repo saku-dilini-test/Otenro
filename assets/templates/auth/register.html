@@ -5,18 +5,22 @@
       <fieldset>
         <label>First Name</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
-        <input type="text" name="fname" ng-model="user.fname" ng-enter ="authSignUp(user);"  required/>
+        <input type="text" name="fname" ng-maxlength="20" ng-model="user.fname" ng-enter ="authSignUp(user);"  required/>
         <span class="help-block" ng-show="register.fname.$error.required">
           *
         </span>
+        <br>
+        <span ng-show="register.fname.$error.maxlength">Too lengthy</span>
       </fieldset>
       <fieldset>
         <label>Last Name</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
-        <input type="text" name="lname" ng-model="user.lname" ng-enter ="authSignUp(user);" required/>
+        <input type="text" name="lname" ng-maxlength="20" ng-model="user.lname" ng-enter ="authSignUp(user);" required/>
         <span class="help-block" ng-show="register.lname.$error.required">
           *
         </span>
+        <br>
+        <span ng-show="register.lname.$error.maxlength">Too lengthy</span>
       </fieldset>
       <fieldset>
         <label> Email </label>
