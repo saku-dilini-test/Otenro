@@ -8,7 +8,10 @@
                         <div class="md-dialog-header-nav clearfix">
                             <h1 class="pull-left">inventory</h1>
                             <fieldset class="col-2 pull-right reset-margin">
-                                <input type="text" required="" ng-model="search" class="me-search-input" name="name">
+                                <md-input-container class="search-container">
+                                    <input aria-label='Search' type="text" ng-model="search" class="me-search-input" name="name">
+
+                                </md-input-container>
                                 <input type="submit" value="search" class="me-search-button">
                             </fieldset>
                         </div>
@@ -28,7 +31,14 @@
                                 <!--<th>sale price</th>-->
                                 <!--<th>Delete</th>-->
                             <!--</thead>-->
-                            <tree-grid tree-data="inventoryList" icon-leaf="glyphicon glyphicon-globe" col-defs= "col_defs"></tree-grid>
+                            <tree-grid
+                                    tree-data="inventoryList"
+                                    icon-leaf="glyphicon glyphicon-unchecked"
+                                    icon-expand="glyphicon glyphicon-plus-sign"
+                                    icon-collapse ="glyphicon glyphicon-minus-sign"
+                                    col-defs= "col_defs">
+
+                            </tree-grid>
                             <!--<tbody class="scrolling">-->
                                 <!--<tr  dir-paginate="inventory in inventoryList | filter:search | itemsPerPage: pageSize" current-page="currentPage">-->
                                     <!--<td class="checkbox-row">-->
