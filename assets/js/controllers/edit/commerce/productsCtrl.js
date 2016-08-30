@@ -546,12 +546,22 @@
         };*/
 
         $scope.addImage = function (img) {
-            $scope.picFile = null;
-            $scope.myImage=null;
+
             if($scope.tmpImage.length < 8 && img && angular.element('#fileInput').val()!=''){
                 $scope.tmpImage.push(img);
                 angular.element('#fileInput').val(null);
-
+                $scope.picFile = null;
+                $scope.myImage=null;
+            }
+            else if(angular.element('#fileInput').val() == ''){
+                toastr.error('Please choose an image to upload', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else{
+                toastr.error('Only 8 images allowed', 'Warning', {
+                    closeButton: true
+                });
             }
         };
 
