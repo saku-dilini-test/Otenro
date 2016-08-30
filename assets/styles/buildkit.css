@@ -1831,3 +1831,6 @@ md-dialog .md-actions .md-button {
 .toast-message{
     margin-left: 10px;
 }
+button[disabled]{
+    cursor: not-allowed;
+}

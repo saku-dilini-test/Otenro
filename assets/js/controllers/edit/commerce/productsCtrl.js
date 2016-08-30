@@ -146,7 +146,7 @@
 
                 var file=evt.currentTarget.files[0];
                 var reader = new FileReader();
-
+                $scope.disable = false;
                 reader.onload = function (evt) {
                     $scope.$apply(function($scope){
                         $scope.myImage=evt.target.result;
@@ -569,24 +569,29 @@
             }
             }
         };*/
-
         $scope.addImage = function (img) {
 
-            if($scope.tmpImage.length < 8 && img && angular.element('#fileInput').val()!=''){
-                $scope.tmpImage.push(img);
-                angular.element('#fileInput').val(null);
-                $scope.picFile = null;
-                $scope.myImage=null;
-            }
-            else if(angular.element('#fileInput').val() == ''){
+            if(angular.element('#fileInput').val() == ''){
+                /*
+                    Disabling button if image area is empty
+                */
+                $scope.disable = true;
                 toastr.error('Please choose an image to upload', 'Warning', {
                     closeButton: true
                 });
             }
             else{
-                toastr.error('Only 8 images allowed', 'Warning', {
-                    closeButton: true
-                });
+                if($scope.tmpImage.length < 8 && img && angular.element('#fileInput').val()!=''){
+                    $scope.tmpImage.push(img);
+                    angular.element('#fileInput').val(null);
+                    $scope.picFile = null;
+                    $scope.myImage=null;
+                }
+                else{
+                    toastr.error('Only 8 images allowed', 'Warning', {
+                        closeButton: true
+                    });
+                }
             }
         };
 

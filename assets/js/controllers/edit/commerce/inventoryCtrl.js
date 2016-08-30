@@ -28,7 +28,7 @@
                 },
                 {
                     field:'size',
-                    displayName:'Size',
+                    displayName:'Size/Weight',
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='sizeForm'>"+
                                             "<md-input-container>"+
@@ -81,7 +81,7 @@
 
         var productList =  initialData.inventoryList;
         $scope.exportArray = [];
-        
+
         for(var i = 0; i <  initialData.inventoryList.length; i++){
             if(productList[i].hasOwnProperty("variants")){
                 productList[i]["children"] = productList[i]["variants"];
