@@ -89,13 +89,38 @@
                 });
             }
             else{
+                var arr = $scope.product.variants;
                 $scope.inserted = {
                     sku: null,
                     name: product.name,
                     price: 0,
                     quantity: 0
                 };
-                $scope.product.variants.push($scope.inserted);
+                if(arr.length<2){
+                    $scope.product.variants.push($scope.inserted);
+                }else{
+                /*
+                    checking if the size/weight already exist for the same product
+                */
+                    var array = [];
+                    for(var i =0; i<arr.length-1; i++){
+                        array.push(arr[i])
+                    }
+                    var size = variants.size;
+                    var found = array.some(function (el) {
+                        return el.size === size;
+                    });
+                    if (!found){
+                      $scope.product.variants.push($scope.inserted);
+                    }
+                    else if(found){
+                        toastr.error('size/weight already exist', 'Warning', {
+                            closeButton: true
+                        });
+                    }
+
+                }
+
             }
         };
         /**
