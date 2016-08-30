@@ -18,7 +18,7 @@
                 {
                     field:'sku',
                     displayName:'SKU',
-                    cellTemplate: "<div ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>",
+                    cellTemplate: "<a class='inventory-link' ng-href='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</a>",
                     cellTemplateScope: {
                         click: function(data) {
                             // go to product edit view
@@ -32,7 +32,7 @@
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='sizeForm'>"+
                                             "<md-input-container>"+
-                                                "<input name='size' ng-model='row.branch[col.field]' required/>"+
+                                                "<input aria-label='Size' class='product-name-column-input' name='size' ng-model='row.branch[col.field]' required/>"+
                                                 "<div ng-messages='sizeForm.size.$error'>"+
                                                     "<div ng-message='required'>This is required!</div>"+
                                                "</div>"+
@@ -46,12 +46,14 @@
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='quantityForm'>"+
                                             "<md-input-container>"+
-                                                "<input name='quantity' ng-model='row.branch[col.field]' required/>"+
+                                                "<input aria-label='Quantity' class='product-name-column-input' ng-pattern='/^\\d*$/' name='quantity' ng-model='row.branch[col.field]' required/>"+
                                                 "<div ng-messages='quantityForm.quantity.$error'>"+
                                                     "<div ng-message='required'>This is required!</div>"+
+                                                    "<div ng-message='pattern'>Invalid value!</div>"+
                                                "</div>"+
                                            "</md-input-container>"+
                                        "</ng-form></div>"
+
                 },
                 {
                     field:'price',
@@ -59,9 +61,10 @@
                     cellTemplate:  "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='priceForm'>"+
                                             "<md-input-container>"+
-                                                "<input name='price' ng-model='row.branch[col.field]' required/>"+
+                                                "<input aria-label='Price' class='product-name-column-input' ng-pattern='/^\\d+(?:[.]\\d{1,2}|$)$/' name='price' ng-model='row.branch[col.field]' required/>"+
                                                 "<div ng-messages='priceForm.price.$error'>"+
                                                     "<div ng-message='required'>This is required!</div>"+
+                                                    "<div ng-message='pattern'>Invalid value!</div>"+
                                                "</div>"+
                                            "</md-input-container>"+
                                        "</ng-form></div>"
@@ -204,7 +207,6 @@
                     //})
                 //}
             };
-
 
         /**
          * Delete a product from the inventory.

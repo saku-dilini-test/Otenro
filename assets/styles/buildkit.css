@@ -247,6 +247,10 @@ input[type='number'] + .me-percentage-placeholder{
     line-height: 30px !important;
 }
 
+.search-container{
+    display:block;
+}
+
 .me-dollar-input{
     padding-left: 25px !important;
     padding-right: 10px !important;
@@ -1830,4 +1834,8 @@ md-dialog .md-actions .md-button {
 }
 .toast-message{
     margin-left: 10px;
+}
+
+.inventory-link{
+    line-height: 2.5;
 }
