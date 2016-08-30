@@ -114,7 +114,7 @@
                                                 <span ng-show="storeSettingsForm.weekDaysOpenMinute.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                AM
+                                                AM to
                                             </td>
                                             <td>
                                                 <input type="number" name="weekDaysCloseHour" min="0" max="12" step="1" ng-model="openHours.weekDaysCloseHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
@@ -144,7 +144,7 @@
                                                 <span ng-show="storeSettingsForm.saturdayOpenMinute.$error.pattern">Invalid number!</span>
                                                 <span ng-show="storeSettingsForm.saturdayOpenMinute.$error.number">Please enter a number!</span>
                                             </td>
-                                            <td>AM</td>
+                                            <td>AM to</td>
                                             <td>
                                                 <input type="number" name="saturdayCloseHour" min="0" max="12" step="1" ng-model="openHours.saturdayCloseHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />
                                                 <span ng-show="storeSettingsForm.saturdayCloseHour.$error.pattern">Invalid number!</span>
@@ -174,7 +174,7 @@
                                                 <span ng-show="storeSettingsForm.sundayOpenMinute.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                AM
+                                                AM to
                                             </td>
                                             <td>
                                                 <input type="number" name="sundayCloseHour" min="0" max="12" step="1" ng-model="openHours.sundayCloseHour" ng-pattern="/^([0-9]|0[0-9]|1[0-2]|0?[1-9])$/" ng-required />

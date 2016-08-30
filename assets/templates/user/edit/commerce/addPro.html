@@ -127,14 +127,14 @@
                             <th width="25%">Product Name</th>
                             <th width="18%">
                                 <select ng-model="selection">
-                                    <option value="Size" ng-selected="true">size</option>
-                                    <option value="Weight">weight</option>
+                                    <option value="Size" ng-selected="true">Size</option>
+                                    <option value="Weight">Weight</option>
                                 </select>
                             </th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th width="13%" style="text-align: center;" >New</th>
-                            <th>&nbsp;</th>
+                            <th>Delete</th>
                             </thead>
                             <tbody>
 
@@ -150,7 +150,7 @@
                                         <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                             <div ng-message="required">SKU is required.</div>
                                             <div ng-message="md-maxlength">Must be less than 10 characters.</div>
-                                            <div ng-message="pattern" class="my-message">That doesn't look like a valid SKU</div>
+                                            <div ng-message="pattern" style="line-height:13px;" class="my-message">That doesn't look like a valid SKU</div>
                                         </div>
                                     </md-input-container>
                                 </td>
