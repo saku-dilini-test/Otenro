@@ -207,6 +207,12 @@ select{
 	border-radius: 2px;
 }
 
+.input-shadow-border{
+    box-shadow: 0 0 5px 2px #d8d8d8 !important;
+    border:1px;
+}
+
+
 input[type='email'],
 input[type='url']
 {
@@ -1303,11 +1309,10 @@ md-dialog{
    height:200px;
 }
 .md-dialog-full{
-    height: 322px;
     overflow-x: hidden;
     overflow-y: scroll;
     position: relative;
-    padding: 20px 0;
+    padding: 0 40px;
 }
 
 .products-options a{
@@ -1838,4 +1843,29 @@ md-dialog .md-actions .md-button {
 
 .inventory-link{
     line-height: 2.5;
+}
+
+.product-name{
+    margin: auto auto 18px;
+    font-size: inherit;
+    /* border-bottom: 1px solid rgba(0,0,0,0.12); */
+    padding-bottom: 4px;
+}
+
+.add-icon{
+    background-color: #808080;
+    margin: auto;
+}
+
+.delete-icon{
+    margin: auto;
+    display:block;
+    height:16px;
+}
+
+
+/*Making a theme. Add your specified colors here. define as color... */
+
+.color-link{
+    color: #2196F3 !important;
 }

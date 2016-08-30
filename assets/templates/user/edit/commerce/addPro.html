@@ -1,4 +1,4 @@
-<md-dialog aria-label="Manage Products" style="width:800px">
+<md-dialog aria-label="Manage Products" style="width:850px">
     <md-dialog-content>
         <md-tabs  md-no-ink-bar ="false"  md-no-bar  md-center-tabs="false" md-selected="selectedTab"  md-autoselect="false"
                  md-dynamic-height="true">
@@ -16,7 +16,7 @@
                                     <div class="md-list-item-text" layout="column">
                                         <h1>{{type.type}}</h1>
                                         <h4>{{type.description}}</h4>
-                                        <p>{{type.status}}</p>
+                                        <p class="color-link">{{type.status}}</p>
                                     </div>
                                 </md-list-item>
                             </md-list>
@@ -52,7 +52,7 @@
 
                                 <md-input-container class="md-block">
                                     <label>Description</label>
-                                    <textarea type="area" required  md-maxlength="100" name="detailedDesc" rows="4"  ng-model="product.detailedDesc" > </textarea>
+                                    <textarea type="area" required  md-maxlength="100" name="detailedDesc" rows="2"  ng-model="product.detailedDesc" > </textarea>
 
                                     <div ng-messages="productForm.detailedDesc.$error" ng-show="productForm.detailedDesc.$dirty">
                                         <div ng-message="required">Description is required.</div>
@@ -126,7 +126,7 @@
                             <th >Sku</th>
                             <th width="25%">Product Name</th>
                             <th width="18%">
-                                <select ng-model="selection">
+                                <select ng-model="selection" class="input-shadow-border">
                                     <option value="Size" ng-selected="true">Size</option>
                                     <option value="Weight">Weight</option>
                                 </select>
@@ -154,7 +154,7 @@
                                         </div>
                                     </md-input-container>
                                 </td>
-                                <td ng-model="data.name">{{data.name}}</td>
+                                <td ng-model="data.name"><p class="product-name">{{data.name}}</p></td>
                                 <td>
                                     <!--<md-input-container>-->
                                         <!--<input md-maxlength="8"-->
@@ -197,8 +197,8 @@
 
                                   </md-input-container>
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
-                                <td><div style="background-color:#808080;margin:auto" class="icon icon-plus" ng-click="addVariant(product,$index,data)"></div></td>
-                                <td><img style="height:16px" src="../../../images/delete-icon.png" ng-click="deleteVariant($index,data)">
+                                <td><div class="icon icon-plus add-icon" ng-click="addVariant(product,$index,data)"></div></td>
+                                <td><img class="delete-icon" src="../../../images/delete-icon.png" ng-click="deleteVariant($index,data)">
                                 </td>
                             </tr>
                             </tbody>
