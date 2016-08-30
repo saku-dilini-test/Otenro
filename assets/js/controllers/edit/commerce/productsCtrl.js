@@ -146,6 +146,7 @@
 
                 var file=evt.currentTarget.files[0];
                 var reader = new FileReader();
+                //Enabling Upload button
                 $scope.disable = false;
                 reader.onload = function (evt) {
                     $scope.$apply(function($scope){

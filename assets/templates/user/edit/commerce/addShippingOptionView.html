@@ -183,6 +183,7 @@
                                 <input type="number" ng-maxlength="10" ng-pattern="/^[a-zA-Z0-9]*$/" name="number" required ng-model="pickup.number"  />
                                 <br />
                                 <span ng-show="pickUp.number.$error.pattern">Numbers only</span>
+                                <span ng-show="pickUp.number.$error.maxlength">Too lengthy</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>street Address</label>
