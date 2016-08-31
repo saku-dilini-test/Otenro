@@ -46,8 +46,8 @@ module.exports = {
                 'name': "Grilled Chicken Salad",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "100",
+                'quantity': "100"
               }],
               "createdDate": Date.now()
             },
@@ -67,8 +67,8 @@ module.exports = {
                 'name': "Spicy Thai Salad with Grilled Chicken",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "200",
+                'quantity': "200"
               }],
               "createdDate": Date.now()
             }
@@ -117,8 +117,8 @@ module.exports = {
                 "name": "Chocolate Fudge Brownie with Vanila Ice Cream",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "100",
+                'quantity': "100"
               }],
               "createdDate": Date.now()
             }
@@ -187,8 +187,8 @@ module.exports = {
                 "name": "Grilled Garlic Lamb Chops",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "100",
+                'quantity': "100"
               }],
               "createdDate": Date.now()
             },
@@ -208,8 +208,8 @@ module.exports = {
                 "name": "Beef Stake with Smashed Potatoes",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "200",
+                'quantity': "200"
               }],
               "createdDate": Date.now()
             },
@@ -229,8 +229,8 @@ module.exports = {
                 "name": "BBQ Pork Ribs",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "300",
+                'quantity': "300"
               }],
               "createdDate": Date.now()
             },
@@ -249,8 +249,8 @@ module.exports = {
                 "name": "Pina Colada",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "400",
+                'quantity': "400"
               }],
               "imageUrl": "bg.png",
               "createdDate": Date.now()
@@ -329,8 +329,8 @@ module.exports = {
                 "name": "Shirt x",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "250",
+                'quantity': "250"
               }],
               "createdDate": Date.now()
             },
@@ -349,8 +349,8 @@ module.exports = {
                 "name": "Shirt y",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "350",
+                'quantity': "350"
               }],
               "imageUrl": "shirt_y.png",
               "createdDate": Date.now()
@@ -370,8 +370,8 @@ module.exports = {
                 "name": "Shirt z",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "450",
+                'quantity': "450"
               }],
               "imageUrl": "shirt_z.png",
               "createdDate": Date.now()
@@ -400,8 +400,8 @@ module.exports = {
                 "name": "Short x",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "250",
+                'quantity': "250"
               }],
               "imageUrl": "short_x.png",
               "createdDate": Date.now()
@@ -447,8 +447,8 @@ module.exports = {
                 "name": "Beach Suit",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "250",
+                'quantity': "250"
               }],
               "imageUrl": "cloth3.png",
               "createdDate": Date.now()
@@ -482,8 +482,8 @@ module.exports = {
                 "name": "Shirt x",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "250",
+                'quantity': "250"
               }],
               "imageUrl": "a.png",
               "createdDate": Date.now()
@@ -503,8 +503,8 @@ module.exports = {
                 "name": "Shirt y",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "350",
+                'quantity': "350"
               }],
               "imageUrl": "b.png",
               "createdDate": Date.now()
@@ -525,7 +525,7 @@ module.exports = {
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
-                'quantity': 11
+                'quantity': "450"
               }],
               "imageUrl": "c.png",
               "createdDate": Date.now()
@@ -554,7 +554,7 @@ module.exports = {
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
-                'quantity': 11
+                'quantity': "250"
               }],
               "imageUrl": "a.png",
               "createdDate": Date.now()
@@ -575,7 +575,7 @@ module.exports = {
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
-                'quantity': 11
+                'quantity': "350"
               }],
               "imageUrl": "b.png",
               "createdDate": Date.now()
@@ -596,7 +596,7 @@ module.exports = {
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
-                'quantity': 11
+                'quantity': "450"
               }],
               "imageUrl": "c.png",
               "createdDate": Date.now()
@@ -626,7 +626,7 @@ module.exports = {
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
-                'quantity': 11
+                'quantity': "250"
               }],
               "imageUrl": "e.png",
               "createdDate": Date.now()
@@ -656,7 +656,7 @@ module.exports = {
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
-                'quantity': 11
+                'quantity': "250"
               }],
               "imageUrl": "cloth3.png",
               "createdDate": Date.now()
@@ -689,7 +689,7 @@ module.exports = {
                 'sku': "1111",
                 'size': "11",
                 'price': "11",
-                'quantity': 11
+                'quantity': "250"
               }],
               "imageUrl": "item_01.png",
               "briefDesc" : "Masala brief des",
@@ -709,8 +709,8 @@ module.exports = {
                 "name" : "New Pizza",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "300",
+                'quantity': "100"
               }],
               "imageUrl": "item_02.png",
               "briefDesc" : "New Pizza brief des",
@@ -740,8 +740,8 @@ module.exports = {
                 "name": "Indian Pizza",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "350",
+                'quantity': "100"
               }],
               "imageUrl": "item_01.png",
               "briefDesc" : "Indian brief des",
@@ -761,8 +761,8 @@ module.exports = {
                 "name" : "New Pizza",
                 'sku': "1111",
                 'size': "11",
-                'price': "11",
-                'quantity': 11
+                'price': "225",
+                'quantity': "15"
               }],
               "imageUrl": "item_02.png",
               "briefDesc" : "New Pizza brief des",

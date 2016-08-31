@@ -18,7 +18,7 @@
                 {
                     field:'sku',
                     displayName:'SKU',
-                    cellTemplate: "<a class='inventory-link' ng-href='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</a>",
+                    cellTemplate: "<div ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>",
                     cellTemplateScope: {
                         click: function(data) {
                             // go to product edit view
@@ -32,12 +32,14 @@
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='sizeForm'>"+
                                             "<md-input-container>"+
-                                                "<input aria-label='Size' class='product-name-column-input' name='size' ng-model='row.branch[col.field]' required/>"+
+                                                "<input name='size' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^([a-zA-Z0-9 ]+)$/' required/>"+
                                                 "<div ng-messages='sizeForm.size.$error'>"+
                                                     "<div ng-message='required'>This is required!</div>"+
+                                                    "<div ng-message='md-maxlength'>Too lengthy</div>"+
+                                                    "<div ng-message='pattern'>That doesn't look like a valid size!</div>"+
                                                "</div>"+
                                            "</md-input-container>"+
-                                       "</form></div>"
+                                       "</ng-form></div>"
 
                 },
                 {
@@ -46,14 +48,14 @@
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='quantityForm'>"+
                                             "<md-input-container>"+
-                                                "<input aria-label='Quantity' class='product-name-column-input' ng-pattern='/^\\d*$/' name='quantity' ng-model='row.branch[col.field]' required/>"+
-                                                "<div ng-messages='quantityForm.quantity.$error'>"+
+                                                "<input name='quantity' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^[0-9]*$/' required/>"+
+                                                "<div ng-messages='quantityForm.quantity.$error' ng-show='quantityForm.quantity.$dirty'>"+
                                                     "<div ng-message='required'>This is required!</div>"+
-                                                    "<div ng-message='pattern'>Invalid value!</div>"+
+                                                    "<div ng-message='md-maxlength'>Too lengthy!</div>"+
+                                                    "<div ng-message='pattern'>That doesn't look like a valid quantity!</div>"+
                                                "</div>"+
                                            "</md-input-container>"+
                                        "</ng-form></div>"
-
                 },
                 {
                     field:'price',
@@ -61,10 +63,11 @@
                     cellTemplate:  "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='priceForm'>"+
                                             "<md-input-container>"+
-                                                "<input aria-label='Price' class='product-name-column-input' ng-pattern='/^\\d+(?:[.]\\d{1,2}|$)$/' name='price' ng-model='row.branch[col.field]' required/>"+
+                                                "<input name='price' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^[0-9]{0,8}(\.[0-9]{2})?$/' required/>"+
                                                 "<div ng-messages='priceForm.price.$error'>"+
                                                     "<div ng-message='required'>This is required!</div>"+
-                                                    "<div ng-message='pattern'>Invalid value!</div>"+
+                                                    "<div ng-message='md-maxlength'>Too lengthy</div>"+
+                                                    "<div ng-message='pattern'>That doesn't look like a valid price!</div>"+
                                                "</div>"+
                                            "</md-input-container>"+
                                        "</ng-form></div>"
@@ -84,7 +87,7 @@
 
         var productList =  initialData.inventoryList;
         $scope.exportArray = [];
-        
+
         for(var i = 0; i <  initialData.inventoryList.length; i++){
             if(productList[i].hasOwnProperty("variants")){
                 productList[i]["children"] = productList[i]["variants"];
@@ -207,6 +210,7 @@
                     //})
                 //}
             };
+
 
         /**
          * Delete a product from the inventory.

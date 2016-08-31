@@ -89,13 +89,38 @@
                 });
             }
             else{
+                var arr = $scope.product.variants;
                 $scope.inserted = {
                     sku: null,
                     name: product.name,
                     price: 0,
                     quantity: 0
                 };
-                $scope.product.variants.push($scope.inserted);
+                if(arr.length<2){
+                    $scope.product.variants.push($scope.inserted);
+                }else{
+                /*
+                    checking if the size/weight already exist for the same product
+                */
+                    var array = [];
+                    for(var i =0; i<arr.length-1; i++){
+                        array.push(arr[i])
+                    }
+                    var size = variants.size;
+                    var found = array.some(function (el) {
+                        return el.size === size;
+                    });
+                    if (!found){
+                      $scope.product.variants.push($scope.inserted);
+                    }
+                    else if(found){
+                        toastr.error('size/weight already exist', 'Warning', {
+                            closeButton: true
+                        });
+                    }
+
+                }
+
             }
         };
         /**
@@ -121,7 +146,8 @@
 
                 var file=evt.currentTarget.files[0];
                 var reader = new FileReader();
-
+                //Enabling Upload button
+                $scope.disable = false;
                 reader.onload = function (evt) {
                     $scope.$apply(function($scope){
                         $scope.myImage=evt.target.result;
@@ -544,24 +570,29 @@
             }
             }
         };*/
-
         $scope.addImage = function (img) {
 
-            if($scope.tmpImage.length < 8 && img && angular.element('#fileInput').val()!=''){
-                $scope.tmpImage.push(img);
-                angular.element('#fileInput').val(null);
-                $scope.picFile = null;
-                $scope.myImage=null;
-            }
-            else if(angular.element('#fileInput').val() == ''){
+            if(angular.element('#fileInput').val() == ''){
+                /*
+                    Disabling button if image area is empty
+                */
+                $scope.disable = true;
                 toastr.error('Please choose an image to upload', 'Warning', {
                     closeButton: true
                 });
             }
             else{
-                toastr.error('Only 8 images allowed', 'Warning', {
-                    closeButton: true
-                });
+                if($scope.tmpImage.length < 8 && img && angular.element('#fileInput').val()!=''){
+                    $scope.tmpImage.push(img);
+                    angular.element('#fileInput').val(null);
+                    $scope.picFile = null;
+                    $scope.myImage=null;
+                }
+                else{
+                    toastr.error('Only 8 images allowed', 'Warning', {
+                        closeButton: true
+                    });
+                }
             }
         };
 
