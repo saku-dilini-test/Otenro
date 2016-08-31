@@ -204,11 +204,14 @@ module.exports = {
             var mime = require('mime');
 
             shell.cd(appPath);
+            console.log("appPath " + appPath);
             shell.exec('ionic build android', {async: true}, function (code, stdout, stderr) {
+
                 if (code==0){
                     /*shell.exec('cordova plugin rm cordova-plugin-console', {async: true}, function (code1, stdout, stderr) {
                         if (code1==0){*/
                             shell.exec('cordova build --release android', {async: true}, function (code2, stdout, stderr) {
+
                                 if (code2==0){
                                             shell.mv('-n', 'my-release-key.keystore', appPath + '/platforms/android/build/outputs/apk/');
                                             shell.cd(appPath + '/platforms/android/build/outputs/apk/');
@@ -216,22 +219,24 @@ module.exports = {
                                                 'SHA1 -keystore my-release-key.keystore android-release-unsigned.apk ' +
                                                 'alias_name -storepass abcd1234 -keypass abcd1234 ', {async: true}, function (code4, stdout, stderr) {
                                                 if (code4==0){
-                                                    fs.stat(appPath + '/platforms/android/build/outputs/apk/'+appName+'.apk', function(err, fileStat) {
+
+                                                    fs.stat(appPath + '/platforms/android/build/outputs/apk/'+appName.replace(/\s/g, '')+'.apk', function(err, fileStat) {
                                                         if (err) {
                                                             if (err.code == 'ENOENT') {
                                                                 console.log('Does not exist.');
                                                             }
                                                         } else {
                                                             if (fileStat.isFile()) {
-                                                                fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/'+appName+'.apk');
+                                                                fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/'+appName.replace(/\s/g, '')+'.apk');
                                                             } else if (fileStat.isDirectory()) {
                                                                 console.log('Directory found.');
                                                             }
                                                         }
                                                     });
-                                                    shell.exec('zipalign -v 4 android-release-unsigned.apk '+appName+'.apk', {async: true}, function (code5, stdout, stderr) {
+                                                    shell.exec('zipalign -v 4 android-release-unsigned.apk '+appName.replace(/\s/g, '')+'.apk', {async: true}, function (code5, stdout, stderr) {
                                                         if (code5==0){
-                                                             var file = appPath + '/platforms/android/build/outputs/apk/'+appName+'.apk';
+
+                                                             var file = appPath + '/platforms/android/build/outputs/apk/'+appName.replace(/\s/g, '')+'.apk';
 
                                                              var filename = path.basename(file);
                                                              var mimetype = mime.lookup(file);
@@ -240,6 +245,7 @@ module.exports = {
                                                              res.setHeader('Content-type', mimetype);
 
                                                              var filestream = fs.createReadStream(file);
+
                                                              filestream.pipe(res);
                                                             /*res.json('ok');*/
                                                         }else{
