@@ -1844,8 +1844,13 @@ button[disabled]{
     cursor: not-allowed;
 }
 
-.inventory-link{
+.sku-link{
     line-height: 2.5;
+    cursor:pointer;
+}
+
+.sku-link:hover{
+    text-decoration:underline;
 }
 
 .product-name{
@@ -1858,12 +1863,14 @@ button[disabled]{
 .add-icon{
     background-color: #808080;
     margin: auto;
+    cursor:pointer;
 }
 
 .delete-icon{
     margin: auto;
     display:block;
     height:16px;
+    cursor:pointer;
 }
 
 

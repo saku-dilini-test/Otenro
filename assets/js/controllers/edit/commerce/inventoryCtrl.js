@@ -18,7 +18,7 @@
                 {
                     field:'sku',
                     displayName:'SKU',
-                    cellTemplate: "<div ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>",
+                    cellTemplate: "<div class='sku-link color-link' ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>",
                     cellTemplateScope: {
                         click: function(data) {
                             // go to product edit view
