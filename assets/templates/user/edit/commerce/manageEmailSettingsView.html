@@ -48,7 +48,7 @@
                                 <!--<md-button class="me-default-button" ng-click="saveEmailDeliInfo(emailDel,'save')">Save-->
                                 <!--</md-button>-->
                                 <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                                <md-button class="me-default-button" ng-click="saveEmailDeliInfo(emailDel,'next')">Next</md-button>
+                                <md-button class="me-default-button" ng-disabled="emailDeliveryForm.$invalid" ng-click="saveEmailDeliInfo(emailDel,'next')">Next</md-button>
                             </div>
 
                         </div>
@@ -64,11 +64,12 @@
 
                         </div>
                     </div>
+                    <form name="headerFooterForm" novalidate>
                     <div class="md-dialog-main">
                         <fieldset>
                             <label>Header</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <trix-editor angular-trix rows="4" ng-model="emailHF.header"></trix-editor>
+                            <trix-editor angular-trix rows="4" ng-model="emailHF.header" required></trix-editor>
                             <!--<div class="file-upload-wrapper clearfix">-->
                                 <!--<p class="file-upload-msg">Upload your product images</p>-->
                                 <!--<div class="pull-left">-->
@@ -114,12 +115,13 @@
                             </div>
                         </fieldset>
                     </div>
+                    </form>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="updateHeaderFooterSettings(picFileHeader,picFileFooter,emailHF,'save')">Save
                             </md-button>
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateHeaderFooterSettings(picFileHeader,picFileFooter,emailHF,'next')">Next</md-button>
+                            <md-button class="me-default-button" ng-disabled="headerFooterForm.$invalid" ng-click="updateHeaderFooterSettings(picFileHeader,picFileFooter,emailHF,'next')">Next</md-button>
                         </div>
                     </div>
 
@@ -134,21 +136,23 @@
 
                         </div>
                     </div>
+                    <form name="orderConfirmationForm" novalidate>
                     <div class="md-dialog-main">
                         <fieldset>
-                            <label>order confirm email</label>
+                            <label>order confirmed email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <trix-editor angular-trix rows="4" ng-model="OConfirm.orderConfirmedEmail"></trix-editor>
+                            <trix-editor angular-trix rows="4" ng-model="OConfirm.orderConfirmedEmail" required></trix-editor>
                         </fieldset>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order confirm')">send test email</md-button>
 
                     </div>
+                    </form>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="updateEmailSettings(OConfirm,'save')">Save
                             </md-button>
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(OConfirm,'next')">Next</md-button>
+                            <md-button class="me-default-button" ng-disabled="orderConfirmationForm.$invalid" ng-click="updateEmailSettings(OConfirm,'next')">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -162,20 +166,22 @@
 
                         </div>
                     </div>
+                    <form name="orderFulfillForm" novalidate>
                     <div class="md-dialog-main">
                         <fieldset>
                             <label>order fulfilled email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <trix-editor angular-trix rows="4" ng-model="Ofulfilled.orderFulfilledEmail"></trix-editor>
+                            <trix-editor angular-trix rows="4" ng-model="Ofulfilled.orderFulfilledEmail" required></trix-editor>
                         </fieldset>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order Fulfilled')">send test email</md-button>
                     </div>
+                    </form>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="updateEmailSettings(Ofulfilled,'save')">Save
                             </md-button>
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(Ofulfilled,'next')">Next</md-button>
+                            <md-button class="me-default-button" ng-disabled="orderFulfillForm.$invalid" ng-click="updateEmailSettings(Ofulfilled,'next')">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -189,20 +195,22 @@
 
                         </div>
                     </div>
+                    <form name="orderRefundForm" novalidate>
                     <div class="md-dialog-main">
                         <fieldset>
-                            <label>order refund email</label>
+                            <label>order refunded email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <trix-editor angular-trix rows="4" ng-model="ORefund.orderRefundEmail"></trix-editor>
+                            <trix-editor angular-trix rows="4" ng-model="ORefund.orderRefundEmail" required></trix-editor>
                         </fieldset>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order Refund')">send test email</md-button>
                     </div>
+                    </form>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="updateEmailSettings(ORefund,'save')">Save
                             </md-button>
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(ORefund,'next')">Finish</md-button>
+                            <md-button class="me-default-button" ng-disabled="orderRefundForm.$invalid" ng-click="updateEmailSettings(ORefund,'next')">Finish</md-button>
                         </div>
                     </div>
                 </md-tab-body>

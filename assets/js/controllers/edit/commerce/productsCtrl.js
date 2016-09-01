@@ -92,8 +92,8 @@
                 $scope.inserted = {
                     sku: null,
                     name: product.name,
-                    price: 0,
-                    quantity: 0
+                    price: null,
+                    quantity: null
                 };
                 $scope.product.variants.push($scope.inserted);
             }
