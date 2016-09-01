@@ -154,12 +154,14 @@
             commerceService.getMainMenuList()
                 .success(function (result) {
                     if (result == '') {
+                        $scope.mainMenuHide = true;
                         commerceService.getCategoryList()
                             .success(function (secondResult) {
-                                $scope.mainMenu = secondResult;
+                                $scope.child = secondResult;
+
                                 if (secondResult[0].templateName == 'foodDemoApp' || secondResult[0].templateName == 'foodDemoApp2'
                                     || secondResult[0].templateName == 'clothingApp' || secondResult[0].templateName == 'ECommerceApp') {
-                                    $scope.show = false;
+                                    $scope.childMenuHide = false;
                                 }
                             }).error(function (error) {
                             toastr.error('Loading Error', 'Warning', {
@@ -168,6 +170,8 @@
                         })
                     }
                     else {
+                        $scope.mainMenuHide = false;
+                        $scope.childMenuHide = false;
                         $scope.mainMenu = result;
                     }
 
@@ -288,7 +292,6 @@
                       closeButton: true
                   });
               }else {
-
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
                       toastr.success('New Product has been added to the inventory.', 'Awsome!', {
                           closeButton: true
