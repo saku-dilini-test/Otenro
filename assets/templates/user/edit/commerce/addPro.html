@@ -76,24 +76,24 @@
                                     </div>
                                 </md-input-container>
 
-                                <md-input-container>
+                                <md-input-container ng-hide="mainMenuHide">
                                     <label>Main Menu</label>
                                     <md-select
                                             md-no-asterisk = flase
                                             placeholder="Select Main Menu"
                                             ng-model="product.mainId"
                                             ng-change="setChild(product.mainId)"
-                                            required>
+                                            >
                                         <md-option ng-value="main.id" ng-repeat="main in mainMenu">{{main.name}}
                                         </md-option>
                                     </md-select>
                                 </md-input-container>
 
                                 <!--Disabled for now-->
-                                <md-input-container ng-hide="show == false">
+                                <md-input-container ng-hide="childMenuHide">
                                     <label>Sub Category</label>
                                     <md-select class="" placeholder="Select Child Menu" ng-model="product.childId"
-                                               >
+                                               required>
                                         <md-option ng-value="child.id" ng-repeat="child in child">{{child.name}}
                                         </md-option>
                                     </md-select>
