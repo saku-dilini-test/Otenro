@@ -82,8 +82,7 @@
                                             md-no-asterisk = flase
                                             placeholder="Select Main Menu"
                                             ng-model="product.mainId"
-                                            ng-change="setChild(product.mainId)"
-                                            >
+                                            ng-change="setChild(product.mainId)">
                                         <md-option ng-value="main.id" ng-repeat="main in mainMenu">{{main.name}}
                                         </md-option>
                                     </md-select>
