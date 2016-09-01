@@ -25,9 +25,9 @@
 
         $scope.refreshData = function() {
         $scope.gridOptions1.data = $filter('filter')($scope.ordersList, $scope.search, undefined);
-        $scope.gridOptions2.data = $filter('filter')($scope.ordersList, $scope.search, undefined);
-        $scope.gridOptions3.data = $filter('filter')($scope.ordersList, $scope.search, undefined);
-        $scope.gridOptions4.data = $filter('filter')($scope.ordersList, $scope.search, undefined);
+        $scope.gridOptions2.data = $filter('filter')($scope.fulfill, $scope.search, undefined);
+        $scope.gridOptions3.data = $filter('filter')($scope.unfulfilled, $scope.search, undefined);
+        $scope.gridOptions4.data = $filter('filter')($scope.refund, $scope.search, undefined);
         }
 
         var fakeI18n = function (title) {
@@ -117,6 +117,7 @@
             enableRowHeaderSelection: false,
             exporterMenuCsv: true,
             enableGridMenu: true,
+            enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
                 {name: 'createdDate'},
@@ -151,6 +152,7 @@
             enableRowHeaderSelection: false,
             exporterMenuCsv: true,
             enableGridMenu: true,
+            enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
                 {name: 'createdDate'},
@@ -187,6 +189,7 @@
             enableRowHeaderSelection: false,
             exporterMenuCsv: true,
             enableGridMenu: true,
+            enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
                 {name: 'createdDate'},
