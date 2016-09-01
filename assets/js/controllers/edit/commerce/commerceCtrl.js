@@ -665,6 +665,7 @@
                         var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                         $scope.selectedIndex = index;
                     }
+                    $scope.enableTab = false;
                     toastr.success('Email Settings has been changed ', 'Success', {
                         closeButton: true
                     });
@@ -750,29 +751,34 @@
             appId: $rootScope.appId
         };
 
+        $scope.enableTab = true;
         commerceService.getEmailSettings(prams)
             .success(function (result) {
+
                 $scope.email = result[0];
-                $scope.emailDel = {
-                    fromEmail :$scope.email.fromEmail,
-                    replyToEmail :$scope.email.replyToEmail,
-                    alertEmail :$scope.email.alertEmail,
-                    alertAt :$scope.email.alertAt
-                };
-                $scope.emailHF = {
-                    header : $scope.email.header,
-                    footer : $scope.email.footer
-                }
-                $scope.picFileFooter = 'images/'+$scope.email.imageFooter
-                $scope.picFileHeader = 'images/'+$scope.email.imageHeader
-                $scope.OConfirm = {
-                    orderConfirmedEmail : $scope.email.orderConfirmedEmail
-                }
-                $scope.Ofulfilled = {
-                    orderFulfilledEmail : $scope.email.orderFulfilledEmail
-                }
-                $scope.ORefund = {
-                    orderRefundEmail : $scope.email.orderRefundEmail
+                if (!angular.isUndefined($scope.email)) {
+                    $scope.enableTab = false;
+                    $scope.emailDel = {
+                        fromEmail: $scope.email.fromEmail,
+                        replyToEmail: $scope.email.replyToEmail,
+                        alertEmail: $scope.email.alertEmail,
+                        alertAt: $scope.email.alertAt
+                    };
+                    $scope.emailHF = {
+                        header: $scope.email.header,
+                        footer: $scope.email.footer
+                    }
+                    $scope.picFileFooter = 'images/' + $scope.email.imageFooter
+                    $scope.picFileHeader = 'images/' + $scope.email.imageHeader
+                    $scope.OConfirm = {
+                        orderConfirmedEmail: $scope.email.orderConfirmedEmail
+                    }
+                    $scope.Ofulfilled = {
+                        orderFulfilledEmail: $scope.email.orderFulfilledEmail
+                    }
+                    $scope.ORefund = {
+                        orderRefundEmail: $scope.email.orderRefundEmail
+                    }
                 }
             }).error(function (error) {
             alert("MainMenu Loading Error : " + error);
@@ -826,7 +832,7 @@
                 }
             }
                 }).error(function (error) {
-                alert("MainMenu Loading Error : " + error);
+                console.log("MainMenu Loading Error : " + error);
             });
 
         };
