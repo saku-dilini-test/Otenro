@@ -170,7 +170,7 @@
                                   <md-input-container>
                                     <input class="product-name-column-input" name="size_{{$index}}" md-maxlength="8"
                                            ng-pattern="/^[0-9a-zA-Z ]+$/" ng-model="data.size" required>
-                                      <div ng-messages="priceAndVariantsForm['size_' + $index].$error">
+                                      <div ng-messages="priceAndVariantsForm['size_' + $index].$error" ng-show="priceAndVariantsForm['size_'+$index].$dirty">
                                           <div ng-message="md-maxlength">Maximum value exceeded</div>
                                           <div ng-message="pattern" class="my-message">That doesn't look like a valid size or weight</div>
 
@@ -181,7 +181,7 @@
                                 <td>
                                   <md-input-container>
                                     <input class="product-name-column-input" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required>
-                                      <div ng-messages="priceAndVariantsForm['price_' + $index].$error">
+                                      <div ng-messages="priceAndVariantsForm['price_' + $index].$error" ng-show="priceAndVariantsForm['price_'+$index].$dirty">
                                           <div ng-message="pattern">Invalid price value</div>
                                       </div>
 
