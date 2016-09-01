@@ -1844,8 +1844,13 @@ button[disabled]{
     cursor: not-allowed;
 }
 
-.inventory-link{
+.sku-link{
     line-height: 2.5;
+    cursor:pointer;
+}
+
+.sku-link:hover{
+    text-decoration:underline;
 }
 
 .product-name{
@@ -1858,14 +1863,36 @@ button[disabled]{
 .add-icon{
     background-color: #808080;
     margin: auto;
+    cursor:pointer;
 }
 
 .delete-icon{
     margin: auto;
     display:block;
     height:16px;
+    cursor:pointer;
 }
 
+.md-container-modify{
+    width: 80px;
+}
+.md-container-modify .md-char-counter{
+    font-size:9px;
+}
+
+@-moz-document url-prefix() {
+   md-input-container .md-input {
+      border-bottom-style: solid;
+   }
+ }
+
+.gylphycon-treegrid{
+    font-size: 14px;
+    color: #c3c3c3;
+}
+.gylphycon-treegrid:empty{
+    width: 20px;
+}
 
 /*Making a theme. Add your specified colors here. define as color... */
 

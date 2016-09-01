@@ -18,7 +18,7 @@
                 {
                     field:'sku',
                     displayName:'SKU',
-                    cellTemplate: "<div ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>",
+                    cellTemplate: "<div class='sku-link color-link' ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>",
                     cellTemplateScope: {
                         click: function(data) {
                             // go to product edit view
@@ -31,8 +31,8 @@
                     displayName:'Size',
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='sizeForm'>"+
-                                            "<md-input-container>"+
-                                                "<input name='size' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^([a-zA-Z0-9 ]+)$/' required/>"+
+                                            "<md-input-container class='md-container-modify'>"+
+                                                "<input aria-label='Size' name='size' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^([a-zA-Z0-9 ]+)$/' required/>"+
                                                 "<div ng-messages='sizeForm.size.$error'>"+
                                                     "<div ng-message='required'>This is required!</div>"+
                                                     "<div ng-message='md-maxlength'>Too lengthy</div>"+
@@ -47,8 +47,8 @@
                     displayName:'Quantity',
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='quantityForm'>"+
-                                            "<md-input-container>"+
-                                                "<input name='quantity' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^[0-9]*$/' required/>"+
+                                            "<md-input-container class='md-container-modify'>"+
+                                                "<input aria-label='Quantity' name='quantity' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^[0-9]*$/' required/>"+
                                                 "<div ng-messages='quantityForm.quantity.$error' ng-show='quantityForm.quantity.$dirty'>"+
                                                     "<div ng-message='required'>This is required!</div>"+
                                                     "<div ng-message='md-maxlength'>Too lengthy!</div>"+
@@ -62,8 +62,8 @@
                     displayName:'Price',
                     cellTemplate:  "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='priceForm'>"+
-                                            "<md-input-container>"+
-                                                "<input name='price' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^[0-9]{0,8}(\.[0-9]{2})?$/' required/>"+
+                                            "<md-input-container class='md-container-modify'>"+
+                                                "<input aria-label='Price' name='price' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^[0-9]{0,8}(\.[0-9]{2})?$/' required/>"+
                                                 "<div ng-messages='priceForm.price.$error'>"+
                                                     "<div ng-message='required'>This is required!</div>"+
                                                     "<div ng-message='md-maxlength'>Too lengthy</div>"+
@@ -74,7 +74,7 @@
 
                 },
                 {
-                    cellTemplate:   "<div><img style='height:16px;cursor:pointer'" +
+                    cellTemplate:   "<div><img class='delete-icon'" +
                                     " ng-click='cellTemplateScope.click(row.branch)' src='../../../images/delete-icon.png'></div>",
                     cellTemplateScope: {
                         click: function(data) {

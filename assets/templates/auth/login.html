@@ -5,7 +5,7 @@
       <fieldset>
         <label>email </label>
         <img src="../../../images/question-mark.svg" width="12" height="12">
-        <input ng-enter ="submit()" name="email" type="text" ng-model="user.email" required>
+        <input class="input-shadow-border" ng-enter ="submit()" name="email" type="text" ng-model="user.email" required>
         <span class="help-block" ng-show="register.email.$dirty && register.email.$invalid">
           <!--{{"login.error.email.required" | translate}}-->
           Enter a proper email
@@ -14,7 +14,7 @@
       <fieldset>
         <label>password </label>
         <img src="../../../images/question-mark.svg" width="12" height="12">
-        <input ng-enter ="submit()" name="password" type="password" value="" ng-model="user.password" required/>
+        <input class="input-shadow-border" ng-enter ="submit()" name="password" type="password" value="" ng-model="user.password" required/>
       </fieldset>
       <fieldset>
         <label class="font-size-12 reset-margin">

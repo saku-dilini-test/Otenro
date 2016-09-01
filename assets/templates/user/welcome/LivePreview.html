@@ -12,7 +12,7 @@
         <br>
         <fieldset>
             <label class="font-size-12">App Name</label>
-            <input name="appName" type="text" ng-model="appName" ng-pattern="/^[A-Za-z0-9\s]*$/"
+            <input class="input-shadow-border" name="appName" type="text" ng-model="appName" ng-pattern="/^[A-Za-z0-9\s]*$/"
                    ng-enter="answer('useful',appId,tempUrl,tempName,tempCategory)" ng-maxlength="25" required/>
         </fieldset>
                 <span ng-show="livePreview.appName.$error.pattern">Symbols cannot be included in the app name</span>
