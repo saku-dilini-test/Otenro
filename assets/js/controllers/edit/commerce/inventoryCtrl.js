@@ -32,11 +32,10 @@
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='sizeForm'>"+
                                             "<md-input-container class='md-container-modify'>"+
-                                                "<input aria-label='Size' name='size' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^([a-zA-Z0-9 ]+)$/' required/>"+
-                                                "<div ng-messages='sizeForm.size.$error'>"+
-                                                    "<div ng-message='required'>This is required!</div>"+
-                                                    "<div ng-message='md-maxlength'>Too lengthy</div>"+
-                                                    "<div ng-message='pattern'>That doesn't look like a valid size!</div>"+
+                                                "<input aria-label='Size' name='size' ng-model='row.branch[col.field]' maxlength='8' ng-pattern='/^([a-zA-Z0-9 ]+)$/' required/>"+
+                                                "<div ng-messages='sizeForm.size.$error' ng-show='sizeForm.size.$dirty'>"+
+                                                    "<div ng-message='required'>Required!</div>"+
+                                                    "<div ng-message='pattern'>Invalid size!</div>"+
                                                "</div>"+
                                            "</md-input-container>"+
                                        "</ng-form></div>"
@@ -48,11 +47,10 @@
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='quantityForm'>"+
                                             "<md-input-container class='md-container-modify'>"+
-                                                "<input aria-label='Quantity' name='quantity' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^[0-9]*$/' required/>"+
+                                                "<input aria-label='Quantity' name='quantity' ng-model='row.branch[col.field]' maxlength='8' ng-pattern='/^[0-9]*$/' required/>"+
                                                 "<div ng-messages='quantityForm.quantity.$error' ng-show='quantityForm.quantity.$dirty'>"+
-                                                    "<div ng-message='required'>This is required!</div>"+
-                                                    "<div ng-message='md-maxlength'>Too lengthy!</div>"+
-                                                    "<div ng-message='pattern'>That doesn't look like a valid quantity!</div>"+
+                                                    "<div ng-message='required'>Required!</div>"+
+                                                    "<div ng-message='pattern'>Invalid quantity!</div>"+
                                                "</div>"+
                                            "</md-input-container>"+
                                        "</ng-form></div>"
@@ -63,11 +61,10 @@
                     cellTemplate:  "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='priceForm'>"+
                                             "<md-input-container class='md-container-modify'>"+
-                                                "<input aria-label='Price' name='price' ng-model='row.branch[col.field]' md-maxlength='8' ng-pattern='/^[0-9]{0,8}(\.[0-9]{2})?$/' required/>"+
-                                                "<div ng-messages='priceForm.price.$error'>"+
-                                                    "<div ng-message='required'>This is required!</div>"+
-                                                    "<div ng-message='md-maxlength'>Too lengthy</div>"+
-                                                    "<div ng-message='pattern'>That doesn't look like a valid price!</div>"+
+                                                "<input aria-label='Price' name='price' ng-model='row.branch[col.field]' maxlength='8' ng-pattern='/^[0-9]{0,8}(\.[0-9]{2})?$/' required/>"+
+                                                "<div ng-messages='priceForm.price.$error' ng-show='priceForm.price.$dirty'>"+
+                                                    "<div ng-message='required'>Required!</div>"+
+                                                    "<div ng-message='pattern'>Invalid price!</div>"+
                                                "</div>"+
                                            "</md-input-container>"+
                                        "</ng-form></div>"
