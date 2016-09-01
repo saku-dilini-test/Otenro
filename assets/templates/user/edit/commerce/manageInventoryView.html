@@ -8,11 +8,8 @@
                         <div class="md-dialog-header-nav clearfix">
                             <h1 class="pull-left">inventory</h1>
                             <fieldset class="col-2 pull-right reset-margin">
-                                <md-input-container class="search-container">
-                                    <input aria-label='Search' type="text" ng-model="search" class="me-search-input" name="name">
-
-                                </md-input-container>
-                                <input type="submit" value="search" class="me-search-button">
+                                    <input type="text" required="" ng-change="refreshData()" ng-model="search" class="me-search-input" name="name">
+                                    <input type="submit" value="search" class="me-search-button">
                             </fieldset>
                         </div>
                     </div>

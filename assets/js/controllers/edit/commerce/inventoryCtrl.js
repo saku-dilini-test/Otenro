@@ -4,9 +4,11 @@
  (function() {
     'use strict';
     angular.module("appEdit").controller("InventoryCtrl", [
-    '$scope', 'inventoryService','commerceService','$rootScope','SERVER_URL','$auth','toastr','$mdDialog','initialData','productService',
+    '$scope', 'inventoryService','commerceService','$rootScope','SERVER_URL','$auth','toastr','$mdDialog','initialData',
+    'productService','$filter',
     InventoryCtrl]);
-    function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth,toastr,$mdDialog,initialData,productService) {
+    function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth,toastr,$mdDialog,
+    initialData,productService,$filter) {
             $scope.currentPage = 1;
             $scope.pageSize = 5;
             $scope.userId=$auth.getPayload().id;
@@ -14,6 +16,10 @@
             $scope.SERVER_URL = SERVER_URL;
             $scope.isValideForm = true;
             $scope.inventoryList = [];
+
+            $scope.refreshData = function() {
+                $scope.inventoryList = $filter('filter')($scope.inventoryList, $scope.search, undefined);
+            }
             $scope.col_defs =[
                 {
                     field:'sku',
