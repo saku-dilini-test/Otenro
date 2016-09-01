@@ -1,10 +1,13 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("CommerceCtrl", [
-        '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope', 'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','comingSoonService',
+        '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope',
+        'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','comingSoonService',
+        '$filter',
         CommerceCtrl]);
 
-    function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope, SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService) {
+    function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope,
+             SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter) {
 
         $scope.refund = [];
         $scope.unfulfilled = [];
@@ -20,6 +23,13 @@
         $scope.maxAboutUsHeader = 20;
         $scope.maxAboutUsContent = 100;
 
+        $scope.refreshData = function() {
+        $scope.gridOptions1.data = $filter('filter')($scope.ordersList, $scope.search, undefined);
+        $scope.gridOptions2.data = $filter('filter')($scope.ordersList, $scope.search, undefined);
+        $scope.gridOptions3.data = $filter('filter')($scope.ordersList, $scope.search, undefined);
+        $scope.gridOptions4.data = $filter('filter')($scope.ordersList, $scope.search, undefined);
+        }
+
         var fakeI18n = function (title) {
             var deferred = $q.defer();
             $interval(function () {
@@ -34,6 +44,7 @@
             enableSelectAll: true,
             enableRowHeaderSelection: true,
             selectionRowHeaderWidth: 35,
+            enableSorting: true,
             rowHeight: 35,
             exporterMenuCsv: true,
             enableGridMenu: true,
