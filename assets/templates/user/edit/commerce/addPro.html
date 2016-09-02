@@ -76,23 +76,24 @@
                                     </div>
                                 </md-input-container>
 
-                                <md-input-container ng-hide="mainMenuHide">
+                                <md-input-container>
                                     <label>Main Menu</label>
                                     <md-select
                                             md-no-asterisk = flase
                                             placeholder="Select Main Menu"
                                             ng-model="product.mainId"
-                                            ng-change="setChild(product.mainId)">
+                                            ng-change="setChild(product.mainId)"
+                                            required>
                                         <md-option ng-value="main.id" ng-repeat="main in mainMenu">{{main.name}}
                                         </md-option>
                                     </md-select>
                                 </md-input-container>
 
                                 <!--Disabled for now-->
-                                <md-input-container ng-hide="childMenuHide">
+                                <md-input-container ng-hide="show == false">
                                     <label>Sub Category</label>
                                     <md-select class="" placeholder="Select Child Menu" ng-model="product.childId"
-                                               required>
+                                               >
                                         <md-option ng-value="child.id" ng-repeat="child in child">{{child.name}}
                                         </md-option>
                                     </md-select>
@@ -140,8 +141,8 @@
                             <tr ng-repeat="data in product.variants">
                                 <td ng-model="data.name"><p class="product-name">{{data.name}}</p></td>
                                 <td>
-                                    <md-input-container style="width: 115px;">
-                                        <input md-maxlength="10"
+                                    <md-input-container style="width: 90px;">
+                                        <input maxlength="10"
                                                required
                                                name="sku_{{$index}}"
                                                ng-model="data.sku"
@@ -149,7 +150,6 @@
                                                ng-readonly="product.checked">
                                         <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                             <div ng-message="required">SKU is required.</div>
-                                            <div ng-message="md-maxlength">Must be less than 10 characters.</div>
                                             <div ng-message="pattern" style="line-height:13px;" class="my-message">That doesn't look like a valid SKU</div>
                                         </div>
                                     </md-input-container>
@@ -166,32 +166,32 @@
                                             <!--<div ng-message="md-maxlength">Must be less than 8 characters.</div>-->
                                         <!--</div>-->
                                     <!--</md-input-container>-->
-                                  <md-input-container>
-                                    <input class="product-name-column-input" name="size_{{$index}}" md-maxlength="8"
+                                  <md-input-container class="md-container-modify">
+                                    <input name="size_{{$index}}" maxlength="8"
                                            ng-pattern="/^[0-9a-zA-Z ]+$/" ng-model="data.size" required>
-                                      <div ng-messages="priceAndVariantsForm['size_' + $index].$error" ng-show="priceAndVariantsForm['size_'+$index].$dirty">
-                                          <div ng-message="md-maxlength">Maximum value exceeded</div>
+                                      <div ng-messages="priceAndVariantsForm['size_' + $index].$error " ng-show="priceAndVariantsForm['size_' + $index].$dirty">
                                           <div ng-message="pattern" class="my-message">That doesn't look like a valid size or weight</div>
-
+                                          <div ng-message="required" class="my-message">Required!</div>
                                       </div>
-
                                   </md-input-container>
                                 </td>
                                 <td>
-                                  <md-input-container>
-                                    <input class="product-name-column-input" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required>
-                                      <div ng-messages="priceAndVariantsForm['price_' + $index].$error" ng-show="priceAndVariantsForm['price_'+$index].$dirty">
+                                  <md-input-container class="md-container-modify">
+                                    <input name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required>
+                                      <div ng-messages="priceAndVariantsForm['price_' + $index].$error" ng-show="priceAndVariantsForm['price_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid price value</div>
+                                          <div ng-message="required" class="my-message">Required!</div>
                                       </div>
 
                                   </md-input-container>
                                 <!--<span ng-show="priceAndVariantsForm['price_' + $index].$error.maxlength">Too lengthy</span></td>-->
 
                                 <td>
-                                  <md-input-container>
-                                    <input class="product-name-column-input" name="qty_{{$index}}"  ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.quantity" required>
-                                      <div ng-messages="priceAndVariantsForm['qty_' + $index].$error">
+                                  <md-input-container class="md-container-modify">
+                                    <input name="qty_{{$index}}"  ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.quantity" required>
+                                      <div ng-messages="priceAndVariantsForm['qty_' + $index].$error " ng-show="priceAndVariantsForm['qty_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid quantity</div>
+                                          <div ng-message="required" class="my-message">Required!</div>
                                       </div>
 
                                   </md-input-container>
