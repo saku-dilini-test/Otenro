@@ -110,7 +110,7 @@
             }
         }
         $scope.exportArrayN= [{
-            'name':'Name',
+            'Name':'Name',
             'sku':'SKU',
             'Price':'Price',
             'Quantity':'Quantity',
@@ -120,7 +120,7 @@
         angular.forEach($scope.exportArray, function(value, key) {
             $scope.exportArrayN.push({
 
-                'name' : value.name,
+                'Name' : value.name,
                 'sku' : value.sku,
                 'price' : value.price,
                 'quantity' : value.quantity,

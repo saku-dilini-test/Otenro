@@ -273,24 +273,25 @@
 
                     <div class="md-dialog-main">
                         <div class="file-upload-wrapper2 clearfix">
-                            <p class="file-upload-msg">Crop your image</p>
-                            <div class="pull-left">
-                                    <input  class="pull-left" value="file" type="file" ng-click = "cropImage()" id="fileInput" />
+                            <div class="inputField">
+                                <div class="btn-material">
+                                    <span>Select a image</span>
+                                    <input type="file" value="file" type="file" ng-click = "cropImage()" id="fileInput" >
+                                </div>
                             </div>
+
                             <div class="cropArea">
                                 <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
                             </div>
                         </div>
 
-                        <div class="uploaded-section pull-left clearfix">
+                        <div class="uploaded-section image-upload clearfix">
                             <div class="uploaded-new-image2">
-                                <br>
                                 <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
                                      height="150" style="display:none" />
                                 <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
 
-                                <button class="me-upload-image-button2" ng-click="addImage(picFile)">Upload Image
-                                </button>
+                                <button class="btn-material" ng-click="addImage(picFile)">Crop and Upload</button>
                             </div>
                             <div class="uploaded-old-images">
                                 <p>Uploaded Product Images</p>
@@ -343,31 +344,13 @@
                                         <img id="6" ng-click="setImage(5)" ng-if="tmpImage[5] !== null" ngf-src="tmpImage[5]"
                                              width="80" height="80"/>
                                     </div>
-                                    <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(6)" value='delete'
-                                               class="image-delete-button"/>
-                                        <img ng-click="setImage()" ng-if="tmpImage[6] == null"
-                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="7" ng-click="setImage(6)" ng-if="tmpImage[6] !== null" ngf-src="tmpImage[6]"
-                                             width="80" height="80"/>
-                                    </div>
-                                    <div class="old-image">
-                                        <input type="button" ng-click="deleteImg(7)" value='delete'
-                                               class="image-delete-button"/>
-                                        <img ng-click="setImage()" ng-if="tmpImage[7] == null"
-                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="8" ng-click="setImage(7)" ng-if="tmpImage[7] !== null" ngf-src="tmpImage[7]"
-                                             width="80" height="80"/>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="addOrUpdateProducts()">Finish
-                            </md-button>
+                            <md-button class="me-default-button" ng-click="addOrUpdateProducts()">Finish </md-button>
                         </div>
                     </div>
                 </md-tab-body>
