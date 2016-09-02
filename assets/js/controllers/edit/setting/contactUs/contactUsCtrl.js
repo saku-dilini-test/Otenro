@@ -103,7 +103,7 @@
                     .success(function(data, status, headers, config) {
                         toastr.success('Basic Info saved successfully', 'Awsome!', {closeButton: true});
                         // go next tab
-                        disableTabs(2,true,false,true);
+                        disableTabs(2,false,false,true);
                     }).error(function(data, status, headers, config) {
                     toastr.error('Basic info saving error', { closeButton: true});
                 });
@@ -115,7 +115,7 @@
             if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
                 toastr.error('Web Information not update', { closeButton: true});
                 // go next tab
-                disableTabs(3,true,true,false);
+                disableTabs(3,false,false,false);
             }else{
                 if(typeof webInfo.email == 'undefined'){
                     toastr.error('Email Not Update', { closeButton: true});
@@ -128,11 +128,12 @@
                     'email': webInfo.email,
                     'webSite': webInfo.webSite
                 };
+                disableTabs(3,false,false,false);
                 contactUsService.saveWebInfo(webInfoResponse)
                     .success(function(data, status, headers, config) {
                         toastr.success('Web info saved successfully', 'Awsome!', {closeButton: true});
                         // to next tab
-                        disableTabs(3,true,true,false);
+
                     }).error(function(data, status, headers, config) {
                         toastr.error('Web info saving error', {closeButton: true});
                 });

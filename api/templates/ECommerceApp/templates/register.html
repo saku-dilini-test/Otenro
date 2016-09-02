@@ -11,7 +11,10 @@
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Email Address</span>
-                        <input type="email" placeholder="" ng-model="data.email" ng-required="true">
+                        <input type="email" placeholder="" name="email" ng-model="data.email" ng-required="true">
+                        <span class="help-block" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
+                            Enter a proper email
+                        </span>
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Password</span>
