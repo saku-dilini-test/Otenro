@@ -174,24 +174,28 @@
                             <fieldset >
                                 <label>Billing Name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="fname" ng-maxlength="20" ng-model="billingEdit.fname" required />
+                                <input type="text" name="fname" maxlength="{{maxMenuCategory}}" ng-model="billingEdit.fname" required />
                                 <br />
-                                <span ng-show="editBilling.fname.$error.maxlength">Too lengthy</span>
+                                <span>Characters left: {{maxMenuCategory - billingEdit.fname.length}}</span>
                             </fieldset>
                         </div>
                         <fieldset>
                             <label>Billing Address</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="address" ng-maxlength="20" ng-model="billingEdit.address" required />
+                            <input type="text" name="address" maxlength="{{maxMenuCategory}}" ng-model="billingEdit.address" required />
                             <br />
-                            <span ng-show="editBilling.address.$error.maxlength">Too lengthy</span>
+                            <span>Characters left: {{maxMenuCategory - billingEdit.address.length}}</span>
                         </fieldset>
                         <fieldset class="col-2">
                             <label>Credit card number</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="number" name="creditCardNumber" ng-maxlength="20" ng-model="billingEdit.creditCardNumber" required />
+                            <input type="text" name="creditCardNumber" maxlength="{{maxMenuCategory}}" ng-pattern="/^\d*[1-9]\d*$/"
+                                   ng-model="billingEdit.creditCardNumber" required />
                             <br />
-                            <span ng-show="editBilling.creditCardNumber.$error.maxlength">Too lengthy</span>
+                            <span>Characters left: {{maxMenuCategory - billingEdit.creditCardNumber.length}}</span>
+                            <div ng-messages="editBilling.creditCardNumber.$error" ng-show="editBilling.creditCardNumber.$dirty">
+                                <div ng-message="pattern" class="my-message">That doesn't look like a valid credit card number</div>
+                            </div>
                         </fieldset>
                         <fieldset class="col-2 reset-margin-right">
                             <label>Card type</label>

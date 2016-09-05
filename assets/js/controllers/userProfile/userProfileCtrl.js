@@ -17,6 +17,7 @@
     function userProfileCtrl($scope, userProfileResource, CurrentUser, userProfileService,Auth,$auth,$state,$mdDialog,toastr) {
 
         $scope.password = false;
+        $scope.maxMenuCategory = 20;
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
         userProfileResource.getUserProfile().success(function (data) {
             $scope.userEdit = data;
