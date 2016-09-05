@@ -175,10 +175,16 @@
                 return;
             }
 
-            if(file == null){
+            if($scope.myImage == ''){
                 toastr.error('Please choose image and upload image', 'Warning', {
                     closeButton: true
                 });
+                return;
+            }
+            if(file == null){
+                toastr.error('Please upload image', 'Warning', {
+                    closeButton: true
+              });
                 return;
             }
 

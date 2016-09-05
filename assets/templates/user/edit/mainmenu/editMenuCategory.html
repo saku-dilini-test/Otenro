@@ -4,10 +4,11 @@
             <h1>Add Menu</h1>
         </div>
         <div class="md-dialog-main">
-            <form name="catForm">
+            <form name="catForm" novalidate>
                 <fieldset>
                     <label for="input-title">Name</label>
-                    <input type="text" name="name" id="input-title" ng-model="menu.name" ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxMenuCategory}}" />
+                    <input type="text" name="name" id="input-title" ng-model="menu.name" ng-pattern="/^[a-zA-Z0-9_ ]*$/"
+                           maxlength="{{maxMenuCategory}}" required/>
                     <br>
                     <span ng-show="catForm.name.$error.pattern">No symbols</span>
                     <br>
@@ -79,7 +80,7 @@
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                <md-button class="me-default-button" ng-click="addNewCategory(mainImg,menu)">Save</md-button>
+                <md-button class="me-default-button" ng-disabled="catForm.$invalid" ng-click="addNewCategory(mainImg,menu)">Save</md-button>
             </div>
         </div>
     </md-dialog-content>

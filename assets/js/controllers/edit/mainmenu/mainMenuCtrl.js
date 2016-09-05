@@ -262,13 +262,24 @@
         };
         // Add menu category
         $scope.addNewCategory = function(file,menu){
-
             // If menu undefined || menu.name undefined or empty, pop up error message
             if((typeof menu == 'undefined') || (typeof menu.name == 'undefined') || menu.name == ''){
                 toastr.error('Fill the Name Field', 'Warning', {closeButton: true});
                 return;
             }
-            
+            if($scope.myImage == ''){
+                toastr.error('Please choose image and upload image', 'Warning', {
+                    closeButton: true
+                });
+                return;
+            }
+            if(file == null){
+                toastr.error('Please upload image', 'Warning', {
+                    closeButton: true
+                });
+                return;
+            }
+            else{
             if($scope.initialData.menu == 'addNewMenuCategory') {
                 mainMenuService.addNewCategory(file, $rootScope.appId, menu.name)
                     .success(function (data) {
@@ -321,6 +332,7 @@
                         });
                 }).error(function(err) {
                 })
+            }
             }
         };
 
