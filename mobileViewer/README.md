@@ -1,4 +1,4 @@
-# ionic-login
+# Otenro-Mobile-Viewer
 
 ###install ionic and cordova
 
@@ -11,23 +11,18 @@
 `bower install`
 
 ###add cordova plugin and ionic plugin
-`cordova plugin add cordova-plugin-device`
-
-`cordova plugin add cordova-plugin-console`
-
-`cordova plugin add cordova-plugin-whitelist`
-
-`cordova plugin add cordova-plugin-splashscreen`
-
-`cordova plugin add cordova-plugin-statusbar`
-
-`ionic plugin add ionic-plugin-keyboard`
-
-`cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git`
+`ionic state restore`
 
 ###add android platform
 
 `ionic platform add android`
+
+###Change Server Url 
+
+<dl>
+  <dt>Path : www/js/constants.js</dt>
+  <dd>.constant('SERVER_URL', '`<< Local or Server IP Address >>`');</dd>
+</d1>
 
 ###Build application
 
