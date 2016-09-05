@@ -189,7 +189,9 @@
                         <fieldset class="col-2">
                             <label>Credit card number</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="number" name="name" ng-model="billingEdit.creditCardNumber" required />
+                            <input type="number" name="creditCardNumber" ng-maxlength="20" ng-model="billingEdit.creditCardNumber" required />
+                            <br />
+                            <span ng-show="editBilling.creditCardNumber.$error.maxlength">Too lengthy</span>
                         </fieldset>
                         <fieldset class="col-2 reset-margin-right">
                             <label>Card type</label>
