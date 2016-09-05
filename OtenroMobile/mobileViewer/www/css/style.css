@@ -1,0 +1,108 @@
+/* Empty. Add your own CSS if you like */
+
+.app-area-view {
+    background-color: gold;
+}
+
+.app-area-view .app-box {
+    background-color: azure;
+    border: 10px;
+    margin: 5px;
+}
+
+/* ---- IONIC ------ */
+.inAppBrowserWrap {
+    background-color: rgba(0,0,0,0.75);
+    color: rgba(235,235,235,1.0);
+}
+.inAppBrowserWrap menu {
+    overflow: auto;
+    list-style-type: none;
+    padding-left: 0;
+}
+.inAppBrowserWrap menu li {
+    font-size: 25px;
+    height: 25px;
+    float: left;
+    margin: 0 10px;
+    padding: 3px 10px;
+    text-decoration: none;
+    color: #ccc;
+    display: block;
+    background: rgba(30,30,30,0.50);
+}
+.inAppBrowserWrap menu li.disabled {
+    color: #777;
+}
+
+/* ---- CUSTOM ------ */
+body{
+    font-family: "Open Sans",sans-serif;
+}
+
+.bar .title {
+    text-transform: uppercase;
+}
+
+.tabs-balanced > .tabs, .tabs.tabs-balanced {
+    background-color: #0a94ff;
+    background-image: none;
+    border-color: #0083ca;
+}
+
+.border-less-list a{
+    border: none;
+}
+
+.border-less-list a.logout{
+    color: #db5309 !important;
+}
+
+.std-button{
+    background-color: #0a94ff;
+    color: white;
+}
+
+.bar.bar-standard {
+    background-color: #f1f1f1;
+    background-image: none;
+    border: medium none;
+    color: #808080;
+}
+
+.bar.bar-balanced .title {
+    color: #808080;
+}
+
+.bar .button, .bar button {
+    font-size: 24px;
+    background-color: transparent;
+}
+
+h1{
+    color: #808080;
+    font-family: "Open Sans",sans-serif;
+    font-size: 16px;
+    line-height: 35px;
+    margin: 0 !important;
+    padding-left: 10px;
+    text-transform: uppercase;
+}
+
+.logo-section{
+    padding: 80px 0 30px;
+    text-align: center;
+}
+
+.logo-section h2{
+    color: #333333;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: normal;
+}
+
+
+.my-apps a:nth-of-type(2n+1) {
+    background-color: #FAFAFA;
+}
+
