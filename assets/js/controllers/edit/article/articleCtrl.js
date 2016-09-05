@@ -176,7 +176,7 @@
             }
 
             if(file == null){
-                toastr.error('Select image', 'Warning', {
+                toastr.error('Please choose image and upload image', 'Warning', {
                     closeButton: true
                 });
                 return;

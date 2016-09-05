@@ -580,3 +580,6 @@ overriding pull-left changes other styles too therefor commented
     padding: 10px 21px;
     margin-top: unset !important;
 }
+.disable-all {
+    cursor: not-allowed;
+}
