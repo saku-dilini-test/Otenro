@@ -57,4 +57,9 @@ mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,$s
         });
     };
 
+    // back to login in view function
+    $scope.backToLogin = function () {
+        $state.go("app.login");
+    }
+
 });
