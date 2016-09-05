@@ -78,17 +78,46 @@
 
         // --/-- delete tax collection
         $scope.deleteTaxInfo = function (index,item) {
-            taxService.deleteTaxInfo(item)
-                .success(function (result) {
-                    toastr.success('Successfully Remove ', 'Saved', {
-                        closeButton: true
-                    });
-                    $scope.items.splice(index, 1);
-                }).error(function (error) {
-                    toastr.error('Deleting Error', 'Warning', {
-                        closeButton: true
-                    });
-                })
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+                    this.confirm = function click(){
+
+                        taxService.deleteTaxInfo(item)
+                        .success(function (result) {
+                            toastr.success('Successfully Remove ', 'Saved', {
+                                closeButton: true
+                            });
+                            $scope.items.splice(index, 1);
+                             $mdDialog.hide();
+                             $scope.backToTaxesView();
+                        }).error(function (error) {
+                            toastr.error('Deleting Error', 'Warning', {
+                                closeButton: true
+                            });
+                        })
+
+                    },
+                        this.cancel = function click(){
+                            $mdDialog.hide();
+                            $scope.backToTaxesView();
+                        }
+                },
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                '<md-content >' +
+                '<div class="md-dialog-header">' +
+                '<h1>Deleting Product </h1>' +
+                '                </div> <br>'+
+                ' <div style="text-align:center"><lable> Tax option will be removed permanently! </lable></div>' +
+                '<br><br><div class="md-dialog-buttons">'+
+                '<div class="inner-section">'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">Cancel</md-button>'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Ok</md-button>'+
+                '</div>'+
+                '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
         };
 
 

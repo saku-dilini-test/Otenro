@@ -10,7 +10,7 @@
                 <label>Article Category</label>
                     <select ng-model="articleCat.value"
                             ng-options="v.id as v.name for v in articleCat.values"
-                            ng-change="changeArticleCat(articleCat.value)">
+                            ng-change="changeArticleCat(articleCat.value)" required>
                     </select>
             </fieldset>
             <fieldset>
@@ -35,7 +35,7 @@
                     <div class="file-upload-wrapper clearfix">
                         <p class="file-upload-msg" style="font-size:16px;">Crop your image</p>
                         <div class="pull-left">
-                            <input  class="pull-left" type="file" ng-click = "cropImage()" id="fileInput" />
+                            <input  class="pull-left" type="file" ng-click = "cropImage()" id="fileInput" required/>
                         </div>
                         <div class="cropArea">
                             <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
@@ -49,7 +49,7 @@
                                  height="150" style="display:none" />
                             <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
 
-                            <button class="me-upload-image-button" ng-click="addImage(picFile)">Upload Image
+                            <button class="me-upload-image-button" ng-disabled="picFile == null" ng-click="addImage(picFile)">Upload Image
                             </button>
                         </div>
                         <div class="uploaded-old-images">
@@ -61,7 +61,7 @@
                                     <img ng-click="setImage()" ng-if="tmpImage[0] == null"
                                          src="../../../images/small-placeholder.png" width="80" height="80"/>
                                     <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
-                                         width="80" height="80"/>
+                                         width="80" height="80" required/>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,8 @@
 
             <fieldset class="pull-left">
                 <label>Text</label>
-                <trix-editor class="textEditor" name="editorText" ng-maxlength="200" angular-trix ng-model="article.desc"></trix-editor>
+                <trix-editor class="textEditor" name="editorText" ng-maxlength="200" angular-trix ng-model="article.desc"
+                             required></trix-editor>
                 <label class="desc">Description</label>
             </fieldset>
             <fieldset style="margin-bottom:0px;">
@@ -82,7 +83,7 @@
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                <md-button class="me-default-button" ng-click="publishArticle(mainImg,article)">Publish</md-button>
+                <md-button class="me-default-button" ng-disabled="articleForm.$invalid" ng-click="publishArticle(mainImg,article)">Publish</md-button>
             </div>
         </div>
     </md-dialog-content>
