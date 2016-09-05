@@ -1,0 +1,20 @@
+<ion-view view-title="app viewer" name="login-view">
+  <ion-content>
+    <div class="logo-section">
+      <img src="img/logo.png" alt="logo" width="112" />
+      <h2>Log into your Otenro account to start testing your Otenro apps </h2>
+    </div>
+    <form name="loginForm">
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" name="username" placeholder="Username" ng-model="data.username" required>
+        </label>
+        <label class="item item-input">
+          <input type="password" name="password" placeholder="Password" ng-model="data.password" required>
+        </label>
+        <br />
+        <button class="button button-full std-button" ng-disabled="loginForm.$invalid" ng-click="login(data)">Login</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
