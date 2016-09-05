@@ -56,7 +56,7 @@
                                      height="150" style="display:none" />
                                 <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
 
-                                <button class="me-upload-image-button" ng-click="addImage(picFile)">Upload Image
+                                <button class="me-upload-image-button" ng-disabled="picFile == null" ng-click="addImage(picFile)">Upload Image
                                 </button>
                             </div>
                             <div class="uploaded-old-images">
