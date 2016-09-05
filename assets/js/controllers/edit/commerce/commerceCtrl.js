@@ -717,7 +717,7 @@
         $scope.updateHeaderFooterSettings = function (picFileHeader, picFileFooter, email, type) {
 
             console.log(email);
-            if(email == undefined || email.footer == undefined || email.header == undefined ){
+            if(email == undefined || email.footer == undefined || email.header == undefined || email.footer == '' || email.header == ''){
                 toastr.error('Fill the all fields','Warning',{
                     closeButton: true
                 });
