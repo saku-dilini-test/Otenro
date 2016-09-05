@@ -16,7 +16,6 @@
                     <th class="message-column">message</th>
                     <th>status</th>
                     <th>scheduled</th>
-                    <th>&nbsp;</th>
                 </thead>
                 <tbody>
                 <tr ng-repeat="data in pushedMessages">
@@ -25,7 +24,6 @@
                     <td ng-model="data.message">{{data.message}}</td>
                     <td ng-model="data.status" ng-class="{'status-sent': data.status == 'sent', 'status-pending': data.status == 'pending'}">{{data.status}}</td>
                     <td ng-model="data.date">{{data.date}}</td>
-                    <td><a href="javascript:void(0);">more</a></td>
                 </tr>
                 </tbody>
             </table>
