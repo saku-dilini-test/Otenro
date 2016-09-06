@@ -410,12 +410,6 @@
             else if (!storeSettings.address1){
                 toastr.error(' warning', "Please fill address field", {closeButton: true});
             }
-            else if (!openHours.saturdayCloseHour || !openHours.saturdayCloseMinute || !openHours.saturdayOpenHour
-                    ||!openHours.saturdayOpenMinute || !openHours.sundayOpenHour || !openHours.sundayOpenMinute
-                    ||!openHours.sundayCloseHour || !openHours.sundayCloseMinute || !openHours.weekDaysOpenHour
-                    ||!openHours.weekDaysOpenMinute || !openHours.weekDaysCloseHour || !openHours.weekDaysCloseMinute){
-                toastr.error(' warning', "Please fill openHours field", {closeButton: true});
-            }
             else {
 
                 for (var i = 0; i < $scope.currencyList.length; i++) {
