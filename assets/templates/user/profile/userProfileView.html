@@ -1,4 +1,4 @@
-<md-dialog aria-label="User Profile">
+<md-dialog aria-label="User Profile" class="md-dialog-profile">
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
             <md-tab>
@@ -82,7 +82,7 @@
                 <md-tab-label></md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
-                        <h1 >Edit Profile</h1>
+                        <h1>Edit Profile</h1>
                         <ul class="md-dialog-header-nav clearfix">
                             <li>
                                 <a ng-click="redirectToDashboard()" class="return-to-app">my apps</a>
@@ -98,14 +98,14 @@
                             <fieldset class="col-2">
                                 <label>First name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="fname" ng-maxlength="20" ng-model="userEdit.firstName" required />
+                                <input class="input-shadow-border" type="text" name="fname" ng-maxlength="20" ng-model="userEdit.firstName" required />
                                 <br />
                                 <span ng-show="editProfile.fname.$error.maxlength">Too lengthy</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Last name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="lname" ng-maxlength="20" ng-model="userEdit.lastName" required />
+                                <input class="input-shadow-border" type="text" name="lname" ng-maxlength="20" ng-model="userEdit.lastName" required />
                                 <br />
                                 <span ng-show="editProfile.lname.$error.maxlength">Too lengthy</span>
                             </fieldset>
@@ -113,13 +113,13 @@
                         <fieldset>
                             <label>Email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="email" disabled ng-model="userEdit.email" required />
+                            <input class="input-shadow-border" type="text" name="email" disabled ng-model="userEdit.email" required />
                         </fieldset>
                         <div class="clearfix">
                             <fieldset class="col-2">
                                 <label>Current Password</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="password" name="password"  ng-model="userEdit.currentPassword" />
+                                <input class="input-shadow-border" type="password" name="password"  ng-model="userEdit.currentPassword" />
                                     <br />
                                 <span ng-show="password">Please enter valid current password</span>
                             </fieldset>
@@ -128,7 +128,7 @@
                             <fieldset class="col-2">
                                 <label>Password</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="password" name="password" ng-model="userEdit.password" ng-pattern="passwordRegularExpression"
+                                <input class="input-shadow-border" type="password" name="password" ng-model="userEdit.password" ng-pattern="passwordRegularExpression"
                                        ng-minlength="7" compare-to="userEdit.confirmPassword" required>
                                 <span class="help-block " ng-show="editProfile.password.$error.minlength">
                                     <span ng-show="editProfile.password.$error.minlength">Password should have at least 7 characters.</span>
@@ -140,7 +140,7 @@
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Confirm Password</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="password" name="confirmPassword" ng-model="userEdit.confirmPassword"  required>
+                                <input class="input-shadow-border" type="password" name="confirmPassword" ng-model="userEdit.confirmPassword"  required>
                                 <span class="help-block " ng-show="editProfile.confirmPassword.$dirty">
                                     <span ng-show="editProfile.password.$error.compareTo">Password must match.</span>
                                 </span>
@@ -174,6 +174,7 @@
                             <fieldset >
                                 <label>Billing Name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input class="input-shadow-border" type="text" name="fname" ng-maxlength="20" ng-model="billingEdit.fname" required />
                                 <input type="text" name="fname" maxlength="{{maxMenuCategory}}" ng-model="billingEdit.fname" required />
                                 <br />
                                 <span>Characters left: {{maxMenuCategory - billingEdit.fname.length}}</span>
@@ -189,26 +190,20 @@
                         <fieldset class="col-2">
                             <label>Credit card number</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="creditCardNumber" maxlength="{{maxMenuCategory}}" ng-pattern="/^\d*[1-9]\d*$/"
-                                   ng-model="billingEdit.creditCardNumber" required />
-                            <br />
-                            <span>Characters left: {{maxMenuCategory - billingEdit.creditCardNumber.length}}</span>
-                            <div ng-messages="editBilling.creditCardNumber.$error" ng-show="editBilling.creditCardNumber.$dirty">
-                                <div ng-message="pattern" class="my-message">That doesn't look like a valid credit card number</div>
-                            </div>
+                            <input type="number" name="name" ng-model="billingEdit.creditCardNumber" required />
                         </fieldset>
                         <fieldset class="col-2 reset-margin-right">
                             <label>Card type</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" ng-model="billingEdit.cardType" required />
+                            <input class="input-shadow-border" type="text" name="name" ng-model="billingEdit.cardType" required />
                         </fieldset>
                         <fieldset class="col-2">
                             <label>CVS code</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" ng-pattern="/[0-9]+/" ui-mask="9999" class="me-xs-input reset-inline" ng-model="billingEdit.cvs" required />
+                            <input class="input-shadow-border" type="text" name="name" ng-pattern="/[0-9]+/" ui-mask="9999" class="me-xs-input reset-inline" ng-model="billingEdit.cvs" required />
                         </fieldset>
 
-                        <div class="md-dialog-buttons">
+                        <div class="btn-view md-dialog-buttons ">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="backToView(1)">cancel</md-button>
                                 <md-button class="me-default-button" ng-click="saveBillings(billingEdit)">save</md-button>

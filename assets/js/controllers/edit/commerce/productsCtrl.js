@@ -24,7 +24,6 @@
             $scope.product = {'appId':$rootScope.appId}
         }
 
-
         $scope.finelImages = [];
         $scope.tmpImageIndex = [];
         $scope.mainImg = null;
@@ -141,6 +140,7 @@
             console.log("<><><><><><>< ")
             $scope.selection = selection;
             $scope.selectedTab = current;
+
         };
 
         $scope.cropImage = function () {
@@ -647,5 +647,18 @@
         $scope.answer = function () {
             $mdDialog.hide();
         };
+
+        // checking if the user is adding a product or editing
+        if (initialData.product.id === undefined){
+            $scope.product.checked = false;
+        }
+        else{
+            $scope.product.checked = true;
+            $scope.selectedTab = 1;
+            $scope.enableTab = false;
+
+        }
+
+
     }
 })();

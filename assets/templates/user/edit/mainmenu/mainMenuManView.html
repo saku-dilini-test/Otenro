@@ -9,15 +9,17 @@
                     </li>
                 </ul>
             </div>
-            <table class="me-simple-table">
-                <tbody>
-                <tr ng-repeat="item in menuItems">
-                    <td>{{item.name}}</td>
-                    <td><img width="25" src="../../../images/edit-icon.svg" ng-click="goToEditMenuItemView(item)"></td>
-                    <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteMenuItem(item)"></td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="md-dialog-main">
+                <table class="me-simple-table">
+                    <tbody>
+                    <tr ng-repeat="item in menuItems">
+                        <td>{{item.name}}</td>
+                        <td><img width="25" src="../../../images/edit-icon.svg" ng-click="goToEditMenuItemView(item)"></td>
+                        <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteMenuItem(item)"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <!-- TODO : Later, ui-tree may be use -->
             <script type="text/ng-template" id="nodes_renderer1.html">
