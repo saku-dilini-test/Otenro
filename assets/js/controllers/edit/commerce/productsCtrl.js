@@ -95,9 +95,37 @@
                     price: null,
                     quantity: null
                 };
-                $scope.product.variants.push($scope.inserted);
+
+                if($scope.product.variants.length >= 2){
+                    duplicateSku(variants.sku);
+                }
+                else{
+                    $scope.product.variants.push($scope.inserted);
+                }
             }
         };
+        /*
+            Checking if the sku duplicates.
+        */
+        function duplicateSku(sku) {
+            var length = $scope.product.variants.length;
+            var arr = [];
+            for(var i = 0; i<length-1; i++){
+                arr.push($scope.product.variants[i]);
+            }
+            var found = arr.some(function (el) {
+              return el.sku === sku;
+            });
+            if (!found) {
+                $scope.product.variants.push($scope.inserted);
+            }
+            else{
+                toastr.error('SKU already exist', 'Warning', {
+                    closeButton: true
+                });
+            }
+        }
+
         /**
          * Delete a Variant from a product
          * @param index
