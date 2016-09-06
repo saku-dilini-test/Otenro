@@ -56,5 +56,8 @@ mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,$s
             alert(provider+' Login error');
         });
     };
-
+    // back to login in view function
+    $scope.backToLogin = function () {
+        $state.go("app.login");
+    }
 });
