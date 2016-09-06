@@ -174,7 +174,7 @@ angular.module('starter.controllers', [])
             });
         }else{
         $rootScope.cart.cartItems.push({
-            id: $scope.selectedVariant.id,
+            id: itemId,
             productId: $scope.selectedVariant.productId,
             name: $scope.item.name,
             qty:$scope.selectedVariant.buyQuantity,
