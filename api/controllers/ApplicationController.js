@@ -234,6 +234,19 @@ module.exports = {
                         if (err) return res.negotiate(err);
                     });
                 });
+            
+            /** config -|- copy template images to App File Server 
+             * TODO : future development, Template dummy data move to another folder
+             * **/
+            var appFileServerPath  = config.APP_FILE_SERVER + userId + '/templates/' + app.id +'/';
+            var tempDummyImagesPath = templatePath + '/img/';
+            var tempDummyImagesDesPath = appFileServerPath +  'img/';
+            /** Copy Template Dummy Images to APP File Server for given userID & appID **/
+            fs.copy(tempDummyImagesPath,tempDummyImagesDesPath,function (err) {
+                if (err) return res.negotiate(err);
+                    sails.log('Third-navigation images copy to app-File-Server');
+                }
+            );
 
         });
         /**

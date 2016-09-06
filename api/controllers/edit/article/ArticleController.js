@@ -94,8 +94,8 @@ module.exports = {
 
     updateCategoryImage : function(req,res){
 
-        var filePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/'+ req.body.imageUrl;
-        var desPath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
+        var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/'+ req.body.imageUrl;
+        var desPath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
 
         req.file('file').upload({
             dirname: require('path').resolve(desPath)
@@ -132,7 +132,7 @@ module.exports = {
     publishArticle : function(req,res){
         
         var article = req.body;
-        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/article/';
+        var dePath=config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/article/';
 
         if(article.isNewArticle == 'true'){
             req.file('file').upload({
@@ -200,7 +200,7 @@ module.exports = {
 
         Article.destroy(deleteQuery).exec(function (err) {
             if (err) return callback("Error while deleting " + err.message);
-            var filePath = config.ME_SERVER + req.userId + '/templates/' + appId+ '/img/article/'+ imageUrl;
+            var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + appId+ '/img/article/'+ imageUrl;
             fs.unlink(filePath, function (err) {
                 if (err) return callback("Error while deleting " + err.message);
                 res.send(200,{message:'Deleted Article'});
