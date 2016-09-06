@@ -57,20 +57,6 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
         templateUrl: 'templates/register.html',
         controller: 'RegisterCtrl'
       })
-      .state('cart', {
-        url: '/cart',
-        templateUrl: 'templates/cart.html',
-        controller: 'CartCtrl'
-      })
-      .state('deliverDetails', {
-        cache: false,
-        url: '/deliverDetails',
-        params:{
-          item: null
-        },
-        templateUrl: 'templates/deliverDetails.html',
-        controller: 'CartCtrl'
-      })
       .state('pickup', {
           url: '/pickup',
           templateUrl: 'templates/pickup.html',
@@ -118,6 +104,28 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
       }
     }
   })
+    .state('tab.cart', {
+     url: '/cart',
+     views: {
+           'tab-menu': {
+             templateUrl: 'templates/cart.html',
+             controller: 'CartCtrl'
+           }
+         }
+    })
+    .state('tab.deliverDetails', {
+      cache: false,
+      url: '/deliverDetails',
+      params:{
+        item: null
+      },
+      views: {
+        'tab-menu': {
+          templateUrl: 'templates/deliverDetails.html',
+          controller: 'CartCtrl'
+        }
+      }
+    })
     .state('tab.ourStores', {
     url: '/ourStores',
     views: {

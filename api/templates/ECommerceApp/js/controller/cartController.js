@@ -62,7 +62,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
 
             $scope.delivery = function (deliverItems) {
                 if (localStorage.getItem('appLocalStorageUser') !== null) {
-                    $state.go('deliverDetails', {item: deliverItems});
+                    $state.go('tab.deliverDetails', {item: deliverItems});
                 }
                 else {
                     $state.go('login');

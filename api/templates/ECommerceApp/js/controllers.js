@@ -175,7 +175,6 @@ angular.module('starter.controllers', [])
         }else{
         $rootScope.cart.cartItems.push({
             id: itemId,
-            productId: $scope.selectedVariant.productId,
             name: $scope.item.name,
             qty:$scope.selectedVariant.buyQuantity,
             sku: $scope.selectedVariant.sku,
@@ -185,7 +184,7 @@ angular.module('starter.controllers', [])
         });
         $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
         $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-        $state.go('cart');
+        $state.go('tab.cart');
         }
     }
 

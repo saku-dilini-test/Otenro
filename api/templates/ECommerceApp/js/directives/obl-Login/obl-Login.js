@@ -27,7 +27,7 @@
                             };
                             localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
 								if($stateParams.item == 'delivery'){
-                                    $state.go('cart');
+                                    $state.go('tab.cart');
                                 }else{
                                     $state.go('tab.menu');
                                 }
@@ -44,7 +44,7 @@
 						$auth.authenticate(provider).then(function(res){
 							if(typeof res.data.token != 'undefined'){
 								if($stateParams.item == 'delivery'){
-                                    $state.go('cart');
+                                    $state.go('tab.cart');
                                 }else{
                                     $state.go('tab.menu');
                                 }
