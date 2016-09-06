@@ -24,10 +24,14 @@ module.exports = {
         };
 
         Article.find(searchQuery).exec(function(err,result) {
-            if (err) return done(err);
+            if (err) {
+                sails.log.debug("Article Collection find Error for given appId : "+appId);
+                return done(err);
+            }
             res.send(result);
         });
     },
+
     /**
      * return collection of article given appId
      *
@@ -42,7 +46,10 @@ module.exports = {
         };
 
         ArticleCategory.find(searchQuery).exec(function(err,result) {
-            if (err) return done(err);
+            if (err) {
+                sails.log.debug("Article Category Collection find Error for given appId : "+appId);
+                return done(err);
+            }
             res.send(result);
         });
     },
@@ -55,15 +62,19 @@ module.exports = {
      */
     addCategory : function(req,res){
 
-        var appId = req.param('appId');
         var data = req.body;
+        var appId = req.param('appId');
         data.appId = appId;
 
         ArticleCategory.create(data).exec(function(err,result) {
-            if (err) return done(err);
+            if (err){
+                sails.log.debug("Article Category Create Error");
+                return done(err);
+            }
             res.send(result);
         });
     },
+
     /**
      * delete collection of article category given Id
      *
@@ -76,22 +87,44 @@ module.exports = {
         var deleteQuery = {
             id : id
         };
+
         ArticleCategory.destroy(deleteQuery).exec(function(err,result) {
-           if (err) return res.send(err);
-            res.send(result);
-        });
-    },
-    editCategory : function(req,res){
-        var editQuery = {
-            appId : req.body.appId,
-            id:req.body.id
-        };
-        ArticleCategory.update(editQuery,{"name":req.body.name}).exec(function(err,result) {
-            if (err) return done(err);
+           if (err){
+               sails.log.debug("Article Category Delete Error");
+               return res.send(err);
+           }
             res.send(result);
         });
     },
 
+    /**
+     * update article category name for given  app Id
+     *
+     * @param req appId, Article Category ID, Article Category Name
+     * @param res result
+     */
+    editCategory : function(req,res){
+        var updateQuery = {
+            appId : req.body.appId,
+            id    : req.body.id
+        };
+
+        var updateData = {"name":req.body.name};
+        ArticleCategory.update(updateQuery,updateData).exec(function(err,result) {
+            if (err){
+                sails.log.debug("Article Category Name Edit Error");
+                return res.send(err);
+            }
+            res.send(result);
+        });
+    },
+
+    /**
+     * Update article category Image for given appID
+     *
+     * @param req
+     * @param res
+     */
     updateCategoryImage : function(req,res){
 
         var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/'+ req.body.imageUrl;
@@ -109,7 +142,7 @@ module.exports = {
             console.log("req.body.imageUrl " + req.body.imageUrl);
 
             if (typeof req.body.imageUrl != "undefined"){
-                // Create new img file name using date.now() 
+                // Create new img file name using date.now()
                 var fileName = Date.now() + '.jpg';
                 fs.rename(uploadedFiles[0].fd, desPath + fileName , function (err) {
                     if (err) return res.send(err);
