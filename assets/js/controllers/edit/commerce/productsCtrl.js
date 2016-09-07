@@ -138,16 +138,15 @@
         };
 
         $scope.addProductVariants = function (selection, variants,current) {
-            console.log("<><><><><><>< ")
-            console.log("<><><><><><>< "+ JSON.stringify($scope.product))
-            console.log("<><><><><><>< ")
             $scope.selection = selection;
             $scope.selectedTab = current;
 
         };
 
-        $scope.cropImage = function () {
 
+
+        $scope.cropImage = function () {
+            $scope.myImage = null;
             var handleFileSelect=function(evt) {
 
                 var file=evt.currentTarget.files[0];
