@@ -142,7 +142,7 @@
                                 <td ng-model="data.name"><p class="product-name">{{data.name}}</p></td>
                                 <td>
                                     <md-input-container style="width: 90px;">
-                                        <input maxlength="10"
+                                        <input ng-blur="validateInputValue(data.sku,'sku')"  md-maxlength="10"
                                                required
                                                name="sku_{{$index}}"
                                                ng-model="data.sku"
@@ -167,7 +167,7 @@
                                         <!--</div>-->
                                     <!--</md-input-container>-->
                                   <md-input-container class="md-container-modify">
-                                    <input name="size_{{$index}}" maxlength="8"
+                                    <input ng-blur="validateInputValue(data.size,'size')" class="product-name-column-input" name="size_{{$index}}" md-maxlength="8"
                                            ng-pattern="/^[0-9a-zA-Z ]+$/" ng-model="data.size" required>
                                       <div ng-messages="priceAndVariantsForm['size_' + $index].$error " ng-show="priceAndVariantsForm['size_' + $index].$dirty">
                                           <div ng-message="pattern" class="my-message">That doesn't look like a valid size or weight</div>
