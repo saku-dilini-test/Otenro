@@ -200,7 +200,10 @@
                         <fieldset class="col-2">
                             <label>CVS code</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input class="input-shadow-border" type="text" name="name" ng-pattern="/[0-9]+/" ui-mask="9999" class="me-xs-input reset-inline" ng-model="billingEdit.cvs" required />
+                            <input class="input-shadow-border" type="text" name="cvs" ng-pattern="/^[0-9]{3,4}$/" class="me-xs-input reset-inline" ng-model="billingEdit.cvs" required />
+                            <span class="help-block " ng-show="editBilling.cvs.$error.pattern">
+                                <span >Not a valid cvs</span>
+                            </span>
                         </fieldset>
 
                         <div class="btn-view md-dialog-buttons ">
