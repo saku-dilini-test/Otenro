@@ -42,10 +42,6 @@ module.exports = {
         });
     },
 
-
-
-
-
     /**
      * add or update product
      * @param req
@@ -243,119 +239,6 @@ module.exports = {
                 res.send('ok');
             });
         }
-    },
-
-//    getVariants: function(req,res){
-//    var appId = req.param('appId');
-//    var childId = req.param('childId');
-//            var searchApp = {
-//                appId: appId,
-//                childId: childId
-//            };
-//            console.log(searchApp);
-//        PriceAndVariants.find(searchApp, function(err, app) {
-//        if (err) return done(err);
-//           res.send(app);
-//        });
-//    },
-
-    updateVariants: function(req,res){
-                var searchApp = {
-                    appId: req.body.appId
-                };
-        PriceAndVariants.find(searchApp, function(err, app){
-
-             if (err) {return done(err);}
-             else if(app == ""){
-                 PriceAndVariants.create(req.body).exec(function (err, thirdN) {
-                     if (err) return err;
-                 });
-             }
-             else{
-             PriceAndVariants.update({childId: req.body.childId},req.body).exec(function(err){
-                             if (err) res.send(err);
-                             res.send('ok');
-             });
-            }
-
-        })
-    },
-    
-    addVariants : function (req,res){
-        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/';
-           if (typeof req.body.quantity !== 'undefined'){
-               var priceAndVariantsAttribute =req.body;
-               PriceAndVariants.find({id: priceAndVariantsAttribute.id}).exec(function(err,found){
-                    if(err) res.send(err);
-                    var query = {
-                        name: priceAndVariantsAttribute.name,
-                        childId: priceAndVariantsAttribute.childId
-                    };
-                    if(found != ''){
-                        PriceAndVariants.update({productId: priceAndVariantsAttribute.productId},query).exec(function(e,updt){
-                            if(e) res.send(e);
-                        })
-                        PriceAndVariants.update({id: priceAndVariantsAttribute.id},priceAndVariantsAttribute).exec(function(err,variants){
-                            if(err) res.send(err);
-                            res.send(variants);
-                        })
-                    }
-                    else{
-                        PriceAndVariants.create(priceAndVariantsAttribute).exec(function(err, priceAndVariants) {
-                            if (err){
-                                res.send(err);
-                            }else{
-                                res.send(priceAndVariants);
-                            }
-                        });
-                    }
-               })
-
-           }else {
-               req.file('file').upload({
-                   dirname: require('path').resolve(dePath)
-               },function (err, uploadedFiles) {
-                   if (err) return res.send(500, err);
-                   var priceAndVariantsAttribute =req.body;
-                       priceAndVariantsAttribute.fileUrl = uploadedFiles[0].fd.split("/").pop();
-                       PriceAndVariants.create(priceAndVariantsAttribute).exec(function(err, priceAndVariants) {
-                           if (err){
-                               res.send(err);
-                           }else{
-                               res.send(priceAndVariants);
-                           }
-                       });
-               });
-           }
-    },
-
-    addToInventory: function(req,res){
-    var inventoryData = req.body;
-        console.log(inventoryData);
-    ApplicationInventory.find({id: inventoryData.id}).exec(function(e,found){
-        if(e) res.send(e);
-        var query = {
-            name: inventoryData.name,
-            childId: inventoryData.childId,
-        };
-        if(found  != ''){
-
-            ApplicationInventory.update({productId: inventoryData.productId},query).exec(function(e,updt){
-                 if(e) res.send(e);
-            });
-            ApplicationInventory.update({id: inventoryData.id},inventoryData).exec(function(err,inventry){
-                if(err) res.send(err);
-                res.send(inventry[0]);
-            });
-        }
-        else{
-            ApplicationInventory.create(inventoryData).exec(function(err,invntry){
-                if(err) console.log(err);
-                res.send(invntry);
-            })
-        }
-    })
-
     },
 
     getUpdates: function(req,res){
