@@ -3,6 +3,15 @@ Create tabs with an icon and label, using the tabs-positive style.
 Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
+<ion-nav-bar class="made-easy-navigationBarColor bar-stable">
+  <ion-nav-back-button class="made-easy-navigationBarColor">
+  </ion-nav-back-button>
+  <ion-nav-buttons side="right" class="cursor-body">
+    <a ui-sref="tab.cart" class="button button-icon ion-ios-cart-outline cursor-body">
+      <span class="badge2">{{parentobj.cartSize}}</span>
+    </a>
+  </ion-nav-buttons>
+</ion-nav-bar>
 
 <ion-tabs class="made-easy-navigationBarColor tabs-icon-top tabs-color-active-positive">
 

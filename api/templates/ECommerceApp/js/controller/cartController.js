@@ -65,7 +65,8 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                     $state.go('tab.deliverDetails', {item: deliverItems});
                 }
                 else {
-                    $state.go('login');
+                    $scope.status = 'delivery'
+                    $state.go('tab.login',{item:$scope.status});
                 }
             }
 
@@ -74,7 +75,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                      $state.go('pickup');
                  }
                  else{
-                     $state.go('login');
+                     $state.go('tab.login');
                  }
              }
 
