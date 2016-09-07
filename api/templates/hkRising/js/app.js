@@ -91,6 +91,7 @@ angular.module('starter', ['ionic', 'ionicLazyLoad','starter.services','starter.
 
 
   .state('app.aboutus', {
+      cache: false,
       url: '/aboutus',
       views: {
         'menuContent': {
@@ -100,6 +101,7 @@ angular.module('starter', ['ionic', 'ionicLazyLoad','starter.services','starter.
       }
     })
     .state('app.contactus', {
+      cache: false,
       url: '/contactus',
       views: {
         'menuContent': {

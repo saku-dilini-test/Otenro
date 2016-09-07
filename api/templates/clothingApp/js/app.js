@@ -107,6 +107,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           }
       })
       .state('app.contactUs', {
+          cache: false,
           url: '/contactUs',
           views: {
               'menuContent': {
