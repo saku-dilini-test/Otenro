@@ -136,6 +136,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     }
   })
   .state('tab.aboutUs', {
+      cache: false,
       url: '/aboutUs',
       views: {
         'tab-aboutUs': {
@@ -145,6 +146,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
       }
     })
     .state('tab.contactUs', {
+    cache: false,
     url: '/contactUs',
     views: {
       'tab-contactUs': {
