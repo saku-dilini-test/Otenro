@@ -233,7 +233,7 @@ module.exports = {
                                                             }
                                                         }
                                                     });
-                                                    shell.exec('zipalign -v 4 android-release-unsigned.apk '+appName.replace(/\s/g, '')+'.apk', {async: true}, function (code5, stdout, stderr) {
+                                                    shell.exec(' /opt/android-sdk-linux/build-tools/23.0.1/zipalign -v 4 android-release-unsigned.apk '+appName.replace(/\s/g, '')+'.apk', {async: true}, function (code5, stdout, stderr) {
                                                         if (code5==0){
 
                                                              var file = appPath + '/platforms/android/build/outputs/apk/'+appName.replace(/\s/g, '')+'.apk';
