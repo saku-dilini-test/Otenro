@@ -163,7 +163,8 @@ p{
     margin-bottom: 5px;
     text-align: left;
     text-transform: uppercase;
-    margin-left: -330px;
+    position:relative;
+    top: -232px;
 }
 label{
     border: medium none;
@@ -822,6 +823,17 @@ table{
 .me-hours-table td{
     color: #999;
     border-bottom: 1px solid #EAEAEA;
+    position:relative;
+}
+.me-hours-table td span{
+    position: absolute;
+    color: red;
+    border-radius: 2px;
+    left: 15px;
+    top : 40px;
+    z-index:1;
+    width:118px;
+    font-size: 11px;
 }
 
 /* Checkbox Table */
@@ -1362,9 +1374,7 @@ background-color: #f4f5f4;
 .uploaded-section .uploaded-new-image {
     float: left;
     width: 175px;
-    margin-top: -3%;
-    /* margin-left: 5%; */
-    margin-bottom: 2%;
+    margin:10px 0 6% 20px
 }
 
 .uploaded-section .uploaded-new-image img{
@@ -1954,10 +1964,11 @@ button[disabled]{
 trix-toolbar .button_group input[type=button]{
     height: 32px;
     width: 38px;
+    border-bottom:unset;
 }
 
 .custom-trix trix-editor{
-    width:75%;
+    width:100%;
     min-height:207px;
 }
 
@@ -1974,6 +1985,17 @@ trix-toolbar .button_group input[type=button]{
 }
 .email-image-upload button{
     margin: 1em 0 0 0;
+}
+
+.validation-massage-span{
+    position: absolute;
+    color: red;
+    width: 125px;
+    padding: 1em;
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 0px 10px 1px;
+    left: 80px;
+    background-color: rgb(255, 232, 231);
 }
 
 /*Making a theme. Add your specified colors here. define as color... */

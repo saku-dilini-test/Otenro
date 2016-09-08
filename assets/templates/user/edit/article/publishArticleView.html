@@ -8,14 +8,14 @@
 
             <fieldset>
                 <label>Article Category</label>
-                    <select ng-model="articleCat.value"
+                    <select class="input-shadow-border" ng-model="articleCat.value"
                             ng-options="v.id as v.name for v in articleCat.values"
                             ng-change="changeArticleCat(articleCat.value)" required>
                     </select>
             </fieldset>
             <fieldset>
                 <label>Title</label>
-                <input type="text" name="title" ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="article.title" required />
+                <input class="input-shadow-border" type="text" name="title" ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="article.title" required />
                 <br />
                 <span ng-show="articleForm.title.$error.pattern">No symbols</span>
                 <div ng-hide="article.title.length > maxArticleTitle">
@@ -26,31 +26,32 @@
                 </div>
             </fieldset>
             <span ng-show="articleForm.title.$error.maxlength">Too lengthy</span></td>
-            <fieldset class="col-2">
+            <fieldset>
                <!-- <div class="md-dialog-header">
                     <h1>Upload Image</h1>
                 </div>-->
 
                 <!--<div class="md-dialog-main">-->
                     <div class="file-upload-wrapper clearfix">
-                        <p class="file-upload-msg" style="font-size:16px;">Crop your image</p>
-                        <div class="pull-left">
-                            <input  class="pull-left" type="file" ng-click = "cropImage()" id="fileInput" required/>
+                        <div class="inputField">
+                            <div class="btn-material">
+                                <span>Select a image</span>
+                                <input type="file" ng-click = "cropImage()" id="fileInput" required/>
+                            </div>
                         </div>
+
                         <div class="cropArea">
                             <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
                         </div>
                     </div>
 
-                    <div class="uploaded-section pull-left clearfix">
+                    <div class="uploaded-section image-upload clearfix" style="width:35%">
                         <div class="uploaded-new-image">
-                            <br>
                             <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
                                  height="150" style="display:none" />
                             <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
 
-                            <button class="me-upload-image-button" ng-disabled="picFile == null" ng-click="addImage(picFile)">Upload Image
-                            </button>
+                            <button class="btn-material" ng-disabled="picFile == null" ng-click="addImage(picFile)">crop & upload</button>
                         </div>
                         <div class="uploaded-old-images">
                             <p>Uploaded Product Images</p>
@@ -69,10 +70,12 @@
                <!-- </div>-->
             </fieldset>
 
-            <fieldset class="pull-left">
+            <fieldset style="clear:both">
                 <label>Text</label>
-                <trix-editor class="textEditor" name="editorText" ng-maxlength="200" angular-trix ng-model="article.desc"
-                             required></trix-editor>
+                <div class="custom-trix">
+                    <trix-editor class="textEditor input-shadow-border" name="editorText" ng-maxlength="200" angular-trix ng-model="article.desc"
+                                 required></trix-editor>
+                 </div>
                 <label class="desc">Description</label>
             </fieldset>
             <fieldset style="margin-bottom:0px;">
