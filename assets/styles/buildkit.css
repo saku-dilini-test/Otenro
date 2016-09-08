@@ -1935,6 +1935,47 @@ button[disabled]{
     width:850px;
 }
 
+.custom-trix{
+
+}
+
+.custom-trix trix-toolbar .button_group {
+    display: inline-block;
+    box-shadow: 0 0 10px 2px rgba(0,0,0,0.2);
+    font-size: 0;
+    margin: 5px 8px 0 0;
+    border:unset;
+    border-color:unset;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.custom-trix trix-toolbar .button_group button,
+trix-toolbar .button_group input[type=button]{
+    height: 32px;
+    width: 38px;
+}
+
+.custom-trix trix-editor{
+    width:75%;
+    min-height:207px;
+}
+
+.email-image-upload{
+    margin: 0;
+    position: relative;
+    padding: 0 0 0 47px;
+    float: left;
+    top: -19px;
+    width: 25%;
+}
+.email-image-upload p{
+    padding:unset;
+}
+.email-image-upload button{
+    margin: 1em 0 0 0;
+}
+
 /*Making a theme. Add your specified colors here. define as color... */
 
 .color-link{

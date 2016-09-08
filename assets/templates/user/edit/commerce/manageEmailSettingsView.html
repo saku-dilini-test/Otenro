@@ -45,7 +45,7 @@
                             <fieldset class="fieldset-default-size">
                                 <label>alert at</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="input" name="alertAt" class="me-xs-input reset-inline" required
+                                <input type="input" name="alertAt" class="input-shadow-border me-xs-input reset-inline" required
                                        ng-model="emailDel.alertAt"/>
                                <!-- <span>%</span>-->
                             </fieldset>
@@ -78,7 +78,9 @@
                         <fieldset>
                             <label>Header</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <trix-editor angular-trix rows="4" ng-model="emailHF.header" required></trix-editor>
+                            <div class="custom-trix">
+                                <trix-editor angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>
+                            </div>
                             <!--<div class="file-upload-wrapper clearfix">-->
                                 <!--<p class="file-upload-msg">Upload your product images</p>-->
                                 <!--<div class="pull-left">-->
@@ -91,33 +93,34 @@
                                     <!--</div>-->
                                 <!--</div>-->
                             <!--</div>-->
-                            <div class="uploaded-section clearfix">
+                            <div class="email-image-upload uploaded-section clearfix">
                                 <div class="uploaded-new-image3">
-                                    <p>Header Image</p>
+                                    <p>Insert Header Image</p>
                                     <img ng-if="picFileHeader == null" ng-src="../../../images/medium-placeholder.png" width="150"
                                          height="150"/>
                                     <img ng-if="picFileHeader != null" ngf-src="picFileHeader" width="150" height="150"/>
 
-                                    <button class="me-upload-image-button" ngf-select ng-model="picFileHeader" ngf-accept="image/*"
-                                            aria-invalid="true" ngf-change="changeImage()" required>Upload Image
+                                    <button class="btn-material" ngf-select ng-model="picFileHeader" ngf-accept="image/*"
+                                            aria-invalid="true" ngf-change="changeImage()" required>Choose Image
                                     </button>
 
                                 </div>
-                                </div>
+                            </div>
                         </fieldset>
                         <fieldset>
                             <label>footer</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <trix-editor angular-trix rows="4" ng-model="emailHF.footer"></trix-editor>
-
-                            <div class="uploaded-section clearfix">
+                            <div class="custom-trix">
+                                <trix-editor angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.footer"></trix-editor>
+                            </div>
+                            <div class="email-image-upload uploaded-section clearfix">
                                 <div class="uploaded-new-image3">
-                                    <p>footer Image</p>
+                                    <p>insert footer Image</p>
                                     <img ng-if="picFileFooter == null" ng-src="../../../images/medium-placeholder.png" width="150"
                                          height="150"/>
                                     <img ng-if="picFileFooter != null" ngf-src="picFileFooter" width="150" height="150"/>
 
-                                    <button class="me-upload-image-button" ngf-select ng-model="picFileFooter" ngf-accept="image/*"
+                                    <button class="btn-material" ngf-select ng-model="picFileFooter" ngf-accept="image/*"
                                             aria-invalid="true" ngf-change="changeImage()" required >Upload Image
                                     </button>
                                 </div>
@@ -150,7 +153,9 @@
                         <fieldset>
                             <label>order confirmed email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <trix-editor angular-trix rows="4" ng-model="OConfirm.orderConfirmedEmail" required></trix-editor>
+                            <div class="custom-trix">
+                                <trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="OConfirm.orderConfirmedEmail" required></trix-editor>
+                            </div>
                         </fieldset>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order confirm')">send test email</md-button>
 
@@ -180,7 +185,9 @@
                         <fieldset>
                             <label>order fulfilled email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <trix-editor angular-trix rows="4" ng-model="Ofulfilled.orderFulfilledEmail" required></trix-editor>
+                            <div class="custom-trix">
+                                <trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="Ofulfilled.orderFulfilledEmail" required></trix-editor>
+                            </div>
                         </fieldset>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order Fulfilled')">send test email</md-button>
                     </div>
@@ -209,7 +216,9 @@
                         <fieldset>
                             <label>order refunded email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <trix-editor angular-trix rows="4" ng-model="ORefund.orderRefundEmail" required></trix-editor>
+                            <div class="custom-trix">
+                                <trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="ORefund.orderRefundEmail" required></trix-editor>
+                            </div>
                         </fieldset>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order Refund')">send test email</md-button>
                     </div>
