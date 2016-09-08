@@ -87,6 +87,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       }
   })
   .state('app.aboutUs', {
+      cache: false,
       url: '/aboutUs',
       views: {
         'menuContent': {
@@ -105,6 +106,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           }
       })
       .state('app.contactUs', {
+          cache: false,
           url: '/contactUs',
           views: {
               'menuContent': {

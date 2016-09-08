@@ -9,9 +9,9 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("ArticleCtrl", [
-        '$scope','$mdDialog','$auth','$rootScope','articleService','toastr','ME_APP_SERVER','mySharedService','initialData',ArticleCtrl]);
+        '$scope','$mdDialog','$auth','$rootScope','articleService','toastr','SERVER_URL','ME_APP_SERVER','mySharedService','initialData',ArticleCtrl]);
 
-    function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,ME_APP_SERVER,mySharedService,initialData) {
+    function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,SERVER_URL,ME_APP_SERVER,mySharedService,initialData) {
 
         $scope.appId = $rootScope.appId;
         $scope.tmpImage = [ null ];

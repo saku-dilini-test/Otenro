@@ -124,6 +124,7 @@ angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdM
 				}
 			})
 			.state('app.contactUs', {
+			    cache: false,
 				url: '/contactUs',
 				views: {
 					'menuContent': {
@@ -133,6 +134,7 @@ angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdM
 				}
 			})
 			.state('app.aboutus', {
+			    cache: false,
             	url: '/aboutus',
             	views: {
             		'menuContent': {

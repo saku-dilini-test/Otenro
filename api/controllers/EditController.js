@@ -34,21 +34,21 @@ module.exports = {
         res.sendfile(config.ME_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
     },
 
+    /**
+     * Build the android source for mobile app
+     * @param req
+     * @param res
+     */
     buildSource : function(req,res){
-
-
-        /*var userId = req.userId;*!/*/
-        /*var appId = req.body.appId;*/
-        /*console.log("userId " + userId);*/
-        var userId = req.param('userId');
-        var appId = req.param('appId');
-        var copyDirPath = config.ME_SERVER + userId + '/build/' + appId + '/';
-        var wwwPath = copyDirPath + 'www/';
-        var moveConfigFile = copyDirPath + 'config.xml';
-        var selectedTemplatePath = config.ME_SERVER + userId + '/templates/' + appId +'/';
-        var configFile = copyDirPath + 'www/config.xml';
-        var appIconFile = copyDirPath + 'www/res/android/icon/icon.jpg';
-        var srcPath = sails.config.appPath + '/api/src/hybrid/';
+        var userId = req.param('userId'),
+            appId = req.param('appId'),
+            copyDirPath = config.ME_SERVER + userId + '/build/' + appId + '/',
+            wwwPath = copyDirPath + 'www/',
+            moveConfigFile = copyDirPath + 'config.xml',
+            selectedTemplatePath = config.ME_SERVER + userId + '/templates/' + appId +'/',
+            configFile = copyDirPath + 'www/config.xml',
+            appIconFile = copyDirPath + 'www/res/android/icon/icon.jpg',
+            srcPath = sails.config.appPath + '/api/src/hybrid/';
 
         fs.readFile(moveConfigFile, 'utf-8',
             function(err, data) {
@@ -263,12 +263,6 @@ module.exports = {
                                 }
                                 shell.code;
                             });
-                    /*    }else{
-                            if (stderr) return res.negotiate(stderr);
-                        }
-                        shell.code;
-                    });*/
-
                 }else{
                     if (stderr) return res.negotiate(stderr);
                 }

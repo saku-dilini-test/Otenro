@@ -29,7 +29,7 @@ mobileApp.controller('RegisterCtrl', function ($scope, $http, $ionicPopup, $stat
                         };
                         localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
                         console.log(localStorage.getItem('appLocalStorageUser'));
-                        $state.go('deliverDetails');
+                        $state.go('tab.deliverDetails');
                     },
                     function (err) {
                         $ionicPopup.alert({
@@ -42,7 +42,7 @@ mobileApp.controller('RegisterCtrl', function ($scope, $http, $ionicPopup, $stat
             $scope.authenticate = function (provider) {
                 $auth.authenticate(provider).then(function (res) {
                     if (typeof res.data.token != 'undefined') {
-                        $state.go('deliverDetails');
+                        $state.go('tab.deliverDetails');
                     } else {
                         alert(provider + ' Login error');
                     }

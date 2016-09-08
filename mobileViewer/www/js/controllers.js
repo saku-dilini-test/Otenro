@@ -57,6 +57,7 @@ angular.module('starter.controllers', [])
     $scope.appList = allApps.data;
     setInterval(function() {
       dashBoardService.getAllApps().success(function (data) {
+          console.log(data);
           $scope.appList = data;
       })
     },10000);

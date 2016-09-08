@@ -5,7 +5,7 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("ShippingCtrl", [
-        '$scope', 'toastr', 'shippingService', '$rootScope','taxService','initialData', ShippingCtrl]);
+        '$scope', 'toastr', 'shippingService', '$rootScope','taxService','initialData','$mdDialog', ShippingCtrl]);
 
     function ShippingCtrl($scope, toastr, shippingService, $rootScope,taxService,initialData) {
 
@@ -242,6 +242,27 @@
         $scope.backToShippingView = function(){
             return shippingService.showShippingDialog();
         };
+
+        //ok button
+        $scope.btnOk = function(){
+            $mdDialog.hide();
+            console.log("wtf")
+        };
+
+        function DialogController($scope, $mdDialog) {
+            $scope.hide = function() {
+              $mdDialog.hide();
+            };
+
+            $scope.cancel = function() {
+              $mdDialog.cancel();
+            };
+
+            $scope.answer = function(answer) {
+              $mdDialog.hide(answer);
+            };
+          }
+
 
     }
 })();

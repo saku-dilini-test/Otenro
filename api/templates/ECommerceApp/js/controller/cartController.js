@@ -62,7 +62,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
 
             $scope.delivery = function (deliverItems) {
                 if (localStorage.getItem('appLocalStorageUser') !== null) {
-                    $state.go('deliverDetails', {item: deliverItems});
+                    $state.go('tab.deliverDetails', {item: deliverItems});
                 }
                 else {
                     $state.go('login');
@@ -97,8 +97,8 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                         $http.post(constants.SERVER_URL + "/templatesInventory/updateInventory", $stateParams.item)
                             .then(function (res) {
                                 $rootScope.cart.cartItems = [];
-                                $rootScope.cart.cartSize = 0;
-                                $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+//                                $rootScope.cart.cartSize = 0;
+//                                $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                                 $rootScope.cart.totalPrice = 0;
                                 $rootScope.cart.totalQuantity = 0;
                                 $ionicPopup.alert({

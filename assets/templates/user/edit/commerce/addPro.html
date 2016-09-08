@@ -1,9 +1,9 @@
-<md-dialog aria-label="Manage Products" style="width:850px">
+<md-dialog aria-label="Manage Products" class="md-dialog-addProduct">
     <md-dialog-content>
         <md-tabs  md-no-ink-bar ="false"  md-no-bar  md-center-tabs="false" md-selected="selectedTab"  md-autoselect="false"
                  md-dynamic-height="true">
             <!--Add Product Tab 1 content -->
-            <md-tab >
+            <md-tab ng-disabled="enableTab" disabled="true ">
                 <md-tab-label>Product Type</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -31,8 +31,10 @@
             </md-tab>
 
             <!-- Add Product Tab 2 content -->
-            <md-tab>
+            <md-tab ng-disabled="enableTab">
                 <md-tab-body>
+
+                    <md-tab-label>Add Details</md-tab-label>
                     <div class="md-dialog-header">
                         <h1>Add Product</h1>
                     </div>
@@ -68,7 +70,8 @@
                                            name="sku"
                                            ng-model="product.sku"
                                            ng-pattern="/^\d*[1-9]\d*$/"
-                                           ng-readonly="product.checked">
+                                           ng-readonly="product.checked"
+                                           ng-click="check(index)">
                                     <div ng-messages="productForm.sku.$error" ng-show="productForm.sku.$dirty">
                                         <div ng-message="required">SKU is required.</div>
                                         <div ng-message="md-maxlength">The SKU must be less than 10 characters long.</div>
@@ -111,8 +114,7 @@
             </md-tab>
 
             <!--Product Variants Tab-->
-            <md-tab-label>Add Details</md-tab-label>
-            <md-tab ng-if="isDigital==false" md-no-select-click ="true" ng-disabled=enableTab >
+            <md-tab class="price-varients-tab" ng-if="isDigital==false" md-no-select-click ="true" ng-disabled=enableTab >
                 <md-tab-label>Price & Variants</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -140,17 +142,17 @@
                             <tr ng-repeat="data in product.variants">
                                 <td ng-model="data.name"><p class="product-name">{{data.name}}</p></td>
                                 <td>
-                                    <md-input-container style="width: 115px;">
-                                        <input md-maxlength="10"
+                                    <md-input-container style="width: 90px;">
+                                        <input ng-blur="validateInputValue(data.sku,'sku')"  md-maxlength="10"
                                                required
                                                name="sku_{{$index}}"
                                                ng-model="data.sku"
                                                ng-pattern="/^\d*[1-9]\d*$/"
-                                               ng-readonly="product.checked">
+                                               ng-readonly="product.checked"
+                                               ng-click="check($index)">
                                         <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                             <div ng-message="required">SKU is required.</div>
-                                            <div ng-message="md-maxlength">Must be less than 10 characters.</div>
-                                            <div ng-message="pattern" style="line-height:13px;" class="my-message">That doesn't look like a valid SKU</div>
+                                            <div ng-message="pattern" style="line-height:13px;" class="my-message">Invalid SKU</div>
                                         </div>
                                     </md-input-container>
                                 </td>
@@ -166,32 +168,32 @@
                                             <!--<div ng-message="md-maxlength">Must be less than 8 characters.</div>-->
                                         <!--</div>-->
                                     <!--</md-input-container>-->
-                                  <md-input-container>
-                                    <input class="product-name-column-input" name="size_{{$index}}" md-maxlength="8"
+                                  <md-input-container class="md-container-modify">
+                                    <input ng-blur="validateInputValue(data.size,'size')" class="product-name-column-input" name="size_{{$index}}" md-maxlength="8"
                                            ng-pattern="/^[0-9a-zA-Z ]+$/" ng-model="data.size" required>
-                                      <div ng-messages="priceAndVariantsForm['size_' + $index].$error" ng-show="priceAndVariantsForm['size_'+$index].$dirty">
-                                          <div ng-message="md-maxlength">Maximum value exceeded</div>
-                                          <div ng-message="pattern" class="my-message">That doesn't look like a valid size or weight</div>
-
+                                      <div ng-messages="priceAndVariantsForm['size_' + $index].$error " ng-show="priceAndVariantsForm['size_' + $index].$dirty">
+                                          <div ng-message="pattern" class="my-message">Invalid value</div>
+                                          <div ng-message="required" class="my-message">Required!</div>
                                       </div>
-
                                   </md-input-container>
                                 </td>
                                 <td>
-                                  <md-input-container>
-                                    <input class="product-name-column-input" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required>
-                                      <div ng-messages="priceAndVariantsForm['price_' + $index].$error" ng-show="priceAndVariantsForm['price_'+$index].$dirty">
-                                          <div ng-message="pattern">Invalid price value</div>
+                                  <md-input-container class="md-container-modify">
+                                    <input name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required>
+                                      <div ng-messages="priceAndVariantsForm['price_' + $index].$error" ng-show="priceAndVariantsForm['price_' + $index].$dirty">
+                                          <div ng-message="pattern">Invalid price</div>
+                                          <div ng-message="required" class="my-message">Required!</div>
                                       </div>
 
                                   </md-input-container>
                                 <!--<span ng-show="priceAndVariantsForm['price_' + $index].$error.maxlength">Too lengthy</span></td>-->
 
                                 <td>
-                                  <md-input-container>
-                                    <input class="product-name-column-input" name="qty_{{$index}}"  ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.quantity" required>
-                                      <div ng-messages="priceAndVariantsForm['qty_' + $index].$error">
+                                  <md-input-container class="md-container-modify">
+                                    <input name="qty_{{$index}}"  ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.quantity" required>
+                                      <div ng-messages="priceAndVariantsForm['qty_' + $index].$error " ng-show="priceAndVariantsForm['qty_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid quantity</div>
+                                          <div ng-message="required" class="my-message">Required!</div>
                                       </div>
 
                                   </md-input-container>
@@ -270,7 +272,7 @@
             </md-tab>
 
 
-            <md-tab>
+            <md-tab ng-disabled="enableTab">
                 <md-tab-label>Upload Image</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">

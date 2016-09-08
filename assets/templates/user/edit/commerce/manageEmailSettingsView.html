@@ -15,23 +15,32 @@
                             <fieldset class="fieldset-default-size">
                                 <label>from email</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input  type="email" name="fromEmail" required ng-model="emailDel.fromEmail"/>
+                                <input  type="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                        name="fromEmail" required ng-model="emailDel.fromEmail"/>
                                 <span class="error"
-                                      ng-show="emailDeliveryForm.fromEmail.$error.email">Invalid Email Address</span>
+                                      ng-show="emailDeliveryForm.fromEmail.$error.email || emailDeliveryForm.fromEmail.$error.pattern">
+                                    Invalid Email Address
+                                </span>
                             </fieldset >
                             <fieldset class="fieldset-default-size">
                                 <label>reply to email</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="email" name="replyToEmail" required ng-model="emailDel.replyToEmail"/>
+                                <input type="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                       name="replyToEmail" required ng-model="emailDel.replyToEmail"/>
                                 <span class="error"
-                                      ng-show="emailDeliveryForm.replyToEmail.$error.email">Invalid Email Address</span>
+                                      ng-show="emailDeliveryForm.replyToEmail.$error.email || emailDeliveryForm.replyToEmail.$error.pattern">
+                                    Invalid Email Address
+                                </span>
                             </fieldset>
                             <fieldset class="fieldset-default-size">
                                 <label>alert email</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="email" name="alertEmail" required ng-model="emailDel.alertEmail"/>
+                                <input type="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                       name="alertEmail" required ng-model="emailDel.alertEmail"/>
                                 <span class="error"
-                                      ng-show="emailDeliveryForm.alertEmail.$error.email">Invalid Email Address</span>
+                                      ng-show="emailDeliveryForm.alertEmail.$error.email || emailDeliveryForm.alertEmail.$error.pattern">
+                                    Invalid Email Address
+                                </span>
                             </fieldset>
                             <fieldset class="fieldset-default-size">
                                 <label>alert at</label>

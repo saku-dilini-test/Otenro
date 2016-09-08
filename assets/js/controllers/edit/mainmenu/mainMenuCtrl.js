@@ -1,11 +1,11 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("MainMenuCtrl", ['$scope', '$mdDialog', '$rootScope',
-        'mainMenuService','$http','commerceService','toastr','mySharedService','ME_APP_SERVER','$auth'
+        'mainMenuService','$http','commerceService','toastr','mySharedService','SERVER_URL','ME_APP_SERVER','$auth'
         ,'dashboardService','articleService','initialData', MainMenuCtrl]);
 
     function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
-                          mySharedService,ME_APP_SERVER,$auth,dashboardService,articleService,initialData) {
+                          mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData) {
 
 
         $scope.tmpImage = [ null ];
@@ -26,6 +26,7 @@
         $scope.myImage='';
         $scope.myCroppedImage='';
 
+        // image crop function
         $scope.cropImage = function () {
             var handleFileSelect=function(evt) {
                 var file=evt.currentTarget.files[0];
@@ -46,7 +47,6 @@
             // check ID of templateCategory and load related collection to navigation
             dashboardService.getApplicationData($rootScope.appId)
                 .success(function (data) {
-                    console.log(data);
                     $scope.templateCategory = data.templateCategory;
                     // Business Template Category
                     if (data.templateCategory == tempCatBusiness) {
@@ -94,10 +94,15 @@
                 $scope.menu = $scope.initialData.menu;
                 $scope.serverImage = $scope.menu.imageUrl;
                 $scope.mainImg = $scope.menu.imageUrl;
-                $scope.tmpImage[0] = ME_APP_SERVER + 'temp/' + $auth.getPayload().id + '/templates/'
-                                     + $rootScope.appId + '/img/'+imgLocation+'/' + $scope.menu.imageUrl;
-                $scope.picFile = ME_APP_SERVER+'temp/' +$auth.getPayload().id+
-                    '/templates/'+$rootScope.appId+'/img/'+imgLocation+'/'+ $scope.menu.imageUrl;
+
+                // defined Navigation or Article Category image path
+                var imageURL = SERVER_URL +"templates/viewImages?" +
+                    "userId="+ $auth.getPayload().id +
+                    "&appId="+$rootScope.appId+"&"+new Date().getTime()+
+                    "&img="+imgLocation+"/"+$scope.menu.imageUrl;
+
+                $scope.tmpImage[0] = imageURL;
+                $scope.picFile     = imageURL;
             }
         }
         // Add New Menu
@@ -318,6 +323,7 @@
                 }).success(function(data, status, headers, config) {
                     // update image name set to imageUrl in menu collection
                     menu.imageUrl = data.imageUrl;
+                    console.log(menu);
                     articleService.editCategory(menu)
                         .success(function (data) {
                             $scope.appTemplateUrl = ME_APP_SERVER + 'temp/' + $auth.getPayload().id

@@ -14,6 +14,8 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 +"/templates/viewImages?userId="
                 +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
 
+    console.log($scope.imageURL);
+
     $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
     $scope.foods = data;
         for(var i=0; i<data.length; i++){
