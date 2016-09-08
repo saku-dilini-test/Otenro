@@ -9,7 +9,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy) {
+.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants) {
 
     $ionicLoading.show({
         template: '<ion-spinner icon="lines"  class="spinner-energized" ></ion-spinner>'
@@ -41,7 +41,11 @@ angular.module('starter.controllers', [])
             }).error(function (err) {
                 $ionicLoading.hide();
                 alert('Items Loading error');
-            }); 
+            });
+            
+            // defined third navigation image path
+            $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+ appData.userId +
+                              "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";
         });
     }
 
@@ -81,20 +85,24 @@ angular.module('starter.controllers', [])
     /* ----- Eng Swipe Fucntion  ----- */
 })
 
-.controller('MenuCtrl', function($scope,appServices,readMadeEasy) {
+.controller('MenuCtrl', function($scope,appServices,readMadeEasy,constants) {
 
     // get all menu by app Id
     readMadeEasy.readFile().success(function(appData){
-    appServices.getAllMenuByAppId(appData.appId)
-        .success(function (data) {
-            $scope.categoryList = data;
-        }).error(function (err) {
-            alert('Menu Loading error');
+        appServices.getAllMenuByAppId(appData.appId)
+            .success(function (data) {
+                $scope.categoryList = data;
+            }).error(function (err) {
+                alert('Menu Loading error');
         });
-        });
+
+        // defined second navigation image path
+        $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
+                          "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
+    });
 })
 
-.controller('ItemsCtrl', function($scope,$stateParams,$state,appServices,readMadeEasy) {
+.controller('ItemsCtrl', function($scope,$stateParams,$state,appServices,readMadeEasy,constants) {
 
     // set select Menu Name
     $scope.menuName = $stateParams.menuName;
@@ -103,20 +111,38 @@ angular.module('starter.controllers', [])
     var menuId = $stateParams.menuId;
     // get all item by menu Id
     readMadeEasy.readFile().success(function(appData){
-    appServices.getAllItemsByMenuId(menuId,appData.appId)
-        .success(function (data) {
-            $scope.itemList = data;
-        }).error(function (err) {
-            alert('Items Loading error');
+        appServices.getAllItemsByMenuId(menuId,appData.appId)
+            .success(function (data) {
+                $scope.itemList = data;
+            }).error(function (err) {
+                alert('Items Loading error');
         });
-        });
+
+        // defined third navigation image path
+        $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+ appData.userId +
+            "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+    });
 
     $scope.navigateFood = function(item){
         $state.go('tab.item',{item:item})
     }
 })
 
-.controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices,readMadeEasy) {
+.controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices,readMadeEasy,constants) {
+
+    // get currency by appId
+    readMadeEasy.readFile().success(function(appData){
+        appServices.getCurrencyByAppId(appData.appId)
+            .success(function(data){
+                $scope.currency = data;
+            }).error(function(err){
+            alert('Currency Loading error');
+        })
+
+        // defined third navigation image path
+        $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+ appData.userId +
+            "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+    });
 
     // set select Item Name
         $scope.itemName = $stateParams.itemName;
@@ -144,14 +170,6 @@ angular.module('starter.controllers', [])
             }
         }).error(function (err) {
             alert('Item Loading error');
-        });
-    readMadeEasy.readFile().success(function(appData){
-    appServices.getCurrencyByAppId(appData.appId)
-        .success(function(data){
-            $scope.currency = data;
-        }).error(function(err){
-          alert('Currency Loading error');
-        })
         });
 
     // variant change function
@@ -209,14 +227,14 @@ angular.module('starter.controllers', [])
 
     // get item by Id
     readMadeEasy.readFile().success(function(appData){
-    appServices.getContactUsByAppId(appData.appId)
-        .success(function (data) {
-            $scope.address = data.address;
-            $scope.telPhone = data.telPhone;
-            $scope.email = data.email;
-            $scope.webSite = data.webSite;
-        }).error(function (err) {
+        appServices.getContactUsByAppId(appData.appId)
+            .success(function (data) {
+                $scope.address = data.address;
+                $scope.telPhone = data.telPhone;
+                $scope.email = data.email;
+                $scope.webSite = data.webSite;
+            }).error(function (err) {
             alert('Contact Us Loading error');
         });
-        });
+    });
 });
