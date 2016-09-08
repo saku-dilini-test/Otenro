@@ -11,8 +11,8 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
     $scope.imageURL = constants.SERVER_URL
-                +"/templates/viewImages?userId="
-                +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+        +"/templates/viewImages?userId="
+        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
 
     console.log($scope.imageURL);
 

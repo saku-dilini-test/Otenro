@@ -3,7 +3,7 @@
         <a ng-repeat="category in categories" href="#/app/category/{{category.id}}/{{category.name}}">
             <div class="cards animated zoomIn">
                 <div class="header-image">
-                    <img ng-src="img/secondNavi/{{category.imageUrl}}">
+                    <img ng-src="{{imageURL}}/{{category.imageUrl}}">
                 </div>
                 <h2>{{category.name}}</h2>
                 <p>{{category.description}}</p>

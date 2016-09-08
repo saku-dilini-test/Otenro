@@ -37,7 +37,8 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
 
         $scope.imageURL = constants.SERVER_URL
             +"/templates/viewImages?userId="
-            +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=secondNavi";
+            +data.userId+"&appId="+data.appId+"&"+new Date().getTime()+"&img=secondNavi";
+
         console.log($scope.imageURL);
         
       $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$scope.appId).success(function(data) {
