@@ -7,7 +7,7 @@
     angular.module("appEdit").controller("ShippingCtrl", [
         '$scope', 'toastr', 'shippingService', '$rootScope','taxService','initialData','$mdDialog', ShippingCtrl]);
 
-    function ShippingCtrl($scope, toastr, shippingService, $rootScope,taxService,initialData) {
+    function ShippingCtrl($scope, toastr, shippingService, $rootScope,taxService,initialData, $mdDialog) {
 
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
@@ -243,26 +243,10 @@
             return shippingService.showShippingDialog();
         };
 
-        //ok button
-        $scope.btnOk = function(){
-            $mdDialog.hide();
-            console.log("wtf")
+        // --- cancel dialog
+        $scope.cancel = function () {
+            $mdDialog.cancel();
         };
-
-        function DialogController($scope, $mdDialog) {
-            $scope.hide = function() {
-              $mdDialog.hide();
-            };
-
-            $scope.cancel = function() {
-              $mdDialog.cancel();
-            };
-
-            $scope.answer = function(answer) {
-              $mdDialog.hide(answer);
-            };
-          }
-
 
     }
 })();
