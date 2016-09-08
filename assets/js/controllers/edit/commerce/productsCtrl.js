@@ -143,8 +143,6 @@
 
         };
 
-
-
         $scope.cropImage = function () {
             $scope.myImage = null;
             var handleFileSelect=function(evt) {
@@ -421,6 +419,43 @@
 
 
 
+
+
+        /**
+         * @description
+         * validation of duplicate sku and size/weight
+         * @param inputVal
+         * @param type
+         *
+         */
+        $scope.validateInputValue = function (inputVal,type) {
+              var count = 0;
+              if (inputVal){
+                  angular.forEach($scope.product.variants, function(variants){
+                      if (type=='size') {
+                          if (inputVal.trim().toLowerCase() == variants.size.trim().
+                              toLowerCase()) {
+                              count++;
+                          }
+                      }else{
+                          if (inputVal.trim() == variants.sku.trim()) {
+                              count++;
+                          }
+                      }
+                      if (count>=2){
+                          if (type=='size'){
+                              variants.size = null;
+                          }else {
+                              variants.sku = null;
+                          }
+                          toastr.error('Can not add duplicate values', 'Warning', {
+                              closeButton: true
+                          });
+                      }
+                  });
+              }
+        };
+
         $scope.nextStep = function (current) {
             $scope.selectedTab = current;
         };
@@ -429,15 +464,31 @@
             $mdDialog.hide();
         };
 
-        // checking if the user is adding a product or editing
-        if (initialData.product.id === undefined){
-            $scope.product.checked = false;
+
+        /**
+         * @description
+         * Making the sku readonly after added
+         * @param index
+         */
+        $scope.check = function(index){
+            if (initialData.product.id === undefined){
+                $scope.product.checked = false;
+            }
+            else if(index === undefined){
+               $scope.product.checked = true;
+            }
+            else if($scope.product.variants[index].sku === "" || $scope.product.variants[index].sku === null || $scope.product.variants[index].sku === undefined ){
+                    $scope.product.checked = false;
+            }
+            else {
+                $scope.product.checked = true;
+            }
         }
-        else{
-            $scope.product.checked = true;
+
+        // when product edit start in second tab and enable pagination
+        if (initialData.product.id !== undefined){
             $scope.selectedTab = 1;
             $scope.enableTab = false;
-
         }
 
 

@@ -43,7 +43,7 @@
                         <fieldset>
                             <label>option name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="optionName"  ng-pattern="/^[a-zA-Z0-9_ ]*$/" required ng-model="flatRates.optionName" />
+                            <input class="input-shadow-border" type="text" name="optionName"  ng-pattern="/^[a-zA-Z0-9_ ]*$/" required ng-model="flatRates.optionName" />
                         </fieldset>
                         <span ng-show="flatRate.optionName.$error.pattern">No symbols</span>
                             <div ng-hide="flatRates.optionName.length > maxFlatRate">
@@ -57,7 +57,7 @@
                             <fieldset class="col-2">
                                 <label>Per order fee </label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="preOrderFee" ng-pattern="/^\d+(.\d{1,2})?$/"
+                                <input class="input-shadow-border"  type="text" name="preOrderFee" ng-pattern="/^\d+(.\d{1,2})?$/"
                                        ng-model="flatRates.preOrderFee" maxlength="10" required/>
                                 <br />
                                 <span ng-show="flatRate.preOrderFee.$error.pattern">Only Positive numbers and Maximum two decimal places only</span>
@@ -65,7 +65,7 @@
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Per item fee</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="feePerItem" ng-pattern="/^\d+(.\d{1,2})?$/"
+                                <input class="input-shadow-border" type="text" name="feePerItem" ng-pattern="/^\d+(.\d{1,2})?$/"
                                        ng-model="flatRates.feePerItem" maxlength="10" required/>
                                 <br />
                                 <span ng-show="flatRate.feePerItem.$error.pattern">Only Positive numbers and Maximum two decimal places only</span>
@@ -92,7 +92,7 @@
                         <fieldset>
                             <label>option name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="name"  ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="weightRate.optionName" required/>
+                            <input class="input-shadow-border" type="text" name="name"  ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="weightRate.optionName" required/>
                             <br />
                             <span ng-show="weightBased.name.$error.pattern">No symbols</span>
                             <div ng-hide="weightRate.optionName.length > maxWeightRate">
@@ -117,7 +117,7 @@
                             <tbody>
                                 <tr ng-repeat="data in weightRate.weightRanges">
                                     <td class="weight-rate">
-                                        <input type="text" name="weightField_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/"
+                                        <input class="input-shadow-border" type="text" name="weightField_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/"
                                                ng-model="data.startWeight" maxlength="10" required>
                                         <br />
                                         <span ng-show="weightBased['weightField_'+$index].$error.pattern">
@@ -125,14 +125,14 @@
                                         </span>
                                         <br />
                                             to
-                                        <input type="text" name="endWeight_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/"
+                                        <input class="input-shadow-border" type="text" name="endWeight_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/"
                                                ng-model="data.endWeight" maxlength="10" required>
                                         <br />
                                         <span ng-show="weightBased['endWeight_'+$index].$error.pattern">
                                             Positive Number Only
                                         </span>
                                     </td>
-                                    <td><input type="text" name="cost_{{$index}}" ng-pattern="/^\d+(.\d{1,2})?$/"
+                                    <td><input class="input-shadow-border" type="text" name="cost_{{$index}}" ng-pattern="/^\d+(.\d{1,2})?$/"
                                                ng-model="data.cost" maxlength="10" required>
                                     <br />
                                         <span ng-show="weightBased['cost_'+$index].$error.pattern">
@@ -167,7 +167,7 @@
                         <fieldset>
                             <label>Location Name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input type="text" name="locationName"  required ng-model="pickup.locationName" />
+                            <input type="text" class="input-shadow-border"  name="locationName"  required ng-model="pickup.locationName" />
                             <br />
                             <div ng-hide="pickup.locationName.length > maxPickup">
                                 <span>Characters left: {{maxPickup - pickup.locationName.length}}</span>
@@ -180,12 +180,12 @@
                             <fieldset class="col-2">
                                 <label>Number</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" ng-maxlength="10" name="number" required ng-model="pickup.number"  />
+                                <input class="input-shadow-border"  type="text" ng-maxlength="10" name="number" required ng-model="pickup.number"  />
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>street Address</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" name="streetAddress" required ng-model="pickup.streetAddress" />
+                                <input class="input-shadow-border"  type="text" name="streetAddress" required ng-model="pickup.streetAddress" />
                                 <div ng-hide="pickup.streetAddress.length > maxPickup">
                                     <span>Characters left: {{maxPickup - pickup.streetAddress.length}}</span>
                                 </div>
@@ -196,7 +196,7 @@
                             <fieldset class="col-2">
                                 <label>City</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text"  name="city" required ng-model="pickup.city" />
+                                <input class="input-shadow-border"  type="text" name="city" required ng-model="pickup.city" />
                                 <div ng-hide="pickup.city.length > maxPickup">
                                     <span>Characters left: {{maxPickup - pickup.city.length}}</span>
                                 </div>
@@ -218,14 +218,14 @@
                             <fieldset class="col-1 reset-margin-right">
                                 <label>postal code</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="text" ng-maxlength="6" ng-pattern="/^[a-zA-Z0-9]*$/" name="postalCode" required ng-model="pickup.postalCode" />
+                                <input class="input-shadow-border"  type="text" ng-maxlength="6" ng-pattern="/^[a-zA-Z0-9]*$/" name="postalCode" required ng-model="pickup.postalCode" />
                                 <br />
                                 <span ng-show="pickUp.postalCode.$error.pattern">No symbols</span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
                                 <label>Cost(optional)</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input type="number" name="cost" ng-maxlength="8" ng-pattern="/^\d{1,5}(?:\.\d{2})?$/" required ng-model="pickup.cost" />
+                                <input class="input-shadow-border"  type="number" name="cost" ng-maxlength="8" ng-pattern="/^\d{1,5}(?:\.\d{2})?$/" required ng-model="pickup.cost" />
                                 <br />
                                 <span ng-show="pickUp.cost.$error.pattern">Maximum two decimal places only</span>
                                 <br />
