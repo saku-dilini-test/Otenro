@@ -40,6 +40,8 @@ module.exports = {
   HOST_URL : 'http://simatosolutions.com',
   // ME SERVER Config 
   ME_SERVER : '/home/git/meAppServer/',
-  ME_SERVER_PORT : 8082
+  ME_SERVER_PORT : 8082,
+  // APP FILE SERVER Config
+  APP_FILE_SERVER : '/home/git/appFileServer/'
 
 };

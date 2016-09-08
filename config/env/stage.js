@@ -24,5 +24,7 @@ module.exports = {
     HOST_URL : 'http://192.168.8.203',
     // ME SERVER Config
     ME_SERVER : '/home/onbitlabs/meServer/temp/',
-    ME_SERVER_PORT : 8080
+    ME_SERVER_PORT : 8080,
+    // APP FILE SERVER Config
+    APP_FILE_SERVER : '/home/onbitlabs/appFileServer/'
 };
