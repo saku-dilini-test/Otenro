@@ -109,8 +109,7 @@ module.exports = {
             id    : req.body.id
         };
 
-        var updateData = {"name":req.body.name};
-        ArticleCategory.update(updateQuery,updateData).exec(function(err,result) {
+        ArticleCategory.update(updateQuery,req.body).exec(function(err,result) {
             if (err){
                 sails.log.debug("Article Category Name Edit Error");
                 return res.send(err);
@@ -128,7 +127,7 @@ module.exports = {
     updateCategoryImage : function(req,res){
 
         var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/'+ req.body.imageUrl;
-        var fileDir = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
+        var fileDir  = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
 
         req.file('file').upload({
             dirname: require('path').resolve(fileDir)
@@ -141,7 +140,7 @@ module.exports = {
 
             if (typeof req.body.imageUrl != "undefined"){
                 // Create new img file name using date.now()
-                var fileName = Date.now() + '.jpg';
+                var fileName = Date.now() + '.png';
                 fs.rename(uploadedFiles[0].fd, fileDir + fileName , function (err) {
                     if (err) return res.send(err);
                     // New img file name send back to update to menu collection
