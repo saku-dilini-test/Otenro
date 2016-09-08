@@ -65,7 +65,6 @@ angular.module('starter.services', [])
       return $q(function(resolve, reject) {
         // Make a request and receive your auth token from your server
           $http.post(SERVER_URL+'auth/authenticate',userData).success(function (data) {
-
             storeUserCredentials(data.user,data.token);
             resolve('Admin Login success.');
           }).error(function (err) {

@@ -79,6 +79,15 @@ module.exports = {
    * variable.  If NODE_ENV is not set, Sails will run in the                *
    * 'development' environment.                                              *
    ***************************************************************************/
+  
+    //environment: process.env.NODE_ENV || 'development',
 
-    environment: process.env.NODE_ENV || 'development'
+    // HOST URL
+    HOST_URL : 'http://192.168.8.104',
+    // ME SERVER Config
+    ME_SERVER : '/home/amila/Desktop/meServer/temp/',
+    //ME_SERVER_PORT : 8080
+    // APP FILE SERVER Config
+    APP_FILE_SERVER : '/home/amila/Desktop/appFileServer/'
+
 };

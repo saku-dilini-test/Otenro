@@ -13,8 +13,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.imageURL = constants.SERVER_URL
                 +"/templates/viewImages?userId="
                 +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
-
+    
     $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
+        console.log("------- Start -----------");
+        console.log(data);
+        console.log("------- End -----------");
     $scope.foods = data;
         for(var i=0; i<data.length; i++){
             if(data[i].discount){

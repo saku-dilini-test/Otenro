@@ -1,24 +1,26 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
-        '$scope', '$mdDialog', 'toastr', 'commerceService','productService', '$rootScope', '$auth', 'ME_APP_SERVER','initialData',
+        '$scope', '$mdDialog', 'toastr', 'commerceService','productService', '$rootScope', '$auth', 'SERVER_URL','initialData',
         ProductCtrl]);
 
-    function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService, $rootScope,  $auth, ME_APP_SERVER,initialData) {
+    function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService, $rootScope,  $auth, SERVER_URL,initialData) {
         var size, weight;
         var variants;
 
         $scope.tmpImage = [];
         $scope.product = initialData.product;
-        if (initialData.product.tempImageArray){
 
+        // Third Navigation Image Path ( Image get from server )
+        var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
+                            +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=thirdNavi/";
+
+        if (initialData.product.tempImageArray){
             for (var i=0; i<initialData.product.tempImageArray.length; i++) {
-                console.log(initialData.product.tempImageArray[i].img);
-               $scope.tmpImage.push(ME_APP_SERVER + 'temp/' + $auth.getPayload().id + '/templates/' + $rootScope.appId +
-                                    '/img/thirdNavi/' + initialData.product.tempImageArray[i].img);
+                var tempImageUrl = tempImagePath + initialData.product.tempImageArray[i].img;
+                $scope.tmpImage.push(tempImageUrl);
             }
         }
-
 
         if(!initialData.product.id){
             $scope.product = {'appId':$rootScope.appId}
@@ -160,11 +162,6 @@
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         };
-
-
-
-
-        $scope.thumbPic = ME_APP_SERVER + 'temp/' + $auth.getPayload().id + '/templates/' + $rootScope.appId + '/img/thirdNavi/default.jpg';
 
         if (typeof $scope.categories === 'undefined') {
 

@@ -29,6 +29,8 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
         +"/templates/viewImages?userId="
         +appData.userId+"&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
 
+        console.log($scope.imageURL);
+
     $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+appData.appId).success(function(data) {
         $scope.categories = data;
     }).error(function(err) {
