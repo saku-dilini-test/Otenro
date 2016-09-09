@@ -110,6 +110,7 @@
             playStoreData.category = 'GooglePlay';
             publishService.addGooglePlayInfo(file,playStoreData,splash)
             .success(function(data, status, headers, config) {
+            disableTabs(1,true,true,true,false);
             toastr.success('Genaral info has been added', 'Saved', {
                                     closeButton: true
                                 });
