@@ -59,9 +59,9 @@
 
 					$scope.singUp = function(){
 						if($stateParams.item == 'delivery'){
-                            $state.go('register',{item:$stateParams.item});
+                            $state.go('tab.register',{item:$stateParams.item});
                         }else{
-                            $state.go('register');
+                            $state.go('tab.register');
                         }
 					}
 				}],

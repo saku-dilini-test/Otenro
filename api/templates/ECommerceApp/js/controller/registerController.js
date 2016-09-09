@@ -5,7 +5,7 @@
 //(function() {
 //    angular.module('starter', [])
 
-mobileApp.controller('RegisterCtrl', function ($scope, $http, $ionicPopup, $state, $auth, constants) {
+mobileApp.controller('RegisterCtrl', function ($scope, $http, $ionicPopup, $state, $stateParams, $auth, constants) {
             $scope.data = {};
             $scope.singUp = function () {
                 $scope.appLocalStorageUser = JSON.parse(localStorage.getItem('appLocalStorageUser'));
@@ -29,7 +29,11 @@ mobileApp.controller('RegisterCtrl', function ($scope, $http, $ionicPopup, $stat
                         };
                         localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
                         console.log(localStorage.getItem('appLocalStorageUser'));
-                        $state.go('tab.deliverDetails');
+                        if($stateParams.item == 'delivery'){
+                            $state.go('tab.cart');
+                        }else{
+                            $state.go('tab.menu');
+                        }
                     },
                     function (err) {
                         $ionicPopup.alert({
@@ -42,7 +46,11 @@ mobileApp.controller('RegisterCtrl', function ($scope, $http, $ionicPopup, $stat
             $scope.authenticate = function (provider) {
                 $auth.authenticate(provider).then(function (res) {
                     if (typeof res.data.token != 'undefined') {
-                        $state.go('tab.deliverDetails');
+                        if($stateParams.item == 'delivery'){
+                            $state.go('tab.cart');
+                        }else{
+                            $state.go('tab.menu');
+                        }
                     } else {
                         alert(provider + ' Login error');
                     }

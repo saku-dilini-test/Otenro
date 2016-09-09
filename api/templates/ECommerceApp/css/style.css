@@ -96,4 +96,15 @@ ion-slides {
     max-width: none;
     max-height: 100%;
 }
+.panel .create-account-btm {
+  background-color: #FFBF0A; /* Green */
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 35px;
+  cursor:url(../img/cursor.cur), auto;;
+  border-radius:4px;
+}
 
