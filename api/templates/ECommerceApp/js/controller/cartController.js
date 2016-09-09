@@ -72,7 +72,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
 
              $scope.pickup = function () {
                  if(localStorage.getItem('appLocalStorageUser')!==null){
-                     $state.go('pickup');
+                     $state.go('tab.pickup');
                  }
                  else{
                      $state.go('tab.login');
