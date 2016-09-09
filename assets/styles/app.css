@@ -6,7 +6,8 @@ a.feature01{
     float: left;
     position: relative;
     text-decoration: none;
-    height: 122px;
+    height: 120px;
+    width:120px;
     border-radius: 2px;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -23,7 +24,6 @@ a.feature01{
 .md-dialog-main .file-upload-wrapper2{
     margin-bottom: 15px;
 	width: 36%;
-    margin-top: 10px;
 	float:left;
 }
 
@@ -90,6 +90,8 @@ a.feature01 img {
     -webkit-border-radius: 2px;
     display: block;
     height: auto;
+    height:100%;
+    width:100%;
 }
 
 .itemsContainer {
