@@ -3,7 +3,7 @@
         <a ng-repeat="food in foods" href=" " ng-click="navigateFood(food)">
             <div class="cards animated zoomIn">
                 <div class="header-image">
-                    <img ng-src="img/thirdNavi/{{food.imageUrl}}">
+                    <img ng-src="{{imageURL}}/{{food.imageUrl}}">
                 </div>
                 <h2>{{food.name}}</h2>
                 <p>{{currency.sign}} : {{food.price}}</p>

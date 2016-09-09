@@ -273,8 +273,13 @@ module.exports = {
         });
     },
 
+    /**
+     * return images for given userID & appID & img ( Path + Image name )
+     * @param req
+     * @param res
+     */
     viewImages : function(req,res){
-       res.sendfile(config.ME_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
+        res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
     },
 
     /**

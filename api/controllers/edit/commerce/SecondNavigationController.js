@@ -24,7 +24,7 @@ module.exports = {
 
     addSecondNavigation : function(req, res) {
 
-        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
+        var dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
         req.file('file').upload({
             dirname: require('path').resolve(dePath)
         },function (err, uploadedFiles) {
@@ -49,9 +49,9 @@ module.exports = {
 
     addNewNavi : function(req,res){
 
-        var imagePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId + '/img/'+ 'default.jpg';
-        var fileName = Date.now()+ '.jpg';
-        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
+        var imagePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/'+ 'default.jpg';
+        var fileName  = Date.now()+ '.jpg';
+        var dePath    = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
 
         fs.readFile(imagePath, function (err, data) {
             if (err) throw err;
@@ -108,7 +108,7 @@ module.exports = {
 
         SecondNavigation.destroy({ id : req.body.categoryID}, function (err) {
             if (err) return err;
-            var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/'+ req.body.imageUrl;
+            var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/'+ req.body.imageUrl;
             fs.unlink(filePath, function (err) {
                 if (err) return console.error(err);
             });
@@ -118,8 +118,8 @@ module.exports = {
 
     updateSecondNaviImage : function(req,res){
 
-        var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/'+ req.body.imageUrl;
-        var desPath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
+        var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/'+ req.body.imageUrl;
+        var desPath  = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
 
         req.file('file').upload({
             dirname: require('path').resolve(desPath)

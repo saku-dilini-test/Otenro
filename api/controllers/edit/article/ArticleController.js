@@ -24,10 +24,14 @@ module.exports = {
         };
 
         Article.find(searchQuery).exec(function(err,result) {
-            if (err) return done(err);
+            if (err) {
+                sails.log.debug("Article Collection find Error for given appId : "+appId);
+                return done(err);
+            }
             res.send(result);
         });
     },
+
     /**
      * return collection of article given appId
      *
@@ -42,7 +46,10 @@ module.exports = {
         };
 
         ArticleCategory.find(searchQuery).exec(function(err,result) {
-            if (err) return done(err);
+            if (err) {
+                sails.log.debug("Article Category Collection find Error for given appId : "+appId);
+                return done(err);
+            }
             res.send(result);
         });
     },
@@ -55,15 +62,19 @@ module.exports = {
      */
     addCategory : function(req,res){
 
-        var appId = req.param('appId');
         var data = req.body;
+        var appId = req.param('appId');
         data.appId = appId;
 
         ArticleCategory.create(data).exec(function(err,result) {
-            if (err) return done(err);
+            if (err){
+                sails.log.debug("Article Category Create Error");
+                return done(err);
+            }
             res.send(result);
         });
     },
+
     /**
      * delete collection of article category given Id
      *
@@ -76,29 +87,50 @@ module.exports = {
         var deleteQuery = {
             id : id
         };
+
         ArticleCategory.destroy(deleteQuery).exec(function(err,result) {
-           if (err) return res.send(err);
-            res.send(result);
-        });
-    },
-    editCategory : function(req,res){
-        var editQuery = {
-            appId : req.body.appId,
-            id:req.body.id
-        };
-        ArticleCategory.update(editQuery,{"name":req.body.name}).exec(function(err,result) {
-            if (err) return done(err);
+           if (err){
+               sails.log.debug("Article Category Delete Error");
+               return res.send(err);
+           }
             res.send(result);
         });
     },
 
+    /**
+     * update article category name for given  app Id
+     *
+     * @param req appId, Article Category ID, Article Category Name
+     * @param res result
+     */
+    editCategory : function(req,res){
+        var updateQuery = {
+            appId : req.body.appId,
+            id    : req.body.id
+        };
+
+        ArticleCategory.update(updateQuery,req.body).exec(function(err,result) {
+            if (err){
+                sails.log.debug("Article Category Name Edit Error");
+                return res.send(err);
+            }
+            res.send(result);
+        });
+    },
+
+    /**
+     * Update article category Image for given appID
+     *
+     * @param req
+     * @param res
+     */
     updateCategoryImage : function(req,res){
 
-        var filePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/'+ req.body.imageUrl;
-        var desPath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
+        var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/'+ req.body.imageUrl;
+        var fileDir  = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
 
         req.file('file').upload({
-            dirname: require('path').resolve(desPath)
+            dirname: require('path').resolve(fileDir)
         },function (err, uploadedFiles) {
             if (err) return res.send(500, err);
 
@@ -106,12 +138,10 @@ module.exports = {
                 if (err) return console.error(err);
             });
 
-            console.log("req.body.imageUrl " + req.body.imageUrl);
-
             if (typeof req.body.imageUrl != "undefined"){
-                // Create new img file name using date.now() 
-                var fileName = Date.now() + '.jpg';
-                fs.rename(uploadedFiles[0].fd, desPath + fileName , function (err) {
+                // Create new img file name using date.now()
+                var fileName = Date.now() + '.png';
+                fs.rename(uploadedFiles[0].fd, fileDir + fileName , function (err) {
                     if (err) return res.send(err);
                     // New img file name send back to update to menu collection
                     res.json({ok: true,imageUrl : fileName});
@@ -132,16 +162,16 @@ module.exports = {
     publishArticle : function(req,res){
         
         var article = req.body;
-        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/article/';
+        var fileDir = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/article/';
 
         if(article.isNewArticle == 'true'){
             req.file('file').upload({
-                dirname: require('path').resolve(dePath)
+                dirname: require('path').resolve(fileDir)
             },function (err, uploadedFiles) {
                 if (err) return res.send(500, err);
 
                 var newFileName=Date.now()+'.png';
-                fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
+                fs.rename(uploadedFiles[0].fd, fileDir+'/'+newFileName, function (err) {
                     if (err) return res.send(err);
                 });
                 var article =req.body;
@@ -162,12 +192,12 @@ module.exports = {
 
         }else if(article.isImageUpdate == 'true'){
             req.file('file').upload({
-                dirname: require('path').resolve(dePath)
+                dirname: require('path').resolve(fileDir)
             },function (err, uploadedFiles) {
                 if (err) return res.send(500, err);
 
                 var newFileName=Date.now()+'.png';
-                fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
+                fs.rename(uploadedFiles[0].fd, fileDir+'/'+newFileName, function (err) {
                     if (err) return res.send(err);
                 });
 
@@ -197,10 +227,10 @@ module.exports = {
         var deleteQuery = {
              id : req.body.id
         }
+        var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + appId+ '/img/article/'+ imageUrl;
 
         Article.destroy(deleteQuery).exec(function (err) {
             if (err) return callback("Error while deleting " + err.message);
-            var filePath = config.ME_SERVER + req.userId + '/templates/' + appId+ '/img/article/'+ imageUrl;
             fs.unlink(filePath, function (err) {
                 if (err) return callback("Error while deleting " + err.message);
                 res.send(200,{message:'Deleted Article'});
