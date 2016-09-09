@@ -251,9 +251,15 @@
                         <fieldset class="col-2 reset-margin-right">
                             <label>Card type</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input class="input-shadow-border" type="text" name="name"
+                            <input class="input-shadow-border"
+                                   type="text"
+                                   name="cardType"
+                                   ng-pattern="/^[a-zA-Z]+$/"
                                    ng-model="billingEdit.cardType"
                                    required />
+                            <span class="help-block " ng-show="editBilling.cardType.$error.pattern">
+                                <span >Not a valid card type</span>
+                            </span>
                         </fieldset>
                         <fieldset class="col-2">
                             <label>CVS code</label>
