@@ -13,7 +13,7 @@
                         <fieldset>
                             <label>title name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input type="text" name="name" ng-model="playStoreData.name"
+                            <input class="input-shadow-border" type="text" name="name" ng-model="playStoreData.name"
                                    ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxName}}" required/>
                             <br>
                             <span ng-show="generalForm.name.$error.pattern">No symbols</span>
@@ -80,7 +80,7 @@
                             <fieldset>
                                 <label>spring board name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="springBoardName" ng-model="playStoreData.springBoardName"
+                                <input class="input-shadow-border" type="text" name="springBoardName" ng-model="playStoreData.springBoardName"
                                        ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxSpringBoardName}}" required/>
                                 <br>
                                 <span ng-show="generalForm.springBoardName.$error.pattern">No symbols</span>
@@ -89,7 +89,7 @@
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>language</label>
-                                    <select class="form-control"
+                                    <select class="input-shadow-border form-control"
                                             ng-model="playStoreData.language"
                                             ng-options="languages.language as languages.language for languages in languageList"
                                             required>
@@ -107,13 +107,13 @@
                         <div class="clearfix">
                             <fieldset>
                                 <label>description</label>
-                                <textarea ng-model="playStoreData.desc" rows="2" maxlength="{{maxDesc}}" required></textarea>
+                                <textarea class="input-shadow-border" ng-model="playStoreData.desc" rows="2" maxlength="{{maxDesc}}" required></textarea>
                                 <br>
                                 <span>Characters left: {{maxDesc - playStoreData.desc.length}}</span>
                             </fieldset>
                             <fieldset>
                                 <label>keywords</label>
-                                <textarea ng-model="playStoreData.keywords" rows="2" maxlength="{{maxKeywords}}" required></textarea>
+                                <textarea class="input-shadow-border" ng-model="playStoreData.keywords" rows="2" maxlength="{{maxKeywords}}" required></textarea>
                                 <br>
                                 <span>Characters left: {{maxKeywords - playStoreData.keywords.length}}</span>
                             </fieldset>

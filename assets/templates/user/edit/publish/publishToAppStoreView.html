@@ -91,7 +91,7 @@
                                 <fieldset>
                                     <label>spring board name</label>
                                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                                    <input type="text" name="springBoardName" ng-model="appStoreData.springBoardName"
+                                    <input class="input-shadow-border" type="text" name="springBoardName" ng-model="appStoreData.springBoardName"
                                            ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxSpringBoardName}}" required/>
                                     <br>
                                     <span ng-show="appStoreForm.springBoardName.$error.pattern">No symbols</span>
@@ -126,20 +126,20 @@
                             <div class="clearfix">
                                 <fieldset>
                                     <label>description</label>
-                                    <textarea ng-model="appStoreData.desc" rows="2" maxlength="{{maxDesc}}" required></textarea>
+                                    <textarea class="input-shadow-border" ng-model="appStoreData.desc" rows="2" maxlength="{{maxDesc}}" required></textarea>
                                     <br>
                                     <span>Characters left: {{maxDesc - appStoreData.desc.length}}</span>
                                 </fieldset>
                                 <fieldset>
                                     <label>keywords</label>
-                                    <textarea ng-model="appStoreData.keywords" rows="2" maxlength="{{maxKeywords}}" required></textarea>
+                                    <textarea class="input-shadow-border" ng-model="appStoreData.keywords" rows="2" maxlength="{{maxKeywords}}" required></textarea>
                                     <br>
                                     <span>Characters left: {{maxKeywords - appStoreData.keywords.length}}</span>
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label>support url</label>
                                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                                    <input type="text"
+                                    <input class="input-shadow-border" type="text"
                                            ng-model="appStoreData.supportUrl"
                                            name="supportUrl"
                                            ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
@@ -149,7 +149,7 @@
                                 <fieldset class="col-2 reset-margin-right">
                                     <label>marketing url</label>
                                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                                    <input type="text"
+                                    <input class="input-shadow-border" type="text"
                                            ng-model="appStoreData.marketingUrl"
                                            name="marketingUrl"
                                            ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
@@ -160,7 +160,7 @@
                                 <fieldset class="col-2">
                                     <label>privacy policy url</label>
                                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                                    <input type="text"
+                                    <input class="input-shadow-border" type="text"
                                            ng-model="appStoreData.privacyPolicyUrl"
                                            name="privacyPolicyUrl"
                                            ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
@@ -171,7 +171,7 @@
                                 <fieldset class="col-2 reset-margin-right">
                                     <label>copyrights</label>
                                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                                    <input type="text" ng-model="appStoreData.copyrights" name="copyrights" required/>
+                                    <input class="input-shadow-border" type="text" ng-model="appStoreData.copyrights" name="copyrights" required/>
                                 </fieldset>
                             </div>
                         </div>
@@ -199,7 +199,7 @@
                     <div class="md-dialog-main clearfix">
                         <fieldset class="col-3">
                             <label>cartoon violence</label>
-                            <select
+                            <select class="input-shadow-border"
                                     ng-model="contentRating.cartoonViolence"
                                     ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
                                     required>
@@ -207,7 +207,7 @@
                         </fieldset>
                         <fieldset class="col-3">
                             <label>realistic violence</label>
-                            <select
+                            <select class="input-shadow-border"
                                     ng-model="contentRating.realisticViolence"
                                     ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
                                     required>
@@ -215,7 +215,7 @@
                         </fieldset>
                         <fieldset class="col-3 reset-margin-right">
                             <label>sexual or nudity</label>
-                            <select
+                            <select class="input-shadow-border"
                                     ng-model="contentRating.nudityViolence"
                                     ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
                                     required>
@@ -223,7 +223,7 @@
                         </fieldset>
                         <fieldset class="col-3">
                             <label>alcohol, tobacco</label>
-                            <select
+                            <select class="input-shadow-border"
                                     ng-model="contentRating.alcoholViolence"
                                     ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
                                     required>
@@ -231,7 +231,7 @@
                         </fieldset>
                         <fieldset class="col-3">
                             <label>mature topics</label>
-                            <select
+                            <select class="input-shadow-border"
                                     ng-model="contentRating.matureViolence"
                                     ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
                                     required>
@@ -239,7 +239,7 @@
                         </fieldset>
                         <fieldset class="col-3 reset-margin-right">
                             <label>simulated gambling</label>
-                            <select
+                            <select class="input-shadow-border"
                                     ng-model="contentRating.gamblingViolence"
                                     ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
                                     required>
@@ -247,7 +247,7 @@
                         </fieldset>
                         <fieldset class="col-3">
                             <label>profanity</label>
-                            <select
+                            <select class="input-shadow-border"
                                     ng-model="contentRating.profanityViolence"
                                     ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
                                     required>
@@ -255,7 +255,7 @@
                         </fieldset>
                         <fieldset class="col-3">
                             <label>horror/fear</label>
-                            <select
+                            <select class="input-shadow-border"
                                     ng-model="contentRating.horrorViolence"
                                     ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
                                     required>
