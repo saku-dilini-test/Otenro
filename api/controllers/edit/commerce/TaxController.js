@@ -19,6 +19,10 @@ module.exports = {
         var searchQuery = {
             id : req.body.id
         };
+        var findQuery = {
+            country: req.body.country,
+            appId: req.body.appId
+        }
         var updateData = req.body;
         if(typeof req.body.id != 'undefined'){
            ApplicationTax.update(searchQuery,updateData,function(err,result) {
@@ -26,10 +30,18 @@ module.exports = {
                 return res.send(200, {message: 'Update Tax Collection'});
             });
         }else{
-           ApplicationTax.create(updateData).exec(function (err, result) {
-                if (err) return res.send(err);
-                return res.send(200, {message: 'Create Tax Collection'});
-            });
+           ApplicationTax.find(findQuery).exec(function(error,data){
+                if(error) return res.send(error);
+                if(data == ''){
+                    ApplicationTax.create(updateData).exec(function (err, result) {
+                         if (err) return res.send(err);
+                         return res.send(200, {message: 'Successfully Saved'});
+                    });
+                }
+                else{
+                    return res.send(200, {message: 'tax for this country is already added'});
+                }
+           });
         }
     },
 
