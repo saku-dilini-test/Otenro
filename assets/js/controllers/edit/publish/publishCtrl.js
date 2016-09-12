@@ -24,7 +24,7 @@
         $scope.defaultLanguage={
             language: "English"
         };
-        disableTabs(0,false,false,false,false);
+        disableTabs(0,false,false,false,true);
         function  disableTabs(activeTab,tab1,tab2,tab3,tab4) {
             $scope.activeTabIndex = activeTab;
             $scope.publishToAppStore = {
@@ -110,7 +110,7 @@
             playStoreData.category = 'GooglePlay';
             publishService.addGooglePlayInfo(file,playStoreData,splash)
             .success(function(data, status, headers, config) {
-            disableTabs(1,true,true,true,false);
+            $mdDialog.hide();
             toastr.success('Genaral info has been added', 'Saved', {
                                     closeButton: true
                                 });

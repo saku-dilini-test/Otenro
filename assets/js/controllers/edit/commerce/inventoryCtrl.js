@@ -189,9 +189,10 @@
                 for(var i = 0; i <  initialData.inventoryList.length; i++){
                     if(productList[i].hasOwnProperty("children")){
                         productList[i]["variants"] = productList[i]["children"];
-                        delete productList[i]["children"];
+//                        delete productList[i]["children"];
                     }
                 }
+                console.log($scope.inventoryList);
                 productService.updateInventory({'inventoryList':$scope.inventoryList,where:{}}).$promise.then(function(data){
                    console.log("XXXXVXVVVXVX")
                    console.log("XXXXVXVVVXVX")

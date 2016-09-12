@@ -2,7 +2,7 @@
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false"
                  md-dynamic-height="true">
-            <md-tab>
+            <md-tab ng-disabled="publishToAppStore.general">
                 <md-tab-label>general</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -97,7 +97,7 @@
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>category</label>
-                                <select class="form-control"
+                                <select class="input-shadow-border form-control"
                                         ng-model="playStoreData.primaryCat"
                                         ng-options="catList.category as catList.category for catList in primaryCatList"
                                         required>
@@ -123,13 +123,13 @@
                         <div class="inner-section">
                             <md-button class="me-default-button">cancel</md-button>
                             <md-button class="me-default-button" ng-disabled="generalForm.$invalid"
-                                       ng-click="addGooglePlayInfo(picFile,playStoreData,splash)">next</md-button>
+                                       ng-click="addGooglePlayInfo(picFile,playStoreData,splash)">finish</md-button>
                         </div>
                     </div>
                     </form>
                 </md-tab-body>
             </md-tab>
-            <md-tab>
+            <md-tab ng-disabled="publishToAppStore.promotions">
                 <md-tab-label>promotions</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">

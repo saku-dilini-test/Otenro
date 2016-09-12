@@ -13,8 +13,8 @@
                             <fieldset>
                                 <label>title name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="text" name="name" ng-model="appStoreData.name"
-                                       ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxName}}" required/>
+                                <input class="input-shadow-border" type="text" name="name" ng-model="appStoreData.name"
+                                       ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxName}}"/>
                                 <br>
                                 <span ng-show="appStoreForm.name.$error.pattern">No symbols</span>
                                 <br>
@@ -100,7 +100,7 @@
                                 </fieldset>
                                 <fieldset class="col-3">
                                     <label>language</label>
-                                    <select class="form-control"
+                                    <select class="form-control input-shadow-border"
                                             ng-model="appStoreData.language"
                                             ng-options="languages.language as languages.language for languages in languageList"
                                             required>
@@ -108,7 +108,7 @@
                                 </fieldset>
                                 <fieldset class="col-3">
                                     <label>primary category</label>
-                                    <select class="form-control"
+                                    <select class="form-control input-shadow-border"
                                             ng-model="appStoreData.primaryCat"
                                             ng-options="catList.category as catList.category for catList in primaryCatList"
                                             required>
