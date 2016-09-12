@@ -14,7 +14,7 @@
                                 <label>title name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <input type="text" name="name" ng-model="appStoreData.name"
-                                       ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxName}}"/>
+                                       ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxName}}" required/>
                                 <br>
                                 <span ng-show="appStoreForm.name.$error.pattern">No symbols</span>
                                 <br>
@@ -28,7 +28,7 @@
                                         <span class="caption01">
                                              <input type="button" class="me-default-button" ngf-select
                                                     ng-model="picFile" ngf-accept="image/*"
-                                                    value="Upload Image" required/>
+                                                    value="Upload Image"/>
                                         </span>
                                     </span>
                                         <img ng-show="picFile != null" ngf-src="picFile"
@@ -92,7 +92,7 @@
                                     <label>spring board name</label>
                                     <img src="../../../images/question-mark.svg" width="12" height="12">
                                     <input type="text" name="springBoardName" ng-model="appStoreData.springBoardName"
-                                           ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxSpringBoardName}}"/>
+                                           ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxSpringBoardName}}" required/>
                                     <br>
                                     <span ng-show="appStoreForm.springBoardName.$error.pattern">No symbols</span>
                                     <br>
@@ -102,47 +102,57 @@
                                     <label>language</label>
                                     <select class="form-control"
                                             ng-model="appStoreData.language"
-                                            ng-options="languages.language as languages.language for languages in languageList">
+                                            ng-options="languages.language as languages.language for languages in languageList"
+                                            required>
                                     </select>
                                 </fieldset>
                                 <fieldset class="col-3">
                                     <label>primary category</label>
                                     <select class="form-control"
                                             ng-model="appStoreData.primaryCat"
-                                            ng-options="catList.category as catList.category for catList in primaryCatList">
+                                            ng-options="catList.category as catList.category for catList in primaryCatList"
+                                            required>
                                     </select>
                                 </fieldset>
                                 <fieldset class="col-3 reset-margin-right">
                                     <label>secondary category</label>
                                     <select class="form-control"
                                             ng-model="appStoreData.secondaryCat"
-                                            ng-options="secondaryCat.category as secondaryCat.category for secondaryCat in secondaryCatList">
+                                            ng-options="secondaryCat.category as secondaryCat.category for secondaryCat in secondaryCatList"
+                                            required>
                                     </select>
                                 </fieldset>
                             </div>
                             <div class="clearfix">
                                 <fieldset>
                                     <label>description</label>
-                                    <textarea ng-model="appStoreData.desc" rows="2" maxlength="{{maxDesc}}"></textarea>
+                                    <textarea ng-model="appStoreData.desc" rows="2" maxlength="{{maxDesc}}" required></textarea>
                                     <br>
                                     <span>Characters left: {{maxDesc - appStoreData.desc.length}}</span>
                                 </fieldset>
                                 <fieldset>
                                     <label>keywords</label>
-                                    <textarea ng-model="appStoreData.keywords" rows="2" maxlength="{{maxKeywords}}"></textarea>
+                                    <textarea ng-model="appStoreData.keywords" rows="2" maxlength="{{maxKeywords}}" required></textarea>
                                     <br>
                                     <span>Characters left: {{maxKeywords - appStoreData.keywords.length}}</span>
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label>support url</label>
                                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                                    <input type="url" ng-model="appStoreData.supportUrl" name="supportUrl" required/>
-                                    <span class="error" ng-show="appStoreForm.supportUrl.$error.url">Invalid url</span>
+                                    <input type="text"
+                                           ng-model="appStoreData.supportUrl"
+                                           name="supportUrl"
+                                           ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
+                                           required/>
+                                    <span class="error" ng-show="appStoreForm.supportUrl.$error.pattern">Invalid url</span>
                                 </fieldset>
                                 <fieldset class="col-2 reset-margin-right">
                                     <label>marketing url</label>
                                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                                    <input type="url" ng-model="appStoreData.marketingUrl" name="marketingUrl"
+                                    <input type="text"
+                                           ng-model="appStoreData.marketingUrl"
+                                           name="marketingUrl"
+                                           ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
                                            required/>
                                     <span class="error"
                                           ng-show="appStoreForm.marketingUrl.$error.url">Invalid url</span>
@@ -150,7 +160,10 @@
                                 <fieldset class="col-2">
                                     <label>privacy policy url</label>
                                     <img src="../../../images/question-mark.svg" width="12" height="12">
-                                    <input type="url" ng-model="appStoreData.privacyPolicyUrl" name="privacyPolicyUrl"
+                                    <input type="text"
+                                           ng-model="appStoreData.privacyPolicyUrl"
+                                           name="privacyPolicyUrl"
+                                           ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
                                            required/>
                                     <span class="error"
                                           ng-show="appStoreForm.privacyPolicyUrl.$error.url">Invalid url</span>
@@ -166,7 +179,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                            <md-button class="me-default-button"
+                            <md-button class="me-default-button" ng-disabled="appStoreForm.$invalid"
                                        ng-click="addAppStoreInfo(picFile,appStoreData,publishSplash)">next
                             </md-button>
                         </div>
@@ -188,63 +201,72 @@
                             <label>cartoon violence</label>
                             <select
                                     ng-model="contentRating.cartoonViolence"
-                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
+                                    required>
                             </select>
                         </fieldset>
                         <fieldset class="col-3">
                             <label>realistic violence</label>
                             <select
                                     ng-model="contentRating.realisticViolence"
-                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
+                                    required>
                             </select>
                         </fieldset>
                         <fieldset class="col-3 reset-margin-right">
                             <label>sexual or nudity</label>
                             <select
                                     ng-model="contentRating.nudityViolence"
-                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
+                                    required>
                             </select>
                         </fieldset>
                         <fieldset class="col-3">
                             <label>alcohol, tobacco</label>
                             <select
                                     ng-model="contentRating.alcoholViolence"
-                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
+                                    required>
                             </select>
                         </fieldset>
                         <fieldset class="col-3">
                             <label>mature topics</label>
                             <select
                                     ng-model="contentRating.matureViolence"
-                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
+                                    required>
                             </select>
                         </fieldset>
                         <fieldset class="col-3 reset-margin-right">
                             <label>simulated gambling</label>
                             <select
                                     ng-model="contentRating.gamblingViolence"
-                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
+                                    required>
                             </select>
                         </fieldset>
                         <fieldset class="col-3">
                             <label>profanity</label>
                             <select
                                     ng-model="contentRating.profanityViolence"
-                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
+                                    required>
                             </select>
                         </fieldset>
                         <fieldset class="col-3">
                             <label>horror/fear</label>
                             <select
                                     ng-model="contentRating.horrorViolence"
-                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList">
+                                    ng-options="contentRating.ratings as contentRating.ratings for contentRating in contentRatingList"
+                                    required>
                             </select>
                         </fieldset>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="contentRatings(contentRating)">next</md-button>
+                            <md-button class="me-default-button" ng-disabled="contentRatingForm.$invalid"
+                                       ng-click="contentRatings(contentRating)">finish</md-button>
                         </div>
                     </div>
                         </form>

@@ -117,6 +117,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           }
       })
       .state('app.pickup', {
+          cache: false,
           url: '/pickup',
           views: {
               'menuContent': {

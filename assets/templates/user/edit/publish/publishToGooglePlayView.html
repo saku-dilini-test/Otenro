@@ -14,7 +14,7 @@
                             <label>title name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <input type="text" name="name" ng-model="playStoreData.name"
-                                   ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxName}}"/>
+                                   ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxName}}" required/>
                             <br>
                             <span ng-show="generalForm.name.$error.pattern">No symbols</span>
                             <br>
@@ -26,7 +26,7 @@
                                 <a class="feature01 logo-upload">
                                     <span class="overlay01">
                                         <span class="caption01">
-                                             <input type="button" class="me-default-button" ngf-select ng-model="picFile" ngf-accept="image/*" value="Add Image" required />
+                                             <input type="button" class="me-default-button" ngf-select ng-model="picFile" ngf-accept="image/*" value="Add Image"/>
                                         </span>
                                     </span>
                                     <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />
@@ -81,7 +81,7 @@
                                 <label>spring board name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <input type="text" name="springBoardName" ng-model="playStoreData.springBoardName"
-                                       ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxSpringBoardName}}"/>
+                                       ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxSpringBoardName}}" required/>
                                 <br>
                                 <span ng-show="generalForm.springBoardName.$error.pattern">No symbols</span>
                                 <br>
@@ -91,27 +91,29 @@
                                 <label>language</label>
                                     <select class="form-control"
                                             ng-model="playStoreData.language"
-                                            ng-options="languages.language as languages.language for languages in languageList">
+                                            ng-options="languages.language as languages.language for languages in languageList"
+                                            required>
                                     </select>
                             </fieldset>
                             <fieldset class="col-3">
                                 <label>category</label>
                                 <select class="form-control"
                                         ng-model="playStoreData.primaryCat"
-                                        ng-options="catList.category as catList.category for catList in primaryCatList">
+                                        ng-options="catList.category as catList.category for catList in primaryCatList"
+                                        required>
                                 </select>
                             </fieldset>
                         </div>
                         <div class="clearfix">
                             <fieldset>
                                 <label>description</label>
-                                <textarea ng-model="playStoreData.desc" rows="2" maxlength="{{maxDesc}}"></textarea>
+                                <textarea ng-model="playStoreData.desc" rows="2" maxlength="{{maxDesc}}" required></textarea>
                                 <br>
                                 <span>Characters left: {{maxDesc - playStoreData.desc.length}}</span>
                             </fieldset>
                             <fieldset>
                                 <label>keywords</label>
-                                <textarea ng-model="playStoreData.keywords" rows="2" maxlength="{{maxKeywords}}"></textarea>
+                                <textarea ng-model="playStoreData.keywords" rows="2" maxlength="{{maxKeywords}}" required></textarea>
                                 <br>
                                 <span>Characters left: {{maxKeywords - playStoreData.keywords.length}}</span>
                             </fieldset>
@@ -120,7 +122,8 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button">cancel</md-button>
-                            <md-button class="me-default-button"  ng-click="addGooglePlayInfo(picFile,playStoreData,splash)">next</md-button>
+                            <md-button class="me-default-button" ng-disabled="generalForm.$invalid"
+                                       ng-click="addGooglePlayInfo(picFile,playStoreData,splash)">next</md-button>
                         </div>
                     </div>
                     </form>
