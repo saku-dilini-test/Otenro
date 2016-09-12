@@ -58,7 +58,7 @@
                 taxInfo.appId = $rootScope.appId;
                 taxService.updateTaxInfo(taxInfo)
                     .success(function (result) {
-                        toastr.success('Successfully Saved ', 'Saved', {
+                        toastr.success(result.message, 'Saved', {
                             closeButton: true
                         });
                         $scope.backToTaxesView();

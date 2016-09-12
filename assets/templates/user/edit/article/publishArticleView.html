@@ -15,7 +15,8 @@
             </fieldset>
             <fieldset>
                 <label>Title</label>
-                <input class="input-shadow-border" type="text" name="title" ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="article.title" required />
+                <input class="input-shadow-border" type="text" name="title" ng-pattern="/^[a-zA-Z0-9_ ]*$/"
+                       ng-model="article.title" required />
                 <br />
                 <span ng-show="articleForm.title.$error.pattern">No symbols</span>
                 <div ng-hide="article.title.length > maxArticleTitle">
@@ -73,7 +74,10 @@
             <fieldset style="clear:both">
                 <label>Text</label>
                 <div class="custom-trix">
-                    <trix-editor class="textEditor input-shadow-border" name="editorText" ng-maxlength="200" angular-trix ng-model="article.desc"
+                    <trix-editor class="textEditor input-shadow-border"
+                                 name="editorText"
+                                 ng-maxlength="1000"
+                                 angular-trix ng-model="article.desc"
                                  required></trix-editor>
                  </div>
                 <label class="desc">Description</label>

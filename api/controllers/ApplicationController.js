@@ -368,7 +368,7 @@ module.exports = {
                       "name": "Low price ",
                       'sku': "1111",
                       'size': "11",
-                      'price': "11",
+                      'price': "100",
                       'quantity': 11
                     }],
                     "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
@@ -387,7 +387,7 @@ module.exports = {
                       "name": "Low price ",
                       'sku': "1111",
                       'size': "11",
-                      'price': "11",
+                      'price': "200",
                       'quantity': 11
                     }],
                     "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
@@ -408,7 +408,7 @@ module.exports = {
                       "name": "Low price ",
                       'sku': "1111",
                       'size': "11",
-                      'price': "11",
+                      'price': "100",
                       'quantity': 11
                     }],
                     "imageUrl": "pizza.jpg",
@@ -427,7 +427,7 @@ module.exports = {
                       "name": "Low price ",
                       'sku': "1111",
                       'size': "11",
-                      'price': "11",
+                      'price': "200",
                       'quantity': 11
                     }],
                     "imageUrl": "melko-21290330.jpg",

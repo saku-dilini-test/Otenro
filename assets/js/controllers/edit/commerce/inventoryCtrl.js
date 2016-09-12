@@ -192,7 +192,6 @@
 //                        delete productList[i]["children"];
                     }
                 }
-                console.log($scope.inventoryList);
                 productService.updateInventory({'inventoryList':$scope.inventoryList,where:{}}).$promise.then(function(data){
                    console.log("XXXXVXVVVXVX")
                    console.log("XXXXVXVVVXVX")
