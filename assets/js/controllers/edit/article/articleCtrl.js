@@ -115,12 +115,19 @@
         $scope.addImage = function(img){
 
             var im = $scope.tmpImage;
-            im[0] = $scope.picFile;
-            $scope.tmpImage = im;
-            $scope.mainImg = img;
-            toastr.success('added Image', 'message', {
-                closeButton: true
-            });
+            if(angular.element('#fileInput').val() == ''){
+                toastr.error('Please choose an image to upload', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else{
+                im[0] = $scope.picFile;
+                $scope.tmpImage = im;
+                $scope.mainImg = img;
+                toastr.success('added Image', 'message', {
+                    closeButton: true
+                });
+            }
         };
 
         $scope.changeArticleCat = function(catId){
@@ -174,15 +181,8 @@
                 );
                 return;
             }
-
-            if($scope.myImage == ''){
-                toastr.error('Please choose image and upload image', 'Warning', {
-                    closeButton: true
-                });
-                return;
-            }
             if(file == null){
-                toastr.error('Please upload image', 'Warning', {
+                toastr.error('Please upload an image', 'Warning', {
                     closeButton: true
               });
                 return;
