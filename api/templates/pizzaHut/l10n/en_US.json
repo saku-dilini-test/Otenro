@@ -95,7 +95,7 @@
 	"inputEmail" 	: "Email",
 	"inputPassword" : "Password",
 	"inputConfirm"  : "Confirm password",
-	"inputName" 	: "Full Name",
+	"inputName" 	: "User Name",
 	"inputPhone" 	: "Phone Number (exp: 08193444)",
 	"inputAddress" 	: "Address",
 	"inputStreet" 	: "Street and house number",

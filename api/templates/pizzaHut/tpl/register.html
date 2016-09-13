@@ -1,6 +1,6 @@
 <div class="content-padded">
 	<form name="register" novalidate>
-		<input type="text" ng-model="register.name" placeholder="{{'load.register.UserName' | translate}}">
+		<input type="text" ng-model="register.name" placeholder="{{'load.register.inputName' | translate}}">
 		<input name="registerEmail" type="email" ng-model="register.email" placeholder="{{'load.register.inputEmail' | translate}}" required>
 		<br />
 		<span class="error" ng-show="register.registerEmail.$error.email">Not valid email!</span>
