@@ -18,7 +18,8 @@
             $scope.inventoryList = [];
 
             $scope.refreshData = function() {
-                $scope.inventoryList = $filter('filter')($scope.inventoryList, $scope.search, undefined);
+                $scope.inventoryList = initialData.inventoryList;
+                $scope.inventoryList = $filter('filter')($scope.inventoryList, $scope.search.name, undefined);
             }
             $scope.col_defs =[
                 {
