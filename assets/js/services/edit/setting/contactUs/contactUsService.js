@@ -32,6 +32,14 @@
                 return $http.post(SERVER_URL + 'edit/addBasicInfo',basicInfoResponse);
             },
 
+            saveWebInfo: function(webInfoResponse){
+                return $http.post(SERVER_URL + 'edit/addWebInfo',webInfoResponse);
+            },
+
+            saveGoogleMapInfo: function(googleMapInfoResponse){
+                return $http.post(SERVER_URL + 'edit/addGoogleMapInfo',googleMapInfoResponse);
+            },
+
             saveOpenHoursInfo: function(openHoursResponse){
                 return $http.post(SERVER_URL + 'edit/addOpenHoursInfo',openHoursResponse);
             }
