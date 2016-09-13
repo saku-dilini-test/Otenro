@@ -303,6 +303,21 @@
                             $scope.fulfill.push($scope.ordersList[i]);
                         }
                     }
+                    $scope.exportArrayN= [{
+                        'Created Date':'Created Date',
+                        'Customer Name':'Customer Name',
+                        'Payment Status':'Payment Status',
+                        'Fulfillment Status':'Fulfillment Status'
+                    }];
+                    angular.forEach($scope.ordersList, function(value, key) {
+                        $scope.exportArrayN.push({
+
+                            'Created Date' : value.createdDate,
+                            'Customer Name' : value.customerName,
+                            'Payment Status' : value.paymentStatus,
+                            'Fulfillment Status' : value.fulfillmentStatus,
+                        });
+                    });
 
                     $scope.gridOptions1.data = $scope.ordersList;
                     $scope.gridOptions2.data = $scope.fulfill;

@@ -127,10 +127,10 @@
                             <th width="25%">Product Name</th>
                             <th >Sku</th>
                             <th width="18%">
-                                <select ng-model="selection" class="input-shadow-border">
-                                    <option value="Size" ng-selected="true">Size</option>
-                                    <option value="Weight">Weight</option>
-                                </select>
+                                <md-select class="" placeholder="Select" ng-model="selection" required>
+                                    <md-option ng-value="child.name" ng-repeat="child in sizeOrWeight">{{child.name}}
+                                    </md-option>
+                                </md-select>
                             </th>
                             <th>Price</th>
                             <th>Quantity</th>
@@ -201,7 +201,7 @@
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
                                 <td>
                                     <div disable-all="priceAndVariantsForm.$invalid">
-                                    <div class="add-icon icon icon-plus" ng-click="addVariant(product,$index,data)"></div>
+                                    <div class="add-icon icon icon-plus" ng-click="addVariant(selection,product,$index,data)"></div>
                                     </div>
                                 </td>
 
