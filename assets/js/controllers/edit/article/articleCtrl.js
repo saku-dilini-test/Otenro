@@ -14,7 +14,7 @@
     function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,SERVER_URL,ME_APP_SERVER,mySharedService,initialData) {
 
         $scope.appId = $rootScope.appId;
-        $scope.tmpImage = [ null ];
+        $scope.tmpImage = [];
         $scope.mainImg = null;
         $scope.isNewArticle = false;
         $scope.edit_Category = initialData;
@@ -181,7 +181,7 @@
                 );
                 return;
             }
-            if(file == null){
+            if($scope.tmpImage[0] == null){
                 toastr.error('Please upload an image', 'Warning', {
                     closeButton: true
               });
