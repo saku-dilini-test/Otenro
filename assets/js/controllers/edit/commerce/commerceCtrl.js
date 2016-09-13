@@ -3,11 +3,12 @@
     angular.module("appEdit").controller("CommerceCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope',
         'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','comingSoonService',
-        '$filter',
+        '$filter','contactUsService','uiGmapGoogleMapApi',
         CommerceCtrl]);
 
     function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope,
-             SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter) {
+             SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
+             contactUsService,uiGmapGoogleMapApi) {
 
         $scope.refund = [];
         $scope.unfulfilled = [];
@@ -399,16 +400,11 @@
                     return;
                 }
             }
-            storeSettings.address = storeSettings.address1 + ',' + storeSettings.address2 + ',' + storeSettings.address3
-                                                + ',' + storeSettings.address4;
             console.log(storeSettings);
             if (!storeSettings){
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
             }else if (!storeSettings.orderNumber) {
                 toastr.error(' warning', "Please fill order number field", {closeButton: true});
-            }
-            else if (!storeSettings.address1){
-                toastr.error(' warning', "Please fill address field", {closeButton: true});
             }
             else {
 
@@ -502,8 +498,7 @@
                                 +'/templates/'+$rootScope.appId+'' +
                                 '#/app/aboutUs';
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
-//                            $scope.selectedTab = current;
-                            $mdDialog.hide();
+                            $scope.selectedTab = current;
                         }).error(function (data, status, headers, config) {
                         toastr.error('Unable to Add', 'Warning', {
                             closeButton: true
@@ -520,24 +515,6 @@
             $scope.storeSettings = data[0];
             $scope.storeSettings.currency = data[0].currencySign;
             $scope.openHours = data[0].OpenHours;
-            if(typeof data[0].address != 'undefined'){
-                var fullAddress = data[0].address;
-                var separateAddressArray = fullAddress.split(",");
-                console.log(separateAddressArray);
-                if(separateAddressArray[0] != "undefined"){
-                    $scope.storeSettings.address1 = separateAddressArray[0]
-                }
-                if(separateAddressArray[1] != "undefined"){
-                    $scope.storeSettings.address2 = separateAddressArray[1]
-                }
-                if(separateAddressArray[2] != "undefined"){
-                    $scope.storeSettings.address3 = separateAddressArray[2]
-                }
-                if(separateAddressArray[3] != "undefined"){
-                    $scope.storeSettings.address4 = separateAddressArray[3]
-                }
-
-            }
         }).error(function (err) {
             toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
         });
@@ -883,6 +860,104 @@
                         closeButton: true
                     });
                 })
+            }
+        };
+        /*
+            Contact us controller
+        */
+        // --/-- Characters length config
+        $scope.maxBasicInfoAddress = 50;
+
+        // --- Config ----
+        $scope.coords ="";
+        contactUsService.getContactUsInfo().success(function(result){
+            //  if(result.appId == $rootScope.appId) {
+            $scope.basicInfo = result;
+            $scope.webInfo = result;
+            $scope.googleMap = result;
+            $scope.coords =result.coords;
+
+            if(!result.coords){
+                $scope.coords={
+                    latitude : 6.9320204155752050,
+                    longitude: 79.8890950584107031
+                };
+            }
+            uiGmapGoogleMapApi.then(function(maps) {
+            $scope.map= {
+                center: $scope.coords,
+                zoom: 11,
+                markers: [{
+                    id: Date.now(),
+                    coords:$scope.coords
+                }],
+                events: {
+                    click: function(map, eventName, originalEventArgs) {
+                        var e = originalEventArgs[0];
+                        var lat = e.latLng.lat(),
+                            lon = e.latLng.lng();
+                        var marker = {
+                            id: Date.now(),
+                            coords: {
+                                latitude: lat,
+                                longitude: lon
+                            }
+                        };
+                        $scope.map.markers=[];
+                        $scope.map.markers.push(marker);
+                        $scope.$apply();
+                            }
+                        }
+                    };
+            });
+               // }
+        }).error(function (error) {
+                alert("Contact Us information Loading Error : " + error);
+        });
+        // Save Contact Us Information and move to Web Information
+        $scope.addContactUs = function(basicInfo,webInfo,googleMap) {
+
+            // If defined basic information address , Check length
+            if((typeof basicInfo.address != 'undefined') && (basicInfo.address.length > $scope.maxBasicInfoAddress)){
+                toastr.error('Address should be less than '+$scope.maxBasicInfoAddress+' letters.',
+                    'Warning',{closeButton: true}
+                );
+                return;
+            }
+
+            if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
+                toastr.error('Basic Information not update', { closeButton: true});
+            }else if(typeof basicInfo.address == 'undefined'){
+                toastr.error('Address Not Update', { closeButton: true});
+            }
+            else if(typeof basicInfo.telPhone == 'undefined'){
+                toastr.error('Tel phone Not Update', { closeButton: true});
+            }
+            else if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
+                toastr.error('Web Information not update', { closeButton: true});
+            }
+            else if(typeof webInfo.email == 'undefined'){
+                toastr.error('Email Not Update', { closeButton: true});
+            }
+            else if(typeof webInfo.webSite == 'undefined'){
+                toastr.error('Web Site Not Update', { closeButton: true});
+            }
+            else{
+                var basicInfoResponse = {
+                    'appId': $rootScope.appId,
+                    'address': basicInfo.address,
+                    'telPhone': basicInfo.telPhone,
+                    'email': webInfo.email,
+                    'webSite': webInfo.webSite,
+                    'coords': $scope.map.markers[0].coords
+                };
+                contactUsService.saveBasicInfo(basicInfoResponse)
+                    .success(function(data, status, headers, config) {
+                        toastr.success('Basic Info saved successfully', 'Awsome!', {closeButton: true});
+                          $mdDialog.hide();
+                    }).error(function(data, status, headers, config) {
+                    toastr.error('Basic info saving error', { closeButton: true});
+                });
             }
         };
     }
