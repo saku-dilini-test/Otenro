@@ -25,7 +25,7 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 1340,
+  port: 1337,
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
@@ -37,11 +37,11 @@ module.exports = {
   
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'http://simatosolutions.com',
+  HOST_URL : 'http://otenro.com',
   // ME SERVER Config 
-  ME_SERVER : '/home/git/meAppServer/',
+  ME_SERVER : '/home/otenro/meAppServer/temp/',
   ME_SERVER_PORT : 8082,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : '/home/git/appFileServer/'
+  APP_FILE_SERVER : '/home/otenro/appFileServer/'
 
 };
