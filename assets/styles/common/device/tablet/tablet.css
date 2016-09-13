@@ -1,9 +1,9 @@
 .tablet {
     position: relative;
-    background: url(../../../../images/tablet.jpg) no-repeat;
+    background: url(../../../../images/tablet.png) no-repeat;
     background-size: 100% 100%;
     width: 749px;
-    height: 495px;
+    height: 562px;
     border-radius: 1em;
     float: none;
 }
@@ -81,10 +81,14 @@
 }
 
 .tabappViewClass{
-    height: 100%;
-    width: 105%;
-    margin-top: -8px;
-    margin-left: 5px;
+    height: 104%;
+    width: 89%;
+    margin-top: -14px;
+    margin-left: 30px;
+}
+
+.tabappViewClass iframe{
+    border: #e6e6e6 2px inset;
 }
 
 .tabButton {
