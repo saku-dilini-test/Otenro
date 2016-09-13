@@ -10,6 +10,7 @@
 
         $scope.tmpImage = [];
         $scope.product = initialData.product;
+        $scope.selection = initialData.product.selection;
 
         // Third Navigation Image Path ( Image get from server )
         var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
@@ -33,7 +34,10 @@
         $scope.tmpFile = [null, null];
         $scope.mainFile = null;
 
-        $scope.selection = "size";
+        $scope.sizeOrWeight=[
+            {name: 'weight'},
+            {name: 'size'},
+        ]
         $scope.userId = $auth.getPayload().id;
         $scope.isDigital = false;
         $scope.isValid = false;
@@ -85,7 +89,7 @@
          * @param index
          * @param variants
          */
-        $scope.addVariant = function (product,index,variants) {
+        $scope.addVariant = function (selection,product,index,variants) {
             if(variants.sku == 0 || variants.price == 0 || variants.quantity == 0
                 || variants.size == "") {
                 toastr.error('Fill all the existing fields before adding a new field', 'Warning', {
@@ -93,11 +97,13 @@
                 });
             }
             else{
+                $scope.selection = selection;
                 $scope.inserted = {
                     sku: null,
                     name: product.name,
                     price: null,
-                    quantity: null
+                    quantity: null,
+                    selection: $scope.selection
                 };
 
                 if($scope.product.variants.length >= 2){
@@ -257,6 +263,7 @@
                       closeButton: true
                   });
               }else {
+                  $scope.product.selection = $scope.selection;
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
                       toastr.success('New Product has been added to the inventory.', 'Awsome!', {
                           closeButton: true
