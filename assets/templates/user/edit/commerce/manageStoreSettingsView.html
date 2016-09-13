@@ -322,10 +322,75 @@
                         <div class="inner-section">
                             <fieldset class="text-right reset-margin">
                                 <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                                <md-button class="me-default-button" ng-click="addAboutUs(3,storeSettings)">Finish</md-button>
+                                <md-button class="me-default-button" ng-click="addAboutUs(3,storeSettings)">next</md-button>
                             </fieldset>
                         </div>
                     </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Contact Us</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>Contact Us</h1>
+                    </div>
+                    <!-- Address | Tel Phone -->
+                    <form name="basicInfoForm" novalidate>
+                        <div class="md-dialog-main">
+                            <fieldset>
+                                <!-- Address -->
+                                <label>Address</label>
+                                <input type="text" name="address" ng-model="basicInfo.address" required />
+                                <div ng-hide="basicInfo.address.length > maxBasicInfoAddress">
+                                    <span>Characters left: {{maxBasicInfoAddress - basicInfo.address.length}}</span>
+                                </div>
+                                <div  ng-show="basicInfo.address.length > maxBasicInfoAddress">
+                                    <span>Characters left: </span>
+                                    <span style="color: #ff0404 ">
+                                        {{maxBasicInfoAddress - basicInfo.address.length}}
+                                    </span>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <!-- Telephone -->
+                                <label>Telephone</label>
+                                <input type="text" name="telPhone" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" ui-mask="(999) 999-9999"  required />
+                            </fieldset>
+                            <fieldset>
+                                <!-- Email -->
+                                <label>Email</label>
+                                <input type="email" name="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                       ng-model="webInfo.email" required />
+                                <span class="error" ng-show="basicInfoForm.email.$error.email || basicInfoForm.email.$error.pattern">Invalid email!</span>
+                            </fieldset>
+                            <fieldset>
+                                <!-- Web Site -->
+                                <label>Website</label>
+                                <input type="text" name="website" ng-model="webInfo.webSite"
+                                       ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" required />
+                                <br/>
+                                <span class="error" ng-show="basicInfoForm.website.$error.pattern">Invalid url!</span>
+                            </fieldset>
+                            <div class="google-map-wrapper">
+                                <div class="google-map-container">
+                                    <ui-gmap-google-map  center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+                                        <ui-gmap-marker ng-repeat="mp in map.markers" coords="mp.coords" icon="mp.icon" idkey="mp.id"></ui-gmap-marker>
+                                    </ui-gmap-google-map>
+                                </div>
+                            </div>
+                            <fieldset>
+                                {{map.markers[0].coords.latitude}}
+                                <br />
+                                {{map.markers[0].coords.longitude}}
+                            </fieldset>
+                        </div>
+                        <div class="md-dialog-buttons">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                                <md-button class="me-default-button" ng-click="addBasicInfo(basicInfo,webInfo,googleMap)">Finish</md-button>
+                            </div>
+                        </div>
+                    </form>
                 </md-tab-body>
             </md-tab>
             <!--<md-tab>-->
