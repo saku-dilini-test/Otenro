@@ -66,22 +66,6 @@
                                     </label>
                                 </div>
                             </fieldset>
-                            <fieldset style="clear:both">
-                                <label>address</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <br >
-                                <input  class="input-shadow-border" style="width:75%;" type="text" ng-model="storeSettings.address1">
-                                <br />
-                                <br />
-                                <input  class="input-shadow-border" style="width:75%;" type="text" ng-model="storeSettings.address2">
-                                <br />
-                                <br />
-                                <input  class="input-shadow-border" style="width:75%;" type="text" ng-model="storeSettings.address3">
-                                <br />
-                                <br />
-                                <input  class="input-shadow-border" style="width:75%;" type="text" ng-model="storeSettings.address4">
-                                <!--<textarea rows="2" ng-model="storeSettings.address" ></textarea>-->
-                            </fieldset>
                             <br />
                             <h2>business hours</h2>
 
@@ -340,7 +324,7 @@
                             <fieldset>
                                 <!-- Address -->
                                 <label>Address</label>
-                                <input type="text" name="address" ng-model="basicInfo.address" required />
+                                <textarea type="text" name="address" ng-model="basicInfo.address" required ></textarea>
                                 <div ng-hide="basicInfo.address.length > maxBasicInfoAddress">
                                     <span>Characters left: {{maxBasicInfoAddress - basicInfo.address.length}}</span>
                                 </div>
@@ -387,7 +371,7 @@
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                                <md-button class="me-default-button" ng-click="addBasicInfo(basicInfo,webInfo,googleMap)">Finish</md-button>
+                                <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap)">Finish</md-button>
                             </div>
                         </div>
                     </form>
