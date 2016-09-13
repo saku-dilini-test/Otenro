@@ -56,6 +56,11 @@ ion-nav-view{
     cursor: url(../img/cursor.cur), auto;
 }
 
+/** --- item Qty err message --- **/
+.item-error-message{
+    color: red;
+    font-size: 70%;
+}
 
 /* ----- Contact Us Page ----- */
 .made-easy-contactUs {
