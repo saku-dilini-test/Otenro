@@ -130,6 +130,9 @@ angular.module('starter.controllers', [])
 
 .controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices,readMadeEasy,constants) {
 
+    // config
+    $scope.selectedVariant = {};
+    
     // get currency by appId
     readMadeEasy.readFile().success(function(appData){
         appServices.getCurrencyByAppId(appData.appId)
@@ -179,6 +182,26 @@ angular.module('starter.controllers', [])
             $scope.isBuyBtnDisable = false;
         }else{
             $scope.isBuyBtnDisable = true;
+        }
+    };
+
+    // Check buyQty input value.
+    // If buyQty value is less than or equal Selected-Variant-Qty, Buy Button Enable
+    $scope.changeBuyQuantity = function (buyQty) {
+
+        // default : Buy button set as Disable
+        $scope.isBuyBtnDisable = true;
+
+        // if buyQty value greater than 0
+        if(buyQty > 0){
+            // Get Selected-Variant-Qty value
+            var selectVariantAvailableQty = $scope.selectedVariant.quantity;
+            if(typeof selectVariantAvailableQty != 'undefined'){
+                // If buyQty less than or equal Selected-Variant-Qty, buy button enable
+                if(buyQty <= selectVariantAvailableQty){
+                    $scope.isBuyBtnDisable = false;
+                }
+            }
         }
     };
 
