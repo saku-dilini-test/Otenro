@@ -400,16 +400,11 @@
                     return;
                 }
             }
-            storeSettings.address = storeSettings.address1 + ',' + storeSettings.address2 + ',' + storeSettings.address3
-                                                + ',' + storeSettings.address4;
             console.log(storeSettings);
             if (!storeSettings){
                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
             }else if (!storeSettings.orderNumber) {
                 toastr.error(' warning', "Please fill order number field", {closeButton: true});
-            }
-            else if (!storeSettings.address1){
-                toastr.error(' warning', "Please fill address field", {closeButton: true});
             }
             else {
 
@@ -520,24 +515,6 @@
             $scope.storeSettings = data[0];
             $scope.storeSettings.currency = data[0].currencySign;
             $scope.openHours = data[0].OpenHours;
-            if(typeof data[0].address != 'undefined'){
-                var fullAddress = data[0].address;
-                var separateAddressArray = fullAddress.split(",");
-                console.log(separateAddressArray);
-                if(separateAddressArray[0] != "undefined"){
-                    $scope.storeSettings.address1 = separateAddressArray[0]
-                }
-                if(separateAddressArray[1] != "undefined"){
-                    $scope.storeSettings.address2 = separateAddressArray[1]
-                }
-                if(separateAddressArray[2] != "undefined"){
-                    $scope.storeSettings.address3 = separateAddressArray[2]
-                }
-                if(separateAddressArray[3] != "undefined"){
-                    $scope.storeSettings.address4 = separateAddressArray[3]
-                }
-
-            }
         }).error(function (err) {
             toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
         });
@@ -889,7 +866,7 @@
             Contact us controller
         */
         // --/-- Characters length config
-        $scope.maxBasicInfoAddress = 20;
+        $scope.maxBasicInfoAddress = 50;
 
         // --- Config ----
         $scope.coords ="";
@@ -937,8 +914,8 @@
         }).error(function (error) {
                 alert("Contact Us information Loading Error : " + error);
         });
-        // Save Basic Information and move to Web Information
-        $scope.addBasicInfo = function(basicInfo,webInfo,googleMap) {
+        // Save Contact Us Information and move to Web Information
+        $scope.addContactUs = function(basicInfo,webInfo,googleMap) {
 
             // If defined basic information address , Check length
             if((typeof basicInfo.address != 'undefined') && (basicInfo.address.length > $scope.maxBasicInfoAddress)){
@@ -950,8 +927,6 @@
 
             if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
                 toastr.error('Basic Information not update', { closeButton: true});
-                // go next tab
-//                disableTabs(1,false,true,true);
             }else if(typeof basicInfo.address == 'undefined'){
                 toastr.error('Address Not Update', { closeButton: true});
             }
@@ -960,8 +935,6 @@
             }
             else if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
                 toastr.error('Web Information not update', { closeButton: true});
-                // go next tab
-//                disableTabs(3,false,false,false);
             }
             else if(typeof webInfo.email == 'undefined'){
                 toastr.error('Email Not Update', { closeButton: true});
@@ -981,57 +954,11 @@
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
                         toastr.success('Basic Info saved successfully', 'Awsome!', {closeButton: true});
-                        // go next tab
-//                        disableTabs(2,false,false,true);
                           $mdDialog.hide();
                     }).error(function(data, status, headers, config) {
                     toastr.error('Basic info saving error', { closeButton: true});
                 });
             }
         };
-        // Save Web Information and move to Google Map
-//        $scope.addWebInfo = function(webInfo) {
-//            if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
-//                toastr.error('Web Information not update', { closeButton: true});
-//                // go next tab
-//                disableTabs(3,false,false,false);
-//            }else{
-//                if(typeof webInfo.email == 'undefined'){
-//                    toastr.error('Email Not Update', { closeButton: true});
-//                }
-//                if(typeof webInfo.webSite == 'undefined'){
-//                    toastr.error('Web Site Not Update', { closeButton: true});
-//                }
-//                var webInfoResponse = {
-//                    'appId': $rootScope.appId,
-//                    'email': webInfo.email,
-//                    'webSite': webInfo.webSite
-//                };
-//                disableTabs(3,false,false,false);
-//                contactUsService.saveWebInfo(webInfoResponse)
-//                    .success(function(data, status, headers, config) {
-//                        toastr.success('Web info saved successfully', 'Awsome!', {closeButton: true});
-//                        // to next tab
-//
-//                    }).error(function(data, status, headers, config) {
-//                        toastr.error('Web info saving error', {closeButton: true});
-//                });
-//            }
-//        };
-//        // Save Google Map information
-//        $scope.addGoogleMap = function(current,googleMapInfo) {
-//            var googleMapInfoResponse = {
-//                'appId': $rootScope.appId,
-//                'coords': $scope.map.markers[0].coords
-//            };
-//            contactUsService.saveGoogleMapInfo(googleMapInfoResponse)
-//                .success(function(data, status, headers, config) {
-//                    toastr.success('Google Map Info saved successfully', 'Awsome!', {closeButton: true});
-//                    // If Successfully finished and popup window close
-//                    $mdDialog.hide();
-//                }).error(function(data, status, headers, config) {
-//                    toastr.error('Google Map Info saving error', {closeButton: true});
-//                });
-//        };
     }
 })();
