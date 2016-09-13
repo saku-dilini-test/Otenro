@@ -307,8 +307,13 @@ module.exports = {
             viewAmount += "---------------------------------------------------------" +
               "<li>Total Amount With Delivery Charges: Rs. " + total + "</li>";
           }
+          var paymentStatus = '';
+          if(data.paymentStatus){
+            paymentStatus = "<h4>Payment Status : "+data.paymentStatus+"</h4>";
+          }
           var emailBody = "<html>" +
             "<h4>" + "New " + optionType + " Order" + "</h4>" +
+            paymentStatus+
             "<h4>Order Details</h4>" +
             "<ul>" +
             itemsHtml +

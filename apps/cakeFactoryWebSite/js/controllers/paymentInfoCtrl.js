@@ -26,6 +26,7 @@ angular.module('animateApp')
 		shoppingCart['comment'] = $scope.cart.getComment();
 		shoppingCart['pickUpDate'] = $scope.cart.getPickUpDate();
 		shoppingCart['pickUpTime'] = $scope.cart.getPickUpTime();
+		shoppingCart['paymentStatus'] = 'Success';
 
 		$http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)
 			.then(function (response) { 
