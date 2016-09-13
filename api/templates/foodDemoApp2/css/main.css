@@ -137,6 +137,10 @@ ion-side-menu-content{
 .made-easy-view .item-buy-quantity{
     width: 50px;
 }
+.made-easy-view .item-error-message{
+    color: red;
+    font-size: 70%;
+}
 
 /* ----- Contact Us Page ----- */
 .made-easy-contactUs {}
