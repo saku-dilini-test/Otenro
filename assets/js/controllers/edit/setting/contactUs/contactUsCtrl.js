@@ -159,6 +159,7 @@
                 }else{
 
                     storeSettings.appId = $rootScope.appId;
+                    storeSettings.userId = $scope.userId;
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
                             toastr.success('Successfully save About Us Data ..... !', 'Awsome!', {
@@ -176,7 +177,7 @@
                     })
                 }
             }else {
-                $scope.selected= current;
+                $scope.selectedTab = current;
             }
 
         };
