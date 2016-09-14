@@ -27,7 +27,7 @@
 				var appId = $rootScope.appId;
 				pagesService.getContactUs(appId).then(setContactUs)
 					.finally(function(){
-						console.log("setAboutUs  " + JSON.stringify(setAboutUs));
+						console.log("setAboutUs  " + JSON.stringify(setContactUs));
 						$ionicLoading.hide();
 					});
 
@@ -38,6 +38,7 @@
 					$scope.email = response.email;
 					$scope.address = response.address;
 					$scope.telPhone = response.telPhone;
+					$scope.webSite = response.webSite;
 				}
 
 			}

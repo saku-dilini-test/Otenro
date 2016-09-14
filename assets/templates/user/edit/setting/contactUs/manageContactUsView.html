@@ -66,6 +66,60 @@
                     </form>
                 </md-tab-body>
             </md-tab>
+            <md-tab ng-disabled="contactUsTabs.policiesInfo">
+                <md-tab-label>policies</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>policies</h1>
+                    </div>
+                    <div class="md-dialog-main">
+                        <form name="policies" class="clearfix" novalidate>
+                            <fieldset>
+                                <label>return policy</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <textarea class="input-shadow-border" name="returnPolicy" rows="2" ng-model="storeSettings.returnPolicy"></textarea>
+                                <br />
+                                <div ng-hide="storeSettings.returnPolicy.length > maxReturnPolicy">
+                                    <span>Characters left: {{maxReturnPolicy - storeSettings.returnPolicy.length}}</span>
+                                </div>
+                                <div  ng-show="storeSettings.returnPolicy.length > maxReturnPolicy">
+                                    <span>Characters left: </span> <span style="color: #ff0404 "> {{maxReturnPolicy - storeSettings.returnPolicy.length}} </span>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <label>terms and conditions</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <textarea class="input-shadow-border" name="termsAndCondition" rows="2" ng-model="storeSettings.termsAndCondition"></textarea>
+                                <br />
+                                <div ng-hide="storeSettings.termsAndCondition.length > maxTermsAndCondition">
+                                    <span>Characters left: {{maxTermsAndCondition - storeSettings.termsAndCondition.length}}</span>
+                                </div>
+                                <div  ng-show="storeSettings.termsAndCondition.length > maxTermsAndCondition">
+                                    <span>Characters left: </span> <span style="color: #ff0404 "> {{maxTermsAndCondition - storeSettings.termsAndCondition.length}} </span>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <label>privacy policy</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <textarea class="input-shadow-border" name="privacyPolicy" rows="2"  ng-model="storeSettings.privacyPolicy"></textarea>
+                                <br />
+                                <div ng-hide="storeSettings.privacyPolicy.length > maxPrivacyPolicy">
+                                    <span>Characters left: {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}}</span>
+                                </div>
+                                <div  ng-show="storeSettings.privacyPolicy.length > maxPrivacyPolicy">
+                                    <span>Characters left: </span> <span style="color: #ff0404 "> {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}} </span>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="savePolicies(storeSettings)">next</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
             <md-tab ng-disabled="contactUsTabs.aboutUsInfo">
                 <md-tab-label>About Us</md-tab-label>
                 <md-tab-body>

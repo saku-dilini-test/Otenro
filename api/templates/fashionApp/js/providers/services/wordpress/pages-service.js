@@ -34,7 +34,7 @@
 						});
 				}
 				function getContactUs(appId) {
-                	return $http.get(routesCfg.wpAboutUs.aboutUs(appId))
+                	return $http.get(routesCfg.wpContactUs.contactUs(appId))
                 		.then(function(response) {
                 			return response.data;
                 		});

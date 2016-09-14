@@ -62,12 +62,13 @@
         //get about Us Information
         commerceService.showStoreSettings($rootScope.appId).success(function (data) {
             $scope.storeSettings = data[0];
+            disableTabs(0,false,false,false);
         }).error(function (err) {
             toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
         });
 
         // init loading 1st tab active and other disable
-        disableTabs(0,false,true);
+        disableTabs(0,false,true,true);
 
         // --/-- enable & disable tabs --/--
         // --/-- Common function for enable disable tabs
@@ -77,7 +78,8 @@
             $scope.activeTabIndex = activeTab;
             $scope.contactUsTabs = {
                 basicInfo : tab1,
-                aboutUsInfo: tab2
+                policiesInfo : tab2,
+                aboutUsInfo: tab3
 
            };
         }
@@ -122,12 +124,64 @@
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
                         toastr.success('Basic Info saved successfully', 'Awsome!', {closeButton: true});
-                        disableTabs(1,false,false);
+                        disableTabs(1,false,false,true);
                     }).error(function(data, status, headers, config) {
                     toastr.error('Basic info saving error', { closeButton: true});
                 });
             }
         };
+
+        $scope.savePolicies = function (storeSettings) {
+
+             // Validate, Return Policy maximum characters length
+             var returnPolicy = storeSettings.returnPolicy;
+             if((typeof returnPolicy != 'undefined') &&
+                 (returnPolicy.length > $scope.maxReturnPolicy)){
+                 toastr.error('Return Policy, maximum characters length is exceed. ' +
+                     'Maximum characters length is : '+$scope.maxReturnPolicy, 'Warning',
+                     {closeButton: true}
+                 );
+                 return;
+             }
+
+             // Validate, Terms And Condition maximum characters length
+             var termsAndCondition = storeSettings.termsAndCondition;
+             if((typeof termsAndCondition != 'undefined') &&
+                 (termsAndCondition.length > $scope.maxTermsAndCondition)){
+                 toastr.error('Terms And Condition, maximum characters length is exceed. ' +
+                     'Maximum characters length is : '+$scope.maxTermsAndCondition, 'Warning',
+                     {closeButton: true}
+                 );
+                 return;
+             }
+
+             // Validate, Privacy Policy maximum characters length
+             var privacyPolicy = storeSettings.privacyPolicy;
+             if((typeof privacyPolicy != 'undefined') &&
+                 (privacyPolicy.length > $scope.maxPrivacyPolicy)){
+                 toastr.error('Privacy Policy, maximum characters length is exceed. ' +
+                     'Maximum characters length is : '+$scope.maxPrivacyPolicy, 'Warning',
+                     {closeButton: true}
+                 );
+                 return;
+             }
+
+             if (!storeSettings.returnPolicy|| !storeSettings.termsAndCondition|| !storeSettings.privacyPolicy) {
+                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
+             }
+             else {
+                 storeSettings.userId = $scope.userId;
+                 storeSettings.appId = $rootScope.appId;
+                 commerceService.savePolicies(storeSettings).success(function (data) {
+                     toastr.success(' Store Settings has been added.!', {
+                         closeButton: true
+                     });
+                     disableTabs(2,false,false,false);
+                 }).error(function (err) {
+                     toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
+                 })
+             }
+         };
 
         //Save about us information and cloase the dialog box
         $scope.addAboutUs = function (storeSettings) {
