@@ -147,7 +147,8 @@ angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdM
 				url: '/terms',
 				views: {
 					'menuContent': {
-						templateUrl: 'templates/termsAndCondition.html'
+						templateUrl: 'templates/termsAndCondition.html',
+						controller: 'AboutUsController as aboutUsCtrl'
 					}
 				}
 			});

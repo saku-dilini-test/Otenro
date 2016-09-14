@@ -36,6 +36,7 @@
 					console.log("response  " + JSON.stringify(response));
 					$scope.header = response.header;
 					$scope.content = response.content;
+					$scope.termsAndCondition = response.termsAndCondition;
 					console.log(response.content);
 				}
 
