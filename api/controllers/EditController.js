@@ -143,6 +143,8 @@ module.exports = {
                     parser.parseString(data, function (err, result) {
 
                         result.widget.name=appName;
+                        result.widget['$'].id="com.otenro."+appName.replace(/\s/g, '').toLowerCase()+appId;
+
 
                         var xml = xmlBuilder.buildObject(result);
 
