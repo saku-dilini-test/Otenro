@@ -170,7 +170,7 @@
                                     <!--</md-input-container>-->
                                   <md-input-container class="md-container-modify">
                                     <input ng-blur="validateInputValue(data.size,'size')" class="product-name-column-input" name="size_{{$index}}" md-maxlength="8"
-                                           ng-pattern="/^[0-9a-zA-Z ]+$/" ng-model="data.size" required>
+                                           ng-pattern="/^[1-9a-zA-Z]+[0-9a-zA-Z]*$/" ng-model="data.size" required>
                                       <div ng-messages="priceAndVariantsForm['size_' + $index].$error " ng-show="priceAndVariantsForm['size_' + $index].$dirty">
                                           <div ng-message="pattern" class="my-message">Invalid value</div>
                                           <div ng-message="required" class="my-message">Required!</div>
@@ -179,7 +179,7 @@
                                 </td>
                                 <td>
                                   <md-input-container class="md-container-modify">
-                                    <input name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required>
+                                    <input type="number"  min="0.01" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required>
                                       <div ng-messages="priceAndVariantsForm['price_' + $index].$error" ng-show="priceAndVariantsForm['price_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid price</div>
                                           <div ng-message="required" class="my-message">Required!</div>
@@ -190,7 +190,7 @@
 
                                 <td>
                                   <md-input-container class="md-container-modify">
-                                    <input name="qty_{{$index}}"  ng-pattern="/^\d+(?:[.]\d{1,}|$)$/" maxlength="8" ng-model="data.quantity" required>
+                                    <input type="number" name="qty_{{$index}}" min="1"  ng-pattern="/^\d+(?:[.]\d{1,}|$)$/" maxlength="8" ng-model="data.quantity" required>
                                       <div ng-messages="priceAndVariantsForm['qty_' + $index].$error " ng-show="priceAndVariantsForm['qty_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid quantity</div>
                                           <div ng-message="required" class="my-message">Required!</div>
