@@ -1,15 +1,20 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$rootScope) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$rootScope, $ionicSideMenuDelegate) {
 
     $rootScope.cart = {cartItems:[],cartSize:0,totalPrice:0};
 
     $scope.parentobj = {};
     $scope.parentobj.cartSize = $rootScope.cart.cartSize;
 
+     function toggleLeft() {
+        $ionicSideMenuDelegate.toggleLeft();
+      };
+
 })
 
-.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants) {
+.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants, $stateParams
+) {
 
     $ionicLoading.show({
         template: '<ion-spinner icon="lines"  class="spinner-energized" ></ion-spinner>'
@@ -21,6 +26,7 @@ angular.module('starter.controllers', [])
     }, 1000);
 
     // get all items function
+
     function getAllItemByAppId() {
         readMadeEasy.readFile().success(function(appData){
         appServices.getAllItemByAppId(appData.appId)
@@ -38,11 +44,12 @@ angular.module('starter.controllers', [])
                 }
                 // initial set as 0 index
                 $scope.setItem(0);
+
             }).error(function (err) {
                 $ionicLoading.hide();
                 alert('Items Loading error');
             });
-            
+
             // defined third navigation image path
             $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+ appData.userId +
                               "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";
@@ -54,34 +61,35 @@ angular.module('starter.controllers', [])
         /** Configuration has inside getAllItemByAppId function  **/
 
     // view item 
-    $scope.item = {};  
-    // item set function     
-    $scope.setItem = function(id){    
-        if($scope.leftIndex <= id && id <= $scope.rightIndex){            
+    $scope.item = {};
+    // item set function
+    $scope.setItem = function(id){
+        if($scope.leftIndex <= id && id <= $scope.rightIndex){
             $scope.item = $scope.itemList[id];
-        }        
+        }
     }
 
-    // left swipe function 
-    $scope.onSwipeLeft = function(){        
+    // left swipe function
+    $scope.onSwipeLeft = function(){
         if($scope.startIndex > $scope.leftIndex)
-            $scope.startIndex = $scope.startIndex - 1;        
+            $scope.startIndex = $scope.startIndex - 1;
         $scope.isEnableRightButton = true;
         $scope.setItem($scope.startIndex);
         if($scope.startIndex == $scope.leftIndex){
             $scope.isEnableLeftButton = false;
-        }    
+        }
     };
-    // Right swipe function 
-    $scope.onSwipeRight = function(){        
+    // Right swipe function
+    $scope.onSwipeRight = function(){
         if($scope.startIndex < $scope.rightIndex)
             $scope.startIndex = $scope.startIndex + 1;
         $scope.setItem($scope.startIndex);
         $scope.isEnableLeftButton = true;
         if($scope.startIndex == $scope.rightIndex){
             $scope.isEnableRightButton = false;
-        }                    
+        }
     };
+
     /* ----- Eng Swipe Fucntion  ----- */
 })
 
@@ -114,6 +122,7 @@ angular.module('starter.controllers', [])
         appServices.getAllItemsByMenuId(menuId,appData.appId)
             .success(function (data) {
                 $scope.itemList = data;
+                console.log("you are here")
             }).error(function (err) {
                 alert('Items Loading error');
         });

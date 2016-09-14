@@ -86,9 +86,7 @@ button{
     cursor: url(../img/cursor.cur), auto;
 }
 ion-slides {
-    width: 200px;
-    height: 150px;
-    display: block;
+    height: 100vh;
 }
 .swiper-slide img {
     width: 100%;
@@ -108,3 +106,56 @@ ion-slides {
   border-radius:4px;
 }
 
+
+.navigation-drawer .menu-left{
+    -webkit-transition: -webkit-transform 200ms ease;
+    transition: transform 200ms ease;
+    transform: translate3d(-275%, 0px, 0px);
+}
+
+.menu-open .navigation-drawer .menu-left{
+    width: 90% !important;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1 !important;
+    transform: translate3d(0%, 0px, 0px);
+}
+
+.navigation-drawer ion-item{
+    background-color: transparent;
+    border: unset;
+
+}
+
+.navigation-drawer ion-item a{
+    background-color: transparent !important;
+    color:#fff;
+}
+
+.navigation-drawer .menu-animated{
+    transform:unset !important;
+}
+
+.navigation-drawer  ion-header-bar{
+    background: url(../img/bg.png) repeat;
+    color:#fff;
+    border: transparent;
+}
+
+.navigation-drawer  ion-header-bar button{
+    color:#fff;
+    background-color:unset;
+}
+
+.navigation-drawer .back-button {
+    color: white;
+    margin: 0 0 0 5px;
+}
+
+.navigation-drawer .back-button span{
+    display:none;
+}
+
+.card{
+    height: 80%;
+    width: 100%;
+}

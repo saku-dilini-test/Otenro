@@ -1,27 +1,48 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="Home">
     <ion-content class="padding" >
 
-        <div class="cards cards-home" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">
+        <!--<div class="cards cards-home" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">-->
 
-            <img src="{{imageURL}}/{{item.imageUrl}}" width="70%">
+            <!--<img src="{{imageURL}}/{{item.imageUrl}}" width="70%">-->
 
-            <div class="made-easy-header-font">
-                <p>{{item.name}}</p>
-                <p>{{item.price}}</p>
-            </div>
+            <!--<div class="made-easy-header-font">-->
+                <!--<p>{{item.name}}</p>-->
+                <!--<p>{{item.price}}</p>-->
+            <!--</div>-->
 
-            <div class="made-easy-content-font">
-                <p>{{item.description}}</p>
-            </div>
+            <!--<div class="made-easy-content-font">-->
+                <!--<p>{{item.description}}</p>-->
+            <!--</div>-->
 
-            <button ng-disabled="!(isEnableLeftButton)" ng-click="onSwipeLeft()" class="button">Left</button>
-            <button ng-disabled="!(isEnableRightButton)" ng-click="onSwipeRight()" class="button">Right</button>
+            <!--<button ng-disabled="!(isEnableLeftButton)" ng-click="onSwipeLeft()" class="button">Left</button>-->
+            <!--<button ng-disabled="!(isEnableRightButton)" ng-click="onSwipeRight()" class="button">Right</button>-->
 
-            <br>
-            <br>
-            <a class="button" ui-sref="tab.item({item:item})">ORDER NOW</a>
-            <br>
-            <br>
-        </div>
+            <!--<br>-->
+            <!--<br>-->
+            <!--<a class="button" ui-sref="tab.item({item:item})">ORDER NOW</a>-->
+            <!--<br>-->
+            <!--<br>-->
+        <!--</div>-->
+        <ion-slides  options="options" slider="data.slider">
+            <ion-slide-page ng-repeat="item in itemList">
+                <div class="list card">
+                    <div class="item item-body">
+                        <img class="full-image" src="{{imageURL}}/{{item.imageUrl}}">
+
+                        <div class="made-easy-header-font">
+                            <p>{{item.name}}</p>
+                            <p>{{item.price}}</p>
+                        </div>
+
+                        <div class="made-easy-content-font">
+                            <p>{{item.description}}</p>
+                        </div>
+                        <a class="button" ui-sref="tab.item({item:item})">ORDER NOW</a>
+                    </div>
+                </div>
+                </ion-slide-page>
+        </ion-slides>
+
+
     </ion-content>
 </ion-view>

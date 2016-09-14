@@ -3,7 +3,7 @@
     background-color: #10b23e !important;
 }
 .made-easy-background-image{
-    background: url(../img/background.jpg) center;
+    background: url(../img/bg.png) repeat;
     background-size: cover;
 }
 .made-easy-background-color {
