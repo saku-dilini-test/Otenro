@@ -8,7 +8,7 @@
 
     function contactUsService($mdDialog, $http, $rootScope, Upload, SERVER_URL) {
         return {
-            showContactUsDialog: function() {
+            showSiteSettingsDialog: function() {
                 return $mdDialog.show({
                     controller: 'contactUsCtrl',
                     templateUrl: 'user/edit/setting/contactUs/manageContactUsView.html',

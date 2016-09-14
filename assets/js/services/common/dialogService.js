@@ -86,8 +86,8 @@
                     return mainMenuService.showMainMenuDialog(clickTitle);
                 if ('products' == clickTitle)
                     return commerceService.showAddProductsDialog(clickTitle);
-                if ('contactUs' == clickTitle)
-                    return contactUsService.showContactUsDialog(clickTitle);
+                if ('siteSettings' == clickTitle)
+                    return contactUsService.showSiteSettingsDialog(clickTitle);
                 if ('aboutUs' == clickTitle)
                     return aboutUsService.showAboutUsDialog(clickTitle);
                 if ('policies' == clickTitle)

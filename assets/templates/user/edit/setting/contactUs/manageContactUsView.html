@@ -2,10 +2,10 @@
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
             <md-tab ng-disabled="contactUsTabs.basicInfo">
-                <md-tab-label>Basic Information</md-tab-label>
+                <md-tab-label>Contact Us</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
-                        <h1>Basic Information</h1>
+                        <h1>Contact Us</h1>
                     </div>
                     <!-- Address | Tel Phone -->
                     <form name="basicInfoForm" novalidate>
@@ -29,32 +29,12 @@
                                 <label>Telephone</label>
                                 <input type="text" name="telPhone" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" ui-mask="(999) 999-9999"  required />
                             </fieldset>
-                        </div>
-                        <div class="md-dialog-buttons">
-                            <div class="inner-section">
-                                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                                <md-button class="me-default-button" ng-click="addBasicInfo(basicInfo)">Next</md-button>
-                            </div>
-                        </div>
-                    </form>
-                </md-tab-body>
-            </md-tab>
-
-            <md-tab ng-disabled="contactUsTabs.webInfo">
-                <md-tab-label>Web Information</md-tab-label>
-                <md-tab-body>
-                    <div class="md-dialog-header">
-                        <h1>Web Information</h1>
-                    </div>
-                    <!-- Email | Web site -->
-                    <form name="webInfoForm" novalidate>
-                        <div class="md-dialog-main">
                             <fieldset>
                                 <!-- Email -->
                                 <label>Email</label>
                                 <input type="email" name="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                        ng-model="webInfo.email" required />
-                                <span class="error" ng-show="webInfoForm.email.$error.email || webInfoForm.email.$error.pattern">Invalid email!</span>
+                                <span class="error" ng-show="basicInfoForm.email.$error.email || basicInfoForm.email.$error.pattern">Invalid email!</span>
                             </fieldset>
                             <fieldset>
                                 <!-- Web Site -->
@@ -62,27 +42,8 @@
                                 <input type="text" name="website" ng-model="webInfo.webSite"
                                        ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" required />
                                 <br/>
-                                <span class="error" ng-show="webInfoForm.website.$error.pattern">Invalid url!</span>
+                                <span class="error" ng-show="basicInfoForm.website.$error.pattern">Invalid url!</span>
                             </fieldset>
-                        </div>
-                        <div class="md-dialog-buttons">
-                            <div class="inner-section">
-                                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                                <md-button class="me-default-button" ng-click="addWebInfo(webInfo)">Next</md-button>
-                            </div>
-                        </div>
-                    </form>
-                </md-tab-body>
-            </md-tab>
-
-            <md-tab ng-disabled="contactUsTabs.googleMap">
-                <md-tab-label>Google Map</md-tab-label>
-                <md-tab-body>
-                    <div class="md-dialog-header">
-                        <h1>Google Map</h1>
-                    </div>
-                    <form name="googleMap" novalidate>
-                        <div class="md-dialog-main">
                             <div class="google-map-wrapper">
                                 <div class="google-map-container">
                                     <ui-gmap-google-map  center="map.center" zoom="map.zoom" draggable="true" events="map.events">
@@ -99,10 +60,58 @@
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                                <md-button class="me-default-button" ng-click="addGoogleMap(3,googleMap)">Finished</md-button>
+                                <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap)">next</md-button>
                             </div>
                         </div>
                     </form>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="contactUsTabs.aboutUsInfo">
+                <md-tab-label>About Us</md-tab-label>
+                <md-tab-body>
+                    <div class="md-dialog-header">
+                        <h1>About Us</h1>
+                    </div>
+                    <div class="md-dialog-main">
+                        <form name="aboutUs" novalidate>
+                            <fieldset>
+                                <label>Heading</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12" />
+                                <input class="input-shadow-border" type="text" name="header" ng-pattern="/^[a-zA-Z0-9_ ]*$/"
+                                       ng-model="storeSettings.header" required  />
+                                <br />
+                                <span ng-show="aboutUs.header.$error.pattern">No symbols</span>
+                                <div ng-hide="storeSettings.header.length > maxAboutUsHeader">
+                                    <span>Characters left: {{maxAboutUsHeader - storeSettings.header.length}}</span>
+                                </div>
+                                <div  ng-show="storeSettings.header.length > maxAboutUsHeader">
+                                    <span>Characters left: </span>
+                                    <span style="color: #ff0404 "> {{maxAboutUsHeader - storeSettings.header.length}} </span>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <label>Content</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <textarea class="input-shadow-border" rows="4" name="content" ng-model="storeSettings.content"></textarea>
+                                <br />
+                                <div ng-hide="storeSettings.content.length > maxAboutUsContent">
+                                    <span>Characters left: {{maxAboutUsContent - storeSettings.content.length}}</span>
+                                </div>
+                                <div  ng-show="storeSettings.content.length > maxAboutUsContent">
+                                    <span>Characters left: </span>
+                                    <span style="color: #ff0404 "> {{maxAboutUsContent - storeSettings.content.length}} </span>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <fieldset class="text-right reset-margin">
+                                <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                                <md-button class="me-default-button" ng-click="addAboutUs(storeSettings)">Finish</md-button>
+                            </fieldset>
+                        </div>
+                    </div>
                 </md-tab-body>
             </md-tab>
 

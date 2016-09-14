@@ -1,13 +1,16 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("contactUsCtrl", [
-        '$scope','$rootScope','$mdDialog', 'toastr','contactUsService','uiGmapGoogleMapApi',
+        '$scope','$rootScope','$mdDialog', 'toastr','contactUsService','uiGmapGoogleMapApi','commerceService','$auth',
+        'ME_APP_SERVER','mySharedService',
         contactUsCtrl]);
 
-    function contactUsCtrl($scope,$rootScope,$mdDialog,toastr, contactUsService,uiGmapGoogleMapApi) {
+    function contactUsCtrl($scope,$rootScope,$mdDialog,toastr, contactUsService,uiGmapGoogleMapApi,commerceService,$auth,
+                            ME_APP_SERVER,mySharedService) {
 
         // --/-- Characters length config
         $scope.maxBasicInfoAddress = 20;
+        $scope.userId = $auth.getPayload().id;
         
         // --- Config ----
         $scope.coords ="";
@@ -55,8 +58,16 @@
         }).error(function (error) {
                 alert("Contact Us information Loading Error : " + error);
         });
+
+        //get about Us Information
+        commerceService.showStoreSettings($rootScope.appId).success(function (data) {
+            $scope.storeSettings = data[0];
+        }).error(function (err) {
+            toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
+        });
+
         // init loading 1st tab active and other disable
-        disableTabs(1,false,true,true);
+        disableTabs(0,false,true);
 
         // --/-- enable & disable tabs --/--
         // --/-- Common function for enable disable tabs
@@ -66,14 +77,13 @@
             $scope.activeTabIndex = activeTab;
             $scope.contactUsTabs = {
                 basicInfo : tab1,
-                webInfo: tab2,
-                googleMap: tab3
-            };
+                aboutUsInfo: tab2
+
+           };
         }
 
-
-        // Save Basic Information and move to Web Information
-        $scope.addBasicInfo = function(basicInfo) {
+        // Save Contact Us Information and move to About Us
+        $scope.addContactUs = function(basicInfo,webInfo,googleMap) {
 
             // If defined basic information address , Check length
             if((typeof basicInfo.address != 'undefined') && (basicInfo.address.length > $scope.maxBasicInfoAddress)){
@@ -85,75 +95,90 @@
 
             if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
                 toastr.error('Basic Information not update', { closeButton: true});
-                // go next tab
-                disableTabs(1,false,true,true);
             }else if(typeof basicInfo.address == 'undefined'){
                 toastr.error('Address Not Update', { closeButton: true});
             }
             else if(typeof basicInfo.telPhone == 'undefined'){
                 toastr.error('Tel phone Not Update', { closeButton: true});
             }
+            else if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
+                toastr.error('Web Information not update', { closeButton: true});
+            }
+            else if(typeof webInfo.email == 'undefined'){
+                toastr.error('Email Not Update', { closeButton: true});
+            }
+            else if(typeof webInfo.webSite == 'undefined'){
+                toastr.error('Web Site Not Update', { closeButton: true});
+            }
             else{
                 var basicInfoResponse = {
                     'appId': $rootScope.appId,
                     'address': basicInfo.address,
-                    'telPhone': basicInfo.telPhone
+                    'telPhone': basicInfo.telPhone,
+                    'email': webInfo.email,
+                    'webSite': webInfo.webSite,
+                    'coords': $scope.map.markers[0].coords
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
                         toastr.success('Basic Info saved successfully', 'Awsome!', {closeButton: true});
-                        // go next tab
-                        disableTabs(2,false,false,true);
+                        disableTabs(1,false,false);
                     }).error(function(data, status, headers, config) {
                     toastr.error('Basic info saving error', { closeButton: true});
                 });
             }
         };
 
-        // Save Web Information and move to Google Map
-        $scope.addWebInfo = function(webInfo) {
-            if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
-                toastr.error('Web Information not update', { closeButton: true});
-                // go next tab
-                disableTabs(3,false,false,false);
-            }else{
-                if(typeof webInfo.email == 'undefined'){
-                    toastr.error('Email Not Update', { closeButton: true});
-                }
-                if(typeof webInfo.webSite == 'undefined'){
-                    toastr.error('Web Site Not Update', { closeButton: true});
-                }
-                var webInfoResponse = {
-                    'appId': $rootScope.appId,
-                    'email': webInfo.email,
-                    'webSite': webInfo.webSite
-                };
-                disableTabs(3,false,false,false);
-                contactUsService.saveWebInfo(webInfoResponse)
-                    .success(function(data, status, headers, config) {
-                        toastr.success('Web info saved successfully', 'Awsome!', {closeButton: true});
-                        // to next tab
+        //Save about us information and cloase the dialog box
+        $scope.addAboutUs = function (storeSettings) {
 
-                    }).error(function(data, status, headers, config) {
-                        toastr.error('Web info saving error', {closeButton: true});
-                });
+            // Validate, About Us Header maximum characters length
+            var header = storeSettings.header;
+            if((typeof header != 'undefined') &&
+                (header.length > $scope.maxAboutUsHeader)){
+                toastr.error('About Us Header, maximum characters length is exceed. ' +
+                    'Maximum characters length is : '+$scope.maxAboutUsHeader, 'Warning',
+                    {closeButton: true}
+                );
+                return;
             }
-        };
+            // Validate, About Us Content maximum characters length
+            var content = storeSettings.content;
+            if((typeof content != 'undefined') &&
+                (content.length > $scope.maxAboutUsContent)){
+                toastr.error('About Us Content, maximum characters length is exceed. ' +
+                    'Maximum characters length is : '+$scope.maxAboutUsContent, 'Warning',
+                    {closeButton: true}
+                );
+                return;
+            }
 
-        // Save Google Map information
-        $scope.addGoogleMap = function(current,googleMapInfo) {
-            var googleMapInfoResponse = {
-                'appId': $rootScope.appId,
-                'coords': $scope.map.markers[0].coords
-            };
-            contactUsService.saveGoogleMapInfo(googleMapInfoResponse)
-                .success(function(data, status, headers, config) {
-                    toastr.success('Google Map Info saved successfully', 'Awsome!', {closeButton: true});
-                    // If Successfully finished and popup window close
-                    $mdDialog.hide();
-                }).error(function(data, status, headers, config) {
-                    toastr.error('Google Map Info saving error', {closeButton: true});
-                });
+            if (storeSettings!=null){
+                if (!storeSettings.header  || !storeSettings.content) {
+                    toastr.error(' warning', "Please fill all the fields", {closeButton: true});
+                }else{
+
+                    storeSettings.appId = $rootScope.appId;
+                    commerceService.saveStoreSettings(storeSettings)
+                        .success(function (data, status, headers, config) {
+                            toastr.success('Successfully save About Us Data ..... !', 'Awsome!', {
+                                closeButton: true
+                            });
+                            $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                +'/templates/'+$rootScope.appId+'' +
+                                '#/app/aboutUs';
+                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                            $mdDialog.hide();
+                        }).error(function (data, status, headers, config) {
+                        toastr.error('Unable to Add', 'Warning', {
+                            closeButton: true
+                        });
+                    })
+                }
+            }else {
+                $scope.selected= current;
+            }
+
         };
 
         // button function
@@ -163,8 +188,8 @@
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
-        $scope.answer = function() {
-            $mdDialog.hide();
-        };
+//        $scope.answer = function() {
+//            $mdDialog.hide();
+//        };
     }
 })();
