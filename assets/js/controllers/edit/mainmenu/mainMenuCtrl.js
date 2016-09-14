@@ -8,7 +8,7 @@
                           mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData) {
 
 
-        $scope.tmpImage = [ null ];
+        $scope.tmpImage = [];
         $scope.mainImg = null;
         $scope.topLevel  = '';
         $scope.tempplayer = "";
@@ -195,6 +195,10 @@
         $scope.addMenuNavigation = function(file,menu){
 
             console.log(menu);
+            if($scope.tmpImage[0] == null){
+                toastr.error('Please upload an image', 'Warning', {closeButton: true});
+                return;
+            }
             // If menu undefined || menu.name undefined or empty, pop up error message
             if((typeof menu == 'undefined') || (typeof menu.name == 'undefined') || menu.name == ''){
                 toastr.error('Fill the Name Field', 'Warning', {closeButton: true});
@@ -510,14 +514,20 @@
             $scope.tmpImage[index] = null;
         };
         $scope.addImage = function(img){
-            var im = $scope.tmpImage;
-
-            im[0] = $scope.picFile;
-            $scope.tmpImage = im;
-            $scope.mainImg = img;
-            toastr.success('added Image', 'message', {
-               closeButton: true
-            });
+            if(angular.element('#fileInput').val() == ''){
+                toastr.error('Please choose an image to upload', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else{
+                var im = $scope.tmpImage;
+                im[0] = $scope.picFile;
+                $scope.tmpImage = im;
+                $scope.mainImg = img;
+                toastr.success('added Image', 'message', {
+                   closeButton: true
+                });
+            }
         };
 
 
