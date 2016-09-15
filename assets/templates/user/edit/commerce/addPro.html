@@ -127,7 +127,7 @@
                             <th width="25%">Product Name</th>
                             <th >Sku</th>
                             <th width="18%">
-                                <md-select class="" placeholder="Select" ng-model="selection" required>
+                                <md-select id="selection" class="" placeholder="Select" ng-change="setPattern(selection)" ng-model="selection" required>
                                     <md-option ng-value="child.name" ng-repeat="child in sizeOrWeight">{{child.name}}
                                     </md-option>
                                 </md-select>
@@ -170,7 +170,7 @@
                                     <!--</md-input-container>-->
                                   <md-input-container class="md-container-modify">
                                     <input ng-blur="validateInputValue(data.size,'size')" class="product-name-column-input" name="size_{{$index}}" md-maxlength="8"
-                                           ng-pattern="/^[1-9a-zA-Z]+[0-9a-zA-Z]*$/" ng-model="data.size" required>
+                                           ng-pattern="customPattern" ng-model="data.size" required>
                                       <div ng-messages="priceAndVariantsForm['size_' + $index].$error " ng-show="priceAndVariantsForm['size_' + $index].$dirty">
                                           <div ng-message="pattern" class="my-message">Invalid value</div>
                                           <div ng-message="required" class="my-message">Required!</div>

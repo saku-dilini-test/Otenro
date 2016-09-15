@@ -8,6 +8,7 @@
         var size, weight;
         var variants;
 
+        $scope.customPattern =   /^[0-9a-zA-Z ]+$/;
         $scope.tmpImage = [];
         $scope.product = initialData.product;
         $scope.selection = initialData.product.selection;
@@ -422,6 +423,22 @@
 
 
 
+        /**
+         * @description
+         * pattern validation of size/weight
+         * @param selectedType
+         *
+         *
+         */
+        $scope.setPattern = function(selectedType){
+            if(selectedType == 'size') {
+                $scope.customPattern =   /^[0-9a-zA-Z ]+$/;
+            }
+            else {
+                $scope.customPattern =   /^[0-9a-zA-Z. ]+$/;
+            }
+
+        }
 
 
 
