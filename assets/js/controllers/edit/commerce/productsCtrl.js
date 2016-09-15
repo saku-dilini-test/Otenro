@@ -435,7 +435,7 @@
                 $scope.customPattern =   /^[0-9a-zA-Z ]+$/;
             }
             else {
-                $scope.customPattern =   /^[0-9]+(\.[0-9]{1,2})?$/;
+                $scope.customPattern =   /^[0-9a-zA-Z. ]+$/;
             }
 
         }
