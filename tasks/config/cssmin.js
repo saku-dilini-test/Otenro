@@ -13,8 +13,15 @@ module.exports = function(grunt) {
 	grunt.config.set('cssmin', {
 		dist: {
 			src: ['.tmp/public/concat/production.css'],
-			dest: '.tmp/public/min/production.min.css'
+			dest: '.tmp/public/min/production.min.css',
+			files: [{
+				expand: true,
+				cwd: './bower_components/angular-ui-grid',
+				src: ['ui-grid.*'],
+				dest: '.tmp/public/min/'
+			}]
 		}
+
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
