@@ -1,16 +1,16 @@
 
 <ion-side-menus class="navigation-drawer">
 
-    <ion-side-menu-content>
+    <ion-side-menu-content drag-content="false">
 
         <ion-nav-bar class="bar bar-header">
             <ion-nav-back-button></ion-nav-back-button>
             <div class="bar bar-header">
                 <ion-nav-buttons side="left">
-                    <button class="button icon ion-navicon-round"  menu-toggle="left"></button>
+                    <button class="button icon ion-navicon"  menu-toggle="left"></button>
                 </ion-nav-buttons>
                 <ion-nav-buttons side="right">
-                    <button ui-sref="tab.cart" class="button icon ion-android-cart"></button>
+                    <button ui-sref="tab.cart" class="button icon ion-ios-cart-outline"></button>
                     <!--<span class="badge2">{{parentobj.cartSize}}</span>-->
                 </ion-nav-buttons>
             </div>
@@ -28,14 +28,14 @@
                 <ion-item nav-clear menu-close href="#/tab/menu">
                     Menu
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/tab/ourStores">
-                    Our stores
-                </ion-item>
                 <ion-item nav-clear menu-close href="#/tab/aboutUs">
                     About us
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/tab/contactUs">
                     Contact us
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/tab/login">
+                    login
                 </ion-item>
             </ion-list>
         </ion-content>

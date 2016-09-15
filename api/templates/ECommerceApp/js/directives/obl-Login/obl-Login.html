@@ -1,31 +1,40 @@
-<ion-content class="made-easy-background-image made-easy-background-color">
-	<div class="login animated fadeInDown">
-		<form name="loginForm">
-			<div class="card">
-				<div class="item item-text-wrap">
-					<div class="login_title">ENTER LOGIN DETAILS</div>
-					<label class="item item-input item-stacked-label">
-
-						<input type="text" placeholder="Username" ng-model="data.username" ng-required="true">
-					</label>
-					<label class="item item-input item-stacked-label">
-
-						<input type="password" placeholder="Password" ng-model="data.password" ng-required="true">
-					</label>
-					<label class="item item-input item-stacked-label">
-						<button class="button button-block button-positive" ng-click="loginForm.$valid && login()">
-							Login
-						</button>
-					</label>
+<ion-view class="made-easy-background-image made-easy-background-color login">
+	<ion-content class="padding">
+		<div class="list card">
+			<div class="item item-body">
+				<div class="logo">
+					<img src="img/logo-sample.png" >
 				</div>
-			</div>
-			<div class="panel">
+				<form name="loginForm">
+							<div class="list">
+								<div class="btn-full">
+									<input type="text" placeholder="USER NAME"  ng-model="data.username" ng-required="true">
+								</div>
+								<div class="btn-full">
+									<input type="password" placeholder="PASSWORD" ng-model="data.password" ng-required="true">
+								</div>
+								<div class="forget-password">
+									<a href="">if you forget password</a>
+								</div>
+								<div class="btn-full">
+									<button class="button button-positive background-light-blue"  ng-click="loginForm.$valid && login()">
+										login
+									</button>
+								</div>
+								<div class="btn-full">
+									<button class="button button-positive background-navy-blue"  ng-click="singUp()">
+										Sign up
+									</button>
+								</div>
+							</div>
+				</form>
+					<!--<div class="panel">-->
+						<!--&lt;!&ndash;<a class="social-button" ng-click="authenticate('google')"> Google</a>-->
+						<!--<a class="social-button-fb" ng-click="authenticate('facebook')" >Facebook</a>&ndash;&gt;-->
+						<!--<div class="create-account-btm" ng-click="singUp()">Create Your Account</div>-->
+					<!--</div>-->
 
-				<!--<a class="social-button" ng-click="authenticate('google')"> Google</a>
-				<a class="social-button-fb" ng-click="authenticate('facebook')" >Facebook</a>-->
-				<br>
-				<div class="create-account-btm" ng-click="singUp()">Create Your Account</div>
 			</div>
-		</form>
-	</div>
-</ion-content>
+		</div>
+	</ion-content>
+</ion-view>

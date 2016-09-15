@@ -2,7 +2,7 @@
 
 /* -- Header -- */
 
-.bar.bar-stable {    
+.bar.bar-stable {
     background-color: #EAD004;
     cursor: url(../img/cursor.cur), auto;
 }
@@ -32,8 +32,8 @@
     -webkit-box-shadow: 2px 4px 5px 0px rgba(50, 50, 50, 0.25);
     -moz-box-shadow:    2px 4px 5px 0px rgba(50, 50, 50, 0.25);
     box-shadow:         2px 4px 5px 0px rgba(50, 50, 50, 0.25);
-    background-color: #fff;    
-    float: left;    
+    background-color: #fff;
+    float: left;
     margin-left: 6.7%;
     text-align: center;
 }
@@ -46,12 +46,12 @@
     background-color: azure;
     cursor: url(../img/cursor.cur), auto;
 }
-.cards-items{	
+.cards-items{
     width: 40%;
     background-color: bisque;
 }
 .cards-item{
-    width: 90%;    
+    width: 90%;
     background-color: darkorange;
 }
 .cards-contactUs {
@@ -88,24 +88,6 @@ button{
 ion-slides {
     height: 100vh;
 }
-.swiper-slide img {
-    width: 100%;
-    height: auto;
-    max-width: none;
-    max-height: 100%;
-}
-.panel .create-account-btm {
-  background-color: #FFBF0A; /* Green */
-  border: none;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 35px;
-  cursor:url(../img/cursor.cur), auto;;
-  border-radius:4px;
-}
-
 
 .navigation-drawer .menu-left{
     -webkit-transition: -webkit-transform 200ms ease;
@@ -143,7 +125,8 @@ ion-slides {
 
 .navigation-drawer  ion-header-bar button{
     color:#fff;
-    background-color:unset;
+    background-color:unset !important;
+    border: unset;
 }
 
 .navigation-drawer .back-button {
@@ -156,6 +139,149 @@ ion-slides {
 }
 
 .card{
-    height: 80%;
+    height: 78%;
+    width: 98%;
+    margin: unset !important;
+}
+
+.card .item {
+    padding:unset;
+    overflow:hidden;
+}
+
+.image-wrapper{
+    width:100%;
+    height:35vh;
+    text-align:center;
+}
+
+.image-wrapper img{
+    width:100%;
+    height:100%;
+}
+
+.header-fonts {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 5px;
+    height:5vh;
+}
+
+.header-fonts h2 {
+    font-weight: 800;
+    color: rgb(213,184,115);
+}
+
+.description{
+    height:20vh;
+}
+
+.description p {
+    margin: 7px !important;
+    text-align: center;
+}
+
+.order{
+    height:15vh;
+    text-align:center;
+}
+
+.detailed-content .content{
+    text-align:start;
+}
+.detailed-content .content p{
+    font-size: 12px;
+    margin: 7px;
+}
+
+.logo{
+    text-align: center;
     width: 100%;
+    height: 70px;
+}
+
+.logo img{
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+}
+
+.btn-full{
+    text-align: center;
+    margin: 10px 0;
+}
+
+.btn-full input{
+    min-height: 10px;
+    height: 25px;
+    width: 90%;
+    letter-spacing: 1px;
+    font-size: 12px;
+    border:1px solid #9e9e9e;
+    margin:10px;
+    padding:5px;
+}
+
+.btn-full button {
+    min-height: 10px;
+    height: 25px;
+    width: 90%;
+    line-height: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    margin: 0 7px;
+}
+
+.forget-password {
+    margin:15px 0;
+    text-align:center;
+}
+
+.forget-password a{
+    text-transform:uppercase;
+    font-size:12px;
+    text-decoration:none;
+    color: rgb(7,70,96) !important;
+}
+
+.login .item{
+    margin-bottom:15px;
+}
+
+.cart-item-header{
+    font-size: 11px;
+    color: #d5b873;
+    text-transform: uppercase;
+}
+.cart-item{
+    font-size: 12px;
+}
+
+.cart-total {
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.cart-charges{
+    font-size:10px;
+}
+
+.cart-charges .row{
+    background-color:rgb(231,226,192);
+}
+
+.delivery{
+    position:absolute;
+    margin: 0 13%;
+}
+
+/*Colors*/
+
+.background-light-blue{
+    background-color:rgb(66,159,192) !important;
+}
+.background-navy-blue{
+    background-color:rgb(7,70,96) !important;
 }
