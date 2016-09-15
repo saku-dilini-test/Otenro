@@ -8,6 +8,7 @@
         var size, weight;
         var variants;
 
+        $scope.customPattern =   /^[0-9a-zA-Z ]+$/;
         $scope.tmpImage = [];
         $scope.product = initialData.product;
         $scope.selection = initialData.product.selection;
