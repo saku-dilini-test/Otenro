@@ -17,11 +17,10 @@ module.exports = function(grunt) {
 			files: [{
 				expand: true,
 				cwd: './bower_components/angular-ui-grid',
-				src: ['ui-grid.*'],
+				src: ['ui-grid.woff'],
 				dest: '.tmp/public/min/'
 			}]
 		}
-
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
