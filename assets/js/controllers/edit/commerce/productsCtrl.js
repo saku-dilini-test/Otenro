@@ -422,6 +422,22 @@
 
 
 
+        /**
+         * @description
+         * pattern validation of size/weight
+         * @param inputVal
+         * @param type
+         *
+         */
+        $scope.setPattern = function(selectedValue){
+            if(selectedValue == 'size') {
+                $scope.customPattern =   /^[0-9a-zA-Z ]+$/;
+            }
+            else {
+                $scope.customPattern =   /^[0-9]+(\.[0-9]{1,2})?$/;
+            }
+
+        }
 
 
 
