@@ -10,7 +10,7 @@ var server = email.server.connect({
     user: "contact@otenro.com",
     password: "FOHDOIHS9S883HNnnfi9",
     host: "otenro.com",
-    ssl: false
+    ssl: true
 });
 
 module.exports = {
