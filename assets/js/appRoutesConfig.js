@@ -14,6 +14,21 @@ angular.module('app')
             controller: 'LoginController'
 
 
+      }).state('anon.forgetPassword', {
+            url: '/forgetPassword/:userId',
+            templateUrl: 'auth/forgotPassword.html',
+            controller: 'ForgotPasswordController'
+
+
+      }).state('anon.resetPassword', {
+            url: '/resetPassword/:userId',
+            params: {
+                userId:null,
+            },
+            templateUrl: 'auth/resetPassword.html',
+            controller: 'ResetPasswordController'
+
+
       }).state('anon.welcome',{
             url :'/',
             controller: 'WelcomeTemplatesCtrl',

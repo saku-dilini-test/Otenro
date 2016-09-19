@@ -7,10 +7,10 @@ var request = require('request'),
 var path = require('path');
 
 var server = email.server.connect({
-    user: "contact@otenro.com",
-    password: "FOHDOIHS9S883HNnnfi9",
-    host: "otenro.com",
-    ssl: false
+    user: "onbilabsttest@gmail.com",
+    password: "0nb1tl@b$",
+    host: "smtp.gmail.com",
+    ssl: true
 });
 
 module.exports = {
@@ -286,6 +286,39 @@ module.exports = {
                 }
             }
 
+        });
+    },
+    sendVerificationEmail: function (data, res) {
+        var searchApp = {
+            email: data.email
+        };
+        User.find(searchApp).exec(function (err, app) {
+             if (err) return done(err);
+             if(app[0].email == data.email){
+                var emailDetails = {
+                    text: "Email verification",
+                    from: 'sallayshamila93@gmail.com',
+                    to: data.email,
+                    cc: "",
+                    subject: data.type,
+                    attachment: [
+                        {
+                            data: "<html>Hello "+app[0].firstName+",<br />"+
+                                  "<a href='http://localhost:1337/#/resetPassword/"+app[0].id+"'>Click here to verify your email address</a></html>",
+                            alternative: true
+                        }
+                    ]
+                };
+                server.send(emailDetails, function(err, message) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    return res({success:'success'})
+                });
+             }
+             else{
+                return res({error:"invalid email"})
+             }
         });
     }
 };

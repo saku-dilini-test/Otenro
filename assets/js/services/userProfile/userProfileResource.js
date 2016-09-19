@@ -18,6 +18,10 @@
             },
             getBillingDetails: function(appParams){
                 return $http.get(SERVER_URL+ 'user/getBillingDetails?userId='+ appParams);
+            },
+            resetPassword: function(appParams){
+                console.log(appParams);
+                return $http.post(SERVER_URL+ 'auth/resetPassword', appParams);
             }
         }
     }

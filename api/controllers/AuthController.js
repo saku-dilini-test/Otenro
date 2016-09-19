@@ -58,6 +58,33 @@ module.exports = {
       });
 
   },
+  forgotPassword : function(req, res) {
+
+      User.findOne({
+        id: req.body.userId
+      }, function foundUser(err, user) {
+        if (err) return res.negotiate(err);
+        if (!user) return res.notFound();
+
+            JWT.encode({
+              secret: '17ca644f4f3be572ec33711a40a5b8b4',
+              payload: {
+                id :  user.id,
+                email:  user.email
+              },
+              algorithm: 'HS256'
+            }).exec({
+              // An unexpected error occurred.
+              error: function (err){
+                return err;
+              },
+              // OK.
+              success: function (result){
+                res.status(200).json({user : { email : user.email , sub : user.id },token : result });
+              }
+            });
+        });
+  },
 
   register: function(req, res) {
 

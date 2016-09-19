@@ -31,6 +31,15 @@ angular.module('app')
           LocalService.set('user', result.user);
         });
         return register;
+      },
+      forgotPassword: function(formData) {
+        LocalService.unset('satellizer_token');
+        var forgotPassword = $http.post('/auth/forgotPassword', formData);
+        forgotPassword.success(function(result) {
+          LocalService.set('satellizer_token', result.token );
+          LocalService.set('user', result.user);
+        });
+        return forgotPassword;
       }
     }
   })
