@@ -19,7 +19,7 @@ module.exports = {
     sendConfirmEmail: function (data, res) {
 
         //var data = this.getUserEmailData(emailsParms,res);
-        console.log(data);
+        //console.log(data);
         var searchApp = {
             appId: data.appId
         };
@@ -278,10 +278,11 @@ module.exports = {
                 };
                 if (mBody != null) {
                     server.send(emailDetails, function (err, message) {
-                        sails.log.info(err || message);
+                        //sails.log.info(err || message);
                         if (err) {
-                            return res.status(err.status).json({err: err.message});
+                            return  err.status;
                         }
+                        return message;
                     });
                 }
             }
