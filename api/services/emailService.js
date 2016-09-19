@@ -7,10 +7,10 @@ var request = require('request'),
 var path = require('path');
 
 var server = email.server.connect({
-    user: "onbilabsttest@gmail.com",
-    password: "onbitlabs",
-    host: "smtp.gmail.com",
-    ssl: true
+    user: "contact@otenro.com",
+    password: "FOHDOIHS9S883HNnnfi9",
+    host: "otenro.com",
+    ssl: false
 });
 
 module.exports = {
