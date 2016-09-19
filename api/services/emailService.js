@@ -278,7 +278,7 @@ module.exports = {
                 };
                 if (mBody != null) {
                     server.send(emailDetails, function (err, message) {
-                        //sails.log.info(err || message);
+                        sails.log.info(err || message);
                         if (err) {
                             return  err.status;
                         }
