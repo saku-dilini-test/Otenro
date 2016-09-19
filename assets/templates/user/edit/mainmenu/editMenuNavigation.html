@@ -8,9 +8,8 @@
 
                 <fieldset>
                     <label for="input-title">Name</label>
-                    <input class="input-shadow-border" type="text" name="name" id="input-title" ng-model="menu.name" ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxMenuNavigation}}"/>
-                    <br>
-                    <span ng-show="catForm.name.$error.pattern">No symbols</span>
+                    <input class="input-shadow-border" type="text" name="name" id="input-title" ng-model="menu.name"
+                           maxlength="{{maxMenuNavigation}}"/>
                     <br>
                     <span>Characters left: {{maxMenuNavigation - menu.name.length}}</span>
                 </fieldset>

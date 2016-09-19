@@ -14,9 +14,7 @@
                                 <label>title name</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <input class="input-shadow-border" type="text" name="name" ng-model="appStoreData.name"
-                                       ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxName}}"/>
-                                <br>
-                                <span ng-show="appStoreForm.name.$error.pattern">No symbols</span>
+                                       maxlength="{{maxName}}"/>
                                 <br>
                                 <span>Characters left: {{maxName - appStoreData.name.length}}</span>
                             </fieldset>
@@ -92,9 +90,7 @@
                                     <label>spring board name</label>
                                     <img src="../../../images/question-mark.svg" width="12" height="12">
                                     <input class="input-shadow-border" type="text" name="springBoardName" ng-model="appStoreData.springBoardName"
-                                           ng-pattern="/^[a-zA-Z0-9_ ]*$/" maxlength="{{maxSpringBoardName}}" required/>
-                                    <br>
-                                    <span ng-show="appStoreForm.springBoardName.$error.pattern">No symbols</span>
+                                           maxlength="{{maxSpringBoardName}}" required/>
                                     <br>
                                     <span>Characters left: {{maxSpringBoardName - appStoreData.springBoardName.length}}</span>
                                 </fieldset>
