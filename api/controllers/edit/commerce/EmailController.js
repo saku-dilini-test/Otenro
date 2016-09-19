@@ -58,17 +58,21 @@ module.exports = {
     updateHeaderFooterSettings : function(req,res){
 
         var appRoot = path.resolve();
-        var dePath= appRoot + '/assets/images/';
+        //var dePath= appRoot + '/assets/images/';
+        var appId = req.param('appId');
+        var dePath      = config.APP_FILE_SERVER + req.body.userId + '/templates/' + appId + '/img/email/';
 
         var appId = req.param('appId');
         var saveData = req.body;
 
         console.log(dePath);
+        console.log(req.file('file'));
 
         req.file('file').upload({
             dirname: require('path').resolve(dePath)
         },function (err, uploadedFiles) {
 
+            console.log(uploadedFiles);
             if (0 < uploadedFiles.length) {
 
             var newFileName = Date.now() + uploadedFiles[0].filename;
@@ -80,8 +84,8 @@ module.exports = {
                 if (err) return res.send(err);
             });
 
-                saveData.imageHeader = newFileName;
-                saveData.imageFooter = newFileName2;
+                saveData.imageHeader =  newFileName;
+                saveData.imageFooter =  newFileName2;
         }
 
 

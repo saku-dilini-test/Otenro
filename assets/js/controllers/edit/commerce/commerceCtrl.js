@@ -714,6 +714,7 @@
                 return;
             } else{
                 email.appId = $rootScope.appId;
+                email.userId = $auth.getPayload().id;
                 commerceService.updateHeaderFooterSettings(picFileHeader, picFileFooter, email)
                     .success(function (data) {
                         console.log(data);
@@ -754,8 +755,11 @@
                         header: $scope.email.header,
                         footer: $scope.email.footer
                     }
-                    $scope.picFileFooter = 'images/' + $scope.email.imageFooter
-                    $scope.picFileHeader = 'images/' + $scope.email.imageHeader
+                    var imagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
+                        +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=email/";
+
+                    $scope.picFileFooter =  imagePath + $scope.email.imageFooter;
+                    $scope.picFileHeader =  imagePath + $scope.email.imageHeader;
                     $scope.OConfirm = {
                         orderConfirmedEmail: $scope.email.orderConfirmedEmail
                     }
