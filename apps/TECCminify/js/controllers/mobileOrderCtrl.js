@@ -35,30 +35,35 @@
 
             // before redirect to PayPal, Cart info send to server to save
             $scope.saveCartInServer = function () {
-
-                $scope.deliveryOption = "pickUp";
-                $scope.isSubmitButtonDisableValue = 'true';
-                $scope.cart = DataService.cart;
-                var data = $scope.cart.getShoppingCart();
+                
+                var data = cartInfo.cart;
                 var shoppingCart = {
-                    'oneDoller' : $scope.cart.getOneDoller()
+                    'oneDoller' : cartInfo.oneDoller
                 };
                 for(var i=0; i < data.length; i++){
                     shoppingCart[i] = data[i];
                 }
 
                 shoppingCart['cartLength']	 = data.length;
-                shoppingCart['pickUpBranch'] = $scope.cart.getBranchName();
-                shoppingCart['deliveryCharge'] = $scope.cart.getDeliveryCharges();
-                shoppingCart['deliveryLocation'] = $scope.cart.getLocationName();
-                shoppingCart['deliveryAddress_01'] = $scope.cart.getDeliveryAddress_01();
-                shoppingCart['deliveryAddress_02'] = $scope.cart.getDeliveryAddress_02();
-                shoppingCart['name'] = $scope.cart.getName();
-                shoppingCart['city'] = $scope.cart.getCity();
-                shoppingCart['telPhone'] = $scope.cart.getTelPhone();
-                shoppingCart['comment'] = $scope.cart.getComment();
-                shoppingCart['pickUpDate'] = $scope.cart.getPickUpDate();
-                shoppingCart['pickUpTime'] = $scope.cart.getPickUpTime();
+                shoppingCart['deliveryCharge'] = cartInfo.deliveryCharge;
+                if(cartInfo.deliveryCharge == 0){
+                    shoppingCart['pickUpBranch'] = cartInfo.userInfo.branch;
+                    shoppingCart['pickUpDate'] = cartInfo.userInfo.date;
+                    shoppingCart['pickUpTime'] = cartInfo.userInfo.time;
+                }else{
+                    shoppingCart['deliveryLocation'] = cartInfo.userInfo.location.locationName;
+                    shoppingCart['deliveryAddress_01'] = cartInfo.userInfo.address;
+                    shoppingCart['pickUpDate'] = '';
+                    shoppingCart['pickUpTime'] = '';
+                }
+                shoppingCart['deliveryAddress_02'] = '';
+                shoppingCart['name'] = cartInfo.userInfo.name;
+                shoppingCart['city'] = '';
+                shoppingCart['telPhone'] = cartInfo.userInfo.contactNo;
+                shoppingCart['comment'] = '';
+                if(typeof cartInfo.userInfo.comment != 'undefined'){
+                    shoppingCart['comment'] = cartInfo.userInfo.comment;
+                }
                 shoppingCart['paymentStatus'] = 'Pending';
                 //cart info save api
                 $http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)
