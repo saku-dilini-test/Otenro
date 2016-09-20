@@ -36,7 +36,7 @@
         $scope.mainFile = null;
 
         $scope.sizeOrWeight=[
-            {name: 'weight'},
+            {name: 'weight(kg)'},
             {name: 'size'},
         ]
         $scope.userId = $auth.getPayload().id;
