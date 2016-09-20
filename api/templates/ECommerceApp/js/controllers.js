@@ -13,7 +13,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants, $stateParams
+.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants, $ionicTabsDelegate
 ) {
 
     $ionicLoading.show({
@@ -55,11 +55,6 @@ angular.module('starter.controllers', [])
                               "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";
         });
     }
-
-    /* ----- Swipe Function start ----- */
-    // Configuration
-        /** Configuration has inside getAllItemByAppId function  **/
-
     // view item
     $scope.item = {};
     // item set function
@@ -69,28 +64,6 @@ angular.module('starter.controllers', [])
         }
     }
 
-    // left swipe function
-    $scope.onSwipeLeft = function(){
-        if($scope.startIndex > $scope.leftIndex)
-            $scope.startIndex = $scope.startIndex - 1;
-        $scope.isEnableRightButton = true;
-        $scope.setItem($scope.startIndex);
-        if($scope.startIndex == $scope.leftIndex){
-            $scope.isEnableLeftButton = false;
-        }
-    };
-    // Right swipe function
-    $scope.onSwipeRight = function(){
-        if($scope.startIndex < $scope.rightIndex)
-            $scope.startIndex = $scope.startIndex + 1;
-        $scope.setItem($scope.startIndex);
-        $scope.isEnableLeftButton = true;
-        if($scope.startIndex == $scope.rightIndex){
-            $scope.isEnableRightButton = false;
-        }
-    };
-
-    /* ----- Eng Swipe Fucntion  ----- */
 
     // get all menu by app Id
         readMadeEasy.readFile().success(function(appData){
@@ -105,6 +78,7 @@ angular.module('starter.controllers', [])
             $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
                               "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
         });
+
 })
 
 .controller('MenuCtrl', function($scope,appServices,readMadeEasy,constants) {
@@ -125,18 +99,32 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ItemsCtrl', function($scope,$stateParams,$state,appServices,readMadeEasy,constants) {
+    // get all menu by app Id
+            readMadeEasy.readFile().success(function(appData){
+                appServices.getAllMenuByAppId(appData.appId)
+                    .success(function (data) {
+                        $scope.categoryList = data;
+
+                    }).error(function (err) {
+                        alert('Menu Loading error');
+                });
+
+                // defined second navigation image path
+                $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
+                                  "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
+            });
+
 
     // set select Menu Name
     $scope.menuName = $stateParams.menuName;
-
     // set select Menu Id
     var menuId = $stateParams.menuId;
+    console.log($stateParams.menuName)
     // get all item by menu Id
     readMadeEasy.readFile().success(function(appData){
         appServices.getAllItemsByMenuId(menuId,appData.appId)
             .success(function (data) {
                 $scope.itemList = data;
-                console.log("you are here")
             }).error(function (err) {
                 alert('Items Loading error');
         });
@@ -149,6 +137,8 @@ angular.module('starter.controllers', [])
     $scope.navigateFood = function(item){
         $state.go('tab.item',{item:item})
     }
+
+
 })
 
 .controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices,readMadeEasy,constants) {

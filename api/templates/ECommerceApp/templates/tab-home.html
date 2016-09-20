@@ -1,28 +1,5 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="Home">
     <ion-content class="padding" >
-
-        <!--<div class="cards cards-home" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">-->
-
-            <!--<img src="{{imageURL}}/{{item.imageUrl}}" width="70%">-->
-
-            <!--<div class="made-easy-header-font">-->
-                <!--<p>{{item.name}}</p>-->
-                <!--<p>{{item.price}}</p>-->
-            <!--</div>-->
-
-            <!--<div class="made-easy-content-font">-->
-                <!--<p>{{item.description}}</p>-->
-            <!--</div>-->
-
-            <!--<button ng-disabled="!(isEnableLeftButton)" ng-click="onSwipeLeft()" class="button">Left</button>-->
-            <!--<button ng-disabled="!(isEnableRightButton)" ng-click="onSwipeRight()" class="button">Right</button>-->
-
-            <!--<br>-->
-            <!--<br>-->
-            <!--<a class="button" ui-sref="tab.item({item:item})">ORDER NOW</a>-->
-            <!--<br>-->
-            <!--<br>-->
-        <!--</div>-->
         <ion-slides  options="options" slider="data.slider" option="myOptions">
             <ion-slide-page ng-repeat="item in itemList" >
                 <div class="list card">
@@ -48,13 +25,14 @@
 
         <ion-scroll zooming="true" direction="x">
             <div style="height: 40px;">
-                <ion-tabs class="tabs-icon-top tabs-color-active-positive">
-
-                    <ion-tab ng-repeat="category in categoryList" title="{{category.name}}" href="#/tab/menu/{{category.id}}/{{category.name}}">
-                        <ion-nav-view name="tab-home"></ion-nav-view>
-                    </ion-tab>
-
-                </ion-tabs>
+                <div class="tabs tab-color-custom">
+                    <a class="tab-item" href="#/home">
+                        All Items
+                    </a>
+                    <a class="tab-item" ng-repeat="category in categoryList"   href="#/tab/menu/{{category.id}}/{{category.name}}" >
+                        {{category.name}}
+                    </a>
+                </div>
             </div>
         </ion-scroll>
 

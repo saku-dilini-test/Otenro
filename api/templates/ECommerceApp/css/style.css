@@ -6,22 +6,7 @@
     background-color: #EAD004;
     cursor: url(../img/cursor.cur), auto;
 }
-/* -- Tab Bar
 
-.tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item {
-    font-size: 10px;
-    line-height: 14px;
-    background-color: #EAD004;
-    padding-top: 3%;
-    border-width: thick;
-    cursor: url(../img/cursor.cur), auto;
-}
-
-.tabs-color-active-positive .tab-item.tab-item-active, .tabs-color-active-positive .tab-item.active, .tabs-color-active-positive .tab-item.activated {
-    background-color: #EAD004;
-    cursor: url(../img/cursor.cur), auto;
-}
- --- */
 
 /* --- Cards Setting --- */
 .cards {
@@ -115,16 +100,26 @@ ion-slides {
 .navigation-drawer ion-item a{
     background-color: transparent !important;
     color:#fff;
+    margin-left: 25%;
+    font-weight: 600;
 }
 
 .navigation-drawer .menu-animated{
     transform:unset !important;
 }
+.navigation-drawer ion-nav-bar{
+    border: unset;
+    background: transparent;
+}
+.navigation-drawer .bar.bar-header {
+    border: unset;
+    background: transparent;
+}
 
 .navigation-drawer  ion-header-bar{
-    background: url(../img/bg.png) repeat;
     color:#fff;
     border: transparent;
+
 }
 
 .navigation-drawer  ion-header-bar button{
@@ -197,12 +192,12 @@ ion-slides {
 .logo{
     text-align: center;
     width: 100%;
-    height: 70px;
+    height: 80px;
 }
 
 .logo img{
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     margin: 10px;
 }
 
@@ -289,11 +284,13 @@ ion-slides {
     width:inherit;
     border: unset;
     background-color: transparent;
-    height:30px;
+    height:40px;
 }
 
 .tabs a{
-    width: 100px;
+    width: 80px;
+    color: #fff;
+    font-weight:600;
 }
 
 .swiper-container-horizontal > .swiper-pagination{
@@ -302,6 +299,15 @@ ion-slides {
 
 .scroll-view.scroll-x{
     overflow-x:hidden;
+}
+
+.scroll-bar-indicator {
+    display:none;
+}
+
+.tab-color-custom a:hover{
+    opacity:1;
+    text-decoration:underline;
 }
 
 /*Colors*/

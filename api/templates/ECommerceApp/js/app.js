@@ -49,12 +49,6 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
   })
-//    .state('tab', {
-//    url: '/tab',
-//    abstract: true,
-//    templateUrl: 'templates/tabs.html',
-//        controller: 'AppCtrl'
-//  })
 
   // Each tab has its own nav history stack:
   .state('tab.login', {
@@ -83,7 +77,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
   .state('tab.home', {
     url: '/home',
     views: {
-      'menuContent': {
+          'menuContent': {
         templateUrl: 'templates/tab-home.html',
         controller: 'HomeCtrl'
       }
