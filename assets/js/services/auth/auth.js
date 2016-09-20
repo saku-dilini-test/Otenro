@@ -32,6 +32,7 @@ angular.module('app')
         });
         return register;
       },
+      //Authentication for password forgot users
       forgotPassword: function(formData) {
         LocalService.unset('satellizer_token');
         var forgotPassword = $http.post('/auth/forgotPassword', formData);

@@ -30,6 +30,10 @@ angular.module('app')
             controller: 'ResetPasswordController'
 
 
+      }).state('anon.checkEmail', {
+            url: '/checkEmail',
+            templateUrl: 'auth/checkEmail.html'
+
       }).state('anon.welcome',{
             url :'/',
             controller: 'WelcomeTemplatesCtrl',

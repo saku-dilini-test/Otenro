@@ -64,6 +64,7 @@ module.exports = {
             res.send(user);
         });
     },
+    //reset password for forgot password users
     forgotPasswordReset : function(req,res){
         var data = req.body;
         User.update({'resetToken.token':req.body.token},data).exec(function(err,user) {

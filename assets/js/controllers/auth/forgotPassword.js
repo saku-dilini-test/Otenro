@@ -10,10 +10,11 @@
                 email: email,
                 type: 'Email Verification to reset password'
             }
+            //send email address to send verification email to the user's email address
             commerceService.sendVerificationLinkEmail(data).success(function (data) {
                 toastr.info(data.msg, {closeButton: true});
-//                $state.go('anon.welcome');
-
+                //To check email page
+                $state.go('anon.checkEmail');
             }).error(function(err) {
                 toastr.error('Error ' , 'Error', {
                     closeButton: true

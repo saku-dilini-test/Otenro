@@ -15,7 +15,9 @@
                 token: $stateParams.token,
                 password: password
             }
+            //Authenticate the user with the token
             Auth.forgotPassword(verify).success(function(data){
+            //reset the password with the new password
             userProfileResource.resetPassword(reset).success(function () {
                 toastr.success('Successfully reset the password ', 'Congratulations ! ', {closeButton: true});
                   $state.go('anon.welcome');
