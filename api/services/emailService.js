@@ -293,54 +293,59 @@ module.exports = {
         var searchApp = {
             email: data.email
         };
+        //Find if the email exist(user exist)
         User.find(searchApp).exec(function (err, app) {
              if (err) return done(err);
              if(app.length !== 0){
                 var token = '';
-                 JWT.encode({
+                //if user exist generate the token
+                JWT.encode({
                    secret: '17ca644f4f3be572ec33711a40a5b8b4',
                    payload: {
                      id :  app[0].id,
                      email:  app[0].email
                    },
                    algorithm: 'HS256'
-                 }).exec({
+                }).exec({
                    error: function (err){
                      return err;
                    },
                    success: function (result){
-                     token = result;
-                 var expires = new Date();
-                 expires.setHours(expires.getHours() + 1);
+                    token = result;
+                    var expires = new Date();
+                    //set the expire time of the token to one hour from the token generated time
+                    expires.setHours(expires.getHours() + 1);
 
-                 resetToken = [{
-                   token: token,
-                   expires: expires
-                 }];
-                  User.update(searchApp,{resetToken:resetToken}).exec(function(err,created){
-                    if(err) console.log(err);
-                var emailDetails = {
-                    text: "Email verification",
-                    from: 'sallayshamila93@gmail.com',
-                    to: data.email,
-                    cc: "",
-                    subject: data.type,
-                    attachment: [
-                        {
-                            data: "<html>Hello "+app[0].firstName+",<br />"+
-                                  "<a href='http://localhost:1337/#/resetPassword/"+token+"'>Click here to verify your email address</a></html>",
-                            alternative: true
-                        }
-                    ]
-                };
-                server.send(emailDetails, function(err, message) {
-                    if (err) {
-                        console.log(err);
-                    }
-                    return res({msg:'Check your email to get the verification link'})
-                });
-                });
-                }
+                    resetToken = [{
+                        token: token,
+                        expires: expires
+                    }];
+                    //update the resetToken in the database
+                    User.update(searchApp,{resetToken:resetToken}).exec(function(err,created){
+                        if(err) console.log(err);
+                        var emailDetails = {
+                            text: "Email verification",
+                            from: 'sallayshamila93@gmail.com',
+                            to: data.email,
+                            cc: "",
+                            subject: data.type,
+                            attachment: [
+                                {
+                                    data: "<html>Hello "+app[0].firstName+",<br />"+
+                                          "<a href='http://localhost:1337/#/resetPassword/"+token+"'>Click here to verify your email address</a></html>",
+                                    alternative: true
+                                }
+                            ]
+                        };
+                        //send the email
+                        server.send(emailDetails, function(err, message) {
+                            if (err) {
+                            console.log(err);
+                            }
+                            return res({msg:'Check your email to get the verification link'})
+                        });
+                    });
+                   }
                 });
              }
              else{
