@@ -44,6 +44,7 @@ module.exports.routes = {
      * */
 
     'POST /auth/editUserProfile': 'UserController.editUserProfile',
+    'POST /auth/resetPassword': 'UserController.forgotPasswordReset',
     'POST /auth/google': 'AuthController.googleAuth',
     'POST /auth/facebook': 'AuthController.facebookAuth',
 
@@ -202,6 +203,7 @@ module.exports.routes = {
     'POST /edit/getEmailSettings': 'edit/commerce/EmailController.getEmailSettings',
     'POST /edit/updateEmailSettings': 'edit/commerce/EmailController.updateEmailSettings',
     'POST /edit/sendTestEmail': 'edit/commerce/EmailController.sendTestEmail',
+    'POST /edit/sendVerificationLinkEmail': 'edit/commerce/EmailController.sendVerificationLinkEmail',
     'POST /edit/updateHeaderFooterSettings': 'edit/commerce/EmailController.updateHeaderFooterSettings',
     'GET /edit/viewImages': 'edit/commerce/EmailController.viewImages',
 
