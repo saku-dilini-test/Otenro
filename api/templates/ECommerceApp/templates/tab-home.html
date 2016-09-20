@@ -38,13 +38,25 @@
                         <div class="description">
                             <p>{{item.detailedDesc}}</p>
                         </div>
-                        <div  class="order">
-                            <a class="button button-balanced" ui-sref="tab.item({item:item})">ORDER NOW</a>
+                        <div  class="btn-full">
+                            <button class="button button-balanced" ui-sref="tab.item({item:item})">ORDER NOW</button>
                         </div>
                     </div>
                 </div>
                 </ion-slide-page>
         </ion-slides>
+
+        <ion-scroll zooming="true" direction="x">
+            <div style="height: 40px;">
+                <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
+                    <ion-tab ng-repeat="category in categoryList" title="{{category.name}}" href="#/tab/menu/{{category.id}}/{{category.name}}">
+                        <ion-nav-view name="tab-home"></ion-nav-view>
+                    </ion-tab>
+
+                </ion-tabs>
+            </div>
+        </ion-scroll>
 
 
     </ion-content>

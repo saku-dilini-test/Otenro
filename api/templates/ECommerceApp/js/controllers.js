@@ -60,7 +60,7 @@ angular.module('starter.controllers', [])
     // Configuration
         /** Configuration has inside getAllItemByAppId function  **/
 
-    // view item 
+    // view item
     $scope.item = {};
     // item set function
     $scope.setItem = function(id){
@@ -91,6 +91,20 @@ angular.module('starter.controllers', [])
     };
 
     /* ----- Eng Swipe Fucntion  ----- */
+
+    // get all menu by app Id
+        readMadeEasy.readFile().success(function(appData){
+            appServices.getAllMenuByAppId(appData.appId)
+                .success(function (data) {
+                    $scope.categoryList = data;
+                }).error(function (err) {
+                    alert('Menu Loading error');
+            });
+
+            // defined second navigation image path
+            $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
+                              "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
+        });
 })
 
 .controller('MenuCtrl', function($scope,appServices,readMadeEasy,constants) {
