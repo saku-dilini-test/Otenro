@@ -63,5 +63,12 @@ module.exports = {
             if (err) return done(err);
             res.send(user);
         });
+    },
+    forgotPasswordReset : function(req,res){
+        var data = req.body;
+        User.update({'resetToken.token':req.body.token},data).exec(function(err,user) {
+            if (err) res.send(err);
+            res.send('ok');
+        });
     }
 };

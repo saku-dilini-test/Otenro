@@ -58,6 +58,38 @@ module.exports = {
       });
 
   },
+  forgotPassword : function(req, res) {
+        var resetToken=[
+        {token : req.body.token}
+        ]
+      User.findOne({'resetToken.token':req.body.token}, function foundUser(err, user) {
+        if (err) return res.negotiate(err);
+        if (!user) return res.notFound();
+        var diff = user.resetToken[0].expires- new Date(req.body.expires);
+        if(diff<=3.6e+6){
+            JWT.encode({
+              secret: '17ca644f4f3be572ec33711a40a5b8b4',
+              payload: {
+                id :  user.id,
+                email:  user.email
+              },
+              algorithm: 'HS256'
+            }).exec({
+              // An unexpected error occurred.
+              error: function (err){
+                return err;
+              },
+              // OK.
+              success: function (result){
+                res.status(200).json({user : { email : user.email , sub : user.id },token : result });
+              }
+            });
+        }
+        else{
+            res.status(404).send({error:'Expired'});
+        }
+        });
+  },
 
   register: function(req, res) {
 
@@ -81,7 +113,6 @@ module.exports = {
                   return err;
                 },
                 success: function (result){
-                  console.log(result);
                   res.status(200).json({user : { email : user.email , sub : user.id  },token : result });
                 }
               });

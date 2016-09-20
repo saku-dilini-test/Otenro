@@ -132,6 +132,20 @@ module.exports = {
         console.log(msg);
         res.send("asd");
     },
+    sendVerificationLinkEmail : function(req,res){
+
+        var type = req.body.type;
+        var email = req.body.email;
+
+        var data = {
+            type : type,
+            email: email
+        }
+        var msg = sentMails.sendVerificationEmail(data, function (msg)
+        {
+               res.send(msg);
+        });
+    },
     viewImages : function(req,res){
 
         var appRoot = path.resolve();

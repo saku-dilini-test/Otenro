@@ -242,6 +242,9 @@
             sendTestEmail: function (data) {
                 return $http.post(SERVER_URL + 'edit/sendTestEmail', data);
             },
+            sendVerificationLinkEmail: function (data) {
+                return $http.post(SERVER_URL + 'edit/sendVerificationLinkEmail', data);
+            },
             getEmailSettings: function (data) {
                 return $http.post(SERVER_URL + 'edit/getEmailSettings', data);
             },
