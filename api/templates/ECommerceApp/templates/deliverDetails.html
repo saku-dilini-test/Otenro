@@ -1,25 +1,49 @@
-<ion-view view-title="Deliver Details">
-    <ion-content class="made-easy-background-image made-easy-background-color">
-        <div class="card animated zoomIn">
-            <div class="box_inner">
-                <h4>Deliver Details</h4>
-                <div class="item item-stacked-label">
-                    <div class="row2">
-                        <div>Name</div>
-                        <input type="text" ng-model="details.name" placeholder="{{details.name}}" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">
-                    </div>
-                    <div class="row2">
-                        <div>Address</div>
-                        <input type="text" ng-model="details.address" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">
-                    </div>
-                    <div class="row2">
-                        <div>Contact number</div>
-                        <input type="number" ng-model="details.number" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">
+<ion-view class="made-easy-background-color made-easy-background-image" view-title="Deliver Details">
+    <ion-content class="padding" >
+        <div class="list card">
+            <div class="item item-body">
+
+                <div class="header-fonts delivery">
+                    <h2>Pizza Delivery</h2>
+                </div>
+                <div class="image-wrapper">
+                    <img src="img/pizza-delivery.jpg">
+                </div>
+                <div class="list custom-form">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Name</span>
+                        <input type="text"  ng-model="details.name" placeholder="{{details.name}}">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Address</span>
+                        <input type="text" ng-model="details.address" placeholder="Address">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Contact Number</span>
+                        <input type="number" ng-model="details.number" placeholder="Contact Number">
+                    </label>
+                    <div class="btn-full">
+                        <button class="button button-assertive" ng-click="deliver(details)" >Deliver</button>
                     </div>
                 </div>
-                <div class="panel2">
-                    <a class="social-button" ng-click="deliver(details)" >Deliver</a>
-                </div>
-            </div></div>
-    </ion-content></div>
+                <!--<div class="item item-stacked-label">-->
+                    <!--<div class="row2">-->
+                        <!--<div>Name</div>-->
+                        <!--<input type="text" ng-model="details.name" placeholder="{{details.name}}" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">-->
+                    <!--</div>-->
+                    <!--<div class="row2">-->
+                        <!--<div>Address</div>-->
+                        <!--<input type="text" ng-model="details.address" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">-->
+                    <!--</div>-->
+                    <!--<div class="row2">-->
+                        <!--<div>Contact number</div>-->
+                        <!--<input type="number" ng-model="details.number" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="panel2">-->
+                    <!--<a class="social-button" ng-click="deliver(details)" >Deliver</a>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

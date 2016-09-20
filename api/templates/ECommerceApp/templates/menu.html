@@ -1,0 +1,45 @@
+
+<ion-side-menus class="navigation-drawer" enable-menu-with-back-views="true">
+
+    <ion-side-menu-content drag-content="false">
+
+        <ion-nav-bar class="bar bar-header">
+            <div class="bar bar-header">
+                <ion-nav-buttons side="left">
+                    <button class="button icon ion-navicon"  menu-toggle="left"></button>
+                </ion-nav-buttons>
+                <ion-nav-buttons side="right">
+                    <button ui-sref="tab.cart" class="button icon ion-ios-cart-outline"></button>
+                    <!--<span class="badge2">{{parentobj.cartSize}}</span>-->
+                </ion-nav-buttons>
+            </div>
+        </ion-nav-bar>
+
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+        <ion-content >
+            <div class="logo">
+                <img src="img/logo-sample.png" >
+            </div>
+            <ion-list>
+                <ion-item nav-clear menu-close href="#/tab/home">
+                    Home
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/tab/cart">
+                    Cart
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/tab/aboutUs">
+                    About us
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/tab/contactUs">
+                    Contact us
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/tab/login">
+                    login
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

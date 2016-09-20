@@ -3,7 +3,7 @@
     background-color: #10b23e !important;
 }
 .made-easy-background-image{
-    background: url(../img/background.jpg) center;
+    background: url(../img/bg.png) repeat;
     background-size: cover;
 }
 .made-easy-background-color {
@@ -107,58 +107,13 @@ ion-view{
 }
 ion-content{
     cursor: url(../img/cursor.cur), auto;
+
 }
 a[href]:hover{
     cursor: url(../img/cursor.cur), auto;
 }
 
 /* ------------------- */
-
-
-.panel .social-button {
-    padding: 8.5px 17px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    color: white;
-    margin-left:10px;
-    font-size: 14px;
-    font-family: Helvetica, sans-serif;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: url(../img/cursor.cur), auto;;
-}
-.panel .social-button-fb{
-    padding: 8.5px 17px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    color: white;
-    margin-right:2px;
-    margin-left: 20px;
-    font-size: 14px;
-    font-family: Helvetica, sans-serif;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor:url(../img/cursor.cur), auto;
-}
-
-.panel .create-account-btm {
-    width: 58%;
-    font-size: 4.0vw;
-}
-
-.panel .create-account-btm {
-    background-color: #FFBF0A; /* Green */
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 35px;
-    cursor:url(../img/cursor.cur), auto;;
-    border-radius:4px;
-}
 
 .col2 {
     -webkit-box-flex: 1;
