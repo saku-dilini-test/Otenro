@@ -294,7 +294,7 @@ module.exports = {
         };
         User.find(searchApp).exec(function (err, app) {
              if (err) return done(err);
-             if(app[0].email == data.email){
+             if(app.length !== 0){
                 var emailDetails = {
                     text: "Email verification",
                     from: 'sallayshamila93@gmail.com',
@@ -313,11 +313,11 @@ module.exports = {
                     if (err) {
                         console.log(err);
                     }
-                    return res({success:'success'})
+                    return res({msg:'Check your email to get the verification link'})
                 });
              }
              else{
-                return res({error:"invalid email"})
+                return res({msg:'Email does not exist'})
              }
         });
     }
