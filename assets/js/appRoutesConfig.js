@@ -21,9 +21,10 @@ angular.module('app')
 
 
       }).state('anon.resetPassword', {
-            url: '/resetPassword/:userId',
+            url: '/resetPassword/:token',
             params: {
                 userId:null,
+                resetToken:null
             },
             templateUrl: 'auth/resetPassword.html',
             controller: 'ResetPasswordController'

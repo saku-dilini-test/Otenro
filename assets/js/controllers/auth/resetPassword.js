@@ -8,14 +8,15 @@
 
         $scope.submitVerification = function (password) {
             var verify = {
-                userId: $stateParams.userId
+                token: $stateParams.token,
+                expires: new Date()
             }
-            var data = {
-                userId: $stateParams.userId,
+            var reset = {
+                token: $stateParams.token,
                 password: password
             }
-            Auth.forgotPassword(verify).success(function(){
-            userProfileResource.resetPassword(data).success(function () {
+            Auth.forgotPassword(verify).success(function(data){
+            userProfileResource.resetPassword(reset).success(function () {
                 toastr.success('Successfully reset the password ', 'Congratulations ! ', {closeButton: true});
                   $state.go('anon.welcome');
 
