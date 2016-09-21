@@ -54,7 +54,13 @@ angular.module('app')
       }).state('user.dashboard',{
             url :'/dashboard',
             controller : 'DashboardCtrl',
-            templateUrl : 'user/dashboard/dashboard.html'//
+            templateUrl : 'user/dashboard/dashboard.html',
+            data: {
+            permissions: {
+                only: ['Admin','Beta'],
+                redirectTo: 'anon.login'
+            }
+        }
 
       }).state('user.templates',{
             url :'/templates',
