@@ -1,27 +1,44 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="Home">
     <ion-content class="padding" >
+        <ion-slides slider="data.slider" options="options">
+            <ion-slide-page ng-repeat="item in itemList" >
+                <div class="list card">
+                    <div class="item item-body">
+                        <div class="image-wrapper">
+                            <img src="{{imageURL}}/{{item.imageUrl}}">
+                        </div>
+                        <div class="header-fonts">
+                            <span class="made-easy-header-font">{{item.name}}</span>
+                            <!--<p>{{item.price}}</p>-->
+                        </div>
 
-        <div class="cards cards-home" on-swipe-left="onSwipeLeft()" on-swipe-right="onSwipeRight()">
+                        <div class="description">
+                            <span class="made-easy-content-font">{{item.detailedDesc}}</span>
+                        </div>
+                        <div  class="btn-full">
+                            <button class="button button-balanced" ui-sref="tab.item({item:item})">ORDER NOW</button>
+                        </div>
+                    </div>
+                </div>
+                </ion-slide-page>
+        </ion-slides>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next ion-chevron-right"></div>
+        <div class="swiper-button-prev ion-chevron-left"></div>
 
-            <img src="{{imageURL}}/{{item.imageUrl}}" width="70%">
-
-            <div class="made-easy-header-font">
-                <p>{{item.name}}</p>
-                <p>{{item.price}}</p>
+        <ion-scroll zooming="true" direction="x">
+            <div style="height: 40px;">
+                <div class="tabs tab-color-custom">
+                    <a class="tab-item" href="#/home">
+                        All Items
+                    </a>
+                    <a class="tab-item" ng-repeat="category in categoryList"   href="#/tab/menu/{{category.id}}/{{category.name}}" >
+                        {{category.name}}
+                    </a>
+                </div>
             </div>
+        </ion-scroll>
 
-            <div class="made-easy-content-font">
-                <p>{{item.description}}</p>
-            </div>
 
-            <button ng-disabled="!(isEnableLeftButton)" ng-click="onSwipeLeft()" class="button">Left</button>
-            <button ng-disabled="!(isEnableRightButton)" ng-click="onSwipeRight()" class="button">Right</button>
-
-            <br>
-            <br>
-            <a class="button" ui-sref="tab.item({item:item})">ORDER NOW</a>
-            <br>
-            <br>
-        </div>
     </ion-content>
 </ion-view>
