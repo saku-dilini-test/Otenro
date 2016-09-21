@@ -86,7 +86,7 @@ ion-slides {
 
 .menu-open .navigation-drawer .menu-left{
     width: 90% !important;
-    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0.8;
     z-index: 1 !important;
     transform: translate3d(0%, 0px, 0px);
 }
@@ -165,27 +165,24 @@ ion-slides {
     letter-spacing: 1px;
     padding: 0 5px;
     height:5vh;
-}
+    margin:5px 15px;
 
-.header-fonts h2 {
-    font-weight: 800;
-    color: rgb(213,184,115);
 }
 
 .description{
     height:16vh;
+    text-align: center;
 }
 
-.description p {
+.description span {
     margin: 7px !important;
-    text-align: center;
 }
 
 .detailed-content .content{
     text-align:start;
 }
-.detailed-content .content p{
-    font-size: 12px;
+.detailed-content .content span{
+    display:block;
     margin: 7px;
 }
 
@@ -245,8 +242,7 @@ ion-slides {
 }
 
 .cart-item-header{
-    font-size: 11px;
-    color: #d5b873;
+    font-size: 11px !important;
     text-transform: uppercase;
 }
 .cart-item{
@@ -268,17 +264,22 @@ ion-slides {
 
 .delivery{
     position:absolute;
-    margin: 0 13%;
+    margin: 15px 13%;
 }
 
 .custom-form{
     margin:0 1em;
 }
 
-.custom-form input, span{
+.custom-form input{
     font-size:12px !important;
     padding-right:0px !important;
 }
+.custom-form span{
+    font-size:12px !important;
+    padding-right:0px !important;
+}
+
 
 .tabs{
     width:inherit;
@@ -288,7 +289,7 @@ ion-slides {
 }
 
 .tabs a{
-    width: 80px;
+    width: 90px;
     color: #fff;
     font-weight:600;
 }
@@ -310,6 +311,16 @@ ion-slides {
     text-decoration:underline;
 }
 
+.swiper-button-next, .swiper-button-prev{
+    background: unset !important;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    top:53%;
+    right: -8px;
+
+}
+
 /*Colors*/
 
 .background-light-blue{
@@ -321,7 +332,15 @@ ion-slides {
 
 /*font-size*/
 
-.font-12 div,span,input{
+.font-12 div{
+    font-size:12px;
+    margin: auto;
+}
+.font-12 span{
+    font-size:12px;
+    margin: auto;
+}
+.font-12 input{
     font-size:12px;
     margin: auto;
 }

@@ -79,6 +79,23 @@ angular.module('starter.controllers', [])
                               "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
         });
 
+        // ionic slider options
+        $scope.options = {
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            pagination: '.swiper-pagination',
+            paginationType: 'fraction',
+            effect: 'coverflow',
+            centeredSlides: true,
+            coverflow: {
+                        rotate: 50,
+                        stretch: 0,
+                        depth: 100,
+                        modifier: 1,
+                        slideShadows : true
+                    }
+        }
+
 })
 
 .controller('MenuCtrl', function($scope,appServices,readMadeEasy,constants) {
@@ -119,7 +136,6 @@ angular.module('starter.controllers', [])
     $scope.menuName = $stateParams.menuName;
     // set select Menu Id
     var menuId = $stateParams.menuId;
-    console.log($stateParams.menuName)
     // get all item by menu Id
     readMadeEasy.readFile().success(function(appData){
         appServices.getAllItemsByMenuId(menuId,appData.appId)
@@ -138,6 +154,22 @@ angular.module('starter.controllers', [])
         $state.go('tab.item',{item:item})
     }
 
+    // ionic slider options
+     $scope.options = {
+                 nextButton: '.swiper-button-next',
+                 prevButton: '.swiper-button-prev',
+                 pagination: '.swiper-pagination',
+                 paginationType: 'fraction',
+                 effect: 'coverflow',
+                 centeredSlides: true,
+                 coverflow: {
+                             rotate: 50,
+                             stretch: 0,
+                             depth: 100,
+                             modifier: 1,
+                             slideShadows : true
+                         }
+             }
 
 })
 
@@ -244,8 +276,19 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('OurStoresCtrl', function($scope) {
-    
+.controller('OurStoresCtrl', function($scope, $http, $rootScope, $ionicPopup, constants) {
+
+    $http.get(constants.SERVER_URL + "/templates/getAboutUs?appId="+$rootScope.appId)
+            .success(function (data) {
+                $scope.header = data.header;
+                $scope.content = data.content;
+            },function (err) {
+                $ionicPopup.alert({
+                    title: 'About us Data loading error!',
+                    template: 'Please check your connection!'
+                });
+            });
+
     // This is dummy data, should come from db
     $scope.stores = [
         {

@@ -3,7 +3,7 @@
     background-color: #10b23e !important;
 }
 .made-easy-background-image{
-    background: url(../img/bg.png) repeat;
+    background: url(../img/background.jpg) center;
     background-size: cover;
 }
 .made-easy-background-color {
@@ -11,21 +11,21 @@
     background-size: cover;
 }
 .made-easy-navigationBarColor{
-    background-color: #EAD004;
+    background-color: #000;
 }
 .made-easy-footerColor{
     background-color: #EAD004;
 }
 .made-easy-header-font{
-    color:#000000;
-    font-family: Ubuntu Light;
-    font-size: 14px;
+    color:rgb(213,184,115);
+    font-family: sans-serif;
+    font-size: 16px;
     font-weight: bold;
 }
 .made-easy-content-font{
-    color: #000000;
-    font-family: Ubuntu Light;
-    font-size: 12px;
+    color: #444;
+    font-family: sans-serif;
+    font-size: 13px;
     font-weight: lighter;
 }
 .made-easy-footer-font{

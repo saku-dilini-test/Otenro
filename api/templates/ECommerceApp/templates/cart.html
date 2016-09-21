@@ -2,10 +2,10 @@
     <ion-content class="padding" >
         <div class="list card">
             <div class="item item-body">
-                <div class="header-fonts">
-                    <h2>Shopping Cart</h2>
+                <div class="header-fonts made-easy-header-font">
+                    <span>Shopping Cart</span>
                  </div>
-                <div class="cart-item-header">
+                <div class=" made-easy-header-font cart-item-header">
                   <div class="row">
                     <div class="col col-50">Item</div>
                     <div class="col">Qty</div>
@@ -15,7 +15,7 @@
                 </div>
                 <div class="cart-item" ng-repeat="item in cartItems" >
                   <div class="row">
-                    <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive "><p>{{item.name}}</p></div>
+                    <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}</div>
                     <div class="col" ng-model="item.qty" >{{item.qty}}</div>
                     <div class="col" ng-model="item.total" >{{item.total}}</div>
                     <div class="col"><a ng-click="removeItem(index)">x</a></div>
@@ -26,6 +26,7 @@
                     <div class="col col-50">Total</div>
                     <div class="col" ng-model="quantity">{{getTotalQuantity()}}</div>
                     <div class="col" ng-model="total" >{{getTotal()}}</div>
+                     <div class="col"> </div>
                   </div>
                 </div>
 
