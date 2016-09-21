@@ -1,0 +1,48 @@
+<div ng-if="isAuthenticated">
+    <div class="obl-dashboard-wrapper" ng-controller="HeaderController" ng-show="auth.isAuthenticated()">
+        <div class="obl-dashboard-header clearfix">
+            <h2 ng-hide="welcome"> </h2>
+            <p  ng-hide="welcome"> Well come to the technical support area</p>
+            <div class="obl-dashboard-settings">
+                <button class="user-settings-button" ng-click="profileView()" type="button">
+                    <img src="images/user-icon.svg" alt="User Logo" />
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="obl-dashboard-wrapper">
+    <!--<div class="obl-dashboard-apps">
+     All Applications
+    </div>-->
+    <div class="md-dialog-main clearfix">
+        <form class="allItems" novalidate>
+            <table class="table">
+                <thead class="obl-dashboard-apps">
+                <th>Id</th>
+                <th>Application Name</th>
+                <th>User Id</th>
+                <th>Application Status</th>
+                <th>Action</th>
+                </thead>
+                <tbody>
+                <tr dir-paginate="app in appList | filter:search | itemsPerPage: 100">
+                    <td>{{app.id}}</td>
+                    <td>{{app.appName}}</td>
+                    <td>{{app.userId}}</td>
+                    <td>{{app.status}}</td>
+
+                    <td>
+                        <a  ng-if="app.status=='DRAFT'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>
+                        <a  ng-if="app.status=='PUBLISHED'" data-ng-click="getPublishDetails(app.id,app.userId)">Update</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+    </div>
+</div>
+
+

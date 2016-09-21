@@ -278,7 +278,16 @@ module.exports.routes = {
      **/
 
     'GET /mobile/allApps': 'mobileViewer/MobileController.allApps',
-    'GET /mobile/meServerUrl': 'mobileViewer/MobileController.meServerUrl'
+    'GET /mobile/meServerUrl': 'mobileViewer/MobileController.meServerUrl',
+
+    /***
+     * Technical Support Controller
+     **/  
+     'GET  /edit/getAllAppsData': 'technicalSupport/TechnicalSupportController.getAllAppsData',
+     'POST  /edit/getPublishDetails': 'technicalSupport/TechnicalSupportController.getPublishDetails'
+
+
+   
 
 
 };

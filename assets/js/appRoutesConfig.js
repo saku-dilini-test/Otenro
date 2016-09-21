@@ -41,10 +41,24 @@ angular.module('app')
             controller : 'TemplatesCtrl',
             templateUrl : 'user/welcome/Templates.html'
 
-        }).state('anon.register', {
+      }).state('anon.register', {
             url: '/register',
             templateUrl: 'auth/register.html',
             controller: 'RegisterController'
+
+      }).state('user.technicalSupporter',{
+            url :'/technicalSupport',
+            controller : 'technicalSupportCtrl',
+            templateUrl : 'user/technicalSupport/TechnicalSupport.html'
+        
+      }).state('user.viewPublishDetails',{
+            url :'/viewPublishDetails/:appId/:userId',
+            controller : 'technicalSupportCtrl',
+            data : {
+                appId : null,
+                userId:null
+            },
+            templateUrl : 'user/technicalSupport/ViewPublishDetails.html'
       });
 
      $stateProvider

@@ -6,7 +6,9 @@
 
 var fs = require('fs-extra'),
     config = require('../services/config'),
-    xml2js = require('xml2js');
+    xml2js = require('xml2js'),
+    EasyZip = require('easy-zip').EasyZip;
+
 
 
 module.exports = {
@@ -235,20 +237,57 @@ module.exports = {
                                                             }
                                                         }
                                                     });
-                                                    shell.exec(' /opt/android-sdk-linux/build-tools/23.0.1/zipalign -v 4 android-release-unsigned.apk '+appName.replace(/\s/g, '')+'.apk', {async: true}, function (code5, stdout, stderr) {
+                                                    shell.exec('zipalign -v 4 android-release-unsigned.apk '+appName.replace(/\s/g, '')+'.apk', {async: true}, function (code5, stdout, stderr) {
                                                         if (code5==0){
 
-                                                             var file = appPath + '/platforms/android/build/outputs/apk/'+appName.replace(/\s/g, '')+'.apk';
+                                                             var file = appPath + 'platforms/android/build/outputs/apk/'+appName.replace(/\s/g, '')+'.apk';
+                                                             var resourcesPath = config.ME_SERVER + userId + '/build/' + appId +'/resources';
+                                                             var publishPath = config.ME_SERVER + userId + '/build/' + appId +'/publish';
+                                                             var zipFile = config.ME_SERVER + userId + '/build/' + appId+'/publish.zip';
 
-                                                             var filename = path.basename(file);
-                                                             var mimetype = mime.lookup(file);
+                                                            fs.stat(zipFile, function(err, fileStat) {
+                                                                if (err) {
+                                                                    if (err.code == 'ENOENT') {
+                                                                        console.log('Does not exist.');
+                                                                    }
+                                                                } else {
+                                                                    if (fileStat.isFile()) {
+                                                                        fs.unlinkSync(zipFile);
+                                                                    } else if (fileStat.isDirectory()) {
+                                                                        console.log('Directory found.');
+                                                                    }
+                                                                }
+                                                            });
+                                                            fs.copy(resourcesPath, publishPath, function (err) {
+                                                                if (err) {
+                                                                    throw err;
+                                                                }else {
+                                                                    fs.copy(file, publishPath+ "/"+appName.replace(/\s/g, '')+'.apk', function (err) {
+                                                                        if (err) {
+                                                                            throw err;
+                                                                        }else {
+                                                                            var zip = new EasyZip();
+                                                                            zip.zipFolder(publishPath,function(err){
+                                                                                zip.writeToFile(zipFile);
+                                                                                if (err) {
+                                                                                    throw err;
+                                                                                }else {
+                                                                                    var filename = path.basename(zipFile);
+                                                                                    var mimetype = mime.lookup(zipFile);
 
-                                                             res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-                                                             res.setHeader('Content-type', mimetype);
+                                                                                    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                                                                                    res.setHeader('Content-type', mimetype);
 
-                                                             var filestream = fs.createReadStream(file);
+                                                                                    var filestream = fs.createReadStream(zipFile);
 
-                                                             filestream.pipe(res);
+                                                                                    filestream.pipe(res);
+                                                                                }
+                                                                            });
+
+                                                                        }
+                                                                    });
+                                                                }
+                                                            });
                                                             /*res.json('ok');*/
                                                         }else{
                                                             if (stderr) return res.negotiate(stderr);
