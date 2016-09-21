@@ -3,12 +3,12 @@
     angular.module("appEdit").controller("CommerceCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope',
         'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','comingSoonService',
-        '$filter','contactUsService','uiGmapGoogleMapApi',
+        '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants',
         CommerceCtrl]);
 
     function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope,
              SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
-             contactUsService,uiGmapGoogleMapApi) {
+             contactUsService,uiGmapGoogleMapApi,uiGridConstants) {
 
         $scope.refund = [];
         $scope.unfulfilled = [];
@@ -51,6 +51,14 @@
             enableGridMenu: true,
             gridMenuTitleFilter: fakeI18n,
             rowTemplate: rowTemplate(),
+            isRowSelectable: function(row) {
+                if(row.entity.paymentStatus === "successful" || row.entity.paymentStatus === "refunded")  {
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            },
             columnDefs: [
                 {name: 'id', visible: false},
                 {name: 'createdDate',},
@@ -837,9 +845,19 @@
             else{
             for (var i = 0; i < $scope.selectedRow.length; i++) {
                 $scope.selectedRow[i].paymentStatus = "refunded";
+                $scope.gridApi1.selection.clearSelectedRows();
                 $scope.refund.push($scope.selectedRow[i]);
                 $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.selectedRow[i]), 1);
             }
+            $scope.gridOptions1.isRowSelectable = function(row){
+                if(row.entity.paymentStatus === "refunded"){
+                    return false;
+                } else {
+                    return true;
+                }
+            };
+            $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
+            $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
             $scope.gridOptions3.data = $scope.unfulfilled;
             commerceService.updateOrders($scope.selectedRow)
                 .success(function (data) {
@@ -862,13 +880,23 @@
                 });
             }
             else{
-            for (var i = 0; i < $scope.row.length; i++) {
-                $scope.row[i].paymentStatus = "successful";
-                $scope.fulfill.push($scope.row[i]);
-                $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.row[i]), 1);
-            }
-            $scope.gridOptions3.data = $scope.unfulfilled;
-            commerceService.updateOrders($scope.row)
+                for (var i = 0; i < $scope.row.length; i++) {
+                    $scope.row[i].paymentStatus = "successful";
+                    $scope.gridApi1.selection.clearSelectedRows();
+                    $scope.fulfill.push($scope.row[i]);
+                    $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.row[i]), 1);
+                }
+                $scope.gridOptions1.isRowSelectable = function(row){
+                    if(row.entity.paymentStatus === "successful"){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                };
+                $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
+                $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+                $scope.gridOptions3.data = $scope.unfulfilled;
+                commerceService.updateOrders($scope.row)
                 .success(function (data) {
                     toastr.success('Status changed to fulfilled ', 'Success', {
                         closeButton: true
