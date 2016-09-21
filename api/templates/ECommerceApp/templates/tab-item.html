@@ -27,7 +27,7 @@
                     </div>
                     <div class="row font-12">
                         <div class="col col-33">
-                                <select ng-model="selectedVariant"
+                                <select class="select-tab-item" ng-model="selectedVariant"
                                         ng-options="variant.size  for variant in item.variants"
                                         ng-change="changeVariant(selectedVariant)">
                                 </select>
@@ -36,7 +36,8 @@
                             {{currency.sign}} : {{selectedVariant.price}}
                         </div>
                         <div class="col col-33">
-                            <input type="number" min="1"
+                            <input style="border-bottom:1px solid #ccc"
+                                   type="number" min="1"
                                    ng-model="selectedVariant.buyQuantity"
                                    ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
                         </div>
