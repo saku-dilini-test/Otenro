@@ -45,6 +45,8 @@
             enableSelectAll: true,
             enableRowHeaderSelection: true,
             selectionRowHeaderWidth: 35,
+            enableFullRowSelection: true,
+            enableRowHeaderSelection: true,
             enableSorting: true,
             rowHeight: 35,
             exporterMenuCsv: true,
