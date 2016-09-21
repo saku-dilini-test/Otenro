@@ -64,8 +64,16 @@ angular.module('app')
       }).state('anon.register', {
             url: '/register',
             templateUrl: 'auth/register.html',
-            controller: 'RegisterController'
-
+            controller: 'RegisterController',
+            resolve:{
+                initialData : ['$q','userProfileResource',
+                    function($q,userProfileResource){
+                        return $q.all({
+                            yourselfReasonList : userProfileResource.getYourselfReason()
+                        })
+                    }
+                ]
+            }
       }).state('user.technicalSupporter',{
             url :'/technicalSupport',
             controller : 'technicalSupportCtrl',
@@ -79,16 +87,6 @@ angular.module('app')
                 userId:null
             },
             templateUrl : 'user/technicalSupport/ViewPublishDetails.html'
-            controller: 'RegisterController',
-            resolve:{
-              initialData : ['$q','userProfileResource',
-                  function($q,userProfileResource){
-                      return $q.all({
-                          yourselfReasonList : userProfileResource.getYourselfReason()
-                      })
-                  }
-              ]
-            }
       });
 
      $stateProvider
