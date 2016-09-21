@@ -28,7 +28,8 @@ module.exports.bootstrap = function(cb) {
     TemplateCategory.seed,
     TemplateMetaData.seed,
     AccountType.seed,
-    Country.seed
+    Country.seed,
+    YourselfReason.seed  
 
   ], cb);
 

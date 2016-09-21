@@ -101,7 +101,14 @@ module.exports = {
     User.findOne({email: req.body.email}, function foundUser(err, user) {
       if (err) return res.negotiate(err);
       if (user) return res.status(409).json({error: 'already exists'});
-          User.create({firstName:req.body.fname,lastName:req.body.lname, email: req.body.email, password: req.body.password}).exec(function(err, user) {
+          var newUserDetails = {
+            firstName : req.body.fname,
+            lastName  : req.body.lname,
+            email     : req.body.email,
+            password  : req.body.password,
+            yourselfReason : req.body.yourselfReason
+          };
+          User.create(newUserDetails).exec(function(err, user) {
             if (err) {
               return res.negotiate(err);
             }
@@ -281,6 +288,17 @@ module.exports = {
           }
         });
       }
+    });
+  },
+
+  /**
+   * Return Tell Us yourself Reason Collections for any GET request
+   */
+  getYourselfReason : function (req,res) {
+    // find Query
+    YourselfReason.find().exec(function(err, result) {
+      if (err) return done(err);
+      res.send(result);
     });
   }
 };

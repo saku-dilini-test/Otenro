@@ -21,6 +21,9 @@
             },
             resetPassword: function(appParams){
                 return $http.post(SERVER_URL+ 'auth/resetPassword', appParams);
+            },
+            getYourselfReason: function(){
+                return $http.get(SERVER_URL+ 'api/getYourselfReason');
             }
         }
     }

@@ -47,6 +47,7 @@ module.exports.routes = {
     'POST /auth/resetPassword': 'UserController.forgotPasswordReset',
     'POST /auth/google': 'AuthController.googleAuth',
     'POST /auth/facebook': 'AuthController.facebookAuth',
+    'GET /api/getYourselfReason': 'AuthController.getYourselfReason',
 
     /***
      * Billing Data

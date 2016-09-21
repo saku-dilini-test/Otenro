@@ -64,11 +64,18 @@
         </span>
       </fieldset>
       <br>
-      <br/>
+      <fieldset>
+        <label>Tell us about yourself</label>
+        <img src="../../../images/question-mark.svg" width=" 12" height="12" />
+        <md-input-container>
+          <md-select ng-model="user.yourselfReason">
+            <md-option ng-value="">Select Yourself</md-option>
+            <md-option ng-value="yourSelf.reason" ng-repeat="yourSelf in yourselfReasonList">{{yourSelf.reason}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </fieldset>
       <br>
-      <br/>
-      <br>
-      <br/>
       <br/>
       <br/>
       <fieldset class="set-register">

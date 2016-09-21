@@ -64,7 +64,16 @@ angular.module('app')
         }).state('anon.register', {
             url: '/register',
             templateUrl: 'auth/register.html',
-            controller: 'RegisterController'
+            controller: 'RegisterController',
+            resolve:{
+              initialData : ['$q','userProfileResource',
+                  function($q,userProfileResource){
+                      return $q.all({
+                          yourselfReasonList : userProfileResource.getYourselfReason()
+                      })
+                  }
+              ]
+            }
       });
 
      $stateProvider

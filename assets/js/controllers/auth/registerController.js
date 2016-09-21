@@ -1,10 +1,14 @@
 (function () {
     'use strict';
     angular.module('app')
-        .controller('RegisterController', ['$scope', '$state', 'Auth', 'toastr', RegisterController]);
+        .controller('RegisterController', ['$scope', '$state', 'Auth', 'toastr','initialData', RegisterController]);
 
-    function RegisterController($scope, $state, Auth, toastr) {
-
+    function RegisterController($scope, $state, Auth, toastr,initialData) {
+        
+        // -- Config -- 
+        // Tell Us About yourself data array
+        $scope.yourselfReasonList = initialData.yourselfReasonList.data;
+        
         $scope.authSignUp = function (user) {
             Auth.register(user).success(function () {
                 toastr.success('Successfully registered ', 'Congratulations ! ', {closeButton: true});
