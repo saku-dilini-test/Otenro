@@ -845,7 +845,7 @@
             else{
             for (var i = 0; i < $scope.selectedRow.length; i++) {
                 $scope.selectedRow[i].paymentStatus = "refunded";
-                $scope.selectedRow[i].fulfillmentStatus = "refunded";
+                $scope.selectedRow[i].fulfillmentStatus = "return";
                 $scope.gridApi1.selection.clearSelectedRows();
                 $scope.refund.push($scope.selectedRow[i]);
                 $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.selectedRow[i]), 1);
