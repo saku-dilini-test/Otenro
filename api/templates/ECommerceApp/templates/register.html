@@ -1,52 +1,55 @@
-<ion-view view-title="Register">
-    <ion-content class="made-easy-background-image made-easy-background-color padding">
-
-        <div class="card animated zoomIn">
-            <h3>Create Your Account</h3>
-            <form name="signUpForm">
-                <div class="list">
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">User Name</span>
-                        <input type="text" placeholder="" ng-model="data.name" ng-required="true">
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Email Address</span>
-                        <input type="email" placeholder="" name="email" ng-model="data.email" ng-required="true">
-                        <span class="help-block" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
-                            Enter a proper email
-                        </span>
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Password</span>
-                        <input type="password" placeholder="" ng-model="data.password" ng-required="true">
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Address</span>
-                        <input type="text" placeholder="" ng-model="data.address" ng-required="true">
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Phone Number</span>
-                        <input type="number" placeholder="" ng-model="data.phone" ng-required="true">
-                    </label>
-                    <div class="col">
-                        <button class="button button-block button-assertive" ng-click="signUpForm.$valid && singUp()">
-                            Sign up
-                        </button>
-                    </div>
-                    <!--<div class="row">
-                        <div class="col">
-                            <button class="button button-block button-calm" ng-click="authenticate('google')">
-                                Google
-                            </button>
+ <ion-view class="made-easy-background-color made-easy-background-image" view-title="Register">
+      <ion-content class="padding" >
+            <div class="list card">
+                  <div class="item item-body">
+                        <div class="header-fonts">
+                            <h2>Creat your Account</h2>
                         </div>
-                        <div class="col">
-                            <button class="button button-block button-positive" ng-click="authenticate('facebook')">
-                                Facebook
-                            </button>
-                        </div>
-                    </div>-->
-                </div>
-            </form>
-        </div>
-    </ion-content>
+                        <form name="signUpForm">
+                            <div class="list custom-form custom-form">
+                                <label class="item item-input item-stacked-label">
+                                    <span class="input-label">User Name</span>
+                                    <input type="text" placeholder="" ng-model="data.name" ng-required="true">
+                                </label>
+                                <label class="item item-input item-stacked-label">
+                                    <span class="input-label">Email Address</span>
+                                    <input type="email" placeholder="" name="email" ng-model="data.email" ng-required="true">
+                                    <span class="help-block" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
+                                        Enter a proper email
+                                    </span>
+                                </label>
+                                <label class="item item-input item-stacked-label">
+                                    <span class="input-label">Password</span>
+                                    <input type="password" placeholder="" ng-model="data.password" ng-required="true">
+                                </label>
+                                <label class="item item-input item-stacked-label">
+                                    <span class="input-label">Address</span>
+                                    <input type="text" placeholder="" ng-model="data.address" ng-required="true">
+                                </label>
+                                <label class="item item-input item-stacked-label">
+                                    <span class="input-label">Phone Number</span>
+                                    <input type="number" placeholder="" ng-model="data.phone" ng-required="true">
+                                </label>
+                                <div class="btn-full">
+                                    <button class="button button-positive" ng-click="signUpForm.$valid && singUp()">
+                                        Sign up
+                                    </button>
+                                </div>
+                                <!--<div class="row">
+                                    <div class="col">
+                                        <button class="button button-block button-calm" ng-click="authenticate('google')">
+                                            Google
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <button class="button button-block button-positive" ng-click="authenticate('facebook')">
+                                            Facebook
+                                        </button>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </form>
+                  </div>
+            </div>
+      </ion-content>
 </ion-view>
