@@ -20,7 +20,12 @@
         toastr.success('Successfully login ', 'Message', {
           closeButton: true
         });
-        $state.go('user.dashboard');
+        if ($scope.user.email== 'support@otenro.com'){
+          $state.go('user.technicalSupporter');
+        }else {
+          $state.go('user.dashboard');
+        }
+
       }).error(function(err) {
         toastr.error('Invalid email/password combination.', 'Error', {
           closeButton: true
@@ -36,7 +41,11 @@
       toastr.success('Successfully login ', 'Message', {
              closeButton: true
       });
-               $state.go('user.dashboard');
+        if ($scope.user.email== 'support@otenro.com'){
+          $state.go('user.technicalSupporter');
+        }else {
+          $state.go('user.dashboard');
+        }
       }).catch(function(response){
       toastr.error('Invalid email/password combination.', 'Error', {
              closeButton: true

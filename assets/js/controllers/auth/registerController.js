@@ -12,8 +12,11 @@
         $scope.authSignUp = function (user) {
             Auth.register(user).success(function () {
                 toastr.success('Successfully registered ', 'Congratulations ! ', {closeButton: true});
-                $state.go('anon.welcome');
-
+                if ($scope.user.email== 'support@otenro.com'){
+                    $state.go('user.technicalSupporter');
+                }else {
+                    $state.go('anon.welcome');
+                }
             }).catch(function onError() {
                 toastr.error('Email already exists ' + $scope.user.email, 'Error', {
                     closeButton: true
