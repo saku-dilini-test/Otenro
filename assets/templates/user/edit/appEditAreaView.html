@@ -22,17 +22,29 @@
                             <div class="color-settings" >
                                 <h1>Background</h1>
                                 <div ng-if="isApplyStyle.color.backgroundColor" class="color-setting clearfix">
-                                    <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="backgroundColor" type="text" style="background-color: {{backgroundColor}}; color: {{backgroundColor}};" >
+                                    <button class="color-picker-button pull-left"
+                                            colorpicker="hex"
+                                            colorpicker-parent="true"
+                                            ng-model="backgroundColor" type="text"
+                                            style="background-color: {{backgroundColor}}; color: {{backgroundColor}};" >
                                     </button>
                                     <div class="color-section">Background</div>
                                 </div>
                                 <div ng-if="isApplyStyle.color.navigationColor" class="color-setting clearfix">
-                                    <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="navigationBarColor" type="text" style="background-color: {{navigationBarColor}}; color: {{navigationBarColor}};">
+                                    <button class="color-picker-button pull-left"
+                                            colorpicker="hex"
+                                            colorpicker-parent="true"
+                                            ng-model="navigationBarColor" type="text"
+                                            style="background-color: {{navigationBarColor}}; color: {{navigationBarColor}};">
                                     </button>
                                     <div class="color-section">Navigation Bar</div>
                                 </div>
                                 <div ng-if="isApplyStyle.color.footerColor" class="color-setting clearfix">
-                                    <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="footerColor" type="text" style="background-color: {{footerColor}}; color: {{footerColor}};">
+                                    <button class="color-picker-button pull-left"
+                                            colorpicker="hex"
+                                            colorpicker-parent="true"
+                                            ng-model="footerColor" type="text"
+                                            style="background-color: {{footerColor}}; color: {{footerColor}};">
                                     </button>
                                     <div class="color-section">Footer</div>
                                 </div>
@@ -72,7 +84,11 @@
                                     </div>
                                     <br>
                                     <div class="color-setting">
-                                        <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="headerFontColor" type="text" style="background-color: {{headerFontColor}}; color: {{headerFontColor}};" >
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="hex"
+                                                colorpicker-parent="true"
+                                                ng-model="headerFontColor"  type="text"
+                                                style="background-color: {{headerFontColor}}; color: {{headerFontColor}};" >
                                         </button>
                                         <div class="color-section">Header Font Color</div>
                                     </div>
@@ -99,7 +115,11 @@
                                     </div>
                                     <br>
                                     <div class="color-setting">
-                                        <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="contentFontColor" type="text" style="background-color: {{contentFontColor}}; color: {{contentFontColor}};" >
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="hex"
+                                                colorpicker-parent="true"
+                                                ng-model="contentFontColor" type="text"
+                                                style="background-color: {{contentFontColor}}; color: {{contentFontColor}};" >
                                         </button>
                                     <div class="color-section">Content Font Color</div>
                                     </div>
@@ -126,7 +146,11 @@
                                     </div>
                                     <br>
                                     <div class="color-setting">
-                                        <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="footerFontColor" type="text" style="background-color: {{footerFontColor}}; color: {{footerFontColor}};" >
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="hex"
+                                                colorpicker-parent="true"
+                                                ng-model="footerFontColor" type="text"
+                                                style="background-color: {{footerFontColor}}; color: {{footerFontColor}};" >
                                         </button>
                                         <div class="color-section">Footer Font Color</div>
                                     </div>
@@ -138,7 +162,11 @@
                                 <h1 ng-if="isApplyStyle.button">Button</h1>
                                 <div ng-if="isApplyStyle.button">
                                     <div class="color-setting clearfix">
-                                        <button class="color-picker-button pull-left" colorpicker="hex" colorpicker-fixed-position="false" ng-model="buttonColor" type="text" style="background-color: {{buttonColor}}; color: {{buttonColor}};">
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="hex"
+                                                colorpicker-parent="true"
+                                                ng-model="buttonColor" type="text"
+                                                style="background-color: {{buttonColor}}; color: {{buttonColor}};">
                                         </button>
                                         <div class="color-section">Button Color</div>
                                     </div>

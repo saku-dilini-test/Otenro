@@ -503,6 +503,7 @@ a.md-button:hover:not([disabled]),
     text-decoration: none;
     margin-bottom: 22px;
     padding-left: 80px;
+    position: relative;
 }
 
 .other-setting{
