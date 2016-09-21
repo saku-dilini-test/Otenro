@@ -45,8 +45,6 @@
             enableSelectAll: true,
             enableRowHeaderSelection: true,
             selectionRowHeaderWidth: 35,
-            enableFullRowSelection: true,
-            enableRowHeaderSelection: true,
             enableSorting: true,
             rowHeight: 35,
             exporterMenuCsv: true,
@@ -847,6 +845,7 @@
             else{
             for (var i = 0; i < $scope.selectedRow.length; i++) {
                 $scope.selectedRow[i].paymentStatus = "refunded";
+                $scope.selectedRow[i].fulfillmentStatus = "refunded";
                 $scope.gridApi1.selection.clearSelectedRows();
                 $scope.refund.push($scope.selectedRow[i]);
                 $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.selectedRow[i]), 1);
@@ -884,6 +883,7 @@
             else{
                 for (var i = 0; i < $scope.row.length; i++) {
                     $scope.row[i].paymentStatus = "successful";
+                    $scope.row[i].fulfillmentStatus = "successful";
                     $scope.gridApi1.selection.clearSelectedRows();
                     $scope.fulfill.push($scope.row[i]);
                     $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.row[i]), 1);
