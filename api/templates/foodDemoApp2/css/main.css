@@ -85,7 +85,7 @@ ion-side-menu-content{
   font-weight: bolder;
 }
 .made-easy-content-font{
-  color:#4e6dde;
+  color:#73A3B9;
   font-family: Ubuntu Light;
   font-size: 12px;
   font-weight: lighter;
@@ -151,7 +151,8 @@ ion-side-menu-content{
     cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-contactUs .content {
-    text-align: center;
+    padding: 1em;
+    letter-spacing:1px;
     cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-contactUs .content .last {

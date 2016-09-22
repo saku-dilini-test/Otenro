@@ -135,14 +135,14 @@ ion-side-menu .list .activated{
 	color:#75A3B8;
 	border-color:transparent !important;
 	}
-	
-	
+
+
 	.item {
 		background-color:transparent;
     border-style:none !important;
 }
 .item2{
-   
+
     border-style:solid!important;
 }
 
@@ -152,7 +152,7 @@ ion-side-menu .list .activated{
 	cursor: url(../img/cursor.cur), auto;
 }
 
-.bar .title.title-left {
+.bar .title{
 	color: #75A3B8 !important;
 	cursor: url(../img/cursor.cur), auto;
 }
@@ -181,7 +181,7 @@ margin-left: 6.7%;
 	padding-bottom: 10px;
     border-bottom: solid thin RGBA(117, 163, 184, 0.29);
 	}
-	
+
 .item-thumbnail-left > img:first-child {
     position: absolute;
     top: 10px;
@@ -267,8 +267,12 @@ font-size: 100%;
 padding: 2px;
 text-align: center;
 	}
-	
-	
+
+h6{
+    font-size : 15px;
+    color: #73A3B9;
+}
+
 h2:first-child{
 	border-bottom:solid;
 	border-width:thin;
@@ -276,7 +280,7 @@ h2:first-child{
 	padding-bottom:10px;
 	color:#73A3B9;
 	margin:5px;
-	font-size:20px;
+	font-size:15px;
 }
 
 .card .item:first-child {
@@ -331,11 +335,11 @@ p{
 	border-radius:5px;
 	background-color:transparent !important;
 	}
-	
+
 .ng-binding{
-	padding:8px;
+	padding:5px;
 	}
-	
+
 .button-calm {
 	border-color: transparent;
     background-color: #75a3b8 !important;
@@ -343,7 +347,7 @@ p{
 	border-radius:0px !important;
 	cursor: url(../img/cursor.cur), auto;
 	}
-	
+
 	.padding .card, .padding .list-inset {
     margin-left: 0;
     margin-right: 0;
@@ -353,10 +357,10 @@ p{
 	text-align:center;
 }
 
-	
+
 h2, .h2 {
-		
-	
+
+
 border-bottom: solid;
 border-width: thin;
 border-bottom-color: #CCC;
@@ -377,7 +381,7 @@ input[type="text"]	{
 	border-color:#CCC !important;
 	border-bottom:solid 2px;
 	margin-bottom:10px;}
-	
+
 .button.button-assertive {
     border-color: transparent;
     background-color: #ef473a;
