@@ -153,8 +153,9 @@ ion-side-menu .list .activated{
 }
 
 .bar .title{
-	color: #75A3B8 !important;
+	color: #292929 !important;
 	cursor: url(../img/cursor.cur), auto;
+	margin:0;
 }
 
 .cards{
@@ -204,11 +205,8 @@ hr{
 }
 
 .bar .buttons-right span {
-    margin-left: 18px !important;
-    display: inherit;
-    padding-right: 10px !important;
     cursor: url(../img/cursor.cur), auto;
-
+    margin-left:0;
 }
 
 h4, .h4 {
@@ -337,7 +335,7 @@ p{
 	}
 
 .ng-binding{
-	padding:5px;
+	padding:7px 0;
 	}
 
 .button-calm {
@@ -439,4 +437,13 @@ ion-slides {
     height: auto;
     max-width: none;
     max-height: 100%;
+}
+
+.bar.bar-header{
+    border: unset;
+    background:transparent;
+}
+ion-header-bar button{
+    border: unset;
+    background-color:transparent !important;
 }

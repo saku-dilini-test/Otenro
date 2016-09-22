@@ -28,6 +28,7 @@
 }
 .cards-category{
     width: 40%;
+    min-height: 34vh;
     background-color: azure;
     cursor: url(../img/cursor.cur), auto;
 }
