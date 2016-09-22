@@ -36,7 +36,8 @@
                             {{currency.sign}} : {{selectedVariant.price}}
                         </div>
                         <div class="col col-33">
-                            <input type="number" min="1"
+                            <input class="select-tab-item"
+                                   type="number" min="1"
                                    ng-model="selectedVariant.buyQuantity"
                                    ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
                         </div>

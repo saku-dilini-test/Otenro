@@ -39,6 +39,7 @@ angular.module('starter.controllers', [])
                 $scope.rightIndex = $scope.itemList.length-1;
                 $scope.isEnableLeftButton = false;
                 $scope.isEnableRightButton = true;
+                       console.log($scope.itemList)
                 if($scope.rightIndex == -1){
                     $scope.isEnableRightButton = false;
                 }
