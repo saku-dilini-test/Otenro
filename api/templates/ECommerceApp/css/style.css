@@ -263,7 +263,8 @@ ion-slides {
 
 .delivery{
     position:absolute;
-    margin: 15px 13%;
+    margin: 15px 0;
+    width:100%;
 }
 
 .custom-form{
