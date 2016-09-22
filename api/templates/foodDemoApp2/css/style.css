@@ -105,17 +105,27 @@ padding-bottom:20px;}
 .item-complex .item-content, .item-radio .item-content {
     position: relative;
     z-index: 2;
-    padding: 16px 49px 16px 16px;
     border-color:transparent !important ;
 	background-color:transparent;
+    padding: 8px 0 8px 30px;
 }
 
 .item-complex {
     padding: 0;
 	border-color:transparent !important ;
-	font-size:14px;	
-	color:#AFAFAF;
-	padding-left:40px;
+	font-size:13px;
+	color:#FFF;
+	width:100%;
+	letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+ion-side-menu .list{
+    margin: 25% 0 0 0;
+}
+
+ion-side-menu .list .activated{
+    background-color: rgba(138, 225, 232, 0.56) !important;
 }
 
 .setting{
@@ -143,13 +153,10 @@ padding-bottom:20px;}
 }
 
 .bar .title.title-left {
-    text-align: left;
 	color: #75A3B8 !important;
-	width: 100%;
 	cursor: url(../img/cursor.cur), auto;
-	margin-top: 20px;
-    margin-left: -45px;
 }
+
 .cards{
 	max-width: 100%;
     margin: 20px auto;
@@ -385,6 +392,15 @@ input[type="text"]	{
 .menu-left {
 	background-image:url(../img/pay_out.png) !important;
 	}
+
+ion-side-menu{
+    width:200px !important;
+}
+
+.menu-open .menu-animated{
+    transform: translate3d(175px, 0px, 0px) !important;
+}
+
 img {
     width: 100%;
     border-radius: 5px 5px 0 0;
