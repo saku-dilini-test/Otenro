@@ -26,12 +26,30 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                 });
             }
 
-
+            // -- Config --
             $scope.userId = $rootScope.userId;
             $scope.appId = $rootScope.appId;
-
             $scope.cartItems = $rootScope.cart.cartItems;
+            // default : tax info hide 
+            $scope.isShowTaxInfo = false;
 
+            // Get Tax Information       
+            var taxInfoAPI_URL = constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId;     
+            $http.get(taxInfoAPI_URL)
+                .success(function(data) {
+                    var taxInfo = data;
+                    // if null tax information
+                    if(taxInfo == ''){
+                        $scope.tax = 0;
+                    }else{
+                        // First tax collection Tax-Amount apply to Product
+                        // ignore other 
+                        $scope.tax = taxInfo[0].taxAmount;
+                        $scope.isShowTaxInfo = true;
+                    }
+                });
+
+            // Calculate total amount function
             $scope.getTotal = function () {
                 var total = 0;
                 var amount = 0;
@@ -40,8 +58,15 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                     amount = product.total;
                     total += (amount);
                 }
-                $rootScope.cart.totalPrice = total;
-                return total;
+                var tax = total * $scope.tax/100;
+                if(tax > 0){
+                    total = total + tax;
+                    $rootScope.cart.totalPrice = total;
+                    return total;
+                }else{
+                    $rootScope.cart.totalPrice = total;
+                    return total;
+                }
             };
 
             $scope.getTotalQuantity = function () {
