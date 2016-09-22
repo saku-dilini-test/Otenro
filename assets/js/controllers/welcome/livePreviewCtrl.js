@@ -46,7 +46,23 @@
         $scope.tempUrl = $stateParams.tempUrl;
         $scope.tempName = $stateParams.tempName;
         $scope.tempCategory = $stateParams.tempCategory;
-        $scope.appTemplateUrl = $cookieStore.get('url');
+
+        // $stateParams console.log only testing
+        console.log('User ID : '+$stateParams.userId);
+        console.log('App ID : '+$stateParams.appId);
+        console.log('TempUrl : '+$stateParams.tempUrl);
+        console.log('Temp Name : '+$stateParams.tempName);
+        console.log('TempCategory : '+$stateParams.tempCategory);
+
+        var userID = $stateParams.userId;
+        var appID  = $stateParams.appId;
+
+        // App URL create $statePrams
+        $scope.appTemplateUrl = ME_APP_SERVER+'/temp'+'/'+userID+'/templates'+'/'+appID+'/';
+
+        // App URL get from cookiesStore
+        // $scope.appTemplateUrl = $cookieStore.get('url');
+
 
         $scope.deleteFile = function(userId,appId) {
 
