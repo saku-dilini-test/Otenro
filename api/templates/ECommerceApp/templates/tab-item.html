@@ -2,12 +2,16 @@
     <ion-content class="padding">
         <div class="list card">
             <div class="item item-body">
-                    <div class="image-wrapper">
-                        <!--<ion-slides options="sliderOptions" slider="sliderDelegate" >-->
-                            <!--<ion-slide-page ng-repeat="image in images">-->
-                                <img ng-src="{{imageURL}}/{{item.imageUrl}}" >
-                            <!--</ion-slide-page>-->
-                        <!--</ion-slides>-->
+                    <div class="image-wrapper order-item-slide">
+                        <ion-slides options="sliderOptions" slider="sliderDelegate" >
+                            <ion-slide-page ng-repeat="image in images">
+                                <img ng-src="img/thirdNavi/{{image.img}}" >
+                            </ion-slide-page>
+                        </ion-slides>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next ion-chevron-right"></div>
+                        <div class="swiper-button-prev ion-chevron-left"></div>
+
                         <!--<img ng-src="img/thirdNavi/{{item.imageUrl}}" width="100%">-->
                     </div>
 
