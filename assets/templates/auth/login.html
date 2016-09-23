@@ -34,13 +34,6 @@
         <input class="me-guest-google-login" ng-click="authenticate('google')"
                type="button" src="images/google-plus-icon.png" />
       </fieldset>
-      <fieldset>
-        <div class="checkbox me-guest-remember">
-          <label>
-            <input name="remember" type="checkbox" value="Remember Me"> Remember Me
-          </label>
-        </div>
-      </fieldset>
       <fieldset class="reset-margin text-right">
         <input type="button" class="me-default-button" ng-model="cancel" ng-click="cancel()" name="cancel" value="Cancel" />
         <button ng-disabled="register.$invalid" type="submit" class="me-default-button">
