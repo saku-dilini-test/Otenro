@@ -124,7 +124,7 @@ ion-side-menu-content{
     cursor: url(../img/cursor.cur), auto;
 }
 .made-easy-third-navigation .content {
-    text-align: right;
+    text-align: center  ;
     cursor: url(../img/cursor.cur), auto;
 }
 
