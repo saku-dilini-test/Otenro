@@ -179,7 +179,7 @@
                                 </td>
                                 <td>
                                   <md-input-container class="md-container-modify">
-                                    <input type="number"  min="0.01" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required>
+                                    <input type="number"  min="0.01" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required ignore-mouse-wheel>
                                       <div ng-messages="priceAndVariantsForm['price_' + $index].$error" ng-show="priceAndVariantsForm['price_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid price</div>
                                           <div ng-message="required" class="my-message">Required!</div>
@@ -190,7 +190,7 @@
 
                                 <td>
                                   <md-input-container class="md-container-modify">
-                                    <input type="number" name="qty_{{$index}}" min="1"  ng-pattern="/^\d+(?:[.]\d{1,}|$)$/" maxlength="8" ng-model="data.quantity" required>
+                                    <input type="number" name="qty_{{$index}}" min="1"  ng-pattern="/^\d+(?:[.]\d{1,}|$)$/" maxlength="8" ng-model="data.quantity" required ignore-mouse-wheel>
                                       <div ng-messages="priceAndVariantsForm['qty_' + $index].$error " ng-show="priceAndVariantsForm['qty_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid quantity</div>
                                           <div ng-message="required" class="my-message">Required!</div>
@@ -256,7 +256,7 @@
                                 <fieldset>
                                     <p>Product Price</p>
                                     <input type="number" name="name" ng-model="variants.price" id="input-price"
-                                           class="me-xs-input reset-inline" required/>
+                                           class="me-xs-input reset-inline" required ignore-mouse-wheel/>
                                 </fieldset>
                             </div>
                         </div>
