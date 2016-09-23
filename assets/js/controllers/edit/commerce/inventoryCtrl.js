@@ -111,21 +111,20 @@
             }
         }
         $scope.getArray = function(){
-        $scope.exportArrayN = [];
-        angular.forEach($scope.exportArray, function(value, key) {
-            $scope.exportArrayN.push({
+            $scope.exportArrayN = [];
+            angular.forEach($scope.exportArray, function(value, key) {
+                $scope.exportArrayN.push({
 
-                'Name' : value.name,
-                'sku' : value.sku,
-                'price' : value.price,
-                'quantity' : value.quantity,
-                'size' : value.size
+                    'Name' : value.name,
+                    'sku' : value.sku,
+                    'price' : value.price,
+                    'quantity' : value.quantity,
+                    'size' : value.size
 
+                });
             });
-        });
-        return $scope.exportArrayN;
+            return $scope.exportArrayN;
         }
-        console.log($scope.exportArrayN);
         $scope.inventoryList = productList;
 
 //            console.log("LLLLLLLLLLLLL")
