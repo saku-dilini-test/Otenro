@@ -181,9 +181,13 @@ ion-slides {
 .detailed-content .content{
     text-align:start;
 }
-.detailed-content .content span{
-    display:block;
-    margin: 7px;
+.detailed-content .content div{
+    padding: 7px;
+}
+
+.detailed-content .content label{
+    width:55px;
+    display:inline-block;
 }
 
 .logo{
@@ -342,7 +346,7 @@ ion-slides {
     font-size:11px;
     margin: auto;
 }
-.font-12 span{
+.font-12 div{
     font-size:11px;
     margin: auto;
 }
