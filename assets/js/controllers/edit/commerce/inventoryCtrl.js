@@ -110,14 +110,8 @@
                 delete productList[i]["variants"];
             }
         }
-        $scope.exportArrayN= [{
-            'Name':'Name',
-            'sku':'SKU',
-            'Price':'Price',
-            'Quantity':'Quantity',
-            'size':'Size'
-
-        }];
+        $scope.getArray = function(){
+        $scope.exportArrayN = [];
         angular.forEach($scope.exportArray, function(value, key) {
             $scope.exportArrayN.push({
 
@@ -129,16 +123,18 @@
 
             });
         });
+        return $scope.exportArrayN;
+        }
         console.log($scope.exportArrayN);
         $scope.inventoryList = productList;
 
-            console.log("LLLLLLLLLLLLL")
-            console.log("LLLLLLLLLLLLL")
+//            console.log("LLLLLLLLLLLLL")
+//            console.log("LLLLLLLLLLLLL")
             //console.log("LLLLLLLLLLLLL" + JSON.stringify(initialData))
             //console.log("LLLLLLLLLLLLL "+ JSON.stringify(inventoryList))
-            console.log("LLLLLLLLLLLLL")
-            console.log("LLLLLLLLLLLLL")
-            console.log("LLLLLLLLLLLLL")
+//            console.log("LLLLLLLLLLLLL")
+//            console.log("LLLLLLLLLLLLL")
+//            console.log("LLLLLLLLLLLLL")
             $scope.imageURL = SERVER_URL+
                 "api/edit/viewImages?userId="+$scope.userId
                 +"&appId="+$scope.appId+"&"
@@ -165,10 +161,10 @@
 
 
             $scope.updateInventory =function(){
-                console.log("&*&*&*&*&*&&*")
-                console.log("&*&*&*&*&*&&*")
-                console.log("&*&*&*&*&*&&* "+ JSON.stringify($scope.inventoryList));
-                console.log("&*&*&*&*&*&&*")
+//                console.log("&*&*&*&*&*&&*")
+//                console.log("&*&*&*&*&*&&*")
+//                console.log("&*&*&*&*&*&&* "+ JSON.stringify($scope.inventoryList));
+//                console.log("&*&*&*&*&*&&*")
                 var inventoryList = inventoryList;
 
 
@@ -194,9 +190,9 @@
                     }
                 }
                 productService.updateInventory({'inventoryList':$scope.inventoryList,where:{}}).$promise.then(function(data){
-                   console.log("XXXXVXVVVXVX")
-                   console.log("XXXXVXVVVXVX")
-                   console.log("XXXXVXVVVXVX")
+//                   console.log("XXXXVXVVVXVX")
+//                   console.log("XXXXVXVVVXVX")
+//                   console.log("XXXXVXVVVXVX")
                 });
                     //commerceService.updateInventory(inventoryList)
                     //    .success(function (result) {
