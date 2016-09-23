@@ -4,7 +4,8 @@
 
 var request = require('request'),
     JWT = require('machinepack-jwt'),
-    email = require("../../node_modules/emailjs/email");
+    email = require("../../node_modules/emailjs/email"),
+    config = require('../services/config');
 var path = require('path');
 
 var server = email.server.connect({
@@ -323,6 +324,7 @@ module.exports = {
                     //update the resetToken in the database
                     User.update(searchApp,{resetToken:resetToken}).exec(function(err,created){
                         if(err) console.log(err);
+                        var serverOrg=config.server.host+':'+config.server.port;
                         var emailDetails = {
                             text: "Email verification",
                             from: 'sallayshamila93@gmail.com',
@@ -332,7 +334,7 @@ module.exports = {
                             attachment: [
                                 {
                                     data: "<html>Hello "+app[0].firstName+",<br />"+
-                                          "<a href='http://localhost:1337/#/resetPassword/"+token+"'>Click here to verify your email address</a></html>",
+                                          "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click here to verify your email address</a></html>",
                                     alternative: true
                                 }
                             ]

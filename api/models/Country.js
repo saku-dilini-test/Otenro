@@ -18,10 +18,7 @@ module.exports = {
                         "countryCode": "AD",
                         "countryName": "Andorra"
                     },
-                    {
-                        "countryCode": "AE",
-                        "countryName": "United Arab Emirates"
-                    },
+
                     {
                         "countryCode": "AF",
                         "countryName": "Afghanistan"
@@ -33,6 +30,10 @@ module.exports = {
                     {
                         "countryCode": "AI",
                         "countryName": "Anguilla"
+                    },
+                    {
+                        "countryCode": "DZ",
+                        "countryName": "Algeria"
                     },
                     {
                         "countryCode": "AL",
@@ -114,10 +115,7 @@ module.exports = {
                         "countryCode": "BJ",
                         "countryName": "Benin"
                     },
-                    {
-                        "countryCode": "BL",
-                        "countryName": "Saint Barthélemy"
-                    },
+
                     {
                         "countryCode": "BM",
                         "countryName": "Bermuda"
@@ -125,6 +123,10 @@ module.exports = {
                     {
                         "countryCode": "BN",
                         "countryName": "Brunei"
+                    },
+                    {
+                        "countryCode": "IO",
+                        "countryName": "British Indian Ocean Territory"
                     },
                     {
                         "countryCode": "BO",
@@ -163,32 +165,24 @@ module.exports = {
                         "countryName": "Belize"
                     },
                     {
+                        "countryCode": "VG",
+                        "countryName": "British Virgin Islands"
+                    },
+                    {
                         "countryCode": "CA",
                         "countryName": "Canada"
+                    },
+                    {
+                        "countryCode": "TD",
+                        "countryName": "Chad"
                     },
                     {
                         "countryCode": "CC",
                         "countryName": "Cocos [Keeling] Islands"
                     },
                     {
-                        "countryCode": "CD",
-                        "countryName": "Democratic Republic of the Congo"
-                    },
-                    {
                         "countryCode": "CF",
                         "countryName": "Central African Republic"
-                    },
-                    {
-                        "countryCode": "CG",
-                        "countryName": "Republic of the Congo"
-                    },
-                    {
-                        "countryCode": "CH",
-                        "countryName": "Switzerland"
-                    },
-                    {
-                        "countryCode": "CI",
-                        "countryName": "Ivory Coast"
                     },
                     {
                         "countryCode": "CK",
@@ -197,6 +191,10 @@ module.exports = {
                     {
                         "countryCode": "CL",
                         "countryName": "Chile"
+                    },
+                    {
+                        "countryCode": "KH",
+                        "countryName": "Cambodia"
                     },
                     {
                         "countryCode": "CM",
@@ -219,6 +217,14 @@ module.exports = {
                         "countryName": "Cuba"
                     },
                     {
+                        "countryCode": "KY",
+                        "countryName": "Cayman Islands"
+                    },
+                    {
+                        "countryCode": "KM",
+                        "countryName": "Comoros"
+                    },
+                    {
                         "countryCode": "CV",
                         "countryName": "Cape Verde"
                     },
@@ -231,6 +237,10 @@ module.exports = {
                         "countryName": "Christmas Island"
                     },
                     {
+                        "countryCode": "HR",
+                        "countryName": "Croatia"
+                    },
+                    {
                         "countryCode": "CY",
                         "countryName": "Cyprus"
                     },
@@ -239,8 +249,8 @@ module.exports = {
                         "countryName": "Czech Republic"
                     },
                     {
-                        "countryCode": "DE",
-                        "countryName": "Germany"
+                        "countryCode": "CD",
+                        "countryName": "Democratic Republic of the Congo"
                     },
                     {
                         "countryCode": "DJ",
@@ -259,10 +269,6 @@ module.exports = {
                         "countryName": "Dominican Republic"
                     },
                     {
-                        "countryCode": "DZ",
-                        "countryName": "Algeria"
-                    },
-                    {
                         "countryCode": "EC",
                         "countryName": "Ecuador"
                     },
@@ -275,20 +281,20 @@ module.exports = {
                         "countryName": "Egypt"
                     },
                     {
-                        "countryCode": "EH",
-                        "countryName": "Western Sahara"
+                        "countryCode": "SV",
+                        "countryName": "El Salvador"
                     },
                     {
                         "countryCode": "ER",
                         "countryName": "Eritrea"
                     },
                     {
-                        "countryCode": "ES",
-                        "countryName": "Spain"
-                    },
-                    {
                         "countryCode": "ET",
                         "countryName": "Ethiopia"
+                    },
+                    {
+                        "countryCode": "GQ",
+                        "countryName": "Equatorial Guinea"
                     },
                     {
                         "countryCode": "FI",
@@ -303,8 +309,8 @@ module.exports = {
                         "countryName": "Falkland Islands"
                     },
                     {
-                        "countryCode": "FM",
-                        "countryName": "Micronesia"
+                        "countryCode": "GF",
+                        "countryName": "French Guiana"
                     },
                     {
                         "countryCode": "FO",
@@ -315,12 +321,20 @@ module.exports = {
                         "countryName": "France"
                     },
                     {
+                        "countryCode": "PF",
+                        "countryName": "French Polynesia"
+                    },
+                    {
+                        "countryCode": "TF",
+                        "countryName": "French Southern Territories"
+                    },
+                    {
                         "countryCode": "GA",
                         "countryName": "Gabon"
                     },
                     {
-                        "countryCode": "GB",
-                        "countryName": "United Kingdom"
+                        "countryCode": "DE",
+                        "countryName": "Germany"
                     },
                     {
                         "countryCode": "GD",
@@ -329,10 +343,6 @@ module.exports = {
                     {
                         "countryCode": "GE",
                         "countryName": "Georgia"
-                    },
-                    {
-                        "countryCode": "GF",
-                        "countryName": "French Guiana"
                     },
                     {
                         "countryCode": "GG",
@@ -362,17 +372,10 @@ module.exports = {
                         "countryCode": "GP",
                         "countryName": "Guadeloupe"
                     },
-                    {
-                        "countryCode": "GQ",
-                        "countryName": "Equatorial Guinea"
-                    },
+
                     {
                         "countryCode": "GR",
                         "countryName": "Greece"
-                    },
-                    {
-                        "countryCode": "GS",
-                        "countryName": "South Georgia and the South Sandwich Islands"
                     },
                     {
                         "countryCode": "GT",
@@ -403,10 +406,6 @@ module.exports = {
                         "countryName": "Honduras"
                     },
                     {
-                        "countryCode": "HR",
-                        "countryName": "Croatia"
-                    },
-                    {
                         "countryCode": "HT",
                         "countryName": "Haiti"
                     },
@@ -431,12 +430,12 @@ module.exports = {
                         "countryName": "Isle of Man"
                     },
                     {
-                        "countryCode": "IN",
-                        "countryName": "India"
+                        "countryCode": "CI",
+                        "countryName": "Ivory Coast"
                     },
                     {
-                        "countryCode": "IO",
-                        "countryName": "British Indian Ocean Territory"
+                        "countryCode": "IN",
+                        "countryName": "India"
                     },
                     {
                         "countryCode": "IQ",
@@ -479,40 +478,20 @@ module.exports = {
                         "countryName": "Kyrgyzstan"
                     },
                     {
-                        "countryCode": "KH",
-                        "countryName": "Cambodia"
-                    },
-                    {
                         "countryCode": "KI",
                         "countryName": "Kiribati"
-                    },
-                    {
-                        "countryCode": "KM",
-                        "countryName": "Comoros"
-                    },
-                    {
-                        "countryCode": "KN",
-                        "countryName": "Saint Kitts and Nevis"
-                    },
-                    {
-                        "countryCode": "KP",
-                        "countryName": "North Korea"
-                    },
-                    {
-                        "countryCode": "KR",
-                        "countryName": "South Korea"
                     },
                     {
                         "countryCode": "KW",
                         "countryName": "Kuwait"
                     },
                     {
-                        "countryCode": "KY",
-                        "countryName": "Cayman Islands"
-                    },
-                    {
                         "countryCode": "KZ",
                         "countryName": "Kazakhstan"
+                    },
+                    {
+                        "countryCode": "XK",
+                        "countryName": "Kosovo"
                     },
                     {
                         "countryCode": "LA",
@@ -523,16 +502,8 @@ module.exports = {
                         "countryName": "Lebanon"
                     },
                     {
-                        "countryCode": "LC",
-                        "countryName": "Saint Lucia"
-                    },
-                    {
                         "countryCode": "LI",
                         "countryName": "Liechtenstein"
-                    },
-                    {
-                        "countryCode": "LK",
-                        "countryName": "Sri Lanka"
                     },
                     {
                         "countryCode": "LR",
@@ -575,16 +546,16 @@ module.exports = {
                         "countryName": "Montenegro"
                     },
                     {
-                        "countryCode": "MF",
-                        "countryName": "Saint Martin"
-                    },
-                    {
                         "countryCode": "MG",
                         "countryName": "Madagascar"
                     },
                     {
                         "countryCode": "MH",
                         "countryName": "Marshall Islands"
+                    },
+                    {
+                        "countryCode": "FM",
+                        "countryName": "Micronesia"
                     },
                     {
                         "countryCode": "MK",
@@ -605,10 +576,6 @@ module.exports = {
                     {
                         "countryCode": "MO",
                         "countryName": "Macao"
-                    },
-                    {
-                        "countryCode": "MP",
-                        "countryName": "Northern Mariana Islands"
                     },
                     {
                         "countryCode": "MQ",
@@ -633,6 +600,10 @@ module.exports = {
                     {
                         "countryCode": "MV",
                         "countryName": "Maldives"
+                    },
+                    {
+                        "countryCode": "YT",
+                        "countryName": "Mayotte"
                     },
                     {
                         "countryCode": "MW",
@@ -667,6 +638,10 @@ module.exports = {
                         "countryName": "Norfolk Island"
                     },
                     {
+                        "countryCode": "MP",
+                        "countryName": "Northern Mariana Islands"
+                    },
+                    {
                         "countryCode": "NG",
                         "countryName": "Nigeria"
                     },
@@ -678,6 +653,11 @@ module.exports = {
                         "countryCode": "NL",
                         "countryName": "Netherlands"
                     },
+                    {
+                        "countryCode": "KP",
+                        "countryName": "North Korea"
+                    },
+
                     {
                         "countryCode": "NO",
                         "countryName": "Norway"
@@ -711,10 +691,6 @@ module.exports = {
                         "countryName": "Peru"
                     },
                     {
-                        "countryCode": "PF",
-                        "countryName": "French Polynesia"
-                    },
-                    {
                         "countryCode": "PG",
                         "countryName": "Papua New Guinea"
                     },
@@ -729,10 +705,6 @@ module.exports = {
                     {
                         "countryCode": "PL",
                         "countryName": "Poland"
-                    },
-                    {
-                        "countryCode": "PM",
-                        "countryName": "Saint Pierre and Miquelon"
                     },
                     {
                         "countryCode": "PN",
@@ -763,16 +735,16 @@ module.exports = {
                         "countryName": "Qatar"
                     },
                     {
+                        "countryCode": "CG",
+                        "countryName": "Republic of the Congo"
+                    },
+                    {
                         "countryCode": "RE",
                         "countryName": "Réunion"
                     },
                     {
                         "countryCode": "RO",
                         "countryName": "Romania"
-                    },
-                    {
-                        "countryCode": "RS",
-                        "countryName": "Serbia"
                     },
                     {
                         "countryCode": "RU",
@@ -791,12 +763,32 @@ module.exports = {
                         "countryName": "Solomon Islands"
                     },
                     {
+                        "countryCode": "CH",
+                        "countryName": "Switzerland"
+                    },
+                    {
+                        "countryCode": "LK",
+                        "countryName": "Sri Lanka"
+                    },
+                    {
                         "countryCode": "SC",
                         "countryName": "Seychelles"
                     },
                     {
+                        "countryCode": "KR",
+                        "countryName": "South Korea"
+                    },
+                    {
                         "countryCode": "SD",
                         "countryName": "Sudan"
+                    },
+                    {
+                        "countryCode": "RS",
+                        "countryName": "Serbia"
+                    },
+                    {
+                        "countryCode": "PM",
+                        "countryName": "Saint Pierre and Miquelon"
                     },
                     {
                         "countryCode": "SE",
@@ -807,8 +799,20 @@ module.exports = {
                         "countryName": "Singapore"
                     },
                     {
+                        "countryCode": "KN",
+                        "countryName": "Saint Kitts and Nevis"
+                    },
+                    {
                         "countryCode": "SH",
                         "countryName": "Saint Helena"
+                    },
+                    {
+                        "countryCode": "MF",
+                        "countryName": "Saint Martin"
+                    },
+                    {
+                        "countryCode": "ES",
+                        "countryName": "Spain"
                     },
                     {
                         "countryCode": "SI",
@@ -817,6 +821,10 @@ module.exports = {
                     {
                         "countryCode": "SJ",
                         "countryName": "Svalbard and Jan Mayen"
+                    },
+                    {
+                        "countryCode": "GS",
+                        "countryName": "South Georgia and the South Sandwich Islands"
                     },
                     {
                         "countryCode": "SK",
@@ -851,10 +859,6 @@ module.exports = {
                         "countryName": "São Tomé and Príncipe"
                     },
                     {
-                        "countryCode": "SV",
-                        "countryName": "El Salvador"
-                    },
-                    {
                         "countryCode": "SX",
                         "countryName": "Sint Maarten"
                     },
@@ -867,16 +871,28 @@ module.exports = {
                         "countryName": "Swaziland"
                     },
                     {
+                        "countryCode": "BL",
+                        "countryName": "Saint Barthélemy"
+                    },
+                    {
+                        "countryCode": "LC",
+                        "countryName": "Saint Lucia"
+                    },
+                    {
+                        "countryCode": "VC",
+                        "countryName": "Saint Vincent and the Grenadines"
+                    },
+                    {
+                        "countryCode": "ZA",
+                        "countryName": "South Africa"
+                    },
+                    {
+                        "countryCode": "WS",
+                        "countryName": "Samoa"
+                    },
+                    {
                         "countryCode": "TC",
                         "countryName": "Turks and Caicos Islands"
-                    },
-                    {
-                        "countryCode": "TD",
-                        "countryName": "Chad"
-                    },
-                    {
-                        "countryCode": "TF",
-                        "countryName": "French Southern Territories"
                     },
                     {
                         "countryCode": "TG",
@@ -939,12 +955,20 @@ module.exports = {
                         "countryName": "Uganda"
                     },
                     {
+                        "countryCode": "AE",
+                        "countryName": "United Arab Emirates"
+                    },
+                    {
                         "countryCode": "UM",
                         "countryName": "U.S. Minor Outlying Islands"
                     },
                     {
                         "countryCode": "US",
                         "countryName": "United States"
+                    },
+                    {
+                        "countryCode": "GB",
+                        "countryName": "United Kingdom"
                     },
                     {
                         "countryCode": "UY",
@@ -955,24 +979,16 @@ module.exports = {
                         "countryName": "Uzbekistan"
                     },
                     {
+                        "countryCode": "VI",
+                        "countryName": "U.S. Virgin Islands"
+                    },
+                    {
                         "countryCode": "VA",
                         "countryName": "Vatican City"
                     },
                     {
-                        "countryCode": "VC",
-                        "countryName": "Saint Vincent and the Grenadines"
-                    },
-                    {
                         "countryCode": "VE",
                         "countryName": "Venezuela"
-                    },
-                    {
-                        "countryCode": "VG",
-                        "countryName": "British Virgin Islands"
-                    },
-                    {
-                        "countryCode": "VI",
-                        "countryName": "U.S. Virgin Islands"
                     },
                     {
                         "countryCode": "VN",
@@ -987,24 +1003,12 @@ module.exports = {
                         "countryName": "Wallis and Futuna"
                     },
                     {
-                        "countryCode": "WS",
-                        "countryName": "Samoa"
-                    },
-                    {
-                        "countryCode": "XK",
-                        "countryName": "Kosovo"
+                        "countryCode": "EH",
+                        "countryName": "Western Sahara"
                     },
                     {
                         "countryCode": "YE",
                         "countryName": "Yemen"
-                    },
-                    {
-                        "countryCode": "YT",
-                        "countryName": "Mayotte"
-                    },
-                    {
-                        "countryCode": "ZA",
-                        "countryName": "South Africa"
                     },
                     {
                         "countryCode": "ZM",
