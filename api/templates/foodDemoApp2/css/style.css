@@ -105,17 +105,27 @@ padding-bottom:20px;}
 .item-complex .item-content, .item-radio .item-content {
     position: relative;
     z-index: 2;
-    padding: 16px 49px 16px 16px;
     border-color:transparent !important ;
 	background-color:transparent;
+    padding: 8px 0 8px 30px;
 }
 
 .item-complex {
     padding: 0;
 	border-color:transparent !important ;
-	font-size:14px;	
-	color:#AFAFAF;
-	padding-left:40px;
+	font-size:13px;
+	color:#FFF;
+	width:100%;
+	letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+ion-side-menu .list{
+    margin: 25% 0 0 0;
+}
+
+ion-side-menu .list .activated{
+    background-color: rgba(138, 225, 232, 0.56) !important;
 }
 
 .setting{
@@ -125,14 +135,14 @@ padding-bottom:20px;}
 	color:#75A3B8;
 	border-color:transparent !important;
 	}
-	
-	
+
+
 	.item {
 		background-color:transparent;
     border-style:none !important;
 }
 .item2{
-   
+
     border-style:solid!important;
 }
 
@@ -142,14 +152,12 @@ padding-bottom:20px;}
 	cursor: url(../img/cursor.cur), auto;
 }
 
-.bar .title.title-left {
-    text-align: left;
-	color: #75A3B8 !important;
-	width: 100%;
+.bar .title{
+	color: #292929 !important;
 	cursor: url(../img/cursor.cur), auto;
-	margin-top: 20px;
-    margin-left: -45px;
+	margin:0;
 }
+
 .cards{
 	max-width: 100%;
     margin: 20px auto;
@@ -174,7 +182,7 @@ margin-left: 6.7%;
 	padding-bottom: 10px;
     border-bottom: solid thin RGBA(117, 163, 184, 0.29);
 	}
-	
+
 .item-thumbnail-left > img:first-child {
     position: absolute;
     top: 10px;
@@ -197,11 +205,8 @@ hr{
 }
 
 .bar .buttons-right span {
-    margin-left: 18px !important;
-    display: inherit;
-    padding-right: 10px !important;
     cursor: url(../img/cursor.cur), auto;
-
+    margin-left:0;
 }
 
 h4, .h4 {
@@ -260,8 +265,12 @@ font-size: 100%;
 padding: 2px;
 text-align: center;
 	}
-	
-	
+
+h6{
+    font-size : 15px;
+    color: #73A3B9;
+}
+
 h2:first-child{
 	border-bottom:solid;
 	border-width:thin;
@@ -269,7 +278,7 @@ h2:first-child{
 	padding-bottom:10px;
 	color:#73A3B9;
 	margin:5px;
-	font-size:20px;
+	font-size:15px;
 }
 
 .card .item:first-child {
@@ -324,11 +333,11 @@ p{
 	border-radius:5px;
 	background-color:transparent !important;
 	}
-	
+
 .ng-binding{
-	padding:8px;
+	padding:7px 0;
 	}
-	
+
 .button-calm {
 	border-color: transparent;
     background-color: #75a3b8 !important;
@@ -336,7 +345,7 @@ p{
 	border-radius:0px !important;
 	cursor: url(../img/cursor.cur), auto;
 	}
-	
+
 	.padding .card, .padding .list-inset {
     margin-left: 0;
     margin-right: 0;
@@ -346,10 +355,10 @@ p{
 	text-align:center;
 }
 
-	
+
 h2, .h2 {
-		
-	
+
+
 border-bottom: solid;
 border-width: thin;
 border-bottom-color: #CCC;
@@ -370,7 +379,7 @@ input[type="text"]	{
 	border-color:#CCC !important;
 	border-bottom:solid 2px;
 	margin-bottom:10px;}
-	
+
 .button.button-assertive {
     border-color: transparent;
     background-color: #ef473a;
@@ -385,6 +394,15 @@ input[type="text"]	{
 .menu-left {
 	background-image:url(../img/pay_out.png) !important;
 	}
+
+ion-side-menu{
+    width:200px !important;
+}
+
+.menu-open .menu-animated{
+    transform: translate3d(175px, 0px, 0px) !important;
+}
+
 img {
     width: 100%;
     border-radius: 5px 5px 0 0;
@@ -419,4 +437,13 @@ ion-slides {
     height: auto;
     max-width: none;
     max-height: 100%;
+}
+
+.bar.bar-header{
+    border: unset;
+    background:transparent;
+}
+ion-header-bar button{
+    border: unset;
+    background-color:transparent !important;
 }

@@ -42,10 +42,11 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
   // setup an abstract state for the tabs directive
-    .state('tab', {
+
+   .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html',
+    templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
   })
 
@@ -56,7 +57,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
       item: null
     },
     views: {
-      'tab-menu': {
+      'menuContent': {
         templateUrl: 'templates/login.html',
       }
     }
@@ -67,7 +68,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
       item: null
     },
     views: {
-      'tab-menu': {
+      'menuContent': {
         templateUrl: 'templates/register.html',
         controller: 'RegisterCtrl'
       }
@@ -76,7 +77,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
   .state('tab.home', {
     url: '/home',
     views: {
-      'tab-home': {
+          'menuContent': {
         templateUrl: 'templates/tab-home.html',
         controller: 'HomeCtrl'
       }
@@ -85,7 +86,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     .state('tab.menu', {
     url: '/menu',
     views: {
-      'tab-menu': {
+      'menuContent': {
         templateUrl: 'templates/tab-menu.html',
         controller: 'MenuCtrl'
       }
@@ -94,7 +95,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     .state('tab.items', {
     url: '/menu/:menuId/:menuName',
     views: {
-      'tab-menu': {
+      'menuContent': {
         templateUrl: 'templates/tab-items.html',
         controller: 'ItemsCtrl'
       }
@@ -107,7 +108,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
        item: null
     },
     views: {
-      'tab-menu': {
+      'menuContent': {
         templateUrl: 'templates/tab-item.html',
         controller: 'ItemCtrl'
       }
@@ -116,7 +117,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     .state('tab.cart', {
      url: '/cart',
      views: {
-           'tab-menu': {
+           'menuContent': {
              templateUrl: 'templates/cart.html',
              controller: 'CartCtrl'
            }
@@ -129,7 +130,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
         item: null
       },
       views: {
-        'tab-menu': {
+        'menuContent': {
           templateUrl: 'templates/deliverDetails.html',
           controller: 'CartCtrl'
         }
@@ -139,7 +140,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
         cache: false,
         url: '/pickup',
         views: {
-          'tab-menu': {
+          'menuContent': {
             templateUrl: 'templates/pickup.html',
             controller: 'pickupCtrl'
           }
@@ -148,7 +149,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     .state('tab.ourStores', {
     url: '/ourStores',
     views: {
-      'tab-ourStores': {
+      'menuContent': {
         templateUrl: 'templates/tab-ourStores.html',
         controller: 'OurStoresCtrl'
       }
@@ -158,7 +159,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
       cache: false,
       url: '/aboutUs',
       views: {
-        'tab-aboutUs': {
+        'menuContent': {
           templateUrl: 'templates/aboutUs.html',
           controller: 'OurStoresCtrl'
         }
@@ -168,7 +169,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     cache: false,
     url: '/contactUs',
     views: {
-      'tab-contactUs': {
+      'menuContent': {
         templateUrl: 'templates/tab-contactUs.html',
         controller: 'ContactUsCtrl'
       }

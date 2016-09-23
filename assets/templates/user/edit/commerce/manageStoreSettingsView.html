@@ -327,7 +327,7 @@
                             <fieldset>
                                 <!-- Address -->
                                 <label>Address</label>
-                                <textarea type="text" name="address" ng-model="basicInfo.address" required ></textarea>
+                                <textarea type="text" class="input-shadow-border" name="address" ng-model="basicInfo.address" required ></textarea>
                                 <div ng-hide="basicInfo.address.length > maxBasicInfoAddress">
                                     <span>Characters left: {{maxBasicInfoAddress - basicInfo.address.length}}</span>
                                 </div>
@@ -341,19 +341,19 @@
                             <fieldset>
                                 <!-- Telephone -->
                                 <label>Telephone</label>
-                                <input type="text" name="telPhone" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" ui-mask="(999) 999-9999"  required />
+                                <input class="input-shadow-border" type="text" name="telPhone" ng-model="basicInfo.telPhone" ng-pattern="/[0-9]+/" ui-mask="(999) 999-9999"  required />
                             </fieldset>
                             <fieldset>
                                 <!-- Email -->
                                 <label>Email</label>
-                                <input type="email" name="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                <input  type="email" name="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                        ng-model="webInfo.email" required />
                                 <span class="error" ng-show="basicInfoForm.email.$error.email || basicInfoForm.email.$error.pattern">Invalid email!</span>
                             </fieldset>
                             <fieldset>
                                 <!-- Web Site -->
                                 <label>Website</label>
-                                <input type="text" name="website" ng-model="webInfo.webSite"
+                                <input class="input-shadow-border" type="text" name="website" ng-model="webInfo.webSite"
                                        ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" required />
                                 <br/>
                                 <span class="error" ng-show="basicInfoForm.website.$error.pattern">Invalid url!</span>

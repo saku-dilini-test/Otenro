@@ -7,12 +7,10 @@
 
 module.exports = {
 
+  schema : true,
   attributes : {
-    schema : true,
-    attributes : {
-      reason : {
-        type : 'string'
-      }
+    reason : {
+      type : 'string'
     }
   },
   seedData: [

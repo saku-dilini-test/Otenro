@@ -1,71 +1,79 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="{{itemName}}">
     <ion-content class="padding">
-        <div class="cards cards-item">
-            <div class="header">
-                <div class="header-image">
-                    <ion-slides options="sliderOptions" slider="sliderDelegate" >
-                        <ion-slide-page ng-repeat="image in images">
-                            <img ng-src="{{imageURL}}/{{image.img}}" >
-                        </ion-slide-page>
-                    </ion-slides>
-                    <!--<img ng-src="img/thirdNavi/{{item.imageUrl}}" width="100%">-->
-                </div>
-            </div>
+        <div class="list card">
+            <div class="item item-body">
+                    <div class="image-wrapper">
+                        <!--<ion-slides options="sliderOptions" slider="sliderDelegate" >-->
+                            <!--<ion-slide-page ng-repeat="image in images">-->
+                                <img ng-src="{{imageURL}}/{{item.imageUrl}}" >
+                            <!--</ion-slide-page>-->
+                        <!--</ion-slides>-->
+                        <!--<img ng-src="img/thirdNavi/{{item.imageUrl}}" width="100%">-->
+                    </div>
 
-            <div class="item item-text-wrap">
-                <div class="animated rubberBand item-name" >
-                    <div class="made-easy-header-font">{{item.name}}</div>
-                </div>
-                <div class="animated zoomIn">
-                    <div class="made-easy-content-font">{{item.detailedDesc}}</div>
-                </div>
-                <div class="row">
-                    <div class="col2 font-size:12px ">{{item.selection}}</div>
-                    <div class="col2 font-size:12px">Price</div>
-                    <div class="col2 font-size:12px">Qty</div>
-                </div>
-                <div class="row">
-                    <select ng-model="selectedVariant"
-                            ng-options="variant.size  for variant in item.variants"
-                            ng-change="changeVariant(selectedVariant)">
-                    </select>
-                    <div class="col2 font-size:12px">
-                        {{currency.sign}} : {{selectedVariant.price}}
+                <div class="">
+                    <div class="header-fonts" >
+                        <span class="made-easy-header-font">{{item.name}}</span>
                     </div>
-                    <div class="col2">
-                        <input type="number" style="width: 50px;" min="1"
-                               ng-model="selectedVariant.buyQuantity"
-                               ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
+                    <div class="description">
+                        <span class="made-easy-content-font">{{item.detailedDesc}}</span>
                     </div>
-                </div>
-                <!-- Buy Qty error message -->
-                <div class="row">
-                    <!-- Product not available in store -->
-                    <div ng-if="selectedVariant.quantity == 0">
-                            <span class="animated zoomIn item-error-message">
-                                Product not available
-                            </span>
+                    <div class="cart-item-header">
+                        <div class="row">
+                            <div class="col">{{item.selection}}</div>
+                            <div class="col">Price</div>
+                            <div class="col">Qty</div>
+                         </div>
                     </div>
-                    <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
-                    <div ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
-                            <span class="animated zoomIn item-error-message">
-                                Please enter a quantity of {{selectedVariant.quantity}} or less.
-                            </span>
+                    <div class="row font-12">
+                        <div class="col col-33">
+                                <select ng-model="selectedVariant"
+                                        ng-options="variant.size  for variant in item.variants"
+                                        ng-change="changeVariant(selectedVariant)">
+                                </select>
+                        </div>
+                        <div class="col col-33">
+                            {{currency.sign}} : {{selectedVariant.price}}
+                        </div>
+                        <div class="col col-33">
+                            <input class="select-tab-item"
+                                   type="number" min="1"
+                                   ng-model="selectedVariant.buyQuantity"
+                                   ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
+                        </div>
                     </div>
-                    <div ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
-                            <span class="animated zoomIn item-error-message">
-                                Please enter a quantity of {{selectedVariant.quantity}}.
-                            </span>
+                    <!-- Buy Qty error message -->
+                    <div class="row">
+                        <!-- Product not available in store -->
+                        <div ng-if="selectedVariant.quantity == 0">
+                                <span class="animated zoomIn item-error-message">
+                                    Product not available
+                                </span>
+                        </div>
+                        <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+                        <div ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
+                                <span class="animated zoomIn item-error-message">
+                                    Please enter a quantity of {{selectedVariant.quantity}} or less.
+                                </span>
+                        </div>
+                        <div ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
+                                <span class="animated zoomIn item-error-message">
+                                    Please enter a quantity of {{selectedVariant.quantity}}.
+                                </span>
+                        </div>
                     </div>
-                </div>
-                <!-- Bye Button -->
-                <div class="row">
-                    <div class="col2">
-                        <button class="button button-small button-calm"
-                                ng-disabled="isBuyBtnDisable"
-                                ng-click="addToCart()">
-                            Buy
-                        </button>
+                    <!-- Buy Button -->
+                            <div class="row btn-full">
+                                <div class="col">
+                                </div>
+                                <button class="button button-small button-calm col"
+                                        ng-disabled="isBuyBtnDisable"
+                                        ng-click="addToCart()">
+                                    Buy
+                                </button>
+                                <div class="col">
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>

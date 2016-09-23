@@ -933,7 +933,7 @@ table{
 .me-simple-table th{
     background-color: #fff;
     color: #747474;
-    padding: 8px 20px;
+    padding: 12px 0px;
 }
 
 .me-simple-table td{
@@ -1696,6 +1696,10 @@ md-dialog .md-actions .md-button {
     width: 48%;
 }
 
+.password-area-row {
+    padding-left: 3.5%;
+    padding-right: 3.5%;
+}
 /******************************************************
 ********************User Profile***********************
 ******************************************************/

@@ -1,15 +1,20 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$rootScope) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$rootScope, $ionicSideMenuDelegate) {
 
     $rootScope.cart = {cartItems:[],cartSize:0,totalPrice:0};
 
     $scope.parentobj = {};
     $scope.parentobj.cartSize = $rootScope.cart.cartSize;
 
+     function toggleLeft() {
+        $ionicSideMenuDelegate.toggleLeft();
+      };
+
 })
 
-.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants) {
+.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants, $ionicTabsDelegate
+) {
 
     $ionicLoading.show({
         template: '<ion-spinner icon="lines"  class="spinner-energized" ></ion-spinner>'
@@ -21,6 +26,7 @@ angular.module('starter.controllers', [])
     }, 1000);
 
     // get all items function
+
     function getAllItemByAppId() {
         readMadeEasy.readFile().success(function(appData){
         appServices.getAllItemByAppId(appData.appId)
@@ -33,56 +39,64 @@ angular.module('starter.controllers', [])
                 $scope.rightIndex = $scope.itemList.length-1;
                 $scope.isEnableLeftButton = false;
                 $scope.isEnableRightButton = true;
+                       console.log($scope.itemList)
                 if($scope.rightIndex == -1){
                     $scope.isEnableRightButton = false;
                 }
                 // initial set as 0 index
                 $scope.setItem(0);
+
             }).error(function (err) {
                 $ionicLoading.hide();
                 alert('Items Loading error');
             });
-            
+
             // defined third navigation image path
             $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+ appData.userId +
                               "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";
         });
     }
-
-    /* ----- Swipe Function start ----- */
-    // Configuration
-        /** Configuration has inside getAllItemByAppId function  **/
-
-    // view item 
-    $scope.item = {};  
-    // item set function     
-    $scope.setItem = function(id){    
-        if($scope.leftIndex <= id && id <= $scope.rightIndex){            
+    // view item
+    $scope.item = {};
+    // item set function
+    $scope.setItem = function(id){
+        if($scope.leftIndex <= id && id <= $scope.rightIndex){
             $scope.item = $scope.itemList[id];
-        }        
+        }
     }
 
-    // left swipe function 
-    $scope.onSwipeLeft = function(){        
-        if($scope.startIndex > $scope.leftIndex)
-            $scope.startIndex = $scope.startIndex - 1;        
-        $scope.isEnableRightButton = true;
-        $scope.setItem($scope.startIndex);
-        if($scope.startIndex == $scope.leftIndex){
-            $scope.isEnableLeftButton = false;
-        }    
-    };
-    // Right swipe function 
-    $scope.onSwipeRight = function(){        
-        if($scope.startIndex < $scope.rightIndex)
-            $scope.startIndex = $scope.startIndex + 1;
-        $scope.setItem($scope.startIndex);
-        $scope.isEnableLeftButton = true;
-        if($scope.startIndex == $scope.rightIndex){
-            $scope.isEnableRightButton = false;
-        }                    
-    };
-    /* ----- Eng Swipe Fucntion  ----- */
+
+    // get all menu by app Id
+        readMadeEasy.readFile().success(function(appData){
+            appServices.getAllMenuByAppId(appData.appId)
+                .success(function (data) {
+                    $scope.categoryList = data;
+                }).error(function (err) {
+                    alert('Menu Loading error');
+            });
+
+            // defined second navigation image path
+            $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
+                              "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
+        });
+
+        // ionic slider options
+        $scope.options = {
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            pagination: '.swiper-pagination',
+            paginationType: 'fraction',
+            effect: 'coverflow',
+            centeredSlides: true,
+            coverflow: {
+                        rotate: 50,
+                        stretch: 0,
+                        depth: 100,
+                        modifier: 1,
+                        slideShadows : true
+                    }
+        }
+
 })
 
 .controller('MenuCtrl', function($scope,appServices,readMadeEasy,constants) {
@@ -103,10 +117,24 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ItemsCtrl', function($scope,$stateParams,$state,appServices,readMadeEasy,constants) {
+    // get all menu by app Id
+            readMadeEasy.readFile().success(function(appData){
+                appServices.getAllMenuByAppId(appData.appId)
+                    .success(function (data) {
+                        $scope.categoryList = data;
+
+                    }).error(function (err) {
+                        alert('Menu Loading error');
+                });
+
+                // defined second navigation image path
+                $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
+                                  "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
+            });
+
 
     // set select Menu Name
     $scope.menuName = $stateParams.menuName;
-
     // set select Menu Id
     var menuId = $stateParams.menuId;
     // get all item by menu Id
@@ -126,6 +154,24 @@ angular.module('starter.controllers', [])
     $scope.navigateFood = function(item){
         $state.go('tab.item',{item:item})
     }
+
+    // ionic slider options
+     $scope.options = {
+                 nextButton: '.swiper-button-next',
+                 prevButton: '.swiper-button-prev',
+                 pagination: '.swiper-pagination',
+                 paginationType: 'fraction',
+                 effect: 'coverflow',
+                 centeredSlides: true,
+                 coverflow: {
+                             rotate: 50,
+                             stretch: 0,
+                             depth: 100,
+                             modifier: 1,
+                             slideShadows : true
+                         }
+             }
+
 })
 
 .controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices,readMadeEasy,constants) {
@@ -231,8 +277,19 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('OurStoresCtrl', function($scope) {
-    
+.controller('OurStoresCtrl', function($scope, $http, $rootScope, $ionicPopup, constants) {
+
+    $http.get(constants.SERVER_URL + "/templates/getAboutUs?appId="+$rootScope.appId)
+            .success(function (data) {
+                $scope.header = data.header;
+                $scope.content = data.content;
+            },function (err) {
+                $ionicPopup.alert({
+                    title: 'About us Data loading error!',
+                    template: 'Please check your connection!'
+                });
+            });
+
     // This is dummy data, should come from db
     $scope.stores = [
         {

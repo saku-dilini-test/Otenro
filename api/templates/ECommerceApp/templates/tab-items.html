@@ -1,24 +1,47 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="{{menuName}}">
     <ion-content class="padding">
-        <div ng-repeat="item in itemList" >
-            <a  ui-sref="tab.item({item:item})">
-                <div class="cards cards-items">
-                    <div class="header">
-                        <div class="header-image">
-                            <img ng-src="{{imageURL}}/{{item.imageUrl}}" width="100%">
+
+        <ion-slides  options="options" slider="data.slider" options="options">
+            <ion-slide-page ng-repeat="item in itemList" >
+                <div class="list card">
+                    <div class="item item-body">
+                        <div class="image-wrapper">
+                            <img src="{{imageURL}}/{{item.imageUrl}}">
+                        </div>
+                        <div class="header-fonts">
+                            <span class="made-easy-header-font">{{item.name}}</span>
+                            <span>{{item.price}}</span>
+                        </div>
+                        <div class="header-fonts">
+                            <span class="made-easy-header-font" ng-repeat="variant in item.variants">{{variant.price}}</span>
+                        </div>
+
+                        <div class="description">
+                            <span class="made-easy-content-font">{{item.detailedDesc}}</span>
+                        </div>
+                        <div  class="btn-full">
+                            <button class="button button-balanced" ui-sref="tab.item({item:item})">ORDER NOW</button>
                         </div>
                     </div>
+                </div>
+            </ion-slide-page>
+        </ion-slides>
 
-                    <div class="made-easy-header-font">
-                        <p>{{item.name}}</p>
-                        <p>{{item.price}}</p>
-                    </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next ion-chevron-right"></div>
+        <div class="swiper-button-prev ion-chevron-left"></div>
 
-                    <div class="made-easy-content-font">
-                        <p>+details</p>
+            <ion-scroll zooming="true" direction="x">
+                <div style="height: 40px;">
+                     <div class="tabs tab-color-custom">
+                        <a class="tab-item" href="#/home">
+                            All Items
+                        </a>
+                        <a class="tab-item " ng-repeat="category in categoryList"  href="#/tab/menu/{{category.id}}/{{category.name}}">
+                            {{category.name}}
+                        </a>
                     </div>
                 </div>
-            </a>
-        </div>
+            </ion-scroll>
     </ion-content>
 </ion-view>

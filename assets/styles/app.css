@@ -562,3 +562,6 @@ overriding pull-left changes other styles too therefor commented
 .disable-all {
     cursor: not-allowed;
 }
+.ui-grid-cell.ui-grid-disable-selection.ui-grid-row-header-cell {
+  pointer-events: auto;
+}
