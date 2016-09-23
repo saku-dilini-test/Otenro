@@ -1,5 +1,5 @@
-<ion-view view-title="Menu">
-    <ion-content class="made-easy-background-image made-easy-background-color made-easy-second-navigation">
+<ion-view  class="made-easy-background-image made-easy-background-color " view-title="Menu">
+    <ion-content class="made-easy-second-navigation">
        <a ng-repeat="category in categories" href="#/app/category/{{category.id}}/{{category.name}}">
            <div class="cards animated zoomIn">
                <div class="header">
@@ -8,8 +8,8 @@
                    </div>
                </div>
                <div class="content">
-                   <h2>{{category.name}}</h2>
-                   <p>{{category.description}}</p>
+                   <h6>{{category.name}}</h6>
+                   <!--<p>{{category.description}}</p>-->
                </div>
            </div>
        </a>
