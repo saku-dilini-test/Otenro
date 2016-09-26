@@ -12,6 +12,8 @@
         </div>
     </div>
 
+
+
     <md-input-container>
         <label><b>STORE LISTING</b></label>
     </md-input-container>
@@ -33,23 +35,23 @@
                         </md-input-container>
                         <md-input-container class="md-block" flex="50">
                             <label>Application Title</label>
-                            <input name="favoriteColor" md-maxlength="30" ng-model="publishDetails[0].name" required>
-                            <div ng-messages="publishForm.name.$error">
+                            <input name="favoriteColor" md-maxlength="30" ng-model="publishDetails[0].title" required>
+                            <div ng-messages="publishForm.title.$error">
                                 <div ng-message="required">This is required!</div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block" flex="50">
                             <label>Short description</label>
-                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].springBoardName" required>
-                            <div ng-messages="publishForm.springBoardName.$error">
+                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].shortDescription" required>
+                            <div ng-messages="publishForm.shortDescription.$error">
                                 <div ng-message="required">This is required!</div>
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block" flex="50">
                             <label>Full description</label>
                         <textarea type="area" required  md-maxlength="4000" name="description" rows="2"
-                                ng-model="publishDetails[0].description" > </textarea>
-                            <div ng-messages="publishForm.description.$error">
+                                ng-model="publishDetails[0].fullDescription" > </textarea>
+                            <div ng-messages="publishForm.fullDescription.$error">
                                 <div ng-message="required">This is required!</div>
                             </div>
                         </md-input-container>
@@ -114,8 +116,8 @@
                         </md-input-container>
                         <md-input-container>
                             <label> Category</label>
-                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].category" required>
-                            <div ng-messages="publishForm.category.$error">
+                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].primaryCategory" required>
+                            <div ng-messages="publishForm.primaryCategory.$error">
                                 <div ng-message="required">This is required!</div>
                             </div>
                         </md-input-container>
@@ -169,6 +171,7 @@
 
             </md-tabs>
         </md-content>
+        <a href="#technicalSupport">Application list</a>
     </div>
     </form>
 

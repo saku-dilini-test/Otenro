@@ -15,10 +15,10 @@ module.exports = {
         category :{
             type: 'string'
         },
-        name:{
+        title:{
             type: 'string'
         },
-        springBoardName:{
+        shortDescription:{
             type: 'string'
         },
         language:{
@@ -30,10 +30,7 @@ module.exports = {
         secondaryCategory:{
             type: 'string'
         },
-        description:{
-            type: 'string'
-        },
-        keywords:{
+        fullDescription:{
             type: 'string'
         },
         file:{
@@ -50,6 +47,18 @@ module.exports = {
         },
         splash4:{
             type:'string'
+        },
+        applicationType: {
+            type:'string'
+        },
+        contentRating : {
+            type:'string'
+        },
+        email : {
+            type:'string'
+        },
+        appType : {
+            type: 'string' 
         },
         copyrights:{
             type: 'string'

@@ -7,10 +7,25 @@
         // config
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
         // max character length defined
-        $scope.maxName = 20;
-        $scope.maxSpringBoardName = 20;
-        $scope.maxDesc = 100;
-        $scope.maxKeywords = 100;
+        $scope.maxTitle = 30;
+        $scope.maxShortDescription = 80;
+        $scope.maxFullDescription = 4000;
+        $scope.image = [];
+
+
+
+
+
+        $scope.setImage = function (img) {
+
+            if (img == undefined) {
+                toastr.error('Upload Image', 'Warning', {
+                    closeButton: true
+                });
+            } else {
+                $scope.picFile = $scope.tmpImage[img];
+            }
+        };
 
 
         $scope.hide = function() {
@@ -52,7 +67,7 @@
            success(function(data){
                $scope.primaryCatList = data;
            }).error(function(err){
-               alert("MainMenu Loading Error : " + err);
+               alert("MainMenu Loading Error :          " + err);
            });
 
         publishService.getAllSecondaryCategories().
@@ -61,7 +76,7 @@
            }).error(function(err){
                alert("MainMenu Loading Error : " + err);
            });
-
+        
     if(item == 'GooglePlay'){
 
        publishService.getExistingData(item).
@@ -77,10 +92,11 @@
                             language : $scope.existingData[0].language,
                             primaryCat : $scope.existingData[0].primaryCategory,
                             secondaryCat : $scope.existingData[0].secondaryCategory,
-                            name: $scope.existingData[0].name,
-                            springBoardName: $scope.existingData[0].springBoardName,
-                            desc: $scope.existingData[0].description,
-                            keywords: $scope.existingData[0].keywords,
+                            title: $scope.existingData[0].title,
+                            shortDescription: $scope.existingData[0].shortDescription,
+                            fullDescription: $scope.existingData[0].fullDescription,
+                            email: $scope.existingData[0].email,
+                          /*  keywords: $scope.existingData[0].keywords,*/
                         };
                         $scope.splash={
                             splash1 : $scope.existingData[0].splash1,
@@ -96,18 +112,19 @@
     }
 
 
-
         $scope.addGooglePlayInfo = function(file, playStoreData, splash) {
 
-        if(file == null || playStoreData.name == null || playStoreData.springBoardName == null || playStoreData.language == null ||
-        playStoreData.primaryCat == null || playStoreData.desc == null  ||
-        playStoreData.keywords == null || splash.splash1 == null || splash.splash2 == null || splash.splash3 == null || splash.splash4 == null){
+            alert ("splash.splash2 " + splash.splash2.getProperties);
+            
+        if(file == null || playStoreData.title == null || playStoreData.shortDescription == null || playStoreData.language == null ||
+        playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
+        splash.splash1 == null || splash.splash2 == null || splash.splash3 == null || splash.splash4 == null ||playStoreData.email==null){
                     toastr.error('Fill all the fields', 'Warning', {
                           closeButton: true
                     });
         }
         else{
-            playStoreData.category = 'GooglePlay';
+          /*  playStoreData.category = 'GooglePlay';*/
             publishService.addGooglePlayInfo(file,playStoreData,splash)
             .success(function(data, status, headers, config) {
             $mdDialog.hide();
@@ -121,6 +138,18 @@
             })
         }
         };
+
+
+
+
+
+
+
+
+        //start of AppStore------------------------------//
+
+
+
         if(item == 'AppStore'){
 
         publishService.getExistingDataAppStore(item).
@@ -155,9 +184,9 @@
                                     language : $scope.existingData[0].language,
                                     primaryCat : $scope.existingData[0].primaryCategory,
                                     secondaryCat : $scope.existingData[0].secondaryCategory,
-                                    name: $scope.existingData[0].name,
-                                    springBoardName: $scope.existingData[0].springBoardName,
-                                    desc: $scope.existingData[0].description,
+                                    title: $scope.existingData[0].title,
+                                    shortDescription: $scope.existingData[0].shortDescription,
+                                    fullDescription: $scope.existingData[0].description,
                                     keywords: $scope.existingData[0].keywords,
                                     supportUrl: $scope.existingData[0].supportUrl,
                                     marketingUrl: $scope.existingData[0].marketingUrl,
@@ -179,8 +208,8 @@
         }
         $scope.addAppStoreInfo = function(file,appStoreData,publishSplash) {
             if(file == null && $scope.serverImage == $scope.thumbPic){
-            if(appStoreData.name == null || appStoreData.springBoardName == null || appStoreData.language == null ||
-                    appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.desc == null  ||
+            if(appStoreData.title == null || appStoreData.shortDescription == null || appStoreData.language == null ||
+                    appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.fullDescription == null  ||
                     appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
                     appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null){
                                 toastr.error('Fill all the fields', 'Warning', {
@@ -204,8 +233,8 @@
                     }
             }
             else{
-            if(file == null || appStoreData.name == null || appStoreData.springBoardName == null || appStoreData.language == null ||
-              appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.desc == null  ||
+            if(file == null || appStoreData.title == null || appStoreData.shortDescription == null || appStoreData.language == null ||
+              appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.fullDescription == null  ||
               appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
               appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null || publishSplash.splash1 == null ||
               publishSplash.splash2 == null || publishSplash.splash3 == null || publishSplash.splash4 == null){
@@ -257,6 +286,8 @@
                 });
             })
         }
+
+        //end of AppStore------------------------------//
 
         /*$scope.addAppReviewInformation = function(appReviewInformation){
             if(!appReviewInformation||!appReviewInformation.firstName||
