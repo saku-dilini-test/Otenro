@@ -92,6 +92,7 @@
 }
 
 .tabButton {
+    z-index:-1;
     position: absolute;
     bottom: 2.75%;
     left: 42.5%;

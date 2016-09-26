@@ -39,7 +39,6 @@ angular.module('starter.controllers', [])
                 $scope.rightIndex = $scope.itemList.length-1;
                 $scope.isEnableLeftButton = false;
                 $scope.isEnableRightButton = true;
-                       console.log($scope.itemList)
                 if($scope.rightIndex == -1){
                     $scope.isEnableRightButton = false;
                 }
@@ -198,7 +197,10 @@ angular.module('starter.controllers', [])
         $scope.sliderOptions = {
           initialSlide: 0,
           direction: 'horizontal', //or vertical
-          speed: 300 //0.3s transition
+          speed: 300, //0.3s transition
+          nextButton: '.swiper-button-next',
+          prevButton: '.swiper-button-prev',
+          centeredSlides: true
         };
         $scope.sliderDelegate = null;
     // set select Menu Id
