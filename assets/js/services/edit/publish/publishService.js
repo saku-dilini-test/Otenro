@@ -42,18 +42,22 @@
                     fields: {
                         'appId':$rootScope.appId,
                         'category':playStoreData.category,
-                        'name': playStoreData.name,
-                        'springBoardName':playStoreData.springBoardName,
+                        'title': playStoreData.title,
+                        'shortDescription':playStoreData.shortDescription,
                         'language':playStoreData.language,
                         'primaryCategory':playStoreData.primaryCat,
                         'secondaryCategory':playStoreData.secondaryCat,
-                        'description':playStoreData.desc,
-                        'keywords':playStoreData.keywords,
+                        'fullDescription':playStoreData.fullDescription,
                         'copyrights':playStoreData.copyrights,
                         'marketingUrl':playStoreData.marketingUrl,
                         'privacyPolicyUrl':playStoreData.privacyPolicyUrl,
                         'supportUrl':playStoreData.supportUrl,
-                         file: file,
+                        'applicationType':"Application",
+                        'contentRating': "Everyone",
+                        'email':playStoreData.email,
+                        'appType':'GooglePlay',
+
+                        file: file,
                          splash1:splash.splash1,
                          splash2:splash.splash2,
                          splash3:splash.splash3,
@@ -105,8 +109,8 @@
             getAllRatings:function(){
                 return $http.get(SERVER_URL + 'edit/getAllRatings');
             },
-            getExistingData:function(category){
-                return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId+'&category='+category);
+            getExistingData:function(appType){
+                return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId+'&appType='+appType);
             },
             getExistingDataAppStore:function(category){
                             return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId+'&category='+category);

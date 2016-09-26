@@ -11,13 +11,39 @@
                     <form name="generalForm" novalidate>
                     <div class="md-dialog-main">
                         <fieldset>
-                            <label>title name</label>
+                            <label>Title</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input class="input-shadow-border" type="text" name="name" ng-model="playStoreData.name"
-                                   maxlength="{{maxName}}" required/>
+                            <input class="input-shadow-border" type="text" name="title" ng-model="playStoreData.title"
+                                   maxlength="{{maxTitle}}" required/>
                             <br>
-                            <span>Characters left: {{maxName - playStoreData.name.length}}</span>
+                            <span>Characters left: {{maxTitle - playStoreData.title.length}}</span>
                         </fieldset>
+
+                        <div class="clearfix">
+                            <fieldset>
+                                <label>Short description</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input class="input-shadow-border" type="text" name="shortDescription" ng-model="playStoreData.shortDescription"
+                                       maxlength="{{maxShortDescription}}" required/>
+                                <br>
+                                <span>Characters left: {{maxShortDescription - playStoreData.shortDescription.length}}</span>
+                            </fieldset>
+
+                        </div>
+                        <div class="clearfix">
+                            <fieldset>
+                                <label>full description</label>
+                                <textarea class="input-shadow-border" ng-model="playStoreData.fullDescription" rows="2" maxlength="{{maxFullDescription}}" required></textarea>
+                                <br>
+                                <span>Characters left: {{maxFullDescription - playStoreData.fullDescription.length}}</span>
+                            </fieldset>
+                            <!--<fieldset>
+                                <label>keywords</label>
+                                <textarea class="input-shadow-border" ng-model="playStoreData.keywords" rows="2" maxlength="{{maxKeywords}}" required></textarea>
+                                <br>
+                                <span>Characters left: {{maxKeywords - playStoreData.keywords.length}}</span>
+                            </fieldset>-->
+                        </div>
                         <div class="clearfix">
                             <fieldset class="col-4 profile-image-section">
                                 <label class="reset-inline">logo</label>
@@ -32,57 +58,51 @@
                                 </a>
                             </fieldset>
 
-                            <div class="pull-right">
-                                <label class="reset-inline">Screen Shots</label>
-                                <div class="clearfix">
-                                    <fieldset class="col-4-1">
-                                        <div class="me-file-upload text-right medium">
-                                            <div class="upload-wrapper">
-                                                <input type="file" ngf-select ng-model="splash.splash1"/>
-                                                <img ng-show="splash.splash1 != null" ngf-src="splash.splash1" width="80" height="120" />
-                                                <img ng-show="splash.splash1 == null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="80" height="120" />
-                                            </div>
+                          <div class="pull-right">
+                            <label class="reset-inline">Screen Shots</label>
+                            <div class="clearfix">
+                                <fieldset class="col-4-1">
+                                    <div class="me-file-upload text-right medium">
+                                        <div class="upload-wrapper">
+                                            <input type="file" ngf-select ng-model="splash.splash1"/>
+                                            <img ng-show="splash.splash1 != null" ngf-src="splash.splash1" width="80" height="120" />
+                                            <img ng-show="splash.splash1 == null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="80" height="120" />
                                         </div>
-                                    </fieldset>
-                                    <fieldset class="col-4-1">
-                                        <div class="me-file-upload text-right medium">
-                                            <div class="upload-wrapper">
-                                                <input type="file" ngf-select ng-model="splash.splash2"/>
-                                                <img ng-show="splash.splash2 != null" ngf-src="splash.splash2" width="80" height="120" />
-                                                <img ng-show="splash.splash2 == null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="80" height="120" />
-                                            </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="col-4-1">
+                                    <div class="me-file-upload text-right medium">
+                                        <div class="upload-wrapper">
+                                            <input type="file" ngf-select ng-model="splash.splash2"/>
+                                            <img ng-show="splash.splash2 != null" ngf-src="splash.splash2" width="80" height="120" />
+                                            <img ng-show="splash.splash2 == null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="80" height="120" />
                                         </div>
-                                    </fieldset>
-                                    <fieldset class="col-4-1">
-                                        <div class="me-file-upload text-right medium">
-                                            <div class="upload-wrapper">
-                                                <input type="file" ngf-select ng-model="splash.splash3"/>
-                                                <img ng-show="splash.splash3 != null" ngf-src="splash.splash3" width="80" height="120" />
-                                                <img ng-show="splash.splash3 == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="80" height="120" />
-                                            </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="col-4-1">
+                                    <div class="me-file-upload text-right medium">
+                                        <div class="upload-wrapper">
+                                            <input type="file" ngf-select ng-model="splash.splash3"/>
+                                            <img ng-show="splash.splash3 != null" ngf-src="splash.splash3" width="80" height="120" />
+                                            <img ng-show="splash.splash3 == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="80" height="120" />
                                         </div>
-                                    </fieldset>
-                                    <fieldset class="col-4-1 reset-margin">
-                                        <div class="me-file-upload text-right medium">
-                                            <div class="upload-wrapper">
-                                                <input type="file" ngf-select ng-model="splash.splash4"/>
-                                                <img ng-show="splash.splash4 != null" ngf-src="splash.splash4" width="80" height="120" />
-                                                <img ng-show="splash.splash4 == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="80" height="120" />
-                                            </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="col-4-1 reset-margin">
+                                    <div class="me-file-upload text-right medium">
+                                        <div class="upload-wrapper">
+                                            <input type="file" ngf-select ng-model="splash.splash4"/>
+                                            <img ng-show="splash.splash4 != null" ngf-src="splash.splash4" width="80" height="120" />
+                                            <img ng-show="splash.splash4 == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="80" height="120" />
                                         </div>
-                                    </fieldset>
-                                </div>
+                                    </div>
+                                </fieldset>
+
+
                             </div>
+                          </div>
                         </div>
                         <div class="clearfix">
-                            <fieldset>
-                                <label>spring board name</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input class="input-shadow-border" type="text" name="springBoardName" ng-model="playStoreData.springBoardName"
-                                       maxlength="{{maxSpringBoardName}}" required/>
-                                <br>
-                                <span>Characters left: {{maxSpringBoardName - playStoreData.springBoardName.length}}</span>
-                            </fieldset>
                             <fieldset class="col-3">
                                 <label>language</label>
                                     <select class="input-shadow-border form-control"
@@ -99,19 +119,13 @@
                                         required>
                                 </select>
                             </fieldset>
+
                         </div>
                         <div class="clearfix">
                             <fieldset>
-                                <label>description</label>
-                                <textarea class="input-shadow-border" ng-model="playStoreData.desc" rows="2" maxlength="{{maxDesc}}" required></textarea>
-                                <br>
-                                <span>Characters left: {{maxDesc - playStoreData.desc.length}}</span>
-                            </fieldset>
-                            <fieldset>
-                                <label>keywords</label>
-                                <textarea class="input-shadow-border" ng-model="playStoreData.keywords" rows="2" maxlength="{{maxKeywords}}" required></textarea>
-                                <br>
-                                <span>Characters left: {{maxKeywords - playStoreData.keywords.length}}</span>
+                                <label>Email</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input class="input-shadow-border" type="text" name="email" ng-model="playStoreData.email" required/>
                             </fieldset>
                         </div>
                     </div>

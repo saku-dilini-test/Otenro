@@ -1,7 +1,8 @@
 
 
 
-var fs = require('fs-extra');
+var fs = require('fs-extra'),
+    config = require('../../../services/config');
 module.exports = {
 
     setPublishDetails: function(req,res){
@@ -27,7 +28,16 @@ module.exports = {
         var splash4y = splash4ex.replace('"}','');
         details.splash4 = splash4y;
 
-            var searchApp = {
+        console.log("details.splash4 "+details.splash4);
+
+        var buf = new Buffer(splash4y ,'base64'); // decode
+        fs.writeFile(config.APP_FILE_SERVER+"myimg.png", buf, function(err) {
+            if(err) {
+                console.log("err", err);
+            }
+        })
+
+        var searchApp = {
                 appId :req.body.appId,
                 category: req.body.category
             }
@@ -121,15 +131,14 @@ module.exports = {
 
     getLanguage : function(req,res){
         var appId = req.param('appId');
-        var category = req.param('category');
+        var appType = req.param('appType');
         var searchApp = {
             appId: appId,
-            category: category
+            appType: appType
         };
         PublishDetails.find(searchApp, function(err, app) {
             if (err) return done(err);
-            var language = app
-            res.send(language)
+            res.send(app)
         });
     },
 

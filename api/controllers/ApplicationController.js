@@ -8,7 +8,8 @@
  */
 
 var fs = require('fs-extra'),
-    config = require('../services/config');
+    config = require('../services/config'),
+    xml2js = require('xml2js');
 
 module.exports = {
 
@@ -216,6 +217,25 @@ module.exports = {
             fs.outputJson(madeEasyFilePath,madeEasyFileContent, function (err) {
                 if(err) return console.error(err);
             });
+
+
+            fs.readFile(tempAppDirPath +app.id+'/config.xml', 'utf-8',
+                function(err, data) {
+                    if (err) return res.negotiate(err);
+                    var parser = new xml2js.Parser(),
+                        xmlBuilder = new xml2js.Builder();
+
+                    parser.parseString(data, function (err, result) {
+                        result.widget['$'].id="com.otenro."+appName.replace(/\s/g, '').toLowerCase()+app.id;
+                        var xml = xmlBuilder.buildObject(result);
+
+                        fs.writeFile(tempAppDirPath +app.id+'/config.xml', xml,'utf-8', function(err) {
+
+                            if (err) return res.negotiate(err);
+                        });
+
+                    });
+                });
 
             fs.readFile(tempAppDirPath +app.id+'/js/constantsService.js', 'utf-8',
                 function(err, data) {

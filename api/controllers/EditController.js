@@ -7,7 +7,7 @@
 var fs = require('fs-extra'),
     config = require('../services/config'),
     xml2js = require('xml2js'),
-    EasyZip = require('easy-zip').EasyZip;
+    zipFolder = require('zip-folder');
 
 
 
@@ -63,6 +63,7 @@ module.exports = {
                         var removeDirArray = ['www'];
                         for (var i = 0; i < removeDirArray.length; i++) {
                             var removeDirPath = copyDirPath + removeDirArray[i] + '/';
+                            console.log("removeDirPath " + removeDirPath) ;
                             fs.remove(removeDirPath, function (err) {
                                 if (err) return res.negotiate(err);
 
@@ -70,13 +71,15 @@ module.exports = {
                                 fs.copy(selectedTemplatePath, wwwPath, function (err) {
                                     if (err) return res.negotiate(err);
 
-                                    var searchApp = {
-                                        id: appId
-                                    };
-                                    Application.findOne(searchApp).exec(function (err, app) {
-                                        if (err) return res.negotiate(err);
-                                        replaceAppNameNIcon(app.appName, app.appIcon);
-                                    });
+                                        var searchApp = {
+                                            id: appId
+                                        };
+                                        Application.findOne(searchApp).exec(function (err, app) {
+                                            if (err) return res.negotiate(err);
+                                            replaceAppNameNIcon(app.appName, app.appIcon);
+                                        });
+
+
                                 });
                             })
                         }
@@ -145,9 +148,6 @@ module.exports = {
                     parser.parseString(data, function (err, result) {
 
                         result.widget.name=appName;
-                        result.widget['$'].id="com.otenro."+appName.replace(/\s/g, '').toLowerCase()+appId;
-
-
                         var xml = xmlBuilder.buildObject(result);
 
                         fs.writeFile(configFile, xml,'utf-8', function(err) {
@@ -176,7 +176,7 @@ module.exports = {
                         }).exec(function(err,build){
                             if (err) return res.negotiate(err);
                             if(build) {
-                                buildApkFile(copyDirPath,appName);
+                               buildApkFile(copyDirPath,appName);
                             }
                         });
                     });
@@ -208,7 +208,6 @@ module.exports = {
             var mime = require('mime');
 
             shell.cd(appPath);
-            console.log("appPath " + appPath);
             shell.exec('ionic build android', {async: true}, function (code, stdout, stderr) {
 
                 if (code==0){
@@ -243,7 +242,7 @@ module.exports = {
                                                              var file = appPath + 'platforms/android/build/outputs/apk/'+appName.replace(/\s/g, '')+'.apk';
                                                              var resourcesPath = config.ME_SERVER + userId + '/build/' + appId +'/resources';
                                                              var publishPath = config.ME_SERVER + userId + '/build/' + appId +'/publish';
-                                                             var zipFile = config.ME_SERVER + userId + '/build/' + appId+'/publish.zip';
+                                                             var zipFile = config.ME_SERVER + userId + '/build/' + appId+'/publish_'+appId+'.zip';
 
                                                             fs.stat(zipFile, function(err, fileStat) {
                                                                 if (err) {
@@ -266,12 +265,10 @@ module.exports = {
                                                                         if (err) {
                                                                             throw err;
                                                                         }else {
-                                                                            var zip = new EasyZip();
-                                                                            zip.zipFolder(publishPath,function(err){
-                                                                                zip.writeToFile(zipFile);
-                                                                                if (err) {
-                                                                                    throw err;
-                                                                                }else {
+                                                                            zipFolder(publishPath, zipFile, function(err) {
+                                                                                if(err) {
+                                                                                    console.log('oh no!', err);
+                                                                                } else {
                                                                                     var filename = path.basename(zipFile);
                                                                                     var mimetype = mime.lookup(zipFile);
 
@@ -281,6 +278,7 @@ module.exports = {
                                                                                     var filestream = fs.createReadStream(zipFile);
 
                                                                                     filestream.pipe(res);
+                                                                                    console.log('EXCELLENT');
                                                                                 }
                                                                             });
 
@@ -309,8 +307,6 @@ module.exports = {
                 }
                 shell.code;
             });
-
-
         }
     }
 };
