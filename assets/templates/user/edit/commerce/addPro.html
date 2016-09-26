@@ -179,7 +179,7 @@
                                 </td>
                                 <td>
                                   <md-input-container class="md-container-modify">
-                                    <input type="number"  min="0.01" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required ignore-mouse-wheel>
+                                    <input type="number"  min="0.00" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" maxlength="8" ng-model="data.price" required ignore-mouse-wheel>
                                       <div ng-messages="priceAndVariantsForm['price_' + $index].$error" ng-show="priceAndVariantsForm['price_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid price</div>
                                           <div ng-message="required" class="my-message">Required!</div>

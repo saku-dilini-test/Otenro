@@ -33,6 +33,7 @@
         }
         // --/-- add new tax collection mode
         else if($scope.initialData == 'newTaxOption'){
+            $scope.isDisabled = false;
             $scope.tax = {
                 isApplyShippingCharge : false,
                 isApplyServicesCharge : false
@@ -40,6 +41,7 @@
         }
         // --/-- tax collection editable mode
         else{
+            $scope.isDisabled = true;
             $scope.tax = $scope.initialData;
         }
 
