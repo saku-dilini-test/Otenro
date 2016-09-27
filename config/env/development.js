@@ -29,8 +29,8 @@ module.exports = {
   // HOST URL 
   HOST_URL : 'http://localhost',
   // ME SERVER Config 
-  ME_SERVER : '/Users/udeshikaperera/meServer/temp/',
-  ME_SERVER_PORT : 8080,
+  ME_SERVER : '/var/www/html/meServer/temp/',
+  ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : '/Users/udeshikaperera/appFileServer/'
+  APP_FILE_SERVER : '/home/madhuranga/appFileServer/'
 };

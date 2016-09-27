@@ -17,7 +17,7 @@
             },
             'preferredLocale': 'en_US'
         })
-        .constant('ME_APP_SERVER','http://localhost:8080/')
+        .constant('ME_APP_SERVER','http://localhost:80/meAppServer/')
         .config(function($urlRouterProvider,$httpProvider, $authProvider, SERVER_URL,uiGmapGoogleMapApiProvider) {
 
             $authProvider.baseUrl = SERVER_URL;

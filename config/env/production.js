@@ -39,8 +39,8 @@ module.exports = {
   // HOST URL 
   HOST_URL : 'http://otenro.com',
   // ME SERVER Config 
-  ME_SERVER : '/home/otenro/meAppServer/temp/',
-  ME_SERVER_PORT : 8082,
+  ME_SERVER : '/home/admin/web/otenro.com/public_html/meAppServer/temp/',
+  ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
   APP_FILE_SERVER : '/home/otenro/appFileServer/'
 
