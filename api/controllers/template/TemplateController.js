@@ -342,6 +342,15 @@ module.exports = {
         res.send(200,{message:'Deleted Application'});
 
 
+    },
+    postDeviceId: function(req,res){
+        var data = req.body;
+        console.log("devices ids");
+        DeviceId.create(data).exec(function(err,app){
+            if(err) return console.error(err);
+            res.send("success");
+        })
+        console.log(data);
     }
 
 
