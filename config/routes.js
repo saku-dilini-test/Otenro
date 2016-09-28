@@ -246,6 +246,7 @@ module.exports.routes = {
     'GET /templates/getAboutUs': 'template/TemplateController.getAboutUs',
     'GET /templates/getPolicies': 'template/TemplateController.getPolicies',
     'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
+    'POST /templates/postDeviceId': 'template/TemplateController.postDeviceId',
 
 
     /**

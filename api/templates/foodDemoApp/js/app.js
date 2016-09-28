@@ -1,16 +1,35 @@
 var mobileApp=angular.module('foodDemoApp', ['ionic','satellizer']);
 
-mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy) {
+mobileApp.run(function($ionicPlatform,$rootScope,$http,readMadeEasy,constants) {
   $ionicPlatform.ready(function() {
+   var push = new Ionic.Push({
+        "debug": true
+      });
 
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+      push.register(function(token) {
+        console.log("My Device token:",token.token);
+        var data = {
+            appId: $rootScope.appId,
+            deviceId : token.token
+        }
+        $http.get(constants.SERVER_URL + "/templates/postDeviceId",data)
+        .then(function(res){
+              alert(res);
+        },
+        function(err){
+              alert(err);
+        });
+        push.saveToken(token);  // persist the token in the Ionic Platform
+      });
 
-    }
-    if (window.StatusBar) {
-      StatusBar.styleDefault();
-    }
+//    if (window.cordova && window.cordova.plugins.Keyboard) {
+//      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+//      cordova.plugins.Keyboard.disableScroll(true);
+//
+//    }
+//    if (window.StatusBar) {
+//      StatusBar.styleDefault();
+//    }
   });
     if (typeof $rootScope.appId === 'undefined'){
 
