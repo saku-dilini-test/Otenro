@@ -1,8 +1,9 @@
 (function() {
     'use strict';
-    angular.module("appEdit").controller("PublishCtrl", ['$scope', '$mdDialog','item','toastr', '$rootScope', 'publishService', '$http', 'SERVER_URL', PublishCtrl]);
+    angular.module("appEdit").controller("PublishCtrl", ['$scope', '$mdDialog','item',
+        'toastr', '$rootScope', 'publishService', '$http', 'SERVER_URL','$auth', PublishCtrl]);
 
-    function PublishCtrl($scope, $mdDialog, item, toastr, $rootScope, publishService, $http, SERVER_URL) {
+    function PublishCtrl($scope, $mdDialog, item, toastr, $rootScope, publishService, $http, SERVER_URL,$auth) {
 
         // config
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
@@ -11,21 +12,9 @@
         $scope.maxShortDescription = 80;
         $scope.maxFullDescription = 4000;
         $scope.image = [];
+        $scope.splash = [];
 
 
-
-
-
-        $scope.setImage = function (img) {
-
-            if (img == undefined) {
-                toastr.error('Upload Image', 'Warning', {
-                    closeButton: true
-                });
-            } else {
-                $scope.picFile = $scope.tmpImage[img];
-            }
-        };
 
 
         $scope.hide = function() {
@@ -77,72 +66,82 @@
                alert("MainMenu Loading Error : " + err);
            });
         
-    if(item == 'GooglePlay'){
+        if(item == 'GooglePlay'){
+           publishService.getExistingData(item).
+                success(function(data){
+                     $scope.existingData = data;
+                     if($scope.existingData.length == 0){
+                            $scope.playStoreData ={language: $scope.defaultLanguage.language};
+                     }
+                     else{
+                            var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
+                            +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=publish/";
 
-       publishService.getExistingData(item).
-            success(function(data){
-                $scope.existingData = data;
-                 if($scope.existingData.length == 0){
-                        $scope.playStoreData ={language: $scope.defaultLanguage.language};
-                 }
-                 else{
-                 $scope.thumbPic = $scope.existingData[0].file;
 
-                        $scope.playStoreData = {
-                            language : $scope.existingData[0].language,
-                            primaryCat : $scope.existingData[0].primaryCategory,
-                            secondaryCat : $scope.existingData[0].secondaryCategory,
-                            title: $scope.existingData[0].title,
-                            shortDescription: $scope.existingData[0].shortDescription,
-                            fullDescription: $scope.existingData[0].fullDescription,
-                            email: $scope.existingData[0].email,
-                          /*  keywords: $scope.existingData[0].keywords,*/
-                        };
-                        $scope.splash={
-                            splash1 : $scope.existingData[0].splash1,
-                            splash2 : $scope.existingData[0].splash2,
-                            splash3 : $scope.existingData[0].splash3,
-                            splash4 : $scope.existingData[0].splash4
-                        };
+                                for (var i=0; i< 5; i++) {
+                                    var tempImageUrl = tempImagePath + i+'.png';
+                                    $scope.splash.push(tempImageUrl);
+                                }
 
-                 }
-            }).error(function(err){
-                alert("MainMenu Loading Error : " + err);
-            });
-    }
+                           /* $scope.thumbPic = $scope.existingData[0].file;*/
+                            $scope.playStoreData = {
+                                language : $scope.existingData[0].language,
+                                primaryCat : $scope.existingData[0].primaryCategory,
+                                secondaryCat : $scope.existingData[0].secondaryCategory,
+                                title: $scope.existingData[0].title,
+                                shortDescription: $scope.existingData[0].shortDescription,
+                                fullDescription: $scope.existingData[0].fullDescription,
+                                email: $scope.existingData[0].email
+                            /*  keywords: $scope.existingData[0].keywords,*/
+                            };
+                     }
+                }).error(function(err){
+                    alert("MainMenu Loading Error : " + err);
+                });
+        }
 
 
         $scope.addGooglePlayInfo = function(file, playStoreData, splash) {
 
-            alert ("splash.splash2 " + splash.splash2.getProperties);
-            
-        if(file == null || playStoreData.title == null || playStoreData.shortDescription == null || playStoreData.language == null ||
+
+        if(splash[4] == null || playStoreData.title == null || playStoreData.shortDescription == null || playStoreData.language == null ||
         playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
-        splash.splash1 == null || splash.splash2 == null || splash.splash3 == null || splash.splash4 == null ||playStoreData.email==null){
+        splash[0] == null || splash[1] == null || splash[2] == null || splash[3] == null ||playStoreData.email==null){
                     toastr.error('Fill all the fields', 'Warning', {
                           closeButton: true
                     });
         }
-        else{
-          /*  playStoreData.category = 'GooglePlay';*/
-            publishService.addGooglePlayInfo(file,playStoreData,splash)
-            .success(function(data, status, headers, config) {
-            $mdDialog.hide();
-            toastr.success('Genaral info has been added', 'Saved', {
+        else {
+
+            publishService.addGooglePlayInfo(playStoreData)
+                .success(function(data, status, headers, config) {
+                    $mdDialog.hide();
+                    toastr.success('Genaral info has been added', 'Saved', {
+                        closeButton: true
+                    });
+                }).error(function(data, status, headers, config) {
+                toastr.error('Error while saving data', 'Warning', {
+                    closeButton: true
+                });
+            });
+                for (var i = 0; i < splash.length; i++) {
+                    if (JSON.stringify(splash[i]).match("blobUrl")){
+                        publishService.uploadPublishFiles(splash[i],i)
+                            .success(function (data, status, headers, config) {
+                                $mdDialog.hide();
+                                toastr.success('Images  has been added', 'Saved', {
                                     closeButton: true
                                 });
-            }).error(function(data, status, headers, config) {
-                toastr.error('Error while saving data', 'Warning', {
-                      closeButton: true
-                });
-            })
+                            }).error(function (data, status, headers, config) {
+                            toastr.error('Error while saving data', 'Warning', {
+                                closeButton: true
+                            });
+                        });
+                    }
+
+                }
         }
         };
-
-
-
-
-
 
 
 
