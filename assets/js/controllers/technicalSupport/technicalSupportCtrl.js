@@ -12,18 +12,28 @@
     'use strict';
     angular.module('app')
         .controller('technicalSupportCtrl',
-            ['$scope','technicalSupportService','$auth','toastr','$state','$stateParams',
+            ['$scope','technicalSupportService','$auth','toastr','$state','$stateParams','SERVER_URL',
                 technicalSupportCtrl
             ]);
 
-    function technicalSupportCtrl($scope,technicalSupportService,$auth,toastr,$state,$stateParams) {
+    function technicalSupportCtrl($scope,technicalSupportService,$auth,toastr,$state,$stateParams,SERVER_URL) {
 
 
-
+            $scope.splash = [];
 
             if($stateParams){
                 $scope.userId = $stateParams.userId;
                 $scope.appId = $stateParams.appId;
+                var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $scope.userId
+                    +"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=publish/";
+
+
+                for (var i=0; i< 5; i++) {
+                    var tempImageUrl = tempImagePath + i+'.png';
+                    $scope.splash.push(tempImageUrl);
+                }
+
+
             }
 
 
