@@ -8,6 +8,7 @@ var request = require('request'),
     config = require('../services/config');
 var path = require('path');
 
+
 var server = email.server.connect({
     user: "onbilabsttest@gmail.com",
     password: "0nb1tl@b$",
@@ -279,17 +280,40 @@ module.exports = {
                     ]
                 };
                 if (mBody != null) {
+                    var server = email.server.connect({
+                        user: app[0].emailUsername,
+                        password: app[0].emailPassword,
+                        host: app[0].domainName,
+                        ssl: app[0].sslEnabled
+                    });
                     server.send(emailDetails, function (err, message) {
                         sails.log.info(err || message);
                         if (err) {
                             return res.status(err.status).json({err: err.message});
                         }
                     });
+
                 }
             }
 
         });
     },
+    sendEmail: function (emailDetails, app) {
+
+        var server = email.server.connect({
+            user: app.emailUsername,
+            password: app.emailPassword,
+            host: app.domainName,
+            ssl: app.sslEnabled
+        });
+        server.send(emailDetails, function (err, message) {
+            sails.log.info(err || message);
+            if (err) {
+                return res.status(err.status).json({err: err.message});
+            }
+        });
+    },
+
     sendVerificationEmail: function (data, res) {
         var searchApp = {
             email: data.email
