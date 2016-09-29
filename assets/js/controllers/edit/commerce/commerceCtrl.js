@@ -761,6 +761,12 @@
                     $scope.emailHF = {
                         header: $scope.email.header,
                         footer: $scope.email.footer
+                    };
+                    $scope.emailSettings = {
+                        domainName: $scope.email.domainName,
+                        emailUsername: $scope.email.emailUsername,
+                        emailPassword: $scope.email.emailPassword,
+                        sslEnabled: $scope.email.sslEnabled
                     }
                     var imagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
                         +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=email/";

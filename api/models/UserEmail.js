@@ -42,6 +42,18 @@ module.exports = {
         },
         footer:{
             type: 'string'
+        },
+        domainName:{
+            type: 'string'
+        },
+        emailUsername:{
+            type: 'string'
+        },
+        emailPassword:{
+            type: 'string'
+        },
+        sslEnabled:{
+            type: 'string'
         }
     }
 };
