@@ -50,11 +50,12 @@
                                 <a class="feature01 logo-upload">
                                     <span class="overlay01">
                                         <span class="caption01">
-                                             <input type="button" class="me-default-button" ngf-select ng-model="picFile" ngf-accept="image/*" value="Add Image"/>
+                                           <input type="button" class="me-default-button" ngf-select ng-model="splash[4]" ngf-accept="image/*" value="Add Image"/>
                                         </span>
                                     </span>
-                                    <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />
-                                    <img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
+                                    <img ng-if="splash[4] != null" ngf-src="splash[4]" style="width:120px; height:120px;" />
+       <!--                             <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />-->
+                                    <img ng-show="splash[4] == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
                                 </a>
                             </fieldset>
 
@@ -64,36 +65,36 @@
                                 <fieldset class="col-4-1">
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
-                                            <input type="file" ngf-select ng-model="splash.splash1"/>
-                                            <img ng-show="splash.splash1 != null" ngf-src="splash.splash1" width="80" height="120" />
-                                            <img ng-show="splash.splash1 == null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="80" height="120" />
+                                            <input type="file" ngf-select ng-model="splash[0]"/>
+                                            <img ng-show="splash[0] != null" ngf-src="splash[0]" width="80" height="120" />
+                                            <img ng-show="splash[0]== null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="80" height="120" />
                                         </div>
                                     </div>
                                 </fieldset>
                                 <fieldset class="col-4-1">
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
-                                            <input type="file" ngf-select ng-model="splash.splash2"/>
-                                            <img ng-show="splash.splash2 != null" ngf-src="splash.splash2" width="80" height="120" />
-                                            <img ng-show="splash.splash2 == null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="80" height="120" />
+                                            <input type="file" ngf-select ng-model="splash[1]"/>
+                                            <img ng-show="splash[1] != null" ngf-src="splash[1]" width="80" height="120" />
+                                            <img ng-show="splash[1]== null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="80" height="120" />
                                         </div>
                                     </div>
                                 </fieldset>
                                 <fieldset class="col-4-1">
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
-                                            <input type="file" ngf-select ng-model="splash.splash3"/>
-                                            <img ng-show="splash.splash3 != null" ngf-src="splash.splash3" width="80" height="120" />
-                                            <img ng-show="splash.splash3 == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="80" height="120" />
+                                            <input type="file" ngf-select ng-model="splash[2]"/>
+                                            <img ng-show="splash[2] != null" ngf-src="splash[2]" width="80" height="120" />
+                                            <img ng-show="splash[2] == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="80" height="120" />
                                         </div>
                                     </div>
                                 </fieldset>
                                 <fieldset class="col-4-1 reset-margin">
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
-                                            <input type="file" ngf-select ng-model="splash.splash4"/>
-                                            <img ng-show="splash.splash4 != null" ngf-src="splash.splash4" width="80" height="120" />
-                                            <img ng-show="splash.splash4 == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="80" height="120" />
+                                            <input type="file" ngf-select ng-model="splash[3]"/>
+                                            <img ng-show="splash[3] != null" ngf-src="splash[3]" width="80" height="120" />
+                                            <img ng-show="splash[3] == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="80" height="120" />
                                         </div>
                                     </div>
                                 </fieldset>

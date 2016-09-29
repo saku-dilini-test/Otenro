@@ -36,36 +36,42 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-            addGooglePlayInfo: function(file,playStoreData,splash){
+            addGooglePlayInfo: function(playStoreData){
+
+                   /* return $http.post(SERVER_URL+ 'edit/setPublishDetails',playStoreData);
+*/
                 return Upload.upload({
                     url: SERVER_URL + 'edit/setPublishDetails',
                     fields: {
-                        'appId':$rootScope.appId,
-                        'category':playStoreData.category,
-                        'title': playStoreData.title,
-                        'shortDescription':playStoreData.shortDescription,
-                        'language':playStoreData.language,
-                        'primaryCategory':playStoreData.primaryCat,
-                        'secondaryCategory':playStoreData.secondaryCat,
-                        'fullDescription':playStoreData.fullDescription,
-                        'copyrights':playStoreData.copyrights,
-                        'marketingUrl':playStoreData.marketingUrl,
-                        'privacyPolicyUrl':playStoreData.privacyPolicyUrl,
-                        'supportUrl':playStoreData.supportUrl,
-                        'applicationType':"Application",
-                        'contentRating': "Everyone",
-                        'email':playStoreData.email,
-                        'appType':'GooglePlay',
-
-                        file: file,
-                         splash1:splash.splash1,
-                         splash2:splash.splash2,
-                         splash3:splash.splash3,
-                         splash4:splash.splash4
-
-                    }
-
+                     'appId':$rootScope.appId,
+                     'category':playStoreData.category,
+                     'title': playStoreData.title,
+                     'shortDescription':playStoreData.shortDescription,
+                     'language':playStoreData.language,
+                     'primaryCategory':playStoreData.primaryCat,
+                     'secondaryCategory':playStoreData.secondaryCat,
+                     'fullDescription':playStoreData.fullDescription,
+                     'copyrights':playStoreData.copyrights,
+                     'marketingUrl':playStoreData.marketingUrl,
+                     'privacyPolicyUrl':playStoreData.privacyPolicyUrl,
+                     'supportUrl':playStoreData.supportUrl,
+                     'applicationType':"Application",
+                     'contentRating': "Everyone",
+                     'email':playStoreData.email,
+                     'appType':'GooglePlay'
+                     },
+                    file:null
                 });
+            },
+            uploadPublishFiles: function(file,imgId){
+                return Upload.upload({
+                        url: SERVER_URL + 'edit/uploadPublishFiles',
+                        fields: {
+                            'appId':$rootScope.appId,
+                            'imgId':imgId,
+                        },
+                        file: file
+                    });
             },
             addContentRating: function(contentRating){
                 return Upload.upload({
