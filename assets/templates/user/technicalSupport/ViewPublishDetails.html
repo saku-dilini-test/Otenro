@@ -163,6 +163,42 @@
                         </md-input-container>
                     </md-content>
                 </md-tab>
+
+                <md-tab label="PUSH CONFIG">
+                    <md-content class="md-padding">
+                        <md-input-container>
+                            <label> IONIC APP ID </label>
+                            <input name="ionicAPPID" ng-model="pushConfigData.ionicAPPID" >
+                            <!--<div ng-messages="publishForm.ionicAPPID.$error">-->
+                                <!--<div ng-message="required">This is required!</div>-->
+                            <!--</div>-->
+                        </md-input-container>
+                        <md-input-container>
+                            <label> SENDER ID </label>
+                            <input name="senderID" ng-model="pushConfigData.senderID" >
+                            <!--<div ng-messages="publishForm.senderID.$error">-->
+                                <!--<div ng-message="required">This is required!</div>-->
+                            <!--</div>-->
+                        </md-input-container>
+                        <md-input-container>
+                            <label> PROFILE </label>
+                            <input name="profile" ng-model="pushConfigData.profile" >
+                            <!--<div ng-messages="publishForm.profile.$error">-->
+                                <!--<div ng-message="required">This is required!</div>-->
+                            <!--</div>-->
+                        </md-input-container>
+                        <md-input-container>
+                            <label> AUTHORIZATION </label>
+                            <input name="authorization" ng-model="pushConfigData.authorization" >
+                            <!--<div ng-messages="publishForm.authorization.$error">-->
+                                <!--<div ng-message="required">This is required!</div>-->
+                            <!--</div>-->
+                        </md-input-container>
+                        <md-input-container>
+                            <div class="button" ng-click="savePushConfig(pushConfigData)">Save</div>
+                        </md-input-container>
+                    </md-content>
+                </md-tab>
                 <md-tab label="Download ZIP">
                     <md-content class="md-padding">
                         <md-input-container>

@@ -290,7 +290,9 @@ module.exports.routes = {
      * Technical Support Controller
      **/  
      'GET  /edit/getAllAppsData': 'technicalSupport/TechnicalSupportController.getAllAppsData',
-     'POST  /edit/getPublishDetails': 'technicalSupport/TechnicalSupportController.getPublishDetails'
+     'POST  /edit/getPublishDetails': 'technicalSupport/TechnicalSupportController.getPublishDetails',
+    'GET    /edit/getPushConfigDetails': 'technicalSupport/TechnicalSupportController.getPushConfigDetails',
+    'POST   /edit/savePushConfigDetails': 'technicalSupport/TechnicalSupportController.savePushConfigDetails'
 
 
    
