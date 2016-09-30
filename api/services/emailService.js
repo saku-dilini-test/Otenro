@@ -168,7 +168,7 @@ module.exports = {
                     '                <tr>' +
                     '                    <td align="center" valign="top" style="padding: 15px 0;" class="logo">' +
                     '                        <a href="" target="_blank">' +
-                    '                            <img alt="Logo" src="http://www.simatosolutions.com:1340/edit/viewImages?image=' + app[0].imageHeader + '" width="60" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">' +
+                    '                            <img alt="Logo" src="http://demo.otenro.com:1340/edit/viewImages?image=' + app[0].imageHeader + '" width="60" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">' +
                     '                        </a>' +
                     '                    </td>' +
                     '                </tr>' +
@@ -215,7 +215,7 @@ module.exports = {
                     '                <tr>' +
                     '                    <td align="center" valign="top" style="padding: 15px 0;" class="logo">' +
                     '                        <a href="http://litmus.com" target="_blank">' +
-                    '                            <img alt="Logo" src="http://www.simatosolutions.com:1340/edit/viewImages?image=' + app[0].imageFooter + '" width="60" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">' +
+                    '                            <img alt="Logo" src="http://demo.otenro.com:1340/edit/viewImages?image=' + app[0].imageFooter + '" width="60" height="60" style="display: block; font-family: Helvetica, Arial, sans-serif; color: #ffffff; font-size: 16px;" border="0">' +
                     '                        </a>' +
                     '                    </td>' +
                     '                </tr>' +
