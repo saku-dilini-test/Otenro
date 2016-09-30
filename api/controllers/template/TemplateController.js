@@ -345,12 +345,25 @@ module.exports = {
     },
     postDeviceId: function(req,res){
         var data = req.body;
-        console.log("devices ids");
-        DeviceId.create(data).exec(function(err,app){
-            if(err) return console.error(err);
-            res.send("success");
-        })
-        console.log(data);
+        var deviceId =  req.body.deviceId;
+        var searchQuery  = {
+            deviceId : deviceId
+        };
+        // check device id already have in db
+        DeviceId.find(searchQuery).exec(function(err,result) {
+            if (err) return console.log(err);
+            // if not device ID in db collections
+            if (result.length == 0) {
+                // create new Device ID Collection
+                DeviceId.create(data).exec(function(err,result) {
+                    if(err) return console.error(err);
+                    res.send("success");
+                });
+            }else{
+                if(err) return console.error(err);
+                res.send("success");
+            }
+        });
     }
 
 

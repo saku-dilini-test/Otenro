@@ -2,6 +2,8 @@ var fs = require('fs-extra');
 var http = require('http');
 var request = require('request');
 
+var config = require('../../../services/config');
+
 module.exports = {
 
 
@@ -19,32 +21,42 @@ module.exports = {
             var findDevicedQuery = {
                 appId : req.body.appId
             };
+
+            // Testing dummy data here
+            // var pushUrl = "https://api.ionic.io/push/notifications";
+            // var profile = "dev_push_sun";
+            // var Authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwM2RjZDE0ZS0zNGRhLTQyZDYtYTAyZi0wNWFmZmE3OTBjODAifQ.wB9jy0C3a0bn4eb4wKvr521UwqIB0gTQXn5DYk92_KE";
+
             // Find device by appID
-            DeviceId.find(findDevicedQuery).exec(function(err,deviceArray){
+            PushConfig.findOne(findDevicedQuery).exec(function(err,pushConfigData){
 
-                var message = req.body.message;
-                var pushUrl = "https://api.ionic.io/push/notifications";
-                var profile = "dev_push_sun";
-                var Authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwM2RjZDE0ZS0zNGRhLTQyZDYtYTAyZi0wNWFmZmE3OTBjODAifQ.wB9jy0C3a0bn4eb4wKvr521UwqIB0gTQXn5DYk92_KE";
+                var Message = req.body.message;
+                var PushUrl = config.PUSH_API_URL;
+                var Profile = pushConfigData.profile;
+                var Authorization = "Bearer "+pushConfigData.authorization;
 
-                for(var i=0; i<deviceArray.length; i++){
-                    // push API request
-                    request.post(pushUrl,
-                        {json:{"tokens": [deviceArray[i].deviceId],
-                            "profile": profile,
-                            "notification": {
-                                "message": message
-                            }},
-                            headers:{
-                                'Content-Type': 'application/json',
-                                'Authorization': Authorization
-                            }} , function(error, response, body){
-                            if (error) sails.log.info(error);
+                // Find device by appID
+                DeviceId.find(findDevicedQuery).exec(function(err,deviceArray){
+                    var message = req.body.message;
+                    for(var i=0; i<deviceArray.length; i++){
+                        // push API request
+                        request.post(PushUrl,
+                            {json:{"tokens": [deviceArray[i].deviceId],
+                                "profile": Profile,
+                                "notification": {
+                                    "message": Message
+                                }},
+                                headers:{
+                                    'Content-Type': 'application/json',
+                                    'Authorization': Authorization
+                                }} , function(error, response, body){
+                                if (error) sails.log.info(error);
                                 sails.log.info(response);
-                        });
-                }
-                res.send(data);
+                            });
+                    }
+                    res.send(data);
                 });
+            });
         });
     },
     getMessageDetails: function(req, res){

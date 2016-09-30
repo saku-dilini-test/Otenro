@@ -15,6 +15,12 @@
             getPublishDetails : function(data){
                 return $http.post(SERVER_URL + 'edit/getPublishDetails',data);
             },
+            getPushConfigDetails : function(appId){
+                return $http.get(SERVER_URL + 'edit/getPushConfigDetails?appId='+appId);
+            },
+            savePushConfigDetails : function(data){
+                return $http.post(SERVER_URL + 'edit/savePushConfigDetails',data);
+            }
         };
     }
 })();
