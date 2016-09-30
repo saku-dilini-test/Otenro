@@ -31,7 +31,7 @@ module.exports = {
 
         var serverOrg=config.server.host+':'+config.server.port;
 
-        var imagePath =  serverOrg +"templates/viewImages?userId="+ data.userId
+        var imagePath =  serverOrg +"/templates/viewImages?userId="+ data.userId
             +"&appId="+data.appId+"&"+new Date().getTime()+"&img=email/";
 
         UserEmail.find(searchApp).exec(function (err, app) {
