@@ -17,7 +17,7 @@ module.exports = {
      *
      */
     getAllAppsData: function (req, res) {
-        Application.find().exec(function (err, appsData) {
+        Application.find({status:'PENDING'}).exec(function (err, appsData) {
             if (err) res.send(err);
             res.json(appsData);
 

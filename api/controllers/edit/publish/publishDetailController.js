@@ -16,34 +16,51 @@ var notifyEmailAddressCSS = '';
 module.exports = {
 
     setPublishDetails: function(req,res){
-        var details = req.body;
+            var details = req.body;
+
             var searchApp = {
                 appId :req.body.appId,
                 appType: req.body.appType
             }
 
-            PublishDetails.update(searchApp,details).exec(function(err,app) {
+            var searchAppData = {
+                id :req.body.appId
+            }
+
+
+        PublishDetails.update(searchApp,details).exec(function(err,app) {
                 if (err) res.send(err);
                 else {
                     if (app.length==0) {
                         PublishDetails.create(details).exec(function(err,appDetails) {
                             if (err) res.send(err);
-                            else {
+                            /*else {
                                 res.send({
                                     appId: appDetails.appId,
                                     message: "New PublishDetails are created!!"
                                 });
-                            }
+                            }*/
                         });
                     }
-                    else{
+                    /*else{
                         res.send({
                             appId: details.appId,
                             message: "New PublishDetails are created!!"
                         });
-                    }
+                    }*/
                 }
-            });
+        });
+
+
+        Application.update(searchAppData, {status :"PENDING"}).exec(function(err,app) {
+            if (err) res.send(err);
+            else {
+                res.send({
+                    appId: app.appId,
+                    message: "New PublishDetails are created!!"
+                });
+            }
+        });
 
             // Email Subject
             var emailSubject = 'Ready to Publish : '+details.title;
