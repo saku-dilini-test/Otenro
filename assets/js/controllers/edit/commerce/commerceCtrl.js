@@ -693,7 +693,7 @@
                         toastr.success('Email Settings has been changed ', 'Success', {
                             closeButton: true
                         });
-                        if ($scope.selectedIndex==5){
+                        if ($scope.selectedIndex==6){
                             $mdDialog.hide();
                         }
 
@@ -803,19 +803,16 @@
             console.log($scope.email);
             for (var i = 0; i < $scope.email.length; i++) {
                 if ((type == "Order confirm") && (typeof $scope.email[0].orderConfirmedEmail === 'undefined')) {
-                    console.log('ss');
                     toastr.error('Save before test the Email ', 'Warning', {
                         closeButton: true
                     });
 
                 } else if ((type == "Order Fulfilled") && (typeof $scope.email[0].orderFulfilledEmail === 'undefined')) {
-
                     toastr.error('Save before test the Email', 'Warning', {
                         closeButton: true
                     });
 
                 } else if ((type == "Order Refund") && (typeof $scope.email[0].orderRefundEmail === 'undefined')) {
-                    console.log('saas');
                     toastr.error('Save before test the Email ', 'Warning', {
                         closeButton: true
                     });
@@ -835,7 +832,7 @@
                 }
             }
                 }).error(function (error) {
-                console.log("MainMenu Loading Error : " + error);
+                console.log("Email Loading Error : " + error);
             });
 
         };
