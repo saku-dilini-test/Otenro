@@ -34,7 +34,7 @@
                     <td>{{app.status}}</td>
 
                     <td>
-                        <a  ng-if="app.status=='DRAFT'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>
+                        <a  ng-if="app.status=='PENDING'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>
                         <a  ng-if="app.status=='PUBLISHED'" data-ng-click="getPublishDetails(app.id,app.userId)">Update</a>
                     </td>
                 </tr>
