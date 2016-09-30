@@ -270,6 +270,7 @@ module.exports = {
 
 
                 console.log(app[0]);
+                console.log(mBody);
                 var emailDetails = {
                     text: "",
                     from: app[0].fromEmail,
