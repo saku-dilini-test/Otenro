@@ -789,7 +789,8 @@
         $scope.testEmail = function (type) {
             console.log('d');
             var sendType = {
-                type: type
+                type: type,
+                userId: $auth.getPayload().id
             }
 
             var prams = {
