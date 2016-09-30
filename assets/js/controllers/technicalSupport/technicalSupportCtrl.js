@@ -33,7 +33,18 @@
                     $scope.splash.push(tempImageUrl);
                 }
 
-
+                // if pushConfigData undefined
+                if(typeof $scope.pushConfigData == 'undefined'){
+                    // set App ID
+                    var appId = $scope.appId;
+                    // API request get push config details
+                    technicalSupportService.getPushConfigDetails(appId)
+                        .success(function (data) {
+                            $scope.pushConfigData = data;
+                        }).error(function (error) {
+                        toastr.error('Push Config Details Loading Error', 'Warning', {closeButton: true});
+                    });
+                }
             }
 
 
@@ -103,6 +114,18 @@
             }
 
 
+            // push-config-details save function
+            $scope.savePushConfig = function (inputData) {
+                // set app ID
+                inputData.appId = $scope.appId;
+                // API request save push config details
+                technicalSupportService.savePushConfigDetails(inputData)
+                    .success(function (data) {
+                        toastr.success('Successfully Save Push Config Details', 'Warning', {closeButton: true});
+                    }).error(function (error) {
+                        toastr.error('Push Config Details Saving Error', 'Warning', {closeButton: true});
+                });
+            };
 
     }
 
