@@ -66,8 +66,11 @@
                                 <md-tabs md-dynamic-height md-border-bottom>
                                     <md-tab label="Phone">
                                         <md-content class="md-padding">
-                                            <img src="images/1 Login.png" alt="Smiley face" height="150px" width="84px">
-                                            <img src="images/2 Register.png" alt="Smiley face" height="150px" width="84px">
+                                            <img ng-if="splash[0] != null" ngf-src="splash[0]" height="150px" width="84px"/>
+                                            <img ng-if="splash[1] != null" ngf-src="splash[1]" height="150px" width="84px"/>
+                                            <img ng-if="splash[2] != null" ngf-src="splash[2]" height="150px" width="84px"/>
+                                            <img ng-if="splash[3] != null" ngf-src="splash[3]" height="150px" width="84px"/>
+
                                         </md-content>
                                     </md-tab>
                                     <md-tab label="Tablet">
@@ -94,14 +97,15 @@
                         512 x 512
                         32-bit PNG (with alpha)
                         <br>
-                        <img src="images/icon.png" alt="Hi-resicon" height="100" width="100">
+                        <img ng-if="splash[4] != null" ngf-src="splash[4]" height="100" width="100"/>
                         <br>
                         Feature Graphic
                         Default – English (United States) – en-US
                         1024 w x 500 h
                         JPG or 24-bit PNG (no alpha)
                         <br>
-                        <img src="images/feature_graphic.png" alt="Feature Graphic" height="150px" width="317px">
+                        <!--<img src="images/feature_graphic.png" alt="Feature Graphic" height="150px" width="317px">-->
+                        <img ng-if="splash[4] != null" ngf-src="splash[4]" height="150px" width="317px"/>
                     </md-content>
 
                 </md-tab>
