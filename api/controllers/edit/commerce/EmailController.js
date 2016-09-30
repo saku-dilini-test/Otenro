@@ -121,10 +121,12 @@ module.exports = {
         console.log(req.body);
         var type = req.body.type;
         var appId = req.param('appId');
+        var userId = req.body.userId;
 
         var data = {
             type : type,
-            appId: appId
+            appId: appId,
+            userId: userId
         }
         var msg = sentMails.sendConfirmEmail(data, function (msg) {
             res.send(msg);
