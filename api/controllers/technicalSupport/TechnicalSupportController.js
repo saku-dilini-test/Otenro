@@ -7,8 +7,11 @@
  *
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var EasyZip = require('easy-zip').EasyZip;
-var fs = require('fs-extra');
+
+var fs = require('fs-extra'),
+    xml2js = require('xml2js'),
+    config = require('../../services/config');
+
 module.exports = {
 
     
@@ -65,8 +68,13 @@ module.exports = {
      * save Push Config Details for given appID
      */
     savePushConfigDetails : function (req, res) {
-        var userData = req.body;
-        var appId    = req.body.appId;
+        
+        var userData   = req.body;
+        var appId      = userData.appId;
+        var userId     = userData.userId;
+        var ionicAPPID = userData.ionicAPPID;
+        var senderID   = userData.senderID;
+        var tempAppDirPath = config.ME_SERVER + userId + '/templates/' + appId;
         var searchQuery = {
             appId : appId
         };
@@ -88,6 +96,61 @@ module.exports = {
                 else{
                     sails.log.info('Successfully Update Push Config Details');
                     res.send(200,updateResult);
+                }
+                
+                // Sender ID update here
+                if(ionicAPPID || senderID) {
+                    
+                    // app.js file path 
+                    var appJsFilePath = tempAppDirPath + '/js/app.js';
+                    
+                    // Update in app.js file
+                    fs.readFile(appJsFilePath, 'utf-8',
+                        function (err, data) {
+                            if (err) return res.negotiate(err);
+
+                            var findIonicAppID = '8307b439'; // TODO : This may be change Later
+                            var findSenderID   = '528602483901'; // TODO : This may be change later
+                            if(ionicAPPID){
+                                data = data.replace(findIonicAppID, ionicAPPID);
+                            }
+                            if(senderID) {
+                                data = data.replace(findSenderID, senderID);
+                            }
+                            fs.writeFile(appJsFilePath, data , 'utf-8', function (err) {
+                                if (err) return res.negotiate(err);
+                            });
+                        });
+                }
+
+                // Sender ID update here
+                if(senderID){
+
+                    // Update in config.xml file
+                    fs.readFile(tempAppDirPath + '/config.xml', 'utf-8',
+                        function(err, data) {
+                            if (err){
+                                sails.log.info(err);
+                            }else{
+                                var parser = new xml2js.Parser(),
+                                    xmlBuilder = new xml2js.Builder();
+
+                                parser.parseString(data, function (err, result) {
+
+                                    result.widget['plugin'][0].variable[0]['$'].value = senderID;
+                                    var xml = xmlBuilder.buildObject(result);
+
+                                    fs.writeFile(tempAppDirPath + '/config.xml', xml,'utf-8',
+                                        function(err) {
+                                            if (err){
+                                                sails.log.info(err);
+                                            }else{
+                                                sails.log.info('Successfully update config.xml')
+                                            }
+                                        });
+                                });
+                            }
+                        });
                 }
             }
         });
