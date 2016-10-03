@@ -92,8 +92,8 @@ module.exports = {
     },
 
     addNewNavi : function(req,res){
-
-        var dePath=config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
+        
+        var dePath      = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
         
         req.file('file').upload({
             dirname: require('path').resolve(dePath)
