@@ -230,20 +230,42 @@
             articleService.showPublishArticleDialog(article);
 
         }
+        $scope.deleteArticle = function (index,article) {
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+                    this.confirm = function click(){
+                        $scope.articleList.splice(index, 1);
+                        articleService.deleteArticle(article).success(function(data) {
+                            toastr.success(data.message, 'Message', {
+                                closeButton: true
+                            });
+                            $mdDialog.hide();
+                            return articleService.showPreviewArticslesDilog('previewArticles');
+                        });
+                    },
+                    this.cancel = function click(){
+                        $mdDialog.hide();
+                        return articleService.showPreviewArticslesDilog('previewArticles');
+                    }
+                },
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                '<md-content >' +
+                '<div class="md-dialog-header">' +
+                '<h1>Deleting Product </h1>' +
+                '                </div> <br>'+
+                ' <div style="text-align:center"><lable> Are you sure you want to delete this article? </lable></div>' +
+                '<br><br><div class="md-dialog-buttons">'+
+                '<div class="inner-section">'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">Cancel</md-button>'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Confirm</md-button>'+
+                '</div>'+
+                '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
 
-        $scope.deleteArticle = function(index,article){
-
-            $scope.articleList.splice(index, 1);
-            articleService.deleteArticle(article).success(function(data) {
-                    toastr.success(data.message, 'Message', {
-                        closeButton: true
-                    });
-                }).error(function(err) {
-                    toastr.error(err, 'Warning', {
-                        closeButton: true
-                    });
-                });
-        }
+        };
 
         $scope.answer = function() {
             $mdDialog.hide();
