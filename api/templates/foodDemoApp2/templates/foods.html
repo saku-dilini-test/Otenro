@@ -1,40 +1,40 @@
 <ion-view class="made-easy-background-image made-easy-background-color " view-title="{{menuName}}">
-  <ion-content class="made-easy-third-navigation">
+    <ion-content class="made-easy-third-navigation">
 
-         <div ng-repeat="food in foods" ng-if="$index%2==0" class="row responsive-sm">
+        <div ng-repeat="food in foods" ng-if="$index%2==0" class="row responsive-sm">
             <div class="col col-50" ng-if="$index<foods.length">
-             <a href=" " ng-click="navigateFood(foods[$index])">
-                   <div class="cards animated zoomIn">
-                       <div class="header">
-                           <div class="header-image">
-                               <img ng-src="{{imageURL}}/{{foods[$index].imageUrl}}">
-                           </div>
-                       </div>
-                       <div class="content">
-                           <h2>{{foods[$index].name}}</h2>
-                           <p>{{food.briefDesc}}</p>
-                           <p>{{currency.sign}} : {{foods[$index].price}}</p>
-                       </div>
-                   </div>
-              </a>
-            </div>
-             <div class="col col-50" ng-if="($index+1)<foods.length">
-                 <a href=" " ng-click="navigateFood(foods[$index+1])">
-                     <div class="cards animated zoomIn">
-                         <div class="header">
-                             <div class="header-image">
-                                 <img ng-src="{{imageURL}}/{{foods[$index+1].imageUrl}}">
-                             </div>
-                         </div>
-                         <div class="content">
-                             <h2>{{foods[$index+1].name}}</h2>
-                             <p>{{food.briefDesc}}</p>
-                             <p>{{currency.sign}} : {{foods[$index+1].price}}</p>
-                         </div>
-                     </div>
+                <a href=" " ng-click="navigateFood(foods[$index])">
+                    <div class="cards animated zoomIn">
+                        <div class="header">
+                            <div class="header-image">
+                                <img ng-src="{{imageURL}}/{{foods[$index].imageUrl}}">
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h2 class="made-easy-header-font">{{foods[$index].name}}</h2>
+                            <p >{{foods[$index].detailedDesc}}</p>
+                            <!--<p ng-repeat="variant in foods[$index].variants">{{currency.sign}} : {{variant.price}}</p>-->
+                        </div>
+                    </div>
                 </a>
-             </div>
-         </div>
+            </div>
+            <div class="col col-50" ng-if="($index+1)<foods.length">
+                <a href=" " ng-click="navigateFood(foods[$index+1])">
+                    <div class="cards animated zoomIn">
+                        <div class="header">
+                            <div class="header-image">
+                                <img ng-src="{{imageURL}}/{{foods[$index+1].imageUrl}}">
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h2 class="made-easy-header-font">{{foods[$index+1].name}}</h2>
+                            <p >{{foods[$index+1].detailedDesc}}</p>
+                            <p ng-repeat="variant in foods[$index+1].variants">{{currency.sign}} : {{variant.price}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
 
     </ion-content>
 </ion-view>

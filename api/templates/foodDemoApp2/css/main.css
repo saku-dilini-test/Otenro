@@ -79,16 +79,18 @@ ion-side-menu-content{
   background-color: #4e6dde;
 }
 .made-easy-header-font{
-  color:#4e6dde;
-  font-family: URW Chancery L;
-  font-size: 12px;
+  color:#73A3B9;
+  font-family: sans-serif;
+  font-size: 14px;
   font-weight: bolder;
+  text-align:center;
 }
 .made-easy-content-font{
   color:#73A3B9;
   font-family: Ubuntu Light;
   font-size: 12px;
   font-weight: lighter;
+  text-align: center;
 }
 .made-easy-footer-font{
   color:#4e6dde;
@@ -107,6 +109,7 @@ ion-side-menu-content{
 /* ----- Second Navigation Page ----- */
 .made-easy-second-navigation {}
 .made-easy-second-navigation .header .header-image{
+    text-align:center;
     width: 100%;
     height: auto;
     cursor: url(../img/cursor.cur), auto;
@@ -134,8 +137,8 @@ ion-side-menu-content{
     text-align: center;
     color: #006666;
 }
-.made-easy-view .item-buy-quantity{
-    width: 50px;
+.made-easy-view .item-buy{
+    width: 100%;
 }
 .made-easy-view .item-error-message{
     color: red;
@@ -352,13 +355,7 @@ padding:5px;
   margin-right: 0; }
   
   .button.button-positive {
-    border-color: transparent;
-    background-color: #387ef5;
-    color: #fff;
     cursor: url(../img/cursor.cur), auto;
-    /*width: 30%;
-    margin-left: 34%;
-	margin-top: 30px;*/
 
 }
 .input-label {
@@ -378,15 +375,6 @@ padding:5px;
  */
 a[href]:hover{
     cursor: url(../img/cursor.cur), auto;
-}
-
-/*
- *  back to login text in register page
- */
-.back-to-login-text p{
-    text-align: center;
-    color: #fff;
-    font-weight: bold;
 }
 
 /** ----------- End Custom update Css Class ---------- **/
