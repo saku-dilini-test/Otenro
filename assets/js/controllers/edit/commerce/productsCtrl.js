@@ -17,6 +17,16 @@
         var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
                             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=thirdNavi/";
 
+        function  disableTabs(selectedTab,tab1,tab2,tab3,tab4) {
+            $scope.selectedTab = selectedTab;
+            $scope.addProductsOptionParams = {
+                firstLocked : tab1,
+                secondLocked: tab2,
+                thirdLocked: tab3,
+                imageUploadLocked : tab4
+            };
+        }
+        disableTabs(0,false,true,true ,true);
         if (initialData.product.tempImageArray){
             for (var i=0; i<initialData.product.tempImageArray.length; i++) {
                 var tempImageUrl = tempImagePath + initialData.product.tempImageArray[i].img;
@@ -66,7 +76,7 @@
          */
         $scope.addType = function (type, current) {
             $scope.product.type = type.type;
-            $scope.selectedTab = current;
+            disableTabs(current,false,false,true,true);
         };
 
         /**
@@ -75,13 +85,12 @@
          * @param current
          */
         $scope.generalDetails = function (product, current) {
-            $scope.enableTab = "false";
             //When new product is adding to the system
             if(!$scope.product.variants){
                 $scope.product.variants = [];
                 $scope.product.variants.push({"sku":product.sku,"name":product.name})
             }
-            $scope.selectedTab = current;
+            disableTabs(current,false,false,false,true);
         };
 
         /**
@@ -148,7 +157,7 @@
 
         $scope.addProductVariants = function (selection, variants,current) {
             $scope.selection = selection;
-            $scope.selectedTab = current;
+            disableTabs(current,false,false,false,false);
 
         };
 
@@ -508,8 +517,7 @@
 
         // when product edit start in second tab and enable pagination
         if (initialData.product.id !== undefined){
-            $scope.selectedTab = 1;
-            $scope.enableTab = false;
+            disableTabs(1,false,false,false ,false);
         }
 
 

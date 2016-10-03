@@ -3,12 +3,12 @@
     angular.module("appEdit").controller("CommerceCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope',
         'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','comingSoonService',
-        '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants',
+        '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants','$templateCache',
         CommerceCtrl]);
 
     function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope,
              SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
-             contactUsService,uiGmapGoogleMapApi,uiGridConstants) {
+             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache) {
 
         $scope.refund = [];
         $scope.unfulfilled = [];
@@ -38,7 +38,12 @@
             }, 1000, 1);
             return deferred.promise;
         };
-
+        $templateCache.put('ui-grid/selectionRowHeaderButtons',
+            "<div class=\"ui-grid-selection-row-header-buttons \" ng-class=\"{'ui-grid-row-selected': row.isSelected}\" ><input style=\"margin: 0; vertical-align: middle\" type=\"checkbox\" ng-model=\"row.isSelected\" ng-click=\"row.isSelected=!row.isSelected;selectButtonClick(row, $event)\">&nbsp;</div>"
+        );
+        $templateCache.put('ui-grid/selectionSelectAllButtons',
+            "<div class=\"ui-grid-selection-row-header-buttons \" ng-class=\"{'ui-grid-all-selected': grid.selection.selectAll}\" ng-if=\"grid.options.enableSelectAll\"><input style=\"margin: 0; vertical-align: middle;\" type=\"checkbox\" ng-model=\"grid.selection.selectAll\" ng-click=\"grid.selection.selectAll=!grid.selection.selectAll;headerButtonClick($event)\"></div>"
+        );
         $scope.gridOptions1 = {
 
             enableRowSelection: true,

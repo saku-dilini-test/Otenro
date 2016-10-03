@@ -113,6 +113,11 @@
         $scope.getArray = function(){
             $scope.exportArrayN = [];
             angular.forEach($scope.exportArray, function(value, key) {
+            if(value.quantity){
+                value.quantity  = value.quantity;
+            }else if(value.unlimited){
+                value.quantity  = 'unlimited';
+            }
                 $scope.exportArrayN.push({
 
                     'Name' : value.name,
