@@ -37,9 +37,6 @@
                 });
             },
             addGooglePlayInfo: function(playStoreData){
-
-                   /* return $http.post(SERVER_URL+ 'edit/setPublishDetails',playStoreData);
-*/
                 return Upload.upload({
                     url: SERVER_URL + 'edit/setPublishDetails',
                     fields: {
@@ -72,6 +69,16 @@
                         },
                         file: file
                     });
+            },
+            validateImage: function(file,imgId){
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/validateImage',
+                    fields: {
+                        'appId':$rootScope.appId,
+                        'imgId':imgId,
+                    },
+                    file: file
+                });
             },
             addContentRating: function(contentRating){
                 return Upload.upload({
