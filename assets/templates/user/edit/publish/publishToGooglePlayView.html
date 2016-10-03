@@ -45,33 +45,53 @@
                             </fieldset>-->
                         </div>
                         <div class="clearfix">
-                            <fieldset class="col-4 profile-image-section">
-                                <label class="reset-inline">logo</label>
+                            <fieldset class="col-4 profile-image-section ">
+                                <label class="reset-inline">Hi-res icon</label>
                                 <a class="feature01 logo-upload">
                                     <span class="overlay01">
                                         <span class="caption01">
-                                           <input type="button" class="me-default-button" ngf-select ng-model="splash[4]" ngf-accept="image/*" value="Add Image"/>
+                                           <input type="button" class="me-default-button" ngf-select
+                                                  ng-model="splash[4]" ngf-accept="image/*"
+                                                   ng-click ='validateImg(splash[4],4)' value="Add Image" id="imageid"/>
                                         </span>
                                     </span>
-                                    <img ng-if="splash[4] != null" ngf-src="splash[4]" style="width:120px; height:120px;" />
-       <!--                             <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />-->
+                                    <img ng-if="splash[4] != null" ngf-src="splash[4]"  style="width:120px; height:120px;" />
                                     <img ng-show="splash[4] == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
                                 </a>
                             </fieldset>
 
+                            <fieldset class="col-4 reset-margin">
+                                <label class="reset-inline">Feature Graphic</label>
+                                <a class="feature01 logo-upload">
+                                    <span class="overlay01">
+                                        <span class="caption01">
+                                           <input type="button" class="me-default-button" ngf-select
+                                                  ng-model="splash[5]" ngf-accept="image/*"
+                                                  value="Add Image" />
+                                        </span>
+                                    </span>
+                                    <img ng-if="splash[5] != null" ngf-src="splash[5]"  style="width:120px; height:120px;" />
+                                    <!--                             <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />-->
+                                    <img ng-show="splash[5] == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="307" height="150" />
+                                </a>
+                            </fieldset>
+
+                        </div>
+                        <br>
+                        <div class="clearfix">
                           <div class="pull-right">
                             <label class="reset-inline">Screen Shots</label>
                             <div class="clearfix">
-                                <fieldset class="col-4-1">
+                                <fieldset class="col-4">
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
-                                            <input type="file" ngf-select ng-model="splash[0]"/>
+                                            <input type="file" ngf-select ng-model="splash[0]" />
                                             <img ng-show="splash[0] != null" ngf-src="splash[0]" width="80" height="120" />
                                             <img ng-show="splash[0]== null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="80" height="120" />
                                         </div>
                                     </div>
                                 </fieldset>
-                                <fieldset class="col-4-1">
+                                <fieldset class="col-4">
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
                                             <input type="file" ngf-select ng-model="splash[1]"/>
@@ -80,7 +100,7 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <fieldset class="col-4-1">
+                                <fieldset class="col-4">
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
                                             <input type="file" ngf-select ng-model="splash[2]"/>
@@ -89,7 +109,7 @@
                                         </div>
                                     </div>
                                 </fieldset>
-                                <fieldset class="col-4-1 reset-margin">
+                                <fieldset class="col-4 reset-margin">
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
                                             <input type="file" ngf-select ng-model="splash[3]"/>

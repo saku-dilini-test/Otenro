@@ -14,6 +14,30 @@
         $scope.image = [];
         $scope.splash = [];
 
+        $scope.validateImg = function (splashImg,imgId) {
+            alert(splashImg);
+
+            publishService.validateImage(splashImg,imgId)
+                .success(function (data, status, headers, config) {
+                    if (data.message==true){
+                        toastr.success('Images  has been added', 'Saved', {
+                            closeButton: true
+                        });
+                    }else {
+                        toastr.success('You need to resize your '+ data.imgType +
+                            ' The required dimensions are '+ (data.imgHeight) +' x '+ (data.imgWidth), 'Error', {
+                            closeButton: true
+                        });
+                        $scope.splash[imgId] = null;
+                    }
+                }).error(function (data, status, headers, config) {
+                toastr.error('Error while saving data', 'Warning', {
+                    closeButton: true
+                });
+            });
+
+        };
+        
 
 
 
@@ -78,7 +102,7 @@
                             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=publish/";
 
 
-                                for (var i=0; i< 5; i++) {
+                                for (var i=0; i< 6; i++) {
                                     var tempImageUrl = tempImagePath + i+'.png';
                                     $scope.splash.push(tempImageUrl);
                                 }
@@ -104,9 +128,11 @@
         $scope.addGooglePlayInfo = function(file, playStoreData, splash) {
 
 
-        if(splash[4] == null || playStoreData.title == null || playStoreData.shortDescription == null || playStoreData.language == null ||
-        playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
-        splash[0] == null || splash[1] == null || splash[2] == null || splash[3] == null ||playStoreData.email==null){
+        if(splash[4] == null || splash[5] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
+            playStoreData.language == null ||
+            playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
+            splash[0] == null || splash[1] == null || splash[2] == null || splash[3] == null ||playStoreData.email==null){
+
                     toastr.error('Fill all the fields', 'Warning', {
                           closeButton: true
                     });
@@ -129,16 +155,24 @@
                         publishService.uploadPublishFiles(splash[i],i)
                             .success(function (data, status, headers, config) {
                                 $mdDialog.hide();
-                                toastr.success('Images  has been added', 'Saved', {
-                                    closeButton: true
-                                });
+                                if (data.message==true){
+                                    toastr.success('Images  has been added', 'Saved', {
+                                        closeButton: true
+                                    });
+                                }else {
+                                    toastr.success('You need to resize your '+ data.imgType +
+                                        ' The required dimensions are '+ (data.imgHeight) +' x '+ (data.imgWidth), 'Error', {
+                                        closeButton: true
+                                    });
+                                    return;
+                                }
+
                             }).error(function (data, status, headers, config) {
                             toastr.error('Error while saving data', 'Warning', {
                                 closeButton: true
                             });
                         });
                     }
-
                 }
         }
         };
