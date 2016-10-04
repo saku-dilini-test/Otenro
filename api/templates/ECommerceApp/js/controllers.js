@@ -75,8 +75,8 @@ angular.module('starter.controllers', [])
             });
 
             // defined second navigation image path
-//            $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
-//                              "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
+            $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
+                              "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
         });
 
         // ionic slider options
