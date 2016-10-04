@@ -14,7 +14,7 @@
                     <span>Characters left: {{maxMenuNavigation - menu.name.length}}</span>
                 </fieldset>
                 <br>
-                <fieldset class="col-2">
+                <fieldset>
                         <!--<div class="file-upload-wrapper clearfix">
                             <p class="file-upload-msg">Select a image to upload</p>
                             <div class="pull-left">
@@ -39,24 +39,25 @@
 
 
                         <div class="file-upload-wrapper clearfix">
-                            <p class="file-upload-msg">Crop your image</p>
-                            <div class="pull-left">
-                                <input  class="pull-left" type="file" ng-click = "cropImage()" id="fileInput" />
+                            <div class="inputField">
+                                <div class="btn-material">
+                                    <span>Select a image</span>
+                                    <input type="file" value="file" ng-click="cropImage()" id="fileInput">
+                                </div>
                             </div>
+
                             <div class="cropArea">
                                 <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
                             </div>
                         </div>
 
-                        <div class="uploaded-section pull-left clearfix">
+                        <div class="uploaded-section image-upload clearfix" style="width:35%">
                             <div class="uploaded-new-image">
-                                <br>
                                 <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
                                      height="150" style="display:none" />
                                 <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
 
-                                <button class="me-upload-image-button" ng-click="addImage(picFile)">Upload Image
-                                </button>
+                                <button class="btn-material" ng-click="addImage(picFile)">crop & upload</button>
                             </div>
                             <div class="uploaded-old-images">
                                 <p>Uploaded Product Images</p>
@@ -70,8 +71,8 @@
                                              width="80" height="80"/>
                                     </div>
                                 </div>
-                                </div>
                             </div>
+                        </div>
 
                 </fieldset>
 

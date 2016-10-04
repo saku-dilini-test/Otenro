@@ -2,18 +2,18 @@
   <ion-content >
    <div class="card animated zoomIn">
    <div class="box_inner">
-    <h4>Shopping Cart Item List</h4>
-    <div class="item item-stacked-label">
+    <h4 class="made-easy-header-font">Shopping Cart</h4>
+    <div>
       <div class="row2">
-        <div class="col2 col-51">Item</div>
-        <div class="col2">Qty</div>
-        <div class="col2">Price</div>
-        <div class="col2"></div>
+        <div class="col col-50">Item</div>
+        <div class="col">Qty</div>
+        <div class="col">Price</div>
+        <div class="col"></div>
       </div>
     </div>
-    <div class="item item-stacked-label" ng-repeat="item in cartItems" >
+    <div class="cartItems" ng-repeat="item in cartItems" >
       <div class="row">
-        <div class="col" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive "><p>{{item.name}}</p></div>
+        <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive "><p>{{item.name}}</p></div>
         <div class="col" ng-model="item.qty" >{{item.qty}}</div>
         <div class="col" ng-model="item.total" >{{item.total}}</div>
         <div class="col"><a ng-click="removeItem(index)">x</a></div>
@@ -25,11 +25,12 @@
             <div class="col" ng-model="tax" >{{tax}}</div>
         </div>
     </div>
-    <div class="item item-stacked-label">
+    <div >
       <div class="row">
         <div class="col col-50">Total</div>
         <div class="col" ng-model="quantity">{{getTotalQuantity()}}</div>
         <div class="col" ng-model="total" >{{getTotal()}}</div>
+        <div class="col"></div>
       </div>
     </div>
 
@@ -51,9 +52,9 @@
         </div>
       </div>
     </ui>
-    <div class="panel2">
-      <a class="social-button" ng-click="pickup()" >Purchase</a>
-      <a class="social-button" ng-click="delivery(cartItems)" >Delivery</a>
+    <div class="row cart-buttons">
+      <button class="button button-block button-small button-positive" ng-click="pickup()" >Purchase</button>
+      <button class="button button-block button-small button-positive" ng-click="delivery(cartItems)" >Delivery</button>
     </div>
      </div></div>
   </ion-content></div>

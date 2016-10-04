@@ -918,10 +918,6 @@ table{
     border-bottom: 1px solid #C1C1C1;
 }
 
-.me-simple-table tr:hover{
-    background-color: #EDEDED;
-}
-
 .me-simple-table td,
 .me-simple-table th{
     font-size: 12px;
@@ -938,7 +934,15 @@ table{
 
 .me-simple-table td{
     color: #999;
-    padding: 12px 20px;
+    padding: 0px 12px 0 0;
+}
+.me-simple-table td input{
+    margin:12px 0;
+}
+
+.me-simple-table span {
+    color: red;
+    font-size: 10px;
 }
 
 .me-simple-table td a{
