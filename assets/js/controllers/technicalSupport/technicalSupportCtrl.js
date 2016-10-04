@@ -28,7 +28,7 @@
                     +"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=publish/";
 
 
-                for (var i=0; i< 5; i++) {
+                for (var i=0; i< 6; i++) {
                     var tempImageUrl = tempImagePath + i+'.png';
                     $scope.splash.push(tempImageUrl);
                 }

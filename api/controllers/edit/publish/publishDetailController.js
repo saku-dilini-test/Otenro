@@ -34,23 +34,10 @@ module.exports = {
                     if (app.length==0) {
                         PublishDetails.create(details).exec(function(err,appDetails) {
                             if (err) res.send(err);
-                            /*else {
-                                res.send({
-                                    appId: appDetails.appId,
-                                    message: "New PublishDetails are created!!"
-                                });
-                            }*/
                         });
                     }
-                    /*else{
-                        res.send({
-                            appId: details.appId,
-                            message: "New PublishDetails are created!!"
-                        });
-                    }*/
                 }
         });
-
 
         Application.update(searchAppData, {status :"PENDING"}).exec(function(err,app) {
             if (err) res.send(err);
@@ -99,102 +86,16 @@ module.exports = {
                      req.body.appId +'/img/publish/'+req.body.imgId+'.png', function (err) {
 
                      if (err) return res.send(err);
-                     else if (req.body.imgId==4||req.body.imgId==5) {
-                         var sizeOf = require('image-size');
-                         var dimensions = sizeOf(config.APP_FILE_SERVER+req.userId + '/templates/' +
-                             req.body.appId +'/img/publish/'+req.body.imgId+'.png');
-                             console.log(dimensions.width, dimensions.height);
-
-
-                         if (req.body.imgId==4){
-                             var imgWidth = 512,
-                                 imgHeight= 512,
-                                 imgType = "Hi-res icon";
-                         }else if (req.body.imgId==5) {
-                             var imgWidth = 1024,
-                                 imgHeight= 500,
-                                 imgType = "Feature Graphic";
-                         }
-                         if (dimensions.width!=imgWidth&dimensions.height!=imgHeight){
-                             fs.unlinkSync(config.APP_FILE_SERVER+req.userId + '/templates/' +
-                                 req.body.appId +'/img/publish/'+req.body.imgId+'.png');
-                             return res.json({
-                                 message: false,
-                                 imgHeight:imgHeight,
-                                 imgWidth:imgWidth,
-                                 imgType :imgType
-                             });
-                         }else {
-                             return res.json({
-                                 message: true
-                             });
-                         }
-
-
-                     }else {
+                     else {
                          return res.json({
                              message: true
                          });
                      }
-
                  });
              }
          });
     },
 
-    validateImage :function (req,res) {
-
-        req.file('file').upload({
-            dirname: require('path').resolve(config.APP_FILE_SERVER+req.userId + '/templates/' +
-                req.body.appId +'/img/publish/')
-        },function (err, uploadedFiles) {
-            if (err) return res.negotiate(err);
-            else {
-                fs.rename(uploadedFiles[0].fd, config.APP_FILE_SERVER+req.userId + '/templates/' +
-                    req.body.appId +'/img/publish/'+req.body.imgId+'.png', function (err) {
-
-                    if (err) return res.send(err);
-                    else if (req.body.imgId==4||req.body.imgId==5) {
-                        var sizeOf = require('image-size');
-                        var dimensions = sizeOf(config.APP_FILE_SERVER+req.userId + '/templates/' +
-                            req.body.appId +'/img/publish/'+req.body.imgId+'.png');
-                        console.log(dimensions.width, dimensions.height);
-
-
-                        if (req.body.imgId==4){
-                            var imgWidth = 512,
-                                imgHeight= 512,
-                                imgType = "Hi-res icon";
-                        }else if (req.body.imgId==5) {
-                            var imgWidth = 1024,
-                                imgHeight= 500,
-                                imgType = "Feature Graphic";
-                        }
-                        if (dimensions.width!=imgWidth&dimensions.height!=imgHeight){
-                            fs.unlinkSync(config.APP_FILE_SERVER+req.userId + '/templates/' +
-                                req.body.appId +'/img/publish/'+req.body.imgId+'.png');
-                            return res.json({
-                                message: false,
-                                imgHeight:imgHeight,
-                                imgWidth:imgWidth,
-                                imgType :imgType
-                            });
-                        }else {
-                            return res.json({
-                                message: true
-                            });
-                        }
-                    }else {
-                        return res.json({
-                            message: true
-                        });
-                    }
-
-                });
-            }
-        });
-
-    },
 
 
     setContentRating: function(req,res){

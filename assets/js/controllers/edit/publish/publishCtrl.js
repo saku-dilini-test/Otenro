@@ -14,29 +14,7 @@
         $scope.image = [];
         $scope.splash = [];
 
-        $scope.validateImg = function (splashImg,imgId) {
-            alert(splashImg);
 
-            publishService.validateImage(splashImg,imgId)
-                .success(function (data, status, headers, config) {
-                    if (data.message==true){
-                        toastr.success('Images  has been added', 'Saved', {
-                            closeButton: true
-                        });
-                    }else {
-                        toastr.success('You need to resize your '+ data.imgType +
-                            ' The required dimensions are '+ (data.imgHeight) +' x '+ (data.imgWidth), 'Error', {
-                            closeButton: true
-                        });
-                        $scope.splash[imgId] = null;
-                    }
-                }).error(function (data, status, headers, config) {
-                toastr.error('Error while saving data', 'Warning', {
-                    closeButton: true
-                });
-            });
-
-        };
         
 
 
@@ -126,55 +104,49 @@
 
 
         $scope.addGooglePlayInfo = function(file, playStoreData, splash) {
+             $scope.isValidFormData = true;
+             $scope.count = 0;
+            if(splash[4] == null || splash[5] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
+                playStoreData.language == null ||
+                playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
+                splash[0] == null || splash[1] == null || splash[2] == null || splash[3] == null ||playStoreData.email==null){
 
+                        toastr.error('Fill all the fields', 'Warning', {
+                              closeButton: true
+                        });
+            }
+            else {
 
-        if(splash[4] == null || splash[5] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
-            playStoreData.language == null ||
-            playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
-            splash[0] == null || splash[1] == null || splash[2] == null || splash[3] == null ||playStoreData.email==null){
-
-                    toastr.error('Fill all the fields', 'Warning', {
-                          closeButton: true
-                    });
-        }
-        else {
-
-            publishService.addGooglePlayInfo(playStoreData)
-                .success(function(data, status, headers, config) {
-                    $mdDialog.hide();
-                    toastr.success('Genaral info has been added', 'Saved', {
-                        closeButton: true
-                    });
-                }).error(function(data, status, headers, config) {
-                toastr.error('Error while saving data', 'Warning', {
-                    closeButton: true
-                });
-            });
-                for (var i = 0; i < splash.length; i++) {
-                    if (JSON.stringify(splash[i]).match("blobUrl")){
-                        publishService.uploadPublishFiles(splash[i],i)
-                            .success(function (data, status, headers, config) {
-                                $mdDialog.hide();
-                                if (data.message==true){
-                                    toastr.success('Images  has been added', 'Saved', {
-                                        closeButton: true
-                                    });
-                                }else {
-                                    toastr.success('You need to resize your '+ data.imgType +
-                                        ' The required dimensions are '+ (data.imgHeight) +' x '+ (data.imgWidth), 'Error', {
-                                        closeButton: true
-                                    });
-                                    return;
-                                }
-
-                            }).error(function (data, status, headers, config) {
-                            toastr.error('Error while saving data', 'Warning', {
+                    publishService.addGooglePlayInfo(playStoreData)
+                        .success(function(data, status, headers, config) {
+                            toastr.success('Genaral info has been added', 'Saved', {
                                 closeButton: true
                             });
+                        }).error(function(data, status, headers, config) {
+                        toastr.error('Error while saving data', 'Warning', {
+                            closeButton: true
                         });
-                    }
-                }
-        }
+                    });
+
+                    splash.forEach(function(splash){
+                        if (JSON.stringify(splash).match("blobUrl")){
+                            publishService.uploadPublishFiles(splash,$scope.count)
+                                .success(function (data, status, headers, config) {
+                                    if (data.message==true){
+                                        toastr.success('Images  has been added', 'Saved', {
+                                            closeButton: true
+                                        });
+                                    }
+                                }).error(function (data, status, headers, config) {
+                                toastr.error('Error while saving data', 'Warning', {
+                                    closeButton: true
+                                });
+
+                            });
+                        }
+                        $scope.count ++;
+                    })
+            }
         };
 
 

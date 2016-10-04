@@ -65,7 +65,7 @@
                         url: SERVER_URL + 'edit/uploadPublishFiles',
                         fields: {
                             'appId':$rootScope.appId,
-                            'imgId':imgId,
+                            'imgId':imgId
                         },
                         file: file
                     });
@@ -75,7 +75,7 @@
                     url: SERVER_URL + 'edit/validateImage',
                     fields: {
                         'appId':$rootScope.appId,
-                        'imgId':imgId,
+                        'imgId':imgId
                     },
                     file: file
                 });
