@@ -167,7 +167,6 @@ module.exports.routes = {
     'GET /edit/getContactUs': 'edit/setting/ContactUsController.getContactUs',
     'POST /edit/setPublishDetails': 'edit/publish/publishDetailController.setPublishDetails',
     'POST /edit/uploadPublishFiles': 'edit/publish/publishDetailController.uploadPublishFiles',
-    'POST /edit/validateImage': 'edit/publish/publishDetailController.validateImage',
     
     'POST /edit/setContentRating': 'edit/publish/publishDetailController.setContentRating',
     'POST /edit/setAppReviewInformation': 'edit/publish/publishDetailController.setAppReviewInformation',
