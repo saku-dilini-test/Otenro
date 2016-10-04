@@ -51,8 +51,8 @@
                                     <span class="overlay01">
                                         <span class="caption01">
                                            <input type="button" class="me-default-button" ngf-select
-                                                  ng-model="splash[4]" ngf-accept="image/*"
-                                                   ng-click ='validateImg(splash[4],4)' value="Add Image" id="imageid"/>
+                                                 ng-model="splash[4]" ngf-accept="image/*"
+                                                  ngf-validate="{width: {min: 512, max:512}, height: {min: 512, max: 512}}"/>
                                         </span>
                                     </span>
                                     <img ng-if="splash[4] != null" ngf-src="splash[4]"  style="width:120px; height:120px;" />
@@ -67,10 +67,10 @@
                                         <span class="caption01">
                                            <input type="button" class="me-default-button" ngf-select
                                                   ng-model="splash[5]" ngf-accept="image/*"
-                                                  value="Add Image" />
+                                                  value="Add Image" ngf-validate="{width: {min: 1024, max:1024}, height: {min: 500, max: 500}}" />
                                         </span>
                                     </span>
-                                    <img ng-if="splash[5] != null" ngf-src="splash[5]"  style="width:120px; height:120px;" />
+                                    <img ng-if="splash[5] != null" ngf-src="splash[5]"  style="width:120px; height:120px;" id="FeatureGraphic"/>
                                     <!--                             <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />-->
                                     <img ng-show="splash[5] == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="307" height="150" />
                                 </a>
