@@ -116,8 +116,9 @@
 
             // push-config-details save function
             $scope.savePushConfig = function (inputData) {
-                // set app ID
-                inputData.appId = $scope.appId;
+                // set app ID & user ID
+                inputData.appId  = $scope.appId;
+                inputData.userId = $scope.userId;
                 // API request save push config details
                 technicalSupportService.savePushConfigDetails(inputData)
                     .success(function (data) {

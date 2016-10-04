@@ -1998,3 +1998,8 @@ trix-toolbar .button_group input[type=button]{
 .color-link{
     color: rgb(79, 156, 255) !important;
 }
+
+.ui-grid-selection-row-header-buttons {
+  cursor: pointer;
+  opacity: 1;
+}
