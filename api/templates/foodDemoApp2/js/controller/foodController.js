@@ -17,6 +17,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
     $scope.foods = data;
+    console.log($scope.foods)
         for(var i=0; i<data.length; i++){
             if(data[i].discount){
             $scope.foods[i].price = data[i].discount;
@@ -39,7 +40,10 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.sliderOptions = {
           initialSlide: 0,
           direction: 'horizontal', //or vertical
-          speed: 300 //0.3s transition
+          speed: 300, //0.3s transition
+          nextButton: '.swiper-button-next',
+          prevButton: '.swiper-button-prev',
+          centeredSlides: true
         };
     $scope.sliderDelegate = null;
     if($stateParams.item){
