@@ -146,7 +146,13 @@
                             <fieldset>
                                 <label>Email</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input class="input-shadow-border" type="text" name="email" ng-model="playStoreData.email" required/>
+                                <input class="input-shadow-border"
+                                       type="email"
+                                       ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                       name="email" ng-model="playStoreData.email" required/>
+                                <span class="help-block" ng-show="generalForm.email.$dirty && generalForm.email.$invalid">
+                                        Enter a proper email
+                                </span>
                             </fieldset>
                         </div>
                     </div>
