@@ -116,6 +116,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       }
    })
       .state('app.policies', {
+          cache: false,
           url: '/policies',
           views: {
               'menuContent': {
@@ -145,6 +146,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           }
       })
       .state('app.terms', {
+          cache: false,
           url: '/terms',
           views: {
               'menuContent': {

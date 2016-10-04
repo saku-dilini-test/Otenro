@@ -16,7 +16,7 @@
      },
      seedData: [
              {
-                 currency : 'SLR',
+                 currency : 'LKR',
                  sign : 'Rs.'
              },
              {

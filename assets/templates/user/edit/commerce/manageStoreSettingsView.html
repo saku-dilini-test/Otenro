@@ -95,7 +95,7 @@
                                                 <span ng-show="storeSettingsForm.weekDayHours.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input  class="input-shadow-border" type="number" name="weekDaysOpenMinute" min="00" max="55" step="5" ng-model="openHours.weekDaysOpenMinute" ng-pattern="/^[0-5][0-9]$/" ng-required />
+                                                <input  class="input-shadow-border" type="number" name="weekDaysOpenMinute" min="00" max="55" step="5" ng-model="openHours.weekDaysOpenMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span ng-show="storeSettingsForm.weekDaysOpenMinute.$error.pattern">Invalid time!</span>
                                                 <span ng-show="storeSettingsForm.weekDaysOpenMinute.$error.number">Please enter a number!</span>
                                             </td>
@@ -108,7 +108,7 @@
                                                 <span ng-show="storeSettingsForm.weekDaysCloseHour.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input  class="input-shadow-border" type="number" name="weekDaysCloseMinute" min="00" max="55" step="5" ng-model="openHours.weekDaysCloseMinute" ng-pattern="/^[0-5][0-9]$/" ng-required />
+                                                <input  class="input-shadow-border" type="number" name="weekDaysCloseMinute" min="00" max="55" step="5" ng-model="openHours.weekDaysCloseMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span ng-show="storeSettingsForm.weekDaysCloseMinute.$error.pattern">Invalid time!</span>
                                                 <span ng-show="storeSettingsForm.weekDaysCloseMinute.$error.number">Please enter a number!</span>
                                             </td>
@@ -126,7 +126,7 @@
                                                 <span ng-show="storeSettingsForm.saturdayOpenHour.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="saturdayOpenMinute" min="00" max="55" step="5" ng-model="openHours.saturdayOpenMinute" ng-pattern="/^[0-5][0-9]$/" ng-required />
+                                                <input class="input-shadow-border" type="number" name="saturdayOpenMinute" min="00" max="55" step="5" ng-model="openHours.saturdayOpenMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span ng-show="storeSettingsForm.saturdayOpenMinute.$error.pattern">Invalid time!</span>
                                                 <span ng-show="storeSettingsForm.saturdayOpenMinute.$error.number">Please enter a number!</span>
                                             </td>
@@ -137,7 +137,7 @@
                                                 <span ng-show="storeSettingsForm.saturdayCloseHour.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="saturdayCloseMinute" min="00" max="55" step="5" ng-model="openHours.saturdayCloseMinute" ng-pattern="/^[0-5][0-9]$/" ng-required />
+                                                <input class="input-shadow-border" type="number" name="saturdayCloseMinute" min="00" max="55" step="5" ng-model="openHours.saturdayCloseMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span ng-show="storeSettingsForm.saturdayCloseMinute.$error.pattern">Invalid time!</span>
                                                 <span ng-show="storeSettingsForm.saturdayCloseMinute.$error.number">Please enter a number!</span>
                                             </td>
@@ -155,7 +155,7 @@
                                                 <span ng-show="storeSettingsForm.sundayOpenHour.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="sundayOpenMinute" min="00" max="55" step="5" ng-model="openHours.sundayOpenMinute" ng-pattern="/^[0-5][0-9]$/" ng-required />
+                                                <input class="input-shadow-border" type="number" name="sundayOpenMinute" min="00" max="55" step="5" ng-model="openHours.sundayOpenMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span ng-show="storeSettingsForm.sundayOpenMinute.$error.pattern">Invalid time!</span>
                                                 <span ng-show="storeSettingsForm.sundayOpenMinute.$error.number">Please enter a number!</span>
                                             </td>
@@ -168,7 +168,7 @@
                                                 <span ng-show="storeSettingsForm.sundayCloseHour.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
-                                                <input class="input-shadow-border" type="number" name="sundayCloseMinute" min="00" max="55" step="5" ng-model="openHours.sundayCloseMinute" ng-pattern="/^[0-5][0-9]$/" ng-required />
+                                                <input class="input-shadow-border" type="number" name="sundayCloseMinute" min="00" max="55" step="5" ng-model="openHours.sundayCloseMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span ng-show="storeSettingsForm.sundayCloseMinute.$error.pattern">Invalid time!</span>
                                                 <span ng-show="storeSettingsForm.sundayCloseMinute.$error.number">Please enter a number!</span>
                                             </td>

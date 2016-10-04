@@ -5,7 +5,7 @@
                     <div class="image-wrapper order-item-slide">
                         <ion-slides options="sliderOptions" slider="sliderDelegate" >
                             <ion-slide-page ng-repeat="image in images">
-                                <img ng-src="img/thirdNavi/{{image.img}}" >
+                                <img ng-src="{{imageURL}}/{{image.img}}" >
                             </ion-slide-page>
                         </ion-slides>
                         <!-- Add Arrows -->

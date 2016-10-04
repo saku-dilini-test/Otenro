@@ -44,10 +44,11 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
   // setup an abstract state for the tabs directive
 
    .state('tab', {
+    cache: false,
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/menu.html',
-        controller: 'AppCtrl'
+    controller: 'AppCtrl'
   })
 
   // Each tab has its own nav history stack:
@@ -75,6 +76,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     }
   })
   .state('tab.home', {
+    cache: false,
     url: '/home',
     views: {
           'menuContent': {
@@ -84,6 +86,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     }
   })
     .state('tab.menu', {
+    cache: false,
     url: '/menu',
     views: {
       'menuContent': {
@@ -93,6 +96,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     }
   })
     .state('tab.items', {
+    cache: false,
     url: '/menu/:menuId/:menuName',
     views: {
       'menuContent': {
@@ -115,6 +119,7 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
     }
   })
     .state('tab.cart', {
+     cache: false,
      url: '/cart',
      views: {
            'menuContent': {
