@@ -1,6 +1,6 @@
-var mobileApp=angular.module('foodDemoApp', ['ionic','satellizer']);
+var mobileApp=angular.module('foodDemoApp', ['ionic','ionic.cloud','satellizer']);
 
-mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy) {
+mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy,$ionicPush,$http,constants) {
   $ionicPlatform.ready(function() {
 
     if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -11,6 +11,25 @@ mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy) {
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+    // Push register function
+    $ionicPush.register().then(function(t) {
+      return $ionicPush.saveToken(t);
+    }).then(function(t) {
+      console.log('Token saved: ', t.token);
+      var data = {
+          appId: $rootScope.appId,
+          deviceId : t.token
+      };
+      // Send to server to save push device token
+      $http.post(constants.SERVER_URL + "/templates/postDeviceId",data)
+          .then(function(res){
+              console.log(res);
+          },function(err){
+              console.log(err);
+          });
+    });
+
   });
     if (typeof $rootScope.appId === 'undefined'){
 
@@ -34,6 +53,27 @@ mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy) {
 }).config(function($ionicConfigProvider) {
     $ionicConfigProvider.views.forwardCache(true);
 })
+
+// Ionic Cloud Provider Configuration
+.config(function($ionicCloudProvider) {
+    $ionicCloudProvider.init({
+        "core": {
+            "app_id": "8307b439"
+        },
+        "push": {
+            "sender_id": "528602483901",
+            "pluginConfig": {
+                "ios": {
+                    "badge": true,
+                    "sound": true
+                },
+                "android": {
+                    "iconColor": "#343434"
+                }
+            }
+        }
+    });
+});
 
 mobileApp.config(['$authProvider','constants', function($authProvider,constants) {
 
