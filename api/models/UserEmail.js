@@ -53,7 +53,7 @@ module.exports = {
             type: 'string'
         },
         sslEnabled:{
-            type: 'string'
+            type: 'boolean'
         }
     }
 };
