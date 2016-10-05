@@ -69,7 +69,6 @@ module.exports = {
         //console.log(req.file('file'));
 
         if(saveData.file != "") {
-            console.log('dd');
 
             req.file('file').upload({
                 dirname: require('path').resolve(dePath)
@@ -122,7 +121,7 @@ module.exports = {
 
     sendTestEmail : function(req,res){
 
-        console.log(req.body);
+        //console.log(req.body);
         var type = req.body.type;
         var appId = req.param('appId');
         var userId = req.body.userId;
@@ -132,11 +131,15 @@ module.exports = {
             appId: appId,
             userId: userId
         }
-        var msg = sentMails.sendConfirmEmail(data, function (msg) {
-            res.send(msg);
+        sentMails.sendConfirmEmail(data,function (err,msg) {
+            //console.log(err);
+            if (err) {
+                return  res.send(500);
+            }else{
+                return res.send('ok');
+            }
+            //res.send(msg);
         });
-        console.log(msg);
-        res.send("asd");
     },
     sendVerificationLinkEmail : function(req,res){
 

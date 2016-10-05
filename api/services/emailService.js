@@ -19,14 +19,14 @@ var server = email.server.connect({
 module.exports = {
 
 
-    sendConfirmEmail: function (data, res) {
+    sendConfirmEmail: function (data, callback) {
 
         //var data = this.getUserEmailData(emailsParms,res);
         //console.log(data);
         var searchApp = {
             appId: data.appId
         };
-        console.log(searchApp);
+        //console.log(searchApp);
         var appRoot = path.resolve();
 
         var serverOrg=config.server.host+':'+config.server.port;
@@ -38,7 +38,7 @@ module.exports = {
             if (err) return done(err);
 
             // var apps = JSON.stringify(app);
-            console.log(app);
+            //console.log(app);
             for (var i = 0; i < app.length; i++) {
 
 
@@ -269,8 +269,8 @@ module.exports = {
                     '</html>';
 
 
-                console.log(app[0]);
-                console.log(mBody);
+                //console.log(app[0]);
+                //console.log(mBody);
                 var emailDetails = {
                     text: "",
                     from: app[0].fromEmail,
@@ -292,10 +292,11 @@ module.exports = {
                         ssl: app[0].sslEnabled
                     });
                     server.send(emailDetails, function (err, message) {
-                        sails.log.info(err || message);
+                        //sails.log.info(err || message);
                         if (err) {
-                            return res.status(err.status).json({err: err.message});
+                           return callback(err);
                         }
+                        callback(null, 'ok');
                     });
 
                 }

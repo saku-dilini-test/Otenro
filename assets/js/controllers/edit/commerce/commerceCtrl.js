@@ -831,7 +831,7 @@
                             });
 
                         }).error(function (err) {
-                        toastr.error('Unable to Send', 'Warning', {
+                        toastr.error('smtp username and password not accepted ', 'Warning', {
                             closeButton: true
                         });
                     })
