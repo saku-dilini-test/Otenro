@@ -45,8 +45,12 @@
                             <fieldset class="fieldset-default-size">
                                 <label>alert at</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="input" name="alertAt" class="input-shadow-border me-xs-input reset-inline" required
+                                <input type="input" ng-pattern="/^[0-9]+$/" name="alertAt" class="input-shadow-border me-xs-input reset-inline" required
                                        ng-model="emailDel.alertAt"/>
+                                <span class="error"
+                                      ng-show="emailDeliveryForm.alertAt.$error.pattern">
+                                    Numbers only
+                                </span>
                                <!-- <span>%</span>-->
                             </fieldset>
 

@@ -74,12 +74,16 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         if(buyQty > 0){
             // Get Selected-Variant-Qty value
             var selectVariantAvailableQty = $scope.selectedVariant.quantity;
-            if(typeof selectVariantAvailableQty != 'undefined'){
-                // If buyQty less than or equal Selected-Variant-Qty, buy button enable
-                if(buyQty <= selectVariantAvailableQty){
-                    $scope.isBuyBtnDisable = false;
-                }
-            }
+             //If quantity is unlimited enable buy button
+             if($scope.selectedVariant.unlimited == true){
+                 $scope.isBuyBtnDisable = false;
+             }
+             else if(typeof selectVariantAvailableQty != 'undefined'){
+                 // If buyQty less than or equal Selected-Variant-Qty, buy button enable
+                 if(buyQty <= selectVariantAvailableQty ){
+                     $scope.isBuyBtnDisable = false;
+                 }
+             }
         }
     };
 
