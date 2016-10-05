@@ -67,14 +67,15 @@ module.exports = {
 
         console.log(dePath);
         //console.log(req.file('file'));
+        //console.log(req.file('file'));
 
-        if(saveData.file != "") {
+       // if(saveData.file != "") {
 
             req.file('file').upload({
                 dirname: require('path').resolve(dePath)
             }, function (err, uploadedFiles) {
 
-                console.log(uploadedFiles);
+                //console.log(uploadedFiles);
                 if (0 < uploadedFiles.length) {
 
                     var newFileName = Date.now() + uploadedFiles[0].filename;
@@ -90,9 +91,9 @@ module.exports = {
                     saveData.imageFooter = newFileName2;
                 }
 
-            });
 
-        }
+
+      //  }
             console.log(saveData);
 
             UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
@@ -100,6 +101,8 @@ module.exports = {
                 res.send({
                     message: "Email Settings has been added"
                 });
+            });
+
             });
 
     },
