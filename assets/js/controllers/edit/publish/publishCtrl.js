@@ -132,15 +132,8 @@
                         if (JSON.stringify(splash).match("blobUrl")){
                             publishService.uploadPublishFiles(splash,$scope.count)
                                 .success(function (data, status, headers, config) {
-                                    if (data.message==true){
-                                        toastr.success('Images  has been added', 'Saved', {
-                                            closeButton: true
-                                        });
-                                    }
+
                                 }).error(function (data, status, headers, config) {
-                                toastr.error('Error while saving data', 'Warning', {
-                                    closeButton: true
-                                });
 
                             });
                         }
