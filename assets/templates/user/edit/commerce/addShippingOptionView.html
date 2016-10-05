@@ -131,9 +131,10 @@
                                             Positive Number Only
                                         </span>
                                     </td>
-                                    <td><input class="input-shadow-border" type="text" name="cost_{{$index}}" ng-pattern="/^\d+(.\d{1,2})?$/"
+                                    <td>
+                                        <input class="input-shadow-border" type="text" name="cost_{{$index}}" ng-pattern="/^\d+(.\d{1,2})?$/"
                                                ng-model="data.cost" maxlength="10" required>
-                                    <br />
+                                        <br />
                                         <span ng-show="weightBased['cost_'+$index].$error.pattern">
                                             Only Positive numbers and Maximum two decimal places only
                                         </span>

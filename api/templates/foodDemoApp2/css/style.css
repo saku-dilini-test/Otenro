@@ -156,10 +156,6 @@ ion-side-menu .list .activated{
     background-color: #fff;
     float: left;
     width:100%;
-    height:100%;
-    height:100%;
-    background-image:url(../img/bg_card2.png);
-    background-size:cover;
 }
 
 .res-nav .col-50{
@@ -321,9 +317,6 @@ p{
 	background-color:transparent !important;
 	}
 
-.ng-binding{
-	padding:7px 0;
-	}
 
 .button-calm {
 	cursor: url(../img/cursor.cur), auto;
@@ -394,24 +387,17 @@ img {
 }
 .popup-body{
     text-align:center;
-    color:#70A1B3;
 }
+
 .popup-title {
-  font-family:"Times New Roman", Times, serif;
-  	border-bottom:solid;
-  	border-width:thin;
-  	border-bottom-color:#CCC;
-  	padding-bottom:10px;
-  	color:#73A3B9;
-  	margin:5px;
   	font-size:20px;
-  	text-align:center; }
-.popup-buttons{
-    text-align: center;
-    position: relative;
-    left: 30%;
-    width: 20%;
+  	color:#de9c00;
 }
+
+.popup-buttons{
+    margin: 0 25%;
+}
+
 ion-slides {
     height:36vh;
 }
@@ -458,4 +444,16 @@ ion-header-bar button{
 
 .cart-item-header {
     text-transform:uppercase;
+}
+
+.cartItems p {
+    text-align: left;
+}
+
+.cart-buttons button {
+    margin: auto 3px;
+}
+
+.buy-button button{
+    margin: 3% 25%;``
 }

@@ -86,8 +86,8 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.addToCart = function() {
         if($scope.selectedVariant.buyQuantity == null){
             $ionicPopup.alert({
-                title: 'Please enter a quantity',
-                template: 'Warning!!!',
+                title: 'Warning!',
+                template: 'Please enter a quantity',
                 cssClass: 'ionicPopUp'
             });
         }else{
