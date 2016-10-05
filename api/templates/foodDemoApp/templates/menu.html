@@ -1,50 +1,49 @@
-<ion-side-menus enable-menu-with-back-views="true">
-  <ion-side-menu-content>
-    <ion-nav-bar class="bar-white" align-title="left">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
+<ion-side-menus class="navigation-drawer" enable-menu-with-back-views="true">
 
-      <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-if="showMenu">
-        </button>
-      </ion-nav-buttons>
-      <ion-nav-buttons side="right" class="cursor-body">
-        <a ui-sref="app.cart" class="button button-icon ion-ios-cart-outline cursor-body">
-          <span class="badge2">{{parentobj.cartSize}}</span>
-        </a>
-      </ion-nav-buttons>
+  <ion-side-menu-content drag-content="false">
+
+    <ion-nav-bar class="bar bar-header" align-title="left">
+      <div class="bar bar-header">
+          <ion-nav-buttons side="left">
+            <button class="button icon ion-navicon" menu-toggle="left"></button>
+          </ion-nav-buttons>
+          <ion-nav-buttons side="right">
+            <button ui-sref="app.cart" class="button icon ion-ios-cart-outline"></button>
+            <span class="badge2">{{parentobj.cartSize}}</span>
+          </ion-nav-buttons>
+      </div>
     </ion-nav-bar>
+
     <ion-nav-view name="menuContent" align="left"></ion-nav-view>
-  </ion-side-menu-content>
+</ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
-    </ion-header-bar>
     <ion-content>
+      <label>Hello! Shashan Sooriyahetti</label>
       <ion-list>
         <ion-item menu-close ui-sref="app.category">
-          Home
+          <i class="icon ion-ios-home-outline"></i> Home
         </ion-item>
         <ion-item menu-close ui-sref="app.category">
-          Menu
+          <i class="icon ion-ios-paper-outline"></i> Menu
         </ion-item>
         <ion-item menu-close ui-sref="app.cart">
-          Cart
+          <i class="icon ion-ios-cart-outline"></i> Cart
         </ion-item>
         <ion-item menu-close ui-sref="app.contactUs">
-          Contact Us
+          <i class="icon ion-ios-telephone-outline"></i> Contact Us
         </ion-item>
         <ion-item menu-close ui-sref="app.policies">
-          Policies
+          <i class="icon ion-ios-help-outline"></i> Policies
         </ion-item>
         <ion-item menu-close ui-sref="app.aboutUs">
-          About Us
+          <i class="icon ion-ios-person-outline"></i> About Us
         </ion-item>
         <ion-item menu-close ui-sref="app.login">
-          Login
+          <i class="icon ion-log-in"></i> Login
         </ion-item>
         <ion-item menu-close ui-sref="app.terms">
-          Terms & Conditions
+          <i class="icon ion-ios-information-outline"></i> Terms & Conditions
         </ion-item>
       </ion-list>
     </ion-content>

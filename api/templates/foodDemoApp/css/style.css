@@ -77,10 +77,8 @@ text-align:center;
 padding-bottom:20px;}
 
 .card {
-    padding-top: 1px;
-    padding-bottom: 1px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-	border-radius:6px !important;
+    padding: 0px;
+    border-radius:5px !important;
 }
 
 .button.button-positive {
@@ -102,9 +100,11 @@ padding-bottom:20px;}
 .item-complex .item-content, .item-radio .item-content {
     position: relative;
     z-index: 2;
-    padding: 16px 49px 16px 16px;
+    padding: 8px 0 8px 0;
+    letter-spacing:1px;
     background-color: #fff;
     border-color:transparent !important ;
+    font-size: 12px;
 }
 
 .item-complex {
@@ -112,7 +112,6 @@ padding-bottom:20px;}
 	border-color:transparent !important ;
 	font-size:14px;
 	color:#AFAFAF;
-	padding-left:40px;
 }
 
 .setting{
@@ -143,24 +142,9 @@ cursor: url(../img/cursor.cur), auto;
 }
 
 .bar .title.title-left {
-    /*text-align: left;*/
-	color: #75A3B8 !important;
 	font-family:"Times New Roman", Times, serif;
-	width: 100%;
 	cursor: url(../img/cursor.cur), auto;
-	/*margin-top: 20px;
-    margin-left: -45px;*/
-}
-.cards{
-	max-width: 100%;
-margin: 50px auto;
-padding-right: 1em;
-margin:15px;
-border-radius:5px;
--webkit-box-shadow: 2px 4px 5px 0px rgba(50, 50, 50, 0.25);
--moz-box-shadow:    2px 4px 5px 0px rgba(50, 50, 50, 0.25);
-box-shadow:         2px 4px 5px 0px rgba(50, 50, 50, 0.25);
-background-color: white;
+    margin: 0 -10px;
 }
 
 .item h2{
@@ -171,17 +155,6 @@ background-color: white;
     border-bottom: solid thin RGBA(117, 163, 184, 0.29);
 	}
 
-.item-thumbnail-left > img:first-child {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    max-width: 80px;
-    max-height: 80px;
-    width: 100%;
-    height: 100%;
-	border-radius:5px !important;
-	cursor: url(../img/cursor.cur), auto;
-}
 
 hr{
 	color:#CCC;
@@ -194,11 +167,8 @@ hr{
 }
 
 .bar .buttons-right span {
-    margin-left: 18px !important;
-    display: inherit;
-    padding-right: 10px !important;
     cursor: url(../img/cursor.cur), auto;
-
+    margin-left: 0;
 }
 
 h4, .h4 {
@@ -315,12 +285,7 @@ p{
 .item-thumbnail-left{
 	border-radius:5px;
 	cursor: url(../img/cursor.cur), auto;
-	}
-
-.ng-binding{
-	text-align:left;
-	padding:8px;
-	}
+}
 
 .button-calm {
 	border-color: transparent;
@@ -341,31 +306,21 @@ p{
 	text-align:center;
 }
 
-
-h2, .h2 {
-
-	font-family: "Times New Roman", Times, serif;
-border-bottom: solid;
-border-width: thin;
-border-bottom-color: #CCC;
-padding-bottom: 10px;
-color: #73A3B9;
-margin: 5px;
-font-size: 20px;
-text-align: center;}
-
 .showName {
-max-width: 100%;
-text-align:left;
+    max-width: 100%;
+    text-align:left;
 }
+
 .hideName {
-max-width: 50%;
-text-align:left;
+    max-width: 50%;
+    text-align:left;
 }
+
 .popup-body{
     text-align:center;
     color:#70A1B3;
 }
+
 .popup-buttons{
     text-align: center;
     position: relative;
@@ -373,11 +328,13 @@ text-align:left;
     width: 20%;
     cursor:url(../img/cursor.cur), auto;
 }
+
 ion-slides {
     width: 200px;
     height: 150px;
     display: block;
 }
+
 .swiper-slide img {
     width: 100%;
     height: auto;
@@ -385,4 +342,103 @@ ion-slides {
     max-height: 100%;
 }
 
+.navigation-drawer .menu-left{
+    -webkit-transition: -webkit-transform 200ms ease;
+    transition: transform 200ms ease;
+    transform: translate3d(-275%, 0px, 0px);
+}
 
+.menu-open .navigation-drawer .menu-left{
+    width: 90% !important;
+    z-index: 1 !important;
+    transform: translate3d(0%, 0px, 0px);
+}
+
+.navigation-drawer ion-item{
+    background-color: transparent;
+    border: unset;
+
+}
+
+.navigation-drawer ion-item a{
+    background-color: transparent !important;
+    color:rgb(139,139,139);
+    margin-left: 20%;
+    font-weight: 600;
+}
+
+.navigation-drawer .menu-animated{
+    transform:unset !important;
+}
+.navigation-drawer ion-nav-bar{
+    border: unset;
+    background: transparent;
+}
+.navigation-drawer .bar.bar-header {
+    border: unset;
+    background: transparent;
+}
+
+.navigation-drawer  ion-header-bar{
+    border: transparent;
+
+}
+
+.navigation-drawer  ion-header-bar button{
+    color:#444;
+    background-color:unset !important;
+    border: unset;
+}
+
+.navigation-drawer .back-button {
+    color: white;
+    margin: 0 0 0 5px;
+}
+
+.navigation-drawer .back-button span{
+    display:none;
+}
+
+.navigation-drawer ion-side-menu label{
+    margin: 10%;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    color: skyblue;
+    font-weight: bold;
+    text-align:center;
+    line-height: 20px;
+}
+
+.category{
+    text-decoration:none;
+}
+
+.category .catHead {
+    letter-spacing: 1px;
+    text-transform:uppercase;
+}
+
+.category .foodsHead {
+    letter-spacing: 1px;
+    text-transform:uppercase;
+}
+
+.category .col:first-child, .row{
+    padding:unset;
+}
+
+.category .col{
+    text-align:center;
+}
+
+.category .price{
+    font-size: 12px;
+    color: #7F7E7D;
+    float:right;
+}
+.category .price label{
+    font-size:10px;
+    color:#7F7E7D;
+}

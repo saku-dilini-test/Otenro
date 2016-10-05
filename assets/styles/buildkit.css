@@ -934,7 +934,7 @@ table{
 
 .me-simple-table td{
     color: #999;
-    padding: 0px 12px 0 0;
+    padding: 15px 12px 0 0;
 }
 .me-simple-table td input{
     margin:12px 0;
@@ -2035,6 +2035,6 @@ trix-toolbar .button_group input[type=button]{
     background-color:#e9e9e9;
 }
 
-.custom-grid [type="checkbox"]{
-
+.custom-grid .ui-grid-selection-row-header-buttons{
+    text-align:center;
 }

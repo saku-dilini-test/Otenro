@@ -1,13 +1,17 @@
 <ion-view view-title="{{menuName}}">
   <ion-content class="made-easy-background-image made-easy-background-color made-easy-third-navigation">
-        <a ng-repeat="food in foods" href=" " ng-click="navigateFood(food)">
-           <div class="cards animated bounceInRight">
-           <div class= "item item-thumbnail-left" >
-              <img ng-src="{{imageURL}}/{{food.imageUrl}}">
-              <h2>{{food.name}}</h2>
-              <!--<p>{{food.briefDesc}}</p>-->
-              <p>{{currency.sign}} : {{food.price}}</p>
-            </div>
+        <a class="category" ng-repeat="food in foods"  ng-click="navigateFood(food)">
+           <div class="card animated bounceInRight" >
+               <div class="row">
+                   <div class="col col-33">
+                       <img width="100%" height="100%" ng-src="{{imageURL}}/{{food.imageUrl}}">
+                   </div>
+                   <div class="col">
+                       <span class="made-easy-header-font foodsHead">- {{food.name}} -</span>
+                       <div class="made-easy-content-font">{{food.detailedDesc}}</div>
+                       <div ng-repeat="variant in food.variants " class="price"><label>{{currency.sign}}</label> {{variant.price}}</div>
+                   </div>
+               </div>
             </div>
         </a>
   </ion-content>
