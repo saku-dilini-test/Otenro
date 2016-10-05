@@ -66,30 +66,34 @@ module.exports = {
         var saveData = req.body;
 
         console.log(dePath);
-        console.log(req.file('file'));
+        //console.log(req.file('file'));
 
-        req.file('file').upload({
-            dirname: require('path').resolve(dePath)
-        },function (err, uploadedFiles) {
+        if(saveData.file != "") {
+            console.log('dd');
 
-            console.log(uploadedFiles);
-            if (0 < uploadedFiles.length) {
+            req.file('file').upload({
+                dirname: require('path').resolve(dePath)
+            }, function (err, uploadedFiles) {
 
-            var newFileName = Date.now() + uploadedFiles[0].filename;
-            fs.rename(uploadedFiles[0].fd, dePath + '/' + newFileName, function (err) {
-                if (err) return res.send(err);
+                console.log(uploadedFiles);
+                if (0 < uploadedFiles.length) {
+
+                    var newFileName = Date.now() + uploadedFiles[0].filename;
+                    fs.rename(uploadedFiles[0].fd, dePath + '/' + newFileName, function (err) {
+                        if (err) return res.send(err);
+                    });
+                    var newFileName2 = Date.now() + uploadedFiles[1].filename;
+                    fs.rename(uploadedFiles[1].fd, dePath + '/' + newFileName2, function (err) {
+                        if (err) return res.send(err);
+                    });
+
+                    saveData.imageHeader = newFileName;
+                    saveData.imageFooter = newFileName2;
+                }
+
             });
-            var newFileName2 = Date.now() + uploadedFiles[1].filename;
-            fs.rename(uploadedFiles[1].fd, dePath + '/' + newFileName2, function (err) {
-                if (err) return res.send(err);
-            });
 
-                saveData.imageHeader =  newFileName;
-                saveData.imageFooter =  newFileName2;
         }
-
-
-
             console.log(saveData);
 
             UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
@@ -98,7 +102,7 @@ module.exports = {
                     message: "Email Settings has been added"
                 });
             });
-        });
+
     },
     getEmailSettings : function(req,res){
 
