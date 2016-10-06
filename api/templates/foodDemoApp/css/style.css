@@ -415,11 +415,6 @@ ion-slides {
     text-decoration:none;
 }
 
-.category .foodsHead {
-    letter-spacing: 1px;
-    text-transform:uppercase;
-}
-
 .category .col:first-child, .row{
     padding:unset;
 }
@@ -431,7 +426,7 @@ ion-slides {
 .category .price{
     font-size: 12px;
     color: #7F7E7D;
-    float:right;
+    text-align:right;
 }
 .category .price label{
     font-size:10px;

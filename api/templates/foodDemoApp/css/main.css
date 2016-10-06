@@ -78,19 +78,21 @@ a{
 .made-easy-footerColor{
   background-color: #4e6dde;
 }
+
 .made-easy-header-font{
     color: #7aa6bb;
     font-family: URW Chancery L;
-    font-size: 14px;
     font-weight: bolder;
-    text-align: center;
-    display: block;
+    font-size:14px;
+    line-height: normal;
 }
+
 .made-easy-content-font{
   color:#7F7E7D;
   font-family: Ubuntu Light;
   font-size: 12px;
   font-weight: lighter;
+  line-height: normal;
 }
 .made-easy-footer-font{
   color:#4e6dde;
@@ -370,4 +372,11 @@ padding:5px;
     font-weight: bold;
 }
 
+
+/*-- Responsive CSS --*/
+
+
+
+
 /** ----------- End Custom update Css Class ---------- **/
+
