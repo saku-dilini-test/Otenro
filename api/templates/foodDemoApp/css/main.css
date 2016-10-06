@@ -79,13 +79,15 @@ a{
   background-color: #4e6dde;
 }
 .made-easy-header-font{
-  color:#4e6dde;
-  font-family: URW Chancery L;
-  font-size: 12px;
-  font-weight: bolder;
+    color: #7aa6bb;
+    font-family: URW Chancery L;
+    font-size: 14px;
+    font-weight: bolder;
+    text-align: center;
+    display: block;
 }
 .made-easy-content-font{
-  color:#4e6dde;
+  color:#7F7E7D;
   font-family: Ubuntu Light;
   font-size: 12px;
   font-weight: lighter;
@@ -186,22 +188,11 @@ h7 {
   color:#666 !important;
 }
 .badge2{
-background-color: transparent;
-color: #AAAAAA;
-z-index: 1;
-display: inline-block;
-margin-right:-28px;
-margin-top:-30px;
-padding: 3px 8px;
-min-width: 10px;
-border-radius: 10px;
-vertical-align: baseline;
-text-align: center;
-white-space: nowrap;
-font-weight: bold;
-font-size: 14px;
-line-height: 16px;
-cursor:url(../img/cursor.cur), auto;}
+    background-color: transparent;
+    color: #404040;
+    padding: 7px 0;
+    cursor:url(../img/cursor.cur), auto;
+}
 
 .buttons .buttons-right .header-item{
     cursor:url(../img/cursor.cur), auto;
