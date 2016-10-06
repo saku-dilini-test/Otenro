@@ -2,29 +2,29 @@
 	<div class="login animated zoomIn">
 		<form name="loginForm">
 			<div class="card">
-				<div class="item item-text-wrap">
-					<div class="login_title">ENTER LOGIN DETAILS</div>
-					<label class="item item-input item-stacked-label">
-
+					<h5 class="made-easy-header-font">ENTER LOGIN DETAILS</h5>
+					<label class="item item-input item-floating-label">
+						<span class="made-easy-content-font input-label">Username</span>
 						<input type="text" placeholder="Username" ng-model="data.username" ng-required="true">
 					</label>
-					<label class="item item-input item-stacked-label">
-
+					<label class="item item-input item-floating-label">
+						<span class="made-easy-content-font input-label">Password</span>
 						<input type="password" placeholder="Password" ng-model="data.password" ng-required="true">
 					</label>
-					<label class="item item-input item-stacked-label">
-						<button class="button button-block button-positive" ng-click="loginForm.$valid && login()">
+					<div class="row">
+						<div class="col"></div>
+						<button class="col button button-block button-small button-positive" ng-click="loginForm.$valid && login()">
 							Login
 						</button>
-					</label>
+						<div class="col"></div>
+					</div>
 				</div>
-			</div>
-			<div class="panel">
+			<div class="card create-account">
 
 				<!--<a class="social-button" ng-click="authenticate('google')"> Google</a>
 				<a class="social-button-fb" ng-click="authenticate('facebook')" >Facebook</a>-->
-				<br>
-				<div class="create-account-btm" ng-click="singUp()">Create Your Account</div>
+
+				<div class="create-account-btm" ng-click="singUp()">Create your Account</div>
 			</div>
 		</form>
 	</div>

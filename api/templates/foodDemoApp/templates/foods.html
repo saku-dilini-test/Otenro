@@ -1,9 +1,9 @@
-<ion-view view-title="{{menuName}}">
-    <ion-content class="made-easy-background-image made-easy-background-color made-easy-third-navigation">
+<ion-view class="made-easy-background-image made-easy-background-color" view-title="{{menuName}}">
+    <ion-content class=" made-easy-third-navigation">
         <a class="category" ng-repeat="food in foods"  ng-click="navigateFood(food)">
             <div class="card animated bounceInRight" >
                 <div class="row ">
-                    <div class="col col-33">
+                    <div class="col">
                         <img width="100%" height="100%" ng-src="{{imageURL}}/{{food.imageUrl}}">
                     </div>
                     <div class="col">

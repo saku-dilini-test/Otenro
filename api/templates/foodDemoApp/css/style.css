@@ -53,44 +53,15 @@
     padding: 10px 18px;
 }
 
-.card .item, .list-inset .item, .padding > .list .item, .padding-horizontal > .list .item {
-    margin-right: 0;
-    margin-left: 0;
-	border-color:transparent !important;
-	margin-bottom:10px;
-}
-
-.card .item.item-input input {
-    padding-right: 44px;
-    border-bottom: solid;
-    border-width: 1px;
-    border-color: #666;}
-
-
-.login_title{
-	color:#75A3B8;
-	font-size:16px;
-font-weight: 600;
-font-family:"Times New Roman", Times, serif;
-line-height: 1.2;
-text-align:center;
-padding-bottom:20px;}
-
 .card {
-    padding: 0px;
+    padding:0px;
     border-radius:5px !important;
 }
 
 .button.button-positive {
-    border-color: transparent;
-    background-color: #75a3b8 !important;
-	width:100%;
 	cursor:url(../img/cursor.cur), auto;
 }
-.panel .create-account-btm {
-    width: 58%;
-    font-size: 4.0vw;
-}
+
 .panel .social-button-fb{
 	background-color:#2A68B0;}
 
@@ -171,63 +142,6 @@ hr{
     margin-left: 0;
 }
 
-h4, .h4 {
-    font-size: 18px;
-font-weight: 500;
-color: #999;
-font-family: "Times New Roman", Times, serif;
-text-align: center;
-border-bottom: solid;
-border-width: thin;
-padding-bottom: 10px;
-}
-
-label {
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 1.2;
-	color:#666;
-}
-
-.row2 {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -moz-flex;
-    display: -ms-flexbox;
-    display: flex;
-    padding: 5px;
-    width: 100%;
-	color:#CCC;
-	font-size:10px;
-}
-
-.panel2 .social-button {
-    background:#70A1B3;
-    padding: 8.5px 17px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    color: white;
-    font-size: 14px;
-    font-family: Helvetica, sans-serif;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: url(../img/cursor.cur), auto;
-}
-
-.panel2{
-margin: 0;
-padding: 0;
-border: 0;
-vertical-align: middle;
-font: inherit;
-font-size: 100%;
-padding: 2px;
-text-align: center;
-	}
-
-
 h2:first-child{
 	font-family:"Times New Roman", Times, serif;
 	border-bottom:solid;
@@ -239,19 +153,6 @@ h2:first-child{
 	font-size:20px;
 }
 
-.card .item:first-child {
-	color:#666;
-    font-size: 14px;
-}
-
-.card .item{
-	font-size:14px;
-	color:#666;
-    margin-right: 0;
-    margin-left: 0;
-    border-color: transparent !important;
-    margin-bottom: 10px;
-}
 
 .panel .create-account-btm2 {
   background-color: #FFBF0A; /* Green */
@@ -265,17 +166,6 @@ h2:first-child{
   width:100%;
 }
 
-h3:first-child{
-font-family:"Times New Roman", Times, serif;
-	border-bottom:solid;
-	border-width:thin;
-	border-bottom-color:#CCC;
-	padding-bottom:10px;
-	color:#73A3B9;
-	margin:5px;
-	font-size:20px;
-	text-align:center;
-}
 
 p{
 	color:#666;
@@ -287,17 +177,8 @@ p{
 	cursor: url(../img/cursor.cur), auto;
 }
 
-.button-calm {
-	border-color: transparent;
-    background-color: #75a3b8 !important;
-    width: 100%;
-    cursor:url(../img/cursor.cur), auto;
-	}
 
-	.padding .card, .padding .list-inset {
-    margin-left: 0;
-    margin-right: 0;
-}
+
 .button-block{
     cursor: url(../img/cursor.cur), auto;
 }
@@ -330,16 +211,13 @@ p{
 }
 
 ion-slides {
-    width: 200px;
-    height: 150px;
-    display: block;
+    height: 36vh;
 }
 
-.swiper-slide img {
-    width: 100%;
-    height: auto;
-    max-width: none;
-    max-height: 100%;
+
+.swiper-slide img{
+    border-radius:5px;
+    width:100%;
 }
 
 .navigation-drawer .menu-left{
@@ -415,7 +293,10 @@ ion-slides {
     text-decoration:none;
 }
 
-.category .col:first-child, .row{
+.category .col:first-child{
+    padding:unset;
+}
+.category .row{
     padding:unset;
 }
 
@@ -431,4 +312,33 @@ ion-slides {
 .category .price label{
     font-size:10px;
     color:#7F7E7D;
+}
+
+.cart-buttons button {
+    margin: auto 3px;
+}
+
+.fixed-font-small{
+    font-size:10px;
+    color:#9a9a9a;
+}
+
+.remove-item{
+    margin: -2px 0;
+}
+
+.item-buy{
+    width:100%
+}
+
+.buy-button button {
+    margin: 3% 25%;
+}
+
+.create-account {
+    padding: 1em;
+    text-align: center;
+    background-color: #e6b500;
+    border-radius: 2px !important;
+    margin: 30% 15%;
 }

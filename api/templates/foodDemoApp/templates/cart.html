@@ -1,61 +1,59 @@
-<ion-view view-title="Filter">
-  <ion-content class="made-easy-background-image made-easy-background-color">
+<ion-view class="made-easy-background-image made-easy-background-color" view-title="Filter">
+  <ion-content >
    <div class="card animated zoomIn">
-   <div class="box_inner">
-    <h4>Shopping Cart Item List</h4>
-    <div class="item item-stacked-label">
-      <div class="row2">
-        <div class="col2 col-51">Item</div>
-        <div class="col2">Qty</div>
-        <div class="col2">Price</div>
-        <div class="col2"></div>
-      </div>
-    </div>
-    <div class="item item-stacked-label" ng-repeat="item in cartItems" >
-      <div class="row">
-        <div class="col" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive "><p>{{item.name}}</p></div>
-        <div class="col" ng-model="item.qty" >{{item.qty}}</div>
-        <div class="col" ng-model="item.total" >{{item.total}}</div>
-        <div class="col"><a ng-click="removeItem(index)">x</a></div>
-      </div>
-    </div>
-    <div ng-hide="hide" class="item item-stacked-label">
-        <div class="row">
-            <div class="col col-50">Tax%</div>
-            <div class="col" ng-model="tax" >{{tax}}</div>
-        </div>
-    </div>
-    <div class="item item-stacked-label">
-      <div class="row">
-        <div class="col col-50">Total</div>
-        <div class="col" ng-model="quantity">{{getTotalQuantity()}}</div>
-        <div class="col" ng-model="total" >{{getTotal()}}</div>
-      </div>
-    </div>
+        <h5 class=" made-easy-header-font">Shopping Cart Item List</h5>
 
+           <div class="row fixed-font-small">
+                <div class="col col-50">Item</div>
+                <div class="col">Qty</div>
+                <div class="col">Price</div>
+                <div class="col"></div>
+           </div>
 
-    <ui class="list2">
-      <div class="row2">
-        <div class="col col-76">
-          Delivery Charges with in City Limits
+            <div class="row made-easy-content-font" ng-repeat="item in cartItems" >
+                <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}</div>
+                <div class="col" ng-model="item.qty" >{{item.qty}}</div>
+                <div class="col" ng-model="item.total" >{{item.total}}</div>
+                <div class="col"><p class="remove-item" ng-click="removeItem(index)">&#10007;</p></div>
+            </div>
+
+            <div  ng-hide="hide" class="row">
+                <div class="col col-50">Tax%</div>
+                <div class="col" ng-model="tax" >{{tax}}</div>
+            </div>
+
+             <div class="row item-divider">
+                <div class="col col-50">Total</div>
+                <div class="col" ng-model="quantity">{{getTotalQuantity()}}</div>
+                <div class="col" ng-model="total" >{{getTotal()}}</div>
+                 <div class="col"></div>
+             </div>
+
+           <div class="fixed-font-small">
+              <div class="row">
+                <div class="col col-67">
+                  Delivery Charges with in City Limits
+                </div>
+                <div class="col">
+                  Rs 150
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-67">
+                  Delivery Charges for off city Limits
+                </div>
+                <div class="col">
+                  Rs 50 per Km
+                </div>
+              </div>
+           </div>
+
+        <div class="row cart-buttons">
+          <div class="col-33"></div>
+          <button class="button button-block button-small button-positive" ng-click="pickup()" >Purchase</button>
+          <button class="button button-block button-small button-positive" ng-click="delivery(cartItems)" >Delivery</button>
         </div>
-        <div class="col">
-          Rs 150
-        </div>
-      </div>
-      <div class="row2">
-        <div class="col col-76">
-          Delivery Charges for off city Limits
-        </div>
-        <div class="col">
-          Rs 50 per Km
-        </div>
-      </div>
-    </ui>
-    <div class="panel2">
-      <a class="social-button" ng-click="pickup()" >Purchase</a>
-      <a class="social-button " ng-click="delivery(cartItems)" >Delivery</a>
+
     </div>
-     </div></div>
-  </ion-content></div>
+  </ion-content>
 </ion-view>
