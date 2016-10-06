@@ -9,7 +9,7 @@
                    <div class="col">
                        <span class="made-easy-header-font foodsHead">- {{food.name}} -</span>
                        <div class="made-easy-content-font">{{food.detailedDesc}}</div>
-                       <div ng-repeat="variant in food.variants " class="price"><label>{{currency.sign}}</label> {{variant.price}}</div>
+                       <div class="price"><label>{{currency.sign}}</label> {{food.variants[0].price}}</div>
                    </div>
                </div>
             </div>
