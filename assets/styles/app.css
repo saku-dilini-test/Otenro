@@ -490,6 +490,14 @@ colorpicker-preview {
     float:left;
     margin-top:20px;
 }
+.textEditor ol li{
+    list-style-type: decimal;
+    margin-left: 10px;
+}
+.textEditor ul li{
+    list-style-type: disc;
+    margin-left: 10px;
+}
 trix-editor {
   color: #111;
   border: 1px solid #bbb;
