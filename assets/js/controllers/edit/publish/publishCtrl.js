@@ -14,10 +14,13 @@
         $scope.image = [];
         $scope.splash = [];
 
-
-        
-
-
+        $scope.validateSize = function(image,width,height){
+            if(image.width != width && image.height != height){
+                toastr.error('Image should be in recommended size', 'Warning', {
+                      closeButton: true
+                });
+            }
+        };
 
         $scope.hide = function() {
             $mdDialog.hide();

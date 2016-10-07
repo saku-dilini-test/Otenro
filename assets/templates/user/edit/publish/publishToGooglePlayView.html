@@ -50,9 +50,10 @@
                                 <a class="feature01 logo-upload">
                                     <span class="overlay01">
                                         <span class="caption01">
-                                           <input type="button" class="me-default-button" ngf-select
-                                                 ng-model="splash[4]" ngf-accept="image/*"
-                                                  value="Add Image" ngf-validate="{width: {min: 512, max:512}, height: {min: 512, max: 512}}"/>
+                                           <input type="button" class="me-default-button" ngf-select name="splash1"
+                                                 ng-model="splash[4]" ngf-accept="image/*" ngf-change="validateSize(splash[4],'512','512')"
+                                                 value="Add Image" ngf-validate="{width: {min: 512, max:512}, height: {min: 512, max: 512}}"/>
+
                                         </span>
                                     </span>
                                     <img ng-if="splash[4] != null" ngf-src="splash[4]"  style="width:120px; height:120px;" />
@@ -66,7 +67,7 @@
                                     <span class="overlay01">
                                         <span class="caption01">
                                            <input type="button" class="me-default-button" ngf-select
-                                                  ng-model="splash[5]" ngf-accept="image/*"
+                                                  ng-model="splash[5]" ngf-accept="image/*" ngf-change="validateSize(splash[5],'1024','500')"
                                                   value="Add Image" ngf-validate="{width: {min: 1024, max:1024}, height: {min: 500, max: 500}}" />
                                         </span>
                                     </span>
