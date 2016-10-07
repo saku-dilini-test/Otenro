@@ -552,9 +552,11 @@ a.md-button:hover:not([disabled]),
 /*Styles for text edit*/
 trix-editor ul li {
     list-style-type: disc;
+    margin-left: 10px;
 }
 trix-editor ol li {
     list-style-type: decimal;
+    margin-left: 10px;
 }
 trix-editor {
     padding: 4px 20px;
