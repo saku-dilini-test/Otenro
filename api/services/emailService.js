@@ -293,6 +293,7 @@ module.exports = {
                     });
                     server.send(emailDetails, function (err, message) {
                         //sails.log.info(err || message);
+                        console.log(err);
                         if (err) {
                            return callback(err);
                         }
