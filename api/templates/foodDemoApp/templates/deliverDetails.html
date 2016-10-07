@@ -2,9 +2,12 @@
     <ion-content>
         <div class="card animated zoomIn">
                 <h5 class="made-easy-header-font">Deliver Details</h5>
+
+                <div class="custom-form">
                     <label class="item item-input item-floating-label">
                         <span class="made-easy-content-font input-label">Name</span>
-                        <input type="text" ng-model="details.name" placeholder="{{details.name}}" >
+                        <input type="text" ng-model="details.name" placeholder="Name" >
+                        <!--{{details.name}}-->
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="made-easy-content-font input-label">Address</span>
@@ -14,8 +17,9 @@
                         <span class="made-easy-content-font input-label">Contact number</span>
                         <input placeholder="Contact Number" type="number" ng-model="details.number">
                     </label>
-                <div class="panel2">
-                    <a class="social-button" ng-click="deliver(details)" >Deliver</a>
+                    <div class="row">
+                        <button class="button button-small button-block button-balanced" ng-click="deliver(details)" >Deliver</button>
+                    </div>
                 </div>
         </div>
     </ion-content>

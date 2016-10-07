@@ -8,6 +8,7 @@
 				controller: ['$scope','$http','$state','$stateParams','$ionicPopup','constants','$auth',
 				function($scope,$http,$state,$stateParams,$ionicPopup,constants,$auth) {
 			   		$scope.data = {};
+
 				    $scope.login = function() {
 						var data = {
 							email : $scope.data.username,
