@@ -2018,7 +2018,9 @@ trix-toolbar .button_group input[type=button]{
 .custom-grid .ui-grid-header-cell-wrapper{
     background-color: #e9e9e9;
     padding: 10px 0;
-    font-size:13px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .custom-grid .ui-grid-row{
@@ -2031,7 +2033,12 @@ trix-toolbar .button_group input[type=button]{
 }
 
 .custom-grid .ui-grid-menu-button{
-    background-color:#e9e9e9;
+    background-color: transparent;
+    font-size: 11px;
+}
+
+.custom-grid .ui-grid-column-menu-button-last-col{
+    margin-right:8px;
 }
 
 .custom-grid .ui-grid-selection-row-header-buttons{
