@@ -4,9 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ionicLazyLoad','starter.services','starter.controllers'])
+angular.module('starter', ['ionic','ionic.cloud','ionicLazyLoad','starter.services','starter.controllers'])
 
-.run(function($ionicPlatform,readMadeEasy,$rootScope) {
+.run(function($ionicPlatform,readMadeEasy,$rootScope,$ionicPush,$http,constants) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,6 +19,24 @@ angular.module('starter', ['ionic', 'ionicLazyLoad','starter.services','starter.
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    // Push register function
+    $ionicPush.register().then(function(t) {
+      return $ionicPush.saveToken(t);
+    }).then(function(t) {
+      console.log('Token saved: ', t.token);
+      var data = {
+        appId: $rootScope.appId,
+        deviceId : t.token
+      };
+      // Send to server to save push device token
+      $http.post(constants.SERVER_URL + "/templates/postDeviceId",data)
+          .then(function(res){
+            console.log(res);
+          },function(err){
+            console.log(err);
+          });
+    });
 
     if (typeof $rootScope.appId === 'undefined'){
 
@@ -49,6 +67,28 @@ angular.module('starter', ['ionic', 'ionicLazyLoad','starter.services','starter.
   $ionicConfigProvider.backButton.previousTitleText(false).text('');
   $ionicConfigProvider.backButton.text("Back");
 })
+    
+// Ionic Cloud Provider Configuration
+.config(function($ionicCloudProvider) {
+  $ionicCloudProvider.init({
+    "core": {
+      "app_id": "8307b439"
+    },
+    "push": {
+      "sender_id": "528602483901",
+      "pluginConfig": {
+        "ios": {
+          "badge": true,
+          "sound": true
+        },
+        "android": {
+          "iconColor": "#343434"
+        }
+      }
+    }
+  });
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
