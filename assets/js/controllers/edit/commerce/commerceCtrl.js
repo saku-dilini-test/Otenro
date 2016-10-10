@@ -100,7 +100,7 @@
             }
 
         };
-        
+
         $scope.tempUnavailable = function () {
             comingSoonService.showComingSoonDialogWithCallBackFunction('commerceService','showStoreSettingsDialog');
         };
@@ -547,7 +547,7 @@
         });
 
         $scope.savePolicies = function (current, storeSettings) {
-            
+
             // Validate, Return Policy maximum characters length
             var returnPolicy = storeSettings.returnPolicy;
             if((typeof returnPolicy != 'undefined') &&
@@ -569,7 +569,7 @@
                 );
                 return;
             }
-            
+
             // Validate, Privacy Policy maximum characters length
             var privacyPolicy = storeSettings.privacyPolicy;
             if((typeof privacyPolicy != 'undefined') &&
