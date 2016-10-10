@@ -22,6 +22,9 @@
             },
             getCurrencyByAppId: function (appId) {
                 return $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+appId);
+            },
+            saveDeviceID : function (data) {
+                return $http.post(constants.SERVER_URL + '/templates/postDeviceId',data)
             }
         }
     }

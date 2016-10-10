@@ -1,8 +1,8 @@
 // ---  app js  ----
 
-var mobileApp = angular.module('starter', ['ionic','satellizer','starter.services','starter.controllers'])
+var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','starter.services','starter.controllers'])
 
-.run(function($ionicPlatform,readMadeEasy,$rootScope) {
+.run(function($ionicPlatform,readMadeEasy,$rootScope,$ionicPush,appServices) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -15,6 +15,24 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    // Push register function
+    $ionicPush.register().then(function(t) {
+      return $ionicPush.saveToken(t);
+    }).then(function(t) {
+      console.log('Token saved: ', t.token);
+      var data = {
+        appId: $rootScope.appId,
+        deviceId : t.token
+      };
+      // Send to server to save push device token
+      appServices.saveDeviceID(data)
+          .success(function (res) {
+            console.log(res);
+          }).error(function (err) {
+        console.log(err);
+      });
+    });
 
     if (typeof $rootScope.appId === 'undefined'){
 
@@ -36,6 +54,27 @@ var mobileApp = angular.module('starter', ['ionic','satellizer','starter.service
       });
     }
 
+  });
+})
+
+// Ionic Cloud Provider Configuration
+.config(function($ionicCloudProvider) {
+  $ionicCloudProvider.init({
+    "core": {
+      "app_id": "8307b439"
+    },
+    "push": {
+      "sender_id": "528602483901",
+      "pluginConfig": {
+        "ios": {
+          "badge": true,
+          "sound": true
+        },
+        "android": {
+          "iconColor": "#343434"
+        }
+      }
+    }
   });
 })
 
