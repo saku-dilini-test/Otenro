@@ -270,16 +270,28 @@ module.exports = {
                                                                                 if(err) {
                                                                                     console.log('oh no!', err);
                                                                                 } else {
-                                                                                    var filename = path.basename(zipFile);
-                                                                                    var mimetype = mime.lookup(zipFile);
 
-                                                                                    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-                                                                                    res.setHeader('Content-type', mimetype);
+                                                                                    var searchAppData = {
+                                                                                        id :appId
+                                                                                    }
 
-                                                                                    var filestream = fs.createReadStream(zipFile);
+                                                                                    Application.update(searchAppData, {status :"UPLOADING"}).exec(function(err,app) {
+                                                                                        if (err) res.send(err);
+                                                                                        else {
+                                                                                            var filename = path.basename(zipFile);
+                                                                                            var mimetype = mime.lookup(zipFile);
 
-                                                                                    filestream.pipe(res);
-                                                                                    console.log('EXCELLENT');
+                                                                                            res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                                                                                            res.setHeader('Content-type', mimetype);
+
+                                                                                            var filestream = fs.createReadStream(zipFile);
+
+                                                                                            filestream.pipe(res);
+                                                                                            console.log('EXCELLENT');
+                                                                                        }
+                                                                                    });
+
+
                                                                                 }
                                                                             });
 

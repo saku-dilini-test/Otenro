@@ -291,8 +291,9 @@ module.exports.routes = {
      **/  
      'GET  /edit/getAllAppsData': 'technicalSupport/TechnicalSupportController.getAllAppsData',
      'POST  /edit/getPublishDetails': 'technicalSupport/TechnicalSupportController.getPublishDetails',
-    'GET    /edit/getPushConfigDetails': 'technicalSupport/TechnicalSupportController.getPushConfigDetails',
-    'POST   /edit/savePushConfigDetails': 'technicalSupport/TechnicalSupportController.savePushConfigDetails'
+     'GET    /edit/getPushConfigDetails': 'technicalSupport/TechnicalSupportController.getPushConfigDetails',
+     'POST   /edit/savePushConfigDetails': 'technicalSupport/TechnicalSupportController.savePushConfigDetails',
+     'POST   /edit/changePublishStatus': 'technicalSupport/TechnicalSupportController.changePublishStatus'
 
 
    

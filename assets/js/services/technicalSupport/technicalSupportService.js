@@ -20,6 +20,9 @@
             },
             savePushConfigDetails : function(data){
                 return $http.post(SERVER_URL + 'edit/savePushConfigDetails',data);
+            },
+            changePublishStatus : function(data){
+                return $http.post(SERVER_URL + 'edit/changePublishStatus',data);
             }
         };
     }
