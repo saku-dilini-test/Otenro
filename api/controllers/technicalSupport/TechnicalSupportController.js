@@ -1,16 +1,18 @@
-/**
- * Created by prasanna on 9/19/16.
- */
 
-/**
- * TechnicalSupportController
- *
- * @help        :: See http://links.sailsjs.org/docs/controllers
- */
+
 
 var fs = require('fs-extra'),
     xml2js = require('xml2js'),
-    config = require('../../services/config');
+    config = require('../../services/config'),
+    email  = require('../../../node_modules/emailjs/email');
+
+
+var server  = email.server.connect({
+    user:    "onbilabsttest@gmail.com",
+    password:"0nb1tl@b$",
+    host:    "smtp.gmail.com",
+    ssl:     true
+});
 
 module.exports = {
 
@@ -20,7 +22,9 @@ module.exports = {
      *
      */
     getAllAppsData: function (req, res) {
-        Application.find({status:'PENDING'}).exec(function (err, appsData) {
+        Application.find().where({ or : [ { status  : 'PENDING' },
+                                        { status  : 'PUBLISHED' },
+                                        { status   : 'UPLOADING' } ]}).exec(function (err, appsData) {
             if (err) res.send(err);
             res.json(appsData);
 
@@ -155,6 +159,69 @@ module.exports = {
             }
         });
 
-    }
+    },
 
+
+
+    /**
+     * final step of the publishing. after
+     * publishing  the app send mail to customer.
+     */
+    changePublishStatus : function (req,res) {
+        console.log("req.body.appId  " + req.body.appId);
+        var searchAppDataDetails = {
+            appId :req.body.appId
+        }
+
+        PublishDetails.findOne(searchAppDataDetails).exec(function(err, publishDetails) {
+            if (err) res.send(err);
+            else {
+                console.log("req.publishDetails " + publishDetails.appId);
+                var searchAppDataApp = {
+                    id :publishDetails.appId
+                }
+
+                Application.update(searchAppDataApp, {status :"PUBLISHED"}).exec(function(err,app) {
+                    if (err) res.send(err);
+                    else {
+
+                        // Email Subject
+                        var emailSubject = 'Congratulation ! Your ' +
+                            publishDetails.title +' application have been published . ';
+                        // Email Body
+                        var emailBody    =  "<html>" +
+                            "<p>  Congratulation ! " + '<br>' + 'Your '  + publishDetails.title +
+                                 ' application have been published on google play. You can view it on ' +
+                                 'https://play.google.com/store/apps/category/BUSINESS?hl=en By searching with '+
+                                '<B>' + publishDetails.title +  "</B></p>"
+
+                            "</html>";
+
+                        console.log("app.email  " + publishDetails.email);
+                        // Email Content
+                        var emailDetails = {
+                            from    : "onbilabsttest@gmail.com",
+                            to      : publishDetails.email,
+                            cc      : '',
+                            subject : emailSubject,
+                            attachment  :
+                                [
+                                    { data : emailBody, alternative : true }
+                                ]
+                        };
+                        // PublishDetails Update or Create Email Notification Function
+                        server.send(emailDetails, function (err, message) {
+                            if (err) res.send(err);
+                            else {
+                                res.send({
+                                    appId: app.appId,
+                                    message: "Send Mail Successfully"
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
 };
