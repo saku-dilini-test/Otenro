@@ -7,6 +7,7 @@ angular.module('animateApp')
 		$scope.deliveryOption = "pickUp";
 		$scope.cart = DataService.cart;
 		$scope.isPassedDate = false;
+		$scope.isOutOfHours = false;
 
 		$http.get(SERVER_URL+"locations/getBranchLocations")
 			.then(function (response) {           
@@ -25,6 +26,7 @@ angular.module('animateApp')
 			$scope.setDeliveryDate = '';
 			$scope.setDeliveryTime = '';
 			$scope.isPassedDate = false;
+			$scope.isOutOfHours = false;
 		}
 
 		$scope.saveBranchName = function(name){
@@ -62,10 +64,20 @@ angular.module('animateApp')
 			$scope.cart.savePickUpTime(pickTime);
 
 			var currentDate = new Date();
+			$scope.isOutOfHours = false;
 			if(date < currentDate){
 				$scope.isPassedDate = true;
 			}else{
 				$scope.isPassedDate = false;
+				var hours = date.getHours();
+				if(8 <= hours && hours < 22){
+					var minutes = date.getMinutes();
+					if(hours == 21 && minutes == 30){
+						$scope.isOutOfHours = true;
+					}
+				}else{
+					$scope.isOutOfHours = true;
+				}
 			}
 		}
 		// save Delivery Date and Time
@@ -79,10 +91,20 @@ angular.module('animateApp')
 			$scope.cart.saveDeliveryTime(deliveryTime);
 
 			var currentDate = new Date();
+			$scope.isOutOfHours = false;
 			if(date < currentDate){
 				$scope.isPassedDate = true;
 			}else{
 				$scope.isPassedDate = false;
+				var hours = date.getHours();
+				if(8 <= hours && hours < 22){
+					var minutes = date.getMinutes();
+					if(hours == 21 && minutes == 30){
+						$scope.isOutOfHours = true;
+					}
+				}else{
+					$scope.isOutOfHours = true;
+				}
 			}
 		};
 

@@ -52,10 +52,14 @@
                         </li>
                         <li>
                             <span ng-if="!(setPickUpDate)"> Select Date and Time for Pickup </span>
+                            <div>We are Open 8.00 am - 9.00 p.m. everyday</div>
                             <label style="width: 100%">Pick Up  Date * : {{ setPickUpDate}}</label>
                             <label style="width: 100%">Pick Up Time * : {{ setPickUpTime}}</label>
                             <div ng-if="isPassedDate">
                                 <span> Selected Date & Time has already passed </span>
+                            </div>
+                            <div ng-if="isOutOfHours">
+                                <span>Sorry, Pick Up Time out of opening hours. Please, Select again.</span>
                             </div>
                             <datetimepicker ng-model="pickUpDate.date"
                                             min-date = "{{minDate}}"
@@ -67,7 +71,7 @@
                             <textarea name="comment" style="width:100%"  rows="3" ng-model="comment" ng-change="saveComment(comment)"></textarea>
                         </li>
                     </ul>
-                        <button ng-disabled="(!(pickUpForm.$valid)) || || (isPassedDate)"
+                        <button ng-disabled="(!(pickUpForm.$valid)) || (isPassedDate) || (isOutOfHours)"
                                 ng-click="pickUpForm.$valid && goShoppingCart()"
                                 class="btn kkcc-btn-success">
                             Submit
@@ -116,10 +120,14 @@
                         </li>
                         <li>
                             <span ng-if="!(setDeliveryDate)"> Select Date and Time for Delivery </span>
+                            <div>We are delivery 8.00 am - 9.00 p.m. everyday</div>
                             <label style="width: 100%">Delivery Date * : {{ setDeliveryDate}}</label>
                             <label style="width: 100%">Delivery Time * : {{ setDeliveryTime}}</label>
                             <div ng-if="isPassedDate">
                                 <span> Selected Date & Time has already passed </span>
+                            </div>
+                            <div ng-if="isOutOfHours">
+                                <span>Sorry, Delivery Time out of delivery hours. Please, Select again.</span>
                             </div>
                             <datetimepicker ng-model="delivery.date"
                                             min-date = "{{minDate}}"
@@ -131,7 +139,7 @@
                             <textarea name="comment" style="width:100%"  rows="3" ng-model="comment" ng-change="saveComment(comment)"> </textarea>
                         </li>
                     </ul>
-                        <button ng-disabled="(!(deliveryForm.$valid)) || (isPassedDate)"
+                        <button ng-disabled="(!(deliveryForm.$valid)) || (isPassedDate) || (isOutOfHours)"
                                 ng-click="deliveryForm.$valid && goShoppingCart()"
                                 class="btn kkcc-btn-success">
                            Submit
