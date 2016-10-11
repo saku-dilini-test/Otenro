@@ -143,9 +143,16 @@
             };
             stylesService.addStyleFontFamily(styleFontFamilyData)
                 .success(function(data) {
-                    toastr.success( type , 'Family Successfully Update', {
+                    if(type == 'headerFont'){
+                    toastr.success('Header Font Updated Successfully', {
                         closeButton: true
-                    });
+                    });}
+                    else if(type == 'contentFont'){
+                        toastr.success('Content Font Updated Successfully', {
+                            closeButton: true
+                        });
+
+                    }
 
                     var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
@@ -173,9 +180,15 @@
             };
             stylesService.addStyleFontSize(styleFontSizeData)
                 .success(function(data) {
-                    toastr.success( type , 'Size Successfully Update ',{
+                    if(type == 'headerFont'){
+                    toastr.success( ' Header Font Size Updated Successfully',{
                         closeButton: true
-                    });
+                    });}
+                    else if(type == 'contentFont'){
+                        toastr.success( 'Content Font Size Updated Successfully',{
+                            closeButton: true
+                        });
+                    }
 
                     var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
@@ -203,9 +216,15 @@
             };
             stylesService.addStyleFontWeight(styleFontWeightData)
                 .success(function(data) {
-                    toastr.success( type , 'Weight Successfully Update ',{
+                    if(type == 'headerFont'){
+                    toastr.success(' Header Font Weight Updated Successfully',{
                         closeButton: true
-                    });
+                    });}
+                    else if(type == 'contentFont'){
+                        toastr.success('Content Font Weight Updated Successfully',{
+                            closeButton: true
+                        });
+                    }
 
                     var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
@@ -294,7 +313,7 @@
                 .success(function (res) {
                     var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
-                    toastr.success('Background image successfully updated', 'Message', {
+                    toastr.success('Background Image Updated Successfully', 'Message', {
                         closeButton: true
                     });
                 }).error(function (res) {
@@ -315,7 +334,7 @@
                         +'/templates/'+appId+'/?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     $mdDialog.hide();
-                    toastr.success('Successfully change backgroundImage', 'Message', {
+                    toastr.success('Background Image Updated Saved', 'Message', {
                         closeButton: true
                     });
                 })
@@ -341,9 +360,22 @@
 
                 stylesService.addStyleColor(styleColorData)
                     .success(function(data) {
-                        toastr.success( type ,'Color Successfully Update ', {
-                            closeButton: true
-                        });
+                        if(type == 'backgroundColor'){
+                            toastr.success('Background Color Updated Successfully', {
+                                closeButton: true
+
+                        });}
+                        else if(type == 'headerFontColor') {
+                            toastr.success('Header Font Color Updated Successfully', {
+                                closeButton: true
+                        });}
+
+                        else if(type == 'contentFontColor') {
+                            toastr.success('Content Font Color Updated Successfully', {
+                                closeButton: true
+                            });}
+
+
                         var tempUrl = mySharedService.url;
                         mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
 
