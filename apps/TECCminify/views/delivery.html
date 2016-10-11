@@ -52,14 +52,14 @@
                         </li>
                         <li>
                             <span ng-if="!(setPickUpDate)"> Select Date and Time for Pickup </span>
-                            <div>We are Open 8.00 am - 9.00 p.m. everyday</div>
+                            <div>Pick up is available from 8:00 am to 9:00 pm everyday</div>
                             <label style="width: 100%">Pick Up  Date * : {{ setPickUpDate}}</label>
                             <label style="width: 100%">Pick Up Time * : {{ setPickUpTime}}</label>
                             <div ng-if="isPassedDate">
                                 <span> Selected Date & Time has already passed </span>
                             </div>
                             <div ng-if="isOutOfHours">
-                                <span>Sorry, Pick Up Time out side of opening hours. Please, Select again.</span>
+                                <span>Sorry, pick up is not available at that time. Please select again.</span>
                             </div>
                             <datetimepicker ng-model="pickUpDate.date"
                                             min-date = "{{minDate}}"
@@ -120,14 +120,14 @@
                         </li>
                         <li>
                             <span ng-if="!(setDeliveryDate)"> Select Date and Time for Delivery </span>
-                            <div>We are delivery 8.00 am - 9.00 p.m. everyday</div>
+                            <div>Delivery is available from 8:00 am to 9:00 pm everyday</div>
                             <label style="width: 100%">Delivery Date * : {{ setDeliveryDate}}</label>
                             <label style="width: 100%">Delivery Time * : {{ setDeliveryTime}}</label>
                             <div ng-if="isPassedDate">
                                 <span> Selected Date & Time has already passed </span>
                             </div>
                             <div ng-if="isOutOfHours">
-                                <span>Sorry, Delivery Time out side of delivery hours. Please, Select again.</span>
+                                <span>Sorry, delivery is not available at that time. Please select again.</span>
                             </div>
                             <datetimepicker ng-model="delivery.date"
                                             min-date = "{{minDate}}"
