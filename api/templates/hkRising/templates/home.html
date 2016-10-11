@@ -1,22 +1,17 @@
-<ion-view hide-back-button="false" view-title="{{appName}}">
-  <ion-content scroll="false">
+<ion-view class="home made-easy-background-color made-easy-background-color" hide-back-button="false" view-title="{{appName}}">
+  <ion-content scroll="false" >
 
-      <br>
-      <br>
-      <br>
       <div class="header made-easy-background-image animated zoomIn"></div>
 
       <ion-nav-view class="made-easy-background-color made-easy-background-color" name="tabContent"></ion-nav-view>
 
-      <ion-tabs class="tabs-positive2 tabs2">
-          <div ng-repeat="category in articleCategoryList">
-              <a class="tab-item tab-item2 animated lightSpeedIn" ng-href="#/app/home/{{category.id}}">
-                  {{category.name}}
-              </a>
-          </div>
-      </ion-tabs>
-
-
+              <ion-tabs class="tabs-positive tabs tabs-top">
+                  <div ng-repeat="category in articleCategoryList">
+                      <a class="tab-item tab-item2 animated lightSpeedIn" ng-href="#/app/home/{{category.id}}">
+                          {{category.name}}
+                      </a>
+                  </div>
+              </ion-tabs>
 
 
   </ion-content>

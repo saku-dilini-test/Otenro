@@ -1,22 +1,21 @@
 <ion-view view-title="{{appName}}">
     <ion-content class="made-easy-background-color" lazy-scroll>
-        <div class="holder">
+
                 <div ng-repeat="article in artilceList">
                     <div class="card animated zoomIn">
                         <a href="#/app/articleView/{{article.id}}">
-                            <div class="row2">
-                                <div class="col2">
+                            <div class="row">
+                                <div class="col">
                                     <div class="item item-image">
-                              <img image-lazy-src="{{imageURL}}/{{article.imageUrl}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="-100"/>
+                                         <img image-lazy-src="{{imageURL}}/{{article.imageUrl}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="-100"/>
                                          <div class="item item-text-wrap">
-                                            <div class="made-easy-header-font">{{article.title}}
-                                        </div>
-                                    </div></div>
+                                            <div class="made-easy-header-font">{{article.title}}</div>
+                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
-        </div>
     </ion-content>
 </ion-view>

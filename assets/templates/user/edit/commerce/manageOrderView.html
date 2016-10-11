@@ -45,6 +45,7 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="hide()">Cancel</md-button>
                             <md-button ng-csv="getArray()"
                                        csv-header="['Created Date', 'Customer Name', 'Payment Status', 'Fulfillment Status']"
                                        filename="orders.csv" class="me-default-button">export as csv</md-button>
@@ -68,7 +69,7 @@
                     </div>
                     <div class="md-dialog-main">
                         <form class="allItems" novalidate>
-                            <div id="grid2" ui-grid="gridOptions2" ui-grid-exporter ui-grid-selection class="grid"></div>
+                            <div id="grid2" ui-grid="gridOptions2" ui-grid-exporter ui-grid-selection class="grid custom-grid"></div>
                         </form>
                         <!--<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>-->
                     </div>
@@ -88,7 +89,7 @@
                     </div>
                     <div class="md-dialog-main">
                         <form class="allItems" novalidate>
-                            <div id="grid3" ui-grid="gridOptions3" ui-grid-exporter ui-grid-selection class="grid"></div>
+                            <div id="grid3" ui-grid="gridOptions3" ui-grid-exporter ui-grid-selection class="grid custom-grid "></div>
                         </form>
                         <!--<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>-->
                     </div>
@@ -108,7 +109,7 @@
                     </div>
                     <div class="md-dialog-main">
                         <form class="allItems" novalidate>
-                            <div id="grid4" ui-grid="gridOptions4" ui-grid-exporter ui-grid-selection class="grid"></div>
+                            <div id="grid4" ui-grid="gridOptions4" ui-grid-exporter ui-grid-selection class="grid custom-grid "></div>
                         </form>
                         <!--<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>-->
                     </div>
