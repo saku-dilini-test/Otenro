@@ -210,7 +210,7 @@
                                        ng-model="billingEdit.fname"
                                        required />
                                 <br />
-                                <span>Characters left: {{maxMenuCategory - billingEdit.fname.length}}</span>
+                                <span class="information">Characters left: {{maxMenuCategory - billingEdit.fname.length}}</span>
                             </fieldset>
                         </div>
                         <fieldset>
@@ -223,7 +223,7 @@
                                    ng-model="billingEdit.address"
                                    required />
                             <br />
-                            <span>Characters left: {{maxMenuCategory - billingEdit.address.length}}</span>
+                            <span class="information">Characters left: {{maxMenuCategory - billingEdit.address.length}}</span>
                         </fieldset>
                         <fieldset class="col-2">
                             <label>Credit card number</label>
@@ -236,10 +236,10 @@
                                    ng-model="billingEdit.creditCardNumber"
                                    required />
                             <br />
-                            <span>Characters left: {{maxMenuCategory - billingEdit.creditCardNumber.length}}</span>
+                            <span class="information">Characters left: {{maxMenuCategory - billingEdit.creditCardNumber.length}}</span>
                             <div ng-messages="editBilling.creditCardNumber.$error" ng-show="editBilling.creditCardNumber.$dirty">
                                 <div ng-message="pattern"
-                                     class="my-message">That doesn't look like a valid credit card number</div>
+                                     class="error my-message">That doesn't look like a valid credit card number</div>
                             </div>
                         </fieldset>
                         <fieldset class="col-2 reset-margin-right">
@@ -252,7 +252,7 @@
                                    ng-model="billingEdit.cardType"
                                    required />
                             <span class="help-block " ng-show="editBilling.cardType.$error.pattern">
-                                <span >Not a valid card type</span>
+                                <span class="error">Not a valid card type</span>
                             </span>
                         </fieldset>
                         <fieldset class="col-2">
@@ -266,7 +266,7 @@
                                    ng-model="billingEdit.cvs"
                                    required />
                             <span class="help-block " ng-show="editBilling.cvs.$error.pattern">
-                                <span >Not a valid cvs</span>
+                                <span class="error">Not a valid cvs</span>
                             </span>
                         </fieldset>
 

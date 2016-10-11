@@ -24,6 +24,7 @@ a.feature01{
 .md-dialog-main .file-upload-wrapper2{
     margin-bottom: 15px;
 	width: 36%;
+	margin-left:45px;
 	float:left;
 }
 
@@ -515,25 +516,28 @@ trix-editor {
     margin-bottom: 2%;
 }
 #loading-bar {
-  pointer-events: all;
-  z-index: 99999;
-  border: none;
-  margin: 0px;
-  padding: 0px;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  cursor: wait;
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: all;
+    z-index: 99999;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    cursor: wait;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
   }
 #loading-bar-spinner .spinner-icon{
-  margin-top: 150%;
-  margin-left: 400%;
-  width: 150px;
-  height: 150px;
-  border: 3px solid #29d;
+    position:relative;
+    width: 150px;
+    height: 150px;
+}
+
+#loading-bar-spinner{
+        top: 43%;
+        left: 45%;
 }
 /*
 overriding pull-left changes other styles too therefor commented
@@ -563,7 +567,7 @@ overriding pull-left changes other styles too therefor commented
 
 .image-upload{
     float: left !important;
-    width: 64%;
+    width: 58%;
     padding: 0 21px;
     margin-top: unset !important;
 }

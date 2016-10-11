@@ -161,24 +161,6 @@
 
         };
 
-        $scope.cropImage = function () {
-            $scope.myImage = null;
-            var handleFileSelect=function(evt) {
-
-                var file=evt.currentTarget.files[0];
-                var reader = new FileReader();
-
-                reader.onload = function (evt) {
-                    $scope.$apply(function($scope){
-                        $scope.myImage=evt.target.result;
-                        $scope.picFile =  $scope.myImage;
-                    });
-                };
-                reader.readAsDataURL(file);
-            };
-            angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
-        };
-
         if (typeof $scope.categories === 'undefined') {
 
             commerceService.getCategoryList()
@@ -328,6 +310,28 @@
             $scope.child = newChild;
         };
 
+         $scope.imageSelected = true;
+         $scope.buttonName = "Browse Image";
+
+        $scope.cropImage = function () {
+            $scope.myImage = null;
+            var handleFileSelect=function(evt) {
+
+                var file=evt.currentTarget.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (evt) {
+                    $scope.$apply(function($scope){
+                        $scope.myImage=evt.target.result;
+                        $scope.picFile =  $scope.myImage;
+                    });
+                };
+                reader.readAsDataURL(file);
+                $scope.imageSelected =false;
+                $scope.buttonName = "Upload";
+            };
+            angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+        };
 
         $scope.addImage = function (img) {
 
@@ -347,6 +351,9 @@
                     closeButton: true
                 });
             }
+
+             $scope.imageSelected = true;
+             $scope.buttonName = "Browse Image";
         };
 
         $scope.deleteImg = function (index) {
@@ -519,6 +526,16 @@
         if (initialData.product.id !== undefined){
             disableTabs(1,false,false,false ,false);
         }
+
+
+
+        $scope.changeName = function(){
+
+        }
+
+
+
+
 
 
     }

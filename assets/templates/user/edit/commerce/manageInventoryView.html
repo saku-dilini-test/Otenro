@@ -1,4 +1,4 @@
-<md-dialog aria-label="Inventory" style="width:900px">
+<md-dialog class="inventory-css" aria-label="Inventory" style="width:900px">
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false" md-dynamic-height="true">
             <md-tab>
@@ -61,15 +61,19 @@
                             <!--</tbody>-->
                         <!--</table>-->
 
-                                <div class="md-dialog-buttons">
-                                    <div class="inner-section">
-                                        <md-button ng-csv="getArray()" csv-header="['Name', 'SKU', 'Price', 'Quantity', 'Size']" filename="products.csv"  class="me-default-button">export as csv</md-button>
-                                        <md-button class="me-default-button" ng-disabled="inventoryForm.$invalid" type="submit"ng-click="updateInventory()">Save</md-button>
-                                    </div>
-                                </div>
+
                             </form>
+
                         <!--<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>-->
 
+                    </div>
+
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="hide()">Cancel</md-button>
+                            <md-button ng-csv="getArray()" csv-header="['Name', 'SKU', 'Price', 'Quantity', 'Size']" filename="products.csv"  class="me-default-button">export as csv</md-button>
+                            <md-button class="me-default-button" ng-disabled="inventoryForm.$invalid" type="submit"ng-click="updateInventory()">Save</md-button>
+                        </div>
                     </div>
 
                     <div class="mini-light-box" ng-show="miniLightBoxShow">
