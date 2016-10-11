@@ -4,8 +4,9 @@
 
 angular.module('animateApp')
 	.controller('locationCtrl', function($scope, $http,SERVER_URL,DataService,$location) {
-		$scope.deliveryOption = "pickUp"
+		$scope.deliveryOption = "pickUp";
 		$scope.cart = DataService.cart;
+		$scope.isPassedDate = false;
 
 		$http.get(SERVER_URL+"locations/getBranchLocations")
 			.then(function (response) {           
@@ -19,6 +20,11 @@ angular.module('animateApp')
 		
 		$scope.selectDeliveryOption = function(option){					
 			$scope.cart.selectDeliveryOption(option);
+			$scope.setPickUpDate = '';
+			$scope.setPickUpTime = '';
+			$scope.setDeliveryDate = '';
+			$scope.setDeliveryTime = '';
+			$scope.isPassedDate = false;
 		}
 
 		$scope.saveBranchName = function(name){
@@ -43,7 +49,7 @@ angular.module('animateApp')
 			$scope.cart.saveName(address.name);
 			$scope.cart.saveCity(address.city);
 			$scope.cart.saveTelPhone(address.contactNumber);
-
+			$scope.cart.saveEmail(address.email);
 		}
 
 		$scope.savePickUpDate = function(date){
@@ -54,7 +60,31 @@ angular.module('animateApp')
 			var pickTime = formatAMPM(date);
 			$scope.setPickUpTime = pickTime;
 			$scope.cart.savePickUpTime(pickTime);
+
+			var currentDate = new Date();
+			if(date < currentDate){
+				$scope.isPassedDate = true;
+			}else{
+				$scope.isPassedDate = false;
+			}
 		}
+		// save Delivery Date and Time
+		$scope.saveDeliveryDate = function(date){
+			var deliveryDate = date.getDate() + ' - ' + ( date.getMonth() + 1 ) + ' - ' + date.getFullYear();
+			$scope.setDeliveryDate = deliveryDate;
+			$scope.cart.saveDeliveryDate(deliveryDate);
+
+			var deliveryTime = formatAMPM(date);
+			$scope.setDeliveryTime = deliveryTime;
+			$scope.cart.saveDeliveryTime(deliveryTime);
+
+			var currentDate = new Date();
+			if(date < currentDate){
+				$scope.isPassedDate = true;
+			}else{
+				$scope.isPassedDate = false;
+			}
+		};
 
 		function formatAMPM(date) {
 			var hours = date.getHours();

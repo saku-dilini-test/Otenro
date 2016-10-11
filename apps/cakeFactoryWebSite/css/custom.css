@@ -27,3 +27,13 @@ table{
 .well{
 	background-color: black
 }
+
+.delivery-email {
+    width:100% !important;
+    border: 0.5px solid #ccc !important;
+    background-color :#fff !important;
+}
+
+.delivery-email:focus {
+    border-color: #66afe9 !important;
+}

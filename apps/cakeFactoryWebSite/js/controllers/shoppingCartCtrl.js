@@ -15,7 +15,7 @@ angular.module('animateApp')
         // before redirect to PayPal, Cart info send to server to save
         $scope.saveCartInServer = function () {
 
-            $scope.deliveryOption = "pickUp"
+            $scope.deliveryOption = "pickUp";
             $scope.isSubmitButtonDisableValue = 'true';
             $scope.cart = DataService.cart;
             var data = $scope.cart.getShoppingCart();
@@ -38,6 +38,9 @@ angular.module('animateApp')
             shoppingCart['comment'] = $scope.cart.getComment();
             shoppingCart['pickUpDate'] = $scope.cart.getPickUpDate();
             shoppingCart['pickUpTime'] = $scope.cart.getPickUpTime();
+            shoppingCart['email'] = $scope.cart.getEmail();
+            shoppingCart['deliveryDate'] = $scope.cart.getDeliveryDate();
+            shoppingCart['deliveryTime'] = $scope.cart.getDeliveryTime();
             shoppingCart['paymentStatus'] = 'Pending';
             //cart info save api
             $http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)

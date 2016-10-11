@@ -290,6 +290,15 @@ module.exports = {
             deliveryOption = deliveryOption + "<ul> Pick Up Time : "+ payment.pickUpTime + "</ul>";
           }
 
+          if (payment.deliveryDate != ''){
+            deliveryOption = deliveryOption + "<ul> Delivery Date : "+ payment.deliveryDate + "</ul>";
+          }
+          if (payment.deliveryTime != ''){
+            deliveryOption = deliveryOption + "<ul> Delivery Time : "+ payment.deliveryTime + "</ul>";
+          }
+          if (payment.email != ''){
+            deliveryOption = deliveryOption + "<ul> Email : "+ payment.email + "</ul>";
+          }
           if (payment.comment != ''){
             deliveryOption = deliveryOption + "<ul> Comment : "+ payment.comment + "</ul>";
           }

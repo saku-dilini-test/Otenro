@@ -66,6 +66,11 @@ shoppingCart.prototype.selectDeliveryOption = function (option) {
         localStorage['deliveryLocation'] = '';
         localStorage['deliveryAddress_01'] = '';
         localStorage['deliveryAddress_02'] = '';
+        localStorage['pickUpDate'] = '';
+        localStorage['pickUpTime'] = '';
+        localStorage['deliveryDate'] = '';
+        localStorage['deliveryTime'] = '';
+        localStorage['email'] = '';
         localStorage['name'] = '';
         localStorage['city'] = '';
         localStorage['telPhone'] = 0;
@@ -188,6 +193,25 @@ shoppingCart.prototype.getDeliveryAddress_02 = function () {
     }
 }
 
+// save Email to local storage
+shoppingCart.prototype.saveEmail = function (email) {
+    if (localStorage != null && JSON != null) {
+        localStorage['email'] = email;
+    }
+}
+
+// get Emai from local storage
+shoppingCart.prototype.getEmail = function () {
+    if (localStorage != null && JSON != null) {
+        var currentCity = localStorage['email'];
+        if(currentCity){
+            return localStorage['email'];
+        }else{
+            return '';
+        }
+    }
+}
+
 // save name to local storage
 shoppingCart.prototype.saveName = function (name) {
     if (localStorage != null && JSON != null) {
@@ -277,6 +301,45 @@ shoppingCart.prototype.getPickUpTime = function () {
         var pickUpTime = localStorage['pickUpTime'];
         if(pickUpTime){
             return localStorage['pickUpTime'];
+        }else{
+            return '';
+        }
+    }
+}
+
+// delivery date and time
+// save deliveryDate to local storage
+shoppingCart.prototype.saveDeliveryDate = function (name) {
+    if (localStorage != null && JSON != null) {
+        localStorage['deliveryDate'] = name;
+    }
+}
+
+// get deliveryDate from local storage
+shoppingCart.prototype.getDeliveryDate = function () {
+    if (localStorage != null && JSON != null) {
+        var deliveryDate = localStorage['deliveryDate'];
+        if(deliveryDate){
+            return localStorage['deliveryDate'];
+        }else{
+            return '';
+        }
+    }
+}
+
+// save deliveryTime to local storage
+shoppingCart.prototype.saveDeliveryTime = function (time) {
+    if (localStorage != null && JSON != null) {
+        localStorage['deliveryTime'] = time;
+    }
+}
+
+// get deliveryTime from local storage
+shoppingCart.prototype.getDeliveryTime = function () {
+    if (localStorage != null && JSON != null) {
+        var deliveryTime = localStorage['deliveryTime'];
+        if(deliveryTime){
+            return localStorage['deliveryTime'];
         }else{
             return '';
         }
