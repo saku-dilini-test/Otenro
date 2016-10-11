@@ -16,16 +16,17 @@
   function LoginController( $scope, $state, Auth ,toastr ,$auth) {
 
     $scope.submit = function($event) {
-      Auth.login($scope.user).success(function() {
-        toastr.success('Successfully login ', 'Message', {
-          closeButton: true
-        });
-        if ($scope.user.email== 'support@otenro.com'){
-          $state.go('user.technicalSupporter');
-        }else {
-          $state.go('user.dashboard');
+      Auth.login($scope.user).success(function(response) {
+        if (response.user.email){
+          toastr.success('Successfully login ', 'Message', {
+            closeButton: true
+          });
+          if (response.user.email== 'support@otenro.com'){
+               $state.go('user.technicalSupporter');
+          }else {
+               $state.go('user.dashboard');
+          }
         }
-
       }).error(function(err) {
         toastr.error('Invalid email/password combination.', 'Error', {
           closeButton: true
@@ -38,15 +39,13 @@
 
     $scope.authenticate = function(provider) {
       $auth.authenticate(provider).then(function(response){
-      toastr.success('Successfully login ', 'Message', {
-             closeButton: true
-      });
-        if ($scope.user.email== 'support@otenro.com'){
-          $state.go('user.technicalSupporter');
-        }else {
+        if (response.user.email){
+          toastr.success('Successfully login ', 'Message', {
+            closeButton: true
+          });
           $state.go('user.dashboard');
         }
-      }).catch(function(response){
+      }).catch(function(error){
       toastr.error('Invalid email/password combination.', 'Error', {
              closeButton: true
       });
