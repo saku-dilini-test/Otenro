@@ -98,9 +98,9 @@
 			}else{
 				$scope.isPassedDate = false;
 				var hours = date.getHours();
-				if(8 <= hours && hours < 22){
+				if(10 <= hours && hours < 21){
 					var minutes = date.getMinutes();
-					if(hours == 21 && minutes == 30){
+					if(hours == 20 && minutes == 30){
 						$scope.isOutOfHours = true;
 					}
 				}else{
