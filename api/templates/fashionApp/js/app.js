@@ -1,14 +1,17 @@
 /**
  * SurfIT invisionApp
  */
-angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdMob', 'srfOneSignal'])
+angular.module('invisionApp', ['ionic', 'ngCordova','ionic.cloud', 'srfSocialSharing', 'srfAdMob', 'srfOneSignal'])
 
 .run([
 	'$ionicPlatform',
 	'$window',
 		'$rootScope',
 		'readMadeEasy',
-	function($ionicPlatform, $window,$rootScope,readMadeEasy) {
+		'$ionicPush',
+		'routesConfig',
+		'$http',
+	function($ionicPlatform, $window,$rootScope,readMadeEasy,$ionicPush,routesConfig,$http) {
 		$ionicPlatform.ready(function() {
 			// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 			// for form inputs)
@@ -20,6 +23,24 @@ angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdM
 				// org.apache.cordova.statusbar required
 				StatusBar.styleDefault();
 			}
+			
+			// Push register function
+			$ionicPush.register().then(function(t) {
+				return $ionicPush.saveToken(t);
+			}).then(function(t) {
+				console.log('Token saved: ', t.token);
+				var data = {
+					appId: $rootScope.appId,
+					deviceId : t.token
+				};
+				// Send to server to save push device token
+				$http.post(routesConfig.wpUrl.SERVER_URL() + "/templates/postDeviceId",data)
+					.then(function(res){
+						console.log(res);
+					},function(err){
+						console.log(err);
+					});
+			});
 
 			$window.localStorage.setItem('showIntro', true);
 
@@ -45,6 +66,29 @@ angular.module('invisionApp', ['ionic', 'ngCordova', 'srfSocialSharing', 'srfAdM
 		});
 	}
 ])
+
+// Ionic Cloud Provider Configuration
+	.config([
+		'$ionicCloudProvider',
+		function($ionicCloudProvider) {
+		$ionicCloudProvider.init({
+			"core": {
+				"app_id": "8307b439"
+			},
+			"push": {
+				"sender_id": "528602483901",
+				"pluginConfig": {
+					"ios": {
+						"badge": true,
+						"sound": true
+					},
+					"android": {
+						"iconColor": "#343434"
+					}
+				}
+			}
+		});
+	}])
 
 .config([
 	'$stateProvider',
