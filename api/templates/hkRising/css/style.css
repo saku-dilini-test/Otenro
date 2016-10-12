@@ -140,10 +140,9 @@
 }
 
 .item-complex .item-content, .item-radio .item-content{
-    position: relative;
-    z-index: 2;
-    padding: 16px 49px 16px 16px;
-    border: none;
+    padding: 15px 0;
+    width:86%;
+    text-align:center;
     background-color: initial;
 }
 .tab-item2 {
@@ -295,13 +294,19 @@ ion-slides {
 .custom-navigation .item{
     background-color:transparent;
     border:none;
-    color:#fff;
 }
+
+.custom-navigation label{
+    width:86%;
+    text-align:center;
+    display:block;
+    padding:1em 0;
+}
+.custom-navigation .menu .scroll-content{
+    top:25%;
+}
+
 
 .home .has-header{
     top:0;
-}
-
-ion-scroll[direction=y] {
-    height: 100vh !important;
 }

@@ -25,7 +25,9 @@
                 {
                     field:'sku',
                     displayName:'SKU',
-                    cellTemplate: "<div class='sku-link color-link' ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>",
+                    cellTemplate: "<md-input-container class='md-container-modify'>"+
+                                        "<div class='sku-link color-link' ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>"+
+                                        "</md-input-container>",
                     cellTemplateScope: {
                         click: function(data) {
                             // go to product edit view
@@ -78,7 +80,7 @@
 
                 },
                 {
-                    cellTemplate:   "<div><img class='delete-icon'" +
+                    cellTemplate:   "<div class='delete-icon'><img " +
                                     " ng-click='cellTemplateScope.click(row.branch)' src='../../../images/delete-icon.png'></div>",
                     cellTemplateScope: {
                         click: function(data) {

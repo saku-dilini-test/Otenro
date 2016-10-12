@@ -100,9 +100,7 @@ ion-slides {
 
 .navigation-drawer ion-item a{
     background-color: transparent !important;
-    color:#fff;
     margin-left: 25%;
-    font-weight: 600;
 }
 
 .navigation-drawer .menu-animated{
