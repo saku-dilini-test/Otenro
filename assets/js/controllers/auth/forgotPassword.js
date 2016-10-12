@@ -14,7 +14,7 @@
             commerceService.sendVerificationLinkEmail(data).success(function (data) {
                 toastr.info(data.msg, {closeButton: true});
                 //To check email page
-                $state.go('anon.checkEmail');
+               //$state.go('anon.checkEmail');
             }).error(function(err) {
                 toastr.error('Error ' , 'Error', {
                     closeButton: true

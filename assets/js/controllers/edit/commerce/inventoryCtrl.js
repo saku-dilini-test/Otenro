@@ -215,6 +215,11 @@
                 //}
             };
 
+          // hide the dialog box
+          $scope.hide = function () {
+                    $mdDialog.hide();
+          };
+
 
         /**
          * Delete a product from the inventory.

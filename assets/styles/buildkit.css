@@ -1408,13 +1408,10 @@ background-color: #f4f5f4;
 
 .uploaded-old-images .old-images .old-image{
     float: left;
-    margin: 0 26px 26px 0;
+    margin: 2%;
     position: relative;
 }
 
-.uploaded-old-images .old-images .old-image:nth-of-type(4n){
-    margin: 0 26px 26px 0;
-}
 
 .uploaded-old-images .old-images .old-image img{
     cursor: pointer;
@@ -1450,7 +1447,7 @@ background-color: #f4f5f4;
 
 .md-dialog-buttons{
     background-color: #fff;
-    padding: 0 57px;
+    padding: 0 44px;
     text-align: right;
     width: 100%;
 }
@@ -1945,9 +1942,24 @@ button[disabled]{
     color:#212121;
 }
 
-.md-dialog-profile{
-    height:540px;
+.img-up {
+    width: 200px;
+    text-align: center;
+    margin: 10% 13%;
 }
+
+.img-up1{
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    top: 0px;
+    left: 0;
+}
+
+.img-up1 input[type=file]{
+    width:inherit;
+}
+
 .md-dialog-addProduct{
     height:550px;
     width:850px;
@@ -1994,6 +2006,25 @@ trix-toolbar .button_group input[type=button]{
 
 .md-dialog-container{
     background-color:rgba(255, 255, 255, 0.60);
+}
+
+/* error massages. add error class. <span class="error"> */
+fieldset .error{
+    font-size: 12px;
+    color: rgba(255, 0, 0, 0.75);
+    position: relative;
+    top: 2px;
+}
+/* information massages. add information class. <span class="information"> */
+fieldset .information{
+    font-size: 12px;
+    color: rgb(174, 174, 174);
+    position: relative;
+    top: 2px;
+}
+
+.inventory-css md-tabs-wrapper{
+    display:none;
 }
 
 /*Making a theme. Add your specified colors here. define as color... */
