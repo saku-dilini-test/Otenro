@@ -526,7 +526,6 @@ trix-editor {
     top: 0px;
     left: 0px;
     cursor: wait;
-    position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
   }
 #loading-bar-spinner .spinner-icon{
@@ -536,8 +535,9 @@ trix-editor {
 }
 
 #loading-bar-spinner{
-        top: 43%;
-        left: 45%;
+        position:absolute;
+        top: 42%;
+        left: 44%;
 }
 /*
 overriding pull-left changes other styles too therefor commented
