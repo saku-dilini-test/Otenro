@@ -8,6 +8,7 @@ var Passwords = require('machinepack-passwords');
 
 module.exports = {
 
+
   schema: true,
 
   attributes: {
@@ -23,7 +24,7 @@ module.exports = {
     },
     email: {
       type: 'string',
-      required: true,
+     /* required: true,*/
       unique: true
     },
     password: {
@@ -50,8 +51,9 @@ module.exports = {
     yahoo:  {
       type: 'string'
     },
-    role:  {
-      type: 'string'
+    userRole:  {
+      type: 'array',
+      defaultsTo : ['beta']
     },
     address:{
         type: 'string'
@@ -71,6 +73,7 @@ module.exports = {
       return obj;
     }
   },
+
 
   beforeCreate : function(values, next) {
     console.log(values);
@@ -96,7 +99,6 @@ module.exports = {
     }
 
   }
-
   ,
 
   beforeUpdate : function(values, next) {
@@ -118,5 +120,7 @@ module.exports = {
       next();
     }
   }
+
+
 };
 

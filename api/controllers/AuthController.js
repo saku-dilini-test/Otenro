@@ -40,7 +40,8 @@ module.exports = {
               secret: '17ca644f4f3be572ec33711a40a5b8b4',
               payload: {
                 id :  user.id,
-                email:  user.email
+                email:  user.email,
+                userRoles : user.userRole
               },
               algorithm: 'HS256'
             }).exec({
@@ -50,7 +51,7 @@ module.exports = {
               },
               // OK.
               success: function (result){
-                res.status(200).json({user : { email : user.email , sub : user.id },token : result });
+                res.status(200).json({user : { email : user.email , sub : user.id,userRoles : user.userRole  },token : result });
               }
             });
           }
@@ -76,7 +77,9 @@ module.exports = {
                     secret: '17ca644f4f3be572ec33711a40a5b8b4',
                     payload: {
                         id :  user.id,
-                        email:  user.email
+                        email:  user.email,
+                        userRoles : user.userRole
+
                     },
                     algorithm: 'HS256'
                 }).exec({
@@ -86,7 +89,8 @@ module.exports = {
                 },
                 // OK.
                 success: function (result){
-                    res.status(200).json({user : { email : user.email , sub : user.id },token : result });
+
+                    res.status(200).json({user : { email : user.email , sub : user.id,userRoles : user.userRole  },token : result });
                 }
                 });
             }
@@ -117,7 +121,8 @@ module.exports = {
                 secret: '17ca644f4f3be572ec33711a40a5b8b4',
                 payload: {
                   id :  user.id,
-                  email:  user.email
+                  email:  user.email,
+                  userRoles : user.userRole
                 },
                 algorithm: 'HS256'
               }).exec({
@@ -125,7 +130,7 @@ module.exports = {
                   return err;
                 },
                 success: function (result){
-                  res.status(200).json({user : { email : user.email , sub : user.id  },token : result });
+                  res.status(200).json({user : { email : user.email , sub : user.id ,userRoles : user.userRole  },token : result });
                 }
               });
             }
@@ -173,7 +178,8 @@ module.exports = {
                     secret: '17ca644f4f3be572ec33711a40a5b8b4',
                     payload: {
                       id :  newUser.id,
-                      email:  newUser.email
+                      email:  newUser.email,
+                      userRoles : newUser.userRoles
                     },
                     algorithm: 'HS256'
                   }).exec({
@@ -181,7 +187,7 @@ module.exports = {
                       return res.negotiate(err);
                     },
                     success: function (result){
-                      res.status(200).json({user : {email: newUser.email, sub: newUser.id},token : result });
+                      res.status(200).json({user : {email: newUser.email, sub: newUser.id,userRoles : newUser.userRole },token : result });
                     }
                   });
                 });
@@ -198,7 +204,7 @@ module.exports = {
                     return res.negotiate(err);
                   },
                   success: function (result){
-                    res.status(200).json({user : {email: foundUser.email, sub: foundUser.id},token : result });
+                    res.status(200).json({user : {email: foundUser.email, sub: foundUser.id,userRoles : foundUser.userRole },token : result });
                   }
                 });
               }
@@ -253,7 +259,8 @@ module.exports = {
                     secret: '17ca644f4f3be572ec33711a40a5b8b4',
                     payload: {
                       id :  newUser.id,
-                      email:  newUser.email
+                      email:  newUser.email,
+                      userRoles : newUser.userRoles
                     },
                     algorithm: 'HS256'
                   }).exec({
@@ -261,7 +268,7 @@ module.exports = {
                       return res.negotiate(err);
                     },
                     success: function (result){
-                      res.status(200).json({user : {email: newUser.email, sub: newUser.id},token : result });
+                      res.status(200).json({user : {email: newUser.email, sub: newUser.id,userRoles : foundUser.userRole},token : result });
                     }
                   });
                 });
@@ -270,7 +277,8 @@ module.exports = {
                   secret: '17ca644f4f3be572ec33711a40a5b8b4',
                   payload: {
                     id :  foundUser.id,
-                    email:  foundUser.email
+                    email:  foundUser.email,
+                    userRoles : foundUser.userRoles
                   },
                   algorithm: 'HS256'
                 }).exec({
@@ -278,7 +286,7 @@ module.exports = {
                     return res.negotiate(err);
                   },
                   success: function (result){
-                    res.status(200).json({user : {email: foundUser.email, sub: foundUser.id},token : result });
+                    res.status(200).json({user : {email: foundUser.email, sub: foundUser.id,userRoles : foundUser.userRole},token : result });
                   }
                 });
               }

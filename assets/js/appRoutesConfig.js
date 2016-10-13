@@ -56,11 +56,11 @@ angular.module('app')
             controller : 'DashboardCtrl',
             templateUrl : 'user/dashboard/dashboard.html',
             data: {
-            permissions: {
-                only: ['Admin','Beta'],
-                redirectTo: 'anon.login'
+                permissions: {
+                    only: ['Admin', 'Beta'],
+                    redirectTo: 'anon.login'
+                }
             }
-        }
 
       }).state('user.templates',{
             url :'/templates',
@@ -83,14 +83,20 @@ angular.module('app')
       }).state('user.technicalSupporter',{
             url :'/technicalSupport',
             controller : 'technicalSupportCtrl',
-            templateUrl : 'user/technicalSupport/TechnicalSupport.html'
+            templateUrl : 'user/technicalSupport/TechnicalSupport.html',
+            data : {
+                permissions: {
+                    only: ['Support'],
+                    redirectTo: 'anon.login'
+                }
+            }
 
       }).state('user.viewPublishDetails',{
             url :'/viewPublishDetails/:appId/:userId',
             controller : 'technicalSupportCtrl',
             data : {
                 appId : null,
-                userId:null
+                userId:null,
             },
             templateUrl : 'user/technicalSupport/ViewPublishDetails.html'
       });
