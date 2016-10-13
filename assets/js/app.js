@@ -53,34 +53,34 @@ angular.module('app', [
 ]).run(function($rootScope, $state, $auth,Auth,Permission) {
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-
     if (!Auth.authorize(toState.data.access)){
         event.preventDefault();
         $state.go('anon.welcome');
     }
   });
-  console.log($auth.getPayload());
 
+  console.log($auth.getPayload());
 
   Permission.defineRole('Admin', function (stateParams) {
     // If the returned value is *truthy* then the user has the role, otherwise they don't
-    if ($auth.getPayload().userRole == 'Admin') {
+    if ($auth.getPayload().userRoles[0] == 'admin') {
+
       return true; // Is anonymous
     }
     return false;
   });
   Permission.defineRole('Support', function (stateParams) {
     // If the returned value is *truthy* then the user has the role, otherwise they don't
-    if ($auth.getPayload().userRole == 'Support') {
+    if ($auth.getPayload().userRoles[0] == 'support') {
       return true; // Is anonymous
     }
     return false;
   });
   Permission.defineRole('Beta', function (stateParams) {
     // If the returned value is *truthy* then the user has the role, otherwise they don't
-    //$auth.getPayload().userRole == 'Beta'
+    if ($auth.getPayload().userRoles[0] == 'beta'){
     //TODO: Replace below 'true' with above line after userRole has been implemented.
-    if (true) {
+
       return true; // Is anonymous
     }
     return false;

@@ -21,7 +21,7 @@
           toastr.success('Successfully login ', 'Message', {
             closeButton: true
           });
-          if (response.user.email== 'support@otenro.com'){
+          if (response.user.userRoles== 'support'){
                $state.go('user.technicalSupporter');
           }else {
                $state.go('user.dashboard');
