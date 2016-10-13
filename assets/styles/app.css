@@ -527,9 +527,9 @@ trix-editor {
     left: 0px;
     cursor: wait;
     background-color: rgba(0, 0, 0, 0.5);
+    position:fixed;
   }
 #loading-bar-spinner .spinner-icon{
-    position:relative;
     width: 150px;
     height: 150px;
 }

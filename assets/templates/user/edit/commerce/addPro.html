@@ -32,9 +32,8 @@
 
             <!-- Add Product Tab 2 content -->
             <md-tab ng-disabled="addProductsOptionParams.secondLocked">
+                <md-tab-label>Add Details</md-tab-label>
                 <md-tab-body>
-
-                    <md-tab-label>Add Details</md-tab-label>
                     <div class="md-dialog-header">
                         <h1>Add Product</h1>
                     </div>
@@ -43,7 +42,7 @@
                         <div class="md-dialog-main">
                             <div class="clearfix">
 
-                                <md-input-container class="md-block" flex="50">
+                                <md-input-container class="md-block">
                                     <label>Name</label>
                                     <input required md-maxlength="15"  name="name" ng-model="product.name">
                                     <div ng-messages="productForm.name.$error" ng-show="productForm.name.$dirty">
@@ -79,7 +78,7 @@
                                     </div>
                                 </md-input-container>
 
-                                <md-input-container ng-hide="mainMenuHide">
+                                <md-input-container class="md-block" flex="50" ng-hide="mainMenuHide">
                                     <label>Main Menu</label>
                                     <md-select
                                             md-no-asterisk = flase
@@ -92,7 +91,7 @@
                                 </md-input-container>
 
                                 <!--Disabled for now-->
-                                <md-input-container ng-hide="childMenuHide">
+                                <md-input-container class="md-block" flex="50" ng-hide="childMenuHide">
                                     <label>Sub Category</label>
                                     <md-select class="" placeholder="Select Child Menu" ng-model="product.childId"
                                                required>
@@ -143,7 +142,7 @@
                                 <td ng-model="data.name"><p class="product-name">{{data.name}}</p></td>
                                 <td>
                                     <md-input-container style="width: 90px;">
-                                        <input ng-blur="validateInputValue(data.sku,'sku')"  md-maxlength="10"
+                                        <input ng-blur="validateInputValue(data.sku,'sku')"  maxlength="10"
                                                required
                                                name="sku_{{$index}}"
                                                ng-model="data.sku"
@@ -169,7 +168,7 @@
                                         <!--</div>-->
                                     <!--</md-input-container>-->
                                   <md-input-container class="md-container-modify">
-                                    <input ng-blur="validateInputValue(data.size,'size')" class="product-name-column-input" name="size_{{$index}}" md-maxlength="8"
+                                    <input ng-blur="validateInputValue(data.size,'size')" class="product-name-column-input" name="size_{{$index}}" maxlength="8"
                                            ng-pattern="customPattern" ng-model="data.size" required>
                                       <div ng-messages="priceAndVariantsForm['size_' + $index].$error " ng-show="priceAndVariantsForm['size_' + $index].$dirty">
                                           <div ng-message="pattern" class="my-message">Invalid value</div>
@@ -196,9 +195,10 @@
                                       </div>
 
                                   </md-input-container>
-                                  <md-input-container class="md-container-modify">
-                                      <input type="checkbox" ng-model="data.unlimited">Unlimited
-                                  </md-input-container>
+                                      <md-checkbox ng-model="data.unlimited" aria-label="Unlimited">
+                                          Unlimited
+                                      </md-checkbox>
+
                                 </td>
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
                                 <td>
@@ -207,19 +207,21 @@
                                     </div>
                                 </td>
 
-                                <td><img class="delete-icon" style="height:16px" src="../../../images/delete-icon.png" ng-click="deleteVariant($index,data)">
+                                <td class="delete-icon">
+                                    <img src="../../../images/delete-icon.png" ng-click="deleteVariant($index,data)">
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                        <div class="md-dialog-buttons" style="padding:0 39px">
-                            <div class="inner-section">
-                                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                                <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid" class="me-default-button" ng-click="addProductVariants(selection,variantsList,3)">Next</md-button>
-                            </div>
-                        </div>
+
                     </form>
+                    <div class="md-dialog-buttons" style="padding:0 39px">
+                        <div class="inner-section">
+                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                            <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid" class="me-default-button" ng-click="addProductVariants(selection,variantsList,3)">Next</md-button>
+                        </div>
+                    </div>
 
                 </md-tab-body>
             </md-tab>

@@ -78,10 +78,9 @@ ion-content{
 }
 .made-easy-header-font{
   color:#B8A47F;
-  font-family: Ubuntu Light;
-  font-size : 10px;
+  font-family: sans-serif;
+  font-size : 16px;
   font-weight: bolder;
-  padding-top:10px;
 }
 .made-easy-content-font{
   color:#787878;

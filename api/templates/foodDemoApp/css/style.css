@@ -165,19 +165,19 @@ ion-slides {
 .navigation-drawer ion-item{
     background-color: transparent;
     border: unset;
+    text-align:unset;
 
 }
 
 .navigation-drawer .item-complex .item-content{
-    padding: 10px 0 10px 20%;
+    padding: 10px 0 10px 16%;
+    opacity:0.7;
 }
 
 .navigation-drawer ion-item a{
     background-color: transparent !important;
-    color:rgb(139,139,139);
     font-weight: 600;
     letter-spacing:1px;
-    font-size:14px;
 }
 
 .navigation-drawer .menu-animated{

@@ -129,6 +129,7 @@ ion-side-menu .list .activated{
     background-color:transparent;
     border-style:none !important;
     padding: 5px;
+    text-align:unset !important;
 }
 .item2{
 
