@@ -1,4 +1,4 @@
-var mobileApp=angular.module('foodDemoApp', ['ionic','ionic.cloud','satellizer']);
+var mobileApp=angular.module('foodDemoApp', ['ionic','ionic.cloud','satellizer','starter.payPalService']);
 
 mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy,$ionicPush,$http,constants) {
   $ionicPlatform.ready(function() {
@@ -53,6 +53,24 @@ mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy,$ionicPush,$http,c
 }).config(function($ionicConfigProvider) {
     $ionicConfigProvider.views.forwardCache(true);
 })
+
+    // Pay pal Config
+    .constant('shopSettings',{
+
+        // payPalSandboxId :'<< Sandbox App Account ID >>',
+        
+        // payPalProductionId : '<< Live App Account ID >>',
+        
+        // payPalEnv: 'PayPalEnvironmentSandbox', // for testing sandbox
+        // payPalEnv: 'PayPalEnvironmentProduction', // for production
+
+        payPalShopName : 'MyShopName',
+
+        payPalMerchantPrivacyPolicyURL : 'url to policy',
+
+        payPalMerchantUserAgreementURL : 'url to user agreement'
+
+    })
 
 // Ionic Cloud Provider Configuration
 .config(function($ionicCloudProvider) {
