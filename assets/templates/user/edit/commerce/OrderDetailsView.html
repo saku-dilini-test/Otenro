@@ -3,60 +3,77 @@
 
         <div class="md-dialog-main clearfix">
             <fieldset>
-                <label><h1>{{oderData.entity.customerName}}</h1></label>
+                <label><h1>{{oderData.entity.customerName}}</h1></label><br>
+                <label><h7>Order No: {{oderData.entity.id}}</h7></label>
             </fieldset>
             <table class="me-simple-table">
                 <thead>
                 <th class="simple-column">Date Ordererd</th>
                 <th class="simple-column">Order Status</th>
-                <th class="simple-column">Order Fullfilment Date</th>
+                <!--<th class="simple-column">Order Fullfilment Date</th>-->
                 <th>&nbsp;</th>
                 </thead>
                 <tbody>
                 <tr>
                     <td> {{ oderData.entity.createdAt | date:'MM/dd/yyyy' }}</td>
                     <td>{{oderData.entity.fulfillmentStatus}}</td>
-                    <td>-</td>
+                    <!--<td>-</td>-->
                 </tr>
                 </tbody>
             </table>
             <fieldset>
-                <p>Address</p>
-                <p>{{oderData.entity.deliveryAddress}}</p>
+                <label><h7>Address: </h7></label>
+                <label><p>{{oderData.entity.deliveryAddress}}</p></label>
+                <br>
+                <label><h7>Mobile Number: </h7></label>
+                <label><p>{{oderData.entity.telNumber}}</p></label>
             </fieldset>
+            <!--<fieldset>-->
+                <!--<p>Refunds</p>-->
+                <!--<p>Non Refundable</p>-->
+            <!--</fieldset>-->
 
-            <fieldset>
-                <p>Refunds</p>
-                <p>Non Refundable</p>
-            </fieldset>
 
-            <fieldset>
-                <p>Orderded Product list</p>
-            </fieldset>
+             <label>
+                 <p>Orderded Details</p>
+             </label>
 
-            <table class="me-simple-table">
+                <table class="me-simple-table table-ordered-data">
                 <thead>
-                <th class="simple-column">Product</th>
-                <th class="simple-column">Individual Price</th>
-                <th class="simple-column">Qty</th>
-                <th class="simple-column">Price</th>
-                <th>&nbsp;</th>
+                <th width="30%">Product</th>
+                <th width="25%">Individual Price</th>
+                <th width="20%">Qty</th>
+                <th width="25%">Price</th>
                 </thead>
                 <tbody>
                 <tr ng-repeat="orders in oderData.entity.item">
-                    <td>{{orders.name}}</td>
+                    <td>{{orders.imageUrl}}{{orders.name}}</td>
                     <td>{{orders.price}}</td>
                     <td>{{orders.qty}}</td>
                     <td>{{orders.total}} </td>
                 </tr>
-                <tr>
-                    <td>Total</td>
+                <!--<tr>-->
+                    <!--<td>&nbsp;</td>-->
+                    <!--<td>&nbsp;</td>-->
+                    <!--<td>+Tax</td>-->
+                    <!--<td>-%</td>-->
+                <!--</tr>-->
+                <tr class="Total">
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
+                    <td>total</td>
                     <td>{{oderData.entity.amount}}</td>
                 </tr>
                 </tbody>
             </table>
+
+
+        </div>
+
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="closeDialog()">Close</md-button>
+            </div>
         </div>
     </md-dialog-content>
 </md-dialog>
