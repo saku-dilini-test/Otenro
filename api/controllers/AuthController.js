@@ -183,7 +183,7 @@ module.exports = {
                     payload: {
                       id :  newUser.id,
                       email:  newUser.email,
-                      userRoles : newUser.userRoles
+                      userRoles : newUser.userRole
                     },
                     algorithm: 'HS256'
                   }).exec({
@@ -201,7 +201,7 @@ module.exports = {
                   payload: {
                     id :  foundUser.id,
                     email:  foundUser.email,
-                    userRoles : foundUser.userRoles
+                    userRoles : foundUser.userRole
 
                   },
                   algorithm: 'HS256'
@@ -266,7 +266,7 @@ module.exports = {
                     payload: {
                       id :  newUser.id,
                       email:  newUser.email,
-                      userRoles : newUser.userRoles
+                      userRoles : newUser.userRole
                     },
                     algorithm: 'HS256'
                   }).exec({
@@ -284,7 +284,7 @@ module.exports = {
                   payload: {
                     id :  foundUser.id,
                     email:  foundUser.email,
-                    userRoles : foundUser.userRoles
+                    userRoles : foundUser.userRole
                   },
                   algorithm: 'HS256'
                 }).exec({
