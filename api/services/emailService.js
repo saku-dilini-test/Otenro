@@ -332,7 +332,7 @@ module.exports = {
                 var token = '';
                 //if user exist generate the token
                 JWT.encode({
-                   secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                   secret: config.CLIENT_SECRET,
                    payload: {
                      id :  app[0].id,
                      email:  app[0].email

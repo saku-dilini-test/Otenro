@@ -32,5 +32,6 @@ module.exports = {
   ME_SERVER : '/var/www/html/meServer/temp/',
   ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : '/home/madhuranga/appFileServer/'
+  APP_FILE_SERVER : '/home/prasanna/Desktop/appFileServer/',
+  CLIENT_SECRET : '44f4f3be572ec33711a40a5b8b4'
 };

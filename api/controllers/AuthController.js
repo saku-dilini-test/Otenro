@@ -8,7 +8,9 @@ var JWT = require('machinepack-jwt'),
     Passwords = require('machinepack-passwords'),
     GoogleAPIsOAuth2v2 = require('machinepack-googleapisoauth2v2'),
     Facebook = require('machinepack-facebook'),
-    request = require('request');
+    request = require('request'),
+    config = require('../services/config');
+    
 
 module.exports = {
 
@@ -17,6 +19,7 @@ module.exports = {
       User.findOne({
         email: req.body.email
       }, function foundUser(err, user) {
+        console.log("AAAAAAAAAAAAAAAA " + config.CLIENT_SECRET);
         if (err) return res.negotiate(err);
         if (!user) return res.notFound();
 
@@ -37,7 +40,7 @@ module.exports = {
           success: function (){
 
             JWT.encode({
-              secret: '17ca644f4f3be572ec33711a40a5b8b4',
+              secret: config.CLIENT_SECRET,
               payload: {
                 id :  user.id,
                 email:  user.email,
@@ -71,10 +74,12 @@ module.exports = {
             if (err) return res.negotiate(err);
             if (!user) return res.notFound();
             var diff = user.resetToken[0].expires- new Date(req.body.expires);
+
+
             //if the resetToken is not expired generate the token
             if(diff<=3.6e+6){
                 JWT.encode({
-                    secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                    secret: config.CLIENT_SECRET,
                     payload: {
                         id :  user.id,
                         email:  user.email,
@@ -118,7 +123,7 @@ module.exports = {
             }
             if (user) {
               JWT.encode({
-                secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                secret: config.CLIENT_SECRET,
                 payload: {
                   id :  user.id,
                   email:  user.email,
@@ -175,7 +180,7 @@ module.exports = {
                 }).exec(function(err, newUser) {
                   if (err) return res.negotiate(err);
                   JWT.encode({
-                    secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                    secret: config.CLIENT_SECRET,
                     payload: {
                       id :  newUser.id,
                       email:  newUser.email,
@@ -193,7 +198,7 @@ module.exports = {
                 });
               } else {
                 JWT.encode({
-                  secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                  secret: config.CLIENT_SECRET,
                   payload: {
                     id :  foundUser.id,
                     email:  foundUser.email
@@ -256,7 +261,7 @@ module.exports = {
 
                   if (err) return res.negotiate(err);
                   JWT.encode({
-                    secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                    secret: config.CLIENT_SECRET,
                     payload: {
                       id :  newUser.id,
                       email:  newUser.email,
@@ -274,7 +279,7 @@ module.exports = {
                 });
               } else {
                 JWT.encode({
-                  secret: '17ca644f4f3be572ec33711a40a5b8b4',
+                  secret: config.CLIENT_SECRET,
                   payload: {
                     id :  foundUser.id,
                     email:  foundUser.email,

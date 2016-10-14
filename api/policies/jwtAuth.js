@@ -1,12 +1,13 @@
 
-var JWT = require('machinepack-jwt');
+var JWT = require('machinepack-jwt'),
+    config = require('../services/config');
 
 module.exports = function(req,res,next){
 
   if(!req.headers.authorization) return handleError(res);
   var token = req.headers.authorization.split(' ')[1];
   JWT.decode({
-    secret: '17ca644f4f3be572ec33711a40a5b8b4',
+    secret: config.CLIENT_SECRET,
     token: token
   }).exec({
     error: function (err){

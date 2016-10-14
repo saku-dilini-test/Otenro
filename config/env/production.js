@@ -42,6 +42,7 @@ module.exports = {
   ME_SERVER : '/home/admin/web/otenro.com/public_html/meAppServer/temp/',
   ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : '/home/otenro/appFileServer/'
+  APP_FILE_SERVER : '/home/otenro/appFileServer/',
+  CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789'
 
 };
