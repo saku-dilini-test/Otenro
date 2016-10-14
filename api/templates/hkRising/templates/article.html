@@ -1,21 +1,32 @@
 <ion-view view-title="{{appName}}">
-    <ion-content class="made-easy-background-color" lazy-scroll>
+    <ion-content class="made-easy-background-color article" lazy-scroll>
 
-                <div ng-repeat="article in artilceList">
-                    <div class="card animated zoomIn">
-                        <a href="#/app/articleView/{{article.id}}">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="item item-image">
-                                         <img image-lazy-src="{{imageURL}}/{{article.imageUrl}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="-100"/>
-                                         <div class="item item-text-wrap">
-                                            <div class="made-easy-header-font">{{article.title}}</div>
-                                         </div>
+                <div class="row" ng-if="$index%2==0" ng-repeat="article in artilceList">
+                    <div class="col col-50"  ng-if="$index<artilceList.length">
+                        <div class="card animated zoomIn">
+                            <a href="#/app/articleView/{{artilceList[$index].id}}">
+                                <div class="item item-image">
+                                     <img image-lazy-src="{{imageURL}}/{{artilceList[$index].imageUrl}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="-100"/>
+                                     <div class="item item-text-wrap">
+                                        <div class="made-easy-header-font">{{artilceList[$index].title}}</div>
+                                     </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col col-50" ng-if="($index+1)<artilceList.length">
+                        <div class="card animated zoomIn">
+                            <a href="#/app/articleView/{{artilceList[$index+1].id}}">
+                                <div class="item item-image">
+                                    <img image-lazy-src="{{imageURL}}/{{artilceList[$index+1].imageUrl}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="-100"/>
+                                    <div class="item item-text-wrap">
+                                        <div class="made-easy-header-font">{{artilceList[$index+1].title}}</div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
+
     </ion-content>
 </ion-view>

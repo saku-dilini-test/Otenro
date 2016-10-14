@@ -1,18 +1,32 @@
 <ion-view class="home made-easy-background-color made-easy-background-color" hide-back-button="false" view-title="{{appName}}">
   <ion-content scroll="false" >
 
-      <div class="header made-easy-background-image animated zoomIn"></div>
+      <div class="header  animated zoomIn">
+          <img width="100%" src="img/header.png">
+      </div>
 
-      <ion-nav-view class="made-easy-background-color made-easy-background-color" name="tabContent"></ion-nav-view>
+      <ion-nav-view class="made-easy-background-color" name="tabContent"></ion-nav-view>
 
-              <ion-tabs class="tabs-positive tabs tabs-top">
-                  <div ng-repeat="category in articleCategoryList">
-                      <a class="tab-item tab-item2 animated lightSpeedIn" ng-href="#/app/home/{{category.id}}">
+      <ion-scroll zooming="true" direction="x" style="height:40px;margin-top:-40px;">
+              <div class="tabs">
+                      <a ng-repeat="category in articleCategoryList" class="tab-item tab-item2 animated lightSpeedIn" ng-href="#/app/home/{{category.id}}">
                           {{category.name}}
                       </a>
-                  </div>
-              </ion-tabs>
+              </div>
+      </ion-scroll>
 
+      <!--<ion-scroll zooming="true" direction="x">-->
+          <!--<div style="height: 40px;">-->
+              <!--<div class="tabs tab-color-custom">-->
+                  <!--<a class="tab-item" href="#/home">-->
+                      <!--All Items-->
+                  <!--</a>-->
+                  <!--<a class="tab-item" ng-repeat="category in categoryList"   href="#/tab/menu/{{category.id}}/{{category.name}}" >-->
+                      <!--{{category.name}}-->
+                  <!--</a>-->
+              <!--</div>-->
+          <!--</div>-->
+      <!--</ion-scroll>-->
 
   </ion-content>
 </ion-view>
