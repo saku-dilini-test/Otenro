@@ -2089,3 +2089,29 @@ trix-toolbar .button_group input[type=button]{
 .custom-grid .ui-grid-menu .ui-grid-menu-inner ul li button.ui-grid-menu-item-active{
     background-color: #cecece !important;
 }
+
+
+
+.table-ordered-data th:first-child, .table-ordered-data td:first-child{
+    text-align:left;
+}
+
+.table-ordered-data th, .table-ordered-data td{
+    text-align:center;
+    padding: 8px 0 12px 0;
+}
+
+.table-ordered-data th:last-child, .table-ordered-data td:last-child{
+    text-align:right;
+    padding-right:3em;
+}
+
+.table-ordered-data .total td{
+    font-weight: 800;
+    color: #4a4a4a;
+    font-size:14px;
+}
+
+h7 {
+    font-size: 10px;
+}
