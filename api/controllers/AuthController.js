@@ -19,7 +19,6 @@ module.exports = {
       User.findOne({
         email: req.body.email
       }, function foundUser(err, user) {
-        console.log("AAAAAAAAAAAAAAAA " + config.CLIENT_SECRET);
         if (err) return res.negotiate(err);
         if (!user) return res.notFound();
 
@@ -201,7 +200,9 @@ module.exports = {
                   secret: config.CLIENT_SECRET,
                   payload: {
                     id :  foundUser.id,
-                    email:  foundUser.email
+                    email:  foundUser.email,
+                    userRoles : foundUser.userRoles
+
                   },
                   algorithm: 'HS256'
                 }).exec({
@@ -273,7 +274,7 @@ module.exports = {
                       return res.negotiate(err);
                     },
                     success: function (result){
-                      res.status(200).json({user : {email: newUser.email, sub: newUser.id,userRoles : foundUser.userRole},token : result });
+                      res.status(200).json({user : {email: newUser.email, sub: newUser.id,userRoles : newUser.userRole},token : result });
                     }
                   });
                 });
