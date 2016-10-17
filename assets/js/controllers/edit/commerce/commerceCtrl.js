@@ -116,12 +116,24 @@
             $mdDialog.show({
                 clickOutsideToClose: true,
                 templateUrl: 'user/edit/commerce/OrderDetailsView.html',
-                controller: function DialogController($scope, $mdDialog) {
+                controller: function DialogController($scope, $mdDialog, $auth) {
                     $scope.oderData = row;
                     $scope.closeDialog = function () {
                         $mdDialog.hide();
                     }
+
+
+                    console.log($scope.oderData)
+
+                     $scope.imageURL = SERVER_URL
+                                    +"templates/viewImages?userId="
+                                    +$auth.getPayload().id+"&appId="+$scope.oderData.entity.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+
+
+
                 }
+
+
             });
 
         };
