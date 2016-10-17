@@ -2115,3 +2115,8 @@ trix-toolbar .button_group input[type=button]{
 h7 {
     font-size: 10px;
 }
+
+md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
+    position: relative;
+    top: 68%;
+}
