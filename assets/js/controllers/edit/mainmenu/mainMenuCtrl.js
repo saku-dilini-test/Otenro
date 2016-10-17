@@ -174,18 +174,21 @@
                 },
                 template:'<md-dialog aria-label="Edit Child Menu">'+
                 '<md-content >' +
-                '<div class="md-dialog-header">' +
-                '<h1>Deleting category </h1>' +
-                '                </div> <br>'+
-                ' <div style="text-align:center">' +
-                '<lable> Deleting category will delete all the ' + childOfMenu +
-                ' under that category! </lable></div>' +
-                '<br><br><div class="md-dialog-buttons">'+
-                '<div class="inner-section">'+
-                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">Cancel</md-button>'+
-                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Ok</md-button>'+
-                '</div>'+
-                '</div>' +
+                    '<div class="md-dialog-header">' +
+                        '<h1>Deleting category</h1>' +
+                    '</div>'+
+                    '<br>'+
+                    '<div style="text-align:center">' +
+                        '<lable>Are you sure, you want to delete this category ?</lable>' +
+                    '</div>' +
+                    '<br>' +
+                    '<br>' +
+                    '<div class="md-dialog-buttons">'+
+                        '<div class="inner-section">'+
+                            '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">NO</md-button>'+
+                            '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">YES</md-button>'+
+                        '</div>'+
+                    '</div>' +
                 '</md-content>' +
                 '</md-dialog>'
             })
