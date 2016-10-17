@@ -14,6 +14,12 @@
         $scope.image = [];
         $scope.splash = [];
 
+        // Mobile App-App Store-Config
+        $scope.maxName = 20;
+        $scope.maxSpringBoardName = 20;
+        $scope.maxDesc = 80;
+        $scope.maxKeywords = 80;
+
         $scope.validateSize = function(image,width,height){
             if(image.width != width && image.height != height){
                 toastr.error('Image should be in recommended size', 'Warning', {
