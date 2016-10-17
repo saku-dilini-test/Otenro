@@ -65,7 +65,7 @@
                 }
             },
             columnDefs: [
-                {name: 'id'},
+                /*{name: 'id'},*/
                 {name: 'createdDate',},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
