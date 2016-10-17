@@ -11,7 +11,7 @@
                     <input class="input-shadow-border" type="text" name="name" id="input-title" ng-model="menu.name"
                            maxlength="{{maxMenuNavigation}}"/>
                     <br>
-                    <span>Characters left: {{maxMenuNavigation - menu.name.length}}</span>
+                    <span class="information">Characters left: {{maxMenuNavigation - menu.name.length}}</span>
                 </fieldset>
                 <br>
                 <fieldset>
@@ -36,28 +36,27 @@
                             </div>
                         </div>-->
 
+                    <div class="file-upload-wrapper clearfix">
 
-
-                        <div class="file-upload-wrapper clearfix">
-                            <div class="inputField">
-                                <div class="btn-material">
-                                    <span>Select a image</span>
-                                    <input type="file" value="file" ng-click="cropImage()" id="fileInput">
-                                </div>
-                            </div>
-
-                            <div class="cropArea">
-                                <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
-                            </div>
+                        <div class="cropArea">
+                            <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
                         </div>
 
+                        <div class="inputField btn-material img-up">
+                            <span >{{buttonName}}</span>
+                            <div class="img-up1" ng-if="imageSelected">
+                                <input type="file" value="file" type="file" ng-click = "cropImage(); change()" id="fileInput" >
+                            </div>
+                            <div  ng-if="!imageSelected" class="img-up1" ng-click="addImage(picFile)"></div>
+
+                        </div>
+
+                    </div>
                         <div class="uploaded-section image-upload clearfix" style="width:35%">
                             <div class="uploaded-new-image">
                                 <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
                                      height="150" style="display:none" />
                                 <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
-
-                                <button class="btn-material" ng-click="addImage(picFile)">crop & upload</button>
                             </div>
                             <div class="uploaded-old-images">
                                 <p>Uploaded Product Images</p>

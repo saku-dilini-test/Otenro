@@ -736,7 +736,7 @@ module.exports = {
                     updateFile(mainCssFile, [{
                         rule: fontSizeCss,
                         target: "font-size",
-                        replacer: styleFontSize +'px'
+                        replacer: styleFontSize +'vh'
                     }], function (err) {
                         console.log((err));
                     });

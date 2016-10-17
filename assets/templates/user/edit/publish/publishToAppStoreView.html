@@ -16,7 +16,7 @@
                                 <input class="input-shadow-border" type="text" name="name" ng-model="appStoreData.name"
                                        maxlength="{{maxName}}"/>
                                 <br>
-                                <span>Characters left: {{maxName - appStoreData.name.length}}</span>
+                                <span class="information">Characters left: {{maxName - appStoreData.name.length}}</span>
                             </fieldset>
                             <div class="clearfix">
                                 <fieldset class="col-4 profile-image-section">
@@ -92,7 +92,7 @@
                                     <input class="input-shadow-border" type="text" name="springBoardName" ng-model="appStoreData.springBoardName"
                                            maxlength="{{maxSpringBoardName}}" required/>
                                     <br>
-                                    <span>Characters left: {{maxSpringBoardName - appStoreData.springBoardName.length}}</span>
+                                    <span class="information">Characters left: {{maxSpringBoardName - appStoreData.springBoardName.length}}</span>
                                 </fieldset>
                                 <fieldset class="col-3">
                                     <label>language</label>
@@ -124,13 +124,13 @@
                                     <label>description</label>
                                     <textarea class="input-shadow-border" ng-model="appStoreData.desc" rows="2" maxlength="{{maxDesc}}" required></textarea>
                                     <br>
-                                    <span>Characters left: {{maxDesc - appStoreData.desc.length}}</span>
+                                    <span class="information">Characters left: {{maxDesc - appStoreData.desc.length}}</span>
                                 </fieldset>
                                 <fieldset>
                                     <label>keywords</label>
                                     <textarea class="input-shadow-border" ng-model="appStoreData.keywords" rows="2" maxlength="{{maxKeywords}}" required></textarea>
                                     <br>
-                                    <span>Characters left: {{maxKeywords - appStoreData.keywords.length}}</span>
+                                    <span class="information">Characters left: {{maxKeywords - appStoreData.keywords.length}}</span>
                                 </fieldset>
                                 <fieldset class="col-2">
                                     <label>support url</label>

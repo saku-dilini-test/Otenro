@@ -26,6 +26,8 @@ a.feature01{
 	width: 36%;
 	margin-left:45px;
 	float:left;
+	display:block;
+	text-align:center;
 }
 
 .inputField {

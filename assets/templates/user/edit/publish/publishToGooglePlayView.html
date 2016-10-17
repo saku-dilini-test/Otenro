@@ -16,7 +16,7 @@
                             <input class="input-shadow-border" type="text" name="title" ng-model="playStoreData.title"
                                    maxlength="{{maxTitle}}" required/>
                             <br>
-                            <span>Characters left: {{maxTitle - playStoreData.title.length}}</span>
+                            <span class="information">Characters left: {{maxTitle - playStoreData.title.length}}</span>
                         </fieldset>
 
                         <div class="clearfix">
@@ -26,7 +26,7 @@
                                 <input class="input-shadow-border" type="text" name="shortDescription" ng-model="playStoreData.shortDescription"
                                        maxlength="{{maxShortDescription}}" required/>
                                 <br>
-                                <span>Characters left: {{maxShortDescription - playStoreData.shortDescription.length}}</span>
+                                <span class="information">Characters left: {{maxShortDescription - playStoreData.shortDescription.length}}</span>
                             </fieldset>
 
                         </div>
@@ -35,7 +35,7 @@
                                 <label>full description</label>
                                 <textarea class="input-shadow-border" ng-model="playStoreData.fullDescription" rows="2" maxlength="{{maxFullDescription}}" required></textarea>
                                 <br>
-                                <span>Characters left: {{maxFullDescription - playStoreData.fullDescription.length}}</span>
+                                <span class="information">Characters left: {{maxFullDescription - playStoreData.fullDescription.length}}</span>
                             </fieldset>
                             <!--<fieldset>
                                 <label>keywords</label>
@@ -151,7 +151,7 @@
                                        type="email"
                                        ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                        name="email" ng-model="playStoreData.email" required/>
-                                <span class="help-block" ng-show="generalForm.email.$dirty && generalForm.email.$invalid">
+                                <span class="error help-block" ng-show="generalForm.email.$dirty && generalForm.email.$invalid">
                                         Enter a proper email
                                 </span>
                             </fieldset>

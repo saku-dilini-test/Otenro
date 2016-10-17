@@ -30,7 +30,7 @@
                                        ng-pattern="/^\d*[1-9]\d*$/" name="number" required />
                                 <br>
                                 <span class="error" ng-show="storeSettingsForm.number.$error.number">Not valid number!</span>
-                                <span ng-show="storeSettingsForm.number.$error.pattern">Positive numbers only</span>
+                                <span class="error" ng-show="storeSettingsForm.number.$error.pattern">Positive numbers only</span>
                             </fieldset>
 
                             <!--<fieldset class="col-2 reset-margin-right">-->
@@ -97,7 +97,7 @@
                                             <td>
                                                 <input  class="input-shadow-border" type="number" name="weekDaysOpenMinute" min="00" max="55" step="5" ng-model="openHours.weekDaysOpenMinute" ng-pattern="/^([0-5][0-9]|0)$/" ng-required />
                                                 <span class="error2" ng-show="storeSettingsForm.weekDaysOpenMinute.$error.pattern">Invalid time!</span>
-                                                <span ng-show="storeSettingsForm.weekDaysOpenMinute.$error.number">Please enter a number!</span>
+                                                <span  class="error2" ng-show="storeSettingsForm.weekDaysOpenMinute.$error.number">Please enter a number!</span>
                                             </td>
                                             <td>
                                                 AM to
@@ -230,10 +230,10 @@
                                 <textarea class="input-shadow-border" name="returnPolicy" rows="2" ng-model="storeSettings.returnPolicy"></textarea>
                                 <br />
                                 <div ng-hide="storeSettings.returnPolicy.length > maxReturnPolicy">
-                                    <span>Characters left: {{maxReturnPolicy - storeSettings.returnPolicy.length}}</span>
+                                    <span class="information">Characters left: {{maxReturnPolicy - storeSettings.returnPolicy.length}}</span>
                                 </div>
                                 <div  ng-show="storeSettings.returnPolicy.length > maxReturnPolicy">
-                                    <span>Characters left: </span> <span style="color: #ff0404 "> {{maxReturnPolicy - storeSettings.returnPolicy.length}} </span>
+                                    <span class="information">Characters left: </span> <span class="information"> {{maxReturnPolicy - storeSettings.returnPolicy.length}} </span>
                                 </div>
                             </fieldset>
                             <fieldset>
@@ -242,10 +242,10 @@
                                 <textarea class="input-shadow-border" name="termsAndCondition" rows="2" ng-model="storeSettings.termsAndCondition"></textarea>
                                 <br />
                                 <div ng-hide="storeSettings.termsAndCondition.length > maxTermsAndCondition">
-                                    <span>Characters left: {{maxTermsAndCondition - storeSettings.termsAndCondition.length}}</span>
+                                    <span class="information">Characters left: {{maxTermsAndCondition - storeSettings.termsAndCondition.length}}</span>
                                 </div>
                                 <div  ng-show="storeSettings.termsAndCondition.length > maxTermsAndCondition">
-                                    <span>Characters left: </span> <span style="color: #ff0404 "> {{maxTermsAndCondition - storeSettings.termsAndCondition.length}} </span>
+                                    <span class="information">Characters left: </span> <span class="information"> {{maxTermsAndCondition - storeSettings.termsAndCondition.length}} </span>
                                 </div>
                             </fieldset>
                             <fieldset>
@@ -254,10 +254,10 @@
                                 <textarea class="input-shadow-border" name="privacyPolicy" rows="2"  ng-model="storeSettings.privacyPolicy"></textarea>
                                 <br />
                                 <div ng-hide="storeSettings.privacyPolicy.length > maxPrivacyPolicy">
-                                    <span>Characters left: {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}}</span>
+                                    <span class="information">Characters left: {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}}</span>
                                 </div>
                                 <div  ng-show="storeSettings.privacyPolicy.length > maxPrivacyPolicy">
-                                    <span>Characters left: </span> <span style="color: #ff0404 "> {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}} </span>
+                                    <span class="information">Characters left: </span> <span class="information"> {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}} </span>
                                 </div>
                             </fieldset>
                         </form>
@@ -283,12 +283,12 @@
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
                             <input class="input-shadow-border" type="text" name="header" ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="storeSettings.header" required  />
                             <br />
-                            <span ng-show="aboutUs.header.$error.pattern">No symbols</span>
+                            <span class="error" ng-show="aboutUs.header.$error.pattern">No symbols</span>
                             <div ng-hide="storeSettings.header.length > maxAboutUsHeader">
-                                <span>Characters left: {{maxAboutUsHeader - storeSettings.header.length}}</span>
+                                <span class="information">Characters left: {{maxAboutUsHeader - storeSettings.header.length}}</span>
                             </div>
                             <div  ng-show="storeSettings.header.length > maxAboutUsHeader">
-                                <span>Characters left: </span> <span style="color: #ff0404 "> {{maxAboutUsHeader - storeSettings.header.length}} </span>
+                                <span class="information">Characters left: </span> <span class="information"> {{maxAboutUsHeader - storeSettings.header.length}} </span>
                             </div>
                         </fieldset>
                         <fieldset>
@@ -297,10 +297,10 @@
                             <textarea class="input-shadow-border" rows="4" name="content" ng-model="storeSettings.content"></textarea>
                             <br />
                             <div ng-hide="storeSettings.content.length > maxAboutUsContent">
-                                <span>Characters left: {{maxAboutUsContent - storeSettings.content.length}}</span>
+                                <span class="information">Characters left: {{maxAboutUsContent - storeSettings.content.length}}</span>
                             </div>
                             <div  ng-show="storeSettings.content.length > maxAboutUsContent">
-                                <span>Characters left: </span> <span style="color: #ff0404 "> {{maxAboutUsContent - storeSettings.content.length}} </span>
+                                <span class="information">Characters left: </span> <span class="information"> {{maxAboutUsContent - storeSettings.content.length}} </span>
                             </div>
                         </fieldset>
                         </form>
@@ -329,11 +329,11 @@
                                 <label>Address</label>
                                 <textarea type="text" class="input-shadow-border" name="address" ng-model="basicInfo.address" required ></textarea>
                                 <div ng-hide="basicInfo.address.length > maxBasicInfoAddress">
-                                    <span>Characters left: {{maxBasicInfoAddress - basicInfo.address.length}}</span>
+                                    <span class="information">Characters left: {{maxBasicInfoAddress - basicInfo.address.length}}</span>
                                 </div>
                                 <div  ng-show="basicInfo.address.length > maxBasicInfoAddress">
-                                    <span>Characters left: </span>
-                                    <span style="color: #ff0404 ">
+                                    <span class="information">Characters left: </span>
+                                    <span class="information">
                                         {{maxBasicInfoAddress - basicInfo.address.length}}
                                     </span>
                                 </div>

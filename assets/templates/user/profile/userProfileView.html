@@ -135,7 +135,7 @@
                                        name="password"
                                        ng-model="userEdit.currentPassword" />
                                     <br />
-                                <span ng-show="password">Please enter valid current password</span>
+                                <span class="error" ng-show="password">Please enter valid current password</span>
                             </fieldset>
                         </div>
                         <div class="clearfix">
@@ -151,13 +151,13 @@
                                        compare-to="userEdit.confirmPassword"
                                        required>
                                 <span class="help-block " ng-show="editProfile.password.$error.minlength">
-                                    <span ng-show="editProfile.password.$error.minlength">
+                                    <span class="error" ng-show="editProfile.password.$error.minlength">
                                         Password should have at least 7 characters.
                                     </span>
                                 </span>
                                 <span class="help-block "
                                       ng-show="!(editProfile.password.$error.minlength) && editProfile.password.$error.pattern">
-                                    <span >Password should have at least one lower or Upper letter and one number</span>
+                                    <span class="error">Password should have at least one lower or Upper letter and one number</span>
                                 </span>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
@@ -169,7 +169,7 @@
                                        ng-model="userEdit.confirmPassword"
                                        required>
                                 <span class="help-block " ng-show="editProfile.confirmPassword.$dirty">
-                                    <span ng-show="editProfile.password.$error.compareTo">Password must match.</span>
+                                    <span class="error" ng-show="editProfile.password.$error.compareTo">Password must match.</span>
                                 </span>
                             </fieldset>
                         </div>

@@ -26,6 +26,10 @@
         $scope.myImage='';
         $scope.myCroppedImage='';
 
+
+        $scope.imageSelected = true;
+        $scope.buttonName = "Browse Image";
+
         // image crop function
         $scope.cropImage = function () {
             var handleFileSelect=function(evt) {
@@ -38,9 +42,33 @@
                     });
                 };
                 reader.readAsDataURL(file);
+                $scope.imageSelected =false;
+                $scope.buttonName = "Upload";
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         }
+
+
+        $scope.addImage = function(img){
+                    if(angular.element('#fileInput').val() == ''){
+                        toastr.error('Please choose an image to upload', 'Warning', {
+                            closeButton: true
+                        });
+                    }
+                    else{
+                        var im = $scope.tmpImage;
+                        im[0] = $scope.picFile;
+                        $scope.tmpImage = im;
+                        $scope.mainImg = img;
+                        toastr.success('added Image', 'message', {
+                           closeButton: true
+                        });
+                    }
+
+                     $scope.imageSelected = true;
+                     $scope.buttonName = "Browse Image";
+                };
+
 
         // Main Menu view
         if($scope.initialData == null ) {
@@ -512,22 +540,6 @@
         };
         $scope.deleteImg = function (index) {
             $scope.tmpImage[index] = null;
-        };
-        $scope.addImage = function(img){
-            if(angular.element('#fileInput').val() == ''){
-                toastr.error('Please choose an image to upload', 'Warning', {
-                    closeButton: true
-                });
-            }
-            else{
-                var im = $scope.tmpImage;
-                im[0] = $scope.picFile;
-                $scope.tmpImage = im;
-                $scope.mainImg = img;
-                toastr.success('added Image', 'message', {
-                   closeButton: true
-                });
-            }
         };
 
 
