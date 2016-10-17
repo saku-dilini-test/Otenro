@@ -81,7 +81,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                     amount : $scope.amount,
                     customerName : deliverDetails.name,
                     deliveryAddress : deliverDetails.address,
-                    telNumber : deliverDetails.number
+                    telNumber : deliverDetails.number,
+                    tax :   $scope.tax
             };
 
     $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)

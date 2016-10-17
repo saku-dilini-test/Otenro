@@ -47,18 +47,18 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="orders in oderData.entity.item">
-                    <td>{{orders.imageUrl}}{{orders.name}}</td>
+                    <td>{{orders.name}}</td>
                     <td>{{orders.price}}</td>
                     <td>{{orders.qty}}</td>
                     <td>{{orders.total}} </td>
                 </tr>
-                <!--<tr>-->
-                    <!--<td>&nbsp;</td>-->
-                    <!--<td>&nbsp;</td>-->
-                    <!--<td>+Tax</td>-->
-                    <!--<td>-%</td>-->
-                <!--</tr>-->
-                <tr class="Total">
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>+Tax</td>
+                    <td>{{oderData.entity.tax}}%</td>
+                </tr>
+                <tr class="total">
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>total</td>

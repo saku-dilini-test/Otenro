@@ -41,6 +41,9 @@ module.exports = {
         },
         createAt: {
             type: 'date'
+        },
+        tax: {
+            type:'integer'
         }
     }
 };
