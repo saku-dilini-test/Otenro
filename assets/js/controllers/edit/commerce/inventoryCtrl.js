@@ -252,14 +252,18 @@
                 template:'<md-dialog aria-label="Edit Child Menu">'+
                 '<md-content >' +
                 '<div class="md-dialog-header">' +
-                '<h1>Deleting Product </h1>' +
-                '                </div> <br>'+
-                ' <div style="text-align:center"><lable> Deleting product will delete this product ! </lable></div>' +
-                '<br><br><div class="md-dialog-buttons">'+
-                '<div class="inner-section">'+
-                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">Cancel</md-button>'+
-                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Ok</md-button>'+
-                '</div>'+
+                    '<h1>Deleting Product </h1>' +
+                '</div>' +
+                '<br>'+
+                '<div style="text-align:center">' +
+                    '<lable>Are you sure, you want to delete this Product ?</lable>' +
+                '</div>' +
+                '<br><br>' +
+                '<div class="md-dialog-buttons">'+
+                    '<div class="inner-section">'+
+                        '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">No</md-button>'+
+                        '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Yes</md-button>'+
+                    '</div>'+
                 '</div>' +
                 '</md-content>' +
                 '</md-dialog>'
