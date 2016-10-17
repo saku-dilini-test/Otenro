@@ -197,24 +197,61 @@
 
         // --/-- delete shopping collection
         $scope.deleteShippingInfo = function (index,item) {
-            shippingService.deleteShippingInfo(item)
-                .success(function (result) {
-                    toastr.success('Successfully Remove ', 'Saved', {
-                        closeButton: true
-                    });
-                    $scope.items.splice(index, 1);
-                }).error(function (error) {
-                    toastr.error('Deleting Error', 'Warning', {
-                        closeButton: true
-                    });
-                })
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+                    this.confirm = function click(){
+                        shippingService.deleteShippingInfo(item)
+                            .success(function (result) {
+                                toastr.success('Successfully Remove ', 'Saved', {
+                                    closeButton: true
+                                });
+                                $scope.items.splice(index, 1);
+                                $mdDialog.hide();
+                                $scope.backToShippingView();
+                            }).error(function (error) {
+                            toastr.error('Deleting Error', 'Warning', {
+                                closeButton: true
+                            });
+                        })
+
+                    },
+                        this.cancel = function click(){
+                            $mdDialog.hide();
+                            $scope.backToShippingView();
+                        }
+                },
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                '<md-content >' +
+                '<div class="md-dialog-header">' +
+                    '<h1>Deleting Shipping Option</h1>' +
+                '</div>' +
+                '<br>'+
+                '<div style="text-align:center">' +
+                    '<lable>Are you sure, you want to delete this Shipping Option ? </lable>' +
+                '</div>' +
+                '<br>' +
+                '<br>' +
+                '<div class="md-dialog-buttons">'+
+                    '<div class="inner-section">'+
+                        '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">NO</md-button>'+
+                        '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">YES</md-button>'+
+                    '</div>'+
+                '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
         };
+        
+        // Get All Country 
         taxService.getAllCountry().success(function (data) {
             $scope.countryList = data;
 
         }).error(function (err) {
             alert("MainMenu Loading Error : " + err);
         });
+        
+        // Update Contry Restriciton 
         $scope.updateCountryRestriction = function(radio,country){
             $scope.shipping.selection = radio.group;
             $scope.shipping.countryRestriction = country;
