@@ -3,12 +3,12 @@
     angular.module("appEdit").controller("CommerceCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope',
         'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','comingSoonService',
-        '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants','$templateCache',
+        '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants','$templateCache','uiGridExporterConstants','uiGridExporterService',
         CommerceCtrl]);
 
     function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope,
              SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
-             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache) {
+             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService) {
 
         $scope.refund = [];
         $scope.unfulfilled = [];
@@ -53,6 +53,7 @@
             enableSorting: true,
             rowHeight: 35,
             exporterMenuCsv: true,
+            exporterMenuPdf: false,
             enableGridMenu: true,
             gridMenuTitleFilter: fakeI18n,
             rowTemplate: rowTemplate(),
@@ -116,24 +117,12 @@
             $mdDialog.show({
                 clickOutsideToClose: true,
                 templateUrl: 'user/edit/commerce/OrderDetailsView.html',
-                controller: function DialogController($scope, $mdDialog, $auth) {
+                controller: function DialogController($scope, $mdDialog) {
                     $scope.oderData = row;
                     $scope.closeDialog = function () {
                         $mdDialog.hide();
                     }
-
-
-                    console.log($scope.oderData)
-
-                     $scope.imageURL = SERVER_URL
-                                    +"templates/viewImages?userId="
-                                    +$auth.getPayload().id+"&appId="+$scope.oderData.entity.appId+"&"+new Date().getTime()+"&img=thirdNavi";
-
-
-
                 }
-
-
             });
 
         };
@@ -330,7 +319,7 @@
                     }
 
                     $scope.getArray = function(){
-                        $scope.exportArrayN = [];
+                        /*$scope.exportArrayN = [];
                         angular.forEach($scope.ordersList, function(value, key) {
                             $scope.exportArrayN.push({
 
@@ -340,7 +329,11 @@
                                 'Fulfillment Status' : value.fulfillmentStatus,
                             });
                         });
-                        return $scope.exportArrayN;
+                        return $scope.exportArrayN;*/
+                        var grid = $scope.gridApi1.grid;
+                        var rowTypes = uiGridExporterConstants.ALL;
+                        var colTypes = uiGridExporterConstants.ALL;
+                        uiGridExporterService.csvExport(grid, rowTypes, colTypes);
                     }
 
                     $scope.gridOptions1.data = $scope.ordersList;

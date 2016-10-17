@@ -43,6 +43,7 @@ angular.module('app', [
   'angularUtils.directives.dirPagination',
   'ui.grid',
   'ui.grid.selection',
+  'ui.grid.exporter',
   'angular-bind-html-compile',
   'ngCsv',
   'ngImgCrop',
@@ -59,7 +60,7 @@ angular.module('app', [
     }
   });
 
-  console.log($auth.getPayload());
+  console.log(JSON.stringify($auth.getPayload()));
 
   Permission.defineRole('Admin', function (stateParams) {
     // If the returned value is *truthy* then the user has the role, otherwise they don't
