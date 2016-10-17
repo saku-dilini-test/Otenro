@@ -189,9 +189,11 @@
 
                                 <td>
                                   <md-input-container class="md-container-modify">
-                                    <input ng-disabled="data.unlimited" type="number" name="qty_{{$index}}" min="1"  ng-pattern="/^\d+(?:[.]\d{1,}|$)$/" maxlength="8" ng-model="data.quantity" ignore-mouse-wheel>
+                                    <input ng-disabled="data.unlimited" type="number" name="qty_{{$index}}" min="1"
+                                           ng-pattern="/^\d+(?:[.]\d{1,}|$)$/" maxlength="8" ng-model="data.quantity"  required ignore-mouse-wheel>
                                       <div ng-messages="priceAndVariantsForm['qty_' + $index].$error " ng-show="priceAndVariantsForm['qty_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid quantity</div>
+                                          <div ng-message="required" class="my-message">Required!</div>
                                       </div>
 
                                   </md-input-container>
