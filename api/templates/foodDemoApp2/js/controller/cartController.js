@@ -75,39 +75,65 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $scope.deliver = function(deliverDetails){
             $scope.amount = $scope.getTotal();
 
-            $scope.details ={
-                    appId : $rootScope.appId,
-                    item : $stateParams.item,
-                    amount : $scope.amount,
-                    customerName : deliverDetails.name,
-                    deliveryAddress : deliverDetails.address,
-                    telNumber : deliverDetails.number,
-                    tax :   $scope.tax
-            };
+            $scope.shipping={};
+            var SelectShippingOptions = $ionicPopup.alert({
+                   templateUrl: 'templates/shippingOpt.html',
+                   title: 'Shipping Options',
+                   subTitle: 'Choose a Delivery Option you wish.',
+                   cssClass: 'ionicPopUp',
+                   scope: $scope,
+                   buttons:[
+                       {text:'Cancel'},
+                       {text: 'Deliver',
+                        type: 'button-balanced',
+                        onTap: function(e) {
+                              if (!$scope.shipping.opt) {
+                                //don't allow the user to close unless he selects an option
+                                e.preventDefault();
+                              } else {
+                                $scope.details ={
+                                        appId : $rootScope.appId,
+                                        item : $stateParams.item,
+                                        amount : $scope.amount,
+                                        customerName : deliverDetails.name,
+                                        deliveryAddress : deliverDetails.address,
+                                        telNumber : deliverDetails.number,
+                                        tax :   $scope.tax,
+                                        shippingOpt : $scope.shipping.opt
+                                };
 
-    $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
-        .then(function(res){
-            $scope.details.id = $rootScope.cart.cartItems[0].id;
-            $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item)
-            .then(function(res){
-                $rootScope.cart.cartItems = [];
-                $rootScope.cart.cartSize = 0;
-                $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-                $rootScope.cart.totalPrice = 0;
-                $rootScope.cart.totalQuantity = 0;
-                var alertPopup = $ionicPopup.alert({
-                       title: 'Order complete',
-                       template: 'Success',
-                       cssClass: 'ionicPopUp'
-                     });
-            },
-            function(err){
-               console.log(err);
+                        $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
+                            .then(function(res){
+                                $scope.details.id = $rootScope.cart.cartItems[0].id;
+                                $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item)
+                                .then(function(res){
+                                    $rootScope.cart.cartItems = [];
+                                    $rootScope.cart.cartSize = 0;
+                                    $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                                    $rootScope.cart.totalPrice = 0;
+                                    $rootScope.cart.totalQuantity = 0;
+                                    var alertPopup = $ionicPopup.alert({
+                                           title: 'Thank you',
+                                           subTitle: 'Your Order has been successfully processed',
+                                           cssClass: 'ionicPopUp',
+                                           buttons:[
+                                            {text:'OK',
+                                             type:'button-positive'},
+                                           ]
+                                         });
+                                },
+                                function(err){
+                                   console.log(err);
+                                });
+                            },
+                            function(err){
+                               console.log(err);
+                            });
+                             }
+                        }
+                       }
+                   ]
             });
-        },
-        function(err){
-           console.log(err);
-        });
     }
 
 });

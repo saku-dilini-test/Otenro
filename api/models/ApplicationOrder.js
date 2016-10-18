@@ -44,6 +44,9 @@ module.exports = {
         },
         tax: {
             type:'integer'
+        },
+        shippingOpt: {
+            type:'string'
         }
     }
 };
