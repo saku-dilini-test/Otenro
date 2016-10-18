@@ -7,7 +7,7 @@
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
         <input class="input-shadow-border" type="text" name="fname" ng-model="user.fname" ng-enter ="authSignUp(user);"
                required/>
-        <span class="help-block" ng-show="register.fname.$error.required">
+        <span class="error help-block" ng-show="register.fname.$error.required">
           *
         </span>
       </fieldset>
@@ -16,7 +16,7 @@
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
         <input class="input-shadow-border" type="text" name="lname" ng-model="user.lname" ng-enter ="authSignUp(user);"
                required/>
-        <span class="help-block" ng-show="register.lname.$error.required">
+        <span class="error help-block" ng-show="register.lname.$error.required">
           *
         </span>
       </fieldset>
@@ -25,10 +25,10 @@
         <img src="../../../images/question-mark.svg" width="12" height="12" />
         <input class="input-shadow-border" name="email" type="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                style="float:left;" ng-model="user.email" ng-enter ="authSignUp(user);" required/>
-        <span class="help-block" ng-show="register.email.$error.required">
+        <span class="error help-block" ng-show="register.email.$error.required">
           *
         </span>
-        <span class="help-block" ng-show="register.email.$dirty && register.email.$invalid">
+        <span class="error help-block" ng-show="register.email.$dirty && register.email.$invalid">
           Enter a proper email
         </span>
       </fieldset>
@@ -40,38 +40,36 @@
                   ng-model="user.password" ng-minlength="7" compare-to="user.password_confirm"
                   ng-pattern="passwordRegularExpression"
                   required>
-          <span class="help-block" ng-show="register.password.$error.required">
+          <span class="error help-block" ng-show="register.password.$error.required">
             *
           </span>
           <span class="help-block register-pw-error-message" ng-show="register.password.$error.minlength">
-             <span ng-show="register.password.$error.minlength">Password should have at least 7 characters.</span>
+             <span class="error" ng-show="register.password.$error.minlength">Password should have at least 7 characters.</span>
           </span>
           <span class="help-block register-pw-error-message" ng-show="!(register.password.$error.minlength) && register.password.$error.pattern">
-             <span >Password should have at least one lower or Upper letter and one number</span>
+             <span class="error">Password should have at least one lower or Upper letter and one number</span>
           </span>
         </fieldset>
         <fieldset class="password-area reset-margin-right">
           <label> Confirm Password</label>
           <img src="../../../images/question-mark.svg" width=" 12" height="12" />
           <input class="input-shadow-border"  name="password_confirm" ng-enter ="authSignUp(user);" ng-model="user.password_confirm" type="password" required/>
-          <span class="help-block" ng-show="register.password_confirm.$error.required">
+          <span class="error help-block" ng-show="register.password_confirm.$error.required">
             *
           </span>
           <span class="help-block " ng-show="register.password_confirm.$dirty">
-              <span ng-show="register.password.$error.compareTo">Password must match.</span>
+              <span class="error" ng-show="register.password.$error.compareTo">Password must match.</span>
           </span>
         </fieldset>
       </div>
       <fieldset>
         <label>Tell us about yourself</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
-        <md-input-container>
-          <md-select ng-model="user.yourselfReason">
+          <md-select flex="50" ng-model="user.yourselfReason">
             <md-option ng-value="">Select Yourself</md-option>
             <md-option ng-value="yourSelf.reason" ng-repeat="yourSelf in yourselfReasonList">{{yourSelf.reason}}
             </md-option>
           </md-select>
-        </md-input-container>
       </fieldset>
       <br>
       <br/>

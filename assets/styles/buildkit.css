@@ -202,6 +202,7 @@ select{
     resize: none;
     text-shadow: 1px 0 1px #FFF;
     width: 100%;
+    margin-right: -10px;
     float: left;
 }
 
@@ -682,14 +683,6 @@ a.md-button:hover:not([disabled]),
 }
 
 /************************************/
-.country-restrictions md-radio-button{
-    margin: 20px 0;
-}
-
-.country-restrictions .md-container{
-    top: -17px;
-}
-
 .country-restrictions .md-label span{
     display: block;
     margin-bottom: 3px;
@@ -1322,12 +1315,11 @@ background-color: #f4f5f4;
 }
 
 .md-dialog-main .file-upload-wrapper{
-    border-bottom: 1px solid #E5E4E2;
-    margin-bottom: 15px;
 	width: 65%;
     margin-top: 10px;
 	float:left;
-}
+    display:block;
+    text-align:center;
 }
 
 .md-dialog-main .file-upload-wrapper .file-upload-msg{
@@ -1339,7 +1331,6 @@ background-color: #f4f5f4;
     padding-top: 4px;
     text-transform: inherit;
     width: 260px;
-    
 }
 
 .uploaded-section{
@@ -1921,7 +1912,7 @@ button[disabled]{
 .img-up {
     width: 200px;
     text-align: center;
-    margin: 10% 13%;
+    margin: 10% 0;
 }
 
 .img-up1{
@@ -1989,7 +1980,8 @@ trix-toolbar .button_group input[type=button]{
     position: relative;
     font-size: 12px;
     color: rgba(255, 0, 0, 0.75);
-    top: 2px;
+    top: 3px;
+    display: table;
 }
 
 /*difference is position */

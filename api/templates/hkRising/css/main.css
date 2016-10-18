@@ -23,14 +23,16 @@
 .made-easy-header-font{
     color: #E8C77A;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 4vh;
     font-weight: inherit;
+    line-height:normal;
     text-transform: capitalize;
 }
 .made-easy-content-font{
     color: inherit;
     font-family: inherit;
-    font-size: 12px;
+    font-size: 3vh;
+    line-height:normal;
     font-weight: inherit;
 }
 .made-easy-footer-font{
