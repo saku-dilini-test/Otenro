@@ -118,7 +118,7 @@ module.exports = {
                                     }).exec(function(err,build){
                                         if (err) return res.negotiate(err);
                                         if(build) {
-                                            buildApkFile(copyDirPath,appIconFileRES);
+                                            buildApkFile(copyDirPath,app.appName);
                                         }
                                     });
                                 });
