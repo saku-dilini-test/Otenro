@@ -50,7 +50,9 @@ module.exports = {
             selectedTemplatePath = config.ME_SERVER + userId + '/templates/' + appId +'/',
             configFile = copyDirPath + 'www/config.xml',
             appIconFile = copyDirPath + 'www/res/android/icon/icon.jpg',
-            srcPath = sails.config.appPath + '/api/src/hybrid/';
+            srcPath = sails.config.appPath + '/api/src/hybrid/',
+            appIconFileRES = config.APP_FILE_SERVER + userId + '/templates/' + appId + '/' + 'img/publish/4.png',
+            appIconFileDES = copyDirPath + 'resources' + '/' + 'icon.png';
 
         fs.readFile(moveConfigFile, 'utf-8',
             function(err, data) {
@@ -76,7 +78,7 @@ module.exports = {
                                         };
                                         Application.findOne(searchApp).exec(function (err, app) {
                                             if (err) return res.negotiate(err);
-                                            replaceAppNameNIcon(app.appName, app.appIcon);
+                                            replaceAppNameNIcon(app.appName, appIconFileRES);
                                         });
 
 
@@ -116,7 +118,7 @@ module.exports = {
                                     }).exec(function(err,build){
                                         if (err) return res.negotiate(err);
                                         if(build) {
-                                            buildApkFile(copyDirPath,app.appName);
+                                            buildApkFile(copyDirPath,appIconFileRES);
                                         }
                                     });
                                 });
@@ -164,10 +166,9 @@ module.exports = {
                             if (err) return res.negotiate(err);
                         });
 
-                        //fs.writeFile(appIconFile, icon, 'base64', function(err) {
-                        //    if (err) return res.negotiate(err);
-                        //});
-
+                        fs.copy(icon, appIconFileDES, 'base64', function(err) {
+                           if (err) return res.negotiate(err);
+                        });
 
                         BuildVersion.create({
                             appId: appId,
@@ -208,114 +209,124 @@ module.exports = {
             var mime = require('mime');
 
             shell.cd(appPath);
-            shell.exec('ionic build android', {async: true}, function (code, stdout, stderr) {
+            shell.exec('ionic resources', {async: true}, function (code, stdout, stderr) {
 
-                if (code==0){
-                    /*shell.exec('cordova plugin rm cordova-plugin-console', {async: true}, function (code1, stdout, stderr) {
-                        if (code1==0){*/
+                if (code == 0) {
+
+                    shell.exec('ionic build android', {async: true}, function (code, stdout, stderr) {
+
+                        if (code == 0) {
+                            /*shell.exec('cordova plugin rm cordova-plugin-console', {async: true}, function (code1, stdout, stderr) {
+                             if (code1==0){*/
                             shell.exec('cordova build --release android', {async: true}, function (code2, stdout, stderr) {
 
-                                if (code2==0){
-                                            shell.mv('-n', 'my-release-key.keystore', appPath + '/platforms/android/build/outputs/apk/');
-                                            shell.cd(appPath + '/platforms/android/build/outputs/apk/');
-                                            shell.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg ' +
-                                                'SHA1 -keystore my-release-key.keystore android-release-unsigned.apk ' +
-                                                'alias_name -storepass abcd1234 -keypass abcd1234 ', {async: true}, function (code4, stdout, stderr) {
-                                                if (code4==0){
+                                if (code2 == 0) {
+                                    shell.mv('-n', 'my-release-key.keystore', appPath + '/platforms/android/build/outputs/apk/');
+                                    shell.cd(appPath + '/platforms/android/build/outputs/apk/');
+                                    shell.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg ' +
+                                        'SHA1 -keystore my-release-key.keystore android-release-unsigned.apk ' +
+                                        'alias_name -storepass abcd1234 -keypass abcd1234 ', {async: true}, function (code4, stdout, stderr) {
+                                        if (code4 == 0) {
 
-                                                    fs.stat(appPath + '/platforms/android/build/outputs/apk/'+appName.replace(/\s/g, '')+'.apk', function(err, fileStat) {
+                                            fs.stat(appPath + '/platforms/android/build/outputs/apk/' + appName.replace(/\s/g, '') + '.apk', function (err, fileStat) {
+                                                if (err) {
+                                                    if (err.code == 'ENOENT') {
+                                                        console.log('Does not exist.');
+                                                    }
+                                                } else {
+                                                    if (fileStat.isFile()) {
+                                                        fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/' + appName.replace(/\s/g, '') + '.apk');
+                                                    } else if (fileStat.isDirectory()) {
+                                                        console.log('Directory found.');
+                                                    }
+                                                }
+                                            });
+                                            shell.exec('/opt/android-sdk-linux/build-tools/23.0.1/zipalign -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
+                                                if (code5 == 0) {
+
+                                                    var file = appPath + 'platforms/android/build/outputs/apk/' + appName.replace(/\s/g, '') + '.apk';
+                                                    var resourcesPath = config.APP_FILE_SERVER + userId + '/templates/' +
+                                                        appId + '/img/publish/';
+                                                    var publishPath = config.ME_SERVER + userId + '/build/' + appId + '/publish';
+                                                    var zipFile = config.ME_SERVER + userId + '/build/' + appId + '/publish_' + appId + '.zip';
+
+                                                    fs.stat(zipFile, function (err, fileStat) {
                                                         if (err) {
                                                             if (err.code == 'ENOENT') {
                                                                 console.log('Does not exist.');
                                                             }
                                                         } else {
                                                             if (fileStat.isFile()) {
-                                                                fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/'+appName.replace(/\s/g, '')+'.apk');
+                                                                fs.unlinkSync(zipFile);
                                                             } else if (fileStat.isDirectory()) {
                                                                 console.log('Directory found.');
                                                             }
                                                         }
                                                     });
-                                                    shell.exec('/opt/android-sdk-linux/build-tools/23.0.1/zipalign -v 4 android-release-unsigned.apk '+appName.replace(/\s/g, '')+'.apk', {async: true}, function (code5, stdout, stderr) {
-                                                        if (code5==0){
-
-                                                             var file = appPath + 'platforms/android/build/outputs/apk/'+appName.replace(/\s/g, '')+'.apk';
-                                                             var resourcesPath = config.APP_FILE_SERVER+userId + '/templates/' +
-                                                                                 appId +'/img/publish/';
-                                                             var publishPath = config.ME_SERVER + userId + '/build/' + appId +'/publish';
-                                                             var zipFile = config.ME_SERVER + userId + '/build/' + appId+'/publish_'+appId+'.zip';
-
-                                                            fs.stat(zipFile, function(err, fileStat) {
-                                                                if (err) {
-                                                                    if (err.code == 'ENOENT') {
-                                                                        console.log('Does not exist.');
-                                                                    }
-                                                                } else {
-                                                                    if (fileStat.isFile()) {
-                                                                        fs.unlinkSync(zipFile);
-                                                                    } else if (fileStat.isDirectory()) {
-                                                                        console.log('Directory found.');
-                                                                    }
-                                                                }
-                                                            });
-                                                            fs.copy(resourcesPath, publishPath, function (err) {
+                                                    fs.copy(resourcesPath, publishPath, function (err) {
+                                                        if (err) {
+                                                            throw err;
+                                                        } else {
+                                                            fs.copy(file, publishPath + "/" + appName.replace(/\s/g, '') + '.apk', function (err) {
                                                                 if (err) {
                                                                     throw err;
-                                                                }else {
-                                                                    fs.copy(file, publishPath+ "/"+appName.replace(/\s/g, '')+'.apk', function (err) {
+                                                                } else {
+                                                                    zipFolder(publishPath, zipFile, function (err) {
                                                                         if (err) {
-                                                                            throw err;
-                                                                        }else {
-                                                                            zipFolder(publishPath, zipFile, function(err) {
-                                                                                if(err) {
-                                                                                    console.log('oh no!', err);
-                                                                                } else {
+                                                                            console.log('oh no!', err);
+                                                                        } else {
 
-                                                                                    var searchAppData = {
-                                                                                        id :appId
-                                                                                    }
+                                                                            var searchAppData = {
+                                                                                id: appId
+                                                                            }
 
-                                                                                    Application.update(searchAppData, {status :"UPLOADING"}).exec(function(err,app) {
-                                                                                        if (err) res.send(err);
-                                                                                        else {
-                                                                                            var filename = path.basename(zipFile);
-                                                                                            var mimetype = mime.lookup(zipFile);
+                                                                            Application.update(searchAppData, {status: "UPLOADING"}).exec(function (err, app) {
+                                                                                if (err) res.send(err);
+                                                                                else {
+                                                                                    var filename = path.basename(zipFile);
+                                                                                    var mimetype = mime.lookup(zipFile);
 
-                                                                                            res.setHeader('Content-disposition', 'attachment; filename=' + filename);
-                                                                                            res.setHeader('Content-type', mimetype);
+                                                                                    res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                                                                                    res.setHeader('Content-type', mimetype);
 
-                                                                                            var filestream = fs.createReadStream(zipFile);
+                                                                                    var filestream = fs.createReadStream(zipFile);
 
-                                                                                            filestream.pipe(res);
-                                                                                            console.log('EXCELLENT');
-                                                                                        }
-                                                                                    });
-
-
+                                                                                    filestream.pipe(res);
+                                                                                    console.log('EXCELLENT');
                                                                                 }
                                                                             });
 
+
                                                                         }
                                                                     });
+
                                                                 }
                                                             });
-                                                            /*res.json('ok');*/
-                                                        }else{
-                                                            if (stderr) return res.negotiate(stderr);
                                                         }
-                                                        shell.code;
                                                     });
-                                                }else{
+                                                    /*res.json('ok');*/
+                                                } else {
                                                     if (stderr) return res.negotiate(stderr);
                                                 }
                                                 shell.code;
                                             });
-                                }else{
+                                        } else {
+                                            if (stderr) return res.negotiate(stderr);
+                                        }
+                                        shell.code;
+                                    });
+                                } else {
                                     if (stderr) return res.negotiate(stderr);
                                 }
                                 shell.code;
                             });
-                }else{
+                        } else {
+                            if (stderr) return res.negotiate(stderr);
+                        }
+                        shell.code;
+                    });
+
+                } else {
                     if (stderr) return res.negotiate(stderr);
                 }
                 shell.code;
