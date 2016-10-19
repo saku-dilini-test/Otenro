@@ -238,9 +238,15 @@
                 controllerAs: 'dialogCtrl',
                 controller: function($mdDialog){
                     this.confirm = function click(){
-                        $scope.articleList.splice(index, 1);
                         articleService.deleteArticle(article).success(function(data) {
                             toastr.success(data.message, 'Message', {
+                                closeButton: true
+                            });
+                            $scope.articleList.splice(index, 1);
+                            $mdDialog.hide();
+                            return articleService.showPreviewArticslesDilog('previewArticles');
+                        }).error(function (error) {
+                            toastr.error('Article Delete Error', 'Warning', {
                                 closeButton: true
                             });
                             $mdDialog.hide();
