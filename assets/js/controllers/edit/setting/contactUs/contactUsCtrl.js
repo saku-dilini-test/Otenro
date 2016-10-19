@@ -10,6 +10,11 @@
 
         // --/-- Characters length config
         $scope.maxBasicInfoAddress = 20;
+        $scope.maxReturnPolicy = 200;
+        $scope.maxTermsAndCondition = 200;
+        $scope.maxPrivacyPolicy = 200;
+        $scope.maxAboutUsHeader = 20;
+        $scope.maxAboutUsContent = 200;
         $scope.userId = $auth.getPayload().id;
         
         // --- Config ----

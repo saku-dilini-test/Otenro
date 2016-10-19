@@ -23,8 +23,8 @@
                             <fieldset>
                                 <label>Short description</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input class="input-shadow-border" type="text" name="shortDescription" ng-model="playStoreData.shortDescription"
-                                       maxlength="{{maxShortDescription}}" required/>
+                                <textarea class="input-shadow-border" name="shortDescription" ng-model="playStoreData.shortDescription"
+                                       maxlength="{{maxShortDescription}}" required></textarea>
                                 <br>
                                 <span class="information">Characters left: {{maxShortDescription - playStoreData.shortDescription.length}}</span>
                             </fieldset>
@@ -33,7 +33,7 @@
                         <div class="clearfix">
                             <fieldset>
                                 <label>full description</label>
-                                <textarea class="input-shadow-border" ng-model="playStoreData.fullDescription" rows="2" maxlength="{{maxFullDescription}}" required></textarea>
+                                <textarea class="input-shadow-border" ng-model="playStoreData.fullDescription" rows="8" maxlength="{{maxFullDescription}}" required></textarea>
                                 <br>
                                 <span class="information">Characters left: {{maxFullDescription - playStoreData.fullDescription.length}}</span>
                             </fieldset>
@@ -44,8 +44,8 @@
                                 <span>Characters left: {{maxKeywords - playStoreData.keywords.length}}</span>
                             </fieldset>-->
                         </div>
-                        <div class="clearfix">
-                            <fieldset class="col-4 profile-image-section ">
+                        <div class="row">
+                            <fieldset class="col-md-3">
                                 <label class="reset-inline">Hi-res icon(512 x 512)</label>
                                 <a class="feature01 logo-upload">
                                     <span class="overlay01">
@@ -61,7 +61,7 @@
                                 </a>
                             </fieldset>
 
-                            <fieldset class="col-4 reset-margin">
+                            <fieldset class="col-md-4">
                                 <label class="reset-inline">Feature Graphic(1024 w x 500 h)</label>
                                 <a class="feature01 logo-upload">
                                     <span class="overlay01">
@@ -78,17 +78,17 @@
                             </fieldset>
 
                         </div>
-                        <br>
-                        <div class="clearfix">
-                          <div class="pull-right">
-                            <label class="reset-inline">Screen Shots (80 x 120)</label>
+
+                        <div class="row">
+                          <div class="col-md-12">
+                            <label class="reset-inline">Screen Shots</label>
                             <div class="clearfix">
                                 <fieldset class="col-4">
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
                                             <input type="file" ngf-select ng-model="splash[0]" />
-                                            <img ng-show="splash[0] != null" ngf-src="splash[0]" width="80" height="120" />
-                                            <img ng-show="splash[0]== null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="80" height="120" />
+                                            <img ng-show="splash[0] != null" ngf-src="splash[0]" width="120" height="120" />
+                                            <img ng-show="splash[0]== null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="120" height="120" />
                                         </div>
                                     </div>
                                 </fieldset>
@@ -96,8 +96,8 @@
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
                                             <input type="file" ngf-select ng-model="splash[1]"/>
-                                            <img ng-show="splash[1] != null" ngf-src="splash[1]" width="80" height="120" />
-                                            <img ng-show="splash[1]== null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="80" height="120" />
+                                            <img ng-show="splash[1] != null" ngf-src="splash[1]" width="120" height="120" />
+                                            <img ng-show="splash[1]== null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="120" height="120" />
                                         </div>
                                     </div>
                                 </fieldset>
@@ -105,8 +105,8 @@
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
                                             <input type="file" ngf-select ng-model="splash[2]"/>
-                                            <img ng-show="splash[2] != null" ngf-src="splash[2]" width="80" height="120" />
-                                            <img ng-show="splash[2] == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="80" height="120" />
+                                            <img ng-show="splash[2] != null" ngf-src="splash[2]" width="120" height="120" />
+                                            <img ng-show="splash[2] == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="120" height="120" />
                                         </div>
                                     </div>
                                 </fieldset>
@@ -114,8 +114,8 @@
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
                                             <input type="file" ngf-select ng-model="splash[3]"/>
-                                            <img ng-show="splash[3] != null" ngf-src="splash[3]" width="80" height="120" />
-                                            <img ng-show="splash[3] == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="80" height="120" />
+                                            <img ng-show="splash[3] != null" ngf-src="splash[3]" width="120" height="120" />
+                                            <img ng-show="splash[3] == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="120" height="120" />
                                         </div>
                                     </div>
                                 </fieldset>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="hide()">cancel</md-button>
                             <md-button class="me-default-button" ng-disabled="generalForm.$invalid"
                                        ng-click="addGooglePlayInfo(picFile,playStoreData,splash)">finish</md-button>
                         </div>
@@ -213,7 +213,7 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button">cancel</md-button>
+                            <md-button ng-click="hide()" class="me-default-button">cancel</md-button>
                             <md-button class="me-default-button">save</md-button>
                         </div>
                     </div>

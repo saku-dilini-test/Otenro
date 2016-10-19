@@ -10,3 +10,13 @@ ion-slides {
     max-width: none;
     max-height: 100%;
 }
+
+ul {
+    margin-left: 10%;
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+    margin-left: 10%;
+}
