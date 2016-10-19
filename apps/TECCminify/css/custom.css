@@ -10,3 +10,7 @@
 .delivery-email:focus {
     border-color: #66afe9 !important;
 }
+
+.error-message {
+    color : #ff3b30;
+}

@@ -46,7 +46,8 @@
                             <label>Email *</label>
                             <input class="form-control delivery-email" name="userEmail" type="email" ng-model="deliveryAddress.email"
                                          ng-change="saveDeliveryAddress(deliveryAddress)"  required>
-                            <span ng-if="pickUpForm.userEmail.$dirty">
+                            <span class="error-message"
+                                    ng-if="pickUpForm.userEmail.$dirty">
                                 <span ng-show="pickUpForm.userEmail.$error.email">Not a valid email address.</span>
                             </span>
                         </li>
@@ -56,14 +57,14 @@
                             <label style="width: 100%">Pick Up  Date * : {{ setPickUpDate}}</label>
                             <label style="width: 100%">Pick Up Time * : {{ setPickUpTime}}</label>
                             <div ng-if="isPassedDate">
-                                <span> Selected Date & Time has already passed </span>
+                                <span class="error-message"> Selected Date & Time has already passed </span>
                             </div>
                             <div ng-if="isOutOfHours">
-                                <span>Sorry, pick up is not available at that time. Please select again.</span>
+                                <span class="error-message">Sorry, pick up is not available at that time. Please select again.</span>
                             </div>
                             <datetimepicker ng-model="pickUpDate.date"
                                             min-date = "{{minDate}}"
-                                            data-datetimepicker-config="{ minuteStep : 30 }"
+                                            data-datetimepicker-config="{ startView:'day', minView:'hour' }"
                                             ng-change="savePickUpDate(pickUpDate.date)" required></datetimepicker>
                         </li>
                         <li>
@@ -114,8 +115,8 @@
                             <label>Email *</label>
                             <input class="form-control delivery-email" name="userEmail" type="email" ng-model="deliveryAddress.email"
                                    ng-change="saveDeliveryAddress(deliveryAddress)"  required>
-                        <span ng-if="pickUpForm.userEmail.$dirty">
-                            <span ng-show="pickUpForm.userEmail.$error.email">Not a valid email address.</span>
+                        <span class="error-message" ng-if="deliveryForm.userEmail.$dirty">
+                            <span ng-show="deliveryForm.userEmail.$error.email">Not a valid email address.</span>
                         </span>
                         </li>
                         <li>
@@ -124,14 +125,14 @@
                             <label style="width: 100%">Delivery Date * : {{ setDeliveryDate}}</label>
                             <label style="width: 100%">Delivery Time * : {{ setDeliveryTime}}</label>
                             <div ng-if="isPassedDate">
-                                <span> Selected Date & Time has already passed </span>
+                                <span class="error-message"> Selected Date & Time has already passed </span>
                             </div>
                             <div ng-if="isOutOfHours">
-                                <span>Sorry, delivery is not available at that time. Please select again.</span>
+                                <span class="error-message">Sorry, delivery is not available at that time. Please select again.</span>
                             </div>
                             <datetimepicker ng-model="delivery.date"
                                             min-date = "{{minDate}}"
-                                            data-datetimepicker-config="{ minuteStep : 30 }"
+                                            data-datetimepicker-config="{ startView:'day', minView:'hour' }"
                                             ng-change="saveDeliveryDate(delivery.date)" required></datetimepicker>
                         </li>
                         <li>
