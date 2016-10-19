@@ -95,7 +95,8 @@
             $scope.serverImg = initialData.imageUrl;
             $scope.mainImg = initialData.imageUrl;
             $scope.picFile = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/article/'+initialData.imageUrl;
-            $scope.tmpImage[0] = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/article/'+initialData.imageUrl;
+            $scope.tmpImage[0] = SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
+            +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article/"+initialData.imageUrl;
 
             $scope.seletedCategoryId = initialData.categoryId;
 
@@ -201,8 +202,10 @@
                     isImageUpdate = false;
                 }
 
-                articleService.publishArticle(file,article.id,$scope.seletedCategoryId,article.title, article.desc, $rootScope.appId,$scope.isNewArticle,isImageUpdate)
+                articleService.publishArticle(file,article.id,$scope.seletedCategoryId,article.title, article.desc, 
+                                              $rootScope.appId,$scope.isNewArticle,isImageUpdate)
                     .progress(function (evt) {
+                        
                         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                         console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                     }).success(function (result) {
