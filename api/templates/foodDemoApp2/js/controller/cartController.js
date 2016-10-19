@@ -72,6 +72,20 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             $state.go('app.login');
         }
     }
+
+
+    // get the shipping options
+    $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
+            .success(function (data) {
+                    $scope.shippingData=data;
+                },
+                function (err) {
+                    $ionicPopup.alert({
+                        title: 'Policies Data loading error!',
+                        template: 'Please check your connection!'
+                    });
+                });
+
     $scope.deliver = function(deliverDetails){
             $scope.amount = $scope.getTotal();
 
@@ -83,11 +97,11 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                    cssClass: 'ionicPopUp',
                    scope: $scope,
                    buttons:[
-                       {text:'Cancel'},
+                       {text:'Back'},
                        {text: 'Deliver',
                         type: 'button-balanced',
                         onTap: function(e) {
-                              if (!$scope.shipping.opt) {
+                              if (!$scope.shipping.opt || $rootScope.cart.cartSize == 0) {
                                 //don't allow the user to close unless he selects an option
                                 e.preventDefault();
                               } else {
@@ -113,7 +127,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                                     $rootScope.cart.totalPrice = 0;
                                     $rootScope.cart.totalQuantity = 0;
                                     var alertPopup = $ionicPopup.alert({
-                                           title: 'Thank you',
+                                           title: 'Thank You',
                                            subTitle: 'Your Order has been successfully processed',
                                            cssClass: 'ionicPopUp',
                                            buttons:[

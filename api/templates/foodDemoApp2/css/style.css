@@ -384,8 +384,9 @@ img {
   	padding-bottom:1em;
 }
 
-.popup-sub-title{
+.popup-sub-title, .popup-body label{
     font-size:2.5vh;
+    line-height: normal;
 }
 
 ion-slides {
@@ -395,7 +396,6 @@ ion-slides {
 .swiper-slide{
     text-align:center;
 }
-
 
 .bar.bar-header{
     border: unset;

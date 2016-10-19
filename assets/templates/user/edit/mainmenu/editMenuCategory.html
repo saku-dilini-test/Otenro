@@ -40,14 +40,17 @@
 
 
                         <div class="file-upload-wrapper clearfix">
-                            <div class="inputField">
-                                <div class="btn-material">
-                                    <span>Select a image</span>
-                                    <input type="file" value="file" ng-click="cropImage()" id="fileInput">
-                                </div>
-                            </div>
                             <div class="cropArea">
                                 <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
+                            </div>
+
+                            <div class="inputField btn-material img-up">
+                                <span >{{buttonName}}</span>
+                                <div class="img-up1" ng-if="imageSelected">
+                                    <input type="file" value="file" type="file" ng-click = "cropImage(); change()" id="fileInput" >
+                                </div>
+                                <div  ng-if="!imageSelected" class="img-up1" ng-disabled="picFile == null" ng-click="addImage(picFile)"></div>
+
                             </div>
                         </div>
 
@@ -56,8 +59,6 @@
                                 <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
                                      height="150" style="display:none" />
                                 <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
-
-                                <button class="btn-material" ng-disabled="picFile == null" ng-click="addImage(picFile)">Crop & Upload</button>
                             </div>
                             <div class="uploaded-old-images">
                                 <p>Uploaded Images</p>

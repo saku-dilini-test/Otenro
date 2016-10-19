@@ -310,8 +310,8 @@
             $scope.child = newChild;
         };
 
-         $scope.imageSelected = true;
-         $scope.buttonName = "Browse Image";
+        $scope.imageSelected = true;
+        $scope.buttonName = "Browse Image";
 
         $scope.cropImage = function () {
             $scope.myImage = null;
