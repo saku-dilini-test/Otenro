@@ -227,12 +227,12 @@ module.exports = {
         var deleteQuery = {
              id : req.body.id
         }
+
         var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + appId+ '/img/article/'+ imageUrl;
 
         Article.destroy(deleteQuery).exec(function (err) {
-            if (err) return callback("Error while deleting " + err.message);
+            if (err) return res.send(err);
             fs.unlink(filePath, function (err) {
-                if (err) return callback("Error while deleting " + err.message);
                 res.send(200,{message:'Deleted Article'});
             });
         });
