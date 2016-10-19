@@ -126,18 +126,15 @@ p{
     text-align:left;
 }
 
-.popup{
-    margin: 2%;
+.popup-title {
+  	font-size:4vh;
+  	padding-bottom:1em;
 }
 
-.popup-body{
-    text-align:center;
-}
-
-.popup-buttons{
-
-    padding: 5% 25%;
-    cursor:url(../img/cursor.cur), auto;
+.popup-sub-title, .popup-body label{
+    font-size:2.5vh;
+    line-height: normal;
+    border:unset;
 }
 
 ion-slides {

@@ -28,6 +28,10 @@
         $scope.myImage='';
         $scope.myCroppedImage='';
 
+        $scope.imageSelected = true;
+        $scope.buttonName = "Browse Image";
+
+
         $scope.cropImage = function () {
             var handleFileSelect=function(evt) {
                 var file=evt.currentTarget.files[0];
@@ -39,6 +43,8 @@
                     });
                 };
                 reader.readAsDataURL(file);
+                $scope.imageSelected =false;
+                $scope.buttonName = "Upload";
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         }
@@ -128,6 +134,9 @@
                     closeButton: true
                 });
             }
+
+            $scope.imageSelected = true;
+            $scope.buttonName = "Browse Image";
         };
 
         $scope.changeArticleCat = function(catId){

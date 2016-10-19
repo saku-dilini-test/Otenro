@@ -10,6 +10,7 @@
                 <thead>
                 <th class="simple-column">Date Ordererd</th>
                 <th class="simple-column">Order Status</th>
+                <th class="simple-column">Shipping Option</th>
                 <!--<th class="simple-column">Order Fullfilment Date</th>-->
                 <th>&nbsp;</th>
                 </thead>
@@ -17,7 +18,7 @@
                 <tr>
                     <td> {{ oderData.entity.createdAt | date:'MM/dd/yyyy' }}</td>
                     <td>{{oderData.entity.fulfillmentStatus}}</td>
-                    <!--<td>-</td>-->
+                    <td>{{oderData.entity.shippingOpt}}</td>
                 </tr>
                 </tbody>
             </table>
