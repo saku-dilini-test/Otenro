@@ -1,31 +1,35 @@
 <ion-content class="made-easy-background-image made-easy-background-color">
-	<div class="login animated zoomIn">
+	<div class="animated zoomIn">
 		<form name="loginForm">
-			<div class="card">
-				<div class="item item-text-wrap">
-					<div class="login_title">ENTER LOGIN DETAILS</div>
-					<label class="item item-input item-stacked-label">
-						
-						<input type="text" placeholder="Username" ng-model="data.username" ng-required="true">
+			<div class="card padding">
+					<div class="row">
+						<div class="col center padding made-easy-header-font">Enter Login Details</div>
+					</div>
+					<div class="list">
+					<label class="item item-input">
+						<span class="input-label">Username:</span>
+						<input type="text"  ng-model="data.username" ng-required="true">
 					</label>
-					<label class="item item-input item-stacked-label">
-						
-						<input type="password" placeholder="Password" ng-model="data.password" ng-required="true">
+					<label class="item item-input">
+						<span class="input-label">Password:</span>
+						<input type="password" ng-model="data.password" ng-required="true">
 					</label>
-					<label class="item item-input item-stacked-label">
-						<button class="button button-block button-positive" ng-click="loginForm.$valid && login()">
+
+					<div class="row">
+						<div class="col col-top"></div>
+						<button class="col col-75 col-center button button-small button-positive" ng-click="loginForm.$valid && login()">
 							Login
 						</button>
-					</label>
-				</div>
+						<div class="col col-bottom"></div>
+					</div>
+					</div>
 			</div>
-			<div class="panel">
+			<div class="row">
 
 				<!--<a class="social-button" ng-click="authenticate('google')"> Google</a>
 				<a class="social-button-fb" ng-click="authenticate('facebook')" >Facebook</a>-->
 
-				<br>
-				<div class="create-account-btm" ng-click="singUp()">Create Your Account</div>
+				<button class="col button button-dark button-small" ng-click="singUp()">Create Your Account</button>
 			</div>
 		</form>
 	</div>

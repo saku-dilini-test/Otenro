@@ -1,25 +1,26 @@
 <ion-side-menus enable-menu-with-back-views="true">
+
   <ion-side-menu-content>
-    <ion-nav-bar class="bar-white" align-title="left">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
+
+    <ion-nav-bar class="bar bar-header">
+
+      <ion-nav-back-button class="icon ion-ios-arrow-back"></ion-nav-back-button>
 
       <ion-nav-buttons side="left">
-        <button class="button button-icon button-toggle ion-navicon" menu-toggle="left" ng-if="showMenu">
-        </button>
+        <button class="button icon ion-navicon" menu-toggle="left" ng-if="showMenu"></button>
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
-        <a ui-sref="app.cart" class="button button-icon ion-ios-cart-outline">
-          <span class="badge2">{{parentobj.cartSize}}</span>
-        </a>
+        <button ui-sref="app.cart" class="button icon ion-ios-cart-outline"></button>
+        <h5>{{parentobj.cartSize}}</h5>
       </ion-nav-buttons>
+
     </ion-nav-bar>
+
     <ion-nav-view name="menuContent" align="left"></ion-nav-view>
-  </ion-side-menu-content>
-  <ion-side-menu side="left">
+</ion-side-menu-content>
+
+  <ion-side-menu side="left" class="clean-menu">
     <ion-content>
-        <div class="logo">
-    </div>
       <ion-list>
         <ion-item class="made-easy-header-font" menu-close ui-sref="app.category">
           Home

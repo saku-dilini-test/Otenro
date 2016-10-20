@@ -618,7 +618,7 @@ module.exports = {
               "detailedDesc" : "Short x details description. Short x details description. Short x details description",
               "tempImageArray" : [
                 {
-                  "img" : "e.png"
+                  "img" : "d.png"
                 }
               ],
               "variants":[{
@@ -628,7 +628,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
-              "imageUrl": "e.png",
+              "imageUrl": "d.png",
               "createdDate": Date.now()
             }
           ]

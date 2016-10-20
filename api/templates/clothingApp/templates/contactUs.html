@@ -1,23 +1,28 @@
 <ion-view view-title="Contact Us">
-    <ion-content class="made-easy-background-image made-easy-background-color made-easy-contactUs">
+    <ion-content class="made-easy-background-image made-easy-background-color">
         <div class="card animated zoomIn">
-            <div class="header">
-                <div class="header-image">
-                    <img src="img/contactUs.jpg" width="100%"/>
-                </div>
+
+
+            <div id="map" data-tap-disabled="true"></div>
+
+
+            <div ng-repeat="map in coords">
+               <iframe ng-src="{{getIframeSrc(map.longitude,map.latitude)}}"></iframe>
             </div>
-            <div class="content made-easy-content-font">
-                <div>
-                    Address : {{address}}
+
+
+            <div class="made-easy-content-font">
+                <div class="row">
+                   <div class="col col-33">Address</div><div class="col col-67">: {{address}}</div>
                 </div>
-                <div>
-                    Tel : {{telPhone}}
+                <div class="row">
+                    <div class="col col-33">Tel</div><div class="col col-67">: {{telPhone}}</div>
                 </div>
-                <div>
-                    E-mail : {{email}}
+                <div class="row">
+                    <div class="col col-33">E-mail</div><div class="col col-67">: {{email}}</div>
                 </div>
-                <div >
-                    Web : {{webSite}}
+                <div class="row">
+                    <div class="col col-33"> Web</div><div class="col col-67">: {{webSite}}</div>
                 </div>
             </div>
         </div>
