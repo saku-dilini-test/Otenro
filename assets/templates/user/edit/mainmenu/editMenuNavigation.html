@@ -36,22 +36,22 @@
                             </div>
                         </div>-->
 
-                    <div class="file-upload-wrapper clearfix">
+                        <div class="file-upload-wrapper clearfix">
 
-                        <div class="cropArea">
-                            <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
-                        </div>
-
-                        <div class="inputField btn-material img-up">
-                            <span >{{buttonName}}</span>
-                            <div class="img-up1" ng-if="imageSelected">
-                                <input type="file" value="file" type="file" ng-click = "cropImage(); change()" id="fileInput" >
+                            <div class="cropArea">
+                                <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
                             </div>
-                            <div  ng-if="!imageSelected" class="img-up1" ng-click="addImage(picFile)"></div>
+
+                            <div class="inputField btn-material img-up">
+                                <span >{{buttonName}}</span>
+                                <div class="img-up1" ng-if="imageSelected">
+                                    <input type="file" value="file" type="file" ng-click = "cropImage(); change()" id="fileInput" >
+                                </div>
+                                <div  ng-if="!imageSelected" class="img-up1" ng-click="addImage(picFile)"></div>
+
+                            </div>
 
                         </div>
-
-                    </div>
                         <div class="uploaded-section image-upload clearfix" style="width:35%">
                             <div class="uploaded-new-image">
                                 <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
@@ -78,7 +78,7 @@
         </div>
         <div class="md-dialog-buttons">
             <div class="inner-section">
-                <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
+                <md-button class="me-default-button" ng-click="cancelEdit()">Cancel</md-button>
                 <md-button class="me-default-button" ng-click="addMenuNavigation(mainImg,menu)">Save</md-button>
             </div>
         </div>

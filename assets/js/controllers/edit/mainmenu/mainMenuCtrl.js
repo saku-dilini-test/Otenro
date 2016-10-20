@@ -133,6 +133,7 @@
                 $scope.picFile     = imageURL;
             }
         }
+
         // Add New Menu
         $scope.goToAddNewMenuItemView = function () {
             if($scope.templateCategory == tempCatBusiness){
@@ -196,6 +197,7 @@
                         }
                     },
                         this.cancel = function click(){
+                            alert("cancel");
                             $mdDialog.hide();
                             return mainMenuService.showMainMenuDialog();
                         }
@@ -549,8 +551,14 @@
         $scope.hide = function() {
             $mdDialog.hide();
         };
+        
         $scope.cancel = function() {
             $mdDialog.hide();
+        };
+
+        $scope.cancelEdit = function() {
+            $mdDialog.hide();
+             mainMenuService.showMainMenuDialog();
         };
 
     }
