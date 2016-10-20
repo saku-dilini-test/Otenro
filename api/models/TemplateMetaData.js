@@ -210,7 +210,7 @@ module.exports = {
       templateId : '2',
       menuType : 'MenuButton',
       menuTitle  : 'IPG Integration',
-      menuFunction : 'commerce.showComingSoonDialog',
+      menuFunction : 'commerce.showIPGDialog',
       orderId : "20",
       menuButtonId : '1509'
     }
