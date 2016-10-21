@@ -8,8 +8,18 @@
     function contactUsCtrl($scope,$rootScope,$mdDialog,toastr, contactUsService,uiGmapGoogleMapApi,commerceService,$auth,
                             ME_APP_SERVER,mySharedService) {
 
+
+
         // --/-- Characters length config
         $scope.maxBasicInfoAddress = 20;
+        $scope.maxPrivacyPolicy = 100;
+        $scope.maxReturnPolicy = 100;
+        $scope.maxTermsAndCondition = 100;
+        $scope.maxAboutUsHeader = 20;
+        $scope.maxAboutUsContent = 100;
+
+
+
         $scope.userId = $auth.getPayload().id;
         
         // --- Config ----
