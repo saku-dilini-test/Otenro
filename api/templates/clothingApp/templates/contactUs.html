@@ -2,15 +2,6 @@
     <ion-content class="made-easy-background-image made-easy-background-color">
         <div class="card animated zoomIn">
 
-
-            <div id="map" data-tap-disabled="true"></div>
-
-
-            <div ng-repeat="map in coords">
-               <iframe ng-src="{{getIframeSrc(map.longitude,map.latitude)}}"></iframe>
-            </div>
-
-
             <div class="made-easy-content-font">
                 <div class="row">
                    <div class="col col-33">Address</div><div class="col col-67">: {{address}}</div>
