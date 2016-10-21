@@ -1,4 +1,4 @@
-var mobileApp=angular.module('foodDemoApp', ['ionic','ionic.cloud','satellizer']);
+var mobileApp=angular.module('foodDemoApp', ['ionic','ionic.cloud','satellizer','credit-cards']);
 
 mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy,$ionicPush,$http,constants) {
   $ionicPlatform.ready(function() {
@@ -226,6 +226,16 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           }
       }
   })
+      .state('app.cardPayment', {
+          cache: false,
+          url: '/cardPayment',
+          views: {
+              'menuContent': {
+                  templateUrl: 'templates/cardPayment.html',
+                  controller: 'cartCtrl'
+              }
+          }
+      })
   .state('app.cart', {
     url: '/cart',
     views: {
