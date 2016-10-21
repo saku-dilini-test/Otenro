@@ -204,10 +204,9 @@ footer {
 }
 .logo{
     float:left;
-    position:absolute;
     background:url(../images/logo_bg.png);
     padding:30px;
-    margin-top:-135px;
+    margin-top:-145px;
     border-radius: 5px 5px 0px 0px;
     -webkit-border-radius: 5px 5px 0px 0px;
     -o-border-radius: 5px 5px 0px 0px;

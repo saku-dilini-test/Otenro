@@ -7,7 +7,7 @@
             <div class="col-md-6">
                 <img ng-src="{{SERVER_URL}}{{product.logoUrl}}" alt="{{product.name}}"/>
             </div>
-            <div class="col-md-6 about_desc reset-padding">
+            <div class="col-md-6 about_desc ">
                 <h2>{{product.name}}</h2>
                 <p>{{product.description}}</p>
 
@@ -22,7 +22,7 @@
                             </td>
                             <td class="text-right">Rs : {{product.price}}</td>
                         </tr>
-                         <tr ng-if="!(product.perSlicePrice == 0)">
+                        <tr ng-if="!(product.perSlicePrice == 0)">
                             <td>
                                 <label class="radio">
                                     <input type="radio" name="selectCakeQuantity" ng-model="cakeType.type" value="slice">
@@ -57,7 +57,7 @@
                         </button>
                     </form>
                 </div>
-                      <!-- items -->
+                <!-- items -->
                 <table class="table table-bordered tbl-shopping-cart">
                     <!-- header -->
                     <tr>

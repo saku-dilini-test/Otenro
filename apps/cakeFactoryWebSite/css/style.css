@@ -49,7 +49,7 @@ li{
 .sign-in-container{
 	width: 100%;
 	height: 30px;
-	padding: 20px 0;
+	padding: 10px 0 20px;
 	overflow: hidden;
 	background: rgba(0, 0, 0, 0) url("../images/header_bg.png") repeat scroll 0 0;
 }
@@ -58,9 +58,10 @@ li{
 	display: block;
 	float: right;
 	height: 29px !important;
-	margin-right: 20px;
+	margin-right: 12px;
 	text-indent: -999999px;
 	width: 162px !important;
+	margin-top:10px;
 }
 
 .sign-in-container .fb-link{
@@ -122,7 +123,7 @@ li{
 
 .menu li{
 	display:inline-block;
-	float:left;	
+	float:left;
 }
 
 .menu li a{
@@ -145,7 +146,7 @@ li{
 
 .menu li a:hover,
 .menu li.active a{
-	background:#1D1810;	
+	background:#1D1810;
 	color:#BEAC7C;
 }
 
@@ -153,13 +154,9 @@ li{
 	border-radius: 0.5em;
 	-moz-border-radius: 0.5em;
 	-webkit-border-radius: 0.5em;
-	background-color: transparent;
 	border: 2px solid #bda954;
-	display: none;
 	float: right;
-	padding: 7px;
-	width: 30px;
-	margin-bottom: 20px;
+	width: 45px;
 }
 
 .menu-button span{
@@ -251,10 +248,10 @@ li{
 	-webkit-transition: all 0.5s ease-in-out;
 	-moz-transition: all 0.5s ease-in-out;
 	-o-transition: all 0.5s ease-in-out;
-	transition: all 0.5s ease-in-out;	
+	transition: all 0.5s ease-in-out;
 }
 .price_text{
-  float:left;	
+  float:left;
 }
 .price_desc .price{
 	font-family: 'Aller_Bd';
@@ -356,7 +353,7 @@ li{
 	float:left;
 	margin:0% 0 0% 3.6%;
 }
-.listview_1_of_2:first-child { margin-left: 0; } 
+.listview_1_of_2:first-child { margin-left: 0; }
 
 .images_1_of_2 {
 	width: 48.6%;
@@ -372,7 +369,7 @@ li{
 	text-transform:uppercase;
     font-family: 'Aller_Bd';
 	text-shadow: 0px 0px 2px rgba(150, 150, 150, 1);
-	
+
 }
 .list_2_of_2  p{
 	font-size: 0.85em;
@@ -380,7 +377,7 @@ li{
 	color: #FFF;
 	line-height: 1.8em;
 	text-shadow: 0px 0px 2px rgba(150, 150, 150, 1);
- 	
+
 }
 .list_2_of_2  h2{
 	color:#FFF;
@@ -389,7 +386,7 @@ li{
 	text-transform:uppercase;
     font-family: 'Aller_Bd';
 	text-shadow: 0px 0px 2px rgba(150, 150, 150, 1);
-	
+
 }
 
 
@@ -415,7 +412,7 @@ li{
 	font-size: 0.85em;
 	padding: 5px;
 	color: #8C8061;
-	line-height: 1.8em; 	
+	line-height: 1.8em;
 }
 .read_more {
     margin-top:10px;
@@ -430,7 +427,7 @@ li{
 	 -webkit-transition: all 0.5s ease-in-out;
 	-moz-transition: all 0.5s ease-in-out;
 	-o-transition: all 0.5s ease-in-out;
-	transition: all 0.5s ease-in-out;	
+	transition: all 0.5s ease-in-out;
 }
 .read_more a:hover{
 	color:#66562D;
@@ -450,7 +447,7 @@ li{
 	 -webkit-transition: all 0.5s ease-in-out;
 	-moz-transition: all 0.5s ease-in-out;
 	-o-transition: all 0.5s ease-in-out;
-	transition: all 0.5s ease-in-out;	
+	transition: all 0.5s ease-in-out;
 }
 .read_more2 a:hover{
 	color:#66562D;
@@ -482,7 +479,7 @@ li{
 
 .span_1_of_3 {
 	width: 29.2%;
-	padding:1.5%; 
+	padding:1.5%;
 }
 .span_1_of_3  h3{
 	color:#8F8042;
@@ -495,7 +492,7 @@ li{
 	font-size: 0.85em;
 	padding: 5px 0;
 	color: #8C8061;
-	line-height: 1.8em; 
+	line-height: 1.8em;
 }
 ul.dishes_list  li a{
 	color:#8C8061;
@@ -548,15 +545,13 @@ ul.dishes_list li a:hover{
  .copy-right p a:hover{
 	text-decoration:none;
 	color:#FFF;
- } 
+ }
  /************* About *************/
 .header_img img{
 	max-width:100%;
 	display:block;
 }
-.about_desc{
-	padding:30px 0;
-}
+
 .about_desc h2{
 	color:#857240;
     font-size:3em;
@@ -593,10 +588,10 @@ ul.dishes_list li a:hover{
 	margin: 1% 0 1% 1.6%;
 }
 .col_1_of_4:first-child { margin-left: 0; } /* all browsers except IE6 and lower */
-	
+
 .span_1_of_4 {
 	width: 20.8%;
-	padding:1.5%; 
+	padding:1.5%;
 }
 .span_1_of_4  h3{
 	color: #BDA954;
@@ -618,8 +613,8 @@ ul.dishes_list li a:hover{
 	font-family: 'ambleregular';
 	font-size:0.85em;
 	display:block;
-	padding:10px 0;	
-	clear:both; 
+	padding:10px 0;
+	clear:both;
 }
 .menu_list li a:hover{
 	color:#554E3B;
@@ -628,7 +623,8 @@ ul.dishes_list li a:hover{
 	float:left;
 	text-transform: capitalize;
 	width: 180px;
-	word-wrap: break-all;
+	height:30px;
+	overflow:hidden;
 	word-break: keep-all;
 }
 .menu_list li a span.price{
@@ -661,14 +657,14 @@ ul.dishes_list li a:hover{
 	display: block;
 	float:left;
 	margin:2% 0 2% 1.6%;
-} 	
+}
 .span_2_of_3 {
 	width:72.1%;
-	padding:1.5%; 
+	padding:1.5%;
 }
 .sidebar {
 	width: 20.2%;
-	padding:1.5%; 
+	padding:1.5%;
 }
 .image {
 	clear: both;
@@ -718,7 +714,7 @@ ul.dishes_list li a:hover{
 }
 
 .span_2_of_1  table p{
-	padding: 3px 0;	
+	padding: 3px 0;
 }
 .offers_list h2,.archives h2{
 	color:#8F8042;
@@ -737,7 +733,7 @@ ul.dishes_list li a:hover{
 }
 
 .archives li a{
-	color:#8C8061;	
+	color:#8C8061;
 }
 
 .archives li a span{
@@ -803,7 +799,7 @@ ul.dishes_list li a:hover{
 }
 .contact-form textarea{
 		resize:none;
-		height:172px;		
+		height:172px;
 }
 .myButton{
     background:#857240;
@@ -930,9 +926,6 @@ ul.dishes_list li a:hover{
 	.menu{
 		float:none;
 	}
-	.menu li a {
-		padding: 22px 33px;
-    } 
 	.col_1_of_2{
 		margin:1% 0;
 	}
@@ -989,7 +982,7 @@ ul.dishes_list li a:hover{
 	.menu{
 		display: none;
 	}
-	
+
 	.menu li{
 		width: 100%;
 		display: block;
@@ -1003,7 +996,7 @@ ul.dishes_list li a:hover{
 	.menu-button{
 		display: block;
 	}
-	
+
 	.col_1_of_3{
 		margin:0;
 	}
@@ -1015,7 +1008,7 @@ ul.dishes_list li a:hover{
 		float:none;
 		width:100%;
 		margin:0;
-	}	
+	}
 }
 @media only screen and (max-width:320px) {
 	.wrap{
@@ -1028,7 +1021,7 @@ ul.dishes_list li a:hover{
 		padding:20px 9px;
 		font-size:0.7em;
 	}*/
-	
+
 	.welcome_desc h3{
 		font-size:1.5em;
 		margin-bottom:0;
@@ -1093,7 +1086,7 @@ table tr:last-of-type{
 	margin: 10px 0;
 }
 
-.promise_area p{	
+.promise_area p{
 	color: #8c8061;
 	font-size: 16px;
 	font-family: "ambleregular";
@@ -1112,14 +1105,14 @@ table tr:last-of-type{
 }
 
 .product_item{
-	padding-bottom:10px; 
-	margin:10px 70px 40px 0; 
-	border-bottom:#BDAC7C thin dotted; 
+	padding-bottom:10px;
+	margin:10px 70px 40px 0;
+	border-bottom:#BDAC7C thin dotted;
 	float:left
 }
 
 .product_item:nth-of-type(4n){
-	margin:10px 0 40px; 
+	margin:10px 0 40px;
 }
 
 .product_item  .item_name{
@@ -1153,10 +1146,6 @@ table tr:last-of-type{
 	color: #464646;
 	font-size: 1em;
 	border: 1px solid #CCC;
-}
-
-.delivery-form-controls{
-	width: 550px;
 }
 
 .delivery-form-controls li{
@@ -1218,4 +1207,12 @@ table tr:last-of-type{
 .gMap{
 	width:100%;
 	height:300px;"
+}
+
+.datetimepicker .table td, .datetimepicker .table th{
+    border-bottom: 2px solid #ddd;
+}
+
+.datetimepicker {
+    width: 100%;
 }
