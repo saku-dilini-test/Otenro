@@ -213,6 +213,15 @@ module.exports = {
       menuFunction : 'commerce.showComingSoonDialog',
       orderId : "20",
       menuButtonId : '1509'
+    },
+    {
+      templateCategoryId : TemplateCategoryDetails.Business.ID,
+      templateId : '2',
+      menuType : 'MenuButton',
+      menuTitle  : 'Delete',
+      menuFunction : 'commerce.showDeleteAppDialog',
+      orderId : "21",
+      menuButtonId : '1510'
     }
 
   ]

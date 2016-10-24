@@ -2,9 +2,15 @@
  * Created by udeshikaperera on 31/08/2015.
  */
 (function() {
-    angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService', 'commerceService','articleService','mainMenuService', 'currencyService', 'publishService', 'engageService', 'logoAndTittleService','aboutUsService','policiesService','comingSoonService', dialogService]);
+    angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService',
+        'commerceService','articleService','mainMenuService', 'currencyService',
+        'publishService', 'engageService', 'logoAndTittleService','aboutUsService',
+        'policiesService','comingSoonService', dialogService]);
 
-    function dialogService(stylesService, contactUsService, commerceService, articleService ,mainMenuService, currencyService, publishService, engageService, logoAndTittleService,aboutUsService,policiesService,comingSoonService) {
+    function dialogService(stylesService, contactUsService,
+                           commerceService, articleService ,mainMenuService,
+                           currencyService, publishService, engageService,
+                           logoAndTittleService,aboutUsService,policiesService,comingSoonService) {
         return {
             showDialog: function(clickTitle) {
 
@@ -122,6 +128,8 @@
                     return articleService.showPreviewArticslesDilog(clickTitle);
                 if ('categories' == clickTitle)
                     return articleService.showCategoriesDialog(clickTitle);
+                if ('delete' == clickTitle)
+                    return commerceService.showDeleteAppDialog(clickTitle);
             }
         }
     }

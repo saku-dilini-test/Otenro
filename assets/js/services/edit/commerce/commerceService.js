@@ -3,10 +3,10 @@
  */
 (function () {
     angular.module('appEdit').service('commerceService', [
-        '$mdDialog', '$http', '$rootScope', 'Upload', 'SERVER_URL', 'toastr','inventoryService', commerceService
+        '$mdDialog', '$http', '$rootScope', 'Upload', 'SERVER_URL', 'toastr','inventoryService','appEditResource', commerceService
     ]);
 
-    function commerceService($mdDialog, $http, $rootScope, Upload, SERVER_URL, inventoryService) {
+    function commerceService($mdDialog, $http, $rootScope, Upload, SERVER_URL, inventoryService,appEditResource) {
         return {
             showAddProductsDialog: function (item) {
                 return $mdDialog.show({
@@ -262,7 +262,47 @@
             },
             updateOrders: function (data) {
                 return $http.post(SERVER_URL + 'edit/updateOrders', data)
-            }
+            },
+            showDeleteAppDialog : function () {
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog,appEditResource,toastr,$rootScope){
+                    this.confirm = function click(){
+                        appEditResource.deleteSelectedApp({appId:$rootScope.appId}).success(function(data) {
+                            toastr.success('Successfully deleted ', 'Done!', {
+                                closeButton: true
+                            });
+                            $mdDialog.hide();
+                        }).error(function(err) {
+                            toastr.error('Cant Build', 'Error', {
+                                closeButton: true
+                            });
+                        });
+                     },
+                     this.cancel = function click(){
+                        $mdDialog.hide();
+                     }
+                },
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                '<md-content >' +
+                '<div class="md-dialog-header">' +
+                '<h1>Deleting Application </h1>' +
+                '</div>' +
+                '<br>'+
+                '<div style="text-align:center">' +
+                '<lable>Are you sure, you want to delete this Application ?</lable>' +
+                '</div>' +
+                '<br><br>' +
+                '<div class="md-dialog-buttons">'+
+                '<div class="inner-section">'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">No</md-button>'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Yes</md-button>'+
+                '</div>'+
+                '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
+        }
 
         };
     }

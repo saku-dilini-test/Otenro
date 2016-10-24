@@ -12,7 +12,13 @@
             },
             getSelectedApp: function(params){
                 return  $http.post(SERVER_URL + 'edit/getSelectedApp',params);
+            },
+            deleteSelectedApp: function(params){
+                alert(JSON.stringify(params));
+                return  $http.post(SERVER_URL + 'edit/deleteSelectedApp',params);
             }
+
+            
         }
     }
 })();
