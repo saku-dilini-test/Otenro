@@ -12,6 +12,7 @@
 
         // --/-- Characters length config
         $scope.maxBasicInfoAddress = 20;
+<<<<<<< .merge_file_d3x6p9
 <<<<<<< .merge_file_QxSoko
         $scope.maxPrivacyPolicy = 100;
         $scope.maxReturnPolicy = 100;
@@ -22,12 +23,17 @@
 
 
 =======
+=======
+>>>>>>> .merge_file_pJsKi9
         $scope.maxReturnPolicy = 200;
         $scope.maxTermsAndCondition = 200;
         $scope.maxPrivacyPolicy = 200;
         $scope.maxAboutUsHeader = 20;
         $scope.maxAboutUsContent = 200;
+<<<<<<< .merge_file_d3x6p9
 >>>>>>> .merge_file_x9qPao
+=======
+>>>>>>> .merge_file_pJsKi9
         $scope.userId = $auth.getPayload().id;
         
         // --- Config ----
