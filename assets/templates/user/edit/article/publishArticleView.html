@@ -20,10 +20,10 @@
                 <br />
                 <span ng-show="articleForm.title.$error.pattern">No symbols</span>
                 <div ng-hide="article.title.length > maxArticleTitle">
-                    <span>Characters left: {{maxArticleTitle - article.title.length}}</span>
+                    <span class="information">Characters left: {{maxArticleTitle - article.title.length}}</span>
                 </div>
                 <div  ng-show="article.title.length > maxArticleTitle">
-                    <span>Characters left: </span> <span style="color: #ff0404 "> {{maxArticleTitle - article.title.length}} </span>
+                    <span class="information">Characters left: {{maxArticleTitle - article.title.length}} </span>
                 </div>
             </fieldset>
             <span ng-show="articleForm.title.$error.maxlength">Too lengthy</span></td>

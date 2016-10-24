@@ -42,7 +42,8 @@
 /* ----- View Page ----- */
 .made-easy-view {}
 .made-easy-view .item-desc {
-    text-align: center;
+   text-align: justify;
+   padding: 10px;
 }
 
 
