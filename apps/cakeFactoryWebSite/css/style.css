@@ -130,7 +130,7 @@ li{
 	font-family: 'ambleregular';
 	color:#FFF;
 	font-size:1.2em;
-	padding:22px 25px;
+	padding:24px;
 	display: block;
 	text-transform:uppercase;
 	text-align:center;
@@ -138,6 +138,8 @@ li{
 	-moz-transition: all 0.5s ease-in-out;
 	-o-transition: all 0.5s ease-in-out;
 	transition: all 0.5s ease-in-out;
+	position: relative;
+	position: relative;
 }
 
 .menu li a:hover{
@@ -875,9 +877,6 @@ ul.dishes_list li a:hover{
 	.logo{
 		padding:50px 30px;
 	}
-	.menu li a{
-		padding:22px 15px;
-	}
 	.list_2_of_1 h3{
 		font-size:1.2em;
 	}
@@ -1221,4 +1220,24 @@ table tr:last-of-type{
     padding: 5px !important;
     color:#fff !important;
     margin: 25px 0;
+}
+.cart_img{
+	height: 46px;
+	width: 42px;
+	position: absolute;
+	top: 9px;
+	left: 15.5px
+}
+
+.cart-items-count{
+	position: relative;
+	left: 8px;
+	top: -14px;
+	font-size: 13px !important;
+	padding: 3px;
+}
+
+.h4{
+	position: absolute;
+	bottom:10px;
 }

@@ -12,13 +12,19 @@
 					</a>
 					<div class="clear"></div>
 				</div>
-				
-				<div id="menu-id" class="menu" ng-controller="navigationController">
+
+				<h3 id="menu-id" class="menu" ng-controller="navigationController">
 					<ul>
 						<li ng-class="{active:isActive('/')}"><a href="#/">Home</a></li>
 						<li ng-class="{active:isActive('/about')}"><a href="#/about">About</a></li>
 						<li ng-class="{active:isActive('/services')}"><a href="#/services">Services</a></li>
 						<li ng-class="{active:isActive('/contact')}"><a href="#/contact">Contact</a></li>
+						<li ng-class="{active:isActive('/shoppingCart')}">
+							<a href="#/shoppingCart">
+								<h4 class="cart-items-count">{{cart.getTotalCount()}}</h4>
+								<img src="images/Cart.png" class="cart_img">
+							</a>
+						</li>
 						<div class="clear"></div>
 					</ul>
 				</div>

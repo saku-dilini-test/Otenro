@@ -10,10 +10,13 @@ angular.module('animateApp')
                 $scope.allCategories = response.data.result;            
             });
     })
-    .controller('navigationController', function($scope, $location) {
+    .controller('navigationController', function($scope, $location, DataService) {
         //Set selected state of navigation
         $scope.isActive = function(route) {
             return route === $location.path();
         }
+        $scope.cart = DataService.cart;
     });
 })();
+
+
