@@ -189,16 +189,15 @@
 
                                 <td>
                                   <md-input-container class="md-container-modify">
-                                    <input ng-disabled="data.unlimited"  type="number" name="qty_{{$index}}" min="1"
-                                           ng-pattern="/^\d+(?:[.]\d{1,}|$)$/" maxlength="8" ng-model="data.quantity"
+                                    <input id ='{{$index}}'  ng-disabled="data.unlimited"  type="number" name="qty_{{$index}}" min="1"
+                                           ng-pattern="/^\d+(?:[.]\d{1}|$)$/" maxlength="8" ng-model="data.quantity"
                                             ng-required="data.unlimited === false || data.unlimited===undefined" ignore-mouse-wheel >
                                       <div ng-messages="priceAndVariantsForm['qty_' + $index].$error " ng-show="priceAndVariantsForm['qty_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid quantity</div>
                                           <div ng-message="required" class="my-message">Required!</div>
                                       </div>
-
                                   </md-input-container>
-                                      <md-checkbox ng-model="data.unlimited"  aria-label="Unlimited">
+                                  <md-checkbox ng-change = 'setValue({{$index}})' ng-disable="data.quantity.$invalid"   ng-model="data.unlimited"   aria-label="Unlimited">
                                           Unlimited
                                   </md-checkbox>
 
@@ -222,7 +221,8 @@
                     <div class="md-dialog-buttons" style="padding:0 39px">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid" class="me-default-button" ng-click="addProductVariants(selection,variantsList,3)">Next</md-button>
+                            <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid"
+                                       class="me-default-button" ng-click="addProductVariants(selection,variantsList,3)">Next</md-button>
                         </div>
                     </div>
 

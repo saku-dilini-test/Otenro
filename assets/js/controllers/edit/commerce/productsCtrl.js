@@ -9,6 +9,7 @@
         var variants;
 
         $scope.customPattern =   /^[0-9a-zA-Z ]+$/;
+        $scope.qtyPattern = '/^\d+(?:[.]\d{1,}|$)$/';
         $scope.tmpImage = [];
         $scope.product = initialData.product;
         $scope.selection = initialData.product.selection;
@@ -514,7 +515,9 @@
             else if(index === undefined){
                $scope.product.checked = true;
             }
-            else if($scope.product.variants[index].sku === "" || $scope.product.variants[index].sku === null || $scope.product.variants[index].sku === undefined ){
+            else if($scope.product.variants[index].sku === "" || 
+                    $scope.product.variants[index].sku === null || 
+                    $scope.product.variants[index].sku === undefined ){
                     $scope.product.checked = false;
             }
             else {
@@ -528,9 +531,13 @@
         }
 
 
-
-        $scope.changeName = function(){
-
+        /**
+         * @description
+         */
+        $scope.setValue = function(index){
+            if (angular.element('#'+index).val() > 0){
+                angular.element('#'+index).val(null);
+            }
         }
 
 
