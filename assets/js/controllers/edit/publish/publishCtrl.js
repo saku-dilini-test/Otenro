@@ -128,7 +128,7 @@
 
                     publishService.addGooglePlayInfo(playStoreData)
                         .success(function(data, status, headers, config) {
-                            toastr.success('Genaral info has been added', 'Saved', {
+                            toastr.success('General information has been added successfully', 'Saved', {
                                 closeButton: true
                             });
                         }).error(function(data, status, headers, config) {
@@ -229,7 +229,7 @@
                         publishService.addGooglePlayInfo(file,appStoreData,publishSplash)
                         .success(function(data, status, headers, config) {
                         disableTabs(1,true,false,true,true);
-                        toastr.success('Genaral info has been added', 'Saved', {
+                        toastr.success('General information has been added successfully', 'Saved', {
                             closeButton: true
                         });
                         }).error(function(data, status, headers, config) {
@@ -254,7 +254,7 @@
                 publishService.addGooglePlayInfo(file,appStoreData,publishSplash)
                 .success(function(data, status, headers, config) {
                 disableTabs(1,false,false,false,false);
-                toastr.success('Genaral info has been added', 'Saved', {
+                toastr.success('General information has been added successfully', 'Saved', {
                     closeButton: true
                 });
                 }).error(function(data, status, headers, config) {
@@ -270,7 +270,7 @@
             publishService.addContentRating(contentRating)
             .success(function(data){
                 disableTabs(2,false,false,false,false);
-                toastr.success('Genaral info has been added', 'Saved', {
+                toastr.success('Content Rating information has been added successfully', 'Saved', {
                     closeButton: true
                 });
             }).error(function(err){

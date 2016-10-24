@@ -257,9 +257,21 @@
             $scope.shipping.countryRestriction = country;
             shippingService.updateShippingInfo($scope.shipping)
             .success(function (result) {
-                toastr.success('Successfully Saved ', 'Saved', {
-                    closeButton: true
-                });
+                if($scope.shipping.shippingOption == "Flat Rate"){
+                    toastr.success('Flat rate option has been added successfully ', 'Saved', {
+                        closeButton: true
+                    });
+                }
+                else if ($scope.shipping.shippingOption == "Weight Base"){
+                    toastr.success('Weight Based Option has been added successfully ', 'Saved', {
+                        closeButton: true
+                    });
+                }
+                else{
+                    toastr.success('Pick up Option has been added successfully ', 'Saved', {
+                        closeButton: true
+                    });
+                }
                 $scope.shipping = null;
                 // This part should change according requirement
                 $scope.backToShippingView();

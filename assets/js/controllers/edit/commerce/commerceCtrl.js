@@ -488,7 +488,7 @@
                 });
 
                 commerceService.saveStoreSettings(storeSettings).success(function (data) {
-                    toastr.success('Successfully Added', {
+                    toastr.success('Store Setting Details has been added successfully', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
@@ -530,7 +530,7 @@
                     storeSettings.appId = $rootScope.appId;
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
-                            toastr.success('Successfully save About Us Data ..... !', 'Awsome!', {
+                            toastr.success('Store Setting Details has been added successfully', 'Awsome!', {
                                 closeButton: true
                             });
                             $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
@@ -600,7 +600,7 @@
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
-                    toastr.success(' Store Settings has been added.!', {
+                    toastr.success('Store Setting Details has been added successfully', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
@@ -838,7 +838,7 @@
                 } else {
                     commerceService.sendTestEmail(sendType)
                         .success(function (data) {
-                            toastr.success('Test Email has been Sent ', 'Success', {
+                            toastr.success('Test Email has been send ', 'Success', {
                                 closeButton: true
                             });
 
@@ -1022,7 +1022,7 @@
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
-                        toastr.success('Basic Info saved successfully', 'Awsome!', {closeButton: true});
+                        toastr.success('Store Setting Details has been added successfully', 'Awsome!', {closeButton: true});
                           $mdDialog.hide();
                     }).error(function(data, status, headers, config) {
                     toastr.error('Basic info saving error', { closeButton: true});
