@@ -31,6 +31,11 @@ a{
 }
 
 
-.clean-menu .item {
+.made-easy-navigationBarColor .item {
     border-style:unset;
+}
+
+.made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
+    background:transparent;
+    border: unset;
 }

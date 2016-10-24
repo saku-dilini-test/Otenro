@@ -68,7 +68,7 @@ module.exports = {
             isApplyStyle = {
                 color : {
                     backgroundColor: true,
-                    navigationColor: false,
+                    navigationColor: true,
                     footerColor: false
                 },
                 typography : {

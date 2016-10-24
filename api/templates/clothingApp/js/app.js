@@ -233,6 +233,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
   })
   .state('app.cart', {
     url: '/cart',
+    cache:false,
     views: {
       'menuContent': {
         templateUrl: 'templates/cart.html',

@@ -17,7 +17,7 @@ ion-content{
     background-size: cover;
 }
 .made-easy-navigationBarColor{
-  background-color: #312626;
+  background-color: #fff;
 }
 .made-easy-footerColor{
   background-color: #4e6dde;
@@ -27,6 +27,8 @@ ion-content{
   font-family: sans-serif;
   font-size : 4vh;
   font-weight: bolder;
+  text-transform: capitalize;
+  text-align:center;
 }
 .made-easy-content-font{
   color:#787878;
@@ -48,54 +50,17 @@ ion-content{
   cursor: url(../img/cursor.cur), auto;
 }
 
-/* ----- Second Navigation Page ----- */
-.made-easy-second-navigation {}
-.made-easy-second-navigation .header-image {
-    width: 100%;
-    height: auto;
-}
-
-/* ----- Third Navigation Page ----- */
-.made-easy-third-navigation {}
-.made-easy-third-navigation .header-image {
-    width: 100%;
-    height: auto;
-}
-
 /* ----- View Page ----- */
-.made-easy-view {}
-.made-easy-view .item-name {
-    text-align: center;
-    color: #006666;
-}
+
 .made-easy-view .item-buy-quantity{
     width: 50px;
+    border-bottom: 1px solid #ccc;
 }
 .made-easy-view .item-error-message{
     color: red;
     font-size: 70%;
 }
 
-
-/* ----- Terms Page ----- */
-.made-easy-terms {}
-.made-easy-terms .content {
-    text-align: center;
-}
-
-/*------- Button Setting ------- */
-.made-easy-button-create-account {
-    background-color: #FFBF0A;
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    cursor: url(../img/cursor.cur), auto;
-    border-radius:4px;
-    width: 94%;
-    margin: 10px;
-}
 
 
 /** ----------- End Custom update Css Class ---------- **/
