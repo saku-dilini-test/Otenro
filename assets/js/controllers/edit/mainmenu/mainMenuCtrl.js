@@ -60,7 +60,7 @@
                         im[0] = $scope.picFile;
                         $scope.tmpImage = im;
                         $scope.mainImg = img;
-                        toastr.success('added Image', 'message', {
+                        toastr.success('Image has been uploaded successfully', 'message', {
                            closeButton: true
                         });
                     }
@@ -246,7 +246,7 @@
                         +'/templates/'+$rootScope.appId+'' +
                         '#/app/home/'+data.id+'?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                    toastr.success("Successfully added new Category", 'Message', {closeButton: true});
+                    toastr.success("New category has been added successfully", 'Message', {closeButton: true});
                     $mdDialog.hide();
                     mainMenuService.showMainMenuDialog();
                 }).error(function(err) {
@@ -329,7 +329,7 @@
                             + '/templates/' + $rootScope.appId + '' +
                             '#/app/home/' + data.id + '?' + new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        toastr.success("Successfully added new Category", 'Message', {closeButton: true});
+                        toastr.success("New category has been added successfully", 'Message', {closeButton: true});
                         $mdDialog.hide();
                         mainMenuService.showMainMenuDialog();
                     }).error(function (err) {
@@ -345,7 +345,7 @@
                             + '/templates/' + $rootScope.appId + '' +
                             '#/app/home/' + data.id + '?' + new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        toastr.success("Successfully added new Category", 'Message', {closeButton: true});
+                        toastr.success("New category has been added successfully", 'Message', {closeButton: true});
                         $mdDialog.hide();
                         mainMenuService.showMainMenuDialog();
                     }).error(function (err) {

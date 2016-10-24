@@ -35,7 +35,7 @@ module.exports = {
                 if(data == ''){
                     ApplicationTax.create(updateData).exec(function (err, result) {
                          if (err) return res.send(err);
-                         return res.send(200, {message: 'Successfully Saved'});
+                         return res.send(200, {message: 'Tax Option has been added successfully'});
                     });
                 }
                 else{
