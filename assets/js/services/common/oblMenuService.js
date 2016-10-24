@@ -4,12 +4,12 @@
 (function() {
     angular.module('appEdit').service('oblMenuService', ['stylesService', 'contactUsService', 'commerceService',
         'shippingService','taxService','articleService','mainMenuService', 'currencyService', 'publishService',
-        'engageService', 'logoAndTittleService','comingSoonService'
+        'engageService', 'logoAndTittleService','ipgService','comingSoonService'
         , oblMenuService]);
 
     function oblMenuService(stylesService, contactUsService, commerceService,shippingService,
                             taxService,articleService ,mainMenuService,currencyService, publishService,
-                            engageService, logoAndTittleService,comingSoonService) {
+                            engageService, logoAndTittleService,ipgService,comingSoonService) {
         return {
             setOblMenuService : function(data) {
 
@@ -54,6 +54,9 @@
                         }
                         if (ctrlFun == 'showComingSoonDialog'){
                             return comingSoonService.showComingSoonDialog();
+                        }
+                        if (ctrlFun == 'showIPGDialog'){
+                            return ipgService.showIPGDialog();
                         }
                     }
 

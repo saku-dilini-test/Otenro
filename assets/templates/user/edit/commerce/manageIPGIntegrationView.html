@@ -1,0 +1,40 @@
+<md-dialog aria-label="Taxes">
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>IPG Integration</h1>
+        </div>
+        <div class="md-dialog-main clearfix">
+            <fieldset>
+                <label>Paypal</label>
+                <div class="on-off-switch">
+                    <input type="checkbox" ng-model="IPGSettings.paypalEnable" name="on-off-switch" class="on-off-switch-checkbox" id="on-off-switch-4">
+                    <label class="input-shadow-border on-off-switch-label" for="on-off-switch-4">
+                        <span class="on-off-switch-inner"></span>
+                        <span class="on-off-switch-switch"></span>
+                    </label>
+                </div>
+                <input class="input-shadow-border" type="text" ng-model="IPGSettings.paypalKey"
+                       name="number" required />
+            </fieldset>
+            <fieldset>
+                <label>Stripe</label>
+                <div class="on-off-switch">
+                    <input type="checkbox" ng-model="IPGSettings.stripeEnable" name="on-off-switch" class="on-off-switch-checkbox" id="on-off-switch-3">
+                    <label class="input-shadow-border on-off-switch-label" for="on-off-switch-3">
+                        <span class="on-off-switch-inner"></span>
+                        <span class="on-off-switch-switch"></span>
+                    </label>
+                </div>
+                <input class="input-shadow-border" type="text" ng-model="IPGSettings.stripeKey"
+                       name="number" required />
+            </fieldset>
+
+        </div>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
+                <md-button class="me-default-button" ng-click="saveIGPSettings(IPGSettings)">Save</md-button>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

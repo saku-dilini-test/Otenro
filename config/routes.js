@@ -293,8 +293,13 @@ module.exports.routes = {
      'POST  /edit/getPublishDetails': 'technicalSupport/TechnicalSupportController.getPublishDetails',
      'GET    /edit/getPushConfigDetails': 'technicalSupport/TechnicalSupportController.getPushConfigDetails',
      'POST   /edit/savePushConfigDetails': 'technicalSupport/TechnicalSupportController.savePushConfigDetails',
-     'POST   /edit/changePublishStatus': 'technicalSupport/TechnicalSupportController.changePublishStatus'
+     'POST   /edit/changePublishStatus': 'technicalSupport/TechnicalSupportController.changePublishStatus',
 
+    /**
+     * IPG Controller
+     */
+    'GET /edit/getIPGInfo': 'edit/commerce/IPGController.getIPGInfo',
+    'POST /edit/updateIPGInfo': 'edit/commerce/IPGController.updateIPGInfo'
 
    
 
