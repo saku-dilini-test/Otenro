@@ -12,7 +12,7 @@
                 return $mdDialog.show({
                     controller: 'ProductCtrl',
                     templateUrl: 'user/edit/commerce/addPro.html',
-                    clickOutsideToClose: true,
+                    clickOutsideToClose: false,
                     resolve:{
                         productService:'productService',
                         initialData:['productService','$q', function(productService,$q){
