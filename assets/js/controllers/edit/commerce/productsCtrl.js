@@ -341,6 +341,9 @@
                 angular.element('#fileInput').val(null);
                 $scope.picFile = null;
                 $scope.myImage=null;
+                toastr.success('Image has been uploaded successfully', 'Awesome', {
+                    closeButton: true
+                });
             }
             else if(angular.element('#fileInput').val() == ''){
                 toastr.error('Please choose an image to upload', 'Warning', {
