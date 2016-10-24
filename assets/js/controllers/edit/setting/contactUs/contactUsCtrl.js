@@ -8,38 +8,13 @@
     function contactUsCtrl($scope,$rootScope,$mdDialog,toastr, contactUsService,uiGmapGoogleMapApi,commerceService,$auth,
                             ME_APP_SERVER,mySharedService) {
 
-
-
         // --/-- Characters length config
         $scope.maxBasicInfoAddress = 20;
-<<<<<<< .merge_file_C7SNyy
-<<<<<<< .merge_file_d3x6p9
-<<<<<<< .merge_file_QxSoko
-        $scope.maxPrivacyPolicy = 100;
-        $scope.maxReturnPolicy = 100;
-        $scope.maxTermsAndCondition = 100;
-        $scope.maxAboutUsHeader = 20;
-        $scope.maxAboutUsContent = 100;
-
-
-
-=======
-=======
->>>>>>> .merge_file_pJsKi9
-=======
->>>>>>> .merge_file_n9Y4ny
         $scope.maxReturnPolicy = 200;
         $scope.maxTermsAndCondition = 200;
         $scope.maxPrivacyPolicy = 200;
         $scope.maxAboutUsHeader = 20;
         $scope.maxAboutUsContent = 200;
-<<<<<<< .merge_file_C7SNyy
-<<<<<<< .merge_file_d3x6p9
->>>>>>> .merge_file_x9qPao
-=======
->>>>>>> .merge_file_pJsKi9
-=======
->>>>>>> .merge_file_n9Y4ny
         $scope.userId = $auth.getPayload().id;
         
         // --- Config ----
