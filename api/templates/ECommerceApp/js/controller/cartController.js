@@ -59,6 +59,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                     total += (amount);
                 }
                 var tax = total * $scope.tax/100;
+                $scope.taxTotal = total * $scope.tax/100;
                 if(tax > 0){
                     total = total + tax;
                     $rootScope.cart.totalPrice = total;
@@ -143,7 +144,8 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                                                     customerName: deliverDetails.name,
                                                     deliveryAddress: deliverDetails.address,
                                                     telNumber: deliverDetails.number,
-                                                    tax :   $scope.tax
+                                                    tax :   $scope.taxTotal,
+                                                    shippingOpt : $scope.shipping.opt
                                                 };
 
                                                 $http.post(constants.SERVER_URL + "/templatesOrder/saveOrder", $scope.details)
