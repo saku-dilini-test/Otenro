@@ -264,46 +264,53 @@
                 return $http.post(SERVER_URL + 'edit/updateOrders', data)
             },
             showDeleteAppDialog : function () {
-            return $mdDialog.show({
-                controllerAs: 'dialogCtrl',
-                controller: function($mdDialog,appEditResource,toastr,$rootScope){
-                    this.confirm = function click(){
-                        appEditResource.deleteSelectedApp({appId:$rootScope.appId}).success(function(data) {
-                            toastr.success('Successfully deleted ', 'Done!', {
-                                closeButton: true
-                            });
-                            $mdDialog.hide();
-                        }).error(function(err) {
-                            toastr.error('Cant Build', 'Error', {
-                                closeButton: true
-                            });
-                        });
-                     },
-                     this.cancel = function click(){
-                        $mdDialog.hide();
-                     }
-                },
-                template:'<md-dialog aria-label="Edit Child Menu">'+
-                '<md-content >' +
-                '<div class="md-dialog-header">' +
-                '<h1>Deleting Application </h1>' +
-                '</div>' +
-                '<br>'+
-                '<div style="text-align:center">' +
-                '<lable>Are you sure, you want to delete this Application ?</lable>' +
-                '</div>' +
-                '<br><br>' +
-                '<div class="md-dialog-buttons">'+
-                '<div class="inner-section">'+
-                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">No</md-button>'+
-                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Yes</md-button>'+
-                '</div>'+
-                '</div>' +
-                '</md-content>' +
-                '</md-dialog>'
-            })
-        }
+                return $mdDialog.show({
+                    controllerAs: 'dialogCtrl',
+                    controller: function($mdDialog,appEditResource,toastr,$rootScope,$state){
+                        this.confirm = function click(){
+                            appEditResource.deleteSelectedApp({appId:$rootScope.appId}).success(function(data) {
+                                if (data.massage){
+                                    toastr.success('You cant delete this app because this app already have send for publishing ', 'Sorry!', {
+                                        closeButton: true
+                                    });
+                                }else {
+                                    toastr.success('Successfully deleted ', 'Done!', {
+                                        closeButton: true
+                                    });
+                                    $state.go('user.dashboard');
+                                }
+                                $mdDialog.hide();
 
+                            }).error(function(err) {
+                                toastr.error('Cant Build', 'Error', {
+                                    closeButton: true
+                                });
+                            });
+                        },
+                            this.cancel = function click(){
+                                $mdDialog.hide();
+                            }
+                    },
+                    template:'<md-dialog aria-label="Edit Child Menu">'+
+                    '<md-content >' +
+                    '<div class="md-dialog-header">' +
+                    '<h1>Deleting Application </h1>' +
+                    '</div>' +
+                    '<br>'+
+                    '<div style="text-align:center">' +
+                    '<lable>Are you sure, you want to delete this Application ?</lable>' +
+                    '</div>' +
+                    '<br><br>' +
+                    '<div class="md-dialog-buttons">'+
+                    '<div class="inner-section">'+
+                    '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">No</md-button>'+
+                    '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Yes</md-button>'+
+                    '</div>'+
+                    '</div>' +
+                    '</md-content>' +
+                    '</md-dialog>'
+                })
+            }
         };
     }
 })();
