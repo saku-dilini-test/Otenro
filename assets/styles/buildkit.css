@@ -1826,10 +1826,21 @@ button[disabled]{
 }
 
 .product-name{
-    margin: auto auto 18px;
-    font-size: inherit;
-    /* border-bottom: 1px solid rgba(0,0,0,0.12); */
-    padding-bottom: 4px;
+     margin: 0 0 -3px;
+     font-size: inherit;
+     border-bottom: 1px solid rgba(0,0,0,0.12);
+     padding: 2px 0px 4px 0;
+}
+
+.product-sku{
+    padding-left: 10px;
+    letter-spacing: 2px;
+    margin-right: -10px;
+}
+
+.product-quantity {
+    margin: 0;
+    padding-top: 38px;
 }
 
 .add-icon{

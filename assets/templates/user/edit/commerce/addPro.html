@@ -141,9 +141,10 @@
                             <tr ng-repeat="data in product.variants">
                                 <td ng-model="data.name"><p class="product-name">{{data.name}}</p></td>
                                 <td>
-                                    <md-input-container style="width: 90px;">
+                                    <md-input-container style="width: 80px;">
                                         <input ng-blur="validateInputValue(data.sku,'sku')"  maxlength="10"
                                                required
+                                               class="product-sku"
                                                name="sku_{{$index}}"
                                                ng-model="data.sku"
                                                ng-pattern="/^\d*[1-9]\d*$/"
@@ -168,7 +169,9 @@
                                         <!--</div>-->
                                     <!--</md-input-container>-->
                                   <md-input-container class="md-container-modify">
-                                    <input ng-blur="validateInputValue(data.size,'size')" class="product-name-column-input" name="size_{{$index}}" maxlength="8"
+                                    <input ng-blur="validateInputValue(data.size,'size')"
+                                           type="text"
+                                           class="product-name-column-input" name="size_{{$index}}" maxlength="8"
                                            ng-pattern="customPattern" ng-model="data.size" required>
                                       <div ng-messages="priceAndVariantsForm['size_' + $index].$error " ng-show="priceAndVariantsForm['size_' + $index].$dirty">
                                           <div ng-message="pattern" class="my-message">Invalid value</div>
@@ -178,7 +181,8 @@
                                 </td>
                                 <td>
                                   <md-input-container class="md-container-modify">
-                                    <input type="number"  min="0.00" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" ng-model="data.price" required ignore-mouse-wheel>
+                                    <input type="number"
+                                           min="0.00" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" ng-model="data.price" required ignore-mouse-wheel>
                                       <div ng-messages="priceAndVariantsForm['price_' + $index].$error" ng-show="priceAndVariantsForm['price_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid price</div>
                                           <div ng-message="required" class="my-message">Required!</div>
