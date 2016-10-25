@@ -54,8 +54,8 @@ module.exports = {
       templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
-      menuTitle  : 'Featured',
-      menuFunction : 'commerce.showComingSoonDialog',
+      menuTitle  : 'Categories',
+      menuFunction : 'article.categories',
       orderId : "3",
       menuButtonId : '1003'
     },
@@ -63,7 +63,7 @@ module.exports = {
       templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
-      menuTitle  : 'Secondary',
+      menuTitle  : 'Featured',
       menuFunction : 'commerce.showComingSoonDialog',
       orderId : "4",
       menuButtonId : '1004'
@@ -72,10 +72,19 @@ module.exports = {
       templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
-      menuTitle  : 'Ads',
+      menuTitle  : 'Secondary',
       menuFunction : 'commerce.showComingSoonDialog',
       orderId : "5",
-      menuButtonId : '1004'
+      menuButtonId : '1005'
+    },
+    {
+      templateCategoryId : TemplateCategoryDetails.Media.ID,
+      templateId : '1',
+      menuType : 'MenuButton',
+      menuTitle  : 'Ads',
+      menuFunction : 'commerce.showComingSoonDialog',
+      orderId : "6",
+      menuButtonId : '1006'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Media.ID,
@@ -83,8 +92,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Subscriptions',
       menuFunction : 'commerce.showComingSoonDialog',
-      orderId : "6",
-      menuButtonId : '1005'
+      orderId : "7",
+      menuButtonId : '1007'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Media.ID,
@@ -92,8 +101,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'View Controls',
       menuFunction : 'commerce.showComingSoonDialog',
-      orderId : "7",
-      menuButtonId : '1006'
+      orderId : "8",
+      menuButtonId : '1008'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Media.ID,
@@ -101,8 +110,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Payment Activities',
       menuFunction : 'commerce.showComingSoonDialog',
-      orderId : "8",
-      menuButtonId : '1007'
+      orderId : "9",
+      menuButtonId : '1009'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Media.ID,
@@ -110,8 +119,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'IPG Integration',
       menuFunction : 'commerce.showComingSoonDialog',
-      orderId : "9",
-      menuButtonId : '1008'
+      orderId : "10",
+      menuButtonId : '1010'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Media.ID,
@@ -119,8 +128,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Communication',
       menuFunction : 'commerce.showComingSoonDialog',
-      orderId : "10",
-      menuButtonId : '1009'
+      orderId : "11",
+      menuButtonId : '1011'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Media.ID,
@@ -128,8 +137,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Site Settings',
       menuFunction : 'commerce.showComingSoonDialog',
-      orderId : "11",
-      menuButtonId : '1010'
+      orderId : "12",
+      menuButtonId : '1012'
     },
 
     // data for business category
@@ -139,8 +148,17 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Add a product',
       menuFunction : 'products.showAddProductsDialog',
-      orderId : "12",
+      orderId : "13",
       menuButtonId : '1501'
+    },
+    {
+      templateCategoryId : TemplateCategoryDetails.Business.ID,
+      templateId : '2',
+      menuType : 'MenuButton',
+      menuTitle  : 'Categories',
+      menuFunction : 'commerce.showAddCategoriesDialog',
+      orderId : "14",
+      menuButtonId : '1502'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
@@ -148,8 +166,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Orders',
       menuFunction : 'commerce.showOrderDialog',
-      orderId : "13",
-      menuButtonId : '1502'
+      orderId : "15",
+      menuButtonId : '1503'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
@@ -157,8 +175,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Inventory',
       menuFunction : 'inventory.showInventoryDialog',
-      orderId : "14",
-      menuButtonId : '1503'
+      orderId : "16",
+      menuButtonId : '1504'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
@@ -166,8 +184,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Shipping',
       menuFunction : 'commerce.showShippingDialog',
-      orderId : "15",
-      menuButtonId : '1504'
+      orderId : "17",
+      menuButtonId : '1505'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
@@ -175,8 +193,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Taxes',
       menuFunction : 'tax.showTaxesDialog',
-      orderId : "16",
-      menuButtonId : '1505'
+      orderId : "18",
+      menuButtonId : '1506'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
@@ -184,8 +202,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'E-mail Settings',
       menuFunction : 'commerce.showEmailSettingsDialog',
-      orderId : "17",
-      menuButtonId : '1506'
+      orderId : "19",
+      menuButtonId : '1507'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
@@ -193,8 +211,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Store Settings',
       menuFunction : 'commerce.showStoreSettingsDialog',
-      orderId : "18",
-      menuButtonId : '1507'
+      orderId : "20",
+      menuButtonId : '1508'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
@@ -202,8 +220,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Payment Activities',
       menuFunction : 'commerce.showComingSoonDialog',
-      orderId : "19",
-      menuButtonId : '1508'
+      orderId : "21",
+      menuButtonId : '1509'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
@@ -211,8 +229,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'IPG Integration',
       menuFunction : 'commerce.showIPGDialog',
-      orderId : "20",
-      menuButtonId : '1509'
+      orderId : "22",
+      menuButtonId : '1510'
     },
     {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
@@ -220,8 +238,8 @@ module.exports = {
       menuType : 'MenuButton',
       menuTitle  : 'Delete',
       menuFunction : 'commerce.showDeleteAppDialog',
-      orderId : "21",
-      menuButtonId : '1510'
+      orderId : "23",
+      menuButtonId : '1511'
     }
 
   ]

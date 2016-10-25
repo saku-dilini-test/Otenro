@@ -88,8 +88,8 @@
                     return stylesService.showStyleDialog(clickTitle);
                 if ('logoAndTitle' == clickTitle)
                     return logoAndTittleService.showLogoAndTittleDialog(clickTitle);
-                if ('navigation' == clickTitle)
-                    return mainMenuService.showMainMenuDialog(clickTitle);
+                /*if ('navigation' == clickTitle)
+                    return mainMenuService.showMainMenuDialog(clickTitle);*/
                 if ('products' == clickTitle)
                     return commerceService.showAddProductsDialog(clickTitle);
                 if ('siteSettings' == clickTitle)

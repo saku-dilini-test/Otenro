@@ -26,6 +26,8 @@
                         if(ctrlFun == 'previewArticles'){
                             return articleService.showPreviewArticslesDilog(ctrlFun);
                         }
+                        if (ctrlFun=='categories') {
+                        } return mainMenuService.showMainMenuDialog(ctrlFun);
                     }
 
 
@@ -36,6 +38,10 @@
                     }
 
                     if(ctrl == 'commerce') {
+                        
+                        if (ctrlFun=='showAddCategoriesDialog') {
+                        } return mainMenuService.showMainMenuDialog(ctrlFun);
+                        
                         if (ctrlFun == 'showOrderDialog') {
                             return commerceService.showOrderDialog();
                         }
