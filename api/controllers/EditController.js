@@ -43,8 +43,33 @@ module.exports = {
                 if (app.status=='DRAFT'){
                     Application.destroy(searchApp).exec(function (err, app) {
                         if (err) return res.negotiate(err);
+
+                        var resourcesPath  = [];
+                        var applicationPath = config.APP_FILE_SERVER + req.param('userId') + '/templates/' + appId + '/';
+                        var appPath = config.APP_FILE_SERVER + req.param('userId') + '/templates/' + appId + '/';
+
+                        resourcesPath.push(applicationPath);
+                        resourcesPath.push(appPath);
+
+                        resourcesPath.forEach(function(path){
+                            fs.stat(path, function (err, fileStat) {
+                                if (err) {
+                                    if (err.code == 'ENOENT') {
+                                        console.log('Does not exist.');
+                                    }
+                                } else {
+                                    if (fileStat.isFile()) {
+                                        fs.unlinkSync(path);
+                                    } else if (fileStat.isDirectory()) {
+                                        console.log('Directory found.');
+                                    }
+                                }
+                            });
+                        });
                         res.json(app);
                     });
+                }else {
+                    res.json({massage:"can not delete"});
                 }
             }
         });

@@ -8,7 +8,7 @@
         AppEditAreaCtrl]);
 
     function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
-    toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore){
+                             toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore){
 
         $rootScope.bodyClass = 'appEdit';
 
@@ -107,6 +107,8 @@
             })
 
         };
+
+        
 
     }
 })();
