@@ -145,7 +145,8 @@
                             <label>Header</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <div class="custom-trix">
-                                <trix-editor style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>
+                                <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="emailHF.header" required></text-angular>
+                                <!--<trix-editor style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
                             </div>
                             <!--<div class="file-upload-wrapper clearfix">-->
                                 <!--<p class="file-upload-msg">Upload your product images</p>-->
@@ -177,7 +178,8 @@
                             <label>footer</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <div class="custom-trix">
-                                <trix-editor style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.footer"></trix-editor>
+                                <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="emailHF.footer" required></text-angular>
+                                <!--<trix-editor style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.footer"></trix-editor>-->
                             </div>
                             <div class="email-image-upload uploaded-section clearfix">
                                 <div class="uploaded-new-image3">
@@ -220,7 +222,8 @@
                             <label>order confirmed email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <div class="custom-trix">
-                                <trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="OConfirm.orderConfirmedEmail" required></trix-editor>
+                                <text-angular rows="4" ng-model="OConfirm.orderConfirmedEmail" class="input-shadow-border" required></text-angular>
+                                <!--<trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="OConfirm.orderConfirmedEmail" required></trix-editor>-->
                             </div>
                         </fieldset>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order confirm')">send test email</md-button>
@@ -252,7 +255,8 @@
                             <label>order fulfilled email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <div class="custom-trix">
-                                <trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="Ofulfilled.orderFulfilledEmail" required></trix-editor>
+                                <text-angular rows="4" ng-model="Ofulfilled.orderFulfilledEmail" class="input-shadow-border" required></text-angular>
+                                <!--<trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="Ofulfilled.orderFulfilledEmail" required></trix-editor>-->
                             </div>
                         </fieldset>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order Fulfilled')">send test email</md-button>
@@ -283,7 +287,8 @@
                             <label>order refunded email</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
                             <div class="custom-trix">
-                                <trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="ORefund.orderRefundEmail" required></trix-editor>
+                                <text-angular rows="4" ng-model="ORefund.orderRefundEmail" class="input-shadow-border" required></text-angular>
+                                <!--<trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="ORefund.orderRefundEmail" required></trix-editor>-->
                             </div>
                         </fieldset>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order Refund')">send test email</md-button>

@@ -31,11 +31,23 @@ module.exports = function(grunt) {
           dest: 'assets/vendor/fonts'
         },
         {
-				  expand: true,
-				  cwd: './assets',
-				  src: ['**/*.!(coffee|less)'],
-				  dest: '.tmp/public'
-			  }
+          expand: true,
+          cwd: './bower_components/font-awesome',
+          src: ['fonts/*'],
+          dest: 'assets/vendor'
+        },
+        {
+          expand: true,
+          cwd: './bower_components/font-awesome/css',
+          src: ['font-awesome.css'],
+          dest: 'assets/vendor/font-awesome'
+        },
+        {
+		  expand: true,
+		  cwd: './assets',
+		  src: ['**/*.!(coffee|less)'],
+		  dest: '.tmp/public'
+		}
       ]
 		},
 		build: {

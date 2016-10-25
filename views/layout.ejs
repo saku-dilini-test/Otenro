@@ -29,6 +29,7 @@
     -->
 
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
+  <link data-require="font-awesome@*" data-semver="4.2.0" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 
    <!--STYLES-->
    <link rel="stylesheet" href="/vendor/adm-dtp/ADM-dateTimePicker.min.css">
@@ -50,7 +51,7 @@
    <link rel="stylesheet" href="/vendor/ngCroppie/unminified/ng-croppie.css">
    <link rel="stylesheet" href="/vendor/ngDialog/ngDialog-theme-default.css">
    <link rel="stylesheet" href="/vendor/ngDialog/ngDialog.css">
-   <link rel="stylesheet" href="/vendor/trix/trix.css">
+   <link rel="stylesheet" href="/vendor/textAngular/textAngular.css">
    <link rel="stylesheet" href="/styles/ext-modules/oblFrameWork/oblFramework.css">
    <link rel="stylesheet" href="/styles/ext-modules/oblDashboard/oblDashboard.css">
    <link rel="stylesheet" href="/styles/widgets/appBox.css">
@@ -102,6 +103,8 @@
     <script src="/vendor/jquery/jquery.js"></script>
     <script src="/vendor/angular/angular.js"></script>
     <script src="/vendor/bootstrap/bootstrap.js"></script>
+    <script src="/vendor/rangy/rangy-core.js"></script>
+    <script src="/vendor/rangy/rangy-classapplier.js"></script>
     <script src="/vendor/adm-dtp/ADM-dateTimePicker.min.js"></script>
     <script src="/vendor/angular-animate/angular-animate.js"></script>
     <script src="/vendor/angular-aria/angular-aria.js"></script>
@@ -123,7 +126,6 @@
     <script src="/vendor/angular-sanitize/angular-sanitize.js"></script>
     <script src="/vendor/angular-toastr/angular-toastr.tpls.js"></script>
     <script src="/vendor/angular-translate/angular-translate.js"></script>
-    <script src="/vendor/angular-trix/angular-trix.js"></script>
     <script src="/vendor/angular-ui-grid/ui-grid.js"></script>
     <script src="/vendor/angular-ui-grid/ui-grid.min.js"></script>
     <script src="/vendor/angular-ui-mask/mask.js"></script>
@@ -141,9 +143,15 @@
     <script src="/vendor/ngCroppie/unminified/ng-croppie.js"></script>
     <script src="/vendor/ngDialog/ngDialog.js"></script>
     <script src="/vendor/ngRepeatReorder/ngRepeatReorder.js"></script>
+    <script src="/vendor/rangy/rangy-highlighter.js"></script>
+    <script src="/vendor/rangy/rangy-selectionsaverestore.js"></script>
+    <script src="/vendor/rangy/rangy-serializer.js"></script>
+    <script src="/vendor/rangy/rangy-textrange.js"></script>
     <script src="/vendor/satellizer/satellizer.js"></script>
+    <script src="/vendor/textAngular/textAngular-sanitize.js"></script>
+    <script src="/vendor/textAngular/textAngular.js"></script>
+    <script src="/vendor/textAngular/textAngularSetup.js"></script>
     <script src="/vendor/tinycolor/tinycolor.js"></script>
-    <script src="/vendor/trix/trix.js"></script>
     <script src="/vendor/tweenlite/TweenLite.min.js"></script>
     <script src="/js/dependencies/lodash.min.js"></script>
     <script src="/js/dependencies/angular-google-maps.min.js"></script>
@@ -177,6 +185,7 @@
     <script src="/js/controllers/edit/commerce/commerceCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/currencyCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/inventoryCtrl.js"></script>
+    <script src="/js/controllers/edit/commerce/ipgCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/proEditImageCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/productsCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/shippingCtrl.js"></script>
@@ -236,6 +245,7 @@
     <script src="/js/services/edit/article/articleService.js"></script>
     <script src="/js/services/edit/commerce/commerceService.js"></script>
     <script src="/js/services/edit/commerce/currencyService.js"></script>
+    <script src="/js/services/edit/commerce/ipgService.js"></script>
     <script src="/js/services/edit/commerce/productService.js"></script>
     <script src="/js/services/edit/commerce/shippingService.js"></script>
     <script src="/js/services/edit/commerce/taxService.js"></script>

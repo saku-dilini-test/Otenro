@@ -39,7 +39,6 @@ angular.module('app', [
   'uiGmapgoogle-maps',
   'angularInlineEdit',
   'ADM-dateTimePicker',
-  'angularTrix',
   'angularUtils.directives.dirPagination',
   'ui.grid',
   'ui.grid.selection',
@@ -48,7 +47,8 @@ angular.module('app', [
   'ngCsv',
   'ngImgCrop',
   'angular-loading-bar',
-  'disableAll'
+  'disableAll',
+  'textAngular'
 
 
 ]).run(function($rootScope, $state, $auth,Auth,Permission) {

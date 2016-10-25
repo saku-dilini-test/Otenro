@@ -51,6 +51,8 @@ var jsFilesToInject = [
   'vendor/angular/angular.js',
   'vendor/bootstrap/bootstrap.js',
   'vendor/momentjs/moment.js',
+  'vendor/rangy/rangy-core.js',
+  'vendor/rangy/rangy-classapplier.js',
   'vendor/**/*.js',
 
   // Dependencies like jQuery, or Angular are brought in here
