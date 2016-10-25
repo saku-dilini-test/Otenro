@@ -81,16 +81,16 @@ ion-side-menu-content{
 .made-easy-header-font{
   color:#444444;
   font-family: sans-serif;
-  font-size: 14px;
+  font-size: 3.5vh;
   font-weight: bolder;
   text-align:center;
+  letter-spacing:1px;
 }
 .made-easy-content-font{
-  color:#73A3B9;
-  font-family: Ubuntu Light;
-  font-size: 12px;
+  color:#2c3f48;
+  font-family: sans-serif;
+  font-size: 3vh;
   font-weight: lighter;
-  text-align: center;
 }
 .made-easy-footer-font{
   color:#4e6dde;
@@ -138,32 +138,13 @@ ion-side-menu-content{
     color: #006666;
 }
 .made-easy-view .item-buy{
-    width: 100%;
+    width: 90%;
+    border: unset;
+    border-bottom: 1px solid #ccc;
 }
 .made-easy-view .item-error-message{
     color: red;
     font-size: 70%;
-}
-
-/* ----- Contact Us Page ----- */
-.made-easy-contactUs {}
-.made-easy-contactUs .header{}
-.made-easy-contactUs .header .header-image {
-    width: 100%;
-    height: auto;
-    cursor: url(../img/cursor.cur), auto;
-}
-.made-easy-contactUs .content {
-    padding: 1em;
-    letter-spacing:1px;
-    cursor: url(../img/cursor.cur), auto;
-}
-.made-easy-contactUs .content .last {
-    margin-bottom: 20px;
-    cursor: url(../img/cursor.cur), auto;
-}
-.made-easy-contactUs .bottom {
-    margin-top: 25%;
 }
 
 /* ----- About Us Page ----- */

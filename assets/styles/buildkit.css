@@ -2079,6 +2079,12 @@ trix-toolbar .button_group input[type=button]{
     text-transform: uppercase;
     letter-spacing: 1px;
     background: #e9e9e9;
+    font-weight:inherit;
+}
+
+li#menuitem-9 {
+    font-weight: 800;
+    background: darkgray;
 }
 
 .custom-grid .ui-grid-menu .ui-grid-menu-inner ul li:not(:last-child)>button{
@@ -2113,11 +2119,11 @@ trix-toolbar .button_group input[type=button]{
 .table-ordered-data .total td{
     font-weight: 800;
     color: #4a4a4a;
-    font-size:14px;
 }
 
 h7 {
-    font-size: 10px;
+    font-size: 11px;
+    color: #9f9f9f;
 }
 
 md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {

@@ -43,7 +43,7 @@ module.exports = {
             type: 'date'
         },
         tax: {
-            type:'integer'
+            type:'string'
         },
         shippingOpt: {
             type:'string'
