@@ -38,10 +38,7 @@
                     }
 
                     if(ctrl == 'commerce') {
-                        
-                        if (ctrlFun=='showAddCategoriesDialog') {
-                        } return mainMenuService.showMainMenuDialog(ctrlFun);
-                        
+
                         if (ctrlFun == 'showOrderDialog') {
                             return commerceService.showOrderDialog();
                         }
@@ -64,6 +61,9 @@
                         if (ctrlFun == 'showIPGDialog'){
                             return ipgService.showIPGDialog();
                         }
+                        if (ctrlFun == 'showAddCategoriesDialog') {
+                        } return mainMenuService.showMainMenuDialog();
+
                     }
 
                     if(ctrl == 'inventory'){
