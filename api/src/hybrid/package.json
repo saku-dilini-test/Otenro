@@ -21,7 +21,14 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser",
+    {
+      "id": "com.telerik.stripe",
+      "locator": "https://github.com/Telerik-Verified-Plugins/Stripe",
+      "variables": {
+        "API_KEY": "sk_live_HOx9lQwtJ2fLwQhHOuzKCJV0"
+      }
+    }
   ],
   "cordovaPlatforms": [
     "android"
