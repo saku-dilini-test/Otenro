@@ -24,47 +24,24 @@
 .button.button-positive {
 	cursor: url(../img/cursor.cur), auto;
 	}
-.panel .create-account-btm {
-    width: 58%;
-    font-size: 4.0vw;
-}
+
 
 .item-complex .item-content, .item-radio .item-content {
-    position: relative;
-    z-index: 2;
-    border-color:transparent !important ;
 	background-color:transparent;
     padding: 8px 0 8px 30px;
 }
 
-.item-complex {
-    padding: 0;
-	border-color:transparent !important ;
-	font-size:13px;
-	color:#FFF;
-	width:100%;
-	letter-spacing: 2px;
-    text-transform: uppercase;
-}
 
 ion-side-menu .list{
         height: 100vh;
         display: table-cell;
         vertical-align: middle;
-        width: 100vw;
 }
 
 ion-side-menu .list .activated{
     background-color: rgba(138, 225, 232, 0.56) !important;
 }
 
-.setting{
-	font-family:"Times New Roman", Times, serif;
-	padding-left:40px;
-	font-size:20px;
-	color:#75A3B8;
-	border-color:transparent !important;
-	}
 
 .bar.bar-stable .title {
     color: #75A3B8 !important;
@@ -115,28 +92,20 @@ p{
 	cursor: url(../img/cursor.cur), auto;
 }
 
-	.padding .card, .padding .list-inset {
+.padding .card, .padding .list-inset {
     margin-left: 0;
     margin-right: 0;
 }
 
-.contact {
-	text-align:center;
-}
 
-
-.menu-left {
-	background-image:url(../img/pay_out.png) !important;
-	    background-repeat: no-repeat;
-        background-size: cover;
-}
-
-ion-side-menu{
-    width:200px !important;
-}
-
-.menu-open .menu-animated{
-    transform: translate3d(175px, 0px, 0px) !important;
+.side-menu-image {
+    background-image:url(../img/pay_out.png) !important;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    width: 100vh;
 }
 
 img {
@@ -236,4 +205,11 @@ ion-header-bar button{
 
 .align-center{
     text-align:center;
+}
+
+ion-item.made-easy-header-font.item.item-complex {
+    background: transparent;
+    border-color: transparent !important;
+    text-transform: capitalize;
+    line-height: 7vh;
 }
