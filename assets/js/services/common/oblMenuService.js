@@ -40,7 +40,8 @@
                     if(ctrl == 'commerce') {
                         
                         if (ctrlFun=='showAddCategoriesDialog') {
-                        } return mainMenuService.showMainMenuDialog(ctrlFun);
+                            return mainMenuService.showMainMenuDialog(ctrlFun);
+                        }
                         
                         if (ctrlFun == 'showOrderDialog') {
                             return commerceService.showOrderDialog();
