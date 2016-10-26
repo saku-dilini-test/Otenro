@@ -1,9 +1,10 @@
 
 
-    <ion-checkbox ng-if="shippingData.length == 0" ng-model="shipping.opt" ng-true-value="'Free Shipping'" class="checkbox-balanced item-checkbox-right" >
-        <div class="row">
+    <ion-checkbox  ng-model="shipping.opt" ng-true-value="'Free Shipping'" class="checkbox-balanced item-checkbox-right" >
+
             <h3>Free Shipping</h3>
-        </div>
+            <span>Within the city limits </span><br>
+            <span class="assertive">Conditions apply*</span>
     </ion-checkbox>
 
     <ion-checkbox ng-repeat="data in shippingData | filter: {shippingOption: 'Flat Rate'}" ng-model="shipping.opt" ng-true-value="'{{data.optionName}}'" class="checkbox-balanced item-checkbox-right" >

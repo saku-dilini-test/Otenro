@@ -74,6 +74,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         }
     }
 
+    //get the user's registered address
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 
     // get the shipping options
     $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)

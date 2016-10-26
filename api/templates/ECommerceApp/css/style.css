@@ -256,14 +256,6 @@ ion-slides {
     font-weight: 800;
 }
 
-.cart-charges{
-    font-size:10px;
-}
-
-.cart-charges .row{
-    background-color:rgb(231,226,192);
-}
-
 .delivery{
     position:absolute;
     margin: 15px 0;
