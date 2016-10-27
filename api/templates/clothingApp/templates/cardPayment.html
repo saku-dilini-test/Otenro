@@ -7,6 +7,14 @@
         <h1 class="title">Ionic Cart Payment</h1>
     </ion-header-bar>
     <ion-content class="ion-list">
+        <form>
+
+        <input type="radio" name="cashpayment" value="cashpayment" checked> Cash Payment
+        <input type="radio" name="paypal" value="paypal" checked> Pay Pal <br>
+        <input type="radio" name="creditcard" value="creditcard" checked> Cerdit/ Debit Card <br>
+            </form>
+
+
         <form name="paymentForm" class="padding" ng-submit="makeStripePayment(card)">
 
             <label class="item item-input item-stacked-label padding">
@@ -44,7 +52,7 @@
                 </div>
             </label>
             <div class="padding">
-                <button type="submit" ng-disabled="paymentForm.$invalid" class="button button-block button-positive">MAKE PAYMENT</button>
+                <button type="submit" class="button button-block button-positive">MAKE PAYMENT</button>
             </div>
             <!--
             <p ng-show="paymentForm.cardNumber.$error.ccNumberType">That's not a valid {{card.cardType}}</p>
