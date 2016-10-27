@@ -261,11 +261,14 @@ input[type="color"]{
     margin: 20px 0;
 }
 
-.promotions{
+.promotions-mainMenu{
     margin: 15px 20px 30px 20px;
 }
+.promotions{
+  margin: 5px 0px;
+}
 
-.promo-button{
+.promo-button-mainMenu{
     background-color: #ffc900 !important;
     border-color: #ffc900 !important;
     font-size: 14px;
@@ -275,6 +278,18 @@ input[type="color"]{
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+}
+
+.promo-button{
+  background-color: #ffc900 !important;
+  border-color: #ffc900 !important;
+  font-size: 14px;
+  line-height: 30px;
+  min-height: 30px;
+  width: 100%;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
 .qty-container{
