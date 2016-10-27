@@ -803,7 +803,7 @@ table{
 .me-hours-table th{
     font-size: 14px;
     font-weight: 400;
-    padding: 10px 15px;
+    padding: 10px 10px;
 }
 
 .me-hours-table th{
@@ -2086,7 +2086,7 @@ trix-toolbar .button_group input[type=button]{
     font-weight:inherit;
 }
 
-li#menuitem-9 {
+li#menuitem-8 {
     font-weight: 800;
     background: darkgray;
 }

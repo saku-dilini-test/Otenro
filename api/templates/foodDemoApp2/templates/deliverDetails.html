@@ -2,25 +2,63 @@
     <ion-content >
         <div class="card animated zoomIn">
                 <div class="row">
-                    <div class="col align-center made-easy-header-font">Deliver Details</div>
+                    <div class="col align-center made-easy-header-font">Location for Delivery</div>
                 </div>
-                <div class="list">
+
+
+                <ion-checkbox ng-model="details.location"  class="checkbox-positive" ng-true-value="'{{user.address}}'">
+                    <label >
+                        <h3>Home</h3>
+                        <span>{{user.address}}</span>
+                    </label>
+                </ion-checkbox >
+
+                <ion-checkbox ng-model="details.location"  class="checkbox-positive" ng-true-value="'New'">
+                    <label >
+                        <h3>New Location</h3>
+                    </label>
+                </ion-checkbox>
+
+                <div class="list delivery-details padding-right"   ng-if="details.location == 'New'">
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Name</span>
-                        <input type="text" ng-model="details.name" placeholder="Ex: John Doe" >
+                        <input type="text" ng-model="details.name" placeholder="E.g. John Doe" >
                     </label>
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">Address</span>
-                        <input type="text" ng-model="details.address" placeholder="Your address">
+                        <span class="input-label">No.</span>
+                        <input type="text" ng-model="details.no" placeholder="address number" >
                     </label>
-                    <span class="item item-input item-stacked-label">
-                        <span class="input-label">Contact number</span>
-                        <input type="number" ng-model="details.number" placeholder="Ex: 0712345678">
-                    </span>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Street Address</span>
+                        <input type="text" ng-model="details.street" placeholder="Street">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">City</span>
+                        <input type="text" ng-model="details.city" placeholder="E.g. Colombo">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Country</span>
+                        <input type="text" ng-model="details.country" placeholder="E.g. Sri Lanka">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Zip / Postal Code</span>
+                        <input type="text" ng-model="details.zip" placeholder="Zip or Postal code">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Contact Number</span>
+                        <input type="number" ng-model="details.number" placeholder="E.g. 0712123123">
+                    </label>
                 </div>
+
+                <div class="row">
+                    <div class="col align-center">
+                        <h6>Total Amount : {{currency.sign}}{{amount}}</h6>
+                    </div>
+                </div>
+
                 <div class="row">
                 <div class="col col-top"></div>
-                <button class="col col-50 col-center button button-positive button-small" ng-click="deliver(details)" >Deliver</button>
+                <button class="col col-50 col-center button button-positive button-small" ng-disabled="!details.location" ng-click="deliver(details)" >Deliver</button>
                 <div class="col col-top"></div>
                 </div>
             </div>

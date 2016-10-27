@@ -24,7 +24,22 @@ module.exports = {
         telNumber : {
             type : 'integer'
         },
-        deliveryAddress : {
+        deliveryLocation : {
+            type : 'string'
+        },
+        deliveryNo : {
+            type : 'string'
+        },
+        deliveryStreet : {
+            type : 'string'
+        },
+        deliveryCity : {
+            type : 'string'
+        },
+        deliveryCountry : {
+            type : 'string'
+        },
+        deliveryZip : {
             type : 'string'
         },
         paymentStatus : {

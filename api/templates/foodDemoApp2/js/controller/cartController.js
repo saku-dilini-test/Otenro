@@ -74,6 +74,15 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         }
     }
 
+    //get the currency
+    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
+            $scope.currency = data;
+    }).error(function(err) {
+        alert('warning', "Unable to get Products Selected Category", err.message);
+    });
+
+    //get the user's registered address
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 
     // get the shipping options
     $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
@@ -87,8 +96,9 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                     });
                 });
 
+    $scope.amount = $scope.getTotal();
+
     $scope.deliver = function(deliverDetails){
-            $scope.amount = $scope.getTotal();
 
             $scope.shipping={};
             var SelectShippingOptions = $ionicPopup.alert({
@@ -111,7 +121,12 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                                         item : $stateParams.item,
                                         amount : $scope.amount,
                                         customerName : deliverDetails.name,
-                                        deliveryAddress : deliverDetails.address,
+                                        deliveryLocation : deliverDetails.location,
+                                        deliveryNo : deliverDetails.no,
+                                        deliveryStreet : deliverDetails.street,
+                                        deliveryCity : deliverDetails.city,
+                                        deliveryCountry : deliverDetails.country,
+                                        deliveryZip : deliverDetails.zip,
                                         telNumber : deliverDetails.number,
                                         tax :   $scope.taxTotal,
                                         shippingOpt : $scope.shipping.opt

@@ -85,11 +85,6 @@
             onRegisterApi: function (gridApi1) {
                 $scope.gridApi1 = gridApi1;
 
-                // interval of zero just to allow the directive to have initialized
-                $interval(function () {
-                    gridApi1.core.addToGridMenu(gridApi1.grid, [{title: 'Dynamic item', order: 100}]);
-                }, 0, 1);
-
                 gridApi1.core.on.columnVisibilityChanged($scope, function (changedColumn) {
                     $scope.columnChanged = {name: changedColumn.colDef.name, visible: changedColumn.colDef.visible};
                 });

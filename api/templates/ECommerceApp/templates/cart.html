@@ -21,13 +21,17 @@
                     <div class="col"><a ng-click="removeItem(index)">x</a></div>
                   </div>
                 </div>
+
                 <!-- Tax Information Here -->
-                <div ng-if="isShowTaxInfo" class="item item-stacked-label">
+                <div ng-if="isShowTaxInfo" class="cart-item">
                     <div class="row">
-                        <div class="col col-50">Tax%</div>
-                        <div class="col" ng-model="tax" >{{tax}}</div>
+                        <div class="col col-50">Tax</div>
+                        <div class="col"></div>
+                        <div class="col"  ng-model="tax">{{tax}}%</div>
+                        <div class="col" ></div>
                     </div>
                 </div>
+
                 <div class="cart-total">
                   <div class="row">
                     <div class="col col-50">Total</div>
@@ -37,16 +41,6 @@
                   </div>
                 </div>
 
-                <ui class="cart-charges">
-                  <div class="row">
-                    <div >Delivery Charges within City Limits -</div>
-                    <div >&nbsp;150 Rs</div>
-                  </div>
-                  <div class="row">
-                    <div >Delivery Charges for off city Limits -</div>
-                    <div >&nbsp;50 Rskm<sup>-1</sup></div>
-                  </div>
-                </ui>
                 <div class="row btn-full">
                   <button class="button button-assertive" ng-click="pickup()" >Pickup</button>
                   <button class="button button-assertive" ng-click="delivery(cartItems)">Delivery</button>
