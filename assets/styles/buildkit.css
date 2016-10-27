@@ -1864,6 +1864,10 @@ button[disabled]{
     width: 80px;
 }
 
+.allItems .md-container-modify {
+    width: 83%;
+}
+
 @-moz-document url-prefix() {
    md-input-container .md-input {
       border-bottom-style: solid;
