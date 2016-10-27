@@ -44,7 +44,7 @@
 
                                 <md-input-container class="md-block">
                                     <label>Name</label>
-                                    <input required md-maxlength="15"  name="name" ng-model="product.name">
+                                    <input md-maxlength="15"  ng-required="true" name="name" ng-model="product.name">
                                     <div ng-messages="productForm.name.$error" ng-show="productForm.name.$dirty">
                                         <div ng-message="required">Name is required.</div>
                                         <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
@@ -125,15 +125,12 @@
                             <thead>
                             <th width="25%">Product Name</th>
                             <th >Sku</th>
-                            <th width="18%">
-                                <md-select id="selection" class="" placeholder="Select" ng-change="setPattern(selection)" ng-model="selection" required>
-                                    <md-option ng-value="child.name" ng-repeat="child in sizeOrWeight">{{child.name}}
-                                    </md-option>
-                                </md-select>
-                            </th>
+                            <th>Variant Name</th>
+                            <th>Variant Type</th>
                             <th>Price</th>
                             <th>Quantity</th>
-                            <th width="13%" style="text-align: center;" >New</th>
+                            <th>Weight</th>
+                            <th style="text-align: center;" >New</th>
                             <th>Delete</th>
                             </thead>
                             <tbody>
@@ -157,27 +154,28 @@
                                     </md-input-container>
                                 </td>
                                 <td>
-                                    <!--<md-input-container>-->
-                                        <!--<input md-maxlength="8"-->
-                                               <!--required-->
-                                               <!--type="text"-->
-                                               <!--name="size_{{$index}}"-->
-                                               <!--ng-model="data.size">-->
-                                        <!--<div ng-messages="priceAndVariantsForm['size_'+$index].$error">-->
-                                            <!--<div ng-message="required">Size/Wight is required.</div>-->
-                                            <!--<div ng-message="md-maxlength">Must be less than 8 characters.</div>-->
-                                        <!--</div>-->
-                                    <!--</md-input-container>-->
-                                  <md-input-container class="md-container-modify">
-                                    <input ng-blur="validateInputValue(data.size,'size')"
-                                           type="text"
-                                           class="product-name-column-input" name="size_{{$index}}" maxlength="8"
-                                           ng-pattern="customPattern" ng-model="data.size" required>
-                                      <div ng-messages="priceAndVariantsForm['size_' + $index].$error " ng-show="priceAndVariantsForm['size_' + $index].$dirty">
-                                          <div ng-message="pattern" class="my-message">Invalid value</div>
-                                          <div ng-message="required" class="my-message">Required!</div>
-                                      </div>
-                                  </md-input-container>
+                                    <md-input-container class="md-container-modify">
+                                        <input id ='vName_{{$index}}'  type="text" name="vName_{{$index}}" min="1"
+                                                 maxlength="8" ng-model="data.vName"
+                                               ng-required="data.unlimited == false" ignore-mouse-wheel >
+                                        <div ng-messages="priceAndVariantsForm['vName_' + $index].$error"
+                                             ng-show="priceAndVariantsForm['vName_' + $index].$dirty">
+                                            <div ng-message="pattern">Invalid quantity</div>
+                                            <div ng-message="required" class="my-message">Required!</div>
+                                        </div>
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <md-input-container class="md-container-modify">
+                                        <input id ='vType_{{$index}}'  type="text" name="vType_{{$index}}" min="1"
+                                                 maxlength="8" ng-model="data.vType"
+                                               ng-required="data.unlimited == false" ignore-mouse-wheel >
+                                        <div ng-messages="priceAndVariantsForm['vType_' + $index].$error"
+                                             ng-show="priceAndVariantsForm['vType_' + $index].$dirty">
+                                            <div ng-message="pattern">Invalid quantity</div>
+                                            <div ng-message="required" class="my-message">Required!</div>
+                                        </div>
+                                    </md-input-container>
                                 </td>
                                 <td>
                                   <md-input-container class="md-container-modify">
@@ -206,6 +204,18 @@
                                           Unlimited
                                   </md-checkbox>
 
+                                </td>
+                                <td>
+                                    <md-input-container class="md-container-modify">
+                                        <input id ='weight_{{$index}}'  type="text" name="weight_{{$index}}" min="1"
+                                                maxlength="8" ng-model="data.weight"
+                                               ng-required="data.unlimited == false" ignore-mouse-wheel >
+                                        <div ng-messages="priceAndVariantsForm['weight_' + $index].$error"
+                                             ng-show="priceAndVariantsForm['weight_' + $index].$dirty">
+                                            <div ng-message="pattern">Invalid quantity</div>
+                                            <div ng-message="required" class="my-message">Required!</div>
+                                        </div>
+                                    </md-input-container>
                                 </td>
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
                                 <td>
