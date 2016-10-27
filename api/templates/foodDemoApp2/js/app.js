@@ -145,6 +145,16 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
               }
           }
       })
+       .state('app.cardPayment', {
+                cache: false,
+                url: '/cardPayment',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/cardPayment.html',
+                        controller: 'paymentCtrl'
+                    }
+                }
+            })
       .state('app.contactUs', {
           cache: false,
           url: '/contactUs',
