@@ -4,39 +4,48 @@
 
 mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants) {
 
-    $scope.userId=$rootScope.userId;
-    $scope.appId=$rootScope.appId;
+     // -- Config --
+                $scope.userId = $rootScope.userId;
+                $scope.appId = $rootScope.appId;
+                $scope.cartItems = $rootScope.cart.cartItems;
+                // default : tax info hide
+                $scope.isShowTaxInfo = false;
 
-    $scope.cartItems = $rootScope.cart.cartItems;
-    $scope.hide = true;
-    $http.get(constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId).success(function(data) {
-        if(data == ''){
-            $scope.hide = true;
-            $scope.tax = 0;
-        }else{
-            $scope.tax = data[0].taxAmount;
-            $scope.hide = false;
-        }
-    })
-    $scope.getTotal = function(){
-        var total = 0;
-        var amount = 0;
-        var tax = 0;
-        for(var i = 0; i < $scope.cartItems.length; i++){
-            var product = $scope.cartItems[i];
-            amount = product.total;
-            total += (amount);
-        }
-        tax = total * $scope.tax/100;
-        if(tax > 0){
-            total = total + tax;
-            $rootScope.cart.totalPrice = total;
-            return total;
-        }else{
-            $rootScope.cart.totalPrice = total;
-            return total;
-        }
-    };
+    // Get Tax Information
+               var taxInfoAPI_URL = constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId;
+               $http.get(taxInfoAPI_URL)
+                   .success(function(data) {
+                       var taxInfo = data;
+                       // if null tax information
+                       if(taxInfo == ''){
+                           $scope.tax = 0;
+                       }else{
+                           // First tax collection Tax-Amount apply to Product
+                           // ignore other
+                           $scope.tax = taxInfo[0].taxAmount;
+                           $scope.isShowTaxInfo = true;
+                       }
+                   });
+   // Calculate total amount function
+               $scope.getTotal = function () {
+                   var total = 0;
+                   var amount = 0;
+                   for (var i = 0; i < $scope.cartItems.length; i++) {
+                       var product = $scope.cartItems[i];
+                       amount = product.total;
+                       total += (amount);
+                   }
+                   var tax = total * $scope.tax/100;
+                   $scope.taxTotal = total * $scope.tax/100;
+                   if(tax > 0){
+                       total = total + tax;
+                       $rootScope.cart.totalPrice = total;
+                       return total;
+                   }else{
+                       $rootScope.cart.totalPrice = total;
+                       return total;
+                   }
+               };
 
     $scope.getTotalQuantity = function(){
         var quantity = 0;
