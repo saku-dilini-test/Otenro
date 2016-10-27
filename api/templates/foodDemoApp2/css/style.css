@@ -226,3 +226,14 @@ button {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
+.delivery-details{
+    zoom: 0.7;
+    padding-left: 72px;
+}
+
+.delivery-details label{
+    padding-left:0;
+    border: unset;
+    border-bottom: 1px solid rgb(221, 221, 221) !important;
+}
