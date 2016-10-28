@@ -125,7 +125,7 @@
                             <thead>
                             <th width="25%">Product Name</th>
                             <th >Sku</th>
-                            <th width="24%"><input type="text" name="variantType" ng-model="selection" placeholder="Variant Name" list="variantType"/>
+                            <th width="25%"><input type="text" name="variantType" ng-model="selection" placeholder="Variant Name" list="variantType"/>
                                 <datalist id="variantType">
                                     <option value="Size">Size</option>
                                     <option value="Weight">Weight</option>
@@ -169,8 +169,8 @@
                                         <!--</div>-->
                                     <!--</md-input-container>-->
                                 <!--</td>-->
-                                <td width="24%">
-                                    <md-input-container class="md-container-modify">
+                                <td>
+                                    <md-input-container class="md-container-modify md-text-input-custom">
                                         <input id ='vType_{{$index}}'  type="text" name="vType_{{$index}}" min="1"
                                                  maxlength="12" ng-model="data.vType" placeholder="Variant Type"
                                                ng-required="data.unlimited == false" ignore-mouse-wheel >

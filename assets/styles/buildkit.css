@@ -1863,6 +1863,9 @@ button[disabled]{
 .md-container-modify{
     width: 80px;
 }
+.md-text-input-custom{
+    width: 100%;
+}
 
 .allItems .md-container-modify {
     width: 83%;
