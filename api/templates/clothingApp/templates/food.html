@@ -24,7 +24,7 @@
                     <div class="row">
                         <select class="col"
                           ng-model="selectedVariant"
-                          ng-options="variant.size  for variant in foodInfo.variants"
+                          ng-options="variant.vType  for variant in foodInfo.variants"
                           ng-change="changeVariant(selectedVariant)">
                         </select>
                         <div class="col col-center" style="margin-top: 1px;">

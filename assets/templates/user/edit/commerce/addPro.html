@@ -104,7 +104,7 @@
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                                <md-button class="me-default-button" ng-disabled="productForm.$invalid" type="submit"ng-click="generalDetails(product,2)">Next</md-button>
+                                <md-button class="me-default-button" ng-disabled="productForm.$invalid" ng-click="generalDetails(product,2)">Next</md-button>
                             </div>
                         </div>
                     </form>
@@ -125,8 +125,12 @@
                             <thead>
                             <th width="25%">Product Name</th>
                             <th >Sku</th>
-                            <th>Variant Name</th>
-                            <th>Variant Type</th>
+                            <th width="24%"><input type="text" name="variantType" ng-model="selection" placeholder="Variant Name" list="variantType"/>
+                                <datalist id="variantType">
+                                    <option value="Size">Size</option>
+                                    <option value="Weight">Weight</option>
+                                    <option value="Color">Color</option>
+                                </datalist></th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Weight</th>
@@ -153,22 +157,22 @@
                                         </div>
                                     </md-input-container>
                                 </td>
-                                <td>
-                                    <md-input-container class="md-container-modify">
-                                        <input id ='vName_{{$index}}'  type="text" name="vName_{{$index}}" min="1"
-                                                 maxlength="8" ng-model="data.vName"
-                                               ng-required="data.unlimited == false" ignore-mouse-wheel >
-                                        <div ng-messages="priceAndVariantsForm['vName_' + $index].$error"
-                                             ng-show="priceAndVariantsForm['vName_' + $index].$dirty">
-                                            <div ng-message="pattern">Invalid quantity</div>
-                                            <div ng-message="required" class="my-message">Required!</div>
-                                        </div>
-                                    </md-input-container>
-                                </td>
-                                <td>
+                                <!--<td>-->
+                                    <!--<md-input-container class="md-container-modify">-->
+                                        <!--<input id ='vName_{{$index}}'  type="text" name="vName_{{$index}}" min="1"-->
+                                                 <!--maxlength="8" ng-model="data.vName"-->
+                                               <!--ng-required="data.unlimited == false" ignore-mouse-wheel >-->
+                                        <!--<div ng-messages="priceAndVariantsForm['vName_' + $index].$error"-->
+                                             <!--ng-show="priceAndVariantsForm['vName_' + $index].$dirty">-->
+                                            <!--<div ng-message="pattern">Invalid quantity</div>-->
+                                            <!--<div ng-message="required" class="my-message">Required!</div>-->
+                                        <!--</div>-->
+                                    <!--</md-input-container>-->
+                                <!--</td>-->
+                                <td width="24%">
                                     <md-input-container class="md-container-modify">
                                         <input id ='vType_{{$index}}'  type="text" name="vType_{{$index}}" min="1"
-                                                 maxlength="8" ng-model="data.vType"
+                                                 maxlength="12" ng-model="data.vType" placeholder="Variant Type"
                                                ng-required="data.unlimited == false" ignore-mouse-wheel >
                                         <div ng-messages="priceAndVariantsForm['vType_' + $index].$error"
                                              ng-show="priceAndVariantsForm['vType_' + $index].$dirty">
