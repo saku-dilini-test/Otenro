@@ -28,6 +28,9 @@
                             localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
 								if($stateParams.item == 'delivery'){
                                     $state.go('app.cart');
+                                }
+                                else if($stateParams.item == 'pickUp'){
+                                    $state.go('app.cart');
                                 }else{
                                     $state.go('app.category');
                                 }
@@ -45,7 +48,10 @@
 							if(typeof res.data.token != 'undefined'){
 								if($stateParams.item == 'delivery'){
                                     $state.go('app.cart');
-                                }else{
+                                }else if($stateParams.item == 'pickUp'){
+                                    $state.go('app.cart');
+                                }
+                                else{
                                     $state.go('app.category');
                                 }
 							}else{

@@ -114,6 +114,12 @@
                 templateUrl: 'user/edit/commerce/OrderDetailsView.html',
                 controller: function DialogController($scope, $mdDialog, $auth) {
                     $scope.oderData = row;
+                    if($scope.oderData.entity.option == 'pickUp'){
+                        $scope.orderType = 'Pick Up';
+                    }
+                    else{
+                        $scope.orderType = 'Delivery';
+                    }
                     $scope.closeDialog = function () {
                         $mdDialog.hide();
                     }
