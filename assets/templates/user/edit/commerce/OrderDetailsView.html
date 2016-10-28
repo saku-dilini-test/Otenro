@@ -24,9 +24,9 @@
             <div class="row">
                 <div class="col-md-4">
                     <h7>Order Type</h7><br>
-                    <label>Delivery</label>
+                    <label>{{orderType}}</label>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" ng-if="oderData.entity.option !== 'pickUp'">
                     <h7>Deliver to:</h7>
                     <div class="row" ng-if="oderData.entity.deliveryLocation !== 'New'">
                         <div class="col-md-4"><h7>Address</h7></div>
@@ -43,6 +43,27 @@
                         <div class="col-md-8"><h7>: {{oderData.entity.deliveryCountry}}</h7></div>
                         <div class="col-md-4"><h7>Zip</h7></div>
                         <div class="col-md-8"><h7>: {{oderData.entity.deliveryZip}}</h7></div>
+                        <div class="col-md-4"><h7>Mobile</h7></div>
+                        <div class="col-md-8"><h7>: {{oderData.entity.telNumber}}</h7></div>
+                    </div>
+                </div>
+                <div class="col-md-4" ng-if="oderData.entity.option == 'pickUp'">
+                    <h7>Pick Up from:</h7>
+                    <div class="row" ng-if="oderData.entity.deliveryLocation !== 'New'">
+                        <div class="col-md-4"><h7>Location</h7></div>
+                        <div class="col-md-8"><h7>{{oderData.entity.pickUp.locationName}}</h7></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><h7>No</h7></div>
+                        <div class="col-md-8"><h7>: {{oderData.entity.pickUp.number}}</h7></div>
+                        <div class="col-md-4"><h7>Street</h7></div>
+                        <div class="col-md-8"><h7>: {{oderData.entity.pickUp.streetAddress}}</h7></div>
+                        <div class="col-md-4"><h7>City</h7></div>
+                        <div class="col-md-8"><h7>: {{oderData.entity.pickUp.city}}</h7></div>
+                        <div class="col-md-4"><h7>Country</h7></div>
+                        <div class="col-md-8"><h7>: {{oderData.entity.pickUp.country}}</h7></div>
+                        <div class="col-md-4"><h7>Zip</h7></div>
+                        <div class="col-md-8"><h7>: {{oderData.entity.pickUp.postalCode}}</h7></div>
                         <div class="col-md-4"><h7>Mobile</h7></div>
                         <div class="col-md-8"><h7>: {{oderData.entity.telNumber}}</h7></div>
                     </div>

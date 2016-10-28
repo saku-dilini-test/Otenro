@@ -13,11 +13,23 @@ module.exports = {
         var data = req.body;
         data['paymentStatus'] = 'Pending';
         data['fulfillmentStatus'] = 'Pending';
-
-        ApplicationOrder.create(data).exec(function (err, order) {
-            if (err) res.send(err);
-            res.send('ok');
-        });
+        if(data.pickupId == null){
+            ApplicationOrder.create(data).exec(function (err, order) {
+                if (err) res.send(err);
+                res.send('ok');
+            });
+        }
+        else{
+           ShippingDetails.find({id:data.pickupId,appId:data.appId}).exec(function(err,pickUp){
+            if(err) res.send(err);
+            data.pickUp = pickUp[0];
+            data.option = 'pickUp';
+            ApplicationOrder.create(data).exec(function (err, order) {
+                if (err) res.send(err);
+                res.send('ok');
+            });
+           });
+        }
     },
     updateInventory : function(req,res){
     /*Manually updating the relevant quantity in the ThirdNavigation*/

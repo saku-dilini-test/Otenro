@@ -164,6 +164,10 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       .state('app.pickup', {
           cache: false,
           url: '/pickup',
+          params:{
+            item: null,
+            deliverDetails:null
+          },
           views: {
               'menuContent': {
                   templateUrl: 'templates/pickup.html',
@@ -234,6 +238,14 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       .state('app.cardPayment', {
           cache: false,
           url: '/cardPayment',
+          params:{
+            item: null,
+            deliverDetails:null,
+            amount:null,
+            shippingOpt:null,
+            method:null,
+            pickupId:null
+          },
           views: {
               'menuContent': {
                   templateUrl: 'templates/cardPayment.html',
@@ -263,7 +275,20 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'cartCtrl'
         }
       }
-    });
+   })
+  .state('app.pickupDetails', {
+      cache: false,
+      url: '/pickupDetails',
+      params:{
+        item: null
+      },
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/pickupDetails.html',
+            controller: 'cartCtrl'
+        }
+      }
+  });
 
   $urlRouterProvider.otherwise('/app/category');
 });

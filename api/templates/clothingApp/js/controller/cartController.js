@@ -64,21 +64,20 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                 $state.go('app.login',{item:$scope.status});
             }
     }
-    $scope.pickup = function () {
+    $scope.pickupDetails = function (deliverItems) {
         if(localStorage.getItem('appLocalStorageUser')!==null){
-            $state.go('app.pickup');
+            $state.go('app.pickupDetails',{item:deliverItems});
         }
         else{
-            $state.go('app.login');
+            $scope.status = 'pickUp'
+            $state.go('app.login',{item:$scope.status});
         }
     }
-    $scope.pickup = function () {
-        if(localStorage.getItem('appLocalStorageUser')!==null){
-            $state.go('app.pickup');
-        }
-        else{
-            $state.go('app.login');
-        }
+    $scope.pickUp = function (details) {
+            $state.go('app.pickup',{
+                item:$stateParams.item,
+                deliverDetails:details,
+            });
     };
 
 
@@ -96,7 +95,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     $scope.deliver = function(deliverDetails){
                 $scope.amount = $scope.getTotal();
-
+                $scope.method = 'Delivery';
                 $scope.shipping={};
                 var SelectShippingOptions = $ionicPopup.alert({
                        templateUrl: 'templates/shippingOpt.html',
@@ -113,44 +112,13 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                                     //don't allow the user to close unless he selects an option
                                     e.preventDefault();
                                   } else {
-                                    $scope.details ={
-                                            appId : $rootScope.appId,
-                                            item : $stateParams.item,
-                                            amount : $scope.amount,
-                                            customerName : deliverDetails.name,
-                                            deliveryAddress : deliverDetails.address,
-                                            telNumber : deliverDetails.number,
-                                            tax :   $scope.tax,
-                                            shippingOpt : $scope.shipping.opt
-                                    };
-
-                            $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
-                                .then(function(res){
-                                    $scope.details.id = $rootScope.cart.cartItems[0].id;
-                                    $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item)
-                                    .then(function(res){
-                                        $rootScope.cart.cartItems = [];
-                                        $rootScope.cart.cartSize = 0;
-                                        $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-                                        $rootScope.cart.totalPrice = 0;
-                                        $rootScope.cart.totalQuantity = 0;
-                                        var alertPopup = $ionicPopup.alert({
-                                               title: 'Thank You',
-                                               subTitle: 'Your Order has been successfully processed',
-                                               cssClass: 'ionicPopUp',
-                                               buttons:[
-                                                {text:'OK',
-                                                 type:'button-positive'},
-                                               ]
-                                             });
-                                    },
-                                    function(err){
-                                       console.log(err);
+                                  $state.go('app.cardPayment',{
+                                    item:$stateParams.item,
+                                    deliverDetails:deliverDetails,
+                                    amount : $scope.amount,
+                                    shippingOpt : $scope.shipping.opt,
+                                    method: $scope.method
                                     });
-                                },
-                                function(err){
-                                   console.log(err);
-                                });
                                  }
                             }
                            }
@@ -158,12 +126,6 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                 });
         }
 
-    // --/-- Here start Card Payment Function --/--
-
-    // --/-- Goto Card Payment function
-    $scope.gotoCartPayment = function(){
-        $state.go('app.cardPayment');
-    };
 
     // Config Cart payment
     $scope.cardType = {};
@@ -178,7 +140,6 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
      Make Payment Function
      */
     function makeStripePayment(_cardInformation) {
-
         if (!window.stripe) {
             alert("stripe plugin not installed");
             return;
@@ -204,14 +165,66 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             function(response) {
                 console.log(JSON.stringify(response, null, 2));
                 // TODO : This alert for only testing
-                alert(JSON.stringify(response, null, 2));
+//                alert(JSON.stringify(response, null, 2));
                 if(response.error){
                     alert("Error");
                     // TODO : Error handle here
                 }else{
                     alert("Payment Success");
-                    // TODO : Currently back to cart
-                    $state.go('app.cart');
+                    if($stateParams.pickupId == null){
+                        $scope.details ={
+                            appId : $rootScope.appId,
+                            item : $stateParams.item,
+                            amount : $scope.getTotal(),
+                            customerName : $stateParams.deliverDetails.name,
+                            deliveryAddress : $stateParams.deliverDetails.address,
+                            telNumber : $stateParams.deliverDetails.number,
+                            tax :   $scope.tax,
+                            shippingOpt : $stateParams.shippingOpt,
+                            pickupId: $stateParams.pickupId
+                        };
+                    }
+                    else{
+                        $scope.details ={
+                            appId : $rootScope.appId,
+                            item : $stateParams.item,
+                            amount : $scope.getTotal(),
+                            customerName : $stateParams.deliverDetails.name,
+                            telNumber : $stateParams.deliverDetails.number,
+                            tax :   $scope.tax,
+                            pickupId: $stateParams.pickupId
+                        }
+
+                    }
+                     $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
+                     .then(function(res){
+                         $scope.details.id = $rootScope.cart.cartItems[0].id;
+                         $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item)
+                         .then(function(res){
+                             $rootScope.cart.cartItems = [];
+                             $rootScope.cart.cartSize = 0;
+                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                             $rootScope.cart.totalPrice = 0;
+                             $rootScope.cart.totalQuantity = 0;
+                             var alertPopup = $ionicPopup.alert({
+                               title: 'Thank You',
+                               subTitle: 'Your Order has been successfully processed',
+                               cssClass: 'ionicPopUp',
+                               buttons:[
+                                {text:'OK',
+                                 type:'button-positive'},
+                               ]
+                             });
+                             // TODO : Currently back to cart
+                             $state.go('app.cart');
+                         },
+                         function(err){
+                            console.log(err);
+                         });
+                     },
+                     function(err){
+                        console.log(err);
+                     });
                 }
 
             },

@@ -62,6 +62,12 @@ module.exports = {
         },
         shippingOpt: {
             type:'string'
+        },
+        pickUp :{
+            type: 'json'
+        },
+        option:{
+            type: 'string'
         }
     }
 };
