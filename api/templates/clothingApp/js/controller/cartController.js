@@ -84,14 +84,21 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     // get the shipping options
     $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
             .success(function (data) {
-                    $scope.shippingData=data;
-                },
-                function (err) {
-                    $ionicPopup.alert({
-                        title: 'Policies Data loading error!',
-                        template: 'Please check your connection!'
-                    });
-                });
+                 $scope.shippingData=data;
+                 $scope.freeShipping = true;
+                 for(var i=0; i<data.length; i++){
+                     if(data[i].shippingOption == 'Flat Rate' || data[i].shippingOption == 'Weight Base'){
+                         $scope.freeShipping = false;
+                         break;
+                     }
+                 }
+            },
+            function (err) {
+                 $ionicPopup.alert({
+                     title: 'Policies Data loading error!',
+                     template: 'Please check your connection!'
+                 });
+            });
 
     $scope.deliver = function(deliverDetails){
                 $scope.amount = $scope.getTotal();
