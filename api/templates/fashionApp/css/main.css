@@ -39,6 +39,7 @@
   border-radius: inherit;
 }
 
+
 /* ----- View Page ----- */
 .made-easy-view {}
 .made-easy-view .item-desc {
@@ -112,3 +113,26 @@ ion-nav-title{
 .menu .item-content{
     color:unset;
 }
+
+/*-- give space between images -- */
+
+.space{
+    margin: 1.4px;
+}
+
+
+/*--Text center the Page--*/
+
+.blocktext {
+    display: block;
+    width: 100%;
+    text-align: center !important;
+    left: 0 !important;
+}
+
+.category-ion-item{
+    background-color: rgba(255, 255, 255, 0.54);
+}
+
+/*--add shadow menu images--*/
+

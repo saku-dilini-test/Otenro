@@ -3,14 +3,14 @@
 	<ion-pane>
 		<ion-content class="made-easy-background-image made-easy-background-color">
 			<ion-list>
-				<ion-item class="category-ion-item" data-ui-sref="app.item({itemId: item.id})" data-ng-repeat="item in categoryCtrl.items track by $index">
+				<ion-item class="category-ion-item card" data-ui-sref="app.item({itemId: item.id})" data-ng-repeat="item in categoryCtrl.items track by $index">
 					<div class="row row-wrap category-items animated zoomIn">
 						<div data-ng-if="item.imageUrl" class="category-item-image col col-33">
 							<!--<img data-ng-src="img/article/{{item.imageUrl}}" alt="{{item.title}}" />-->
 							<img data-ng-src="{{categoryCtrl.imageUrl}}/{{item.imageUrl}}" alt="{{item.title}}" />
 						</div>
 						<div class="category-item-tools col animated zoomIn" data-ng-class="{'col-66' : item.img}">
-							<h3 data-ng-bind-html="item.title|trustHtml"></h3>
+							<h3 data-ng-bind-html="item.title|trustHtml "></h3>
 							<!--<div class="row">-->
 								<!--<div class="col col-40"><i class="icon ion-radio-waves"></i>{{item.source}}</div>-->
 								<!--<div class="col col-60 right-align item-category"><i class="icon ion-clock"></i>{{item.date | date:'MMM d, y'}}</div>-->
