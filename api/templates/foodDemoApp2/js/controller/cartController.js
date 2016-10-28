@@ -96,10 +96,13 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                     });
                 });
 
-    $scope.amount = $scope.getTotal();
+
 
     $scope.deliver = function(deliverDetails){
 
+            $scope.amount = $scope.getTotal();
+
+            $scope.method = 'Delivery';
             $scope.shipping={};
             var SelectShippingOptions = $ionicPopup.alert({
                    templateUrl: 'templates/shippingOpt.html',
@@ -116,42 +119,12 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                                 //don't allow the user to close unless he selects an option
                                 e.preventDefault();
                               } else {
-                                $scope.details ={
-                                        appId : $rootScope.appId,
-                                        item : $stateParams.item,
-                                        amount : $scope.amount,
-                                        customerName : deliverDetails.name,
-                                        deliveryLocation : deliverDetails.location,
-                                        deliveryNo : deliverDetails.no,
-                                        deliveryStreet : deliverDetails.street,
-                                        deliveryCity : deliverDetails.city,
-                                        deliveryCountry : deliverDetails.country,
-                                        deliveryZip : deliverDetails.zip,
-                                        telNumber : deliverDetails.number,
-                                        tax :   $scope.taxTotal,
-                                        shippingOpt : $scope.shipping.opt
-                                };
-
-                        $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
-                            .then(function(res){
-                                $scope.details.id = $rootScope.cart.cartItems[0].id;
-                                $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item)
-                                .then(function(res){
-                                    $rootScope.cart.cartItems = [];
-                                    $rootScope.cart.cartSize = 0;
-                                    $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-                                    $rootScope.cart.totalPrice = 0;
-                                    $rootScope.cart.totalQuantity = 0;
-
-                                    $rootScope.amount = $scope.amount;
-                                    $state.go('app.cardPayment');
-                                },
-                                function(err){
-                                   console.log(err);
-                                });
-                            },
-                            function(err){
-                               console.log(err);
+                              $state.go('app.cardPayment',{
+                               item:$stateParams.item,
+                               deliverDetails:deliverDetails,
+                               amount : $scope.amount,
+                               shippingOpt : $scope.shipping.opt,
+                               method: $scope.method
                             });
                              }
                         }

@@ -3,14 +3,14 @@
  */
 
 
-mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams) {
+mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state) {
 
    // --/-- Here start Card Payment Function --/--
 
       // Config Cart payment
       $scope.cardType = {};
       $scope.card = {
-          amount : $rootScope.amount
+          amount : $stateParams.amount
       };
 
 
@@ -54,6 +54,64 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams) {
                       alert("Payment Success");
                       // TODO : Currently back to cart
                       $state.go('app.cart');
+                      if($stateParams.pickupId == null){
+                          $scope.details ={
+                              appId : $rootScope.appId,
+                              item : $stateParams.item,
+                              amount : $scope.getTotal(),
+                              customerName : $stateParams.deliverDetails.name,
+                              deliveryLocation : $stateParams.deliverDetails.location,
+                              deliveryNo : $stateParams.deliverDetails.no,
+                              deliveryStreet : $stateParams.deliverDetails.street,
+                              deliveryCity : $stateParams.deliverDetails.city,
+                              deliveryCountry : $stateParams.deliverDetails.country,
+                              deliveryZip : $stateParams.deliverDetails.zip,
+                              telNumber : $stateParams.deliverDetails.number,
+                              tax :   $scope.tax,
+                              shippingOpt : $stateParams.shippingOpt,
+                              pickupId: $stateParams.pickupId
+                           };
+                       }
+                       else{
+                          $scope.details ={
+                             appId : $rootScope.appId,
+                             item : $stateParams.item,
+                             amount : $scope.getTotal(),
+                             customerName : $stateParams.deliverDetails.name,
+                             telNumber : $stateParams.deliverDetails.number,
+                             tax :   $scope.tax,
+                             pickupId: $stateParams.pickupId
+                          }
+                        }
+                        $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
+                         .then(function(res){
+                          $scope.details.id = $rootScope.cart.cartItems[0].id;
+                          $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item)
+                             .then(function(res){
+                                $rootScope.cart.cartItems = [];
+                                $rootScope.cart.cartSize = 0;
+                                $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                                $rootScope.cart.totalPrice = 0;
+                                $rootScope.cart.totalQuantity = 0;
+                                var alertPopup = $ionicPopup.alert({
+                                  title: 'Thank You',
+                                  subTitle: 'Your Order has been successfully processed',
+                                  cssClass: 'ionicPopUp',
+                                  buttons:[
+                                   {text:'OK',
+                                    type:'button-positive'},
+                                  ]
+                                });
+                                // TODO : Currently back to cart
+                               $state.go('app.cart');
+                              },
+                        function(err){
+                          console.log(err);
+                        });
+                        },
+                  function(err){
+                      console.log(err);
+                     });
                   }
 
               },

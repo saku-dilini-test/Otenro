@@ -145,16 +145,6 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
               }
           }
       })
-       .state('app.cardPayment', {
-                cache: false,
-                url: '/cardPayment',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/cardPayment.html',
-                        controller: 'paymentCtrl'
-                    }
-                }
-            })
       .state('app.contactUs', {
           cache: false,
           url: '/contactUs',
@@ -226,12 +216,20 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('app.payment', {
+  .state('app.cardPayment', {
       cache: false,
-      url: '/payment',
+      url: '/cardPayment',
+      params:{
+          item: null,
+          deliverDetails:null,
+          amount:null,
+          shippingOpt:null,
+          method:null,
+          pickupId:null
+      },
       views: {
           'menuContent': {
-              templateUrl: 'templates/payment.html',
+              templateUrl: 'templates/cardPayment.html',
               controller: 'paymentCtrl'
           }
       }
