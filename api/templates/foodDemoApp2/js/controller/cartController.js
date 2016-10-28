@@ -142,15 +142,9 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                                     $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                                     $rootScope.cart.totalPrice = 0;
                                     $rootScope.cart.totalQuantity = 0;
-                                    var alertPopup = $ionicPopup.alert({
-                                           title: 'Thank You',
-                                           subTitle: 'Your Order has been successfully processed',
-                                           cssClass: 'ionicPopUp',
-                                           buttons:[
-                                            {text:'OK',
-                                             type:'button-positive'},
-                                           ]
-                                         });
+
+                                    $rootScope.amount = $scope.amount;
+                                    $state.go('app.cardPayment');
                                 },
                                 function(err){
                                    console.log(err);

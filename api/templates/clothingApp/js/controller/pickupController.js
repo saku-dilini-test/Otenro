@@ -17,4 +17,8 @@ mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPop
                     template: 'Please check your connection!'
                 });
             });
+
+     $scope.gotoCartPayment = function(){
+         $state.go('app.cardPayment');
+     };
 });
