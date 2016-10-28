@@ -4,8 +4,12 @@
 
 mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants) {
 
-    $scope.userId=$rootScope.userId;
-    $scope.appId=$rootScope.appId;
+     // -- Config --
+                $scope.userId = $rootScope.userId;
+                $scope.appId = $rootScope.appId;
+                $scope.cartItems = $rootScope.cart.cartItems;
+                // default : tax info hide
+                $scope.isShowTaxInfo = false;
 
     $scope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;
