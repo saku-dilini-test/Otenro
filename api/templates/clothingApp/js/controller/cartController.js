@@ -141,9 +141,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     // Config Cart payment
     $scope.cardType = {};
     $scope.card = {
-        amount : $scope.getTotal()
+        amount : $stateParams.amount
     };
-
 
     $scope.makeStripePayment = makeStripePayment;
 
@@ -186,7 +185,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                         $scope.details ={
                             appId : $rootScope.appId,
                             item : $stateParams.item,
-                            amount : $scope.getTotal(),
+                            amount : $stateParams.amount,
                             customerName : $stateParams.deliverDetails.name,
                             deliveryAddress : $stateParams.deliverDetails.address,
                             telNumber : $stateParams.deliverDetails.number,
@@ -199,7 +198,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                         $scope.details ={
                             appId : $rootScope.appId,
                             item : $stateParams.item,
-                            amount : $scope.getTotal(),
+                            amount : $stateParams.amount,
                             customerName : $stateParams.deliverDetails.name,
                             telNumber : $stateParams.deliverDetails.number,
                             tax :   $scope.tax,

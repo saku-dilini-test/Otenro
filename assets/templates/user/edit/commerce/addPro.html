@@ -172,11 +172,12 @@
                                 <td>
                                     <md-input-container class="md-container-modify md-text-input-custom">
                                         <input id ='vType_{{$index}}'  type="text" name="vType_{{$index}}" min="1"
-                                                 maxlength="12" ng-model="data.vType" placeholder="Variant Type"
+                                               ng-pattern="/^\w+/"
+                                               maxlength="12" ng-model="data.vType" placeholder="Variant Type"
                                                ng-required="data.unlimited == false" ignore-mouse-wheel >
                                         <div ng-messages="priceAndVariantsForm['vType_' + $index].$error"
                                              ng-show="priceAndVariantsForm['vType_' + $index].$dirty">
-                                            <div ng-message="pattern">Invalid quantity</div>
+                                            <div ng-message="pattern">Invalid variant type</div>
                                             <div ng-message="required" class="my-message">Required!</div>
                                         </div>
                                     </md-input-container>
