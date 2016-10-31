@@ -58,7 +58,7 @@
                                 <label>Per order fee </label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <input class="input-shadow-border"  type="text" name="preOrderFee" ng-pattern="/^\d+(.\d{1,2})?$/"
-                                       ng-model="flatRates.preOrderFee" maxlength="10" required/>
+                                       ng-model="flatRates.preOrderFee" maxlength="10" ng-required="flatRates.feePerItem == ''"/>
                                 <br />
                                 <span class="error" ng-show="flatRate.preOrderFee.$error.pattern">Only Positive numbers and Maximum two decimal places only</span>
                             </fieldset>
@@ -66,7 +66,7 @@
                                 <label>Per item fee</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <input class="input-shadow-border" type="text" name="feePerItem" ng-pattern="/^\d+(.\d{1,2})?$/"
-                                       ng-model="flatRates.feePerItem" maxlength="10" required/>
+                                       ng-model="flatRates.feePerItem" maxlength="10" ng-required="flatRates.preOrderFee == ''"/>
                                 <br />
                                 <span class="error" ng-show="flatRate.feePerItem.$error.pattern">Only Positive numbers and Maximum two decimal places only</span>
                             </fieldset>
