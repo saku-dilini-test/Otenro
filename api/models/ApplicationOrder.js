@@ -21,6 +21,9 @@ module.exports = {
         customerName : {
             type : 'string'
         },
+        registeredName : {
+            type : 'string'
+        },
         telNumber : {
             type : 'integer'
         },

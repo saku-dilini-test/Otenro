@@ -9,7 +9,7 @@
                         <h1>Background Image</h1>
                     </div>
                     <div class="md-dialog-main">
-                        <fieldset class="col-2">
+
 
 
                         <!--<div class="md-dialog-main">
@@ -35,13 +35,16 @@
 
 
                        <div class="file-upload-wrapper clearfix">
-                            <p class="file-upload-msg">Crop your image</p>
-                            <div class="pull-left">
-                                <input  class="pull-left" type="file" ng-click = "cropImage()" id="fileInput" />
-                            </div>
+
                             <div class="cropArea">
                                 <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
                             </div>
+                           <div class="inputField btn-material img-up">
+                               <span>Select Image</span>
+                               <div class="img-up1">
+                                   <input  type="file" ng-click = "cropImage()" id="fileInput" />
+                               </div>
+                           </div>
                         </div>
 
                         <div class="uploaded-section pull-left clearfix">
@@ -53,7 +56,7 @@
                             </div>
                         </div>
 
-                    </fieldset>
+
                         </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
