@@ -579,3 +579,6 @@ overriding pull-left changes other styles too therefor commented
 .ui-grid-cell.ui-grid-disable-selection.ui-grid-row-header-cell {
   pointer-events: auto;
 }
+.ui-grid-sort-priority-number {
+    font-size: 0;
+}
