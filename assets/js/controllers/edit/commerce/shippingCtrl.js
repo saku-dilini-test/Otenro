@@ -126,7 +126,7 @@
             }
             else if(typeof pickup.number == 'undefined' || typeof pickup.streetAddress == 'undefined'
                 || typeof pickup.city == 'undefined' || typeof pickup.country == 'undefined'
-                || typeof pickup.country == 'undefined' || typeof pickup.cost == 'undefined'){
+                || typeof pickup.country == 'undefined'){
                         toastr.error('Fill all the fields', 'Warning', {
                             closeButton: true
                         });
