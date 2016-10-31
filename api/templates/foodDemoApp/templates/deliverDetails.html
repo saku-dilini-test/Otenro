@@ -2,7 +2,7 @@
     <ion-content>
         <div class="card animated zoomIn">
                 <h5 class="made-easy-header-font">Deliver Details</h5>
-
+                <form name="deliverDetails" novalidate>
                 <div class="custom-form">
                     <label class="item item-input item-floating-label">
                         <span class="made-easy-content-font input-label">Name</span>
@@ -15,12 +15,18 @@
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="made-easy-content-font input-label">Contact number</span>
-                        <input placeholder="Contact Number" type="number" ng-model="details.number">
+                        <input placeholder="Contact Number" type="text" name="teleNumber"
+                               ng-pattern="/^[\+]?[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,5}$/im"
+                               ng-model="details.number">
+                        <span class="help-block" ng-show="deliverDetails.teleNumber.$error.pattern">
+                             Enter a proper telephone number
+                        </span>
                     </label>
                     <div class="row">
                         <button class="button button-small button-block button-balanced" ng-click="deliver(details)" >Deliver</button>
                     </div>
                 </div>
+                </form>
         </div>
     </ion-content>
 </ion-view>

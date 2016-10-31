@@ -6,6 +6,7 @@
                 <div class="header-fonts delivery  made-easy-header-font">
                     <span>Pizza Delivery</span>
                 </div>
+                <form name="deliverDetails" novalidate>
                 <div class="image-wrapper">
                     <img src="img/pizza-delivery.jpg">
                 </div>
@@ -20,12 +21,18 @@
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="made-easy-content-font input-label">Contact Number</span>
-                        <input type="number" ng-model="details.number" placeholder="Contact Number">
+                        <input type="text" ng-model="details.number" name="teleNumber"
+                               ng-pattern="/^[\+]?[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,5}$/im"
+                               placeholder="Contact Number">
+                        <span class="help-block" ng-show="deliverDetails.teleNumber.$error.pattern">
+                             Enter a proper telephone number
+                        </span>
                     </label>
                     <div class="btn-full">
                         <button class="button button-assertive" ng-click="deliver(details)" >Deliver</button>
                     </div>
                 </div>
+                </form>
                 <!--<div class="item item-stacked-label">-->
                     <!--<div class="row2">-->
                         <!--<div>Name</div>-->
