@@ -90,6 +90,19 @@ angular.module('invisionApp', ['ionic', 'ngCordova','ionic.cloud', 'srfSocialSha
 		});
 	}])
 
+
+.config(function($ionicConfigProvider) {
+    $ionicConfigProvider.views.forwardCache(true);
+    $ionicConfigProvider.backButton.previousTitleText(false).text('');
+})
+
+
+
+
+
+
+
+
 .config([
 	'$stateProvider',
 	'$urlRouterProvider',
