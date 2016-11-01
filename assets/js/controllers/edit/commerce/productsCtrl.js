@@ -13,6 +13,7 @@
         $scope.tmpImage = [];
         $scope.product = initialData.product;
         $scope.selection = initialData.product.selection;
+        $scope.currency = $rootScope.currency;
 
         // Third Navigation Image Path ( Image get from server )
         var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id

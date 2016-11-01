@@ -5,10 +5,10 @@
     'use strict';
     angular.module("appEdit").controller("InventoryCtrl", [
     '$scope', 'inventoryService','commerceService','$rootScope','SERVER_URL','$auth','toastr','$mdDialog','initialData',
-    'productService','$filter',
+    'productService','$filter','$http',
     InventoryCtrl]);
     function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth,toastr,$mdDialog,
-    initialData,productService,$filter) {
+    initialData,productService,$filter,$http,currencyService) {
             $scope.currentPage = 1;
             $scope.pageSize = 5;
             $scope.userId=$auth.getPayload().id;
@@ -16,6 +16,7 @@
             $scope.SERVER_URL = SERVER_URL;
             $scope.isValideForm = true;
             $scope.inventoryList = [];
+        
 
             $scope.refreshData = function() {
                 $scope.inventoryList = initialData.inventoryList;
@@ -66,7 +67,7 @@
                 },
                 {
                     field:'price',
-                    displayName:'Price',
+                    displayName:'Price ('+$rootScope.currency + ")",
                     cellTemplate:  "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='priceForm'>"+
                                             "<md-input-container class='md-container-modify'>"+

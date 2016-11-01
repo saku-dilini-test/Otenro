@@ -4,17 +4,27 @@
 (function(){
     angular.module('appEdit').controller('AppEditAreaCtrl',[
         '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER',
-        'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore',
+        'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore','currencyService',
         AppEditAreaCtrl]);
 
     function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
-                             toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore){
+                             toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore,currencyService){
 
         $rootScope.bodyClass = 'appEdit';
 
         $scope.appId = $stateParams.appId;
         $rootScope.appId = $stateParams.appId;
         $scope.userId = $auth.getPayload().id;
+        currencyService.getCurrency()
+            .success(function (result) {
+                if(typeof result === 'undefined'){
+                    $rootScope.currency = '$';
+                }else {
+                    $rootScope.currency = result;
+                }
+
+            }).error(function (error) {
+        })
 
         var tempUrl = $cookieStore.get('url');
 

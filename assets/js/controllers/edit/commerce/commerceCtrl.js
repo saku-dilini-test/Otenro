@@ -23,6 +23,8 @@
         // About us
         $scope.maxAboutUsHeader = 20;
         $scope.maxAboutUsContent = 100;
+        $scope.currency = $rootScope.currency;
+
 
         $scope.refreshData = function() {
         $scope.gridOptions1.data = $filter('filter')($scope.ordersList, $scope.search, undefined);
@@ -114,6 +116,7 @@
                 templateUrl: 'user/edit/commerce/OrderDetailsView.html',
                 controller: function DialogController($scope, $mdDialog, $auth) {
                     $scope.oderData = row;
+                    $scope.currency = $rootScope.currency;
                     if($scope.oderData.entity.option == 'pickUp'){
                         $scope.orderType = 'Pick Up';
                     }
@@ -493,6 +496,7 @@
                         closeButton: true
                     });
                     $scope.selectedTab = current;
+                    $rootScope.currency = $scope.options.sign;
                 }).error(function (err) {
                     toastr.error(' warning', "Unable to get templates", {closeButton: true});
                 })
