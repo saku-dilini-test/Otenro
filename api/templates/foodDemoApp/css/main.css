@@ -69,8 +69,10 @@ a{
     text-align: center;
     color: #006666;
 }
-.made-easy-view .item-buy-quantity{
+.made-easy-view .item-buy{
     width: 100%;
+    border: unset;
+    border-bottom: 1px solid #ccc;
 }
 .item-error-message{
     color: red;

@@ -10,12 +10,13 @@
                         <div class="col">Price</div>
                         <div class="col"></div>
                     </div>
+            <form name="my">
                     <div class="row padding-vertical" ng-repeat="item in cartItems">
                         <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}"
                              ng-click="setActive = !setActive ">
                             {{item.name}}
                         </div>
-                        <div class="col" ng-model="item.qty" >{{item.qty}}</div>
+                        <div class="col" ng-model="item.qty">{{item.qty}}</div>
                         <div class="col" ng-model="item.total" >{{item.total}}</div>
                         <div class="col center "><a class="dark" ng-click="removeItem(index)">x</a></div>
                     </div>
@@ -32,33 +33,11 @@
                         <div class="col"></div>
                     </div>
 
-                    <div class="row font-small">
-                        <div class="col col-75">
-                            Delivery Charges with in City Limits
-                        </div>
-                        <div class="col">
-                            Rs 150
-                        </div>
-                    </div>
-                    <div class="row font-small">
-                        <div class="col col-75">
-                            Delivery Charges for off city Limits
-                        </div>
-                        <div class="col">
-                            Rs 50 per Km
-                        </div>
-                    </div>
-                </ui>
-                <div class="panel2">
-                    <!--<a class="social-button" ng-click="gotoCartPayment()" >Card Pay</a>-->
-                    <a class="social-button" ng-click="pickupDetails(cartItems)" >Pick Up</a>
-                    <a class="social-button" ng-click="delivery(cartItems)" >Delivery</a>
-
-
-
-
+                <div class="row">
+                    <button class="margin col button button-small button-dark" ng-click="pickupDetails(cartItems)" >Pick up</button>
+                    <button class="margin col button button-small button-dark" ng-click="delivery(cartItems)" >Delivery</button>
                 </div>
-            </div>
+            </form>
         </div>
     </ion-content>
 </ion-view>
