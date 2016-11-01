@@ -1,12 +1,13 @@
 <ion-view view-title="{{appName}}">
     <ion-content class="made-easy-background-color Paddingspace  article" lazy-scroll>
 
-                <div class="row" ng-if="$index%2==0" ng-repeat="article in artilceList">
+                <div class="row " ng-if="$index%2==0" ng-repeat="article in artilceList">
                     <div class="col col-50"  ng-if="$index<artilceList.length">
                         <div class="card animated zoomIn">
                             <a href="#/app/articleView/{{artilceList[$index].id}}">
                                 <div class="item item-image">
-                                     <img image-lazy-src="{{imageURL}}/{{artilceList[$index].imageUrl}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="-100"/>
+                                    <div class="grad"></div>
+                                     <img width="100%" image-lazy-src="{{imageURL}}/{{artilceList[$index].imageUrl}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="-100"/>
                                      <div class="item item-text-wrap">
                                         <div class="made-easy-header-font">{{artilceList[$index].title}}</div>
                                      </div>
@@ -18,7 +19,8 @@
                         <div class="card  animated zoomIn">
                             <a href="#/app/articleView/{{artilceList[$index+1].id}}">
                                 <div class="item item-image">
-                                    <img image-lazy-src="{{imageURL}}/{{artilceList[$index+1].imageUrl}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="-100"/>
+                                    <div class="grad"></div>
+                                    <img width="100%" image-lazy-src="{{imageURL}}/{{artilceList[$index+1].imageUrl}}" image-lazy-loader="android" image-lazy-distance-from-bottom-to-load="-100"/>
                                     <div class="item item-text-wrap">
                                         <div class="made-easy-header-font">{{artilceList[$index+1].title}}</div>
                                     </div>
