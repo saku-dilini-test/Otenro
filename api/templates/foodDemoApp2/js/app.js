@@ -158,6 +158,10 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       .state('app.pickup', {
           cache: false,
           url: '/pickup',
+          params:{
+              item: null,
+              deliverDetails:null
+            },
           views: {
               'menuContent': {
                   templateUrl: 'templates/pickup.html',
@@ -220,12 +224,13 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       cache: false,
       url: '/cardPayment',
       params:{
-          item: null,
-          deliverDetails:null,
-          amount:null,
-          shippingOpt:null,
-          method:null,
-          pickupId:null
+        item: null,
+        registeredName:null,
+        deliverDetails:null,
+        amount:null,
+        shippingOpt:null,
+        method:null,
+        pickupId:null
       },
       views: {
           'menuContent': {
@@ -244,19 +249,32 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('app.deliverDetails', {
-      cache: false,
-      url: '/deliverDetails',
-      params:{
-        item: null
-      },
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/deliverDetails.html',
-            controller: 'cartCtrl'
-        }
-      }
-    });
+   .state('app.deliverDetails', {
+       cache: false,
+       url: '/deliverDetails',
+       params:{
+         item: null,
+       },
+       views: {
+         'menuContent': {
+           templateUrl: 'templates/deliverDetails.html',
+             controller: 'cartCtrl'
+         }
+       }
+    })
+   .state('app.pickupDetails', {
+       cache: false,
+       url: '/pickupDetails',
+       params:{
+         item: null
+       },
+       views: {
+         'menuContent': {
+           templateUrl: 'templates/pickupDetails.html',
+             controller: 'cartCtrl'
+         }
+       }
+   });
 
   $urlRouterProvider.otherwise('/app/category');
 });

@@ -8,7 +8,7 @@
             </div>
 
             <div class="row pickup"  ng-repeat="pickupData in pickup">
-                <ion-checkbox ng-true-value="'{{pickupData.locationName}}'" ng-model="pickup.opt" class="made-easy-content-font checkbox-positive">
+                <ion-checkbox ng-true-value="'{{pickupData.id}}'" ng-model="pickup.opt" class="made-easy-content-font checkbox-positive">
                         <div ng-if="pickupData.locationName" class="col" ng-model="pickupData.locationName">{{pickupData.locationName}}</div>
                         <div class="content">
                             <div ng-if="pickupData.number" class="col" ng-model="pickupData.number">{{pickupData.number}},</div>

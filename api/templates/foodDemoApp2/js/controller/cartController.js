@@ -65,14 +65,21 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                 $state.go('app.login',{item:$scope.status});
             }
     }
-    $scope.pickup = function () {
+    $scope.pickupDetails = function (deliverItems) {
         if(localStorage.getItem('appLocalStorageUser')!==null){
-            $state.go('app.pickup');
+            $state.go('app.pickupDetails',{item:deliverItems});
         }
         else{
-            $state.go('app.login');
+            $scope.status = 'pickUp'
+            $state.go('app.login',{item:$scope.status});
         }
     }
+    $scope.pickUp = function (details) {
+        $state.go('app.pickup',{
+            item:$stateParams.item,
+            deliverDetails:details,
+        });
+    };
 
     //get the currency
     $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
@@ -97,10 +104,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                 });
 
 
-
+    $scope.amount = $scope.getTotal();
     $scope.deliver = function(deliverDetails){
-
-            $scope.amount = $scope.getTotal();
 
             $scope.method = 'Delivery';
             $scope.shipping={};
@@ -116,7 +121,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                         type: 'button-balanced',
                         onTap: function(e) {
                               if (!$scope.shipping.opt || $rootScope.cart.cartSize == 0) {
-                                //don't allow the user to close unless he selects an option
+                                //don't allow the user to continue unless he selects an option
                                 e.preventDefault();
                               } else {
                               $state.go('app.cardPayment',{

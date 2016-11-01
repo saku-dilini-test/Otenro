@@ -5,8 +5,11 @@
 
 mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state) {
 
-   // --/-- Here start Card Payment Function --/--
+  //getting the user's registered name and address
+  $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 
+   // --/-- Here start Card Payment Function --/--
+      console.log($stateParams.amount)
       // Config Cart payment
       $scope.cardType = {};
       $scope.card = {
@@ -21,44 +24,43 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
        */
       function makeStripePayment(_cardInformation) {
 
-          if (!window.stripe) {
-              alert("stripe plugin not installed");
-              return;
-          }
-
-          if (!_cardInformation) {
-              alert("Invalid Card Data");
-              return;
-          }
-          stripe.charges.create({
-                  // amount is in cents so * 100
-                  amount: _cardInformation.amount * 100,
-                  currency: 'usd',
-                  card: {
-                      "number": _cardInformation.number,
-                      "exp_month": _cardInformation.exp_month,
-                      "exp_year": _cardInformation.exp_year,
-                      "cvc": _cardInformation.cvc,
-                      "name": _cardInformation.userName
-                  },
-                  description: $rootScope.appName
-              },
-              function(response) {
-                  console.log(JSON.stringify(response, null, 2));
-                  // TODO : This alert for only testing
-                  alert(JSON.stringify(response, null, 2));
-                  if(response.error){
-                      alert("Error");
-                      // TODO : Error handle here
-                  }else{
+//          if (!window.stripe) {
+//              alert("stripe plugin not installed");
+//              return;
+//          }
+//
+//          if (!_cardInformation) {
+//              alert("Invalid Card Data");
+//              return;
+//          }
+//          stripe.charges.create({
+//                  // amount is in cents so * 100
+//                  amount: _cardInformation.amount * 100,
+//                  currency: 'usd',
+//                  card: {
+//                      "number": _cardInformation.number,
+//                      "exp_month": _cardInformation.exp_month,
+//                      "exp_year": _cardInformation.exp_year,
+//                      "cvc": _cardInformation.cvc,
+//                      "name": _cardInformation.userName
+//                  },
+//                  description: $rootScope.appName
+//              },
+//              function(response) {
+//                  console.log(JSON.stringify(response, null, 2));
+//                  // TODO : This alert for only testing
+//                  alert(JSON.stringify(response, null, 2));
+//                  if(response.error){
+//                      alert("Error");
+//                      // TODO : Error handle here
+//                  }else{
                       alert("Payment Success");
-                      // TODO : Currently back to cart
-                      $state.go('app.cart');
                       if($stateParams.pickupId == null){
                           $scope.details ={
                               appId : $rootScope.appId,
                               item : $stateParams.item,
-                              amount : $scope.getTotal(),
+//                              amount : $scope.getTotal(),
+                              registeredName : $scope.user.name,
                               customerName : $stateParams.deliverDetails.name,
                               deliveryLocation : $stateParams.deliverDetails.location,
                               deliveryNo : $stateParams.deliverDetails.no,
@@ -76,7 +78,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                           $scope.details ={
                              appId : $rootScope.appId,
                              item : $stateParams.item,
-                             amount : $scope.getTotal(),
+//                             amount : $scope.getTotal(),
                              customerName : $stateParams.deliverDetails.name,
                              telNumber : $stateParams.deliverDetails.number,
                              tax :   $scope.tax,
@@ -103,7 +105,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                   ]
                                 });
                                 // TODO : Currently back to cart
-                               $state.go('app.cart');
+                                //back to Main Menu
+                               $state.go('app.category');
                               },
                         function(err){
                           console.log(err);
@@ -114,12 +117,12 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                      });
                   }
 
-              },
-              function(response) {
-                  alert(JSON.stringify(response));
-                  alert("Error");
-              }   // error handler
-          );
-      }
+//              },
+//              function(response) {
+//                  alert(JSON.stringify(response));
+//                  alert("Error");
+//              }   // error handler
+//          );
+//      }
       // --/-- Here end Card Payment Function --/--
 });
