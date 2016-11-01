@@ -122,8 +122,10 @@
                         inventoryService:'inventoryService',
                         initialData:['inventoryService','$q', function(inventoryService,$q){
                             return $q.all({
-                                inventoryList:inventoryService.query({appId:$rootScope.appId}).$promise
+                                  inventoryList : inventoryService.query({appId:$rootScope.appId}).$promise
+
                             });
+
                         }]
                     }
                 }).then(function (answer) {

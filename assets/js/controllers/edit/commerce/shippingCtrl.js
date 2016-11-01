@@ -15,6 +15,7 @@
         $scope.maxFlatRate = 20;
         $scope.maxWeightRate = 20;
         $scope.maxPickup = 20;
+        $scope.currency = $rootScope.currency;
 
 
         // --/-- enable & disable tabs --/--
