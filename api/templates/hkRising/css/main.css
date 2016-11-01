@@ -21,14 +21,19 @@
     background-color: inherit;
 }
 .made-easy-header-font{
-    color: #FFD700;
-    font-family: inherit;
-    font-size: 2.9vh;
-    font-weight: inherit;
-    line-height:normal;
-    font-weight: bold;
-    text-transform: capitalize;
-    text-align: center;
+        color: #FFD700;
+       font-family: inherit;
+       font-size: 2.4vh;
+       font-weight: inherit;
+       line-height: normal;
+       font-weight: bold;
+       text-align: center;
+       text-transform: capitalize;
+       bottom: 20px;
+       text-shadow: rgba(255,255,255,0.5) 2px 3px 6px;
+
+
+
 
 }
 .made-easy-content-font{
@@ -140,8 +145,25 @@ a[href]:hover{
         cursor: url(../img/cursor.cur), auto;
     }
 
-/*--give the space between images--
-.space{
-    margin: 0px;
+/*--give the space between images--*/
+.article.Paddingspace
+{
+    position: absolute;
+    top: 0px;
+    margin-right: -5px;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    margin-top: -8px;
+    padding-top: 5px;
+    margin-bottom: -15px;
+    width: auto;
+    height: auto;
+    margin-left: -5px;
+
 }
-*/
+/*icon color change*/
+.iconcolor
+{
+
+}

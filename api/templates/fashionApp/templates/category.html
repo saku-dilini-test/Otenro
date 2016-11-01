@@ -19,8 +19,6 @@
 						<!--<div class="col col-60 right-align item-category"><i class="icon ion-clock"></i>{{item.date | date:'MMM d, y'}}</div>-->
 						<!--</div>-->
 					</div>
-
-
 				</ion-item>
 			</ion-list>
 			<ion-infinite-scroll ng-if="!categoryCtrl.noMoreItemsAvailable" on-infinite="categoryCtrl.loadData()" distance="10%"></ion-infinite-scroll>

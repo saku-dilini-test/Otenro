@@ -4,15 +4,15 @@ angular.module('starter.controllers', [])
 
         // show & hide menu icon button
         $scope.showMenu = true;
-        $scope.$on('hideMenu', function(){
-            $scope.showMenu = false;
-        });
-        $scope.$on('$stateChangeStart', function(){
-            $scope.showMenu = true;
-        });
+      $scope.$on('hideMenu', function(){
+           $scope.showMenu = false;
+       });
+       $scope.$on('$stateChangeStart', function(){           $scope.showMenu = true;
+       });
 
         $scope.goBack = function(){
             $ionicHistory.goBack();
+
         };
 
         //get the user name
@@ -169,6 +169,8 @@ angular.module('starter.controllers', [])
 
     .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading,initialData,readMadeEasy) {
 
+
+
         $ionicLoading.show({
             template: '<ion-spinner icon="lines" ></ion-spinner>'
         });
@@ -184,7 +186,6 @@ angular.module('starter.controllers', [])
             $scope.selectedArticle = getInitialData.data;
         }
         $scope.imageURL = initialData.imageURL;
-
 
 
 
@@ -212,6 +213,7 @@ angular.module('starter.controllers', [])
             $scope.appId = $rootScope.appId;
             $scope.appName = $rootScope.appName;
             $scope.userId = $rootScope.userId;
+
 
             $scope.imageURL = constants.SERVER_URL
                 +"/templates/viewImages?userId="
