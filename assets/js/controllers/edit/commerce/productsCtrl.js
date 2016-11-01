@@ -20,6 +20,7 @@
                             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=thirdNavi/";
 
         function  disableTabs(selectedTab,tab1,tab2,tab3,tab4) {
+            console.log(selectedTab);
             $scope.selectedTab = selectedTab;
             $scope.addProductsOptionParams = {
                 firstLocked : tab1,
@@ -92,7 +93,8 @@
                 $scope.product.variants = [];
                 $scope.product.variants.push({"sku":product.sku,"name":product.name})
             }
-            disableTabs(current,false,false,false,true);
+            disableTabs(current,true,true,false,true);
+
         };
 
         /**
