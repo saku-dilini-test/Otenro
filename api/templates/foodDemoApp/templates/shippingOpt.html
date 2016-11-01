@@ -13,7 +13,7 @@
     <span ng-if="data.feePerItem != 0">Per Item Fee - {{data.feePerItem}}</span>
 </ion-checkbox>
 
-<ion-checkbox ng-repeat="data in shippingData | filter: {shippingOption: 'Weight Base'}" ng-model="shipping.opt" ng-true-value="'{{data.optionName}}'" class="checkbox-balanced item-checkbox-right" >
+<ion-checkbox ng-repeat="data in shippingData | filter: {shippingOption: 'Weight Based'}" ng-model="shipping.opt" ng-true-value="'{{data.optionName}}'" class="checkbox-balanced item-checkbox-right" >
     <h3>{{data.optionName}}</h3>
     <span>Cost For the selected Address</span><br>
     <div ng-repeat="weight in data.weightRanges">

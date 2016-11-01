@@ -72,7 +72,7 @@
                 $scope.country = $scope.initialData.countryRestriction;
                 disableTabs(1,true,false,true,true,true);
             }
-            if($scope.initialData.shippingOption == 'Weight Base'){
+            if($scope.initialData.shippingOption == 'Weight Based'){
                 $scope.weightRate = $scope.initialData;
                 $scope.addNewWeightRange = function(){
                     $scope.weightRate.weightRanges.push({startWeight : '',endWeight : '',cost : ''})
@@ -184,7 +184,7 @@
             }
             else {
                 shipping.appId = $rootScope.appId;
-                shipping.shippingOption = 'Weight Base';
+                shipping.shippingOption = 'Weight Based';
                 $scope.shipping = shipping;
                 disableTabs(3,true,true,false,true,false);
             }
@@ -262,7 +262,7 @@
                         closeButton: true
                     });
                 }
-                else if ($scope.shipping.shippingOption == "Weight Base"){
+                else if ($scope.shipping.shippingOption == "Weight Based"){
                     toastr.success('Weight Based Option has been added successfully ', 'Saved', {
                         closeButton: true
                     });
