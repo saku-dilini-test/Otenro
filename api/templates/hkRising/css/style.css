@@ -55,7 +55,7 @@
 }
 
 .card, .list-inset {
-    margin: 5% !important;
+    margin: 1% !important;
 }
 
 .item-text-wrap2 .item, .item-text-wrap2 .item-content2, .item-text-wrap2, .item-text-wrap2 h1, .item-text-wrap2 h2, .item-text-wrap2 h3, .item-text-wrap2 h4, .item-text-wrap2 h5, .item-text-wrap2 h6, .item-text-wrap2 p, .item-complexw.item-text-wrapw .item-contentw, .item-body2 h1, .item-body2 h2, .item-body2 h3, .item-body2 h4, .item-body2 h5, .item-body2 h6, .item-body2 p {
@@ -93,10 +93,10 @@
 }
 
 .tabs {
-    background: transparent !important;
-    border:none;
-    cursor: url(../img/cursor.cur), auto;
-    width:inherit;
+   background: rgba(0, 0, 0, 0.3) !important;
+       border: none;
+       cursor: url(../img/cursor.cur), auto;
+       width: 100%;
 }
 
 
@@ -113,12 +113,16 @@
     padding: 15px 0;
     text-align:center;
     background-color: initial;
+
+
 }
 .tab-item2 {
-    font-weight: 500;
-    font-size: 2.2vh;
-    padding-right: 10px;
-    color:#fff;
+   font-weight: 500;
+       font-size: 3.2vh;
+       padding-right: 10px;
+       color: #fff;
+       text-align: center;
+       font-weight: bold;
 }
 
  .bar-stable.button.button-clear {
