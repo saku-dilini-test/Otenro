@@ -1,10 +1,9 @@
 
 
-mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPopup, $state, constants) {
+mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPopup, $state, constants, $stateParams) {
 
     $http.get(constants.SERVER_URL + "/edit/getShippingPickupInfo?appId="+$rootScope.appId)
         .success(function (data) {
-                console.log("data " +data);
 
                 $scope.pickup=data;
                /* $scope.header = data.header;
@@ -17,4 +16,13 @@ mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPop
                     template: 'Please check your connection!'
                 });
             });
+
+            $scope.gotoCartPayment = function(){
+                        $state.go('tab.cardPayment',{
+                            pickupId:$scope.pickup.opt,
+                            item:$stateParams.item,
+                            deliverDetails:$stateParams.deliverDetails,
+                            amount:$stateParams.amount
+                        });
+                    };
 });

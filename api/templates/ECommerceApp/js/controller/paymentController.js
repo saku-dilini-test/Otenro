@@ -1,8 +1,5 @@
-/**
- * Created by amila on 4/5/16.
- */
  /**
- * Edited by Shashan on 02/11/16.
+ * created by Shashan on 02/11/16.
  */
 
 mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state) {
@@ -108,7 +105,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                 });
                                 // TODO : Currently back to cart
                                 //back to Main Menu
-                               $state.go('app.category');
+                               $state.go('tab.home');
                               },
                         function(err){
                           console.log(err);

@@ -78,6 +78,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         $state.go('app.pickup',{
             item:$stateParams.item,
             deliverDetails:details,
+            amount: $scope.amount
         });
     };
 

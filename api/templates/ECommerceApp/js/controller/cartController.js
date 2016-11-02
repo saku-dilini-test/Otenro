@@ -96,94 +96,78 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                 }
             }
 
-             $scope.pickup = function () {
-                 if(localStorage.getItem('appLocalStorageUser')!==null){
-                     $state.go('tab.pickup');
-                 }
-                 else{
-                     $state.go('tab.login');
-                 }
-             }
-
-
-            // get the shipping options
-            $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
-                    .success(function (data) {
-                            $scope.shippingData=data;
-                        },
-                        function (err) {
-                            $ionicPopup.alert({
-                                title: 'Policies Data loading error!',
-                                template: 'Please check your connection!'
-                            });
-                        });
-
-            $scope.deliver = function (deliverDetails) {
-                $scope.amount = $scope.getTotal();
-
-                 $scope.shipping={};
-                            var SelectShippingOptions = $ionicPopup.alert({
-                                   templateUrl: 'templates/shippingOpt.html',
-                                   title: 'Shipping Options',
-                                   subTitle: 'Choose a Delivery Option you wish.',
-                                   cssClass: 'ionicPopUp',
-                                   scope: $scope,
-                                   buttons:[
-                                       {text:'Back'},
-                                       {text: 'Deliver',
-                                        type: 'button-balanced',
-                                        onTap: function(e) {
-                                              if (!$scope.shipping.opt || $rootScope.cart.cartSize == 0) {
-                                                //don't allow the user to close unless he selects an option
-                                                e.preventDefault();
-                                              } else {
-                                                $scope.details = {
-                                                    appId: $rootScope.appId,
-                                                    item: $stateParams.item,
-                                                    amount: $scope.amount,
-                                                    customerName: deliverDetails.name,
-                                                    deliveryAddress: deliverDetails.address,
-                                                    telNumber: deliverDetails.number,
-                                                    tax :   $scope.taxTotal,
-                                                    shippingOpt : $scope.shipping.opt
-                                                };
-
-                                                $http.post(constants.SERVER_URL + "/templatesOrder/saveOrder", $scope.details)
-                                                    .then(function (res) {
-                                                        $scope.details.id = $rootScope.cart.cartItems[0].id;
-                                                        $http.post(constants.SERVER_URL + "/templatesInventory/updateInventory", $stateParams.item)
-                                                            .then(function (res) {
-                                                                $rootScope.cart.cartItems = [];
-                                //                                $rootScope.cart.cartSize = 0;
-                                //                                $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-                                                                $rootScope.cart.totalPrice = 0;
-                                                                $rootScope.cart.totalQuantity = 0;
-                                                                $ionicPopup.alert({
-                                                                   title: 'Thank You',
-                                                                   subTitle: 'Your Order has been successfully processed',
-                                                                   cssClass: 'ionicPopUp',
-                                                                   buttons:[
-                                                                    {text:'OK',
-                                                                     type:'button-positive'},
-                                                                   ]
-                                                                });
-
-                                                                    $scope.details = null;
-                                                            },
-                                                            function (err) {
-                                                                console.log(err);
-                                                            });
-                                                    },
-                                                    function (err) {
-                                                        console.log(err);
-                                                    });
-                                                     }
-                                                }
-                                               }
-                                           ]
-                                    });
+            $scope.pickupDetails = function (deliverItems) {
+                if(localStorage.getItem('appLocalStorageUser')!==null){
+                    $state.go('tab.pickupDetails',{item:deliverItems});
+                }
+                else{
+                    $scope.status = 'pickUp'
+                    $state.go('tab.login',{item:$scope.status});
+                }
             }
+            $scope.pickUp = function (details) {
+                $state.go('tab.pickup',{
+                    item:$stateParams.item,
+                    deliverDetails:details,
+                    amount: $scope.amount
+                });
+            };
 
-        });
+    //get the currency
+    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
+            $scope.currency = data;
+    }).error(function(err) {
+        alert('warning', "Unable to get Products Selected Category", err.message);
+    });
 
-//})();
+    //get the user's registered address
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
+
+    // get the shipping options
+    $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
+            .success(function (data) {
+                    $scope.shippingData=data;
+                },
+                function (err) {
+                    $ionicPopup.alert({
+                        title: 'Policies Data loading error!',
+                        template: 'Please check your connection!'
+                    });
+                });
+
+
+    $scope.amount = $scope.getTotal();
+    $scope.deliver = function(deliverDetails){
+
+            $scope.method = 'Delivery';
+            $scope.shipping={};
+            var SelectShippingOptions = $ionicPopup.alert({
+                   templateUrl: 'templates/shippingOpt.html',
+                   title: 'Shipping Options',
+                   subTitle: 'Choose a Delivery Option you wish.',
+                   cssClass: 'ionicPopUp',
+                   scope: $scope,
+                   buttons:[
+                       {text:'Back'},
+                       {text: 'Deliver',
+                        type: 'button-balanced',
+                        onTap: function(e) {
+                              if (!$scope.shipping.opt || $rootScope.cart.cartSize == 0) {
+                                //don't allow the user to continue unless he selects an option
+                                e.preventDefault();
+                              } else {
+                              $state.go('tab.cardPayment',{
+                               item:$stateParams.item,
+                               deliverDetails:deliverDetails,
+                               amount : $scope.amount,
+                               shippingOpt : $scope.shipping.opt,
+                               method: $scope.method
+                            });
+                             }
+                        }
+                       }
+                   ]
+            });
+    }
+
+});
