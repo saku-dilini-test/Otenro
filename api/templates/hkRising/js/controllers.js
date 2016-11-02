@@ -4,10 +4,10 @@ angular.module('starter.controllers', [])
 
         // show & hide menu icon button
         $scope.showMenu = true;
-      $scope.$on('hideMenu', function(){
-           $scope.showMenu = false;
+        $scope.$on('hideMenu', function(){
+        $scope.showMenu = false;
        });
-       $scope.$on('$stateChangeStart', function(){           $scope.showMenu = true;
+       $scope.$on('$stateChangeStart', function(){           $scope.showMenu = false;
        });
 
         $scope.goBack = function(){
