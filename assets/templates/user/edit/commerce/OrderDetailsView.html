@@ -30,7 +30,7 @@
                     <h7>Deliver to:</h7>
                     <div class="row" ng-if="oderData.entity.deliveryLocation !== 'New'">
                         <div class="col-md-4"><h7>Address</h7></div>
-                        <div class="col-md-8"><h7>{{oderData.entity.deliveryLocation}}</h7></div>
+                        <div class="col-md-8"><h7>: {{oderData.entity.deliveryLocation}}</h7></div>
                     </div>
                     <div class="row" ng-if="oderData.entity.deliveryLocation == 'New'">
                         <div class="col-md-4"><h7>No</h7></div>
@@ -101,7 +101,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>+Tax</td>
-                    <td>{{oderData.entity.tax}}</td>
+                    <td>{{oderData.entity.tax || 0}}</td>
                 </tr>
                 <tr class="total">
                     <td>&nbsp;</td>
