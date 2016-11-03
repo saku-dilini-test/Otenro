@@ -57,86 +57,19 @@ a{
 
 }
 
-/* ----- Second Navigation Page ----- */
-.made-easy-second-navigation {}
-
-/* ----- Third Navigation Page ----- */
-.made-easy-third-navigation {}
-
 /* ----- View Page ----- */
-.made-easy-view {}
-.made-easy-view .item-name {
-    text-align: center;
-    color: #006666;
-}
-.made-easy-view .item-buy-quantity{
+.made-easy-view .item-buy{
     width: 100%;
+    border: unset;
+    border-bottom: 1px solid #ccc;
 }
 .item-error-message{
     color: red;
     font-size: 70%;
 }
 
-/* ----- Contact Us Page ----- */
-.made-easy-contactUs {}
-.made-easy-contactUs .header{}
-.made-easy-contactUs .header .header-image {
-    width: 100%;
-    height: auto;
-}
-.made-easy-contactUs .content {
-    text-align: center;
-}
-.made-easy-contactUs .content .last {
-    margin-bottom: 20px;
-}
-.made-easy-contactUs .bottom {
-    margin-top: 2.5%;
-}
-
-/* ----- About Us Page ----- */
-.made-easy-aboutUs {}
-.made-easy-aboutUs .header{}
-.made-easy-aboutUs .header .header-image {
-    width: 100%;
-    height: auto;
-}
-.made-easy-aboutUs .content {
-    text-align: center;
-    padding: 8px;
-}
-.made-easy-aboutUs .content .last {
-    margin-bottom: 20px;
-}
-
-/* ----- Terms Page ----- */
-.made-easy-terms {}
-.made-easy-terms .content {
-    text-align: center;
-}
-
-/*------- Button Setting ------- */
-.made-easy-button-create-account {
-    background-color: #FFBF0A;
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    cursor: url(../img/cursor.cur), auto;;
-    border-radius:4px;
-    width: 94%;
-    margin: 10px;
-}
-
 /* ------------------- */
 
-h7 {
-  font-family: Helvetica, sans-serif;
-  font-size: 35px !important;
-  font-weight: 300;
-  color:#666 !important;
-}
 .badge2{
     background-color: transparent;
     color: #404040;
@@ -154,42 +87,6 @@ h7 {
 .col{
     cursor: url(../img/cursor.cur), auto;
 }
-
-
-/**
- * Cards and Inset Lists
- * --------------------------------------------------
- * A card and list-inset are close to the same thing, except a card as a box shadow.
- */
-
-
-.padding-left > .list .item2 {
-  margin-left: 0; }
-
-.padding-right > .list .item2 {
-  margin-right: 0; }
-
-/**
- * Badges
- * --------------------------------------------------
- */
-	a[href]:hover{
-        cursor: url(../img/cursor.cur), auto;
-    }
-
-/*
- *  back to login text in register page
- */
-.back-to-login-text p{
-    text-align: center;
-    color: #fff;
-    font-weight: bold;
-}
-
-
-/*-- Responsive CSS --*/
-
-
 
 
 /** ----------- End Custom update Css Class ---------- **/

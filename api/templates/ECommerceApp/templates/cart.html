@@ -1,9 +1,8 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="Cart">
     <ion-content class="padding" >
         <div class="list card">
-            <div class="item item-body">
-                <div class="header-fonts made-easy-header-font">
-                    <span>Shopping Cart</span>
+                <div class="row ">
+                    <div class="col align-center made-easy-header-font">Shopping Cart</div>
                  </div>
                 <div class=" made-easy-header-font cart-item-header">
                   <div class="row">
@@ -16,9 +15,9 @@
                 <div class="cart-item" ng-repeat="item in cartItems" >
                   <div class="row">
                     <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}</div>
-                    <div class="col" ng-model="item.qty" >{{item.qty}}</div>
-                    <div class="col" ng-model="item.total" >{{item.total}}</div>
-                    <div class="col"><a ng-click="removeItem(index)">x</a></div>
+                    <div class="col align-right" ng-model="item.qty" >{{item.qty}}</div>
+                    <div class="col align-right" ng-model="item.total" >{{item.total}}</div>
+                    <div class="col align-right"><a ng-click="removeItem(index)"><i class="icon ion-ios-trash-outline"></i></a></a></div>
                   </div>
                 </div>
 
@@ -33,7 +32,7 @@
                 </div>
 
                 <div class="cart-total">
-                  <div class="row">
+                  <div class="row align-right">
                     <div class="col col-50">Total</div>
                     <div class="col" ng-model="quantity">{{getTotalQuantity()}}</div>
                     <div class="col" ng-model="total" >{{getTotal()}}</div>
@@ -41,12 +40,11 @@
                   </div>
                 </div>
 
-                <div class="row btn-full">
-                  <button class="button button-assertive" ng-click="pickup()" >Pickup</button>
-                  <button class="button button-assertive" ng-click="delivery(cartItems)">Delivery</button>
+                <div class="row">
+                  <button class="col margin button button-small button-assertive" ng-click="pickupDetails(cartItems)" >Pickup</button>
+                  <button class="col margin button button-small button-assertive" ng-click="delivery(cartItems)">Delivery</button>
                   <!--<a class="social-button " ng-click="delivery(cartItems)" >Delivery</a>-->
                 </div>
-             </div>
        </div>
 
   </ion-content>

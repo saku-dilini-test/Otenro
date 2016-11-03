@@ -52,8 +52,9 @@ ion-content{
 
 /* ----- View Page ----- */
 
-.made-easy-view .item-buy-quantity{
-    width: 50px;
+.made-easy-view .item-buy{
+    width: 90%;
+    border: unset;
     border-bottom: 1px solid #ccc;
 }
 .made-easy-view .item-error-message{
@@ -61,6 +62,10 @@ ion-content{
     font-size: 70%;
 }
 
-
+/*backbutton color change*/
+.backcolor
+{
+  background: #ccc;
+}
 
 /** ----------- End Custom update Css Class ---------- **/

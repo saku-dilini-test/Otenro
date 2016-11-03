@@ -2,8 +2,7 @@
     <ion-content class="padding" >
         <ion-slides slider="data.slider" options="options">
             <ion-slide-page ng-repeat="item in itemList" >
-                <div class="list card">
-                    <div class="item item-body">
+                <div class="card">
                         <div class="image-wrapper">
                             <img src="{{imageURL}}/{{item.imageUrl}}">
                         </div>
@@ -15,13 +14,12 @@
                         </div>
 
                         <div class="description">
-                            <span class="made-easy-content-font">{{item.detailedDesc}}</span>
+                            <div class="align-center made-easy-content-font">{{item.detailedDesc}}</div>
                         </div>
                         <div  class="btn-full">
                             <button class="button button-balanced" ui-sref="tab.item({item:item})">ORDER NOW</button>
                         </div>
                     </div>
-                </div>
                 </ion-slide-page>
         </ion-slides>
         <!-- Add Arrows -->

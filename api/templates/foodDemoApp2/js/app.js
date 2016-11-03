@@ -1,4 +1,4 @@
-var mobileApp=angular.module('foodDemoApp', ['ionic','ionic.cloud','satellizer']);
+var mobileApp=angular.module('foodDemoApp', ['ionic','ionic.cloud','satellizer','credit-cards']);
 
 mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy,$ionicPush,$http,constants) {
   $ionicPlatform.ready(function() {
@@ -160,7 +160,8 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           url: '/pickup',
           params:{
               item: null,
-              deliverDetails:null
+              deliverDetails:null,
+              amount: null
             },
           views: {
               'menuContent': {

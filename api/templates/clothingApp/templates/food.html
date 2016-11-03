@@ -1,42 +1,54 @@
 <ion-view view-title="{{foodInfo.name}}">
     <ion-content class="made-easy-background-image made-easy-background-color made-easy-view">
         <div class="card">
-                    <div class="padding animated bounceInRight">
-                        <ion-slide-box options="sliderOptions" slider="sliderDelegate" show-pager="false">
-                            <ion-slide ng-repeat="image in images">
-                                <img width="100%" ng-src="{{imageURL}}/{{image.img}}" >
-                            </ion-slide>
-                        </ion-slide-box>
-                    </div>
+            <div class="padding animated bounceInRight">
+                <ion-slide-box options="sliderOptions" slider="sliderDelegate" show-pager="false">
+                    <ion-slide ng-repeat="image in images">
+                        <img width="100%" ng-src="{{imageURL}}/{{image.img}}" >
+                    </ion-slide>
+                </ion-slide-box>
+            </div>
 
-                    <div class="row animated rubberBand">
-                        <div class="col made-easy-header-font">{{foodInfo.name}}</div>
-                    </div>
-                    <div class="row animated zoomIn">
-                        <div class="col center made-easy-content-font">{{foodInfo.detailedDesc}}</div>
-                    </div>
+            <div class="row animated rubberBand">
+                <div class="col made-easy-header-font">{{foodInfo.name}}</div>
+            </div>
+            <div class="row animated zoomIn">
+                <div class="col center made-easy-content-font">{{foodInfo.detailedDesc}}</div>
+            </div>
 
+            <div class="item item-text-wrap cart-item-header">
                     <div class="row">
-                        <div class="col">{{foodInfo.selection}}</div>
-                        <div class="col">Price</div>
-                        <div class="col">Qty</div>
-                    </div>
-                    <div class="row">
-                        <select class="col"
-                          ng-model="selectedVariant"
-                          ng-options="variant.vType  for variant in foodInfo.variants"
-                          ng-change="changeVariant(selectedVariant)">
-                        </select>
-                        <div class="col col-center" style="margin-top: 1px;">
-                            {{currency.sign}} {{selectedVariant.price}}
+                        <div class="col col-50 align-right">
+                            {{foodInfo.selection}} :
                         </div>
-                        <div class="col">
+                        <div class="col col-50 align-left">
+                            <select ng-model="selectedVariant"
+                                    class="item-buy"
+                                    ng-options="variant.vType  for variant in foodInfo.variants"
+                                    ng-change="changeVariant(selectedVariant)">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-50 align-right">
+                            Price :
+                        </div>
+                        <div class="col col-50 align-left">
+                            {{currency.sign}} : {{selectedVariant.price}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-50 col-center align-right">
+                            Qty :
+                        </div>
+                        <div class="col col-50 align-left">
                             <input type="number" min="1"
-                             class="item-buy-quantity"
-                             ng-model="selectedVariant.buyQuantity"
-                             ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
+                                   class="item-buy"
+                                   ng-model="selectedVariant.buyQuantity"
+                                   ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
                         </div>
                     </div>
+            </div>
                     <!-- Buy Qty error message -->
                     <div class="row">
                         <!-- Product not available in store -->
@@ -60,11 +72,11 @@
                     <!-- Bye Button -->
                     <div class="row">
                         <div class="col col-top"> </div>
-                        <div class="col col-50 col-center">
-                            <button class="button button-block button-small button-calm"
+                        <div class="col col-67 col-center">
+                            <button class="button button-block button-small button-royal"
                                     ng-disabled="isBuyBtnDisable"
                                     ng-click="addToCart()">
-                                Buy
+                                Add to cart
                             </button>
                         </div>
                         <div class="col col-bottom"> </div>

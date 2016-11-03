@@ -4,6 +4,8 @@
 
 mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants) {
 
+    $scope.$emit('hideMenu',{});
+
      // -- Config --
                 $scope.userId = $rootScope.userId;
                 $scope.appId = $rootScope.appId;
@@ -84,6 +86,15 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             });
     };
 
+    //get the currency
+    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
+            $scope.currency = data;
+    }).error(function(err) {
+        alert('warning', "Unable to get Products Selected Category", err.message);
+    });
+
+    //get the user's registered address
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 
     // get the shipping options
     $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
@@ -104,8 +115,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                  });
             });
 
+    $scope.amount = $scope.getTotal();
     $scope.deliver = function(deliverDetails){
-                $scope.amount = $scope.getTotal();
                 $scope.method = 'Delivery';
                 $scope.shipping={};
                 var SelectShippingOptions = $ionicPopup.alert({
@@ -120,7 +131,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                             type: 'button-balanced',
                             onTap: function(e) {
                                   if (!$scope.shipping.opt || $rootScope.cart.cartSize == 0) {
-                                    //don't allow the user to close unless he selects an option
+                                    //don't allow the user to continue unless he selects an option
                                     e.preventDefault();
                                   } else {
                                   $state.go('app.cardPayment',{
@@ -185,9 +196,15 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                         $scope.details ={
                             appId : $rootScope.appId,
                             item : $stateParams.item,
-                            amount : $stateParams.amount,
+                            amount : $scope.getTotal(),
+                            registeredName : $scope.user.name,
                             customerName : $stateParams.deliverDetails.name,
-                            deliveryAddress : $stateParams.deliverDetails.address,
+                            deliveryLocation : $stateParams.deliverDetails.location,
+                            deliveryNo : $stateParams.deliverDetails.no,
+                            deliveryStreet : $stateParams.deliverDetails.street,
+                            deliveryCity : $stateParams.deliverDetails.city,
+                            deliveryCountry : $stateParams.deliverDetails.country,
+                            deliveryZip : $stateParams.deliverDetails.zip,
                             telNumber : $stateParams.deliverDetails.number,
                             tax :   $scope.tax,
                             shippingOpt : $stateParams.shippingOpt,
@@ -198,7 +215,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                         $scope.details ={
                             appId : $rootScope.appId,
                             item : $stateParams.item,
-                            amount : $stateParams.amount,
+                            amount : $scope.getTotal(),
                             customerName : $stateParams.deliverDetails.name,
                             telNumber : $stateParams.deliverDetails.number,
                             tax :   $scope.tax,
@@ -226,7 +243,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                                ]
                              });
                              // TODO : Currently back to cart
-                             $state.go('app.cart');
+                             $state.go('app.category');
                          },
                          function(err){
                             console.log(err);

@@ -50,13 +50,9 @@ mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy,$ionicPush,$http,c
             $rootScope.appName = data.name;
         });
     }
-}).config(function($ionicConfigProvider, $sceDelegateProvider) {
+}).config(function($ionicConfigProvider) {
     $ionicConfigProvider.views.forwardCache(true);
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
-
-    $sceDelegateProvider.resourceUrlWhitelist([
-      'self',
-      'https://www.google.com/maps/**']);
 })
 
 // Ionic Cloud Provider Configuration

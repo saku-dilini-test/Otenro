@@ -9,8 +9,8 @@
                 <ion-checkbox ng-model="details.location"  class="checkbox-positive" ng-true-value="'{{user.address}}'">
                     <label >
                         <h3>Home</h3>
-                        <span>{{user.name}}</span><br>
-                        <span>{{user.address}}</span>
+                        <div ng-if="user.name">{{user.name}}</div>
+                        <div ng-if="user.address">{{user.address}}</div>
                     </label>
                 </ion-checkbox >
 
@@ -70,7 +70,7 @@
                     <div class="col col-top"></div>
                 </div>
             </form>
-            </div>
+
         </div>
 
     </ion-content>

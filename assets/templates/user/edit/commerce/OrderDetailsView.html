@@ -30,7 +30,7 @@
                     <h7>Deliver to:</h7>
                     <div class="row" ng-if="oderData.entity.deliveryLocation !== 'New'">
                         <div class="col-md-4"><h7>Address</h7></div>
-                        <div class="col-md-8"><h7>{{oderData.entity.deliveryLocation}}</h7></div>
+                        <div class="col-md-8"><h7>: {{oderData.entity.deliveryLocation}}</h7></div>
                     </div>
                     <div class="row" ng-if="oderData.entity.deliveryLocation == 'New'">
                         <div class="col-md-4"><h7>No</h7></div>
@@ -51,7 +51,7 @@
                     <h7>Pick Up from:</h7>
                     <div class="row" ng-if="oderData.entity.deliveryLocation !== 'New'">
                         <div class="col-md-4"><h7>Location</h7></div>
-                        <div class="col-md-8"><h7>{{oderData.entity.pickUp.locationName}}</h7></div>
+                        <div class="col-md-8"><h7>: {{oderData.entity.pickUp.locationName}}</h7></div>
                     </div>
                     <div class="row">
                         <div class="col-md-4"><h7>No</h7></div>
@@ -68,7 +68,7 @@
                         <div class="col-md-8"><h7>: {{oderData.entity.telNumber}}</h7></div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" ng-if="oderData.entity.shippingOpt">
                     <h7>Shipping Type:</h7><br>
                     <label>Name : {{oderData.entity.shippingOpt}}</label>
                 </div>
@@ -101,7 +101,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>+Tax</td>
-                    <td>{{oderData.entity.tax}}</td>
+                    <td>{{oderData.entity.tax || 0}}</td>
                 </tr>
                 <tr class="total">
                     <td>&nbsp;</td>
@@ -118,6 +118,7 @@
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="closeDialog()">Close</md-button>
+
             </div>
         </div>
     </md-dialog-content>

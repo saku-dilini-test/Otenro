@@ -1,56 +1,82 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="Deliver Details">
     <ion-content class="padding" >
-        <div class="list card">
-            <div class="item item-body">
+        <div class="list card delivery-details">
 
                 <div class="header-fonts delivery  made-easy-header-font">
                     <span>Pizza Delivery</span>
                 </div>
-                <form name="deliverDetails" novalidate>
+
                 <div class="image-wrapper">
                     <img src="img/pizza-delivery.jpg">
                 </div>
-                <div class="list custom-form">
-                    <label class="item item-input item-floating-label">
-                        <span class="made-easy-content-font input-label">Name</span>
-                        <input type="text"  ng-model="details.name" placeholder="Name">
+
+
+                <ion-checkbox ng-model="details.location"  class="checkbox-positive" ng-true-value="'{{user.address}}'">
+                    <label >
+                        <h3>Home</h3>
+                        <div ng-if="user.name">{{user.name}}</div>
+                        <div ng-if="user.address">{{user.address}}</div>
                     </label>
-                    <label class="item item-input item-floating-label">
-                        <span class="made-easy-content-font input-label">Address</span>
-                        <input type="text" ng-model="details.address" placeholder="Address">
+                </ion-checkbox >
+
+                <ion-checkbox ng-model="details.location"  class="checkbox-positive" ng-true-value="'New'">
+                    <label >
+                        <h3>New Location</h3>
                     </label>
-                    <label class="item item-input item-floating-label">
-                        <span class="made-easy-content-font input-label">Contact Number</span>
-                        <input type="text" ng-model="details.number" name="teleNumber"
+                </ion-checkbox>
+
+            <form name="delivery" novalidate>
+                <div class="list delivery-form padding-right"   ng-if="details.location == 'New'">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Name</span>
+                        <input type="text" ng-model="details.name" placeholder="E.g. John Doe" required>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">No.</span>
+                        <input type="text" ng-model="details.no" placeholder="address number" required>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Street Address</span>
+                        <input type="text" ng-model="details.street" placeholder="Street" required>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">City</span>
+                        <input type="text" ng-model="details.city" placeholder="E.g. Colombo" required>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Country</span>
+                        <input type="text" ng-model="details.country" placeholder="E.g. Sri Lanka" required>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Zip / Postal Code</span>
+                        <input type="text" ng-model="details.zip" placeholder="Zip or Postal code" required>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Contact Number</span>
+                        <input type="text" name="teleNumber" ng-model="details.number" placeholder="E.g. 0712123123"
                                ng-pattern="/^[\+]?[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,5}$/im"
                                placeholder="Contact Number">
                         <span class="help-block" ng-show="deliverDetails.teleNumber.$error.pattern">
                              Enter a proper telephone number
                         </span>
                     </label>
-                    <div class="btn-full">
-                        <button class="button button-assertive" ng-click="deliver(details)" >Deliver</button>
+                </div>
+
+
+                <div class="row">
+                    <div class="col align-center">
+                        <h6>Total Amount : {{currency.sign}}{{amount}}</h6>
                     </div>
                 </div>
-                </form>
-                <!--<div class="item item-stacked-label">-->
-                    <!--<div class="row2">-->
-                        <!--<div>Name</div>-->
-                        <!--<input type="text" ng-model="details.name" placeholder="{{details.name}}" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">-->
-                    <!--</div>-->
-                    <!--<div class="row2">-->
-                        <!--<div>Address</div>-->
-                        <!--<input type="text" ng-model="details.address" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">-->
-                    <!--</div>-->
-                    <!--<div class="row2">-->
-                        <!--<div>Contact number</div>-->
-                        <!--<input type="number" ng-model="details.number" style="width:100%; height:20px; margin: 0px 10px; border: 1px groove gray;">-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="panel2">-->
-                    <!--<a class="social-button" ng-click="deliver(details)" >Deliver</a>-->
-                <!--</div>-->
-            </div>
+
+                <div class="row">
+                    <div class="col col-top"></div>
+                    <button class="col col-50 col-center button button-positive button-small" ng-disabled="!details.location || delivery.$invalid" ng-click="deliver(details)" >Deliver</button>
+                    <div class="col col-top"></div>
+                </div>
+            </form>
+
         </div>
+
     </ion-content>
 </ion-view>
