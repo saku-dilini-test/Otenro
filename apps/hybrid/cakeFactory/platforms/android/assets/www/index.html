@@ -8,28 +8,34 @@
   <link href="./lib/ionic/css/ionic.css" rel="stylesheet">
   <link href="./css/style.css" rel="stylesheet">
 
+  <link href="./css/customCss.css" rel="stylesheet">
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
   <link href="css/ionic.app.css" rel="stylesheet">
   -->
 
   <!-- ionic/angularjs js -->
   <script src="./lib/ionic/js/ionic.bundle.js"></script>
+  <script src="./lib/ionic-service-core/ionic-core.js"></script></head>
+  <script src="./lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+  <script src="./lib/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
+  <script src="./lib/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"></script>
 
   <!-- cordova script (this will be a 404 during development) -->
-  <script src="./cordova.js"></script>
+  <script src="./js/ng-cordova.min.js"></script>
   <script src="./lib/ionic/js/angular-ui/angular-ui-router.js"></script>
-  <script src="./js/paypal-mobile-js-helper.js"></script>
-  <script src="./js/cdv-plugin-paypal-mobile-sdk.js"></script>
+  <script src="./lib/jquery/dist/jquery.js"></script>
 
   <!-- your app's js -->
   <script src="./js/app.js"></script>
-  <script src="./js/services/payPalService.js"></script>
+  <script src="./js/services/shoppingCart.js"></script>
   <script src="./js/services.js"></script>
+  <script src="./js/services/dataService.js"></script>
   <script src="./js/controllers.js"></script>
   <script src="./js/dashResource.js"></script>
   <script src="./js/categoryResource.js"></script>
   <script src="./js/categoryProductResource.js"></script>
   <script src="./js/services/paymentService.js"></script>
+  <script src="./js/services/promotionService.js"></script>
 
 </head>
 <body ng-app="starter" class="platform-android platform-cordova platform-webview">

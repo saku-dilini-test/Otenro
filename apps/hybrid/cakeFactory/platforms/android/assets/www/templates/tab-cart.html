@@ -14,7 +14,7 @@
 	      </table>
 	      <span class="font-size-14">{{cartItem.pieces}} pieces</span>
 	      <div class="text-align-right">
-	      	<button class="cart-button button-assertive reset-padding" ng-click="removeItem($index)">Remove</button>
+	      	<button class="cart-button button-assertive reset-padding" ng-click="removeItem($index,cartItem)">Remove</button>
 	  	  </div>
 	    </div>
 	    <div class="item padding-small">
@@ -33,5 +33,10 @@
 	    	 <a href="#/delivery/{{getTotal()}}" class="button button-buy dark">Delivery</a>
 	    </div>
 	</div>
+  <div class="promotions">
+    <a class="button button-stable promo-button" ui-sref="promos">
+      Promotions <i class="ion-ios-pricetags-outline"></i>
+    </a>
+  </div>
   </ion-content>
 </ion-view>

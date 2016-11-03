@@ -30,6 +30,8 @@
             shoppingCart['comment'] = $scope.cart.getComment();
             shoppingCart['pickUpDate'] = $scope.cart.getPickUpDate();
             shoppingCart['pickUpTime'] = $scope.cart.getPickUpTime();
+            shoppingCart['deliveryDate'] = $scope.cart.getDeliveryDate();
+            shoppingCart['deliveryTime'] = $scope.cart.getDeliveryTime();
             shoppingCart['paymentStatus'] = 'Success';
 
             $http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)
@@ -48,6 +50,8 @@
                         localStorage['comment'] = '';
                         localStorage['pickUpDate'] = '';
                         localStorage['pickUpTime'] = '';
+                        localStorage['deliveryDate'] = '';
+                        localStorage['deliveryTime'] = '';
                     }
                 });
 

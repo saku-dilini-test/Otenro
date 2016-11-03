@@ -7,17 +7,9 @@
         "files": {
             "res/xml/config.xml": {
                 "parents": {
-                    "/*": [
+                    "/widget": [
                         {
-                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"FileChooser\"><param name=\"android-package\" value=\"com.megster.cordova.FileChooser\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -26,42 +18,21 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.onbitlabs.english.cake.company"
-        },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.onbitlabs.english.cake.company"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.onbitlabs.english.cake.company"
-        },
-        "cordova-plugin-splashscreen": {
+        "com.megster.cordova.FileChooser": {
             "PACKAGE_NAME": "com.onbitlabs.english.cake.company"
         }
     },
     "dependent_plugins": {},
     "modules": [
         {
-            "file": "plugins/cordova-plugin-device/www/device.js",
-            "id": "cordova-plugin-device.device",
-            "pluginId": "cordova-plugin-device",
+            "file": "plugins/com.megster.cordova.FileChooser/www/fileChooser.js",
+            "id": "com.megster.cordova.FileChooser.FileChooser",
             "clobbers": [
-                "device"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-            "id": "cordova-plugin-splashscreen.SplashScreen",
-            "pluginId": "cordova-plugin-splashscreen",
-            "clobbers": [
-                "navigator.splashscreen"
+                "fileChooser"
             ]
         }
     ],
     "plugin_metadata": {
-        "cordova-plugin-device": "1.1.2",
-        "cordova-plugin-console": "1.0.3",
-        "cordova-plugin-whitelist": "1.2.2",
-        "cordova-plugin-splashscreen": "3.2.2"
+        "com.megster.cordova.FileChooser": "0.0.0"
     }
 }

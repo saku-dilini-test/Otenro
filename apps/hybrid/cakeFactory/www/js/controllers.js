@@ -147,7 +147,8 @@ angular.module('starter.controllers', [])
     }
   })
 
-.controller('DeliveryCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService,$location,$timeout,ORDER_URL) {
+.controller('DeliveryCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,
+                                      DataService,$location,$timeout,ORDER_URL,ionicTimePicker,ionicDatePicker) {
         var totalAmountUSD = initialData.totalAmount.data.usd;
         var oneUSD = initialData.oneUSD.data.result;
         $scope.isVisibleAddress = false;
@@ -155,19 +156,87 @@ angular.module('starter.controllers', [])
 
         $scope.cart = DataService.cart;
         $scope.addDeliveryFee = function(amount){
+
           $scope.delivery.usdAmountWithDeliveryFee = totalAmountUSD + (amount / oneUSD );
           $scope.paypalCart.saveDeliveryCharges(amount);
           $scope.isVisibleAddress = true;
+
           if(typeof amount == 'undefined'){
             $scope.isVisibleAddress = false;
           }
         };
+
+        var startDate = (new Date()).valueOf();
+        var endDate = startDate + 31536000000;
+        var ipObj1 = {
+          callback: function (val) {  //Mandatory
+            console.log(val);
+            var date = new Date(val);
+            var deliveryDate = date.getDate() + ' - ' + ( date.getMonth() + 1 ) + ' - ' + date.getFullYear();
+            console.log(deliveryDate);
+            $scope.delivery.date = deliveryDate;
+
+
+          },
+          from: new Date(), //Optional
+          to : new Date(endDate),
+          mondayFirst: true,          //Optional
+          closeOnSelect: false,       //Optional
+          templateType: 'popup'       //Optional
+        };
+
+        $scope.openDatePicker = function(){
+          var currentDate = (new Date()).valueOf();
+          console.log(currentDate);
+          console.log(currentDate = currentDate + 40000000000)
+          ionicDatePicker.openDatePicker(ipObj1);
+        };
+
+
+        var ipObj2 = {
+          callback: function (val) {      //Mandatory
+            if (typeof (val) === 'undefined') {
+              console.log('Time not selected');
+            } else {
+              var selectedTime = new Date(val * 1000);
+              var deliveryTime = formatAMPM(selectedTime);
+              $scope.delivery.time = deliveryTime;
+
+
+              function formatAMPM(date) {
+                var hours = date.getUTCHours();
+                var minutes = date.getUTCMinutes();
+                var ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                minutes = minutes < 10 ? '0'+minutes : minutes;
+                var strTime = hours + ':' + minutes + ' ' + ampm;
+                return strTime;
+              }
+
+            }
+          },
+          inputTime: 36000,   //Optional
+          format: 12,         //Optional
+          step: 15,           //Optional
+          setLabel: 'Set Time'    //Optional
+        };
+
+        $scope.openDateTime = function() {
+          ionicTimePicker.openTimePicker(ipObj2);
+        }
+
+
         $scope.delivery = {usdAmount:totalAmountUSD};
         $scope.deliveryLocations = initialData.deliveryLocations.data.result;
+
         $scope.payNow = function(){
           $scope.cartInfo = $scope.cart.getCartInfo();
           $scope.cartInfo.oneDoller = $rootScope.cart.oneDoller;
           $scope.cartInfo.userInfo = $scope.delivery;
+
+          console.log("------------------------------- "+JSON.stringify($scope.cartInfo.userInfo));
+
           var cartInfo = JSON.stringify($scope.cartInfo);
           {
             // Open in external browser
@@ -187,6 +256,8 @@ angular.module('starter.controllers', [])
             $scope.changePath();
           }, 3000);
         }
+
+
   })
   .controller('PickupCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService,$location,$timeout,ORDER_URL,ionicDatePicker,ionicTimePicker) {
     var totalAmountUSD = initialData.totalAmount.data.usd;
@@ -204,6 +275,7 @@ angular.module('starter.controllers', [])
         var pickDate = date.getDate() + ' - ' + ( date.getMonth() + 1 ) + ' - ' + date.getFullYear();
         console.log(pickDate);
         $scope.pickup.date = pickDate;
+
 
       },
       from: new Date(), //Optional
@@ -229,6 +301,7 @@ angular.module('starter.controllers', [])
           var selectedTime = new Date(val * 1000);
           var pickTime = formatAMPM(selectedTime);
           $scope.pickup.time = pickTime;
+
 
           function formatAMPM(date) {
             var hours = date.getUTCHours();

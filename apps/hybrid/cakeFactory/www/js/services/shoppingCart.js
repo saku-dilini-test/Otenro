@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by amila on 5/25/16.
  */
 
@@ -19,7 +19,7 @@ function shoppingCart(cartName) {
 
   // save items to local storage when unloading
   var self = this;
-  $(window).unload(function () {
+ $(window).on("unload", function(e) {
     if (self.clearCart) {
       self.clearItems();
     }

@@ -28,6 +28,16 @@
           <span class="input-label" >Address</span>
           <input type="text" name="deliveryAddress" ng-model="delivery.address" required>
         </label>
+        <label class="item item-input item-stacked-label" ng-click="openDatePicker()">
+          <span class="input-label">Pick Up Date</span>
+          <input ng-disabled="true" class="pickup-disable" type="text" placeholder="DD - MM - YYYY"
+                 name="customerPickupDate" ng-model="delivery.date" required>
+        </label>
+        <label class="item item-input item-stacked-label" ng-click="openDateTime()">
+          <span class="input-label">Pick Up Time</span>
+          <input ng-disabled="true" class="pickup-disable" type="text"
+                 placeholder="-- : --  --" name="customerPickupTime" ng-model="delivery.time" required>
+        </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">Comment</span>
           <input type="text" name="deliveryComment" ng-model="delivery.comment">

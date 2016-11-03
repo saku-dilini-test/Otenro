@@ -7,14 +7,14 @@
     "use strict";
 
     angular.module('animateApp')
-        .controller('mobileOrderCtrl',['$scope', '$http','$routeParams','SERVER_URL','DataService','$location', function($scope, $http,$routeParams,SERVER_URL,DataService,$location) {
+        .controller('mobileOrderCtrl', function($scope, $http,$routeParams,SERVER_URL,DataService,$location) {
             $scope.SERVER_URL = SERVER_URL;
             $scope.cart = DataService.cart;
             var cartInfo = JSON.parse($location.search().cartInfo);
-
             $scope.cart.items = cartInfo.cart;
             $scope.cart.saveDeliveryCharges(cartInfo.deliveryCharge);
             $scope.cart.setOneDoller(cartInfo.oneDoller);
+
             if(cartInfo.deliveryCharge == 0){
                 $scope.cart.saveBranchName(cartInfo.userInfo.branch);
                 $scope.cart.saveName(cartInfo.userInfo.name);
@@ -28,14 +28,16 @@
                 $scope.cart.saveLocationName(cartInfo.userInfo.location.locationName);
                 $scope.cart.saveDeliveryAddress_01(cartInfo.userInfo.address);
                 $scope.cart.saveComment(cartInfo.userInfo.comment);
+                $scope.cart.saveDeliveryDate(cartInfo.userInfo.date);
+                $scope.cart.saveDeliveryTime(cartInfo.userInfo.time);
             }
+
             $scope.conform = function(){
                 $scope.cart.checkout('PayPal','Mobile');
             };
 
             // before redirect to PayPal, Cart info send to server to save
             $scope.saveCartInServer = function () {
-                
                 var data = cartInfo.cart;
                 var shoppingCart = {
                     'oneDoller' : cartInfo.oneDoller
@@ -53,8 +55,8 @@
                 }else{
                     shoppingCart['deliveryLocation'] = cartInfo.userInfo.location.locationName;
                     shoppingCart['deliveryAddress_01'] = cartInfo.userInfo.address;
-                    shoppingCart['pickUpDate'] = '';
-                    shoppingCart['pickUpTime'] = '';
+                    shoppingCart['deliveryDate'] = cartInfo.userInfo.date;
+                    shoppingCart['deliveryTime'] = cartInfo.userInfo.time;
                 }
                 shoppingCart['deliveryAddress_02'] = '';
                 shoppingCart['name'] = cartInfo.userInfo.name;
@@ -65,11 +67,15 @@
                     shoppingCart['comment'] = cartInfo.userInfo.comment;
                 }
                 shoppingCart['paymentStatus'] = 'Pending';
+
+                console.log(shoppingCart);
                 //cart info save api
                 $http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)
                     .then(function (response) {
+                        console.log(response);
                     });
+
             }
 
-        }]);
+        });
 })();
