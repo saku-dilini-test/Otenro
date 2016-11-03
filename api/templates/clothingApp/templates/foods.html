@@ -5,9 +5,15 @@
                 <div class="padding">
                     <img width="100%" ng-src="{{imageURL}}/{{food.imageUrl}}">
                 </div>
-                <div class="item item-text-wrap">
-                    <h2>{{food.name}}</h2>
-                    <p>{{currency.sign}} : {{food.variants[0].price}}</p>
+                <div class="row item item-text-wrap">
+                   <div class="col">
+                       <div class="made-easy-header-font">{{food.name}}</div>
+                       <span class="made-easy-content-font">{{currency.sign}} : {{food.variants[0].price}}  </span>
+                   </div>
+                    <button class="button button-icon col col-20 add-to-cart">
+                        <i class="made-easy-content-font icon ion-ios-cart-outline"></i>
+                        <i class="made-easy-content-font icon ion-ios-plus-empty"></i>
+                    </button>
                 </div>
            </div>
         </a>
