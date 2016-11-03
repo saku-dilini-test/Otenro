@@ -1,6 +1,6 @@
 // ---  app js  ----
 
-var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','starter.services','starter.controllers'])
+var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','starter.services','starter.controllers','credit-cards'])
 
 .run(function($ionicPlatform,readMadeEasy,$rootScope,$ionicPush,appServices) {
   $ionicPlatform.ready(function() {
@@ -183,6 +183,11 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
     .state('tab.pickup', {
         cache: false,
         url: '/pickup',
+        params:{
+          item: null,
+          deliverDetails:null,
+          amount: null
+        },
         views: {
           'menuContent': {
             templateUrl: 'templates/pickup.html',
@@ -210,14 +215,46 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
       }
     })
     .state('tab.contactUs', {
-    cache: false,
-    url: '/contactUs',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/tab-contactUs.html',
-        controller: 'ContactUsCtrl'
-      }
-    }
+        cache: false,
+        url: '/contactUs',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/tab-contactUs.html',
+            controller: 'ContactUsCtrl'
+          }
+         }
+    })
+    .state('tab.cardPayment', {
+          cache: false,
+          url: '/cardPayment',
+          params:{
+            item: null,
+            registeredName:null,
+            deliverDetails:null,
+            amount:null,
+            shippingOpt:null,
+            method:null,
+            pickupId:null
+          },
+          views: {
+              'menuContent': {
+                  templateUrl: 'templates/cardPayment.html',
+                  controller: 'paymentCtrl'
+              }
+          }
+      })
+   .state('tab.pickupDetails', {
+       cache: false,
+       url: '/pickupDetails',
+       params:{
+         item: null
+       },
+       views: {
+         'menuContent': {
+           templateUrl: 'templates/pickupDetails.html',
+             controller: 'CartCtrl'
+         }
+       }
   });
 
   // if none of the above states are matched, use this as the fallback

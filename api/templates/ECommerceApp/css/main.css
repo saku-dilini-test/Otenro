@@ -61,6 +61,11 @@ ion-nav-view{
     color: red;
     font-size: 70%;
 }
+.item-buy{
+    width: 100%;
+    border: unset;
+    border-bottom: 1px solid #ccc;
+}
 
 /* ----- Contact Us Page ----- */
 .made-easy-contactUs {
@@ -109,20 +114,9 @@ ion-content{
     cursor: url(../img/cursor.cur), auto;
 
 }
+
 a[href]:hover{
     cursor: url(../img/cursor.cur), auto;
 }
 
 /* ------------------- */
-
-.col2 {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -moz-box-flex: 1;
-    -moz-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    display: block;
-    padding: 5px;
-    width: 100%;
-	font-weight:600;}

@@ -161,7 +161,8 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           url: '/pickup',
           params:{
               item: null,
-              deliverDetails:null
+              deliverDetails:null,
+              amount: null
             },
           views: {
               'menuContent': {

@@ -4,7 +4,6 @@
         <ion-slides  options="options" slider="data.slider" options="options">
             <ion-slide-page ng-repeat="item in itemList" >
                 <div class="list card">
-                    <div class="item item-body">
                         <div class="image-wrapper">
                             <img src="{{imageURL}}/{{item.imageUrl}}">
                         </div>
@@ -23,7 +22,6 @@
                             <button class="button button-balanced" ui-sref="tab.item({item:item})">ORDER NOW</button>
                         </div>
                     </div>
-                </div>
             </ion-slide-page>
         </ion-slides>
 

@@ -4,6 +4,8 @@
 
 mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants) {
 
+    $scope.$emit('hideMenu',{});
+
      // -- Config --
                 $scope.userId = $rootScope.userId;
                 $scope.appId = $rootScope.appId;
@@ -194,7 +196,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                         $scope.details ={
                             appId : $rootScope.appId,
                             item : $stateParams.item,
-                            amount : $stateParams.amount,
+                            amount : $scope.getTotal(),
                             registeredName : $scope.user.name,
                             customerName : $stateParams.deliverDetails.name,
                             deliveryLocation : $stateParams.deliverDetails.location,
@@ -213,7 +215,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                         $scope.details ={
                             appId : $rootScope.appId,
                             item : $stateParams.item,
-                            amount : $stateParams.amount,
+                            amount : $scope.getTotal(),
                             customerName : $stateParams.deliverDetails.name,
                             telNumber : $stateParams.deliverDetails.number,
                             tax :   $scope.tax,

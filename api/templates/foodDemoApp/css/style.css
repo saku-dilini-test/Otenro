@@ -271,6 +271,18 @@ ion-slides {
     margin:0 1em;
 }
 
+.item-checkbox {
+    padding: 5px 5px 5px 50px;
+    width: 100%;
+    border: unset;
+}
+.cart-item-header {
+    text-transform:uppercase;
+    font-size: 2.4vh;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
 /* Helper Classes */
 .align-left{
     text-align:left;
@@ -288,7 +300,7 @@ ion-slides {
 /* Delivery page */
 .delivery-details .item-checkbox .checkbox{
     zoom: 0.6;
-    top: 43px;
+    top: 44px;
     left: -65px;
     position: relative;
 }
@@ -331,6 +343,8 @@ ion-slides {
 
 .payment .cards-list img{
     opacity:0.4;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
 }
 
 .payment .cards-list .selected img{
@@ -349,7 +363,7 @@ ion-slides {
 
 .pickup .item-checkbox .checkbox{
     zoom: 0.6;
-    top:16%;
+    top:12%;
 }
 
 .pickup h3{

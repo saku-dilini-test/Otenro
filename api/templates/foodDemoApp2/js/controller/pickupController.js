@@ -20,7 +20,8 @@ mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPop
                         $state.go('app.cardPayment',{
                             pickupId:$scope.pickup.opt,
                             item:$stateParams.item,
-                            deliverDetails:$stateParams.deliverDetails
+                            deliverDetails:$stateParams.deliverDetails,
+                            amount:$stateParams.amount
                         });
                     };
 });
