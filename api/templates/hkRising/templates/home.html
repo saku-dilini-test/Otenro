@@ -7,7 +7,7 @@
 
       <ion-nav-view class="made-easy-background-color" name="tabContent"></ion-nav-view>
 
-      <ion-scroll zooming="true" direction="x" style="height:40px;margin-top:-40px;">
+      <ion-scroll zooming="true" direction="x" class="main-scroll">
               <div class="tabs">
                       <a ng-repeat="category in articleCategoryList" class="tab-item tab-item2 animated lightSpeedIn" ng-href="#/app/home/{{category.id}}">
                           {{category.name}}

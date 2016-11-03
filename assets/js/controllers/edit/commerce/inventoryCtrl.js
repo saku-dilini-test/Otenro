@@ -27,7 +27,7 @@
                     field:'sku',
                     displayName:'SKU',
                     cellTemplate: "<md-input-container class='md-container-modify'>"+
-                                        "<div class='sku-link color-link' ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>"+
+                                        "<div class='md-input input-modify color-link' ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>"+
                                         "</md-input-container>",
                     cellTemplateScope: {
                         click: function(data) {
@@ -40,7 +40,7 @@
                     field:'vType',
                     displayName:'Variant',
                     cellTemplate:   "<md-input-container class='md-container-modify'>"+
-                    "<div class='sku-link color-link' >{{row.branch['selection']}}{{row.branch[col.field]}}</div>"+
+                    "<div class='md-input input-modify' >{{row.branch['selection']}}{{row.branch[col.field]}}</div>"+
                     "</md-input-container>"
 
                 },
