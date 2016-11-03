@@ -1,6 +1,7 @@
 <ion-view class="made-easy-background-image made-easy-background-color" view-title="{{foodInfo.name}}">
     <ion-content class=" made-easy-view">
         <div class="food">
+            <div class="panel">
                 <div class="card">
                         <div class="header_image animated order-item-slide">
                             <ion-slides options="sliderOptions" slider="sliderDelegate" >
@@ -13,7 +14,7 @@
                             <div class="swiper-button-prev ion-chevron-left"></div>
                         </div>
 
-
+                    <div class="item item-text-wrap">
                         <div class="animated rubberBand item-name" >
                             <div class="col made-easy-header-font">{{foodInfo.name}}</div>
                         </div>
@@ -76,19 +77,15 @@
                         </div>
                         <!-- Bye Button -->
                         <div class="row">
-                            <div class="col col-top"> </div>
-                            <div class="col col-67 col-center">
-                                <button class="button button-small button-block button-calm"
+                                <button class="col button button-small button-block button-calm"
                                         ng-disabled="isBuyBtnDisable"
                                         ng-click="addToCart()">
                                     ADD TO CART
                                 </button>
-                            </div>
-                            <div class="col col-bottom"> </div>
                         </div>
-
+                    </div>
                 </div>
-
+            </div>
         </div>
     </ion-content>
 </ion-view>

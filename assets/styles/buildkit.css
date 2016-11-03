@@ -1816,8 +1816,13 @@ button[disabled]{
     cursor: not-allowed;
 }
 
-.input-modify{
-    border:unset !important;
+.sku-link{
+    line-height: 2.5;
+    cursor:pointer;
+}
+
+.sku-link:hover{
+    text-decoration:underline;
 }
 
 .product-name{
@@ -1864,7 +1869,6 @@ button[disabled]{
 
 .allItems .md-container-modify {
     width: 83%;
-    margin-bottom:0;
 }
 
 @-moz-document url-prefix() {
@@ -2022,12 +2026,10 @@ trix-toolbar .button_group input[type=button]{
     display:none;
 }
 
+/*Making a theme. Add your specified colors here. define as color... */
+
 .color-link{
     color: rgb(79, 156, 255) !important;
-    cursor:pointer;
-}
-.color-link:hover{
-    text-decoration:underline;
 }
 
 .ui-grid-selection-row-header-buttons {

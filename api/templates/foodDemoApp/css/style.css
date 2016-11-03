@@ -283,10 +283,6 @@ ion-slides {
     letter-spacing: 1px;
 }
 
-.popup-body {
-    text-align: center;
-}
-
 /* Helper Classes */
 .align-left{
     text-align:left;
