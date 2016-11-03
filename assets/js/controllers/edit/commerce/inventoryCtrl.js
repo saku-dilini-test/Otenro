@@ -37,18 +37,11 @@
                     }
                 },
                 {
-                    field:'size',
-                    displayName:'Size',
-                    cellTemplate:   "<div ng-if='row.level == 2'>" +
-                                       "<ng-form name='sizeForm'>"+
-                                            "<md-input-container class='md-container-modify'>"+
-                                                "<input aria-label='Size' name='size' ng-model='row.branch[col.field]' maxlength='8' ng-pattern='/^([a-zA-Z0-9 ]+)$/' required/>"+
-                                                "<div ng-messages='sizeForm.size.$error' ng-show='sizeForm.size.$dirty'>"+
-                                                    "<div ng-message='required'>Required!</div>"+
-                                                    "<div ng-message='pattern'>Invalid Character!</div>"+
-                                               "</div>"+
-                                           "</md-input-container>"+
-                                       "</ng-form></div>"
+                    field:'vType',
+                    displayName:'Variant',
+                    cellTemplate:   "<md-input-container class='md-container-modify'>"+
+                    "<div class='sku-link color-link' >{{row.branch['selection']}}{{row.branch[col.field]}}</div>"+
+                    "</md-input-container>"
 
                 },
                 {
@@ -93,6 +86,7 @@
             ];
 
         var productList =  initialData.inventoryList;
+        //console.log(initialData.inventoryList);
         $scope.exportArray = [];
 
         for(var i = 0; i <  initialData.inventoryList.length; i++){
@@ -127,7 +121,7 @@
                     'sku' : value.sku,
                     'price' : value.price,
                     'quantity' : value.quantity,
-                    'size' : value.size
+                    'variant' : value.size
 
                 });
             });
