@@ -39,9 +39,10 @@
                 {
                     field:'vType',
                     displayName:'Variant',
-                    cellTemplate:   "<md-input-container class='md-container-modify'>"+
-                    "<div class='sku-link color-link' >{{row.branch['selection']}}{{row.branch[col.field]}}</div>"+
-                    "</md-input-container>"
+                    cellTemplate:   "<div ng-if='row.level == 2'>" +
+                    "<md-input-container class='md-container-modify'>"+
+                    "<div >{{row.branch['selection']}}</div> - <div>{{row.branch[col.field]}}</div>"+
+                    "</md-input-container>"+ "</div>"
 
                 },
                 {
@@ -86,7 +87,7 @@
             ];
 
         var productList =  initialData.inventoryList;
-        //console.log(initialData.inventoryList);
+        console.log(initialData.inventoryList);
         $scope.exportArray = [];
 
         for(var i = 0; i <  initialData.inventoryList.length; i++){
@@ -96,9 +97,11 @@
                 // This part may be change later according platform integration
                 // -- start -- inject product id to child array
                 var productID = productList[i]['id'];
+                var selection = productList[i]['selection'];
                 var tempChildArray = productList[i]['children'];
                 for(var j = 0; j < tempChildArray.length; j++){
                     tempChildArray[j]['id'] = productID;
+                    tempChildArray[j]['selection'] = selection;
                     $scope.exportArray.push(tempChildArray[j]);
                 }
                 productList[i]['children'] = tempChildArray;
