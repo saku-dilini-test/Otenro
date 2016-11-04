@@ -8,7 +8,7 @@
 
     function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope,
              SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
-             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService) {
+             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,sendDate) {
 
         $scope.refund = [];
         $scope.unfulfilled = [];
@@ -119,6 +119,34 @@
                 templateUrl: 'user/edit/commerce/OrderDetailsView.html',
                 controller: function DialogController($scope, $mdDialog) {
                     $scope.oderData = row;
+                    //console.log(row);
+                    if($scope.oderData.entity.fulfillmentStatus == "successful"){
+                            $scope.orderStatus = [{
+                            date1:$scope.oderData.entity.createdAt,
+                            name:'pending',
+                            {
+                            date1:$scope.oderData.entity.fulfilledDate;,
+                            name: $scope.oderData.entity.fulfillmentStatus}
+                            }];
+                            }
+
+
+                     else if($scope.oderData.entity.fulfillmentStatus == "return"){
+                            $scope.orderStatus = [{
+                            date1:$scope.oderData.entity.createdAt,
+                            name: 'pending'},
+                            {
+                            date1:$scope.oderData.entity.refundedDate,
+                            name:$scope.oderData.entity.fulfillmentStatus
+                            }];
+                     }else{
+
+                            $scope.orderStatus = [{
+                            date1:$scope.oderData.entity.createdAt,
+                            name:$scope.oderData.entity.fulfillmentStatus
+                            }];
+                            }
+
                     $scope.closeDialog = function () {
                         $mdDialog.hide();
                     }
@@ -856,9 +884,14 @@
                 });
             }
             else{
+
             for (var i = 0; i < $scope.selectedRow.length; i++) {
+                $scope.refundedDate = new Date();
+                var refundedDate = $scope.refundedDate;
+
                 $scope.selectedRow[i].paymentStatus = "refunded";
                 $scope.selectedRow[i].fulfillmentStatus = "return";
+                $scope.selectedRow[i].refundedDate = refundedDate;
                 $scope.gridApi1.selection.clearSelectedRows();
                 $scope.refund.push($scope.selectedRow[i]);
                 $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.selectedRow[i]), 1);
@@ -894,7 +927,12 @@
                 });
             }
             else{
+
                 for (var i = 0; i < $scope.row.length; i++) {
+                    $scope.fulfilledDate = new Date();
+                    var fulfilledDate = $scope.fulfilledDate;
+                    $scope.row[i].fulfilledDate = fulfilledDate;
+
                     $scope.row[i].paymentStatus = "successful";
                     $scope.row[i].fulfillmentStatus = "successful";
                     $scope.gridApi1.selection.clearSelectedRows();

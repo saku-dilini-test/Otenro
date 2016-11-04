@@ -14,10 +14,10 @@
                 <th>&nbsp;</th>
                 </thead>
                 <tbody>
-                <tr>
-                    <td> {{ oderData.entity.createdAt | date:'MM/dd/yyyy' }}</td>
-                    <td>{{oderData.entity.fulfillmentStatus}}</td>
-                    <!--<td>-</td>-->
+                <tr ng-repeat="order in orderStatus">
+                    <td>{{order.date1|date:'MM/dd/yyyy'}}</td>
+                    <td>{{order.name}}</td>
+                    <td></td>
                 </tr>
                 </tbody>
             </table>
