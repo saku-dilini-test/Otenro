@@ -117,7 +117,8 @@
                             <tbody>
                                 <tr ng-repeat="data in weightRate.weightRanges">
                                     <td class="weight-rate">
-                                        <input class="input-shadow-border" type="text" name="weightField_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/"
+                                        <input id="startWeight{{$index}}" ng-blur="validateInputValue(data.startWeight,data.endWeight,'startWeight',$index)"
+                                               class="input-shadow-border" type="text" name="weightField_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/"
                                                ng-model="data.startWeight" maxlength="10" required>
                                         <br />
                                         <span ng-show="weightBased['weightField_'+$index].$error.pattern">
@@ -125,7 +126,8 @@
                                         </span>
                                         <br />
                                             to
-                                        <input class="input-shadow-border" type="text" name="endWeight_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/"
+                                        <input id="endWeight{{$index}}" ng-blur="validateInputValue(data.startWeight,data.endWeight,'endWeight',$index)"
+                                               class="input-shadow-border" type="text" name="endWeight_{{$index}}" ng-pattern="/^\d*[0-9\.]\d*$/"
                                                ng-model="data.endWeight" maxlength="10" required>
                                         <br />
                                         <span ng-show="weightBased['endWeight_'+$index].$error.pattern">
