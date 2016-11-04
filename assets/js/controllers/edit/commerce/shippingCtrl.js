@@ -16,6 +16,7 @@
         $scope.maxWeightRate = 20;
         $scope.maxPickup = 20;
         $scope.currency = $rootScope.currency;
+        $scope.size = 0;
 
 
         // --/-- enable & disable tabs --/--
@@ -54,7 +55,41 @@
                     weightRanges : [{startWeight : '', endWeight : '',cost : ''}]
                 };
                 $scope.addNewWeightRange = function(){
+
+                    $scope.size  = ($scope.weightRate.weightRanges.length);
+                    $scope.size  = $scope.size -1;
+                    angular.element(document.getElementById('startWeight'+ $scope.size))[0].disabled = true;
+                    angular.element(document.getElementById('endWeight'+ $scope.size))[0].disabled = true;
                     $scope.weightRate.weightRanges.push({startWeight : '',endWeight : '',cost : ''})
+                };
+                $scope.validateInputValue = function(startWeight,endWeight,type,index){
+                    if (type=='startWeight'){
+                        if ((parseInt(startWeight) >=  parseInt(endWeight))&& endWeight){
+                            $scope.weightRate.weightRanges[index].startWeight  = null;
+                            toastr.error('Start Weight can not be over than or equals end Weight', 'Warning', {
+                                closeButton: true
+                            });
+                        }
+                    }
+                    else if (type=='endWeight'){
+                        if ((parseInt(endWeight) <= parseInt(startWeight))&& startWeight){
+                            $scope.weightRate.weightRanges[index].endWeight  = null;
+                            toastr.error('End Weight can not be lower than or equals Start Weight', 'Warning', {
+                                closeButton: true
+                            });
+                        }
+                    }
+
+                    if (index > 0){
+                        if (((parseInt($scope.weightRate.weightRanges[index-1].startWeight) ) >= parseInt(startWeight))||
+                            ((parseInt($scope.weightRate.weightRanges[index-1].endWeight) ) >= parseInt(startWeight)) ){
+                            toastr.error('Invalid weight Ranges ', 'Warning', {
+                                closeButton: true
+                            });
+                            $scope.weightRate.weightRanges[index].startWeight  = null;
+                        }
+                    }
+
                 };
                 disableTabs(2,false,true,false,true,true);
             };
