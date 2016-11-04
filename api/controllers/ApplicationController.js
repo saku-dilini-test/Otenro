@@ -171,8 +171,8 @@ module.exports = {
             templateCategory : templateCategory,
             appSettings:{
                 appCurrency:{
-                    sign : "Rs.",
-                    currency: "SLR",
+                    sign : "$",
+                    currency: "USD",
                 },
                 isApplyBGImage : true,
                 isApplyStyle : isApplyStyle,
