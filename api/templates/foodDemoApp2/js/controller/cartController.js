@@ -2,7 +2,7 @@
  * Created by amila on 4/5/16.
  */
 
-mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants) {
+mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService) {
 
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
@@ -139,4 +139,15 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             });
     }
 
+    // Buy With PayPal
+    $scope.buyWithPayPal = function () {
+        
+        PaypalService.initPaymentUI().then(function () {
+            PaypalService.makePayment(100, "Total Amount").then(function (response) {
+                alert("success"+JSON.stringify(response));
+            }, function (error) {
+                alert("Transaction Canceled");
+            });
+        });
+    }
 });
