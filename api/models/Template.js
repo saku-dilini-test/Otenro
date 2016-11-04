@@ -24,6 +24,10 @@ module.exports = {
         imageUrl: {
             type: 'string'
         },
+        versions:{
+            collection:'version',
+            via : 'template'
+        },
         templateFilesPath:{
             type: 'string'
         },
