@@ -40,11 +40,13 @@ module.exports = {
                   "img" : "grilled_chicken_salad.png"
                 }
               ],
+              "selection" : "Size",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
                 'name': "Grilled Chicken Salad",
                 'sku': "1111",
+                'vType' : "s",
                 'size': "11",
                 'price': "100",
                 'quantity': 100
@@ -61,11 +63,13 @@ module.exports = {
                   "img" : "spicy thai salad with grilled chicken.png"
                 }
               ],
+              "selection" : "Size",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
                 'name': "Spicy Thai Salad with Grilled Chicken",
                 'sku': "1111",
+                'vType' : "s",
                 'size': "11",
                 'price': "200",
                 'quantity': 200
@@ -111,11 +115,13 @@ module.exports = {
                   "img" : "chocolate Fudge brownie with vanila ice cream.png"
                 }
               ],
+              "selection" : "Size",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
                 "name": "Chocolate Fudge Brownie with Vanila Ice Cream",
                 'sku': "1111",
+                'vType' : "s",
                 'size': "11",
                 'price': "100",
                 'quantity': 100
@@ -181,11 +187,13 @@ module.exports = {
                   "img" : "grilled garlic lamb chops.png"
                 }
               ],
+              "selection" : "Size",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
                 "name": "Grilled Garlic Lamb Chops",
                 'sku': "1111",
+                'vType' : "s",
                 'size': "11",
                 'price': "100",
                 'quantity': 100
@@ -202,12 +210,14 @@ module.exports = {
                   "img" : "beef stake with smashed potatoes.png"
                 }
               ],
+              "selection" : "Size",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
                 "name": "Beef Stake with Smashed Potatoes",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "200",
                 'quantity': 200
               }],
@@ -223,12 +233,14 @@ module.exports = {
                   "img" : "bbq pork ribs.png"
                 }
               ],
+              "selection" : "Size",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
               "variants":[{
                 "name": "BBQ Pork Ribs",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "300",
                 'quantity': 300
               }],
@@ -238,6 +250,7 @@ module.exports = {
               "name": "Pina Colada",
               "price": 400,
               "quantity": 400,
+              "selection" : "Size",
               "briefDesc" : "Pina Colada brief des",
               "detailedDesc" : "Pina Colada details description. Pina Colada details description. Pina Colada details description",
               "tempImageArray" : [
@@ -249,6 +262,7 @@ module.exports = {
                 "name": "Pina Colada",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "400",
                 'quantity': 400
               }],
@@ -317,6 +331,7 @@ module.exports = {
               "name": "Shirt x",
               "price": 250,
               "quantity": 250,
+              "selection" : "Size",
               "briefDesc" : "Shirt x brief des",
               "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
               "imageUrl": "shirt_x.png",
@@ -329,6 +344,7 @@ module.exports = {
                 "name": "Shirt x",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "250",
                 'quantity': 250
               }],
@@ -338,6 +354,7 @@ module.exports = {
               "name": "Shirt y",
               "price": 350,
               "quantity": 350,
+              "selection" : "Size",
               "briefDesc" : "Shirt y brief des",
               "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
               "tempImageArray" : [
@@ -349,6 +366,7 @@ module.exports = {
                 "name": "Shirt y",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "350",
                 'quantity': 350
               }],
@@ -359,6 +377,7 @@ module.exports = {
               "name": "Shirt z",
               "price": 450,
               "quantity": 450,
+              "selection" : "Size",
               "briefDesc" : "Shirt z brief des",
               "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
               "tempImageArray" : [
@@ -369,6 +388,7 @@ module.exports = {
               "variants":[{
                 "name": "Shirt z",
                 'sku': "1111",
+                'vType' : "s",
                 'size': "11",
                 'price': "450",
                 'quantity': 450
@@ -389,6 +409,7 @@ module.exports = {
               "name": "Short x",
               "price": 250,
               "quantity": 250,
+              "selection" : "Size",
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Short x details description. Short x details description. Short x details description",
               "tempImageArray" : [
@@ -399,6 +420,7 @@ module.exports = {
               "variants":[{
                 "name": "Short x",
                 'sku': "1111",
+                'vType' : "s",
                 'size': "11",
                 'price': "250",
                 'quantity': 250
@@ -436,6 +458,7 @@ module.exports = {
               "name": "Beach Suit",
               "price": 250,
               "quantity": 250,
+              "selection" : "Size",
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Short x details description. Short x details description. Short x details description",
               "tempImageArray" : [
@@ -447,6 +470,7 @@ module.exports = {
                 "name": "Beach Suit",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "250",
                 'quantity': 250
               }],
@@ -471,6 +495,7 @@ module.exports = {
               "name": "Shirt x",
               "price": 250,
               "quantity": 250,
+              "selection" : "Size",
               "briefDesc" : "Shirt x brief des",
               "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
               "tempImageArray" : [
@@ -482,6 +507,7 @@ module.exports = {
                 "name": "Shirt x",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "250",
                 'quantity': 250
               }],
@@ -492,6 +518,7 @@ module.exports = {
               "name": "Shirt y",
               "price": 350,
               "quantity": 350,
+              "selection" : "Size",
               "briefDesc" : "Shirt y brief des",
               "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
               "tempImageArray" : [
@@ -503,6 +530,7 @@ module.exports = {
                 "name": "Shirt y",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "350",
                 'quantity': 350
               }],
@@ -513,6 +541,7 @@ module.exports = {
               "name": "Shirt z",
               "price": 450,
               "quantity": 450,
+              "selection" : "Size",
               "briefDesc" : "Shirt z brief des",
               "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
               "tempImageArray" : [
@@ -524,6 +553,7 @@ module.exports = {
                 "name": "Shirt z",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "450",
                 'quantity': 450
               }],
@@ -542,6 +572,7 @@ module.exports = {
               "name": "Shirt x",
               "price": 250,
               "quantity": 250,
+              "selection" : "Size",
               "briefDesc" : "Shirt x brief des",
               "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
               "tempImageArray" : [
@@ -553,6 +584,7 @@ module.exports = {
                 "name": "Shirt x",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "250",
                 'quantity': 250
               }],
@@ -563,6 +595,7 @@ module.exports = {
               "name": "Shirt y",
               "price": 350,
               "quantity": 350,
+              "selection" : "Size",
               "briefDesc" : "Shirt y brief des",
               "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
               "tempImageArray" : [
@@ -574,6 +607,7 @@ module.exports = {
                 "name": "Shirt y",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "350",
                 'quantity': 350
               }],
@@ -584,6 +618,7 @@ module.exports = {
               "name": "Shirt z",
               "price": 450,
               "quantity": 450,
+              "selection" : "Size",
               "briefDesc" : "Shirt z brief des",
               "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
               "tempImageArray" : [
@@ -595,6 +630,7 @@ module.exports = {
                 "name": "Shirt z",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "450",
                 'quantity': 450
               }],
@@ -614,6 +650,7 @@ module.exports = {
               "name": "Short x",
               "price": 250,
               "quantity": 250,
+              "selection" : "Size",
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Short x details description. Short x details description. Short x details description",
               "tempImageArray" : [
@@ -625,6 +662,7 @@ module.exports = {
                 "name": "Short x",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "250",
                 'quantity': 250
               }],
@@ -644,6 +682,7 @@ module.exports = {
               "name": "Beach Suit",
               "price": 250,
               "quantity": 250,
+              "selection" : "Size",
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Short x details description. Short x details description. Short x details description",
               "tempImageArray" : [
@@ -655,6 +694,7 @@ module.exports = {
                 "name": "Beach Suit",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "250",
                 'quantity': 250
               }],
@@ -679,6 +719,7 @@ module.exports = {
               "name": "Masala Pizza",
               "price": 250,
               "quantity": 250,
+              "selection" : "Size",
               "tempImageArray" : [
                 {
                   "img" : "item_01.png"
@@ -688,6 +729,7 @@ module.exports = {
                 "name": "Masala Pizza",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "250",
                 'quantity': 250
               }],
@@ -700,6 +742,7 @@ module.exports = {
               "name" : "New Pizza",
               "price" : 300,
               "quantity" : 100,
+              "selection" : "Size",
               "tempImageArray" : [
                 {
                   "img" : "item_02.png"
@@ -709,6 +752,7 @@ module.exports = {
                 "name" : "New Pizza",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "300",
                 'quantity': 100
               }],
@@ -731,6 +775,7 @@ module.exports = {
               "name": "Indian Pizza",
               "price": 350,
               "quantity": 100,
+              "selection" : "Size",
               "tempImageArray" : [
                 {
                   "img" : "item_01.png"
@@ -740,6 +785,7 @@ module.exports = {
                 "name": "Indian Pizza",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "350",
                 'quantity': 100
               }],
@@ -752,6 +798,7 @@ module.exports = {
               "name" : "New Pizza",
               "price" : 225,
               "quantity" : 15,
+              "selection" : "Size",
               "tempImageArray" : [
                 {
                   "img" : "item_02.png"
@@ -761,6 +808,7 @@ module.exports = {
                 "name" : "New Pizza",
                 'sku': "1111",
                 'size': "11",
+                'vType' : "s",
                 'price': "225",
                 'quantity': 15
               }],
