@@ -2121,6 +2121,13 @@ li#menuitem-8 {
     padding-right:3em;
 }
 
+.second_image, #image:hover .main_image{
+    display:none
+}
+.main_image, #image:hover .second_image{
+    display:block
+}
+
 .table-ordered-data .total td{
     font-weight: 800;
     color: #4a4a4a;
@@ -2135,3 +2142,4 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     position: relative;
     top: 68%;
 }
+
