@@ -68,7 +68,7 @@
 .item-text-wrap2 .made-easy-header-font{
     text-align:center;
 }
-
+/*
 .menu {
     position: absolute;
     top: 0;
@@ -80,6 +80,7 @@
     background-size: 100% 100%;
     height: 100%;
 }
+*/
 
 .header {
     width: 100%;
@@ -92,10 +93,10 @@
 }
 
 .tabs {
-   background: rgba(0, 0, 0, 0.3) !important;
-       border: none;
-       cursor: url(../img/cursor.cur), auto;
-       width: inherit;
+   background: transparent;
+   border: none;
+   cursor: url(../img/cursor.cur), auto;
+   width: inherit;
 }
 
 
@@ -109,12 +110,9 @@
 }
 
 .item-complex .item-content, .item-radio .item-content{
-    padding: 15px 0;
-    text-align:center;
     background-color: initial;
-
-
 }
+
 .tab-item2 {
       width: 100px;
       font-size: 2.2vh;
@@ -122,7 +120,6 @@
       color: #fff;
       text-align: center;
       font-weight: bold;
-      width:80px;
 }
 
  .bar-stable.button.button-clear {
@@ -255,7 +252,7 @@ ion-slides {
 .custom-navigation label{
     text-align:center;
     display:block;
-    padding:1em 0;
+    padding:16px 49px 20px 16px;
 }
 .custom-navigation .menu .scroll-content{
     top:25%;
@@ -267,7 +264,7 @@ ion-slides {
 }
 
 .scroll{
-    height:110%;
+    height:112%;
 }
 
 
@@ -289,6 +286,15 @@ ion-slides {
 }
 
 .article .row:last-child {
-    height: 100%;}
 
+}
 
+.back-button {
+    left:3%;
+}
+
+.main-scroll{
+   height:40px;
+   margin-top:-40px;
+   background: rgba(0, 0, 0, 0.3) !important;
+}

@@ -27,7 +27,7 @@
                     field:'sku',
                     displayName:'SKU',
                     cellTemplate: "<md-input-container class='md-container-modify'>"+
-                                        "<div class='sku-link color-link' ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>"+
+                                        "<div class='md-input input-modify color-link' ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>"+
                                         "</md-input-container>",
                     cellTemplateScope: {
                         click: function(data) {
@@ -87,7 +87,7 @@
             ];
 
         var productList =  initialData.inventoryList;
-        console.log(initialData.inventoryList);
+        //console.log(initialData.inventoryList);
         $scope.exportArray = [];
 
         for(var i = 0; i <  initialData.inventoryList.length; i++){
