@@ -4,7 +4,7 @@
 			<ion-list>
 				<div class="row row-wrap row-no-padding category-items">
 					<ion-item class="col col-50" data-ng-repeat="category in categoriesCtrl.categories track by $index" data-ui-sref="app.category({categoryId: category.id})">
-						<div class="card animated zoomIn">
+						<div class="card space animated zoomIn">
 						<div class="item-image">
 							<img data-ng-if="category.imageUrl" data-ng-src="{{categoriesCtrl.imageUrl}}/{{category.imageUrl}}" alt="{{category.name}}" />
 							<h3>{{category.name}}</h3>
