@@ -19,11 +19,10 @@
         <ul class="grid obl-app-templates clearfix">
             <li ng-repeat="template in templates">
                 <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory)" >
-                <div ng-init="imgSrc=template.imageUrl"
-                     ng-mouseover="imgSrc=template.gifImageUrl"
-                     ng-mouseout="imgSrc=template.imageUrl">
-                    <img ng-src="images/templates/{{imgSrc}}" />
-                </div>
+                    <div  id ="image">
+                        <img class = "main_image" ng-src="images/templates/{{template.imageUrl}}" />
+                        <img class ="second_image"  ng-src="images/templates/{{template.gifImageUrl}}" />
+                    </div>
                 </a>
             </li>
         </ul>
