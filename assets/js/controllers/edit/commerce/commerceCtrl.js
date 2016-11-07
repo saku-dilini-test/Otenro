@@ -480,7 +480,7 @@
                 toastr.error(' warning', "Please fill all required fields", {closeButton: true});
             }/*else if (!storeSettings.orderNumber) {
                 toastr.error(' warning', "Please fill order number field", {closeButton: true});
-            }
+            }*/
             else {
 
                 for (var i = 0; i < $scope.currencyList.length; i++) {
