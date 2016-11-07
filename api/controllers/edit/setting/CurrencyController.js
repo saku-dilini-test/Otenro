@@ -12,7 +12,8 @@ module.exports = {
          appSettings:{
             appCurrency:{
                 'currency': req.body.currency,
-                'sign': req.body.currencySign
+                'sign': req.body.currencySign,
+                'symbol': req.body.currencySymbol,
             }
          }
         };

@@ -173,6 +173,7 @@ module.exports = {
                 appCurrency:{
                     sign : "$",
                     currency: "USD",
+                    symbol: "usd"
                 },
                 isApplyBGImage : true,
                 isApplyStyle : isApplyStyle,

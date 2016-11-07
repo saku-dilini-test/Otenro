@@ -10,6 +10,16 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
   //getting the user's registered name and address
   $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 
+  // --/-- Here start retrieving the currency --/--//
+  $scope.userId = $rootScope.userId;
+  $scope.appId - $rootScope.appId;
+  $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
+      $scope.currency = data;
+  }).error(function(err) {
+      alert('warning', "Unable to get Products Selected Category", err.message);
+  });
+  // --/-- Here ends retrieving the currency --/--//
+
    // --/-- Here start Card Payment Function --/--
 
       // Config Cart payment
@@ -38,7 +48,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
           stripe.charges.create({
                   // amount is in cents so * 100
                   amount: _cardInformation.amount * 100,
-                  currency: 'usd',
+                  currency: $scope.currency.symbol,
                   card: {
                       "number": _cardInformation.number,
                       "exp_month": _cardInformation.exp_month,

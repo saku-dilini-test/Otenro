@@ -148,7 +148,15 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                 });
         }
 
-
+ // --/-- Here start retrieving the currency --/--//
+  $scope.userId = $rootScope.userId;
+  $scope.appId - $rootScope.appId;
+  $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
+      $scope.currency = data;
+  }).error(function(err) {
+      alert('warning', "Unable to get Products Selected Category", err.message);
+  });
+  // --/-- Here ends retrieving the currency --/--//
     // Config Cart payment
     $scope.cardType = {};
     $scope.card = {
@@ -173,7 +181,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         stripe.charges.create({
                 // amount is in cents so * 100
                 amount: _cardInformation.amount * 100,
-                currency: 'usd',
+                currency: $scope.currency.symbol,
                 card: {
                     "number": _cardInformation.number,
                     "exp_month": _cardInformation.exp_month,

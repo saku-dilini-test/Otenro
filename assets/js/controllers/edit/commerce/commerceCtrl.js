@@ -509,6 +509,7 @@
 
                 storeSettings.currencySign = $scope.options.sign,
                     storeSettings.currency = $scope.options.currency,
+                    storeSettings.currencySymbol = $scope.options.symbol,
                     storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 storeSettings.OpenHours = openHoursData;
@@ -516,6 +517,7 @@
                 var reqParams = {
                     currencySign: $scope.options.sign,
                     currency: $scope.options.currency,
+                    currencySymbol: $scope.options.symbol,
                     appId: $rootScope.appId
                 };
                 currencyService.setCurrency(reqParams).success(function (data) {

@@ -21,6 +21,9 @@
             currencySign:{
                type: 'string'
             },
+            currencySymbol:{
+               type: 'string'
+            },
             measurementStandard:{
                 type: 'string'
             },
