@@ -76,7 +76,7 @@ module.exports = {
             template_name : 'foodDemoApp',
             templateViewName : 'Café El Jafe',
             templateViewDesc : 'Artesian',
-            gifImageUrl : 'foodDeliver/food.png',
+            gifImageUrl : 'foodDeliver/food.jpg',
             imageUrl : 'foodDeliver/foodDeliver.png',
             templateFilesPath:'templates/foodDemoApp',
             templateCategory: TemplateCategoryDetails.Business.ID
