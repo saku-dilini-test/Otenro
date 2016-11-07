@@ -51,6 +51,12 @@ module.exports = {
         fulfillmentStatus : {
             type : 'string'
         },
+        fulfilledDate : {
+            type : 'string'
+        },
+        refundedDate : {
+            type : 'string'
+        },
         item:{
             type: 'json'
         },
