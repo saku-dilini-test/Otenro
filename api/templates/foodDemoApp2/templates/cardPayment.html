@@ -13,10 +13,8 @@
                 </ion-checkbox >
             </form>
 
-
+            <div class="card-form list padding-right" ng-if="payment.type == 'creditcard'">
             <form name="paymentForm" ng-submit="makeStripePayment(card)">
-                <div class="card-form list padding-right" ng-if="payment.type == 'creditcard'">
-
                         <span class="col input-label">Select Card Type*</span>
                         <div class="row cards-list">
                             <ion-checkbox  ng-model="card.cardType" ng-class="card.cardType == 'visa' ? 'selected' : ''" class="checkbox-positive" ng-true-value="'visa'">
@@ -67,7 +65,6 @@
                                 </label>
                         </div>
                     </label>
-                </div>
                     <div class="row">
                         <div class="col col-top"></div>
                         <button type="submit" class="col col-67 button button-small button-block button-positive">MAKE PAYMENT</button>
@@ -81,6 +78,17 @@
                             <pre style="font-size:smaller">{{card | json}}</pre>
                             <pre style="font-size:smaller">{{cardNumber | json}}</pre>
                     -->
+            </form>
+            </div>
+            <form name="cashPaymentFrom" novalidate>
+                <div class="card-form list padding-right" ng-if="payment.type == 'cashpayment'">
+                    <span class="col input-label">Confirm payment by cash on delivery</span>
+                    <div class="row cart-buttons">
+                        <div class="col-33"></div>
+                        <button class="button button-block button-small button-positive" ng-click="confirmCashPayment()" >Confirm</button>
+                    </div>
+                </div>
+
             </form>
         </div>
     </ion-content>
