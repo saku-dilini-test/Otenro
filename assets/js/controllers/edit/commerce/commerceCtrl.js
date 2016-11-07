@@ -8,7 +8,7 @@
 
     function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope,
              SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
-             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService) {
+             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,sendDate) {
 
         $scope.refund = [];
         $scope.unfulfilled = [];
@@ -105,7 +105,8 @@
 
         function rowTemplate() {
             return '<div ng-dblclick="grid.appScope.rowDblClick(row)" >' +
-                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" ' +
+                'class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
                 '</div>';
         }
 
@@ -116,6 +117,39 @@
                 templateUrl: 'user/edit/commerce/OrderDetailsView.html',
                 controller: function DialogController($scope, $mdDialog, $auth) {
                     $scope.oderData = row;
+                    console.log(row);
+
+                    //$scope.curruntDate = new Date();
+                    //var sDate = $scope.oderData.entity.fulfilledDate;
+                    //var fDate = $scope.oderData.entity.refundedDate;
+
+                    if($scope.oderData.entity.fulfillmentStatus == "successful"){
+                            $scope.orderStatus = [{
+                            date1:$scope.oderData.entity.createdAt,
+                            name:'pending'},
+                            {
+                            date1:$scope.oderData.entity.fulfilledDate,
+                            name:$scope.oderData.entity.fulfillmentStatus
+                            }];
+                            }
+
+
+                     else if($scope.oderData.entity.fulfillmentStatus == "refund"){
+                            $scope.orderStatus = [{
+                            date1:$scope.oderData.entity.createdAt,
+                            name:'pending'},
+                            {
+                            date1:$scope.oderData.entity.refundedDate,
+                            name:$scope.oderData.entity.fulfillmentStatus
+                            }];
+                     }else{
+                            //$scope.orderStatus = [{name: "pending"}];}
+                            $scope.orderStatus = [{
+                            date1:$scope.oderData.entity.createdAt,
+                            name:$scope.oderData.entity.fulfillmentStatus
+                            }];
+                            }
+
                     $scope.currency = $rootScope.currency;
                     if($scope.oderData.entity.option == 'pickUp'){
                         $scope.orderType = 'Pick Up';
@@ -132,8 +166,6 @@
                                     +$auth.getPayload().id+"&appId="+$scope.oderData.entity.appId+"&"+new Date().getTime()+"&img=thirdNavi";
 
                 }
-
-
             });
 
         };
@@ -448,7 +480,7 @@
                 toastr.error(' warning', "Please fill all required fields", {closeButton: true});
             }/*else if (!storeSettings.orderNumber) {
                 toastr.error(' warning', "Please fill order number field", {closeButton: true});
-            }*/
+            }
             else {
 
                 for (var i = 0; i < $scope.currencyList.length; i++) {
@@ -868,9 +900,13 @@
                 });
             }
             else{
+                $scope.refundedDate = new Date();
+                var refundedDate = $scope.refundedDate;
+               // $state.go('PassOderDates', {refundedDate: refundedDate});
             for (var i = 0; i < $scope.selectedRow.length; i++) {
                 $scope.selectedRow[i].paymentStatus = "refunded";
-                $scope.selectedRow[i].fulfillmentStatus = "return";
+                $scope.selectedRow[i].fulfillmentStatus = "refund";
+                $scope.selectedRow[i].refundedDate = refundedDate;
                 $scope.gridApi1.selection.clearSelectedRows();
                 $scope.refund.push($scope.selectedRow[i]);
                 $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.selectedRow[i]), 1);
@@ -906,8 +942,12 @@
                 });
             }
             else{
+                $scope.fulfilledDate = new Date();
+                var fulfilledDate = $scope.fulfilledDate;
+                //$state.go('PassOderDates', {fulfilledDate: fulfilledDate});
                 for (var i = 0; i < $scope.row.length; i++) {
                     $scope.row[i].paymentStatus = "successful";
+                    $scope.row[i].fulfilledDate = fulfilledDate;
                     $scope.row[i].fulfillmentStatus = "successful";
                     $scope.gridApi1.selection.clearSelectedRows();
                     $scope.fulfill.push($scope.row[i]);
@@ -1035,4 +1075,4 @@
             }
         };
     }
-})();
+}})();

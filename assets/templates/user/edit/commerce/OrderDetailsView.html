@@ -14,9 +14,9 @@
                 <th>&nbsp;</th>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>{{ oderData.entity.createdAt | date:'MM/dd/yyyy' }}</td>
-                    <td>{{oderData.entity.fulfillmentStatus}}</td>
+                <tr ng-repeat="order in orderStatus">
+                    <td>{{order.date1|date:'MM/dd/yyyy'}}</td>
+                    <td>{{order.name}}</td>
                     <td></td>
                 </tr>
                 </tbody>
@@ -118,7 +118,6 @@
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="closeDialog()">Close</md-button>
-
             </div>
         </div>
     </md-dialog-content>
