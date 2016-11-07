@@ -65,9 +65,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="col col-top"></div>
-                    <button class="col col-50 col-center button button-positive button-small" ng-disabled="!details.location || delivery.$invalid" ng-click="deliver(details)" >Deliver</button>
-                    <div class="col col-top"></div>
+
+                    <button class="col margin button button-positive button-small" ng-disabled="!details.location || delivery.$invalid" ng-click="deliver(details)" >Deliver</button>
+                    <button class="col margin button button-positive button-small"  type="reset" value="Reset">Clear</button>
+
                 </div>
             </form>
 

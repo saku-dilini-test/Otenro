@@ -71,6 +71,7 @@ a{
 button {
     text-transform: uppercase;
     letter-spacing: 2px;
+    width:100%;
 }
 
 .cart-item-header {
