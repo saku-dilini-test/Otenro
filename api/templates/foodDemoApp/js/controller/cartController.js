@@ -8,6 +8,9 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $scope.appId=$rootScope.appId;
 
     $scope.cartItems = $rootScope.cart.cartItems;
+    if($scope.cartItems.length == 0){
+        $scope.available = true;
+    }
     $scope.hide = true;
     $http.get(constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId).success(function(data) {
         if(data == ''){
