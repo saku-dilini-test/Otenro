@@ -2,6 +2,8 @@
 
 mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPopup, $state, constants, $stateParams) {
 
+    $scope.$emit('hideMenu',{});
+
     $http.get(constants.SERVER_URL + "/edit/getShippingPickupInfo?appId="+$rootScope.appId)
         .success(function (data) {
 

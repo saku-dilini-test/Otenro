@@ -3,7 +3,7 @@
  */
 
 mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants) {
-
+    $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
 

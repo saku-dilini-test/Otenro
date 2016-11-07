@@ -43,6 +43,9 @@
     border-top:none !important;
 }
 
+.back-button {
+    left: 3%;
+}
 
 .bar .bar-header{
     cursor: url(../img/cursor.cur), auto;
@@ -138,7 +141,7 @@ p{
 }
 
 ion-slides {
-    height: 36vh;
+    height: 85vw;
 }
 
 
@@ -200,14 +203,6 @@ ion-slides {
     border: unset;
 }
 
-.navigation-drawer .back-button {
-    color: white;
-    margin: 0 0 0 5px;
-}
-
-.navigation-drawer .back-button span{
-    display:none;
-}
 
 .navigation-drawer ion-side-menu label{
     margin: 10%;
