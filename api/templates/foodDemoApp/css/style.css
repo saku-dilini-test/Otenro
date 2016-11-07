@@ -384,3 +384,7 @@ ion-slides {
 .pickup label {
     padding-left: 30px;
 }
+
+.margin {
+    margin : 5px;
+}
