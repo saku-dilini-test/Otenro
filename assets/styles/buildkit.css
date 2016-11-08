@@ -556,14 +556,14 @@ a.md-button:hover:not([disabled]),
 }
 
 .on-off-switch-inner:before{
-    content: "ON";
+    content: "OFF";
     padding-left: 10px;
     background-color: #D0D0D0;
     color: #FFFFFF;
 }
 
 .on-off-switch-inner:after{
-    content: "OFF";
+    content: "ON";
     padding-right: 10px;
     background-color: #EEEEEE;
     color: #999999;
