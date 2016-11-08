@@ -47,7 +47,7 @@
                         if(data.firstMenuLabel){
                             $scope.menuButtonView =
                                 '<obl-menu-group label="{{firstMenuLabel}}" icon="fa-pencil-square-o">'+
-                                    '<div ng-repeat="btn in buttonArray" >' +
+                                    '<div ng-repeat="btn in buttonArray | orderBy : \'orderId\' " >' +
                                         '<obl-menu-button ng-if="btn.menuTitle !=\'Site Settings\' " label="{{btn.menuTitle}}" icon="fa fa-file-image-o"  menu-function="{{btn.menuFunction}}">' +
                                         '</obl-menu-button>'+
                                         '<obl-menu-group ng-if="btn.menuTitle ==\'Site Settings\' " label="{{btn.menuTitle}}" icon="fa-pencil-square-o"  class="md-sub-menu">' +
