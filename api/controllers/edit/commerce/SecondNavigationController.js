@@ -41,7 +41,7 @@ module.exports = {
                 if (err) res.send(err);
                 res.send({
                     appId: appProduct,
-                    message: "New Navigation is created!!"
+                    message: "New Navigation has been created"
                 });
             });
         });

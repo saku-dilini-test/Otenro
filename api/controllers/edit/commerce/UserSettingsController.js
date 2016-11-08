@@ -17,13 +17,14 @@ module.exports = {
 
                        res.send({
                            app: app,
-                           message: "New Store Settings Record Create Success !"
+                           message: "New Store Settings Record successfully Created"
+
                        });
                    });
                } else {
                    res.send({
                        app: user,
-                       message: "New Store Settings Record Update Success !"
+                       message: "New Store Settings Record  Successfully updated"
                    });
                }
         });
@@ -71,13 +72,13 @@ module.exports = {
 
                        res.send({
                            app: app,
-                           message: "New Store Settings Record Create Success !"
+                           message: "New Store Settings Record successfully Created"
                        });
                    });
                } else {
                    res.send({
                        app: user,
-                       message: "New Store Settings Record Update Success !"
+                       message: "New Store Settings Record  Successfully updated"
                    });
                }
         });

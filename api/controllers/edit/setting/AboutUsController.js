@@ -23,13 +23,13 @@ module.exports = {
                         appId: appAboutUs.appId,
 
 
-                        message: "New About Us Record Create Success !"
+                        message: "New About Us Record Create Successfully created"
                     });
                 });
             } else {
                 res.send({
                     appId: req.body.appId,
-                    message: "About Us Record Update Success !"
+                    message: "About Us Record Successfully updated"
                 });
             }
         });

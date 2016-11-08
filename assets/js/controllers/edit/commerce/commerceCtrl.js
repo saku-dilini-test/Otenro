@@ -419,17 +419,17 @@
                         $scope.categories.splice($index, 1);
                         commerceService.deleteCategoryData(prams)
                             .success(function () {
-                                toastr.success('Second Navigation has been Deleted ', 'Deleted', {
+                                toastr.success('Category has been deleted ', 'Deleted', {
                                     closeButton: true
                                 });
                             }).error(function (err) {
-                            toastr.error('Unable to Delete', 'Warning', {
+                            toastr.error('Unable to Delete. Please try again', 'Warning', {
                                 closeButton: true
                             });
                         })
                     }
                 }).error(function (err) {
-                toastr.error('Unable to Updated', 'Warning', {
+                toastr.error('Update Failed ', 'Warning', {
                     closeButton: true
                 });
             })
@@ -477,7 +477,7 @@
             }
             console.log(storeSettings);
             if (!storeSettings){
-                toastr.error(' warning', "Please fill all required fields", {closeButton: true});
+                toastr.error(' warning', "Please fill all fields", {closeButton: true});
             }/*else if (!storeSettings.orderNumber) {
                 toastr.error(' warning', "Please fill order number field", {closeButton: true});
             }*/
@@ -526,7 +526,7 @@
                 });
 
                 commerceService.saveStoreSettings(storeSettings).success(function (data) {
-                    toastr.success('Store Setting Details has been added successfully', {
+                    toastr.success('Store settings successfully updated', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
@@ -569,7 +569,7 @@
                     storeSettings.appId = $rootScope.appId;
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
-                            toastr.success('Store Setting Details has been added successfully', 'Awsome!', {
+                            toastr.success('Store settings successfully updated. ', 'Awsome!', {
                                 closeButton: true
                             });
                             $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
@@ -633,13 +633,13 @@
             }
 
             if (!storeSettings.returnPolicy|| !storeSettings.termsAndCondition|| !storeSettings.privacyPolicy) {
-                toastr.error(' warning', "Please fill all the fields", {closeButton: true});
+                toastr.error(' warning', "Please fill all fields", {closeButton: true});
             }
             else {
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
-                    toastr.success('Store Setting Details has been added successfully', {
+                    toastr.success('Store settings successfully updated', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
@@ -701,7 +701,7 @@
         $scope.saveEmailDeliInfo = function (email, type) {
             if(email == undefined || email.fromEmail == undefined || email.replyToEmail == undefined
              || email.alertEmail == undefined || email.alertAt == undefined){
-                toastr.error('Fill the all fields','Warning',{
+                toastr.error('Please fill all fields','Warning',{
                     closeButton: true
                 });
             }
@@ -715,12 +715,12 @@
                         $scope.selectedIndex = index;
                     }
                     $scope.enableTab = false;
-                    toastr.success('Email Settings has been changed ', 'Success', {
+                    toastr.success('Email settings successfully updated ', 'Success', {
                         closeButton: true
                     });
 
                 }).error(function (err) {
-                toastr.error('Unable to Create', 'Warning', {
+                toastr.error('Create failed', 'Warning', {
                     closeButton: true
                 });
             })
@@ -733,7 +733,7 @@
 
             console.log(email);
             if(email == undefined){
-                toastr.error('Fill the all fields','Warning',{
+                toastr.error('Please fill all fields','Warning',{
                     closeButton: true
                 });
             }
@@ -746,7 +746,7 @@
                             var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                             $scope.selectedIndex = index;
                         }
-                        toastr.success('Email Settings has been changed ', 'Success', {
+                        toastr.success('Email settings successfully updated ', 'Success', {
                             closeButton: true
                         });
                         if ($scope.selectedIndex==6){
@@ -755,7 +755,7 @@
 
 
                     }).error(function (err) {
-                        toastr.error('Unable to Create', 'Warning', {
+                        toastr.error('Create failed', 'Warning', {
                             closeButton: true
                         });
                         $mdDialog.hide();
@@ -767,7 +767,7 @@
 
             console.log(email);
             if(email == undefined || email.footer == undefined || email.header == undefined || email.footer == '' || email.header == ''){
-                toastr.error('Fill the all fields','Warning',{
+                toastr.error('Please fill all fields','Warning',{
                     closeButton: true
                 });
             }else if(picFileHeader == null || picFileFooter == null){
@@ -785,12 +785,12 @@
                             var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                             $scope.selectedIndex = index;
                         }
-                        toastr.success('Email Settings has been changed ', 'Success', {
+                        toastr.success('Email settings successfully updated ', 'Success', {
                             closeButton: true
                         });
 
                     }).error(function (err) {
-                    toastr.error('Unable to Create', 'Warning', {
+                    toastr.error('Create failed', 'Warning', {
                         closeButton: true
                     });
                 })
@@ -877,7 +877,7 @@
                 } else {
                     commerceService.sendTestEmail(sendType)
                         .success(function (data) {
-                            toastr.success('Test Email has been send ', 'Success', {
+                            toastr.success('Test email successfully sent ', 'Success', {
                                 closeButton: true
                             });
 
@@ -897,7 +897,7 @@
         $scope.refunded = function () {
             $scope.selectedRow = $scope.gridApi1.selection.getSelectedRows();
             if($scope.selectedRow.length == 0){
-                toastr.error('Select a row', 'Warning', {
+                toastr.error('Please select a row ', 'Warning', {
                     closeButton: true
                 });
             }
@@ -925,12 +925,12 @@
             $scope.gridOptions3.data = $scope.unfulfilled;
             commerceService.updateOrders($scope.selectedRow)
                 .success(function (data) {
-                    toastr.success('Status changed to refunded ', 'Success', {
+                    toastr.success('Order status changed to refunded', 'Success', {
                         closeButton: true
                     });
                 })
                 .error(function (err) {
-                    toastr.error('could not change the status', 'Warning', {
+                    toastr.error('Order status change failed ', 'Warning', {
                         closeButton: true
                     });
                 })
@@ -939,7 +939,7 @@
         $scope.fulfilled = function () {
             $scope.row = $scope.gridApi1.selection.getSelectedRows();
             if($scope.row.length == 0){
-                toastr.error('Select a row', 'Warning', {
+                toastr.error('Please select a row', 'Warning', {
                     closeButton: true
                 });
             }
@@ -967,12 +967,12 @@
                 $scope.gridOptions3.data = $scope.unfulfilled;
                 commerceService.updateOrders($scope.row)
                 .success(function (data) {
-                    toastr.success('Status changed to fulfilled ', 'Success', {
+                    toastr.success('Order status changed to fulfilled', 'Success', {
                         closeButton: true
                     });
                 })
                 .error(function (err) {
-                    toastr.error('could not change the status', 'Warning', {
+                    toastr.error('Order status change failed', 'Warning', {
                         closeButton: true
                     });
                 })
@@ -1042,21 +1042,21 @@
             }
 
             if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
-                toastr.error('Basic Information not update', { closeButton: true});
+                toastr.error('Updating of basic information failed', { closeButton: true});
             }else if(typeof basicInfo.address == 'undefined'){
-                toastr.error('Address Not Update', { closeButton: true});
+                toastr.error('Updating of address failed', { closeButton: true});
             }
             else if(typeof basicInfo.telPhone == 'undefined'){
-                toastr.error('Tel phone Not Update', { closeButton: true});
+                toastr.error('Updating of Telephone number failed', { closeButton: true});
             }
             else if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
-                toastr.error('Web Information not update', { closeButton: true});
+                toastr.error('Updating of Web information failed', { closeButton: true});
             }
             else if(typeof webInfo.email == 'undefined'){
-                toastr.error('Email Not Update', { closeButton: true});
+                toastr.error('Updating of Email address failed', { closeButton: true});
             }
             else if(typeof webInfo.webSite == 'undefined'){
-                toastr.error('Web Site Not Update', { closeButton: true});
+                toastr.error('Updating of web address failed', { closeButton: true});
             }
             else{
                 var basicInfoResponse = {
@@ -1069,7 +1069,7 @@
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
-                        toastr.success('Store Setting Details has been added successfully', 'Awsome!', {closeButton: true});
+                        toastr.success('Store settings successfully updated. ', 'Awsome!', {closeButton: true});
                           $mdDialog.hide();
                     }).error(function(data, status, headers, config) {
                     toastr.error('Basic info saving error', { closeButton: true});

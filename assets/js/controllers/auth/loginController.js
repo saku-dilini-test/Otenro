@@ -18,7 +18,7 @@
     $scope.submit = function($event) {
       Auth.login($scope.user).success(function(response) {
         if (response.user.email){
-          toastr.success('Successfully login ', 'Message', {
+          toastr.success('Login Successful ', 'Message', {
             closeButton: true
           });
           if (response.user.userRoles== 'support'){
@@ -28,7 +28,7 @@
           }
         }
       }).error(function(err) {
-        toastr.error('Invalid email/password combination.', 'Error', {
+        toastr.error('Please check your Email/Password', 'Error', {
           closeButton: true
         });
       });
@@ -39,12 +39,12 @@
 
     $scope.authenticate = function(provider) {
       $auth.authenticate(provider).then(function(){
-          toastr.success('Successfully login ', 'Message', {
+          toastr.success('Login Successful ', 'Message', {
             closeButton: true
           });
           $state.go('user.dashboard');
       }).catch(function(error){
-      toastr.error('Invalid email/password combination.', 'Error', {
+      toastr.error('Please check your Email/Password', 'Error', {
              closeButton: true
       });
       })

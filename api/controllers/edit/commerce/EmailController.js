@@ -29,13 +29,13 @@ module.exports = {
                         appId: appAboutUs.appId,
 
 
-                        message: "Email Settings has been added !"
+                        message: "Email Settings has been successfully added "
                     });
                 });
             } else {
                 res.send({
                     appId: req.body.appId,
-                    message: "Email Settings has been Updated !"
+                    message: "Email Settings has been successfully Updated "
                 });
             }
         });
@@ -51,7 +51,7 @@ module.exports = {
         UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
             if (err) return done(err);
             res.send({
-                message: "Email Settings has been added"
+                message: "Email Settings has been successfully added "
             });
         });
     },
@@ -99,7 +99,7 @@ module.exports = {
             UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
                 if (err) return done(err);
                 res.send({
-                    message: "Email Settings has been added"
+                    message: "Email Settings has been successfully added"
                 });
             });
 

@@ -46,13 +46,14 @@ module.exports = {
 
                        res.send({
                            app: app,
-                           message: "New Contact Us Record Create Success !"
+                           message: "New Contact Us Record Successfully created"
                        });
                    });
                } else {
                    res.send({
                        app: user,
-                       message: "Contact Us Record Update Success !"
+                       message: "Contact Us Record Successfully updated"
+
                    });
                }
         });

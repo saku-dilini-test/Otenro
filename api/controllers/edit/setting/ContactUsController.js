@@ -23,13 +23,13 @@ module.exports = {
                         appId: appContactUs.appId,
 
 
-                        message: "New Contact Us Record Create Success !"
+                        message: "New Contact Us Record Successfully created"
                     });
                 });
             } else {
                 res.send({
                     appId: req.body.appId,
-                    message: "Contact Us Record Update Success !"
+                    message: "Contact Us Record Successfully updated"
                 });
             }
         });
@@ -52,13 +52,13 @@ module.exports = {
                         appId: appContactUs.appId,
 
 
-                        message: "New Contact Us Record Create Success !"
+                        message: "New Contact Us Record Successfully created"
                     });
                 });
             } else {
                 res.send({
                     appId: req.body.appId,
-                    message: "Contact Us Record Update Success !"
+                    message: "Contact Us Record Successfully updated"
                 });
             }
         });
@@ -78,13 +78,13 @@ module.exports = {
                         appId: appContactUs.appId,
 
 
-                        message: "New Contact Us Record Create Success !"
+                        message: "New Contact Us Record Successfully created"
                     });
                 });
             } else {
                 res.send({
                     appId: req.body.appId,
-                    message: "Contact Us Record Update Success !"
+                    message: "Contact Us Record Successfully updated"
                 });
             }
         });
@@ -103,13 +103,13 @@ module.exports = {
                         appId: appContactUs.appId,
 
 
-                        message: "New Contact Us Record Create Success !"
+                        message: "New Contact Us Record Successfully created"
                     });
                 });
             } else {
                 res.send({
                     appId: req.body.appId,
-                    message: "Contact Us Record Update Success !"
+                    message: "Contact Us Record Successfully updated"
                 });
             }
         });
@@ -129,13 +129,13 @@ module.exports = {
                         appId: appContactUs.appId,
 
 
-                        message: "New Contact Us Record Create Success !"
+                        message: "New Contact Us Record Successfully created"
                     });
                 });
             } else {
                 res.send({
                     appId: req.body.appId,
-                    message: "Contact Us Record Update Success !"
+                    message: "Contact Us Record Successfully updated"
                 });
             }
         });

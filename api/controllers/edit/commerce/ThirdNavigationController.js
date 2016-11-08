@@ -88,12 +88,12 @@ module.exports = {
             delete product["id"];
             ThirdNavigation.update(searchQuery,product,function(err,main) {
                 if (err) return res.send(err);
-                return res.send(200, {message: 'Update Shipping Collection'});
+                return res.send(200, {message: 'Shipping Collection successfully updated'});
             });
         }else{
             ThirdNavigation.create(product).exec(function (err, result) {
                 if (err) return res.send(err);
-                return res.send(200, {message: 'Create Shipping Collection'});
+                return res.send(200, {message: 'Shipping Collection successfully created'});
             });
         }
     },

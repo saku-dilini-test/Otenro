@@ -23,13 +23,13 @@ module.exports = {
                         appId: appPolicies.appId,
 
 
-                        message: "New Policies Record Create Success !"
+                        message: "New Policies Record Successfully created"
                     });
                 });
             } else {
                 res.send({
                     appId: req.body.appId,
-                    message: "Policies Record Update Success !"
+                    message: "Policies Record Successfully updated"
                 });
             }
         });

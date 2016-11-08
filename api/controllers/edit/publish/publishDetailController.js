@@ -44,7 +44,7 @@ module.exports = {
             else {
                 res.send({
                     appId: app.appId,
-                    message: "New PublishDetails are created!!"
+                    message: "New Publish Details has been created"
                 });
             }
         });
@@ -115,7 +115,7 @@ module.exports = {
              else{
                  res.send({
                  appId: details.appId,
-                 message: "New PublishDetails are created!!"
+                 message: "New Publish Details has been created"
                  });
              }
 
@@ -139,7 +139,7 @@ module.exports = {
              else{
                  res.send({
                  appId: details.appId,
-                 message: "New PublishDetails are created!!"
+                 message: "New Publish Details has been created"
                  });
              }
 
