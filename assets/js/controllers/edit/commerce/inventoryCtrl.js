@@ -228,9 +228,16 @@
          * @returns {*}
          */
         $scope.deletePro = function (item,inventory) {
+            var itemLength = item.children.length;
             return $mdDialog.show({
                 controllerAs: 'dialogCtrl',
                 controller: function($mdDialog){
+                    if(itemLength != 0){
+                        this.message = "Are you sure you want to delete this Product and its variants?"
+                    }
+                    else{
+                         this.message = "Are you sure you would like to delete the product variant?"
+                    }
                     this.confirm = function click(){
                         var itemIndex = $scope.inventoryList.indexOf(item);
                         $scope.inventoryList.splice(itemIndex, 1);
@@ -242,10 +249,10 @@
                             return commerceService.showInventoryDialog();
                         });
                     },
-                        this.cancel = function click(){
-                            $mdDialog.hide();
-                            return commerceService.showInventoryDialog();
-                        }
+                    this.cancel = function click(){
+                        $mdDialog.hide();
+                        return commerceService.showInventoryDialog();
+                    }
                 },
                 template:'<md-dialog aria-label="Edit Child Menu">'+
                 '<md-content >' +
@@ -254,7 +261,7 @@
                 '</div>' +
                 '<br>'+
                 '<div style="text-align:center">' +
-                    '<lable>Are you sure, you want to delete this Product ?</lable>' +
+                    '<lable>{{dialogCtrl.message}}</lable>' +
                 '</div>' +
                 '<br><br>' +
                 '<div class="md-dialog-buttons">'+
