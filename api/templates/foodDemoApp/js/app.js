@@ -52,6 +52,7 @@ mobileApp.run(function($ionicPlatform,$rootScope,$http,readMadeEasy,constants,$i
     }
 }).config(function($ionicConfigProvider) {
     $ionicConfigProvider.views.forwardCache(true);
+    $ionicConfigProvider.backButton.previousTitleText(false).text('');
 })
 
 // Ionic Cloud Provider Configuration

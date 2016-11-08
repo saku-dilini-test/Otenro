@@ -1187,7 +1187,6 @@ md-tabs-canvas.md-paginated{
 }
 
 md-tabs md-tabs-wrapper{
-    background-color: #f5f6f4;
     padding: 10px 20px 0;
 }
 
@@ -1409,7 +1408,6 @@ background-color: #f4f5f4;
 }
 
 .md-dialog-buttons{
-    background-color: #fff;
     padding: 0 44px;
     text-align: right;
     width: 100%;
@@ -1818,6 +1816,7 @@ button[disabled]{
 
 .input-modify{
     border:unset !important;
+    padding-top: 3px !important;
 }
 
 .product-name{
@@ -1865,6 +1864,10 @@ button[disabled]{
 .allItems .md-container-modify {
     width: 83%;
     margin-bottom:0;
+}
+
+.tree-grid md-input-container{
+    margin:0;
 }
 
 @-moz-document url-prefix() {
@@ -1972,12 +1975,8 @@ trix-toolbar .button_group input[type=button]{
 }
 
 .email-image-upload{
-    margin: 0;
     position: relative;
-    padding: 0 0 0 47px;
-    float: left;
-    top: -19px;
-    width: 25%;
+    text-align:center;
 }
 .email-image-upload p{
     padding:unset;

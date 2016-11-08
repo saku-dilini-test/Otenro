@@ -41,7 +41,7 @@
                     displayName:'Variant',
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                     "<md-input-container class='md-container-modify'>"+
-                    "<div >{{row.branch['selection']}}</div> - <div>{{row.branch[col.field]}}</div>"+
+                    "<div class='md-input input-modify'>{{row.branch['selection']}} - {{row.branch[col.field]}}</div>"+
                     "</md-input-container>"+ "</div>"
 
                 },

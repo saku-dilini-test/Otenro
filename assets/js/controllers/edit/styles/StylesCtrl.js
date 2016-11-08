@@ -67,6 +67,7 @@
             $scope.backgroundColor = appSettings.backgroundColor;
             $scope.navigationBarColor = appSettings.navigationBarColor;
             $scope.footerColor = appSettings.footerColor;
+            $scope.navigationBarFontColor = appSettings.navigationBarFontColor;
             $scope.headerFontColor = appSettings.headerFontColor;
             $scope.contentFontColor = appSettings.contentFontColor;
             $scope.footerFontColor = appSettings.footerFontColor;
@@ -364,6 +365,10 @@
                             toastr.success('Background Color Updated Successfully', {
                                 closeButton: true
 
+                        });}
+                        else if(type == 'navigationBarFontColor') {
+                            toastr.success('Navigation Font Color Updated Successfully', {
+                                closeButton: true
                         });}
                         else if(type == 'headerFontColor') {
                             toastr.success('Header Font Color Updated Successfully', {

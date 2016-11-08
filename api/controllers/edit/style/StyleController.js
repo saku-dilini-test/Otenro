@@ -551,6 +551,10 @@ module.exports = {
                 colorTypeCss = ".made-easy-button-setting";
             }
             // here update color in Css class
+            else if(type == 'navigationBarFontColor') {
+                app.appSettings.navigationBarFontColor = styleColor;
+                colorTypeCss = ".made-easy-navigationBarColor";
+            }
             else if(type == 'headerFontColor') {
                 app.appSettings.headerFontColor = styleColor;
                 colorTypeCss = ".made-easy-header-font";
@@ -568,7 +572,7 @@ module.exports = {
                 if (err) res.send(err);
 
                 // here update color in Css class
-                if(type == 'headerFontColor' || type == 'contentFontColor' || type == 'footerFontColor'){
+                if(type == 'navigationBarFontColor' || type == 'headerFontColor' || type == 'contentFontColor' || type == 'footerFontColor'){
                     updateFile(mainCssFile, [{
                         rule: colorTypeCss,
                         target: "color",

@@ -31,6 +31,15 @@ a{
     left: 3%;
 }
 
+.button.activated {
+    background: transparent;
+}
+
+.item .item-content.activated, .item .item-content.activated.item-complex>.item-content, .item .item-content.active, .item .item-content.active.item-complex>.item-content, .item-complex.activated .item-content, .item-complex.activated .item-content.item-complex>.item-content, .item-complex.active .item-content, .item-complex.active .item-content.item-complex>.item-content, .item.activated, .item.activated.item-complex>.item-content, .item.active, .item.active.item-complex>.item-content {
+    border-color: unset;
+    background-color: unset;
+}
+
 /* Helper Classes */
 .center{
     text-align:center;
@@ -66,6 +75,7 @@ a{
 .made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
     background:transparent;
     border: unset;
+    color:inherit;
 }
 
 button {
