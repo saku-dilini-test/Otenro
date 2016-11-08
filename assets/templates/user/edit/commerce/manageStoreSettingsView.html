@@ -27,7 +27,7 @@
                                 <label>next order number </label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <input class="input-shadow-border" type="number" ng-model="storeSettings.orderNumber"
-                                       ng-pattern="/^\d*[1-9]\d*$/" name="number" required />
+                                       placeholder="000001" ng-pattern="/^\d*[1-9]\d*$/" name="number" required />
                                 <br>
                                 <span class="error" ng-show="storeSettingsForm.number.$error.number">Not valid number!</span>
                                 <span class="error" ng-show="storeSettingsForm.number.$error.pattern">Positive numbers only</span>
@@ -186,13 +186,13 @@
                                 </div>
                             </div>-->
                             <br />
-                            <fieldset>
-                                <label>select language</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <md-select class="" placeholder="{{languagesPlaceHolder}}" ng-model="storeSettings.language" required>
-                                    <md-option ng-value="languages.language" ng-repeat="languages in languageList">{{languages.language}}</md-option>
-                                </md-select>
-                            </fieldset>
+                            <!--<fieldset>-->
+                                <!--<label>select language</label>-->
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
+                                <!--<md-select class="" placeholder="{{languagesPlaceHolder}}" ng-model="storeSettings.language" required>-->
+                                    <!--<md-option ng-value="languages.language" ng-repeat="languages in languageList">{{languages.language}}</md-option>-->
+                                <!--</md-select>-->
+                            <!--</fieldset>-->
                             <fieldset>
                                 <label>time and region</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
