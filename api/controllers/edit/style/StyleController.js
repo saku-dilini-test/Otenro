@@ -550,10 +550,19 @@ module.exports = {
                 app.appSettings.buttonColor = styleColor  ;
                 colorTypeCss = ".made-easy-button-setting";
             }
+            // here to update button border color
+            else if(type == 'buttonBorderColor'){
+                app.appSettings.buttonBorderColor = styleColor  ;
+                colorTypeCss = ".made-easy-button-setting";
+            }
             // here update color in Css class
             else if(type == 'navigationBarFontColor') {
                 app.appSettings.navigationBarFontColor = styleColor;
                 colorTypeCss = ".made-easy-navigationBarColor";
+            }
+            else if(type == 'buttonFontColor') {
+                app.appSettings.buttonFontColor = styleColor;
+                colorTypeCss = ".made-easy-button-setting";
             }
             else if(type == 'headerFontColor') {
                 app.appSettings.headerFontColor = styleColor;
@@ -572,10 +581,20 @@ module.exports = {
                 if (err) res.send(err);
 
                 // here update color in Css class
-                if(type == 'navigationBarFontColor' || type == 'headerFontColor' || type == 'contentFontColor' || type == 'footerFontColor'){
+                if(type == 'buttonFontColor' || type == 'navigationBarFontColor' || type == 'headerFontColor' || type == 'contentFontColor' || type == 'footerFontColor'){
                     updateFile(mainCssFile, [{
                         rule: colorTypeCss,
                         target: "color",
+                        replacer: styleColor
+                    }], function (err) {
+                        console.log((err));
+                    });
+
+                }// here update border-color in Css class
+                else if(type == 'buttonBorderColor'){
+                    updateFile(mainCssFile, [{
+                        rule: colorTypeCss,
+                        target: "border-color",
                         replacer: styleColor
                     }], function (err) {
                         console.log((err));

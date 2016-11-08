@@ -11,7 +11,18 @@
     background-size: cover;
 }
 .made-easy-navigationBarColor{
-    background-color: #000;
+  background-color: #5d0700;
+  color:#fff;
+  border: 0;
+}
+.made-easy-navigationBarColor .item {
+    border-style:unset;
+}
+
+.made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
+    background:transparent;
+    border: unset;
+    color:inherit;
 }
 .made-easy-footerColor{
     background-color: #EAD004;
@@ -34,13 +45,21 @@
     font-size: 12px;
     font-weight: lighter;
 }
+
+/* ----- Button Font Settings ----- */
 .made-easy-button-setting{
-    background-color: inherit;
-    font-family: Ubuntu Light;
-    border-width: inherit;
-    border-radius: inherit;
-    cursor: url(../img/cursor.cur), auto;
+  border-color: transparent;
+  background-color: #33cd5f;
+  color: #fff;
+  border-width:1px;
+  border-radius:1px;
+  cursor: url(../img/cursor.cur), auto;
 }
+
+.button.made-easy-button-setting.activated {
+    background:#e5e5e5;
+}
+
 .button.disabled, .button[disabled] {
     opacity: .4;
     cursor: default !important;

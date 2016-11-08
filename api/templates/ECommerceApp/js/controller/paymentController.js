@@ -4,6 +4,7 @@
 
 mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state) {
 
+  $scope.$emit('hideMenu',{});
   //getting the user's registered name and address
   $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 
@@ -110,7 +111,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                   cssClass: 'ionicPopUp',
                                   buttons:[
                                    {text:'OK',
-                                    type:'button-positive'},
+                                    type:'made-easy-button-setting'},
                                   ]
                                 });
                                 // TODO : Currently back to cart

@@ -2,14 +2,15 @@
 
   <ion-side-menu-content drag-content="false">
 
-    <ion-nav-bar class="bar bar-header" >
+    <ion-nav-bar class="bar bar-header made-easy-navigationBarColor" >
+      <ion-nav-back-button class="icon ion-ios-arrow-back"></ion-nav-back-button>
       <div class="bar bar-header">
         <ion-nav-back-button class="icon ion-ios-arrow-back"></ion-nav-back-button>
           <ion-nav-buttons side="left">
             <button class="button icon ion-navicon" menu-toggle="left" ng-if="showMenu"></button>
           </ion-nav-buttons>
           <ion-nav-buttons side="right">
-            <button ui-sref="app.cart" class="button icon ion-ios-cart-outline"></button>
+            <button ui-sref="app.cart" class="button icon ion-ios-cart"></button>
             <span class="badge2">{{parentobj.cartSize}}</span>
           </ion-nav-buttons>
       </div>
@@ -18,32 +19,29 @@
     <ion-nav-view name="menuContent"></ion-nav-view>
 </ion-side-menu-content>
 
-  <ion-side-menu side="left">
+  <ion-side-menu side="left" class="made-easy-navigationBarColor">
     <ion-content>
-      <label class="made-easy-header-font">Hello! {{user.name}}</label>
+      <label >Hello! {{user.name}}</label>
       <ion-list>
-        <ion-item class="made-easy-header-font" menu-close ui-sref="app.category">
+        <ion-item menu-close ui-sref="app.category">
           <i class="icon ion-ios-home-outline"></i> Home
         </ion-item>
-        <ion-item class="made-easy-header-font" menu-close ui-sref="app.category">
+        <ion-item menu-close ui-sref="app.category">
           <i class="icon ion-ios-paper-outline"></i> Menu
         </ion-item>
-        <ion-item class="made-easy-header-font" menu-close ui-sref="app.cart">
-          <i class="icon ion-ios-cart-outline"></i> Cart
-        </ion-item>
-        <ion-item class="made-easy-header-font" menu-close ui-sref="app.contactUs">
+        <ion-item menu-close ui-sref="app.contactUs">
           <i class="icon ion-ios-telephone-outline"></i> Contact Us
         </ion-item>
-        <ion-item class="made-easy-header-font" menu-close ui-sref="app.policies">
+        <ion-item menu-close ui-sref="app.policies">
           <i class="icon ion-ios-help-outline"></i> Policies
         </ion-item>
-        <ion-item class="made-easy-header-font" menu-close ui-sref="app.aboutUs">
+        <ion-item menu-close ui-sref="app.aboutUs">
           <i class="icon ion-ios-person-outline"></i> About Us
         </ion-item>
-        <ion-item class="made-easy-header-font" menu-close ui-sref="app.login">
+        <ion-item menu-close ui-sref="app.login">
           <i class="icon ion-log-in"></i> Login
         </ion-item>
-        <ion-item class="made-easy-header-font" menu-close ui-sref="app.terms">
+        <ion-item menu-close ui-sref="app.terms">
           <i class="icon ion-ios-information-outline"></i> Terms & Conditions
         </ion-item>
       </ion-list>

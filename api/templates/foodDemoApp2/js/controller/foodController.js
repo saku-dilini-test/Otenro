@@ -92,7 +92,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             $ionicPopup.alert({
                 title: 'Warning!',
                 template: 'Please enter a quantity',
-                cssClass: 'ionicPopUp'
+                cssClass: 'ionicPopUp',
+                buttons:[
+                    {text:'OK',
+                     type:'made-easy-button-setting'},
+                ]
             });
         }else{
             $rootScope.cart.cartItems.push({

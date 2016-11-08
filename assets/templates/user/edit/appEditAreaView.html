@@ -56,7 +56,7 @@
                                     <h1>Navigation</h1>
                                     <div class="color-setting">
                                         <button class="color-picker-button pull-left"
-                                                colorpicker="hex"
+                                                colorpicker="rgba"
                                                 colorpicker-parent="true"
                                                 ng-model="navigationBarColor"  type="text"
                                                 style="background-color: {{navigationBarColor}}; color: {{navigationBarColor}};" >
@@ -176,18 +176,36 @@
                                 <div ng-if="isApplyStyle.button">
                                     <div class="color-setting clearfix">
                                         <button class="color-picker-button pull-left"
-                                                colorpicker="hex"
+                                                colorpicker="rgba"
                                                 colorpicker-parent="true"
                                                 ng-model="buttonColor" type="text"
                                                 style="background-color: {{buttonColor}}; color: {{buttonColor}};">
                                         </button>
                                         <div class="color-section">Button Color</div>
                                     </div>
-                                    <div class="other-setting">
-                                        <h2>Font Type</h2>
-                                        <select ng-model="buttonFontFamilyProp.value" ng-options="v for v in buttonFontFamilyProp.values" ng-change="styleFontFamilyChange(buttonFontFamilyProp.value,'buttonFont')">
-                                        </select>
+                                    <div class="color-setting clearfix">
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="hex"
+                                                colorpicker-parent="true"
+                                                ng-model="buttonFontColor" type="text"
+                                                style="background-color: {{buttonFontColor}}; color: {{buttonFontColor}};">
+                                        </button>
+                                        <div class="color-section">Button Font Color</div>
                                     </div>
+                                    <div class="color-setting clearfix">
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="buttonBorderColor" type="text"
+                                                style="background-color: {{buttonBorderColor}}; color: {{buttonBorderColor}};">
+                                        </button>
+                                        <div class="color-section">Button Border Color</div>
+                                    </div>
+                                    <!--<div class="other-setting">-->
+                                        <!--<h2>Font Type</h2>-->
+                                        <!--<select ng-model="buttonFontFamilyProp.value" ng-options="v for v in buttonFontFamilyProp.values" ng-change="styleFontFamilyChange(buttonFontFamilyProp.value,'buttonFont')">-->
+                                        <!--</select>-->
+                                    <!--</div>-->
                                     <div class="other-setting">
                                         <h2>Border size</h2>
                                         <select ng-model="buttonBorderWidthProp.value" ng-options="v for v in buttonBorderWidthProp.values" ng-change="styleButtonBorderWidthChange(buttonBorderWidthProp.value)">

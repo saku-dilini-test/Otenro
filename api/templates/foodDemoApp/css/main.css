@@ -20,8 +20,20 @@ a{
     background-size: cover;
 }
 .made-easy-navigationBarColor{
-  background-color: #312626;
+  background-color: inherit;
+  color:#000;
+  border: 0;
 }
+.made-easy-navigationBarColor .item {
+    border-style:unset;
+}
+
+.made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
+    background:transparent;
+    border: unset;
+    color:inherit;
+}
+
 .made-easy-footerColor{
   background-color: #4e6dde;
 }
@@ -48,13 +60,19 @@ a{
   font-size: 12px;
   font-weight: bolder;
 }
-.made-easy-button-setting{
-  background-color: #2e62be;
-  font-family: Ubuntu Light;
-  border-width: 3px;
-  border-radius: 3px;
-  cursor:url(../img/cursor.cur), auto;
 
+/* ----- Button Font Settings ----- */
+.made-easy-button-setting{
+  border-color: transparent;
+  background-color: #387ef5;
+  color: #fff;
+  border-width:1px;
+  border-radius:1px;
+  cursor: url(../img/cursor.cur), auto;
+}
+
+.button.made-easy-button-setting.activated {
+    background:#e5e5e5;
 }
 
 /* ----- View Page ----- */
@@ -72,9 +90,7 @@ a{
 
 .badge2{
     background-color: transparent;
-    color: #404040;
     padding: 7px 0;
-    cursor:url(../img/cursor.cur), auto;
 }
 
 .buttons .buttons-right .header-item{

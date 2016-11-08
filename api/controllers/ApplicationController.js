@@ -51,7 +51,7 @@ module.exports = {
             isApplyStyle = {
                 color : {
                     backgroundColor: true,
-                    navigationColor: false,
+                    navigationColor: true,
                     footerColor: false
                 },
                 typography : {
@@ -59,7 +59,7 @@ module.exports = {
                     content : true,
                     footer : false
                 },
-                button : false
+                button : true
             }
         }
 
@@ -76,7 +76,7 @@ module.exports = {
                     content : true,
                     footer : false
                 },
-                button : false
+                button : true
             }
         }
 
@@ -85,7 +85,7 @@ module.exports = {
             isApplyStyle = {
                 color : {
                     backgroundColor: true,
-                    navigationColor: false,
+                    navigationColor: true,
                     footerColor: false
                 },
                 typography : {
@@ -126,7 +126,7 @@ module.exports = {
                     content : true,
                     footer : false
                 },
-                button : false
+                button : true
             }
 
         }
