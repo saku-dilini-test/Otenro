@@ -156,7 +156,14 @@
          * @param variants
          */
         $scope.deleteVariant = function (index,variants) {
-            $scope.product.variants.splice(index, 1);
+            if($scope.product.variants.length == 1){
+                toastr.error('cannot delete all the variants', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else{
+                $scope.product.variants.splice(index, 1);
+            }
         };
 
         $scope.addProductVariants = function (selection, variants,current) {
