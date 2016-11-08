@@ -264,7 +264,14 @@
                       toastr.success('New Product has been added to the inventory.', 'Awsome!', {
                           closeButton: true
                       });
-                      $mdDialog.hide();
+                      if(initialData.product.appId){
+                             return commerceService.showInventoryDialog();
+                             $mdDialog.hide();
+
+                      }
+                      else{
+                        $mdDialog.hide();
+                      }
                   }).error(function (err) {
                       toastr.error('Unable to Add', 'Warning', {
                           closeButton: true
