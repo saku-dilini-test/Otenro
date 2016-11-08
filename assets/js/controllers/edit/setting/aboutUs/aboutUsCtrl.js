@@ -58,7 +58,7 @@
             aboutUs.appId = $rootScope.appId;
             aboutUsService.addAboutUs(aboutUs)
                 .success(function (data, status, headers, config) {
-                    toastr.success('Successfully save About Us Data ..... !', 'Awsome!', {
+                    toastr.success('About us updated', 'Awsome!', {
                         closeButton: true
                     });
                     $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
@@ -66,7 +66,7 @@
                         '#/app/aboutUs';
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (data, status, headers, config) {
-                toastr.error('Unable to Add', 'Warning', {
+                toastr.error('Error updating About Us', 'Warning', {
                     closeButton: true
                 });
             })

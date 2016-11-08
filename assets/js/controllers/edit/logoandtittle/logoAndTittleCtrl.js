@@ -24,13 +24,13 @@
                         +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
-                    toastr.success('Change Header Image', 'Awsome!', {
+                    toastr.success('Header image changed  ', 'Awsome!', {
                         closeButton: true
                     });
                 }).error(function(err) {
                     console.log(err);
                     //alert('warning', "Unable to get templates", err.message);
-                    toastr.error('Unable to change ', 'Error', {
+                    toastr.error('Header image change failed ', 'Error', {
                         closeButton: true
                     });
                 })

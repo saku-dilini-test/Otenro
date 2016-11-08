@@ -120,7 +120,7 @@
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
                 splash[0] == null || splash[1] == null || splash[2] == null || splash[3] == null ||playStoreData.email==null){
 
-                        toastr.error('Fill all the fields', 'Warning', {
+                        toastr.error('Please fill all fields  ', 'Warning', {
                               closeButton: true
                         });
             }
@@ -132,7 +132,7 @@
                                 closeButton: true
                             });
                         }).error(function(data, status, headers, config) {
-                        toastr.error('Error while saving data', 'Warning', {
+                        toastr.error('Unable to save ', 'Warning', {
                             closeButton: true
                         });
                     });
@@ -245,7 +245,7 @@
               appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
               appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null || publishSplash.splash1 == null ||
               publishSplash.splash2 == null || publishSplash.splash3 == null || publishSplash.splash4 == null){
-                        toastr.error('Fill all the fields', 'Warning', {
+                        toastr.error('Please fill all fields ', 'Warning', {
                               closeButton: true
                         });
               }
