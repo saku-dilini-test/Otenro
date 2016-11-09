@@ -59,10 +59,14 @@ mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy,$ionicPush,$http,c
 
         // payPalSandboxId :'<< Sandbox App Account ID >>',
 
-        // payPalProductionId : '<< Live App Account ID >>',
+         payPalProductionId : 'AXQGp0iQvumflqsAcxYBR4f-j4ucJLFmftgaVVJ_0k8euEAT_VL7ibFN0FMwPz1_-0MEeMMO7jettA0U',
 
-        // payPalEnv: 'PayPalEnvironmentSandbox', // for testing sandbox
+         payPalEnv: 'PayPalEnvironmentSandbox', // for testing sandbox
         // payPalEnv: 'PayPalEnvironmentProduction', // for production
+
+        payPalSandboxId :'AXPo6ek3B5WG2PpeLm3HOOSh6kDfqSDlVYYHPaEfn6hpvCe8FUY1cAKCI21LUcwooy_hdAsV872EQSaT',
+
+        payPalEnv:'PayPalEnvironmentSandbox', // for testing production for production
 
         payPalShopName : 'MyShopName',
 
