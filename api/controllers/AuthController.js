@@ -9,7 +9,9 @@ var JWT = require('machinepack-jwt'),
     GoogleAPIsOAuth2v2 = require('machinepack-googleapisoauth2v2'),
     Facebook = require('machinepack-facebook'),
     request = require('request'),
-    config = require('../services/config');
+    config = require('../services/config'),
+    moment = require('moment'),
+    createToken = require('../services/jwt');
     
 
 module.exports = {
@@ -37,25 +39,7 @@ module.exports = {
           },
 
           success: function (){
-
-            JWT.encode({
-              secret: config.CLIENT_SECRET,
-              payload: {
-                id :  user.id,
-                email:  user.email,
-                userRoles : user.userRole
-              },
-              algorithm: 'HS256'
-            }).exec({
-              // An unexpected error occurred.
-              error: function (err){
-                return err;
-              },
-              // OK.
-              success: function (result){
-                res.status(200).json({user : { email : user.email , sub : user.id,userRoles : user.userRole  },token : result });
-              }
-            });
+            createToken(user,res);
           }
         });
       });
@@ -65,38 +49,15 @@ module.exports = {
     Authentication for the forgot password users
   */
   forgotPassword : function(req, res) {
-        var resetToken=[{
-        token : req.body.token
-        }]
+        var resetToken=[{token : req.body.token}];
         //find if the user with the token exist
         User.findOne({'resetToken.token':req.body.token}, function foundUser(err, user) {
             if (err) return res.negotiate(err);
             if (!user) return res.notFound();
             var diff = user.resetToken[0].expires- new Date(req.body.expires);
-
-
             //if the resetToken is not expired generate the token
             if(diff<=3.6e+6){
-                JWT.encode({
-                    secret: config.CLIENT_SECRET,
-                    payload: {
-                        id :  user.id,
-                        email:  user.email,
-                        userRoles : user.userRole
-
-                    },
-                    algorithm: 'HS256'
-                }).exec({
-                // An unexpected error occurred.
-                error: function (err){
-                    return err;
-                },
-                // OK.
-                success: function (result){
-
-                    res.status(200).json({user : { email : user.email , sub : user.id,userRoles : user.userRole  },token : result });
-                }
-                });
+              createToken(user,res);
             }
             else{
                 res.status(404).send({error:'Expired'});
@@ -121,22 +82,7 @@ module.exports = {
               return res.negotiate(err);
             }
             if (user) {
-              JWT.encode({
-                secret: config.CLIENT_SECRET,
-                payload: {
-                  id :  user.id,
-                  email:  user.email,
-                  userRoles : user.userRole
-                },
-                algorithm: 'HS256'
-              }).exec({
-                error: function (err){
-                  return err;
-                },
-                success: function (result){
-                  res.status(200).json({user : { email : user.email , sub : user.id ,userRoles : user.userRole  },token : result });
-                }
-              });
+              createToken(user,res);
             }
           });
     });
@@ -178,41 +124,10 @@ module.exports = {
                   facebookId : facebookId
                 }).exec(function(err, newUser) {
                   if (err) return res.negotiate(err);
-                  JWT.encode({
-                    secret: config.CLIENT_SECRET,
-                    payload: {
-                      id :  newUser.id,
-                      email:  newUser.email,
-                      userRoles : newUser.userRole
-                    },
-                    algorithm: 'HS256'
-                  }).exec({
-                    error: function (err){
-                      return res.negotiate(err);
-                    },
-                    success: function (result){
-                      res.status(200).json({user : {email: newUser.email, sub: newUser.id,userRoles : newUser.userRole },token : result });
-                    }
-                  });
+                  createToken(newUser,res);
                 });
               } else {
-                JWT.encode({
-                  secret: config.CLIENT_SECRET,
-                  payload: {
-                    id :  foundUser.id,
-                    email:  foundUser.email,
-                    userRoles : foundUser.userRole
-
-                  },
-                  algorithm: 'HS256'
-                }).exec({
-                  error: function (err){
-                    return res.negotiate(err);
-                  },
-                  success: function (result){
-                    res.status(200).json({user : {email: foundUser.email, sub: foundUser.id,userRoles : foundUser.userRole },token : result });
-                  }
-                });
+                createToken(foundUser,res)
               }
             });
           }else{
@@ -261,40 +176,10 @@ module.exports = {
                 }).exec(function(err, newUser) {
 
                   if (err) return res.negotiate(err);
-                  JWT.encode({
-                    secret: config.CLIENT_SECRET,
-                    payload: {
-                      id :  newUser.id,
-                      email:  newUser.email,
-                      userRoles : newUser.userRole
-                    },
-                    algorithm: 'HS256'
-                  }).exec({
-                    error: function (err){
-                      return res.negotiate(err);
-                    },
-                    success: function (result){
-                      res.status(200).json({user : {email: newUser.email, sub: newUser.id,userRoles : newUser.userRole},token : result });
-                    }
-                  });
+                  createToken(newUser,res)
                 });
               } else {
-                JWT.encode({
-                  secret: config.CLIENT_SECRET,
-                  payload: {
-                    id :  foundUser.id,
-                    email:  foundUser.email,
-                    userRoles : foundUser.userRole
-                  },
-                  algorithm: 'HS256'
-                }).exec({
-                  error: function (err){
-                    return res.negotiate(err);
-                  },
-                  success: function (result){
-                    res.status(200).json({user : {email: foundUser.email, sub: foundUser.id,userRoles : foundUser.userRole},token : result });
-                  }
-                });
+                createToken(foundUser,res)
               }
             });
           }else{
