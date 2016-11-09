@@ -145,11 +145,11 @@
             stylesService.addStyleFontFamily(styleFontFamilyData)
                 .success(function(data) {
                     if(type == 'headerFont'){
-                    toastr.success('Header Font Updated Successfully', {
+                    toastr.success('Header Font Successfully Updated', {
                         closeButton: true
                     });}
                     else if(type == 'contentFont'){
-                        toastr.success('Content Font Updated Successfully', {
+                        toastr.success('Content Font Successfully Updated', {
                             closeButton: true
                         });
 
@@ -159,7 +159,7 @@
                     mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
 
                 }).error(function(err) {
-                    toastr.error( type ,'Unable to update', {
+                    toastr.error( type ,'Update Failed ', {
                         closeButton: true
                     });
                 });
@@ -182,11 +182,11 @@
             stylesService.addStyleFontSize(styleFontSizeData)
                 .success(function(data) {
                     if(type == 'headerFont'){
-                    toastr.success( ' Header Font Size Updated Successfully',{
+                    toastr.success( ' Header Font Size Successfully Updated',{
                         closeButton: true
                     });}
                     else if(type == 'contentFont'){
-                        toastr.success( 'Content Font Size Updated Successfully',{
+                        toastr.success( 'Content Font Size Successfully Updated',{
                             closeButton: true
                         });
                     }
@@ -194,7 +194,7 @@
                     var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
                 }).error(function(err) {
-                    toastr.error( type , 'Unable to update ', {
+                    toastr.error( type , 'Update Failed ', {
                         closeButton: true
                     });
 
@@ -218,11 +218,11 @@
             stylesService.addStyleFontWeight(styleFontWeightData)
                 .success(function(data) {
                     if(type == 'headerFont'){
-                    toastr.success(' Header Font Weight Updated Successfully',{
+                    toastr.success(' Header Font Weight Successfully Updated',{
                         closeButton: true
                     });}
                     else if(type == 'contentFont'){
-                        toastr.success('Content Font Weight Updated Successfully',{
+                        toastr.success('Content Font Weight Successfully Updated',{
                             closeButton: true
                         });
                     }
@@ -231,7 +231,7 @@
                     mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
 
                 }).error(function(err) {
-                    toastr.error( type , 'Unable to update  ', {
+                    toastr.error( type , 'Update failed ', {
                         closeButton: true
                     });
                 });
@@ -245,7 +245,7 @@
             };
             stylesService.addStyleButtonBorderWidth(styleButtonBorderWidthData)
                 .success(function(data) {
-                    toastr.success('Button Border Width Successfully Update', {
+                    toastr.success('Button Border Width Successfully Updated', {
                         closeButton: true
                     });
 
@@ -267,7 +267,7 @@
             };
             stylesService.addStyleButtonBorderRadius(styleButtonBorderRadiusData)
                 .success(function(data) {
-                    toastr.success('Button Border Radius Successfully Update', {
+                    toastr.success('Button Border Radius Successfully Updated', {
                         closeButton: true
                     });
 
@@ -314,7 +314,7 @@
                 .success(function (res) {
                     var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
-                    toastr.success('Background Image Updated Successfully', 'Message', {
+                    toastr.success('Background Image Successfully Updated', 'Message', {
                         closeButton: true
                     });
                 }).error(function (res) {
@@ -362,21 +362,21 @@
                 stylesService.addStyleColor(styleColorData)
                     .success(function(data) {
                         if(type == 'backgroundColor'){
-                            toastr.success('Background Color Updated Successfully', {
+                            toastr.success('Background Color Successfully Updated', {
                                 closeButton: true
 
                         });}
                         else if(type == 'navigationBarFontColor') {
-                            toastr.success('Navigation Font Color Updated Successfully', {
+                            toastr.success('Navigation Font Color Successfully Updated', {
                                 closeButton: true
                         });}
                         else if(type == 'headerFontColor') {
-                            toastr.success('Header Font Color Updated Successfully', {
+                            toastr.success('Header Font Color Successfully Updated', {
                                 closeButton: true
                         });}
 
                         else if(type == 'contentFontColor') {
-                            toastr.success('Content Font Color Updated Successfully', {
+                            toastr.success('Content Font Color Successfully Updated', {
                                 closeButton: true
                             });}
 
@@ -385,7 +385,7 @@
                         mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
 
                     }).error(function(err) {
-                        toastr.error( type , 'Unable to update ', {
+                        toastr.error( type , 'Update failed ', {
                             closeButton: true
                         });
                     });
@@ -399,7 +399,7 @@
             };
             stylesService.addFonts($scope.fontsData)
                 .success(function(res){
-                    toastr.success({title: "Successfully Update Fonts"});
+                    toastr.success({title: "Fonts Successfully Updated"});
 
                     var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());

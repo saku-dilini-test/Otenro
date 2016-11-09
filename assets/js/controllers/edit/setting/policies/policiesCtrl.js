@@ -11,7 +11,7 @@
             policies.appId = $rootScope.appId;
             policiesService.addPolicies(policies)
                 .success(function (data, status, headers, config) {
-                    toastr.success('Successfully save policies Data ..... !', 'Awsome!', {
+                    toastr.success('Policies successfully updated', {
                         closeButton: true
                     });
                     $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
@@ -19,7 +19,7 @@
                         '#/app/Policies';
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (data, status, headers, config) {
-                toastr.error('Unable to Add', 'Warning', {
+                toastr.error('Error updating Policies', 'Warning', {
                     closeButton: true
                 });
             })
@@ -38,7 +38,7 @@
                         '#/app/aboutUs';
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (data, status, headers, config) {
-                toastr.error('Unable to Add', 'Warning', {
+                toastr.error('Error updating Contact us', 'Warning', {
                     closeButton: true
                 });
             })

@@ -30,10 +30,10 @@
 
             commerceService.updateCategoryList(child)
                 .success(function() {
-                    alert("success", 'Awsome! ', 'Category has been Updated.!');
+                    alert("success", 'Awsome! ', 'Category has been successfully Updated');
                       return mainMenuService.showMainMenuDialog();
                 }).error(function(err) {
-                    alert('warning', "Unable to Updated");
+                    alert('warning', "Update Failed ");
                 })
 
         };

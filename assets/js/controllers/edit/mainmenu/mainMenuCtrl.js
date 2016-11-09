@@ -60,7 +60,7 @@
                         im[0] = $scope.picFile;
                         $scope.tmpImage = im;
                         $scope.mainImg = img;
-                        toastr.success('Image has been uploaded successfully', 'message', {
+                        toastr.success('Image has been successfully uploaded ', 'message', {
                            closeButton: true
                         });
                     }
@@ -246,7 +246,7 @@
                         +'/templates/'+$rootScope.appId+'' +
                         '#/app/home/'+data.id+'?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                    toastr.success("New category has been added successfully", 'Message', {closeButton: true});
+                    toastr.success("New category has been successfully added", 'Message', {closeButton: true});
                     $mdDialog.hide();
                     mainMenuService.showMainMenuDialog();
                 }).error(function(err) {
@@ -264,7 +264,7 @@
                         +'/templates/'+$rootScope.appId+'' +
                         '#/app/home/'+data.id+'?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                    toastr.success("Successfully Update new Category", 'Message', {closeButton: true});
+                    toastr.success("Successfully updated category", 'Message', {closeButton: true});
                     $mdDialog.hide();
                     mainMenuService.showMainMenuDialog();
                 }).error(function(err) {
@@ -288,7 +288,7 @@
                             +'/templates/'+$rootScope.appId+'' +
                             '#/app/home/'+data.id+'?'+new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        toastr.success("Successfully Update new Category", 'Message', {closeButton: true});
+                        toastr.success("Successfully updated category, 'Message', {closeButton: true});
                         $mdDialog.hide();
                         mainMenuService.showMainMenuDialog();
                     }).error(function(err) {
@@ -306,7 +306,7 @@
         $scope.addNewCategory = function(file,menu){
             // If menu undefined || menu.name undefined or empty, pop up error message
             if((typeof menu == 'undefined') || (typeof menu.name == 'undefined') || menu.name == ''){
-                toastr.error('Fill the Name Field', 'Warning', {closeButton: true});
+                toastr.error('Please fill all fields', 'Warning', {closeButton: true});
                 return;
             }
             // if($scope.myImage == ''){
@@ -329,7 +329,7 @@
                             + '/templates/' + $rootScope.appId + '' +
                             '#/app/home/' + data.id + '?' + new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        toastr.success("New category has been added successfully", 'Message', {closeButton: true});
+                        toastr.success("New category has been successfully added", 'Message', {closeButton: true});
                         $mdDialog.hide();
                         mainMenuService.showMainMenuDialog();
                     }).error(function (err) {
@@ -345,7 +345,7 @@
                             + '/templates/' + $rootScope.appId + '' +
                             '#/app/home/' + data.id + '?' + new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        toastr.success("New category has been added successfully", 'Message', {closeButton: true});
+                        toastr.success("New category has been successfully added", 'Message', {closeButton: true});
                         $mdDialog.hide();
                         mainMenuService.showMainMenuDialog();
                     }).error(function (err) {
@@ -367,7 +367,7 @@
                                 + '/templates/' + $rootScope.appId + '' +
                                 '#/app/home/' + data.id + '?' + new Date().getTime();
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                            toastr.success("Successfully Edit Category", 'Message', {closeButton: true});
+                            toastr.success("Successfully edited category", 'Message', {closeButton: true});
                             $mdDialog.hide();
                             mainMenuService.showMainMenuDialog();
                         }).error(function (err) {

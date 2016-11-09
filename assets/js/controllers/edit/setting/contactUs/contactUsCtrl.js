@@ -101,21 +101,21 @@
             }
 
             if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
-                toastr.error('Basic Information not update', { closeButton: true});
+                toastr.error('Updating of basic information failed', { closeButton: true});
             }else if(typeof basicInfo.address == 'undefined'){
-                toastr.error('Address Not Update', { closeButton: true});
+                toastr.error('Updating of address failed', { closeButton: true});
             }
             else if(typeof basicInfo.telPhone == 'undefined'){
-                toastr.error('Tel phone Not Update', { closeButton: true});
+                toastr.error('Updating of Telephone number failed', { closeButton: true});
             }
             else if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
-                toastr.error('Web Information not update', { closeButton: true});
+                toastr.error('Updating of Web information failed ', { closeButton: true});
             }
             else if(typeof webInfo.email == 'undefined'){
-                toastr.error('Email Not Update', { closeButton: true});
+                toastr.error('Updating of Email address failed', { closeButton: true});
             }
             else if(typeof webInfo.webSite == 'undefined'){
-                toastr.error('Web Site Not Update', { closeButton: true});
+                toastr.error('Updating of web address failed', { closeButton: true});
             }
             else{
                 var basicInfoResponse = {
@@ -128,7 +128,7 @@
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
-                        toastr.success('Basic Info saved successfully', 'Awsome!', {closeButton: true});
+                        toastr.success('Basic information updated successfully', {closeButton: true});
                         disableTabs(1,false,false,true);
                     }).error(function(data, status, headers, config) {
                     toastr.error('Basic info saving error', { closeButton: true});
@@ -221,7 +221,7 @@
                     storeSettings.userId = $scope.userId;
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
-                            toastr.success('Successfully save About Us Data ..... !', 'Awsome!', {
+                            toastr.success('About us updated', {
                                 closeButton: true
                             });
                             $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
@@ -230,7 +230,7 @@
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $mdDialog.hide();
                         }).error(function (data, status, headers, config) {
-                        toastr.error('Unable to Add', 'Warning', {
+                        toastr.error('Error updating About Us', 'Warning', {
                             closeButton: true
                         });
                     })

@@ -132,13 +132,13 @@
         // --/-- insert Flat Rate type shipping collection --/--
         $scope.insertFlatRates = function (shipping) {
             if(typeof shipping == 'undefined'){
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
             }else if(typeof shipping.optionName == 'undefined'
                 || typeof shipping.preOrderFee == 'undefined'
                 || typeof shipping.feePerItem == 'undefined'){
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
             }else if(shipping.optionName.length > $scope.maxFlatRate){
@@ -156,7 +156,7 @@
         // --/-- insert Pickup Base type shipping collection --/--
         $scope.insertPickup = function (pickup) {
             if(typeof pickup == 'undefined'){
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
             }
@@ -197,11 +197,11 @@
         // --/-- insert Weight Base type shipping collection --/--
         $scope.insertWeightBase = function (shipping) {
             if(typeof shipping == 'undefined'){
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
             }else if(typeof shipping.optionName == 'undefined'){
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
             }else if(shipping.optionName.length > $scope.maxWeightRate){
@@ -212,11 +212,11 @@
             // Only Check Weight in WeightRanges Array '0' index values
             else if(typeof shipping.weightRanges[0].startWeight == 'undefined'
                     || typeof shipping.weightRanges[0].endWeight == 'undefined'){
-                        toastr.error('Fill the Weight Ranges', 'Warning', {closeButton: true});
+                        toastr.error('Please Fill the Weight Ranges', 'Warning', {closeButton: true});
             }
             // Only Check Cost in WeightRanges Array '0' index values
             else if(typeof shipping.weightRanges[0].cost == 'undefined'){
-                toastr.error('Fill the Weight Cost', 'Warning', {closeButton: true});
+                toastr.error('Please Fill the Weight Cost', 'Warning', {closeButton: true});
             }
             else {
                 shipping.appId = $rootScope.appId;
@@ -294,17 +294,17 @@
             shippingService.updateShippingInfo($scope.shipping)
             .success(function (result) {
                 if($scope.shipping.shippingOption == "Flat Rate"){
-                    toastr.success('Flat rate option has been added successfully ', 'Saved', {
+                    toastr.success('Flat rate option has been successfully added ', 'Saved', {
                         closeButton: true
                     });
                 }
                 else if ($scope.shipping.shippingOption == "Weight Based"){
-                    toastr.success('Weight Based Option has been added successfully ', 'Saved', {
+                    toastr.success('Weight Based Option has been successfully added ', 'Saved', {
                         closeButton: true
                     });
                 }
                 else{
-                    toastr.success('Pick up Option has been added successfully ', 'Saved', {
+                    toastr.success('Pick up Option has been successfully added', 'Saved', {
                         closeButton: true
                     });
                 }

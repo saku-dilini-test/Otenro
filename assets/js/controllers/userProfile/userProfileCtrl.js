@@ -62,14 +62,14 @@
             Auth.login($scope.user).success(function() {
                 userProfileResource.editUserProfile(params).then(function(data){
                     $mdDialog.hide();
-                    toastr.success('Successfully Changed', 'Success', {
+                    toastr.success('Password successfully changed', 'Success', {
                         closeButton: true
                     });
                 });
             }).error(function(err) {
                 $scope.password = true;
                 console.log(err);
-                toastr.error('Invalid email/password combination.', 'Error', {
+                toastr.error('Please check your Email/Password', 'Error', {
                   closeButton: true
                 });
             })
@@ -78,7 +78,7 @@
         $scope.saveBillings = function(billingEdit){
             billingEdit.userId = $auth.getPayload().id;
             userProfileResource.editBillingDetails(billingEdit).then(function(data){
-                 toastr.success('Successfully Changed', 'Success', {
+                 toastr.success('Password successfully changed', 'Success', {
                      closeButton: true
                  });
                 $scope.backToView(1);

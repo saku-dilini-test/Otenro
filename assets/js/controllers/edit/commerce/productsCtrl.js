@@ -106,7 +106,7 @@
         $scope.addVariant = function (selection,product,index,variants) {
             if(variants.sku == 0 || variants.price == 0 || variants.quantity == 0
                 || variants.size == "") {
-                toastr.error('Fill all the existing fields before adding a new field', 'Warning', {
+                toastr.error('Please fill all fields prior to adding a new variant ', 'Warning', {
                     closeButton: true
                 });
             }
@@ -215,7 +215,7 @@
 
         $scope.nextStep3Digital = function (current, product, variants) {
             if (variants.price == null) {
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
             } else {
@@ -255,13 +255,13 @@
          */
         $scope.addOrUpdateProducts = function () {
               if ($scope.tmpImage.length<=0){
-                  toastr.error('Please add at least one image', 'Warning', {
+                  toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
               }else {
                   $scope.product.selection = $scope.selection;
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
-                      toastr.success('New Product has been added to the inventory.', 'Awsome!', {
+                      toastr.success('Product added successfully ', 'Awsome!', {
                           closeButton: true
                       });
                       if(initialData.product.appId){
@@ -273,7 +273,7 @@
                         $mdDialog.hide();
                       }
                   }).error(function (err) {
-                      toastr.error('Unable to Add', 'Warning', {
+                      toastr.error('Product creation failed ', 'Warning', {
                           closeButton: true
                       });
                       $mdDialog.hide();
@@ -351,7 +351,7 @@
                 angular.element('#fileInput').val(null);
                 $scope.picFile = null;
                 $scope.myImage=null;
-                toastr.success('Image has been uploaded successfully', 'Awesome', {
+                toastr.success('Image has been  successfully added', 'Awesome', {
                     closeButton: true
                 });
             }
@@ -361,7 +361,7 @@
                 });
             }
             else{
-                toastr.error('Only 8 images allowed', 'Warning', {
+                toastr.error('A maximum of 8 images are allowed ', 'Warning', {
                     closeButton: true
                 });
             }

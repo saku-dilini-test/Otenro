@@ -120,7 +120,7 @@
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
                 splash[0] == null || splash[1] == null || splash[2] == null || splash[3] == null ||playStoreData.email==null){
 
-                        toastr.error('Fill all the fields', 'Warning', {
+                        toastr.error('Please fill all fields', 'Warning', {
                               closeButton: true
                         });
             }
@@ -128,7 +128,7 @@
 
                     publishService.addGooglePlayInfo(playStoreData)
                         .success(function(data, status, headers, config) {
-                            toastr.success('General information has been added successfully', 'Saved', {
+                            toastr.success('General information has been successfully added', 'Saved', {
                                 closeButton: true
                             });
                         }).error(function(data, status, headers, config) {
@@ -219,7 +219,7 @@
                     appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.fullDescription == null  ||
                     appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
                     appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null){
-                                toastr.error('Fill all the fields', 'Warning', {
+                                toastr.error('Please fill all fields', 'Warning', {
                                       closeButton: true
                                 });
                     }
@@ -229,7 +229,7 @@
                         publishService.addGooglePlayInfo(file,appStoreData,publishSplash)
                         .success(function(data, status, headers, config) {
                         disableTabs(1,true,false,true,true);
-                        toastr.success('General information has been added successfully', 'Saved', {
+                        toastr.success('General information has been successfully added', 'Saved', {
                             closeButton: true
                         });
                         }).error(function(data, status, headers, config) {
@@ -245,7 +245,7 @@
               appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
               appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null || publishSplash.splash1 == null ||
               publishSplash.splash2 == null || publishSplash.splash3 == null || publishSplash.splash4 == null){
-                        toastr.error('Fill all the fields', 'Warning', {
+                        toastr.error('Please Fill all the fields', 'Warning', {
                               closeButton: true
                         });
               }
@@ -254,7 +254,7 @@
                 publishService.addGooglePlayInfo(file,appStoreData,publishSplash)
                 .success(function(data, status, headers, config) {
                 disableTabs(1,false,false,false,false);
-                toastr.success('General information has been added successfully', 'Saved', {
+                toastr.success('General information has been successfully added', 'Saved', {
                     closeButton: true
                 });
                 }).error(function(data, status, headers, config) {
@@ -270,7 +270,7 @@
             publishService.addContentRating(contentRating)
             .success(function(data){
                 disableTabs(2,false,false,false,false);
-                toastr.success('Content Rating information has been added successfully', 'Saved', {
+                toastr.success('Content Rating information has been successfully added', 'Saved', {
                     closeButton: true
                 });
             }).error(function(err){
