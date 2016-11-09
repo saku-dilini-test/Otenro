@@ -31,6 +31,7 @@
     font-family: inherit;
     font-size: inherit;
     font-weight: inherit;
+    text-transform: uppercase;
 }
 .made-easy-content-font{
     color: inherit;
@@ -183,4 +184,7 @@ ion-nav-title{
     font-weight: bold;
 }
 
+.back-button {
+    left: 3%;
+}
 

@@ -177,10 +177,7 @@ ion-item {
 
 
 .spinner svg {
-    width: 28px;
-    height: 28px;
-    stroke: gold;
-    fill: white;
+    display:none;
 }
 
 @-webkit-keyframes slideIn {

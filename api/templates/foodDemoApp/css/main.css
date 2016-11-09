@@ -39,7 +39,7 @@ a{
 }
 
 .made-easy-header-font{
-    color: #7aa6bb;
+    color: #a46a2c;
     font-family: sans-serif;
     font-weight: bolder;
     font-size:14px;
@@ -55,7 +55,7 @@ a{
   line-height: normal;
 }
 .made-easy-footer-font{
-  color:#4e6dde;
+  color:#387ef5;
   font-family: Ubuntu Light;
   font-size: 12px;
   font-weight: bolder;
@@ -63,11 +63,11 @@ a{
 
 /* ----- Button Font Settings ----- */
 .made-easy-button-setting{
-  border-color: transparent;
-  background-color: #387ef5;
-  color: #fff;
-  border-width:1px;
-  border-radius:1px;
+  border-color: #a46a2c;
+  background-color: #fff;
+  color:#a46a2c;
+  border-width:4px;
+  border-radius:15px;
   cursor: url(../img/cursor.cur), auto;
 }
 
