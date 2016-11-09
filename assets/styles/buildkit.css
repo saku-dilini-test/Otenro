@@ -2142,3 +2142,52 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     top: 68%;
 }
 
+/* Fixed header inventory */
+.fixed-inventory{
+    margin-top: 65px;
+    padding-top: 0;
+}
+
+.fixed-inventory .tree-grid thead{
+    position:fixed;
+    top:92px;
+}
+
+.fixed-inventory .tree-grid thead tr th:nth-child(1) {
+    width:35%
+}
+.fixed-inventory .tree-grid thead tr th:nth-child(2) {
+    width:13%
+}
+.fixed-inventory .tree-grid thead tr th:nth-child(3) {
+    width:13%
+}
+.fixed-inventory .tree-grid thead tr th:nth-child(4) {
+    width:13%
+}
+.fixed-inventory .tree-grid thead tr th:nth-child(5) {
+    width:13%
+}
+.fixed-inventory .tree-grid thead tr th:nth-child(6) {
+    width:2%
+}
+
+
+.fixed-inventory .tree-grid tbody tr td:nth-child(1) {
+    width:33%
+}
+.fixed-inventory .tree-grid tbody tr td:nth-child(2) {
+    width:13%
+}
+.fixed-inventory .tree-grid tbody tr td:nth-child(3) {
+    width:12%
+}
+.fixed-inventory .tree-grid tbody tr td:nth-child(4) {
+    width:12%
+}
+.fixed-inventory .tree-grid tbody tr td:nth-child(5) {
+    width:14.5%
+}
+.fixed-inventory .tree-grid tbody tr td:nth-child(6) {
+    width:2%
+}

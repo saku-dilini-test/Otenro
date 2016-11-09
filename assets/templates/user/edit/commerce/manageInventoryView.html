@@ -13,7 +13,7 @@
                             </fieldset>
                         </div>
                     </div>
-                    <div class="md-dialog-main">
+                    <div class="md-dialog-main fixed-inventory">
                         <form name="inventoryForm" class="allItems" novalidate>
                             <!--<tree-grid tree-data="tree_data"></tree-grid>-->
                         <!--<table class="me-checkbox-table">-->
@@ -28,6 +28,7 @@
                                 <!--<th>sale price</th>-->
                                 <!--<th>Delete</th>-->
                             <!--</thead>-->
+
                             <tree-grid
                                     tree-data="inventoryList"
                                     icon-leaf     = "gylphycon-treegrid glyphicon glyphicon-unchecked"
@@ -36,6 +37,7 @@
                                     col-defs= "col_defs">
 
                             </tree-grid>
+
                             <!--<tbody class="scrolling">-->
                                 <!--<tr  dir-paginate="inventory in inventoryList | filter:search | itemsPerPage: pageSize" current-page="currentPage">-->
                                     <!--<td class="checkbox-row">-->
