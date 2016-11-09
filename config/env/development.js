@@ -29,9 +29,9 @@ module.exports = {
   // HOST URL 
   HOST_URL : 'http://localhost',
   // ME SERVER Config 
-  ME_SERVER : '/var/www/html/meServer/temp/',
+  ME_SERVER : 'c:/xampp/htdocs/meServer/temp/',
   ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
-  APP_FILE_SERVER :'/home/manoshi/appFileServer/',
-    CLIENT_SECRET : '44f4f3be572ec33711a40a5b8b4'
+  APP_FILE_SERVER : 'c:/xampp/htdocs/meServer/temp/',
+  CLIENT_SECRET : '44f4f3be572ec33711a40a5b8b4'
 };
