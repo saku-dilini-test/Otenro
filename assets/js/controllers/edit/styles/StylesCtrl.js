@@ -53,7 +53,7 @@
         $scope.fontSizeList = [2,3,4,5,6];
         $scope.fontWeightList = ["normal","bold","bolder","lighter"];
         $scope.buttonBorderWidthList = ['0px','1px','2px','3px','4px','5px'];
-        $scope.buttonBorderRadiusList = ['0px','1px','2px','3px','4px','5px'];
+        $scope.buttonBorderRadiusList = ['0px','1px','2px','3px','4px','5px','10px','15px','20px'];
 
 
         stylesService.getAppSettings({'appId':appId}).success(function (data) {
@@ -72,6 +72,8 @@
             $scope.contentFontColor = appSettings.contentFontColor;
             $scope.footerFontColor = appSettings.footerFontColor;
             $scope.buttonColor = appSettings.buttonColor;
+            $scope.buttonFontColor = appSettings.buttonFontColor;
+            $scope.buttonBorderColor = appSettings.buttonBorderColor;
             $scope.headerFontFamilyProp = {
                 "value": appSettings.headerFontFamily,
                 "values": $scope.fontFamilyList
@@ -368,6 +370,14 @@
                         });}
                         else if(type == 'navigationBarFontColor') {
                             toastr.success('Navigation Font Color Successfully Updated', {
+                                closeButton: true
+                        });}
+                        else if(type == 'buttonFontColor') {
+                            toastr.success('Button Font Color Updated Successfully', {
+                                closeButton: true
+                        });}
+                        else if(type == 'buttonBorderColor') {
+                            toastr.success('Button Border Color Updated Successfully', {
                                 closeButton: true
                         });}
                         else if(type == 'headerFontColor') {

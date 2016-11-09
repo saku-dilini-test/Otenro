@@ -1,32 +1,32 @@
 <ion-side-menus class="custom-navigation" enable-menu-with-back-views="true">
 
   <ion-side-menu-content>
-    <ion-nav-bar class="bar bar-header made-easy-header-font">
-      <div class="bar bar-header">
-          <ion-nav-back-button style="color:#FFD700;">         </ion-nav-back-button>
+    <ion-nav-bar class="bar bar-header made-easy-navigationBarColor">
+
+        <ion-nav-back-button class="icon ion-ios-arrow-back"></ion-nav-back-button>
+
         <ion-nav-buttons side="left">
-          <button class="made-easy-header-font button-icon ion-navicon" ng-if="showMenu" menu-toggle="left" >
-          </button>
+          <button class="button-icon ion-navicon" ng-if="showMenu" menu-toggle="left" ></button>
           <!--<button class="button button-icon button-clear" ng-if="!(showMenu)" ng-click="goBack()">-->
             <!--<span class="icon ion-ios-arrow-back">Back</span>-->
           <!--</button>-->
         </ion-nav-buttons>
-      </div>
+
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
-  <ion-side-menu class="made-easy-background-image made-easy-background-color" side="left">
+  <ion-side-menu class="made-easy-navigationBarColor" side="left">
     <ion-content>
-      <label class="made-easy-header-font ">{{user.name}}</label>
+      <label >{{user.name}}</label>
       <ion-list >
-        <ion-item class="made-easy-header-font" menu-close href="#/app/home/firstMenu">
+        <ion-item  menu-close href="#/app/home/firstMenu">
           Home
         </ion-item>
-        <ion-item class="made-easy-header-font" menu-close href="#/app/aboutus">
+        <ion-item menu-close href="#/app/aboutus">
           About Us
         </ion-item>
-        <ion-item class="made-easy-header-font" menu-close href="#/app/contactus">
+        <ion-item  menu-close href="#/app/contactus">
           Contact Us
         </ion-item>
       </ion-list>

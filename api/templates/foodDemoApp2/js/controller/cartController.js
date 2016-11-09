@@ -4,6 +4,7 @@
 
 mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService) {
 
+    $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
 
@@ -119,7 +120,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                    buttons:[
                        {text:'Back'},
                        {text: 'Deliver',
-                        type: 'button-balanced',
+                        type: 'made-easy-button-setting',
                         onTap: function(e) {
                               if (!$scope.shipping.opt || $rootScope.cart.cartSize == 0) {
                                 //don't allow the user to continue unless he selects an option

@@ -9,13 +9,27 @@
     background-color: #ffffff !important;
 }
 
-.made-easy-background-image{
+.made-easy-background-image {
     background: url(../img/background.jpg);
     background-size: 100% 100%;
+    height: 100%;
+    width: 100%;
 }
 
+/* ----- Main Navigation Settings ----- */
 .made-easy-navigationBarColor{
-    background-color: inherit;
+  background-color: transparent;
+  color:#000;
+  border: 0;
+}
+.made-easy-navigationBarColor .item {
+    border-style:unset;
+}
+
+.made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
+    background:transparent;
+    border: unset;
+    color:inherit;
 }
 .made-easy-footerColor{
     background-color: inherit;

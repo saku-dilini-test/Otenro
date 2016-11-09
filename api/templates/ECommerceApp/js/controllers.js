@@ -11,6 +11,15 @@ angular.module('starter.controllers', [])
         $ionicSideMenuDelegate.toggleLeft();
       };
 
+      // show & hide menu icon button
+      $scope.showMenu = true;
+      $scope.$on('hideMenu', function(){
+          $scope.showMenu = false;
+      });
+      $scope.$on('$stateChangeStart', function(){
+          $scope.showMenu = true;
+      });
+
 })
 
 .controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants, $ionicTabsDelegate
@@ -116,6 +125,8 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ItemsCtrl', function($scope,$stateParams,$state,appServices,readMadeEasy,constants) {
+
+    $scope.$emit('hideMenu',{});
     // get all menu by app Id
             readMadeEasy.readFile().success(function(appData){
                 appServices.getAllMenuByAppId(appData.appId)
@@ -177,6 +188,10 @@ angular.module('starter.controllers', [])
 
     // config
     $scope.selectedVariant = {};
+        if($stateParams.item){
+            $scope.foodInfo = $stateParams.item;
+        };
+    $scope.$emit('hideMenu',{});
     
     // get currency by appId
     readMadeEasy.readFile().success(function(appData){
@@ -263,7 +278,11 @@ angular.module('starter.controllers', [])
             $ionicPopup.alert({
                 title: 'Please enter a quantity',
                 template: 'Warning!!!',
-                cssClass: 'ionicPopUp'
+                cssClass: 'ionicPopUp',
+                buttons:[
+                    {text:'OK',
+                     type:'made-easy-button-setting'},
+                ]
             });
         }else{
         $rootScope.cart.cartItems.push({

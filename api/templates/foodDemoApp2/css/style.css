@@ -39,7 +39,7 @@ ion-side-menu .list{
 }
 
 ion-side-menu .list .activated{
-    background-color: rgba(138, 225, 232, 0.56) !important;
+    background:transparent !important;
 }
 
 
@@ -50,9 +50,7 @@ ion-side-menu .list .activated{
 }
 
 .bar .title{
-	color: #292929 !important;
 	cursor: url(../img/cursor.cur), auto;
-	margin:0;
 }
 
 .cards{
@@ -131,10 +129,6 @@ ion-slides {
     text-align:center;
 }
 
-.bar.bar-header{
-    border: unset;
-    background:transparent;
-}
 ion-header-bar button{
     border: unset;
     background-color:transparent !important;
@@ -196,19 +190,12 @@ ion-header-bar button{
     margin: auto 3px;
 }
 
-.align-left{
-    text-align:left;
+.back-button {
+    left: 3%;
 }
 
-.align-right{
-    text-align:right;
-}
 
-.align-center{
-    text-align:center;
-}
-
-ion-item.made-easy-header-font.item.item-complex {
+ion-item .item.item-complex {
     background: transparent;
     border-color: transparent !important;
     text-transform: capitalize;
@@ -227,6 +214,26 @@ button {
 
 }
 
+.bar-header {
+    border-bottom-width: 0px;
+}
+
+.bar {
+    background-color:unset;
+}
+
+/*helper classes*/
+.align-left{
+    text-align:left;
+}
+
+.align-right{
+    text-align:right;
+}
+
+.align-center{
+    text-align:center;
+}
 
 /* Delivery page */
 .delivery-details .item-checkbox .checkbox{

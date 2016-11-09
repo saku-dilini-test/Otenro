@@ -8,6 +8,7 @@ ion-content{
 
 /** ----------- Start Custom update Css Class ---------- **/
 
+/* ----- Background Settings ----- */
 .made-easy-background-color {
     background-color: #10b23e !important;
 }
@@ -16,14 +17,32 @@ ion-content{
     background: url(../img/background.jpg) center;
     background-size: cover;
 }
+/* ----- Main Navigation Settings ----- */
 .made-easy-navigationBarColor{
   background-color: #fff !important;
   color:#000;
   border: 0;
 }
+.made-easy-navigationBarColor .item {
+    border-style:unset;
+}
+
+.made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
+    background:transparent;
+    border: unset;
+    color:inherit;
+}
+/* ----- Footer Settings ----- */
 .made-easy-footerColor{
   background-color: #4e6dde;
 }
+.made-easy-footer-font{
+  color:#4e6dde;
+  font-family: Ubuntu Light;
+  font-size: 12px;
+  font-weight: bolder;
+}
+/* ----- Header Font Settings ----- */
 .made-easy-header-font{
   color:#B8A47F;
   font-family: sans-serif;
@@ -32,6 +51,8 @@ ion-content{
   text-transform: capitalize;
   line-height:normal;
 }
+
+/* ----- Content Font Settings ----- */
 .made-easy-content-font{
   color:#787878;
   font-family: sans-serif;
@@ -39,18 +60,19 @@ ion-content{
   font-weight: lighter;
   line-height:normal;
 }
-.made-easy-footer-font{
-  color:#4e6dde;
-  font-family: Ubuntu Light;
-  font-size: 12px;
-  font-weight: bolder;
-}
+
+/* ----- Button Font Settings ----- */
 .made-easy-button-setting{
-  background-color: #2e62be;
-  font-family: Ubuntu Light;
-  border-width: 3px;
-  border-radius: 3px;
+  border-color: transparent;
+  background-color: #886aea;
+  color: #fff;
+  border-width:1px;
+  border-radius:1px;
   cursor: url(../img/cursor.cur), auto;
+}
+
+.button.made-easy-button-setting.activated {
+    background:#e5e5e5;
 }
 
 /* ----- View Page ----- */
@@ -64,12 +86,5 @@ ion-content{
     color: red;
     font-size: 70%;
 }
-
-/*backbutton color change*/
-.backcolor
-{
-  background: #ccc;
-}
-
 
 /** ----------- End Custom update Css Class ---------- **/

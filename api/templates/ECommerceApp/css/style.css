@@ -120,19 +120,16 @@ ion-slides {
 }
 
 .navigation-drawer  ion-header-bar{
-    color:#fff;
     border: transparent;
 
 }
 
 .navigation-drawer  ion-header-bar button{
-    color:#fff;
     background-color:unset !important;
     border: unset;
 }
 
 .navigation-drawer .back-button {
-    color: white;
     margin: 0 0 0 5px;
 }
 
@@ -208,8 +205,6 @@ ion-slides {
     line-height: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 12px;
-    margin: 0 7px;
 }
 
 .forget-password {
@@ -318,15 +313,6 @@ ion-slides {
 .order-item-slide .swiper-button-prev{
     top:26%;
     left:-2px;
-}
-
-/*Colors*/
-
-.background-light-blue{
-    background-color:rgb(66,159,192) !important;
-}
-.background-navy-blue{
-    background-color:rgb(7,70,96) !important;
 }
 
 /*font-size*/
