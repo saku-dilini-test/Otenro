@@ -35,7 +35,7 @@
                 return engageService.showPushMessageDialog();
               })
               .error(function(err){
-               toastr.error('Error while Saving', 'Warning', {
+               toastr.error('Unable to save. Please try again.', 'Warning', {
                    closeButton: true
                });
               })

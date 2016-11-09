@@ -123,7 +123,7 @@
 
             var im = $scope.tmpImage;
             if(angular.element('#fileInput').val() == ''){
-                toastr.error('Please choose an image to upload', 'Warning', {
+                toastr.error('Select an image to upload', 'Warning', {
                     closeButton: true
                 });
             }
@@ -164,21 +164,21 @@
 
         $scope.publishArticle = function(file,article){
             if($scope.seletedCategoryId == null){
-                toastr.error('Selected Category', 'Warning', {
+                toastr.error('Please select a category', 'Warning', {
                     closeButton: true
                 });
                 return;
             }
 
             if(typeof article == 'undefined'){
-                toastr.error('Fill blanks', 'Warning', {
+                toastr.error('Please fill all fields ', 'Warning', {
                     closeButton: true
                 });
                 return;
             }
 
             if(article.title == null){
-                toastr.error('Fill article title', 'Warning', {
+                toastr.error('Please enter an article title ', 'Warning', {
                     closeButton: true
                 });
                 return;
@@ -199,7 +199,7 @@
             }
 
             if(article.desc == null){
-                toastr.error('Fill article description', 'Warning', {
+                toastr.error('Article description required', 'Warning', {
                     closeButton: true
                 });
                 return;
@@ -218,7 +218,7 @@
                         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                         console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                     }).success(function (result) {
-                        toastr.success('Successfully Publish Article ', 'Saved', {
+                        toastr.success('Your article has successfully been published', 'Saved', {
                             closeButton: true
                         });
 
@@ -230,7 +230,7 @@
 
                         articleService.showPreviewArticslesDilog('previewArticles');
                     }).error(function (error) {
-                        toastr.error('Article Publish Error', 'Warning', {
+                        toastr.error('Article publishing failed', 'Warning', {
                             closeButton: true
                         });
                     })
@@ -308,7 +308,7 @@
             data.appId = $rootScope.appId;
             articleService.addCategory(data)
                 .success(function (result) {
-                    toastr.success('Successfully Added Article Category', 'Message', {
+                    toastr.success('Category creation successful ', 'Message', {
                         closeButton: true
                     });
                     var catId = result.id;
@@ -330,7 +330,7 @@
             console.log(dataDelete);
             articleService.deleteCategory(dataDelete)
                 .success(function (data) {
-                    toastr.success('Successfully Delete Article Category', 'Message', {
+                    toastr.success('Article has been  successfully deleted ', 'Message', {
                         closeButton: true
                     });
                     $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
@@ -338,7 +338,7 @@
                         '#/app/home/firstMenu?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (error) {
-                toastr.error('Article Category Delete Error', 'Message', {
+                toastr.error('Error deleting category', 'Message', {
                     closeButton: true
                 });
             })
@@ -347,7 +347,7 @@
         $scope.editCategory = function(data){
             articleService.editCategory(data)
                 .success(function (result) {
-                    toastr.success('Successfully Edit Article Category', 'Message', {
+                    toastr.success('Category has been successfully edited', 'Message', {
                         closeButton: true
                     });
                     var catId = result.id;
@@ -356,7 +356,7 @@
                         '#/app/home/'+catId+'?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (error) {
-                toastr.error('Article Category Adding Error', 'Message', {
+                toastr.error('Category creation failed', 'Message', {
                     closeButton: true
                 });
             })

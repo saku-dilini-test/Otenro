@@ -48,11 +48,11 @@
         // --/-- add new tax collection --/--
         $scope.addNewTaxOption = function (taxInfo) {
             if(typeof taxInfo.country == 'undefined'){
-                toastr.error('Fill the Country field', 'Message', {
+                toastr.error('Please select a country', 'Message', {
                     closeButton: true
                 });
             }else if(typeof taxInfo.taxAmount == 'undefined'){
-                toastr.error('Tax Amount should be a between 0 - 100', 'Message', {
+                toastr.error('Tax should be between 0 to 100', 'Message', {
                     closeButton: true
                 });
             }
@@ -87,14 +87,14 @@
 
                         taxService.deleteTaxInfo(item)
                         .success(function (result) {
-                            toastr.success('Successfully Remove ', 'Saved', {
+                            toastr.success('Successfully Deleted ', 'Saved', {
                                 closeButton: true
                             });
                             $scope.items.splice(index, 1);
                              $mdDialog.hide();
                              $scope.backToTaxesView();
                         }).error(function (error) {
-                            toastr.error('Deleting Error', 'Warning', {
+                            toastr.error('Unable to delete. Please try again. ', 'Warning', {
                                 closeButton: true
                             });
                         })

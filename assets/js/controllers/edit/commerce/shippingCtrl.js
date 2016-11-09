@@ -132,17 +132,17 @@
         // --/-- insert Flat Rate type shipping collection --/--
         $scope.insertFlatRates = function (shipping) {
             if(typeof shipping == 'undefined'){
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
             }else if(typeof shipping.optionName == 'undefined'
                 || typeof shipping.preOrderFee == 'undefined'
                 || typeof shipping.feePerItem == 'undefined'){
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
             }else if(shipping.optionName.length > $scope.maxFlatRate){
-                toastr.error('Option name should be less than 20 letters.', 'Warning', {
+                toastr.error('Option name should not exceed 20 characters', 'Warning', {
                     closeButton: true
                 });
             }else{
@@ -156,18 +156,18 @@
         // --/-- insert Pickup Base type shipping collection --/--
         $scope.insertPickup = function (pickup) {
             if(typeof pickup == 'undefined'){
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please fill all fields ', 'Warning', {
                     closeButton: true
                 });
             }
             else if(typeof pickup.number == 'undefined' || typeof pickup.streetAddress == 'undefined'
                 || typeof pickup.city == 'undefined' || typeof pickup.country == 'undefined'
                 || typeof pickup.country == 'undefined'){
-                        toastr.error('Fill all the fields', 'Warning', {
+                        toastr.error('Please fill all fields', 'Warning', {
                             closeButton: true
                         });
             }else if(pickup.locationName.length > $scope.maxPickup){
-                toastr.error('Location name should be less than 20 letters.', 'Warning', {
+                toastr.error('Location name should not exceed 20 characters', 'Warning', {
                     closeButton: true
                 });
             }else if(pickup.city.length > $scope.maxPickup){
@@ -197,26 +197,26 @@
         // --/-- insert Weight Base type shipping collection --/--
         $scope.insertWeightBase = function (shipping) {
             if(typeof shipping == 'undefined'){
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
             }else if(typeof shipping.optionName == 'undefined'){
-                toastr.error('Fill all the fields', 'Warning', {
+                toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
             }else if(shipping.optionName.length > $scope.maxWeightRate){
-                toastr.error('Option name should be less than 20 letters.', 'Warning', {
+                toastr.error('Option name should not exceed 20 characters', 'Warning', {
                     closeButton: true
                 });
             }
             // Only Check Weight in WeightRanges Array '0' index values
             else if(typeof shipping.weightRanges[0].startWeight == 'undefined'
                     || typeof shipping.weightRanges[0].endWeight == 'undefined'){
-                        toastr.error('Fill the Weight Ranges', 'Warning', {closeButton: true});
+                        toastr.error('Weight ranges required', 'Warning', {closeButton: true});
             }
             // Only Check Cost in WeightRanges Array '0' index values
             else if(typeof shipping.weightRanges[0].cost == 'undefined'){
-                toastr.error('Fill the Weight Cost', 'Warning', {closeButton: true});
+                toastr.error('Weight range costs required', 'Warning', {closeButton: true});
             }
             else {
                 shipping.appId = $rootScope.appId;
@@ -239,14 +239,14 @@
                     this.confirm = function click(){
                         shippingService.deleteShippingInfo(item)
                             .success(function (result) {
-                                toastr.success('Successfully Remove ', 'Saved', {
+                                toastr.success('Successfully deleted', 'Saved', {
                                     closeButton: true
                                 });
                                 $scope.items.splice(index, 1);
                                 $mdDialog.hide();
                                 $scope.backToShippingView();
                             }).error(function (error) {
-                            toastr.error('Deleting Error', 'Warning', {
+                            toastr.error('Unable to delete shipping option. Please try again', 'Warning', {
                                 closeButton: true
                             });
                         })

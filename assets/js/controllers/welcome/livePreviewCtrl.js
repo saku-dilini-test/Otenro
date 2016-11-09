@@ -89,7 +89,7 @@
 
         $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory) {
         if($scope.appName== null){
-            toastr.error('Please enter the app name', 'Warning', {
+            toastr.error('Please enter a name for the application', 'Warning', {
                   closeButton: true
             });
         }

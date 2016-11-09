@@ -120,7 +120,7 @@
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
                 splash[0] == null || splash[1] == null || splash[2] == null || splash[3] == null ||playStoreData.email==null){
 
-                        toastr.error('Fill all the fields', 'Warning', {
+                        toastr.error('Please fill all fields  ', 'Warning', {
                               closeButton: true
                         });
             }
@@ -132,7 +132,7 @@
                                 closeButton: true
                             });
                         }).error(function(data, status, headers, config) {
-                        toastr.error('Error while saving data', 'Warning', {
+                        toastr.error('Unable to save ', 'Warning', {
                             closeButton: true
                         });
                     });
@@ -215,20 +215,40 @@
         }
         $scope.addAppStoreInfo = function(file,appStoreData,publishSplash) {
             if(file == null && $scope.serverImage == $scope.thumbPic){
-                appStoreData.category = 'AppStore';
-                file = $scope.thumbPic;
-                publishService.addGooglePlayInfo(file,appStoreData,publishSplash)
-                .success(function(data, status, headers, config) {
-                disableTabs(1,true,false,true,true);
-                toastr.success('General information has been added successfully', 'Saved', {
-                    closeButton: true
-                });
-                }).error(function(data, status, headers, config) {
-                    toastr.error('Error while saving data', 'Warning', {
-                          closeButton: true
-                    });
-                })
+            if(appStoreData.title == null || appStoreData.shortDescription == null || appStoreData.language == null ||
+                    appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.fullDescription == null  ||
+                    appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
+                    appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null){
+                                toastr.error('Fill all the fields', 'Warning', {
+                                      closeButton: true
+                                });
+                    }
+                    else{
+                        appStoreData.category = 'AppStore';
+                        file = $scope.thumbPic;
+                        publishService.addGooglePlayInfo(file,appStoreData,publishSplash)
+                        .success(function(data, status, headers, config) {
+                        disableTabs(1,true,false,true,true);
+                        toastr.success('General information has been added successfully', 'Saved', {
+                            closeButton: true
+                        });
+                        }).error(function(data, status, headers, config) {
+                            toastr.error('Error while saving data', 'Warning', {
+                                  closeButton: true
+                            });
+                        })
+                    }
             }
+            else{
+            if(file == null || appStoreData.title == null || appStoreData.shortDescription == null || appStoreData.language == null ||
+              appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.fullDescription == null  ||
+              appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
+              appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null || publishSplash.splash1 == null ||
+              publishSplash.splash2 == null || publishSplash.splash3 == null || publishSplash.splash4 == null){
+                        toastr.error('Please fill all fields ', 'Warning', {
+                              closeButton: true
+                        });
+              }
             else{
                 appStoreData.category = 'AppStore';
                 publishService.addGooglePlayInfo(file,appStoreData,publishSplash)

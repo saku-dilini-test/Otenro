@@ -37,7 +37,7 @@ currencyService
             };
         currencyService.setCurrency(reqParams).
             success(function(data) {
-                     toastr.success(' Currency has been added.!', {
+                     toastr.success('Currency changed successfully ', {
                                                 closeButton: true
                                             });
             }).error(function(err) {

@@ -82,7 +82,7 @@
                             .success(function (secondNaviList) {
                                 $scope.menuItems = secondNaviList;
                             }).error(function (error) {
-                                toastr.error('Menu Loading Error', 'Warning', {closeButton: true});
+                                toastr.error('don’t we need one for this or are u ok whats there?', 'Warning', {closeButton: true});
                             });
                     }   // Media Template Category
                     else if (data.templateCategory == tempCatMedia) {
@@ -153,7 +153,7 @@
         };
         $scope.setImage = function (img) {
                     if (img == undefined) {
-                        toastr.error('Upload Image', 'Warning', {
+                        toastr.error('Please choose an image to upload', 'Warning', {
                             closeButton: true
                         });
                     } else {
@@ -234,7 +234,7 @@
             }
             // If menu undefined || menu.name undefined or empty, pop up error message
             if((typeof menu == 'undefined') || (typeof menu.name == 'undefined') || menu.name == ''){
-                toastr.error('Fill the Name Field', 'Warning', {closeButton: true});
+                toastr.error('Please enter a name ', 'Warning', {closeButton: true});
                 return;
             }
 
@@ -246,7 +246,7 @@
                         +'/templates/'+$rootScope.appId+'' +
                         '#/app/home/'+data.id+'?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                    toastr.success("New category has been added successfully", 'Message', {closeButton: true});
+                    toastr.success("New Category Added", 'Message', {closeButton: true});
                     $mdDialog.hide();
                     mainMenuService.showMainMenuDialog();
                 }).error(function(err) {
@@ -264,7 +264,7 @@
                         +'/templates/'+$rootScope.appId+'' +
                         '#/app/home/'+data.id+'?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                    toastr.success("Successfully Update new Category", 'Message', {closeButton: true});
+                    toastr.success("Successfully updated category", 'Message', {closeButton: true});
                     $mdDialog.hide();
                     mainMenuService.showMainMenuDialog();
                 }).error(function(err) {
@@ -288,7 +288,7 @@
                             +'/templates/'+$rootScope.appId+'' +
                             '#/app/home/'+data.id+'?'+new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        toastr.success("Successfully Update new Category", 'Message', {closeButton: true});
+                        toastr.success("New Category Added", 'Message', {closeButton: true});
                         $mdDialog.hide();
                         mainMenuService.showMainMenuDialog();
                     }).error(function(err) {
@@ -430,7 +430,7 @@
             };
             mainMenuService.saveMainMenu(dataPrams).success(function(data) {
                 $scope.mainMenu = data;
-                toastr.success('Successfully Added', 'Success', {
+                toastr.success('New Category Added', 'Success', {
                     closeButton: true
                 });
                 $mdDialog.hide();
@@ -502,7 +502,7 @@
                         nodes: []
                     });
                 }).success(function(data) {
-                    toastr.success("Successfully added new navigation", 'Message', {
+                    toastr.success("New Category Added", 'Message', {
                         closeButton: true
                     });
                 }).error(function(err) {
@@ -528,7 +528,7 @@
                         nodes: []
                     });
                 }).success(function(data) {
-                    toastr.success("Successfully added new navigation", 'Message', {
+                    toastr.success("New Category Added", 'Message', {
                         closeButton: true
                     });
                 }).error(function(err) {

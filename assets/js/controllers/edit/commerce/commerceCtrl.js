@@ -419,17 +419,17 @@
                         $scope.categories.splice($index, 1);
                         commerceService.deleteCategoryData(prams)
                             .success(function () {
-                                toastr.success('Second Navigation has been Deleted ', 'Deleted', {
+                                toastr.success('Category has been deleted', 'Deleted', {
                                     closeButton: true
                                 });
                             }).error(function (err) {
-                            toastr.error('Unable to Delete', 'Warning', {
+                            toastr.error('Unable to Delete. Please try again.', 'Warning', {
                                 closeButton: true
                             });
                         })
                     }
                 }).error(function (err) {
-                toastr.error('Unable to Updated', 'Warning', {
+                toastr.error('Update Failed', 'Warning', {
                     closeButton: true
                 });
             })
@@ -715,7 +715,7 @@
                         $scope.selectedIndex = index;
                     }
                     $scope.enableTab = false;
-                    toastr.success('Email Settings has been changed ', 'Success', {
+                    toastr.success('Email settings successfully updated ', 'Success', {
                         closeButton: true
                     });
 
@@ -771,7 +771,7 @@
                     closeButton: true
                 });
             }else if(picFileHeader == null || picFileFooter == null){
-                toastr.error('select header and footer image', 'Warning', {
+                toastr.error('Please upload a header and footer image', 'Warning', {
                     closeButton: true
                 });
                 return;
@@ -865,7 +865,7 @@
                     });
 
                 } else if ((type == "Order Fulfilled") && (typeof $scope.email[0].orderFulfilledEmail === 'undefined')) {
-                    toastr.error('Save before test the Email', 'Warning', {
+                    toastr.error('Please save your changes and proceed to test email', 'Warning', {
                         closeButton: true
                     });
 
@@ -877,7 +877,7 @@
                 } else {
                     commerceService.sendTestEmail(sendType)
                         .success(function (data) {
-                            toastr.success('Test Email has been send ', 'Success', {
+                            toastr.success('Test email successfully sent ', 'Success', {
                                 closeButton: true
                             });
 
@@ -1069,10 +1069,10 @@
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
-                        toastr.success('Store Setting Details has been added successfully', 'Awsome!', {closeButton: true});
+                        toastr.success('Store settings successfully updated. ', 'Awsome!', {closeButton: true});
                           $mdDialog.hide();
                     }).error(function(data, status, headers, config) {
-                    toastr.error('Basic info saving error', { closeButton: true});
+                    toastr.error('Updating of basic information failed', { closeButton: true});
                 });
             }
         };

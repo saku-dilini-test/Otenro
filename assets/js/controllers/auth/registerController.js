@@ -11,7 +11,7 @@
         
         $scope.authSignUp = function (user) {
             Auth.register(user).success(function () {
-                toastr.success('Successfully registered ', 'Congratulations ! ', {closeButton: true});
+                toastr.success('Password successfully changed ', {closeButton: true});
                 if ($scope.user.email== 'support@otenro.com'){
                     $state.go('user.technicalSupporter');
                 }else {
