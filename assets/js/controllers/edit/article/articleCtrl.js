@@ -123,7 +123,7 @@
 
             var im = $scope.tmpImage;
             if(angular.element('#fileInput').val() == ''){
-                toastr.error('Select an image to upload', 'Warning', {
+                toastr.error('Please choose an image to upload', 'Warning', {
                     closeButton: true
                 });
             }
@@ -218,7 +218,7 @@
                         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                         console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                     }).success(function (result) {
-                        toastr.success('Your article has successfully been published', 'Saved', {
+                        toastr.success('Your article has successfully been published ', 'Saved', {
                             closeButton: true
                         });
 
@@ -308,7 +308,7 @@
             data.appId = $rootScope.appId;
             articleService.addCategory(data)
                 .success(function (result) {
-                    toastr.success('Category creation successful ', 'Message', {
+                    toastr.success('Successfully Added Article Category', 'Message', {
                         closeButton: true
                     });
                     var catId = result.id;
@@ -338,7 +338,7 @@
                         '#/app/home/firstMenu?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (error) {
-                toastr.error('Error deleting category', 'Message', {
+                toastr.error('Article Category Delete Error', 'Message', {
                     closeButton: true
                 });
             })

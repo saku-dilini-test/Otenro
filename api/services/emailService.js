@@ -365,7 +365,7 @@ module.exports = {
                             attachment: [
                                 {
                                     data: "<html>Hello "+app[0].firstName+",<br />"+
-                                          "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click here to verify your email address</a></html>",
+                                          "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click to here for  verify your email address</a></html>",
                                     alternative: true
                                 }
                             ]
@@ -375,7 +375,7 @@ module.exports = {
                             if (err) {
                             console.log(err);
                             }
-                            return res({msg:'Check your email to get the verification link'})
+                            return res({msg:'Check your email for get the verification link'})
                         });
                     });
                    }

@@ -27,7 +27,7 @@ module.exports = {
         if(typeof req.body.id != 'undefined'){
            ApplicationTax.update(searchQuery,updateData,function(err,result) {
                 if (err) return res.send(err);
-                return res.send(200, {message: 'Update Tax Collection'});
+                return res.send(200, {message: 'Tax Collection successfully updated'});
             });
         }else{
            ApplicationTax.find(findQuery).exec(function(error,data){
@@ -35,11 +35,11 @@ module.exports = {
                 if(data == ''){
                     ApplicationTax.create(updateData).exec(function (err, result) {
                          if (err) return res.send(err);
-                         return res.send(200, {message: 'Tax Option has been added successfully'});
+                         return res.send(200, {message: 'Tax Option has been  successfully added'});
                     });
                 }
                 else{
-                    return res.send(200, {message: 'tax for this country is already added'});
+                    return res.send(200, {message: 'This Country tax already added'});
                 }
            });
         }
@@ -72,7 +72,7 @@ module.exports = {
         };
        ApplicationTax.destroy(deleteQuery).exec(function(err, result) {
             if (err) return res.send(err);
-            return res.send(200,{message:'Deleted Tax Collection'});
+            return res.send(200,{message:'Tax Collection successfully deleted'});
         });
     },
 

@@ -24,12 +24,12 @@ module.exports = {
         if(typeof req.body.id != 'undefined'){
             ShippingDetails.update(searchQuery,updateData,function(err,main) {
                 if (err) return res.send(err);
-                return res.send(200, {message: 'Update Shipping Collection'});
+                return res.send(200, {message: 'Shipping Collection has been updated'});
             });
         }else{
             ShippingDetails.create(updateData).exec(function (err, result) {
                 if (err) return res.send(err);
-                return res.send(200, {message: 'Create Shipping Collection'});
+                return res.send(200, {message: ' Shipping Collection has been created'});
             });
         }
     },
@@ -75,7 +75,7 @@ module.exports = {
         };
         ShippingDetails.destroy(deleteQuery).exec(function(err, result) {
             if (err) return res.send(err);
-            return res.send(200,{message:'Deleted Shipping Collection'});
+            return res.send(200,{message:' Shipping Collection has been deleted'});
         });
     }
 

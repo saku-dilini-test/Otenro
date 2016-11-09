@@ -20,12 +20,12 @@ module.exports = {
         if(typeof req.body.id != 'undefined'){
             IPGDetails.update(searchQuery,updateData,function(err,main) {
                 if (err) return res.send(err);
-                return res.send(200, {message: 'Update IPG Details'});
+                return res.send(200, {message: 'IPG Details successfully updated'});
             });
         }else{
             IPGDetails.create(updateData).exec(function (err, result) {
                 if (err) return res.send(err);
-                return res.send(200, {message: 'Create IPG Details'});
+                return res.send(200, {message: 'IPG Details successfully created'});
             });
         }
     },

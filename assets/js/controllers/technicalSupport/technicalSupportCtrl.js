@@ -123,7 +123,7 @@
                 // API request save push config details
                 technicalSupportService.savePushConfigDetails(inputData)
                     .success(function (data) {
-                        toastr.success('Successfully Save Push Config Details', 'Warning', {closeButton: true});
+                        toastr.success('Push Config Details Successfully saved', 'Warning', {closeButton: true});
                     }).error(function (error) {
                         toastr.error('Push Config Details Saving Error', 'Warning', {closeButton: true});
                 });
@@ -132,7 +132,7 @@
            $scope.changePublishStatus = function () {
                technicalSupportService.changePublishStatus({appId : $scope.appId})
                    .success(function (data) {
-                       toastr.success('Successfully Send mail to customer', 'success', {closeButton: true});
+                       toastr.success('Click to here for  verify your email address', 'success', {closeButton: true});
                    }).error(function (error) {
                    toastr.error('Send mail Error', 'Warning', {closeButton: true});
                });

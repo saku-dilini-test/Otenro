@@ -505,7 +505,7 @@ module.exports = {
         }
         res.send({
             appId: app.id,
-            message: "New Application is created!!"
+            message: "New Application has been created"
         });
          });
 

@@ -146,7 +146,7 @@ module.exports = {
         if (main != ""){
             MainNavigation.destroy({ id : req.body.id}).exec(function (err) {
                 if (err) return callback("Error while deleting " + err.message);
-                res.send(200,{message:'Deleted Main Navigation'});
+                res.send(200,{message:' Main Navigation deleted'});
             })
         }
         else {
@@ -164,7 +164,7 @@ module.exports = {
                                 })
                             })
                             }
-                            res.send(200,{message:'Deleted Main Navigation'});
+                            res.send(200,{message:' Main Navigation deleted'});
                         })
                     })
                 }
@@ -174,7 +174,7 @@ module.exports = {
                         if (third !=""){
                             ThirdNavigation.destroy({ id : req.body.id}).exec(function (err) {
                                 if (err) return callback("Error while deleting " + err.message);
-                                res.send(200,{message:'Deleted Main Navigation'});
+                                res.send(200,{message:' Main Navigation deleted'});
                             })
                         }
                     })

@@ -23,7 +23,7 @@ module.exports = {
             if (err) res.send(err);
             res.send({
                 appId: appProduct,
-                message: "Successfully added the currency!!!"
+                message: "Currency Successfully added"
             });
         });
     },

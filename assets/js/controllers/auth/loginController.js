@@ -39,12 +39,12 @@
 
     $scope.authenticate = function(provider) {
       $auth.authenticate(provider).then(function(){
-          toastr.success('Successfully login ', 'Message', {
+          toastr.success('Login Successful ', 'Message', {
             closeButton: true
           });
           $state.go('user.dashboard');
       }).catch(function(error){
-      toastr.error('Invalid email/password combination.', 'Error', {
+      toastr.error('Please check your Email/Password', 'Error', {
              closeButton: true
       });
       })

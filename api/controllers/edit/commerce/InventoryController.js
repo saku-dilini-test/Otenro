@@ -175,7 +175,7 @@ module.exports = {
                                 var filePath = config.ME_SERVER + req.body.userId + '/templates/' + appId+ '/img/thirdNavi/'+ imageUrl;
                                 fs.unlink(filePath, function (err) {
                                     if (err) return done(err);
-                                    res.send(200,{message:'Deleted Article'});
+                                    res.send(200,{message:'Article successfully Deleted'});
                                 });
                             });
                             })
@@ -196,7 +196,7 @@ module.exports = {
                         if(err) return done(err);
                           PriceAndVariants.destroy({id: req.body.id}).exec(function(err, dlteV){
                             if(err) return done(err);
-                            res.send(200,{message:'Deleted Article'})
+                            res.send(200,{message:'Article successfully Deleted'})
                           })
                     })
                     })
