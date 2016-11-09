@@ -97,6 +97,7 @@
 
         };
 
+
         /**
          * Product variants tab, add variant of a product.
          * @param product
@@ -443,12 +444,14 @@
                           if (inputVal.trim() == variants.sku.trim()) {
                               count++;
                           }
+
                       }
                       if (count>=2){
                           if (type=='size'){
                               variants.size = null;
                           }else {
                               variants.sku = null;
+
                           }
                           toastr.error('don’t we need one for this or are u ok whats there?', 'Warning', {
                               closeButton: true
@@ -499,12 +502,14 @@
                           if (inputVal.trim() == variants.sku.trim()) {
                               count++;
                           }
+
                       }
                       if (count>=2){
                           if (type=='size'){
                               variants.size = null;
                           }else {
                               variants.sku = null;
+
                           }
                           toastr.error('don’t we need one for this or are u ok whats there?', 'Warning', {
                               closeButton: true
@@ -513,6 +518,99 @@
                   });
               }
         };
+
+
+
+       // validate varient type
+
+         $scope.validateInputValueVtype = function (inputVal,type) {
+                      var count = 0;
+                      if (inputVal){
+                          angular.forEach($scope.product.variants, function(variants){
+                              if (type=='size') {
+                                  if (inputVal.trim().toLowerCase() == variants.size.trim().
+                                      toLowerCase()) {
+                                      count++;
+                                  }
+                              }else{
+
+                                  if(inputVal.trim() == variants.vType.trim()) {
+                                      count++;
+                                  }
+                              }
+                              if (count>=2){
+                                  if (type=='size'){
+                                      variants.size = null;
+                                  }else {
+
+                                      variants.vType = null;
+                                  }
+                                  toastr.error('Can not add duplicate values', 'Warning', {
+                                      closeButton: true
+                                  });
+                              }
+                          });
+                      }
+                };
+
+
+
+                /**
+                 * @description
+                 * pattern validation of size/weight
+                 * @param selectedType
+                 *
+                 *
+                 */
+                $scope.setPattern = function(selectedType){
+                    if(selectedType == 'size') {
+                        $scope.customPattern =   /^[0-9a-zA-Z ]+$/;
+                    }
+                    else {
+                        $scope.customPattern =   /^[0-9a-zA-Z. ]+$/;
+                    }
+
+                }
+
+
+
+                /**
+                 * @description
+                 * validation of duplicate sku and size/weight
+                 * @param inputVal
+                 * @param type
+                 *
+                 */
+                $scope.validateInputValueVType = function (inputVal,type) {
+                      var count = 0;
+                      if (inputVal){
+                          angular.forEach($scope.product.variants, function(variants){
+                              if (type=='size') {
+                                  if (inputVal.trim().toLowerCase() == variants.size.trim().
+                                      toLowerCase()) {
+                                      count++;
+                                  }
+                              }else{
+
+                                  if(inputVal.trim() == variants.vType.trim()) {
+                                      count++;
+                                  }
+                              }
+                              if (count>=2){
+                                  if (type=='size'){
+                                      variants.size = null;
+                                  }else {
+
+                                      variants.vType = null;
+                                  }
+                                  toastr.error('Can not add duplicate values', 'Warning', {
+                                      closeButton: true
+                                  });
+                              }
+                          });
+                      }
+                };
+
 
         $scope.nextStep = function (current) {
             $scope.selectedTab = current;
