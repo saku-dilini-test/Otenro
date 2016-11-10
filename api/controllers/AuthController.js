@@ -4,8 +4,7 @@
  * @description :: Server-side logic for managing auths
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var JWT = require('machinepack-jwt'),
-    Passwords = require('machinepack-passwords'),
+var Passwords = require('machinepack-passwords'),
     GoogleAPIsOAuth2v2 = require('machinepack-googleapisoauth2v2'),
     Facebook = require('machinepack-facebook'),
     request = require('request'),
@@ -49,7 +48,6 @@ module.exports = {
     Authentication for the forgot password users
   */
   forgotPassword : function(req, res) {
-        var resetToken=[{token : req.body.token}];
         //find if the user with the token exist
         User.findOne({'resetToken.token':req.body.token}, function foundUser(err, user) {
             if (err) return res.negotiate(err);

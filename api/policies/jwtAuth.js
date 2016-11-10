@@ -1,25 +1,24 @@
 
-var JWT = require('machinepack-jwt'),
+var JWT = require('jsonwebtoken'),
     config = require('../services/config');
 
 module.exports = function(req,res,next){
 
   if(!req.headers.authorization) return handleError(res);
   var token = req.headers.authorization.split(' ')[1];
-  JWT.decode({
-    secret: config.CLIENT_SECRET,
-    token: token
-  }).exec({
-    error: function (err){
-      return handleError(res);
-    },
-    success: function (result){
-      req.userId=result.id;
-      next();
+  JWT.verify(token, config.CLIENT_SECRET, function(err, decoded) {
+    if(err){
+      err = {
+        name: 'TokenExpiredError',
+        message: 'Session is expired',
+      };
+      return handleError(res,err);
     }
+    req.userId = decoded.id;
+    next();
   });
  };
 
-function handleError (res){
-  return res.status(401).send({  error : "You are not Authorized" })
+function handleError (res,err){
+  return res.status(401).send(err)
 }
