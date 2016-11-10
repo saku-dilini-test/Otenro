@@ -90,6 +90,14 @@
                 </div>
 
             </form>
+            <form name="cashPaymentFrom" novalidate>
+                <div class="card-form list padding-right" ng-if="payment.type == 'paypal'">
+                    <div class="row cart-buttons">
+                        <div class="col-33"></div>
+                        <button class="button button-block button-small button-positive" ng-click="buyWithPayPal()" >Buy with PayPal</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </ion-content>
 </ion-view>
