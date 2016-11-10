@@ -1269,7 +1269,7 @@ md-dialog{
 
 .md-dialog-main{
     max-height: 390px;
-    /*overflow-x: hidden;*/
+    overflow-x: hidden;
     overflow-y: scroll;
     padding: 25px 40px 0;
 }
@@ -2142,3 +2142,13 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     top: 68%;
 }
 
+/* Developper account support page */
+.developer-account{
+    color:#747474;
+    letter-spacing:1px;
+}
+
+.developer-account ul li{
+    margin: 10px;
+    font-size: 12px;
+}

@@ -2,6 +2,38 @@
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false"
                  md-dynamic-height="true">
+            <md-tab >
+                <md-tab-label>Apple Developer Account</md-tab-label>
+                <md-tab-body >
+                    <div class="md-dialog-header">
+                        <h1>Developer Account</h1>
+                    </div>
+                    <div class="md-dialog-main developer-account clearfix">
+                        <fieldset>
+                            Inviting Team Members<br><br>
+                            If you are already have an Apple Develper Account please follow the steps below or visit
+                            <a target="_blank"  href="http://developer.apple.com" > http://developer.apple.com </a> to create a new account.
+                        </fieldset>
+
+                        <fieldset >
+                            <ul>To invite team members,
+
+                                <li>1. Sign in to <a href="https://developer.apple.com/accont">developer.apple.com/accont</a> and click 'People'</li>
+                                <li>2. Click invite people.</li>
+                                <li class="col-md-12"><img width="100%" src="../images/Apple-Publishing.png"></li>
+                                <li>3. Enter <a href="">support@otenro.com</a> email address as admin.
+                                    To learn more details about each role click, <a target="_blank"  href="https://developer.apple.com/support/roles/">Learn about roles(https://developer.apple.com/support/roles/)</a>.</li>
+                            </ul>
+                        </fieldset>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button ng-click="hide()" class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="nextStep(1)">Next</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
             <md-tab ng-disabled="publishToAppStore.general">
                 <md-tab-label>general</md-tab-label>
                 <md-tab-body>
