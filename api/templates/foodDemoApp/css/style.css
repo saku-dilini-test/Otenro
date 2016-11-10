@@ -217,10 +217,10 @@ ion-slides {
 }
 
 .category .col:first-child{
-    padding:unset;
+    padding:0;
 }
 .category .row{
-    padding:unset;
+    padding:0;
 }
 
 .category .col{
