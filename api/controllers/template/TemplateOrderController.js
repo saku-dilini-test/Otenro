@@ -4,7 +4,7 @@
  * @description :: Server-side logic for managing templateorders
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-
+var sentMails = require('../../services/emailService');
 module.exports = {
 
 
@@ -13,9 +13,19 @@ module.exports = {
         var data = req.body;
         data['paymentStatus'] = 'Pending';
         data['fulfillmentStatus'] = 'Pending';
+
+
         if(data.pickupId == null){
             ApplicationOrder.create(data).exec(function (err, order) {
+                console.log(order);
+
                 if (err) res.send(err);
+                sentMails.sendOrderEmail(order,function (err,msg) {
+                    console.log(err);
+                    if (err) {
+                        return  res.send(500);
+                    }
+                });
                 res.send('ok');
             });
         }
@@ -26,6 +36,12 @@ module.exports = {
             data.option = 'pickUp';
             ApplicationOrder.create(data).exec(function (err, order) {
                 if (err) res.send(err);
+                sentMails.sendOrderEmail(order,function (err,msg) {
+                    console.log(err);
+                    if (err) {
+                        return  res.send(500);
+                    }
+                });
                 res.send('ok');
             });
            });
