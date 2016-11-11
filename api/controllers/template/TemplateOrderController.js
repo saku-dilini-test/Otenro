@@ -44,11 +44,18 @@ module.exports = {
             data.option = 'pickUp';
             ApplicationOrder.create(data).exec(function (err, order) {
                 if (err) res.send(err);
-                sentMails.sendOrderEmail(order,function (err,msg) {
-                    console.log(err);
-                    if (err) {
-                        return  res.send(500);
-                    }
+                var searchApp = {
+                    id: order.appId
+                };
+                console.log(searchApp);
+                Application.findOne(searchApp).exec(function (err, app) {
+                    order['userId'] = app.userId;
+                    sentMails.sendOrderEmail(order,function (err,msg) {
+                        console.log(err);
+                        if (err) {
+                            return  res.send(500);
+                        }
+                    });
                 });
                 res.send('ok');
             });
