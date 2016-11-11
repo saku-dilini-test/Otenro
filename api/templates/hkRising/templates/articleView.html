@@ -2,11 +2,11 @@
     <ion-content>
         <div class="padding">
                     <div class="item item-image animated zoomIn">
-                        <ion-slides options="sliderOptions" slider="sliderDelegate" >
-                            <ion-slide-page >
+                        <ion-slide-box options="sliderOptions" slider="sliderDelegate" >
+                            <ion-slide>
                                 <img ng-src="{{imageURL}}/{{selectedArticle.imageUrl}}" >
-                            </ion-slide-page>
-                        </ion-slides>
+                            </ion-slide>
+                        </ion-slide-box>
                     </div>
                     <div class="item item-text-wrap2">
                         <div class="made-easy-header-font animated zoomIn" >{{selectedArticle.title}}</div>

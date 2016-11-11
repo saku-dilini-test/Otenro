@@ -83,7 +83,7 @@ ion-side-menu-content{
 
 .made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
     background:transparent;
-    border: unset;
+    border: 0;
     color:inherit;
 }
 .made-easy-footerColor{
@@ -158,7 +158,7 @@ ion-side-menu-content{
 }
 .made-easy-view .item-buy{
     width: 90%;
-    border: unset;
+    border: 0;
     border-bottom: 1px solid #ccc;
 }
 .made-easy-view .item-error-message{

@@ -3,12 +3,13 @@
         <div class="food">
                 <div class="card">
                     <div class="header_image animated bounceInRight">
-                        <ion-slides options="sliderOptions" slider="sliderDelegate" >
-                            <ion-slide-page ng-repeat="image in images">
-                                <img ng-src="{{imageURL}}/{{image.img}}" >
-                            </ion-slide-page>
-                        </ion-slides>
+                        <ion-slide-box options="sliderOptions" slider="sliderDelegate" >
+                            <ion-slide ng-repeat="image in images">
+                                <img width="100%" ng-src="{{imageURL}}/{{image.img}}" >
+                            </ion-slide>
+                        </ion-slide-box>
                     </div>
+
 
                     <div class="padding">
                         <div class="animated rubberBand item-name" >

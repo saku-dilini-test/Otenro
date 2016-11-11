@@ -64,7 +64,7 @@ a{
 }
 
 .popup-body label{
-    border:unset;
+    border:0;
 }
 
 button {
@@ -83,7 +83,7 @@ button {
 .item-checkbox {
     padding: 5px 5px 5px 50px;
     width: 100%;
-    border: unset;
+    border: 0;
 }
 
 /*Pickup page styles*/
@@ -128,20 +128,20 @@ button {
 
 .delivery-details .delivery-form label{
     padding-left:0;
-    border: unset;
+    border: 0;
     border-bottom: 1px solid rgb(221, 221, 221) !important;
 }
 
 /*Payment Page*/
 .payment label{
-   padding-left: 54px;
-   border: 0;
+    padding-left: 54px;
+    border: 0;
 }
 
 .payment .card-form label{
-   padding:3px;
-   border: unset;
-   border-bottom: 1px solid rgb(221, 221, 221) !important;
+    padding:3px;
+    border: 0;
+    border-bottom: 1px solid rgb(221, 221, 221) !important;
 }
 
 .payment .card-form{

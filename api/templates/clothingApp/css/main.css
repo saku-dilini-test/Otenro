@@ -19,9 +19,9 @@ ion-content{
 }
 /* ----- Main Navigation Settings ----- */
 .made-easy-navigationBarColor{
-  background-color: #fff !important;
-  color:#000;
-  border: 0;
+    background-color: #fff !important;
+    color:#000;
+    border: 0;
 }
 .made-easy-navigationBarColor .item {
     border-style:unset;
@@ -29,46 +29,46 @@ ion-content{
 
 .made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
     background:transparent;
-    border: unset;
+    border: 0;
     color:inherit;
 }
 /* ----- Footer Settings ----- */
 .made-easy-footerColor{
-  background-color: #4e6dde;
+    background-color: #4e6dde;
 }
 .made-easy-footer-font{
-  color:#4e6dde;
-  font-family: Ubuntu Light;
-  font-size: 12px;
-  font-weight: bolder;
+    color:#4e6dde;
+    font-family: Ubuntu Light;
+    font-size: 12px;
+    font-weight: bolder;
 }
 /* ----- Header Font Settings ----- */
 .made-easy-header-font{
-  color:#B8A47F;
-  font-family: sans-serif;
-  font-size : 4vh;
-  font-weight: bolder;
-  text-transform: capitalize;
-  line-height:normal;
+    color:#B8A47F;
+    font-family: sans-serif;
+    font-size : 4vh;
+    font-weight: bolder;
+    text-transform: capitalize;
+    line-height:normal;
 }
 
 /* ----- Content Font Settings ----- */
 .made-easy-content-font{
-  color:#787878;
-  font-family: sans-serif;
-  font-size: 3vh;
-  font-weight: lighter;
-  line-height:normal;
+    color:#787878;
+    font-family: sans-serif;
+    font-size: 3vh;
+    font-weight: lighter;
+    line-height:normal;
 }
 
 /* ----- Button Font Settings ----- */
 .made-easy-button-setting{
-  border-color: transparent;
-  background-color: #886aea;
-  color: #fff;
-  border-width:1px;
-  border-radius:1px;
-  cursor: url(../img/cursor.cur), auto;
+    border-color: transparent;
+    background-color: #886aea;
+    color: #fff;
+    border-width:1px;
+    border-radius:1px;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .button.made-easy-button-setting.activated {

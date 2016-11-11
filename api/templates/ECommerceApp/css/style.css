@@ -72,7 +72,7 @@ button{
     cursor: url(../img/cursor.cur), auto;
 }
 ion-slides {
-    height: 76vh;
+    height: 93%;
 }
 
 .swiper-container{
@@ -98,7 +98,7 @@ ion-slides {
 
 .navigation-drawer ion-item{
     background-color: transparent;
-    border: unset;
+    border: 0;
 
 }
 
@@ -111,11 +111,11 @@ ion-slides {
     transform:unset !important;
 }
 .navigation-drawer ion-nav-bar{
-    border: unset;
+    border: 0;
     background: transparent;
 }
 .navigation-drawer .bar.bar-header {
-    border: unset;
+    border: 0;
     background: transparent;
 }
 
@@ -139,14 +139,14 @@ ion-slides {
 
 .card{
     height: 100%;
-    margin: unset !important;
-    padding:unset;
+    margin: 0 !important;
+    padding:0;
 }
 
 
 .image-wrapper{
     width:100%;
-    height:39vh;
+    height:51%;
     text-align:center;
 }
 
@@ -160,13 +160,14 @@ ion-slides {
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 0 5px;
-    height:5vh;
+    height:6%;
     margin:5px 15px;
 
 }
 
 .description{
-    height:14vh;
+    height:25%;
+    padding:1em;
 }
 
 
@@ -287,7 +288,7 @@ ion-slides {
 }
 
 .swiper-button-next, .swiper-button-prev{
-    background: unset !important;
+    background: none !important;
 }
 
 .swiper-button-prev, .swiper-button-next {
@@ -305,7 +306,7 @@ ion-slides {
     height:100%;
 }
 
- .order-item-slide .swiper-button-next {
+.order-item-slide .swiper-button-next {
     top:26%;
     right: -2px;
 }
@@ -331,8 +332,8 @@ ion-slides {
 }
 
 .popup-title {
-  	font-size:4vh;
-  	padding-bottom:1em;
+    font-size:4vh;
+    padding-bottom:1em;
 }
 
 .popup-sub-title, .popup-body label{
@@ -402,9 +403,9 @@ ion-slides {
 }
 
 .payment .card-form label{
-   padding-left:5px;
-   border: unset;
-   border-bottom: 1px solid rgb(221, 221, 221) !important;
+    padding-left:5px;
+    border: unset;
+    border-bottom: 1px solid rgb(221, 221, 221) !important;
 }
 
 .payment .card-form{
