@@ -53,6 +53,7 @@ mobileApp.run(function($ionicPlatform,$rootScope,$http,readMadeEasy,constants,$i
 }).config(function($ionicConfigProvider) {
     $ionicConfigProvider.views.forwardCache(true);
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
+    $ionicConfigProvider.navBar.alignTitle('center');
 })
 
 // Pay pal Config

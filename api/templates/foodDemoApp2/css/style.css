@@ -1,41 +1,41 @@
 /* Empty. Add your own CSS if you like */
 
 .bar.bar-white{
-  background-color: #fff;
-  background-image: none;
-  border-color: #fff;
-  color: #444;
-  cursor: url(../img/cursor.cur), auto;
+    background-color: #fff;
+    background-image: none;
+    border-color: #fff;
+    color: #444;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .button-toggle{
-  box-shadow: none;
-  color: #444;
-  cursor: url(../img/cursor.cur), auto;
+    box-shadow: none;
+    color: #444;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .card {
     padding-top: 1px;
     padding-bottom: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-	border-radius:6px !important;
+    border-radius:6px !important;
 }
 
 .button.button-positive {
-	cursor: url(../img/cursor.cur), auto;
-	}
+    cursor: url(../img/cursor.cur), auto;
+}
 
 
 .item-complex .item-content, .item-radio .item-content {
-	background-color:transparent;
+    background-color:transparent;
     padding: 8px 0 8px 30px;
 }
 
 
 ion-side-menu .list{
-        height: 100vh;
-        display: table-cell;
-        vertical-align: middle;
+    height: 100vh;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 ion-side-menu .list .activated{
@@ -45,16 +45,16 @@ ion-side-menu .list .activated{
 
 .bar.bar-stable .title {
     color: #75A3B8 !important;
-	font-family:"Times New Roman", Times, serif;
-	cursor: url(../img/cursor.cur), auto;
+    font-family:"Times New Roman", Times, serif;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .bar .title{
-	cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .cards{
-	max-width: 100%;
+    max-width: 100%;
     border-radius:5px;
     -webkit-box-shadow: 2px 4px 5px 0px rgba(50, 50, 50, 0.25);
     -moz-box-shadow:    2px 4px 5px 0px rgba(50, 50, 50, 0.25);
@@ -78,16 +78,16 @@ label {
     font-weight: normal;
     font-size: 12px;
     line-height: 1.2;
-	color:#666;
+    color:#666;
 }
 
 p{
-	color:#666;
-	text-align:center;
+    color:#666;
+    text-align:center;
 }
 
 .button-calm {
-	cursor: url(../img/cursor.cur), auto;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .padding .card, .padding .list-inset {
@@ -111,26 +111,24 @@ img {
     border-radius: 5px 5px 0 0;
 }
 .popup-title {
-  	font-size:4vh;
-  	padding-bottom:1em;
+    font-size:4vh;
+    padding-bottom:1em;
 }
 
 .popup-sub-title, .popup-body label{
     font-size:2.5vh;
     line-height: normal;
-    .pickup-checkbox
+.pickup-checkbox
 }
 
-ion-slides {
-    height:36vh;
-}
+
 
 .swiper-slide{
     text-align:center;
 }
 
 ion-header-bar button{
-    border: unset;
+    border: 0;
     background-color:transparent !important;
 }
 
@@ -147,7 +145,7 @@ ion-header-bar button{
 }
 
 .swiper-button-next, .swiper-button-prev{
- background :unset !important;
+    background :unset !important;
 }
 
 .order-item-slide .swiper-button-next {
@@ -205,7 +203,7 @@ ion-item .item.item-complex {
 .item-checkbox{
     padding:10px 5px 10px 50px;
     width:100%;
-    border:unset;
+    border:0;
 }
 
 button {
@@ -254,7 +252,7 @@ button {
 
 .delivery-details .delivery-form label{
     padding-left:0;
-    border: unset;
+    border: 0;
     border-bottom: 1px solid rgb(221, 221, 221) !important;
 }
 
@@ -265,9 +263,9 @@ button {
 }
 
 .payment .card-form label{
-   padding-left:5px;
-   border: unset;
-   border-bottom: 1px solid rgb(221, 221, 221) !important;
+    padding-left:5px;
+    border: 0;
+    border-bottom: 1px solid rgb(221, 221, 221) !important;
 }
 
 .payment .card-form{
@@ -320,7 +318,7 @@ button {
 .signbutton
 {
 
-font-size: 9px;
+    font-size: 9px;
 }
 
 .margin {

@@ -3,17 +3,17 @@
     cursor: url(../img/cursor.cur), auto;
 }
 .bar.bar-white{
-  background-color: #fff;
-  background-image: none;
-  border-color: #fff;
-  color: #444;
-  cursor: url(../img/cursor.cur), auto;
+    background-color: #fff;
+    background-image: none;
+    border-color: #fff;
+    color: #444;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .button-toggle{
-  box-shadow: none;
-  color: #444;
-  cursor:url(../img/cursor.cur), auto;
+    box-shadow: none;
+    color: #444;
+    cursor:url(../img/cursor.cur), auto;
 }
 
 .button-clear.button-clear {
@@ -27,16 +27,16 @@
 }
 
 .button.button-positive {
-	cursor:url(../img/cursor.cur), auto;
+    cursor:url(../img/cursor.cur), auto;
 }
 
 .setting{
-	font-family:"Times New Roman", Times, serif;
-	padding-left:40px;
-	font-size:20px;
-	color:#75A3B8;
-	border-color:transparent !important;
-	}
+    font-family:"Times New Roman", Times, serif;
+    padding-left:40px;
+    font-size:20px;
+    color:#75A3B8;
+    border-color:transparent !important;
+}
 
 
 .item {
@@ -53,33 +53,33 @@
 
 .bar.bar-stable .title {
     color: #75A3B8 !important;
-	font-family:"Times New Roman", Times, serif;
-	cursor: url(../img/cursor.cur), auto;
+    font-family:"Times New Roman", Times, serif;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 .bar .title.title-left {
-	font-family:"Times New Roman", Times, serif;
-	cursor: url(../img/cursor.cur), auto;
+    font-family:"Times New Roman", Times, serif;
+    cursor: url(../img/cursor.cur), auto;
     margin: 0 -10px;
 }
 
 .item h2{
-	color: #75A3B8 !important;
-	font-family:"Times New Roman", Times, serif;
-	font-weight:600;
-	padding-bottom: 10px;
+    color: #75A3B8 !important;
+    font-family:"Times New Roman", Times, serif;
+    font-weight:600;
+    padding-bottom: 10px;
     border-bottom: solid thin RGBA(117, 163, 184, 0.29);
-	}
+}
 
 
 hr{
-	color:#CCC;
+    color:#CCC;
 }
 
 .item p:last-child {
     margin-bottom: 0;
-	color:#929292 !important;
-	text-align: left;
+    color:#929292 !important;
+    text-align: left;
 }
 
 .bar .buttons-right span {
@@ -88,25 +88,25 @@ hr{
 }
 
 h2:first-child{
-	font-family:"Times New Roman", Times, serif;
-	border-bottom:solid;
-	border-width:thin;
-	border-bottom-color:#CCC;
-	padding-bottom:10px;
-	color:#73A3B9;
-	margin:5px;
-	font-size:20px;
+    font-family:"Times New Roman", Times, serif;
+    border-bottom:solid;
+    border-width:thin;
+    border-bottom-color:#CCC;
+    padding-bottom:10px;
+    color:#73A3B9;
+    margin:5px;
+    font-size:20px;
 }
 
 
 p{
-	color:#666;
-	text-align:center;
+    color:#666;
+    text-align:center;
 }
 
 .item-thumbnail-left{
-	border-radius:5px;
-	cursor: url(../img/cursor.cur), auto;
+    border-radius:5px;
+    cursor: url(../img/cursor.cur), auto;
 }
 
 
@@ -116,7 +116,7 @@ p{
 }
 
 .contact {
-	text-align:center;
+    text-align:center;
 }
 
 .showName {
@@ -130,20 +130,15 @@ p{
 }
 
 .popup-title {
-  	font-size:4vh;
-  	padding-bottom:1em;
+    font-size:4vh;
+    padding-bottom:1em;
 }
 
 .popup-sub-title, .popup-body label{
     font-size:2.5vh;
     line-height: normal;
-    border:unset;
+    border:0;
 }
-
-ion-slides {
-    height: 85vw;
-}
-
 
 .swiper-slide img{
     border-radius:5px;
@@ -164,7 +159,7 @@ ion-slides {
 
 .navigation-drawer ion-item{
     background-color: transparent;
-    border: unset;
+    border: 0;
     text-align:unset;
 
 }
@@ -181,11 +176,11 @@ ion-slides {
     transform:unset !important;
 }
 .navigation-drawer ion-nav-bar{
-    border: unset;
+    border: 0;
     background: transparent;
 }
 .navigation-drawer .bar.bar-header {
-    border: unset;
+    border: 0;
     background: transparent;
 }
 
@@ -196,7 +191,7 @@ ion-slides {
 
 .navigation-drawer  ion-header-bar button{
     background-color:unset !important;
-    border: unset;
+    border: 0;
 }
 
 
@@ -258,7 +253,7 @@ ion-slides {
 .item-checkbox {
     padding: 5px 5px 5px 50px;
     width: 100%;
-    border: unset;
+    border: 0;
 }
 .cart-item-header {
     text-transform:uppercase;
@@ -304,7 +299,7 @@ ion-slides {
 
 .delivery-details .delivery-form label{
     padding-left:0;
-    border: unset;
+    border: 0;
     border-bottom: 1px solid rgb(221, 221, 221) !important;
 }
 
@@ -315,9 +310,9 @@ ion-slides {
 }
 
 .payment .card-form label{
-   padding-left:5px;
-   border: unset;
-   border-bottom: 1px solid rgb(221, 221, 221) !important;
+    padding-left:5px;
+    border: 0;
+    border-bottom: 1px solid rgb(221, 221, 221) !important;
 }
 
 .payment .card-form{
@@ -372,3 +367,4 @@ ion-slides {
 .margin {
     margin : 5px;
 }
+

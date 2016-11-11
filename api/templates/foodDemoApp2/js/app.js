@@ -1,36 +1,36 @@
 var mobileApp=angular.module('foodDemoApp', ['ionic','ionic.cloud','satellizer','credit-cards','starter.payPalService']);
 
 mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy,$ionicPush,$http,constants) {
-  $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function() {
 
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            cordova.plugins.Keyboard.disableScroll(true);
 
-    }
-    if (window.StatusBar) {
-      StatusBar.styleDefault();
-    }
+        }
+        if (window.StatusBar) {
+            StatusBar.styleDefault();
+        }
 
-      // Push register function
-      $ionicPush.register().then(function(t) {
-          return $ionicPush.saveToken(t);
-      }).then(function(t) {
-          console.log('Token saved: ', t.token);
-          var data = {
-              appId: $rootScope.appId,
-              deviceId : t.token
-          };
-          // Send to server to save push device token
-          $http.post(constants.SERVER_URL + "/templates/postDeviceId",data)
-              .then(function(res){
-                  console.log(res);
-              },function(err){
-                  console.log(err);
-              });
-      });
+        // Push register function
+        $ionicPush.register().then(function(t) {
+            return $ionicPush.saveToken(t);
+        }).then(function(t) {
+            console.log('Token saved: ', t.token);
+            var data = {
+                appId: $rootScope.appId,
+                deviceId : t.token
+            };
+            // Send to server to save push device token
+            $http.post(constants.SERVER_URL + "/templates/postDeviceId",data)
+                .then(function(res){
+                    console.log(res);
+                },function(err){
+                    console.log(err);
+                });
+        });
 
-  });
+    });
     if (typeof $rootScope.appId === 'undefined'){
 
         readMadeEasy.readFile().success(function(data){
@@ -53,16 +53,17 @@ mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy,$ionicPush,$http,c
 }).config(function($ionicConfigProvider) {
     $ionicConfigProvider.views.forwardCache(true);
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
+    $ionicConfigProvider.navBar.alignTitle('center');
 })
 
-    // Pay pal Config
+// Pay pal Config
     .constant('shopSettings',{
 
         // payPalSandboxId :'<< Sandbox App Account ID >>',
 
-         payPalProductionId : 'AXQGp0iQvumflqsAcxYBR4f-j4ucJLFmftgaVVJ_0k8euEAT_VL7ibFN0FMwPz1_-0MEeMMO7jettA0U',
+        payPalProductionId : 'AXQGp0iQvumflqsAcxYBR4f-j4ucJLFmftgaVVJ_0k8euEAT_VL7ibFN0FMwPz1_-0MEeMMO7jettA0U',
 
-         payPalEnv: 'PayPalEnvironmentSandbox', // for testing sandbox
+        payPalEnv: 'PayPalEnvironmentSandbox', // for testing sandbox
         // payPalEnv: 'PayPalEnvironmentProduction', // for production
 
         payPalSandboxId :'AXPo6ek3B5WG2PpeLm3HOOSh6kDfqSDlVYYHPaEfn6hpvCe8FUY1cAKCI21LUcwooy_hdAsV872EQSaT',
@@ -77,26 +78,26 @@ mobileApp.run(function($ionicPlatform,$rootScope,readMadeEasy,$ionicPush,$http,c
 
     })
 
-// Ionic Cloud Provider Configuration
-.config(function($ionicCloudProvider) {
-    $ionicCloudProvider.init({
-        "core": {
-            "app_id": "8307b439"
-        },
-        "push": {
-            "sender_id": "528602483901",
-            "pluginConfig": {
-                "ios": {
-                    "badge": true,
-                    "sound": true
-                },
-                "android": {
-                    "iconColor": "#343434"
+    // Ionic Cloud Provider Configuration
+    .config(function($ionicCloudProvider) {
+        $ionicCloudProvider.init({
+            "core": {
+                "app_id": "8307b439"
+            },
+            "push": {
+                "sender_id": "528602483901",
+                "pluginConfig": {
+                    "ios": {
+                        "badge": true,
+                        "sound": true
+                    },
+                    "android": {
+                        "iconColor": "#343434"
+                    }
                 }
             }
-        }
+        });
     });
-});
 
 mobileApp.config(['$authProvider','constants', function($authProvider,constants) {
 
@@ -118,187 +119,187 @@ mobileApp.config(['$authProvider','constants', function($authProvider,constants)
 }])
 
 mobileApp.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+    $stateProvider
 
-  .state('app', {
-      url: '/app',
-      abstract: true,
-      templateUrl: 'templates/menu.html',
-      controller: 'appCtrl'
-  })
-  .state('app.login', {
-      url: '/login',
-      params:{
-        item: null
-      },
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/login.html'
-        }
-      }
-  })
-  .state('app.register', {
-      url: '/register',
-      params:{
-        item: null
-      },
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/register.html',
-            controller: 'registerCtrl'
-        }
-      }
-  })
-  .state('app.aboutUs', {
-      cache: false,
-      url: '/aboutUs',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/aboutUs.html',
-            controller: 'aboutUsCtrl'
-        }
-      }
-   })
-      .state('app.policies', {
-          url: '/policies',
-          views: {
-              'menuContent': {
-                  templateUrl: 'templates/policies.html',
-                  controller: 'policiesCtrl'
-              }
-          }
-      })
-      .state('app.contactUs', {
-          cache: false,
-          url: '/contactUs',
-          views: {
-              'menuContent': {
-                  templateUrl: 'templates/contactUs.html',
-                  controller: 'contactUsCtrl'
-              }
-          }
-      })
-      .state('app.pickup', {
-          cache: false,
-          url: '/pickup',
-          params:{
-              item: null,
-              deliverDetails:null,
-              amount: null
+        .state('app', {
+            url: '/app',
+            abstract: true,
+            templateUrl: 'templates/menu.html',
+            controller: 'appCtrl'
+        })
+        .state('app.login', {
+            url: '/login',
+            params:{
+                item: null
             },
-          views: {
-              'menuContent': {
-                  templateUrl: 'templates/pickup.html',
-                  controller: 'pickupCtrl'
-              }
-          }
-      })
-      .state('app.terms', {
-          url: '/terms',
-          views: {
-              'menuContent': {
-                  templateUrl: 'templates/terms.html',
-                  controller: 'termsCtrl'
-              }
-          }
-      })
-  .state('app.category', {
-          cache: false,
-          url: '/category',
-          views: {
-              'menuContent': {
-                  templateUrl: 'templates/category.html',
-                  controller: 'categoryCtrl'
-              }
-          }
-      })
-   .state('app.foods', {
-     cache: false,
-     url: '/category/:categoryId/:categoryName',
-     views: {
-       'menuContent': {
-         templateUrl: 'templates/foods.html',
-         controller: 'foodCtrl'
-       }
-     }
-   })
-   .state('app.food', {
-     cache: false,
-     url: '/foods',
-     params:{
-        item: null
-     },
-     views: {
-       'menuContent': {
-         templateUrl: 'templates/food.html',
-         controller: 'foodCtrl'
-       }
-     }
-   })
-  .state('app.order', {
-    url: '/order',
-    views: {
-      'menuContent': {
-          templateUrl: 'templates/order.html',
-          controller: 'orderCtrl'
-      }
-    }
-  })
-  .state('app.cardPayment', {
-      cache: false,
-      url: '/cardPayment',
-      params:{
-        item: null,
-        registeredName:null,
-        deliverDetails:null,
-        amount:null,
-        shippingOpt:null,
-        method:null,
-        pickupId:null
-      },
-      views: {
-          'menuContent': {
-              templateUrl: 'templates/cardPayment.html',
-              controller: 'paymentCtrl'
-          }
-      }
-  })
-  .state('app.cart', {
-    cache: false,
-    url: '/cart',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/cart.html',
-          controller: 'cartCtrl'
-      }
-    }
-  })
-   .state('app.deliverDetails', {
-       cache: false,
-       url: '/deliverDetails',
-       params:{
-         item: null,
-       },
-       views: {
-         'menuContent': {
-           templateUrl: 'templates/deliverDetails.html',
-             controller: 'cartCtrl'
-         }
-       }
-    })
-   .state('app.pickupDetails', {
-       cache: false,
-       url: '/pickupDetails',
-       params:{
-         item: null
-       },
-       views: {
-         'menuContent': {
-           templateUrl: 'templates/pickupDetails.html',
-             controller: 'cartCtrl'
-         }
-       }
-   });
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/login.html'
+                }
+            }
+        })
+        .state('app.register', {
+            url: '/register',
+            params:{
+                item: null
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/register.html',
+                    controller: 'registerCtrl'
+                }
+            }
+        })
+        .state('app.aboutUs', {
+            cache: false,
+            url: '/aboutUs',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/aboutUs.html',
+                    controller: 'aboutUsCtrl'
+                }
+            }
+        })
+        .state('app.policies', {
+            url: '/policies',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/policies.html',
+                    controller: 'policiesCtrl'
+                }
+            }
+        })
+        .state('app.contactUs', {
+            cache: false,
+            url: '/contactUs',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/contactUs.html',
+                    controller: 'contactUsCtrl'
+                }
+            }
+        })
+        .state('app.pickup', {
+            cache: false,
+            url: '/pickup',
+            params:{
+                item: null,
+                deliverDetails:null,
+                amount: null
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/pickup.html',
+                    controller: 'pickupCtrl'
+                }
+            }
+        })
+        .state('app.terms', {
+            url: '/terms',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/terms.html',
+                    controller: 'termsCtrl'
+                }
+            }
+        })
+        .state('app.category', {
+            cache: false,
+            url: '/category',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/category.html',
+                    controller: 'categoryCtrl'
+                }
+            }
+        })
+        .state('app.foods', {
+            cache: false,
+            url: '/category/:categoryId/:categoryName',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/foods.html',
+                    controller: 'foodCtrl'
+                }
+            }
+        })
+        .state('app.food', {
+            cache: false,
+            url: '/foods',
+            params:{
+                item: null
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/food.html',
+                    controller: 'foodCtrl'
+                }
+            }
+        })
+        .state('app.order', {
+            url: '/order',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/order.html',
+                    controller: 'orderCtrl'
+                }
+            }
+        })
+        .state('app.cardPayment', {
+            cache: false,
+            url: '/cardPayment',
+            params:{
+                item: null,
+                registeredName:null,
+                deliverDetails:null,
+                amount:null,
+                shippingOpt:null,
+                method:null,
+                pickupId:null
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/cardPayment.html',
+                    controller: 'paymentCtrl'
+                }
+            }
+        })
+        .state('app.cart', {
+            cache: false,
+            url: '/cart',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/cart.html',
+                    controller: 'cartCtrl'
+                }
+            }
+        })
+        .state('app.deliverDetails', {
+            cache: false,
+            url: '/deliverDetails',
+            params:{
+                item: null,
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/deliverDetails.html',
+                    controller: 'cartCtrl'
+                }
+            }
+        })
+        .state('app.pickupDetails', {
+            cache: false,
+            url: '/pickupDetails',
+            params:{
+                item: null
+            },
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/pickupDetails.html',
+                    controller: 'cartCtrl'
+                }
+            }
+        });
 
-  $urlRouterProvider.otherwise('/app/category');
+    $urlRouterProvider.otherwise('/app/category');
 });
