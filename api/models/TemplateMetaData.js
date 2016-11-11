@@ -117,7 +117,7 @@ module.exports = {
       templateCategoryId : TemplateCategoryDetails.Media.ID,
       templateId : '1',
       menuType : 'MenuButton',
-      menuTitle  : 'IPG Integration',
+      menuTitle  : 'Payment Settings',
       menuFunction : 'commerce.showComingSoonDialog',
       orderId : 10,
       menuButtonId : '1010'
@@ -227,7 +227,7 @@ module.exports = {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
-      menuTitle  : 'IPG Integration',
+      menuTitle  : 'Payment Settings',
       menuFunction : 'commerce.showIPGDialog',
       orderId : 22,
       menuButtonId : '1510'

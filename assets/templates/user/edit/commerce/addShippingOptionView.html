@@ -279,10 +279,32 @@
                                     </md-radio-button>
                                 </md-radio-group>
                             </fieldset>
+
                             <fieldset ng-show="data.group == 'allowed'">
                                 <md-select class=""  ng-model="country" required>
                                     <md-option ng-value="oneCountry.countryName" ng-repeat="oneCountry in countryList | orderBy:'countryName'">{{oneCountry.countryName}}</md-option>
                                 </md-select>
+                            </fieldset>
+                            <fieldset class="row" ng-show="data.group == 'allowed'">
+                                <div class="col-md-6 country-list">
+                                    <label>Excluded Countries</label>
+                                    <br>
+                                    <md-checkbox aria-label="Select All"
+                                                 ng-checked="isChecked()"
+                                                 md-indeterminate="isIndeterminate()"
+                                                 ng-click="toggleAll()">
+                                        <span ng-if="isChecked()">Un-</span>Select All
+                                    </md-checkbox>
+                                    <div ng-repeat="oneCountry in countryList | orderBy:'countryName'"  ng-model="country" required>
+                                        <md-checkbox ng-checked="exists(oneCountry, selected)" ng-click="toggle(oneCountry, selected)" aria-label="oneCountry.countryName" >{{oneCountry.countryName}}</md-checkbox>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 country-list">
+                                    <label>Included Countries</label>
+                                        <div class="md-label" ng-repeat="country in selected">
+                                            <span>{{country}}</span>
+                                        </div>
+                                </div>
                             </fieldset>
                         </form>
                     </div>

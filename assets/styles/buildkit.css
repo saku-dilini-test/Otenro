@@ -576,7 +576,7 @@ a.md-button:hover:not([disabled]),
     border-radius: 20px;
     bottom: 0;
     display: block;
-    margin: 5px;
+    margin: 4px 4px 9px 4px;
     position: absolute;
     right: 38px;
     top: 0;
@@ -2190,4 +2190,26 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 }
 .fixed-inventory .tree-grid tbody tr td:nth-child(6) {
     width:2%
+}
+
+/* Country Rstrictions */
+.country-list{
+    height: 200px;
+    overflow-y: auto;
+}
+
+/* payment Settings */
+.cash-payment{
+    left: 30px;
+}
+.cash-payment label:first-child{
+    width: 25%;
+}
+.cash-payment .on-off-switch{
+    display: inline-block;
+    left: 20px;
+    top: 6px;
+}
+.apikey{
+    margin-top:5px;
 }
