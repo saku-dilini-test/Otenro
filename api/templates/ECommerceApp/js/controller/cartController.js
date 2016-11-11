@@ -4,7 +4,7 @@
 
 //(function() {
 //    angular.module('starter', [])
-mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy) {
+mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService) {
 
             if (typeof $rootScope.appId === 'undefined'){
 
@@ -169,5 +169,6 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                    ]
             });
     }
+
 
 });

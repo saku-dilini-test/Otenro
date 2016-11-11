@@ -20,7 +20,7 @@ angular.module('app')
         return login;
       },
       logout: function() {
-
+        LocalService.unset('user');
         LocalService.unset('satellizer_token');
       },
       register: function(formData) {

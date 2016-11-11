@@ -2,7 +2,7 @@
  * Created by amila on 4/5/16.
  */
 
-mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants) {
+mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService) {
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
@@ -141,5 +141,6 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
                    ]
             });
     }
+    
 
 });

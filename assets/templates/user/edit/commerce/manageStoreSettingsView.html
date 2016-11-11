@@ -211,6 +211,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="saveStoreSettings(0,storeSettings,openHours)">save</md-button>
                             <md-button class="me-default-button" ng-click="saveStoreSettings(1,storeSettings,openHours)">next</md-button>
                         </div>
                     </div>
@@ -265,6 +266,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="savePolicies(1,storeSettings)">save</md-button>
                             <md-button class="me-default-button" ng-click="savePolicies(2,storeSettings)">next</md-button>
                         </div>
                     </div>
@@ -309,6 +311,7 @@
                         <div class="inner-section">
                             <fieldset class="text-right reset-margin">
                                 <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                                <md-button class="me-default-button" ng-click="addAboutUs(2,storeSettings)">save</md-button>
                                 <md-button class="me-default-button" ng-click="addAboutUs(3,storeSettings)">next</md-button>
                             </fieldset>
                         </div>
@@ -374,6 +377,7 @@
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                                <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap)">save</md-button>
                                 <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap)">Finish</md-button>
                             </div>
                         </div>

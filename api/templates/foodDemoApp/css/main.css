@@ -30,7 +30,7 @@ a{
 
 .made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
     background:transparent;
-    border: unset;
+    border: 0;
     color:inherit;
 }
 

@@ -278,15 +278,15 @@
                 '</md-dialog>'
             })
         };
-        
-        // Get All Country 
+
+        // Get All Country
         taxService.getAllCountry().success(function (data) {
             $scope.countryList = data;
 
         }).error(function (err) {
             alert("MainMenu Loading Error : " + err);
         });
-        
+
         // Update Contry Restriciton 
         $scope.updateCountryRestriction = function(radio,country){
             $scope.shipping.selection = radio.group;
