@@ -2,6 +2,53 @@
     <md-dialog-content>
         <md-tabs md-center-tabs="false" md-selected="activeTabIndex" md-no-ink="true" md-autoselect="false"
                  md-dynamic-height="true">
+            <md-tab >
+                <md-tab-label>Google Developer Account</md-tab-label>
+                <md-tab-body >
+                    <div class="md-dialog-header">
+                        <h1>Developer Account</h1>
+                    </div>
+                    <div class="md-dialog-main developer-account clearfix">
+                        <fieldset>
+                            If you are already have a google develper account please click log in to your google developer account and send
+                            a invitation to <a>support@otenro.com</a>
+                        </fieldset>
+
+                        <fieldset>
+                            <a target="_blank"  href="https://accounts.google.com/" class="btn-material"> Log In to Google</a>
+                        </fieldset>
+
+                        <fieldset >
+                            <ul>How to send an invitation,
+
+                                <li>1. Log into your Google Play Developer Account.</li>
+                                <li>2. Select Settings.</li>
+                                <li>3. Select User Accounts & Rights.</li>
+                                <li>4. Press 'Invite new user' buttton.</li>
+                                <li class="col-md-12"><img width="100%" src="../images/google-1.png"></li>
+                                <li>5. Enter 'support@otenro.com' as your publishing manager.</li>
+                                <li class="col-md-12"><img width="100%" src="../images/google2.png"></li>
+                                <li>6. Press 'Send Invitation' Button.</li>
+                                <li class="col-md-12"><img width="100%" src="../images/google3.png"></li>
+                            </ul>
+                        </fieldset>
+
+                        <fieldset>
+                            If you don't have an google developer account please Sign Up and send us a invitation
+                        </fieldset>
+
+                        <fieldset>
+                            <a target="_blank" href="https://accounts.google.com/SignUp?continue=https%3A%2F%2Faccounts.google.com%2FManageAccount" class="btn-material">Sign up with google</a>
+                        </fieldset>
+                    </div>
+                    <div class="md-dialog-buttons">
+                        <div class="inner-section">
+                            <md-button ng-click="hide()" class="me-default-button">cancel</md-button>
+                            <md-button class="me-default-button" ng-click="nextStep(1)">Next</md-button>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
             <md-tab ng-disabled="publishToAppStore.general">
                 <md-tab-label>general</md-tab-label>
                 <md-tab-body>
@@ -222,14 +269,3 @@
         </md-tabs>
     </md-dialog-content>
 </md-dialog>
-
-<!--<fieldset class="col-4">-->
-<!--<label class="reset-inline">logo</label>-->
-<!--<div class="me-file-upload small">-->
-<!--<div class="upload-wrapper">-->
-<!--<input type="button" class="me-default-button" ngf-select ng-model="picFile"  ngf-accept="image/*" required />-->
-<!--<img ng-show="picFile != null" ngf-src="picFile" width="120" height="120" />-->
-<!--<img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />-->
-<!--</div>-->
-<!--</div>-->
-<!--</fieldset>-->
