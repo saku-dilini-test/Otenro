@@ -343,3 +343,14 @@ input[type="color"]{
     border: 1px solid #8c8061;
     padding: 3px;
 }
+
+.pickupDeliveryInfo{
+    color: #beac7c;
+    font-size: 15px;
+
+
+}
+.error-messages{
+  color: #beac7c;
+  font-size: 15px;
+}

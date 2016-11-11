@@ -11,8 +11,14 @@
 			    <span class="input-label">Telephone</span>
                 <br>
 			      <span> +94 </span>
-            <input type="number" ng-minlength="9" ng-maxlength="10" name="customerNumber" ng-model="delivery.contactNo" required>
-			  </label>
+            <input type="number"  ng-minlength="10" ng-maxlength="10" name="customerNumber" ng-model="delivery.contactNo" required>
+          <span class="error-messages"
+                 ng-show="contactForm.customerNumber.$dirty
+                                                && contactForm.customerNumber.$invalid" >
+                  The phone number field should be of 10 digits
+          </span>
+
+        </label>
         <label class="item item-input item-select">
           <div class="input-label">
             Delivery Location
@@ -28,16 +34,19 @@
           <span class="input-label" >Address</span>
           <input type="text" name="deliveryAddress" ng-model="delivery.address" required>
         </label>
-        <label class="item item-input item-stacked-label" ng-click="openDatePicker()">
-          <span class="input-label">Pick Up Date</span>
+        <label class="item">
+          <span class="pickupDeliveryInfo ">Select Date and Time for Delivery</span>
+          <div class="pickupDeliveryInfo">Delivery is available from <span><br>8:00 am to 9:00 pm everyday</span></div>
+        <label class=" item-input item-stacked-label" ng-click="openDatePicker()">
+          <span class="input-label">Delivery Date</span>
           <input ng-disabled="true" class="pickup-disable" type="text" placeholder="DD - MM - YYYY"
                  name="customerPickupDate" ng-model="delivery.date" required>
         </label>
-        <label class="item item-input item-stacked-label" ng-click="openDateTime()">
-          <span class="input-label">Pick Up Time</span>
+        <label class=" item-input item-stacked-label" ng-click="openDateTime()">
+          <span class="input-label">Delivery Time</span>
           <input ng-disabled="true" class="pickup-disable" type="text"
                  placeholder="-- : --  --" name="customerPickupTime" ng-model="delivery.time" required>
-        </label>
+        </label></label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">Comment</span>
           <input type="text" name="deliveryComment" ng-model="delivery.comment">
