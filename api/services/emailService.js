@@ -393,7 +393,7 @@ console.log(data);
         var serverOrg=config.server.host+':'+config.server.port;
 
         var imagePath =  serverOrg +"/templates/viewImages?userId="+ data.userId
-            +"&appId="+data.appId+"&"+new Date().getTime()+"&img=";
+            +"&appId="+data.appId+"&"+new Date().getTime()+"&img=thirdNavi/";
 
 
         var mBody = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'+
