@@ -530,9 +530,8 @@ console.log(data);
                 {
                     data: mBody,
                     alternative: true
-                },
-                {path:"http://beta.otenro.com:1337/templates/viewImages?userId=58243f05b634e09e5399b348&appId=58243f28b634e09e5399b356&1478932546539&img=thirdNavi/a.png", type:"image/png", headers:{"Content-ID":"<my-image>"}}
-            ]
+                }
+                ]
         };
 
         server.send(emailDetails, function(err, message) {
