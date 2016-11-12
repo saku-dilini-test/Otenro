@@ -64,7 +64,7 @@
                 };
                 $scope.validateInputValue = function(startWeight,endWeight,type,index){
                     if (type=='startWeight'){
-                        if ((parseInt(startWeight) >=  parseInt(endWeight))&& endWeight){
+                        if ((parseFloat(startWeight) >=  parseFloat(endWeight))&& endWeight){
                             $scope.weightRate.weightRanges[index].startWeight  = null;
                             toastr.error('Start Weight can not be over than or equals end Weight', 'Warning', {
                                 closeButton: true
@@ -72,7 +72,7 @@
                         }
                     }
                     else if (type=='endWeight'){
-                        if ((parseInt(endWeight) <= parseInt(startWeight))&& startWeight){
+                        if ((parseFloat(endWeight) <= parseFloat(startWeight))&& startWeight){
                             $scope.weightRate.weightRanges[index].endWeight  = null;
                             toastr.error('End Weight can not be lower than or equals Start Weight', 'Warning', {
                                 closeButton: true
@@ -81,8 +81,8 @@
                     }
 
                     if (index > 0){
-                        if (((parseInt($scope.weightRate.weightRanges[index-1].startWeight) ) >= parseInt(startWeight))||
-                            ((parseInt($scope.weightRate.weightRanges[index-1].endWeight) ) >= parseInt(startWeight)) ){
+                        if (((parseFloat($scope.weightRate.weightRanges[index-1].startWeight) ) >= parseInt(startWeight))||
+                            ((parseFloat($scope.weightRate.weightRanges[index-1].endWeight) ) >= parseInt(startWeight)) ){
                             toastr.error('Invalid weight Ranges ', 'Warning', {
                                 closeButton: true
                             });
