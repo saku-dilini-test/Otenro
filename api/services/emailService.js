@@ -483,7 +483,7 @@ console.log(data);
 
 
              mBody += '<tr  style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top">'+
-            '															<div style="display: inline-block;padding: 5px"><img src="'+imagePath+data.item[j].imgURL[0].img+'"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
+            '															<div style="display: inline-block;padding: 5px"><img alt="prodcut" src="'+imagePath+data.item[j].imgURL[0].img+'"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
             '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">'+
             '															<br><div>$ '+data.item[j].total+'</div></td></tr>';
         }
@@ -531,7 +531,7 @@ console.log(data);
                     data: mBody,
                     alternative: true
                 },
-                {path:"http://beta.otenro.com:1337/templates/viewImages?userId=58243f05b634e09e5399b348&appId=58243f28b634e09e5399b356&1478932546539&img=thirdNavi/a.png", type:"image/jpg", headers:{"Content-ID":"<my-image>"}}
+                {path:"http://beta.otenro.com:1337/templates/viewImages?userId=58243f05b634e09e5399b348&appId=58243f28b634e09e5399b356&1478932546539&img=thirdNavi/a.png", type:"image/png", headers:{"Content-ID":"<my-image>"}}
             ]
         };
 
