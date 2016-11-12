@@ -124,7 +124,8 @@
                     'sku' : value.sku,
                     'price' : value.price,
                     'quantity' : value.quantity,
-                    'variant' : value.size
+                    'variantName' : value.selection,
+                    'variantType' : value.vType
 
                 });
             });
