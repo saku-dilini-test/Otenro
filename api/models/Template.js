@@ -55,15 +55,6 @@ module.exports = {
         // imageUrl : 'resturant/image1.png',
         // templateFilesPath:'templates/ang-starter'
         // },
-        {
-            template_name : 'pizzaHut',
-            templateViewName : 'Pizza Hut',
-            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
-            imageUrl : 'resturant/pizzHut.png',
-            gifImageUrl :'resturant/pizza.png',
-            templateFilesPath:'templates/pizzaHut',
-            templateCategory:'2'
-        },
         //{
         //    template_name : 'pizzaNew',
         //    templateViewName : 'Hell’s kitchen',
