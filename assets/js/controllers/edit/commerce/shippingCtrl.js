@@ -58,9 +58,16 @@
 
                     $scope.size  = ($scope.weightRate.weightRanges.length);
                     $scope.size  = $scope.size -1;
+                    var lastEndWeight = parseFloat($scope.weightRate.weightRanges[$scope.size].endWeight);
+                    if(lastEndWeight % 1 != 0){
+                        lastEndWeight = (lastEndWeight+ 0.1)+'';
+                    }else{
+                        lastEndWeight = (lastEndWeight+ 1)+'';
+                    }
                     angular.element(document.getElementById('startWeight'+ $scope.size))[0].disabled = true;
                     angular.element(document.getElementById('endWeight'+ $scope.size))[0].disabled = true;
-                    $scope.weightRate.weightRanges.push({startWeight : '',endWeight : '',cost : ''})
+                    $scope.weightRate.weightRanges.push({startWeight : lastEndWeight,endWeight : '',cost : ''});
+                    //angular.element(document.getElementById('startWeight'+ ($scope.size+1)))[0].disabled = true;
                 };
                 $scope.validateInputValue = function(startWeight,endWeight,type,index){
                     if (type=='startWeight'){
@@ -81,8 +88,8 @@
                     }
 
                     if (index > 0){
-                        if (((parseFloat($scope.weightRate.weightRanges[index-1].startWeight) ) >= parseInt(startWeight))||
-                            ((parseFloat($scope.weightRate.weightRanges[index-1].endWeight) ) >= parseInt(startWeight)) ){
+                        if (((parseFloat($scope.weightRate.weightRanges[index-1].startWeight) ) >= parseFloat(startWeight))||
+                            ((parseFloat($scope.weightRate.weightRanges[index-1].endWeight) ) >= parseFloat(startWeight)) ){
                             toastr.error('Invalid weight Ranges ', 'Warning', {
                                 closeButton: true
                             });
