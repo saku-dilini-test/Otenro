@@ -285,7 +285,7 @@
                 '</md-dialog>'
             })
         };
-
+        
         // Get All Country
         taxService.getAllCountry().success(function (data) {
             $scope.countryList = data;
@@ -293,6 +293,44 @@
         }).error(function (err) {
             alert("MainMenu Loading Error : " + err);
         });
+
+        $scope.selected = [];
+
+        $scope.toggle = function (item, list) {
+            var idx = list.indexOf(item.countryName);
+            if (idx > -1) {
+              list.splice(idx, 1);
+            }
+            else {
+              list.push(item.countryName);
+            }
+         };
+
+        $scope.exists = function (item, list) {
+             return list.indexOf(item.countryName) > -1;
+        };
+
+
+//
+//         $scope.isIndeterminate = function() {
+//            return ($scope.selected.length !== 0 &&
+//                $scope.selected.length !== $scope.countryList.length);
+//          };
+//
+//          $scope.isChecked = function() {
+//            return $scope.selected.length === $scope.countryList.length;
+//          };
+//
+//          $scope.toggleAll = function() {
+//            if ($scope.selected.length === $scope.countryList.length) {
+//              $scope.selected = [];
+//            } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
+//              $scope.selected = $scope.countryList.slice(0);
+//            }
+//          };
+
+
+
 
         // Update Contry Restriciton 
         $scope.updateCountryRestriction = function(radio,country){
