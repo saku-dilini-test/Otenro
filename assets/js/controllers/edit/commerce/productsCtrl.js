@@ -298,7 +298,7 @@
         $scope.setImage = function (img) {
 
             if (img == undefined) {
-                toastr.error('don’t we need one for this or are u ok whats there?', 'Warning', {
+                toastr.error('Upload Image', 'Warning', {
                     closeButton: true
                 });
             } else {
@@ -388,7 +388,7 @@
 
         $scope.setFile = function (file) {
             if (file == undefined) {
-                toastr.error('don’t we need one for this or are u ok whats there?', 'Warning', {
+                toastr.error('Upload File', 'Warning', {
                     closeButton: true
                 });
             } else {
@@ -453,7 +453,7 @@
                               variants.sku = null;
 
                           }
-                          toastr.error('don’t we need one for this or are u ok whats there?', 'Warning', {
+                          toastr.error('Can not add duplicate values', 'Warning', {
                               closeButton: true
                           });
                       }

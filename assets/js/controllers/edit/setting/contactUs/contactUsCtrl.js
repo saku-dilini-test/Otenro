@@ -230,7 +230,7 @@
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $mdDialog.hide();
                         }).error(function (data, status, headers, config) {
-                        toastr.error('Error updating About Us', 'Warning', {
+                        toastr.error('Error updating Contact Us', 'Warning', {
                             closeButton: true
                         });
                     })
