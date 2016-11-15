@@ -62,7 +62,7 @@
             Auth.login($scope.user).success(function() {
                 userProfileResource.editUserProfile(params).then(function(data){
                     $mdDialog.hide();
-                    toastr.success('Password successfully changed', 'Success', {
+                    toastr.success('Successfully Changed', 'Success', {
                         closeButton: true
                     });
                 });
@@ -78,7 +78,7 @@
         $scope.saveBillings = function(billingEdit){
             billingEdit.userId = $auth.getPayload().id;
             userProfileResource.editBillingDetails(billingEdit).then(function(data){
-                 toastr.success('Password successfully changed', 'Success', {
+                 toastr.success('Successfully Changed', 'Success', {
                      closeButton: true
                  });
                 $scope.backToView(1);
