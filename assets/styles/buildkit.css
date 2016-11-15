@@ -1211,7 +1211,7 @@ md-dialog{
 }
 
 .md-dialog-header{
-    background-color: #F5F6F4;
+    background-color: #fff;
     padding: 7px 40px;
 }
 
@@ -2197,7 +2197,23 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     width:2%
 }
 
+.fixed-inventory .tree-grid tbody tr:first-child td {
+    border: 0;
+}
+
 .developer-account ul li{
     margin: 10px;
     font-size: 12px;
+}
+
+.header-beta{
+    background-color: #ff7b7b;
+    width: 100%;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 1px;
+    height: 19px;
+    z-index: 4;
+    position: absolute;
+    padding: 0 5px;
 }

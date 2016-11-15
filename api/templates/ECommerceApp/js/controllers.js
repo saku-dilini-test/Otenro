@@ -184,7 +184,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices,readMadeEasy,constants) {
+.controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices,readMadeEasy,constants,$ionicPopup) {
 
     // config
     $scope.selectedVariant = {};
@@ -192,7 +192,7 @@ angular.module('starter.controllers', [])
             $scope.foodInfo = $stateParams.item;
         };
     $scope.$emit('hideMenu',{});
-    
+
     // get currency by appId
     readMadeEasy.readFile().success(function(appData){
         appServices.getCurrencyByAppId(appData.appId)
