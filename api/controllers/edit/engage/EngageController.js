@@ -30,6 +30,9 @@ module.exports = {
             // Find device by appID
             PushConfig.findOne(findDevicedQuery).exec(function(err,pushConfigData){
 
+
+                console.log( pushConfigData);
+
                 var Message = req.body.message;
                 var PushUrl = config.PUSH_API_URL;
                 var Profile = pushConfigData.profile;
@@ -40,6 +43,8 @@ module.exports = {
                     var message = req.body.message;
                     for(var i=0; i<deviceArray.length; i++){
                         // push API request
+
+                        console.log(" deviceArray " + i);
                         request.post(PushUrl,
                             {json:{"tokens": [deviceArray[i].deviceId],
                                 "profile": Profile,
@@ -51,7 +56,7 @@ module.exports = {
                                     'Authorization': Authorization
                                 }} , function(error, response, body){
                                 if (error) sails.log.info(error);
-                                sails.log.info(response);
+                                sails.log.info("push response "+response);
                             });
                     }
                     res.send(data);
