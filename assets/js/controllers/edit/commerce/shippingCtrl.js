@@ -311,24 +311,25 @@
         };
 
 
-//
-//         $scope.isIndeterminate = function() {
-//            return ($scope.selected.length !== 0 &&
-//                $scope.selected.length !== $scope.countryList.length);
-//          };
-//
-//          $scope.isChecked = function() {
-//            return $scope.selected.length === $scope.countryList.length;
-//          };
-//
-//          $scope.toggleAll = function() {
-//            if ($scope.selected.length === $scope.countryList.length) {
-//              $scope.selected = [];
-//            } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
-//              $scope.selected = $scope.countryList.slice(0);
-//            }
-//          };
+              //select all country
 
+
+         $scope.isIndeterminate = function() {
+            return ($scope.selected.length !== 0 &&
+                $scope.selected.length !== $scope.countryList.length);
+          };
+
+          $scope.isChecked = function() {
+            return $scope.selected.length === $scope.countryList.length;
+          };
+
+          $scope.toggleAll = function() {
+            if ($scope.selected.length === $scope.countryList.length) {
+              $scope.selected = [];
+            } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
+              $scope.selected = $scope.countryList.slice(0);
+            }
+          };
 
 
 
