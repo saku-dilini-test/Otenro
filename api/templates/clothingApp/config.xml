@@ -1,44 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!DOCTYPE widget [
-        <!ELEMENT widget (name|description|author|content|access|preference|feature|plugin)*>
-        <!ATTLIST widget
-                id CDATA #REQUIRED
-                version CDATA #REQUIRED
-                xmlns CDATA #REQUIRED
-                xmlns:cdv CDATA #REQUIRED>
-        <!ELEMENT name (#PCDATA)>
-        <!ELEMENT description (#PCDATA)>
-        <!ELEMENT author (#PCDATA)>
-        <!ATTLIST author
-                email CDATA #REQUIRED
-                href CDATA #REQUIRED>
-        <!ELEMENT content (#PCDATA)>
-        <!ATTLIST content
-                src CDATA #REQUIRED>
-        <!ELEMENT access (#PCDATA)>
-        <!ATTLIST access
-                origin CDATA #REQUIRED>
-        <!ELEMENT preference (#PCDATA)>
-        <!ATTLIST preference
-                name CDATA #REQUIRED
-                value CDATA #REQUIRED>
-        <!ELEMENT feature (param)*>
-        <!ATTLIST feature
-                name CDATA #REQUIRED>
-        <!ELEMENT param (#PCDATA)>
-        <!ATTLIST param
-                name CDATA #REQUIRED
-                value CDATA #REQUIRED
-                onload CDATA #REQUIRED>
-        <!ELEMENT plugin (variable)*>
-        <!ATTLIST plugin
-                name CDATA #REQUIRED
-                spec CDATA #IMPLIED>
-        <!ELEMENT variable (#PCDATA)>
-        <!ATTLIST variable
-                name CDATA #REQUIRED
-                value CDATA #REQUIRED>
-        ]>
 <widget id="com.ionicframework.clothingapp633622" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>foodDemoApp</name>
   <description>
