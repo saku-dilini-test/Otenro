@@ -120,17 +120,16 @@
         $scope.addGooglePlayInfo = function(file, playStoreData, splash) {
              $scope.isValidFormData = true;
              $scope.count = 0;
-            if(splash[4] == null || splash[5] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
+            if(splash[0] == null || splash[1] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
                 playStoreData.language == null ||
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
-                splash[0] == null || splash[1] == null || splash[2] == null || splash[3] == null ||playStoreData.email==null){
+                playStoreData.email==null){
 
                         toastr.error('Please fill all fields  ', 'Warning', {
                               closeButton: true
                         });
             }
             else {
-
                     publishService.addGooglePlayInfo(playStoreData)
                         .success(function(data, status, headers, config) {
                             toastr.success('General information has been added successfully', 'Saved', {
@@ -141,7 +140,7 @@
                             closeButton: true
                         });
                     });
-
+                    
                     splash.forEach(function(splash){
                         if (JSON.stringify(splash).match("blobUrl")){
                             publishService.uploadPublishFiles(splash,$scope.count)
@@ -153,6 +152,7 @@
                         }
                         $scope.count ++;
                     })
+                $mdDialog.hide();
             }
         };
 
