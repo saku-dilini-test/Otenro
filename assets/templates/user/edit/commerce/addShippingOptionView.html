@@ -287,7 +287,9 @@
 
                             <fieldset ng-show="data.group == 'allowed'">
                                 <md-select aria-label="Countries" class=""  ng-model="country" required>
-                                    <md-option ng-value="oneCountry.countryName" ng-repeat="oneCountry in countryList | orderBy:'countryName'">{{oneCountry.countryName}}</md-option>
+                                    <md-option ng-value="oneCountry.countryName"
+
+                                               ng-repeat="oneCountry in countryList | orderBy:'countryName'">{{oneCountry.countryName}}</md-option>
                                 </md-select>
                             </fieldset>
                             <fieldset class="row" ng-show="data.group == 'allowed'">
@@ -300,14 +302,17 @@
                                                  ng-click="toggleAll()">
                                         <span ng-if="isChecked()">Un-</span>Select All
                                     </md-checkbox>
-                                    <div ng-repeat="oneCountry in countryList | orderBy:'countryName'"  ng-model="country" required>
-                                        <md-checkbox ng-checked="exists(oneCountry, selected)" ng-click="toggle(oneCountry, selected)" aria-label="oneCountry.countryName" >{{oneCountry.countryName}}</md-checkbox>
+                                    <div ng-repeat="oneCountry in countryList | orderBy:'countryName'"
+                                         ng-model="country" required>
+                                        <md-checkbox ng-checked="exists(oneCountry, selected)"
+                                                     ng-click="toggle(oneCountry, selected)"
+                                                     aria-label="oneCountry.countryName" >{{oneCountry.countryName}}</md-checkbox>
                                     </div>
                                 </div>
                                 <div class="col-md-6 country-list">
                                     <label>Included Countries</label>
                                         <div class="md-label" ng-repeat="country in selected">
-                                            <span>{{country}}</span>
+                                            <span>{{country.countryName}}</span>
                                         </div>
                                 </div>
                             </fieldset>
