@@ -66,10 +66,10 @@
                                 <md-tabs md-dynamic-height md-border-bottom>
                                     <md-tab label="Phone">
                                         <md-content class="md-padding">
-                                            <img ng-if="splash[0] != null" ngf-src="splash[0]" height="150px" width="84px"/>
-                                            <img ng-if="splash[1] != null" ngf-src="splash[1]" height="150px" width="84px"/>
                                             <img ng-if="splash[2] != null" ngf-src="splash[2]" height="150px" width="84px"/>
                                             <img ng-if="splash[3] != null" ngf-src="splash[3]" height="150px" width="84px"/>
+                                            <img ng-if="splash[4] != null" ngf-src="splash[4]" height="150px" width="84px"/>
+                                            <img ng-if="splash[5] != null" ngf-src="splash[5]" height="150px" width="84px"/>
 
                                         </md-content>
                                     </md-tab>
@@ -97,7 +97,7 @@
                         512 x 512
                         32-bit PNG (with alpha)
                         <br>
-                        <img ng-if="splash[4] != null" ngf-src="splash[4]" height="100" width="100"/>
+                        <img ng-if="splash[0] != null" ngf-src="splash[0]" height="100" width="100"/>
                         <br>
                         Feature Graphic
                         Default – English (United States) – en-US
@@ -105,7 +105,7 @@
                         JPG or 24-bit PNG (no alpha)
                         <br>
                         <!--<img src="images/feature_graphic.png" alt="Feature Graphic" height="150px" width="317px">-->
-                        <img ng-if="splash[5] != null" ngf-src="splash[5]" height="150px" width="317px"/>
+                        <img ng-if="splash[1] != null" ngf-src="splash[1]" height="150px" width="317px"/>
                     </md-content>
 
                 </md-tab>
