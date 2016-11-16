@@ -17,6 +17,8 @@
         $scope.maxPickup = 20;
         $scope.currency = $rootScope.currency;
         $scope.size = 0;
+        $scope.selected = [];
+        $scope.countryList = [];
 
 
         // --/-- enable & disable tabs --/--
@@ -230,8 +232,7 @@
         };
 
         //Delete first or last weight from the weight base
-        $scope.deleteWeight = function(weight){
-            var index = $scope.weightRate.weightRanges.indexOf(weight);
+        $scope.deleteWeight = function(index){
             $scope.weightRate.weightRanges.splice(index, 1);
         };
 
