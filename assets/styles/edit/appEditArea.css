@@ -71,7 +71,7 @@
 
 .mdapp-device-selector{
     font-weight: 300;
-    padding-top: 10px;
+    padding-top: 25px;
 }
 
 .mdapp-device-selector p{
@@ -170,10 +170,8 @@
 }
 
 .device-preview-livePreview{
-    padding-top: 22px;
     width: 100%;
     margin: 0 auto;
-    padding: 50px 0;
 }
 .device-preview{
     padding-top: 22px;

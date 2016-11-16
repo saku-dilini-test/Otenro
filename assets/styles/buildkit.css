@@ -2212,8 +2212,10 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     color: #fff;
     font-size: 12px;
     letter-spacing: 1px;
-    height: 19px;
+    height: 20px;
     z-index: 4;
     position: absolute;
-    padding: 0 5px;
+    text-align:center;
+    font-weight:lighter;
+    top: 0;
 }
