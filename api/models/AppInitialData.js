@@ -31,7 +31,7 @@ module.exports = {
           },
           thirdNavi : [
             {
-              "name": "Grilled Chicken Salad",
+              "name": "Grilled Chicken",
               "price": 100,
               "quantity": 100,
               "imageUrl": "grilled_chicken_salad.png",
@@ -41,10 +41,10 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
-              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
-                'name': "Grilled Chicken Salad",
+                'name': "Grilled Chicken",
                 'sku': "1111",
                 'vType' : "s",
                 'size': "11",
@@ -54,7 +54,7 @@ module.exports = {
               "createdDate": Date.now()
             },
             {
-              "name": "Spicy Thai Salad with Grilled Chicken",
+              "name": "Spicy Thai Salad",
               "price": 200,
               "quantity": 200,
               "imageUrl": "spicy thai salad with grilled chicken.png",
@@ -64,10 +64,10 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
-              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
-                'name': "Spicy Thai Salad with Grilled Chicken",
+                'name': "Spicy Thai Salad",
                 'sku': "1111",
                 'vType' : "s",
                 'size': "11",
@@ -106,7 +106,7 @@ module.exports = {
           },
           thirdNavi: [
             {
-              "name": "Chocolate Fudge Brownie with Vanila Ice Cream",
+              "name": "Chocolate Fudge",
               "price": 100,
               "quantity": 100,
               "imageUrl": "chocolate Fudge brownie with vanila ice cream.png",
@@ -116,10 +116,10 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
-              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
-                "name": "Chocolate Fudge Brownie with Vanila Ice Cream",
+                "name": "Chocolate Fudge",
                 'sku': "1111",
                 'vType' : "s",
                 'size': "11",
@@ -178,7 +178,7 @@ module.exports = {
           },
           thirdNavi : [
             {
-              "name": "Grilled Garlic Lamb Chops",
+              "name": "Grilled Garlic Lamb",
               "price": 100,
               "quantity": 100,
               "imageUrl": "grilled garlic lamb chops.png",
@@ -188,10 +188,10 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
-              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
-                "name": "Grilled Garlic Lamb Chops",
+                "name": "Grilled Garlic Lamb",
                 'sku': "1111",
                 'vType' : "s",
                 'size': "11",
@@ -201,7 +201,7 @@ module.exports = {
               "createdDate": Date.now()
             },
             {
-              "name": "Beef Stake with Smashed Potatoes",
+              "name": "Beef Stake",
               "price": 200,
               "quantity": 200,
               "imageUrl": "beef stake with smashed potatoes.png",
@@ -211,10 +211,10 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
-              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
-                "name": "Beef Stake with Smashed Potatoes",
+                "name": "Beef Stake",
                 'sku': "1111",
                 'size': "11",
                 'vType' : "s",
@@ -234,8 +234,8 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
-              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
+              "briefDesc": "Soft choux pastry balls filled with crème patisserie",
+              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
                 "name": "BBQ Pork Ribs",
                 'sku': "1111",
@@ -251,8 +251,8 @@ module.exports = {
               "price": 400,
               "quantity": 400,
               "selection" : "Size",
-              "briefDesc" : "Pina Colada brief des",
-              "detailedDesc" : "Pina Colada details description. Pina Colada details description. Pina Colada details description",
+              "briefDesc" : "Pina Colada",
+              "detailedDesc" : "Pina Colada details description. Pina Colada details",
               "tempImageArray" : [
                 {
                   "img" : "bg.png"

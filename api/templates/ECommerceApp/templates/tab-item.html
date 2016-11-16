@@ -28,7 +28,7 @@
                             <div class="col col-50 align-left">
                                 <select ng-model="selectedVariant"
                                         class="item-buy"
-                                        ng-options="variant.vType  for variant in item.variants"
+                                        ng-options="variant as variant.vType for variant in item.variants"
                                         ng-change="changeVariant(selectedVariant)">
                                 </select>
                             </div>

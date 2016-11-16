@@ -65,7 +65,7 @@
       <fieldset>
         <label>Tell us about yourself</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />
-          <md-select flex="50" ng-model="user.yourselfReason">
+          <md-select aria-label="Your Self" flex="50" ng-model="user.yourselfReason">
             <md-option ng-value="yourSelf.reason" ng-repeat="yourSelf in yourselfReasonList">{{yourSelf.reason}}
             </md-option>
           </md-select>
