@@ -22,11 +22,11 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
   // --/-- Here ends retrieving the currency --/--//
 
    // --/-- Here start Card Payment Function --/--
-      console.log($stateParams.amount)
+      console.log($stateParams.item.amount)
       // Config Cart payment
       $scope.cardType = {};
       $scope.card = {
-          amount : $stateParams.amount
+          amount : $stateParams.item.amount
       };
 
 

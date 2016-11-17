@@ -1,0 +1,25 @@
+<ion-view class="made-easy-background-image made-easy-background-color" view-title="Shipping Options">
+    <ion-content >
+        <div class="card animated zoomIn delivery-details">
+            <form name="shippingForm" novalidate>
+                <div class="row">
+                    <div class="col align-center made-easy-header-font">Shipping Options</div>
+                </div>
+
+                <div class="list list-inset" ng-repeat="ship in shippingData" >
+                    <input  type="radio"  ng-model="details.shipping"  class="checkbox-positive" ng-value="ship" >
+                    <label >
+                        <h3>{{ship.optionName}}</h3>
+                        <div >{{ship.shippingOption}}</div>
+                    </label>
+                    </div>
+            <div class="row">
+                <button class="col margin button made-easy-button-setting button-small"  type="reset" value="Reset">Clear</button>
+                <button class="col margin button made-easy-button-setting button-small" ng-click="addShipping(details)" >Check Out</button>
+            </div>
+            </form>
+        </div>
+
+
+    </ion-content>
+</ion-view>

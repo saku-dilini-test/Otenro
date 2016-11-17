@@ -6,11 +6,11 @@
                 </div>
 
 
-                <ion-checkbox ng-model="details.location"  class="checkbox-positive" ng-true-value="'{{user.address}}'">
+                <ion-checkbox ng-model="details.location"  class="checkbox-positive" ng-true-value="'old'">
                     <label >
                         <h3>Home</h3>
                         <div ng-if="user.name">{{user.name}}</div>
-                        <div ng-if="user.address">{{user.address}}</div>
+                        <div ng-if="user.streetNumber">{{user.streetNumber}},{{user.streetName}},{{user.city}},{{user.country}}</div>
                     </label>
                 </ion-checkbox >
 
@@ -40,7 +40,10 @@
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Country</span>
-                        <input type="text" ng-model="details.country" placeholder="E.g. Sri Lanka" required>
+                        <select  placeholder="Select Category" ng-model="details.country">
+                            <option ng-value="country.countryName" ng-repeat="country in countries">{{country.countryName}}
+                            </option>
+                        </select>
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">Zip / Postal Code</span>
@@ -66,7 +69,7 @@
 
                 <div class="row">
                     <button class="col margin button made-easy-button-setting button-small"  type="reset" value="Reset">Clear</button>
-                    <button class="col margin button made-easy-button-setting button-small" ng-disabled="!details.location || delivery.$invalid" ng-click="deliver(details)" >Deliver</button>
+                    <button class="col margin button made-easy-button-setting button-small" ng-disabled="!details.location || delivery.$invalid" ng-click="deliver(details)" >Check Out</button>
                 </div>
             </form>
 

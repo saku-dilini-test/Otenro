@@ -81,6 +81,24 @@ module.exports = {
             res.send(obj);
 
         })
+    },
+    /**
+     * return Tax Details collections for given app Id
+     * @param req
+     * @param res
+     */
+    getTaxInfoByCountry : function(req,res){
+        var appId = req.body.appId;
+        var country = req.body.country;
+        var searchQuery = {
+            appId: appId,
+            country:country
+        };
+        console.log(searchQuery);
+        ApplicationTax.find(searchQuery).exec(function(err, result) {
+            if (err) return res.send(err);
+            return res.send(result);
+        });
     }
 
 };

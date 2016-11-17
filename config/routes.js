@@ -275,6 +275,7 @@ module.exports.routes = {
      * Template Order Controller
      */
     'POST /templatesOrder/saveOrder': 'template/TemplateOrderController.saveOrder',
+    'POST /templatesOrder/getTaxInfoByCountry': 'template/TemplateOrderController.getTaxInfoByCountry',
 
     /***
      * Template Inventory Controller
