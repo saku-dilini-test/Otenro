@@ -2228,12 +2228,11 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 }
 
 .header-beta{
-    background-color: #ff7b7b;
+    background-color: #747474;
     width: 100%;
     color: #fff;
     font-size: 12px;
     letter-spacing: 1px;
-    height: 20px;
     z-index: 4;
     position: absolute;
     text-align:center;

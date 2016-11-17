@@ -48,6 +48,15 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     if($stateParams.item){
         $scope.foodInfo = $stateParams.item;
         $scope.images = $stateParams.item.tempImageArray;
+
+        if($stateParams.item.variants.length > 0){
+                $scope.selectedVariant = $stateParams.item.variants[0];
+                if($scope.selectedVariant.quantity > 0 ){
+                    $scope.isBuyBtnDisable = false;
+                }else{
+                    $scope.isBuyBtnDisable = true;
+                }
+         }
     }
 
 

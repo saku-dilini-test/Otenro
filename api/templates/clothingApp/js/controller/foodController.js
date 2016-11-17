@@ -45,6 +45,15 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     if($stateParams.item){
         $scope.foodInfo = $stateParams.item;
         $scope.images = $stateParams.item.tempImageArray;
+
+          if($stateParams.item.variants.length > 0){
+                $scope.selectedVariant = $stateParams.item.variants[0];
+                if($scope.selectedVariant.quantity > 0 ){
+                    $scope.isBuyBtnDisable = false;
+                }else{
+                    $scope.isBuyBtnDisable = true;
+                }
+          }
     }
 
     $scope.menuName = $stateParams.categoryName;
@@ -105,7 +114,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             });
             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-            $state.go('app.cart');
+            $state.go('app.category');
         }
     }
 

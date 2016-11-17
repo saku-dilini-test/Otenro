@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants, $ionicTabsDelegate
+.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants, $ionicTabsDelegate,$ionicSlideBoxDelegate
 ) {
 
     $ionicLoading.show({
@@ -53,6 +53,7 @@ angular.module('starter.controllers', [])
                 }
                 // initial set as 0 index
                 $scope.setItem(0);
+                $ionicSlideBoxDelegate.update();
 
             }).error(function (err) {
                 $ionicLoading.hide();
