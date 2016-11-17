@@ -1,17 +1,17 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="Home">
-    <ion-content class="padding" >
-        <ion-slide-box slider="data.slider" options="options" show-pager="false">
-            <ion-slide ng-repeat="item in itemList">
+    <ion-content class="padding home" >
+        <ion-slides slider="data.slider" options="options">
+            <ion-slide-page ng-repeat="item in itemList" >
                 <div class="card">
-                    <div class="image-wrapper">
-                        <img src="{{imageURL}}/{{item.imageUrl}}">
-                    </div>
-                    <div class="header-fonts">
-                        <span class="made-easy-header-font">{{item.name}}</span>
-                    </div>
-                    <div class="header-fonts">
-                        <span class="made-easy-header-font">{{item.variants[0].price}}</span>
-                    </div>
+                        <div class="image-wrapper">
+                            <img src="{{imageURL}}/{{item.imageUrl}}">
+                        </div>
+                        <div class="header-fonts">
+                            <span class="made-easy-header-font">{{item.name}}</span>
+                        </div>
+                        <div class="header-fonts">
+                            <span class="made-easy-header-font">{{item.variants[0].price}}</span>
+                        </div>
 
                     <div class="description">
                         <div class="align-center made-easy-content-font">{{item.detailedDesc}}</div>
@@ -20,8 +20,8 @@
                         <button class="button button-small made-easy-button-setting" ui-sref="tab.item({item:item})">ORDER NOW</button>
                     </div>
                 </div>
-            </ion-slide>
-        </ion-slide-box>
+            </ion-slide-page>
+        </ion-slides>
         <!-- Add Arrows -->
         <div class="swiper-button-next ion-chevron-right"></div>
         <div class="swiper-button-prev ion-chevron-left"></div>
