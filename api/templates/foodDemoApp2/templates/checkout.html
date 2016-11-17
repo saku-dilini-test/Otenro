@@ -17,16 +17,17 @@
             <div class="col" ng-model="item.total" >{{item.total}}</div>
           </div>
         </div>
-       <div ng-show="hideShipping" class="item item-stacked-label">
+       <div ng-show="hideShipping">
            <div class="row">
-               <div class="col col-50">Shipping</div>
+               <div class="col"></div>
+               <div class="align-right col col-50">Shipping</div>
                <div class="col" ng-model="shipping" >{{shippingCost}}</div>
            </div>
        </div>
-        <div ng-hide="hide" class="item item-stacked-label">
+        <div ng-hide="hide" >
             <div class="row">
-                <div class="col col-50">Tax%</div>
-                <div class="col" ng-model="tax" >{{tax}}</div>
+                <div class="col"  ></div>
+                <div class="align-right col col-50" ng-model="tax" >Tax({{tax}}%)</div>
                 <div class="col" ng-model="tax" >{{taxTotal}}</div>
             </div>
         </div>
@@ -36,7 +37,6 @@
             <div class="col col-50">Total</div>
             <div class="col" ng-model="quantity">{{totalQuantity}}</div>
             <div class="col" ng-model="total" >{{totalPrice}}</div>
-            <div class="col"></div>
           </div>
         </div>
 

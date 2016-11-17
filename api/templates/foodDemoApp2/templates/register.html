@@ -6,9 +6,9 @@
       
     <div class="animated zoomIn">
       <div class="list card">
-        <div class="item item-body">
-          <div class="made-easy-header-font">
-            <span >Create Your Account</span>
+        <div class="padding-vertical">
+          <div class="row made-easy-header-font">
+            <div class="col align-center">Create Your Account</div>
           </div>
 
           <form name="signUpForm">
@@ -44,9 +44,9 @@
                 <span class="input-label">City</span>
                 <input type="text" placeholder="" ng-model="data.city" ng-required="true">
               </label>
-              <label class="item item-input item-stacked-label">
+              <label class="item item-input item-select">
                 <span class="input-label">Country</span>
-                <select  placeholder="Select Category" ng-model="data.country">
+                <select  placeholder="Select Category" ng-model="data.country" required>
                   <option ng-value="country.countryName" ng-repeat="country in countries">{{country.countryName}}
                   </option>
                 </select>

@@ -233,11 +233,15 @@ button {
     text-align:center;
 }
 
+div {
+    line-height: normal;
+}
+
 /* Delivery page */
 .delivery-details .item-checkbox .checkbox{
-    zoom: 0.6;
-    top: 43px;
-    left: -65px;
+     zoom: 0.7;
+     top: 38px;
+     left: -56px;
     position: relative;
 }
 
@@ -247,7 +251,7 @@ button {
 
 .delivery-details .delivery-form{
     zoom: 0.7;
-    padding-left: 72px;
+    padding-left: 26px;
 }
 
 .delivery-details .delivery-form label{
@@ -270,7 +274,7 @@ button {
 
 .payment .card-form{
     zoom: 0.7;
-    padding-left: 72px;
+    padding-left: 17px;
 }
 
 .payment .item-checkbox .checkbox{

@@ -6,17 +6,21 @@
                     <div class="col align-center made-easy-header-font">Shipping Options</div>
                 </div>
 
-                <div class="list list-inset" ng-repeat="ship in shippingData" >
-                    <input  type="radio"  ng-model="details.shipping"  class="checkbox-positive" ng-value="ship" >
-                    <label >
-                        <h3>{{ship.optionName}}</h3>
-                        <div >{{ship.shippingOption}}</div>
-                    </label>
+                <ion-checkbox ng-repeat="ship in shippingData"  ng-model="details.shipping" ng-true-value="{{ship}}" class="checkbox-balanced item-checkbox-left" >
+                    <h3>{{ship.optionName}}</h3>
+                    <span >{{ship.shippingOption}}</span>
+                </ion-checkbox>
+
+                <div class="row">
+                    <div class="col col-top"> </div>
+                    <div class="col col-67 col-center">
+                        <button class="col button button-small button-block made-easy-button-setting"
+                                ng-click="addShipping(details)" >
+                            Check Out
+                        </button>
                     </div>
-            <div class="row">
-                <button class="col margin button made-easy-button-setting button-small"  type="reset" value="Reset">Clear</button>
-                <button class="col margin button made-easy-button-setting button-small" ng-click="addShipping(details)" >Check Out</button>
-            </div>
+                    <div class="col col-bottom"> </div>
+                </div>
             </form>
         </div>
 
