@@ -11,7 +11,7 @@
 			    <span class="input-label">Telephone</span>
           <br>
           <span> +94 </span>
-          <input type="number" ng-minlength="10" ng-maxlength="10" name="customerNumber" ng-model="pickup.contactNo" required>
+          <input type="number" ng-minlength="9" ng-maxlength="10" name="customerNumber" ng-model="pickup.contactNo" required>
           <span class="error-messages"
                 ng-show="customerPickupForm.customerNumber.$dirty
                                                 && customerPickupForm.customerNumber.$invalid" >
@@ -19,6 +19,18 @@
           </span>
 
         </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Email</span>
+          <input  name="userEmail" type="email" ng-model="pickup.email" required>
+          <span class="error-messages"
+                ng-if="customerPickupForm.userEmail.$dirty">
+                                    <span class="error-messages" ng-show="customerPickupForm.userEmail.$error.email">Not a valid email address.</span>
+                                </span>
+
+        </label>
+
+
 			  <label class="item item-input item-select">
 			    <div class="input-label">
 			      Branches

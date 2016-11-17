@@ -22,6 +22,7 @@
                 $scope.cart.saveComment(cartInfo.userInfo.comment);
                 $scope.cart.savePickUpDate(cartInfo.userInfo.date);
                 $scope.cart.savePickUpTime(cartInfo.userInfo.time);
+                $scope.cart.saveEmail(cartInfo.userInfo.email);
             }else{
                 $scope.cart.saveName(cartInfo.userInfo.name);
                 $scope.cart.saveTelPhone(cartInfo.userInfo.contactNo);
@@ -30,6 +31,7 @@
                 $scope.cart.saveComment(cartInfo.userInfo.comment);
                 $scope.cart.saveDeliveryDate(cartInfo.userInfo.date);
                 $scope.cart.saveDeliveryTime(cartInfo.userInfo.time);
+                $scope.cart.saveEmail(cartInfo.userInfo.email);
             }
 
             $scope.conform = function(){
@@ -57,12 +59,15 @@
                     shoppingCart['deliveryAddress_01'] = cartInfo.userInfo.address;
                     shoppingCart['deliveryDate'] = cartInfo.userInfo.date;
                     shoppingCart['deliveryTime'] = cartInfo.userInfo.time;
+
                 }
                 shoppingCart['deliveryAddress_02'] = '';
                 shoppingCart['name'] = cartInfo.userInfo.name;
                 shoppingCart['city'] = '';
                 shoppingCart['telPhone'] = cartInfo.userInfo.contactNo;
                 shoppingCart['comment'] = '';
+                shoppingCart['email'] = cartInfo.userInfo.email;
+                console.log(cartInfo.userInfo.email);
                 if(typeof cartInfo.userInfo.comment != 'undefined'){
                     shoppingCart['comment'] = cartInfo.userInfo.comment;
                 }
