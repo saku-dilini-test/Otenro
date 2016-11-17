@@ -302,16 +302,21 @@
                                                  ng-click="toggleAll()">
                                         <span ng-if="isChecked()">Un-</span>Select All
                                     </md-checkbox>
+
                                     <div ng-repeat="oneCountry in countryList | orderBy:'countryName'"
                                          ng-model="country" required>
                                         <md-checkbox ng-checked="exists(oneCountry, selected)"
                                                      ng-click="toggle(oneCountry, selected)"
-                                                     aria-label="oneCountry.countryName" >{{oneCountry.countryName}}</md-checkbox>
+                                                     aria-label="oneCountry.countryName" >{{oneCountry.countryName}}
+                                        </md-checkbox>
                                     </div>
                                 </div>
                                 <div class="col-md-6 country-list">
                                     <label>Included Countries</label>
-                                        <div class="md-label" ng-repeat="country in selected">
+                                        <div ng-if ="IsSingleSelection === false" class="md-label" ng-repeat="country in selected">
+                                            <span>{{country.countryName}}</span>
+                                        </div>
+                                        <div ng-if ="IsSingleSelection" class="md-label" ng-repeat="country in selected">
                                             <span>{{country.countryName}}</span>
                                         </div>
                                 </div>
@@ -321,7 +326,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="backToShippingView()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateCountryRestriction(data,country,flatRates)">save</md-button>
+                            <md-button class="me-default-button" ng-click="updateCountryRestriction(data,selected,flatRates)">save</md-button>
                         </div>
                     </div>
                 </md-tab-body>
