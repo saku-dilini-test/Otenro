@@ -57,7 +57,14 @@
         <label class=" item-input item-stacked-label" ng-click="openDateTime()">
           <span class="input-label">Pick Up Time</span>
           <input ng-disabled="true" class="pickup-disable" type="text" placeholder="-- : --  --" name="customerPickupTime" ng-model="pickup.time" required>
-        </label></label>
+        </label>
+          <div ng-if="OutOfHours">
+            <span class="pickupDeliveryError">Sorry, pickup is not available at that time.<br><span> Please select again.</span></span>
+          </div>
+          <div ng-if="OutOfDate">
+            <span class="pickupDeliveryError">Selected Date & Time has already passed</span>
+          </div>
+        </label>
 
         <label class="item item-input item-stacked-label">
           <span class="input-label">Comment</span>

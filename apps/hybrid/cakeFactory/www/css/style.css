@@ -354,3 +354,8 @@ input[type="color"]{
   color: #beac7c;
   font-size: 15px;
 }
+.pickupDeliveryError{
+  color: #beac7c;
+  font-size: 15px;
+
+}
