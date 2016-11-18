@@ -264,7 +264,7 @@
                     </div>
                     <div class="md-dialog-main clearfix">
                         <form class="clearfix" novalidate>
-                            <fieldset class="reset-margin">
+                            <!--<fieldset class="reset-margin">
                                 <label>control where you ship to</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <md-radio-group ng-model="data.group" class="country-restrictions">
@@ -283,7 +283,7 @@
                                         </span>
                                     </md-radio-button>
                                 </md-radio-group>
-                            </fieldset>
+                            </fieldset>-->
 
                             <!--<fieldset ng-show="data.group == 'allowed'">
                                 <md-select aria-label="Countries" class=""  ng-model="country" required>
@@ -292,9 +292,9 @@
                                                ng-repeat="oneCountry in countryList | orderBy:'countryName'">{{oneCountry.countryName}}</md-option>
                                 </md-select>
                             </fieldset>-->
-                            <fieldset class="row" ng-show="data.group == 'allowed'">
+                            <fieldset class="row">
                                 <div class="col-md-6 country-list">
-                                    <label>Excluded Countries</label>
+                                    <label>Country List</label>
                                     <br>
                                     <md-checkbox aria-label="Select All"
                                                  ng-checked="isChecked()"
@@ -312,12 +312,20 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 country-list">
-                                    <label>Included Countries</label>
+                                    <label>Restricted Countries</label>
                                         <div ng-if ="IsSingleSelection === false" class="md-label" ng-repeat="country in selected">
-                                            <span>{{country.countryName}}</span>
+                                            <!--<span>{{country.countryName}}</span>-->
+                                            <md-checkbox ng-checked="exists(country, selected)"
+                                                         ng-click="toggle(country, selected)"
+                                                         aria-label="oneCountry.countryName" >{{country.countryName}}
+                                            </md-checkbox>
                                         </div>
                                         <div ng-if ="IsSingleSelection" class="md-label" ng-repeat="country in selected">
-                                            <span>{{country.countryName}}</span>
+                                            <!--<span>{{country.countryName}}</span>-->
+                                            <md-checkbox ng-checked="exists(country, selected)"
+                                                         ng-click="toggle(country, selected)"
+                                                         aria-label="oneCountry.countryName" >{{country.countryName}}
+                                            </md-checkbox>
                                         </div>
                                 </div>
                             </fieldset>
