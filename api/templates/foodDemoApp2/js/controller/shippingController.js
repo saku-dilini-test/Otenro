@@ -59,7 +59,7 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
     //get the currency
     $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-            $scope.currency = data;
+        $scope.currency = data;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -68,21 +68,26 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
     $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 
     // get the shipping options
-    $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
-            .success(function (data) {
-                    $scope.shippingData=data;
-                    for(var i = 0; i < $scope.shippingData.length; i++){
-                       if($scope.shippingData[i].shippingOption == "Pick up"){
-                           $scope.shippingData.splice([i],1);
-                       }
+    var param = {
+        'appId':$scope.appId,
+        'country': $scope.country
+    };
+    $http.post(constants.SERVER_URL + "/edit/getShippingInfoByCountry",param)
+        .success(function (data) {
+                $scope.shippingData=data;
+                console.log($scope.shippingData);
+                for(var i = 0; i < $scope.shippingData.length; i++){
+                    if($scope.shippingData[i].shippingOption == "Pick up"){
+                        $scope.shippingData.splice([i],1);
                     }
-                },
-                function (err) {
-                    $ionicPopup.alert({
-                        title: 'Policies Data loading error!',
-                        template: 'Please check your connection!'
-                    });
+                }
+            },
+            function (err) {
+                $ionicPopup.alert({
+                    title: 'Policies Data loading error!',
+                    template: 'Please check your connection!'
                 });
+            });
 
 
     $scope.amount = $scope.getTotal();
@@ -132,5 +137,5 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         $state.go('app.checkout',{item:shippingDetails});
     }
 
-    
+
 });

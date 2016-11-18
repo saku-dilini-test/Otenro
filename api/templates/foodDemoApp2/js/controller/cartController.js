@@ -35,10 +35,10 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         }
         tax = total * $scope.tax/100;
         $scope.taxTotal = total * $scope.tax/100;
-       if(tax > 0){
-           //total = total + tax;
-           $rootScope.cart.totalPrice = total;
-           return total;
+        if(tax > 0){
+            //total = total + tax;
+            $rootScope.cart.totalPrice = total;
+            return total;
         }else{
             $rootScope.cart.totalPrice = total;
             return total;
@@ -63,13 +63,13 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     $scope.delivery = function(deliverItems){
 
-            if(localStorage.getItem('appLocalStorageUser')!==null){
-                 $state.go('app.deliverDetails',{item:deliverItems});
-            }
-            else{
-                $scope.status = 'delivery'
-                $state.go('app.login',{item:$scope.status});
-            }
+        if(localStorage.getItem('appLocalStorageUser')!==null){
+            $state.go('app.deliverDetails',{item:deliverItems});
+        }
+        else{
+            $scope.status = 'delivery'
+            $state.go('app.login',{item:$scope.status});
+        }
     }
     $scope.pickupDetails = function (deliverItems) {
         if(localStorage.getItem('appLocalStorageUser')!==null){
@@ -90,7 +90,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     //get the currency
     $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-            $scope.currency = data.sign;
+        $scope.currency = data.sign;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -100,22 +100,32 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     // get the shipping options
     $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
-            .success(function (data) {
-                    $scope.shippingData=data;
-                },
-                function (err) {
-                    $ionicPopup.alert({
-                        title: 'Policies Data loading error!',
-                        template: 'Please check your connection!'
-                    });
+        .success(function (data) {
+                $scope.shippingData=data;
+            },
+            function (err) {
+                $ionicPopup.alert({
+                    title: 'Policies Data loading error!',
+                    template: 'Please check your connection!'
                 });
+            });
 
 
     $scope.amount = $scope.getTotal();
     $scope.deliver = function(deliverDetails){
 
-            deliverDetails.method = 'Delivery';
-            $state.go('app.shipping',{item:deliverDetails});
+
+        if(typeof deliverDetails.country == 'undefined'){
+            var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+            deliverDetails.name = localData.name;
+            deliverDetails.streetNumber = localData.streetNumber;
+            deliverDetails.streetName = localData.streetName;
+            deliverDetails.country = localData.country;
+            deliverDetails.city = localData.city;
+        }
+        console.log(deliverDetails);
+        deliverDetails.method = 'Delivery';
+        $state.go('app.shipping',{item:deliverDetails});
     }
-    
+
 });

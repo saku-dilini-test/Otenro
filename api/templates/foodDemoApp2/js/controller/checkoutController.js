@@ -10,7 +10,7 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
     $scope.shippingCost = $stateParams.item.shippingCost;
     $scope.totalQuantity = $rootScope.cart.totalQuantity;
     $scope.hideShipping = true;
-    if($scope.shippingCost == 'undefined'){
+    if(typeof $scope.shippingCost == 'undefined'){
         $scope.hideShipping = false;
     }
 
@@ -80,7 +80,7 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
 
     //get the currency
     $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-            $scope.currency = data.sign;
+        $scope.currency = data.sign;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -94,9 +94,11 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
         var payInfo = $stateParams.item;
         payInfo.amount = $scope.totalPrice;
         payInfo.taxTotal = $scope.taxTotal;
+        payInfo.cart = $rootScope.cart.cartItems;
+        payInfo.userEmail = localData.email;
         console.log(payInfo);
         $state.go('app.payment',{item:payInfo});
     }
 
-    
+
 });
