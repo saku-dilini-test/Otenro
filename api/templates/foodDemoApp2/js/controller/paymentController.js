@@ -87,7 +87,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                     // TODO : Error handle here
                 }else{
                     alert("Payment Success");
-                    if($stateParams.pickupId == null){
+                    if($stateParams.item.location == "deliver"){
                         $scope.details ={
                             appId : $rootScope.appId,
                             item : $stateParams.item.cart,
@@ -102,7 +102,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             telNumber : $stateParams.item.delivery.number,
                             tax :   $stateParams.item.taxTotal,
                             shippingOpt : $stateParams.shipping.shippingOption,
-                            pickupId: $stateParams.pickupId
                         };
                     }
                     else{
@@ -113,13 +112,13 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             customerName : $stateParams.deliverDetails.name,
                             telNumber : $stateParams.deliverDetails.number,
                             tax :   $scope.tax,
-                            pickupId: $stateParams.pickupId
+                            pickupId: $stateParams.item.pickupId
                         }
                     }
                     $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
                         .then(function(res){
                                 $scope.details.id = $rootScope.cart.cartItems[0].id;
-                                $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item)
+                                $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
                                     .then(function(res){
                                             $rootScope.cart.cartItems = [];
                                             $rootScope.cart.cartSize = 0;
@@ -159,7 +158,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here start Cash Payment Function --/--
 
     $scope.confirmCashPayment = function(){
-        if($stateParams.pickupId == null){
+        if($stateParams.item.location == "deliver"){
             $scope.details ={
                 appId : $rootScope.appId,
                 item : $stateParams.item.cart,
@@ -173,7 +172,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 deliveryZip : $stateParams.item.delivery.zip,
                 telNumber : $stateParams.item.delivery.number,
                 tax :   $stateParams.item.taxTotal,
-                shippingOpt : $stateParams.shipping.shippingOption,
+                shippingOpt : $stateParams.item.shipping.shippingOption,
                 email: $stateParams.item.userEmail
             };
         }
@@ -182,16 +181,16 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 appId : $rootScope.appId,
                 item : $stateParams.item.cart,
                 amount : $stateParams.item.amount,
-                customerName : $stateParams.item.delivery.name,
-                telNumber : $stateParams.item.delivery.number,
+                customerName : $stateParams.item.deliverDetails.name,
+                telNumber : $stateParams.item.deliverDetails.number,
                 tax :   $stateParams.item.taxTotal,
-                pickupId: $stateParams.pickupId
+                pickupId: $stateParams.item.pickupId
             }
         }
         $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
             .then(function(res){
                     $scope.details.id = $rootScope.cart.cartItems[0].id;
-                    $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item)
+                    $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
                         .then(function(res){
                                 $rootScope.cart.cartItems = [];
                                 $rootScope.cart.cartSize = 0;

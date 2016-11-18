@@ -2,18 +2,22 @@
     <ion-content class="ion-list">
         <div class="card payment">
             <form>
-                <ion-checkbox ng-if="deliveryShow" ng-model="payment.type"  class="checkbox-positive" ng-true-value="'cashOnDelivery'">
+                <ion-checkbox ng-show="deliveryShow" ng-model="payment.type"  class="checkbox-positive" ng-true-value="'cashOnDelivery'">
                     <h3>Cash On Delivery</h3>
                 </ion-checkbox >
-                <ion-checkbox ng-if="pickupShow" ng-model="payment.type"  class="checkbox-positive" ng-true-value="'cashOnPickup'">
+
+                <ion-checkbox ng-show="pickupShow" ng-model="payment.type"  class="checkbox-positive" ng-true-value="'cashOnPickup'">
                     <h3>Cash On Pickup</h3>
                 </ion-checkbox >
-                <ion-checkbox ng-if="paypalShow" ng-model="payment.type"  class="checkbox-positive" ng-true-value="'paypal'">
+
+                <ion-checkbox ng-show="paypalShow" ng-model="payment.type"  class="checkbox-positive" ng-true-value="'paypal'">
                     <h3>Pay Pal</h3>
                 </ion-checkbox >
-                <ion-checkbox ng-if="stripeShow" ng-model="payment.type"  class="checkbox-positive" ng-true-value="'creditcard'">
+
+                <ion-checkbox ng-show="stripeShow"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'creditcard'">
                     <h3>Stripe</h3>
                 </ion-checkbox >
+
             </form>
 
             <div class="card-form list padding-right" ng-if="payment.type == 'creditcard'">

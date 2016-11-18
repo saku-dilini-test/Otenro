@@ -215,6 +215,7 @@ module.exports.routes = {
      * ShippingController
      */
     'GET /edit/getShippingInfo': 'edit/commerce/ShippingController.getShippingInfo',
+    'POST /edit/getShippingInfoByCountry': 'edit/commerce/ShippingController.getShippingInfoByCountry',
     'POST /edit/updateShippingInfo': 'edit/commerce/ShippingController.updateShippingInfo',
     'POST /edit/deleteShippingInfo': 'edit/commerce/ShippingController.deleteShippingInfo',
     'GET /edit/getShippingPickupInfo': 'edit/commerce/ShippingController.getShippingPickupInfo',
