@@ -24,7 +24,14 @@ module.exports = {
         },
         stripeKey: {
             type: 'string'
+        },
+        cashOnPickupEnable : {
+            type : 'boolean'
+        },
+        cashOnDeliveryEnable : {
+            type : 'boolean'
+
         }
-    }
-};
+     }
+    };
 
