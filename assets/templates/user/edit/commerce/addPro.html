@@ -9,7 +9,7 @@
                     <div class="md-dialog-header">
                         <h1>Choose Product Type</h1>
                     </div>
-                    <div id="Navigation" class="md-dialog-full">
+                    <div id="Navigation" class="md-dialog-main">
                         <div class="products-options">
                             <md-list flex>
                                 <md-list-item class="md-3-line" ng-repeat="type in productTypes" ng-click="addType(type,1)">
@@ -196,9 +196,9 @@
                                   </md-input-container>
                                 <!--<span ng-show="priceAndVariantsForm['price_' + $index].$error.maxlength">Too lengthy</span></td>-->
 
-                                <td>
+                                <td class="add-quantity">
                                   <md-input-container class="md-container-modify">
-                                    <input id ='{{$index}}' ng-disabled="data.unlimited" type="" name="qty_{{$index}}" min="1"
+                                    <input id ='{{$index}}' ng-disabled="data.unlimited" type="text" name="qty_{{$index}}" min="1"
                                            aria-label="Quantity"
                                            ng-if="data.unlimited != true" ng-pattern="/^\d+(?:[.]\d{1}|$)$/" maxlength="8" ng-model="data.quantity"
                                            ng-required="data.unlimited != true" ignore-mouse-wheel >
