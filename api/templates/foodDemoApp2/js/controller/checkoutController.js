@@ -36,45 +36,49 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
         if(data == ''){
             $scope.hide = true;
             $scope.tax = 0;
-        }else{
+            $scope.isApplyShippingCharge = false;
+        }else {
             $scope.tax = data[0].taxAmount;
             console.log(data[0]);
             $scope.isApplyShippingCharge = data[0].isApplyShippingCharge;
             $scope.hide = false;
+        }
+        var total = 0;
+        var amount = 0;
+        var tax = 0;
+        for(var i = 0; i < $scope.cartItems.length; i++){
+            var product = $scope.cartItems[i];
+            amount = product.total;
+            total += (amount);
+        }
+        console.log($scope.isApplyShippingCharge);
+        if($scope.isApplyShippingCharge == true && $stateParams.item.delivery.location != "Pick up"){
 
-            var total = 0;
-            var amount = 0;
-            var tax = 0;
-            for(var i = 0; i < $scope.cartItems.length; i++){
-                var product = $scope.cartItems[i];
-                amount = product.total;
-                total += (amount);
+            console.log($scope.shippingCost);
+            var shipping = parseInt($scope.shippingCost);
+            total = total + shipping;
+            tax = total * $scope.tax / 100;
+            $scope.taxTotal = total * $scope.tax / 100;
+            if (tax > 0) {
+                total = total + tax;
+                $scope.totalPrice = total;
+            } else {
+                $scope.cart.totalPrice = total;
             }
-            console.log($scope.isApplyShippingCharge);
-            if($scope.isApplyShippingCharge == true && $stateParams.item.delivery.location != "Pick up"){
-
-                console.log($scope.shippingCost);
-                var shipping = parseInt($scope.shippingCost);
-                total = total + shipping;
-                tax = total * $scope.tax / 100;
-                $scope.taxTotal = total * $scope.tax / 100;
-                if (tax > 0) {
-                    total = total + tax;
-                    $scope.totalPrice = total;
-                } else {
-                    $scope.cart.totalPrice = total;
-                }
-            }else {
-                tax = total * $scope.tax / 100;
-                $scope.taxTotal = total * $scope.tax / 100;
-                if (tax > 0) {
-                    total = total + tax;
-                    $scope.totalPrice = total;
-                } else {
-                    $scope.totalPrice = total;
-                }
+        }else {
+            tax = total * $scope.tax / 100;
+            $scope.taxTotal = total * $scope.tax / 100;
+            if(typeof $scope.shippingCost == "undefined"){
+                $scope.shippingCost = 0;
+            }
+            if (tax > 0) {
+                total = total + tax;
+                $scope.totalPrice = total + $scope.shippingCost;
+            } else {
+                $scope.totalPrice = total + $scope.shippingCost;
             }
         }
+
     });
 
 

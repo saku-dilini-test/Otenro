@@ -524,7 +524,7 @@ console.log(data);
         var emailDetails = {
             text: "",
             from: "onbitlabs@gmail.com",
-            to: "mpmadhuranga@gmail.com",
+            to: data.email,
             subject: "You have ordered ",
             attachment: [
                 {
