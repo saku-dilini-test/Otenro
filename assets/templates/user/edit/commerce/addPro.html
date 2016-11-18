@@ -145,6 +145,7 @@
                                     <md-input-container style="width: 80px;">
                                         <input ng-blur="validateInputValue(data.sku,'sku')"  maxlength="10"
                                                required
+                                               aria-label="SKU"
                                                class="product-sku"
                                                name="sku_{{$index}}"
                                                ng-model="data.sku"
@@ -185,6 +186,7 @@
                                 <td>
                                   <md-input-container class="md-container-modify">
                                     <input type="number"
+                                           aria-label="Price"
                                            min="0.00" name="price_{{$index}}" ng-pattern="/^\d+(?:[.]\d{1,2}|$)$/" ng-model="data.price" required ignore-mouse-wheel>
                                       <div ng-messages="priceAndVariantsForm['price_' + $index].$error" ng-show="priceAndVariantsForm['price_' + $index].$dirty">
                                           <div ng-message="pattern">Invalid price</div>
@@ -197,6 +199,7 @@
                                 <td>
                                   <md-input-container class="md-container-modify">
                                     <input id ='{{$index}}' ng-disabled="data.unlimited" type="" name="qty_{{$index}}" min="1"
+                                           aria-label="Quantity"
                                            ng-if="data.unlimited != true" ng-pattern="/^\d+(?:[.]\d{1}|$)$/" maxlength="8" ng-model="data.quantity"
                                            ng-required="data.unlimited != true" ignore-mouse-wheel >
                                       <div ng-messages="priceAndVariantsForm['qty_' + $index].$error"
@@ -213,6 +216,7 @@
                                 <td>
                                     <md-input-container class="md-container-modify">
                                         <input id ='weight_{{$index}}'  type="text" name="weight_{{$index}}" min="1"
+                                               aria-label="Weight"
                                                ng-pattern="/^\w+/" maxlength="8" ng-model="data.weight"
                                                ng-required="data.unlimited == false" ignore-mouse-wheel >
                                         <div ng-messages="priceAndVariantsForm['weight_' + $index].$error"

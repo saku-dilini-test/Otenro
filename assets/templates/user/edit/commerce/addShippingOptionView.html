@@ -142,6 +142,11 @@
                                             Only Positive numbers and Maximum two decimal places only
                                         </span>
                                     </td>
+                                    <td>
+                                        <div class='delete-icon' ng-show="$index == 0 || $index ==(weightRate.weightRanges.length-1)">
+                                            <img ng-click='deleteWeight($index)' name="deleteWeight_{{$index}}" src='../../../images/delete-icon.png'>
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -212,7 +217,7 @@
                                 <label>Country</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <!--<input type="text" name="country" ng-pattern="/^[a-zA-Z_ ]*$/" required ng-model="pickup.country" />-->
-                                <md-select class=""  ng-model="pickup.country" required>
+                                <md-select aria-label="Country Name" class=""  ng-model="pickup.country" required>
                                     <md-option ng-value="oneCountry.countryName" ng-repeat="oneCountry in countryList | orderBy:'countryName'">{{oneCountry.countryName}}</md-option>
                                 </md-select>
                                 <br />
@@ -281,8 +286,10 @@
                             </fieldset>
 
                             <fieldset ng-show="data.group == 'allowed'">
-                                <md-select class=""  ng-model="country" required>
-                                    <md-option ng-value="oneCountry.countryName" ng-repeat="oneCountry in countryList | orderBy:'countryName'">{{oneCountry.countryName}}</md-option>
+                                <md-select aria-label="Countries" class=""  ng-model="country" required>
+                                    <md-option ng-value="oneCountry.countryName"
+
+                                               ng-repeat="oneCountry in countryList | orderBy:'countryName'">{{oneCountry.countryName}}</md-option>
                                 </md-select>
                             </fieldset>
                             <fieldset class="row" ng-show="data.group == 'allowed'">
@@ -295,14 +302,22 @@
                                                  ng-click="toggleAll()">
                                         <span ng-if="isChecked()">Un-</span>Select All
                                     </md-checkbox>
-                                    <div ng-repeat="oneCountry in countryList | orderBy:'countryName'"  ng-model="country" required>
-                                        <md-checkbox ng-checked="exists(oneCountry, selected)" ng-click="toggle(oneCountry, selected)" aria-label="oneCountry.countryName" >{{oneCountry.countryName}}</md-checkbox>
+
+                                    <div ng-repeat="oneCountry in countryList | orderBy:'countryName'"
+                                         ng-model="country" required>
+                                        <md-checkbox ng-checked="exists(oneCountry, selected)"
+                                                     ng-click="toggle(oneCountry, selected)"
+                                                     aria-label="oneCountry.countryName" >{{oneCountry.countryName}}
+                                        </md-checkbox>
                                     </div>
                                 </div>
                                 <div class="col-md-6 country-list">
                                     <label>Included Countries</label>
-                                        <div class="md-label" ng-repeat="country in selected">
-                                            <span>{{country}}</span>
+                                        <div ng-if ="IsSingleSelection === false" class="md-label" ng-repeat="country in selected">
+                                            <span>{{country.countryName}}</span>
+                                        </div>
+                                        <div ng-if ="IsSingleSelection" class="md-label" ng-repeat="country in selected">
+                                            <span>{{country.countryName}}</span>
                                         </div>
                                 </div>
                             </fieldset>
@@ -311,7 +326,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="backToShippingView()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateCountryRestriction(data,country,flatRates)">save</md-button>
+                            <md-button class="me-default-button" ng-click="updateCountryRestriction(data,selected,flatRates)">save</md-button>
                         </div>
                     </div>
                 </md-tab-body>

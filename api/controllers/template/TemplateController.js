@@ -349,6 +349,8 @@ module.exports = {
         var searchQuery  = {
             deviceId : deviceId
         };
+
+        console.log("deviceId " + deviceId);
         // check device id already have in db
         DeviceId.find(searchQuery).exec(function(err,result) {
             if (err) return console.log(err);

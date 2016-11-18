@@ -54,7 +54,7 @@ module.exports = {
             type :'integer'
         },
         countryRestriction: {
-            type : 'string'
+            type : 'json'
         },
         selection : {
             type : 'string'

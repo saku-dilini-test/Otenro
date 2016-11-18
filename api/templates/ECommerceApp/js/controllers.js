@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants, $ionicTabsDelegate
+.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants, $ionicTabsDelegate,$ionicSlideBoxDelegate
 ) {
 
     $ionicLoading.show({
@@ -53,6 +53,7 @@ angular.module('starter.controllers', [])
                 }
                 // initial set as 0 index
                 $scope.setItem(0);
+                $ionicSlideBoxDelegate.update();
 
             }).error(function (err) {
                 $ionicLoading.hide();
@@ -184,7 +185,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices,readMadeEasy,constants) {
+.controller('ItemCtrl', function($scope,$rootScope,$stateParams,$state,appServices,readMadeEasy,constants,$ionicPopup) {
 
     // config
     $scope.selectedVariant = {};
@@ -192,7 +193,7 @@ angular.module('starter.controllers', [])
             $scope.foodInfo = $stateParams.item;
         };
     $scope.$emit('hideMenu',{});
-    
+
     // get currency by appId
     readMadeEasy.readFile().success(function(appData){
         appServices.getCurrencyByAppId(appData.appId)

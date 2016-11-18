@@ -95,7 +95,7 @@ module.exports = {
             configFile = copyDirPath + 'www/config.xml',
             appIconFile = copyDirPath + 'www/res/android/icon/icon.jpg',
             srcPath = sails.config.appPath + '/api/src/hybrid/',
-            appIconFileRES = config.APP_FILE_SERVER + userId + '/templates/' + appId + '/' + 'img/publish/4.png',
+            appIconFileRES = config.APP_FILE_SERVER + userId + '/templates/' + appId + '/' + 'img/publish/0.png',
             appIconFileDES = copyDirPath + 'resources' + '/' + 'icon.png';
 
         fs.readFile(moveConfigFile, 'utf-8',

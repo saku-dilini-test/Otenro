@@ -98,13 +98,13 @@
                                     <span class="overlay01">
                                         <span class="caption01">
                                            <input type="button" class="me-default-button" ngf-select name="splash1"
-                                                 ng-model="splash[4]" ngf-accept="image/*" ngf-change="validateSize(splash[4],'512','512')"
+                                                 ng-model="splash[0]" ngf-accept="image/*" ngf-change="validateSize(splash[0],'512','512')"
                                                  value="Add Image" ngf-validate="{width: {min: 512, max:512}, height: {min: 512, max: 512}}"/>
 
                                         </span>
                                     </span>
-                                    <img ng-if="splash[4] != null" ngf-src="splash[4]"  style="width:120px; height:120px;" />
-                                    <img ng-show="splash[4] == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
+                                    <img ng-if="splash[0] != null" ngf-src="splash[0]"  style="width:120px; height:120px;" />
+                                    <img ng-show="splash[0] == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="120" height="120" />
                                 </a>
                             </fieldset>
 
@@ -114,13 +114,13 @@
                                     <span class="overlay01">
                                         <span class="caption01">
                                            <input type="button" class="me-default-button" ngf-select
-                                                  ng-model="splash[5]" ngf-accept="image/*" ngf-change="validateSize(splash[5],'1024','500')"
+                                                  ng-model="splash[1]" ngf-accept="image/*" ngf-change="validateSize(splash[1],'1024','500')"
                                                   value="Add Image" ngf-validate="{width: {min: 1024, max:1024}, height: {min: 500, max: 500}}" />
                                         </span>
                                     </span>
-                                    <img ng-if="splash[5] != null" ngf-src="splash[5]"  style="width:120px; height:120px;" id="FeatureGraphic"/>
+                                    <img ng-if="splash[1] != null" ngf-src="splash[1]"  style="width:120px; height:120px;" id="FeatureGraphic"/>
                                     <!--                             <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />-->
-                                    <img ng-show="splash[5] == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="307" height="150" />
+                                    <img ng-show="splash[1] == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="307" height="150" />
                                 </a>
                             </fieldset>
 
@@ -129,40 +129,42 @@
                         <div class="row">
                           <div class="col-md-12">
                             <label class="reset-inline">Screen Shots</label>
+                            <label class="reset-inline"> You can leave the screen shots blank if you would Otenro to generate them for you</label>
+
                             <div class="clearfix">
                                 <fieldset class="col-4">
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
-                                            <input type="file" ngf-select ng-model="splash[0]" />
-                                            <img ng-show="splash[0] != null" ngf-src="splash[0]" width="120" height="120" />
-                                            <img ng-show="splash[0]== null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="120" height="120" />
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset class="col-4">
-                                    <div class="me-file-upload text-right medium">
-                                        <div class="upload-wrapper">
-                                            <input type="file" ngf-select ng-model="splash[1]"/>
-                                            <img ng-show="splash[1] != null" ngf-src="splash[1]" width="120" height="120" />
-                                            <img ng-show="splash[1]== null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="120" height="120" />
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <fieldset class="col-4">
-                                    <div class="me-file-upload text-right medium">
-                                        <div class="upload-wrapper">
-                                            <input type="file" ngf-select ng-model="splash[2]"/>
+                                            <input type="file" ngf-select ng-model="splash[2]" />
                                             <img ng-show="splash[2] != null" ngf-src="splash[2]" width="120" height="120" />
-                                            <img ng-show="splash[2] == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="120" height="120" />
+                                            <img ng-show="splash[2]== null" ng-src="{{thumbPic1}}" ng-model="thumbPic1" width="120" height="120" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="col-4">
+                                    <div class="me-file-upload text-right medium">
+                                        <div class="upload-wrapper">
+                                            <input type="file" ngf-select ng-model="splash[3]"/>
+                                            <img ng-show="splash[3] != null" ngf-src="splash[3]" width="120" height="120" />
+                                            <img ng-show="splash[3]== null" ng-src="{{thumbPic2}}" ng-model="thumbPic2" width="120" height="120" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="col-4">
+                                    <div class="me-file-upload text-right medium">
+                                        <div class="upload-wrapper">
+                                            <input type="file" ngf-select ng-model="splash[5]"/>
+                                            <img ng-show="splash[4] != null" ngf-src="splash[4]" width="120" height="120" />
+                                            <img ng-show="splash[4] == null" ng-src="{{thumbPic3}}" ng-model="thumbPic3" width="120" height="120" />
                                         </div>
                                     </div>
                                 </fieldset>
                                 <fieldset class="col-4 reset-margin">
                                     <div class="me-file-upload text-right medium">
                                         <div class="upload-wrapper">
-                                            <input type="file" ngf-select ng-model="splash[3]"/>
-                                            <img ng-show="splash[3] != null" ngf-src="splash[3]" width="120" height="120" />
-                                            <img ng-show="splash[3] == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="120" height="120" />
+                                            <input type="file" ngf-select ng-model="splash[5]"/>
+                                            <img ng-show="splash[5] != null" ngf-src="splash[5]" width="120" height="120" />
+                                            <img ng-show="splash[5] == null" ng-src="{{thumbPic4}}" ng-model="thumbPic4" width="120" height="120" />
                                         </div>
                                     </div>
                                 </fieldset>

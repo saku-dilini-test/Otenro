@@ -17,6 +17,8 @@
         $scope.maxPickup = 20;
         $scope.currency = $rootScope.currency;
         $scope.size = 0;
+        $scope.selected = [];
+        $scope.countryList = [];
 
 
         // --/-- enable & disable tabs --/--
@@ -59,15 +61,11 @@
                     $scope.size  = ($scope.weightRate.weightRanges.length);
                     $scope.size  = $scope.size -1;
                     var lastEndWeight = parseFloat($scope.weightRate.weightRanges[$scope.size].endWeight);
-                    if(lastEndWeight % 1 != 0){
-                        lastEndWeight = (lastEndWeight+ 0.1)+'';
-                    }else{
-                        lastEndWeight = (lastEndWeight+ 1)+'';
-                    }
+                    lastEndWeight = lastEndWeight+ 0.1+"";
                     angular.element(document.getElementById('startWeight'+ $scope.size))[0].disabled = true;
                     angular.element(document.getElementById('endWeight'+ $scope.size))[0].disabled = true;
                     $scope.weightRate.weightRanges.push({startWeight : lastEndWeight,endWeight : '',cost : ''});
-                    //angular.element(document.getElementById('startWeight'+ ($scope.size+1)))[0].disabled = true;
+                    angular.element(document.getElementById('deleteWeight'+ $scope.size)).disabled = true;
                 };
                 $scope.validateInputValue = function(startWeight,endWeight,type,index){
                     if (type=='startWeight'){
@@ -233,6 +231,11 @@
             }
         };
 
+        //Delete first or last weight from the weight base
+        $scope.deleteWeight = function(index){
+            $scope.weightRate.weightRanges.splice(index, 1);
+        };
+
         // --/-- edit shopping collection
         $scope.editShippingInfo = function (item) {
             return shippingService.showUpdateShippingOptionDialog(item);
@@ -295,6 +298,7 @@
         });
 
         $scope.selected = [];
+        $scope.IsSingleSelection = false;
 
         $scope.toggle = function (item, list) {
             var idx = list.indexOf(item.countryName);
@@ -302,7 +306,8 @@
               list.splice(idx, 1);
             }
             else {
-              list.push(item.countryName);
+              list.push(item);
+              $scope.IsSingleSelection = true;
             }
          };
 
@@ -311,24 +316,26 @@
         };
 
 
-//
-//         $scope.isIndeterminate = function() {
-//            return ($scope.selected.length !== 0 &&
-//                $scope.selected.length !== $scope.countryList.length);
-//          };
-//
-//          $scope.isChecked = function() {
-//            return $scope.selected.length === $scope.countryList.length;
-//          };
-//
-//          $scope.toggleAll = function() {
-//            if ($scope.selected.length === $scope.countryList.length) {
-//              $scope.selected = [];
-//            } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
-//              $scope.selected = $scope.countryList.slice(0);
-//            }
-//          };
+              //select all country
 
+
+         $scope.isIndeterminate = function() {
+            return ($scope.selected.length !== 0 &&
+                $scope.selected.length !== $scope.countryList.length);
+          };
+
+          $scope.isChecked = function() {
+            return $scope.selected.length === $scope.countryList.length;
+          };
+
+          $scope.toggleAll = function() {
+              $scope.IsSingleSelection = false;
+            if ($scope.selected.length === $scope.countryList.length) {
+              $scope.selected = [];
+            } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
+              $scope.selected = $scope.countryList.slice(0);
+            }
+          };
 
 
 

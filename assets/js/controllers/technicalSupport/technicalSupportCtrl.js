@@ -24,6 +24,9 @@
             if($stateParams){
                 $scope.userId = $stateParams.userId;
                 $scope.appId = $stateParams.appId;
+                $scope.sourcePath = "/home/admin/web/" +
+                    "otenro.com/public_html/meAppServer/temp/"+$scope.userId +'/templates' + "/"+$scope.appId ;
+                
                 var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $scope.userId
                     +"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=publish/";
 
@@ -132,7 +135,7 @@
            $scope.changePublishStatus = function () {
                technicalSupportService.changePublishStatus({appId : $scope.appId})
                    .success(function (data) {
-                       toastr.success('Click to here for  verify your email address', 'success', {closeButton: true});
+                       toastr.success('Successfully Send mail to customer', 'success', {closeButton: true});
                    }).error(function (error) {
                    toastr.error('Send mail Error', 'Warning', {closeButton: true});
                });

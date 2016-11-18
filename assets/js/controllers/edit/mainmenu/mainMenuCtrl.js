@@ -82,7 +82,7 @@
                             .success(function (secondNaviList) {
                                 $scope.menuItems = secondNaviList;
                             }).error(function (error) {
-                                toastr.error('don’t we need one for this or are u ok whats there?', 'Warning', {closeButton: true});
+                                toastr.error('Menu Loading Error', 'Warning', {closeButton: true});
                             });
                     }   // Media Template Category
                     else if (data.templateCategory == tempCatMedia) {
