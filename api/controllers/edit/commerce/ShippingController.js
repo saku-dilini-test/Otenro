@@ -50,6 +50,28 @@ module.exports = {
         });
     },
 
+    /**
+     * return Shipping Details collections for given app Id
+     * @param req
+     * @param res
+     */
+    getShippingInfoByCountry : function(req,res){
+        var appId = req.body.appId;
+        var country = req.body.country;
+        var searchQuery = {
+            appId:appId,
+            countryRestriction:{
+                $elemMatch:{
+                    countryName:country
+                }
+            }
+        };
+        ShippingDetails.find(searchQuery).exec(function(err, result) {
+            if (err) return res.send(err);
+            return res.send(result);
+        });
+    },
+
 
     getShippingPickupInfo  : function(req,res){
         var appId = req.param('appId');

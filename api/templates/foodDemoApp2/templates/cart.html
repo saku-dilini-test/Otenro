@@ -18,17 +18,18 @@
             <div class="col"><a class="dark" ng-click="removeItem(index)"><i class="icon ion-ios-trash-outline"></i></a></div>
           </div>
         </div>
-        <div ng-hide="hide" class="item item-stacked-label">
-            <div class="row">
-                <div class="col col-50">Tax%</div>
-                <div class="col" ng-model="tax" >{{tax}}</div>
-            </div>
-        </div>
+        <!--<div ng-hide="hide" class="item item-stacked-label">-->
+            <!--<div class="row">-->
+                <!--<div class="col col-50">Tax%</div>-->
+                <!--<div class="col" ng-model="tax" >{{tax}}</div>-->
+                <!--<div class="col" ng-model="tax" >{{taxTotal}}</div>-->
+            <!--</div>-->
+        <!--</div>-->
         <div >
           <div class="row shopping-cart-total">
             <div class="col col-50">Total</div>
             <div class="col" ng-model="quantity">{{getTotalQuantity()}}</div>
-            <div class="col" ng-model="total" >{{getTotal()}}</div>
+            <div class="col" ng-model="total" >{{currency}}{{getTotal()}}</div>
             <div class="col"></div>
           </div>
         </div>

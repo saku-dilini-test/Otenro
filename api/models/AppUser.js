@@ -12,9 +12,7 @@ module.exports = {
 
   attributes: {
 
-    name:  {
-      type: 'string'
-    },
+
     firstName: {
       type: 'string'
     },
@@ -53,7 +51,19 @@ module.exports = {
     role:  {
       type: 'string'
     },
-    address:{
+    streetNumber:{
+        type: 'string'
+    },
+    streetName:{
+        type: 'string'
+    },
+    city:{
+        type: 'string'
+    },
+    country:{
+        type: 'string'
+    },
+    appId:{
         type: 'string'
     },
     phone:{

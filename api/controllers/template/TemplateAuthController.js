@@ -51,7 +51,7 @@ module.exports = {
                         },
                         // OK.
                         success: function (result){
-                            res.status(200).json({user : { email : user.email , sub : user.id, address : user.address, phone: user.phone, name: user.name },token : result });
+                            res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,streetName : user.streetName,city : user.city, country : user.country, phone: user.phone, name: user.firstName },token : result });
                         }
                     });
                 }
@@ -60,7 +60,8 @@ module.exports = {
     },
 
     register: function(req, res) {
-        AppUser.create({email: req.body.email, password: req.body.password, address: req.body.address, phone: req.body.phone, name: req.body.name}).exec(function(err, user) {
+        console.log(req.body);
+        AppUser.create(req.body).exec(function(err, user) {
             if (err) {
                 return res.negotiate(err);
             }

@@ -215,6 +215,7 @@ module.exports.routes = {
      * ShippingController
      */
     'GET /edit/getShippingInfo': 'edit/commerce/ShippingController.getShippingInfo',
+    'POST /edit/getShippingInfoByCountry': 'edit/commerce/ShippingController.getShippingInfoByCountry',
     'POST /edit/updateShippingInfo': 'edit/commerce/ShippingController.updateShippingInfo',
     'POST /edit/deleteShippingInfo': 'edit/commerce/ShippingController.deleteShippingInfo',
     'GET /edit/getShippingPickupInfo': 'edit/commerce/ShippingController.getShippingPickupInfo',
@@ -275,6 +276,7 @@ module.exports.routes = {
      * Template Order Controller
      */
     'POST /templatesOrder/saveOrder': 'template/TemplateOrderController.saveOrder',
+    'POST /templatesOrder/getTaxInfoByCountry': 'template/TemplateOrderController.getTaxInfoByCountry',
 
     /***
      * Template Inventory Controller

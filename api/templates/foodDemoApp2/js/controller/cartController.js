@@ -8,6 +8,11 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
 
+    $http.get(constants.SERVER_URL+"/edit/getAllCountry")
+        .then(function(res){
+            $scope.countries = res.data;
+        });
+
     $scope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;
     $http.get(constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId).success(function(data) {
@@ -31,7 +36,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         tax = total * $scope.tax/100;
         $scope.taxTotal = total * $scope.tax/100;
         if(tax > 0){
-            total = total + tax;
+            //total = total + tax;
             $rootScope.cart.totalPrice = total;
             return total;
         }else{
@@ -58,13 +63,13 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     $scope.delivery = function(deliverItems){
 
-            if(localStorage.getItem('appLocalStorageUser')!==null){
-                 $state.go('app.deliverDetails',{item:deliverItems});
-            }
-            else{
-                $scope.status = 'delivery'
-                $state.go('app.login',{item:$scope.status});
-            }
+        if(localStorage.getItem('appLocalStorageUser')!==null){
+            $state.go('app.deliverDetails',{item:deliverItems});
+        }
+        else{
+            $scope.status = 'delivery'
+            $state.go('app.login',{item:$scope.status});
+        }
     }
     $scope.pickupDetails = function (deliverItems) {
         if(localStorage.getItem('appLocalStorageUser')!==null){
@@ -85,7 +90,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     //get the currency
     $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-            $scope.currency = data;
+        $scope.currency = data.sign;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -95,49 +100,32 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     // get the shipping options
     $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
-            .success(function (data) {
-                    $scope.shippingData=data;
-                },
-                function (err) {
-                    $ionicPopup.alert({
-                        title: 'Policies Data loading error!',
-                        template: 'Please check your connection!'
-                    });
+        .success(function (data) {
+                $scope.shippingData=data;
+            },
+            function (err) {
+                $ionicPopup.alert({
+                    title: 'Policies Data loading error!',
+                    template: 'Please check your connection!'
                 });
+            });
 
 
     $scope.amount = $scope.getTotal();
     $scope.deliver = function(deliverDetails){
 
-            $scope.method = 'Delivery';
-            $scope.shipping={};
-            var SelectShippingOptions = $ionicPopup.alert({
-                   templateUrl: 'templates/shippingOpt.html',
-                   title: 'Shipping Options',
-                   subTitle: 'Choose a Delivery Option you wish.',
-                   cssClass: 'ionicPopUp',
-                   scope: $scope,
-                   buttons:[
-                       {text:'Back'},
-                       {text: 'Deliver',
-                        type: 'made-easy-button-setting',
-                        onTap: function(e) {
-                              if (!$scope.shipping.opt || $rootScope.cart.cartSize == 0) {
-                                //don't allow the user to continue unless he selects an option
-                                e.preventDefault();
-                              } else {
-                              $state.go('app.cardPayment',{
-                               item:$stateParams.item,
-                               deliverDetails:deliverDetails,
-                               amount : $scope.amount,
-                               shippingOpt : $scope.shipping.opt,
-                               method: $scope.method
-                            });
-                             }
-                        }
-                       }
-                   ]
-            });
+
+        if(typeof deliverDetails.country == 'undefined'){
+            var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+            deliverDetails.name = localData.name;
+            deliverDetails.streetNumber = localData.streetNumber;
+            deliverDetails.streetName = localData.streetName;
+            deliverDetails.country = localData.country;
+            deliverDetails.city = localData.city;
+        }
+        console.log(deliverDetails);
+        deliverDetails.method = 'Delivery';
+        $state.go('app.shipping',{item:deliverDetails});
     }
-    
+
 });

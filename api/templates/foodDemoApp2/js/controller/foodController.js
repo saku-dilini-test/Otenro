@@ -115,7 +115,8 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 sku: $scope.selectedVariant.sku,
                 price: $scope.selectedVariant.price,
                 total : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.price,
-                imgURL : $stateParams.item.tempImageArray
+                imgURL : $stateParams.item.tempImageArray,
+                totWeight : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.weight
             });
             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
             $scope.parentobj.cartSize = $rootScope.cart.cartSize;

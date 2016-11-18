@@ -298,6 +298,7 @@
         });
 
         $scope.selected = [];
+        $scope.IsSingleSelection = false;
 
         $scope.toggle = function (item, list) {
             var idx = list.indexOf(item.countryName);
@@ -305,7 +306,8 @@
               list.splice(idx, 1);
             }
             else {
-              list.push(item.countryName);
+              list.push(item);
+              $scope.IsSingleSelection = true;
             }
          };
 
@@ -327,6 +329,7 @@
           };
 
           $scope.toggleAll = function() {
+              $scope.IsSingleSelection = false;
             if ($scope.selected.length === $scope.countryList.length) {
               $scope.selected = [];
             } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
