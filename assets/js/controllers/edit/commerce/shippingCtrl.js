@@ -300,8 +300,9 @@
         $scope.selected = [];
         $scope.IsSingleSelection = false;
 
+
         $scope.toggle = function (item, list) {
-            var idx = list.indexOf(item.countryName);
+            var idx = list.indexOf(item);
             if (idx > -1) {
               list.splice(idx, 1);
             }
@@ -312,13 +313,11 @@
          };
 
         $scope.exists = function (item, list) {
-             return list.indexOf(item.countryName) > -1;
+             return list.indexOf(item) > -1;
         };
 
 
-              //select all country
-
-
+        //select all country
          $scope.isIndeterminate = function() {
             return ($scope.selected.length !== 0 &&
                 $scope.selected.length !== $scope.countryList.length);
@@ -337,6 +336,14 @@
             }
           };
 
+
+        if ($scope.country){
+            $scope.country.forEach(function(element) {
+                $scope.exists(element , $scope.selected);
+                $scope.toggle(element , $scope.selected);
+
+            });
+        }
 
 
         // Update Contry Restriciton 
