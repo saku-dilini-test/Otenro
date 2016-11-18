@@ -1,15 +1,12 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="{{foodInfo.name}}">
     <ion-content class="padding">
-        <div class="list card">
+        <div class="card">
                     <div class="image-wrapper order-item-slide">
-                        <ion-slides options="sliderOptions" slider="sliderDelegate" >
-                            <ion-slide-page ng-repeat="image in images">
-                                <img ng-src="{{imageURL}}/{{image.img}}" >
-                            </ion-slide-page>
-                        </ion-slides>
-                        <!-- Add Arrows -->
-                        <div class="swiper-button-next ion-chevron-right"></div>
-                        <div class="swiper-button-prev ion-chevron-left"></div>
+                        <ion-slide-box show-pager="false" >
+                            <ion-slide ng-repeat="image in images">
+                                <img width="60%" ng-src="{{imageURL}}/{{image.img}}" >
+                            </ion-slide>
+                        </ion-slide-box>
 
                     </div>
 

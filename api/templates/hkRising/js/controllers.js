@@ -3,13 +3,13 @@ angular.module('starter.controllers', [])
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicLoading,$ionicHistory) {
 
         // show & hide menu icon button
-        $scope.showMenu = true;
-        $scope.$on('hideMenu', function(){
-        $scope.showMenu = false;
+       $scope.$on('$ionicView.beforeEnter', function (e, data) {
+           if (data.enableBack) {
+               $scope.$root.showMenuIcon = false;
+           } else {
+               $scope.$root.showMenuIcon = true;
+           }
        });
-       $scope.$on('$stateChangeStart', function(){           $scope.showMenu = false;
-       });
-
         $scope.goBack = function(){
             $ionicHistory.goBack();
 
@@ -63,7 +63,6 @@ angular.module('starter.controllers', [])
     .controller('HomeCtrl', function ($scope, $http, constants, $rootScope, $timeout, $state, $ionicLoading) {
 
         $scope.appName = $rootScope.appName;
-
 
         $scope.changeAppName = function () {
             $scope.appName = $rootScope.appName;
