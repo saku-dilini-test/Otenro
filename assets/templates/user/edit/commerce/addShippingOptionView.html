@@ -285,13 +285,13 @@
                                 </md-radio-group>
                             </fieldset>
 
-                            <fieldset ng-show="data.group == 'allowed'">
+                            <!--<fieldset ng-show="data.group == 'allowed'">
                                 <md-select aria-label="Countries" class=""  ng-model="country" required>
                                     <md-option ng-value="oneCountry.countryName"
 
                                                ng-repeat="oneCountry in countryList | orderBy:'countryName'">{{oneCountry.countryName}}</md-option>
                                 </md-select>
-                            </fieldset>
+                            </fieldset>-->
                             <fieldset class="row" ng-show="data.group == 'allowed'">
                                 <div class="col-md-6 country-list">
                                     <label>Excluded Countries</label>

@@ -301,7 +301,7 @@
         $scope.IsSingleSelection = false;
 
         $scope.toggle = function (item, list) {
-            var idx = list.indexOf(item.countryName);
+            var idx = list.indexOf(item);
             if (idx > -1) {
               list.splice(idx, 1);
             }
