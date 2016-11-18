@@ -25,13 +25,13 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 443,
+  port: 80,
 
-  ssl: {
-    ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
-    key: require('fs').readFileSync(__dirname + '/ssl/private.key'),
-    cert: require('fs').readFileSync(__dirname + '/ssl/certificate.crt')
-  },
+  //ssl: {
+  //  ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
+  //  key: require('fs').readFileSync(__dirname + '/ssl/private.key'),
+  //  cert: require('fs').readFileSync(__dirname + '/ssl/certificate.crt')
+  //},
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
@@ -46,7 +46,7 @@ module.exports = {
   HOST_URL : 'http://otenro.com',
   // ME SERVER Config 
   ME_SERVER : '/var/www/html/meAppServer/temp/',
-  ME_SERVER_PORT : 80,
+  ME_SERVER_PORT : 8081,
   // APP FILE SERVER Config
   APP_FILE_SERVER : '/home/otenro/appFileServer/',
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789'
