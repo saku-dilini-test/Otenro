@@ -41,7 +41,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here ends retrieving the currency --/--//
 
     // --/-- Here start Card Payment Function --/--
-    console.log($stateParams.item.amount)
+    console.log($stateParams.item.amount);
     // Config Cart payment
     $scope.cardType = {};
     $scope.card = {
@@ -101,6 +101,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             deliveryZip : $stateParams.item.delivery.zip,
                             telNumber : $stateParams.item.delivery.number,
                             tax :   $stateParams.item.taxTotal,
+                            shippingCost :   $stateParams.item.shippingCost,
                             shippingOpt : $stateParams.shipping.shippingOption,
                             email: $stateParams.item.userEmail
                         };
@@ -112,7 +113,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             amount : $stateParams.item.amount,
                             customerName : $stateParams.deliverDetails.name,
                             telNumber : $stateParams.deliverDetails.number,
-                            tax :   $scope.tax,
+                            tax :   $stateParams.item.taxTotal,
+                            shippingCost :   $stateParams.item.shippingCost,
                             pickupId: $stateParams.item.pickupId,
                             email: $stateParams.item.userEmail
                         }
@@ -174,6 +176,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 deliveryZip : $stateParams.item.delivery.zip,
                 telNumber : $stateParams.item.delivery.number,
                 tax :   $stateParams.item.taxTotal,
+                shippingCost :   $stateParams.item.shippingCost,
                 shippingOpt : $stateParams.item.shipping.shippingOption,
                 email: $stateParams.item.userEmail
             };
@@ -186,6 +189,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 customerName : $stateParams.item.deliverDetails.name,
                 telNumber : $stateParams.item.deliverDetails.number,
                 tax :   $stateParams.item.taxTotal,
+                shippingCost :   $stateParams.item.shippingCost,
                 pickupId: $stateParams.item.pickupId,
                 email: $stateParams.item.userEmail
             }
@@ -245,6 +249,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         deliveryZip : $stateParams.item.delivery.zip,
                         telNumber : $stateParams.item.delivery.number,
                         tax :   $stateParams.item.taxTotal,
+                        shippingCost :   $stateParams.item.shippingCost,
                         shippingOpt : $stateParams.item.shipping.shippingOption,
                         email: $stateParams.item.userEmail
                     };
@@ -257,6 +262,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         customerName : $stateParams.item.deliverDetails.name,
                         telNumber : $stateParams.item.deliverDetails.number,
                         tax :   $stateParams.item.taxTotal,
+                        shippingCost :   $stateParams.item.shippingCost,
                         pickupId: $stateParams.item.pickupId,
                         email: $stateParams.item.userEmail
                     }
