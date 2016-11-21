@@ -16,10 +16,27 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
   }).error(function(err) {
       alert('warning', "Unable to get Products Selected Category", err.message);
   });
+
+  $http.get(constants.SERVER_URL + '/edit/getIPGInfo?appId='+$scope.appId).success(function(data) {
+          $scope.paymentData = data;
+          console.log($scope.paymentData);
+          if($stateParams.item.delivery.method == "Delivery") {
+              $scope.deliveryShow = data.cashOnDeliveryEnable;
+              $scope.pickupShow = false;
+          }else{
+              $scope.deliveryShow = false;
+              $scope.pickupShow = data.cashOnPickupEnable;
+          }
+          $scope.paypalShow = data.paypalEnable;
+          $scope.stripeShow = data.stripeEnable;
+      }).error(function(err) {
+          alert('warning', "Unable to get Products Selected Category", err.message);
+      });
+
   // --/-- Here ends retrieving the currency --/--//
 
    // --/-- Here start Card Payment Function --/--
-
+        console.log($stateParams.item.amount)
       // Config Cart payment
       $scope.cardType = {};
       $scope.card = {
@@ -258,7 +275,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                         });
                                         // TODO : Currently back to cart
                                         //back to Main Menu
-                                        $state.go('app.category');
+                                        $state.go('tab.category');
                                     },
                                     function(err){
                                         console.log(err);
