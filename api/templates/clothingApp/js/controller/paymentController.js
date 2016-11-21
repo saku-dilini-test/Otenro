@@ -41,7 +41,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here ends retrieving the currency --/--//
 
     // --/-- Here start Card Payment Function --/--
-    console.log($stateParams.item.amount)
+    console.log($stateParams.item.userEmail);
     // Config Cart payment
     $scope.cardType = {};
     $scope.card = {
@@ -113,7 +113,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             customerName : $stateParams.deliverDetails.name,
                             telNumber : $stateParams.deliverDetails.number,
                             tax :   $scope.tax,
-                            pickupId: $stateParams.item.pickupId
+                            pickupId: $stateParams.item.pickupId,
+                            email: $stateParams.item.userEmail
                         }
                     }
                     $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -185,7 +186,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 customerName : $stateParams.item.deliverDetails.name,
                 telNumber : $stateParams.item.deliverDetails.number,
                 tax :   $stateParams.item.taxTotal,
-                pickupId: $stateParams.item.pickupId
+                pickupId: $stateParams.item.pickupId,
+                email: $stateParams.item.userEmail
             }
         }
         $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -255,7 +257,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         customerName : $stateParams.item.deliverDetails.name,
                         telNumber : $stateParams.item.deliverDetails.number,
                         tax :   $stateParams.item.taxTotal,
-                        pickupId: $stateParams.item.pickupId
+                        pickupId: $stateParams.item.pickupId,
+                        email: $stateParams.item.userEmail
                     }
                 }
                 $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)

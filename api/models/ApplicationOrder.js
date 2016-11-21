@@ -75,6 +75,9 @@ module.exports = {
         pickUp :{
             type: 'json'
         },
+        email :{
+            type: 'string'
+        },
         option:{
             type: 'string'
         }

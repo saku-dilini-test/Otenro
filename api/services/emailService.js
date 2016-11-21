@@ -389,6 +389,7 @@ module.exports = {
     sendOrderEmail:function (data,res) {
 
 console.log(data);
+console.log('dd');
 
         var serverOrg=config.server.host+':'+config.server.port;
 
@@ -538,6 +539,7 @@ console.log(data);
             if (err) {
                 console.log(err);
             }
+            //console.log(message);
            //return res('done');
         });
 
