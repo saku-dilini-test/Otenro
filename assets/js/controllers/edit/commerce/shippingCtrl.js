@@ -348,7 +348,7 @@
 
         // Update Contry Restriciton 
         $scope.updateCountryRestriction = function(radio,country){
-            $scope.shipping.selection = radio.group;
+           /* $scope.shipping.selection = radio.group;*/
             $scope.shipping.countryRestriction = country;
             shippingService.updateShippingInfo($scope.shipping)
             .success(function (result) {

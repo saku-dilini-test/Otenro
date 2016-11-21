@@ -21,6 +21,7 @@ module.exports = {
             id : req.body.id
         };
         var updateData = req.body;
+        console.log("updateData " + updateData);
         if(typeof req.body.id != 'undefined'){
             ShippingDetails.update(searchQuery,updateData,function(err,main) {
                 if (err) return res.send(err);
