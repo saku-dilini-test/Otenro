@@ -3,27 +3,41 @@
  */
 
 
-mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,$stateParams,$auth,constants) {
+mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopup,$state,$stateParams,$auth,constants) {
     $scope.data = {};
-    $scope.singUp = function() {
+
+
+    $http.get(constants.SERVER_URL+"/edit/getAllCountry")
+        .then(function(res){
+            $scope.countries = res.data;
+        });
+    $scope.signUp = function() {
     $scope.appLocalStorageUser  = JSON.parse(localStorage.getItem('appLocalStorageUser'));
         var data = {
-            name: $scope.data.name,
+            firstName: $scope.data.fname,
+            lastName: $scope.data.lname,
             email : $scope.data.email,
             password : $scope.data.password,
-            address: $scope.data.address,
-            phone: $scope.data.phone
+            streetNumber: $scope.data.streetNumber,
+            streetName: $scope.data.streetName,
+            city: $scope.data.city,
+            country: $scope.data.country,
+            phone: $scope.data.phone,
+            appId: $rootScope.appId
         };
         $http.post(constants.SERVER_URL+"/templatesAuth/register",data)
             .then(function(res){
             var requestParams = {
             	"token": res.data.token,
             	"email": data.email,
-            	"password": data.password,
-            	"name": data.name,
+            	"name": data.firstName,
             	"phone": data.phoneNumber,
-            	"address": data.address,
-            	"type": 'internal'
+            	"streetNumber": data.streetNumber,
+            	"streetName": data.streetName,
+            	"country": data.country,
+            	"city": data.city,
+            	"type": 'internal',
+                "appId":data.appId
             };
             		localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
             		console.log(localStorage.getItem('appLocalStorageUser'));
@@ -56,8 +70,10 @@ mobileApp.controller('registerCtrl', function($scope,$http,$ionicPopup,$state,$s
             alert(provider+' Login error');
         });
     };
+
     // back to login in view function
     $scope.backToLogin = function () {
         $state.go("app.login");
     }
+
 });

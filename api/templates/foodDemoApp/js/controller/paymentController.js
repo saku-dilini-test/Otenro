@@ -87,7 +87,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                     // TODO : Error handle here
                 }else{
                     alert("Payment Success");
-                    if($stateParams.item.delivery.method == "delivery"){
+                    if($stateParams.item.delivery.method == "Delivery"){
                         $scope.details ={
                             appId : $rootScope.appId,
                             item : $stateParams.item.cart,
@@ -159,7 +159,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here start Cash Payment Function --/--
 
     $scope.confirmCashPayment = function(){
-        if($stateParams.item.delivery.method == "delivery"){
+        if($stateParams.item.delivery.method == "Delivery"){
             $scope.details ={
                 appId : $rootScope.appId,
                 item : $stateParams.item.cart,
@@ -228,7 +228,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         PaypalService.initPaymentUI().then(function () {
             PaypalService.makePayment($stateParams.amount, "Total Amount").then(function (response) {
                 alert("success"+JSON.stringify(response));
-                if($stateParams.item.delivery.method == "delivery"){
+                if($stateParams.item.delivery.method == "Delivery"){
                     $scope.details ={
 
                         appId : $rootScope.appId,
