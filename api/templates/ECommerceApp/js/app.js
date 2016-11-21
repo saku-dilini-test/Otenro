@@ -269,6 +269,68 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     }
                 }
             })
+
+                   .state('tab.shipping', {
+                         cache: false,
+                         url: '/shipping',
+                         params:{
+                             item: null,
+                         },
+                         views: {
+                             'menuContent': {
+                                 templateUrl: 'templates/shipping.html',
+                                 controller: 'shippingCtrl'
+                             }
+                         }
+                     })
+
+                    .state('tab.checkout', {
+                        cache: false,
+                        url: '/checkout',
+                        params:{
+                            item: null,
+                        },
+                        views: {
+                            'menuContent': {
+                                templateUrl: 'templates/checkout.html',
+                                controller: 'checkoutCtrl'
+                            }
+                        }
+                    })
+
+
+            .state('tab.payment', {
+                        cache: false,
+                        url: '/payment',
+                        params:{
+                            item: null,
+                            registeredName:null,
+                            deliverDetails:null,
+                            amount:null,
+                            shippingOpt:null,
+                            method:null,
+                            pickupId:null
+                        },
+                        views: {
+                            'menuContent': {
+                                templateUrl: 'templates/payment.html',
+                                controller: 'paymentCtrl'
+                            }
+                        }
+                    })
+
+
+            .state('tab.category', {
+                        cache: false,
+                        url: '/category',
+                        views: {
+                            'menuContent': {
+                                templateUrl: 'templates/category.html',
+                                controller: 'categoryCtrl'
+                            }
+                        }
+                    })
+
             .state('tab.pickupDetails', {
                 cache: false,
                 url: '/pickupDetails',

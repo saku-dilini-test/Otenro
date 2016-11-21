@@ -1,222 +1,226 @@
- /**
- * created by Shashan on 02/11/16.
+/**
+ * Created by amila on 4/5/16.
+ */
+/**
+ * Edited by Shashan on 01/11/16.
  */
 
 mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService) {
 
-  $scope.$emit('hideMenu',{});
-  //getting the user's registered name and address
-  $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
+    $scope.$emit('hideMenu',{});
+    //getting the user's registered name and address
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 
-  // --/-- Here start retrieving the currency --/--//
-  $scope.userId = $rootScope.userId;
-  $scope.appId - $rootScope.appId;
-  $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-      $scope.currency = data;
-  }).error(function(err) {
-      alert('warning', "Unable to get Products Selected Category", err.message);
-  });
-
-  $http.get(constants.SERVER_URL + '/edit/getIPGInfo?appId='+$scope.appId).success(function(data) {
-          $scope.paymentData = data;
-          console.log($scope.paymentData);
-          if($stateParams.item.delivery.method == "Delivery") {
-              $scope.deliveryShow = data.cashOnDeliveryEnable;
-              $scope.pickupShow = false;
-          }else{
-              $scope.deliveryShow = false;
-              $scope.pickupShow = data.cashOnPickupEnable;
-          }
-          $scope.paypalShow = data.paypalEnable;
-          $scope.stripeShow = data.stripeEnable;
-      }).error(function(err) {
-          alert('warning', "Unable to get Products Selected Category", err.message);
-      });
-
-  // --/-- Here ends retrieving the currency --/--//
-
-   // --/-- Here start Card Payment Function --/--
-        console.log($stateParams.item.amount)
-      // Config Cart payment
-      $scope.cardType = {};
-      $scope.card = {
-          amount : $stateParams.amount
-      };
+    // --/-- Here start retrieving the currency --/--//
+    $scope.userId = $rootScope.userId;
+    $scope.appId = $rootScope.appId;
+    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
+        $scope.currency = data;
+    }).error(function(err) {
+        alert('warning', "Unable to get Products Selected Category", err.message);
+    });
 
 
-      $scope.makeStripePayment = makeStripePayment;
+    $http.get(constants.SERVER_URL + '/edit/getIPGInfo?appId='+$scope.appId).success(function(data) {
+        $scope.paymentData = data;
+        console.log($scope.paymentData);
+        if($stateParams.item.delivery.method == "Delivery") {
+            $scope.deliveryShow = data.cashOnDeliveryEnable;
+            $scope.pickupShow = false;
+        }else{
+            $scope.deliveryShow = false;
+            $scope.pickupShow = data.cashOnPickupEnable;
+        }
+        $scope.paypalShow = data.paypalEnable;
+        $scope.stripeShow = data.stripeEnable;
+    }).error(function(err) {
+        alert('warning', "Unable to get Products Selected Category", err.message);
+    });
 
-      /**
-       Make Payment Function
-       */
-      function makeStripePayment(_cardInformation) {
 
-          if (!window.stripe) {
-              alert("stripe plugin not installed");
-              return;
-          }
+    // --/-- Here ends retrieving the currency --/--//
 
-          if (!_cardInformation) {
-              alert("Invalid Card Data");
-              return;
-          }
-          stripe.charges.create({
-                  // amount is in cents so * 100
-                  amount: _cardInformation.amount * 100,
-                  currency: $scope.currency.symbol,
-                  card: {
-                      "number": _cardInformation.number,
-                      "exp_month": _cardInformation.exp_month,
-                      "exp_year": _cardInformation.exp_year,
-                      "cvc": _cardInformation.cvc,
-                      "name": _cardInformation.userName
-                  },
-                  description: $rootScope.appName
-              },
-              function(response) {
-                  console.log(JSON.stringify(response, null, 2));
-                  // TODO : This alert for only testing
-                  alert(JSON.stringify(response, null, 2));
-                  if(response.error){
-                      alert("Error");
-                      // TODO : Error handle here
-                  }else{
-                      alert("Payment Success");
-                      if($stateParams.pickupId == null){
-                          $scope.details ={
-                              appId : $rootScope.appId,
-                              item : $stateParams.item,
-                              amount : $stateParams.amount,
-                              registeredName : $scope.user.name,
-                              customerName : $stateParams.deliverDetails.name,
-                              deliveryLocation : $stateParams.deliverDetails.location,
-                              deliveryNo : $stateParams.deliverDetails.no,
-                              deliveryStreet : $stateParams.deliverDetails.street,
-                              deliveryCity : $stateParams.deliverDetails.city,
-                              deliveryCountry : $stateParams.deliverDetails.country,
-                              deliveryZip : $stateParams.deliverDetails.zip,
-                              telNumber : $stateParams.deliverDetails.number,
-                              tax :   $scope.tax,
-                              shippingOpt : $stateParams.shippingOpt,
-                              pickupId: $stateParams.pickupId
-                           };
-                       }
-                       else{
-                          $scope.details ={
-                             appId : $rootScope.appId,
-                             item : $stateParams.item,
-                             amount : $stateParams.amount,
-                             customerName : $stateParams.deliverDetails.name,
-                             telNumber : $stateParams.deliverDetails.number,
-                             tax :   $scope.tax,
-                             pickupId: $stateParams.pickupId
-                          }
+    // --/-- Here start Card Payment Function --/--
+    console.log($stateParams.item.amount)
+    // Config Cart payment
+    $scope.cardType = {};
+    $scope.card = {
+        amount : $stateParams.item.amount
+    };
+
+
+    $scope.makeStripePayment = makeStripePayment;
+
+    /**
+     Make Payment Function
+     */
+    function makeStripePayment(_cardInformation) {
+
+        if (!window.stripe) {
+            alert("stripe plugin not installed");
+            return;
+        }
+
+        if (!_cardInformation) {
+            alert("Invalid Card Data");
+            return;
+        }
+        stripe.charges.create({
+                // amount is in cents so * 100
+                amount: _cardInformation.amount * 100,
+                currency: $scope.currency.symbol,
+                card: {
+                    "number": _cardInformation.number,
+                    "exp_month": _cardInformation.exp_month,
+                    "exp_year": _cardInformation.exp_year,
+                    "cvc": _cardInformation.cvc,
+                    "name": _cardInformation.userName
+                },
+                description: $rootScope.appName
+            },
+            function(response) {
+                console.log(JSON.stringify(response, null, 2));
+                // TODO : This alert for only testing
+                alert(JSON.stringify(response, null, 2));
+                if(response.error){
+                    alert("Error");
+                    // TODO : Error handle here
+                }else{
+                    alert("Payment Success");
+                    if($stateParams.item.delivery.method == "Delivery"){
+                        $scope.details ={
+                            appId : $rootScope.appId,
+                            item : $stateParams.item.cart,
+                            amount : $stateParams.item.amount,
+                            customerName : $scope.user.name,
+                            deliverName : $stateParams.item.delivery.name,
+                            deliveryNo : $stateParams.item.delivery.streetNumber,
+                            deliveryStreet : $stateParams.item.delivery.street,
+                            deliveryCity : $stateParams.item.delivery.city,
+                            deliveryCountry : $stateParams.item.delivery.country,
+                            deliveryZip : $stateParams.item.delivery.zip,
+                            telNumber : $stateParams.item.delivery.number,
+                            tax :   $stateParams.item.taxTotal,
+                            shippingOpt : $stateParams.shipping.shippingOption,
+                            email: $stateParams.item.userEmail
+                        };
+                    }
+                    else{
+                        $scope.details ={
+                            appId : $rootScope.appId,
+                            item : $stateParams.item.cart,
+                            amount : $stateParams.item.amount,
+                            customerName : $stateParams.deliverDetails.name,
+                            telNumber : $stateParams.deliverDetails.number,
+                            tax :   $scope.tax,
+                            pickupId: $stateParams.item.pickupId
                         }
-                        $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
-                         .then(function(res){
-                          $scope.details.id = $rootScope.cart.cartItems[0].id;
-                          $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item)
-                             .then(function(res){
+                    }
+                    $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
+                        .then(function(res){
+                                $scope.details.id = $rootScope.cart.cartItems[0].id;
+                                $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
+                                    .then(function(res){
+                                            $rootScope.cart.cartItems = [];
+                                            $rootScope.cart.cartSize = 0;
+                                            $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                                            $rootScope.cart.totalPrice = 0;
+                                            $rootScope.cart.totalQuantity = 0;
+                                            var alertPopup = $ionicPopup.alert({
+                                                title: 'Thank You',
+                                                subTitle: 'Your Order has been successfully processed',
+                                                cssClass: 'ionicPopUp',
+                                                buttons:[
+                                                    {text:'OK',
+                                                        type:'made-easy-button-setting'},
+                                                ]
+                                            });
+                                            // TODO : Currently back to cart
+                                            //back to Main Menu
+                                            $state.go('tab.category');
+                                        },
+                                        function(err){
+                                            console.log(err);
+                                        });
+                            },
+                            function(err){
+                                console.log(err);
+                            });
+                }
+
+            },
+            function(response) {
+                alert(JSON.stringify(response));
+                alert("Error");
+            }   // error handler
+        );
+    }
+    // --/-- Here end Card Payment Function --/--
+    // --/-- Here start Cash Payment Function --/--
+
+    $scope.confirmCashPayment = function(){
+        if($stateParams.item.delivery.method == "Delivery"){
+            $scope.details ={
+                appId : $rootScope.appId,
+                item : $stateParams.item.cart,
+                amount : $stateParams.item.amount,
+                customerName : $scope.user.name,
+                deliverName : $stateParams.item.delivery.name,
+                deliveryNo : $stateParams.item.delivery.streetNumber,
+                deliveryStreet : $stateParams.item.delivery.street,
+                deliveryCity : $stateParams.item.delivery.city,
+                deliveryCountry : $stateParams.item.delivery.country,
+                deliveryZip : $stateParams.item.delivery.zip,
+                telNumber : $stateParams.item.delivery.number,
+                tax :   $stateParams.item.taxTotal,
+                shippingOpt : $stateParams.item.shipping.shippingOption,
+                email: $stateParams.item.userEmail
+            };
+        }
+        else{
+            $scope.details ={
+                appId : $rootScope.appId,
+                item : $stateParams.item.cart,
+                amount : $stateParams.item.amount,
+                customerName : $stateParams.item.deliverDetails.name,
+                telNumber : $stateParams.item.deliverDetails.number,
+                tax :   $stateParams.item.taxTotal,
+                pickupId: $stateParams.item.pickupId
+            }
+        }
+        $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
+            .then(function(res){
+                    $scope.details.id = $rootScope.cart.cartItems[0].id;
+                    $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
+                        .then(function(res){
                                 $rootScope.cart.cartItems = [];
                                 $rootScope.cart.cartSize = 0;
                                 $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                                 $rootScope.cart.totalPrice = 0;
                                 $rootScope.cart.totalQuantity = 0;
                                 var alertPopup = $ionicPopup.alert({
-                                  title: 'Thank You',
-                                  subTitle: 'Your Order has been successfully processed',
-                                  cssClass: 'ionicPopUp',
-                                  buttons:[
-                                   {text:'OK',
-                                    type:'made-easy-button-setting'},
-                                  ]
+                                    title: 'Thank You',
+                                    subTitle: 'Your Order has been successfully processed',
+                                    cssClass: 'ionicPopUp',
+                                    buttons:[
+                                        {text:'OK',
+                                            type:'button-positive'},
+                                    ]
                                 });
                                 // TODO : Currently back to cart
                                 //back to Main Menu
-                               $state.go('tab.home');
-                              },
-                        function(err){
-                          console.log(err);
-                        });
-                        },
-                  function(err){
-                      console.log(err);
-                     });
-                  }
+                                $state.go('tab.category');
+                            },
+                            function(err){
+                                console.log(err);
+                            });
+                },
+                function(err){
+                    console.log(err);
+                });
+    }
+    // --/-- Here end cash Payment Function --/--
 
-              },
-              function(response) {
-                  alert(JSON.stringify(response));
-                  alert("Error");
-              }   // error handler
-          );
-      }
-      // --/-- Here end Card Payment Function --/--
-      // --/-- Here start Cash Payment Function --/--
-
-      $scope.confirmCashPayment = function(){
-        if($stateParams.pickupId == null){
-           $scope.details ={
-               appId : $rootScope.appId,
-               item : $stateParams.item,
-               amount : $stateParams.amount,
-               customerName : $scope.user.name,
-               deliverName : $stateParams.deliverDetails.name,
-               deliveryLocation : $stateParams.deliverDetails.location,
-               deliveryNo : $stateParams.deliverDetails.no,
-               deliveryStreet : $stateParams.deliverDetails.street,
-               deliveryCity : $stateParams.deliverDetails.city,
-               deliveryCountry : $stateParams.deliverDetails.country,
-               deliveryZip : $stateParams.deliverDetails.zip,
-               telNumber : $stateParams.deliverDetails.number,
-               tax :   $scope.tax,
-               shippingOpt : $stateParams.shippingOpt,
-               pickupId: $stateParams.pickupId
-            };
-        }
-        else{
-           $scope.details ={
-              appId : $rootScope.appId,
-              item : $stateParams.item,
-              amount : $stateParams.amount,
-              customerName : $stateParams.deliverDetails.name,
-              telNumber : $stateParams.deliverDetails.number,
-              tax :   $scope.tax,
-              pickupId: $stateParams.pickupId
-           }
-         }
-        $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
-            .then(function(res){
-                $scope.details.id = $rootScope.cart.cartItems[0].id;
-                $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item)
-                   .then(function(res){
-                      $rootScope.cart.cartItems = [];
-                      $rootScope.cart.cartSize = 0;
-                      $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-                      $rootScope.cart.totalPrice = 0;
-                      $rootScope.cart.totalQuantity = 0;
-                      var alertPopup = $ionicPopup.alert({
-                        title: 'Thank You',
-                        subTitle: 'Your Order has been successfully processed',
-                        cssClass: 'ionicPopUp',
-                        buttons:[
-                         {text:'OK',
-                          type:'button-positive'},
-                        ]
-                      });
-                      // TODO : Currently back to cart
-                      //back to Main Menu
-                     $state.go('tab.menu');
-                   },
-                    function(err){
-                        console.log(err);
-                    });
-            },
-        function(err){
-         console.log(err);
-        });
-      }
-            // --/-- Here end cash Payment Function --/--
 
 
     // Buy With PayPal
@@ -224,40 +228,40 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         PaypalService.initPaymentUI().then(function () {
             PaypalService.makePayment($stateParams.amount, "Total Amount").then(function (response) {
                 alert("success"+JSON.stringify(response));
-                if($stateParams.pickupId == null){
+                if($stateParams.item.delivery.method == "Delivery"){
                     $scope.details ={
+
                         appId : $rootScope.appId,
-                        item : $stateParams.item,
-                        amount : $stateParams.amount,
+                        item : $stateParams.item.cart,
+                        amount : $stateParams.item.amount,
                         customerName : $scope.user.name,
-                        deliverName : $stateParams.deliverDetails.name,
-                        deliveryLocation : $stateParams.deliverDetails.location,
-                        deliveryNo : $stateParams.deliverDetails.no,
-                        deliveryStreet : $stateParams.deliverDetails.street,
-                        deliveryCity : $stateParams.deliverDetails.city,
-                        deliveryCountry : $stateParams.deliverDetails.country,
-                        deliveryZip : $stateParams.deliverDetails.zip,
-                        telNumber : $stateParams.deliverDetails.number,
-                        tax :   $scope.tax,
-                        shippingOpt : $stateParams.shippingOpt,
-                        pickupId: $stateParams.pickupId
+                        deliverName : $stateParams.item.delivery.name,
+                        deliveryNo : $stateParams.item.delivery.streetNumber,
+                        deliveryStreet : $stateParams.item.delivery.street,
+                        deliveryCity : $stateParams.item.delivery.city,
+                        deliveryCountry : $stateParams.item.delivery.country,
+                        deliveryZip : $stateParams.item.delivery.zip,
+                        telNumber : $stateParams.item.delivery.number,
+                        tax :   $stateParams.item.taxTotal,
+                        shippingOpt : $stateParams.item.shipping.shippingOption,
+                        email: $stateParams.item.userEmail
                     };
                 }
                 else{
                     $scope.details ={
                         appId : $rootScope.appId,
-                        item : $stateParams.item,
-                        amount : $stateParams.amount,
-                        customerName : $stateParams.deliverDetails.name,
-                        telNumber : $stateParams.deliverDetails.number,
-                        tax :   $scope.tax,
-                        pickupId: $stateParams.pickupId
+                        item : $stateParams.item.cart,
+                        amount : $stateParams.item.amount,
+                        customerName : $stateParams.item.deliverDetails.name,
+                        telNumber : $stateParams.item.deliverDetails.number,
+                        tax :   $stateParams.item.taxTotal,
+                        pickupId: $stateParams.item.pickupId
                     }
                 }
                 $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
                     .then(function(res){
                             $scope.details.id = $rootScope.cart.cartItems[0].id;
-                            $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item)
+                            $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
                                 .then(function(res){
                                         $rootScope.cart.cartItems = [];
                                         $rootScope.cart.cartSize = 0;
