@@ -232,7 +232,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // Buy With PayPal
     $scope.buyWithPayPal = function () {
         PaypalService.initPaymentUI().then(function () {
-            PaypalService.makePayment($stateParams.amount, "Total Amount").then(function (response) {
+            PaypalService.makePayment($stateParams.item.amount, "Total Amount").then(function (response) {
                 alert("success"+JSON.stringify(response));
                 if($stateParams.item.delivery.method == "Delivery"){
                     $scope.details ={
