@@ -8,7 +8,7 @@
 				controller: ['$scope','$http','$state','$stateParams','$ionicPopup','constants','$auth',
 				function($scope,$http,$state,$stateParams,$ionicPopup,constants,$auth) {
 			   		$scope.data = {};
-
+ 
 				    $scope.login = function() {
 						var data = {
 							email : $scope.data.username,
@@ -17,20 +17,23 @@
 						$http.post(constants.SERVER_URL+"/templatesAuth/authenticate",data)
 							.then(function(res){
 							var requestParams = {
-                            	"token": res.data.token,
-                            	"email": data.email,
-                            	"password": data.password,
-                            	"name": res.data.user.name,
-                            	"phone": res.data.user.phoneNumber,
-                            	"address": res.data.user.address,
-                            	"type": 'internal'
+								"token": res.data.token,
+								"email": data.email,
+								"name": res.data.user.firstName,
+								"phone": res.data.user.phoneNumber,
+								"streetNumber": res.data.user.streetNumber,
+								"streetName": res.data.user.streetName,
+								"country": res.data.user.country,
+								"city": res.data.user.city,
+								"type": 'internal',
+								"appId":res.data.user.appId
                             };
                             localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
-                                if($stateParams.item == 'delivery'){
+								if($stateParams.item == 'delivery'){
                                     $state.go('app.cart');
                                 }else{
-								    $state.go('app.category');
-								}
+                                    $state.go('app.category');
+                                }
 							},
 							function(err){
 								$ionicPopup.alert({
@@ -58,11 +61,11 @@
 
 
 					$scope.singUp = function(){
-					    if($stateParams.item == 'delivery'){
-					        $state.go('app.register',{item:$stateParams.item});
-					    }else{
-						    $state.go('app.register');
-						}
+						if($stateParams.item == 'delivery'){
+                            $state.go('app.register',{item:$stateParams.item});
+                        }else{
+                            $state.go('app.register');
+                        }
 					}
 				}],
 				restrict: 'ASE',
