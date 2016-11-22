@@ -19,7 +19,7 @@
 							var requestParams = {
 								"token": res.data.token,
 								"email": data.email,
-								"name": res.data.user.firstName,
+								"name": res.data.user.name,
 								"phone": res.data.user.phoneNumber,
 								"streetNumber": res.data.user.streetNumber,
 								"streetName": res.data.user.streetName,
