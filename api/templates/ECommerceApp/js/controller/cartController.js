@@ -6,6 +6,12 @@
 //    angular.module('starter', [])
 mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService) {
 
+            $http.get(constants.SERVER_URL+"/edit/getAllCountry")
+                    .then(function(res){
+                        $scope.countries = res.data;
+                    });
+
+
             if (typeof $rootScope.appId === 'undefined'){
 
                 readMadeEasy.readFile().success(function(data){
