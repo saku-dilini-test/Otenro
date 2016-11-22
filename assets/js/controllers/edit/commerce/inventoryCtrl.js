@@ -125,7 +125,8 @@
                     'price' : value.price,
                     'quantity' : value.quantity,
                     'variantName' : value.selection,
-                    'variantType' : value.vType
+                    'variantType' : value.vType,
+                    'weight' : value.weight
 
                 });
             });

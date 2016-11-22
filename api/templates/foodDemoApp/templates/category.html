@@ -3,10 +3,10 @@
         <a class="category" ng-repeat="category in categories" href="#/app/category/{{category.id}}/{{category.name}}">
             <div class="card animated bounceInRight">
                 <div class="row ">
-                    <div class="col">
+                    <div class="col col-50">
                         <img width="100%" height="100%" ng-src="{{imageURL}}/{{category.imageUrl}}">
                     </div>
-                    <div class="col col-center">
+                    <div class="col col-50 col-center">
                         <div class="col made-easy-header-font">{{category.name}}</div>
 
                         <!--<p>{{category.description}}</p>-->
