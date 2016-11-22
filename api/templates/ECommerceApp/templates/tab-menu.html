@@ -2,7 +2,7 @@
     <ion-content class="padding">
         <div ng-repeat="category in categoryList" >
             <a href="#/tab/menu/{{category.id}}/{{category.name}}">
-                <div class="cards cards-category">
+                <div class="card padding">
                     <div class="header">
                         <div class="header-image">
                             <img ng-src="{{imageURL}}/{{category.imageUrl}}" width="100%">
@@ -10,7 +10,7 @@
                     </div>
 
                     <div class="made-easy-header-font">
-                        <p>{{category.name}}</p>
+                        <p class="align-center">{{category.name}}</p>
                     </div>
 
                 </div>

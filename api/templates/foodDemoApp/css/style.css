@@ -24,6 +24,7 @@
 .card {
     padding:0px;
     border-radius:5px !important;
+    margin:2%;
 }
 
 .button.button-positive {
@@ -220,6 +221,10 @@ p{
 
 .category .col{
     text-align:center;
+}
+.category .col img{
+    display:flex;
+    height:100%;
 }
 
 .category .price{

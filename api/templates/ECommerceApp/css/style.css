@@ -7,6 +7,10 @@
     cursor: url(../img/cursor.cur), auto;
 }
 
+a {
+    text-decoration: none;
+}
+
 .item[ng-click]:hover{
     cursor: url(../img/cursor.cur), auto;
 }
