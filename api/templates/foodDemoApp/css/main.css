@@ -42,7 +42,7 @@ a{
     color: #a46a2c;
     font-family: sans-serif;
     font-weight: bolder;
-    font-size:14px;
+    font-size:3vh;
     line-height: normal;
     text-align: center;
 }
@@ -50,7 +50,7 @@ a{
 .made-easy-content-font{
   color:#7F7E7D;
   font-family: sans-serif;
-  font-size: 12px;
+  font-size: 2.2vh;
   font-weight: lighter;
   line-height: normal;
 }
@@ -78,7 +78,7 @@ a{
 /* ----- View Page ----- */
 .made-easy-view .item-buy{
     width: 100%;
-    border: unset;
+    border: 0;
     border-bottom: 1px solid #ccc;
 }
 .item-error-message{
