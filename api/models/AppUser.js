@@ -57,6 +57,9 @@ module.exports = {
     streetName:{
         type: 'string'
     },
+    zip:{
+        type: 'string'
+    },
     city:{
         type: 'string'
     },

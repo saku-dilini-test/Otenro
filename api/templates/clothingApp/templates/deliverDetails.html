@@ -1,24 +1,24 @@
 <ion-view class="made-easy-background-image made-easy-background-color" view-title="Deliver Details">
     <ion-content >
         <div class="card animated zoomIn delivery-details">
-                <div class="row">
-                    <div class="col align-center made-easy-header-font">Location for Delivery</div>
-                </div>
+            <div class="row">
+                <div class="col align-center made-easy-header-font">Location for Delivery</div>
+            </div>
 
 
-                <ion-checkbox ng-model="details.location"  class="checkbox-positive" ng-true-value="'old'">
-                    <label >
-                        <h3>Home</h3>
-                        <div ng-if="user.name">{{user.name}}</div>
-                        <div ng-if="user.streetNumber">{{user.streetNumber}},{{user.streetName}},{{user.city}},{{user.country}}</div>
-                    </label>
-                </ion-checkbox >
+            <ion-checkbox ng-model="details.location"  class="checkbox-positive" ng-true-value="'old'">
+                <label >
+                    <h3>Home</h3>
+                    <div ng-if="user.name">{{user.name}}</div>
+                    <div ng-if="user.streetNumber">{{user.streetNumber}},{{user.streetName}},{{user.city}},{{user.country}}</div>
+                </label>
+            </ion-checkbox >
 
-                <ion-checkbox ng-model="details.location"  class="checkbox-positive" ng-true-value="'New'">
-                    <label >
-                        <h3>New Location</h3>
-                    </label>
-                </ion-checkbox>
+            <ion-checkbox ng-model="details.location"  class="checkbox-positive" ng-true-value="'New'">
+                <label >
+                    <h3>New Location</h3>
+                </label>
+            </ion-checkbox>
 
             <form name="delivery" novalidate>
                 <div class="list delivery-form padding-right"   ng-if="details.location == 'New'">
@@ -27,12 +27,12 @@
                         <input type="text" ng-model="details.name" placeholder="E.g. John Doe" required>
                     </label>
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">No.</span>
-                        <input type="text" ng-model="details.no" placeholder="address number" required>
+                        <span class="input-label">Street No.</span>
+                        <input type="text" ng-model="details.streetNumber" placeholder="Street number" required>
                     </label>
                     <label class="item item-input item-stacked-label">
-                        <span class="input-label">Street Address</span>
-                        <input type="text" ng-model="details.street" placeholder="Street" required>
+                        <span class="input-label">Street Name</span>
+                        <input type="text" ng-model="details.streetName" placeholder="Street Name" required>
                     </label>
                     <label class="item item-input item-stacked-label">
                         <span class="input-label">City</span>

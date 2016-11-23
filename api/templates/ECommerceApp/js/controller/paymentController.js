@@ -101,6 +101,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             deliveryZip : $stateParams.item.delivery.zip,
                             telNumber : $stateParams.item.delivery.number,
                             tax :   $stateParams.item.taxTotal,
+                            shippingCost :   $stateParams.item.shippingCost,
                             shippingOpt : $stateParams.shipping.shippingOption,
                             email: $stateParams.item.userEmail
                         };
@@ -112,8 +113,10 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             amount : $stateParams.item.amount,
                             customerName : $stateParams.deliverDetails.name,
                             telNumber : $stateParams.deliverDetails.number,
-                            tax :   $scope.tax,
-                            pickupId: $stateParams.item.pickupId
+                            tax :   $stateParams.item.taxTotal,
+                            shippingCost :   $stateParams.item.shippingCost,
+                            pickupId: $stateParams.item.pickupId,
+                            email: $stateParams.item.userEmail
                         }
                     }
                     $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -173,6 +176,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 deliveryZip : $stateParams.item.delivery.zip,
                 telNumber : $stateParams.item.delivery.number,
                 tax :   $stateParams.item.taxTotal,
+                shippingCost :   $stateParams.item.shippingCost,
                 shippingOpt : $stateParams.item.shipping.shippingOption,
                 email: $stateParams.item.userEmail
             };
@@ -185,7 +189,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 customerName : $stateParams.item.deliverDetails.name,
                 telNumber : $stateParams.item.deliverDetails.number,
                 tax :   $stateParams.item.taxTotal,
-                pickupId: $stateParams.item.pickupId
+                shippingCost :   $stateParams.item.shippingCost,
+                pickupId: $stateParams.item.pickupId,
+                email: $stateParams.item.userEmail
             }
         }
         $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -226,7 +232,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // Buy With PayPal
     $scope.buyWithPayPal = function () {
         PaypalService.initPaymentUI().then(function () {
-            PaypalService.makePayment($stateParams.amount, "Total Amount").then(function (response) {
+            PaypalService.makePayment($stateParams.item.amount, "Total Amount").then(function (response) {
                 alert("success"+JSON.stringify(response));
                 if($stateParams.item.delivery.method == "Delivery"){
                     $scope.details ={
@@ -243,6 +249,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         deliveryZip : $stateParams.item.delivery.zip,
                         telNumber : $stateParams.item.delivery.number,
                         tax :   $stateParams.item.taxTotal,
+                        shippingCost :   $stateParams.item.shippingCost,
                         shippingOpt : $stateParams.item.shipping.shippingOption,
                         email: $stateParams.item.userEmail
                     };
@@ -255,7 +262,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         customerName : $stateParams.item.deliverDetails.name,
                         telNumber : $stateParams.item.deliverDetails.number,
                         tax :   $stateParams.item.taxTotal,
-                        pickupId: $stateParams.item.pickupId
+                        shippingCost :   $stateParams.item.shippingCost,
+                        pickupId: $stateParams.item.pickupId,
+                        email: $stateParams.item.userEmail
                     }
                 }
                 $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)

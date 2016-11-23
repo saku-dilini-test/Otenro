@@ -3,7 +3,7 @@
 <ion-view class="made-easy-background-image made-easy-background-color" view-title="Register">
 
   <ion-content class=" padding">
-      
+
     <div class="animated zoomIn">
       <div class="list card">
         <div class="padding-vertical">
@@ -50,6 +50,10 @@
                   <option ng-value="country.countryName" ng-repeat="country in countries">{{country.countryName}}
                   </option>
                 </select>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Zip / Postal Code</span>
+                <input type="text" placeholder="" ng-model="data.zip" ng-required="true">
               </label>
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Phone Number</span>

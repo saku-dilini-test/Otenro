@@ -25,6 +25,7 @@
 								"streetName": res.data.user.streetName,
 								"country": res.data.user.country,
 								"city": res.data.user.city,
+								"zip": res.data.user.zip,
 								"type": 'internal',
 								"appId":res.data.user.appId
                             };
