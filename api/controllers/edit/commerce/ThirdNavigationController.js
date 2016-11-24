@@ -83,17 +83,45 @@ module.exports = {
         var searchQuery = {
             id : req.body.product.id
         };
-
+        var skuSearchQuery = {
+            productId : req.body.product.id
+        };
+        var sku =[];
         if(typeof req.body.product.id != 'undefined'){
             delete product["id"];
             ThirdNavigation.update(searchQuery,product,function(err,main) {
                 if (err) return res.send(err);
-                return res.send(200, {message: 'Shipping Collection successfully updated'});
+                var data = {
+                    userId: req.userId,
+                    appId: product.appId,
+                    productId:skuSearchQuery.productId
+                }
+                for(var i=0; i<product.variants.length; i++){
+                    sku.push(product.variants[i].sku)
+                }
+                data.sku = sku;
+                Sku.update(skuSearchQuery,data,function(err,skuData){
+                    if (err) return res.send(err);
+                    return res.send(200, {message: 'Shipping Collection successfully updated'});
+                })
+
             });
         }else{
             ThirdNavigation.create(product).exec(function (err, result) {
                 if (err) return res.send(err);
-                return res.send(200, {message: 'Shipping Collection successfully created'});
+                var data = {
+                    userId: req.userId,
+                    appId: product.appId,
+                    productId:result.id
+                }
+                for(var i=0; i<product.variants.length; i++){
+                    sku.push(product.variants[i].sku);
+                }
+                data.sku = sku;
+                 Sku.create(data,function(err,skuData){
+                     if (err) return res.send(err);
+                     return res.send(200, {message: 'Shipping Collection successfully created'});
+                 })
             });
         }
     },
@@ -255,6 +283,28 @@ module.exports = {
        if (err) return done(err);
          res.send(app);
      })
+    },
+    /*
+        check uniqueness of the sku
+    */
+    checkUniqueSku: function(req,res){
+        var searchApp={
+            userId: req.body.userId
+        }
+        Sku.find(searchApp, function(err, app){
+            if (err) return done(err);
+            for(var i=0; i<app.length; i++){
+                for(var j=0; j<app[i].sku.length; j++){
+                if(app[i].sku[j] == req.body.sku){
+                    return res.send('true');
+                    break;
+                }
+                }
+            }
+            res.send('false');
+
+        })
+
     }
 
 

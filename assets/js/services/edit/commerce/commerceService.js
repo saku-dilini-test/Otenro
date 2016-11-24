@@ -265,6 +265,9 @@
             updateOrders: function (data) {
                 return $http.post(SERVER_URL + 'edit/updateOrders', data)
             },
+            checkUniqueSku: function(data){
+                return $http.post(SERVER_URL + 'edit/checkUniqueSku', data)
+            },
             showDeleteAppDialog : function () {
                 return $mdDialog.show({
                     controllerAs: 'dialogCtrl',
