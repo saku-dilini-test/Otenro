@@ -106,11 +106,10 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
         if(shippingDetails.shipping.shippingOption == "Flat Rate"){
 
-            if(shippingDetails.shipping.preOrderFee > 0){
-                shippingCost = shippingDetails.shipping.preOrderFee;
-            }else{
-                shippingCost = shippingDetails.shipping.feePerItem;
-            }
+            var shippingCostPreOrderFee = shippingDetails.shipping.preOrderFee;
+            var shippingCostFeePerItem = shippingDetails.shipping.feePerItem * $rootScope.cart.cartItems.length;
+            shippingCost = shippingCostPreOrderFee + shippingCostFeePerItem;
+
         }else if(shippingDetails.shipping.shippingOption == "Weight Based"){
 
             console.log(shippingDetails.shipping.weightRanges);
