@@ -25,7 +25,7 @@ module.exports = {
       secondNavi : [
         {
           attribute : {
-            "imageUrl": "bbq salad.png",
+            "imageUrl": "pasta-salad.jpg",
             "name": "Salads",
             "description": "Salads description"
           },
@@ -34,10 +34,10 @@ module.exports = {
               "name": "Grilled Chicken",
               "price": 100,
               "quantity": 100,
-              "imageUrl": "grilled_chicken_salad.png",
+              "imageUrl": "sa1.jpeg",
               "tempImageArray" : [
                 {
-                  "img" : "grilled_chicken_salad.png"
+                  "img" : "sa1.jpeg"
                 }
               ],
               "selection" : "Size",
@@ -57,10 +57,10 @@ module.exports = {
               "name": "Spicy Thai Salad",
               "price": 200,
               "quantity": 200,
-              "imageUrl": "spicy thai salad with grilled chicken.png",
+              "imageUrl": "sa2.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "spicy thai salad with grilled chicken.png"
+                  "img" : "sa2.jpg"
                 }
               ],
               "selection" : "Size",
@@ -100,7 +100,7 @@ module.exports = {
         },
         {
           attribute: {
-            "imageUrl": "chocolate Fudge brownie with vanila ice cream.png",
+            "imageUrl": "crpes.jpg",
             "name": "Deserts",
             "description": "Deserts description"
           },
@@ -109,10 +109,10 @@ module.exports = {
               "name": "Chocolate Fudge",
               "price": 100,
               "quantity": 100,
-              "imageUrl": "chocolate Fudge brownie with vanila ice cream.png",
+              "imageUrl": "da1.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "chocolate Fudge brownie with vanila ice cream.png"
+                  "img" : "da1.jpg"
                 }
               ],
               "selection" : "Size",
@@ -172,8 +172,8 @@ module.exports = {
         },
         {
           attribute : {
-            "imageUrl": "salmon stake grilled.png",
-            "name": "Beverages",
+            "imageUrl": "how-to-grill-fish.jpg",
+            "name": "Stakes",
             "description": "Beverages description"
           },
           thirdNavi : [
@@ -181,10 +181,10 @@ module.exports = {
               "name": "Grilled Garlic Lamb",
               "price": 100,
               "quantity": 100,
-              "imageUrl": "grilled garlic lamb chops.png",
+              "imageUrl": "st1.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "grilled garlic lamb chops.png"
+                  "img" : "st1.jpg"
                 }
               ],
               "selection" : "Size",
@@ -204,10 +204,10 @@ module.exports = {
               "name": "Beef Stake",
               "price": 200,
               "quantity": 200,
-              "imageUrl": "beef stake with smashed potatoes.png",
+              "imageUrl": "st2.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "beef stake with smashed potatoes.png"
+                  "img" : "st2.jpg"
                 }
               ],
               "selection" : "Size",
@@ -227,10 +227,10 @@ module.exports = {
               "name": "BBQ Pork Ribs",
               "price": 300,
               "quantity": 300,
-              "imageUrl": "bbq pork ribs.png",
+              "imageUrl": "st3.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "bbq pork ribs.png"
+                  "img" : "st3.jpg"
                 }
               ],
               "selection" : "Size",
@@ -255,7 +255,7 @@ module.exports = {
               "detailedDesc" : "Pina Colada details description. Pina Colada details",
               "tempImageArray" : [
                 {
-                  "img" : "bg.png"
+                  "img" : "st4.jpg"
                 }
               ],
               "variants":[{
@@ -266,7 +266,7 @@ module.exports = {
                 'price': "400",
                 'quantity': 400
               }],
-              "imageUrl": "bg.png",
+              "imageUrl": "st4.jpg",
               "createdDate": Date.now()
             }
           ]
@@ -722,7 +722,7 @@ module.exports = {
               "selection" : "Size",
               "tempImageArray" : [
                 {
-                  "img" : "item_01.png"
+                  "img" : "1.jpg"
                 }
               ],
               "variants":[{
@@ -733,7 +733,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
-              "imageUrl": "item_01.png",
+              "imageUrl": "1.jpg",
               "briefDesc" : "Masala brief des",
               "detailedDesc" : "Masala Pizza, details description. details description",
               "createdDate": Date.now()
@@ -745,7 +745,7 @@ module.exports = {
               "selection" : "Size",
               "tempImageArray" : [
                 {
-                  "img" : "item_02.png"
+                  "img" : "2.jpg"
                 }
               ],
               "variants":[{
@@ -756,7 +756,7 @@ module.exports = {
                 'price': "300",
                 'quantity': 100
               }],
-              "imageUrl": "item_02.png",
+              "imageUrl": "2.jpg",
               "briefDesc" : "New Pizza brief des",
               "detailedDesc" : "New Pizza, details description. details description",
               "createdDate": Date.now()
@@ -778,7 +778,7 @@ module.exports = {
               "selection" : "Size",
               "tempImageArray" : [
                 {
-                  "img" : "item_01.png"
+                  "img" : "3.jpg"
                 }
               ],
               "variants":[{
@@ -789,7 +789,7 @@ module.exports = {
                 'price': "350",
                 'quantity': 100
               }],
-              "imageUrl": "item_01.png",
+              "imageUrl": "3.jpg",
               "briefDesc" : "Indian brief des",
               "detailedDesc" : "Indian Pizza, details description. details description",
               "createdDate": Date.now()
@@ -801,7 +801,7 @@ module.exports = {
               "selection" : "Size",
               "tempImageArray" : [
                 {
-                  "img" : "item_02.png"
+                  "img" : "4.jpg"
                 }
               ],
               "variants":[{
@@ -812,7 +812,7 @@ module.exports = {
                 'price': "225",
                 'quantity': 15
               }],
-              "imageUrl": "item_02.png",
+              "imageUrl": "4.jpg",
               "briefDesc" : "New Pizza brief des",
               "detailedDesc" : "New Pizza, details description. details description",
               "createdDate": Date.now()

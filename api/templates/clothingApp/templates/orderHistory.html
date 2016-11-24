@@ -1,13 +1,15 @@
 <ion-view view-title="Order History">
     <ion-content class="made-easy-background-image made-easy-background-color">
 
-        <div class="list card" data-ng-repeat="data in temp">
-            <div class="item item-avatar">
-                <img src="avatar.jpg">
-                <h2>data.name</h2>
-                <p>data.amount</p>
-                <p>11/23/2016</p>
-                <p>12.45 PM</p>
+        <div class="list card" data-ng-repeat="order in orderHistory  | filter: {orderHistoryKey: appId}  | orderBy:'':true">
+            <div ng-repeat="item in order.item" class="item item-avatar">
+                <img src="{{imageURL}}/{{item.imgURL[0].img}}">
+                <h2>{{item.name}}</h2>
+                <h2>{{currency.sign}}{{item.price}}</h2>
+            </div>
+            <div class="item">
+                <p>Total - {{currency.sign}}{{order.amount}}</p>
+                <p>Order Date - {{order.createdDate | date:'MM/dd/yyyy'}}</p>
             </div>
         </div>
 
