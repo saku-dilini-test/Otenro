@@ -25,7 +25,7 @@ module.exports = {
       secondNavi : [
         {
           attribute : {
-            "imageUrl": "bbq salad.png",
+            "imageUrl": "pasta-salad.jpg",
             "name": "Salads",
             "description": "Salads description"
           },
@@ -34,10 +34,10 @@ module.exports = {
               "name": "Grilled Chicken",
               "price": 100,
               "quantity": 100,
-              "imageUrl": "grilled_chicken_salad.png",
+              "imageUrl": "sa1.jpeg",
               "tempImageArray" : [
                 {
-                  "img" : "grilled_chicken_salad.png"
+                  "img" : "sa1.jpeg"
                 }
               ],
               "selection" : "Size",
@@ -57,10 +57,10 @@ module.exports = {
               "name": "Spicy Thai Salad",
               "price": 200,
               "quantity": 200,
-              "imageUrl": "spicy thai salad with grilled chicken.png",
+              "imageUrl": "sa2.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "spicy thai salad with grilled chicken.png"
+                  "img" : "sa2.jpg"
                 }
               ],
               "selection" : "Size",
@@ -100,7 +100,7 @@ module.exports = {
         },
         {
           attribute: {
-            "imageUrl": "chocolate Fudge brownie with vanila ice cream.png",
+            "imageUrl": "crpes.jpg",
             "name": "Deserts",
             "description": "Deserts description"
           },
@@ -109,10 +109,10 @@ module.exports = {
               "name": "Chocolate Fudge",
               "price": 100,
               "quantity": 100,
-              "imageUrl": "chocolate Fudge brownie with vanila ice cream.png",
+              "imageUrl": "da1.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "chocolate Fudge brownie with vanila ice cream.png"
+                  "img" : "da1.jpg"
                 }
               ],
               "selection" : "Size",
@@ -172,8 +172,8 @@ module.exports = {
         },
         {
           attribute : {
-            "imageUrl": "salmon stake grilled.png",
-            "name": "Beverages",
+            "imageUrl": "how-to-grill-fish.jpg",
+            "name": "Stakes",
             "description": "Beverages description"
           },
           thirdNavi : [
@@ -181,10 +181,10 @@ module.exports = {
               "name": "Grilled Garlic Lamb",
               "price": 100,
               "quantity": 100,
-              "imageUrl": "grilled garlic lamb chops.png",
+              "imageUrl": "st1.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "grilled garlic lamb chops.png"
+                  "img" : "st1.jpg"
                 }
               ],
               "selection" : "Size",
@@ -204,10 +204,10 @@ module.exports = {
               "name": "Beef Stake",
               "price": 200,
               "quantity": 200,
-              "imageUrl": "beef stake with smashed potatoes.png",
+              "imageUrl": "st2.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "beef stake with smashed potatoes.png"
+                  "img" : "st2.jpg"
                 }
               ],
               "selection" : "Size",
@@ -227,10 +227,10 @@ module.exports = {
               "name": "BBQ Pork Ribs",
               "price": 300,
               "quantity": 300,
-              "imageUrl": "bbq pork ribs.png",
+              "imageUrl": "st3.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "bbq pork ribs.png"
+                  "img" : "st3.jpg"
                 }
               ],
               "selection" : "Size",
@@ -255,7 +255,7 @@ module.exports = {
               "detailedDesc" : "Pina Colada details description. Pina Colada details",
               "tempImageArray" : [
                 {
-                  "img" : "bg.png"
+                  "img" : "st4.jpg"
                 }
               ],
               "variants":[{
@@ -266,7 +266,7 @@ module.exports = {
                 'price': "400",
                 'quantity': 400
               }],
-              "imageUrl": "bg.png",
+              "imageUrl": "st4.jpg",
               "createdDate": Date.now()
             }
           ]
@@ -487,24 +487,24 @@ module.exports = {
         {
           attribute : {
             "imageUrl": "a.png",
-            "name": "Shirt",
+            "name": "Women Shoes",
             "description": "Shirt description"
           },
           thirdNavi : [
             {
-              "name": "Shirt x",
+              "name": "Shoe 1",
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
               "briefDesc" : "Shirt x brief des",
-              "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
                   "img" : "a.png"
                 }
               ],
               "variants":[{
-                "name": "Shirt x",
+                "name": "Shoe 1",
                 'sku': "1111",
                 'size': "11",
                 'vType' : "s",
@@ -515,19 +515,19 @@ module.exports = {
               "createdDate": Date.now()
             },
             {
-              "name": "Shirt y",
+              "name": "Shoe 2",
               "price": 350,
               "quantity": 350,
               "selection" : "Size",
               "briefDesc" : "Shirt y brief des",
-              "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
                   "img" : "b.png"
                 }
               ],
               "variants":[{
-                "name": "Shirt y",
+                "name": "Shoe 2",
                 'sku': "1111",
                 'size': "11",
                 'vType' : "s",
@@ -538,19 +538,19 @@ module.exports = {
               "createdDate": Date.now()
             },
             {
-              "name": "Shirt z",
+              "name": "Shoe 3",
               "price": 450,
               "quantity": 450,
               "selection" : "Size",
               "briefDesc" : "Shirt z brief des",
-              "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
                   "img" : "c.png"
                 }
               ],
               "variants":[{
-                "name": "Shirt z",
+                "name": "Shoe 3",
                 'sku': "1111",
                 'size': "11",
                 'vType' : "s",
@@ -564,7 +564,7 @@ module.exports = {
         },{
           attribute : {
             "imageUrl": "c.png",
-            "name": "Shirt",
+            "name": "Men Shirts",
             "description": "Shirt description"
           },
           thirdNavi : [
@@ -574,10 +574,10 @@ module.exports = {
               "quantity": 250,
               "selection" : "Size",
               "briefDesc" : "Shirt x brief des",
-              "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
-                  "img" : "a.png"
+                  "img" : "d.jpeg"
                 }
               ],
               "variants":[{
@@ -588,7 +588,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
-              "imageUrl": "a.png",
+              "imageUrl": "d.jpeg",
               "createdDate": Date.now()
             },
             {
@@ -597,10 +597,10 @@ module.exports = {
               "quantity": 350,
               "selection" : "Size",
               "briefDesc" : "Shirt y brief des",
-              "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
-                  "img" : "b.png"
+                  "img" : "e.jpeg"
                 }
               ],
               "variants":[{
@@ -611,7 +611,7 @@ module.exports = {
                 'price': "350",
                 'quantity': 350
               }],
-              "imageUrl": "b.png",
+              "imageUrl": "e.jpeg",
               "createdDate": Date.now()
             },
             {
@@ -620,10 +620,10 @@ module.exports = {
               "quantity": 450,
               "selection" : "Size",
               "briefDesc" : "Shirt z brief des",
-              "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
-                  "img" : "c.png"
+                  "img" : "f.jpg"
                 }
               ],
               "variants":[{
@@ -634,7 +634,7 @@ module.exports = {
                 'price': "450",
                 'quantity': 450
               }],
-              "imageUrl": "c.png",
+              "imageUrl": "f.jpg",
               "createdDate": Date.now()
             }
           ]
@@ -642,31 +642,31 @@ module.exports = {
         {
           attribute : {
             "imageUrl": "d.png",
-            "name": "Short",
+            "name": "Men Shoes",
             "description": "Short description"
           },
           thirdNavi : [
             {
-              "name": "Short x",
+              "name": "Shoe 1",
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
               "briefDesc" : "Short x brief des",
-              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
-                  "img" : "d.png"
+                  "img" : "h.png"
                 }
               ],
               "variants":[{
-                "name": "Short x",
+                "name": "Shoe 1",
                 'sku': "1111",
                 'size': "11",
                 'vType' : "s",
                 'price': "250",
                 'quantity': 250
               }],
-              "imageUrl": "d.png",
+              "imageUrl": "h.png",
               "createdDate": Date.now()
             }
           ]
@@ -674,31 +674,31 @@ module.exports = {
         {
           attribute : {
             "imageUrl": "cloth3.png",
-            "name": "Suits",
+            "name": "Accessories",
             "description": "Short description"
           },
           thirdNavi : [
             {
-              "name": "Beach Suit",
+              "name": "Watch 1",
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
               "briefDesc" : "Short x brief des",
-              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
-                  "img" : "cloth3.png"
+                  "img" : "g.png"
                 }
               ],
               "variants":[{
-                "name": "Beach Suit",
+                "name": "Watch 1",
                 'sku': "1111",
                 'size': "11",
                 'vType' : "s",
                 'price': "250",
                 'quantity': 250
               }],
-              "imageUrl": "cloth3.png",
+              "imageUrl": "g.png",
               "createdDate": Date.now()
             }
           ]
@@ -722,7 +722,7 @@ module.exports = {
               "selection" : "Size",
               "tempImageArray" : [
                 {
-                  "img" : "item_01.png"
+                  "img" : "1.jpg"
                 }
               ],
               "variants":[{
@@ -733,7 +733,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
-              "imageUrl": "item_01.png",
+              "imageUrl": "1.jpg",
               "briefDesc" : "Masala brief des",
               "detailedDesc" : "Masala Pizza, details description. details description",
               "createdDate": Date.now()
@@ -745,7 +745,7 @@ module.exports = {
               "selection" : "Size",
               "tempImageArray" : [
                 {
-                  "img" : "item_02.png"
+                  "img" : "2.jpg"
                 }
               ],
               "variants":[{
@@ -756,7 +756,7 @@ module.exports = {
                 'price': "300",
                 'quantity': 100
               }],
-              "imageUrl": "item_02.png",
+              "imageUrl": "2.jpg",
               "briefDesc" : "New Pizza brief des",
               "detailedDesc" : "New Pizza, details description. details description",
               "createdDate": Date.now()
@@ -778,7 +778,7 @@ module.exports = {
               "selection" : "Size",
               "tempImageArray" : [
                 {
-                  "img" : "item_01.png"
+                  "img" : "3.jpg"
                 }
               ],
               "variants":[{
@@ -789,7 +789,7 @@ module.exports = {
                 'price': "350",
                 'quantity': 100
               }],
-              "imageUrl": "item_01.png",
+              "imageUrl": "3.jpg",
               "briefDesc" : "Indian brief des",
               "detailedDesc" : "Indian Pizza, details description. details description",
               "createdDate": Date.now()
@@ -801,7 +801,7 @@ module.exports = {
               "selection" : "Size",
               "tempImageArray" : [
                 {
-                  "img" : "item_02.png"
+                  "img" : "4.jpg"
                 }
               ],
               "variants":[{
@@ -812,7 +812,7 @@ module.exports = {
                 'price': "225",
                 'quantity': 15
               }],
-              "imageUrl": "item_02.png",
+              "imageUrl": "4.jpg",
               "briefDesc" : "New Pizza brief des",
               "detailedDesc" : "New Pizza, details description. details description",
               "createdDate": Date.now()
