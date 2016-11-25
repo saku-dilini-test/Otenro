@@ -135,7 +135,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                             $rootScope.cart.totalQuantity = 0;
 
                                             //Pushing into order purchase history
+                                            if(angular.fromJson(localStorage.getItem('history')) != null){
                                             orderHistory = angular.fromJson(localStorage.getItem('history'));
+                                            }
                                             orderHistory.push({
                                                 orderHistoryKey : $rootScope.appId,
                                                 createdDate: new Date(),
@@ -222,7 +224,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                 $rootScope.cart.totalQuantity = 0;
 
                                 //Pushing into order purchase history
-                                orderHistory = angular.fromJson(localStorage.getItem('history'));
+                                  if(angular.fromJson(localStorage.getItem('history')) != null){
+                                  orderHistory = angular.fromJson(localStorage.getItem('history'));
+                                  }
                                 orderHistory.push({
                                     orderHistoryKey : $rootScope.appId,
                                     createdDate: new Date(),
@@ -306,7 +310,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                         $rootScope.cart.totalQuantity = 0;
 
                                         //Pushing into order purchase history
+                                        if(angular.fromJson(localStorage.getItem('history')) != null){
                                         orderHistory = angular.fromJson(localStorage.getItem('history'));
+                                        }
                                         orderHistory.push({
                                             orderHistoryKey : $rootScope.appId,
                                             createdDate: new Date(),

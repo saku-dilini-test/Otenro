@@ -40,10 +40,6 @@
 }
 
 
-.item {
-    border-top:none !important;
-}
-
 .back-button {
     left: 3%;
 }
@@ -62,14 +58,6 @@
     font-family:"Times New Roman", Times, serif;
     cursor: url(../img/cursor.cur), auto;
     margin: 0 -10px;
-}
-
-.item h2{
-    color: #75A3B8 !important;
-    font-family:"Times New Roman", Times, serif;
-    font-weight:600;
-    padding-bottom: 10px;
-    border-bottom: solid thin RGBA(117, 163, 184, 0.29);
 }
 
 
@@ -97,12 +85,6 @@ h2:first-child{
     color:#73A3B9;
     margin:5px;
     font-size:20px;
-}
-
-
-p{
-    color:#666;
-    text-align:center;
 }
 
 .item-thumbnail-left{
