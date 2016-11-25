@@ -404,3 +404,10 @@ ion-slides {
     margin-top:0;
     padding:0;
 }
+
+.menu-items{
+    display:list-item;
+}
+.menu-items .card{
+    margin:20px 2%;
+}

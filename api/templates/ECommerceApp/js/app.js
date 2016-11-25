@@ -250,6 +250,26 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     }
                 }
             })
+            .state('tab.policies', {
+                cache: false,
+                url: '/policies',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/policies.html',
+                        controller: 'policiesCtrl'
+                    }
+                }
+            })
+            .state('tab.terms', {
+                cache: false,
+                url: '/terms',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/terms.html',
+                        controller: 'termsCtrl'
+                    }
+                }
+            })
             .state('tab.cardPayment', {
                 cache: false,
                 url: '/cardPayment',

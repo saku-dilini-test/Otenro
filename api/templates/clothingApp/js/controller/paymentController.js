@@ -133,6 +133,17 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                                             $rootScope.cart.totalPrice = 0;
                                             $rootScope.cart.totalQuantity = 0;
+
+                                            //Pushing into order purchase history
+                                            orderHistory = angular.fromJson(localStorage.getItem('history'));
+                                            orderHistory.push({
+                                                orderHistoryKey : $rootScope.appId,
+                                                createdDate: new Date(),
+                                                item :   $stateParams.item.cart,
+                                                amount :  $stateParams.item.amount,
+                                            });
+                                            localStorage.setItem('history', JSON.stringify(orderHistory));
+
                                             var alertPopup = $ionicPopup.alert({
                                                 title: 'Thank You',
                                                 subTitle: 'Your Order has been successfully processed',
@@ -293,6 +304,17 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                         $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                                         $rootScope.cart.totalPrice = 0;
                                         $rootScope.cart.totalQuantity = 0;
+
+                                        //Pushing into order purchase history
+                                        orderHistory = angular.fromJson(localStorage.getItem('history'));
+                                        orderHistory.push({
+                                            orderHistoryKey : $rootScope.appId,
+                                            createdDate: new Date(),
+                                            item :   $stateParams.item.cart,
+                                            amount :  $stateParams.item.amount,
+                                        });
+                                        localStorage.setItem('history', JSON.stringify(orderHistory));
+
                                         var alertPopup = $ionicPopup.alert({
                                             title: 'Thank You',
                                             subTitle: 'Your Order has been successfully processed',
