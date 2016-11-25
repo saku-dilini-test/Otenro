@@ -460,6 +460,29 @@
                   });
               }
         };
+        /**
+        * @description
+        * check if the sku already exist
+        * @param selectedType
+        *
+        *
+        */
+        $scope.checkValidity = function(sku){
+            $scope.exist = false;
+            var skuData = {
+                userId: $auth.getPayload().id,
+                appId: $rootScope.appId,
+                sku: sku
+            }
+            commerceService.checkUniqueSku(skuData)
+            .success(function(result){
+                if(result == 'true'){
+                    $scope.exist = true;
+                }
+            }).error(function (error) {
+                console.log(error);
+            })
+        }
 
 
 

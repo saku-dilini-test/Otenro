@@ -140,6 +140,7 @@ module.exports.routes = {
     'GET /edit/getThirdNavigation': 'edit/commerce/ThirdNavigationController.getThirdNavigation',
     'GET /edit/getOrders': 'edit/commerce/OrderController.getOrders',
     'POST /edit/updateOrders': 'edit/commerce/OrderController.updateOrders',
+    'POST /edit/checkUniqueSku': 'edit/commerce/ThirdNavigationController.checkUniqueSku',
 
 
     'POST /edit/saveMainMenu': 'edit/commerce/MainNavigationController.saveMainMenu',
