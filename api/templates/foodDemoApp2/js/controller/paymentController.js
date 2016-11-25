@@ -15,7 +15,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     $scope.userId = $rootScope.userId;
     $scope.appId = $rootScope.appId;
     $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-        $scope.currency = data;
+        $rootScope.currency = data;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -68,7 +68,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         stripe.charges.create({
                 // amount is in cents so * 100
                 amount: _cardInformation.amount * 100,
-                currency: $scope.currency.symbol,
+                currency: $rootScope.currency.symbol,
                 card: {
                     "number": _cardInformation.number,
                     "exp_month": _cardInformation.exp_month,
@@ -233,7 +233,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     $scope.buyWithPayPal = function () {
         PaypalService.initPaymentUI().then(function () {
             PaypalService.makePayment($stateParams.item.amount, "Total Amount").then(function (response) {
-                alert("success"+JSON.stringify(response));
                 if($stateParams.item.delivery.method == "Delivery"){
                     $scope.details ={
 
