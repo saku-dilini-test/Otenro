@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicLoading,$ionicHistory) {
+    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicLoading,$ionicHistory,$rootScope,$http,constants) {
 
         // show & hide menu icon button
        $scope.$on('$ionicView.beforeEnter', function (e, data) {
@@ -14,6 +14,24 @@ angular.module('starter.controllers', [])
             $ionicHistory.goBack();
 
         };
+
+        $scope.appName = $rootScope.appName;
+
+        $scope.changeAppName = function () {
+            $scope.appName = $rootScope.appName;
+
+            $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId=' + $rootScope.appId)
+                .success(function (data) {
+                    $ionicLoading.hide();
+                    $scope.articleCategoryList = data;
+                }).error(function (err) {
+                alert('loading err');
+            });
+        }
+
+        $timeout(function () {
+            $scope.changeAppName();
+        }, 1000);
 
         //get the user name
         $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
@@ -65,12 +83,42 @@ angular.module('starter.controllers', [])
         $scope.appName = $rootScope.appName;
 
         $scope.changeAppName = function () {
+
+
+            if (typeof $rootScope.appId === 'undefined'){
+
+                readMadeEasy.readFile().success(function(data){
+                    $rootScope.appId = data.appId;
+                });
+            }
+
+            if (typeof $rootScope.userId === 'undefined'){
+
+                readMadeEasy.readFile().success(function(data){
+                    $rootScope.userId = data.userId;
+                });
+            }
+            if (typeof $rootScope.appName === 'undefined'){
+
+                readMadeEasy.readFile().success(function(data){
+                    $rootScope.appName = data.name;
+                });
+            }
+
             $scope.appName = $rootScope.appName;
+
+            $scope.imageURL =
+                        constants.SERVER_URL
+                        +"/templates/viewImages?userId="
+                        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category";
+
+
 
             $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId=' + $rootScope.appId)
                 .success(function (data) {
                     $ionicLoading.hide();
                     $scope.articleCategoryList = data;
+                    console.log($scope.articleCategoryList)
                 }).error(function (err) {
                 alert('loading err');
             });

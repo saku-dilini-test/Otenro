@@ -827,6 +827,7 @@ module.exports = {
       articleCategory : [{
         attribute : {
           "name": "Attractions",
+          "imageUrl":"star ferry.png",
         },
         article : [
           {
@@ -936,6 +937,7 @@ module.exports = {
         {
           attribute : {
             "name": "Shopping",
+            "imageUrl":"apliu street flee market.png",
           },
           article : [
             {
@@ -973,6 +975,7 @@ module.exports = {
         {
           attribute : {
             "name": "Historical sites",
+            "imageUrl":"1881 heritage.png",
           },
           article : [
             {
