@@ -277,8 +277,8 @@ angular.module('starter.controllers', [])
     $scope.addToCart = function() {
         if($scope.selectedVariant.buyQuantity == null){
             $ionicPopup.alert({
-                title: 'Please enter a quantity',
-                template: 'Warning!!!',
+                title: 'Warning!',
+                template: 'Please enter a quantity',
                 cssClass: 'ionicPopUp',
                 buttons:[
                     {text:'OK',
@@ -293,12 +293,13 @@ angular.module('starter.controllers', [])
             sku: $scope.selectedVariant.sku,
             price: $scope.selectedVariant.price,
             total : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.price,
-            imgURL : $stateParams.item.tempImageArray
+            imgURL : $stateParams.item.tempImageArray,
+            totWeight : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.weight
 
         });
         $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
         $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-        $state.go('tab.cart');
+        $state.go('tab.category');
         }
     }
 

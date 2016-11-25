@@ -1,17 +1,17 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="{{foodInfo.name}}">
-    <ion-content class="padding">
+    <ion-content class="padding item-details">
         <div class="card">
             <div class="image-wrapper">
                 <ion-slide-box show-pager="false" >
                     <ion-slide ng-repeat="image in images">
-                        <img width="65%" ng-src="{{imageURL}}/{{image.img}}" >
+                        <img width="100%" ng-src="{{imageURL}}/{{image.img}}" >
                     </ion-slide>
                 </ion-slide-box>
 
             </div>
 
 
-            <div class="header-fonts" >
+            <div class="col align-center" >
                 <span class="made-easy-header-font">{{item.name}}</span>
             </div>
             <div class="description">

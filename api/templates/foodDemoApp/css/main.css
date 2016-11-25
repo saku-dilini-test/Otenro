@@ -39,7 +39,7 @@ a{
 }
 
 .made-easy-header-font{
-    color: #a46a2c;
+    color: #8eb5c2;
     font-family: sans-serif;
     font-weight: bolder;
     font-size:3vh;
@@ -63,11 +63,11 @@ a{
 
 /* ----- Button Font Settings ----- */
 .made-easy-button-setting{
-  border-color: #a46a2c;
+  border-color: #8eb5c2;
   background-color: #fff;
-  color:#a46a2c;
-  border-width:4px;
-  border-radius:15px;
+  color:#4e4e4e;
+  border-width:2px;
+  border-radius:4px;
   cursor: url(../img/cursor.cur), auto;
 }
 
