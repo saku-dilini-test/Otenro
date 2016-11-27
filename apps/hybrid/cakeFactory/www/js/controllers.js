@@ -12,6 +12,8 @@ angular.module('starter.controllers', [])
 
 .controller('CategoryProductsCtrl',
   function ($scope,SERVER_URL, $stateParams,categoryProductResources) {
+    $scope.OutOfDate = false;
+    $scope.isOutOfHours = false;
     $scope.SERVER_URL = SERVER_URL;
     $scope.categoryProducts = categoryProductResources.getProductsByCategory($stateParams.categoryCode)
       .success(function (data) {
@@ -25,6 +27,8 @@ angular.module('starter.controllers', [])
 .controller('ProductDetailCtrl',
   function ($scope,SERVER_URL,categoryProductResources, $stateParams,$state,$rootScope,DataService) {
     $scope.SERVER_URL = SERVER_URL;
+    $scope.OutOfDate = false;
+    $scope.isOutOfHours = false;
     $scope.paypalCart = DataService.cart;
     $scope.product =  categoryProductResources.productsDetails($stateParams.productId)
       .success(function (data) {
@@ -73,6 +77,7 @@ angular.module('starter.controllers', [])
 .controller('AboutCtrl', function ($scope) {})
 
 .controller('CartCtrl', function ($scope,$rootScope,DataService) {
+
     $scope.cartItems = $rootScope.cart.cartItems;
     $scope.paypalCart = DataService.cart;
 
@@ -304,6 +309,14 @@ angular.module('starter.controllers', [])
           }, 3000);
         }
 
+        $scope.master = {name:"" ,location:"", address:"",date:"",time:"",comment:"", contactNo:"" , email:"" , };
+        $scope.reset = function() {
+                $scope.delivery.contactNo = null;
+                $scope.OutOfDate = false;
+                $scope.isOutOfHours = false;
+                $scope.delivery = angular.copy($scope.master);
+         };
+        $scope.reset();
 
   })
   .controller('PickupCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService,$location,$timeout,ORDER_URL,ionicDatePicker,ionicTimePicker) {
@@ -448,6 +461,14 @@ angular.module('starter.controllers', [])
 
 
     }
+    $scope.master = {name:"" ,location:"", address:"",date:"",time:"",comment:"", contactNo:"" , email:"" , };
+    $scope.reset = function() {
+         $scope.pickup.contactNo = null;
+         $scope.OutOfDate = false;
+         $scope.OutOfHours = false;
+         $scope.pickup = angular.copy($scope.master);
+    };
+          $scope.reset();
 
   })
 

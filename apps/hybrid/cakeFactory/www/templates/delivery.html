@@ -1,7 +1,7 @@
 <ion-view view-title="The English Cake Company">
 	<ion-content class="padding">
 		<h1>Delivery</h1>
-		<form class="contact-form" name="contactForm" novalidate>
+		<form class="contact-form" id="myorm" name="contactForm" novalidate>
 			<div class="list">
 			  <label class="item item-input item-stacked-label">
 			    <span class="input-label" >Name</span>
@@ -85,7 +85,7 @@
         <span>{{delivery.usdAmountWithDeliveryFee | currency}}</span>
       </div>
 			<div class="text-align-right">
-	    	 	<a ui-sref="tab.cart" class="button button-buy">Back</a>
+	    	 	<a ui-sref="tab.cart" class="button button-buy"  ng-click="reset()">Back</a>
 	    	 	<a href="" class="button button-buy dark" ng-disabled="contactForm.$invalid" ng-click="payNow()">Pay</a>
       </div>
 		</form>
