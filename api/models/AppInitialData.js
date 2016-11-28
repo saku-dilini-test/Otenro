@@ -324,7 +324,7 @@ module.exports = {
           attribute : {
             "imageUrl": "shirt_x.png",
             "name": "Shirt",
-            "description": "Shirt description"
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
           },
           thirdNavi : [
             {
@@ -332,8 +332,8 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
-              "briefDesc" : "Shirt x brief des",
-              "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "imageUrl": "shirt_x.png",
               "tempImageArray" : [
                 {
@@ -355,8 +355,8 @@ module.exports = {
               "price": 350,
               "quantity": 350,
               "selection" : "Size",
-              "briefDesc" : "Shirt y brief des",
-              "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
                 {
                   "img" : "shirt_y.png"
@@ -378,8 +378,8 @@ module.exports = {
               "price": 450,
               "quantity": 450,
               "selection" : "Size",
-              "briefDesc" : "Shirt z brief des",
-              "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
                 {
                   "img" : "shirt_z.png"
@@ -402,7 +402,7 @@ module.exports = {
           attribute : {
             "imageUrl": "short_x.png",
             "name": "Short",
-            "description": "Short description"
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
           },
           thirdNavi : [
             {
@@ -410,8 +410,8 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
-              "briefDesc" : "Short x brief des",
-              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "SLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
                 {
                   "img" : "short_x.png"
@@ -451,7 +451,7 @@ module.exports = {
           attribute : {
             "imageUrl": "cloth3.png",
             "name": "Suits",
-            "description": "Short description"
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
           },
           thirdNavi : [
             {
@@ -459,8 +459,8 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
-              "briefDesc" : "Short x brief des",
-              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
                 {
                   "img" : "cloth3.png"
@@ -712,7 +712,7 @@ module.exports = {
           attribute : {
             "name": "Large Pizza",
             "imageUrl": "category_01.png",
-            "description": "Shirt description"
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
           },
           thirdNavi : [
             {
@@ -734,8 +734,8 @@ module.exports = {
                 'quantity': 250
               }],
               "imageUrl": "1.jpg",
-              "briefDesc" : "Masala brief des",
-              "detailedDesc" : "Masala Pizza, details description. details description",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "createdDate": Date.now()
             },
             {
@@ -757,8 +757,8 @@ module.exports = {
                 'quantity': 100
               }],
               "imageUrl": "2.jpg",
-              "briefDesc" : "New Pizza brief des",
-              "detailedDesc" : "New Pizza, details description. details description",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "createdDate": Date.now()
             }
 
@@ -768,7 +768,7 @@ module.exports = {
           attribute : {
             "name": "Indian Pizza",
             "imageUrl": "category_02.png",
-            "description": "Shirt description"
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
           },
           thirdNavi : [
             {
@@ -790,8 +790,8 @@ module.exports = {
                 'quantity': 100
               }],
               "imageUrl": "3.jpg",
-              "briefDesc" : "Indian brief des",
-              "detailedDesc" : "Indian Pizza, details description. details description",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "createdDate": Date.now()
             },
             {
@@ -813,8 +813,8 @@ module.exports = {
                 'quantity': 15
               }],
               "imageUrl": "4.jpg",
-              "briefDesc" : "New Pizza brief des",
-              "detailedDesc" : "New Pizza, details description. details description",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "createdDate": Date.now()
             }
 
