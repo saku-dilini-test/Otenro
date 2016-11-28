@@ -47,9 +47,7 @@
 
         <label class="item">
           <span class="pickupDeliveryInfo ">Select Date and Time for Pickup</span>
-          <div class="pickupDeliveryInfo">Pick up is available from 8:00 am to 9:00 pm everyday</div>
-
-          <label class="pickupDeliveryInfo " style="width: 100%">Pick Up Time * : {{ pickup.pickTime}}</label>
+          <div class="pickupDeliveryInfo">Pick up is available from <span><br>8:00 am to 9:00 pm everyday</span></div>
         <label class=" item-input item-stacked-label" ng-click="openDatePicker()">
           <span class="input-label">Pick Up Date</span>
           <input ng-disabled="true" class="pickup-disable" type="text" placeholder="DD - MM - YYYY" name="customerPickupDate" ng-model="pickup.date" required>
