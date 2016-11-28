@@ -206,6 +206,9 @@ angular.module('starter.controllers', [])
           console.log(currentDate);
           console.log(currentDate = currentDate + 40000000000)
           ionicDatePicker.openDatePicker(ipObj1);
+          $scope.delivery.time = null;
+          $scope.OutOfDate = false;
+          $scope.isOutOfHours = false;
         };
 
 
@@ -367,6 +370,9 @@ angular.module('starter.controllers', [])
       console.log("currentDate = " + currentDate);
       console.log(currentDate = currentDate + 40000000000)
       ionicDatePicker.openDatePicker(ipObj1);
+      $scope.pickup.time = null;
+      $scope.OutOfDate = false;
+      $scope.OutOfHours = false;
 
     };
 
