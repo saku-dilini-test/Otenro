@@ -131,7 +131,7 @@ table {
 
 .items-table td{
     color: #5d3a23;
-    font-style: inherit;
+
 }
 
 .button.button-buy {
@@ -359,4 +359,8 @@ input[type="color"]{
   color: #beac7c;
   font-size: 15px;
 
+}
+
+.pre{
+  white-space: pre-wrap !important;
 }
