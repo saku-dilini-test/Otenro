@@ -234,34 +234,39 @@ angular.module('starter.controllers', [])
                console.log("selectedMonth = "+ selectedMonth );*/
 
 
-                  if((val > 72000) || (val < 36000)){
-                    console.log("select another time");
-                    $scope.isOutOfHours = true;
-
-                  }else if((val < CurrentDate) & (Crntday == selectDate)& (Crntmonth == selectedMonth) & (CrntYear == selectYear)){
-                    console.log("select time again");
-                    $scope.OutOfDate = true;
-                  }
-
-                  else{
-                   $scope.OutOfDate = false;
-                  $scope.isOutOfHours = false;
-                  var deliveryTime = formatAMPM(selectedTime);
-                  $scope.delivery.time = deliveryTime;
-                  console.log(deliveryTime);
 
 
-                      function formatAMPM(date) {
-                        var hours = date.getUTCHours();
-                        var minutes = date.getUTCMinutes();
-                        var ampm = hours >= 12 ? 'PM' : 'AM';
-                        hours = hours % 12;
-                        hours = hours ? hours : 12; // the hour '0' should be '12'
-                        minutes = minutes < 10 ? '0'+minutes : minutes;
-                        var strTime = hours + ':' + minutes + ' ' + ampm;
-                        return strTime;
-                        }
-                  }
+
+              $scope.delivery.time = null;
+              $scope.OutOfDate = false;
+              $scope.isOutOfHours = false;
+              var deliveryTime = formatAMPM(selectedTime);
+              $scope.delivery.time = deliveryTime;
+              console.log(deliveryTime);
+
+
+              function formatAMPM(date) {
+                 var hours = date.getUTCHours();
+                 var minutes = date.getUTCMinutes();
+                 var ampm = hours >= 12 ? 'PM' : 'AM';
+                 hours = hours % 12;
+                 hours = hours ? hours : 12; // the hour '0' should be '12'
+                 minutes = minutes < 10 ? '0'+minutes : minutes;
+                 var strTime = hours + ':' + minutes + ' ' + ampm;
+                 return strTime;
+              }
+
+               if((val > 72000) || (val < 36000)){
+
+                  console.log("select another time");
+                  $scope.isOutOfHours = true;
+
+               }else if((val < CurrentDate) & (Crntday == selectDate)& (Crntmonth == selectedMonth) & (CrntYear == selectYear)){
+                   console.log("select time again");
+                   $scope.OutOfDate = true;
+               }
+
+
               }
           },
           //var seconds = new Date().getTime() / 1000;
@@ -315,8 +320,8 @@ angular.module('starter.controllers', [])
                 $scope.OutOfDate = false;
                 $scope.isOutOfHours = false;
                 $scope.delivery = angular.copy($scope.master);
-         };
-        $scope.reset();
+            };
+           $scope.reset();
 
   })
   .controller('PickupCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService,$location,$timeout,ORDER_URL,ionicDatePicker,ionicTimePicker) {
@@ -382,7 +387,7 @@ angular.module('starter.controllers', [])
              var CurrentDate = Crnthour + Crntminuts;
              var selectedTime = new Date(val * 1000);
              //console.log("val =" + val);
-             $scope.OutOfHours = false;
+
 
              /*console.log("Crntday = "+ Crntday );
              console.log("selectDate = "+ selectDate );
@@ -390,33 +395,35 @@ angular.module('starter.controllers', [])
              console.log("selectYear = "+ selectYear );
              console.log("Crntmonth = "+ Crntmonth );
              console.log("selectedMonth = "+ selectedMonth );*/
-                if((val > 75600) || (val < 28800)){
-                    console.log("select time again");
-                    $scope.OutOfHours = true;
 
-                }else if((val < CurrentDate) & (Crntday == selectDate)& (Crntmonth == selectedMonth) & (CrntYear == selectYear)){
-                    console.log("select time again");
-                    $scope.OutOfDate = true;
-                }
-                else{
-                     $scope.OutOfDate = false;
-                     $scope.OutOfHours = false;
-                     var pickTime = formatAMPM(selectedTime);
-                     $scope.pickup.time = pickTime;
-                     console.log(pickTime);
+             $scope.OutOfDate = false;
+             $scope.OutOfHours = false;
+             var pickTime = formatAMPM(selectedTime);
+             $scope.pickup.time = pickTime;
+             console.log(pickTime);
 
-                     function formatAMPM(date) {
-                        var hours = date.getUTCHours();
-                        var minutes = date.getUTCMinutes();
-                        var ampm = hours >= 12 ? 'PM' : 'AM';
-                        hours = hours % 12;
-                        hours = hours ? hours : 12; // the hour '0' should be '12'
-                        minutes = minutes < 10 ? '0'+minutes : minutes;
-                        var strTime = hours + ':' + minutes + ' ' + ampm;
-                        return strTime;
-                     }
+             function formatAMPM(date) {
+                var hours = date.getUTCHours();
+                var minutes = date.getUTCMinutes();
+                var ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                minutes = minutes < 10 ? '0'+minutes : minutes;
+                var strTime = hours + ':' + minutes + ' ' + ampm;
+                return strTime;
 
-                }
+             }
+
+             if((val > 75600) || (val < 28800)){
+                 console.log("select time again");
+                 $scope.OutOfHours = true;
+
+
+             }else if((val < CurrentDate) & (Crntday == selectDate)& (Crntmonth == selectedMonth) & (CrntYear == selectYear)){
+                 console.log("select time again");
+                 $scope.OutOfDate = true;
+
+             }
           }
         },
 
@@ -462,13 +469,13 @@ angular.module('starter.controllers', [])
 
     }
     $scope.master = {name:"" ,location:"", address:"",date:"",time:"",comment:"", contactNo:"" , email:"" , };
-    $scope.reset = function() {
-         $scope.pickup.contactNo = null;
-         $scope.OutOfDate = false;
-         $scope.OutOfHours = false;
-         $scope.pickup = angular.copy($scope.master);
-    };
-          $scope.reset();
+            $scope.reset = function() {
+                    $scope.pickup.contactNo = null;
+                    $scope.OutOfDate = false;
+                    $scope.OutOfHours = false;
+                    $scope.pickup = angular.copy($scope.master);
+                };
+               $scope.reset();
 
   })
 

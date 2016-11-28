@@ -80,7 +80,7 @@
 			</div>
 			<div class="text-align-right">
 	    	 	<a ui-sref="tab.cart" class="button button-buy" ng-click="reset()">Back</a>
-	    	 	<a href="" class="button button-buy dark" ng-disabled="customerPickupForm.$invalid" ng-click="payNow()">Pay</a>
+	    	 	<a href="" class="button button-buy dark" ng-disabled="customerPickupForm.$invalid || OutOfHours == true || OutOfDate == true" ng-click="payNow()">Pay</a>
 	    	</div>
 		</form>
 	</ion-content>
