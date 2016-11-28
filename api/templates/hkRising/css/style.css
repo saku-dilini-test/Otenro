@@ -162,9 +162,7 @@ ion-item {
 
 .bar .title {
     cursor: url(../img/cursor.cur), auto;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
+    text-transform: capitalize;
 }
 
 .col {
@@ -248,9 +246,7 @@ ol {
     display:block;
     padding:16px 49px 20px 16px;
 }
-.custom-navigation .menu .scroll-content{
-    top:25%;
-}
+
 
 .custom-navigation ion-item .activated{
     background-color:#000 !important;

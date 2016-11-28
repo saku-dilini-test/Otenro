@@ -260,6 +260,16 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     }
                 }
             })
+            .state('tab.orderHistory', {
+                cache: false,
+                url: '/orderHistory',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/orderHistory.html',
+                        controller: 'orderHistoryCtrl'
+                    }
+                }
+            })
             .state('tab.terms', {
                 cache: false,
                 url: '/terms',

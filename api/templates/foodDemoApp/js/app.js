@@ -205,7 +205,17 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
               }
           }
       })
-  .state('app.category', {
+      .state('app.orderHistory', {
+            cache: false,
+            url: '/orderHistory',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/orderHistory.html',
+                    controller: 'orderHistoryCtrl'
+                }
+            }
+        })
+     .state('app.category', {
           cache: false,
           url: '/category',
           views: {

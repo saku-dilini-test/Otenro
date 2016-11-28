@@ -99,6 +99,9 @@ ion-slides {
     width:100%;
     text-align:center;
 }
+.image-wrapper img{
+    width:100%;
+}
 
 .header-fonts {
     text-align: center;
