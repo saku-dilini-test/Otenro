@@ -131,6 +131,7 @@ table {
 
 .items-table td{
     color: #5d3a23;
+    font-style: inherit;
 }
 
 .button.button-buy {
