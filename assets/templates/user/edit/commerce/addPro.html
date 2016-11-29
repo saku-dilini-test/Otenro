@@ -216,17 +216,35 @@
 
                                 </td>
                                 <td>
+
                                     <md-input-container class="md-container-modify">
-                                        <input id ='weight_{{$index}}'  type="text" name="weight_{{$index}}" min="1"
+                                        <input id ='weight_{{$index}}'    type="number" name="weight_{{$index}}" min="0"
                                                aria-label="Weight"
-                                               ng-pattern="/^\w+/" maxlength="8" ng-model="data.weight"
-                                               ng-required="data.unlimited == false" ignore-mouse-wheel >
-                                        <div ng-messages="priceAndVariantsForm['weight_' + $index].$error"
-                                             ng-show="priceAndVariantsForm['weight_' + $index].$dirty">
-                                            <div ng-message="pattern">Invalid weight</div>
+                                               min="0.00" name="price_{{$index}}" ng-pattern="/^\w+/" maxlength="8"
+                                               ng-model="data.weight" required ignore-mouse-wheel>
+                                        <div ng-messages="priceAndVariantsForm['weight' + $index].$error"
+                                             ng-show="priceAndVariantsForm['weight' + $index].$dirty">
+                                            <div ng-message="pattern">Invalid Weight</div>
                                             <div ng-message="required" class="my-message">Required!</div>
                                         </div>
+
                                     </md-input-container>
+
+                                    <!--<md-input-container class="md-container-modify">-->
+                                        <!--<input id ='weight_{{$index}}'  type="text" name="weight_{{$index}}" min="1"-->
+                                               <!--aria-label="Weight"-->
+                                               <!--ng-pattern="/^\w+/" maxlength="8" ng-model="data.weight"-->
+                                               <!--ng-required="data.unlimited == false" ignore-mouse-wheel >-->
+                                        <!--<div ng-messages="priceAndVariantsForm['weight_' + $index].$error"-->
+                                             <!--ng-show="priceAndVariantsForm['weight_' + $index].$dirty">-->
+                                            <!--<div ng-message="pattern">Invalid weight</div>-->
+                                            <!--<div ng-message="required" class="my-message">Required!</div>-->
+                                        <!--</div>-->
+                                    <!--</md-input-container>-->
+
+
+
+
                                 </td>
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
                                 <td>
@@ -297,7 +315,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep3Digital(3,product,variants)">Next
+                            <md-button class="me-default-button" ng-click="nextStep3Digital(3,product,variants,weight)">Next
                             </md-button>
                         </div>
                     </div>

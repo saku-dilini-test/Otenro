@@ -534,7 +534,7 @@
                               variants.sku = null;
 
                           }
-                          toastr.error('don’t we need one for this or are u ok whats there?', 'Warning', {
+                          toastr.error('Can not add duplicate values', 'Warning', 'Warning', {
                               closeButton: true
                           });
                       }
