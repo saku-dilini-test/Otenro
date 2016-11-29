@@ -299,7 +299,7 @@ angular.module('starter.controllers', [])
         });
         $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
         $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-        $state.go('tab.category');
+        $state.go('tab.menu');
         }
     }
 

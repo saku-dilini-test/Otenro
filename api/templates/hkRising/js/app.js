@@ -158,6 +158,16 @@ angular.module('starter', ['ionic','ionic.cloud','ionicLazyLoad','starter.servic
               }
             }
           })
+          .state('app.category', {
+            cache: false,
+            url: '/category',
+            views: {
+              'menuContent': {
+                templateUrl: 'templates/category.html',
+                controller: 'HomeCtrl'
+              }
+            }
+          })
           .state('app.articleView', {
             cache: false,
             url: '/articleView/:articleId',
@@ -180,5 +190,5 @@ angular.module('starter', ['ionic','ionic.cloud','ionicLazyLoad','starter.servic
           });
 
       // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/app/home/firstMenu');
+      $urlRouterProvider.otherwise('/app/category');
     });

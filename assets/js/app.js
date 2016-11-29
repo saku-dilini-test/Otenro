@@ -45,10 +45,10 @@ angular.module('app', [
   'ui.grid.exporter',
   'angular-bind-html-compile',
   'ngCsv',
-  'ngImgCrop',
   'angular-loading-bar',
   'disableAll',
-  'textAngular'
+  'textAngular',
+  'ngImgCrop'
 
 
 ]).run(function($rootScope, $state, $auth,Auth,Permission) {
