@@ -102,14 +102,11 @@ module.exports = {
             function(err, data) {
 
                 if(!data || err ){
-                    console.log("err");
-                    console.log(err);
                     fs.copy(srcPath, copyDirPath, function (err) {
                         if (err) return res.negotiate(err);
                         //Success
                         var packageJsonFile = copyDirPath + 'package.json',
-                                        jsonFile = require(packageJsonFile);
-                                        console.log(packageJsonFile);
+                            jsonFile = require(packageJsonFile);
                         IPGDetails.findOne({appId:appId}).exec(function(err,stripe){
                             if(err){
                                 sails.log.info(err);
@@ -123,7 +120,6 @@ module.exports = {
                                             }
                                             else{
                                                 var json = JSON.parse(data);
-                                                console.log(JSON.stringify(jsonFile,null, 2));
                                                 jsonFile.cordovaPlugins[6].variables.API_KEY = stripe.stripeKey;
                                                 fs.writeFile(packageJsonFile, JSON.stringify(jsonFile,null, 2), function (err) {
                                                     if(err){
@@ -143,7 +139,6 @@ module.exports = {
                         var removeDirArray = ['www'];
                         for (var i = 0; i < removeDirArray.length; i++) {
                             var removeDirPath = copyDirPath + removeDirArray[i] + '/';
-                            console.log("removeDirPath " + removeDirPath) ;
                             fs.remove(removeDirPath, function (err) {
                                 if (err) return res.negotiate(err);
 
