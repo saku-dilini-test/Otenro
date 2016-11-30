@@ -8,6 +8,8 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
     $scope.shippingCost = $stateParams.item.shippingCost;
+    $scope.overWeight = $stateParams.item.overWeight;
+    $scope.underWeight = $stateParams.item.underWeight;
     $scope.totalQuantity = $rootScope.cart.totalQuantity;
     $scope.hideShipping = true;
     if(typeof $scope.shippingCost == 'undefined'){
