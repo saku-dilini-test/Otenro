@@ -27,7 +27,8 @@ module.exports = {
           attribute : {
             "imageUrl": "pasta-salad.jpg",
             "name": "Salads",
-            "description": "Salads description"
+            "description": "Salads description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -41,6 +42,7 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -64,6 +66,7 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -102,7 +105,8 @@ module.exports = {
           attribute: {
             "imageUrl": "crpes.jpg",
             "name": "Deserts",
-            "description": "Deserts description"
+            "description": "Deserts description",
+            "enteredBy":"demo"
           },
           thirdNavi: [
             {
@@ -116,6 +120,7 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -174,7 +179,8 @@ module.exports = {
           attribute : {
             "imageUrl": "how-to-grill-fish.jpg",
             "name": "Stakes",
-            "description": "Beverages description"
+            "description": "Beverages description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -188,6 +194,7 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -211,6 +218,7 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -234,6 +242,7 @@ module.exports = {
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -251,6 +260,7 @@ module.exports = {
               "price": 400,
               "quantity": 400,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Pina Colada",
               "detailedDesc" : "Pina Colada details description. Pina Colada details",
               "tempImageArray" : [
@@ -324,7 +334,8 @@ module.exports = {
           attribute : {
             "imageUrl": "shirt_x.png",
             "name": "Shirt",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -332,6 +343,7 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "imageUrl": "shirt_x.png",
@@ -355,6 +367,7 @@ module.exports = {
               "price": 350,
               "quantity": 350,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
@@ -378,6 +391,7 @@ module.exports = {
               "price": 450,
               "quantity": 450,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
@@ -402,7 +416,8 @@ module.exports = {
           attribute : {
             "imageUrl": "short_x.png",
             "name": "Short",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -410,6 +425,7 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "SLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
@@ -451,7 +467,8 @@ module.exports = {
           attribute : {
             "imageUrl": "cloth3.png",
             "name": "Suits",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -459,6 +476,7 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
@@ -488,7 +506,8 @@ module.exports = {
           attribute : {
             "imageUrl": "a.png",
             "name": "Women Shoes",
-            "description": "Shirt description"
+            "description": "Shirt description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -496,6 +515,7 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt x brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -519,6 +539,7 @@ module.exports = {
               "price": 350,
               "quantity": 350,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt y brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -542,6 +563,7 @@ module.exports = {
               "price": 450,
               "quantity": 450,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt z brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -565,7 +587,8 @@ module.exports = {
           attribute : {
             "imageUrl": "c.png",
             "name": "Men Shirts",
-            "description": "Shirt description"
+            "description": "Shirt description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -573,6 +596,7 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt x brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -596,6 +620,7 @@ module.exports = {
               "price": 350,
               "quantity": 350,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt y brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -619,6 +644,7 @@ module.exports = {
               "price": 450,
               "quantity": 450,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt z brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -643,7 +669,8 @@ module.exports = {
           attribute : {
             "imageUrl": "d.png",
             "name": "Men Shoes",
-            "description": "Short description"
+            "description": "Short description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -651,6 +678,7 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -675,7 +703,8 @@ module.exports = {
           attribute : {
             "imageUrl": "cloth3.png",
             "name": "Accessories",
-            "description": "Short description"
+            "description": "Short description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -683,6 +712,7 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -712,7 +742,8 @@ module.exports = {
           attribute : {
             "name": "Large Pizza",
             "imageUrl": "category_01.png",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -720,6 +751,7 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "tempImageArray" : [
                 {
                   "img" : "1.jpg"
@@ -743,6 +775,7 @@ module.exports = {
               "price" : 300,
               "quantity" : 100,
               "selection" : "Size",
+              "enteredBy":"demo",
               "tempImageArray" : [
                 {
                   "img" : "2.jpg"
@@ -768,7 +801,8 @@ module.exports = {
           attribute : {
             "name": "Indian Pizza",
             "imageUrl": "category_02.png",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -776,6 +810,7 @@ module.exports = {
               "price": 350,
               "quantity": 100,
               "selection" : "Size",
+              "enteredBy":"demo",
               "tempImageArray" : [
                 {
                   "img" : "3.jpg"
@@ -799,6 +834,7 @@ module.exports = {
               "price" : 225,
               "quantity" : 15,
               "selection" : "Size",
+              "enteredBy":"demo",
               "tempImageArray" : [
                 {
                   "img" : "4.jpg"
@@ -828,6 +864,7 @@ module.exports = {
         attribute : {
           "name": "Attractions",
           "imageUrl":"star ferry.png",
+          "enteredBy":"demo"
         },
         article : [
           {
@@ -846,6 +883,7 @@ module.exports = {
             "Reservations: recommended",
             "imageUrl":"oceanpark.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": " The Peak",
@@ -863,6 +901,7 @@ module.exports = {
             "Payment type: credit cards accepted",
             "imageUrl":"thepeak.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": "Temple Street night market",
@@ -877,6 +916,7 @@ module.exports = {
             "MTR Jordan Station, Exit A. Turn right onto Jordan Road and then take another right onto Temple Street.",
             "imageUrl":"1881heritage.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": "Star Ferry",
@@ -894,6 +934,7 @@ module.exports = {
             "Payment type: credit cards not accepted",
             "imageUrl":"starferry.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": "Aqua Luna harbour cruises",
@@ -912,6 +953,7 @@ module.exports = {
             "Reservations: essential",
             "imageUrl":"aqua_luna.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": " Hong Kong Museum of History",
@@ -928,6 +970,7 @@ module.exports = {
             "Reservations: Not possible",
             "imageUrl":"historymusium.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
 
 
@@ -938,6 +981,7 @@ module.exports = {
           attribute : {
             "name": "Shopping",
             "imageUrl":"apliu street flee market.png",
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -949,6 +993,7 @@ module.exports = {
               "Getting there: MTR Mong Kok Station, Exit D3. Walk along Argyle Street to Fa Yuen Street.",
               "imageUrl":"sneakerstreet.png",
               "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "Apliu Street Flea Market (Electronics)",
@@ -957,6 +1002,7 @@ module.exports = {
               " Getting there: MTR Sham Shui Po Station, Exit C2",
               "imageUrl":"apliustreetfleemarket.png",
               "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "City Plaza",
@@ -968,6 +1014,7 @@ module.exports = {
               "Getting there: MTR Tai Koo Station and take the Cityplaza exit",
               "imageUrl":"cityplaza.png",
               "categoryId":"0",
+              "enteredBy":"demo"
             }
 
           ]
@@ -976,6 +1023,7 @@ module.exports = {
           attribute : {
             "name": "Historical sites",
             "imageUrl":"1881 heritage.png",
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -991,6 +1039,7 @@ module.exports = {
               "turn right, take subway (pedestrian tunnel) next to YMCA to 1881 Heritage.",
               "imageUrl":"1881heritage.png",
               "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "Clock Tower",
@@ -1010,6 +1059,7 @@ module.exports = {
               "YMCA to the Hong Kong Cultural Centre. Turn right again and walk straight ahead towards the waterfront",
               "imageUrl":"apliustreetfleemarket.png",
               "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         }
@@ -1021,14 +1071,16 @@ module.exports = {
       articleCategory : [{
         attribute : {
           "name": "FEATURED CATEGORY",
-          "imageUrl" : 'CatImg_00001.jpg'
+          "imageUrl" : 'CatImg_00001.jpg',
+          "enteredBy":"demo"
         },
         article : [
           {
             "title": "Ocean Park",
             "desc": "Ocean park opened in 1977, is a ",
             "imageUrl":"Article_00001.jpg",
-            "categoryId":"0"
+            "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": "Clock Tower",
@@ -1037,14 +1089,16 @@ module.exports = {
             "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
             "Built out of red bricks and granite",
             "imageUrl":"Article_00003.jpg",
-            "categoryId":"0"
+            "categoryId":"0",
+            "enteredBy":"demo"
           }
         ]
       },
         {
           attribute : {
             "name": "FASHION",
-            "imageUrl" : 'CatImg_00002.jpg'
+            "imageUrl" : 'CatImg_00002.jpg',
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -1053,14 +1107,16 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite",
               "imageUrl":"Article_00002.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         },
         {
           attribute : {
             "name": "SCIENCE",
-            "imageUrl" : 'CatImg_00003.jpg'
+            "imageUrl" : 'CatImg_00003.jpg',
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -1069,14 +1125,16 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite",
               "imageUrl":"Article_00003.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         },
         {
           attribute : {
             "name": "Auto",
-            "imageUrl" : 'CatImg_00004.jpg'
+            "imageUrl" : 'CatImg_00004.jpg',
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -1085,7 +1143,8 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite ",
               "imageUrl":"Article_00004.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "1881 Heritage",
@@ -1093,14 +1152,16 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite",
               "imageUrl":"Article_00003.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         },
         {
           attribute : {
             "name": "Environement",
-            "imageUrl" : 'CatImg_00005.jpg'
+            "imageUrl" : 'CatImg_00005.jpg',
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -1109,7 +1170,8 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite ",
               "imageUrl":"Article_00005.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "1881 Heritage",
@@ -1117,14 +1179,16 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite",
               "imageUrl":"Article_00005.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         },
         {
           attribute : {
             "name": "Sport",
-            "imageUrl" : 'CatImg_00006.jpg'
+            "imageUrl" : 'CatImg_00006.jpg',
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -1133,7 +1197,8 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite ",
               "imageUrl":"Article_00006.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "1881 Heritage",
@@ -1141,7 +1206,8 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite",
               "imageUrl":"Article_00006.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         }

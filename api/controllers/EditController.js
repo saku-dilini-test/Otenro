@@ -76,6 +76,42 @@ module.exports = {
 
     },
 
+    deleteDefaultData : function(req,res){
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId,
+            enteredBy:'demo'
+        };
+        console.log(searchApp);
+        SecondNavigation.destroy(searchApp).exec(function (err, app) {
+            if (err) {return res.negotiate(err);}
+            else {
+                ThirdNavigation.destroy(searchApp).exec(function (err, app) {
+                    if (err) return res.negotiate(err);
+                    else {
+
+                    }
+                });
+            }
+        });
+        ArticleCategory.destroy(searchApp).exec(function (err, app) {
+            if (err) {return res.negotiate(err);}
+            else {
+                Article.destroy(searchApp).exec(function (err, app) {
+                    if (err) return res.negotiate(err);
+                    else {
+
+                    }
+                });
+            }
+        });
+        res.send({
+            appId: appId,
+            message: "All data Removed"
+        });
+
+    },
+
     viewImages : function(req,res){
         res.sendfile(config.ME_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
     },
