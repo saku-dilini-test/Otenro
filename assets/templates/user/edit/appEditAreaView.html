@@ -58,22 +58,12 @@
                                 <div ng-if="isApplyStyle.color.navigationColor">
                                     <h1>Navigation</h1>
                                     <div class="color-setting">
-                                        <button class="color-picker-button pull-left"
-                                                colorpicker="rgba"
-                                                colorpicker-parent="true"
-                                                ng-model="navigationBarColor"  type="text"
-                                                style="background-color: {{navigationBarColor}}; color: {{navigationBarColor}};" >
-                                        </button>
                                         <div class="color-section">Navigation background Color</div><br>
+                                        <input colorpicker="hex" ng-model="navigationBarColor" type="text">
                                     </div><br>
                                     <div class="color-setting">
-                                        <button class="color-picker-button pull-left"
-                                                colorpicker="hex"
-                                                colorpicker-parent="true"
-                                                ng-model="navigationBarFontColor"  type="text"
-                                                style="background-color: {{navigationBarFontColor}}; color: {{navigationBarFontColor}};" >
-                                        </button>
                                         <div class="color-section">Navigation Font Color</div>
+                                        <input colorpicker="hex" ng-model="navigationBarFontColor" type="text">
                                     </div>
                                     <br>
                                 </div>
