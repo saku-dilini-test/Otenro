@@ -2,9 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService','productService', '$rootScope', '$auth', 'SERVER_URL','initialData',
-        ProductCtrl]);
+        'mainMenuService', ProductCtrl]);
 
-    function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService, $rootScope,  $auth, SERVER_URL,initialData) {
+    function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService, $rootScope,  $auth, SERVER_URL,initialData,
+    mainMenuService) {
         var size, weight;
         var variants;
 
@@ -681,7 +682,10 @@
             }
         }
 
-
+        $scope.newcategory = function(){
+            console.log("innnnnnnnnnnn");
+            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
+        }
 
 
 
