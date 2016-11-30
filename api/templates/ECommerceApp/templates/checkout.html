@@ -39,17 +39,16 @@
                     <div class="col" ng-model="total" >{{currency}}{{totalPrice}}</div>
                 </div>
             </div>
-
+            
             <div>
                 <!--Change the error messages accordingly-->
                 <div ng-if="overWeight">Over weight. Cannot ship</div>
                 <div ng-if="underWeight">Under weight. Cannot ship</div>
             </div>
 
-            <div class="row cart-buttons">
-                <button class="button button-block button-small made-easy-button-setting"  >Cancel</button>
-                <button class="button button-block button-small made-easy-button-setting" ng-disabled="overWeight || underWeight"
-                        ng-click="pay()" >Pay</button>
+            <div class="row ">
+                <button class="col margin button button-block button-small made-easy-button-setting"  >Cancel</button>
+                <button class="col margin button button-block button-small made-easy-button-setting" ng-click="pay()" >Pay</button>
             </div>
         </div>
     </ion-content>

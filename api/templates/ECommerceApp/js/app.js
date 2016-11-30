@@ -140,16 +140,6 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     }
                 }
             })
-            .state('tab.home', {
-                cache: false,
-                url: '/home',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/tab-home.html',
-                        controller: 'HomeCtrl'
-                    }
-                }
-            })
             .state('tab.menu', {
                 cache: false,
                 url: '/menu',
@@ -218,15 +208,6 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     'menuContent': {
                         templateUrl: 'templates/pickup.html',
                         controller: 'pickupCtrl'
-                    }
-                }
-            })
-            .state('tab.ourStores', {
-                url: '/ourStores',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/tab-ourStores.html',
-                        controller: 'OurStoresCtrl'
                     }
                 }
             })
