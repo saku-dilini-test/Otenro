@@ -22,10 +22,11 @@
 
         <label class="item item-input item-stacked-label">
           <span class="input-label">Email</span>
-          <input  name="deliveryEmail" type="email" ng-model="delivery.email" required>
+          <input  name="deliveryEmail" type="email" ng-model="delivery.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                   required>
           <span class="error-messages"
-                ng-if="contactForm.deliveryEmail.$dirty">
-                                    <span class="error-messages" ng-show="contactForm.deliveryEmail.$error.email">Not a valid email address.</span>
+                ng-if="contactForm.deliveryEmail.$dirty && contactForm.deliveryEmail.$invalid">
+                                    <span class="error-messages" ng-show="contactForm.deliveryEmail.$dirty && contactForm.deliveryEmail.$invalid">Not a valid email address.</span>
                                 </span>
 
         </label>
@@ -34,7 +35,8 @@
           <div class="input-label">
             Delivery Location
           </div>
-          <select required ng-model="delivery.location" ng-change="addDeliveryFee(delivery.location.deliveryCharge)"
+
+          <select required ng-model="delivery.location" class="deliveryLocation" ng-change="addDeliveryFee(delivery.location.deliveryCharge)"
                   ng-options="location as
                   location.locationName +' Rs '+location.deliveryCharge
                   for location in deliveryLocations">

@@ -364,3 +364,6 @@ input[type="color"]{
 .pre{
   white-space: pre-wrap !important;
 }
+.deliveryLocation{
+max-width: 55% !important;
+}

@@ -112,10 +112,17 @@ angular.module('starter.controllers', [])
     }
 
     $scope.submitContactForm = function(file,data) {
+    console.log("select image " + file)
+    console.log("a" + data.name)
+    console.log("a" + data.email)
+    console.log("a" +data.title)
+    console.log("a" +data.msg)
       if(file != ''){
-        var reqData = {name : data.name,email : data.email,title : data.title,msg : data.msg,
-          imageUrl : 'image.jpg'
-        };
+        var reqData = {name:data.name ,email:data.email, title:data.title, msg:data.msg, imageUrl:'image.jpg' }
+        console.log("aa" + reqData.name);
+        console.log("aa" + reqData.imageUrl)
+
+        //reqData['imageUrl'] = $scope.selectImage;
         var options = {
           fileKey: "file",
           fileName: "ionic.png",
@@ -123,7 +130,8 @@ angular.module('starter.controllers', [])
           mimeType: "image/png",
           params : reqData
         };
-        $cordovaFileTransfer.upload(SERVER_URL+'contactUs/create', file , options).then(function(result) {
+
+        $cordovaFileTransfer.upload(SERVER_URL+'contactUs/create', file , options , true).then(function(result) {
           $timeout( function(){
             $scope.contact.name = '';
             $scope.contact.email = '';

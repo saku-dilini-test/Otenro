@@ -9,7 +9,12 @@
 			  </label>
 			  <label class="item item-input item-stacked-label">
 			    <span class="input-label">Email</span>
-			    <input type="email" name="contactForm.email" ng-model="contact.email" placeholder="john@gmail.com" required>
+			    <input type="email" name="email" ng-model="contact.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                 placeholder="john@gmail.com" required>
+          <span class="error-messages"
+                ng-if="contactForm.email.$dirty && contactForm.email.$invalid">
+                                    <span class="error-messages" ng-show="contactForm.email.$dirty && contactForm.email.$invalid">Not a valid email address.</span>
+                                </span>
 			  </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label">Title</span>
