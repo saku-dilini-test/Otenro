@@ -2,9 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService','productService', '$rootScope', '$auth', 'SERVER_URL','initialData',
-        ProductCtrl]);
+        'mainMenuService', ProductCtrl]);
 
-    function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService, $rootScope,  $auth, SERVER_URL,initialData) {
+    function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService, $rootScope,  $auth, SERVER_URL,initialData,
+    mainMenuService) {
         var size, weight;
         var variants;
 
@@ -460,6 +461,29 @@
                   });
               }
         };
+        /**
+        * @description
+        * check if the sku already exist
+        * @param selectedType
+        *
+        *
+        */
+        $scope.checkValidity = function(sku){
+            $scope.exist = false;
+            var skuData = {
+                userId: $auth.getPayload().id,
+                appId: $rootScope.appId,
+                sku: sku
+            }
+            commerceService.checkUniqueSku(skuData)
+            .success(function(result){
+                if(result == 'true'){
+                    $scope.exist = true;
+                }
+            }).error(function (error) {
+                console.log(error);
+            })
+        }
 
 
 
@@ -511,7 +535,7 @@
                               variants.sku = null;
 
                           }
-                          toastr.error('don’t we need one for this or are u ok whats there?', 'Warning', {
+                          toastr.error('Can not add duplicate values', 'Warning', 'Warning', {
                               closeButton: true
                           });
                       }
@@ -658,7 +682,10 @@
             }
         }
 
-
+        $scope.newcategory = function(){
+            console.log("innnnnnnnnnnn");
+            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
+        }
 
 
 

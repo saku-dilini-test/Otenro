@@ -6,6 +6,12 @@
 //    angular.module('starter', [])
 mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService) {
 
+            $http.get(constants.SERVER_URL+"/edit/getAllCountry")
+                    .then(function(res){
+                        $scope.countries = res.data;
+                    });
+
+
             if (typeof $rootScope.appId === 'undefined'){
 
                 readMadeEasy.readFile().success(function(data){
@@ -139,36 +145,19 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
     $scope.amount = $scope.getTotal();
     $scope.deliver = function(deliverDetails){
 
-            $scope.method = 'Delivery';
-            $scope.shipping={};
-            var SelectShippingOptions = $ionicPopup.alert({
-                   templateUrl: 'templates/shippingOpt.html',
-                   title: 'Shipping Options',
-                   subTitle: 'Choose a Delivery Option you wish.',
-                   cssClass: 'ionicPopUp',
-                   scope: $scope,
-                   buttons:[
-                       {text:'Back'},
-                       {text: 'Deliver',
-                        type: 'made-easy-button-setting',
-                        onTap: function(e) {
-                              if (!$scope.shipping.opt || $rootScope.cart.cartSize == 0) {
-                                //don't allow the user to continue unless he selects an option
-                                e.preventDefault();
-                              } else {
-                              $state.go('tab.cardPayment',{
-                               item:$stateParams.item,
-                               deliverDetails:deliverDetails,
-                               amount : $scope.amount,
-                               shippingOpt : $scope.shipping.opt,
-                               method: $scope.method
-                            });
-                             }
-                        }
-                       }
-                   ]
-            });
-    }
+
+            if(typeof deliverDetails.country == 'undefined'){
+                var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+                deliverDetails.name = localData.name;
+                deliverDetails.streetNumber = localData.streetNumber;
+                deliverDetails.streetName = localData.streetName;
+                deliverDetails.country = localData.country;
+                deliverDetails.city = localData.city;
+            }
+            console.log(deliverDetails);
+            deliverDetails.method = 'Delivery';
+            $state.go('tab.shipping',{item:deliverDetails});
+        }
 
 
 });

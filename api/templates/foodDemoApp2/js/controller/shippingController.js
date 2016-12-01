@@ -106,20 +106,25 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
         if(shippingDetails.shipping.shippingOption == "Flat Rate"){
 
-            if(shippingDetails.shipping.preOrderFee > 0){
-                shippingCost = shippingDetails.shipping.preOrderFee;
-            }else{
-                shippingCost = shippingDetails.shipping.feePerItem;
-            }
-        }else if(shippingDetails.shipping.shippingOption == "Weight Based"){
+            var shippingCostPreOrderFee = shippingDetails.shipping.preOrderFee;
+            var shippingCostFeePerItem = shippingDetails.shipping.feePerItem * $rootScope.cart.cartItems.length;
+            shippingCost = shippingCostPreOrderFee + shippingCostFeePerItem;
 
+        }else if(shippingDetails.shipping.shippingOption == "Weight Based"){
+            shippingDetails.overWeight = false;
+            shippingDetails.underWeight = false;
             console.log(shippingDetails.shipping.weightRanges);
             for(var i = 0; i < shippingDetails.shipping.weightRanges.length; i++){
                 var weightRange = shippingDetails.shipping.weightRanges[i];
                 if(weightRange.startWeight <= totalWeight && weightRange.endWeight >= totalWeight){
                     shippingCost = shippingDetails.shipping.weightRanges[i].cost;
                 }
-
+            }
+            if(shippingDetails.shipping.weightRanges[0].startWeight>totalWeight){
+                shippingDetails.underWeight = true;
+            }
+            if(shippingDetails.shipping.weightRanges[shippingDetails.shipping.weightRanges.length-1].endWeight<totalWeight){
+                shippingDetails.overWeight = true;
             }
 
         }else{

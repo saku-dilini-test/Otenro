@@ -102,6 +102,7 @@ module.exports.routes = {
     'GET /edit/buildSource': 'EditController.buildSource',
     'GET /edit/getSelectedApp': 'EditController.getSelectedApp',
     'GET /edit/deleteSelectedApp': 'EditController.deleteSelectedApp',
+    'GET /edit/deleteDefaultData': 'EditController.deleteDefaultData',
 
     //'POST /edit/updateCategory' : '',
     //'POST /edit/checkCategory': '',
@@ -140,6 +141,7 @@ module.exports.routes = {
     'GET /edit/getThirdNavigation': 'edit/commerce/ThirdNavigationController.getThirdNavigation',
     'GET /edit/getOrders': 'edit/commerce/OrderController.getOrders',
     'POST /edit/updateOrders': 'edit/commerce/OrderController.updateOrders',
+    'POST /edit/checkUniqueSku': 'edit/commerce/ThirdNavigationController.checkUniqueSku',
 
 
     'POST /edit/saveMainMenu': 'edit/commerce/MainNavigationController.saveMainMenu',

@@ -1,4 +1,4 @@
-<ion-view class="made-easy-background-image made-easy-background-color" view-title="Filter">
+<ion-view class="made-easy-background-image made-easy-background-color" view-title="Cart">
   <ion-content >
    <div class="card animated zoomIn">
         <div class="col align-center made-easy-header-font">
@@ -18,28 +18,26 @@
             <div class="col"><a class="dark" ng-click="removeItem(index)"><i class="icon ion-ios-trash-outline"></i></a></div>
           </div>
         </div>
-        <div ng-hide="hide" class="item item-stacked-label">
-            <div class="row">
-                <div class="col col-50">Tax%</div>
-                <div class="col" ng-model="tax" >{{tax}}</div>
-            </div>
-        </div>
+        <!--<div ng-hide="hide" class="item item-stacked-label">-->
+            <!--<div class="row">-->
+                <!--<div class="col col-50">Tax%</div>-->
+                <!--<div class="col" ng-model="tax" >{{tax}}</div>-->
+                <!--<div class="col" ng-model="tax" >{{taxTotal}}</div>-->
+            <!--</div>-->
+        <!--</div>-->
         <div >
           <div class="row shopping-cart-total">
             <div class="col col-50">Total</div>
             <div class="col" ng-model="quantity">{{getTotalQuantity()}}</div>
-            <div class="col" ng-model="total" >{{getTotal()}}</div>
+            <div class="col" ng-model="total" >{{currency}}{{getTotal()}}</div>
             <div class="col"></div>
           </div>
         </div>
 
         <div class="row cart-buttons">
-          <!--<div class="col-33"></div>-->
-          <button ng-disabled="available" class="button button-block button-small made-easy-button-setting" ng-click="pickupDetails(cartItems)" >Pickup</button>
-          <button ng-disabled="available" class="button button-block button-small made-easy-button-setting" ng-click="delivery(cartItems)" >Delivery</button>
+          <button class="button button-block button-small made-easy-button-setting" ng-click="pickupDetails(cartItems)" >Pick up</button>
+          <button class="button button-block button-small made-easy-button-setting" ng-click="delivery(cartItems)" >Delivery</button>
         </div>
-
-
     </div>
   </ion-content>
 </ion-view>

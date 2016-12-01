@@ -25,22 +25,24 @@ module.exports = {
       secondNavi : [
         {
           attribute : {
-            "imageUrl": "bbq salad.png",
+            "imageUrl": "pasta-salad.jpg",
             "name": "Salads",
-            "description": "Salads description"
+            "description": "Salads description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
               "name": "Grilled Chicken",
               "price": 100,
               "quantity": 100,
-              "imageUrl": "grilled_chicken_salad.png",
+              "imageUrl": "sa1.jpeg",
               "tempImageArray" : [
                 {
-                  "img" : "grilled_chicken_salad.png"
+                  "img" : "sa1.jpeg"
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -57,13 +59,14 @@ module.exports = {
               "name": "Spicy Thai Salad",
               "price": 200,
               "quantity": 200,
-              "imageUrl": "spicy thai salad with grilled chicken.png",
+              "imageUrl": "sa2.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "spicy thai salad with grilled chicken.png"
+                  "img" : "sa2.jpg"
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -100,22 +103,24 @@ module.exports = {
         },
         {
           attribute: {
-            "imageUrl": "chocolate Fudge brownie with vanila ice cream.png",
+            "imageUrl": "crpes.jpg",
             "name": "Deserts",
-            "description": "Deserts description"
+            "description": "Deserts description",
+            "enteredBy":"demo"
           },
           thirdNavi: [
             {
               "name": "Chocolate Fudge",
               "price": 100,
               "quantity": 100,
-              "imageUrl": "chocolate Fudge brownie with vanila ice cream.png",
+              "imageUrl": "da1.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "chocolate Fudge brownie with vanila ice cream.png"
+                  "img" : "da1.jpg"
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -172,22 +177,24 @@ module.exports = {
         },
         {
           attribute : {
-            "imageUrl": "salmon stake grilled.png",
-            "name": "Beverages",
-            "description": "Beverages description"
+            "imageUrl": "how-to-grill-fish.jpg",
+            "name": "Stakes",
+            "description": "Beverages description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
               "name": "Grilled Garlic Lamb",
               "price": 100,
               "quantity": 100,
-              "imageUrl": "grilled garlic lamb chops.png",
+              "imageUrl": "st1.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "grilled garlic lamb chops.png"
+                  "img" : "st1.jpg"
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -204,13 +211,14 @@ module.exports = {
               "name": "Beef Stake",
               "price": 200,
               "quantity": 200,
-              "imageUrl": "beef stake with smashed potatoes.png",
+              "imageUrl": "st2.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "beef stake with smashed potatoes.png"
+                  "img" : "st2.jpg"
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -227,13 +235,14 @@ module.exports = {
               "name": "BBQ Pork Ribs",
               "price": 300,
               "quantity": 300,
-              "imageUrl": "bbq pork ribs.png",
+              "imageUrl": "st3.jpg",
               "tempImageArray" : [
                 {
-                  "img" : "bbq pork ribs.png"
+                  "img" : "st3.jpg"
                 }
               ],
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -251,11 +260,12 @@ module.exports = {
               "price": 400,
               "quantity": 400,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Pina Colada",
               "detailedDesc" : "Pina Colada details description. Pina Colada details",
               "tempImageArray" : [
                 {
-                  "img" : "bg.png"
+                  "img" : "st4.jpg"
                 }
               ],
               "variants":[{
@@ -266,7 +276,7 @@ module.exports = {
                 'price': "400",
                 'quantity': 400
               }],
-              "imageUrl": "bg.png",
+              "imageUrl": "st4.jpg",
               "createdDate": Date.now()
             }
           ]
@@ -324,7 +334,8 @@ module.exports = {
           attribute : {
             "imageUrl": "shirt_x.png",
             "name": "Shirt",
-            "description": "Shirt description"
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -332,8 +343,9 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
-              "briefDesc" : "Shirt x brief des",
-              "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
+              "enteredBy":"demo",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "imageUrl": "shirt_x.png",
               "tempImageArray" : [
                 {
@@ -355,8 +367,9 @@ module.exports = {
               "price": 350,
               "quantity": 350,
               "selection" : "Size",
-              "briefDesc" : "Shirt y brief des",
-              "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "enteredBy":"demo",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
                 {
                   "img" : "shirt_y.png"
@@ -378,8 +391,9 @@ module.exports = {
               "price": 450,
               "quantity": 450,
               "selection" : "Size",
-              "briefDesc" : "Shirt z brief des",
-              "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
+              "enteredBy":"demo",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
                 {
                   "img" : "shirt_z.png"
@@ -402,7 +416,8 @@ module.exports = {
           attribute : {
             "imageUrl": "short_x.png",
             "name": "Short",
-            "description": "Short description"
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -410,8 +425,9 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
-              "briefDesc" : "Short x brief des",
-              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "enteredBy":"demo",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "SLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
                 {
                   "img" : "short_x.png"
@@ -451,7 +467,8 @@ module.exports = {
           attribute : {
             "imageUrl": "cloth3.png",
             "name": "Suits",
-            "description": "Short description"
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -459,8 +476,9 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
-              "briefDesc" : "Short x brief des",
-              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "enteredBy":"demo",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
                 {
                   "img" : "cloth3.png"
@@ -487,24 +505,26 @@ module.exports = {
         {
           attribute : {
             "imageUrl": "a.png",
-            "name": "Shirt",
-            "description": "Shirt description"
+            "name": "Women Shoes",
+            "description": "Shirt description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
-              "name": "Shirt x",
+              "name": "Shoe 1",
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt x brief des",
-              "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
                   "img" : "a.png"
                 }
               ],
               "variants":[{
-                "name": "Shirt x",
+                "name": "Shoe 1",
                 'sku': "1111",
                 'size': "11",
                 'vType' : "s",
@@ -515,19 +535,20 @@ module.exports = {
               "createdDate": Date.now()
             },
             {
-              "name": "Shirt y",
+              "name": "Shoe 2",
               "price": 350,
               "quantity": 350,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt y brief des",
-              "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
                   "img" : "b.png"
                 }
               ],
               "variants":[{
-                "name": "Shirt y",
+                "name": "Shoe 2",
                 'sku': "1111",
                 'size': "11",
                 'vType' : "s",
@@ -538,19 +559,20 @@ module.exports = {
               "createdDate": Date.now()
             },
             {
-              "name": "Shirt z",
+              "name": "Shoe 3",
               "price": 450,
               "quantity": 450,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt z brief des",
-              "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
                   "img" : "c.png"
                 }
               ],
               "variants":[{
-                "name": "Shirt z",
+                "name": "Shoe 3",
                 'sku': "1111",
                 'size': "11",
                 'vType' : "s",
@@ -564,8 +586,9 @@ module.exports = {
         },{
           attribute : {
             "imageUrl": "c.png",
-            "name": "Shirt",
-            "description": "Shirt description"
+            "name": "Men Shirts",
+            "description": "Shirt description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -573,11 +596,12 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt x brief des",
-              "detailedDesc" : "Shirt x details description. Shirt x details description. Shirt x details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
-                  "img" : "a.png"
+                  "img" : "d.jpeg"
                 }
               ],
               "variants":[{
@@ -588,7 +612,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
-              "imageUrl": "a.png",
+              "imageUrl": "d.jpeg",
               "createdDate": Date.now()
             },
             {
@@ -596,11 +620,12 @@ module.exports = {
               "price": 350,
               "quantity": 350,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt y brief des",
-              "detailedDesc" : "Shirt y details description. Shirt y details description. Shirt y details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
-                  "img" : "b.png"
+                  "img" : "e.jpeg"
                 }
               ],
               "variants":[{
@@ -611,7 +636,7 @@ module.exports = {
                 'price': "350",
                 'quantity': 350
               }],
-              "imageUrl": "b.png",
+              "imageUrl": "e.jpeg",
               "createdDate": Date.now()
             },
             {
@@ -619,11 +644,12 @@ module.exports = {
               "price": 450,
               "quantity": 450,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Shirt z brief des",
-              "detailedDesc" : "Shirt z details description. Shirt z details description. Shirt z details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
-                  "img" : "c.png"
+                  "img" : "f.jpg"
                 }
               ],
               "variants":[{
@@ -634,7 +660,7 @@ module.exports = {
                 'price': "450",
                 'quantity': 450
               }],
-              "imageUrl": "c.png",
+              "imageUrl": "f.jpg",
               "createdDate": Date.now()
             }
           ]
@@ -642,31 +668,33 @@ module.exports = {
         {
           attribute : {
             "imageUrl": "d.png",
-            "name": "Short",
-            "description": "Short description"
+            "name": "Men Shoes",
+            "description": "Short description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
-              "name": "Short x",
+              "name": "Shoe 1",
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Short x brief des",
-              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
-                  "img" : "d.png"
+                  "img" : "h.png"
                 }
               ],
               "variants":[{
-                "name": "Short x",
+                "name": "Shoe 1",
                 'sku': "1111",
                 'size': "11",
                 'vType' : "s",
                 'price': "250",
                 'quantity': 250
               }],
-              "imageUrl": "d.png",
+              "imageUrl": "h.png",
               "createdDate": Date.now()
             }
           ]
@@ -674,31 +702,33 @@ module.exports = {
         {
           attribute : {
             "imageUrl": "cloth3.png",
-            "name": "Suits",
-            "description": "Short description"
+            "name": "Accessories",
+            "description": "Short description",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
-              "name": "Beach Suit",
+              "name": "Watch 1",
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "briefDesc" : "Short x brief des",
-              "detailedDesc" : "Short x details description. Short x details description. Short x details description",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
                 {
-                  "img" : "cloth3.png"
+                  "img" : "g.png"
                 }
               ],
               "variants":[{
-                "name": "Beach Suit",
+                "name": "Watch 1",
                 'sku': "1111",
                 'size': "11",
                 'vType' : "s",
                 'price': "250",
                 'quantity': 250
               }],
-              "imageUrl": "cloth3.png",
+              "imageUrl": "g.png",
               "createdDate": Date.now()
             }
           ]
@@ -712,7 +742,8 @@ module.exports = {
           attribute : {
             "name": "Large Pizza",
             "imageUrl": "category_01.png",
-            "description": "Shirt description"
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -720,9 +751,10 @@ module.exports = {
               "price": 250,
               "quantity": 250,
               "selection" : "Size",
+              "enteredBy":"demo",
               "tempImageArray" : [
                 {
-                  "img" : "item_01.png"
+                  "img" : "1.jpg"
                 }
               ],
               "variants":[{
@@ -733,9 +765,9 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
-              "imageUrl": "item_01.png",
-              "briefDesc" : "Masala brief des",
-              "detailedDesc" : "Masala Pizza, details description. details description",
+              "imageUrl": "1.jpg",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "createdDate": Date.now()
             },
             {
@@ -743,9 +775,10 @@ module.exports = {
               "price" : 300,
               "quantity" : 100,
               "selection" : "Size",
+              "enteredBy":"demo",
               "tempImageArray" : [
                 {
-                  "img" : "item_02.png"
+                  "img" : "2.jpg"
                 }
               ],
               "variants":[{
@@ -756,9 +789,9 @@ module.exports = {
                 'price': "300",
                 'quantity': 100
               }],
-              "imageUrl": "item_02.png",
-              "briefDesc" : "New Pizza brief des",
-              "detailedDesc" : "New Pizza, details description. details description",
+              "imageUrl": "2.jpg",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "createdDate": Date.now()
             }
 
@@ -768,7 +801,8 @@ module.exports = {
           attribute : {
             "name": "Indian Pizza",
             "imageUrl": "category_02.png",
-            "description": "Shirt description"
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
           },
           thirdNavi : [
             {
@@ -776,9 +810,10 @@ module.exports = {
               "price": 350,
               "quantity": 100,
               "selection" : "Size",
+              "enteredBy":"demo",
               "tempImageArray" : [
                 {
-                  "img" : "item_01.png"
+                  "img" : "3.jpg"
                 }
               ],
               "variants":[{
@@ -789,9 +824,9 @@ module.exports = {
                 'price': "350",
                 'quantity': 100
               }],
-              "imageUrl": "item_01.png",
-              "briefDesc" : "Indian brief des",
-              "detailedDesc" : "Indian Pizza, details description. details description",
+              "imageUrl": "3.jpg",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "createdDate": Date.now()
             },
             {
@@ -799,9 +834,10 @@ module.exports = {
               "price" : 225,
               "quantity" : 15,
               "selection" : "Size",
+              "enteredBy":"demo",
               "tempImageArray" : [
                 {
-                  "img" : "item_02.png"
+                  "img" : "4.jpg"
                 }
               ],
               "variants":[{
@@ -812,9 +848,9 @@ module.exports = {
                 'price': "225",
                 'quantity': 15
               }],
-              "imageUrl": "item_02.png",
-              "briefDesc" : "New Pizza brief des",
-              "detailedDesc" : "New Pizza, details description. details description",
+              "imageUrl": "4.jpg",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "createdDate": Date.now()
             }
 
@@ -827,6 +863,8 @@ module.exports = {
       articleCategory : [{
         attribute : {
           "name": "Attractions",
+          "imageUrl":"star ferry.png",
+          "enteredBy":"demo"
         },
         article : [
           {
@@ -845,6 +883,7 @@ module.exports = {
             "Reservations: recommended",
             "imageUrl":"oceanpark.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": " The Peak",
@@ -862,6 +901,7 @@ module.exports = {
             "Payment type: credit cards accepted",
             "imageUrl":"thepeak.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": "Temple Street night market",
@@ -876,6 +916,7 @@ module.exports = {
             "MTR Jordan Station, Exit A. Turn right onto Jordan Road and then take another right onto Temple Street.",
             "imageUrl":"1881heritage.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": "Star Ferry",
@@ -893,6 +934,7 @@ module.exports = {
             "Payment type: credit cards not accepted",
             "imageUrl":"starferry.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": "Aqua Luna harbour cruises",
@@ -911,6 +953,7 @@ module.exports = {
             "Reservations: essential",
             "imageUrl":"aqua_luna.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": " Hong Kong Museum of History",
@@ -927,6 +970,7 @@ module.exports = {
             "Reservations: Not possible",
             "imageUrl":"historymusium.png",
             "categoryId":"0",
+            "enteredBy":"demo"
           },
 
 
@@ -936,6 +980,8 @@ module.exports = {
         {
           attribute : {
             "name": "Shopping",
+            "imageUrl":"apliu street flee market.png",
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -947,6 +993,7 @@ module.exports = {
               "Getting there: MTR Mong Kok Station, Exit D3. Walk along Argyle Street to Fa Yuen Street.",
               "imageUrl":"sneakerstreet.png",
               "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "Apliu Street Flea Market (Electronics)",
@@ -955,6 +1002,7 @@ module.exports = {
               " Getting there: MTR Sham Shui Po Station, Exit C2",
               "imageUrl":"apliustreetfleemarket.png",
               "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "City Plaza",
@@ -966,6 +1014,7 @@ module.exports = {
               "Getting there: MTR Tai Koo Station and take the Cityplaza exit",
               "imageUrl":"cityplaza.png",
               "categoryId":"0",
+              "enteredBy":"demo"
             }
 
           ]
@@ -973,6 +1022,8 @@ module.exports = {
         {
           attribute : {
             "name": "Historical sites",
+            "imageUrl":"1881 heritage.png",
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -988,6 +1039,7 @@ module.exports = {
               "turn right, take subway (pedestrian tunnel) next to YMCA to 1881 Heritage.",
               "imageUrl":"1881heritage.png",
               "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "Clock Tower",
@@ -1007,6 +1059,7 @@ module.exports = {
               "YMCA to the Hong Kong Cultural Centre. Turn right again and walk straight ahead towards the waterfront",
               "imageUrl":"apliustreetfleemarket.png",
               "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         }
@@ -1018,14 +1071,16 @@ module.exports = {
       articleCategory : [{
         attribute : {
           "name": "FEATURED CATEGORY",
-          "imageUrl" : 'CatImg_00001.jpg'
+          "imageUrl" : 'CatImg_00001.jpg',
+          "enteredBy":"demo"
         },
         article : [
           {
             "title": "Ocean Park",
             "desc": "Ocean park opened in 1977, is a ",
             "imageUrl":"Article_00001.jpg",
-            "categoryId":"0"
+            "categoryId":"0",
+            "enteredBy":"demo"
           },
           {
             "title": "Clock Tower",
@@ -1034,14 +1089,16 @@ module.exports = {
             "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
             "Built out of red bricks and granite",
             "imageUrl":"Article_00003.jpg",
-            "categoryId":"0"
+            "categoryId":"0",
+            "enteredBy":"demo"
           }
         ]
       },
         {
           attribute : {
             "name": "FASHION",
-            "imageUrl" : 'CatImg_00002.jpg'
+            "imageUrl" : 'CatImg_00002.jpg',
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -1050,14 +1107,16 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite",
               "imageUrl":"Article_00002.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         },
         {
           attribute : {
             "name": "SCIENCE",
-            "imageUrl" : 'CatImg_00003.jpg'
+            "imageUrl" : 'CatImg_00003.jpg',
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -1066,14 +1125,16 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite",
               "imageUrl":"Article_00003.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         },
         {
           attribute : {
             "name": "Auto",
-            "imageUrl" : 'CatImg_00004.jpg'
+            "imageUrl" : 'CatImg_00004.jpg',
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -1082,7 +1143,8 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite ",
               "imageUrl":"Article_00004.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "1881 Heritage",
@@ -1090,14 +1152,16 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite",
               "imageUrl":"Article_00003.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         },
         {
           attribute : {
             "name": "Environement",
-            "imageUrl" : 'CatImg_00005.jpg'
+            "imageUrl" : 'CatImg_00005.jpg',
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -1106,7 +1170,8 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite ",
               "imageUrl":"Article_00005.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "1881 Heritage",
@@ -1114,14 +1179,16 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite",
               "imageUrl":"Article_00005.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         },
         {
           attribute : {
             "name": "Sport",
-            "imageUrl" : 'CatImg_00006.jpg'
+            "imageUrl" : 'CatImg_00006.jpg',
+            "enteredBy":"demo"
           },
           article : [
             {
@@ -1130,7 +1197,8 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite ",
               "imageUrl":"Article_00006.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             },
             {
               "title": "1881 Heritage",
@@ -1138,7 +1206,8 @@ module.exports = {
               "Kowloon-Canton Railway Clock Tower, it is usually referred to as the Tsim Sha Tsui Clock Tower for its location." +
               "Built out of red bricks and granite",
               "imageUrl":"Article_00006.jpg",
-              "categoryId":"0"
+              "categoryId":"0",
+              "enteredBy":"demo"
             }
           ]
         }

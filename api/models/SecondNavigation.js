@@ -31,6 +31,9 @@ module.exports = {
         imageUrl: {
             type: 'string'
         },
+        enteredBy: {
+            type: 'string'
+        },
         createdDate: {
             type: 'date'
         }

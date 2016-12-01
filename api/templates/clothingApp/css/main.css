@@ -10,7 +10,7 @@ ion-content{
 
 /* ----- Background Settings ----- */
 .made-easy-background-color {
-    background-color: #10b23e !important;
+    background-color: #fff !important;
 }
 
 .made-easy-background-image{
@@ -20,17 +20,23 @@ ion-content{
 /* ----- Main Navigation Settings ----- */
 .made-easy-navigationBarColor{
     background-color: #fff !important;
-    color:#000;
+    color:#8d8961;
     border: 0;
 }
 .made-easy-navigationBarColor .item {
     border-style:unset;
 }
 
+
+.made-easy-navigationBarColor .list{
+    margin-top:10%;
+}
+
 .made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
     background:transparent;
     border: 0;
     color:inherit;
+    padding:6px;
 }
 /* ----- Footer Settings ----- */
 .made-easy-footerColor{
@@ -46,7 +52,7 @@ ion-content{
 .made-easy-header-font{
     color:#B8A47F;
     font-family: sans-serif;
-    font-size : 4vh;
+    font-size : 3.5vh;
     font-weight: bolder;
     text-transform: capitalize;
     line-height:normal;
@@ -54,7 +60,7 @@ ion-content{
 
 /* ----- Content Font Settings ----- */
 .made-easy-content-font{
-    color:#787878;
+    color:#5d5537;
     font-family: sans-serif;
     font-size: 3vh;
     font-weight: lighter;
@@ -63,11 +69,11 @@ ion-content{
 
 /* ----- Button Font Settings ----- */
 .made-easy-button-setting{
-    border-color: transparent;
-    background-color: #886aea;
+    border-color: #dcd8b2;
+    background-color: #B8A47F;
     color: #fff;
     border-width:1px;
-    border-radius:1px;
+    border-radius:3px;
     cursor: url(../img/cursor.cur), auto;
 }
 

@@ -76,6 +76,42 @@ module.exports = {
 
     },
 
+    deleteDefaultData : function(req,res){
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId,
+            enteredBy:'demo'
+        };
+        console.log(searchApp);
+        SecondNavigation.destroy(searchApp).exec(function (err, app) {
+            if (err) {return res.negotiate(err);}
+            else {
+                ThirdNavigation.destroy(searchApp).exec(function (err, app) {
+                    if (err) return res.negotiate(err);
+                    else {
+
+                    }
+                });
+            }
+        });
+        ArticleCategory.destroy(searchApp).exec(function (err, app) {
+            if (err) {return res.negotiate(err);}
+            else {
+                Article.destroy(searchApp).exec(function (err, app) {
+                    if (err) return res.negotiate(err);
+                    else {
+
+                    }
+                });
+            }
+        });
+        res.send({
+            appId: appId,
+            message: "All data Removed"
+        });
+
+    },
+
     viewImages : function(req,res){
         res.sendfile(config.ME_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
     },
@@ -102,14 +138,43 @@ module.exports = {
             function(err, data) {
 
                 if(!data || err ){
-
                     fs.copy(srcPath, copyDirPath, function (err) {
                         if (err) return res.negotiate(err);
                         //Success
+                        var packageJsonFile = copyDirPath + 'package.json',
+                            jsonFile = require(packageJsonFile);
+                        IPGDetails.findOne({appId:appId}).exec(function(err,stripe){
+                            if(err){
+                                sails.log.info(err);
+                            }
+                            else{
+                                if(stripe.stripeEnable == true){
+                                    if(stripe.stripeKey){
+                                        fs.readFile(packageJsonFile, function (err, data) {
+                                            if(err){
+                                                sails.log.info(err);
+                                            }
+                                            else{
+                                                var json = JSON.parse(data);
+                                                jsonFile.cordovaPlugins[6].variables.API_KEY = stripe.stripeKey;
+                                                fs.writeFile(packageJsonFile, JSON.stringify(jsonFile,null, 2), function (err) {
+                                                    if(err){
+                                                        sails.log.info(err);
+                                                    }
+                                                    else{
+                                                        console.log(JSON.stringify(jsonFile,null, 2));
+                                                        console.log('writing to ' + packageJsonFile);
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }
+                                }
+                            }
+                        })
                         var removeDirArray = ['www'];
                         for (var i = 0; i < removeDirArray.length; i++) {
                             var removeDirPath = copyDirPath + removeDirArray[i] + '/';
-                            console.log("removeDirPath " + removeDirPath) ;
                             fs.remove(removeDirPath, function (err) {
                                 if (err) return res.negotiate(err);
 
@@ -131,7 +196,8 @@ module.exports = {
                         }
                     });
 
-                }else{
+                }
+                else{
                     var parser = new xml2js.Parser(),
                         xmlBuilder = new xml2js.Builder();
 
@@ -149,6 +215,37 @@ module.exports = {
                                 fs.writeFile(moveConfigFile, xml,'utf-8', function(err) {
                                     if (err) return res.negotiate(err);
                                 });
+
+                                var packageJsonFile = copyDirPath + 'package.json',
+                                    jsonFile = require(packageJsonFile);
+                                IPGDetails.findOne({appId:appId}).exec(function(err,stripe){
+                                    if(err){
+                                        sails.log.info(err);
+                                    }
+                                    else{
+                                        if(stripe.stripeEnable == true){
+                                            if(stripe.stripeKey){
+                                                fs.readFile(packageJsonFile, function (err, data) {
+                                                    if(err){
+                                                        sails.log.info(err);
+                                                    }
+                                                    else{
+                                                        var json = JSON.parse(data);
+                                                        jsonFile.cordovaPlugins[6].variables.API_KEY = stripe.stripeKey;
+                                                        fs.writeFile(packageJsonFile, JSON.stringify(jsonFile,null, 2), function (err) {
+                                                            if(err){
+                                                                sails.log.info(err);
+                                                            }
+                                                            else{
+                                                                console.log('writing to ' + packageJsonFile);
+                                                            }
+                                                        })
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    }
+                                })
 
                                 var searchApp = {
                                     id: appId

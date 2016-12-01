@@ -72,8 +72,14 @@ module.exports = {
         shippingOpt: {
             type:'string'
         },
+        shippingCost: {
+            type:'string'
+        },
         pickUp :{
             type: 'json'
+        },
+        email :{
+            type: 'string'
         },
         option:{
             type: 'string'

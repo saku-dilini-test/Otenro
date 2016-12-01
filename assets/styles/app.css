@@ -13,13 +13,7 @@ a.feature01{
     -webkit-border-radius: 2px;
 }
 
-.cropArea {
-    background: #E4E4E4;
-    overflow: hidden;
-    width:100%;
-    height:250px;
-    border-radius:4px;
-}
+
 
 .md-dialog-main .file-upload-wrapper2{
     margin-bottom: 15px;

@@ -1,58 +1,92 @@
-<ion-view class="made-easy-background-image made-easy-background-color" view-title="Register">
-  <ion-content class=" padding">
 
-    <div class="card animated zoomIn">
-      <h5 class="made-easy-header-font">Create Your Account</h5>
-      <form name="signUpForm">
-        <div class="custom-form list">
-          <label class="item item-input item-floating-label">
-            <span class="made-easy-content-font input-label">User Name</span>
-            <input type="text" placeholder="User Name" ng-model="data.name" ng-required="true">
-          </label>
-          <label class="item item-input item-floating-label">
-            <span class="made-easy-content-font input-label">Email Address</span>
-            <input type="email" name="email" placeholder="Email Address" ng-model="data.email" ng-required="true">
-            <span class="item-error-message" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
+
+<ion-view class="made-easy-background-image made-easy-background-color" view-title="Register">
+
+  <ion-content class=" padding">
+      
+    <div class="animated zoomIn">
+      <div class="list card">
+        <div class="padding-vertical">
+          <div class="row made-easy-header-font">
+            <div class="col align-center">Create Your Account</div>
+          </div>
+
+          <form name="signUpForm">
+            <div class="list">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">First Name</span>
+                <input type="text" placeholder="" ng-model="data.fname" ng-required="true">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Last Name</span>
+                <input type="text" placeholder="" ng-model="data.lname" ng-required="true">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Email Address</span>
+                <input type="email" name="email" placeholder="" ng-model="data.email" ng-required="true">
+                <span class="help-block" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
               Enter a proper email
             </span>
-          </label>
-          <label class="item item-input item-floating-label">
-            <span class="made-easy-content-font input-label">Password</span>
-            <input type="password" placeholder="Password" ng-model="data.password" ng-required="true">
-          </label>
-          <label class="item item-input item-floating-label">
-            <span class="made-easy-content-font input-label">Address</span>
-            <input type="text" placeholder="Address" ng-model="data.address" ng-required="true">
-          </label>
-          <label class="item item-input item-floating-label">
-            <span class="made-easy-content-font input-label">Phone Number</span>
-            <input type="number" placeholder="Phone Number" ng-model="data.phone" ng-required="true">
-          </label>
-          <div class="row padding">
-            <button class="button button-block made-easy-button-setting" ng-click="signUpForm.$valid && singUp()">
-              Sign up
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Password</span>
+                <input type="password" placeholder="" ng-model="data.password" ng-required="true">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Street Number</span>
+                <input type="text" placeholder="" ng-model="data.streetNumber" ng-required="true">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Street Name</span>
+                <input type="text" placeholder="" ng-model="data.streetName" ng-required="true">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">City</span>
+                <input type="text" placeholder="" ng-model="data.city" ng-required="true">
+              </label>
+              <label class="item item-input item-select">
+                <span class="input-label">Country</span>
+                <select  placeholder="Select Category" ng-model="data.country" required>
+                  <option ng-value="country.countryName" ng-repeat="country in countries">{{country.countryName}}
+                  </option>
+                </select>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Zip / Postal Code</span>
+                <input type="text" placeholder="" ng-model="data.zip" ng-required="true">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Phone Number</span>
+                <input type="number" placeholder="" ng-model="data.phone" ng-required="true">
+              </label>
+              <div class="row">
+                <button class="button button-small button-block made-easy-button-setting" ng-click="signUpForm.$valid && signUp()">
+                  Sign up
+                </button>
+              </div>
+              <!--<div class="row">
+                <div class="col">
+                  <button class="button button-block button-calm" ng-click="authenticate('google')">
+                    Google
+                  </button>
+                </div>
+                <div class="col">
+                  <button class="button button-block button-positive" ng-click="authenticate('facebook')">
+                    Facebook
+                  </button>
+                </div>
+              </div>-->
+            </div>
+          </form>
+          <!-- Back to login view -->
+          <div class="row">
+            <button class="button button-small button-clear made-easy-button-setting signbutton" ng-click="backToLogin()">
+              Already have an account? Sign in
             </button>
           </div>
-          <!--<div class="row">
-            <div class="col">
-              <button class="button button-block button-calm" ng-click="authenticate('google')">
-                Google
-              </button>
-            </div>
-            <div class="col">
-              <button class="button button-block button-positive" ng-click="authenticate('facebook')">
-                Facebook
-              </button>
-            </div>
-          </div>-->
         </div>
-      </form>
-      </div>
-    <!-- Back to login view -->
-    <div class="col animated zoomIn">
-      <div class="back-to-login-text" ng-click="backToLogin()">
-        <p class="made-easy-header-font">Already have an account? Sign in</p>
       </div>
     </div>
+
   </ion-content>
 </ion-view>

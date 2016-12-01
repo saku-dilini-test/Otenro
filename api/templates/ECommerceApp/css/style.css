@@ -7,6 +7,10 @@
     cursor: url(../img/cursor.cur), auto;
 }
 
+a {
+    text-decoration: none;
+}
+
 .item[ng-click]:hover{
     cursor: url(../img/cursor.cur), auto;
 }
@@ -39,7 +43,6 @@ ion-slides {
 
 .menu-open .navigation-drawer .menu-left{
     width: 90% !important;
-    opacity: 0.8;
     z-index: 1 !important;
     transform: translate3d(0%, 0px, 0px);
 }
@@ -86,16 +89,20 @@ ion-slides {
 }
 
 .home .card{
-    height: 100%;
-    margin: 0 !important;
     padding:0;
 }
 
 
 .image-wrapper{
     width:100%;
-    height:45%;
     text-align:center;
+}
+.image-wrapper img{
+    width:100%;
+}
+
+.header-image img{
+    width:100%;
 }
 
 .header-fonts {
@@ -104,13 +111,12 @@ ion-slides {
     letter-spacing: 1px;
     padding: 0 5px;
     height:5%;
-    margin:5px 15px;
+    margin:15px 15px;
 
 }
 
 .description{
     height:24%;
-    padding:1.5em 0.5em 0 0.5em;
 }
 
 
@@ -203,7 +209,6 @@ ion-slides {
 
 .tabs a{
     width: 90px;
-    color: #fff;
     font-weight:600;
 }
 
@@ -223,9 +228,8 @@ ion-slides {
     display:none;
 }
 
-.tab-color-custom a:hover{
+.tab-color-custom a{
     opacity:1;
-    text-decoration:underline;
 }
 
 .swiper-button-next, .swiper-button-prev{
@@ -233,9 +237,13 @@ ion-slides {
 }
 
 .swiper-button-prev, .swiper-button-next {
-    top:53%;
-    right: -10px;
+    top:68%;
+    right: 0px;
 
+}
+
+.swiper-button-prev{
+    left:20px;
 }
 
 .select-tab-item{
@@ -243,19 +251,12 @@ ion-slides {
     width: 100%;
 }
 
-.order-item-slide ion-slides{
-    height:100%;
+
+.slider-slides{
+    width:inherit !important;
 }
 
-.order-item-slide .swiper-button-next {
-    top:26%;
-    right: -2px;
-}
 
-.order-item-slide .swiper-button-prev{
-    top:26%;
-    left:-2px;
-}
 
 /*font-size*/
 
@@ -397,4 +398,18 @@ ion-slides {
 
 .pickup label {
     padding-left: 30px;
+}
+.item-details{
+    padding-top:0;
+}
+.item-details .card{
+    margin-top:0;
+    padding:0;
+}
+
+.menu-items{
+    display:list-item;
+}
+.menu-items .card{
+    margin:20px 2%;
 }

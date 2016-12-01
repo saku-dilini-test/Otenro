@@ -64,13 +64,15 @@
 
                                 <md-input-container class="md-block">
                                     <label>SKU</label>
-                                    <input md-maxlength="10"
+                                    <input ng-blur="checkValidity(product.sku)"
+                                           md-maxlength="10"
                                            required
                                            name="sku"
                                            ng-model="product.sku"
                                            ng-pattern="/^\d*[1-9]\d*$/"
                                            ng-readonly="product.checked"
                                            ng-click="check(index)">
+                                    <div class="error" ng-if="exist">Sku already exist</div>
                                     <div ng-messages="productForm.sku.$error" ng-show="productForm.sku.$dirty">
                                         <div ng-message="required">SKU is required.</div>
                                         <div ng-message="md-maxlength">The SKU must be less than 10 characters long.</div>
@@ -93,10 +95,15 @@
                                 <!--Disabled for now-->
                                 <md-input-container class="md-block" flex="50" ng-hide="childMenuHide">
                                     <label>Sub Category</label>
-                                    <md-select class="" placeholder="Select Category" ng-model="product.childId"
+                                    <md-select class="" placeholder="Sub Category" ng-model="product.childId"
                                                required>
-                                        <md-option ng-value="child.id" ng-repeat="child in child">{{child.name}}
+                                        <md-option ng-value="child.id" ng-repeat="child in child ">{{child.name}}
                                         </md-option>
+
+                                        <!--// create new catergory-->
+                                        <md-option ng-click="newcategory ()">Create New Category</md-option>
+                                        
+
                                     </md-select>
                                 </md-input-container>
                             </div>
@@ -104,7 +111,7 @@
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                                <md-button class="me-default-button" ng-disabled="productForm.$invalid" ng-click="generalDetails(product,2)">Next</md-button>
+                                <md-button class="me-default-button" ng-disabled="productForm.$invalid || exist" ng-click="generalDetails(product,2)">Next</md-button>
                             </div>
                         </div>
                     </form>
@@ -214,17 +221,35 @@
 
                                 </td>
                                 <td>
+
                                     <md-input-container class="md-container-modify">
-                                        <input id ='weight_{{$index}}'  type="text" name="weight_{{$index}}" min="1"
+                                        <input id ='weight_{{$index}}'    type="number" name="weight_{{$index}}" min="0"
                                                aria-label="Weight"
-                                               ng-pattern="/^\w+/" maxlength="8" ng-model="data.weight"
-                                               ng-required="data.unlimited == false" ignore-mouse-wheel >
-                                        <div ng-messages="priceAndVariantsForm['weight_' + $index].$error"
-                                             ng-show="priceAndVariantsForm['weight_' + $index].$dirty">
-                                            <div ng-message="pattern">Invalid weight</div>
+                                               min="0.00" name="price_{{$index}}" ng-pattern="/^\w+/" maxlength="8"
+                                               ng-model="data.weight" required ignore-mouse-wheel>
+                                        <div ng-messages="priceAndVariantsForm['weight' + $index].$error"
+                                             ng-show="priceAndVariantsForm['weight' + $index].$dirty">
+                                            <div ng-message="pattern">Invalid Weight</div>
                                             <div ng-message="required" class="my-message">Required!</div>
                                         </div>
+
                                     </md-input-container>
+
+                                    <!--<md-input-container class="md-container-modify">-->
+                                        <!--<input id ='weight_{{$index}}'  type="text" name="weight_{{$index}}" min="1"-->
+                                               <!--aria-label="Weight"-->
+                                               <!--ng-pattern="/^\w+/" maxlength="8" ng-model="data.weight"-->
+                                               <!--ng-required="data.unlimited == false" ignore-mouse-wheel >-->
+                                        <!--<div ng-messages="priceAndVariantsForm['weight_' + $index].$error"-->
+                                             <!--ng-show="priceAndVariantsForm['weight_' + $index].$dirty">-->
+                                            <!--<div ng-message="pattern">Invalid weight</div>-->
+                                            <!--<div ng-message="required" class="my-message">Required!</div>-->
+                                        <!--</div>-->
+                                    <!--</md-input-container>-->
+
+
+
+
                                 </td>
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
                                 <td>
@@ -295,7 +320,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="nextStep3Digital(3,product,variants)">Next
+                            <md-button class="me-default-button" ng-click="nextStep3Digital(3,product,variants,weight)">Next
                             </md-button>
                         </div>
                     </div>
@@ -314,7 +339,9 @@
                         <div class="file-upload-wrapper2 clearfix">
 
                             <div class="cropArea">
-                                <img-crop area-type="square" image="myImage" result-image="picFile"></img-crop>
+                                <img-crop image="myImage" area-type="rectangle" result-image="picFile"
+                                         >
+                                </img-crop>
                             </div>
 
                             <div class="inputField btn-material img-up">

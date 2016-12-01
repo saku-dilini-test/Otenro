@@ -7,15 +7,20 @@
 
 mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService) {
 
+
     $scope.$emit('hideMenu',{});
     //getting the user's registered name and address
     $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
+
+     //setting Order Purchase History
+    var orderHistory = [];
+    $scope.history  = JSON.parse(localStorage.getItem('history'));
 
     // --/-- Here start retrieving the currency --/--//
     $scope.userId = $rootScope.userId;
     $scope.appId = $rootScope.appId;
     $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-        $scope.currency = data;
+        $rootScope.currency = data;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -41,7 +46,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here ends retrieving the currency --/--//
 
     // --/-- Here start Card Payment Function --/--
-    console.log($stateParams.item.amount)
+    console.log($stateParams.item.amount);
     // Config Cart payment
     $scope.cardType = {};
     $scope.card = {
@@ -68,7 +73,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         stripe.charges.create({
                 // amount is in cents so * 100
                 amount: _cardInformation.amount * 100,
-                currency: $scope.currency.symbol,
+                currency: $rootScope.currency.symbol,
                 card: {
                     "number": _cardInformation.number,
                     "exp_month": _cardInformation.exp_month,
@@ -87,32 +92,36 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                     // TODO : Error handle here
                 }else{
                     alert("Payment Success");
-                    if($stateParams.item.location == "delivery"){
+                    if($stateParams.item.delivery.method == "Delivery"){
                         $scope.details ={
                             appId : $rootScope.appId,
                             item : $stateParams.item.cart,
-                            amount : $stateParams.amount,
+                            amount : $stateParams.item.amount,
                             customerName : $scope.user.name,
                             deliverName : $stateParams.item.delivery.name,
                             deliveryNo : $stateParams.item.delivery.streetNumber,
-                            deliveryStreet : $stateParams.item.delivery.street,
+                            deliveryStreet : $stateParams.item.delivery.streetName,
                             deliveryCity : $stateParams.item.delivery.city,
                             deliveryCountry : $stateParams.item.delivery.country,
                             deliveryZip : $stateParams.item.delivery.zip,
                             telNumber : $stateParams.item.delivery.number,
                             tax :   $stateParams.item.taxTotal,
+                            shippingCost :   $stateParams.item.shippingCost,
                             shippingOpt : $stateParams.shipping.shippingOption,
+                            email: $stateParams.item.userEmail
                         };
                     }
                     else{
                         $scope.details ={
                             appId : $rootScope.appId,
-                            item : $stateParams.item,
-                            amount : $stateParams.amount,
+                            item : $stateParams.item.cart,
+                            amount : $stateParams.item.amount,
                             customerName : $stateParams.deliverDetails.name,
                             telNumber : $stateParams.deliverDetails.number,
-                            tax :   $scope.tax,
-                            pickupId: $stateParams.item.pickupId
+                            tax :   $stateParams.item.taxTotal,
+                            shippingCost :   $stateParams.item.shippingCost,
+                            pickupId: $stateParams.item.pickupId,
+                            email: $stateParams.item.userEmail
                         }
                     }
                     $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -125,6 +134,19 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                                             $rootScope.cart.totalPrice = 0;
                                             $rootScope.cart.totalQuantity = 0;
+
+                                            //Pushing into order purchase history
+                                            if(angular.fromJson(localStorage.getItem('history')) != null){
+                                            orderHistory = angular.fromJson(localStorage.getItem('history'));
+                                            }
+                                            orderHistory.push({
+                                                orderHistoryKey : $rootScope.appId,
+                                                createdDate: new Date(),
+                                                item :   $stateParams.item.cart,
+                                                amount :  $stateParams.item.amount,
+                                            });
+                                            localStorage.setItem('history', JSON.stringify(orderHistory));
+
                                             var alertPopup = $ionicPopup.alert({
                                                 title: 'Thank You',
                                                 subTitle: 'Your Order has been successfully processed',
@@ -158,7 +180,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here start Cash Payment Function --/--
 
     $scope.confirmCashPayment = function(){
-        if($stateParams.item.location == "delivery"){
+        if($stateParams.item.delivery.method == "Delivery"){
             $scope.details ={
                 appId : $rootScope.appId,
                 item : $stateParams.item.cart,
@@ -166,12 +188,13 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 customerName : $scope.user.name,
                 deliverName : $stateParams.item.delivery.name,
                 deliveryNo : $stateParams.item.delivery.streetNumber,
-                deliveryStreet : $stateParams.item.delivery.street,
+                deliveryStreet : $stateParams.item.delivery.streetName,
                 deliveryCity : $stateParams.item.delivery.city,
                 deliveryCountry : $stateParams.item.delivery.country,
                 deliveryZip : $stateParams.item.delivery.zip,
                 telNumber : $stateParams.item.delivery.number,
                 tax :   $stateParams.item.taxTotal,
+                shippingCost :   $stateParams.item.shippingCost,
                 shippingOpt : $stateParams.item.shipping.shippingOption,
                 email: $stateParams.item.userEmail
             };
@@ -184,7 +207,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 customerName : $stateParams.item.deliverDetails.name,
                 telNumber : $stateParams.item.deliverDetails.number,
                 tax :   $stateParams.item.taxTotal,
-                pickupId: $stateParams.item.pickupId
+                shippingCost :   $stateParams.item.shippingCost,
+                pickupId: $stateParams.item.pickupId,
+                email: $stateParams.item.userEmail
             }
         }
         $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -197,6 +222,19 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                 $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                                 $rootScope.cart.totalPrice = 0;
                                 $rootScope.cart.totalQuantity = 0;
+
+                                //Pushing into order purchase history
+                                if(angular.fromJson(localStorage.getItem('history')) != null){
+                                orderHistory = angular.fromJson(localStorage.getItem('history'));
+                                }
+                                orderHistory.push({
+                                    orderHistoryKey : $rootScope.appId,
+                                    createdDate: new Date(),
+                                    item :   $stateParams.item.cart,
+                                    amount :  $stateParams.item.amount,
+                                });
+                                localStorage.setItem('history', JSON.stringify(orderHistory));
+
                                 var alertPopup = $ionicPopup.alert({
                                     title: 'Thank You',
                                     subTitle: 'Your Order has been successfully processed',
@@ -225,9 +263,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // Buy With PayPal
     $scope.buyWithPayPal = function () {
         PaypalService.initPaymentUI().then(function () {
-            PaypalService.makePayment($stateParams.amount, "Total Amount").then(function (response) {
-                alert("success"+JSON.stringify(response));
-                if($stateParams.item.location == "delivery"){
+            PaypalService.makePayment($stateParams.item.amount, "Total Amount").then(function (response) {
+                if($stateParams.item.delivery.method == "Delivery"){
                     $scope.details ={
 
                         appId : $rootScope.appId,
@@ -236,12 +273,13 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         customerName : $scope.user.name,
                         deliverName : $stateParams.item.delivery.name,
                         deliveryNo : $stateParams.item.delivery.streetNumber,
-                        deliveryStreet : $stateParams.item.delivery.street,
+                        deliveryStreet : $stateParams.item.delivery.streetName,
                         deliveryCity : $stateParams.item.delivery.city,
                         deliveryCountry : $stateParams.item.delivery.country,
                         deliveryZip : $stateParams.item.delivery.zip,
                         telNumber : $stateParams.item.delivery.number,
                         tax :   $stateParams.item.taxTotal,
+                        shippingCost :   $stateParams.item.shippingCost,
                         shippingOpt : $stateParams.item.shipping.shippingOption,
                         email: $stateParams.item.userEmail
                     };
@@ -254,7 +292,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         customerName : $stateParams.item.deliverDetails.name,
                         telNumber : $stateParams.item.deliverDetails.number,
                         tax :   $stateParams.item.taxTotal,
-                        pickupId: $stateParams.item.pickupId
+                        shippingCost :   $stateParams.item.shippingCost,
+                        pickupId: $stateParams.item.pickupId,
+                        email: $stateParams.item.userEmail
                     }
                 }
                 $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -267,6 +307,19 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                         $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                                         $rootScope.cart.totalPrice = 0;
                                         $rootScope.cart.totalQuantity = 0;
+
+                                        //Pushing into order purchase history
+                                        if(angular.fromJson(localStorage.getItem('history')) != null){
+                                        orderHistory = angular.fromJson(localStorage.getItem('history'));
+                                        }
+                                        orderHistory.push({
+                                            orderHistoryKey : $rootScope.appId,
+                                            createdDate: new Date(),
+                                            item :   $stateParams.item.cart,
+                                            amount :  $stateParams.item.amount,
+                                        });
+                                        localStorage.setItem('history', JSON.stringify(orderHistory));
+
                                         var alertPopup = $ionicPopup.alert({
                                             title: 'Thank You',
                                             subTitle: 'Your Order has been successfully processed',

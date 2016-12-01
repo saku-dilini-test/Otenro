@@ -22,92 +22,6 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('HomeCtrl', function($scope,$timeout,$ionicLoading,appServices,readMadeEasy,constants, $ionicTabsDelegate,$ionicSlideBoxDelegate
-) {
-
-    $ionicLoading.show({
-        template: '<ion-spinner icon="lines"  class="spinner-energized" ></ion-spinner>'
-    });
-
-    // After 1000 ms execute
-    $timeout(function () {
-        getAllItemByAppId();
-    }, 1000);
-
-    // get all items function
-
-    function getAllItemByAppId() {
-        readMadeEasy.readFile().success(function(appData){
-        appServices.getAllItemByAppId(appData.appId)
-            .success(function (data) {
-                $ionicLoading.hide();
-                /**  Swipe Function Configuration  **/
-                $scope.itemList = data;
-                $scope.startIndex = 0;
-                $scope.leftIndex = 0;
-                $scope.rightIndex = $scope.itemList.length-1;
-                $scope.isEnableLeftButton = false;
-                $scope.isEnableRightButton = true;
-                if($scope.rightIndex == -1){
-                    $scope.isEnableRightButton = false;
-                }
-                // initial set as 0 index
-                $scope.setItem(0);
-                $ionicSlideBoxDelegate.update();
-
-            }).error(function (err) {
-                $ionicLoading.hide();
-                alert('Items Loading error');
-            });
-
-            // defined third navigation image path
-            $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+ appData.userId +
-                              "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";
-        });
-    }
-    // view item
-    $scope.item = {};
-    // item set function
-    $scope.setItem = function(id){
-        if($scope.leftIndex <= id && id <= $scope.rightIndex){
-            $scope.item = $scope.itemList[id];
-        }
-    }
-
-
-    // get all menu by app Id
-        readMadeEasy.readFile().success(function(appData){
-            appServices.getAllMenuByAppId(appData.appId)
-                .success(function (data) {
-                    $scope.categoryList = data;
-                }).error(function (err) {
-                    alert('Menu Loading error');
-            });
-
-            // defined second navigation image path
-            $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
-                              "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
-        });
-
-        // ionic slider options
-        $scope.options = {
-            nextButton: '.swiper-button-next',
-            prevButton: '.swiper-button-prev',
-            pagination: '.swiper-pagination',
-            paginationType: 'fraction',
-            effect: 'coverflow',
-            centeredSlides: true,
-            coverflow: {
-                        rotate: 50,
-                        stretch: 0,
-                        depth: 100,
-                        modifier: 1,
-                        slideShadows : true
-                    }
-        }
-
-})
-
 .controller('MenuCtrl', function($scope,appServices,readMadeEasy,constants) {
 
     // get all menu by app Id
@@ -128,20 +42,6 @@ angular.module('starter.controllers', [])
 .controller('ItemsCtrl', function($scope,$stateParams,$state,appServices,readMadeEasy,constants) {
 
     $scope.$emit('hideMenu',{});
-    // get all menu by app Id
-            readMadeEasy.readFile().success(function(appData){
-                appServices.getAllMenuByAppId(appData.appId)
-                    .success(function (data) {
-                        $scope.categoryList = data;
-
-                    }).error(function (err) {
-                        alert('Menu Loading error');
-                });
-
-                // defined second navigation image path
-                $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
-                                  "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
-            });
 
 
     // set select Menu Name
@@ -277,8 +177,8 @@ angular.module('starter.controllers', [])
     $scope.addToCart = function() {
         if($scope.selectedVariant.buyQuantity == null){
             $ionicPopup.alert({
-                title: 'Please enter a quantity',
-                template: 'Warning!!!',
+                title: 'Warning!',
+                template: 'Please enter a quantity',
                 cssClass: 'ionicPopUp',
                 buttons:[
                     {text:'OK',
@@ -293,12 +193,13 @@ angular.module('starter.controllers', [])
             sku: $scope.selectedVariant.sku,
             price: $scope.selectedVariant.price,
             total : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.price,
-            imgURL : $stateParams.item.tempImageArray
+            imgURL : $stateParams.item.tempImageArray,
+            totWeight : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.weight
 
         });
         $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
         $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-        $state.go('tab.cart');
+        $state.go('tab.menu');
         }
     }
 

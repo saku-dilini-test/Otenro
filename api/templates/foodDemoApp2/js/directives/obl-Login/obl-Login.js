@@ -19,12 +19,13 @@
 							var requestParams = {
 								"token": res.data.token,
 								"email": data.email,
-								"name": res.data.user.firstName,
+								"name": res.data.user.name,
 								"phone": res.data.user.phoneNumber,
 								"streetNumber": res.data.user.streetNumber,
 								"streetName": res.data.user.streetName,
 								"country": res.data.user.country,
 								"city": res.data.user.city,
+								"zip": res.data.user.zip,
 								"type": 'internal',
 								"appId":res.data.user.appId
                             };

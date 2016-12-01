@@ -83,17 +83,45 @@ module.exports = {
         var searchQuery = {
             id : req.body.product.id
         };
-
+        var skuSearchQuery = {
+            productId : req.body.product.id
+        };
+        var sku =[];
         if(typeof req.body.product.id != 'undefined'){
             delete product["id"];
             ThirdNavigation.update(searchQuery,product,function(err,main) {
                 if (err) return res.send(err);
-                return res.send(200, {message: 'Shipping Collection successfully updated'});
+                var data = {
+                    userId: req.userId,
+                    appId: product.appId,
+                    productId:skuSearchQuery.productId
+                }
+                for(var i=0; i<product.variants.length; i++){
+                    sku.push(product.variants[i].sku)
+                }
+                data.sku = sku;
+                Sku.update(skuSearchQuery,data,function(err,skuData){
+                    if (err) return res.send(err);
+                    return res.send(200, {message: 'Shipping Collection successfully updated'});
+                })
+
             });
         }else{
             ThirdNavigation.create(product).exec(function (err, result) {
                 if (err) return res.send(err);
-                return res.send(200, {message: 'Shipping Collection successfully created'});
+                var data = {
+                    userId: req.userId,
+                    appId: product.appId,
+                    productId:result.id
+                }
+                for(var i=0; i<product.variants.length; i++){
+                    sku.push(product.variants[i].sku);
+                }
+                data.sku = sku;
+                 Sku.create(data,function(err,skuData){
+                     if (err) return res.send(err);
+                     return res.send(200, {message: 'Shipping Collection successfully created'});
+                 })
             });
         }
     },
@@ -138,6 +166,7 @@ module.exports = {
     deleteProductOrVariant: function(req,res){
         var item = req.body.item;
         var query = {'id':item.id};
+        var skuQuery = {productId:item.id};
         //Variant of a Product
         if(item.sku){
             ThirdNavigation.findOne(query).exec(function(err,product){
@@ -151,29 +180,49 @@ module.exports = {
                         deleteVariants.splice(index, 1);
                     }
                 }
+                Sku.findOne(skuQuery).exec(function(err,skuOutput){
+                    if(err) sails.log.error(new Error("Error while retrieving Sku array by productId : "+ item.id));
+                    var skuArray = skuOutput.sku;
+                    for(var i=0; i<skuArray.length; i++){
+                        if(skuArray[i] == item.sku){
+                            var index = skuArray.indexOf(skuArray[i]);
+                            skuArray.splice(index, 1);
+                        }
+                    }
                 //If Variants has one or more elements
                 if(0 < deleteVariants.length){
                     ThirdNavigation.update(query,product).exec(function(err,item){
                         if(err) sails.log.error(new Error("Error while deleting a Variant from a product : "+
                             JSON.stringify(product)));
                         sails.log.info("Product update Successfully!!");
-                        res.ok({'status':"Success"});
+                        Sku.update(skuQuery,skuOutput).exec(function(err,result){
+                            if(err) sails.log.error(new Error("Error while deleting a Variant from sku array : "+
+                                JSON.stringify(skuOutput)));
+                                res.ok({'status':"Success"});
+                        })
                     });
                 }else{
                     //Product is deleted if there is no variants in the Variants array
                     ThirdNavigation.destroy(query).exec(function(err,deletedItem){
                         if(err) sails.log.error(new Error("Error while deleting the Product by ID : "+ item.id));
                         sails.log.info("Successfully Delete the Product"+ JSON.stringify(deletedItem));
-                        res.ok({'status':"Success"});
+                        Sku.destroy(skuQuery).exec(function(err,deletedSku){
+                           if(err) sails.log.error(new Error("Error while deleting the Sku array by productId : "+ item.id));
+                           res.ok({'status':"Success"});
+                        })
                     })
                 }
+                });
             });
         }else{
             //When User delete the whole product
             ThirdNavigation.destroy(query).exec(function(err,deletedItem){
                 if(err) sails.log.error(new Error("Error while deleting the Product by ID : "+ item.id));
                 sails.log.info("Successfully Delete the Product"+ JSON.stringify(deletedItem));
-                res.ok({'status':"Success"});
+                Sku.destroy(skuQuery).exec(function(err,deletedSku){
+                    if(err) sails.log.error(new Error("Error while deleting the Sku array by productId : "+ item.id));
+                    res.ok({'status':"Success"});
+                })
             });
         }
     },
@@ -255,6 +304,28 @@ module.exports = {
        if (err) return done(err);
          res.send(app);
      })
+    },
+    /*
+        check uniqueness of the sku
+    */
+    checkUniqueSku: function(req,res){
+        var searchApp={
+            userId: req.body.userId
+        }
+        Sku.find(searchApp, function(err, app){
+            if (err) return done(err);
+            for(var i=0; i<app.length; i++){
+                for(var j=0; j<app[i].sku.length; j++){
+                if(app[i].sku[j] == req.body.sku){
+                    return res.send('true');
+                    break;
+                }
+                }
+            }
+            res.send('false');
+
+        })
+
     }
 
 

@@ -140,16 +140,6 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     }
                 }
             })
-            .state('tab.home', {
-                cache: false,
-                url: '/home',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/tab-home.html',
-                        controller: 'HomeCtrl'
-                    }
-                }
-            })
             .state('tab.menu', {
                 cache: false,
                 url: '/menu',
@@ -221,15 +211,6 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     }
                 }
             })
-            .state('tab.ourStores', {
-                url: '/ourStores',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/tab-ourStores.html',
-                        controller: 'OurStoresCtrl'
-                    }
-                }
-            })
             .state('tab.aboutUs', {
                 cache: false,
                 url: '/aboutUs',
@@ -247,6 +228,36 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     'menuContent': {
                         templateUrl: 'templates/tab-contactUs.html',
                         controller: 'ContactUsCtrl'
+                    }
+                }
+            })
+            .state('tab.policies', {
+                cache: false,
+                url: '/policies',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/policies.html',
+                        controller: 'policiesCtrl'
+                    }
+                }
+            })
+            .state('tab.orderHistory', {
+                cache: false,
+                url: '/orderHistory',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/orderHistory.html',
+                        controller: 'orderHistoryCtrl'
+                    }
+                }
+            })
+            .state('tab.terms', {
+                cache: false,
+                url: '/terms',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/terms.html',
+                        controller: 'termsCtrl'
                     }
                 }
             })
@@ -269,6 +280,68 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     }
                 }
             })
+
+                   .state('tab.shipping', {
+                         cache: false,
+                         url: '/shipping',
+                         params:{
+                             item: null,
+                         },
+                         views: {
+                             'menuContent': {
+                                 templateUrl: 'templates/shipping.html',
+                                 controller: 'shippingCtrl'
+                             }
+                         }
+                     })
+
+                    .state('tab.checkout', {
+                        cache: false,
+                        url: '/checkout',
+                        params:{
+                            item: null,
+                        },
+                        views: {
+                            'menuContent': {
+                                templateUrl: 'templates/checkout.html',
+                                controller: 'checkoutCtrl'
+                            }
+                        }
+                    })
+
+
+            .state('tab.payment', {
+                        cache: false,
+                        url: '/payment',
+                        params:{
+                            item: null,
+                            registeredName:null,
+                            deliverDetails:null,
+                            amount:null,
+                            shippingOpt:null,
+                            method:null,
+                            pickupId:null
+                        },
+                        views: {
+                            'menuContent': {
+                                templateUrl: 'templates/payment.html',
+                                controller: 'paymentCtrl'
+                            }
+                        }
+                    })
+
+
+            .state('tab.category', {
+                        cache: false,
+                        url: '/category',
+                        views: {
+                            'menuContent': {
+                                templateUrl: 'templates/category.html',
+                                controller: 'categoryCtrl'
+                            }
+                        }
+                    })
+
             .state('tab.pickupDetails', {
                 cache: false,
                 url: '/pickupDetails',
@@ -284,6 +357,6 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/tab/home');
+        $urlRouterProvider.otherwise('/tab/menu');
 
     });

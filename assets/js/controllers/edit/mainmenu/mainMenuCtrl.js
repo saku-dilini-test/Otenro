@@ -137,8 +137,14 @@
         // Add New Menu
         $scope.goToAddNewMenuItemView = function () {
             if($scope.templateCategory == tempCatBusiness){
+            console.log(tempCatBusiness);
+            console.log($scope.templateCategory );
+            console.log("1111111");
                 mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',$scope.templateCategory);
             }else if($scope.templateCategory == tempCatMedia){
+             console.log(tempCatMedia);
+             console.log("sasdasdasdasd");
+                        console.log($scope.templateCategory );
                 mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory',$scope.templateCategory);
             }
         };

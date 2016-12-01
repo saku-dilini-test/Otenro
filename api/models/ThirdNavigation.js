@@ -50,6 +50,9 @@ module.exports = {
         type : {
             type: 'string'
         },
+        enteredBy : {
+            type: 'string'
+        },
         createdDate: {
             type: 'string'
         }
