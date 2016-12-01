@@ -588,3 +588,7 @@ trix-editor ol li {
 trix-editor {
     padding: 4px 20px;
 }
+
+a {
+    color: inherit !important;
+}

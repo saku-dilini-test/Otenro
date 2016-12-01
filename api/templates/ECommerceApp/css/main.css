@@ -1,15 +1,12 @@
 /** ----------- Start Custom update Css Class ---------- **/
 .made-easy-background-color {
-    background-color: #10b23e !important;
+    background-color: #fff !important;
 }
 .made-easy-background-image{
     background: url(../img/background.jpg) center;
     background-size: cover;
 }
-.made-easy-background-color {
-    background-color: #ffffff;
-    background-size: cover;
-}
+
 .made-easy-navigationBarColor{
   background-color: rgba(0,0,0,0.8);
   color:#fff;
