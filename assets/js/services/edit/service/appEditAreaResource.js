@@ -15,6 +15,9 @@
             },
             deleteSelectedApp: function(params){
                 return  $http.post(SERVER_URL + 'edit/deleteSelectedApp',params);
+            },
+            deleteDefaultData: function(params){
+                return  $http.post(SERVER_URL + 'edit/deleteDefaultData',params);
             }
         }
     }

@@ -89,8 +89,6 @@ ion-slides {
 }
 
 .home .card{
-    height: 100%;
-    margin: 0 !important;
     padding:0;
 }
 
@@ -100,6 +98,10 @@ ion-slides {
     text-align:center;
 }
 .image-wrapper img{
+    width:100%;
+}
+
+.header-image img{
     width:100%;
 }
 
@@ -236,8 +238,12 @@ ion-slides {
 
 .swiper-button-prev, .swiper-button-next {
     top:68%;
-    right: -10px;
+    right: 0px;
 
+}
+
+.swiper-button-prev{
+    left:20px;
 }
 
 .select-tab-item{
@@ -245,19 +251,12 @@ ion-slides {
     width: 100%;
 }
 
-.order-item-slide ion-slides{
-    height:100%;
+
+.slider-slides{
+    width:inherit !important;
 }
 
-.order-item-slide .swiper-button-next {
-    top:26%;
-    right: -2px;
-}
 
-.order-item-slide .swiper-button-prev{
-    top:26%;
-    left:-2px;
-}
 
 /*font-size*/
 

@@ -102,6 +102,7 @@ module.exports.routes = {
     'GET /edit/buildSource': 'EditController.buildSource',
     'GET /edit/getSelectedApp': 'EditController.getSelectedApp',
     'GET /edit/deleteSelectedApp': 'EditController.deleteSelectedApp',
+    'GET /edit/deleteDefaultData': 'EditController.deleteDefaultData',
 
     //'POST /edit/updateCategory' : '',
     //'POST /edit/checkCategory': '',

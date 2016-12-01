@@ -130,6 +130,8 @@
                     return articleService.showCategoriesDialog(clickTitle);
                 if ('delete' == clickTitle)
                     return commerceService.showDeleteAppDialog(clickTitle);
+                if ('remove' == clickTitle)
+                    return commerceService.showRemoveDefaultDataDialog(clickTitle);
             }
         }
     }

@@ -1070,7 +1070,6 @@
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
                         toastr.success('Store settings successfully updated. ', 'Awsome!', {closeButton: true});
-                          $mdDialog.hide();
                     }).error(function(data, status, headers, config) {
                     toastr.error('Updating of basic information failed', { closeButton: true});
                 });

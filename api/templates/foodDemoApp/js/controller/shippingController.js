@@ -111,8 +111,8 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
             shippingCost = shippingCostPreOrderFee + shippingCostFeePerItem;
 
         }else if(shippingDetails.shipping.shippingOption == "Weight Based"){
-
-            console.log(shippingDetails.shipping.weightRanges);
+            shippingDetails.overWeight = false;
+            shippingDetails.underWeight = false;
             for(var i = 0; i < shippingDetails.shipping.weightRanges.length; i++){
                 var weightRange = shippingDetails.shipping.weightRanges[i];
                 if(weightRange.startWeight <= totalWeight && weightRange.endWeight >= totalWeight){
@@ -120,7 +120,12 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
                 }
 
             }
-
+            if(shippingDetails.shipping.weightRanges[0].startWeight>totalWeight){
+                shippingDetails.underWeight = true;
+            }
+            if(shippingDetails.shipping.weightRanges[shippingDetails.shipping.weightRanges.length-1].endWeight<totalWeight){
+                shippingDetails.overWeight = true;
+            }
         }else{
 
             shippingCost = shippingDetails.shipping.cost;
@@ -129,10 +134,6 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
         shippingDetails.delivery = $stateParams.item;
         shippingDetails.shippingCost = shippingCost;
-        console.log(totalWeight);
-        console.log(shippingCost);
-        console.log(shippingDetails.shipping);
-        console.log($rootScope.cart.cartItems);
         $state.go('app.checkout',{item:shippingDetails});
     }
 
