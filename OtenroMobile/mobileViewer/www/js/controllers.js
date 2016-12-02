@@ -37,10 +37,12 @@ angular.module('starter.controllers', [])
 
   /** --/-- Dash-board Ctrl ------------------- **/
    .controller('DashCtrl', function($scope,$ionicLoading,
-     dashBoardService,meServerUrl,allApps,$state,$interval) {
+     dashBoardService,meServerUrl,fileServerUrl,allApps,$state,$interval) {
 
     // Set me Server URL
     var meServerURL = meServerUrl.data.meServerUrl;
+    $scope.fileUrl = fileServerUrl.data.fileServerUrl;
+    $scope.date = new Date().getTime();
 
     // Set mobile application list
     $scope.appList = allApps.data;
@@ -63,7 +65,8 @@ angular.module('starter.controllers', [])
     $scope.openApp = function(userID,appId,appName){
 
       // ME SERVER URL for GIVEN User ID & AppId
-      var url = meServerURL+'/temp/'+userID+'/templates/'+appId+'/#/';
+        var url = meServerURL+'/meServer/temp/'+userID+'/templates/'+appId+'/#/';
+      console.log(url);
 
       // Keep in mind that you must add your own images to native resource.
       // Images below are for sample only. They are not imported by this plugin.

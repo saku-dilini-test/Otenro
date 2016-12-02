@@ -32,5 +32,8 @@ module.exports = {
 
     meServerUrl :function(req,res){
         res.send({meServerUrl:config.server.host+':'+config.ME_PORT})
+    },
+    fileServerUrl :function(req,res){
+        res.send({fileServerUrl:config.server.host+':'+config.server.port})
     }
 };

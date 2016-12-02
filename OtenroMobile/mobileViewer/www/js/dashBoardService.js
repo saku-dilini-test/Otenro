@@ -12,6 +12,9 @@
       },
       getMeServerUrl: function () {
         return $http.get(SERVER_URL+'mobile/meServerUrl');
+      },
+      getFileServerUrl: function () {
+        return $http.get(SERVER_URL+'mobile/fileServerUrl');
       }
     }
   }
