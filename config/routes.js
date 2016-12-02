@@ -290,6 +290,7 @@ module.exports.routes = {
 
     'GET /mobile/allApps': 'mobileViewer/MobileController.allApps',
     'GET /mobile/meServerUrl': 'mobileViewer/MobileController.meServerUrl',
+    'GET /mobile/fileServerUrl': 'mobileViewer/MobileController.fileServerUrl',
 
     /***
      * Technical Support Controller
