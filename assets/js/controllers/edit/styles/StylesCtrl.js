@@ -390,9 +390,13 @@
                                 closeButton: true
                             });}
 
+                        $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                            +'/templates/'+appId+'/?'+new Date().getTime();
+                        mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                        console.log($scope.appTemplateUrl);
 
-                        var tempUrl = mySharedService.url;
-                        mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                        // var tempUrl = mySharedService.url;
+                        // mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
 
                     }).error(function(err) {
                         toastr.error( type , 'Update failed ', {
