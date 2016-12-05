@@ -5,6 +5,7 @@
     height: 100%;
     border-radius: 1em;
     float: none;
+    background-size:100%;
 }
 
 .power {
@@ -80,8 +81,9 @@
 }
 
 .appViewClass{
-    height: 100%;
-    width: auto;
+    height: 640px;
+    width: 360px;
+    zoom:75%;
     margin-top: 2px;
     margin-left: 2px;
 }
