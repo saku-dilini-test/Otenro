@@ -43,9 +43,9 @@ module.exports = {
   
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'http://otenro.com',
+  HOST_URL : 'http://beta.otenro.com',
   // ME SERVER Config 
-  ME_SERVER : '/var/www/html/meAppServer/temp/',
+  ME_SERVER : '/home/admin/web/cdn.otenro.com/public_html/temp/',
   ME_SERVER_PORT : 8081,
   // APP FILE SERVER Config
   APP_FILE_SERVER : '/home/otenro/appFileServer/',
