@@ -47,6 +47,12 @@ module.exports = function(grunt) {
 		  cwd: './assets',
 		  src: ['**/*.!(coffee|less)'],
 		  dest: '.tmp/public'
+		},
+		{
+		 expand: true,
+		 cwd: './bower_components/angular-ui-grid',
+		 src: ['ui-grid.woff','ui-grid.ttf','ui-grid.svg','ui-grid.eot'],
+		 dest: '.tmp/public/min'
 		}
       ]
 		},
