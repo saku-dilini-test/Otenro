@@ -23,14 +23,13 @@ module.exports = {
     viewTemplate : function(req,res){
 
         var templateName = req.body.templateName,
-            userId = req.userId,
             templateCategory = req.body.templateCategory,
             userId = req.body.userId,
             tempAppDirPath = config.ME_SERVER + userId + '/templates/',
             templatePath = sails.config.appPath + '/api/templates/' + templateName,
             appName = req.body.appName,
             serverTmp="http://localhost:port",
-            serverOrg=config.server.host+':'+config.server.port;
+            serverOrg=config.server.host;
 
         var loginPath = '/#/',
             isApplyStyle =  {

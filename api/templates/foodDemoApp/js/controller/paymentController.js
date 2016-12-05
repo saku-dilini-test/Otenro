@@ -19,7 +19,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     $scope.userId = $rootScope.userId;
     $scope.appId = $rootScope.appId;
     $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-        $rootScope.currency = data;
+        $rootScope.currency = data.sign;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -107,7 +107,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             tax :   $stateParams.item.taxTotal,
                             shippingCost :   $stateParams.item.shippingCost,
                             shippingOpt : $stateParams.shipping.shippingOption,
-                            email: $stateParams.item.userEmail
+                            email: $stateParams.item.userEmail,
+                            currency:$rootScope.currency
                         };
                     }
                     else{
@@ -120,7 +121,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             tax :   $stateParams.item.taxTotal,
                             shippingCost :   $stateParams.item.shippingCost,
                             pickupId: $stateParams.item.pickupId,
-                            email: $stateParams.item.userEmail
+                            email: $stateParams.item.userEmail,
+                            currency:$rootScope.currency
                         }
                     }
                     $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -195,7 +197,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 tax :   $stateParams.item.taxTotal,
                 shippingCost :   $stateParams.item.shippingCost,
                 shippingOpt : $stateParams.item.shipping.shippingOption,
-                email: $stateParams.item.userEmail
+                email: $stateParams.item.userEmail,
+                currency:$rootScope.currency
             };
         }
         else{
@@ -208,7 +211,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 tax :   $stateParams.item.taxTotal,
                 shippingCost :   $stateParams.item.shippingCost,
                 pickupId: $stateParams.item.pickupId,
-                email: $stateParams.item.userEmail
+                email: $stateParams.item.userEmail,
+                currency:$rootScope.currency
             }
         }
         $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -280,7 +284,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         tax :   $stateParams.item.taxTotal,
                         shippingCost :   $stateParams.item.shippingCost,
                         shippingOpt : $stateParams.item.shipping.shippingOption,
-                        email: $stateParams.item.userEmail
+                        email: $stateParams.item.userEmail,
+                        currency:$rootScope.currency
                     };
                 }
                 else{
@@ -293,7 +298,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         tax :   $stateParams.item.taxTotal,
                         shippingCost :   $stateParams.item.shippingCost,
                         pickupId: $stateParams.item.pickupId,
-                        email: $stateParams.item.userEmail
+                        email: $stateParams.item.userEmail,
+                        currency:$rootScope.currency
                     }
                 }
                 $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)

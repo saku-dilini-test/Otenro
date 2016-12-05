@@ -25,7 +25,7 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 80,
+  port: 1337,
 
   //ssl: {
   //  ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
@@ -43,10 +43,10 @@ module.exports = {
   
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'http://otenro.com',
+  HOST_URL : 'http://beta.otenro.com',
   // ME SERVER Config 
-  ME_SERVER : '/home/admin/web/otenro.com/public_html/meAppServer/temp/',
-  ME_SERVER_PORT : 8080,
+  ME_SERVER : '/home/admin/web/cdn.otenro.com/public_html/temp/',
+  ME_SERVER_PORT : 8081,
   // APP FILE SERVER Config
   APP_FILE_SERVER : '/home/otenro/appFileServer/',
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789'

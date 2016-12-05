@@ -59,6 +59,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',])
         templateUrl: 'templates/main.html'
       })
       .state('main.dash', {
+        cache: false,
         url: 'main/dash',
         views: {
           'dash-tab': {
@@ -73,10 +74,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',])
           },
           meServerUrl: function(dashBoardService) {
             return dashBoardService.getMeServerUrl()
+          },
+          fileServerUrl: function(dashBoardService) {
+            return dashBoardService.getFileServerUrl()
           }
         }
       })
       .state('main.userInfo', {
+        cache: false,
         url: 'main/userInfo',
         views: {
           'user-tab': {

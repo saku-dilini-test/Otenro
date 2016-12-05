@@ -14,10 +14,10 @@ module.exports = {
         data['paymentStatus'] = 'Pending';
         data['fulfillmentStatus'] = 'Pending';
 
-
+        console.log(data);
         if(data.pickupId == null){
             ApplicationOrder.create(data).exec(function (err, order) {
-                //console.log(order);
+                console.log(order);
 
                 if (err) res.send(err);
                 var searchApp = {
