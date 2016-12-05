@@ -3,7 +3,7 @@
  */
 (function() {
     angular.module('foodDemoApp').constant('constants', {
-        SERVER_URL: 'http://192.168.8.126:1337'
+        SERVER_URL: 'http://localhost:port'
     })
 })();
 
