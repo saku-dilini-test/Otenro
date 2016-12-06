@@ -24,6 +24,7 @@ module.exports = {
             publicKey: "9bqjdssmgrrg7j8w",
             privateKey: "b5f83bb6a33b0c3be424c45eddc5ad49"
         }).clientToken.generate({}, function (err, response) {
+            console.log("error " + err);
             if (err) return res.send(err);
             console.log("response " + response);
             res.send(response.clientToken);

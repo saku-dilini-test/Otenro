@@ -7,13 +7,7 @@
 
 mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService) {
 
-    $scope.step = 'signup';
-    $scope.customerId = false;
-    $scope.paymentMethodToken = false;
-    $scope.amount = 0;
-    $scope.ready = false;
-    $scope.step = 'verification';
-    $scope.ready = true;
+   
     
     
     $scope.$emit('hideMenu',{});
@@ -430,7 +424,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                     if (response.status === 200 && response.data.transaction.id) {
                         $scope.step = 'done';
                         $scope.transactionId = response.data.transaction.id;
-                       /* console.log('transactionId ' + transactionId);*/
                         if($stateParams.item.delivery.method == "Delivery"){
                             $scope.details ={
 

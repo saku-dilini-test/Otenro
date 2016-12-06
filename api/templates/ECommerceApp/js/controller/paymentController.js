@@ -37,6 +37,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         }
         $scope.paypalShow = data.paypalEnable;
         $scope.stripeShow = data.stripeEnable;
+        $scope.braintreeShow = data.braintreeEnable;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -413,7 +414,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 if (response.status === 200 && response.data.transaction.id) {
                     $scope.step = 'done';
                     $scope.transactionId = response.data.transaction.id;
-                    console.log('transactionId ' + transactionId);
                     if($stateParams.item.delivery.method == "Delivery"){
                         $scope.details ={
 
