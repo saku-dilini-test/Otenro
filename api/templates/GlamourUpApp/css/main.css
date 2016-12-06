@@ -77,10 +77,6 @@ ion-content{
     cursor: url(../img/cursor.cur), auto;
 }
 
-.button.made-easy-button-setting.activated {
-    background:#e5e5e5;
-}
-
 /* ----- View Page ----- */
 
 .made-easy-view .item-buy{

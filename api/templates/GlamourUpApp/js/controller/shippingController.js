@@ -2,7 +2,7 @@
  * Created by Madhuranga on 15/11/16.
  */
 
-mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService) {
+mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService  ,ionicMaterialInk, ionicMaterialMotion) {
 
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
@@ -11,7 +11,6 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
 
     console.log($stateParams.item);
-    console.log(localStorage.getItem('appLocalStorageUser'));
     var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
 
     if($stateParams.item.location == "old"){
@@ -143,5 +142,9 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         $state.go('app.checkout',{item:shippingDetails});
     }
 
+    // Set Motion
+    ionicMaterialMotion.fadeSlideInRight();
 
+    // Set Ink
+    ionicMaterialInk.displayEffect();
 });

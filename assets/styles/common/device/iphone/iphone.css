@@ -81,9 +81,8 @@
 }
 
 .appViewClass{
-    height: 640px;
-    width: 360px;
-    zoom:75%;
+    height: 480px;
+    width: 270px;
     margin-top: 2px;
     margin-left: 2px;
 }

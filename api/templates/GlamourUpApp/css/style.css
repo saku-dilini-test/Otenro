@@ -8,6 +8,11 @@
 .color-invert{
     filter: hue-rotate(180deg);
 }
+
+.item-select select{
+    background:transparent;
+}
+
 /*home page*/
 .bottom{
 	position: relative;

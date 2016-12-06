@@ -1,9 +1,9 @@
-<ion-view class="made-easy-background-image made-easy-background-color" view-title="Shipping Options">
+<ion-view class="made-easy-background-image made-easy-background-color" view-title="Shipping">
     <ion-content >
         <div class="card animated zoomIn delivery-details">
             <form name="shippingForm" novalidate>
                 <div class="row">
-                    <div class="col center made-easy-header-font">Shipping Options</div>
+                    <div class="col center made-easy-header-font">Select an Options</div>
                 </div>
 
                 <ion-checkbox ng-repeat="ship in shippingData"  ng-model="details.shipping" ng-true-value="{{ship}}" class="checkbox-balanced item-checkbox-left" >
@@ -11,10 +11,10 @@
                     <span >{{ship.shippingOption}}</span>
                 </ion-checkbox>
 
-                <div class="row">
+                <div class="row center">
                     <div class="col col-top"> </div>
                     <div class="col col-67 col-center">
-                        <button class="col button button-small button-block made-easy-button-setting"
+                        <button class="button button-raised button-assertive ink-dark"
                                 ng-click="addShipping(details)" >
                             Check Out
                         </button>

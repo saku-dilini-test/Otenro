@@ -153,7 +153,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/register.html',
-            controller: 'registerCtrl'
+            controller: 'appCtrl'
         }
       }
   })
@@ -287,7 +287,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           views: {
               'menuContent': {
                   templateUrl: 'templates/cart.html',
-                  controller: 'cartCtrl'
+                  controller: 'appCtrl'
               }
           }
       })

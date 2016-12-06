@@ -1,8 +1,8 @@
-<ion-view class="made-easy-background-image made-easy-background-color" view-title="Deliver Details">
+<ion-view class="made-easy-background-image made-easy-background-color" view-title="Location">
     <ion-content >
         <div class="card animated zoomIn delivery-details">
             <div class="row">
-                <div class="col align-center made-easy-header-font">Location for Delivery</div>
+                <div class="col center made-easy-header-font">Select a location</div>
             </div>
 
 
@@ -21,37 +21,37 @@
             </ion-checkbox>
 
             <form name="delivery" novalidate>
-                <div class="list delivery-form padding-right"   ng-if="details.location == 'New'">
-                    <label class="item item-input item-stacked-label">
+                <div class="list"   ng-if="details.location == 'New'">
+                    <label class="item item-input item-floating-label">
                         <span class="input-label">Name</span>
-                        <input type="text" ng-model="details.name" placeholder="E.g. John Doe" required>
+                        <input type="text" ng-model="details.name" placeholder="Name" required>
                     </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Street No.</span>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Street Number</span>
                         <input type="text" ng-model="details.streetNumber" placeholder="Street number" required>
                     </label>
-                    <label class="item item-input item-stacked-label">
+                    <label class="item item-input item-floating-label">
                         <span class="input-label">Street Name</span>
                         <input type="text" ng-model="details.streetName" placeholder="Street Name" required>
                     </label>
-                    <label class="item item-input item-stacked-label">
+                    <label class="item item-input item-floating-label">
                         <span class="input-label">City</span>
-                        <input type="text" ng-model="details.city" placeholder="E.g. Colombo" required>
+                        <input type="text" ng-model="details.city" placeholder="City" required>
                     </label>
                     <label class="item item-input item-select">
                         <div class="input-label">Country</div>
-                        <select  placeholder="Select Category" ng-model="details.country" required>
+                        <select  placeholder="Select Country" ng-model="details.country" required>
                             <option ng-value="country.countryName" ng-repeat="country in countries">{{country.countryName}}
                             </option>
                         </select>
                     </label>
-                    <label class="item item-input item-stacked-label">
+                    <label class="item item-input item-floating-label">
                         <span class="input-label">Zip / Postal Code</span>
                         <input type="text" ng-model="details.zip" placeholder="Zip or Postal code" required>
                     </label>
-                    <label class="item item-input item-stacked-label">
+                    <label class="item item-input item-floating-label">
                         <span class="input-label">Contact Number</span>
-                        <input type="text" name="teleNumber" ng-model="details.number" placeholder="E.g. 0712123123"
+                        <input type="text" name="teleNumber" ng-model="details.number" placeholder="Contact Number"
                                ng-pattern="/^[\+]?[(]?[0-9]{2}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,5}$/im"
                                required>
                         <span class="help-block" ng-show="delivery.teleNumber.$error.pattern">
@@ -67,9 +67,9 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <button class="col margin button made-easy-button-setting button-small"  type="reset" value="Reset">Clear</button>
-                    <button class="col margin button made-easy-button-setting button-small" ng-disabled="!details.location || delivery.$invalid" ng-click="deliver(details)" >CheckOut</button>
+                <div class="center col">
+                    <button class="button button-raised button-assertive"  type="reset" value="Reset">Clear</button>
+                    <button class="button button-raised button-assertive" ng-disabled="!details.location || delivery.$invalid" ng-click="deliver(details)" >Next</button>
                 </div>
             </form>
 

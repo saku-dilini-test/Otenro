@@ -39,7 +39,6 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
         
       $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$scope.appId).success(function(data) {
           $scope.categories = data;
-          console.log($scope.categories)
       }).error(function(err) {
           alert('warning', "Unable to get categories", err.message);
       });

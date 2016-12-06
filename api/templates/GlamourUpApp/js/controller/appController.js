@@ -106,10 +106,12 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
     }
     $scope.pickupDetails = function (deliverItems) {
         if(localStorage.getItem('appLocalStorageUser')!==null){
+            $scope.cart.hide();
             $state.go('app.pickupDetails',{item:deliverItems});
         }
         else{
             $scope.status = 'pickUp'
+            $scope.cart.hide();
             $state.go('app.login',{item:$scope.status});
         }
     }
@@ -128,38 +130,9 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
 
-    //get the user's registered address
-    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
-
-    // get the shipping options
-    $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
-        .success(function (data) {
-                $scope.shippingData=data;
-            },
-            function (err) {
-                $ionicPopup.alert({
-                    title: 'Policies Data loading error!',
-                    template: 'Please check your connection!'
-                });
-            });
-
 
     $scope.amount = $scope.getTotal();
-    $scope.deliver = function(deliverDetails){
 
-
-        if(typeof deliverDetails.country == 'undefined'){
-            var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
-            deliverDetails.name = localData.name;
-            deliverDetails.streetNumber = localData.streetNumber;
-            deliverDetails.streetName = localData.streetName;
-            deliverDetails.country = localData.country;
-            deliverDetails.city = localData.city;
-        }
-        console.log(deliverDetails);
-        deliverDetails.method = 'Delivery';
-        $state.go('app.shipping',{item:deliverDetails});
-    }
 
 
     // Cart Functions End
@@ -170,7 +143,8 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
 
     // Create the login modal that we will use later
       $ionicModal.fromTemplateUrl('templates/login.html', {
-        scope: $scope
+        scope: $scope,
+      animation: 'slide-in-up'
       }).then(function(modal) {
         $scope.loginModel = modal;
       });

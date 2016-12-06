@@ -68,19 +68,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
           speed: 300 //0.3s transition
         };
     $scope.sliderDelegate = null;
-//    if($stateParams.item){
-//        $scope.foodInfo = $stateParams.item;
-//        $scope.images = $stateParams.item.tempImageArray;
-//
-//          if($stateParams.item.variants.length > 0){
-//                $scope.selectedVariant = $stateParams.item.variants[0];
-//                if($scope.selectedVariant.quantity > 0 ){
-//                    $scope.isBuyBtnDisable = false;
-//                }else{
-//                    $scope.isBuyBtnDisable = true;
-//                }
-//          }
-//    }
+
 
     $scope.menuName = $stateParams.categoryName;
 
