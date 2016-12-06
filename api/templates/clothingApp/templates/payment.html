@@ -17,6 +17,9 @@
                 <ion-checkbox ng-show="stripeShow"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'creditcard'">
                     <h3>Stripe</h3>
                 </ion-checkbox >
+                <ion-checkbox ng-show="braintreeShow"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'braintree'">
+                    <h3>Braintree</h3>
+                </ion-checkbox >
 
             </form>
 
@@ -87,6 +90,51 @@
                     -->
                 </form>
             </div>
+
+
+
+            <div class="card-form list padding-right" ng-if="payment.type == 'braintree'">
+                <div ng-show="step == 'verification'">
+                    <div class="list">
+                        <label class="item item-input">
+                            <input type="text" placeholder="Cardholder name" ng-model="card.cardholder">
+                        </label>
+                        <label class="item item-input">
+                            <input type="text" placeholder="Number" ng-model="card.number">
+                        </label>
+                        <label class="item item-input">
+                            <input type="text" placeholder="CVV" ng-model="card.cvv">
+                        </label>
+
+                        <label class="item item-input">
+                            <span class="input-label">Expire month</span>
+                            <input type="text" placeholder="mm" ng-model="card.expiration_month">
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label">Expire year</span>
+                            <input type="text" placeholder="yy" ng-model="card.expiration_year">
+                        </label>
+                    </div>
+                    <div class="padding">
+                        <button class="button button-block button-positive" ng-click="saveCard(card)" ng-disabled="!ready">Save</button>
+                    </div>
+                </div>
+
+
+                <div ng-show="step == 'checkout'">
+                    <span class="made-easy-content-font">{{currency.sign}} : {{amount}}  </span>
+                    <div class="padding">
+                        <button class="button button-block button-positive" ng-click="pay()" ng-disabled="!ready">Pay</button>
+                    </div>
+                </div>
+
+                <div ng-show="step == 'done'">
+                    <p>Transaction completed with transaction id: {{ transactionId }}</p>
+                </div>
+            </div>
+
+
+
             <form name="cashPaymentFrom" novalidate>
                 <div class="card-form list padding-right" ng-if="payment.type == 'cashOnPickup' || payment.type == 'cashOnDelivery'">
                     <span class="col input-label">Confirm payment by cash on delivery</span>

@@ -304,9 +304,15 @@ module.exports.routes = {
      * IPG Controller
      */
     'GET /edit/getIPGInfo': 'edit/commerce/IPGController.getIPGInfo',
-    'POST /edit/updateIPGInfo': 'edit/commerce/IPGController.updateIPGInfo'
+    'POST /edit/updateIPGInfo': 'edit/commerce/IPGController.updateIPGInfo',
 
-   
 
+    /**
+     * braintreeController
+     */
+    'GET /edit/getClientToken': 'edit/commerce/BraintreeController.getClientToken',
+    'POST /edit/sale': 'edit/commerce/BraintreeController.sale',
+    'POST /edit/paymentMethods': 'edit/commerce/BraintreeController.paymentMethods'
+    
 
 };
