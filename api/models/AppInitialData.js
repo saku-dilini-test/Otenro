@@ -1218,7 +1218,7 @@ module.exports = {
             secondNavi : [
               {
                 attribute : {
-                  "imageUrl": "1.jpg",
+                  "imageUrl": "1.JPG",
                   "name": "Accessories",
                   "description": "Accessories description",
                   "enteredBy":"demo"
@@ -1299,7 +1299,7 @@ module.exports = {
                 ]
               },{
                 attribute : {
-                  "imageUrl": "2.jpg",
+                  "imageUrl": "2.JPG",
                   "name": "Women Tops",
                   "description": "Women description",
                   "enteredBy":"demo"
@@ -1381,7 +1381,7 @@ module.exports = {
               },
               {
                 attribute : {
-                  "imageUrl": "3.jpg",
+                  "imageUrl": "3.JPG",
                   "name": "Dresses",
                   "description": "Dresses",
                   "enteredBy":"demo"
@@ -1415,7 +1415,7 @@ module.exports = {
               },
               {
                 attribute : {
-                  "imageUrl": "4.jpg",
+                  "imageUrl": "4.JPG",
                   "name": "Shoes",
                   "description": "Shoes description",
                   "enteredBy":"demo"
@@ -1430,7 +1430,7 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "11.jpg"
+                        "img" : "11.JPG"
                       }
                     ],
                     "variants":[{
@@ -1441,7 +1441,7 @@ module.exports = {
                       'price': "150",
                       'quantity': 250
                     }],
-                    "imageUrl": "11.jpg",
+                    "imageUrl": "11.JPG",
                     "createdDate": Date.now()
                   },
                   {
@@ -1453,7 +1453,7 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "12.jpg"
+                        "img" : "12.JPG"
                       }
                     ],
                     "variants":[{
@@ -1464,7 +1464,7 @@ module.exports = {
                       'price': "130",
                       'quantity': 250
                     }],
-                    "imageUrl": "12.jpg",
+                    "imageUrl": "12.JPG",
                     "createdDate": Date.now()
                   },
                   {
@@ -1476,7 +1476,7 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "13.jpg"
+                        "img" : "13.JPG"
                       }
                     ],
                     "variants":[{
@@ -1487,7 +1487,7 @@ module.exports = {
                       'price': "130",
                       'quantity': 250
                     }],
-                    "imageUrl": "13.jpg",
+                    "imageUrl": "13.JPG",
                     "createdDate": Date.now()
                   },
                   {
@@ -1499,7 +1499,7 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "14.jpg"
+                        "img" : "14.JPG"
                       }
                     ],
                     "variants":[{
@@ -1510,7 +1510,7 @@ module.exports = {
                       'price': "150",
                       'quantity': 250
                     }],
-                    "imageUrl": "14.jpg",
+                    "imageUrl": "14.JPG",
                     "createdDate": Date.now()
                   }
                 ]
