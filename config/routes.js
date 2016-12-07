@@ -265,6 +265,10 @@ module.exports.routes = {
     'GET /templates/getArticleById': 'template/TemplateController.getArticleById',
     'GET /templates/getCommentsDummy': 'template/TemplateController.getCommentsDummy',
 
+    /**
+    * Pay by authorizeNet in templates
+    */
+    'POST /templateController/authorizeNetPay': 'template/TemplateController.authorizeNetPay',
     /***
      * Template Auth Controller
      */
