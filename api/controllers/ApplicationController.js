@@ -29,7 +29,7 @@ module.exports = {
             templatePath = sails.config.appPath + '/api/templates/' + templateName,
             appName = req.body.appName,
             serverTmp="http://localhost:port",
-            serverOrg=config.server.host;
+            serverOrg=config.server.host+':1337';
 
         var loginPath = '/#/',
             isApplyStyle =  {
