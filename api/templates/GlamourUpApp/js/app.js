@@ -287,7 +287,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
           views: {
               'menuContent': {
                   templateUrl: 'templates/cart.html',
-                  controller: 'appCtrl'
+                  controller: 'cartCtrl'
               }
           }
       })

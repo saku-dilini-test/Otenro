@@ -1,12 +1,6 @@
-<ion-popover-view>
-    <ion-header-bar class="bar-assertive color-invert">
-        <h1 class="title">Your Cart</h1>
-        <div class="buttons">
-            <button class=" button button-clear ion-close-round" ng-click="closePopover()"></button>
-        </div>
-    </ion-header-bar>
+<ion-view title="Cart">
   <ion-content >
-   <div class="list ">
+   <div class="list cart">
        <a class="item item-avatar"  ng-repeat="item in cartItems" >
            <img src="{{imageURL}}/{{item.imgURL[0].img}}">
            <h2 ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}
@@ -21,13 +15,13 @@
            {{currency}}{{getTotal()}}
        </div>
        <div class="center">
-           <button class="button button-raised button-assertive color-invert" ng-click="pickupDetails(cartItems)">
+           <button class="button button-raised  made-easy-button-setting color-invert" ng-click="pickupDetails(cartItems)">
               Pickup
            </button>
-           <button class="button button-raised button-assertive " ng-click="delivery(cartItems)">
+           <button class="button button-raised  made-easy-button-setting " ng-click="delivery(cartItems)">
                Delivery
            </button>
        </div>
     </div>
   </ion-content>
-</ion-popover-view>
+</ion-view>

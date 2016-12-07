@@ -16,8 +16,6 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
         $scope.hideShipping = false;
     }
 
-    console.log($stateParams.item);
-    console.log(localStorage.getItem('appLocalStorageUser'));
     var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
 
     if($stateParams.item.delivery.location == "old" || $stateParams.item.delivery.location == "Pick up" ){
@@ -53,10 +51,9 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
                 amount = product.total;
                 total += (amount);
             }
-            console.log($scope.isApplyShippingCharge);
+
             if($scope.isApplyShippingCharge == true && $stateParams.item.delivery.location != "Pick up"){
 
-                console.log($scope.shippingCost);
                 var shipping = parseInt($scope.shippingCost);
                 total = total + shipping;
                 tax = total * $scope.tax / 100;
@@ -102,7 +99,6 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
         payInfo.taxTotal = $scope.taxTotal;
         payInfo.cart = $rootScope.cart.cartItems;
         payInfo.userEmail = localData.email;
-        console.log(payInfo);
         $state.go('app.payment',{item:payInfo});
     }
 

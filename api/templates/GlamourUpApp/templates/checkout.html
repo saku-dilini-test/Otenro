@@ -1,8 +1,8 @@
 <ion-view class="made-easy-background-image made-easy-background-color" view-title="Check Out">
     <ion-content >
         <div class="card animated zoomIn">
-            <div class="col align-center made-easy-header-font">
-                Check Out
+            <div class="col center made-easy-header-font">
+                Confirm Checkout
             </div>
             <div class="row shopping-cart-header">
                 <div class="col col-50">Item</div>
@@ -46,9 +46,9 @@
                 <div ng-if="underWeight">Under weight. Cannot ship</div>
             </div>
 
-            <div class="row cart-buttons">
-                <button class="button button-block button-small made-easy-button-setting"  >Cancel</button>
-                <button class="button button-block button-small made-easy-button-setting" ng-disabled="overWeight || underWeight"
+            <div class="center">
+                <button class="button button-raised  made-easy-button-setting color-invert"  >Cancel</button>
+                <button class="button button-raised  made-easy-button-setting" ng-disabled="overWeight || underWeight"
                         ng-click="pay()" >Pay</button>
             </div>
         </div>

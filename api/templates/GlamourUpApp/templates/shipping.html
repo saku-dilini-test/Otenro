@@ -3,10 +3,10 @@
         <div class="card animated zoomIn delivery-details">
             <form name="shippingForm" novalidate>
                 <div class="row">
-                    <div class="col center made-easy-header-font">Select an Options</div>
+                    <div class="col center made-easy-header-font">Select an Option</div>
                 </div>
 
-                <ion-checkbox ng-repeat="ship in shippingData"  ng-model="details.shipping" ng-true-value="{{ship}}" class="checkbox-balanced item-checkbox-left" >
+                <ion-checkbox ng-repeat="ship in shippingData"  ng-model="details.shipping" ng-true-value="{{ship}}" class="checkbox-dark item-checkbox-left" >
                     <h3>{{ship.optionName}}</h3>
                     <span >{{ship.shippingOption}}</span>
                 </ion-checkbox>
@@ -14,7 +14,7 @@
                 <div class="row center">
                     <div class="col col-top"> </div>
                     <div class="col col-67 col-center">
-                        <button class="button button-raised button-assertive ink-dark"
+                        <button class="button button-raised  made-easy-button-setting"
                                 ng-click="addShipping(details)" >
                             Check Out
                         </button>

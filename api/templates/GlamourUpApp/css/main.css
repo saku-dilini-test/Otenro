@@ -69,12 +69,13 @@ ion-content{
 
 /* ----- Button Font Settings ----- */
 .made-easy-button-setting{
-    border-color: #dcd8b2;
-    background-color: #B8A47F;
+    border-color: #dcd8b2 !important;
+    background-color: #ef473a;
     color: #fff;
-    border-width:1px;
-    border-radius:3px;
+    border-width:0px !important;
+    border-radius:2px;
     cursor: url(../img/cursor.cur), auto;
+    border:solid;
 }
 
 /* ----- View Page ----- */

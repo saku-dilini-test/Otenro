@@ -5,7 +5,6 @@ mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPop
     $scope.$emit('hideMenu',{});
     var pickup = {};
 
-    console.log($stateParams.item);
     $http.get(constants.SERVER_URL + "/edit/getShippingPickupInfo?appId="+$rootScope.appId)
         .success(function (data) {
 
@@ -37,7 +36,6 @@ mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPop
                         };
                         pickup.deliverDetails = $stateParams.deliverDetails;
                         pickup.pickupId = $scope.pickup.opt;
-                        console.log(pickup);
                         $state.go('app.checkout',{item:pickup});
                     };
 });
