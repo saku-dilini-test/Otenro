@@ -33,7 +33,15 @@ module.exports = {
         },
         cashOnDeliveryEnable : {
             type : 'boolean'
-
+        },
+        authorizeNetEnable: {
+            type : 'boolean'
+        },
+        apiLoginId : {
+            type : 'string'
+        },
+        transactionKey : {
+            type : 'string'
         }
      }
     };

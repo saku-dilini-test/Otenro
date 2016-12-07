@@ -8,7 +8,8 @@
  */
 
 var fs = require('fs-extra');
-
+var ApiContracts = require('authorizenet').APIContracts;
+var ApiControllers = require('authorizenet').APIControllers;
 
 module.exports = {
 
@@ -365,6 +366,85 @@ module.exports = {
                 if(err) return console.error(err);
                 res.send("success");
             }
+        });
+    },
+    authorizeNetPay: function(req,res){
+        var expDate = req.body.exp_year+'-'+req.body.exp_month,
+            cardNumber = req.body.number,
+            cvc = req.body.cvc,
+            amount = req.body.amount;
+
+        IPGDetails.findOne({appId:req.body.appId}).exec(function(err, authorizeDetails){
+            if (err) return console.log(err);
+            var apiLoginId = authorizeDetails.apiLoginId,
+                transactionKey = authorizeDetails.transactionKey;
+
+        var merchantAuthenticationType = new ApiContracts.MerchantAuthenticationType();
+            //set api login id
+        	merchantAuthenticationType.setName(apiLoginId);
+        	//set transaction key
+        	merchantAuthenticationType.setTransactionKey(transactionKey);
+
+        var creditCard = new ApiContracts.CreditCardType();
+        	creditCard.setCardNumber(cardNumber);
+        	creditCard.setExpirationDate(expDate);
+        	creditCard.setCardCode(cvc);
+
+        var paymentType = new ApiContracts.PaymentType();
+        	paymentType.setCreditCard(creditCard);
+        var transactionRequestType = new ApiContracts.TransactionRequestType();
+            transactionRequestType.setTransactionType(ApiContracts.TransactionTypeEnum.AUTHONLYTRANSACTION);
+            transactionRequestType.setPayment(paymentType);
+            transactionRequestType.setAmount(amount);
+        var createRequest = new ApiContracts.CreateTransactionRequest();
+            createRequest.setMerchantAuthentication(merchantAuthenticationType);
+            createRequest.setTransactionRequest(transactionRequestType);
+        //pretty print request
+        	//console.log(JSON.stringify(createRequest.getJSON(), null, 2));
+
+        var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON());
+            ctrl.execute(function(){
+
+            		var apiResponse = ctrl.getResponse();
+            		var response = new ApiContracts.CreateTransactionResponse(apiResponse);
+
+            		//pretty print response
+            		//console.log(JSON.stringify(response, null, 2));
+
+            		if(response != null){
+            			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
+            				if(response.getTransactionResponse().getMessages() != null){
+            				    console.log('Successfully created transaction with Transaction ID: ' + response.getTransactionResponse().getTransId());
+            				    res.send({data:'Successfully created transaction with Transaction ID: ' + response.getTransactionResponse().getTransId(),status:'ok'});
+            				}
+            				else {
+            					console.log('Failed Transaction.');
+            					if(response.getTransactionResponse().getErrors() != null){
+            					    res.send({data: 'Failed Transaction',status:'error'});
+            					}
+            				}
+            			}
+            			else {
+            				console.log('Failed Transaction.');
+            				if(response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null){
+            				    res.send({data:'Failed Transaction',status:'error'});
+
+            				}
+            				else {
+            					res.send({data:'Invalid Data',status:'error'});
+            				}
+            			}
+            		}
+            		else {
+            			res.send({data:'Null Response.', status: 'error'});
+            		}
+
+            	});
+            	if (require.main === module) {
+                	authorizeCreditCard(function(){
+                		console.log('authorizeCreditCard call complete.');
+                	});
+                }
         });
     }
 
