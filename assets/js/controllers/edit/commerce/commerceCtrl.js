@@ -1031,7 +1031,7 @@
                 alert("Contact Us information Loading Error : " + error);
         });
         // Save Contact Us Information and move to Web Information
-        $scope.addContactUs = function(basicInfo,webInfo,googleMap) {
+        $scope.addContactUs = function(basicInfo,webInfo,googleMap,type) {
 
             // If defined basic information address , Check length
             if((typeof basicInfo.address != 'undefined') && (basicInfo.address.length > $scope.maxBasicInfoAddress)){
@@ -1070,8 +1070,13 @@
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
                         toastr.success('Store settings successfully updated. ', 'Awsome!', {closeButton: true});
+                        if(type == 'finish'){
+
+                            $mdDialog.hide();
+                        }
                     }).error(function(data, status, headers, config) {
                     toastr.error('Updating of basic information failed', { closeButton: true});
+                    $mdDialog.hide();
                 });
             }
         };

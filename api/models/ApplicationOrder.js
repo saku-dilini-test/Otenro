@@ -81,6 +81,9 @@ module.exports = {
         email :{
             type: 'string'
         },
+        currency :{
+            type: 'string'
+        },
         option:{
             type: 'string'
         }

@@ -1,4 +1,4 @@
-<ion-view view-title="" name="dashboard-view">
+<ion-view class="dashboard" view-title="" name="dashboard-view">
   <ion-nav-buttons side="left">
     <h1>my apps</h1>
   </ion-nav-buttons>
@@ -10,10 +10,10 @@
   </ion-nav-buttons>
 
   <ion-content>
-    <div class="list border-less-list my-apps">
+    <div class="list border-less-list1 my-apps">
       <a class="item item-thumbnail-left" ng-repeat="oneApp in appList"
          ng-click="openApp('{{oneApp.userId}}','{{oneApp.id}}','{{oneApp.appName}}')">
-        <img src="img/no-preview.jpg" alt="No preview available">
+        <img src="{{fileUrl}}/templates/viewImages?userId={{oneApp.userId}}&appId={{oneApp.id}}&{{date}}&img=publish/0.png" alt="No preview available">
         <h2>{{oneApp.appName}}</h2>
         <p>App description goes here...</p>
       </a>

@@ -44,7 +44,7 @@ module.exports = {
                     for(var i=0; i<deviceArray.length; i++){
                         // push API request
 
-                        console.log(" deviceArray " + i);
+                        console.log(" deviceArray " + deviceArray[i].deviceId);
                         request.post(PushUrl,
                             {json:{"tokens": [deviceArray[i].deviceId],
                                 "profile": Profile,
@@ -56,6 +56,7 @@ module.exports = {
                                     'Authorization': Authorization
                                 }} , function(error, response, body){
                                 if (error) sails.log.info(error);
+			       console.log("push response "+JSON.stringify(response));
                                 sails.log.info("push response "+response);
                             });
                     }
