@@ -20,10 +20,11 @@ module.exports = {
             id : req.body.id
         };
         var findQuery = {
-            country: req.body.country,
+            countryRestriction: req.body.countryRestriction,
             appId: req.body.appId
         }
         var updateData = req.body;
+        console.log(findQuery);
         if(typeof req.body.id != 'undefined'){
            ApplicationTax.update(searchQuery,updateData,function(err,result) {
                 if (err) return res.send(err);
@@ -32,6 +33,7 @@ module.exports = {
         }else{
            ApplicationTax.find(findQuery).exec(function(error,data){
                 if(error) return res.send(error);
+               console.log(data);
                 if(data == ''){
                     ApplicationTax.create(updateData).exec(function (err, result) {
                          if (err) return res.send(err);

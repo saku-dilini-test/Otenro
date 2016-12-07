@@ -25,6 +25,12 @@ module.exports = {
     isApplyServicesCharge:{
       type: 'boolean',
       defaultsTo : false
+    },
+    countryRestriction: {
+      type : 'json'
+    },
+    taxName: {
+      type : 'string'
     }
   }
 };

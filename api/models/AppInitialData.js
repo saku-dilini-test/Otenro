@@ -1212,7 +1212,311 @@ module.exports = {
           ]
         }
       ]
-    }
+    },
+    {
+            templateName : 'GlamourUpApp',
+            secondNavi : [
+              {
+                attribute : {
+                  "imageUrl": "1.jpg",
+                  "name": "Accessories",
+                  "description": "Accessories description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Shoe 1",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "a.png"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Shoe 1",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "a.png",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Shoe 2",
+                    "price": 350,
+                    "quantity": 350,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt y brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "b.png"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Shoe 2",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "350",
+                      'quantity': 350
+                    }],
+                    "imageUrl": "b.png",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Shoe 3",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "c.png"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Shoe 3",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "imageUrl": "c.png",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },{
+                attribute : {
+                  "imageUrl": "2.jpg",
+                  "name": "Women Tops",
+                  "description": "Women description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Shirt x",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "d.jpeg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Shirt x",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "d.jpeg",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Shirt y",
+                    "price": 350,
+                    "quantity": 350,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt y brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "e.jpeg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Shirt y",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "350",
+                      'quantity': 350
+                    }],
+                    "imageUrl": "e.jpeg",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Shirt z",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "f.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Shirt z",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "imageUrl": "f.jpg",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },
+              {
+                attribute : {
+                  "imageUrl": "3.jpg",
+                  "name": "Dresses",
+                  "description": "Dresses",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Shoe 1",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Short x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "h.png"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Shoe 1",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "h.png",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },
+              {
+                attribute : {
+                  "imageUrl": "4.jpg",
+                  "name": "Shoes",
+                  "description": "Shoes description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Lita Orange",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "11.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Lita Orange",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "11.jpg",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Brown Pump",
+                    "price": 130,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "12.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Brown Pump",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "12.jpg",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Wedge Booties",
+                    "price": 160,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "13.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Wedge Booties",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "13.jpg",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Black Pump",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "14.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Black Pump",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "14.jpg",
+                    "createdDate": Date.now()
+                  }
+                ]
+              }
+              ]
+          }
   ]
 };
 
