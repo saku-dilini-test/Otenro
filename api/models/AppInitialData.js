@@ -1225,7 +1225,7 @@ module.exports = {
                 },
                 thirdNavi : [
                   {
-                    "name": "Shoe 1",
+                    "name": "Brown Handbag",
                     "price": 250,
                     "quantity": 250,
                     "selection" : "Size",
@@ -1234,22 +1234,22 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "a.png"
+                        "img" : "15.JPG"
                       }
                     ],
                     "variants":[{
-                      "name": "Shoe 1",
+                      "name": "Brown Handbag",
                       'sku': "1111",
                       'size': "11",
                       'vType' : "s",
                       'price': "250",
                       'quantity': 250
                     }],
-                    "imageUrl": "a.png",
+                    "imageUrl": "15.JPG",
                     "createdDate": Date.now()
                   },
                   {
-                    "name": "Shoe 2",
+                    "name": "Green Handbag",
                     "price": 350,
                     "quantity": 350,
                     "selection" : "Size",
@@ -1258,22 +1258,22 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "b.png"
+                        "img" : "16.JPG"
                       }
                     ],
                     "variants":[{
-                      "name": "Shoe 2",
+                      "name": "Gren Handbag",
                       'sku': "1111",
                       'size': "11",
                       'vType' : "s",
                       'price': "350",
                       'quantity': 350
                     }],
-                    "imageUrl": "b.png",
+                    "imageUrl": "16.JPG",
                     "createdDate": Date.now()
                   },
                   {
-                    "name": "Shoe 3",
+                    "name": "Fancy Scarf",
                     "price": 450,
                     "quantity": 450,
                     "selection" : "Size",
@@ -1282,18 +1282,18 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "c.png"
+                        "img" : "17.JPG"
                       }
                     ],
                     "variants":[{
-                      "name": "Shoe 3",
+                      "name": "Fancy Scarf",
                       'sku': "1111",
                       'size': "11",
                       'vType' : "s",
                       'price': "450",
                       'quantity': 450
                     }],
-                    "imageUrl": "c.png",
+                    "imageUrl": "17.JPG",
                     "createdDate": Date.now()
                   }
                 ]
@@ -1306,7 +1306,7 @@ module.exports = {
                 },
                 thirdNavi : [
                   {
-                    "name": "Shirt x",
+                    "name": "Crop Top Brown",
                     "price": 250,
                     "quantity": 250,
                     "selection" : "Size",
@@ -1315,22 +1315,22 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "d.jpeg"
+                        "img" : "18.JPG"
                       }
                     ],
                     "variants":[{
-                      "name": "Shirt x",
+                      "name": "Crop Top Brown",
                       'sku': "1111",
                       'size': "11",
                       'vType' : "s",
                       'price': "250",
                       'quantity': 250
                     }],
-                    "imageUrl": "d.jpeg",
+                    "imageUrl": "18.JPG",
                     "createdDate": Date.now()
                   },
                   {
-                    "name": "Shirt y",
+                    "name": "Crop Top Ash",
                     "price": 350,
                     "quantity": 350,
                     "selection" : "Size",
@@ -1339,22 +1339,22 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "e.jpeg"
+                        "img" : "19.JPG"
                       }
                     ],
                     "variants":[{
-                      "name": "Shirt y",
+                      "name": "Crop Top Ash",
                       'sku': "1111",
                       'size': "11",
                       'vType' : "s",
                       'price': "350",
                       'quantity': 350
                     }],
-                    "imageUrl": "e.jpeg",
+                    "imageUrl": "19.JPG",
                     "createdDate": Date.now()
                   },
                   {
-                    "name": "Shirt z",
+                    "name": "Crop Top BrownX",
                     "price": 450,
                     "quantity": 450,
                     "selection" : "Size",
@@ -1363,7 +1363,7 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "f.jpg"
+                        "img" : "Crop Top BrownX"
                       }
                     ],
                     "variants":[{
@@ -1374,7 +1374,7 @@ module.exports = {
                       'price': "450",
                       'quantity': 450
                     }],
-                    "imageUrl": "f.jpg",
+                    "imageUrl": "20.JPG",
                     "createdDate": Date.now()
                   }
                 ]
@@ -1388,7 +1388,7 @@ module.exports = {
                 },
                 thirdNavi : [
                   {
-                    "name": "Shoe 1",
+                    "name": "Dark Frock",
                     "price": 250,
                     "quantity": 250,
                     "selection" : "Size",
@@ -1397,18 +1397,18 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "h.png"
+                        "img" : "21.JPG"
                       }
                     ],
                     "variants":[{
-                      "name": "Shoe 1",
+                      "name": "Dark Frock",
                       'sku': "1111",
                       'size': "11",
                       'vType' : "s",
                       'price': "250",
                       'quantity': 250
                     }],
-                    "imageUrl": "h.png",
+                    "imageUrl": "21.JPG",
                     "createdDate": Date.now()
                   }
                 ]

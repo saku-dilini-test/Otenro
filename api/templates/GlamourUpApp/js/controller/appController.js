@@ -34,11 +34,13 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
       // Triggered in the login modal to close it
       $scope.closeLogin = function() {
         $scope.loginModel.hide();
+
       };
 
       // Open the login modal
       $scope.login = function() {
         $scope.loginModel.show();
+         $scope.loginModelCon = true;
       };
 
     //End login functions
@@ -53,6 +55,9 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
         });
 
     $scope.register = function() {
+        if( $scope.loginModelCon = true){
+            $scope.loginModel.hide();
+        }
      $scope.modal.show();
     };
 
