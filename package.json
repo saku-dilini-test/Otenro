@@ -67,5 +67,8 @@
     "url": "git://github.com/udeshikaperera/myProject.git"
   },
   "author": "udeshikaperera",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "grunt-rename": "^0.1.4"
+  }
 }
