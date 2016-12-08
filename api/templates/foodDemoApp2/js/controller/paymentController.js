@@ -21,6 +21,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     $scope.appId = $rootScope.appId;
     $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
         $rootScope.currency = data.sign;
+        $rootScope.symbol = data.symbol;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
