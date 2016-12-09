@@ -1945,11 +1945,12 @@ button[disabled]{
    /*browse image*/
 
 .img-browse{
-    width: 50px;
+    width: 0px;
     height: 0px;
     position: absolute;
+    align:center;
     top: 110px;
-    left: 20px
+    left: 150px
 
 }
 
@@ -1963,6 +1964,13 @@ button[disabled]{
 	top: 0px;
 	left: 0px;
 	z-index: 1;
+}
+
+
+.textbox
+{
+height:0px;
+weight:0px;
 }
 
 
