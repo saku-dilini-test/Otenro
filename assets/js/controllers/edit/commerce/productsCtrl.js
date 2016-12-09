@@ -263,11 +263,15 @@
          * add or update product
          */
         $scope.addOrUpdateProducts = function () {
-              if ($scope.tmpImage.length<=0){
+              if ($scope.tmpImage.length<=0&&$scope.myImage==null){
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
               }else {
+                  if ($scope.myImage){
+                      $scope.addImage($scope.myImage);
+                  }
+
                   $scope.product.selection = $scope.selection;
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
                       toastr.success('Product added successfully', 'Awsome!', {
