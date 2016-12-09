@@ -11,7 +11,7 @@
            }
        ])
 
-    }).constant('SERVER_URL', 'http://beta.otenro.com/')
+    }).constant('SERVER_URL', 'http://localhost:1337/')
 
 
         .constant('LOCALES', {

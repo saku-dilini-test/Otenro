@@ -1941,6 +1941,48 @@ button[disabled]{
     left: 0;
 }
 
+
+   /*browse image*/
+
+.img-browse{
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    align:center;
+    top: 110px;
+    left: 150px
+
+}
+
+.fileinputs {
+	position: relative;
+
+}
+
+.fakefile {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+}
+
+
+.textbox
+{
+height:0px;
+weight:0px;
+}
+
+
+.file {
+	position: relative;
+	-moz-opacity:0 ;
+	filter:alpha(opacity: 0);
+	opacity: 0;
+    z-index: 2;
+}
+
+
 .img-up1 input[type=file]{
     width:inherit;
 }

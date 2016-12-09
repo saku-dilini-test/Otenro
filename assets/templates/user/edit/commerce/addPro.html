@@ -326,35 +326,39 @@
                     </div>
                 </md-tab-body>
             </md-tab>
-
-
             <md-tab ng-disabled="addProductsOptionParams.imageUploadLocked">
                 <md-tab-label>Upload Image</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
                         <h1>Upload Image</h1>
                     </div>
-
                     <div class="md-dialog-main">
                         <div class="file-upload-wrapper2 clearfix">
+                            <div class="cropArea "> <div class="img-upl " >
 
-                            <div class="cropArea">
-                                <img-crop image="myImage" area-type="square"   result-image="picFile"
-                                         >
+
+                        <!--browse image-->
+                                <div class="fileinputs img-browse ">
+
+                                <input type="file" value="" ng-click = "cropImage();"  id="fileInput" class="file" >
+                                    <div class="fakefile  glyphicon glyphicon-plus"  >
+                                        <textbox />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                                <img-crop image="myImage" area-type="square"  result-image="picFile">
                                 </img-crop>
+
                             </div>
 
                             <div class="inputField btn-material img-up">
-                                <span >{{buttonName}}</span>
-                                <div class="img-up1" ng-if="imageSelected">
-                                    <input type="file" value="file" type="file" ng-click = "cropImage(); change()" id="fileInput" >
-                                </div>
-                                <div  ng-if="!imageSelected" class="img-up1" ng-click="addImage(picFile)"></div>
-
+                                <span >upload</span>
+                                <div   class="img-up1 " ng-click="addImage(picFile)"></div>
                             </div>
-
                         </div>
-
                         <div class="uploaded-section image-upload clearfix">
                             <div class="uploaded-new-image2">
                                 <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
