@@ -1212,7 +1212,311 @@ module.exports = {
           ]
         }
       ]
-    }
+    },
+    {
+            templateName : 'GlamourUpApp',
+            secondNavi : [
+              {
+                attribute : {
+                  "imageUrl": "1.JPG",
+                  "name": "Accessories",
+                  "description": "Accessories description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Brown Handbag",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "15.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Brown Handbag",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "15.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Green Handbag",
+                    "price": 350,
+                    "quantity": 350,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt y brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "16.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Gren Handbag",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "350",
+                      'quantity': 350
+                    }],
+                    "imageUrl": "16.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Fancy Scarf",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "17.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Fancy Scarf",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "imageUrl": "17.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },{
+                attribute : {
+                  "imageUrl": "2.JPG",
+                  "name": "Women Tops",
+                  "description": "Women description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Crop Top Brown",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "18.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Crop Top Brown",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "18.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Crop Top Ash",
+                    "price": 350,
+                    "quantity": 350,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt y brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "19.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Crop Top Ash",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "350",
+                      'quantity': 350
+                    }],
+                    "imageUrl": "19.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Crop Top BrownX",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "Crop Top BrownX"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Shirt z",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "imageUrl": "20.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },
+              {
+                attribute : {
+                  "imageUrl": "3.JPG",
+                  "name": "Dresses",
+                  "description": "Dresses",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Dark Frock",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Short x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "21.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Dark Frock",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "21.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },
+              {
+                attribute : {
+                  "imageUrl": "4.JPG",
+                  "name": "Shoes",
+                  "description": "Shoes description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Lita Orange",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "11.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Lita Orange",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "11.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Brown Pump",
+                    "price": 130,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "12.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Brown Pump",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "12.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Wedge Booties",
+                    "price": 160,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "13.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Wedge Booties",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "13.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Black Pump",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "14.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Black Pump",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "14.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              }
+              ]
+          }
   ]
 };
 

@@ -22,6 +22,9 @@ module.exports = {
         stripeEnable: {
             type: 'boolean'
         },
+        braintreeEnable : {
+            type: 'boolean'
+        },
         stripeKey: {
             type: 'string'
         },

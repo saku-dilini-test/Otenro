@@ -207,10 +207,9 @@
 }
 
 .device-simulator{
-    height: 165mm;
+    height: 669px;
     margin: 0 auto;
-    padding: 15px;
-    width: 320px;
+    width: 324px;
 }
 
 .tabletView .device-simulator{
