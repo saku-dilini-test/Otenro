@@ -12,11 +12,15 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
     console.log($stateParams.item);
     var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
-
-    if($stateParams.item.location == "old"){
-        $scope.country = localData.country;
-    }else{
-        $scope.country = $stateParams.item.country;
+    if(localData == null){
+        $state.go('app.login')
+    }
+    else{
+        if($stateParams.item.location == "old"){
+            $scope.country = localData.country;
+        }else{
+            $scope.country = $stateParams.item.country;
+        }
     }
     $scope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;

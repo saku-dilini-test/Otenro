@@ -138,6 +138,18 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('app.logout',{
+            url: '/logout',
+            views:{
+              'menuContent':{
+                controller: function($scope, $state) {
+                  localStorage.setItem('appLocalStorageUser', null);
+                  console.log(localStorage.getItem('appLocalStorageUser'))
+                  $state.go("app.login");
+                }
+              }
+            }
+        })
         .state('app.register', {
             url: '/register',
             params:{

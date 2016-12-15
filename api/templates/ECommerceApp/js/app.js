@@ -128,6 +128,18 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     }
                 }
             })
+            .state('tab.logout', {
+                url: '/logout',
+                views: {
+                    'menuContent': {
+                        controller: function($scope, $state) {
+                          localStorage.setItem('appLocalStorageUser', null);
+                          console.log(localStorage.getItem('appLocalStorageUser'))
+                          $state.go("tab.login");
+                        }
+                    }
+                }
+            })
             .state('tab.register', {
                 url: '/register',
                 params:{
