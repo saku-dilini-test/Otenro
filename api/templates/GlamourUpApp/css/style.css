@@ -86,3 +86,6 @@ select{
 .right{
 	text-align: right;
 }
+.title-image {
+    margin-left: 20%;
+}

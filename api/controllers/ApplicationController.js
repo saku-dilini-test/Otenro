@@ -518,5 +518,12 @@ module.exports = {
             res.json(application);
         }
 
-    })}
+    })
+    },
+    iconAllowance : function(req,res){
+        ApplicationStoreSettings.findOne({appId: req.param('appId')}).exec(function(err,data){
+            if(err) res.send(err);
+                res.send(data);
+        })
+    }
 };
