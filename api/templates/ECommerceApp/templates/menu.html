@@ -46,6 +46,12 @@
                 <ion-item nav-clear menu-close href="#/tab/logout">
                     logout
                 </ion-item>
+                <br />
+                <ion-item ng-if="allowOtenroToPromote" menu-close>
+                    <a class="made-easy-navigationBarColor" href="#"
+                       onclick="window.open('http://www.otenro.com/','_system','location=yes'); return false;">
+                        Created on otenro.com</a>
+                </ion-item>
             </ion-list>
         </ion-content>
     </ion-side-menu>

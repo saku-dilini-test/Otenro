@@ -50,6 +50,12 @@
         <ion-item menu-close ui-sref="app.logout">
           <i class="icon ion-log-out"></i> Logout
         </ion-item>
+        <br />
+        <ion-item ng-if="allowOtenroToPromote" class="title-image" menu-close>
+          <a class="made-easy-navigationBarColor" href="#"
+             onclick="window.open('http://www.otenro.com/','_system','location=yes'); return false;">
+            Created on otenro.com</a>
+        </ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>

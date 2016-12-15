@@ -22,7 +22,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('MenuCtrl', function($scope,appServices,readMadeEasy,constants) {
+.controller('MenuCtrl', function($scope,appServices,readMadeEasy,constants,$http,$rootScope) {
 
     // get all menu by app Id
     readMadeEasy.readFile().success(function(appData){
@@ -36,6 +36,20 @@ angular.module('starter.controllers', [])
         // defined second navigation image path
         $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
                           "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
+        $http.get(constants.SERVER_URL + "/app/getIconAllowance?appId="+$rootScope.appId)
+            .success(function(data){
+                if(data.allowPromote == true){
+                  $rootScope.allowOtenroToPromote = true;
+                  $rootScope.icon = data.icon;
+                }
+                else{
+                  $rootScope.allowOtenroToPromote = false;
+                  $rootScope.icon = null;
+                }
+
+            },function(err){
+              console.log(err);
+            })
     });
 })
 
