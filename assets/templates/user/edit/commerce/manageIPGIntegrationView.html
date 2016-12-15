@@ -72,6 +72,29 @@
 
             </fieldset>
 
+            <fieldset>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Authorize.net</label>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="on-off-switch">
+                            <input type="checkbox" ng-model="IPGSettings.authorizeNetEnable" name="on-off-switch" class="on-off-switch-checkbox" id="on-off-switch-5">
+                            <label class="input-shadow-border on-off-switch-label" for="on-off-switch-5">
+                                <span class="on-off-switch-inner"></span>
+                                <span class="on-off-switch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <input class="apikey input-shadow-border" type="text" ng-model="IPGSettings.apiLoginId"
+                       name="number" placeholder="API login id" required /><br /><br />
+                <input class="apikey input-shadow-border" type="text" ng-model="IPGSettings.transactionKey"
+                       name="number" placeholder="Transaction key" required />
+
+            </fieldset>
+
         </div>
         <div class="md-dialog-buttons">
             <div class="inner-section">

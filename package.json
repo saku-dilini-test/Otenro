@@ -2,6 +2,7 @@
   "dependencies": {
     "FileSaver": "^0.10.0",
     "angular-google-maps": "^2.3.2",
+    "authorizenet": "^1.0.1",
     "body-parser": "^1.15.0",
     "braintree": "^1.44.0",
     "connect-multiparty": "^2.0.0",
@@ -67,5 +68,8 @@
     "url": "git://github.com/udeshikaperera/myProject.git"
   },
   "author": "udeshikaperera",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "grunt-rename": "^0.1.4"
+  }
 }
