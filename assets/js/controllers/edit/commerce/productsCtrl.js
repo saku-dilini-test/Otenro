@@ -348,7 +348,7 @@
                 };
                 reader.readAsDataURL(file);
                 $scope.imageSelected =false;
-                $scope.buttonName = "Upload";
+                $scope.buttonName = "Crop";
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         };

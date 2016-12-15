@@ -336,29 +336,32 @@
                         <div class="file-upload-wrapper2 clearfix">
                             <div class="cropArea "> <div class="img-upl " >
 
-
-                        <!--browse image-->
+                                <!--browse image-->
                                 <div class="fileinputs img-browse ">
 
-                                <input type="file" value="" ng-click = "cropImage();"  id="fileInput" class="file" >
-                                    <div class="fakefile  glyphicon glyphicon-plus"  >
-                                        <textbox />
-
-                                    </div>
+                                <input type="file" value="" ng-click = "cropImage();"  id="fileInput" class="file" size="100">
+                                    <div class="fakefile  glyphicon glyphicon-upload"  >
+                                     </div>
 
                                 </div>
 
                             </div>
-                                <img-crop image="myImage" area-type="square"  result-image="picFile">
+                                <img-crop image="myImage" area-type="square" result-image="picFile">
                                 </img-crop>
 
                             </div>
 
                             <div class="inputField btn-material img-up">
-                                <span >upload</span>
+                                <span> {{buttonName}} </span>
                                 <div   class="img-up1 " ng-click="addImage(picFile)"></div>
                             </div>
                         </div>
+
+
+
+
+
+
                         <div class="uploaded-section image-upload clearfix">
                             <div class="uploaded-new-image2">
                                 <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"

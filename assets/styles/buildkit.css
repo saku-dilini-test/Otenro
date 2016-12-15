@@ -1942,11 +1942,9 @@ button[disabled]{
 }
 
 
-   /*browse image*/
+   /*Browse image icon */
 
 .img-browse{
-    width: 0px;
-    height: 0px;
     position: absolute;
     align:center;
     top: 110px;
@@ -1967,21 +1965,26 @@ button[disabled]{
 }
 
 
-.textbox
-{
-height:0px;
-weight:0px;
-}
-
-
 .file {
 	position: relative;
 	-moz-opacity:0 ;
 	filter:alpha(opacity: 0);
 	opacity: 0;
     z-index: 2;
-}
+    right:60px;
+    top:14px;
 
+
+}
+.glyphicon.glyphicon-upload
+{
+ font-size: 40px;
+ top:-15px;
+ left:-15px;
+ color:#C0C0C0;
+
+
+}
 
 .img-up1 input[type=file]{
     width:inherit;
