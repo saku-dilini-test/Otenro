@@ -23,6 +23,11 @@ ion-content{
     color:#fff;
     border: 0;
 }
+
+.made-easy-navigationBarColor .bar .button.button-clear{
+    color:inherit;
+}
+
 .made-easy-navigationBarColor .item {
     border-style:unset;
 }
