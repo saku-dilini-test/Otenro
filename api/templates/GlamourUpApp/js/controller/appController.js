@@ -34,7 +34,6 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
       // Triggered in the login modal to close it
       $scope.closeLogin = function() {
         $scope.loginModel.hide();
-
       };
 
       // Open the login modal

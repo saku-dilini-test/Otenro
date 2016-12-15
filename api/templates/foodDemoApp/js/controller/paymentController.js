@@ -8,6 +8,10 @@
 mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService) {
 
     $scope.$emit('hideMenu',{});
+
+    if(localStorage.getItem('appLocalStorageUser') == null){
+        $state.go('app.login')
+    }
     //getting the user's registered name and address
     $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 

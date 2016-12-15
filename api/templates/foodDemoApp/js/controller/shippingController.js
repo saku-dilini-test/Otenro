@@ -13,11 +13,15 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
     console.log($stateParams.item);
     console.log(localStorage.getItem('appLocalStorageUser'));
     var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
-
-    if($stateParams.item.location == "old"){
-        $scope.country = localData.country;
-    }else{
-        $scope.country = $stateParams.item.country;
+    if(localData == null){
+        $state.go('app.login')
+    }
+    else{
+        if($stateParams.item.location == "old"){
+            $scope.country = localData.country;
+        }else{
+            $scope.country = $stateParams.item.country;
+        }
     }
     $scope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;
@@ -64,6 +68,9 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
 
+    if(localStorage.getItem('appLocalStorageUser') == null){
+        $state.go('app.login')
+    }
     //get the user's registered address
     $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 

@@ -95,6 +95,9 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
 
+    if(localStorage.getItem('appLocalStorageUser') == null){
+        $state.go('app.login')
+    }
     //get the user's registered address
     $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 
@@ -117,12 +120,16 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
         if(typeof deliverDetails.country == 'undefined'){
             var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+            if(localData == null){
+                $state.go('app.login')
+            }else{
             deliverDetails.name = localData.name;
             deliverDetails.streetNumber = localData.streetNumber;
             deliverDetails.streetName = localData.streetName;
             deliverDetails.country = localData.country;
             deliverDetails.city = localData.city;
             deliverDetails.zip = localData.zip;
+            }
         }
         console.log(deliverDetails);
         deliverDetails.method = 'Delivery';

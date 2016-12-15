@@ -117,11 +117,16 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
         if(typeof deliverDetails.country == 'undefined'){
             var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+            if(localData == null){
+                $state.go('app.login')
+            }
+            else{
             deliverDetails.name = localData.name;
             deliverDetails.streetNumber = localData.streetNumber;
             deliverDetails.streetName = localData.streetName;
             deliverDetails.country = localData.country;
             deliverDetails.city = localData.city;
+            }
         }
         console.log(deliverDetails);
         deliverDetails.method = 'Delivery';
