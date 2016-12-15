@@ -14,7 +14,11 @@ module.exports = function(grunt) {
 	grunt.config.set('clean', {
 		options: { force: true },
 		dev: ['.tmp/public/**'],
-		build: ['www']
+		build: ['www'],
+		rename: {
+				src: [".tmp/public/min/production.min.js",".tmp/public/min/production.min.css"]
+		}
+
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');

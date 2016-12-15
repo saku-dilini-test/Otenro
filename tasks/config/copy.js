@@ -14,7 +14,8 @@
  * 		https://github.com/gruntjs/grunt-contrib-copy
  */
 module.exports = function(grunt) {
-
+	var versionDate = new Date();
+	var timestamp = versionDate.getTime();
 	grunt.config.set('copy', {
 		dev: {
 			files: [
@@ -55,6 +56,19 @@ module.exports = function(grunt) {
 		 dest: '.tmp/public/min'
 		}
       ]
+		},
+		rename: {
+			files: [
+				{
+					expand: true,
+					flatten: true,
+					cwd: '.tmp/public/min',
+					src: ['production.*.*'],
+					dest: '.tmp/public/min/',
+					rename: function(dest, src) {
+					return dest + src.replace('production','production.v'+timestamp);
+				}
+				}]
 		},
 		build: {
 			files: [{
