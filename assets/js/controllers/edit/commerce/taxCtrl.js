@@ -13,6 +13,8 @@
             var appId = $rootScope.appId;
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
+        $scope.selected = [];
+        $scope.countryList = [];
 
 
         taxService.getAllCountry().success(function (data) {
@@ -21,6 +23,51 @@
         }).error(function (err) {
             alert("MainMenu Loading Error : " + err);
         });
+
+        $scope.selected = [];
+        $scope.IsSingleSelection = false;
+
+        $scope.toggle = function (item, list) {
+            var idx = list.indexOf(item);
+            if (idx > -1) {
+                list.splice(idx, 1);
+            }
+            else {
+                list.push(item);
+                $scope.IsSingleSelection = true;
+            }
+        };
+
+        $scope.exists = function (item, list) {
+            return list.indexOf(item) > -1;
+        };
+        //select all country
+        $scope.isIndeterminate = function() {
+            return ($scope.selected.length !== 0 &&
+            $scope.selected.length !== $scope.countryList.length);
+        };
+
+        $scope.isChecked = function() {
+            return $scope.selected.length === $scope.countryList.length;
+        };
+
+        $scope.toggleAll = function() {
+            $scope.IsSingleSelection = false;
+            if ($scope.selected.length === $scope.countryList.length) {
+                $scope.selected = [];
+            } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
+                $scope.selected = $scope.countryList.slice(0);
+            }
+        };
+
+
+        if ($scope.country){
+            $scope.country.forEach(function(element) {
+                $scope.exists(element , $scope.selected);
+                $scope.toggle(element , $scope.selected);
+
+            });
+        }
 
         // --/-- view tax collections mode
         if($scope.initialData == null){
@@ -46,17 +93,14 @@
         }
 
         // --/-- add new tax collection --/--
-        $scope.addNewTaxOption = function (taxInfo) {
-            if(typeof taxInfo.country == 'undefined'){
-                toastr.error('Please select a country', 'Message', {
-                    closeButton: true
-                });
-            }else if(typeof taxInfo.taxAmount == 'undefined'){
+        $scope.addNewTaxOption = function (taxInfo,country) {
+             if(typeof taxInfo.taxAmount == 'undefined'){
                 toastr.error('Tax should be between 0 to 100', 'Message', {
                     closeButton: true
                 });
             }
             else{
+                 taxInfo.countryRestriction = country;
                 taxInfo.appId = $rootScope.appId;
                 taxService.updateTaxInfo(taxInfo)
                     .success(function (result) {

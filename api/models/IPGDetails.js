@@ -22,6 +22,9 @@ module.exports = {
         stripeEnable: {
             type: 'boolean'
         },
+        braintreeEnable : {
+            type: 'boolean'
+        },
         stripeKey: {
             type: 'string'
         },
@@ -30,7 +33,15 @@ module.exports = {
         },
         cashOnDeliveryEnable : {
             type : 'boolean'
-
+        },
+        authorizeNetEnable: {
+            type : 'boolean'
+        },
+        apiLoginId : {
+            type : 'string'
+        },
+        transactionKey : {
+            type : 'string'
         }
      }
     };

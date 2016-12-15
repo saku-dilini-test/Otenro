@@ -91,6 +91,15 @@ module.exports = {
             templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
+            template_name : 'GlamourUpApp',
+            templateViewName : 'Glamour Up',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
+            gifImageUrl : 'GlamourUpApp/clothing2.png',
+            imageUrl : 'GlamourUpApp/clothing.jpg',
+            templateFilesPath:'templates/clothingApp',
+            templateCategory: TemplateCategoryDetails.Business.ID
+        },
+        {
             template_name : 'hkRising',
             templateViewName : 'Rising',
             templateViewDesc : 'Reporters, writers, bloggers - keep your readers informed.',

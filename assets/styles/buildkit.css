@@ -363,8 +363,8 @@ a.md-button:hover:not([disabled]),
 .color-picker-button{
     border: 1px solid #999;
     cursor: pointer;
-    height: 15px !important;
-    width: 15px !important;
+    height: 35px !important;
+    width: 35px !important;
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
@@ -1939,6 +1939,51 @@ button[disabled]{
     position: absolute;
     top: 0px;
     left: 0;
+}
+
+
+   /*Browse image icon */
+
+.img-browse{
+    position: absolute;
+    align:center;
+    top: 110px;
+    left: 150px
+
+}
+
+.fileinputs {
+	position: relative;
+
+}
+
+.fakefile {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+}
+
+
+.file {
+	position: relative;
+	-moz-opacity:0 ;
+	filter:alpha(opacity: 0);
+	opacity: 0;
+    z-index: 2;
+    right:60px;
+    top:14px;
+
+
+}
+.glyphicon.glyphicon-upload
+{
+ font-size: 40px;
+ top:-15px;
+ left:-15px;
+ color:#C0C0C0;
+
+
 }
 
 .img-up1 input[type=file]{

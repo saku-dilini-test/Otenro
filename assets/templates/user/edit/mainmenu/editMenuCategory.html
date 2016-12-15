@@ -12,7 +12,7 @@
                     <br>
                     <span class="information" ng-show="catForm.name.$error.pattern">No symbols</span>
                     <br>
-                    <span>Characters left: {{maxMenuCategory - menu.name.length}}</span>
+                    <span class="information">Characters left: {{maxMenuCategory - menu.name.length}}</span>
                 </fieldset>
                 <br>
                 <fieldset>
@@ -41,7 +41,7 @@
 
                         <div class="file-upload-wrapper clearfix">
                             <div class="cropArea">
-                                <img-crop image="myImage" area-type="rectangle" result-image="picFile"
+                                <img-crop image="myImage" area-type="square" result-image="picFile"
                                 >
                                 </img-crop>
                             </div>

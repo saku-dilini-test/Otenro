@@ -595,7 +595,7 @@ module.exports = {
                     updateFile(mainCssFile, [{
                         rule: colorTypeCss,
                         target: "border-color",
-                        replacer: styleColor
+                        replacer: styleColor + " "+"!important"
                     }], function (err) {
                         console.log((err));
                     });
@@ -892,7 +892,7 @@ module.exports = {
                 updateFile(mainCssFile, [{
                     rule: buttonBorderWidthCss,
                     target: "border-width",
-                    replacer: buttonBorderWidth
+                    replacer: buttonBorderWidth +" "+"!important"
                 }], function (err) {
                     console.log((err));
                 });
