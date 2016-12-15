@@ -363,8 +363,8 @@ a.md-button:hover:not([disabled]),
 .color-picker-button{
     border: 1px solid #999;
     cursor: pointer;
-    height: 15px !important;
-    width: 15px !important;
+    height: 35px !important;
+    width: 35px !important;
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
