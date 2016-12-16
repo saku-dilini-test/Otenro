@@ -8,37 +8,35 @@
   <ion-content class="padding">
     <div class="list card">
 
-      <div class="item item-header">
+      <div class=" item-header">
         <h2>{{product.name}}</h2>
       </div>
 
-      <div class="item item-body">
+      <div class=" item-body">
         <img class="full-image" src="{{SERVER_URL}}{{product.logoUrl}}">
         <p>
             {{product.description}}
         </p>
       </div>
 
-      <div class="item item-divider">
+      <div class=" item-divider">
         <div class="padding-vertical">
-          <table width="100%">
-          <tbody>
-            <tr>
 
-              <td><span>{{product.quantity}}</span></td>
-              <td><ion-radio ng-repeat="item in choice"
+            <div class="row">
+              <div class="col"><span>{{product.quantity}}</span></div>
+              <div class="col"><ion-radio ng-repeat="item in choice"
                              ng-value="item.value"
                              ng-model="data.choice">
                 {{ item.text }}
-              </ion-radio>
-              </td>
-              <td class="text-align-right">{{product.price | currency:"Rs. " }} <br><br><br>{{product.perSlicePrice | currency:"Rs. " }}</td><br >
-            </tr>
-          </tbody>
-          </table>
+              </ion-radio></div>
+              <div class="col text-align-right">{{product.price | currency:"Rs. " }} <br><br><br>{{product.perSlicePrice | currency:"Rs. " }}</div><br >
+
         </div>
 
-        <label class="item item-input qty-container">
+
+        </div>
+
+        <label class=" item-input qty-container">
           <span class="input-label">Qty</span>
           <input type="tel" ng-model="product.qty" class="qty-input-box">
         </label>
