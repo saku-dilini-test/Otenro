@@ -92,7 +92,7 @@ angular.module('app')
             }
 
       }).state('user.technicalRegisteruser',{
-            url :'/technicalSupport',
+            url :'/technicalRegisterusers',
             controller : 'technicalSupportCtrl',
             templateUrl : 'user/technicalSupport/TechnicalRegisteruser.html',
             data : {
