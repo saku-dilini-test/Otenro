@@ -41,8 +41,14 @@
                     displayName:'Variant',
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                     "<md-input-container class='md-container-modify'>"+
-                    "<div class='md-input input-modify'>{{row.branch['selection']}} - {{row.branch[col.field]}}</div>"+
-                    "</md-input-container>"+ "</div>"
+                    "<div class='md-input input-modify color-link' ng-click='cellTemplateScope.click(row.branch)'>{{row.branch['selection']}} - {{row.branch[col.field]}}</div>"+
+                    "</md-input-container>"+ "</div>",
+                    cellTemplateScope: {
+                        click: function(data) {
+                            // go to product edit view
+                            $scope.goToEditProductWindow(data);
+                        }
+                    }
 
                 },
                 {
@@ -51,13 +57,19 @@
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='quantityForm'>"+
                                             "<md-input-container class='md-container-modify'>"+
-                                                "<input aria-label='Quantity' name='quantity' ng-model='row.branch[col.field]' maxlength='8' ng-pattern='/^[0-9]*$/' required/>"+
+                                                "<input class='color-link' aria-label='Quantity' name='quantity' ng-model='row.branch[col.field]' maxlength='8' ng-pattern='/^[0-9]*$/' ng-click='cellTemplateScope.click(row.branch)' required/>"+
                                                 "<div ng-messages='quantityForm.quantity.$error' ng-show='quantityForm.quantity.$dirty'>"+
                                                     "<div ng-message='required'>Required!</div>"+
                                                     "<div ng-message='pattern'>Invalid Character!</div>"+
                                                "</div>"+
                                            "</md-input-container>"+
-                                       "</ng-form></div>"
+                                       "</ng-form></div>",
+                    cellTemplateScope: {
+                        click: function(data) {
+                            // go to product edit view
+                            $scope.goToEditProductWindow(data);
+                        }
+                    }
                 },
                 {
                     field:'price',
@@ -65,13 +77,19 @@
                     cellTemplate:  "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='priceForm'>"+
                                             "<md-input-container class='md-container-modify'>"+
-                                                "<input aria-label='Price' name='price' ng-model='row.branch[col.field]' maxlength='8' ng-pattern='/^[0-9]{0,8}(\.[0-9]{2})?$/' required/>"+
+                                                "<input class='color-link' aria-label='Price' name='price' ng-model='row.branch[col.field]' maxlength='8' ng-pattern='/^[0-9]{0,8}(\.[0-9]{2})?$/' ng-click='cellTemplateScope.click(row.branch)' required/>"+
                                                 "<div ng-messages='priceForm.price.$error' ng-show='priceForm.price.$dirty'>"+
                                                     "<div ng-message='required'>Required!</div>"+
                                                     "<div ng-message='pattern'>Invalid Character!</div>"+
                                                "</div>"+
                                            "</md-input-container>"+
-                                       "</ng-form></div>"
+                                       "</ng-form></div>",
+                    cellTemplateScope: {
+                        click: function(data) {
+                            // go to product edit view
+                            $scope.goToEditProductWindow(data);
+                        }
+                    }
 
                 },
                 {
@@ -277,5 +295,13 @@
             })
 
         };
+
+        /*
+            To edit the inventory details when click on the name of the product
+        */
+
+        $scope.tree_handler = function(branch){
+            $scope.goToEditProductWindow(branch);
+        }
     }
     })();
