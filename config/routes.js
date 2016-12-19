@@ -304,7 +304,7 @@ module.exports.routes = {
      'GET    /edit/getPushConfigDetails': 'technicalSupport/TechnicalSupportController.getPushConfigDetails',
      'POST   /edit/savePushConfigDetails': 'technicalSupport/TechnicalSupportController.savePushConfigDetails',
      'POST   /edit/changePublishStatus': 'technicalSupport/TechnicalSupportController.changePublishStatus',
-     'GET  /edit/getAlluserData': 'technicalSupport/TechnicalSupportController.getAllAppsData',
+     'GET  /edit/getAlluserData': 'technicalSupport/TechnicalSupportController.getAlluserData',
 
     /**
      * IPG Controller

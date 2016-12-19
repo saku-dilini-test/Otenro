@@ -106,11 +106,16 @@
             getAllAppDataList();
 
 
-
+      /**
+                  * @ngdoc init data
+                  * @description
+                  * # view  Registered user  Details of the system
+                  */
 
              var getAlluserData = function () {
                             technicalSupportService. getAlluserData()
                                 .success(function (result) {
+                                    console.log(result);
                                     $scope.appList = result;
                                 }).error(function (error) {
                                 toastr.error('Loading Error', 'Warning', {
@@ -121,8 +126,6 @@
                         }
 
                         getAlluserData();
-
-
 
 
             /**

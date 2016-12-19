@@ -17,6 +17,14 @@
      All Applications
     </div>-->
     <div class="md-dialog-main clearfix">
+
+        <md-tabs md-center-tabs="false" md-selected="selectedIndex" md-no-ink="true" md-autoselect="false"
+                 md-dynamic-height="true">
+            <md-tab>
+                <md-tab-label>App Details</md-tab-label>
+                <md-tab-body>
+
+
         <form class="allItems" novalidate>
             <table class="table">
                 <thead class="obl-dashboard-apps">
@@ -25,7 +33,7 @@
                 <th>User Id</th>
                 <th>Application Status</th>
                 <th>Action</th>
-                <th>User Details</th>
+                <!--<th>User Details</th>-->
                 </thead>
 
                 <tbody>
@@ -40,15 +48,47 @@
                         <a  ng-if="app.status=='PENDING'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>
                         <a  ng-if="app.status=='PUBLISHED'" data-ng-click="getPublishDetails(app.id,app.userId)">Update</a>
                         <a  ng-if="app.status=='UPLOADING'" data-ng-click="getPublishDetails(app.id,app.userId)">Finish</a>
-                      <td>  <a  ng-click="usersview()" class="techview">View</a> </td>
-
-
                     </td>
                 </tr>
                 </tbody>
             </table>
-        </form>
-        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+        </form> </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="enableTab">
+
+                <md-tab-label>Registered user </md-tab-label>
+                <md-tab-body>
+                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
+                                             template-url="vendor/angularUtils-pagination/dirPagination.tpl.html">
+
+                    </dir-pagination-controls> <form class="allItems" novalidate>
+                    <table class="table">
+                        <thead class="obl-dashboard-apps">
+                        <th>user Name</th>
+                        <th>user id</th>
+
+
+                         <!--<th>user Id</th>-->
+
+
+                        </thead>
+
+                        <tbody>
+
+                        <tr dir-paginate="app in appList | filter:search | itemsPerPage: 100">
+
+                             <td> {{app.email}} </td>
+                             <td> {{app.id}} </td>
+
+
+                       </tr>
+
+                        </tbody>
+                    </table>
+                </form> </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="enableTab">
+
     </div>
 </div>
 
