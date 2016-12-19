@@ -112,7 +112,7 @@ module.exports = {
           var firstName = nameArray[0];
           var lastName = nameArray[1];
           if(facebookId){
-            User.findOne({email: facebookEmail}, function foundUser(err, foundUser) {
+            User.findOne({facebookId: facebookId}, function foundUser(err, foundUser) {
               if (err) return res.negotiate(err);
               if(!foundUser){
                 User.create({
@@ -162,7 +162,7 @@ module.exports = {
           var firstName = nameArray[0];
           var lastName = nameArray[1];
           if(googleId){
-            User.findOne({email: googleEmail}, function foundUser(err, foundUser) {
+            User.findOne({googleId: googleId}, function foundUser(err, foundUser) {
               if (err) return res.negotiate(err);
 
               if(!foundUser){
