@@ -1,0 +1,57 @@
+<div ng-if="isAuthenticated">
+    <div class="obl-dashboard-wrapper" ng-controller="HeaderController" ng-show="auth.isAuthenticated()">
+        <div class="obl-dashboard-header clearfix">
+
+            <legend>Registered Users</legend>
+
+            <fieldset>
+                <label> Email </label>
+                <img src="../../../images/question-mark.svg" width=" 12" height="12" />
+                <md-select aria-label="Email" flex="50" ng-model="user.email">
+                    <md-option ng-value="email"  >{{user.email}}
+                    </md-option>
+                </md-select>
+            </fieldset>
+
+            <fieldset>
+                <label> First Name </label>
+                <img  width=" 12" height="12" />
+                <md-input aria-label="firstName" flex="50" ng-model="user.firstName">
+                    <md-option ng-value="firstName" >{{user.firstName}}
+                    </md-option>
+                </md-input>
+            </fieldset>
+
+            <fieldset>
+                <label> Last Name </label>
+                <img  width=" 12" height="12" />
+                <md-input aria-label="lastName" flex="50" ng-model="user.lastName">
+                    <md-option ng-value="lastName" >{{user.lastName}}
+                    </md-option>
+                </md-input>
+            </fieldset>
+
+
+            <fieldset>
+                <label> Created At </label>
+                <img  width=" 12" height="12" />
+                <md-input aria-label="createdAt" flex="50" ng-model="user.createdAt">
+                    <md-option ng-value="createdAt" >{{user.createdAt}}
+                    </md-option>
+                </md-input>
+            </fieldset>
+
+
+            <fieldset>
+                <label> Updated At </label>
+                <img  width=" 12" height="12" />
+                <md-input aria-label="updatedAt" flex="50" ng-model="user.updatedAt">
+                    <md-option ng-value=updatedAt"" >{{user.updatedAt}}
+                    </md-option>
+                </md-input>
+            </fieldset>
+            <a VALUE="Back" onClick="history.go(-1)" return="true"> Back </a>
+
+            </form>
+    </div>
+</div>

@@ -2,7 +2,7 @@
     <div class="obl-dashboard-wrapper" ng-controller="HeaderController" ng-show="auth.isAuthenticated()">
         <div class="obl-dashboard-header clearfix">
             <h2 ng-hide="welcome"> </h2>
-            <p  ng-hide="welcome"> Well come to the technical support area</p>
+            <p  ng-hide="welcome"> Welcome to the technical support area</p>
             <div class="obl-dashboard-settings">
                 <button class="user-settings-button" ng-click="profileView()" type="button">
                     <img src="images/user-icon.svg" alt="User Logo" />
@@ -25,7 +25,9 @@
                 <th>User Id</th>
                 <th>Application Status</th>
                 <th>Action</th>
+                <th>User Details</th>
                 </thead>
+
                 <tbody>
                 <tr dir-paginate="app in appList | filter:search | itemsPerPage: 100">
                     <td>{{app.id}}</td>
@@ -33,10 +35,14 @@
                     <td>{{app.userId}}</td>
                     <td>{{app.status}}</td>
 
+
                     <td>
                         <a  ng-if="app.status=='PENDING'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>
                         <a  ng-if="app.status=='PUBLISHED'" data-ng-click="getPublishDetails(app.id,app.userId)">Update</a>
                         <a  ng-if="app.status=='UPLOADING'" data-ng-click="getPublishDetails(app.id,app.userId)">Finish</a>
+                      <td>  <a  ng-click="usersview()" class="techview">View</a> </td>
+
+
                     </td>
                 </tr>
                 </tbody>

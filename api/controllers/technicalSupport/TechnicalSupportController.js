@@ -31,8 +31,27 @@ module.exports = {
         });
     },
     
-    
-    
+
+    /**
+         * get All userData
+         *
+         */
+     getAlluserData : function (req, res) {
+            var searchApp = {
+                appId :req.body.appId,
+            }
+
+            console.log("req.body.appId " + req.body.appId);
+
+            PublishDetails.find(searchApp).exec(function (err, publishedData) {
+                if (err) res.send(err);
+                res.json(publishedData);
+
+            });
+
+        },
+
+
     /**
      * get Publish Details of the Application
      *

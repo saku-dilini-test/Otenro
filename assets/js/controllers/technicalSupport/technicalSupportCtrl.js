@@ -106,6 +106,25 @@
             getAllAppDataList();
 
 
+
+
+             var getAlluserData = function () {
+                            technicalSupportService. getAlluserData()
+                                .success(function (result) {
+                                    $scope.appList = result;
+                                }).error(function (error) {
+                                toastr.error('Loading Error', 'Warning', {
+                                    closeButton: true
+                                });
+                            })
+
+                        }
+
+                        getAlluserData();
+
+
+
+
             /**
              * @ngdoc function
              * @name getPublishDetails
@@ -116,6 +135,11 @@
                 $state.go('user.viewPublishDetails',{appId : appId,userId:userId});
             }
         
+            // View technical user details
+
+              $scope.usersview = function(){
+                $state.go('user.technicalRegisteruser');
+              };
 
 
             // push-config-details save function
