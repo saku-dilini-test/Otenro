@@ -123,7 +123,7 @@
 
             var im = $scope.tmpImage;
             if(angular.element('#fileInput').val() == ''){
-                toastr.error('Please choose an image to upload', 'Warning', {
+                toastr.error('Select an image to upload', 'Warning', {
                     closeButton: true
                 });
             }
@@ -131,7 +131,7 @@
                 im[0] = $scope.picFile;
                 $scope.tmpImage = im;
                 $scope.mainImg = img;
-                toastr.success('Image has been uploaded successfully', 'message', {
+                toastr.success('Image successfully uploaded ', 'Message', {
                     closeButton: true
                 });
             }
@@ -308,7 +308,7 @@
             data.appId = $rootScope.appId;
             articleService.addCategory(data)
                 .success(function (result) {
-                    toastr.success('Successfully Added Article Category', 'Message', {
+                    toastr.success('Category creation successful ', 'Message', {
                         closeButton: true
                     });
                     var catId = result.id;

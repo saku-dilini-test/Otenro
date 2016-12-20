@@ -11,7 +11,7 @@
             policies.appId = $rootScope.appId;
             policiesService.addPolicies(policies)
                 .success(function (data, status, headers, config) {
-                    toastr.success('Policies successfully updated', 'Awsome!', {
+                    toastr.success('Policies successfully updated', 'Awesome!', {
                         closeButton: true
                     });
                     $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
@@ -30,7 +30,7 @@
             aboutUs.appId = $rootScope.appId;
             aboutUsService.addAboutUs(aboutUs)
                 .success(function (data, status, headers, config) {
-                    toastr.success('About us updated', 'Awsome!', {
+                    toastr.success('About us updated', 'Awesome!', {
                         closeButton: true
                     });
                     $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
