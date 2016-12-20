@@ -9,8 +9,8 @@ var sizeOf = require('image-size'),
     fs = require('fs-extra'),
     config = require('../../../services/config'),
     im = require('imagemagick'),
-    easyimg = require('easyimage'),
-    lwip = require('lwip');
+    easyimg = require('easyimage')
+    /*lwip = require('lwip');*/
 
 module.exports = {
 
@@ -385,6 +385,8 @@ module.exports = {
      * Update background image given appId
      */
     addBackgroundImage : function(req,res){
+
+        console.log("addBackgroundImage running ");
         var userId = req.userId;
         var appId = req.body.appId;
         var backImg = req.body.backgroundImg;
@@ -392,11 +394,24 @@ module.exports = {
         var backgroundExist = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'background.jpg';
         var backgroundDimensions = sizeOf(backgroundExist);
 
-        /**
+
+        var data = backImg.replace(/^data:image\/\w+;base64,/, "");
+        var buf = new Buffer(data, 'base64');
+        // product images copy to app file server
+        fs.writeFile(config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'background.jpg', buf, function(err) {
+            if(err) {
+                if (err) res.send(err);
+            }
+            res.send('ok');
+        });
+
+
+
+        /*/!**
          *  Decode Image
          * @param dataString
          * @returns {*}
-         */
+         *!/
         function decodeBase64Image(dataString) {
             var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
                 response = {};
@@ -417,9 +432,9 @@ module.exports = {
             if(e.code != 'EEXIT') throw e;
         }
 
-        /**
+        /!**
          * read background image and create temporary image with new image then resize new header image and overwrite it
-         */
+         *!/
         if(typeof data != "undefined"){
 
             var backgroundimageBuffer = decodeBase64Image(data);
@@ -435,7 +450,7 @@ module.exports = {
                         return console.dir(err);
                     }
 
-                    lwip.open(backgroundImage, function(err, image) {
+                   /!* lwip.open(backgroundImage, function(err, image) {*!/
                         if (err)  return res.send(500, err);
 
                         fs.unlink(backgroundExist, function (err) {
@@ -451,16 +466,16 @@ module.exports = {
                                 });
                             });
                         });
-                    });
+                   /!* });*!/
                 });
             });
-        }
+        }*/
     },
     ///**
     // * Update Background Color given appId
     // */
     //
-    //addBackgroundColor : function(req,res){
+   // addBackgroundColor : function(req,res){
     //    var userId = req.userId;
     //    var appId = req.body.appId;
     //    var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
@@ -518,7 +533,7 @@ module.exports = {
     //            console.log((err));
     //        });
     //    }
-    //},
+   // },
     /**
      * Update Background Color , Navigation Bar , Footer and Button given appId with common function
      * also Update Header , Content & Footer Color given appId also integrated
@@ -1080,7 +1095,7 @@ module.exports = {
         }
     },
 
-    addLogoImage: function(req,res) {
+    /*addLogoImage: function(req,res) {
 
 
         var dePath = config.ME_SERVER + req.userId + '/templates/' + req.body.appId + '/img/';
@@ -1117,5 +1132,5 @@ module.exports = {
                 });
             });
         });
-    }
+    }*/
 };
