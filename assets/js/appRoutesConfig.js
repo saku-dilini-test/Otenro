@@ -91,6 +91,17 @@ angular.module('app')
                 }
             }
 
+      }).state('user.technicalRegisteruser',{
+            url :'/technicalRegisterusers',
+            controller : 'technicalSupportCtrl',
+            templateUrl : 'user/technicalSupport/TechnicalRegisteruser.html',
+            data : {
+                permissions: {
+                    only: ['Support'],
+                    redirectTo: 'anon.login'
+                }
+            }
+
       }).state('user.viewPublishDetails',{
             url :'/viewPublishDetails/:appId/:userId',
             controller : 'technicalSupportCtrl',
