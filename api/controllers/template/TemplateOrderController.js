@@ -90,9 +90,14 @@ module.exports = {
     getTaxInfoByCountry : function(req,res){
         var appId = req.body.appId;
         var country = req.body.country;
+
         var searchQuery = {
-            appId: appId,
-            country:country
+            appId:appId,
+            countryRestriction:{
+                $elemMatch:{
+                    countryName:country
+                }
+            }
         };
         console.log(searchQuery);
         ApplicationTax.find(searchQuery).exec(function(err, result) {
