@@ -115,8 +115,7 @@
              var getAlluserData = function () {
                             technicalSupportService. getAlluserData()
                                 .success(function (result) {
-                                    console.log(result);
-                                    $scope.appList = result;
+                                    $scope.userList = result;
                                 }).error(function (error) {
                                 toastr.error('Loading Error', 'Warning', {
                                     closeButton: true
