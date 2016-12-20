@@ -18,6 +18,12 @@
             getPushConfigDetails : function(appId){
                 return $http.get(SERVER_URL + 'edit/getPushConfigDetails?appId='+appId);
             },
+            getAllAppData: function(){
+                            return $http.get(SERVER_URL + 'edit/getAllAppsData');
+            },
+            getAlluserData: function(){
+                            return $http.get(SERVER_URL + 'edit/getAlluserData');
+            },
             savePushConfigDetails : function(data){
                 return $http.post(SERVER_URL + 'edit/savePushConfigDetails',data);
             },

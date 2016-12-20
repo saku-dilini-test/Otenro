@@ -23,7 +23,7 @@ module.exports = {
      */
     getAllAppsData: function (req, res) {
         Application.find().where({ or : [ { status  : 'PENDING' },
-                                        { status  : 'PUBLISHED' },
+                                        { status   : 'PUBLISHED' },
                                         { status   : 'UPLOADING' } ]}).exec(function (err, appsData) {
             if (err) res.send(err);
             res.json(appsData);
@@ -31,8 +31,23 @@ module.exports = {
         });
     },
     
-    
-    
+
+    /**
+         * get All userData
+         *
+         */
+
+     getAlluserData : function (req, res) {
+
+            User.find().exec(function (err, publishedData) {
+                if (err) res.send(err);
+                res.send(publishedData);
+
+            });
+
+        },
+
+
     /**
      * get Publish Details of the Application
      *
