@@ -340,8 +340,11 @@
                                 <div class="fileinputs img-browse ">
 
                                 <input type="file" value="" ng-click = "cropImage();"  id="fileInput" class="file" size="100">
-                                    <div class="fakefile  glyphicon glyphicon-upload"  >
+                                    <div ng-if="!picFile" class="fakefile  glyphicon glyphicon-upload"  >
                                      </div>
+                                    <div ng-if="picFile" style="display:none"  >
+                                    </div>
+
 
                                 </div>
 
