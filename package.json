@@ -1,8 +1,8 @@
 {
   "dependencies": {
     "FileSaver": "^0.10.0",
-      "angular-google-maps": "^2.3.2",
-      "authorizenet": "^1.0.1",
+    "angular-google-maps": "^2.3.2",
+    "authorizenet": "^1.0.1",
     "body-parser": "^1.15.0",
     "braintree": "^1.44.0",
     "connect-multiparty": "^2.0.0",
@@ -68,5 +68,15 @@
     "url": "git://github.com/udeshikaperera/myProject.git"
   },
   "author": "udeshikaperera",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "angular": "^1.6.0",
+    "angular-mocks": "^1.6.0",
+    "angular-ui-router": "^0.3.2",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.1.0"
+  }
 }
