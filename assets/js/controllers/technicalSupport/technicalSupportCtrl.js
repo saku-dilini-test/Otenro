@@ -144,19 +144,6 @@
                 $state.go('user.technicalRegisteruser');
               };
 
-
-              //count all users
-             $scope.getTotal = function(){
-                 var total = 0;
-                 for(var i = 0; i < $scope.app.id; i++){
-                     var product = $scope.app.id[i];
-                     total += (app.id + app.id);
-                 }
-                 return total;
-             }
-
-
-
             // push-config-details save function
             $scope.savePushConfig = function (inputData) {
                 // set app ID & user ID

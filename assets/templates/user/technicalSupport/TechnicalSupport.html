@@ -64,7 +64,7 @@
                     </dir-pagination-controls> <form class="allItems" novalidate>
                     <table class="table">
                         <thead class="obl-dashboard-apps">
-                        <th>user No</th>
+
                         <th>user Name</th>
                         <th>user id</th>
                         <th>About User</th>
@@ -75,7 +75,7 @@
 
                         <tr dir-paginate="app in appList | filter:search | itemsPerPage: 100">
 
-                             <td> {{ 1 }}</td>
+
                              <td> {{app.email}} </td>
                              <td> {{app.id}} </td>
                              <td> {{app.yourselfReason}} </td>
