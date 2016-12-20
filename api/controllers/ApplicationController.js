@@ -20,6 +20,17 @@ module.exports = {
         });
     },
 
+    templatePreview : function (req,res) {
+        console.log(req.body.templateName);
+       if (req.body.templateName=='foodDemoApp'){
+           res.send({
+               appId: '58578588d1e494ad11b91369',
+               message: "New Application has been created"
+           });
+       }
+
+    },
+
     viewTemplate : function(req,res){
 
         var templateName = req.body.templateName,
@@ -29,7 +40,7 @@ module.exports = {
             templatePath = sails.config.appPath + '/api/templates/' + templateName,
             appName = req.body.appName,
             serverTmp="http://localhost:port",
-            serverOrg=config.server.host;
+            serverOrg=config.server.host+":1337";
 
         var loginPath = '/#/',
             isApplyStyle =  {
@@ -254,8 +265,8 @@ module.exports = {
                         if (err) return res.negotiate(err);
                     });
                 });
-            
-            /** config -|- copy template images to App File Server 
+
+            /** config -|- copy template images to App File Server
              * TODO : future development, Template dummy data move to another folder
              * **/
             var appFileServerPath  = config.APP_FILE_SERVER + userId + '/templates/' + app.id +'/';

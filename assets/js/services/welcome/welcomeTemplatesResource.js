@@ -12,6 +12,9 @@
             getTemplates:function(){
                 return $http.post(SERVER_URL + 'app/designApps');
             },
+            viewTemplatePreview:function(tempAppParams){
+                return $http.post(SERVER_URL + 'app/templatePreview', tempAppParams);
+            },
             createApp:function(tempAppParams){
                 return $http.post(SERVER_URL + 'app/viewTemplate', tempAppParams);
             },

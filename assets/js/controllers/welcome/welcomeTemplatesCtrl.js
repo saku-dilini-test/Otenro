@@ -83,9 +83,13 @@
                 };
 
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
+                    alert("data.data.appId " + data.data.appId);
 
                     var url= ME_APP_SERVER+'temp/unknownUser'
                        +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+
+
+                    alert(url);
 
                     mySharedService.prepForBroadcast(url);
                     $scope.goLivePreview = function() {
