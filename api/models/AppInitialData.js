@@ -1363,11 +1363,11 @@ module.exports = {
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
-                        "img" : "Crop Top BrownX"
+                        "img" : "20.JPG"
                       }
                     ],
                     "variants":[{
-                      "name": "Shirt z",
+                      "name": "Crop Top BrownX",
                       'sku': "1111",
                       'size': "11",
                       'vType' : "s",
@@ -1511,6 +1511,412 @@ module.exports = {
                       'quantity': 250
                     }],
                     "imageUrl": "14.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              }
+              ]
+          },
+          {
+            templateName : 'CrushApp',
+            secondNavi : [
+              {
+                attribute : {
+                  "imageUrl": "1.JPG",
+                  "name": "New Arrivals",
+                  "description": "New Arrivals description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Airtex",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "15.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Airtex",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "15.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Cloo Hadia",
+                    "price": 350,
+                    "quantity": 350,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt y brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "16.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Cloo Hadia",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "350",
+                      'quantity': 350
+                    }],
+                    "imageUrl": "16.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Cloo Peony",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "17.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Cloo Peony",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "imageUrl": "17.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },{
+                attribute : {
+                  "imageUrl": "2.JPG",
+                  "name": "Surf",
+                  "description": "Surf description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Swimwear Red",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "18.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Swimwear Red",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "18.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Swimwear Top",
+                    "price": 350,
+                    "quantity": 350,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt y brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "19.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Swimwear Top",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "350",
+                      'quantity': 350
+                    }],
+                    "imageUrl": "19.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Swimwear Full",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "20.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Swimwear Full",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "imageUrl": "20.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },
+              {
+                attribute : {
+                  "imageUrl": "3.JPG",
+                  "name": "Men",
+                  "description": "Men",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Skinny & Short",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "briefDesc" : "Short x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "21.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Skinny & Short",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "21.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },
+              {
+                attribute : {
+                  "imageUrl": "4.JPG",
+                  "name": "Women",
+                  "description": "Shoes description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "White Summer",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "11.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "White Summer",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "11.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Blue Fish",
+                    "price": 130,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "12.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Blue Fish",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "12.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Beach Oneck",
+                    "price": 160,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "13.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Beach Oneck",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "13.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Korea Crocheted",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "14.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Korea Crocheted",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "14.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },
+              {
+                attribute : {
+                  "imageUrl": "5.JPG",
+                  "name": "Kids",
+                  "description": "Kids description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Checker Short",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "22.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Checker Short",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "22.jpg",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Pink kit",
+                    "price": 130,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "23.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Pink kit",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "23.jpg",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Sweet Pink",
+                    "price": 160,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "24.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Sweet Pink",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "24.jpg",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Yellow Beach",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "25.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Yellow Beach",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "25.jpg",
                     "createdDate": Date.now()
                   }
                 ]

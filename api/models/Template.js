@@ -100,6 +100,15 @@ module.exports = {
             templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
+            template_name : 'CrushApp',
+            templateViewName : 'Crush Surf Shop',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
+            gifImageUrl : 'CrushApp/clothing2.png',
+            imageUrl : 'CrushApp/clothing.jpg',
+            templateFilesPath:'templates/clothingApp',
+            templateCategory: TemplateCategoryDetails.Business.ID
+        },
+        {
             template_name : 'hkRising',
             templateViewName : 'The Peak',
             templateViewDesc : 'Clean, simple, and focused on an elegant user experience. Ideal for media and blog apps.',
