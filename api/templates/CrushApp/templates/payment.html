@@ -1,36 +1,36 @@
-<ion-view class="made-easy-background-image made-easy-background-color" view-title="Payment">
+<ion-view class="made-easy-background-color" view-title="Payment">
     <ion-content class="ion-list">
         <div class="card payment">
             <form>
-                <ion-checkbox ng-show="deliveryShow" ng-model="payment.type"  class="checkbox-positive" ng-true-value="'cashOnDelivery'">
+                <ion-checkbox ng-show="deliveryShow" ng-model="payment.type"  class="checkbox-dark" ng-true-value="'cashOnDelivery'">
                     <h3>Cash On Delivery</h3>
                 </ion-checkbox >
 
-                <ion-checkbox ng-show="pickupShow" ng-model="payment.type"  class="checkbox-positive" ng-true-value="'cashOnPickup'">
+                <ion-checkbox ng-show="pickupShow" ng-model="payment.type"  class="checkbox-dark" ng-true-value="'cashOnPickup'">
                     <h3>Cash On Pickup</h3>
                 </ion-checkbox >
 
-                <ion-checkbox ng-show="paypalShow" ng-model="payment.type"  class="checkbox-positive" ng-true-value="'paypal'">
+                <ion-checkbox ng-show="paypalShow" ng-model="payment.type"  class="checkbox-dark" ng-true-value="'paypal'">
                     <h3>Pay Pal</h3>
                 </ion-checkbox >
 
-                <ion-checkbox ng-show="stripeShow"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'creditcard'">
+                <ion-checkbox ng-show="stripeShow"  ng-model="payment.type"  class="checkbox-dark" ng-true-value="'creditcard'">
                     <h3>Stripe</h3>
                 </ion-checkbox >
 
-                <ion-checkbox ng-show="braintreeShow"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'braintree'">
+                <ion-checkbox ng-show="braintreeShow"  ng-model="payment.type"  class="checkbox-dark" ng-true-value="'braintree'">
                     <h3>Braintree</h3>
                 </ion-checkbox >
 
-                <ion-checkbox ng-show="authorizeNet"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'authorizeNet'">
+                <ion-checkbox ng-show="authorizeNet"  ng-model="payment.type"  class="checkbox-dark" ng-true-value="'authorizeNet'">
                     <h3>AuthorizeNet</h3>
                 </ion-checkbox >
 
             </form>
 
-            <div class="card-form list padding-right" ng-if="payment.type == 'creditcard'">
+            <div class="card-form list" ng-if="payment.type == 'creditcard'">
                 <form name="paymentForm" ng-submit="makeStripePayment(card)">
-                    <span class="col input-label">Select Card Type*</span>
+                    <span class="col padding-left input-label">Select Card Type*</span>
                     <div class="row cards-list">
                         <ion-checkbox  ng-model="card.cardType" ng-class="card.cardType == 'visa' ? 'selected' : ''" class="checkbox-positive" ng-true-value="'visa'">
                             <img src="img/visa.png">
@@ -81,9 +81,8 @@
                         </div>
                     </label>
                     <div class="row">
-                        <div class="col col-top"></div>
-                        <button type="submit" class="col col-67 button button-raised  made-easy-button-setting">MAKE PAYMENT</button>
-                        <div class="col col-top"></div>
+                        <button type="submit" class="col button button-raised  made-easy-button-setting">MAKE PAYMENT</button>
+
                     </div>
                     <!--
                     <p ng-show="paymentForm.cardNumber.$error.ccNumberType">That's not a valid {{card.cardType}}</p>
@@ -97,7 +96,7 @@
             </div>
             <div class="card-form list padding-right" ng-if="payment.type == 'authorizeNet'">
                 <form name="paymentForm" ng-submit="authorizeCreditCard(card)">
-                    <span class="col input-label">Select Card Type*</span>
+                    <span class="col padding-left input-label">Select Card Type*</span>
                     <div class="row cards-list">
                         <ion-checkbox  ng-model="card.cardType" ng-class="card.cardType == 'visa' ? 'selected' : ''" class="checkbox-positive" ng-true-value="'visa'">
                             <img src="img/visa.png">
@@ -144,9 +143,8 @@
                         </div>
                     </label>
                     <div class="row">
-                        <div class="col col-top"></div>
-                        <button type="submit" class="col col-67 button button-small button-block made-easy-button-setting">MAKE PAYMENT</button>
-                        <div class="col col-top"></div>
+                        <button type="submit" class="col button button-small button-block made-easy-button-setting">MAKE PAYMENT</button>
+
                     </div>
                     <!--
                     <p ng-show="paymentForm.cardNumber.$error.ccNumberType">That's not a valid {{card.cardType}}</p>
@@ -199,20 +197,18 @@
                 </div>
             </div>
             <form name="cashPaymentFrom" novalidate>
-                <div class="card-form list padding-right" ng-if="payment.type == 'cashOnPickup' || payment.type == 'cashOnDelivery'">
-                    <span class="col input-label">Confirm payment by cash on delivery</span>
-                    <div class="row cart-buttons">
-                        <div class="col-33"></div>
-                        <button class="button button-raised  made-easy-button-setting" ng-click="confirmCashPayment()" >Confirm</button>
+                <div class="list" ng-if="payment.type == 'cashOnPickup' || payment.type == 'cashOnDelivery'">
+                    <span class="col center made-easy-content-font">Confirm payment by cash on delivery</span>
+                    <div class="row">
+                        <button class="col button button-raised  made-easy-button-setting" ng-click="confirmCashPayment()" >Confirm</button>
                     </div>
                 </div>
 
             </form>
             <form name="cashPaymentFrom" novalidate>
-                <div class="card-form list padding-right" ng-if="payment.type == 'paypal'">
-                    <div class="row cart-buttons">
-                        <div class="col-33"></div>
-                        <button class="button button-raised  made-easy-button-setting" ng-click="buyWithPayPal()" >Buy with PayPal</button>
+                <div class="list" ng-if="payment.type == 'paypal'">
+                    <div class="row">
+                        <button class="col button button-raised  made-easy-button-setting" ng-click="buyWithPayPal()" >Buy with PayPal</button>
                     </div>
                 </div>
             </form>
