@@ -93,7 +93,7 @@ module.exports = function(config) {
         './bower_components/angular-cookies/angular-cookies.js',
 
         './assets/js/app.js',
-        './assets/js/services/users.spec.js'
+        './assets/js/tests/app.spec.js'
     ],
 
 
