@@ -121,11 +121,8 @@
                                     closeButton: true
                                 });
                             })
-
-                        }
-
-                        getAlluserData();
-
+             }
+              getAlluserData();
 
             /**
              * @ngdoc function

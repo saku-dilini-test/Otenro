@@ -24,7 +24,6 @@
                 <md-tab-label>App Details</md-tab-label>
                 <md-tab-body>
 
-
         <form class="allItems" novalidate>
             <table class="table">
                 <thead class="obl-dashboard-apps">
@@ -42,8 +41,6 @@
                     <td>{{app.appName}}</td>
                     <td>{{app.userId}}</td>
                     <td>{{app.status}}</td>
-
-
                     <td>
                         <a  ng-if="app.status=='PENDING'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>
                         <a  ng-if="app.status=='PUBLISHED'" data-ng-click="getPublishDetails(app.id,app.userId)">Update</a>
@@ -64,33 +61,22 @@
                     </dir-pagination-controls> <form class="allItems" novalidate>
                     <table class="table">
                         <thead class="obl-dashboard-apps">
-
-
                         <th>User No</th>
                         <th>User Name</th>
                         <th>User Id</th>
                         <th>About User</th>
                         <th>Created Date</th>
                         </thead>
-
-                        <tbody>
-
-                        <tr dir-paginate="app in userList | filter:search | itemsPerPage: 100">
-
-                            <a ng-repeat="user in user">
-
-
-                             <td> {{$index +1}} </td>
-                             <td> {{app.email}} </td>
-                             <td> {{app.id}} </td>
-                             <td> {{app.yourselfReason}} </td>
-                             <td> {{app.createdAt}} </td>
-
-
-
-                       </tr>
-
-                        </tbody>
+                           <tbody>
+                           <tr dir-paginate="app in userList | filter:search | itemsPerPage: 100">
+                               <a ng-repeat="user in user">
+                            <td> {{$index +1}} </td>
+                            <td> {{app.email}} </td>
+                            <td> {{app.id}} </td>
+                            <td> {{app.yourselfReason}} </td>
+                            <td> {{app.createdAt}} </td>
+                           </tr>
+                           </tbody>
                     </table>
                 </form> </md-tab-body>
             </md-tab>
