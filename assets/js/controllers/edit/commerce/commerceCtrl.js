@@ -479,7 +479,7 @@
             if (!storeSettings){
                 toastr.error(' warning', "Please fill all required fields", {closeButton: true});
             }/*else if (!storeSettings.orderNumber) {
-                toastr.error(' warning', "Please fill order number field", {closeButton: true});
+                toastr.error(' warning', "Order number required ", {closeButton: true});
             }*/
             else {
 
@@ -569,7 +569,7 @@
                     storeSettings.appId = $rootScope.appId;
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
-                            toastr.success('Store Setting Details has been added successfully', 'Awsome!', {
+                            toastr.success('Store Setting Details has been added successfully', 'Awesome', {
                                 closeButton: true
                             });
                             $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
@@ -701,7 +701,7 @@
         $scope.saveEmailDeliInfo = function (email, type) {
             if(email == undefined || email.fromEmail == undefined || email.replyToEmail == undefined
              || email.alertEmail == undefined || email.alertAt == undefined){
-                toastr.error('Fill the all fields','Warning',{
+                toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
                 });
             }
@@ -733,7 +733,7 @@
 
             console.log(email);
             if(email == undefined){
-                toastr.error('Fill the all fields','Warning',{
+                toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
                 });
             }
@@ -767,7 +767,7 @@
 
             console.log(email);
             if(email == undefined || email.footer == undefined || email.header == undefined || email.footer == '' || email.header == ''){
-                toastr.error('Fill the all fields','Warning',{
+                toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
                 });
             }else if(picFileHeader == null || picFileFooter == null){
@@ -897,7 +897,7 @@
         $scope.refunded = function () {
             $scope.selectedRow = $scope.gridApi1.selection.getSelectedRows();
             if($scope.selectedRow.length == 0){
-                toastr.error('Select a row', 'Warning', {
+                toastr.error('Please select a row', 'Warning', {
                     closeButton: true
                 });
             }
@@ -925,12 +925,12 @@
             $scope.gridOptions3.data = $scope.unfulfilled;
             commerceService.updateOrders($scope.selectedRow)
                 .success(function (data) {
-                    toastr.success('Status changed to refunded ', 'Success', {
+                    toastr.success('Order status changed to refunded  ', 'Success', {
                         closeButton: true
                     });
                 })
                 .error(function (err) {
-                    toastr.error('could not change the status', 'Warning', {
+                    toastr.error('Order status change failed ', 'Warning', {
                         closeButton: true
                     });
                 })
@@ -939,7 +939,7 @@
         $scope.fulfilled = function () {
             $scope.row = $scope.gridApi1.selection.getSelectedRows();
             if($scope.row.length == 0){
-                toastr.error('Select a row', 'Warning', {
+                toastr.error('Please Select a row', 'Warning', {
                     closeButton: true
                 });
             }
@@ -967,12 +967,12 @@
                 $scope.gridOptions3.data = $scope.unfulfilled;
                 commerceService.updateOrders($scope.row)
                 .success(function (data) {
-                    toastr.success('Status changed to fulfilled ', 'Success', {
+                    toastr.success('Order status changed to fulfilled ', 'Success', {
                         closeButton: true
                     });
                 })
                 .error(function (err) {
-                    toastr.error('could not change the status', 'Warning', {
+                    toastr.error('Could not change the status', 'Warning', {
                         closeButton: true
                     });
                 })
@@ -1044,19 +1044,19 @@
             if(typeof basicInfo.address == 'undefined' && typeof basicInfo.telPhone == 'undefined'){
                 toastr.error('Basic Information not update', { closeButton: true});
             }else if(typeof basicInfo.address == 'undefined'){
-                toastr.error('Address Not Update', { closeButton: true});
+                toastr.error('Updating of address failed', { closeButton: true});
             }
             else if(typeof basicInfo.telPhone == 'undefined'){
-                toastr.error('Tel phone Not Update', { closeButton: true});
+                toastr.error('Updating of Telephone number failed', { closeButton: true});
             }
             else if(typeof webInfo.email == 'undefined' && typeof webInfo.webSite == 'undefined'){
-                toastr.error('Web Information not update', { closeButton: true});
+                toastr.error('Updating of Web information failed ', { closeButton: true});
             }
             else if(typeof webInfo.email == 'undefined'){
-                toastr.error('Email Not Update', { closeButton: true});
+                toastr.error('Updating of Email address failed', { closeButton: true});
             }
             else if(typeof webInfo.webSite == 'undefined'){
-                toastr.error('Web Site Not Update', { closeButton: true});
+                toastr.error('Updating of web address failed', { closeButton: true});
             }
             else{
                 var basicInfoResponse = {
@@ -1069,13 +1069,13 @@
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
-                        toastr.success('Store settings successfully updated. ', 'Awsome!', {closeButton: true});
+                        toastr.success('Store settings successfully updated. ', 'Awesome ', {closeButton: true});
                         if(type == 'finish'){
 
                             $mdDialog.hide();
                         }
                     }).error(function(data, status, headers, config) {
-                    toastr.error('Updating of basic information failed', { closeButton: true});
+                    toastr.error('Updating of basic information failed','Warning', { closeButton: true});
                     $mdDialog.hide();
                 });
             }

@@ -312,7 +312,7 @@
         $scope.addNewCategory = function(file,menu){
             // If menu undefined || menu.name undefined or empty, pop up error message
             if((typeof menu == 'undefined') || (typeof menu.name == 'undefined') || menu.name == ''){
-                toastr.error('Fill the Name Field', 'Warning', {closeButton: true});
+                toastr.error('Please Fill the Name Field', 'Warning', {closeButton: true});
                 return;
             }
             // if($scope.myImage == ''){
@@ -373,7 +373,7 @@
                                 + '/templates/' + $rootScope.appId + '' +
                                 '#/app/home/' + data.id + '?' + new Date().getTime();
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                            toastr.success("Successfully Edit Category", 'Message', {closeButton: true});
+                            toastr.success("Successfully edited category", 'Message', {closeButton: true});
                             $mdDialog.hide();
                             mainMenuService.showMainMenuDialog();
                         }).error(function (err) {
