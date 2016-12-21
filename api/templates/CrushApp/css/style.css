@@ -5,9 +5,7 @@
 .scroll{
 	height: 100%;
 }
-.color-invert{
-    filter: hue-rotate(180deg);
-}
+
 
 .item-select select{
     background:transparent;
@@ -134,6 +132,10 @@ a {
 	border-bottom: 1px solid #929292;
 }
 
+.cart-row .col{
+    padding:0;
+}
+
 .cart .row+.row {
     margin-top: 0;
     padding-top: 5px;
@@ -155,6 +157,34 @@ a {
 
 select{
 	background: #fff0 !important;
+}
+
+/*checkout page*/
+.shopping-cart-total{
+    font-weight: 800;
+    border: 1px #ccc solid;
+}
+
+
+/*payment page*/
+
+.payment .cards-list img{
+    opacity:0.4;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+
+.payment .cards-list .selected img{
+    opacity:1
+}
+
+.payment .cards-list i {
+    display:none;
+}
+
+.payment .card-form label {
+    padding: 16px;
+    border-bottom: 1px solid rgb(221, 221, 221) !important;
 }
 
 /*helper classes*/

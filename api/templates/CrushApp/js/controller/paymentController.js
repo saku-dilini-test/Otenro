@@ -272,7 +272,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                     cssClass: 'ionicPopUp',
                                     buttons:[
                                         {text:'OK',
-                                            type:'button-positive'},
+                                            type:'made-easy-button-setting'},
                                     ]
                                 });
                                 // TODO : Currently back to cart
@@ -359,7 +359,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                             cssClass: 'ionicPopUp',
                                             buttons:[
                                                 {text:'OK',
-                                                    type:'button-positive'},
+                                                    type:'made-easy-button-setting'},
                                             ]
                                         });
                                         // TODO : Currently back to cart
@@ -455,7 +455,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                                 cssClass: 'ionicPopUp',
                                                 buttons:[
                                                     {text:'OK',
-                                                        type:'button-positive'},
+                                                        type:'made-easy-button-setting'},
                                                 ]
                                             });
                                             // TODO : Currently back to cart
