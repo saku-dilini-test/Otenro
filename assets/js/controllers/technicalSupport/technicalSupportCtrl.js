@@ -84,7 +84,6 @@
             }
 
 
-
             /**
              * @ngdoc function
              * @name getAllAppDataList
