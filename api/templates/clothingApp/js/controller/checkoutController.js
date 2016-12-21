@@ -103,7 +103,6 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
         payInfo.cart = $rootScope.cart.cartItems;
         payInfo.userEmail = localData.email;
         payInfo.promotionCode = promotionCode;
-        console.log(payInfo);
         $state.go('app.payment',{item:payInfo});
     }
 
