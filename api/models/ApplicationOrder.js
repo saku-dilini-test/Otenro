@@ -86,6 +86,9 @@ module.exports = {
         },
         option:{
             type: 'string'
+        },
+        promotionCode:{
+            type: 'string'
         }
     }
 };

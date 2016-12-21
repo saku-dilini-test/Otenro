@@ -32,11 +32,18 @@
                 </div>
             </div>
 
-            <div >
+            <div>
                 <div class="row shopping-cart-total">
                     <div class="col col-50">Total</div>
                     <div class="col" ng-model="quantity">{{totalQuantity}}</div>
                     <div class="col" ng-model="total" >{{currency}}{{totalPrice}}</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="row shopping-cart-total">
+                    <div class="col col-50">Promotion code</div>
+                    <input style="border-bottom: 1px solid #ccc;" type="text" ng-model="promotionCode">
                 </div>
             </div>
 
@@ -49,7 +56,7 @@
             <div class="row cart-buttons">
                 <button class="button button-block button-small made-easy-button-setting"  >Cancel</button>
                 <button class="button button-block button-small made-easy-button-setting" ng-disabled="overWeight || underWeight"
-                        ng-click="pay()" >Pay</button>
+                        ng-click="pay(promotionCode)" >Pay</button>
             </div>
         </div>
     </ion-content>

@@ -95,13 +95,14 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
     $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
 
 
-    $scope.pay = function(){
+    $scope.pay = function(promotionCode){
 
         var payInfo = $stateParams.item;
         payInfo.amount = $scope.totalPrice;
         payInfo.taxTotal = $scope.taxTotal;
         payInfo.cart = $rootScope.cart.cartItems;
         payInfo.userEmail = localData.email;
+        payInfo.promotionCode = promotionCode;
         console.log(payInfo);
         $state.go('tab.payment',{item:payInfo});
     }
