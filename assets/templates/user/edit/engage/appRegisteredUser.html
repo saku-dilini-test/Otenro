@@ -1,4 +1,4 @@
-<md-dialog aria-label="App User">
+<md-dialog aria-label="AppUser">
     <md-dialog-content>
         <div class="md-dialog-header">
             <h1>users</h1>
@@ -6,27 +6,31 @@
             </ul>
         </div>
         <div class="md-dialog-main">
-            <table class="me-checkbox-table">
+
+            <table class="me-simple-table">
                 <thead>
-                <!--<th class="checkbox-column"><input type="checkbox" /></th>-->
-                <th>User No</th>
-                <th>Email</th>
-                <th>User Name</th>
-                <th>City</th>
-                <th>Country</th>
+                <th>Name</th>
+                <th>Email</th><br>
                 <th>Phone No</th>
+                <th>Address</th>
+                <th>Registered Date</th>
+
                 </thead>
                 <tbody>
                 <tr ng-repeat="data in appuserList">
-                    <td>{{$index +1}}</td>
-                    <td ng-model="data.email">{{data.email}}</td>
-                    <td ng-model="data.name">{{data.name}}</td>
-                    <td ng-model="data.city">{{data.city}}</td>
-                    <td ng-model="data.country">{{data.country}}</td>
-                    <td ng-model="data.phone">{{data.phone}}</td>
+
+                    <td>{{data.firstName}} {{data.lastName}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.phone}}</td>
+                    <td>{{data.streetNumber}},{{data.streetName}},{{data.city}},{{data.country}}</td>
+                    <td>{{data.registeredDate}}</td>
+                    <td><img width="25" src="../../../images/edit-icon.svg" ng-click="editAppUser(item)"></td>
+                    <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteAppUserInfo($index,item)"></td>
                 </tr>
                 </tbody>
             </table>
+
+
         </div>
         <div class="md-dialog-buttons">
             <div class="inner-section">

@@ -14,6 +14,13 @@
         var getAppUserData = function () {
             engageService. getAppUserData()
                 .success(function (result) {
+                    for(var i=0; i<result.length; i++){
+                        var date = new Date(result[i].updatedAt);
+                        $scope.year = date.getFullYear();
+                        $scope.month = date.getMonth() + 1;
+                        $scope.date = date.getDate();
+                        result[i].registeredDate = $scope.year + "-" + $scope.month + "-" + $scope.date;
+                    }
                     $scope.appuserList = result;
                     console.log($scope.appuserList);
                 }).error(function (error) {

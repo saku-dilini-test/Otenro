@@ -1,0 +1,58 @@
+<md-dialog aria-label="Add Shipping Option">
+    <md-dialog-content>
+
+        <div class="md-dialog-main clearfix">
+            <fieldset>
+                <label><h1>{{oderData.entity.customerName || oderData.entity.registeredName}}</h1></label><br>
+
+            </fieldset>
+            <table class="me-simple-table">
+                <thead>
+                <th class="simple-column">Email</th>
+                <th class="simple-column">Address</th>
+                <th class="simple-column">Phone No</th>
+                <th class="simple-column">Registered Date</th>
+
+                <th>&nbsp;</th>
+                </thead>
+
+            <div>
+                <h7>Orders History</h7>
+            </div>
+
+            <table class="me-simple-table table-ordered-data">
+                <thead>
+                <th width="30%">Date</th>
+                <th width="25%">item</th>
+                <th width="25%">Order status</th>
+                <th width="20%">value</th>
+
+                </thead>
+                <tbody>
+                <div class="list card" data-ng-repeat="order in orderHistory  | filter: {orderHistoryKey: appId}  | orderBy:'':true">
+                    <div ng-repeat="item in order.item" class="item item-avatar">
+
+                        <h2>{{order.date1|date:'MM/dd/yyyy'}}}</h2>
+                        <h2>{{item.name}}</h2>
+                        <h2>{{order.name}}</h2>
+                        <h2>{{item.qty}}</h2>
+                    </div>
+                    <div class="item">
+
+
+                    </div>
+                </div>
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="closeDialog()">Close</md-button>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>
