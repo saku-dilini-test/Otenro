@@ -15,6 +15,7 @@
                 <th>Address</th>
                 <th>Registered Date</th>
 
+
                 </thead>
                 <tbody>
                 <tr ng-repeat="data in appuserList">
@@ -22,10 +23,11 @@
                     <td>{{data.firstName}} {{data.lastName}}</td>
                     <td>{{data.email}}</td>
                     <td>{{data.phone}}</td>
-                    <td>{{data.streetNumber}},{{data.streetName}},{{data.city}},{{data.country}}</td>
+                    <td>{{data.streetNumber}},{{data.streetName}},<br>
+                        {{data.city}},<br>
+                        {{data.country}}</td>
                     <td>{{data.registeredDate}}</td>
-                    <td><img width="25" src="../../../images/edit-icon.svg" ng-click="editAppUser(item)"></td>
-                    <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteAppUserInfo($index,item)"></td>
+
                 </tr>
                 </tbody>
             </table>
@@ -35,6 +37,8 @@
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+
+
             </div>
         </div>
     </md-dialog-content>
