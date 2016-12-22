@@ -2,10 +2,34 @@
     'use strict';
     angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr', 'engageService', '$http', 'SERVER_URL', EngageCtrl]);
 
+
+
+
     function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL) {
+
+        //get all app registered user details
+
+        var getAppUserData = function () {
+            engageService. getAppUserData()
+                .success(function (result) {
+                    $scope.appuserList = result;
+                    console.log($scope.appuserList);
+                }).error(function (error) {
+                toastr.error('Loading Error', 'Warning', {
+                    closeButton: true
+                });
+            })
+        }
+        getAppUserData();
 
         $scope.sendPushMessage=function(){
             return engageService.showPushMessageSendDialog();
+        };
+
+
+
+        $scope.showAppUserDialog=function(){
+            return engageService.showAppUserDialog();
         };
 
         $scope.hide = function() {

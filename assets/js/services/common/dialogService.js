@@ -26,8 +26,8 @@
                     return comingSoonService.showComingSoonDialog();
                 if ('madeEasyBadge'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
-                if ('users'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+                // if ('users'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
                 if ('promotionsAndSales'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('emailMarketing'==clickTitle)
@@ -68,8 +68,8 @@
                     return comingSoonService.showComingSoonDialog();
                 if ('domain'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
-                if ('users'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+                // if ('users'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
                 if ('seo'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('socialMedia'==clickTitle)
@@ -84,6 +84,8 @@
                     return comingSoonService.showComingSoonDialog();
 
 
+                 if ('users' == clickTitle)
+                     return engageService.showAppUserDialog(clickTitle);
                 if ('styles' == clickTitle)
                     return stylesService.showStyleDialog(clickTitle);
                 if ('logoAndTitle' == clickTitle)

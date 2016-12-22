@@ -6,6 +6,8 @@
         '$mdDialog', '$http', '$rootScope', 'SERVER_URL','$q', engageService
     ]);
 
+
+
     function engageService($mdDialog, $http, $rootScope, SERVER_URL, $q) {
         return {
             showPushMessageDialog: function() {
@@ -19,6 +21,21 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+
+            //Get  All Registered Users
+            showAppUserDialog: function() {
+                return $mdDialog.show({
+                    controller: 'EngageCtrl',
+                    templateUrl: 'user/edit/engage/appRegisteredUser.html',
+                    clickOutsideToClose: true
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+
+
             showPushMessageSendDialog: function() {
                 return $mdDialog.show({
                     controller: 'EngageCtrl',
@@ -35,6 +52,9 @@
             },
             getMessageDetails: function(userId){
                 return $http.get(SERVER_URL + 'edit/getMessageDetails?userId='+userId+'&appId='+$rootScope.appId);
+            },
+            getAppUserData: function () {
+                return $http.get(SERVER_URL + 'edit/getAppUserData?appId='+$rootScope.appId);
             }
         };
     }

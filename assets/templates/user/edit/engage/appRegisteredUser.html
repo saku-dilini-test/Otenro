@@ -1,0 +1,47 @@
+<md-dialog aria-label="AppUser">
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>Users</h1>
+        </div>
+            <p > App Registered User Details</p>
+            <div class="obl-dashboard-settings">
+                <!--<button class="user-settings-button" ng-click="profileView()" type="button">-->
+                    <!--<img src="images/user-icon.svg" alt="User Logo" />-->
+                <!--</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="obl-dashboard-wrapper">
+    <!--<div class="obl-dashboard-apps">
+     All Applications
+    </div>-->
+    <div class="md-dialog-main clearfix">
+        <form class="allItems" novalidate>
+            <table class="table">
+                <thead class="obl-dashboard-apps">
+                <th>User Name</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Postal Code</th>
+                <th>Phone No</th>
+                </thead>
+                <tbody>
+
+                <tr dir-paginate="app in appuserList | filter:search | itemsPerPage: 100">
+                    <td>{{}}</td>
+                    <td>{{}}</td>
+                    <td>{{}}</td>
+                    <td>{{}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+    </div>
+</div>
+
+    </md-dialog-content>
+</md-dialog>
+

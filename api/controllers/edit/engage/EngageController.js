@@ -65,6 +65,22 @@ module.exports = {
             });
         });
     },
+
+
+    // get registered user Details
+
+    getAppUserData : function(req,res){
+        var appId = req.param('appId');
+        var searchQuery = {
+            appId: appId
+        };
+        AppUser.find(searchQuery).exec(function(err, result) {
+            if (err) return res.send(err);
+            return res.send(result);
+        });
+    },
+
+
     getMessageDetails: function(req, res){
     var appId = req.param('appId');
     var userId = req.param('userId');
@@ -78,4 +94,5 @@ module.exports = {
         });
 
     }
+
 }
