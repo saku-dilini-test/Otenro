@@ -3,7 +3,6 @@
         <div class="md-dialog-header">
             <h1>users</h1>
             <ul class="md-dialog-header-nav clearfix">
-
             </ul>
         </div>
         <div class="md-dialog-main">
@@ -11,18 +10,20 @@
                 <thead>
                 <!--<th class="checkbox-column"><input type="checkbox" /></th>-->
                 <th>User No</th>
+                <th>Email</th>
                 <th>User Name</th>
                 <th>City</th>
                 <th>Country</th>
-                <th>postal Code</th>
                 <th>Phone No</th>
                 </thead>
                 <tbody>
                 <tr ng-repeat="data in appuserList">
-
-                    <!--<td ng-model="app.createdDate">{{data.createdDate}}</td>-->
-                    <!--<td ng-model="app.message">{{data.message}}</td>-->
-                    <!--<td ng-model="app.date">{{data.date}}</td>-->
+                    <td>{{$index +1}}</td>
+                    <td ng-model="data.email">{{data.email}}</td>
+                    <td ng-model="data.name">{{data.name}}</td>
+                    <td ng-model="data.city">{{data.city}}</td>
+                    <td ng-model="data.country">{{data.country}}</td>
+                    <td ng-model="data.phone">{{data.phone}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -30,7 +31,6 @@
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-
             </div>
         </div>
     </md-dialog-content>
