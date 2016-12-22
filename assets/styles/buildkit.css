@@ -2184,7 +2184,7 @@ h7 {
 
 md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     position: relative;
-    top: 68%;
+    top: 77%;
 }
 
 /* Developper account support page */
@@ -2293,3 +2293,20 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     margin: unset;
     zoom: 0.8;
 }
+
+/* Sales & Promotion */
+
+.sales-promotion md-radio-button {
+     margin: 0 15px 40px 0;
+     float: left;
+}
+
+.sales-promotion md-input-container{
+    clear: both;
+}
+
+.sales-promotion .margin{
+    margin:18px 0;
+}
+
+
