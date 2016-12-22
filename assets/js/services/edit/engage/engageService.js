@@ -22,6 +22,12 @@
                 });
             },
 
+
+
+
+
+
+
             //Get  All Registered Users
             showAppUserDialog: function() {
                 return $mdDialog.show({
@@ -34,6 +40,10 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+
+
+
+
 
 
             showPushMessageSendDialog: function() {

@@ -7,6 +7,8 @@
 
     function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL) {
 
+
+
         //get all app registered user details
 
         var getAppUserData = function () {
@@ -22,15 +24,20 @@
         }
         getAppUserData();
 
+
+
+
+
+
         $scope.sendPushMessage=function(){
             return engageService.showPushMessageSendDialog();
         };
 
-     // get all app registered user
-
-        $scope.showAppUserDialog=function(){
-            return engageService.showAppUserDialog();
-        };
+        //    // get all app registered user
+        //
+        // $scope.showAppUserDialog=function(){
+        //     return engageService.showAppUserDialog();
+        // };
 
         $scope.hide = function() {
             $mdDialog.hide();
