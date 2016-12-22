@@ -1,53 +1,35 @@
-<md-dialog aria-label="AppUser">
+<md-dialog aria-label="App User">
     <md-dialog-content>
         <div class="md-dialog-header">
-            <h1>Users</h1>
+            <h1>users</h1>
+            <ul class="md-dialog-header-nav clearfix">
+
+            </ul>
         </div>
-        <div class="md-dialog-main clearfix">
+        <div class="md-dialog-main">
+            <table class="me-checkbox-table">
+                <thead>
+                <!--<th class="checkbox-column"><input type="checkbox" /></th>-->
+                <th>User No</th>
+                <th>User Name</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>postal Code</th>
+                <th>Phone No</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="data in appuserList">
 
-            <md-tab ng-disabled="enableTab">
-
-                <md-tab-label>App Registered user </md-tab-label>
-                <md-tab-body>
-                    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
-                                             template-url="vendor/angularUtils-pagination/dirPagination.tpl.html">
-
-                    </dir-pagination-controls> <form class="allItems" novalidate>
-                    <table class="table">
-                        <thead class="obl-dashboard-apps">
-                        <th>User No</th>
-                        <th>User Name</th>
-                        <th>City</th>
-                        <th>Country</th>
-                        <th>Postal Code</th>
-                        <th>Phone No</th>
-
-                        </thead>
-                        <tbody>
-                        <tr dir-paginate="app in userList | filter:search | itemsPerPage: 100">
-                            <a ng-repeat="user in user">
-                                <td> {{$index +1}} </td>
-                                <td> {{app.email}} </td>
-                                <td> {{app.id}} </td>
-                                <td> {{app.yourselfReason}} </td>
-                                <td> {{app.createdAt}} </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-
-
-
-                    <div class="md-dialog-buttons">
-                        <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-
-
-                </form> </md-tab-body>
-            </md-tab>
-            <md-tab ng-disabled="enableTab">
-
-
+                    <!--<td ng-model="app.createdDate">{{data.createdDate}}</td>-->
+                    <!--<td ng-model="app.message">{{data.message}}</td>-->
+                    <!--<td ng-model="app.date">{{data.date}}</td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
 
             </div>
         </div>
