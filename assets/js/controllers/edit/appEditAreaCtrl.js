@@ -4,17 +4,26 @@
 (function(){
     angular.module('appEdit').controller('AppEditAreaCtrl',[
         '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER',
-        'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore','currencyService',
+        'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore','currencyService','templateService',
         AppEditAreaCtrl]);
 
     function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
-                             toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore,currencyService){
+                             toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore,currencyService,templateService){
 
         $rootScope.bodyClass = 'appEdit';
 
         $scope.appId = $stateParams.appId;
         $rootScope.appId = $stateParams.appId;
         $scope.userId = $auth.getPayload().id;
+        //$scope.changeTemplate = $rootScope.changeTemplate;
+        var changeTemp = JSON.parse(localStorage.getItem('changeTemplate'));
+        if(changeTemp){
+           // $scope.changeTemplate  = changeTemp.showConfirm;
+        }
+
+        console.log(localStorage.getItem('changeTemplate'));
+        console.log($scope.changeTemplate);
+
         currencyService.getCurrency()
             .success(function (result) {
                 if(typeof result === 'undefined'){
@@ -83,6 +92,44 @@
 
         $scope.profileView = function() {
            return userProfileService.showUserProfileDialog();
+        };
+        $scope.changePermanently = function(state) {
+
+            if(state == 'yes'){
+
+                var appParams = {
+                    'userId':$auth.getPayload().id,
+                    'appId' : $rootScope.appId
+                };
+                templateService.changeTemplatePermanent(appParams)
+                    .success(function(data) {
+                        toastr.success('Successfully Build ', 'Congratulations!', {
+                            closeButton: true
+                        });
+                        var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                            +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
+
+                        mySharedService.prepForBroadcast(url);
+                        $rootScope.changeTemplate = false;
+                    }).error(function(err) {
+                    toastr.error('Cant Build', 'Error', {
+                        closeButton: true
+                    });
+                });
+            }else {
+
+                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                    +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
+
+                mySharedService.prepForBroadcast(url);
+
+                $rootScope.changeTemplate = false;
+                toastr.success('You refused to change the template ', 'Congratulations!', {
+                    closeButton: true
+                });
+
+            }
+
         };
 
         $scope.thumbPic = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/header.jpg?time='+new Date().getTime();
