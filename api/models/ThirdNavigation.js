@@ -50,6 +50,9 @@ module.exports = {
         type : {
             type: 'string'
         },
+        publish : {
+            type: 'boolean'
+        },
         enteredBy : {
             type: 'string'
         },
