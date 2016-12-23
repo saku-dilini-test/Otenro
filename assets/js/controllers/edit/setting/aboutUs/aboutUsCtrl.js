@@ -58,7 +58,7 @@
             aboutUs.appId = $rootScope.appId;
             aboutUsService.addAboutUs(aboutUs)
                 .success(function (data, status, headers, config) {
-                    toastr.success('About us updated', 'Awsome!', {
+                    toastr.success('About us updated', 'Awesome!', {
                         closeButton: true
                     });
                     $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id

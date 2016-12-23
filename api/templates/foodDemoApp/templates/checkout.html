@@ -41,6 +41,13 @@
             </div>
 
             <div>
+                <div class="row shopping-cart-total">
+                    <div class="col col-50">Promotion code</div>
+                    <input style="border-bottom: 1px solid #ccc;" type="text" ng-model="promotionCode">
+                </div>
+            </div>
+
+            <div>
                 <!--Change the error messages accordingly-->
                 <div ng-if="overWeight">Over weight. Cannot ship</div>
                 <div ng-if="underWeight">Under weight. Cannot ship</div>
@@ -49,7 +56,7 @@
             <div class="row cart-buttons">
                 <button class="button button-block button-small made-easy-button-setting"  >Cancel</button>
                 <button class="button button-block button-small made-easy-button-setting" ng-disabled="overWeight || underWeight"
-                        ng-click="pay()" >Pay</button>
+                        ng-click="pay(promotionCode)" >Pay</button>
             </div>
         </div>
     </ion-content>

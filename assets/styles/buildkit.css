@@ -2184,7 +2184,7 @@ h7 {
 
 md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     position: relative;
-    top: 68%;
+    top: 77%;
 }
 
 /* Developper account support page */
@@ -2294,6 +2294,8 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     zoom: 0.8;
 }
 
+/* template_change */
+
 .change-template-notifi{
     background-color: rgba(2,2,2,0.6);
     width: 100%;
@@ -2317,4 +2319,18 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 
 .change-template-notifi a{
     text-decoration: none;
+}
+/* Sales & Promotion */
+
+.sales-promotion md-radio-button {
+     margin: 0 15px 40px 0;
+     float: left;
+}
+
+.sales-promotion md-input-container{
+    clear: both;
+}
+
+.sales-promotion .margin{
+    margin:18px 0;
 }

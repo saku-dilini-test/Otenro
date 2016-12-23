@@ -288,7 +288,7 @@
             publishService.addAppReviewInformation(appReview)
             .success(function(data){
                 disableTabs(3,false,false,false,false);
-                toastr.success('Genaral info has been added', 'Saved', {
+                toastr.success('General info has been added', 'Saved', {
                     closeButton: true
                 });
             }).error(function(err){

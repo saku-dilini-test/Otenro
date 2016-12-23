@@ -145,7 +145,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
               tax :   $stateParams.item.taxTotal,
               shippingCost :   $stateParams.item.shippingCost,
               shippingOpt : $stateParams.item.shipping.shippingOption,
-              email: $stateParams.item.userEmail
+              email: $stateParams.item.userEmail,
+              promotionCode: $stateParams.item.promotionCode
           };
       }
       else{
@@ -158,7 +159,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
               tax :   $stateParams.item.taxTotal,
               shippingCost :   $stateParams.item.shippingCost,
               pickupId: $stateParams.item.pickupId,
-              email: $stateParams.item.userEmail
+              email: $stateParams.item.userEmail,
+              promotionCode: $stateParams.item.promotionCode
           }
       }
       $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -225,7 +227,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 shippingCost :   $stateParams.item.shippingCost,
                 shippingOpt : $stateParams.item.shipping.shippingOption,
                 email: $stateParams.item.userEmail,
-                currency:$rootScope.currency
+                currency:$rootScope.currency,
+                promotionCode: $stateParams.item.promotionCode
             };
         }
         else{
@@ -239,7 +242,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 shippingCost :   $stateParams.item.shippingCost,
                 pickupId: $stateParams.item.pickupId,
                 email: $stateParams.item.userEmail,
-                currency:$rootScope.currency
+                currency:$rootScope.currency,
+                promotionCode: $stateParams.item.promotionCode
             }
         }
 
@@ -272,7 +276,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                     cssClass: 'ionicPopUp',
                                     buttons:[
                                         {text:'OK',
-                                            type:'button-positive'},
+                                            type:'made-easy-button-setting'},
                                     ]
                                 });
                                 // TODO : Currently back to cart
@@ -313,7 +317,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         shippingCost :   $stateParams.item.shippingCost,
                         shippingOpt : $stateParams.item.shipping.shippingOption,
                         email: $stateParams.item.userEmail,
-                        currency:$rootScope.currency
+                        currency:$rootScope.currency,
+                        promotionCode: $stateParams.item.promotionCode
                     };
                 }
                 else{
@@ -327,7 +332,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         shippingCost :   $stateParams.item.shippingCost,
                         pickupId: $stateParams.item.pickupId,
                         email: $stateParams.item.userEmail,
-                        currency:$rootScope.currency
+                        currency:$rootScope.currency,
+                        promotionCode: $stateParams.item.promotionCode
                     }
                 }
                 $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -359,7 +365,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                             cssClass: 'ionicPopUp',
                                             buttons:[
                                                 {text:'OK',
-                                                    type:'button-positive'},
+                                                    type:'made-easy-button-setting'},
                                             ]
                                         });
                                         // TODO : Currently back to cart
@@ -410,7 +416,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             tax :   $stateParams.item.taxTotal,
                             shippingCost :   $stateParams.item.shippingCost,
                             shippingOpt : $stateParams.item.shipping.shippingOption,
-                            email: $stateParams.item.userEmail
+                            email: $stateParams.item.userEmail,
+                            promotionCode: $stateParams.item.promotionCode
                         };
                     }
                     else{
@@ -423,7 +430,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             tax :   $stateParams.item.taxTotal,
                             shippingCost :   $stateParams.item.shippingCost,
                             pickupId: $stateParams.item.pickupId,
-                            email: $stateParams.item.userEmail
+                            email: $stateParams.item.userEmail,
+                            promotionCode: $stateParams.item.promotionCode
                         }
                     }
                     $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
@@ -455,7 +463,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                                 cssClass: 'ionicPopUp',
                                                 buttons:[
                                                     {text:'OK',
-                                                        type:'button-positive'},
+                                                        type:'made-easy-button-setting'},
                                                 ]
                                             });
                                             // TODO : Currently back to cart

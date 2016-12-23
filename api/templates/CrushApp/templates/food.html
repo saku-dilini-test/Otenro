@@ -44,6 +44,7 @@
                     Select {{foodInfo.selection}}
                 </div>
                 <select ng-model="selectedVariant"
+                        class="made-easy-header-font"
                         ng-options="variant.vType  for variant in foodInfo.variants"
                         ng-change="changeVariant(selectedVariant)">
                 </select>

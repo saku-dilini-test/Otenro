@@ -24,7 +24,7 @@
                         +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
-                    toastr.success('Header image changed  ', 'Awsome!', {
+                    toastr.success('Header image changed  ', 'Awesome!', {
                         closeButton: true
                     });
                 }).error(function(err) {

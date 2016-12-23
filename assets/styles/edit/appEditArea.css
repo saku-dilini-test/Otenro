@@ -38,7 +38,7 @@
 .mdapp-nav{
     text-align: right;
     min-height: 762px;
-    height: 100vh;
+    height: 100%;
     position: absolute;
     left: 0;
     top: 0;

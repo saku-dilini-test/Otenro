@@ -93,7 +93,7 @@ module.exports.routes = {
     'POST /edit/applyStyleImage/applyBackgroundImage': 'edit/style/StyleController.applyBackgroundImage',
     'POST /edit/addStyleImage/addBackgroundImage': 'edit/style/StyleController.addBackgroundImage',
     'POST /edit/addStyleColor': 'edit/style/StyleController.addStyleColor',
-    'POST /edit/addLogoImage': 'edit/style/StyleController.addLogoImage',
+  /*  'POST /edit/addLogoImage': 'edit/style/StyleController.addLogoImage',*/
     // 'POST /edit/addBackgroundColor' : 'style/StyleController.addBackgroundColor',
     'POST /edit/addStyleFontFamily': 'edit/style/StyleController.addStyleFontFamily',
     'POST /edit/addStyleFontSize': 'edit/style/StyleController.addStyleFontSize',

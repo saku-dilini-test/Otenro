@@ -290,12 +290,12 @@
             };
             stylesService.addHeaderImage($scope.headerImgData)
                 .success(function (res) {
-                   toastr.success('Successfully change HeaderImage', 'Message', {
+                   toastr.success('Header image changed', 'Message', {
                         closeButton: true
                     })
                     .error(function (res) {
                            console.log(res);
-                       toastr.error('Cant Change Image', 'Waring', {
+                       toastr.error('Error changing image', 'Waring', {
                            closeButton: true
                     });
                    });
@@ -316,7 +316,7 @@
                 .success(function (res) {
                     var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
-                    toastr.success('Background Image Successfully Updated', 'Message', {
+                    toastr.success('Background image changed ', 'Message', {
                         closeButton: true
                     });
                 }).error(function (res) {
