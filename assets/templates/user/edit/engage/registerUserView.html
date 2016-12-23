@@ -2,12 +2,10 @@
     <div>
 
         <div class="md-dialog-main clearfix">
+
             <fieldset>
                 <label><h1>{{oderData.entity.customerName || oderData.entity.registeredName}}</h1></label><br>
-
             </fieldset>
-
-
             <table class="me-simple-table">
                 <thead>
                 <th>Email</th><br>
@@ -16,11 +14,13 @@
                 <th>Registered Date</th>
                 </thead>
 
-
-
                 <tbody>
                 <tr ng-repeat="data in appuserList">
+                    <fieldset>
+
                     <td>{{data.email}}</td>
+
+                        </fieldset>
                     <td>{{data.streetNumber}},{{data.streetName}},<br>
                         {{data.city}},<br>
                         {{data.country}}</td>
@@ -52,20 +52,17 @@
                     <td>{{item.name}}</td>
                     <td>{{order.name}}</td>
                     <td>{{oderData.entity.amount}}</td>
-
                 </tr>
                 </tr>
                 </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
-
-
         <div class="md-dialog-buttons">
             <div class="inner-section">
-                <md-button class="me-default-button" ng-click="closeDialog()">Close</md-button>
+                <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+
             </div>
         </div>
     </md-dialog-content>

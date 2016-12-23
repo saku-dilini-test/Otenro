@@ -35,6 +35,11 @@
 
 
 
+        $scope.redirect = function(){
+            return engageService.showAllordersView();
+        }
+
+
 
         $scope.sendPushMessage=function(){
             return engageService.showPushMessageSendDialog();

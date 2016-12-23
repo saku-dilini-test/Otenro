@@ -10,7 +10,7 @@
             <table class="me-simple-table">
                 <thead>
                 <th>Name</th>
-                <th>Email</th><br>
+                <th>Email</th>
                 <th>Phone No</th>
                 <th>Address</th>
                 <th>Registered Date</th>
@@ -21,7 +21,7 @@
                 <tr ng-repeat="data in appuserList">
 
                     <td>{{data.firstName}} {{data.lastName}}</td>
-                    <td>{{data.email}}</td>
+                    <th><md-button ng-click="redirect()">{{data.email}}</md-button> </th>
                     <td>{{data.phone}}</td>
                     <td>{{data.streetNumber}},{{data.streetName}},<br>
                         {{data.city}},<br>
@@ -34,9 +34,19 @@
 
 
         </div>
+
+        <div class="md-dialog-main">
+            <form class="allItems" novalidate>
+
+                <div id="grid1" ui-grid="gridOptions1" ui-grid-exporter ui-grid-selection="" class="grid custom-grid"></div>
+            </form>
+
+        </div>
+
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+
 
 
             </div>

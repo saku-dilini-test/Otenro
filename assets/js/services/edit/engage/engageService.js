@@ -44,6 +44,22 @@
 
 
 
+            //Get  All order Details
+            showAllordersView: function() {
+                return $mdDialog.show({
+                    controller: 'EngageCtrl',
+                    templateUrl: 'user/edit/engage/registerUserView.html',
+                    clickOutsideToClose: true
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+
+
+
+
 
 
             showPushMessageSendDialog: function() {

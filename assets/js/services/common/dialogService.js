@@ -84,8 +84,10 @@
                     return comingSoonService.showComingSoonDialog();
 
 
-                 if ('users' == clickTitle)
+                if ('users' == clickTitle)
                      return engageService.showAppUserDialog(clickTitle);
+                if ('users' == clickTitle)
+                    return engageService.showAllordersView(clickTitle);
                 if ('styles' == clickTitle)
                     return stylesService.showStyleDialog(clickTitle);
                 if ('logoAndTitle' == clickTitle)
