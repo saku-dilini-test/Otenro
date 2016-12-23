@@ -1,0 +1,40 @@
+<md-dialog aria-label="Sales & Promotions" >
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>Sales & Promotions</h1>
+            <ul class="md-dialog-header-nav clearfix">
+                <li>
+                    <a class="add-new-item" ng-click="addNewSalesAndPromotions()">Add new</a>
+                </li>
+            </ul>
+        </div>
+        <div class="md-dialog-main clearfix">
+
+            <table class="me-simple-table">
+                <thead>
+                <th class="simple-column">Name</th>
+                <th class="simple-column">Order type</th>
+                <th class="simple-column">Discount</th>
+                <th class="simple-column">Date</th>
+                <th class="simple-column">edit</th>
+                <th class="simple-column">delete</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in items">
+                    <!--<td>{{item.name}}</td>-->
+                    <!--<td>{{item.orderType}}</td>-->
+                    <!--<td>{{item.discount}}</td>-->
+                    <!--<td>{{item.date}}</td>-->
+                    <!--<td><img width="25" src="../../../images/edit-icon.svg" ng-click="editShippingInfo(item)"></td>-->
+                    <!--<td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteShippingInfo($index,item)"></td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

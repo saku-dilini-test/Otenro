@@ -28,8 +28,6 @@
                     return comingSoonService.showComingSoonDialog();
                 if ('users'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
-                if ('promotionsAndSales'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
                 if ('emailMarketing'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('popUpMessages'==clickTitle)
@@ -118,6 +116,8 @@
                     return publishService.showPublishToGooglePlayDialog(clickTitle);
                 if ('pushMessages' == clickTitle)
                     return engageService.showPushMessageDialog(clickTitle);
+                if ('promotionsAndSales'==clickTitle)
+                    return engageService.showPromotionsAndSalesDialog();
                 if ('profile' == clickTitle)
                     return engageService.showProfileDialog(clickTitle);
                 if ('styleEditBackgroundImage' == clickTitle)
