@@ -104,7 +104,6 @@ module.exports = {
         }
         ApplicationOrder.find(searchApp).exec(function (err, app) {
             if (err) return done(err);
-            console.log(app);
             res.send(app);
         })
     }

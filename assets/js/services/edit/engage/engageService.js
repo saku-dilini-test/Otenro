@@ -95,7 +95,6 @@
                 return $http.get(SERVER_URL + 'edit/getAppUserData?appId='+$rootScope.appId);
             },
             getUserOrders: function (registeredUser) {
-                console.log(registeredUser)
                 return $http.get(SERVER_URL + 'edit/getUserOrders?registeredUser='+registeredUser);
             }
         };

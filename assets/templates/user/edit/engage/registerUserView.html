@@ -17,22 +17,16 @@
                 <tbody>
                 <tr>
                     <fieldset>
-
-                    <td>{{user.email}}</td>
-
-                        </fieldset>
+                        <td>{{user.email}}</td>
+                    </fieldset>
                     <td>{{user.streetNumber}},{{user.streetName}},<br>
                         {{user.city}},<br>
                         {{user.country}}</td>
                     <td>{{user.phone}}</td>
                     <td>{{user.registeredDate}}</td>
-
-
                 </tr>
                 </tbody>
             </table>
-
-
             <div>
                 <label>Orders History</label>
             </div>
@@ -45,12 +39,11 @@
                 <th>Value</th>
                 </thead>
                 <tr>
-                <tr class="list card" ng-repeat="order in orders  ">
+                <tr ng-repeat="order in orders ">
                    <td>{{order.createdAt}}</td>
                     <!--<td>{{item.name}}</td>-->
-                    <td>{{order.fulfillmentStatus}}</td>
-                    <td>{{order.amount}}</td>
-                    <td>{{data.registeredDate}}</td>
+                   <td>{{order.fulfillmentStatus}}</td>
+                   <td>{{order.amount}}</td>
                 </tr>
                 </tr>
                 </tr>
@@ -61,9 +54,7 @@
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                <md-button class="me-default-button" > Show</md-button>
-
-
+                <!--<md-button class="me-default-button" > Show</md-button>-->
             </div>
         </div>
     </md-dialog-content>

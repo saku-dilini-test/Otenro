@@ -127,6 +127,7 @@
             .error(function(err){
                 console.log(err);
             });
+          console.log(initialData);
         if(initialData != null) {
             $scope.user = initialData;
             console.log($scope.user);
