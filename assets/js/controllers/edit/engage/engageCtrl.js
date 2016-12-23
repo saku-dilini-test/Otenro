@@ -7,7 +7,8 @@
 
     function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL) {
 
-
+        console.log(initialData);
+        $scope.user = initialData
 
         //get all app registered user details
 
@@ -35,8 +36,9 @@
 
 
 
-        $scope.redirect = function(){
-            return engageService.showAllordersView();
+        $scope.redirect = function(data){
+            console.log(data);
+            return engageService.showAllordersView(data);
         }
 
 

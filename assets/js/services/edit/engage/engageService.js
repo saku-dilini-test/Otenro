@@ -14,7 +14,10 @@
                 return $mdDialog.show({
                     controller: 'EngageCtrl',
                     templateUrl: 'user/edit/engage/pushMessageView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals : {
+                        initialData : data
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
@@ -45,7 +48,7 @@
 
 
             //Get  All order Details
-            showAllordersView: function() {
+            showAllordersView: function(data) {
                 return $mdDialog.show({
                     controller: 'EngageCtrl',
                     templateUrl: 'user/edit/engage/registerUserView.html',
