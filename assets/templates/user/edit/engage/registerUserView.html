@@ -4,7 +4,7 @@
         <div class="md-dialog-main clearfix">
 
             <fieldset>
-                <label><h1>{{oderData.entity.customerName || oderData.entity.registeredName}}</h1></label><br>
+                <label><h1>{{user.firstName}} {{user.lastName}}</h1></label><br>
             </fieldset>
             <table class="me-simple-table">
                 <thead>
@@ -15,17 +15,19 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat="data in appuserList">
+                <tr>
                     <fieldset>
 
-                    <td>{{data.email}}</td>
+                    <td>{{user.email}}</td>
 
                         </fieldset>
-                    <td>{{data.streetNumber}},{{data.streetName}},<br>
-                        {{data.city}},<br>
-                        {{data.country}}</td>
-                    <td>{{data.phone}}</td>
-                    <td>{{data.registeredDate}}</td>
+                    <td>{{user.streetNumber}},{{user.streetName}},<br>
+                        {{user.city}},<br>
+                        {{user.country}}</td>
+                    <td>{{user.phone}}</td>
+                    <td>{{user.registeredDate}}</td>
+
+
                 </tr>
                 </tbody>
             </table>
@@ -38,20 +40,17 @@
             <table class="me-simple-table">
                 <thead>
                 <th>Date</th><br>
-                <th>Item</th>
+                <!--<th>Item</th>-->
                 <th>Order Status</th>
                 <th>Value</th>
                 </thead>
                 <tr>
-                <tr class="list card" data-ng-repeat="order in orderHistory  | filter: {orderHistoryKey: appId}  | orderBy:'':true">
-                    <tr ng-repeat="item in order.item" class="item item-avatar">
-                <tr ng-repeat="orders in oderData.entity.item">
-
-
-                    <td>{{order.date1|date:'MM/dd/yyyy'}}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{order.name}}</td>
-                    <td>{{oderData.entity.amount}}</td>
+                <tr class="list card" ng-repeat="order in orders  ">
+                   <td>{{order.createdAt}}</td>
+                    <!--<td>{{item.name}}</td>-->
+                    <td>{{order.fulfillmentStatus}}</td>
+                    <td>{{order.amount}}</td>
+                    <td>{{data.registeredDate}}</td>
                 </tr>
                 </tr>
                 </tr>

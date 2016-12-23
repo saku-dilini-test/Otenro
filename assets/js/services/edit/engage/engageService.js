@@ -36,7 +36,10 @@
                 return $mdDialog.show({
                     controller: 'EngageCtrl',
                     templateUrl: 'user/edit/engage/appRegisteredUser.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals: {
+                        initialData: null
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
@@ -52,7 +55,10 @@
                 return $mdDialog.show({
                     controller: 'EngageCtrl',
                     templateUrl: 'user/edit/engage/registerUserView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals: {
+                        initialData: data
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
@@ -69,7 +75,10 @@
                 return $mdDialog.show({
                     controller: 'EngageCtrl',
                     templateUrl: 'user/edit/engage/pushMessageSendView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals: {
+                        initialData: null
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
@@ -84,6 +93,10 @@
             },
             getAppUserData: function () {
                 return $http.get(SERVER_URL + 'edit/getAppUserData?appId='+$rootScope.appId);
+            },
+            getUserOrders: function (registeredUser) {
+                console.log(registeredUser)
+                return $http.get(SERVER_URL + 'edit/getUserOrders?registeredUser='+registeredUser);
             }
         };
     }

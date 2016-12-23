@@ -1,14 +1,13 @@
 (function() {
     'use strict';
-    angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr', 'engageService', '$http', 'SERVER_URL', EngageCtrl]);
+    angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr',
+        'engageService', '$http', 'SERVER_URL','initialData', EngageCtrl]);
 
 
 
 
-    function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL) {
+    function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL, initialData) {
 
-        console.log(initialData);
-        $scope.user = initialData
 
         //get all app registered user details
 
@@ -23,7 +22,6 @@
                         result[i].registeredDate = $scope.year + "-" + $scope.month + "-" + $scope.date;
                     }
                     $scope.appuserList = result;
-                    console.log($scope.appuserList);
                 }).error(function (error) {
                 toastr.error('Loading Error', 'Warning', {
                     closeButton: true
@@ -37,7 +35,6 @@
 
 
         $scope.redirect = function(data){
-            console.log(data);
             return engageService.showAllordersView(data);
         }
 
@@ -129,6 +126,19 @@
             })
             .error(function(err){
                 console.log(err);
-            })
+            });
+        if(initialData != null) {
+            $scope.user = initialData;
+            console.log($scope.user);
+              var  registeredUser= $scope.user.id;
+            engageService.getUserOrders(registeredUser)
+                .success(function (data) {
+                    console.log(data);
+                    $scope.orders = data;
+                })
+                .error(function (err) {
+                    console.log(err);
+                })
+        }
     }
 })();

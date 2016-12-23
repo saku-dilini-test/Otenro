@@ -133,9 +133,10 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     $scope.orderProcess = function(){
       console.log("orderProcess");
       if($stateParams.item.delivery.method == "Delivery"){
-        console.log('delivery');
+        console.log($rootScope.userId);
           $scope.details ={
               appId : $rootScope.appId,
+              registeredUser: $scope.user.registeredUser,
               item : $stateParams.item.cart,
               amount : $stateParams.item.amount,
               customerName : $scope.user.name,
@@ -156,6 +157,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
       else{
           $scope.details ={
               appId : $rootScope.appId,
+              registeredUser: $scope.user.registeredUser,
               item : $stateParams.item.cart,
               amount : $stateParams.item.amount,
               customerName : $stateParams.deliverDetails.name,

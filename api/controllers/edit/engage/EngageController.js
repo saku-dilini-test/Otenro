@@ -93,6 +93,20 @@ module.exports = {
             res.send(app);
         });
 
+    },
+
+    getUserOrders: function (req, res) {
+        var registeredUser = req.param('registeredUser');
+        console.log(registeredUser);
+        console.log(req.param('registeredUser'));
+        var searchApp = {
+            registeredUser: registeredUser
+        }
+        ApplicationOrder.find(searchApp).exec(function (err, app) {
+            if (err) return done(err);
+            console.log(app);
+            res.send(app);
+        })
     }
 
 }
