@@ -36,18 +36,18 @@
                     'templateName': templateName,
                     'templateUrl':templateUrl,
                     'templateCategory' : templateCategory,
-                    'userId':$auth.getPayload().id
+                    'userId':'unknownUser'
                 };
 
-                welcomeTemplatesResource.createApp(appParams).then(function(data){
+                welcomeTemplatesResource.viewTemplatePreview(appParams).then(function(data){
 
-                    var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                    var url= ME_APP_SERVER+'temp/unknownUser'
                         +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
                     $scope.goLivePreview = function() {
                         $state.go('anon.livePreview', {
-                            userId: $auth.getPayload().id,
+                            userId: 'unknownUser',
                             appId: data.data.appId,
                             tempUrl: templateUrl,
                             tempName: templateName,
@@ -72,7 +72,7 @@
                     'userId':'unknownUser'
                 };
 
-                welcomeTemplatesResource.createApp(appParams).then(function(data){
+                welcomeTemplatesResource.viewTemplatePreview(appParams).then(function(data){
 
                     var url= ME_APP_SERVER+'temp/unknownUser'
                         +'/templates/'+data.data.appId+'/?'+new Date().getTime();

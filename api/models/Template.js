@@ -33,6 +33,9 @@ module.exports = {
         },
         templateCategory :{
             type: 'string'
+        },
+        previewId : {
+            type: 'string'
         }
     },
     seedData: [
@@ -70,7 +73,8 @@ module.exports = {
             gifImageUrl : 'foodDeliver/food.jpg',
             imageUrl : 'foodDeliver/foodDeliver.png',
             templateFilesPath:'templates/foodDemoApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '585cd2b5a31b341f5d58eb2d'
         },
         {
             template_name : 'foodDemoApp2',
@@ -79,7 +83,8 @@ module.exports = {
             gifImageUrl : 'foodDeliver2/clothing.png',
             imageUrl : 'foodDeliver2/foodDeliver2.png',
             templateFilesPath:'templates/foodDemoApp2',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '2'
         },
         {
             template_name : 'clothingApp',
@@ -88,7 +93,8 @@ module.exports = {
             gifImageUrl : 'clothingApp/clothing2.png',
             imageUrl : 'clothingApp/clothing.jpg',
             templateFilesPath:'templates/clothingApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '3',
         },
         {
             template_name : 'GlamourUpApp',
@@ -97,7 +103,8 @@ module.exports = {
             gifImageUrl : 'GlamourUpApp/clothing2.png',
             imageUrl : 'GlamourUpApp/clothing.jpg',
             templateFilesPath:'templates/clothingApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '4'
         },
         {
             template_name : 'hkRising',
@@ -106,7 +113,8 @@ module.exports = {
             gifImageUrl : 'hkRising/hkRising1.png',
             imageUrl : 'hkRising/hkRising.png',
             templateFilesPath:'templates/hkRising',
-            templateCategory: TemplateCategoryDetails.Media.ID
+            templateCategory: TemplateCategoryDetails.Media.ID,
+            previewId : '5'
         },
         {
             template_name : 'ECommerceApp',
@@ -115,7 +123,8 @@ module.exports = {
             imageUrl : 'ECommerceApp/ECommerceApp.png',
             gifImageUrl : 'ECommerceApp/ecommerce.png',
             templateFilesPath:'templates/ECommerceApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '6'
         },
         {
             template_name : 'fashionApp',
@@ -124,7 +133,9 @@ module.exports = {
             imageUrl : 'fashionApp/fashionApp.png',
             gifImageUrl : 'fashionApp/fashion.png',
             templateFilesPath:'templates/fashionApp',
-            templateCategory: TemplateCategoryDetails.Media.ID
+            templateCategory: TemplateCategoryDetails.Media.ID,
+            previewId : '7'
+
         }
     ]
 };

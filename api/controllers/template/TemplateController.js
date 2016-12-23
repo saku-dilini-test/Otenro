@@ -8,8 +8,8 @@
  */
 
 var fs = require('fs-extra');
-var ApiContracts = require('authorizenet').APIContracts;
-var ApiControllers = require('authorizenet').APIControllers;
+/*var ApiContracts = require('authorizenet').APIContracts;
+var ApiControllers = require('authorizenet').APIControllers;*/
 
 module.exports = {
 
@@ -310,7 +310,7 @@ module.exports = {
     },
 
     deletePreviewTemp : function(req,res){
-        var appId  = req.param('appId');
+        /*var appId  = req.param('appId');
         var userId = req.param('userId');
 
         Application.destroy({ id : appId}).exec(function (err) {
@@ -338,7 +338,7 @@ module.exports = {
             if (err) {
                 console.error(err);
             }
-        });
+        });*/
 
         res.send(200,{message:'Deleted Application'});
 

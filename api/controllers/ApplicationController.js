@@ -24,10 +24,16 @@ module.exports = {
         console.log(req.body.templateName);
        if (req.body.templateName=='foodDemoApp'){
            res.send({
-               appId: '58578588d1e494ad11b91369',
+               appId: '5859117bac4a80fb5265ab04',
                message: "New Application has been created"
            });
        }
+        if (req.body.templateName=='foodDemoApp'){
+            res.send({
+                appId: '5859117bac4a80fb5265ab04',
+                message: "New Application has been created"
+            });
+        }
 
     },
 
@@ -40,7 +46,7 @@ module.exports = {
             templatePath = sails.config.appPath + '/api/templates/' + templateName,
             appName = req.body.appName,
             serverTmp="http://localhost:port",
-            serverOrg=config.server.host+":1337";
+            serverOrg=config.server.host+':1337';
 
         var loginPath = '/#/',
             isApplyStyle =  {
@@ -265,8 +271,8 @@ module.exports = {
                         if (err) return res.negotiate(err);
                     });
                 });
-
-            /** config -|- copy template images to App File Server
+            
+            /** config -|- copy template images to App File Server 
              * TODO : future development, Template dummy data move to another folder
              * **/
             var appFileServerPath  = config.APP_FILE_SERVER + userId + '/templates/' + app.id +'/';

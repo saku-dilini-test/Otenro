@@ -17,6 +17,7 @@
 
     function livePreviewCtrl($scope,welcomeTemplatesResource, userProfileService,$stateParams,$mdDialog,mySharedService,
     $http,$state,ME_APP_SERVER,$auth,toastr,$cookieStore,$cookies,$interval,$q) {
+        
         welcomeTemplatesResource.getTemplates().success(function(data){
             $cookies.temp = data;
             $scope.templates = $cookies.temp;

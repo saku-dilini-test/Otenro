@@ -31,83 +31,35 @@
 
         welcomeTemplatesResource.getTemplates().success(function(data){
                 $rootScope.templates = data;
+            alert("$rootScope.templates " + JSON.stringify($rootScope.templates))
         });
   
-        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory) {
+        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory,previewId) {
+            alert ("aaaaaaaaaaaaaaaa");
 
-
-
-
-            if ($auth.isAuthenticated()) {
-               
-                var appParams = {
-                    'appName': 'preview',
-                    'templateId': templateId,
-                    'templateName': templateName,
-                    'templateUrl':templateUrl,
-                    'templateCategory' : templateCategory,
-                    'userId':$auth.getPayload().id
-                };
-
-                welcomeTemplatesResource.createApp(appParams).then(function(data){
-
-                    var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                            +'/templates/'+data.data.appId+'/?'+new Date().getTime();
-
-                    mySharedService.prepForBroadcast(url);
-                    $scope.goLivePreview = function() {
-                        $state.go('anon.livePreview', {
-                            userId: $auth.getPayload().id,
-                            appId: data.data.appId,
-                            tempUrl: templateUrl,
-                            tempName: templateName,
-                            tempCategory: templateCategory
-                        });
-
-                    }
-
-                    $timeout(function () {
-                        $scope.goLivePreview();
-                    }, 1000);
-
-                });
-
-            }else{
-                var appParams = {
-                    'appName': 'preview',
-                    'templateId': templateId,
-                    'templateName': templateName,
-                    'templateUrl':templateUrl,
-                    'templateCategory' : templateCategory,
-                    'userId':'unknownUser'
-                };
-
-                welcomeTemplatesResource.createApp(appParams).then(function(data){
-                    alert("data.data.appId " + data.data.appId);
+                    var userId = '';
 
                     var url= ME_APP_SERVER+'temp/unknownUser'
-                       +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                            +'/templates/'+previewId+'/?'+new Date().getTime();
 
+                    alert ("url " + url);
 
-                    alert(url);
-
+                    if ($auth.isAuthenticated()) {
+                        userId = $auth.getPayload().id;
+                    }else {
+                        userId = 'unknownUser';
+                    }
+                    alert("userId " + userId);
                     mySharedService.prepForBroadcast(url);
-                    $scope.goLivePreview = function() {
+
                         $state.go('anon.livePreview', {
-                            userId: 'unknownUser',
-                            appId: data.data.appId,
+                            userId: userId,
+                            appId: previewId,
                             tempUrl: templateUrl,
                             tempName: templateName,
                             tempCategory: templateCategory
                         });
-                    }
-                    $timeout(function () {
-                        $scope.goLivePreview();
-                    }, 1000);
-                });
-            }
 
         }
     }
-
 })();
