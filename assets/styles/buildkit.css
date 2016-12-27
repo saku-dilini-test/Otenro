@@ -2293,3 +2293,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     margin: unset;
     zoom: 0.8;
 }
+.ordercolour{
+    color: blue;
+
+}

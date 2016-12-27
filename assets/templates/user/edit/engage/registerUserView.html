@@ -40,8 +40,8 @@
                 </thead>
                 <tr>
                 <tr ng-repeat="order in orders ">
-                   <td>{{order.createdAt}}</td>
-                    <!--<td>{{item.name}}</td>-->
+                   <td>{{order.createdAt|date:'MM/dd/yyyy'}}</td>
+                <!--{{order.date1|date:'MM/dd/yyyy'}}-->
                    <td>{{order.fulfillmentStatus}}</td>
                    <td>{{order.amount}}</td>
                 </tr>
