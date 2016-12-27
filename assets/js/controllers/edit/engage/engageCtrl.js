@@ -1,12 +1,48 @@
 (function() {
     'use strict';
-    angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr', 'engageService', '$http', 'SERVER_URL', EngageCtrl]);
+    angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr',
+        'engageService', '$http', 'SERVER_URL','initialData', EngageCtrl]);
 
-    function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL) {
+
+
+
+    function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL, initialData) {
+
+
+        //get all app registered user details
+
+        var getAppUserData = function () {
+            engageService. getAppUserData()
+                .success(function (result) {
+                    for(var i=0; i<result.length; i++){
+                        var date = new Date(result[i].updatedAt);
+                        $scope.year = date.getFullYear();
+                        $scope.month = date.getMonth() + 1;
+                        $scope.date = date.getDate();
+                        result[i].registeredDate = $scope.year + "-" + $scope.month + "-" + $scope.date;
+                    }
+                    $scope.appuserList = result;
+                }).error(function (error) {
+                toastr.error('Loading Error', 'Warning', {
+                    closeButton: true
+                });
+            })
+        }
+        getAppUserData();
+
+        $scope.redirect = function(data){
+            return engageService.showAllordersView(data);
+        }
 
         $scope.sendPushMessage=function(){
             return engageService.showPushMessageSendDialog();
         };
+
+        //    // get all app registered user
+        //
+        // $scope.showAppUserDialog=function(){
+        //     return engageService.showAppUserDialog();
+        // };
 
         $scope.hide = function() {
             $mdDialog.hide();
@@ -84,13 +120,27 @@
             })
             .error(function(err){
                 console.log(err);
-            })
-
-
-        // Sales & Promotions
+            });
+         console.log(initialData);
+        if(initialData != null) {
+            $scope.user = initialData;
+            console.log($scope.user);
+              var  registeredUser= $scope.user.id;
+            engageService.getUserOrders(registeredUser)
+                .success(function (data) {
+                    console.log(data);
+                    $scope.orders = data;
+                })
+                .error(function (err) {
+                    console.log(err);
+                });
+        }
+    }
+    // Sales & Promotions
 
         $scope.addNewSalesAndPromotions=function(){
-            return engageService.showPromotionsAndSalesAddNewDialog();
-        };
-    }
+             return engageService.showPromotionsAndSalesAddNewDialog();
+    };
+
 })();
+

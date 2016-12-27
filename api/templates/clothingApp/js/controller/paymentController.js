@@ -132,10 +132,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     $scope.orderProcess = function(){
       console.log("orderProcess");
       if($stateParams.item.delivery.method == "Delivery"){
-          console.log($scope.user.registeredUser);
+        console.log('delivery');
           $scope.details ={
               appId : $rootScope.appId,
-              registeredUser: $scope.user.registeredUser,
               item : $stateParams.item.cart,
               amount : $stateParams.item.amount,
               customerName : $scope.user.name,
@@ -154,10 +153,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
           };
       }
       else{
-          console.log($scope.user.registeredUser);
           $scope.details ={
               appId : $rootScope.appId,
-              registeredUser: $scope.user.registeredUser,
               item : $stateParams.item.cart,
               amount : $stateParams.item.amount,
               customerName : $stateParams.deliverDetails.name,
@@ -220,7 +217,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         if($stateParams.item.delivery.method == "Delivery"){
             $scope.details ={
                 appId : $rootScope.appId,
-                registeredUser: $scope.user.registeredUser,
                 item : $stateParams.item.cart,
                 amount : $stateParams.item.amount,
                 customerName : $scope.user.name,
@@ -242,7 +238,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         else{
             $scope.details ={
                 appId : $rootScope.appId,
-                registeredUser: $scope.user.registeredUser,
                 item : $stateParams.item.cart,
                 amount : $stateParams.item.amount,
                 customerName : $stateParams.item.deliverDetails.name,
@@ -312,7 +307,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                     $scope.details ={
 
                         appId : $rootScope.appId,
-                        registeredUser: $scope.user.registeredUser,
                         item : $stateParams.item.cart,
                         amount : $stateParams.item.amount,
                         customerName : $scope.user.name,
@@ -334,7 +328,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 else{
                     $scope.details ={
                         appId : $rootScope.appId,
-                        registeredUser: $scope.user.registeredUser,
                         item : $stateParams.item.cart,
                         amount : $stateParams.item.amount,
                         customerName : $stateParams.item.deliverDetails.name,
@@ -474,7 +467,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             $scope.details ={
 
                                 appId : $rootScope.appId,
-                                registeredUser: $scope.user.registeredUser,
                                 item : $stateParams.item.cart,
                                 amount : $stateParams.item.amount,
                                 customerName : $scope.user.name,
@@ -495,7 +487,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         else{
                             $scope.details ={
                                 appId : $rootScope.appId,
-                                registeredUser: $scope.user.registeredUser,
                                 item : $stateParams.item.cart,
                                 amount : $stateParams.item.amount,
                                 customerName : $stateParams.item.deliverDetails.name,

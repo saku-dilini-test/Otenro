@@ -39,8 +39,7 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
                         "city": data.city,
                         "zip": data.zip,
                         "type": 'internal',
-                        "appId":data.appId,
-                        "registeredUser": res.data.user.sub
+                        "appId":data.appId
                     };
                     localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
                     console.log(localStorage.getItem('appLocalStorageUser'));

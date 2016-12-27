@@ -26,7 +26,10 @@
                     return comingSoonService.showComingSoonDialog();
                 if ('madeEasyBadge'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
+                // if ('users'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
                 if ('users'==clickTitle)
+                if ('promotionsAndSales'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('emailMarketing'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
@@ -66,8 +69,8 @@
                     return comingSoonService.showComingSoonDialog();
                 if ('domain'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
-                if ('users'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+                // if ('users'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
                 if ('seo'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('socialMedia'==clickTitle)
@@ -82,6 +85,10 @@
                     return comingSoonService.showComingSoonDialog();
 
 
+                if ('users' == clickTitle)
+                     return engageService.showAppUserDialog(clickTitle);
+                if ('users' == clickTitle)
+                    return engageService.showAllordersView(clickTitle);
                 if ('styles' == clickTitle)
                     return stylesService.showStyleDialog(clickTitle);
                 if ('logoAndTitle' == clickTitle)
@@ -116,8 +123,6 @@
                     return publishService.showPublishToGooglePlayDialog(clickTitle);
                 if ('pushMessages' == clickTitle)
                     return engageService.showPushMessageDialog(clickTitle);
-                if ('promotionsAndSales'==clickTitle)
-                    return engageService.showPromotionsAndSalesDialog();
                 if ('profile' == clickTitle)
                     return engageService.showProfileDialog(clickTitle);
                 if ('styleEditBackgroundImage' == clickTitle)
