@@ -120,13 +120,27 @@
             })
             .error(function(err){
                 console.log(err);
-            })
-
-
-        // Sales & Promotions
+            });
+         console.log(initialData);
+        if(initialData != null) {
+            $scope.user = initialData;
+            console.log($scope.user);
+              var  registeredUser= $scope.user.id;
+            engageService.getUserOrders(registeredUser)
+                .success(function (data) {
+                    console.log(data);
+                    $scope.orders = data;
+                })
+                .error(function (err) {
+                    console.log(err);
+                });
+        }
+    }
+    // Sales & Promotions
 
         $scope.addNewSalesAndPromotions=function(){
-            return engageService.showPromotionsAndSalesAddNewDialog();
-        };
-    }
+             return engageService.showPromotionsAndSalesAddNewDialog();
+    };
+
 })();
+
