@@ -57,7 +57,6 @@
                 });
             },
 
-
             showPushMessageSendDialog: function() {
                 return $mdDialog.show({
                     controller: 'EngageCtrl',
