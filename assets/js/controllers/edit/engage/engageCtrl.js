@@ -30,15 +30,9 @@
         }
         getAppUserData();
 
-
-
-
-
         $scope.redirect = function(data){
             return engageService.showAllordersView(data);
         }
-
-
 
         $scope.sendPushMessage=function(){
             return engageService.showPushMessageSendDialog();
@@ -127,7 +121,7 @@
             .error(function(err){
                 console.log(err);
             });
-          console.log(initialData);
+         console.log(initialData);
         if(initialData != null) {
             $scope.user = initialData;
             console.log($scope.user);
@@ -139,7 +133,14 @@
                 })
                 .error(function (err) {
                     console.log(err);
-                })
+                });
         }
     }
+    // Sales & Promotions
+
+        $scope.addNewSalesAndPromotions=function(){
+             return engageService.showPromotionsAndSalesAddNewDialog();
+    };
+
 })();
+

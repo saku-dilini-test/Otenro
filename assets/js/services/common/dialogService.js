@@ -28,6 +28,7 @@
                     return comingSoonService.showComingSoonDialog();
                 // if ('users'==clickTitle)
                 //     return comingSoonService.showComingSoonDialog();
+                if ('users'==clickTitle)
                 if ('promotionsAndSales'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('emailMarketing'==clickTitle)
