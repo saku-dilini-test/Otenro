@@ -525,5 +525,53 @@ module.exports = {
             if(err) res.send(err);
                 res.send(data);
         })
+    },
+    createTempTemplates : function(req,res){
+        var templateName = req.body.templateName,
+            userId = req.body.userId,
+            appId = req.body.appId,
+            tempAppDirPath = config.ME_SERVER + userId + '/templates/',
+            templatePath = sails.config.appPath + '/api/templates/' + templateName;
+
+
+        fs.copy(templatePath, tempAppDirPath + 'changePreview' , function(err) {
+            if (err) return console.error(err);
+            var madeEasyFilePath = tempAppDirPath + appId + '/madeEasy.Project';
+            console.log(madeEasyFilePath);
+            fs.copy(madeEasyFilePath, tempAppDirPath + 'changePreview/madeEasy.Project' , function(err){
+                if (err) return console.error(err);
+                var bgFilePath = tempAppDirPath + appId + '/img/background.jpg';
+                fs.copy(bgFilePath, tempAppDirPath + 'changePreview/img/background.jpg' , function(err){
+                    if (err) return console.error(err);
+
+                    res.send({
+                        message: "New Application has been created"
+                    });
+                });
+            });
+
+        });
+
+
+
+    },
+    changeTemplatePermanent : function(req,res){
+        var userId = req.body.userId,
+            appId = req.body.appId,
+            tempAppDirPath = config.ME_SERVER + userId + '/templates/changePreview',
+            templatePath = config.ME_SERVER + userId + '/templates/'+appId;
+            //templatePath = sails.config.appPath + '/api/templates/' + templateName;
+            console.log(templatePath);
+
+        fs.copy(tempAppDirPath, templatePath , function(err) {
+            if (err) return console.error(err);
+            res.send({
+                message: "New Application has been created"
+            });
+
+        });
+
+
+
     }
 };

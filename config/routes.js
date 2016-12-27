@@ -67,6 +67,8 @@ module.exports.routes = {
     'POST /app/viewTemplate': 'ApplicationController.viewTemplate',
     'GET /api/getTemplateMetaData': 'DashboardController.getTemplateMetaData',
     'GET /app/getIconAllowance': 'ApplicationController.iconAllowance',
+    'POST /app/createTempTemplates': 'ApplicationController.createTempTemplates',
+    'POST /app/changeTemplatePermanent': 'ApplicationController.changeTemplatePermanent',
     /***
      * Store Settings Data
      *
