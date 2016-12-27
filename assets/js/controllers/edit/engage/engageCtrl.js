@@ -126,7 +126,7 @@
         if(initialData != null) {
             $scope.user = initialData;
             console.log($scope.user);
-            var registeredUser = $scope.user.id;
+              var  registeredUser= $scope.user.id;
             engageService.getUserOrders(registeredUser)
                 .success(function (data) {
                     console.log(data);
