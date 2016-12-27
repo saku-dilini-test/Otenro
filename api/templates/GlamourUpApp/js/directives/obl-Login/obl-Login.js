@@ -16,6 +16,7 @@
 							};
 							$http.post(constants.SERVER_URL+"/templatesAuth/authenticate",data)
 								.then(function(res){
+                                        console.log(res);
 										var requestParams = {
 											"token": res.data.token,
 											"email": data.email,
@@ -27,7 +28,8 @@
 											"city": res.data.user.city,
 											"zip": res.data.user.zip,
 											"type": 'internal',
-											"appId":res.data.user.appId
+                                            "appId":res.data.user.appId,
+                                            "registeredUser": res.data.user.sub
 										};
 										localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
 										if($stateParams.item == 'delivery'){

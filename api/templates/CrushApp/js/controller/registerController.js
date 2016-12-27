@@ -24,7 +24,8 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
             zip: $scope.data.zip,
             country: $scope.data.country,
             phone: $scope.data.phone,
-            appId: $rootScope.appId
+            "appId":data.appId,
+            "registeredUser": res.data.user.sub
         };
         $http.post(constants.SERVER_URL+"/templatesAuth/register",data)
             .then(function(res){
