@@ -273,6 +273,42 @@
                   }
 
                   $scope.product.selection = $scope.selection;
+                  $scope.product.published = 'NO';
+                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
+                      toastr.success('Product added successfully', 'Awsome!', {
+                          closeButton: true
+                      });
+                      if(initialData.product.appId){
+                             return commerceService.showInventoryDialog();
+                             $mdDialog.hide();
+
+                      }
+                      else{
+                        $mdDialog.hide();
+                      }
+                  }).error(function (err) {
+                      toastr.error('Product creation failed', 'Warning', {
+                          closeButton: true
+                      });
+                      $mdDialog.hide();
+
+                  });
+
+              }
+
+        };
+        $scope.saveAndPublishProducts = function () {
+              if ($scope.tmpImage.length<=0&&$scope.myImage==null){
+                  toastr.error('Please add an image ', 'Warning', {
+                      closeButton: true
+                  });
+              }else {
+                  if ($scope.myImage){
+                      $scope.addImage($scope.myImage);
+                  }
+
+                  $scope.product.selection = $scope.selection;
+                  $scope.product.published = 'YES';
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
                       toastr.success('Product added successfully', 'Awsome!', {
                           closeButton: true

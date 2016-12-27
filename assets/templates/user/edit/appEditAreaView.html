@@ -224,10 +224,10 @@
 
                     <obl-menu-button label="Announcement Bar" icon="fa fa-file-image-o" click-title="announcementBar"></obl-menu-button>
 
+                    <obl-menu-button label="Clear Default Data" icon="fa fa-file-image-o" click-title="remove"></obl-menu-button>
+
                     <!--<obl-menu-button label="Made Easy Badge" icon="fa fa-file-image-o" click-title="madeEasyBadge"></obl-menu-button>-->
-
                 </obl-menu-group>
-
                 <!--TODO-->
                 <!--For the beta release-->
                 <obl-menu-group label="Engage" icon="fa-pencil-square-o">
@@ -271,8 +271,6 @@
                         <obl-menu-button label="Analytics Integration" icon="fa fa-file-image-o" click-title="analyticsIntegration"></obl-menu-button>
                     </obl-menu-group>
                 </obl-menu-group>
-
-
                 <obl-menu-group label="Publish" icon="fa-pencil-square-o">
                     <obl-menu-group label="Website" icon="fa-pencil-square-o" class="md-sub-menu">
                         <obl-menu-button label="Website" icon="fa fa-file-image-o" click-title="website"></obl-menu-button>
@@ -281,14 +279,14 @@
                         <obl-menu-button label="App Store" icon="fa fa-file-image-o" click-title="appStore"></obl-menu-button>
                         <obl-menu-button label="Google Play" icon="fa fa-file-image-o" click-title="googlePlay"></obl-menu-button>
                     </obl-menu-group>
+                    <obl-menu-group label="Delete" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
+                    <obl-menu-button label="Delete" icon="fa-cogs" click-title="delete"></obl-menu-button>
+                    </obl-menu-group>
                 </obl-menu-group>
-
-
                 <obl-menu-group label="Settings" icon="fa-cogs">
 
                    <!-- <obl-menu-button label="About Us" icon="fa fa-file-image-o" click-title="aboutUs"></obl-menu-button>-->
                    <!-- <obl-menu-button label="Policies" icon="fa fa-file-image-o" click-title="policies"></obl-menu-button>-->
-
                     <obl-menu-group label="Basic Info" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
                         <obl-menu-button label="Basic Info" icon="fa-cogs" click-title="basicInfo"></obl-menu-button>
                     </obl-menu-group>
@@ -313,14 +311,13 @@
                     <obl-menu-group label="Backup" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
                         <obl-menu-button label="Backup" icon="fa-cogs" click-title="backup"></obl-menu-button>
                     </obl-menu-group>
-                    <obl-menu-group label="Clear Default Data" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
-                        <obl-menu-button label="Remove" icon="fa-cogs" click-title="remove"></obl-menu-button>
-                    </obl-menu-group>
-                    <obl-menu-group label="Delete" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">
-                        <obl-menu-button label="Delete" icon="fa-cogs" click-title="delete"></obl-menu-button>
-                    </obl-menu-group>
+                    <!--<obl-menu-group label="Clear Default Data" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">-->
+                        <!--<obl-menu-button label="Remove" icon="fa-cogs" click-title="remove"></obl-menu-button>-->
+                    <!--</obl-menu-group>-->
+                    <!--<obl-menu-group label="Delete" icon="fa-cogs" class="md-sub-menu" class="md-sub-menu">-->
+                        <!--<obl-menu-button label="Delete" icon="fa-cogs" click-title="delete"></obl-menu-button>-->
+                    <!--</obl-menu-group>-->
                 </obl-menu-group>
-
                 <a href="https://www.otenro.com/help/" target="_blank">
                     <li class="obl-selectable-item" role="button" tabindex="0">
                         <div class="obl-noselect ng-binding">
@@ -347,7 +344,14 @@
                     <a  href ng-click="temporaryMessage()" class="desktop-icon size-fix"></a>
                     <a  href ng-click="temporaryMessage()" class="tablet-icon"></a>
                 </div>
-                <!--<div class="download-section">-->
+
+                <div class="website-area">
+                    <div class="pull-left">
+                        <p>Delete</p>
+                        <a  href ng-click="temporaryMessage()" class="desktop-icon size-fix"></a>
+                        <a  href ng-click="temporaryMessage()" class="tablet-icon"></a>
+                    </div>
+                    <!--<div class="download-section">-->
                   <!--&lt;!&ndash;  <a href ng-click="buildSource()" class="download-link"></a>&ndash;&gt;-->
                     <!--<a href="/edit/buildSource?appId={{appId}}&userId={{userId}}" target="_self" class="download-link"></a>-->
                 <!--</div>-->
@@ -365,4 +369,5 @@
             </div>
         </div>
     </div>
+    <div class="change-template-notifi" ng-show="changeTemplate">Please confirm if you are satisfied with this selection <a class="btn-material" ng-click="changePermanently('yes')" >Yes</a> <a class="btn-material" ng-click="changePermanently('no')">no</a></div>
 </div>

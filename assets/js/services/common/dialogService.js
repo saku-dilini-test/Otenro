@@ -5,17 +5,17 @@
     angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService',
         'commerceService','articleService','mainMenuService', 'currencyService',
         'publishService', 'engageService', 'logoAndTittleService','aboutUsService',
-        'policiesService','comingSoonService', dialogService]);
+        'policiesService','comingSoonService','templateService', dialogService]);
 
     function dialogService(stylesService, contactUsService,
                            commerceService, articleService ,mainMenuService,
                            currencyService, publishService, engageService,
-                           logoAndTittleService,aboutUsService,policiesService,comingSoonService) {
+                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService) {
         return {
             showDialog: function(clickTitle) {
 
                 if ('templates'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+                    return templateService.showTemplateDialog();
                 if ('checkoutPageStyle'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('lockedPages'==clickTitle)
@@ -29,8 +29,6 @@
                 // if ('users'==clickTitle)
                 //     return comingSoonService.showComingSoonDialog();
                 if ('users'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('promotionsAndSales'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('emailMarketing'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
@@ -124,6 +122,8 @@
                     return publishService.showPublishToGooglePlayDialog(clickTitle);
                 if ('pushMessages' == clickTitle)
                     return engageService.showPushMessageDialog(clickTitle);
+                if ('promotionsAndSales'==clickTitle)
+                    return engageService.showPromotionsAndSalesDialog();
                 if ('profile' == clickTitle)
                     return engageService.showProfileDialog(clickTitle);
                 if ('styleEditBackgroundImage' == clickTitle)
