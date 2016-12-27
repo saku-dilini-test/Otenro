@@ -2219,6 +2219,9 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     width:13%
 }
 .fixed-inventory .tree-grid thead tr th:nth-child(6) {
+    width:13%
+}
+.fixed-inventory .tree-grid thead tr th:nth-child(7) {
     width:2%
 }
 
@@ -2239,6 +2242,9 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     width:14.5%
 }
 .fixed-inventory .tree-grid tbody tr td:nth-child(6) {
+    width:14.5%
+}
+.fixed-inventory .tree-grid tbody tr td:nth-child(7) {
     width:2%
 }
 

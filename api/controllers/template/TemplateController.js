@@ -188,7 +188,7 @@ module.exports = {
         var searchApp = {
             appId: appId,
             childId : childId,
-            publish : true
+            published : 'YES'
         };
         var thirdNavi = [];
         ThirdNavigation.find().where(searchApp).exec(function(err, app) {

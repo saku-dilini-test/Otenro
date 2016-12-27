@@ -16,7 +16,7 @@ module.exports = {
     getInventoryList:function(req, res) {
         var appId = req.param('appId');
 
-        ThirdNavigation.find({select: ['name','publish','selection','variants'],where:{appId:appId}}).exec(function(err,inventoryList){
+        ThirdNavigation.find({select: ['name','published','selection','variants'],where:{appId:appId}}).exec(function(err,inventoryList){
             if(err)sails.log.debug("Error has occurred while retrieving Inventory for the AppID :"+ appId);
            res.send(inventoryList);
         });

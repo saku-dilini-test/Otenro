@@ -93,6 +93,22 @@
 
                 },
                 {
+                    field:'published',
+                    displayName:'Published',
+                    cellTemplate:   "<div ng-if='row.level == 2'>" +
+                    "<md-input-container class='md-container-modify'>"+
+                    "<div class='md-input input-modify color-link' ng-click='cellTemplateScope.click(row.branch)'>{{row.branch[col.field]}}</div>"+
+                    "</md-input-container>"+ "</div>",
+                    cellTemplateScope: {
+                        click: function(data) {
+                            // go to product edit view
+                            $scope.goToEditProductWindow(data);
+                        }
+                    }
+
+                },
+                {
+                    displayName:'Delete',
                     cellTemplate:   "<div class='delete-icon'><img " +
                                     " ng-click='cellTemplateScope.click(row.branch)' src='../../../images/delete-icon.png'></div>",
                     cellTemplateScope: {
@@ -116,10 +132,12 @@
                 // -- start -- inject product id to child array
                 var productID = productList[i]['id'];
                 var selection = productList[i]['selection'];
+                var published = productList[i]['published'];
                 var tempChildArray = productList[i]['children'];
                 for(var j = 0; j < tempChildArray.length; j++){
                     tempChildArray[j]['id'] = productID;
                     tempChildArray[j]['selection'] = selection;
+                    tempChildArray[j]['published'] = published;
                     $scope.exportArray.push(tempChildArray[j]);
                 }
                 productList[i]['children'] = tempChildArray;
@@ -141,6 +159,7 @@
                     'Name' : value.name,
                     'sku' : value.sku,
                     'price' : value.price,
+                    'publish' : value.publish,
                     'quantity' : value.quantity,
                     'variantName' : value.selection,
                     'variantType' : value.vType,
@@ -151,6 +170,7 @@
             return $scope.exportArrayN;
         }
         $scope.inventoryList = productList;
+        console.log(productList);
 
 //            console.log("LLLLLLLLLLLLL")
 //            console.log("LLLLLLLLLLLLL")
