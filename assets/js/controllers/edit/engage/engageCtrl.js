@@ -121,11 +121,12 @@
             .error(function(err){
                 console.log(err);
             });
+
          console.log(initialData);
         if(initialData != null) {
             $scope.user = initialData;
             console.log($scope.user);
-              var  registeredUser= $scope.user.id;
+            var registeredUser = $scope.user.id;
             engageService.getUserOrders(registeredUser)
                 .success(function (data) {
                     console.log(data);
@@ -136,6 +137,7 @@
                 });
         }
     }
+
     // Sales & Promotions
 
         $scope.addNewSalesAndPromotions=function(){
