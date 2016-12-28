@@ -4,11 +4,13 @@
 (function(){
     angular.module('appEdit').controller('AppEditAreaCtrl',[
         '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER',
-        'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore','currencyService','templateService',
+        'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore','currencyService',
+        'templateService','SERVER_URL',
         AppEditAreaCtrl]);
 
     function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
-                             toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore,currencyService,templateService){
+                             toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore,currencyService,
+                             templateService,SERVER_URL){
 
         $rootScope.bodyClass = 'appEdit';
 
@@ -35,9 +37,10 @@
             }).error(function (error) {
         })
 
-        var tempUrl = $cookieStore.get('url');
+        var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                       +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
 
-        $scope.appTemplateUrl=tempUrl;
+        $scope.appTemplateUrl=urlPath;
         //$scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
         //                        +'/templates/'+$stateParams.appId;
 
@@ -106,10 +109,12 @@
                         toastr.success('Successfully Build ', 'Congratulations!', {
                             closeButton: true
                         });
-                        var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                            +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
+//                        var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+//                            +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
+                        var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                      +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
 
-                        mySharedService.prepForBroadcast(url);
+                        mySharedService.prepForBroadcast(urlPath);
                         $rootScope.changeTemplate = false;
                     }).error(function(err) {
                     toastr.error('Cant Build', 'Error', {
@@ -118,10 +123,13 @@
                 });
             }else {
 
-                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                    +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
+//                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+//                    +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
 
-                mySharedService.prepForBroadcast(url);
+                var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                              +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+
+                mySharedService.prepForBroadcast(urlPath);
 
                 $rootScope.changeTemplate = false;
                 toastr.success('You refused to change the template ', 'Congratulations!', {
