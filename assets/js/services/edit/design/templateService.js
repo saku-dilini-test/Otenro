@@ -30,7 +30,7 @@
                 });
             },
             getTemplates:function(){
-                return $http.post(SERVER_URL + 'app/designApps');
+                return $http.post(SERVER_URL + 'app/getAppsCommerce');
             },
             createTempTemplates:function(appParams){
                 return $http.post(SERVER_URL + 'app/createTempTemplates',appParams);
