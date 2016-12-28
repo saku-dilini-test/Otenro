@@ -2184,7 +2184,7 @@ h7 {
 
 md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     position: relative;
-    top: 68%;
+    top: 77%;
 }
 
 /* Developper account support page */
@@ -2219,6 +2219,9 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     width:13%
 }
 .fixed-inventory .tree-grid thead tr th:nth-child(6) {
+    width:13%
+}
+.fixed-inventory .tree-grid thead tr th:nth-child(7) {
     width:2%
 }
 
@@ -2239,6 +2242,9 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     width:14.5%
 }
 .fixed-inventory .tree-grid tbody tr td:nth-child(6) {
+    width:14.5%
+}
+.fixed-inventory .tree-grid tbody tr td:nth-child(7) {
     width:2%
 }
 
@@ -2294,10 +2300,13 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     zoom: 0.8;
 }
 
+
 .sales-promotion md-radio-button {
     margin: 0 15px 40px 0;
     float: left;
 }
+
+
 
 /* template_change */
 
@@ -2328,6 +2337,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 /* Sales & Promotion */
 
 .sales-promotion md-radio-button {
+
     margin: 0 15px 40px 0;
     float: left;
 }
@@ -2335,6 +2345,9 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 .sales-promotion md-radio-button {
     margin: 0 15px 40px 0;
     float: left;
+    margin: 0 15px 40px 0;
+    float: left;
+
 }
 
 .sales-promotion md-input-container{

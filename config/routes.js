@@ -118,7 +118,7 @@ module.exports.routes = {
     //'POST /edit/addProducts': '
     //
     'POST /edit/addContactUs': 'edit/setting/ContactUsController.addContactUs',
-    'POST /edit/addBasicInfo': 'edit/setting/ContactUsController.addBasicInfo',
+    'POST /edit/addBasicInfo': 'edit/setting/CoconfigntactUsController.addBasicInfo',
     'POST /edit/addWebInfo': 'edit/setting/ContactUsController.addWebInfo',
     'POST /edit/addGoogleMapInfo': 'edit/setting/ContactUsController.addGoogleMapInfo',
     'POST /edit/addOpenHoursInfo': 'edit/setting/ContactUsController.addOpenHoursInfo',

@@ -187,7 +187,8 @@ module.exports = {
         var childId = req.param('childId');
         var searchApp = {
             appId: appId,
-            childId : childId
+            childId : childId,
+            published : 'YES'
         };
         var thirdNavi = [];
         ThirdNavigation.find().where(searchApp).exec(function(err, app) {

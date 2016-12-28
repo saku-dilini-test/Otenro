@@ -121,7 +121,6 @@
             .error(function(err){
                 console.log(err);
             });
-
          console.log(initialData);
         if(initialData != null) {
             $scope.user = initialData;
@@ -137,7 +136,6 @@
                 });
         }
     }
-
     // Sales & Promotions
 
         $scope.addNewSalesAndPromotions=function(){
@@ -145,4 +143,3 @@
     };
 
 })();
-
