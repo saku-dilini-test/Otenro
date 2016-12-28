@@ -79,7 +79,7 @@ module.exports = {
             }
         }
 
-        if(templateName == 'hkRising'){
+        if(templateName == 'hkRising' || templateName == 'RecipeApp'){
             loginPath = '/#/app/home/firstMenu';
             isApplyStyle = {
                 color : {
@@ -314,7 +314,7 @@ module.exports = {
             /**
              * If hkRising or fashionApp Details Feed to DB
              */
-        }else if(templateName == 'hkRising' || templateName == 'fashionApp'){
+        }else if(templateName == 'hkRising' || templateName == 'fashionApp'|| templateName == 'RecipeApp'){
                 var searchAppInitialData = {
                     'templateName' : templateName
                 }
