@@ -2219,6 +2219,9 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     width:13%
 }
 .fixed-inventory .tree-grid thead tr th:nth-child(6) {
+    width:13%
+}
+.fixed-inventory .tree-grid thead tr th:nth-child(7) {
     width:2%
 }
 
@@ -2239,6 +2242,9 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     width:14.5%
 }
 .fixed-inventory .tree-grid tbody tr td:nth-child(6) {
+    width:14.5%
+}
+.fixed-inventory .tree-grid tbody tr td:nth-child(7) {
     width:2%
 }
 
@@ -2294,6 +2300,32 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     zoom: 0.8;
 }
 
+/* template_change */
+
+.change-template-notifi{
+    background-color: rgba(2,2,2,0.6);
+    width: 100%;
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 1px;
+    position: fixed;
+    font-weight: 500;
+    bottom: 0;
+    height: 50px;
+    padding: 8px 0;
+    margin-left: 270px;
+    padding-left: 270px;
+}
+
+.change-template-notifi .btn-material {
+    background-color: #f3f3f3;
+    color: #000 !important;
+    margin: 0 10px;
+}
+
+.change-template-notifi a{
+    text-decoration: none;
+}
 /* Sales & Promotion */
 
 .sales-promotion md-radio-button {
@@ -2308,5 +2340,3 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 .sales-promotion .margin{
     margin:18px 0;
 }
-
-

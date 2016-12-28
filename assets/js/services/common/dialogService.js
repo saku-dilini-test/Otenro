@@ -5,17 +5,18 @@
     angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService',
         'commerceService','articleService','mainMenuService', 'currencyService',
         'publishService', 'engageService', 'logoAndTittleService','aboutUsService',
-        'policiesService','comingSoonService', 'salesAndPromotionService',dialogService]);
+        'policiesService','comingSoonService', 'templateService','salesAndPromotionService',dialogService]);
 
     function dialogService(stylesService, contactUsService,
                            commerceService, articleService ,mainMenuService,
                            currencyService, publishService, engageService,
-                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,salesAndPromotionService) {
+                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService,salesAndPromotionService) {
+
         return {
             showDialog: function(clickTitle) {
 
                 if ('templates'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+                    return templateService.showTemplateDialog();
                 if ('checkoutPageStyle'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('lockedPages'==clickTitle)
