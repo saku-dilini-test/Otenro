@@ -1,6 +1,6 @@
 <ion-view view-title="Menu" class="made-easy-background-image">
     <ion-content >
-        <div class="col app-name">Crush</div>
+        <div class="col app-name">{{appName}}</div>
         <div class="categories"> 
             <div  ng-repeat="category in categories | orderBy:'id'" >
                 <div class="card">

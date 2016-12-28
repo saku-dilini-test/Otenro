@@ -103,7 +103,7 @@ module.exports = {
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             gifImageUrl : 'GlamourUpApp/clothing2.png',
             imageUrl : 'GlamourUpApp/clothing.jpg',
-            templateFilesPath:'templates/clothingApp',
+            templateFilesPath:'templates/GlamourUpApp',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
@@ -113,7 +113,7 @@ module.exports = {
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             gifImageUrl : 'CrushApp/clothing2.png',
             imageUrl : 'CrushApp/clothing.jpg',
-            templateFilesPath:'templates/clothingApp',
+            templateFilesPath:'templates/CrushApp',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
@@ -144,6 +144,15 @@ module.exports = {
             imageUrl : 'fashionApp/fashionApp.png',
             gifImageUrl : 'fashionApp/fashion.png',
             templateFilesPath:'templates/fashionApp',
+            templateCategory: TemplateCategoryDetails.Media.ID
+        },
+        {
+            template_name : 'RecipeApp',
+            templateViewName : 'Recipe App',
+            templateViewDesc : 'Striking, scalable, and built to boost engagement.',
+            imageUrl : 'recipeApp/recipeApp.png',
+            gifImageUrl : 'recipeApp/recipeAppGif.png',
+            templateFilesPath:'templates/RecipeApp',
             templateCategory: TemplateCategoryDetails.Media.ID
         }
     ]
