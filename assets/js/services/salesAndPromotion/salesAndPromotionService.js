@@ -50,6 +50,9 @@
             saveSalesAndPromotion: function(data){
                 return $http.post(SERVER_URL+ 'edit/saveSalesAndPromotion',data);
             },
+            getListOfSalesAndPromotions  : function (appId) {
+                return $http.get(SERVER_URL+ 'edit/getListOfSalesAndPromotions?appId='+appId);
+            }
 
         };
     }
