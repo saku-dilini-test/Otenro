@@ -120,6 +120,7 @@
             })
             .error(function(err){
                 console.log(err);
+
             });
          console.log(initialData);
         if(initialData != null) {
@@ -141,5 +142,12 @@
         $scope.addNewSalesAndPromotions=function(){
              return engageService.showPromotionsAndSalesAddNewDialog();
     };
+
+
+            })
+
+
+
+    }
 
 })();

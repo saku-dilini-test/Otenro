@@ -44,12 +44,18 @@
             //Get  All order Details
             showAllordersView: function(data) {
                 return $mdDialog.show({
+
                     controller: 'EngageCtrl',
                     templateUrl: 'user/edit/engage/registerUserView.html',
                     clickOutsideToClose: true,
                     locals: {
                         initialData: data
                     }
+
+                    controller: 'SalesAndPromotionCtrl',
+                    templateUrl: 'user/edit/engage/promotionsAndSalesView.html',
+                    clickOutsideToClose: true
+
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
@@ -59,12 +65,18 @@
 
             showPushMessageSendDialog: function() {
                 return $mdDialog.show({
+
                     controller: 'EngageCtrl',
                     templateUrl: 'user/edit/engage/pushMessageSendView.html',
                     clickOutsideToClose: true,
                     locals: {
                         initialData: null
                     }
+
+                    controller: 'SalesAndPromotionCtrl',
+                    templateUrl: 'user/edit/engage/promotionsAndSalesAddNew.html',
+                    clickOutsideToClose: true
+
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
