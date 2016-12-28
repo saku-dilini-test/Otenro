@@ -25,12 +25,6 @@
                 });
             },
 
-
-
-
-
-
-
             //Get  All Registered Users
             showAppUserDialog: function() {
                 return $mdDialog.show({
@@ -46,9 +40,6 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-
-
-
 
             //Get  All order Details
             showAllordersView: function(data) {
@@ -66,11 +57,6 @@
                 });
             },
 
-
-
-
-
-
             showPushMessageSendDialog: function() {
                 return $mdDialog.show({
                     controller: 'EngageCtrl',
@@ -79,28 +65,6 @@
                     locals: {
                         initialData: null
                     }
-                }).then(function(answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
-                }, function() {
-                    //$scope.status = 'You cancelled the dialog.';
-                });
-            },
-            showPromotionsAndSalesDialog: function() {
-                return $mdDialog.show({
-                    controller: 'EngageCtrl',
-                    templateUrl: 'user/edit/engage/promotionsAndSalesView.html',
-                    clickOutsideToClose: true
-                }).then(function(answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
-                }, function() {
-                    //$scope.status = 'You cancelled the dialog.';
-                });
-            },
-            showPromotionsAndSalesAddNewDialog: function() {
-                return $mdDialog.show({
-                    controller: 'EngageCtrl',
-                    templateUrl: 'user/edit/engage/promotionsAndSalesAddNew.html',
-                    clickOutsideToClose: true
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
