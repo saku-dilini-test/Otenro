@@ -5,12 +5,12 @@
     angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService',
         'commerceService','articleService','mainMenuService', 'currencyService',
         'publishService', 'engageService', 'logoAndTittleService','aboutUsService',
-        'policiesService','comingSoonService', dialogService]);
+        'policiesService','comingSoonService', 'salesAndPromotionService',dialogService]);
 
     function dialogService(stylesService, contactUsService,
                            commerceService, articleService ,mainMenuService,
                            currencyService, publishService, engageService,
-                           logoAndTittleService,aboutUsService,policiesService,comingSoonService) {
+                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,salesAndPromotionService) {
         return {
             showDialog: function(clickTitle) {
 
@@ -117,7 +117,7 @@
                 if ('pushMessages' == clickTitle)
                     return engageService.showPushMessageDialog(clickTitle);
                 if ('promotionsAndSales'==clickTitle)
-                    return engageService.showPromotionsAndSalesDialog();
+                    return salesAndPromotionService.showPromotionsAndSalesDialog();
                 if ('profile' == clickTitle)
                     return engageService.showProfileDialog(clickTitle);
                 if ('styleEditBackgroundImage' == clickTitle)
