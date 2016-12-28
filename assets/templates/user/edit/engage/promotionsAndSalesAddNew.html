@@ -48,29 +48,29 @@
             </md-tab>
 
             <!-- Store Wide content -->
-            <md-tab >
+             <md-tab >
                 <md-tab-label>Store Wide</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
                         <h1>Store Wide</h1>
                     </div>
                     <md-content layout-padding>
-                        <form name="promoForm">
+                        <form name="storeWideForm">
                             <div class="md-dialog-main">
                                 <div class="clearfix">
 
-                                    <md-radio-group ng-model="data.group1">
+                                    <md-radio-group ng-model="storeWide.discountType">
 
-                                        <md-radio-button value="Apple" class="md-primary">Discount Value</md-radio-button>
-                                        <md-radio-button value="Banana" class="md-primary">Discount %</md-radio-button>
-                                        <md-radio-button value="Mango" class="md-primary">Free Shipping</md-radio-button>
+                                        <md-radio-button value="discountValue" class="md-primary">Discount Value</md-radio-button>
+                                        <md-radio-button value="discountPercentage" class="md-primary">Discount %</md-radio-button>
+                                        <md-radio-button value="freeShipping" class="md-primary">Free Shipping</md-radio-button>
 
                                     </md-radio-group>
 
                                     <md-input-container class="md-block">
                                         <label>Name</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="product.name">
-                                        <div ng-messages="promoForm.name.$error" ng-show="promoForm.name.$dirty">
+                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="storeWide.name">
+                                        <div ng-messages="storeWideForm.name.$error" ng-show="storeWideForm.name.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
@@ -78,9 +78,9 @@
 
                                     <md-input-container class="md-block" flex="50">
                                         <label>Discount</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="product.name">
-                                        <div ng-messages="promoForm.name.$error" ng-show="promoForm.name.$dirty">
-                                            <div ng-message="required">Name is required.</div>
+                                        <input md-maxlength="15"  ng-required="true" name="discount" ng-model="storeWide.discount">
+                                        <div ng-messages="storeWideForm.discount.$error" ng-show="storeWideForm.discount.$dirty">
+                                            <div ng-message="required">Discount is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
                                     </md-input-container>
@@ -89,38 +89,59 @@
                                         <label>Date</label>
                                     </fieldset>
                                     <div class="row">
-                                        <adm-dtp ng-model='date1' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='storeWide.dateFrom' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
 
                                             <label class="col-md-2 text-center">To</label>
 
-                                        <adm-dtp ng-model='date2' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='storeWide.dateTo' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
                                     </div>
                                     <br>
+
                                     <fieldset >
-                                            <md-checkbox  aria-label="Limit user" ng-model="data.cb3">
+                                            <md-checkbox  aria-label="Limit user" ng-model="storeWide.isLimitUsers">
                                                 <label>Limit users</label>
                                             </md-checkbox>
-                                    </fieldset>
-                                    <fieldset  >
-                                        <md-checkbox  aria-label="Limit code usage" ng-model="data.cb4">
-                                            <label>Limit number of times code can be used</label>
-                                        </md-checkbox>
-                                    </fieldset>
-                                    <fieldset  >
-                                        <md-checkbox  aria-label="TnC" ng-model="data.cb5">
-                                            <label>Terms and conditions</label>
-                                        </md-checkbox>
+                                        <md-input-container  ng-if ="storeWide.isLimitUsers" class="md-block" flex="50">
+                                            <input  md-maxlength="15"  ng-required="true" name="Limit users" ng-model="storeWide.limitUsers">
+                                            <div ng-messages="storeWideForm.limitUsers.$error" ng-show="storeWideForm.limitUsers.$dirty">
+                                                <div ng-message="required">Limit Users is required.</div>
+                                                <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                            </div>
+                                        </md-input-container>
                                     </fieldset>
 
-                                    <fieldset ng-if="data.cb5">
-                                        <textarea type="text" class="input-shadow-border" name="TnC" ng-model="tnc" required ></textarea>
+                                    <fieldset  >
+
+                                        <md-checkbox  aria-label="Limit code usage" ng-model="storeWide.isLimitNumberOfTime">
+                                            <label>Limit number of times code can be used</label>
+                                        </md-checkbox>
+                                        <md-input-container ng-if ="storeWide.isLimitNumberOfTime" class="md-block" flex="50">
+                                            <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="storeWide.limitNumberOfTime">
+                                            <div ng-messages="storeWideForm.limitNumberOfTime.$error" ng-show="storeWideForm.limitNumberOfTime.$dirty">
+                                                <div ng-message="required">Limit Users is required.</div>
+                                                <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                            </div>
+                                        </md-input-container>
+                                    </fieldset>
+
+                                    <fieldset  >
+                                        <md-checkbox  aria-label="TnC" ng-model="storeWide.isTermsAndCondition">
+                                            <label>Terms and conditions</label>
+                                        </md-checkbox>
+                                        <fieldset ng-if ="storeWide.isTermsAndCondition" ><!--ng-if="data.cb5"-->
+                                            <textarea type="text" class="input-shadow-border" name="TnC" ng-model="storeWide.termsAndCondition" required ></textarea>
+                                        </fieldset>
                                     </fieldset>
 
                                     <div class="row">
                                         <div class="col-md-5">
                                             <md-input-container class="md-block">
                                                 <label>Promo Code</label>
-                                                <input md-maxlength="15"  ng-required="true" name="name" ng-model="product.name">
+                                                <input md-maxlength="15"  ng-required="true" name="promoCode" ng-model="storeWide.promoCode">
+                                                <div ng-messages="storeWideForm.promoCode.$error" ng-show="storeWideForm.promoCode.$dirty">
+                                                    <div ng-message="required">promoCode is required.</div>
+                                                    <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                                </div>
                                             </md-input-container>
                                         </div>
                                         <div class="col-md-2 text-center margin">
@@ -136,7 +157,9 @@
                             <div class="md-dialog-buttons">
                                 <div class="inner-section">
                                     <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                                    <md-button class="me-default-button" ng-disabled="promoForm.$invalid " ng-click="">Save</md-button>
+                                    <md-button class="me-default-button" ng-disabled="storeWideForm.$invalid"
+                                               ng-click="saveSalesAndPromotion(storeWide,'storeWide')">Save
+                                    </md-button>
                                 </div>
                             </div>
                         </form>
@@ -144,7 +167,7 @@
                 </md-tab-body>
             </md-tab>
 
-            <!-- Minimum Order Value Content -->
+             Minimum Order Value Content
             <md-tab >
                 <md-tab-label>Minimum Order Value</md-tab-label>
                 <md-tab-body>
@@ -152,22 +175,22 @@
                         <h1>Minimum Order Value</h1>
                     </div>
                     <md-content layout-padding>
-                        <form name="promoForm">
+                        <form name="minimumOrderValueForm">
                             <div class="md-dialog-main">
                                 <div class="clearfix">
 
-                                    <md-radio-group ng-model="data.group1">
+                                    <md-radio-group ng-model="minimumOrderValue.discountType">
 
-                                        <md-radio-button value="Apple" class="md-primary">Discount Value</md-radio-button>
-                                        <md-radio-button value="Banana" class="md-primary">Discount %</md-radio-button>
-                                        <md-radio-button value="Mango" class="md-primary">Free Shipping</md-radio-button>
+                                        <md-radio-button value="discountValue" class="md-primary">Discount Value</md-radio-button>
+                                        <md-radio-button value="discountPercentage" class="md-primary">Discount %</md-radio-button>
+                                        <md-radio-button value="freeShipping" class="md-primary">Free Shipping</md-radio-button>
 
                                     </md-radio-group>
 
                                     <md-input-container class="md-block">
                                         <label>Name</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="product.name">
-                                        <div ng-messages="promoForm.name.$error" ng-show="promoForm.name.$dirty">
+                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="minimumOrderValue.name">
+                                        <div ng-messages="minimumOrderValueForm.name.$error" ng-show="minimumOrderValueForm.name.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
@@ -175,16 +198,17 @@
 
                                     <md-input-container class="md-block" flex="50">
                                         <label>Minimum Order Value</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="mov">
-                                        <div ng-messages="promoForm.name.$error" ng-show="promoForm.name.$dirty">
+                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="minimumOrderValue.minimumOderValue">
+                                        <div ng-messages="minimumOrderValueForm.minimumOderValue.$error"
+                                             ng-show="minimumOrderValueForm.minimumOderValue.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
                                     </md-input-container>
                                     <md-input-container class="md-block" flex="50">
                                         <label>Discount</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="discount">
-                                        <div ng-messages="promoForm.name.$error" ng-show="promoForm.name.$dirty">
+                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="minimumOrderValue.discount">
+                                        <div ng-messages="minimumOrderValueForm.discount.$error" ng-show="minimumOrderValueForm.discount.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
@@ -194,38 +218,55 @@
                                         <label>Date</label>
                                     </fieldset>
                                     <div class="row">
-                                        <adm-dtp ng-model='date3' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='minimumOrderValue.dateFrom' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
 
-                                            <label class="col-md-2 text-center">To</label>
+                                        <label class="col-md-2 text-center">To</label>
 
-                                        <adm-dtp ng-model='date4' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='minimumOrderValue.dateTo' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
                                     </div>
                                     <br>
                                     <fieldset >
-                                            <md-checkbox  aria-label="Limit user" ng-model="data.cb3">
+                                            <md-checkbox  aria-label="Limit user" ng-model="minimumOrderValue.isLimitUsers">
                                                 <label>Limit users</label>
                                             </md-checkbox>
+                                            <md-input-container ng-if="minimumOrderValue.isLimitUsers" class="md-block" flex="50">
+                                                <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="minimumOrderValue.limitUsers">
+                                                <div ng-messages="minimumOrderValueForm.limitUsers.$error" ng-show="minimumOrderValueForm.limitUsers.$dirty">
+                                                    <div ng-message="required">Limit Users is required.</div>
+                                                    <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                                </div>
+                                            </md-input-container>
                                     </fieldset>
                                     <fieldset  >
-                                        <md-checkbox  aria-label="Limit code usage" ng-model="data.cb4">
+                                        <md-checkbox  aria-label="Limit code usage" ng-model="minimumOrderValue.isLimitNumberOfTime">
                                             <label>Limit number of times code can be used</label>
                                         </md-checkbox>
+                                        <md-input-container ng-if="minimumOrderValue.isLimitNumberOfTime" class="md-block" flex="50">
+                                            <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="minimumOrderValue.limitNumberOfTime">
+                                            <div ng-messages="minimumOrderValueForm.limitNumberOfTime.$error" ng-show="minimumOrderValueForm.limitUsers.$dirty">
+                                                <div ng-message="required">Limit Users is required.</div>
+                                                <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                            </div>
+                                        </md-input-container>
                                     </fieldset>
                                     <fieldset  >
-                                        <md-checkbox  aria-label="TnC" ng-model="data.cb5">
+                                        <md-checkbox  aria-label="TnC" ng-model="minimumOrderValue.isTermsAndCondition">
                                             <label>Terms and conditions</label>
                                         </md-checkbox>
-                                    </fieldset>
-
-                                    <fieldset ng-if="data.cb5">
-                                        <textarea type="text" class="input-shadow-border" name="TnC" ng-model="tnc" required ></textarea>
+                                        <fieldset ng-if="minimumOrderValue.isTermsAndCondition" ><!--ng-if="data.cb5"-->
+                                            <textarea type="text" class="input-shadow-border" name="TnC" ng-model="minimumOrderValue.termsAndCondition" required ></textarea>
+                                        </fieldset>
                                     </fieldset>
 
                                     <div class="row">
                                         <div class="col-md-5">
                                             <md-input-container class="md-block">
                                                 <label>Promo Code</label>
-                                                <input md-maxlength="15"  ng-required="true" name="name" ng-model="product.name">
+                                                <input md-maxlength="15"  ng-required="true" name="name" ng-model="minimumOrderValue.promoCode">
+                                                <div ng-messages="minimumOrderValueForm.promoCode.$error" ng-show="minimumOrderValueForm.promoCode.$dirty">
+                                                    <div ng-message="required">promoCode is required.</div>
+                                                    <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                                </div>
                                             </md-input-container>
                                         </div>
                                         <div class="col-md-2 text-center margin">
@@ -241,7 +282,7 @@
                             <div class="md-dialog-buttons">
                                 <div class="inner-section">
                                     <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                                    <md-button class="me-default-button" ng-disabled="promoForm.$invalid " ng-click="">Save</md-button>
+                                    <md-button class="me-default-button" ng-disabled="minimumOrderValueForm.$invalid " ng-click="saveSalesAndPromotion(minimumOrderValue,'minimumOrderValue')">Save</md-button>
                                 </div>
                             </div>
                         </form>
@@ -249,7 +290,6 @@
                 </md-tab-body>
             </md-tab>
 
-            <!-- Category Wide Content -->
             <md-tab >
                 <md-tab-label>Category Wide</md-tab-label>
                 <md-tab-body>
@@ -257,38 +297,40 @@
                         <h1>Category Wide</h1>
                     </div>
                     <md-content layout-padding>
-                        <form name="promoForm">
+                        <form name="categoryWideForm">
                             <div class="md-dialog-main">
                                 <div class="clearfix">
 
-                                    <md-radio-group ng-model="data.group1">
+                                    <md-radio-group ng-model="categoryWide.discountType">
 
-                                        <md-radio-button value="Apple" class="md-primary">Discount Value</md-radio-button>
-                                        <md-radio-button value="Banana" class="md-primary">Discount %</md-radio-button>
+                                        <md-radio-button value="discountValue" class="md-primary">Discount Value</md-radio-button>
+                                        <md-radio-button value="discount" class="md-primary">Discount %</md-radio-button>
 
                                     </md-radio-group>
 
                                     <md-input-container class="md-block">
                                         <label>Name</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="product.name">
-                                        <div ng-messages="promoForm.name.$error" ng-show="promoForm.name.$dirty">
+                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="categoryWide.name">
+                                        <div ng-messages="categoryWideForm.name.$error" ng-show="categoryWideForm.name.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
                                     </md-input-container>
 
-                                    <md-input-container class="md-block" flex="50" ng-hide="mainMenuHide">
+                                    <md-input-container class="md-block" flex="50">
                                         <label>Select Category</label>
                                         <md-select
-                                                placeholder="Select Main Menu"
-                                                ng-model="category">
+                                                placeholder="Select Category"
+                                                ng-model="categoryWide.category">
+                                            <md-option ng-value="cat.id" ng-repeat="cat in categories">{{cat.name}}
+                                            </md-option>
                                         </md-select>
                                     </md-input-container>
 
                                     <md-input-container class="md-block" flex="50">
                                         <label>Discount</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="discount">
-                                        <div ng-messages="promoForm.name.$error" ng-show="promoForm.name.$dirty">
+                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="categoryWide.discount">
+                                        <div ng-messages="categoryWideForm.discount.$error" ng-show="categoryWideForm.discount.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
@@ -298,38 +340,54 @@
                                         <label>Date</label>
                                     </fieldset>
                                     <div class="row">
-                                        <adm-dtp ng-model='date3' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='categoryWide.dateFrom' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
 
                                             <label class="col-md-2 text-center">To</label>
 
-                                        <adm-dtp ng-model='date4' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='categoryWide.dateTo' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
                                     </div>
                                     <br>
                                     <fieldset >
-                                            <md-checkbox  aria-label="Limit user" ng-model="data.cb3">
+                                            <md-checkbox  aria-label="Limit user" ng-model="categoryWide.isLimitUsers">
                                                 <label>Limit users</label>
                                             </md-checkbox>
+                                            <md-input-container ng-if="categoryWide.isLimitUsers" class="md-block" flex="50">
+                                                <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="categoryWide.limitUsers">
+                                                <div ng-messages="categoryWideForm.limitUsers.$error" ng-show="categoryWideForm.limitUsers.$dirty">
+                                                    <div ng-message="required">Limit Users is required.</div>
+                                                    <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                                </div>
+                                            </md-input-container>
                                     </fieldset>
                                     <fieldset  >
-                                        <md-checkbox  aria-label="Limit code usage" ng-model="data.cb4">
+                                        <md-checkbox  aria-label="Limit code usage" ng-model="categoryWide.isLimitNumberOfTime">
                                             <label>Limit number of times code can be used</label>
                                         </md-checkbox>
+                                        <md-input-container  ng-if="categoryWide.isLimitNumberOfTime" class="md-block" flex="50">
+                                            <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="categoryWide.limitNumberOfTime">
+                                            <div ng-messages="categoryWideForm.limitNumberOfTime.$error" ng-show="categoryWideForm.limitNumberOfTime.$dirty">
+                                                <div ng-message="required">Limit Users is required.</div>
+                                                <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                            </div>
+                                        </md-input-container>
                                     </fieldset>
                                     <fieldset  >
-                                        <md-checkbox  aria-label="TnC" ng-model="data.cb5">
+                                        <md-checkbox  aria-label="TnC" ng-model="categoryWide.isTermsAndCondition">
                                             <label>Terms and conditions</label>
                                         </md-checkbox>
+                                        <fieldset ng-if="categoryWide.isTermsAndCondition" ><!--ng-if="data.cb5"-->
+                                            <textarea type="text" class="input-shadow-border" name="TnC" ng-model="categoryWide.termsAndCondition" required ></textarea>
+                                        </fieldset>
                                     </fieldset>
-
-                                    <fieldset ng-if="data.cb5">
-                                        <textarea type="text" class="input-shadow-border" name="TnC" ng-model="tnc" required ></textarea>
-                                    </fieldset>
-
                                     <div class="row">
                                         <div class="col-md-5">
                                             <md-input-container class="md-block">
                                                 <label>Promo Code</label>
-                                                <input md-maxlength="15"  ng-required="true" name="name" ng-model="product.name">
+                                                <input md-maxlength="15"  ng-required="true" name="name" ng-model="categoryWide.promoCode">
+                                                <div ng-messages="categoryWideForm.promoCode.$error" ng-show="categoryWideForm.promoCode.$dirty">
+                                                    <div ng-message="required">promoCode is required.</div>
+                                                    <div ng-message="md-maxlength">The promoCode must be less than 15 characters long.</div>
+                                                </div>
                                             </md-input-container>
                                         </div>
                                         <div class="col-md-2 text-center margin">
@@ -345,7 +403,9 @@
                             <div class="md-dialog-buttons">
                                 <div class="inner-section">
                                     <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                                    <md-button class="me-default-button" ng-disabled="promoForm.$invalid " ng-click="">Save</md-button>
+                                    <md-button class="me-default-button" ng-disabled="categoryWideForm.$invalid "
+                                               ng-click="saveSalesAndPromotion(categoryWide,'categoryWide')">Save
+                                    </md-button>
                                 </div>
                             </div>
                         </form>
@@ -353,29 +413,29 @@
                 </md-tab-body>
             </md-tab>
 
-            <!-- Single Product Content -->
-            <md-tab >
+                        <!-- Single Product Content-->
+           <md-tab >
                 <md-tab-label>Single Product</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
                         <h1>Single Product</h1>
                     </div>
                     <md-content layout-padding>
-                        <form name="promoForm">
+                        <form name="singleProductForm">
                             <div class="md-dialog-main">
                                 <div class="clearfix">
 
-                                    <md-radio-group ng-model="data.group1">
+                                    <md-radio-group ng-model="singleProduct.discountType" required >
 
-                                        <md-radio-button value="Apple" class="md-primary">Discount Value</md-radio-button>
-                                        <md-radio-button value="Banana" class="md-primary">Discount %</md-radio-button>
+                                        <md-radio-button value="discountValue" class="md-primary">Discount Value</md-radio-button>
+                                        <md-radio-button value="discount" class="md-primary">Discount %</md-radio-button>
 
                                     </md-radio-group>
 
                                     <md-input-container class="md-block">
                                         <label>Name</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="product.name">
-                                        <div ng-messages="promoForm.name.$error" ng-show="promoForm.name.$dirty">
+                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="singleProduct.name">
+                                        <div ng-messages="singleProductForm.name.$error" ng-show="singleProductForm.name.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
@@ -392,28 +452,28 @@
                                                 <span ng-if="isChecked()">Un-</span>Select All
                                             </md-checkbox>
 
-                                            <div ng-repeat="oneCountry in countryList | orderBy:'countryName'"
-                                                 ng-model="country" required>
-                                                <md-checkbox ng-checked="exists(oneCountry, selected)"
-                                                             ng-click="toggle(oneCountry, selected)"
-                                                             aria-label="oneCountry.countryName" >{{oneCountry.countryName}}
+                                            <div ng-repeat="oneProduct in productsList | orderBy:'name'"
+                                                 ng-model="product"  >
+                                                <md-checkbox ng-checked="exists(oneProduct, selected)"
+                                                             ng-click="toggle(oneProduct, selected)"
+                                                             aria-label="oneProduct.name" >{{oneProduct.name}}
                                                 </md-checkbox>
                                             </div>
                                         </div>
                                         <div class="col-md-6 country-list">
                                             <label>Selected</label>
-                                            <div ng-if ="IsSingleSelection === false" class="md-label" ng-repeat="country in selected">
-                                                <!--<span>{{country.countryName}}</span>-->
-                                                <md-checkbox ng-checked="exists(country, selected)"
-                                                             ng-click="toggle(country, selected)"
-                                                             aria-label="oneCountry.countryName" >{{country.countryName}}
+                                            <div ng-if ="IsSingleSelection === false" class="md-label" ng-repeat="product in selected">
+                                                <!--<span>{{product.name}}</span>-->
+                                                <md-checkbox ng-checked="exists(product, selected)"
+                                                             ng-click="toggle(product, selected)"
+                                                             aria-label="oneProduct.name" >{{product.name}}
                                                 </md-checkbox>
                                             </div>
-                                            <div ng-if ="IsSingleSelection" class="md-label" ng-repeat="country in selected">
-                                                <!--<span>{{country.countryName}}</span>-->
-                                                <md-checkbox ng-checked="exists(country, selected)"
-                                                             ng-click="toggle(country, selected)"
-                                                             aria-label="oneCountry.countryName" >{{country.countryName}}
+                                            <div ng-if ="IsSingleSelection" class="md-label" ng-repeat="product in selected">
+                                               <!-- <span>{{product.name}}</span>-->
+                                                <md-checkbox ng-checked="exists(product, selected)"
+                                                             ng-click="toggle(product, selected)"
+                                                             aria-label="oneProduct.name" >{{product.name}}
                                                 </md-checkbox>
                                             </div>
                                         </div>
@@ -422,7 +482,7 @@
                                     <md-input-container class="md-block" flex="50">
                                         <label>Discount</label>
                                         <input md-maxlength="15"  ng-required="true" name="name" ng-model="discount">
-                                        <div ng-messages="promoForm.name.$error" ng-show="promoForm.name.$dirty">
+                                        <div ng-messages="singleProductForm.discount.$error" ng-show="singleProductForm.discount.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                         </div>
@@ -432,38 +492,56 @@
                                         <label>Date</label>
                                     </fieldset>
                                     <div class="row">
-                                        <adm-dtp ng-model='date3' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='singleProduct.dataFrom' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
 
                                             <label class="col-md-2 text-center">To</label>
 
-                                        <adm-dtp ng-model='date4' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
+                                        <adm-dtp ng-model='singleProduct.dataTo' options='{calType: "gregorian", default: today}' class="col-md-5"></adm-dtp>
                                     </div>
                                     <br>
                                     <fieldset >
-                                            <md-checkbox  aria-label="Limit user" ng-model="data.cb3">
+                                            <md-checkbox  aria-label="Limit user" ng-model="singleProduct.isLimitUser">
                                                 <label>Limit users</label>
                                             </md-checkbox>
+                                            <md-input-container ng-if="singleProduct.isLimitUser" class="md-block" flex="50">
+                                                <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitUsers">
+                                                <div ng-messages="singleProductForm.limitUsers.$error" ng-show="singleProductForm.limitUsers.$dirty">
+                                                    <div ng-message="required">Limit Users is required.</div>
+                                                    <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                                </div>
+                                            </md-input-container>
                                     </fieldset>
                                     <fieldset  >
-                                        <md-checkbox  aria-label="Limit code usage" ng-model="data.cb4">
+                                        <md-checkbox  aria-label="Limit code usage" ng-model="singleProduct.isLimitNumberOfTime">
                                             <label>Limit number of times code can be used</label>
                                         </md-checkbox>
+                                        <md-input-container ng-if="singleProduct.isLimitNumberOfTime" class="md-block" flex="50">
+                                            <input md-maxlength="15"  ng-required="true" name="Limit users" ng-model="singleProduct.limitNumberOfTime">
+                                            <div ng-messages="singleProductForm.limitNumberOfTime.$error" ng-show="singleProductForm.limitNumberOfTime.$dirty">
+                                                <div ng-message="required">Limit Users is required.</div>
+                                                <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                            </div>
+                                        </md-input-container>
                                     </fieldset>
                                     <fieldset  >
-                                        <md-checkbox  aria-label="TnC" ng-model="data.cb5">
+                                        <md-checkbox  aria-label="TnC" ng-model="singleProduct.isTermsAndCondition">
                                             <label>Terms and conditions</label>
                                         </md-checkbox>
+                                        <fieldset ng-if="singleProduct.isTermsAndCondition" ><!--ng-if="data.cb5"-->
+                                            <textarea type="text" class="input-shadow-border" name="TnC" ng-model="singleProduct.termsAndCondition" required ></textarea>
+                                        </fieldset>
                                     </fieldset>
 
-                                    <fieldset ng-if="data.cb5">
-                                        <textarea type="text" class="input-shadow-border" name="TnC" ng-model="tnc" required ></textarea>
-                                    </fieldset>
 
                                     <div class="row">
                                         <div class="col-md-5">
                                             <md-input-container class="md-block">
                                                 <label>Promo Code</label>
-                                                <input md-maxlength="15"  ng-required="true" name="name" ng-model="product.name">
+                                                <input md-maxlength="15"  ng-required="true" name="name" ng-model="singleProduct.promoCode">
+                                                <div ng-messages="singleProductForm.promoCode.$error" ng-show="singleProductForm.promoCode.$dirty">
+                                                    <div ng-message="required">promoCode is required.</div>
+                                                    <div ng-message="md-maxlength">The promoCode must be less than 15 characters long.</div>
+                                                </div>
                                             </md-input-container>
                                         </div>
                                         <div class="col-md-2 text-center margin">
@@ -479,7 +557,7 @@
                             <div class="md-dialog-buttons">
                                 <div class="inner-section">
                                     <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                                    <md-button class="me-default-button" ng-disabled="promoForm.$invalid " ng-click="">Save</md-button>
+                                    <md-button class="me-default-button" ng-disabled="singleProductForm.$invalid " ng-click="saveSalesAndPromotion(singleProduct,'singleProduct')">Save</md-button>
                                 </div>
                             </div>
                         </form>

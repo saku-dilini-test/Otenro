@@ -87,10 +87,6 @@
             })
 
 
-        // Sales & Promotions
 
-        $scope.addNewSalesAndPromotions=function(){
-            return engageService.showPromotionsAndSalesAddNewDialog();
-        };
     }
 })();
