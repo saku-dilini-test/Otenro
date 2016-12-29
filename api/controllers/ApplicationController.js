@@ -19,6 +19,12 @@ module.exports = {
             res.send(template);
         });
     },
+    getAppsCommerce: function(req,res){
+        Template.find({templateType:'ecommerce'}).exec(function(err, template) {
+            if (err) res.send(err);
+            res.send(template);
+        });
+    },
 
     viewTemplate : function(req,res){
 

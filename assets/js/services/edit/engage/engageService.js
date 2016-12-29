@@ -32,7 +32,7 @@
             },
             showPromotionsAndSalesDialog: function() {
                 return $mdDialog.show({
-                    controller: 'EngageCtrl',
+                    controller: 'SalesAndPromotionCtrl',
                     templateUrl: 'user/edit/engage/promotionsAndSalesView.html',
                     clickOutsideToClose: true
                 }).then(function(answer) {
@@ -43,7 +43,7 @@
             },
             showPromotionsAndSalesAddNewDialog: function() {
                 return $mdDialog.show({
-                    controller: 'EngageCtrl',
+                    controller: 'SalesAndPromotionCtrl',
                     templateUrl: 'user/edit/engage/promotionsAndSalesAddNew.html',
                     clickOutsideToClose: true
                 }).then(function(answer) {

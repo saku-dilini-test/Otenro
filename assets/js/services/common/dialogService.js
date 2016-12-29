@@ -5,39 +5,40 @@
     angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService',
         'commerceService','articleService','mainMenuService', 'currencyService',
         'publishService', 'engageService', 'logoAndTittleService','aboutUsService',
-        'policiesService','comingSoonService','templateService', dialogService]);
+        'policiesService','comingSoonService', 'templateService','salesAndPromotionService',dialogService]);
 
     function dialogService(stylesService, contactUsService,
                            commerceService, articleService ,mainMenuService,
                            currencyService, publishService, engageService,
-                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService) {
+                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService,salesAndPromotionService) {
+
         return {
             showDialog: function(clickTitle) {
 
                 if ('templates'==clickTitle)
                     return templateService.showTemplateDialog();
-                if ('checkoutPageStyle'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('lockedPages'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+                // if ('checkoutPageStyle'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
+                // if ('lockedPages'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
                 if ('otenroBadge'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
-                if ('announcementBar'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('madeEasyBadge'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+                // if ('announcementBar'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
+                // if ('madeEasyBadge'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
                 if ('users'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
-                if ('emailMarketing'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('popUpMessages'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('geofencedMessages'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('socialLock'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('detectionTools'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+                // if ('emailMarketing'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
+                // if ('popUpMessages'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
+                // if ('geofencedMessages'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
+                // if ('socialLock'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
+                // if ('detectionTools'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
                 if ('sales'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('traffic'==clickTitle)
@@ -56,8 +57,8 @@
                     return comingSoonService.showComingSoonDialog();
                 if ('analyticsIntegration'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
-                if ('website'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+                // if ('website'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
               /*  if ('appStore'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('googlePlay'==clickTitle)
@@ -117,7 +118,7 @@
                 if ('pushMessages' == clickTitle)
                     return engageService.showPushMessageDialog(clickTitle);
                 if ('promotionsAndSales'==clickTitle)
-                    return engageService.showPromotionsAndSalesDialog();
+                    return salesAndPromotionService.showPromotionsAndSalesDialog();
                 if ('profile' == clickTitle)
                     return engageService.showProfileDialog(clickTitle);
                 if ('styleEditBackgroundImage' == clickTitle)
