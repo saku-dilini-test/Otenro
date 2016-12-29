@@ -1,4 +1,4 @@
-//12344
+//12
 (function(){
     "use strict";
     angular.module("app").config(function($provide){
