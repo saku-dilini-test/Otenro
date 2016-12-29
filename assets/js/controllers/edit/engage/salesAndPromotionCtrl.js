@@ -16,6 +16,18 @@
             return salesAndPromotionService.showPromotionsAndSalesAddNewDialog();
         };
 
+        if (typeof $scope.salesAndPromotionList === 'undefined') {
+            salesAndPromotionService.getListOfSalesAndPromotions($rootScope.appId)
+                .success(function (data) {
+                    $scope.salesAndPromotionList = data;
+                }).error(function (error) {
+                toastr.error('Sales And Promotion Adding Error', 'Message', {
+                    closeButton: true
+                });
+            })
+
+        }
+
         if (typeof $scope.categories === 'undefined') {
             commerceService.getCategoryList()
                 .success(function (result) {
@@ -89,12 +101,7 @@
             })
         }
 
-
-
-
-
-
-
+     
 
         $scope.saveSalesAndPromotion =function(salesAndPromotion,type){
 

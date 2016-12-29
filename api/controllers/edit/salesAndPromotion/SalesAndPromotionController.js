@@ -18,13 +18,13 @@ module.exports = {
             salesAndPromotionType : salesAndPromotionData.salesAndPromotionType
         };
         // update Sales And  Promotion for given appId and salesAndPromotionType
-        SalesAndPromotIon.update(searchQuery,salesAndPromotionData).exec(function(err,updateResult) {
+        SalesAndPromotion.update(searchQuery,salesAndPromotionData).exec(function(err,updateResult) {
             if (err) res.send(err);
             else {
                 // if not update
                 if (updateResult.length == 0) {
                     // create new Sales And  Promotion Collection
-                    SalesAndPromotIon.create(salesAndPromotionData).exec(function (err, createResult) {
+                    SalesAndPromotion.create(salesAndPromotionData).exec(function (err, createResult) {
                         if (err) res.send(err);
                         else {
                             sails.log.info('Successfully Create Sales And Promotion');
@@ -37,6 +37,18 @@ module.exports = {
                     res.send(200, updateResult);
                 }
             }
+        });
+    },
+
+
+    getListOfSalesAndPromotions : function(req,res){
+        var appId = req.param('appId');
+        var searchQuery = {
+            appId: appId
+        };
+        SalesAndPromotion.find(searchQuery).exec(function (err, salesAndPromotion) {
+            if (err) res.send(err);
+            res.send(salesAndPromotion);
         });
     }
 };

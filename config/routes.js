@@ -321,9 +321,12 @@ module.exports.routes = {
      */
     'GET /edit/getClientToken': 'edit/commerce/BraintreeController.getClientToken',
     'POST /edit/sale': 'edit/commerce/BraintreeController.sale',
-    'POST /edit/paymentMethods': 'edit/commerce/BraintreeController.paymentMethods', 
+    'POST /edit/paymentMethods': 'edit/commerce/BraintreeController.paymentMethods',
+        /**
+         * salesAndPromotionsController
+         */  
     'POST /edit/saveSalesAndPromotion': 'edit/salesAndPromotion/SalesAndPromotionController.saveSalesAndPromotion',
+    'GET /edit/getListOfSalesAndPromotions': 'edit/salesAndPromotion/SalesAndPromotionController.getListOfSalesAndPromotions',
         
-    
 
 };
