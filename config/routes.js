@@ -244,6 +244,7 @@ module.exports.routes = {
      * Template Data
      ***/
 
+    'GET /templates/viewTemplateUrl': 'template/TemplateController.viewTemplateUrl',
     'GET /templates/getContactUs': 'template/TemplateController.getContactUs',
     'GET /templates/getSpecificChild': 'template/TemplateController.getSpecificChild',
     'GET /templates/getProductsByAppId': 'template/TemplateController.getSubChildsByAppId',
