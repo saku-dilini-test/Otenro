@@ -15,6 +15,9 @@ module.exports = {
         templateViewName: {
             type: 'string'
         },
+        templateType: {
+            type: 'string'
+        },
         templateViewDesc: {
             type: 'string'
         },
@@ -66,6 +69,7 @@ module.exports = {
         {
             template_name : 'foodDemoApp',
             templateViewName : 'Hawthorn',
+            templateType: 'ecommerce',
             templateViewDesc : 'A clean and distinct template that immediately engages with the user',
             gifImageUrl : 'foodDeliver/food.jpg',
             imageUrl : 'foodDeliver/foodDeliver.png',
@@ -75,6 +79,7 @@ module.exports = {
         {
             template_name : 'foodDemoApp2',
             templateViewName : 'Hawaii',
+            templateType: 'ecommerce',
             templateViewDesc : 'A bold grid-style theme, perfect for lifestyle, clothing, and product imagery',
             gifImageUrl : 'foodDeliver2/clothing.png',
             imageUrl : 'foodDeliver2/foodDeliver2.png',
@@ -84,6 +89,7 @@ module.exports = {
         {
             template_name : 'clothingApp',
             templateViewName : 'Colombo',
+            templateType: 'ecommerce',
             templateViewDesc : 'Designed to beautifully showcase your brand and products',
             gifImageUrl : 'clothingApp/clothing2.png',
             imageUrl : 'clothingApp/clothing.jpg',
@@ -93,6 +99,7 @@ module.exports = {
         {
             template_name : 'GlamourUpApp',
             templateViewName : 'Glamour Up',
+            templateType: 'ecommerce',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             gifImageUrl : 'GlamourUpApp/clothing2.png',
             imageUrl : 'GlamourUpApp/clothing.jpg',
@@ -102,6 +109,7 @@ module.exports = {
         {
             template_name : 'CrushApp',
             templateViewName : 'Crush Surf Shop',
+            templateType: 'ecommerce',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
             gifImageUrl : 'CrushApp/clothing2.png',
             imageUrl : 'CrushApp/clothing.jpg',
@@ -111,6 +119,7 @@ module.exports = {
         {
             template_name : 'hkRising',
             templateViewName : 'The Peak',
+            templateType: 'article',
             templateViewDesc : 'Clean, simple, and focused on an elegant user experience. Ideal for media and blog apps.',
             gifImageUrl : 'hkRising/hkRising1.png',
             imageUrl : 'hkRising/hkRising.png',
@@ -120,6 +129,7 @@ module.exports = {
         {
             template_name : 'ECommerceApp',
             templateViewName : 'Rome',
+            templateType: 'ecommerce',
             templateViewDesc : 'Tailor-made for modern restaurants and clothing store with a tinder type swipe to navigate through your product.',
             imageUrl : 'ECommerceApp/ECommerceApp.png',
             gifImageUrl : 'ECommerceApp/ecommerce.png',
@@ -129,6 +139,7 @@ module.exports = {
         {
             template_name : 'fashionApp',
             templateViewName : 'Cali',
+            templateType: 'article',
             templateViewDesc : 'Striking, scalable, and built to boost engagement.',
             imageUrl : 'fashionApp/fashionApp.png',
             gifImageUrl : 'fashionApp/fashion.png',
