@@ -6,7 +6,6 @@
  */
 
 module.exports = {
-
   schema: true,
   attributes: {
     templateName :{
