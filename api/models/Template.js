@@ -109,6 +109,15 @@ module.exports = {
             templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
+            template_name : 'HeadphoneApp',
+            templateViewName : 'Headphone App',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
+            gifImageUrl : 'HeadphoneApp/headphoneAppGif.png',
+            imageUrl : 'HeadphoneApp/headphoneApp.jpg',
+            templateFilesPath:'templates/HeadphoneApp',
+            templateCategory: TemplateCategoryDetails.Business.ID
+        },
+        {
             template_name : 'hkRising',
             templateViewName : 'The Peak',
             templateViewDesc : 'Clean, simple, and focused on an elegant user experience. Ideal for media and blog apps.',
@@ -139,8 +148,8 @@ module.exports = {
             template_name : 'RecipeApp',
             templateViewName : 'Recipe App',
             templateViewDesc : 'Striking, scalable, and built to boost engagement.',
-            imageUrl : 'recipeApp/recipeApp.png',
-            gifImageUrl : 'recipeApp/recipeAppGif.png',
+            imageUrl : 'RecipeApp/recipeApp.png',
+            gifImageUrl : 'RecipeApp/recipeAppGif.png',
             templateFilesPath:'templates/RecipeApp',
             templateCategory: TemplateCategoryDetails.Media.ID
         }
