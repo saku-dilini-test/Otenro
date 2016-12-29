@@ -15,6 +15,9 @@ module.exports = {
             type: 'string',
             required: true
         },
+        registeredUser : {
+            type: 'string'
+        },
         orderId  : {
             type: 'string'
         },
