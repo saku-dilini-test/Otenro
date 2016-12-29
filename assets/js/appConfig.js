@@ -1,4 +1,3 @@
-//53w5
 (function(){
     "use strict";
     angular.module("app").config(function($provide){
