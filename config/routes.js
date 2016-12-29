@@ -321,7 +321,23 @@ module.exports.routes = {
      */
     'GET /edit/getClientToken': 'edit/commerce/BraintreeController.getClientToken',
     'POST /edit/sale': 'edit/commerce/BraintreeController.sale',
-    'POST /edit/paymentMethods': 'edit/commerce/BraintreeController.paymentMethods'
-    
+    'POST /edit/paymentMethods': 'edit/commerce/BraintreeController.paymentMethods',
+
+
+    /***
+     * Help
+     * */
+
+    'GET /edit/getcommeceFile': 'edit/commerce/HelpController.getcommeceFile',
+    'GET /edit/getstyleFile': 'edit/commerce/HelpController.getstyleFile',
+    'GET /edit/getcategoryFile': 'edit/commerce/HelpController.getcategoryFile',
+    'GET /edit/getorderFile': 'edit/commerce/HelpController.getorderFile',
+    'GET /edit/getinventoryFile': 'edit/commerce/HelpController.getinventoryFile',
+    'GET /edit/gettaxFile': 'edit/commerce/HelpController.gettaxFile',
+    'GET /edit/getemailFile': 'edit/commerce/HelpController.getemailFile',
+    'GET /edit/getshippingFile': 'edit/commerce/HelpController.getshippingFile',
+    'GET /edit/getstoreFile': 'edit/commerce/HelpController.getstoreFile',
+    'GET /edit/getpaymentfile': 'edit/commerce/HelpController.getpaymentfile'
+
 
 };
