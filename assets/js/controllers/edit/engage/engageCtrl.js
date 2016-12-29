@@ -38,12 +38,6 @@
             return engageService.showPushMessageSendDialog();
         };
 
-        //    // get all app registered user
-        //
-        // $scope.showAppUserDialog=function(){
-        //     return engageService.showAppUserDialog();
-        // };
-
         $scope.hide = function() {
             $mdDialog.hide();
         };
