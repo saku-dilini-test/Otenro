@@ -1,4 +1,3 @@
-
 (function(){
     "use strict";
     angular.module("app").config(function($provide){
@@ -20,7 +19,7 @@
             },
             'preferredLocale': 'en_US'
         })
-        .constant('ME_APP_SERVER','http://cdn.otenro.com/')
+        .constant('ME_APP_SERVER','http://localhost:80/meServer/')
         .config(function($urlRouterProvider,$httpProvider, $authProvider, SERVER_URL,uiGmapGoogleMapApiProvider) {
 
             $authProvider.loginRedirect = '/dashboard';

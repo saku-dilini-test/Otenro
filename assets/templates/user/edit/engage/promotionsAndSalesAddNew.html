@@ -481,7 +481,7 @@
 
                                     <md-input-container class="md-block" flex="50">
                                         <label>Discount</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="discount">
+                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="singleProduct.discount">
                                         <div ng-messages="singleProductForm.discount.$error" ng-show="singleProductForm.discount.$dirty">
                                             <div ng-message="required">Name is required.</div>
                                             <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>

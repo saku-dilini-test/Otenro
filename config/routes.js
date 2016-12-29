@@ -64,6 +64,7 @@ module.exports.routes = {
     'POST /api/dashboard/getSelectedCategory': 'DashboardController.getSelectedCategory',
     'POST /api/dashboard/getSelectedCategoryDashboard': 'DashboardController.getSelectedCategoryDashboard',
     'POST /app/designApps': 'ApplicationController.designApps',
+    'POST /app/getAppsCommerce': 'ApplicationController.getAppsCommerce',
     'POST /app/viewTemplate': 'ApplicationController.viewTemplate',
     'GET /api/getTemplateMetaData': 'DashboardController.getTemplateMetaData',
     'GET /app/getIconAllowance': 'ApplicationController.iconAllowance',
@@ -321,9 +322,12 @@ module.exports.routes = {
      */
     'GET /edit/getClientToken': 'edit/commerce/BraintreeController.getClientToken',
     'POST /edit/sale': 'edit/commerce/BraintreeController.sale',
-    'POST /edit/paymentMethods': 'edit/commerce/BraintreeController.paymentMethods', 
+    'POST /edit/paymentMethods': 'edit/commerce/BraintreeController.paymentMethods',
+        /**
+         * salesAndPromotionsController
+         */  
     'POST /edit/saveSalesAndPromotion': 'edit/salesAndPromotion/SalesAndPromotionController.saveSalesAndPromotion',
+    'GET /edit/getListOfSalesAndPromotions': 'edit/salesAndPromotion/SalesAndPromotionController.getListOfSalesAndPromotions',
         
-    
 
 };
