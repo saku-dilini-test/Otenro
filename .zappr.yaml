@@ -1,0 +1,5 @@
+commit:
+  message:
+    patterns: # commit message has to match any one of
+      - "^#[0-9]+" # starts with hash and digits
+      - "^[A-Z]+-[0-9]+" # starts with uppercase letters, a dash and digits
