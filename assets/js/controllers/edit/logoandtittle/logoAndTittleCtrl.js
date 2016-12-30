@@ -1,9 +1,11 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("LogoAndTittleCtrl",
-        ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','logoAndTittleService','ME_APP_SERVER','$auth','mySharedService',LogoAndTittleCtrl]);
+        ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','logoAndTittleService','ME_APP_SERVER',
+        '$auth','mySharedService','SERVER_URL',LogoAndTittleCtrl]);
 
-    function LogoAndTittleCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,logoAndTittleService,ME_APP_SERVER,$auth,mySharedService) {
+    function LogoAndTittleCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,logoAndTittleService,ME_APP_SERVER,
+            $auth,mySharedService,SERVER_URL) {
 
 
         $scope.thumbPic = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/header.jpg?time='+new Date().getTime();
@@ -20,8 +22,8 @@
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function(data, status, headers, config) {
 
-                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                        +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
+                    $scope.appTemplateUrl =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
                     toastr.success('Header image changed  ', 'Awesome!', {

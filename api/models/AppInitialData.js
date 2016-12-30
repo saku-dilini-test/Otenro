@@ -2096,6 +2096,427 @@ module.exports = {
                 ]
               }
               ]
+          },
+          {
+            templateName : 'HeadphoneApp',
+            secondNavi : [
+              {
+                attribute : {
+                  "imageUrl": "1.JPG",
+                  "name": "B&O Earphones",
+                  "description": "New Arrivals description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "H3 In-Ear",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "15.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "H3 In-Ear",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "15.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "A8 Earphones",
+                    "price": 350,
+                    "quantity": 350,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt y brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "16.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "A8 Earphones",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "350",
+                      'quantity': 350
+                    }],
+                    "imageUrl": "16.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Earset 3i",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "17.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Earset 3i",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "imageUrl": "17.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },{
+                attribute : {
+                  "imageUrl": "2.JPG",
+                  "name": "B&O Bluetooth",
+                  "description": "B&O Speakers",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Beoplay A1 ",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "18.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Beoplay A1 ",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "18.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "A2 Bluetooth",
+                    "price": 350,
+                    "quantity": 350,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt y brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "19.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "A2 Bluetooth",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "350",
+                      'quantity': 350
+                    }],
+                    "imageUrl": "19.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "A2 Silver",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "20.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "A2 Silver",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "imageUrl": "20.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },
+              {
+                attribute : {
+                  "imageUrl": "3.JPG",
+                  "name": "B&O Wall Speakers",
+                  "description": "Men",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "BeoVox 1",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Short x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "21.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "BeoVox 1",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "21.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },
+              {
+                attribute : {
+                  "imageUrl": "4.JPG",
+                  "name": "B&O Headphones",
+                  "description": "Shoes description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Form2i",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "11.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Form2i",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "11.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "H8 Wireless",
+                    "price": 130,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "12.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "H8 Wireless",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "12.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Beoplay H8",
+                    "price": 160,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "13.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Beoplay H8",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "13.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Beoplay H2",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "14.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Beoplay H2",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "14.JPG",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },
+              {
+                attribute : {
+                  "imageUrl": "5.JPG",
+                  "name": "B&O Speakers",
+                  "description": "Kids description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "BeoLab 90",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "22.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "BeoLab 90",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "22.jpg",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Beosound 9000",
+                    "price": 130,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "23.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Beosound 9000",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "23.jpg",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Beoplay A9",
+                    "price": 160,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "24.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Beoplay A9",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "130",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "24.jpg",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Beolab 5",
+                    "price": 150,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "25.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Beolab 5",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "150",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "25.jpg",
+                    "createdDate": Date.now()
+                  }
+                ]
+              }
+              ]
           }
   ]
 };
