@@ -68,7 +68,7 @@ module.exports = {
             }
         }
 
-        if(templateName == 'clothingApp' || templateName == 'GlamourUpApp'|| templateName == 'CrushApp'){
+        if(templateName == 'clothingApp' || templateName == 'GlamourUpApp'|| templateName == 'CrushApp'|| templateName == 'HeadphoneApp'){
             loginPath = '/#/app/category';
             isApplyStyle = {
                 color : {

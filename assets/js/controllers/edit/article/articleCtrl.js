@@ -100,7 +100,9 @@
             $scope.article = initialData;
             $scope.serverImg = initialData.imageUrl;
             $scope.mainImg = initialData.imageUrl;
-            $scope.picFile = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/article/'+initialData.imageUrl;
+            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                           +"&appId="+item.id+"&"+new Date().getTime()+"/";
+            $scope.picFile = urlPath+'/img/article/'+initialData.imageUrl;
             $scope.tmpImage[0] = SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article/"+initialData.imageUrl;
 
@@ -223,8 +225,9 @@
                         });
 
                         var catId = result.categoryId;
-                        $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                            +'/templates/'+$rootScope.appId+'' +
+                        var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                       +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                        $scope.appTemplateUrl = urlPath+'' +
                             '#/app/home/'+catId+'?'+new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
@@ -312,8 +315,9 @@
                         closeButton: true
                     });
                     var catId = result.id;
-                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                        +'/templates/'+$rootScope.appId+'' +
+                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                    $scope.appTemplateUrl = urlPath+'' +
                         '#/app/home/'+catId+'?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (error) {
@@ -333,8 +337,9 @@
                     toastr.success('Article has been  successfully deleted ', 'Message', {
                         closeButton: true
                     });
-                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                        +'/templates/'+$rootScope.appId+'' +
+                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                    $scope.appTemplateUrl = urlPath+'' +
                         '#/app/home/firstMenu?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (error) {

@@ -6,17 +6,62 @@
         '$mdDialog', '$http', '$rootScope', 'SERVER_URL','$q', engageService
     ]);
 
-
-
     function engageService($mdDialog, $http, $rootScope, SERVER_URL, $q) {
         return {
             showPushMessageDialog: function() {
                 return $mdDialog.show({
                     controller: 'EngageCtrl',
                     templateUrl: 'user/edit/engage/pushMessageView.html',
+                    clickOutsideToClose: true
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+            showPushMessageSendDialog: function() {
+                return $mdDialog.show({
+                    controller: 'EngageCtrl',
+                    templateUrl: 'user/edit/engage/pushMessageSendView.html',
+                    clickOutsideToClose: true
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+            showPromotionsAndSalesDialog: function() {
+                return $mdDialog.show({
+                    controller: 'SalesAndPromotionCtrl',
+                    templateUrl: 'user/edit/engage/promotionsAndSalesView.html',
+                    clickOutsideToClose: true
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+            showPromotionsAndSalesAddNewDialog: function() {
+                return $mdDialog.show({
+                    controller: 'SalesAndPromotionCtrl',
+                    templateUrl: 'user/edit/engage/promotionsAndSalesAddNew.html',
+                    clickOutsideToClose: true
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+
+
+            //Get  All order Details
+            showAllordersView: function(data) {
+                return $mdDialog.show({
+                    controller: 'EngageCtrl',
+                    templateUrl: 'user/edit/engage/registerUserView.html',
                     clickOutsideToClose: true,
-                    locals : {
-                        initialData : data
+                    locals: {
+                        initialData: data
                     }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
@@ -41,36 +86,12 @@
                 });
             },
 
-            //Get  All order Details
-            showAllordersView: function(data) {
-                return $mdDialog.show({
-                    controller: 'EngageCtrl',
-                    templateUrl: 'user/edit/engage/registerUserView.html',
-                    clickOutsideToClose: true,
-                    locals: {
-                        initialData: data
-                    }
-                }).then(function(answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
-                }, function() {
-                    //$scope.status = 'You cancelled the dialog.';
-                });
-            },
 
-            showPushMessageSendDialog: function() {
-                return $mdDialog.show({
-                    controller: 'EngageCtrl',
-                    templateUrl: 'user/edit/engage/pushMessageSendView.html',
-                    clickOutsideToClose: true,
-                    locals: {
-                        initialData: null
-                    }
-                }).then(function(answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
-                }, function() {
-                    //$scope.status = 'You cancelled the dialog.';
-                });
-            },
+
+
+
+
+
             sendPushMessage: function(data){
                 return $http.post(SERVER_URL+ 'edit/sendPushMessage',data);
             },

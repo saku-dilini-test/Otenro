@@ -1,6 +1,7 @@
 module.exports = {
 
     ME_SERVER: sails.config.ME_SERVER,
+    ME_SERVER_URL: sails.config.ME_SERVER_URL,
     APP_FILE_SERVER: sails.config.APP_FILE_SERVER,
 
     server: {
