@@ -10,9 +10,10 @@
     'use strict';
     angular.module('app')
         .controller('DashboardCtrl', ['$scope','dashboardService','toastr','$state','$auth','ME_APP_SERVER',
-            'mySharedService','$rootScope', DashboardCtrl]);
+            'mySharedService','$rootScope', 'SERVER_URL', DashboardCtrl]);
 
-    function DashboardCtrl($scope, dashboardService,toastr,$state,$auth,ME_APP_SERVER,mySharedService,$rootScope) {
+    function DashboardCtrl($scope, dashboardService,toastr,$state,$auth,ME_APP_SERVER,mySharedService,$rootScope,
+            SERVER_URL) {
         dashboardService.getAllApps().success(function (data) {
             $rootScope.widgets=data;
             $scope.path = ME_APP_SERVER+"temp/";
@@ -40,10 +41,10 @@
             })
         }else{
 
-            var url= ME_APP_SERVER+'temp/'+item.userId
-                +'/templates/'+item.id+'/?'+new Date().getTime();
+            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                           +"&appId="+item.id+"&"+new Date().getTime()+"/";
 
-            mySharedService.prepForBroadcast(url);
+            mySharedService.prepForBroadcast(urlPath);
             $state.go('user.editApp',{appId: item.id});
         }
       }

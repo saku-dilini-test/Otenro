@@ -181,8 +181,10 @@
                     this.confirm = function click(){
                         if($scope.templateCategory == tempCatBusiness){
                             mainMenuService.deleteData(item).success(function(data) {
-                                $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                    +'/templates/'+$rootScope.appId+'' +
+
+                                var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                               +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                $scope.appTemplateUrl = urlPath+'' +
                                     '#/app/update?'+new Date().getTime();
                                 mySharedService.prepForBroadcast($scope.appTemplateUrl);
                                 return mainMenuService.showMainMenuDialog();
@@ -192,8 +194,9 @@
                         }
                         if($scope.templateCategory == tempCatMedia){
                             articleService.deleteCategory(item).success(function(data) {
-                                $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                    +'/templates/'+$rootScope.appId+'' +
+                                var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                               +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                $scope.appTemplateUrl = urlPath+'' +
                                     '#/app/update?'+new Date().getTime();
                                 mySharedService.prepForBroadcast($scope.appTemplateUrl);
                                 return mainMenuService.showMainMenuDialog();
@@ -248,8 +251,9 @@
             if($scope.initialData.menu == 'addNewMenuNavigation'){
                 //console.log("Add new Menu Navigation ");
                 mainMenuService.addMenu(file,$rootScope.appId,menu.name).success(function(data) {
-                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                        +'/templates/'+$rootScope.appId+'' +
+                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                    $scope.appTemplateUrl = urlPath+'' +
                         '#/app/home/'+data.id+'?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     toastr.success("New Category Added", 'Message', {closeButton: true});
@@ -266,8 +270,9 @@
             if($scope.mainImg == $scope.serverImage){
                 //console.log("Only Update Menu Name ");
                 mainMenuService.updateSecondNavi(menu).success(function(data) {
-                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                        +'/templates/'+$rootScope.appId+'' +
+                var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                              +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                    $scope.appTemplateUrl = urlPath+'' +
                         '#/app/home/'+data.id+'?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     toastr.success("Successfully updated category", 'Message', {closeButton: true});
@@ -290,8 +295,9 @@
                     // update image name set to imageUrl in menu collection
                     menu.imageUrl = data.imageUrl;
                     mainMenuService.updateSecondNavi(menu).success(function(data) {
-                        $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                            +'/templates/'+$rootScope.appId+'' +
+                        var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                       +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                        $scope.appTemplateUrl = urlPath+'' +
                             '#/app/home/'+data.id+'?'+new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                         toastr.success("New Category Added", 'Message', {closeButton: true});
@@ -331,8 +337,9 @@
             if($scope.initialData.menu == 'addNewMenuCategory') {
                 mainMenuService.addNewCategory(file, $rootScope.appId, menu.name)
                     .success(function (data) {
-                        $scope.appTemplateUrl = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
-                            + '/templates/' + $rootScope.appId + '' +
+                        var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                       +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                        $scope.appTemplateUrl = urlPath + '' +
                             '#/app/home/' + data.id + '?' + new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                         toastr.success("New category has been added successfully", 'Message', {closeButton: true});
@@ -347,8 +354,9 @@
             if($scope.mainImg == $scope.serverImage){
                 articleService.editCategory(menu)
                     .success(function (data) {
-                        $scope.appTemplateUrl = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
-                            + '/templates/' + $rootScope.appId + '' +
+                        var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                       +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                        $scope.appTemplateUrl = urlPath + '' +
                             '#/app/home/' + data.id + '?' + new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                         toastr.success("New category has been added successfully", 'Message', {closeButton: true});
@@ -369,8 +377,10 @@
                     console.log(menu);
                     articleService.editCategory(menu)
                         .success(function (data) {
-                            $scope.appTemplateUrl = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
-                                + '/templates/' + $rootScope.appId + '' +
+
+                            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                           +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                            $scope.appTemplateUrl = urlPath + '' +
                                 '#/app/home/' + data.id + '?' + new Date().getTime();
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             toastr.success("Successfully edited category", 'Message', {closeButton: true});
