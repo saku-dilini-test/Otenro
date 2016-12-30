@@ -5,18 +5,17 @@
     angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService',
         'commerceService','articleService','mainMenuService', 'currencyService',
         'publishService', 'engageService', 'logoAndTittleService','aboutUsService',
-        'policiesService','comingSoonService', 'templateService','salesAndPromotionService',dialogService]);
+        'policiesService','comingSoonService', dialogService]);
 
     function dialogService(stylesService, contactUsService,
                            commerceService, articleService ,mainMenuService,
                            currencyService, publishService, engageService,
-                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService,salesAndPromotionService) {
-
+                           logoAndTittleService,aboutUsService,policiesService,comingSoonService) {
         return {
             showDialog: function(clickTitle) {
 
                 if ('templates'==clickTitle)
-                    return templateService.showTemplateDialog();
+                    return comingSoonService.showComingSoonDialog();
                 if ('checkoutPageStyle'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('lockedPages'==clickTitle)
@@ -27,8 +26,8 @@
                     return comingSoonService.showComingSoonDialog();
                 if ('madeEasyBadge'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
-                if ('users'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+                // if ('users'==clickTitle)
+                //     return comingSoonService.showComingSoonDialog();
                 if ('emailMarketing'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('popUpMessages'==clickTitle)
@@ -67,8 +66,6 @@
                     return comingSoonService.showComingSoonDialog();
                 if ('domain'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
-                if ('users'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
                 if ('seo'==clickTitle)
                     return comingSoonService.showComingSoonDialog();
                 if ('socialMedia'==clickTitle)
@@ -87,6 +84,8 @@
                     return stylesService.showStyleDialog(clickTitle);
                 if ('logoAndTitle' == clickTitle)
                     return logoAndTittleService.showLogoAndTittleDialog(clickTitle);
+                if ('users' == clickTitle)
+                    return engageService.showAppUserDialog(clickTitle);
                 /*if ('navigation' == clickTitle)
                     return mainMenuService.showMainMenuDialog(clickTitle);*/
                 if ('products' == clickTitle)
@@ -118,7 +117,7 @@
                 if ('pushMessages' == clickTitle)
                     return engageService.showPushMessageDialog(clickTitle);
                 if ('promotionsAndSales'==clickTitle)
-                    return salesAndPromotionService.showPromotionsAndSalesDialog();
+                    return engageService.showPromotionsAndSalesDialog();
                 if ('profile' == clickTitle)
                     return engageService.showProfileDialog(clickTitle);
                 if ('styleEditBackgroundImage' == clickTitle)
