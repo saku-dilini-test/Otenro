@@ -44,6 +44,22 @@
                     file: file
                 });
             },
+
+
+            //Get  One order Details
+            showOneOrderDialog: function() {
+                return $mdDialog.show({
+                    controller: 'CommerceCtrl',
+                    templateUrl: 'user/edit/engage/OrderDetailsView.html',
+                    clickOutsideToClose: true
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+
+
             updateCategoryImage: function (file, imageUrl, catId, appId) {
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
