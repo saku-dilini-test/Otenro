@@ -285,6 +285,15 @@ module.exports = {
     },
 
     /**
+     * return template url for given userID & appID & img ( template path )
+     * @param req
+     * @param res
+     */
+    viewTemplateUrl : function(req,res){
+        res.redirect(config.ME_SERVER_URL + req.param('userId') + '/templates/' + req.param('appId'));
+    },
+
+    /**
      * return two dummy comments json object for every request
      *
      * @param req

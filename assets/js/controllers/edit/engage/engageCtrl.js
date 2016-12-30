@@ -1,12 +1,11 @@
 (function() {
     'use strict';
-    angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr',
-        'engageService', '$http', 'SERVER_URL','initialData', EngageCtrl]);
+    angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr', 'engageService', '$http', 'SERVER_URL', EngageCtrl]);
 
 
 
 
-    function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL, initialData) {
+    function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL, initialData ) {
 
 
         //get all app registered user details
