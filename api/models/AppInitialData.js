@@ -29,6 +29,7 @@ module.exports = {
             "name": "Salads",
             "description": "Salads description",
             "enteredBy":"demo"
+
           },
           thirdNavi : [
             {
@@ -36,6 +37,7 @@ module.exports = {
               "price": 100,
               "quantity": 100,
               "imageUrl": "sa1.jpeg",
+              "published":"YES",
               "tempImageArray" : [
                 {
                   "img" : "sa1.jpeg"
@@ -60,6 +62,7 @@ module.exports = {
               "price": 200,
               "quantity": 200,
               "imageUrl": "sa2.jpg",
+              "published":"YES",
               "tempImageArray" : [
                 {
                   "img" : "sa2.jpg"
@@ -114,6 +117,7 @@ module.exports = {
               "price": 100,
               "quantity": 100,
               "imageUrl": "da1.jpg",
+              "published":"YES",
               "tempImageArray" : [
                 {
                   "img" : "da1.jpg"
@@ -188,6 +192,7 @@ module.exports = {
               "price": 100,
               "quantity": 100,
               "imageUrl": "st1.jpg",
+              "published":"YES",
               "tempImageArray" : [
                 {
                   "img" : "st1.jpg"
@@ -212,6 +217,7 @@ module.exports = {
               "price": 200,
               "quantity": 200,
               "imageUrl": "st2.jpg",
+              "published":"YES",
               "tempImageArray" : [
                 {
                   "img" : "st2.jpg"
@@ -236,6 +242,7 @@ module.exports = {
               "price": 300,
               "quantity": 300,
               "imageUrl": "st3.jpg",
+              "published":"YES",
               "tempImageArray" : [
                 {
                   "img" : "st3.jpg"
@@ -277,6 +284,7 @@ module.exports = {
                 'quantity': 400
               }],
               "imageUrl": "st4.jpg",
+              "published":"YES",
               "createdDate": Date.now()
             }
           ]
@@ -347,6 +355,7 @@ module.exports = {
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "imageUrl": "shirt_x.png",
+              "published":"YES",
               "tempImageArray" : [
                 {
                   "img" : "shirt_x.png"
@@ -384,6 +393,7 @@ module.exports = {
                 'quantity': 350
               }],
               "imageUrl": "shirt_y.png",
+              "published":"YES",
               "createdDate": Date.now()
             },
             {
@@ -408,6 +418,7 @@ module.exports = {
                 'quantity': 450
               }],
               "imageUrl": "shirt_z.png",
+              "published":"YES",
               "createdDate": Date.now()
             }
           ]
@@ -441,6 +452,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
+              "published":"YES",
               "imageUrl": "short_x.png",
               "createdDate": Date.now()
             }
@@ -492,6 +504,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
+              "published":"YES",
               "imageUrl": "cloth3.png",
               "createdDate": Date.now()
             }
@@ -531,6 +544,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
+              "published":"YES",
               "imageUrl": "a.png",
               "createdDate": Date.now()
             },
@@ -555,6 +569,7 @@ module.exports = {
                 'price': "350",
                 'quantity': 350
               }],
+              "published":"YES",
               "imageUrl": "b.png",
               "createdDate": Date.now()
             },
@@ -579,6 +594,7 @@ module.exports = {
                 'price': "450",
                 'quantity': 450
               }],
+              "published":"YES",
               "imageUrl": "c.png",
               "createdDate": Date.now()
             }
@@ -612,6 +628,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
+              "published":"YES",
               "imageUrl": "d.jpeg",
               "createdDate": Date.now()
             },
@@ -636,6 +653,7 @@ module.exports = {
                 'price': "350",
                 'quantity': 350
               }],
+              "published":"YES",
               "imageUrl": "e.jpeg",
               "createdDate": Date.now()
             },
@@ -660,6 +678,7 @@ module.exports = {
                 'price': "450",
                 'quantity': 450
               }],
+              "published":"YES",
               "imageUrl": "f.jpg",
               "createdDate": Date.now()
             }
@@ -694,6 +713,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
+              "published":"YES",
               "imageUrl": "h.png",
               "createdDate": Date.now()
             }
@@ -728,6 +748,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
+              "published":"YES",
               "imageUrl": "g.png",
               "createdDate": Date.now()
             }
@@ -765,6 +786,7 @@ module.exports = {
                 'price': "250",
                 'quantity': 250
               }],
+              "published":"YES",
               "imageUrl": "1.jpg",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
@@ -790,6 +812,7 @@ module.exports = {
                 'quantity': 100
               }],
               "imageUrl": "2.jpg",
+              "published":"YES",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "createdDate": Date.now()
@@ -825,6 +848,7 @@ module.exports = {
                 'quantity': 100
               }],
               "imageUrl": "3.jpg",
+              "published":"YES",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "createdDate": Date.now()
@@ -849,6 +873,7 @@ module.exports = {
                 'quantity': 15
               }],
               "imageUrl": "4.jpg",
+              "published":"YES",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "createdDate": Date.now()
@@ -1424,6 +1449,7 @@ module.exports = {
                       'price': "450",
                       'quantity': 450
                     }],
+                    "published":"YES",
                     "imageUrl": "17.JPG",
                     "createdDate": Date.now()
                   }
@@ -1457,6 +1483,7 @@ module.exports = {
                       'price': "250",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "18.JPG",
                     "createdDate": Date.now()
                   },
@@ -1481,6 +1508,7 @@ module.exports = {
                       'price': "350",
                       'quantity': 350
                     }],
+                    "published":"YES",
                     "imageUrl": "19.JPG",
                     "createdDate": Date.now()
                   },
@@ -1572,6 +1600,7 @@ module.exports = {
                       'price': "150",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "11.JPG",
                     "createdDate": Date.now()
                   },
@@ -1595,6 +1624,7 @@ module.exports = {
                       'price': "130",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "12.JPG",
                     "createdDate": Date.now()
                   },
@@ -1618,6 +1648,7 @@ module.exports = {
                       'price': "130",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "13.JPG",
                     "createdDate": Date.now()
                   },
@@ -1641,6 +1672,7 @@ module.exports = {
                       'price': "150",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "14.JPG",
                     "createdDate": Date.now()
                   }
@@ -1680,6 +1712,7 @@ module.exports = {
                       'price': "250",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "15.JPG",
                     "createdDate": Date.now()
                   },
@@ -1704,6 +1737,7 @@ module.exports = {
                       'price': "350",
                       'quantity': 350
                     }],
+                    "published":"YES",
                     "imageUrl": "16.JPG",
                     "createdDate": Date.now()
                   },
@@ -1761,6 +1795,7 @@ module.exports = {
                       'price': "250",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "18.JPG",
                     "createdDate": Date.now()
                   },
@@ -1809,6 +1844,7 @@ module.exports = {
                       'price': "450",
                       'quantity': 450
                     }],
+                    "published":"YES",
                     "imageUrl": "20.JPG",
                     "createdDate": Date.now()
                   }
@@ -1843,6 +1879,7 @@ module.exports = {
                       'price': "250",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "21.JPG",
                     "createdDate": Date.now()
                   }
@@ -1876,6 +1913,7 @@ module.exports = {
                       'price': "150",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "11.JPG",
                     "createdDate": Date.now()
                   },
@@ -1899,6 +1937,7 @@ module.exports = {
                       'price': "130",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "12.JPG",
                     "createdDate": Date.now()
                   },
@@ -1922,6 +1961,7 @@ module.exports = {
                       'price': "130",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "13.JPG",
                     "createdDate": Date.now()
                   },
@@ -1945,6 +1985,7 @@ module.exports = {
                       'price': "150",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "14.JPG",
                     "createdDate": Date.now()
                   }
@@ -1978,6 +2019,7 @@ module.exports = {
                       'price': "150",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "22.jpg",
                     "createdDate": Date.now()
                   },
@@ -2024,6 +2066,7 @@ module.exports = {
                       'price': "130",
                       'quantity': 250
                     }],
+                    "published":"YES",
                     "imageUrl": "24.jpg",
                     "createdDate": Date.now()
                   },
