@@ -7,6 +7,7 @@
         'publishService', 'engageService', 'logoAndTittleService','aboutUsService',
         'policiesService','comingSoonService', 'templateService','salesAndPromotionService',dialogService]);
 
+
     function dialogService(stylesService, contactUsService,
                            commerceService, articleService ,mainMenuService,
                            currencyService, publishService, engageService,
