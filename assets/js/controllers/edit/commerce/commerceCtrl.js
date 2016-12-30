@@ -576,8 +576,9 @@
                             toastr.success('Store Setting Details has been added successfully', 'Awesome', {
                                 closeButton: true
                             });
-                            $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                +'/templates/'+$rootScope.appId+'' +
+                            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                           +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                            $scope.appTemplateUrl = urlPath+'' +
                                 '#/app/aboutUs';
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $scope.selectedTab = current;
