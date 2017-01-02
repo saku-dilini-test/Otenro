@@ -42,7 +42,7 @@ Change the <Directory "/var/www> to <Directory "/var/www/html/meServer"> and sho
     Allow from 127.0.0.1 ::1 localhost 192.168
 </Directory>
 
-Restart Apache server by the command "sudo service httpd restart".
+Restart Apache server by the command "sudo service httpd restart"
 
 Apache version 2.4
 
@@ -55,5 +55,5 @@ Do the below changes in apache2.conf file
         </RequireAll>
 </Directory>
 
-Restart Apache server by the command "sudo service apache2 restart".
+Restart Apache server by the command "sudo service apache2 restart"
 
