@@ -51,7 +51,7 @@ angular.module('app', [
   'ngImgCrop'
 
 
-]).run(function($rootScope, $state, $auth,Auth,Permission) {
+]).run(function($rootScope, $state, $auth,Auth,Permission,$log) {
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
     if (!Auth.authorize(toState.data.access)){
@@ -60,7 +60,8 @@ angular.module('app', [
     }
   });
 
-  console.log(JSON.stringify($auth.getPayload()));
+    $log.debug('TEST Log');
+
 
   Permission.defineRole('Admin', function (stateParams) {
     // If the returned value is *truthy* then the user has the role, otherwise they don't

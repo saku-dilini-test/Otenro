@@ -5,12 +5,12 @@
     angular.module('appEdit').controller('AppEditAreaCtrl',[
         '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER',
         'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore','currencyService',
-        'templateService','SERVER_URL',
+        'templateService','SERVER_URL','$log',
         AppEditAreaCtrl]);
 
     function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
                              toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore,currencyService,
-                             templateService,SERVER_URL){
+                             templateService,SERVER_URL,$log){
 
         $rootScope.bodyClass = 'appEdit';
 
@@ -23,8 +23,8 @@
            // $scope.changeTemplate  = changeTemp.showConfirm;
         }
 
-        console.log(localStorage.getItem('changeTemplate'));
-        console.log($scope.changeTemplate);
+        $log.debug(localStorage.getItem('changeTemplate'));
+        $log.debug($scope.changeTemplate);
 
         currencyService.getCurrency()
             .success(function (result) {

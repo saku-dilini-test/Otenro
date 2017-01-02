@@ -9,9 +9,9 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("ArticleCtrl", [
-        '$scope','$mdDialog','$auth','$rootScope','articleService','toastr','SERVER_URL','ME_APP_SERVER','mySharedService','initialData',ArticleCtrl]);
+        '$scope','$mdDialog','$auth','$rootScope','articleService','toastr','SERVER_URL','ME_APP_SERVER','mySharedService','initialData','$log',ArticleCtrl]);
 
-    function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,SERVER_URL,ME_APP_SERVER,mySharedService,initialData) {
+    function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,SERVER_URL,ME_APP_SERVER,mySharedService,initialData,$log) {
 
         $scope.appId = $rootScope.appId;
         $scope.tmpImage = [];
@@ -19,7 +19,7 @@
         $scope.isNewArticle = false;
         $scope.edit_Category = initialData;
         $scope.pageSize = 5;
-        console.log("catName " + $scope.catName);
+        $log.debug("catName " + $scope.catName);
 
         // Characters length config (Article)
         $scope.maxArticleTitle = 20;
@@ -218,7 +218,7 @@
                     .progress(function (evt) {
                         
                         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                        console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                        $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                     }).success(function (result) {
                         toastr.success('Your article has successfully been published ', 'Saved', {
                             closeButton: true
@@ -331,7 +331,7 @@
             var dataDelete = {
                 catId : data
             };
-            console.log(dataDelete);
+            $log.debug(dataDelete);
             articleService.deleteCategory(dataDelete)
                 .success(function (data) {
                     toastr.success('Article has been  successfully deleted ', 'Message', {

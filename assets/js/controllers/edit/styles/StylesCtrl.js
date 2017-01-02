@@ -2,7 +2,7 @@
     'use strict';
     angular.module("appEdit").controller("StylesCtrl",
         ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','stylesService','ME_APP_SERVER','$auth','SERVER_URL',
-        'mySharedService',StylesCtrl]);
+        'mySharedService','$log',StylesCtrl]);
 
     function StylesCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,stylesService,ME_APP_SERVER,$auth,SERVER_URL,
             mySharedService) {
@@ -295,7 +295,7 @@
                         closeButton: true
                     })
                     .error(function (res) {
-                           console.log(res);
+                           $log.debug(res);
                        toastr.error('Error changing image', 'Waring', {
                            closeButton: true
                     });
@@ -395,7 +395,7 @@
                                        +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
                         $scope.appTemplateUrl = urlPath+'/?'+new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        console.log($scope.appTemplateUrl);
+                        $log.debug($scope.appTemplateUrl);
 
                         // var tempUrl = mySharedService.url;
                         // mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());

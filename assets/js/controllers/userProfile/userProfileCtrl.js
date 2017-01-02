@@ -10,11 +10,11 @@
     'use strict';
     angular.module('app')
         .controller('userProfileCtrl',
-      ['$scope', 'userProfileResource', 'CurrentUser', 'userProfileService','Auth','$auth','$state','$mdDialog','toastr',
+      ['$scope', 'userProfileResource', 'CurrentUser', 'userProfileService','Auth','$auth','$state','$mdDialog','toastr','$log',
             userProfileCtrl
         ]);
 
-    function userProfileCtrl($scope, userProfileResource, CurrentUser, userProfileService,Auth,$auth,$state,$mdDialog,toastr) {
+    function userProfileCtrl($scope, userProfileResource, CurrentUser, userProfileService,Auth,$auth,$state,$mdDialog,toastr,$log) {
 
         $scope.password = false;
         $scope.maxMenuCategory = 20;
@@ -68,7 +68,7 @@
                 });
             }).error(function(err) {
                 $scope.password = true;
-                console.log(err);
+                $log.debug(err);
                 toastr.error('Please check your Email/Password', 'Error', {
                   closeButton: true
                 });

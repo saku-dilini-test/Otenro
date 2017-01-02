@@ -4,19 +4,19 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("EditChildImageCtrl", [
-        '$scope', '$mdDialog', 'toastr','mainMenuService','commerceService','$rootScope','SERVER_URL','child','imageUrl',
+        '$scope', '$mdDialog', 'toastr','mainMenuService','commerceService','$rootScope','SERVER_URL','child','imageUrl','$log',
         EditChildImageCtrl]);
 
-    function EditChildImageCtrl($scope, $mdDialog,toastr, mainMenuService,commerceService,$rootScope,SERVER_URL,child,imageUrl) {
+    function EditChildImageCtrl($scope, $mdDialog,toastr, mainMenuService,commerceService,$rootScope,SERVER_URL,child,imageUrl,$log) {
 
         $scope.updateImage = function(file) {
 
             commerceService.updateCategoryImage(file,imageUrl,child._id,$rootScope.appId).progress(function(evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
             }).success(function(data, status, headers, config) {
                 return mainMenuService.showChildDialog(child);
-                // console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                // $log.debug('file ' + config.file.name + 'uploaded. Response: ' + data);
             }).error(function(data, status, headers, config) {
 
             })

@@ -2,7 +2,7 @@
  * Created by Madhuranga on 15/11/16.
  */
 
-mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService) {
+mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService,$log) {
 
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
@@ -39,7 +39,7 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
             $scope.isApplyShippingCharge = false;
         }else {
             $scope.tax = data[0].taxAmount;
-            console.log(data[0]);
+            $log.debug(data[0]);
             $scope.isApplyShippingCharge = data[0].isApplyShippingCharge;
             $scope.hide = false;
         }

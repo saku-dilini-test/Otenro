@@ -2,9 +2,9 @@
     'use strict';
     angular.module('app')
         .controller('ResetPasswordController', ['$scope', '$state', 'Auth', '$auth', '$stateParams', 'commerceService',
-        'userProfileResource', 'toastr', ResetPasswordController]);
+        'userProfileResource', 'toastr', '$log',ResetPasswordController]);
 
-    function ResetPasswordController($scope, $state, Auth, $auth, $stateParams, commerceService, userProfileResource, toastr) {
+    function ResetPasswordController($scope, $state, Auth, $auth, $stateParams, commerceService, userProfileResource, toastr,$log) {
 
         $scope.submitVerification = function (password) {
             var verify = {
@@ -28,7 +28,7 @@
                 });
             });
             }).error(function(err) {
-                console.log(err);
+                $log.debug(err);
             })
         };
         $scope.cancel = function () {

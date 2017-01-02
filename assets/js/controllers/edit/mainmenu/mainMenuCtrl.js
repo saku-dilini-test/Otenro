@@ -2,10 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("MainMenuCtrl", ['$scope', '$mdDialog', '$rootScope',
         'mainMenuService','$http','commerceService','toastr','mySharedService','SERVER_URL','ME_APP_SERVER','$auth'
-        ,'dashboardService','articleService','initialData', MainMenuCtrl]);
+        ,'dashboardService','articleService','initialData','$log', MainMenuCtrl]);
 
     function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
-                          mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData) {
+                          mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log) {
 
 
         $scope.tmpImage = [];
@@ -137,14 +137,14 @@
         // Add New Menu
         $scope.goToAddNewMenuItemView = function () {
             if($scope.templateCategory == tempCatBusiness){
-            console.log(tempCatBusiness);
-            console.log($scope.templateCategory );
-            console.log("1111111");
+            $log.debug(tempCatBusiness);
+            $log.debug($scope.templateCategory );
+            $log.debug("1111111");
                 mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',$scope.templateCategory);
             }else if($scope.templateCategory == tempCatMedia){
-             console.log(tempCatMedia);
-             console.log("sasdasdasdasd");
-                        console.log($scope.templateCategory );
+             $log.debug(tempCatMedia);
+             $log.debug("sasdasdasdasd");
+                        $log.debug($scope.templateCategory );
                 mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory',$scope.templateCategory);
             }
         };
@@ -236,7 +236,7 @@
         // Add menu navigation
         $scope.addMenuNavigation = function(file,menu){
 
-            console.log(menu);
+            $log.debug(menu);
             if($scope.tmpImage[0] == null){
                 toastr.error('Please upload an image', 'Warning', {closeButton: true});
                 return;
@@ -249,7 +249,7 @@
 
             // If Add new Menu Navigation
             if($scope.initialData.menu == 'addNewMenuNavigation'){
-                //console.log("Add new Menu Navigation ");
+                //$log.debug("Add new Menu Navigation ");
                 mainMenuService.addMenu(file,$rootScope.appId,menu.name).success(function(data) {
                     var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
                                    +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
@@ -268,7 +268,7 @@
 
             // if Only Update Menu Name
             if($scope.mainImg == $scope.serverImage){
-                //console.log("Only Update Menu Name ");
+                //$log.debug("Only Update Menu Name ");
                 mainMenuService.updateSecondNavi(menu).success(function(data) {
                 var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
                               +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
@@ -287,10 +287,10 @@
 
             // If Update Both Menu name and Image
             if($scope.mainImg != $scope.serverImage && !($scope.initialData.menu == 'addNewMenuNavigation')){
-                //console.log("If Update Both Menu name and Image");
+                //$log.debug("If Update Both Menu name and Image");
                 commerceService.updateCategoryImage(file,menu.imageUrl,menu.id,$rootScope.appId).progress(function(evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                    $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function(data, status, headers, config) {
                     // update image name set to imageUrl in menu collection
                     menu.imageUrl = data.imageUrl;
@@ -367,14 +367,14 @@
                     });
             }
             if($scope.mainImg != $scope.serverImage && !($scope.initialData.menu == 'addNewMenuCategory')){
-                console.log('imageUpdate true');
+                $log.debug('imageUpdate true');
                 articleService.updateCategoryImage(file,menu.imageUrl,$rootScope.appId).progress(function(evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                    $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function(data, status, headers, config) {
                     // update image name set to imageUrl in menu collection
                     menu.imageUrl = data.imageUrl;
-                    console.log(menu);
+                    $log.debug(menu);
                     articleService.editCategory(menu)
                         .success(function (data) {
 
@@ -415,12 +415,12 @@
         //        $scope.menuItems.splice($index, 1);
         //    }else {
         //        mainMenuService.checkMainMenu(frontData).success(function (data) {
-        //            console.log(data);
+        //            $log.debug(data);
         //            if (data.message == 'YES') {
         //                alert('warning Unable to delete Main Menu');
         //            }else if(data.message == 'NO'){
         //                mainMenuService.deleteMainMenu(frontData).success(function (data) {
-        //                    console.log(data);
+        //                    $log.debug(data);
         //                    if (data.message == 'OK') {
         //                        $scope.menuItems.splice($index, 1);
         //                    }else{
@@ -468,7 +468,7 @@
                         return mainMenuService.showMainMenuDialog();
                         scope.remove();
                     }).error(function(err) {
-                    console.log(err);
+                    $log.debug(err);
                         $mdDialog.hide();
                     });
                     },
@@ -501,7 +501,7 @@
 
         $scope.newSubItem = function (scope) {
             var nodeData = scope.$modelValue;
-            console.log(nodeData);
+            $log.debug(nodeData);
             if(nodeData.link){
                 var childParams={
                     name : nodeData.name + '.' + (nodeData.nodes.length + 1),

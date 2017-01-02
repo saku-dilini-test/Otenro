@@ -1,11 +1,11 @@
 (function() {
     'use strict';
-    angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr', 'engageService', '$http', 'SERVER_URL', EngageCtrl]);
+    angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr', 'engageService', '$http', 'SERVER_URL','$log', EngageCtrl]);
 
 
 
 
-    function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL, initialData ) {
+    function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL, initialData,$log ) {
 
 
         //get all app registered user details
@@ -112,20 +112,19 @@
                 $scope.pushedMessages = data;
             })
             .error(function(err){
-                console.log(err);
+                $log.debug(err);
             });
-         console.log(initialData);
+         //$log.debug(initialData);
         if(initialData != null) {
             $scope.user = initialData;
-            console.log($scope.user);
               var  registeredUser= $scope.user.id;
             engageService.getUserOrders(registeredUser)
                 .success(function (data) {
-                    console.log(data);
+                    $log.debug(data);
                     $scope.orders = data;
                 })
                 .error(function (err) {
-                    console.log(err);
+                    $log.debug(err);
                 });
         }
     }

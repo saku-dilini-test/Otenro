@@ -2,10 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService','productService', '$rootScope', '$auth', 'SERVER_URL','initialData',
-        'mainMenuService', ProductCtrl]);
+        'mainMenuService','$log', ProductCtrl]);
 
     function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService, $rootScope,  $auth, SERVER_URL,initialData,
-    mainMenuService) {
+    mainMenuService,$log) {
         var size, weight;
         var variants;
 
@@ -21,7 +21,7 @@
                             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=thirdNavi/";
 
         function  disableTabs(selectedTab,tab1,tab2,tab3,tab4) {
-            console.log(selectedTab);
+            $log.debug(selectedTab);
             $scope.selectedTab = selectedTab;
             $scope.addProductsOptionParams = {
                 firstLocked : tab1,
@@ -521,7 +521,7 @@
                     $scope.exist = true;
                 }
             }).error(function (error) {
-                console.log(error);
+                $log.debug(error);
             })
         }
 
@@ -723,7 +723,7 @@
         }
 
         $scope.newcategory = function(){
-            console.log("innnnnnnnnnnn");
+            $log.debug("innnnnnnnnnnn");
             mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
         }
 

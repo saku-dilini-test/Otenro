@@ -5,10 +5,10 @@
     'use strict';
     angular.module("appEdit").controller("InventoryCtrl", [
     '$scope', 'inventoryService','commerceService','$rootScope','SERVER_URL','$auth','toastr','$mdDialog','initialData',
-    'productService','$filter','$http',
+    'productService','$filter','$http','$log',
     InventoryCtrl]);
     function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth,toastr,$mdDialog,
-    initialData,productService,$filter,$http,currencyService) {
+    initialData,productService,$filter,$http,currencyService,$log) {
             $scope.currentPage = 1;
             $scope.pageSize = 5;
             $scope.userId=$auth.getPayload().id;
@@ -121,7 +121,7 @@
             ];
 
         var productList =  initialData.inventoryList;
-        //console.log(initialData.inventoryList);
+        //$log.debug(initialData.inventoryList);
         $scope.exportArray = [];
 
         for(var i = 0; i <  initialData.inventoryList.length; i++){
@@ -170,15 +170,15 @@
             return $scope.exportArrayN;
         }
         $scope.inventoryList = productList;
-        console.log(productList);
+        //$log.debug(productList);
 
-//            console.log("LLLLLLLLLLLLL")
-//            console.log("LLLLLLLLLLLLL")
-            //console.log("LLLLLLLLLLLLL" + JSON.stringify(initialData))
-            //console.log("LLLLLLLLLLLLL "+ JSON.stringify(inventoryList))
-//            console.log("LLLLLLLLLLLLL")
-//            console.log("LLLLLLLLLLLLL")
-//            console.log("LLLLLLLLLLLLL")
+//            $log.debug("LLLLLLLLLLLLL")
+//            $log.debug("LLLLLLLLLLLLL")
+            //$log.debug("LLLLLLLLLLLLL" + JSON.stringify(initialData))
+            //$log.debug("LLLLLLLLLLLLL "+ JSON.stringify(inventoryList))
+//            $log.debug("LLLLLLLLLLLLL")
+//            $log.debug("LLLLLLLLLLLLL")
+//            $log.debug("LLLLLLLLLLLLL")
             $scope.imageURL = SERVER_URL+
                 "api/edit/viewImages?userId="+$scope.userId
                 +"&appId="+$scope.appId+"&"
@@ -205,10 +205,10 @@
 
 
             $scope.updateInventory =function(){
-//                console.log("&*&*&*&*&*&&*")
-//                console.log("&*&*&*&*&*&&*")
-//                console.log("&*&*&*&*&*&&* "+ JSON.stringify($scope.inventoryList));
-//                console.log("&*&*&*&*&*&&*")
+//                $log.debug("&*&*&*&*&*&&*")
+//                $log.debug("&*&*&*&*&*&&*")
+//                $log.debug("&*&*&*&*&*&&* "+ JSON.stringify($scope.inventoryList));
+//                $log.debug("&*&*&*&*&*&&*")
                 var inventoryList = inventoryList;
 
 
@@ -234,9 +234,9 @@
                     }
                 }
                 productService.updateInventory({'inventoryList':$scope.inventoryList,where:{}}).$promise.then(function(data){
-//                   console.log("XXXXVXVVVXVX")
-//                   console.log("XXXXVXVVVXVX")
-//                   console.log("XXXXVXVVVXVX")
+//                   $log.debug("XXXXVXVVVXVX")
+//                   $log.debug("XXXXVXVVVXVX")
+//                   $log.debug("XXXXVXVVVXVX")
                 });
                     //commerceService.updateInventory(inventoryList)
                     //    .success(function (result) {

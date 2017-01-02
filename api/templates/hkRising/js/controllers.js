@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicLoading,$ionicHistory,$rootScope,$http,constants) {
+    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicLoading,$ionicHistory,$rootScope,$http,constants,$log) {
 
         // show & hide menu icon button
        $scope.$on('$ionicView.beforeEnter', function (e, data) {
@@ -68,7 +68,7 @@ angular.module('starter.controllers', [])
 
         // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
-            console.log('Doing login', $scope.loginData);
+            $log.debug('Doing login', $scope.loginData);
 
             // Simulate a login delay. Remove this and replace with your login
             // code if using a login system
@@ -78,7 +78,7 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('HomeCtrl', function ($scope, $http, constants, $rootScope, $timeout, $state, $ionicLoading) {
+    .controller('HomeCtrl', function ($scope, $http, constants, $rootScope, $timeout, $state, $ionicLoading,$log) {
 
         $scope.appName = $rootScope.appName;
 
@@ -118,7 +118,7 @@ angular.module('starter.controllers', [])
                 .success(function (data) {
                     $ionicLoading.hide();
                     $scope.articleCategoryList = data;
-                    console.log($scope.articleCategoryList)
+                    $log.debug($scope.articleCategoryList)
                 }).error(function (err) {
                 alert('loading err');
             });
@@ -131,7 +131,7 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('contactUsCtrl', function ($scope, $http, constants, $rootScope, $ionicLoading) {
+    .controller('contactUsCtrl', function ($scope, $http, constants, $rootScope, $ionicLoading,$log) {
         $ionicLoading.show({
             template: '<ion-spinner icon="lines" ></ion-spinner>'
         });
@@ -189,7 +189,7 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('aboutUsCtrl', function ($scope, $rootScope, $http,$ionicLoading, constants) {
+    .controller('aboutUsCtrl', function ($scope, $rootScope, $http,$ionicLoading, constants,$log) {
         $scope.appName = $rootScope.appName;
         $scope.aboutUs = "A guide to things to see and do in Hong Kong. This is a demo app built using Otenro. Please visit www.otenro.com for further information.";
 
@@ -199,7 +199,7 @@ angular.module('starter.controllers', [])
 
         $http.post(constants.SERVER_URL + "/edit/getAboutUsData", data)
             .success(function (data) {
-                    console.log(data);
+                    $log.debug(data);
                     $scope.header = data.header;
                     $scope.content = data.content;
                     //$state.go('app.category');
@@ -214,7 +214,7 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading,initialData,readMadeEasy) {
+    .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading,initialData,readMadeEasy,$log) {
 
 
 

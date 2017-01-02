@@ -2,7 +2,7 @@
  * Created by Madhuranga on 15/11/16.
  */
 
-mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService) {
+mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService,$log) {
 
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
@@ -16,8 +16,8 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
         $scope.hideShipping = false;
     }
 
-    console.log($stateParams.item);
-    console.log(localStorage.getItem('appLocalStorageUser'));
+    $log.debug($stateParams.item);
+    $log.debug(localStorage.getItem('appLocalStorageUser'));
     var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
     if(localData == null){
         $state.go('app.login')
@@ -44,7 +44,7 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
             $scope.isApplyShippingCharge = false;
         }else {
             $scope.tax = data[0].taxAmount;
-            console.log(data[0]);
+            $log.debug(data[0]);
             $scope.isApplyShippingCharge = data[0].isApplyShippingCharge;
             $scope.hide = false;
         }
@@ -56,10 +56,10 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
                 amount = product.total;
                 total += (amount);
             }
-            console.log($scope.isApplyShippingCharge);
+            $log.debug($scope.isApplyShippingCharge);
             if($scope.isApplyShippingCharge == true && $stateParams.item.delivery.location != "Pick up"){
 
-                console.log($scope.shippingCost);
+                $log.debug($scope.shippingCost);
                 var shipping = parseInt($scope.shippingCost);
                 total = total + shipping;
                 tax = total * $scope.tax / 100;
@@ -110,7 +110,7 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
         payInfo.cart = $rootScope.cart.cartItems;
         payInfo.userEmail = localData.email;
         payInfo.promotionCode = promotionCode;
-        console.log(payInfo);
+        $log.debug(payInfo);
         $state.go('app.payment',{item:payInfo});
     }
 

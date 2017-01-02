@@ -3,7 +3,7 @@
  */
 
 
-mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants,readMadeEasy) {
+mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants,readMadeEasy,$log) {
 
     if (typeof $rootScope.appId === 'undefined'){
 
@@ -29,7 +29,7 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
         +"/templates/viewImages?userId="
         +appData.userId+"&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
 
-        console.log($scope.imageURL);
+        $log.debug($scope.imageURL);
 
     $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+appData.appId).success(function(data) {
         $scope.categories = data;
@@ -48,7 +48,7 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
             }
 
         },function(err){
-          console.log(err);
+          $log.debug(err);
         })
     });
 
