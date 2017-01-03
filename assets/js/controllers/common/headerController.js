@@ -3,9 +3,9 @@
   'use strict';
   angular.module('app')
     .controller('HeaderController', ['$scope', 'Auth', 'CurrentUser',
-        'userProfileService','$location','dashboardService','toastr','$rootScope',HeaderController]);
+        'userProfileService','$location','dashboardService','toastr','$rootScope','$log',HeaderController]);
 
-    function HeaderController($scope, Auth, CurrentUser,userProfileService,$location,dashboardService,toastr,$rootScope) {
+    function HeaderController($scope, Auth, CurrentUser,userProfileService,$location,dashboardService,toastr,$rootScope,$log) {
 
 
 
@@ -14,7 +14,7 @@
 
       var location=$location.url();
       if(location == "/") {
-        console.log("welcome");
+        $log.debug("welcome");
       }
 
       $scope.auth = Auth;
@@ -33,13 +33,13 @@
         });
       });
       $scope.getCategoryData = function(id){
-        console.log($location.path());
+        $log.debug($location.path());
         if($location.path().toLowerCase().indexOf("dashboard") >= 0){
           var sendData = {
             id : id
           }
           dashboardService.getSelectedCategoryDashboard(sendData).success(function (data) {
-            console.log(data);
+            $log.debug(data);
             $rootScope.widgets = data;
           }).error(function (err) {
             toastr.error(err.error, 'Error', {

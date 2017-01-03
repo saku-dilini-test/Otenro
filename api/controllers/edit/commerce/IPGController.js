@@ -37,12 +37,12 @@ module.exports = {
      */
     getIPGInfo : function(req,res){
         var appId = req.param('appId');
-        console.log(appId);
+        sails.log.info(appId);
         var searchQuery = {
             appId: appId
         };
         IPGDetails.findOne(searchQuery).exec(function(err, result) {
-            console.log(result);
+            sails.log.info(result);
             if (err) return res.send(err);
             return res.send(result);
         });

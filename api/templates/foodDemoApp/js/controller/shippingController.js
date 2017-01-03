@@ -2,7 +2,7 @@
  * Created by Madhuranga on 15/11/16.
  */
 
-mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService) {
+mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService,$log) {
 
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
@@ -10,8 +10,8 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
 
 
-    console.log($stateParams.item);
-    console.log(localStorage.getItem('appLocalStorageUser'));
+    $log.debug($stateParams.item);
+    $log.debug(localStorage.getItem('appLocalStorageUser'));
     var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
     if(localData == null){
         $state.go('app.login')
@@ -82,7 +82,7 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
     $http.post(constants.SERVER_URL + "/edit/getShippingInfoByCountry",param)
         .success(function (data) {
                 $scope.shippingData=data;
-                console.log($scope.shippingData);
+                $log.debug($scope.shippingData);
                 for(var i = 0; i < $scope.shippingData.length; i++){
                     if($scope.shippingData[i].shippingOption == "Pick up"){
                         $scope.shippingData.splice([i],1);

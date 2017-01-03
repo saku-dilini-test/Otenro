@@ -3,13 +3,13 @@
  */
 
 
-mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants,readMadeEasy) {
+mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants,readMadeEasy,$log) {
 
     if (typeof $rootScope.appId === 'undefined'){
 
         readMadeEasy.readFile().success(function(data){
             $rootScope.appId = data.appId;
-            console.log("appId " + $rootScope.appId);
+            $log.debug("appId " + $rootScope.appId);
         });
     }
 
@@ -17,14 +17,14 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
 
         readMadeEasy.readFile().success(function(data){
             $rootScope.userId = data.userId;
-            console.log("userId " + $rootScope.userId);
+            $log.debug("userId " + $rootScope.userId);
         });
     }
     if (typeof $rootScope.appName === 'undefined'){
 
         readMadeEasy.readFile().success(function(data){
             $rootScope.appName = data.name;
-            console.log("$rootScope.appName " + $rootScope.appName);
+            $log.debug("$rootScope.appName " + $rootScope.appName);
         });
     }
 
@@ -39,11 +39,11 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
             +"/templates/viewImages?userId="
             +data.userId+"&appId="+data.appId+"&"+new Date().getTime()+"&img=secondNavi";
 
-        console.log($scope.imageURL);
+        $log.debug($scope.imageURL);
         
       $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$scope.appId).success(function(data) {
           $scope.categories = data;
-          console.log("$scope.categories  " + $scope.categories );
+          $log.debug("$scope.categories  " + $scope.categories );
       }).error(function(err) {
           alert('warning', "Unable to get categories", err.message);
       });
@@ -60,7 +60,7 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
             }
 
         },function(err){
-          console.log(err);
+          $log.debug(err);
         })
     });
 

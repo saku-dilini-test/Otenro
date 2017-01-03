@@ -14,20 +14,20 @@ module.exports = {
         data['paymentStatus'] = 'Pending';
         data['fulfillmentStatus'] = 'Pending';
 
-        console.log(data);
+        sails.log.info(data);
         if(data.pickupId == null){
             ApplicationOrder.create(data).exec(function (err, order) {
-                console.log(order);
+                sails.log.info(order);
 
                 if (err) res.send(err);
                 var searchApp = {
                     id: order.appId
                 };
-                console.log(searchApp);
+                sails.log.info(searchApp);
                 Application.findOne(searchApp).exec(function (err, app) {
                     order['userId'] = app.userId;
                 sentMails.sendOrderEmail(order,function (err,msg) {
-                    console.log(err);
+                    sails.log.info(err);
                     if (err) {
                         return  res.send(500);
                     }
@@ -47,11 +47,11 @@ module.exports = {
                 var searchApp = {
                     id: order.appId
                 };
-                console.log(searchApp);
+                sails.log.info(searchApp);
                 Application.findOne(searchApp).exec(function (err, app) {
                     order['userId'] = app.userId;
                     sentMails.sendOrderEmail(order,function (err,msg) {
-                        console.log(err);
+                        sails.log.info(err);
                         if (err) {
                             return  res.send(500);
                         }
@@ -99,7 +99,7 @@ module.exports = {
                 }
             }
         };
-        console.log(searchQuery);
+        sails.log.info(searchQuery);
         ApplicationTax.find(searchQuery).exec(function(err, result) {
             if (err) return res.send(err);
             return res.send(result);

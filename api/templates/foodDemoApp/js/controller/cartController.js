@@ -2,7 +2,7 @@
  * Created by amila on 4/5/16.
  */
 
-mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService) {
+mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService,$log) {
 
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
@@ -131,7 +131,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             deliverDetails.zip = localData.zip;
             }
         }
-        console.log(deliverDetails);
+        $log.debug(deliverDetails);
         deliverDetails.method = 'Delivery';
         $state.go('app.shipping',{item:deliverDetails});
     }

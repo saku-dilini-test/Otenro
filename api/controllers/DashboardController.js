@@ -41,7 +41,7 @@ module.exports = {
                 templateCategory: categoryId
             };
 
-            console.log(searchApp);
+            sails.log.info(searchApp);
             Template.find(searchApp, function (err, apps) {
                 if (err) return done(err);
                 res.send(apps);
@@ -64,7 +64,7 @@ module.exports = {
         }
 
 
-        console.log(searchApp);
+        sails.log.info(searchApp);
         Application.find(searchApp, function (err, apps) {
             if (err) return done(err);
             res.send(apps);

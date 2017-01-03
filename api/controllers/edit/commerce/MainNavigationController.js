@@ -40,7 +40,7 @@ module.exports = {
 //
 //                            for(var j=0 ; j < childNodes.length ; j++) {
 //                                ThirdNavigation.update({id: childNodes[j].id, appId: appId}, childNodes[j], function (err, subchild) {
-//                                    console.log(subchild);
+//                                    sails.log.info(subchild);
 //                                });
 //                            }
 //                        });
@@ -185,17 +185,17 @@ module.exports = {
 
 
 //        if(req.body.icon){
-//        console.log("1");
+//        sails.log.info("1");
 //            MainNavigation.destroy({ id : req.body.id}).exec(function (err) {
-//            console.log("1");
+//            sails.log.info("1");
 //                if (err) return callback("Error while deleting " + err.message);
 //                res.send(200,{message:'Deleted Main Navigation'});
 //            });
 //
 //        }if(req.body.mainId){
-//        console.log("2");
+//        sails.log.info("2");
 //            SecondNavigation.destroy({ id : req.body.id}).exec(function (err) {
-//            console.log("1");
+//            sails.log.info("1");
 //                if (err) return callback("Error while deleting " + err.message);
 //                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/'+ req.body.imageUrl;
 //                fs.unlink(filePath, function (err) {
@@ -205,9 +205,9 @@ module.exports = {
 //            });
 //
 //        }if(req.body.childId){
-//        console.log("3");
+//        sails.log.info("3");
 //            ThirdNavigation.destroy({ id : req.body.id}).exec(function (err) {
-//            console.log("1");
+//            sails.log.info("1");
 //                if (err) return callback("Error while deleting " + err.message);
 //                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/'+ req.body.imageUrl;
 //                fs.unlink(filePath, function (err) {

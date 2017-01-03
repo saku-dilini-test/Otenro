@@ -50,7 +50,7 @@
 //          });
 //        }
 //      }).error(function (err) {
-//        console.log("Error thrown while creating the app " + err);
+//        $log.debug("Error thrown while creating the app " + err);
 //      });
 //    };
 //    $scope.cancel=function(){

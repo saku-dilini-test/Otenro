@@ -57,7 +57,7 @@ module.exports = {
             appId :req.body.appId,
         }
 
-        console.log("req.body.appId " + req.body.appId);
+        sails.log.info("req.body.appId " + req.body.appId);
         
         PublishDetails.find(searchApp).exec(function (err, publishedData) {
             if (err) res.send(err);
@@ -183,7 +183,7 @@ module.exports = {
      * publishing  the app send mail to customer.
      */
     changePublishStatus : function (req,res) {
-        console.log("req.body.appId  " + req.body.appId);
+        sails.log.info("req.body.appId  " + req.body.appId);
         var searchAppDataDetails = {
             appId :req.body.appId
         }
@@ -191,7 +191,7 @@ module.exports = {
         PublishDetails.findOne(searchAppDataDetails).exec(function(err, publishDetails) {
             if (err) res.send(err);
             else {
-                console.log("req.publishDetails " + publishDetails.appId);
+                sails.log.info("req.publishDetails " + publishDetails.appId);
                 var searchAppDataApp = {
                     id :publishDetails.appId
                 }
@@ -212,7 +212,7 @@ module.exports = {
 
                             "</html>";
 
-                        console.log("app.email  " + publishDetails.email);
+                        sails.log.info("app.email  " + publishDetails.email);
                         // Email Content
                         var emailDetails = {
                             from    : "onbilabsttest@gmail.com",

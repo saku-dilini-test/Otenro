@@ -4,7 +4,7 @@
 
 //(function() {
 //    angular.module('starter', [])
-mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService) {
+mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService,$log) {
 
             $http.get(constants.SERVER_URL+"/edit/getAllCountry")
                     .then(function(res){
@@ -158,7 +158,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                 deliverDetails.city = localData.city;
                 }
             }
-            console.log(deliverDetails);
+            $log.debug(deliverDetails);
             deliverDetails.method = 'Delivery';
             $state.go('tab.shipping',{item:deliverDetails});
         }

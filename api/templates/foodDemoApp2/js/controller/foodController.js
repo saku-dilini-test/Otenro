@@ -2,7 +2,7 @@
  * Created by amila on 3/31/16.
  */
 
-mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants) {
+mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants,$log) {
 
     $scope.$emit('hideMenu',{});
 
@@ -17,7 +17,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
     $scope.foods = data;
-    console.log($scope.foods)
+    $log.debug($scope.foods)
         for(var i=0; i<data.length; i++){
             if(data[i].discount){
             $scope.foods[i].price = data[i].discount;

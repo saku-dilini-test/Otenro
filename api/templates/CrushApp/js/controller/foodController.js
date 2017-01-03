@@ -2,7 +2,7 @@
  * Created by amila on 3/31/16.
  */
 
-mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants) {
+mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants,$log) {
 
     $scope.$emit('hideMenu',{});
 
@@ -59,7 +59,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.menuName = $stateParams.categoryName;
 
     $scope.changeVariant = function(variant){
-        console.log(variant)
+        $log.debug(variant)
         $scope.selectedVariant = variant;
         if(variant.quantity > 0 ){
             $scope.isBuyBtnDisable = false;

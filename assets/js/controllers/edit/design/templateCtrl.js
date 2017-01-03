@@ -1,15 +1,15 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("TemplateCtrl", [
-        '$scope','$mdDialog','toastr', 'templateService', '$rootScope','$auth','ME_APP_SERVER','mySharedService',
+        '$scope','$mdDialog','toastr', 'templateService', '$rootScope','$auth','ME_APP_SERVER','mySharedService','$log',
         TemplateCtrl]);
 
-    function TemplateCtrl($scope, $mdDialog, toastr, templateService, $rootScope,$auth,ME_APP_SERVER,mySharedService) {
+    function TemplateCtrl($scope, $mdDialog, toastr, templateService, $rootScope,$auth,ME_APP_SERVER,mySharedService,$log) {
 
 
         templateService.getTemplates().success(function(data){
             $scope.templates = data;
-            console.log(data);
+            $log.debug(data);
         });
 
         $scope.changeTemplate = function (templateId, templateUrl, templateName,templateCategory) {
@@ -26,7 +26,7 @@
 
             templateService.createTempTemplates(appParams).success(function(data){
                 $scope.templates = data;
-                console.log(data);
+                $log.debug(data);
             });
 
             var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
@@ -39,8 +39,8 @@
                 showConfirm : true
             }
             localStorage.setItem('changeTemplate', JSON.stringify(requestParams));
-            console.log(localStorage.getItem('changeTemplate'));
-            console.log($rootScope.changeTemplate);
+            $log.debug(localStorage.getItem('changeTemplate'));
+            $log.debug($rootScope.changeTemplate);
         };
        
         // --- cancel dialog -----
