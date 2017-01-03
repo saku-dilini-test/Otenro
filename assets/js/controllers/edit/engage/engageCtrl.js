@@ -7,10 +7,7 @@
 
 
     function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL, initialData,$log ) {
-
-
         //get all app registered user details
-
         var getAppUserData = function () {
             engageService. getAppUserData()
                 .success(function (result) {
