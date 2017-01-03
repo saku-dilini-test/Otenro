@@ -1,6 +1,7 @@
 (function() {
     'use strict';
-    angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr', 'engageService', '$http', 'SERVER_URL','$log', EngageCtrl]);
+    angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr',
+        'engageService', '$http', 'SERVER_URL','initialData', EngageCtrl]);
 
 
 
