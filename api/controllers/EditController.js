@@ -132,7 +132,27 @@ module.exports = {
             appIconFile = copyDirPath + 'www/res/android/icon/icon.jpg',
             srcPath = sails.config.appPath + '/api/src/hybrid/',
             appIconFileRES = config.APP_FILE_SERVER + userId + '/templates/' + appId + '/' + 'img/publish/0.png',
-            appIconFileDES = copyDirPath + 'resources' + '/' + 'icon.png';
+            appIconFileDES = copyDirPath + 'resources' + '/' + 'icon.png',
+            indexPath = selectedTemplatePath + 'index.html';
+
+        fs.readFile(indexPath,'utf8', function (err, data) {
+            if(err){
+                sails.log.info(err);
+            }
+            else{
+                var result = data.replace(/<!-- cordova.js -->/g, '<script src="cordova.js"></script>')
+                    .replace(/<!-- cdv-plugin-paypal-mobile-sdk -->/g, '<script src="lib/cdv-plugin-paypal-mobile-sdk.js"></script>');
+
+                fs.writeFile(indexPath, result, function (err) {
+                    if(err){
+                        sails.log.info(err);
+                    }
+                    else{
+                        console.log('writing to ' + indexPath);
+                    }
+                })
+            }
+        });
 
         fs.readFile(moveConfigFile, 'utf-8',
             function(err, data) {

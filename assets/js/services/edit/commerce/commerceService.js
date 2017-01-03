@@ -3,10 +3,11 @@
  */
 (function () {
     angular.module('appEdit').service('commerceService', [
-        '$mdDialog', '$http', '$rootScope', 'Upload', 'SERVER_URL', 'toastr','inventoryService','appEditResource', commerceService
+        '$mdDialog', '$http', '$rootScope', 'Upload', 'SERVER_URL', 'toastr','inventoryService','appEditResource', '$auth',
+         commerceService
     ]);
 
-    function commerceService($mdDialog, $http, $rootScope, Upload, SERVER_URL, inventoryService,appEditResource) {
+    function commerceService($mdDialog, $http, $rootScope, Upload, SERVER_URL, inventoryService,appEditResource,$auth) {
         return {
             showAddProductsDialog: function (item) {
                 return $mdDialog.show({
@@ -44,6 +45,22 @@
                     file: file
                 });
             },
+
+
+            //Get  One order Details
+            showOneOrderDialog: function() {
+                return $mdDialog.show({
+                    controller: 'CommerceCtrl',
+                    templateUrl: 'user/edit/engage/OrderDetailsView.html',
+                    clickOutsideToClose: true
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+
+
             updateCategoryImage: function (file, imageUrl, catId, appId) {
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
@@ -330,8 +347,9 @@
                                     toastr.success('Successfully Removed ', 'Done!', {
                                         closeButton: true
                                     });
-                                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                        +'/templates/'+$rootScope.appId+'' +
+                                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                                  +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                    $scope.appTemplateUrl = urlPath+'' +
                                         '#/app/home/id?'+new Date().getTime();
                                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                                     //$state.go('user.dashboard');

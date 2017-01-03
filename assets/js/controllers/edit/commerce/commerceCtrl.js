@@ -69,6 +69,7 @@
             },
             columnDefs: [
                 /*{name: 'id'},*/
+                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate',},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -178,6 +179,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
+                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -213,6 +215,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
+                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -250,6 +253,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
+                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -572,8 +576,9 @@
                             toastr.success('Store Setting Details has been added successfully', 'Awesome', {
                                 closeButton: true
                             });
-                            $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                +'/templates/'+$rootScope.appId+'' +
+                            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                           +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                            $scope.appTemplateUrl = urlPath+'' +
                                 '#/app/aboutUs';
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $scope.selectedTab = current;

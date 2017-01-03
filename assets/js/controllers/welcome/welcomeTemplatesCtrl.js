@@ -10,12 +10,12 @@
     angular.module('app')
         .controller('WelcomeTemplatesCtrl',
       ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER',
-      '$auth','$rootScope','$timeout',
+      '$auth','$rootScope','$timeout','SERVER_URL',
             WelcomeTemplatesCtrl
         ]);
 
     function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,
-    ME_APP_SERVER,$auth,$rootScope,$timeout) {
+    ME_APP_SERVER,$auth,$rootScope,$timeout,SERVER_URL) {
 
         if ($auth.isAuthenticated()) {
             $scope.isAuthenticated = true;
@@ -50,9 +50,9 @@
                 };
 
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
-
-                    var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                            +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                    var url= urlPath+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
                     $scope.goLivePreview = function() {
@@ -83,9 +83,9 @@
                 };
 
                 welcomeTemplatesResource.createApp(appParams).then(function(data){
-
-                    var url= ME_APP_SERVER+'temp/unknownUser'
-                       +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                    var url= urlPath+'/?'+new Date().getTime();
 
                     mySharedService.prepForBroadcast(url);
                     $scope.goLivePreview = function() {
