@@ -4,12 +4,12 @@
 (function() {
     angular.module('appEdit').service('oblMenuService', ['stylesService', 'contactUsService', 'commerceService',
         'shippingService','taxService','articleService','mainMenuService', 'currencyService', 'publishService',
-        'engageService', 'logoAndTittleService','ipgService','comingSoonService'
+        'engageService', 'logoAndTittleService','ipgService','comingSoonService','$log'
         , oblMenuService]);
 
     function oblMenuService(stylesService, contactUsService, commerceService,shippingService,
                             taxService,articleService ,mainMenuService,currencyService, publishService,
-                            engageService, logoAndTittleService,ipgService,comingSoonService) {
+                            engageService, logoAndTittleService,ipgService,comingSoonService,$log) {
         return {
             setOblMenuService : function(data) {
 
@@ -80,7 +80,7 @@
                     }
 
                 }else{
-                    console.log('Note : data are undefined');
+                    $log.debug('Note : data are undefined');
                 }
             }
         }

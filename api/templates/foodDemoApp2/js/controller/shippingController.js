@@ -2,7 +2,7 @@
  * Created by Madhuranga on 15/11/16.
  */
 
-mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService) {
+mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService,$log) {
 
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
@@ -10,8 +10,8 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
 
 
-    console.log($stateParams.item);
-    console.log(localStorage.getItem('appLocalStorageUser'));
+    $log.debug($stateParams.item);
+    $log.debug(localStorage.getItem('appLocalStorageUser'));
     var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
 
     if(localData == null){
@@ -80,7 +80,7 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
     $http.post(constants.SERVER_URL + "/edit/getShippingInfoByCountry",param)
         .success(function (data) {
                 $scope.shippingData=data;
-                console.log($scope.shippingData);
+                $log.debug($scope.shippingData);
                 for(var i = 0; i < $scope.shippingData.length; i++){
                     if($scope.shippingData[i].shippingOption == "Pick up"){
                         $scope.shippingData.splice([i],1);
@@ -118,7 +118,7 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         }else if(shippingDetails.shipping.shippingOption == "Weight Based"){
             shippingDetails.overWeight = false;
             shippingDetails.underWeight = false;
-            console.log(shippingDetails.shipping.weightRanges);
+            $log.debug(shippingDetails.shipping.weightRanges);
             for(var i = 0; i < shippingDetails.shipping.weightRanges.length; i++){
                 var weightRange = shippingDetails.shipping.weightRanges[i];
                 if(weightRange.startWeight <= totalWeight && weightRange.endWeight >= totalWeight){
@@ -140,10 +140,10 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
         shippingDetails.delivery = $stateParams.item;
         shippingDetails.shippingCost = shippingCost;
-        console.log(totalWeight);
-        console.log(shippingCost);
-        console.log(shippingDetails.shipping);
-        console.log($rootScope.cart.cartItems);
+        $log.debug(totalWeight);
+        $log.debug(shippingCost);
+        $log.debug(shippingDetails.shipping);
+        $log.debug($rootScope.cart.cartItems);
         $state.go('app.checkout',{item:shippingDetails});
     }
 

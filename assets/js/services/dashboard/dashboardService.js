@@ -3,9 +3,9 @@
  */
 (function(){
     angular.module('app').factory('dashboardService',[
-        '$http','SERVER_URL',dashboardService]);
+        '$http','SERVER_URL','$log',dashboardService]);
 
-    function dashboardService($http,SERVER_URL){
+    function dashboardService($http,SERVER_URL,$log){
         return{
             getAllApps:function(){
                 return $http.post(SERVER_URL+ 'app/dashboard/allApps');
@@ -26,7 +26,7 @@
                 return $http.get(SERVER_URL +'api/getTemplateMetaData?templateCategoryId='+templateCategoryId);
             },
             getApplicationData : function(appId){
-                console.log("appId appId appId " + appId)
+                $log.debug("appId appId appId " + appId)
             return  $http.get(SERVER_URL + 'edit/getApplicationData?appId='+appId);
         }
         }

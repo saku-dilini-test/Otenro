@@ -135,7 +135,7 @@
                 return $http.get(SERVER_URL + 'edit/getAllSecondaryCategories?appId='+$rootScope.appId);
             },
 //addGooglePlayInfo: function(file,playStoreData){
-//console.log('playStoreData.name '+playStoreData.name);
+//$log.debug('playStoreData.name '+playStoreData.name);
 //                 return $http.post(SERVER_URL+ 'edit/setPublishDetails'+ playStoreData   );
 //            },
         };

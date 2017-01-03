@@ -52,11 +52,57 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+
+
+            //Get  All order Details
+            showAllordersView: function(data) {
+                return $mdDialog.show({
+                    controller: 'EngageCtrl',
+                    templateUrl: 'user/edit/engage/registerUserView.html',
+                    clickOutsideToClose: true,
+                    locals: {
+                        initialData: data
+                    }
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+
+            //Get  All Registered Users
+            showAppUserDialog: function() {
+                return $mdDialog.show({
+                    controller: 'EngageCtrl',
+                    templateUrl: 'user/edit/engage/appRegisteredUser.html',
+                    clickOutsideToClose: true,
+                    locals: {
+                        initialData: null
+                    }
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+
+
+
+
+
+
+
             sendPushMessage: function(data){
                 return $http.post(SERVER_URL+ 'edit/sendPushMessage',data);
             },
             getMessageDetails: function(userId){
                 return $http.get(SERVER_URL + 'edit/getMessageDetails?userId='+userId+'&appId='+$rootScope.appId);
+            },
+            getAppUserData: function () {
+                return $http.get(SERVER_URL + 'edit/getAppUserData?appId='+$rootScope.appId);
+            },
+            getUserOrders: function (registeredUser) {
+                return $http.get(SERVER_URL + 'edit/getUserOrders?registeredUser='+registeredUser);
             }
         };
     }

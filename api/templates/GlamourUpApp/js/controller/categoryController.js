@@ -3,7 +3,7 @@
  */
 
 
-mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants,readMadeEasy) {
+mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants,readMadeEasy,$log) {
 
     if (typeof $rootScope.appId === 'undefined'){
 
@@ -55,7 +55,7 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
             }
 
         },function(err){
-          console.log(err);
+          $log.debug(err);
         })
     });
 

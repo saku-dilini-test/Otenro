@@ -32,7 +32,7 @@ module.exports = {
         var searchApp = {
             appId: appId
         };
-        console.log(searchApp);
+        sails.log.info(searchApp);
         ApplicationContactUs.findOne(searchApp).exec(function (err, app) {
             if (err) return err;
             res.json(app);
@@ -49,7 +49,7 @@ module.exports = {
         var searchApp = {
             appId: appId
         };
-        console.log(searchApp);
+        sails.log.info(searchApp);
         ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
             if (err) return err;
             res.json(app);
@@ -67,7 +67,7 @@ module.exports = {
         var searchApp = {
             appId: appId
         };
-        console.log(searchApp);
+        sails.log.info(searchApp);
         ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
             if (err) return err;
             res.json(app);
@@ -144,13 +144,13 @@ module.exports = {
             //var query =  PriceAndVariants.find({productId: app.id});
            // query.sort('id ASC');
            // query.exec(function(err, variants){
-             //if (err) console.log(err);
+             //if (err) sails.log.info(err);
             // if(variants != undefined){
                 /*app.price = variants.price;
                 app.quantity = variants.quantity;
                 app.size = variants.size;*/
               //   app.variants = variants;
-              //   console.log( "variants " + JSON.stringify(variants));
+              //   sails.log.info( "variants " + JSON.stringify(variants));
            //  }
              res.json(app);
            // })
@@ -211,14 +211,14 @@ module.exports = {
 
         var appId = req.param('appId');
         var categoryId = req.param('categoryId');
-        //console.log(appId);
+        //sails.log.info(appId);
         var searchApp = {
             appId: appId,
             categoryId : categoryId
         };
         Article.find({ select: ['appId','title','imageUrl','categoryId']}).where(searchApp).exec(function (err, result) {
             if (err) return done(err);
-            //console.log(result);
+            //sails.log.info(result);
             res.json(result);
         });
     },
@@ -285,6 +285,15 @@ module.exports = {
     },
 
     /**
+     * return template url for given userID & appID & img ( template path )
+     * @param req
+     * @param res
+     */
+    viewTemplateUrl : function(req,res){
+        res.redirect(config.ME_SERVER_URL + req.param('userId') + '/templates/' + req.param('appId'));
+    },
+
+    /**
      * return two dummy comments json object for every request
      *
      * @param req
@@ -333,7 +342,7 @@ module.exports = {
 
         });
 
-        //console.log("run run");
+        //sails.log.info("run run");
         fs.remove(config.ME_SERVER+ userId +'/templates/'+appId+'/', function (err) {
 
             if (err) {
@@ -352,10 +361,10 @@ module.exports = {
             deviceId : deviceId
         };
 
-        console.log("deviceId " + deviceId);
+        sails.log.info("deviceId " + deviceId);
         // check device id already have in db
         DeviceId.find(searchQuery).exec(function(err,result) {
-            if (err) return console.log(err);
+            if (err) return sails.log.info(err);
             // if not device ID in db collections
             if (result.length == 0) {
                 // create new Device ID Collection
@@ -376,7 +385,7 @@ module.exports = {
             amount = req.body.amount;
 
         IPGDetails.findOne({appId:req.body.appId}).exec(function(err, authorizeDetails){
-            if (err) return console.log(err);
+            if (err) return sails.log.info(err);
             var apiLoginId = authorizeDetails.apiLoginId,
                 transactionKey = authorizeDetails.transactionKey;
 
@@ -401,7 +410,7 @@ module.exports = {
             createRequest.setMerchantAuthentication(merchantAuthenticationType);
             createRequest.setTransactionRequest(transactionRequestType);
         //pretty print request
-        	//console.log(JSON.stringify(createRequest.getJSON(), null, 2));
+        	//sails.log.info(JSON.stringify(createRequest.getJSON(), null, 2));
 
         var ctrl = new ApiControllers.CreateTransactionController(createRequest.getJSON());
             ctrl.execute(function(){
@@ -410,23 +419,23 @@ module.exports = {
             		var response = new ApiContracts.CreateTransactionResponse(apiResponse);
 
             		//pretty print response
-            		//console.log(JSON.stringify(response, null, 2));
+            		//sails.log.info(JSON.stringify(response, null, 2));
 
             		if(response != null){
             			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
             				if(response.getTransactionResponse().getMessages() != null){
-            				    console.log('Successfully created transaction with Transaction ID: ' + response.getTransactionResponse().getTransId());
+            				    sails.log.info('Successfully created transaction with Transaction ID: ' + response.getTransactionResponse().getTransId());
             				    res.send({data:'Successfully created transaction with Transaction ID: ' + response.getTransactionResponse().getTransId(),status:'ok'});
             				}
             				else {
-            					console.log('Failed Transaction.');
+            					sails.log.info('Failed Transaction.');
             					if(response.getTransactionResponse().getErrors() != null){
             					    res.send({data: 'Failed Transaction',status:'error'});
             					}
             				}
             			}
             			else {
-            				console.log('Failed Transaction.');
+            				sails.log.info('Failed Transaction.');
             				if(response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null){
             				    res.send({data:'Failed Transaction',status:'error'});
 
@@ -443,7 +452,7 @@ module.exports = {
             	});
             	if (require.main === module) {
                 	authorizeCreditCard(function(){
-                		console.log('authorizeCreditCard call complete.');
+                		sails.log.info('authorizeCreditCard call complete.');
                 	});
                 }
         });

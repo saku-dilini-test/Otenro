@@ -11,7 +11,7 @@ module.exports = {
 
     saveSalesAndPromotion : function(req,res){
         var salesAndPromotionData   = req.body;
-        console.log("salesAndPromotionData.appId "+salesAndPromotionData.appId);
+        sails.log.info("salesAndPromotionData.appId "+salesAndPromotionData.appId);
 
         var searchQuery = {
             appId : salesAndPromotionData.appId,

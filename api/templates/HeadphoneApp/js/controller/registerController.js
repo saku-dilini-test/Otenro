@@ -3,7 +3,7 @@
  */
 
 
-mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopup,$state,$stateParams,$auth,constants) {
+mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopup,$state,$stateParams,$auth,constants,$log) {
     $scope.data = {};
 
 
@@ -42,7 +42,7 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
                         "appId":data.appId
                     };
                     localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
-                    console.log(localStorage.getItem('appLocalStorageUser'));
+                    $log.debug(localStorage.getItem('appLocalStorageUser'));
                     if($stateParams.item == 'delivery'){
                         $state.go('app.cart');
                     }else{

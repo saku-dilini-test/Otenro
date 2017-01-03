@@ -1,11 +1,11 @@
 
 
-mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPopup, $state, constants, $stateParams) {
+mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPopup, $state, constants, $stateParams,$log) {
 
     $scope.$emit('hideMenu',{});
     var pickup = {};
 
-    console.log($stateParams.item);
+    $log.debug($stateParams.item);
     $http.get(constants.SERVER_URL + "/edit/getShippingPickupInfo?appId="+$rootScope.appId)
         .success(function (data) {
 
@@ -37,7 +37,7 @@ mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPop
                         };
                         pickup.deliverDetails = $stateParams.deliverDetails;
                         pickup.pickupId = $scope.pickup.opt;
-                        console.log(pickup);
+                        $log.debug(pickup);
                         $state.go('tab.checkout',{item:pickup});
                     };
 });

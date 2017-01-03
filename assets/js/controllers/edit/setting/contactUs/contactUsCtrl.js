@@ -2,11 +2,11 @@
     'use strict';
     angular.module("appEdit").controller("contactUsCtrl", [
         '$scope','$rootScope','$mdDialog', 'toastr','contactUsService','uiGmapGoogleMapApi','commerceService','$auth',
-        'ME_APP_SERVER','mySharedService',
+        'ME_APP_SERVER','mySharedService','SERVER_URL',
         contactUsCtrl]);
 
     function contactUsCtrl($scope,$rootScope,$mdDialog,toastr, contactUsService,uiGmapGoogleMapApi,commerceService,$auth,
-                            ME_APP_SERVER,mySharedService) {
+                            ME_APP_SERVER,mySharedService,SERVER_URL) {
 
         // --/-- Characters length config
         $scope.maxBasicInfoAddress = 20;
@@ -224,8 +224,9 @@
                             toastr.success('About us updated', 'Awesome!', {
                                 closeButton: true
                             });
-                            $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                +'/templates/'+$rootScope.appId+'' +
+                            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                           +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                            $scope.appTemplateUrl = urlPath+'' +
                                 '#/app/aboutUs';
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $mdDialog.hide();

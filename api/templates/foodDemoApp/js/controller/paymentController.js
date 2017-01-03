@@ -5,7 +5,7 @@
  * Edited by Shashan on 01/11/16.
  */
 
-mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService) {
+mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService,$log) {
 
     $scope.$emit('hideMenu',{});
 
@@ -32,7 +32,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
     $http.get(constants.SERVER_URL + '/edit/getIPGInfo?appId='+$scope.appId).success(function(data) {
         $scope.paymentData = data;
-        console.log($scope.paymentData);
+        $log.debug($scope.paymentData);
         if($stateParams.item.delivery.method == "Delivery") {
             $scope.deliveryShow = data.cashOnDeliveryEnable;
             $scope.pickupShow = false;
@@ -52,7 +52,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here ends retrieving the currency --/--//
 
     // --/-- Here start Card Payment Function --/--
-    console.log($stateParams.item.amount);
+    $log.debug($stateParams.item.amount);
     // Config Cart payment
     $scope.cardType = {};
     $scope.card = {
@@ -91,7 +91,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 description: $rootScope.appName
             },
             function(response) {
-                console.log(JSON.stringify(response, null, 2));
+                $log.debug(JSON.stringify(response, null, 2));
                 // TODO : This alert for only testing
                 alert(JSON.stringify(response, null, 2));
                 if(response.error){
@@ -126,16 +126,17 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
               $scope.orderProcess();
             }
           },function(err){
-            console.log(err);
+            $log.debug(err);
           })
     }
 
     $scope.orderProcess = function(){
-      console.log("orderProcess");
+      $log.debug("orderProcess");
       if($stateParams.item.delivery.method == "Delivery"){
-        console.log('delivery');
+        $log.debug($scope.user.registeredUser);
           $scope.details ={
               appId : $rootScope.appId,
+              registeredUser: $scope.user.registeredUser,
               item : $stateParams.item.cart,
               amount : $stateParams.item.amount,
               customerName : $scope.user.name,
@@ -154,8 +155,10 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
           };
       }
       else{
+          $log.debug($scope.user.registeredUser);
           $scope.details ={
               appId : $rootScope.appId,
+              registeredUser: $scope.user.registeredUser,
               item : $stateParams.item.cart,
               amount : $stateParams.item.amount,
               customerName : $stateParams.deliverDetails.name,
@@ -167,6 +170,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
               promotionCode: $stateParams.item.promotionCode
           }
       }
+      $log.debug(details);
       $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
          .then(function(res){
           $scope.details.id = $rootScope.cart.cartItems[0].id;
@@ -204,11 +208,11 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                   $state.go('app.category');
               },
               function(err){
-                  console.log(err);
+                  $log.debug(err);
               });
       },
       function(err){
-          console.log(err);
+          $log.debug(err);
       });
     }
     // --/-- Here end Card Payment Function --/--
@@ -218,6 +222,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         if($stateParams.item.delivery.method == "Delivery"){
             $scope.details ={
                 appId : $rootScope.appId,
+                registeredUser: $scope.user.registeredUser,
                 item : $stateParams.item.cart,
                 amount : $stateParams.item.amount,
                 customerName : $scope.user.name,
@@ -239,6 +244,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         else{
             $scope.details ={
                 appId : $rootScope.appId,
+                registeredUser: $scope.user.registeredUser,
                 item : $stateParams.item.cart,
                 amount : $stateParams.item.amount,
                 customerName : $stateParams.item.deliverDetails.name,
@@ -288,11 +294,11 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                 $state.go('app.category');
                             },
                             function(err){
-                                console.log(err);
+                                $log.debug(err);
                             });
                 },
                 function(err){
-                    console.log(err);
+                    $log.debug(err);
                 });
     }
     // --/-- Here end cash Payment Function --/--
@@ -309,6 +315,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         appId : $rootScope.appId,
                         item : $stateParams.item.cart,
                         amount : $stateParams.item.amount,
+                        registeredUser: $scope.user.registeredUser,
                         customerName : $scope.user.name,
                         deliverName : $stateParams.item.delivery.name,
                         deliveryNo : $stateParams.item.delivery.streetNumber,
@@ -331,6 +338,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         item : $stateParams.item.cart,
                         amount : $stateParams.item.amount,
                         customerName : $stateParams.item.deliverDetails.name,
+                        registeredUser: $scope.user.registeredUser,
                         telNumber : $stateParams.item.deliverDetails.number,
                         tax :   $stateParams.item.taxTotal,
                         shippingCost :   $stateParams.item.shippingCost,
@@ -377,11 +385,11 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                         $state.go('app.category');
                                     },
                                     function(err){
-                                        console.log(err);
+                                        $log.debug(err);
                                     });
                         },
                         function(err){
-                            console.log(err);
+                            $log.debug(err);
                         });
             }, function (error) {
                 alert("Transaction Canceled");
@@ -436,7 +444,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 .post(constants.SERVER_URL + '/edit/paymentMethods', postData)
                 .then(function(response) {
                     if (response.status === 200 && response.data !== undefined) {
-                        console.log('paymentMethodToken ' + response.data);
+                        $log.debug('paymentMethodToken ' + response.data);
                         $scope.paymentMethodToken = response.data;
                         $scope.step = 'checkout';
                         $scope.amount = $stateParams.item.amount;
@@ -465,6 +473,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             appId : $rootScope.appId,
                             item : $stateParams.item.cart,
                             amount : $stateParams.item.amount,
+                            registeredUser: $scope.user.registeredUser,
                             customerName : $scope.user.name,
                             deliverName : $stateParams.item.delivery.name,
                             deliveryNo : $stateParams.item.delivery.streetNumber,
@@ -484,6 +493,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         $scope.details ={
                             appId : $rootScope.appId,
                             item : $stateParams.item.cart,
+                            registeredUser: $scope.user.registeredUser,
                             amount : $stateParams.item.amount,
                             customerName : $stateParams.item.deliverDetails.name,
                             telNumber : $stateParams.item.deliverDetails.number,
@@ -531,11 +541,11 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                             $state.go('app.category');
                                         },
                                         function(err){
-                                            console.log(err);
+                                            $log.debug(err);
                                         });
                             },
                             function(err){
-                                console.log(err);
+                                $log.debug(err);
                             });
                 }
             },function (error) {

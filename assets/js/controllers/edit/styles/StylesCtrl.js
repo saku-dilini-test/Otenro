@@ -1,10 +1,11 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("StylesCtrl",
-        ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','stylesService','ME_APP_SERVER','$auth',
-        'mySharedService',StylesCtrl]);
+        ['$scope','$mdDialog','$rootScope','$timeout','toastr','$window','stylesService','ME_APP_SERVER','$auth','SERVER_URL',
+        'mySharedService','$log',StylesCtrl]);
 
-    function StylesCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,stylesService,ME_APP_SERVER,$auth,mySharedService) {
+    function StylesCtrl($scope,$mdDialog,$rootScope,$timeout,toastr,$window,stylesService,ME_APP_SERVER,$auth,SERVER_URL,
+            mySharedService) {
 
         var appId = $rootScope.appId;
 
@@ -294,7 +295,7 @@
                         closeButton: true
                     })
                     .error(function (res) {
-                           console.log(res);
+                           $log.debug(res);
                        toastr.error('Error changing image', 'Waring', {
                            closeButton: true
                     });
@@ -333,8 +334,9 @@
             };
             stylesService.addBackgroundImage($scope.backgroundImgData)
                 .success(function (res) {
-                    $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                        +'/templates/'+appId+'/?'+new Date().getTime();
+                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                    $scope.appTemplateUrl = urlPath+'/?'+new Date().getTime();
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     $mdDialog.hide();
                     toastr.success('Background Image Updated Saved', 'Message', {
@@ -389,11 +391,11 @@
                             toastr.success('Content Font Color Successfully Updated', {
                                 closeButton: true
                             });}
-
-                        $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                            +'/templates/'+appId+'/?'+new Date().getTime();
+                        var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                       +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                        $scope.appTemplateUrl = urlPath+'/?'+new Date().getTime();
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        console.log($scope.appTemplateUrl);
+                        $log.debug($scope.appTemplateUrl);
 
                         // var tempUrl = mySharedService.url;
                         // mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());

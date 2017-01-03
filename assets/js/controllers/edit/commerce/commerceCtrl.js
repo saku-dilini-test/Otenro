@@ -3,12 +3,12 @@
     angular.module("appEdit").controller("CommerceCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope',
         'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','comingSoonService',
-        '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants','$templateCache','uiGridExporterConstants','uiGridExporterService',
+        '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants','$templateCache','uiGridExporterConstants','uiGridExporterService','$log',
         CommerceCtrl]);
 
     function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope,
              SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
-             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,sendDate) {
+             contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,sendDate,$log) {
 
         $scope.refund = [];
         $scope.unfulfilled = [];
@@ -69,6 +69,7 @@
             },
             columnDefs: [
                 /*{name: 'id'},*/
+                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate',},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -117,7 +118,7 @@
                 templateUrl: 'user/edit/commerce/OrderDetailsView.html',
                 controller: function DialogController($scope, $mdDialog, $auth) {
                     $scope.oderData = row;
-                    console.log(row);
+                    $log.debug(row);
 
                     //$scope.curruntDate = new Date();
                     //var sDate = $scope.oderData.entity.fulfilledDate;
@@ -178,6 +179,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
+                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -213,6 +215,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
+                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -250,6 +253,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
+                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -475,7 +479,7 @@
                     return;
                 }
             }
-            console.log(storeSettings);
+            $log.debug(storeSettings);
             if (!storeSettings){
                 toastr.error(' warning', "Please fill all required fields", {closeButton: true});
             }/*else if (!storeSettings.orderNumber) {
@@ -572,8 +576,9 @@
                             toastr.success('Store Setting Details has been added successfully', 'Awesome', {
                                 closeButton: true
                             });
-                            $scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                +'/templates/'+$rootScope.appId+'' +
+                            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                           +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                            $scope.appTemplateUrl = urlPath+'' +
                                 '#/app/aboutUs';
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $scope.selectedTab = current;
@@ -709,7 +714,7 @@
             email.appId = $rootScope.appId;
             commerceService.saveEmailDeliInfo(email)
                 .success(function (data) {
-                    console.log(data);
+                    $log.debug(data);
                     if (type == "next") {
                         var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                         $scope.selectedIndex = index;
@@ -731,7 +736,7 @@
         };
         $scope.updateEmailSettings = function (email, type) {
 
-            console.log(email);
+            $log.debug(email);
             if(email == undefined){
                 toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
@@ -741,7 +746,7 @@
                 email.appId = $rootScope.appId;
                 commerceService.updateEmailSettings(email)
                     .success(function (data) {
-                        console.log(data);
+                        $log.debug(data);
                         if (type == "next") {
                             var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                             $scope.selectedIndex = index;
@@ -765,7 +770,7 @@
         };
         $scope.updateHeaderFooterSettings = function (picFileHeader, picFileFooter, email, type) {
 
-            console.log(email);
+            $log.debug(email);
             if(email == undefined || email.footer == undefined || email.header == undefined || email.footer == '' || email.header == ''){
                 toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
@@ -780,7 +785,7 @@
                 email.userId = $auth.getPayload().id;
                 commerceService.updateHeaderFooterSettings(picFileHeader, picFileFooter, email)
                     .success(function (data) {
-                        console.log(data);
+                        $log.debug(data);
                         if (type == "next") {
                             var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                             $scope.selectedIndex = index;
@@ -843,7 +848,7 @@
             alert("MainMenu Loading Error : " + error);
         });
         $scope.testEmail = function (type) {
-            console.log('d');
+            $log.debug('d');
             var sendType = {
                 type: type,
                 userId: $auth.getPayload().id
@@ -857,7 +862,7 @@
                     $scope.email = result;
 
             sendType.appId = $rootScope.appId;
-            console.log($scope.email);
+                    $log.debug($scope.email);
             for (var i = 0; i < $scope.email.length; i++) {
                 if ((type == "Order confirm") && (typeof $scope.email[0].orderConfirmedEmail === 'undefined')) {
                     toastr.error('Save before test the Email ', 'Warning', {
@@ -889,7 +894,7 @@
                 }
             }
                 }).error(function (error) {
-                console.log("Email Loading Error : " + error);
+                $log.debug("Email Loading Error : " + error);
             });
 
         };

@@ -29,7 +29,7 @@ module.exports = {
         }).exec({
 
           error: function (err){
-            console.log(err);
+            sails.log.info(err);
             return res.negotiate(err);
           },
 
@@ -146,7 +146,7 @@ module.exports = {
     }).exec({
       // An unexpected error occurred.
       error: function (err){
-        console.log(err);
+        sails.log.info(err);
       },
       // OK.
       success: function ( result){

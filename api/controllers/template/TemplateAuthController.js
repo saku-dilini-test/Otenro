@@ -27,7 +27,7 @@ module.exports = {
             }).exec({
 
                 error: function (err){
-                    console.log(err);
+                    sails.log.info(err);
                     return res.negotiate(err);
                 },
 
@@ -60,7 +60,7 @@ module.exports = {
     },
 
     register: function(req, res) {
-        console.log(req.body);
+        sails.log.info(req.body);
         AppUser.create(req.body).exec(function(err, user) {
             if (err) {
                 return res.negotiate(err);
@@ -78,7 +78,7 @@ module.exports = {
                         return err;
                     },
                     success: function (result){
-                        console.log(result);
+                        sails.log.info(result);
                         res.status(200).json({user : { email : user.email , sub : user.id  },token : result });
                     }
                 });
@@ -164,7 +164,7 @@ module.exports = {
         }).exec({
             // An unexpected error occurred.
             error: function (err){
-                console.log(err);
+                sails.log.info(err);
             },
             // OK.
             success: function ( result){
@@ -198,7 +198,7 @@ module.exports = {
                                     });
                                 });
                             } else {
-                                console.log(appUser);
+                                sails.log.info(appUser);
                                 JWT.encode({
                                     secret: config.CLIENT_SECRET,
                                     payload: {

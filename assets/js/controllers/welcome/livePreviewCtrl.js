@@ -10,13 +10,13 @@
     angular.module('app')
         .controller('livePreviewCtrl',
         ['$scope', 'welcomeTemplatesResource', 'userProfileService','$stateParams','$mdDialog','mySharedService','$http','$state','ME_APP_SERVER',
-        '$auth','toastr','$cookieStore','$cookies','$interval','$q',
+        '$auth','toastr','$cookieStore','$cookies','$interval','$q','$log',
             livePreviewCtrl
         ]);
 
 
     function livePreviewCtrl($scope,welcomeTemplatesResource, userProfileService,$stateParams,$mdDialog,mySharedService,
-    $http,$state,ME_APP_SERVER,$auth,toastr,$cookieStore,$cookies,$interval,$q) {
+    $http,$state,ME_APP_SERVER,$auth,toastr,$cookieStore,$cookies,$interval,$q,$log) {
         welcomeTemplatesResource.getTemplates().success(function(data){
             $cookies.temp = data;
             $scope.templates = $cookies.temp;
@@ -47,12 +47,12 @@
         $scope.tempName = $stateParams.tempName;
         $scope.tempCategory = $stateParams.tempCategory;
 
-        // $stateParams console.log only testing
-        console.log('User ID : '+$stateParams.userId);
-        console.log('App ID : '+$stateParams.appId);
-        console.log('TempUrl : '+$stateParams.tempUrl);
-        console.log('Temp Name : '+$stateParams.tempName);
-        console.log('TempCategory : '+$stateParams.tempCategory);
+        // $stateParams $log.debug only testing
+        $log.debug('User ID : '+$stateParams.userId);
+        $log.debug('App ID : '+$stateParams.appId);
+        $log.debug('TempUrl : '+$stateParams.tempUrl);
+        $log.debug('Temp Name : '+$stateParams.tempName);
+        $log.debug('TempCategory : '+$stateParams.tempCategory);
 
         var userID = $stateParams.userId;
         var appID  = $stateParams.appId;

@@ -1,7 +1,7 @@
 
 
 
-mobileApp.controller('RegisterCtrl', function($scope,$rootScope,$http,$ionicPopup,$state,$stateParams,$auth,constants) {
+mobileApp.controller('RegisterCtrl', function($scope,$rootScope,$http,$ionicPopup,$state,$stateParams,$auth,constants,$log) {
     $scope.data = {};
 
 
@@ -35,10 +35,11 @@ mobileApp.controller('RegisterCtrl', function($scope,$rootScope,$http,$ionicPopu
             	"country": data.country,
             	"city": data.city,
             	"type": 'internal',
-                "appId":data.appId
+                "appId":data.appId,
+                "registeredUser": res.data.user.sub
             };
             		localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
-            		console.log(localStorage.getItem('appLocalStorageUser'));
+            		$log.debug(localStorage.getItem('appLocalStorageUser'));
                 if($stateParams.item == 'delivery'){
                     $state.go('tab.cart');
                 }else{

@@ -11,7 +11,7 @@
 			'$ionicLoading',
 			'$rootScope',
 			'$scope',
-			function (pagesService, $stateParams, $ionicLoading,$rootScope,$scope) {
+			function (pagesService, $stateParams, $ionicLoading,$rootScope,$scope,$log) {
 				'use strict';
 
 				//var vm = this;
@@ -27,17 +27,17 @@
 				var appId = $rootScope.appId;
 				pagesService.getAboutUs(appId).then(setAboutUs)
 					.finally(function(){
-						console.log("setAboutUs  " + JSON.stringify(setAboutUs));
+						$log.debug("setAboutUs  " + JSON.stringify(setAboutUs));
 						$ionicLoading.hide();
 					});
 
 
 				function setAboutUs(response) {
-					console.log("response  " + JSON.stringify(response));
+					$log.debug("response  " + JSON.stringify(response));
 					$scope.header = response.header;
 					$scope.content = response.content;
 					$scope.termsAndCondition = response.termsAndCondition;
-					console.log(response.content);
+					$log.debug(response.content);
 				}
 
 			}

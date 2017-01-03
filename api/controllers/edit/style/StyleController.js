@@ -82,13 +82,13 @@ module.exports = {
                 if(err){
                     return console.dir(err);
                 }
-                console.log("Header file read");
+                sails.log.info("Header file read");
                 fs.writeFile(headerImage, headerimageBuffer.data, function (err) {
                     if(err){
                         //this will log specific error to file
                         return console.dir(err);
                     }
-                    console.log("Header image write");
+                    sails.log.info("Header image write");
                     im.resize({
                         srcPath:headerImage,
                         dstPath: headerExist,
@@ -97,9 +97,9 @@ module.exports = {
 
                     }, function(err, stdout, stderr){
                         if (err) throw err;
-                        console.log('resized image to fit within ' + headerDimensions.width + ' and ' + headerDimensions.height);
+                        sails.log.info('resized image to fit within ' + headerDimensions.width + ' and ' + headerDimensions.height);
                     });
-                    console.log("success");
+                    sails.log.info("success");
                 });
             });
         }
@@ -125,10 +125,10 @@ module.exports = {
                         height: backgroundDimensions.height
                     }, function(err, stdout, stderr){
                         if (err) throw err;
-                        console.log('resized image to fit within ' + backgroundDimensions.width + ' and ' + backgroundDimensions.height);
+                        sails.log.info('resized image to fit within ' + backgroundDimensions.width + ' and ' + backgroundDimensions.height);
                     });
 
-                    console.log("success");
+                    sails.log.info("success");
                 });
             });
         }
@@ -164,7 +164,7 @@ module.exports = {
                 target: "color",
                 replacer: color
             }], function(err) {
-                console.log((err));
+                sails.log.info((err));
             });
         } else if (color == "#FFFFFF" && font == "Arial") {
             updateFile(main, [{
@@ -172,7 +172,7 @@ module.exports = {
                 target: "font-size",
                 replacer: fontSize + "em"
             }], function(err) {
-                console.log((err));
+                sails.log.info((err));
             });
         } else if (color == "#FFFFFF" && fontSize == 11) {
             updateFile(main, [{
@@ -180,7 +180,7 @@ module.exports = {
                 target: "font-family",
                 replacer: font
             }], function(err) {
-                console.log((err));
+                sails.log.info((err));
             });
         } else if (font == "Arial") {
             updateFile(main, [{
@@ -192,7 +192,7 @@ module.exports = {
                 target: "font-size",
                 replacer: fontSize + "em"
             }], function(err) {
-                console.log((err));
+                sails.log.info((err));
             });
         } else if (fontSize == 11) {
             updateFile(main, [{
@@ -204,7 +204,7 @@ module.exports = {
                 target: "font-family",
                 replacer: font
             }], function(err) {
-                console.log((err));
+                sails.log.info((err));
             });
         } else {
             updateFile(main, [{
@@ -220,7 +220,7 @@ module.exports = {
                 target: "font-size",
                 replacer: fontSize + "em"
             }], function(err) {
-                console.log((err));
+                sails.log.info((err));
             });
 
         }
@@ -287,14 +287,14 @@ module.exports = {
                 if(err){
                     return console.dir(err);
                 }
-                console.log("Header file read");
+                sails.log.info("Header file read");
                 fs.writeFile(headerImage, headerimageBuffer.data, function (err) {
                     if(err){
                         //this will log specific error to file
                         return console.dir(err);
                     }
-                    console.log("Header image write");
-                    console.log(headerDimensions.height);
+                    sails.log.info("Header image write");
+                    sails.log.info(headerDimensions.height);
                     im.resize({
                         srcPath:headerImage,
                         dstPath: headerExist,
@@ -303,9 +303,9 @@ module.exports = {
 
                     }, function(err, stdout, stderr){
                         if (err) throw err;
-                        console.log('resized image to fit within ' + headerDimensions.width + ' and ' + headerDimensions.height);
+                        sails.log.info('resized image to fit within ' + headerDimensions.width + ' and ' + headerDimensions.height);
                     });
-                    console.log("success");
+                    sails.log.info("success");
                 });
             });
         }
@@ -336,7 +336,7 @@ module.exports = {
                         target: "background",
                         replacer: "url(../img/background.jpg) center"
                     }], function (err) {
-                        console.log((err));
+                        sails.log.info((err));
                     });
                 }else{
                     updateFile(mainCssFile, [{
@@ -344,7 +344,7 @@ module.exports = {
                         target: "background",
                         replacer: 'null'
                     }], function (err) {
-                        console.log((err));
+                        sails.log.info((err));
                     });
                 }
                 res.send(appUpdate);
@@ -386,7 +386,7 @@ module.exports = {
      */
     addBackgroundImage : function(req,res){
 
-        console.log("addBackgroundImage running ");
+        sails.log.info("addBackgroundImage running ");
         var userId = req.userId;
         var appId = req.body.appId;
         var backImg = req.body.backgroundImg;
@@ -522,7 +522,7 @@ module.exports = {
     //        updateFile(mainCssFile, [{
     //
     //        }], function (err) {
-    //            console.log((err));
+    //            sails.log.info((err));
     //        });
     //    }else{
     //        updateFile(mainCssFile, [{
@@ -530,7 +530,7 @@ module.exports = {
     //            target: "color",
     //            replacer: backgroundColor
     //        }], function (err) {
-    //            console.log((err));
+    //            sails.log.info((err));
     //        });
     //    }
    // },
@@ -602,7 +602,7 @@ module.exports = {
                         target: "color",
                         replacer: styleColor
                     }], function (err) {
-                        console.log((err));
+                        sails.log.info((err));
                     });
 
                 }// here update border-color in Css class
@@ -612,7 +612,7 @@ module.exports = {
                         target: "border-color",
                         replacer: styleColor + " "+"!important"
                     }], function (err) {
-                        console.log((err));
+                        sails.log.info((err));
                     });
 
                 }else
@@ -623,7 +623,7 @@ module.exports = {
                         target: "background-color",
                         replacer: styleColor + " "+"!important"
                     }], function (err) {
-                        console.log((err));
+                        sails.log.info((err));
                     });
                 }
                 res.send(appUpdate);
@@ -648,7 +648,7 @@ module.exports = {
                             replaceStr = "$1" + replacements[i].replacer + "$3";
                             data = data.replace(regex, replaceStr);
                         }
-                        console.log("Test")
+                        sails.log.info("Test")
                     }
                     fs.writeFile(filename, data, 'utf-8', function(err) {
                         if (err) {
@@ -704,7 +704,7 @@ module.exports = {
                     target: "font-family",
                     replacer: styleFontFamily
                 }], function (err) {
-                    console.log((err));
+                    sails.log.info((err));
                 });
 
                 res.send(appUpdate);
@@ -776,7 +776,7 @@ module.exports = {
                         target: "font-size",
                         replacer: styleFontSize +'vh'
                     }], function (err) {
-                        console.log((err));
+                        sails.log.info((err));
                     });
                 res.send(appUpdate);
             });
@@ -849,7 +849,7 @@ module.exports = {
                     target: "font-weight",
                     replacer: styleFontWeight
                 }], function (err) {
-                    console.log((err));
+                    sails.log.info((err));
                 });
 
                 res.send(appUpdate);
@@ -909,7 +909,7 @@ module.exports = {
                     target: "border-width",
                     replacer: buttonBorderWidth +" "+"!important"
                 }], function (err) {
-                    console.log((err));
+                    sails.log.info((err));
                 });
 
                 res.send(appUpdate);
@@ -951,7 +951,7 @@ module.exports = {
      * Update button border Radius function
      */
     addStyleButtonBorderRadius : function(req,res){
-        console.log(req.body);
+        sails.log.info(req.body);
         var userId = req.userId;
         var appId = req.body.appId;
         var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
@@ -971,7 +971,7 @@ module.exports = {
                     target: "border-radius",
                     replacer: buttonBorderRadius
                 }], function (err) {
-                    console.log((err));
+                    sails.log.info((err));
                 });
 
                 res.send(appUpdate);
@@ -1061,7 +1061,7 @@ module.exports = {
             updateFile(mainCssFile, [{
 
             }], function(err) {
-                console.log((err));
+                sails.log.info((err));
             });
         } else if (font == "Arial") {
             updateFile(mainCssFile, [{
@@ -1069,7 +1069,7 @@ module.exports = {
                 target: "font-size",
                 replacer: fontSize + "em"
             }], function(err) {
-                console.log((err));
+                sails.log.info((err));
             });
         } else if (fontSize == 11) {
             updateFile(mainCssFile, [{
@@ -1077,7 +1077,7 @@ module.exports = {
                 target: "font-family",
                 replacer: font
             }], function(err) {
-                console.log((err));
+                sails.log.info((err));
             });
         }else {
             updateFile(mainCssFile, [{
@@ -1089,7 +1089,7 @@ module.exports = {
                 target: "font-size",
                 replacer: fontSize + "em"
             }], function(err) {
-                console.log((err));
+                sails.log.info((err));
             });
 
         }
@@ -1102,7 +1102,7 @@ module.exports = {
         var headerExist = config.ME_SERVER + req.userId + '/templates/' + req.body.appId + '/img/header.jpg';
         var headerDimensions = sizeOf(headerExist);
 
-        console.log(headerDimensions);
+        sails.log.info(headerDimensions);
 
         req.file('file').upload({
             dirname: require('path').resolve(dePath)

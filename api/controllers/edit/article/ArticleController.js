@@ -25,7 +25,7 @@ module.exports = {
 
         Article.find(searchQuery).exec(function(err,result) {
             if (err) {
-                sails.log.debug("Article Collection find Error for given appId : "+appId);
+                sails.log.error("Article Collection find Error for given appId : "+appId);
                 return done(err);
             }
             res.send(result);
@@ -47,7 +47,7 @@ module.exports = {
 
         ArticleCategory.find(searchQuery).exec(function(err,result) {
             if (err) {
-                sails.log.debug("Article Category Collection find Error for given appId : "+appId);
+                sails.log.error("Article Category Collection find Error for given appId : "+appId);
                 return done(err);
             }
             res.send(result);
@@ -68,7 +68,7 @@ module.exports = {
 
         ArticleCategory.create(data).exec(function(err,result) {
             if (err){
-                sails.log.debug("Article Category Create Error");
+                sails.log.error("Article Category Create Error");
                 return done(err);
             }
             res.send(result);
@@ -90,7 +90,7 @@ module.exports = {
 
         ArticleCategory.destroy(deleteQuery).exec(function(err,result) {
            if (err){
-               sails.log.debug("Article Category Delete Error");
+               sails.log.error("Article Category Delete Error");
                return res.send(err);
            }
             res.send(result);
@@ -111,7 +111,7 @@ module.exports = {
 
         ArticleCategory.update(updateQuery,req.body).exec(function(err,result) {
             if (err){
-                sails.log.debug("Article Category Name Edit Error");
+                sails.log.error("Article Category Name Edit Error");
                 return res.send(err);
             }
             res.send(result);
@@ -186,7 +186,7 @@ module.exports = {
             var data = article;
             Article.update(updateQuery,data).exec(function(err, result) {
                 if (err) res.send(err);
-                //console.log(result);
+                //sails.log.info(result);
                 res.send({categoryId : article.categoryId});
             });
 
@@ -206,7 +206,7 @@ module.exports = {
                 var data = article;
                 Article.update(updateQuery,data).exec(function(err, result) {
                     if (err) res.send(err);
-                    //console.log(result);
+                    //sails.log.info(result);
                     res.send({categoryId : article.categoryId});
                 });
             });

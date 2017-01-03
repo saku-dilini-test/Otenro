@@ -31,7 +31,7 @@ module.exports = {
             PushConfig.findOne(findDevicedQuery).exec(function(err,pushConfigData){
 
 
-                console.log( pushConfigData);
+                sails.log.info( pushConfigData);
 
                 var Message = req.body.message;
                 var PushUrl = config.PUSH_API_URL;
@@ -44,7 +44,7 @@ module.exports = {
                     for(var i=0; i<deviceArray.length; i++){
                         // push API request
 
-                        console.log(" deviceArray " + deviceArray[i].deviceId);
+                        sails.log.info(" deviceArray " + deviceArray[i].deviceId);
                         request.post(PushUrl,
                             {json:{"tokens": [deviceArray[i].deviceId],
                                 "profile": Profile,
@@ -56,7 +56,7 @@ module.exports = {
                                     'Authorization': Authorization
                                 }} , function(error, response, body){
                                 if (error) sails.log.info(error);
-			       console.log("push response "+JSON.stringify(response));
+			       sails.log.info("push response "+JSON.stringify(response));
                                 sails.log.info("push response "+response);
                             });
                     }
@@ -65,6 +65,22 @@ module.exports = {
             });
         });
     },
+
+
+    // get registered user Details
+
+    getAppUserData : function(req,res){
+        var appId = req.param('appId');
+        var searchQuery = {
+            appId: appId
+        };
+        AppUser.find(searchQuery).exec(function(err, result) {
+            if (err) return res.send(err);
+            return res.send(result);
+        });
+    },
+
+
     getMessageDetails: function(req, res){
     var appId = req.param('appId');
     var userId = req.param('userId');
@@ -77,5 +93,19 @@ module.exports = {
             res.send(app);
         });
 
+    },
+
+    getUserOrders: function (req, res) {
+        var registeredUser = req.param('registeredUser');
+        sails.log.info(registeredUser);
+        sails.log.info(req.param('registeredUser'));
+        var searchApp = {
+            registeredUser: registeredUser
+        }
+        ApplicationOrder.find(searchApp).exec(function (err, app) {
+            if (err) return done(err);
+            res.send(app);
+        })
     }
+
 }
