@@ -27,12 +27,12 @@ module.exports = {
 
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'http://localhost',
+  HOST_URL : 'http://192.168.8.154',
   // ME SERVER Config
-  ME_SERVER_URL : 'http://localhost:80/meServer/temp/',
-  ME_SERVER : 'c:/xampp/htdocs/meServer/temp/',
+  ME_SERVER_URL : 'http://192.168.8.154:80/meServer/temp/',
+  ME_SERVER : '/var/www/html/meServer/temp/',
   ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : 'c:/xampp/htdocs/meServer/temp/',
+  APP_FILE_SERVER : '/home/manosh/appFileServer/',
   CLIENT_SECRET : '44f4f3be572ec33711a40a5b8b4'
 };
