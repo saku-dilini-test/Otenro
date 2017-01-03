@@ -12,7 +12,7 @@ module.exports = {
     attributes: {
 
         appName:{
-            type: 'string',
+            type: 'string'
             required: true
         },
         appTempPath:{
