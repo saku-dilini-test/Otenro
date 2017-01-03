@@ -141,9 +141,7 @@ module.exports = {
             }
             else{
                 var result = data.replace(/<!-- cordova.js -->/g, '<script src="cordova.js"></script>')
-                    .replace(/<!-- paypal-mobile-js-helper -->/g, '<script src="lib/paypal-mobile-js-helper.js"></script>')
-                    .replace(/<!-- cdv-plugin-paypal-mobile-sdk -->/g, '<script src="lib/payPalService.js"></script>')
-                    .replace(/<!-- payPalService -->/g, '<script src="lib/paypal-mobile-js-helper.js"></script>');
+                    .replace(/<!-- cdv-plugin-paypal-mobile-sdk -->/g, '<script src="lib/cdv-plugin-paypal-mobile-sdk.js"></script>');
 
                 fs.writeFile(indexPath, result, function (err) {
                     if(err){
