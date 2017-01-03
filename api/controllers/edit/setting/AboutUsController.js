@@ -37,7 +37,7 @@ module.exports = {
     },
 
     getAboutUsData: function (req, res) {
-        console.log("req.param('appId') " + req.param('appId'));
+        sails.log.info("req.param('appId') " + req.param('appId'));
         var appId = req.param('appId');
         var searchApp = {
             appId: appId

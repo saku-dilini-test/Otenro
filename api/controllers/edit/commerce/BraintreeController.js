@@ -24,9 +24,9 @@ module.exports = {
             publicKey: "9bqjdssmgrrg7j8w",
             privateKey: "b5f83bb6a33b0c3be424c45eddc5ad49"
         }).clientToken.generate({}, function (err, response) {
-            console.log("error " + err);
+            sails.log.info("error " + err);
             if (err) return res.send(err);
-            console.log("response " + response);
+            sails.log.info("response " + response);
             res.send(response.clientToken);
         });
 
@@ -34,7 +34,7 @@ module.exports = {
 
     paymentMethods : function(req,res){
        nonceFromTheClient = req.body.paymentMethodNonce;
-        console.log("nonceFromTheClient " + nonceFromTheClient);
+        sails.log.info("nonceFromTheClient " + nonceFromTheClient);
         res.send(nonceFromTheClient);
     },
 
@@ -53,7 +53,7 @@ module.exports = {
             }
         }, function (err, result) {
             if (err) return res.send(err);
-            console.log(result.transaction.id);
+            sails.log.info(result.transaction.id);
             res.send(result);
         });
 

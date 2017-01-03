@@ -120,7 +120,7 @@ module.exports = {
             appId: req.body.appId
         };
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
-            if(err) console.log(err);
+            if(err) sails.log.info(err);
             if (app.length == 0) {
                 ApplicationContactUs.create(data).exec(function (err, appContactUs) {
                     if (err) res.send(err);

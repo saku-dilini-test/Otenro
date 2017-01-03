@@ -130,7 +130,7 @@ module.exports = {
                 if (err) return console.error(err);
             });
 
-            console.log("req.body.imageUrl, " + req.body.imageUrl);
+            sails.log.info("req.body.imageUrl, " + req.body.imageUrl);
             if (typeof req.body.imageUrl != "undefined") {
                 // Create new img file name using date.now() 
                 var fileName = Date.now() + '.jpg';

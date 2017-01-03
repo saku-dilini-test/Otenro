@@ -24,7 +24,7 @@ module.exports = {
             appId: req.body.appId
         }
         var updateData = req.body;
-        console.log(findQuery);
+        sails.log.info(findQuery);
         if(typeof req.body.id != 'undefined'){
            ApplicationTax.update(searchQuery,updateData,function(err,result) {
                 if (err) return res.send(err);
@@ -33,7 +33,7 @@ module.exports = {
         }else{
            ApplicationTax.find(findQuery).exec(function(error,data){
                 if(error) return res.send(error);
-               console.log(data);
+               sails.log.info(data);
                 if(data == ''){
                     ApplicationTax.create(updateData).exec(function (err, result) {
                          if (err) return res.send(err);

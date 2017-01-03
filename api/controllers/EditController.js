@@ -55,13 +55,13 @@ module.exports = {
                             fs.stat(path, function (err, fileStat) {
                                 if (err) {
                                     if (err.code == 'ENOENT') {
-                                        console.log('Does not exist.');
+                                        sails.log.info('Does not exist.');
                                     }
                                 } else {
                                     if (fileStat.isFile()) {
                                         fs.unlinkSync(path);
                                     } else if (fileStat.isDirectory()) {
-                                        console.log('Directory found.');
+                                        sails.log.info('Directory found.');
                                     }
                                 }
                             });
@@ -82,7 +82,7 @@ module.exports = {
             appId: appId,
             enteredBy:'demo'
         };
-        console.log(searchApp);
+        sails.log.info(searchApp);
         SecondNavigation.destroy(searchApp).exec(function (err, app) {
             if (err) {return res.negotiate(err);}
             else {
@@ -150,7 +150,7 @@ module.exports = {
                         sails.log.info(err);
                     }
                     else{
-                        console.log('writing to ' + indexPath);
+                        sails.log.info('writing to ' + indexPath);
                     }
                 })
             }
@@ -184,8 +184,8 @@ module.exports = {
                                                         sails.log.info(err);
                                                     }
                                                     else{
-                                                        console.log(JSON.stringify(jsonFile,null, 2));
-                                                        console.log('writing to ' + packageJsonFile);
+                                                        sails.log.info(JSON.stringify(jsonFile,null, 2));
+                                                        sails.log.info('writing to ' + packageJsonFile);
                                                     }
                                                 })
                                             }
@@ -259,7 +259,7 @@ module.exports = {
                                                                 sails.log.info(err);
                                                             }
                                                             else{
-                                                                console.log('writing to ' + packageJsonFile);
+                                                                sails.log.info('writing to ' + packageJsonFile);
                                                             }
                                                         })
                                                     }
@@ -394,13 +394,13 @@ module.exports = {
                                             fs.stat(appPath + '/platforms/android/build/outputs/apk/' + appName.replace(/\s/g, '') + '.apk', function (err, fileStat) {
                                                 if (err) {
                                                     if (err.code == 'ENOENT') {
-                                                        console.log('Does not exist.');
+                                                        sails.log.info('Does not exist.');
                                                     }
                                                 } else {
                                                     if (fileStat.isFile()) {
                                                         fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/' + appName.replace(/\s/g, '') + '.apk');
                                                     } else if (fileStat.isDirectory()) {
-                                                        console.log('Directory found.');
+                                                        sails.log.info('Directory found.');
                                                     }
                                                 }
                                             });
@@ -416,13 +416,13 @@ module.exports = {
                                                     fs.stat(zipFile, function (err, fileStat) {
                                                         if (err) {
                                                             if (err.code == 'ENOENT') {
-                                                                console.log('Does not exist.');
+                                                                sails.log.info('Does not exist.');
                                                             }
                                                         } else {
                                                             if (fileStat.isFile()) {
                                                                 fs.unlinkSync(zipFile);
                                                             } else if (fileStat.isDirectory()) {
-                                                                console.log('Directory found.');
+                                                                sails.log.info('Directory found.');
                                                             }
                                                         }
                                                     });
@@ -436,7 +436,7 @@ module.exports = {
                                                                 } else {
                                                                     zipFolder(publishPath, zipFile, function (err) {
                                                                         if (err) {
-                                                                            console.log('oh no!', err);
+                                                                            sails.log.info('oh no!', err);
                                                                         } else {
 
                                                                             var searchAppData = {
@@ -455,7 +455,7 @@ module.exports = {
                                                                                     var filestream = fs.createReadStream(zipFile);
 
                                                                                     filestream.pipe(res);
-                                                                                    console.log('EXCELLENT');
+                                                                                    sails.log.info('EXCELLENT');
                                                                                 }
                                                                             });
 

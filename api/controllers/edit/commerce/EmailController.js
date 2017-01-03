@@ -12,7 +12,7 @@ module.exports = {
     saveEmailDeliInfo : function(req,res){
 
 
-        console.log(req.body);
+        sails.log.info(req.body);
         var appId = req.param('appId');
         var searchApp = {
             appId: appId
@@ -42,9 +42,9 @@ module.exports = {
     },
     updateEmailSettings : function(req,res){
 
-        console.log(req.body);
+        sails.log.info(req.body);
         var appId = req.param('appId');
-        console.log(appId);
+        sails.log.info(appId);
         var saveData = req.body;
 
 
@@ -65,9 +65,9 @@ module.exports = {
         var appId = req.param('appId');
         var saveData = req.body;
 
-        console.log(dePath);
-        //console.log(req.file('file'));
-        //console.log(req.file('file'));
+        sails.log.info(dePath);
+        //sails.log.info(req.file('file'));
+        //sails.log.info(req.file('file'));
 
        // if(saveData.file != "") {
 
@@ -75,7 +75,7 @@ module.exports = {
                 dirname: require('path').resolve(dePath)
             }, function (err, uploadedFiles) {
 
-                //console.log(uploadedFiles);
+                //sails.log.info(uploadedFiles);
                 if (0 < uploadedFiles.length) {
 
                     var newFileName = Date.now() + uploadedFiles[0].filename;
@@ -94,7 +94,7 @@ module.exports = {
 
 
       //  }
-            console.log(saveData);
+            sails.log.info(saveData);
 
             UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
                 if (err) return done(err);
@@ -108,7 +108,7 @@ module.exports = {
     },
     getEmailSettings : function(req,res){
 
-        console.log(req.body);
+        sails.log.info(req.body);
 
         var appId = req.param('appId');
         var searchApp = {
@@ -124,7 +124,7 @@ module.exports = {
 
     sendTestEmail : function(req,res){
 
-        //console.log(req.body);
+        //sails.log.info(req.body);
         var type = req.body.type;
         var appId = req.param('appId');
         var userId = req.body.userId;
@@ -135,7 +135,7 @@ module.exports = {
             userId: userId
         }
         sentMails.sendConfirmEmail(data,function (err,msg) {
-            //console.log(err);
+            //sails.log.info(err);
             if (err) {
                 return  res.send(500);
             }else{

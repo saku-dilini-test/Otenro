@@ -25,7 +25,7 @@ module.exports = {
     getInventoryListByProductId : function (req,res) {
         var pId = req.param('pId');
         ApplicationInventory.find({productId: pId}).exec(function(e,invntry){
-            if(e) console.log(e);
+            if(e) sails.log.info(e);
             res.send(invntry);
         })
     },
@@ -55,13 +55,13 @@ module.exports = {
                 appData.productId = appData.id;
                 var appInvn = appData;
                 ApplicationInventory.find({productId: appData.id}).exec(function(e,fff){
-                    if(e) console.log(e);
+                    if(e) sails.log.info(e);
                     if(fff == ''){
                         ApplicationInventory.create(appInvn).exec(function(e,aaa){
-                            if(e) console.log(e);
+                            if(e) sails.log.info(e);
                             query.id = aaa.id;
                             PriceAndVariants.create(query).exec(function(er,bbb){
-                                if(er) console.log(er);
+                                if(er) sails.log.info(er);
                             })
                         })
                     }
@@ -122,7 +122,7 @@ module.exports = {
     updateInventoryProducts : function(req,res){
 
         var body=req.body;
-        console.log(body.cart);
+        sails.log.info(body.cart);
         var lng=body.length;
         for(var i=0 ; i < lng ; i++){
 

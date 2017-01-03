@@ -35,7 +35,7 @@ module.exports = {
             templatePath = sails.config.appPath + '/api/templates/' + templateName,
             appName = req.body.appName,
             serverTmp="http://localhost:port",
-            serverOrg=config.server.host;
+            serverOrg=config.server.host+':1337';
 
         var loginPath = '/#/',
             isApplyStyle =  {
@@ -543,7 +543,7 @@ module.exports = {
         fs.copy(templatePath, tempAppDirPath + 'changePreview' , function(err) {
             if (err) return console.error(err);
             var madeEasyFilePath = tempAppDirPath + appId + '/madeEasy.Project';
-            console.log(madeEasyFilePath);
+            sails.log.info(madeEasyFilePath);
             fs.copy(madeEasyFilePath, tempAppDirPath + 'changePreview/madeEasy.Project' , function(err){
                 if (err) return console.error(err);
                 var bgFilePath = tempAppDirPath + appId + '/img/background.jpg';
@@ -567,7 +567,7 @@ module.exports = {
             tempAppDirPath = config.ME_SERVER + userId + '/templates/changePreview',
             templatePath = config.ME_SERVER + userId + '/templates/'+appId;
             //templatePath = sails.config.appPath + '/api/templates/' + templateName;
-            console.log(templatePath);
+            sails.log.info(templatePath);
 
         fs.copy(tempAppDirPath, templatePath , function(err) {
             if (err) return console.error(err);
