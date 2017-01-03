@@ -26,3 +26,34 @@ SetUp Project
 		goto root directory
 
 			> sails lift
+
+Apache server changes for meServer
+===================================================================================================================
+Apache version 2.2
+
+Do the below changes in httpd.conf file
+Change the <Directory "/var/www> to <Directory "/var/www/html/meServer"> and should be as below.
+<Directory "/var/www/html/meServer">
+
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Order deny,allow
+    Deny from all
+    Allow from 127.0.0.1 ::1 localhost 192.168
+</Directory>
+
+Restart Apache server by the command "sudo service httpd restart"
+
+Apache version 2.4
+
+Do the below changes in apache2.conf file
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        <RequireAll>
+                Require local
+        </RequireAll>
+</Directory>
+
+Restart Apache server by the command "sudo service apache2 restart"
+
