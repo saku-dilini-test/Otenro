@@ -127,11 +127,11 @@
                     $log.debug(err);
                 });
         }
-    }
     // Sales & Promotions
 
         $scope.addNewSalesAndPromotions=function(){
              return engageService.showPromotionsAndSalesAddNewDialog();
+    };
     };
 
 })();

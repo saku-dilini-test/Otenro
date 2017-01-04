@@ -6,8 +6,7 @@
 
 module.exports = {
 
-    editUserProfile :
-    xzxZxZfunction(req,res){
+    editUserProfile : function(req,res){
 
         var data = req.body;
         var query = {id:req.userId};
