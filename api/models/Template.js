@@ -71,8 +71,7 @@ module.exports = {
             templateViewName : 'Hawthorn',
             templateType: 'ecommerce',
             templateViewDesc : 'A clean and distinct template that immediately engages with the user',
-            gifImageUrl : 'foodDeliver/food.jpg',
-            imageUrl : 'foodDeliver/foodDeliver.png',
+            imageUrl : 'foodDeliver/',
             templateFilesPath:'templates/foodDemoApp',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
@@ -81,8 +80,7 @@ module.exports = {
             templateViewName : 'Hawaii',
             templateType: 'ecommerce',
             templateViewDesc : 'A bold grid-style theme, perfect for lifestyle, clothing, and product imagery',
-            gifImageUrl : 'foodDeliver2/clothing.png',
-            imageUrl : 'foodDeliver2/foodDeliver2.png',
+            imageUrl : 'foodDeliver2/',
             templateFilesPath:'templates/foodDemoApp2',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
@@ -91,8 +89,7 @@ module.exports = {
             templateViewName : 'Colombo',
             templateType: 'ecommerce',
             templateViewDesc : 'Designed to beautifully showcase your brand and products',
-            gifImageUrl : 'clothingApp/clothing2.png',
-            imageUrl : 'clothingApp/clothing.jpg',
+            imageUrl : 'clothingApp/',
             templateFilesPath:'templates/clothingApp',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
@@ -101,8 +98,7 @@ module.exports = {
             templateViewName : 'Glamour Up',
             templateType: 'ecommerce',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
-            gifImageUrl : 'GlamourUpApp/clothing2.png',
-            imageUrl : 'GlamourUpApp/clothing.jpg',
+            imageUrl : 'GlamourUpApp/',
             templateFilesPath:'templates/GlamourUpApp',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
@@ -111,17 +107,16 @@ module.exports = {
             templateViewName : 'Crush Surf Shop',
             templateType: 'ecommerce',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
-            gifImageUrl : 'CrushApp/clothing2.png',
-            imageUrl : 'CrushApp/clothing.jpg',
+            imageUrl : 'CrushApp/',
             templateFilesPath:'templates/CrushApp',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
             template_name : 'HeadphoneApp',
             templateViewName : 'Headphone App',
+            templateType: 'ecommerce',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
-            gifImageUrl : 'HeadphoneApp/headphoneAppGif.png',
-            imageUrl : 'HeadphoneApp/headphoneApp.jpg',
+            imageUrl : 'HeadphoneApp/',
             templateFilesPath:'templates/HeadphoneApp',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
@@ -130,8 +125,7 @@ module.exports = {
             templateViewName : 'The Peak',
             templateType: 'article',
             templateViewDesc : 'Clean, simple, and focused on an elegant user experience. Ideal for media and blog apps.',
-            gifImageUrl : 'hkRising/hkRising1.png',
-            imageUrl : 'hkRising/hkRising.png',
+            imageUrl : 'hkRising/',
             templateFilesPath:'templates/hkRising',
             templateCategory: TemplateCategoryDetails.Media.ID
         },
@@ -140,8 +134,7 @@ module.exports = {
             templateViewName : 'Rome',
             templateType: 'ecommerce',
             templateViewDesc : 'Tailor-made for modern restaurants and clothing store with a tinder type swipe to navigate through your product.',
-            imageUrl : 'ECommerceApp/ECommerceApp.png',
-            gifImageUrl : 'ECommerceApp/ecommerce.png',
+            imageUrl : 'ECommerceApp/',
             templateFilesPath:'templates/ECommerceApp',
             templateCategory: TemplateCategoryDetails.Business.ID
         },
@@ -150,17 +143,16 @@ module.exports = {
             templateViewName : 'Cali',
             templateType: 'article',
             templateViewDesc : 'Striking, scalable, and built to boost engagement.',
-            imageUrl : 'fashionApp/fashionApp.png',
-            gifImageUrl : 'fashionApp/fashion.png',
+            imageUrl : 'fashionApp/',
             templateFilesPath:'templates/fashionApp',
             templateCategory: TemplateCategoryDetails.Media.ID
         },
         {
             template_name : 'RecipeApp',
             templateViewName : 'Recipe App',
+            templateType: 'article',
             templateViewDesc : 'Striking, scalable, and built to boost engagement.',
-            imageUrl : 'RecipeApp/recipeApp.png',
-            gifImageUrl : 'RecipeApp/recipeAppGif.png',
+            imageUrl : 'RecipeApp/',
             templateFilesPath:'templates/RecipeApp',
             templateCategory: TemplateCategoryDetails.Media.ID
         }
