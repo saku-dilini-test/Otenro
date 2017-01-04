@@ -122,6 +122,13 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
             $state.go('app.category');
         }
-    }
+    };
 
+    //get Sales and Promotions
+    $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {
+        $scope.salesandpromotion = data[0];
+        console.log(data);
+    }).error(function(err) {
+        alert('warning', "Unable to get sales and Promotions ", err.message);
+    });
 });

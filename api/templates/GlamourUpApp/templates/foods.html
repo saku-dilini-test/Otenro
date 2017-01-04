@@ -9,6 +9,10 @@
                        <div class="col price center">
                         {{currency.sign}} : {{foods[$index].variants[0].price}}
                        </div>
+                       <div>
+                           <div class="col col made-easy-header-font">{{salesandpromotion.discountType}}</div>
+                           <div class="col col made-easy-header-font">{{salesandpromotion.discount}}</div>
+                       </div>
                        <div class="col center" ng-click="modal.show()">
                            ADD
                        </div>
@@ -22,6 +26,10 @@
                    <div class="row">
                        <div class="col price center">
                         {{currency.sign}} : {{foods[$index+1].variants[0].price}}
+                       </div>
+                       <div>
+                       <div class="col col made-easy-header-font">{{salesandpromotion.discountType}}</div>
+                       <div class="col col made-easy-header-font">{{salesandpromotion.discount}}</div>
                        </div>
                        <div class="col center" ng-click="modal.show()">
                            ADD
