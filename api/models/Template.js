@@ -36,6 +36,9 @@ module.exports = {
         },
         templateCategory :{
             type: 'string'
+        },
+        previewId : {
+            type: 'string'
         }
     },
     seedData: [
@@ -74,7 +77,8 @@ module.exports = {
             gifImageUrl : 'foodDeliver/food.jpg',
             imageUrl : 'foodDeliver/foodDeliver.png',
             templateFilesPath:'templates/foodDemoApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd621641694232165c16b'
         },
         {
             template_name : 'foodDemoApp2',
@@ -84,7 +88,8 @@ module.exports = {
             gifImageUrl : 'foodDeliver2/clothing.png',
             imageUrl : 'foodDeliver2/foodDeliver2.png',
             templateFilesPath:'templates/foodDemoApp2',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd62b641694232165c176'
         },
         {
             template_name : 'clothingApp',
@@ -94,7 +99,8 @@ module.exports = {
             gifImageUrl : 'clothingApp/clothing2.png',
             imageUrl : 'clothingApp/clothing.jpg',
             templateFilesPath:'templates/clothingApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd633641694232165c17f',
         },
         {
             template_name : 'GlamourUpApp',
@@ -104,7 +110,8 @@ module.exports = {
             gifImageUrl : 'GlamourUpApp/clothing2.png',
             imageUrl : 'GlamourUpApp/clothing.jpg',
             templateFilesPath:'templates/GlamourUpApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd641641694232165c18c',
         },
         {
             template_name : 'CrushApp',
@@ -114,7 +121,8 @@ module.exports = {
             gifImageUrl : 'CrushApp/clothing2.png',
             imageUrl : 'CrushApp/clothing.jpg',
             templateFilesPath:'templates/CrushApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId :'586cd655641694232165c19c'
         },
         {
             template_name : 'HeadphoneApp',
@@ -123,7 +131,8 @@ module.exports = {
             gifImageUrl : 'HeadphoneApp/headphoneAppGif.png',
             imageUrl : 'HeadphoneApp/headphoneApp.jpg',
             templateFilesPath:'templates/HeadphoneApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd65e641694232165c1b1'
         },
         {
             template_name : 'hkRising',
@@ -133,7 +142,9 @@ module.exports = {
             gifImageUrl : 'hkRising/hkRising1.png',
             imageUrl : 'hkRising/hkRising.png',
             templateFilesPath:'templates/hkRising',
-            templateCategory: TemplateCategoryDetails.Media.ID
+            templateCategory: TemplateCategoryDetails.Media.ID,
+            previewId : '586cd675641694232165c1cd',
+
         },
         {
             template_name : 'ECommerceApp',
@@ -143,7 +154,8 @@ module.exports = {
             imageUrl : 'ECommerceApp/ECommerceApp.png',
             gifImageUrl : 'ECommerceApp/ecommerce.png',
             templateFilesPath:'templates/ECommerceApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd66a641694232165c1c6'
         },
         {
             template_name : 'fashionApp',
@@ -153,7 +165,8 @@ module.exports = {
             imageUrl : 'fashionApp/fashionApp.png',
             gifImageUrl : 'fashionApp/fashion.png',
             templateFilesPath:'templates/fashionApp',
-            templateCategory: TemplateCategoryDetails.Media.ID
+            templateCategory: TemplateCategoryDetails.Media.ID,
+            previewId : '586cd681641694232165c1dc',
         },
         {
             template_name : 'RecipeApp',
@@ -162,7 +175,8 @@ module.exports = {
             imageUrl : 'RecipeApp/recipeApp.png',
             gifImageUrl : 'RecipeApp/recipeAppGif.png',
             templateFilesPath:'templates/RecipeApp',
-            templateCategory: TemplateCategoryDetails.Media.ID
+            templateCategory: TemplateCategoryDetails.Media.ID,
+            previewId : '586cd68e641694232165c1ed'
         }
     ]
 };

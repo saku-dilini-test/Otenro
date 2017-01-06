@@ -320,7 +320,7 @@ module.exports = {
     },
 
     deletePreviewTemp : function(req,res){
-        var appId  = req.param('appId');
+        /*var appId  = req.param('appId');
         var userId = req.param('userId');
 
         Application.destroy({ id : appId}).exec(function (err) {
@@ -348,7 +348,7 @@ module.exports = {
             if (err) {
                 console.error(err);
             }
-        });
+        });*/
 
         res.send(200,{message:'Deleted Application'});
 

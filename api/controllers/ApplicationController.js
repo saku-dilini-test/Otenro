@@ -26,6 +26,23 @@ module.exports = {
         });
     },
 
+    templatePreview : function (req,res) {
+        console.log(req.body.templateName);
+       if (req.body.templateName=='foodDemoApp'){
+           res.send({
+               appId: '5859117bac4a80fb5265ab04',
+               message: "New Application has been created"
+           });
+       }
+        if (req.body.templateName=='foodDemoApp'){
+            res.send({
+                appId: '5859117bac4a80fb5265ab04',
+                message: "New Application has been created"
+            });
+        }
+
+    },
+
     viewTemplate : function(req,res){
 
         var templateName = req.body.templateName,

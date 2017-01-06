@@ -7,7 +7,7 @@
     <div class="obl-dashboard-apps">
         <ul class="grid obl-app-templates clearfix">
             <li ng-repeat="template in templates">
-                <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory)" >
+                <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
                     <div  id ="image">
                         <img class = "main_image" ng-src="images/templates/{{template.imageUrl}}" />
                         <img class ="second_image"  ng-src="images/templates/{{template.gifImageUrl}}" />
