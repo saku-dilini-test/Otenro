@@ -139,6 +139,15 @@ module.exports = {
             templateCategory: TemplateCategoryDetails.Business.ID
         },
         {
+            template_name : 'BondiApp',
+            templateViewName : 'Bondi',
+            templateType: 'ecommerce',
+            templateViewDesc : 'With a card styled navigation, users are presented with product categories at the fore front. This allows for easy navigation and minimal clicks to purchase. This template is easily tailored to suit any e-commerce needs for hobby stores, clothing stores, cafes and more.',
+            imageUrl : 'BondiApp/',
+            templateFilesPath:'templates/BondiApp',
+            templateCategory: TemplateCategoryDetails.Business.ID
+        },
+        {
             template_name : 'fashionApp',
             templateViewName : 'Cali',
             templateType: 'article',

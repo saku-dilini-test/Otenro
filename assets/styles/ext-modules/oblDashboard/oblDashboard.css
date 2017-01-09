@@ -215,10 +215,18 @@
     text-transform:uppercase;
 }
 .obl-dashboard-tab-height h5{
-    color:#000;
+    color: #000;
     line-height: inherit;
     letter-spacing: 1px;
+    overflow: auto;
+    max-height: 75px;
+    height:75px
 }
+.obl-dashboard-tab-height span h5{
+    height:27px;
+}
+
+
 .obl-dashboard-tab-height .col-md-5 span{
     font-size:12px;
     text-transform:capitalize;
