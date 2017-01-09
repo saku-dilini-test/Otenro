@@ -53,77 +53,24 @@
         })
         };
   
-        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory) {
+        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory,previewId) {
+                    var userId = '';
+                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId=unknownUser"
+                                    +"&appId="+previewId+"&"+new Date().getTime()+"/";
 
-
-
-
-            if ($auth.isAuthenticated()) {
-               
-                var appParams = {
-                    'appName': 'preview',
-                    'templateId': templateId,
-                    'templateName': templateName,
-                    'templateUrl':templateUrl,
-                    'templateCategory' : templateCategory,
-                    'userId':$auth.getPayload().id
-                };
-
-                welcomeTemplatesResource.createApp(appParams).then(function(data){
-                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
                     var url= urlPath+'/?'+new Date().getTime();
-
                     mySharedService.prepForBroadcast(url);
-                    $scope.goLivePreview = function() {
-                        $state.go('anon.livePreview', {
-                            userId: $auth.getPayload().id,
-                            appId: data.data.appId,
-                            tempUrl: templateUrl,
-                            tempName: templateName,
-                            tempCategory: templateCategory
-                        });
 
-                    }
-
-                    $timeout(function () {
-                        $scope.goLivePreview();
-                    }, 1000);
-
-                });
-
-            }else{
-                var appParams = {
-                    'appName': 'preview',
-                    'templateId': templateId,
-                    'templateName': templateName,
-                    'templateUrl':templateUrl,
-                    'templateCategory' : templateCategory,
-                    'userId':'unknownUser'
-                };
-
-                welcomeTemplatesResource.createApp(appParams).then(function(data){
-                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                    var url= urlPath+'/?'+new Date().getTime();
-
-                    mySharedService.prepForBroadcast(url);
-                    $scope.goLivePreview = function() {
                         $state.go('anon.livePreview', {
                             userId: 'unknownUser',
-                            appId: data.data.appId,
+                            appId: previewId,
                             tempUrl: templateUrl,
                             tempName: templateName,
                             tempCategory: templateCategory
                         });
-                    }
-                    $timeout(function () {
-                        $scope.goLivePreview();
-                    }, 1000);
-                });
-            }
 
         }
+
     }
 
 })();

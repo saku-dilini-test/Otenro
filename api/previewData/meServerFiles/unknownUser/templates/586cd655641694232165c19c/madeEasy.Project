@@ -1,0 +1,9 @@
+{
+  "name": "preview",
+  "appId": "586cd655641694232165c19c",
+  "userId": "unknownUser",
+  "serviceApi": {
+    "host": "http://localhost",
+    "port": 1337
+  }
+}

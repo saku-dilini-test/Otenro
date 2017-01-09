@@ -20,7 +20,6 @@
 
 <div class="obl-dashboard-wrapper obl-dashboard-tab-height">
     <div class="obl-dashboard-apps">
-
         <md-tabs md-selected="selectedIndex" md-autoselect md-center-tabs>
             <md-tab ng-disabled="tab.disabled"
                     label="All">
@@ -30,7 +29,7 @@
                             <div class="col-md-5  col-md-offset-1">
                                 <ul class="grid obl-app-templates clearfix">
                                     <li>
-                                        <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory)" >
+                                        <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
                                             <div  id ="image">
                                                 <img class = "main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
                                                 <img class ="second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
@@ -51,7 +50,7 @@
                                     <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail">
                                 </div>
                                 <h4 class="text-center">
-                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory)">
+                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)">
                                         Select
                                     </button>
                                 </h4>
@@ -70,7 +69,7 @@
                             <div class="col-md-5  col-md-offset-1">
                                 <ul class="grid obl-app-templates clearfix">
                                     <li >
-                                        <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory)" >
+                                        <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
                                             <div  id ="image">
                                                 <img class = "main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
                                                 <img class ="second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
@@ -91,7 +90,7 @@
                                     <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail">
                                 </div>
                                 <h4 class="text-center">
-                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory)">
+                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)">
                                         Select
                                     </button>
                                 </h4>
