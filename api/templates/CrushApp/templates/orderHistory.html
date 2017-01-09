@@ -1,5 +1,5 @@
-<ion-view view-title="Order History">
-    <ion-content class="made-easy-background-image made-easy-background-color">
+<ion-view view-title="Order History" class="made-easy-background-image made-easy-background-color ">
+    <ion-content >
 
         <div class="list card" data-ng-repeat="order in orderHistory  | filter: {orderHistoryKey: appId}  | orderBy:'':true">
             <div ng-repeat="item in order.item" class="item item-avatar">

@@ -19,15 +19,34 @@
                                   ME_APP_SERVER,$auth,$rootScope,$timeout,SERVER_URL) {
        
 
+
+
         if ($auth.isAuthenticated()) {
             $scope.isAuthenticated = true;
         }
 
-
+        $scope.types=[];
         welcomeTemplatesResource.getTemplates().success(function(data){
             $rootScope.templates = data;
+
+            for (var i=0; i< data.length ; i++){
+                if($scope.types.indexOf(data[i].templateType) === -1){
+                   $scope.types.push(data[i].templateType);
+                }
+            };
         });
 
+
+        $scope.showSampleImage = function(ev,path, image) {
+          $mdDialog.show({
+            template:  '<md-dialog aria-label="sample images" class="dashboard-dialog">' +
+                       '<img src="images/templates/'+path+image+'" class="img-thumbnail">'+
+                       '</md-dialog>',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+          })
+        };
 
         $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory,previewId) {
             var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
@@ -44,8 +63,6 @@
                 tempName: templateName,
                 tempCategory: templateCategory
             });
-
-        }
     }
-
+    }
 })();
