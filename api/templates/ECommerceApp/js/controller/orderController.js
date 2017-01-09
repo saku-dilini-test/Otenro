@@ -20,7 +20,7 @@ mobileApp.controller('OrderCtrl', function ($scope, $rootScope, $http, $state, c
                     telNumber: order.telNumber,
                     deliveryAddress: order.deliveryAddress,
                     cart: $scope.cart
-                }
+                };
 
                 $http.post(constants.SERVER_URL + "/templatesOrder/saveOrder", data)
                     .then(function (res) {
@@ -36,6 +36,14 @@ mobileApp.controller('OrderCtrl', function ($scope, $rootScope, $http, $state, c
                     function (err) {
 
                     });
-            }
+            };
+
+    //get Sales and Promotions
+    $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {
+        $scope.salesandpromotion = data[0];
+        console.log(data);
+    }).error(function(err) {
+        alert('warning', "Unable to get sales and Promotions ", err.message);
+    });
         });
 //})();
