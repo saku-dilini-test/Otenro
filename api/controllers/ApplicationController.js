@@ -52,7 +52,7 @@ module.exports = {
             templatePath = sails.config.appPath + '/api/templates/' + templateName,
             appName = req.body.appName,
             serverTmp="http://localhost:port",
-            serverOrg=config.server.host+':1337';
+            serverOrg=config.server.host;
 
         var loginPath = '/#/',
             isApplyStyle =  {
@@ -135,7 +135,7 @@ module.exports = {
                 button : false
             }
         }
-        if(templateName == 'ECommerceApp'){
+        if(templateName == 'ECommerceApp' || templateName == 'BondiApp'){
             loginPath = '/#/tab/home';
             isApplyStyle = {
                 color : {
@@ -300,7 +300,7 @@ module.exports = {
          * If Only foodDemoApp or foodDemoApp2 Category & Product Feed to DB
          */
         if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2' || templateName == 'clothingApp'
-            || templateName == 'ECommerceApp'|| templateName == 'GlamourUpApp'|| templateName == 'CrushApp'|| templateName == 'HeadphoneApp' ) {
+            || templateName == 'ECommerceApp'|| templateName == 'GlamourUpApp'|| templateName == 'CrushApp'|| templateName == 'HeadphoneApp' || templateName == 'BondiApp' ) {
             var searchAppInitialData = {
                 'templateName': templateName
             }

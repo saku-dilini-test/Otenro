@@ -789,6 +789,200 @@ module.exports = {
       ]
     },
     {
+      templateName : 'BondiApp',
+      secondNavi : [
+        {
+          attribute : {
+            "name": "Women's",
+            "imageUrl": "category_01.png",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
+          },
+          thirdNavi : [
+            {
+              "name": "Summer Fashion",
+              "price": 250,
+              "quantity": 250,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "1.png"
+                }
+              ],
+              "variants":[{
+                "name": "Summer Fashion",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "250",
+                'quantity': 250
+              }],
+              "published":"YES",
+              "imageUrl": "1.png",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            },
+            {
+              "name" : "Work Wear",
+              "price" : 300,
+              "quantity" : 100,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "2.png"
+                }
+              ],
+              "variants":[{
+                "name" : "Work Wear",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "300",
+                'quantity': 100
+              }],
+              "imageUrl": "2.png",
+              "published":"YES",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            }
+
+          ]
+        },
+        {
+          attribute : {
+            "name": "Men's",
+            "imageUrl": "category_02.png",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
+          },
+          thirdNavi : [
+            {
+              "name": "Lorem ipsum",
+              "price": 350,
+              "quantity": 100,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "3.png"
+                }
+              ],
+              "variants":[{
+                "name": "Lorem ipsum",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "350",
+                'quantity': 100
+              }],
+              "imageUrl": "3.png",
+              "published":"YES",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            },
+            {
+              "name" : "dolor sit amet",
+              "price" : 225,
+              "quantity" : 15,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "4.png"
+                }
+              ],
+              "variants":[{
+                "name" : "dolor sit amet",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "225",
+                'quantity': 15
+              }],
+              "imageUrl": "4.png",
+              "published":"YES",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            }
+
+          ]
+        },
+        {
+          attribute : {
+            "name": "Kid's",
+            "imageUrl": "category_03.png",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
+          },
+          thirdNavi : [
+            {
+              "name": "Made in USA",
+              "price": 350,
+              "quantity": 100,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "5.png"
+                }
+              ],
+              "variants":[{
+                "name": "Made in USA",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "350",
+                'quantity': 100
+              }],
+              "imageUrl": "5.png",
+              "published":"YES",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            },
+            {
+              "name" : "Kid Jacket",
+              "price" : 225,
+              "quantity" : 15,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "6.png"
+                }
+              ],
+              "variants":[{
+                "name" : "Kid Jacket",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "225",
+                'quantity': 15
+              }],
+              "imageUrl": "6.png",
+              "published":"YES",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            }
+
+          ]
+        }
+      ]
+    },
+    {
       templateName : 'hkRising',
       articleCategory : [{
         attribute : {
