@@ -4,7 +4,7 @@ echo  'start....'
 MESERVER='/var/www/html/meServer/temp/';
 APPFILESERVER='/home/prasanna/Desktop/appFileServer/';
 
-ENV='dev'   #this is for develoment
+ENV='dev'   #this is for development
 #ENV='pro'  #this is for production
 DB=''
 
@@ -31,9 +31,8 @@ mongoimport --db $DB --collection thirdnavigation --file thirdnavigation.json
 #mongoexport --db $DB --collection secondnavigation --out secondnavigation.json
 #mongoexport --db $DB --collection thirdnavigation --out thirdnavigation.json
 
-echo $MESERVER'test'
+echo $MESERVER
 
-#mkdir $MESERVER'test'
 cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
 cp -r ./meServerFiles/unknownUser $MESERVER
 
