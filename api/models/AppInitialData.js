@@ -1322,6 +1322,81 @@ module.exports = {
       ]
     },
     {
+      templateName : 'NewsApp',
+      articleCategory : [{
+        attribute : {
+          "name": "Breaking News",
+          "imageUrl":"stakes_slider.jpg",
+          "enteredBy":"demo"
+        },
+        article : [
+          {
+            "title": "Quick Brown Fox",
+            "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "imageUrl":"avacado_sandwitch.png",
+            "categoryId":"0",
+            "enteredBy":"demo"
+          },
+          {
+            "title": "Jump Over The Lazy Dog",
+            "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "imageUrl":"salmon_fillet.png",
+            "categoryId":"0",
+            "enteredBy":"demo"
+          }
+        ]
+      },
+        {
+          attribute : {
+            "name": "Money",
+            "imageUrl":"appatizer_slider.jpg",
+            "enteredBy":"demo"
+          },
+          article : [
+              {
+                "title": "Quick Brown Fox",
+                "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                "imageUrl":"avacado_sandwitch.png",
+                "categoryId":"0",
+                "enteredBy":"demo"
+              },
+              {
+                "title": "Jump Over The Lazy Dog",
+                "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                "imageUrl":"salmon_fillet.png",
+                "categoryId":"0",
+                "enteredBy":"demo"
+              }
+
+          ]
+        },
+        {
+          attribute : {
+            "name": "Fashion",
+            "imageUrl":"desserts_slider.jpg",
+            "enteredBy":"demo"
+          },
+          article : [
+           {
+              "title": "Quick Brown Fox",
+              "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+              "imageUrl":"avacado_sandwitch.png",
+              "categoryId":"0",
+              "enteredBy":"demo"
+            },
+            {
+              "title": "Jump Over The Lazy Dog",
+              "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+              "imageUrl":"salmon_fillet.png",
+              "categoryId":"0",
+              "enteredBy":"demo"
+            }
+          ]
+        }
+
+      ]
+    },
+    {
       templateName : 'fashionApp',
       articleCategory : [{
         attribute : {

@@ -157,7 +157,8 @@ module.exports = {
             templateViewDesc : 'With a card styled navigation, users are presented with product categories at the fore front. This allows for easy navigation and minimal clicks to purchase. This template is easily tailored to suit any e-commerce needs for hobby stores, clothing stores, cafes and more.',
             imageUrl : 'BondiApp/',
             templateFilesPath:'templates/BondiApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '587cb44c4d711ab806743d0d'
         },
         {
             template_name : 'fashionApp',
@@ -178,6 +179,16 @@ module.exports = {
             templateFilesPath:'templates/RecipeApp',
             templateCategory: TemplateCategoryDetails.Media.ID,
             previewId : '586cd68e641694232165c1ed'
+        },
+        {
+            template_name : 'NewsApp',
+            templateViewName : 'News Media',
+            templateType: 'article',
+            templateViewDesc : 'Striking, scalable, and built to boost engagement.',
+            imageUrl : 'NewsApp/',
+            templateFilesPath:'templates/NewsApp',
+            templateCategory: TemplateCategoryDetails.Media.ID,
+            previewId : '587f2fc69cca49641ff664e4'
         }
     ]
 };

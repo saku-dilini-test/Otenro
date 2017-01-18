@@ -78,7 +78,7 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('HomeCtrl', function ($scope, $http, constants, $rootScope, $timeout, $state, $ionicLoading, $window) {
+    .controller('HomeCtrl', function ($scope, $http, constants, $rootScope, $timeout, $state, $ionicLoading, $window, $log) {
 
         $scope.appName = $rootScope.appName;
 
@@ -193,7 +193,7 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('aboutUsCtrl', function ($scope, $rootScope, $http,$ionicLoading, constants) {
+    .controller('aboutUsCtrl', function ($scope, $rootScope, $http,$ionicLoading, constants, $log) {
         $scope.appName = $rootScope.appName;
         $scope.aboutUs = "A guide to things to see and do in Hong Kong. This is a demo app built using Otenro. Please visit www.otenro.com for further information.";
 

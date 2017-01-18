@@ -1,8 +1,8 @@
 #!/bin/bash
 echo  'start....'
 
-MESERVER='/var/www/html/meServer/temp/';
-APPFILESERVER='/home/prasanna/Desktop/appFileServer/';
+MESERVER='c:/xampp/htdocs/meServer/temp/';
+APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
 
 ENV='dev'   #this is for development
 #ENV='pro'  #this is for production
