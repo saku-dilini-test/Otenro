@@ -26,8 +26,9 @@ SetUp Project
     give execute permission for importData.sh file as follows (for linux users) on command line prompt
     chmod 777 importData.sh
 
-    Run 'importData.sh' bash file as './importData.sh' on command line prompt
-    (for windows platform  use cygwin (https://www.cygwin.com/))
+    Run 'importData.sh' bash file as './importData.sh' on command line prompt (for linux users)
+    (for windows platform  use cygwin (https://www.cygwin.com/) and Run 'sed -i 's/\r$//' importData.sh' and execute ./importData.sh )
+
 
 (4) Start project
 
