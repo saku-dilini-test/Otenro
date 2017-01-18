@@ -102,7 +102,7 @@ module.exports = {
             }
         }
 
-        if(templateName == 'hkRising' || templateName == 'RecipeApp'){
+        if(templateName == 'hkRising' || templateName == 'RecipeApp'|| templateName == 'NewsApp'){
             loginPath = '/#/app/home/firstMenu';
             isApplyStyle = {
                 color : {
@@ -229,6 +229,8 @@ module.exports = {
 
 
         fs.copy(templatePath, tempAppDirPath + app.id, function(err) {
+            console.log("app.id "   + app.id );
+
             if (err) return console.error(err);
             var madeEasyFilePath = tempAppDirPath +app.id+'/madeEasy.Project';
             var madeEasyFileContent = {
@@ -337,7 +339,7 @@ module.exports = {
             /**
              * If hkRising or fashionApp Details Feed to DB
              */
-        }else if(templateName == 'hkRising' || templateName == 'fashionApp'|| templateName == 'RecipeApp'){
+        }else if(templateName == 'hkRising' || templateName == 'fashionApp'|| templateName == 'RecipeApp'|| templateName == 'NewsApp'){
                 var searchAppInitialData = {
                     'templateName' : templateName
                 }
