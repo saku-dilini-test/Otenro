@@ -1,17 +1,26 @@
-<div class="iphone">
-    <div class="power"></div>
-    <div class="lock"></div>
-    <div class="volume up"></div>
-    <div class="volume down"></div>
-    <div class="camera"></div>
-    <div class="speaker"></div>
-    <div class="screen">
-        <div id="appView" class="appViewClass">
+<div ng-class="deviceClass" >
+    <div ng-if="phone" class="power"></div>
+    <div ng-if="phone" class="lock"></div>
+    <div ng-if="phone" class="volume up"></div>
+    <div ng-if="phone" class="volume down"></div>
+    <div ng-if="phone" class="camera"></div>
+    <div ng-if="phone" class="speaker"></div>
+    <div ng-if="tablet" class="tabPower"></div>
+    <div ng-if="tablet" class="tabLock"></div>
+    <div ng-if="tablet" class="tabVolume up"></div>
+    <div ng-if="tablet" class="tabVolume down"></div>
+    <div ng-if="tablet" class="tabCamera"></div>
+    <div ng-if="tablet" class="tabSpeaker"></div>
+    <div ng-class="deviceScreenClass">
+        <div id="appView" ng-class="appViewClass">
             <iframe ng-show="!!tmpUrl" ng-src="{{editTemplateUrl}}" height="100%" width="100%"></iframe>
             <img ng-show="!!imgSrc" ng-src="{{imgSrc}}" style="width:150px;" />
         </div>
     </div>
-    <div class="button">
+    <div ng-if="phone" class="button">
         <div class="square"></div>
+    </div>
+    <div ng-if="tablet" class="tabButton">
+        <div class="tabSquare"></div>
     </div>
 </div>

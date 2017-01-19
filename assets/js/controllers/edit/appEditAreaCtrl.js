@@ -13,6 +13,7 @@
                              templateService,SERVER_URL,$log){
 
         $rootScope.bodyClass = 'appEdit';
+        $scope.contentUrl = true;
 
         $scope.appId = $stateParams.appId;
         $rootScope.appId = $stateParams.appId;
@@ -172,6 +173,22 @@
             })
 
         };
+
+
+        $scope.changeDevice = function(deviceType){
+
+            if(deviceType == "mobile"){
+                $scope.contentUrl = true;
+                $scope.tabletView = "";
+            }else{
+                $scope.contentUrl = false;
+                $scope.tabletView = "tabletView";
+            }
+
+
+        };
+
+
 
         
 

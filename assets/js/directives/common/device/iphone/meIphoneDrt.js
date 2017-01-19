@@ -7,13 +7,17 @@
 
     function meIphone(){
         return{
-            scope:{
-              imgSrc:'@',
-              tmpUrl:'@'
-            },
             restrict: 'E',
+            scope: {
+                imageSrc:'@',
+                tmpUrl:'@',
+                devicePath:'@'
+            },
             controller: 'IphoneCtrl',
-            templateUrl:'user/common/device/iphone/meIphoneView.html'
+            templateUrl: "user/common/device/iphone/meIphoneView.html"
+
         }
     }
+
+
 })();
