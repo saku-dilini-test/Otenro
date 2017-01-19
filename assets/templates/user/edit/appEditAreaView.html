@@ -335,8 +335,8 @@
         <div class="mdapp-device-selector clearfix">
             <div class="mobile-area">
                 <p>Mobile App</p>
-                <a class="mobile-icon" href ng-click="tabletView=false" ng-class="{'current-device': !tabletView}"></a>
-                <a class="tablet-icon" href ng-click="tabletView=true" ng-class="{'current-device': tabletView}"></a>
+                <a class="mobile-icon" href ng-click="changeDevice('mobile')" ng-class="{'current-device': !tabletView}"></a>
+                <a class="tablet-icon" href ng-click="changeDevice('tablet')" ng-class="{'current-device': tabletView}"></a>
             </div>
             <div class="website-area">
                 <div class="pull-left">
@@ -362,10 +362,11 @@
                 </button>
             </div>
         </div>
-        <div class="device-preview" ng-class="tabletView ? 'tabletView' : '!tabletView'">
+        <div class="device-preview" ng-class="tabletView">
             <div class="device-simulator" overflow="scroll">
-                    <me-tablet ng-show="tabletView" tmp-url="{{appTemplateUrl}}"></me-tablet>
-                    <me-iphone ng-show="!tabletView" tmp-url="{{appTemplateUrl}}"></me-iphone>
+                    <!--<me-tablet ng-show="tabletView" tmp-url="{{appTemplateUrl}}"></me-tablet>-->
+                    <me-iphone device-path="{{contentUrl}}" tmp-url="{{appTemplateUrl}}"></me-iphone>
+
             </div>
         </div>
     </div>
