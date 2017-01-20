@@ -1,0 +1,31 @@
+<ion-view class="made-easy-background-image made-easy-background-color" view-title="Cart">
+  <ion-content drag-content="false">
+   <div class=" animated zoomIn">
+
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in cartItems"  type="item-text-wrap" >
+        <img ng-src="{{imageURL}}/{{item.imgURL[0].img}}">
+        <div class="made-easy-content-font">{{item.name}}</div>
+        <p>{{item.total}}</p>
+        <i class="icon ion-close-round icon-accessory">
+          {{item.qty}}
+        </i>
+
+        <ion-option-button class="button-assertive" ng-click="removeItem(index)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+
+          <div class="col text-center">
+            <h4 class="col" ng-model="total" >Subtotal - {{currency}}{{getTotal()}}</h4>
+          </div>
+  </div>
+
+        <div class="row fix-button-bottom no-padding">
+          <button class="button no-margin button-block  made-easy-button-setting" ng-click="pickupDetails(cartItems)" >Pick up</button>
+          <button class="button no-margin button-block  made-easy-button-setting" ng-click="delivery(cartItems)" >Delivery</button>
+        </div>
+
+  </ion-content>
+</ion-view>

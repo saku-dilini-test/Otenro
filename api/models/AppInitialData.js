@@ -658,6 +658,262 @@ module.exports = {
         ]
     },
     {
+      templateName : 'CatenitApp',
+      secondNavi : [
+        {
+          attribute : {
+            "imageUrl": "a.png",
+            "name": "Stakes",
+            "description": "Shirt description",
+            "enteredBy":"demo",
+            "orderNo" : "1"
+          },
+          thirdNavi : [
+            {
+              "name": "Lorem ipsum",
+              "price": 250,
+              "quantity": 250,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "briefDesc" : "Shirt x brief des",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+              "tempImageArray" : [
+                {
+                  "img" : "a.png"
+                }
+              ],
+              "variants":[{
+                "name": "Lorem ipsum",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "250",
+                'quantity': 250
+              }],
+              "published":"YES",
+              "imageUrl": "a.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "dolor sit amet",
+              "price": 350,
+              "quantity": 350,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "briefDesc" : "Shirt y brief des",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+              "tempImageArray" : [
+                {
+                  "img" : "b.png"
+                }
+              ],
+              "variants":[{
+                "name": "dolor sit amet",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "350",
+                'quantity': 350
+              }],
+              "published":"YES",
+              "imageUrl": "b.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "consectetur",
+              "price": 450,
+              "quantity": 450,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "briefDesc" : "Shirt z brief des",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+              "tempImageArray" : [
+                {
+                  "img" : "c.png"
+                }
+              ],
+              "variants":[{
+                "name": "consectetur",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "450",
+                'quantity': 450
+              }],
+              "published":"YES",
+              "imageUrl": "c.png",
+              "createdDate": Date.now()
+            }
+          ]
+        },{
+          attribute : {
+            "imageUrl": "c.png",
+            "name": "Deserts",
+            "description": "Shirt description",
+            "enteredBy":"demo",
+             "orderNo" : "2"
+          },
+          thirdNavi : [
+            {
+              "name": "Lorem ipsum",
+              "price": 250,
+              "quantity": 250,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "briefDesc" : "Shirt x brief des",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+              "tempImageArray" : [
+                {
+                  "img" : "d.png"
+                }
+              ],
+              "variants":[{
+                "name": "Lorem ipsum",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "250",
+                'quantity': 250
+              }],
+              "published":"YES",
+              "imageUrl": "d.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "dolor sit amet",
+              "price": 350,
+              "quantity": 350,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "briefDesc" : "Shirt y brief des",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+              "tempImageArray" : [
+                {
+                  "img" : "e.png"
+                }
+              ],
+              "variants":[{
+                "name": "dolor sit amet",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "350",
+                'quantity': 350
+              }],
+              "published":"YES",
+              "imageUrl": "e.png",
+              "createdDate": Date.now()
+            },
+            {
+              "name": "consectetur ",
+              "price": 450,
+              "quantity": 450,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "briefDesc" : "Shirt z brief des",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+              "tempImageArray" : [
+                {
+                  "img" : "f.png"
+                }
+              ],
+              "variants":[{
+                "name": "consectetur ",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "450",
+                'quantity': 450
+              }],
+              "published":"YES",
+              "imageUrl": "f.png",
+              "createdDate": Date.now()
+            }
+          ]
+        },
+        {
+          attribute : {
+            "imageUrl": "d.png",
+            "name": "Beverages",
+            "description": "Short description",
+            "enteredBy":"demo",
+             "orderNo" : "3"
+          },
+          thirdNavi : [
+            {
+              "name": "Lorem ipsum",
+              "price": 250,
+              "quantity": 250,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "briefDesc" : "Short x brief des",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+              "tempImageArray" : [
+                {
+                  "img" : "h.png"
+                }
+              ],
+              "variants":[{
+                "name": "Lorem ipsum",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "250",
+                'quantity': 250
+              }],
+              "published":"YES",
+              "imageUrl": "h.png",
+              "createdDate": Date.now()
+            }
+          ]
+        },
+        {
+          attribute : {
+            "imageUrl": "cloth3.png",
+            "name": "Soups",
+            "description": "Short description",
+            "enteredBy":"demo",
+             "orderNo" : "4"
+          },
+          thirdNavi : [
+            {
+              "name": "Lorem ipsum",
+              "price": 250,
+              "quantity": 250,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "briefDesc" : "Short x brief des",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+              "tempImageArray" : [
+                {
+                  "img" : "g.png"
+                }
+              ],
+              "variants":[{
+                "name": "Lorem ipsum",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "250",
+                'quantity': 250
+              }],
+              "published":"YES",
+              "imageUrl": "g.png",
+              "createdDate": Date.now()
+            }
+          ]
+        }
+        ]
+    },
+    {
       templateName : 'ECommerceApp',
       secondNavi : [
         {

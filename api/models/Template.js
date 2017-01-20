@@ -100,6 +100,16 @@ module.exports = {
             previewId : '586cd633641694232165c17f',
         },
         {
+            template_name : 'CatenitApp',
+            templateViewName : 'Catenit',
+            templateType: 'ecommerce',
+            templateViewDesc : 'Designed to beautifully showcase your brand and products',
+            imageUrl : 'CatenitApp/',
+            templateFilesPath:'templates/CatenitApp',
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '5881d10735d8f098239b2f69',
+        },
+        {
             template_name : 'GlamourUpApp',
             templateViewName : 'Glamour Up',
             templateType: 'ecommerce',

@@ -1,0 +1,9 @@
+{
+  "name": "Catenit",
+  "appId": "5881d10735d8f098239b2f69",
+  "userId": "unknownUser",
+  "serviceApi": {
+    "host": "http://localhost",
+    "port": 1337
+  }
+}
