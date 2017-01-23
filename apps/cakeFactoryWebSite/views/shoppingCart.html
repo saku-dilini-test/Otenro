@@ -88,22 +88,29 @@
                         class="btn kkcc-btn-success"
                         ng-click="saveCartInServer(); cart.checkout('PayPal')"
                         ng-model="isSubmitButtonDisableValue"
-                        ng-disabled="cart.getTotalCount() < 1">
+                        ng-disabled=" (cart.getBranchName() === '' && cart.getDeliveryCharges() === 0) || cart.getTotalCount() < 1 ">
                         <i class="icon-ok icon-white" /> Submit
                     </button>
                 </div>
-                <div ng-if="cart.getTotalCount() < 1" class="pull-left">
-                    <button 
+                <div ng-if="cart.getBranchName() === '' && cart.getDeliveryCharges() === 0 && (!cart.getTotalCount() < 1) " class="pull-left">
+                    <button
                     class="btn "
-                    onclick="window.location.href='#/'">
-                    <i class="icon-chevron-left" /> Back to Store
+                    onclick="window.location.href='#/delivery'">
+                    <i class="icon-chevron-left" /> Checkout
                     </button>
                 </div>
+            <div ng-if="cart.getTotalCount() < 1" class="pull-left">
+                <button
+                        class="btn "
+                        onclick="window.location.href='#/'">
+                    <i class="icon-chevron-left" /> Back to Store
+                </button>
+            </div>
                 <div ng-if="false">
                     <button
                         class="btn btn-block btn-primary"
                         ng-click="cart.checkout('PayPal')"
-                        ng-disabled="cart.getTotalCount() < 1">
+                        ng-disabled=" pickUpBranch === '' || deliveryCharge === 0 || cart.getTotalCount() < 1 ">
                         <i class="icon-ok icon-white" /> check out using PayPal
                     </button>
                 </div>
