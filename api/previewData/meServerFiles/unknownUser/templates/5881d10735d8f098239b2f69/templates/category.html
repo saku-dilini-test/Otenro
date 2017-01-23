@@ -1,0 +1,42 @@
+<ion-view view-title="Menu">
+    <ion-content class="made-easy-background-image made-easy-background-color">
+
+        <div class="" ng-repeat="category in categories  | orderBy:'id'" ng-if="$even">
+            <div class="" ng-if="$index < categories.length">
+                <a  href="#/app/category/{{categories[$index].id}}/{{categories[$index].name}}">
+                  <div class="row no-padding">  
+                    <div class="col no-padding">
+                        <div class="cat-img">
+                            <img width="100%" ng-src="{{imageURL}}/{{categories[$index].imageUrl}}">
+                        </div>
+                    </div> 
+                    <div class="left-abo">
+                        <div class="category-font">
+                            <div class=" center made-easy-header-font">{{categories[$index].name}}</div>
+                        </div>
+                    </div>
+                   </div>
+                </a>
+            </div>
+
+            <div class="" ng-if="($index+1) < categories.length">
+                <a  href="#/app/category/{{categories[$index + 1].id}}/{{categories[$index + 1].name}}">
+                  <div class="row no-padding">
+                    <div class="right-abo">
+                        <div class="category-font">
+                            <div class=" center made-easy-header-font">{{categories[$index + 1].name}}</div>
+                        </div>
+                    </div>
+                    <div class="col no-padding">
+                        <div class="cat-img">
+                            <img width="100%" ng-src="{{imageURL}}/{{categories[$index + 1].imageUrl}}">
+                        </div>
+                    </div>
+                  </div>
+                </a>
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>
