@@ -27,6 +27,7 @@ angular.module('animateApp')
 			$scope.setDeliveryTime = '';
 			$scope.isPassedDate = false;
 			$scope.isOutOfHours = false;
+			$scope.comment = '';
 		}
 
 		$scope.saveBranchName = function(name){
@@ -129,6 +130,9 @@ angular.module('animateApp')
 		$scope.goShoppingCart = function () {
 			$location.path('/shoppingCart');
 		};
+		 $scope.reset = function () {
+                $scope.comment = '';
+            };
 
 
 	});	
