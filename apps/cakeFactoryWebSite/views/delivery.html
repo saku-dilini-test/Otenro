@@ -45,11 +45,11 @@
                             </li>
                             <li class="delivery-address-section">
                                 <label>Email *</label>
-                                <input class="form-control delivery-email" name="userEmail" type="email" ng-model="deliveryAddress.email"
+                                <input class="form-control delivery-email" name="userEmail" type="email" ng-model="deliveryAddress.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                              ng-change="saveDeliveryAddress(deliveryAddress)"  required>
                                 <span class="error-message"
-                                        ng-if="pickUpForm.userEmail.$dirty">
-                                    <span ng-show="pickUpForm.userEmail.$error.email">Not a valid email address.</span>
+                                        ng-if="pickUpForm.userEmail.$dirty && pickUpForm.userEmail.$invalid">
+                                    <span ng-show="pickUpForm.userEmail.$dirty && pickUpForm.userEmail.$invalid ">Not a valid email address.</span>
                                 </span>
                             </li>
                             <li>
@@ -65,8 +65,8 @@
                                 </div>
                                 <datetimepicker ng-model="pickUpDate.date"
                                                 min-date = "{{minDate}}"
-                                                data-datetimepicker-config="{ startView:'day', minView:'hour' }"
-                                                ng-change="savePickUpDate(pickUpDate.date)" required></datetimepicker>
+                                                data-datetimepicker-config="{ startView:'day', minView:'hour'}"
+                                                ng-change="savePickUpDate(pickUpDate.date)"required></datetimepicker>
                             </li>
                             <li>
                                 <label>Comment</label>
@@ -114,10 +114,11 @@
                             </li>
                             <li class="delivery-address-section">
                                 <label>Email *</label>
-                                <input class="form-control delivery-email" name="userEmail" type="email" ng-model="deliveryAddress.email"
+                                <input class="form-control delivery-email" name="userEmail" type="email" ng-model="deliveryAddress.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                        ng-change="saveDeliveryAddress(deliveryAddress)"  required>
-                            <span class="error-message" ng-if="deliveryForm.userEmail.$dirty">
-                                <span ng-show="deliveryForm.userEmail.$error.email">Not a valid email address.</span>
+                            <span class="error-message"
+                                  ng-if="deliveryForm.userEmail.$dirty && deliveryForm.userEmail.$invalid">
+                                <span ng-show="deliveryForm.userEmail.$dirty && deliveryForm.userEmail.$invalid">Not a valid email address.</span>
                             </span>
                             </li>
                             <li>
@@ -142,7 +143,7 @@
                             </li>
                         </ul>
                             <button ng-disabled="(!(deliveryForm.$valid)) || (isPassedDate) || (isOutOfHours)"
-                                    ng-click="deliveryForm.$valid && goShoppingCart()"
+                                    ng-click="deliveryForm.$valid && goShoppingCart() && reset()"
                                     class="btn kkcc-btn-success">
                                Submit
                             </button>
