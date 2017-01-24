@@ -46,7 +46,8 @@
         $scope.tempUrl = $stateParams.tempUrl;
         $scope.tempName = $stateParams.tempName;
         $scope.tempCategory = $stateParams.tempCategory;
-
+        $scope.contentUrl = true;
+        console.log('ddd');
         // $stateParams $log.debug only testing
         $log.debug('User ID : '+$stateParams.userId);
         $log.debug('App ID : '+$stateParams.appId);
