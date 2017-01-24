@@ -80,6 +80,7 @@ angular.module('animateApp')
 					$scope.isOutOfHours = true;
 				}
 			}
+
 		}
 		// save Delivery Date and Time
 		$scope.saveDeliveryDate = function(date){
@@ -130,9 +131,6 @@ angular.module('animateApp')
 		$scope.goShoppingCart = function () {
 			$location.path('/shoppingCart');
 		};
-		 $scope.reset = function () {
-                $scope.comment = '';
-            };
 
 
 	});	
