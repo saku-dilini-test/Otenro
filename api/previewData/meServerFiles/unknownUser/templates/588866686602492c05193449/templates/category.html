@@ -1,0 +1,26 @@
+<ion-view view-title="Menu" class="made-easy-background-image made-easy-background-color">
+    <ion-content >
+
+<!--         <div class="categories" ng-repeat="category in categories | orderBy:'id'" >
+            <div class="card">
+                <a  href="#/app/category/{{category.id}}/{{category.name}}">
+                    <img width="100%" ng-src="{{imageURL}}/{{category.imageUrl}}">
+                    <h3 class="made-easy-header-font">{{category.name}}</h3>
+                </a>
+            </div>
+ -->
+ <a href="#/app/category/{{category.id}}/{{category.name}}" ng-repeat="category in categories | orderBy:'id'" >
+             <div class="row" >
+                
+                    <div class="col col-33 text-right" > 
+                       <img width="75%" ng-src="{{imageURL}}/{{category.imageUrl}}">
+                      
+                    </div>
+                    <div class="col col-center padding-left">
+                         <div class="made-easy-header-font">{{category.name}}</div>
+                    </div>
+              
+            </div>
+              </a>
+    </ion-content>
+</ion-view>

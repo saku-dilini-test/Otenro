@@ -1,0 +1,9 @@
+{
+  "name": "Delicious",
+  "appId": "588866686602492c05193449",
+  "userId": "unknownUser",
+  "serviceApi": {
+    "host": "http://localhost",
+    "port": 1337
+  }
+}

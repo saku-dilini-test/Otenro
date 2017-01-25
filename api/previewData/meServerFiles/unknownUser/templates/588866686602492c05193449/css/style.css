@@ -1,0 +1,123 @@
+/* Empty. Add your own CSS if you like */
+
+
+/*overall app*/
+.scroll{
+	height: 100%;
+}
+
+.item-select select{
+    background:transparent;
+}
+
+/*home page*/
+.top{
+	position: relative;
+	top: 20%;
+	text-align: center;
+}
+
+.top h1{
+	font-family: "Comic Sans MS", cursive, sans-serif;
+    text-transform: uppercase;
+    transform: rotate(-8deg); 
+}
+
+.bottom{
+	position: absolute;
+	bottom: 0;
+    margin: 1em 0;
+    width: 100%;
+}
+
+.bottom .row .col{
+
+}
+/*categories Page*/
+
+.categories h3{
+	position: absolute;
+	top: 0;
+	left: 7%;
+}
+
+/* items page */
+.items .white-65{
+	background-color: #fff;
+	height: 65%;
+}
+
+.items .rest-45{
+	height: 35%;
+	display: list-item;
+	vertical-align: middle;
+}
+
+/*home page and menu*/
+
+.login .card{
+	background-color: rgba(255,255,255,0.8)
+}
+
+
+.cart i{
+	display: block;
+	position: absolute;
+	right: 20px;
+}
+.cartSize{
+    margin: 17px 5px 0 0;
+}
+
+select{
+	background: #fff0 !important;
+}
+
+/*helper classes*/
+
+.title-image {
+    margin-left: 20%;
+}
+
+a{
+	text-decoration: none;
+}
+
+.no-padding{
+	padding: 0 !important;
+}
+
+.no-margin{
+	margin: 0 !important;
+}
+
+
+.fix-size{
+    height: 40px;
+    width: 40px;
+    float: right;
+}
+
+.fix-size i::before{
+    font-size: 20px !important;
+    margin-top: 12px;
+}
+.padding-custom{
+    padding:10px;
+}
+
+.item-buy select {
+    background: transparent;
+}
+
+* Remove controls from Firefox , Chrome, safari*/
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

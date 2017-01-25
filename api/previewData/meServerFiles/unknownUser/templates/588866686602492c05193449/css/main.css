@@ -1,0 +1,98 @@
+
+ion-view{
+    cursor: url(../img/cursor.cur), auto;
+}
+ion-content{
+    cursor: url(../img/cursor.cur), auto;
+}
+
+/** ----------- Start Custom update Css Class ---------- **/
+
+/* ----- Background Settings ----- */
+.made-easy-background-color {
+    background-color: #21283B !important;
+}
+
+.made-easy-background-image{
+	background: url('../img/background.jpg') no-repeat;
+    background-size: cover;
+}
+/* ----- Main Navigation Settings ----- */
+.made-easy-navigationBarColor{
+    background-color: rgba(33, 40, 59, 0.5) !important;
+    color:#fff;
+    border: 0;
+}
+
+.made-easy-navigationBarColor .bar .button.button-clear{
+    color:inherit;
+}
+
+.made-easy-navigationBarColor .item {
+    border-style:unset;
+}
+
+
+.made-easy-navigationBarColor .list{
+    margin-top:10%;
+}
+
+.made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
+    background:transparent;
+    border: 0;
+    color:inherit;
+    padding:6px;
+}
+/* ----- Footer Settings ----- */
+.made-easy-footerColor{
+    background-color: #4e6dde;
+}
+.made-easy-footer-font{
+    color:#4e6dde;
+    font-family: Ubuntu Light;
+    font-size: 12px;
+    font-weight: bolder;
+}
+/* ----- Header Font Settings ----- */
+.made-easy-header-font{
+    font-size: 3vh;
+    color:#ff9800;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: bolder;
+    text-transform: capitalize;
+    line-height:normal;
+}
+
+/* ----- Content Font Settings ----- */
+.made-easy-content-font{
+    font-size:2.2vh;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: lighter;
+    line-height:normal;
+}
+
+/* ----- Button Font Settings ----- */
+.made-easy-button-setting{
+    border-color: #ffffff !important;
+    background-color: rgb(70, 82, 115);
+    color: #ffffff !important;
+    border-width: 0 !important;
+    border-radius: 1px;
+    cursor: url(../img/cursor.cur), auto;
+    border: solid;
+}
+
+/* ----- View Page ----- */
+
+.item-buy{
+    width: 100%;
+    border: unset !important;
+    height: 100% !important;
+}
+.item-error-message{
+    color: red;
+    font-size: 70%;
+}
+
+/** ----------- End Custom update Css Class ---------- **/

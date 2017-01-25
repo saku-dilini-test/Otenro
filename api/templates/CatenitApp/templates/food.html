@@ -8,7 +8,7 @@
                     </ion-slide>
                 </ion-slide-box>
             </div>
-            
+
             <div class="row no-padding">
                 <div class="col col-50 align-left made-easy-header-font ">
                     {{currency.sign}}{{selectedVariant.price}}
@@ -17,31 +17,31 @@
                     <div class="made-easy-button-setting text-center fix-size"  model="selectedVariant.buyQuantity" ng-click="increment()">
                         <i class="icon  ion-android-add"></i>
                     </div>
-                
+
                     <div class="fix-size">
-                        <input type="number" min="1" value="1"  
-                                       class="item-buy made-easy-button-setting text-center"
-                                       ng-model="selectedVariant.buyQuantity"
-                                       ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
+                        <input type="number" min="1" value="1"
+                               class="item-buy made-easy-button-setting text-center"
+                               ng-model="selectedVariant.buyQuantity"
+                               ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
                     </div>
-                
+
                     <div class="made-easy-button-setting text-center fix-size"  model="selectedVariant.buyQuantity" ng-click="decrement()">
                         <i class="icon ion-android-remove "></i>
                     </div>
                 </div>
             </div>
             <div class="col no-padding made-easy-content-font">
-                        <div class="col  align-right">
-                            {{foodInfo.selection}} 
-                        </div>
-                        <div class="col align-left">
-                            <select ng-model="selectedVariant"
-                                    class="item-buy made-easy-content-font"
-                                    ng-options="variant.vType  for variant in foodInfo.variants"
-                                    ng-change="changeVariant(selectedVariant)">
-                            </select>
-                        </div>
-                    </div>
+                <div class="col  align-right">
+                    {{foodInfo.selection}}
+                </div>
+                <div class="col align-left">
+                    <select ng-model="selectedVariant"
+                            class="item-buy made-easy-content-font"
+                            ng-options="variant.vType  for variant in foodInfo.variants"
+                            ng-change="changeVariant(selectedVariant)">
+                    </select>
+                </div>
+            </div>
             <div class="col made-easy-content-font">
                 Description
             </div>
@@ -49,34 +49,34 @@
                 {{foodInfo.detailedDesc}}
             </div>
 
-           
-                    <!-- Buy Qty error message -->
-                    <div class="row">
-                        <!-- Product not available in store -->
-                        <div ng-if="selectedVariant.quantity == 0">
+
+            <!-- Buy Qty error message -->
+            <div class="row">
+                <!-- Product not available in store -->
+                <div ng-if="selectedVariant.quantity == 0">
                         <span class="animated zoomIn item-error-message">
                             Product not available
                         </span>
-                        </div>
-                        <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
-                        <div ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
+                </div>
+                <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+                <div ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
                         <span class="animated zoomIn item-error-message">
                             Please enter a quantity of {{selectedVariant.quantity}} or less.
                         </span>
-                        </div>
-                        <div ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
+                </div>
+                <div ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
                         <span class="animated zoomIn item-error-message">
                             Please enter a quantity of {{selectedVariant.quantity}}.
                         </span>
-                        </div>
-                    </div>
+                </div>
+            </div>
         </div>
-          <!-- Bye Button -->
-            <button class="button button-block made-easy-button-setting fix-button-bottom"
-                    ng-disabled="isBuyBtnDisable"
-                    ng-click="addToCart()">
-                Place Order
-            </button>
-                 
+        <!-- Bye Button -->
+        <button class="button button-block made-easy-button-setting fix-button-bottom"
+                ng-disabled="isBuyBtnDisable"
+                ng-click="addToCart()">
+            Place Order
+        </button>
+
     </ion-content>
 </ion-view>

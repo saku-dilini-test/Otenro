@@ -120,6 +120,16 @@ module.exports = {
             previewId : '586cd641641694232165c18c',
         },
         {
+            template_name : 'DeliciousApp',
+            templateViewName : 'Delicious',
+            templateType: 'ecommerce',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
+            imageUrl : 'DeliciousApp/',
+            templateFilesPath:'templates/DeliciousApp',
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '588866686602492c05193449',
+        },
+        {
             template_name : 'CrushApp',
             templateViewName : 'Crush Surf Shop',
             templateType: 'ecommerce',
