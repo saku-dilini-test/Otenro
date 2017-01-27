@@ -24,6 +24,9 @@
                 <ion-checkbox ng-show="authorizeNet"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'authorizeNet'">
                     <h3>AuthorizeNet</h3>
                 </ion-checkbox >
+                <ion-checkbox ng-show="wepayShow"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'wepay'">
+                    <h3>wepay</h3>
+                </ion-checkbox >
 
             </form>
 
@@ -198,6 +201,33 @@
                 <div ng-show="step == 'done'">
                     <p>Transaction completed with transaction id: {{ transactionId }}</p>
                 </div>
+            </div>
+
+            <div class="card-form list padding-right" ng-if="payment.type == 'wepay'">
+                <div class="list">
+
+
+                    <label class="item item-input">
+                        <span class="input-label">Credit Card Number</span>
+                        <input id="cc-number" type="text" placeholder="Credit Card Number" ng-model="wepay.number">
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">Expiration Month</span>
+                        <input id="cc-month" type="text" placeholder="Month" ng-model="wepay.month">
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">Expiration Year</span>
+                        <input id="cc-year" type="text" placeholder="Expiration Year" ng-model="wepay.year">
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">CVV</span>
+                        <input id="cc-cvv" type="text" placeholder="CVV" ng-model="wepay.cvv">
+                    </label>
+                    <div class="padding">
+                        <button class="button button-block button-positive" ng-click="wepayPayment(wepay)" id="cc-submit" >Submit</button>
+                    </div>
+                </div>
+
             </div>
 
 

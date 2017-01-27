@@ -10,6 +10,7 @@
 var fs = require('fs-extra');
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
+var wepay = require('wepay').WEPAY;
 
 module.exports = {
 
@@ -195,6 +196,43 @@ module.exports = {
             if (err) return done(err);
             return res.send(app);
         });
+
+
+    },
+    /**
+     * return all third navigation for given app Id & second navigation Id
+     *
+     * @param req
+     * @param res
+     */
+    createPayment : function(req,res){
+        var credit_card_id = req.param('credit_card_id');
+        var amount = req.param('amount');
+        var currency = req.param('currency');
+
+
+        var wepay_settings = {
+            'client_id'     : '2593',
+            'client_secret' : '90996683ee',
+            'access_token'  : 'STAGE_a481e0e5a60ff145ff1e1abfd618cdf1cb51fcae29d42b93550798d92e4c06f2', // used for oAuth2
+            // 'api_version': 'API_VERSION'
+        }
+
+        var wp = new wepay(wepay_settings);
+        wp.use_staging(); // use staging environment (payments are not charged)
+        wp.call('/checkout/create',
+            {
+                'account_id': 382331001,
+                'amount': amount,
+                'currency': currency.toUpperCase(),
+                'short_description': 'Selling 42 Pens',
+                'type': 'goods'
+
+            },
+            function(response) {
+                return res.send(response);
+            }
+        );
 
 
     },

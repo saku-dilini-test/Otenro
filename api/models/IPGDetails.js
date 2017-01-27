@@ -37,6 +37,9 @@ module.exports = {
         authorizeNetEnable: {
             type : 'boolean'
         },
+        wepayEnable: {
+            type : 'boolean'
+        },
         apiLoginId : {
             type : 'string'
         },

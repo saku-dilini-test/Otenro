@@ -95,6 +95,29 @@
 
             </fieldset>
 
+            <fieldset>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>wepay</label>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="on-off-switch">
+                            <input type="checkbox" ng-model="IPGSettings.wepayEnable" name="on-off-switch"
+                                   class="on-off-switch-checkbox" id="on-off-switch-6">
+
+                            <label class="input-shadow-border on-off-switch-label" for="on-off-switch-6">
+                                <span class="on-off-switch-inner"></span>
+                                <span class="on-off-switch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <input class="apikey input-shadow-border" type="text" ng-model="IPGSettings.paypalKey"
+                       name="number" placeholder="Paypal API Key" required />
+
+            </fieldset>
+
         </div>
         <div class="md-dialog-buttons">
             <div class="inner-section">

@@ -8,6 +8,7 @@
 mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService,$log) {
 
     $scope.$emit('hideMenu',{});
+       WePay.set_endpoint("stage");
 
     if(localStorage.getItem('appLocalStorageUser') == null){
         $state.go('app.login')
@@ -30,6 +31,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     });
 
 
+
+
     $http.get(constants.SERVER_URL + '/edit/getIPGInfo?appId='+$scope.appId).success(function(data) {
         $scope.paymentData = data;
         $log.debug($scope.paymentData);
@@ -44,6 +47,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         $scope.stripeShow = data.stripeEnable;
         $scope.braintreeShow = data.braintreeEnable;
         $scope.authorizeNet = data.authorizeNetEnable;
+        $scope.wepayShow = data.wepayEnable;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -62,6 +66,42 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
     $scope.makeStripePayment = makeStripePayment;
     $scope.authorizeCreditCard = authorizeCreditCard;
+
+    $scope.wepayPayment = function (wepayData) {
+        console.log("$stateParams.item.delivery "+JSON.stringify($stateParams.item.delivery));
+        console.log("$$stateParams.item.userEmail "+JSON.stringify($stateParams.item.userEmail));
+
+        response = WePay.credit_card.create({
+            "client_id":        2593,
+            "user_name":        $stateParams.item.delivery.name,
+            "email":            $stateParams.item.userEmail,
+            "cc_number":        wepayData.number,
+            "cvv":              wepayData.cvv,
+            "expiration_month": wepayData.month,
+            "expiration_year":  wepayData.year,
+            "address": {
+                "country": "US",
+                "postal_code": "94025"
+            }
+
+        }, function(data) {
+            if (data.error) {
+                console.log(data);
+                // handle error response
+            } else {
+                $http.get(constants.SERVER_URL +
+                    '/templates/createPayment?credit_card_id='+data.credit_card_id+
+                    "&currency=" +$rootScope.symbol + "&amount="+ $stateParams.item.amount ).success(function(data) {
+                    if(data.state=='new'){
+                        $scope.orderProcess();
+                    }
+                }).error(function(err) {
+                    alert('warning', "Unable to get Products Selected Category", err.message);
+                });
+
+            }
+        });
+    }
 
     /**
      Make Payment Function
@@ -170,7 +210,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
               promotionCode: $stateParams.item.promotionCode
           }
       }
-      $log.debug(details);
+      $log.debug($scope.details);
       $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
          .then(function(res){
           $scope.details.id = $rootScope.cart.cartItems[0].id;
