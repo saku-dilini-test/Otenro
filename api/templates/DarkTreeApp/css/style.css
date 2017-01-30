@@ -1,0 +1,117 @@
+/* Empty. Add your own CSS if you like */
+
+
+/*overall app*/
+.scroll{
+	height: 100%;
+}
+.item-select select{
+    background:transparent;
+}
+
+
+/*categories Page*/
+
+.categories .card{
+	height: calc((100vh - 76px) / 3);
+}
+.categories h3{
+	position: absolute;
+	bottom: 0;
+	left: 7%;
+	background-color: rgba(0,0,0,1);
+	padding: 7px; 
+	border-radius: 2px;
+	text-transform: uppercase;
+}
+
+/* items page */
+
+.items .card{
+	margin: 6px;
+}
+
+.items .col-50{
+	
+}
+
+/*item page*/
+.item-select{
+	border:0;
+}
+
+/*home page and menu*/
+
+.login .card{
+	background-color: rgba(255,255,255,0.8)
+}
+
+.login .scroll{
+	height: unset !important;
+}
+
+.cart i{
+	display: block;
+	position: absolute;
+	right: 20px;
+}
+.cartSize{
+    position: absolute;
+    top: auto;
+    right: 10px;
+    bottom: 22px;
+    left: auto;
+    border-radius: 10px;
+    padding: 1px;
+}
+
+/*helper classes*/
+
+.menu-content{
+	box-shadow: -9px 10px 15px 0px rgba(0,0,0,0.3);
+}
+.title-image {
+    margin-left: 20%;
+}
+
+
+.menu-open  ion-side-menu-content{
+   transform: translate3d(239px, 0, 0px ) scale(0.8) !important;
+	
+}
+
+ion-item a i{
+    margin-right: 1em;
+}
+
+
+ion-modal-view .made-easy-navigationBarColor{
+	border:0;
+}
+
+/*logging page*/
+.large-padding{
+	padding: 20% 10% !important;
+}
+
+.social .button{
+	color:#000;
+}
+
+.no-account {
+	position: fixed;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 15px;
+}
+
+.no-account span{
+	text-transform: uppercase;
+	text-decoration: underline;
+}
+
+.hideFab{
+	display: none !important;
+}
+

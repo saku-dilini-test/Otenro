@@ -1,0 +1,15 @@
+<ion-view view-title="Menu" class="made-easy-background-color made-easy-background-image">
+    <ion-content >
+
+        <div class="categories" ng-repeat="category in categories | orderBy:'id'" >
+            <div class="card">
+                <a  href="#/app/category/{{category.id}}/{{category.name}}">
+                    <img width="100%" height="100%" ng-src="{{imageURL}}/{{category.imageUrl}}">
+                    <h3 class="made-easy-header-font">{{category.name}}</h3>
+                </a>
+            </div>
+        </div>
+
+                
+    </ion-content>
+</ion-view>

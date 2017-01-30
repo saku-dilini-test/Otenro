@@ -1,0 +1,60 @@
+<ion-side-menus enable-menu-with-back-views="true">
+
+  <ion-side-menu-content>
+
+    <ion-nav-bar class="made-easy-navigationBarColor">
+
+      <ion-nav-back-button class="button button-icon button-clear ion-android-arrow-back"></ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-if="showMenu"></button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+      
+      </ion-nav-buttons>
+
+    </ion-nav-bar>
+        <button id="fab" class="button button-dark button-fab button-fab-bottom-right" ui-sref="app.cart" ng-class="{hideFab: ($state.current.name === 'app.login' || $state.current.name === 'app.register')}">
+            <i class="icon ion-bag"></i>
+            <h6 class="made-easy-navigationBarColor cartSize">{{parentobj.cartSize}}</h6>
+        </button>
+    <ion-nav-view name="menuContent" align="left"></ion-nav-view>
+</ion-side-menu-content>
+
+  <ion-side-menu side="left" class="made-easy-navigationBarColor made-easy-background-image">
+    <ion-content>
+      <ion-list>
+        <ion-item menu-close ui-sref="app.category">
+          <i class="icon ion-home"></i> Home
+        </ion-item>
+        <ion-item menu-close ui-sref="app.orderHistory">
+         <i class="icon ion-ios-clock"></i> Order History
+        </ion-item>
+        <ion-item menu-close ui-sref="app.contactUs">
+          <i class="icon ion-ios-telephone"> </i> Contact Us
+        </ion-item>
+        <ion-item menu-close ui-sref="app.policies">
+          <i class="icon ion-ios-help"></i> Policies
+        </ion-item>
+        <ion-item menu-close ui-sref="app.aboutUs" ui-sref-opts="{reload: true, notify: true}">
+         <i class="icon ion-ios-person"></i>  About Us
+        </ion-item>
+        <ion-item menu-close ui-sref="app.login">
+         <i class="icon ion-log-in"></i>  Login
+        </ion-item>
+        <ion-item menu-close ui-sref="app.terms">
+          <i class="icon ion-ios-information"></i> Terms 
+        </ion-item>
+        <ion-item menu-close ui-sref="app.logout">
+          <i class="icon ion-log-out"></i> Logout
+        </ion-item>
+        <br />
+        <ion-item ng-if="allowOtenroToPromote" class="title-image" menu-close>
+          <a class="made-easy-navigationBarColor" href="#"
+             onclick="window.open('http://www.otenro.com/','_system','location=yes'); return false;">
+            Created on otenro.com</a>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

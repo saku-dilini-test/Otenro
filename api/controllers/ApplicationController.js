@@ -85,7 +85,7 @@ module.exports = {
             }
         }
 
-        if(templateName == 'clothingApp' || templateName == 'GlamourUpApp'|| templateName == 'CrushApp'|| templateName == 'HeadphoneApp'|| templateName == 'CatenitApp'|| templateName == 'DeliciousApp'){
+        if(templateName == 'clothingApp' || templateName == 'GlamourUpApp'|| templateName == 'CrushApp'|| templateName == 'HeadphoneApp'|| templateName == 'CatenitApp'|| templateName == 'DeliciousApp'|| templateName == 'DarkTreeApp'){
             loginPath = '/#/app/category';
             isApplyStyle = {
                 color : {
@@ -302,7 +302,8 @@ module.exports = {
          * If Only foodDemoApp or foodDemoApp2 Category & Product Feed to DB
          */
         if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2' || templateName == 'clothingApp'
-            || templateName == 'ECommerceApp'|| templateName == 'GlamourUpApp'|| templateName == 'CrushApp'|| templateName == 'HeadphoneApp' || templateName == 'BondiApp'|| templateName == 'CatenitApp'|| templateName == 'DeliciousApp' ) {
+            || templateName == 'ECommerceApp'|| templateName == 'GlamourUpApp'|| templateName == 'CrushApp'|| templateName == 'HeadphoneApp' || templateName == 'BondiApp'|| templateName == 'CatenitApp'
+            || templateName == 'DeliciousApp'|| templateName == 'DarkTreeApp' ) {
             var searchAppInitialData = {
                 'templateName': templateName
             }

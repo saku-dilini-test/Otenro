@@ -1,0 +1,9 @@
+{
+  "name": "Dark Tree",
+  "appId": "588f0581d1a4aee80f01eee2",
+  "userId": "unknownUser",
+  "serviceApi": {
+    "host": "http://localhost",
+    "port": 1337
+  }
+}

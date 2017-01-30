@@ -130,6 +130,16 @@ module.exports = {
             previewId : '588866686602492c05193449',
         },
         {
+            template_name : 'DarkTreeApp',
+            templateViewName : 'Dark Tree',
+            templateType: 'ecommerce',
+            templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
+            imageUrl : 'DarkTreeApp/',
+            templateFilesPath:'templates/DarkTreeApp',
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '588f0581d1a4aee80f01eee2',
+        },
+        {
             template_name : 'CrushApp',
             templateViewName : 'Crush Surf Shop',
             templateType: 'ecommerce',

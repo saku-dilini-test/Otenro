@@ -1,0 +1,40 @@
+<ion-view view-title="{{menuName}}">
+  <ion-content class="made-easy-background-color items">
+        <div class="row" ng-repeat="food in foods"  ng-if="$even">
+            <div class="col col-50" ng-click="openItem(foods[$index]) && navigateFood(foods[$index])" ng-if="$index < foods.length">
+                    <img width="100%" ng-src="{{imageURL}}/{{foods[$index].imageUrl}}">
+                <div class="col made-easy-content-font">{{foods[$index].name}}</div>
+                <div class="made-easy-content-font">
+                   <div class="">
+                       <div class="col center made-easy-header-font" ng-click="modal.show()">
+                        {{currency.sign}}{{foods[$index].variants[0].price}}
+                       </div>
+                       <div ng-if="salesandpromotion">
+                           <div class="col col made-easy-header-font">{{salesandpromotion.discountType}}</div>
+                           <div class="col col made-easy-header-font">{{salesandpromotion.discount}}</div>
+                       </div>
+               
+                   </div>
+                </div>
+           </div>
+            <div class="col col-50" ng-click="openItem(foods[$index+1]) && navigateFood(foods[$index+1])" ng-if="($index+1) < foods.length">
+                    <img width="100%" ng-src="{{imageURL}}/{{foods[$index+1].imageUrl}}">
+                <div class="col made-easy-content-font">{{foods[$index+1].name}}</div>
+                <div class="made-easy-content-font">
+                   <div class="">
+                       <div class="col price center made-easy-header-font" ng-click="modal.show()">
+                        {{currency.sign}}{{foods[$index+1].variants[0].price}}
+                       </div>
+                       <div ng-if="salesandpromotion">
+                       <div class="col col made-easy-header-font">{{salesandpromotion.discountType}}</div>
+                       <div class="col col made-easy-header-font">{{salesandpromotion.discount}}</div>
+                       </div>
+                   </div>
+                </div>
+           </div>
+        </div>
+
+        <div class="" ng-repeat="food in foods" style="
+    
+    </ion-content>
+</ion-view>

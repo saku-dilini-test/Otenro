@@ -1,0 +1,45 @@
+<ion-view title="Login">
+	<ion-content class="im-wrapper login made-easy-background-image made-easy-background-color large-padding">
+		<div class="col">
+			<h1>Login.</h1>
+		</div>
+			<form name="loginForm">
+				
+						<div class="list">
+							<label class="item item-input item-floating-label">
+								<span class="input-label"><i class="icon ion-email"></i> Email</span>
+								<input type="text" placeholder="Email"  ng-model="data.username" ng-required="true">
+							</label>
+							<label class="item item-input item-floating-label">
+								<span class="input-label"><i class="icon ion-android-lock"></i> Password</span>
+								<input type="password" placeholder="Password" ng-model="data.password" ng-required="true">
+							</label>
+							<h5 class="col text-center"> FORGET PASSWORD? </div>
+
+					
+								<button class="button button-block button-raised  made-easy-button-setting color-invert" ng-click="loginForm.$valid && login()">Login</button>
+							
+
+						</div>
+
+						<!--<div class="row">-->
+							<!--<h5 class="col made-easy-content-font text-center">-->
+								<!--<b>SIGN IN WITH</b>-->
+							<!--</h5>-->
+						<!--</div>-->
+						<!--<div class="row social">-->
+							<!--<div class="col text-right ">-->
+								<!--<a class="button button-clear icon ion-social-facebook no-padding"></a>-->
+							<!--</div>-->
+							<!--<div class="col text-left">-->
+								<!--<a class="button button-clear icon ion-social-twitter no-padding"></a>-->
+							<!--</div>-->
+						<!--</div>-->
+
+			</form>
+	</ion-content>
+	<div class="col text-center no-account">
+				Don't Have an Account? <span ng-click="singUp()">sign up here</span>
+	</div>
+				
+</ion-view>

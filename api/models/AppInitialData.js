@@ -2120,6 +2120,294 @@ module.exports = {
                 ]
               }
               ]
+          },
+          {
+            templateName : 'DarkTreeApp',
+            secondNavi : [
+              {
+                attribute : {
+                  "imageUrl": "1.JPG",
+                  "name": "Women's",
+                  "description": "Women's description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Lorem ipsum",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "15.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Lorem ipsum",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "15.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "dolor sit amet",
+                    "price": 350,
+                    "quantity": 350,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt y brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "16.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "dolor sit amet",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "350",
+                      'quantity': 350
+                    }],
+                    "imageUrl": "16.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "consectetur",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "17.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "consectetur",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "published":"YES",
+                    "imageUrl": "17.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "adipiscing elit",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "14.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "adipiscing elit",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "published":"YES",
+                    "imageUrl": "14.jpg",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },{
+                attribute : {
+                  "imageUrl": "2.JPG",
+                  "name": "Men's",
+                  "description": "Men's description",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "consectetur",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "18.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "consectetur",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "published":"YES",
+                    "imageUrl": "18.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "Lorem ipsum",
+                    "price": 350,
+                    "quantity": 350,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt y brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "19.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Lorem ipsum",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "350",
+                      'quantity': 350
+                    }],
+                    "published":"YES",
+                    "imageUrl": "19.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "dolor sit amet",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "20.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "dolor sit amet",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "imageUrl": "20.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "adipiscing elit",
+                    "price": 450,
+                    "quantity": 450,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Shirt z brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "22.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "adipiscing elit",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "450",
+                      'quantity': 450
+                    }],
+                    "imageUrl": "22.jpg",
+                    "createdDate": Date.now()
+                  }
+                ]
+              },
+              {
+                attribute : {
+                  "imageUrl": "3.JPG",
+                  "name": "Kid's",
+                  "description": "Kid's",
+                  "enteredBy":"demo"
+                },
+                thirdNavi : [
+                  {
+                    "name": "Lorem ipsum",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Short x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "21.JPG"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "Lorem ipsum",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "21.JPG",
+                    "createdDate": Date.now()
+                  },
+                  {
+                    "name": "adipiscing elit",
+                    "price": 250,
+                    "quantity": 250,
+                    "selection" : "Size",
+                    "enteredBy":"demo",
+                    "published":"YES",
+                    "briefDesc" : "Short x brief des",
+                    "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                    "tempImageArray" : [
+                      {
+                        "img" : "23.jpg"
+                      }
+                    ],
+                    "variants":[{
+                      "name": "adipiscing elit",
+                      'sku': "1111",
+                      'size': "11",
+                      'vType' : "s",
+                      'price': "250",
+                      'quantity': 250
+                    }],
+                    "imageUrl": "23.jpg",
+                    "createdDate": Date.now()
+                  }
+                ]
+              }
+              ]
           }
           ,{
             templateName : 'DeliciousApp',
