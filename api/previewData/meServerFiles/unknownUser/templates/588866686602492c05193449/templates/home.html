@@ -1,0 +1,26 @@
+<ion-view view-title="Home" class="made-easy-background-image made-easy-background-color">
+    <ion-content >
+
+        <div class="top">
+            <div   class="col center light"><h1>{{appName}}</h1></div>
+            <!-- <button ng-click="register()" class="button button-raised made-easy-button-setting  color-invert ">
+                Register
+            </button>
+            <button ng-click="login()" class="button button-raised  made-easy-button-setting">
+                Sign in
+            </button> -->
+        </div>
+
+        <div class="bottom text-center">
+
+            <div class="row" >
+                <div class="col" ng-repeat="category in categories | orderBy:'id'">
+                    <a href="#/app/category/{{category.id}}/{{category.name}}">
+                        <img width="100%" ng-src="{{imageURL}}/{{category.imageUrl}}">
+                   </a>
+                </div>
+            </div>  
+
+        </div>
+    </ion-content>
+</ion-view>

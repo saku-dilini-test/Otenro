@@ -226,8 +226,6 @@ button {
 }
 
 .fix-button-bottom{
-    position:  fixed;
-    bottom: 0;
     margin: 0 !important;
     z-index: 1;
 }

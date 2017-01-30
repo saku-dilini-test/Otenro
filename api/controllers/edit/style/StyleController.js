@@ -600,7 +600,7 @@ module.exports = {
                     updateFile(mainCssFile, [{
                         rule: colorTypeCss,
                         target: "color",
-                        replacer: styleColor
+                        replacer: styleColor +" "+"!important"
                     }], function (err) {
                         sails.log.info((err));
                     });
