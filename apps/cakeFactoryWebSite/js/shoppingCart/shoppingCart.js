@@ -400,14 +400,16 @@ shoppingCart.prototype.getShoppingCart = function () {
 shoppingCart.prototype.addItem = function (sku, name, price, quantity) {
     quantity = this.toNumber(quantity);
     if (quantity != 0) {
-
+//console.log("pricesdadsa"+ price);
         // update quantity for existing item
         var found = false;
         for (var i = 0; i < this.items.length && !found; i++) {
+        console.log("price"+ price);
             var item = this.items[i];
-            if (item.sku == sku) {
+            if (item.sku == sku && item.price==price) {
                 found = true;
                 item.quantity = this.toNumber(item.quantity + quantity);
+                //console.log("eeee"+item.quantity);
                 if (item.quantity <= 0) {
                     this.items.splice(i, 1);
                 }
@@ -418,6 +420,7 @@ shoppingCart.prototype.addItem = function (sku, name, price, quantity) {
         if (!found) {
             var item = new cartItem(sku, name, price, quantity);
             this.items.push(item);
+           // console.log("prhjgjghjygftftftice"+ price);
         }
 
         // save changes
@@ -436,6 +439,8 @@ shoppingCart.prototype.getTotalPrice = function (sku) {
     }
     return total;
 }
+
+
 
 // get the total price for all items currently in the cart
 shoppingCart.prototype.getTotalCount = function (sku) {
