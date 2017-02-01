@@ -1,4 +1,4 @@
-﻿<div class="other-page-header home-pg"></div>
+﻿﻿<div class="other-page-header home-pg"></div>
 <div ng-include=" 'views/navigation.html' "></div>
 
 <div class="delivery-page-wrapper">
@@ -16,7 +16,7 @@
                     <td></td>
                     <td><b>Item</b></td>
                     <td class="tdCenter"><b>Quantity</b></td>
-                    <td class="tdRight"><b>Price</b></td>                    
+                    <td class="tdRight"><b>Price</b></td>
                 </tr>
 
                 <!-- empty cart message -->
@@ -29,23 +29,23 @@
                 <!-- cart items -->
                 <tr ng-repeat="item in cart.items | orderBy:'name'">
                     <td>
-                        <button 
-                            class="btn btn-danger" type="button"                             
-                            ng-click="cart.addItem(item.sku, item.name, item.price, -1000)">x</button>
+                        <button
+                                class="btn btn-danger" type="button"
+                                ng-click="cart.addItem(item.sku, item.name, item.price, -1000)">x</button>
                     </td>
                     <td>{{item.name}}</td>
                     <td class="tdCenter">
                         <div class="input-append">
                             <!-- use type=tel instead of  to prevent spinners -->
                             <input
-                                class="span3 text-center" type="number"
-                                ng-model="item.quantity" 
-                                ng-change="cart.saveItems()" />
+                                    class="span3 text-center" type="number"
+                                    ng-model="item.quantity"
+                                    ng-change="cart.saveItems()" />
                         </div>
                     </td>
-                    <td class="tdRight">Rs {{item.price * item.quantity}}</td>              
+                    <td class="tdRight">Rs {{item.price * item.quantity}}</td>
                 </tr>
-             
+
                 <!-- footer -->
                 <tr>
                     <td></td>
@@ -53,7 +53,7 @@
                         <div ng-if="!(cart.getDeliveryCharges() > 0)">Total</div>
                         <div ng-if="cart.getDeliveryCharges() > 0">Sub Total
                         </div>
-                        </b>
+                    </b>
                     </td>
                     <td class="tdCenter"><b>{{cart.getTotalCount()}}</b></td>
                     <td class="tdRight"><b>Rs {{cart.getTotalPrice()}}</b></td>
@@ -63,10 +63,10 @@
                     <td>
                     </td>
                     <td>
-                        Delivery Charges :  
-                    <td/>             
-                    <td> 
-                        <b>Rs {{cart.getDeliveryCharges()}}</b> 
+                        Delivery Charges :
+                    <td/>
+                    <td>
+                        <b>Rs {{cart.getDeliveryCharges()}}</b>
                     </td>
                 <tr>
 
@@ -83,22 +83,26 @@
         <!-- buttons -->
         <div>
             <p class="text-info clearfix">
-                <div ng-if="true" class="pull-right">
-                      <button
+            <div ng-if="true" class="pull-right">
+                <button
                         class="btn kkcc-btn-success"
-                        ng-click="saveCartInServer(); cart.checkout('PayPal')"
+                        ng-click="saveCartInServer(); cart.checkout('PayPal'); cartR"
                         ng-model="isSubmitButtonDisableValue"
-                        ng-disabled=" (cart.getBranchName() === '' && cart.getDeliveryCharges() === 0) || cart.getTotalCount() < 1 ">
-                        <i class="icon-ok icon-white" /> Submit
-                    </button>
-                </div>
-                <div ng-if="cart.getBranchName() === '' && cart.getDeliveryCharges() === 0 && (!cart.getTotalCount() < 1) " class="pull-left">
-                    <button
-                    class="btn "
-                    onclick="window.location.href='#/delivery'">
+                        ng-disabled=" (cart.getBranchName() === '' && cart.getDeliveryCharges() == 0) || cart.getTotalCount() < 1 ">
+                    <i class="icon-ok icon-white" /> Submit
+                </button>
+            </div>
+
+
+            <div ng-if="cart.getDeliveryCharges() == 0 &&
+            (!cart.getTotalCount() < 1) " class="pull-left" ng-disabled="(!cart.getEmail() === '')">
+                <button class="btn "
+                        onclick="window.location.href='#/delivery'">
                     <i class="icon-chevron-left" /> Checkout
-                    </button>
-                </div>
+                </button>
+            </div>
+
+
             <div ng-if="cart.getTotalCount() < 1" class="pull-left">
                 <button
                         class="btn "
@@ -106,14 +110,14 @@
                     <i class="icon-chevron-left" /> Back to Store
                 </button>
             </div>
-                <div ng-if="false">
-                    <button
+            <div ng-if="false">
+                <button
                         class="btn btn-block btn-primary"
                         ng-click="cart.checkout('PayPal')"
                         ng-disabled=" pickUpBranch === '' || deliveryCharge === 0 || cart.getTotalCount() < 1 ">
-                        <i class="icon-ok icon-white" /> check out using PayPal
-                    </button>
-                </div>
+                    <i class="icon-ok icon-white" /> check out using PayPal
+                </button>
+            </div>
             </p>
         </div>
     </div>

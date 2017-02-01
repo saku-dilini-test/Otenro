@@ -39,5 +39,7 @@ table{
 }
 
 .error-message {
-    color : #ff3b30;
+    color : #ff0000 !important;
+    font-size: 14px;
+
 }

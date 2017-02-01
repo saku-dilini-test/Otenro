@@ -24,16 +24,16 @@
 						<div ng-class="{'has-error':contactUsComment.userEmail.$invalid && contactUsComment.userEmail.$dirty}">
 							<span><label>Email</label></span>
 							<span><input name="userEmail" type="email" class="textbox" ng-model="contactForm.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"required></span>
-						<span class="help-block has-error"
-							  ng-if="contactUsComment.userEmail.$dirty && contactUsComment.userEmail.$invalid">
-						<span ng-show="contactUsComment.userEmail.$dirty && contactUsComment.userEmail.$invalid">Not a valid email address.</span>
+						<!--<span class="msgerror"-->
+							  <!--ng-if="contactUsComment.userEmail.$dirty && contactUsComment.userEmail.$invalid">-->
+						<span class="error-message " ng-show="contactUsComment.userEmail.$dirty && contactUsComment.userEmail.$invalid">Not a valid email address.</span>
 						</span>
 						</div>
 						<div>
 							<span><lable>Phone Number</lable></span>
 
-							<input type="number" name="phone" ng-model="contactForm.phone" ➥ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/">
-							<span class="error-message"
+							<input type="text" name="phone" ng-model="contactForm.phone" ➥ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/">
+							<span class="error-message "
 								  ng-show="contactUsComment.phone.$dirty
                                                 && contactUsComment.phone.$invalid" >
                                                 The phone number field should be of 10 digits
