@@ -44,6 +44,7 @@
    <link rel="stylesheet" href="/vendor/angular-ui-grid/ui-grid.css">
    <link rel="stylesheet" href="/vendor/angular-ui-grid/ui-grid.min.css">
    <link rel="stylesheet" href="/vendor/angular-ui-tree/angular-ui-tree.css">
+   <link rel="stylesheet" href="/vendor/font-awesome/font-awesome.css">
    <link rel="stylesheet" href="/vendor/ng-dialog/ngDialog-theme-default.css">
    <link rel="stylesheet" href="/vendor/ng-dialog/ngDialog.css">
    <link rel="stylesheet" href="/vendor/ng-img-crop-full-extended/ng-img-crop.css">
@@ -104,6 +105,9 @@
     <script src="/vendor/jquery/jquery.js"></script>
     <script src="/vendor/angular/angular.js"></script>
     <script src="/vendor/bootstrap/bootstrap.js"></script>
+    <script src="/components/js/core-js/client/shim.min.js"></script>
+    <script src="/components/js/zone.js/dist/zone.js"></script>
+    <script src="/components/js/systemjs/dist/system.src.js"></script>
     <script src="/vendor/rangy/rangy-core.js"></script>
     <script src="/vendor/rangy/rangy-classapplier.js"></script>
     <script src="/vendor/adm-dtp/ADM-dateTimePicker.min.js"></script>
@@ -271,6 +275,7 @@
     <script src="/js/services/userProfile/userProfileResource.js"></script>
     <script src="/js/services/userProfile/userProfileService.js"></script>
     <script src="/js/services/welcome/welcomeTemplatesResource.js"></script>
+    <script src="/components/systemjs.config.js"></script>
     <!--SCRIPTS END-->
 
 
@@ -310,6 +315,9 @@
       ga('send', 'pageview');
 
     </script>
-
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
+    <my-app>loading...</my-app>
   </body>
 </html>

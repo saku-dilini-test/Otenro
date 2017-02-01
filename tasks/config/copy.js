@@ -54,6 +54,14 @@ module.exports = function(grunt) {
 		 cwd: './bower_components/angular-ui-grid',
 		 src: ['ui-grid.woff','ui-grid.ttf','ui-grid.svg','ui-grid.eot'],
 		 dest: '.tmp/public/min'
+		},
+		{
+		 expand: true,
+		 cwd: './node_modules/',
+		 src: ['@angular/**/bundles/*.js','zone.js/dist/*.js','typescript/**/*.js',
+		 		'systemjs/dist/*.js','rxjs/**/*.js','core-js/client/*.js',
+				 'angular-in-memory-web-api/bundles/*.js'],
+		 dest: 'assets/components/js'
 		}
       ]
 		},

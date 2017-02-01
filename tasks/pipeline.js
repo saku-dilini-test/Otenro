@@ -50,6 +50,9 @@ var jsFilesToInject = [
   'vendor/jquery/jquery.js',
   'vendor/angular/angular.js',
   'vendor/bootstrap/bootstrap.js',
+  'components/js/core-js/client/shim.min.js',
+  'components/js/zone.js/dist/zone.js',
+  'components/js/systemjs/dist/system.src.js',
   'vendor/momentjs/moment.js',
   'vendor/rangy/rangy-core.js',
   'vendor/rangy/rangy-classapplier.js',
@@ -78,7 +81,9 @@ var jsFilesToInject = [
   'js/directives/treeSource/directives/uiTreeHandle.js',
   'js/directives/treeSource/directives/uiTreeNode.js',
   'js/directives/treeSource/directives/uiTreeNodes.js',
-  'js/**/*.js'
+  'js/**/*.js',
+  'components/systemjs.config.js'
+
 
   //'js/appModule.js',
   //'js/services/accessLevels.js',
