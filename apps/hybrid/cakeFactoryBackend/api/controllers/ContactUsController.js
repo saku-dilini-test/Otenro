@@ -10,16 +10,16 @@ var fs = require('fs-extra'),
 
 var host,link;
 var server  = email.server.connect({
-  user:    "orders@verticalmedia.lk",
-  password :"YDUyfsdhduis**S&f83-2",
-  host     :"localhost",   // This should be as 'verticalmedia.lk' when local testing
-  ssl     :  false,
-  port    : '25'
+  user:    "ordersverticamedia@gmail.com",
+  password :"Ud98yt98wehnc8z89--z",
+  host     :"smtp.gmail.com",   // This should be as 'verticalmedia.lk' when local testing
+  ssl     :  true,
+//  port    : '25'
 });
 
 
-var orderEmail = 'galapitage@gmail.com';
-//var orderEmail = 'amila@onbitlabs.com';
+var orderEmail = 'waidyarathnanmw@gmail.com';
+
 
 module.exports = {
 
@@ -57,9 +57,9 @@ module.exports = {
               "<ul>"+contact.msg+"</ul>"+
               "</html>";
             var emailDetails = {
-              from: "orders@verticalmedia.lk",
+              from: "ordersverticamedia@gmail.com",
               to: orderEmail,
-              cc: "orders@verticalmedia.lk",
+              cc: "ordersverticamedia@gmail.com",
               bcc: '',
               subject: "New Contact Request : "+contact.title,
               attachment: [
@@ -93,9 +93,9 @@ module.exports = {
           "<ul>"+contact.msg+"</ul>"+
           "</html>";
         var emailDetails = {
-          from: "orders@verticalmedia.lk",
+          from: "ordersverticamedia@gmail.com",
           to: orderEmail,
-          cc: "orders@verticalmedia.lk",
+          cc: "ordersverticamedia@gmail.com",
           bcc: '',
           subject: "New Contact Request : "+contact.title,
           attachment: [

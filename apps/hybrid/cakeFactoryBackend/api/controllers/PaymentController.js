@@ -7,15 +7,16 @@ var email = require("../../node_modules/emailjs/email"),
 
 var host,link;
 var server  = email.server.connect({
-  user:    "orders@verticalmedia.lk",
-  password :"YDUyfsdhduis**S&f83-2",
-  host     :"localhost",   // This should be as 'verticalmedia.lk' when local testing
-  ssl     :  false,
-  port    : '25'
+  user:    "ordersverticamedia@gmail.com",
+  password :"Ud98yt98wehnc8z89--z",
+  host     :"smtp.gmail.com",   // This should be as 'verticalmedia.lk' when local testing
+  ssl     :  true,
+//  port    : '25'
+
 });
 
-var orderEmail = 'galapitage@gmail.com';
-//var orderEmail = 'amilaonbit@gmail.com';
+//var orderEmail = 'galapitage@gmail.com';
+var orderEmail = 'waidyarathnanmw@gmail.com';
 
 module.exports = {
   create: function (req, res) {
@@ -58,7 +59,7 @@ module.exports = {
                                 "</ul>"+
                           "</html>";
           var emailDetails = {
-            from: "orders@verticalmedia.lk",
+            from: "ordersverticamedia@gmail.com",
             to: orderEmail,
             cc: "",
             subject: "[PayPal] New Order for - "+payment.deliveryDetails.name,
@@ -119,7 +120,7 @@ module.exports = {
                               "</ul>"+
                         "</html>";
         var emailDetails = {
-          from: "orders@verticalmedia.lk",
+          from: "ordersverticamedia@gmail.com",
           to: orderEmail,
           cc: "",
           subject: "[PayPal] New Order for - "+payment.pickupDetails.name,
@@ -154,6 +155,9 @@ module.exports = {
    */
   oneUSD : function(req,res){
     Currency.findOne({type:'USD'}).exec(function(err,currency){
+      currency = {
+        USDLKR : 'USD'
+      }
       var oneUSD = currency.USDLKR;
       res.json(200, {result: oneUSD});
     });
@@ -187,6 +191,7 @@ module.exports = {
         return res.status(err.status).json({err: err.message});
       }
       if (payment) {
+
         var itemsHtml = "";
         var total = 0;
         var optionType = '';
@@ -228,7 +233,7 @@ module.exports = {
           "</html>";
 
         var emailDetails = {
-          from: "orders@verticalmedia.lk",
+          from: "ordersverticamedia@gmail.com",
           to: orderEmail,
           cc: "",
           subject: "[PayPal] New Order ",
@@ -332,22 +337,24 @@ module.exports = {
             deliveryOption +
             "</html>";
           var emailDetails = {
-            from: "orders@verticalmedia.lk",
+            from: "ordersverticamedia@gmail.com",
             to: orderEmail,
-            cc: 'orders@verticalmedia.lk',
+            cc: 'ordersverticamedia@gmail.com',
             bcc: '',
             subject: "New " + optionType + " Order",
             attachment: [
               {data: emailBody, alternative: true},
             ]
           };
+//          console.log(payment);
           server.send(emailDetails, function (err, message) {
-            sails.log.info(err || message);
+           sails.log.info(err || message);
             if (err) {
               return res.status(err.status).json({err: err.message});
             }
             sails.log('Email has sent & Payment Id ' + payment.id);
             return res.json(200, {result: 'success'});
+
           });
 
         }
