@@ -202,6 +202,7 @@
 
 .obl-dashboard-tab-height{
     height:85vh;
+    min-width:768px;
 }
 .obl-dashboard-tab-height .obl-dashboard-apps{
     height:100%;
@@ -227,7 +228,7 @@
 }
 
 
-.obl-dashboard-tab-height .col-md-5 span{
+.obl-dashboard-tab-height .col-md-6 span{
     font-size:12px;
     text-transform:capitalize;
     color:#000;

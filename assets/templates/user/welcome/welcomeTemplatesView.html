@@ -26,7 +26,7 @@
                 <md-tab-body>
                     <div class="col-md-6" ng-repeat="template in templates">
                         <div class="row">
-                            <div class="col-md-5  col-md-offset-1">
+                            <div class="col-xs-4 col-xs-offset-1 col-md-6  col-md-offset-0 col-lg-5 col-lg-offset-2">
                                 <ul class="grid obl-app-templates clearfix">
                                     <li>
                                         <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
@@ -38,7 +38,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-md-5 text-left">
+                            <div class="col-xs-6 col-md-6 col-lg-5 text-left">
                                 <h3><span>Style Name :</span>  <br>{{template.templateViewName}}</h3>
                                 <span>App Type : </span>
                                 <span><h5>{{template.templateType}}</h5></span>
@@ -66,7 +66,7 @@
 
                     <div class="col-md-6" ng-repeat="template in templates" ng-if="type == template.templateType">
                         <div class="row">
-                            <div class="col-md-5  col-md-offset-1">
+                            <div class="col-xs-4 col-xs-offset-1 col-md-6  col-md-offset-0 col-lg-5 col-lg-offset-2">
                                 <ul class="grid obl-app-templates clearfix">
                                     <li >
                                         <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
@@ -78,7 +78,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-md-5 text-left ">
+                            <div class="col-xs-6 col-md-6 col-lg-5 text-left">
                                 <h3><span>Style Name :</span>  <br>{{template.templateViewName}}</h3>
                                 <span>App Type : </span>
                                 <span><h5>{{template.templateType}}</h5></span>
