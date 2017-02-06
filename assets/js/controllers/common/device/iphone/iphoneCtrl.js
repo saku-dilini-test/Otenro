@@ -16,5 +16,21 @@
             },1000);
         });
         $scope.editTemplateUrl =  $sce.trustAsResourceUrl($scope.tmpUrl);
+        $scope.device = $scope.devicePath;
+        $scope.$watch('devicePath', function (val) {
+            if (val == 'true'){
+                $scope.phone = true;
+                $scope.tablet = false;
+                $scope.deviceClass = "iphone";
+                $scope.deviceScreenClass = "screen";
+                $scope.appViewClass = "appViewClass";
+            }else{
+                $scope.tablet = true;
+                $scope.phone = false;
+                $scope.deviceClass = "tablet";
+                $scope.deviceScreenClass = "tabScreen";
+                $scope.appViewClass = "tabappViewClass";
+            }
+        });
     }
 })();

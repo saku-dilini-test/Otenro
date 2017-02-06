@@ -45,6 +45,7 @@ module.exports = {
               ],
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -70,6 +71,7 @@ module.exports = {
               ],
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -82,26 +84,6 @@ module.exports = {
               }],
               "createdDate": Date.now()
             }
-//            {
-//              "name": "Pasta Salad",
-//              "price": 300,
-//              "briefDesc" : "Pasta Salad brief des",
-//              "detailedDesc" : "Pasta Salad details description. Pasta Salad details description. Pasta Salad details description",
-//              "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
-//              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-//              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
-//              "createdDate": Date.now()
-//            },
-//            {
-//              "name": "Egg Salad",
-//              "price": 400,
-//              "briefDesc" : "Egg salad brief des",
-//              "detailedDesc" : "Egg salad details description. Egg salad details description. Egg salad details description",
-//              "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
-//              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-//              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
-//              "createdDate": Date.now()
-//            }
           ]
         },
         {
@@ -125,6 +107,7 @@ module.exports = {
               ],
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -137,46 +120,6 @@ module.exports = {
               }],
               "createdDate": Date.now()
             }
-//            {
-//              "name": "Caramal Pudding",
-//              "price": 200,
-//              "briefDesc" : "Caramal Pudding brief des",
-//              "detailedDesc" : "Caramal Pudding details description. Caramal Pudding details description. Caramal Pudding details description",
-//              "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
-//              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-//              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
-//              "createdDate": Date.now()
-//            },
-//            {
-//              "name": "Chocolate Ice Cream Sunday",
-//              "price": 300,
-//              "briefDesc" : "Chocoloate Ice Cream Sunday brief des",
-//              "detailedDesc" : "Chocoloate Ice Cream Sunday details description. Chocoloate Ice Cream Sunday details description. Chocoloate Ice Cream Sunday details description",
-//              "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
-//              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-//              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
-//              "createdDate": Date.now()
-//            },
-//            {
-//              "name": "Chocolate Muse",
-//              "price": 400,
-//              "briefDesc" : "Chocoloate Muse brief des",
-//              "detailedDesc" : "Chocoloate Muse details description. Chocoloate Muse details description. Chocoloate Muse details description",
-//              "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
-//              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-//              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
-//              "createdDate": Date.now()
-//            },
-//            {
-//              "name": "Apple Crumble Pie",
-//              "price": 500,
-//              "briefDesc" : "Apple Crumble Pie brief des",
-//              "detailedDesc" : "Apple Crumble Pie details description. Apple Crumble Pie details description. Apple Crumble Pie details description",
-//              "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
-//              "briefDesc": "Soft choux pastry balls filled with crème patisserie or chocolate mousse drizzled with chocolate ganache",
-//              "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast, pancakes, scones or used in cakes",
-//              "createdDate": Date.now()
-//            }
           ]
         },
         {
@@ -200,6 +143,7 @@ module.exports = {
               ],
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -225,6 +169,7 @@ module.exports = {
               ],
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -250,6 +195,7 @@ module.exports = {
               ],
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc": "Soft choux pastry balls filled with crème patisserie",
               "detailedDesc": "Soft, fresh and homemade curd that can be eaten with toast",
               "variants":[{
@@ -268,6 +214,7 @@ module.exports = {
               "quantity": 400,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Pina Colada",
               "detailedDesc" : "Pina Colada details description. Pina Colada details",
               "tempImageArray" : [
@@ -289,48 +236,6 @@ module.exports = {
             }
           ]
         }
-//        ,
-//        {
-//          attribute : {
-//            "imageUrl": "category_61_5327.jpg",
-//            "name": "Cake",
-//            "description": "Cake description"
-//          },
-//          thirdNavi : [
-//            {
-//              "name": "Espresso Shot",
-//              "price": 100,
-//              "briefDesc" : "Espresso Shot brief des",
-//              "detailedDesc" : "Espresso Shot details description. Espresso Shot details description. Espresso Shot details description",
-//              "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
-//              "createdDate": Date.now()
-//            },
-//            {
-//              "name": "Mocha Frapachino",
-//              "price": 200,
-//              "briefDesc" : "Mocha Frapachino brief des",
-//              "detailedDesc" : "Mocha Frapachino details description. Mocha Frapachino details description. Mocha Frapachino details description",
-//              "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
-//              "createdDate": Date.now()
-//            },
-//            {
-//              "name": "Chocolate Milk Shake",
-//              "price": 300,
-//              "briefDesc" : "Chocolate Milk Shake brief des",
-//              "detailedDesc" : "Chocolate Milk Shake details description. Chocolate Milk Shake details description. Chocolate Milk Shake details description",
-//              "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
-//              "createdDate": Date.now()
-//            },
-//            {
-//              "name": "Pina Colada",
-//              "price": 400,
-//              "briefDesc" : "Pina Colada brief des",
-//              "detailedDesc" : "Pina Colada details description. Pina Colada details description. Pina Colada details description",
-//              "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
-//              "createdDate": Date.now()
-//            }
-//          ]
-//        }
 
       ]
 
@@ -352,6 +257,7 @@ module.exports = {
               "quantity": 250,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "imageUrl": "shirt_x.png",
@@ -377,6 +283,7 @@ module.exports = {
               "quantity": 350,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
@@ -402,6 +309,7 @@ module.exports = {
               "quantity": 450,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
@@ -437,6 +345,7 @@ module.exports = {
               "quantity": 250,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "SLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
@@ -456,23 +365,6 @@ module.exports = {
               "imageUrl": "short_x.png",
               "createdDate": Date.now()
             }
-//            ,
-//            {
-//              "name": "Short y",
-//              "price": 350,
-//              "briefDesc" : "Short y brief des",
-//              "detailedDesc" : "Short y details description. Short y details description. Short y details description",
-//              "imageUrl": "short_x.png",
-//              "createdDate": Date.now()
-//            },
-//            {
-//              "name": "Short z",
-//              "price": 450,
-//              "briefDesc" : "Short z brief des",
-//              "detailedDesc" : "Short z details description. Short z details description. Short z details description",
-//              "imageUrl": "short_x.png",
-//              "createdDate": Date.now()
-//            }
           ]
         },
         {
@@ -489,6 +381,7 @@ module.exports = {
               "quantity": 250,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "tempImageArray" : [
@@ -529,6 +422,7 @@ module.exports = {
               "quantity": 250,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Shirt x brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -554,6 +448,7 @@ module.exports = {
               "quantity": 350,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Shirt y brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -579,6 +474,7 @@ module.exports = {
               "quantity": 450,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Shirt z brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -613,6 +509,7 @@ module.exports = {
               "quantity": 250,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Shirt x brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -638,6 +535,7 @@ module.exports = {
               "quantity": 350,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Shirt y brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -663,6 +561,7 @@ module.exports = {
               "quantity": 450,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Shirt z brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -698,6 +597,7 @@ module.exports = {
               "quantity": 250,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -733,6 +633,7 @@ module.exports = {
               "quantity": 250,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "briefDesc" : "Short x brief des",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
               "tempImageArray" : [
@@ -773,6 +674,7 @@ module.exports = {
               "quantity": 250,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "tempImageArray" : [
                 {
                   "img" : "1.jpg"
@@ -798,6 +700,7 @@ module.exports = {
               "quantity" : 100,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "tempImageArray" : [
                 {
                   "img" : "2.jpg"
@@ -834,6 +737,7 @@ module.exports = {
               "quantity": 100,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "tempImageArray" : [
                 {
                   "img" : "3.jpg"
@@ -859,6 +763,7 @@ module.exports = {
               "quantity" : 15,
               "selection" : "Size",
               "enteredBy":"demo",
+              "published":"YES",
               "tempImageArray" : [
                 {
                   "img" : "4.jpg"
@@ -873,6 +778,200 @@ module.exports = {
                 'quantity': 15
               }],
               "imageUrl": "4.jpg",
+              "published":"YES",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            }
+
+          ]
+        }
+      ]
+    },
+    {
+      templateName : 'BondiApp',
+      secondNavi : [
+        {
+          attribute : {
+            "name": "Women's",
+            "imageUrl": "category_01.png",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
+          },
+          thirdNavi : [
+            {
+              "name": "Summer Fashion",
+              "price": 250,
+              "quantity": 250,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "1.png"
+                }
+              ],
+              "variants":[{
+                "name": "Summer Fashion",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "250",
+                'quantity': 250
+              }],
+              "published":"YES",
+              "imageUrl": "1.png",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            },
+            {
+              "name" : "Work Wear",
+              "price" : 300,
+              "quantity" : 100,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "2.png"
+                }
+              ],
+              "variants":[{
+                "name" : "Work Wear",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "300",
+                'quantity': 100
+              }],
+              "imageUrl": "2.png",
+              "published":"YES",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            }
+
+          ]
+        },
+        {
+          attribute : {
+            "name": "Men's",
+            "imageUrl": "category_02.png",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
+          },
+          thirdNavi : [
+            {
+              "name": "Lorem ipsum",
+              "price": 350,
+              "quantity": 100,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "3.png"
+                }
+              ],
+              "variants":[{
+                "name": "Lorem ipsum",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "350",
+                'quantity': 100
+              }],
+              "imageUrl": "3.png",
+              "published":"YES",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            },
+            {
+              "name" : "dolor sit amet",
+              "price" : 225,
+              "quantity" : 15,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "4.png"
+                }
+              ],
+              "variants":[{
+                "name" : "dolor sit amet",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "225",
+                'quantity': 15
+              }],
+              "imageUrl": "4.png",
+              "published":"YES",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            }
+
+          ]
+        },
+        {
+          attribute : {
+            "name": "Kid's",
+            "imageUrl": "category_03.png",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+            "enteredBy":"demo"
+          },
+          thirdNavi : [
+            {
+              "name": "Made in USA",
+              "price": 350,
+              "quantity": 100,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "5.png"
+                }
+              ],
+              "variants":[{
+                "name": "Made in USA",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "350",
+                'quantity': 100
+              }],
+              "imageUrl": "5.png",
+              "published":"YES",
+              "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+              "createdDate": Date.now()
+            },
+            {
+              "name" : "Kid Jacket",
+              "price" : 225,
+              "quantity" : 15,
+              "selection" : "Size",
+              "enteredBy":"demo",
+              "published":"YES",
+              "tempImageArray" : [
+                {
+                  "img" : "6.png"
+                }
+              ],
+              "variants":[{
+                "name" : "Kid Jacket",
+                'sku': "1111",
+                'size': "11",
+                'vType' : "s",
+                'price': "225",
+                'quantity': 15
+              }],
+              "imageUrl": "6.png",
               "published":"YES",
               "briefDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
               "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
@@ -1223,6 +1322,81 @@ module.exports = {
       ]
     },
     {
+      templateName : 'NewsApp',
+      articleCategory : [{
+        attribute : {
+          "name": "Breaking News",
+          "imageUrl":"stakes_slider.jpg",
+          "enteredBy":"demo"
+        },
+        article : [
+          {
+            "title": "Quick Brown Fox",
+            "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "imageUrl":"avacado_sandwitch.png",
+            "categoryId":"0",
+            "enteredBy":"demo"
+          },
+          {
+            "title": "Jump Over The Lazy Dog",
+            "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "imageUrl":"salmon_fillet.png",
+            "categoryId":"0",
+            "enteredBy":"demo"
+          }
+        ]
+      },
+        {
+          attribute : {
+            "name": "Money",
+            "imageUrl":"appatizer_slider.jpg",
+            "enteredBy":"demo"
+          },
+          article : [
+              {
+                "title": "Quick Brown Fox",
+                "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                "imageUrl":"avacado_sandwitch.png",
+                "categoryId":"0",
+                "enteredBy":"demo"
+              },
+              {
+                "title": "Jump Over The Lazy Dog",
+                "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                "imageUrl":"salmon_fillet.png",
+                "categoryId":"0",
+                "enteredBy":"demo"
+              }
+
+          ]
+        },
+        {
+          attribute : {
+            "name": "Fashion",
+            "imageUrl":"desserts_slider.jpg",
+            "enteredBy":"demo"
+          },
+          article : [
+           {
+              "title": "Quick Brown Fox",
+              "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+              "imageUrl":"avacado_sandwitch.png",
+              "categoryId":"0",
+              "enteredBy":"demo"
+            },
+            {
+              "title": "Jump Over The Lazy Dog",
+              "desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+              "imageUrl":"salmon_fillet.png",
+              "categoryId":"0",
+              "enteredBy":"demo"
+            }
+          ]
+        }
+
+      ]
+    },
+    {
       templateName : 'fashionApp',
       articleCategory : [{
         attribute : {
@@ -1386,6 +1560,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt x brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1410,6 +1585,7 @@ module.exports = {
                     "quantity": 350,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt y brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1434,6 +1610,7 @@ module.exports = {
                     "quantity": 450,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt z brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1468,6 +1645,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt x brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1493,6 +1671,7 @@ module.exports = {
                     "quantity": 350,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt y brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1518,6 +1697,7 @@ module.exports = {
                     "quantity": 450,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt z brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1552,6 +1732,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Short x brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1586,6 +1767,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
@@ -1610,6 +1792,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
@@ -1634,6 +1817,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
@@ -1658,6 +1842,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
@@ -1697,6 +1882,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt x brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1722,6 +1908,7 @@ module.exports = {
                     "quantity": 350,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt y brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1747,6 +1934,7 @@ module.exports = {
                     "quantity": 450,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt z brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1780,6 +1968,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt x brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1805,6 +1994,7 @@ module.exports = {
                     "quantity": 350,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt y brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1829,6 +2019,7 @@ module.exports = {
                     "quantity": 450,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Shirt z brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1864,6 +2055,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "briefDesc" : "Short x brief des",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
@@ -1899,6 +2091,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
@@ -1923,6 +2116,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
@@ -1947,6 +2141,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
@@ -1971,6 +2166,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
@@ -2005,6 +2201,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
@@ -2029,6 +2226,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
@@ -2052,6 +2250,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {
@@ -2076,6 +2275,7 @@ module.exports = {
                     "quantity": 250,
                     "selection" : "Size",
                     "enteredBy":"demo",
+                    "published":"YES",
                     "detailedDesc" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
                     "tempImageArray" : [
                       {

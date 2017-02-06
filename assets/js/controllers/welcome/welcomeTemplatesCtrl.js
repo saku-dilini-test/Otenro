@@ -29,81 +29,48 @@
             return userProfileService.showUserProfileDialog();
         }
 
+
+        $scope.types=[];
         welcomeTemplatesResource.getTemplates().success(function(data){
-                $rootScope.templates = data;
+            $rootScope.templates = data;
+
+            for (var i=0; i< data.length ; i++){
+                if($scope.types.indexOf(data[i].templateType) === -1){
+                   $scope.types.push(data[i].templateType);
+                }
+            };
         });
+
+
+        $scope.showSampleImage = function(ev,path, image) {
+        $mdDialog.show({
+          template:  '<md-dialog aria-label="sample images" class="dashboard-dialog">' +
+                     '<img src="images/templates/'+path+image+'" class="img-thumbnail">'+
+                     '</md-dialog>',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+        })
+        };
   
-        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory) {
+        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory,previewId) {
+                    var userId = '';
+                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId=unknownUser"
+                                    +"&appId="+previewId+"&"+new Date().getTime()+"/";
 
-
-
-
-            if ($auth.isAuthenticated()) {
-               
-                var appParams = {
-                    'appName': 'preview',
-                    'templateId': templateId,
-                    'templateName': templateName,
-                    'templateUrl':templateUrl,
-                    'templateCategory' : templateCategory,
-                    'userId':$auth.getPayload().id
-                };
-
-                welcomeTemplatesResource.createApp(appParams).then(function(data){
-                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
                     var url= urlPath+'/?'+new Date().getTime();
-
                     mySharedService.prepForBroadcast(url);
-                    $scope.goLivePreview = function() {
-                        $state.go('anon.livePreview', {
-                            userId: $auth.getPayload().id,
-                            appId: data.data.appId,
-                            tempUrl: templateUrl,
-                            tempName: templateName,
-                            tempCategory: templateCategory
-                        });
 
-                    }
-
-                    $timeout(function () {
-                        $scope.goLivePreview();
-                    }, 1000);
-
-                });
-
-            }else{
-                var appParams = {
-                    'appName': 'preview',
-                    'templateId': templateId,
-                    'templateName': templateName,
-                    'templateUrl':templateUrl,
-                    'templateCategory' : templateCategory,
-                    'userId':'unknownUser'
-                };
-
-                welcomeTemplatesResource.createApp(appParams).then(function(data){
-                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                    var url= urlPath+'/?'+new Date().getTime();
-
-                    mySharedService.prepForBroadcast(url);
-                    $scope.goLivePreview = function() {
                         $state.go('anon.livePreview', {
                             userId: 'unknownUser',
-                            appId: data.data.appId,
+                            appId: previewId,
                             tempUrl: templateUrl,
                             tempName: templateName,
                             tempCategory: templateCategory
                         });
-                    }
-                    $timeout(function () {
-                        $scope.goLivePreview();
-                    }, 1000);
-                });
-            }
 
         }
+
     }
 
 })();

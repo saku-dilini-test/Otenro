@@ -15,7 +15,22 @@ SetUp Project
         > npm install
         > bower install
 
-(3) Start project
+(3) init preview data for templates preview
+
+    goto -> api -> previewData - > importData.sh
+
+        > set MESERVER directory path
+        > set APPFILESERVER directory path
+        > set db
+
+    give execute permission for importData.sh file as follows (for linux users) on command line prompt
+    chmod 777 importData.sh
+
+    Run 'importData.sh' bash file as './importData.sh' on command line prompt (for linux users)
+    (for windows platform  use cygwin (https://www.cygwin.com/) and Run 'sed -i 's/\r$//' importData.sh' and execute ./importData.sh )
+
+
+(4) Start project
 
 		goto -> config -> env -> development.js
 		goto -> assests -> js -> services -> appConfig.js
@@ -26,6 +41,8 @@ SetUp Project
 		goto root directory
 
 			> sails lift
+
+
 
 Apache server changes for meServer
 ===================================================================================================================

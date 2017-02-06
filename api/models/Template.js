@@ -36,6 +36,9 @@ module.exports = {
         },
         templateCategory :{
             type: 'string'
+        },
+        previewId : {
+            type: 'string'
         }
     },
     seedData: [
@@ -71,98 +74,121 @@ module.exports = {
             templateViewName : 'Hawthorn',
             templateType: 'ecommerce',
             templateViewDesc : 'A clean and distinct template that immediately engages with the user',
-            gifImageUrl : 'foodDeliver/food.jpg',
-            imageUrl : 'foodDeliver/foodDeliver.png',
+            imageUrl : 'foodDeliver/',
             templateFilesPath:'templates/foodDemoApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd621641694232165c16b'
         },
         {
             template_name : 'foodDemoApp2',
             templateViewName : 'Hawaii',
             templateType: 'ecommerce',
             templateViewDesc : 'A bold grid-style theme, perfect for lifestyle, clothing, and product imagery',
-            gifImageUrl : 'foodDeliver2/clothing.png',
-            imageUrl : 'foodDeliver2/foodDeliver2.png',
+            imageUrl : 'foodDeliver2/',
             templateFilesPath:'templates/foodDemoApp2',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd62b641694232165c176'
         },
         {
             template_name : 'clothingApp',
             templateViewName : 'Colombo',
             templateType: 'ecommerce',
             templateViewDesc : 'Designed to beautifully showcase your brand and products',
-            gifImageUrl : 'clothingApp/clothing2.png',
-            imageUrl : 'clothingApp/clothing.jpg',
+            imageUrl : 'clothingApp/',
             templateFilesPath:'templates/clothingApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd633641694232165c17f',
         },
         {
             template_name : 'GlamourUpApp',
             templateViewName : 'Glamour Up',
             templateType: 'ecommerce',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
-            gifImageUrl : 'GlamourUpApp/clothing2.png',
-            imageUrl : 'GlamourUpApp/clothing.jpg',
+            imageUrl : 'GlamourUpApp/',
             templateFilesPath:'templates/GlamourUpApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd641641694232165c18c',
         },
         {
             template_name : 'CrushApp',
             templateViewName : 'Crush Surf Shop',
             templateType: 'ecommerce',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
-            gifImageUrl : 'CrushApp/clothing2.png',
-            imageUrl : 'CrushApp/clothing.jpg',
+            imageUrl : 'CrushApp/',
             templateFilesPath:'templates/CrushApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId :'586cd655641694232165c19c'
         },
         {
             template_name : 'HeadphoneApp',
             templateViewName : 'Headphone App',
+            templateType: 'ecommerce',
             templateViewDesc : 'Rum Punch is favored by many businesses. It is easy to customise.',
-            gifImageUrl : 'HeadphoneApp/headphoneAppGif.png',
-            imageUrl : 'HeadphoneApp/headphoneApp.jpg',
+            imageUrl : 'HeadphoneApp/',
             templateFilesPath:'templates/HeadphoneApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd65e641694232165c1b1'
         },
         {
             template_name : 'hkRising',
             templateViewName : 'The Peak',
             templateType: 'article',
             templateViewDesc : 'Clean, simple, and focused on an elegant user experience. Ideal for media and blog apps.',
-            gifImageUrl : 'hkRising/hkRising1.png',
-            imageUrl : 'hkRising/hkRising.png',
+            imageUrl : 'hkRising/',
             templateFilesPath:'templates/hkRising',
-            templateCategory: TemplateCategoryDetails.Media.ID
+            templateCategory: TemplateCategoryDetails.Media.ID,
+            previewId : '586cd675641694232165c1cd',
+
         },
         {
             template_name : 'ECommerceApp',
             templateViewName : 'Rome',
             templateType: 'ecommerce',
             templateViewDesc : 'Tailor-made for modern restaurants and clothing store with a tinder type swipe to navigate through your product.',
-            imageUrl : 'ECommerceApp/ECommerceApp.png',
-            gifImageUrl : 'ECommerceApp/ecommerce.png',
+            imageUrl : 'ECommerceApp/',
             templateFilesPath:'templates/ECommerceApp',
-            templateCategory: TemplateCategoryDetails.Business.ID
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '586cd66a641694232165c1c6'
+        },
+        {
+            template_name : 'BondiApp',
+            templateViewName : 'Bondi',
+            templateType: 'ecommerce',
+            templateViewDesc : 'With a card styled navigation, users are presented with product categories at the fore front. This allows for easy navigation and minimal clicks to purchase. This template is easily tailored to suit any e-commerce needs for hobby stores, clothing stores, cafes and more.',
+            imageUrl : 'BondiApp/',
+            templateFilesPath:'templates/BondiApp',
+            templateCategory: TemplateCategoryDetails.Business.ID,
+            previewId : '587cb44c4d711ab806743d0d'
         },
         {
             template_name : 'fashionApp',
             templateViewName : 'Cali',
             templateType: 'article',
             templateViewDesc : 'Striking, scalable, and built to boost engagement.',
-            imageUrl : 'fashionApp/fashionApp.png',
-            gifImageUrl : 'fashionApp/fashion.png',
+            imageUrl : 'fashionApp/',
             templateFilesPath:'templates/fashionApp',
-            templateCategory: TemplateCategoryDetails.Media.ID
+            templateCategory: TemplateCategoryDetails.Media.ID,
+            previewId : '586cd681641694232165c1dc',
         },
         {
             template_name : 'RecipeApp',
             templateViewName : 'Recipe App',
+            templateType: 'article',
             templateViewDesc : 'Striking, scalable, and built to boost engagement.',
-            imageUrl : 'RecipeApp/recipeApp.png',
-            gifImageUrl : 'RecipeApp/recipeAppGif.png',
+            imageUrl : 'RecipeApp/',
             templateFilesPath:'templates/RecipeApp',
-            templateCategory: TemplateCategoryDetails.Media.ID
+            templateCategory: TemplateCategoryDetails.Media.ID,
+            previewId : '586cd68e641694232165c1ed'
+        },
+        {
+            template_name : 'NewsApp',
+            templateViewName : 'News Media',
+            templateType: 'article',
+            templateViewDesc : 'Striking, scalable, and built to boost engagement.',
+            imageUrl : 'NewsApp/',
+            templateFilesPath:'templates/NewsApp',
+            templateCategory: TemplateCategoryDetails.Media.ID,
+            previewId : '587f2fc69cca49641ff664e4'
         }
     ]
 };

@@ -83,11 +83,11 @@
 .obl-dashboard-apps{
        width: 95%;
     margin: 0 auto;
-    padding: 50px 18px;
+    padding: 0 18px;
 	padding-left: 2.5%;
     text-align: center;
 }
-}
+
 
 
 .obl-mobile-app{
@@ -199,3 +199,44 @@
     margin-left:100px;
     padding: 50px 0;
 }*/
+
+.obl-dashboard-tab-height{
+    height:85vh;
+}
+.obl-dashboard-tab-height .obl-dashboard-apps{
+    height:100%;
+}
+.obl-dashboard-tab-height md-tabs{
+    height:100%;
+}
+.obl-dashboard-tab-height h3{
+    font-weight:900;
+    color:#000;
+    text-transform:uppercase;
+}
+.obl-dashboard-tab-height h5{
+    color: #000;
+    line-height: inherit;
+    letter-spacing: 1px;
+    overflow: auto;
+    max-height: 75px;
+    height:75px
+}
+.obl-dashboard-tab-height span h5{
+    height:27px;
+}
+
+
+.obl-dashboard-tab-height .col-md-5 span{
+    font-size:12px;
+    text-transform:capitalize;
+    color:#000;
+    font-weight:900;
+}
+.obl-dashboard-tab-height .img-thumbnail{
+    max-width:32%;
+}
+
+.dashboard-dialog{
+    width:20%;
+}

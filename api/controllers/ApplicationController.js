@@ -26,6 +26,23 @@ module.exports = {
         });
     },
 
+    templatePreview : function (req,res) {
+        console.log(req.body.templateName);
+       if (req.body.templateName=='foodDemoApp'){
+           res.send({
+               appId: '5859117bac4a80fb5265ab04',
+               message: "New Application has been created"
+           });
+       }
+        if (req.body.templateName=='foodDemoApp'){
+            res.send({
+                appId: '5859117bac4a80fb5265ab04',
+                message: "New Application has been created"
+            });
+        }
+
+    },
+
     viewTemplate : function(req,res){
 
         var templateName = req.body.templateName,
@@ -35,7 +52,7 @@ module.exports = {
             templatePath = sails.config.appPath + '/api/templates/' + templateName,
             appName = req.body.appName,
             serverTmp="http://localhost:port",
-            serverOrg=config.server.host+':1337';
+            serverOrg=config.server.host;
 
         var loginPath = '/#/',
             isApplyStyle =  {
@@ -85,7 +102,7 @@ module.exports = {
             }
         }
 
-        if(templateName == 'hkRising' || templateName == 'RecipeApp'){
+        if(templateName == 'hkRising' || templateName == 'RecipeApp'|| templateName == 'NewsApp'){
             loginPath = '/#/app/home/firstMenu';
             isApplyStyle = {
                 color : {
@@ -118,7 +135,7 @@ module.exports = {
                 button : false
             }
         }
-        if(templateName == 'ECommerceApp'){
+        if(templateName == 'ECommerceApp' || templateName == 'BondiApp'){
             loginPath = '/#/tab/home';
             isApplyStyle = {
                 color : {
@@ -212,6 +229,8 @@ module.exports = {
 
 
         fs.copy(templatePath, tempAppDirPath + app.id, function(err) {
+            console.log("app.id "   + app.id );
+
             if (err) return console.error(err);
             var madeEasyFilePath = tempAppDirPath +app.id+'/madeEasy.Project';
             var madeEasyFileContent = {
@@ -283,7 +302,7 @@ module.exports = {
          * If Only foodDemoApp or foodDemoApp2 Category & Product Feed to DB
          */
         if(templateName == 'foodDemoApp' || templateName == 'foodDemoApp2' || templateName == 'clothingApp'
-            || templateName == 'ECommerceApp'|| templateName == 'GlamourUpApp'|| templateName == 'CrushApp'|| templateName == 'HeadphoneApp' ) {
+            || templateName == 'ECommerceApp'|| templateName == 'GlamourUpApp'|| templateName == 'CrushApp'|| templateName == 'HeadphoneApp' || templateName == 'BondiApp' ) {
             var searchAppInitialData = {
                 'templateName': templateName
             }
@@ -320,7 +339,7 @@ module.exports = {
             /**
              * If hkRising or fashionApp Details Feed to DB
              */
-        }else if(templateName == 'hkRising' || templateName == 'fashionApp'|| templateName == 'RecipeApp'){
+        }else if(templateName == 'hkRising' || templateName == 'fashionApp'|| templateName == 'RecipeApp'|| templateName == 'NewsApp'){
                 var searchAppInitialData = {
                     'templateName' : templateName
                 }

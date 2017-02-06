@@ -17,17 +17,88 @@
         </div>
     </div>
 </div>
-<div class="obl-dashboard-wrapper">
+
+<div class="obl-dashboard-wrapper obl-dashboard-tab-height">
     <div class="obl-dashboard-apps">
-        <ul class="grid obl-app-templates clearfix">
-            <li ng-repeat="template in templates">
-                <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory)" >
-                    <div  id ="image">
-                        <img class = "main_image" ng-src="images/templates/{{template.imageUrl}}" />
-                        <img class ="second_image"  ng-src="images/templates/{{template.gifImageUrl}}" />
+        <md-tabs md-selected="selectedIndex" md-autoselect md-center-tabs>
+            <md-tab ng-disabled="tab.disabled"
+                    label="All">
+                <md-tab-body>
+                    <div class="col-md-6" ng-repeat="template in templates">
+                        <div class="row">
+                            <div class="col-md-5  col-md-offset-1">
+                                <ul class="grid obl-app-templates clearfix">
+                                    <li>
+                                        <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
+                                            <div  id ="image">
+                                                <img class = "main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
+                                                <img class ="second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-5 text-left">
+                                <h3><span>Style Name :</span>  <br>{{template.templateViewName}}</h3>
+                                <span>App Type : </span>
+                                <span><h5>{{template.templateType}}</h5></span>
+                                <span>Description : </span>
+                                <h5>{{template.templateViewDesc}}</h5>
+                                <div>
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample1.png')"  src="images/templates/{{template.imageUrl}}sample1.png" class="img-thumbnail">
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample2.png')" src="images/templates/{{template.imageUrl}}sample2.png" class="img-thumbnail">
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail">
+                                </div>
+                                <h4 class="text-center">
+                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)">
+                                        Select
+                                    </button>
+                                </h4>
+                            </div>
+                        </div>
                     </div>
-                </a>
-            </li>
-        </ul>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-repeat="type in types"
+                    ng-disabled="tab.disabled"
+                    label=" {{type}}">
+                <md-tab-body>
+
+                    <div class="col-md-6" ng-repeat="template in templates" ng-if="type == template.templateType">
+                        <div class="row">
+                            <div class="col-md-5  col-md-offset-1">
+                                <ul class="grid obl-app-templates clearfix">
+                                    <li >
+                                        <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
+                                            <div  id ="image">
+                                                <img class = "main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
+                                                <img class ="second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-5 text-left ">
+                                <h3><span>Style Name :</span>  <br>{{template.templateViewName}}</h3>
+                                <span>App Type : </span>
+                                <span><h5>{{template.templateType}}</h5></span>
+                                <span>Description : </span>
+                                <h5>{{template.templateViewDesc}}</h5>
+                                <div>
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample1.png')"  src="images/templates/{{template.imageUrl}}sample1.png" class="img-thumbnail">
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample2.png')" src="images/templates/{{template.imageUrl}}sample2.png" class="img-thumbnail">
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail">
+                                </div>
+                                <h4 class="text-center">
+                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)">
+                                        Select
+                                    </button>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
     </div>
 </div>

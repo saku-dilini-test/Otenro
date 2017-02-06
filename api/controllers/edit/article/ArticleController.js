@@ -1,5 +1,5 @@
 /**
- * edit/article/ArticleController
+ * edit/article/ArticleController1224
  *
  * @description :: Server-side logic for managing edit/article/articles
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
