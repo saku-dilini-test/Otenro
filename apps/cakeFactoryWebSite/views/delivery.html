@@ -39,7 +39,7 @@
                                            ng-change="saveDeliveryAddress(deliveryAddress)" required>
                                     <span class="error-message"
                                           ng-show="pickUpForm.phone.$dirty
-                                                && pickUpForm.phone.$invalid" >
+                                                && pickUpForm.phone.$invalid" ng-hide="pickUpForm.phone.$error.required">
                                                 The phone number field should be of 10 digits
                                 </span>
                                 </li>
@@ -49,7 +49,7 @@
                                            ng-change="saveDeliveryAddress(deliveryAddress)"  required>
                                     <span class="error-message"
                                           ng-if="pickUpForm.userEmail.$dirty && pickUpForm.userEmail.$invalid">
-                                    <span ng-show="pickUpForm.userEmail.$dirty && pickUpForm.userEmail.$invalid ">Please enter the valid email address.</span>
+                                    <span ng-show="pickUpForm.userEmail.$dirty && pickUpForm.userEmail.$invalid " ng-hide="pickUpForm.userEmail.$error.required">Please enter the valid email address.</span>
                                 </span>
                                 </li>
                                 <li>
@@ -108,7 +108,7 @@
                                            ng-change="saveDeliveryAddress(deliveryAddress)" required>
                                     <span class="error-message"
                                           ng-show="deliveryForm.phone.$dirty
-                                                && deliveryForm.phone.$invalid" >
+                                                && deliveryForm.phone.$invalid" ng-hide="deliveryForm.phone.$error.required">
                                                 The phone number field should be of 10 digits
                                 </span>
                                 </li>
@@ -118,7 +118,7 @@
                                            ng-change="saveDeliveryAddress(deliveryAddress)"  required>
                                     <span class="error-message"
                                           ng-if="deliveryForm.userEmail.$dirty && deliveryForm.userEmail.$invalid">
-                                <span ng-show="deliveryForm.userEmail.$dirty && deliveryForm.userEmail.$invalid">Not a valid email address.</span>
+                                <span ng-show="deliveryForm.userEmail.$dirty && deliveryForm.userEmail.$invalid" ng-hide="deliveryForm.userEmail.$error.required">Not a valid email address.</span>
                             </span>
                                 </li>
                                 <li>
