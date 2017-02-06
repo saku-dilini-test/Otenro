@@ -7,7 +7,8 @@
     // map tells the System loader where to look for things
     map: {
       // our app is within the app folder
-      app: 'components/app',
+      myngapp: 'components/app',
+      myapp: 'components/app',
 
       // angular bundles
       '@angular/core': 'components/js/@angular/core/bundles/core.umd.js',
@@ -18,6 +19,8 @@
       '@angular/http': 'components/js/@angular/http/bundles/http.umd.js',
       '@angular/router': 'components/js/@angular/router/bundles/router.umd.js',
       '@angular/forms': 'components/js/@angular/forms/bundles/forms.umd.js',
+      '@angular/upgrade': 'components/js/@angular/upgrade/bundles/upgrade.umd.js',
+      '@angular/upgrade/static': 'components/js/@angular/upgrade/bundles/upgrade-static.umd.js',
 
       // other libraries
       'rxjs':                      'components/js/rxjs',
@@ -30,7 +33,7 @@
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
-      app: {
+      myngapp: {
         main: './main.ts',
         defaultExtension: 'ts'
       },

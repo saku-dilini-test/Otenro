@@ -1,23 +1,26 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, RequestOptions }  from '@angular/http';
-import { DefaultRequestOptions } from './requestoption.service'
-
+import { DefaultRequestOptions } from './requestoption.service';
+import { UpgradeModule } from '@angular/upgrade/static';
 
 import { AppComponent }  from './app.component';
+import { MyAppComponent }  from './myapp.component';
 
 
 @NgModule({
   imports:      [ 
     BrowserModule,
-    HttpModule
+    HttpModule,
+    UpgradeModule
   ],
   declarations: [ 
-    AppComponent
-  ],
-  bootstrap:    [
-     AppComponent
-  ],
+    AppComponent,
+    MyAppComponent
+  ],  
   providers: [ { provide: RequestOptions, useClass: DefaultRequestOptions }]
 })
-export class AppModule { }
+
+export class AppModule { 
+  ngDoBootstrap() {}
+}

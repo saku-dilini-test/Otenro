@@ -3,10 +3,7 @@ import { AppService } from './app.service'
 
 @Component({
   selector: 'my-app',
-  template: `
-  <h1>Hello and  {{title}}</h1>
-  <div (click)="makeRequest()">click here</div>
-  `,
+  templateUrl: '/templates/components/app.component.html',
   providers: [AppService]
 })
 
