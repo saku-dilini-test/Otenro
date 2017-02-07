@@ -21,17 +21,24 @@
 							<span><label>Name</label></span>
 							<span><input name="userName" type="text" class="textbox" ng-model="contactForm.name" required></span>
 						</div>
-						<div ng-class="{'has-error':contactUsComment.userEmail.$invalid && contactUsComment.userEmail.$dirty}">
+						<div>
 							<span><label>Email</label></span>
-							<span><input name="userEmail" type="email" class="textbox" ng-model="contactForm.email" required></span>
-						<span class="help-block has-error" ng-if="contactUsComment.userEmail.$dirty">
-						<span ng-show="contactUsComment.userEmail.$error.email">Not a valid email address.</span>
-						</span>
+							<input type="email" name="userEmail" class="textbox" ng-model="contactForm.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" required>
+
+							<span class="error-message" ng-if="contactUsComment.userEmail.$dirty && contactUsComment.userEmail.$invalid "  ng-hide="contactUsComment.userEmail.$error.required" ng-show="contactUsComment.userEmail.$dirty && contactUsComment.userEmail.$invalid">
+							Not a valid email address.</span>
+
+
+							Required!</span>
+
 						</div>
 						<div>
 							<span><lable>Phone Number</lable></span>
 
-							<input type="number" name="phone" ng-model="contactForm.phone">
+							<input type="text" name="phone" ng-model="contactForm.phone" ➥ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/">
+							<span class="error-message"  ng-show="contactUsComment.phone.$dirty && contactUsComment.phone.$invalid" >
+                                                The phone number field should be of 10 digits
+                                </span>
 						</div>
 					</div>
 					<div class="right_form">
@@ -47,7 +54,7 @@
 							<span>
 								Upload Image
 								<button ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-										 ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Upload</button>
+										ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Upload</button>
 
 								<p ng-if="file">
 									{{file.name}}
@@ -55,7 +62,7 @@
 							</span>
 						</div>
 						<div class="contact-button-wrapper">
-							<span><input ng-click='contactUsComment.$valid && submitContactForm(file,contactForm)' type="submit" value="Submit"  class="myButton" /></span>
+							<span><input ng-disabled="(contactUsComment.$invalid)" ng-click="contactUsComment.$valid && submitContactForm(file,contactForm)" type="submit" value="Submit"  class="myButton" /></span>
 						</div>
 					</div>
 				</form>
@@ -85,7 +92,6 @@
 				</div>
 				<div class="contact_info">
 					<h2>Find Us Here</h2>
-					<!--<div id="googleMap" class="gMap" ng-controller="mapCtrl"></div>-->
 					<static-gmap size="750x400"
 								 markers="{ color: 'red', label: 'The English Cake Company', coords: [6.8929988, 79.8661994] }"
 								 sensor="false" zoom="16"></static-gmap>
@@ -98,5 +104,4 @@
 </div>
 
 
-    
-    
+

@@ -45,7 +45,7 @@
                                 </li>
                                 <li class="delivery-address-section">
                                     <label>Email *</label>
-                                    <input class="form-control delivery-email" name="userEmail" type="email" ng-model="deliveryAddress.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                    <input class="form-control" name="userEmail" type="text" ng-model="deliveryAddress.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                            ng-change="saveDeliveryAddress(deliveryAddress)"  required>
                                     <span class="error-message"
                                           ng-if="pickUpForm.userEmail.$dirty && pickUpForm.userEmail.$invalid">
@@ -65,6 +65,7 @@
                                     </div>
                                     <datetimepicker ng-model="pickUpDate.date"
                                                     min-date = "minDate"
+                                                    readonly="true"
                                                     data-datetimepicker-config="{ startView:'day', minView:'hour'}"
                                                     ng-change="savePickUpDate(pickUpDate.date)"required></datetimepicker>
                                 </li>
@@ -114,7 +115,7 @@
                                 </li>
                                 <li class="delivery-address-section">
                                     <label>Email *</label>
-                                    <input class="form-control delivery-email" name="userEmail" type="email" ng-model="deliveryAddress.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                    <input class="form-control" name="userEmail" type="text" ng-model="deliveryAddress.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                            ng-change="saveDeliveryAddress(deliveryAddress)"  required>
                                     <span class="error-message"
                                           ng-if="deliveryForm.userEmail.$dirty && deliveryForm.userEmail.$invalid">
@@ -134,6 +135,7 @@
                                     </div>
                                     <datetimepicker ng-model="delivery.date"
                                                     min-date = "{{minDate}}"
+                                                    readonly="true"
                                                     data-datetimepicker-config="{ startView:'day', minView:'hour' }"
                                                     ng-change="saveDeliveryDate(delivery.date)" required></datetimepicker>
                                 </li>

@@ -39,17 +39,17 @@
                                            ng-change="saveDeliveryAddress(deliveryAddress)" required>
                                     <span class="error-message"
                                           ng-show="pickUpForm.phone.$dirty
-                                                && pickUpForm.phone.$invalid" >
+                                                && pickUpForm.phone.$invalid" ng-hide="pickUpForm.phone.$error.required">
                                                 The phone number field should be of 10 digits
                                 </span>
                                 </li>
                                 <li class="delivery-address-section">
                                     <label>Email *</label>
-                                    <input class="form-control delivery-email" name="userEmail" type="email" ng-model="deliveryAddress.email"
+                                    <input class="form-control" name="userEmail" type="text" ng-model="deliveryAddress.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                            ng-change="saveDeliveryAddress(deliveryAddress)"  required>
                                     <span class="error-message"
-                                          ng-if="pickUpForm.userEmail.$dirty">
-                                    <span ng-show="pickUpForm.userEmail.$error.email">Not a valid email address.</span>
+                                          ng-if="pickUpForm.userEmail.$dirty && pickUpForm.userEmail.$invalid">
+                                    <span ng-show="pickUpForm.userEmail.$dirty && pickUpForm.userEmail.$invalid " ng-hide="pickUpForm.userEmail.$error.required">Please enter the valid email address.</span>
                                 </span>
                                 </li>
                                 <li>
@@ -64,9 +64,10 @@
                                         <span class="error-message">Sorry, pick up is not available at that time. Please select again.</span>
                                     </div>
                                     <datetimepicker ng-model="pickUpDate.date"
-                                                    min-date = "{{minDate}}"
-                                                    data-datetimepicker-config="{ startView:'day', minView:'hour' }"
-                                                    ng-change="savePickUpDate(pickUpDate.date)" required></datetimepicker>
+                                                    min-date = "minDate"
+                                                    readonly="true"
+                                                    data-datetimepicker-config="{ startView:'day', minView:'hour'}"
+                                                    ng-change="savePickUpDate(pickUpDate.date)"required></datetimepicker>
                                 </li>
                                 <li>
                                     <label>Comment</label>
@@ -108,16 +109,17 @@
                                            ng-change="saveDeliveryAddress(deliveryAddress)" required>
                                     <span class="error-message"
                                           ng-show="deliveryForm.phone.$dirty
-                                                && deliveryForm.phone.$invalid" >
+                                                && deliveryForm.phone.$invalid" ng-hide="deliveryForm.phone.$error.required">
                                                 The phone number field should be of 10 digits
                                 </span>
                                 </li>
                                 <li class="delivery-address-section">
                                     <label>Email *</label>
-                                    <input class="form-control delivery-email" name="userEmail" type="email" ng-model="deliveryAddress.email"
+                                    <input class="form-control" name="userEmail" type="text" ng-model="deliveryAddress.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                            ng-change="saveDeliveryAddress(deliveryAddress)"  required>
-                                    <span class="error-message" ng-if="deliveryForm.userEmail.$dirty">
-                                <span ng-show="deliveryForm.userEmail.$error.email">Not a valid email address.</span>
+                                    <span class="error-message"
+                                          ng-if="deliveryForm.userEmail.$dirty && deliveryForm.userEmail.$invalid">
+                                <span ng-show="deliveryForm.userEmail.$dirty && deliveryForm.userEmail.$invalid" ng-hide="deliveryForm.userEmail.$error.required">Not a valid email address.</span>
                             </span>
                                 </li>
                                 <li>
@@ -133,6 +135,7 @@
                                     </div>
                                     <datetimepicker ng-model="delivery.date"
                                                     min-date = "{{minDate}}"
+                                                    readonly="true"
                                                     data-datetimepicker-config="{ startView:'day', minView:'hour' }"
                                                     ng-change="saveDeliveryDate(delivery.date)" required></datetimepicker>
                                 </li>
@@ -142,7 +145,7 @@
                                 </li>
                             </ul>
                             <button ng-disabled="(!(deliveryForm.$valid)) || (isPassedDate) || (isOutOfHours)"
-                                    ng-click="deliveryForm.$valid && goShoppingCart()"
+                                    ng-click="deliveryForm.$valid && goShoppingCart() && reset()"
                                     class="btn kkcc-btn-success">
                                 Submit
                             </button>
