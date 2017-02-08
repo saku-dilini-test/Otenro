@@ -2,7 +2,7 @@
     "use strict";
 
 angular.module('animateApp')
-    .controller('shoppingCartCtrl', function($scope, $http,$routeParams,SERVER_URL,DataService) { 		
+    .controller('shoppingCartCtrl', function($scope, $http,$routeParams,SERVER_URL,DataService) {
         $scope.SERVER_URL = SERVER_URL;
         $scope.cart = DataService.cart;
      
@@ -14,7 +14,7 @@ angular.module('animateApp')
 
         // before redirect to PayPal, Cart info send to server to save
         $scope.saveCartInServer = function () {
-
+            console.log("data" + $scope.cart.getShoppingCart())
             $scope.deliveryOption = "pickUp";
             $scope.isSubmitButtonDisableValue = 'true';
             $scope.cart = DataService.cart;
@@ -46,6 +46,13 @@ angular.module('animateApp')
             $http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)
                 .then(function (response) {
                 });
+
+               localStorage.clear();
+        }
+
+        $scope.clearCart = function(){
+            console.log("cart is clear");
+            localStorage.clear();
         }
 
     });
