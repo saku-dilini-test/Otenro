@@ -27,11 +27,11 @@ module.exports = {
 
   port: 1337,
 
-  //ssl: {
-  //  ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
-  //  key: require('fs').readFileSync(__dirname + '/ssl/private.key'),
-  //  cert: require('fs').readFileSync(__dirname + '/ssl/certificate.crt')
-  //},
+  ssl: {
+    ca: require('fs').readFileSync(__dirname + '/ssl/ssl.dashboard.otenro.com.ca'),
+    key: require('fs').readFileSync(__dirname + '/ssl/ssl.dashboard.otenro.com.key'),
+    cert: require('fs').readFileSync(__dirname + '/ssl/ssl.dashboard.otenro.com.crt')
+  },
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
@@ -43,8 +43,9 @@ module.exports = {
   
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'http://beta.otenro.com',
-  // ME SERVER Config 
+  HOST_URL : 'https://dashboard.otenro.com',
+  // ME SERVER Config
+  ME_SERVER_URL:'https://cdn.otenro.com/temp/',
   ME_SERVER : '/home/admin/web/cdn.otenro.com/public_html/temp/',
   ME_SERVER_PORT : 8081,
   // APP FILE SERVER Config
