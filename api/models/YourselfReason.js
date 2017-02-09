@@ -12,7 +12,8 @@ module.exports = {
     reason : {
       type : 'string'
     }
-  },
+  }
+  /*,
   seedData: [
     {
       reason : 'Already Selling'
@@ -23,6 +24,6 @@ module.exports = {
     {
       reason : 'Just Starting To Sell'
     }
-  ]
+  ]*/
 };
 

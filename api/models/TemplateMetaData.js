@@ -28,7 +28,8 @@ module.exports = {
     menuButtonId : {  // There is range for each template eg :- hkRising 1001 - 1999
       type: 'string'
     }
-  },
+  }
+  /*,
   seedData: [
 
     // data for media category
@@ -232,7 +233,7 @@ module.exports = {
       orderId : 22,
       menuButtonId : '1510'
     },
-   /* {
+    {
       templateCategoryId : TemplateCategoryDetails.Business.ID,
       templateId : '2',
       menuType : 'MenuButton',
@@ -240,8 +241,8 @@ module.exports = {
       menuFunction : 'commerce.showDeleteAppDialog',
       orderId : "23",
       menuButtonId : '1511'
-    }*/
+    }
 
-  ]
+  ]*/
 };
 

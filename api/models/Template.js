@@ -40,7 +40,8 @@ module.exports = {
         previewId : {
             type: 'string'
         }
-    },
+    }
+    /*,
     seedData: [
         //{
         //    template_name : 'codecanyon',
@@ -190,6 +191,6 @@ module.exports = {
             templateCategory: TemplateCategoryDetails.Media.ID,
             previewId : '587f2fc69cca49641ff664e4'
         }
-    ]
+    ]*/
 };
 

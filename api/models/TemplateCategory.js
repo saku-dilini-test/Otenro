@@ -13,8 +13,8 @@ module.exports = {
         imageUrl: {
             type: 'string'
         }
-    },
-    seedData: [
+    }
+    /*,seedData: [
         {
             category_name: 'Business',
             imageUrl: 'resturant/codecanyon.png'
@@ -26,5 +26,5 @@ module.exports = {
             imageUrl: 'resturant/codecanyon.png'
         }
 
-    ]
+    ]*/
 };

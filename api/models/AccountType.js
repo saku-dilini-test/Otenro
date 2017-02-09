@@ -13,7 +13,8 @@ module.exports = {
         accountTypeId: {
             type: 'integer'
         }
-    },
+    }
+    /*,
     seedData: [
         {
             accountType: 'Free Beta',
@@ -26,6 +27,6 @@ module.exports = {
             accountTypeId: 3
         },
 
-    ]
+    ]*/
 };
 

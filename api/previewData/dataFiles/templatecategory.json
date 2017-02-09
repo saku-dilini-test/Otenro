@@ -1,0 +1,3 @@
+{"_id":{"$oid":"589c46f0d0f788851f2ed8e8"},"category_name":"Business","imageUrl":"resturant/codecanyon.png","createdAt":{"$date":"2017-02-09T10:39:44.932Z"},"updatedAt":{"$date":"2017-02-09T10:39:44.932Z"}}
+{"_id":{"$oid":"589c46f0d0f788851f2ed8e9"},"category_name":"Port Folio","imageUrl":"resturant/codecanyon.png","createdAt":{"$date":"2017-02-09T10:39:44.932Z"},"updatedAt":{"$date":"2017-02-09T10:39:44.932Z"}}
+{"_id":{"$oid":"589c46f0d0f788851f2ed8ea"},"category_name":"Media","imageUrl":"resturant/codecanyon.png","createdAt":{"$date":"2017-02-09T10:39:44.933Z"},"updatedAt":{"$date":"2017-02-09T10:39:44.933Z"}}

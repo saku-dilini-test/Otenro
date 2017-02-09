@@ -10,7 +10,8 @@
             language:{
                 type: 'string'
             }
-     },
+     }
+     /*,
      seedData: [
       {
          language: 'Afrikaans'
@@ -163,5 +164,5 @@
       {
          language: 'Zulu'
       }
-     ]
+     ]*/
  };
