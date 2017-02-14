@@ -15,8 +15,9 @@ var server  = email.server.connect({
 
 });
 
-//var orderEmail = 'galapitage@gmail.com';
-var orderEmail = 'waidyarathnanmw@gmail.com';
+var orderEmail = 'galapitage@gmail.com';
+//var orderEmail = 'kalaniparapitiya@gmail.com';
+
 
 module.exports = {
   create: function (req, res) {
@@ -141,45 +142,42 @@ module.exports = {
   },
 
   totalAmountInUSD : function(req,res){
-    Currency.findOne({type:'USD'}).exec(function(err,currency){
-      var oneUSD = currency.USDLKR;
-      var totalUSD = req.param('totalAmount')/oneUSD;
-      res.json(200, {success: 'received',usd:Math.round(totalUSD * 100) / 100});
-    });
-  },
+      Currency.findOne({type:'USD'}).exec(function(err,currency){
+        var oneUSD = currency.USDLKR;
+        var totalUSD = req.param('totalAmount')/oneUSD;
+        res.json(200, {success: 'received',usd:Math.round(totalUSD * 100) / 100});
+      });
+    },
 
-  /**
-   * Retrive oneUSD amount for LKR
-   * @param req
-   * @param res
-   */
-  oneUSD : function(req,res){
-    Currency.findOne({type:'USD'}).exec(function(err,currency){
-      currency = {
-        USDLKR : 'USD'
-      }
-      var oneUSD = currency.USDLKR;
-      res.json(200, {result: oneUSD});
-    });
-  },
+    /**
+     * Retrive oneUSD amount for LKR
+     * @param req
+     * @param res
+     */
+    oneUSD : function(req,res){
+      Currency.findOne({type:'USD'}).exec(function(err,currency){
+        var oneUSD = currency.USDLKR;
+        res.json(200, {result: oneUSD});
+      });
+    },
 
-  /**
-   * Given order Id retrive payment details
-   * @param req
-   * @param res
-   */
-  orderSummary : function(req,res){
-    var orderId = req.param('orderId');
-    Payment.findOne( { 'response.id' : orderId}).exec(function(err,payment){
-      res.json(200, {result:payment});
-    });
-  },
+    /**
+     * Given order Id retrive payment details
+     * @param req
+     * @param res
+     */
+    orderSummary : function(req,res){
+      var orderId = req.param('orderId');
+      Payment.findOne( { 'response.id' : orderId}).exec(function(err,payment){
+        res.json(200, {result:payment});
+      });
+    },
 
-  /**
-   * Given userId create payment colletion
-   * @param req
-   * @param res
-   */
+    /**
+     * Given userId create payment colletion
+     * @param req
+     * @param res
+     */
   saveShoppingCart: function(req,res){
 
     var data = req.body;
@@ -353,6 +351,7 @@ module.exports = {
               return res.status(err.status).json({err: err.message});
             }
             sails.log('Email has sent & Payment Id ' + payment.id);
+            sails.log('cart info ' + payment);
             return res.json(200, {result: 'success'});
 
           });
