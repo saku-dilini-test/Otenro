@@ -258,7 +258,12 @@
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     toastr.success("New Category Added", 'Message', {closeButton: true});
                     $mdDialog.hide();
-                    mainMenuService.showMainMenuDialog();
+
+                    if(initialData.prodItem == null) {
+                        mainMenuService.showMainMenuDialog();
+                    }else{
+                        commerceService.showAddProductsDialog(initialData.prodItem, true);
+                    }
                 }).error(function(err) {
                     toastr.error(err.message, 'Warning', {
                         closeButton: true
