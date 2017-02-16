@@ -1,4 +1,4 @@
-﻿﻿<div class="other-page-header home-pg"></div>
+﻿<div class="other-page-header home-pg"></div>
 <div ng-include=" 'views/navigation.html' "></div>
 
 <div class="delivery-page-wrapper">
@@ -20,10 +20,11 @@
                 </tr>
 
                 <!-- empty cart message -->
-                <tr ng-hide="cart.getTotalCount() > 0" >
+                <tr ng-hide="cart.getTotalCount() > 0">
+                    <div ng-if="cart.getTotalCount() == 0" ng-init="clearCart()">
                     <td class="tdCenter" colspan="4">
                         Your cart is empty.
-                    </td>
+                    </td></div>
                 </tr>
 
                 <!-- cart items -->
@@ -86,7 +87,7 @@
             <div ng-if="true" class="pull-right">
                 <button
                         class="btn kkcc-btn-success"
-                        ng-click="saveCartInServer(); cart.checkout('PayPal'); cartR"
+                        ng-click="saveCartInServer(); cart.checkout('PayPal')"
                         ng-model="isSubmitButtonDisableValue"
                         ng-disabled=" (cart.getBranchName() === '' && cart.getDeliveryCharges() == 0) || cart.getTotalCount() < 1 ">
                     <i class="icon-ok icon-white" /> Submit
