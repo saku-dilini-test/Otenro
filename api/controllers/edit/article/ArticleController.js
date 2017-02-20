@@ -23,6 +23,7 @@ module.exports = {
             appId : appId
         };
 
+
         Article.find(searchQuery).exec(function(err,result) {
             if (err) {
                 sails.log.error("Article Collection find Error for given appId : "+appId);
@@ -31,6 +32,8 @@ module.exports = {
             res.send(result);
         });
     },
+
+
 
     /**
      * return collection of article given appId
