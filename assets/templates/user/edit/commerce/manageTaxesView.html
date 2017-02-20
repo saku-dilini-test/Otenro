@@ -2,9 +2,9 @@
     <md-dialog-content>
         <div class="md-dialog-header">
             <h1>taxes</h1>
-            <ul class="md-dialog-header-nav clearfix">
+            <ul ng-hide="items.length > 0"  class="md-dialog-header-nav clearfix">
                 <li>
-                    <a class="add-new-item" ng-click="addTaxOption()">Add Tax Option </a>
+                    <a class="add-new-item" ng-click="items.length == 0 ? addTaxOption() : 'javascript:void(0)'">Add Tax Option </a>
                 </li>
             </ul>
         </div>
