@@ -39,8 +39,27 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
             // default : tax info hide 
             $scope.isShowTaxInfo = false;
 
-            // Get Tax Information       
-            var taxInfoAPI_URL = constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId;     
+            // Get Tax Information
+            if (localStorage.getItem('appLocalStorageUser') !== null) {
+                var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+
+                var param = {
+                    'appId':$scope.appId,
+                    'country': localData.country
+                };
+                // Get Tax Information
+                $http.post(constants.SERVER_URL + '/templatesOrder/getTaxInfoByCountry',param).success(function(data) {
+                    if(data != ''){
+                        $scope.tax = data[0].taxAmount;
+                        $scope.taxDisplayName = data[0].taxName;
+                        $scope.isShowTaxInfo = true;
+                    }
+                });
+
+            }
+
+
+            /*var taxInfoAPI_URL = constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId;
             $http.get(taxInfoAPI_URL)
                 .success(function(data) {
                     var taxInfo = data;
@@ -53,7 +72,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                         $scope.tax = taxInfo[0].taxAmount;
                         $scope.isShowTaxInfo = true;
                     }
-                });
+                });*/
 
             // Calculate total amount function
             $scope.getTotal = function () {

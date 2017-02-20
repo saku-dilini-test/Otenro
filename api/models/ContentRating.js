@@ -10,7 +10,8 @@
             ratings:{
                 type: 'string'
             }
-     },
+     }
+     /*,
      seedData: [
         {
             ratings: 'Maturity level: High'
@@ -24,5 +25,5 @@
         {
             ratings: 'Everybody'
         }
-     ]
+     ]*/
      };

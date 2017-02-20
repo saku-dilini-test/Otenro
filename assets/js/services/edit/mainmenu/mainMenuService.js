@@ -72,7 +72,7 @@
                 });
 
             },
-            showEditMenuNavigationDialog: function(data,id){
+            showEditMenuNavigationDialog: function(data,id, productItem){
                 return $mdDialog.show({
                     controller: 'MainMenuCtrl',
                     templateUrl: 'user/edit/mainmenu/editMenuNavigation.html',
@@ -80,7 +80,8 @@
                     locals : {
                         initialData : {
                             menu : data,
-                            templateCategory : id
+                            templateCategory : id,
+                            prodItem: productItem == null ? null : productItem
                         }
                     }
                 }).then(function(answer) {

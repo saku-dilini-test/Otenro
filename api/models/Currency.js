@@ -16,7 +16,8 @@
             symbol:{
                 type: 'string'
             }
-     },
+     }
+     /*,
      seedData: [
              /*{
                  currency : 'LKR',
@@ -29,7 +30,7 @@
              {
                  currency : 'EUR',
                  sign : '€'
-             },*/
+             },
          {
              sign: "$",
              currency: "US Dollar",
@@ -520,5 +521,5 @@
              symbol: "zmw"
          }
 
-     ]
+     ]*/
  };

@@ -10,7 +10,8 @@
             measurementStandard:{
                 type: 'string'
             }
-     },
+     }
+     /*,
      seedData: [
              {
                  measurementStandard : 'Metric',
@@ -18,5 +19,5 @@
              {
                  measurementStandard : 'Imperial',
              }
-     ]
+     ]*/
  };

@@ -10,7 +10,8 @@
             siteType:{
                 type: 'string'
             }
-     },
+     }
+     /*,
      seedData: [
              {
                  siteType : 'Ecommerce',
@@ -27,5 +28,5 @@
              {
                 siteType : 'Artist',
              }
-     ]
+     ]*/
  };

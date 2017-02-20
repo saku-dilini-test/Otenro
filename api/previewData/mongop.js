@@ -1,0 +1,2 @@
+use appBuilder;
+db.dropDatabase();

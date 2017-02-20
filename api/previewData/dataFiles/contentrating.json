@@ -1,0 +1,4 @@
+{"_id":{"$oid":"589c475d3685292e22667192"},"ratings":"Maturity level: High","createdAt":{"$date":"2017-02-09T10:41:33.535Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.535Z"}}
+{"_id":{"$oid":"589c475d3685292e22667193"},"ratings":"Maturity level: Medium","createdAt":{"$date":"2017-02-09T10:41:33.536Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.536Z"}}
+{"_id":{"$oid":"589c475d3685292e22667194"},"ratings":"Maturity level: Low","createdAt":{"$date":"2017-02-09T10:41:33.536Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.536Z"}}
+{"_id":{"$oid":"589c475d3685292e22667195"},"ratings":"Everybody","createdAt":{"$date":"2017-02-09T10:41:33.537Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.537Z"}}

@@ -18,7 +18,8 @@ module.exports = {
     articleCategory : {
       type : 'array'
     }
-  },
+  }
+  /*,
   seedData: [
     {
       templateName : 'foodDemoApp',
@@ -2718,6 +2719,6 @@ module.exports = {
               }
               ]
           }
-  ]
+  ]*/
 };
 
