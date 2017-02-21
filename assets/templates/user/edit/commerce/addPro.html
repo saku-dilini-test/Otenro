@@ -150,7 +150,7 @@
                                 <td ng-model="data.name"><p class="product-name">{{data.name}}</p></td>
                                 <td>
                                     <md-input-container style="width: 80px;">
-                                        <input ng-blur="validateInputValue(data.sku,'sku')"  maxlength="10"
+                                        <input ng-blur="validateInputValue(data.sku,'sku'); checkValidity(product.sku)"  maxlength="10"
                                                required
                                                aria-label="SKU"
                                                class="product-sku"
@@ -159,6 +159,7 @@
                                                ng-pattern="/^\d*[1-9]\d*$/"
                                                ng-readonly="product.checked"
                                                ng-click="check($index)">
+                                        <div class="error" ng-if="exist">Sku already exist</div>
                                         <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                             <div ng-message="required">SKU is required.</div>
                                             <div ng-message="pattern" style="line-height:13px;" class="my-message">Invalid SKU</div>
