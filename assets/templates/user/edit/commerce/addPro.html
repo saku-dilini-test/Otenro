@@ -150,7 +150,7 @@
                                 <td ng-model="data.name"><p class="product-name">{{data.name}}</p></td>
                                 <td>
                                     <md-input-container style="width: 80px;">
-                                        <input ng-blur="validateInputValue(data.sku,'sku'); checkValidity(product.sku)"  maxlength="10"
+                                        <input ng-blur="validateInputValue(data.sku,'sku');checkValidity(product.sku)"  maxlength="10"
                                                required
                                                aria-label="SKU"
                                                class="product-sku"
@@ -216,7 +216,7 @@
                                           <div ng-message="required" class="my-message">Required!</div>
                                       </div>
                                   </md-input-container>
-                                  <md-checkbox ng-change = "data.quantity = data.unlimited ? null : data.quantity" ng-disable="data.quantity.$invalid" ng-model="data.unlimited" aria-label="Unlimited">
+                                  <md-checkbox ng-change = 'setValue({{$index}})' ng-disable="data.quantity.$invalid" ng-model="data.unlimited" aria-label="Unlimited">
                                           Unlimited
                                   </md-checkbox>
 
