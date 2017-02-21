@@ -621,7 +621,7 @@
 
 
 
-                /**
+                /**New category
                  * @description
                  * pattern validation of size/weight
                  * @param selectedType
@@ -714,6 +714,12 @@
             disableTabs(1,false,false,false ,false);
         }
 
+        // to identify if navigating to this page after creating a new category from add product
+        if(initialData.isNewItem){
+            disableTabs(1,false,false,true ,true);
+        }
+
+
 
         /**
          * @description
@@ -726,7 +732,15 @@
 
         $scope.newcategory = function(){
 
+
             mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
+
+            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2, initialData.productItem);
+            /*.then(function(answer) {
+                //mainMenuService.showMainMenuDialog();
+                commerceService.showAddProductsDialog(initialData.productItem);
+            });*/
+
         }
 
 

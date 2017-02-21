@@ -10,7 +10,8 @@
             timeAndRegion:{
                 type: 'string'
             }
-     },
+     }
+     /*,
      seedData: [
              {
                  timeAndRegion : '(UTC-12:00) International Date Line West',
@@ -309,5 +310,5 @@
              {
                 timeAndRegion: '(UTC-11:00)Samoa'
              }
-     ]
+     ]*/
  };

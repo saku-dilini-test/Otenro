@@ -1,0 +1,5 @@
+{"_id":{"$oid":"589c475d3685292e22667128"},"siteType":"Ecommerce","createdAt":{"$date":"2017-02-09T10:41:33.383Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.383Z"}}
+{"_id":{"$oid":"589c475d3685292e22667129"},"siteType":"Business","createdAt":{"$date":"2017-02-09T10:41:33.383Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.383Z"}}
+{"_id":{"$oid":"589c475d3685292e2266712a"},"siteType":"NGO","createdAt":{"$date":"2017-02-09T10:41:33.384Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.384Z"}}
+{"_id":{"$oid":"589c475d3685292e2266712b"},"siteType":"Media","createdAt":{"$date":"2017-02-09T10:41:33.384Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.384Z"}}
+{"_id":{"$oid":"589c475d3685292e2266712c"},"siteType":"Artist","createdAt":{"$date":"2017-02-09T10:41:33.384Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.384Z"}}

@@ -12,7 +12,8 @@ module.exports = {
         countryName:{
             type: 'string'
         }
-    },
+    }
+    /*,
     seedData: [
                     {
                         "countryCode": "AD",
@@ -1018,6 +1019,6 @@ module.exports = {
                         "countryCode": "ZW",
                         "countryName": "Zimbabwe"
                     }
-                ]
+                ]*/
 };
 

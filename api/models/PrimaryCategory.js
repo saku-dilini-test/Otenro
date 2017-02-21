@@ -10,7 +10,8 @@
             category:{
                 type: 'string'
             }
-     },
+     }
+     /*,
      seedData: [
              {
                  category : 'Books'
@@ -81,5 +82,5 @@
              {
                 category: 'Weather'
              }
-     ]
+     ]*/
  };

@@ -1,0 +1,50 @@
+{"_id":{"$oid":"589c475d3685292e226670c8"},"language":"Afrikaans","createdAt":{"$date":"2017-02-09T10:41:33.272Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.272Z"}}
+{"_id":{"$oid":"589c475d3685292e226670c9"},"language":"Amharic","createdAt":{"$date":"2017-02-09T10:41:33.273Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.273Z"}}
+{"_id":{"$oid":"589c475d3685292e226670ca"},"language":"Arabic","createdAt":{"$date":"2017-02-09T10:41:33.274Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.274Z"}}
+{"_id":{"$oid":"589c475d3685292e226670cb"},"language":"Belarusian","createdAt":{"$date":"2017-02-09T10:41:33.274Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.274Z"}}
+{"_id":{"$oid":"589c475d3685292e226670cc"},"language":"Bulgarian","createdAt":{"$date":"2017-02-09T10:41:33.274Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.274Z"}}
+{"_id":{"$oid":"589c475d3685292e226670cd"},"language":"Catalan","createdAt":{"$date":"2017-02-09T10:41:33.275Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.275Z"}}
+{"_id":{"$oid":"589c475d3685292e226670ce"},"language":"Chinese (Simplified)","createdAt":{"$date":"2017-02-09T10:41:33.275Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.275Z"}}
+{"_id":{"$oid":"589c475d3685292e226670cf"},"language":"Chinese (Traditional)","createdAt":{"$date":"2017-02-09T10:41:33.275Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.275Z"}}
+{"_id":{"$oid":"589c475d3685292e226670d0"},"language":"Croatian","createdAt":{"$date":"2017-02-09T10:41:33.275Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.275Z"}}
+{"_id":{"$oid":"589c475d3685292e226670d1"},"language":"Czech","createdAt":{"$date":"2017-02-09T10:41:33.275Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.275Z"}}
+{"_id":{"$oid":"589c475d3685292e226670d2"},"language":"Danish","createdAt":{"$date":"2017-02-09T10:41:33.276Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.276Z"}}
+{"_id":{"$oid":"589c475d3685292e226670d3"},"language":"Dutch","createdAt":{"$date":"2017-02-09T10:41:33.276Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.276Z"}}
+{"_id":{"$oid":"589c475d3685292e226670d4"},"language":"English (United Kingdom)","createdAt":{"$date":"2017-02-09T10:41:33.277Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.277Z"}}
+{"_id":{"$oid":"589c475d3685292e226670d5"},"language":"English (United States)","createdAt":{"$date":"2017-02-09T10:41:33.277Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.277Z"}}
+{"_id":{"$oid":"589c475d3685292e226670d6"},"language":"Estonian","createdAt":{"$date":"2017-02-09T10:41:33.278Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.278Z"}}
+{"_id":{"$oid":"589c475d3685292e226670d7"},"language":"Filipino","createdAt":{"$date":"2017-02-09T10:41:33.278Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.278Z"}}
+{"_id":{"$oid":"589c475d3685292e226670d8"},"language":"Finnish","createdAt":{"$date":"2017-02-09T10:41:33.279Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.279Z"}}
+{"_id":{"$oid":"589c475d3685292e226670d9"},"language":"French","createdAt":{"$date":"2017-02-09T10:41:33.282Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.282Z"}}
+{"_id":{"$oid":"589c475d3685292e226670da"},"language":"German","createdAt":{"$date":"2017-02-09T10:41:33.282Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.282Z"}}
+{"_id":{"$oid":"589c475d3685292e226670db"},"language":"Greek","createdAt":{"$date":"2017-02-09T10:41:33.283Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.283Z"}}
+{"_id":{"$oid":"589c475d3685292e226670dc"},"language":"Hebrew","createdAt":{"$date":"2017-02-09T10:41:33.283Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.283Z"}}
+{"_id":{"$oid":"589c475d3685292e226670dd"},"language":"Hindi","createdAt":{"$date":"2017-02-09T10:41:33.284Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.284Z"}}
+{"_id":{"$oid":"589c475d3685292e226670de"},"language":"Hungarian","createdAt":{"$date":"2017-02-09T10:41:33.284Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.284Z"}}
+{"_id":{"$oid":"589c475d3685292e226670df"},"language":"Italian","createdAt":{"$date":"2017-02-09T10:41:33.286Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.286Z"}}
+{"_id":{"$oid":"589c475d3685292e226670e0"},"language":"Japanese","createdAt":{"$date":"2017-02-09T10:41:33.287Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.287Z"}}
+{"_id":{"$oid":"589c475d3685292e226670e1"},"language":"Korean (South Korea)","createdAt":{"$date":"2017-02-09T10:41:33.287Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.287Z"}}
+{"_id":{"$oid":"589c475d3685292e226670e2"},"language":"Latvian","createdAt":{"$date":"2017-02-09T10:41:33.287Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.287Z"}}
+{"_id":{"$oid":"589c475d3685292e226670e3"},"language":"Lithuanian","createdAt":{"$date":"2017-02-09T10:41:33.290Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.290Z"}}
+{"_id":{"$oid":"589c475d3685292e226670e4"},"language":"Malay","createdAt":{"$date":"2017-02-09T10:41:33.290Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.290Z"}}
+{"_id":{"$oid":"589c475d3685292e226670e5"},"language":"Norwegian","createdAt":{"$date":"2017-02-09T10:41:33.290Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.290Z"}}
+{"_id":{"$oid":"589c475d3685292e226670e6"},"language":"Persian","createdAt":{"$date":"2017-02-09T10:41:33.290Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.290Z"}}
+{"_id":{"$oid":"589c475d3685292e226670e7"},"language":"Polish","createdAt":{"$date":"2017-02-09T10:41:33.291Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.291Z"}}
+{"_id":{"$oid":"589c475d3685292e226670e8"},"language":"Portuguese (Brazil)","createdAt":{"$date":"2017-02-09T10:41:33.291Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.291Z"}}
+{"_id":{"$oid":"589c475d3685292e226670e9"},"language":"Portuguese (Portugal)","createdAt":{"$date":"2017-02-09T10:41:33.291Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.291Z"}}
+{"_id":{"$oid":"589c475d3685292e226670ea"},"language":"Romansh","createdAt":{"$date":"2017-02-09T10:41:33.291Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.291Z"}}
+{"_id":{"$oid":"589c475d3685292e226670eb"},"language":"Romanian","createdAt":{"$date":"2017-02-09T10:41:33.291Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.291Z"}}
+{"_id":{"$oid":"589c475d3685292e226670ec"},"language":"Russian","createdAt":{"$date":"2017-02-09T10:41:33.291Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.291Z"}}
+{"_id":{"$oid":"589c475d3685292e226670ed"},"language":"Serbian","createdAt":{"$date":"2017-02-09T10:41:33.292Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.292Z"}}
+{"_id":{"$oid":"589c475d3685292e226670ee"},"language":"Slovak","createdAt":{"$date":"2017-02-09T10:41:33.292Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.292Z"}}
+{"_id":{"$oid":"589c475d3685292e226670ef"},"language":"Slovenian","createdAt":{"$date":"2017-02-09T10:41:33.292Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.292Z"}}
+{"_id":{"$oid":"589c475d3685292e226670f0"},"language":"Spanish(Latin America)","createdAt":{"$date":"2017-02-09T10:41:33.292Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.292Z"}}
+{"_id":{"$oid":"589c475d3685292e226670f1"},"language":"Spanish(Spain)","createdAt":{"$date":"2017-02-09T10:41:33.292Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.292Z"}}
+{"_id":{"$oid":"589c475d3685292e226670f2"},"language":"Spanish (United States)","createdAt":{"$date":"2017-02-09T10:41:33.293Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.293Z"}}
+{"_id":{"$oid":"589c475d3685292e226670f3"},"language":"Swahili","createdAt":{"$date":"2017-02-09T10:41:33.293Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.293Z"}}
+{"_id":{"$oid":"589c475d3685292e226670f4"},"language":"Swedish","createdAt":{"$date":"2017-02-09T10:41:33.293Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.293Z"}}
+{"_id":{"$oid":"589c475d3685292e226670f5"},"language":"Thai","createdAt":{"$date":"2017-02-09T10:41:33.293Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.293Z"}}
+{"_id":{"$oid":"589c475d3685292e226670f6"},"language":"Turkish","createdAt":{"$date":"2017-02-09T10:41:33.293Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.293Z"}}
+{"_id":{"$oid":"589c475d3685292e226670f7"},"language":"Ukrainian","createdAt":{"$date":"2017-02-09T10:41:33.294Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.294Z"}}
+{"_id":{"$oid":"589c475d3685292e226670f8"},"language":"Vietnamese","createdAt":{"$date":"2017-02-09T10:41:33.294Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.294Z"}}
+{"_id":{"$oid":"589c475d3685292e226670f9"},"language":"Zulu","createdAt":{"$date":"2017-02-09T10:41:33.294Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.294Z"}}

@@ -1,0 +1,99 @@
+{"_id":{"$oid":"589c475d3685292e2266712d"},"timeAndRegion":"(UTC-12:00) International Date Line West","createdAt":{"$date":"2017-02-09T10:41:33.421Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.421Z"}}
+{"_id":{"$oid":"589c475d3685292e2266712e"},"timeAndRegion":"(UTC-11:00) Coordinated Universal Time -11","createdAt":{"$date":"2017-02-09T10:41:33.422Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.422Z"}}
+{"_id":{"$oid":"589c475d3685292e2266712f"},"timeAndRegion":"(UTC-10:00) Hawaii","createdAt":{"$date":"2017-02-09T10:41:33.423Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.423Z"}}
+{"_id":{"$oid":"589c475d3685292e22667130"},"timeAndRegion":"(UTC-09:00) Alaska","createdAt":{"$date":"2017-02-09T10:41:33.423Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.423Z"}}
+{"_id":{"$oid":"589c475d3685292e22667131"},"timeAndRegion":"(UTC-08:00) Pacific Time (US and Canada)","createdAt":{"$date":"2017-02-09T10:41:33.423Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.423Z"}}
+{"_id":{"$oid":"589c475d3685292e22667132"},"timeAndRegion":"(UTC-08:00)Baja California","createdAt":{"$date":"2017-02-09T10:41:33.424Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.424Z"}}
+{"_id":{"$oid":"589c475d3685292e22667133"},"timeAndRegion":"(UTC-07:00) Mountain Time (US and Canada)","createdAt":{"$date":"2017-02-09T10:41:33.424Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.424Z"}}
+{"_id":{"$oid":"589c475d3685292e22667134"},"timeAndRegion":"(UTC-07:00) Chihuahua, La Paz, Mazatlan","createdAt":{"$date":"2017-02-09T10:41:33.424Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.424Z"}}
+{"_id":{"$oid":"589c475d3685292e22667135"},"timeAndRegion":"(UTC-07:00) Arizona","createdAt":{"$date":"2017-02-09T10:41:33.425Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.425Z"}}
+{"_id":{"$oid":"589c475d3685292e22667136"},"timeAndRegion":"(UTC-06:00) Saskatchewan","createdAt":{"$date":"2017-02-09T10:41:33.426Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.426Z"}}
+{"_id":{"$oid":"589c475d3685292e22667137"},"timeAndRegion":"(UTC-06:00) Central America","createdAt":{"$date":"2017-02-09T10:41:33.426Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.426Z"}}
+{"_id":{"$oid":"589c475d3685292e22667138"},"timeAndRegion":"(UTC-06:00) Central Time (US and Canada)","createdAt":{"$date":"2017-02-09T10:41:33.427Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.427Z"}}
+{"_id":{"$oid":"589c475d3685292e22667139"},"timeAndRegion":"(UTC-06:00) Guadalajara, Mexico City, Monterrey","createdAt":{"$date":"2017-02-09T10:41:33.427Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.427Z"}}
+{"_id":{"$oid":"589c475d3685292e2266713a"},"timeAndRegion":"(UTC-05:00) Eastern Time (US and Canada)","createdAt":{"$date":"2017-02-09T10:41:33.427Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.427Z"}}
+{"_id":{"$oid":"589c475d3685292e2266713b"},"timeAndRegion":"(UTC-05:00) Bogota, Lima, Quito","createdAt":{"$date":"2017-02-09T10:41:33.428Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.428Z"}}
+{"_id":{"$oid":"589c475d3685292e2266713c"},"timeAndRegion":"(UTC-05:00) Indiana (East)","createdAt":{"$date":"2017-02-09T10:41:33.428Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.428Z"}}
+{"_id":{"$oid":"589c475d3685292e2266713d"},"timeAndRegion":"(UTC-04:30) Caracas","createdAt":{"$date":"2017-02-09T10:41:33.428Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.428Z"}}
+{"_id":{"$oid":"589c475d3685292e2266713e"},"timeAndRegion":"(UTC-04:00) Atlantic Time (Canada)","createdAt":{"$date":"2017-02-09T10:41:33.429Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.429Z"}}
+{"_id":{"$oid":"589c475d3685292e2266713f"},"timeAndRegion":"(UTC-04:00) Cuiaba","createdAt":{"$date":"2017-02-09T10:41:33.429Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.429Z"}}
+{"_id":{"$oid":"589c475d3685292e22667140"},"timeAndRegion":"(UTC-04:00) Santiago","createdAt":{"$date":"2017-02-09T10:41:33.429Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.429Z"}}
+{"_id":{"$oid":"589c475d3685292e22667141"},"timeAndRegion":"(UTC-04:00) Georgetown, La Paz, Manaus, San Juan","createdAt":{"$date":"2017-02-09T10:41:33.429Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.429Z"}}
+{"_id":{"$oid":"589c475d3685292e22667142"},"timeAndRegion":"(UTC-04:00) Asuncion","createdAt":{"$date":"2017-02-09T10:41:33.430Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.430Z"}}
+{"_id":{"$oid":"589c475d3685292e22667143"},"timeAndRegion":"(UTC-03:30) Newfoundland","createdAt":{"$date":"2017-02-09T10:41:33.430Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.430Z"}}
+{"_id":{"$oid":"589c475d3685292e22667144"},"timeAndRegion":"(UTC-03:00) Brasilia","createdAt":{"$date":"2017-02-09T10:41:33.430Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.430Z"}}
+{"_id":{"$oid":"589c475d3685292e22667145"},"timeAndRegion":"(UTC-03:00) Greenland","createdAt":{"$date":"2017-02-09T10:41:33.431Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.431Z"}}
+{"_id":{"$oid":"589c475d3685292e22667146"},"timeAndRegion":"(UTC-03:00) Montevideo","createdAt":{"$date":"2017-02-09T10:41:33.431Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.431Z"}}
+{"_id":{"$oid":"589c475d3685292e22667147"},"timeAndRegion":"(UTC-03:00) Cayenne, Fortaleza","createdAt":{"$date":"2017-02-09T10:41:33.431Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.431Z"}}
+{"_id":{"$oid":"589c475d3685292e22667148"},"timeAndRegion":"(UTC-03:00) Buenos Aires","createdAt":{"$date":"2017-02-09T10:41:33.432Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.432Z"}}
+{"_id":{"$oid":"589c475d3685292e22667149"},"timeAndRegion":"(UTC-02:00) Mid-Atlantic","createdAt":{"$date":"2017-02-09T10:41:33.432Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.432Z"}}
+{"_id":{"$oid":"589c475d3685292e2266714a"},"timeAndRegion":"(UTC-02:00) Coordinated Universal Time -02","createdAt":{"$date":"2017-02-09T10:41:33.432Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.432Z"}}
+{"_id":{"$oid":"589c475d3685292e2266714b"},"timeAndRegion":"(UTC-01:00) Azores","createdAt":{"$date":"2017-02-09T10:41:33.432Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.432Z"}}
+{"_id":{"$oid":"589c475d3685292e2266714c"},"timeAndRegion":"(UTC-01:00) Cabo Verde Is.","createdAt":{"$date":"2017-02-09T10:41:33.433Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.433Z"}}
+{"_id":{"$oid":"589c475d3685292e2266714d"},"timeAndRegion":"(UTC) Dublin, Edinburgh, Lisbon, London","createdAt":{"$date":"2017-02-09T10:41:33.433Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.433Z"}}
+{"_id":{"$oid":"589c475d3685292e2266714e"},"timeAndRegion":"(UTC) Monrovia, Reykjavik","createdAt":{"$date":"2017-02-09T10:41:33.433Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.433Z"}}
+{"_id":{"$oid":"589c475d3685292e2266714f"},"timeAndRegion":"(UTC) Casablanca","createdAt":{"$date":"2017-02-09T10:41:33.434Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.434Z"}}
+{"_id":{"$oid":"589c475d3685292e22667150"},"timeAndRegion":"(UTC) Coordinated Universal Time","createdAt":{"$date":"2017-02-09T10:41:33.434Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.434Z"}}
+{"_id":{"$oid":"589c475d3685292e22667151"},"timeAndRegion":"(UTC+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague","createdAt":{"$date":"2017-02-09T10:41:33.434Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.434Z"}}
+{"_id":{"$oid":"589c475d3685292e22667152"},"timeAndRegion":"(UTC+01:00) Sarajevo, Skopje, Warsaw, Zagreb","createdAt":{"$date":"2017-02-09T10:41:33.435Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.435Z"}}
+{"_id":{"$oid":"589c475d3685292e22667153"},"timeAndRegion":"(UTC+01:00) Brussels, Copenhagen, Madrid, Paris","createdAt":{"$date":"2017-02-09T10:41:33.435Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.435Z"}}
+{"_id":{"$oid":"589c475d3685292e22667154"},"timeAndRegion":"(UTC+01:00) West Central Africa","createdAt":{"$date":"2017-02-09T10:41:33.435Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.435Z"}}
+{"_id":{"$oid":"589c475d3685292e22667155"},"timeAndRegion":"(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna","createdAt":{"$date":"2017-02-09T10:41:33.435Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.435Z"}}
+{"_id":{"$oid":"589c475d3685292e22667156"},"timeAndRegion":"(UTC+01:00) Windhoek","createdAt":{"$date":"2017-02-09T10:41:33.436Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.436Z"}}
+{"_id":{"$oid":"589c475d3685292e22667157"},"timeAndRegion":"(UTC+02:00) Minsk","createdAt":{"$date":"2017-02-09T10:41:33.436Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.436Z"}}
+{"_id":{"$oid":"589c475d3685292e22667158"},"timeAndRegion":"(UTC+02:00) Cairo","createdAt":{"$date":"2017-02-09T10:41:33.437Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.437Z"}}
+{"_id":{"$oid":"589c475d3685292e22667159"},"timeAndRegion":"(UTC+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius","createdAt":{"$date":"2017-02-09T10:41:33.438Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.438Z"}}
+{"_id":{"$oid":"589c475d3685292e2266715a"},"timeAndRegion":"(UTC+02:00) Athens, Bucharest","createdAt":{"$date":"2017-02-09T10:41:33.439Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.439Z"}}
+{"_id":{"$oid":"589c475d3685292e2266715b"},"timeAndRegion":"(UTC+02:00) Jerusalem","createdAt":{"$date":"2017-02-09T10:41:33.439Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.439Z"}}
+{"_id":{"$oid":"589c475d3685292e2266715c"},"timeAndRegion":"(UTC+02:00) Amman","createdAt":{"$date":"2017-02-09T10:41:33.440Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.440Z"}}
+{"_id":{"$oid":"589c475d3685292e2266715d"},"timeAndRegion":"(UTC+02:00) Beirut","createdAt":{"$date":"2017-02-09T10:41:33.440Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.440Z"}}
+{"_id":{"$oid":"589c475d3685292e2266715e"},"timeAndRegion":"(UTC+02:00) Harare, Pretoria","createdAt":{"$date":"2017-02-09T10:41:33.441Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.441Z"}}
+{"_id":{"$oid":"589c475d3685292e2266715f"},"timeAndRegion":"(UTC+02:00) Damascus","createdAt":{"$date":"2017-02-09T10:41:33.441Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.441Z"}}
+{"_id":{"$oid":"589c475d3685292e22667160"},"timeAndRegion":"(UTC+02:00) Istanbul","createdAt":{"$date":"2017-02-09T10:41:33.441Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.441Z"}}
+{"_id":{"$oid":"589c475d3685292e22667161"},"timeAndRegion":"(UTC+03:00) Kuwait, Riyadh","createdAt":{"$date":"2017-02-09T10:41:33.442Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.442Z"}}
+{"_id":{"$oid":"589c475d3685292e22667162"},"timeAndRegion":"(UTC+03:00) Baghdad","createdAt":{"$date":"2017-02-09T10:41:33.444Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.444Z"}}
+{"_id":{"$oid":"589c475d3685292e22667163"},"timeAndRegion":"(UTC+03:00) Nairobi","createdAt":{"$date":"2017-02-09T10:41:33.445Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.445Z"}}
+{"_id":{"$oid":"589c475d3685292e22667164"},"timeAndRegion":"(UTC+03:00) Kaliningrad","createdAt":{"$date":"2017-02-09T10:41:33.445Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.445Z"}}
+{"_id":{"$oid":"589c475d3685292e22667165"},"timeAndRegion":"(UTC+03:30) Tehran","createdAt":{"$date":"2017-02-09T10:41:33.445Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.445Z"}}
+{"_id":{"$oid":"589c475d3685292e22667166"},"timeAndRegion":"(UTC+04:00) Moscow, St. Petersburg, Volgograd","createdAt":{"$date":"2017-02-09T10:41:33.445Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.445Z"}}
+{"_id":{"$oid":"589c475d3685292e22667167"},"timeAndRegion":"(UTC+04:00) Abu Dhabi, Muscat","createdAt":{"$date":"2017-02-09T10:41:33.446Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.446Z"}}
+{"_id":{"$oid":"589c475d3685292e22667168"},"timeAndRegion":"(UTC+04:00) Baku","createdAt":{"$date":"2017-02-09T10:41:33.446Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.446Z"}}
+{"_id":{"$oid":"589c475d3685292e22667169"},"timeAndRegion":"(UTC+04:00) Yerevan","createdAt":{"$date":"2017-02-09T10:41:33.446Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.446Z"}}
+{"_id":{"$oid":"589c475d3685292e2266716a"},"timeAndRegion":"(UTC+04:00) Tbilisi","createdAt":{"$date":"2017-02-09T10:41:33.447Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.447Z"}}
+{"_id":{"$oid":"589c475d3685292e2266716b"},"timeAndRegion":"(UTC+04:00) Port Louis","createdAt":{"$date":"2017-02-09T10:41:33.447Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.447Z"}}
+{"_id":{"$oid":"589c475d3685292e2266716c"},"timeAndRegion":"(UTC+04:30) Kabul","createdAt":{"$date":"2017-02-09T10:41:33.447Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.447Z"}}
+{"_id":{"$oid":"589c475d3685292e2266716d"},"timeAndRegion":"(UTC+05:00) Tashkent","createdAt":{"$date":"2017-02-09T10:41:33.447Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.447Z"}}
+{"_id":{"$oid":"589c475d3685292e2266716e"},"timeAndRegion":"(UTC+05:00) Islamabad, Karachi","createdAt":{"$date":"2017-02-09T10:41:33.448Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.448Z"}}
+{"_id":{"$oid":"589c475d3685292e2266716f"},"timeAndRegion":"(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi","createdAt":{"$date":"2017-02-09T10:41:33.448Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.448Z"}}
+{"_id":{"$oid":"589c475d3685292e22667170"},"timeAndRegion":"(UTC+05:30) Sri Jayawardenepura","createdAt":{"$date":"2017-02-09T10:41:33.448Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.448Z"}}
+{"_id":{"$oid":"589c475d3685292e22667171"},"timeAndRegion":"(UTC+05:45) Kathmandu","createdAt":{"$date":"2017-02-09T10:41:33.449Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.449Z"}}
+{"_id":{"$oid":"589c475d3685292e22667172"},"timeAndRegion":"(UTC+06:00) Ekaterinburg","createdAt":{"$date":"2017-02-09T10:41:33.449Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.449Z"}}
+{"_id":{"$oid":"589c475d3685292e22667173"},"timeAndRegion":"(UTC+06:00) Astana","createdAt":{"$date":"2017-02-09T10:41:33.449Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.449Z"}}
+{"_id":{"$oid":"589c475d3685292e22667174"},"timeAndRegion":"(UTC+06:00) Dhaka","createdAt":{"$date":"2017-02-09T10:41:33.449Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.449Z"}}
+{"_id":{"$oid":"589c475d3685292e22667175"},"timeAndRegion":"(UTC+06:30) Yangon (Rangoon)","createdAt":{"$date":"2017-02-09T10:41:33.450Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.450Z"}}
+{"_id":{"$oid":"589c475d3685292e22667176"},"timeAndRegion":"(UTC+07:00) Novosibirsk","createdAt":{"$date":"2017-02-09T10:41:33.450Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.450Z"}}
+{"_id":{"$oid":"589c475d3685292e22667177"},"timeAndRegion":"(UTC+07:00) Bangkok, Hanoi, Jakarta","createdAt":{"$date":"2017-02-09T10:41:33.450Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.450Z"}}
+{"_id":{"$oid":"589c475d3685292e22667178"},"timeAndRegion":"(UTC+08:00) Krasnoyarsk","createdAt":{"$date":"2017-02-09T10:41:33.451Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.451Z"}}
+{"_id":{"$oid":"589c475d3685292e22667179"},"timeAndRegion":"(UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi","createdAt":{"$date":"2017-02-09T10:41:33.452Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.452Z"}}
+{"_id":{"$oid":"589c475d3685292e2266717a"},"timeAndRegion":"(UTC+08:00) Kuala Lumpur, Singapore","createdAt":{"$date":"2017-02-09T10:41:33.452Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.452Z"}}
+{"_id":{"$oid":"589c475d3685292e2266717b"},"timeAndRegion":"(UTC+08:00) Taipei","createdAt":{"$date":"2017-02-09T10:41:33.452Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.452Z"}}
+{"_id":{"$oid":"589c475d3685292e2266717c"},"timeAndRegion":"(UTC+08:00) Perth","createdAt":{"$date":"2017-02-09T10:41:33.453Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.453Z"}}
+{"_id":{"$oid":"589c475d3685292e2266717d"},"timeAndRegion":"(UTC+08:00) Ulaanbaatar","createdAt":{"$date":"2017-02-09T10:41:33.453Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.453Z"}}
+{"_id":{"$oid":"589c475d3685292e2266717e"},"timeAndRegion":"(UTC+09:00) Irkutsk","createdAt":{"$date":"2017-02-09T10:41:33.453Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.453Z"}}
+{"_id":{"$oid":"589c475d3685292e2266717f"},"timeAndRegion":"(UTC+09:00) Seoul","createdAt":{"$date":"2017-02-09T10:41:33.453Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.453Z"}}
+{"_id":{"$oid":"589c475d3685292e22667180"},"timeAndRegion":"(UTC+09:00) Osaka, Sapporo, Tokyo","createdAt":{"$date":"2017-02-09T10:41:33.454Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.454Z"}}
+{"_id":{"$oid":"589c475d3685292e22667181"},"timeAndRegion":"(UTC+09:30) Darwin","createdAt":{"$date":"2017-02-09T10:41:33.454Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.454Z"}}
+{"_id":{"$oid":"589c475d3685292e22667182"},"timeAndRegion":"(UTC+09:30) Adelaide","createdAt":{"$date":"2017-02-09T10:41:33.454Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.454Z"}}
+{"_id":{"$oid":"589c475d3685292e22667183"},"timeAndRegion":"(UTC+10:00) Yakutsk","createdAt":{"$date":"2017-02-09T10:41:33.455Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.455Z"}}
+{"_id":{"$oid":"589c475d3685292e22667184"},"timeAndRegion":"(UTC+10:00) Canberra, Melbourne, Sydney","createdAt":{"$date":"2017-02-09T10:41:33.455Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.455Z"}}
+{"_id":{"$oid":"589c475d3685292e22667185"},"timeAndRegion":"(UTC+10:00) Brisbane","createdAt":{"$date":"2017-02-09T10:41:33.455Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.455Z"}}
+{"_id":{"$oid":"589c475d3685292e22667186"},"timeAndRegion":"(UTC+10:00) Hobart","createdAt":{"$date":"2017-02-09T10:41:33.456Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.456Z"}}
+{"_id":{"$oid":"589c475d3685292e22667187"},"timeAndRegion":"(UTC+10:00) Guam, Port Moresby","createdAt":{"$date":"2017-02-09T10:41:33.456Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.456Z"}}
+{"_id":{"$oid":"589c475d3685292e22667188"},"timeAndRegion":"(UTC+11:00) Vladivostok","createdAt":{"$date":"2017-02-09T10:41:33.456Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.456Z"}}
+{"_id":{"$oid":"589c475d3685292e22667189"},"timeAndRegion":"(UTC+11:00) Solomon Is., New Caledonia","createdAt":{"$date":"2017-02-09T10:41:33.456Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.456Z"}}
+{"_id":{"$oid":"589c475d3685292e2266718a"},"timeAndRegion":"(UTC+12:00) Magadan","createdAt":{"$date":"2017-02-09T10:41:33.457Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.457Z"}}
+{"_id":{"$oid":"589c475d3685292e2266718b"},"timeAndRegion":"(UTC+12:00) Fiji","createdAt":{"$date":"2017-02-09T10:41:33.457Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.457Z"}}
+{"_id":{"$oid":"589c475d3685292e2266718c"},"timeAndRegion":"(UTC+12:00) Auckland, Wellington","createdAt":{"$date":"2017-02-09T10:41:33.457Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.457Z"}}
+{"_id":{"$oid":"589c475d3685292e2266718d"},"timeAndRegion":"(UTC+12:00) Coordinated Universal Time +12","createdAt":{"$date":"2017-02-09T10:41:33.458Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.458Z"}}
+{"_id":{"$oid":"589c475d3685292e2266718e"},"timeAndRegion":"(UTC+13:00) Nuku'alofa","createdAt":{"$date":"2017-02-09T10:41:33.458Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.458Z"}}
+{"_id":{"$oid":"589c475d3685292e2266718f"},"timeAndRegion":"(UTC-11:00)Samoa","createdAt":{"$date":"2017-02-09T10:41:33.458Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.458Z"}}
