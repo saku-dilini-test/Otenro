@@ -175,7 +175,6 @@
         $scope.gridOptions2 = {
             enableRowHeaderSelection: false,
             exporterMenuCsv: true,
-            exporterMenuPdf:true,
             enableGridMenu: true,
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
@@ -212,7 +211,6 @@
         $scope.gridOptions3 = {
             enableRowHeaderSelection: false,
             exporterMenuCsv: true,
-            exporterMenuPdf:true,
             enableGridMenu: true,
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
@@ -251,7 +249,6 @@
         $scope.gridOptions4 = {
             enableRowHeaderSelection: false,
             exporterMenuCsv: true,
-            exporterMenuPdf:true,
             enableGridMenu: true,
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
@@ -482,7 +479,7 @@
                     return;
                 }
             }
-            $log.debug(storeSettings);
+            //$log.debug(storeSettings);
             if (!storeSettings){
                 toastr.error(' warning', "Please fill all required fields", {closeButton: true});
             }/*else if (!storeSettings.orderNumber) {
