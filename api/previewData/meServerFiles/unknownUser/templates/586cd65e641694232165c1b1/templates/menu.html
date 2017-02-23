@@ -37,11 +37,14 @@
         <ion-item menu-close ui-sref="app.aboutUs" ui-sref-opts="{reload: true, notify: true}">
           About Us
         </ion-item>
-        <ion-item menu-close ui-sref="app.login">
-          Login
-        </ion-item>
         <ion-item menu-close ui-sref="app.terms">
           Terms & Conditions
+        </ion-item>
+        <ion-item menu-close ui-sref="app.login" ng-if="!parentobj.userLog ">
+          Login
+        </ion-item>
+        <ion-item menu-close ui-sref="app.login"  ng-click="logout()" ng-if="parentobj.userLog ">
+          Logout
         </ion-item>
       </ion-list>
     </ion-content>

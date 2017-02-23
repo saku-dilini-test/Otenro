@@ -41,13 +41,13 @@
         <ion-item menu-close ui-sref="app.aboutUs">
           <i class="icon ion-ios-person-outline"></i> About Us
         </ion-item>
-        <ion-item menu-close ui-sref="app.login">
-          <i class="icon ion-log-in"></i> Login
-        </ion-item>
         <ion-item menu-close ui-sref="app.terms">
           <i class="icon ion-ios-information-outline"></i> Terms & Conditions
         </ion-item>
-        <ion-item menu-close ui-sref="app.logout">
+        <ion-item menu-close ui-sref="app.login" ng-if="!parentobj.userLog ">
+          <i class="icon ion-log-in"></i> Login
+        </ion-item>
+        <ion-item menu-close  ui-sref="app.login"  ng-click="logout()" ng-if="parentobj.userLog ">
           <i class="icon ion-log-out"></i> Logout
         </ion-item>
         <br />
