@@ -1,6 +1,6 @@
 // --- constants js ----
 (function() {
     angular.module('starter').constant('constants', {
-        SERVER_URL: 'http://dashboard.otenro.com'
+        SERVER_URL: 'https://dashboard.otenro.com'
     })
 })();
