@@ -260,6 +260,7 @@ angular.module('starter.controllers', [])
             $scope.appId = $rootScope.appId;
             $scope.appName = $rootScope.appName;
             $scope.userId = $rootScope.userId;
+            $scope.categoryName = $stateParams.categoryName;
 
 
             $scope.imageURL = constants.SERVER_URL
