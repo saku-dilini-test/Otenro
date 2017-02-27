@@ -59,8 +59,7 @@
                 $scope.selected = $scope.countryList.slice(0);
             }
         };
-
-
+        
         if ($scope.country){
             $scope.country.forEach(function(element) {
                 $scope.exists(element , $scope.selected);
