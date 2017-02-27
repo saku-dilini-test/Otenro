@@ -98,8 +98,8 @@
                     closeButton: true
                 });
             }
-             else if(typeof taxAmount == 'undefined'){
-                toastr.error('Please fill all fields', 'Warning', {
+             else if(typeof countryRestriction == 'undefined'){
+                toastr.error('Please Select a Country', 'Warning', {
                     closeButton: true
                 });
              }else{
