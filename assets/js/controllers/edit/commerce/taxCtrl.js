@@ -99,7 +99,11 @@
                     closeButton: true
                 });
             }
-            else{
+             else if(typeof taxAmount == 'undefined'){
+                toastr.error('Please fill all fields', 'Warning', {
+                    closeButton: true
+                });
+             }else{
                  taxInfo.countryRestriction = country;
                 taxInfo.appId = $rootScope.appId;
                 taxService.updateTaxInfo(taxInfo)
