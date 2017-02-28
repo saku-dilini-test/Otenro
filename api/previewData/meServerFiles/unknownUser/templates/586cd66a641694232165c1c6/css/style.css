@@ -96,10 +96,10 @@ ion-slides {
 .image-wrapper{
     width:100%;
     text-align:center;
+    height:250px;
+    padding-top: 5%;
 }
-.image-wrapper img{
-    width:100%;
-}
+
 
 .header-image img{
     width:100%;
@@ -412,4 +412,16 @@ ion-slides {
 }
 .menu-items .card{
     margin:20px 2%;
+}
+
+/* Remove controls from Firefox , Chrome, safari*/
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }

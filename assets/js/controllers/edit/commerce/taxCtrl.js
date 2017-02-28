@@ -5,10 +5,10 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("taxCtrl", [
-        '$scope','$mdDialog','toastr', 'taxService', '$rootScope','initialData',
+        '$scope','$mdDialog','toastr', 'taxService', '$rootScope','initialData','$filter',
         ShippingCtrl]);
 
-    function ShippingCtrl($scope, $mdDialog, toastr, taxService, $rootScope,initialData) {
+    function ShippingCtrl($scope, $mdDialog, toastr, taxService, $rootScope,initialData, $filter) {
 
             var appId = $rootScope.appId;
         // --/-- Configuration Data --/--
@@ -28,6 +28,7 @@
         $scope.IsSingleSelection = false;
 
         $scope.toggle = function (item, list) {
+
             var idx = list.indexOf(item);
             if (idx > -1) {
                 list.splice(idx, 1);
@@ -39,7 +40,15 @@
         };
 
         $scope.exists = function (item, list) {
-            return list.indexOf(item) > -1;
+           for(var i=0; i< list.length; i++)
+           {
+                if(list[i].countryCode == item.countryCode)
+                {
+                    return true;
+                }
+           }
+           return false;
+           //return list.indexOf(item) > -1;
         };
         //select all country
         $scope.isIndeterminate = function() {
@@ -59,8 +68,7 @@
                 $scope.selected = $scope.countryList.slice(0);
             }
         };
-
-
+        
         if ($scope.country){
             $scope.country.forEach(function(element) {
                 $scope.exists(element , $scope.selected);
@@ -90,6 +98,7 @@
         else{
             $scope.isDisabled = true;
             $scope.tax = $scope.initialData;
+            $scope.selected = $scope.tax.countryRestriction;
         }
 
         // --/-- add new tax collection --/--
@@ -99,7 +108,11 @@
                     closeButton: true
                 });
             }
-            else{
+             else if(typeof countryRestriction == 'undefined'){
+                toastr.error('Please Select a Country', 'Warning', {
+                    closeButton: true
+                });
+             }else{
                  taxInfo.countryRestriction = country;
                 taxInfo.appId = $rootScope.appId;
                 taxService.updateTaxInfo(taxInfo)

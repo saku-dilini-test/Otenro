@@ -18,6 +18,7 @@
 
         $scope.password = false;
         $scope.maxMenuCategory = 20;
+        $scope.maxAddressLength = 50;
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
         userProfileResource.getUserProfile().success(function (data) {
             $scope.userEdit = data;

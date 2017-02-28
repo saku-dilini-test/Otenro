@@ -3,6 +3,7 @@ angular.module('starter.controllers', [])
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicLoading,$ionicHistory,$rootScope,$http,constants,$log) {
 
         // show & hide menu icon button
+
        $scope.$on('$ionicView.beforeEnter', function (e, data) {
            if (data.enableBack) {
                $scope.$root.showMenuIcon = false;
@@ -264,6 +265,7 @@ angular.module('starter.controllers', [])
             $scope.appId = $rootScope.appId;
             $scope.appName = $rootScope.appName;
             $scope.userId = $rootScope.userId;
+            $scope.categoryName = $stateParams.categoryName;
 
 
             $scope.imageURL = constants.SERVER_URL
