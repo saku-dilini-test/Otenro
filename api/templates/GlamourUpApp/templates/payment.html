@@ -200,10 +200,11 @@
             </div>
             <form name="cashPaymentFrom" novalidate>
                 <div class="card-form list padding-right" ng-if="payment.type == 'cashOnPickup' || payment.type == 'cashOnDelivery'">
-                    <span class="col input-label">Confirm payment by cash on delivery</span>
+                    <span class="col input-label" ng-if="payment.type == 'cashOnDelivery'">Confirm payment by cash on delivery</span>
+                    <span class="col input-label" ng-if="payment.type == 'cashOnPickup'">Confirm payment by cash on pickup</span>
                     <div class="row cart-buttons">
                         <div class="col-33"></div>
-                        <button class="button button-raised  made-easy-button-setting" ng-click="confirmCashPayment()" >Confirm</button>
+                        <button class="button button-block button-small made-easy-button-setting" ng-click="confirmCashPayment()" >Confirm</button>
                     </div>
                 </div>
 
