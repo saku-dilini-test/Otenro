@@ -96,10 +96,10 @@ ion-slides {
 .image-wrapper{
     width:100%;
     text-align:center;
+   height:250px;
+    padding-top: 5%;
 }
-.image-wrapper img{
-    width:100%;
-}
+
 
 .header-image img{
     width:100%;
