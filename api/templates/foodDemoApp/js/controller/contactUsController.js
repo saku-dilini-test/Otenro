@@ -18,4 +18,8 @@ mobileApp.controller('contactUsCtrl', function($scope,$rootScope,$http,constants
         alert('warning', "Unable to get contact us info", err.message);
     });
     
+    
+    
+    
+    
 });

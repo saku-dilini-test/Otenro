@@ -2,11 +2,11 @@
     <ion-content class="padding item-details">
         <div class="card">
             <div class="image-wrapper">
-                <ion-slide-box show-pager="false" >
-                    <ion-slide ng-repeat="image in images">
-                        <img width="100%" src="{{imageURL}}/{{item.imageUrl}}" >
-                    </ion-slide>
-                </ion-slide-box>
+                <ion-slides show-pager="false" options="options" slider="data.slider">
+                    <ion-slide-page ng-repeat="image in images">
+                        <img width="100%" src="{{imageURL}}/{{image.img}}" >
+                    </ion-slide-page>
+                </ion-slides>
 
             </div>
 

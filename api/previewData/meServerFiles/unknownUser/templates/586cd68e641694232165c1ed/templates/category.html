@@ -3,7 +3,7 @@
 
         <ion-slides  options="options" slider="data.slider">
             <ion-slide-page ng-repeat="category in articleCategoryList | orderBy:'id'">
-                    <div class="card" ng-click="navigateArticles(category.id)">
+                <div class="card" ng-click="navigateArticles(category.id,category.name)">
                         <img width="100%" src="{{imageURL}}/{{category.imageUrl}}" />
                         <div class="content_slider">
                             <div class="made-easy-header-font">{{category.name}}</div>

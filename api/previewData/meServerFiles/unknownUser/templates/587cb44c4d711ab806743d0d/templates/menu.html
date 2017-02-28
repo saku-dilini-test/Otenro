@@ -43,10 +43,10 @@
                 <ion-item nav-clear menu-close href="#/tab/terms">
                     Terms
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/tab/login">
+                <ion-item nav-clear menu-close href="#/tab/login"  ng-if="!parentobj.userLog ">
                     login
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/tab/logout">
+                <ion-item nav-clear menu-close ui-sref="tab.login"  ng-click="logout()"  ng-if="parentobj.userLog ">
                     logout
                 </ion-item>
                 <br />

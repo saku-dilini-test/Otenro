@@ -52,7 +52,8 @@
     "satellizer": "https://github.com/sahat/satellizer.git#cf42ff11775991b572e0f9e94dfc6ccfeb37319c",
     "textAngular": "https://github.com/fraywing/textAngular.git#fa896a64f6deffaa67f94b4470be8d30bc8e9eeb",
     "tinycolor": "https://github.com/bgrins/TinyColor.git#80f7225029c428c0de0757f7d98ac15f497bee57",
-    "tweenlite": "https://github.com/jjhan1986/TweenLite.git#4b5eb64916f24a2169032feda89ac306ae0cbdf5"
+    "tweenlite": "https://github.com/jjhan1986/TweenLite.git#4b5eb64916f24a2169032feda89ac306ae0cbdf5",
+    "pdfmake": "^0.1.25"
   },
   "name": "meV2",
   "version": "0.0.0",

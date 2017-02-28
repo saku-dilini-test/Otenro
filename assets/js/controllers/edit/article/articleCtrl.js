@@ -100,9 +100,7 @@
             $scope.article = initialData;
             $scope.serverImg = initialData.imageUrl;
             $scope.mainImg = initialData.imageUrl;
-            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                           +"&appId="+item.id+"&"+new Date().getTime()+"/";
-            $scope.picFile = urlPath+'/img/article/'+initialData.imageUrl;
+            $scope.picFile = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/article/'+initialData.imageUrl;
             $scope.tmpImage[0] = SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article/"+initialData.imageUrl;
 

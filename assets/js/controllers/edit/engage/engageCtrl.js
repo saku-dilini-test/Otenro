@@ -38,6 +38,7 @@
             return engageService.showPushMessageSendDialog();
         };
 
+
         $scope.hide = function() {
             $mdDialog.hide();
         };
@@ -115,14 +116,16 @@
             .error(function(err){
                 $log.debug(err);
             });
-         //$log.debug(initialData);
+
+        
         if(initialData != null) {
             $scope.user = initialData;
               var  registeredUser= $scope.user.id;
             engageService.getUserOrders(registeredUser)
                 .success(function (data) {
-                    $log.debug(data);
+                 
                     $scope.orders = data;
+                    console.log(user);
                 })
                 .error(function (err) {
                     $log.debug(err);
