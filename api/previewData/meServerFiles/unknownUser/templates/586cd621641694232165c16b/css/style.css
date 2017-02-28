@@ -359,3 +359,14 @@ h2:first-child{
     margin-left: 20%;
 }
 
+/* Remove controls from Firefox , Chrome, safari*/
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

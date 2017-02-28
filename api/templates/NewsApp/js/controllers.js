@@ -16,6 +16,7 @@ angular.module('starter.controllers', [])
         };
 
         $scope.appName = $rootScope.appName;
+        //$scope.category.name = $rootScope.category.name;
 
         $scope.changeAppName = function () {
             $scope.appName = $rootScope.appName;
@@ -92,8 +93,8 @@ angular.module('starter.controllers', [])
 
         $scope.appName = $rootScope.appName;
 
-        $scope.navigateArticles = function(categoryId){
-             $state.go('app.home.categoryId',{categoryId:categoryId});
+        $scope.navigateArticles = function(categoryId,categoryName){
+             $state.go('app.home.categoryId',{categoryId:categoryId,categoryName:categoryName});
         }
 
         $scope.changeAppName = function () {
@@ -229,7 +230,6 @@ angular.module('starter.controllers', [])
     })
 
     .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading,initialData,readMadeEasy, $state) {
-
          $scope.options = {
             initialSlide: 0,
             direction: 'horizontal', //or vertical
@@ -287,6 +287,7 @@ angular.module('starter.controllers', [])
             $scope.appId = $rootScope.appId;
             $scope.appName = $rootScope.appName;
             $scope.userId = $rootScope.userId;
+            $scope.categoryName = $stateParams.categoryName;
 
 
             $scope.imageURL = constants.SERVER_URL
