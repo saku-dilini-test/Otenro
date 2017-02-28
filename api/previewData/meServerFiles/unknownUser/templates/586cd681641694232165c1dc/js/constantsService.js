@@ -11,7 +11,7 @@
         .constant('routesConfig', (function () {
             'use strict';
 
-            var siteURL = 'http://localhost:1337';
+            var siteURL = SERVER_URL: 'url';
 
             var rootRoutesConfig = {
                 wpMenuByAppId: siteURL + '/templates/getArticleCategoryByAppId?appId=',  // OK
@@ -89,7 +89,7 @@
 //        .module('invisionApp')
 //
 //        .constant('constants', {
-//            SERVER_URL: 'http://localhost:1337'
+//            SERVER_URL: 'http://dashboard.otenro.com'
 //        })
 //
 //})(window.angular);
