@@ -26,8 +26,8 @@
                     <td>{{salesAndPromotion.discount}} %</td>
                     <td ng-if="salesAndPromotion.dateFrom">{{salesAndPromotion.dateFrom | date : "dd.MM.y"}} to  {{salesAndPromotion.dateTo | date : "dd.MM.y"}}</td>
                     <td ng-if="!salesAndPromotion.dateFrom">-</td>
-                    <td><img width="25" src="../../../images/edit-icon.svg" ng-click="editShippingInfo(item)"></td>
-                    <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteShippingInfo($index,item)"></td>
+                    <td><img width="25" src="../../../images/edit-icon.svg" ng-click="editSalesAndPromotionsInfo(item)"></td>
+                    <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteSalesAndPromotionInfo($index,item)"></td>
                 </tr>
                 </tbody>
             </table>

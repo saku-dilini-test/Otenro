@@ -20,7 +20,22 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-            showPromotionsAndSalesAddNewDialog: function() {
+
+            showUpdateSalesandPromotionsOptionDialog: function (initialData) {
+                return $mdDialog.show({
+                    controller: 'SalesAndPromotionCtrl',
+                    templateUrl: 'user/edit/engage/promotionsAndSalesAddNew.html',
+                    clickOutsideToClose: true,
+                    locals: {
+                        initialData: initialData
+                    }
+                }).then(function (answer) {
+                }, function () {
+
+                });
+            },
+            
+          showPromotionsAndSalesAddNewDialog: function() {
                 return $mdDialog.show({
                     controller: 'SalesAndPromotionCtrl',
                     templateUrl: 'user/edit/engage/promotionsAndSalesAddNew.html',
@@ -50,6 +65,10 @@
             saveSalesAndPromotion: function(data){
                 return $http.post(SERVER_URL+ 'edit/saveSalesAndPromotion',data);
             },
+            deleteSalesAndPromotionInfo : function(data){
+                return $http.post(SERVER_URL+ 'edit/deleteSalesAndPromotionInfo',data);
+            },
+
             getListOfSalesAndPromotions  : function (appId) {
                 return $http.get(SERVER_URL+ 'edit/getListOfSalesAndPromotions?appId='+appId);
             }

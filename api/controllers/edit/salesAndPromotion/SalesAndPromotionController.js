@@ -40,6 +40,15 @@ module.exports = {
         });
     },
 
+    deleteSalesAndPromotionInfo : function(req,res){
+        var deleteQuery = {
+            id : req.body.id
+        };
+        SalesAndPromotion.destroy(deleteQuery).exec(function(err, result) {
+            if (err) return res.send(err);
+            return res.send(200,{message:'sales and Collections Collection successfully deleted'});
+        });
+    },
 
     getListOfSalesAndPromotions : function(req,res){
         var appId = req.param('appId');
