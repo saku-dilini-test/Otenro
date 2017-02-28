@@ -3,6 +3,7 @@ angular.module('starter.controllers', [])
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicLoading,$ionicHistory,$rootScope,$http,constants,$log) {
 
         // show & hide menu icon button
+
        $scope.$on('$ionicView.beforeEnter', function (e, data) {
            if (data.enableBack) {
                $scope.$root.showMenuIcon = false;
@@ -82,8 +83,8 @@ angular.module('starter.controllers', [])
 
         $scope.appName = $rootScope.appName;
 
-        $scope.navigateArticles = function(categoryId){
-             $state.go('app.home.categoryId',{categoryId:categoryId});
+        $scope.navigateArticles = function(categoryId,categoryName){
+             $state.go('app.home.categoryId',{categoryId:categoryId,categoryName:categoryName});
         }
 
         $scope.changeAppName = function () {
@@ -264,7 +265,7 @@ angular.module('starter.controllers', [])
             $scope.appId = $rootScope.appId;
             $scope.appName = $rootScope.appName;
             $scope.userId = $rootScope.userId;
-
+            $scope.categoryName = $stateParams.categoryName;
 
             $scope.imageURL = constants.SERVER_URL
                 +"/templates/viewImages?userId="
