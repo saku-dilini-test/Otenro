@@ -1,10 +1,10 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
-        '$scope', '$mdDialog', 'toastr', 'commerceService','productService', '$rootScope', '$auth', 'SERVER_URL','initialData',
+        '$scope', '$mdDialog', 'toastr', 'commerceService','productService','inventoryService', '$rootScope', '$auth', 'SERVER_URL','initialData',
         'mainMenuService','$log', ProductCtrl]);
 
-    function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService, $rootScope,  $auth, SERVER_URL,initialData,
+    function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService,inventoryService, $rootScope,  $auth, SERVER_URL,initialData,
     mainMenuService,$log) {
         var size, weight;
         var variants;
@@ -619,7 +619,7 @@
 
 
 
-                /**New category
+                /**
                  * @description
                  * pattern validation of size/weight
                  * @param selectedType
@@ -683,6 +683,10 @@
         $scope.answer = function () {
             $mdDialog.hide();
         };
+        $scope.back = function(){
+            return commerceService.showInventoryDialog();
+
+        };
 
 
         /**
@@ -697,8 +701,8 @@
             else if(index === undefined){
                $scope.product.checked = true;
             }
-            else if($scope.product.variants[index].sku === "" || 
-                    $scope.product.variants[index].sku === null || 
+            else if($scope.product.variants[index].sku === "" ||
+                    $scope.product.variants[index].sku === null ||
                     $scope.product.variants[index].sku === undefined ){
                     $scope.product.checked = false;
             }
@@ -712,12 +716,6 @@
             disableTabs(1,false,false,false ,false);
         }
 
-        // to identify if navigating to this page after creating a new category from add product
-        if(initialData.isNewItem){
-            disableTabs(1,false,false,true ,true);
-        }
-
-
 
         /**
          * @description
@@ -729,11 +727,8 @@
         }
 
         $scope.newcategory = function(){
-            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2, initialData.productItem);
-            /*.then(function(answer) {
-                //mainMenuService.showMainMenuDialog();
-                commerceService.showAddProductsDialog(initialData.productItem);
-            });*/
+            $log.debug("innnnnnnnnnnn");
+            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
         }
 
 
