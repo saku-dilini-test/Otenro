@@ -321,6 +321,10 @@
         };
         // Add menu category
         $scope.addNewCategory = function(file,menu){
+            if($scope.tmpImage[0] == null){
+                toastr.error('Please upload an image', 'Warning', {closeButton: true});
+                return;
+            }
             // If menu undefined || menu.name undefined or empty, pop up error message
             if((typeof menu == 'undefined') || (typeof menu.name == 'undefined') || menu.name == ''){
                 toastr.error('Please Fill the Name Field', 'Warning', {closeButton: true});
