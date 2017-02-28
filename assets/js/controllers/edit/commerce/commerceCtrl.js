@@ -118,7 +118,7 @@
                 templateUrl: 'user/edit/commerce/OrderDetailsView.html',
                 controller: function DialogController($scope, $mdDialog, $auth) {
                     $scope.oderData = row;
-                    $log.debug(row);
+                    // $log.debug(row);
 
                     //$scope.curruntDate = new Date();
                     //var sDate = $scope.oderData.entity.fulfilledDate;
