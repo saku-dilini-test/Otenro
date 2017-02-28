@@ -183,7 +183,6 @@
                         <fieldset class="text-right">
                             <md-button class="me-default-button" ng-click="backToView(0)">Cancel</md-button>
                             <md-button class="me-default-button"
-                                       ng-disabled="editProfile.$invalid"
                                        ng-click="editUserProfile(userEdit)">Save</md-button>
                         </fieldset>
                         </form>
@@ -219,11 +218,11 @@
                             <input class="input-shadow-border"
                                    type="text"
                                    name="address"
-                                   maxlength="{{maxMenuCategory}}"
+                                   maxlength="{{maxAddressLength}}"
                                    ng-model="billingEdit.address"
                                    required />
                             <br />
-                            <span class="information">Characters left: {{maxMenuCategory - billingEdit.address.length}}</span>
+                            <span class="information">Characters left: {{maxAddressLength - billingEdit.address.length}}</span>
                         </fieldset>
                         <fieldset class="col-2">
                             <label>Credit card number</label>

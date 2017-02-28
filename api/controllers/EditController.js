@@ -168,26 +168,28 @@ module.exports = {
                                 sails.log.info(err);
                             }
                             else{
-                                if(stripe.stripeEnable == true){
-                                    if(stripe.stripeKey){
-                                        fs.readFile(packageJsonFile, function (err, data) {
-                                            if(err){
-                                                sails.log.info(err);
-                                            }
-                                            else{
-                                                var json = JSON.parse(data);
-                                                jsonFile.cordovaPlugins[6].variables.API_KEY = stripe.stripeKey;
-                                                fs.writeFile(packageJsonFile, JSON.stringify(jsonFile,null, 2), function (err) {
-                                                    if(err){
-                                                        sails.log.info(err);
-                                                    }
-                                                    else{
-                                                        sails.log.info(JSON.stringify(jsonFile,null, 2));
-                                                        sails.log.info('writing to ' + packageJsonFile);
-                                                    }
-                                                })
-                                            }
-                                        })
+                                if(stripe !== undefined){
+                                    if(stripe.stripeEnable == true){
+                                        if(stripe.stripeKey){
+                                            fs.readFile(packageJsonFile, function (err, data) {
+                                                if(err){
+                                                    sails.log.info(err);
+                                                }
+                                                else{
+                                                    var json = JSON.parse(data);
+                                                    jsonFile.cordovaPlugins[6].variables.API_KEY = stripe.stripeKey;
+                                                    fs.writeFile(packageJsonFile, JSON.stringify(jsonFile,null, 2), function (err) {
+                                                        if(err){
+                                                            sails.log.info(err);
+                                                        }
+                                                        else{
+                                                            sails.log.info(JSON.stringify(jsonFile,null, 2));
+                                                            sails.log.info('writing to ' + packageJsonFile);
+                                                        }
+                                                    })
+                                                }
+                                            })
+                                        }
                                     }
                                 }
                             }
@@ -243,25 +245,27 @@ module.exports = {
                                         sails.log.info(err);
                                     }
                                     else{
-                                        if(stripe.stripeEnable == true){
-                                            if(stripe.stripeKey){
-                                                fs.readFile(packageJsonFile, function (err, data) {
-                                                    if(err){
-                                                        sails.log.info(err);
-                                                    }
-                                                    else{
-                                                        var json = JSON.parse(data);
-                                                        jsonFile.cordovaPlugins[6].variables.API_KEY = stripe.stripeKey;
-                                                        fs.writeFile(packageJsonFile, JSON.stringify(jsonFile,null, 2), function (err) {
-                                                            if(err){
-                                                                sails.log.info(err);
-                                                            }
-                                                            else{
-                                                                sails.log.info('writing to ' + packageJsonFile);
-                                                            }
-                                                        })
-                                                    }
-                                                })
+                                        if(stripe !== undefined){
+                                            if(stripe.stripeEnable == true){
+                                                if(stripe.stripeKey){
+                                                    fs.readFile(packageJsonFile, function (err, data) {
+                                                        if(err){
+                                                            sails.log.info(err);
+                                                        }
+                                                        else{
+                                                            var json = JSON.parse(data);
+                                                            jsonFile.cordovaPlugins[6].variables.API_KEY = stripe.stripeKey;
+                                                            fs.writeFile(packageJsonFile, JSON.stringify(jsonFile,null, 2), function (err) {
+                                                                if(err){
+                                                                    sails.log.info(err);
+                                                                }
+                                                                else{
+                                                                    sails.log.info('writing to ' + packageJsonFile);
+                                                                }
+                                                            })
+                                                        }
+                                                    })
+                                                }
                                             }
                                         }
                                     }

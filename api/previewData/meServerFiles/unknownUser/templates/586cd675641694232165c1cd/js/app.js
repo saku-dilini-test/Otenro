@@ -119,7 +119,7 @@ angular.module('starter', ['ionic','ionic.cloud','ionicLazyLoad','starter.servic
 
           .state('app.home.categoryId', {
             cache: false,
-            url: '/:categoryId',
+            url: '/:categoryId/:categoryName',
             views: {
               'tabContent': {
                 templateUrl: 'templates/article.html',
