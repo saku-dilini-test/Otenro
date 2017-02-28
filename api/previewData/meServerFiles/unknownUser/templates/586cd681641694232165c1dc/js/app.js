@@ -191,21 +191,30 @@ angular.module('invisionApp', ['ionic', 'ngCordova','ionic.cloud', 'srfSocialSha
 						}
 					}
 				})
+				 .state('app.policies', {
+                      url: '/policies',
+                      views: {
+                          'menuContent': {
+                              templateUrl: 'templates/policies.html',
+                              controller: 'AboutUsController as aboutUsCtrl'
+                          }
+                      }
+                  })
+                  .state('app.terms', {
+                      url: '/terms',
+                      views: {
+                          'menuContent': {
+                              templateUrl: 'templates/terms.html',
+                              controller: 'AboutUsController as aboutUsCtrl'
+                          }
+                      }
+                  })
 				.state('app.aboutus', {
 					cache: false,
 					url: '/aboutus',
 					views: {
 						'menuContent': {
 							templateUrl: 'templates/aboutUs.html',
-							controller: 'AboutUsController as aboutUsCtrl'
-						}
-					}
-				})
-				.state('app.terms', {
-					url: '/terms',
-					views: {
-						'menuContent': {
-							templateUrl: 'templates/termsAndCondition.html',
 							controller: 'AboutUsController as aboutUsCtrl'
 						}
 					}

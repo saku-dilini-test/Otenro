@@ -11,6 +11,7 @@
 			'$ionicLoading',
 			'$rootScope',
 			'$scope',
+			'$log',
 			function (pagesService, $stateParams, $ionicLoading,$rootScope,$scope,$log) {
 				'use strict';
 

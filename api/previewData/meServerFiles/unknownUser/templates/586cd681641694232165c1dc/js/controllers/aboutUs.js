@@ -11,7 +11,10 @@
 			'$ionicLoading',
 			'$rootScope',
 			'$scope',
-			function (pagesService, $stateParams, $ionicLoading,$rootScope,$scope,$log) {
+			'$log',
+			'$http',
+			'routesConfig',
+			function (pagesService, $stateParams, $ionicLoading,$rootScope,$scope,$log,$http,routesConfig) {
 				'use strict';
 
 				//var vm = this;
@@ -40,7 +43,29 @@
 					$log.debug(response.content);
 				}
 
+			  // get policies
+              $http.get(routesConfig.wpUrl.SERVER_URL() + "/templates/getPolicies?appId="+$rootScope.appId)
+                  .success(function (data) {
+                      $scope.privacyPolicy = data.privacyPolicy;
+                      $scope.returnPolicy = data.returnPolicy;
+                  },function (err) {
+                      $ionicPopup.alert({
+                          title: 'Policies Data loading error!',
+                          template: 'Please check your connection!'
+                      });
+                  });
+
+
+            $http.get( routesConfig.wpUrl.SERVER_URL() + '/templates/getTermsAndConditions?appId='+$scope.appId).success(function(data) {
+                $scope.terms = data.termsAndCondition;
+            }).error(function(err) {
+                console.log('warning', "Unable to get terms & condition info", err.message);
+            });
+
+            $scope.terms = "This is terms and condition of this application ";
+
 			}
-		]);
+		])
+		;
 
 })(window.angular);
