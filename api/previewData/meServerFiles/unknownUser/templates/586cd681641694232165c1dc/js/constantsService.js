@@ -11,7 +11,7 @@
         .constant('routesConfig', (function () {
             'use strict';
 
-            var siteURL = 'https://dashboard.otenro.com';
+            var siteURL = 'url';
 
             var rootRoutesConfig = {
                 wpMenuByAppId: siteURL + '/templates/getArticleCategoryByAppId?appId=',  // OK

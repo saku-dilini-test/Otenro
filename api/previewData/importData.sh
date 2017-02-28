@@ -2,7 +2,7 @@
 echo  'start....'
 
 MESERVER='/var/www/html/meServer/temp/';
-APPFILESERVER='/home/praveen/otenro/files/';
+APPFILESERVER='/home/onbit/Documents/appFileServer/';
 
 ENV='dev'   #this is for development
 #ENV='pro'  #this is for production
@@ -11,11 +11,14 @@ DB=''
 if [ $ENV == 'dev' ]
 then
 	DB='appBuilder'
+	serverUrl='http://localhost:1337'
 else
 	DB='otenro'
+	serverUrl='http://dashboard.otenro.com'
 fi
 
 echo $DB
+echo $serverUrl
 
 mongoimport --db $DB --collection accounttype --file dataFiles/accounttype.json
 mongoimport --db $DB --collection appinitialdata --file dataFiles/appinitialdata.json
@@ -65,5 +68,26 @@ echo $MESERVER
 
 cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
 cp -r ./meServerFiles/unknownUser $MESERVER
+
+if [ $ENV == 'dev' ]
+then
+    cd meServerFiles/unknownUser/templates/
+        for d in ./*;do
+            cd $d/js/
+            ls
+            sed -i 's\url\'http://localhost:1337'\' constantsService.js
+            sed -i 's\'http://dashboard.otenro.com'\'http://localhost:1337'\' constantsService.js
+            cd -
+        done
+else
+    cd meServerFiles/unknownUser/templates/
+        for d in ./*;do
+            cd $d/js/
+            ls
+            sed -i 's\url\'http://dashboard.otenro.com'\' constantsService.js
+            sed -i 's\'http://localhost:1337'\'http://dashboard.otenro.com'\' constantsService.js
+            cd -
+        done
+fi
 
 echo  'end'
