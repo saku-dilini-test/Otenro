@@ -922,7 +922,7 @@ table{
 }
 
 .me-simple-table span {
-    color: red;
+    color:gray;
     font-size: 10px;
 }
 
@@ -2339,4 +2339,9 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 
 .sales-promotion .margin{
     margin:18px 0;
+}
+
+.ocolor{
+    font-weight: bold;
+    color:gray;
 }

@@ -413,3 +413,15 @@ ion-slides {
 .menu-items .card{
     margin:20px 2%;
 }
+
+/* Remove controls from Firefox , Chrome, safari*/
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

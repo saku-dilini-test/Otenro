@@ -5,8 +5,8 @@
 		.directive('oblLogin',function(){
 			return {
 				templateUrl:'js/directives/obl-Login/obl-Login.html',
-				controller: ['$scope','$http','$state','$stateParams','$ionicPopup','constants','$auth',
-					function($scope,$http,$state,$stateParams,$ionicPopup,constants,$auth) {
+				controller: ['$scope','$http','$state','$stateParams','$ionicPopup','constants','$auth','$rootScope',
+					function($scope,$http,$state,$stateParams,$ionicPopup,constants,$auth,$rootScope) {
 						$scope.data = {};
 
 						$scope.login = function() {
@@ -32,6 +32,8 @@
                                             "registeredUser": res.data.user.sub
 										};
 										localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
+                                        $rootScope.isUserLoggedIn.check = true;
+                                        $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
 										if($stateParams.item == 'delivery'){
 											$state.go('app.cart');
 										}else{
