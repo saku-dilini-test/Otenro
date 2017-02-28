@@ -73,7 +73,7 @@
             };
 
             welcomeTemplatesResource.deletePreviewTemp(appParams).then(function(data) {
-                $state.go('anon.welcome');
+                $state.go('user.templates');
             });
         };
         $scope.successDeleteFile = function(userId,appId) {
