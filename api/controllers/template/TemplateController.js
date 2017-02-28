@@ -385,7 +385,10 @@ module.exports = {
             amount = req.body.amount;
 
         IPGDetails.findOne({appId:req.body.appId}).exec(function(err, authorizeDetails){
-            if (err) return sails.log.info(err);
+            if (err){
+                TansactionLogger.info("appId " +req.body.appId+ ","+ "error " + err );
+                return sails.log.info(err);
+            }
             var apiLoginId = authorizeDetails.apiLoginId,
                 transactionKey = authorizeDetails.transactionKey;
 
@@ -417,42 +420,48 @@ module.exports = {
 
             		var apiResponse = ctrl.getResponse();
             		var response = new ApiContracts.CreateTransactionResponse(apiResponse);
-
+                    TansactionLogger.info("appId " +req.body.appId+ ","+ "response " + JSON.stringify(response) );
             		//pretty print response
             		//sails.log.info(JSON.stringify(response, null, 2));
 
             		if(response != null){
             			if(response.getMessages().getResultCode() == ApiContracts.MessageTypeEnum.OK){
             				if(response.getTransactionResponse().getMessages() != null){
-            				    sails.log.info('Successfully created transaction with Transaction ID: ' + response.getTransactionResponse().getTransId());
+                                TansactionLogger.info("appId " +req.body.appId+ ","+ "success " + response.getTransactionResponse().getTransId() );
             				    res.send({data:'Successfully created transaction with Transaction ID: ' + response.getTransactionResponse().getTransId(),status:'ok'});
             				}
             				else {
-            					sails.log.info('Failed Transaction.');
+                                TansactionLogger.info("appId " +req.body.appId+ ","+ "error " + "not success" );
             					if(response.getTransactionResponse().getErrors() != null){
+                                    TansactionLogger.info("appId " +req.body.appId+ ","+ "error " + response.getTransactionResponse().getErrors() );
             					    res.send({data: 'Failed Transaction',status:'error'});
+
             					}
             				}
             			}
             			else {
-            				sails.log.info('Failed Transaction.');
+            			
+                            TansactionLogger.info("appId " +req.body.appId+ ","+ "error " + "Failed Transaction." );
             				if(response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null){
+                                TansactionLogger.info("appId " +req.body.appId+ ","+ "error " + response.getTransactionResponse().getErrors() );
             				    res.send({data:'Failed Transaction',status:'error'});
 
             				}
             				else {
+                                TansactionLogger.info("appId " +req.body.appId+ ","+ "Invalid Data ");
             					res.send({data:'Invalid Data',status:'error'});
             				}
             			}
             		}
             		else {
+                        TansactionLogger.info("appId " +req.body.appId+ ","+ "Null Response.");
             			res.send({data:'Null Response.', status: 'error'});
             		}
 
             	});
             	if (require.main === module) {
                 	authorizeCreditCard(function(){
-                		sails.log.info('authorizeCreditCard call complete.');
+                        TansactionLogger.info("appId " +req.body.appId+ ","+ "authorizeCreditCard call complete.");
                 	});
                 }
         });

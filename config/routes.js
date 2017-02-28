@@ -333,6 +333,6 @@ module.exports.routes = {
          */  
     'POST /edit/saveSalesAndPromotion': 'edit/salesAndPromotion/SalesAndPromotionController.saveSalesAndPromotion',
     'GET /edit/getListOfSalesAndPromotions': 'edit/salesAndPromotion/SalesAndPromotionController.getListOfSalesAndPromotions',
-        
 
+    'POST /edit/transcationLog': 'TranscationLog.saveSalesAndPromotion',
 };
