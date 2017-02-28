@@ -52,7 +52,7 @@
 
             <div class="row ">
                 <button class="col margin button button-block button-small made-easy-button-setting"  ng-click="$ionicGoBack()">Cancel</button>
-                <button class="col margin button button-block button-small made-easy-button-setting" ng-click="pay(promotionCode)" >Pay</button>
+                <button ng-disabled="overWeight || underWeight" class="col margin button button-block button-small made-easy-button-setting" ng-click="pay(promotionCode)" >Pay</button>
             </div>
         </div>
     </ion-content>
