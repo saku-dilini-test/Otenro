@@ -3,9 +3,18 @@ angular.module('starter.controllers', [])
 .controller('AppCtrl', function($scope, $ionicModal, $timeout,$rootScope, $ionicSideMenuDelegate) {
 
     $rootScope.cart = {cartItems:[],cartSize:0,totalPrice:0};
+    $rootScope.isUserLoggedIn = {check:false};
+
+    if(localStorage.getItem('appLocalStorageUser') == null){
+            $rootScope.isUserLoggedIn.check = false;
+    }else{
+            $rootScope.isUserLoggedIn.check = true;
+    }
+
 
     $scope.parentobj = {};
     $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+    $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
 
      function toggleLeft() {
         $ionicSideMenuDelegate.toggleLeft();
@@ -19,6 +28,14 @@ angular.module('starter.controllers', [])
       $scope.$on('$stateChangeStart', function(){
           $scope.showMenu = true;
       });
+
+
+        $scope.logout = function(){
+            localStorage.removeItem('appLocalStorageUser');
+            $rootScope.isUserLoggedIn.check = false;
+            $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
+             $ionicSideMenuDelegate.toggleLeft();
+        }
 
 })
 

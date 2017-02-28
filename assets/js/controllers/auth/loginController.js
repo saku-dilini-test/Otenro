@@ -34,7 +34,7 @@
       });
     };
     $scope.cancel = function () {
-      $state.go('user.welcome');
+      $state.go('anon.welcome');
     };
 
     $scope.authenticate = function(provider) {

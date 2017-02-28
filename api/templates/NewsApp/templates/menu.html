@@ -23,7 +23,7 @@
         <ion-item  menu-close href="#/app/category">
           Home
         </ion-item>
-        <ion-item ng-repeat="category in articleCategoryList"  menu-close href="#/app/home/{{category.id}}">
+        <ion-item ng-repeat="category in articleCategoryList"  menu-close href="#/app/home/{{category.id}}/{{category.name}}">
           {{category.name}}
         </ion-item>
         <ion-item menu-close href="#/app/aboutus">
