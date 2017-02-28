@@ -116,6 +116,24 @@ angular.module('starter', ['ionic','ionic.cloud','ionicLazyLoad','starter.servic
               }
             }
           })
+           .state('app.policies', {
+                url: '/policies',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/policies.html',
+                        controller: 'policiesCtrl'
+                    }
+                }
+            })
+            .state('app.terms', {
+                url: '/terms',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/terms.html',
+                        controller: 'termsCtrl'
+                    }
+                }
+            })
 
           .state('app.home.categoryId', {
             cache: false,

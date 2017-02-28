@@ -79,7 +79,7 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('HomeCtrl', function ($scope, $http, constants, $rootScope, $timeout, $state, $ionicLoading, $window, $log) {
+    .controller('HomeCtrl', function ($scope, $http, constants, $rootScope, $timeout, $state, $ionicLoading, $window, $log,readMadeEasy) {
 
         $scope.appName = $rootScope.appName;
 
@@ -218,6 +218,33 @@ angular.module('starter.controllers', [])
 
 
     })
+    .controller('policiesCtrl', function ($scope, $http, $rootScope, $ionicPopup, constants) {
+
+                // get policies
+                $http.get(constants.SERVER_URL + "/templates/getPolicies?appId="+$rootScope.appId)
+                    .success(function (data) {
+                        $scope.privacyPolicy = data.privacyPolicy;
+                        $scope.returnPolicy = data.returnPolicy;
+                    },function (err) {
+                        $ionicPopup.alert({
+                            title: 'Policies Data loading error!',
+                            template: 'Please check your connection!'
+                        });
+                    });
+    })
+    .controller('termsCtrl', function($scope,$rootScope,$http,constants) {
+
+        $scope.appId = $rootScope.appId;
+
+        $http.get( constants.SERVER_URL + '/templates/getTermsAndConditions?appId='+$scope.appId).success(function(data) {
+            $scope.terms = data.termsAndCondition;
+        }).error(function(err) {
+            alert('warning', "Unable to get terms & condition info", err.message);
+        });
+
+        $scope.terms = "This is terms and condition of this application ";
+    })
+
 
     .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading,initialData,readMadeEasy) {
 

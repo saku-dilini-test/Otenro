@@ -148,6 +148,24 @@ angular.module('starter', ['ionic','ionic.cloud','starter.services','starter.con
               }
             }
           })
+        .state('app.policies', {
+                url: '/policies',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/policies.html',
+                        controller: 'policiesCtrl'
+                    }
+                }
+        })
+        .state('app.terms', {
+            url: '/terms',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/terms.html',
+                    controller: 'termsCtrl'
+                }
+            }
+        })
           .state('app.contactus', {
             cache: false,
             url: '/contactus',
