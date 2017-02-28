@@ -68,8 +68,7 @@
                 $scope.selected = $scope.countryList.slice(0);
             }
         };
-
-
+        
         if ($scope.country){
             $scope.country.forEach(function(element) {
                 $scope.exists(element , $scope.selected);
@@ -109,7 +108,11 @@
                     closeButton: true
                 });
             }
-            else{
+             else if(typeof countryRestriction == 'undefined'){
+                toastr.error('Please Select a Country', 'Warning', {
+                    closeButton: true
+                });
+             }else{
                  taxInfo.countryRestriction = country;
                 taxInfo.appId = $rootScope.appId;
                 taxService.updateTaxInfo(taxInfo)
