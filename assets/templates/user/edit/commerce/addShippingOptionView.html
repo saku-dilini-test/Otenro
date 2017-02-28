@@ -186,12 +186,18 @@
                         </fieldset>
                         <div class="clearfix">
                             <fieldset class="col-2">
-                                <label>Number</label>
+                                <label>Address Line 1</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input class="input-shadow-border"  type="text" ng-maxlength="10" name="number" required ng-model="pickup.number"  />
+                                <input class="input-shadow-border"  type="text"  name="number" required ng-model="pickup.number"  />
+                                <div ng-hide="pickup.number.length > maxPickup">
+                                    <span class="information">Characters left: {{maxPickup - pickup.number.length}}</span>
+                                </div>
+                                <div  ng-show="pickup.number.length > maxPickup">
+                                    <span class="information">Characters left: </span> <span class="information"> {{maxPickup - pickup.number.length}} </span>
+                                </div>
                             </fieldset>
                             <fieldset class="col-1 reset-margin-right">
-                                <label>street Address</label>
+                                <label>Address Line 2</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
                                 <input class="input-shadow-border"  type="text" name="streetAddress" required ng-model="pickup.streetAddress" />
                                 <div ng-hide="pickup.streetAddress.length > maxPickup">
