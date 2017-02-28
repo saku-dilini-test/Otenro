@@ -2,13 +2,21 @@
  * Created by amila on 4/5/16.
  */
 
-mobileApp.controller('appCtrl', function($scope, $ionicModal, $timeout,$rootScope) {
+mobileApp.controller('appCtrl', function($scope, $ionicModal, $timeout,$rootScope,$ionicSideMenuDelegate) {
 
     $rootScope.cart = {cartItems:[],cartSize:0,totalPrice:0};
+    $rootScope.isUserLoggedIn = {check:false};
+
+    if(localStorage.getItem('appLocalStorageUser') == null){
+            $rootScope.isUserLoggedIn.check = false;
+    }else{
+            $rootScope.isUserLoggedIn.check = true;
+    }
+
 
     $scope.parentobj = {};
     $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-
+    $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
     // show & hide menu icon button
     $scope.showMenu = true;
     $scope.$on('hideMenu', function(){
@@ -17,5 +25,15 @@ mobileApp.controller('appCtrl', function($scope, $ionicModal, $timeout,$rootScop
     $scope.$on('$stateChangeStart', function(){
         $scope.showMenu = true;
     });
+
+
+    $scope.logout = function(){
+        localStorage.removeItem('appLocalStorageUser');
+        $rootScope.isUserLoggedIn.check = false;
+        $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
+         $ionicSideMenuDelegate.toggleLeft();
+    }
+
+
 
 });
