@@ -330,18 +330,6 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                         }
                     })
 
-
-            .state('tab.category', {
-                        cache: false,
-                        url: '/category',
-                        views: {
-                            'menuContent': {
-                                templateUrl: 'templates/category.html',
-                                controller: 'categoryCtrl'
-                            }
-                        }
-                    })
-
             .state('tab.pickupDetails', {
                 cache: false,
                 url: '/pickupDetails',

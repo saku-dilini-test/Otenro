@@ -43,6 +43,8 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
                         "appId":data.appId
                     };
                     localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
+                    $rootScope.isUserLoggedIn.check = true;
+                    $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
                     $log.debug(localStorage.getItem('appLocalStorageUser'));
                     if($stateParams.item == 'delivery'){
                         $state.go('app.cart');
