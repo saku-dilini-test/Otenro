@@ -19,6 +19,7 @@
         $scope.size = 0;
         $scope.selected = [];
         $scope.countryList = [];
+        //$scope.isDisabled = true;
 
 
         // --/-- enable & disable tabs --/--
@@ -314,6 +315,7 @@
 
         $scope.exists = function (item, list) {
              return list.indexOf(item) > -1;
+             $scope.isDisabled = true;
         };
 
 

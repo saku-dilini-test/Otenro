@@ -340,7 +340,7 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="backToShippingView()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateCountryRestriction(data,selected,flatRates)">save</md-button>
+                            <md-button class="me-default-button" ng-disabled="selected.length === 0" ng-click="updateCountryRestriction(data,selected,flatRates)">save</md-button>
                         </div>
                     </div>
                 </md-tab-body>
