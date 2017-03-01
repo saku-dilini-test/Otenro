@@ -24,8 +24,8 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
             zip: $scope.data.zip,
             country: $scope.data.country,
             phone: $scope.data.phone,
-            "appId":data.appId,
-            "registeredUser": res.data.user.sub
+            appId:$rootScope.appId
+
         };
         $http.post(constants.SERVER_URL+"/templatesAuth/register",data)
             .then(function(res){
@@ -40,7 +40,8 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
                         "city": data.city,
                         "zip": data.zip,
                         "type": 'internal',
-                        "appId":data.appId
+                        "appId":data.appId,
+                        "registeredUser": res.data.user.sub
                     };
                     localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
                     $log.debug(localStorage.getItem('appLocalStorageUser'));

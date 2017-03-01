@@ -206,7 +206,6 @@
                         }
                     },
                         this.cancel = function click(){
-                            alert("cancel");
                             $mdDialog.hide();
                             return mainMenuService.showMainMenuDialog();
                         }
