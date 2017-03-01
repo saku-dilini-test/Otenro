@@ -21,11 +21,12 @@ module.exports = {
 
     /** ****** Custom Config ****** **/
     // HOST URL
-    HOST_URL : 'http://192.168.8.203',
+    HOST_URL : 'http://192.168.8.56:1337',
     // ME SERVER Config
-    ME_SERVER : '/home/onbitlabs/meServer/temp/',
-    ME_SERVER_PORT : 8080,
+    ME_SERVER_URL : 'http://192.168.8.56:80/temp/',
+    ME_SERVER : '/home/admin/web/otenro.meserver.local.com/public_html/temp/',
+    ME_SERVER_PORT : 80,
     // APP FILE SERVER Config
-    APP_FILE_SERVER : '/home/onbitlabs/appFileServer/',
+    APP_FILE_SERVER : '/home/otenro/appFileServer/',
     CLIENT_SECRET : 'stage44f4f3be572ec33711a40a5b8b4789'
 };
