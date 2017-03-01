@@ -3,7 +3,7 @@
  */
 (function() {
     angular.module('foodDemoApp').constant('constants', {
-        SERVER_URL: 'url'
+        SERVER_URL: 'serverUrl'
     })
 })();
 

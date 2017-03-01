@@ -4,8 +4,8 @@ echo  'start....'
 MESERVER='/var/www/html/meServer/temp/';
 APPFILESERVER='/home/onbit/Documents/appFileServer/';
 
-ENV='dev'   #this is for development
-#ENV='pro'  #this is for production
+#ENV='dev'   #this is for development
+ENV='pro'  #this is for production
 DB=''
 
 if [ $ENV == 'dev' ]
@@ -69,25 +69,12 @@ echo $MESERVER
 cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
 cp -r ./meServerFiles/unknownUser $MESERVER
 
-if [ $ENV == 'dev' ]
-then
-    cd meServerFiles/unknownUser/templates/
-        for d in ./*;do
-            cd $d/js/
-            ls
-            sed -i 's\url\'http://localhost:1337'\' constantsService.js
-            sed -i 's\'http://dashboard.otenro.com'\'http://localhost:1337'\' constantsService.js
-            cd -
-        done
-else
-    cd meServerFiles/unknownUser/templates/
-        for d in ./*;do
-            cd $d/js/
-            ls
-            sed -i 's\url\'http://dashboard.otenro.com'\' constantsService.js
-            sed -i 's\'http://localhost:1337'\'http://dashboard.otenro.com'\' constantsService.js
-            cd -
-        done
-fi
+cd meServerFiles/unknownUser/templates/
+   for d in ./*;do
+       cd $d/js/
+       ls
+       sed -i "s@serverUrl@$serverUrl@" constantsService.js
+       cd -
+    done
 
 echo  'end'
