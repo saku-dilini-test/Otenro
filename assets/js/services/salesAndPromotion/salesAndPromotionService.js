@@ -68,7 +68,7 @@
             deleteSalesAndPromotionInfo : function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteSalesAndPromotionInfo',data);
             },
-
+            
             getListOfSalesAndPromotions  : function (appId) {
                 return $http.get(SERVER_URL+ 'edit/getListOfSalesAndPromotions?appId='+appId);
             }

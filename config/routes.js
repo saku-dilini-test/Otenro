@@ -332,6 +332,7 @@ module.exports.routes = {
          * salesAndPromotionsController
          */  
     'POST /edit/saveSalesAndPromotion': 'edit/salesAndPromotion/SalesAndPromotionController.saveSalesAndPromotion',
+    'POST /edit/deleteSalesAndPromotionInfo': 'edit/salesAndPromotion/SalesAndPromotionController.deleteSalesAndPromotionInfo',
     'GET /edit/getListOfSalesAndPromotions': 'edit/salesAndPromotion/SalesAndPromotionController.getListOfSalesAndPromotions',
         
 

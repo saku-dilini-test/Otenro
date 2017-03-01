@@ -3,7 +3,7 @@
         <md-tabs  md-no-ink-bar ="false" md-no-ink="true" md-no-bar  md-center-tabs="false"  md-autoselect="false"
                   md-dynamic-height="true" >
             <!--Choosing a Sales & Promotion Type -->
-            <md-tab >
+            <md-tab  ng-disabled="addSalesOptionParams.firstLocked" >
                 <md-tab-label>Sales & Promotion Type</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -15,7 +15,7 @@
                             <md-list flex>
                                 <md-list-item class="md-3-line" >
                                     <div class="md-list-item-text" layout="column">
-                                       <a ng-click="moveToFlatRateOption()">
+                                       <a ng-click="showStoreWide()">
                                             <h1>Store Wide</h1>
                                             <label>Store Wide</label>
                                         </a>
@@ -23,7 +23,7 @@
                                 </md-list-item>
                                 <md-list-item class="md-3-line"  >
                                     <div class="md-list-item-text" layout="column">
-                                        <a ng-click="moveToFlatRateOption()">
+                                        <a ng-click="showOrderValue()">
                                             <h1>Minimum Order Value</h1>
                                             <label>Minimum Order Value</label>
                                         </a>
@@ -31,7 +31,7 @@
                                 </md-list-item>
                                 <md-list-item class="md-3-line" >
                                     <div class="md-list-item-text" layout="column">
-                                        <a ng-click="moveToFlatRateOption()">
+                                        <a ng-click="showCategoryWide()">
                                             <h1>Category Wide</h1>
                                             <label>Category Wide</label>
                                         </a>
@@ -39,7 +39,7 @@
                                 </md-list-item>
                                 <md-list-item class="md-3-line" >
                                     <div class="md-list-item-text" layout="column">
-                                        <a ng-click="moveToFlatRateOption()">
+                                        <a ng-click="showSingleProduct()">
                                             <h1>Single Product</h1>
                                             <label>Single Product</label>
                                         </a>
@@ -58,7 +58,7 @@
             </md-tab>
 
             <!-- Store Wide content -->
-             <md-tab >
+             <md-tab ng-disabled="addSalesOptionParams.secondLocked">
                 <md-tab-label>Store Wide</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -177,8 +177,8 @@
                 </md-tab-body>
             </md-tab>
 
-             Minimum Order Value Content
-            <md-tab >
+             <!--Minimum Order Value Content-->
+            <md-tab ng-disabled="addSalesOptionParams.thirdLocked">
                 <md-tab-label>Minimum Order Value</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -300,7 +300,8 @@
                 </md-tab-body>
             </md-tab>
 
-            <md-tab >
+            <!-- Category wide Content-->
+            <md-tab ng-disabled="addSalesOptionParams.fourthLocked">
                 <md-tab-label>Category Wide</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
@@ -424,7 +425,7 @@
             </md-tab>
 
                         <!-- Single Product Content-->
-           <md-tab >
+           <md-tab ng-disabled="addSalesOptionParams.fivethLocked">
                 <md-tab-label>Single Product</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
