@@ -130,12 +130,14 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
             $scope.modal.hide();
+            $scope.selectedVariant.buyQuantity='';
         }
-    };
-    $scope.clear = function(){
-        $scope.selectedVariant.buyQuantity='';
 
-    }
+    };
+
+
+
+
     //get Sales and Promotions
     $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {
         $scope.salesandpromotion = data[0];
