@@ -39,11 +39,13 @@ mobileApp.controller('RegisterCtrl', function($scope,$rootScope,$http,$ionicPopu
                 "registeredUser": res.data.user.sub
             };
             		localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
+                    $rootScope.isUserLoggedIn.check = true;
+                    $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
             		$log.debug(localStorage.getItem('appLocalStorageUser'));
                 if($stateParams.item == 'delivery'){
                     $state.go('tab.cart');
                 }else{
-                    $state.go('tab.category');
+                    $state.go('tab.menu');
                 }
             },
             function(err){
@@ -60,7 +62,7 @@ mobileApp.controller('RegisterCtrl', function($scope,$rootScope,$http,$ionicPopu
                 if($stateParams.item == 'delivery'){
                     $state.go('tab.cart');
                 }else{
-                    $state.go('tab.category');
+                    $state.go('tab.menu');
                 }
             }else{
                 alert(provider+' Login error');
