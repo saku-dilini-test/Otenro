@@ -9,7 +9,6 @@ mobileApp.controller('appCtrl', function($scope, $ionicModal, $timeout,$rootScop
 
     if(localStorage.getItem('appLocalStorageUser') == null){
             $rootScope.isUserLoggedIn.check = false;
-            $state.go('app.login')
     }else{
             $rootScope.isUserLoggedIn.check = true;
     }
