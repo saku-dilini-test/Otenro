@@ -16,9 +16,9 @@
             <fieldset>
                 <label>Title</label>
                 <input class="input-shadow-border" type="text" name="title" ng-pattern="/^[a-zA-Z0-9_ ]*$/"
-                       ng-model="article.title" required />
+                       ng-model="article.title" max-length="maxArticleTitle" required />
                 <br />
-                <span ng-show="articleForm.title.$error.pattern">No symbols</span>
+                <span ng-show="articleForm.title.$error.pattern" class="error">No symbols</span>
                 <div ng-hide="article.title.length > maxArticleTitle">
                     <span class="information">Characters left: {{maxArticleTitle - article.title.length}}</span>
                 </div>
@@ -26,7 +26,7 @@
                     <span class="information">Characters left: {{maxArticleTitle - article.title.length}} </span>
                 </div>
             </fieldset>
-            <span ng-show="articleForm.title.$error.maxlength">Too lengthy</span></td>
+            <span ng-show="articleForm.title.$error.maxlength" class="error">Too lengthy</span></td>
             <fieldset>
                <!-- <div class="md-dialog-header">
                     <h1>Upload Image</h1>
