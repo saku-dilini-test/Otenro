@@ -10,8 +10,8 @@
                     <input class="input-shadow-border" type="text" name="name" id="input-title" ng-model="menu.name" ng-pattern="/^[a-zA-Z0-9_ ]*$/"
                            maxlength="{{maxMenuCategory}}" required/>
                     <br>
-                    <span class="information" ng-show="catForm.name.$error.pattern">No symbols</span>
-                    <br>
+                    <span class="error" ng-show="catForm.name.$error.pattern">No symbols</span>
+
                     <span class="information">Characters left: {{maxMenuCategory - menu.name.length}}</span>
                 </fieldset>
                 <br>

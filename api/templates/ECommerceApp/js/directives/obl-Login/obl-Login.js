@@ -37,7 +37,7 @@
 										if($stateParams.item == 'delivery'){
 											$state.go('tab.cart');
 										}else{
-											$state.go('tab.category');
+											$state.go('tab.menu');
 										}
 									},
 									function(err){
@@ -54,7 +54,7 @@
 								if($stateParams.item == 'delivery'){
                                     $state.go('tab.cart');
                                 }else{
-                                    $state.go('tab.category');
+                                    $state.go('tab.menu');
                                 }
 							}else{
 								alert(provider+' Login error');
