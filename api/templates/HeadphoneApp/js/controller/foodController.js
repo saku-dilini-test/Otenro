@@ -122,6 +122,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 ]
             });
         }else{
+            
             $rootScope.cart.cartItems.push({
                 id: $scope.foodInfo.id,
                 name: $scope.foodInfo.name,
