@@ -132,10 +132,6 @@
         // }
 
 
-
-
-
-
         // Sales & Promotions
 
         $scope.addNewSalesAndPromotions = function () {
