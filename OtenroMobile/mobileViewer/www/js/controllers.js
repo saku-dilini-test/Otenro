@@ -1,20 +1,27 @@
 angular.module('starter.controllers', [])
 
   /** --/-- App Ctrl ------------------- **/
-  .controller('AppCtrl', function($scope, AuthService) {
+  .controller('AppCtrl', function($scope, AuthService, $state) {
 
     // Still not use
     $scope.username = AuthService.username();
+     // --- logout function --------
+        $scope.logout = function () {
+          AuthService.logout();
+          $state.go('app.login');
+        };
 
   })
 
   /** --/-- Login Ctrl ------------------- **/
   .controller('LoginCtrl', function($scope, $state, $ionicPopup, AuthService) {
 
+
+
     // Check user already login
     // If login true, move to dashboard
     if(AuthService.isAuthenticated){
-      $state.go('main.dash', {}, {reload: true});
+      $state.go('app.dash', {}, {reload: true});
     }
 
     // Login Function
@@ -24,7 +31,7 @@ angular.module('starter.controllers', [])
       AuthService.login(data.username, data.password)
         .then(function(authenticated) {
           // If success move to dashboard
-          $state.go('main.dash', {}, {reload: true});
+          $state.go('app.dash', {}, {reload: true});
         }, function(err) {
           // Login failed give alert
           $ionicPopup.alert({
@@ -37,7 +44,11 @@ angular.module('starter.controllers', [])
 
   /** --/-- Dash-board Ctrl ------------------- **/
    .controller('DashCtrl', function($scope,$ionicLoading,
-     dashBoardService,meServerUrl,fileServerUrl,allApps,$state,$interval) {
+     dashBoardService,meServerUrl,fileServerUrl,allApps,$state,$interval,$ionicSideMenuDelegate) {
+
+      $scope.menuToggle = function() {
+         $ionicSideMenuDelegate.toggleLeft();
+       };
 
     // Set me Server URL
     var meServerURL = meServerUrl.data.meServerUrl;
@@ -53,7 +64,7 @@ angular.module('starter.controllers', [])
       // get current state
        var currentState = $state.current;
       // if current state == main.dash, send request to get update appList
-      if(currentState.name == 'main.dash'){
+      if(currentState.name == 'app.dash'){
         dashBoardService.getAllApps().success(function (data) {
           $scope.appList = data;
         })
@@ -65,7 +76,7 @@ angular.module('starter.controllers', [])
     $scope.openApp = function(userID,appId,appName){
 
       // ME SERVER URL for GIVEN User ID & AppId
-        var url = meServerURL+'/meServer/temp/'+userID+'/templates/'+appId+'/#/';
+        var url = 'http://cdn.otenro.com'+'/temp/'+userID+'/templates/'+appId+'/#/';
       console.log(url);
 
       // Keep in mind that you must add your own images to native resource.
@@ -131,7 +142,7 @@ angular.module('starter.controllers', [])
     // --- logout function --------
     $scope.logout = function () {
       AuthService.logout();
-      $state.go('login');
+      $state.go('app.login');
     };
 
   });

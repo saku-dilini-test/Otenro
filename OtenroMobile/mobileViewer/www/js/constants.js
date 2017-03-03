@@ -12,6 +12,6 @@ angular.module('starter')
   })
 
   // local development
-    .constant('SERVER_URL', 'http://192.168.8.126:1337/');
+    .constant('SERVER_URL', 'http://dashboard.otenro.com/');
   // Stage testing
   // .constant('SERVER_URL', 'http://192.168.8.203:1340/');
