@@ -49,6 +49,11 @@
             return engageService.showPushMessageDialog();
         };
 
+        $scope.backToUserView = function(){
+            return engageService.showAppUserDialog();
+        };
+
+
         $scope.sendMsgNow = function(message){
         if(message.date != ""){
             toastr.error('Clean the schedule message', 'Warning', {
