@@ -15,7 +15,7 @@
             <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}</div>
             <div class="col" ng-model="item.qty" >{{item.qty}}</div>
             <div class="col" ng-model="item.total" >{{item.total}}</div>
-            <div class="col"><a class="dark" ng-click="removeItem(index)"><i class="icon ion-ios-trash-outline"></i></a></div>
+            <div class="col"><a class="dark" ng-click="removeItem($index)"><i class="icon ion-ios-trash-outline"></i></a></div>
           </div>
         </div>
         <!--<div ng-hide="hide" class="item item-stacked-label">-->
