@@ -10,7 +10,8 @@
            }
        ])
 
-    }).constant('SERVER_URL', 'http://localhost:1337/')
+
+    }).constant('SERVER_URL', O_SERVER_URL)
 
 
         .constant('LOCALES', {
@@ -19,7 +20,7 @@
             },
             'preferredLocale': 'en_US'
         })
-        .constant('ME_APP_SERVER','http://localhost:80/meServer/')
+        .constant('ME_APP_SERVER',O_MESERVER_URL)
         .config(function($urlRouterProvider,$httpProvider, $authProvider, SERVER_URL,uiGmapGoogleMapApiProvider,$logProvider) {
 
             $logProvider.debugEnabled(false);
