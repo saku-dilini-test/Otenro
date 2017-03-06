@@ -38,6 +38,8 @@ var cssFilesToInject = [
   'styles/buildkit.css'
 ];
 
+var env = process.env.NODE_ENV;
+var jsToInject = 'env/' + env + '.js';
 
 // Client-side javascript files to inject in order
 // (uses Grunt-style wildcard/glob/splat expressions)
@@ -65,6 +67,7 @@ var jsFilesToInject = [
 
 
   'js/app.js',
+   jsToInject,
   'js/appConfig.js',
   'js/services/accessLevels.js',
   'js/directives/common/device/deviceModule.js',
