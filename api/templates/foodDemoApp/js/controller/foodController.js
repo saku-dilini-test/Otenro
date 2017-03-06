@@ -58,9 +58,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 }
          }
     }
-
-
-        $scope.slideChanged = function(index) {
+    $scope.slideChanged = function(index) {
             $scope.slideIndex = index;
           };
 
@@ -99,7 +97,8 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         }
     };
 
-    $scope.addToCart = function() {
+      // Products Add to cart
+      $scope.addToCart = function() {
         if($scope.selectedVariant.buyQuantity == null){
             $ionicPopup.alert({
                 title: 'Please enter a quantity',
@@ -109,9 +108,17 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                     {text:'OK',
                      type:'made-easy-button-setting'},
                 ]
-            });
-        }else{
-            $rootScope.cart.cartItems.push({
+            }) ;
+
+        }
+
+   else  {
+            
+            if($scope.selectedVariant.quantity == "null"){
+                $scope.isBuyBtnDisable = false;
+            }
+            else{
+               $rootScope.cart.cartItems.push({
                 id: $scope.foodInfo.id,
                 name: $scope.foodInfo.name,
                 qty: $scope.selectedVariant.buyQuantity,
@@ -125,7 +132,19 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
             $state.go('app.category');
         }
+        }
     };
+
+
+
+
+
+
+
+
+
+
+
 
     //get Sales and Promotions
     $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {

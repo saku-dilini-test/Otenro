@@ -107,7 +107,16 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                      type:'made-easy-button-setting'},
                 ]
             });
-        }else{
+            
+        }
+        else
+        {
+            if($scope.selectedVariant.quantity == "null"){
+                $scope.isBuyBtnDisable = false;
+            }
+            else{
+                
+        
             $rootScope.cart.cartItems.push({
                 id: $scope.foodInfo.id,
                 name: $scope.foodInfo.name,
@@ -121,7 +130,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
             $state.go('app.category');
-        }
+        }}
     };
 
     //get Sales and Promotions
