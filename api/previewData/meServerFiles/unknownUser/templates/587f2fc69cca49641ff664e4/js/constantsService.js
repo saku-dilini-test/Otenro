@@ -1,6 +1,6 @@
 
 (function() {
     angular.module('starter').constant('constants', {
-        SERVER_URL: 'https://dashboard.otenro.com'
+        SERVER_URL: 'serverUrl'
     })
 })();
