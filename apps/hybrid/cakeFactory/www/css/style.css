@@ -131,6 +131,7 @@ table {
 
 .items-table td{
     color: #5d3a23;
+
 }
 
 .button.button-buy {
@@ -342,4 +343,27 @@ input[type="color"]{
     color: #8c8061;
     border: 1px solid #8c8061;
     padding: 3px;
+}
+
+.pickupDeliveryInfo{
+    color: #beac7c;
+    font-size: 15px;
+
+
+}
+.error-messages{
+  color: #beac7c;
+  font-size: 15px;
+}
+.pickupDeliveryError{
+  color: #beac7c;
+  font-size: 15px;
+
+}
+
+.pre{
+  white-space: pre-wrap !important;
+}
+.deliveryLocation{
+max-width: 55% !important;
 }

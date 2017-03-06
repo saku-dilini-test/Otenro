@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 angular.module('animateApp')
-    .controller('contactCtrl',['$scope','$http','SERVER_URL','Upload', function($scope,$http,SERVER_URL,Upload) {
+    .controller('contactCtrl', function($scope,$http,SERVER_URL,Upload) {
 
 
         $scope.submitContactForm = function(file,data) {
@@ -35,10 +35,12 @@ angular.module('animateApp')
                 }, function (evt) {
                 });
 
+
             }
+        $scope.contactUsComment.$setPristine();
 
 
         }
-    }])
+    })
 })();
 

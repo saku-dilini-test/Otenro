@@ -7,9 +7,11 @@ angular.module('animateApp')
         $scope.cart = DataService.cart;
         $scope.cakeType = {
             type : 'full'
+
         };
         $scope.cakeFullQuantity = 1;
         $scope.cakeSliceQuantity = 1;
+        $scope.cakeSliceQuantity1 = 1;
         var productId = $routeParams.productId;    
         
         $http.get(SERVER_URL+"products/getProductsDetails",{params:{id:productId}})

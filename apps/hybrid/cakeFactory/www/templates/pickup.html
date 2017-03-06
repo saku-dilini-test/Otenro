@@ -12,7 +12,26 @@
           <br>
           <span> +94 </span>
           <input type="number" ng-minlength="9" ng-maxlength="10" name="customerNumber" ng-model="pickup.contactNo" required>
-			  </label>
+          <span class="error-messages"
+                ng-show="customerPickupForm.customerNumber.$dirty
+                                                && customerPickupForm.customerNumber.$invalid" >
+                  The phone number field should be of 10 digits
+          </span>
+
+        </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Email</span>
+          <input  name="userEmail" type="email" ng-model="pickup.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                  required>
+          <span class="error-messages"
+                ng-if="customerPickupForm.userEmail.$dirty">
+                                    <span class="error-messages" ng-show="customerPickupForm.userEmail.$dirty && customerPickupForm.userEmail.$invalid">Not a valid email address.</span>
+                                </span>
+
+        </label>
+
+
 			  <label class="item item-input item-select">
 			    <div class="input-label">
 			      Branches
@@ -23,14 +42,29 @@
             </option>
 			    </select>
 			  </label>
-        <label class="item item-input item-stacked-label" ng-click="openDatePicker()">
+
+
+
+
+        <label class="item">
+          <span class="pickupDeliveryInfo ">Select Date and Time for Pickup</span>
+          <div class="pickupDeliveryInfo">Pick up is available from <span><br>8:00 am to 9:00 pm everyday</span></div>
+        <label class=" item-input item-stacked-label" ng-click="openDatePicker()">
           <span class="input-label">Pick Up Date</span>
           <input ng-disabled="true" class="pickup-disable" type="text" placeholder="DD - MM - YYYY" name="customerPickupDate" ng-model="pickup.date" required>
         </label>
-        <label class="item item-input item-stacked-label" ng-click="openDateTime()">
+        <label class=" item-input item-stacked-label" ng-click="openDateTime()">
           <span class="input-label">Pick Up Time</span>
           <input ng-disabled="true" class="pickup-disable" type="text" placeholder="-- : --  --" name="customerPickupTime" ng-model="pickup.time" required>
         </label>
+          <div ng-if="OutOfHours">
+            <span class="pickupDeliveryError">Sorry, pickup is not available at that time.<br><span> Please select again.</span></span>
+          </div>
+          <div ng-if="OutOfDate">
+            <span class="pickupDeliveryError">Selected Date & Time has already passed</span>
+          </div>
+        </label>
+
         <label class="item item-input item-stacked-label">
           <span class="input-label">Comment</span>
           <input type="text" name="customerComment" ng-model="pickup.comment">
@@ -44,8 +78,8 @@
         </div>
 			</div>
 			<div class="text-align-right">
-	    	 	<a ui-sref="tab.cart" class="button button-buy">Back</a>
-	    	 	<a href="" class="button button-buy dark" ng-disabled="customerPickupForm.$invalid" ng-click="payNow()">Pay</a>
+	    	 	<a ui-sref="tab.cart" class="button button-buy" ng-click="reset()">Back</a>
+	    	 	<a href="" class="button button-buy dark" ng-disabled="customerPickupForm.$invalid || OutOfHours == true || OutOfDate == true" ng-click="payNow()">Pay</a>
 	    	</div>
 		</form>
 	</ion-content>

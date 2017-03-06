@@ -35,7 +35,9 @@ angular.module('animateApp')
                 }, function (evt) {
                 });
 
+
             }
+        $scope.contactUsComment.$setPristine();
 
 
         }

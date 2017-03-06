@@ -10,16 +10,16 @@ angular.module('animateApp')
 		$scope.isOutOfHours = false;
 
 		$http.get(SERVER_URL+"locations/getBranchLocations")
-			.then(function (response) {           
-	            $scope.branchLocations = response.data.result;	            
+			.then(function (response) {
+	            $scope.branchLocations = response.data.result;
           	});
 
 		$http.get(SERVER_URL+"locations/getDeliveryLocations")
-			.then(function (response) {           
-	            $scope.deliveryLocations = response.data.result;	            
-          	});		       	
-		
-		$scope.selectDeliveryOption = function(option){					
+			.then(function (response) {
+	            $scope.deliveryLocations = response.data.result;
+          	});
+
+		$scope.selectDeliveryOption = function(option){
 			$scope.cart.selectDeliveryOption(option);
 			$scope.setPickUpDate = '';
 			$scope.setPickUpTime = '';
@@ -27,10 +27,11 @@ angular.module('animateApp')
 			$scope.setDeliveryTime = '';
 			$scope.isPassedDate = false;
 			$scope.isOutOfHours = false;
+			$scope.comment = '';
 		}
 
 		$scope.saveBranchName = function(name){
-			$scope.cart.saveBranchName(name);			
+			$scope.cart.saveBranchName(name);
 			$scope.selectedBranch = $scope.cart.getBranchName();
 		}
 
@@ -79,7 +80,9 @@ angular.module('animateApp')
 					$scope.isOutOfHours = true;
 				}
 			}
-		}
+		};
+
+
 		// save Delivery Date and Time
 		$scope.saveDeliveryDate = function(date){
 			var deliveryDate = date.getDate() + ' - ' + ( date.getMonth() + 1 ) + ' - ' + date.getFullYear();
@@ -91,6 +94,7 @@ angular.module('animateApp')
 			$scope.cart.saveDeliveryTime(deliveryTime);
 
 			var currentDate = new Date();
+
 			$scope.isOutOfHours = false;
 			if(date < currentDate){
 				$scope.isPassedDate = true;

@@ -8,7 +8,7 @@
 
 .form-control {
     width: 40px;
-    text-align: center;
+    text-align: left;
 }
 
 /******************************************************
@@ -39,5 +39,7 @@ table{
 }
 
 .error-message {
-    color : #ff3b30;
+    color : #ff0000 !important;
+    font-size: 14px;
+
 }

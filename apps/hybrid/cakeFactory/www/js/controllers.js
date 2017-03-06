@@ -12,6 +12,8 @@ angular.module('starter.controllers', [])
 
 .controller('CategoryProductsCtrl',
   function ($scope,SERVER_URL, $stateParams,categoryProductResources) {
+    $scope.OutOfDate = false;
+    $scope.isOutOfHours = false;
     $scope.SERVER_URL = SERVER_URL;
     $scope.categoryProducts = categoryProductResources.getProductsByCategory($stateParams.categoryCode)
       .success(function (data) {
@@ -25,6 +27,8 @@ angular.module('starter.controllers', [])
 .controller('ProductDetailCtrl',
   function ($scope,SERVER_URL,categoryProductResources, $stateParams,$state,$rootScope,DataService) {
     $scope.SERVER_URL = SERVER_URL;
+    $scope.OutOfDate = false;
+    $scope.isOutOfHours = false;
     $scope.paypalCart = DataService.cart;
     $scope.product =  categoryProductResources.productsDetails($stateParams.productId)
       .success(function (data) {
@@ -73,6 +77,7 @@ angular.module('starter.controllers', [])
 .controller('AboutCtrl', function ($scope) {})
 
 .controller('CartCtrl', function ($scope,$rootScope,DataService) {
+
     $scope.cartItems = $rootScope.cart.cartItems;
     $scope.paypalCart = DataService.cart;
 
@@ -107,10 +112,17 @@ angular.module('starter.controllers', [])
     }
 
     $scope.submitContactForm = function(file,data) {
+    console.log("select image " + file)
+    console.log("a" + data.name)
+    console.log("a" + data.email)
+    console.log("a" +data.title)
+    console.log("a" +data.msg)
       if(file != ''){
-        var reqData = {name : data.name,email : data.email,title : data.title,msg : data.msg,
-          imageUrl : 'image.jpg'
-        };
+        var reqData = {name:data.name ,email:data.email, title:data.title, msg:data.msg, imageUrl:'image.jpg' }
+        console.log("aa" + reqData.name);
+        console.log("aa" + reqData.imageUrl)
+
+        //reqData['imageUrl'] = $scope.selectImage;
         var options = {
           fileKey: "file",
           fileName: "ionic.png",
@@ -118,7 +130,8 @@ angular.module('starter.controllers', [])
           mimeType: "image/png",
           params : reqData
         };
-        $cordovaFileTransfer.upload(SERVER_URL+'contactUs/create', file , options).then(function(result) {
+
+        $cordovaFileTransfer.upload(SERVER_URL+'contactUs/create', file , options , true).then(function(result) {
           $timeout( function(){
             $scope.contact.name = '';
             $scope.contact.email = '';
@@ -160,6 +173,10 @@ angular.module('starter.controllers', [])
           $scope.delivery.usdAmountWithDeliveryFee = totalAmountUSD + (amount / oneUSD );
           $scope.paypalCart.saveDeliveryCharges(amount);
           $scope.isVisibleAddress = true;
+          $scope.isOutOfHours = false;
+          var selectDate , selectedMonth , selectYear;
+          $scope.OutOfDate = false;
+
 
           if(typeof amount == 'undefined'){
             $scope.isVisibleAddress = false;
@@ -175,6 +192,13 @@ angular.module('starter.controllers', [])
             var deliveryDate = date.getDate() + ' - ' + ( date.getMonth() + 1 ) + ' - ' + date.getFullYear();
             console.log(deliveryDate);
             $scope.delivery.date = deliveryDate;
+            selectDate = date.getDate();
+            //console.log("selectDate = "+ selectDate);
+            selectedMonth = date.getMonth() + 1;
+            //console.log("selectedMonth = "+ selectedMonth);
+            selectYear = date.getFullYear();
+            //console.log("selectYear = "+ selectYear);
+
 
 
           },
@@ -190,6 +214,9 @@ angular.module('starter.controllers', [])
           console.log(currentDate);
           console.log(currentDate = currentDate + 40000000000)
           ionicDatePicker.openDatePicker(ipObj1);
+          $scope.delivery.time = null;
+          $scope.OutOfDate = false;
+          $scope.isOutOfHours = false;
         };
 
 
@@ -197,25 +224,63 @@ angular.module('starter.controllers', [])
           callback: function (val) {      //Mandatory
             if (typeof (val) === 'undefined') {
               console.log('Time not selected');
-            } else {
+            }else {
+
+              var Crntdate = new Date();
+              var CrntYear = Crntdate.getFullYear();
+              var Crntmonth = Crntdate.getMonth() + 1;
+              var Crntday = Crntdate.getDate();
+              var Crnthour = Crntdate.getHours() * 3600;
+              var Crntminuts = Crntdate.getMinutes() * 60;
+              var CurrentDate = Crnthour + Crntminuts;
               var selectedTime = new Date(val * 1000);
+
+              console.log("val =" + val);
+              $scope.isOutOfHours = false;
+              /*console.log("Crntday = "+ Crntday );
+               console.log("selectDate = "+ selectDate );
+               console.log("CrntYear = "+ CrntYear );
+               console.log("selectYear = "+ selectYear );
+               console.log("Crntmonth = "+ Crntmonth );
+               console.log("selectedMonth = "+ selectedMonth );*/
+
+
+
+
+
+              $scope.delivery.time = null;
+              $scope.OutOfDate = false;
+              $scope.isOutOfHours = false;
               var deliveryTime = formatAMPM(selectedTime);
               $scope.delivery.time = deliveryTime;
+              console.log(deliveryTime);
 
 
               function formatAMPM(date) {
-                var hours = date.getUTCHours();
-                var minutes = date.getUTCMinutes();
-                var ampm = hours >= 12 ? 'PM' : 'AM';
-                hours = hours % 12;
-                hours = hours ? hours : 12; // the hour '0' should be '12'
-                minutes = minutes < 10 ? '0'+minutes : minutes;
-                var strTime = hours + ':' + minutes + ' ' + ampm;
-                return strTime;
+                 var hours = date.getUTCHours();
+                 var minutes = date.getUTCMinutes();
+                 var ampm = hours >= 12 ? 'PM' : 'AM';
+                 hours = hours % 12;
+                 hours = hours ? hours : 12; // the hour '0' should be '12'
+                 minutes = minutes < 10 ? '0'+minutes : minutes;
+                 var strTime = hours + ':' + minutes + ' ' + ampm;
+                 return strTime;
               }
 
-            }
+               if((val > 72000) || (val < 36000)){
+
+                  console.log("select another time");
+                  $scope.isOutOfHours = true;
+
+               }else if((val < CurrentDate) & (Crntday == selectDate)& (Crntmonth == selectedMonth) & (CrntYear == selectYear)){
+                   console.log("select time again");
+                   $scope.OutOfDate = true;
+               }
+
+
+              }
           },
+          //var seconds = new Date().getTime() / 1000;
           inputTime: 36000,   //Optional
           format: 12,         //Optional
           step: 15,           //Optional
@@ -229,6 +294,9 @@ angular.module('starter.controllers', [])
 
         $scope.delivery = {usdAmount:totalAmountUSD};
         $scope.deliveryLocations = initialData.deliveryLocations.data.result;
+        console.log(initialData.email);
+
+
 
         $scope.payNow = function(){
           $scope.cartInfo = $scope.cart.getCartInfo();
@@ -257,24 +325,44 @@ angular.module('starter.controllers', [])
           }, 3000);
         }
 
+        $scope.master = {name:"" ,location:"", address:"",date:"",time:"",comment:"", contactNo:"" , email:"" , };
+        $scope.reset = function() {
+                $scope.delivery.contactNo = null;
+                $scope.OutOfDate = false;
+                $scope.isOutOfHours = false;
+                $scope.delivery = angular.copy($scope.master);
+            };
+           $scope.reset();
 
   })
   .controller('PickupCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService,$location,$timeout,ORDER_URL,ionicDatePicker,ionicTimePicker) {
     var totalAmountUSD = initialData.totalAmount.data.usd;
     $scope.pickup = {usdAmount:totalAmountUSD};
     $scope.cart = DataService.cart;
-
     $scope.branchLocations = initialData.branchLocations.data.result;
+    var selectDate , selectedMonth , selectYear;
+    $scope.OutOfDate = false;
+    $scope.OutOfHours = false;
+
 
     var startDate = (new Date()).valueOf();
+    console.log("start=" + startDate);
     var endDate = startDate + 31536000000;
+    console.log("endDate=" + endDate);
     var ipObj1 = {
       callback: function (val) {  //Mandatory
-        console.log(val);
+        //console.log(val);
         var date = new Date(val);
         var pickDate = date.getDate() + ' - ' + ( date.getMonth() + 1 ) + ' - ' + date.getFullYear();
         console.log(pickDate);
         $scope.pickup.date = pickDate;
+        selectDate = date.getDate();
+         //console.log("selectDate = "+ selectDate);
+         selectedMonth = date.getMonth() + 1;
+         //console.log("selectedMonth = "+ selectedMonth);
+         selectYear = date.getFullYear();
+         //console.log("selectYear = "+ selectYear);
+
 
 
       },
@@ -287,35 +375,73 @@ angular.module('starter.controllers', [])
 
     $scope.openDatePicker = function(){
       var currentDate = (new Date()).valueOf();
-      console.log(currentDate);
+      console.log("currentDate = " + currentDate);
       console.log(currentDate = currentDate + 40000000000)
       ionicDatePicker.openDatePicker(ipObj1);
+      $scope.pickup.time = null;
+      $scope.OutOfDate = false;
+      $scope.OutOfHours = false;
+
     };
 
 
     var ipObj2 = {
+
       callback: function (val) {      //Mandatory
-        if (typeof (val) === 'undefined') {
-          console.log('Time not selected');
-        } else {
-          var selectedTime = new Date(val * 1000);
-          var pickTime = formatAMPM(selectedTime);
-          $scope.pickup.time = pickTime;
+         if (typeof (val) === 'undefined') {
+            console.log('Time not selected');
+         }else {
+
+             var Crntdate = new Date();
+             var CrntYear = Crntdate.getFullYear();
+             var Crntmonth = Crntdate.getMonth() + 1;
+             var Crntday = Crntdate.getDate();
+             var Crnthour = Crntdate.getHours() * 3600;
+             var Crntminuts = Crntdate.getMinutes() * 60;
+             var CurrentDate = Crnthour + Crntminuts;
+             var selectedTime = new Date(val * 1000);
+             //console.log("val =" + val);
 
 
-          function formatAMPM(date) {
-            var hours = date.getUTCHours();
-            var minutes = date.getUTCMinutes();
-            var ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12;
-            hours = hours ? hours : 12; // the hour '0' should be '12'
-            minutes = minutes < 10 ? '0'+minutes : minutes;
-            var strTime = hours + ':' + minutes + ' ' + ampm;
-            return strTime;
+             /*console.log("Crntday = "+ Crntday );
+             console.log("selectDate = "+ selectDate );
+             console.log("CrntYear = "+ CrntYear );
+             console.log("selectYear = "+ selectYear );
+             console.log("Crntmonth = "+ Crntmonth );
+             console.log("selectedMonth = "+ selectedMonth );*/
+
+             $scope.OutOfDate = false;
+             $scope.OutOfHours = false;
+             var pickTime = formatAMPM(selectedTime);
+             $scope.pickup.time = pickTime;
+             console.log(pickTime);
+
+             function formatAMPM(date) {
+                var hours = date.getUTCHours();
+                var minutes = date.getUTCMinutes();
+                var ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                minutes = minutes < 10 ? '0'+minutes : minutes;
+                var strTime = hours + ':' + minutes + ' ' + ampm;
+                return strTime;
+
+             }
+
+             if((val > 75600) || (val < 28800)){
+                 console.log("select time again");
+                 $scope.OutOfHours = true;
+
+
+             }else if((val < CurrentDate) & (Crntday == selectDate)& (Crntmonth == selectedMonth) & (CrntYear == selectYear)){
+                 console.log("select time again");
+                 $scope.OutOfDate = true;
+
+             }
           }
+        },
 
-        }
-      },
+
       inputTime: 36000,   //Optional
       format: 12,         //Optional
       step: 15,           //Optional
@@ -325,13 +451,20 @@ angular.module('starter.controllers', [])
     $scope.openDateTime = function() {
 
       ionicTimePicker.openTimePicker(ipObj2);
+
     }
+
 
     $scope.payNow = function(){
       $scope.cartInfo = $scope.cart.getCartInfo();
       $scope.cartInfo.oneDoller = $rootScope.cart.oneDoller;
       $scope.cartInfo.userInfo = $scope.pickup;
+
+      console.log("------------------------------- "+JSON.stringify($scope.cartInfo.userInfo));
+      console.log($scope.cartInfo.userInfo.email)
+
       var cartInfo = JSON.stringify($scope.cartInfo);
+
       window.open(ORDER_URL+'cartInfo='+cartInfo,'_system','location=no');
       $scope.changePath = function(){
         $scope.cart.clearItems();
@@ -349,6 +482,15 @@ angular.module('starter.controllers', [])
 
 
     }
+    $scope.master = {name:"" ,location:"", address:"",date:"",time:"",comment:"", contactNo:"" , email:"" , };
+            $scope.reset = function() {
+                    $scope.pickup.contactNo = null;
+                    $scope.OutOfDate = false;
+                    $scope.OutOfHours = false;
+                    $scope.pickup = angular.copy($scope.master);
+                };
+               $scope.reset();
+
   })
 
   .controller('orderConfirmationCtrl', function ($scope,$rootScope,initialData) {

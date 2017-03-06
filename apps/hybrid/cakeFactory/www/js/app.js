@@ -13,10 +13,11 @@ angular.module('starter',
     'starter.services',
     'ionic-datepicker',
     'ionic-timepicker',
-    'ngCordova'
+    'ngCordova',
+    'ionic.cloud'
 ])
 
-  .run(function($ionicPlatform,$rootScope,paymentResources) {
+  .run(function($ionicPlatform,$rootScope, paymentResources, $ionicPush,$ionicPopup, $http) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -29,10 +30,68 @@ angular.module('starter',
         // org.apache.cordova.statusbar required
         StatusBar.styleLightContent();
       }
+            // Push register function
+      $ionicPush.register().then(function(t) {
+         return $ionicPush.saveToken(t);
+      }).then(function(t) {
+         console.log('Token saved: ', t.token);
+       //appId: $rootScope.appId,
+      var data = {
+          deviceId : t.token
+      }
+      // Send to localserver to save push device token
+      //$http.post('http://192.168.8.53:1341/template/postDeviceId',data)
+      // Send to server to save push device token
+      $http.post(' http://simatosolutions.com:1341/template/postDeviceId',data)
+        .then(function(res){
+             console.log(res);
+             //alert('success ' + data.deviceId);
+         },function(err){
+             console.log(err);
+         });
+      });
+
+      $rootScope.$on('cloud:push:notification', function(event, data) {
+         var msg = data.message;
+         //alert(msg.title + ': ' + msg.text);
+         var alertPopup = $ionicPopup.alert({
+             title: msg.title,
+             template: msg.text
+         });
+         alertPopup.then(function(res) {
+             console.log('Thank you');
+         });
+      });
+
     });
+
+
   })
 
-  .config(function($stateProvider, $urlRouterProvider,ionicDatePickerProvider,ionicTimePickerProvider) {
+
+  .config(function($stateProvider, $urlRouterProvider,ionicDatePickerProvider,ionicTimePickerProvider, $ionicCloudProvider) {
+
+    $ionicCloudProvider.init({
+         "core": {
+           //development level
+           //"app_id": "d4838ea4"
+
+           //production level
+           "app_id": "ccf341c8"
+         },
+         "push": {
+           "sender_id": "830023904047",
+           "pluginConfig": {
+             "ios": {
+               "badge": true,
+               "sound": true
+             },
+             "android": {
+               "iconColor": "#343434"
+             }
+           }
+         }
+        });
 
     var datePickerObj = {
       inputDate: new Date(),
@@ -216,10 +275,10 @@ angular.module('starter',
     $urlRouterProvider.otherwise('/');
 
   })
-  //.constant('SERVER_URL', "http://192.168.8.155:1337/")
+  //.constant('SERVER_URL', "http://192.168.8.108:1337/")
   .constant('SERVER_URL', "http://onbitlabs.com:1338/")
 
-  //.constant('ORDER_URL','http://192.168.8.155:8080/#/mobileOrderConform?')
+  //.constant('ORDER_URL','http://192.168.8.108:8080/#/mobileOrderConform?')
   .constant('ORDER_URL','http://tecclk.com/#/mobileOrderConform?')
 
   .constant('shopSettings',{
