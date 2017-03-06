@@ -15,10 +15,16 @@
            {{currency}}{{getTotal()}}
        </div>
        <div class="center">
-           <button class="button button-raised  made-easy-button-setting color-invert" ng-click="pickupDetails(cartItems)">
+           <tr ng-repeat="item in cartItems"> </tr>
+           <button class="button button-raised  made-easy-button-setting color-invert"
+                   ng-disabled="!getTotal()"
+                   ng-click="pickupDetails(cartItems)">
               Pickup
            </button>
-           <button class="button button-raised  made-easy-button-setting " ng-click="delivery(cartItems)">
+           <tr ng-repeat="item in cartItems"> </tr>
+           <button class="button button-raised  made-easy-button-setting "
+                   ng-disabled="!getTotal()"
+                   ng-click="delivery(cartItems)">
                Delivery
            </button>
        </div>

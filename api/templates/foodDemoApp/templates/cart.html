@@ -35,8 +35,20 @@
         </div>
 
         <div class="row cart-buttons">
-          <button class="button button-block button-small made-easy-button-setting" ng-click="pickupDetails(cartItems)" >Pick up</button>
-          <button class="button button-block button-small made-easy-button-setting" ng-click="delivery(cartItems)" >Delivery</button>
+
+            <tr ng-repeat="item in cartItems"> </tr>
+
+          <button class="button button-block button-small made-easy-button-setting"
+                  ng-disabled="!getTotal()"
+                  ng-click="pickupDetails(cartItems)" >Pick up</button>
+
+
+               <tr ng-repeat="item in cartItems">
+               </tr>
+               <button class="button button-block button-small made-easy-button-setting"
+                       ng-disabled="!getTotal()"
+               ng-click="delivery(cartItems)" >Delivery</button>
+
         </div>
     </div>
   </ion-content>

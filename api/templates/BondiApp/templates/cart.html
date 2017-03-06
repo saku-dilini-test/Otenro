@@ -38,8 +38,14 @@
                 </div>
 
                 <div class="row">
-                  <button class="col margin button button-small made-easy-button-setting" ng-click="pickupDetails(cartItems)" >Pickup</button>
-                  <button class="col margin button button-small made-easy-button-setting" ng-click="delivery(cartItems)">Delivery</button>
+                    <tr ng-repeat="item in cartItems"> </tr>
+                  <button class="col margin button button-small made-easy-button-setting"
+                          ng-disabled="!getTotal()"
+                          ng-click="pickupDetails(cartItems)" >Pickup</button>
+                    <tr ng-repeat="item in cartItems"> </tr>
+                  <button class="col margin button button-small made-easy-button-setting"
+                          ng-disabled="!getTotal()"
+                          ng-click="delivery(cartItems)">Delivery</button>
                   <!--<a class="social-button " ng-click="delivery(cartItems)" >Delivery</a>-->
                 </div>
        </div>
