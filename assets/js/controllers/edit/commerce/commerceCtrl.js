@@ -354,13 +354,13 @@
                     }
                     $scope.ordersList = result;
                     for (var i = 0; i < $scope.ordersList.length; i++) {
-                        if ($scope.ordersList[i].paymentStatus == "refunded") {
+                        if ($scope.ordersList[i].paymentStatus == "Refunded") {
                             $scope.refund.push($scope.ordersList[i]);
                         }
                         else if ($scope.ordersList[i].paymentStatus == "Pending") {
                             $scope.unfulfilled.push($scope.ordersList[i]);
                         }
-                        else if ($scope.ordersList[i].paymentStatus == "successful") {
+                        else if ($scope.ordersList[i].paymentStatus == "Successful") {
                             $scope.fulfill.push($scope.ordersList[i]);
                         }
                     }
@@ -911,15 +911,15 @@
                 var refundedDate = $scope.refundedDate;
                // $state.go('PassOderDates', {refundedDate: refundedDate});
             for (var i = 0; i < $scope.selectedRow.length; i++) {
-                $scope.selectedRow[i].paymentStatus = "refunded";
-                $scope.selectedRow[i].fulfillmentStatus = "refund";
+                $scope.selectedRow[i].paymentStatus = "Refunded";
+                $scope.selectedRow[i].fulfillmentStatus = "Refund";
                 $scope.selectedRow[i].refundedDate = refundedDate;
                 $scope.gridApi1.selection.clearSelectedRows();
                 $scope.refund.push($scope.selectedRow[i]);
                 $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.selectedRow[i]), 1);
             }
             $scope.gridOptions1.isRowSelectable = function(row){
-                if(row.entity.paymentStatus === "refunded"){
+                if(row.entity.paymentStatus === "Refunded"){
                     return false;
                 } else {
                     return true;
@@ -953,15 +953,15 @@
                 var fulfilledDate = $scope.fulfilledDate;
                 //$state.go('PassOderDates', {fulfilledDate: fulfilledDate});
                 for (var i = 0; i < $scope.row.length; i++) {
-                    $scope.row[i].paymentStatus = "successful";
+                    $scope.row[i].paymentStatus = "Successful";
                     $scope.row[i].fulfilledDate = fulfilledDate;
-                    $scope.row[i].fulfillmentStatus = "successful";
+                    $scope.row[i].fulfillmentStatus = "Successful";
                     $scope.gridApi1.selection.clearSelectedRows();
                     $scope.fulfill.push($scope.row[i]);
                     $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.row[i]), 1);
                 }
                 $scope.gridOptions1.isRowSelectable = function(row){
-                    if(row.entity.paymentStatus === "successful"){
+                    if(row.entity.paymentStatus === "Successful"){
                         return false;
                     } else {
                         return true;
