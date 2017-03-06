@@ -292,7 +292,7 @@
         ];
         $scope.data = {status: "Closed"};
         $scope.statusPlaceHolder = "Closed";
-        $scope.currencyPlaceHolder = "USD";
+        $scope.currencyPlaceHolder = "US Doller";
         $scope.measurementStandardsPlaceHolder = "Metric";
         $scope.siteTypesPlaceHolder = "Ecommerce";
         $scope.languagesPlaceHolder = "English (United Kingdom)";
