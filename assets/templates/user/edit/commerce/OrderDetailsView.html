@@ -28,11 +28,10 @@
                 </div>
                 <div class="col-md-4" ng-if="oderData.entity.option !== 'pickUp'">
                     <h7>Deliver to:</h7>
-                    <div class="row" ng-if="oderData.entity.deliveryLocation !== 'New'">
+                    <div class="row">
                         <div class="col-md-4"><h7>Address</h7></div>
-                        <div class="col-md-8"><h7>: {{oderData.entity.deliveryLocation}}</h7></div>
                     </div>
-                    <div class="row" ng-if="oderData.entity.deliveryLocation == 'New'">
+                    <div class="row">
                         <div class="col-md-4"><h7>No</h7></div>
                         <div class="col-md-8"><h7>: {{oderData.entity.deliveryNo}}</h7></div>
                         <div class="col-md-4"><h7>Street</h7></div>
@@ -49,9 +48,8 @@
                 </div>
                 <div class="col-md-4" ng-if="oderData.entity.option == 'pickUp'">
                     <h7>Pick Up from:</h7>
-                    <div class="row" ng-if="oderData.entity.deliveryLocation !== 'New'">
+                    <div class="row">
                         <div class="col-md-4"><h7>Location</h7></div>
-                        <div class="col-md-8"><h7>: {{oderData.entity.pickUp.locationName}}</h7></div>
                     </div>
                     <div class="row">
                         <div class="col-md-4"><h7>No</h7></div>
