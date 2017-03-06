@@ -5,7 +5,7 @@
            <img src="{{imageURL}}/{{item.imgURL[0].img}}">
            <h2 ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}
                <span class="made-easy-content-font"> x {{item.qty}}</span>
-               <i class="dark icon ion-trash-a right" ng-click="removeItem(index)"></i>
+               <i class="dark icon ion-trash-a right" ng-click="removeItem($index)"></i>
            </h2>
            <p>{{currency}}{{item.total}}</p>
 
