@@ -108,11 +108,7 @@
                     closeButton: true
                 });
             }
-             else if(typeof countryRestriction == 'undefined'){
-                toastr.error('Please Select a Country', 'Warning', {
-                    closeButton: true
-                });
-             }else{
+            else{
                  taxInfo.countryRestriction = country;
                 taxInfo.appId = $rootScope.appId;
                 taxService.updateTaxInfo(taxInfo)
