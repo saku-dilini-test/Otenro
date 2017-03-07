@@ -9,7 +9,7 @@
                             ME_APP_SERVER,mySharedService,SERVER_URL) {
 
         // --/-- Characters length config
-        $scope.maxBasicInfoAddress = 20;
+        $scope.maxBasicInfoAddress = 50;
         $scope.maxReturnPolicy = 200;
         $scope.maxTermsAndCondition = 200;
         $scope.maxPrivacyPolicy = 200;
