@@ -253,6 +253,10 @@
                     //    $mdDialog.hide();
                     //})
                 //}
+                toastr.success("Changes Saved!", 'Message', {
+                                                closeButton: true
+                                            });
+
             };
 
           // hide the dialog box
