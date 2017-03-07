@@ -17,8 +17,8 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
     }
 
     $log.debug($stateParams.item);
-    $log.debug(localStorage.getItem('appLocalStorageUser'));
-    var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+    $log.debug(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
+    var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
     if(localData == null){
         $state.go('app.login')
     }
@@ -94,12 +94,12 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
 
-    if(localStorage.getItem('appLocalStorageUser') == null){
+    if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId) == null){
         $state.go('app.login')
     }
 
     //get the user's registered address
-    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
 
     $scope.pay = function(promotionCode){

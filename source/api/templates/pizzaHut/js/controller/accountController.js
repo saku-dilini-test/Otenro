@@ -3,7 +3,7 @@ mobileApp.controller('accountController', function($scope, $translate, $rootScop
 	$rootScope.appTitle	 		= $translate.instant('load.account.Title');
 	$scope.serviceApi			= serviceApi;
 	$scope.GetServiceApi		= GetServiceApi;
-	$scope.saved 				= localStorage.getItem('appLocalStorageUser');
+	$scope.saved 				= localStorage.getItem('appLocalStorageUser'+$rootScope.appId);
 	$scope.appLocalStorageUser 	= JSON.parse($scope.saved);
 
 	$scope.goChange  = function() {
@@ -24,7 +24,7 @@ mobileApp.controller('accountController', function($scope, $translate, $rootScop
 		}else{
 			
 			alert('Your change account complete!');
-			localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
+			localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
 			appService.HttpRequest('POST',GetServiceApi+'service/send_account_change',requestParams).success(function(data) {
 				//$scope.requestPromoDetail = data;
 			});

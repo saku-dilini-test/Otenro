@@ -7,7 +7,7 @@ mobileApp.controller('appCtrl', function($scope, $ionicModal, $timeout,$rootScop
     $rootScope.cart = {cartItems:[],cartSize:0,totalPrice:0};
     $rootScope.isUserLoggedIn = {check:false};
 
-    if(localStorage.getItem('appLocalStorageUser') == null){
+    if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId) == null){
             $rootScope.isUserLoggedIn.check = false;
     }else{
             $rootScope.isUserLoggedIn.check = true;
@@ -27,13 +27,13 @@ mobileApp.controller('appCtrl', function($scope, $ionicModal, $timeout,$rootScop
     });
 
     $scope.logout = function(){
-        localStorage.removeItem('appLocalStorageUser');
+        localStorage.removeItem('appLocalStorageUser'+$rootScope.appId);
         $rootScope.isUserLoggedIn.check = false;
         $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
          $ionicSideMenuDelegate.toggleLeft();
     }
 
     //get the user name
-    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
 });

@@ -11,8 +11,8 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
 
     $log.debug($stateParams.item);
-    $log.debug(localStorage.getItem('appLocalStorageUser'));
-    var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+    $log.debug(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
+    var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
     if(localData == null){
         $state.go('tab.login')
     }
@@ -69,7 +69,7 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
     });
 
     //get the user's registered address
-    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
     // get the shipping options
     var param = {

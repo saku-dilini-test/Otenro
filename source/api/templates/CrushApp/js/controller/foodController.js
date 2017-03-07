@@ -134,4 +134,4 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     }).error(function(err) {
         alert('warning', "Unable to get sales and Promotions ", err.message);
     });
-});
+}});
