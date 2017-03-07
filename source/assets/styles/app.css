@@ -409,8 +409,12 @@ colorpicker-alpha,
     margin: 16px;
 }
 
-.icon-plus {
+
+.disable-all .icon-plus{
     background-color: #E9E9E9;
+}
+.icon-plus {
+    background-color: #444;
     border-radius:8px;
     -webkit-border-radius:8px;
     -moz-border-radius:8px;
