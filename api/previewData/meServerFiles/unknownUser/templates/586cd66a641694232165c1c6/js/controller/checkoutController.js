@@ -17,8 +17,8 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
     }
 
     $log.debug($stateParams.item);
-    $log.debug(localStorage.getItem('appLocalStorageUser'));
-    var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+    $log.debug(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
+    var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
     if($stateParams.item.delivery.location == "old" || $stateParams.item.delivery.location == "Pick up" ){
         $scope.country = localData.country;
@@ -92,7 +92,7 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
     });
 
     //get the user's registered address
-    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
 
     $scope.pay = function(promotionCode){

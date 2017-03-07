@@ -3,10 +3,10 @@ mobileApp.controller('ordersController', function($scope, $rootScope, $translate
 	$rootScope.appTitle 		= $translate.instant('load.orders.Title');
 	$scope.serviceApi			= serviceApi;
 	$scope.GetServiceApi		= GetServiceApi;
-	$scope.saved 				= localStorage.getItem('appLocalStorageUser');
+	$scope.saved 				= localStorage.getItem('appLocalStorageUser'+$rootScope.appId);
 	$scope.appLocalStorageUser 	= JSON.parse($scope.saved);
 
-	if(localStorage.getItem('appLocalStorageUser')!==null){
+	if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId)!==null){
 
 		$scope.loadData = function() {
 			$rootScope.loading = true;

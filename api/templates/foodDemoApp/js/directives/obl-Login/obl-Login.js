@@ -12,9 +12,10 @@
 						$scope.login = function() {
 							var data = {
 								email : $scope.data.username,
-								password : $scope.data.password
+								password : $scope.data.password,
+								appId : $rootScope.appId
 							};
-							$http.post(constants.SERVER_URL+"/templatesAuth/authenticate",data)
+							$http.post(constants.SERVER_URL+"/templatesAuth/authenticateForApp",data)
 								.then(function(res){
                                         console.log(res);
 										var requestParams = {
@@ -31,7 +32,7 @@
 											"appId":res.data.user.appId,
                                             "registeredUser": res.data.user.sub
 										};
-										localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
+										localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
                                         $rootScope.isUserLoggedIn.check = true;
                                         $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
 										if($stateParams.item == 'delivery'){

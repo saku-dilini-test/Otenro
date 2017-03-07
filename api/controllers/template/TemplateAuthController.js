@@ -13,6 +13,53 @@ var JWT = require('machinepack-jwt'),
 
 module.exports = {
 
+    authenticateForApp : function(req, res) {
+
+        AppUser.findOne({
+            email: req.body.email,
+            appId : req.body.appId
+        }, function foundUser(err, user) {
+            if (err) return res.negotiate(err);
+            if (!user) return res.notFound();
+
+            Passwords.checkPassword({
+                passwordAttempt: req.body.password,
+                encryptedPassword: user.password
+            }).exec({
+
+                error: function (err){
+                    sails.log.info(err);
+                    return res.negotiate(err);
+                },
+
+                incorrect: function (){
+                    return res.notFound();
+                },
+
+                success: function (){
+
+                    JWT.encode({
+                        secret: config.CLIENT_SECRET,
+                        payload: {
+                            id :  user.id,
+                            email:  user.email
+                        },
+                        algorithm: 'HS256'
+                    }).exec({
+                        // An unexpected error occurred.
+                        error: function (err){
+                            return err;
+                        },
+                        // OK.
+                        success: function (result){
+                            res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,streetName : user.streetName,city : user.city, country : user.country, phone: user.phone, name: user.firstName, zip: user.zip },token : result });
+                        }
+                    });
+                }
+            });
+        });
+    },
+
     authenticate : function(req, res) {
 
         AppUser.findOne({
@@ -61,7 +108,7 @@ module.exports = {
 
     register: function(req, res) {
         sails.log.info(req.body);
-        AppUser.create(req.body).exec(function(err, user) {
+        /*AppUser.create(req.body).exec(function(err, user) {
             if (err) {
                 return res.negotiate(err);
             }
@@ -83,6 +130,34 @@ module.exports = {
                     }
                 });
             }
+        });*/
+
+        AppUser.findOne({email: req.body.email,appId:req.body.appId}, function foundUser(err, user) {
+            if (err) return res.negotiate(err);
+            if (user) return res.status(409).json({error: 'already exists'});
+            AppUser.create(req.body).exec(function(err, user) {
+                if (err) {
+                    return res.negotiate(err);
+                }
+                if (user) {
+                    JWT.encode({
+                        secret: config.CLIENT_SECRET,
+                        payload: {
+                            id :  user.id,
+                            email:  user.email
+                        },
+                        algorithm: 'HS256'
+                    }).exec({
+                        error: function (err){
+                            return err;
+                        },
+                        success: function (result){
+                            sails.log.info(result);
+                            res.status(200).json({user : { email : user.email , sub : user.id  },token : result });
+                        }
+                    });
+                }
+            });
         });
     },
 

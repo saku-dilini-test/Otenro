@@ -30,7 +30,7 @@ mobileApp.controller('loginController', function($scope, $rootScope, $translate,
 						"street": data[0].register_street,
 						"type": data[0].register_type
 					};
-					localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
+					localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
 					alert('Your login success!');
 					$window.history.back();
 				}else{

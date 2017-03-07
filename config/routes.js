@@ -283,6 +283,7 @@ module.exports.routes = {
      * Template Auth Controller
      */
     'POST /templatesAuth/authenticate': 'template/TemplateAuthController.authenticate',
+    'POST /templatesAuth/authenticateForApp': 'template/TemplateAuthController.authenticateForApp',
     'POST /templatesAuth/register': 'template/TemplateAuthController.register',
     'POST /templatesAuth/facebook': 'template/TemplateAuthController.facebookAuth',
     'POST /templatesAuth/google': 'template/TemplateAuthController.googleAuth',

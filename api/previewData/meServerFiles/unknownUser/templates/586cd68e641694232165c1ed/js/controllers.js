@@ -35,7 +35,7 @@ angular.module('starter.controllers', [])
         }, 1000);
 
         //get the user name
-        $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
+        $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
 
         // With the new view caching in Ionic, Controllers are only called

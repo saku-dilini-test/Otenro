@@ -34,7 +34,7 @@ mobileApp.controller('registerController', function($scope, $translate, $rootSco
 	
 	$scope.goRegister  = function() {
 		
-		$scope.appLocalStorageUser  = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+		$scope.appLocalStorageUser  = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 		
 		var requestParams = {
 			"token": token,
@@ -51,7 +51,7 @@ mobileApp.controller('registerController', function($scope, $translate, $rootSco
 			alert('This input form not complete!');
 		}else{
 			if($scope.register.confirm == $scope.register.password){
-				localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
+				localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
 				
 				appService.HttpRequest('POST',GetServiceApi+'service/send_register',requestParams).success(function(data) {
 					alert(data);
