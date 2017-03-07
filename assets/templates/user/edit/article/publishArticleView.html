@@ -1,0 +1,104 @@
+<md-dialog aria-label="publish-article">
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>publish an article</h1>
+        </div>
+        <form name="articleForm" novalidate>
+        <div class="md-dialog-main clearfix">
+
+            <fieldset>
+                <label>Article Category</label>
+                    <select class="input-shadow-border" ng-model="articleCat.value"
+                            ng-options="v.id as v.name for v in articleCat.values"
+                            ng-change="changeArticleCat(articleCat.value)" required>
+                    </select>
+            </fieldset>
+            <fieldset>
+                <label>Title</label>
+                <input class="input-shadow-border" type="text" name="title" ng-pattern="/^[a-zA-Z0-9_ ]*$/"
+                       ng-model="article.title" required />
+                <br />
+                <span ng-show="articleForm.title.$error.pattern">No symbols</span>
+                <div ng-hide="article.title.length > maxArticleTitle">
+                    <span class="information">Characters left: {{maxArticleTitle - article.title.length}}</span>
+                </div>
+                <div  ng-show="article.title.length > maxArticleTitle">
+                    <span class="information">Characters left: {{maxArticleTitle - article.title.length}} </span>
+                </div>
+            </fieldset>
+            <span ng-show="articleForm.title.$error.maxlength">Too lengthy</span></td>
+            <fieldset>
+               <!-- <div class="md-dialog-header">
+                    <h1>Upload Image</h1>
+                </div>-->
+
+                <!--<div class="md-dialog-main">-->
+                    <div class="file-upload-wrapper clearfix">
+                        <div class="cropArea">
+                            <img-crop image="myImage" area-type="square" result-image="picFile"
+                            >
+                            </img-crop>
+                        </div>
+
+                        <div class="inputField btn-material img-up">
+                            <span >{{buttonName}}</span>
+                            <div class="img-up1" ng-if="imageSelected">
+                                <input type="file" value="file" type="file" ng-click = "cropImage(); change()" id="fileInput" >
+                            </div>
+                            <div  ng-if="!imageSelected" class="img-up1" ng-disabled="picFile == null" ng-click="addImage(picFile)"></div>
+
+                        </div>
+                    </div>
+
+                    <div class="uploaded-section image-upload clearfix" style="width:35%">
+                        <div class="uploaded-new-image">
+                            <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                 height="150" style="display:none" />
+                            <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
+
+                        </div>
+                        <div class="uploaded-old-images">
+                            <p>Uploaded Product Images</p>
+                            <div class="old-images clearfix">
+                                <div class="old-image">
+                                    <input type="button" ng-click="deleteImg(0)" value='delete'
+                                           class="image-delete-button"/>
+                                    <img ng-click="setImage()" ng-if="tmpImage[0] == null"
+                                         src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                    <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
+                                         width="80" height="80" required/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               <!-- </div>-->
+            </fieldset>
+
+            <fieldset style="clear:both">
+                <label>Description</label>
+                <div class="custom-trix">
+                    <!--<trix-editor class="textEditor input-shadow-border"-->
+                                 <!--name="editorText"-->
+                                 <!--ng-maxlength="1000"-->
+                                 <!--angular-trix ng-model="article.desc"-->
+                                 <!--required></trix-editor>-->
+                    <text-angular name="editorText"
+                                  ng-maxlength="1000"
+                                  ng-model="article.desc" required></text-angular>
+
+                </div>
+
+            </fieldset>
+            <fieldset style="margin-bottom:0px;">
+            <span ng-show="articleForm.editorText.$error.maxlength">Too lengthy</span></td>
+            </fieldset>
+        </div>
+        </form>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                <md-button class="me-default-button" ng-disabled="articleForm.$invalid" ng-click="publishArticle(mainImg,article)">Publish</md-button>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

@@ -1,25 +1,23 @@
-<ion-view class="made-easy-background-color" view-title="Login" name="login-view" >
+<ion-view class="login" view-title="Login" name="login-view">
   <ion-content >
-       <div class="card">
-             <div class="logo-section text-center">
-                  <img src="img/made-easy-logo.svg" alt="logo" width="150" />
-                  <h4 style="color:#b4b4b4">Log into your Otenro account to start testing your Otenro apps </h4>
-            </div>
-            <form name="loginForm">
-                  <div class="list">
-                    <label class="item item-input item-floating-label">
-                      <span class="input-label">Email</span>
-                      <input type="text" name="username" placeholder="Email" ng-model="data.username" required>
-                    </label>
-                    <label class="item item-input item-floating-label">
-                      <span class="input-label">Password</span>
-                      <input type="password" name="password" placeholder="Password" ng-model="data.password" required>
-                    </label>
-                    <div class="col text-center">
-                      <button class="button button-positive button-full" ng-disabled="loginForm.$invalid" ng-click="login(data)">Login</button>
-                    </div>
-                  </div>
-            </form>
-       </div>
+    <div class="logo-section">
+      <img src="img/made-easy-logo.svg" alt="logo" width="112" />
+      <h2 style="color:#b4b4b4">Log into your Otenro account to start testing your Otenro apps </h2>
+    </div>
+    <form name="loginForm">
+      <div class="list">
+        <p style="margin-left:10px;color:#b4b4b4">Username</p>
+        <label class="item item-input">
+          <input type="text" name="username" placeholder="Username" ng-model="data.username" required>
+        </label>
+        <br />
+        <p style="margin-left:10px;color:#b4b4b4">Password</p>
+        <label class="item item-input">
+          <input type="password" name="password" placeholder="Password" ng-model="data.password" required>
+        </label>
+        <br />
+        <button class="button button-full std-button" ng-disabled="loginForm.$invalid" ng-click="login(data)">Login</button>
+      </div>
+    </form>
   </ion-content>
 </ion-view>
