@@ -17,19 +17,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',])
           }
         }
         if (!AuthService.isAuthenticated()) {
-          if (next.name !== 'app.login') {
+          if (next.name !== 'login') {
             event.preventDefault();
-            $state.go('app.login');
+            $state.go('login');
           }
         }
 
-        // When click back button in dashboard, app close
-        if((fromState.name == 'app.dash') && (next.name == 'app.login')){
+        // When click back button in dashboard, app colose
+        if((fromState.name == 'main.dash') && (next.name == 'login')){
           navigator.app.exitApp();
         }
 
       });
-
 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -44,35 +43,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',])
       StatusBar.styleDefault();
     }
   });
-}).config(function($ionicConfigProvider) {
-      $ionicConfigProvider.views.forwardCache(true);
-      $ionicConfigProvider.backButton.previousTitleText(false).text('');
-      $ionicConfigProvider.navBar.alignTitle('center');
-  })
-
+})
 
 .config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
-      .state('app', {
-        url: '/app',
+      .state('login', {
+        url: '/login',
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
+      })
+      .state('main', {
+        url: '/',
         abstract: true,
         templateUrl: 'templates/main.html'
       })
-      .state('app.login', {
-        url: '/login',
-         views: {
-                'menuContent': {
-                  templateUrl: 'templates/login.html',
-                  controller: 'LoginCtrl'
-                }
-              }
-      })
-      .state('app.dash', {
+      .state('main.dash', {
         cache: false,
-        url: 'app/dash',
+        url: 'main/dash',
         views: {
-          'menuContent': {
+          'dash-tab': {
             templateUrl: 'templates/dashboard.html',
             controller: 'DashCtrl'
           }
@@ -90,13 +80,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',])
           }
         }
       })
-      ;
+      .state('main.userInfo', {
+        cache: false,
+        url: 'main/userInfo',
+        views: {
+          'user-tab': {
+            templateUrl: 'templates/settings.html',
+            controller: 'userCtrl'
+          }
+        }
+      });
 
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise(function ($injector) {
       var $state = $injector.get("$state");
-      $state.go("app.login");
+      $state.go("login");
     });
 
 });
