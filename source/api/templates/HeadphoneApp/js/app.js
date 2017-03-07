@@ -336,10 +336,6 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       }
   });
 
-  if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId)){
     $urlRouterProvider.otherwise('/app/category');
-  }
-  else{
-    $urlRouterProvider.otherwise('/app/category');
-  }
+
 });
