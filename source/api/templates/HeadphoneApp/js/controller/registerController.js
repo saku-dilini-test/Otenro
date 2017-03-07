@@ -12,7 +12,7 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
             $scope.countries = res.data;
         });
     $scope.signUp = function() {
-        $scope.appLocalStorageUser  = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+        $scope.appLocalStorageUser  = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
         var data = {
             firstName: $scope.data.fname,
             lastName: $scope.data.lname,
@@ -41,10 +41,10 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
                         "type": 'internal',
                         "appId":data.appId
                     };
-                    localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
+                    localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
                     $rootScope.isUserLoggedIn.check = true;
                     $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
-                    $log.debug(localStorage.getItem('appLocalStorageUser'));
+                    $log.debug(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
                     if($stateParams.item == 'delivery'){
                         $state.go('app.cart');
                     }else{

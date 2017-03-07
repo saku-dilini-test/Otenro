@@ -63,7 +63,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     $scope.delivery = function(deliverItems){
 
-        if(localStorage.getItem('appLocalStorageUser')!==null){
+        if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId)!==null){
             $state.go('app.deliverDetails',{item:deliverItems});
         }
         else{
@@ -72,7 +72,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         }
     }
     $scope.pickupDetails = function (deliverItems) {
-        if(localStorage.getItem('appLocalStorageUser')!==null){
+        if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId)!==null){
             $state.go('app.pickupDetails',{item:deliverItems});
         }
         else{
@@ -95,11 +95,11 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
 
-    if(localStorage.getItem('appLocalStorageUser') == null){
+    if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId) == null){
         $state.go('app.login')
     }
     //get the user's registered address
-    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
     // get the shipping options
     $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
@@ -119,7 +119,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
 
         if(typeof deliverDetails.country == 'undefined'){
-            var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+            var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
             if(localData == null){
                 $state.go('app.login')
             }else{

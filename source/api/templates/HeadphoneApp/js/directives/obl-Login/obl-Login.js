@@ -29,7 +29,7 @@
 											"type": 'internal',
 											"appId":res.data.user.appId
 										};
-										localStorage.setItem('appLocalStorageUser', JSON.stringify(requestParams));
+										localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
                                         $rootScope.isUserLoggedIn.check = true;
                                         $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
 										if($stateParams.item == 'delivery'){

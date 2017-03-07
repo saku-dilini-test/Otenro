@@ -4,14 +4,14 @@ mobileApp.controller('cartController', function($scope, $rootScope, $translate, 
 	$scope.GetServiceApi		= GetServiceApi;
 	$rootScope.appTitle 		= $translate.instant('load.cart.Title');
 	$rootScope.footerCheckout	= false;
-	$scope.saved 				= localStorage.getItem('appLocalStorageUser');
+	$scope.saved 				= localStorage.getItem('appLocalStorageUser'+$rootScope.appId);
 	$scope.appLocalStorageUser 	= JSON.parse($scope.saved);
 
 	if($location.path() == '/provideDetail'){
 		$rootScope.appTitle  	= $translate.instant('load.cart.ProvideDetail');
 	}
 
-	if(localStorage.getItem('appLocalStorageUser')!==null){
+	if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId)!==null){
 		$scope.link				= '#provideDetail';
 	}else{
 		$scope.link				= '#login';

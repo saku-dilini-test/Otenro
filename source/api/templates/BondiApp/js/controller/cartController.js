@@ -40,8 +40,8 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
             $scope.isShowTaxInfo = false;
 
             // Get Tax Information
-            if (localStorage.getItem('appLocalStorageUser') !== null) {
-                var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+            if (localStorage.getItem('appLocalStorageUser'+$rootScope.appId) !== null) {
+                var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
                 if(localData != null){
                     var param = {
@@ -113,7 +113,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
             };
 
             $scope.delivery = function (deliverItems) {
-                if (localStorage.getItem('appLocalStorageUser') !== null) {
+                if (localStorage.getItem('appLocalStorageUser'+$rootScope.appId) !== null) {
                     $state.go('tab.deliverDetails', {item: deliverItems});
                 }
                 else {
@@ -123,7 +123,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
             }
 
             $scope.pickupDetails = function (deliverItems) {
-                if(localStorage.getItem('appLocalStorageUser')!==null){
+                if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId)!==null){
                     $state.go('tab.pickupDetails',{item:deliverItems});
                 }
                 else{
@@ -147,7 +147,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
     });
 
     //get the user's registered address
-    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
     // get the shipping options
     $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
@@ -167,7 +167,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
 
 
             if(typeof deliverDetails.country == 'undefined'){
-                var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'));
+                var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
                 if(localData == null){
                     $state.go('tab.login')
                 }else{

@@ -5,7 +5,7 @@ angular.module('starter.controllers', [])
     $rootScope.cart = {cartItems:[],cartSize:0,totalPrice:0};
     $rootScope.isUserLoggedIn = {check:false};
 
-    if(localStorage.getItem('appLocalStorageUser') == null){
+    if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId) == null){
             $rootScope.isUserLoggedIn.check = false;
     }else{
             $rootScope.isUserLoggedIn.check = true;
@@ -31,7 +31,7 @@ angular.module('starter.controllers', [])
 
 
         $scope.logout = function(){
-            localStorage.removeItem('appLocalStorageUser');
+            localStorage.removeItem('appLocalStorageUser'+$rootScope.appId);
             $rootScope.isUserLoggedIn.check = false;
             $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
              $ionicSideMenuDelegate.toggleLeft();

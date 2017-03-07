@@ -9,11 +9,11 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
     $scope.$emit('hideMenu',{});
 
-    if(localStorage.getItem('appLocalStorageUser') == null){
+    if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId) == null){
         $state.go('app.login')
     }
     //getting the user's registered name and address
-    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'));
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
      //setting Order Purchase History
     var orderHistory = [];
