@@ -22,6 +22,7 @@
                         result[i].registeredDate = $scope.year + "-" + $scope.month + "-" + $scope.date;
                     }
                     $scope.appuserList = result;
+                    console.log(appuserList);
                 }).error(function (error) {
                 toastr.error('Loading Error', 'Warning', {
                     closeButton: true
@@ -122,7 +123,7 @@
                 $log.debug(err);
             });
 
-        
+
         // if(initialData != null) {
         //     $scope.user = initialData;
         //       var  registeredUser= $scope.user.id;

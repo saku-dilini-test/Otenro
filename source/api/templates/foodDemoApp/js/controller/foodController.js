@@ -82,9 +82,9 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
         // if buyQty value greater than 0
         if(buyQty > 0){
-            // Get Selected-Variant-Qty value
+
             var selectVariantAvailableQty = $scope.selectedVariant.quantity;
-            //If quantity is unlimited enable buy button
+
             if($scope.selectedVariant.unlimited == true){
                 $scope.isBuyBtnDisable = false;
             }
@@ -134,17 +134,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         }
         }
     };
-
-
-
-
-
-
-
-
-
-
-
 
     //get Sales and Promotions
     $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {

@@ -2,10 +2,11 @@
     <div>
 
         <div class="md-dialog-main clearfix">
-
+            <tr ng-repeat="user in appuserList">
             <fieldset>
-                <label><h1>{{user.firstName}} {{user.lastName}}</h1></label><br>
+                <label><h1>{{user.name}} </h1></label><br>
             </fieldset>
+                </tr>
             <table class="me-simple-table">
                 <thead>
                 <th>Email</th><br>
@@ -15,14 +16,17 @@
                 </thead>
                 <tbody>
                 <tr>
+                <tr ng-repeat="user in appuserList">
                     <fieldset>
                         <td>{{user.email}}</td>
                     </fieldset>
+
                     <td>{{user.streetNumber}},{{user.streetName}},<br>
                         {{user.city}},<br>
                         {{user.country}}</td>
                     <td>{{user.phone}}</td>
                     <td>{{user.registeredDate}}</td>
+                </tr>
                 </tr>
                 </tbody>
             </table>
