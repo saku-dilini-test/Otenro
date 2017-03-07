@@ -192,3 +192,6 @@ ion-nav-title{
 .back-button {
     left: 3%;
 }
+.item-image{
+    display:block;
+}
