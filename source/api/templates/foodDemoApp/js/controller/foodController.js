@@ -118,6 +118,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 $scope.isBuyBtnDisable = false;
             }
             else{
+                alert(" $rootScope.cart.cartItems " +  $rootScope.cart.cartItems.length);
                $rootScope.cart.cartItems.push({
                 id: $scope.foodInfo.id,
                 name: $scope.foodInfo.name,
@@ -129,7 +130,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 imgURL : $stateParams.item.tempImageArray
             });
             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-            $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+            $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
             $state.go('app.category');
         }
         }

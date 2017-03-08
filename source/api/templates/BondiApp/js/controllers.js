@@ -12,9 +12,9 @@ angular.module('starter.controllers', [])
     }
 
 
-    $scope.parentobj = {};
-    $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-    $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
+    $rootScope.parentobj = {};
+    $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
+    $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
 
      function toggleLeft() {
         $ionicSideMenuDelegate.toggleLeft();
@@ -30,12 +30,15 @@ angular.module('starter.controllers', [])
       });
 
 
-        $scope.logout = function(){
-            localStorage.removeItem('appLocalStorageUser'+$rootScope.appId);
-            $rootScope.isUserLoggedIn.check = false;
-            $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
-             $ionicSideMenuDelegate.toggleLeft();
-        }
+    $scope.logout = function(){
+        localStorage.removeItem('appLocalStorageUser'+$rootScope.appId);
+        $rootScope.cart.cartSize = 0;
+        $rootScope.cart.cartItems = [];
+        $rootScope.parentobj.cartSize = 0;
+        $rootScope.isUserLoggedIn.check = false;
+        $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
+        $ionicSideMenuDelegate.toggleLeft();
+    }
 
 })
 
@@ -256,7 +259,7 @@ angular.module('starter.controllers', [])
 
         });
         $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-        $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+        $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
         $state.go('tab.menu');
         }
     }

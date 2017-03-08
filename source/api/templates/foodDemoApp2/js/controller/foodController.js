@@ -128,7 +128,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 totWeight : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.weight
             });
             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-            $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+            $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
             $state.go('app.category');
         }}
     };

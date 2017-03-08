@@ -135,7 +135,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 imgURL : $scope.images
             });
             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-            $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+            $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
             $scope.modal.hide();
         }}
     };
