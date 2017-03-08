@@ -11,29 +11,39 @@
                     </div>
                     <div id="Navigation" class="md-dialog-main">
                         <div class="products-options">
-                            <md-list flex>
-                                <md-list-item class="md-3-line" >
-                                    <div class="md-list-item-text" layout="column">
-                                        <h1>Store Wide</h1>
-                                        <h4>Store Wide</h4>
-                                    </div>
-                                </md-list-item>
+                            <md-list-item class="md-3-line" >
+                                <div class="md-list-item-text" layout="column">
+                                    <a ng-click="showStoreWide()">
+                                            <h1>Store Wide</h1>
+                                            <label>Store Wide</label>
+                                        </a>
+                                </div>
+                            </md-list-item>
                                 <md-list-item class="md-3-line"  >
                                     <div class="md-list-item-text" layout="column">
-                                        <h1>Minimum Order Value</h1>
-                                        <h4>Minimum Order Value</h4>
+                                        <a ng-click="showOrderValue()">
+                                            <h1>Minimum Order Value</h1>
+                                            <label>Minimum Order Value</label>
+                                        </a>
+
                                     </div>
                                 </md-list-item>
                                 <md-list-item class="md-3-line" >
                                     <div class="md-list-item-text" layout="column">
-                                        <h1>Category Wide</h1>
-                                        <h4>Category Wide</h4>
+                                        <a ng-click="showCategoryWide()">
+                                            <h1>Category Wide</h1>
+                                            <label>Category Wide</label>
+                                        </a>
+
                                     </div>
                                 </md-list-item>
                                 <md-list-item class="md-3-line" >
                                     <div class="md-list-item-text" layout="column">
-                                        <h1>Single Product</h1>
-                                        <h4>Single Product</h4>
+                                        <a ng-click="showSingleProduct()">
+                                            <h1>Single Product</h1>
+                                            <label>Single Product</label>
+                                        </a>
+
                                     </div>
                                 </md-list-item>
                             </md-list>
