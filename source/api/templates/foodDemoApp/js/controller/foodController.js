@@ -135,17 +135,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         }
     };
 
-
-
-
-
-
-
-
-
-
-
-
+    
     //get Sales and Promotions
     $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {
         $scope.salesandpromotion = data[0];
