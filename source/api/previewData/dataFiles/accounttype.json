@@ -1,3 +1,0 @@
-{"_id":{"$oid":"589c475d3685292e226671af"},"accountType":"Free Beta","accountTypeId":1,"createdAt":{"$date":"2017-02-09T10:41:33.594Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.594Z"}}
-{"_id":{"$oid":"589c475d3685292e226671b0"},"accountType":"Standard","accountTypeId":2,"createdAt":{"$date":"2017-02-09T10:41:33.594Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.594Z"}}
-{"_id":{"$oid":"589c475d3685292e226671b1"},"accountType":"Corporate","accountTypeId":3,"createdAt":{"$date":"2017-02-09T10:41:33.595Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.595Z"}}

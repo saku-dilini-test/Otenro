@@ -1,0 +1,98 @@
+<ion-view view-title="Details">
+
+    <ion-content class="made-easy-background-image made-easy-background-color food">
+
+
+        <div class="card-full row no-padding">
+
+            <div class="col no-padding">
+                <ion-slide-box options="sliderOptions" slider="sliderDelegate">
+                    <ion-slide ng-repeat="image in images">
+                        <div class="h8 made-easy-header-font"> {{foodInfo.name}}</div>
+
+                        <img width="100%" ng-src="{{imageURL}}/{{image.img}}" >
+                    </ion-slide>
+                </ion-slide-box>
+
+
+            </div>
+        </div>
+        <div class="card mods2_card">
+            <div class="item item-text-wrap ">
+
+                <div class="list">
+
+                    <a class="item item-icon-right" href="#">
+                        <h2 class="made-easy-content-font"> Price - {{currency.sign}} {{selectedVariant.price}}</h2>
+                        <i class="icon ion-cash"></i>
+                    </a>
+
+                    <a class="item item-icon-right" href="#">
+                        <h2 class="made-easy-content-font">
+                            <input type="number" min="1"
+                                   placeholder="Enter Quantity"
+                                   ng-model="selectedVariant.buyQuantity"
+                                   ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
+                        </h2>
+                        <i class="icon ion-pricetags"></i>
+                    </a>
+
+                    <a class="item" href="#">
+
+                        <label class="col item-input item-select no-padding">
+                            <div class="made-easy-content-font input-label">
+                                Select {{foodInfo.selection}}
+                            </div>
+                            <select ng-model="selectedVariant"
+                                    class="made-easy-content-font"
+                                    ng-options="variant.vType  for variant in foodInfo.variants"
+                                    ng-change="changeVariant(selectedVariant)">
+                            </select>
+                        </label>
+
+
+                    </a>
+
+                    <a class="item " href="#">
+                        <div class="made-easy-content-font">{{foodInfo.detailedDesc}}</div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+                    <!-- Buy Qty error message -->
+                    <div class="row text-center">
+                        <!-- Product not available in store -->
+                        <div class="col" ng-if="selectedVariant.quantity == 0">
+                        <span class="animated zoomIn item-error-message">
+                            Product not available
+                        </span>
+                        </div>
+                        <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+                        <div class="col" ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
+                        <span class="animated zoomIn item-error-message">
+                            Please enter a quantity of {{selectedVariant.quantity}} or less.
+                        </span>
+                        </div>
+                        <div class="col" ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
+                        <span class="animated zoomIn item-error-message">
+                            Please enter a quantity of {{selectedVariant.quantity}}.
+                        </span>
+                        </div>
+                    </div>
+                    <!-- Buy Button -->
+                    <div class="row item center ">
+                        <div class="col col-center">
+                            <button class="col col-80 button button-raised  made-easy-button-setting icon-left ion-ios-cart "
+                                    ng-disabled="isBuyBtnDisable"
+                                    ng-click="addToCart()">
+                                Add to cart
+                            </button>
+                        </div>
+                    </div>
+
+
+
+    </ion-content>
+</ion-view>
