@@ -13,7 +13,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
     //setting Order Purchase History
     var orderHistory = [];
-    $scope.history  = JSON.parse(localStorage.getItem('history'+$rootScope.appId+$scope.user.registeredUser));
+    $scope.history  = JSON.parse(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser));
 
     // --/-- Here start retrieving the currency --/--//
     $scope.userId = $rootScope.userId;
@@ -175,8 +175,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                   $rootScope.cart.totalQuantity = 0;
 
                  //Pushing into order purchase history
-                 if(angular.fromJson(localStorage.getItem('history'+$rootScope.appId+$scope.user.registeredUser)) != null){
-                 orderHistory = angular.fromJson(localStorage.getItem('history'+$rootScope.appId+$scope.user.registeredUser));
+                 if(angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser)) != null){
+                 orderHistory = angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser));
                  }
                   orderHistory.push({
                       orderHistoryKey : $rootScope.appId,
@@ -184,7 +184,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                       item :   $stateParams.item.cart,
                       amount :  $stateParams.item.amount,
                   });
-                  localStorage.setItem('history'+$rootScope.appId+$scope.user.registeredUser, JSON.stringify(orderHistory));
+                  localStorage.setItem("history"+$rootScope.appId+$scope.user.registeredUser, JSON.stringify(orderHistory));
 
                   var alertPopup = $ionicPopup.alert({
                       title: 'Thank You',
@@ -259,8 +259,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                 $rootScope.cart.totalQuantity = 0;
 
                                 //Pushing into order purchase history
-                                  if(angular.fromJson(localStorage.getItem('history'+$rootScope.appId+$scope.user.registeredUser)) != null){
-                                  orderHistory = angular.fromJson(localStorage.getItem('history'+$rootScope.appId+$scope.user.registeredUser));
+                                  if(angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser)) != null){
+                                  orderHistory = angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser));
                                   }
                                 orderHistory.push({
                                     orderHistoryKey : $rootScope.appId,
@@ -268,7 +268,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                     item :   $stateParams.item.cart,
                                     amount :  $stateParams.item.amount,
                                 });
-                                localStorage.setItem('history'+$rootScope.appId+$scope.user.registeredUser, JSON.stringify(orderHistory));
+                                localStorage.setItem("history"+$rootScope.appId+$scope.user.registeredUser, JSON.stringify(orderHistory));
 
                                 var alertPopup = $ionicPopup.alert({
                                     title: 'Thank You',
@@ -348,8 +348,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                         $rootScope.cart.totalQuantity = 0;
 
                                         //Pushing into order purchase history
-                                        if(angular.fromJson(localStorage.getItem('history'+$rootScope.appId+$scope.user.registeredUser)) != null){
-                                        orderHistory = angular.fromJson(localStorage.getItem('history'+$rootScope.appId+$scope.user.registeredUser));
+                                        if(angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser)) != null){
+                                        orderHistory = angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser));
                                         }
                                         orderHistory.push({
                                             orderHistoryKey : $rootScope.appId,
@@ -357,7 +357,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                             item :   $stateParams.item.cart,
                                             amount :  $stateParams.item.amount,
                                         });
-                                        localStorage.setItem('history'+$rootScope.appId+$scope.user.registeredUser, JSON.stringify(orderHistory));
+                                        localStorage.setItem("history"+$rootScope.appId+$scope.user.registeredUser, JSON.stringify(orderHistory));
 
                                         var alertPopup = $ionicPopup.alert({
                                             title: 'Thank You',
@@ -446,8 +446,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                             $rootScope.cart.totalQuantity = 0;
 
                                             //Pushing into order purchase history
-                                            if(angular.fromJson(localStorage.getItem('history'+$rootScope.appId+$scope.user.registeredUser)) != null){
-                                                orderHistory = angular.fromJson(localStorage.getItem('history'+$rootScope.appId+$scope.user.registeredUser));
+                                            if(angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser)) != null){
+                                                orderHistory = angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser));
                                             }
                                             orderHistory.push({
                                                 orderHistoryKey : $rootScope.appId,
@@ -455,7 +455,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                                 item :   $stateParams.item.cart,
                                                 amount :  $stateParams.item.amount,
                                             });
-                                            localStorage.setItem('history'+$rootScope.appId+$scope.user.registeredUser, JSON.stringify(orderHistory));
+                                            localStorage.setItem("history"+$rootScope.appId+$scope.user.registeredUser, JSON.stringify(orderHistory));
 
                                             var alertPopup = $ionicPopup.alert({
                                                 title: 'Thank You',
