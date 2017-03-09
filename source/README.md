@@ -17,7 +17,7 @@ SetUp Project
 
 (3) init preview data for templates preview
 
-    goto -> api -> previewData - > importData.sh
+    goto -> initData -> previewData - > importData.sh
 
         > set MESERVER directory path
         > set APPFILESERVER directory path

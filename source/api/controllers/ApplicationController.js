@@ -27,20 +27,6 @@ module.exports = {
     },
 
     templatePreview : function (req,res) {
-        console.log(req.body.templateName);
-       if (req.body.templateName=='foodDemoApp'){
-           res.send({
-               appId: '5859117bac4a80fb5265ab04',
-               message: "New Application has been created"
-           });
-       }
-        if (req.body.templateName=='foodDemoApp'){
-            res.send({
-                appId: '5859117bac4a80fb5265ab04',
-                message: "New Application has been created"
-            });
-        }
-
     },
 
     viewTemplate : function(req,res){
@@ -49,7 +35,7 @@ module.exports = {
             templateCategory = req.body.templateCategory,
             userId = req.body.userId,
             tempAppDirPath = config.ME_SERVER + userId + '/templates/',
-            templatePath = sails.config.appPath + '/api/templates/' + templateName,
+            templatePath = config.TEMPLATES_PATH + templateName,
             appName = req.body.appName,
             serverTmp="http://localhost:port",
             serverOrg=config.server.host;
