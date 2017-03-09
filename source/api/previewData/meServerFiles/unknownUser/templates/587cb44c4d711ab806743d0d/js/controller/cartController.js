@@ -32,6 +32,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                 });
             }
 
+
             // -- Config --
             $scope.userId = $rootScope.userId;
             $scope.appId = $rootScope.appId;
@@ -39,8 +40,36 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
             // default : tax info hide 
             $scope.isShowTaxInfo = false;
 
-            // Get Tax Information       
-            var taxInfoAPI_URL = constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId;     
+              $scope.buttonDisable = function(qty,totalQty){
+                    if(qty > totalQty && totalQty > 1){
+                          $scope.buyButtonDisable = true;
+                    }else{
+                          $scope.buyButtonDisable = false;
+                    }
+                }
+
+            // Get Tax Information
+            if (localStorage.getItem('appLocalStorageUser'+$rootScope.appId) !== null) {
+                var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
+
+                if(localData != null){
+                    var param = {
+                        'appId':$scope.appId,
+                        'country': localData.country
+                    };
+                    // Get Tax Information
+                    $http.post(constants.SERVER_URL + '/templatesOrder/getTaxInfoByCountry',param).success(function(data) {
+                        if(data != ''){
+                            $scope.tax = data[0].taxAmount;
+                            $scope.taxDisplayName = data[0].taxName;
+                            $scope.isShowTaxInfo = true;
+                        }
+                    });
+                }
+
+            }
+
+           /* var taxInfoAPI_URL = constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId;
             $http.get(taxInfoAPI_URL)
                 .success(function(data) {
                     var taxInfo = data;
@@ -53,7 +82,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                         $scope.tax = taxInfo[0].taxAmount;
                         $scope.isShowTaxInfo = true;
                     }
-                });
+                });*/
 
             // Calculate total amount function
             $scope.getTotal = function () {
@@ -62,7 +91,8 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                 for (var i = 0; i < $scope.cartItems.length; i++) {
                     var product = $scope.cartItems[i];
                     amount = product.total;
-                    total += (amount);
+                    total += (amount*product.qty);
+
                 }
                 var tax = total * $scope.tax/100;
                 $scope.taxTotal = total * $scope.tax/100;

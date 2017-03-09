@@ -8,6 +8,14 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
 
+    $scope.buttonDisable = function(qty,totalQty){
+        if(qty > totalQty && totalQty > 1){
+              $scope.buyButtonDisable = true;
+        }else{
+              $scope.buyButtonDisable = false;
+        }
+    }
+
     $http.get(constants.SERVER_URL+"/edit/getAllCountry")
         .then(function(res){
             $scope.countries = res.data;
@@ -35,7 +43,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         for(var i = 0; i < $scope.cartItems.length; i++){
             var product = $scope.cartItems[i];
             amount = product.total;
-            total += (amount);
+            total += (amount*product.qty);
         }
         tax = total * $scope.tax/100;
         $scope.taxTotal = total * $scope.tax/100;
@@ -126,6 +134,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             deliverDetails.streetName = localData.streetName;
             deliverDetails.country = localData.country;
             deliverDetails.city = localData.city;
+            deliverDetails.zip = localData.zip;
+
         }
         $log.debug(deliverDetails);
         deliverDetails.method = 'Delivery';

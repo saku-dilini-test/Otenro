@@ -32,12 +32,21 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                 });
             }
 
+
             // -- Config --
             $scope.userId = $rootScope.userId;
             $scope.appId = $rootScope.appId;
             $scope.cartItems = $rootScope.cart.cartItems;
             // default : tax info hide 
             $scope.isShowTaxInfo = false;
+
+              $scope.buttonDisable = function(qty,totalQty){
+                    if(qty > totalQty && totalQty > 1){
+                          $scope.buyButtonDisable = true;
+                    }else{
+                          $scope.buyButtonDisable = false;
+                    }
+                }
 
             // Get Tax Information
             if (localStorage.getItem('appLocalStorageUser'+$rootScope.appId) !== null) {
@@ -82,7 +91,8 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                 for (var i = 0; i < $scope.cartItems.length; i++) {
                     var product = $scope.cartItems[i];
                     amount = product.total;
-                    total += (amount);
+                    total += (amount*product.qty);
+
                 }
                 var tax = total * $scope.tax/100;
                 $scope.taxTotal = total * $scope.tax/100;
