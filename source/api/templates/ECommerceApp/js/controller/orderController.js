@@ -28,7 +28,7 @@ mobileApp.controller('OrderCtrl', function ($scope, $rootScope, $http, $state, c
                             $rootScope.cart.cartItems = [];
                             $rootScope.cart.cartSize = 0;
                             $rootScope.cart.totalPrice = 0;
-                            $scope.parentobj.cartSize = 0;
+                            $rootScope.parentobj.cartSize = 0;
                             $scope.orderInfo = {};
                             $state.go('tab.menu');
                         }
