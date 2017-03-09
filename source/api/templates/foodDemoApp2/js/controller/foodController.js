@@ -156,6 +156,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 $state.go('app.category');
             }
         }
+
     };
 
     //get Sales and Promotions

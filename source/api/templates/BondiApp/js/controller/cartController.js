@@ -119,7 +119,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
             $scope.removeItem = function (index) {
                 $scope.cartItems.splice(index, 1);
                 $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-                $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
             };
 
             $scope.delivery = function (deliverItems) {

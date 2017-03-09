@@ -23,7 +23,7 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
             $scope.country = $stateParams.item.country;
         }
     }
-    $scope.cartItems = $rootScope.cart.cartItems;
+    $rootScope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;
     var param = {
         'appId':$scope.appId,
@@ -42,8 +42,8 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         var total = 0;
         var amount = 0;
         var tax = 0;
-        for(var i = 0; i < $scope.cartItems.length; i++){
-            var product = $scope.cartItems[i];
+        for(var i = 0; i < $rootScope.cartItems.length; i++){
+            var product = $rootScope.cartItems[i];
             amount = product.total;
             total += (amount);
         }

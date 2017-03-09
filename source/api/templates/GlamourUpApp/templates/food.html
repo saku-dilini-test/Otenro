@@ -52,20 +52,20 @@
         </div>
 
                     <!-- Buy Qty error message -->
-                    <div class="row">
+                    <div class="row text-center">
                         <!-- Product not available in store -->
-                        <div ng-if="selectedVariant.quantity == 0">
+                        <div class="col" ng-if="selectedVariant.quantity == 0">
                         <span class="animated zoomIn item-error-message">
                             Product not available
                         </span>
                         </div>
                         <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
-                        <div ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
+                        <div class="col" ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
                         <span class="animated zoomIn item-error-message">
                             Please enter a quantity of {{selectedVariant.quantity}} or less.
                         </span>
                         </div>
-                        <div ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
+                        <div class="col" ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
                         <span class="animated zoomIn item-error-message">
                             Please enter a quantity of {{selectedVariant.quantity}}.
                         </span>
@@ -76,7 +76,7 @@
                         <div class="col col-top"> </div>
                         <div class="col col-67 col-center">
                             <button class="button button-raised  made-easy-button-setting"
-                                    ng-disabled="isBuyBtnDisable"
+                                    ng-disabled="isBuyBtnDisable || !selectedVariant.buyQuantity"
                                     ng-click="addToCart()">
                                 Add to cart
                             </button>

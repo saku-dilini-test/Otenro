@@ -21,7 +21,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             $scope.countries = res.data;
         });
 
-    $scope.cartItems = $rootScope.cart.cartItems;
+    $rootScope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;
     $http.get(constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId).success(function(data) {
         if(data == ''){
@@ -36,8 +36,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         var total = 0;
         var amount = 0;
         var tax = 0;
-        for(var i = 0; i < $scope.cartItems.length; i++){
-            var product = $scope.cartItems[i];
+        for(var i = 0; i < $rootScope.cartItems.length; i++){
+            var product = $rootScope.cartItems[i];
             amount = product.total;
             total += (amount*product.qty);
         }
@@ -55,8 +55,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     $scope.getTotalQuantity = function(){
         var quantity = 0;
-        for(var i =0; i<$scope.cartItems.length; i++){
-            var product = $scope.cartItems[i];
+        for(var i =0; i<$rootScope.cartItems.length; i++){
+            var product = $rootScope.cartItems[i];
             quantity += product.qty;
         }
         $rootScope.cart.totalQuantity = quantity;
@@ -64,9 +64,9 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     };
 
     $scope.removeItem = function(index){
-        $scope.cartItems.splice(index, 1);
+        $rootScope.cartItems.splice(index, 1);
         $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-        $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+        $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
     };
 
     $scope.delivery = function(deliverItems){

@@ -99,6 +99,7 @@ select{
 .removeAr input[type=number] {
   -moz-appearance: textfield;
 }
+
 input[type=number] {
   height: inherit;
   line-height: normal;
@@ -110,7 +111,3 @@ input[type=number] {
     white-space:normal;
     zoom: 0.8;
 }
-
-
-
-

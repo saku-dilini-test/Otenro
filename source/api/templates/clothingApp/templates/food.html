@@ -74,7 +74,7 @@
                         <div class="col col-top"> </div>
                         <div class="col col-67 col-center">
                             <button class="button button-block button-small made-easy-button-setting"
-                                    ng-disabled="isBuyBtnDisable"
+                                    ng-disabled="isBuyBtnDisable || !selectedVariant.buyQuantity"
                                     ng-click="addToCart()">
                                 Add to cart
                             </button>

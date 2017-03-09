@@ -151,6 +151,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                 $state.go('app.category');
             }
+
         }
     };
 
