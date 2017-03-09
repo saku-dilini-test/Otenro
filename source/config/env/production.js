@@ -50,6 +50,7 @@ module.exports = {
   ME_SERVER_PORT : 8081,
   // APP FILE SERVER Config
   APP_FILE_SERVER : '/home/otenro/appFileServer/',
-  CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789'
+  CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
+  TEMPLATES_PATH : '/home/prasanna/project/Otenro/initData/templates/'
 
 };

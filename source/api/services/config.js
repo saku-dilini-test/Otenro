@@ -11,6 +11,7 @@ module.exports = {
 
     ME_PORT : sails.config.ME_SERVER_PORT,
     CLIENT_SECRET:sails.config.CLIENT_SECRET,
+    TEMPLATES_PATH :sails.config.TEMPLATES_PATH,
 
     PUSH_API_URL : "https://api.ionic.io/push/notifications"
 };
