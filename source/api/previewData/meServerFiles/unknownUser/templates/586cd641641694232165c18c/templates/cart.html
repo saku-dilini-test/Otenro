@@ -4,10 +4,19 @@
        <a class="item item-avatar"  ng-repeat="item in cartItems" >
            <img src="{{imageURL}}/{{item.imgURL[0].img}}">
            <h2 ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}
-               <span class="made-easy-content-font"> x {{item.qty}}</span>
-               <i class="dark icon ion-trash-a right" ng-click="removeItem(index)"></i>
+               <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></span>
+               <i class="dark icon ion-trash-a right" ng-click="removeItem($index)"></i>
            </h2>
-           <p>{{currency}}{{item.total}}</p>
+           <p>{{currency}}{{item.total*item.qty}}</p>
+           <!-- Buy Qty error message -->
+           <div class="text-left">
+               <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+               <div ng-if="item.qty > item.totalQty && item.totalQty > 1" >
+                                    <span class="animated zoomIn item-error-message">
+                                        Please enter a quantity of {{item.totalQty}} or less.
+                                    </span>
+               </div>
+           </div>
 
        </a>
 
@@ -15,10 +24,14 @@
            {{currency}}{{getTotal()}}
        </div>
        <div class="center">
-           <button class="button button-raised  made-easy-button-setting color-invert" ng-click="pickupDetails(cartItems)">
+           <button class="button button-raised  made-easy-button-setting color-invert"
+                   ng-disabled="!getTotal() || buyButtonDisable"
+                   ng-click="pickupDetails(cartItems)">
               Pickup
            </button>
-           <button class="button button-raised  made-easy-button-setting " ng-click="delivery(cartItems)">
+           <button class="button button-raised  made-easy-button-setting "
+                   ng-disabled="!getTotal() || buyButtonDisable"
+                   ng-click="delivery(cartItems)">
                Delivery
            </button>
        </div>

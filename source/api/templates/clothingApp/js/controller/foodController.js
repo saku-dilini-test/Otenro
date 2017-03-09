@@ -91,38 +91,66 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         }
     };
 
-    $scope.addToCart = function() {
+      // Products Add to cart
+      $scope.addToCart = function() {
         if($scope.selectedVariant.buyQuantity == null){
             $ionicPopup.alert({
-                title: 'Warning !!!',
-                subTitle: 'Please enter a quantity',
+                title: 'Please enter a quantity',
+                template: 'Warning!!!',
                 cssClass: 'ionicPopUp',
                 buttons:[
                     {text:'OK',
                      type:'made-easy-button-setting'},
                 ]
             });
-        }
+        }else{
+            if($rootScope.cart.cartItems.length != 0){
+                    var i=0;
+                    while(i < $rootScope.cart.cartItems.length){
+                        if($scope.foodInfo.id == $rootScope.cart.cartItems[i].id){
+                            $rootScope.cart.cartItems[i].qty += $scope.selectedVariant.buyQuantity;
+                            $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
+                            $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                            $state.go('app.category');
+                            break;
+                        }
+                        else if(i == ($rootScope.cart.cartItems.length -1)){
+                            $rootScope.cart.cartItems.push({
+                                id: $scope.foodInfo.id,
+                                name: $scope.foodInfo.name,
+                                qty: $scope.selectedVariant.buyQuantity,
+                                sku: $scope.selectedVariant.sku,
+                                totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
+                                price: $scope.selectedVariant.price,
+                                total : $scope.selectedVariant.price,
+                                imgURL : $stateParams.item.tempImageArray,
+                                totalQty: $scope.selectedVariant.quantity
 
-        else  {
-
-            if($scope.selectedVariant.quantity == "null"){
-                $scope.isBuyBtnDisable = false;
+                            });
+                            $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
+                            $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                            $state.go('app.category');
+                        }
+                        i++;
+                    }
             }
             else{
-            $rootScope.cart.cartItems.push({
-                id: $scope.foodInfo.id,
-                name: $scope.foodInfo.name,
-                qty: $scope.selectedVariant.buyQuantity,
-                sku: $scope.selectedVariant.sku,
-                totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
-                price: $scope.selectedVariant.price,
-                total : $scope.selectedVariant.buyQuantity*$scope.selectedVariant.price,
-                imgURL : $stateParams.item.tempImageArray
-            });
-            $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-            $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
-            $state.go('app.category');
+                $rootScope.cart.cartItems.push({
+                    id: $scope.foodInfo.id,
+                    name: $scope.foodInfo.name,
+                    qty: $scope.selectedVariant.buyQuantity,
+                    sku: $scope.selectedVariant.sku,
+                    totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
+                    price: $scope.selectedVariant.price,
+                    total : $scope.selectedVariant.price,
+                    imgURL : $stateParams.item.tempImageArray,
+                    totalQty: $scope.selectedVariant.quantity
+                });
+                $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
+                $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                $state.go('app.category');
+            }
+
         }
     };
 
