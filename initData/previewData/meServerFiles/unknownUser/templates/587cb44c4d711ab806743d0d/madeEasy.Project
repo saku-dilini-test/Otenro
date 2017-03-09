@@ -1,0 +1,9 @@
+{
+  "name": "xxx",
+  "appId": "587cb44c4d711ab806743d0d",
+  "userId": "unknownUser",
+  "serviceApi": {
+    "host": "http://localhost",
+    "port": 1337
+  }
+}
