@@ -243,6 +243,7 @@ module.exports.routes = {
     'GET /edit/getMessageDetails': 'edit/engage/EngageController.getMessageDetails',
     'GET /edit/getAppUserData': 'edit/engage/EngageController.getAppUserData',
     'GET /edit/getUserOrders': 'edit/engage/EngageController.getUserOrders',
+    'POST /edit/saveSchedulePushMassage' : 'edit/engage/EngageController.saveSchedulePushMassage',
 
     /***
      * Template Data
