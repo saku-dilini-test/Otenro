@@ -305,6 +305,8 @@
 
         // --/-- When user click check box, apply existing background.jpg as background image
         $scope.applyBackgroundImage = function(isApply){
+            /*alert("$scope.isApplyBGImage " + $scope.isApplyBGImage);
+            alert("isApply " + isApply);*/
             var isApplyUpdate = isApply;
             if($scope.isApplyBGImage == null){
                 isApplyUpdate = true;
@@ -316,7 +318,10 @@
             stylesService.applyBackgroundImage(requestData)
                 .success(function (res) {
                     var tempUrl = mySharedService.url;
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    console.log("tempUrl "  + tempUrl);
+                    console.log("$scope.appUpdateLocation.loginUrl "  + $scope.appUpdateLocation.loginUrl);
+
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime(),$auth.getPayload().id,$rootScope.appId);
                     toastr.success('Background image changed ', 'Message', {
                         closeButton: true
                     });
