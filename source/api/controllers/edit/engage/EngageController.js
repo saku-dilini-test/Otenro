@@ -67,6 +67,14 @@ module.exports = {
     },
 
 
+    saveSchedulePushMassage : function (req,res) {
+        // Create push collection
+        PushMessage.create(req.body).exec(function(err,data){
+            if(err) return done(err);
+            return res.send(data);
+        });
+    },
+
     // get registered user Details
 
     getAppUserData : function(req,res){

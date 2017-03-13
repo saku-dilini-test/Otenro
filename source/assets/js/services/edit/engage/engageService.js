@@ -103,6 +103,9 @@
             },
             getUserOrders: function (registeredUser) {
                 return $http.get(SERVER_URL + 'edit/getUserOrders?registeredUser='+registeredUser);
+            },
+            saveSchedulePushMassage :function (data) {
+                return $http.post(SERVER_URL+ 'edit/saveSchedulePushMassage',data);
             }
         };
     }

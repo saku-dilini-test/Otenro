@@ -332,7 +332,7 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     })
 
 
-            .state('tab.category', {
+            /*.state('tab.category', {
                         cache: false,
                         url: '/category',
                         views: {
@@ -342,7 +342,7 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                             }
                         }
                     })
-
+*/
             .state('tab.pickupDetails', {
                 cache: false,
                 url: '/pickupDetails',

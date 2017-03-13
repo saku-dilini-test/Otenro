@@ -81,7 +81,7 @@
         $scope.save = function(message){
             message.appId = $rootScope.appId;
             message.userId = $auth.getPayload().id;
-                engageService.sendPushMessage(message)
+                engageService.saveSchedulePushMassage(message)
                   .success(function(data){
                     toastr.success('Successfully Saved ', 'Saved', {
                         closeButton: true
