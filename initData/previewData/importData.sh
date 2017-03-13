@@ -2,10 +2,10 @@
 echo  'start....'
 
 MESERVER='/var/www/html/meServer/temp/';
-APPFILESERVER='/home/onbit/Documents/appFileServer/';
+APPFILESERVER='/home/prasanna/Desktop/appFileServer/';
 
-#ENV='dev'   #this is for development
-ENV='pro'  #this is for production
+ENV='dev'   #this is for development
+#ENV='pro'  #this is for production
 DB=''
 
 if [ $ENV == 'dev' ]
