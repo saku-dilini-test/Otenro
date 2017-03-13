@@ -1,4 +1,4 @@
-/**
+    /**
  * CurrencyController
  *
  * @help        :: See http://links.sailsjs.org/docs/controllers
@@ -8,22 +8,27 @@ module.exports = {
 
     setCurrency : function(req,res){
 
-        var data = {
-         appSettings:{
-            appCurrency:{
-                'currency': req.body.currency,
-                'sign': req.body.currencySign,
-                'symbol': req.body.currencySymbol,
-            }
-         }
-        };
+        var appId = req.body.appId;
 
-        var query = {id:req.body.appId};
-        Application.update(query,data).exec(function(err, appProduct) {
-            if (err) res.send(err);
-            res.send({
-                appId: appProduct,
-                message: "Currency Successfully added"
+        var appSettings = null;
+        var searchApp = {
+            id: appId
+        };
+        Application.find(searchApp, function(err, app) {
+            appSettings = app[0].appSettings;
+            appSettings.appCurrency.currency = req.body.currency;
+            appSettings.appCurrency.sign = req.body.currencySign;
+            appSettings.appCurrency.symbol = req.body.currencySymbol;
+
+            var data = appSettings;
+
+            var query = {id:req.body.appId};
+            Application.update(query,data).exec(function(err, appProduct) {
+                if (err) res.send(err);
+                res.send({
+                    appId: appProduct,
+                    message: "Currency Successfully added"
+                });
             });
         });
     },
