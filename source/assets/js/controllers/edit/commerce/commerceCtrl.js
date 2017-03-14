@@ -565,11 +565,7 @@
                 return;
             }
 
-            if (storeSettings!=null){
-                if (!storeSettings.header  || !storeSettings.content) {
-                    toastr.error(' warning', "Please fill all the fields", {closeButton: true});
-                }else{
-
+            if (storeSettings.header&&storeSettings.content ){
                     storeSettings.appId = $rootScope.appId;
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
@@ -587,7 +583,6 @@
                             closeButton: true
                         });
                     })
-                }
             }else {
                 $scope.selectedTab = current;
             }
@@ -637,10 +632,7 @@
                 return;
             }
 
-            if (!storeSettings.returnPolicy|| !storeSettings.termsAndCondition|| !storeSettings.privacyPolicy) {
-                toastr.error(' warning', "Please fill all the fields", {closeButton: true});
-            }
-            else {
+            if (storeSettings.returnPolicy&&storeSettings.termsAndCondition&&storeSettings.privacyPolicy) {
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
@@ -651,6 +643,8 @@
                 }).error(function (err) {
                     toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
                 })
+            }else {
+                $scope.selectedTab = current;
             }
         };
 
@@ -1084,6 +1078,7 @@
                     $mdDialog.hide();
                 });
             }
+
         };
     }
 })();
