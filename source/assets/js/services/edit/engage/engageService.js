@@ -57,32 +57,32 @@
             //Get  All order Details
             showAllordersView: function(data) {
                 return $mdDialog.show({
-                    controller: 'EngageCtrl',
+                    controller: 'UserCtrl',
                     templateUrl: 'user/edit/engage/registerUserView.html',
                     clickOutsideToClose: true,
                     locals: {
                         initialData: data
                     }
                 }).then(function(answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
+
                 }, function() {
-                    //$scope.status = 'You cancelled the dialog.';
+
                 });
             },
 
             //Get  All Registered Users
             showAppUserDialog: function() {
                 return $mdDialog.show({
-                    controller: 'EngageCtrl',
+                    controller: 'UserCtrl',
                     templateUrl: 'user/edit/engage/appRegisteredUser.html',
                     clickOutsideToClose: true,
                     locals: {
                         initialData: null
                     }
                 }).then(function(answer) {
-                    //$scope.status = 'You said the information was "' + answer + '".';
+
                 }, function() {
-                    //$scope.status = 'You cancelled the dialog.';
+                   
                 });
             },
 

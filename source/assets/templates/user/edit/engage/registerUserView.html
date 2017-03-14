@@ -18,8 +18,9 @@
                     <fieldset>
                         <td>{{user.email}}</td>
                     </fieldset>
-                    <td>{{user.streetNumber}},{{user.streetName}},<br>
-                        {{user.city}},<br>
+                    <td>{{user.streetNumber}} <br>
+                        {{user.streetName}}<br>
+                        {{user.city}}<br>
                         {{user.country}}</td>
                     <td>{{user.phone}}</td>
                     <td>{{user.registeredDate}}</td>
@@ -50,8 +51,8 @@
     </div>
         <div class="md-dialog-buttons">
             <div class="inner-section">
-                <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
                 <md-button class="me-default-button" ng-click="backToUserView()">cancel</md-button>
+                <md-button class="me-default-button" ng-click="backToUserView()">Finish</md-button>
                 <!--<md-button class="me-default-button" > Show</md-button>-->
             </div>
         </div>
