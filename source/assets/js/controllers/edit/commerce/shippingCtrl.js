@@ -235,6 +235,12 @@
         //Delete first or last weight from the weight base
         $scope.deleteWeight = function(index){
             $scope.weightRate.weightRanges.splice(index, 1);
+            $scope.previousIndex  = index-1 ;
+            if ( $scope.previousIndex >= 0){
+                angular.element(document.getElementById('startWeight'+ $scope.previousIndex ))[0].disabled = false;
+                angular.element(document.getElementById('endWeight'+ $scope.previousIndex ))[0].disabled = false;
+            }
+
         };
 
         // --/-- edit shopping collection
