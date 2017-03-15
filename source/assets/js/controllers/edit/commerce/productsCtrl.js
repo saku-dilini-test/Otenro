@@ -168,8 +168,8 @@
             }
         };
 
-        $scope.addProductVariants = function (selection, variants,current) {
-            $scope.selection = selection;
+        $scope.addProductVariants = function ( variants,current) {
+            $scope.selection = $scope.product.selection;
             disableTabs(current,false,false,false,false);
 
         };
@@ -310,7 +310,7 @@
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'YES';
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
-                      toastr.success('Product added successfully', 'Awsome!', {
+                      toastr.success('Product added successfully', 'Awesome!', {
                           closeButton: true
                       });
                       if(initialData.product.appId){
@@ -644,36 +644,38 @@
                  * @param inputVal
                  * @param type
                  *
+                 * Have to change this validation according to the new variants logic
+                 * for now a user can add duplicate variant patterns
                  */
-                $scope.validateInputValueVType = function (inputVal,type) {
-                      var count = 0;
-                      if (inputVal){
-                          angular.forEach($scope.product.variants, function(variants){
-                              if (type=='size') {
-                                  if (inputVal.trim().toLowerCase() == variants.size.trim().
-                                      toLowerCase()) {
-                                      count++;
-                                  }
-                              }else{
-
-                                  if(inputVal.trim() == variants.vType.trim()) {
-                                      count++;
-                                  }
-                              }
-                              if (count>=2){
-                                  if (type=='size'){
-                                      variants.size = null;
-                                  }else {
-
-                                      variants.vType = null;
-                                  }
-                                  toastr.error('Can not add duplicate values', 'Warning', {
-                                      closeButton: true
-                                  });
-                              }
-                          });
-                      }
-                };
+//                $scope.validateInputValueVType = function (inputVal,type) {
+//                      var count = 0;
+//                      if (inputVal){
+//                          angular.forEach($scope.product.variants, function(variants){
+//                              if (type=='size') {
+//                                  if (inputVal.trim().toLowerCase() == variants.size.trim().
+//                                      toLowerCase()) {
+//                                      count++;
+//                                  }
+//                              }else{
+//
+//                                  if(inputVal.trim() == variants.vType.trim()) {
+//                                      count++;
+//                                  }
+//                              }
+//                              if (count>=2){
+//                                  if (type=='size'){
+//                                      variants.size = null;
+//                                  }else {
+//
+//                                      variants.vType = null;
+//                                  }
+//                                  toastr.error('Can not add duplicate values', 'Warning', {
+//                                      closeButton: true
+//                                  });
+//                              }
+//                          });
+//                      }
+//                };
 
 
         $scope.nextStep = function (current) {
@@ -731,7 +733,149 @@
             mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
         }
 
+        $scope.goToEditProductWindow = function(item){
+             return commerceService.showAddProductsDialog(item);
 
+//               $state.go('user.editApp',{appId: item.id});
+         };
+
+
+
+         $scope.addNewVariant = function (fullProduct, variantName) {
+                return $mdDialog.show({
+                    controllerAs: 'dialogCtrl',
+                    locals: { name: variantName },
+                    controller:  ['$scope', 'name', function($scope, name) {
+                        $scope.product = fullProduct;
+                        $scope.product.selection = fullProduct.selection;
+                        $scope.vType = name;
+                        $scope.vTypeRemove = name;
+
+                        if ($scope.product.selection == undefined){
+                            $scope.product.selection= [];
+                        }
+                        this.confirm = function click(vName){
+                            if($scope.product.selection.length == 4 && $scope.vTypeRemove == undefined){
+                                 toastr.error('You can only add 4 variants', 'Error!', {
+                                      closeButton: true
+                                 });
+                                  return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                            }else if($scope.product.selection.length > 0){
+                                for (var i = 0; i < $scope.product.selection.length; i++){
+                                   if( $scope.product.selection[i].name.toLowerCase() ==  $scope.vType.toLowerCase()){
+                                         toastr.error('Cannot rename or add by the same name', 'Error!', {
+                                              closeButton: true
+                                         });
+                                         break;
+                                   }else if( $scope.product.selection[i].name ==  $scope.vTypeRemove){
+                                        $scope.product.selection[i].name = vName;
+                                        for(var j=0;j<$scope.product.variants.length;j++){
+                                            for(var k=0;k<$scope.product.variants[0].selection.length;k++){
+                                                $scope.product.variants[j].selection[k].name = vName;
+                                            }
+                                        }
+                                        toastr.success('Variant renamed', 'Success!', {
+                                            closeButton: true
+                                        });
+                                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                                        break;
+                                   }else if( i == $scope.product.selection.length -1){
+                                        $scope.product.selection.push({
+                                            name:vName,
+                                            vType:""
+                                        });
+                                         for(var j=0;j<$scope.product.variants.length;j++){
+                                            $scope.product.variants[j].selection.push({
+                                                name:vName,
+                                                vType:""
+                                            });
+                                        }
+                                        toastr.success('Variant added', 'Success!', {
+                                              closeButton: true
+                                        });
+                                        return commerceService.showAddProductsDialog($scope.product,undefined, $scope.product.variants);
+                                        break;
+                                   }
+                                 }
+                            }else{
+                                $scope.product.selection.push({
+                                    name:vName,
+                                    vType:""
+                                });
+                                for(var j=0;j<$scope.product.variants.length;j++){
+                                    $scope.product.variants[j].selection= [];
+                                    $scope.product.variants[j].selection.push({
+                                        name:vName,
+                                        vType:""
+                                    });
+                                }
+                                  $scope.tmpImage = [];
+                                  $scope.product.published = 'NO';
+                                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product})
+                                  .success(function (result) {
+                                      toastr.success('Variant added', 'Success!', {
+                                          closeButton: true
+                                      });
+                                 return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants, result.productId);
+
+                                  }).error(function (err) {
+                                      toastr.error('Variant creation failed', 'Warning', {
+                                          closeButton: true
+                                      });
+                                      $mdDialog.hide();
+
+                                  });
+                            }
+
+                        },
+                        this.cancel = function click(){
+
+                           return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                        },
+                        this.remove = function click(selection){
+                                for (var i = 0; i < $scope.product.selection.length; i++){
+                                   if( $scope.product.selection[i].name ==  selection){
+                                        $scope.product.selection.splice(i, 1);
+                                        for(var j=0;j<$scope.product.variants.length;j++){
+                                            $scope.product.variants[j].selection.splice(i, 1);
+                                        }
+                                         toastr.success('Variant removed', 'Success!', {
+                                              closeButton: true
+                                         });
+                                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                                   }
+                                }
+                        }
+                    }],
+                    template:'<md-dialog aria-label="Add new Variant">'+
+                    '<md-content >' +
+                    '<div class="md-dialog-header">' +
+                        '<h1>Price & Variants </h1>' +
+                    '</div>' +
+                    '<br>'+
+                    '<div class="md-dialog-main">' +
+                        '<md-input-container class="md-block">'+
+                            '<label>Variant name </label>' +
+                            '<input type="text"'+
+                            'min="1" maxlength="12" ng-model="vType" placeholder="Type a name" >' +
+                        '</md-input-container>'+
+                        '<label>Eg: Color, Size, Meterial, etc</label>'+
+                    '</div>' +
+                    '<br>' +
+                    '<br>' +
+                    '<div class="md-dialog-buttons">'+
+                        '<div class="inner-section">'+
+                            '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">CANCEL</md-button>'+
+                            '<md-button ng-if="vTypeRemove != null" class="me-default-button" ng-click="dialogCtrl.remove(vType)">REMOVE</md-button>'+
+                            '<md-button class="me-default-button" ng-click="dialogCtrl.confirm(vType)">SAVE</md-button>'+
+                        '</div>'+
+                    '</div>' +
+                    '</md-content>' +
+                    '</md-dialog>'
+                })
+
+
+            };
 
 
     }

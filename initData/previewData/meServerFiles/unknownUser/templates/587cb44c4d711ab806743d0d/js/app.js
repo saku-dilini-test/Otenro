@@ -332,7 +332,7 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                     })
 
 
-            .state('tab.category', {
+            /*.state('tab.category', {
                         cache: false,
                         url: '/category',
                         views: {
@@ -342,7 +342,7 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                             }
                         }
                     })
-
+*/
             .state('tab.pickupDetails', {
                 cache: false,
                 url: '/pickupDetails',
@@ -360,4 +360,19 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/menu');
 
-    });
+    }).filter('unique', function() {
+        return function(collection, keyname) {
+          var output = [],
+            keys = [];
+
+          angular.forEach(collection, function(item) {
+            var key = item[keyname];
+            if(keys.indexOf(key) == -1) {
+              keys.push(key);
+              output.push(item);
+            }
+          });
+
+          return output;
+        };
+      });

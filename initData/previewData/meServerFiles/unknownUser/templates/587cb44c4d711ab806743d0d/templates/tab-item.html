@@ -2,11 +2,11 @@
     <ion-content class="padding item-details">
         <div class="card">
             <div class="image-wrapper">
-                <ion-slide-box show-pager="false" >
-                    <ion-slide ng-repeat="image in images">
+                <ion-slides show-pager="false" options="options" slider="data.slider">
+                    <ion-slide-page ng-repeat="image in images">
                         <img width="100%" src="{{imageURL}}/{{image.img}}" >
-                    </ion-slide>
-                </ion-slide-box>
+                    </ion-slide-page>
+                </ion-slides>
 
             </div>
 
@@ -18,15 +18,51 @@
                 <div class="align-center made-easy-content-font">{{item.detailedDesc}}</div>
             </div>
             <div class="cart-item-header">
-                <div class="row">
+                <div class="row" ng-if="item.selection[0]">
                     <div class="col col-50 align-right">
-                        {{item.selection}} :
+                        {{item.selection[0].name}} :
                     </div>
                     <div class="col col-50 align-left">
                         <select ng-model="selectedVariant"
                                 class="item-buy"
-                                ng-options="variant as variant.vType for variant in item.variants"
+                                ng-options="variant.vType  for variant in selection |unique:'vType' "
                                 ng-change="changeVariant(selectedVariant)">
+                        </select>
+                    </div>
+                </div>
+                <div class="row" ng-if="item.selection[1]">
+                    <div class="col col-50 align-right">
+                        {{item.selection[1].name}} :
+                    </div>
+                    <div class="col col-50 align-left">
+                        <select ng-model="selectedVariant1"
+                                class="item-buy"
+                                ng-options="variant.vType  for variant in selection1 |unique:'vType' "
+                                ng-change="changeVariant2(selectedVariant1)">
+                        </select>
+                    </div>
+                </div>
+                <div class="row" ng-if="item.selection[2]">
+                    <div class="col col-50 align-right">
+                        {{item.selection[2].name}} :
+                    </div>
+                    <div class="col col-50 align-left">
+                        <select ng-model="selectedVariant3"
+                                class="item-buy"
+                                ng-options="variant.vType  for variant in selection2 |unique:'vType' "
+                                ng-change="changeVariant3(selectedVariant3)">
+                        </select>
+                    </div>
+                </div>
+                <div class="row" ng-if="item.selection[3]">
+                    <div class="col col-50 align-right">
+                        {{item.selection[3].name}} :
+                    </div>
+                    <div class="col col-50 align-left">
+                        <select ng-model="selectedVariant4"
+                                class="item-buy"
+                                ng-options="variant.vType  for variant in selection3 |unique:'vType' "
+                                ng-change="changeVariant4(selectedVariant4)">
                         </select>
                     </div>
                 </div>
@@ -75,7 +111,7 @@
                 <div class="col col-top"> </div>
                 <div class="col col-67 col-center">
                     <button class="button button-small button-block made-easy-button-setting"
-                            ng-disabled="isBuyBtnDisable"
+                            ng-disabled="isBuyBtnDisable || !selectedVariant.buyQuantity || lockBuyButton"
                             ng-click="addToCart()">
                         ADD TO CART
                     </button>

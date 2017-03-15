@@ -39,17 +39,46 @@
 
                     <a class="item" href="#">
 
-                        <label class="col item-input item-select no-padding">
+                        <label class="col item-input item-select no-padding" ng-if="foodInfo.selection[0]">
                             <div class="made-easy-content-font input-label">
-                                Select {{foodInfo.selection}}
+                                Select {{foodInfo.selection[0].name}}
                             </div>
                             <select ng-model="selectedVariant"
                                     class="made-easy-content-font"
-                                    ng-options="variant.vType  for variant in foodInfo.variants"
+                                    ng-options="variant.vType  for variant in selection |unique:'vType' "
                                     ng-change="changeVariant(selectedVariant)">
                             </select>
                         </label>
-
+                        <label class="col item-input item-select no-padding" ng-if="foodInfo.selection[1]">
+                            <div class="made-easy-content-font input-label">
+                                Select {{foodInfo.selection[1].name}}
+                            </div>
+                            <select ng-model="selectedVariant1"
+                                    class="made-easy-content-font"
+                                    ng-options="variant.vType  for variant in selection1 |unique:'vType' "
+                                    ng-change="changeVariant2(selectedVariant1)">
+                            </select>
+                        </label>
+                        <label class="col item-input item-select no-padding" ng-if="foodInfo.selection[2]">
+                            <div class="made-easy-content-font input-label">
+                                Select {{foodInfo.selection[2].name}}
+                            </div>
+                            <select ng-model="selectedVariant3"
+                                    class="made-easy-content-font"
+                                    ng-options="variant.vType  for variant in selection2 |unique:'vType'"
+                                    ng-change="changeVariant3(selectedVariant3)">
+                            </select>
+                        </label>
+                        <label class="col item-input item-select no-padding" ng-if="foodInfo.selection[3]">
+                            <div class="made-easy-content-font input-label">
+                                Select {{foodInfo.selection[3].name}}
+                            </div>
+                            <select ng-model="selectedVariant4"
+                                    class="made-easy-content-font"
+                                    ng-options="variant.vType  for variant in selection3 |unique:'vType'"
+                                    ng-change="changeVariant4(selectedVariant4)">
+                            </select>
+                        </label>
 
                     </a>
 
@@ -85,7 +114,7 @@
                     <div class="row item center ">
                         <div class="col col-center">
                             <button class="col col-80 button button-raised  made-easy-button-setting icon-left ion-ios-cart "
-                                    ng-disabled="isBuyBtnDisable"
+                                    ng-disabled="isBuyBtnDisable || !selectedVariant.buyQuantity || lockBuyButton"
                                     ng-click="addToCart()">
                                 Add to cart
                             </button>
