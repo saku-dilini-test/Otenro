@@ -376,4 +376,6 @@ input[type=number] {
   padding-top: 0;
 }
 
-
+.no-padding{
+    padding:0;
+}

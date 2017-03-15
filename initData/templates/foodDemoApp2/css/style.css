@@ -343,4 +343,8 @@ input[type=number] {
 }
 .item-error-message{
     color:red;
+    zoom:0.7;
+}
+.no-padding{
+    padding:0;
 }
