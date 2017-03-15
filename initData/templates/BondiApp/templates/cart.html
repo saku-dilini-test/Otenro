@@ -1,10 +1,10 @@
 <ion-view class="made-easy-background-color made-easy-background-image" view-title="Cart">
     <ion-content class="padding" >
         <div class="list card">
-                <div class=" made-easy-content-font cart-item-header">
+                <div class=" made-easy-content-font ">
                   <div class="row">
                     <div class="col col-50">Item</div>
-                    <div class="col">Qty</div>
+                    <div class="col col-25">Qty</div>
                     <div class="col">Price</div>
                     <div class="col"></div>
                   </div>
@@ -12,8 +12,8 @@
                 <div class="cart-item" ng-repeat="item in cartItems" >
                   <div class="row">
                     <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}</div>
-                      <div class="col" ><input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></div>
-                      <div class="col" ng-model="item.total" >{{item.total*item.qty}}</div>
+                      <div class="col col-25 text-right" ><input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></div>
+                      <div class="col text-right" ng-model="item.total" >{{item.total*item.qty}}</div>
                     <div class="col align-right"><a ng-click="removeItem($index)"><i class="icon ion-ios-trash-outline"></i></a></a></div>
                   </div>
                    <!-- Buy Qty error message -->
@@ -31,17 +31,17 @@
                 <div ng-if="isShowTaxInfo" class="cart-item">
                     <div class="row">
                         <div class="col col-50">{{taxDisplayName}}</div>
-                        <div class="col"></div>
+                        <div class="col col-25"></div>
                         <div class="col"  ng-model="tax">{{tax}}%</div>
                         <div class="col" ></div>
                     </div>
                 </div>
 
                 <div class="cart-total">
-                  <div class="row align-right">
-                    <div class="col col-50">Total</div>
-                    <div class="col" ng-model="quantity">{{getTotalQuantity()}}</div>
-                    <div class="col" ng-model="total" >{{getTotal()}}</div>
+                  <div class="row">
+                    <div class="col col-50 text-right">Total</div>
+                    <div class="col col-25" ng-model="quantity">{{getTotalQuantity()}}</div>
+                    <div class="col text-right" ng-model="total" >{{getTotal()}}</div>
                      <div class="col"> </div>
                   </div>
                 </div>

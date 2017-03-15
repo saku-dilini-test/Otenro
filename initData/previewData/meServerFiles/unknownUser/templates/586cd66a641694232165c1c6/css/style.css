@@ -432,3 +432,7 @@ input[type=number] {
 }
 
 
+.header-modify{
+    width:100% !important;
+    text-align:left !important;
+}
