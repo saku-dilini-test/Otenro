@@ -107,7 +107,15 @@
                 toastr.error('Tax should be between 0 to 100', 'Message', {
                     closeButton: true
                 });
-            }
+            }else if (typeof taxInfo.taxName == 'undefined'){
+                 toastr.error('Please fill the tax name', 'Message', {
+                     closeButton: true
+                 });
+             }else if(country.length <=0) {
+                 toastr.error('Please add at least one country', 'Message', {
+                     closeButton: true
+                 });
+             }
             else{
                  taxInfo.countryRestriction = country;
                 taxInfo.appId = $rootScope.appId;
