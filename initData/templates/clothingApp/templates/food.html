@@ -17,15 +17,51 @@
             </div>
 
             <div class="item item-text-wrap cart-item-header">
-                    <div class="row">
+                    <div class="row"  ng-if="foodInfo.selection[0]">
                         <div class="col col-50 align-right">
-                            {{foodInfo.selection}} :
+                            {{foodInfo.selection[0].name}} :
                         </div>
                         <div class="col col-50 align-left">
                             <select ng-model="selectedVariant"
                                     class="item-buy"
-                                    ng-options="variant.vType  for variant in foodInfo.variants"
+                                    ng-options="variant.vType  for variant in selection |unique:'vType' "
                                     ng-change="changeVariant(selectedVariant)">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row"  ng-if="foodInfo.selection[1]">
+                        <div class="col col-50 align-right">
+                            {{foodInfo.selection[1].name}} :
+                        </div>
+                        <div class="col col-50 align-left">
+                            <select ng-model="selectedVariant1"
+                                    class="item-buy"
+                                    ng-options="variant.vType  for variant in selection1 |unique:'vType' "
+                                    ng-change="changeVariant2(selectedVariant1)">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row"  ng-if="foodInfo.selection[2]">
+                        <div class="col col-50 align-right">
+                            {{foodInfo.selection[2].name}} :
+                        </div>
+                        <div class="col col-50 align-left">
+                            <select ng-model="selectedVariant3"
+                                    class="item-buy"
+                                    ng-options="variant.vType  for variant in selection2 |unique:'vType' "
+                                    ng-change="changeVariant3(selectedVariant3)">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="foodInfo.selection[3]">
+                        <div class="col col-50 align-right">
+                            {{foodInfo.selection[3].name}} :
+                        </div>
+                        <div class="col col-50 align-left">
+                            <select ng-model="selectedVariant4"
+                                    class="item-buy"
+                                    ng-options="variant.vType  for variant in selection3 |unique:'vType' "
+                                    ng-change="changeVariant4(selectedVariant4)">
                             </select>
                         </div>
                     </div>

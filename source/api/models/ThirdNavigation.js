@@ -39,7 +39,7 @@ module.exports = {
             type: 'string'
         },
         selection: {
-            type: 'string'
+            type: 'json'
         },
         tempImageArray : {
             type : 'json'

@@ -40,13 +40,40 @@
 
         </div>
         <div class="col">
-            <label class="col item item-input item-select">
+            <label class="col item item-input item-select" ng-if="foodInfo.selection[0]">
                 <div class="input-label">
-                    {{foodInfo.selection}}
+                    {{foodInfo.selection[0].name}}
                 </div>
                 <select ng-model="selectedVariant"
-                        ng-options="variant.vType  for variant in foodInfo.variants"
+                        ng-options="variant.vType  for variant in selection |unique:'vType' "
                         ng-change="changeVariant(selectedVariant)">
+                </select>
+            </label>
+            <label class="col item item-input item-select" ng-if="foodInfo.selection[1]">
+                <div class="input-label">
+                    {{foodInfo.selection[1].name}}
+                </div>
+                <select ng-model="selectedVariant1"
+                        ng-options="variant.vType  for variant in selection1 |unique:'vType' "
+                        ng-change="changeVariant2(selectedVariant1)">
+                </select>
+            </label>
+            <label class="col item item-input item-select" ng-if="foodInfo.selection[2]">
+                <div class="input-label">
+                    {{foodInfo.selection[2].name}}
+                </div>
+                <select ng-model="selectedVariant3"
+                        ng-options="variant.vType  for variant in selection2 |unique:'vType' "
+                        ng-change="changeVariant3(selectedVariant3)">
+                </select>
+            </label>
+            <label class="col item item-input item-select" ng-if="foodInfo.selection[3]">
+                <div class="input-label">
+                    {{foodInfo.selection[3].name}}
+                </div>
+                <select ng-model="selectedVariant4"
+                        ng-options="variant.vType  for variant in selection3 |unique:'vType' "
+                        ng-change="changeVariant4(selectedVariant4)">
                 </select>
             </label>
         </div>
@@ -76,7 +103,7 @@
                         <div class="col col-top"> </div>
                         <div class="col col-67 col-center">
                             <button class="button button-raised  made-easy-button-setting"
-                                    ng-disabled="isBuyBtnDisable"
+                                    ng-disabled="isBuyBtnDisable || !selectedVariant.buyQuantity"
                                     ng-click="addToCart()">
                                 Add to cart
                             </button>

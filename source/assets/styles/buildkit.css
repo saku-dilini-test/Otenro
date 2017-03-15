@@ -2195,7 +2195,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 /* Fixed header inventory */
 .fixed-inventory{
     margin-top: 65px;
-    padding-top: 0;
+    padding:0 10px !important;
 }
 
 .fixed-inventory .tree-grid thead{
@@ -2204,13 +2204,13 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 }
 
 .fixed-inventory .tree-grid thead tr th:nth-child(1) {
-    width:35%
+    width:37.5%
 }
 .fixed-inventory .tree-grid thead tr th:nth-child(2) {
-    width:13%
+    width:14%
 }
 .fixed-inventory .tree-grid thead tr th:nth-child(3) {
-    width:13%
+    width:16.5%
 }
 .fixed-inventory .tree-grid thead tr th:nth-child(4) {
     width:13%
@@ -2233,16 +2233,16 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     width:13%
 }
 .fixed-inventory .tree-grid tbody tr td:nth-child(3) {
-    width:12%
+    width:17%
 }
 .fixed-inventory .tree-grid tbody tr td:nth-child(4) {
-    width:12%
+    width:13%
 }
 .fixed-inventory .tree-grid tbody tr td:nth-child(5) {
-    width:14.5%
+    width:13%
 }
 .fixed-inventory .tree-grid tbody tr td:nth-child(6) {
-    width:14.5%
+    width:10%
 }
 .fixed-inventory .tree-grid tbody tr td:nth-child(7) {
     width:2%
@@ -2344,4 +2344,8 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 .ocolor{
     font-weight: bold;
     color:gray;
+}
+.add-new-variant{
+    position: absolute;
+    bottom: -20px;
 }

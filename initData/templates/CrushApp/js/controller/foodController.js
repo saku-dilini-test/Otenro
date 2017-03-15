@@ -47,7 +47,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         $scope.images = $stateParams.item.tempImageArray;
 
           if($stateParams.item.variants.length > 0){
-                $scope.selectedVariant = $stateParams.item.variants[0];
+                 $scope.selectedVariant = $stateParams.item.variants[0];
+                $scope.selection = [];
+                for(var i=0;i <$scope.foodInfo.variants.length;i++){
+                        $scope.selection.push({'vType':$scope.foodInfo.variants[i].selection[0].vType});
+                }
                 if($scope.selectedVariant.quantity > 0 ){
                     $scope.isBuyBtnDisable = false;
                 }else{
@@ -58,15 +62,92 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.menuName = $stateParams.categoryName;
 
+    $scope.lockBuyButton = true;
     $scope.changeVariant = function(variant){
-        $log.debug(variant)
-        $scope.selectedVariant = variant;
-        if(variant.quantity > 0 ){
-            $scope.isBuyBtnDisable = false;
+      $scope.selection1 =[];
+      $scope.selectedVariant1  =variant.vType;
+      $scope.lockBuyButton = true;
+
+        if($scope.foodInfo.selection.length==1){
+          for(var i=0;i<$scope.foodInfo.variants.length;i++){
+            if($scope.foodInfo.variants[i].selection[0].vType == $scope.selectedVariant1){
+                $scope.selectedVariant = $scope.foodInfo.variants[i];
+                $scope.lockBuyButton = false;
+            }
+          }
         }else{
-            $scope.isBuyBtnDisable = true;
+            for(var i=0;i <$scope.foodInfo.variants.length;i++){
+                if($scope.foodInfo.variants[i].selection[0].vType == variant.vType){
+                    $scope.selection1.push({'vType':$scope.foodInfo.variants[i].selection[1].vType});
+                }
+            }
+        }
+
+    };
+
+    $scope.changeVariant2 = function(variant){
+      $scope.selection2 =[];
+      $scope.selectedVariant2  =variant.vType;
+      $scope.lockBuyButton = true;
+
+        if($scope.foodInfo.selection.length==2){
+          for(var i=0;i<$scope.foodInfo.variants.length;i++){
+            if($scope.foodInfo.variants[i].selection[0].vType == $scope.selectedVariant1 &&
+                $scope.foodInfo.variants[i].selection[1].vType == $scope.selectedVariant2){
+                $scope.selectedVariant = $scope.foodInfo.variants[i];
+                $scope.lockBuyButton = false;
+
+            }
+          }
+        }else{
+            for(var i=0;i <$scope.foodInfo.variants.length;i++){
+                if($scope.foodInfo.variants[i].selection[1].vType == variant.vType){
+                    $scope.selection2.push({'vType':$scope.foodInfo.variants[i].selection[2].vType});
+                }
+            }
+        }
+
+    };
+
+    $scope.changeVariant3 = function(variant){
+      $scope.selection3 =[];
+      $scope.selectedVariant3  =variant.vType;
+      $scope.lockBuyButton = true;
+
+        if($scope.foodInfo.selection.length==3){
+              for(var i=0;i<$scope.foodInfo.variants.length;i++){
+                if($scope.foodInfo.variants[i].selection[0].vType == $scope.selectedVariant1 &&
+                    $scope.foodInfo.variants[i].selection[1].vType == $scope.selectedVariant2 &&
+                    $scope.foodInfo.variants[i].selection[2].vType == $scope.selectedVariant3){
+                    $scope.selectedVariant = $scope.foodInfo.variants[i];
+                     $scope.lockBuyButton = false;
+
+                }
+              }
+        }else{
+            for(var i=0;i <$scope.foodInfo.variants.length;i++){
+                if($scope.foodInfo.variants[i].selection[2].vType == variant.vType){
+                    $scope.selection3.push({'vType':$scope.foodInfo.variants[i].selection[3].vType});
+                }
+            }
         }
     };
+    $scope.changeVariant4 = function(variant){
+      $scope.selectedVariant4  =variant.vType;
+
+      for(var i=0;i<$scope.foodInfo.variants.length;i++){
+            if($scope.foodInfo.variants[i].selection[0].vType == $scope.selectedVariant1 &&
+                $scope.foodInfo.variants[i].selection[1].vType == $scope.selectedVariant2 &&
+                $scope.foodInfo.variants[i].selection[2].vType == $scope.selectedVariant3 &&
+                $scope.foodInfo.variants[i].selection[3].vType == $scope.selectedVariant4){
+                $scope.selectedVariant = $scope.foodInfo.variants[i];
+                $scope.lockBuyButton = false;
+
+            }
+      }
+      console.log($scope.selectedVariant)
+    };
+
 
     // Check buyQty input value.
     // If buyQty value is less than or equal Selected-Variant-Qty, Buy Button Enable
@@ -108,7 +189,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             if($rootScope.cart.cartItems.length != 0){
                     var i=0;
                     while(i < $rootScope.cart.cartItems.length){
-                        if($scope.foodInfo.id == $rootScope.cart.cartItems[i].id){
+                        if($scope.foodInfo.id == $rootScope.cart.cartItems[i].id && $scope.selectedVariant.sku == $rootScope.cart.cartItems[i].sku){
                             $rootScope.cart.cartItems[i].qty += $scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
@@ -131,6 +212,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                             $state.go('app.category');
+                            break;
                         }
                         i++;
                     }

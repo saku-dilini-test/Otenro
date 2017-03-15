@@ -16,7 +16,7 @@
             $scope.SERVER_URL = SERVER_URL;
             $scope.isValideForm = true;
             $scope.inventoryList = [];
-        
+
 
             $scope.refreshData = function() {
                 $scope.inventoryList = initialData.inventoryList;
@@ -38,10 +38,10 @@
                 },
                 {
                     field:'vType',
-                    displayName:'Variant',
+                    displayName:'Variants',
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
-                    "<md-input-container class='md-container-modify'>"+
-                    "<div class='md-input input-modify color-link' ng-click='cellTemplateScope.click(row.branch)'>{{row.branch['selection']}} - {{row.branch[col.field]}}</div>"+
+                    "<md-input-container class='md-container-modify' ng-repeat='x in row.branch.selection'>"+
+                    "<div class='md-input input-modify color-link' ng-click='cellTemplateScope.click(row.branch)'>{{x.name}} - {{x.vType}}</div>"+
                     "</md-input-container>"+ "</div>",
                     cellTemplateScope: {
                         click: function(data) {
@@ -136,7 +136,7 @@
                 var tempChildArray = productList[i]['children'];
                 for(var j = 0; j < tempChildArray.length; j++){
                     tempChildArray[j]['id'] = productID;
-                    tempChildArray[j]['selection'] = selection;
+//                    tempChildArray[j]['selection'] = selection;
                     tempChildArray[j]['published'] = published;
                     $scope.exportArray.push(tempChildArray[j]);
                 }

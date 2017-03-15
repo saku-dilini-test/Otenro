@@ -120,7 +120,7 @@ module.exports = {
                 data.sku = sku;
                  Sku.create(data,function(err,skuData){
                      if (err) return res.send(err);
-                     return res.send(200, {message: 'Shipping Collection successfully created'});
+                     return res.send(200, data);
                  })
             });
         }
