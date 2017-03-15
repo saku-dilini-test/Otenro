@@ -4,7 +4,25 @@
 
 //(function() {
 //    angular.module('starter', [])
-mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService,$log) {
+mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService,$log,$ionicNavBarDelegate,$location) {
+
+   var path = $location.path();
+   console.log(path.indexOf('tab/cart'))
+   if (path.indexOf('tab/cart') != -1){
+     $ionicNavBarDelegate.showBackButton(false);
+   }
+   else{
+     $ionicNavBarDelegate.showBackButton(true);
+   }
+   $scope.$on('$stateChangeStart', function () {
+      $ionicNavBarDelegate.showBackButton(true);
+    });
+
+   $scope.doSomething = function(){
+        $state.go('tab.menu');
+   }
+
+
 
             $http.get(constants.SERVER_URL+"/edit/getAllCountry")
                     .then(function(res){
@@ -119,7 +137,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
             $scope.removeItem = function (index) {
                 $scope.cartItems.splice(index, 1);
                 $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-                $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
             };
 
             $scope.delivery = function (deliverItems) {
