@@ -29,6 +29,10 @@
             })
         }
         getAppUserData();
+        
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
 
         $scope.redirect = function(data){
             return engageService.showAllordersView(data);
@@ -36,11 +40,6 @@
 
         $scope.hide = function() {
             $mdDialog.hide();
-        };
-
-
-        $scope.cancel = function () {
-            $mdDialog.cancel();
         };
 
         $scope.backToUserView = function(){
