@@ -21,7 +21,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         });
 
        $scope.doSomething = function(){
-            $state.go('app.menu');
+            $state.go('app.category');
        }
 
 
