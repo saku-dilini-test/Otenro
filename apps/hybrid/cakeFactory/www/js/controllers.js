@@ -161,7 +161,7 @@ angular.module('starter.controllers', [])
   })
 
 .controller('DeliveryCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,
-                                      DataService,$location,$timeout,ORDER_URL,ionicTimePicker,ionicDatePicker) {
+                                      DataService,$location,$timeout,ORDER_URL,ionicTimePicker,$ionicHistory,ionicDatePicker) {
         var totalAmountUSD = initialData.totalAmount.data.usd;
         var oneUSD = initialData.oneUSD.data.result;
         $scope.isVisibleAddress = false;
@@ -332,10 +332,14 @@ angular.module('starter.controllers', [])
                 $scope.isOutOfHours = false;
                 $scope.delivery = angular.copy($scope.master);
             };
-           $scope.reset();
+        $scope.GoBack = function() {
+              $ionicHistory.goBack();
+        }
+        var isIOS;
+        $scope.isIOS = ionic.Platform.isIOS();
 
   })
-  .controller('PickupCtrl', function ($scope,$rootScope,paymentResources,$state,initialData,DataService,$location,$timeout,ORDER_URL,ionicDatePicker,ionicTimePicker) {
+  .controller('PickupCtrl', function ($scope,$rootScope,paymentResources,$state,$ionicHistory,initialData,DataService,$location,$timeout,ORDER_URL,ionicDatePicker,ionicTimePicker) {
     var totalAmountUSD = initialData.totalAmount.data.usd;
     $scope.pickup = {usdAmount:totalAmountUSD};
     $scope.cart = DataService.cart;
@@ -489,7 +493,11 @@ angular.module('starter.controllers', [])
                     $scope.OutOfHours = false;
                     $scope.pickup = angular.copy($scope.master);
                 };
-               $scope.reset();
+    $scope.GoBack = function() {
+          $ionicHistory.goBack();
+    }
+     var isIOS;
+     $scope.isIOS = ionic.Platform.isIOS();
 
   })
 
