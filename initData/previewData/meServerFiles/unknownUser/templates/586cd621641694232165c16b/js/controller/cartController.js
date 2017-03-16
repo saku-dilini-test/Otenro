@@ -2,11 +2,26 @@
  * Created by amila on 4/5/16.
  */
 
-mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService,$log) {
+mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService,$log,$ionicNavBarDelegate,$location) {
 
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
+
+       var path = $location.path();
+       if (path.indexOf('app/cart') != -1){
+         $ionicNavBarDelegate.showBackButton(false);
+       }
+       else{
+         $ionicNavBarDelegate.showBackButton(true);
+       }
+       $scope.$on('$stateChangeStart', function () {
+          $ionicNavBarDelegate.showBackButton(true);
+        });
+
+       $scope.doSomething = function(){
+            $state.go('app.menu');
+       }
 
     $scope.buttonDisable = function(qty,totalQty){
         if(qty > totalQty && totalQty > 1){
@@ -21,7 +36,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             $scope.countries = res.data;
         });
 
-    $scope.cartItems = $rootScope.cart.cartItems;
+    $rootScope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;
     $http.get(constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId).success(function(data) {
         if(data == ''){
@@ -36,8 +51,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         var total = 0;
         var amount = 0;
         var tax = 0;
-        for(var i = 0; i < $scope.cartItems.length; i++){
-            var product = $scope.cartItems[i];
+        for(var i = 0; i < $rootScope.cartItems.length; i++){
+            var product = $rootScope.cartItems[i];
             amount = product.total;
             total += (amount*product.qty);
         }
@@ -55,8 +70,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     $scope.getTotalQuantity = function(){
         var quantity = 0;
-        for(var i =0; i<$scope.cartItems.length; i++){
-            var product = $scope.cartItems[i];
+        for(var i =0; i<$rootScope.cartItems.length; i++){
+            var product = $rootScope.cartItems[i];
             quantity += product.qty;
         }
         $rootScope.cart.totalQuantity = quantity;
@@ -64,9 +79,9 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     };
 
     $scope.removeItem = function(index){
-        $scope.cartItems.splice(index, 1);
+        $rootScope.cartItems.splice(index, 1);
         $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
-        $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+        $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
     };
 
     $scope.delivery = function(deliverItems){

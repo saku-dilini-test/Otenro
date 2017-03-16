@@ -4,12 +4,27 @@
 
 //(function() {
 //    angular.module('starter', [])
-mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService,$log) {
+mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService,$log,$ionicNavBarDelegate,$location) {
 
             $http.get(constants.SERVER_URL+"/edit/getAllCountry")
                     .then(function(res){
                         $scope.countries = res.data;
                     });
+
+       var path = $location.path();
+       if (path.indexOf('tab/cart') != -1){
+         $ionicNavBarDelegate.showBackButton(false);
+       }
+       else{
+         $ionicNavBarDelegate.showBackButton(true);
+       }
+       $scope.$on('$stateChangeStart', function () {
+          $ionicNavBarDelegate.showBackButton(true);
+        });
+
+       $scope.doSomething = function(){
+            $state.go('tab.menu');
+       }
 
 
             if (typeof $rootScope.appId === 'undefined'){
