@@ -7,7 +7,6 @@
 mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService,$log,$ionicNavBarDelegate,$location) {
 
    var path = $location.path();
-   console.log(path.indexOf('tab/cart'))
    if (path.indexOf('tab/cart') != -1){
      $ionicNavBarDelegate.showBackButton(false);
    }
