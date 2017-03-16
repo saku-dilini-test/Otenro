@@ -9,14 +9,16 @@
                     </div>
                     <div class="md-dialog-main">
                         <form name="storeSettingsForm" class="clearfix" novalidate>
+                            <fieldset>
                             <md-input-container class="md-block">
                                 <label>App Name</label>
-                                <input type="text" md-maxlength="20"   ng-required="true" name="appName" ng-model="appName">
+                                <input type="text" md-maxlength="20"   ng-required="true" name="appName" ng-model="storeSettings.appName">
                                 <div ng-messages="storeSettingsForm.appName.$error" ng-show="storeSettingsForm.appName.$dirty">
                                     <div ng-message="required">Name is required.</div>
                                     <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
                                 </div>
                             </md-input-container>
+                            </fieldset>
                             <fieldset class="col-2">
                                 <label>select a currency</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
