@@ -542,17 +542,6 @@
             }
         };
 
-
-
-        commerceService.showStoreSettings($rootScope.appId).success(function (data) {
-            $scope.storeSettings = data[0];
-            $scope.storeSettings.currency = data[0].currencySign;
-            $scope.openHours = data[0].OpenHours;
-        }).error(function (err) {
-            toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
-        });
-
-
         $scope.addAboutUs = function (current,storeSettings) {
 
             // Validate, About Us Header maximum characters length
@@ -577,23 +566,37 @@
             }
 
             if (storeSettings.header&&storeSettings.content ){
-                storeSettings.appId = $rootScope.appId;
                 storeSettings.userId = $scope.userId;
-                commerceService.saveStoreSettings(storeSettings).success(function (data) {
-
-                    toastr.success('Store Setting Details has been added successfully', 'Awesome', {
-                        closeButton: true
-                    });
-                    $scope.selectedTab = current;
-                }).error(function (err) {
-                    toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
-
-                })
+                storeSettings.appId = $rootScope.appId;
+                    commerceService.saveStoreSettings(storeSettings)
+                        .success(function (data, status, headers, config) {
+                            toastr.success('Store Setting Details has been added successfully', 'Awesome', {
+                                closeButton: true
+                            });
+                            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                           +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                            $scope.appTemplateUrl = urlPath+'' +
+                                '#/app/aboutUs';
+                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                            $scope.selectedTab = current;
+                        }).error(function (data, status, headers, config) {
+                        toastr.error('Unable to Add', 'Warning', {
+                            closeButton: true
+                        });
+                    })
             }else {
                 $scope.selectedTab = current;
             }
 
         };
+
+        commerceService.showStoreSettings($rootScope.appId).success(function (data) {
+            $scope.storeSettings = data[0];
+            $scope.storeSettings.currency = data[0].currencySign;
+            $scope.openHours = data[0].OpenHours;
+        }).error(function (err) {
+            toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
+        });
 
         $scope.savePolicies = function (current, storeSettings) {
 
