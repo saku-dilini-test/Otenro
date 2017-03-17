@@ -85,13 +85,7 @@
                    
                 });
             },
-
-
-
-
-
-
-
+            
             sendPushMessage: function(data){
                 return $http.post(SERVER_URL+ 'edit/sendPushMessage',data);
             },
