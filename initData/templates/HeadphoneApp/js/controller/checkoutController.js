@@ -49,7 +49,7 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
             for(var i = 0; i < $scope.cartItems.length; i++){
                 var product = $scope.cartItems[i];
                 amount = product.total;
-                total += (amount);
+                total += (amount*product.qty);
             }
 
             if($scope.isApplyShippingCharge == true && $stateParams.item.delivery.location != "Pick up"){
