@@ -200,6 +200,8 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                 deliverDetails.streetName = localData.streetName;
                 deliverDetails.country = localData.country;
                 deliverDetails.city = localData.city;
+                deliverDetails.zip = localData.zip;
+                 deliverDetails.number = localData.number;      
                 }
             }
             $log.debug(deliverDetails);

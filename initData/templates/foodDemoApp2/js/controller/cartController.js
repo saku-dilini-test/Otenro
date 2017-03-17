@@ -151,6 +151,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             deliverDetails.country = localData.country;
             deliverDetails.city = localData.city;
             deliverDetails.zip = localData.zip;
+            deliverDetails.zip = localData.zip;
+            deliverDetails.number = localData.number;
             }
         }
         $log.debug(deliverDetails);
