@@ -53,10 +53,29 @@
               </label>
               <label class="item item-input item-floating-label removeAr">
                 <span class="input-label">Phone Number</span>
-                <input type="number" placeholder="Phone Number" ng-model="data.phone" ng-required="true">
+                <input type="number"  pattern="\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|
+                                                    2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|
+                                                    4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$"
+                       name="phone"  placeholder="Phone Number" ng-model="data.phone" ng-required="true">
+                <div class="row">
+                  <div ng-if="signUpForm.phone.$error.pattern">
+                                                    <span class="animated zoomIn item-error-message">
+                                                        not a phone number(ex:+94771234567)
+                                                    </span>
+                  </div>
+                </div>
+              </label>
+              <label class="item item-input item-stacked-label ">
+                <div class="row">
+                  <div ng-if="signUpForm.$error.required">
+                                                    <span class="animated zoomIn item-error-message">
+                                                        All the fields needs to be filled
+                                                    </span>
+                  </div>
+                </div>
               </label>
               <label class="item">
-                <button class="button button-block button-raised  made-easy-button-setting" ng-click="signUpForm.$valid && signUp()">
+                <button class="button button-block button-raised  made-easy-button-setting" ng-click="signUpForm.$valid && signUp()" ng-disabled="signUpForm.$invalid">
                   Sign up
                 </button>
               </label>
