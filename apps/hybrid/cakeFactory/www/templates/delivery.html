@@ -1,19 +1,29 @@
 <ion-view view-title="The English Cake Company">
-	<ion-content class="padding">
-		<h1>Delivery</h1>
-		<form class="contact-form" id="myorm" name="contactForm" novalidate>
-			<div class="list">
-			  <label class="item item-input item-stacked-label">
-			    <span class="input-label" >Name</span>
-			    <input type="text" name="customerName" ng-model="delivery.name" required>
-			  </label>
-			  <label class="item item-input item-stacked-label">
-			    <span class="input-label">Telephone</span>
-                <br>
-			      <span> +94 </span>
-            <input type="number"  ng-minlength="9" ng-maxlength="10" name="customerNumber" ng-model="delivery.contactNo" required>
+  <ion-nav-bar class="bar-stable nav-bar-container nav-bar-tabs-top" nav-bar-direction="back" nav-swipe="">
+    <ion-nav-back-button class="hide"></ion-nav-back-button>
+    <ion-nav-buttons class="bar-stable nav-bar-contasiner" side="left">
+      <button class="button back-button buttons button-clear header-item" ng-click="GoBack()">
+        <div ng-if="isIOS" ><i class="icon ion-ios-arrow-back"></i></div>
+        <div ng-if="isIOS==false"><i class="icon ion-android-arrow-back"></i></div>
+        <span class="back-text" style="opacity: 0;"></span>
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content class="padding">
+    <h1>Delivery</h1>
+    <form class="contact-form" id="myorm" name="contactForm" novalidate>
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label" >Name</span>
+          <input type="text" name="customerName" ng-model="delivery.name" required>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Telephone</span>
+          <br>
+          <!--<span> +94 </span>-->
+          <input type="number"  placeholder="0711234567" ng-minlength="10" ng-maxlength="10" name="customerNumber" ng-model="delivery.contactNo" required>
           <span class="error-messages"
-                 ng-show="contactForm.customerNumber.$dirty
+                ng-show="contactForm.customerNumber.$dirty
                                                 && contactForm.customerNumber.$invalid" >
                   The phone number field should be of 10 digits
           </span>
@@ -23,7 +33,7 @@
         <label class="item item-input item-stacked-label">
           <span class="input-label">Email</span>
           <input  name="deliveryEmail" type="email" ng-model="delivery.email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
-                   required>
+                  required>
           <span class="error-messages"
                 ng-if="contactForm.deliveryEmail.$dirty && contactForm.deliveryEmail.$invalid">
                                     <span class="error-messages" ng-show="contactForm.deliveryEmail.$dirty && contactForm.deliveryEmail.$invalid">Not a valid email address.</span>
@@ -42,7 +52,7 @@
                   for location in deliveryLocations">
             <option value="">-- Select Location --</option>
           </select>
-			  </label>
+        </label>
         <label class="item item-input item-stacked-label" ng-show="isVisibleAddress">
           <span class="input-label" >Address</span>
           <input type="text" name="deliveryAddress" ng-model="delivery.address" required>
@@ -50,19 +60,19 @@
         <label class="item">
           <span class="pickupDeliveryInfo ">Select Date and Time for Delivery</span>
           <div class="pickupDeliveryInfo">Delivery is available from <span><br>10:00 am to 8:00 pm everyday</span></div>
-        <label class=" item-input item-stacked-label" ng-click="openDatePicker()">
-          <span class="input-label">Delivery Date</span>
-          <input ng-disabled="true" class="pickup-disable" type="text" placeholder="DD - MM - YYYY"
-                 name="customerPickupDate" ng-model="delivery.date" required>
-        </label>
-        <label class=" item-input item-stacked-label" ng-click="openDateTime()">
-          <span class="input-label">Delivery Time</span>
-          <input ng-disabled="true" class="pickup-disable" type="text"
-                 placeholder="-- : --  --" name="customerPickupTime" ng-model="delivery.time" required>
-        </label>
+          <label class=" item-input item-stacked-label" ng-click="openDatePicker()">
+            <span class="input-label">Delivery Date</span>
+            <input onfocus="blur()" class="pickup-disable" type="text" placeholder="DD - MM - YYYY"
+                   name="customerPickupDate" ng-model="delivery.date" required>
+          </label>
+          <label class=" item-input item-stacked-label" ng-click="openDateTime()">
+            <span class="input-label">Delivery Time</span>
+            <input onfocus="blur()" class="pickup-disable" type="text"
+                   placeholder="-- : --  --" name="customerPickupTime" ng-model="delivery.time" required>
+          </label>
           <div ng-if="isOutOfHours">
-          <span class="pickupDeliveryError">Sorry, delivery is not available at that time.<br><span> Please select again.</span></span>
-        </div>
+            <span class="pickupDeliveryError">Sorry, delivery is not available at that time.<br><span> Please select again.</span></span>
+          </div>
           <div ng-if="OutOfDate">
             <span class="pickupDeliveryError">Selected Date & Time has already passed</span>
           </div>
@@ -72,11 +82,11 @@
           <span class="input-label">Comment</span>
           <input type="text" name="deliveryComment" ng-model="delivery.comment">
         </label>
-			</div>
-			<div>
+      </div>
+      <div>
         <br>
         <label>
-            Total Amount
+          Total Amount
         </label>
         <span>{{delivery.usdAmount| currency}}</span>
       </div>
@@ -86,10 +96,10 @@
         </label>
         <span>{{delivery.usdAmountWithDeliveryFee | currency}}</span>
       </div>
-			<div class="text-align-right">
-	    	 	<a ui-sref="tab.cart" class="button button-buy"  ng-click="reset()">Back</a>
-	    	 	<a href="" class="button button-buy dark" ng-disabled="contactForm.$invalid || isOutOfHours == true || OutOfDate == true" ng-click="payNow()">Pay</a>
+      <div class="text-align-right">
+        <a ui-sref="tab.cart" class="button button-buy"  ng-click="reset()">Back</a>
+        <a href="" class="button button-buy dark" ng-disabled="contactForm.$invalid || isOutOfHours == true || OutOfDate == true" ng-click="payNow()">Pay</a>
       </div>
-		</form>
-	</ion-content>
+    </form>
+  </ion-content>
 </ion-view>

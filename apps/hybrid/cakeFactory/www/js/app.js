@@ -22,13 +22,14 @@ angular.module('starter',
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
         cordova.plugins.Keyboard.disableScroll(true);
 
       }
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required
         StatusBar.styleLightContent();
+        StatusBar.styleDefault();
       }
             // Push register function
       $ionicPush.register().then(function(t) {
@@ -275,6 +276,7 @@ angular.module('starter',
     $urlRouterProvider.otherwise('/');
 
   })
+
   //.constant('SERVER_URL', "http://192.168.8.108:1337/")
   .constant('SERVER_URL', "http://onbitlabs.com:1338/")
 
@@ -287,4 +289,7 @@ angular.module('starter',
 
   payPalMerchantUserAgreementURL : 'http://onbitlabs.com:1338/url_to_user_agreement'
 
+
+
 });
+

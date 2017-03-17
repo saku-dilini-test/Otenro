@@ -1,17 +1,27 @@
 <ion-view view-title="The English Cake Company">
-	<ion-content class="padding">
-		<h1>Pick Up</h1>
-		<form class="contact-form" name="customerPickupForm" novalidate>
-			<div class="list">
-			  <label class="item item-input item-stacked-label">
-			    <span class="input-label">Name</span>
-			    <input type="text" name="customerName" ng-model="pickup.name" required>
-			  </label>
-			  <label class="item item-input item-stacked-label">
-			    <span class="input-label">Telephone</span>
+  <ion-nav-bar class="bar-stable nav-bar-container nav-bar-tabs-top" nav-bar-direction="back" nav-swipe="">
+    <ion-nav-back-button class="hide"></ion-nav-back-button>
+    <ion-nav-buttons class="bar-stable nav-bar-contasiner" side="left">
+      <button class="button back-button buttons button-clear header-item" ng-click="GoBack()">
+        <div ng-if="isIOS" ><i class="icon ion-ios-arrow-back"></i></div>
+        <div ng-if="isIOS==false"><i class="icon ion-android-arrow-back"></i></div>
+        <span class="back-text" style="opacity: 0;"></span>
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content class="padding">
+    <h1>Pick Up</h1>
+    <form class="contact-form" name="customerPickupForm" novalidate>
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Name</span>
+          <input type="text" name="customerName" ng-model="pickup.name" required>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Telephone</span>
           <br>
-          <span> +94 </span>
-          <input type="number" ng-minlength="9" ng-maxlength="10" name="customerNumber" ng-model="pickup.contactNo" required>
+         <!-- <span> +94 </span>-->
+          <input type="number" placeholder="0711234567" ng-minlength="10" ng-maxlength="10" name="customerNumber" ng-model="pickup.contactNo" required>
           <span class="error-messages"
                 ng-show="customerPickupForm.customerNumber.$dirty
                                                 && customerPickupForm.customerNumber.$invalid" >
@@ -32,31 +42,28 @@
         </label>
 
 
-			  <label class="item item-input item-select">
-			    <div class="input-label">
-			      Branches
-			    </div>
-			    <select required ng-model="pickup.branch">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Branches
+          </div>
+          <select required ng-model="pickup.branch">
             <option ng-repeat="branch in branchLocations" value="{{branch.locationName}}">
               {{branch.locationName}}
             </option>
-			    </select>
-			  </label>
-
-
-
+          </select>
+        </label>
 
         <label class="item">
           <span class="pickupDeliveryInfo ">Select Date and Time for Pickup</span>
           <div class="pickupDeliveryInfo">Pick up is available from <span><br>8:00 am to 9:00 pm everyday</span></div>
-        <label class=" item-input item-stacked-label" ng-click="openDatePicker()">
-          <span class="input-label">Pick Up Date</span>
-          <input ng-disabled="true" class="pickup-disable" type="text" placeholder="DD - MM - YYYY" name="customerPickupDate" ng-model="pickup.date" required>
-        </label>
-        <label class=" item-input item-stacked-label" ng-click="openDateTime()">
-          <span class="input-label">Pick Up Time</span>
-          <input ng-disabled="true" class="pickup-disable" type="text" placeholder="-- : --  --" name="customerPickupTime" ng-model="pickup.time" required>
-        </label>
+          <label class=" item-input item-stacked-label" ng-click="openDatePicker()">
+            <span class="input-label">Pick Up Date</span>
+            <input class="pickup-disable" type="text" placeholder="DD - MM - YYYY" name="customerPickupDate" ng-model="pickup.date" onfocus="blur()" required>
+          </label>
+          <label class=" item-input item-stacked-label" ng-click="openDateTime()">
+            <span class="input-label">Pick Up Time</span>
+            <input  class="pickup-disable" type="text" onfocus="blur()" placeholder="-- : --  --" name="customerPickupTime" ng-model="pickup.time" required>
+          </label>
           <div ng-if="OutOfHours">
             <span class="pickupDeliveryError">Sorry, pickup is not available at that time.<br><span> Please select again.</span></span>
           </div>
@@ -76,11 +83,11 @@
           </label>
           <span>{{pickup.usdAmount| currency}}</span>
         </div>
-			</div>
-			<div class="text-align-right">
-	    	 	<a ui-sref="tab.cart" class="button button-buy" ng-click="reset()">Back</a>
-	    	 	<a href="" class="button button-buy dark" ng-disabled="customerPickupForm.$invalid || OutOfHours == true || OutOfDate == true" ng-click="payNow()">Pay</a>
-	    	</div>
-		</form>
-	</ion-content>
+      </div>
+      <div class="text-align-right">
+        <a ui-sref="tab.cart" class="button button-buy" ng-click="reset()">Back</a>
+        <a href="" class="button button-buy dark" ng-disabled="customerPickupForm.$invalid || OutOfHours == true || OutOfDate == true" ng-click="payNow()">Pay</a>
+      </div>
+    </form>
+  </ion-content>
 </ion-view>
