@@ -16,6 +16,7 @@
 
         // Characters length config
         $scope.maxLengthNextOrderNumber = 8; // max characters length of NextOrderNumber in product
+        $scope.maxLengthAppName = 20;
         // Policy
         $scope.maxReturnPolicy = 100;
         $scope.maxTermsAndCondition = 100;
@@ -479,6 +480,17 @@
                     return;
                 }
             }
+
+            var appName = storeSettings.appName;
+            if(typeof appName != 'undefined'){
+                appName = appName.toString();
+                if(appName.length >= $scope.maxLengthAppName) {
+                    toastr.error('Character Limit  should be less than '+
+                        $scope.maxLengthAppName , 'Warning',{closeButton: true});
+                    return;
+                }
+            }
+            
             //$log.debug(storeSettings);
             if (!storeSettings){
                 toastr.error(' warning', "Please fill all required fields", {closeButton: true});
@@ -691,6 +703,7 @@
         $scope.hide = function () {
             $mdDialog.hide();
         };
+        
         $scope.cancel = function () {
             $mdDialog.cancel();
         };

@@ -30,6 +30,9 @@
             orderNumber:{
                 type: 'integer'
             },
+            appName:{
+             type: 'string'
+            },
             expressCheckout:{
                  type: 'boolean'
             },
