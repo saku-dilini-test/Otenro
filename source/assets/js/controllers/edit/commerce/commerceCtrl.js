@@ -566,7 +566,8 @@
             }
 
             if (storeSettings.header&&storeSettings.content ){
-                    storeSettings.appId = $rootScope.appId;
+                storeSettings.userId = $scope.userId;
+                storeSettings.appId = $rootScope.appId;
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
                             toastr.success('Store Setting Details has been added successfully', 'Awesome', {
@@ -643,7 +644,8 @@
                 }).error(function (err) {
                     toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
                 })
-            }else {
+            }
+            else {
                 $scope.selectedTab = current;
             }
         };
