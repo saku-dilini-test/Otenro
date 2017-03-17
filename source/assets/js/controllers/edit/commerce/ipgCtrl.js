@@ -1,10 +1,10 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("ipgCtrl", [
-        '$scope','$mdDialog','toastr', 'ipgService', '$rootScope',
+        '$scope','$mdDialog','toastr', 'ipgService', '$rootScope','$auth',
         ipgCtrl]);
 
-    function ipgCtrl($scope, $mdDialog, toastr, ipgService, $rootScope) {
+    function ipgCtrl($scope, $mdDialog, toastr, ipgService, $rootScope,$auth) {
 
         // --/-- Configuration Data --/--
         if(typeof $scope.IPGSettings == 'undefined'){
@@ -20,6 +20,8 @@
         $scope.saveIGPSettings = function (IPGInfo) {
             // Set AppID
             IPGInfo.appId = $rootScope.appId;
+            IPGInfo.userId = $auth.getPayload().id;
+
             ipgService.updateIPGInfo(IPGInfo)
                 .success(function (result) {
                     toastr.success(result.message, 'Saved', {

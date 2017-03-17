@@ -64,16 +64,11 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
     // Pay pal Config
     .constant('shopSettings',{
 
-        // payPalSandboxId :'<< Sandbox App Account ID >>',
+        payPalProductionId : 'prod-xxx',
 
-        payPalProductionId : 'AXQGp0iQvumflqsAcxYBR4f-j4ucJLFmftgaVVJ_0k8euEAT_VL7ibFN0FMwPz1_-0MEeMMO7jettA0U',
+        payPalEnv: 'paypalEnv', 
 
-        payPalEnv: 'PayPalEnvironmentSandbox', // for testing sandbox
-        // payPalEnv: 'PayPalEnvironmentProduction', // for production
-
-        payPalSandboxId :'AXPo6ek3B5WG2PpeLm3HOOSh6kDfqSDlVYYHPaEfn6hpvCe8FUY1cAKCI21LUcwooy_hdAsV872EQSaT',
-
-        payPalEnv:'PayPalEnvironmentSandbox', // for testing production for production
+        payPalSandboxId :'sandbox-xxx',
 
         payPalShopName : 'MyShopName',
 
