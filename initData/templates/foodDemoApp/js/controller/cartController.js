@@ -2,11 +2,26 @@
  * Created by amila on 4/5/16.
  */
 
-mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService,$log) {
+mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService,$log,$ionicNavBarDelegate,$location) {
 
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
+
+       var path = $location.path();
+       if (path.indexOf('app/cart') != -1){
+         $ionicNavBarDelegate.showBackButton(false);
+       }
+       else{
+         $ionicNavBarDelegate.showBackButton(true);
+       }
+       $scope.$on('$stateChangeStart', function () {
+          $ionicNavBarDelegate.showBackButton(true);
+        });
+
+       $scope.doSomething = function(){
+            $state.go('app.category');
+       }
 
     $scope.buttonDisable = function(qty,totalQty){
         if(qty > totalQty && totalQty > 1){
