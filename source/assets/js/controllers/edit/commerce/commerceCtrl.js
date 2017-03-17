@@ -158,8 +158,9 @@
                     else{
                         $scope.orderType = 'Delivery';
                     }
+
                     $scope.closeDialog = function () {
-                        $mdDialog.hide();
+                        return commerceService.showOrderDialog();
                     }
 
                      $scope.imageURL = SERVER_URL
