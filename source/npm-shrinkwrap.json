@@ -4299,18 +4299,6 @@
       "from": "lru-queue@>=0.1.0 <0.2.0",
       "resolved": "https://registry.npmjs.org/lru-queue/-/lru-queue-0.1.0.tgz"
     },
-    "lwip": {
-      "version": "0.0.9",
-      "from": "lwip@0.0.9",
-      "resolved": "https://registry.npmjs.org/lwip/-/lwip-0.0.9.tgz",
-      "dependencies": {
-        "async": {
-          "version": "2.1.4",
-          "from": "async@>=2.0.0-rc.5 <3.0.0",
-          "resolved": "https://registry.npmjs.org/async/-/async-2.1.4.tgz"
-        }
-      }
-    },
     "machine": {
       "version": "10.4.0",
       "from": "machine@>=10.3.1 <11.0.0",
