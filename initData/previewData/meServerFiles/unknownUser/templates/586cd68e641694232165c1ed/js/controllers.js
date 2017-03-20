@@ -3,6 +3,7 @@ angular.module('starter.controllers', [])
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicLoading,$ionicHistory,$rootScope,$http,constants,$log) {
 
         // show & hide menu icon button
+
        $scope.$on('$ionicView.beforeEnter', function (e, data) {
            if (data.enableBack) {
                $scope.$root.showMenuIcon = false;
@@ -16,7 +17,6 @@ angular.module('starter.controllers', [])
         };
 
         $scope.appName = $rootScope.appName;
-        //$scope.category.name = $rootScope.category.name;
 
         $scope.changeAppName = function () {
             $scope.appName = $rootScope.appName;
@@ -80,16 +80,6 @@ angular.module('starter.controllers', [])
     })
 
     .controller('HomeCtrl', function ($scope, $http, constants, $rootScope, $timeout, $state, $ionicLoading, $window, $log,readMadeEasy) {
-
-          $scope.options = {
-            initialSlide: 0,
-            direction: 'horizontal', //or vertical
-            speed: 300, //0.3s transition
-            pagination: false,
-            slidesPerView: 3,
-            paginationClickable: true,
-            spaceBetween: 30
-            };
 
         $scope.appName = $rootScope.appName;
 
@@ -228,49 +218,36 @@ angular.module('starter.controllers', [])
 
 
     })
-
     .controller('policiesCtrl', function ($scope, $http, $rootScope, $ionicPopup, constants) {
 
-            // get policies
-            $http.get(constants.SERVER_URL + "/templates/getPolicies?appId="+$rootScope.appId)
-                .success(function (data) {
-                    $scope.privacyPolicy = data.privacyPolicy;
-                    $scope.returnPolicy = data.returnPolicy;
-                },function (err) {
-                    $ionicPopup.alert({
-                        title: 'Policies Data loading error!',
-                        template: 'Please check your connection!'
+                // get policies
+                $http.get(constants.SERVER_URL + "/templates/getPolicies?appId="+$rootScope.appId)
+                    .success(function (data) {
+                        $scope.privacyPolicy = data.privacyPolicy;
+                        $scope.returnPolicy = data.returnPolicy;
+                    },function (err) {
+                        $ionicPopup.alert({
+                            title: 'Policies Data loading error!',
+                            template: 'Please check your connection!'
+                        });
                     });
-                });
-        })
-        .controller('termsCtrl', function($scope,$rootScope,$http,constants) {
+    })
+    .controller('termsCtrl', function($scope,$rootScope,$http,constants) {
 
-            $scope.appId = $rootScope.appId;
+        $scope.appId = $rootScope.appId;
 
-            $http.get( constants.SERVER_URL + '/templates/getTermsAndConditions?appId='+$scope.appId).success(function(data) {
-                $scope.terms = data.termsAndCondition;
-            }).error(function(err) {
-                alert('warning', "Unable to get terms & condition info", err.message);
-            });
+        $http.get( constants.SERVER_URL + '/templates/getTermsAndConditions?appId='+$scope.appId).success(function(data) {
+            $scope.terms = data.termsAndCondition;
+        }).error(function(err) {
+            alert('warning', "Unable to get terms & condition info", err.message);
+        });
 
-            $scope.terms = "This is terms and condition of this application ";
-        })
+        $scope.terms = "This is terms and condition of this application ";
+    })
 
 
-    .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading,initialData,readMadeEasy, $state) {
-         $scope.options = {
-            initialSlide: 0,
-            direction: 'horizontal', //or vertical
-            speed: 300, //0.3s transition
-            pagination: false,
-            slidesPerView: 3,
-            paginationClickable: true,
-            spaceBetween: 30
-            };
+    .controller('articleCtrl', function ($scope, $http, constants, $rootScope, $stateParams, $timeout, $ionicLoading,initialData,readMadeEasy) {
 
-        $scope.navigateArticles = function(categoryId){
-             $state.go('app.home.categoryId',{categoryId:categoryId});
-        }
 
 
         $ionicLoading.show({
@@ -316,7 +293,6 @@ angular.module('starter.controllers', [])
             $scope.appName = $rootScope.appName;
             $scope.userId = $rootScope.userId;
             $scope.categoryName = $stateParams.categoryName;
-
 
             $scope.imageURL = constants.SERVER_URL
                 +"/templates/viewImages?userId="

@@ -90,7 +90,7 @@
         }
 
         // Save Contact Us Information and move to About Us
-        $scope.addContactUs = function(basicInfo,webInfo,googleMap) {
+        $scope.addContactUs = function(basicInfo,webInfo,googleMap,tab) {
 
             // If defined basic information address , Check length
             if((typeof basicInfo.address != 'undefined') && (basicInfo.address.length > $scope.maxBasicInfoAddress)){
@@ -129,14 +129,14 @@
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
                         toastr.success('Basic information updated successfully ', 'Awesome!', {closeButton: true});
-                        disableTabs(1,false,false,true);
+                        disableTabs(tab,false,false,true);
                     }).error(function(data, status, headers, config) {
                     toastr.error('Updating of basic information failed', { closeButton: true});
                 });
             }
         };
 
-        $scope.savePolicies = function (storeSettings) {
+        $scope.savePolicies = function (storeSettings,tab) {
 
              // Validate, Return Policy maximum characters length
              var returnPolicy = storeSettings.returnPolicy;
@@ -181,7 +181,7 @@
                      toastr.success('Store settings updated  ', {
                          closeButton: true
                      });
-                     disableTabs(2,false,false,false);
+                     disableTabs(tab,false,false,false);
                  }).error(function (err) {
                      toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
                  })
@@ -189,7 +189,7 @@
          };
 
         //Save about us information and cloase the dialog box
-        $scope.addAboutUs = function (storeSettings) {
+        $scope.addAboutUs = function (storeSettings,tab) {
 
             // Validate, About Us Header maximum characters length
             var header = storeSettings.header;
@@ -229,7 +229,12 @@
                             $scope.appTemplateUrl = urlPath+'' +
                                 '#/app/aboutUs';
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                            $mdDialog.hide();
+                            if(tab){
+                                disableTabs(tab,false,false,false);
+                            }
+                            else{
+                                $mdDialog.hide();
+                            }
                         }).error(function (data, status, headers, config) {
                         toastr.error('Error updating Contact Us', 'Warning', {
                             closeButton: true
