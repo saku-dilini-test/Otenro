@@ -60,7 +60,8 @@
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                                <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap)">next</md-button>
+                                <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap,0)">save</md-button>
+                                <md-button class="me-default-button" ng-click="addContactUs(basicInfo,webInfo,googleMap,1)">next</md-button>
                             </div>
                         </div>
                     </form>
@@ -115,7 +116,8 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
-                            <md-button class="me-default-button" ng-click="savePolicies(storeSettings)">next</md-button>
+                            <md-button class="me-default-button" ng-click="savePolicies(storeSettings,1)">save</md-button>
+                            <md-button class="me-default-button" ng-click="savePolicies(storeSettings,2)">next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -162,6 +164,7 @@
                         <div class="inner-section">
                             <fieldset class="text-right reset-margin">
                                 <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
+                                <md-button class="me-default-button" ng-click="addAboutUs(storeSettings,2)">save</md-button>
                                 <md-button class="me-default-button" ng-click="addAboutUs(storeSettings)">Finish</md-button>
                             </fieldset>
                         </div>
