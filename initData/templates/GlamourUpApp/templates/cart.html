@@ -11,7 +11,7 @@
                <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></span>
                <i class="dark icon ion-trash-a right" ng-click="removeItem($index)"></i>
            </h2>
-           <p>{{currency}}{{item.total*item.qty}}</p>
+           <p>{{currency.sign}}{{item.total*item.qty}}</p>
            <!-- Buy Qty error message -->
            <div class="text-left">
                <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
@@ -25,7 +25,7 @@
        </a>
 
        <div class="col center made-easy-header-font">
-           {{currency}}{{getTotal()}}
+           {{currency.sign}}{{getTotal()}}
        </div>
        <div class="center">
            <button class="button button-raised  made-easy-button-setting color-invert"
