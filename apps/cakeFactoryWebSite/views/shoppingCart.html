@@ -1,4 +1,4 @@
-﻿<div class="other-page-header home-pg"></div>
+﻿﻿<div class="other-page-header home-pg"></div>
 <div ng-include=" 'views/navigation.html' "></div>
 
 <div class="delivery-page-wrapper">
@@ -84,27 +84,27 @@
         <!-- buttons -->
         <div>
             <p class="text-info clearfix">
-            <div ng-if="true" class="pull-right">
+            <div ng-if="true" class="pull-left">
                 <button
                         class="btn kkcc-btn-success"
                         ng-click="saveCartInServer(); cart.checkout('PayPal')"
                         ng-model="isSubmitButtonDisableValue"
                         ng-disabled=" (cart.getBranchName() === '' && cart.getDeliveryCharges() == 0) || cart.getTotalCount() < 1 ">
-                    <i class="icon-ok icon-white" /> Submit
+                    <i class="icon-ok icon-white" /> Proceed To Pay
                 </button>
             </div>
 
 
-            <div ng-if="cart.getDeliveryCharges() == 0 &&
-            (!cart.getTotalCount() < 1) " class="pull-left" ng-disabled="(!cart.getEmail() === '')">
+            <div ng-if="cart.getDeliveryCharges() == 0 && (!cart.getTotalCount() < 1) " class="pull-right ">
                 <button class="btn "
+                        ng-disabled="cart.getEmail()"
                         onclick="window.location.href='#/delivery'">
                     <i class="icon-chevron-left" /> Checkout
                 </button>
             </div>
 
 
-            <div ng-if="cart.getTotalCount() < 1" class="pull-left">
+            <div ng-if="cart.getTotalCount() < 1" class="pull-right">
                 <button
                         class="btn "
                         onclick="window.location.href='#/'">
