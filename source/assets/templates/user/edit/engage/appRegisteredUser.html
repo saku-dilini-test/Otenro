@@ -19,7 +19,7 @@
                 <tr ng-repeat="data in appuserList">
 
                     <td>{{data.firstName}} {{data.lastName}}</td>
-                    <th><md-button ng-click="redirect()" class="ocolor" >{{data.email}}</md-button> </th>
+                    <th><md-button ng-click="redirect(data)" class="ocolor" >{{data.email}}</md-button> </th>
                     <td>{{data.phone}}</td>
                     <td>{{data.streetNumber}}
                         {{data.streetName}}<br>
