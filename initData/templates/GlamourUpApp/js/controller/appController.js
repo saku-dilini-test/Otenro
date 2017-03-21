@@ -93,7 +93,7 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
                 city: $scope.data.city,
                 zip: $scope.data.zip,
                 country: $scope.data.country,
-                phone: $scope.data.phone,
+                phone: $scope.data.number,
                 appId: $rootScope.appId
             };
             $http.post(constants.SERVER_URL+"/templatesAuth/register",data)
@@ -102,7 +102,7 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
                             "token": res.data.token,
                             "email": data.email,
                             "name": data.firstName,
-                            "phone": data.phoneNumber,
+                            "phone": data.number,
                             "streetNumber": data.streetNumber,
                             "streetName": data.streetName,
                             "country": data.country,

@@ -36,6 +36,9 @@ module.exports = {
         deliveryNo : {
             type : 'string'
         },
+        name : {
+            type : 'string'
+        },
         deliveryStreet : {
             type : 'string'
         },
