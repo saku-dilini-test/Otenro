@@ -723,9 +723,8 @@
          * @description
          */
         $scope.setValue = function(index){
-            if (angular.element('#'+index).val() > 0){
-                angular.element('#'+index).val(null);
-            }
+            angular.element('#'+index).val(null);
+            $scope.product.variants[index].quantity = null;
         }
 
         $scope.newcategory = function(){
