@@ -19,7 +19,7 @@
             <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}</div>
             <div class="col col-25" ><input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></div>
             <div class="col" ng-model="item.total" >{{item.total*item.qty}}</div>
-            <div class="col col-10"><a class="dark" ng-click="removeItem(index)"><i class="icon ion-ios-trash-outline"></i></a></div>
+            <div class="col col-10"><a class="dark" ng-click="removeItem($index)"><i class="icon ion-ios-trash-outline"></i></a></div>
           </div>
           <!-- Buy Qty error message -->
            <div class="row text-center no-padding">
