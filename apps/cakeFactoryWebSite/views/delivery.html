@@ -24,11 +24,15 @@
                                 <li>
                                     <label>Pick Up Branch *</label>
                                     <select ng-model="selectedBranch"
+                                            name="branch"
                                             ng-options="branch.locationName for branch in branchLocations"
                                             ng-change="saveBranchName(selectedBranch.locationName)"
                                             required>
                                         <option value=""> Select Branch </option>
+
                                     </select>
+                                    <span class="error-message" ng-show="deliveryAddress.name"  ng-if="!selectedBranch" >
+                                        <br><br>Please Select a Branch</span>
                                 </li>
                                 <li class="delivery-address-section">
                                     <label>Name *</label>
@@ -93,6 +97,8 @@
                                             required>
                                         <option value="">-- Select Location --</option>
                                     </select>
+                                    <span class="error-message" ng-show="deliveryAddress.name"  ng-if="!selectedLocation" >
+                                        <br><br>Please Select a Location</span>
                                 </li>
                                 <li class="delivery-address-section">
                                     <label>Name *</label>
