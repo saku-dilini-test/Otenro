@@ -9,11 +9,13 @@
 
 
 
-        function UserCtrl($scope, $mdDialog, toastr, initialData,commerceService, engageService,currencyService, publishService, $rootScope,
+        function UserCtrl($scope, $mdDialog, toastr,commerceService,initialData, engageService,currencyService, publishService, $rootScope,
                               SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
                               contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,sendDate,$log) {
 
         //get all app registered user details
+
+        $scope.initialData = initialData;
 
         var getAppUserData = function () {
             engageService. getAppUserData()
