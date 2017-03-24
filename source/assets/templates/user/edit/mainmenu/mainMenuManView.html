@@ -1,0 +1,73 @@
+<md-dialog aria-label="Menu Tree">
+    <md-dialog-content>
+        <form novalidate>
+            <div class="md-dialog-header">
+                <h1>Categories</h1>
+                <ul class="md-dialog-header-nav clearfix">
+                    <li>
+                        <a class="add-new-item" ng-click="goToAddNewMenuItemView()">Add New Menu</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="md-dialog-main">
+                <table class="me-simple-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in menuItems">
+                        <td>{{item.name}}</td>
+                        <td><img width="25" src="../../../images/edit-icon.svg" ng-click="goToEditMenuItemView(item)"></td>
+                        <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteMenuItem(item)"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- TODO : Later, ui-tree may be use -->
+            <script type="text/ng-template" id="nodes_renderer1.html">
+                <div ui-tree-handle class="tree-node tree-node-content">
+                    <div class="tree-node-content clearfix">
+                        <a class="menu-toggle" data-nodrag ng-click="toggle(this)"></a>
+                            <span ng-class="{'btn-expand': collapsed, 'btn-hide': !collapsed}"></span>
+                        </a>
+                         Change the text box width into 370px and programmatically reduce it by 20px
+                        <input type="text" ng-model="node.name" class="menu-add-input" />
+                        <input type="button" value="Edit" ng-hide="node.link" data-nodrag ng-click="edit(this)" class="btn-edit">
+
+                        <div class="menu-controls">
+                            <a class="btn-delete" data-nodrag ng-click="removes(this)"></a>
+                            <!--<a class="btn-add-sub reset-margin-right" ng-if="topLevel != 'secondNavi'" data-nodrag ng-click="newSubItem(this)"></a>-->
+                        </div>
+
+                        <button class="pull-right btn-icon-picker btn-xs dropdown-toggle" type="button">
+                            <i class="glyphicon glyphicon-asterisk"></i>
+                            <span class="caret"></span>
+                        </button>
+                    </div>
+                </div>
+                <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer1.html'"></li>
+                </ol>
+            </script>
+            <!--<div class="md-dialog-main">-->
+                <!--<div ui-tree id="tree1-root">-->
+                    <!--<ol ui-tree-nodes="" ng-model="menuItems">-->
+                        <!--<li ng-repeat="node in menuItems" ui-tree-node ng-include="'nodes_renderer1.html'"></li>-->
+                    <!--</ol>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="md-dialog-buttons">
+                <div class="inner-section">
+                    <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
+                    <md-button class="me-default-button" ng-click="hide()">OK</md-button>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>

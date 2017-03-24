@@ -1,0 +1,57 @@
+<ion-view view-title="Shopping Cart" class="made-easy-background-color cart">
+    <ion-nav-buttons side="primary">
+        <button class="button back-button buttons icon ion-ios-arrow-back header-item"ng-click="doSomething()">
+        </button>
+    </ion-nav-buttons>
+  <ion-content >
+   <div class="list ">
+         <div class="cart-row" ng-repeat="item in cartItems" >
+           <div class="row">
+             <div class="col">
+               <a class="item item-thumbnail-left"  >
+                   <img src="{{imageURL}}/{{item.imgURL[0].img}}">
+                   <h2 ng-model="item.name" class="made-easy-content-font" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}
+                       <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></span>
+
+                   </h2>
+                   <span class="made-easy-header-font">{{currency}}{{item.total*item.qty}}</span>
+
+               </a>
+             </div>
+             <div class="col-20 center delete"  ng-click="removeItem($index)">
+                <i class="icon ion-close-round"></i>
+                <p>Remove</p>
+             </div>
+           </div>
+           <!-- Buy Qty error message -->
+           <div class="row text-center">
+               <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+               <div class="col" ng-if="item.qty > item.totalQty && item.totalQty > 1" >
+                                    <span class="animated zoomIn item-error-message">
+                                        Please enter a quantity of {{item.totalQty}} or less.
+                                    </span>
+               </div>
+           </div>
+       </div>
+
+
+       <div class="col center made-easy-header-font">
+           {{currency}}{{getTotal()}}
+       </div>
+       <div class="center">
+           <tr ng-repeat="item in cartItems"> </tr>
+           <button class="button button-raised  made-easy-button-setting"
+                   ng-disabled="!getTotal() || buyButtonDisable"
+                   ng-click="pickupDetails(cartItems)">
+              Pickup
+           </button>
+           <tr ng-repeat="item in cartItems"> </tr>
+           <button class="button button-raised  made-easy-button-setting "
+                   ng-disabled="!getTotal() || buyButtonDisable"
+                   ng-click="delivery(cartItems)">
+               Delivery
+           </button>
+       </div>
+    </div>
+  </ion-content>
+</ion-view>

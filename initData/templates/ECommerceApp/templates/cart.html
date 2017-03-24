@@ -1,0 +1,69 @@
+<ion-view class="made-easy-background-color made-easy-background-image" view-title="Cart">
+    <ion-nav-buttons side="primary">
+        <button class="button back-button buttons icon ion-ios-arrow-back header-item"ng-click="doSomething()">
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="padding" >
+        <div class="list card">
+                <div class="row ">
+                    <div class="col align-center made-easy-header-font">Shopping Cart</div>
+                 </div>
+                <div class=" made-easy-header-font cart-item-header header-modify">
+                  <div class="row">
+                    <div class="col col-50">Item</div>
+                    <div class="col col-25">Qty</div>
+                    <div class="col">Price</div>
+                    <div class="col"></div>
+                  </div>
+                </div>
+                <div class="cart-item" ng-repeat="item in cartItems" >
+                  <div class="row">
+                    <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}</div>
+                      <div class="col col-25" ><input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></div>
+                      <div class="col" ng-model="item.total" >{{item.total*item.qty}}</div>
+                    <div class="col align-right"><a ng-click="removeItem($index)"><i class="icon ion-ios-trash-outline"></i></a></a></div>
+                  </div>
+                    <!-- Buy Qty error message -->
+                    <div class="row text-center">
+                        <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+                        <div class="col" ng-if="item.qty > item.totalQty && item.totalQty > 1" >
+                                    <span class="animated zoomIn item-error-message">
+                                        Please enter a quantity of {{item.totalQty}} or less.
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tax Information Here -->
+                <div ng-if="isShowTaxInfo" class="cart-item">
+                    <div class="row">
+                        <div class="col col-50">{{taxDisplayName}}</div>
+                        <div class="col col-25"></div>
+                        <div class="col"  ng-model="tax">{{tax}}%</div>
+                        <div class="col" ></div>
+                    </div>
+                </div>
+
+                <div class="cart-total">
+                  <div class="row ">
+                    <div class="col col-50">Total</div>
+                    <div class="col col-25" ng-model="quantity">{{getTotalQuantity()}}</div>
+                    <div class="col" ng-model="total" >{{getTotal()}}</div>
+                     <div class="col"> </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <button class="col margin button button-small made-easy-button-setting"
+                          ng-disabled="!getTotal() || buyButtonDisable"
+                          ng-click="pickupDetails(cartItems)" >Pickup</button>
+                  <button class="col margin button button-small made-easy-button-setting"
+                          ng-disabled="!getTotal() || buyButtonDisable"
+                          ng-click="delivery(cartItems)">Delivery</button>
+                  <!--<a class="social-button " ng-click="delivery(cartItems)" >Delivery</a>-->
+                </div>
+       </div>
+
+  </ion-content>
+
+</ion-view>

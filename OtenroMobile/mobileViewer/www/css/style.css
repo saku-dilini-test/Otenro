@@ -1,5 +1,110 @@
 /* Empty. Add your own CSS if you like */
 
+
+.made-easy-background-color{
+  background: rgba(159,34,134,1);
+  background: -moz-linear-gradient(left, rgba(159,34,134,1) 0%, rgba(255,113,205,1) 84%, rgba(255,113,205,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(159,34,134,1)), color-stop(84%, rgba(255,113,205,1)), color-stop(100%, rgba(255,113,205,1)));
+  background: -webkit-linear-gradient(left, rgba(159,34,134,1) 0%, rgba(255,113,205,1) 84%, rgba(255,113,205,1) 100%);
+  background: -o-linear-gradient(left, rgba(159,34,134,1) 0%, rgba(255,113,205,1) 84%, rgba(255,113,205,1) 100%);
+  background: -ms-linear-gradient(left, rgba(159,34,134,1) 0%, rgba(255,113,205,1) 84%, rgba(255,113,205,1) 100%);
+  background: linear-gradient(to right, rgba(159,34,134,1) 0%, rgba(255,113,205,1) 84%, rgba(255,113,205,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9f2286', endColorstr='#ff71cd', GradientType=1 );
+
+}
+
+.made-easy-navigationBarColor{
+    background-color: transparent !important;
+    color: #fff !important;
+    border: 0;
+    box-shadow: none;
+}
+.made-easy-navigationBarColor .bar .button.button-clear{
+    color:inherit;
+}
+
+.made-easy-navigationBarColor .item {
+    border-style:unset;
+}
+
+
+.made-easy-navigationBarColor .list{
+    margin-top:30%;
+}
+
+.made-easy-navigationBarColor ion-item , .made-easy-navigationBarColor .item-content, .made-easy-navigationBarColor button {
+    background:transparent;
+    border: 0;
+    color:inherit;
+    padding:6px;
+}
+
+
+.navigation-drawer .menu-left{
+    -webkit-transition: -webkit-transform 200ms ease;
+    transition: transform 200ms ease;
+    transform: translate3d(-275%, 0px, 0px);
+}
+
+
+.menu-open .navigation-drawer .menu-left{
+    width: 90% !important;
+    z-index: 1 !important;
+    transform: translate3d(0%, 0px, 0px);
+
+background: rgba(255,113,205,0.6);
+background: -moz-linear-gradient(left, rgba(255,113,205,0.6) 0%, rgba(159,34,134,0.94) 84%, rgba(159,34,134,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,113,205,0.6)), color-stop(84%, rgba(159,34,134,0.94)), color-stop(100%, rgba(159,34,134,1)));
+background: -webkit-linear-gradient(left, rgba(255,113,205,0.6) 0%, rgba(159,34,134,0.94) 84%, rgba(159,34,134,1) 100%);
+background: -o-linear-gradient(left, rgba(255,113,205,0.6) 0%, rgba(159,34,134,0.94) 84%, rgba(159,34,134,1) 100%);
+background: -ms-linear-gradient(left, rgba(255,113,205,0.6) 0%, rgba(159,34,134,0.94) 84%, rgba(159,34,134,1) 100%);
+background: linear-gradient(to right, rgba(255,113,205,0.6) 0%, rgba(159,34,134,0.94) 84%, rgba(159,34,134,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff71cd', endColorstr='#9f2286', GradientType=1 );
+
+
+}
+
+.navigation-drawer ion-item{
+    background-color: transparent;
+    border: 0;
+
+}
+
+.navigation-drawer ion-item a{
+    background-color: transparent !important;
+    margin-left: 10%;
+}
+
+.navigation-drawer .menu-animated{
+    transform:unset !important;
+}
+.navigation-drawer ion-nav-bar{
+    border: 0;
+    background: transparent;
+}
+.navigation-drawer .bar.bar-header {
+    border: 0;
+    background: transparent;
+}
+
+.navigation-drawer  ion-header-bar{
+    border: transparent;
+
+}
+
+.navigation-drawer  ion-header-bar button{
+    background-color:unset !important;
+    border: unset;
+}
+
+.navigation-drawer .back-button {
+    margin: 0 0 0 5px;
+}
+
+.navigation-drawer .back-button span{
+    display:none;
+}
+
 .app-area-view {
     background-color: gold;
 }
@@ -40,119 +145,25 @@ body{
     font-family: "Open Sans",sans-serif;
 }
 
-.bar .title {
-    text-transform: uppercase;
+.logout{
+  margin-top:60%;
 }
 
-.tabs-balanced > .tabs, .tabs.tabs-balanced {
-    background-color: #ac2e72;
-    background-image: none;
-    border-color: #ac2e72;
+.settings {
+  border-bottom: 1px solid #fff !important;
 }
-.tabs-striped.tabs-balanced .tabs {
-  background-color: #ac2e72;
-}
-.border-less-list a{
-    border: none;
-    background-color: #ac2e72;
-    color: white;
-}
-.border-less-list1 a{
-    border: none;
-    background-color: #fff;
-    color: white;
+.settings h1, .settings p{
+  color: #fff !important;
 }
 
-.border-less-list a.logout{
-    color: #fff !important;
-}
-
-.std-button{
-    background-color: #9E7BFF;
-    color: white;
-    border-radius: 13px;
-}
-
-.bar.bar-standard {
-    background-color: #ac2e72;
-    background-image: none;
-    border: medium none;
-    color: #fff;
-}
-
-.bar.bar-balanced .title {
-    color: #808080;
-}
-
-.bar .button, .bar button {
-    font-size: 24px;
-    background-color: transparent;
-    color: white;
-}
-
-h1{
-    color: #fff;
-    font-family: "Open Sans",sans-serif;
-    font-size: 16px;
-    line-height: 35px;
-    margin: 0 !important;
-    padding-left: 10px;
-    text-transform: uppercase;
-}
-
-.logo-section{
-    padding: 80px 0 30px;
-    text-align: center;
-}
-
-.logo-section h2{
-    color: #333333;
-    font-size: 18px;
-    font-weight: 300;
-    line-height: normal;
-}
-
-
-.my-apps a:nth-of-type(2n+1) {
-    background-color: #FAFAFA;
-}
-.backView {
-  background-color:#ac2e72;
-}
-.view-container {
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: #ac2e72;
-}
-.login{
-    margin-right: auto;
-    width:85%;
-    height:85%;
-    margin-left: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    border-radius: 13px;
-}
-.dashboard{
-    margin-right: auto;
-    width:95%;
-    height:85%;
-    margin-left: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    border-radius: 13px;
-}
-.list {
+.card{
+    top: 10%;
     position: relative;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 20px;
-}
-.item-input{
-  border-radius: 13px;
+    height: 85%;
+    overflow-y: auto;
+    border-radius: 5px;
 }
 
+.scroll{
+  height:100%;
+}
