@@ -144,7 +144,7 @@
                }
                else{
                     $scope.product.variants.push($scope.inserted);
-             }
+               }
             }
         };
         /*
