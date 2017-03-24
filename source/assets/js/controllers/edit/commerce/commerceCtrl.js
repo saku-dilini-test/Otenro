@@ -524,9 +524,9 @@
                 }
 
                 storeSettings.currencySign = $scope.options.sign,
-                    storeSettings.currency = $scope.options.currency,
-                    storeSettings.currencySymbol = $scope.options.symbol,
-                    storeSettings.userId = $scope.userId;
+                storeSettings.currency = $scope.options.currency,
+                storeSettings.currencySymbol = $scope.options.symbol,
+                storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 storeSettings.OpenHours = openHoursData;
 

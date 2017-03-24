@@ -15,11 +15,11 @@
                 type: 'string',
                 required: true
             },
-            currency:{
-                type: 'string'
-            },
             currencySign:{
                type: 'string'
+            },
+            currency:{
+             type : 'string'
             },
             currencySymbol:{
                type: 'string'
