@@ -78,6 +78,16 @@ angular.module('starter.controllers', [])
     $scope.$emit('hideMenu',{});
 
 
+    $scope.$emit('hideMenu',{});
+    // get currency by appId
+    readMadeEasy.readFile().success(function(appData){
+        appServices.getCurrencyByAppId(appData.appId)
+            .success(function(data){
+                $scope.currency = data;
+            }).error(function(err){
+            alert('Currency Loading error');
+        })
+    });
     // set select Menu Name
     $scope.menuName = $stateParams.menuName;
     // set select Menu Id
