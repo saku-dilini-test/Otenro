@@ -10,6 +10,10 @@ angular.module('app')
             }
       }).state('anon.login', {
             url: '/login',
+            params: {
+                affid: null,
+                clickid:null
+            },
             templateUrl: 'auth/login.html',
             controller: 'LoginController'
 
@@ -46,7 +50,9 @@ angular.module('app')
                 appId: null,
                 tempUrl:null,
                 tempName:null,
-                tempCategory: null
+                tempCategory: null,
+                affid: null,
+                clickid:null
             },
             controller: 'livePreviewCtrl',
             templateUrl : 'user/welcome/LivePreview.html'
@@ -69,6 +75,10 @@ angular.module('app')
 
       }).state('anon.register', {
             url: '/register',
+            params: {
+                affid: null,
+                clickid:null
+            },
             templateUrl: 'auth/register.html',
             controller: 'RegisterController',
             resolve:{
