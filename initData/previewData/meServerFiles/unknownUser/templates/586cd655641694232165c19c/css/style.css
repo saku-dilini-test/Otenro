@@ -262,8 +262,3 @@ input[type=number] {
 .item-error-message{
     color:red;
 }
-
-.deliver-address{
-    word-wrap: normal;
-    padding: 5px 5px 5px 0px;
-}

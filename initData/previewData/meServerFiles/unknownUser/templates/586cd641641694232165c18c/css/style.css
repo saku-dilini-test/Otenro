@@ -99,19 +99,13 @@ select{
 .removeAr input[type=number] {
   -moz-appearance: textfield;
 }
-
 input[type=number] {
   height: inherit;
   line-height: normal;
   padding-top: 0;
 }
 
-.item-error-message{
-    color:red;
-    white-space:normal;
-    zoom: 0.8;
-}
-.deliver-address{
-	word-wrap: normal;
-	padding: 5px 5px 5px 0px;
+.item-error-message {
+    font-size: 70%;
+    color: red;
 }
