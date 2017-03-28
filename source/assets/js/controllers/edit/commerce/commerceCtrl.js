@@ -254,6 +254,9 @@
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
                 {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
+
+                {name: 'createdDate'},
+
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
