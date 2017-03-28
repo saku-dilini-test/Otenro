@@ -231,8 +231,8 @@
                 <!--TODO-->
                 <!--For the beta release-->
                 <obl-menu-group label="Engage" icon="fa-pencil-square-o">
-                    <obl-menu-button label="Users" icon="fa fa-file-image-o" click-title="users"></obl-menu-button>
-                    <obl-menu-button label="Promotions & Sales" icon="fa fa-file-image-o" click-title="promotionsAndSales"></obl-menu-button>
+                    <obl-menu-button ng-if="!isArticleApp" label="Users" icon="fa fa-file-image-o" click-title="users"></obl-menu-button>
+                    <obl-menu-button ng-if="!isArticleApp" label="Promotions & Sales" icon="fa fa-file-image-o" click-title="promotionsAndSales"></obl-menu-button>
                     <!--<obl-menu-button label="E-mail Marketing" icon="fa fa-file-image-o" click-title="emailMarketing"></obl-menu-button>-->
                     <!--<obl-menu-button label="Pop up Messages" icon="fa fa-file-image-o" click-title="popUpMessages"></obl-menu-button>-->
                     <obl-menu-button label="Push Messages" icon="fa fa-file-image-o" click-title="pushMessages"></obl-menu-button>
