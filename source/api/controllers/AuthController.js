@@ -85,6 +85,37 @@ module.exports = {
           });
     });
   },
+    sendAgentInfo: function(req, res) {
+
+
+        var url = "http://www.securebill.mobi/bg.php?clickID="+req.body.clickid+"&idcallback=bda90516cfadcac19221685973261a75";
+
+        request.get({
+            url: url,
+        }, function (error, response, data) {
+            console.log("data"+ data);
+            if (error) {
+                sails.log.debug('Some error occurred ' + error);
+                return res.status(500).send({error: 'Some error occurred'});
+
+            }
+
+            var agentInfo = req.body;
+            agentInfo.createdTime = Date.now();
+            console.log(agentInfo);
+            AdAgentInfo.create(agentInfo).exec(function(err, user) {
+                if (err) {
+                    return res.negotiate(err);
+                }
+            });
+            res.send("ok");
+
+
+
+        });
+
+
+  },
 
   facebookAuth : function(req,res){
 

@@ -10,10 +10,18 @@
   });
 
   angular.module('app')
-      .controller('LoginController',['$scope','$state','Auth','toastr','$auth', LoginController]);
+      .controller('LoginController',['$scope','$state','Auth','toastr','$auth','$stateParams', LoginController]);
 
 
-  function LoginController( $scope, $state, Auth ,toastr ,$auth) {
+  function LoginController( $scope, $state, Auth ,toastr ,$auth,$stateParams) {
+
+      var agentInfo = {
+          clickid : $stateParams.clickid,
+          affid:$stateParams.affid
+
+      };
+
+      console.log(agentInfo);
 
     $scope.submit = function($event) {
       Auth.login($scope.user).success(function(response) {
@@ -36,6 +44,15 @@
     $scope.cancel = function () {
       $state.go('anon.welcome');
     };
+
+      $scope.register = function() {
+
+          $state.go('anon.register', {
+              clickid : $stateParams.clickid,
+              affid:$stateParams.affid
+          });
+
+      }
 
     $scope.authenticate = function(provider) {
       $auth.authenticate(provider).then(function(){

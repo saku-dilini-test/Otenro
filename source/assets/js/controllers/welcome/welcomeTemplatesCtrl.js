@@ -10,13 +10,15 @@
     angular.module('app')
         .controller('WelcomeTemplatesCtrl',
       ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER',
-      '$auth','$rootScope','$timeout','SERVER_URL',
+      '$auth','$rootScope','$timeout','SERVER_URL','$location',
             WelcomeTemplatesCtrl
         ]);
 
     function WelcomeTemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,
-    ME_APP_SERVER,$auth,$rootScope,$timeout,SERVER_URL) {
+    ME_APP_SERVER,$auth,$rootScope,$timeout,SERVER_URL,$location) {
 
+
+        console.log($location.search());
         if ($auth.isAuthenticated()) {
             $scope.isAuthenticated = true;
             $state.go('user.dashboard');
@@ -58,6 +60,10 @@
                     var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId=unknownUser"
                                     +"&appId="+previewId+"&"+new Date().getTime()+"/";
 
+                    var affid = $location.search().affid;
+                    var clickid = $location.search().clickid;
+
+
                     var url= urlPath+'/?'+new Date().getTime();
                     mySharedService.prepForBroadcast(url);
 
@@ -66,7 +72,9 @@
                             appId: previewId,
                             tempUrl: templateUrl,
                             tempName: templateName,
-                            tempCategory: templateCategory
+                            tempCategory: templateCategory,
+                            affid: affid,
+                            clickid: clickid
                         });
 
         }

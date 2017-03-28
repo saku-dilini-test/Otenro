@@ -29,9 +29,12 @@
             }
         });
 
-        var loginFunction = function(){
+        var loginFunction = function(agentInfo){
             var deferred = $q.defer();
-            $state.go('anon.login');
+            $state.go('anon.login', {
+                    affid: agentInfo.affid,
+                    clickid: agentInfo.clickid
+            });
             $interval(function () {
                 if ($auth.isAuthenticated()) {
                     var id = $auth.getPayload().id;
@@ -48,6 +51,7 @@
         $scope.tempCategory = $stateParams.tempCategory;
         $scope.contentUrl = true;
         console.log('ddd');
+        console.log($stateParams);
         // $stateParams $log.debug only testing
         $log.debug('User ID : '+$stateParams.userId);
         $log.debug('App ID : '+$stateParams.appId);
@@ -89,6 +93,12 @@
         };
 
         $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory) {
+            var agentInfo = {
+                clickid : $stateParams.clickid,
+                affid:$stateParams.affid
+
+            }
+
         if($scope.appName== null){
             toastr.error('Please enter a name for the application', 'Warning', {
                   closeButton: true
@@ -116,7 +126,7 @@
                         });
                     $mdDialog.hide(answer);
                 }else{
-                    loginFunction().then(function(id){
+                    loginFunction(agentInfo).then(function(id){
                         $scope.successDeleteFile($scope.userId, $scope.appId);
                         var tempAppParams = {
                             'appName': $scope.appName,
