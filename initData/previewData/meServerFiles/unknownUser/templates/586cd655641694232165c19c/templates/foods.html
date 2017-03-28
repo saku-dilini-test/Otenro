@@ -13,6 +13,12 @@
                        <div class="col col-80 right made-easy-header-font">
                            {{currency.sign}} : {{foods[$index].variants[0].price}}
                        </div>
+
+                       <div>
+                           <div class="col center made-easy-content-font">{{salesandpromotion.discountType}}</div>
+                           <div class="col center made-easy-content-font">{{salesandpromotion.discount}}</div>
+                       </div>
+
                    </div>
                 </div>
            </div>
@@ -26,6 +32,10 @@
                        </div>
                        <div class="col col-80 right made-easy-header-font" >
                            {{currency.sign}} : {{foods[$index+1].variants[0].price}}
+                       </div>
+                       <div>
+                       <div class="col center made-easy-content-font">{{salesandpromotion.discountType}}</div>
+                       <div class="col center made-easy-content-font">{{salesandpromotion.discount}}</div>
                        </div>
                    </div>
                 </div>
