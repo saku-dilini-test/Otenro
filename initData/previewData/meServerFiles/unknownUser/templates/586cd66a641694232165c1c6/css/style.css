@@ -436,3 +436,8 @@ input[type=number] {
     width:100% !important;
     text-align:left !important;
 }
+
+.deliver-address{
+    word-wrap: normal;
+    padding: 5px 5px 5px 0px;
+}

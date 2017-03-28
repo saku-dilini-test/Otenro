@@ -348,3 +348,8 @@ input[type=number] {
 .no-padding{
     padding:0;
 }
+
+.deliver-address{
+    word-wrap: normal;
+    padding: 5px 5px 5px 0px;
+}
