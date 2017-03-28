@@ -19,6 +19,13 @@ angular.module('app')
         });
         return login;
       },
+        sendAgentInfo: function(agentInfo) {
+        var agent = $http.post('/auth/sendAgentInfo', agentInfo);
+        agent.success(function(result) {
+              console.log(result);
+            });
+      },
+
       logout: function() {
         LocalService.unset('user');
         LocalService.unset('satellizer_token');
