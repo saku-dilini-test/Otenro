@@ -14,7 +14,7 @@
                        <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></span>
 
                    </h2>
-                   <span class="made-easy-header-font">{{currency}}{{item.total*item.qty}}</span>
+                   <span class="made-easy-header-font">{{currency.sign}}{{item.total*item.qty}}</span>
 
                </a>
              </div>
@@ -36,7 +36,7 @@
 
 
        <div class="col center made-easy-header-font">
-           {{currency}}{{getTotal()}}
+           {{currency.sign}}{{getTotal()}}
        </div>
        <div class="center">
            <tr ng-repeat="item in cartItems"> </tr>
