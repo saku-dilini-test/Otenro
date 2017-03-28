@@ -30,6 +30,9 @@ module.exports = {
         telNumber : {
             type : 'integer'
         },
+        id : {
+            type : 'integer'
+        },
         deliveryLocation : {
             type : 'string'
         },
