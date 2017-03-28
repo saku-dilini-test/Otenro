@@ -308,7 +308,8 @@ angular.module('starter.controllers', [])
           var cartInfo = JSON.stringify($scope.cartInfo);
           {
             // Open in external browser
-            window.open(ORDER_URL+'cartInfo='+cartInfo,'_system','location=no');
+            var url = encodeURI(ORDER_URL+'cartInfo='+cartInfo);
+            window.open(url,'_system','location=no');
           };
           $scope.changePath = function(){
             $scope.cart.clearItems();
@@ -469,7 +470,8 @@ angular.module('starter.controllers', [])
 
       var cartInfo = JSON.stringify($scope.cartInfo);
 
-      window.open(ORDER_URL+'cartInfo='+cartInfo,'_system','location=no');
+      var url = encodeURI(ORDER_URL+'cartInfo='+cartInfo);
+      window.open(url,'_system','location=no');
       $scope.changePath = function(){
         $scope.cart.clearItems();
         for(var i = 0; i < $rootScope.cart.cartSize ; i++ ){
