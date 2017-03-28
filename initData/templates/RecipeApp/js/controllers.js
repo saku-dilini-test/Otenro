@@ -131,7 +131,7 @@ angular.module('starter.controllers', [])
 
         $timeout(function () {
             $scope.changeAppName();
-        }, 1000);
+        }, 1500);
 
 
     })
