@@ -582,7 +582,7 @@
                 storeSettings.appId = $rootScope.appId;
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
-                            toastr.success('Store Setting Details has been added successfully', 'Awesome', {
+                            toastr.success('About Us has been added successfully', 'Awesome', {
                                 closeButton: true
                             });
                             var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
@@ -649,7 +649,7 @@
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
-                    toastr.success('Store Setting Details has been added successfully', {
+                    toastr.success('Policies and Terms has been added successfully', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
@@ -1083,7 +1083,7 @@
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
-                        toastr.success('Store settings successfully updated. ', 'Awesome ', {closeButton: true});
+                        toastr.success('Contact Us successfully updated. ', 'Awesome ', {closeButton: true});
                         if(type == 'finish'){
 
                             $mdDialog.hide();

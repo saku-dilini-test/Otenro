@@ -128,7 +128,7 @@
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
-                        toastr.success('Basic information updated successfully ', 'Awesome!', {closeButton: true});
+                        toastr.success('Contact us updated successfully ', 'Success!', {closeButton: true});
                         disableTabs(tab,false,false,true);
                     }).error(function(data, status, headers, config) {
                     toastr.error('Updating of basic information failed', { closeButton: true});
@@ -178,7 +178,7 @@
                  storeSettings.userId = $scope.userId;
                  storeSettings.appId = $rootScope.appId;
                  commerceService.savePolicies(storeSettings).success(function (data) {
-                     toastr.success('Store settings updated  ', {
+                     toastr.success('Policies and Terms successfully updated  ', {
                          closeButton: true
                      });
                      disableTabs(tab,false,false,false);
