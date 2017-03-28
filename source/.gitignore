@@ -60,3 +60,6 @@ config/ssl/sslforfree/
 mobileApps/
 node.zip
 node_modules/
+gen/
+nohup.out
+transaction.log

@@ -11,14 +11,16 @@
     angular.module('app')
         .controller('TemplatesCtrl',
             ['$scope', '$mdDialog', 'welcomeTemplatesResource','userProfileService','$state','mySharedService','ME_APP_SERVER',
-                '$auth','$rootScope','$timeout','SERVER_URL',
+                '$auth','$rootScope','$timeout','SERVER_URL','$stateParams',
                 TemplatesCtrl
             ]);
 
     function TemplatesCtrl($scope, $mdDialog, welcomeTemplatesResource, userProfileService,$state,mySharedService,
-                                  ME_APP_SERVER,$auth,$rootScope,$timeout,SERVER_URL) {
-       
+                                  ME_APP_SERVER,$auth,$rootScope,$timeout,SERVER_URL,$stateParams) {
 
+
+
+        console.log($stateParams + "dfsdf");
 
 
         if ($auth.isAuthenticated()) {
