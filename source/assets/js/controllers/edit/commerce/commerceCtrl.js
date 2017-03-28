@@ -246,7 +246,6 @@
 
         };
 
-
         $scope.gridOptions4 = {
             enableRowHeaderSelection: false,
             exporterMenuCsv: true,
