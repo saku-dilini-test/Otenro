@@ -181,7 +181,20 @@
                 });
             }
             else{
-                $scope.product.variants.splice(index, 1);
+                    var confirm = $mdDialog.confirm()
+                        .title('Would you like to delete this variant?')
+                        .textContent('This action cannot undo.')
+                        .ariaLabel('Delete variant')
+                        .ok('Delete')
+                        .cancel('Cancel');
+
+                    $mdDialog.show(confirm).then(function() {
+                        $scope.product.variants.splice(index, 1);
+                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                    }, function() {
+                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                    });
+
             }
         };
 

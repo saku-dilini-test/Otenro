@@ -437,8 +437,16 @@ tr.angular-ui-tree-empty {
 
 a.md-button.md-primary,
 .md-button.md-primary {
-    color: #666;
-    font-size: 1.8em;
+    color: #666 !important;
+    font-size: 0.75em;
+    letter-spacing: 3px;
+    cursor: pointer;
+    border:1px solid transparent
+}
+a.md-button.md-primary:hover,
+.md-button.md-primary:hover {
+    color: #666 !important;
+    border-color: #666;
 }
 
 a.md-button:hover:not([disabled]),
