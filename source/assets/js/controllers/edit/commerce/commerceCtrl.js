@@ -474,7 +474,7 @@
 
             // Validate, Next Order Number characters max length
             var orderNumber = storeSettings.orderNumber;
-            if(typeof orderNumber != 'undefined') {
+            if(typeof orderNumber != 'undefined'){
                 orderNumber = orderNumber.toString();
                 if(orderNumber.length >= $scope.maxLengthNextOrderNumber) {
                     toastr.error('Next Order Number length should be less than '+
@@ -557,6 +557,13 @@
         };
 
         $scope.addAboutUs = function (current,storeSettings) {
+            
+            if(header == undefined || content == undefined ){
+                toastr.error('Please fill the all fields','Warning',{
+                    closeButton: true
+                });
+            }
+            
 
             // Validate, About Us Header maximum characters length
             var header = storeSettings.header;
@@ -582,7 +589,6 @@
             if (storeSettings.header&&storeSettings.content ){
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
-
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
                             toastr.success('About Us has been added successfully', 'Awesome', {
@@ -599,11 +605,12 @@
                             closeButton: true
                         });
                     })
-            }else {
+
                 $scope.selectedTab = current;
             }
 
         };
+
         commerceService.showStoreSettings($rootScope.appId).success(function (data) {
             $scope.storeSettings = data[0];
             $scope.storeSettings.currency = data[0].currencySign;
@@ -613,7 +620,14 @@
         });
 
         $scope.savePolicies = function (current, storeSettings) {
-            
+
+            if(returnPolicy == undefined || termsAndCondition == undefined || privacyPolicy == undefined ){
+                toastr.error('Please fill the all fields','Warning',{
+                    closeButton: true
+                });
+            }
+
+
             // Validate, Return Policy maximum characters length
             var returnPolicy = storeSettings.returnPolicy;
             if((typeof returnPolicy != 'undefined') &&
