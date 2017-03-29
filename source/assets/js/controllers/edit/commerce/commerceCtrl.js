@@ -598,7 +598,7 @@
                             closeButton: true
                         });
                     })
-            }else {
+
                 $scope.selectedTab = current;
             }
 
@@ -613,7 +613,7 @@
         });
 
         $scope.savePolicies = function (current, storeSettings) {
-
+            
             // Validate, Return Policy maximum characters length
             var returnPolicy = storeSettings.returnPolicy;
             if((typeof returnPolicy != 'undefined') &&
@@ -658,8 +658,7 @@
                 }).error(function (err) {
                     toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
                 })
-            }
-            else {
+
                 $scope.selectedTab = current;
             }
         };
