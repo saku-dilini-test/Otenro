@@ -557,6 +557,13 @@
         };
 
         $scope.addAboutUs = function (current,storeSettings) {
+            
+            if(header == undefined || content == undefined ){
+                toastr.error('Please fill the all fields','Warning',{
+                    closeButton: true
+                });
+            }
+            
 
             // Validate, About Us Header maximum characters length
             var header = storeSettings.header;
@@ -598,7 +605,7 @@
                             closeButton: true
                         });
                     })
-            }else {
+
                 $scope.selectedTab = current;
             }
 
@@ -613,6 +620,13 @@
         });
 
         $scope.savePolicies = function (current, storeSettings) {
+
+            if(returnPolicy == undefined || termsAndCondition == undefined || privacyPolicy == undefined ){
+                toastr.error('Please fill the all fields','Warning',{
+                    closeButton: true
+                });
+            }
+
 
             // Validate, Return Policy maximum characters length
             var returnPolicy = storeSettings.returnPolicy;
@@ -658,8 +672,7 @@
                 }).error(function (err) {
                     toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
                 })
-            }
-            else {
+
                 $scope.selectedTab = current;
             }
         };
