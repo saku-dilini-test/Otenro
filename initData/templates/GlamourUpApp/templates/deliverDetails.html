@@ -40,7 +40,7 @@
                     </label>
                     <label class="item item-input item-select">
                         <div class="input-label">Country</div>
-                        <select  placeholder="Select Country" ng-model="details.country" required>
+                        <select   ng-model="details.country" required>
                             <option ng-value="country.countryName" ng-repeat="country in countries">{{country.countryName}}
                             </option>
                         </select>
@@ -59,8 +59,6 @@
                         </span>
                     </label>
                 </div>
-
-
                 <div class="row">
                     <div class="col center">
                         <h6>Total Amount : {{currency.sign}}{{amount}}</h6>
