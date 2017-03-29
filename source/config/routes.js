@@ -250,7 +250,7 @@ module.exports.routes = {
      ***/
 
     'GET /templates/viewTemplateUrl': 'template/TemplateController.viewTemplateUrl',
-    'GET /templates/getContactUs': 'template/TemplateController.getContactUs',
+    // 'GET /templates/getContactUs': 'template/TemplateController.getContactUs',
     'GET /templates/getSpecificChild': 'template/TemplateController.getSpecificChild',
     'GET /templates/getProductsByAppId': 'template/TemplateController.getSubChildsByAppId',
     'GET /templates/getProductById': 'template/TemplateController.getSubChildById',
@@ -259,10 +259,18 @@ module.exports.routes = {
     'GET /templates/viewImages': 'template/TemplateController.viewImages',
     'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
     'POST /templates/deletePreviewTemp': 'template/TemplateController.deletePreviewTemp',
-    'GET /templates/getAboutUs': 'template/TemplateController.getAboutUs',
-    'GET /templates/getPolicies': 'template/TemplateController.getPolicies',
-    'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
+    // 'GET /templates/getAboutUs': 'template/TemplateController.getAboutUs',
+    // 'GET /templates/getPolicies': 'template/TemplateController.getPolicies',
+    // 'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
     'POST /templates/postDeviceId': 'template/TemplateController.postDeviceId',
+
+    /**
+     * Mobile app APIs
+     */
+    'GET /templates/getContactUs': 'template/CommonMobileApis.getContactUs',
+    'GET /templates/getAboutUs': 'template/CommonMobileApis.getAboutUs',
+    'GET /templates/getPolicies': 'template/CommonMobileApis.getPolicies',
+    'GET /templates/getTermsAndConditions': 'template/CommonMobileApis.getTermsAndConditions',
 
 
     /**
