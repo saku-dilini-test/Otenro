@@ -723,7 +723,7 @@
             email.appId = $rootScope.appId;
             commerceService.saveEmailDeliInfo(email)
                 .success(function (data) {
-                    $log.debug(data);
+                    //$log.debug(data);
                     if (type == "next") {
                         var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                         $scope.selectedIndex = index;
