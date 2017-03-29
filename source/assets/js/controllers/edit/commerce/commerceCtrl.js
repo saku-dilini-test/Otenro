@@ -474,7 +474,7 @@
 
             // Validate, Next Order Number characters max length
             var orderNumber = storeSettings.orderNumber;
-            if(typeof orderNumber != 'undefined'){
+            if(typeof orderNumber != 'undefined') {
                 orderNumber = orderNumber.toString();
                 if(orderNumber.length >= $scope.maxLengthNextOrderNumber) {
                     toastr.error('Next Order Number length should be less than '+
@@ -582,6 +582,7 @@
             if (storeSettings.header&&storeSettings.content ){
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
+
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
                             toastr.success('About Us has been added successfully', 'Awesome', {
@@ -598,12 +599,11 @@
                             closeButton: true
                         });
                     })
-
+            }else {
                 $scope.selectedTab = current;
             }
 
         };
-
         commerceService.showStoreSettings($rootScope.appId).success(function (data) {
             $scope.storeSettings = data[0];
             $scope.storeSettings.currency = data[0].currencySign;
