@@ -65,6 +65,8 @@ ion-content{
     font-family: sans-serif;
     font-weight: bolder;
     line-height:normal;
+    text-transform: uppercase;
+
 }
 
 /* ----- Content Font Settings ----- */
