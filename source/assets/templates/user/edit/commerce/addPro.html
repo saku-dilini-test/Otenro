@@ -223,6 +223,7 @@
 
                                     </td>
                                     <td>
+
                                         <md-input-container class="md-container-modify">
                                             <input id ='weight_{{$index}}'    type="number" name="weight_{{$index}}" min="0"
                                                    aria-label="Weight"
@@ -291,7 +292,6 @@
                     </form>
                     <div class="md-dialog-buttons" style="padding:0 39px">
                         <div class="inner-section">
-                            <div data-ng-if="product.price">
                             <md-button class="me-default-button" ng-if="product.sku" ng-click="back()">Cancel</md-button>
                             <md-button class="me-default-button" ng-hide="product.sku" ng-click="answer('cancel')">Cancel</md-button>
                             <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid"
