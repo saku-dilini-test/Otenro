@@ -61,12 +61,17 @@
 
                     $scope.size  = ($scope.weightRate.weightRanges.length);
                     $scope.size  = $scope.size -1;
-                    var lastEndWeight = parseFloat($scope.weightRate.weightRanges[$scope.size].endWeight);
-                    lastEndWeight = lastEndWeight+ 0.1+"";
-                    angular.element(document.getElementById('startWeight'+ $scope.size))[0].disabled = true;
-                    angular.element(document.getElementById('endWeight'+ $scope.size))[0].disabled = true;
-                    $scope.weightRate.weightRanges.push({startWeight : lastEndWeight,endWeight : '',cost : ''});
-                    angular.element(document.getElementById('deleteWeight'+ $scope.size)).disabled = true;
+
+                    if($scope.weightRate.weightRanges.length > 0) {
+                        var lastEndWeight = parseFloat($scope.weightRate.weightRanges[$scope.size].endWeight);
+                        lastEndWeight = lastEndWeight + 0.1 + "";
+                        angular.element(document.getElementById('startWeight' + $scope.size))[0].disabled = true;
+                        angular.element(document.getElementById('endWeight' + $scope.size))[0].disabled = true;
+                        $scope.weightRate.weightRanges.push({startWeight: lastEndWeight, endWeight: '', cost: ''});
+                        angular.element(document.getElementById('deleteWeight' + $scope.size)).disabled = true;
+                    }else{
+                        $scope.weightRate.weightRanges.push({startWeight: lastEndWeight, endWeight: '', cost: ''});
+                    }
                 };
                 $scope.validateInputValue = function(startWeight,endWeight,type,index){
                     if (type=='startWeight'){
