@@ -5,8 +5,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',])
 .run(function($ionicPlatform ,$rootScope, $state, AuthService, AUTH_EVENTS) {
     $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
 
-        console.log(fromState);
-        console.log(next);
+        // console.log(fromState);
+        // console.log(next);
 
         if ('data' in next && 'authorizedRoles' in next.data) {
           var authorizedRoles = next.data.authorizedRoles;
@@ -99,4 +99,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',])
       $state.go("app.login");
     });
 
+}).directive('errSrc', function() {
+  return {
+    link: function(scope, element, attrs) {
+      element.bind('error', function() {
+        if (attrs.src != attrs.errSrc) {
+          attrs.$set('src', attrs.errSrc);
+        }
+      });
+    }
+  }
 });
