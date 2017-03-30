@@ -766,7 +766,7 @@
         }
 
         $scope.newcategory = function(){
-            $log.debug("innnnnnnnnnnn");
+           
             mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
         }
 
