@@ -41,12 +41,12 @@
             shippingService.getShippingInfo().
                 success(function(data){
                     $scope.items = data;
-                }).error(function(err){
+            }).error(function(err){
                     alert("Shipping Info Loading Error : " + err);
                 });
         }
         // --/-- add new shipping collection mode
-        else if($scope.initialData == 'newShippingOption'){
+        else if($scope.initialData.shipOption == 'newShippingOption'){
                 disableTabs(0,false,true,true,true,true);
 
             $scope.moveToFlatRateOption = function () {
@@ -140,8 +140,10 @@
             }
         }
 
+
         // --/-- insert Flat Rate type shipping collection --/--
         $scope.insertFlatRates = function (shipping) {
+
             if(typeof shipping == 'undefined'){
                 toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
@@ -157,10 +159,27 @@
                     closeButton: true
                 });
             }else{
-                shipping.appId = $rootScope.appId;
-                shipping.shippingOption = 'Flat Rate';
-                $scope.shipping = shipping;
-                disableTabs(4,true,false,true,true,false);
+
+                var isNameTaken = false;
+                if($scope.initialData.shipData){
+                    $scope.initialData.shipData.forEach(function(ele){
+                        if(ele.optionName == shipping.optionName.trim()){
+                            isNameTaken = true;
+                        }
+                    })
+                }
+
+                if(isNameTaken){
+                    toastr.error('Shipping option with the name ' + shipping.optionName + ' already exist', 'Warning', {
+                        closeButton: true
+                    });
+                }else{
+                    shipping.appId = $rootScope.appId;
+                    shipping.shippingOption = 'Flat Rate';
+                    $scope.shipping = shipping;
+                    disableTabs(4,true,false,true,true,false);
+                }
+
             }
         };
 
@@ -191,12 +210,26 @@
                 });
             }
             else{
+                var isNameTaken = false;
+                if($scope.initialData.shipData){
+                    $scope.initialData.shipData.forEach(function(ele){
+                        if(ele.optionName == pickup.locationName.trim()){
+                            isNameTaken = true;
+                        }
+                    })
+                }
 
-                pickup.appId = $rootScope.appId;
-                pickup.shippingOption = 'Pick up';
-                pickup.optionName = pickup.locationName;
-                disableTabs(4,true,true,true,false,false);
-                $scope.shipping = pickup;
+                if(isNameTaken){
+                    toastr.error('Shipping option with the name ' + pickup.locationName + ' already exist', 'Warning', {
+                        closeButton: true
+                    });
+                }else {
+                    pickup.appId = $rootScope.appId;
+                    pickup.shippingOption = 'Pick up';
+                    pickup.optionName = pickup.locationName;
+                    disableTabs(4, true, true, true, false, false);
+                    $scope.shipping = pickup;
+                }
             }
         };
         
@@ -230,15 +263,31 @@
                 toastr.error('Weight range costs required', 'Warning', {closeButton: true});
             }
             else {
-                shipping.appId = $rootScope.appId;
-                shipping.shippingOption = 'Weight Based';
-                $scope.shipping = shipping;
-                disableTabs(3,true,true,false,true,false);
+                var isNameTaken = false;
+                if($scope.initialData.shipData){
+                    $scope.initialData.shipData.forEach(function(ele){
+                        if(ele.optionName == shipping.optionName.trim()){
+                            isNameTaken = true;
+                        }
+                    })
+                }
+
+                if(isNameTaken){
+                    toastr.error('Shipping option with the name ' + shipping.optionName + ' already exist', 'Warning', {
+                        closeButton: true
+                    });
+                }else {
+                    shipping.appId = $rootScope.appId;
+                    shipping.shippingOption = 'Weight Based';
+                    $scope.shipping = shipping;
+                    disableTabs(3, true, true, false, true, false);
+                }
             }
         };
 
         //Delete first or last weight from the weight base
         $scope.deleteWeight = function(index){
+
             $scope.weightRate.weightRanges.splice(index, 1);
             $scope.previousIndex  = index-1 ;
             if ( $scope.previousIndex >= 0){
@@ -394,7 +443,12 @@
 
         // ---  Open dialog ----------
         $scope.addShippingOption = function () {
-            return shippingService.showAddShippingOptionDialog('newShippingOption');
+            var iData = {
+                shipOption : 'newShippingOption',
+                shipData : $scope.items
+            };
+
+            return shippingService.showAddShippingOptionDialog(iData);
         };
         $scope.backToShippingView = function(){
             return shippingService.showShippingDialog();
