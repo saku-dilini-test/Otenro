@@ -292,7 +292,9 @@
                     </form>
                     <div class="md-dialog-buttons" style="padding:0 39px">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                            <div data-ng-if="product.price">
+                            <md-button class="me-default-button" ng-if="product.sku" ng-click="back()">Cancel</md-button>
+                            <md-button class="me-default-button" ng-hide="product.sku" ng-click="answer('cancel')">Cancel</md-button>
                             <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid"
                                        class="me-default-button" ng-click="addProductVariants(data,3)">Next</md-button>
                         </div>
@@ -367,10 +369,7 @@
                                     </div>
                                     <div ng-if="picFile" style="display:none"  >
                                     </div>
-
-
                                 </div>
-
                             </div>
                                 <img-crop image="myImage" area-type="square" result-image="picFile">
                                 </img-crop>
@@ -382,11 +381,6 @@
                                 <div   class="img-up1 " ng-click="addImage(picFile)"></div>
                             </div>
                         </div>
-
-
-
-
-
 
                         <div class="uploaded-section image-upload clearfix">
                             <div class="uploaded-new-image2">
@@ -468,7 +462,8 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                            <md-button class="me-default-button" ng-if="product.sku" ng-click="back()">Cancel</md-button>
+                            <md-button class="me-default-button" ng-hide="product.sku" ng-click="answer('cancel')">Cancel</md-button>
                             <md-button class="me-default-button" ng-click="addOrUpdateProducts(myImage)">save </md-button>
                             <md-button class="me-default-button" ng-click="saveAndPublishProducts(myImage)">save & publish</md-button>
                         </div>
@@ -477,7 +472,6 @@
             </md-tab>
         </md-tabs>
     </md-dialog-content>
-
 
     <!--
     <div class="dialog-controls clearfix">

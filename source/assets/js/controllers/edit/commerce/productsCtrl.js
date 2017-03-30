@@ -371,9 +371,7 @@
 
         };
 
-
-
-
+        
         $scope.setImage = function (img) {
 
             if (img == undefined) {
@@ -723,9 +721,9 @@
         $scope.answer = function () {
             $mdDialog.hide();
         };
+        
         $scope.back = function(){
             return commerceService.showInventoryDialog();
-
         };
 
 
@@ -743,6 +741,9 @@
             }
             else if($scope.product.variants[index].sku === "" ||
                     $scope.product.variants[index].sku === null ||
+                    $scope.product.variants[index].price === "" ||
+                     $scope.product.variants[index].price === null ||
+                    
                     $scope.product.variants[index].sku === undefined ){
                     $scope.product.checked = false;
             }
@@ -766,7 +767,7 @@
         }
 
         $scope.newcategory = function(){
-            $log.debug("innnnnnnnnnnn");
+           
             mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
         }
 
