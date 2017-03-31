@@ -2,7 +2,7 @@
  * Created by udeshika on 3/24/17.
  */
 /**
- * CommonMobileApis
+ * CommonMobileApisController
  *
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
@@ -11,8 +11,10 @@ var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 
 module.exports = {
-    getContactUs : function(req,res){
 
+    getContactUs : function(req,res){
+        console.log("hy");
+        sails.log.debug("I am a debug message");
         var appId = req.param('appId');
         var searchApp = {
             appId: appId

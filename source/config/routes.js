@@ -267,10 +267,10 @@ module.exports.routes = {
     /**
      * Mobile app APIs
      */
-    'GET /templates/getContactUs': 'template/CommonMobileApis.getContactUs',
-    'GET /templates/getAboutUs': 'template/CommonMobileApis.getAboutUs',
-    'GET /templates/getPolicies': 'template/CommonMobileApis.getPolicies',
-    'GET /templates/getTermsAndConditions': 'template/CommonMobileApis.getTermsAndConditions',
+    'GET /templates/getContactUs': 'template/CommonMobileApisController.getContactUs',
+    'GET /templates/getAboutUs': 'template/CommonMobileApisController.getAboutUs',
+    'GET /templates/getPolicies': 'template/CommonMobileApisController.getPolicies',
+    'GET /templates/getTermsAndConditions': 'template/CommonMobileApisController.getTermsAndConditions',
 
 
     /**
