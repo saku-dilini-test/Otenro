@@ -257,9 +257,7 @@
         }
 
 
-
-
-
+        
         $scope.nextStep3Digital = function (current, product, variants) {
             if (variants.price == null) {
                 toastr.error('Please fill all fields', 'Warning', {
@@ -275,8 +273,6 @@
 
             }
         };
-
-
 
 
         $scope.typeUpdateHandler = function (newValue) {
@@ -741,17 +737,25 @@
             }
             else if($scope.product.variants[index].sku === "" ||
                     $scope.product.variants[index].sku === null ||
-                    $scope.product.variants[index].price === "" ||
-                     $scope.product.variants[index].price === null ||
-                    
                     $scope.product.variants[index].sku === undefined ){
                     $scope.product.checked = false;
             }
             else {
                 $scope.product.checked = true;
             }
-        }
+        };
 
+
+              // validation with price name
+        $scope.isSkunull = function(price){
+            if( sku == 'null' || sku == null || sku == undefined ){
+                $scope.ButtonDisable = true;
+            }else{
+                $scope.ButtonDisable = false;
+            }
+        }
+        
+        
         // when product edit start in second tab and enable pagination
         if (initialData.product.id !== undefined){
             disableTabs(1,false,false,false ,false);

@@ -558,12 +558,12 @@
 
         $scope.addAboutUs = function (current,storeSettings) {
             
-            if(header == undefined || content == undefined ){
-                toastr.error('Please fill the all fields','Warning',{
-                    closeButton: true
-                });
-            }
-            
+            // if(header == undefined || content == undefined ){
+            //     toastr.error('Please fill the all fields','Warning',{
+            //         closeButton: true
+            //     });
+            // }
+            //
 
             // Validate, About Us Header maximum characters length
             var header = storeSettings.header;
@@ -621,11 +621,11 @@
 
         $scope.savePolicies = function (current, storeSettings) {
 
-            if(returnPolicy == undefined || termsAndCondition == undefined || privacyPolicy == undefined ){
-                toastr.error('Please fill the all fields','Warning',{
-                    closeButton: true
-                });
-            }
+            // if(returnPolicy == undefined || termsAndCondition == undefined || privacyPolicy == undefined ){
+            //     toastr.error('Please fill the all fields','Warning',{
+            //         closeButton: true
+            //     });
+            // }
 
 
             // Validate, Return Policy maximum characters length
