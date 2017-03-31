@@ -21,6 +21,9 @@
             deletePreviewTemp : function(appParams){
                 return $http.post(SERVER_URL + 'templates/deletePreviewTemp',appParams);
             },
+            checkUniqueAppName: function(data){
+                return $http.post(SERVER_URL + 'edit/checkUniqueAppName', data)
+            },
             createPreview:function(appParams){
                 return $http.post(SERVER_URL + 'app/preview', appParams);
             },

@@ -92,6 +92,27 @@
             });
         };
 
+        
+        //validate App name
+        $scope.checkAppName = function(appName){
+            $scope.exist = false;
+            var Data = {
+                userId: $rootScope.userId,
+                appId: $rootScope.appId,
+                templateId : $rootScope.templateId,
+                appName: appName
+            }
+            welcomeTemplatesResource.checkUniqueAppName(Data)
+                .success(function(result){
+                    if(result == 'true'){
+                        $scope.exist = true;
+                    }
+                }).error(function (error) {
+                $log.debug(error);
+            })
+        };
+        
+
         $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory) {
             var agentInfo = {
                 clickid : $stateParams.clickid,

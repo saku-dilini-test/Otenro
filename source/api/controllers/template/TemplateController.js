@@ -263,6 +263,8 @@ module.exports = {
             res.json(result);
         });
     },
+    
+
     getArticleById : function(req,res) {
 
         var id = req.param('articleId');
@@ -274,6 +276,8 @@ module.exports = {
             res.json(artilce);
         });
     },
+    
+    
 
     /**
      * return images for given userID & appID & img ( Path + Image name )
@@ -317,6 +321,30 @@ module.exports = {
             }
         ];
         res.json(response);
+    },
+
+
+    // validate app Name
+    checkUniqueAppName: function(req,res){
+        var searchApp={
+            userId: req.body.userId
+           
+
+        }
+        Application.find(searchApp, function(err, app){
+            if (err) return done(err);
+            for(var i=0; i<app.length; i++){
+                for(var j=0; j<app[i].appName.length; j++){
+                    if(app[i].appName[j] == req.body.appName){
+                        return res.send('true');
+                        break;
+                    }
+                }
+            }
+            res.send('false');
+
+        })
+
     },
 
     deletePreviewTemp : function(req,res){

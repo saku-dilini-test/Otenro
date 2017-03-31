@@ -563,8 +563,7 @@
             })
         }
 
-
-
+        
         /**
          * @description
          * pattern validation of size/weight
