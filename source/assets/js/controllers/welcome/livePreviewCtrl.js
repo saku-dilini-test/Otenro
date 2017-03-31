@@ -92,14 +92,12 @@
             });
         };
 
-        
         //validate App name
         $scope.checkAppName = function(appName){
             $scope.exist = false;
             var Data = {
                 userId: $rootScope.userId,
                 appId: $rootScope.appId,
-                templateId : $rootScope.templateId,
                 appName: appName
             }
             welcomeTemplatesResource.checkUniqueAppName(Data)
@@ -111,7 +109,7 @@
                 $log.debug(error);
             })
         };
-        
+
 
         $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory) {
             var agentInfo = {
