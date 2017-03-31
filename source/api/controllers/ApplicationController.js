@@ -556,7 +556,9 @@ module.exports = {
             userId = req.body.userId,
             appId = req.body.appId,
             tempAppDirPath = config.ME_SERVER + userId + '/templates/',
-            templatePath = sails.config.appPath + '/api/templates/' + templateName;
+            templatePath = config.TEMPLATES_PATH  + templateName,
+            serverTmp="http://localhost:port",
+            serverOrg=config.server.host;
 
 
         fs.copy(templatePath, tempAppDirPath + 'changePreview' , function(err) {
@@ -568,10 +570,16 @@ module.exports = {
                 var bgFilePath = tempAppDirPath + appId + '/img/background.jpg';
                 fs.copy(bgFilePath, tempAppDirPath + 'changePreview/img/background.jpg' , function(err){
                     if (err) return console.error(err);
+                        res.send({
+                            message: "New Application has been created"
+                        });
+                });
+            });
 
-                    res.send({
-                        message: "New Application has been created"
-                    });
+            fs.readFile(tempAppDirPath +'changePreview/js/constantsService.js', 'utf-8',  function(err, data) {
+                if (err) return res.negotiate(err);
+                fs.writeFile(tempAppDirPath +'changePreview/js/constantsService.js', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
+                    if (err) return res.negotiate(err);
                 });
             });
 
@@ -586,7 +594,7 @@ module.exports = {
             tempAppDirPath = config.ME_SERVER + userId + '/templates/changePreview',
             templatePath = config.ME_SERVER + userId + '/templates/'+appId;
             //templatePath = sails.config.appPath + '/api/templates/' + templateName;
-            sails.log.info(templatePath);
+            sails.log.debug(templatePath);
 
         fs.copy(tempAppDirPath, templatePath , function(err) {
             if (err) return console.error(err);
