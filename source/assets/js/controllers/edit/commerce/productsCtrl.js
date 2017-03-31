@@ -748,7 +748,7 @@
 
               // validation with price name
         $scope.isSkunull = function(price){
-            if( sku == 'null' || sku == null || sku == undefined ){
+            if( sku == "" || sku == null || sku == undefined ){
                 $scope.ButtonDisable = true;
             }else{
                 $scope.ButtonDisable = false;
