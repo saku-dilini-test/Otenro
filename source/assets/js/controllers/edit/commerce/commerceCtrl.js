@@ -544,7 +544,7 @@
                 });
 
                 commerceService.saveStoreSettings(storeSettings).success(function (data) {
-                    toastr.success('Store Setting Details has been added successfully', 'Awesome', {
+                    toastr.success('Store Setting Details has been added successfully', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
@@ -558,13 +558,6 @@
 
         $scope.addAboutUs = function (current,storeSettings) {
             
-            if(header == undefined || content == undefined ){
-                toastr.error('Please fill the all fields','Warning',{
-                    closeButton: true
-                });
-            }
-            
-
             // Validate, About Us Header maximum characters length
             var header = storeSettings.header;
             if((typeof header != 'undefined') &&
@@ -606,6 +599,8 @@
                         });
                     })
 
+            }else {
+
                 $scope.selectedTab = current;
             }
 
@@ -621,23 +616,25 @@
 
         $scope.savePolicies = function (current, storeSettings) {
 
-            if(returnPolicy == undefined || termsAndCondition == undefined || privacyPolicy == undefined ){
-                toastr.error('Please fill the all fields','Warning',{
+
+            if(typeof returnPolicy == 'undefined'
+                || typeof termsAndCondition == 'undefined'
+                || typeof privacyPolicy == 'undefined'
+            ){
+                toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
             }
 
-
-            // Validate, Return Policy maximum characters length
-            var returnPolicy = storeSettings.returnPolicy;
-            if((typeof returnPolicy != 'undefined') &&
+               var returnPolicy = storeSettings.returnPolicy;
+                if ((typeof returnPolicy != 'undefined') &&
                 (returnPolicy.length > $scope.maxReturnPolicy)){
                 toastr.error('Return Policy, maximum characters length is exceed. ' +
                     'Maximum characters length is : '+$scope.maxReturnPolicy, 'Warning',
                     {closeButton: true}
                 );
                 return;
-            }
+             }
 
             // Validate, Terms And Condition maximum characters length
             var termsAndCondition = storeSettings.termsAndCondition;
@@ -665,13 +662,15 @@
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
-                    toastr.success('Policies and Terms has been added successfully', 'Awesome', {
+                    toastr.success('Policies and Terms has been added successfully', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
                 }).error(function (err) {
                     toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
                 })
+
+           
 
                 $scope.selectedTab = current;
             }
