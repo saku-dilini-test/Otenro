@@ -557,6 +557,16 @@
         };
 
         $scope.addAboutUs = function (current,storeSettings) {
+
+            if(typeof header == 'undefined'
+                || typeof content == 'undefined'
+                
+            ){
+                toastr.error('Please fill all fields', 'Warning', {
+                    closeButton: true
+                });
+            }
+            
             
             // Validate, About Us Header maximum characters length
             var header = storeSettings.header;
