@@ -557,8 +557,7 @@
         };
 
         $scope.addAboutUs = function (current,storeSettings) {
-
-
+            
             // Validate, About Us Header maximum characters length
             var header = storeSettings.header;
             if((typeof header != 'undefined') &&
