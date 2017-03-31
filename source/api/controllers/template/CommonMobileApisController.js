@@ -13,8 +13,7 @@ var ApiControllers = require('authorizenet').APIControllers;
 module.exports = {
 
     getContactUs : function(req,res){
-        console.log("hy");
-        sails.log.debug("I am a debug message");
+        sails.log.debug("debug");
         var appId = req.param('appId');
         var searchApp = {
             appId: appId
