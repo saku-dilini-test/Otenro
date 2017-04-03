@@ -110,6 +110,9 @@
             })
         };
 
+        
+
+
 
         $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory) {
             var agentInfo = {
