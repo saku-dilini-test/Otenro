@@ -44,7 +44,7 @@ angular.module('app')
             templateUrl : 'user/welcome/welcomeTemplatesView.html'
 
       }).state('anon.livePreview',{
-            url :'/livePreview/:userId/:appId/:tempUrl/:tempName/:tempCategory',
+            url :'/livePreview/:p',
             params: {
                 userId:null,
                 appId: null,
@@ -52,7 +52,8 @@ angular.module('app')
                 tempName:null,
                 tempCategory: null,
                 affid: null,
-                clickid:null
+                clickid:null,
+                p:null
             },
             controller: 'livePreviewCtrl',
             templateUrl : 'user/welcome/LivePreview.html'
@@ -131,9 +132,10 @@ angular.module('app')
             }
           })
       .state('user.editApp',{
-          url :'/appedit/:appId',
+          url :'/appedit/:p',
           params: {
-                appId: null
+                appId: null,
+                p: null
           },
           controller : 'AppEditAreaCtrl',
           templateUrl : 'user/edit/appEditAreaView.html'

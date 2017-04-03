@@ -63,6 +63,13 @@
                     var affid = $location.search().affid;
                     var clickid = $location.search().clickid;
 
+                    var encUserId = 'unknownUser' + "/";
+                    var encAppId = previewId + "/";
+                    var encTempUrl = templateUrl + "/";
+                    var encTempName = templateName + "/";
+                    var encTempCategory = templateCategory + "/";
+
+                    var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory);
 
                     var url= urlPath+'/?'+new Date().getTime();
                     mySharedService.prepForBroadcast(url);
@@ -74,7 +81,8 @@
                             tempName: templateName,
                             tempCategory: templateCategory,
                             affid: affid,
-                            clickid: clickid
+                            clickid: clickid,
+                            p: encryptedURL
                         });
 
         }
