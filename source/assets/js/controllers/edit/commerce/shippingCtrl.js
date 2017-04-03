@@ -204,8 +204,12 @@
                 toastr.error('City should be less than '+$scope.maxPickup+' letters.', 'Warning', {
                     closeButton: true
                 });
+            }else if(pickup.number.length > $scope.maxPickup){
+                toastr.error('Address Line 1 should be less than '+$scope.maxPickup+' letters.', 'Warning', {
+                    closeButton: true
+                });
             }else if(pickup.streetAddress.length > $scope.maxPickup){
-                toastr.error('Street Address should be less than '+$scope.maxPickup+' letters.', 'Warning', {
+                toastr.error('Address Line 2 should be less than '+$scope.maxPickup+' letters.', 'Warning', {
                     closeButton: true
                 });
             }
