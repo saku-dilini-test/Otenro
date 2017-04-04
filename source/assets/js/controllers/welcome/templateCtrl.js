@@ -20,7 +20,7 @@
 
 
 
-        console.log($stateParams + "dfsdf");
+
 
 
         if ($auth.isAuthenticated()) {
@@ -58,12 +58,23 @@
 
             mySharedService.prepForBroadcast(url);
 
+            var encUserId = 'unknownUser' + "/";
+            var encAppId = previewId + "/";
+            var encTempUrl = templateUrl + "/";
+            var encTempName = templateName + "/";
+            var encTempCategory = templateCategory + "/";
+
+            var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory);
+
+
+            var encParam = btoa(previewId);
             $state.go('anon.livePreview', {
                 userId: 'unknownUser',
                 appId: previewId,
                 tempUrl: templateUrl,
                 tempName: templateName,
-                tempCategory: templateCategory
+                tempCategory: templateCategory,
+                p:encryptedURL
             });
     }
     }
