@@ -15,6 +15,15 @@
         $scope.product = initialData.product;
         $scope.selection = initialData.product.selection;
         $scope.currency = $rootScope.currency;
+        $scope.isNewProduct = true;
+
+
+        if(initialData.isNewItem)
+        {
+            $scope.isNewProduct = initialData.isNewItem;
+        }else if($scope.product.sku){
+            $scope.isNewProduct = false;
+        }
 
         // Third Navigation Image Path ( Image get from server )
         var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
@@ -164,7 +173,20 @@
                 });
             }
             else{
-                $scope.product.variants.splice(index, 1);
+                    var confirm = $mdDialog.confirm()
+                        .title('Would you like to delete this variant?')
+                        .textContent('This action cannot undo.')
+                        .ariaLabel('Delete variant')
+                        .ok('Delete')
+                        .cancel('Cancel');
+
+                    $mdDialog.show(confirm).then(function() {
+                        $scope.product.variants.splice(index, 1);
+                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                    }, function() {
+                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                    });
+
             }
         };
 
@@ -685,8 +707,14 @@
         $scope.answer = function () {
             $mdDialog.hide();
         };
+        
         $scope.back = function(){
-            return commerceService.showInventoryDialog();
+            if($scope.isNewProduct){
+                $mdDialog.hide();
+            }else{
+                return commerceService.showInventoryDialog();
+            }
+
 
         };
 
@@ -729,7 +757,6 @@
         }
 
         $scope.newcategory = function(){
-            $log.debug("innnnnnnnnnnn");
             mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
         }
 
@@ -742,6 +769,7 @@
 
 
          $scope.addNewVariant = function (fullProduct, variantName) {
+                var isNewItem =  $scope.isNewProduct;
                 return $mdDialog.show({
                     controllerAs: 'dialogCtrl',
                     locals: { name: variantName },
@@ -750,6 +778,7 @@
                         $scope.product.selection = fullProduct.selection;
                         $scope.vType = name;
                         $scope.vTypeRemove = name;
+                        $scope.isNewProduct = isNewItem;
 
                         if ($scope.product.selection == undefined){
                             $scope.product.selection= [];
@@ -759,7 +788,7 @@
                                  toastr.error('You can only add 4 variants', 'Error!', {
                                       closeButton: true
                                  });
-                                  return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                                  return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants);
                             }else if($scope.product.selection.length > 0){
                                 for (var i = 0; i < $scope.product.selection.length; i++){
                                    if( $scope.product.selection[i].name.toLowerCase() ==  $scope.vType.toLowerCase()){
@@ -777,7 +806,10 @@
                                         toastr.success('Variant renamed', 'Success!', {
                                             closeButton: true
                                         });
-                                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+
+
+                                        return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants);
+
                                         break;
                                    }else if( i == $scope.product.selection.length -1){
                                         $scope.product.selection.push({
@@ -793,7 +825,7 @@
                                         toastr.success('Variant added', 'Success!', {
                                               closeButton: true
                                         });
-                                        return commerceService.showAddProductsDialog($scope.product,undefined, $scope.product.variants);
+                                        return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants);
                                         break;
                                    }
                                  }
@@ -816,7 +848,8 @@
                                       toastr.success('Variant added', 'Success!', {
                                           closeButton: true
                                       });
-                                 return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants, result.productId);
+
+                                 return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, result.productId);
 
                                   }).error(function (err) {
                                       toastr.error('Variant creation failed', 'Warning', {
@@ -830,7 +863,7 @@
                         },
                         this.cancel = function click(){
 
-                           return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                           return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants);
                         },
                         this.remove = function click(selection){
                                 for (var i = 0; i < $scope.product.selection.length; i++){
@@ -842,7 +875,7 @@
                                          toastr.success('Variant removed', 'Success!', {
                                               closeButton: true
                                          });
-                                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                                        return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants);
                                    }
                                 }
                         }

@@ -18,6 +18,8 @@
         $scope.appId = $stateParams.appId;
         $rootScope.appId = $stateParams.appId;
         $scope.userId = $auth.getPayload().id;
+        $scope.isArticleApp = false;
+
         //$scope.changeTemplate = $rootScope.changeTemplate;
         var changeTemp = JSON.parse(localStorage.getItem('changeTemplate'));
         if(changeTemp){
@@ -52,7 +54,9 @@
                  * TODO : This should change later according type of template category
                  * @type {boolean}
                  */
-
+                if(data.templateCategory == 3){
+                    $scope.isArticleApp = true;
+                }
                 dashboardService.getTemplateMetaData(data.templateCategory)
                     .success(function(data) {
                         $scope.buttonArray = data.btnArray;

@@ -180,7 +180,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
-                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
+                {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -216,7 +216,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
-                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
+                {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -246,7 +246,6 @@
 
         };
 
-
         $scope.gridOptions4 = {
             enableRowHeaderSelection: false,
             exporterMenuCsv: true,
@@ -254,7 +253,10 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
-                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
+                {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
+
+                {name: 'createdDate'},
+
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -556,6 +558,16 @@
 
         $scope.addAboutUs = function (current,storeSettings) {
 
+            if(typeof header == 'undefined'
+                || typeof content == 'undefined'
+                
+            ){
+                toastr.error('Please fill all fields', 'Warning', {
+                    closeButton: true
+                });
+            }
+            
+            
             // Validate, About Us Header maximum characters length
             var header = storeSettings.header;
             if((typeof header != 'undefined') &&
@@ -582,7 +594,7 @@
                 storeSettings.appId = $rootScope.appId;
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
-                            toastr.success('Store Setting Details has been added successfully', 'Awesome', {
+                            toastr.success('About Us has been added successfully', 'Awesome', {
                                 closeButton: true
                             });
                             var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
@@ -596,7 +608,9 @@
                             closeButton: true
                         });
                     })
+
             }else {
+
                 $scope.selectedTab = current;
             }
 
@@ -612,16 +626,25 @@
 
         $scope.savePolicies = function (current, storeSettings) {
 
-            // Validate, Return Policy maximum characters length
-            var returnPolicy = storeSettings.returnPolicy;
-            if((typeof returnPolicy != 'undefined') &&
+
+            if(typeof returnPolicy == 'undefined'
+                || typeof termsAndCondition == 'undefined'
+                || typeof privacyPolicy == 'undefined'
+            ){
+                toastr.error('Please fill all fields', 'Warning', {
+                    closeButton: true
+                });
+            }
+
+               var returnPolicy = storeSettings.returnPolicy;
+                if ((typeof returnPolicy != 'undefined') &&
                 (returnPolicy.length > $scope.maxReturnPolicy)){
                 toastr.error('Return Policy, maximum characters length is exceed. ' +
                     'Maximum characters length is : '+$scope.maxReturnPolicy, 'Warning',
                     {closeButton: true}
                 );
                 return;
-            }
+             }
 
             // Validate, Terms And Condition maximum characters length
             var termsAndCondition = storeSettings.termsAndCondition;
@@ -649,15 +672,16 @@
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
-                    toastr.success('Store Setting Details has been added successfully', {
+                    toastr.success('Policies and Terms has been added successfully', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
                 }).error(function (err) {
                     toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
                 })
-            }
-            else {
+
+           
+
                 $scope.selectedTab = current;
             }
         };
@@ -723,7 +747,7 @@
             email.appId = $rootScope.appId;
             commerceService.saveEmailDeliInfo(email)
                 .success(function (data) {
-                    $log.debug(data);
+                    //$log.debug(data);
                     if (type == "next") {
                         var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                         $scope.selectedIndex = index;
@@ -1083,7 +1107,7 @@
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)
                     .success(function(data, status, headers, config) {
-                        toastr.success('Store settings successfully updated. ', 'Awesome ', {closeButton: true});
+                        toastr.success('Contact Us successfully updated. ', 'Awesome ', {closeButton: true});
                         if(type == 'finish'){
 
                             $mdDialog.hide();
