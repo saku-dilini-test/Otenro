@@ -71,6 +71,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.lockBuyButton = true;
     $scope.changeVariant = function(variant){
       $scope.selection1 =[];
+      $scope.buyQuantity = {};
       $scope.selectedVariant1  =variant.vType;
       $scope.lockBuyButton = true;
 
@@ -91,7 +92,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     };
 
-    $scope.changeVariant2 = function(variant){
+    $scope.changeVariant2 = function(variant) {
       $scope.selection2 =[];
       $scope.selectedVariant2  =variant.vType;
       $scope.lockBuyButton = true;
