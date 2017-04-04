@@ -2345,16 +2345,6 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     color:gray;
 }
 .add-new-variant{
-    position: fixed;
-    bottom: 80px;
-}
-
-.custom-add-products{
-    overflow-x:auto;
-    padding:0;
-    margin:25px 40px 0;
-}
-
-.custom-add-products .me-hours-table{
-   width:1500px;
+    position: absolute;
+    bottom: -20px;
 }
