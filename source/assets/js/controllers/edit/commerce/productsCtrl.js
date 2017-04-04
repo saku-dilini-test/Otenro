@@ -310,7 +310,7 @@
          * add or update product
          */
         $scope.addOrUpdateProducts = function () {
-              if ($scope.tmpImage.length<=0&&$scope.myImage==null){
+              if ($scope.tmpImage.length <= 0 || $scope.myImage==null){
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
@@ -345,7 +345,7 @@
 
         };
         $scope.saveAndPublishProducts = function () {
-              if ($scope.tmpImage.length<=0&&$scope.myImage==null){
+              if ($scope.tmpImage.length<=0 || $scope.myImage==null){
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
@@ -885,7 +885,24 @@
                         },
                         this.cancel = function click(){
 
-                           return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants);
+                           if($scope.product.selection.length > 0){
+                               return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants);
+                           }else {
+                               $scope.tmpImage = [];
+                               $scope.product.published = 'NO';
+                               commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product})
+                                   .success(function (result) {
+                                       return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, result.productId);
+                                   }).error(function (err) {
+                                   toastr.error('Product creation failed', 'Warning', {
+                                       closeButton: true
+                                   });
+                                   $mdDialog.hide();
+
+                               });
+                           }
+
+
                         },
                         this.remove = function click(selection){
                                 for (var i = 0; i < $scope.product.selection.length; i++){
