@@ -15,6 +15,7 @@
         $scope.maxFlatRate = 20;
         $scope.maxWeightRate = 20;
         $scope.maxPickup = 50;
+        $scope.maxPostalCode = 8;
         $scope.currency = $rootScope.currency;
         $scope.size = 0;
         $scope.selected = [];
