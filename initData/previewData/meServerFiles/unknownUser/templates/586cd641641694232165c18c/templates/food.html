@@ -33,7 +33,8 @@
                            class="item-buy"
                            placeholder="Quantity"
                            ng-model="selectedVariant.buyQuantity"
-                           ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
+                           ng-change="changeBuyQuantity(selectedVariant.buyQuantity)"
+                           ng-hide="lockBuyButton">
 
                 </div>
             </label>

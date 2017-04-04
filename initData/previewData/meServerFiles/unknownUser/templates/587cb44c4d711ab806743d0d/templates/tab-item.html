@@ -86,7 +86,8 @@
                         <input type="number" min="1"
                                class="item-buy"
                                ng-model="selectedVariant.buyQuantity"
-                               ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
+                               ng-change="changeBuyQuantity(selectedVariant.buyQuantity)"
+                               ng-hide="lockBuyButton">
                     </div>
                 </div>
             </div>
