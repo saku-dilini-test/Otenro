@@ -71,6 +71,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.lockBuyButton = true;
     $scope.changeVariant = function(variant){
       $scope.selection1 =[];
+      $scope.buyQuantity = {};
       $scope.selectedVariant1  =variant.vType;
       $scope.lockBuyButton = true;
 
@@ -91,7 +92,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     };
 
-    $scope.changeVariant2 = function(variant){
+    $scope.changeVariant2 = function(variant) {
       $scope.selection2 =[];
       $scope.selectedVariant2  =variant.vType;
       $scope.lockBuyButton = true;
@@ -115,7 +116,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     };
 
-    $scope.changeVariant3 = function(variant){
+    $scope.changeVariant3 = function(variant) {
       $scope.selection3 =[];
       $scope.selectedVariant3  =variant.vType;
       $scope.lockBuyButton = true;
@@ -138,7 +139,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             }
         }
     };
-    $scope.changeVariant4 = function(variant){
+    $scope.changeVariant4 = function(variant) {
       $scope.selectedVariant4  =variant.vType;
 
       for(var i=0;i<$scope.foodInfo.variants.length;i++){
@@ -170,6 +171,9 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             if($scope.selectedVariant.unlimited == true){
                 $scope.isBuyBtnDisable = false;
             }
+
+
+
             else if(typeof selectVariantAvailableQty != 'undefined'){
                 // If buyQty less than or equal Selected-Variant-Qty, buy button enable
                 if(buyQty <= selectVariantAvailableQty ){
