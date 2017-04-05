@@ -232,7 +232,10 @@
                             <fieldset class="col-1 reset-margin-right">
                                 <label>postal code</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <input class="input-shadow-border"  type="text" ng-maxlength="6" ng-pattern="/^[a-zA-Z0-9]*$/" name="postalCode" required ng-model="pickup.postalCode" />
+                                <input class="input-shadow-border"  type="text" maxlength="8" ng-pattern="/^[a-zA-Z0-9]*$/" name="postalCode" required ng-model="pickup.postalCode" />
+                                <div ng-hide="pickup.postalCode.length > maxPostalCode">
+                                    <span class="information">Characters left: {{maxPostalCode - pickup.postalCode.length}}</span>
+                                </div>
                                 <br />
                                 <span class="error" ng-show="pickUp.postalCode.$error.pattern">No symbols</span>
                             </fieldset>
