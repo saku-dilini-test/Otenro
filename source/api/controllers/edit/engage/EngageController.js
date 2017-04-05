@@ -81,8 +81,8 @@ module.exports = {
         };
         PushConfig.findOne(findDevicedQuery).exec(function(err,pushConfigData) {
             
-            sails.log.debug(pushConfigData);
-            if (pushConfigData != 'undefined') {
+            //sails.log.debug(pushConfigData);
+            if (!pushConfigData) {
                 return res.serverError();
             }else {
                 // Create push collection
