@@ -70,7 +70,7 @@
             },
             columnDefs: [
                 /*{name: 'id'},*/
-                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
+                // {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate',},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -180,7 +180,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
-                {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
+                // {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -216,7 +216,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
-                {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
+                // {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -253,10 +253,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
-                {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
-
-                {name: 'createdDate'},
-
+                // {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
