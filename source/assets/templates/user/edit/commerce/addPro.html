@@ -100,11 +100,8 @@
                                                    required>
                                             <md-option ng-value="child.id" ng-repeat="child in child ">{{child.name}}
                                             </md-option>
-
                                             <!--// create new catergory-->
                                             <md-option ng-click="newcategory ()">Create New Category</md-option>
-
-
                                         </md-select>
                                     </md-input-container>
                                 </div>
@@ -138,12 +135,6 @@
                                 <th width="8%">Price({{currency}})</th>
                                 <th width="10%">Quantity</th>
                                 <th width="10%">Weight(kg)</th>
-                                <!--<th width="28%"><input type="text" required name="variantType" ng-model="selection" placeholder="Variant Name" list="variantType"/>-->
-                                    <!--<datalist id="variantType">-->
-                                        <!--<option value="Size">Size</option>-->
-                                        <!--<option value="Weight">Weight</option>-->
-                                        <!--<option value="Color">Color</option>-->
-                                    <!--</datalist></th>-->
                                 <th width="10%" data-ng-repeat="data in product.selection">
                                     <a data-ng-click="addNewVariant(product, data.name)">{{data.name}}</a>
                                 </th>
@@ -164,15 +155,16 @@
                                     </td>
                                     <td>
                                         <md-input-container style="width: 80px;">
-                                            <input ng-blur="checkValidity(data.sku,'sku')"  maxlength="10"
+                                            <input ng-blur="checkValidity(data.sku,'sku')"
+                                                   maxlength="10"
                                                    required
                                                    aria-label="SKU"
                                                    class="product-sku"
                                                    name="sku_{{$index}}"
                                                    ng-model="data.sku"
                                                    ng-pattern="/^\d*[1-9]\d*$/"
-                                                   ng-readonly="product.checked"
-                                                   ng-click="check($index)">
+                                                   ng-readonly="data.checked"
+                                                   ng-click="check($index1)">
                                             <div class="error" ng-if="exist">Sku already exist</div>
                                             <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                                 <div ng-message="required">SKU is required.</div>
