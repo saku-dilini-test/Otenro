@@ -15,12 +15,12 @@
                 affid:$stateParams.affid
             }
             Auth.register(user).success(function () {
-                Auth.sendAgentInfo(agentInfo).success(function () { });
+                Auth.sendAgentInfo(agentInfo);
                 toastr.success('Register Successful ', 'Congratulations ! ', {closeButton: true});
                 if ($scope.user.email== 'support@otenro.com'){
                     $state.go('user.technicalSupporter');
                 }else {
-                    $state.go('anon.welcome');
+                    $state.go('user.dashboard');
                 }
             }).catch(function onError() {
                 toastr.error('Email already exists ' + $scope.user.email, 'Error', {
