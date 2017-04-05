@@ -32,7 +32,8 @@
                             <input type="number" min="1"
                                    placeholder="Enter Quantity"
                                    ng-model="selectedVariant.buyQuantity"
-                                   ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
+                                   ng-change="changeBuyQuantity(selectedVariant.buyQuantity)"
+                                   ng-hide="lockBuyButton">
                         </h2>
                         <i class="icon ion-pricetags"></i>
                     </a>
@@ -46,7 +47,8 @@
                             <select ng-model="selectedVariant"
                                     class="made-easy-content-font"
                                     ng-options="variant.vType  for variant in selection |unique:'vType' "
-                                    ng-change="changeVariant(selectedVariant)">
+                                    ng-change="changeVariant(selectedVariant)"
+                                    ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </label>
                         <label class="col item-input item-select no-padding" ng-if="foodInfo.selection[1]">
@@ -56,7 +58,8 @@
                             <select ng-model="selectedVariant1"
                                     class="made-easy-content-font"
                                     ng-options="variant.vType  for variant in selection1 |unique:'vType' "
-                                    ng-change="changeVariant2(selectedVariant1)">
+                                    ng-change="changeVariant2(selectedVariant1)"
+                                    ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </label>
                         <label class="col item-input item-select no-padding" ng-if="foodInfo.selection[2]">
@@ -66,7 +69,8 @@
                             <select ng-model="selectedVariant3"
                                     class="made-easy-content-font"
                                     ng-options="variant.vType  for variant in selection2 |unique:'vType'"
-                                    ng-change="changeVariant3(selectedVariant3)">
+                                    ng-change="changeVariant3(selectedVariant3)"
+                                    ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </label>
                         <label class="col item-input item-select no-padding" ng-if="foodInfo.selection[3]">
@@ -76,7 +80,8 @@
                             <select ng-model="selectedVariant4"
                                     class="made-easy-content-font"
                                     ng-options="variant.vType  for variant in selection3 |unique:'vType'"
-                                    ng-change="changeVariant4(selectedVariant4)">
+                                    ng-change="changeVariant4(selectedVariant4)"
+                                    ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </label>
 
