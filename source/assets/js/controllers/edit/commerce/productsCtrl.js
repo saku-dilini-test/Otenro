@@ -31,6 +31,7 @@
 
         function  disableTabs(selectedTab,tab1,tab2,tab3,tab4) {
             $log.debug(selectedTab);
+
             $scope.selectedTab = selectedTab;
             $scope.addProductsOptionParams = {
                 firstLocked : tab1,
@@ -39,7 +40,11 @@
                 imageUploadLocked : tab4
             };
         }
-        disableTabs(0,false,true,true ,true);
+
+        console.log(initialData.addVariant);
+
+            disableTabs(0, false, true, true, true);
+
         if (initialData.product.tempImageArray){
             for (var i=0; i<initialData.product.tempImageArray.length; i++) {
                 var tempImageUrl = tempImagePath + initialData.product.tempImageArray[i].img;
@@ -768,7 +773,12 @@
 
         // when product edit start in second tab and enable pagination
         if (initialData.product.id !== undefined){
-            disableTabs(1,false,false,false ,false);
+            if(initialData.addVariant)
+            {
+                disableTabs(2, false, false, false, true);
+            }else {
+                disableTabs(1, false, false, false, false);
+            }
         }
 
 
@@ -812,7 +822,7 @@
                                  toastr.error('You can only add 4 variants', 'Error!', {
                                       closeButton: true
                                  });
-                                  return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants);
+                                  return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null, true);
                             }else if($scope.product.selection.length > 0){
                                 for (var i = 0; i < $scope.product.selection.length; i++){
                                    if( $scope.product.selection[i].name.toLowerCase() ==  $scope.vType.toLowerCase()){
@@ -831,7 +841,7 @@
                                             closeButton: true
                                         });
 
-                                        return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants);
+                                        return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants,null, true);
                                         break;
                                    }else{
 
@@ -849,7 +859,7 @@
                                         toastr.success('Variant added', 'Success!', {
                                               closeButton: true
                                         });
-                                        return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants);
+                                        return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,null, true);
                                         break;
                                    }
                                  }
@@ -872,7 +882,7 @@
                                       toastr.success('Variant added', 'Success!', {
                                           closeButton: true
                                       });
-                                 return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, result.productId);
+                                 return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, result.productId, true);
                                   }).error(function (err) {
                                       toastr.error('Variant creation failed', 'Warning', {
                                           closeButton: true
@@ -892,7 +902,7 @@
                                $scope.product.published = 'NO';
                                commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product})
                                    .success(function (result) {
-                                       return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, result.productId);
+                                       return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, result.productId, true);
                                    }).error(function (err) {
                                    toastr.error('Product creation failed', 'Warning', {
                                        closeButton: true
@@ -914,7 +924,7 @@
                                          toastr.success('Variant removed', 'Success!', {
                                               closeButton: true
                                          });
-                                        return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants);
+                                        return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants,null, true);
                                    }
                                 }
                         }
