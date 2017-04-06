@@ -171,6 +171,7 @@
            if (!found) {
                $scope.product.variants.push($scope.inserted);
            }
+
            else{
                toastr.error('SKU already exists ', 'Warning', {
                    closeButton: true
@@ -265,10 +266,7 @@
             })
         }
 
-
-
-
-
+        
         $scope.nextStep3Digital = function (current, product, variants) {
             if (variants.price == null) {
                 toastr.error('Please fill all fields', 'Warning', {
@@ -286,8 +284,6 @@
         };
 
 
-
-
         $scope.typeUpdateHandler = function (newValue) {
             $scope.variants[0].type = newValue;
         };
@@ -303,7 +299,6 @@
         $scope.quantityUpdateHandler = function (newValue) {
             $scope.variants[0].quantity = newValue;
         };
-
 
 
         /**
@@ -379,8 +374,6 @@
               }
 
         };
-
-
 
 
         $scope.setImage = function (img) {
@@ -566,6 +559,9 @@
             .success(function(result){
                 if(result == 'true'){
                     $scope.exist = true;
+                    toastr.error('Can not add duplicate SKU values', 'Warning', {
+                        closeButton: true
+                    });
                 }
             }).error(function (error) {
                 $log.debug(error);

@@ -150,12 +150,12 @@
                                     <td ng-model="data.name">
                                         <p class="product-name">{{data.name}}</p>
                                         <div disable-all="priceAndVariantsForm.$invalid" class="add-new-variant">
-                                            <div class="add-icon icon icon-plus" ng-disable = "exist" ng-click="addVariant(selection,product,$index,data);generalDetails(data , 1)"></div>
+                                            <div class="add-icon icon icon-plus" ng-hide="exist" ng-click="addVariant(selection,product,$index,data);generalDetails(data,1)"></div>
                                         </div>
                                     </td>
                                     <td>
                                         <md-input-container style="width: 80px;">
-                                            <input ng-blur="checkValidity(data.sku)"
+                                           <input ng-blur="checkValidity(data.sku,'sku')"
                                                    maxlength="10"
                                                    required
                                                    aria-label="SKU"
@@ -165,14 +165,14 @@
                                                    ng-pattern="/^\d*[1-9]\d*$/"
                                                    ng-readonly="data.checked"
                                                    ng-click="check($index)">
-                                    <div class="error"  ng-if="exist" >Sku already exist </div>
-                                    <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
+                                     <div class="error" ng-if="exist"  > </div>
+                     <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                                 <div ng-message="required">SKU is required.</div>
                                                 <div ng-message="pattern" style="line-height:13px;" class="my-message">Invalid SKU</div>
                                             </div>
                                         </md-input-container>
                                     </td>
-                                    <!--<td>-->
+                                    <!--&lt;!&ndash;<td>&ndash;&gt;indexOf(row)+1-->
                                     <!--<md-input-container class="md-container-modify">-->
                                     <!--<input id ='vName_{{$index}}'  type="text" name="vName_{{$index}}" min="1"-->
                                     <!--maxlength="8" ng-model="data.vName"-->
