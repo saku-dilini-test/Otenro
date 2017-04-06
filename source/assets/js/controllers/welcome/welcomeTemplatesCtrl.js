@@ -18,7 +18,7 @@
     ME_APP_SERVER,$auth,$rootScope,$timeout,SERVER_URL,$location) {
 
 
-        console.log($location.search());
+        //console.log($location.search());
         if ($auth.isAuthenticated()) {
             $scope.isAuthenticated = true;
             $state.go('user.dashboard');
@@ -35,7 +35,6 @@
         $scope.types=[];
         welcomeTemplatesResource.getTemplates().success(function(data){
             $rootScope.templates = data;
-
             for (var i=0; i< data.length ; i++){
                 if($scope.types.indexOf(data[i].templateType) === -1){
                    $scope.types.push(data[i].templateType);

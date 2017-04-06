@@ -2,21 +2,25 @@
  * Created by udeshikaperera on 31/08/2015.
  */
 (function() {
-    angular.module('app').service('userProfileService', ['$mdDialog', '$state', userProfileService]);
+    angular.module('app').service('userProfileService', ['$mdDialog', '$state','$auth', userProfileService]);
 
-    function userProfileService($mdDialog, $state) {
+    function userProfileService($mdDialog, $state, $auth) {
         return {
             showUserProfileDialog: function() {
+                if (!$auth.isAuthenticated()) {
+                    $state.go('anon.login');
+                }else {
+                    $mdDialog.show({
+                        controller: 'userProfileCtrl',
+                        templateUrl: 'user/profile/userProfileView.html',
+                        clickOutsideToClose: true
+                    })
+                        .then(function (answer) {
+                        }, function () {
 
-                $mdDialog.show({
-                    controller: 'userProfileCtrl',
-                    templateUrl: 'user/profile/userProfileView.html',
-                    clickOutsideToClose: true
-                })
-                .then(function(answer) {
-                }, function() {
+                        });
+                }
 
-                });
             },
             closeDialog: function() {
                 $mdDialog.hide();
