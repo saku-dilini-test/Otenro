@@ -43,8 +43,8 @@
             $scope.viewBilling = "Billing Details";
             $scope.activeTabIndex = index;
         }
-
-        if (typeof $auth.getPayload().id !== 'undefined' ){
+        
+        if (typeof $auth.getPayload() !== 'undefined' ){
             userProfileResource.getBillingDetails($auth.getPayload().id).success(function (data) {
                 $scope.billingEdit= data;
             }).error(function (err) {

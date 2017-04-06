@@ -21,7 +21,7 @@
 
       };
 
-      console.log(agentInfo);
+      //console.log(agentInfo);
 
     $scope.submit = function($event) {
       Auth.login($scope.user).success(function(response) {
