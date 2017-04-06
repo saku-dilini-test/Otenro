@@ -14,7 +14,6 @@
                     </ion-slide>
                 </ion-slide-box>
 
-
             </div>
         </div>
         <div class="card mods2_card">
@@ -27,15 +26,6 @@
                         <i class="icon ion-cash"></i>
                     </a>
 
-                    <a class="item item-icon-right" href="#">
-                        <h2 class="made-easy-content-font">
-                            <input type="number" min="1"
-                                   placeholder="Enter Quantity"
-                                   ng-model="selectedVariant.buyQuantity"
-                                   ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
-                        </h2>
-                        <i class="icon ion-pricetags"></i>
-                    </a>
 
                     <a class="item" href="#">
 
@@ -85,6 +75,19 @@
                         </label>
 
                     </a>
+
+                    <a class="item item-icon-right" href="#">
+                        <h2 class="made-easy-content-font">
+                            <input type="number" min="1"
+                                   placeholder="Enter Quantity"
+                                   ng-model="selectedVariant.buyQuantity"
+                                   ng-change="changeBuyQuantity(selectedVariant.buyQuantity)"
+                                   ng-disabled="lockBuyButton">
+                        </h2>
+                        <i class="icon ion-pricetags"></i>
+                    </a>
+
+
 
                     <a class="item " href="#">
                         <div class="made-easy-content-font">{{foodInfo.detailedDesc}}</div>
