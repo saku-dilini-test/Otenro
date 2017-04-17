@@ -22,8 +22,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
         $state.go('tab.menu');
    }
 
-
-
+    
             $http.get(constants.SERVER_URL+"/edit/getAllCountry")
                     .then(function(res){
                         $scope.countries = res.data;
