@@ -62,7 +62,6 @@
                                         </div>
                                     </md-input-container>
 
-
                                     <md-input-container class="md-block">
                                         <label>SKU</label>
                                         <input ng-blur="checkValidity(product.sku)"
@@ -150,7 +149,7 @@
                                     <td ng-model="data.name">
                                         <p class="product-name">{{data.name}}</p>
                                         <div disable-all="priceAndVariantsForm.$invalid" class="add-new-variant">
-                                            <div class="add-icon icon icon-plus" ng-hide="exist" ng-click="addVariant(selection,product,$index,data);generalDetails(data,1)"></div>
+                                            <div class="add-icon icon icon-plus"  ng-click="addVariant(selection,product,$index,data);generalDetails(data,1)"></div>
                                         </div>
                                     </td>
                                     <td>
@@ -165,7 +164,7 @@
                                                    ng-pattern="/^\d*[1-9]\d*$/"
                                                    ng-readonly="data.checked"
                                                    ng-click="check($index)">
-                                     <div class="error" ng-if="exist"  > </div>
+                                     <div class="error" ng-if="exist" > </div>
                      <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                                 <div ng-message="required">SKU is required.</div>
                                                 <div ng-message="pattern" style="line-height:13px;" class="my-message">Invalid SKU</div>
@@ -241,9 +240,6 @@
                                         <!--<div ng-message="required" class="my-message">Required!</div>-->
                                         <!--</div>-->
                                         <!--</md-input-container>-->
-
-
-
 
                                     </td>
                                     <!--<td>-->
@@ -363,7 +359,6 @@
                                     <div ng-if="picFile" style="display:none"  >
                                     </div>
 
-
                                 </div>
 
                             </div>
@@ -377,12 +372,6 @@
                                 <div   class="img-up1 " ng-click="addImage(picFile)"></div>
                             </div>
                         </div>
-
-
-
-
-
-
                         <div class="uploaded-section image-upload clearfix">
                             <div class="uploaded-new-image2">
                                 <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
@@ -473,7 +462,6 @@
             </md-tab>
         </md-tabs>
     </md-dialog-content>
-
 
     <!--
     <div class="dialog-controls clearfix">

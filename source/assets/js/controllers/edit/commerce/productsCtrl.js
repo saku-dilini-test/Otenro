@@ -213,7 +213,7 @@
                      $scope.product.selection = [];
                 }
                 if($scope.product.selection.length == 0){
-                    toastr.error('Please add atleast one variant to continue ', 'Warning', {
+                    toastr.error('Please add at least one variant to continue ', 'Warning', {
                         closeButton: true
                     });
                 }else{
@@ -305,8 +305,8 @@
          * add or update product
          */
         $scope.addOrUpdateProducts = function () {
-              if ($scope.tmpImage.length <= 0 || $scope.myImage==null){
-                  toastr.error('Please add an image ', 'Warning', {
+              if ($scope.tmpImage.length <= 0 && $scope.myImage==null){
+                  toastr.error('Please add an images ', 'Warning', {
                       closeButton: true
                   });
               }else {
@@ -503,8 +503,7 @@
             }
         };
 
-
-
+        
         /**
          * @description
          * validation of duplicate sku and size/weight
@@ -566,9 +565,7 @@
             }).error(function (error) {
                 $log.debug(error);
             })
-        }
-
-
+        };
 
         /**
          * @description
@@ -586,7 +583,6 @@
             }
 
         }
-
 
 
         /**
@@ -626,8 +622,6 @@
               }
         };
 
-
-
        // validate varient type
 
          $scope.validateInputValueVtype = function (inputVal,type) {
@@ -660,8 +654,6 @@
                       }
                 };
 
-
-
                 /**
                  * @description
                  * pattern validation of size/weight
@@ -678,8 +670,6 @@
                     }
 
                 }
-
-
 
                 /**
                  * @description
@@ -785,7 +775,6 @@
 
 //               $state.go('user.editApp',{appId: item.id});
          };
-
 
 
          $scope.addNewVariant = function (fullProduct, variantName) {
@@ -944,7 +933,6 @@
 
 
             };
-
 
     }
 })();
