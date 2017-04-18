@@ -776,8 +776,7 @@
 //               $state.go('user.editApp',{appId: item.id});
          };
 
-
-         $scope.addNewVariant = function (fullProduct, variantName) {
+        $scope.addNewVariant = function (fullProduct, variantName) {
                 var isNewItem =  $scope.isNewProduct;
                 return $mdDialog.show({
                     controllerAs: 'dialogCtrl',
