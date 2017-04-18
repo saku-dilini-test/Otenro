@@ -22,8 +22,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
         $state.go('tab.menu');
    }
 
-
-
+    
             $http.get(constants.SERVER_URL+"/edit/getAllCountry")
                     .then(function(res){
                         $scope.countries = res.data;
@@ -204,6 +203,8 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                 deliverDetails.streetName = localData.streetName;
                 deliverDetails.country = localData.country;
                 deliverDetails.city = localData.city;
+                deliverDetails.zip = localData.zip;
+                deliverDetails.phone = localData.phone;
                 }
             }
             $log.debug(deliverDetails);
