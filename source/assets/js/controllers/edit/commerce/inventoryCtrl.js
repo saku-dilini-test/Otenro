@@ -161,7 +161,10 @@
                     'price' : value.price,
                     'quantity' : value.quantity,
                     'weight' : value.weight,
-                    'variantType' : value.selection.vType
+                    'variantType' : selection[0].name
+
+
+
 
                 });
             });
