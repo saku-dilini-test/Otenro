@@ -8,7 +8,10 @@
                 <fieldset>
                     <label>Tax Name</label>
                     <img src="../../../images/question-mark.svg" width="12" height="12" />
-                    <input class="input-shadow-border" type="text" name="taxName" min="0" max="100" ng-model="tax.taxName" required />
+                    <input class="input-shadow-border" type="text" name="taxName" maxlength="20" min="0" max="20" ng-model="tax.taxName" required />
+                    <div ng-hide="tax.taxName.length > maxTax">
+                        <span class="information">Characters left: {{maxTax - tax.taxName.length}}</span>
+                    </div>
                 </fieldset>
                 <!--<fieldset>-->
                     <!--<label>country</label>-->
