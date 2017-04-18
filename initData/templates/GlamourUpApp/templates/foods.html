@@ -7,7 +7,7 @@
                 <div class="made-easy-content-font">
                    <div class="row">
                        <div class="col price center">
-                        {{currency.sign}} : {{foods[$index].variants[0].price}}
+                        {{currency.sign}} {{foods[$index].variants[0].price}}
                        </div>
                        <div>
                            <div class="col col made-easy-header-font">{{salesandpromotion.discountType}}</div>
@@ -25,7 +25,7 @@
                 <div class="made-easy-content-font">
                    <div class="row">
                        <div class="col price center">
-                        {{currency.sign}} : {{foods[$index+1].variants[0].price}}
+                        {{currency.sign}} {{foods[$index+1].variants[0].price}}
                        </div>
                        <div>
                        <div class="col col made-easy-header-font">{{salesandpromotion.discountType}}</div>

@@ -7,7 +7,7 @@
                 <div class="made-easy-content-font">
                    <div class="row">
                        <div class="col price center">
-                        {{currency.sign}} : {{foods[$index].variants[0].price}}
+                        {{currency.sign}} {{foods[$index].variants[0].price}}
                        </div>
                        <div class="col center" ng-click="modal.show()">
                            ADD
@@ -21,7 +21,7 @@
                 <div class="made-easy-content-font">
                    <div class="row">
                        <div class="col price center">
-                        {{currency.sign}} : {{foods[$index+1].variants[0].price}}
+                        {{currency.sign}} {{foods[$index+1].variants[0].price}}
                        </div>
                        <div class="col center" ng-click="modal.show()">
                            ADD
