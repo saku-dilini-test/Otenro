@@ -41,7 +41,6 @@
             };
         }
 
-        console.log(initialData.addVariant);
 
             disableTabs(0, false, true, true, true);
 
@@ -915,18 +914,47 @@
 
                         },
                         this.remove = function click(selection){
-                                for (var i = 0; i < $scope.product.selection.length; i++){
-                                   if( $scope.product.selection[i].name ==  selection){
-                                        $scope.product.selection.splice(i, 1);
-                                        for(var j=0;j<$scope.product.variants.length;j++){
-                                            $scope.product.variants[j].selection.splice(i, 1);
+                            return $mdDialog.show({
+                                controllerAs: 'dialogCtrl',
+                                controller: function($mdDialog){
+                                    this.confirm = function click(){
+                                        for (var i = 0; i < $scope.product.selection.length; i++){
+                                            if( $scope.product.selection[i].name ==  selection){
+                                                $scope.product.selection.splice(i, 1);
+                                                for(var j=0;j<$scope.product.variants.length;j++){
+                                                    $scope.product.variants[j].selection.splice(i, 1);
+                                                }
+                                                toastr.success('Variant removed', 'Success!', {
+                                                    closeButton: true
+                                                });
+                                                return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants,null, true);
+                                            }
                                         }
-                                         toastr.success('Variant removed', 'Success!', {
-                                              closeButton: true
-                                         });
+                                    },
+                                    this.cancel = function click(){
                                         return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants,null, true);
-                                   }
-                                }
+                                    }
+                                },
+                                template:'<md-dialog aria-label="Edit Child Menu">'+
+                                '<md-content >' +
+                                '<div class="md-dialog-header">' +
+                                '<h1>Deleting Variant Type </h1>' +
+                                '</div>' +
+                                '<br>'+
+                                '<div style="text-align:center">' +
+                                '<lable>Are you sure you want to delete this variant type?</lable>' +
+                                '</div>' +
+                                '<br><br>' +
+                                '<div class="md-dialog-buttons">'+
+                                '<div class="inner-section">'+
+                                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">No</md-button>'+
+                                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Yes</md-button>'+
+                                '</div>'+
+                                '</div>' +
+                                '</md-content>' +
+                                '</md-dialog>'
+                            })
+
                         }
                     }],
                     template:'<md-dialog aria-label="Add new Variant">'+
@@ -958,6 +986,57 @@
 
 
             };
+
+
+
+        $scope.deleteVariant = function (item) {
+            var itemLength = item.children.length;
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+                    if(itemLength != 0){
+                        this.message = "Are you sure you want to delete this Product and its variants?"
+                    }
+                    else{
+                        this.message = "Are you sure you would like to delete the product variant?"
+                    }
+                    this.confirm = function click(){
+                        var itemIndex = $scope.inventoryList.indexOf(item);
+                        $scope.inventoryList.splice(itemIndex, 1);
+                        productService.delete({item:item}).$promise.then(function(result){
+                            toastr.success("Product successfully deleted", 'Message', {
+                                closeButton: true
+                            });
+                            $mdDialog.hide();
+                            return commerceService.showInventoryDialog();
+                        });
+                    },
+                        this.cancel = function click(){
+                            $mdDialog.hide();
+                            return commerceService.showInventoryDialog();
+                        }
+                },
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                '<md-content >' +
+                '<div class="md-dialog-header">' +
+                '<h1>Deleting Product </h1>' +
+                '</div>' +
+                '<br>'+
+                '<div style="text-align:center">' +
+                '<lable>{{dialogCtrl.message}}</lable>' +
+                '</div>' +
+                '<br><br>' +
+                '<div class="md-dialog-buttons">'+
+                '<div class="inner-section">'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">No</md-button>'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Yes</md-button>'+
+                '</div>'+
+                '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
+
+        };
 
 
     }
