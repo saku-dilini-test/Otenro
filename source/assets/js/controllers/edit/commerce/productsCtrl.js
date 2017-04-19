@@ -311,14 +311,13 @@
          * add or update product
          */
         $scope.addOrUpdateProducts = function () {
-              if ($scope.tmpImage.length <= 0 || $scope.myImage==null){
+              if ($scope.tmpImage.length <= 0 ){
+
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
               }else {
-                  if ($scope.myImage){
-                      $scope.addImage($scope.myImage);
-                  }
+
 
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'NO';
@@ -346,14 +345,12 @@
 
         };
         $scope.saveAndPublishProducts = function () {
-              if ($scope.tmpImage.length<=0 || $scope.myImage==null){
+              if ($scope.tmpImage.length<=0 ){
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
               }else {
-                  if ($scope.myImage){
-                      $scope.addImage($scope.myImage);
-                  }
+
 
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'YES';
@@ -982,58 +979,6 @@
 
 
             };
-
-
-
-        $scope.deleteVariant = function (item) {
-            var itemLength = item.children.length;
-            return $mdDialog.show({
-                controllerAs: 'dialogCtrl',
-                controller: function($mdDialog){
-                    if(itemLength != 0){
-                        this.message = "Are you sure you want to delete this Product and its variants?"
-                    }
-                    else{
-                        this.message = "Are you sure you would like to delete the product variant?"
-                    }
-                    this.confirm = function click(){
-                        var itemIndex = $scope.inventoryList.indexOf(item);
-                        $scope.inventoryList.splice(itemIndex, 1);
-                        productService.delete({item:item}).$promise.then(function(result){
-                            toastr.success("Product successfully deleted", 'Message', {
-                                closeButton: true
-                            });
-                            $mdDialog.hide();
-                            return commerceService.showInventoryDialog();
-                        });
-                    },
-                        this.cancel = function click(){
-                            $mdDialog.hide();
-                            return commerceService.showInventoryDialog();
-                        }
-                },
-                template:'<md-dialog aria-label="Edit Child Menu">'+
-                '<md-content >' +
-                '<div class="md-dialog-header">' +
-                '<h1>Deleting Product </h1>' +
-                '</div>' +
-                '<br>'+
-                '<div style="text-align:center">' +
-                '<lable>{{dialogCtrl.message}}</lable>' +
-                '</div>' +
-                '<br><br>' +
-                '<div class="md-dialog-buttons">'+
-                '<div class="inner-section">'+
-                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">No</md-button>'+
-                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Yes</md-button>'+
-                '</div>'+
-                '</div>' +
-                '</md-content>' +
-                '</md-dialog>'
-            })
-
-        };
-
 
     }
 })();
