@@ -66,7 +66,7 @@
                     toastr.success('Successfully Changed', 'Success', {
                         closeButton: true
                     });
-                    $scope.backToView(1);
+                    $scope.backToView(0);
                 });
             }).error(function(err) {
                 $scope.password = true;
