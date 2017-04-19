@@ -270,9 +270,7 @@
         }
 
 
-
-
-
+        
         $scope.nextStep3Digital = function (current, product, variants) {
             if (variants.price == null) {
                 toastr.error('Please fill all fields', 'Warning', {
@@ -289,8 +287,7 @@
             }
         };
 
-
-
+        
 
         $scope.typeUpdateHandler = function (newValue) {
             $scope.variants[0].type = newValue;
@@ -385,8 +382,7 @@
         };
 
 
-
-
+        
         $scope.setImage = function (img) {
 
             if (img == undefined) {
@@ -570,13 +566,14 @@
             .success(function(result){
                 if(result == 'true'){
                     $scope.exist = true;
+                    toastr.error('Can not add duplicate SKU values', 'Warning', {
+                        closeButton: true
+                    });
                 }
             }).error(function (error) {
                 $log.debug(error);
             })
-        }
-
-
+        };
 
         /**
          * @description
@@ -687,8 +684,7 @@
 
                 }
 
-
-
+        
                 /**
                  * @description
                  * validation of duplicate sku and size/weight

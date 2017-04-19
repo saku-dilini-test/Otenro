@@ -171,9 +171,9 @@
                                                    name="sku_{{$index}}"
                                                    ng-model="data.sku"
                                                    ng-pattern="/^\d*[1-9]\d*$/"
-                                                   ng-readonly="product.checked"
+                                                   ng-readonly="data.checked"
                                                    ng-click="check($index)">
-                                            <div class="error" ng-if="exist">Sku already exist</div>
+                                            <!--<div class="error" ng-if="exist">Sku already exist</div>-->
                                             <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                                 <div ng-message="required">SKU is required.</div>
                                                 <div ng-message="pattern" style="line-height:13px;" class="my-message">Invalid SKU</div>
