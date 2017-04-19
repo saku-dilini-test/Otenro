@@ -287,7 +287,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                 });
                                 // TODO : Currently back to cart
                                 //back to Main Menu
-                                $state.go('tab.menu');
+                                $state.go('app.category');
                             },
                             function(err){
                                 $log.debug(err);
