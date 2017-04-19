@@ -546,6 +546,7 @@
                     });
                     $scope.selectedTab = current;
                     $rootScope.currency = $scope.options.sign;
+                    $scope.currencyPlaceHolder = $scope.options.currency;
                 }).error(function (err) {
                     toastr.error(' warning', "Unable to get templates", {closeButton: true});
                 })
