@@ -62,10 +62,11 @@
             }
             Auth.login($scope.user).success(function() {
                 userProfileResource.editUserProfile(params).then(function(data){
-                    $mdDialog.hide();
+                    // $mdDialog.hide();
                     toastr.success('Successfully Changed', 'Success', {
                         closeButton: true
                     });
+                    $scope.backToView(1);
                 });
             }).error(function(err) {
                 $scope.password = true;
