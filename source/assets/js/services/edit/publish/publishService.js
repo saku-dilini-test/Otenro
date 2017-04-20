@@ -36,7 +36,7 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-            addGooglePlayInfo: function(playStoreData){
+            addGooglePlayInfo: function(playStoreData ){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/setPublishDetails',
                     fields: {
@@ -60,6 +60,31 @@
                     file:null
                 });
             },
+
+            addAppStoreInfo: function(file, appStoreData ){
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/setAppStoreDetails',
+                    fields: {
+                        'appId':$rootScope.appId,
+                        'category':appStoreData.category,
+                        'name': appStoreData.name,
+                        'springBoardName':appStoreData.springBoardName,
+                        'language':appStoreData.language,
+                        'primaryCat':appStoreData.primaryCat,
+                        'secondaryCat':appStoreData.secondaryCat,
+                        'desc':appStoreData.desc,
+                        'keywords':appStoreData.keywords,
+                        'supportUrl':appStoreData.supportUrl,
+                        'marketingUrl':appStoreData.marketingUrl,
+                        'privacyPolicyUrl':appStoreData.privacyPolicyUrl,
+                        'copyrights':appStoreData.copyrights
+
+                    },
+                    file:null
+                });
+            },
+
+
             uploadPublishFiles: function(file,imgId){
                 return Upload.upload({
                         url: SERVER_URL + 'edit/uploadPublishFiles',
@@ -98,6 +123,7 @@
 
                 });
             },
+
             addAppReviewInformation: function(appReview){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/setAppReviewInformation',

@@ -193,10 +193,13 @@
                                 }
 
                                 $scope.appStoreData = {
+                                    name : $scope.existingData[0].name,
                                     language : $scope.existingData[0].language,
-                                    primaryCat : $scope.existingData[0].primaryCategory,
-                                    secondaryCat : $scope.existingData[0].secondaryCategory,
+                                    primaryCat : $scope.existingData[0].primaryCat,
+                                    secondaryCat : $scope.existingData[0].secondaryCat,
                                     title: $scope.existingData[0].title,
+                                    desc: $scope.existingData[0].desc,
+                                    springBoardName: $scope.existingData[0].springBoardName,
                                     shortDescription: $scope.existingData[0].shortDescription,
                                     fullDescription: $scope.existingData[0].description,
                                     keywords: $scope.existingData[0].keywords,
@@ -218,47 +221,26 @@
                         alert("MainMenu Loading Error : " + err);
                     });
         }
+        
+        
+        
+     // App Store 
         $scope.addAppStoreInfo = function(file,appStoreData,publishSplash) {
-            // if (file == null && $scope.serverImage == $scope.thumbPic) {
-            //     if (appStoreData.title == null || appStoreData.shortDescription == null || appStoreData.language == null ||
-            //         appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.fullDescription == null ||
-            //         appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
-            //         appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null) {
-            //         toastr.error('Fill all the fields', 'Warning', {
-            //             closeButton: true
-            //         });
-            //     }
-            //     else {
-            //         appStoreData.category = 'AppStore';
-            //         file = $scope.thumbPic;
-            //         publishService.addGooglePlayInfo(file, appStoreData, publishSplash)
-            //             .success(function (data, status, headers, config) {
-            //                 disableTabs(1, true, false, true, true);
-            //                 toastr.success('General information has been added successfully', 'Saved', {
-            //                     closeButton: true
-            //                 });
-            //             }).error(function (data, status, headers, config) {
-            //             toastr.error('Error while saving data', 'Warning', {
-            //                 closeButton: true
-            //             });
-            //         })
-            //     }
-            // }
-            // else {
-            //     if (file == null || appStoreData.title == null || appStoreData.shortDescription == null || appStoreData.language == null ||
-            //         appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.fullDescription == null ||
-            //         appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
-            //         appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null || publishSplash.splash1 == null ||
-            //         publishSplash.splash2 == null || publishSplash.splash3 == null || publishSplash.splash4 == null) {
-            //         toastr.error('Please fill all fields ', 'Warning', {
-            //             closeButton: true
-            //         });
-            //     }
-                // else {
+            if (file == null && $scope.serverImage == $scope.thumbPic) {
+                if ( appStoreData.name == null ||   appStoreData.springBoardName == null || appStoreData.language == null ||
+                    appStoreData.primaryCat == null || appStoreData.secondaryCat == null ||  appStoreData.desc == null ||
+                    appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
+                    appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null) {
+                    toastr.error('Fill all the fields', 'Warning', {
+                        closeButton: true
+                    });
+                }
+                else {
                     appStoreData.category = 'AppStore';
-                    publishService.addGooglePlayInfo(file, appStoreData, publishSplash)
+                    file = $scope.thumbPic;
+                    publishService.addAppStoreInfo(file, appStoreData, publishSplash)
                         .success(function (data, status, headers, config) {
-                            disableTabs(1, false, false, false, false);
+                            disableTabs(1, true, false, true, true);
                             toastr.success('General information has been added successfully', 'Saved', {
                                 closeButton: true
                             });
@@ -267,9 +249,42 @@
                             closeButton: true
                         });
                     })
-                // }
-            // }
-        }
+                }
+            }
+            // else {
+            //     if ( appStoreData.language == null ||
+            //         appStoreData.primaryCat == null || appStoreData.secondaryCat == null ||
+            //         appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
+            //         appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null || publishSplash.splash1 == null ||
+            //         publishSplash.splash2 == null || publishSplash.splash3 == null || publishSplash.splash4 == null) {
+            //         toastr.error('Please fill all fields ', 'Warning', {
+            //             closeButton: true
+            //         });
+            //     }
+            //     else {
+            //         appStoreData.category = 'AppStore';
+            //         publishService.addGooglePlayInfo(file, appStoreData, publishSplash)
+            //             .success(function (data, status, headers, config) {
+            //                 disableTabs(1, false, false, false, false);
+            //                 toastr.success('General information has been added successfully', 'Saved', {
+            //                     closeButton: true
+            //                 });
+            //             }).error(function (data, status, headers, config) {
+            //             toastr.error('Error while saving data', 'Warning', {
+            //                 closeButton: true
+            //             });
+            //         })
+            //      }
+            //  }
+        };
+        
+
+
+
+
+
+
+
         $scope.contentRatings = function(contentRating){
             contentRating.category = 'AppStore';
             publishService.addContentRating(contentRating)
