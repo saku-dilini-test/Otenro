@@ -136,7 +136,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 deliveryCountry : $stateParams.item.delivery.country,
                 deliveryZip : $stateParams.item.delivery.zip,
                 telNumber : $stateParams.item.delivery.phone,
-                
                 tax :   $stateParams.item.taxTotal,
                 shippingCost :   $stateParams.item.shippingCost,
                 shippingOpt : $stateParams.item.shipping.shippingOption,
@@ -153,7 +152,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 amount : $stateParams.item.amount,
                 customerName : $stateParams.deliverDetails.name,
                 telNumber : $stateParams.deliverDetails.phone,
-                
                 tax :   $stateParams.item.taxTotal,
                 shippingCost :   $stateParams.item.shippingCost,
                 pickupId: $stateParams.item.pickupId,
@@ -224,7 +222,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 deliveryCountry : $stateParams.item.delivery.country,
                 deliveryZip : $stateParams.item.delivery.zip,
                 telNumber : $stateParams.item.delivery.phone,
-                
                 tax :   $stateParams.item.taxTotal,
                 shippingCost :   $stateParams.item.shippingCost,
                 shippingOpt : $stateParams.item.shipping.shippingOption,
@@ -241,7 +238,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 amount : $stateParams.item.amount,
                 customerName : $stateParams.item.deliverDetails.name,
                 telNumber : $stateParams.item.deliverDetails.phone,
-               
                 tax :   $stateParams.item.taxTotal,
                 shippingCost :   $stateParams.item.shippingCost,
                 pickupId: $stateParams.item.pickupId,
@@ -318,7 +314,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         deliveryCountry : $stateParams.item.delivery.country,
                         deliveryZip : $stateParams.item.delivery.zip,
                         telNumber : $stateParams.item.delivery.phone,
-                        
                         tax :   $stateParams.item.taxTotal,
                         shippingCost :   $stateParams.item.shippingCost,
                         shippingOpt : $stateParams.item.shipping.shippingOption,
@@ -335,7 +330,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         customerName : $stateParams.item.deliverDetails.name,
                         registeredUser: $scope.user.registeredUser,
                         telNumber : $stateParams.item.deliverDetails.phone,
-                        
                         tax :   $stateParams.item.taxTotal,
                         shippingCost :   $stateParams.item.shippingCost,
                         pickupId: $stateParams.item.pickupId,
@@ -478,7 +472,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             deliveryCountry : $stateParams.item.delivery.country,
                             deliveryZip : $stateParams.item.delivery.zip,
                             telNumber : $stateParams.item.delivery.phone,
-                            
                             tax :   $stateParams.item.taxTotal,
                             shippingCost :   $stateParams.item.shippingCost,
                             shippingOpt : $stateParams.item.shipping.shippingOption,
@@ -494,7 +487,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             amount : $stateParams.item.amount,
                             customerName : $stateParams.item.deliverDetails.name,
                             telNumber : $stateParams.item.deliverDetails.phone,
-                           
                             tax :   $stateParams.item.taxTotal,
                             shippingCost :   $stateParams.item.shippingCost,
                             pickupId: $stateParams.item.pickupId,
