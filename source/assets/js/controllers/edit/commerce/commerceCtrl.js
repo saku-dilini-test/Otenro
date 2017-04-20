@@ -626,30 +626,29 @@
 
         $scope.savePolicies = function (current, storeSettings) {
 
-               var returnPolicy = storeSettings.returnPolicy;
-                if ((typeof returnPolicy != 'undefined') &&
-                (returnPolicy.length > $scope.maxReturnPolicy)){
+            var returnPolicy = storeSettings.returnPolicy;
+            if ((typeof returnPolicy != 'undefined') &&
+                (returnPolicy.length > $scope.maxReturnPolicy)) {
                 toastr.error('Return Policy, maximum characters length is exceed. ' +
-                    'Maximum characters length is : '+$scope.maxReturnPolicy, 'Warning',
+                    'Maximum characters length is : ' + $scope.maxReturnPolicy, 'Warning',
                     {closeButton: true}
                 );
                 return;
-             }
+            }
 
 
-
-                else if (typeof returnPolicy == 'undefined' || termsAndCondition == 'undefined' || privacyPolicy == 'undefined'  ){
-                    toastr.error('Please fill the fields', 'Message', {
-                        closeButton: true
-                    });
-                }
+            else if (typeof returnPolicy == 'undefined' || termsAndCondition == 'undefined' || privacyPolicy == 'undefined') {
+                toastr.error('Please fill the fields', 'Message', {
+                    closeButton: true
+                });
+            }
 
             // Validate, Terms And Condition maximum characters length
             var termsAndCondition = storeSettings.termsAndCondition;
-            if((typeof termsAndCondition != 'undefined') &&
-                (termsAndCondition.length > $scope.maxTermsAndCondition)){
+            if ((typeof termsAndCondition != 'undefined') &&
+                (termsAndCondition.length > $scope.maxTermsAndCondition)) {
                 toastr.error('Terms And Condition, maximum characters length is exceed. ' +
-                    'Maximum characters length is : '+$scope.maxTermsAndCondition, 'Warning',
+                    'Maximum characters length is : ' + $scope.maxTermsAndCondition, 'Warning',
                     {closeButton: true}
                 );
                 return;
@@ -657,16 +656,16 @@
 
             // Validate, Privacy Policy maximum characters length
             var privacyPolicy = storeSettings.privacyPolicy;
-            if((typeof privacyPolicy != 'undefined') &&
-                (privacyPolicy.length > $scope.maxPrivacyPolicy)){
+            if ((typeof privacyPolicy != 'undefined') &&
+                (privacyPolicy.length > $scope.maxPrivacyPolicy)) {
                 toastr.error('Privacy Policy, maximum characters length is exceed. ' +
-                    'Maximum characters length is : '+$scope.maxPrivacyPolicy, 'Warning',
+                    'Maximum characters length is : ' + $scope.maxPrivacyPolicy, 'Warning',
                     {closeButton: true}
                 );
                 return;
             }
-
-            if (storeSettings.returnPolicy&&storeSettings.termsAndCondition&&storeSettings.privacyPolicy) {
+else {
+            if (storeSettings.returnPolicy && storeSettings.termsAndCondition && storeSettings.privacyPolicy) {
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
@@ -679,9 +678,9 @@
                 })
 
 
-
                 $scope.selectedTab = current;
             }
+        }
         };
 
         /*commerceService.showPolicies($scope.appId).success(function (data) {
