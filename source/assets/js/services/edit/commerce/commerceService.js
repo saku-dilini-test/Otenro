@@ -29,10 +29,14 @@
                                 addVariant: isAddVariant,
                                 productItem: item,
                                 product:productService.get({'productId':item.id}).$promise.then(function(product){
-                                    product.sku = item.sku;
-                                    product.selection = item.selection;
-                                    if(secItem){
-                                        product.variants = secItem;
+                                    if(itemID == '0'){
+                                        product = item;
+                                    }else{
+                                        product.sku = item.sku;
+                                        product.selection = item.selection;
+                                        if(secItem){
+                                            product.variants = secItem;
+                                        }
                                     }
                                     return product;
                                 })
