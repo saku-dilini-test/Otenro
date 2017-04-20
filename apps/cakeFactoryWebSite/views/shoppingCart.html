@@ -87,7 +87,7 @@
             <div ng-if="true" class="pull-left">
                 <button
                         class="btn kkcc-btn-success"
-                        ng-click="saveCartInServer(); cart.checkout('PayPal')"
+                        ng-click="saveCartInServer()"
                         ng-model="isSubmitButtonDisableValue"
                         ng-disabled=" (cart.getBranchName() === '' && cart.getDeliveryCharges() == 0) || cart.getTotalCount() < 1 ">
                     <i class="icon-ok icon-white" /> Proceed To Pay

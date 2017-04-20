@@ -14,6 +14,7 @@
             $scope.cart.items = cartInfo.cart;
             $scope.cart.saveDeliveryCharges(cartInfo.deliveryCharge);
             $scope.cart.setOneDoller(cartInfo.oneDoller);
+            console.log("email = " + cartInfo.userInfo.email);
 
             if(cartInfo.deliveryCharge == 0){
                 $scope.cart.saveBranchName(cartInfo.userInfo.branch);
@@ -34,9 +35,9 @@
                 $scope.cart.saveEmail(cartInfo.userInfo.email);
             }
 
-            $scope.conform = function(){
-                $scope.cart.checkout('PayPal','Mobile');
-            };
+//            $scope.conform = function(){
+//                $scope.cart.checkout('PayPal','Mobile');
+//            };
 
             // before redirect to PayPal, Cart info send to server to save
             $scope.saveCartInServer = function () {
@@ -76,7 +77,8 @@
                 console.log(shoppingCart);
                 //cart info save api
                 $http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)
-                    .then(function (response) {
+                    .success(function (response) {
+                        $scope.cart.checkout('PayPal','Mobile');
                         console.log(response);
                     });
 
