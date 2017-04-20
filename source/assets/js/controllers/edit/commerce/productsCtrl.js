@@ -311,6 +311,10 @@
          * add or update product
          */
         $scope.addOrUpdateProducts = function () {
+              if(initialData.product.id == '0'){
+                  initialData.product.id = undefined;
+                  $scope.product.id = undefined;
+              }
               if ($scope.tmpImage.length <= 0 ){
 
                   toastr.error('Please add an image ', 'Warning', {
@@ -345,6 +349,10 @@
 
         };
         $scope.saveAndPublishProducts = function () {
+              if(initialData.product.id == '0'){
+                    initialData.product.id = undefined;
+                    $scope.product.id = undefined;
+              }
               if ($scope.tmpImage.length<=0 ){
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
@@ -765,7 +773,7 @@
 
         // when product edit start in second tab and enable pagination
         if (initialData.product.id !== undefined || initialData.product.id !== '0'){
-            console.log(initialData.product.id)
+
             if(initialData.addVariant || initialData.product.id == '0')
             {
                 disableTabs(2, false, false, false, true);
