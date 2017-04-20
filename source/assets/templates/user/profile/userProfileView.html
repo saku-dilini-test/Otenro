@@ -182,8 +182,7 @@
                         </fieldset>
                         <fieldset class="text-right">
                             <md-button class="me-default-button" ng-click="backToView(0)">Cancel</md-button>
-                            <md-button class="me-default-button"
-                                       ng-click="editUserProfile(userEdit); backToView(0) ">Save</md-button>
+                            <md-button class="me-default-button" ng-click="editUserProfile(userEdit,selected);">Save</md-button>
                         </fieldset>
                         </form>
                     </div>
@@ -268,8 +267,7 @@
                                 <span class="error">Not a valid cvs</span>
                             </span>
                         </fieldset>
-
-                        <div class="btn-view md-dialog-buttons">
+                            <div class="btn-view md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="backToView(1)">cancel</md-button>
                                 <md-button class="me-default-button" ng-click="saveBillings(billingEdit)">save</md-button>

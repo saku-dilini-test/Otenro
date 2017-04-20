@@ -541,7 +541,7 @@
                 });
 
                 commerceService.saveStoreSettings(storeSettings).success(function (data) {
-                    toastr.success('Store Setting Details has been added successfully', {
+                    toastr.success('Store Setting Details has been added successfully','Awesome', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
@@ -669,7 +669,7 @@ else {
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
-                    toastr.success('Policies and Terms has been added successfully', {
+                    toastr.success('Policies and Terms has been added successfully','Awesome', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
