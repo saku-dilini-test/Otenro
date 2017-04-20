@@ -213,7 +213,11 @@
                                     splash1 : $scope.existingData[0].splash1,
                                     splash2 : $scope.existingData[0].splash2,
                                     splash3 : $scope.existingData[0].splash3,
-                                    splash4 : $scope.existingData[0].splash4
+                                    splash4 : $scope.existingData[0].splash4,
+                                    picFile : $scope.existingData[0].picFile,
+                                    thumbPic : $scope.existingData[0].thumbPic
+
+
                                 };
 
                          }
