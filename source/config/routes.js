@@ -69,7 +69,7 @@ module.exports.routes = {
     'POST /app/templatePreview': 'ApplicationController.templatePreview',
    
     'GET /api/getTemplateMetaData': 'DashboardController.getTemplateMetaData',
-    'GET /app/getIconAllowance': 'ApplicationController.iconAllowance',
+    //'GET /app/getIconAllowance': 'ApplicationController.iconAllowance',
     'POST /app/createTempTemplates': 'ApplicationController.createTempTemplates',
     'POST /app/changeTemplatePermanent': 'ApplicationController.changeTemplatePermanent',
     /***
@@ -250,7 +250,7 @@ module.exports.routes = {
      ***/
 
     'GET /templates/viewTemplateUrl': 'template/TemplateController.viewTemplateUrl',
-    // 'GET /templates/getContactUs': 'template/TemplateController.getContactUs',
+    'GET /templates/getContactUs': 'template/TemplateController.getContactUs',
     'GET /templates/getSpecificChild': 'template/TemplateController.getSpecificChild',
     'GET /templates/getProductsByAppId': 'template/TemplateController.getSubChildsByAppId',
     'GET /templates/getProductById': 'template/TemplateController.getSubChildById',
@@ -259,19 +259,55 @@ module.exports.routes = {
     'GET /templates/viewImages': 'template/TemplateController.viewImages',
     'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
     'POST /templates/deletePreviewTemp': 'template/TemplateController.deletePreviewTemp',
-    // 'GET /templates/getAboutUs': 'template/TemplateController.getAboutUs',
-    // 'GET /templates/getPolicies': 'template/TemplateController.getPolicies',
-    // 'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
+    'GET /templates/getAboutUs': 'template/TemplateController.getAboutUs',
+    'GET /templates/getPolicies': 'template/TemplateController.getPolicies',
+    'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
     'POST /templates/postDeviceId': 'template/TemplateController.postDeviceId',
 
     /**
      * Mobile app APIs
      */
-    'GET /templates/getContactUs': 'template/CommonMobileApisController.getContactUs',
-    'GET /templates/getAboutUs': 'template/CommonMobileApisController.getAboutUs',
-    'GET /templates/getPolicies': 'template/CommonMobileApisController.getPolicies',
-    'GET /templates/getTermsAndConditions': 'template/CommonMobileApisController.getTermsAndConditions',
+    'GET /mobile/templates/getContactUs': 'template/CommonMobileApisController.getContactUs',
+    'GET /mobile/templates/getAboutUs': 'template/CommonMobileApisController.getAboutUs',
+    'GET /mobile/templates/getPolicies': 'template/CommonMobileApisController.getPolicies',
+    'GET /mobile/templates/getTermsAndConditions': 'template/CommonMobileApisController.getTermsAndConditions',
+    'GET /mobile/templates/viewImages': 'template/CommonMobileApisController.viewImages',
 
+
+    /**
+     *Common Mobile app APIs in Media app
+     */
+
+     'GET /mobile/templates/getArticleCategoryByAppId': 'template/MediaAppMobileApisController.getArticleCategoryByAppId',
+     'GET /mobile/templates/getArticleById': 'template/MediaAppMobileApisController.getArticleById',
+     'GET /mobile/templates/getArticles': 'template/MediaAppMobileApisController.getArticles',
+     'GET /mobile/templates/getArticleCategoryById': 'template/MediaAppMobileApisController.getArticleCategoryById',
+     'GET /mobile/templates/getArticleByCategoryId': 'template/MediaAppMobileApisController.getArticleByCategoryId',
+
+
+     /**
+     * Commen Mobile app APIs in Ecommerce app
+     */
+
+     'GET /mobile/templates/getProductsByCatId': 'template/EcommerceAppMobileApisController.getThirdBySecondId',
+     'GET /mobile/templates/getCurrency': 'template/EcommerceAppMobileApisController.getCurrency',
+     'GET /mobile/edit/getListOfSalesAndPromotions': 'template/EcommerceAppMobileApisController.getListOfSalesAndPromotions',
+     'GET /mobile/edit/getTaxInfo': 'template/EcommerceAppMobileApisController.getTaxInfo',
+     'GET /mobile/edit/getAllCountry': 'template/EcommerceAppMobileApisController.getAllCountry',
+     'GET /mobile/edit/getShippingInfo': 'template/EcommerceAppMobileApisController.getShippingInfo',
+     'GET /mobile/edit/getIPGInfo': 'template/EcommerceAppMobileApisController.getIPGInfo',
+     'POST /mobile/templatesOrder/saveOrder': 'template/EcommerceAppMobileApisController.saveOrder',
+     'POST /mobile/templatesInventory/updateInventory': 'template/EcommerceAppMobileApisController.updateInventory',
+     'GET /mobile/templates/getSpecificChild': 'template/EcommerceAppMobileApisController.getSpecificChild',
+     'GET /mobile/app/getIconAllowance': 'template/EcommerceAppMobileApisController.iconAllowance',
+     'POST /mobile/edit/getShippingInfoByCountry': 'template/EcommerceAppMobileApisController.getShippingInfoByCountry',
+     'POST /mobile/templatesAuth/register': 'template/EcommerceAppMobileApisController.register',
+     'POST /mobile/templatesAuth/authenticateForApp': 'template/EcommerceAppMobileApisController.authenticateForApp',
+     'POST /mobile/templatesAuth/authenticate': 'template/EcommerceAppMobileApisController.authenticate',
+     'GET /mobile/templates/getProductById': 'template/EcommerceAppMobileApisController.getSubChildById',
+     'POST /mobile/templatesOrder/getTaxInfoByCountry': 'template/EcommerceAppMobileApisController.getTaxInfoByCountry',
+     'GET /mobile/edit/getShippingPickupInfo': 'template/EcommerceAppMobileApisController.getShippingPickupInfo',
+     'GET /mobile/edit/getClientToken': 'template/EcommerceAppMobileApisController.getClientToken',
 
     /**
      * Template Data for App Category Media

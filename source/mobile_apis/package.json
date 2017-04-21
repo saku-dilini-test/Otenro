@@ -1,0 +1,79 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "mobile_apis",
+        "scope": null,
+        "escapedName": "mobile_apis",
+        "name": "mobile_apis",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/home/onbit/Desktop/Otenro/source"
+    ]
+  ],
+  "_from": "mobile_apis@latest",
+  "_id": "mobile_apis@1.0.0",
+  "_inCache": true,
+  "_location": "/mobile_apis",
+  "_nodeVersion": "4.4.2",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/mobile_apis-1.0.0.tgz_1491220816372_0.6841192510910332"
+  },
+  "_npmUser": {
+    "name": "kalani",
+    "email": "kalani@onbitlabs.com"
+  },
+  "_npmVersion": "2.15.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "mobile_apis",
+    "scope": null,
+    "escapedName": "mobile_apis",
+    "name": "mobile_apis",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/mobile_apis/-/mobile_apis-1.0.0.tgz",
+  "_shasum": "deb932dd19a2c0b8b3c3b8156fc2d8cf49571262",
+  "_shrinkwrap": null,
+  "_spec": "mobile_apis",
+  "_where": "/home/onbit/Desktop/Otenro/source",
+  "author": {
+    "name": "Kalani",
+    "email": "kalani@onbitlabs.com"
+  },
+  "dependencies": {},
+  "description": "mobile apis in media and ecommerce app",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "deb932dd19a2c0b8b3c3b8156fc2d8cf49571262",
+    "tarball": "https://registry.npmjs.org/mobile_apis/-/mobile_apis-1.0.0.tgz"
+  },
+  "license": "ISC",
+  "main": "CommonMobileApisController.js",
+  "maintainers": [
+    {
+      "name": "kalani",
+      "email": "kalani@onbitlabs.com"
+    }
+  ],
+  "name": "mobile_apis",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onbitlabspvt/Otenro/tree/master/source"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

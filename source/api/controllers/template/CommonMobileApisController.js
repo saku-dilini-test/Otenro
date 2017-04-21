@@ -6,68 +6,48 @@
  *
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var fs = require('fs-extra');
-var ApiContracts = require('authorizenet').APIContracts;
-var ApiControllers = require('authorizenet').APIControllers;
+var CommonMobileApisController = require('../../../mobile_apis/CommonMobileApisController');
+
+
 
 module.exports = {
 
-    getContactUs : function(req,res){
-        sails.log.debug("debug");
-        var appId = req.param('appId');
-        var searchApp = {
-            appId: appId
-        };
-        sails.log.info(searchApp);
-        ApplicationContactUs.findOne(searchApp).exec(function (err, app) {
-            if (err) return err;
-            res.json(app);
-        });
-    },
-    /**
-     * Return Application Store Setting Collection for Given App Id
-     * It has About Us
-     * @param req
-     * @param res
-     */
-    getAboutUs : function(req,res){
-        var appId = req.param('appId');
-        var searchApp = {
-            appId: appId
-        };
-        sails.log.info(searchApp);
-        ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
-            if (err) return err;
-            res.json(app);
-        });
-    },
-    /**
-     * Return Application Store Setting Collection for Given App Id
-     * It has policies
-     * @param req
-     * @param res
-     */
-    getPolicies : function(req,res){
-        var appId = req.param('appId');
-        var searchApp = {
-            appId: appId
-        };
-        sails.log.info(searchApp);
-        ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
-            if (err) return err;
-            res.json(app);
-        });
-    },
+getContactUs : CommonMobileApisController.getContactUs,
+getAboutUs : CommonMobileApisController.getAboutUs,
+getPolicies : CommonMobileApisController.getPolicies,
+viewImages : CommonMobileApisController.viewImages,
+getTermsAndConditions : CommonMobileApisController.getTermsAndConditions
 
-    getTermsAndConditions : function(req,res){
-
-        var appId = req.param('appId');
-        var searchApp = {
-            appId: appId
-        };
-        ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
-            if (err) return err;
-            res.json(app);
-        });
-    }
 }
+
+
+
+
+
+var seneca = require('seneca')()
+
+seneca.use('../../../mobile_apis/CommonMobileApisController');
+
+getContactUs : seneca.act({ role: 'process', cmd: 'getContactUs'},{getContactUs:{GET:true}}, function ( err, result ) {
+  console.log( result );
+} )
+
+getAboutUs : seneca.act({ role: 'process', cmd: 'getAboutUs'},{getAboutUs:{GET:true}}, function ( err, result ) {
+  console.log( result );
+} )
+
+getPolicies : seneca.act({ role: 'process', cmd: 'getPolicies'},{getPolicies:{GET:true}}, function ( err, result ) {
+  console.log( result );
+} )
+
+viewImages : seneca.act({ role: 'process', cmd: 'viewImages'},{viewImages:{GET:true}}, function ( err, result ) {
+  console.log( result );
+} )
+
+getTermsAndConditions : seneca.act({ role: 'process', cmd: 'getTermsAndConditions'},{getTermsAndConditions:{GET:true}}, function ( err, result ) {
+  console.log( result );
+} )
+
+
+
+
