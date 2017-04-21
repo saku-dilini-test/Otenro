@@ -2365,3 +2365,12 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     letter-spacing: 1.5px;
     font-size: 11px;
 }
+
+.download-mobile-viewer{
+    width: 700px;
+    height: 400px;
+}
+.download-mobile-viewer h3,
+.download-mobile-viewer h4{
+    color: #747474;
+}

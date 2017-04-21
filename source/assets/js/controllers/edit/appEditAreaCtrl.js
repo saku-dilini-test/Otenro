@@ -203,6 +203,10 @@
 
         };
 
+        $scope.downloadMobileViewer = function() {
+            return userProfileService.showDownloadMobileViewerDialog();
+        };
+
 
 
         

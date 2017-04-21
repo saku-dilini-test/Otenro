@@ -22,6 +22,20 @@
                 }
 
             },
+            showDownloadMobileViewerDialog: function() {
+
+                $mdDialog.show({
+                    controller: 'userProfileCtrl',
+                    templateUrl: 'user/profile/downloadMobileViewer.html',
+                    clickOutsideToClose: true
+                })
+                .then(function (answer) {
+                }, function () {
+
+                });
+
+
+            },
             closeDialog: function() {
                 $mdDialog.hide();
             },
