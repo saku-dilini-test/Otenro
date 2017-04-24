@@ -202,10 +202,23 @@
                         .cancel('Cancel');
 
                     $mdDialog.show(confirm).then(function() {
-                        $scope.product.variants.splice(index, 1);
-                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                        if(initialData.product.id == undefined || initialData.product.id == '0'){
+                            $scope.product.variants.splice(index, 1);
+                            return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true);
+
+                        }else {
+                            $scope.product.variants.splice(index, 1);
+                            return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
+
+                        }
                     }, function() {
-                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                        if(initialData.product.id == undefined || initialData.product.id == '0'){
+                            return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true);
+
+                        }else {
+                            return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
+
+                        }
                     });
 
             }
