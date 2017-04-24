@@ -61,7 +61,7 @@
                 });
             },
 
-            addAppStoreInfo: function(file, appStoreData ){
+            addAppStoreInfo: function(file, appStoreData,publishSplash){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/setAppStoreDetails',
                     fields: {
@@ -152,7 +152,7 @@
                 return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId+'&appType='+appType);
             },
             getExistingDataAppStore:function(category){
-                            return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId+'&category='+category);
+                 return $http.get(SERVER_URL + 'edit/getLanguage?appId='+$rootScope.appId+'&category='+category);
                         },
             getAllPrimaryCategories:function(){
                  return $http.get(SERVER_URL + 'edit/getAllPrimaryCategories?appId='+$rootScope.appId);
