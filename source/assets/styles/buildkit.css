@@ -2200,6 +2200,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 .fixed-inventory .tree-grid thead{
     position:fixed;
     top:92px;
+    width: 97%;
 }
 
 .fixed-inventory .tree-grid thead tr th:nth-child(1) {
