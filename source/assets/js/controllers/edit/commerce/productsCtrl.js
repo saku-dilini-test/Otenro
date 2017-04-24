@@ -574,6 +574,19 @@
                     toastr.error('Can not add duplicate SKU values', 'Warning', {
                         closeButton: true
                     });
+                }else if($scope.product.variants){
+                    var count = 0;
+                    for(var i=0; i<$scope.product.variants.length; i++){
+                        if($scope.product.variants[i].sku == sku){
+                            count = count +1;
+                            if(count == 2) {
+                                $scope.exist = true;
+                                toastr.error('Can not add duplicate SKU values', 'Warning', {
+                                    closeButton: true
+                                });
+                            }
+                        }
+                    }
                 }
             }).error(function (error) {
                 $log.debug(error);
