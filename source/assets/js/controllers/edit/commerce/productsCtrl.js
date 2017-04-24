@@ -560,7 +560,7 @@
         *
         *
         */
-        $scope.checkValidity = function(sku){
+        $scope.checkValidity = function(sku, position){
             $scope.exist = false;
             var skuData = {
                 userId: $auth.getPayload().id,
@@ -570,7 +570,12 @@
             commerceService.checkUniqueSku(skuData)
             .success(function(result){
                 if(result == 'true'){
-                    $scope.exist = true;
+                     $scope.exist = true;
+                     $scope.position = position;
+                     if(position) {
+                         $scope.product.variants[position].sku = '';
+                     }
+
                     toastr.error('Can not add duplicate SKU values', 'Warning', {
                         closeButton: true
                     });
@@ -581,6 +586,8 @@
                             count = count +1;
                             if(count == 2) {
                                 $scope.exist = true;
+                                $scope.position = position;
+                                $scope.product.variants[position].sku = '';
                                 toastr.error('Can not add duplicate SKU values', 'Warning', {
                                     closeButton: true
                                 });
