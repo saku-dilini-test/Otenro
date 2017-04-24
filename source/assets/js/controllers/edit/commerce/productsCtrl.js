@@ -103,12 +103,18 @@
          */
         $scope.generalDetails = function (product, current) {
             //When new product is adding to the system
+
             if(!$scope.product.variants){
                 $scope.product.variants = [];
                 $scope.product.variants.push({"sku":product.sku,"name":product.name})
             }
-            disableTabs(current,true,true,false,true);
-
+            if(product.childId == 'Create New Category') {
+                toastr.error('Please select a category continue ', 'Warning', {
+                    closeButton: true
+                });
+            }else {
+                disableTabs(current, true, true, false, true);
+            }
         };
 
 
@@ -794,7 +800,7 @@
         // when product edit start in second tab and enable pagination
         if (initialData.product.id !== undefined || initialData.product.id !== '0'){
 
-            if(initialData.addVariant || initialData.product.id == '0')
+            if(initialData.addVariant && initialData.product.id == '0')
             {
                 disableTabs(2, false, false, false, true);
             }else if(initialData.product.id == undefined){
@@ -815,7 +821,7 @@
         }
 
         $scope.newcategory = function(){
-            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
+            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2,$scope.product)
         }
 
         $scope.goToEditProductWindow = function(item){
@@ -889,7 +895,6 @@
                                         toastr.success('Variant added', 'Success!', {
                                               closeButton: true
                                         });
-                                       console.log($scope.product.id)
                                         if($scope.product.id == undefined){
                                             return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true)
                                         }else{
