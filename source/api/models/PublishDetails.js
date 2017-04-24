@@ -102,6 +102,25 @@ module.exports = {
         createdDate:{
             type: 'date'
         },
+        name:{
+            type: 'string'
+        },
+        springBoardName:{
+            type: 'string'
+        },
+        primaryCat:{
+            type: 'string'
+        },
+        secondaryCat:{
+            type: 'string'
+        },
+        desc:{
+            type: 'string'
+        },
+        keywords:{
+            type: 'string'
+        },
+        
         toJSON: function() {
           var obj = this.toObject();
           delete obj.password;
