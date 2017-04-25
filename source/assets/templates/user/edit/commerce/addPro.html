@@ -24,7 +24,8 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                            <md-button class="me-default-button" ng-click="back()">Cancel</md-button>
+                            <!--<md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>-->
                         </div>
                     </div>
                 </md-tab-body>
@@ -111,8 +112,8 @@
                             <div class="md-dialog-buttons">
                                 <div class="inner-section">
 
-                                    <md-button class="me-default-button" ng-if="product.sku" ng-click="back()">Cancel</md-button>
-                                    <md-button class="me-default-button" ng-hide="product.sku" ng-click="answer('cancel')">Cancel</md-button>
+                                    <md-button class="me-default-button" ng-click="back()">Cancel</md-button>
+                                    <!--<md-button class="me-default-button" ng-hide="product.sku" ng-click="answer('cancel')">Cancel</md-button>-->
                                     <md-button class="me-default-button" ng-disabled="productForm.$invalid || exist" ng-click="generalDetails(product,2)">Next</md-button>
                                 </div>
                             </div>
@@ -129,28 +130,28 @@
                         <h1>Price & Variants</h1>
                     </div>
                     <form name="priceAndVariantsForm" novalidate>
-                        <div class="md-dialog-main custom-add-products">
+                        <div class="md-dialog-main">
                             <table class="me-hours-table">
                                 <thead>
-                                <th width="15%">Product Name</th>
-                                <th width="8%">Sku</th>
-                                <th width="8%">Price({{currency}})</th>
-                                <th width="10%">Quantity</th>
-                                <th width="10%">Weight(kg)</th>
+                                <th width="25%">Product Name</th>
+                                <th >Sku</th>
+                                <th>Price({{currency}})</th>
+                                <th>Quantity</th>
+                                <th>Weight(kg)</th>
                                 <!--<th width="28%"><input type="text" required name="variantType" ng-model="selection" placeholder="Variant Name" list="variantType"/>-->
                                     <!--<datalist id="variantType">-->
                                         <!--<option value="Size">Size</option>-->
                                         <!--<option value="Weight">Weight</option>-->
                                         <!--<option value="Color">Color</option>-->
                                     <!--</datalist></th>-->
-                                <th width="10%" data-ng-repeat="data in product.selection">
+                                <th data-ng-repeat="data in product.selection">
                                     <a data-ng-click="addNewVariant(product, data.name)">{{data.name}}</a>
                                 </th>
-                                <th width="5%" style="text-align: center;" >
+                                <th style="text-align: center;" >
                                     Add Variant
                                     <div class="add-icon icon icon-plus" ng-click="addNewVariant(product)"></div>
                                 </th>
-                                <th width="4%">Delete</th>
+                                <th>Delete</th>
                                 </thead>
                                 <tbody>
 
@@ -163,19 +164,24 @@
                                     </td>
                                     <td>
                                         <md-input-container style="width: 80px;">
-                                            <input ng-blur="checkValidity(data.sku,'sku')"  maxlength="10"
+
+                                            <input ng-blur="checkValidity(data.sku, $index)"  maxlength="10"
+
                                                    required
                                                    aria-label="SKU"
                                                    class="product-sku"
                                                    name="sku_{{$index}}"
                                                    ng-model="data.sku"
                                                    ng-pattern="/^\d*[1-9]\d*$/"
-                                                   ng-readonly="product.checked"
+                                                   ng-readonly="data.checked"
                                                    ng-click="check($index)">
-                                            <div class="error" ng-if="exist">Sku already exist</div>
+
+                                            <div class="error" ng-if="exist && $index == position">Sku already exist</div>
+
                                             <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                                 <div ng-message="required">SKU is required.</div>
                                                 <div ng-message="pattern" style="line-height:13px;" class="my-message">Invalid SKU</div>
+
                                             </div>
                                         </md-input-container>
                                     </td>
@@ -216,8 +222,7 @@
                                                 <div ng-message="required" class="my-message">Required!</div>
                                             </div>
                                         </md-input-container>
-                                        <md-checkbox ng-change = 'setValue({{$index}})' ng-disable="data.quantity.$invalid"
-                                                     ng-model="data.unlimited" aria-label="Unlimited">
+                                        <md-checkbox ng-change = 'setValue({{$index}})' ng-disable="data.quantity.$invalid" ng-model="data.unlimited" aria-label="Unlimited">
                                             Unlimited
                                         </md-checkbox>
 
@@ -268,14 +273,16 @@
                                     <!--</td>-->
 
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
-                                    <td data-ng-repeat="SAD in data.selection">
+                                    <td data-ng-repeat="data in data.selection">
                                         <md-input-container class="md-container-modify md-text-input-custom">
-                                            <input ng-blur="validateInputValueVType(SAD.vType,'vType')" id ='vType_{{$index}}'  type="text" name="vType_{{$index}}" min="1"
+                                            <input ng-blur="validateInputValueVType(data.vType,'vType')" id ='vType_{{$index}}'  type="text" name="vType_{{$index}}" min="1"
                                                    ng-pattern="/^\w+/"
-                                                   maxlength="12" ng-model="SAD.vType" placeholder="Variant Type"
-                                                   required>
-                                            <div ng-messages="priceAndVariantsForm['vType_' + $index].$error">
-                                                <div ng-message="required" >Required!</div>
+                                                   maxlength="12" ng-model="data.vType" placeholder="Variant Type"
+                                                   ng-required="data.unlimited == false" ignore-mouse-wheel >
+                                            <div ng-messages="priceAndVariantsForm['vType_' + $index].$error"
+                                                 ng-show="priceAndVariantsForm['vType_' + $index].$dirty">
+                                                <div ng-message="pattern">Invalid variant type</div>
+                                                <div ng-message="required" class="my-message">Required!</div>
                                             </div>
                                         </md-input-container>
                                     </td>
@@ -292,8 +299,9 @@
                     </form>
                     <div class="md-dialog-buttons" style="padding:0 39px">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid"
+                            <md-button class="me-default-button" ng-click="back()">Cancel</md-button>
+                            <!--<md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>-->
+                            <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid || exist"
                                        class="me-default-button" ng-click="addProductVariants(data,3)">Next</md-button>
                         </div>
                     </div>
@@ -342,7 +350,8 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                            <!--<md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>-->
+                            <md-button class="me-default-button" ng-click="back()">Cancel</md-button>
                             <md-button class="me-default-button" ng-click="nextStep3Digital(3,product,variants,weight)">Next
                             </md-button>
                         </div>
@@ -468,9 +477,10 @@
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="addOrUpdateProducts(myImage)">save </md-button>
-                            <md-button class="me-default-button" ng-click="saveAndPublishProducts(myImage)">save & publish</md-button>
+                            <!--<md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>-->
+                            <md-button class="me-default-button" ng-click="back()">Cancel</md-button>
+                            <md-button class="me-default-button" ng-click="addOrUpdateProducts()">save </md-button>
+                            <md-button class="me-default-button" ng-click="saveAndPublishProducts()">save & publish</md-button>
                         </div>
                     </div>
                 </md-tab-body>

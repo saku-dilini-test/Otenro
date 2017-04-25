@@ -21,7 +21,7 @@
                                 <li>1. Sign in to <a href="https://developer.apple.com/accont">developer.apple.com/accont</a> and click 'People'</li>
                                 <li>2. Click invite people.</li>
                                 <li class="col-md-12"><img width="100%" src="../images/Apple1.png"></li>
-                                <li>3. Enter <a href="">publish@otenro.com</a> email address as admin.
+                                <li>3. Enter <a href="">support@otenro.com</a> email address as admin.
                                     To learn more details about each role click, <a target="_blank"  href="https://developer.apple.com/support/roles/">Learn about roles(https://developer.apple.com/support/roles/)</a>.</li>
                             </ul>
                         </fieldset>
@@ -74,6 +74,7 @@
                                             <div class="me-file-upload text-right medium">
                                                 <div class="upload-wrapper">
                                                     <input type="file" ngf-select ng-model="publishSplash.splash1"/>
+
                                                     <img ng-show="publishSplash.splash1 != null"
                                                          ngf-src="publishSplash.splash1" width="120" height="120"/>
                                                     <img ng-show="publishSplash.splash1 == null" ng-src="{{thumbPic1}}"
@@ -208,7 +209,7 @@
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
                             <md-button class="me-default-button" ng-disabled="appStoreForm.$invalid"
-                                       ng-click="addAppStoreInfo(picFile,appStoreData,publishSplash)">next
+                                       ng-click="addAppStoreInfo(picFile,appStoreData,publishSplash); nextStep(2) ">next
                             </md-button>
                         </div>
                     </div>

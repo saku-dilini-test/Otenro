@@ -25,7 +25,8 @@
                             <select ng-model="selectedVariant"
                                     class="item-buy"
                                     ng-options="variant.vType  for variant in selection |unique:'vType' "
-                                    ng-change="changeVariant(selectedVariant)">
+                                    ng-change="changeVariant(selectedVariant)"
+                                    ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </div>
                     </div>
@@ -37,7 +38,8 @@
                             <select ng-model="selectedVariant1"
                                     class="item-buy"
                                     ng-options="variant.vType  for variant in selection1 |unique:'vType' "
-                                    ng-change="changeVariant2(selectedVariant1)">
+                                    ng-change="changeVariant2(selectedVariant1)"
+                                    ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </div>
                     </div>
@@ -49,7 +51,8 @@
                             <select ng-model="selectedVariant3"
                                     class="item-buy"
                                     ng-options="variant.vType  for variant in selection2 |unique:'vType' "
-                                    ng-change="changeVariant3(selectedVariant3)">
+                                    ng-change="changeVariant3(selectedVariant3)"
+                                    ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </div>
                     </div>
@@ -61,7 +64,8 @@
                             <select ng-model="selectedVariant4"
                                     class="item-buy"
                                     ng-options="variant.vType  for variant in selection3 |unique:'vType' "
-                                    ng-change="changeVariant4(selectedVariant4)">
+                                    ng-change="changeVariant4(selectedVariant4)"
+                                    ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </div>
                     </div>
@@ -70,7 +74,7 @@
                             Price :
                         </div>
                         <div class="col col-50 align-left">
-                            {{currency.sign}} : {{selectedVariant.price}}
+                            {{currency.sign}} {{selectedVariant.price}}
                         </div>
                     </div>
                     <div class="row">
@@ -81,7 +85,8 @@
                             <input type="number" min="1"
                                    class="item-buy"
                                    ng-model="selectedVariant.buyQuantity"
-                                   ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
+                                   ng-change="changeBuyQuantity(selectedVariant.buyQuantity)"
+                                   ng-hide="lockBuyButton">
                         </div>
                     </div>
             </div>

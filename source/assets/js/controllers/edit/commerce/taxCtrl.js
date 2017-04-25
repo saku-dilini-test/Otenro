@@ -15,6 +15,7 @@
         $scope.initialData = initialData;
         $scope.selected = [];
         $scope.countryList = [];
+        $scope.maxTax = 20;
 
 
         taxService.getAllCountry().success(function (data) {

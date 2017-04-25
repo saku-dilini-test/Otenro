@@ -71,6 +71,8 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.changeVariant = function(variant){
       $scope.selection1 =[];
       $scope.selectedVariant1  =variant.vType;
+      $scope.selectedVariant.buyQuantity = '';
+
       $scope.lockBuyButton = true;
 
         if($scope.foodInfo.selection.length==1){
@@ -92,7 +94,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.changeVariant2 = function(variant){
       $scope.selection2 =[];
-      $scope.selectedVariant2  =variant.vType;
+      if(variant){
+            $scope.selectedVariant2  =variant.vType;
+            $scope.selectedVariant.buyQuantity = '';
+
+      }
       $scope.lockBuyButton = true;
 
         if($scope.foodInfo.selection.length==2){
@@ -116,7 +122,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.changeVariant3 = function(variant){
       $scope.selection3 =[];
-      $scope.selectedVariant3  =variant.vType;
+      if(variant){
+            $scope.selectedVariant3  =variant.vType;
+            $scope.selectedVariant.buyQuantity = '';
+
+      }
       $scope.lockBuyButton = true;
 
         if($scope.foodInfo.selection.length==3){
@@ -138,7 +148,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         }
     };
     $scope.changeVariant4 = function(variant){
-      $scope.selectedVariant4  =variant.vType;
+        if(variant){
+            $scope.selectedVariant4  =variant.vType;
+            $scope.selectedVariant.buyQuantity = '';
+
+        }
 
       for(var i=0;i<$scope.foodInfo.variants.length;i++){
             if($scope.foodInfo.variants[i].selection[0].vType == $scope.selectedVariant1 &&
@@ -150,7 +164,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
             }
       }
-      console.log($scope.selectedVariant)
     };
 
 

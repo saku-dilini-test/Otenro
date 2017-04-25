@@ -159,11 +159,12 @@
                     'Name' : value.name,
                     'sku' : value.sku,
                     'price' : value.price,
-                    'publish' : value.publish,
                     'quantity' : value.quantity,
-                    'variantName' : value.selection,
-                    'variantType' : value.vType,
-                    'weight' : value.weight
+                    'weight' : value.weight,
+                    'variantType' : value.selection[0].name
+
+
+
 
                 });
             });

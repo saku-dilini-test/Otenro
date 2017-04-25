@@ -11,7 +11,7 @@
                 <div class="row shopping-cart-items">
                     <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}</div>
                     <div class="col" ng-model="item.qty" >{{item.qty}}</div>
-                    <div class="col" ng-model="item.total" >{{(item.total)*(item.qty)}}</div>
+                    <div class="col" ng-model="item.total" >{{currency}}{{(item.total)*(item.qty)}}</div>
                 </div>
             </div>
             <div ng-if="hideShipping">

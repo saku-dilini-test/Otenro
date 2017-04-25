@@ -9,7 +9,7 @@
 
     function commerceService($mdDialog, $http, $rootScope, Upload, SERVER_URL, inventoryService,appEditResource,$auth) {
         return {
-            showAddProductsDialog: function (item, isNew, secItem, itemID) {
+            showAddProductsDialog: function (item, isNew, secItem, itemID, isAddVariant) {
                 return $mdDialog.show({
                     controller: 'ProductCtrl',
                     templateUrl: 'user/edit/commerce/addPro.html',
@@ -26,12 +26,17 @@
                             }
                             return $q.all({
                                 isNewItem: isNew,
+                                addVariant: isAddVariant,
                                 productItem: item,
                                 product:productService.get({'productId':item.id}).$promise.then(function(product){
-                                    product.sku = item.sku;
-                                    product.selection = item.selection;
-                                    if(secItem){
-                                        product.variants = secItem;
+                                    if(itemID == '0'){
+                                        product = item;
+                                    }else{
+                                        product.sku = item.sku;
+                                        product.selection = item.selection;
+                                        if(secItem){
+                                            product.variants = secItem;
+                                        }
                                     }
                                     return product;
                                 })

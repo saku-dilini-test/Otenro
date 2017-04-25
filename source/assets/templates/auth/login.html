@@ -28,11 +28,12 @@
           here or login with
         </label>
       </fieldset>
-      <fieldset>
-        <input class="me-guest-fb-login" ng-click="authenticate('facebook')"
+      <fieldset class="terms">
+        <input class="me-guest-fb-login pull-left" ng-click="authenticate('facebook')"
                type="button"/>
-        <input class="me-guest-google-login" ng-click="authenticate('google')"
+        <input class="me-guest-google-login pull-left" ng-click="authenticate('google')"
                type="button" src="images/google-plus-icon.png" />
+        <div>By signing in you agree to our  <a class="me-guest-reset-link" target="_blank" href="https://www.otenro.com/terms.pdf">Terms & Conditions</a></div>
       </fieldset>
       <fieldset class="reset-margin text-right">
         <input type="button" class="me-default-button" ng-model="cancel" ng-click="cancel()" name="cancel" value="Cancel" />

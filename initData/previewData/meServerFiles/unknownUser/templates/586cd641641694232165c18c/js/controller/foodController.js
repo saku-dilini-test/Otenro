@@ -2,7 +2,7 @@
  * Created by amila on 3/31/16.
  */
 
-mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants, $ionicModal) {
+mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants) {
 
     $scope.$emit('hideMenu',{});
 
@@ -10,36 +10,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $rootScope.timestamp = new Date().getTime();
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
-
-    $ionicModal.fromTemplateUrl('templates/food.html', {
-        scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-     $scope.modal = modal;
-    });
-    $scope.openItem = function(food) {
-        $scope.modal.show();
-        $scope.foodInfo = food;
-        $scope.images = food.tempImageArray;
-
-        if(food.variants.length > 0){
-                $scope.selectedVariant = food.variants[0];
-                $scope.selection = [];
-                for(var i=0;i <$scope.foodInfo.variants.length;i++){
-                        $scope.selection.push({'vType':food.variants[i].selection[0].vType});
-                }
-                if($scope.selectedVariant.quantity > 0 ){
-                    $scope.isBuyBtnDisable = false;
-                }else{
-                    $scope.isBuyBtnDisable = true;
-                }
-          }
-    };
-    $scope.closeItem = function() {
-        $scope.modal.hide();
-    };
-
-
     $scope.imageURL = constants.SERVER_URL
         +"/templates/viewImages?userId="
         +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
@@ -72,7 +42,23 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
           speed: 300 //0.3s transition
         };
     $scope.sliderDelegate = null;
+    if($stateParams.item){
+        $scope.foodInfo = $stateParams.item;
+        $scope.images = $stateParams.item.tempImageArray;
 
+          if($stateParams.item.variants.length > 0){
+                $scope.selectedVariant = $stateParams.item.variants[0];
+                $scope.selection = [];
+                for(var i=0;i <$scope.foodInfo.variants.length;i++){
+                        $scope.selection.push({'vType':$scope.foodInfo.variants[i].selection[0].vType});
+                }
+                if($scope.selectedVariant.quantity > 0 ){
+                    $scope.isBuyBtnDisable = false;
+                }else{
+                    $scope.isBuyBtnDisable = true;
+                }
+          }
+    }
 
     $scope.menuName = $stateParams.categoryName;
 
@@ -80,6 +66,8 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.changeVariant = function(variant){
       $scope.selection1 =[];
       $scope.selectedVariant1  =variant.vType;
+      $scope.selectedVariant.buyQuantity = '';
+
       $scope.lockBuyButton = true;
 
         if($scope.foodInfo.selection.length==1){
@@ -101,7 +89,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.changeVariant2 = function(variant){
       $scope.selection2 =[];
-      $scope.selectedVariant2  =variant.vType;
+      if(variant){
+            $scope.selectedVariant2  =variant.vType;
+            $scope.selectedVariant.buyQuantity = '';
+
+      }
       $scope.lockBuyButton = true;
 
         if($scope.foodInfo.selection.length==2){
@@ -125,7 +117,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.changeVariant3 = function(variant){
       $scope.selection3 =[];
-      $scope.selectedVariant3  =variant.vType;
+      if(variant){
+            $scope.selectedVariant3  =variant.vType;
+            $scope.selectedVariant.buyQuantity = '';
+
+      }
       $scope.lockBuyButton = true;
 
         if($scope.foodInfo.selection.length==3){
@@ -147,7 +143,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         }
     };
     $scope.changeVariant4 = function(variant){
-      $scope.selectedVariant4  =variant.vType;
+        if(variant){
+            $scope.selectedVariant4  =variant.vType;
+            $scope.selectedVariant.buyQuantity = '';
+
+        }
 
       for(var i=0;i<$scope.foodInfo.variants.length;i++){
             if($scope.foodInfo.variants[i].selection[0].vType == $scope.selectedVariant1 &&
@@ -159,7 +159,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
             }
       }
-      console.log($scope.selectedVariant)
     };
 
 
@@ -187,12 +186,12 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         }
     };
 
-    // Products Add to cart
+        // Products Add to cart
       $scope.addToCart = function() {
         if($scope.selectedVariant.buyQuantity == null){
             $ionicPopup.alert({
-                title: 'Warning !!!',
-                subTitle: 'Please enter a quantity',
+                title: 'Please enter a quantity',
+                template: 'Warning!!!',
                 cssClass: 'ionicPopUp',
                 buttons:[
                     {text:'OK',
@@ -207,7 +206,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                             $rootScope.cart.cartItems[i].qty += $scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-                            $scope.modal.hide();
+                            $state.go('app.category');
                             break;
                         }
                         else if(i == ($rootScope.cart.cartItems.length -1)){
@@ -219,13 +218,13 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                                 totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                                 price: $scope.selectedVariant.price,
                                 total : $scope.selectedVariant.price,
-                                imgURL : $scope.images,
+                                imgURL : $stateParams.item.tempImageArray,
                                 totalQty: $scope.selectedVariant.quantity
 
                             });
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-                            $scope.modal.hide();
+                            $state.go('app.category');
                             break;
                         }
                         i++;
@@ -240,16 +239,17 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                     totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                     price: $scope.selectedVariant.price,
                     total : $scope.selectedVariant.price,
-                    imgURL : $scope.images,
+                    imgURL : $stateParams.item.tempImageArray,
                     totalQty: $scope.selectedVariant.quantity
                 });
                 $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                 $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-                $scope.modal.hide();
+                $state.go('app.category');
             }
-        }
 
+        }
     };
+
     //get Sales and Promotions
     $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {
         $scope.salesandpromotion = data[0];

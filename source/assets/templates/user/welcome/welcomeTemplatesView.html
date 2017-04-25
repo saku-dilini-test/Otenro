@@ -45,10 +45,11 @@
                                 <span><h5>{{template.templateType}}</h5></span>
                                 <span>Description : </span>
                                 <h5>{{template.templateViewDesc}}</h5>
+
                                 <div>
-                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample1.png')"  src="images/templates/{{template.imageUrl}}sample1.png" class="img-thumbnail">
-                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample2.png')" src="images/templates/{{template.imageUrl}}sample2.png" class="img-thumbnail">
-                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail">
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample1.png')"  ng-src="images/templates/{{template.imageUrl}}sample1.png" class="img-thumbnail">
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample2.png')" ng-src="images/templates/{{template.imageUrl}}sample2.png" class="img-thumbnail">
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" ng-src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail">
                                 </div>
                                 <h4 class="text-center">
                                     <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)">
@@ -86,9 +87,9 @@
                                 <span>Description : </span>
                                 <h5>{{template.templateViewDesc}}</h5>
                                 <div>
-                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample1.png')"  src="images/templates/{{template.imageUrl}}sample1.png" class="img-thumbnail">
-                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample2.png')" src="images/templates/{{template.imageUrl}}sample2.png" class="img-thumbnail">
-                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail">
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample1.png')"  ng-src="images/templates/{{template.imageUrl}}sample1.png" class="img-thumbnail">
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample2.png')" ng-src="images/templates/{{template.imageUrl}}sample2.png" class="img-thumbnail">
+                                    <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" ng-src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail">
                                 </div>
                                 <h4 class="text-center">
                                     <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)">
