@@ -261,7 +261,11 @@
                     if(initialData.prodItem == null) {
                         mainMenuService.showMainMenuDialog();
                     }else{
-                        commerceService.showAddProductsDialog(initialData.prodItem, true);
+                        if(initialData.prodItem.id == undefined){
+                            return commerceService.showAddProductsDialog(initialData.prodItem,true, null,'0', false)
+                        }else{
+                            return commerceService.showAddProductsDialog(initialData.prodItem,false);
+                        }
                     }
                 }).error(function(err) {
                     toastr.error(err.message, 'Warning', {
