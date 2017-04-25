@@ -161,7 +161,7 @@
                     'price' : value.price,
                     'quantity' : value.quantity,
                     'weight' : value.weight,
-                    'variantType' : value.vType
+                    'variantType' : value.selection[0].name
 
 
 

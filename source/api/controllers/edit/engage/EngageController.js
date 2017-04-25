@@ -68,10 +68,25 @@ module.exports = {
 
 
     saveSchedulePushMassage : function (req,res) {
-        // Create push collection
-        PushMessage.create(req.body).exec(function(err,data){
-            if(err) return done(err);
-            return res.send(data);
+
+
+        var findDevicedQuery = {
+            appId : req.body.appId
+        };
+        PushConfig.findOne(findDevicedQuery).exec(function(err,pushConfigData) {
+            
+            //sails.log.debug(pushConfigData);
+            if (!pushConfigData) {
+                return res.serverError();
+            }else {
+                // Create push collection
+                PushMessage.create(req.body).exec(function(err,data){
+                    if(err) return done(err);
+                    return res.send(data);
+                });
+            }
+
+
         });
     },
 

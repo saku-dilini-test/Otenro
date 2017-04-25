@@ -18,7 +18,7 @@
     ME_APP_SERVER,$auth,$rootScope,$timeout,SERVER_URL,$location) {
 
 
-        console.log($location.search());
+        //console.log($location.search());
         if ($auth.isAuthenticated()) {
             $scope.isAuthenticated = true;
             $state.go('user.dashboard');
@@ -35,7 +35,6 @@
         $scope.types=[];
         welcomeTemplatesResource.getTemplates().success(function(data){
             $rootScope.templates = data;
-
             for (var i=0; i< data.length ; i++){
                 if($scope.types.indexOf(data[i].templateType) === -1){
                    $scope.types.push(data[i].templateType);
@@ -63,6 +62,13 @@
                     var affid = $location.search().affid;
                     var clickid = $location.search().clickid;
 
+                    var encUserId = 'unknownUser' + "/";
+                    var encAppId = previewId + "/";
+                    var encTempUrl = templateUrl + "/";
+                    var encTempName = templateName + "/";
+                    var encTempCategory = templateCategory + "/";
+
+                    var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory);
 
                     var url= urlPath+'/?'+new Date().getTime();
                     mySharedService.prepForBroadcast(url);
@@ -74,7 +80,8 @@
                             tempName: templateName,
                             tempCategory: templateCategory,
                             affid: affid,
-                            clickid: clickid
+                            clickid: clickid,
+                            p: encryptedURL
                         });
 
         }

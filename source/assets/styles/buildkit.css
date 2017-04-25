@@ -2200,6 +2200,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 .fixed-inventory .tree-grid thead{
     position:fixed;
     top:92px;
+    width: 97%;
 }
 
 .fixed-inventory .tree-grid thead tr th:nth-child(1) {
@@ -2345,6 +2346,25 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     color:gray;
 }
 .add-new-variant{
-    position: absolute;
-    bottom: -20px;
+
+    position: fixed;
+    bottom: 80px;
 }
+
+.custom-add-products{
+    overflow-x:auto;
+    padding:0;
+    margin:25px 40px 0;
+}
+
+.custom-add-products .me-hours-table{
+   width:1500px;
+}
+
+.terms div{
+    padding-top: 8px;
+    color: #adadad;
+    letter-spacing: 1.5px;
+    font-size: 11px;
+}
+

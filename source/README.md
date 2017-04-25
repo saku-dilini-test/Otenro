@@ -25,9 +25,6 @@ SetUp Project
 
     give execute permission for importData.sh file as follows (for linux users) on command line prompt
     chmod 777 importData.sh
-
-    **WARNING: run the below mentioned clearData.sh only in dev environment**
-    run clearData.sh. This will clear the database
     
     Run 'importData.sh' bash file as './importData.sh' on command line prompt (for linux users)
     (for windows platform  use cygwin (https://www.cygwin.com/) and Run 'sed -i 's/\r$//' importData.sh' and execute ./importData.sh )

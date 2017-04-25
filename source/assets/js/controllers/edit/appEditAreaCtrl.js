@@ -5,18 +5,29 @@
     angular.module('appEdit').controller('AppEditAreaCtrl',[
         '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER',
         'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore','currencyService',
-        'templateService','SERVER_URL','$log',
+        'templateService','SERVER_URL','$log','$state',
         AppEditAreaCtrl]);
 
     function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
                              toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore,currencyService,
-                             templateService,SERVER_URL,$log){
+                             templateService,SERVER_URL,$log,$state){
 
         $rootScope.bodyClass = 'appEdit';
         $scope.contentUrl = true;
 
-        $scope.appId = $stateParams.appId;
-        $rootScope.appId = $stateParams.appId;
+        var encParam = $stateParams.p;
+        var decParamAppId = atob(encParam);
+
+        if(!encParam){
+            decParamAppId = $stateParams.appId;
+            if(!decParamAppId)
+            {
+                $state.go('user.dashboard');
+            }
+        }
+
+        $scope.appId = decParamAppId; //$stateParams.appId;
+        $rootScope.appId = decParamAppId; //$stateParams.appId;
         $scope.userId = $auth.getPayload().id;
         $scope.isArticleApp = false;
 

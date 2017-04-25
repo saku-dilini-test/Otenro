@@ -20,19 +20,17 @@ module.exports = {
             appSettings.appCurrency.sign = req.body.currencySign;
             appSettings.appCurrency.symbol = req.body.currencySymbol;
 
-            var data = appSettings;
-
-            var query = {id:req.body.appId};
-            Application.update(query,data).exec(function(err, appProduct) {
+            Application.update(searchApp,app[0]).exec(function(err, appProduct) {
                 if (err) res.send(err);
                 res.send({
-                    appId: appProduct,
+                    app: appProduct,
                     message: "Currency Successfully added"
                 });
             });
         });
+
     },
-//
+
    getCurrency : function(req,res){
        var appId = req.param('appId');
        var searchApp = {

@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="center col">
-                    <button class="button button-raised  made-easy-button-setting"  type="reset" value="Reset">Clear</button>
+                    <button class="button button-raised  made-easy-button-setting"  ng-click="details = '' ; details.location = 'New';details.number= '' ">Clear</button>
                     <button class="button button-raised  made-easy-button-setting" ng-disabled="!details.location || delivery.$invalid" ng-click="deliver(details)" >Next</button>
                 </div>
             </form>

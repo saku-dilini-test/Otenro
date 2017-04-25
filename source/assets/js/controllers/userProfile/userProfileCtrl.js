@@ -43,8 +43,8 @@
             $scope.viewBilling = "Billing Details";
             $scope.activeTabIndex = index;
         }
-
-        if (typeof $auth.getPayload().id !== 'undefined' ){
+        
+        if (typeof $auth.getPayload() !== 'undefined' ){
             userProfileResource.getBillingDetails($auth.getPayload().id).success(function (data) {
                 $scope.billingEdit= data;
             }).error(function (err) {
@@ -62,10 +62,11 @@
             }
             Auth.login($scope.user).success(function() {
                 userProfileResource.editUserProfile(params).then(function(data){
-                    $mdDialog.hide();
+                    // $mdDialog.hide();
                     toastr.success('Successfully Changed', 'Success', {
                         closeButton: true
                     });
+                    $scope.backToView(0);
                 });
             }).error(function(err) {
                 $scope.password = true;
