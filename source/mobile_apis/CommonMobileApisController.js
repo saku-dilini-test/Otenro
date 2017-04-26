@@ -9,10 +9,9 @@
 var fs = require('fs-extra');
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
+/*
 
-
-
-/*module.exports =  {
+module.exports =  {
 
 
     getContactUs : function(req,res){
@@ -27,12 +26,14 @@ var ApiControllers = require('authorizenet').APIControllers;
             res.json(app);
         });
     },
-    *//**
+    */
+/**
      * Return Application Store Setting Collection for Given App Id
      * It has About Us
      * @param req
      * @param res
      *//*
+
     getAboutUs : function(req,res){
         var appId = req.param('appId');
         var searchApp = {
@@ -44,12 +45,14 @@ var ApiControllers = require('authorizenet').APIControllers;
             res.json(app);
         });
     },
-    *//**
+    */
+/**
      * Return Application Store Setting Collection for Given App Id
      * It has policies
      * @param req
      * @param res
      *//*
+
     getPolicies : function(req,res){
         var appId = req.param('appId');
         var searchApp = {
@@ -74,20 +77,26 @@ var ApiControllers = require('authorizenet').APIControllers;
         });
     },
 
-     *//**
+     */
+/**
       * return images for given userID & appID & img ( Path + Image name )
       * @param req
       * @param res
       *//*
+
      viewImages : function(req,res){
          sails.log.debug("viewImages loading..");
          res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
      }
-}*/
+
+}
+*/
+
+
+///* seneca *///
+
 
 module.exports = function(option) {
-
-/* seneca */
 
     var seneca = this;
 
@@ -96,71 +105,81 @@ module.exports = function(option) {
        seneca.add( { role:'process', cmd:'getPolicies' }, getPolicies );
        seneca.add( { role:'process', cmd:'viewImages' }, viewImages );
        seneca.add( { role:'process', cmd:'getTermsAndConditions' }, getTermsAndConditions );
+       seneca.add( { role:'process', cmd:'cal' }, cal );
 
-    function getContactUs (req,res,Done){
-        sails.log.debug("getContactUs loading.." + req.param('appId'));
-        var appId = req.param('appId');
-            var searchApp = {
-                appId: appId
-            };
-            sails.log.info(searchApp);
-            ApplicationContactUs.findOne(searchApp).exec(function (err, app) {
-                if (err) return err;
-                res.json(app);
-                sails.log.debug("gfdsafdsgfdsfdsf..");
-            });
-        done( null, { result: res } );
-    }
-    //,
-
-
-    function getAboutUs (req,res,done){
-        sails.log.debug("getAboutUs loading..");
-        var appId = req.param('appId');
-                var searchApp = {
-                    appId: appId
-                };
-                sails.log.info(searchApp);
-                ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
-                    if (err) return err;
-                    res.json(app);
-                });
-        done( null, { result: res } );
+    function getContactUs (req,Done){
+        console.log("getContactUs loading..");
+//        var appId = req.param('appId');
+//            var searchApp = {
+//                appId: appId
+//            };
+//            sails.log.info(searchApp);
+//            ApplicationContactUs.findOne(searchApp).exec(function (err, app) {
+//                if (err) return err;
+//                res.json(app);
+//                sails.log.debug("getContactUs..");
+//            });
+        Done( null, { result: "test" } );
     }
 
-    function getPolicies (req,res,done){
-        sails.log.debug("getPolicies loading..");
-         var appId = req.param('appId');
-                var searchApp = {
-                    appId: appId
-                };
-                ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
-                    if (err) return err;
-                    res.json(app);
-                });
-        done( null, { result: res } );
+    function cal (req,Done){
+        console.log("cal loading..");
+        var result=req.left+req.right;
+        Done( null, { result: result} );
     }
 
 
-    function viewImages (req,res,done){
-                 sails.log.debug("viewImages loading..");
-                 res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
 
-        done( null, { result: res } );
+    function getAboutUs (req,done){
+        console.log("getAboutUs loading..");
+//        var appId = req.param('appId');
+//                var searchApp = {
+//                    appId: appId
+//                };
+//                sails.log.info(searchApp);
+//                ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
+//                    if (err) return err;
+//                    res.json(app);
+//                });
+        done( null, { result: 'dad' } );
+    }
+
+    function getPolicies (req,done){
+        console.log("getPolicies loading..");
+//         var appId = req.param('appId');
+//                var searchApp = {
+//                    appId: appId
+//                };
+//                ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
+//                    if (err) return err;
+//                    res.json(app);
+//                });
+        done( null, { result: 'sda' } );
     }
 
 
-    function getTermsAndConditions (req,res,done){
-        sails.log.debug("getTermsAndConditions loading..");
-        var appId = req.param('appId');
-                var searchApp = {
-                    appId: appId
-                };
-                ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
-                    if (err) return err;
-                    res.json(app);
-                });
-        done( null, { result: res } );
+    function viewImages (req,done){
+                 console.log("viewImages loading..");
+                 //res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
+
+        done( null, { result: 'fsfds' } );
     }
+
+
+    function getTermsAndConditions (req,done){
+        console.log("getTermsAndConditions loading..");
+//        var appId = req.param('appId');
+//                var searchApp = {
+//                    appId: appId
+//                };
+//                ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
+//                    if (err) return err;
+//                    res.json(app);
+//                });
+        done( null, { result: 'dsada' } );
+    }
+
+
 
   }
+
