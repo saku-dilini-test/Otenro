@@ -2,19 +2,24 @@
     "use strict";
 
 angular.module('animateApp')
-    .controller('shoppingCartCtrl',['$scope','$http','$routeParams','SERVER_URL','DataService', function($scope, $http,$routeParams,SERVER_URL,DataService) {
+    .controller('shoppingCartCtrl', function($scope, $http,$routeParams,SERVER_URL,DataService) {
         $scope.SERVER_URL = SERVER_URL;
         $scope.cart = DataService.cart;
-     
+
+
         $http.get(SERVER_URL+"products/oneUSD")
             .then(function (response) {
-                $scope.oneDoller = response.data.result;  
-                $scope.cart.saveOneDoller($scope.oneDoller);                
-        });       
+                $scope.oneDoller = response.data.result;
+                $scope.cart.saveOneDoller($scope.oneDoller);
+        });
 
         // before redirect to PayPal, Cart info send to server to save
+
         $scope.saveCartInServer = function () {
 
+
+            console.log("saveCartInServer")
+            console.log("data" + $scope.cart.getShoppingCart())
             $scope.deliveryOption = "pickUp";
             $scope.isSubmitButtonDisableValue = 'true';
             $scope.cart = DataService.cart;
@@ -43,11 +48,21 @@ angular.module('animateApp')
             shoppingCart['deliveryTime'] = $scope.cart.getDeliveryTime();
             shoppingCart['paymentStatus'] = 'Pending';
             //cart info save api
+            console.log("shopping cart"+ shoppingCart.name);
             $http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)
-                .then(function (response) {
+                .success(function (response) {
+                console.log("shopping cart");
+                $scope.cart.checkout('PayPal');
                 });
+
+               localStorage.clear();
         }
 
-    }]);
+        $scope.clearCart = function(){
+            console.log("cart is clear");
+            localStorage.clear();
+        }
+
+    });
 })();
 

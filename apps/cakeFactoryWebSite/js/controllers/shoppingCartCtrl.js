@@ -5,7 +5,8 @@ angular.module('animateApp')
     .controller('shoppingCartCtrl', function($scope, $http,$routeParams,SERVER_URL,DataService) {
         $scope.SERVER_URL = SERVER_URL;
         $scope.cart = DataService.cart;
-     
+
+
         $http.get(SERVER_URL+"products/oneUSD")
             .then(function (response) {
                 $scope.oneDoller = response.data.result;  
@@ -13,7 +14,11 @@ angular.module('animateApp')
         });       
 
         // before redirect to PayPal, Cart info send to server to save
+
         $scope.saveCartInServer = function () {
+
+
+            console.log("saveCartInServer")
             console.log("data" + $scope.cart.getShoppingCart())
             $scope.deliveryOption = "pickUp";
             $scope.isSubmitButtonDisableValue = 'true';
@@ -43,8 +48,11 @@ angular.module('animateApp')
             shoppingCart['deliveryTime'] = $scope.cart.getDeliveryTime();
             shoppingCart['paymentStatus'] = 'Pending';
             //cart info save api
+            console.log("shopping cart"+ shoppingCart.name);
             $http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)
-                .then(function (response) {
+                .success(function (response) {
+                console.log("shopping cart");
+                $scope.cart.checkout('PayPal');
                 });
 
                localStorage.clear();
