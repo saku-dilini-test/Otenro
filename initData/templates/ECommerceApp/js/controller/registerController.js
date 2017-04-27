@@ -20,6 +20,7 @@ mobileApp.controller('RegisterCtrl', function($scope,$rootScope,$http,$ionicPopu
             streetName: $scope.data.streetName,
             city: $scope.data.city,
             country: $scope.data.country,
+            zip: $scope.data.zip,
             phone: $scope.data.phone,
             appId: $rootScope.appId
         };
@@ -29,10 +30,11 @@ mobileApp.controller('RegisterCtrl', function($scope,$rootScope,$http,$ionicPopu
             	"token": res.data.token,
             	"email": data.email,
             	"name": data.firstName,
-            	"phone": data.phoneNumber,
+            	"phone": data.phone,
             	"streetNumber": data.streetNumber,
             	"streetName": data.streetName,
             	"country": data.country,
+                "zip": data.zip,
             	"city": data.city,
             	"type": 'internal',
                 "appId":data.appId,
