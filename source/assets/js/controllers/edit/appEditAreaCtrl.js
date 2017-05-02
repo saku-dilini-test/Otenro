@@ -5,12 +5,12 @@
     angular.module('appEdit').controller('AppEditAreaCtrl',[
         '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER',
         'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore','currencyService',
-        'templateService','SERVER_URL','$log','$state',
+        'templateService','SERVER_URL','$log','$state','$http',
         AppEditAreaCtrl]);
 
     function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
                              toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore,currencyService,
-                             templateService,SERVER_URL,$log,$state){
+                             templateService,SERVER_URL,$log,$state,$http){
 
         $rootScope.bodyClass = 'appEdit';
         $scope.contentUrl = true;
@@ -51,16 +51,32 @@
             }).error(function (error) {
         })
 
-        var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                       +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
 
+
+
+            $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+            var urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+        // $http.get(urlPath)
+        //     .success(function(){
+        //         console.log("working1")
+        //     })
+        //     .error(function() {
+        //         console.log("working2")
+        //     });
         $scope.appTemplateUrl=urlPath;
+
+
         //$scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
         //                        +'/templates/'+$stateParams.appId;
 
 
         appEditResource.getSelectedApp({appId: $scope.appId})
             .success(function(data) {
+
                 /**
                  * TODO : This should change later according type of template category
                  * @type {boolean}

@@ -109,8 +109,17 @@
     margin: 0;
     padding: 0;
 }
+.obl-app-templates2{
+    margin: 0;
+    padding: 0;
+}
 
 .obl-app-templates li{
+    display: inline;
+    float: left;
+    margin-right: 263px;
+}
+.obl-app-templates2 li{
     display: inline;
     float: left;
     margin-right: 263px;
@@ -125,6 +134,27 @@
    background-size: 230px 444px !important;
 }
 
+.obl-app-templates2 li .screen{
+    left: 0;
+    display: block;
+    width: 800px;
+    height: 484px;
+    position: relative;
+    background: url(../../../images/responsiveness-screen.png) no-repeat;
+    background-size: 76%;
+}
+.obl-app-templates2 li .mobile{
+    display: block;
+    width: 210px;
+    height: 430px;
+    position: absolute;
+    z-index: 4;
+    top: 45px;
+    right: 52px;
+    background: url(../../../images/responsiveness-mobile.png) no-repeat;
+    background-size: 100%;
+}
+
 .obl-app-templates li a img{
     height: auto;
     position: absolute;
@@ -132,6 +162,22 @@
     width: 189px;
 	height:330px;
     left: 21px;
+}
+.obl-app-templates2 li a .img-screen{
+    height: auto;
+    position: absolute;
+    top: 26px;
+    width: 556px;
+    height: 313px;
+    left: 26px;
+}
+.obl-app-templates2 li a .img-mobile{
+    height: auto;
+    position: absolute;
+    top: 55px;
+    width: 183px;
+    height: 328px;
+    left: 13px;
 }
 
 .me-dialog-phone-view{
@@ -192,6 +238,8 @@
 .obl-dashboard-apps-livePreview{
 	Width:35%;
 	padding:30px 0 30px 30px;
+    position:relative;
+    top:-100px;
 }
 /*.obl-dashboard-apps-livePreview{
     width: 35%;
@@ -235,6 +283,9 @@
 }
 .obl-dashboard-tab-height .img-thumbnail{
     max-width:32%;
+}
+.obl-dashboard-tab-height .img-thumbnail2{
+    max-width:18%;
 }
 
 .dashboard-dialog{

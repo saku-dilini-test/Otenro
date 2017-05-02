@@ -189,6 +189,121 @@
                 }
         };
 
+
+        $scope.answerProgressive = function(answer,templateId, templateUrl, templateName,templateCategory) {
+            var agentInfo = {
+                clickid : $stateParams.clickid,
+                affid:$stateParams.affid
+
+            }
+
+            if($scope.appName== null){
+                toastr.error('Please enter a name for the application', 'Warning', {
+                      closeButton: true
+                });
+            }
+            else{
+                if ($auth.isAuthenticated()) {
+                       $scope.successDeleteFile($scope.userId, $scope.appId);
+                    var tempAppParams = {
+                        'appName': $scope.appName,
+                        'templateId': templateId,
+                        'templateName': templateName,
+                        'templateUrl':templateUrl,
+                        'templateCategory' : templateCategory,
+                        'userId':$auth.getPayload().id
+
+                    };
+
+                        welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
+                            if(data.data.appId == -1)
+                            {
+                                toastr.error(data.data.message, 'Warning', {
+                                    closeButton: true
+                                });
+                            }else{
+                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                    +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+
+                                mySharedService.prepForBroadcast(url);
+
+                                var encParam = btoa(data.data.appId);
+                                $state.go('user.editApp',{appId:data.data.appId, p:encParam });
+                            }
+
+                        });
+                    $mdDialog.hide(answer);
+                }else{
+                    loginFunction(agentInfo).then(function(id){
+                        $scope.successDeleteFile($scope.userId, $scope.appId);
+                        var tempAppParams = {
+                            'appName': $scope.appName,
+                            'templateId': templateId,
+                            'templateName': "test-app",
+                            'templateUrl':templateUrl,
+                            'templateCategory' : templateCategory,
+                            'userId':$auth.getPayload().id
+                        };
+
+                        welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
+                            if(data.data.appId == -1)
+                            {
+                                toastr.error(data.data.message, 'Warning', {
+                                    closeButton: true
+                                });
+
+                                var encUserId = 'unknownUser' + "/";
+                                var encAppId = templateId + "/";
+                                var encTempUrl = templateUrl + "//";
+                                var encTempName = templateName + "/";
+                                var encTempCategory = templateCategory + "/";
+
+                                var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory);
+
+                                $state.go('anon.livePreview', {
+                                    userId: 'unknownUser',
+                                    appId: templateId,
+                                    tempUrl: templateUrl,
+                                    tempName: templateName,
+                                    tempCategory: templateCategory,
+                                    p: encryptedURL
+                                });
+
+
+
+                            }else {
+                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                    +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+
+                                mySharedService.prepForBroadcast(url);
+
+                                var encParam = btoa(data.data.appId);
+                                $state.go('user.editApp', {appId: data.data.appId, p: encParam});
+                            }
+                        });
+                        $mdDialog.hide(answer);
+                    });
+
+                }
+            }
+                $scope.profileView = function () {
+                    return userProfileService.showUserProfileDialog();
+                }
+        };
+
+        $scope.changeDevice = function(deviceType){
+
+            if(deviceType == "mobile"){
+                $scope.contentUrl = true;
+                $scope.tabletView = "";
+            }else{
+                $scope.contentUrl = false;
+                $scope.tabletView = "tabletView-live";
+            }
+
+
+        };
+
     }
 
     function DialogController($scope, $mdDialog,$auth,$state,initialData,welcomeTemplatesResource,mySharedService,ME_APP_SERVER) {
@@ -208,4 +323,5 @@
         };
 
     };
+
 })();

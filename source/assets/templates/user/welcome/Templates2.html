@@ -1,0 +1,100 @@
+
+<div ng-if="isAuthenticated" ng-include=" 'user/header/header.html' "></div>
+<div class="header-beta">We are currently in open beta and you could experience minor issues,
+    please do give us feedback on issues and any suggestions to help us improve the system.
+    You can contact us on SHASHAN </div>
+
+<div class="obl-dashboard-wrapper obl-dashboard-tab-height">
+    <div class="obl-dashboard-apps">
+
+        <md-tabs md-center-tabs>
+            <md-tab md-active ="true"
+                    ng-disabled="tab.disabled"
+                    label="All">
+                    <md-tab-body>
+                                <div class="col-md-12" ng-repeat="template in templates">
+                                   <div class="row">
+                                       <div class="col-md-7">
+                                           <ul class="grid obl-app-templates2 clearfix">
+                                               <li>
+                                                   <a class="mobile" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
+                                                       <div id ="image">
+                                                           <img class = "img-mobile main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
+                                                           <img class ="img-mobile second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
+                                                       </div>
+                                                   </a>
+                                                   <a class="screen" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
+                                                       <div id ="image">
+                                                           <img class = "img-screen main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
+                                                           <img class ="img-screen second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
+                                                       </div>
+                                                   </a>
+                                               </li>
+                                           </ul>
+                                       </div>
+                                       <div class="col-md-5 text-left">
+                                           <h3><span>Style Name :</span>  <br>{{template.templateViewName}}</h3>
+                                           <span>App Type : </span>
+                                           <span><h5>{{template.templateType}}</h5></span>
+                                           <span>Description : </span>
+                                           <h5>{{template.templateViewDesc}}</h5>
+                                           <div>
+                                               <img ng-click="showSampleImage($event,template.imageUrl, 'sample1.png')"  ng-src="images/templates/{{template.imageUrl}}sample1.png" class="img-thumbnail2">
+                                               <img ng-click="showSampleImage($event,template.imageUrl, 'sample2.png')" ng-src="images/templates/{{template.imageUrl}}sample2.png" class="img-thumbnail2">
+                                               <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" ng-src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail2">
+                                               <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" ng-src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail2">
+                                               <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" ng-src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail2">
+                                           </div>
+                                           <h4 class="text-center">
+                                               <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)">
+                                                Select
+                                               </button>
+                                           </h4>
+                                       </div>
+                                   </div>
+                                </div>
+                    </md-tab-body>
+            </md-tab>
+            <md-tab ng-repeat="type in types"
+                    ng-disabled="tab.disabled"
+                    label=" {{type}}">
+                    <md-tab-body>
+
+                        <div class="col-md-12" ng-repeat="template in templates" ng-if="type == template.templateType">
+                            <div class="row">
+                                <div class="col-md-7  col-md-offset-1">
+                                    <ul class="grid obl-app-templates clearfix">
+                                        <li >
+                                            <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
+                                                <div  id ="image">
+                                                    <img class = "main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
+                                                    <img class ="second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-5 text-left ">
+                                    <h3><span>Style Name :</span>  <br>{{template.templateViewName}}</h3>
+                                    <span>App Type : </span>
+                                    <span><h5>{{template.templateType}}</h5></span>
+                                    <span>Description : </span>
+                                    <h5>{{template.templateViewDesc}}</h5>
+                                    <div>
+                                        <img ng-click="showSampleImage($event,template.imageUrl, 'sample1.png')"  ng-src="images/templates/{{template.imageUrl}}sample1.png" class="img-thumbnail">
+                                        <img ng-click="showSampleImage($event,template.imageUrl, 'sample2.png')" ng-src="images/templates/{{template.imageUrl}}sample2.png" class="img-thumbnail">
+                                        <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" ng-src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail">
+                                    </div>
+                                    <h4 class="text-center">
+                                        <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)">
+                                            Select
+                                        </button>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </div>
+</div>

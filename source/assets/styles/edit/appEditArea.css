@@ -58,7 +58,7 @@
     -moz-transition: 0.4s linear;
     -o-transition: 0.4s linear;
     transition: 0.4s linear;
-    margin-top: -380px;
+    margin-top: -435px;
     margin-left: inherit;
 }
 .mdapp-content{
@@ -100,6 +100,11 @@
 .mdapp-device-selector{
     font-weight: 300;
     padding-top: 35px;
+}
+.mdapp-device-selector2{
+    font-weight: 300;
+    padding-top: 35px;
+    margin-left:35%;
 }
 
 .mdapp-device-selector p{

@@ -3,6 +3,21 @@
     <div class="header-beta">We are currently in open beta and you could experience minor issues,
         please do give us feedback on issues and any suggestions to help us improve the system.
         You can contact us on support@otenro.com</div>
+    <div class="mdapp-device-selector2 clearfix">
+        <div class="mobile-area">
+            <p>Mobile App</p>
+            <a class="mobile-icon" href ng-click="changeDevice('mobile')" ng-class="{'current-device': !tabletView}"></a>
+            <a class="tablet-icon" href ng-click="changeDevice('tablet-live')" ng-class="{'current-device': tabletView}"></a>
+        </div>
+        <div class="website-area">
+            <div class="pull-left">
+                <p>Website</p>
+                <a  href ng-click="temporaryMessage()" class="desktop-icon size-fix"></a>
+                <a  href ng-click="temporaryMessage()" class="tablet-icon"></a>
+            </div>
+
+        </div>
+    </div>
     <div class="obl-dashboard-apps-livePreview">
         <fieldset class="text-left">
             <h1 id="livePreviewH1">{{templateViewName}}</h1>
@@ -30,11 +45,14 @@
                 <button class="me-default-button-preview" ng-click="answer('useful',appId,tempUrl,tempName,tempCategory)">
                     Get Started
                 </button>
+                <button class="me-default-button-preview" ng-click="answerProgressive('useful',appId,tempUrl,tempName,tempCategory)">
+                    Get Started progressive web app
+                </button>
             </fieldset>
         </ul>
     </div>
     <div class="mdapp-content-livePreview">
-        <div class="device-preview-livePreview" ng-class="tabletView ? 'tabletView' : '!tabletView'">
+        <div class="device-preview-livePreview" ng-class="tabletView">
             <div class="device-simulator" overflow="scroll">
                 <me-iphone device-path="{{contentUrl}}" tmp-url="{{appTemplateUrl}}"></me-iphone>
             </div>

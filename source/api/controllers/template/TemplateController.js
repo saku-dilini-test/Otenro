@@ -292,6 +292,9 @@ module.exports = {
     viewTemplateUrl : function(req,res){
         res.redirect(config.ME_SERVER_URL + req.param('userId') + '/templates/' + req.param('appId'));
     },
+    viewProgUrl : function(req,res){
+        res.redirect(config.ME_SERVER_URL + req.param('userId') + '/progressiveTemplates/' + req.param('appId')+'/src/');
+    },
 
     /**
      * return two dummy comments json object for every request

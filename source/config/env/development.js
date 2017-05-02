@@ -35,5 +35,6 @@ module.exports = {
   // APP FILE SERVER Config
   APP_FILE_SERVER : 'c:/xampp/htdocs/meServer/temp/',
   CLIENT_SECRET : '44f4f3be572ec33711a40a5b8b4',
-  TEMPLATES_PATH : '/home/prasanna/project/Otenro/initData/templates/'
+  TEMPLATES_PATH : 'd:/OfficeWork/Otenro/Otenro/initData/templates/',
+  PROGRESSIVE_TEMPLATES_PATH : 'd:/OfficeWork/Otenro/Otenro/initData/webTemplates/'
 };
