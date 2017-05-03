@@ -559,7 +559,7 @@ module.exports = {
                 templateCategory = req.body.templateCategory,
                 userId = req.body.userId,
                 tempAppDirPath = config.ME_SERVER + userId + '/progressiveTemplates/',
-                templatePath = config.PROGRESSIVE_TEMPLATES_PATH + "test-app",
+                templatePath = config.PROGRESSIVE_TEMPLATES_PATH + "test-app2",
                 appName = req.body.appName,
                 serverTmp="http://localhost:port",
                 serverOrg=config.server.host+":1337",
@@ -669,41 +669,41 @@ module.exports = {
                                   if(err) return console.error(err);
                               });
 
-                              fs.readFile(tempAppDirPath +app.id+'/config.xml', 'utf-8',
-                                  function(err, data) {
-                                      if (err) return res.negotiate(err);
-                                      var parser = new xml2js.Parser(),
-                                          xmlBuilder = new xml2js.Builder();
+                              // fs.readFile(tempAppDirPath +app.id+'/config.xml', 'utf-8',
+                              //     function(err, data) {
+                              //         if (err) return res.negotiate(err);
+                              //         var parser = new xml2js.Parser(),
+                              //             xmlBuilder = new xml2js.Builder();
+                              //
+                              //         parser.parseString(data, function (err, result) {
+                              //             result.widget['$'].id="com.otenro."+appName.replace(/\s/g, '').toLowerCase()+app.id;
+                              //             var xml = xmlBuilder.buildObject(result);
+                              //
+                              //             fs.writeFile(tempAppDirPath +app.id+'/config.xml', xml,'utf-8', function(err) {
+                              //
+                              //                 if (err) return res.negotiate(err);
+                              //             });
+                              //
+                              //         });
+                              //     });
 
-                                      parser.parseString(data, function (err, result) {
-                                          result.widget['$'].id="com.otenro."+appName.replace(/\s/g, '').toLowerCase()+app.id;
-                                          var xml = xmlBuilder.buildObject(result);
-
-                                          fs.writeFile(tempAppDirPath +app.id+'/config.xml', xml,'utf-8', function(err) {
-
-                                              if (err) return res.negotiate(err);
-                                          });
-
-                                      });
-                                  });
-
-                              fs.readFile(tempAppDirPath +app.id+'/js/constantsService.js', 'utf-8',
-                                  function(err, data) {
-                                      if (err) return res.negotiate(err);
-                                      fs.writeFile(tempAppDirPath +app.id+'/js/constantsService.js', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
-                                          if (err) return res.negotiate(err);
-                                      });
-                                  });
-
-                              fs.readFile(tempAppDirPath +app.id+'/js/app.js', 'utf-8',
-                                  function(err, data) {
-                                      if (err) return res.negotiate(err);
-                                      data=data.replace(serverTmp,serverOrg);
-                                      data=data.replace(serverTmp,serverOrg);
-                                      fs.writeFile(tempAppDirPath + app.id +'/js/app.js', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
-                                          if (err) return res.negotiate(err);
-                                      });
-                                  });
+                              // fs.readFile(tempAppDirPath +app.id+'/js/constantsService.js', 'utf-8',
+                              //     function(err, data) {
+                              //         if (err) return res.negotiate(err);
+                              //         fs.writeFile(tempAppDirPath +app.id+'/js/constantsService.js', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
+                              //             if (err) return res.negotiate(err);
+                              //         });
+                              //     });
+                              //
+                              // fs.readFile(tempAppDirPath +app.id+'/js/app.js', 'utf-8',
+                              //     function(err, data) {
+                              //         if (err) return res.negotiate(err);
+                              //         data=data.replace(serverTmp,serverOrg);
+                              //         data=data.replace(serverTmp,serverOrg);
+                              //         fs.writeFile(tempAppDirPath + app.id +'/js/app.js', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
+                              //             if (err) return res.negotiate(err);
+                              //         });
+                              //     });
 
                               /** config -|- copy template images to App File Server
                                * TODO : future development, Template dummy data move to another folder

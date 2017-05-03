@@ -140,7 +140,7 @@
     width: 800px;
     height: 484px;
     position: relative;
-    background: url(../../../images/responsiveness-screen.png) no-repeat;
+    background: url(../../../images/responsiveness-screen.svg) no-repeat;
     background-size: 76%;
 }
 .obl-app-templates2 li .mobile{
