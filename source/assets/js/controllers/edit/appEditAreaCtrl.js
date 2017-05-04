@@ -206,14 +206,19 @@
         };
 
 
+        $scope.deviceView = "mobile";
         $scope.changeDevice = function(deviceType){
 
+
+
             if(deviceType == "mobile"){
-                $scope.contentUrl = true;
-                $scope.tabletView = "";
-            }else{
-                $scope.contentUrl = false;
-                $scope.tabletView = "tabletView";
+                $scope.deviceView = "mobile";
+            }else if(deviceType == "tablet"){
+                $scope.deviceView = "tabletView";
+
+            }else if(deviceType == "web"){
+                $scope.deviceView = "web";
+
             }
 
 

@@ -21,7 +21,7 @@ background-size: 230px 480px;
 }
 
 .obl-dashboard-apps ul li{
-    margin-right: 2.3% !important;
+    margin: 0 1% !important;
     margin-bottom: 40px !important;
     outline: none;
 	float: left;

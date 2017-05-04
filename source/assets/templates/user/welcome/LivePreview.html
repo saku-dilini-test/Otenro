@@ -6,14 +6,14 @@
     <div class="mdapp-device-selector2 clearfix">
         <div class="mobile-area">
             <p>Mobile App</p>
-            <a class="mobile-icon" href ng-click="changeDevice('mobile')" ng-class="{'current-device': !tabletView}"></a>
-            <a class="tablet-icon" href ng-click="changeDevice('tablet-live')" ng-class="{'current-device': tabletView}"></a>
+            <a class="mobile-icon" href ng-click="changeDevice('mobile')" ng-class="{'current-device': deviceView == 'mobile'}"></a>
+            <a class="tablet-icon" href ng-click="changeDevice('tablet')" ng-class="{'current-device': deviceView == 'tabletView'}"></a>
         </div>
         <div class="website-area">
             <div class="pull-left">
                 <p>Website</p>
-                <a  href ng-click="temporaryMessage()" class="desktop-icon size-fix"></a>
-                <a  href ng-click="temporaryMessage()" class="tablet-icon"></a>
+                <a  href ng-click="changeDevice('web')" class="desktop-icon size-fix" ng-class="{'current-device': deviceView == 'web'}"></a>
+                <!--<a  href ng-click="temporaryMessage()" class="tablet-icon"></a>-->
             </div>
 
         </div>
@@ -52,9 +52,16 @@
         </ul>
     </div>
     <div class="mdapp-content-livePreview">
-        <div class="device-preview-livePreview" ng-class="tabletView">
+        <div class="device-preview-livePreview"  ng-class="deviceView" ng-if="deviceView == 'mobile' || deviceView == 'tabletView'">
             <div class="device-simulator" overflow="scroll">
-                <me-iphone device-path="{{contentUrl}}" tmp-url="{{appTemplateUrl}}"></me-iphone>
+                <me-iphone device-path="{{deviceView}}" tmp-url="{{appTemplateUrl}}"></me-iphone>
+            </div>
+        </div>
+        <div class="device-preview" ng-class="deviceView" ng-if="deviceView == 'web'">
+            <div overflow="scroll">
+                    <!--<me-tablet ng-show="tabletView" tmp-url="{{appTemplateUrl}}"></me-tablet>-->
+                    <me-iphone device-path="{{deviceView}}" tmp-url="{{urlPath1}}"></me-iphone>
+
             </div>
         </div>
     </div>

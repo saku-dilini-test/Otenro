@@ -5,14 +5,15 @@
   <title>TestApp2</title>
   <base href="./">
 
- 
+
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
 	 <link rel="icon" type="image/x-icon" href="favicon.ico">
 	 <!-- app manifest -->
 	 <link rel="manifest" href="../src/manifest.webapp">
 	 <!--bootstrap -->
   <link rel="stylesheet" href="../src/assets/css/bootstrap.min.css" />
-	 <!-- Add to home screen for Safari on iOS -->
+  <!--custom style sheet -->
+  <link rel="stylesheet" href="../src/assets/css/style.css" />	 <!-- Add to home screen for Safari on iOS -->
 	 <meta name="apple-mobile-web-app-capable" content="yes">
 	 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 	 <meta name="apple-mobile-web-app-title" content="Hello Mobile">
@@ -27,7 +28,7 @@
     <script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
     <script src="systemjs.config.js"></script>
     <script>
-      System.import('main.js').catch(function(err){ console.error(err); });
+      System.import('main.ts').catch(function(err){ console.error(err); });
     </script>
 </head>
 <body>

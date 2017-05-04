@@ -81,10 +81,6 @@
 }
 
 .obl-dashboard-apps{
-       width: 95%;
-    margin: 0 auto;
-    padding: 0 18px;
-	padding-left: 2.5%;
     text-align: center;
 }
 
@@ -166,18 +162,20 @@
 .obl-app-templates2 li a .img-screen{
     height: auto;
     position: absolute;
-    top: 26px;
-    width: 556px;
-    height: 313px;
-    left: 26px;
+    top: 30px;
+    width: 553px;
+    height: 362px;
+    left: 31px;
+    border-radius: 3px;
 }
 .obl-app-templates2 li a .img-mobile{
     height: auto;
     position: absolute;
     top: 55px;
-    width: 183px;
+    width: 184px;
     height: 328px;
     left: 13px;
+    border-radius: 3px;
 }
 
 .me-dialog-phone-view{
@@ -275,7 +273,7 @@
 }
 
 
-.obl-dashboard-tab-height .col-md-5 span{
+.obl-dashboard-tab-height .col-sm-12 span, .obl-dashboard-tab-height .col-md-4 span, .obl-dashboard-tab-height .col-lg-5 span{
     font-size:12px;
     text-transform:capitalize;
     color:#000;
@@ -285,7 +283,7 @@
     max-width:32%;
 }
 .obl-dashboard-tab-height .img-thumbnail2{
-    max-width:18%;
+    max-width:15%;
 }
 
 .dashboard-dialog{

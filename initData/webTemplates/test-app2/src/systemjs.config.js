@@ -5,9 +5,6 @@
  * Adjust as necessary for your application needs.
  */
 (function (global) {
-   System
-      .import('main.ts')
-      .then(null, console.error.bind(console));
   System.config({
     // DEMO ONLY! REAL CODE SHOULD NOT TRANSPILE IN THE BROWSER
     transpiler: 'ts',
@@ -65,12 +62,7 @@
     packages: {
       app: {
         main: './main.ts',
-        defaultExtension: 'ts',
-        meta: {
-          './*.ts': {
-            loader: 'systemjs-angular-loader.js'
-          }
-        }
+        defaultExtension: 'ts'
       },
       rxjs: {
         defaultExtension: 'js'

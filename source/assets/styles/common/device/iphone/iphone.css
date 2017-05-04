@@ -106,3 +106,30 @@
     width: 45%;
     height: 45%;
 }
+
+/*web app css*/
+
+.web{
+    padding:0 10px;
+    height:768px;
+}
+
+.webApp{
+    width: 100%;
+    height: 100%;
+}
+
+.webScreen{
+    width: 100%;
+    height: 100%;
+}
+
+.webAppViewClass{
+    width:100%;
+    height: 600px;
+    box-shadow: 0 0 4px 4px rgba(0,0,0,0.1);
+}
+
+.webAppViewClass iframe{
+    border:0px;
+}

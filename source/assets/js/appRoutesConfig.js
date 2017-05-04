@@ -74,11 +74,6 @@ angular.module('app')
             controller : 'TemplatesCtrl',
             templateUrl : 'user/welcome/Templates.html'
 
-      }).state('user.templates2',{
-            url :'/templates2',
-            controller : 'TemplatesCtrl',
-            templateUrl : 'user/welcome/Templates2.html'
-
       }).state('anon.register', {
             url: '/register',
             params: {

@@ -18,18 +18,24 @@
         $scope.editTemplateUrl =  $sce.trustAsResourceUrl($scope.tmpUrl);
         $scope.device = $scope.devicePath;
         $scope.$watch('devicePath', function (val) {
-            if (val == 'true'){
+            if (val == 'mobile'){
                 $scope.phone = true;
                 $scope.tablet = false;
                 $scope.deviceClass = "iphone";
                 $scope.deviceScreenClass = "screen";
                 $scope.appViewClass = "appViewClass";
-            }else{
+            }else if(val == 'tabletView'){
                 $scope.tablet = true;
                 $scope.phone = false;
                 $scope.deviceClass = "tablet";
                 $scope.deviceScreenClass = "tabScreen";
                 $scope.appViewClass = "tabappViewClass";
+            }else {
+                $scope.deviceClass = "webApp";
+                $scope.deviceScreenClass = "webScreen";
+                $scope.appViewClass = "webAppViewClass";
+
+
             }
         });
     }
