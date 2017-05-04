@@ -208,7 +208,7 @@
                     var tempAppParams = {
                         'appName': $scope.appName,
                         'templateId': templateId,
-                        'templateName': templateName,
+                        'templateName': "test-app",
                         'templateUrl':templateUrl,
                         'templateCategory' : templateCategory,
                         'userId':$auth.getPayload().id
@@ -223,7 +223,7 @@
                                 });
                             }else{
                                 var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                    +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
 
                                 mySharedService.prepForBroadcast(url);
 
@@ -273,7 +273,7 @@
 
                             }else {
                                 var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                    +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
 
                                 mySharedService.prepForBroadcast(url);
 

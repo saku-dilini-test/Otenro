@@ -34,12 +34,6 @@ module.exports = {
                message: "New Application has been created"
            });
        }
-        if (req.body.templateName=='foodDemoApp'){
-            res.send({
-                appId: '5859117bac4a80fb5265ab04',
-                message: "New Application has been created"
-            });
-        }
 
     },
 
