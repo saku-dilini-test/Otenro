@@ -158,6 +158,18 @@ module.exports = {
                res.send(msg);
         });
     },
+    sendRegisterConfirmationEmail : function(req,res){
+        var email = req.body.email;
+
+        var data = {
+            email: email
+        }
+
+        var msg = sentMails.sendRegisterConfirmation(data, function (msg)
+        {
+            res.send(msg);
+        });
+    },
     viewImages : function(req,res){
 
         var appRoot = path.resolve();
