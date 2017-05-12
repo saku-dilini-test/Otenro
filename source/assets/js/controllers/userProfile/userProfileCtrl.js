@@ -76,6 +76,8 @@
                 });
             })
 
+            $scope.userEdit.currentPassword = "";
+
         };
         $scope.saveBillings = function(billingEdit){
             billingEdit.userId = $auth.getPayload().id;
