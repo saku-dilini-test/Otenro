@@ -49,7 +49,10 @@
     "name": "Kalani",
     "email": "kalani@onbitlabs.com"
   },
-  "dependencies": {},
+  "dependencies": {
+    "braintree": "^2.0.2",
+    "seneca-entity": "^2.0.0"
+  },
   "description": "mobile apis in media and ecommerce app",
   "devDependencies": {},
   "directories": {},

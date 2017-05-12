@@ -12,87 +12,100 @@ var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 
 
-module.exports = {
 
-    getArticleCategoryByAppId : function(req,res) {
-    sails.log.debug("getArticleCategoryByAppId loading..");
+module.exports = function(option) {
 
-    var appId = req.param('appId');
-    var searchApp = {
-        appId: appId,
-    };
-        ArticleCategory.find().where(searchApp).exec(function (err, result) {
-            if (err) return done(err);
-            res.json(result);
-    });
-},
+    var seneca = this;
+    var MongoClient = require('mongodb').MongoClient;
 
-    getArticleById : function(req,res) {
-         sails.log.debug("getArticleById loading..");
-        var id = req.param('articleId');
-        var searchApp = {
-            id : id
-        };
-        Article.findOne().where(searchApp).exec(function (err, artilce) {
-            if (err) return done(err);
-            res.json(artilce);
-        });
-},
+    var url = 'mongodb://localhost:27017/appBuilder';
 
-    getArticles : function(req,res) {
-        sails.log.debug("getArticles loading..");
-        var appId = req.param('appId');
-        var categoryId = req.param('categoryId');
-        //sails.log.info(appId);
-        var searchApp = {
-            appId: appId,
-            categoryId : categoryId
-        };
-        Article.find({ select: ['appId','title','imageUrl','categoryId']}).where(searchApp).exec(function (err, result) {
-            if (err) return done(err);
-            //sails.log.info(result);
-            res.json(result);
-        });
-    },
+    MongoClient.connect(url, function(err, db){
+
+       seneca.add( {cmd:'getArticleCategoryByAppId' }, getArticleCategoryByAppId );
+       seneca.add( {cmd:'getArticles' }, getArticles );
+       seneca.add( {cmd:'getArticleByCategoryId' }, getArticleByCategoryId );
+       seneca.add( {cmd:'getArticleById' }, getArticleById );
+       seneca.add( {cmd:'getCommentsDummy' }, getCommentsDummy );
 
 
-    getArticleCategoryById : function(req,res) {
-         sails.log.debug("getArticleCategoryById loading..");
-        var id = req.param('categoryId');
-        var searchApp = {
-            id : id
-        };
-        ArticleCategory.findOne().where(searchApp).exec(function (err, artilce) {
-            if (err) return done(err);
-            res.json(artilce);
-        });
-    },
+    function getArticleCategoryByAppId (req,Done){
+
+            var collection = db.collection('articlecategory');
+            collection.findOne({appId:req.appId}, function(err, data) {
+                console.log('dadada'+data);
+
+                Done( null, { result:data} );
+            });
+
+    }
+
+    function getArticles (req,Done){
+
+            var collection = db.collection('article');
+            console.log('dadada'+req.categoryId);
+            collection.findOne({appId:req.appId,categoryId:req.categoryId}, function(err, data) {
+
+                var result={'appId':data.appId,'title':data.title,'imageUrl':data.imageUrl,'categoryId':data.categoryId}
+                Done( null, { result:result} );
+            });
+
+    }
+
 
     /**
-     * Return Article Collection for given category ID
-     * @param req
-     * @param res
-     */
-    getArticleByCategoryId : function(req,res) {
-        sails.log.debug("getArticleByCategoryId loading..");
-        var categoryId = req.param('categoryId');
-        var searchApp = {
-            categoryId : categoryId
-        };
-        Article.find().where(searchApp).exec(function (err, result) {
-            if (err) return done(err);
-            res.json(result);
-        });
-    },
-    /**
-     * return two dummy comments json object for every request
-     *
-     * @param req
-     * @param res
-     */
-    getCommentsDummy : function(req,res) {
+         * Return Article Collection for given category ID
+         * @param req
+         * @param res
+         */
 
-         sails.log.debug("getCommentsDummy loading..");
+
+
+    function getArticleByCategoryId (req,Done){
+
+            var collection = db.collection('article');
+            collection.findOne({categoryId:req.categoryId}, function(err, data) {
+
+                console.log('dadada'+req.categoryId);
+                Done( null, { result:data} );
+            });
+
+    }
+
+    function getArticleById (req,Done){
+
+            var collection = db.collection('article');
+            collection.findOne({id:req.articleId}, function(err, data) {
+
+                console.log('dadada'+req.categoryId);
+                Done( null, { result:data} );
+            });
+
+    }
+
+
+
+    function getArticleCategoryById (req,Done){
+
+            var collection = db.collection('articlecategory');
+            collection.findOne({id:req.articleId}, function(err, data) {
+                console.log("id"+id)
+                console.log('dadada'+req.categoryId);
+                Done( null, { result:data} );
+            });
+
+    }
+
+
+    /**
+         * return two dummy comments json object for every request
+         *
+         * @param req
+         * @param res
+         */
+
+    function getCommentsDummy (req,Done){
+
         var response = [
             {
                 author : {
@@ -109,9 +122,13 @@ module.exports = {
                 description : 'There will be two S12 (Luxury) sets '
             }
         ];
-        res.json(response);
+        Done( null, { result:response} );
     }
+
+    })
+
 
 
 
 }
+
