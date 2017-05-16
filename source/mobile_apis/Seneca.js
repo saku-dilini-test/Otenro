@@ -111,7 +111,13 @@ seneca.act({ role: 'process', cmd: 'register'}, function ( err, result ) {
    if (err) return console.error(err)
       console.log(result);
 } )
+
 seneca.act({ role: 'process', cmd: 'saveorder'}, function ( err, result ) {
+   if (err) return console.error(err)
+      console.log(result);
+} )
+
+seneca.act({ role: 'process', cmd: 'authenticate'}, function ( err, result ) {
    if (err) return console.error(err)
       console.log(result);
 } )
@@ -149,7 +155,7 @@ seneca.act({ role: 'process', cmd: 'getCommentsDummy'}, function ( err, result )
 
 
 
-seneca.listen({ port: 8080, host: '192.168.8.54' })
+seneca.listen({ port: 8080, host: '100.64.113.123' })
 
 
 
