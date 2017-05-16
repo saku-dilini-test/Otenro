@@ -36,14 +36,14 @@ module.exports = function(option) {
        seneca.add( {cmd:'iconAllowance' }, iconAllowance );
        seneca.add( {cmd:'getSubChildById' }, getSubChildById );
        seneca.add( {cmd:'getShippingPickupInfo' }, getShippingPickupInfo );
-       //seneca.add( {cmd:'getClientToken' }, getClientToken );
+       seneca.add( {cmd:'getClientToken' }, getClientToken );
        seneca.add( {cmd:'getTaxInfoByCountry' }, getTaxInfoByCountry );
        seneca.add( {cmd:'getShippingInfoByCountry' }, getShippingInfoByCountry );
        seneca.add( {cmd:'updateInventory' }, updateInventory );
        seneca.add( {cmd:'register' }, register );
        seneca.add( {cmd:'authenticateForApp' }, authenticateForApp );
        seneca.add( {cmd:'authenticate' }, authenticate );
-       seneca.add( {cmd:'saveOrder' }, saveOrder );
+       //seneca.add( {cmd:'saveOrder' }, saveOrder );
 
 
 
@@ -78,7 +78,7 @@ module.exports = function(option) {
         if(req.appID != null){
             var collection = db.collection('application');
             collection.findOne({templateId:req.appID}, function(err, app) {
-                console.log('dadada'+app);
+
 
                 Done( null, { result:app} );
             });
@@ -90,7 +90,6 @@ module.exports = function(option) {
         if(req.appID != null){
             var collection = db.collection('SalesAndPromotion');
             collection.findOne({appId:req.appID}, function(err, app) {
-                console.log('dadada'+app);
 
                 Done( null, { result:app} );
             });
@@ -109,8 +108,6 @@ module.exports = function(option) {
         if(req.appID != null){
             var collection = db.collection('applicationtax');
             collection.findOne({appId:req.appID}, function(err, app) {
-                console.log('dadada'+app);
-
                 Done( null, { result:app} );
             });
         }
@@ -256,7 +253,6 @@ module.exports = function(option) {
             console.log("req[0]"+req.cart[0]);
             var collection = db.collection('thirdnavigation');
             collection.findOne({id:req.id}, function(err, app) {
-                console.log('dadada'+app);
                 for(var i =0;i<app[0].variants.length;i++){
                     if(app[0].variants[i].sku == data.sku){
                         app[0].variants[i].quantity = app[0].variants[i].quantity - data.qty;
@@ -279,7 +275,6 @@ module.exports = function(option) {
              if(typeof mainId == 'undefined'){
 
                    collection.findOne({appId:req.appID}, function(err, app) {
-                        console.log('dadada'+app);
                         Done( null, { result:app} );
                    });
              }
@@ -299,7 +294,6 @@ module.exports = function(option) {
         if(req.appID != null){
             var collection = db.collection('applicationstoresettings');
             collection.findOne({appId:req.appID}, function(err, data) {
-                console.log('dadada'+data);
 
                 Done( null, { result:data} );
             });
@@ -434,7 +428,7 @@ module.exports = function(option) {
 
                 },
                    success: function (){
-                   console.log('successssss');
+                   console.log('success');
                             JWT.encode({
                                  secret: '44f4f3be572ec33711a40a5b8b4',
                                  payload: {
@@ -543,7 +537,7 @@ module.exports = function(option) {
             var thirdNavi = [];
             var collection = db.collection('thirdnavigation');
             collection.findOne(searchApp, function(err, data) {
-                console.log('dadada'+data);
+
 
                 Done( null, { result:data} );
             });
@@ -587,34 +581,31 @@ module.exports = function(option) {
         if(req.appID != null){
             var collection = db.collection('shippingdetails');
             collection.findOne({appId:req.appID,shippingOption:'Pick up'}, function(err, data) {
-                console.log('dadada'+data);
 
                 Done( null, { result:data} );
             });
         }
     }
 
+  function getClientToken (req,Done){
+       braintree.connect({
+            environment: braintree.Environment.Sandbox,
+            merchantId: "vk2y7mb8s5vbhctg",
+            publicKey: "9bqjdssmgrrg7j8w",
+            privateKey: "b5f83bb6a33b0c3be424c45eddc5ad49"
 
-/*
-        getClientToken: function(req,res){
-            sails.log.debug("getClientToken Loading");
-            braintree.connect({
-                environment: braintree.Environment.Sandbox,
-                merchantId: "vk2y7mb8s5vbhctg",
-                publicKey: "9bqjdssmgrrg7j8w",
-                privateKey: "b5f83bb6a33b0c3be424c45eddc5ad49"
-            }).clientToken.generate({}, function (err, response) {
-                sails.log.info("error " + err);
-                if (err) return res.send(err);
-                sails.log.info("response " + response);
-                res.send(response.clientToken);
-            });
+       }).clientToken.generate({}, function (err, response) {
+            if (err) return err
+            console.log("response " + response);
+            Done( null, { result:response.clientToken} );
+       });
 
-        }*/
+    }
 
 
+})
 
-    })
+
 }
 
 

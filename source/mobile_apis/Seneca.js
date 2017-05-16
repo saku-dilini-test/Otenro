@@ -122,6 +122,11 @@ seneca.act({ role: 'process', cmd: 'authenticate'}, function ( err, result ) {
       console.log(result);
 } )
 
+seneca.act({ role: 'process', cmd: 'getClientToken'}, function ( err, result ) {
+   if (err) return console.error(err)
+      console.log(result);
+} )
+
 
 
 
