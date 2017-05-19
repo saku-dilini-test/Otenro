@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     angular.module('app')
-        .controller('RegisterController', ['$scope', '$state', 'Auth', 'toastr','initialData','$stateParams','commerceService', RegisterController]);
+        .controller('RegisterController', ['$scope', '$state', 'Auth', 'toastr','initialData','$stateParams', RegisterController]);
 
-    function RegisterController($scope, $state, Auth, toastr,initialData,$stateParams,commerceService) {
+    function RegisterController($scope, $state, Auth, toastr,initialData,$stateParams) {
 
         // -- Config -- 
         // Tell Us About yourself data array
@@ -20,7 +20,6 @@
                 if ($scope.user.email== 'support@otenro.com'){
                     $state.go('user.technicalSupporter');
                 }else {
-                    commerceService.sendRegisterVerificationLinkEmail(user);
                     $state.go('user.dashboard');
                 }
             }).catch(function onError() {

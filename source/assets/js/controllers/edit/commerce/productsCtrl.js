@@ -787,7 +787,8 @@
 
         // when product edit start in second tab and enable pagination
         if (initialData.product.id !== undefined || initialData.product.id !== '0'){
-            if(initialData.addVariant)
+
+            if(initialData.addVariant && initialData.product.id == '0')
             {
                 disableTabs(2, false, false, false, true);
             }else if(initialData.product.id == undefined){
@@ -841,7 +842,7 @@
                                       closeButton: true
                                  });
                                   return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null, true);
-                            }else if($scope.product.selection.length > 0 ){
+                            }else if($scope.product.selection.length > 0){
                                 for (var i = 0; i < $scope.product.selection.length; i++){
                                    if( $scope.product.selection[i].name.toLowerCase() ==  $scope.vType.toLowerCase()){
                                          toastr.error('Cannot rename or add by the same name', 'Error!', {
@@ -888,7 +889,7 @@
                                         toastr.success('Variant added', 'Success!', {
                                               closeButton: true
                                         });
-                                        if($scope.product.id == undefined || initialData.product.id == '0'){
+                                        if($scope.product.id == undefined){
                                             return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true)
                                         }else{
                                             return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,null, true);
@@ -913,11 +914,7 @@
                                       closeButton: true
 
                                   });
-                                if($scope.product.id == undefined || initialData.product.id == '0'){
-                                    return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true)
-                                }else{
-                                    return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,null, true);
-                                }
+                                return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true)
                             }
 
                         },
@@ -966,7 +963,7 @@
                                         }
                                     }
                                 },
-                                template:'<md-dialog aria-label="Deleting variant">'+
+                                template:'<md-dialog aria-label="Edit Child Menu">'+
                                 '<md-content >' +
                                 '<div class="md-dialog-header">' +
                                 '<h1>Deleting Variant Type </h1>' +

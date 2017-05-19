@@ -248,7 +248,6 @@
 
             // If Add new Menu Navigation
             if($scope.initialData.menu == 'addNewMenuNavigation'){
-                console.dir(initialData.prodItem)
                 //$log.debug("Add new Menu Navigation ");
                 mainMenuService.addMenu(file,$rootScope.appId,menu.name).success(function(data) {
                     var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
@@ -262,9 +261,7 @@
                     if(initialData.prodItem == null) {
                         mainMenuService.showMainMenuDialog();
                     }else{
-                        console.dir(initialData.prodItem.id )
-                        if(initialData.prodItem.id == undefined || initialData.prodItem.id == '0'){
-
+                        if(initialData.prodItem.id == undefined){
                             return commerceService.showAddProductsDialog(initialData.prodItem,true, null,'0', false)
                         }else{
                             return commerceService.showAddProductsDialog(initialData.prodItem,false);

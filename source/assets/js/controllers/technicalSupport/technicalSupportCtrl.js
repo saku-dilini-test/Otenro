@@ -94,7 +94,6 @@
                 technicalSupportService.getAllAppData()
                     .success(function (result) {
                         $scope.appList = result;
-                        $scope.serverURL = SERVER_URL;
                     }).error(function (error) {
                     toastr.error('Loading Error', 'Warning', {
                         closeButton: true

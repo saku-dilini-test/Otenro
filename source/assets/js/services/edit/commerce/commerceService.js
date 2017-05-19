@@ -278,9 +278,6 @@
             sendVerificationLinkEmail: function (data) {
                 return $http.post(SERVER_URL + 'edit/sendVerificationLinkEmail', data);
             },
-            sendRegisterVerificationLinkEmail: function (data) {
-                return $http.post(SERVER_URL + 'edit/sendRegisterConfirmationEmail', data);
-            },
             getEmailSettings: function (data) {
                 return $http.post(SERVER_URL + 'edit/getEmailSettings', data);
             },

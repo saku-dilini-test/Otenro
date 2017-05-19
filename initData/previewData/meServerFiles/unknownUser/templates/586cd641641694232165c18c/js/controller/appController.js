@@ -102,7 +102,7 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
                             "token": res.data.token,
                             "email": data.email,
                             "name": data.firstName,
-                            "phone": data.phone,
+                            "phone": data.phoneNumber,
                             "streetNumber": data.streetNumber,
                             "streetName": data.streetName,
                             "country": data.country,
