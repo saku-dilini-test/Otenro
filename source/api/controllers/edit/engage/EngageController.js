@@ -15,26 +15,24 @@ module.exports = {
     sendPushMessage: function(req, res){
 
         // Create push collection
-        /*  PushMessage.create(req.body).exec(function(err,data){
-         if(err) return done(err);*/
+        PushMessage.create(req.body).exec(function(err,data){
+            if(err) return done(err);
 
-        var findDevicedQuery = {
-            appId : req.body.appId
-        };
+            var findDevicedQuery = {
+                appId : req.body.appId
+            };
 
-        // Testing dummy data here
-        // var pushUrl = "https://api.ionic.io/push/notifications";
-        // var profile = "dev_push_sun";
-        // var Authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwM2RjZDE0ZS0zNGRhLTQyZDYtYTAyZi0wNWFmZmE3OTBjODAifQ.wB9jy0C3a0bn4eb4wKvr521UwqIB0gTQXn5DYk92_KE";
+            // Testing dummy data here
+            // var pushUrl = "https://api.ionic.io/push/notifications";
+            // var profile = "dev_push_sun";
+            // var Authorization = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIwM2RjZDE0ZS0zNGRhLTQyZDYtYTAyZi0wNWFmZmE3OTBjODAifQ.wB9jy0C3a0bn4eb4wKvr521UwqIB0gTQXn5DYk92_KE";
 
-        // Find device by appID
-        PushConfig.findOne(findDevicedQuery).exec(function(err,pushConfigData){
+            // Find device by appID
+            PushConfig.findOne(findDevicedQuery).exec(function(err,pushConfigData){
 
 
-            sails.log.debug( pushConfigData);
-            if (pushConfigData == 'undefined'){
-                return res.serverError();
-            }else {
+                sails.log.info( pushConfigData);
+
                 var Message = req.body.message;
                 var PushUrl = config.PUSH_API_URL;
                 var Profile = pushConfigData.profile;
@@ -42,7 +40,6 @@ module.exports = {
 
                 // Find device by appID
                 DeviceId.find(findDevicedQuery).exec(function(err,deviceArray){
-                    if (err) return res.send(err);
                     var message = req.body.message;
                     for(var i=0; i<deviceArray.length; i++){
                         // push API request
@@ -59,28 +56,25 @@ module.exports = {
                                     'Authorization': Authorization
                                 }} , function(error, response, body){
                                 if (error) sails.log.info(error);
-                                sails.log.info("push response "+JSON.stringify(response));
+			       sails.log.info("push response "+JSON.stringify(response));
                                 sails.log.info("push response "+response);
                             });
                     }
-                    PushMessage.create(req.body).exec(function(err,data){
-                        if(err) return done(err);
-                        res.send(data);
-                    });
+                    res.send(data);
                 });
-            }
+            });
         });
-        /*  });*/
     },
 
 
     saveSchedulePushMassage : function (req,res) {
 
+
         var findDevicedQuery = {
             appId : req.body.appId
         };
         PushConfig.findOne(findDevicedQuery).exec(function(err,pushConfigData) {
-
+            
             //sails.log.debug(pushConfigData);
             if (!pushConfigData) {
                 return res.serverError();
@@ -92,8 +86,8 @@ module.exports = {
                 });
             }
 
-        });
 
+        });
     },
 
     // get registered user Details
@@ -111,8 +105,8 @@ module.exports = {
 
 
     getMessageDetails: function(req, res){
-        var appId = req.param('appId');
-        var userId = req.param('userId');
+    var appId = req.param('appId');
+    var userId = req.param('userId');
         var searchApp ={
             appId: appId,
             userId:userId

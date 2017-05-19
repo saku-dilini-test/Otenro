@@ -37,7 +37,7 @@
 
                 <tbody>
                 <tr dir-paginate="app in appList | filter:search | itemsPerPage: 100">
-                    <td><a href="{{serverURL}}templates/viewTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">{{app.id}}</a></td>
+                    <td>{{app.id}}</td>
                     <td>{{app.appName}}</td>
                     <td>{{app.userId}}</td>
                     <td>{{app.status}}</td>
@@ -66,7 +66,6 @@
                         <th>User Id</th>
                         <th>About User</th>
                         <th>Created Date</th>
-                        <th>Last login</th>
                         </thead>
                            <tbody>
                            <tr dir-paginate="app in userList | filter:search | itemsPerPage: 100">
@@ -76,7 +75,6 @@
                             <td> {{app.id}} </td>
                             <td> {{app.yourselfReason}} </td>
                             <td> {{app.createdAt}} </td>
-                             <td> {{app.lastLoginTime}} </td>
                            </tr>
                            </tbody>
                     </table>

@@ -38,8 +38,6 @@ module.exports = {
           },
 
           success: function (){
-              User.update({email : req.body.email},{lastLoginTime : new Date()}, function(err1){
-              });
             createToken(user,res);
           }
         });

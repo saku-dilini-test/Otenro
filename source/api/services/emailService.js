@@ -5,7 +5,6 @@
 var request = require('request'),
     JWT = require('machinepack-jwt'),
     email = require("../../node_modules/emailjs/email"),
-    fs = require('fs-extra'),
     config = require('../services/config');
 var path = require('path');
 
@@ -20,41 +19,6 @@ var server = email.server.connect({
 module.exports = {
 
 
-    sendRegisterConfirmation: function(data, callback){
-        var emailBody = "";
-        var approot = path.resolve();
-        //var file = path.join(__dirname,  'output', index.html');
-        var serverOrg=config.server.host;
-        var imgPath = serverOrg + '/images/emailtemplates';
-        fs.readFile(approot + '/assets/templates/user/common/emailtemplates/index.html','utf8',function (err, mailbody) {
-            var replaceMailBody = mailbody.replace(/#img#/g,imgPath);
-
-            var emailDetails = {
-                text: "",
-                from: "onbitlabs@gmail.com",
-                to: data.email,
-                subject: "Welcome to Otenro ",
-                attachment: [
-                    {
-                        data: replaceMailBody,
-                        alternative: true
-                    }
-                ]
-            };
-           
-            server.send(emailDetails, function (err, message) {
-                //sails.log.info(err || message);
-                console.log(err);
-                if (err) {
-                    return callback(err);
-                }
-                callback(null, 'ok');
-            });
-        });
-
-
-
-    },
     sendConfirmEmail: function (data, callback) {
 
         //var data = this.getUserEmailData(emailsParms,res);

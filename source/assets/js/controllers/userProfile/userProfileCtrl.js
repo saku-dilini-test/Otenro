@@ -56,7 +56,6 @@
 
 
         $scope.editUserProfile = function(params){
-            $scope.password = false;
             $scope.user={
                 email : params.email,
                 password : params.currentPassword
@@ -76,8 +75,6 @@
                   closeButton: true
                 });
             })
-
-            $scope.userEdit.currentPassword = "";
 
         };
         $scope.saveBillings = function(billingEdit){
