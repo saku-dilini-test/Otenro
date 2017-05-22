@@ -71,7 +71,7 @@
                 return engageService.showPushMessageDialog();
               })
               .error(function(err){
-               toastr.error('Push massage configuration  not found. Please contact support@otenro.com ', 'Warning', {
+               toastr.error('Unable to save. Please try again.', 'Warning', {
                    closeButton: true
                });
               })
@@ -89,7 +89,7 @@
                     return engageService.showPushMessageDialog();
                   })
                   .error(function(err){
-                    toastr.error('Push massage configuration  not found . Please contact support@otenro.com' , 'Warning', {
+                    toastr.error('Error while Saving', 'Warning', {
                         closeButton: true
                     });
                   })
