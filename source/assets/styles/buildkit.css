@@ -2346,6 +2346,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     color:gray;
 }
 .add-new-variant{
+
     position: fixed;
     bottom: 80px;
 }
@@ -2366,3 +2367,4 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     letter-spacing: 1.5px;
     font-size: 11px;
 }
+

@@ -149,44 +149,24 @@
         $scope.getArray = function(){
             $scope.exportArrayN = [];
             angular.forEach($scope.exportArray, function(value, key) {
-                if (value.quantity) {
-                    value.quantity = value.quantity;
-                } else if (value.unlimited) {
-                    value.quantity = 'unlimited';
-                }
-                $scope.printVariants = function (selection) {
-                    selection.length
+            if(value.quantity){
+                value.quantity  = value.quantity;
+            }else if(value.unlimited){
+                value.quantity  = 'unlimited';
+            }
+                $scope.exportArrayN.push({
 
-                    if(selection.length == 1){
-                        $scope.selectionArray = selection[0].name + "-" + selection[0].vType;
-                    }else if(selection.length == 2){
-                        $scope.selectionArray = selection[0].name + "-" + selection[0].vType
-                            +"\n"+selection[1].name + "-" + selection[1].vType;
-                    }else if(selection.length == 3){
-                        $scope.selectionArray = selection[0].name + "-" + selection[0].vType;
-                        +"\n"+selection[1].name + "-" + selection[1].vType
-                        +"\n"+selection[2].name + "-" + selection[2].vType
-                    }else{
-                        $scope.selectionArray = selection[0].name + "-" + selection[0].vType;
-                        +"\n"+selection[1].name + "-" + selection[1].vType
-                        +"\n"+selection[2].name + "-" + selection[2].vType
-                        +"\n"+selection[3].name + "-" + selection[3].vType
-                    }
-
-                    return $scope.selectionArray;
-                }
-
-                    $scope.exportArrayN.push({
-
-                        'Name': value.name,
-                        'sku': value.sku,
-                        'price': value.price,
-                        'quantity': value.quantity,
-                        'weight': value.weight,
-                        'variants': $scope.printVariants(value.selection),
-                    });
+                    'Name' : value.name,
+                    'sku' : value.sku,
+                    'price' : value.price,
+                    'quantity' : value.quantity,
+                    'weight' : value.weight,
+                    'variantType' : value.selection[0].name
 
 
+
+
+                });
             });
             return $scope.exportArrayN;
         }
