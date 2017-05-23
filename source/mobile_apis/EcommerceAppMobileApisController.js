@@ -13,7 +13,6 @@ var braintree = require("braintree");
 var JWT = require('machinepack-jwt');
 Passwords = require('machinepack-passwords');
 var sentMails = require('../mobile_apis/Services/emailService.js');
-var str2json = require('string-to-json');
 //var config = require('../mobile_apis/Services/config.js');
 
 
@@ -125,7 +124,7 @@ module.exports = function(option) {
 
             var collection = db.collection('country');
             collection.find().toArray(function(err, app){
-                console.log('dadada'+app);
+                console.log('appdataaaaaaaaaaaaaaaaa'+app);
                 Done( null, { result:app} );
             });
 
