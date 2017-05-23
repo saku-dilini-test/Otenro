@@ -122,13 +122,13 @@ module.exports = function(option) {
 
 
     function getAllCountry (req,Done){
-        if(req.appID != null){
+
             var collection = db.collection('country');
             collection.find().toArray(function(err, app){
                 console.log('dadada'+app);
                 Done( null, { result:app} );
             });
-        }
+
     }
 
     /**
@@ -140,8 +140,8 @@ module.exports = function(option) {
     function getShippingInfo (req,Done){
 
             var collection = db.collection('shippingdetails');
-            collection.findOne({appId:req.appID}, function(err, app) {
-                console.log('dadada'+app);
+            collection.findOne({appId:req.appId}, function(err, app) {
+                console.log('data'+app);
 
                 Done( null, { result:app} );
             });
@@ -159,7 +159,7 @@ module.exports = function(option) {
     function getIPGInfo (req,Done){
         if(req.appID != null){
             var collection = db.collection('ipgdetails');
-            collection.findOne({appId:req.appID}, function(err, app) {
+            collection.findOne({appId:req.appId}, function(err, app) {
                 console.log('dadada'+app);
 
                 Done( null, { result:app} );
@@ -305,7 +305,7 @@ module.exports = function(option) {
         }
    }
 
-
+///
     function updateInventory (req,Done){
      /*Manually updating the relevant quantity in the ThirdNavigation*/
 
@@ -645,6 +645,7 @@ module.exports = function(option) {
 
 
   function getClientToken (req,Done){
+  console.log('get get get get get')
        braintree.connect({
             environment: braintree.Environment.Sandbox,
             merchantId: "vk2y7mb8s5vbhctg",
