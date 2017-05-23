@@ -6,11 +6,14 @@
  *
  * @help        :: See http://senecajs.org/getting-started/
  */
+ var config = require('../mobile_apis/Services/config');
 var seneca = require('seneca')()
 
 seneca.use('CommonMobileApisController');
 seneca.use('EcommerceAppMobileApisController');
 seneca.use('MediaAppMobileApisController');
+
+
 
 /*Common Mobile Api*/
 
@@ -160,7 +163,6 @@ seneca.act({ role: 'process', cmd: 'getCommentsDummy'}, function ( err, result )
 
 
 
-seneca.listen({ port: 8080, host: '100.64.113.123' })
-
+seneca.listen({ port:8080, host:'192.168.8.63' })
 
 

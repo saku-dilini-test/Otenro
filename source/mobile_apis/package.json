@@ -51,9 +51,14 @@
   },
   "dependencies": {
     "braintree": "^2.0.2",
+    "emailjs": "^1.0.8",
+    "express": "^4.15.3",
     "machinepack-jwt": "^0.1.14",
     "machinepack-passwords": "^2.3.0",
-    "seneca-entity": "^2.0.0"
+    "path": "^0.12.7",
+    "request": "^2.81.0",
+    "seneca-entity": "^2.0.0",
+    "seneca-web": "^2.0.0"
   },
   "description": "mobile apis in media and ecommerce app",
   "devDependencies": {},

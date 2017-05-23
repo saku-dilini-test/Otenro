@@ -11,7 +11,12 @@
 
 var braintree = require("braintree");
 var JWT = require('machinepack-jwt');
-Passwords = require('machinepack-passwords'),
+Passwords = require('machinepack-passwords');
+var sentMails = require('../mobile_apis/Services/emailService.js');
+var str2json = require('string-to-json');
+//var config = require('../mobile_apis/Services/config.js');
+
+
 
 
 
@@ -20,8 +25,9 @@ module.exports = function(option) {
 
     var seneca = this;
     var MongoClient = require('mongodb').MongoClient;
-
     var url = 'mongodb://localhost:27017/appBuilder';
+    var ObjectID = require('mongodb').ObjectID;
+
 
     MongoClient.connect(url, function(err, db){
 
@@ -43,7 +49,7 @@ module.exports = function(option) {
        seneca.add( {cmd:'register' }, register );
        seneca.add( {cmd:'authenticateForApp' }, authenticateForApp );
        seneca.add( {cmd:'authenticate' }, authenticate );
-       //seneca.add( {cmd:'saveOrder' }, saveOrder );
+       seneca.add( {cmd:'saveOrder' }, saveOrder );
 
 
 
@@ -60,7 +66,7 @@ module.exports = function(option) {
             var collection = db.collection('thirdnavigation');
             var thirdNavi = [];
             collection.findOne({appId:req.appID,childId:req.childId,published:'YES'}, function(err, app) {
-                console.log('dadada'+app);
+                console.log('app'+app);
                 Done( null, { result:app} );
             });
         }
@@ -114,6 +120,7 @@ module.exports = function(option) {
 
     }
 
+
     function getAllCountry (req,Done){
         if(req.appID != null){
             var collection = db.collection('country');
@@ -161,91 +168,145 @@ module.exports = function(option) {
     }
 
 
-/*
-//post
-
-
    function saveOrder (req,Done){
 
-            var a = req.data;
-            console.log('sssssssssss'+a);
-            var collection = db.collection('applicationorder');
-            data['paymentStatus'] = 'Pending';
-            data['fulfillmentStatus'] = 'Pending';
-            console.log(data['paymentStatus']);
+       var data = req;
 
-            if(data.pickupId == null){
-               collection.insert(req.data, function(err, data){
-                     console.log('data'+JSON.stringify(data));
+       var collection = db.collection('applicationorder');
+       data['paymentStatus'] = 'Pending';
+       data['fulfillmentStatus'] = 'Pending';
+
+       if(data.pickupId == null){
+
+             var output = JSON.parse(data.item);
+
+                  console.log(JSON.stringify(output))
+
+                  var Data = {
+                      'appId' : data.appId,
+                      'registeredUser': data.registeredUser,
+                      'item':output,
+                      'amount' : data.amount,
+                      'customerName' :data.customerName,
+                      'deliveryNo' : data.deliveryNo,
+                      'deliveryStreet' :data.deliveryStreet,
+                      'deliveryCity' : data.deliveryCity,
+                      'deliveryCountry' : data.deliveryCountry,
+                      'deliveryZip': data.deliveryZip,
+                      'tax' :   data.tax,
+                      'shippingCost' :data.shippingCost,
+                      'shippingOpt' :data.shippingOpt,
+                      'email': data.email,
+                      'currency': data.currency,
+                      'paymentStatus':data.paymentStatus,
+                      'fulfillmentStatus':data.fulfillmentStatus,
+                      'createdAt':new Date(),
+                      'updatedAt':new Date()
+
+                  }
+
+                  collection.insert(Data,function(err, order){
+                       if(err){
+                           console.log('err:::'+err)
+                       }
+                       var obj_id = new ObjectID(Data.appId);
+                       var collection = db.collection('application');
+                       collection.findOne({_id:obj_id},function(err,app){
+
+                           Data['userId'] = app.userId;
+                           console.log(':::::::::::::::::::'+Data['userId'])
+
+                           sentMails.sendOrderEmail(Data,function (err,msg) {
+
+                                if (err) {
+                                      console.log('err'+err);
+                                      return  err;
+
+                                }
+
+                           })
+                           Done( null, { result:order} );
+
+                       })
+
+
+                  })
+
+        }
+
+        else{
+
+            var collection = db.collection('shippingdetails');
+            var obj_id = new ObjectID(data.pickupId);
+            collection.findOne({_id:obj_id,appId:data.appId},function(err,pickUp){
+
+                if (err){
+                    console.log(err);
+                    return err;
+                }
+
+               var array = JSON.stringify([pickUp])
+               var pickUpArray = JSON.parse(array);
+
+               data.pickUp = pickUpArray[0];
+               data.option = 'pickUp';
+
+               var output = JSON.parse(data.item);
+               var Data = {
+                    'appId' : data.appId,
+                    'registeredUser' : data.registeredUser,
+                    'item' : output,
+                    'amount' : data.amount,
+                    'customerName' : data.customerName,
+                    'telNumber' : data.telNumber,
+                    'tax' : data.tax,
+                    'email' : data.email,
+                    'currency' : data.currency,
+                    'paymentStatus' : data.paymentStatus,
+                    'fulfillmentStatus' : data.fulfillmentStatus,
+                    'pickUp' : data.pickUp,
+                    'option': data.option,
+                    'createdAt':new Date(),
+                    'updatedAt':new Date()
+
+               }
+
+
+                var collection = db.collection('applicationorder');
+                collection.insert(Data,function(err, order){
+
+                    if(err){
+                        console.log(err)
+                        return err
+
+                    }
+                    var obj_id = new ObjectID(Data.appId);
+                    var collection = db.collection('application');
+                    collection.findOne({_id:obj_id},function(err,app){
+
+                        Data['userId'] = app.userId;
+
+                        sentMails.sendOrderEmail(Data,function (err,msg) {
+
+                                if (err) {
+                                      console.log('err'+err);
+                                      return  err;
+
+                                }
+
+                        })
+                        Done( null, { result:order} );
+
+                    })
+
+                })
 
             })
-
-            }
-            }
-*/
+        }
+   }
 
 
-
-/*
-    saveOrder : function(req,res) {
-
-            var data = req.body;
-            data['paymentStatus'] = 'Pending';
-            data['fulfillmentStatus'] = 'Pending';
-
-            sails.log.info(data);
-            if(data.pickupId == null){
-                ApplicationOrder.create(data).exec(function (err, order) {
-                    sails.log.info(order);
-
-                    if (err) res.send(err);
-                    var searchApp = {
-                        id: order.appId
-                    };
-                    sails.log.info(searchApp);
-                    Application.findOne(searchApp).exec(function (err, app) {
-                        order['userId'] = app.userId;
-                    sentMails.sendOrderEmail(order,function (err,msg) {
-                        sails.log.info(err);
-                        if (err) {
-                            return  res.send(500);
-                        }
-                    });
-                    });
-
-                    res.send('ok');
-                });
-            }
-            else{
-               ShippingDetails.find({id:data.pickupId,appId:data.appId}).exec(function(err,pickUp){
-                if(err) res.send(err);
-                data.pickUp = pickUp[0];
-                data.option = 'pickUp';
-                ApplicationOrder.create(data).exec(function (err, order) {
-                    if (err) res.send(err);
-                    var searchApp = {
-                        id: order.appId
-                    };
-                    sails.log.info(searchApp);
-                    Application.findOne(searchApp).exec(function (err, app) {
-                        order['userId'] = app.userId;
-                        sentMails.sendOrderEmail(order,function (err,msg) {
-                            sails.log.info(err);
-                            if (err) {
-                                return  res.send(500);
-                            }
-                        });
-                    });
-                    res.send('ok');
-                });
-               });
-            }
-            sails.log.debug("saveOrder post..");
-        },*/
-
-
-
-     function updateInventory (req,Done){
+    function updateInventory (req,Done){
      /*Manually updating the relevant quantity in the ThirdNavigation*/
 
             var obj = [];
@@ -265,7 +326,7 @@ module.exports = function(option) {
 
          });
           Done( null, { result:obj} );
-     }
+    }
 
     function getSpecificChild (req,Done){
      /**
@@ -286,7 +347,6 @@ module.exports = function(option) {
                    });
 
              }
-
     }
 
 
@@ -307,39 +367,38 @@ module.exports = function(option) {
          * @param res
          */
 
-        function getShippingInfoByCountry (req,Done){
+    function getShippingInfoByCountry (req,Done){
 
-                var data = req;
-                console.log(req.appId)
-                //console.log(req.country)
-                var appId = req.appId;
-                var country = req.country;
-                var searchQuery = {
-                            appId:appId,
-                            countryRestriction:{
-                                $elemMatch:{
-                                    countryName:country
-                                }
-                            }
-                        };
+          var data = req;
+          console.log(req.appId)
+          //console.log(req.country)
+          var appId = req.appId;
+          var country = req.country;
+          var searchQuery = {
+               appId:appId,
+               countryRestriction:{
+                    $elemMatch:{
+                         countryName:country
+                    }
+               }
+          };
 
                 //console.log('sdsdsa'+searchQuery);
-                var collection = db.collection('shippingdetails');
+          var collection = db.collection('shippingdetails');
 
-                collection.findOne(searchQuery, function(err, data) {
+           collection.findOne(searchQuery, function(err, data) {
 
-                    if(data){
-                        collection.insert(data, function(err, data){
+                 if(data){
+                      collection.insert(data, function(err, data){
                              console.log('data'+JSON.stringify(data));
-                        })
+                       })
+                 }
+                 Done( null, { data:data} );
 
-                    }
-                    Done( null, { data:data} );
 
+           });
 
-                });
-
-        }
+    }
 
 
     function register (req,Done){
@@ -465,7 +524,7 @@ module.exports = function(option) {
      }
 
 
-        function authenticate (req,Done){
+     function authenticate (req,Done){
 
         var collection = db.collection('appuser');
         collection.findOne({email:req.email},function foundUser(err, user){
@@ -515,10 +574,6 @@ module.exports = function(option) {
                     }
                 });
 
-
-
-
-
             }
 
         })
@@ -530,9 +585,10 @@ module.exports = function(option) {
 
 
     function getSubChildById (req,Done){
+            var obj_id = new ObjectID(req.productId);
             var productId = req.productId
             var searchApp = {
-                id: productId
+                _id: obj_id
             };
             var thirdNavi = [];
             var collection = db.collection('thirdnavigation');
@@ -550,34 +606,34 @@ module.exports = function(option) {
          * @param res
          */
 
-        function getTaxInfoByCountry (req,Done){
-                 var appId = req.appId;
-                 var country = req.country;
-                 var searchQuery = {
-                             appId:appId,
-                             countryRestriction:{
-                                 $elemMatch:{
-                                     countryName:country
-                                 }
-                             }
-                         };
+    function getTaxInfoByCountry (req,Done){
+          var appId = req.appId;
+          var country = req.country;
+          var searchQuery = {
+                appId:appId,
+                countryRestriction:{
+                      $elemMatch:{
+                            countryName:country
+                      }
+                }
+          };
 
-                 var collection = db.collection('applicationtax');
+           var collection = db.collection('applicationtax');
 
-                 collection.findOne(searchQuery, function(err, data) {
-                    Done( null, { data:data} );
-                     if(data){
-                         collection.insert(data, function(err, data){
-                              console.log('data'+JSON.stringify(data));
-                         })
-                     }
+           collection.findOne(searchQuery, function(err, data) {
+                Done( null, { data:data} );
+                if(data){
+                    collection.insert(data, function(err, data){
+                         console.log('data'+JSON.stringify(data));
+                    })
+                }
 
-                 });
+           });
 
-         }
+     }
 
 
-    function getShippingPickupInfo (req,Done){
+   function getShippingPickupInfo (req,Done){
         if(req.appID != null){
             var collection = db.collection('shippingdetails');
             collection.findOne({appId:req.appID,shippingOption:'Pick up'}, function(err, data) {
@@ -585,7 +641,8 @@ module.exports = function(option) {
                 Done( null, { result:data} );
             });
         }
-    }
+   }
+
 
   function getClientToken (req,Done){
        braintree.connect({

@@ -11,8 +11,6 @@ var fs = require('fs-extra');
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
 
-
-
 module.exports = function(option) {
 
     var seneca = this;
@@ -74,8 +72,9 @@ module.exports = function(option) {
 
     function getArticleById (req,Done){
 
+            var obj_id = new ObjectID(req.articleId);
             var collection = db.collection('article');
-            collection.findOne({id:req.articleId}, function(err, data) {
+            collection.findOne({_id:obj_id}, function(err, data) {
 
                 console.log('dadada'+req.categoryId);
                 Done( null, { result:data} );
@@ -87,9 +86,10 @@ module.exports = function(option) {
 
     function getArticleCategoryById (req,Done){
 
+            var obj_id = new ObjectID(req.articleId);
             var collection = db.collection('articlecategory');
-            collection.findOne({id:req.articleId}, function(err, data) {
-                console.log("id"+id)
+            collection.findOne({_id:obj_id}, function(err, data) {
+                console.log("id"+_id)
                 console.log('dadada'+req.categoryId);
                 Done( null, { result:data} );
             });
@@ -126,7 +126,6 @@ module.exports = function(option) {
     }
 
     })
-
 
 
 
