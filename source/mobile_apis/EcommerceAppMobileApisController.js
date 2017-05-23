@@ -125,7 +125,7 @@ module.exports = function(option) {
             var collection = db.collection('country');
             collection.find().toArray(function(err, app){
                 console.log('appdataaaaaaaaaaaaaaaaa'+app);
-                Done( null, { result:app} );
+                Done( null, { data:app} );
             });
 
     }

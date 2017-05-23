@@ -55,6 +55,7 @@
     "express": "^4.15.3",
     "machinepack-jwt": "^0.1.14",
     "machinepack-passwords": "^2.3.0",
+    "mongodb": "^2.2.27",
     "path": "^0.12.7",
     "request": "^2.81.0",
     "seneca-entity": "^2.0.0",
