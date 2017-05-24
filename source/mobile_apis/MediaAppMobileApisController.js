@@ -31,21 +31,28 @@ module.exports = function(option) {
 
             var collection = db.collection('articlecategory');
             collection.findOne({appId:req.appId}, function(err, data) {
-                console.log('dadada'+data);
+                console.log('getArticleCategoryByAppId'+JSON.stringify(data));
 
-                Done( null, { result:data} );
+                Done( null, { ArticleData:data} );
             });
 
     }
 
     function getArticles (req,Done){
 
-            var collection = db.collection('article');
+            var collections = db.collection('article');
             console.log('dadada'+req.categoryId);
-            collection.findOne({appId:req.appId,categoryId:req.categoryId}, function(err, data) {
+            console.log('dadada'+req.appId);
 
-                var result={'appId':data.appId,'title':data.title,'imageUrl':data.imageUrl,'categoryId':data.categoryId}
-                Done( null, { result:result} );
+            collections.findOne({appId:req.appId,categoryId:req.categoryId}, function(err, data) {
+            console.log('getArticle'+JSON.stringify(data));
+                var result={
+                    'appId':data.appId,
+                    'title':data.title,
+                    'imageUrl':data.imageUrl,
+                    'categoryId':data.categoryId
+                }
+                Done( null, { data:result} );
             });
 
     }
@@ -77,7 +84,7 @@ module.exports = function(option) {
             collection.findOne({_id:obj_id}, function(err, data) {
 
                 console.log('dadada'+req.categoryId);
-                Done( null, { result:data} );
+                Done( null, { data:data} );
             });
 
     }

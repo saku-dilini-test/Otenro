@@ -28,12 +28,12 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         'appId':$scope.appId,
         'country': $scope.country
     };
-    $http.post(constants.SERVER_URL + '/templatesOrder/getTaxInfoByCountry',param).success(function(data) {
-        if(data == ''){
+    $http.post(constants.server_url + 'cmd=getTaxInfoByCountry&appId='+$scope.appId+'&country='+$scope.country).success(function(res) {
+        if(res.data == ''){
             $scope.hide = true;
             $scope.tax = 0;
         }else{
-            $scope.tax = data[0].taxAmount;
+            $scope.tax = res.data[0].taxAmount;
             $scope.hide = false;
         }
     })
@@ -61,8 +61,8 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
 
     //get the currency
-    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-        $scope.currency = data;
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(res) {
+        $scope.currency = res.data.currency;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -75,9 +75,9 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         'appId':$scope.appId,
         'country': $scope.country
     };
-    $http.post(constants.SERVER_URL + "/edit/getShippingInfoByCountry",param)
-        .success(function (data) {
-                $scope.shippingData=data;
+    $http.post(constants.server_url + "cmd=getShippingInfoByCountry&appId="+$scope.appId+'&country='+$scope.country)
+        .success(function (res) {
+                $scope.shippingData=res.data;
                 $log.debug($scope.shippingData);
                 for(var i = 0; i < $scope.shippingData.length; i++){
                     if($scope.shippingData[i].shippingOption == "Pick up"){

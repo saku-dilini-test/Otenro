@@ -38,7 +38,7 @@ module.exports = function(option) {
        seneca.add( {cmd:'getShippingInfo' }, getShippingInfo );
        seneca.add( {cmd:'getIPGInfo' }, getIPGInfo );
        seneca.add( {cmd:'getSpecificChild' }, getSpecificChild );
-       seneca.add( {cmd:'iconAllowance' }, iconAllowance );
+       seneca.add( {cmd:'getIconAllowance' }, getIconAllowance );
        seneca.add( {cmd:'getSubChildById' }, getSubChildById );
        seneca.add( {cmd:'getShippingPickupInfo' }, getShippingPickupInfo );
        seneca.add( {cmd:'getClientToken' }, getClientToken );
@@ -80,23 +80,24 @@ module.exports = function(option) {
              */
 
     function getCurrency (req,Done){
-        if(req.appID != null){
+        if(req.appId != null){
+            var obj_id = new ObjectID(req.appId);
             var collection = db.collection('application');
-            collection.findOne({templateId:req.appID}, function(err, app) {
+            collection.findOne({id:obj_id}, function(err, app) {
 
 
-                Done( null, { result:app} );
+                Done( null, { data:app} );
             });
         }
 
     }
 
     function getListOfSalesAndPromotions (req,Done){
-        if(req.appID != null){
+        if(req.appId != null){
             var collection = db.collection('SalesAndPromotion');
-            collection.findOne({appId:req.appID}, function(err, app) {
+            collection.findOne({appId:req.appId}, function(err, app) {
 
-                Done( null, { result:app} );
+                Done( null, { data:app} );
             });
         }
 
@@ -110,10 +111,10 @@ module.exports = function(option) {
           */
 
     function getTaxInfo (req,Done){
-        if(req.appID != null){
+        if(req.appId != null){
             var collection = db.collection('applicationtax');
-            collection.findOne({appId:req.appID}, function(err, app) {
-                Done( null, { result:app} );
+            collection.findOne({appId:req.appId}, function(err, app) {
+                Done( null, { data:app} );
             });
         }
 
@@ -142,7 +143,7 @@ module.exports = function(option) {
             collection.findOne({appId:req.appId}, function(err, app) {
                 console.log('data'+app);
 
-                Done( null, { result:app} );
+                Done( null, { data:app} );
             });
 
     }
@@ -156,12 +157,12 @@ module.exports = function(option) {
 
 
     function getIPGInfo (req,Done){
-        if(req.appID != null){
+        if(req.appId != null){
             var collection = db.collection('ipgdetails');
             collection.findOne({appId:req.appId}, function(err, app) {
                 console.log('dadada'+app);
 
-                Done( null, { result:app} );
+                Done( null, { data:app} );
             });
         }
     }
@@ -332,31 +333,33 @@ module.exports = function(option) {
               *  If main Id undefined, return all second navigation
               */
              var collection = db.collection('secondnavigation');
-             if(typeof mainId == 'undefined'){
+             if(typeof req.mainId == 'undefined'){
 
-                   collection.findOne({appId:req.appID}, function(err, app) {
-                        Done( null, { result:app} );
+                   collection.find({appId:req.appId}, function(err, app) {
+
+                        console.log('dasdadsadsadsadsadsadsadsadsada'+{app})
+                        Done( null, { data:app} );
                    });
              }
              else{
 
-                   collection.findOne({appId:req.appID,mainId:mainId}, function(err, app) {
+                   collection.find({appId:req.appId,mainId:mainId}, function(err, app) {
                          console.log('dadada'+app);
-                         Done( null, { result:app} );
+                         Done( null, { data:app} );
                    });
 
              }
     }
 
 
-    function iconAllowance (req,Done){
-        if(req.appID != null){
-            var collection = db.collection('applicationstoresettings');
-            collection.findOne({appId:req.appID}, function(err, data) {
+    function getIconAllowance (req,Done){
 
-                Done( null, { result:data} );
+            var collection = db.collection('applicationstoresettings');
+            collection.findOne({appId:req.appId}, function(err, data) {
+                console.log('dddddddddddddddddddddddddd'+data)
+                Done( null, { data:data} );
             });
-        }
+
     }
 
 
@@ -502,13 +505,13 @@ module.exports = function(option) {
                                       // OK.
                                       success: function (result){
                                       console.log('result='+result);
-                                      var r = {
+                                      var result = {
                                       'user':{ 'appId': user.appId, 'email' : user.email , 'sub' : user.id, 'streetNumber' : user.streetNumber,'streetName' : user.streetName,'city' : user.city, 'country' : user.country, 'phone': user.phone, 'name': user.firstName, 'zip': user.zip },
                                       'token' : result
 
 
                                       }
-                                           Done( null, {user : r } );
+                                           Done( null, {user : result } );
                                           //res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,streetName : user.streetName,city : user.city, country : user.country, phone: user.phone, name: user.firstName, zip: user.zip },token : result });
                                       }
                                   });
@@ -621,11 +624,11 @@ module.exports = function(option) {
 
            collection.findOne(searchQuery, function(err, data) {
                 Done( null, { data:data} );
-                if(data){
+/*                if(data){
                     collection.insert(data, function(err, data){
                          console.log('data'+JSON.stringify(data));
                     })
-                }
+                }*/
 
            });
 
@@ -633,11 +636,11 @@ module.exports = function(option) {
 
 
    function getShippingPickupInfo (req,Done){
-        if(req.appID != null){
+        if(req.appId != null){
             var collection = db.collection('shippingdetails');
-            collection.findOne({appId:req.appID,shippingOption:'Pick up'}, function(err, data) {
+            collection.findOne({appId:req.appId,shippingOption:'Pick up'}, function(err, data) {
 
-                Done( null, { result:data} );
+                Done( null, { data:data} );
             });
         }
    }
@@ -654,7 +657,7 @@ module.exports = function(option) {
        }).clientToken.generate({}, function (err, response) {
             if (err) return err
             console.log("response " + response);
-            Done( null, { result:response.clientToken} );
+            Done( null, { data:response.clientToken} );
        });
 
     }

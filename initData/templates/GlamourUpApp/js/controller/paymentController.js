@@ -22,28 +22,28 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here start retrieving the currency --/--//
     $scope.userId = $rootScope.userId;
     $scope.appId = $rootScope.appId;
-    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-        $rootScope.currency = data.sign;
-        $rootScope.symbol = data.symbol;
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(res) {
+        $rootScope.currency = res.data.sign;
+        $rootScope.symbol = res.data.symbol;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
 
 
-    $http.get(constants.SERVER_URL + '/edit/getIPGInfo?appId='+$scope.appId).success(function(data) {
-        $scope.paymentData = data;
+    $http.get(constants.server_url + 'cmd=getIPGInfo&appId='+$scope.appId).success(function(res) {
+        $scope.paymentData = res.data;
         $log.debug($scope.paymentData);
         if($stateParams.item.delivery.method == "Delivery") {
-            $scope.deliveryShow = data.cashOnDeliveryEnable;
+            $scope.deliveryShow = res.data.cashOnDeliveryEnable;
             $scope.pickupShow = false;
         }else{
             $scope.deliveryShow = false;
-            $scope.pickupShow = data.cashOnPickupEnable;
+            $scope.pickupShow = res.data.cashOnPickupEnable;
         }
-        $scope.paypalShow = data.paypalEnable;
-        $scope.stripeShow = data.stripeEnable;
-        $scope.braintreeShow = data.braintreeEnable;
-        $scope.authorizeNet = data.authorizeNetEnable;
+        $scope.paypalShow = res.data.paypalEnable;
+        $scope.stripeShow = res.data.stripeEnable;
+        $scope.braintreeShow = res.data.braintreeEnable;
+        $scope.authorizeNet = res.data.authorizeNetEnable;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -165,6 +165,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                     $scope.details.id = $rootScope.cart.cartItems[0].id;
                     $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
                         .then(function(res){
+                                sails.log.debug('cart'+$stateParams.item.cart);
                                 $rootScope.cart.cartItems = [];
                                 $rootScope.cart.cartSize = 0;
                                 $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
@@ -208,45 +209,41 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here start Cash Payment Function --/--
 
     $scope.confirmCashPayment = function(){
+    console.log('$stateParams.item.delivery.method'+$stateParams.item.delivery.method)
+    var url;
+
+        var object = JSON.stringify($stateParams.item.cart, function( key, value ){
+
+        if( key === "$$hashKey" ) {
+           return undefined;
+        }
+        return value;
+
+
+        })
+
         if($stateParams.item.delivery.method == "Delivery"){
-            $scope.details ={
-                appId : $rootScope.appId,
-                registeredUser: $scope.user.registeredUser,
-                item : $stateParams.item.cart,
-                amount : $stateParams.item.amount,
-                customerName : $scope.user.name,
-                deliverName : $stateParams.item.delivery.name,
-                deliveryNo : $stateParams.item.delivery.streetNumber,
-                deliveryStreet : $stateParams.item.delivery.streetName,
-                deliveryCity : $stateParams.item.delivery.city,
-                deliveryCountry : $stateParams.item.delivery.country,
-                deliveryZip : $stateParams.item.delivery.zip,
-                telNumber : $stateParams.item.delivery.number,
-                tax :   $stateParams.item.taxTotal,
-                shippingCost :   $stateParams.item.shippingCost,
-                shippingOpt : $stateParams.item.shipping.shippingOption,
-                email: $stateParams.item.userEmail,
-                currency: $rootScope.currency,
-                promotionCode: $stateParams.item.promotionCode
-            };
+                    $scope.details ={
+
+                    };
+
+              url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$scope.user.name+'&deliverName='+$stateParams.item.delivery.name+'&deliveryNo='+$stateParams.item.delivery.streetNumber+ '&deliveryStreet='+$stateParams.item.delivery.streetName+'&deliveryCity='+$stateParams.item.delivery.city+'&deliveryCountry='+$stateParams.item.delivery.country+ '&deliveryZip='+$stateParams.item.delivery.zip+'&telNumber='+ $stateParams.item.delivery.number+'&tax='+$stateParams.item.taxTotal  +'&shippingCost='+$stateParams.item.shippingCost+'&shippingOpt='+ $stateParams.item.shipping.shippingOption+'&email='+ $stateParams.item.userEmail+'&currency='+$rootScope.currency  +'&promotionCode='+$stateParams.item.promotionCode,$stateParams.item.cart
+
         }
         else{
-            $scope.details ={
-                appId : $rootScope.appId,
-                registeredUser: $scope.user.registeredUser,
-                item : $stateParams.item.cart,
-                amount : $stateParams.item.amount,
-                customerName : $stateParams.item.deliverDetails.name,
-                telNumber : $stateParams.item.deliverDetails.number,
-                tax :   $stateParams.item.taxTotal,
-                shippingCost :   $stateParams.item.shippingCost,
-                pickupId: $stateParams.item.pickupId,
-                email: $stateParams.item.userEmail,
-                currency:$rootScope.currency,
-                promotionCode: $stateParams.item.promotionCode
-            }
+
+                    $scope.details ={
+
+                    };
+            url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$stateParams.item.deliverDetails.name+'&telNumber='+$stateParams.item.deliverDetails.number+'&tax='+$stateParams.item.taxTotal+'&shippingCost='+$stateParams.item.shippingCost+'&pickupId='+$stateParams.item.pickupId+'&email='+$stateParams.item.userEmail+'&currency='+$rootScope.currency+'&promotionCode='+$stateParams.item.promotionCode
+
+
         }
-        $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
+
+
+
+
+        $http.post(server_url+ url)
             .then(function(res){
                     $scope.details.id = $rootScope.cart.cartItems[0].id;
                     $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
@@ -286,11 +283,14 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             function(err){
                                 $log.debug(err);
                             });
-                },
+                }
+,
                 function(err){
                     $log.debug(err);
                 });
+
     }
+
     // --/-- Here end cash Payment Function --/--
 
 
@@ -399,10 +399,10 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
     var braintreeClient;
     $http
-        .get(constants.SERVER_URL + '/edit/getClientToken?customerId=dsjdfsjdfjshdfjshjfhsjfhsdjkfhsdjkfhsjdkfhk')
-        .then(function(response) {
-            if (response.status === 200 && response.data !== undefined) {
-                braintreeClient = new braintree.api.Client({clientToken: response.data, enableCORS: true});
+        .get(constants.server_url +'cmd=getClientToken?customerId=dsjdfsjdfjshdfjshjfhsjfhsdjkfhsdjkfhsjdkfhk')
+        .then(function(res) {
+            if (res.data.status === 200 && res.data.data !== undefined) {
+                braintreeClient = new braintree.api.Client({clientToken: res.data.data, enableCORS: true});
                 $scope.ready = true;
             }
             throw 'Invalid response';

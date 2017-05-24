@@ -30,49 +30,50 @@ module.exports = function(option) {
 
 
     function getContactUs (req,Done){
-    if(req.appID != null){
+    if(req.appId != null){
         var collection = db.collection('applicationcontactus');
-        collection.findOne({appId:req.appID}, function(err, item) {
+        collection.findOne({appId:req.appId}, function(err, item) {
         console.log(item.email)
-            Done( null, { result:item} );
+            Done( null, { data:item} );
         });
     }
 
     }
 
     function getAboutUs (req,Done){
-    if(req.appID != null){
+    if(req.appId != null){
         var collection = db.collection('applicationstoresettings');
-        collection.findOne({appId:req.appID}, function(err, item) {
-            Done( null, { result:item} );
+        collection.findOne({appId:req.appId}, function(err, item) {
+            Done( null, { data:item} );
         });
     }
     }
 
-    function getPolicies (req,done){
-    if(req.appID != null){
+    function getPolicies (req,Done){
+    if(req.appId != null){
         var collection = db.collection('applicationstoresettings');
-        collection.findOne({appId:req.appID}, function(err, item) {
-            Done( null, { result:item} );
+        collection.findOne({appId:req.appId}, function(err, item) {
+        console.log('dsadasdadsa'+JSON.stringify(item));
+            Done( null, { data:item} );
         });
     }
 
     }
 
-    function viewImages (req,done){
+    function viewImages (req,Done){
                  console.log("viewImages loading..");
                  res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
 
-        done( null, { result: 'fsfds' } );
+        done( null, { data: 'fsfds' } );
 
     }
 
 
     function getTermsAndConditions (req,Done){
-    if(req.appID != null){
+    if(req.appId != null){
         var collection = db.collection('applicationstoresettings');
-        collection.findOne({appId:req.appID}, function(err, item) {
-            Done( null, { result:item} );
+        collection.findOne({appId:req.appId}, function(err, item) {
+            Done( null, { data:item} );
         });
     }
     }

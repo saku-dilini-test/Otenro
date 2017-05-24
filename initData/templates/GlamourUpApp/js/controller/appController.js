@@ -78,8 +78,9 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
      $scope.data = {};
 
 
-        $http.get(constants.SERVER_URL+"/edit/getAllCountry")
-            .then(function(res){
+        $http.get(constants.server_url+"cmd=getAllCountry")
+            .success(function(res){
+                console.log(res)
                 $scope.countries = res.data;
             });
         $scope.signUp = function() {
@@ -97,10 +98,12 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
                 phone: $scope.data.phone,
                 appId: $rootScope.appId
             };
-            $http.post(constants.SERVER_URL+"/templatesAuth/register",data)
-                .then(function(res){
+
+            $http.post(constants.server_url+'cmd=register&firstName='+$scope.data.fname+'&lastName='+$scope.data.lname+'&email='+$scope.data.email+'&password='+$scope.data.password+'&streetNumber='+$scope.data.streetNumber+'&streetName='+$scope.data.streetName+'&city='+$scope.data.city+'&zip='+$scope.data.zip+'&country='+$scope.data.country+'&phone='+$scope.data.phone+'&appId='+$rootScope.appId)
+            //$http.post(constants.SERVER_URL+"/templatesAuth/register",data)
+                .success(function(res){
                         var requestParams = {
-                            "token": res.data.token,
+                            "token": res.token,
                             "email": data.email,
                             "name": data.firstName,
                             "phone": data.phoneNumber,
@@ -112,6 +115,7 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
                             "type": 'internal',
                             "appId":data.appId
                         };
+
                         localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
                         $rootScope.isUserLoggedIn.check = true;
                         $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;

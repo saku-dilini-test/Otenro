@@ -32,7 +32,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         }
     }
 
-    $http.get(constants.SERVER_URL+"/edit/getAllCountry")
+    $http.get(constants.server_url+"cmd=getAllCountry")
         .then(function(res){
             $scope.countries = res.data;
         });
@@ -43,12 +43,12 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     $scope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;
-    $http.get(constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId).success(function(data) {
-        if(data == ''){
+    $http.get(constants.server_url + 'cmd=getTaxInfo&appId='+$rootScope.appId).success(function(res) {
+        if(res.data == ''){
             $scope.hide = true;
             $scope.tax = 0;
         }else{
-            $scope.tax = data[0].taxAmount;
+            $scope.tax = res.data[0].taxAmount;
             $scope.hide = false;
         }
     })
@@ -117,8 +117,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     };
 
     //get the currency
-    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-        $scope.currency = data.sign;
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(res) {
+        $scope.currency = res.data.sign;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -127,9 +127,9 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
     // get the shipping options
-    $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
-        .success(function (data) {
-                $scope.shippingData=data;
+    $http.get(constants.server_url + "cmd=getShippingInfo&appId="+$rootScope.appId)
+        .success(function (res) {
+                $scope.shippingData=res.data;
             },
             function (err) {
                 $ionicPopup.alert({
