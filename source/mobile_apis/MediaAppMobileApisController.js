@@ -15,6 +15,7 @@ module.exports = function(option) {
 
     var seneca = this;
     var MongoClient = require('mongodb').MongoClient;
+    var ObjectID = require('mongodb').ObjectID;
 
     var url = 'mongodb://localhost:27017/appBuilder';
 
@@ -30,10 +31,14 @@ module.exports = function(option) {
     function getArticleCategoryByAppId (req,Done){
 
             var collection = db.collection('articlecategory');
-            collection.findOne({appId:req.appId}, function(err, data) {
-                console.log('getArticleCategoryByAppId'+JSON.stringify(data));
+            collection.find({appId:req.appId}).toArray(function(err, data){
+                console.log('getArticleCategoryByAppId'+JSON.stringify(data).replace('_id','id'));
+                var Data = JSON.stringify(data).replace(/_id/g,'id');
+                var Adata = JSON.parse(Data);
 
-                Done( null, { ArticleData:data} );
+
+
+                Done( null, { ArticleData:Adata} );
             });
 
     }
@@ -44,15 +49,25 @@ module.exports = function(option) {
             console.log('dadada'+req.categoryId);
             console.log('dadada'+req.appId);
 
-            collections.findOne({appId:req.appId,categoryId:req.categoryId}, function(err, data) {
+            collections.find({appId:req.appId,categoryId:req.categoryId}).toArray(function(err, data) {
             console.log('getArticle'+JSON.stringify(data));
-                var result={
-                    'appId':data.appId,
-                    'title':data.title,
-                    'imageUrl':data.imageUrl,
-                    'categoryId':data.categoryId
+/*            var array = [];
+            var intCount = data.length;
+            for (var i = 0; i < intCount;){
+                var a = {
+                'appId':data[i].appId,
+                'title':data[i].title,
+                'imageUrl':data[i].imageUrl,
+                'categoryId':data[i].categoryId
                 }
-                Done( null, { data:result} );
+                array.push(a)
+
+            }
+            var Array = JSON.parse(array)*/
+                var Data = JSON.stringify(data).replace(/_id/g,'id');
+                var Adata = JSON.parse(Data);
+                console.log('get articles result:::::'+JSON.stringify(Adata))
+                Done( null, { data:Adata} );
             });
 
     }
@@ -81,7 +96,7 @@ module.exports = function(option) {
 
             var obj_id = new ObjectID(req.articleId);
             var collection = db.collection('article');
-            collection.findOne({_id:obj_id}, function(err, data) {
+            collection.find({_id:obj_id}).toArray(function(err, data) {
 
                 console.log('dadada'+req.categoryId);
                 Done( null, { data:data} );

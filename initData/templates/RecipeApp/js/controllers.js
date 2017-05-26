@@ -21,10 +21,10 @@ angular.module('starter.controllers', [])
         $scope.changeAppName = function () {
             $scope.appName = $rootScope.appName;
 
-            $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId=' + $rootScope.appId)
+            $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                 .success(function (data) {
                     $ionicLoading.hide();
-                    $scope.articleCategoryList = data;
+                    $scope.articleCategoryList = data.ArticleData;
                 }).error(function (err) {
                 alert('loading err');
             });
@@ -84,6 +84,7 @@ angular.module('starter.controllers', [])
         $scope.appName = $rootScope.appName;
 
         $scope.navigateArticles = function(categoryId,categoryName){
+        console.log('categoryId:::'+categoryId+'categoryName:::'+categoryName)
              $state.go('app.home.categoryId',{categoryId:categoryId,categoryName:categoryName});
         }
 
@@ -119,11 +120,11 @@ angular.module('starter.controllers', [])
 
 
 
-            $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId=' + $rootScope.appId)
+            $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                 .success(function (data) {
                     $ionicLoading.hide();
-                    $scope.articleCategoryList = data;
-                    $log.debug($scope.articleCategoryList)
+                    $scope.articleCategoryList = data.ArticleData;
+                   console.log('data.ArticleData='+$scope.articleCategoryList)
                 }).error(function (err) {
                 alert('loading err');
             });
@@ -299,13 +300,14 @@ angular.module('starter.controllers', [])
                 +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=article";
 
             if ($stateParams.categoryId == 'firstMenu') {
-                $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId=' + $rootScope.appId)
+                $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                     .success(function (catList) {
-                        if (catList.length > 0) {
-                            var firstCat = catList[0];
-                            $http.get(constants.SERVER_URL + '/templates/getArticles?appId=' + $rootScope.appId + "&categoryId=" + firstCat.id)
+                        if (catList.ArticleData.length > 0) {
+                            var firstCat = catList.ArticleData[0];
+                            console.log('______________'+firstCat)
+                            $http.get(constants.server_url + 'cmd=getArticles&appId=' + $rootScope.appId + "&categoryId=" + firstCat.id)
                                 .success(function (data) {
-                                    $scope.artilceList = data;
+                                    $scope.artilceList = data.data;
                                     $timeout(function () {
                                         $ionicLoading.hide();
                                     }, 2000);
@@ -317,9 +319,10 @@ angular.module('starter.controllers', [])
                     alert('loading err');
                 });
             } else {
-                $http.get(constants.SERVER_URL + '/templates/getArticles?appId=' + $rootScope.appId + "&categoryId=" + $stateParams.categoryId)
+            console.log('______________'+$stateParams.categoryId)
+                $http.get(constants.server_url + 'cmd=getArticles&appId=' + $rootScope.appId + '&categoryId=' +$stateParams.categoryId)
                     .success(function (data) {
-                        $scope.artilceList = data;
+                        $scope.artilceList = data.data;
                         $timeout(function () {
                             $ionicLoading.hide();
                         }, 2000);

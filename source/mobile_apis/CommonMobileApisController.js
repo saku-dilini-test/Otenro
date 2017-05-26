@@ -10,6 +10,8 @@
 var fs = require('fs-extra');
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
+var express = require('express');
+var app = express();
 
 
 module.exports = function(option) {
@@ -18,6 +20,7 @@ module.exports = function(option) {
     var MongoClient = require('mongodb').MongoClient;
 
     var url = 'mongodb://localhost:27017/appBuilder';
+    var APP_FILE_SERVER = '/home/onbit/Documents/appFileServer/';
 
     MongoClient.connect(url, function(err, db){
 
@@ -61,10 +64,29 @@ module.exports = function(option) {
     }
 
     function viewImages (req,Done){
-                 console.log("viewImages loading..");
-                 res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
 
-        done( null, { data: 'fsfds' } );
+
+                 var data = {
+                    'userId':req.userId,
+                    'appId':req.appId,
+                    'img':req.img
+                 }
+                 if(data){
+
+
+                    app.get('/', function view(req, res) {
+                    console.log('____________')
+                    res.sendFile(APP_FILE_SERVER + data.userId + '/templates/' + data.appId + '/img/'+ data.img);
+                    });
+                 }
+
+
+
+
+
+                 //sendfile APP_FILE_SERVER + req.userId + '/templates/' + req.appId + '/img/'+ req.img;
+
+        Done( null, { data: 'fsfds' } );
 
     }
 

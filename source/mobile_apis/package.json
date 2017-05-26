@@ -58,6 +58,7 @@
     "mongodb": "^2.2.27",
     "path": "^0.12.7",
     "request": "^2.81.0",
+    "send": "^0.15.3",
     "seneca-entity": "^2.0.0",
     "seneca-web": "^2.0.0"
   },
