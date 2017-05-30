@@ -32,15 +32,15 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
         'country': $scope.country
     };
 
-    $http.post(constants.server_url + 'cmd=getTaxInfoByCountry&appId='+$scope.appId+'&country='+$scope.country).success(function(res) {
-        if(res.data == ''){
+    $http.post(constants.server_url + 'cmd=getTaxInfoByCountry&appId='+$scope.appId+'&country='+$scope.country).success(function(data) {
+        if(data == ''){
             $scope.hide = true;
             $scope.tax = 0;
             $scope.isApplyShippingCharge = false;
         }else {
-            $scope.tax = res.data[0].taxAmount;
-            $log.debug(res.data[0]);
-            $scope.isApplyShippingCharge = res.data[0].isApplyShippingCharge;
+            $scope.tax = data[0].taxAmount;
+            $log.debug(data[0]);
+            $scope.isApplyShippingCharge = data[0].isApplyShippingCharge;
             $scope.hide = false;
         }
             var total = 0;
@@ -83,8 +83,8 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
 
 
     //get the currency
-    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(res) {
-        $scope.currency = res.data.sign;
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(data) {
+        $scope.currency = data.sign;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });

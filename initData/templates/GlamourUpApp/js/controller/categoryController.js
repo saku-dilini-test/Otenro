@@ -37,8 +37,8 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
             +data.userId+"&appId="+data.appId+"&"+new Date().getTime()+"&img=secondNavi";
 
         
-      $http.get(constants.server_url + 'cmd=getSpecificChild&appId='+$scope.appId).success(function(res) {
-          $scope.categories = res.data;
+      $http.get(constants.server_url + 'cmd=getSpecificChild&appId='+$scope.appId).success(function(data) {
+          $scope.categories = data;
           console.log($scope.categories);
 
       }).error(function(err) {
@@ -46,8 +46,8 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
       });
 
       $http.get(constants.server_url + "cmd=getIconAllowance&appId="+$rootScope.appId)
-        .success(function(res){
-        console.log('fffffffffffff'+JSON.stringify(res));
+        .success(function(data){
+        console.log('fffffffffffff'+JSON.stringify(data));
 
 
         },function(err){

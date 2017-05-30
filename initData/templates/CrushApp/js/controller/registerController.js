@@ -7,7 +7,7 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
     $scope.data = {};
 
 
-    $http.get(constants.SERVER_URL+"/edit/getAllCountry")
+    $http.get(constants.server_url+"cmd=getAllCountry")
         .then(function(res){
             $scope.countries = res.data;
         });
@@ -27,7 +27,8 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
             appId:$rootScope.appId
 
         };
-        $http.post(constants.SERVER_URL+"/templatesAuth/register",data)
+    var url = '&firstName='+$scope.data.fname+'&lastName='+$scope.data.lname+'&email='+$scope.data.email+'&password='+ $scope.data.password+'&streetNumber='+$scope.data.streetNumber+'&streetName='+$scope.data.streetName+'&city='+$scope.data.city+'&zip='+$scope.data.zip+'&country='+$scope.data.country+'&phone='+$scope.data.phone+'&appId='+$rootScope.appId;
+        $http.post(constants.server_url+"cmd=register"+url)
             .then(function(res){
                     var requestParams = {
                         "token": res.data.token,

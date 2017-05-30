@@ -72,7 +72,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                     'country': localData.country
                 };
                 // Get Tax Information
-                $http.post(constants.SERVER_URL + '/templatesOrder/getTaxInfoByCountry',param).success(function(data) {
+                $http.post(constants.server_url + 'cmd=getTaxInfoByCountry&appId='+$scope.appId+'&country='+ localData.country).success(function(data) {
                     if(data != ''){
                         $scope.tax = data[0].taxAmount;
                         $scope.taxDisplayName = data[0].taxName;
@@ -164,7 +164,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
             };
 
     //get the currency
-    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(data) {
             $scope.currency = data;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
@@ -174,7 +174,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
     $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
     // get the shipping options
-    $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
+    $http.get(constants.server_url + "cmd=getShippingInfo&appId="+$rootScope.appId)
             .success(function (data) {
                     $scope.shippingData=data;
                 },

@@ -24,7 +24,7 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         'appId':$scope.appId,
         'country': $scope.country
     };
-    $http.post(constants.SERVER_URL + '/templatesOrder/getTaxInfoByCountry',param).success(function(data) {
+    $http.post(constants.server_url + 'cmd=getTaxInfoByCountry&appId='+$scope.appId+'&country='+$scope.country).success(function(data) {
         if(data == ''){
             $scope.hide = true;
             $scope.tax = 0;
@@ -71,7 +71,7 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         'appId':$scope.appId,
         'country': $scope.country
     };
-    $http.post(constants.SERVER_URL + "/edit/getShippingInfoByCountry",param)
+    $http.post(constants.server_url + "cmd=getShippingInfoByCountry&appId="+$scope.appId+"&country="+$scope.country)
         .success(function (data) {
                 $scope.shippingData=data;
                 $log.debug($scope.shippingData);

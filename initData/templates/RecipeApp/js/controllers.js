@@ -24,7 +24,7 @@ angular.module('starter.controllers', [])
             $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                 .success(function (data) {
                     $ionicLoading.hide();
-                    $scope.articleCategoryList = data.ArticleData;
+                    $scope.articleCategoryList = data;
                 }).error(function (err) {
                 alert('loading err');
             });
@@ -113,17 +113,15 @@ angular.module('starter.controllers', [])
 
             $scope.appName = $rootScope.appName;
 
-            $scope.imageURL =
-                        constants.SERVER_URL
-                        +"/templates/viewImages?userId="
-                        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category";
-
+            $scope.imageURL = constants.SERVER_URL
+                            +"/templates/viewImages?userId="
+                            +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category";
 
 
             $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                 .success(function (data) {
                     $ionicLoading.hide();
-                    $scope.articleCategoryList = data.ArticleData;
+                    $scope.articleCategoryList = data;
                    console.log('data.ArticleData='+$scope.articleCategoryList)
                 }).error(function (err) {
                 alert('loading err');
@@ -144,7 +142,7 @@ angular.module('starter.controllers', [])
         $scope.appId = $rootScope.appId;
         $scope.appName = $rootScope.appName;
 
-        $http.get(constants.SERVER_URL + '/templates/getContactUs?appId=' + $scope.appId).success(function (data) {
+        $http.get(constants.server_url + 'cmd=getContactUs&appId=' + $scope.appId).success(function (data) {
             $scope.address = data.address;
             $scope.email = data.email;
             $scope.webSite = data.webSite;
@@ -203,9 +201,9 @@ angular.module('starter.controllers', [])
             appId: $rootScope.appId
         }
 
-        $http.post(constants.SERVER_URL + "/edit/getAboutUsData", data)
+        $http.post(constants.server_url + "cmd=getAboutUs&appId=" +$rootScope.appId)
             .success(function (data) {
-                    $log.debug(data);
+                    //$log.debug(data);
                     $scope.header = data.header;
                     $scope.content = data.content;
                     //$state.go('app.category');
@@ -222,7 +220,7 @@ angular.module('starter.controllers', [])
     .controller('policiesCtrl', function ($scope, $http, $rootScope, $ionicPopup, constants) {
 
                 // get policies
-                $http.get(constants.SERVER_URL + "/templates/getPolicies?appId="+$rootScope.appId)
+                $http.get(constants.server_url + "cmd=getPolicies&appId="+$rootScope.appId)
                     .success(function (data) {
                         $scope.privacyPolicy = data.privacyPolicy;
                         $scope.returnPolicy = data.returnPolicy;
@@ -237,7 +235,7 @@ angular.module('starter.controllers', [])
 
         $scope.appId = $rootScope.appId;
 
-        $http.get( constants.SERVER_URL + '/templates/getTermsAndConditions?appId='+$scope.appId).success(function(data) {
+        $http.get( constants.server_url + 'cmd=getTermsAndConditions&appId='+$scope.appId).success(function(data) {
             $scope.terms = data.termsAndCondition;
         }).error(function(err) {
             alert('warning', "Unable to get terms & condition info", err.message);
@@ -302,12 +300,12 @@ angular.module('starter.controllers', [])
             if ($stateParams.categoryId == 'firstMenu') {
                 $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                     .success(function (catList) {
-                        if (catList.ArticleData.length > 0) {
-                            var firstCat = catList.ArticleData[0];
+                        if (catList.length > 0) {
+                            var firstCat = catList[0];
                             console.log('______________'+firstCat)
                             $http.get(constants.server_url + 'cmd=getArticles&appId=' + $rootScope.appId + "&categoryId=" + firstCat.id)
                                 .success(function (data) {
-                                    $scope.artilceList = data.data;
+                                    $scope.artilceList = data;
                                     $timeout(function () {
                                         $ionicLoading.hide();
                                     }, 2000);
@@ -322,7 +320,7 @@ angular.module('starter.controllers', [])
             console.log('______________'+$stateParams.categoryId)
                 $http.get(constants.server_url + 'cmd=getArticles&appId=' + $rootScope.appId + '&categoryId=' +$stateParams.categoryId)
                     .success(function (data) {
-                        $scope.artilceList = data.data;
+                        $scope.artilceList = data;
                         $timeout(function () {
                             $ionicLoading.hide();
                         }, 2000);

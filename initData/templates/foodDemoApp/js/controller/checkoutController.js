@@ -37,7 +37,7 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
         'country': $scope.country
     };
 
-    $http.post(constants.SERVER_URL + '/templatesOrder/getTaxInfoByCountry',param).success(function(data) {
+    $http.post(constants.server_url + 'cmd=getTaxInfoByCountry&appId='+$scope.appId+'&country='+$scope.country).success(function(data) {
         if(data == ''){
             $scope.hide = true;
             $scope.tax = 0;
@@ -88,7 +88,7 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
 
 
     //get the currency
-    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(data) {
         $scope.currency = data.sign;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);

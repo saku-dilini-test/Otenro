@@ -66,7 +66,7 @@ module.exports = function(option) {
             var thirdNavi = [];
             collection.findOne({appId:req.appID,childId:req.childId,published:'YES'}, function(err, app) {
                 console.log('app'+app);
-                Done( null, { result:app} );
+                Done( null, app );
             });
         }
 
@@ -82,11 +82,15 @@ module.exports = function(option) {
     function getCurrency (req,Done){
         if(req.appId != null){
             var obj_id = new ObjectID(req.appId);
+
             var collection = db.collection('application');
-            collection.findOne({id:obj_id}, function(err, app) {
+            collection.findOne({_id:obj_id}, function(err, app) {
+            console.log('getCurrency'+JSON.stringify(app))
+            var currency = app.appSettings.appCurrency;
+            console.log('currencyy'+JSON.stringify(currency))
 
 
-                Done( null, { data:app} );
+                Done( null, currency );
             });
         }
 
@@ -97,7 +101,7 @@ module.exports = function(option) {
             var collection = db.collection('SalesAndPromotion');
             collection.findOne({appId:req.appId}, function(err, app) {
 
-                Done( null, { data:app} );
+                Done( null, app );
             });
         }
 
@@ -114,7 +118,8 @@ module.exports = function(option) {
         if(req.appId != null){
             var collection = db.collection('applicationtax');
             collection.findOne({appId:req.appId}, function(err, app) {
-                Done( null, { data:app} );
+            console.log('taxIfo=='+JSON.stringify(app))
+                Done( null, [app] );
             });
         }
 
@@ -126,7 +131,7 @@ module.exports = function(option) {
             var collection = db.collection('country');
             collection.find().toArray(function(err, app){
                 console.log('appdataaaaaaaaaaaaaaaaa'+app);
-                Done( null, { data:app} );
+                Done( null, {data:app} );
             });
 
     }
@@ -141,9 +146,9 @@ module.exports = function(option) {
 
             var collection = db.collection('shippingdetails');
             collection.findOne({appId:req.appId}, function(err, app) {
-                console.log('data'+app);
+                console.log('getShippingInfo'+app);
 
-                Done( null, { data:app} );
+                Done( null, app );
             });
 
     }
@@ -162,7 +167,7 @@ module.exports = function(option) {
             collection.findOne({appId:req.appId}, function(err, app) {
                 console.log('dadada'+app);
 
-                Done( null, { data:app} );
+                Done( null, app );
             });
         }
     }
@@ -225,7 +230,7 @@ module.exports = function(option) {
                                 }
 
                            })
-                           Done( null, { result:order} );
+                           Done( null, order );
 
                        })
 
@@ -295,7 +300,7 @@ module.exports = function(option) {
                                 }
 
                         })
-                        Done( null, { result:order} );
+                        Done( null, order );
 
                     })
 
@@ -325,7 +330,7 @@ module.exports = function(option) {
                 }
 
          });
-          Done( null, { result:obj} );
+          Done( null, obj );
     }
 
     function getSpecificChild (req,Done){
@@ -335,17 +340,20 @@ module.exports = function(option) {
              var collection = db.collection('secondnavigation');
              if(typeof req.mainId == 'undefined'){
 
-                   collection.find({appId:req.appId}, function(err, app) {
 
-                        console.log('dasdadsadsadsadsadsadsadsadsada'+{app})
-                        Done( null, { data:app} );
+                    collection.find({appId:req.appId}).toArray(function(err, app){
+                        var Data = JSON.stringify(app).replace(/_id/g,'id');
+                        var Adata = JSON.parse(Data);
+                        console.log('getSpecificChild'+JSON.stringify(Adata))
+
+                        Done( null, Adata );
                    });
              }
              else{
 
                    collection.find({appId:req.appId,mainId:mainId}, function(err, app) {
                          console.log('dadada'+app);
-                         Done( null, { data:app} );
+                         Done( null, app );
                    });
 
              }
@@ -357,7 +365,7 @@ module.exports = function(option) {
             var collection = db.collection('applicationstoresettings');
             collection.findOne({appId:req.appId}, function(err, data) {
                 console.log('dddddddddddddddddddddddddd'+data)
-                Done( null, { data:data} );
+                Done( null, data );
             });
 
     }
@@ -385,17 +393,18 @@ module.exports = function(option) {
                }
           };
 
-                //console.log('sdsdsa'+searchQuery);
+                console.log('getShippingInfoByCountry'+searchQuery);
           var collection = db.collection('shippingdetails');
 
-           collection.findOne(searchQuery, function(err, data) {
+           collection.find(searchQuery).toArray (function(err, data) {
+           console.log('_______________'+JSON.stringify(data))
 
-                 if(data){
+/*                 if(data){
                       collection.insert(data, function(err, data){
-                             console.log('data'+JSON.stringify(data));
+                            // console.log('data'+JSON.stringify(data));
                        })
-                 }
-                 Done( null, { data:data} );
+                 }*/
+                 Done( null, data );
 
 
            });
@@ -456,7 +465,9 @@ module.exports = function(option) {
                                 'token' : result
                             }
 
-                         Done( null, {token : result } );
+                            console.log('DDDDDDDdd'+JSON.stringify(result))
+
+                         Done( null, result  );
                         }
                     });
 
@@ -503,15 +514,14 @@ module.exports = function(option) {
                                           return err;
                                       },
                                       // OK.
-                                      success: function (result){
-                                      console.log('result='+result);
+                                      success: function (res){
+                                      console.log('result='+res);
                                       var result = {
                                       'user':{ 'appId': user.appId, 'email' : user.email , 'sub' : user.id, 'streetNumber' : user.streetNumber,'streetName' : user.streetName,'city' : user.city, 'country' : user.country, 'phone': user.phone, 'name': user.firstName, 'zip': user.zip },
-                                      'token' : result
-
+                                      'token' : res
 
                                       }
-                                           Done( null, {user : result } );
+                                           Done( null, result );
                                           //res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,streetName : user.streetName,city : user.city, country : user.country, phone: user.phone, name: user.firstName, zip: user.zip },token : result });
                                       }
                                   });
@@ -569,7 +579,7 @@ module.exports = function(option) {
 
 
                                       }
-                                           Done( null, {user : r } );
+                                           Done( null,  r  );
 
                                 }
                         });
@@ -597,7 +607,7 @@ module.exports = function(option) {
             collection.findOne(searchApp, function(err, data) {
 
 
-                Done( null, { result:data} );
+                Done( null, data );
             });
 
     }
@@ -620,10 +630,12 @@ module.exports = function(option) {
                 }
           };
 
+
            var collection = db.collection('applicationtax');
 
            collection.findOne(searchQuery, function(err, data) {
-                Done( null, { data:data} );
+                console.log('applicationtaxxxxxxxxxxxxxxxxxxxxxxxxx'+JSON.stringify(data))
+                Done( null, [data] );
 /*                if(data){
                     collection.insert(data, function(err, data){
                          console.log('data'+JSON.stringify(data));
@@ -640,7 +652,7 @@ module.exports = function(option) {
             var collection = db.collection('shippingdetails');
             collection.findOne({appId:req.appId,shippingOption:'Pick up'}, function(err, data) {
 
-                Done( null, { data:data} );
+                Done( null, data );
             });
         }
    }
@@ -656,7 +668,7 @@ module.exports = function(option) {
 
        }).clientToken.generate({}, function (err, response) {
             if (err) return err
-            console.log("response " + response);
+            console.log("response " + JSON.stringify(response));
             Done( null, { data:response.clientToken} );
        });
 

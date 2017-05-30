@@ -5,8 +5,8 @@
 mobileApp.controller('orderHistoryCtrl', function($scope,$rootScope,constants,$http) {
 
      //get currency
-     $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(res) {
-            $scope.currency = res.data.currency;
+     $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(data) {
+            $scope.currency = data.currency;
         }).error(function(err) {
             alert('warning', "Unable to get Products Selected Category", err.message);
         });

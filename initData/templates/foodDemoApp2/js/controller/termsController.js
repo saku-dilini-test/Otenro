@@ -7,7 +7,7 @@ mobileApp.controller('termsCtrl', function($scope,$rootScope,$http,constants,$lo
 
     $scope.appId = $rootScope.appId;
 
-    $http.get( constants.SERVER_URL + '/templates/getTermsAndConditions?appId='+$scope.appId).success(function(data) {
+    $http.get( constants.server_url + 'cmd=getTermsAndConditions&appId='+$scope.appId).success(function(data) {
         $log.debug("TermAndCondistion data " + data);
         $scope.terms = data.termsAndCondition;
     }).error(function(err) {

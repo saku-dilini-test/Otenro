@@ -61,8 +61,8 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
 
     //get the currency
-    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(res) {
-        $scope.currency = res.data.currency;
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(data) {
+        $scope.currency = data.currency;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -76,8 +76,8 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         'country': $scope.country
     };
     $http.post(constants.server_url + "cmd=getShippingInfoByCountry&appId="+$scope.appId+'&country='+$scope.country)
-        .success(function (res) {
-                $scope.shippingData=res.data;
+        .success(function (data) {
+                $scope.shippingData=data;
                 $log.debug($scope.shippingData);
                 for(var i = 0; i < $scope.shippingData.length; i++){
                     if($scope.shippingData[i].shippingOption == "Pick up"){

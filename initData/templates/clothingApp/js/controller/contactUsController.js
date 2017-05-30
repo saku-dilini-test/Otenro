@@ -6,7 +6,7 @@ mobileApp.controller('contactUsCtrl', function($scope,$rootScope,$http,constants
 
     $scope.appId = $rootScope.appId;
 
-    $http.get( constants.SERVER_URL + '/templates/getContactUs?appId='+$scope.appId).success(function(data) {
+    $http.get( constants.server_url + 'cmd=getContactUs&appId='+$scope.appId).success(function(data) {
         $scope.address = data.address;
         $scope.email = data.email;
         $scope.webSite = data.webSite;

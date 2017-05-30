@@ -5,7 +5,7 @@
 mobileApp.controller('policiesCtrl', function ($scope, $http, $rootScope, $ionicPopup, constants) {
 
     // get policies
-    $http.get(constants.SERVER_URL + "/templates/getPolicies?appId="+$rootScope.appId)
+    $http.get(constants.server_url + "cmd=getPolicies&appId="+$rootScope.appId)
         .success(function (data) {
             $scope.privacyPolicy = data.privacyPolicy;
             $scope.returnPolicy = data.returnPolicy;

@@ -43,12 +43,12 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     $scope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;
-    $http.get(constants.server_url + 'cmd=getTaxInfo&appId='+$rootScope.appId).success(function(res) {
-        if(res.data == ''){
+    $http.get(constants.server_url + 'cmd=getTaxInfo&appId='+$rootScope.appId).success(function(data) {
+        if(data == ''){
             $scope.hide = true;
             $scope.tax = 0;
         }else{
-            $scope.tax = res.data[0].taxAmount;
+            $scope.tax = data[0].taxAmount;
             $scope.hide = false;
         }
     })
@@ -117,8 +117,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     };
 
     //get the currency
-    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(res) {
-        $scope.currency = res.data.sign;
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(data) {
+        $scope.currency = data.sign;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -128,8 +128,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     // get the shipping options
     $http.get(constants.server_url + "cmd=getShippingInfo&appId="+$rootScope.appId)
-        .success(function (res) {
-                $scope.shippingData=res.data;
+        .success(function (data) {
+                $scope.shippingData=data;
             },
             function (err) {
                 $ionicPopup.alert({

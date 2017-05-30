@@ -50,9 +50,12 @@
     "email": "kalani@onbitlabs.com"
   },
   "dependencies": {
+    "base64-img": "^1.0.3",
     "braintree": "^2.0.2",
+    "cordova-plugin-file-transfer": "^1.6.3",
     "emailjs": "^1.0.8",
     "express": "^4.15.3",
+    "file-send": "^2.1.3",
     "machinepack-jwt": "^0.1.14",
     "machinepack-passwords": "^2.3.0",
     "mongodb": "^2.2.27",
@@ -60,7 +63,8 @@
     "request": "^2.81.0",
     "send": "^0.15.3",
     "seneca-entity": "^2.0.0",
-    "seneca-web": "^2.0.0"
+    "seneca-web": "^2.0.0",
+    "xmlhttprequest": "^1.8.0"
   },
   "description": "mobile apis in media and ecommerce app",
   "devDependencies": {},

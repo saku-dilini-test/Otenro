@@ -21,7 +21,7 @@ mobileApp.controller('orderCtrl', function($scope,$rootScope,$http,$state,consta
             cart : $scope.cart
         }
 
-        $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",data)
+        $http.post(constants.server_url+"cmd=saveOrder&appId="+ $scope.appId+"&customerName="+ order.customerName+"&telNumber="+order.telNumber+"&deliveryAddress="+ order.deliveryAddress+"&cart="+$scope.cart)
             .then(function(res){
                 if(res.data == 'ok'){
                     $rootScope.cart.cartItems = [];

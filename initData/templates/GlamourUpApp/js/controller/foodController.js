@@ -60,8 +60,9 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         $state.go('app.food',{item:food})
     }
 
-    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(res) {
-        $scope.currency = res.data.currency;
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(data) {
+        $scope.currency = data.currency;
+        console.log('$SCOPE>CURRENCY'+$scope.currency);
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -80,6 +81,8 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.changeVariant = function(variant){
       $scope.selection1 =[];
       $scope.selectedVariant1  =variant.vType;
+      $scope.selectedVariant.buyQuantity = '';
+
       $scope.lockBuyButton = true;
 
         if($scope.foodInfo.selection.length==1){
@@ -101,7 +104,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.changeVariant2 = function(variant){
       $scope.selection2 =[];
-      $scope.selectedVariant2  =variant.vType;
+      if(variant){
+            $scope.selectedVariant2  =variant.vType;
+            $scope.selectedVariant.buyQuantity = '';
+
+      }
       $scope.lockBuyButton = true;
 
         if($scope.foodInfo.selection.length==2){
@@ -125,7 +132,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.changeVariant3 = function(variant){
       $scope.selection3 =[];
-      $scope.selectedVariant3  =variant.vType;
+      if(variant){
+            $scope.selectedVariant3  =variant.vType;
+            $scope.selectedVariant.buyQuantity = '';
+
+      }
       $scope.lockBuyButton = true;
 
         if($scope.foodInfo.selection.length==3){
@@ -147,7 +158,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         }
     };
     $scope.changeVariant4 = function(variant){
-      $scope.selectedVariant4  =variant.vType;
+        if(variant){
+            $scope.selectedVariant4  =variant.vType;
+            $scope.selectedVariant.buyQuantity = '';
+
+        }
 
       for(var i=0;i<$scope.foodInfo.variants.length;i++){
             if($scope.foodInfo.variants[i].selection[0].vType == $scope.selectedVariant1 &&
@@ -159,7 +174,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
             }
       }
-      console.log($scope.selectedVariant)
     };
 
 
@@ -251,9 +265,9 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     };
     //get Sales and Promotions
-    $http.get(constants.server_url + 'cmd=getListOfSalesAndPromotions&appId='+$scope.appId).success(function(res) {
-        $scope.salesandpromotion = res.data[0];
-        console.log(res.data);
+    $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {
+        $scope.salesandpromotion = data[0];
+        console.log(JSON.stringify(data));
     }).error(function(err) {
         alert('warning', "Unable to get sales and Promotions ", err.message);
     });

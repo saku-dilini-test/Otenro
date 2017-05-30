@@ -22,7 +22,7 @@ seneca.act({cmd: 'getContactUs'}, function ( err, result ) {
     console.log(result);
 } )
 
-seneca.act({ role: 'process', cmd: 'getAboutUs'}, function ( err, result ) {
+seneca.act({ role: 'process', cmd: 'getAboutUsData'}, function ( err, result ) {
    if (err) return console.error(err)
       console.log(result);
 } )
@@ -163,6 +163,6 @@ seneca.act({ role: 'process', cmd: 'getCommentsDummy'}, function ( err, result )
 
 
 
-seneca.listen({ port:8080, host:'100.68.108.86' })
+seneca.listen({ port:8080, host:'192.168.8.56',protocol: 'http' })
 
 

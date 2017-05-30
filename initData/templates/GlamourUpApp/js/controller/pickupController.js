@@ -6,9 +6,9 @@ mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPop
     var pickup = {};
 
     $http.get(constants.server_url + "cmd=getShippingPickupInfo&appId="+$rootScope.appId)
-        .success(function (res) {
+        .success(function (data) {
 
-                $scope.pickup=res.data;
+                $scope.pickup=data;
                /* $scope.header = data.header;
                 $scope.content = data.content;*/
                 //$state.go('app.category');

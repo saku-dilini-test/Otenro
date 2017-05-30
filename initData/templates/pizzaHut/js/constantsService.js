@@ -3,6 +3,6 @@
  */
 (function() {
     angular.module('mobileApp').constant('constants', {
-        SERVER_URL: 'http://localhost:port'
+        SERVER_URL: 'http://localhost:1337'
     })
 })();

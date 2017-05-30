@@ -20,7 +20,7 @@ angular.module('starter.controllers', [])
         $scope.changeAppName = function () {
             $scope.appName = $rootScope.appName;
 
-            $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId=' + $rootScope.appId)
+            $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                 .success(function (data) {
                     $ionicLoading.hide();
                     $scope.articleCategoryList = data;
@@ -112,7 +112,7 @@ angular.module('starter.controllers', [])
 
 
 
-            $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId=' + $rootScope.appId)
+            $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                 .success(function (data) {
                     $ionicLoading.hide();
                     $scope.articleCategoryList = data;
@@ -136,7 +136,7 @@ angular.module('starter.controllers', [])
         $scope.appId = $rootScope.appId;
         $scope.appName = $rootScope.appName;
 
-        $http.get(constants.SERVER_URL + '/templates/getContactUs?appId=' + $scope.appId).success(function (data) {
+        $http.get(constants.server_url + 'cmd=getContactUs&appId=' + $scope.appId).success(function (data) {
             $scope.address = data.address;
             $scope.email = data.email;
             $scope.webSite = data.webSite;
@@ -195,7 +195,7 @@ angular.module('starter.controllers', [])
             appId: $rootScope.appId
         }
 
-        $http.post(constants.SERVER_URL + "/edit/getAboutUsData", data)
+        $http.post(constants.server_url + "cmd=getAboutUs&appId=" + $rootScope.appId)
             .success(function (data) {
                     $log.debug(data);
                     $scope.header = data.header;
@@ -214,7 +214,7 @@ angular.module('starter.controllers', [])
     .controller('policiesCtrl', function ($scope, $http, $rootScope, $ionicPopup, constants) {
 
         // get policies
-        $http.get(constants.SERVER_URL + "/templates/getPolicies?appId="+$rootScope.appId)
+        $http.get(constants.server_url + "cmd=getPolicies&appId="+$rootScope.appId)
             .success(function (data) {
                 $scope.privacyPolicy = data.privacyPolicy;
                 $scope.returnPolicy = data.returnPolicy;
@@ -229,7 +229,7 @@ angular.module('starter.controllers', [])
 
         $scope.appId = $rootScope.appId;
 
-        $http.get( constants.SERVER_URL + '/templates/getTermsAndConditions?appId='+$scope.appId).success(function(data) {
+        $http.get( constants.server_url + 'cmd=getTermsAndConditions&appId='+$scope.appId).success(function(data) {
             $scope.terms = data.termsAndCondition;
         }).error(function(err) {
             alert('warning', "Unable to get terms & condition info", err.message);
@@ -292,11 +292,11 @@ angular.module('starter.controllers', [])
                 +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=article";
 
             if ($stateParams.categoryId == 'firstMenu') {
-                $http.get(constants.SERVER_URL + '/templates/getArticleCategoryByAppId?appId=' + $rootScope.appId)
+                $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                     .success(function (catList) {
                         if (catList.length > 0) {
                             var firstCat = catList[0];
-                            $http.get(constants.SERVER_URL + '/templates/getArticles?appId=' + $rootScope.appId + "&categoryId=" + firstCat.id)
+                            $http.get(constants.server_url + 'cmd=getArticles&appId=' + $rootScope.appId + "&categoryId=" + firstCat.id)
                                 .success(function (data) {
                                     $scope.artilceList = data;
                                     $timeout(function () {
@@ -310,7 +310,7 @@ angular.module('starter.controllers', [])
                     alert('loading err');
                 });
             } else {
-                $http.get(constants.SERVER_URL + '/templates/getArticles?appId=' + $rootScope.appId + "&categoryId=" + $stateParams.categoryId)
+                $http.get(constants.server_url + 'cmd=getArticles&appId=' + $rootScope.appId + "&categoryId=" + $stateParams.categoryId)
                     .success(function (data) {
                         $scope.artilceList = data;
                         $timeout(function () {

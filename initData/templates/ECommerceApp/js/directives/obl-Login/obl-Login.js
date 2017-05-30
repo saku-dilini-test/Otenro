@@ -15,7 +15,7 @@
 								password : $scope.data.password,
 								appId : $rootScope.appId
 							};
-							$http.post(constants.SERVER_URL+"/templatesAuth/authenticateForApp",data)
+							$http.post(constants.server_url+'cmd=authenticateForApp&email='+$scope.data.username+'&password='+$scope.data.password+'&appId='+$rootScope.appId)
 								.then(function(res){
                                         console.log(res);
 										var requestParams = {

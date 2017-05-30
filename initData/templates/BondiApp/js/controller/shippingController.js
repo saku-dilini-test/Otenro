@@ -29,7 +29,7 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         'appId':$scope.appId,
         'country': $scope.country
     };
-    $http.post(constants.SERVER_URL + '/templatesOrder/getTaxInfoByCountry',param).success(function(data) {
+    $http.post(constants.server_url + 'cmd=getTaxInfoByCountry&appId='+$scope.appId+'&country='+$scope.country).success(function(data) {
         if(data == ''){
             $scope.hide = true;
             $scope.tax = 0;
@@ -62,7 +62,7 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
 
     //get the currency
-    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(data) {
         $scope.currency = data;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
@@ -76,7 +76,7 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         'appId':$scope.appId,
         'country': $scope.country
     };
-    $http.post(constants.SERVER_URL + "/edit/getShippingInfoByCountry",param)
+    $http.post(constants.server_url + "cmd=getShippingInfoByCountry&appId="+$scope.appId+"&country="+$scope.country)
         .success(function (data) {
                 $scope.shippingData=data;
                 $log.debug($scope.shippingData);

@@ -32,13 +32,13 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
         +appData.userId+"&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
 
 
-     $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+appData.appId).success(function(data) {
+     $http.get(constants.server_url + 'cmd=getSpecificChild&appId='+appData.appId).success(function(data) {
          $scope.categories = data;
      }).error(function(err) {
          alert('warning', "Unable to get categories", err.message);
      });
 
-     $http.get(constants.SERVER_URL + "/app/getIconAllowance?appId="+$rootScope.appId)
+     $http.get(constants.server_url + "cmd=getIconAllowance&appId="+$rootScope.appId)
         .success(function(data){
             if(data.allowPromote == true){
               $rootScope.allowOtenroToPromote = true;

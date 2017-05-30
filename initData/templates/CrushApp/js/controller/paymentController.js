@@ -208,45 +208,38 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here start Cash Payment Function --/--
 
     $scope.confirmCashPayment = function(){
+
+    console.log('$stateParams.item.delivery.method'+$stateParams.item.delivery.method)
+    var url;
+
+        var object = JSON.stringify($stateParams.item.cart, function( key, value ){
+
+        if( key === "$$hashKey" ) {
+           return undefined;
+        }
+        return value;
+
+
+        })
+
         if($stateParams.item.delivery.method == "Delivery"){
-            $scope.details ={
-                appId : $rootScope.appId,
-                registeredUser: $scope.user.registeredUser,
-                item : $stateParams.item.cart,
-                amount : $stateParams.item.amount,
-                customerName : $scope.user.name,
-                deliverName : $stateParams.item.delivery.name,
-                deliveryNo : $stateParams.item.delivery.streetNumber,
-                deliveryStreet : $stateParams.item.delivery.streetName,
-                deliveryCity : $stateParams.item.delivery.city,
-                deliveryCountry : $stateParams.item.delivery.country,
-                deliveryZip : $stateParams.item.delivery.zip,
-                telNumber : $stateParams.item.delivery.number,
-                tax :   $stateParams.item.taxTotal,
-                shippingCost :   $stateParams.item.shippingCost,
-                shippingOpt : $stateParams.item.shipping.shippingOption,
-                email: $stateParams.item.userEmail,
-                currency: $rootScope.currency,
-                promotionCode: $stateParams.item.promotionCode
-            };
+                    $scope.details ={
+
+                    };
+
+              url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$scope.user.name+'&deliverName='+$stateParams.item.delivery.name+'&deliveryNo='+$stateParams.item.delivery.streetNumber+ '&deliveryStreet='+$stateParams.item.delivery.streetName+'&deliveryCity='+$stateParams.item.delivery.city+'&deliveryCountry='+$stateParams.item.delivery.country+ '&deliveryZip='+$stateParams.item.delivery.zip+'&telNumber='+ $stateParams.item.delivery.number+'&tax='+$stateParams.item.taxTotal  +'&shippingCost='+$stateParams.item.shippingCost+'&shippingOpt='+ $stateParams.item.shipping.shippingOption+'&email='+ $stateParams.item.userEmail+'&currency='+$rootScope.currency  +'&promotionCode='+$stateParams.item.promotionCode,$stateParams.item.cart
+
         }
         else{
-            $scope.details ={
-                appId : $rootScope.appId,
-                registeredUser: $scope.user.registeredUser,
-                item : $stateParams.item.cart,
-                amount : $stateParams.item.amount,
-                customerName : $stateParams.item.deliverDetails.name,
-                telNumber : $stateParams.item.deliverDetails.number,
-                tax :   $stateParams.item.taxTotal,
-                shippingCost :   $stateParams.item.shippingCost,
-                pickupId: $stateParams.item.pickupId,
-                email: $stateParams.item.userEmail,
-                currency:$rootScope.currency,
-                promotionCode: $stateParams.item.promotionCode
-            }
+
+                    $scope.details ={
+
+                    };
+            url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$stateParams.item.deliverDetails.name+'&telNumber='+$stateParams.item.deliverDetails.number+'&tax='+$stateParams.item.taxTotal+'&shippingCost='+$stateParams.item.shippingCost+'&pickupId='+$stateParams.item.pickupId+'&email='+$stateParams.item.userEmail+'&currency='+$rootScope.currency+'&promotionCode='+$stateParams.item.promotionCode
+
+
         }
-        $http.post(constants.SERVER_URL+"/templatesOrder/saveOrder",$scope.details)
+        $http.post(constants.server_url+ url)
             .then(function(res){
                     $scope.details.id = $rootScope.cart.cartItems[0].id;
                     $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
@@ -399,7 +392,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
     var braintreeClient;
     $http
-        .get(constants.SERVER_URL + '/edit/getClientToken?customerId=dsjdfsjdfjshdfjshjfhsjfhsdjkfhsdjkfhsjdkfhk')
+        .get(constants.server_url + 'cmd=getClientToken&customerId=dsjdfsjdfjshdfjshjfhsjfhsdjkfhsdjkfhsjdkfhk')
         .then(function(response) {
             if (response.status === 200 && response.data !== undefined) {
                 braintreeClient = new braintree.api.Client({clientToken: response.data, enableCORS: true});
