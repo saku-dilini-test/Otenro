@@ -176,6 +176,7 @@ module.exports = function(option) {
    function saveOrder (req,Done){
 
        var data = req;
+       console.log('SAVEORDER==='+JSON.stringify(data))
 
        var collection = db.collection('applicationorder');
        data['paymentStatus'] = 'Pending';
@@ -241,9 +242,13 @@ module.exports = function(option) {
 
         else{
 
+            var output = JSON.parse(data.item);
+            console.log('**********'+JSON.stringify(output))
+
             var collection = db.collection('shippingdetails');
             var obj_id = new ObjectID(data.pickupId);
             collection.findOne({_id:obj_id,appId:data.appId},function(err,pickUp){
+            console.log("________"+JSON.stringify(pickUp))
 
                 if (err){
                     console.log(err);
@@ -280,16 +285,15 @@ module.exports = function(option) {
                 var collection = db.collection('applicationorder');
                 collection.insert(Data,function(err, order){
 
-                    if(err){
-                        console.log(err)
-                        return err
-
-                    }
+                       if(err){
+                           console.log('err:::'+err)
+                       }
                     var obj_id = new ObjectID(Data.appId);
                     var collection = db.collection('application');
                     collection.findOne({_id:obj_id},function(err,app){
 
                         Data['userId'] = app.userId;
+                         console.log(':::::::::::::::::::'+Data['userId'])
 
                         sentMails.sendOrderEmail(Data,function (err,msg) {
 
@@ -650,9 +654,12 @@ module.exports = function(option) {
    function getShippingPickupInfo (req,Done){
         if(req.appId != null){
             var collection = db.collection('shippingdetails');
-            collection.findOne({appId:req.appId,shippingOption:'Pick up'}, function(err, data) {
-
-                Done( null, data );
+            collection.find({appId:req.appId,shippingOption:'Pick up'}).toArray (function(err, data) {
+            var Data = JSON.stringify(data).replace(/_id/g,'id');
+            var Adata = JSON.parse(Data);
+            //collection.findOne({appId:req.appId,shippingOption:'Pick up'}, function(err, data) {
+                console.log('^^^^^^^^^^^'+JSON.stringify(Adata))
+                Done( null, Adata );
             });
         }
    }

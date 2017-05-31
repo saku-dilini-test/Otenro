@@ -6,7 +6,7 @@
  */
 (function(angular, undefined) {
     angular
-        .module('
+        .module('invisionApp')
 
         .constant('routesConfig', (function () {
             'use strict';
