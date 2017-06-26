@@ -1,0 +1,143 @@
+ 
+<app-carousel
+   [slides]="slides">   
+</app-carousel>
+
+ <div class="container">       
+   	<div class="row">
+    	<div class="col-md-9">
+			<form>
+				<div>
+					<table class="table table-bordered table-responsive" cellspacing="0">
+						<thead>
+							<tr>
+								<td width="80px">&nbsp;</td>
+								<td><span>Product</span></td>
+								<td><span>Price</span></td>
+								<td width="15%"><span>Quantity</span></td>
+								<td><span>Total</span></td>
+								<td><span>remove</span></td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<a href="catalog-product.html">
+		                                <img width="80" height="80" src="http://lorempixel.com/160/180/fashion">
+		                            </a>						
+		                        </td>
+								<td data-title="Product">
+									<div>
+										<a>Hyperion</a>							
+									</div>
+								</td>
+								<td data-title="Price">
+									<span>
+										<span>£</span>
+										875.00
+									</span>						    
+								
+								</td>
+								<td data-title="Quantity">
+									<div data-trigger="spinner">
+										<input type="text" data-rule="quantity" value="1" title="Qty" class="form-control">		
+									</div>
+								</td>
+								<td data-title="Total">
+									<span>
+										<span>£</span>
+										875.00
+									</span>						
+								</td>
+								<td>
+									<a href="/" class="btn btn-remove" title="Remove this item" >
+										<i class="fa fa-trash fa-lg"></i>
+									</a>					
+								</td>
+							</tr>
+							<tr>
+								<td colspan="5" class="text-left">
+										<input type="text" placeholder="Coupon code" class="form-control w-50 d-inline align-middle">
+										<input type="submit" name="apply_coupon" value="Apply Coupon"  class="btn btn-primary">
+								</td>
+								<td colspan="1" class="text-right">
+									<input type="submit" name="update_cart" value="Update Cart" class="btn btn-primary">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+
+			<div class="w-50 pull-right clearfix">
+				<h5>Cart Total</h5>
+				<table cellspacing="0" class="table table-responsive table-bordered">
+					<tbody>
+						<tr>
+							<th width="82%">Subtotal</th>
+							<td data-title="Subtotal">
+								<span class="d-inline">£</span>
+								<span class="d-inline">875.00</span>
+							</td>
+						</tr>
+						<tr>
+							<th>Total</th>
+							<td data-title="Total">
+								<strong>
+									<span class="d-inline">£</span>
+									<span class="d-inline">875.00</span>
+								</strong> 
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<button class="btn btn-secondary bg-inverse text-white btn-block" (click)="navigate('checkout')">
+						Checkout
+					</button>
+				</div>
+			</div>
+       </div>
+              
+        <div class="col-md-3">
+        	<h5 class="text-uppercase my-3">Categories</h5>
+	        <ngb-accordion  [closeOthers]="true" #acc="ngbAccordion" activeIds="">
+			  <ngb-panel>
+			    <ng-template ngbPanelTitle >
+			      <span><i class="fa fa-caret-right pr-3  control-2"></i><i class="fa fa-caret-down pr-3 control-1" ></i> Clothing</span>
+			    </ng-template>
+			    <ng-template ngbPanelContent>
+			   		<ul>
+			   			<li>Jackets</li>
+			   			<li>Shorts</li>
+			   			<li>Pants</li>
+			   			<li>Shirts</li>
+			   			<li>Sweatshirts</li>
+			   		</ul>
+			    </ng-template>
+			  </ngb-panel>
+			  <ngb-panel>
+			    <ng-template ngbPanelTitle>
+			      <span><i class="fa fa-caret-right pr-3 control-2"></i><i class="fa fa-caret-down pr-3 control-1"></i> Shoes</span>
+			    </ng-template>
+			    <ng-template ngbPanelContent>
+			   		<ul>
+			   			<li>Jackets</li>
+			   			<li>Shorts</li>
+			   			<li>Pants</li>
+			   			<li>Shirts</li>
+			   			<li>Sweatshirts</li>
+			   		</ul>
+			    </ng-template>
+			  </ngb-panel>
+			  
+			</ngb-accordion>
+        </div>
+    </div>
+</div>
+
+
+
+  <app-newsletter></app-newsletter>
+
+  <hr class="featurette-divider">

@@ -14,6 +14,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { OwlModule } from 'angular-owl-carousel';
 // https://angular-maps.com/guides/getting-started/
 import { AgmCoreModule } from '@agm/core';
+// http://tb.github.io/ng2-nouislider/
+import { NouisliderModule } from 'ng2-nouislider';
 
 
 
@@ -33,7 +35,8 @@ import { AgmCoreModule } from '@agm/core';
     OwlModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCoIor1Q1dpEf57CudzEk4rS7XIzAxR8jc'
-    })
+    }),
+    NouisliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

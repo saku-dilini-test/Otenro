@@ -53,6 +53,8 @@
        'owl.carousel': '../node_modules/owl.carousel/dist/owl.carousel.js',
        'angular-owl-carousel': 'npm:angular-owl-carousel/',
        '@agm/core': 'npm:@agm/core/core.umd.js',
+       'nouislider': 'npm:/nouislider',
+      'ng2-nouislider': 'npm:/ng2-nouislider',
 
       // other libraries
       'rxjs':                      'npm:rxjs',
@@ -75,6 +77,8 @@
        defaultExtension: 'js'
       },
       'environments': {defaultExtension: 'ts'},
+      'nouislider': { main: 'distribute/nouislider.js', defaultExtension: 'js' },
+      'ng2-nouislider': { main: 'src/nouislider.js', defaultExtension: 'js' },
     }
   });
 
