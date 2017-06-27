@@ -34,7 +34,7 @@ import { NouisliderModule } from 'ng2-nouislider';
     NgbModule.forRoot(),
     OwlModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCoIor1Q1dpEf57CudzEk4rS7XIzAxR8jc'
+      apiKey: 'AIzaSyBanVJ_9ViC-HeJruJzhetGXUERg1eYXag'
     }),
     NouisliderModule
   ],

@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CarouselComponent } from '../../addons/carousel/carousel.component';
-import { MarketingOption1LeftComponent } from '../../addons/marketing-option1-left/marketing-option1-left.component';
-import { MarketingOption1RightComponent } from '../../addons/marketing-option1-right/marketing-option1-right.component';
-
-
-
 @Component({
   selector: 'app-homepage',
   templateUrl: './app/page-body/homepage/homepage.component.html',
