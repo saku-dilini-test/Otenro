@@ -15,7 +15,17 @@ var app = express();
 var router = express.Router();
 var base64Img = require('base64-img');
 
+/*view: function (req,res){
 
+console.log('okkkkkkkkkkkk')
+    res.sendfile('/var/www/html/meServer/temp/'+ req.userId + '/templates/' + req.appId + '/img/'+ req.img);
+
+}*/
+/*function a (req, res){
+  console.log('okkkkkkkkkkkk')
+  console.log(req)
+     res.sendfile('/var/www/html/meServer/temp/'+ req.userId + '/templates/' + req.appId + '/img/'+ req.img);
+};*/
 
 
 module.exports = function(option) {
@@ -25,6 +35,7 @@ module.exports = function(option) {
 
     var url = 'mongodb://localhost:27017/appBuilder';
     var APP_FILE_SERVER = '/home/onbit/Documents/appFileServer/';
+
 
     MongoClient.connect(url, function(err, db){
 
@@ -51,6 +62,7 @@ module.exports = function(option) {
         if(req.appId != null){
             var collection = db.collection('applicationstoresettings');
             collection.findOne({appId:req.appId}, function(err, item) {
+            console.log("getAboutUs::"+JSON.stringify(item))
                 Done( null, item);
             });
         }
@@ -67,28 +79,52 @@ module.exports = function(option) {
 
     }
 
-    function viewImages (req,Done){
+    function viewImages (req,respond){
 
-        // hard won knowledge from http://stackoverflow.com/questions/20035615/using-raw-image-data-from-ajax-request-for-data-uri
-        /*var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-        var xhr = new XMLHttpRequest();
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.responseType = 'arraybuffer';
-        xhr.onload = function(e) {
-          var arr = new Uint8Array(this.response);
-          var raw = String.fromCharCode.apply(null,arr);
-          var b64 = base64.encode(raw);
-          var dataURL=app;"base64," + b64;
-        };*/
+        var http = require('http'),fs = require('fs'),image;
+        var filepath = APP_FILE_SERVER + req.userId + '/templates/' + req.appId + '/img/'+ req.img;
+
+        if(req.img){
+
+            // function to encode file data to base64 encoded string
+            function base64_encode(file) {
+
+                var bitmap = fs.readFileSync(file);
+                return new Buffer(bitmap).toString('base64');
+
+            }
+            var base64str = base64_encode(filepath);
+            console.log("dasdasd"+base64str)
+
+            respond(null,{imageSrc:'data:image/jpeg;base64,'+base64str})
+
+    /*            fs.readFile(filepath, function(err, data) {
+                    //seneca.log.info("@@@@@@@@@@2"+data)
+                        var app = {
+                        'image':data
+                        };
+                    response(null,data)
+
+                        //console.log("@@@@@@@@@@2"+app.image)
+                  if (err) throw err; // Fail if the file can't be read.
+
+                });*/
 
 
 
-         var app = ('/var/www/html/meServer/temp/'+ req.userId + '/templates/' + req.appId + '/img/'+ req.img);
-         //sendfile APP_FILE_SERVER + req.userId + '/templates/' + req.appId + '/img/'+ req.img;
+         }
 
-         Done( null, app);
-    }
+}
+
+
+
+
+
+/*    viewImages : function(req,res){
+           res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
+    },*/
+
+
 
 
     function getTermsAndConditions (req,Done){

@@ -26,6 +26,7 @@ module.exports = function(option) {
     var MongoClient = require('mongodb').MongoClient;
     var url = 'mongodb://localhost:27017/appBuilder';
     var ObjectID = require('mongodb').ObjectID;
+    var send = require('send');
 
 
     MongoClient.connect(url, function(err, db){
@@ -65,7 +66,7 @@ module.exports = function(option) {
             var collection = db.collection('thirdnavigation');
             var thirdNavi = [];
             collection.findOne({appId:req.appID,childId:req.childId,published:'YES'}, function(err, app) {
-                console.log('app'+app);
+                //console.log('app'+app);
                 Done( null, app );
             });
         }
@@ -87,7 +88,7 @@ module.exports = function(option) {
             collection.findOne({_id:obj_id}, function(err, app) {
             console.log('getCurrency'+JSON.stringify(app))
             var currency = app.appSettings.appCurrency;
-            console.log('currencyy'+JSON.stringify(currency))
+            //console.log('currencyy'+JSON.stringify(currency))
 
 
                 Done( null, currency );
@@ -118,7 +119,7 @@ module.exports = function(option) {
         if(req.appId != null){
             var collection = db.collection('applicationtax');
             collection.findOne({appId:req.appId}, function(err, app) {
-            console.log('taxIfo=='+JSON.stringify(app))
+            //console.log('taxIfo='+JSON.stringify(app))
                 Done( null, [app] );
             });
         }
@@ -130,7 +131,7 @@ module.exports = function(option) {
 
             var collection = db.collection('country');
             collection.find().toArray(function(err, app){
-                console.log('appdataaaaaaaaaaaaaaaaa'+app);
+               // console.log('appdata'+app);
                 Done( null, {data:app} );
             });
 
@@ -176,7 +177,7 @@ module.exports = function(option) {
    function saveOrder (req,Done){
 
        var data = req;
-       console.log('SAVEORDER==='+JSON.stringify(data))
+       //console.log('SAVEORDER='+JSON.stringify(data))
 
        var collection = db.collection('applicationorder');
        data['paymentStatus'] = 'Pending';
@@ -220,7 +221,7 @@ module.exports = function(option) {
                        collection.findOne({_id:obj_id},function(err,app){
 
                            Data['userId'] = app.userId;
-                           console.log(':::::::::::::::::::'+Data['userId'])
+                           //console.log(':::::::::::::::::::'+Data['userId'])
 
                            sentMails.sendOrderEmail(Data,function (err,msg) {
 
@@ -243,12 +244,12 @@ module.exports = function(option) {
         else{
 
             var output = JSON.parse(data.item);
-            console.log('**********'+JSON.stringify(output))
+            //console.log(JSON.stringify(output))
 
             var collection = db.collection('shippingdetails');
             var obj_id = new ObjectID(data.pickupId);
             collection.findOne({_id:obj_id,appId:data.appId},function(err,pickUp){
-            console.log("________"+JSON.stringify(pickUp))
+            //console.log("________"+JSON.stringify(pickUp))
 
                 if (err){
                     console.log(err);
@@ -293,7 +294,6 @@ module.exports = function(option) {
                     collection.findOne({_id:obj_id},function(err,app){
 
                         Data['userId'] = app.userId;
-                         console.log(':::::::::::::::::::'+Data['userId'])
 
                         sentMails.sendOrderEmail(Data,function (err,msg) {
 
@@ -319,14 +319,15 @@ module.exports = function(option) {
      /*Manually updating the relevant quantity in the ThirdNavigation*/
 
             var obj = [];
-            var data = req.cart[0];
-            console.log("req[0]"+req.cart[0]);
+            //var data = req.cart[0];
+
             var collection = db.collection('thirdnavigation');
-            collection.findOne({id:req.id}, function(err, app) {
-                for(var i =0;i<app[0].variants.length;i++){
-                    if(app[0].variants[i].sku == data.sku){
-                        app[0].variants[i].quantity = app[0].variants[i].quantity - data.qty;
-                        collection.update({id:data.id},app[0],function(err,thirdNavi){
+            collection.find({id:req.id}).toArray(function(err, app) {
+            console.log("variants="+app[0].variants);
+                for(var i=0;i<app[0].variants.length;i++){
+                    if(app[0].variants[i].sku == req.sku){
+                        app[0].variants[i].quantity = app[0].variants[i].quantity - req.qty;
+                        collection.update({id:req.id},app[0],function(err,thirdNavi){
                                  obj.push(thirdNavi);
                         })
                     }
@@ -368,7 +369,7 @@ module.exports = function(option) {
 
             var collection = db.collection('applicationstoresettings');
             collection.findOne({appId:req.appId}, function(err, data) {
-                console.log('dddddddddddddddddddddddddd'+data)
+                //console.log(data)
                 Done( null, data );
             });
 
@@ -401,7 +402,7 @@ module.exports = function(option) {
           var collection = db.collection('shippingdetails');
 
            collection.find(searchQuery).toArray (function(err, data) {
-           console.log('_______________'+JSON.stringify(data))
+           //console.log('_______________'+JSON.stringify(data))
 
 /*                 if(data){
                       collection.insert(data, function(err, data){
@@ -489,6 +490,8 @@ module.exports = function(option) {
             email: req.email,
             appId : req.appId
         },function foundUser(err, user){
+            if (err) return err;
+            if (!user) return err;
 
         console.log('name'+JSON.stringify(req));
             Passwords.checkPassword({
@@ -638,7 +641,7 @@ module.exports = function(option) {
            var collection = db.collection('applicationtax');
 
            collection.findOne(searchQuery, function(err, data) {
-                console.log('applicationtaxxxxxxxxxxxxxxxxxxxxxxxxx'+JSON.stringify(data))
+                //console.log('applicationtax'+JSON.stringify(data))
                 Done( null, [data] );
 /*                if(data){
                     collection.insert(data, function(err, data){
@@ -658,7 +661,7 @@ module.exports = function(option) {
             var Data = JSON.stringify(data).replace(/_id/g,'id');
             var Adata = JSON.parse(Data);
             //collection.findOne({appId:req.appId,shippingOption:'Pick up'}, function(err, data) {
-                console.log('^^^^^^^^^^^'+JSON.stringify(Adata))
+                //console.log(JSON.stringify(Adata))
                 Done( null, Adata );
             });
         }
@@ -666,7 +669,6 @@ module.exports = function(option) {
 
 
   function getClientToken (req,Done){
-  console.log('get get get get get')
        braintree.connect({
             environment: braintree.Environment.Sandbox,
             merchantId: "vk2y7mb8s5vbhctg",
@@ -675,8 +677,8 @@ module.exports = function(option) {
 
        }).clientToken.generate({}, function (err, response) {
             if (err) return err
-            console.log("response " + JSON.stringify(response));
-            Done( null, { data:response.clientToken} );
+            console.log("response " + response.clientToken);
+            Done( null, response.clientToken );
        });
 
     }

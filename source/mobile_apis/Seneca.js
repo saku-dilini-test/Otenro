@@ -34,7 +34,7 @@ seneca.act({ role: 'process', cmd: 'getPolicies'}, function ( err, result ) {
 
 seneca.act({ role: 'process', cmd: 'viewImages'}, function ( err, result ) {
    if (err) return console.error(err)
-      console.log(result);
+      console.log('result123::::::::'+result);
 } )
 
 seneca.act({ role: 'process', cmd: 'getTermsAndConditions'}, function ( err, result ) {
@@ -160,9 +160,6 @@ seneca.act({ role: 'process', cmd: 'getCommentsDummy'}, function ( err, result )
       console.log(result);
 } )
 
-
-
-
-seneca.listen({ port:8080, host:'192.168.8.56',protocol: 'http' })
+seneca.listen({ port:8080, host:'192.168.8.54',protocol: 'http' })
 
 

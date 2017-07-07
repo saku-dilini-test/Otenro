@@ -59,6 +59,7 @@
     "machinepack-jwt": "^0.1.14",
     "machinepack-passwords": "^2.3.0",
     "mongodb": "^2.2.27",
+    "node-sass-middleware": "^0.11.0",
     "path": "^0.12.7",
     "request": "^2.81.0",
     "send": "^0.15.3",
