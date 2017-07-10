@@ -13,7 +13,7 @@
 					</label>
 					<div class="row">
 						<div class="col"></div>
-						<button class="col col-67 button button-block button-small made-easy-button-setting" ng-click="loginForm.$valid && login()">
+						<button class="col col-67 button button-block button-small made-easy-button-setting" ng-click="loginForm.$valid && login()" ng-disabled="loginForm.$invalid">
 							Login
 						</button>
 						<div class="col"></div>
