@@ -2366,3 +2366,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     letter-spacing: 1.5px;
     font-size: 11px;
 }
+
+.orders-dialog .md-dialog-main {
+    overflow-y: hidden;
+}
