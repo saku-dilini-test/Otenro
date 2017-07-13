@@ -115,6 +115,8 @@ button {
     top: 43px;
     left: -65px;
     position: relative;
+    -moz-transform-origin: top right;
+    -moz-transform: scale(0.6);
 }
 
 .delivery-details .item-content{
@@ -123,7 +125,7 @@ button {
 
 .delivery-details .delivery-form{
     zoom: 0.7;
-    padding-left: 73px;
+    padding-left: 65px;
 }
 
 .delivery-details .delivery-form label{
