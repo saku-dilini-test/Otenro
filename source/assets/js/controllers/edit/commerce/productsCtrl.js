@@ -860,7 +860,12 @@
                             $scope.product.selection= [];
                         }
                         this.confirm = function click(vName){
-                            if($scope.product.selection.length == 4 && $scope.vTypeRemove == undefined){
+                            if(!vName){
+                                toastr.error('Variant name can not be a empty ', 'Error!', {
+                                    closeButton: true
+                                });
+                            }
+                            else if($scope.product.selection.length == 4 && $scope.vTypeRemove == undefined){
                                  toastr.error('You can only add 4 variants', 'Error!', {
                                       closeButton: true
                                  });
