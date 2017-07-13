@@ -460,7 +460,7 @@ a.md-button:hover:not([disabled]),
 .me-file-upload.medium .upload-wrapper input{
     height: 120px;
     width: 120px;
-    border: 1px;
+    border-width: 1px;
 }
 
 .me-file-upload.large,
