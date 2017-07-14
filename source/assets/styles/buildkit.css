@@ -2031,6 +2031,7 @@ trix-toolbar .button_group input[type=button]{
 
 .md-dialog-container{
     background-color:rgba(255, 255, 255, 0.60);
+    position: fixed ;
 }
 
 /* error massages. add error class. <span class="error"> */
@@ -2346,6 +2347,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     color:gray;
 }
 .add-new-variant{
+
     position: fixed;
     bottom: 86px;
 
