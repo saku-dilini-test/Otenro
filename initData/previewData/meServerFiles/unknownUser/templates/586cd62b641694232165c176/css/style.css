@@ -237,6 +237,9 @@ div {
      top: 38px;
      left: -56px;
     position: relative;
+    -moz-transform-origin: center right;
+    -moz-transform: scale(0.6);
+
 }
 
 .delivery-details .item-content{
@@ -343,7 +346,7 @@ input[type=number] {
 }
 .item-error-message{
     color:red;
-    zoom:0.7;
+    font-size: 70%;
 }
 .no-padding{
     padding:0;
