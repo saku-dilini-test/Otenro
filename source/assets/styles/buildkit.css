@@ -2347,17 +2347,20 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 }
 .add-new-variant{
     position: fixed;
-    bottom: 80px;
+    bottom: 86px;
+
 }
 
 .custom-add-products{
     overflow-x:auto;
     padding:0;
     margin:25px 40px 0;
+    padding-bottom: 10px;
 }
 
 .custom-add-products .me-hours-table{
    width:1500px;
+   display: -moz-box;
 }
 
 .terms div{
