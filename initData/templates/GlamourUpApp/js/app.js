@@ -256,61 +256,61 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
-      .state('app.payment', {
-          cache: false,
-          url: '/payment',
-          params:{
-              item: null,
-              registeredName:null,
-              deliverDetails:null,
-              amount:null,
-              shippingOpt:null,
-              method:null,
-              pickupId:null
-          },
-          views: {
-              'menuContent': {
-                  templateUrl: 'templates/payment.html',
-                  controller: 'paymentCtrl'
-              }
+  .state('app.payment', {
+      cache: false,
+      url: '/payment',
+      params:{
+          item: null,
+          registeredName:null,
+          deliverDetails:null,
+          amount:null,
+          shippingOpt:null,
+          method:null,
+          pickupId:null
+      },
+      views: {
+          'menuContent': {
+              templateUrl: 'templates/payment.html',
+              controller: 'paymentCtrl'
           }
-      })
-      .state('app.cart', {
-          cache: false,
-          url: '/cart',
-          views: {
-              'menuContent': {
-                  templateUrl: 'templates/cart.html',
-                  controller: 'cartCtrl'
-              }
+      }
+  })
+  .state('app.cart', {
+      cache: false,
+      url: '/cart',
+      views: {
+          'menuContent': {
+              templateUrl: 'templates/cart.html',
+              controller: 'cartCtrl'
           }
-      })
-      .state('app.checkout', {
-          cache: false,
-          url: '/checkout',
-          params:{
-              item: null,
-          },
-          views: {
-              'menuContent': {
-                  templateUrl: 'templates/checkout.html',
-                  controller: 'checkoutCtrl'
-              }
+      }
+  })
+  .state('app.checkout', {
+      cache: false,
+      url: '/checkout',
+      params:{
+          item: null,
+      },
+      views: {
+          'menuContent': {
+              templateUrl: 'templates/checkout.html',
+              controller: 'checkoutCtrl'
           }
-      })
-      .state('app.shipping', {
-          cache: false,
-          url: '/shipping',
-          params:{
-              item: null,
-          },
-          views: {
-              'menuContent': {
-                  templateUrl: 'templates/shipping.html',
-                  controller: 'shippingCtrl'
-              }
+      }
+  })
+  .state('app.shipping', {
+      cache: false,
+      url: '/shipping',
+      params:{
+          item: null,
+      },
+      views: {
+          'menuContent': {
+              templateUrl: 'templates/shipping.html',
+              controller: 'shippingCtrl'
           }
-      })
+      }
+  })
   .state('app.deliverDetails', {
       cache: false,
       url: '/deliverDetails',
@@ -338,7 +338,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       }
   });
 
-  if(localStorage.getItem('appLocalStorageUser')){
+  if(localStorage.length > 2){
     $urlRouterProvider.otherwise('/app/category');
   }
   else{
