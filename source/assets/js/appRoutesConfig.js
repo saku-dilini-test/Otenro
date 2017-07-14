@@ -43,6 +43,11 @@ angular.module('app')
             controller: 'WelcomeTemplatesCtrl',
             templateUrl : 'user/welcome/welcomeTemplatesView.html'
 
+      }).state('anon.addNetwork',{
+            url :'/fromAddNetwork',
+            controller: 'LoginController',
+            templateUrl : 'auth/addNetwork.html'
+
       }).state('anon.livePreview',{
             url :'/livePreview/:p',
             params: {

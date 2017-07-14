@@ -1,0 +1,41 @@
+<!-- Page preloader -->
+<div id="loading">
+    <div id="preloader">
+        <span></span>
+        <span></span>
+    </div>
+</div>
+<div class="addNetwork">
+
+    <!-- Your logo -->
+    <img src="./images/made-easy-logo.svg" alt="" class="brand-logo" />
+
+    <section>
+        <h1>Get your business online today.</h1>
+
+            <h2>Sign up for free beta</h2>
+
+            <div class="row">
+                <div class="col-md-6">
+                        <a class="btn btn-primary btn-lg btn-block" ng-click="authenticate('facebook')">
+                            <i class="fa fa-facebook-square"></i> &nbsp; Sign in with Facebook</a>
+                </div>
+                <div class="col-md-6">
+                        <a class="btn btn-warning btn-lg btn-block" ng-click="authenticate('google')">
+                            <i class="fa fa-google-plus"></i>&nbsp;Sign in with Google+</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="btn btn-primary btn-lg btn-block" ng-click="register()">Register</a>
+                </div>
+            </div>
+
+
+    </section>
+      <!--Video is & autoplays, placed after major DOM elements for performance & has an image fallback  -->
+
+    <video autoplay loop id="video-background"  plays-inline>
+        <source src="./videos/labVid.mp4" type="video/mp4">
+    </video>
+</div>
