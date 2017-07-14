@@ -288,3 +288,7 @@ ol {
 .article div .row:last-child{
     height:60%;
 }
+.map {
+    width:100%;
+    height: 300px;
+}

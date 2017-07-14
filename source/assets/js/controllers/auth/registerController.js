@@ -21,6 +21,7 @@
                     $state.go('user.technicalSupporter');
                 }else {
                     commerceService.sendRegisterVerificationLinkEmail(user);
+                    goog_report_conversion(O_SERVER_URL + "#dashboard");
                     $state.go('user.dashboard');
                 }
             }).catch(function onError() {

@@ -67,6 +67,8 @@
                     toastr.success('Successfully Changed', 'Success', {
                         closeButton: true
                     });
+                    $scope.userEdit.password = "";
+                    $scope.userEdit.confirmPassword = "";
                     $scope.backToView(0);
                 });
             }).error(function(err) {
