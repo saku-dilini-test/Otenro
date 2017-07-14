@@ -61,7 +61,7 @@
                 });
             },
 
-            addAppStoreInfo: function(file, appStoreData,publishSplash){
+            addAppStoreInfo: function(appStoreData,publishSplash){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/setAppStoreDetails',
                     fields: {
