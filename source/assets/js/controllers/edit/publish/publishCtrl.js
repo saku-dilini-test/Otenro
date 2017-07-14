@@ -96,6 +96,7 @@
                             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=publish/";
 
 
+
                                 for (var i=0; i< 6; i++) {
                                     var tempImageUrl = tempImagePath + i+'.png';
                                     $scope.splash.push(tempImageUrl);
@@ -216,13 +217,7 @@
                                     copyrights: $scope.existingData[0].copyrights
 
                                 };
-                                $scope.publishSplash={
-                                    splash1 : $scope.existingData[0].splash1,
-                                    splash2 : $scope.existingData[0].splash2,
-                                    splash3 : $scope.existingData[0].splash3,
-                                    splash4 : $scope.existingData[0].splash4
 
-                                };
 
                          }
                     }).error(function(err){
@@ -232,7 +227,7 @@
         
 
      // App Store 
-        $scope.addAppStoreInfo = function(file,appStoreData,publishSplash) {
+        $scope.addAppStoreInfo = function(appStoreData,publishSplash) {
             $scope.count = 0;
             if (appStoreData.name == null || appStoreData.springBoardName == null || appStoreData.language == null ||
                     appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.desc == null ||
@@ -241,11 +236,10 @@
                     toastr.error('Fill all the fields', 'Warning', {
                         closeButton: true
                     });
-                }
-                else {
+
+            }else {
                     appStoreData.category = 'AppStore';
-                    file = $scope.thumbPic;
-                    publishService.addAppStoreInfo(file, appStoreData, publishSplash)
+                    publishService.addAppStoreInfo(appStoreData, publishSplash)
                         .success(function (data, status, headers, config) {
                             disableTabs(1, true, false, true, true);
                             toastr.success('General information has been added successfully', 'Saved', {
@@ -258,13 +252,11 @@
                     });
 
 
-                    publishSplash.forEach(function (file,publishSplash) {
+                   publishSplash.forEach(function (publishSplash) {
                         if (JSON.stringify(publishSplash).match("blobUrl")) {
                             publishService.uploadPublishFiles(publishSplash, $scope.count)
                                 .success(function (data, status, headers, config) {
-
                                 }).error(function (data, status, headers, config) {
-
                             });
                         }
                         $scope.count++;

@@ -1,6 +1,6 @@
 <ion-content class="made-easy-background-image made-easy-background-color">
 	<div class="animated zoomIn">
-		<form name="loginForm">
+		<form name="loginForm" novalidate>
 			<div class="card padding">
 					<div class="row">
 						<div class="col center padding made-easy-header-font">Enter Login Details</div>
@@ -17,7 +17,7 @@
 
 					<div class="row">
 						<div class="col col-top"></div>
-						<button class="col col-75 col-center button button-small made-easy-button-setting" ng-click="loginForm.$valid && login()">
+						<button class="col col-75 col-center button button-small made-easy-button-setting" ng-click="loginForm.$valid && login()" ng-disabled="loginForm.$invalid">
 							Login
 						</button>
 						<div class="col col-bottom"></div>
