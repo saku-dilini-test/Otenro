@@ -353,11 +353,14 @@ ion-slides {
 
 .payment .card-form{
     zoom: 0.7;
-    padding-left: 72px;
+    padding-left: 65px;
 }
 
 .payment .item-checkbox .checkbox{
     zoom: 0.7;
+    -moz-transform-origin: left;
+    -moz-transform: scale(0.6);
+
 }
 
 .payment .cards-list img{

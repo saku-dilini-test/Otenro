@@ -310,6 +310,8 @@ h2:first-child{
 
 .payment .item-checkbox .checkbox{
     zoom: 0.7;
+    -moz-transform-origin: left;
+    -moz-transform: scale(0.6);
 }
 
 .payment .cards-list img{
