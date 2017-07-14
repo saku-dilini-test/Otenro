@@ -24,7 +24,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
 
 
             $http.get(constants.server_url+"cmd=getAllCountry")
-                    .then(function(res){
+                    .success(function(res){
                         $scope.countries = res.data;
                     });
 
@@ -54,7 +54,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
             $scope.userId = $rootScope.userId;
             $scope.appId = $rootScope.appId;
             $scope.cartItems = $rootScope.cart.cartItems;
-            // default : tax info hide 
+            // default : tax info hide
             $scope.isShowTaxInfo = false;
 
               $scope.buttonDisable = function(qty,totalQty){
@@ -95,7 +95,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
                         $scope.tax = 0;
                     }else{
                         // First tax collection Tax-Amount apply to Product
-                        // ignore other 
+                        // ignore other
                         $scope.tax = taxInfo[0].taxAmount;
                         $scope.isShowTaxInfo = true;
                     }

@@ -6,9 +6,10 @@ mobileApp.controller('RegisterCtrl', function($scope,$rootScope,$http,$ionicPopu
 
 
     $http.get(constants.server_url+"cmd=getAllCountry")
-        .then(function(res){
+        .success(function(res){
             $scope.countries = res.data;
         });
+
     $scope.signUp = function() {
     $scope.appLocalStorageUser  = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
         var data = {

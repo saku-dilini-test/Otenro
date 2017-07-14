@@ -9,7 +9,7 @@
            <div class="row">
              <div class="col">
                <a class="item item-thumbnail-left"  >
-                   <img src="{{imageURL}}/{{item.imgURL[0].img}}">
+                   <img src="{{item.imgURL[0].img}}">
                    <h2 ng-model="item.name" class="made-easy-content-font" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}
                        <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></span>
 

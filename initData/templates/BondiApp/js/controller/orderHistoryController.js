@@ -17,7 +17,7 @@ mobileApp.controller('orderHistoryCtrl', function($scope,$rootScope,constants,$h
            +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
     try {
         $scope.appUserId = angular.fromJson(localStorage.getItem("appLocalStorageUser"+$rootScope.appId)).registeredUser;
-        $scope.orderHistory = angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.appUserId));
+        $scope.orderHistory = angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.appUserId));z
     }
     catch(err) {
        console.log("no orderHistory");

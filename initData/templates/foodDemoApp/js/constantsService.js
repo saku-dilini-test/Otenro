@@ -4,7 +4,7 @@
 (function() {
     angular.module('foodDemoApp').constant('constants', {
         SERVER_URL: 'http://localhost:1337',
-        server_url: 'http://192.168.8.56:8080/act?'
+        server_url: 'http://192.168.8.58:8080/act?'
     })
 })();
 

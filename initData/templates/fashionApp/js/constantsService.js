@@ -12,7 +12,7 @@
             'use strict';
 
             var siteURL = 'http://localhost:1337';
-            var server_url= 'http://192.168.8.56:8080/act?';
+            var server_url= 'http://192.168.8.58:8080/act?';
 
             var rootRoutesConfig = {
                 wpMenuByAppId: server_url + 'cmd=getArticleCategoryByAppId&appId=',  // OK

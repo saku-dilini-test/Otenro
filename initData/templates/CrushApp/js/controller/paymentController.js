@@ -4,6 +4,9 @@
 /**
  * Edited by Shashan on 01/11/16.
  */
+/**
+ * Edited by Kalani on 14/07/17.
+ */
 
 mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService,$log) {
 
@@ -22,7 +25,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here start retrieving the currency --/--//
     $scope.userId = $rootScope.userId;
     $scope.appId = $rootScope.appId;
-    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(data) {
         $rootScope.currency = data.sign;
         $rootScope.symbol = data.symbol;
     }).error(function(err) {
@@ -30,7 +33,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     });
 
 
-    $http.get(constants.SERVER_URL + '/edit/getIPGInfo?appId='+$scope.appId).success(function(data) {
+    $http.get(constants.server_url + 'cmd=getIPGInfo&appId='+$scope.appId).success(function(data) {
         $scope.paymentData = data;
         $log.debug($scope.paymentData);
         if($stateParams.item.delivery.method == "Delivery") {
@@ -242,7 +245,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         $http.post(constants.server_url+ url)
             .then(function(res){
                     $scope.details.id = $rootScope.cart.cartItems[0].id;
-                    $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
+                    //$http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
+                    $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
                         .then(function(res){
                                 $rootScope.cart.cartItems = [];
                                 $rootScope.cart.cartSize = 0;

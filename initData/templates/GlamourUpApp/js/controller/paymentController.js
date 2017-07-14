@@ -173,6 +173,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
 
         })
+        console.log($stateParams.item.cart)
 
         if($stateParams.item.delivery.method == "Delivery"){
              $scope.details ={
@@ -254,7 +255,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
         })
 
-        console.log(object);
+         console.log($stateParams.item.cart)
 
         if($stateParams.item.delivery.method == "Delivery"){
                     $scope.details ={

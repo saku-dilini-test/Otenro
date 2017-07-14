@@ -8,7 +8,7 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
 
 
     $http.get(constants.server_url+"cmd=getAllCountry")
-        .then(function(res){
+        .success(function(res){
         console.log("Countryies:::::::::::::"+JSON.stringify(res.data))
             $scope.countries = res.data;
         });

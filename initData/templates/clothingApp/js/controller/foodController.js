@@ -10,13 +10,51 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $rootScope.timestamp = new Date().getTime();
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
-    $scope.imageURL = constants.SERVER_URL
+    var image = []
+/*    $scope.imageURL = constants.SERVER_URL
         +"/templates/viewImages?userId="
-        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";*/
     $scope.selectedVariant = {};
 
-    $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
+    $http.get(constants.server_url + 'cmd=getThirdBySecondId&appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
     $scope.foods = data;
+
+    for(var i=0; i<data.length; i++){
+            //console.log(data[i].imageUrl)
+        getData(i);
+
+    }
+
+    function getData(i){
+
+            $http.get(constants.server_url+"cmd=viewImages&userId="+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi/"+data[i].imageUrl).success(function(Data) {
+                console.log(Data)
+                image.splice(i, 0, {img:Data.imageSrc});
+                replaceByValue(data,data[i].imageUrl,image[i].img)
+            }).error(function(err) {
+                alert('warning', "Unable to get categories", err.message);
+            });
+            //console.log(data[i].imageUrl)
+
+    }
+
+    function replaceByValue(imageData,equalImage,image) {
+          //console.log(imageData[0].imageUrl)
+
+          //console.log(image)
+
+            for( var k = 0; k < imageData.length; k++ ) {
+                if( equalImage == imageData[k].imageUrl ) {
+
+                    imageData[k].imageUrl = image ;
+                    imageData[k].tempImageArray[0].img = image;
+                    console.log(imageData)
+                    $scope.foods = imageData;
+                    console.log(imageData.length)
+                }
+            }
+
+    }
         for(var i=0; i<data.length; i++){
             if(data[i].discount){
             $scope.foods[i].price = data[i].discount;
@@ -189,7 +227,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             if($rootScope.cart.cartItems.length != 0){
                     var i=0;
                     while(i < $rootScope.cart.cartItems.length){
-                        if($scope.foodInfo.id == $rootScope.cart.cartItems[i].id && $scope.selectedVariant.sku == $rootScope.cart.cartItems[i].sku){
+                        if($scope.foodInfo._id == $rootScope.cart.cartItems[i]._id && $scope.selectedVariant.sku == $rootScope.cart.cartItems[i].sku){
                             $rootScope.cart.cartItems[i].qty += $scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
@@ -198,7 +236,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                         }
                         else if(i == ($rootScope.cart.cartItems.length -1)){
                             $rootScope.cart.cartItems.push({
-                                id: $scope.foodInfo.id,
+                                id: $scope.foodInfo._id,
                                 name: $scope.foodInfo.name,
                                 qty: $scope.selectedVariant.buyQuantity,
                                 sku: $scope.selectedVariant.sku,
@@ -219,7 +257,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             }
             else{
                 $rootScope.cart.cartItems.push({
-                    id: $scope.foodInfo.id,
+                    id: $scope.foodInfo._id,
                     name: $scope.foodInfo.name,
                     qty: $scope.selectedVariant.buyQuantity,
                     sku: $scope.selectedVariant.sku,
@@ -238,7 +276,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     };
 
     //get Sales and Promotions
-    $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {
+    $http.get(constants.server_url + 'cmd=getListOfSalesAndPromotions&appId='+$scope.appId).success(function(data) {
         $scope.salesandpromotion = data[0];
         console.log(data);
     }).error(function(err) {

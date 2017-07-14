@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$rootScope, $ionicSideMenuDelegate) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$rootScope,$http,$ionicSideMenuDelegate) {
 
     $rootScope.cart = {cartItems:[],cartSize:0,totalPrice:0};
     $rootScope.isUserLoggedIn = {check:false};
@@ -54,20 +54,54 @@ angular.module('starter.controllers', [])
                  paginationType: 'fraction',
 
              }
+    var image = [];
 
 
     // get all menu by app Id
     readMadeEasy.readFile().success(function(appData){
         appServices.getAllMenuByAppId(appData.appId)
-            .success(function (data) {
-                $scope.categoryList = data;
+            .success(function (imageData) {
+                for(i=0;i<(imageData.length);i++){
+                    getData(i)
+                }
+
+            function getData(i){
+
+                appServices.imageLoading(appData.userId,appData.appId,"secondNavi/",imageData[i].imageUrl)
+                .success(function(Data) {
+                    image.splice(i, 0, {img:Data.imageSrc});
+                    replaceByValue(imageData,imageData[i].imageUrl,image[i].img)
+               }).error(function(err) {
+                    alert('warning', "Unable to get categories", err.message);
+               });
+
+            }
+            function replaceByValue(imageData,equalImage,image) {
+              //console.log(imageData[0].imageUrl)
+
+              //console.log(image)
+
+                for( var k = 0; k < imageData.length; k++ ) {
+                    if( equalImage == imageData[k].imageUrl ) {
+
+                      //console.log('dsadsadsadasdadsad'+imageData[k].imageUrl)
+                      //console.log('dsadsadsadasdadsad'+image)
+
+                        imageData[k].imageUrl = image ;
+                        console.log(imageData)
+                         $scope.categoryList = imageData;
+                    }
+                }
+
+            }
+
             }).error(function (err) {
                 alert('Menu Loading error');
         });
 
         // defined second navigation image path
-        $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
-                          "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";
+/*        $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+appData.userId+
+                          "&appId="+appData.appId+"&"+new Date().getTime()+"&img=secondNavi";*/
         $http.get(constants.SERVER_URL + "/app/getIconAllowance?appId="+$rootScope.appId)
             .success(function(data){
                 if(data.allowPromote == true){
@@ -108,18 +142,57 @@ angular.module('starter.controllers', [])
     $scope.menuName = $stateParams.menuName;
     // set select Menu Id
     var menuId = $stateParams.menuId;
+    var image = [];
     // get all item by menu Id
     readMadeEasy.readFile().success(function(appData){
         appServices.getAllItemsByMenuId(menuId,appData.appId)
             .success(function (data) {
-                $scope.itemList = data;
+                //console.log(JSON.stringify(data))
+                for(var i=0; i<data.length; i++){
+                    //console.log(data[i].imageUrl)
+                    getData(i);
+
+                }
+
+                function getData(i){
+
+                appServices.imageLoading(appData.userId,appData.appId,"thirdNavi/",data[i].imageUrl)
+                    .success(function(Data) {
+                        console.log(Data)
+                        image.splice(i, 0, {img:Data.imageSrc});
+                        replaceByValue(data,data[i].imageUrl,image[i].img)
+                    }).error(function(err) {
+                        alert('warning', "Unable to get categories", err.message);
+                    });
+                    //console.log(data[i].imageUrl)
+
+                }
+                function replaceByValue(imageData,equalImage,image) {
+                  //console.log(imageData[0].imageUrl)
+
+                  //console.log(image)
+
+                    for( var k = 0; k < imageData.length; k++ ) {
+                        if( equalImage == imageData[k].imageUrl ) {
+
+                            imageData[k].imageUrl = image ;
+                            imageData[k].tempImageArray[0].img = image;
+                            console.log(imageData)
+                            $scope.itemList = imageData;
+
+                        }
+                    }
+
+                }
+
+
             }).error(function (err) {
                 alert('Items Loading error');
         });
 
         // defined third navigation image path
-        $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+ appData.userId +
-            "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+/*        $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+ appData.userId +
+            "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";*/
     });
 
     $scope.navigateFood = function(item){
@@ -163,14 +236,18 @@ angular.module('starter.controllers', [])
             }).error(function(err){
             alert('Currency Loading error');
         })
+            console.log(JSON.stringify(appData))
+            $scope.appData = appData;
+
 
         // defined third navigation image path
-        $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+ appData.userId +
-            "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+/*        $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+ appData.userId +
+            "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";*/
     });
 
     // set select Item Name
         $scope.itemName = $stateParams.itemName;
+
         $scope.sliderOptions = {
           initialSlide: 0,
           direction: 'horizontal', //or vertical
@@ -181,12 +258,14 @@ angular.module('starter.controllers', [])
         };
         $scope.sliderDelegate = null;
     // set select Menu Id
-    var itemId = $stateParams.item.id;
+    var itemId = $stateParams.item._id;
+    console.log('itemId:'+ itemId)
     // get item by Id
     appServices.getItemById(itemId)
         .success(function (data) {
+            console.log(JSON.stringify(data))
+            getImage(data);
             $scope.item = data;
-            $scope.images = data.tempImageArray;
             $scope.productVariants = data.variants;
             if(data.variants.length > 0){
                 $scope.selectedVariant = data.variants[0];
@@ -203,6 +282,19 @@ angular.module('starter.controllers', [])
         }).error(function (err) {
             alert('Item Loading error');
         });
+
+    function getImage(data){
+        var image = [];
+        //console.log(JSON.stringify(data))
+         appServices.imageLoading($scope.appData.userId,$scope.appData.appId,'thirdNavi/',data.imageUrl)
+                .success(function (Data) {
+                    data.imageUrl = Data.imageSrc;
+                    data.tempImageArray[0].img = Data.imageSrc;
+                    $scope.images = data.tempImageArray;
+                }).error(function (err) {
+                 alert('Item Loading error');
+                });
+    }
 
     $scope.lockBuyButton = true;
     $scope.changeVariant = function(variant){
@@ -331,7 +423,7 @@ angular.module('starter.controllers', [])
             if($rootScope.cart.cartItems.length != 0){
                     var i=0;
                     while(i < $rootScope.cart.cartItems.length){
-                        if($scope.item.id == $rootScope.cart.cartItems[i].id && $scope.selectedVariant.sku == $rootScope.cart.cartItems[i].sku){
+                        if($scope.item._id == $rootScope.cart.cartItems[i]._id && $scope.selectedVariant.sku == $rootScope.cart.cartItems[i].sku){
                             $rootScope.cart.cartItems[i].qty += $scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
@@ -340,7 +432,7 @@ angular.module('starter.controllers', [])
                         }
                         else if(i == ($rootScope.cart.cartItems.length -1)){
                             $rootScope.cart.cartItems.push({
-                                id: $scope.item.id,
+                                id: $scope.item._id,
                                 name: $scope.item.name,
                                 qty: $scope.selectedVariant.buyQuantity,
                                 sku: $scope.selectedVariant.sku,
@@ -360,7 +452,7 @@ angular.module('starter.controllers', [])
             }
             else{
                 $rootScope.cart.cartItems.push({
-                    id: $scope.item.id,
+                    id: $scope.item._id,
                     name: $scope.item.name,
                     qty: $scope.selectedVariant.buyQuantity,
                     sku: $scope.selectedVariant.sku,

@@ -6,7 +6,7 @@
                 <div class="col no-padding" ng-if="$index < categories.length">
                     <a  href="#/app/category/{{categories[$index].id}}/{{categories[$index].name}}">
                         <div class="col no-padding">
-                            <img width="100%" height="inherit" src="{{imageURL}}/{{categories[$index].imageUrl}}">
+                            <img width="100%" height="inherit" src="{{categories[$index].imageUrl}}">
                             <div class="h7 made-easy-header-font">{{categories[$index].name}}</div>
                         </div>
                     </a>
@@ -15,7 +15,7 @@
                 <div class="col no-padding" ng-if="($index+1) < categories.length">
                     <a  href="#/app/category/{{categories[$index+1].id}}/{{categories[$index+1].name}}">
                         <div class="col no-padding">
-                            <img width="100%" height="inherit" src="{{imageURL}}/{{categories[$index+1].imageUrl}}">
+                            <img width="100%" height="inherit" src="{{categories[$index+1].imageUrl}}">
                             <div class="h7 made-easy-header-font">{{categories[$index+1].name}}</div>
                         </div>
                     </a>

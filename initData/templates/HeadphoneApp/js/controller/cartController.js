@@ -33,13 +33,13 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     }
 
     $http.get(constants.server_url+"cmd=getAllCountry")
-        .then(function(res){
+        .success(function(res){
             $scope.countries = res.data;
         });
 
-     $scope.imageURL = constants.SERVER_URL
+/*     $scope.imageURL = constants.SERVER_URL
             +"/templates/viewImages?userId="
-            +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+            +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";*/
 
     $scope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;

@@ -31,14 +31,51 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
 
     readMadeEasy.readFile().success(function(data){
         $scope.appId = data.appId;
+        var image = [];
 
-        $scope.imageURL = constants.SERVER_URL
+/*        $scope.imageURL = constants.SERVER_URL
             +"/templates/viewImages?userId="
-            +data.userId+"&appId="+data.appId+"&"+new Date().getTime()+"&img=secondNavi";
+            +data.userId+"&appId="+data.appId+"&"+new Date().getTime()+"&img=secondNavi";*/
 
         
-      $http.get(constants.server_url + 'cmd=getSpecificChild&appId='+$scope.appId).success(function(data) {
-          $scope.categories = data;
+      $http.get(constants.server_url + 'cmd=getSpecificChild&appId='+$scope.appId).success(function(imageData) {
+          //$scope.categories = data;
+
+        for(i=0;i<(imageData.length);i++){
+
+            getData(i)
+        }
+
+        function getData(i){
+              $http.get(constants.server_url+"cmd=viewImages&userId="+data.userId+"&appId="+data.appId+"&"+new Date().getTime()+"&img=secondNavi/"+imageData[i].imageUrl).success(function(Data) {
+
+                  image.splice(i, 0, {img:Data.imageSrc});
+                   replaceByValue(imageData,imageData[i].imageUrl,image[i].img)
+               }).error(function(err) {
+                  alert('warning', "Unable to get categories", err.message);
+               });
+
+        }
+
+
+        function replaceByValue(imageData,equalImage,image) {
+          //console.log(imageData[0].imageUrl)
+
+          //console.log(image)
+
+            for( var k = 0; k < imageData.length; k++ ) {
+                if( equalImage == imageData[k].imageUrl ) {
+
+                  //console.log('dsadsadsadasdadsad'+imageData[k].imageUrl)
+                  //console.log('dsadsadsadasdadsad'+image)
+
+                    imageData[k].imageUrl = image ;
+                    console.log(imageData)
+                    $scope.categories = imageData;
+                }
+            }
+
+        }
       }).error(function(err) {
           alert('warning', "Unable to get categories", err.message);
       });
