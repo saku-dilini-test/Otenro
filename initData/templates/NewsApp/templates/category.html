@@ -15,7 +15,7 @@
 
         <div ng-repeat="category in articleCategoryList | orderBy:'id'" ng-click="navigateArticles(category.id,category.name)">
             <div>
-                <img width="100%" src="{{imageURL}}/{{category.imageUrl}}" />
+                <img width="100%" src="{{category.imageUrl}}" />
             </div>
             <div class="col">
                 <div class="made-easy-header-font">{{category.name}}</div>

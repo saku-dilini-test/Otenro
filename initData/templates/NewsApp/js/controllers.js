@@ -16,6 +16,7 @@ angular.module('starter.controllers', [])
         };
 
         $scope.appName = $rootScope.appName;
+        var image = [];
         //$scope.category.name = $rootScope.category.name;
 
         $scope.changeAppName = function () {
@@ -24,7 +25,39 @@ angular.module('starter.controllers', [])
             $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                 .success(function (data) {
                     $ionicLoading.hide();
-                    $scope.articleCategoryList = data;
+                    for(i=0;i<(data.length);i++){
+                        getData(i)
+                    }
+                    function getData(i){
+                        $http.get(constants.server_url+"cmd=viewImages&userId="+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category/"+data[i].imageUrl).success(function(Data) {
+                        image.splice(i, 0, {img:Data.imageSrc});
+                        replaceByValue(data,data[i].imageUrl,image[i].img)
+                        }).error(function(err) {
+                            alert('warning', "Unable to get categories", err.message);
+                        });
+
+                    }
+
+                    function replaceByValue(imageData,equalImage,image) {
+                        //console.log(imageData[0].imageUrl)
+
+                        //console.log(image)
+
+                        for( var k = 0; k < imageData.length; k++ ) {
+                            if( equalImage == imageData[k].imageUrl ) {
+
+                          //console.log('dsadsadsadasdadsad'+imageData[k].imageUrl)
+                          //console.log('dsadsadsadasdadsad'+image)
+
+                            imageData[k].imageUrl = image ;
+                            console.log(imageData)
+                            $scope.articleCategoryList = data;
+
+                            }
+                        }
+
+
+                    }
                 }).error(function (err) {
                 alert('loading err');
             });
@@ -121,19 +154,52 @@ angular.module('starter.controllers', [])
             }
 
             $scope.appName = $rootScope.appName;
+            var image = [];
 
-            $scope.imageURL =
+/*            $scope.imageURL =
                         constants.SERVER_URL
                         +"/templates/viewImages?userId="
-                        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category";
+                        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category";*/
 
 
 
             $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                 .success(function (data) {
+
                     $ionicLoading.hide();
-                    $scope.articleCategoryList = data;
-                    $log.debug($scope.articleCategoryList)
+                    for(i=0;i<(data.length);i++){
+                        getData(i)
+                    }
+                    function getData(i){
+                        $http.get(constants.server_url+"cmd=viewImages&userId="+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category/"+data[i].imageUrl).success(function(Data) {
+                        image.splice(i, 0, {img:Data.imageSrc});
+                        replaceByValue(data,data[i].imageUrl,image[i].img)
+                        }).error(function(err) {
+                            alert('warning', "Unable to get categories", err.message);
+                        });
+
+                    }
+
+                    function replaceByValue(imageData,equalImage,image) {
+                        //console.log(imageData[0].imageUrl)
+
+                        //console.log(image)
+
+                        for( var k = 0; k < imageData.length; k++ ) {
+                            if( equalImage == imageData[k].imageUrl ) {
+
+                          //console.log('dsadsadsadasdadsad'+imageData[k].imageUrl)
+                          //console.log('dsadsadsadasdadsad'+image)
+
+                            imageData[k].imageUrl = image ;
+                            console.log(imageData)
+                            $scope.articleCategoryList = data;
+
+                            }
+                        }
+
+
+                    }
                 }).error(function (err) {
                 alert('loading err');
             });
@@ -285,7 +351,13 @@ angular.module('starter.controllers', [])
         var getInitialData = initialData.selectedArticle;
         if(getInitialData){
             $scope.$emit('hideMenu',{});
-            $scope.selectedArticle = getInitialData.data;
+            $http.get(constants.server_url+"cmd=viewImages&userId="+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=article/"+getInitialData.data.imageUrl).success(function(Data) {
+                getInitialData.data.imageUrl = Data.imageSrc ;
+                $scope.selectedArticle = getInitialData.data
+
+                }).error(function(err) {
+                    alert('warning', "Unable to get categories", err.message);
+                });
         }
         $scope.imageURL = initialData.imageURL;
 
@@ -316,27 +388,63 @@ angular.module('starter.controllers', [])
             $scope.appName = $rootScope.appName;
             $scope.userId = $rootScope.userId;
             $scope.categoryName = $stateParams.categoryName;
+            var image = [];
 
 
 
-            $scope.imageURL = constants.SERVER_URL
+/*            $scope.imageURL = constants.SERVER_URL
                 +"/templates/viewImages?userId="
-                +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=article";
+                +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=article";*/
 
             if ($stateParams.categoryId == 'firstMenu') {
                 $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                     .success(function (catList) {
-                        if (catList.length > 0) {
-                            var firstCat = catList[0];
-                            $http.get(constants.server_url + 'cmd=getArticles&appId=' + $rootScope.appId + "&categoryId=" + firstCat.id)
-                                .success(function (data) {
-                                    $scope.artilceList = data;
-                                    $timeout(function () {
-                                        $ionicLoading.hide();
-                                    }, 2000);
-                                }).error(function (err) {
-                                alert('loading err');
+
+                        for(i=0;i<(catList.length);i++){
+                            getData(i)
+                        }
+                        function getData(i){
+                            $http.get(constants.server_url+"cmd=viewImages&userId="+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=article/"+catList[i].imageUrl).success(function(Data) {
+                            image.splice(i, 0, {img:Data.imageSrc});
+                            replaceByValue(catList,catList[i].imageUrl,image[i].img)
+                            }).error(function(err) {
+                                alert('warning', "Unable to get categories", err.message);
                             });
+
+                        }
+
+                        function replaceByValue(imageData,equalImage,image) {
+                            //console.log(imageData[0].imageUrl)
+
+                            //console.log(image)
+
+                            for( var k = 0; k < imageData.length; k++ ) {
+                                if( equalImage == imageData[k].imageUrl ) {
+
+                              //console.log('dsadsadsadasdadsad'+imageData[k].imageUrl)
+                              //console.log('dsadsadsadasdadsad'+image)
+
+                                imageData[k].imageUrl = image ;
+                                console.log(imageData)
+                                if (imageData.length > 0) {
+                                    var firstCat = imageData[0];
+                                    console.log('______________'+firstCat)
+                                    $http.get(constants.server_url + 'cmd=getArticles&appId=' + $rootScope.appId + "&categoryId=" + firstCat.id)
+                                        .success(function (data) {
+
+                                            $scope.artilceList = data;
+                                            $timeout(function () {
+                                                $ionicLoading.hide();
+                                            }, 2000);
+                                        }).error(function (err) {
+                                        alert('loading err');
+                                });
+                            }
+
+                                }
+                            }
+
+
                         }
                     }).error(function (err) {
                     alert('loading err');
@@ -347,7 +455,40 @@ angular.module('starter.controllers', [])
             console.log($stateParams.categoryId)
                 $http.get(constants.server_url + 'cmd=getArticles&appId=' + $rootScope.appId + "&categoryId=" + $stateParams.categoryId)
                     .success(function (data) {
-                        $scope.artilceList = data;
+                        for(i=0;i<(data.length);i++){
+                            getData(i)
+                        }
+                        function getData(i){
+                            $http.get(constants.server_url+"cmd=viewImages&userId="+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=article/"+data[i].imageUrl).success(function(Data) {
+                            image.splice(i, 0, {img:Data.imageSrc});
+                            replaceByValue(data,data[i].imageUrl,image[i].img)
+                            }).error(function(err) {
+                                alert('warning', "Unable to get categories", err.message);
+                            });
+
+                        }
+
+                        function replaceByValue(imageData,equalImage,image) {
+                            //console.log(imageData[0].imageUrl)
+
+                            //console.log(image)
+
+                            for( var k = 0; k < imageData.length; k++ ) {
+                                if( equalImage == imageData[k].imageUrl ) {
+
+                              //console.log('dsadsadsadasdadsad'+imageData[k].imageUrl)
+                              //console.log('dsadsadsadasdadsad'+image)
+
+                                imageData[k].imageUrl = image ;
+                                console.log(imageData)
+                                $scope.artilceList = data;
+
+                                }
+                            }
+
+
+                        }
+
                         $timeout(function () {
                             $ionicLoading.hide();
                         }, 2000);

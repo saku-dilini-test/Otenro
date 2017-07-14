@@ -94,7 +94,7 @@ module.exports = function(option) {
 
             }
             var base64str = base64_encode(filepath);
-            console.log("dasdasd"+base64str)
+            //console.log("dasdasd"+base64str)
 
             respond(null,{imageSrc:'data:image/jpeg;base64,'+base64str})
 

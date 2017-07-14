@@ -10,8 +10,8 @@ var path = require('path');
 
 
 var server = email.server.connect({
-    user: "onbilabsttest@gmail.com",
-    password: "0nb1tl@b$",
+    user: "onbitkalanitest@gmail.com",
+    password: "Kalani123",
     host: "smtp.gmail.com",
     ssl: true
 });

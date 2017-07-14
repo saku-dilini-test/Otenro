@@ -11,7 +11,7 @@
             <div class="col">
                 <ion-slide-box options="sliderOptions" slider="sliderDelegate" show-pager="false">
                     <ion-slide ng-repeat="image in images">
-                        <img width="100%" ng-src="{{imageURL}}/{{image.img}}" >
+                        <img width="100%" ng-src="{{image.img}}" >
                     </ion-slide>
                 </ion-slide-box>
 
@@ -78,38 +78,38 @@
             </label>
         </div>
 
-                    <!-- Buy Qty error message -->
-                    <div class="row text-center">
-                        <!-- Product not available in store -->
-                        <div class="col" ng-if="selectedVariant.quantity == 0">
+        <!-- Buy Qty error message -->
+        <div class="row text-center">
+            <!-- Product not available in store -->
+            <div class="col" ng-if="selectedVariant.quantity == 0">
                         <span class="animated zoomIn item-error-message">
                             Product not available
                         </span>
-                        </div>
-                        <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
-                        <div class="col" ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
+            </div>
+            <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+            <div class="col" ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
                         <span class="animated zoomIn item-error-message">
                             Please enter a quantity of {{selectedVariant.quantity}} or less.
                         </span>
-                        </div>
-                        <div class="col" ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
+            </div>
+            <div class="col" ng-if="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
                         <span class="animated zoomIn item-error-message">
                             Please enter a quantity of {{selectedVariant.quantity}}.
                         </span>
-                        </div>
-                    </div>
-                    <!-- Buy Button -->
-                    <div class="row center">
-                        <div class="col col-top"> </div>
-                        <div class="col col-67 col-center">
-                            <button class="button button-raised  made-easy-button-setting"
-                                    ng-disabled="isBuyBtnDisable || !selectedVariant.buyQuantity"
-                                    ng-click="addToCart()">
-                                Add to cart
-                            </button>
-                        </div>
-                        <div class="col col-bottom"> </div>
-                    </div>
+            </div>
+        </div>
+        <!-- Buy Button -->
+        <div class="row center">
+            <div class="col col-top"> </div>
+            <div class="col col-67 col-center">
+                <button class="button button-raised  made-easy-button-setting"
+                        ng-disabled="isBuyBtnDisable || !selectedVariant.buyQuantity"
+                        ng-click="addToCart()">
+                    Add to cart
+                </button>
+            </div>
+            <div class="col col-bottom"> </div>
+        </div>
 
         </div>
     </ion-content>

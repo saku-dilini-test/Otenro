@@ -130,6 +130,12 @@ seneca.act({ role: 'process', cmd: 'getClientToken'}, function ( err, result ) {
       console.log(result);
 } )
 
+seneca.act({ role: 'process', cmd: 'getProductById'}, function ( err, result ) {
+   if (err) return console.error(err)
+      console.log(result);
+} )
+
+
 
 
 
@@ -160,6 +166,6 @@ seneca.act({ role: 'process', cmd: 'getCommentsDummy'}, function ( err, result )
       console.log(result);
 } )
 
-seneca.listen({ port:8080, host:'192.168.8.54',protocol: 'http' })
+seneca.listen({ port:8080, host:'192.168.8.58',protocol: 'http' })
 
 

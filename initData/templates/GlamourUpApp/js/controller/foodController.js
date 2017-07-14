@@ -1,5 +1,6 @@
 /**
  * Created by amila on 3/31/16.
+ * Updated by kalani on 11/07/17
  */
 
 mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants, $ionicModal) {
@@ -10,6 +11,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $rootScope.timestamp = new Date().getTime();
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
+    var image = [];
 
     $ionicModal.fromTemplateUrl('templates/food.html', {
         scope: $scope,
@@ -18,8 +20,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
      $scope.modal = modal;
     });
     $scope.openItem = function(food) {
+
+        var image = [];
         $scope.modal.show();
         $scope.foodInfo = food;
+        console.log($scope.foodInfo._id)
         $scope.images = food.tempImageArray;
 
         if(food.variants.length > 0){
@@ -40,18 +45,75 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     };
 
 
-    $scope.imageURL = constants.SERVER_URL
+/*    $scope.imageURL = constants.SERVER_URL
         +"/templates/viewImages?userId="
-        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";*/
+
+
+/*       $http.get(constants.server_url+"cmd=viewImages&userId=" +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi").success(function(data) {
+             $scope.imageURL = 'http://192.168.8.55'+ data.url;
+             console.log("URL::"+ $scope.imageURL);
+       }).error(function(err) {
+             return err;
+       });*/
+
     $scope.selectedVariant = {};
 
-    $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
-    $scope.foods = data;
+    //$http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
+    $http.get(constants.server_url + 'cmd=getThirdBySecondId&appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
+    /*console.log('hgvhgv'+ JSON.stringify(data))*/
+   // $scope.foods = data;
+    console.log(data.length)
+
+        for(var i=0; i<data.length; i++){
+            //console.log(data[i].imageUrl)
+           getData(i);
+
+        }
+
         for(var i=0; i<data.length; i++){
             if(data[i].discount){
             $scope.foods[i].price = data[i].discount;
+            console.log('juhkhjuh'+$scope.foods[i].imageUrl)
+
             }
+
         }
+
+
+        function getData(i){
+
+            $http.get(constants.server_url+"cmd=viewImages&userId="+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi/"+data[i].imageUrl).success(function(Data) {
+                console.log(Data)
+                image.splice(i, 0, {img:Data.imageSrc});
+                replaceByValue(data,data[i].imageUrl,image[i].img)
+            }).error(function(err) {
+                alert('warning', "Unable to get categories", err.message);
+            });
+            //console.log(data[i].imageUrl)
+
+        }
+
+        function replaceByValue(imageData,equalImage,image) {
+          //console.log(imageData[0].imageUrl)
+
+          //console.log(image)
+
+            for( var k = 0; k < imageData.length; k++ ) {
+                if( equalImage == imageData[k].imageUrl ) {
+
+                    imageData[k].imageUrl = image ;
+                    imageData[k].tempImageArray[0].img = image;
+                    console.log(imageData)
+                    $scope.foods = imageData;
+                    console.log(imageData.length)
+                }
+            }
+
+        }
+
+
+
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -62,7 +124,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(data) {
         $scope.currency = data.currency;
-        console.log('$SCOPE>CURRENCY'+$scope.currency);
+        //console.log('$SCOPE>CURRENCY'+$scope.currency);
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -201,6 +263,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         }
     };
 
+
     // Products Add to cart
       $scope.addToCart = function() {
         if($scope.selectedVariant.buyQuantity == null){
@@ -216,8 +279,10 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         }else{
             if($rootScope.cart.cartItems.length != 0){
                     var i=0;
+                    console.log($rootScope.cart.cartItems.length)
                     while(i < $rootScope.cart.cartItems.length){
-                        if($scope.foodInfo.id == $rootScope.cart.cartItems[i].id && $scope.selectedVariant.sku == $rootScope.cart.cartItems[i].sku){
+                        if($scope.foodInfo._id == $rootScope.cart.cartItems[i].id && $scope.selectedVariant.sku == $rootScope.cart.cartItems[i].sku){
+                            console.log('dffdfewrrew')
                             $rootScope.cart.cartItems[i].qty += $scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
@@ -226,7 +291,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                         }
                         else if(i == ($rootScope.cart.cartItems.length -1)){
                             $rootScope.cart.cartItems.push({
-                                id: $scope.foodInfo.id,
+                                id: $scope.foodInfo._id,
                                 name: $scope.foodInfo.name,
                                 qty: $scope.selectedVariant.buyQuantity,
                                 sku: $scope.selectedVariant.sku,
@@ -237,6 +302,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                                 totalQty: $scope.selectedVariant.quantity
 
                             });
+                            console.log('fds'+$rootScope.cart.cartItems)
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                             $scope.modal.hide();
@@ -247,7 +313,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             }
             else{
                 $rootScope.cart.cartItems.push({
-                    id: $scope.foodInfo.id,
+                    id: $scope.foodInfo._id,
                     name: $scope.foodInfo.name,
                     qty: $scope.selectedVariant.buyQuantity,
                     sku: $scope.selectedVariant.sku,
@@ -262,14 +328,15 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 $scope.modal.hide();
             }
         }
+        console.log('dsadsadsadsadadad'+ $rootScope.cart.cartItems.totWeight)
 
     };
     //get Sales and Promotions
-    $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {
+/*    $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {
         $scope.salesandpromotion = data[0];
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
     }).error(function(err) {
         alert('warning', "Unable to get sales and Promotions ", err.message);
     });
-
+*/
 });

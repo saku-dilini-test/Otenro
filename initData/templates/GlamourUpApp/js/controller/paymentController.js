@@ -4,6 +4,9 @@
 /**
  * Edited by Shashan on 01/11/16.
  */
+ /**
+  * updated by kalani on 12/07/17.
+  */
 
 mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService,$log) {
 
@@ -164,19 +167,19 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         var object = JSON.stringify($stateParams.item.cart, function( key, value ){
 
         if( key === "$$hashKey" ) {
-               return undefined;
+           return undefined;
         }
         return value;
 
 
-         })
+        })
 
         if($stateParams.item.delivery.method == "Delivery"){
              $scope.details ={
 
              };
 
-             url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$scope.user.name+'&deliverName='+$stateParams.item.delivery.name+'&deliveryNo='+$stateParams.item.delivery.streetNumber+ '&deliveryStreet='+$stateParams.item.delivery.streetName+'&deliveryCity='+$stateParams.item.delivery.city+'&deliveryCountry='+$stateParams.item.delivery.country+ '&deliveryZip='+$stateParams.item.delivery.zip+'&telNumber='+ $stateParams.item.delivery.number+'&tax='+$stateParams.item.taxTotal  +'&shippingCost='+$stateParams.item.shippingCost+'&shippingOpt='+ $stateParams.item.shipping.shippingOption+'&email='+ $stateParams.item.userEmail+'&currency='+$rootScope.currency  +'&promotionCode='+$stateParams.item.promotionCode,$stateParams.item.cart
+             url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+$stateParams.item.cart+'&amount='+$stateParams.item.amount+'&customerName='+$scope.user.name+'&deliverName='+$stateParams.item.delivery.name+'&deliveryNo='+$stateParams.item.delivery.streetNumber+ '&deliveryStreet='+$stateParams.item.delivery.streetName+'&deliveryCity='+$stateParams.item.delivery.city+'&deliveryCountry='+$stateParams.item.delivery.country+ '&deliveryZip='+$stateParams.item.delivery.zip+'&telNumber='+ $stateParams.item.delivery.number+'&tax='+$stateParams.item.taxTotal  +'&shippingCost='+$stateParams.item.shippingCost+'&shippingOpt='+ $stateParams.item.shipping.shippingOption+'&email='+ $stateParams.item.userEmail+'&currency='+$rootScope.currency  +'&promotionCode='+$stateParams.item.promotionCode
 
         }
         else{
@@ -184,14 +187,15 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
              $scope.details ={
 
              };
-             url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$stateParams.item.deliverDetails.name+'&telNumber='+$stateParams.item.deliverDetails.number+'&tax='+$stateParams.item.taxTotal+'&shippingCost='+$stateParams.item.shippingCost+'&pickupId='+$stateParams.item.pickupId+'&email='+$stateParams.item.userEmail+'&currency='+$rootScope.currency+'&promotionCode='+$stateParams.item.promotionCode
+             url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+$stateParams.item.cart+'&amount='+$stateParams.item.amount+'&customerName='+$stateParams.item.deliverDetails.name+'&telNumber='+$stateParams.item.deliverDetails.number+'&tax='+$stateParams.item.taxTotal+'&shippingCost='+$stateParams.item.shippingCost+'&pickupId='+$stateParams.item.pickupId+'&email='+$stateParams.item.userEmail+'&currency='+$rootScope.currency+'&promotionCode='+$stateParams.item.promotionCode
 
 
         }
         $http.post(constants.server_url+ url)
             .then(function(res){
                     $scope.details.id = $rootScope.cart.cartItems[0].id;
-                    $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
+                    $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
+                     //$http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
                         .then(function(res){
                                 sails.log.debug('cart'+$stateParams.item.cart);
                                 $rootScope.cart.cartItems = [];
@@ -232,7 +236,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 function(err){
                     $log.debug(err);
                 });
-    }
+       }
     // --/-- Here end Card Payment Function --/--
     // --/-- Here start Cash Payment Function --/--
 
@@ -250,15 +254,18 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
         })
 
+        console.log(object);
+
         if($stateParams.item.delivery.method == "Delivery"){
                     $scope.details ={
 
                     };
 
-              url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$scope.user.name+'&deliverName='+$stateParams.item.delivery.name+'&deliveryNo='+$stateParams.item.delivery.streetNumber+ '&deliveryStreet='+$stateParams.item.delivery.streetName+'&deliveryCity='+$stateParams.item.delivery.city+'&deliveryCountry='+$stateParams.item.delivery.country+ '&deliveryZip='+$stateParams.item.delivery.zip+'&telNumber='+ $stateParams.item.delivery.number+'&tax='+$stateParams.item.taxTotal  +'&shippingCost='+$stateParams.item.shippingCost+'&shippingOpt='+ $stateParams.item.shipping.shippingOption+'&email='+ $stateParams.item.userEmail+'&currency='+$rootScope.currency  +'&promotionCode='+$stateParams.item.promotionCode,$stateParams.item.cart
+              url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$scope.user.name+'&deliverName='+$stateParams.item.delivery.name+'&deliveryNo='+$stateParams.item.delivery.streetNumber+ '&deliveryStreet='+$stateParams.item.delivery.streetName+'&deliveryCity='+$stateParams.item.delivery.city+'&deliveryCountry='+$stateParams.item.delivery.country+ '&deliveryZip='+$stateParams.item.delivery.zip+'&telNumber='+ $stateParams.item.delivery.number+'&tax='+$stateParams.item.taxTotal  +'&shippingCost='+$stateParams.item.shippingCost+'&shippingOpt='+ $stateParams.item.shipping.shippingOption+'&email='+ $stateParams.item.userEmail+'&currency='+$rootScope.currency  +'&promotionCode='+$stateParams.item.promotionCode
 
         }
         else{
+            console.log('pickup')
 
                     $scope.details ={
 
@@ -272,10 +279,14 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
 
         $http.post(constants.server_url+ url)
-            .then(function(res){
+            .success(function(res){
                     $scope.details.id = $rootScope.cart.cartItems[0].id;
-                    $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
+                    console.log($stateParams.item.cart[0])
+                    $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
+                     //console.log("item.cdart::"+JSON.stringify($stateParams.item.cart))
+                     //$http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
                         .then(function(res){
+                            console.log(res)
                                 $rootScope.cart.cartItems = [];
                                 $rootScope.cart.cartSize = 0;
                                 $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
@@ -328,7 +339,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         PaypalService.initPaymentUI().then(function () {
             PaypalService.makePayment($stateParams.item.amount, "Total Amount").then(function (response) {
 
-                /*if($stateParams.item.delivery.method == "Delivery"){
+/*                if($stateParams.item.delivery.method == "Delivery"){
                     $scope.details ={
 
                         appId : $rootScope.appId,
@@ -385,7 +396,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
                                     };
 
-                              url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$scope.user.name+'&deliverName='+$stateParams.item.delivery.name+'&deliveryNo='+$stateParams.item.delivery.streetNumber+ '&deliveryStreet='+$stateParams.item.delivery.streetName+'&deliveryCity='+$stateParams.item.delivery.city+'&deliveryCountry='+$stateParams.item.delivery.country+ '&deliveryZip='+$stateParams.item.delivery.zip+'&telNumber='+ $stateParams.item.delivery.number+'&tax='+$stateParams.item.taxTotal  +'&shippingCost='+$stateParams.item.shippingCost+'&shippingOpt='+ $stateParams.item.shipping.shippingOption+'&email='+ $stateParams.item.userEmail+'&currency='+$rootScope.currency  +'&promotionCode='+$stateParams.item.promotionCode,$stateParams.item.cart
+                              url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$scope.user.name+'&deliverName='+$stateParams.item.delivery.name+'&deliveryNo='+$stateParams.item.delivery.streetNumber+ '&deliveryStreet='+$stateParams.item.delivery.streetName+'&deliveryCity='+$stateParams.item.delivery.city+'&deliveryCountry='+$stateParams.item.delivery.country+ '&deliveryZip='+$stateParams.item.delivery.zip+'&telNumber='+ $stateParams.item.delivery.number+'&tax='+$stateParams.item.taxTotal  +'&shippingCost='+$stateParams.item.shippingCost+'&shippingOpt='+ $stateParams.item.shipping.shippingOption+'&email='+ $stateParams.item.userEmail+'&currency='+$rootScope.currency  +'&promotionCode='+$stateParams.item.promotionCode
 
                         }
                         else{
@@ -400,7 +411,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 $http.post(constants.server_url+ url)
                     .then(function(res){
                             $scope.details.id = $rootScope.cart.cartItems[0].id;
-                            $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
+                            $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
+                            //$http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
                                 .then(function(res){
                                         $rootScope.cart.cartItems = [];
                                         $rootScope.cart.cartSize = 0;
@@ -549,6 +561,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 $http.post(constants.server_url+ url)
                         .then(function(res){
                                 $scope.details.id = $rootScope.cart.cartItems[0].id;
+                                //$http.post(constants.server_url+"cmd=updateInventory&cart="+$stateParams.item.cart)
                                 $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
                                     .then(function(res){
                                             $rootScope.cart.cartItems = [];

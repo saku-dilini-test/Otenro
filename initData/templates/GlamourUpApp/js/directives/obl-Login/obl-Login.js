@@ -16,21 +16,21 @@
 								appId : $rootScope.appId
 							};
 							$http.post(constants.server_url+'cmd=authenticateForApp&email='+$scope.data.username+'&password='+$scope.data.password+'&appId='+$rootScope.appId)
-								.success(function(res){
-                                        console.log('sfdsfdsf'+res.user);
+								.then(function(res){
+                                        console.log(res);
 										var requestParams = {
-											"token": res.token,
+											"token": res.data.token,
 											"email": data.email,
-											"name": res.user.name,
-											"phone": res.user.phoneNumber,
-											"streetNumber": res.user.streetNumber,
-											"streetName": res.user.streetName,
-											"country": res.user.country,
-											"city": res.user.city,
-											"zip": res.user.zip,
+											"name": res.data.user.name,
+											"phone": res.data.user.phoneNumber,
+											"streetNumber": res.data.user.streetNumber,
+											"streetName": res.data.user.streetName,
+											"country": res.data.user.country,
+											"city": res.data.user.city,
+											"zip": res.data.user.zip,
 											"type": 'internal',
-                                            "appId":res.user.appId,
-                                            "registeredUser": res.user.sub
+                                            "appId":res.data.user.appId,
+                                            "registeredUser": res.data.user.sub
 										};
 										localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
                                         $rootScope.isUserLoggedIn.check = true;

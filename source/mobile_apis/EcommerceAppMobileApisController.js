@@ -50,6 +50,7 @@ module.exports = function(option) {
        seneca.add( {cmd:'authenticateForApp' }, authenticateForApp );
        seneca.add( {cmd:'authenticate' }, authenticate );
        seneca.add( {cmd:'saveOrder' }, saveOrder );
+       seneca.add( {cmd:'getProductById' }, getProductById );
 
 
 
@@ -62,17 +63,31 @@ module.exports = function(option) {
 
 
     function getThirdBySecondId (req,Done){
-        if(req.appID != null){
+        if(req.appId != null){
             var collection = db.collection('thirdnavigation');
             var thirdNavi = [];
-            collection.findOne({appId:req.appID,childId:req.childId,published:'YES'}, function(err, app) {
-                //console.log('app'+app);
+            collection.find({appId:req.appId,childId:req.childId,published:'YES'}).toArray(function(err, app){
+            //collection.findOne({appId:req.appId,childId:req.childId,published:'YES'}, function(err, app) {
+                console.log('app'+JSON.stringify(app));
                 Done( null, app );
             });
         }
 
     }
 
+    function getProductById (req,Done){
+        if(req.productId != null){
+            var collection = db.collection('thirdnavigation');
+            var thirdNavi = [];
+            var obj_id = new ObjectID(req.productId);
+            collection.findOne({_id:obj_id} ,function(err, app){
+            //collection.findOne({appId:req.appId,childId:req.childId,published:'YES'}, function(err, app) {
+                console.log('app'+JSON.stringify(app));
+                Done( null, app );
+            });
+        }
+
+    }
     /**
              * Get existing currency for the mobile app.
              *
@@ -177,8 +192,6 @@ module.exports = function(option) {
    function saveOrder (req,Done){
 
        var data = req;
-       //console.log('SAVEORDER='+JSON.stringify(data))
-
        var collection = db.collection('applicationorder');
        data['paymentStatus'] = 'Pending';
        data['fulfillmentStatus'] = 'Pending';
@@ -186,8 +199,6 @@ module.exports = function(option) {
        if(data.pickupId == null){
 
              var output = JSON.parse(data.item);
-
-                  console.log(JSON.stringify(output))
 
                   var Data = {
                       'appId' : data.appId,
@@ -244,12 +255,9 @@ module.exports = function(option) {
         else{
 
             var output = JSON.parse(data.item);
-            //console.log(JSON.stringify(output))
-
             var collection = db.collection('shippingdetails');
             var obj_id = new ObjectID(data.pickupId);
             collection.findOne({_id:obj_id,appId:data.appId},function(err,pickUp){
-            //console.log("________"+JSON.stringify(pickUp))
 
                 if (err){
                     console.log(err);
@@ -320,19 +328,49 @@ module.exports = function(option) {
 
             var obj = [];
             //var data = req.cart[0];
-
+            var obj_id = new ObjectID(req.id);
             var collection = db.collection('thirdnavigation');
-            collection.find({id:req.id}).toArray(function(err, app) {
-            console.log("variants="+app[0].variants);
+            collection.find({_id:obj_id}).toArray(function(err, app) {
+
+            if( app[0] != null){
+                console.log("variants="+ JSON.stringify(app[0].variants));
                 for(var i=0;i<app[0].variants.length;i++){
                     if(app[0].variants[i].sku == req.sku){
+                    console.log('fdsfdsfs'+app[0].variants[i].quantity)
+                    console.log('fdsfdsfs'+ req.qty)
                         app[0].variants[i].quantity = app[0].variants[i].quantity - req.qty;
-                        collection.update({id:req.id},app[0],function(err,thirdNavi){
+                        console.log('fdsfdsfs'+app[0].variants[i].quantity)
+                        collection.update({_id:obj_id},app[0],function(err,thirdNavi){
                                  obj.push(thirdNavi);
+                                 console.log(JSON.stringify(obj))
                         })
                     }
 
                 }
+
+
+            }
+
+
+
+
+/*                {
+                "_id":"5964c2fbfa758a495c9cc57f",
+                "name":"Green Handbag",
+                "selection":[{"name":"Size","vType":""}],
+                "enteredBy":"demo",
+                "published":"YES",
+                "detailedDesc":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ut iuet magna aliqua.",
+                "tempImageArray":[{"img":"16.JPG"}],
+                "variants":[{"name":"Gren Handbag","sku":"1111","size":"11","selection":[{"name":"Size","vType":"Large"}],"price":"350","quantity":346}],
+                "imageUrl":"16.JPG",
+                "createdDate":"1486636890652",
+                "appId":"5964c2f5fa758a495c9cc579",
+                "childId":"5964c2fafa758a495c9cc57a",
+                "createdAt":"2017-07-11T12:22:19.867Z",
+                "updatedAt":"2017-07-12T04:16:03.552Z"
+                }*/
+
 
          });
           Done( null, obj );

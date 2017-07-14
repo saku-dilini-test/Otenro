@@ -80,7 +80,7 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
 
         $http.get(constants.server_url+"cmd=getAllCountry")
             .success(function(res){
-                console.log('@@@@@@@@@@@@@2'+res.data)
+                //console.log('@@@@@@@@@@@@@2'+res.data)
                 $scope.countries = res.data;
             });
         $scope.signUp = function() {
