@@ -1,7 +1,7 @@
 /* ---- Custom CSS ---- */
 
 .card.col.col-50 {
-    margin: 2%;
+    margin: 1.5vh 2% 1.5vh 2%;
     max-width: 45%;
     text-align:center;
 }
