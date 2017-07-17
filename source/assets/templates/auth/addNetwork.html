@@ -7,35 +7,47 @@
 </div>
 <div class="addNetwork">
 
-    <!-- Your logo -->
-    <img src="./images/made-easy-logo.svg" alt="" class="brand-logo" />
+    <div ng-show="expand">
+        <!-- Your logo -->
+        <img src="./images/made-easy-logo.svg" alt="" class="brand-logo" />
 
-    <section>
-        <h1>Get your business online today.</h1>
+        <section >
+            <h1>Get your business online today.</h1>
 
-            <h2>Sign up for free beta</h2>
+                <h2>Sign up for free beta</h2>
 
-            <div class="row">
-                <div class="col-md-6">
-                        <a class="btn btn-primary btn-lg btn-block" ng-click="authenticate('facebook')">
-                            <i class="fa fa-facebook-square"></i> &nbsp; Sign in with Facebook</a>
+                <div class="row">
+                    <div class="col-md-6">
+                            <a class="btn btn-primary btn-lg btn-block" ng-click="authenticate('facebook')">
+                                <i class="fa fa-facebook-square"></i> &nbsp; Sign in with Facebook</a>
+                    </div>
+                    <div class="col-md-6">
+                            <a class="btn btn-warning btn-lg btn-block" ng-click="authenticate('google')">
+                                <i class="fa fa-google-plus"></i>&nbsp;Sign in with Google+</a>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                        <a class="btn btn-warning btn-lg btn-block" ng-click="authenticate('google')">
-                            <i class="fa fa-google-plus"></i>&nbsp;Sign in with Google+</a>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="btn btn-primary btn-lg btn-block" ng-click="register()">Register</a>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <a class="btn btn-primary btn-lg btn-block" ng-click="register()">Register</a>
-                </div>
-            </div>
-
-
-    </section>
+        </section>
+    </div>
       <!--Video is & autoplays, placed after major DOM elements for performance & has an image fallback  -->
 
     <video autoplay loop id="video-background"  plays-inline>
         <source src="./videos/labVid.mp4" type="video/mp4">
     </video>
+
+    <div class="controls">
+        <a class="btn " ng-click="play()">
+            <i class="fa fa-play " aria-hidden="true"></i>
+        </a>
+        <a class="btn " ng-click="pause()">
+            <i class="fa fa-pause " aria-hidden="true"></i>
+        </a>
+        <a class="btn "  ng-click="expand = !expand">
+            <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+        </a>
+    </div>
 </div>
