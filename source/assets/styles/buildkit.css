@@ -2552,7 +2552,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 }
 
 .addNetwork section{
-    position: fixed;
+    position: absolute;
     z-index: 1;
     left: 0;
     padding: 0;
@@ -2568,8 +2568,8 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 
 .addNetwork img{
     position: absolute;
-    left: 6%;
-    top: 5%;
+    left: 5%;
+    top: 50px;
     max-width: 150px;
     z-index:1;
 }
@@ -2631,4 +2631,73 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 
 .orders-dialog .md-dialog-main {
     overflow-y: hidden;
+}
+.expand {
+    transition: all linear 0.5s;
+    position: relative;
+    -webkit-transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
+    -moz-transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
+    -ms-transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
+    -o-transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
+    transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
+    z-index: 3;
+    opacity:1;
+}
+
+.ng-hide{
+    opacity:0;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translate3d(0, 100%, 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+.slideInUp {
+    animation-name: slideInUp;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-delay: 2s;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-delay: 1s;
+}
+@keyframes videoFadeIn {
+    from {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.videoFadeIn {
+    animation-name: fadeIn;
+    animation-duration: 3s;
+    animation-delay: 3s;
+    animation-fill-mode: both;
 }

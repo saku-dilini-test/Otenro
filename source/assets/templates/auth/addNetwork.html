@@ -7,16 +7,16 @@
 </div>
 <div class="addNetwork">
 
-    <div ng-show="expand">
+    <div ng-hide="expand" class="expand">
         <!-- Your logo -->
-        <img src="./images/made-easy-logo.svg" alt="" class="brand-logo" />
+        <img src="./images/made-easy-logo.svg" alt="" class="brand-logo fadeIn" />
 
-        <section >
-            <h1>Get your business online today.</h1>
+        <section>
+            <h1 class="videoFadeIn">Get your business online today.</h1>
 
-                <h2>Sign up for free beta</h2>
+                <h2 class="videoFadeIn">Sign up for free beta</h2>
 
-                <div class="row">
+                <div class="row slideInUp">
                     <div class="col-md-6">
                             <a class="btn btn-primary btn-lg btn-block" ng-click="authenticate('facebook')">
                                 <i class="fa fa-facebook-square"></i> &nbsp; Sign in with Facebook</a>
@@ -26,7 +26,7 @@
                                 <i class="fa fa-google-plus"></i>&nbsp;Sign in with Google+</a>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row slideInUp">
                     <div class="col-md-6">
                         <a class="btn btn-primary btn-lg btn-block" ng-click="register()">Register</a>
                     </div>
@@ -35,7 +35,7 @@
     </div>
       <!--Video is & autoplays, placed after major DOM elements for performance & has an image fallback  -->
 
-    <video autoplay loop id="video-background"  plays-inline>
+    <video loop id="video-background"  plays-inline class="videoFadeIn">
         <source src="./videos/labVid.mp4" type="video/mp4">
     </video>
 
@@ -47,7 +47,7 @@
             <i class="fa fa-pause " aria-hidden="true"></i>
         </a>
         <a class="btn "  ng-click="expand = !expand">
-            <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+            <i class="fa fa-expand" aria-hidden="true"></i>
         </a>
     </div>
 </div>
