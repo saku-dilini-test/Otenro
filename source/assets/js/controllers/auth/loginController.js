@@ -67,5 +67,20 @@
       })
     };
 
+
+      angular.element(document).ready(function(){
+          $('#loading').remove(); // Just an example dont modify the dom outside of a directive in a real app!
+      });
+
+      var videoControl = document.getElementById("video-background");
+
+      $scope.play = function(){
+          videoControl.play();
+      }
+      $scope.pause = function(){
+          videoControl.pause();
+      }
+      $scope.expand = true;
+
   }
 })();
