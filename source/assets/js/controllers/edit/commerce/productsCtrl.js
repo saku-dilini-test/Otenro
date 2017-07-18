@@ -16,13 +16,16 @@
         $scope.selection = initialData.product.selection;
         $scope.currency = $rootScope.currency;
         $scope.isNewProduct = true;
+        $scope.skuFieldEnable = false;
 
 
         if(initialData.isNewItem)
         {
             $scope.isNewProduct = initialData.isNewItem;
+
         }else if($scope.product.sku){
             $scope.isNewProduct = false;
+            $scope.skuFieldEnable = true;
         }
 
         // Third Navigation Image Path ( Image get from server )
