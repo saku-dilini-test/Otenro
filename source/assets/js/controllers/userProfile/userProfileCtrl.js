@@ -43,8 +43,8 @@
             $scope.viewBilling = "Billing Details";
             $scope.activeTabIndex = index;
         }
-
-        if (typeof $auth.getPayload().id !== 'undefined' ){
+        
+        if (typeof $auth.getPayload() !== 'undefined' ){
             userProfileResource.getBillingDetails($auth.getPayload().id).success(function (data) {
                 $scope.billingEdit= data;
             }).error(function (err) {
@@ -56,16 +56,20 @@
 
 
         $scope.editUserProfile = function(params){
+            $scope.password = false;
             $scope.user={
                 email : params.email,
                 password : params.currentPassword
             }
             Auth.login($scope.user).success(function() {
                 userProfileResource.editUserProfile(params).then(function(data){
-                    $mdDialog.hide();
+                    // $mdDialog.hide();
                     toastr.success('Successfully Changed', 'Success', {
                         closeButton: true
                     });
+                    $scope.userEdit.password = "";
+                    $scope.userEdit.confirmPassword = "";
+                    $scope.backToView(0);
                 });
             }).error(function(err) {
                 $scope.password = true;
@@ -74,6 +78,8 @@
                   closeButton: true
                 });
             })
+
+            $scope.userEdit.currentPassword = "";
 
         };
         $scope.saveBillings = function(billingEdit){

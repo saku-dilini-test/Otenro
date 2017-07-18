@@ -21,7 +21,7 @@
 
       };
 
-      console.log(agentInfo);
+      //console.log(agentInfo);
 
     $scope.submit = function($event) {
       Auth.login($scope.user).success(function(response) {
@@ -66,6 +66,27 @@
       });
       })
     };
+
+
+      angular.element(document).ready(function(){
+          setTimeout(function(){
+              $('#loading').remove(); // Just an example dont modify the dom outside of a directive in a real app!
+          },1000);
+      });
+
+      var videoControl = document.getElementById("video-background");
+
+      $scope.play = function(){
+          videoControl.play();
+      }
+      setTimeout(function(){
+          videoControl.play();
+      },4000);
+
+      $scope.pause = function(){
+          videoControl.pause();
+      }
+      $scope.expand = false;
 
   }
 })();

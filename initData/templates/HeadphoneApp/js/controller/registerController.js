@@ -34,7 +34,7 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
                         "token": res.data.token,
                         "email": data.email,
                         "name": data.firstName,
-                        "phone": data.phoneNumber,
+                        "phone": data.phone,
                         "streetNumber": data.streetNumber,
                         "streetName": data.streetName,
                         "country": data.country,

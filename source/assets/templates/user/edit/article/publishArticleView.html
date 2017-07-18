@@ -9,8 +9,8 @@
             <fieldset>
                 <label>Article Category</label>
                     <select class="input-shadow-border" ng-model="articleCat.value"
-                            ng-options="v.id as v.name for v in articleCat.values"
-                            ng-change="changeArticleCat(articleCat.value)" required>
+                            ng-options="v.name as v.name for v in articleCat.values"
+                            ng-click="changeArticleCat(articleCat.value)" required>
                     </select>
             </fieldset>
             <fieldset>

@@ -33,13 +33,25 @@
 					});
 
 				function setContactUs(response) {
-					$log.debug("response  " + JSON.stringify(response));
 //					$scope.header = response.header;
 //					$scope.content = response.content;
 					$scope.email = response.email;
 					$scope.address = response.address;
 					$scope.telPhone = response.telPhone;
 					$scope.webSite = response.webSite;
+                    $scope.coords = response.coords;
+
+                    $scope.myLatLng = {lat: $scope.coords.latitude, lng: $scope.coords.longitude};
+                    $scope.map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 12,
+                        center: $scope.myLatLng
+                    });
+
+                    $scope.marker = new google.maps.Marker({
+                        position: $scope.myLatLng,
+                        map:  $scope.map,
+                        title: response.address
+                    });
 				}
 
 			}

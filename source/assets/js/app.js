@@ -48,7 +48,8 @@ angular.module('app', [
   'angular-loading-bar',
   'disableAll',
   'textAngular',
-  'ngImgCrop'
+  'ngImgCrop',
+  'ngAnimate'
 
 
 ]).run(function($rootScope, $state, $auth,Auth,Permission,$log) {

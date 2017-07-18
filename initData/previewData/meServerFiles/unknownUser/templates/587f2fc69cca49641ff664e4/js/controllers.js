@@ -268,8 +268,8 @@ angular.module('starter.controllers', [])
             spaceBetween: 30
             };
 
-        $scope.navigateArticles = function(categoryId){
-             $state.go('app.home.categoryId',{categoryId:categoryId});
+        $scope.navigateArticles = function(categoryId,categoryName){
+            $state.go('app.home.categoryId',{categoryId:categoryId,categoryName:categoryName});
         }
 
 

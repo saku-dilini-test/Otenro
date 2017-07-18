@@ -70,7 +70,7 @@
             },
             columnDefs: [
                 /*{name: 'id'},*/
-                {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
+                // {name: '#', width: '5%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate',},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -180,7 +180,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
-                {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
+                // {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -216,7 +216,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
-                {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
+                // {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -253,10 +253,7 @@
             enableSorting: true,
             gridMenuTitleFilter: fakeI18n,
             columnDefs: [
-                {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
-
-                {name: 'createdDate'},
-
+                // {name: 'id', width: '20%', cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row)+1}}.</div>'  },
                 {name: 'createdDate'},
                 {name: 'customerName', enableHiding: false},
                 {name: 'paymentStatus'},
@@ -544,11 +541,12 @@
                 });
 
                 commerceService.saveStoreSettings(storeSettings).success(function (data) {
-                    toastr.success('Store Setting Details has been added successfully', {
+                    toastr.success('Store Setting Details has been added successfully','Awesome', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
                     $rootScope.currency = $scope.options.sign;
+                    $scope.currencyPlaceHolder = $scope.options.currency;
                 }).error(function (err) {
                     toastr.error(' warning', "Unable to get templates", {closeButton: true});
                 })
@@ -557,13 +555,6 @@
         };
 
         $scope.addAboutUs = function (current,storeSettings) {
-            
-            if(header == undefined || content == undefined ){
-                toastr.error('Please fill the all fields','Warning',{
-                    closeButton: true
-                });
-            }
-            
 
             // Validate, About Us Header maximum characters length
             var header = storeSettings.header;
@@ -575,28 +566,38 @@
                 );
                 return;
             }
-            // Validate, About Us Content maximum characters length
-            var content = storeSettings.content;
-            if((typeof content != 'undefined') &&
-                (content.length > $scope.maxAboutUsContent)){
+
+            else if (typeof header == 'undefined' || content == 'undefined'  ){
+                toastr.error('Please fill the fields', 'Message', {
+                    closeButton: true
+                });
+            }
+
+
+                // Validate, About Us Content maximum characters length
+                var content = storeSettings.content;
+             if ((typeof content != 'undefined') &&
+                (content.length > $scope.maxAboutUsContent)) {
                 toastr.error('About Us Content, maximum characters length is exceed. ' +
-                    'Maximum characters length is : '+$scope.maxAboutUsContent, 'Warning',
+                    'Maximum characters length is : ' + $scope.maxAboutUsContent, 'Warning',
                     {closeButton: true}
                 );
                 return;
             }
 
-            if (storeSettings.header&&storeSettings.content ){
-                storeSettings.userId = $scope.userId;
-                storeSettings.appId = $rootScope.appId;
+
+         else {
+                if (storeSettings.header && storeSettings.content) {
+                    storeSettings.userId = $scope.userId;
+                    storeSettings.appId = $rootScope.appId;
                     commerceService.saveStoreSettings(storeSettings)
                         .success(function (data, status, headers, config) {
                             toastr.success('About Us has been added successfully', 'Awesome', {
                                 closeButton: true
                             });
-                            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                           +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                            $scope.appTemplateUrl = urlPath+'' +
+                            var urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                            $scope.appTemplateUrl = urlPath + '' +
                                 '#/app/aboutUs';
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $scope.selectedTab = current;
@@ -606,7 +607,10 @@
                         });
                     })
 
-                $scope.selectedTab = current;
+                } else {
+
+                    $scope.selectedTab = current;
+                }
             }
 
         };
@@ -619,32 +623,32 @@
             toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
         });
 
+
         $scope.savePolicies = function (current, storeSettings) {
 
-            if(returnPolicy == undefined || termsAndCondition == undefined || privacyPolicy == undefined ){
-                toastr.error('Please fill the all fields','Warning',{
-                    closeButton: true
-                });
-            }
-
-
-            // Validate, Return Policy maximum characters length
             var returnPolicy = storeSettings.returnPolicy;
-            if((typeof returnPolicy != 'undefined') &&
-                (returnPolicy.length > $scope.maxReturnPolicy)){
+            if ((typeof returnPolicy != 'undefined') &&
+                (returnPolicy.length > $scope.maxReturnPolicy)) {
                 toastr.error('Return Policy, maximum characters length is exceed. ' +
-                    'Maximum characters length is : '+$scope.maxReturnPolicy, 'Warning',
+                    'Maximum characters length is : ' + $scope.maxReturnPolicy, 'Warning',
                     {closeButton: true}
                 );
                 return;
             }
 
+
+            else if (typeof returnPolicy == 'undefined' || termsAndCondition == 'undefined' || privacyPolicy == 'undefined') {
+                toastr.error('Please fill the fields', 'Message', {
+                    closeButton: true
+                });
+            }
+
             // Validate, Terms And Condition maximum characters length
             var termsAndCondition = storeSettings.termsAndCondition;
-            if((typeof termsAndCondition != 'undefined') &&
-                (termsAndCondition.length > $scope.maxTermsAndCondition)){
+            if ((typeof termsAndCondition != 'undefined') &&
+                (termsAndCondition.length > $scope.maxTermsAndCondition)) {
                 toastr.error('Terms And Condition, maximum characters length is exceed. ' +
-                    'Maximum characters length is : '+$scope.maxTermsAndCondition, 'Warning',
+                    'Maximum characters length is : ' + $scope.maxTermsAndCondition, 'Warning',
                     {closeButton: true}
                 );
                 return;
@@ -652,20 +656,20 @@
 
             // Validate, Privacy Policy maximum characters length
             var privacyPolicy = storeSettings.privacyPolicy;
-            if((typeof privacyPolicy != 'undefined') &&
-                (privacyPolicy.length > $scope.maxPrivacyPolicy)){
+            if ((typeof privacyPolicy != 'undefined') &&
+                (privacyPolicy.length > $scope.maxPrivacyPolicy)) {
                 toastr.error('Privacy Policy, maximum characters length is exceed. ' +
-                    'Maximum characters length is : '+$scope.maxPrivacyPolicy, 'Warning',
+                    'Maximum characters length is : ' + $scope.maxPrivacyPolicy, 'Warning',
                     {closeButton: true}
                 );
                 return;
             }
-
-            if (storeSettings.returnPolicy&&storeSettings.termsAndCondition&&storeSettings.privacyPolicy) {
+else {
+            if (storeSettings.returnPolicy && storeSettings.termsAndCondition && storeSettings.privacyPolicy) {
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
-                    toastr.success('Policies and Terms has been added successfully', {
+                    toastr.success('Policies and Terms has been added successfully','Awesome', {
                         closeButton: true
                     });
                     $scope.selectedTab = current;
@@ -673,8 +677,10 @@
                     toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
                 })
 
+
                 $scope.selectedTab = current;
             }
+        }
         };
 
         /*commerceService.showPolicies($scope.appId).success(function (data) {

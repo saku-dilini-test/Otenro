@@ -17,12 +17,16 @@
 
     function livePreviewCtrl($scope,welcomeTemplatesResource, userProfileService,$stateParams,$mdDialog,mySharedService,
     $http,$state,ME_APP_SERVER,$auth,toastr,$cookieStore,$cookies,$interval,$q,$log) {
+        $scope.encParam = $stateParams.p;
+        var decParams = atob($scope.encParam);
+
+        var splitParams = decParams.split("/");
+
         welcomeTemplatesResource.getTemplates().success(function(data){
             $cookies.temp = data;
             $scope.templates = $cookies.temp;
-
             for(var i = 0; i < $scope.templates.length ; i++){
-                if($scope.templates[i].template_name == $stateParams.tempName){
+                if($scope.templates[i].template_name == splitParams[4]){
                     $scope.templateViewName = $scope.templates[i].templateViewName;
                     $scope.templateViewDesc = $scope.templates[i].templateViewDesc;
                 }
@@ -44,26 +48,18 @@
             return deferred.promise;
         }
 
-        $scope.userId = $stateParams.userId;
-        $scope.appId = $stateParams.appId;
-        $scope.tempUrl = $stateParams.tempUrl;
-        $scope.tempName = $stateParams.tempName;
-        $scope.tempCategory = $stateParams.tempCategory;
+        $scope.userId = splitParams[0]; //$stateParams.userId;
+        $scope.appId = splitParams[1]; //$stateParams.appId;
+        $scope.tempUrl = splitParams[2];
+        $scope.tempName = splitParams[4];
+        $scope.tempCategory = splitParams[5];
         $scope.contentUrl = true;
-        console.log('ddd');
-        console.log($stateParams);
-        // $stateParams $log.debug only testing
-        $log.debug('User ID : '+$stateParams.userId);
-        $log.debug('App ID : '+$stateParams.appId);
-        $log.debug('TempUrl : '+$stateParams.tempUrl);
-        $log.debug('Temp Name : '+$stateParams.tempName);
-        $log.debug('TempCategory : '+$stateParams.tempCategory);
 
-        var userID = $stateParams.userId;
-        var appID  = $stateParams.appId;
+        var userID = splitParams[0];
+        var appID  = splitParams[1];
 
         // App URL create $statePrams
-        $scope.appTemplateUrl = ME_APP_SERVER+'/temp'+'/'+userID+'/templates'+'/'+appID+'/';
+        $scope.appTemplateUrl = ME_APP_SERVER+'/temp'+'/'+$scope.userId+'/templates'+'/'+$scope.appId+'/';
 
         // App URL get from cookiesStore
         // $scope.appTemplateUrl = $cookieStore.get('url');
@@ -116,13 +112,23 @@
                         'userId':$auth.getPayload().id
 
                     };
+
                         welcomeTemplatesResource.createApp(tempAppParams).then(function(data){
+                            if(data.data.appId == -1)
+                            {
+                                toastr.error(data.data.message, 'Warning', {
+                                    closeButton: true
+                                });
+                            }else{
+                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                    +'/templates/'+data.data.appId+'/?'+new Date().getTime();
 
-                            var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                                mySharedService.prepForBroadcast(url);
 
-                            mySharedService.prepForBroadcast(url);
-                            $state.go('user.editApp',{appId:data.data.appId});
+                                var encParam = btoa(data.data.appId);
+                                $state.go('user.editApp',{appId:data.data.appId, p:encParam });
+                            }
+
                         });
                     $mdDialog.hide(answer);
                 }else{
@@ -136,13 +142,42 @@
                             'templateCategory' : templateCategory,
                             'userId':$auth.getPayload().id
                         };
+
                         welcomeTemplatesResource.createApp(tempAppParams).then(function(data){
+                            if(data.data.appId == -1)
+                            {
+                                toastr.error(data.data.message, 'Warning', {
+                                    closeButton: true
+                                });
 
-                            var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                                var encUserId = 'unknownUser' + "/";
+                                var encAppId = templateId + "/";
+                                var encTempUrl = templateUrl + "//";
+                                var encTempName = templateName + "/";
+                                var encTempCategory = templateCategory + "/";
 
-                            mySharedService.prepForBroadcast(url);
-                            $state.go('user.editApp',{appId:data.data.appId});
+                                var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory);
+
+                                $state.go('anon.livePreview', {
+                                    userId: 'unknownUser',
+                                    appId: templateId,
+                                    tempUrl: templateUrl,
+                                    tempName: templateName,
+                                    tempCategory: templateCategory,
+                                    p: encryptedURL
+                                });
+
+
+
+                            }else {
+                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                    +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+
+                                mySharedService.prepForBroadcast(url);
+
+                                var encParam = btoa(data.data.appId);
+                                $state.go('user.editApp', {appId: data.data.appId, p: encParam});
+                            }
                         });
                         $mdDialog.hide(answer);
                     });

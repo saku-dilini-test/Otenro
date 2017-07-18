@@ -1,5 +1,5 @@
 <ion-view class="made-easy-background-image made-easy-background-color" view-title="Cart">
-    <ion-nav-buttons side="primary">
+    <ion-nav-buttons side="left">
         <button class="button back-button buttons icon ion-ios-arrow-back header-item"ng-click="doSomething()">
         </button>
     </ion-nav-buttons>
@@ -18,7 +18,7 @@
           <div class="row shopping-cart-items no-padding">
             <div class="col col-33" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}</div>
             <div class="col col-25" ><input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></div>
-            <div class="col" ng-model="item.total" >{{item.total*item.qty}}</div>
+            <div class="col" ng-model="item.total" >{{currency}}{{item.total*item.qty}}</div>
             <div class="col col-10"><a class="dark" ng-click="removeItem($index)"><i class="icon ion-ios-trash-outline"></i></a></div>
           </div>
           <!-- Buy Qty error message -->
@@ -42,14 +42,10 @@
           <div class="row shopping-cart-total no-padding">
             <div class="col col-33">Total</div>
             <div class="col col-25" ng-model="quantity">{{getTotalQuantity()}}</div>
-            <div class="col" ng-model="total" >{{currency.sign}}{{getTotal()}}</div>
+            <div class="col" ng-model="total" >{{currency}}{{getTotal()}}</div>
             <div class="col col-10"></div>
           </div>
         </div>
-
-
-
-
         <div class="row cart-buttons">
           <button class="button margin button-block button-small made-easy-button-setting"
                   ng-disabled="!getTotal() || buyButtonDisable"

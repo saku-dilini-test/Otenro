@@ -1,44 +1,44 @@
 <ion-view title="Cart">
-    <ion-nav-buttons side="primary">
+    <ion-nav-buttons side="left">
         <button class="icon ion-ios-arrow-back header-item"ng-click="doSomething()">
         </button>
     </ion-nav-buttons>
-    <ion-content >
-        <div class="list cart">
-            <a class="item item-avatar"  ng-repeat="item in cartItems" >
-                <img src="{{item.imgURL[0].img}}">
-                <h2 ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}
-                    <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></span>
-                    <i class="dark icon ion-trash-a right" ng-click="removeItem($index)"></i>
-                </h2>
-                <p>{{currency.sign}}{{item.total*item.qty}}</p>
-                <!-- Buy Qty error message -->
-                <div class="text-left">
-                    <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
-                    <div ng-if="item.qty > item.totalQty && item.totalQty > 1" >
+  <ion-content >
+   <div class="list cart">
+       <a class="item item-avatar"  ng-repeat="item in cartItems" >
+           <img src="{{item.imgURL[0].img}}">
+           <h2 ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}
+               <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></span>
+               <i class="dark icon ion-trash-a right" ng-click="removeItem($index)"></i>
+           </h2>
+           <p>{{currency}}{{item.total*item.qty}}</p>
+           <!-- Buy Qty error message -->
+           <div class="text-left">
+               <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+               <div ng-if="item.qty > item.totalQty && item.totalQty > 1" >
                                     <span class="animated zoomIn item-error-message">
                                         Please enter a quantity of {{item.totalQty}} or less.
                                     </span>
-                    </div>
-                </div>
+               </div>
+           </div>
 
-            </a>
+       </a>
 
-            <div class="col center made-easy-header-font">
-                {{currency.sign}}{{getTotal()}}
-            </div>
-            <div class="center">
-                <button class="button button-raised  made-easy-button-setting color-invert"
-                        ng-disabled="!getTotal() || buyButtonDisable"
-                        ng-click="pickupDetails(cartItems)">
-                    Pickup
-                </button>
-                <button class="button button-raised  made-easy-button-setting "
-                        ng-disabled="!getTotal() || buyButtonDisable"
-                        ng-click="delivery(cartItems)">
-                    Delivery
-                </button>
-            </div>
-        </div>
-    </ion-content>
+       <div class="col center made-easy-header-font">
+           {{currency}}{{getTotal()}}
+       </div>
+       <div class="center">
+           <button class="button button-raised  made-easy-button-setting color-invert"
+                   ng-disabled="!getTotal() || buyButtonDisable"
+                   ng-click="pickupDetails(cartItems)">
+              Pickup
+           </button>
+           <button class="button button-raised  made-easy-button-setting "
+                   ng-disabled="!getTotal() || buyButtonDisable"
+                   ng-click="delivery(cartItems)">
+               Delivery
+           </button>
+       </div>
+    </div>
+  </ion-content>
 </ion-view>

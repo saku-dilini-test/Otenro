@@ -138,7 +138,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 deliveryCity : $stateParams.item.delivery.city,
                 deliveryCountry : $stateParams.item.delivery.country,
                 deliveryZip : $stateParams.item.delivery.zip,
-                telNumber : $stateParams.item.delivery.number,
+                telNumber : $stateParams.item.delivery.phone,
                 tax :   $stateParams.item.taxTotal,
                 shippingCost :   $stateParams.item.shippingCost,
                 shippingOpt : $stateParams.item.shipping.shippingOption,
@@ -154,7 +154,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 item : $stateParams.item.cart,
                 amount : $stateParams.item.amount,
                 customerName : $stateParams.deliverDetails.name,
-                telNumber : $stateParams.deliverDetails.number,
+                telNumber : $stateParams.deliverDetails.phone,
                 tax :   $stateParams.item.taxTotal,
                 shippingCost :   $stateParams.item.shippingCost,
                 pickupId: $stateParams.item.pickupId,
@@ -258,22 +258,50 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
          console.log($stateParams.item.cart)
 
         if($stateParams.item.delivery.method == "Delivery"){
-                    $scope.details ={
-
-                    };
 
               url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$scope.user.name+'&deliverName='+$stateParams.item.delivery.name+'&deliveryNo='+$stateParams.item.delivery.streetNumber+ '&deliveryStreet='+$stateParams.item.delivery.streetName+'&deliveryCity='+$stateParams.item.delivery.city+'&deliveryCountry='+$stateParams.item.delivery.country+ '&deliveryZip='+$stateParams.item.delivery.zip+'&telNumber='+ $stateParams.item.delivery.number+'&tax='+$stateParams.item.taxTotal  +'&shippingCost='+$stateParams.item.shippingCost+'&shippingOpt='+ $stateParams.item.shipping.shippingOption+'&email='+ $stateParams.item.userEmail+'&currency='+$rootScope.currency  +'&promotionCode='+$stateParams.item.promotionCode
 
+            $scope.details ={
+                appId : $rootScope.appId,
+                registeredUser: $scope.user.registeredUser,
+                item : $stateParams.item.cart,
+                amount : $stateParams.item.amount,
+                customerName : $scope.user.name,
+                deliverName : $stateParams.item.delivery.name,
+                deliveryNo : $stateParams.item.delivery.streetNumber,
+                deliveryStreet : $stateParams.item.delivery.streetName,
+                deliveryCity : $stateParams.item.delivery.city,
+                deliveryCountry : $stateParams.item.delivery.country,
+                deliveryZip : $stateParams.item.delivery.zip,
+                telNumber : $stateParams.item.delivery.phone,
+                tax :   $stateParams.item.taxTotal,
+                shippingCost :   $stateParams.item.shippingCost,
+                shippingOpt : $stateParams.item.shipping.shippingOption,
+                email: $stateParams.item.userEmail,
+                currency: $rootScope.currency,
+                promotionCode: $stateParams.item.promotionCode
+            };
         }
         else{
             console.log('pickup')
 
-                    $scope.details ={
-
-                    };
             url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$stateParams.item.deliverDetails.name+'&telNumber='+$stateParams.item.deliverDetails.number+'&tax='+$stateParams.item.taxTotal+'&shippingCost='+$stateParams.item.shippingCost+'&pickupId='+$stateParams.item.pickupId+'&email='+$stateParams.item.userEmail+'&currency='+$rootScope.currency+'&promotionCode='+$stateParams.item.promotionCode
 
 
+            $scope.details ={
+                appId : $rootScope.appId,
+                registeredUser: $scope.user.registeredUser,
+                item : $stateParams.item.cart,
+                amount : $stateParams.item.amount,
+                customerName : $stateParams.item.deliverDetails.name,
+                telNumber : $stateParams.item.deliverDetails.phone,
+                tax :   $stateParams.item.taxTotal,
+                shippingCost :   $stateParams.item.shippingCost,
+                pickupId: $stateParams.item.pickupId,
+                email: $stateParams.item.userEmail,
+                currency:$rootScope.currency,
+                promotionCode: $stateParams.item.promotionCode
+            }
         }
 
 
@@ -354,7 +382,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         deliveryCity : $stateParams.item.delivery.city,
                         deliveryCountry : $stateParams.item.delivery.country,
                         deliveryZip : $stateParams.item.delivery.zip,
-                        telNumber : $stateParams.item.delivery.number,
+                        telNumber : $stateParams.item.delivery.phone,
                         tax :   $stateParams.item.taxTotal,
                         shippingCost :   $stateParams.item.shippingCost,
                         shippingOpt : $stateParams.item.shipping.shippingOption,
@@ -370,7 +398,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                         amount : $stateParams.item.amount,
                         customerName : $stateParams.item.deliverDetails.name,
                         registeredUser: $scope.user.registeredUser,
-                        telNumber : $stateParams.item.deliverDetails.number,
+                        telNumber : $stateParams.item.deliverDetails.phone,
                         tax :   $stateParams.item.taxTotal,
                         shippingCost :   $stateParams.item.shippingCost,
                         pickupId: $stateParams.item.pickupId,
@@ -558,6 +586,38 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                             url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$stateParams.item.deliverDetails.name+'&telNumber='+$stateParams.item.deliverDetails.number+'&tax='+$stateParams.item.taxTotal+'&shippingCost='+$stateParams.item.shippingCost+'&pickupId='+$stateParams.item.pickupId+'&email='+$stateParams.item.userEmail+'&currency='+$rootScope.currency+'&promotionCode='+$stateParams.item.promotionCode
 
 
+                            appId : $rootScope.appId,
+                            item : $stateParams.item.cart,
+                            amount : $stateParams.item.amount,
+                            registeredUser: $scope.user.registeredUser,
+                            customerName : $scope.user.name,
+                            deliverName : $stateParams.item.delivery.name,
+                            deliveryNo : $stateParams.item.delivery.streetNumber,
+                            deliveryStreet : $stateParams.item.delivery.streetName,
+                            deliveryCity : $stateParams.item.delivery.city,
+                            deliveryCountry : $stateParams.item.delivery.country,
+                            deliveryZip : $stateParams.item.delivery.zip,
+                            telNumber : $stateParams.item.delivery.phone,
+                            tax :   $stateParams.item.taxTotal,
+                            shippingCost :   $stateParams.item.shippingCost,
+                            shippingOpt : $stateParams.item.shipping.shippingOption,
+                            email: $stateParams.item.userEmail,
+                            promotionCode: $stateParams.item.promotionCode
+                        };
+                    }
+                    else{
+                        $scope.details ={
+                            appId : $rootScope.appId,
+                            item : $stateParams.item.cart,
+                            registeredUser: $scope.user.registeredUser,
+                            amount : $stateParams.item.amount,
+                            customerName : $stateParams.item.deliverDetails.name,
+                            telNumber : $stateParams.item.deliverDetails.phone,
+                            tax :   $stateParams.item.taxTotal,
+                            shippingCost :   $stateParams.item.shippingCost,
+                            pickupId: $stateParams.item.pickupId,
+                            email: $stateParams.item.userEmail,
+                            promotionCode: $stateParams.item.promotionCode
                         }
                 $http.post(constants.server_url+ url)
                         .then(function(res){

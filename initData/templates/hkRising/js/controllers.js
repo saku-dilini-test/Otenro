@@ -209,39 +209,17 @@ angular.module('starter.controllers', [])
             $scope.coords =data.coords;
             $scope.googleMap = data;
 
-            if(!data.coords){
-                $scope.coords={
-                    latitude : 6.9320204155752050,
-                    longitude: 79.8890950584107031
-                };
-            }
+            $scope.myLatLng = {lat: $scope.coords.latitude, lng: $scope.coords.longitude};
+            $scope.map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: $scope.myLatLng
+            });
 
-            $scope.map= {
-                center: $scope.coords,
-                zoom: 11,
-                markers: [{
-                    id: Date.now(),
-                    coords:$scope.coords
-                }],
-                events: {
-                    click: function(map, eventName, originalEventArgs) {
-                        var e = originalEventArgs[0];
-                        var lat = e.latLng.lat(),
-                            lon = e.latLng.lng();
-                        var marker = {
-                            id: Date.now(),
-                            coords: {
-                                latitude: lat,
-                                longitude: lon
-                            }
-                        };
-                        $scope.map.markers=[];
-                        $scope.map.markers.push(marker);
-                        $scope.$apply();
-                    }
-                }
-            };
-
+            $scope.marker = new google.maps.Marker({
+                position: $scope.myLatLng,
+                map:  $scope.map,
+                title: data.address
+            });
 
             $ionicLoading.hide();
 

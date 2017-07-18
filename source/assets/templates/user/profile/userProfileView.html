@@ -149,7 +149,7 @@
                                        ng-pattern="passwordRegularExpression"
                                        ng-minlength="7"
                                        compare-to="userEdit.confirmPassword"
-                                       required>
+                                       >
                                 <span class="help-block " ng-show="editProfile.password.$error.minlength">
                                     <span class="error" ng-show="editProfile.password.$error.minlength">
                                         Password should have at least 7 characters.
@@ -167,7 +167,7 @@
                                        type="password"
                                        name="confirmPassword"
                                        ng-model="userEdit.confirmPassword"
-                                       required>
+                                       >
                                 <span class="help-block " ng-show="editProfile.confirmPassword.$dirty">
                                     <span class="error" ng-show="editProfile.password.$error.compareTo">Password must match.</span>
                                 </span>
@@ -182,8 +182,10 @@
                         </fieldset>
                         <fieldset class="text-right">
                             <md-button class="me-default-button" ng-click="backToView(0)">Cancel</md-button>
-                            <md-button class="me-default-button"
-                                       ng-click="editUserProfile(userEdit)">Save</md-button>
+
+                            <md-button class="me-default-button" ng-disabled="editProfile.password.$error.compareTo"
+                                       ng-click="editUserProfile(userEdit,selected);">Save
+                            </md-button>
                         </fieldset>
                         </form>
                     </div>
@@ -268,8 +270,7 @@
                                 <span class="error">Not a valid cvs</span>
                             </span>
                         </fieldset>
-
-                        <div class="btn-view md-dialog-buttons">
+                            <div class="btn-view md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="backToView(1)">cancel</md-button>
                                 <md-button class="me-default-button" ng-click="saveBillings(billingEdit)">save</md-button>

@@ -45,7 +45,9 @@
                            +"&appId="+item.id+"&"+new Date().getTime()+"/";
 
             mySharedService.prepForBroadcast(urlPath);
-            $state.go('user.editApp',{appId: item.id});
+            var encParam = btoa(item.id);
+
+            $state.go('user.editApp',{appId: item.id, p:encParam});
         }
       }
     }

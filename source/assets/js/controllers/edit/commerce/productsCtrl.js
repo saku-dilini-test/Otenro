@@ -15,6 +15,18 @@
         $scope.product = initialData.product;
         $scope.selection = initialData.product.selection;
         $scope.currency = $rootScope.currency;
+        $scope.isNewProduct = true;
+        $scope.skuFieldEnable = false;
+
+
+        if(initialData.isNewItem)
+        {
+            $scope.isNewProduct = initialData.isNewItem;
+
+        }else if($scope.product.sku){
+            $scope.isNewProduct = false;
+            $scope.skuFieldEnable = true;
+        }
 
         // Third Navigation Image Path ( Image get from server )
         var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
@@ -22,6 +34,7 @@
 
         function  disableTabs(selectedTab,tab1,tab2,tab3,tab4) {
             $log.debug(selectedTab);
+
             $scope.selectedTab = selectedTab;
             $scope.addProductsOptionParams = {
                 firstLocked : tab1,
@@ -30,7 +43,10 @@
                 imageUploadLocked : tab4
             };
         }
-        disableTabs(0,false,true,true ,true);
+
+
+            disableTabs(0, false, true, true, true);
+
         if (initialData.product.tempImageArray){
             for (var i=0; i<initialData.product.tempImageArray.length; i++) {
                 var tempImageUrl = tempImagePath + initialData.product.tempImageArray[i].img;
@@ -90,12 +106,18 @@
          */
         $scope.generalDetails = function (product, current) {
             //When new product is adding to the system
+
             if(!$scope.product.variants){
                 $scope.product.variants = [];
                 $scope.product.variants.push({"sku":product.sku,"name":product.name})
             }
-            disableTabs(current,true,true,false,true);
-
+            if(product.childId == 'Create New Category') {
+                toastr.error('Please select a category continue ', 'Warning', {
+                    closeButton: true
+                });
+            }else {
+                disableTabs(current, true, true, false, true);
+            }
         };
 
 
@@ -189,10 +211,23 @@
                         .cancel('Cancel');
 
                     $mdDialog.show(confirm).then(function() {
-                        $scope.product.variants.splice(index, 1);
-                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                        if(initialData.product.id == undefined || initialData.product.id == '0'){
+                            $scope.product.variants.splice(index, 1);
+                            return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true);
+
+                        }else {
+                            $scope.product.variants.splice(index, 1);
+                            return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
+
+                        }
                     }, function() {
-                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                        if(initialData.product.id == undefined || initialData.product.id == '0'){
+                            return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true);
+
+                        }else {
+                            return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
+
+                        }
                     });
 
             }
@@ -257,9 +292,7 @@
         }
 
 
-
-
-
+        
         $scope.nextStep3Digital = function (current, product, variants) {
             if (variants.price == null) {
                 toastr.error('Please fill all fields', 'Warning', {
@@ -276,8 +309,7 @@
             }
         };
 
-
-
+        
 
         $scope.typeUpdateHandler = function (newValue) {
             $scope.variants[0].type = newValue;
@@ -301,14 +333,17 @@
          * add or update product
          */
         $scope.addOrUpdateProducts = function () {
-              if ($scope.tmpImage.length<=0&&$scope.myImage==null){
+              if(initialData.product.id == '0'){
+                  initialData.product.id = undefined;
+                  $scope.product.id = undefined;
+              }
+              if ($scope.tmpImage.length <= 0 ){
+
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
               }else {
-                  if ($scope.myImage){
-                      $scope.addImage($scope.myImage);
-                  }
+
 
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'NO';
@@ -336,14 +371,16 @@
 
         };
         $scope.saveAndPublishProducts = function () {
-              if ($scope.tmpImage.length<=0&&$scope.myImage==null){
+              if(initialData.product.id == '0'){
+                    initialData.product.id = undefined;
+                    $scope.product.id = undefined;
+              }
+              if ($scope.tmpImage.length<=0 ){
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
               }else {
-                  if ($scope.myImage){
-                      $scope.addImage($scope.myImage);
-                  }
+
 
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'YES';
@@ -372,8 +409,7 @@
         };
 
 
-
-
+        
         $scope.setImage = function (img) {
 
             if (img == undefined) {
@@ -546,7 +582,7 @@
         *
         *
         */
-        $scope.checkValidity = function(sku){
+        $scope.checkValidity = function(sku, position){
             $scope.exist = false;
             var skuData = {
                 userId: $auth.getPayload().id,
@@ -556,14 +592,35 @@
             commerceService.checkUniqueSku(skuData)
             .success(function(result){
                 if(result == 'true'){
-                    $scope.exist = true;
+                     $scope.exist = true;
+                     $scope.position = position;
+                     if(position) {
+                         $scope.product.variants[position].sku = '';
+                     }
+
+                    toastr.error('Can not add duplicate SKU values', 'Warning', {
+                        closeButton: true
+                    });
+                }else if($scope.product.variants){
+                    var count = 0;
+                    for(var i=0; i<$scope.product.variants.length; i++){
+                        if($scope.product.variants[i].sku == sku){
+                            count = count +1;
+                            if(count == 2) {
+                                $scope.exist = true;
+                                $scope.position = position;
+                                $scope.product.variants[position].sku = '';
+                                toastr.error('Can not add duplicate SKU values', 'Warning', {
+                                    closeButton: true
+                                });
+                            }
+                        }
+                    }
                 }
             }).error(function (error) {
                 $log.debug(error);
             })
-        }
-
-
+        };
 
         /**
          * @description
@@ -674,8 +731,7 @@
 
                 }
 
-
-
+        
                 /**
                  * @description
                  * validation of duplicate sku and size/weight
@@ -723,8 +779,14 @@
         $scope.answer = function () {
             $mdDialog.hide();
         };
+        
         $scope.back = function(){
-            return commerceService.showInventoryDialog();
+            if($scope.isNewProduct){
+                $mdDialog.hide();
+            }else{
+                return commerceService.showInventoryDialog();
+            }
+
 
         };
 
@@ -752,8 +814,16 @@
         }
 
         // when product edit start in second tab and enable pagination
-        if (initialData.product.id !== undefined){
-            disableTabs(1,false,false,false ,false);
+        if (initialData.product.id !== undefined || initialData.product.id !== '0'){
+            if(initialData.addVariant)
+            {
+                disableTabs(2, false, false, false, true);
+            }else if(initialData.product.id == undefined){
+                disableTabs(0, true, true, true, true);
+            }
+            else {
+                disableTabs(1, false, false, false, false);
+            }
         }
 
 
@@ -766,8 +836,7 @@
         }
 
         $scope.newcategory = function(){
-            $log.debug("innnnnnnnnnnn");
-            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
+            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2,$scope.product)
         }
 
         $scope.goToEditProductWindow = function(item){
@@ -779,6 +848,7 @@
 
 
          $scope.addNewVariant = function (fullProduct, variantName) {
+                var isNewItem =  $scope.isNewProduct;
                 return $mdDialog.show({
                     controllerAs: 'dialogCtrl',
                     locals: { name: variantName },
@@ -787,17 +857,23 @@
                         $scope.product.selection = fullProduct.selection;
                         $scope.vType = name;
                         $scope.vTypeRemove = name;
+                        $scope.isNewProduct = isNewItem;
 
                         if ($scope.product.selection == undefined){
                             $scope.product.selection= [];
                         }
                         this.confirm = function click(vName){
-                            if($scope.product.selection.length == 4 && $scope.vTypeRemove == undefined){
+                            if(!vName){
+                                toastr.error('Variant name can not be a empty ', 'Error!', {
+                                    closeButton: true
+                                });
+                            }
+                            else if($scope.product.selection.length == 4 && $scope.vTypeRemove == undefined){
                                  toastr.error('You can only add 4 variants', 'Error!', {
                                       closeButton: true
                                  });
-                                  return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
-                            }else if($scope.product.selection.length > 0){
+                                  return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null, true);
+                            }else if($scope.product.selection.length > 0 ){
                                 for (var i = 0; i < $scope.product.selection.length; i++){
                                    if( $scope.product.selection[i].name.toLowerCase() ==  $scope.vType.toLowerCase()){
                                          toastr.error('Cannot rename or add by the same name', 'Error!', {
@@ -815,7 +891,13 @@
                                             closeButton: true
                                         });
 
-                                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                                        if(initialData.product.id == undefined || initialData.product.id == '0'){
+                                               return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true);
+
+                                        }else {
+                                               return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
+
+                                        }
                                         break;
                                    }else{
 
@@ -825,7 +907,6 @@
                                          });
 
                                          for(var j=0;j<$scope.product.variants.length;j++){
-                                            console.log($scope.product.variants[j].selection)
                                             $scope.product.variants[j].selection.push({
                                                 name:vName,
                                                 vType:""
@@ -834,7 +915,11 @@
                                         toastr.success('Variant added', 'Success!', {
                                               closeButton: true
                                         });
-                                        return commerceService.showAddProductsDialog($scope.product,undefined, $scope.product.variants);
+                                        if($scope.product.id == undefined || initialData.product.id == '0'){
+                                            return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true)
+                                        }else{
+                                            return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,null, true);
+                                        }
                                         break;
                                    }
                                  }
@@ -850,41 +935,82 @@
                                         vType:""
                                     });
                                 }
-                                  $scope.tmpImage = [];
-                                  $scope.product.published = 'NO';
-                                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product})
-                                  .success(function (result) {
-                                      toastr.success('Variant added', 'Success!', {
-                                          closeButton: true
-                                      });
-                                 return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants, result.productId);
-                                  }).error(function (err) {
-                                      toastr.error('Variant creation failed', 'Warning', {
-                                          closeButton: true
-                                      });
-                                      $mdDialog.hide();
-
+                                  toastr.success('Variant added', 'Success!', {
+                                      closeButton: true
                                   });
+                                if($scope.product.id == undefined || initialData.product.id == '0'){
+                                    return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true)
+                                }else{
+                                    return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,null, true);
+                                }
                             }
 
                         },
                         this.cancel = function click(){
+                           if(initialData.product.id == undefined || initialData.product.id == '0'){
+                               return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true);
 
-                           return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                           }else {
+                               return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
+
+                           }
+
+
                         },
                         this.remove = function click(selection){
-                                for (var i = 0; i < $scope.product.selection.length; i++){
-                                   if( $scope.product.selection[i].name ==  selection){
-                                        $scope.product.selection.splice(i, 1);
-                                        for(var j=0;j<$scope.product.variants.length;j++){
-                                            $scope.product.variants[j].selection.splice(i, 1);
+                            return $mdDialog.show({
+                                controllerAs: 'dialogCtrl',
+                                controller: function($mdDialog){
+                                    this.confirm = function click(){
+                                        for (var i = 0; i < $scope.product.selection.length; i++){
+                                            if( $scope.product.selection[i].name ==  selection){
+                                                $scope.product.selection.splice(i, 1);
+                                                for(var j=0;j<$scope.product.variants.length;j++){
+                                                    $scope.product.variants[j].selection.splice(i, 1);
+                                                }
+                                                toastr.success('Variant removed', 'Success!', {
+                                                    closeButton: true
+                                                });
+                                                if(initialData.product.id == undefined || initialData.product.id == '0'){
+                                                    return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true);
+
+                                                }else {
+                                                    return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
+
+                                                }
+                                            }
                                         }
-                                         toastr.success('Variant removed', 'Success!', {
-                                              closeButton: true
-                                         });
-                                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
-                                   }
-                                }
+                                    },
+                                    this.cancel = function click(){
+                                        if(initialData.product.id == undefined || initialData.product.id == '0'){
+                                            return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true);
+
+                                        }else {
+                                            return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
+
+                                        }
+                                    }
+                                },
+                                template:'<md-dialog aria-label="Deleting variant">'+
+                                '<md-content >' +
+                                '<div class="md-dialog-header">' +
+                                '<h1>Deleting Variant Type </h1>' +
+                                '</div>' +
+                                '<br>'+
+                                '<div style="text-align:center">' +
+                                '<lable>Are you sure you want to delete this variant type?</lable>' +
+                                '</div>' +
+                                '<br><br>' +
+                                '<div class="md-dialog-buttons">'+
+                                '<div class="inner-section">'+
+                                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">No</md-button>'+
+                                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Yes</md-button>'+
+                                '</div>'+
+                                '</div>' +
+                                '</md-content>' +
+                                '</md-dialog>'
+                            })
+
                         }
                     }],
                     template:'<md-dialog aria-label="Add new Variant">'+
@@ -916,7 +1042,6 @@
 
 
             };
-
 
     }
 })();

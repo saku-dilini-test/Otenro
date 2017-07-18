@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     angular.module('app')
-        .controller('RegisterController', ['$scope', '$state', 'Auth', 'toastr','initialData','$stateParams', RegisterController]);
+        .controller('RegisterController', ['$scope', '$state', 'Auth', 'toastr','initialData','$stateParams','commerceService', RegisterController]);
 
-    function RegisterController($scope, $state, Auth, toastr,initialData,$stateParams) {
+    function RegisterController($scope, $state, Auth, toastr,initialData,$stateParams,commerceService) {
 
         // -- Config -- 
         // Tell Us About yourself data array
@@ -15,12 +15,14 @@
                 affid:$stateParams.affid
             }
             Auth.register(user).success(function () {
-                Auth.sendAgentInfo(agentInfo).success(function () { });
+                Auth.sendAgentInfo(agentInfo);
                 toastr.success('Register Successful ', 'Congratulations ! ', {closeButton: true});
                 if ($scope.user.email== 'support@otenro.com'){
                     $state.go('user.technicalSupporter');
                 }else {
-                    $state.go('anon.welcome');
+                    commerceService.sendRegisterVerificationLinkEmail(user);
+                    goog_report_conversion(O_SERVER_URL + "#dashboard");
+                    $state.go('user.dashboard');
                 }
             }).catch(function onError() {
                 toastr.error('Email already exists ' + $scope.user.email, 'Error', {
