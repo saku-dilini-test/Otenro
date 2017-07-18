@@ -9,9 +9,9 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("ArticleCtrl", [
-        '$scope','$mdDialog','$auth','$rootScope','articleService','toastr','SERVER_URL','ME_APP_SERVER','mySharedService','initialData','$log',ArticleCtrl]);
+        '$scope','$mdDialog','$auth','$rootScope','articleService','toastr','SERVER_URL','ME_APP_SERVER','mySharedService','initialData','$log','mainMenuService',ArticleCtrl]);
 
-    function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,SERVER_URL,ME_APP_SERVER,mySharedService,initialData,$log) {
+    function ArticleCtrl($scope, $mdDialog,$auth,$rootScope,articleService,toastr,SERVER_URL,ME_APP_SERVER,mySharedService,initialData,$log,mainMenuService) {
 
         $scope.appId = $rootScope.appId;
         $scope.tmpImage = [];
@@ -61,6 +61,7 @@
 
         if(initialData == 'publishArticle'){
             $scope.isNewArticle = true;
+            $scope.dummyCat =[];
 
             $scope.seletedCategoryId = null;
             $scope.articleCat = {
@@ -68,8 +69,16 @@
             };
             articleService.getArticleCategoryByAppId()
                 .success(function (data) {
+                    $scope.dummyCat.push({name:"Create New Category"});
+                    data.forEach(function(aricaleCat) {
+                        console.log(aricaleCat.name);
+                        $scope.dummyCat.push({name:aricaleCat.name});
+                    });
+
+                    console.log($scope.dummyCat);
+
                     $scope.articleCat = {
-                        "values":  data
+                        "values":  $scope.dummyCat
                     };
                 }).error(function (error) {
                     toastr.error('Articles Category List Loading Error', 'Message', {
@@ -141,6 +150,10 @@
         };
 
         $scope.changeArticleCat = function(catId){
+            console.log(catId);
+            if (catId=="Create New Category"){
+                mainMenuService.showMainMenuDialog();
+            }
             $scope.seletedCategoryId = catId;
         }
 
