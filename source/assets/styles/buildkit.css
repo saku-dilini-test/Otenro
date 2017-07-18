@@ -2081,10 +2081,12 @@ trix-toolbar .button_group input[type=button]{
 
 .custom-grid {
     border:unset;
+    border:none;
 }
 
 .custom-grid div{
     border:unset !important;
+    border:none !important;
 }
 
 .custom-grid .ui-grid-header-cell-wrapper{
@@ -2142,6 +2144,14 @@ li#menuitem-8 {
 
 .custom-grid .ui-grid-menu .ui-grid-menu-inner ul li button:focus{
     box-shadow:unset;
+}
+
+.custom-grid .ui-grid-row .ui-grid-row-header-cell.ui-grid-cell{
+    border-bottom:none;
+}
+.custom-grid .ui-grid-pinned-container-left.ui-grid-pinned-container :last-child.ui-grid-cell{
+    border-right:none;
+    border-width:0;
 }
 
 
