@@ -68,6 +68,7 @@
                                         <input ng-blur="checkValidity(product.sku)"
                                                md-maxlength="10"
                                                required
+                                               ng-disabled="skuFieldEnable"
                                                name="sku"
                                                ng-model="product.sku"
                                                ng-pattern="/^\d*[1-9]\d*$/"
@@ -167,6 +168,7 @@
                                             <input ng-blur="checkValidity(data.sku, $index)"  maxlength="10"
                                                    required
                                                    aria-label="SKU"
+                                                   ng-disabled="skuFieldEnable&&data.sku"
                                                    class="product-sku"
                                                    name="sku_{{$index}}"
                                                    ng-model="data.sku"
