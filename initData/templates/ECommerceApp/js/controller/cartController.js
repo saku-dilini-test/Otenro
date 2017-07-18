@@ -6,8 +6,8 @@
 //    angular.module('starter', [])
 mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService,$log,$ionicNavBarDelegate,$location) {
 
-            $http.get(constants.SERVER_URL+"/edit/getAllCountry")
-                    .then(function(res){
+            $http.get(constants.server_url+"cmd=getAllCountry")
+                    .success(function(res){
                         $scope.countries = res.data;
                     });
 

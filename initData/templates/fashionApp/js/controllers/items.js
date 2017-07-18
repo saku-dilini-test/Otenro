@@ -15,8 +15,9 @@ angular
 		'sharedObjects',
 		'routesConfig',
 		'$rootScope',
+		'$http',
 		function ($q, $stateParams, itemsSvc, categoriesSvc, commentsSvc, $ionicLoading,
-				  sharedObjects, routesConfig, $rootScope) {
+				  sharedObjects, routesConfig, $rootScope,$http) {
 			'use strict';
 
 			var vm = this;
@@ -27,11 +28,11 @@ angular
                 };
             vm.sliderDelegate = null;
 
-			vm.imageUrl =
+			/*vm.imageUrl =
 				routesConfig.wpUrl.SERVER_URL()
 				+"/templates/viewImages?userId="
 				+$rootScope.userId+"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article";
-
+*/
 			$ionicLoading.show({
 				content: 'Loading',
 				animation: 'fade-in',
@@ -51,11 +52,19 @@ angular
 				});
 
 			function setItems(response) {
-				vm.item = response;
-				return response;
+				console.log($stateParams.itemId)
+				$http.get(routesConfig.wpUrl.SERVER_URL()+"cmd=viewImages&userId="+$rootScope.userId+"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article/"+response.imageUrl).success(function(Data) {
+                    response.imageUrl = Data.imageSrc;
+
+					vm.item = response;
+					return response;
+				}).error(function(err) {
+                            alert('warning', "Unable to get categories", err.message);
+                });
 			}
 
 			function getCategory(response) {
+				console.log(response)
 				return categoriesSvc.getCategory(response.categoryId)
 			}
 

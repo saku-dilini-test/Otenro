@@ -6,25 +6,28 @@
     function appServices($rootScope,$http,constants){
         return {
             getAllMenuByAppId: function (appId) {
-                return $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+appId);
+                return $http.get(constants.server_url + 'cmd=getSpecificChild&appId='+appId);
             },
             getAllItemByAppId: function (appId) {
                 return $http.get(constants.SERVER_URL + '/templates/getProductsByAppId?appId='+appId);
             },
             getAllItemsByMenuId: function (menuId,appId) {
-                return $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+appId+'&childId='+menuId);
+                return $http.get(constants.server_url + 'cmd=getThirdBySecondId&appId='+appId+'&childId='+menuId);
             },
             getItemById: function (itemId) {
-                return $http.get(constants.SERVER_URL + '/templates/getProductById?productId='+itemId);
+                return $http.get(constants.server_url + 'cmd=getProductById&productId='+itemId);
             },
             getContactUsByAppId: function (appId) {
-                return $http.get(constants.SERVER_URL + '/templates/getContactUs?appId='+appId);
+                return $http.get(constants.server_url + 'cmd=getContactUs&appId='+appId);
             },
             getCurrencyByAppId: function (appId) {
-                return $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+appId);
+                return $http.get(constants.server_url + 'cmd=getCurrency&appId='+appId);
             },
             saveDeviceID : function (data) {
                 return $http.post(constants.SERVER_URL + '/templates/postDeviceId',data)
+            },
+            imageLoading: function(userId,appId,name,imageId){
+                return $http.get(constants.server_url + "cmd=viewImages&userId="+userId+"&appId="+appId+"&"+new Date().getTime()+"&img="+name+imageId)
             }
         }
     }

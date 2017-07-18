@@ -12,7 +12,7 @@
             'use strict';
 
             var siteURL = 'http://localhost:1337';
-            var server_url= 'http://192.168.8.58:8080/act?';
+            var server_url= 'http://192.168.8.61:8080/act?';
 
             var rootRoutesConfig = {
                 wpMenuByAppId: server_url + 'cmd=getArticleCategoryByAppId&appId=',  // OK
@@ -24,7 +24,7 @@
                 wpAboutUs : server_url + 'cmd=getAboutUsData&appId=', // OK
                 wpContactUs : server_url + 'cmd=getContactUs&appId=', // OK
                 wpPages: server_url + '', // This part discussion mode yet,
-                wpServerUrl : siteURL
+                wpServerUrl : server_url
             };
 
             var routesConfig = {

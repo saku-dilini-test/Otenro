@@ -132,9 +132,9 @@ angular.module('starter.controllers', [])
                 alert('Currency Loading error');
             })
 
-            // defined third navigation image path
+/*            // defined third navigation image path
             $scope.imageURL = constants.SERVER_URL+"/templates/viewImages?"+"userId="+ appData.userId +
-                "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+                "&appId="+appData.appId+"&"+new Date().getTime()+"&img=thirdNavi";*/
         });
 
 

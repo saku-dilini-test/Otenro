@@ -13,7 +13,8 @@ angular
 		'routesConfig',
 		'readMadeEasy',
 		'$scope',
-		function (categoriesSvc, $ionicLoading,$rootScope,$timeout,routesConfig,readMadeEasy,$scope) {
+		"$http",
+		function (categoriesSvc, $ionicLoading,$rootScope,$timeout,routesConfig,readMadeEasy,$scope,$http) {
 			'use strict';
 
 			var vm = this;
@@ -52,12 +53,49 @@ angular
 				readMadeEasy.readFile().success(function(data){
 					$scope.userId = data.userId;
 					$scope.appId = data.appId;
-				vm.imageUrl =
+/*				vm.imageUrl =
 					routesConfig.wpUrl.SERVER_URL()
 					+"/templates/viewImages?userId="
-					+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category";
+					+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category";*/
 				});
-				vm.categories = categories;
+				var image = [];
+
+                    for(var i=0;i<(categories.length);i++){
+                        getData(i)
+                    }
+                    function getData(i){
+
+                        $http.get(routesConfig.wpUrl.SERVER_URL()+"cmd=viewImages&userId="+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category/"+categories[i].imageUrl).success(function(Data) {
+                        image.splice(i, 0, {img:Data.imageSrc});
+                        replaceByValue(categories,categories[i].imageUrl,image[i].img)
+                        }).error(function(err) {
+                            alert('warning', "Unable to get categories", err.message);
+                        });
+
+                    }
+
+                    function replaceByValue(imageData,equalImage,image) {
+                        //console.log(imageData[0].imageUrl)
+
+                        //console.log(image)
+
+                        for( var k = 0; k < imageData.length; k++ ) {
+                            if( equalImage == imageData[k].imageUrl ) {
+
+                          //console.log('dsadsadsadasdadsad'+imageData[k].imageUrl)
+                          //console.log('dsadsadsadasdadsad'+image)
+
+                            imageData[k].imageUrl = image ;
+                            console.log(imageData)
+                           vm.categories  = imageData;
+
+                            }
+                        }
+
+
+                    }
+				//vm.categories = categories;
+				console.log(vm.categories)
 			}
 
 			function goToGetCategories() {

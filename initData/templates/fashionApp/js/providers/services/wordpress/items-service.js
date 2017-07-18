@@ -45,6 +45,7 @@ angular
 				return $http.get(routesCfg.wpItems.all(params))
 					.then(function(items) {
 						// _transformItemData(items.data);
+						console.log(items.data)
 						return items.data;
 					});
 			}
@@ -53,6 +54,7 @@ angular
 				return $http.get(routesCfg.wpItems.single(itemId))
 					.then(function(item) {
 						//return _transformItemData(item.data);
+						console.log(item.data);
 						return item.data;
 					});
 			}

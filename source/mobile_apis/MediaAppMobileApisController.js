@@ -85,11 +85,12 @@ module.exports = function(option) {
     function getArticleByCategoryId (req,Done){
 
             var collection = db.collection('article');
-            collection.findOne({categoryId:req.categoryId}, function(err, data) {
+            collection.find({categoryId:req.categoryId}).toArray(function(err, data) {
 
                 console.log('getArticleByCategoryId'+JSON.stringify(data));
                 Done( null, data );
             });
+
 
     }
 

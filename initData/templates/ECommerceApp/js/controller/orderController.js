@@ -39,7 +39,7 @@ mobileApp.controller('OrderCtrl', function ($scope, $rootScope, $http, $state, c
             };
 
     //get Sales and Promotions
-    $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {
+    $http.get(constants.server_url + 'cmd=getListOfSalesAndPromotions&appId='+$scope.appId).success(function(data) {
         $scope.salesandpromotion = data[0];
         console.log(data);
     }).error(function(err) {

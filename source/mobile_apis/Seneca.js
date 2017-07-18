@@ -166,6 +166,6 @@ seneca.act({ role: 'process', cmd: 'getCommentsDummy'}, function ( err, result )
       console.log(result);
 } )
 
-seneca.listen({ port:8080, host:'192.168.8.58',protocol: 'http' })
+seneca.listen({ port:8080, host:'192.168.8.61',protocol: 'http' })
 
 
