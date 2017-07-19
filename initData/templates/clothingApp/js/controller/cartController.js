@@ -34,7 +34,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         }
 
     $http.get(constants.server_url+"cmd=getAllCountry")
-        .then(function(res){
+        .success(function(res){
             $scope.countries = res.data;
         });
 

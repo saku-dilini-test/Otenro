@@ -177,7 +177,7 @@ angular.module('starter.controllers', [])
 
                             imageData[k].imageUrl = image ;
                             imageData[k].tempImageArray[0].img = image;
-                            console.log(imageData)
+                            imageData[k].tempImageArray.splice(1,0,{oldImage:equalImage})
                             $scope.itemList = imageData;
 
                         }
@@ -452,7 +452,7 @@ angular.module('starter.controllers', [])
                                 totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                                 price: $scope.selectedVariant.price,
                                 total : $scope.selectedVariant.price,
-                                imgURL : $stateParams.item.tempImageArray,
+                                imgURL : $stateParams.item.tempImageArray[1].oldImage,
                                 totalQty: $scope.selectedVariant.quantity
                             });
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
@@ -472,7 +472,7 @@ angular.module('starter.controllers', [])
                     totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                     price: $scope.selectedVariant.price,
                     total : $scope.selectedVariant.price,
-                    imgURL : $stateParams.item.tempImageArray,
+                    imgURL : $stateParams.item.tempImageArray[1].oldImage,
                     totalQty: $scope.selectedVariant.quantity
                 });
                 $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;

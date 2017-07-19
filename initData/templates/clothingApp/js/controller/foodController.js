@@ -48,9 +48,8 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
                     imageData[k].imageUrl = image ;
                     imageData[k].tempImageArray[0].img = image;
-                    console.log(imageData)
+                    imageData[k].tempImageArray.splice(1,0,{oldImage:equalImage})
                     $scope.foods = imageData;
-                    console.log(imageData.length)
                 }
             }
 
@@ -256,7 +255,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                                 totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                                 price: $scope.selectedVariant.price,
                                 total : $scope.selectedVariant.price,
-                                imgURL : $stateParams.item.tempImageArray,
+                                imgURL : $stateParams.item.tempImageArray[1].oldImage,
                                 totalQty: $scope.selectedVariant.quantity
 
                             });
@@ -277,7 +276,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                     totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                     price: $scope.selectedVariant.price,
                     total : $scope.selectedVariant.price,
-                    imgURL : $stateParams.item.tempImageArray,
+                    imgURL : $stateParams.item.tempImageArray[1].oldImage,
                     totalQty: $scope.selectedVariant.quantity
                 });
                 $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
