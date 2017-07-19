@@ -263,3 +263,7 @@ input[type=number] {
 .item-error-message{
     color:red;
 }
+
+input {
+    width: 100%;
+}

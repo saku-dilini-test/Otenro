@@ -441,3 +441,7 @@ input[type=number] {
     width:100% !important;
     text-align:left !important;
 }
+
+input {
+    width: 100%;
+}

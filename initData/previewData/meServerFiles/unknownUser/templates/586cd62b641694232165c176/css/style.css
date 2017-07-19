@@ -354,3 +354,7 @@ input[type=number] {
 .no-padding{
     padding:0;
 }
+
+input {
+    width: 100%;
+}
