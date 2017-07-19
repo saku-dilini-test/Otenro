@@ -173,8 +173,8 @@ h2:first-child{
 }
 
 .navigation-drawer  ion-header-bar button{
-    background-color:unset !important;
-    border: 0;
+    background-color: transparent !important;
+    border: none;
 }
 
 
