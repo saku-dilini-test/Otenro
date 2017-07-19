@@ -198,3 +198,6 @@ input[type=number] {
     padding:0;
 }
 
+input {
+    width: 100%;
+}

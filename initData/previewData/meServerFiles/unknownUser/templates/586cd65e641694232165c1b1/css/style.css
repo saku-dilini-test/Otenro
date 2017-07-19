@@ -186,3 +186,6 @@ input[type=number] {
     zoom: 0.8;
 }
 
+input {
+    width: 100%;
+}

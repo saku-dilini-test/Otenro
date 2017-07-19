@@ -469,5 +469,8 @@ input[type=number] {
   line-height: normal;
   padding-top: 0;
 }
+input {
+    width: 100%;
+}
 
 
