@@ -1814,7 +1814,7 @@ button[disabled]{
 }
 
 .input-modify{
-    border:unset !important;
+    border:none !important;
     padding-top: 3px !important;
 }
 
@@ -2710,4 +2710,11 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     animation-duration: 3s;
     animation-delay: 3s;
     animation-fill-mode: both;
+}
+
+/*IE 10 and abouve specific css wirte inside this media quary*/
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .fixed-inventory .tree-grid thead {
+        position: relative;
+    }
 }
