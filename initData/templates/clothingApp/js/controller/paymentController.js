@@ -145,7 +145,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         $http.post(constants.server_url+ url)
             .then(function(res){
                     $scope.details.id = $rootScope.cart.cartItems[0].id;
-                    $http.post(constants.server_url+"cmd=updateInventory&cart="+$stateParams.item.cart)
+                    $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
                         .then(function(res){
                                 $rootScope.cart.cartItems = [];
                                 $rootScope.cart.cartSize = 0;
@@ -216,7 +216,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         $http.post(constants.server_url+ url)
             .then(function(res){
                     //$scope.details.id = $rootScope.cart.cartItems[0].id;
-                    $http.post(constants.server_url+"cmd=updateInventory&cart="+$stateParams.item.cart)
+                    $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
                         .then(function(res){
                                 $rootScope.cart.cartItems = [];
                                 $rootScope.cart.cartSize = 0;
@@ -291,7 +291,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         $http.post(constants.server_url+ url)
                     .then(function(res){
                             $scope.details.id = $rootScope.cart.cartItems[0].id;
-                            $http.post(constants.server_url+"cmd=updateInventory&cart="+$stateParams.item.cart)
+                            $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
                                 .then(function(res){
                                         $rootScope.cart.cartItems = [];
                                         $rootScope.cart.cartSize = 0;
@@ -432,7 +432,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                     $http.post(constants.server_url+ url)
                         .then(function(res){
                                 $scope.details.id = $rootScope.cart.cartItems[0].id;
-                                $http.post(constants.server_url+"cmd=updateInventory&cart="+$stateParams.item.cart)
+                                $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
                                     .then(function(res){
                                             $rootScope.cart.cartItems = [];
                                             $rootScope.cart.cartSize = 0;

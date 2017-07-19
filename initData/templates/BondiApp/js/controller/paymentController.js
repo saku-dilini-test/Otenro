@@ -535,44 +535,6 @@ $scope.confirmCashPayment = function() {
                 if (response.status === 200 && response.data.transaction.id) {
                     $scope.step = 'done';
                     $scope.transactionId = response.data.transaction.id;
-/*                    if($stateParams.item.delivery.method == "Delivery"){
-                        $scope.details ={
-
-                            appId : $rootScope.appId,
-                            item : $stateParams.item.cart,
-                            amount : $stateParams.item.amount,
-                            registeredUser: $scope.user.registeredUser,
-                            customerName : $scope.user.name,
-                            deliverName : $stateParams.item.delivery.name,
-                            deliveryNo : $stateParams.item.delivery.streetNumber,
-                            deliveryStreet : $stateParams.item.delivery.streetName,
-                            deliveryCity : $stateParams.item.delivery.city,
-                            deliveryCountry : $stateParams.item.delivery.country,
-                            deliveryZip : $stateParams.item.delivery.zip,
-                            telNumber : $stateParams.item.delivery.phone,
-                            tax :   $stateParams.item.taxTotal,
-                            shippingCost :   $stateParams.item.shippingCost,
-                            shippingOpt : $stateParams.item.shipping.shippingOption,
-                            email: $stateParams.item.userEmail,
-                            promotionCode: $stateParams.item.promotionCode
-                        };
-                    }
-                    else{
-                        $scope.details ={
-                            appId : $rootScope.appId,
-                            item : $stateParams.item.cart,
-                            registeredUser: $scope.user.registeredUser,
-                            amount : $stateParams.item.amount,
-                            customerName : $stateParams.item.deliverDetails.name,
-                            telNumber : $stateParams.item.deliverDetails.phone,
-                            tax :   $stateParams.item.taxTotal,
-                            shippingCost :   $stateParams.item.shippingCost,
-                            pickupId: $stateParams.item.pickupId,
-                            email: $stateParams.item.userEmail,
-                            promotionCode: $stateParams.item.promotionCode
-                        }
-                    }*/
-
                     var url;
                     var object = JSON.stringify($stateParams.item.cart, function( key, value ){
 
@@ -596,7 +558,7 @@ $scope.confirmCashPayment = function() {
                         .then(function(res){
                                 $scope.details.id = $rootScope.cart.cartItems[0].id;
                                 //$http.post(constants.server_url+"cmd=updateInventory&cart="+$stateParams.item.cart)
-                                $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
+                                $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
                                     .then(function(res){
                                             $rootScope.cart.cartItems = [];
                                             $rootScope.cart.cartSize = 0;

@@ -1,12 +1,16 @@
 /**
  * Created by amila on 4/5/16.
  */
+ /**
+ * Edited by kalani on 19/7/17.
+ */
 
 mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService,$log,$ionicNavBarDelegate,$location) {
 
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
+    var a ;
 
 
        var path = $location.path();
@@ -33,15 +37,16 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         }
 
     $http.get(constants.server_url+"cmd=getAllCountry")
-        .then(function(res){
+        .success(function(res){
             $scope.countries = res.data;
         });
 
-     $scope.imageURL = constants.SERVER_URL
+/*     $scope.imageURL = constants.SERVER_URL
             +"/templates/viewImages?userId="
-            +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+            +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";*/
 
     $scope.cartItems = $rootScope.cart.cartItems;
+
     $scope.hide = true;
     $http.get(constants.server_url + 'cmd=getTaxInfo&appId='+$rootScope.appId).success(function(data) {
         if(data == ''){
