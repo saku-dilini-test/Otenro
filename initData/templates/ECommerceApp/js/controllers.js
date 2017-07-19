@@ -149,25 +149,17 @@ angular.module('starter.controllers', [])
                     }).error(function(err) {
                         alert('warning', "Unable to get categories", err.message);
                     });
-                    //console.log(data[i].imageUrl)
-
                 }
                 function replaceByValue(imageData,equalImage,image) {
-                  //console.log(imageData[0].imageUrl)
-
-                  //console.log(image)
-
                     for( var k = 0; k < imageData.length; k++ ) {
                         if( equalImage == imageData[k].imageUrl ) {
-
                             imageData[k].imageUrl = image ;
                             imageData[k].tempImageArray[0].img = image;
+                            imageData[k].tempImageArray.splice(1,0,{oldImage:equalImage})
                             console.log(imageData)
                             $scope.itemList = imageData;
-
                         }
                     }
-
                 }
 
             }).error(function (err) {
@@ -432,7 +424,7 @@ angular.module('starter.controllers', [])
                                 totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                                 price: $scope.selectedVariant.price,
                                 total : $scope.selectedVariant.price,
-                                imgURL : $stateParams.item.tempImageArray,
+                                imgURL : $stateParams.item.tempImageArray[1].oldImage,
                                 totalQty: $scope.selectedVariant.quantity
                             });
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
@@ -452,7 +444,7 @@ angular.module('starter.controllers', [])
                     totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                     price: $scope.selectedVariant.price,
                     total : $scope.selectedVariant.price,
-                    imgURL : $stateParams.item.tempImageArray,
+                    imgURL :  $stateParams.item.tempImageArray[1].oldImage,
                     totalQty: $scope.selectedVariant.quantity
                 });
                 $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;

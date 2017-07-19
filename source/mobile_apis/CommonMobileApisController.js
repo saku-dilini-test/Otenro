@@ -20,7 +20,7 @@ module.exports = function(option) {
     var seneca = this;
     var MongoClient = require('mongodb').MongoClient;
 
-    var url = 'mongodb://192.168.8.54:27017/appBuilder';
+    var url = 'mongodb://localhost:27017/appBuilder';
     var APP_FILE_SERVER = '/home/onbit/Documents/appFileServer/';
 
     MongoClient.connect(url, function(err, db){
@@ -33,6 +33,7 @@ module.exports = function(option) {
 
         function getContactUs (req,Done){
             if(req.appId != null){
+                console.log(req.appId)
                 var collection = db.collection('applicationcontactus');
                 collection.findOne({appId:req.appId}, function(err, item) {
                 console.log(item.email)
