@@ -44,19 +44,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         $scope.modal.hide();
     };
 
-
-/*    $scope.imageURL = constants.SERVER_URL
-        +"/templates/viewImages?userId="
-        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";*/
-
-
-/*       $http.get(constants.server_url+"cmd=viewImages&userId=" +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi").success(function(data) {
-             $scope.imageURL = 'http://192.168.8.55'+ data.url;
-             console.log("URL::"+ $scope.imageURL);
-       }).error(function(err) {
-             return err;
-       });*/
-
     $scope.selectedVariant = {};
 
     //$http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
@@ -79,8 +66,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             }
 
         }
-
-
         function getData(i){
 
             $http.get(constants.server_url+"cmd=viewImages&userId="+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi/"+data[i].imageUrl).success(function(Data) {
@@ -90,29 +75,18 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             }).error(function(err) {
                 alert('warning', "Unable to get categories", err.message);
             });
-            //console.log(data[i].imageUrl)
-
         }
 
         function replaceByValue(imageData,equalImage,image) {
-          //console.log(imageData[0].imageUrl)
-
-          //console.log(image)
-
             for( var k = 0; k < imageData.length; k++ ) {
                 if( equalImage == imageData[k].imageUrl ) {
-
                     imageData[k].imageUrl = image ;
                     imageData[k].tempImageArray[0].img = image;
-                    console.log(imageData)
+                    imageData[k].tempImageArray.splice(1,0,{oldImage:equalImage})
                     $scope.foods = imageData;
-                    console.log(imageData.length)
                 }
             }
-
         }
-
-
 
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
@@ -238,7 +212,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
       }
     };
 
-
     // Check buyQty input value.
     // If buyQty value is less than or equal Selected-Variant-Qty, Buy Button Enable
     $scope.changeBuyQuantity = function (buyQty) {
@@ -262,7 +235,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             }
         }
     };
-
 
     // Products Add to cart
       $scope.addToCart = function() {
@@ -328,15 +300,13 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                 $scope.modal.hide();
             }
         }
-        console.log('dsadsadsadsadadad'+ $rootScope.cart.cartItems.totWeight)
 
     };
     //get Sales and Promotions
-/*    $http.get(constants.SERVER_URL + '/edit/getListOfSalesAndPromotions?appId='+$scope.appId).success(function(data) {
+    $http.get(constants.server_url + 'cmd=getListOfSalesAndPromotions&appId='+$scope.appId).success(function(data) {
         $scope.salesandpromotion = data[0];
         //console.log(JSON.stringify(data));
     }).error(function(err) {
         alert('warning', "Unable to get sales and Promotions ", err.message);
     });
-*/
 });

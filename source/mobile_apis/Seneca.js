@@ -136,9 +136,6 @@ seneca.act({ role: 'process', cmd: 'getProductById'}, function ( err, result ) {
 } )
 
 
-
-
-
 /*Media App controller*/
 
 seneca.act({ role: 'process', cmd: 'getArticleCategoryByAppId'}, function ( err, result ) {
@@ -166,6 +163,6 @@ seneca.act({ role: 'process', cmd: 'getCommentsDummy'}, function ( err, result )
       console.log(result);
 } )
 
-seneca.listen({ port:8080, host:'192.168.8.61',protocol: 'http' })
+seneca.listen({ port:8080, host:'192.168.8.54',protocol: 'http' })
 
 

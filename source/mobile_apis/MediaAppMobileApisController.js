@@ -28,7 +28,6 @@ module.exports = function(option) {
        seneca.add( {cmd:'getArticleCategoryById' }, getArticleCategoryById );
        seneca.add( {cmd:'getCommentsDummy' }, getCommentsDummy );
 
-
     function getArticleCategoryByAppId (req,Done){
 
             var collection = db.collection('articlecategory');
@@ -36,14 +35,10 @@ module.exports = function(option) {
                 console.log('getArticleCategoryByAppId'+JSON.stringify(data).replace('_id','id'));
                 var Data = JSON.stringify(data).replace(/_id/g,'id');
                 var Adata = JSON.parse(Data);
-
-
-
                 Done( null, Adata );
             });
 
     }
-
     function getArticles (req,Done){
 
             var collections = db.collection('article');
@@ -52,19 +47,6 @@ module.exports = function(option) {
 
             collections.find({appId:req.appId,categoryId:req.categoryId}).toArray(function(err, data) {
             console.log('getArticle'+JSON.stringify(data));
-/*            var array = [];
-            var intCount = data.length;
-            for (var i = 0; i < intCount;){
-                var a = {
-                'appId':data[i].appId,
-                'title':data[i].title,
-                'imageUrl':data[i].imageUrl,
-                'categoryId':data[i].categoryId
-                }
-                array.push(a)
-
-            }
-            var Array = JSON.parse(array)*/
                 var Data = JSON.stringify(data).replace(/_id/g,'id');
                 var Adata = JSON.parse(Data);
                 console.log('get articles result:::::'+JSON.stringify(Adata))
@@ -73,14 +55,11 @@ module.exports = function(option) {
 
     }
 
-
     /**
          * Return Article Collection for given category ID
          * @param req
          * @param res
          */
-
-
 
     function getArticleByCategoryId (req,Done){
 
@@ -90,8 +69,6 @@ module.exports = function(option) {
                 console.log('getArticleByCategoryId'+JSON.stringify(data));
                 Done( null, data );
             });
-
-
     }
 
     function getArticleById (req,Done){
@@ -107,10 +84,8 @@ module.exports = function(option) {
 
     }
 
-
-
     function getArticleCategoryById (req,Done){
-    console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeee'+req.categoryId);
+    console.log('categoryId'+req.categoryId);
 
             var obj_id = new ObjectID(req.categoryId);
             var collection = db.collection('articlecategory');
@@ -121,7 +96,6 @@ module.exports = function(option) {
             });
 
     }
-
 
     /**
          * return two dummy comments json object for every request
@@ -152,8 +126,6 @@ module.exports = function(option) {
     }
 
     })
-
-
 
 }
 
