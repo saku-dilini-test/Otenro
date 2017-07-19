@@ -13,6 +13,20 @@ angular.module('invisionApp', ['ionic', 'ngCordova','ionic.cloud', 'srfSocialSha
 		'$http',
 		function($ionicPlatform, $window,$rootScope,readMadeEasy,$ionicPush,routesConfig,$http) {
 			$ionicPlatform.ready(function() {
+
+                if(window.Connection) {
+                    if(navigator.connection.type == Connection.NONE) {
+                        $ionicPopup.confirm({
+                            title: "Internet Disconnected",
+                            content: "The internet is disconnected on your device."
+                        })
+                            .then(function(result) {
+                                if(!result) {
+                                    ionic.Platform.exitApp();
+                                }
+                            });
+                    }
+                }
 				// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 				// for form inputs)
 				if (window.cordova && window.cordova.plugins.Keyboard) {

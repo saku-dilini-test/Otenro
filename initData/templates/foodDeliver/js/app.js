@@ -10,6 +10,8 @@ mobileApp.run(function($rootScope, $timeout, $translate, $location, appService,r
     $rootScope.footerBadge = 0;
     $rootScope.startPage = 0;
 
+
+
     FastClick.attach(document.body);
 
     $rootScope.$on('$routeChangeStart', function() {

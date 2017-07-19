@@ -3,6 +3,20 @@ var mobileApp=angular.module('foodDemoApp', ['ionic','ionic.cloud','satellizer',
 mobileApp.run(function($ionicPlatform,$rootScope,$http,readMadeEasy,constants,$ionicPush) {
   $ionicPlatform.ready(function() {
 
+      if(window.Connection) {
+          if(navigator.connection.type == Connection.NONE) {
+              $ionicPopup.confirm({
+                  title: "Internet Disconnected",
+                  content: "The internet is disconnected on your device."
+              })
+                  .then(function(result) {
+                      if(!result) {
+                          ionic.Platform.exitApp();
+                      }
+                  });
+          }
+      }
+
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
