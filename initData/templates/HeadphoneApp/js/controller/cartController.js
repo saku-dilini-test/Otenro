@@ -1,6 +1,9 @@
 /**
  * Created by amila on 4/5/16.
  */
+/**
+ * Edited by kalani on 7/20/17.
+ */
 
 mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService,$log,$ionicNavBarDelegate,$location) {
 
@@ -152,7 +155,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             deliverDetails.city = localData.city;
             deliverDetails.zip = localData.zip;
             deliverDetails.phone = localData.phone;
-            
+
 
         }
         $log.debug(deliverDetails);

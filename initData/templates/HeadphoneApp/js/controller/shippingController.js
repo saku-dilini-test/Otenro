@@ -1,6 +1,9 @@
 /**
  * Created by Madhuranga on 15/11/16.
  */
+/**
+ * Edited by kalani on 7/20/17.
+ */
 
 mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$stateParams,$ionicPopup,constants,PaypalService  ,ionicMaterialInk, ionicMaterialMotion,$log) {
 
@@ -57,10 +60,10 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
 
 
     //get the currency
-    $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
+    $http.get(constants.server_url + 'cmd=getCurrency&appId='+$scope.appId).success(function(data) {
         $scope.currency = data;
     }).error(function(err) {
-        alert('warning', "Unable to get Products Selected Category", err.message);
+        alert('warning', "Unable to get Products Selected Category");
     });
 
     //get the user's registered address
