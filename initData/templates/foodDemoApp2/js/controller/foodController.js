@@ -1,6 +1,9 @@
 /**
  * Created by amila on 3/31/16.
  */
+/**
+ * Edited by kalani on 7/20/17.
+ */
 
 mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants,$log) {
 
@@ -48,9 +51,9 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
                     imageData[k].imageUrl = image ;
                     imageData[k].tempImageArray[0].img = image;
-                    console.log(imageData)
+                    imageData[k].tempImageArray.splice(1,0,{oldImage:equalImage})
                     $scope.foods = imageData;
-                    console.log(imageData.length)
+
                 }
             }
 
