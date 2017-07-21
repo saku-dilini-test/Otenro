@@ -637,12 +637,6 @@
             }
 
 
-            else if (typeof returnPolicy == 'undefined' || termsAndCondition == 'undefined' || privacyPolicy == 'undefined') {
-                toastr.error('Please fill the fields', 'Message', {
-                    closeButton: true
-                });
-            }
-
             // Validate, Terms And Condition maximum characters length
             var termsAndCondition = storeSettings.termsAndCondition;
             if ((typeof termsAndCondition != 'undefined') &&
@@ -664,8 +658,7 @@
                 );
                 return;
             }
-else {
-            if (storeSettings.returnPolicy && storeSettings.termsAndCondition && storeSettings.privacyPolicy) {
+        else {
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
@@ -679,7 +672,6 @@ else {
 
 
                 $scope.selectedTab = current;
-            }
         }
         };
 
