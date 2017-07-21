@@ -11,7 +11,7 @@
                     <div class="md-dialog-header">
                         <h1 >Hello {{userEdit.firstName}}</h1>
                         <ul class="md-dialog-header-nav clearfix">
-                            <li>
+                            <li ng-if="userRole != 'support'">
                                 <a ng-click="redirectToDashboard()" class="return-to-app">my apps</a>
                             </li>
                             <li>
@@ -51,7 +51,7 @@
                     <div class="md-dialog-header">
                         <h1>billing account</h1>
                         <ul class="md-dialog-header-nav clearfix">
-                            <li>
+                            <li ng-if="userRole != 'support'">
                                 <a ng-click="redirectToDashboard()" class="return-to-app">my apps</a>
                             </li>
                             <li>
@@ -90,7 +90,7 @@
                     <div class="md-dialog-header">
                         <h1>Edit Profile</h1>
                         <ul class="md-dialog-header-nav clearfix">
-                            <li>
+                            <li ng-if="userRole != 'support'">
                                 <a ng-click="redirectToDashboard()" class="return-to-app">my apps</a>
                             </li>
                             <li>

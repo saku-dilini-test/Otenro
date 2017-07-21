@@ -22,6 +22,8 @@
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
         userProfileResource.getUserProfile().success(function (data) {
             $scope.userEdit = data;
+            $scope.userRole = data.userRole;
+
         }).error(function (err) {
             /*toastr.error(err.error, 'Error', {
                 closeButton: true
