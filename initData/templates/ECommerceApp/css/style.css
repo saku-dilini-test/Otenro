@@ -76,8 +76,8 @@ ion-slides {
 }
 
 .navigation-drawer  ion-header-bar button{
-    background-color:unset !important;
-    border: unset;
+    background-color: transparent !important;
+    border: none;
 }
 
 .navigation-drawer .back-button {
