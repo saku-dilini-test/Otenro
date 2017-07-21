@@ -97,6 +97,8 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         else{
             $scope.status = 'delivery'
             $state.go('app.login',{item:$scope.status});
+            $scope.loginModel.show();
+            $scope.loginModelCon = true;
         }
     }
     $scope.pickupDetails = function (deliverItems) {
