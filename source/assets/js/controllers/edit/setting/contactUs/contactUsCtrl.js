@@ -170,10 +170,6 @@
                  );
                  return;
              }
-
-             if (!storeSettings.returnPolicy|| !storeSettings.termsAndCondition|| !storeSettings.privacyPolicy) {
-                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
-             }
              else {
                  storeSettings.userId = $scope.userId;
                  storeSettings.appId = $rootScope.appId;
