@@ -19,7 +19,7 @@ angular.module('starter.controllers', [])
 
         $scope.changeAppName = function () {
             $scope.appName = $rootScope.appName;
-
+            var image = [];
             $http.get(constants.server_url + 'cmd=getArticleCategoryByAppId&appId=' + $rootScope.appId)
                 .success(function (data) {
                     for(i=0;i<(data.length);i++){

@@ -20,8 +20,6 @@ angular
 
 			var vm = this;
 			vm.noMoreItemsAvailable = false;
-
-
 			vm.items = [];
 			vm.loadData = loadData;
 
@@ -40,7 +38,6 @@ angular
 
 			categoriesSvc.getCategory($stateParams.categoryId).then(setCategory);
 
-
 			function setCategory(response) {
 				console.log(response)
 				$http.get(routesConfig.wpUrl.SERVER_URL()+"cmd=viewImages&userId="+$rootScope.userId+"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=category/"+response.imageUrl).success(function(Data) {
@@ -50,8 +47,6 @@ angular
                     }).error(function(err) {
                         alert('warning', "Unable to get categories", err.message);
                     });
-
-
 			}
 
 			function setItems(response) {
@@ -62,57 +57,37 @@ angular
 				}
 
 				function getData(i){
+					//console.log(response[i].imageUrl)
+					$http.get(routesConfig.wpUrl.SERVER_URL()+"cmd=viewImages&userId="+$rootScope.userId+"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article/"+response[i].imageUrl).success(function(Data) {
 
-					console.log(response[i].imageUrl)
+                    	image.splice(i, 0, {img:Data.imageSrc});
+                    	replaceByValue(response,response[i].imageUrl,image[i].img)
 
-				$http.get(routesConfig.wpUrl.SERVER_URL()+"cmd=viewImages&userId="+$rootScope.userId+"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article/"+response[i].imageUrl).success(function(Data) {
-                    //response.imageUrl = Data.imageSrc;
-                    image.splice(i, 0, {img:Data.imageSrc});
-                    replaceByValue(response,response[i].imageUrl,image[i].img)
+                	}).error(function(err) {
+                    	alert('warning', "Unable to get categories", err.message);
+                	});
+            	}
+	            function replaceByValue(imageData,equalImage,image) {
+	                        console.log(imageData)
+	                    for( var k = 0; k < imageData.length; k++ ) {
+	                        if( equalImage == imageData[k].imageUrl ) {
+	                            imageData[k].imageUrl = image ;
+	                            $scope.imageData = imageData;
+	                            console.log("image")
+	                        }
+	                   	}
+	                   	         //response = $scope.imageData
+	            }
+                vm.noMoreItemsAvailable = true;
 
-
-                }).error(function(err) {
-                    alert('warning', "Unable to get categories", err.message);
-                });
-
-                console.log(response)
-
-                function replaceByValue(imageData,equalImage,image) {
-                        //console.log(imageData[0].imageUrl)
-
-                        //console.log(image)
-
-                    for( var k = 0; k < imageData.length; k++ ) {
-                        if( equalImage == imageData[k].imageUrl ) {
-
-                            imageData[k].imageUrl = image ;
-                            $scope.imageData = imageData;
-
-                        }
-
-                   	}
-                   	         response = $scope.imageData
-                            vm.noMoreItemsAvailable = true;
-
-
-
-                	if (response.length === 0) {
-						vm.noMoreItemsAvailable = true;
-					} else {
-						vm.items = vm.items.concat(response);
-
-						//vm.items = response;
-						vm.noMoreItemsAvailable = true;
-					}
-
-
-				console.log(response)
-                }
-
+               	if (response.length === 0) {
+					vm.noMoreItemsAvailable = true;
+				} else {
+					vm.items = vm.items.concat(response);
+					//vm.items = response;
+					vm.noMoreItemsAvailable = true;
+				}
 				$scope.$broadcast('scroll.infiniteScrollComplete');
-            }
-
-
 			}
 		}
 	]);
