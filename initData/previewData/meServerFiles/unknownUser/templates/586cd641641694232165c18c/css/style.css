@@ -111,3 +111,6 @@ input[type=number] {
 input {
 	width: 100%;
 }
+.login .item {
+	width: auto;
+}
