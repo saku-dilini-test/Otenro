@@ -299,10 +299,12 @@
                 toastr.success('Content Rating information has been added successfully', 'Saved', {
                     closeButton: true
                 });
+                $mdDialog.hide();
             }).error(function(err){
                 toastr.error('Error while saving data', 'Warning', {
                       closeButton: true
                 });
+                $mdDialog.hide();
             })
         }
         $scope.appReviewInfo = function(appReview){

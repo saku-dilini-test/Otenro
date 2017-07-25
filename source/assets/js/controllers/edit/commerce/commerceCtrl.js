@@ -637,12 +637,6 @@
             }
 
 
-            else if (typeof returnPolicy == 'undefined' || termsAndCondition == 'undefined' || privacyPolicy == 'undefined') {
-                toastr.error('Please fill the fields', 'Message', {
-                    closeButton: true
-                });
-            }
-
             // Validate, Terms And Condition maximum characters length
             var termsAndCondition = storeSettings.termsAndCondition;
             if ((typeof termsAndCondition != 'undefined') &&
@@ -664,8 +658,7 @@
                 );
                 return;
             }
-else {
-            if (storeSettings.returnPolicy && storeSettings.termsAndCondition && storeSettings.privacyPolicy) {
+        else {
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
@@ -679,7 +672,6 @@ else {
 
 
                 $scope.selectedTab = current;
-            }
         }
         };
 
@@ -766,7 +758,7 @@ else {
         };
         $scope.updateEmailSettings = function (email, type) {
 
-            $log.debug(email);
+            //$log.debug(email);
             if(email == undefined){
                 toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
@@ -776,7 +768,7 @@ else {
                 email.appId = $rootScope.appId;
                 commerceService.updateEmailSettings(email)
                     .success(function (data) {
-                        $log.debug(data);
+                        //$log.debug(data);
                         if (type == "next") {
                             var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                             $scope.selectedIndex = index;
@@ -800,7 +792,7 @@ else {
         };
         $scope.updateHeaderFooterSettings = function (picFileHeader, picFileFooter, email, type) {
 
-            $log.debug(email);
+            //$log.debug(email);
             if(email == undefined || email.footer == undefined || email.header == undefined || email.footer == '' || email.header == ''){
                 toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
@@ -815,7 +807,7 @@ else {
                 email.userId = $auth.getPayload().id;
                 commerceService.updateHeaderFooterSettings(picFileHeader, picFileFooter, email)
                     .success(function (data) {
-                        $log.debug(data);
+                        //$log.debug(data);
                         if (type == "next") {
                             var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                             $scope.selectedIndex = index;
@@ -878,7 +870,7 @@ else {
             alert("MainMenu Loading Error : " + error);
         });
         $scope.testEmail = function (type) {
-            $log.debug('d');
+            //$log.debug('d');
             var sendType = {
                 type: type,
                 userId: $auth.getPayload().id
@@ -892,7 +884,7 @@ else {
                     $scope.email = result;
 
             sendType.appId = $rootScope.appId;
-                    $log.debug($scope.email);
+                    //$log.debug($scope.email);
             for (var i = 0; i < $scope.email.length; i++) {
                 if ((type == "Order confirm") && (typeof $scope.email[0].orderConfirmedEmail === 'undefined')) {
                     toastr.error('Save before test the Email ', 'Warning', {
