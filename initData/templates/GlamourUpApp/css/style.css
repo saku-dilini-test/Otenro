@@ -9,6 +9,7 @@
 
 .item-select select{
     background:transparent;
+	height: 100%;
 }
 
 /*home page*/

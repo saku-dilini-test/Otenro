@@ -469,8 +469,11 @@ input[type=number] {
   line-height: normal;
   padding-top: 0;
 }
-
-
 input {
     width: 100%;
+}
+
+.item-select select{
+    background:transparent;
+    height: 100%;
 }

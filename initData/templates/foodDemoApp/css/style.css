@@ -403,3 +403,7 @@ input {
         zoom: 0.6;
     }
 }
+.item-select select{
+    background:transparent;
+    height: 100%;
+}
