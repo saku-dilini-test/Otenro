@@ -82,6 +82,7 @@ ion-slides {
 
 .navigation-drawer .back-button {
     margin: 0 0 0 5px;
+    min-width: auto;
 }
 
 .navigation-drawer .back-button span{
