@@ -133,6 +133,7 @@
                         });
             }
             else {
+                    playStoreData.category = 'GooglePlay';
                     publishService.addGooglePlayInfo(playStoreData)
                         .success(function(data, status, headers, config) {
                             toastr.success('General information has been added successfully', 'Saved', {
@@ -175,7 +176,7 @@
                                  +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=publish/";
 
                              for (var i=0; i< 6; i++) {
-                                 var tempImageUrl = tempImagePath + i+'.png';
+                                 var tempImageUrl = tempImagePath + i+'ios'+'.png';
                                  $scope.publishSplash.push(tempImageUrl);
                              }
 
@@ -254,7 +255,7 @@
 
                    publishSplash.forEach(function (publishSplash) {
                         if (JSON.stringify(publishSplash).match("blobUrl")) {
-                            publishService.uploadPublishFiles(publishSplash, $scope.count)
+                            publishService.uploadPublishFiles(publishSplash, $scope.count +"ios")
                                 .success(function (data, status, headers, config) {
                                 }).error(function (data, status, headers, config) {
                             });
