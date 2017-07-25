@@ -348,5 +348,11 @@
         $scope.tree_handler = function(branch){
             $scope.goToEditProductWindow(branch);
         }
+        /**
+         * Show add product dialog
+         */
+        $scope.addProduct = function () {
+            return commerceService.showAddProductsDialog('products');
+        }
     }
     })();
