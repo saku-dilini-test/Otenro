@@ -362,3 +362,7 @@ input[type=number] {
 input {
     width: 100%;
 }
+.item-select select{
+    background:transparent;
+    height: 100%;
+}
