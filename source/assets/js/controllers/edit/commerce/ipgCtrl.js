@@ -12,7 +12,7 @@
                 success(function(data){                 
                     $scope.IPGSettings = data;
                 }).error(function(err){
-                    alert("IPG Info Loading Error : " + err);
+                    //alert("IPG Info Loading Error : " + err);
                 });    
         }
 
