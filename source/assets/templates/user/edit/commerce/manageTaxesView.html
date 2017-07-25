@@ -15,17 +15,17 @@
             </fieldset>
             <table class="me-simple-table">
                 <thead>
-                    <th class="simple-column">Name</th>
-                    <th class="simple-column">Amount</th>
-                    <th class="simple-column">Edit</th>
-                    <th class="simple-column">Delete</th>
+                    <th width="30%" class="simple-column">Name</th>
+                    <th width="30%" class="simple-column">Amount</th>
+                    <th width="20%" class="simple-column">Edit</th>
+                    <th width="20%" class="simple-column">Delete</th>
                 </thead>
                 <tbody>
                 <tr ng-repeat="item in items">
                     <td>{{item.taxName}}</td>
                     <td>{{item.taxAmount}} %</td>
-                    <td><img width="25" src="../../../images/edit-icon.svg" ng-click="editTaxInfo(item)"></td>
-                    <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteTaxInfo($index,item)"></td>
+                    <td><img width="15%" src="../../../images/edit-icon.svg" ng-click="editTaxInfo(item)"></td>
+                    <td><img width="15%" src="../../../images/delete-icon.svg" ng-click="deleteTaxInfo($index,item)"></td>
                 </tr>
                 </tbody>
             </table>
