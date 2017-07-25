@@ -60,28 +60,28 @@
         success(function(data){
             $scope.languageList = data;
         }).error(function(err){
-            alert("MainMenu Loading Error : " + err);
+            //alert("MainMenu Loading Error : " + err);
         });
 
         publishService.getAllRatings().
         success(function(data){
             $scope.contentRatingList = data;
         }).error(function(err){
-            alert("MainMenu Loading Error : " + err);
+            //alert("MainMenu Loading Error : " + err);
         });
 
         publishService.getAllPrimaryCategories().
            success(function(data){
                $scope.primaryCatList = data;
            }).error(function(err){
-               alert("MainMenu Loading Error :          " + err);
+               //alert("MainMenu Loading Error :          " + err);
            });
 
         publishService.getAllSecondaryCategories().
            success(function(data){
                $scope.secondaryCatList = data;
            }).error(function(err){
-               alert("MainMenu Loading Error : " + err);
+               //alert("MainMenu Loading Error : " + err);
            });
         
         if(item == 'GooglePlay'){
@@ -115,7 +115,7 @@
                             };
                      }
                 }).error(function(err){
-                    alert("MainMenu Loading Error : " + err);
+                    //alert("MainMenu Loading Error : " + err);
                 });
         }
 
@@ -222,7 +222,7 @@
 
                          }
                     }).error(function(err){
-                        alert("MainMenu Loading Error : " + err);
+                        //alert("MainMenu Loading Error : " + err);
                     });
         }
         

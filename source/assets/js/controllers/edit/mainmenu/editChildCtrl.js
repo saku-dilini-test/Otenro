@@ -19,7 +19,7 @@
             .success(function (result) {
                 $scope.mainMenus = result;
             }).error(function (error) {
-                alert("MainMenu Loading Error : " + error);
+                //alert("MainMenu Loading Error : " + error);
             });
 
         $scope.editChildImage=function(imageUrl,child){

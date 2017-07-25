@@ -61,7 +61,7 @@
             });
                // }
         }).error(function (error) {
-                alert("Contact Us information Loading Error : " + error);
+                //alert("Contact Us information Loading Error : " + error);
         });
 
         //get about Us Information
