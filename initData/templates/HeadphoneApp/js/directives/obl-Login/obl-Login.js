@@ -21,7 +21,7 @@
 											"token": res.data.token,
 											"email": data.email,
 											"name": res.data.user.name,
-											"phone": res.data.user.phoneNumber,
+                                            "phone": res.data.user.phone,
 											"streetNumber": res.data.user.streetNumber,
 											"streetName": res.data.user.streetName,
 											"country": res.data.user.country,
