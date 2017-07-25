@@ -66,6 +66,7 @@ ion-side-menu .list .activated{
 
 .res-nav .col-50{
     padding:3%;
+    -ms-flex: 0 0 auto;
 }
 
 
