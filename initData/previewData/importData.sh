@@ -66,9 +66,6 @@ mongoimport --db $DB --collection thirdnavigation --file dataFiles/thirdnavigati
 
 echo $MESERVER
 
-cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
-cp -r ./meServerFiles/unknownUser $MESERVER
-
 cd meServerFiles/unknownUser/templates/
    for d in ./*;do
        cd $d/js/
@@ -76,5 +73,11 @@ cd meServerFiles/unknownUser/templates/
        sed -i "s@serverUrl@$serverUrl@" constantsService.js
        cd -
     done
+
+cd ../../../
+cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
+cp -r ./meServerFiles/unknownUser $MESERVER
+
+
 
 echo  'end'
