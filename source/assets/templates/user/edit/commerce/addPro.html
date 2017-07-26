@@ -160,7 +160,9 @@
                                     <td ng-model="data.name">
                                         <p class="product-name">{{data.name}}</p>
                                         <div disable-all="priceAndVariantsForm.$invalid" class="add-new-variant">
-                                            <div class="add-icon icon icon-plus" ng-click="addVariant(selection,product,$index,data);generalDetails(data , 1)"></div>
+                                            <div class="add-icon icon icon-plus" ng-click="addVariant(selection,product,$index,data);generalDetails(data , 1)">
+                                                <span>Add row</span>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>
