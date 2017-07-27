@@ -2711,10 +2711,28 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     animation-delay: 3s;
     animation-fill-mode: both;
 }
+.add-new-variant span {
+  display:none;
+}
 
 /*IE 10 and abouve specific css wirte inside this media quary*/
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     .fixed-inventory .tree-grid thead {
         position: relative;
+    }
+
+    .add-new-variant{
+        position:-ms-device-fixed;
+        top:720px;
+        left:504px;
+        transform: translateX(-50%);
+    }
+
+    .add-new-variant span {
+        display:block;
+        width: 80px;
+        position: absolute;
+        left: 20px;
+        margin-top: -1px;
     }
 }
