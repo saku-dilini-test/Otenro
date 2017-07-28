@@ -21,6 +21,7 @@
         $scope.maxAddressLength = 50;
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
         userProfileResource.getUserProfile().success(function (data) {
+            $scope.original = angular.copy(data);
             $scope.userEdit = data;
             $scope.userRole = data.userRole;
 
@@ -40,9 +41,14 @@
             $scope.activeTabIndex = index;
         }
 
-        $scope.backToView = function (index){
+        $scope.backToView = function (index,resetData){
             $scope.viewProfile = "Profile";
             $scope.viewBilling = "Billing Details";
+            if(resetData == 'userEdit'){
+                $scope.userEdit = angular.copy($scope.original);
+                $scope.editProfile.$setPristine();
+                $scope.editProfile.$setUntouched();
+            }
             $scope.activeTabIndex = index;
         }
         
