@@ -273,7 +273,7 @@
                             <div class="btn-view md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="backToView(1)">cancel</md-button>
-                                <md-button class="me-default-button" ng-click="saveBillings(billingEdit)">save</md-button>
+                                <md-button class="me-default-button" ng-disabled="editBilling.$invalid" ng-click="saveBillings(billingEdit)">save</md-button>
                             </div>
                         </div>
                         </form>
