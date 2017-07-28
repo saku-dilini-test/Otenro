@@ -181,7 +181,7 @@
                             </md-select>
                         </fieldset>
                         <fieldset class="text-right">
-                            <md-button class="me-default-button" ng-click="backToView(0)">Cancel</md-button>
+                            <md-button class="me-default-button" ng-click="backToView(0,'userEdit')">Cancel</md-button>
 
                             <md-button class="me-default-button" ng-disabled="editProfile.password.$error.compareTo"
                                        ng-click="editUserProfile(userEdit,selected);">Save
@@ -217,7 +217,7 @@
                         <fieldset>
                             <label>Billing Address</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input class="input-shadow-border"
+                            <input class="input-shadow-bordebackToViewr"
                                    type="text"
                                    name="address"
                                    maxlength="{{maxAddressLength}}"
