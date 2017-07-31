@@ -32,6 +32,8 @@ SetUp Project
 
 (3) Start project
 
+    Development
+
         i) Cake Company Web Site
 
             goto Otenro -> apps -> cakeFactoryWebSite -> js -> app.js
@@ -57,9 +59,14 @@ SetUp Project
                     goto Otenro -> apps -> hybrid -> cakeFactoryBackend
                         > sails lift
 
-                 Production
+    Production
 
-                     * login as 'git' user
-                     * go to "/home/git/projects/cakeCompany/Otenro/apps/hybrid/cakeFactoryBackend"
-                     * check the running apps in pm2 ( pm2 list), if you restart the server there should not be any running processes.
-                     * run pm2 start app.js -x -- --prod
+        i) Cake Company Web Site
+
+            1) load Cake company Front-end(apps -> cakeFactoryWebSite folder) to the apache server
+            2) Cake Company Backend up
+
+                 > login as 'git' user
+                 > go to "/home/git/projects/cakeCompany/Otenro/apps/hybrid/cakeFactoryBackend"
+                 > check the running apps in pm2 ( pm2 list), if you restart the server there should not be any running processes.
+                 > run pm2 start app.js -x -- --prod
