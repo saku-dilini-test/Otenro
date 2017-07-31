@@ -13,16 +13,16 @@
                 <table class="me-simple-table">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th width="50%">Name</th>
+                            <th width="25%">Edit</th>
+                            <th width="25%">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in menuItems">
                         <td>{{item.name}}</td>
-                        <td><img width="25" src="../../../images/edit-icon.svg" ng-click="goToEditMenuItemView(item)"></td>
-                        <td><img width="25" src="../../../images/delete-icon.svg" ng-click="deleteMenuItem(item)"></td>
+                        <td><img width="15%" src="../../../images/edit-icon.svg" ng-click="goToEditMenuItemView(item)"></td>
+                        <td><img width="15%" src="../../../images/delete-icon.svg" ng-click="deleteMenuItem(item)"></td>
                     </tr>
                     </tbody>
                 </table>

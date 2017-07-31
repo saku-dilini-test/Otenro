@@ -316,7 +316,7 @@
                 .success(function (result) {
                     $scope.mainMenus = result;
                 }).error(function (error) {
-                alert("MainMenu Loading Error : " + error);
+                //alert("MainMenu Loading Error : " + error);
             })
         }
 
@@ -325,7 +325,7 @@
                 .success(function (result) {
                     $scope.categories = result;
                 }).error(function (error) {
-                alert("Category Loading Error : " + error);
+                //alert("Category Loading Error : " + error);
             })
         }
 
@@ -337,7 +337,7 @@
                         $scope.categoryIdList[i] = $scope.products[i].categoryId;
                     }
                 }).error(function (error) {
-                alert("Category Loading Error : " + error);
+                //alert("Category Loading Error : " + error);
             })
 
         }
@@ -388,7 +388,7 @@
                     $scope.gridOptions3.data = $scope.unfulfilled;
                     $scope.gridOptions4.data = $scope.refund;
                 }).error(function (error) {
-                alert("Orders List Loading Error : " + error);
+                //alert("Orders List Loading Error : " + error);
             })
         }
 
@@ -442,29 +442,29 @@
         publishService.getAllLanguages().success(function (data) {
             $scope.languageList = data;
         }).error(function (err) {
-            alert("MainMenu Loading Error : " + err);
+            //alert("MainMenu Loading Error : " + err);
         });
 
         currencyService.getAllCurrency().success(function (data) {
             $scope.currencyList = data;
 
         }).error(function (err) {
-            alert("MainMenu Loading Error : " + err);
+            //alert("MainMenu Loading Error : " + err);
         });
         commerceService.getAllSiteType().success(function (data) {
             $scope.siteTypeList = data;
         }).error(function (err) {
-            alert("MainMenu Loading Error : " + err);
+            //alert("MainMenu Loading Error : " + err);
         });
         commerceService.getAllMeasurementType().success(function (data) {
             $scope.measurementTypeList = data;
         }).error(function (err) {
-            alert("MainMenu Loading Error : " + err);
+            //alert("MainMenu Loading Error : " + err);
         });
         commerceService.getAllTimeAndRegion().success(function (data) {
             $scope.timeAndRegionList = data;
         }).error(function (err) {
-            alert("MainMenu Loading Error : " + err);
+            //alert("MainMenu Loading Error : " + err);
         });
 
         $scope.saveStoreSettings = function (current, storeSettings, openHours) {
@@ -637,12 +637,6 @@
             }
 
 
-            else if (typeof returnPolicy == 'undefined' || termsAndCondition == 'undefined' || privacyPolicy == 'undefined') {
-                toastr.error('Please fill the fields', 'Message', {
-                    closeButton: true
-                });
-            }
-
             // Validate, Terms And Condition maximum characters length
             var termsAndCondition = storeSettings.termsAndCondition;
             if ((typeof termsAndCondition != 'undefined') &&
@@ -664,8 +658,7 @@
                 );
                 return;
             }
-else {
-            if (storeSettings.returnPolicy && storeSettings.termsAndCondition && storeSettings.privacyPolicy) {
+        else {
                 storeSettings.userId = $scope.userId;
                 storeSettings.appId = $rootScope.appId;
                 commerceService.savePolicies(storeSettings).success(function (data) {
@@ -679,7 +672,6 @@ else {
 
 
                 $scope.selectedTab = current;
-            }
         }
         };
 
@@ -766,7 +758,7 @@ else {
         };
         $scope.updateEmailSettings = function (email, type) {
 
-            $log.debug(email);
+            //$log.debug(email);
             if(email == undefined){
                 toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
@@ -776,7 +768,7 @@ else {
                 email.appId = $rootScope.appId;
                 commerceService.updateEmailSettings(email)
                     .success(function (data) {
-                        $log.debug(data);
+                        //$log.debug(data);
                         if (type == "next") {
                             var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                             $scope.selectedIndex = index;
@@ -800,7 +792,7 @@ else {
         };
         $scope.updateHeaderFooterSettings = function (picFileHeader, picFileFooter, email, type) {
 
-            $log.debug(email);
+            //$log.debug(email);
             if(email == undefined || email.footer == undefined || email.header == undefined || email.footer == '' || email.header == ''){
                 toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
@@ -815,7 +807,7 @@ else {
                 email.userId = $auth.getPayload().id;
                 commerceService.updateHeaderFooterSettings(picFileHeader, picFileFooter, email)
                     .success(function (data) {
-                        $log.debug(data);
+                        //$log.debug(data);
                         if (type == "next") {
                             var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
                             $scope.selectedIndex = index;
@@ -875,10 +867,10 @@ else {
                     }
                 }
             }).error(function (error) {
-            alert("MainMenu Loading Error : " + error);
+            //alert("MainMenu Loading Error : " + error);
         });
         $scope.testEmail = function (type) {
-            $log.debug('d');
+            //$log.debug('d');
             var sendType = {
                 type: type,
                 userId: $auth.getPayload().id
@@ -892,7 +884,7 @@ else {
                     $scope.email = result;
 
             sendType.appId = $rootScope.appId;
-                    $log.debug($scope.email);
+                    //$log.debug($scope.email);
             for (var i = 0; i < $scope.email.length; i++) {
                 if ((type == "Order confirm") && (typeof $scope.email[0].orderConfirmedEmail === 'undefined')) {
                     toastr.error('Save before test the Email ', 'Warning', {
@@ -1063,7 +1055,7 @@ else {
             });
                // }
         }).error(function (error) {
-                alert("Contact Us information Loading Error : " + error);
+                //alert("Contact Us information Loading Error : " + error);
         });
         // Save Contact Us Information and move to Web Information
         $scope.addContactUs = function(basicInfo,webInfo,googleMap,type) {

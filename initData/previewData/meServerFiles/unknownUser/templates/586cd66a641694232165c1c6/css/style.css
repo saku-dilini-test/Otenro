@@ -76,12 +76,13 @@ ion-slides {
 }
 
 .navigation-drawer  ion-header-bar button{
-    background-color:unset !important;
-    border: unset;
+    background-color: transparent !important;
+    border: none;
 }
 
 .navigation-drawer .back-button {
     margin: 0 0 0 5px;
+    min-width: auto;
 }
 
 .navigation-drawer .back-button span{
@@ -322,6 +323,8 @@ ion-slides {
     top: 44px;
     left: -65px;
     position: relative;
+    -moz-transform-origin: top right;
+    -moz-transform: scale(0.6);
 }
 
 .delivery-details .item-content{
@@ -330,7 +333,7 @@ ion-slides {
 
 .delivery-details .delivery-form{
     zoom: 0.7;
-    padding-left: 72px;
+    padding-left: 65px;
 }
 
 .delivery-details .delivery-form label{
@@ -353,11 +356,14 @@ ion-slides {
 
 .payment .card-form{
     zoom: 0.7;
-    padding-left: 72px;
+    padding-left: 65px;
 }
 
 .payment .item-checkbox .checkbox{
     zoom: 0.7;
+    -moz-transform-origin: left;
+    -moz-transform: scale(0.6);
+
 }
 
 .payment .cards-list img{
@@ -435,4 +441,12 @@ input[type=number] {
 .header-modify{
     width:100% !important;
     text-align:left !important;
+}
+
+input {
+    width: 100%;
+}
+.item-select select{
+    background:transparent;
+    height: 100%;
 }

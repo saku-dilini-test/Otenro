@@ -32,7 +32,7 @@ module.exports = {
 
 
                 sails.log.debug( pushConfigData);
-                if (pushConfigData != 'undefined'){
+                if (pushConfigData == 'undefined'){
                     return res.serverError();
                 }else {
                     var Message = req.body.message;

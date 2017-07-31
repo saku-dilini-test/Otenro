@@ -19,6 +19,7 @@ mobileApp.controller('RegisterCtrl', function($scope,$rootScope,$http,$ionicPopu
             streetNumber: $scope.data.streetNumber,
             streetName: $scope.data.streetName,
             city: $scope.data.city,
+            zip: $scope.data.zip,
             country: $scope.data.country,
             phone: $scope.data.phone,
             appId: $rootScope.appId
@@ -34,6 +35,7 @@ mobileApp.controller('RegisterCtrl', function($scope,$rootScope,$http,$ionicPopu
             	"streetName": data.streetName,
             	"country": data.country,
             	"city": data.city,
+                "zip": data.zip,
             	"type": 'internal',
                 "appId":data.appId,
                 "registeredUser": res.data.user.sub

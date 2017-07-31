@@ -21,206 +21,429 @@
     <div ng-cloak>
         <md-content>
             <md-tabs md-dynamic-height md-border-bottom>
-                <md-tab label="PRODUCT DETAILS">
-                    <md-tab-body>
-                    <md-content class="md-padding">
-                        <md-input-container class="md-block" flex="50">
-                            <label>language</label>
-                            <input name="language" ng-model="publishDetails[0].language" >
-                            <div ng-messages="publishForm.language.$error">
-                                <div ng-message="required">This is required!</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container class="md-block" flex="50">
-                            <label>Application Title</label>
-                            <input name="favoriteColor" md-maxlength="30" ng-model="publishDetails[0].title" required>
-                            <div ng-messages="publishForm.title.$error">
-                                <div ng-message="required">This is required!</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container class="md-block" flex="50">
-                            <label>Short description</label>
-                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].shortDescription" required>
-                            <div ng-messages="publishForm.shortDescription.$error">
-                                <div ng-message="required">This is required!</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container class="md-block" flex="50">
-                            <label>Full description</label>
-                        <textarea type="area" required  md-maxlength="4000" name="description" rows="2"
-                                ng-model="publishDetails[0].fullDescription" > </textarea>
-                            <div ng-messages="publishForm.fullDescription.$error">
-                                <div ng-message="required">This is required!</div>
-                            </div>
-                        </md-input-container>
-                    </md-content>
-                    </md-tab-body>
-                </md-tab>
-                <md-tab label="GRAPHIC ASSETS">
-                    <md-content class="md-padding">
-                        <div ng-cloak>
-                            Screenshots*
-                            <md-content>
-                                <md-tabs md-dynamic-height md-border-bottom>
-                                    <md-tab label="Phone">
-                                        <md-content class="md-padding">
-                                            <img ng-if="splash[2] != null" ngf-src="splash[2]" height="150px" width="84px"/>
-                                            <img ng-if="splash[3] != null" ngf-src="splash[3]" height="150px" width="84px"/>
-                                            <img ng-if="splash[4] != null" ngf-src="splash[4]" height="150px" width="84px"/>
-                                            <img ng-if="splash[5] != null" ngf-src="splash[5]" height="150px" width="84px"/>
+                <md-tab label="Android">
+                    <md-content>
+                        <md-tabs md-dynamic-height md-border-bottom>
+                            <md-tab label="PRODUCT DETAILS">
+                                <md-tab-body>
+                                    <md-content class="md-padding">
+                                        <md-input-container class="md-block" flex="50">
+                                            <label>language</label>
+                                            <input name="language" ng-model="publishDetails[0].language" >
+                                            <div ng-messages="publishForm.language.$error">
+                                                <div ng-message="required">This is required!</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-block" flex="50">
+                                            <label>Application Title</label>
+                                            <input name="favoriteColor" md-maxlength="30" ng-model="publishDetails[0].title" required>
+                                            <div ng-messages="publishForm.title.$error">
+                                                <div ng-message="required">This is required!</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-block" flex="50">
+                                            <label>Short description</label>
+                                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].shortDescription" required>
+                                            <div ng-messages="publishForm.shortDescription.$error">
+                                                <div ng-message="required">This is required!</div>
+                                            </div>
+                                        </md-input-container>
+                                        <md-input-container class="md-block" flex="50">
+                                            <label>Full description</label>
+                                            <textarea type="area" required  md-maxlength="4000" name="description" rows="2"
+                                                      ng-model="publishDetails[0].fullDescription" > </textarea>
+                                            <div ng-messages="publishForm.fullDescription.$error">
+                                                <div ng-message="required">This is required!</div>
+                                            </div>
+                                        </md-input-container>
+                                    </md-content>
+                                </md-tab-body>
+                            </md-tab>
+                            <md-tab label="GRAPHIC ASSETS">
+                                <md-content class="md-padding">
+                                    <div ng-cloak>
+                                        Screenshots*
+                                        <md-content>
+                                            <md-tabs md-dynamic-height md-border-bottom>
+                                                <md-tab label="Phone">
+                                                    <md-content class="md-padding">
+                                                        <img ng-if="splash[2] != null" ngf-src="splash[2]" height="150px" width="84px"/>
+                                                        <img ng-if="splash[3] != null" ngf-src="splash[3]" height="150px" width="84px"/>
+                                                        <img ng-if="splash[4] != null" ngf-src="splash[4]" height="150px" width="84px"/>
+                                                        <img ng-if="splash[5] != null" ngf-src="splash[5]" height="150px" width="84px"/>
 
+                                                    </md-content>
+                                                </md-tab>
+                                                <md-tab label="Tablet">
+                                                    <md-content class="md-padding">
+                                                        <img src="images/aimp(512x512).png" alt="Smiley face" height="100" width="100">
+                                                    </md-content>
+                                                </md-tab>
+                                                <md-tab label="Android TV">
+                                                    <md-content class="md-padding">
+                                                        <img src="images/images.jpg" alt="Smiley face" height="100" width="100">
+                                                    </md-content>
+                                                </md-tab>
+                                                <md-tab label="Android Wear">
+                                                    <md-content class="md-padding">
+                                                        <img src="images/aimp(512x512).png" alt="Smiley face" height="100" width="100">
+                                                    </md-content>
+                                                </md-tab>
+                                            </md-tabs>
                                         </md-content>
-                                    </md-tab>
-                                    <md-tab label="Tablet">
-                                        <md-content class="md-padding">
-                                            <img src="images/aimp(512x512).png" alt="Smiley face" height="100" width="100">
-                                        </md-content>
-                                    </md-tab>
-                                    <md-tab label="Android TV">
-                                        <md-content class="md-padding">
-                                            <img src="images/images.jpg" alt="Smiley face" height="100" width="100">
-                                        </md-content>
-                                    </md-tab>
-                                    <md-tab label="Android Wear">
-                                        <md-content class="md-padding">
-                                            <img src="images/aimp(512x512).png" alt="Smiley face" height="100" width="100">
-                                        </md-content>
-                                    </md-tab>
-                                </md-tabs>
-                            </md-content>
-                        </div>
-                        <br>
-                        Hi-res icon*
-                        Default – English (United States) – en-US
-                        512 x 512
-                        32-bit PNG (with alpha)
-                        <br>
-                        <img ng-if="splash[0] != null" ngf-src="splash[0]" height="100" width="100"/>
-                        <br>
-                        Feature Graphic
-                        Default – English (United States) – en-US
-                        1024 w x 500 h
-                        JPG or 24-bit PNG (no alpha)
-                        <br>
-                        <!--<img src="images/feature_graphic.png" alt="Feature Graphic" height="150px" width="317px">-->
-                        <img ng-if="splash[1] != null" ngf-src="splash[1]" height="150px" width="317px"/>
+                                    </div>
+                                    <br>
+                                    Hi-res icon*
+                                    Default – English (United States) – en-US
+                                    512 x 512
+                                    32-bit PNG (with alpha)
+                                    <br>
+                                    <img ng-if="splash[0] != null" ngf-src="splash[0]" height="100" width="100"/>
+                                    <br>
+                                    Feature Graphic
+                                    Default – English (United States) – en-US
+                                    1024 w x 500 h
+                                    JPG or 24-bit PNG (no alpha)
+                                    <br>
+                                    <!--<img src="images/feature_graphic.png" alt="Feature Graphic" height="150px" width="317px">-->
+                                    <img ng-if="splash[1] != null" ngf-src="splash[1]" height="150px" width="317px"/>
+                                </md-content>
+
+                            </md-tab>
+                            <md-tab label="CATEGORIZATION">
+                                <md-content class="md-padding">
+                                    <md-input-container>
+                                        <label> Application type</label>
+                                        <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].applicationType" required>
+                                        <div ng-messages="publishForm.applicationType.$error">
+                                            <div ng-message="required">This is required!</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label> Category</label>
+                                        <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].primaryCategory" required>
+                                        <div ng-messages="publishForm.primaryCategory.$error">
+                                            <div ng-message="required">This is required!</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label> Content rating</label>
+                                        <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].contentRating" required>
+                                        <div ng-messages="publishForm.contentRating.$error">
+                                            <div ng-message="required">This is required!</div>
+                                        </div>
+                                    </md-input-container>
+                                </md-content>
+                            </md-tab>
+                            <md-tab label="CONTACT DETAILS">
+                                <md-content class="md-padding">
+                                    <md-input-container>
+                                        <label>Website</label>
+                                        <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].website" required>
+                                        <div ng-messages="publishForm.website.$error">
+                                            <div ng-message="required">This is required!</div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label>Email</label>
+                                        <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].email" required>
+                                        <div ng-messages="publishForm.email.$error">
+                                            <div ng-message="required">This is required!</div>
+                                        </div>
+                                    </md-input-container>
+                                </md-content>
+                            </md-tab>
+                            <md-tab label="PRIVACY POLICY">
+                                <md-content class="md-padding">
+                                    <md-input-container>
+                                        <label> Privacy Policy</label>
+                                        <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].privacyPolicy" required>
+                                        <div ng-messages="publishForm.privacyPolicy.$error">
+                                            <div ng-message="required">This is required!</div>
+                                        </div>
+                                    </md-input-container>
+                                </md-content>
+                            </md-tab>
+
+                            <md-tab label="PUSH CONFIG">
+                                <md-content class="md-padding">
+                                    <md-input-container>
+                                        <label> IONIC APP ID </label>
+                                        <input name="ionicAPPID" ng-model="pushConfigData.ionicAPPID" >
+                                        <!--<div ng-messages="publishForm.ionicAPPID.$error">-->
+                                        <!--<div ng-message="required">This is required!</div>-->
+                                        <!--</div>-->
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label> SENDER ID </label>
+                                        <input name="senderID" ng-model="pushConfigData.senderID" >
+                                        <!--<div ng-messages="publishForm.senderID.$error">-->
+                                        <!--<div ng-message="required">This is required!</div>-->
+                                        <!--</div>-->
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label> PROFILE </label>
+                                        <input name="profile" ng-model="pushConfigData.profile" >
+                                        <!--<div ng-messages="publishForm.profile.$error">-->
+                                        <!--<div ng-message="required">This is required!</div>-->
+                                        <!--</div>-->
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label> AUTHORIZATION </label>
+                                        <input name="authorization" ng-model="pushConfigData.authorization" >
+                                        <!--<div ng-messages="publishForm.authorization.$error">-->
+                                        <!--<div ng-message="required">This is required!</div>-->
+                                        <!--</div>-->
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <div class="button" ng-click="savePushConfig(pushConfigData)">Save</div>
+                                    </md-input-container>
+                                    <br>
+                                    <div>
+                                        sourcePath : {{sourcePath}}
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                            <md-tab label="Download ZIP">
+                                <md-content class="md-padding">
+                                    <md-input-container>
+                                        <div class="download-section">
+                                            <a href="/edit/buildSource?appId={{appId}}&userId={{userId}}" target="_self">Download ZIP</a>
+                                        </div>
+                                    </md-input-container>
+                                </md-content>
+                            </md-tab>
+                            <md-tab label="finish">
+                                <md-content class="md-padding">
+                                    <md-input-container>
+                                        <md-button class="me-default-button" ng-disabled="generalForm.$invalid"
+                                                   ng-click="changePublishStatus()">finish</md-button>
+                                    </md-input-container>
+                                </md-content>
+                            </md-tab>
+
+                        </md-tabs>
                     </md-content>
 
                 </md-tab>
-                <md-tab label="CATEGORIZATION">
-                    <md-content class="md-padding">
-                        <md-input-container>
-                            <label> Application type</label>
-                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].applicationType" required>
-                            <div ng-messages="publishForm.applicationType.$error">
-                                <div ng-message="required">This is required!</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container>
-                            <label> Category</label>
-                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].primaryCategory" required>
-                            <div ng-messages="publishForm.primaryCategory.$error">
-                                <div ng-message="required">This is required!</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container>
-                            <label> Content rating</label>
-                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].contentRating" required>
-                            <div ng-messages="publishForm.contentRating.$error">
-                                <div ng-message="required">This is required!</div>
-                            </div>
-                        </md-input-container>
-                    </md-content>
-                </md-tab>
-                <md-tab label="CONTACT DETAILS">
-                    <md-content class="md-padding">
-                        <md-input-container>
-                            <label>Website</label>
-                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].website" required>
-                            <div ng-messages="publishForm.website.$error">
-                                <div ng-message="required">This is required!</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container>
-                            <label>Email</label>
-                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].email" required>
-                            <div ng-messages="publishForm.email.$error">
-                                <div ng-message="required">This is required!</div>
-                            </div>
-                        </md-input-container>
-                    </md-content>
-                </md-tab>
-                <md-tab label="PRIVACY POLICY">
-                    <md-content class="md-padding">
-                        <md-input-container>
-                            <label> Privacy Policy</label>
-                            <input name="favoriteColor" md-maxlength="80" ng-model="publishDetails[0].privacyPolicy" required>
-                            <div ng-messages="publishForm.privacyPolicy.$error">
-                                <div ng-message="required">This is required!</div>
-                            </div>
-                        </md-input-container>
-                    </md-content>
-                </md-tab>
+                <md-tab label="IOS">
+                    <md-content>
+                        <md-tabs md-dynamic-height md-border-bottom>
+                            <md-tab label="general">
+                                <md-tab-body>
+                                    <md-content class="md-padding">
+                                        <form name="appStoreForm" novalidate>
+                                            <div class="md-dialog-main">
+                                                <fieldset class="col-6">
+                                                    <label>title name</label>
+                                                    <img src="../../../images/question-mark.svg" width="12" height="12">
+                                                    <input class="input-shadow-border" type="text" name="name" ng-model="iosPublishDetails.name"
+                                                           maxlength="{{maxName}}"/>
+                                                    <br>
+                                                    <span class="information">Characters left: {{maxName - iosPublishDetails.name.length}}</span>
+                                                </fieldset>
+                                                <BR>
+                                                <div class="clearfix">
+                                                    <fieldset class="col-4 profile-image-section">
+                                                        <label class="reset-inline">Product Image</label>
+                                                        <a class="feature01 logo-upload">
+                                                            <img ng-show="publishSplash[0] != null" ngf-src="publishSplash[0]"
+                                                                 style="width:120px; height:120px;"/>
+                                                            <img ng-show="publishSplash[0] == null" ng-src="{{thumbPic}}"
+                                                                 width="120" height="120"/>
+                                                        </a>
+                                                    </fieldset>
+                                                    <!-- <div class="pull-right">-->
+                                                    <label class="reset-inline">Screen Shots</label>
+                                                    <div class="clearfix">
+                                                        <fieldset class="col-4-1">
+                                                            <div class="me-file-upload text-right medium">
 
-                <md-tab label="PUSH CONFIG">
-                    <md-content class="md-padding">
-                        <md-input-container>
-                            <label> IONIC APP ID </label>
-                            <input name="ionicAPPID" ng-model="pushConfigData.ionicAPPID" >
-                            <!--<div ng-messages="publishForm.ionicAPPID.$error">-->
-                                <!--<div ng-message="required">This is required!</div>-->
-                            <!--</div>-->
-                        </md-input-container>
-                        <md-input-container>
-                            <label> SENDER ID </label>
-                            <input name="senderID" ng-model="pushConfigData.senderID" >
-                            <!--<div ng-messages="publishForm.senderID.$error">-->
-                                <!--<div ng-message="required">This is required!</div>-->
-                            <!--</div>-->
-                        </md-input-container>
-                        <md-input-container>
-                            <label> PROFILE </label>
-                            <input name="profile" ng-model="pushConfigData.profile" >
-                            <!--<div ng-messages="publishForm.profile.$error">-->
-                                <!--<div ng-message="required">This is required!</div>-->
-                            <!--</div>-->
-                        </md-input-container>
-                        <md-input-container>
-                            <label> AUTHORIZATION </label>
-                            <input name="authorization" ng-model="pushConfigData.authorization" >
-                            <!--<div ng-messages="publishForm.authorization.$error">-->
-                                <!--<div ng-message="required">This is required!</div>-->
-                            <!--</div>-->
-                        </md-input-container>
-                        <md-input-container>
-                            <div class="button" ng-click="savePushConfig(pushConfigData)">Save</div>
-                        </md-input-container>
-                        <br>
-                        <div>
-                            sourcePath : {{sourcePath}}
-                        </div>
-                    </md-content>
-                </md-tab>
-                <md-tab label="Download ZIP">
-                    <md-content class="md-padding">
-                        <md-input-container>
-                            <div class="download-section">
-                                <a href="/edit/buildSource?appId={{appId}}&userId={{userId}}" target="_self">Download ZIP</a>
-                            </div>
-                        </md-input-container>
-                    </md-content>
-                </md-tab>
-                <md-tab label="finish">
-                    <md-content class="md-padding">
-                        <md-input-container>
-                            <md-button class="me-default-button" ng-disabled="generalForm.$invalid"
-                                       ng-click="changePublishStatus()">finish</md-button>
-                        </md-input-container>
-                    </md-content>
-                </md-tab>
+                                                                <img ng-show="publishSplash[1] != null"
+                                                                     ngf-src="publishSplash[1]" width="120" height="120"/>
+                                                                <img ng-show="publishSplash[1] == null" ng-src="{{thumbPic1}}"
+                                                                     ng-model="thumbPic1" width="120" height="120"/>
 
+                                                            </div>
+                                                        </fieldset>
+                                                        <fieldset class="col-4-1">
+                                                            <div class="me-file-upload text-right medium">
+
+                                                                <img ng-show="publishSplash[2] != null"
+                                                                     ngf-src="publishSplash[2]" width="120" height="120"/>
+                                                                <img ng-show="publishSplash[2]== null" ng-src="{{thumbPic2}}"
+                                                                     ng-model="thumbPic2" width="120" height="120"/>
+                                                            </div>
+                                                        </fieldset>
+                                                        <fieldset class="col-4-1">
+                                                            <div class="me-file-upload text-right medium">
+                                                                <img ng-show="publishSplash[3] != null"
+                                                                     ngf-src="publishSplash[3]" width="120" height="120"/>
+                                                                <img ng-show="publishSplash[3] == null" ng-src="{{thumbPic3}}"
+                                                                     ng-model="thumbPic3" width="120" height="120"/>
+
+                                                            </div>
+                                                        </fieldset>
+                                                        <fieldset class="col-4-1 reset-margin">
+                                                            <div class="me-file-upload text-right medium">
+                                                                <img ng-show="publishSplash[4]!= null"
+                                                                     ngf-src="publishSplash[4]" width="120" height="120"/>
+                                                                <img ng-show="publishSplash[4] == null" ng-src="{{thumbPic4}}"
+                                                                     ng-model="thumbPic4" width="120" height="120"/>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    <!--</div>-->
+                                                </div>
+                                                <div class="clearfix">
+                                                    <fieldset>
+                                                        <label>spring board name</label>
+                                                        <img src="../../../images/question-mark.svg" width="12" height="12">
+                                                        <input class="input-shadow-border" type="text" name="springBoardName" ng-model="iosPublishDetails.springBoardName"
+                                                               maxlength="{{maxSpringBoardName}}" required/>
+                                                        <br>
+                                                        <span class="information">Characters left: {{maxSpringBoardName - iosPublishDetails.springBoardName.length}}</span>
+                                                    </fieldset>
+                                                    <fieldset class="col-3">
+                                                        <label>language</label>
+                                                        <input class="input-shadow-border" type="text" name="language" ng-model="iosPublishDetails.language"
+                                                               required/>
+                                                    </fieldset>
+                                                    <fieldset class="col-3">
+                                                        <label>primary category</label>
+                                                        <input class="input-shadow-border" type="text" name="primaryCat" ng-model="iosPublishDetails.primaryCat"
+                                                               required/>
+                                                    </fieldset>
+                                                    <fieldset class="col-3 reset-margin-right">
+                                                        <label>secondary category</label>
+                                                        <input class="input-shadow-border" type="text" name="secondaryCat" ng-model="iosPublishDetails.secondaryCat"
+                                                               required/>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="clearfix">
+                                                    <fieldset>
+                                                        <label>description</label>
+                                                        <textarea class="input-shadow-border" ng-model="iosPublishDetails.desc" rows="2" maxlength="{{maxDesc}}" required></textarea>
+                                                        <br>
+                                                        <span class="information">Characters left: {{maxDesc - iosPublishDetails.desc.length}}</span>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <label>keywords</label>
+                                                        <textarea class="input-shadow-border" ng-model="iosPublishDetails.keywords" rows="2" maxlength="{{maxKeywords}}" required></textarea>
+                                                        <br>
+                                                        <span class="information">Characters left: {{maxKeywords - iosPublishDetails.keywords.length}}</span>
+                                                    </fieldset>
+                                                    <fieldset class="col-2">
+                                                        <label>support url</label>
+                                                        <img src="../../../images/question-mark.svg" width="12" height="12">
+                                                        <input class="input-shadow-border" type="text"
+                                                               ng-model="iosPublishDetails.supportUrl"
+                                                               name="supportUrl"
+                                                               ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
+                                                               required/>
+                                                        <span class="error" ng-show="appStoreForm.supportUrl.$error.pattern">Invalid url</span>
+                                                    </fieldset>
+                                                    <fieldset class="col-2 reset-margin-right">
+                                                        <label>marketing url</label>
+                                                        <img src="../../../images/question-mark.svg" width="12" height="12">
+                                                        <input class="input-shadow-border" type="text"
+                                                               ng-model="iosPublishDetails.marketingUrl"
+                                                               name="marketingUrl"
+                                                               ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
+                                                               required/>
+                                                        <span class="error"
+                                                              ng-show="appStoreForm.marketingUrl.$error.url">Invalid url</span>
+                                                    </fieldset>
+
+                                                </div>
+                                                <div class="clearfix">
+                                                    <fieldset class="col-2">
+                                                        <label>privacy policy url</label>
+                                                        <img src="../../../images/question-mark.svg" width="12" height="12">
+                                                        <input class="input-shadow-border" type="text"
+                                                               ng-model="iosPublishDetails.privacyPolicyUrl"
+                                                               name="privacyPolicyUrl"
+                                                               ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/"
+                                                               required/>
+                                                        <span class="error"
+                                                              ng-show="appStoreForm.privacyPolicyUrl.$error.url">Invalid url</span>
+                                                    </fieldset>
+                                                    <fieldset class="col-2 reset-margin-right">
+                                                        <label>copyrights</label>
+                                                        <img src="../../../images/question-mark.svg" width="12" height="12">
+                                                        <input class="input-shadow-border" type="text" ng-model="iosPublishDetails.copyrights" name="copyrights" required/>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </md-content>
+                                </md-tab-body>
+                            </md-tab>
+                            <md-tab label="CONTENT RATING">
+                                <md-tab-body>
+                                    <md-content class="md-padding">
+                                        <form name="contentRatingForm" novalidate>
+                                            <div class="md-dialog-main clearfix">
+                                                <fieldset class="col-3">
+                                                    <label>cartoon violence</label>
+
+                                                    <input class="input-shadow-border" type="text" name="name" ng-model="iosPublishDetails.cartoonViolence"
+                                                           maxlength="{{maxName}}"/>
+                                                </fieldset>
+                                                <fieldset class="col-3">
+                                                    <label>realistic violence</label>
+
+                                                    <input class="input-shadow-border" type="text" name="realisticViolence" ng-model="iosPublishDetails.realisticViolence"
+                                                           maxlength="{{maxName}}"/>
+                                                </fieldset>
+                                                <fieldset class="col-3 reset-margin-right">
+                                                    <label>sexual or nudity</label>
+
+                                                    <input class="input-shadow-border" type="text" name="nudityViolence" ng-model="iosPublishDetails.nudityViolence"
+                                                           maxlength="{{maxName}}"/>
+                                                </fieldset>
+                                                <fieldset class="col-3">
+                                                    <label>alcohol, tobacco</label>
+
+                                                    <input class="input-shadow-border" type="text" name="alcoholViolence" ng-model="iosPublishDetails.alcoholViolence"
+                                                           maxlength="{{maxName}}"/>
+                                                </fieldset>
+                                                <fieldset class="col-3">
+                                                    <label>mature topics</label>
+                                                    <input class="input-shadow-border" type="text" name="matureViolence" ng-model="iosPublishDetails.matureViolence"
+                                                           maxlength="{{maxName}}"/>
+
+                                                </fieldset>
+                                                <fieldset class="col-3 reset-margin-right">
+                                                    <label>simulated gambling</label>
+
+                                                    <input class="input-shadow-border" type="text" name="gamblingViolence" ng-model="iosPublishDetails.gamblingViolence"
+                                                           maxlength="{{maxName}}"/>
+                                                </fieldset>
+                                                <fieldset class="col-3">
+                                                    <label>profanity</label>
+                                                    <input class="input-shadow-border" type="text" name="profanityViolence" ng-model="iosPublishDetails.profanityViolence"
+                                                           maxlength="{{maxName}}"/>
+                                                </fieldset>
+                                                <fieldset class="col-3">
+                                                    <label>horror/fear</label>
+                                                    <input class="input-shadow-border" type="text" name="horrorViolence" ng-model="iosPublishDetails.horrorViolence"
+                                                           maxlength="{{maxName}}"/>
+
+                                                </fieldset>
+                                            </div>
+                                         </form>
+                                    </md-content>
+                                </md-tab-body>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
+                </md-tab>
             </md-tabs>
         </md-content>
+
+
         <a href="#technicalSupport">Application list</a>
     </div>
     </form>

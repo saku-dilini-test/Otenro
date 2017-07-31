@@ -21,7 +21,10 @@
         $scope.maxAddressLength = 50;
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
         userProfileResource.getUserProfile().success(function (data) {
+            $scope.original = angular.copy(data);
             $scope.userEdit = data;
+            $scope.userRole = data.userRole;
+
         }).error(function (err) {
             /*toastr.error(err.error, 'Error', {
                 closeButton: true
@@ -38,9 +41,14 @@
             $scope.activeTabIndex = index;
         }
 
-        $scope.backToView = function (index){
+        $scope.backToView = function (index,resetData){
             $scope.viewProfile = "Profile";
             $scope.viewBilling = "Billing Details";
+            if(resetData == 'userEdit'){
+                $scope.userEdit = angular.copy($scope.original);
+                $scope.editProfile.$setPristine();
+                $scope.editProfile.$setUntouched();
+            }
             $scope.activeTabIndex = index;
         }
         
@@ -56,6 +64,7 @@
 
 
         $scope.editUserProfile = function(params){
+            $scope.password = false;
             $scope.user={
                 email : params.email,
                 password : params.currentPassword
@@ -66,6 +75,8 @@
                     toastr.success('Successfully Changed', 'Success', {
                         closeButton: true
                     });
+                    $scope.userEdit.password = "";
+                    $scope.userEdit.confirmPassword = "";
                     $scope.backToView(0);
                 });
             }).error(function(err) {
@@ -75,6 +86,8 @@
                   closeButton: true
                 });
             })
+
+            $scope.userEdit.currentPassword = "";
 
         };
         $scope.saveBillings = function(billingEdit){

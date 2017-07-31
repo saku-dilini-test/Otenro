@@ -16,13 +16,16 @@
         $scope.selection = initialData.product.selection;
         $scope.currency = $rootScope.currency;
         $scope.isNewProduct = true;
+        $scope.skuFieldEnable = false;
 
 
         if(initialData.isNewItem)
         {
             $scope.isNewProduct = initialData.isNewItem;
+
         }else if($scope.product.sku){
             $scope.isNewProduct = false;
+            $scope.skuFieldEnable = true;
         }
 
         // Third Navigation Image Path ( Image get from server )
@@ -103,12 +106,18 @@
          */
         $scope.generalDetails = function (product, current) {
             //When new product is adding to the system
+
             if(!$scope.product.variants){
                 $scope.product.variants = [];
                 $scope.product.variants.push({"sku":product.sku,"name":product.name})
             }
-            disableTabs(current,true,true,false,true);
-
+            if(product.childId == 'Create New Category') {
+                toastr.error('Please select a category continue ', 'Warning', {
+                    closeButton: true
+                });
+            }else {
+                disableTabs(current, true, true, false, true);
+            }
         };
 
 
@@ -202,10 +211,23 @@
                         .cancel('Cancel');
 
                     $mdDialog.show(confirm).then(function() {
-                        $scope.product.variants.splice(index, 1);
-                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                        if(initialData.product.id == undefined || initialData.product.id == '0'){
+                            $scope.product.variants.splice(index, 1);
+                            return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true);
+
+                        }else {
+                            $scope.product.variants.splice(index, 1);
+                            return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
+
+                        }
                     }, function() {
-                        return commerceService.showAddProductsDialog($scope.product, undefined, $scope.product.variants);
+                        if(initialData.product.id == undefined || initialData.product.id == '0'){
+                            return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true);
+
+                        }else {
+                            return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
+
+                        }
                     });
 
             }
@@ -560,7 +582,7 @@
         *
         *
         */
-        $scope.checkValidity = function(sku){
+        $scope.checkValidity = function(sku, position){
             $scope.exist = false;
             var skuData = {
                 userId: $auth.getPayload().id,
@@ -570,10 +592,30 @@
             commerceService.checkUniqueSku(skuData)
             .success(function(result){
                 if(result == 'true'){
-                    $scope.exist = true;
+                     $scope.exist = true;
+                     $scope.position = position;
+                     if(position) {
+                         $scope.product.variants[position].sku = '';
+                     }
+
                     toastr.error('Can not add duplicate SKU values', 'Warning', {
                         closeButton: true
                     });
+                }else if($scope.product.variants){
+                    var count = 0;
+                    for(var i=0; i<$scope.product.variants.length; i++){
+                        if($scope.product.variants[i].sku == sku){
+                            count = count +1;
+                            if(count == 2) {
+                                $scope.exist = true;
+                                $scope.position = position;
+                                $scope.product.variants[position].sku = '';
+                                toastr.error('Can not add duplicate SKU values', 'Warning', {
+                                    closeButton: true
+                                });
+                            }
+                        }
+                    }
                 }
             }).error(function (error) {
                 $log.debug(error);
@@ -773,8 +815,7 @@
 
         // when product edit start in second tab and enable pagination
         if (initialData.product.id !== undefined || initialData.product.id !== '0'){
-
-            if(initialData.addVariant || initialData.product.id == '0')
+            if(initialData.addVariant)
             {
                 disableTabs(2, false, false, false, true);
             }else if(initialData.product.id == undefined){
@@ -795,7 +836,7 @@
         }
 
         $scope.newcategory = function(){
-            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2);
+            mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',2,$scope.product)
         }
 
         $scope.goToEditProductWindow = function(item){
@@ -822,12 +863,17 @@
                             $scope.product.selection= [];
                         }
                         this.confirm = function click(vName){
-                            if($scope.product.selection.length == 4 && $scope.vTypeRemove == undefined){
+                            if(!vName){
+                                toastr.error('Variant name can not be a empty ', 'Error!', {
+                                    closeButton: true
+                                });
+                            }
+                            else if($scope.product.selection.length == 4 && $scope.vTypeRemove == undefined){
                                  toastr.error('You can only add 4 variants', 'Error!', {
                                       closeButton: true
                                  });
                                   return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null, true);
-                            }else if($scope.product.selection.length > 0){
+                            }else if($scope.product.selection.length > 0 ){
                                 for (var i = 0; i < $scope.product.selection.length; i++){
                                    if( $scope.product.selection[i].name.toLowerCase() ==  $scope.vType.toLowerCase()){
                                          toastr.error('Cannot rename or add by the same name', 'Error!', {
@@ -869,8 +915,7 @@
                                         toastr.success('Variant added', 'Success!', {
                                               closeButton: true
                                         });
-                                       console.log($scope.product.id)
-                                        if($scope.product.id == undefined){
+                                        if($scope.product.id == undefined || initialData.product.id == '0'){
                                             return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true)
                                         }else{
                                             return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,null, true);
@@ -893,7 +938,11 @@
                                   toastr.success('Variant added', 'Success!', {
                                       closeButton: true
                                   });
-                                return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true)
+                                if($scope.product.id == undefined || initialData.product.id == '0'){
+                                    return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true)
+                                }else{
+                                    return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,null, true);
+                                }
                             }
 
                         },
@@ -942,7 +991,7 @@
                                         }
                                     }
                                 },
-                                template:'<md-dialog aria-label="Edit Child Menu">'+
+                                template:'<md-dialog aria-label="Deleting variant">'+
                                 '<md-content >' +
                                 '<div class="md-dialog-header">' +
                                 '<h1>Deleting Variant Type </h1>' +

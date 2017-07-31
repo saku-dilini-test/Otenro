@@ -61,7 +61,7 @@
             });
                // }
         }).error(function (error) {
-                alert("Contact Us information Loading Error : " + error);
+                //alert("Contact Us information Loading Error : " + error);
         });
 
         //get about Us Information
@@ -169,10 +169,6 @@
                      {closeButton: true}
                  );
                  return;
-             }
-
-             if (!storeSettings.returnPolicy|| !storeSettings.termsAndCondition|| !storeSettings.privacyPolicy) {
-                 toastr.error(' warning', "Please fill all the fields", {closeButton: true});
              }
              else {
                  storeSettings.userId = $scope.userId;

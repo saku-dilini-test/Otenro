@@ -11,7 +11,7 @@
                         <div class="col align-center">Create Your Account</div>
                     </div>
 
-                    <form name="signUpForm">
+                    <form name="signUpForm" novalidate>
                         <div class="list">
                             <label class="item item-input item-stacked-label">
                                 <span class="input-label">First Name</span>
@@ -44,12 +44,20 @@
                                 <span class="input-label">City</span>
                                 <input type="text" placeholder="" ng-model="data.city" ng-required="true">
                             </label>
+                            <label class="item item-input item-stacked-label">
+                                <span class="input-label">City</span>
+                                <input type="text" placeholder="" ng-model="data.city" ng-required="true">
+                            </label>
                             <label class="item item-input item-select">
                                 <span class="input-label">Country</span>
                                 <select  placeholder="Select Category" ng-model="data.country" required>
                                     <option ng-value="country.countryName" ng-repeat="country in countries">{{country.countryName}}
                                     </option>
                                 </select>
+                            </label>
+                            <label class="item item-input item-stacked-label">
+                                <span class="input-label">Zip / Postal Code</span>
+                                <input type="text" placeholder="" ng-model="data.zip" ng-required="true">
                             </label>
                             <label class="item item-input item-stacked-label removeAr">
                                 <span class="input-label">Phone Number</span>

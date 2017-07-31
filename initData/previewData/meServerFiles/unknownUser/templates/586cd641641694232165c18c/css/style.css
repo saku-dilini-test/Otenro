@@ -5,12 +5,11 @@
 .scroll{
 	height: 100%;
 }
-.color-invert{
-    filter: hue-rotate(180deg);
-}
+
 
 .item-select select{
     background:transparent;
+	height: 100%;
 }
 
 /*home page*/
@@ -99,13 +98,21 @@ select{
 .removeAr input[type=number] {
   -moz-appearance: textfield;
 }
+
 input[type=number] {
   height: inherit;
   line-height: normal;
   padding-top: 0;
 }
 
-.item-error-message {
-    font-size: 70%;
-    color: red;
+.item-error-message{
+    color:red;
+    white-space:normal;
+    zoom: 0.8;
+}
+input {
+	width: 100%;
+}
+.login .item {
+	width: auto;
 }

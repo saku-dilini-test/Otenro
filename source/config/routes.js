@@ -178,6 +178,7 @@ module.exports.routes = {
     'POST /edit/uploadPublishFiles': 'edit/publish/publishDetailController.uploadPublishFiles',
     
     'POST /edit/setContentRating': 'edit/publish/publishDetailController.setContentRating',
+    'POST /edit/setAppStoreDetails': 'edit/publish/publishDetailController.setAppStoreDetails',
     'POST /edit/setAppReviewInformation': 'edit/publish/publishDetailController.setAppReviewInformation',
     'GET /edit/getAllLanguages': 'edit/publish/publishDetailController.getAllLanguages',
     'GET /edit/getAllRatings': 'edit/publish/publishDetailController.getContentRatings',
@@ -216,6 +217,7 @@ module.exports.routes = {
     'POST /edit/updateEmailSettings': 'edit/commerce/EmailController.updateEmailSettings',
     'POST /edit/sendTestEmail': 'edit/commerce/EmailController.sendTestEmail',
     'POST /edit/sendVerificationLinkEmail': 'edit/commerce/EmailController.sendVerificationLinkEmail',
+    'POST /edit/sendRegisterConfirmationEmail': 'edit/commerce/EmailController.sendRegisterConfirmationEmail',
     'POST /edit/updateHeaderFooterSettings': 'edit/commerce/EmailController.updateHeaderFooterSettings',
     'GET /edit/viewImages': 'edit/commerce/EmailController.viewImages',
 

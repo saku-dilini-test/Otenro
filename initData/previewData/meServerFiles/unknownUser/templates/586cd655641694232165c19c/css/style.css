@@ -9,6 +9,7 @@
 
 .item-select select{
     background:transparent;
+    height: 100%;
 }
 
 a {
@@ -262,4 +263,11 @@ input[type=number] {
 
 .item-error-message{
     color:red;
+}
+
+input {
+    width: 100%;
+}
+.login .item {
+    width: auto;
 }

@@ -5,12 +5,11 @@
 .scroll{
 	height: 100%;
 }
-.color-invert{
-    filter: hue-rotate(180deg);
-}
+
 
 .item-select select{
     background:transparent;
+	height: 100%;
 }
 
 /*home page*/
@@ -110,4 +109,10 @@ input[type=number] {
     color:red;
     white-space:normal;
     zoom: 0.8;
+}
+input {
+	width: 100%;
+}
+.login .item {
+	width: auto;
 }

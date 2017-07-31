@@ -13,6 +13,8 @@
         $scope.maxFullDescription = 4000;
         $scope.image = [];
         $scope.splash = [];
+        $scope.publishSplash = [];
+
 
         // Mobile App-App Store-Config
         $scope.maxName = 20;
@@ -58,28 +60,28 @@
         success(function(data){
             $scope.languageList = data;
         }).error(function(err){
-            alert("MainMenu Loading Error : " + err);
+            //alert("MainMenu Loading Error : " + err);
         });
 
         publishService.getAllRatings().
         success(function(data){
             $scope.contentRatingList = data;
         }).error(function(err){
-            alert("MainMenu Loading Error : " + err);
+            //alert("MainMenu Loading Error : " + err);
         });
 
         publishService.getAllPrimaryCategories().
            success(function(data){
                $scope.primaryCatList = data;
            }).error(function(err){
-               alert("MainMenu Loading Error :          " + err);
+               //alert("MainMenu Loading Error :          " + err);
            });
 
         publishService.getAllSecondaryCategories().
            success(function(data){
                $scope.secondaryCatList = data;
            }).error(function(err){
-               alert("MainMenu Loading Error : " + err);
+               //alert("MainMenu Loading Error : " + err);
            });
         
         if(item == 'GooglePlay'){
@@ -92,6 +94,7 @@
                      else{
                             var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
                             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=publish/";
+
 
 
                                 for (var i=0; i< 6; i++) {
@@ -112,7 +115,7 @@
                             };
                      }
                 }).error(function(err){
-                    alert("MainMenu Loading Error : " + err);
+                    //alert("MainMenu Loading Error : " + err);
                 });
         }
 
@@ -130,6 +133,7 @@
                         });
             }
             else {
+                    playStoreData.category = 'GooglePlay';
                     publishService.addGooglePlayInfo(playStoreData)
                         .success(function(data, status, headers, config) {
                             toastr.success('General information has been added successfully', 'Saved', {
@@ -157,20 +161,25 @@
         };
 
 
-
         //start of AppStore------------------------------//
 
-
-
         if(item == 'AppStore'){
-
-        publishService.getExistingDataAppStore(item).
+            publishService.getExistingDataAppStore(item).
                     success(function(data){
                         $scope.existingData = data;
                          if($scope.existingData.length == 0){
-                                $scope.playStoreData ={language: $scope.defaultLanguage.language};
+                                $scope.appStoreData ={language: $scope.defaultLanguage.language};
                          }
                          else{
+
+                             var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
+                                 +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=publish/";
+
+                             for (var i=0; i< 6; i++) {
+                                 var tempImageUrl = tempImagePath + i+'ios'+'.png';
+                                 $scope.publishSplash.push(tempImageUrl);
+                             }
+
                          $scope.thumbPic = $scope.existingData[0].file;
                          $scope.serverImage = $scope.existingData[0].file;
                                 $scope.appReview = {
@@ -193,10 +202,13 @@
                                 }
 
                                 $scope.appStoreData = {
+                                    name : $scope.existingData[0].name,
                                     language : $scope.existingData[0].language,
-                                    primaryCat : $scope.existingData[0].primaryCategory,
-                                    secondaryCat : $scope.existingData[0].secondaryCategory,
+                                    primaryCat : $scope.existingData[0].primaryCat,
+                                    secondaryCat : $scope.existingData[0].secondaryCat,
                                     title: $scope.existingData[0].title,
+                                    desc: $scope.existingData[0].desc,
+                                    springBoardName: $scope.existingData[0].springBoardName,
                                     shortDescription: $scope.existingData[0].shortDescription,
                                     fullDescription: $scope.existingData[0].description,
                                     keywords: $scope.existingData[0].keywords,
@@ -206,34 +218,67 @@
                                     copyrights: $scope.existingData[0].copyrights
 
                                 };
-                                $scope.publishSplash={
-                                    splash1 : $scope.existingData[0].splash1,
-                                    splash2 : $scope.existingData[0].splash2,
-                                    splash3 : $scope.existingData[0].splash3,
-                                    splash4 : $scope.existingData[0].splash4
-                                };
+
 
                          }
                     }).error(function(err){
-                        alert("MainMenu Loading Error : " + err);
+                        //alert("MainMenu Loading Error : " + err);
                     });
         }
-        $scope.addAppStoreInfo = function(file,appStoreData,publishSplash) {
-            // if (file == null && $scope.serverImage == $scope.thumbPic) {
-            //     if (appStoreData.title == null || appStoreData.shortDescription == null || appStoreData.language == null ||
-            //         appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.fullDescription == null ||
+        
+
+     // App Store 
+        $scope.addAppStoreInfo = function(appStoreData,publishSplash) {
+            $scope.count = 0;
+            if (appStoreData.name == null || appStoreData.springBoardName == null || appStoreData.language == null ||
+                    appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.desc == null ||
+                    appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
+                    appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null) {
+                    toastr.error('Fill all the fields', 'Warning', {
+                        closeButton: true
+                    });
+
+            }else {
+                    appStoreData.category = 'AppStore';
+                    publishService.addAppStoreInfo(appStoreData, publishSplash)
+                        .success(function (data, status, headers, config) {
+                            disableTabs(1, true, false, true, true);
+                            toastr.success('General information has been added successfully', 'Saved', {
+                                closeButton: true
+                            });
+                        }).error(function (data, status, headers, config) {
+                        toastr.error('Error while saving data', 'Warning', {
+                            closeButton: true
+                        });
+                    });
+
+
+                   publishSplash.forEach(function (publishSplash) {
+                        if (JSON.stringify(publishSplash).match("blobUrl")) {
+                            publishService.uploadPublishFiles(publishSplash, $scope.count +"ios")
+                                .success(function (data, status, headers, config) {
+                                }).error(function (data, status, headers, config) {
+                            });
+                        }
+                        $scope.count++;
+                    })
+                }
+        };
+            // else {
+            //     if ( appStoreData.language == null ||
+            //         appStoreData.primaryCat == null || appStoreData.secondaryCat == null ||
             //         appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
-            //         appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null) {
-            //         toastr.error('Fill all the fields', 'Warning', {
+            //         appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null || publishSplash.splash1 == null ||
+            //         publishSplash.splash2 == null || publishSplash.splash3 == null || publishSplash.splash4 == null) {
+            //         toastr.error('Please fill all fields ', 'Warning', {
             //             closeButton: true
             //         });
             //     }
             //     else {
             //         appStoreData.category = 'AppStore';
-            //         file = $scope.thumbPic;
             //         publishService.addGooglePlayInfo(file, appStoreData, publishSplash)
             //             .success(function (data, status, headers, config) {
-            //                 disableTabs(1, true, false, true, true);
+            //                 disableTabs(1, false, false, false, false);
             //                 toastr.success('General information has been added successfully', 'Saved', {
             //                     closeButton: true
             //                 });
@@ -242,34 +287,10 @@
             //                 closeButton: true
             //             });
             //         })
-            //     }
-            // }
-            // else {
-            //     if (file == null || appStoreData.title == null || appStoreData.shortDescription == null || appStoreData.language == null ||
-            //         appStoreData.primaryCat == null || appStoreData.secondaryCat == null || appStoreData.fullDescription == null ||
-            //         appStoreData.keywords == null || appStoreData.supportUrl == null || appStoreData.marketingUrl == null ||
-            //         appStoreData.privacyPolicyUrl == null || appStoreData.copyrights == null || publishSplash.splash1 == null ||
-            //         publishSplash.splash2 == null || publishSplash.splash3 == null || publishSplash.splash4 == null) {
-            //         toastr.error('Please fill all fields ', 'Warning', {
-            //             closeButton: true
-            //         });
-            //     }
-                // else {
-                    appStoreData.category = 'AppStore';
-                    publishService.addGooglePlayInfo(file, appStoreData, publishSplash)
-                        .success(function (data, status, headers, config) {
-                            disableTabs(1, false, false, false, false);
-                            toastr.success('General information has been added successfully', 'Saved', {
-                                closeButton: true
-                            });
-                        }).error(function (data, status, headers, config) {
-                        toastr.error('Error while saving data', 'Warning', {
-                            closeButton: true
-                        });
-                    })
-                // }
-            // }
-        }
+            //      }
+            //  }
+        // };
+        
         $scope.contentRatings = function(contentRating){
             contentRating.category = 'AppStore';
             publishService.addContentRating(contentRating)
@@ -278,10 +299,12 @@
                 toastr.success('Content Rating information has been added successfully', 'Saved', {
                     closeButton: true
                 });
+                $mdDialog.hide();
             }).error(function(err){
                 toastr.error('Error while saving data', 'Warning', {
                       closeButton: true
                 });
+                $mdDialog.hide();
             })
         }
         $scope.appReviewInfo = function(appReview){

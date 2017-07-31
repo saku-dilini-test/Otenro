@@ -9,6 +9,7 @@
 
 .item-select select{
     background:transparent;
+    height: 100%;
 }
 
 a {
@@ -186,3 +187,9 @@ input[type=number] {
     zoom: 0.8;
 }
 
+input {
+    width: 100%;
+}
+.login .item {
+    width: auto;
+}

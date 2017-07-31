@@ -460,7 +460,7 @@ a.md-button:hover:not([disabled]),
 .me-file-upload.medium .upload-wrapper input{
     height: 120px;
     width: 120px;
-    border: 1px;
+    border-width: 1px;
 }
 
 .me-file-upload.large,
@@ -1269,7 +1269,7 @@ md-dialog{
 .md-dialog-main{
     max-height: 390px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 25px 40px 0;
 }
 .md-dialog-main1{
@@ -1814,7 +1814,7 @@ button[disabled]{
 }
 
 .input-modify{
-    border:unset !important;
+    border:none !important;
     padding-top: 3px !important;
 }
 
@@ -2031,6 +2031,7 @@ trix-toolbar .button_group input[type=button]{
 
 .md-dialog-container{
     background-color:rgba(255, 255, 255, 0.60);
+    position: fixed ;
 }
 
 /* error massages. add error class. <span class="error"> */
@@ -2080,10 +2081,12 @@ trix-toolbar .button_group input[type=button]{
 
 .custom-grid {
     border:unset;
+    border:none;
 }
 
 .custom-grid div{
     border:unset !important;
+    border:none !important;
 }
 
 .custom-grid .ui-grid-header-cell-wrapper{
@@ -2143,6 +2146,14 @@ li#menuitem-8 {
     box-shadow:unset;
 }
 
+.custom-grid .ui-grid-row .ui-grid-row-header-cell.ui-grid-cell{
+    border-bottom:none;
+}
+.custom-grid .ui-grid-pinned-container-left.ui-grid-pinned-container :last-child.ui-grid-cell{
+    border-right:none;
+    border-width:0;
+}
+
 
 .custom-grid .ui-grid-menu .ui-grid-menu-inner ul li button.ui-grid-menu-item-active{
     background-color: #cecece !important;
@@ -2200,6 +2211,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 .fixed-inventory .tree-grid thead{
     position:fixed;
     top:92px;
+    width: 97%;
 }
 
 .fixed-inventory .tree-grid thead tr th:nth-child(1) {
@@ -2345,18 +2357,22 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     color:gray;
 }
 .add-new-variant{
+
     position: fixed;
-    bottom: 80px;
+    bottom: 86px;
+
 }
 
 .custom-add-products{
     overflow-x:auto;
     padding:0;
     margin:25px 40px 0;
+    padding-bottom: 10px;
 }
 
 .custom-add-products .me-hours-table{
    width:1500px;
+   display: -moz-box;
 }
 
 .terms div{
@@ -2373,4 +2389,357 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 .download-mobile-viewer h3,
 .download-mobile-viewer h4{
     color: #747474;
+}
+/*ADD NETWORK CSS*/
+
+/*Preloader*/
+#loading {
+    width: 100vw;
+    height: 100vh;
+    background: #20232D;
+    position: fixed;
+    z-index: 999;
+}
+
+#loading #preloader {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    top: calc(50% - 50px);
+    text-align: center;
+    margin: 0 auto;
+}
+
+#loading #preloader:after {
+    content: "Otenro is loading";
+    /* Text under the circles */
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 400;
+    color: #dc418e;
+    letter-spacing: 1px;
+    font-family: Montserrat, "Helvetica Neue", "Lucida Grande", Arial, Verdana, sans-serif;
+    top: 90px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    text-align: center;
+}
+
+#loading #preloader span {
+    position: absolute;
+    border: 8px solid #dc418e;
+    border-top: 8px solid transparent;
+    border-radius: 999px;
+}
+
+#loading #preloader span:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    left: calc(50% - 40px);
+    -webkit-animation: spin-1 1s infinite ease;
+    -moz-animation: spin-1 1s infinite ease;
+    animation: spin-1 1s infinite ease;
+}
+
+#loading #preloader span:nth-child(2) {
+    top: 20px;
+    left: calc(50% - 20px);
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin-2 1s infinite ease;
+    -moz-animation: spin-2 1s infinite ease;
+    animation: spin-2 1s infinite ease;
+}
+
+@-webkit-keyframes spin-1 {
+    0% {
+        -webkit-transform: rotate(360deg);
+        opacity: 1;
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        opacity: 0.5;
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes spin-1 {
+    0% {
+        -moz-transform: rotate(360deg);
+        opacity: 1;
+    }
+    50% {
+        -moz-transform: rotate(180deg);
+        opacity: 0.5;
+    }
+    100% {
+        -moz-transform: rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes spin-1 {
+    0% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+        opacity: 1;
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        transform: rotate(180deg);
+        opacity: 0.5;
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes spin-2 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        opacity: 0.5;
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        opacity: 0.5;
+    }
+}
+
+@-moz-keyframes spin-2 {
+    0% {
+        -moz-transform: rotate(0deg);
+        opacity: 0.5;
+    }
+    50% {
+        -moz-transform: rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        -moz-transform: rotate(360deg);
+        opacity: 0.5;
+    }
+}
+
+@keyframes spin-2 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+        opacity: 0.5;
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        transform: rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+        opacity: 0.5;
+    }
+}
+
+.addNetwork section{
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    padding: 0;
+    top: 30vh;
+    width: 65%;
+    padding: 0 6%;
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    opacity: 1;
+    visibility: visible;
+}
+
+.addNetwork img{
+    position: absolute;
+    left: 5%;
+    top: 50px;
+    max-width: 150px;
+    z-index:1;
+}
+.addNetwork h1{
+    font-size:60px;
+    padding:40px 0 20px 0;
+    text-transform:capitalize;
+    font-family: Montserrat, "Helvetica Neue", "Lucida Grande", Arial, Verdana, sans-serif;
+    color:#fff;
+}
+.addNetwork h2{
+    font-size:22px;
+    padding:20px 0 30px 0;
+    font-weight: 500;
+    text-transform:capitalize;
+    color:#fff;
+}
+.addNetwork .btn{
+    margin: 10px 0;
+    border-radius: 0;
+    color: #fff !important;
+    font-weight: 800;
+}
+
+.addNetwork .btn-primary{
+    background: #095391;
+    border: 2px solid #095391;
+}
+.addNetwork .btn-warning{
+    background: #ff5400;
+    border-color: #ff5400;
+}
+
+.addNetwork video{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+}
+
+.addNetwork .controls{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 16px;
+}
+
+.addNetwork .controls a {
+    background: #00af94;
+    opacity: 0.7;
+}
+.addNetwork .controls a:hover {
+    opacity: 1;
+}
+
+.orders-dialog .md-dialog-main {
+    overflow-y: hidden;
+}
+.expand {
+    transition: all linear 0.5s;
+    position: relative;
+    -webkit-transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
+    -moz-transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
+    -ms-transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
+    -o-transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
+    transition: all 0.3s cubic-bezier(0, 0, 0.58, 1);
+    z-index: 3;
+    opacity:1;
+}
+
+.ng-hide{
+    opacity:0;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translate3d(0, 100%, 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+.slideInUp {
+    animation-name: slideInUp;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-delay: 2s;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-delay: 1s;
+}
+@keyframes videoFadeIn {
+    from {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.videoFadeIn {
+    animation-name: fadeIn;
+    animation-duration: 3s;
+    animation-delay: 3s;
+    animation-fill-mode: both;
+}
+.add-new-variant span {
+  display:none;
+}
+
+/*IE 10 and abouve specific css wirte inside this media quary*/
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .fixed-inventory .tree-grid thead {
+        position: relative;
+    }
+
+    .add-new-variant{
+        position:-ms-device-fixed;
+        top:720px;
+        left:504px;
+        transform: translateX(-50%);
+    }
+
+    .add-new-variant span {
+        display:block;
+        width: 80px;
+        position: absolute;
+        left: 20px;
+        margin-top: -1px;
+    }
 }

@@ -58,7 +58,6 @@
     text-align: justify;
     padding: 10px;
     background: rgba(255, 255, 255, 0.5);
-
 }
 
 
@@ -110,7 +109,7 @@ ion-nav-title{
 /** ----------- End Custom update Css Class ---------- **/
 
 
-.item-image .title {
+.item-slide .title {
     position: absolute;
     bottom: 10px;
     left: 0;
@@ -193,7 +192,30 @@ ion-nav-title{
 .back-button {
     left: 3%;
 }
-
 .item-image{
     display:block;
+}
+.item-image div{
+    background-size: cover !important;
+    height: 100%;
+    background-position: center center !important;
+}
+.item-slide{
+    position: relative;
+}
+.item-slide img{
+    width: 100%;
+}
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: 100%;
+}
+.map {
+    width:100%;
+    height: 300px;
+}
+.removeBac:before{
+    display: none;
 }

@@ -23,7 +23,7 @@
             .success(function (result) {
                 $scope.childs = result;
             }).error(function (error) {
-                alert("Category Loading Error : " + error);
+                //alert("Category Loading Error : " + error);
             });
 
         $scope.editSubChildImage=function(imageUrl,subChild){

@@ -22,7 +22,10 @@
   <ion-side-menu side="left" class="made-easy-navigationBarColor">
     <ion-content>
       <ion-list>
-         <ion-item menu-close ui-sref="app.category">
+         <ion-item menu-close ui-sref="app.home" ng-if="!parentobj.userLog ">
+          Home
+        </ion-item>
+        <ion-item menu-close ui-sref="app.category" ng-if="parentobj.userLog ">
           Home
         </ion-item>
         <ion-item menu-close ui-sref="app.category">

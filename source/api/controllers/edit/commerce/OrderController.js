@@ -17,15 +17,20 @@ module.exports = {
         });
     },
     updateOrders : function(req,res){
+
+    var ObjectId = require('mongodb').ObjectID;
+    console.log("req " + req);
     var data = req.body;
     var obj = [];
+
     data.forEach(function(orders){
-        ApplicationOrder.update({id: orders.id}, orders).exec(function(err,order){
+
+        console.log("orders " + JSON.stringify(orders));
+        ApplicationOrder.update({id: ObjectId(orders.id)},orders).exec(function(err,order){
             if (err) return done(err);
             obj.push(order);
         })
     })
         res.send(obj);
-
     }
 };

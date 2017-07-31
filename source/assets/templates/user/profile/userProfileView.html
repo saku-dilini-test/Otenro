@@ -11,7 +11,7 @@
                     <div class="md-dialog-header">
                         <h1 >Hello {{userEdit.firstName}}</h1>
                         <ul class="md-dialog-header-nav clearfix">
-                            <li>
+                            <li ng-if="userRole != 'support'">
                                 <a ng-click="redirectToDashboard()" class="return-to-app">my apps</a>
                             </li>
                             <li>
@@ -51,7 +51,7 @@
                     <div class="md-dialog-header">
                         <h1>billing account</h1>
                         <ul class="md-dialog-header-nav clearfix">
-                            <li>
+                            <li ng-if="userRole != 'support'">
                                 <a ng-click="redirectToDashboard()" class="return-to-app">my apps</a>
                             </li>
                             <li>
@@ -90,7 +90,7 @@
                     <div class="md-dialog-header">
                         <h1>Edit Profile</h1>
                         <ul class="md-dialog-header-nav clearfix">
-                            <li>
+                            <li ng-if="userRole != 'support'">
                                 <a ng-click="redirectToDashboard()" class="return-to-app">my apps</a>
                             </li>
                             <li>
@@ -149,7 +149,7 @@
                                        ng-pattern="passwordRegularExpression"
                                        ng-minlength="7"
                                        compare-to="userEdit.confirmPassword"
-                                       required>
+                                       >
                                 <span class="help-block " ng-show="editProfile.password.$error.minlength">
                                     <span class="error" ng-show="editProfile.password.$error.minlength">
                                         Password should have at least 7 characters.
@@ -167,7 +167,7 @@
                                        type="password"
                                        name="confirmPassword"
                                        ng-model="userEdit.confirmPassword"
-                                       required>
+                                       >
                                 <span class="help-block " ng-show="editProfile.confirmPassword.$dirty">
                                     <span class="error" ng-show="editProfile.password.$error.compareTo">Password must match.</span>
                                 </span>
@@ -181,8 +181,11 @@
                             </md-select>
                         </fieldset>
                         <fieldset class="text-right">
-                            <md-button class="me-default-button" ng-click="backToView(0)">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="editUserProfile(userEdit,selected);">Save</md-button>
+                            <md-button class="me-default-button" ng-click="backToView(0,'userEdit')">Cancel</md-button>
+
+                            <md-button class="me-default-button" ng-disabled="editProfile.password.$error.compareTo"
+                                       ng-click="editUserProfile(userEdit,selected);">Save
+                            </md-button>
                         </fieldset>
                         </form>
                     </div>
@@ -214,7 +217,7 @@
                         <fieldset>
                             <label>Billing Address</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <input class="input-shadow-border"
+                            <input class="input-shadow-bordebackToViewr"
                                    type="text"
                                    name="address"
                                    maxlength="{{maxAddressLength}}"
@@ -270,7 +273,7 @@
                             <div class="btn-view md-dialog-buttons">
                             <div class="inner-section">
                                 <md-button class="me-default-button" ng-click="backToView(1)">cancel</md-button>
-                                <md-button class="me-default-button" ng-click="saveBillings(billingEdit)">save</md-button>
+                                <md-button class="me-default-button" ng-disabled="editBilling.$invalid" ng-click="saveBillings(billingEdit)">save</md-button>
                             </div>
                         </div>
                         </form>

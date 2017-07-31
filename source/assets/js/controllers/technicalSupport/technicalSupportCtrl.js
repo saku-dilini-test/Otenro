@@ -20,8 +20,10 @@
 
 
             $scope.splash = [];
+            $scope.publishSplash = [];
 
             if($stateParams){
+
                 $scope.userId = $stateParams.userId;
                 $scope.appId = $stateParams.appId;
                 $scope.sourcePath = "/home/admin/web/" +
@@ -32,8 +34,19 @@
 
 
                 for (var i=0; i< 6; i++) {
-                    var tempImageUrl = tempImagePath + i+'.png';
-                    $scope.splash.push(tempImageUrl);
+                    try {
+                        var tempImageUrl = tempImagePath + i+'.png';
+                        $scope.splash.push(tempImageUrl);
+
+                        if(i<=5){
+
+                            var iosTempImageUrl = tempImagePath + i+'ios'+'.png';
+                            $scope.publishSplash.push(iosTempImageUrl);
+                        }
+
+                    }catch (err){
+                        console.log(err);
+                    }
                 }
 
                 // if pushConfigData undefined
@@ -63,7 +76,13 @@
                 }
                 technicalSupportService.getPublishDetails(searchApp)
                     .success(function (result) {
-                        $scope.publishDetails = result;
+                        try{
+                            $scope.publishDetails = result;
+                            $scope.iosPublishDetails = $scope.publishDetails[1];
+                         }catch(err) {
+                           console.log(err);
+                        }
+
                     }).error(function (error) {
                     toastr.error('Loading Error', 'Warning', {
                         closeButton: true
@@ -94,6 +113,7 @@
                 technicalSupportService.getAllAppData()
                     .success(function (result) {
                         $scope.appList = result;
+                        $scope.serverURL = SERVER_URL;
                     }).error(function (error) {
                     toastr.error('Loading Error', 'Warning', {
                         closeButton: true

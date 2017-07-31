@@ -68,6 +68,7 @@
                                         <input ng-blur="checkValidity(product.sku)"
                                                md-maxlength="10"
                                                required
+                                               ng-disabled="skuFieldEnable"
                                                name="sku"
                                                ng-model="product.sku"
                                                ng-pattern="/^\d*[1-9]\d*$/"
@@ -159,24 +160,28 @@
                                     <td ng-model="data.name">
                                         <p class="product-name">{{data.name}}</p>
                                         <div disable-all="priceAndVariantsForm.$invalid" class="add-new-variant">
-                                            <div class="add-icon icon icon-plus" ng-click="addVariant(selection,product,$index,data);generalDetails(data , 1)"></div>
+                                            <div class="add-icon icon icon-plus" ng-click="addVariant(selection,product,$index,data);generalDetails(data , 1)">
+                                                <span>Add row</span>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>
                                         <md-input-container style="width: 80px;">
-                                            <input ng-blur="checkValidity(data.sku,'sku')"  maxlength="10"
+                                            <input ng-blur="checkValidity(data.sku, $index)"  maxlength="10"
                                                    required
                                                    aria-label="SKU"
+                                                   ng-disabled="skuFieldEnable&&data.sku"
                                                    class="product-sku"
                                                    name="sku_{{$index}}"
                                                    ng-model="data.sku"
                                                    ng-pattern="/^\d*[1-9]\d*$/"
                                                    ng-readonly="data.checked"
                                                    ng-click="check($index)">
-                                            <!--<div class="error" ng-if="exist">Sku already exist</div>-->
+                                            <div class="error" ng-if="exist && $index == position">Sku already exist</div>
                                             <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                                 <div ng-message="required">SKU is required.</div>
                                                 <div ng-message="pattern" style="line-height:13px;" class="my-message">Invalid SKU</div>
+
                                             </div>
                                         </md-input-container>
                                     </td>
@@ -295,7 +300,7 @@
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="back()">Cancel</md-button>
                             <!--<md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>-->
-                            <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid"
+                            <md-button type="submit" ng-disabled="priceAndVariantsForm.$invalid || exist"
                                        class="me-default-button" ng-click="addProductVariants(data,3)">Next</md-button>
                         </div>
                     </div>

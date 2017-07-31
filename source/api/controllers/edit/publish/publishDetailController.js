@@ -122,6 +122,33 @@ module.exports = {
 
          });
     },
+
+
+    setAppStoreDetails: function(req,res){
+        var details = req.body;
+        var searchApp = {
+            appId :req.body.appId,
+            category: req.body.category
+        }
+        PublishDetails.update(searchApp,details).exec(function(err,app) {
+            if (err) res.send(err);
+            if (app.length == 0) {
+                PublishDetails.create(details).exec(function(err,appDetails) {
+                    if (err) res.send(err);
+                    res.send('ok');
+                });
+            }
+            else{
+                res.send({
+                    appId: details.appId,
+                    message: "New Publish Details has been created"
+                });
+            }
+
+
+        });
+    },
+
     setAppReviewInformation: function(req,res){
             var details = req.body;
             var searchApp = {

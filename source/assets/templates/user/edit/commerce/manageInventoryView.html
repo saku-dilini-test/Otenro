@@ -73,7 +73,8 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="hide()">Cancel</md-button>
-                            <md-button ng-csv="getArray()" csv-header="['Name', 'SKU', 'Price', 'Quantity', 'Weight','Variant Type']" filename="products.csv"  class="me-default-button">export as csv</md-button>
+                            <md-button class="me-default-button" ng-click="addProduct()">Add Product</md-button>
+                            <md-button ng-csv="getArray()" csv-header="['Name', 'SKU', 'Price', 'Quantity', 'Weight','Variants']" filename="products.csv"  class="me-default-button">export as csv</md-button>
                             <md-button class="me-default-button" ng-disabled="inventoryForm.$invalid" type="submit"ng-click="updateInventory()">Save</md-button>
                         </div>
                     </div>

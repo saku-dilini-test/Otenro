@@ -13,7 +13,7 @@ currencyService
            success(function(data){
                $scope.currencyList = data;
            }).error(function(err){
-               alert("MainMenu Loading Error : " + err);
+               //alert("MainMenu Loading Error : " + err);
            });
 
          currencyService.getCurrency().
@@ -21,7 +21,7 @@ currencyService
                 $scope.existingCurrency = data;
                 $scope.oneCurrency = {currency : $scope.existingCurrency.sign};
             }).error(function(err){
-                alert("MainMenu Loading Error : " + err);
+               // alert("MainMenu Loading Error : " + err);
             });
 
         $scope.addCurrency = function() {

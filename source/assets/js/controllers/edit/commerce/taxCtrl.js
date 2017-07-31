@@ -22,7 +22,7 @@
             $scope.countryList = data;
 
         }).error(function (err) {
-            alert("MainMenu Loading Error : " + err);
+            //alert("MainMenu Loading Error : " + err);
         });
 
         $scope.selected = [];
@@ -84,7 +84,7 @@
                 success(function(data){
                     $scope.items = data;
                 }).error(function(err){
-                    alert("Taxes Info Loading Error : " + err);
+                    //alert("Taxes Info Loading Error : " + err);
                 });
         }
         // --/-- add new tax collection mode

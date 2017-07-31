@@ -57,13 +57,13 @@
                                     <span class="overlay01">
                                         <span class="caption01">
                                              <input type="button" class="me-default-button" ngf-select
-                                                    ng-model="picFile" ngf-accept="image/*"
+                                                    ng-model="publishSplash[0]" ngf-accept="image/*"
                                                     value="Upload Image"/>
                                         </span>
                                     </span>
-                                        <img ng-show="picFile != null" ngf-src="picFile"
+                                        <img ng-show="publishSplash[0] != null" ngf-src="publishSplash[0]"
                                              style="width:120px; height:120px;"/>
-                                        <img ng-show="picFile == null" ng-src="{{thumbPic}}" ng-model="thumbPic"
+                                        <img ng-show="publishSplash[0] == null" ng-src="{{thumbPic}}"
                                              width="120" height="120"/>
                                     </a>
                                 </fieldset>
@@ -73,10 +73,11 @@
                                         <fieldset class="col-4-1">
                                             <div class="me-file-upload text-right medium">
                                                 <div class="upload-wrapper">
-                                                    <input type="file" ngf-select ng-model="publishSplash.splash1"/>
-                                                    <img ng-show="publishSplash.splash1 != null"
-                                                         ngf-src="publishSplash.splash1" width="120" height="120"/>
-                                                    <img ng-show="publishSplash.splash1 == null" ng-src="{{thumbPic1}}"
+                                                    <input type="file" ngf-select ng-model="publishSplash[1]"/>
+
+                                                    <img ng-show="publishSplash[1] != null"
+                                                         ngf-src="publishSplash[1]" width="120" height="120"/>
+                                                    <img ng-show="publishSplash[1] == null" ng-src="{{thumbPic1}}"
                                                          ng-model="thumbPic1" width="120" height="120"/>
                                                 </div>
                                             </div>
@@ -84,10 +85,10 @@
                                         <fieldset class="col-4-1">
                                             <div class="me-file-upload text-right medium">
                                                 <div class="upload-wrapper">
-                                                    <input type="file" ngf-select ng-model="publishSplash.splash2"/>
-                                                    <img ng-show="publishSplash.splash2 != null"
-                                                         ngf-src="publishSplash.splash2" width="120" height="120"/>
-                                                    <img ng-show="publishSplash.splash2 == null" ng-src="{{thumbPic2}}"
+                                                    <input type="file" ngf-select ng-model="publishSplash[2]"/>
+                                                    <img ng-show="publishSplash[2] != null"
+                                                         ngf-src="publishSplash[2]" width="120" height="120"/>
+                                                    <img ng-show="publishSplash[2]== null" ng-src="{{thumbPic2}}"
                                                          ng-model="thumbPic2" width="120" height="120"/>
                                                 </div>
                                             </div>
@@ -95,10 +96,10 @@
                                         <fieldset class="col-4-1">
                                             <div class="me-file-upload text-right medium">
                                                 <div class="upload-wrapper">
-                                                    <input type="file" ngf-select ng-model="publishSplash.splash3"/>
-                                                    <img ng-show="publishSplash.splash3 != null"
-                                                         ngf-src="publishSplash.splash3" width="120" height="120"/>
-                                                    <img ng-show="publishSplash.splash3 == null" ng-src="{{thumbPic3}}"
+                                                    <input type="file" ngf-select ng-model="publishSplash[3]"/>
+                                                    <img ng-show="publishSplash[3] != null"
+                                                         ngf-src="publishSplash[3]" width="120" height="120"/>
+                                                    <img ng-show="publishSplash[3] == null" ng-src="{{thumbPic3}}"
                                                          ng-model="thumbPic3" width="120" height="120"/>
                                                 </div>
                                             </div>
@@ -106,10 +107,10 @@
                                         <fieldset class="col-4-1 reset-margin">
                                             <div class="me-file-upload text-right medium">
                                                 <div class="upload-wrapper">
-                                                    <input type="file" ngf-select ng-model="publishSplash.splash4"/>
-                                                    <img ng-show="publishSplash.splash4 != null"
-                                                         ngf-src="publishSplash.splash4" width="120" height="120"/>
-                                                    <img ng-show="publishSplash.splash4 == null" ng-src="{{thumbPic4}}"
+                                                    <input type="file" ngf-select ng-model="publishSplash[4]"/>
+                                                    <img ng-show="publishSplash[4]!= null"
+                                                         ngf-src="publishSplash[4]" width="120" height="120"/>
+                                                    <img ng-show="publishSplash[4] == null" ng-src="{{thumbPic4}}"
                                                          ng-model="thumbPic4" width="120" height="120"/>
                                                 </div>
                                             </div>
@@ -208,7 +209,7 @@
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">cancel</md-button>
                             <md-button class="me-default-button" ng-disabled="appStoreForm.$invalid"
-                                       ng-click="addAppStoreInfo(picFile,appStoreData,publishSplash)">next
+                                       ng-click="addAppStoreInfo(appStoreData,publishSplash); nextStep(2) ">next
                             </md-button>
                         </div>
                     </div>

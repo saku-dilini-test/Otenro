@@ -50,7 +50,7 @@
             };
             // }
         }).error(function (error) {
-            alert("Contact Us information Loading Error : " + error);
+            //alert("Contact Us information Loading Error : " + error);
         });
 
         $scope.addAboutUs = function (aboutUs) {
