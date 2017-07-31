@@ -26,6 +26,16 @@
         }else if($scope.product.sku){
             $scope.isNewProduct = false;
             $scope.skuFieldEnable = true;
+            $scope.initSkuLength = initialData.product.variants.length;
+        }
+
+        $scope.initSku = function(index){
+            if(index<$scope.initSkuLength || index == 0){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
 
         // Third Navigation Image Path ( Image get from server )
