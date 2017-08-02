@@ -46,6 +46,8 @@ Step 03 : To sign the unsigned APK, run the jarsigner tool which is also include
 
 $ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore android-release-unsigned.apk alias_name
 
+ Passphrase for keystore : jango@B37
+
 
 Step 04: Zip apk run zipalign
 
