@@ -70,7 +70,12 @@ module.exports = {
             if(err) res.send(err);
             for(var i =0; i<app[0].variants.length; i++){
                 if(app[0].variants[i].sku == data.sku){
-                    app[0].variants[i].quantity = app[0].variants[i].quantity - data.qty;
+                    if(app[0].variants[i].unlimited == true){
+                        app[0].variants[i].quantity = null;
+                    }
+                    else {
+                        app[0].variants[i].quantity = app[0].variants[i].quantity - data.qty;
+                    }
                     ThirdNavigation.update({id:data.id},app[0]).exec(function(err,thirdNavi){
                         if(err) res.send(err);
                         obj.push(thirdNavi)
