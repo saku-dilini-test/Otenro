@@ -165,6 +165,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         }*/
 
         var url;
+        for(var i=0;i<$stateParams.item.cart.length;i++){
+               $stateParams.item.cart[i].imgURL = $stateParams.item.cart[i].imgURL[1].oldImage;
+        }
         var object = JSON.stringify($stateParams.item.cart, function( key, value ){
             if( key === "$$hashKey" ) {
                 return undefined;
@@ -184,7 +187,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
         $http.post(constants.server_url+ url)
             .then(function(res){
-                    $scope.details.id = $rootScope.cart.cartItems[0].id;
+                    //$scope.details.id = $rootScope.cart.cartItems[0].id;
                     $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
                     //$http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
                         .then(function(res){
@@ -234,6 +237,7 @@ $scope.confirmCashPayment = function() {
     console.log('$stateParams.item.delivery.method'+$stateParams.item.delivery.method)
     var url;
 
+
         var object = JSON.stringify($stateParams.item.cart, function( key, value ){
 
         if( key === "$$hashKey" ) {
@@ -247,57 +251,18 @@ $scope.confirmCashPayment = function() {
         console.log(object);
 
         if($stateParams.item.delivery.method == "Delivery"){
-
-
-              url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$scope.user.name+'&deliverName='+$stateParams.item.delivery.name+'&deliveryNo='+$stateParams.item.delivery.streetNumber+ '&deliveryStreet='+$stateParams.item.delivery.streetName+'&deliveryCity='+$stateParams.item.delivery.city+'&deliveryCountry='+$stateParams.item.delivery.country+ '&deliveryZip='+$stateParams.item.delivery.zip+'&telNumber='+ $stateParams.item.delivery.number+'&tax='+$stateParams.item.taxTotal  +'&shippingCost='+$stateParams.item.shippingCost+'&shippingOpt='+ $stateParams.item.shipping.shippingOption+'&email='+ $stateParams.item.userEmail+'&currency='+$rootScope.currency  +'&promotionCode='+$stateParams.item.promotionCode
-
-            $scope.details ={
-                appId : $rootScope.appId,
-                registeredUser: $scope.user.registeredUser,
-                item : $stateParams.item.cart,
-                amount : $stateParams.item.amount,
-                customerName : $scope.user.name,
-                deliverName : $stateParams.item.delivery.name,
-                deliveryNo : $stateParams.item.delivery.streetNumber,
-                deliveryStreet : $stateParams.item.delivery.streetName,
-                deliveryCity : $stateParams.item.delivery.city,
-                deliveryCountry : $stateParams.item.delivery.country,
-                deliveryZip : $stateParams.item.delivery.zip,
-                telNumber : $stateParams.item.delivery.phone,
-                tax :   $stateParams.item.taxTotal,
-                shippingCost :   $stateParams.item.shippingCost,
-                shippingOpt : $stateParams.item.shipping.shippingOption,
-                email: $stateParams.item.userEmail,
-                currency: $rootScope.currency,
-                promotionCode: $stateParams.item.promotionCode
-            };
+             url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$scope.user.name+'&deliverName='+$stateParams.item.delivery.name+'&deliveryNo='+$stateParams.item.delivery.streetNumber+ '&deliveryStreet='+$stateParams.item.delivery.streetName+'&deliveryCity='+$stateParams.item.delivery.city+'&deliveryCountry='+$stateParams.item.delivery.country+ '&deliveryZip='+$stateParams.item.delivery.zip+'&telNumber='+ $stateParams.item.delivery.number+'&tax='+$stateParams.item.taxTotal  +'&shippingCost='+$stateParams.item.shippingCost+'&shippingOpt='+ $stateParams.item.shipping.shippingOption+'&email='+ $stateParams.item.userEmail+'&currency='+$rootScope.currency  +'&promotionCode='+$stateParams.item.promotionCode
         }
         else{
             console.log('pickup')
 
-
             url = 'cmd=saveOrder&appId='+$rootScope.appId+'&registeredUser='+$scope.user.registeredUser+'&item='+encodeURIComponent(object)+'&amount='+$stateParams.item.amount+'&customerName='+$stateParams.item.deliverDetails.name+'&telNumber='+$stateParams.item.deliverDetails.number+'&tax='+$stateParams.item.taxTotal+'&shippingCost='+$stateParams.item.shippingCost+'&pickupId='+$stateParams.item.pickupId+'&email='+$stateParams.item.userEmail+'&currency='+$rootScope.currency+'&promotionCode='+$stateParams.item.promotionCode
 
-
-            $scope.details ={
-                appId : $rootScope.appId,
-                registeredUser: $scope.user.registeredUser,
-                item : $stateParams.item.cart,
-                amount : $stateParams.item.amount,
-                customerName : $stateParams.item.deliverDetails.name,
-                telNumber : $stateParams.item.deliverDetails.phone,
-                tax :   $stateParams.item.taxTotal,
-                shippingCost :   $stateParams.item.shippingCost,
-                pickupId: $stateParams.item.pickupId,
-                email: $stateParams.item.userEmail,
-                currency:$rootScope.currency,
-                promotionCode: $stateParams.item.promotionCode
-            }
         }
 
         $http.post(constants.server_url+ url)
             .success(function(res){
-                    $scope.details.id = $rootScope.cart.cartItems[0].id;
+                    //$scope.details.id = $rootScope.cart.cartItems[0].id;
                     console.log($stateParams.item.cart[0])
                     $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
                      //console.log("item.cdart::"+JSON.stringify($stateParams.item.cart))
@@ -395,6 +360,9 @@ $scope.confirmCashPayment = function() {
                 }*/
 
                 var url;
+                for(var i=0;i<$stateParams.item.cart.length;i++){
+                    $stateParams.item.cart[i].imgURL = $stateParams.item.cart[i].imgURL[1].oldImage;
+                }
                 var object = JSON.stringify($stateParams.item.cart, function( key, value ){
 
                 if( key === "$$hashKey" ) {
@@ -416,7 +384,7 @@ $scope.confirmCashPayment = function() {
                 }
                 $http.post(constants.server_url+ url)
                     .then(function(res){
-                            $scope.details.id = $rootScope.cart.cartItems[0].id;
+                            //$scope.details.id = $rootScope.cart.cartItems[0].id;
                             $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
                             //$http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
                                 .then(function(res){
@@ -536,6 +504,9 @@ $scope.confirmCashPayment = function() {
                     $scope.step = 'done';
                     $scope.transactionId = response.data.transaction.id;
                     var url;
+                    for(var i=0;i<$stateParams.item.cart.length;i++){
+                           $stateParams.item.cart[i].imgURL = $stateParams.item.cart[i].imgURL[1].oldImage;
+                    }
                     var object = JSON.stringify($stateParams.item.cart, function( key, value ){
 
                     if( key === "$$hashKey" ) {
@@ -556,7 +527,7 @@ $scope.confirmCashPayment = function() {
                     }
                     $http.post(constants.server_url+ url)
                         .then(function(res){
-                                $scope.details.id = $rootScope.cart.cartItems[0].id;
+                                //$scope.details.id = $rootScope.cart.cartItems[0].id;
                                 //$http.post(constants.server_url+"cmd=updateInventory&cart="+$stateParams.item.cart)
                                 $http.post(constants.server_url+'cmd=updateInventory&id='+$stateParams.item.cart[0].id+'&sku='+$stateParams.item.cart[0].sku+'&qty='+$stateParams.item.cart[0].qty)
                                     .then(function(res){

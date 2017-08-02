@@ -191,7 +191,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
 
     $scope.confirmCashPayment = function(){
 
-    console.log('$stateParams.item.delivery.method'+$stateParams.item.delivery.method)
+    console.log($stateParams.item.cart)
     var url;
 
         var object = JSON.stringify($stateParams.item.cart, function( key, value ){
@@ -259,7 +259,6 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 });
     }
     // --/-- Here end cash Payment Function --/--
-
 
 
     // Buy With PayPal

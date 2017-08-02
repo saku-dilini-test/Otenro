@@ -163,6 +163,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
             }
         }*/
         var url;
+        for(var i=0;i<$stateParams.item.cart.length;i++){
+            $stateParams.item.cart[i].imgURL = $stateParams.item.cart[i].imgURL[1].oldImage;
+        }
 
         var object = JSON.stringify($stateParams.item.cart, function( key, value ){
 
@@ -239,6 +242,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     $scope.confirmCashPayment = function(){
     console.log('$stateParams.item.delivery.method'+$stateParams.item.delivery.method)
     var url;
+        for(var i=0;i<$stateParams.item.cart.length;i++){
+            $stateParams.item.cart[i].imgURL = $stateParams.item.cart[i].imgURL[1].oldImage;
+        }
 
         var object = JSON.stringify($stateParams.item.cart, function( key, value ){
 
@@ -361,6 +367,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                 }*/
 
                     var url;
+                    for(var i=0;i<$stateParams.item.cart.length;i++){
+                        $stateParams.item.cart[i].imgURL = $stateParams.item.cart[i].imgURL[1].oldImage;
+                    }
 
                         var object = JSON.stringify($stateParams.item.cart, function( key, value ){
 
@@ -511,7 +520,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                     $scope.transactionId = response.data.transaction.id;
 
                     var url;
-
+                        for(var i=0;i<$stateParams.item.cart.length;i++){
+                            $stateParams.item.cart[i].imgURL = $stateParams.item.cart[i].imgURL[1].oldImage;
+                        }
                         var object = JSON.stringify($stateParams.item.cart, function( key, value ){
 
                         if( key === "$$hashKey" ) {

@@ -186,6 +186,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     $scope.confirmCashPayment = function(){
         var url;
         //convert Json array in to string
+        console.log($stateParams.item.cart)
         var object = JSON.stringify($stateParams.item.cart, function( key, value ){
             if( key === "$$hashKey" ) {
                return undefined;
