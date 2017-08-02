@@ -38,32 +38,23 @@ module.exports = {
                         });
                     }).then(function(source) {
                         return stripe.charges.create({
-                            amount: req.body.amount,
+                            amount: req.body.amount * 100,   //A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge
                             currency: 'usd',
                             customer: source.customer
                         });
                     }).then(function(charge) {
                         // New charge created on a new customer
-                        console.log(JSON.stringify(charge));
+                        console.log("success : "+JSON.stringify(charge));
                         res.send(charge);
                     }).catch(function(err) {
                         // Deal with an error
+                        console.log("this is error .................. " + err);
                         res.send(err);
                     });
                 }
             });
 
         });
-
-
-
-
-
-
-
-
     }
-
-
 
 };
