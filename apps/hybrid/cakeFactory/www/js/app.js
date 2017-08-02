@@ -277,8 +277,8 @@ angular.module('starter',
 
   })
 
-  //.constant('SERVER_URL', "http://192.168.8.108:1337/")
-  .constant('SERVER_URL', "http://onbitlabs.com:1338/")
+  //.constant('SERVER_URL', "http://192.168.8.58:1337/")
+  .constant('SERVER_URL', "http://tecclk.com:1338/")
 
   //.constant('ORDER_URL','http://192.168.8.108:8080/#/mobileOrderConform?')
   .constant('ORDER_URL','http://tecclk.com/#/mobileOrderConform?')
