@@ -19,7 +19,8 @@
               </label>
               <label class="item item-input item-floating-label">
                 <span class="input-label">Email</span>
-                <input type="email" name="email" placeholder="Email" ng-model="data.email" ng-required="true">
+                <input type="email" name="email" placeholder="Email" ng-model="data.email" ng-required="true"
+                       ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
                 <span class="help-block" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
               Enter a proper email
             </span>
