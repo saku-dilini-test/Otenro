@@ -11,13 +11,13 @@ var braintree = require("braintree");
 var JWT = require('machinepack-jwt');
 Passwords = require('machinepack-passwords');
 var sentMails = require('../mobile_apis/Services/emailService.js');
-//var config = require('../mobile_apis/Services/config.js');
+var config = require('../mobile_apis/Services/config.js');
 
 module.exports = function(option) {
 
     var seneca = this;
     var MongoClient = require('mongodb').MongoClient;
-    var url = 'mongodb://localhost:27017/appBuilder';
+    var url = config.DB_URL;
     var ObjectID = require('mongodb').ObjectID;
     var send = require('send');
     MongoClient.connect(url, function(err, db){
@@ -49,6 +49,8 @@ module.exports = function(option) {
          * @param req
          * @param res
          */
+
+
 
         function getThirdBySecondId (req,Done){
             if(req.appId != null){

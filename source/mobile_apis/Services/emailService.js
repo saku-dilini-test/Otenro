@@ -21,13 +21,11 @@ module.exports = {
 
     sendConfirmEmail: function (data, callback) {
 
-        console.log('apppppppppppppppp');
         //var data = this.getUserEmailData(emailsParms,res);
         //console.log(data);
         var searchApp = {
             appId: data.appId
         };
-        console.log('apppppppppppppppp'+searchApp.appId);
         var appRoot = path.resolve();
 
         var serverOrg=config.host+':'+config.port;

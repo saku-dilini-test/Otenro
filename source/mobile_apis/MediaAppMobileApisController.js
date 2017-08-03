@@ -10,14 +10,14 @@
 var fs = require('fs-extra');
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
+var config = require('../mobile_apis/Services/config.js');
 
 module.exports = function(option) {
 
     var seneca = this;
     var MongoClient = require('mongodb').MongoClient;
     var ObjectID = require('mongodb').ObjectID;
-
-    var url = 'mongodb://localhost:27017/appBuilder';
+    var url = config.DB_URL;
 
     MongoClient.connect(url, function(err, db){
 
@@ -42,14 +42,10 @@ module.exports = function(option) {
     function getArticles (req,Done){
 
             var collections = db.collection('article');
-            console.log('fdsfsf'+req.categoryId);
-            console.log('dadeqewqeada'+req.appId);
-
             collections.find({appId:req.appId,categoryId:req.categoryId}).toArray(function(err, data) {
             console.log('getArticle'+JSON.stringify(data));
                 var Data = JSON.stringify(data).replace(/_id/g,'id');
                 var Adata = JSON.parse(Data);
-                console.log('get articles result:::::'+JSON.stringify(Adata))
                 Done( null, Adata );
             });
 
@@ -65,8 +61,6 @@ module.exports = function(option) {
 
             var collection = db.collection('article');
             collection.find({categoryId:req.categoryId}).toArray(function(err, data) {
-
-                console.log('getArticleByCategoryId'+JSON.stringify(data));
                 Done( null, data );
             });
     }
@@ -78,14 +72,13 @@ module.exports = function(option) {
             var collection = db.collection('article');
             collection.find({_id:obj_id}).toArray(function(err, data) {
 
-                console.log('getArticleById'+JSON.stringify(data[0]));
+         //       console.log('getArticleById'+JSON.stringify(data[0]));
                 Done( null, data[0] );
             });
 
     }
 
     function getArticleCategoryById (req,Done){
-    console.log('categoryId'+req.categoryId);
 
             var obj_id = new ObjectID(req.categoryId);
             var collection = db.collection('articlecategory');

@@ -8,20 +8,15 @@
  * @help        :: See http://senecajs.org/getting-started/
  */
 var fs = require('fs-extra');
-var ApiContracts = require('authorizenet').APIContracts;
-var ApiControllers = require('authorizenet').APIControllers;
-var express = require('express');
-var app = express();
-var router = express.Router();
 var base64Img = require('base64-img');
+var config = require('../mobile_apis/Services/config.js');
 
 module.exports = function(option) {
 
     var seneca = this;
     var MongoClient = require('mongodb').MongoClient;
-
-    var url = 'mongodb://localhost:27017/appBuilder';
-    var APP_FILE_SERVER = '/home/onbit/Documents/appFileServer/';
+    var url = config.DB_URL;
+    var APP_FILE_SERVER = config.APP_FILE_SERVER;
 
     MongoClient.connect(url, function(err, db){
 
