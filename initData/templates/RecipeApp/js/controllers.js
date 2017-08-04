@@ -39,15 +39,9 @@ angular.module('starter.controllers', [])
                     }
 
                     function replaceByValue(imageData,equalImage,image) {
-                        //console.log(imageData[0].imageUrl)
-
-                        //console.log(image)
 
                         for( var k = 0; k < imageData.length; k++ ) {
                             if( equalImage == imageData[k].imageUrl ) {
-
-                          //console.log('dsadsadsadasdadsad'+imageData[k].imageUrl)
-                          //console.log('dsadsadsadasdadsad'+image)
 
                             imageData[k].imageUrl = image ;
                             console.log(imageData)
@@ -55,7 +49,6 @@ angular.module('starter.controllers', [])
 
                             }
                         }
-
 
                     }
 

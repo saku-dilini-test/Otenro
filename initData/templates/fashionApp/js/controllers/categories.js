@@ -57,10 +57,7 @@ angular
 					routesConfig.wpUrl.SERVER_URL()
 					+"/templates/viewImages?userId="
 					+$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=category";*/
-				});
-				var image = [];
-
-                    for(var i=0;i<(categories.length);i++){
+				    for(var i=0;i<(categories.length);i++){
                         getData(i)
                     }
                     function getData(i){
@@ -73,6 +70,10 @@ angular
                         });
 
                     }
+				});
+				var image = [];
+
+
 
                     function replaceByValue(imageData,equalImage,image) {
                         //console.log(imageData[0].imageUrl)
