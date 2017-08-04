@@ -379,8 +379,14 @@
          };
 
         $scope.exists = function (item, list) {
-             return list.indexOf(item) > -1;
-             $scope.isDisabled = true;
+            for(var i=0; i< list.length; i++)
+            {
+                if(list[i].countryCode == item.countryCode)
+                {
+                    return true;
+                }
+            }
+            return false;
         };
 
 
