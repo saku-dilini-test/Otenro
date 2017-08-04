@@ -46,6 +46,7 @@
             $scope.viewBilling = "Billing Details";
             if(resetData == 'userEdit'){
                 $scope.userEdit = angular.copy($scope.original);
+                $scope.userEdit.password = null;
                 $scope.editProfile.$setPristine();
                 $scope.editProfile.$setUntouched();
             }
