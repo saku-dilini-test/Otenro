@@ -149,6 +149,11 @@
             }
         };
 
+
+        $scope.clearDefaultData = function () {
+            commerceService.showRemoveDefaultDataDialog("remove");
+        }
+
         // Edit Menu
         $scope.goToEditMenuItemView = function(item){
             if($scope.templateCategory == tempCatBusiness){
