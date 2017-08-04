@@ -6,6 +6,7 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
 
     $rootScope.cart = {cartItems:[],cartSize:0,totalPrice:0};
     $rootScope.isUserLoggedIn = {check:false};
+    $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
 
     if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId) == null){
             $rootScope.isUserLoggedIn.check = false;

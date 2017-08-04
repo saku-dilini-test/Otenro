@@ -30,7 +30,13 @@
               </label>
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Password</span>
-                <input type="password" placeholder="" ng-model="data.password" ng-required="true">
+                <input type="password" name="password" placeholder="" ng-pattern="passwordRegularExpression" ng-model="data.password" ng-required="true" >
+                <span class="help-block register-pw-error-message" ng-show="signUpForm.password.$error.minlength">
+                <span class="error" ng-show="signUpForm.password.$error.minlength">Password should have at least 7 characters.</span>
+                </span>
+                <span class="help-block register-pw-error-message" ng-show="!(signUpForm.password.$error.minlength) && signUpForm.password.$error.pattern">
+                <span class="error">Password should have at least one lower or Upper letter and one number</span>
+                </span>
               </label>
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Street Number</span>

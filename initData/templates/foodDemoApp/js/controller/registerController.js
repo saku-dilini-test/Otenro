@@ -6,7 +6,7 @@
 mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopup,$state,$stateParams,$auth,constants,$log) {
     $scope.data = {};
 
-
+    $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
     $http.get(constants.SERVER_URL+"/edit/getAllCountry")
         .then(function(res){
             $scope.countries = res.data;
