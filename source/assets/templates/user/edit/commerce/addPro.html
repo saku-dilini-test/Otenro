@@ -73,7 +73,7 @@
                                                ng-model="product.sku"
                                                ng-pattern="/^\d*[1-9]\d*$/"
                                                ng-readonly="product.checked"
-                                               ng-click="check(index)">
+                                               >
                                         <div class="error" ng-if="exist">Sku already exist</div>
                                         <div ng-messages="productForm.sku.$error" ng-show="productForm.sku.$dirty">
                                             <div ng-message="required">SKU is required.</div>
