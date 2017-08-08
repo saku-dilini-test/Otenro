@@ -10,13 +10,13 @@
     angular.module('app')
         .controller('livePreviewCtrl',
         ['$scope', 'welcomeTemplatesResource', 'userProfileService','$stateParams','$mdDialog','mySharedService','$http','$state','ME_APP_SERVER',
-        '$auth','toastr','$cookieStore','$cookies','$interval','$q','$log',
+        '$auth','toastr','$cookieStore','$cookies','$interval','$q','$log','commerceService',
             livePreviewCtrl
         ]);
 
 
     function livePreviewCtrl($scope,welcomeTemplatesResource, userProfileService,$stateParams,$mdDialog,mySharedService,
-    $http,$state,ME_APP_SERVER,$auth,toastr,$cookieStore,$cookies,$interval,$q,$log) {
+    $http,$state,ME_APP_SERVER,$auth,toastr,$cookieStore,$cookies,$interval,$q,$log,commerceService) {
         $scope.encParam = $stateParams.p;
         var decParams = atob($scope.encParam);
 
@@ -92,7 +92,6 @@
             var agentInfo = {
                 clickid : $stateParams.clickid,
                 affid:$stateParams.affid
-
             }
 
         if($scope.appName== null){
@@ -131,6 +130,7 @@
 
                         });
                     $mdDialog.hide(answer);
+                    commerceService.showRemoveDefaultDataDialog("remove");
                 }else{
                     loginFunction(agentInfo).then(function(id){
                         $scope.successDeleteFile($scope.userId, $scope.appId);
@@ -167,8 +167,6 @@
                                     p: encryptedURL
                                 });
 
-
-
                             }else {
                                 var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
                                     +'/templates/'+data.data.appId+'/?'+new Date().getTime();
@@ -178,9 +176,12 @@
                                 var encParam = btoa(data.data.appId);
                                 $state.go('user.editApp', {appId: data.data.appId, p: encParam});
                             }
+
                         });
+
                         $mdDialog.hide(answer);
                     });
+                    commerceService.showRemoveDefaultDataDialog("remove");
 
                 }
                 }
