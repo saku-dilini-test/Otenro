@@ -52,16 +52,33 @@
             }
             $scope.activeTabIndex = index;
         }
-        
+
+        $scope.cancel = function () {
+            if (typeof $auth.getPayload() !== 'undefined' ){
+                userProfileResource.getBillingDetails($auth.getPayload().id).success(function (data) {
+                    $scope.billingEdit= data;
+                    $scope.backToView(1);
+                }).error(function (err) {
+                    toastr.error(err.error, 'Error', {
+                        closeButton: true
+                    });
+                });
+            }
+        }
+
+
         if (typeof $auth.getPayload() !== 'undefined' ){
             userProfileResource.getBillingDetails($auth.getPayload().id).success(function (data) {
                 $scope.billingEdit= data;
+                $scope.originalBillingData = angular.copy(data);
             }).error(function (err) {
                 toastr.error(err.error, 'Error', {
                     closeButton: true
                 });
             });
         }
+
+
 
 
         $scope.editUserProfile = function(params){
