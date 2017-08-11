@@ -5,14 +5,19 @@ angular.module('animateApp')
     .controller('shoppingCartCtrl', function($scope, $http,$routeParams,SERVER_URL,DataService) {
         $scope.SERVER_URL = SERVER_URL;
         $scope.cart = DataService.cart;
-     
+
         $http.get(SERVER_URL+"products/oneUSD")
             .then(function (response) {
-                $scope.oneDoller = response.data.result;  
-                $scope.cart.saveOneDoller($scope.oneDoller);                
-        });       
+                $scope.oneDoller = response.data.result;
+                $scope.cart.saveOneDoller($scope.oneDoller);
+        });
 
         // before redirect to PayPal, Cart info send to server to save
+
+        $scope.loader = function(){
+             $(' <div class="loader"></div>').prependTo(document.body);
+             $(' <div class="loading-overlay"></div>').prependTo(document.body);
+        }
         $scope.saveCartInServer = function () {
             console.log("data" + $scope.cart.getShoppingCart())
             $scope.deliveryOption = "pickUp";
