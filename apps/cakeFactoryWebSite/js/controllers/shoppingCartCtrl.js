@@ -6,19 +6,19 @@ angular.module('animateApp')
         $scope.SERVER_URL = SERVER_URL;
         $scope.cart = DataService.cart;
 
-
         $http.get(SERVER_URL+"products/oneUSD")
             .then(function (response) {
-                $scope.oneDoller = response.data.result;  
-                $scope.cart.saveOneDoller($scope.oneDoller);                
-        });       
+                $scope.oneDoller = response.data.result;
+                $scope.cart.saveOneDoller($scope.oneDoller);
+        });
 
         // before redirect to PayPal, Cart info send to server to save
 
+        $scope.loader = function(){
+             $(' <div class="loader"></div>').prependTo(document.body);
+             $(' <div class="loading-overlay"></div>').prependTo(document.body);
+        }
         $scope.saveCartInServer = function () {
-
-
-            console.log("saveCartInServer")
             console.log("data" + $scope.cart.getShoppingCart())
             $scope.deliveryOption = "pickUp";
             $scope.isSubmitButtonDisableValue = 'true';
@@ -31,7 +31,7 @@ angular.module('animateApp')
                 shoppingCart[i] = data[i];
             }
 
-            shoppingCart['cartLength']	 = data.length;
+            shoppingCart['cartLength']   = data.length;
             shoppingCart['pickUpBranch'] = $scope.cart.getBranchName();
             shoppingCart['deliveryCharge'] = $scope.cart.getDeliveryCharges();
             shoppingCart['deliveryLocation'] = $scope.cart.getLocationName();
@@ -48,11 +48,8 @@ angular.module('animateApp')
             shoppingCart['deliveryTime'] = $scope.cart.getDeliveryTime();
             shoppingCart['paymentStatus'] = 'Pending';
             //cart info save api
-            console.log("shopping cart"+ shoppingCart.name);
             $http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)
-                .success(function (response) {
-                console.log("shopping cart");
-                $scope.cart.checkout('PayPal');
+                .then(function (response) {
                 });
 
                localStorage.clear();

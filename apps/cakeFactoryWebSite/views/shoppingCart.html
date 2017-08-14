@@ -22,9 +22,9 @@
                 <!-- empty cart message -->
                 <tr ng-hide="cart.getTotalCount() > 0">
                     <div ng-if="cart.getTotalCount() == 0" ng-init="clearCart()">
-                    <td class="tdCenter" colspan="4">
-                        Your cart is empty.
-                    </td></div>
+                        <td class="tdCenter" colspan="4">
+                            Your cart is empty.
+                        </td></div>
                 </tr>
 
                 <!-- cart items -->
@@ -82,16 +82,20 @@
         </div>
 
         <!-- buttons -->
-        <div>
+        <div >
             <p class="text-info clearfix">
             <div ng-if="true" class="pull-left">
                 <button
                         class="btn kkcc-btn-success"
-                        ng-click="saveCartInServer()"
+                        ng-click="saveCartInServer(); cart.checkout('PayPal');loader()"
                         ng-model="isSubmitButtonDisableValue"
                         ng-disabled=" (cart.getBranchName() === '' && cart.getDeliveryCharges() == 0) || cart.getTotalCount() < 1 ">
                     <i class="icon-ok icon-white" /> Proceed To Pay
                 </button>
+
+
+
+
             </div>
 
 
