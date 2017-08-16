@@ -10,11 +10,18 @@ var request = require('request'),
 var path = require('path');
 
 
-var server = email.server.connect({
+/*var server = email.server.connect({
     user: "onbilabsttest@gmail.com",
     password: "0nb1tl@b$",
     host: "smtp.gmail.com",
     ssl: true
+});*/
+
+var server  = email.server.connect({
+    user:    "communications@otenro.com",
+    password:"R&3%ee=r1",
+    host:    "smtp.gmail.com",
+    ssl:     true
 });
 
 module.exports = {
@@ -31,7 +38,7 @@ module.exports = {
 
             var emailDetails = {
                 text: "",
-                from: "onbitlabs@gmail.com",
+                from: "Otenro<communications@otenro.com>",
                 to: data.email,
                 subject: "Welcome to Otenro ",
                 attachment: [
