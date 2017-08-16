@@ -15,12 +15,15 @@ angular.module('animateApp')
 
 
         $scope.load = function(){
+
             if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0){
                 var promise = $scope.loader();
                 promise.then(function(resolve) {
                     if(resolve == 'ok'){
                          $scope.saveCartInServer();
-                         $scope.cart.checkout('PayPal');
+                         setTimeout(function() {
+                            $scope.cart.checkout('PayPal');
+                         }, 1000);
                     }
                 });
 
@@ -34,12 +37,9 @@ angular.module('animateApp')
          $scope.loader = function() {
           // perform some asynchronous operation, resolve or reject the promise when appropriate.
           return $q(function(resolve, reject) {
-            setTimeout(function() {
                    $(' <div class=" loader"></div>').prependTo(document.body);
                    $(' <div class="loading-overlay"></div>').prependTo(document.body)
                    resolve ('ok');
-
-            }, 1000);
           });
         }
 
