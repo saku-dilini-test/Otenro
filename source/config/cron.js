@@ -4,8 +4,8 @@
 
 module.exports.cron = {
     myFirstJob: {
-        //schedule: '00 00 01 * * *',
-        schedule: '*/10 * * * * *',
+        schedule: '00 00 01 * * *',
+        //schedule: '*/10 * * * * *',
         onTick: function () {
             if(sails){
                 /*runs everyday at 1 am*/
