@@ -62,6 +62,63 @@ module.exports = {
 
 
     },
+    sendReminderEmail: function(data, callback){
+        User.find().exec(function(err, users){
+            if(users){
+                var approot = path.resolve();
+                var emailContent = "";
+                var replaceMailBody = "";
+                var serverOrg=config.server.host;
+                var imgPath = serverOrg + '/images/emailtemplates';
+                for(var i=0;i<users.length;i++){
+
+                    if(users[i].lastLoginTime){
+                        var timeDiff = new Date() - users[i].lastLoginTime;
+                        var daysDifference = Math.floor(timeDiff/1000/60/60/24);
+
+                        if(daysDifference > 7)
+                        {
+                            if(!users[i].isReminderSent){
+                                if(emailContent == "")
+                                {
+                                    emailContent = fs.readFileSync(approot + '/assets/templates/user/common/emailtemplates/index.html').toString();
+                                    var replaceMailBody = emailContent.replace(/#img#/g,imgPath);
+                                }
+
+
+                                var userEmail = users[i].email;
+                                var emailDetails = {
+                                    text: "",
+                                    from: "Otenro<communications@otenro.com>",
+                                    to: userEmail,
+                                    subject: "Dont Forget to explore Otenro",
+                                    attachment: [
+                                        {
+                                            data: replaceMailBody,
+                                            alternative: true
+                                        }
+                                    ]
+                                };
+                                server.send(emailDetails, function (err, message) {
+                                    //sails.log.info(err || message);
+                                    console.log(err);
+                                    /*if (err) {
+                                     return callback(err);
+                                     }*/
+                                    //callback(null, 'ok');
+                                    sails.log.debug("Updating :" + userEmail)
+                                    User.update({email : userEmail},{isReminderSent : true}, function(err1, msg1){
+                                    });
+                                });
+                            }
+                        }
+                    }
+
+                }
+
+            }
+        })
+    },
     sendConfirmEmail: function (data, callback) {
 
         //var data = this.getUserEmailData(emailsParms,res);
