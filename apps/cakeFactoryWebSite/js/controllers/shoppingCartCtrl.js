@@ -2,9 +2,10 @@
     "use strict";
 
 angular.module('animateApp')
-    .controller('shoppingCartCtrl', function($scope, $http,$routeParams,SERVER_URL,DataService) {
+    .controller('shoppingCartCtrl', function($scope, $http,$routeParams,SERVER_URL,DataService,$q) {
         $scope.SERVER_URL = SERVER_URL;
         $scope.cart = DataService.cart;
+        console.log(DataService.cart);
 
         $http.get(SERVER_URL+"products/oneUSD")
             .then(function (response) {
@@ -12,12 +13,39 @@ angular.module('animateApp')
                 $scope.cart.saveOneDoller($scope.oneDoller);
         });
 
+
+        $scope.load = function(){
+            if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0){
+                var promise = $scope.loader();
+                promise.then(function(resolve) {
+                    if(resolve == 'ok'){
+                         $scope.saveCartInServer();
+                         $scope.cart.checkout('PayPal');
+                    }
+                });
+
+            }else{
+                $scope.loader();
+                $scope.saveCartInServer();
+                $scope.cart.checkout('PayPal');
+            }
+        }
+
+         $scope.loader = function() {
+          // perform some asynchronous operation, resolve or reject the promise when appropriate.
+          return $q(function(resolve, reject) {
+            setTimeout(function() {
+                   $(' <div class=" loader"></div>').prependTo(document.body);
+                   $(' <div class="loading-overlay"></div>').prependTo(document.body)
+                   resolve ('ok');
+
+            }, 1000);
+          });
+        }
+
+
         // before redirect to PayPal, Cart info send to server to save
 
-        $scope.loader = function(){
-             $(' <div class="loader"></div>').prependTo(document.body);
-             $(' <div class="loading-overlay"></div>').prependTo(document.body);
-        }
         $scope.saveCartInServer = function () {
             console.log("data" + $scope.cart.getShoppingCart())
             $scope.deliveryOption = "pickUp";
