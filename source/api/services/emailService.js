@@ -70,6 +70,7 @@ module.exports = {
                 var replaceMailBody = "";
                 var serverOrg=config.server.host;
                 var imgPath = serverOrg + '/images/emailtemplates';
+                var userEmail = ""
                 for(var i=0;i<users.length;i++){
 
                     if(users[i].lastLoginTime){
@@ -86,35 +87,40 @@ module.exports = {
                                 }
 
 
-                                var userEmail = users[i].email;
-                                var emailDetails = {
-                                    text: "",
-                                    from: "Otenro<communications@otenro.com>",
-                                    to: userEmail,
-                                    subject: "Dont Forget to explore Otenro",
-                                    attachment: [
-                                        {
-                                            data: replaceMailBody,
-                                            alternative: true
-                                        }
-                                    ]
-                                };
-                                server.send(emailDetails, function (err, message) {
-                                    //sails.log.info(err || message);
-                                    console.log(err);
-                                    /*if (err) {
-                                     return callback(err);
-                                     }*/
-                                    //callback(null, 'ok');
-                                    sails.log.debug("Updating :" + userEmail)
-                                    User.update({email : userEmail},{isReminderSent : true}, function(err1, msg1){
-                                    });
+                                userEmail = userEmail + "," + users[i].email;
+                                User.update({email : users[i].email},{isReminderSent : true}, function(err1, msg1){
                                 });
                             }
                         }
                     }
 
                 }
+
+                if(userEmail != "") {
+                    var emailDetails = {
+                        text: "",
+                        from: "Otenro<communications@otenro.com>",
+                        bcc: userEmail,
+                        subject: "Dont Forget to explore Otenro",
+                        attachment: [
+                            {
+                                data: replaceMailBody,
+                                alternative: true
+                            }
+                        ]
+                    };
+                    server.send(emailDetails, function (err, message) {
+                        //sails.log.info(err || message);
+                        console.log(err);
+                        /*if (err) {
+                         return callback(err);
+                         }*/
+                        //callback(null, 'ok');
+                        sails.log.debug("Updating :" + userEmail)
+
+                    });
+                }
+                //here
 
             }
         })
