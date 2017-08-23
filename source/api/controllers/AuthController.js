@@ -75,7 +75,8 @@ module.exports = {
             lastName  : req.body.lname,
             email     : req.body.email,
             password  : req.body.password,
-            yourselfReason : req.body.yourselfReason
+            yourselfReason : req.body.yourselfReason,
+              lastLoginTime : new Date()
           };
           User.create(newUserDetails).exec(function(err, user) {
             if (err) {
