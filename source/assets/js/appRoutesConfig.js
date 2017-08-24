@@ -44,7 +44,11 @@ angular.module('app')
             templateUrl : 'user/welcome/welcomeTemplatesView.html'
 
       }).state('anon.addNetwork',{
-            url :'/fromAddNetwork',
+            url :'/fromAddNetwork?clickid&affid',
+            params: {
+                affid: null,
+                clickid:null
+            },
             controller: 'LoginController',
             templateUrl : 'auth/addNetwork.html'
 
