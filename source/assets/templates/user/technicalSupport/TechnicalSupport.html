@@ -51,9 +51,68 @@
             </table>
         </form> </md-tab-body>
             </md-tab>
+            <md-tab>
+                <md-tab-label>Ad Networks</md-tab-label>
+                <md-tab-body>
+
+                    <form class="allItems" novalidate>
+                        <table class="table">
+                            <thead class="obl-dashboard-apps">
+                            <th>Add network name</th>
+                            <th>Params</th>
+                            <th>Return URL</th>
+                            <th>Action</th>
+                            <!--<th>User Details</th>-->
+                            </thead>
+
+                            <tbody>
+                            <tr dir-paginate="app in addNetworkList | filter:search | itemsPerPage: 100">
+                                <td>{{app.adagentname}}</td>
+                                <td>{{app.reqparams}}</td>
+                                <td>{{app.returnurl}}</td>
+                                <td>
+                                    <a data-ng-click="adNetworkDetails(app)">Edit</a>
+                                    /
+                                    <a data-ng-click="deleteAdNetwork(app)">Delete</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div><a href="#/viewAdNetworks/"> + Add new network</a></div>
+                    </form> </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Users from Ad Networks</md-tab-label>
+                <md-tab-body>
+
+                    <form class="allItems" novalidate>
+                        <table class="table">
+                            <thead class="obl-dashboard-apps">
+                            <th>User Name</th>
+                            <th>Ad network</th>
+                            <th>AFFID</th>
+                            <th>Created Date</th>
+                            <th>Last login</th>
+                            <th>isActive</th>
+                            </thead>
+                            <tbody>
+                            <tr dir-paginate="app in adUserList | filter:search | itemsPerPage: 100">
+                                <a ng-repeat="user in user">
+                                    <td> {{app.email}} </td>
+                                    <td> {{app.adagent}} </td>
+                                    <td> {{app.affid}} </td>
+                                    <td> {{app.createdAt}} </td>
+                                    <td> {{app.lastLoginTime}} </td>
+                                    <td> {{app.isActive}} </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div><a href="#/viewAdNetworks/"></a></div>
+                    </form> </md-tab-body>
+            </md-tab>
             <md-tab ng-disabled="enableTab">
 
-                <md-tab-label>Registered user </md-tab-label>
+                <md-tab-label>Registered users </md-tab-label>
                 <md-tab-body>
                     <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
                                              template-url="vendor/angularUtils-pagination/dirPagination.tpl.html">

@@ -61,6 +61,19 @@
                         toastr.error('Push Config Details Loading Error', 'Warning', {closeButton: true});
                     });
                 }
+
+
+            }
+
+            if($stateParams.adname){
+                var addname = $stateParams.adname;
+
+                technicalSupportService.getAdNetworkData(addname)
+                    .success(function (data) {
+                        $scope.addNetworkData = data;
+                    }).error(function (error) {
+                    toastr.error('Ad network Details Loading Error', 'Warning', {closeButton: true});
+                });
             }
 
 
@@ -143,6 +156,42 @@
              }
               getAlluserData();
 
+            var getAllAdNetworkuserData = function () {
+                technicalSupportService. getAllAduserData()
+                    .success(function (result) {
+
+                        for(var i=0; i< result.length; i++) {
+                            result[i].isActive = true;
+                            var nowTime = new Date().getTime();
+                           var lastLogTime = new Date(result[i].lastLoginTime).getTime();
+                            var diff = Math.round(Math.abs((nowTime - lastLogTime)/(24*60*60*1000)));
+                            if(diff > 60)
+                            {
+                                result[i].isActive = false;
+                            }
+                        }
+                        $scope.adUserList = result;
+                        console.log($scope.adUserList);
+                    }).error(function (error) {
+                    toastr.error('Loading Error', 'Warning', {
+                        closeButton: true
+                    });
+                })
+            }
+            getAllAdNetworkuserData();
+
+            var getAllAddNetworks = function () {
+                technicalSupportService.getAllAddNetworks()
+                    .success(function (result) {
+                        $scope.addNetworkList = result;
+                    }).error(function (error) {
+                    toastr.error('Loading Error', 'Warning', {
+                        closeButton: true
+                    });
+                })
+            }
+            getAllAddNetworks();
+
             /**
              * @ngdoc function
              * @name getPublishDetails
@@ -152,6 +201,35 @@
             $scope.getPublishDetails  = function (appId,userId) {
                 $state.go('user.viewPublishDetails',{appId : appId,userId:userId});
             }
+
+            $scope.adNetworkDetails = function(addnetwork) {
+                $state.go('user.viewAdNetworks', {adname : addnetwork.adagentname });
+            }
+
+            $scope.deleteAdNetwork = function(addnetwork) {
+                technicalSupportService.deleteAdNetwork(addnetwork).success(function (data) {
+                    var johnRemoved = $scope.addNetworkList.filter(function(el) {
+                        return el.adagentname !== addnetwork.adagentname;
+                    });
+                    $scope.addNetworkList = johnRemoved;
+                    toastr.success('Ad network Successfully deleted', 'Warning', {closeButton: true});
+                }).error(function (error) {
+                    toastr.error('Ad network delete Error', 'Warning', {closeButton: true});
+                });
+            }
+
+            $scope.saveAdNetwork= function(addNetwork) {
+                technicalSupportService.saveAdNetwork(addNetwork).success(function (data) {
+                    toastr.success('Ad network Successfully saved', 'Warning', {closeButton: true});
+                    $state.go('user.technicalSupporter');
+                }).error(function (error) {
+                    toastr.error('Ad network Saving Error', 'Warning', {closeButton: true});
+                });
+            }
+
+             $scope.cancel = function(){
+                 $state.go('user.technicalSupporter');
+             }
         
             // View technical user details
 

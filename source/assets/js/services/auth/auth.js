@@ -25,6 +25,9 @@ angular.module('app')
               console.log(result);
             });
       },
+      getAgentInfo: function(agentName) {
+        return $http.get('/edit/getAdNetwork?addname='+agentName);
+      },
 
       logout: function() {
         LocalService.unset('user');

@@ -8,14 +8,19 @@
         // -- Config -- 
         // Tell Us About yourself data array
         $scope.yourselfReasonList = initialData.yourselfReasonList.data;
-        
+
         $scope.authSignUp = function (user) {
-            var agentInfo = {
-                clickid : $stateParams.clickid,
-                affid:$stateParams.affid
+
+            if($stateParams.data && $stateParams.data.addname) {
+                user.adagent = $stateParams.data.addname;
+                user.affid = $stateParams.data.affid;
             }
+            console.log(user);
             Auth.register(user).success(function () {
-                Auth.sendAgentInfo(agentInfo);
+
+                if($stateParams.data && $stateParams.data.addname) {
+                    Auth.sendAgentInfo($stateParams.data);
+                }
                 toastr.success('Register Successful ', 'Congratulations ! ', {closeButton: true});
                 if ($scope.user.email== 'support@otenro.com'){
                     $state.go('user.technicalSupporter');
