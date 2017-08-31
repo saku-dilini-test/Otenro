@@ -73,6 +73,12 @@ module.exports = {
     isReminderSent:{
       type: 'boolean'
     },
+    adagent:{
+      type: 'string'
+    },
+    affid:{
+      type: 'string'
+    },
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;
