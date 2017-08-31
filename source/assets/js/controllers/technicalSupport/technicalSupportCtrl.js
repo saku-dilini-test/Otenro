@@ -159,7 +159,19 @@
             var getAllAdNetworkuserData = function () {
                 technicalSupportService. getAllAduserData()
                     .success(function (result) {
+
+                        for(var i=0; i< result.length; i++) {
+                            result[i].isActive = true;
+                            var nowTime = new Date().getTime();
+                           var lastLogTime = new Date(result[i].lastLoginTime).getTime();
+                            var diff = Math.round(Math.abs((nowTime - lastLogTime)/(24*60*60*1000)));
+                            if(diff > 60)
+                            {
+                                result[i].isActive = false;
+                            }
+                        }
                         $scope.adUserList = result;
+                        console.log($scope.adUserList);
                     }).error(function (error) {
                     toastr.error('Loading Error', 'Warning', {
                         closeButton: true
