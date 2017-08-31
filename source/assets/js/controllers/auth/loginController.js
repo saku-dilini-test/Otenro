@@ -10,18 +10,31 @@
   });
 
   angular.module('app')
-      .controller('LoginController',['$scope','$state','Auth','toastr','$auth','$stateParams', LoginController]);
+      .controller('LoginController',['$scope','$state','Auth','toastr','$auth','$stateParams','$location', LoginController]);
 
 
-  function LoginController( $scope, $state, Auth ,toastr ,$auth,$stateParams) {
+  function LoginController( $scope, $state, Auth ,toastr ,$auth,$stateParams,$location) {
 
-      var agentInfo = {
-          clickid : $stateParams.clickid,
-          affid:$stateParams.affid
 
-      };
+    var params = $location.search();
 
-      //console.log(agentInfo);
+      var adAgentInfo = {};
+
+
+     if(params.adn){
+        var adnetworkname = params.adn;
+         var agentDetails = Auth.getAgentInfo(adnetworkname).success(function (data) {
+             if(data){
+                 var paramObj = angular.fromJson(data.reqparams)
+                 adAgentInfo.addname =  adnetworkname;
+                 adAgentInfo.clickid = params[paramObj.clickid];
+                 adAgentInfo.affid = params[paramObj.affid];
+                 adAgentInfo.clickidparam = paramObj.clickid;
+                 adAgentInfo.affidparam = paramObj.affid;
+                 adAgentInfo.returnUrl = data.returnurl;
+             }
+         });
+     }
 
     $scope.submit = function($event) {
       Auth.login($scope.user).success(function(response) {
@@ -48,8 +61,7 @@
       $scope.register = function() {
 
           $state.go('anon.register', {
-              clickid : $stateParams.clickid,
-              affid:$stateParams.affid
+              data: adAgentInfo
           });
 
       }

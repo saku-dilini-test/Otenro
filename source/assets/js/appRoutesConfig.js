@@ -86,8 +86,11 @@ angular.module('app')
       }).state('anon.register', {
             url: '/register',
             params: {
+                adname: null,
                 affid: null,
-                clickid:null
+                clickid:null,
+                data: null
+
             },
             templateUrl: 'auth/register.html',
             controller: 'RegisterController',
@@ -130,7 +133,14 @@ angular.module('app')
                 userId:null,
             },
             templateUrl : 'user/technicalSupport/ViewPublishDetails.html'
-      });
+      }).state('user.viewAdNetworks',{
+        url :'/viewAdNetworks/:adname',
+        controller : 'technicalSupportCtrl',
+        data : {
+            adname : null
+        },
+        templateUrl : 'user/technicalSupport/AdNetworkDetails.html'
+    });
 
      $stateProvider
        .state('user', {

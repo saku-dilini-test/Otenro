@@ -316,8 +316,13 @@ module.exports.routes = {
      'POST  /edit/getPublishDetails': 'technicalSupport/TechnicalSupportController.getPublishDetails',
      'GET    /edit/getPushConfigDetails': 'technicalSupport/TechnicalSupportController.getPushConfigDetails',
      'POST   /edit/savePushConfigDetails': 'technicalSupport/TechnicalSupportController.savePushConfigDetails',
+     'POST   /edit/saveAdNetwork': 'technicalSupport/TechnicalSupportController.saveAdNetwork',
+    'POST   /edit/deleteAdNetwork': 'technicalSupport/TechnicalSupportController.deleteAdNetwork',
      'POST   /edit/changePublishStatus': 'technicalSupport/TechnicalSupportController.changePublishStatus',
      'GET  /edit/getAlluserData': 'technicalSupport/TechnicalSupportController.getAlluserData',
+    'GET  /edit/getAllAduserData': 'technicalSupport/TechnicalSupportController.getAllAduserData',
+    'GET  /edit/getAllAddNetworksData': 'technicalSupport/TechnicalSupportController.getAllAddNetworks',
+    'GET  /edit/getAdNetwork': 'technicalSupport/TechnicalSupportController.getAddNetwork',
 
     /**
      * IPG Controller

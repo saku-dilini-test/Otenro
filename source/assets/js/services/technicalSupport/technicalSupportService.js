@@ -21,12 +21,27 @@
             getAlluserData: function(){
                             return $http.get(SERVER_URL + 'edit/getAlluserData');
             },
+            getAllAduserData: function(){
+                return $http.get(SERVER_URL + 'edit/getAllAduserData');
+            },
+            getAllAddNetworks: function(){
+                return $http.get(SERVER_URL + 'edit/getAllAddNetworksData');
+            },
             savePushConfigDetails : function(data){
                 return $http.post(SERVER_URL + 'edit/savePushConfigDetails',data);
             },
             changePublishStatus : function(data){
                 return $http.post(SERVER_URL + 'edit/changePublishStatus',data);
-            }
+            },
+            saveAdNetwork : function(data){
+                return $http.post(SERVER_URL + 'edit/saveAdNetwork',data);
+            },
+            deleteAdNetwork : function(data){
+                return $http.post(SERVER_URL + 'edit/deleteAdNetwork',data);
+            },
+            getAdNetworkData : function(adname){
+                return $http.get(SERVER_URL + 'edit/getAdNetwork?addname='+adname);
+            },
         };
     }
 })();
