@@ -36,6 +36,7 @@
 
                     if(ctrl == 'products'){
                         if(ctrlFun == 'showAddProductsDialog'){
+                            this.mockData = true;
                             return commerceService.showAddProductsDialog(ctrl);
                         }
                     }
@@ -44,6 +45,7 @@
 
 
                         if (ctrlFun=='showAddCategoriesDialog') {
+                            this.mockData = false;
                             return mainMenuService.showMainMenuDialog(ctrlFun);
                         }
 
