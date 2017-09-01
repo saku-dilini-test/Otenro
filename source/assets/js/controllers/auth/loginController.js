@@ -25,12 +25,12 @@
         var adnetworkname = params.adn;
          var agentDetails = Auth.getAgentInfo(adnetworkname).success(function (data) {
              if(data){
-                 var paramObj = angular.fromJson(data.reqparams)
+                 //var paramObj = angular.fromJson(data.reqparams)
                  adAgentInfo.addname =  adnetworkname;
-                 adAgentInfo.clickid = params[paramObj.clickid];
-                 adAgentInfo.affid = params[paramObj.affid];
-                 adAgentInfo.clickidparam = paramObj.clickid;
-                 adAgentInfo.affidparam = paramObj.affid;
+                 adAgentInfo.clickid = params[data.clickid];
+                 adAgentInfo.affid = params[data.affid];
+                 adAgentInfo.clickidparam = data.clickid;
+                 adAgentInfo.affidparam = data.affid;
                  adAgentInfo.returnUrl = data.returnurl;
              }
          });
@@ -67,7 +67,18 @@
       }
 
     $scope.authenticate = function(provider) {
-      $auth.authenticate(provider).then(function(){
+      $auth.authenticate(provider).then(function(data){
+          if(adAgentInfo.clickid) {
+              if(data.data.user.isNewUser){
+                  var updateInfo = {
+                      email : data.data.user.email,
+                      adagentname : params.adn,
+                      affid : adAgentInfo.affid
+                  }
+                  Auth.sendAgentInfo(adAgentInfo);
+                  Auth.updateUserAdInfo(updateInfo);
+              }
+          }
           toastr.success('Login Successful ', 'Message', {
             closeButton: true
           });

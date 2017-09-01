@@ -28,6 +28,11 @@ angular.module('app')
       getAgentInfo: function(agentName) {
         return $http.get('/edit/getAdNetwork?addname='+agentName);
       },
+      updateUserAdInfo: function(agentInfo) {
+        var agent = $http.post('/auth/updateUserAdNetwork', agentInfo);
+        agent.success(function(result) {
+        });
+      },
 
       logout: function() {
         LocalService.unset('user');

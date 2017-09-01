@@ -10,9 +10,6 @@ module.exports = {
         adagentname:{
           type: 'string'
         },
-        reqparams:{
-            type: 'string'
-        },
         returnurl:{
             type: 'string'
         },
