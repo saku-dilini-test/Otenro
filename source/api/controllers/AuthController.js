@@ -46,6 +46,18 @@ module.exports = {
       });
 
   },
+    updateUserAdNetwork: function(req, res) {
+
+        User.findOne({email: req.body.email}, function foundUser(err, user) {
+            if (err) return res.negotiate(err);
+            if (user){
+                User.update({email : req.body.email},{adagent : req.body.adagentname,affid: req.body.affid }, function(err1){
+                    res.send({response:'OK'});
+                });
+            }
+
+        });
+    },
   /*
     Authentication for the forgot password users
   */
@@ -163,12 +175,17 @@ module.exports = {
                   firstName: firstName,
                   lastName: lastName,
                   email: facebookEmail,
-                  facebookId : facebookId
+                  facebookId : facebookId,
+                    lastLoginTime : new Date()
                 }).exec(function(err, newUser) {
                   if (err) return res.negotiate(err);
+                    newUser.isNew = true;
                   createToken(newUser,res);
                 });
               } else {
+                  foundUser.isNew = false;
+                  User.update({email : foundUser.email},{lastLoginTime : new Date()}, function(err1){
+                  });
                 createToken(foundUser,res)
               }
             });
@@ -214,13 +231,18 @@ module.exports = {
                   firstName: firstName,
                   lastName: lastName,
                   email: googleEmail,
-                  googleId : googleId
+                  googleId : googleId,
+                    lastLoginTime : new Date()
                 }).exec(function(err, newUser) {
 
                   if (err) return res.negotiate(err);
+                    newUser.isNew = true;
                   createToken(newUser,res)
                 });
               } else {
+                  foundUser.isNew = false;
+                  User.update({email : foundUser.email},{lastLoginTime : new Date()}, function(err1){
+                  });
                 createToken(foundUser,res)
               }
             });

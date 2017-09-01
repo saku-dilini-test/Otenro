@@ -59,7 +59,8 @@
                         <table class="table">
                             <thead class="obl-dashboard-apps">
                             <th>Add network name</th>
-                            <th>Params</th>
+                            <th>Clickid</th>
+                            <th>AFfid</th>
                             <th>Return URL</th>
                             <th>Action</th>
                             <!--<th>User Details</th>-->
@@ -68,7 +69,8 @@
                             <tbody>
                             <tr dir-paginate="app in addNetworkList | filter:search | itemsPerPage: 100">
                                 <td>{{app.adagentname}}</td>
-                                <td>{{app.reqparams}}</td>
+                                <td>{{app.clickid}}</td>
+                                <td>{{app.affid}}</td>
                                 <td>{{app.returnurl}}</td>
                                 <td>
                                     <a data-ng-click="adNetworkDetails(app)">Edit</a>
