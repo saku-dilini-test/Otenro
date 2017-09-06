@@ -1,10 +1,10 @@
 (function() {
     'use strict';
-    angular.module("appEdit").controller("MainMenuCtrl", ['$scope', '$mdDialog', '$rootScope',
+    angular.module("appEdit").controller("MainMenuCtrl", ['oblMenuService','$scope', '$mdDialog', '$rootScope',
         'mainMenuService','$http','commerceService','toastr','mySharedService','SERVER_URL','ME_APP_SERVER','$auth'
         ,'dashboardService','articleService','initialData','$log', MainMenuCtrl]);
 
-    function MainMenuCtrl($scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
+    function MainMenuCtrl(oblMenuService,$scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
                           mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log) {
 
 
@@ -592,9 +592,21 @@
             $mdDialog.hide();
         };
 
-        $scope.cancelEdit = function() {
+        $scope.cancelCategory = function() {
             $mdDialog.hide();
-             mainMenuService.showMainMenuDialog();
+            mainMenuService.showMainMenuDialog();
+        };
+
+        $scope.cancelEdit = function() {
+            $scope.data = oblMenuService.parseData();
+            // console.log($scope.data);
+            if($scope.data == true){
+                $mdDialog.hide();
+                commerceService.showAddProductsDialog('products');
+            }else{
+                $mdDialog.hide();
+                mainMenuService.showMainMenuDialog();
+            }
         };
 
     }

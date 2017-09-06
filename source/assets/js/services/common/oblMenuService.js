@@ -10,6 +10,9 @@
     function oblMenuService(stylesService, contactUsService, commerceService,shippingService,
                             taxService,articleService ,mainMenuService,currencyService, publishService,
                             engageService, logoAndTittleService,ipgService,comingSoonService,$log) {
+
+        this.mockData = false;
+
         return {
             setOblMenuService : function(data) {
 
@@ -33,6 +36,7 @@
 
                     if(ctrl == 'products'){
                         if(ctrlFun == 'showAddProductsDialog'){
+                            this.mockData = true;
                             return commerceService.showAddProductsDialog(ctrl);
                         }
                     }
@@ -41,6 +45,7 @@
 
 
                         if (ctrlFun=='showAddCategoriesDialog') {
+                            this.mockData = false;
                             return mainMenuService.showMainMenuDialog(ctrlFun);
                         }
 
@@ -82,6 +87,10 @@
                 }else{
                     $log.debug('Note : data are undefined');
                 }
+            },
+            parseData : function(){
+
+                return this.mockData;
             }
         }
     }
