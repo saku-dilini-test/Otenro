@@ -923,54 +923,88 @@
 
         $scope.refunded = function () {
             $scope.selectedRow = $scope.gridApi1.selection.getSelectedRows();
-            if($scope.selectedRow.length == 0){
-                toastr.error('Please select a row', 'Warning', {
-                    closeButton: true
-                });
-            }
-            else{
-                $scope.refundedDate = new Date();
-                var refundedDate = $scope.refundedDate;
-               // $state.go('PassOderDates', {refundedDate: refundedDate});
+
+            var status = null;
             for (var i = 0; i < $scope.selectedRow.length; i++) {
-                $scope.selectedRow[i].paymentStatus = "Refunded";
-                $scope.selectedRow[i].fulfillmentStatus = "Refund";
-                $scope.selectedRow[i].refundedDate = refundedDate;
-                $scope.gridApi1.selection.clearSelectedRows();
-                $scope.refund.push($scope.selectedRow[i]);
-                $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.selectedRow[i]), 1);
-            }
-            $scope.gridOptions1.isRowSelectable = function(row){
-                if(row.entity.paymentStatus === "Refunded"){
-                    return false;
-                } else {
-                    return true;
+                status =$scope.selectedRow[i].paymentStatus;
+
+                 }
+
+
+
+                    if ($scope.selectedRow.length == 0) {
+                        toastr.error('Please select a row', 'Warning', {
+                            closeButton: true
+                        });
+                    }
+
+                    else {
+
+                        if(status == "Pending") {
+
+
+                        $scope.refundedDate = new Date();
+                        var refundedDate = $scope.refundedDate;
+                        // $state.go('PassOderDates', {refundedDate: refundedDate});
+                        for (var i = 0; i < $scope.selectedRow.length; i++) {
+                            $scope.selectedRow[i].paymentStatus = "Refunded";
+                            $scope.selectedRow[i].fulfillmentStatus = "Refund";
+                            $scope.selectedRow[i].refundedDate = refundedDate;
+                            $scope.gridApi1.selection.clearSelectedRows();
+                            $scope.refund.push($scope.selectedRow[i]);
+                            $scope.unfulfilled.splice($scope.unfulfilled.indexOf($scope.selectedRow[i]), 1);
+                        }
+                        $scope.gridOptions1.isRowSelectable = function (row) {
+                            if (row.entity.paymentStatus === "Refunded") {
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        };
+                        $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
+                        $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+                        $scope.gridOptions3.data = $scope.unfulfilled;
+                        commerceService.updateOrders($scope.selectedRow)
+                            .success(function (data) {
+                                toastr.success('Order status changed to refunded  ', 'Success', {
+                                    closeButton: true
+                                });
+                            })
+                            .error(function (err) {
+                                toastr.error('Order status change failed ', 'Warning', {
+                                    closeButton: true
+                                });
+                            })
+                    } else if(status == "Refunded"){
+                            toastr.error('This order already refunded ', 'Warning', {
+                                closeButton: true
+                            });
+
+                        }else{
+
+                            toastr.error('Successful order cannot be changed ', 'Warning', {
+                                closeButton: true
+                            });
+                            }
                 }
-            };
-            $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
-            $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
-            $scope.gridOptions3.data = $scope.unfulfilled;
-            commerceService.updateOrders($scope.selectedRow)
-                .success(function (data) {
-                    toastr.success('Order status changed to refunded  ', 'Success', {
-                        closeButton: true
-                    });
-                })
-                .error(function (err) {
-                    toastr.error('Order status change failed ', 'Warning', {
-                        closeButton: true
-                    });
-                })
-            }
         };
         $scope.fulfilled = function () {
             $scope.row = $scope.gridApi1.selection.getSelectedRows();
+
+            var status = null;
+            for (var i = 0; i < $scope.row.length; i++) {
+                status = $scope.row[i].paymentStatus;
+
+            }
             if($scope.row.length == 0){
                 toastr.error('Please Select a row', 'Warning', {
                     closeButton: true
                 });
             }
             else{
+                if(status == "Pending" || status == "Refunded" ) {
+
+
                 $scope.fulfilledDate = new Date();
                 var fulfilledDate = $scope.fulfilledDate;
                 //$state.go('PassOderDates', {fulfilledDate: fulfilledDate});
@@ -1003,6 +1037,12 @@
                         closeButton: true
                     });
                 })
+                }else{
+
+                    toastr.error('Already Successfully performed', 'Warning', {
+                        closeButton: true
+                    });
+                }
             }
         };
         /*

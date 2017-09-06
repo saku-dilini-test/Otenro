@@ -18,7 +18,7 @@ module.exports = {
     },
     updateOrders : function(req,res){
 
-    var ObjectId = require('mongodb').ObjectID;
+    // var ObjectId = require('mongodb').ObjectID;
     console.log("req " + req);
     var data = req.body;
     var obj = [];
@@ -26,7 +26,7 @@ module.exports = {
     data.forEach(function(orders){
 
         console.log("orders " + JSON.stringify(orders));
-        ApplicationOrder.update({id: ObjectId(orders.id)},orders).exec(function(err,order){
+        ApplicationOrder.update({_id: orders.id},orders).exec(function(err,order){
             if (err) return done(err);
             obj.push(order);
         })
