@@ -33,8 +33,8 @@ module.exports = {
         no : {
             type : 'integer'
         },
-        id : {
-            type : 'integer'
+        _id : {
+            type : 'objectid'
         },
         deliveryLocation : {
             type : 'string'
