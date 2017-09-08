@@ -5,7 +5,7 @@
 mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants,$log) {
 
     $scope.$emit('hideMenu',{});
-
+    $rootScope.parseWeight;
     $scope.buyQuantity=0;
     $rootScope.timestamp = new Date().getTime();
     $scope.userId=$rootScope.userId;
@@ -221,13 +221,18 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                     var i=0;
                     while(i < $rootScope.cart.cartItems.length){
                         if($scope.foodInfo.id == $rootScope.cart.cartItems[i].id && $scope.selectedVariant.sku == $rootScope.cart.cartItems[i].sku){
+                            $rootScope.position2 = false;
+                            //increasing weight when we add same product again.
+                            $rootScope.cart.cartItems[i].totWeight += $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartItems[i].qty += $scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                            $rootScope.parseWeight = $scope.selectedVariant.weight;
                             $state.go('app.category');
                             break;
                         }
                         else if(i == ($rootScope.cart.cartItems.length -1)){
+                            $rootScope.position2 = true;
                             $rootScope.cart.cartItems.push({
                                 id: $scope.foodInfo.id,
                                 name: $scope.foodInfo.name,
@@ -237,9 +242,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                                 price: $scope.selectedVariant.price,
                                 total : $scope.selectedVariant.price,
                                 imgURL : $stateParams.item.tempImageArray,
-                                totalQty: $scope.selectedVariant.quantity
+                                totalQty: $scope.selectedVariant.quantity,
+                                weight: $scope.selectedVariant.weight  //(new) added weight of each product
 
                             });
+                            // $rootScope.cart.cartItems[i].totWeight = $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity + $scope.insideWeight;
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                             $state.go('app.category');
@@ -258,10 +265,13 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                     price: $scope.selectedVariant.price,
                     total : $scope.selectedVariant.price,
                     imgURL : $stateParams.item.tempImageArray,
-                    totalQty: $scope.selectedVariant.quantity
+                    totalQty: $scope.selectedVariant.quantity,
+                    weight: $scope.selectedVariant.weight //(new) added weight of each product
+
                 });
                 $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                 $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                $rootScope.parseWeight = $scope.selectedVariant.weight;
                 $state.go('app.category');
             }
         }

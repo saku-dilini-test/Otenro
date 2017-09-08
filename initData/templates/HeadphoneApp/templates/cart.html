@@ -9,7 +9,7 @@
        <a class="item item-avatar"  ng-repeat="item in cartItems" >
            <img src="{{imageURL}}/{{item.imgURL[0].img}}">
            <h2 ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}
-               <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></span>
+               <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty,cartItems.indexOf(item) )"></span>
                <i class="dark icon ion-trash-a right" ng-click="removeItem($index)"></i>
            </h2>
            <p>{{currency}}{{item.total*item.qty}}</p>
