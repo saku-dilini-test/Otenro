@@ -69,16 +69,20 @@
             };
             articleService.getArticleCategoryByAppId()
                 .success(function (data) {
-                    $scope.dummyCat.push({name:"Create New Category"});
+                    $scope.dummyCat.push({id:1,name:"Create New Category"});
                     data.forEach(function(aricaleCat) {
-                        console.log(aricaleCat.name);
-                        $scope.dummyCat.push({name:aricaleCat.name});
+                        console.log("aricaleCat id  " + aricaleCat.id);
+                        console.log("aricaleCat name  " + aricaleCat.name);
+
+                        $scope.dummyCat.push({id:aricaleCat.id,name:aricaleCat.name});
                     });
 
-                    console.log($scope.dummyCat);
+                    console.log("aricaleCat dummy  "+$scope.dummyCat);
+                    console.log(JSON.stringify($scope.dummyCat));
 
                     $scope.articleCat = {
-                        "values":  $scope.dummyCat
+                        "value" : $scope.dummyCat.id,
+                        "values": $scope.dummyCat
                     };
                 }).error(function (error) {
                     toastr.error('Articles Category List Loading Error', 'Message', {
@@ -106,6 +110,7 @@
                     });
                 })
         }else{
+            console.log("initialData  : " + initialData);
             $scope.article = initialData;
             $scope.serverImg = initialData.imageUrl;
             $scope.mainImg = initialData.imageUrl;
@@ -113,10 +118,15 @@
             $scope.tmpImage[0] = SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article/"+initialData.imageUrl;
 
+
             $scope.seletedCategoryId = initialData.categoryId;
+            console.log("1 $scope.seletedCategoryId  : " + $scope.seletedCategoryId);
 
             articleService.getArticleCategoryByAppId()
                 .success(function (data) {
+                    console.log("inside final else");
+                    console.log("data  : " + data);
+
                     $scope.articleCat = {
                         "value" : initialData.categoryId,
                         "values":  data
@@ -150,11 +160,12 @@
         };
 
         $scope.changeArticleCat = function(catId){
-            console.log(catId);
+            console.log(catId.id);
             if (catId=="Create New Category"){
                 mainMenuService.showMainMenuDialog();
             }
-            $scope.seletedCategoryId = catId;
+            $scope.seletedCategoryId = catId.id;
+            console.log("2 seletedCategoryId   : "+ $scope.seletedCategoryId);
         }
 
         $scope.deleteImg = function(index){
@@ -224,6 +235,7 @@
                     isImageUpdate = false;
                 }
 
+                console.log("3 $scope.seletedCategoryId  : "+$scope.seletedCategoryId);
                 articleService.publishArticle(file,article.id,$scope.seletedCategoryId,article.title, article.desc, 
                                               $rootScope.appId,$scope.isNewArticle,isImageUpdate)
                     .progress(function (evt) {
