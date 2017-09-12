@@ -47,6 +47,7 @@ module.exports.routes = {
     'POST /auth/resetPassword': 'UserController.forgotPasswordReset',
     'POST /auth/google': 'AuthController.googleAuth',
     'POST /auth/facebook': 'AuthController.facebookAuth',
+    'POST /api/updateUserAdNetwork': 'AuthController.updateUserAdNetwork',
     'GET /api/getYourselfReason': 'AuthController.getYourselfReason',
 
     /***
@@ -316,8 +317,13 @@ module.exports.routes = {
      'POST  /edit/getPublishDetails': 'technicalSupport/TechnicalSupportController.getPublishDetails',
      'GET    /edit/getPushConfigDetails': 'technicalSupport/TechnicalSupportController.getPushConfigDetails',
      'POST   /edit/savePushConfigDetails': 'technicalSupport/TechnicalSupportController.savePushConfigDetails',
+     'POST   /edit/saveAdNetwork': 'technicalSupport/TechnicalSupportController.saveAdNetwork',
+    'POST   /edit/deleteAdNetwork': 'technicalSupport/TechnicalSupportController.deleteAdNetwork',
      'POST   /edit/changePublishStatus': 'technicalSupport/TechnicalSupportController.changePublishStatus',
      'GET  /edit/getAlluserData': 'technicalSupport/TechnicalSupportController.getAlluserData',
+    'GET  /edit/getAllAduserData': 'technicalSupport/TechnicalSupportController.getAllAduserData',
+    'GET  /edit/getAllAddNetworksData': 'technicalSupport/TechnicalSupportController.getAllAddNetworks',
+    'GET  /edit/getAdNetwork': 'technicalSupport/TechnicalSupportController.getAddNetwork',
 
     /**
      * IPG Controller

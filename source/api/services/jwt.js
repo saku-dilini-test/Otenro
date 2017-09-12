@@ -19,7 +19,7 @@ module.exports = function(user,res){
         function(err, token) {
             if(err)return err;
             res.status(200).json(
-                {user : { email : user.email , sub : user.id,userRoles : user.userRole  }
+                {user : { email : user.email , sub : user.id,userRoles : user.userRole, isNewUser:  user.isNew }
                     ,token : token });
         }
     );

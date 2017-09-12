@@ -47,6 +47,42 @@ module.exports = {
 
         },
 
+    getAllAduserData : function (req, res) {
+        var searchAd = {
+            adagent : {$ne : null}
+        }
+        User.find(searchAd).exec(function (err, publishedData) {
+            if (err) res.send(err);
+            res.send(publishedData);
+
+        });
+
+    },
+
+
+    getAllAddNetworks : function (req, res) {
+
+        AdAgentInfo.find().exec(function (err, publishedData) {
+            if (err) res.send(err);
+            res.send(publishedData);
+
+        });
+
+    },
+
+    getAddNetwork : function (req, res) {
+        var appId = req.param('addname');
+        var searchAd = {
+            adagentname :appId
+        }
+        AdAgentInfo.findOne(searchAd).exec(function (err, publishedData) {
+            if (err) res.send(err);
+            res.send(publishedData);
+
+        });
+
+    },
+
 
     /**
      * get Publish Details of the Application
@@ -80,6 +116,50 @@ module.exports = {
             if (err) res.send(err);
             res.json(pushConfigData);
         });
+
+    },
+
+    /**
+     * Save add network
+     * @param req
+     * @param res
+     */
+    saveAdNetwork : function (req, res){
+        var adNetwork = req.body;
+
+        if(adNetwork.id){
+            var searchAd = {
+                id :adNetwork.id
+            }
+            AdAgentInfo.update(searchAd, adNetwork).exec(function (err, result) {
+                if (err) return res.send(err);
+                return res.send(200, {message: 'Ad network has been  successfully updated'});
+            });
+        }else{
+            AdAgentInfo.create(adNetwork).exec(function (err, result) {
+                if (err) return res.send(err);
+                return res.send(200, {message: 'Ad network has been  successfully added'});
+            });
+        }
+
+    },
+
+    /**
+     * Delete add network
+     * @param req
+     * @param res
+     */
+    deleteAdNetwork : function (req, res){
+        var adNetwork = req.body;
+
+        var searchAd = {
+            id :adNetwork.id
+        }
+        AdAgentInfo.destroy(searchAd).exec(function (err, result) {
+            if (err) return res.send(err);
+            return res.send(200, {message: 'Ad network has been  successfully deleted'});
+        });
+
 
     },
 

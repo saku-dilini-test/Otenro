@@ -46,6 +46,18 @@ module.exports = {
       });
 
   },
+    updateUserAdNetwork: function(req, res) {
+
+        User.findOne({email: req.body.email}, function foundUser(err, user) {
+            if (err) return res.negotiate(err);
+            if (user){
+                User.update({email : req.body.email},{adagent : req.body.adagentname,affid: req.body.affid }, function(err1){
+                    res.send({response:'OK'});
+                });
+            }
+
+        });
+    },
   /*
     Authentication for the forgot password users
   */
@@ -78,6 +90,11 @@ module.exports = {
             yourselfReason : req.body.yourselfReason,
               lastLoginTime : new Date()
           };
+          if(req.body.adagent){
+              newUserDetails.adagent = req.body.adagent;
+              newUserDetails.affid = req.body.affid;
+          }
+
           User.create(newUserDetails).exec(function(err, user) {
             if (err) {
               return res.negotiate(err);
@@ -89,10 +106,15 @@ module.exports = {
     });
   },
     sendAgentInfo: function(req, res) {
-
-
-        var url = "http://www.securebill.mobi/bg.php?clickID="+req.body.clickid+"&idcallback=bda90516cfadcac19221685973261a75";
-
+        var retUrl = req.body.returnUrl;
+        var paramseperator = "?";
+        if(retUrl.indexOf("?" > -1)){
+            paramseperator = "&"
+        }
+        var url = req.body.returnUrl + paramseperator +req.body.clickidparam + "=" +  req.body.clickid;
+        sails.log(url);
+        // var url = "http://www.securebill.mobi/bg.php?clickID="+req.body.clickid+"&idcallback=bda90516cfadcac19221685973261a75";
+        //
         request.get({
             url: url,
         }, function (error, response, data) {
@@ -106,11 +128,11 @@ module.exports = {
             var agentInfo = req.body;
             agentInfo.createdTime = Date.now();
             console.log(agentInfo);
-            AdAgentInfo.create(agentInfo).exec(function(err, user) {
-                if (err) {
-                    return res.negotiate(err);
-                }
-            });
+            // AdAgentInfo.create(agentInfo).exec(function(err, user) {
+            //     if (err) {
+            //         return res.negotiate(err);
+            //     }
+            // });
             res.send("ok");
 
 
@@ -153,12 +175,17 @@ module.exports = {
                   firstName: firstName,
                   lastName: lastName,
                   email: facebookEmail,
-                  facebookId : facebookId
+                  facebookId : facebookId,
+                    lastLoginTime : new Date()
                 }).exec(function(err, newUser) {
                   if (err) return res.negotiate(err);
+                    newUser.isNew = true;
                   createToken(newUser,res);
                 });
               } else {
+                  foundUser.isNew = false;
+                  User.update({email : foundUser.email},{lastLoginTime : new Date()}, function(err1){
+                  });
                 createToken(foundUser,res)
               }
             });
@@ -204,13 +231,18 @@ module.exports = {
                   firstName: firstName,
                   lastName: lastName,
                   email: googleEmail,
-                  googleId : googleId
+                  googleId : googleId,
+                    lastLoginTime : new Date()
                 }).exec(function(err, newUser) {
 
                   if (err) return res.negotiate(err);
+                    newUser.isNew = true;
                   createToken(newUser,res)
                 });
               } else {
+                  foundUser.isNew = false;
+                  User.update({email : foundUser.email},{lastLoginTime : new Date()}, function(err1){
+                  });
                 createToken(foundUser,res)
               }
             });
