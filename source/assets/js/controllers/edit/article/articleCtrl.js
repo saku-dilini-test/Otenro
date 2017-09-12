@@ -161,7 +161,7 @@
 
         $scope.changeArticleCat = function(catId){
             console.log(catId.id);
-            if (catId=="Create New Category"){
+            if (catId.id == 1){
                 mainMenuService.showMainMenuDialog();
             }
             $scope.seletedCategoryId = catId.id;
