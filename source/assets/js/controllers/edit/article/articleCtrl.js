@@ -71,14 +71,9 @@
                 .success(function (data) {
                     $scope.dummyCat.push({id:1,name:"Create New Category"});
                     data.forEach(function(aricaleCat) {
-                        console.log("aricaleCat id  " + aricaleCat.id);
-                        console.log("aricaleCat name  " + aricaleCat.name);
-
-                        $scope.dummyCat.push({id:aricaleCat.id,name:aricaleCat.name});
+                       $scope.dummyCat.push({id:aricaleCat.id,name:aricaleCat.name});
                     });
 
-                    console.log("aricaleCat dummy  "+$scope.dummyCat);
-                    console.log(JSON.stringify($scope.dummyCat));
 
                     $scope.articleCat = {
                         "value" : $scope.dummyCat.id,
@@ -110,7 +105,6 @@
                     });
                 })
         }else{
-            console.log("initialData  : " + initialData);
             $scope.article = initialData;
             $scope.serverImg = initialData.imageUrl;
             $scope.mainImg = initialData.imageUrl;
@@ -120,13 +114,10 @@
 
 
             $scope.seletedCategoryId = initialData.categoryId;
-            console.log("1 $scope.seletedCategoryId  : " + $scope.seletedCategoryId);
 
             articleService.getArticleCategoryByAppId()
                 .success(function (data) {
-                    console.log("inside final else");
-                    console.log("data  : " + data);
-
+                 
                     $scope.articleCat = {
                         "value" : initialData.categoryId,
                         "values":  data
@@ -160,12 +151,10 @@
         };
 
         $scope.changeArticleCat = function(catId){
-            console.log(catId.id);
             if (catId.id == 1){
                 mainMenuService.showMainMenuDialog();
             }
             $scope.seletedCategoryId = catId.id;
-            console.log("2 seletedCategoryId   : "+ $scope.seletedCategoryId);
         }
 
         $scope.deleteImg = function(index){
@@ -235,8 +224,7 @@
                     isImageUpdate = false;
                 }
 
-                console.log("3 $scope.seletedCategoryId  : "+$scope.seletedCategoryId);
-                articleService.publishArticle(file,article.id,$scope.seletedCategoryId,article.title, article.desc, 
+                articleService.publishArticle(file,article.id,$scope.seletedCategoryId,article.title, article.desc,
                                               $rootScope.appId,$scope.isNewArticle,isImageUpdate)
                     .progress(function (evt) {
                         
