@@ -17,7 +17,7 @@
         <div class="cartItems" ng-repeat="item in cartItems" >
           <div class="row shopping-cart-items no-padding">
             <div class="col col-33" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}</div>
-            <div class="col col-25" ><input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></div>
+            <div class="col col-25" ><input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty,cartItems.indexOf(item) )"></div>
             <div class="col" ng-model="item.total" >{{currency}}{{item.total*item.qty}}</div>
             <div class="col col-10"><a class="dark" ng-click="removeItem($index)"><i class="icon ion-ios-trash-outline"></i></a></div>
           </div>

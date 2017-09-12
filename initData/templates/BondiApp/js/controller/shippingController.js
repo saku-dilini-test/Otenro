@@ -101,11 +101,78 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
         var total= 0;
         var totalWeight= 0;
         var shippingCost = 0;
+        var weight = 0; //calculate single item weight
 
-        for(var i = 0; i < $rootScope.cart.cartItems.length; i++){
-            var product = $rootScope.cart.cartItems[i];
-            total = product.totWeight;
-            totalWeight += (total);
+//there are 3 stated when adding item to cart
+//position 3 - when add a new item in the begening
+//position 1 - adding the same item continously
+//position 2 - when we change the product item adding.
+
+        // if we triggerd the quantity change in the cart
+        if ($rootScope.parseEnable == true) {
+            //getting the parsed selected item index
+            var index = $rootScope.parseIndex;
+
+            //when we added the second item and change its value
+            if ($rootScope.position2 == true) {
+
+                //getting item weight of changed item (with the index)
+                weight = $rootScope.cart.cartItems[index].weight;
+
+                //resetting its total weight.
+                for (var i = 0; i < $rootScope.cart.cartItems.length; i++) {
+                    $rootScope.cart.cartItems[index].totWeight = weight * $rootScope.parseQty;;
+                }
+
+                //calculating the whole item total weight
+                for (var i = 0; i < $rootScope.cart.cartItems.length; i++) {
+                    var product = $rootScope.cart.cartItems[i];
+                    total = product.totWeight;
+                    totalWeight += (total);
+
+                }
+
+                // $rootScope.parseEnable=false;
+                $rootScope.position2 = false;
+                //when we add same item without changing the item (with value change)
+            } else {
+
+                var weight2 = 0;
+                //getting the parsed selected item index
+                var index = $rootScope.parseIndex;
+
+
+                //getting item weight of changed item (with the index)
+                weight2 = $rootScope.cart.cartItems[index].weight;
+
+                //resetting its total weight.
+                for (var i = 0; i < $rootScope.cart.cartItems.length; i++) {
+                    $rootScope.cart.cartItems[index].totWeight = weight2*$rootScope.parseQty;
+                }
+
+                //calculating the whole item total weight
+                for (var i = 0; i < $rootScope.cart.cartItems.length; i++) {
+                    var product = $rootScope.cart.cartItems[i];
+                    total = product.totWeight;
+                    totalWeight += (total);
+
+                }
+                // resetting the parsed values.
+                $rootScope.parseEnable = false;
+                $rootScope.parseQty = 0;
+            }
+
+            //Normal way to calculate the total weight, when we did not change
+            //the value from the cart.
+        } else {
+
+            for (var i = 0; i < $rootScope.cart.cartItems.length; i++) {
+                var product = $rootScope.cart.cartItems[i];
+                total = product.totWeight;
+                totalWeight += (total);
+
+            }
+
         }
 
         if(shippingDetails.shipping.shippingOption == "Flat Rate"){
