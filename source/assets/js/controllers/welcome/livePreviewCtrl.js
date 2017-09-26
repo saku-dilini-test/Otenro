@@ -126,11 +126,12 @@
 
                                 var encParam = btoa(data.data.appId);
                                 $state.go('user.editApp',{appId:data.data.appId, p:encParam });
+                                commerceService.showRemoveDefaultDataDialog("remove");
+
                             }
 
                         });
                     $mdDialog.hide(answer);
-                    commerceService.showRemoveDefaultDataDialog("remove");
                 }else{
                     loginFunction(agentInfo).then(function(id){
                         $scope.successDeleteFile($scope.userId, $scope.appId);
