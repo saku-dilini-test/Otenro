@@ -602,7 +602,7 @@
             // console.log($scope.data);
             if($scope.data == true){
                 $mdDialog.hide();
-                commerceService.showAddProductsDialog('products');
+                return commerceService.showAddProductsDialog(initialData.prodItem,true, null,'0', false)
             }else{
                 $mdDialog.hide();
                 mainMenuService.showMainMenuDialog();
