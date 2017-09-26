@@ -36,7 +36,7 @@
                 </thead>
 
                 <tbody>
-                <tr dir-paginate="app in appList | filter:search | itemsPerPage: 100">
+                <tr ng-repeat="app in appList">
                     <td><a href="{{serverURL}}templates/viewTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">{{app.id}}</a></td>
                     <td>{{app.appName}}</td>
                     <td>{{app.userId}}</td>
@@ -67,7 +67,7 @@
                             </thead>
 
                             <tbody>
-                            <tr dir-paginate="app in addNetworkList | filter:search | itemsPerPage: 100">
+                            <tr ng-repeat="app in addNetworkList">
                                 <td>{{app.adagentname}}</td>
                                 <td>{{app.clickid}}</td>
                                 <td>{{app.affid}}</td>
@@ -98,8 +98,7 @@
                             <th>isActive</th>
                             </thead>
                             <tbody>
-                            <tr dir-paginate="app in adUserList | filter:search | itemsPerPage: 100">
-                                <a ng-repeat="user in user">
+                            <tr ng-repeat="app in adUserList">
                                     <td> {{app.email}} </td>
                                     <td> {{app.adagent}} </td>
                                     <td> {{app.affid}} </td>
@@ -130,8 +129,7 @@
                         <th>Last login</th>
                         </thead>
                            <tbody>
-                           <tr dir-paginate="app in userList | filter:search | itemsPerPage: 100">
-                               <a ng-repeat="user in user">
+                           <tr ng-repeat="app in userList">
                             <td> {{$index +1}} </td>
                             <td> {{app.email}} </td>
                             <td> {{app.id}} </td>
