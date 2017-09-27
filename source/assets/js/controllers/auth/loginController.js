@@ -82,7 +82,12 @@
           toastr.success('Login Successful ', 'Message', {
             closeButton: true
           });
-          $state.go('user.dashboard');
+          if(data.data.user.isNewUser === true){
+              $state.go('user.templates');
+          }else{
+              $state.go('user.dashboard');
+          }
+
       }).catch(function(error){
       toastr.error('Please check your Email/Password', 'Error', {
              closeButton: true
