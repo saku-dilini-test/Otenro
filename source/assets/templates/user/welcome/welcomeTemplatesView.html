@@ -1,4 +1,9 @@
 <div ng-if="isAuthenticated" ng-include=" 'user/header/header.html' "></div>
+<!--Google Analytics-->
+<script>
+    ga('set', 'page', '/user/welcome/welcomeTemplatesView.html');
+    ga('send', 'pageview');
+</script>
 <div ng-if="nonAuthenticated">
     <div class="header-beta">We are currently in open beta and you could experience minor issues,
         please do give us feedback on issues and any suggestions to help us improve the system.

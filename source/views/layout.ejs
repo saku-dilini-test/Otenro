@@ -28,6 +28,21 @@
             + Use a different or additional preprocessor, like SASS, SCSS or Stylus
     -->
 
+    <!--Google Analytics-->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+//        ga('create', 'UA-106780646-1', {
+//            'cookieDomain': 'none'
+//        });
+        ga('create', 'UA-87408154-1', 'auto');
+        ga('set', 'page', '/');
+        ga('send', 'pageview');
+    </script>
+
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
   <!--need to inject the font-awesome.css from the library-->
   <link data-require="font-awesome@*" data-semver="4.2.0" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
@@ -191,8 +206,8 @@
     <script src="/js/controllers/edit/commerce/currencyCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/inventoryCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/ipgCtrl.js"></script>
-    <script src="/js/controllers/edit/commerce/proEditImageCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/productsCtrl.js"></script>
+    <script src="/js/controllers/edit/commerce/proEditImageCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/shippingCtrl.js"></script>
     <script src="/js/controllers/edit/commerce/taxCtrl.js"></script>
     <script src="/js/controllers/edit/design/templateCtrl.js"></script>
@@ -242,7 +257,6 @@
     <script src="/js/directives/ignoreMouseWheel.js"></script>
     <script src="/js/directives/ng-enter.js"></script>
     <script src="/js/directives/ng-image-compress.js"></script>
-    <script src="/js/services/TempUnavilable/comingSoonService.js"></script>
     <script src="/js/services/auth/accessLevels.js"></script>
     <script src="/js/services/auth/auth.js"></script>
     <script src="/js/services/auth/currentUser.js"></script>
@@ -271,6 +285,7 @@
     <script src="/js/services/edit/styles/stylesService.js"></script>
     <script src="/js/services/salesAndPromotion/salesAndPromotionService.js"></script>
     <script src="/js/services/technicalSupport/technicalSupportService.js"></script>
+    <script src="/js/services/TempUnavilable/comingSoonService.js"></script>
     <script src="/js/services/treeSource/services/helper.js"></script>
     <script src="/js/services/userProfile/userProfileResource.js"></script>
     <script src="/js/services/userProfile/userProfileService.js"></script>
@@ -304,16 +319,16 @@
     <!--TEMPLATES END-->
 
     <!-- Google Analytics -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    <!--<script>-->
+      <!--(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){-->
+                <!--(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),-->
+              <!--m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)-->
+      <!--})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');-->
 
-      ga('create', 'UA-87408154-1', 'auto');
-      ga('send', 'pageview');
+      <!--ga('create', 'UA-87408154-1', 'auto');-->
+      <!--ga('send', 'pageview');-->
 
-    </script>
+    <!--</script>-->
 
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">

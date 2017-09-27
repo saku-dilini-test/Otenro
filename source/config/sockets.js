@@ -35,12 +35,13 @@ module.exports.sockets = {
   //// A array of allowed transport methods which the clients will try to use.
   //// The flashsocket transport is disabled by default
   //// You can enable flashsockets by adding 'flashsocket' to this list:
-  //transports: [
-  //  'websocket',
+  transports: [
+      'polling',
+      'websocket',
   //  'htmlfile',
   //  'xhr-polling',
   //  'jsonp-polling'
-  //],
+  ]
   //
   //
   //
