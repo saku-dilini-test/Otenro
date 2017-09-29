@@ -1,5 +1,5 @@
 angular.module('app')
-  .config(function($stateProvider, $urlRouterProvider , AccessLevels) {
+  .config(function($stateProvider, $urlRouterProvider ,$locationProvider, AccessLevels) {
 
     $stateProvider
       .state('anon', {
@@ -163,5 +163,5 @@ angular.module('app')
         ;
 
     $urlRouterProvider.otherwise('/');
-
+      $locationProvider.html5Mode(true);
   });
