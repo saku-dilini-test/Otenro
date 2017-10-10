@@ -263,5 +263,26 @@ module.exports = {
       if (err) return done(err);
       res.send(result);
     });
+  },
+
+  /**
+   * Redirect to addNetwork page
+   **/
+  fromAddNetwork : function (req, res) {
+      var baseUrl = sails.getBaseUrl();
+      var urlParamString = "";
+      var requestParameters = req.allParams();
+      var length = Object.keys(requestParameters).length;
+      for(var key in requestParameters){
+          if(length == 1){
+              urlParamString += key + '=' + requestParameters[key];
+          }
+          if(length > 1){
+              urlParamString += key + '=' + requestParameters[key] + '&';
+              length = length - 1;
+          }
+
+      }
+      return res.redirect( baseUrl + '/#/fromAddNetwork?' + urlParamString );
   }
 };

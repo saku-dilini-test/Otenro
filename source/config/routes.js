@@ -49,6 +49,7 @@ module.exports.routes = {
     'POST /auth/facebook': 'AuthController.facebookAuth',
     'POST /api/updateUserAdNetwork': 'AuthController.updateUserAdNetwork',
     'GET /api/getYourselfReason': 'AuthController.getYourselfReason',
+    'GET /fromAddNetwork': 'AuthController.fromAddNetwork',
 
     /***
      * Billing Data
