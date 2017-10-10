@@ -269,7 +269,7 @@ module.exports = {
    * Redirect to addNetwork page
    **/
   fromAddNetwork : function (req, res) {
-      var baseUrl = sails.getBaseUrl();
+      var baseUrl = sails.config.REDIRECT_URL;
       var urlParamString = "";
       var requestParameters = req.allParams();
       var length = Object.keys(requestParameters).length;

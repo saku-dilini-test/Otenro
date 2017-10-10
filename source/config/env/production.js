@@ -51,6 +51,7 @@ module.exports = {
   // APP FILE SERVER Config
   APP_FILE_SERVER : '/home/otenro/appFileServer/',
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
-  TEMPLATES_PATH : '/home/otenro/sslOtenro3/Otenro/initData/templates/'
+  TEMPLATES_PATH : '/home/otenro/sslOtenro3/Otenro/initData/templates/',
+  REDIRECT_URL : 'https://dashboard.otenro.com'
 
 };
