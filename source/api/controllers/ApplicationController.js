@@ -195,6 +195,7 @@ module.exports = {
                       appName : req.body.appName,
                       appTempPath :tempAppDirPath,
                       templateId : req.body.templateId,
+                      isNew : false,
                       userId : userId,
                       status : "DRAFT",
                       displayImage: req.body.templateUrl,
@@ -553,12 +554,15 @@ module.exports = {
                 templateCategory = req.body.templateCategory,
                 userId = req.body.userId,
                 tempAppDirPath = config.ME_SERVER + userId + '/progressiveTemplates/',
-                templatePath = config.PROGRESSIVE_TEMPLATES_PATH + "test-app2",
+                templatePath = config.PROGRESSIVE_TEMPLATES_PATH + templateName,
                 appName = req.body.appName,
                 serverTmp="http://localhost:port",
                 serverOrg=config.server.host+":1337",
                 isAppNameAvailable=false;
-            var appQuery = { 
+
+        console.log("templatePath  : " + templatePath);
+
+        var appQuery = { 
                 "userId":userId, 
                 "appName":req.body.appName
              }
@@ -585,7 +589,7 @@ module.exports = {
                               },
                               button : true
                           };
-                      if(templateName == 'test-app'||templateName == 'foodDemoApp' ){
+                      if(templateName == 'test-app'||templateName == 'demo' ){
                           loginPath = '/#/app/login';
                           isApplyStyle = {
                               color : {
@@ -607,6 +611,7 @@ module.exports = {
                           appName : req.body.appName,
                           appTempPath :tempAppDirPath,
                           templateId : req.body.templateId,
+                          isNew : true,
                           userId : userId,
                           status : "DRAFT",
                           displayImage: req.body.templateUrl,
@@ -721,7 +726,7 @@ module.exports = {
                            * If Only foodDemoApp or foodDemoApp2 Category & Product Feed to DB
                            */
 
-                          if(templateName == 'test-app' || templateName == 'foodDemoApp'  ) {
+                          if(templateName == 'test-app' || templateName == 'demo'  ) {
                               var mainNavi = [{
                                   "name": "Promo",
                                   "link": "promo",

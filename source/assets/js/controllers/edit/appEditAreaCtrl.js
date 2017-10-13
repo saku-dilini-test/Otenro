@@ -14,9 +14,12 @@
 
         $rootScope.bodyClass = 'appEdit';
         $scope.contentUrl = true;
-
+console.log("$stateParams.is new  : " + $stateParams.isNew);
+        console.log("$stateParams.appId  : " + $stateParams.appId);
+        console.log("$stateParams.p  : " + $stateParams.p);
         var encParam = $stateParams.p;
         var decParamAppId = atob(encParam);
+        var templateCheck = $stateParams.isNew;
 
         if(!encParam){
             decParamAppId = $stateParams.appId;
@@ -53,12 +56,28 @@
 
 
 
+        if(templateCheck == true || templateCheck == 'true'){
 
+            console.log('inside web urls');
             $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
-            var urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+
+            $scope.appTemplateUrl = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+        }else{
+
+            console.log('inside mobile urls');
+            $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+
+            $scope.appTemplateUrl = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+        }
+
 
         // $http.get(urlPath)
         //     .success(function(){
@@ -67,7 +86,6 @@
         //     .error(function() {
         //         console.log("working2")
         //     });
-        $scope.appTemplateUrl=urlPath;
 
 
         //$scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id

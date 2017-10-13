@@ -25,6 +25,7 @@
 
         $scope.goToEdit = function(item){
         if(item.appName == "preview"){
+            console.log('inside preview');
             for(var i =0; i<$rootScope.templates.length; i++){
                 if(item.templateId == $rootScope.templates[i].id){
                     $scope.templateName = $rootScope.templates[i].template_name;
@@ -37,17 +38,29 @@
                 appId: item.id,
                 tempUrl: $scope.tempUrl,
                 tempName: $scope.templateName,
-                tempCategory: $scope.tempCategory
-            })
+                tempCategory: $scope.tempCategory,
+                isNew: item.isNew
+            });
         }else{
+            console.log('inside create');
 
-            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                           +"&appId="+item.id+"&"+new Date().getTime()+"/";
+            var urlPath;
+            if(item.isNew == 'true'){
+
+                urlPath  =  SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
+                    +"&appId="+item.id+"&"+new Date().getTime()+"/";
+
+            }else{
+
+                urlPath  =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                    +"&appId="+item.id+"&"+new Date().getTime()+"/";
+
+            }
 
             mySharedService.prepForBroadcast(urlPath);
             var encParam = btoa(item.id);
 
-            $state.go('user.editApp',{appId: item.id, p:encParam});
+            $state.go('user.editApp',{tempName:item.templateName,isNew:item.isNew ,appId: item.id, p:encParam});
         }
       }
     }

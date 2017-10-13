@@ -48,6 +48,7 @@ angular.module('app')
             params: {
                 userId:null,
                 appId: null,
+                isNew: null,
                 tempUrl:null,
                 tempName:null,
                 tempCategory: null,
@@ -132,8 +133,9 @@ angular.module('app')
             }
           })
       .state('user.editApp',{
-          url :'/appedit/:p',
+          url :'/appedit/:p/:isNew',
           params: {
+              isNew: null,
                 appId: null,
                 p: null
           },

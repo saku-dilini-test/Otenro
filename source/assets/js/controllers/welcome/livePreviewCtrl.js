@@ -19,7 +19,7 @@
     $http,$state,ME_APP_SERVER,$auth,toastr,$cookieStore,$cookies,$interval,$q,$log) {
         $scope.encParam = $stateParams.p;
         var decParams = atob($scope.encParam);
-
+        console.log("decParams  : " + decParams);
         var splitParams = decParams.split("/");
 
         welcomeTemplatesResource.getTemplates().success(function(data){
@@ -53,8 +53,9 @@
         $scope.tempUrl = splitParams[2];
         $scope.tempName = splitParams[4];
         $scope.tempCategory = splitParams[5];
+        $scope.isNew = splitParams[6];
         $scope.contentUrl = true;
-
+console.log("$scope.isNew  : " + $scope.isNew);
         var userID = splitParams[0];
         var appID  = splitParams[1];
 
@@ -88,7 +89,10 @@
             });
         };
 
-        $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory) {
+        $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory,isNew) {
+            console.log("templateName  : " + templateName);
+            console.log("isNew  : " + isNew);
+
             var agentInfo = {
                 clickid : $stateParams.clickid,
                 affid:$stateParams.affid
@@ -100,6 +104,7 @@
                   closeButton: true
             });
         }
+
         else{
                 if ($auth.isAuthenticated()) {
                        $scope.successDeleteFile($scope.userId, $scope.appId);
@@ -112,24 +117,49 @@
                         'userId':$auth.getPayload().id
 
                     };
+                    console.log('live preview is new :  ' + isNew);
 
-                        welcomeTemplatesResource.createApp(tempAppParams).then(function(data){
-                            if(data.data.appId == -1)
-                            {
+                    if(isNew == 'true' || isNew == true){
+                        console.log('inside web');
+
+                        welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
+                                            if(data.data.appId == -1)
+                                            {
+                                                toastr.error(data.data.message, 'Warning', {
+                                                    closeButton: true
+                                                });
+                                            }else{
+                                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
+
+                                                mySharedService.prepForBroadcast(url);
+
+                                                var encParam = btoa(data.data.appId);
+                                                $state.go('user.editApp',{isNew:isNew, appId:data.data.appId, p:encParam });
+                                            }
+
+                                        });
+
+                    }else {
+
+                        console.log('inside mobile');
+                        welcomeTemplatesResource.createApp(tempAppParams).then(function (data) {
+                            if (data.data.appId == -1) {
                                 toastr.error(data.data.message, 'Warning', {
                                     closeButton: true
                                 });
-                            }else{
-                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                    +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                            } else {
+                                var url = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
+                                    + '/templates/' + data.data.appId + '/?' + new Date().getTime();
 
                                 mySharedService.prepForBroadcast(url);
 
                                 var encParam = btoa(data.data.appId);
-                                $state.go('user.editApp',{appId:data.data.appId, p:encParam });
+                                $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
                             }
 
                         });
+                    }
                     $mdDialog.hide(answer);
                 }else{
                     loginFunction(agentInfo).then(function(id){
@@ -143,42 +173,83 @@
                             'userId':$auth.getPayload().id
                         };
 
-                        welcomeTemplatesResource.createApp(tempAppParams).then(function(data){
-                            if(data.data.appId == -1)
-                            {
-                                toastr.error(data.data.message, 'Warning', {
-                                    closeButton: true
-                                });
+                        if(isNew == 'true' || isNew == true){
 
-                                var encUserId = 'unknownUser' + "/";
-                                var encAppId = templateId + "/";
-                                var encTempUrl = templateUrl + "//";
-                                var encTempName = templateName + "/";
-                                var encTempCategory = templateCategory + "/";
+                                        welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
+                                            if(data.data.appId == -1)
+                                            {
+                                                toastr.error(data.data.message, 'Warning', {
+                                                    closeButton: true
+                                                });
 
-                                var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory);
+                                                var encUserId = 'unknownUser' + "/";
+                                                var encAppId = templateId + "/";
+                                                var encTempUrl = templateUrl + "//";
+                                                var encTempName = templateName + "/";
+                                                var encTempCategory = templateCategory + "/";
+                                                var encIsNew = isNew + "/";
 
-                                $state.go('anon.livePreview', {
-                                    userId: 'unknownUser',
-                                    appId: templateId,
-                                    tempUrl: templateUrl,
-                                    tempName: templateName,
-                                    tempCategory: templateCategory,
-                                    p: encryptedURL
-                                });
+                                                var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory + encIsNew);
+
+                                                $state.go('anon.livePreview', {
+                                                    userId: 'unknownUser',
+                                                    appId: templateId,
+                                                    tempUrl: templateUrl,
+                                                    tempName: templateName,
+                                                    tempCategory: templateCategory,
+                                                    p: encryptedURL
+                                                });
 
 
 
-                            }else {
-                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                    +'/templates/'+data.data.appId+'/?'+new Date().getTime();
+                                            }else {
+                                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+                                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
 
-                                mySharedService.prepForBroadcast(url);
+                                                mySharedService.prepForBroadcast(url);
 
-                                var encParam = btoa(data.data.appId);
-                                $state.go('user.editApp', {appId: data.data.appId, p: encParam});
-                            }
-                        });
+                                                var encParam = btoa(data.data.appId);
+                                                $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
+                                            }
+                                        });
+                        }else {
+
+                            welcomeTemplatesResource.createApp(tempAppParams).then(function (data) {
+                                if (data.data.appId == -1) {
+                                    toastr.error(data.data.message, 'Warning', {
+                                        closeButton: true
+                                    });
+
+                                    var encUserId = 'unknownUser' + "/";
+                                    var encAppId = templateId + "/";
+                                    var encTempUrl = templateUrl + "//";
+                                    var encTempName = templateName + "/";
+                                    var encTempCategory = templateCategory + "/";
+                                    var encIsNew = isNew + "/";
+
+                                    var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory + encIsNew);
+
+                                    $state.go('anon.livePreview', {
+                                        userId: 'unknownUser',
+                                        appId: templateId,
+                                        tempUrl: templateUrl,
+                                        tempName: templateName,
+                                        tempCategory: templateCategory,
+                                        p: encryptedURL
+                                    });
+
+
+                                } else {
+                                    var url = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
+                                        + '/templates/' + data.data.appId + '/?' + new Date().getTime();
+
+                                    mySharedService.prepForBroadcast(url);
+
+                                    var encParam = btoa(data.data.appId);
+                                    $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
+                                }
+                            });
+                        }
                         $mdDialog.hide(answer);
                     });
 
@@ -191,6 +262,8 @@
 
 
         $scope.answerProgressive = function(answer,templateId, templateUrl, templateName,templateCategory) {
+
+            console.log("answer " + answer + "templateId : " + templateId)
             var agentInfo = {
                 clickid : $stateParams.clickid,
                 affid:$stateParams.affid
@@ -202,90 +275,90 @@
                       closeButton: true
                 });
             }
-            else{
-                if ($auth.isAuthenticated()) {
-                       $scope.successDeleteFile($scope.userId, $scope.appId);
-                    var tempAppParams = {
-                        'appName': $scope.appName,
-                        'templateId': templateId,
-                        'templateName': "test-app",
-                        'templateUrl':templateUrl,
-                        'templateCategory' : templateCategory,
-                        'userId':$auth.getPayload().id
-
-                    };
-
-                        welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
-                            if(data.data.appId == -1)
-                            {
-                                toastr.error(data.data.message, 'Warning', {
-                                    closeButton: true
-                                });
-                            }else{
-                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
-
-                                mySharedService.prepForBroadcast(url);
-
-                                var encParam = btoa(data.data.appId);
-                                $state.go('user.editApp',{appId:data.data.appId, p:encParam });
-                            }
-
-                        });
-                    $mdDialog.hide(answer);
-                }else{
-                    loginFunction(agentInfo).then(function(id){
-                        $scope.successDeleteFile($scope.userId, $scope.appId);
-                        var tempAppParams = {
-                            'appName': $scope.appName,
-                            'templateId': templateId,
-                            'templateName': "test-app",
-                            'templateUrl':templateUrl,
-                            'templateCategory' : templateCategory,
-                            'userId':$auth.getPayload().id
-                        };
-
-                        welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
-                            if(data.data.appId == -1)
-                            {
-                                toastr.error(data.data.message, 'Warning', {
-                                    closeButton: true
-                                });
-
-                                var encUserId = 'unknownUser' + "/";
-                                var encAppId = templateId + "/";
-                                var encTempUrl = templateUrl + "//";
-                                var encTempName = templateName + "/";
-                                var encTempCategory = templateCategory + "/";
-
-                                var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory);
-
-                                $state.go('anon.livePreview', {
-                                    userId: 'unknownUser',
-                                    appId: templateId,
-                                    tempUrl: templateUrl,
-                                    tempName: templateName,
-                                    tempCategory: templateCategory,
-                                    p: encryptedURL
-                                });
-
-
-
-                            }else {
-                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
-
-                                mySharedService.prepForBroadcast(url);
-
-                                var encParam = btoa(data.data.appId);
-                                $state.go('user.editApp', {appId: data.data.appId, p: encParam});
-                            }
-                        });
-                        $mdDialog.hide(answer);
-                    });
-
-                }
-            }
+            // else{
+            //     if ($auth.isAuthenticated()) {
+            //            $scope.successDeleteFile($scope.userId, $scope.appId);
+            //         var tempAppParams = {
+            //             'appName': $scope.appName,
+            //             'templateId': templateId,
+            //             'templateName': "test-app",
+            //             'templateUrl':templateUrl,
+            //             'templateCategory' : templateCategory,
+            //             'userId':$auth.getPayload().id
+            //
+            //         };
+            //
+            //             welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
+            //                 if(data.data.appId == -1)
+            //                 {
+            //                     toastr.error(data.data.message, 'Warning', {
+            //                         closeButton: true
+            //                     });
+            //                 }else{
+            //                     var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+            //                         +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
+            //
+            //                     mySharedService.prepForBroadcast(url);
+            //
+            //                     var encParam = btoa(data.data.appId);
+            //                     $state.go('user.editApp',{appId:data.data.appId, p:encParam });
+            //                 }
+            //
+            //             });
+            //         $mdDialog.hide(answer);
+            //     }else{
+            //         loginFunction(agentInfo).then(function(id){
+            //             $scope.successDeleteFile($scope.userId, $scope.appId);
+            //             var tempAppParams = {
+            //                 'appName': $scope.appName,
+            //                 'templateId': templateId,
+            //                 'templateName': "test-app",
+            //                 'templateUrl':templateUrl,
+            //                 'templateCategory' : templateCategory,
+            //                 'userId':$auth.getPayload().id
+            //             };
+            //
+            //             welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
+            //                 if(data.data.appId == -1)
+            //                 {
+            //                     toastr.error(data.data.message, 'Warning', {
+            //                         closeButton: true
+            //                     });
+            //
+            //                     var encUserId = 'unknownUser' + "/";
+            //                     var encAppId = templateId + "/";
+            //                     var encTempUrl = templateUrl + "//";
+            //                     var encTempName = templateName + "/";
+            //                     var encTempCategory = templateCategory + "/";
+            //
+            //                     var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory);
+            //
+            //                     $state.go('anon.livePreview', {
+            //                         userId: 'unknownUser',
+            //                         appId: templateId,
+            //                         tempUrl: templateUrl,
+            //                         tempName: templateName,
+            //                         tempCategory: templateCategory,
+            //                         p: encryptedURL
+            //                     });
+            //
+            //
+            //
+            //                 }else {
+            //                     var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+            //                         +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
+            //
+            //                     mySharedService.prepForBroadcast(url);
+            //
+            //                     var encParam = btoa(data.data.appId);
+            //                     $state.go('user.editApp', {appId: data.data.appId, p: encParam});
+            //                 }
+            //             });
+            //             $mdDialog.hide(answer);
+            //         });
+            //
+            //     }
+            // }
                 $scope.profileView = function () {
                     return userProfileService.showUserProfileDialog();
                 }
