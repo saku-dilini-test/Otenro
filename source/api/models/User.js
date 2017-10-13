@@ -79,6 +79,9 @@ module.exports = {
     affid:{
       type: 'string'
     },
+    loginCount:{
+      type: 'integer'
+    },
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;

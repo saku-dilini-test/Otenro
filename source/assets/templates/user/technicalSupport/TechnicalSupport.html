@@ -101,6 +101,7 @@
                             <th>Created Date</th>
                             <th>Last login</th>
                             <th>isActive</th>
+                            <th>Login Count</th>
                             </thead>
                             <tbody>
                             <tr ng-repeat="app in adUserList">
@@ -110,6 +111,7 @@
                                     <td> {{app.createdAt}} </td>
                                     <td> {{app.lastLoginTime}} </td>
                                     <td> {{app.isActive}} </td>
+                                    <td> {{app.loginCount}} </td>
                             </tr>
                             </tbody>
                         </table>
@@ -132,6 +134,7 @@
                         <th>About User</th>
                         <th>Created Date</th>
                         <th>Last login</th>
+                        <th>Login Count</th>
                         </thead>
                            <tbody>
                            <tr ng-repeat="app in userList">
@@ -141,6 +144,7 @@
                             <td> {{app.yourselfReason}} </td>
                             <td> {{app.createdAt}} </td>
                              <td> {{app.lastLoginTime}} </td>
+                             <td> {{app.loginCount}} </td>
                            </tr>
                            </tbody>
                     </table>
