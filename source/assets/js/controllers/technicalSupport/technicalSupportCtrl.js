@@ -258,8 +258,7 @@
                    }).error(function (error) {
                    toastr.error('Send mail Error', 'Warning', {closeButton: true});
                });
-
-
+               
            }
 
     }

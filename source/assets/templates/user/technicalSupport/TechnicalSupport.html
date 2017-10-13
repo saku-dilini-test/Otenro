@@ -32,7 +32,7 @@
         <form class="allItems" novalidate>
             <table class="table">
                 <thead class="obl-dashboard-apps">
-                <th>Id</th>
+                <th>Email</th>
                 <th>Application Name</th>
                 <th>User Id</th>
                 <th>Application Status</th>
@@ -42,7 +42,14 @@
 
                 <tbody>
                 <tr ng-repeat="app in appList">
-                    <td><a href="{{serverURL}}templates/viewTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">{{app.id}}</a></td>
+                    <td ><a href="{{serverURL}}templates/viewTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">
+                        <div data-ng-repeat="user in userList">
+                            <div ng-if="user.id==app.userId">
+                                {{user.email}}
+                            </div>
+                        </div>
+                    </a>
+                    </td>
                     <td>{{app.appName}}</td>
                     <td>{{app.userId}}</td>
                     <td>{{app.status}}</td>
