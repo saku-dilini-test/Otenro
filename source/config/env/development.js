@@ -25,16 +25,16 @@ module.exports = {
     level: "debug"
   },
 
-  /** ****** Custom Config ****** **/
-  // HOST URL 
-  HOST_URL : 'http://localhost',
-  // ME SERVER Config
-  ME_SERVER_URL : 'http://localhost:80/meServer/temp/',
-  ME_SERVER : 'c:/xampp/htdocs/meServer/temp/',
-  ME_SERVER_PORT : 80,
-  // APP FILE SERVER Config
-  APP_FILE_SERVER : 'c:/xampp/htdocs/meServer/temp/',
-  CLIENT_SECRET : '44f4f3be572ec33711a40a5b8b4',
-  TEMPLATES_PATH : 'd:/OfficeWork/Otenro/Otenro/initData/templates/',
-  PROGRESSIVE_TEMPLATES_PATH : 'd:/OfficeWork/Otenro/Otenro/initData/webTemplates/'
+    /** ****** Custom Config ****** **/
+    // HOST URL
+    HOST_URL : 'http://localhost:1337',
+    // ME SERVER Config
+    ME_SERVER_URL : 'http://localhost:80/meServer/otenro_server/',
+    ME_SERVER : '/var/www/html/meServer/otenro_server/',
+    ME_SERVER_PORT : 80,
+    // APP FILE SERVER Config
+    APP_FILE_SERVER : '/var/www/html/meServer/otenro_server/',
+    CLIENT_SECRET : '44f4f3be572ec33711a40a5b8b4',
+    TEMPLATES_PATH : '/home/dilakshan/Desktop/Otenro/initData/templates/',
+    PROGRESSIVE_TEMPLATES_PATH : '/home/dilakshan/Desktop/Otenro/initData/webTemplates/'
 };

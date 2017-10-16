@@ -45,7 +45,7 @@
             console.log('inside create');
 
             var urlPath;
-            if(item.isNew == 'true'){
+            if(item.isNew == 'true' || item.isNew == true){
 
                 urlPath  =  SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
                     +"&appId="+item.id+"&"+new Date().getTime()+"/";
