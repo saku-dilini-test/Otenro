@@ -52,6 +52,24 @@ angular.module('app')
             controller: 'LoginController',
             templateUrl : 'auth/addNetwork.html'
 
+      }).state('anon.addNetwork2',{
+            url :'/fromAddNetwork2?clickid&affid',
+            params: {
+                affid: null,
+                clickid:null
+            },
+            controller: 'LoginController',
+            templateUrl : 'auth/addNetwork2.html'
+
+      }).state('anon.addNetwork3',{
+            url :'/fromAddNetwork3?clickid&affid',
+            params: {
+                affid: null,
+                clickid:null
+            },
+            controller: 'LoginController',
+            templateUrl : 'auth/addNetwork3.html'
+
       }).state('anon.livePreview',{
             url :'/livePreview/:p',
             params: {
