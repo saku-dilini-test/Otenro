@@ -38,7 +38,11 @@ module.exports = {
           },
 
           success: function (){
-              User.update({email : req.body.email},{lastLoginTime : new Date()}, function(err1){
+              var loginCount = 0;
+              if(user.loginCount){
+                  loginCount = user.loginCount + 1;
+              }
+              User.update({email : req.body.email},{lastLoginTime : new Date(), loginCount : loginCount}, function(err1){
               });
             createToken(user,res);
           }
@@ -285,4 +289,5 @@ module.exports = {
       }
       return res.redirect( baseUrl + '/#/fromAddNetwork?' + urlParamString );
   }
+
 };
