@@ -32,9 +32,9 @@
         <form class="allItems" novalidate>
             <table class="table">
                 <thead class="obl-dashboard-apps">
-                <th>Email</th>
+                <th>Id</th>
                 <th>Application Name</th>
-                <th>User Id</th>
+                <th>Email</th>
                 <th>Application Status</th>
                 <th>Action</th>
                 <!--<th>User Details</th>-->
@@ -42,16 +42,19 @@
 
                 <tbody>
                 <tr ng-repeat="app in appList">
-                    <td ><a href="{{serverURL}}templates/viewTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">
+                    <td >
+                    <a href="{{serverURL}}templates/viewTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">
+                        {{app.id}}
+                    </a>
+                    </td>
+                    <td>{{app.appName}}</td>
+                    <td>
                         <div data-ng-repeat="user in userList">
                             <div ng-if="user.id==app.userId">
                                 {{user.email}}
                             </div>
                         </div>
-                    </a>
                     </td>
-                    <td>{{app.appName}}</td>
-                    <td>{{app.userId}}</td>
                     <td>{{app.status}}</td>
                     <td>
                         <a  ng-if="app.status=='PENDING'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>
