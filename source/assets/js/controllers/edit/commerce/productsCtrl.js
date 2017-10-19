@@ -458,6 +458,7 @@
 ////        $scope.buttonName = "Browse Image";
 
         $scope.cropImage = function () {
+            $scope.setAspectRatio();
             $scope.myImage = null;
             var handleFileSelect=function(evt) {
 
@@ -1052,6 +1053,33 @@
 
 
             };
+
+        /**
+         * set third navigation aspect ratios to $scope
+         * */
+        $scope.setAspectRatio = function () {
+            mainMenuService.getApplicationData($rootScope.appId)
+                .success(function (data) {
+                    if (data.templateId){
+                        mainMenuService.getTemplateData(data.templateId)
+                            .success(function (templateData) {
+                                if(templateData.thirdNaviAspectRatio){
+                                    $scope.thirdNaviAspectRatio = parseInt(templateData.thirdNaviAspectRatio);
+                                }
+                            }).error(function (err) {
+                            toastr.error(err.message, 'Warning', {
+                                closeButton: true
+                            });
+                        });
+                    }
+                }).error(function (err) {
+                toastr.error(err.message, 'Warning', {
+                    closeButton: true
+                });
+            });
+        };
+
+
 
     }
 })();
