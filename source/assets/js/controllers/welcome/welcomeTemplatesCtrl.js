@@ -54,7 +54,7 @@
         })
         };
   
-        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory,previewId) {
+        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory,previewId,isNew) {
                     var userId = '';
                     var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId=unknownUser"
                                     +"&appId="+previewId+"&"+new Date().getTime()+"/";
@@ -62,13 +62,18 @@
                     var affid = $location.search().affid;
                     var clickid = $location.search().clickid;
 
+            console.log("templateId  :" + templateId);
+            console.log("templateName : " + templateName);
+            console.log("previewId  :" + previewId );
+            console.log("isNew  :" + isNew );
+
                     var encUserId = 'unknownUser' + "/";
                     var encAppId = previewId + "/";
                     var encTempUrl = templateUrl + "/";
                     var encTempName = templateName + "/";
                     var encTempCategory = templateCategory + "/";
 
-                    var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory);
+                    var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory + isNew);
 
                     var url= urlPath+'/?'+new Date().getTime();
                     mySharedService.prepForBroadcast(url);
@@ -76,6 +81,7 @@
                         $state.go('anon.livePreview', {
                             userId: 'unknownUser',
                             appId: previewId,
+                            isNew: isNew,
                             tempUrl: templateUrl,
                             tempName: templateName,
                             tempCategory: templateCategory,

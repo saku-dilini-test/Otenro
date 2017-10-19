@@ -22,49 +22,31 @@
         console.log("decParams  : " + decParams);
         var splitParams = decParams.split("/");
 
-        welcomeTemplatesResource.getTemplates().success(function(data){
+        welcomeTemplatesResource.getTemplates().success(function (data) {
             $cookies.temp = data;
             $scope.templates = $cookies.temp;
-            for(var i = 0; i < $scope.templates.length ; i++){
-                if($scope.templates[i].template_name == splitParams[4]){
+            for (var i = 0; i < $scope.templates.length; i++) {
+                if ($scope.templates[i].template_name == splitParams[4]) {
                     $scope.templateViewName = $scope.templates[i].templateViewName;
                     $scope.templateViewDesc = $scope.templates[i].templateViewDesc;
                 }
             }
         });
 
-        var loginFunction = function(agentInfo){
+        var loginFunction = function (agentInfo) {
             var deferred = $q.defer();
             $state.go('anon.login', {
-                    affid: agentInfo.affid,
-                    clickid: agentInfo.clickid
+                affid: agentInfo.affid,
+                clickid: agentInfo.clickid
             });
             $interval(function () {
                 if ($auth.isAuthenticated()) {
                     var id = $auth.getPayload().id;
                     deferred.resolve(id);
                 }
-                })
+            })
             return deferred.promise;
         }
-
-        $scope.deviceView = "mobile";
-        $scope.changeDevice = function(deviceType){
-
-
-
-            if(deviceType == "mobile"){
-                $scope.deviceView = "mobile";
-            }else if(deviceType == "tablet"){
-                $scope.deviceView = "tabletView";
-
-            }else if(deviceType == "web"){
-                $scope.deviceView = "web";
-
-            }
-
-
-        };
 
         $scope.userId = splitParams[0]; //$stateParams.userId;
         $scope.appId = splitParams[1]; //$stateParams.appId;
@@ -75,11 +57,18 @@
         $scope.contentUrl = true;
         console.log("$scope.isNew  : " + $scope.isNew);
         var userID = splitParams[0];
-        var appID  = splitParams[1];
+        var appID = splitParams[1];
 
+        console.log("ME_APP_SERVER  : " + ME_APP_SERVER);
         // App URL create $statePrams
-        $scope.appTemplateUrl = ME_APP_SERVER+'/temp'+'/'+$scope.userId+'/templates'+'/'+$scope.appId+'/';
+        if ($scope.isNew == 'true' || $scope.isNew == true) {
+            $scope.appTemplateUrl = ME_APP_SERVER + '/temp' + '/' + $scope.userId + '/webTemplates' + '/' + $scope.appId + '/src';
+            $scope.urlPath1 = ME_APP_SERVER + '/temp' + '/' + $scope.userId + '/webTemplates' + '/' + $scope.appId + '/src';
 
+        }else{
+        $scope.appTemplateUrl = ME_APP_SERVER + '/temp' + '/' + $scope.userId + '/templates' + '/' + $scope.appId + '/';
+        // $scope.urlPath1 = ME_APP_SERVER+'/temp'+'/'+$scope.userId+'/webTemplates'+'/'+$scope.appId+'/';
+    }
         // App URL get from cookiesStore
         // $scope.appTemplateUrl = $cookieStore.get('url');
 
@@ -114,6 +103,7 @@
             var agentInfo = {
                 clickid : $stateParams.clickid,
                 affid:$stateParams.affid
+
             }
 
         if($scope.appName== null){
@@ -250,6 +240,7 @@
                                     $state.go('anon.livePreview', {
                                         userId: 'unknownUser',
                                         appId: templateId,
+                                        isNew: isNew,
                                         tempUrl: templateUrl,
                                         tempName: templateName,
                                         tempCategory: templateCategory,
