@@ -48,6 +48,24 @@
             return deferred.promise;
         }
 
+        $scope.deviceView = "mobile";
+        $scope.changeDevice = function(deviceType){
+
+
+
+            if(deviceType == "mobile"){
+                $scope.deviceView = "mobile";
+            }else if(deviceType == "tablet"){
+                $scope.deviceView = "tabletView";
+
+            }else if(deviceType == "web"){
+                $scope.deviceView = "web";
+
+            }
+
+
+        };
+
         $scope.userId = splitParams[0]; //$stateParams.userId;
         $scope.appId = splitParams[1]; //$stateParams.appId;
         $scope.tempUrl = splitParams[2];
