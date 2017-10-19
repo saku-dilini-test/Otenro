@@ -37,4 +37,5 @@ module.exports = {
   CLIENT_SECRET : '44f4f3be572ec33711a40a5b8b4',
   TEMPLATES_PATH : '/home/prasanna/project/Otenro/initData/templates/',
   REDIRECT_URL : 'http://localhost:1337'
+  PROGRESSIVE_TEMPLATES_PATH : '/home/dilakshan/Desktop/Otenro/initData/webTemplates/'
 };

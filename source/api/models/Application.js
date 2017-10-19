@@ -36,6 +36,11 @@ module.exports = {
             required: true
 
         },
+        isNew:{
+            type: 'boolean',
+            required: true
+
+        },
         appIcon:{
             type: 'string'
 

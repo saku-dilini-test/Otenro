@@ -67,7 +67,6 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
             $scope.loginModel.hide();
         }
      $scope.modal.show();
-     document.getElementById("signUpForm").reset();
     };
 
     // Triggered in the login modal to close it

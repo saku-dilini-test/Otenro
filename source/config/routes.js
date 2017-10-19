@@ -68,6 +68,7 @@ module.exports.routes = {
     'POST /app/designApps': 'ApplicationController.designApps',
     'POST /app/getAppsCommerce': 'ApplicationController.getAppsCommerce',
     'POST /app/viewTemplate': 'ApplicationController.viewTemplate',
+    'POST /app/createProgWebApp': 'ApplicationController.createProgWebApp',
     'POST /app/templatePreview': 'ApplicationController.templatePreview',
    
     'GET /api/getTemplateMetaData': 'DashboardController.getTemplateMetaData',
@@ -254,6 +255,7 @@ module.exports.routes = {
      ***/
 
     'GET /templates/viewTemplateUrl': 'template/TemplateController.viewTemplateUrl',
+    'GET /progressiveTemplates/viewProgUrl': 'template/TemplateController.viewProgUrl',
     'GET /templates/getContactUs': 'template/TemplateController.getContactUs',
     'GET /templates/getSpecificChild': 'template/TemplateController.getSpecificChild',
     'GET /templates/getProductsByAppId': 'template/TemplateController.getSubChildsByAppId',

@@ -1,0 +1,49 @@
+
+<app-carousel
+	 [slides]="slides">	 	
+</app-carousel>
+
+
+<div class="row">
+  	<div class="col-md-6 my-3">
+  		<img src="./assets/images/promotions/1.jpg" width="100%" />
+  	</div>
+  	<div class="col-md-6 my-3">
+  		<img src="./assets/images/promotions/2.jpg" class="img-responsive" width="100%" />
+  	</div>
+  </div>
+ <div class="row">
+  	<div class="col-md-4 my-3">
+  		<img src="./assets/images/promotions/3.jpg" class="img-responsive" width="100%"/>
+  	</div>
+  	<div class="col-md-4 my-3">
+  		<img src="./assets/images/promotions/4.jpg" class="img-responsive" width="100%"/>
+  	</div>
+  	<div class="col-md-4 my-3">
+  		<img src="./assets/images/promotions/5.jpg" class="img-responsive" width="100%"/>
+  	</div>
+  </div>
+
+
+	<h1 class="px-5 my-5">Popular Products</h1>
+		 <owl-carousel  [options]="owlOptions"
+		 [carouselClasses]="['owl-carousel', 'owl-theme', 'owl-theme_mod-a', 'enable-owl-carousel', 'js-zoom-gallery']">
+	       <div *ngFor="let img of images">
+	          <section>
+	              <div>
+	              	<a> <img src="http://lorempixel.com/160/180/{{img}}"/></a>
+	                <div class="name-category">category</div>
+	                <h4 >Epimetheus</h4>
+	                <div class="name-price color-primary">$450</div>
+	                <div class="button-hover">
+                      <a class="btn btn-primary text-white" (click)="navigate('product')">add to cart</a> 
+                  </div>
+	              </div>
+	            </section>
+	       </div>
+	    </owl-carousel>
+
+  <app-newsletter></app-newsletter>
+
+  <hr class="featurette-divider">
+

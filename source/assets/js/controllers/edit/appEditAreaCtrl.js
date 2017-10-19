@@ -5,18 +5,21 @@
     angular.module('appEdit').controller('AppEditAreaCtrl',[
         '$scope', '$stateParams', '$rootScope', '$auth', 'appEditResource', 'userProfileService', 'ME_APP_SERVER',
         'toastr','mySharedService','$interval','dashboardService','$mdDialog','$cookieStore','currencyService',
-        'templateService','SERVER_URL','$log','$state',
+        'templateService','SERVER_URL','$log','$state','$http',
         AppEditAreaCtrl]);
 
     function AppEditAreaCtrl($scope,$stateParams,$rootScope,$auth,appEditResource,userProfileService,ME_APP_SERVER,
                              toastr,mySharedService,$interval,dashboardService,$mdDialog,$cookieStore,currencyService,
-                             templateService,SERVER_URL,$log,$state){
+                             templateService,SERVER_URL,$log,$state,$http){
 
         $rootScope.bodyClass = 'appEdit';
         $scope.contentUrl = true;
-
+console.log("$stateParams.is new  : " + $stateParams.isNew);
+        console.log("$stateParams.appId  : " + $stateParams.appId);
+        console.log("$stateParams.p  : " + $stateParams.p);
         var encParam = $stateParams.p;
         var decParamAppId = atob(encParam);
+        var templateCheck = $stateParams.isNew;
 
         if(!encParam){
             decParamAppId = $stateParams.appId;
@@ -51,16 +54,47 @@
             }).error(function (error) {
         })
 
-        var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                       +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
 
-        $scope.appTemplateUrl=urlPath;
+
+        if(templateCheck == true || templateCheck == 'true'){
+
+            console.log('inside web urls');
+            $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+
+            $scope.appTemplateUrl = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+        }else{
+
+            console.log('inside mobile urls');
+            $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+
+            $scope.appTemplateUrl = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+        }
+
+
+        // $http.get(urlPath)
+        //     .success(function(){
+        //         console.log("working1")
+        //     })
+        //     .error(function() {
+        //         console.log("working2")
+        //     });
+
+
         //$scope.appTemplateUrl = ME_APP_SERVER+'temp/'+$auth.getPayload().id
         //                        +'/templates/'+$stateParams.appId;
 
 
         appEditResource.getSelectedApp({appId: $scope.appId})
             .success(function(data) {
+
                 /**
                  * TODO : This should change later according type of template category
                  * @type {boolean}
@@ -190,14 +224,19 @@
         };
 
 
+        $scope.deviceView = "mobile";
         $scope.changeDevice = function(deviceType){
 
+
+
             if(deviceType == "mobile"){
-                $scope.contentUrl = true;
-                $scope.tabletView = "";
-            }else{
-                $scope.contentUrl = false;
-                $scope.tabletView = "tabletView";
+                $scope.deviceView = "mobile";
+            }else if(deviceType == "tablet"){
+                $scope.deviceView = "tabletView";
+
+            }else if(deviceType == "web"){
+                $scope.deviceView = "web";
+
             }
 
 

@@ -53,13 +53,15 @@
 .mdapp-content-livePreview{
     min-height: 762px;
     background-color: #F2F2F2;
-   /* padding-left: 270px;*/
     -webkit-transition: 0.4s linear;
     -moz-transition: 0.4s linear;
     -o-transition: 0.4s linear;
     transition: 0.4s linear;
-    margin-top: -380px;
-    margin-left: inherit;
+    margin-left: 36%;
+    width: 64%;
+    text-align:center;
+    position: absolute;
+    top: 130px;
 }
 .mdapp-content{
     min-height: 762px;
@@ -100,6 +102,11 @@
 .mdapp-device-selector{
     font-weight: 300;
     padding-top: 35px;
+}
+.mdapp-device-selector2{
+    font-weight: 300;
+    padding-top: 35px;
+    margin-left:35%;
 }
 
 .mdapp-device-selector p{
@@ -212,8 +219,10 @@
     width: 324px;
 }
 
+
+
 .tabletView .device-simulator{
-    width: 63%;
+    width: 700px;;
 }
 
 .download-section{

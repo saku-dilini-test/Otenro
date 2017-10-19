@@ -18,6 +18,9 @@
             createApp:function(tempAppParams){
                 return $http.post(SERVER_URL + 'app/viewTemplate', tempAppParams);
             },
+            createProgApp:function(tempAppParams){
+                return $http.post(SERVER_URL + 'app/createProgWebApp', tempAppParams);
+            },
             deletePreviewTemp : function(appParams){
                 return $http.post(SERVER_URL + 'templates/deletePreviewTemp',appParams);
             },
