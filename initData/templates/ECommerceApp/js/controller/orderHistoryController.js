@@ -26,5 +26,7 @@ mobileApp.controller('orderHistoryCtrl', function($scope,$rootScope,constants,$h
     $http.get(constants.SERVER_URL + '/templates/getOrdersOfUser?appId=' + $scope.appId + '&userId=' + $scope.appUserId)
         .success(function(data){
             $scope.orderHistory = angular.fromJson(data);
-        });
+        }).error(function(err) {
+        alert('warning', "Unable to get Products Selected Category", err.message);
+    });
 });
