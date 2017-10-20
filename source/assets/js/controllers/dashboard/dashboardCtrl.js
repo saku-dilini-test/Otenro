@@ -16,7 +16,8 @@
             SERVER_URL) {
         dashboardService.getAllApps().success(function (data) {
             $rootScope.widgets=data;
-            $scope.path = ME_APP_SERVER+"temp/";
+            $scope.path = ME_APP_SERVER+"otenro_server/";
+
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
                 closeButton: true
@@ -43,24 +44,25 @@
             });
         }else{
             console.log('inside create');
+            var encParam = btoa(item.id);
 
             var urlPath;
             if(item.isNew == 'true' || item.isNew == true){
 
                 urlPath  =  "http://localhost:3000/meServer/otenro_server/" + $auth.getPayload().id
                     + "/progressiveTemplates/" + $rootScope.appId + "/src";
+                $state.go('user.editWebApp',{tempName:item.templateName,isNew:item.isNew ,appId: item.id, p:encParam});
 
             }else{
 
                 urlPath  =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
                     +"&appId="+item.id+"&"+new Date().getTime()+"/";
+                $state.go('user.editApp',{tempName:item.templateName,isNew:item.isNew ,appId: item.id, p:encParam});
 
             }
 
             mySharedService.prepForBroadcast(urlPath);
-            var encParam = btoa(item.id);
 
-            $state.go('user.editApp',{tempName:item.templateName,isNew:item.isNew ,appId: item.id, p:encParam});
         }
       }
     }

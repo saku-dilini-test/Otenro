@@ -82,11 +82,11 @@
         console.log("ME_APP_SERVER  : " + ME_APP_SERVER);
         // App URL create $statePrams
         if ($scope.isNew == 'true' || $scope.isNew == true) {
-            $scope.appTemplateUrl = ME_APP_SERVER + '/temp' + '/' + $scope.userId + '/webTemplates' + '/' + $scope.appId + '/src';
-            $scope.urlPath1 = ME_APP_SERVER + '/temp' + '/' + $scope.userId + '/webTemplates' + '/' + $scope.appId + '/src';
+            $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/webTemplates' + '/' + $scope.appId + '/src';
+            $scope.urlPath1 = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/webTemplates' + '/' + $scope.appId + '/src';
 
         }else{
-        $scope.appTemplateUrl = ME_APP_SERVER + '/temp' + '/' + $scope.userId + '/templates' + '/' + $scope.appId + '/';
+        $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/templates' + '/' + $scope.appId + '/';
         // $scope.urlPath1 = ME_APP_SERVER+'/temp'+'/'+$scope.userId+'/webTemplates'+'/'+$scope.appId+'/';
     }
         // App URL get from cookiesStore
@@ -162,7 +162,7 @@
                                                 mySharedService.prepForBroadcast(url);
 
                                                 var encParam = btoa(data.data.appId);
-                                                $state.go('user.editApp',{isNew:isNew, appId:data.data.appId, p:encParam });
+                                                $state.go('user.editWebApp',{isNew:isNew, appId:data.data.appId, p:encParam });
                                             }
 
                                         });
@@ -236,7 +236,7 @@
                                                 mySharedService.prepForBroadcast(url);
 
                                                 var encParam = btoa(data.data.appId);
-                                                $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
+                                                $state.go('user.editWebApp', {isNew:isNew, appId: data.data.appId, p: encParam});
                                             }
                                         });
 

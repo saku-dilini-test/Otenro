@@ -99,10 +99,16 @@ module.exports.routes = {
     'POST /edit/applyStyleImage/applyBackgroundImage': 'edit/style/StyleController.applyBackgroundImage',
     'POST /edit/addStyleImage/addBackgroundImage': 'edit/style/StyleController.addBackgroundImage',
     'POST /edit/addStyleColor': 'edit/style/StyleController.addStyleColor',
-  /*  'POST /edit/addLogoImage': 'edit/style/StyleController.addLogoImage',*/
+    'POST /edit/addWebStyleColor': 'edit/style/webStyleController.addWebStyleColor',
+
+    /*  'POST /edit/addLogoImage': 'edit/style/StyleController.addLogoImage',*/
     // 'POST /edit/addBackgroundColor' : 'style/StyleController.addBackgroundColor',
     'POST /edit/addStyleFontFamily': 'edit/style/StyleController.addStyleFontFamily',
+    'POST /edit/addWebStyleFontFamily': 'edit/style/webStyleController.addWebStyleFontFamily',
+
     'POST /edit/addStyleFontSize': 'edit/style/StyleController.addStyleFontSize',
+    'POST /edit/addWebStyleFontSize': 'edit/style/webStyleController.addWebStyleFontSize',
+
     'POST /edit/addStyleFontWeight': 'edit/style/StyleController.addStyleFontWeight',
     'POST /edit/addStyleButtonBorderWidth': 'edit/style/StyleController.addStyleButtonBorderWidth',
     'POST /edit/addStyleButtonBorderRadius': 'edit/style/StyleController.addStyleButtonBorderRadius',

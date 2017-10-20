@@ -180,6 +180,17 @@ angular.module('app')
           templateUrl : 'user/edit/appEditAreaView.html'
 
        })
+         .state('user.editWebApp',{
+             url :'/webappedit/:p/:isNew',
+             params: {
+                 isNew: null,
+                 appId: null,
+                 p: null
+             },
+             controller : 'AppEditAreaCtrl',
+             templateUrl : 'user/edit/webAppEditAreaView.html'
+
+         })
         ;
 
     $urlRouterProvider.otherwise('/');
