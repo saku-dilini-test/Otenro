@@ -18,9 +18,13 @@ mobileApp.controller('orderHistoryCtrl', function($scope,$rootScope,constants,$h
 
     try {
         $scope.appUserId = angular.fromJson(localStorage.getItem("appLocalStorageUser"+$rootScope.appId)).registeredUser;
-        $scope.orderHistory = angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.appUserId));
     }
     catch(err) {
         console.log("no orderHistory");
     }
+    //get orders history
+    $http.get(constants.SERVER_URL + '/templates/getOrdersOfUser?appId=' + $scope.appId + '&userId=' + $scope.appUserId)
+        .success(function(data){
+            $scope.orderHistory = angular.fromJson(data);
+        });
 });
