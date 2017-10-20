@@ -465,6 +465,24 @@ module.exports = {
                 	});
                 }
         });
+    },
+    /**
+     * Return all orders of a particular user
+     * @param req {appId : string, userId' : string }
+     * @param res {json}
+     */
+    getOrdersOfUser : function (req, res) {
+        var appId = req.param('appId');
+        var registeredUser = req.param('userId');
+        var searchApp = {
+            appId : appId,
+            registeredUser : registeredUser
+
+        };
+        ApplicationOrder.find().where(searchApp).exec(function (err, result) {
+            if (err) return done(err);
+            res.json(result);
+        });
     }
 
 
