@@ -111,7 +111,8 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
                             "city": data.city,
                             "zip": data.zip,
                             "type": 'internal',
-                            "appId":data.appId
+                            "appId":data.appId,
+                            "registeredUser": res.data.user.sub
                         };
                         localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
                         $rootScope.isUserLoggedIn.check = true;
