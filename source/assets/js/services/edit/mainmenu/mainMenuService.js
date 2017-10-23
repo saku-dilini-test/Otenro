@@ -200,9 +200,22 @@
                 return $http.post(SERVER_URL+ 'edit/deleteItem',data);
             },
             updateSecondNavi : function(data) {
-                return $http.post(SERVER_URL+ 'edit/updateSecondNavi',data)
-            }
-
+                return $http.post(SERVER_URL+ 'edit/updateSecondNavi',data);
+            },
+            /**
+             * Get Application data from server
+             * @param {String} appId
+             * */
+            getApplicationData : function (appId) {
+                return $http.get( SERVER_URL + 'edit/getApplicationData?appId=' + appId );
+            },
+            /**
+             * Get Template data from server
+             * @param {String} templateId
+             * */
+            getTemplateData : function (templateId) {
+                return $http.get( SERVER_URL + 'templates/getTemplateData?templateId=' + templateId );
+            },
         };
     }
 })();
