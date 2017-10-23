@@ -573,7 +573,7 @@ module.exports = {
             // here update color in Css class
             else if(type == 'navigationBarFontColor') {
                 // app.appSettings.navigationBarFontColor = styleColor;
-                colorTypeCss = ".made-easy-navigationBarColor";
+                colorTypeCss = "#myNavbar";
             }
             else if(type == 'buttonFontColor') {
                 // app.appSettings.buttonFontColor = styleColor;
@@ -581,11 +581,11 @@ module.exports = {
             }
             else if(type == 'headerFontColor') {
                 // app.appSettings.headerFontColor = styleColor;
-                colorTypeCss = ".made-easy-header-font";
+                colorTypeCss = "h3";
             }
             else if(type == 'contentFontColor') {
                 // app.appSettings.contentFontColor = styleColor;
-                colorTypeCss = ".made-easy-content-font";
+                colorTypeCss = "p";
             }
             else if(type == 'footerFontColor') {
                 // app.appSettings.footerFontColor = styleColor;
