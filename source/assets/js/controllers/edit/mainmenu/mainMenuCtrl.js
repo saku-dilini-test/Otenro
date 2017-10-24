@@ -147,7 +147,6 @@
                         $log.debug($scope.templateCategory );
                 mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory',$scope.templateCategory);
             }
-            $scope.setAspectRatio();
         };
 
 
@@ -611,7 +610,7 @@
         };
         /**
          * set second navigation aspect ratios to $scope
-         * */
+         **/
         $scope.setAspectRatio = function () {
             mainMenuService.getApplicationData($rootScope.appId)
                 .success(function (data) {
@@ -619,7 +618,7 @@
                         mainMenuService.getTemplateData(data.templateId)
                             .success(function (templateData) {
                                 if(templateData.secondNaviAspectRatio){
-                                    $scope.secondNaviAspectRatio = parseInt(templateData.secondNaviAspectRatio);
+                                    $scope.secondNaviAspectRatio = parseFloat(templateData.secondNaviAspectRatio);
                                 }
                             }).error(function (err) {
                             toastr.error(err.message, 'Warning', {
@@ -633,6 +632,6 @@
                 });
             });
         };
-
+        $scope.setAspectRatio();
     }
 })();

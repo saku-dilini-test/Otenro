@@ -41,10 +41,10 @@ module.exports = {
             type: 'string'
         },
         secondNaviAspectRatio : {
-            type: 'integer'
+            type: 'float'
         },
         thirdNaviAspectRatio : {
-            type: 'integer'
+            type: 'float'
         },
     }
     /*,
