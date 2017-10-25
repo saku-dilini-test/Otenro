@@ -1056,7 +1056,7 @@
 
         /**
          * set third navigation aspect ratios to $scope
-         * */
+         **/
         $scope.setAspectRatio = function () {
             mainMenuService.getApplicationData($rootScope.appId)
                 .success(function (data) {
@@ -1064,7 +1064,7 @@
                         mainMenuService.getTemplateData(data.templateId)
                             .success(function (templateData) {
                                 if(templateData.thirdNaviAspectRatio){
-                                    $scope.thirdNaviAspectRatio = parseInt(templateData.thirdNaviAspectRatio);
+                                    $scope.thirdNaviAspectRatio = parseFloat(templateData.thirdNaviAspectRatio);
                                 }
                             }).error(function (err) {
                             toastr.error(err.message, 'Warning', {

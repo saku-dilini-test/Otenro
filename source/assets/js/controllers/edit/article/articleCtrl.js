@@ -378,5 +378,31 @@
             })
         };
 
+        /**
+         * set articles' images crop aspect ratios to $scope
+         **/
+        $scope.setAspectRatio = function () {
+            mainMenuService.getApplicationData($rootScope.appId)
+                .success(function (data) {
+                    if (data.templateId){
+                        mainMenuService.getTemplateData(data.templateId)
+                            .success(function (templateData) {
+                                if(templateData.thirdNaviAspectRatio){
+                                    $scope.thirdNaviAspectRatio = parseFloat(templateData.thirdNaviAspectRatio);
+                                }
+                            }).error(function (err) {
+                            toastr.error(err.message, 'Warning', {
+                                closeButton: true
+                            });
+                        });
+                    }
+                }).error(function (err) {
+                toastr.error(err.message, 'Warning', {
+                    closeButton: true
+                });
+            });
+        };
+        $scope.setAspectRatio();
+
     }
 })();
