@@ -29,6 +29,7 @@ console.log("$stateParams.is new  : " + $stateParams.isNew);
             }
         }
 
+        $scope.tempIsNew = $stateParams.isNew;
         $scope.appId = decParamAppId; //$stateParams.appId;
         $rootScope.appId = decParamAppId; //$stateParams.appId;
         $scope.userId = $auth.getPayload().id;
@@ -55,29 +56,27 @@ console.log("$stateParams.is new  : " + $stateParams.isNew);
         })
 
 
-        //
-        // if(templateCheck == true || templateCheck == 'true'){
-        //
-        //     console.log('inside web urls');
-        //     $scope.urlPath1 = "http://localhost:3000/meServer/otenro_server/" + $auth.getPayload().id
-        //         + "/progressiveTemplates/" + $rootScope.appId + "/src";
-        //
-        //
-        //     $scope.appTemplateUrl = "http://localhost:3000/meServer/otenro_server/" + $auth.getPayload().id
-        //         + "/progressiveTemplates/" + $rootScope.appId + "/src";
-        //
-        // }else{
-        //
-        //     console.log('inside mobile urls');
-        //     $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-        //         + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-        //
-        //
-        //     $scope.appTemplateUrl = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
-        //         + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-        //
-        // }
 
+        if(templateCheck == true || templateCheck == 'true'){
+
+            console.log('inside web urls');
+            $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+            $scope.appTemplateUrl = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+        }else{
+
+            console.log('inside mobile urls');
+            $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+
+            $scope.appTemplateUrl = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+        }
         console.log("server URL :  "  + $scope.urlPath1);
         console.log("server URL :  "  + $scope.appTemplateUrl);
 
