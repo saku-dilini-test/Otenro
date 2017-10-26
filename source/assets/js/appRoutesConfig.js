@@ -144,13 +144,14 @@ angular.module('app')
             }
 
       }).state('user.viewPublishDetails',{
-            url :'/viewPublishDetails/:appId/:userId',
-            controller : 'technicalSupportCtrl',
-            data : {
-                appId : null,
-                userId:null,
-            },
-            templateUrl : 'user/technicalSupport/ViewPublishDetails.html'
+        url :'/viewPublishDetails/:appId/:userId',
+        controller : 'technicalSupportCtrl',
+        data : {
+            appId : null,
+            userId:null,
+        },
+        templateUrl : 'user/technicalSupport/ViewPublishDetails.html'
+
       }).state('user.viewAdNetworks',{
         url :'/viewAdNetworks/:adname',
         controller : 'technicalSupportCtrl',
@@ -158,6 +159,14 @@ angular.module('app')
             adname : null
         },
         templateUrl : 'user/technicalSupport/AdNetworkDetails.html'
+
+    }).state('user.viewUserApps',{
+        url :'/viewUserApps/:selectedUserId',
+        controller : 'technicalSupportCtrl',
+        selectedUserId : {
+            userId : null
+        },
+        templateUrl : 'user/technicalSupport/viewUserApps.html'
     });
 
      $stateProvider
