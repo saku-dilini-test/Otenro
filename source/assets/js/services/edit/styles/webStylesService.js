@@ -72,6 +72,9 @@
             getAppSettings:function(Data){
                 return $http.post(SERVER_URL+ 'edit/getAppSettings',Data);
             },
+            addJsChange:function (Data) {
+                return $http.post(SERVER_URL + 'edit/addJsChange',Data);
+            }
         };
     }
 })();

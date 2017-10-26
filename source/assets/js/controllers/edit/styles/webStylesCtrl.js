@@ -129,6 +129,31 @@
             });
         });
 
+        $scope.logotxt = ["Hello There"," Well Played","Good luck"]
+
+        $scope.jschange = function (data) {
+            alert(data);
+
+            var jstxt = {
+                userId: $auth.getPayload().id,
+                appId : appId,
+                jsdata: data,
+            }
+            webStylesService.addJsChange(jstxt)
+                .success(function(data) {
+
+
+                    mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime());
+
+
+                }).error(function(err) {
+                toastr.error( type ,'Update Failed ', {
+                    closeButton: true
+                });
+            });
+        }
+
         $scope.styleFontFamilyChange = function (data,type) {
             var styleFontFamily = data;
             if(type == 'headerFont') {
@@ -160,7 +185,8 @@
                     }
 
                     // var tempUrl = mySharedService.url;
-                    // mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime());
 
                 }).error(function(err) {
                     toastr.error( type ,'Update Failed ', {

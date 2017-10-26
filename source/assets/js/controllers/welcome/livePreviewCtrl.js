@@ -162,7 +162,7 @@
                                                 mySharedService.prepForBroadcast(url);
 
                                                 var encParam = btoa(data.data.appId);
-                                                $state.go('user.editWebApp',{isNew:isNew, appId:data.data.appId, p:encParam });
+                                                $state.go('user.editApp',{isNew:isNew, appId:data.data.appId, p:encParam });
                                             }
 
                                         });
@@ -236,7 +236,7 @@
                                                 mySharedService.prepForBroadcast(url);
 
                                                 var encParam = btoa(data.data.appId);
-                                                $state.go('user.editWebApp', {isNew:isNew, appId: data.data.appId, p: encParam});
+                                                $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
                                             }
                                         });
 

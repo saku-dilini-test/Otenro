@@ -51,7 +51,7 @@
 
                 urlPath  =  "http://localhost:3000/meServer/otenro_server/" + $auth.getPayload().id
                     + "/progressiveTemplates/" + $rootScope.appId + "/src";
-                $state.go('user.editWebApp',{tempName:item.templateName,isNew:item.isNew ,appId: item.id, p:encParam});
+                $state.go('user.editApp',{tempName:item.templateName,isNew:item.isNew ,appId: item.id, p:encParam});
 
             }else{
 
@@ -64,6 +64,6 @@
             mySharedService.prepForBroadcast(urlPath);
 
         }
-      }
+      };
     }
 })();

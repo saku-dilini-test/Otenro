@@ -665,6 +665,62 @@ module.exports = {
 
     },
 
+    addJsChange : function(req,res){
+        var userId = req.body.userId;
+        var appId = req.body.appId;
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/app.js';
+       // var mainCssFile = "/home/dilakshan/Desktop/regex.ts";
+        var data = req.body.jsdata;
+
+        console.log("req.data :  " + JSON.stringify(data))
+
+        updateFile(mainCssFile, [{
+            attribute: 'title',
+            rule: 'string',
+            replacer: "'" + data + "'"
+        }], function (err) {
+            sails.log.info((err));
+        });
+
+        setTimeout(function() {
+            // console.log("res.send(\"success\");");
+            res.send("success");
+        }, 800);
+
+
+        /**
+         * update css file with new changes
+         *
+         */
+        function updateFile(filename, replacements) {
+            return new Promise(function(resolve) {
+                fs.readFile(filename, 'utf-8', function(err, data) {
+                    var regex, replaceStr;
+                    if (err) {
+                        throw (err);
+                    } else {
+                        regex = new RegExp("(" + replacements[0].attribute + "\\s*:]*" + replacements[0].rule + "\\s*=\\s*)([^\\n;}]+)([\\s*;}])");
+                            replaceStr = "$1" + replacements[0].replacer + "$3";
+                            data = data.replace(regex, replaceStr);
+
+                    }
+                    fs.writeFile(filename, data, 'utf-8', function(err) {
+
+                        if (err) {
+                            throw (err);
+                        } else {
+                            resolve();
+                        }
+                    });
+                });
+            })
+        }
+
+    },
+
+
+
+
     /**
      * Update header, content , footer and button font family given appId with common function
      */
@@ -686,7 +742,7 @@ var data = req.body;
 
             if(type == 'headerFont'){
                 // app.appSettings.headerFontFamily = styleFontFamily;
-                fontFamilyCss = "h3";
+                fontFamilyCss = ".navbar-brand";
 
                 updateFile(mainCssFile, [{
                     rule: fontFamilyCss,

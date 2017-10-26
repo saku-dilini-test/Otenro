@@ -21,67 +21,71 @@
                         <!--
                         <obl-menu-button label="Styles" icon="fa fa-file-image-o" click-title="styles"></obl-menu-button>
                         -->
-                        <div class="styles-settings" ng-controller="StylesCtrl">
-                            <div class="color-settings" >
-                                <h1>Background</h1>
-                                <div ng-if="isApplyStyle.color.backgroundColor" class="color-setting clearfix">
-                                    <div class="color-section">Background color</div>
-                                    <button class="color-picker-button pull-left"
-                                            colorpicker="rgba"
-                                            colorpicker-parent="true"
-                                            ng-model="backgroundColor" type="text"
-                                            style="background-color: {{backgroundColor}}; color: {{backgroundColor}};" >
-                                    </button>
-                                    <input colorpicker="rgba" ng-model="backgroundColor" type="text">
-                                </div>
-                                <div ng-if="isApplyStyle.color.footerColor" class="color-setting clearfix">
-                                    <button class="color-picker-button pull-left"
-                                            colorpicker="rgba"
-                                            colorpicker-parent="true"
-                                            ng-model="footerColor" type="text"
-                                            style="background-color: {{footerColor}}; color: {{footerColor}};">
-                                    </button>
-                                    <div class="color-section">Footer</div>
-                                    <input colorpicker="rgba" ng-model="footerColor" type="text">
-                                </div>
-                            </div>
-                            <div class="other-settings">
-                                <!--<h1>Background Image</h1>-->
-                                <div class="other-setting">
-                                    <md-checkbox md-no-ink ng-model="editBackgroundImage"
-                                                 aria-label="Apply Background Image"
-                                            ng-change="applyBackgroundImage(editBackgroundImage)">
-                                        Background Image
-                                    </md-checkbox>
-                                    <div ng-show="editBackgroundImage" class="edit-bg-wrapper">
-                                        <obl-menu-button label="Edit Image" icon="fa fa-file-image-o" click-title="styleEditBackgroundImage"></obl-menu-button>
+                        <div ng-if="tempIsNew == 'true' || tempIsNew == true">
+                            <div class="styles-settings" ng-controller="webStylesCtrl">
+                                <div class="color-settings" >
+                                    <h1>Web App Background</h1>
+                                    <input ng-model='title' style="margin-bottom: 16px;">
+                                    <button class="btn btn-material" ng-click="jschange(title)">Change Title</button>
+
+                                    <div ng-if="isApplyStyle.color.backgroundColor" class="color-setting clearfix">
+                                        <div class="color-section">Background color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="backgroundColor" type="text"
+                                                style="background-color: {{backgroundColor}}; color: {{backgroundColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="backgroundColor" type="text">
+                                    </div>
+                                    <div ng-if="isApplyStyle.color.footerColor" class="color-setting clearfix">
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="footerColor" type="text"
+                                                style="background-color: {{footerColor}}; color: {{footerColor}};">
+                                        </button>
+                                        <div class="color-section">Footer</div>
+                                        <input colorpicker="rgba" ng-model="footerColor" type="text">
                                     </div>
                                 </div>
-                            </div>
+                                <div class="other-settings">
+                                    <!--<h1>Background Image</h1>-->
+                                    <div class="other-setting">
+                                        <md-checkbox md-no-ink ng-model="editBackgroundImage"
+                                                     aria-label="Apply Background Image"
+                                                     ng-change="applyBackgroundImage(editBackgroundImage)">
+                                            Background Image
+                                        </md-checkbox>
+                                        <div ng-show="editBackgroundImage" class="edit-bg-wrapper">
+                                            <obl-menu-button label="Edit Image" icon="fa fa-file-image-o" click-title="styleEditBackgroundImage"></obl-menu-button>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div ng-if="isApplyStyle.color.navigationColor">
-                                <h1>Navigation</h1>
-                                <div class="color-setting">
-                                    <div class="color-section">Navigation background Color</div>
-                                    <button class="color-picker-button pull-left"
-                                            colorpicker="rgba"
-                                            colorpicker-parent="true"
-                                            ng-model="navigationBarColor"  type="text"
-                                            style="background-color: {{navigationBarColor}}; color: {{navigationBarColor}};" >
-                                    </button>
-                                    <input colorpicker="rgba" ng-model="navigationBarColor" type="text">
+                                <div ng-if="isApplyStyle.color.navigationColor">
+                                    <h1>Navigation</h1>
+                                    <div class="color-setting">
+                                        <div class="color-section">Navigation background Color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="navigationBarColor"  type="text"
+                                                style="background-color: {{navigationBarColor}}; color: {{navigationBarColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="navigationBarColor" type="text">
+                                    </div>
+                                    <div class="color-setting">
+                                        <div class="color-section">Navigation Font Color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="navigationBarFontColor"  type="text"
+                                                style="background-color: {{navigationBarFontColor}}; color: {{navigationBarFontColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="navigationBarFontColor" type="text">
+                                    </div>
                                 </div>
-                                <div class="color-setting">
-                                    <div class="color-section">Navigation Font Color</div>
-                                    <button class="color-picker-button pull-left"
-                                            colorpicker="rgba"
-                                            colorpicker-parent="true"
-                                            ng-model="navigationBarFontColor"  type="text"
-                                            style="background-color: {{navigationBarFontColor}}; color: {{navigationBarFontColor}};" >
-                                    </button>
-                                    <input colorpicker="rgba" ng-model="navigationBarFontColor" type="text">
-                                </div>
-                            </div>
 
 
                                 <h1>Typography</h1>
@@ -215,6 +219,204 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div ng-if="tempIsNew == 'false' || tempIsNew == 'undefined'">
+                            <div class="styles-settings" ng-controller="StylesCtrl">
+                                <div class="color-settings" >
+                                    <h1>Background</h1>
+                                    <div ng-if="isApplyStyle.color.backgroundColor" class="color-setting clearfix">
+                                        <div class="color-section">Background color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="backgroundColor" type="text"
+                                                style="background-color: {{backgroundColor}}; color: {{backgroundColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="backgroundColor" type="text">
+                                    </div>
+                                    <div ng-if="isApplyStyle.color.footerColor" class="color-setting clearfix">
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="footerColor" type="text"
+                                                style="background-color: {{footerColor}}; color: {{footerColor}};">
+                                        </button>
+                                        <div class="color-section">Footer</div>
+                                        <input colorpicker="rgba" ng-model="footerColor" type="text">
+                                    </div>
+                                </div>
+                                <div class="other-settings">
+                                    <!--<h1>Background Image</h1>-->
+                                    <div class="other-setting">
+                                        <md-checkbox md-no-ink ng-model="editBackgroundImage"
+                                                     aria-label="Apply Background Image"
+                                                     ng-change="applyBackgroundImage(editBackgroundImage)">
+                                            Background Image
+                                        </md-checkbox>
+                                        <div ng-show="editBackgroundImage" class="edit-bg-wrapper">
+                                            <obl-menu-button label="Edit Image" icon="fa fa-file-image-o" click-title="styleEditBackgroundImage"></obl-menu-button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div ng-if="isApplyStyle.color.navigationColor">
+                                    <h1>Navigation</h1>
+                                    <div class="color-setting">
+                                        <div class="color-section">Navigation background Color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="navigationBarColor"  type="text"
+                                                style="background-color: {{navigationBarColor}}; color: {{navigationBarColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="navigationBarColor" type="text">
+                                    </div>
+                                    <div class="color-setting">
+                                        <div class="color-section">Navigation Font Color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="navigationBarFontColor"  type="text"
+                                                style="background-color: {{navigationBarFontColor}}; color: {{navigationBarFontColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="navigationBarFontColor" type="text">
+                                    </div>
+                                </div>
+
+
+                                <h1>Typography</h1>
+                                <div ng-if="isApplyStyle.typography.header">
+                                    <div class="other-setting">
+                                        <h2>Header Font</h2>
+                                        <select ng-model="headerFontFamilyProp.value" ng-options="v for v in headerFontFamilyProp.values" ng-change="styleFontFamilyChange(headerFontFamilyProp.value,'headerFont')">
+                                        </select>
+                                    </div>
+                                    <div class="other-setting">
+                                        <h2>Font Size</h2>
+                                        <select ng-model="headerFontSizeProp.value" ng-options="v for v in headerFontSizeProp.values" ng-change="styleFontSizeChange(headerFontSizeProp.value,'headerFont')">
+                                        </select>
+                                    </div>
+                                    <div class="other-setting">
+                                        <h2>Font Weight</h2>
+                                        <select ng-model="headerFontWeightProp.value" ng-options="v for v in headerFontWeightProp.values" ng-change="styleFontWeightChange(headerFontWeightProp.value,'headerFont')">
+                                        </select>
+                                    </div>
+                                    <div class="color-setting">
+                                        <div class="color-section">Header Font Color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="headerFontColor"  type="text"
+                                                style="background-color: {{headerFontColor}}; color: {{headerFontColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="headerFontColor" type="text">
+                                    </div>
+                                </div>
+                                <div ng-if="isApplyStyle.typography.content">
+                                    <div class="other-setting">
+                                        <h2>Content Font</h2>
+                                        <select ng-model="contentFontFamilyProp.value" ng-options="v for v in contentFontFamilyProp.values" ng-change="styleFontFamilyChange(contentFontFamilyProp.value,'contentFont')">
+                                        </select>
+                                    </div>
+                                    <div class="other-setting">
+                                        <h2>Font Size</h2>
+                                        <select ng-model="contentFontSizeProp.value" ng-options="v for v in contentFontSizeProp.values" ng-change="styleFontSizeChange(contentFontSizeProp.value,'contentFont')">
+                                        </select>
+                                    </div>
+                                    <div class="other-setting">
+                                        <h2>Font Weight</h2>
+                                        <select ng-model="contentFontWeightProp.value" ng-options="v for v in contentFontWeightProp.values" ng-change="styleFontWeightChange(contentFontWeightProp.value,'contentFont')">
+                                        </select>
+                                    </div>
+
+                                    <div class="color-setting">
+                                        <div class="color-section">Content Font Color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="contentFontColor" type="text"
+                                                style="background-color: {{contentFontColor}}; color: {{contentFontColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="contentFontColor" type="text">
+                                    </div>
+                                </div>
+                                <div ng-if="isApplyStyle.typography.footer">
+                                    <div class="other-setting">
+                                        <h2>Footer Font</h2>
+                                        <div class="">
+                                            <select ng-model="footerFontFamilyProp.value" ng-options="v for v in footerFontFamilyProp.values" ng-change="styleFontFamilyChange(footerFontFamilyProp.value,'footerFont')">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="other-setting">
+                                        <h2>Font Size</h2>
+                                        <select ng-model="footerFontSizeProp.value" ng-options="v for v in footerFontSizeProp.values" ng-change="styleFontSizeChange(footerFontSizeProp.value,'footerFont')">
+                                        </select>
+                                    </div>
+                                    <div class="other-setting">
+                                        <h2>Font Weight</h2>
+                                        <select ng-model="footerFontWeightProp.value" ng-options="v for v in footerFontWeightProp.values" ng-change="styleFontWeightChange(footerFontWeightProp.value,'footerFont')">
+                                        </select>
+                                    </div>
+                                    <div class="color-setting">
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="footerFontColor" type="text"
+                                                style="background-color: {{footerFontColor}}; color: {{footerFontColor}};" >
+                                        </button>
+                                        <div class="color-section">Footer Font Color</div>
+                                        <input colorpicker="rgba" ng-model="footerFontColor" type="text">
+                                    </div>
+                                </div>
+
+
+                                <h1 ng-if="isApplyStyle.button">Button</h1>
+                                <div ng-if="isApplyStyle.button">
+                                    <div class="color-setting clearfix">
+                                        <div class="color-section">Button Color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="buttonColor"  type="text"
+                                                style="background-color: {{buttonColor}}; color: {{buttonColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="buttonColor" type="text">
+                                    </div>
+                                    <div class="color-setting clearfix">
+                                        <div class="color-section">Button Font Color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="buttonFontColor"  type="text"
+                                                style="background-color: {{buttonFontColor}}; color: {{buttonFontColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="buttonFontColor" type="text">
+                                    </div>
+                                    <div class="color-setting clearfix">
+                                        <div class="color-section">Button Border Color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="buttonBorderColor"  type="text"
+                                                style="background-color: {{buttonBorderColor}}; color: {{buttonBorderColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="buttonBorderColor" type="text">
+                                    </div>
+                                    <div class="other-setting">
+                                        <h2>Border size</h2>
+                                        <select ng-model="buttonBorderWidthProp.value" ng-options="v for v in buttonBorderWidthProp.values" ng-change="styleButtonBorderWidthChange(buttonBorderWidthProp.value)">
+                                        </select>
+                                    </div>
+                                    <div class="other-setting">
+                                        <h2>Border Radius</h2>
+                                        <select ng-model="buttonBorderRadiusProp.value" ng-options="v for v in buttonBorderRadiusProp.values" ng-change="styleButtonBorderRadiusChange(buttonBorderRadiusProp.value)">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                     </obl-menu-group>
 
