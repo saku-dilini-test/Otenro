@@ -223,7 +223,9 @@
                     }
 
                     // var tempUrl = mySharedService.url;
-                    // mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime());
+
                 }).error(function(err) {
                     toastr.error( type , 'Update Failed ', {
                         closeButton: true
@@ -242,11 +244,12 @@
                 $scope.selectedFooterFontWeight = data;
             }
             var styleFontWeightData = {
+                userId:$auth.getPayload().id,
                 appId : appId,
                 styleFontWeight : styleFontWeight,
                 type : type
             };
-            webStylesService.addStyleFontWeight(styleFontWeightData)
+            webStylesService.addWebStyleFontWeight(styleFontWeightData)
                 .success(function(data) {
                     if(type == 'headerFont'){
                     toastr.success(' Header Font Weight Successfully Updated',{
@@ -258,8 +261,9 @@
                         });
                     }
 
-                    var tempUrl = mySharedService.url;
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    // var tempUrl = mySharedService.url;
+                    mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime());
 
                 }).error(function(err) {
                     toastr.error( type , 'Update failed ', {
@@ -432,7 +436,8 @@
                       // /*  $log.debug($scope.appTemplateUrl);*/
 
                         // var tempUrl = mySharedService.url;
-                        // mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                        mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                            + "&appId=" + $rootScope.appId + "&" + new Date().getTime());
 
                     }).error(function(err) {
                         toastr.error( type , 'Update failed ', {

@@ -81,6 +81,10 @@
 
         console.log("ME_APP_SERVER  : " + ME_APP_SERVER);
         // App URL create $statePrams
+
+        /*
+         *Live preview Area display
+         */
         if ($scope.isNew == 'true' || $scope.isNew == true) {
             $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/webTemplates' + '/' + $scope.appId + '/src';
             $scope.urlPath1 = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/webTemplates' + '/' + $scope.appId + '/src';
@@ -89,6 +93,8 @@
         $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/templates' + '/' + $scope.appId + '/';
         // $scope.urlPath1 = ME_APP_SERVER+'/temp'+'/'+$scope.userId+'/webTemplates'+'/'+$scope.appId+'/';
     }
+
+
         // App URL get from cookiesStore
         // $scope.appTemplateUrl = $cookieStore.get('url');
 

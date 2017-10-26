@@ -57,8 +57,8 @@
                 return $http.post(SERVER_URL + 'edit/addWebStyleFontSize',Data);
             },
             // add common function to change font weight for header, content and footer
-            addStyleFontWeight: function(Data){
-                return $http.post(SERVER_URL + 'edit/addStyleFontWeight',Data);
+            addWebStyleFontWeight: function(Data){
+                return $http.post(SERVER_URL + 'edit/addWebStyleFontWeight',Data);
             },
             addStyleButtonBorderWidth: function(Data){
                 return $http.post(SERVER_URL + 'edit/addStyleButtonBorderWidth',Data);

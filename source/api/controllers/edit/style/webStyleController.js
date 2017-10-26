@@ -541,7 +541,7 @@ module.exports = {
     addWebStyleColor : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/style.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/header/header.component.css';
         var styleColor = req.body.styleColor;
         var type = req.body.type;
         var colorTypeCss = '';
@@ -581,7 +581,7 @@ module.exports = {
             }
             else if(type == 'headerFontColor') {
                 // app.appSettings.headerFontColor = styleColor;
-                colorTypeCss = "h3";
+                colorTypeCss = ".navbar-brand";
             }
             else if(type == 'contentFontColor') {
                 // app.appSettings.contentFontColor = styleColor;
@@ -668,7 +668,7 @@ module.exports = {
     addJsChange : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/app.js';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/header/header.component.ts';
        // var mainCssFile = "/home/dilakshan/Desktop/regex.ts";
         var data = req.body.jsdata;
 
@@ -685,7 +685,7 @@ module.exports = {
         setTimeout(function() {
             // console.log("res.send(\"success\");");
             res.send("success");
-        }, 100);
+        }, 800);
 
 
         /**
@@ -727,7 +727,7 @@ module.exports = {
     addWebStyleFontFamily : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/style.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/header/header.component.css';
         var styleFontFamily = req.body.styleFontFamily;
         var type = req.body.type;
         var fontFamilyCss = '';
@@ -742,7 +742,7 @@ var data = req.body;
 
             if(type == 'headerFont'){
                 // app.appSettings.headerFontFamily = styleFontFamily;
-                fontFamilyCss = "h3";
+                fontFamilyCss = ".navbar-brand";
 
                 updateFile(mainCssFile, [{
                     rule: fontFamilyCss,
@@ -817,7 +817,7 @@ var data = req.body;
     addWebStyleFontSize : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/style.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/header/header.component.css';
         var styleFontSize = req.body.styleFontSize;
         var type = req.body.type;
         var data = {};
@@ -830,7 +830,7 @@ var data = req.body;
 
             if(type == 'headerFont'){
                 // app.appSettings.headerFontSize = styleFontSize;
-                fontSizeCss = "h3";
+                fontSizeCss = ".navbar-brand";
 
                 updateFile(mainCssFile, [{
                     rule: fontSizeCss,
@@ -916,32 +916,22 @@ var data = req.body;
     /**
      * Update header, content and footer font Weight given appId with common function
      */
-    addStyleFontWeight : function(req,res){
-        var userId = req.userId;
+    addWebStyleFontWeight : function(req,res){
+        var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/header/header.component.css';
         var styleFontWeight = req.body.styleFontWeight;
         var type = req.body.type;
         var fontWeightCss = '';
 
-        var query = {id:appId};
-
-        Application.findOne(query).exec(function(err, app) {
-            if (err) res.send(err);
+        // var query = {id:appId};
+        //
+        // Application.findOne(query).exec(function(err, app) {
+        //     if (err) res.send(err);
 
             if(type == 'headerFont'){
-                app.appSettings.headerFontWeight = styleFontWeight;
-                fontWeightCss = ".made-easy-header-font";
-            }else if(type == 'contentFont'){
-                app.appSettings.contentFontWeight = styleFontWeight;
-                fontWeightCss = ".made-easy-content-font";
-            }else if(type == 'footerFont'){
-                app.appSettings.footerFontWeight = styleFontWeight;
-                fontWeightCss = ".made-easy-footer-font";
-            }
-
-            Application.update(query,app).exec(function(err, appUpdate) {
-                if (err) res.send(err);
+                // app.appSettings.headerFontWeight = styleFontWeight;
+                fontWeightCss = ".navbar-brand";
 
                 updateFile(mainCssFile, [{
                     rule: fontWeightCss,
@@ -951,10 +941,24 @@ var data = req.body;
                     sails.log.info((err));
                 });
 
-                res.send(appUpdate);
-            });
+                res.send("success");
 
-        });
+            }else if(type == 'contentFont'){
+                // app.appSettings.contentFontWeight = styleFontWeight;
+                fontWeightCss = ".made-easy-content-font";
+            }else if(type == 'footerFont'){
+                // app.appSettings.footerFontWeight = styleFontWeight;
+                fontWeightCss = ".made-easy-footer-font";
+            }
+
+            // Application.update(query,app).exec(function(err, appUpdate) {
+            //     if (err) res.send(err);
+
+
+
+            // });
+
+        // });
         /**
          * update css file with new changes
          *
