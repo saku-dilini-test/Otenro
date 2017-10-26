@@ -685,7 +685,7 @@ module.exports = {
         setTimeout(function() {
             // console.log("res.send(\"success\");");
             res.send("success");
-        }, 800);
+        }, 100);
 
 
         /**
