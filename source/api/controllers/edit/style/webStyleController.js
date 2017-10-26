@@ -685,7 +685,7 @@ module.exports = {
         setTimeout(function() {
             // console.log("res.send(\"success\");");
             res.send("success");
-        }, 800);
+        }, 100);
 
 
         /**
@@ -742,7 +742,7 @@ var data = req.body;
 
             if(type == 'headerFont'){
                 // app.appSettings.headerFontFamily = styleFontFamily;
-                fontFamilyCss = ".navbar-brand";
+                fontFamilyCss = "h3";
 
                 updateFile(mainCssFile, [{
                     rule: fontFamilyCss,
