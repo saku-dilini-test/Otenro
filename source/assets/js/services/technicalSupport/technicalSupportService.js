@@ -12,6 +12,12 @@
             getAllAppData: function(){
                 return $http.get(SERVER_URL + 'edit/getAllAppsData');
             },
+
+            getUserApps : function (data) {
+
+                return $http.post(SERVER_URL + 'edit/getUserApps',data);
+            },
+
             getPublishDetails : function(data){
                 return $http.post(SERVER_URL + 'edit/getPublishDetails',data);
             },

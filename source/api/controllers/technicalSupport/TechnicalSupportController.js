@@ -30,7 +30,21 @@ module.exports = {
 
         });
     },
-    
+
+
+    getUserApps : function (req, res) {
+        console.log("req.body.userId " + req.body.userId);
+        var userApps = {
+            userId : req.body.userId
+        }
+        Application.find(userApps).exec(function (err, appsData) {
+            if (err) res.send(err);
+            console.log(JSON.stringify(appsData));
+            res.json(appsData);
+
+        });
+
+    },
 
     /**
          * get All userData

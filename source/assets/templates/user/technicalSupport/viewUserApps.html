@@ -1,0 +1,60 @@
+<div ng-if="isAuthenticated">
+    <!--Google Analytics-->
+    <script>
+        ga('set', 'page', 'technical-support');
+        ga('send', 'pageview');
+    </script>
+    <div class="obl-dashboard-wrapper" ng-controller="HeaderController" ng-show="auth.isAuthenticated()">
+        <div class="obl-dashboard-header clearfix">
+            <h2 ng-hide="welcome"> </h2>
+            <p  ng-hide="welcome"> Well come to the technical support area</p>
+            <div class="obl-dashboard-settings">
+                <button class="user-settings-button" ng-click="profileView()" type="button">
+                    <img src="images/user-icon.svg" alt="User Logo" />
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="obl-dashboard-wrapper">
+        <div class="md-dialog-main clearfix">
+    <form class="allItems" novalidate>
+        <table class="table">
+            <thead class="obl-dashboard-apps">
+            <th>Id</th>
+            <th>Application Name</th>
+            <th>Email</th>
+            <th>Application Status</th>
+            <th>Action</th>
+            <!--<th>User Details</th>-->
+            </thead>
+
+            <tbody>
+            <tr ng-repeat="app in userAppsList">
+                <td >
+                    <a href="{{serverURL}}templates/viewTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">
+                        {{app.id}}
+                    </a>
+                </td>
+                <td>{{app.appName}}</td>
+                <td>
+                    <div data-ng-repeat="user in userList">
+                        <div ng-if="user.id==app.userId">
+                            {{user.email}}
+                        </div>
+                    </div>
+                </td>
+                <td>{{app.status}}</td>
+                <td>
+                    <a  ng-if="app.status=='PENDING'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>
+                    <a  ng-if="app.status=='PUBLISHED'" data-ng-click="getPublishDetails(app.id,app.userId)">Update</a>
+                    <a  ng-if="app.status=='UPLOADING'" data-ng-click="getPublishDetails(app.id,app.userId)">Finish</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    </div>
+        <a href="#technicalSupport">Application list</a>
+    </div>
+
+</div>

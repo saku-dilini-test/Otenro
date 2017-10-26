@@ -149,8 +149,8 @@
                            <tbody>
                            <tr ng-repeat="app in userList">
                             <td> {{$index +1}} </td>
-                            <td> {{app.email}} </td>
-                            <td> {{app.id}} </td>
+                            <td>{{app.email}}</td>
+                            <td><a data-ng-click="getUserAppData(app.id)">{{app.id}}</a></td>
                             <td> {{app.yourselfReason}} </td>
                             <td> {{app.createdAt}} </td>
                              <td> {{app.lastLoginTime}} </td>
