@@ -76,7 +76,8 @@ angular.module('starter.controllers', [])
     $scope.openApp = function(userID,appId,appName){
 
       // ME SERVER URL for GIVEN User ID & AppId
-        var url = 'http://cdn.otenro.com'+'/temp/'+userID+'/templates/'+appId+'/#/';
+        //var url = 'http://192.168.8.35/meServer/temp/'+userID+'/templates/'+appId+'/#/';
+      var url = 'http://cdn.otenro.com'+'/temp/'+userID+'/templates/'+appId+'/#/';
       console.log(url);
 
       // Keep in mind that you must add your own images to native resource.
@@ -137,13 +138,34 @@ angular.module('starter.controllers', [])
   })
 
   /** --/-- User Ctrl ------------------- **/
-  .controller('userCtrl', function($scope,$state,AuthService) {
+  .controller('userCtrl', function($scope,$state,AuthService,$ionicPopup,dashBoardService) {
 
     // --- logout function --------
     $scope.logout = function () {
       AuthService.logout();
       $state.go('app.login');
     };
+
+    $scope.clearAllData = function () {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Clear All App Data',
+        template: 'Are you sure you want clear all app data?'
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+          console.log('You are sure');
+          var LOCAL_TOKEN_KEY = 'userToken';
+          var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
+
+          dashBoardService.clearAllAppData(JSON.parse(token).sub).success(function (data) {
+            console.log("delete done");
+          })
+        } else {
+          console.log('You are not sure');
+        }
+      });
+    }
+
 
   });
 
