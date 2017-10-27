@@ -15,6 +15,9 @@
       },
       getFileServerUrl: function () {
         return $http.get(SERVER_URL+'mobile/fileServerUrl');
+      },
+      clearAllAppData :  function (appParams) {
+        return $http.get(SERVER_URL +'mobile/clearAllAppData?data='+appParams);
       }
     }
   }
