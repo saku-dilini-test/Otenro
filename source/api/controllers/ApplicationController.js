@@ -308,7 +308,7 @@ module.exports = {
                               },
                               button : true
                           };
-                      if(templateName == 'test-app'||templateName == 'demo' ){
+                      if(templateName == 'demo' ){
                           loginPath = '/#/app/login';
                           isApplyStyle = {
                               color : {
@@ -445,7 +445,7 @@ module.exports = {
                            * If Only foodDemoApp or foodDemoApp2 Category & Product Feed to DB
                            */
 
-                          if(templateName == 'test-app' || templateName == 'demo'  ) {
+                          if(templateName == 'demo' ) {
                               var mainNavi = [{
                                   "name": "Promo",
                                   "link": "promo",

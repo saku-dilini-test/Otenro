@@ -16,8 +16,7 @@
             SERVER_URL) {
         dashboardService.getAllApps().success(function (data) {
             $rootScope.widgets=data;
-            $scope.path = ME_APP_SERVER+"otenro_server/";
-
+            $scope.path = ME_APP_SERVER+"temp/";
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
                 closeButton: true
