@@ -96,8 +96,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',])
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise(function ($injector) {
+      var token = window.localStorage.getItem('userToken');
       var $state = $injector.get("$state");
-      $state.go("app.login");
+      if (!token) {
+        $state.go("app.login");
+      }else {
+        $state.go("app.dash");
+      }
+
     });
 
 }).directive('errSrc', function() {
