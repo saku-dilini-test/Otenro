@@ -444,15 +444,15 @@ html {
 
 .main-header-font{
   font-size: 15px;
-  letter-spacing: 0.3	em;
-  color:rgba(255,0,0,1);
+  letter-spacing: 0.3em;
+  color:rgba(0,0,0,1);
   font-family: Arial;
   font-weight: bold;
 }
 .main-content-font{
   font-size: 12px;
-  letter-spacing: 0.1	em;
-  color:rgba(255,0,0,1);
+  letter-spacing: 0.1em;
+  color: rgb(255, 104, 55);
   font-family: Arial;
   font-weight: 400;
 }
@@ -463,10 +463,13 @@ html {
   background-color: rgba(255,255,255,0);
   color: #000;
 }
+.main-navigation li a{
+  color: inherit !important;
+}
 .main-button{
   background-color: #0a568c;
-  color: #fff;
   border-color: rgba(255,255,255,0);
   border-width: 0px;
+  color: #fff;
   border-radius: 2px;
 }

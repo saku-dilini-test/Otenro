@@ -732,7 +732,7 @@ module.exports = {
         var styleFontFamily = req.body.styleFontFamily;
         var type = req.body.type;
         var fontFamilyCss = '';
-var data = req.body;
+        var data = req.body;
 
         console.log("req.data :  " + JSON.stringify(data))
 

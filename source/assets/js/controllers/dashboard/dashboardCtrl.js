@@ -48,8 +48,8 @@
             var urlPath;
             if(item.isNew == 'true' || item.isNew == true){
 
-                urlPath  =  "http://localhost:3000/meServer/otenro_server/" + $auth.getPayload().id
-                    + "/progressiveTemplates/" + $rootScope.appId + "/src";
+                urlPath  =  SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                    + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
                 $state.go('user.editApp',{tempName:item.templateName,isNew:item.isNew ,appId: item.id, p:encParam});
 
             }else{
