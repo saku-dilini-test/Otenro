@@ -541,7 +541,7 @@ module.exports = {
     addWebStyleColor : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/header/header.component.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
         var styleColor = req.body.styleColor;
         var type = req.body.type;
         var colorTypeCss = '';

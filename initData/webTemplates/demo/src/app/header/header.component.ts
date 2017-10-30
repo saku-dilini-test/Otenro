@@ -14,4 +14,6 @@ export class HeaderComponent {
   navigate(val:string){
     this.router.navigate([val])
   }
+
+  title:string = "Black Friday";
 }

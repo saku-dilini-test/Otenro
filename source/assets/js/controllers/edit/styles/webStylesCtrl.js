@@ -132,7 +132,6 @@
         $scope.logotxt = ["Hello There"," Well Played","Good luck"]
 
         $scope.jschange = function (data) {
-            alert(data);
 
             var jstxt = {
                 userId: $auth.getPayload().id,
