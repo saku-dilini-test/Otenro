@@ -351,6 +351,7 @@ input[type=number] {
 .item-error-message{
     color:red;
     font-size: 70%;
+    white-space: normal;
 }
 .no-padding{
     padding:0;

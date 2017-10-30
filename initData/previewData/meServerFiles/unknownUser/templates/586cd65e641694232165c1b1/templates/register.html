@@ -20,7 +20,7 @@
               <label class="item item-input item-floating-label">
                 <span class="input-label">Email</span>
                 <input type="email" name="email" placeholder="Email" ng-model="data.email" ng-required="true">
-                <span class="help-block" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
+                <span class="item-error-message" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
               Enter a proper email
             </span>
               </label>
