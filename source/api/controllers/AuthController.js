@@ -94,9 +94,12 @@ module.exports = {
             yourselfReason : req.body.yourselfReason,
               lastLoginTime : new Date()
           };
+        /*
+        Temporary fix to remove the ad agent registration from ad network landing pages
+         */
           if(req.body.adagent){
-              newUserDetails.adagent = req.body.adagent;
-              newUserDetails.affid = req.body.affid;
+              //newUserDetails.adagent = req.body.adagent;
+              //newUserDetails.affid = req.body.affid;
           }
 
           User.create(newUserDetails).exec(function(err, user) {
