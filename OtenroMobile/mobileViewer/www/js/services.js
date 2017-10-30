@@ -12,7 +12,7 @@ angular.module('starter.services', [])
     function loadUserCredentials() {
       var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
       var serverToken = window.localStorage.getItem(SEVER_TOKEN_KEY);
-      console.log(token);
+
       if (token) {
         useCredentials(token,serverToken);
       }
@@ -25,6 +25,7 @@ angular.module('starter.services', [])
     }
 
     function useCredentials(token,serverToken) {
+     //alert(JSON.parse(window.localStorage.getItem(LOCAL_TOKEN_KEY)).email);
       userRole = token.role;
       //username = token.split('.')[0];
       isAuthenticated = true;
@@ -66,8 +67,7 @@ angular.module('starter.services', [])
       return $q(function(resolve, reject) {
         // Make a request and receive your auth token from your server
           $http.post(SERVER_URL+'auth/authenticate',userData).success(function (data) {
-
-            storeUserCredentials(data.user,data.token);
+            storeUserCredentials(JSON.stringify(data.user),data.token);
             resolve('Admin Login success.');
           }).error(function (err) {
             reject('Login Failed.');
