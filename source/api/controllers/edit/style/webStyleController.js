@@ -546,6 +546,7 @@ module.exports = {
         var type = req.body.type;
         var colorTypeCss = '';
 
+        console.log("type  : " + type);
         // var query = { id : appId };
         //
         // Application.findOne(query).exec(function(err, app) {
@@ -554,38 +555,38 @@ module.exports = {
             // here update background-color in Css class
             if(type == 'backgroundColor'){
                 // app.appSettings.backgroundColor= styleColor;
-                colorTypeCss = ".logo";
+                colorTypeCss = ".main-background";
             }else if(type == 'navigationBarColor'){
                 // app.appSettings.navigationBarColor= styleColor;
-                colorTypeCss = ".made-easy-navigationBarColor";
+                colorTypeCss = ".main-navigation";
             }else if(type == 'footerColor'){
                 // app.appSettings.footerColor =  styleColor;
                 colorTypeCss = ".made-easy-footerColor";
             }else if(type == 'buttonColor'){
                 // app.appSettings.buttonColor = styleColor  ;
-                colorTypeCss = ".made-easy-button-setting";
+                colorTypeCss = ".main-button";
             }
             // here to update button border color
             else if(type == 'buttonBorderColor'){
                 // app.appSettings.buttonBorderColor = styleColor  ;
-                colorTypeCss = ".made-easy-button-setting";
+                colorTypeCss = ".main-button";
             }
             // here update color in Css class
             else if(type == 'navigationBarFontColor') {
                 // app.appSettings.navigationBarFontColor = styleColor;
-                colorTypeCss = "#myNavbar";
+                colorTypeCss = ".main-navigation";
             }
             else if(type == 'buttonFontColor') {
                 // app.appSettings.buttonFontColor = styleColor;
-                colorTypeCss = ".made-easy-button-setting";
+                colorTypeCss = ".main-button";
             }
             else if(type == 'headerFontColor') {
                 // app.appSettings.headerFontColor = styleColor;
-                colorTypeCss = ".navbar-brand";
+                colorTypeCss = ".main-header-font";
             }
             else if(type == 'contentFontColor') {
                 // app.appSettings.contentFontColor = styleColor;
-                colorTypeCss = "p";
+                colorTypeCss = ".main-content-font";
             }
             else if(type == 'footerFontColor') {
                 // app.appSettings.footerFontColor = styleColor;
@@ -727,7 +728,7 @@ module.exports = {
     addWebStyleFontFamily : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/header/header.component.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
         var styleFontFamily = req.body.styleFontFamily;
         var type = req.body.type;
         var fontFamilyCss = '';
@@ -742,7 +743,7 @@ var data = req.body;
 
             if(type == 'headerFont'){
                 // app.appSettings.headerFontFamily = styleFontFamily;
-                fontFamilyCss = ".navbar-brand";
+                fontFamilyCss = ".main-header-font";
 
                 updateFile(mainCssFile, [{
                     rule: fontFamilyCss,
@@ -755,7 +756,7 @@ var data = req.body;
                 res.send("success");
             }else if(type == 'contentFont'){
                 // app.appSettings.contentFontFamily = styleFontFamily;
-                fontFamilyCss = "p";
+                fontFamilyCss = ".main-content-font";
 
                 updateFile(mainCssFile, [{
                     rule: fontFamilyCss,
@@ -817,7 +818,7 @@ var data = req.body;
     addWebStyleFontSize : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/header/header.component.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
         var styleFontSize = req.body.styleFontSize;
         var type = req.body.type;
         var data = {};
@@ -830,7 +831,7 @@ var data = req.body;
 
             if(type == 'headerFont'){
                 // app.appSettings.headerFontSize = styleFontSize;
-                fontSizeCss = ".navbar-brand";
+                fontSizeCss = ".main-header-font";
 
                 updateFile(mainCssFile, [{
                     rule: fontSizeCss,
@@ -843,7 +844,7 @@ var data = req.body;
 
             }else if(type == 'contentFont'){
                 // app.appSettings.contentFontSize= styleFontSize;
-                fontSizeCss = "p";
+                fontSizeCss = ".main-content-font";
 
                 updateFile(mainCssFile, [{
                     rule: fontSizeCss,
@@ -919,7 +920,7 @@ var data = req.body;
     addWebStyleFontWeight : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/app/header/header.component.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
         var styleFontWeight = req.body.styleFontWeight;
         var type = req.body.type;
         var fontWeightCss = '';
@@ -931,7 +932,7 @@ var data = req.body;
 
             if(type == 'headerFont'){
                 // app.appSettings.headerFontWeight = styleFontWeight;
-                fontWeightCss = ".navbar-brand";
+                fontWeightCss = ".main-header-font";
 
                 updateFile(mainCssFile, [{
                     rule: fontWeightCss,
@@ -945,7 +946,18 @@ var data = req.body;
 
             }else if(type == 'contentFont'){
                 // app.appSettings.contentFontWeight = styleFontWeight;
-                fontWeightCss = ".made-easy-content-font";
+                fontWeightCss = ".main-content-font";
+
+                updateFile(mainCssFile, [{
+                    rule: fontWeightCss,
+                    target: "font-weight",
+                    replacer: styleFontWeight
+                }], function (err) {
+                    sails.log.info((err));
+                });
+
+                res.send("success");
+
             }else if(type == 'footerFont'){
                 // app.appSettings.footerFontWeight = styleFontWeight;
                 fontWeightCss = ".made-easy-footer-font";
@@ -992,20 +1004,20 @@ var data = req.body;
     /**
      * Update button border width function
      */
-    addStyleButtonBorderWidth : function(req,res){
-        var userId = req.userId;
+    addWebStyleButtonBorderWidth : function(req,res){
+        var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
         var buttonBorderWidth = req.body.styleButtonBorderWidth;
-        var buttonBorderWidthCss = '.made-easy-button-setting';
+        var buttonBorderWidthCss = '.main-button';
 
-        var query = {id:appId};
-
-        Application.findOne(query).exec(function(err, app) {
-            if (err) res.send(err);
-            app.appSettings.buttonBorderWidth = buttonBorderWidth;
-            Application.update(query, app).exec(function (err, appUpdate) {
-                if (err) res.send(err);
+        // var query = {id:appId};
+        //
+        // Application.findOne(query).exec(function(err, app) {
+        //     if (err) res.send(err);
+        //     app.appSettings.buttonBorderWidth = buttonBorderWidth;
+        //     Application.update(query, app).exec(function (err, appUpdate) {
+        //         if (err) res.send(err);
 
                 updateFile(mainCssFile, [{
                     rule: buttonBorderWidthCss,
@@ -1015,10 +1027,10 @@ var data = req.body;
                     sails.log.info((err));
                 });
 
-                res.send(appUpdate);
-            });
+                res.send("success");
+            // });
 
-        });
+        // });
 
         /**
          * update css file with new changes
@@ -1053,21 +1065,21 @@ var data = req.body;
     /**
      * Update button border Radius function
      */
-    addStyleButtonBorderRadius : function(req,res){
+    addWebStyleButtonBorderRadius : function(req,res){
         sails.log.info(req.body);
-        var userId = req.userId;
+        var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
         var buttonBorderRadius = req.body.styleButtonBorderRadius;
-        var buttonBorderRadiusCss = '.made-easy-button-setting';
+        var buttonBorderRadiusCss = '.main-button';
 
-        var query = {id:appId};
-
-        Application.findOne(query).exec(function(err, app) {
-            if (err) res.send(err);
-            app.appSettings.buttonBorderRadius = buttonBorderRadius;
-            Application.update(query, app).exec(function (err, appUpdate) {
-                if (err) res.send(err);
+        // var query = {id:appId};
+        //
+        // Application.findOne(query).exec(function(err, app) {
+        //     if (err) res.send(err);
+        //     app.appSettings.buttonBorderRadius = buttonBorderRadius;
+        //     Application.update(query, app).exec(function (err, appUpdate) {
+        //         if (err) res.send(err);
 
                 updateFile(mainCssFile, [{
                     rule: buttonBorderRadiusCss,
@@ -1077,10 +1089,10 @@ var data = req.body;
                     sails.log.info((err));
                 });
 
-                res.send(appUpdate);
-            });
+                res.send("success");
+            // });
 
-        });
+        // });
 
 
         /**
