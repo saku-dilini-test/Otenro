@@ -115,7 +115,11 @@ module.exports.routes = {
     'POST /edit/addWebStyleFontWeight': 'edit/style/webStyleController.addWebStyleFontWeight',
 
     'POST /edit/addStyleButtonBorderWidth': 'edit/style/StyleController.addStyleButtonBorderWidth',
+    'POST /edit/addWebStyleButtonBorderWidth': 'edit/style/webStyleController.addWebStyleButtonBorderWidth',
+
     'POST /edit/addStyleButtonBorderRadius': 'edit/style/StyleController.addStyleButtonBorderRadius',
+    'POST /edit/addWebStyleButtonBorderRadius': 'edit/style/webStyleController.addWebStyleButtonBorderRadius',
+
     'POST /edit/addFonts': 'edit/style/StyleController.addFonts',
     'GET /edit/viewImages': 'EditController.viewImages',
     'GET /edit/buildSource': 'EditController.buildSource',

@@ -274,17 +274,19 @@
         $scope.styleButtonBorderWidthChange = function (data) {
             var styleButtonBorderWidth = data;
             var styleButtonBorderWidthData = {
+                userId:$auth.getPayload().id,
                 appId : appId,
                 styleButtonBorderWidth : styleButtonBorderWidth
             };
-            webStylesService.addStyleButtonBorderWidth(styleButtonBorderWidthData)
+            webStylesService.addWebStyleButtonBorderWidth(styleButtonBorderWidthData)
                 .success(function(data) {
                     toastr.success('Button Border Width Successfully Updated', {
                         closeButton: true
                     });
 
-                    var tempUrl = mySharedService.url;
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    // var tempUrl = mySharedService.url;
+                    mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime());
 
                 }).error(function(err) {
                     toastr.error('Unable to update Button Border Width', {
@@ -296,17 +298,19 @@
         $scope.styleButtonBorderRadiusChange = function (data) {
             var styleButtonBorderRadius = data;
             var styleButtonBorderRadiusData = {
+                userId:$auth.getPayload().id,
                 appId : appId,
                 styleButtonBorderRadius : styleButtonBorderRadius
             };
-            webStylesService.addStyleButtonBorderRadius(styleButtonBorderRadiusData)
+            webStylesService.addWebStyleButtonBorderRadius(styleButtonBorderRadiusData)
                 .success(function(data) {
                     toastr.success('Button Border Radius Successfully Updated', {
                         closeButton: true
                     });
 
-                    var tempUrl = mySharedService.url;
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    // var tempUrl = mySharedService.url;
+                    mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime());
 
                 }).error(function(err) {
                     toastr.error('Unable to update Button Border Radius', {

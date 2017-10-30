@@ -60,11 +60,11 @@
             addWebStyleFontWeight: function(Data){
                 return $http.post(SERVER_URL + 'edit/addWebStyleFontWeight',Data);
             },
-            addStyleButtonBorderWidth: function(Data){
-                return $http.post(SERVER_URL + 'edit/addStyleButtonBorderWidth',Data);
+            addWebStyleButtonBorderWidth: function(Data){
+                return $http.post(SERVER_URL + 'edit/addWebStyleButtonBorderWidth',Data);
             },
-            addStyleButtonBorderRadius: function(Data){
-                return $http.post(SERVER_URL + 'edit/addStyleButtonBorderRadius',Data);
+            addWebStyleButtonBorderRadius: function(Data){
+                return $http.post(SERVER_URL + 'edit/addWebStyleButtonBorderRadius',Data);
             },
             addFonts: function(Data){
                 return $http.post(SERVER_URL + 'edit/addFonts',Data);
