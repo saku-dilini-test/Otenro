@@ -50,6 +50,8 @@ module.exports.routes = {
     'POST /api/updateUserAdNetwork': 'AuthController.updateUserAdNetwork',
     'GET /api/getYourselfReason': 'AuthController.getYourselfReason',
     'GET /fromAddNetwork': 'AuthController.fromAddNetwork',
+    'GET /fromAddNetwork2': 'AuthController.fromAddNetwork2',
+    'GET /fromAddNetwork3': 'AuthController.fromAddNetwork3',
 
     /***
      * Billing Data
