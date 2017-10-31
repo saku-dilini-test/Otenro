@@ -123,6 +123,8 @@ module.exports = {
                           }
                       });
                   });
+              }else {
+                  return res.status(409).json({error: 'Registration Error'})
               }
           });
 
