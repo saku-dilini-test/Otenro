@@ -91,6 +91,7 @@ ion-content{
 .item-error-message{
     color: red;
     font-size: 70%;
+    white-space: normal;
 }
 
 /** ----------- End Custom update Css Class ---------- **/
