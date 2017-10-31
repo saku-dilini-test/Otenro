@@ -24,7 +24,7 @@
       "sourceMap": true,
       "declaration": false,
       "typeRoots": [
-        "node_modules/@types"
+        "/meServer/node_modules/@types"
       ],
     },
     meta: {
@@ -34,7 +34,7 @@
     },
     paths: {
       // paths serve as alias
-      'npm:': '../node_modules/'
+      'npm:': '/meServer/node_modules/'
     },
     // map tells the System loader where to look for things
     map: {
@@ -57,11 +57,11 @@
       // '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js',
       // '@angular/upgrade/static': 'npm:@angular/upgrade/bundles/upgrade-static.umd.js',
       '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
-       'owl.carousel': '../node_modules/owl.carousel/dist/owl.carousel.js',
+       'owl.carousel': 'npm:owl.carousel/dist/owl.carousel.js',
        'angular-owl-carousel': 'npm:angular-owl-carousel/',
        '@agm/core': 'npm:@agm/core/core.umd.js',
-       'nouislider': 'npm:/nouislider',
-      'ng2-nouislider': 'npm:/ng2-nouislider',
+       'nouislider': 'npm:nouislider',
+      'ng2-nouislider': 'npm:ng2-nouislider',
 
       // other libraries
       'rxjs':                      'npm:rxjs',
