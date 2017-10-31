@@ -1,8 +1,11 @@
 #!/bin/bash
 echo  'start....'
 
-MESERVER='/var/www/html/meServer/temp/';
-APPFILESERVER='/home/prasanna/Desktop/appFileServer/';
+**importData.sh
+
+MESERVER='/var/www/html/meServer/temp';
+NODE='/var/www/html/meServer/node_modules';
+APPFILESERVER='/home/dilakshan/Desktop/appFileServer/';
 
 ENV='dev'   #this is for development
 #ENV='pro'  #this is for production
@@ -65,6 +68,7 @@ mongoimport --db $DB --collection thirdnavigation --file dataFiles/thirdnavigati
 #mongoexport --db $DB --collection thirdnavigation --out thirdnavigation.json
 
 echo $MESERVER
+echo $NODE
 
 cd meServerFiles/unknownUser/templates/
    for d in ./*;do
@@ -77,6 +81,7 @@ cd meServerFiles/unknownUser/templates/
 cd ../../../
 cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
 cp -r ./meServerFiles/unknownUser $MESERVER
+cp -r ./meServerFiles/node_modules $NODE
 
 
 
