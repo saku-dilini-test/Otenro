@@ -13,15 +13,15 @@
             user.cap = angular.element('#recaptcha_response_field').val();
 
             if($stateParams.data && $stateParams.data.addname) {
-                user.adagent = $stateParams.data.addname;
-                user.affid = $stateParams.data.affid;
+                // user.adagent = $stateParams.data.addname;
+                // user.affid = $stateParams.data.affid;
             }
             console.log(user);
 
             Auth.register(user).success(function () {
 
                 if($stateParams.data && $stateParams.data.addname) {
-                    Auth.sendAgentInfo($stateParams.data);
+                    //Auth.sendAgentInfo($stateParams.data);
                 }
                 toastr.success('Register Successful ', 'Congratulations ! ', {closeButton: true});
                 if ($scope.user.email== 'support@otenro.com'){

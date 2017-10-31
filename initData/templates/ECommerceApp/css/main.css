@@ -76,6 +76,7 @@ ion-nav-view{
 .item-error-message{
     color: red;
     font-size: 70%;
+    white-space: normal;
 }
 .item-buy{
     width: 100%;

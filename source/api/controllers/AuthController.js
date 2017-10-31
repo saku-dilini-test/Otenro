@@ -83,7 +83,9 @@ module.exports = {
 
   register: function(req, res) {
 
+
       console.log("req.body.cap "+req.body.cap);
+
 
       var postData = {
           secret: '6LdkazYUAAAAAK-iSfM23fREPrdyfxCtztJoYaYY',
@@ -308,6 +310,48 @@ module.exports = {
 
       }
       return res.redirect( baseUrl + '/#/fromAddNetwork?' + urlParamString );
-  }
+  },
+
+    /**
+     * Redirect to addNetwork2 page
+     **/
+    fromAddNetwork2 : function (req, res) {
+        var baseUrl = sails.config.REDIRECT_URL;
+        var urlParamString = "";
+        var requestParameters = req.allParams();
+        var length = Object.keys(requestParameters).length;
+        for(var key in requestParameters){
+            if(length == 1){
+                urlParamString += key + '=' + requestParameters[key];
+            }
+            if(length > 1){
+                urlParamString += key + '=' + requestParameters[key] + '&';
+                length = length - 1;
+            }
+
+        }
+        return res.redirect( baseUrl + '/#/fromAddNetwork2?' + urlParamString );
+    },
+
+    /**
+     * Redirect to addNetwork3 page
+     **/
+    fromAddNetwork3 : function (req, res) {
+        var baseUrl = sails.config.REDIRECT_URL;
+        var urlParamString = "";
+        var requestParameters = req.allParams();
+        var length = Object.keys(requestParameters).length;
+        for(var key in requestParameters){
+            if(length == 1){
+                urlParamString += key + '=' + requestParameters[key];
+            }
+            if(length > 1){
+                urlParamString += key + '=' + requestParameters[key] + '&';
+                length = length - 1;
+            }
+
+        }
+        return res.redirect( baseUrl + '/#/fromAddNetwork3?' + urlParamString );
+    },
 
 };
