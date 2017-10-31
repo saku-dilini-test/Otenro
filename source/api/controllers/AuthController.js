@@ -38,7 +38,11 @@ module.exports = {
           },
 
           success: function (){
-              User.update({email : req.body.email},{lastLoginTime : new Date()}, function(err1){
+              var loginCount = 0;
+              if(user.loginCount){
+                  loginCount = user.loginCount + 1;
+              }
+              User.update({email : req.body.email},{lastLoginTime : new Date(), loginCount : loginCount}, function(err1){
               });
             createToken(user,res);
           }
@@ -90,9 +94,12 @@ module.exports = {
             yourselfReason : req.body.yourselfReason,
               lastLoginTime : new Date()
           };
+        /*
+        Temporary fix to remove the ad agent registration from ad network landing pages
+         */
           if(req.body.adagent){
-              newUserDetails.adagent = req.body.adagent;
-              newUserDetails.affid = req.body.affid;
+              //newUserDetails.adagent = req.body.adagent;
+              //newUserDetails.affid = req.body.affid;
           }
 
           User.create(newUserDetails).exec(function(err, user) {
@@ -263,5 +270,69 @@ module.exports = {
       if (err) return done(err);
       res.send(result);
     });
-  }
+  },
+
+  /**
+   * Redirect to addNetwork page
+   **/
+  fromAddNetwork : function (req, res) {
+      var baseUrl = sails.config.REDIRECT_URL;
+      var urlParamString = "";
+      var requestParameters = req.allParams();
+      var length = Object.keys(requestParameters).length;
+      for(var key in requestParameters){
+          if(length == 1){
+              urlParamString += key + '=' + requestParameters[key];
+          }
+          if(length > 1){
+              urlParamString += key + '=' + requestParameters[key] + '&';
+              length = length - 1;
+          }
+
+      }
+      return res.redirect( baseUrl + '/#/fromAddNetwork?' + urlParamString );
+  },
+
+    /**
+     * Redirect to addNetwork2 page
+     **/
+    fromAddNetwork2 : function (req, res) {
+        var baseUrl = sails.config.REDIRECT_URL;
+        var urlParamString = "";
+        var requestParameters = req.allParams();
+        var length = Object.keys(requestParameters).length;
+        for(var key in requestParameters){
+            if(length == 1){
+                urlParamString += key + '=' + requestParameters[key];
+            }
+            if(length > 1){
+                urlParamString += key + '=' + requestParameters[key] + '&';
+                length = length - 1;
+            }
+
+        }
+        return res.redirect( baseUrl + '/#/fromAddNetwork2?' + urlParamString );
+    },
+
+    /**
+     * Redirect to addNetwork3 page
+     **/
+    fromAddNetwork3 : function (req, res) {
+        var baseUrl = sails.config.REDIRECT_URL;
+        var urlParamString = "";
+        var requestParameters = req.allParams();
+        var length = Object.keys(requestParameters).length;
+        for(var key in requestParameters){
+            if(length == 1){
+                urlParamString += key + '=' + requestParameters[key];
+            }
+            if(length > 1){
+                urlParamString += key + '=' + requestParameters[key] + '&';
+                length = length - 1;
+            }
+
+        }
+        return res.redirect( baseUrl + '/#/fromAddNetwork3?' + urlParamString );
+    },
+
 };

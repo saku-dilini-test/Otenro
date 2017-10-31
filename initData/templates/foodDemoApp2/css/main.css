@@ -164,6 +164,7 @@ ion-side-menu-content{
 .made-easy-view .item-error-message{
     color: red;
     font-size: 70%;
+    white-space: normal;
 }
 
 /* ----- About Us Page ----- */

@@ -69,16 +69,15 @@
             };
             articleService.getArticleCategoryByAppId()
                 .success(function (data) {
-                    $scope.dummyCat.push({name:"Create New Category"});
+                    $scope.dummyCat.push({id:1,name:"Create New Category"});
                     data.forEach(function(aricaleCat) {
-                        console.log(aricaleCat.name);
-                        $scope.dummyCat.push({name:aricaleCat.name});
+                       $scope.dummyCat.push({id:aricaleCat.id,name:aricaleCat.name});
                     });
 
-                    console.log($scope.dummyCat);
 
                     $scope.articleCat = {
-                        "values":  $scope.dummyCat
+                        "value" : $scope.dummyCat.id,
+                        "values": $scope.dummyCat
                     };
                 }).error(function (error) {
                     toastr.error('Articles Category List Loading Error', 'Message', {
@@ -113,10 +112,12 @@
             $scope.tmpImage[0] = SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article/"+initialData.imageUrl;
 
+
             $scope.seletedCategoryId = initialData.categoryId;
 
             articleService.getArticleCategoryByAppId()
                 .success(function (data) {
+                 
                     $scope.articleCat = {
                         "value" : initialData.categoryId,
                         "values":  data
@@ -150,11 +151,10 @@
         };
 
         $scope.changeArticleCat = function(catId){
-            console.log(catId);
-            if (catId=="Create New Category"){
+            if (catId.id == 1){
                 mainMenuService.showMainMenuDialog();
             }
-            $scope.seletedCategoryId = catId;
+            $scope.seletedCategoryId = catId.id;
         }
 
         $scope.deleteImg = function(index){
@@ -224,7 +224,7 @@
                     isImageUpdate = false;
                 }
 
-                articleService.publishArticle(file,article.id,$scope.seletedCategoryId,article.title, article.desc, 
+                articleService.publishArticle(file,article.id,$scope.seletedCategoryId,article.title, article.desc,
                                               $rootScope.appId,$scope.isNewArticle,isImageUpdate)
                     .progress(function (evt) {
                         
@@ -377,6 +377,32 @@
                 });
             })
         };
+
+        /**
+         * set articles' images crop aspect ratios to $scope
+         **/
+        $scope.setAspectRatio = function () {
+            mainMenuService.getApplicationData($rootScope.appId)
+                .success(function (data) {
+                    if (data.templateId){
+                        mainMenuService.getTemplateData(data.templateId)
+                            .success(function (templateData) {
+                                if(templateData.thirdNaviAspectRatio){
+                                    $scope.thirdNaviAspectRatio = parseFloat(templateData.thirdNaviAspectRatio);
+                                }
+                            }).error(function (err) {
+                            toastr.error(err.message, 'Warning', {
+                                closeButton: true
+                            });
+                        });
+                    }
+                }).error(function (err) {
+                toastr.error(err.message, 'Warning', {
+                    closeButton: true
+                });
+            });
+        };
+        $scope.setAspectRatio();
 
     }
 })();

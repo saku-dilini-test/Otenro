@@ -84,6 +84,7 @@ a{
 .item-error-message{
     color: red;
     font-size: 70%;
+    white-space: normal;
 }
 
 /* ------------------- */

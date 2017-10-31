@@ -108,7 +108,9 @@
           videoControl.play();
       }
       setTimeout(function(){
-          videoControl.play();
+          if(videoControl){
+              videoControl.play();
+          }
       },4000);
 
       $scope.pause = function(){

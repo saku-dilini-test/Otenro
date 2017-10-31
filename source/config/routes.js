@@ -49,6 +49,9 @@ module.exports.routes = {
     'POST /auth/facebook': 'AuthController.facebookAuth',
     'POST /api/updateUserAdNetwork': 'AuthController.updateUserAdNetwork',
     'GET /api/getYourselfReason': 'AuthController.getYourselfReason',
+    'GET /fromAddNetwork': 'AuthController.fromAddNetwork',
+    'GET /fromAddNetwork2': 'AuthController.fromAddNetwork2',
+    'GET /fromAddNetwork3': 'AuthController.fromAddNetwork3',
 
     /***
      * Billing Data
@@ -266,6 +269,8 @@ module.exports.routes = {
     'GET /templates/getPolicies': 'template/TemplateController.getPolicies',
     'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
     'POST /templates/postDeviceId': 'template/TemplateController.postDeviceId',
+    'GET /templates/getOrdersOfUser': 'template/TemplateController.getOrdersOfUser',
+    'GET /templates/getTemplateData' : 'template/TemplateController.getTemplateByPreviewId',
 
 
     /**
@@ -312,9 +317,11 @@ module.exports.routes = {
 
     /***
      * Technical Support Controller
+     *
      **/  
      'GET  /edit/getAllAppsData': 'technicalSupport/TechnicalSupportController.getAllAppsData',
      'POST  /edit/getPublishDetails': 'technicalSupport/TechnicalSupportController.getPublishDetails',
+    'POST  /edit/getUserApps': 'technicalSupport/TechnicalSupportController.getUserApps',
      'GET    /edit/getPushConfigDetails': 'technicalSupport/TechnicalSupportController.getPushConfigDetails',
      'POST   /edit/savePushConfigDetails': 'technicalSupport/TechnicalSupportController.savePushConfigDetails',
      'POST   /edit/saveAdNetwork': 'technicalSupport/TechnicalSupportController.saveAdNetwork',

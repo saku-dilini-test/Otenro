@@ -76,6 +76,20 @@
                 });
             }
 
+        if($stateParams.selectedUserId){
+            var data ={userId :$stateParams.selectedUserId}
+            technicalSupportService.getUserApps(data)
+                .success(function (result) {
+                    $scope.userAppsList = result;
+                }).error(function (error) {
+                toastr.error('Loading Error', 'Warning', {
+                    closeButton: true
+                });
+            })
+        }
+
+
+
 
             /**
              * @ngdoc init data
@@ -134,6 +148,13 @@
                 })
                 
             }
+
+           $scope.getUserAppData = function (userId) {
+                var data ={selectedUserId:userId}
+               $state.go('user.viewUserApps',data);
+
+            }
+
 
             getAllAppDataList();
 
@@ -258,8 +279,7 @@
                    }).error(function (error) {
                    toastr.error('Send mail Error', 'Warning', {closeButton: true});
                });
-
-
+               
            }
 
     }

@@ -1,4 +1,9 @@
     <div ng-if="isAuthenticated">
+        <!--Google Analytics-->
+        <script>
+            ga('set', 'page', 'technical-support');
+            ga('send', 'pageview');
+        </script>
         <div class="obl-dashboard-wrapper" ng-controller="HeaderController" ng-show="auth.isAuthenticated()">
             <div class="obl-dashboard-header clearfix">
                 <h2 ng-hide="welcome"> </h2>

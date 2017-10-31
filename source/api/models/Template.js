@@ -39,7 +39,13 @@ module.exports = {
         },
         previewId : {
             type: 'string'
-        }
+        },
+        secondNaviAspectRatio : {
+            type: 'float'
+        },
+        thirdNaviAspectRatio : {
+            type: 'float'
+        },
     }
     /*,
     seedData: [

@@ -63,6 +63,19 @@ angular.module('invisionApp', ['ionic', 'ngCordova','ionic.cloud', 'srfSocialSha
 						$rootScope.appName = data.name;
 					});
 				}
+
+                ionic.Platform.isIE = function() {
+                    return ionic.Platform.ua.toLowerCase().indexOf('trident') > -1;
+                }
+
+                if (ionic.Platform.isIE()) {
+                    window.addEventListener('click', function(event) {
+                            if (Object.prototype.toString.call(event) == '[object PointerEvent]') {
+                                event.stopPropagation();
+                            }
+                        }
+                        , true);
+                }
 			});
 		}
 	])

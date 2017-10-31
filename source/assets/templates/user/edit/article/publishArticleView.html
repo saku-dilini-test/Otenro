@@ -1,4 +1,11 @@
 <md-dialog aria-label="publish-article">
+
+    <!--Google Analytics-->
+    <script>
+        ga('set', 'page', 'publish-article');
+        ga('send', 'pageview');
+    </script>
+
     <md-dialog-content>
         <div class="md-dialog-header">
             <h1>publish an article</h1>
@@ -8,9 +15,9 @@
 
             <fieldset>
                 <label>Article Category</label>
-                    <select class="input-shadow-border" ng-model="articleCat.value"
-                            ng-options="v.name as v.name for v in articleCat.values"
-                            ng-click="changeArticleCat(articleCat.value)" required>
+                    <select class="input-shadow-border" ng-model="dummyCat.id"
+                            ng-options="v.name for v in dummyCat"
+                            ng-click="changeArticleCat(dummyCat.id)" required>
                     </select>
             </fieldset>
             <fieldset>
@@ -35,7 +42,7 @@
                 <!--<div class="md-dialog-main">-->
                     <div class="file-upload-wrapper clearfix">
                         <div class="cropArea">
-                            <img-crop image="myImage" area-type="square" result-image="picFile"
+                            <img-crop image="myImage" area-type="rectangle" aspect-ratio="thirdNaviAspectRatio" result-image="picFile"
                             >
                             </img-crop>
                         </div>

@@ -36,4 +36,18 @@ module.exports = {
     fileServerUrl :function(req,res){
         res.send({fileServerUrl:config.server.host+':'+config.server.port})
     }
+    ,
+    clearAllAppData : function(req,res){
+        console.log();
+        var searchApp = {
+            userId: req.param("data"),
+            status:'DRAFT'
+        };
+        Application.destroy(searchApp, function(err, apps) {
+            if (err) return done(err);
+            res.ok();
+        });
+    }
+
+
 };

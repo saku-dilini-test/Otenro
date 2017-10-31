@@ -60,6 +60,19 @@ angular.module('starter', ['ionic','ionic.cloud','ionicLazyLoad','starter.servic
           });
         }
 
+          ionic.Platform.isIE = function() {
+              return ionic.Platform.ua.toLowerCase().indexOf('trident') > -1;
+          }
+
+          if (ionic.Platform.isIE()) {
+              window.addEventListener('click', function(event) {
+                      if (Object.prototype.toString.call(event) == '[object PointerEvent]') {
+                          event.stopPropagation();
+                      }
+                  }
+                  , true);
+          }
+
       });
     })
     .config(function($ionicConfigProvider) {

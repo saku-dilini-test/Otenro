@@ -24,7 +24,7 @@
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Email Address</span>
                 <input type="email" name="email" placeholder="" ng-model="data.email" ng-required="true">
-                <span class="help-block" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
+                <span class="item-error-message" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
               Enter a proper email
             </span>
               </label>
@@ -72,7 +72,7 @@
               </label>
               <label class="item item-input item-stacked-label ">
                 <div class="row">
-                  <div ng-if="signUpForm.$error.required">
+                  <div ng-if="signUpForm.$error.required && signUpForm.$dirty">
                                                     <span class="animated zoomIn item-error-message">
                                                         All the fields needs to be filled
                                                     </span>

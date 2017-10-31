@@ -1,4 +1,9 @@
 <div ng-if="isAuthenticated">
+    <!--Google Analytics-->
+    <script>
+        ga('set', 'page', 'technical-support');
+        ga('send', 'pageview');
+    </script>
     <div class="obl-dashboard-wrapper" ng-controller="HeaderController" ng-show="auth.isAuthenticated()">
         <div class="obl-dashboard-header clearfix">
             <h2 ng-hide="welcome"> </h2>
@@ -29,7 +34,7 @@
                 <thead class="obl-dashboard-apps">
                 <th>Id</th>
                 <th>Application Name</th>
-                <th>User Id</th>
+                <th>Email</th>
                 <th>Application Status</th>
                 <th>Action</th>
                 <!--<th>User Details</th>-->
@@ -37,9 +42,19 @@
 
                 <tbody>
                 <tr ng-repeat="app in appList">
-                    <td><a href="{{serverURL}}templates/viewTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">{{app.id}}</a></td>
+                    <td >
+                    <a href="{{serverURL}}templates/viewTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">
+                        {{app.id}}
+                    </a>
+                    </td>
                     <td>{{app.appName}}</td>
-                    <td>{{app.userId}}</td>
+                    <td>
+                        <div data-ng-repeat="user in userList">
+                            <div ng-if="user.id==app.userId">
+                                {{user.email}}
+                            </div>
+                        </div>
+                    </td>
                     <td>{{app.status}}</td>
                     <td>
                         <a  ng-if="app.status=='PENDING'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>
@@ -96,6 +111,7 @@
                             <th>Created Date</th>
                             <th>Last login</th>
                             <th>isActive</th>
+                            <th>Login Count</th>
                             </thead>
                             <tbody>
                             <tr ng-repeat="app in adUserList">
@@ -105,6 +121,7 @@
                                     <td> {{app.createdAt}} </td>
                                     <td> {{app.lastLoginTime}} </td>
                                     <td> {{app.isActive}} </td>
+                                    <td> {{app.loginCount}} </td>
                             </tr>
                             </tbody>
                         </table>
@@ -127,15 +144,17 @@
                         <th>About User</th>
                         <th>Created Date</th>
                         <th>Last login</th>
+                        <th>Login Count</th>
                         </thead>
                            <tbody>
                            <tr ng-repeat="app in userList">
                             <td> {{$index +1}} </td>
-                            <td> {{app.email}} </td>
-                            <td> {{app.id}} </td>
+                            <td>{{app.email}}</td>
+                            <td><a data-ng-click="getUserAppData(app.id)">{{app.id}}</a></td>
                             <td> {{app.yourselfReason}} </td>
                             <td> {{app.createdAt}} </td>
                              <td> {{app.lastLoginTime}} </td>
+                             <td> {{app.loginCount}} </td>
                            </tr>
                            </tbody>
                     </table>

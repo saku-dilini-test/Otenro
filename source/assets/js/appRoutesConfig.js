@@ -1,5 +1,5 @@
 angular.module('app')
-  .config(function($stateProvider, $urlRouterProvider , AccessLevels) {
+  .config(function($stateProvider, $urlRouterProvider ,$locationProvider, AccessLevels) {
 
     $stateProvider
       .state('anon', {
@@ -51,6 +51,24 @@ angular.module('app')
             },
             controller: 'LoginController',
             templateUrl : 'auth/addNetwork.html'
+
+      }).state('anon.addNetwork2',{
+            url :'/fromAddNetwork2?clickid&affid',
+            params: {
+                affid: null,
+                clickid:null
+            },
+            controller: 'LoginController',
+            templateUrl : 'auth/addNetwork2.html'
+
+      }).state('anon.addNetwork3',{
+            url :'/fromAddNetwork3?clickid&affid',
+            params: {
+                affid: null,
+                clickid:null
+            },
+            controller: 'LoginController',
+            templateUrl : 'auth/addNetwork3.html'
 
       }).state('anon.livePreview',{
             url :'/livePreview/:p',
@@ -126,13 +144,14 @@ angular.module('app')
             }
 
       }).state('user.viewPublishDetails',{
-            url :'/viewPublishDetails/:appId/:userId',
-            controller : 'technicalSupportCtrl',
-            data : {
-                appId : null,
-                userId:null,
-            },
-            templateUrl : 'user/technicalSupport/ViewPublishDetails.html'
+        url :'/viewPublishDetails/:appId/:userId',
+        controller : 'technicalSupportCtrl',
+        data : {
+            appId : null,
+            userId:null,
+        },
+        templateUrl : 'user/technicalSupport/ViewPublishDetails.html'
+
       }).state('user.viewAdNetworks',{
         url :'/viewAdNetworks/:adname',
         controller : 'technicalSupportCtrl',
@@ -140,6 +159,14 @@ angular.module('app')
             adname : null
         },
         templateUrl : 'user/technicalSupport/AdNetworkDetails.html'
+
+    }).state('user.viewUserApps',{
+        url :'/viewUserApps/:selectedUserId',
+        controller : 'technicalSupportCtrl',
+        selectedUserId : {
+            userId : null
+        },
+        templateUrl : 'user/technicalSupport/viewUserApps.html'
     });
 
      $stateProvider
@@ -163,5 +190,5 @@ angular.module('app')
         ;
 
     $urlRouterProvider.otherwise('/');
-
+     // $locationProvider.html5Mode(true);
   });

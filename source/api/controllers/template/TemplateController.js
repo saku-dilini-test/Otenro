@@ -465,7 +465,39 @@ module.exports = {
                 	});
                 }
         });
+    },
+    /**
+     * Return all orders of a particular user
+     * @param req {appId : string, userId' : string }
+     * @param res {json}
+     */
+    getOrdersOfUser : function (req, res) {
+        var appId = req.param('appId');
+        var registeredUser = req.param('userId');
+        var searchApp = {
+            appId : appId,
+            registeredUser : registeredUser
+
+        };
+        ApplicationOrder.find().where(searchApp).exec(function (err, result) {
+            if (err) return done(err);
+            res.json(result);
+        });
+     },
+                                                      
+     /**
+     * Get template data using previewId and return it as json response
+     * */
+    getTemplateByPreviewId : function (req, res) {
+        var templateId = req.param('templateId');
+        Template.findOne({ previewId : templateId })
+            .exec(function (err, template) {
+            if (err) return done(err);
+            res.json(template);
+
+        });
     }
+
 
 
 };

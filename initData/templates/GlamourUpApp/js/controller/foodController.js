@@ -217,13 +217,17 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                     var i=0;
                     while(i < $rootScope.cart.cartItems.length){
                         if($scope.foodInfo.id == $rootScope.cart.cartItems[i].id && $scope.selectedVariant.sku == $rootScope.cart.cartItems[i].sku){
+                            $rootScope.cart.cartItems[i].totWeight += $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartItems[i].qty += $scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                            $rootScope.parseWeight = $scope.selectedVariant.weight;
+
                             $scope.modal.hide();
                             break;
                         }
                         else if(i == ($rootScope.cart.cartItems.length -1)){
+                            $rootScope.position2 = true;
                             $rootScope.cart.cartItems.push({
                                 id: $scope.foodInfo.id,
                                 name: $scope.foodInfo.name,
@@ -233,7 +237,9 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                                 price: $scope.selectedVariant.price,
                                 total : $scope.selectedVariant.price,
                                 imgURL : $scope.images,
-                                totalQty: $scope.selectedVariant.quantity
+                                totalQty: $scope.selectedVariant.quantity,
+                                weight: $scope.selectedVariant.weight  //(new) added weight of each product
+
 
                             });
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
@@ -254,10 +260,13 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                     price: $scope.selectedVariant.price,
                     total : $scope.selectedVariant.price,
                     imgURL : $scope.images,
-                    totalQty: $scope.selectedVariant.quantity
+                    totalQty: $scope.selectedVariant.quantity,
+                    weight: $scope.selectedVariant.weight //(new) added weight of each product
+
                 });
                 $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                 $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                $rootScope.parseWeight = $scope.selectedVariant.weight;
                 $scope.modal.hide();
             }
         }
