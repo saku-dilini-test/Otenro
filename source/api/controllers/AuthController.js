@@ -83,34 +83,55 @@ module.exports = {
 
   register: function(req, res) {
 
-    User.findOne({email: req.body.email}, function foundUser(err, user) {
-      if (err) return res.negotiate(err);
-      if (user) return res.status(409).json({error: 'already exists'});
-          var newUserDetails = {
-            firstName : req.body.fname,
-            lastName  : req.body.lname,
-            email     : req.body.email,
-            password  : req.body.password,
-            yourselfReason : req.body.yourselfReason,
-              lastLoginTime : new Date()
-          };
-        /*
-        Temporary fix to remove the ad agent registration from ad network landing pages
-         */
-          if(req.body.adagent){
-              //newUserDetails.adagent = req.body.adagent;
-              //newUserDetails.affid = req.body.affid;
-          }
 
-          User.create(newUserDetails).exec(function(err, user) {
-            if (err) {
-              return res.negotiate(err);
-            }
-            if (user) {
-              createToken(user,res);
-            }
+      console.log("req.body.cap "+req.body.cap);
+
+
+      var postData = {
+          secret: '6LdkazYUAAAAAK-iSfM23fREPrdyfxCtztJoYaYY',
+          response: req.body.cap,
+          remoteip :''
+      }
+
+      request.post({
+              url: 'https://www.google.com/recaptcha/api/siteverify',
+              form: postData
+          },
+          function (err, httpResponse, body) {
+              console.log(err, JSON.parse(body));
+              if (JSON.parse(body).success=='true'){
+                  User.findOne({email: req.body.email}, function foundUser(err, user) {
+                      if (err) return res.negotiate(err);
+                      if (user) return res.status(409).json({error: 'already exists'});
+                      var newUserDetails = {
+                          firstName : req.body.fname,
+                          lastName  : req.body.lname,
+                          email     : req.body.email,
+                          password  : req.body.password,
+                          yourselfReason : req.body.yourselfReason,
+                          lastLoginTime : new Date()
+                      };
+                      if(req.body.adagent){
+                          newUserDetails.adagent = req.body.adagent;
+                          newUserDetails.affid = req.body.affid;
+                      }
+
+                      User.create(newUserDetails).exec(function(err, user) {
+                          if (err) {
+                              return res.negotiate(err);
+                          }
+                          if (user) {
+                              createToken(user,res);
+                          }
+                      });
+                  });
+              }else {
+                  return res.status(409).json({error: 'Registration Error'})
+              }
           });
-    });
+
+
+
   },
     sendAgentInfo: function(req, res) {
         var retUrl = req.body.returnUrl;

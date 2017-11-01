@@ -10,12 +10,14 @@
         $scope.yourselfReasonList = initialData.yourselfReasonList.data;
 
         $scope.authSignUp = function (user) {
+            user.cap = angular.element('#recaptcha_response_field').val();
 
             if($stateParams.data && $stateParams.data.addname) {
                 // user.adagent = $stateParams.data.addname;
                 // user.affid = $stateParams.data.affid;
             }
             console.log(user);
+
             Auth.register(user).success(function () {
 
                 if($stateParams.data && $stateParams.data.addname) {
