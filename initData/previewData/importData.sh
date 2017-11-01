@@ -1,11 +1,9 @@
 #!/bin/bash
 echo  'start....'
 
-**importData.sh
-
-MESERVER='/var/www/html/meServer/temp';
-NODE='/var/www/html/meServer/node_modules';
-APPFILESERVER='/home/dilakshan/Desktop/appFileServer/';
+MESERVER='c:/xampp/htdocs/meServer/temp/';
+NODE='c:/xampp/htdocs/meServer/';
+APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
 
 ENV='dev'   #this is for development
 #ENV='pro'  #this is for production

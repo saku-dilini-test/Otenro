@@ -279,8 +279,6 @@ module.exports = {
                 serverOrg=config.server.host+":1337",
                 isAppNameAvailable=false;
 
-        console.log("templatePath  : " + templatePath);
-
         var appQuery = { 
                 "userId":userId, 
                 "appName":req.body.appName
@@ -308,22 +306,11 @@ module.exports = {
                               },
                               button : true
                           };
-                      if(templateName == 'demo' ){
-                          loginPath = '/#/app/login';
-                          isApplyStyle = {
-                              color : {
-                                  backgroundColor: true,
-                                  navigationColor: true,
-                                  footerColor: false
-                              },
-                              typography : {
-                                  header : true,
-                                  content : true,
-                                  footer : false
-                              },
-                              button : true
-                          }
-                      }
+                      Template.find(
+                      {"template_name":req.body.templateName}
+                      ).exec(function (err, template) {
+                      if (err) res.negotiate(err);
+                      isApplyStyle =  template[0].appStyle;
 
 
                       var application ={
@@ -386,42 +373,6 @@ module.exports = {
                               fs.outputJson(madeEasyFilePath,madeEasyFileContent, function (err) {
                                   if(err) return console.error(err);
                               });
-
-                              // fs.readFile(tempAppDirPath +app.id+'/config.xml', 'utf-8',
-                              //     function(err, data) {
-                              //         if (err) return res.negotiate(err);
-                              //         var parser = new xml2js.Parser(),
-                              //             xmlBuilder = new xml2js.Builder();
-                              //
-                              //         parser.parseString(data, function (err, result) {
-                              //             result.widget['$'].id="com.otenro."+appName.replace(/\s/g, '').toLowerCase()+app.id;
-                              //             var xml = xmlBuilder.buildObject(result);
-                              //
-                              //             fs.writeFile(tempAppDirPath +app.id+'/config.xml', xml,'utf-8', function(err) {
-                              //
-                              //                 if (err) return res.negotiate(err);
-                              //             });
-                              //
-                              //         });
-                              //     });
-
-                              // fs.readFile(tempAppDirPath +app.id+'/js/constantsService.js', 'utf-8',
-                              //     function(err, data) {
-                              //         if (err) return res.negotiate(err);
-                              //         fs.writeFile(tempAppDirPath +app.id+'/js/constantsService.js', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
-                              //             if (err) return res.negotiate(err);
-                              //         });
-                              //     });
-                              //
-                              // fs.readFile(tempAppDirPath +app.id+'/js/app.js', 'utf-8',
-                              //     function(err, data) {
-                              //         if (err) return res.negotiate(err);
-                              //         data=data.replace(serverTmp,serverOrg);
-                              //         data=data.replace(serverTmp,serverOrg);
-                              //         fs.writeFile(tempAppDirPath + app.id +'/js/app.js', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
-                              //             if (err) return res.negotiate(err);
-                              //         });
-                              //     });
 
                               /** config -|- copy template images to App File Server
                                * TODO : future development, Template dummy data move to another folder
@@ -606,7 +557,8 @@ module.exports = {
                               message: "New Application has been created"
                           });
                       });
-                  }
+                  });
+                }
             });
         },
 
