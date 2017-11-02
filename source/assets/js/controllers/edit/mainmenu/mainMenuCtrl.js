@@ -187,8 +187,18 @@
                         if($scope.templateCategory == tempCatBusiness){
                             mainMenuService.deleteData(item).success(function(data) {
 
-                                var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                               +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                var urlPath;
+                                if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
+                                    urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                                }else {
+
+                                    urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                                }
+
                                 $scope.appTemplateUrl = urlPath+'' +
                                     '#/app/update?'+new Date().getTime();
                                 mySharedService.prepForBroadcast($scope.appTemplateUrl);
@@ -256,10 +266,22 @@
                 console.dir(initialData.prodItem)
                 //$log.debug("Add new Menu Navigation ");
                 mainMenuService.addMenu(file,$rootScope.appId,menu.name).success(function(data) {
-                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                    $scope.appTemplateUrl = urlPath+'' +
-                        '#/app/home/'+data.id+'?'+new Date().getTime();
+
+                    console.log("$rootScope.tempNew : " + $rootScope.tempNew);
+                    var urlPath;
+                    if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
+                        urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                            + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                    }else {
+
+                        urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                            + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                    }
+                    $scope.appTemplateUrl = urlPath + '' +
+                        '#/app/home/' + data.id + '?' + new Date().getTime();
+
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     toastr.success("New Category Added", 'Message', {closeButton: true});
                     $mdDialog.hide();

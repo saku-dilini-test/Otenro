@@ -363,7 +363,7 @@ module.exports = {
                               console.log("app.id "   + app.id );
 
                               if (err) return console.error(err);
-                              var madeEasyFilePath = tempAppDirPath +app.id+'/madeEasy.Project';
+                              var madeEasyFilePath = tempAppDirPath +app.id+'/src/app/madeEasy.json';
                               var madeEasyFileContent = {
                                   name : appName,
                                   appId : app.id,
@@ -397,38 +397,10 @@ module.exports = {
                            */
 
                           if(templateName == 'demo' ) {
-                              var mainNavi = [{
-                                  "name": "Promo",
-                                  "link": "promo",
-                                  "appId": app.id,
-                                  "icon": "glyphicon glyphicon-cloud"
-                              },
-                                  {
-                                      "name": "Category",
-                                      "link": "category",
-                                      "appId": app.id,
-                                      "icon": "glyphicon glyphicon-cloud"
-                                  },
-                                  {
-                                      "name": "Best Seller",
-                                      "link": "bestSeller",
-                                      "appId": app.id,
-                                      "icon": "glyphicon glyphicon-cloud"
-                                  }
+                              var mainNavi = [
                               ];
 
-                              var secondNavi = [{
-                                  "imageUrl": "category_61_5327.jpg",
-                                  "appId": app.id,
-                                  "name": "Hot",
-                                  "desc": "Hot description"
-                              },
-                                  {
-                                      "imageUrl": "melko-21290330.jpg",
-                                      "appId": app.id,
-                                      "name": "Low",
-                                      "desc": "Low description"
-                                  }];
+                              var secondNavi = [];
 
                               var thirdNavi1 = [
                                   {

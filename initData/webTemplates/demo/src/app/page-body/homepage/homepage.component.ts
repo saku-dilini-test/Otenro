@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {  trigger,  state,  style,  animate,  transition} from '@angular/animations';
-
-
+import { HttpClient } from '@angular/common/http';
+import { SERVER_URL } from '../../constantsService';
+import * as data from '../../madeEasy.json';
 
 @Component({
   selector: 'app-homepage',
@@ -24,14 +25,42 @@ import {  trigger,  state,  style,  animate,  transition} from '@angular/animati
 })
 export class HomepageComponent implements OnInit {
 
-constructor(private router: Router) { }
+  public appId = (<any>data).appId;
+  public userId = (<any>data).userId;
+  
+  imageUrl = SERVER_URL + "/templates/viewImages?userId="
+  +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+'&img=secondNavi' ;
+  results:{};
+
+constructor(private router: Router,private http: HttpClient) { 
+  console.log(this.imageUrl)}
+
+
 
   ngOnInit() {
+    this.http.get('http://localhost:1337/templates/getSpecificChild?appId=' + this.appId).subscribe(data => {
+      // Read the result field from the JSON response.
+      
+      this.results = data;
+      console.log("this.results  : " + JSON.stringify(this.results));
+      
+   
+    },
+    error => {
+      this.showErrorPage();
+   });
   }
 
   // Routing Method
   navigate(val:string){
     this.router.navigate([val])
+  }
+
+  getData(){
+  
+  }
+  showErrorPage(){
+    alert('Somthing went Wrong!');
   }
 
   slides = SLIDES;

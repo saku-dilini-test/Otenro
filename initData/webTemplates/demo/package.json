@@ -29,6 +29,7 @@
     "ng2-nouislider": "^1.6.1",
     "nouislider": "^10.0.0",
     "rxjs": "^5.1.0",
+    "tslib": "^1.8.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
@@ -47,6 +48,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.0",
     "sw-precache": "^5.1.0",
+    "systemjs-plugin-json": "^0.3.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"

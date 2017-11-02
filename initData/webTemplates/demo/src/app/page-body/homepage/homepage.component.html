@@ -4,6 +4,22 @@
 </app-carousel>
 
 
+<div class="row" *ngFor="let item of results; let i = index">
+	<div class="card col col-50" >
+		<a  href="">
+			<div class="animated zoomIn">
+				<div class="padding">
+					<img width="100%" src= '{{imageUrl}}/{{item.imageUrl}}'>
+				</div>
+				<div class="">
+					<div class=" center made-easy-header-font">{{item.name}}</div>
+				</div>
+			</div>
+		</a>
+	</div>
+
+</div>
+
 <div class="row">
   	<div class="col-md-6 my-3">
   		<img src="./assets/images/promotions/1.jpg" width="100%" />
