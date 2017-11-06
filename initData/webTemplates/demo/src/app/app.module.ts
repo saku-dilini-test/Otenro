@@ -8,6 +8,9 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AddonsModule } from './addons/addons.module';
 import { PageBodyModule } from './page-body/page-body.module';
+import {ShopComponent} from './page-body/shop/shop.component'
+import {HomepageComponent} from './page-body/homepage/homepage.component'
+import { RouterModule, Routes } from '@angular/router';
 // https://ng-bootstrap.github.io/#/getting-started
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // https://github.com/mujtaba01/ng2-owl-carousel
@@ -17,7 +20,10 @@ import { AgmCoreModule } from '@agm/core';
 // http://tb.github.io/ng2-nouislider/
 import { NouisliderModule } from 'ng2-nouislider';
 
-
+const appRoutes: Routes = [
+  { path: 'shop/:id',component: ShopComponent
+}
+];
 
 @NgModule({
   declarations: [
@@ -26,6 +32,10 @@ import { NouisliderModule } from 'ng2-nouislider';
     FooterComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
     BrowserModule,
     FormsModule,
     HttpClientModule,

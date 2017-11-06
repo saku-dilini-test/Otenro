@@ -343,7 +343,8 @@
          * add or update product
          */
         $scope.addOrUpdateProducts = function () {
-              if(initialData.product.id == '0'){
+            console.log("publish products : ");
+            if(initialData.product.id == '0'){
                   initialData.product.id = undefined;
                   $scope.product.id = undefined;
               }
@@ -357,7 +358,7 @@
 
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'NO';
-                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
+                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product,'isNew': $rootScope.tempNew}).success(function (result) {
                       toastr.success('Product added successfully', 'Awsome!', {
                           closeButton: true
                       });
@@ -381,6 +382,7 @@
 
         };
         $scope.saveAndPublishProducts = function () {
+            console.log("publish products : " + $rootScope.tempNew);
               if(initialData.product.id == '0'){
                     initialData.product.id = undefined;
                     $scope.product.id = undefined;
@@ -394,7 +396,7 @@
 
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'YES';
-                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product}).success(function (result) {
+                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product, 'isNew': $rootScope.tempNew}).success(function (result) {
                       toastr.success('Product added successfully', 'Awesome!', {
                           closeButton: true
                       });

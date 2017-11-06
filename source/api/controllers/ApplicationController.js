@@ -396,134 +396,60 @@ module.exports = {
                            * If Only foodDemoApp or foodDemoApp2 Category & Product Feed to DB
                            */
 
-                          if(templateName == 'demo' ) {
-                              var mainNavi = [
-                              ];
-
-                              var secondNavi = [];
-
-                              var thirdNavi1 = [
-                                  {
-                                      "appId": app.id,
-                                      "name": "Low price ",
-                                      "price": 100,
-                                      "tempImageArray" : [
-                                          {
-                                              "img" : "article-0-1A9F1DAA000005DC-669_634x447.jpg"
-                                          }
-                                      ],
-                                      "variants":[{
-                                          "name": "Low price ",
-                                          'sku': "1111",
-                                          'size': "11",
-                                          'price': "100",
-                                          'quantity': 11
-                                      }],
-                                      "imageUrl": "article-0-1A9F1DAA000005DC-669_634x447.jpg",
-                                      "createdDate": Date.now()
-                                  },
-                                  {
-                                      "appId": app.id,
-                                      "name": "High price ",
-                                      "price": 200,
-                                      "tempImageArray" : [
-                                          {
-                                              "img" : "OOMPizza-Pepperoni-300x233.jpg"
-                                          }
-                                      ],
-                                      "variants":[{
-                                          "name": "Low price ",
-                                          'sku': "1111",
-                                          'size': "11",
-                                          'price': "200",
-                                          'quantity': 11
-                                      }],
-                                      "imageUrl": "OOMPizza-Pepperoni-300x233.jpg",
-                                      "createdDate": Date.now()
-                                  }
-                              ];
-                              var thirdNavi2 = [
-                                  {
-                                      "appId": app.id,
-                                      "name": "Low price ",
-                                      "price": 100,
-                                      "tempImageArray" : [
-                                          {
-                                              "img" : "pizza.jpg"
-                                          }
-                                      ],
-                                      "variants":[{
-                                          "name": "Low price ",
-                                          'sku': "1111",
-                                          'size': "11",
-                                          'price': "100",
-                                          'quantity': 11
-                                      }],
-                                      "imageUrl": "pizza.jpg",
-                                      "createdDate": Date.now()
-                                  },
-                                  {
-                                      "appId": app.id,
-                                      "name": "High price ",
-                                      "price": 200,
-                                      "tempImageArray" : [
-                                          {
-                                              "img" : "melko-21290330.jpg"
-                                          }
-                                      ],
-                                      "variants":[{
-                                          "name": "Low price ",
-                                          'sku': "1111",
-                                          'size': "11",
-                                          'price': "200",
-                                          'quantity': 11
-                                      }],
-                                      "imageUrl": "melko-21290330.jpg",
-                                      "createdDate": Date.now()
-                                  }
-                              ];
-
-                              for (var i = 0; i < mainNavi.length; i++) {
-                                  MainNavigation.create(mainNavi[i]).exec(function (err, mainN) {
-                                      if (err) return err;
-                                      /**
-                                       * Add Second Navigation
-                                       *
-                                       */
-
-                                      if (mainN.name == "Category") {
-                                          for (var j = 0; j < secondNavi.length; j++) {
-                                              secondNavi[j].mainId = mainN.id;
-                                              SecondNavigation.create(secondNavi[j]).exec(function (err, secondN) {
-                                                  if (err) return err;
-
-                                                  /**
-                                                   * Add Third NavigatThirdNavigation.jsion
-                                                   */
-
-                                                  if (j == 0) {
-                                                      for (var z = 0; z < thirdNavi1.length; z++) {
-                                                          thirdNavi1[z].childId = secondN.id;
-
-                                                          ThirdNavigation.create(thirdNavi1[z]).exec(function (err, thirdN) {
-                                                              if (err) return err;
-                                                          });
-                                                      }
-                                                  } else {
-                                                      for (var z = 0; z < thirdNavi2.length; z++) {
-                                                          thirdNavi2[z].childId = secondN.id;
-                                                          ThirdNavigation.create(thirdNavi2[z]).exec(function (err, thirdN) {
-                                                              if (err) return err;
-                                                          });
-
-                                                      }
-                                                  }
-                                              });
-                                          }
-                                      }
-                                  });
-                              }
-                          }
+                          // if(templateName == 'demo' ) {
+                          //     var mainNavi = [
+                          //     ];
+                          //
+                          //     var secondNavi = [];
+                          //
+                          //     var thirdNavi1 = [
+                          //
+                          //     ];
+                          //     var thirdNavi2 = [
+                          //
+                          //     ];
+                          //
+                          //     for (var i = 0; i < mainNavi.length; i++) {
+                          //         MainNavigation.create(mainNavi[i]).exec(function (err, mainN) {
+                          //             if (err) return err;
+                          //             /**
+                          //              * Add Second Navigation
+                          //              *
+                          //              */
+                          //
+                          //             if (mainN.name == "Category") {
+                          //                 for (var j = 0; j < secondNavi.length; j++) {
+                          //                     secondNavi[j].mainId = mainN.id;
+                          //                     SecondNavigation.create(secondNavi[j]).exec(function (err, secondN) {
+                          //                         if (err) return err;
+                          //
+                          //                         /**
+                          //                          * Add Third NavigatThirdNavigation.jsion
+                          //                          */
+                          //
+                          //                         if (j == 0) {
+                          //                             for (var z = 0; z < thirdNavi1.length; z++) {
+                          //                                 thirdNavi1[z].childId = secondN.id;
+                          //
+                          //                                 ThirdNavigation.create(thirdNavi1[z]).exec(function (err, thirdN) {
+                          //                                     if (err) return err;
+                          //                                 });
+                          //                             }
+                          //                         } else {
+                          //                             for (var z = 0; z < thirdNavi2.length; z++) {
+                          //                                 thirdNavi2[z].childId = secondN.id;
+                          //                                 ThirdNavigation.create(thirdNavi2[z]).exec(function (err, thirdN) {
+                          //                                     if (err) return err;
+                          //                                 });
+                          //
+                          //                             }
+                          //                         }
+                          //                     });
+                          //                 }
+                          //             }
+                          //         });
+                          //     }
+                          // }
                           res.send({
                               appId: app.id,
                               message: "New Application has been created"

@@ -7,7 +7,7 @@
   <span class="px-5">Women</span>
   <span class="px-5">Accessories</span>
   <span class="px-5">Gadgets</span>
-</div>
+</div> 
 <div class="container">
 	<section class="filter">
 		<div class="clearfix"> 
@@ -103,32 +103,17 @@
 
         <div class="my-5">
             <section class="row py-3">
+                <div class="row" *ngFor="let item of results; let i = index">
+                    
                 <div class="col-lg-2 col-md-3 col-xs-6 text-center">
-                    <a href="catalog-product-2.html"> <img src="http://lorempixel.com/200/250/{{img}}" width="100%" /></a>
+                    <a href=""> <img src='{{imageUrl}}/{{item.imageUrl}}' /></a>
                     <div class="b-goods__category">category</div>
-                    <h3 class="b-goods__name">Epimetheus</h3>
+                    <h3 class="b-goods__name">{{item.name}}</h3>
                     <div class="b-goods__price">$450</div>
                     <div class="b-goods-links">
                         <a href="home.html" class="btn btn-primary">add to cart</a> 
                     </div>
-                </div>
-                 <div class="col-lg-2 col-md-3 col-xs-6 text-center">
-                    <a href="catalog-product-2.html"> <img src="http://lorempixel.com/200/250/{{img}}" width="100%" /></a>
-                    <div class="b-goods__category">category</div>
-                    <h3 class="b-goods__name">Epimetheus</h3>
-                    <div class="b-goods__price">$450</div>
-                    <div class="b-goods-links">
-                        <a href="home.html" class="btn btn-primary">add to cart</a> 
-                    </div>
-                </div>
-                 <div class="col-lg-2 col-md-3 col-xs-6 text-center">
-                    <a href="catalog-product-2.html"> <img src="http://lorempixel.com/200/250/{{img}}" width="100%" /></a>
-                    <div class="b-goods__category">category</div>
-                    <h3 class="b-goods__name">Epimetheus</h3>
-                    <div class="b-goods__price">$450</div>
-                    <div class="b-goods-links">
-                        <a href="home.html" class="btn btn-primary">add to cart</a> 
-                    </div>
+                </div>    
                 </div>
           </section>
           <div class="pull-right clearfix">

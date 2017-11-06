@@ -143,7 +143,7 @@
                 return $http.post(SERVER_URL+ 'edit/specificThirdNavi?appId='+$rootScope.appId,Data);
             },
 
-            addMenu: function(file,appId,name){
+            addMenu: function(file,appId,name,isNew){
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -162,11 +162,12 @@
                     fields: {
                         'appId' : appId,
                         'name' : name,
+                        'isNew' : isNew,
                     },
                     file: UploadFile
                 });
             },
-            addNewCategory:function(file,appId,name){
+            addNewCategory:function(file,appId,name,isNew){
 
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
@@ -186,6 +187,7 @@
                     fields: {
                         'appId' : appId,
                         'name' : name,
+                        'isNew' : isNew,
                     },
                     file: UploadFile
                 });

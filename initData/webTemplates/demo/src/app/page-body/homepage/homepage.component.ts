@@ -20,16 +20,16 @@ import * as data from '../../madeEasy.json';
         transition('small <=> large', animate('300ms ease-in')),
     ]),
   ]
-
-
+  
 })
 export class HomepageComponent implements OnInit {
 
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
-  
-  imageUrl = SERVER_URL + "/templates/viewImages?userId="
-  +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+'&img=secondNavi' ;
+  public categoryId;
+
+  imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+  +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+'&img=secondNavi';
   results:{};
 
 constructor(private router: Router,private http: HttpClient) { 
@@ -43,8 +43,8 @@ constructor(private router: Router,private http: HttpClient) {
       
       this.results = data;
       console.log("this.results  : " + JSON.stringify(this.results));
-      
-   
+      console.log(" cat id  : " + JSON.stringify((this.results[0].id)));      
+   this.categoryId = this.results[0].id;
     },
     error => {
       this.showErrorPage();
@@ -54,6 +54,9 @@ constructor(private router: Router,private http: HttpClient) {
   // Routing Method
   navigate(val:string){
     this.router.navigate([val])
+  }
+  navigateShop(val:string){
+    this.router.navigate([val,this.categoryId])
   }
 
   getData(){

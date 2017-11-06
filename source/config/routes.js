@@ -277,6 +277,7 @@ module.exports.routes = {
     'POST /templates/getMainMenu': 'template/TemplateController.getMainMenu',
     'GET /templates/getCurrency': 'template/TemplateController.getCurrency',
     'GET /templates/viewImages': 'template/TemplateController.viewImages',
+    'GET /templates/viewWebImages': 'template/TemplateController.viewWebImages',
     'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
     'POST /templates/deletePreviewTemp': 'template/TemplateController.deletePreviewTemp',
     'GET /templates/getAboutUs': 'template/TemplateController.getAboutUs',
