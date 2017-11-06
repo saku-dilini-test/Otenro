@@ -20,6 +20,7 @@
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
     <allow-navigation href="http://192.168.8.222:8100" />
+    <allow-navigation href="http://192.168.8.211:8100" />
     <engine name="android" spec="~6.1.2" />
     <platform name="android">
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -51,5 +52,4 @@
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.3" />
     <plugin name="cordova-plugin-statusbar" spec="~2.2.3" />
     <plugin name="cordova-plugin-themeablebrowser" spec="~0.2.17" />
-    <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
 </widget>
