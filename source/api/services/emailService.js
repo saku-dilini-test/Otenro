@@ -58,10 +58,50 @@ module.exports = {
                 callback(null, 'ok');
             });
         });
-
-
-
     },
+
+    sendGetAssistance: function(data, callback){
+        console.log(data.appName)
+        var emailBody = "";
+        var approot = path.resolve();
+        //var file = path.join(__dirname,  'output', index.html');
+        var serverOrg=config.server.host;
+        var imgPath = serverOrg + '/images/emailtemplates';
+        fs.readFile(approot + '/assets/templates/user/common/emailtemplates/needAssistance.html','utf8',function (err, mailbody) {
+            var mapObj = {
+                imgUrl:imgPath,
+                appType:data.appType,
+                appName:data.appName,
+                userName:data.userName,
+                userEmail:data.userEmail
+            };
+            var replaceMailBody = mailbody.replace(/imgUrl|appType|appName|userName|userEmail/g, function(matched){
+                return mapObj[matched];
+            });
+
+            var emailDetails = {
+                text: "",
+                from: "Otenro<communications@otenro.com>",
+                to: 'support@otenro.com',
+                subject: "Need Assistance",
+                attachment: [
+                    {
+                        data: replaceMailBody,
+                        alternative: true
+                    }
+                ]
+            };
+
+            server.send(emailDetails, function (err, message) {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, 'ok');
+            });
+        });
+    },
+
+
     sendReminderEmail: function(data, callback){
         User.find().exec(function(err, users){
             if(users){

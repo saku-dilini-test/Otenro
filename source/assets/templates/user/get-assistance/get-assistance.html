@@ -1,0 +1,43 @@
+<!-- Created by Shashan on 06/11/2017 -->
+
+<md-dialog aria-label="Get Assistance" >
+
+    <!--Google Analytics-->
+    <script>
+        ga('set', 'page', 'show-get-assistance');
+        ga('send', 'pageview');
+    </script>
+
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <label>Help us to identify your business</label>
+            <h1 class="margin-top">Your Details</h1>
+        </div>
+        <div class="md-dialog-main clearfix">
+            <table class="me-simple-table">
+                <tr>
+                    <th width="50%">APP NAME</th>
+                    <td>- {{appData.appName}}</td>
+                </tr>
+                <tr>
+                    <th width="50%">APP TYPE</th>
+                    <td>- {{appType}}</td>
+                </tr>
+                <tr>
+                    <th width="50%">CUSTOMER NAME</th>
+                    <td>- {{user.firstName}} {{user.lastName}}</td>
+                </tr>
+                <tr>
+                    <th width="50%">E-MAIL</th>
+                    <td>- {{user.email}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="md-dialog-buttons">
+            <div class="inner-section">
+                <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
+                <md-button class="me-default-button" ng-click="request(appData,appType,user)">Request</md-button>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>
