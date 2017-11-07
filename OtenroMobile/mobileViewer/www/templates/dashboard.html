@@ -7,13 +7,19 @@
       </span>
     </div>
     <div class="title title-center header-item">My Apps</div>
+    <div class="buttons buttons-left header-item">
+      <span class="right-buttons">
+           <button class="button button-icon icon ion-ios-refresh-empty"></button>
+      </span>
+    </div>
   </ion-header-bar>
 
-  <ion-content>
+
+  <ion-content scroll="false">
     <div class="list card" style="height:85%">
       <a class="item item-thumbnail-left" ng-repeat="oneApp in appList"
          ng-click="openApp('{{oneApp.userId}}','{{oneApp.id}}','{{oneApp.appName}}')">
-        <img  ng-src="http://dashboard.otenro.com/templates/viewImages?userId={{oneApp.userId}}&appId={{oneApp.id}}&{{date}}&img=publish/0.png"  err-src="img/no-preview.jpg" alt="published image">
+        <img  ng-src="https://dashboard.otenro.com/templates/viewImages?userId={{oneApp.userId}}&appId={{oneApp.id}}&{{date}}&img=publish/0.png"  err-src="img/no-preview.jpg" alt="published image">
         <h2>{{oneApp.appName}}</h2>
       </a>
     </div>
