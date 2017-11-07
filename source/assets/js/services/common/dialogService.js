@@ -5,13 +5,13 @@
     angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService',
         'commerceService','articleService','mainMenuService', 'currencyService',
         'publishService', 'engageService', 'logoAndTittleService','aboutUsService',
-        'policiesService','comingSoonService', 'templateService','salesAndPromotionService',dialogService]);
+        'policiesService','comingSoonService', 'templateService','salesAndPromotionService','getAssistanceService',dialogService]);
 
 
     function dialogService(stylesService, contactUsService,
                            commerceService, articleService ,mainMenuService,
                            currencyService, publishService, engageService,
-                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService,salesAndPromotionService) {
+                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService,salesAndPromotionService,getAssistanceService) {
 
         return {
             showDialog: function(clickTitle) {
@@ -134,6 +134,8 @@
                     return commerceService.showDeleteAppDialog(clickTitle);
                 if ('remove' == clickTitle)
                     return commerceService.showRemoveDefaultDataDialog(clickTitle);
+                if('get-assistance' == clickTitle)
+                    return getAssistanceService.showGetAssistanceDialog();
             }
         }
     }
