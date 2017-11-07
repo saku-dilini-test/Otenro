@@ -160,11 +160,14 @@ body{
 .card{
     top: 5%;
     position: relative;
-    height: 90%;
     overflow-y: auto;
     border-radius: 5px;
 }
 
 .scroll{
   height:100%;
+}
+
+.logo-section{
+  height:70vh;
 }
