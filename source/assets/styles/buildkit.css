@@ -2758,6 +2758,48 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     margin-top: 16px;
 }
 
+/*when mobile devices enter*/
+header.when-mobile{
+    position: relative;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 100px;
+    color: #a52f73;
+    background-color: #ececec;
+    background-image: url('/images/mobile_404.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: bottom center;
+    height: calc(100vh - 64px);
+}
+header.when-mobile .header-content {
+    max-width: 500px;
+    margin-bottom: 100px;
+    text-align: center;
+    margin: auto;
+}
+header.when-mobile  .btn-outline {
+    color: #a52f73;
+    border: 1px solid;
+    border-color: #a52f73;
+    font-size: 11px;
+    padding: 15px 45px;
+    border-radius: 300px;
+    letter-spacing: 2px;
+    text-transform: uppercase !important;
+    transition: ease-in-out 0.1s;
+}
+header.when-mobile  .btn-outline:active {
+    color: #fff !important;
+    background-color: #a52f73;
+}
+footer.when-mobile{
+    padding: 25px 0;
+    text-align: center;
+    color: rgba(255, 255, 255, .3);
+    background-color: #222;
+}
+
 /*IE 10 and abouve specific css wirte inside this media quary*/
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     .fixed-inventory .tree-grid thead {
