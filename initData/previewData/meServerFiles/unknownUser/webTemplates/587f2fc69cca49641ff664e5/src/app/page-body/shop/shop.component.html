@@ -1,4 +1,3 @@
- 
 <app-carousel
    [slides]="slides">   
 </app-carousel>
@@ -7,7 +6,7 @@
   <span class="px-5">Women</span>
   <span class="px-5">Accessories</span>
   <span class="px-5">Gadgets</span>
-</div>
+</div> 
 <div class="container">
 	<section class="filter">
 		<div class="clearfix"> 
@@ -16,7 +15,7 @@
 			    <span class="badge">3</span><i class="icon fa fa-bars"></i> Filters
 			  </button>
 			</div>
-
+ 
 	        <div class="pull-right">
 	         <div class="pull-left">
 	          <span class="text-uppercase font-weight-bold pull-left p-3  mr-5">Sort by:</span>
@@ -97,39 +96,22 @@
               <button type="reset" class="btn btn-secondary pull-right"><i class="icon fa fa-refresh"></i> Reset Filters</button>
             </div>
           </div>
-		  </div>
+		  </div> 
 		</div>
 	</section>
 
         <div class="my-5">
             <section class="row py-3">
-                <div class="col-lg-2 col-md-3 col-xs-6 text-center">
-                    <a href="catalog-product-2.html"> <img src="http://lorempixel.com/200/250/{{img}}" width="100%" /></a>
+                    
+                <div class="col-lg-2 col-md-3 col-xs-6 text-center"  *ngFor="let item of results; let i = index">
+                    <a > <img src='{{imageUrl}}/{{item.imageUrl}}' /></a>
                     <div class="b-goods__category">category</div>
-                    <h3 class="b-goods__name">Epimetheus</h3>
+                    <h3 class="b-goods__name">{{item.name}}</h3>
                     <div class="b-goods__price">$450</div>
                     <div class="b-goods-links">
-                        <a href="home.html" class="btn btn-primary">add to cart</a> 
+                        <a (click)= "navigateProd('product',results[i])" class="btn btn-primary">add to cart</a> 
                     </div>
-                </div>
-                 <div class="col-lg-2 col-md-3 col-xs-6 text-center">
-                    <a href="catalog-product-2.html"> <img src="http://lorempixel.com/200/250/{{img}}" width="100%" /></a>
-                    <div class="b-goods__category">category</div>
-                    <h3 class="b-goods__name">Epimetheus</h3>
-                    <div class="b-goods__price">$450</div>
-                    <div class="b-goods-links">
-                        <a href="home.html" class="btn btn-primary">add to cart</a> 
-                    </div>
-                </div>
-                 <div class="col-lg-2 col-md-3 col-xs-6 text-center">
-                    <a href="catalog-product-2.html"> <img src="http://lorempixel.com/200/250/{{img}}" width="100%" /></a>
-                    <div class="b-goods__category">category</div>
-                    <h3 class="b-goods__name">Epimetheus</h3>
-                    <div class="b-goods__price">$450</div>
-                    <div class="b-goods-links">
-                        <a href="home.html" class="btn btn-primary">add to cart</a> 
-                    </div>
-                </div>
+                </div>    
           </section>
           <div class="pull-right clearfix">
             <ngb-pagination  [collectionSize]="70" [(page)]="page" aria-label="Default pagination"></ngb-pagination>

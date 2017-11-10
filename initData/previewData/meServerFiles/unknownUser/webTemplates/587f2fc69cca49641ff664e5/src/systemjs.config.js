@@ -30,7 +30,8 @@
     meta: {
       'typescript': {
         "exports": "ts"
-      }
+      },
+      '*.json': { loader: 'plugin-json'}
     },
     paths: {
       // paths serve as alias
@@ -40,7 +41,7 @@
     map: {
       // our app is within the app folder
       'app': 'app',
-
+      'plugin-json': 'npm:systemjs-plugin-json/json.js',
       //  angular bundles
       '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
       '@angular/animations/browser': 'npm:@angular/animations/bundles/animations-browser.umd.js',
@@ -57,11 +58,13 @@
       // '@angular/upgrade': 'npm:@angular/upgrade/bundles/upgrade.umd.js',
       // '@angular/upgrade/static': 'npm:@angular/upgrade/bundles/upgrade-static.umd.js',
       '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
-       'owl.carousel': 'http://localhost/meServer/node_modules/owl.carousel/dist/owl.carousel.js',
+       'owl.carousel': 'npm:owl.carousel/dist/owl.carousel.js',
        'angular-owl-carousel': 'npm:angular-owl-carousel/',
        '@agm/core': 'npm:@agm/core/core.umd.js',
-       'nouislider': 'npm:/nouislider',
-      'ng2-nouislider': 'npm:/ng2-nouislider',
+       'nouislider': 'npm:nouislider',
+       '@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
+       'tslib': 'npm:tslib/tslib.js',
+      'ng2-nouislider': 'npm:ng2-nouislider',
 
       // other libraries
       'rxjs':                      'npm:rxjs',

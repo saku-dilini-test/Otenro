@@ -72,14 +72,15 @@ module.exports = {
                 // product images copy to app file server
                 if(isNew == 'true' || isNew == true){
                     console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                        req.body.product.appId + '/img/thirdNavi/' + imgeFileName);
+                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName);
                     fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                        req.body.product.appId + '/img/thirdNavi/' + imgeFileName, buf, function (err) {
+                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
                         if (err) {
                             return res.send(err);
                         }
                     });
                 }else {
+                    console.log("inside template ")
                     fs.writeFile(config.APP_FILE_SERVER + req.userId + '/templates/' +
                         req.body.product.appId + '/img/thirdNavi/' + imgeFileName, buf, function (err) {
                         if (err) {
@@ -102,6 +103,7 @@ module.exports = {
         var sku =[];
         if(typeof req.body.product.id != 'undefined'){
             delete product["id"];
+            console.log( "product  : " +product);
             ThirdNavigation.update(searchQuery,product,function(err,main) {
                 if (err) {
                     return res.send(err);

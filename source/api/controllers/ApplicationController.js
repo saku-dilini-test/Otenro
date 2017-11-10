@@ -378,7 +378,7 @@ module.exports = {
                                * TODO : future development, Template dummy data move to another folder
                                * **/
                               var appFileServerPath  = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + app.id +'/';
-                              var tempDummyImagesPath = templatePath + '/src/assets/images';
+                              var tempDummyImagesPath = templatePath + '/src/assets/images/';
                               var tempDummyImagesDesPath = appFileServerPath +  '/src/assets/images/';
                               /** Copy Template Dummy Images to APP File Server for given userID & appID **/
                               fs.copy(tempDummyImagesPath,tempDummyImagesDesPath,function (err) {

@@ -1,14 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AddonsModule } from './addons/addons.module';
 import { PageBodyModule } from './page-body/page-body.module';
+import { RouterModule, Routes } from '@angular/router';
+import { RegisterComponent } from './page-body/register/register.component';
+import { LoginComponent } from './page-body/login/login.component';
 // https://ng-bootstrap.github.io/#/getting-started
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // https://github.com/mujtaba01/ng2-owl-carousel
@@ -17,19 +19,22 @@ import { OwlModule } from 'angular-owl-carousel';
 import { AgmCoreModule } from '@agm/core';
 // http://tb.github.io/ng2-nouislider/
 import { NouisliderModule } from 'ng2-nouislider';
-
+import { PagebodyServiceModule } from './page-body/page-body.service';
+import { LoginComponent } from './login/login.component' 
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
+ 
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     AddonsModule,
     PageBodyModule,
     NgbModule.forRoot(),
@@ -40,7 +45,7 @@ import { NouisliderModule } from 'ng2-nouislider';
     NouisliderModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [PagebodyServiceModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -96,7 +96,7 @@ module.exports = {
 
         var dePath;
         if(isNew == 'true' || isNew == true){
-            dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/img/secondNavi/';
+            dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/secondNavi/';
 
         }else {
             dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/secondNavi/';
@@ -127,7 +127,7 @@ module.exports = {
 
         var dePath;
         if(isNew == 'true' || isNew == true){
-            dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/img/secondNavi/';
+            dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/secondNavi/';
 
         }else {
             dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/secondNavi/';

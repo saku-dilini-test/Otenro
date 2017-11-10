@@ -22,7 +22,7 @@
             <div class='carousel-outer col-lg-12 col-xl-10 p-0'>
               <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
-                  <img class="d-block img-fluid" width="100%" src="http://placehold.it/400x620&text=slide6" alt="First slide">
+                  <img class="d-block img-fluid" width="100%" src="{{imageUrl}}/{{Data.tempImageArray[0].img}}" alt="First slide">
                 </div>
                 <div class="carousel-item">
                   <img class="d-block img-fluid" width="100%" src="http://placehold.it/400x620&text=slide7" alt="Second slide">
@@ -49,18 +49,16 @@
     </div>
     <div class="col-md-4 offset-md-1">
       <section class="border-bottom">
-        <div class="name-category">Jackets</div>
-        <h3>Hyperion</h3>
-        <div class="name-price color-primary">$85.99</div>
-        <div class="name-price-old">$130.00</div>
+        <div class="name-category">{{catName}}</div>
+        <h3>{{Data.name}}</h3>
+        <div class="name-price color-primary">${{sign}}{{Data.variants[0].price}}</div>
+        <!-- <div class="name-price-old">$130.00</div> -->
         <div class="name-sale">sale</div>
-        <div class="name-description">Donec id massa ut nisl auctor mollis eu nec magna. Duis mattis congue lacus ac elementum.</div>
+        <div class="name-description">{{Data.detailedDesc}}</div>
       </section>
                   <!-- end b-goods-->
-                  
-                  
-                  <form>
-                    <div class="row my-4">
+
+                    <!-- <div class="row my-4">
                       <label class="col-md-4 name-label">Color:</label>
                       <div class="col-md-8">
                             <div ngbDropdown class="d-inline-block">
@@ -72,8 +70,8 @@
                               </div>
                            </div>
                       </div>
-                    </div>
-                    <div class="row my-4">
+                    </div> -->
+                    <!-- <div class="row my-4">
                       <label class="name-label col-md-4">Size:</label>
                       <div class="col-md-8">
                          <div ngbDropdown class="d-inline-block">
@@ -85,16 +83,105 @@
                               </div>
                            </div>
                       </div>
+                    </div> -->
+
+                    <div class="row my-4" *ngIf="Data.selection[0]">
+                        <label class="name-label col-md-4">{{Data.selection[0].name}}:</label>
+                            <div class="col-md-8">
+                                <select [(ngModel)]="selectedVariant" (ngModelChange)="changeVariant(selectedVariant)" >
+                                    <option *ngFor="let c of selection"> {{c.vType}} </option>
+                                  </select>
+                    
+                            </div>
+                      
+                            <!-- <select ng-model="selectedVariant"
+                                    class="item-buy"
+                                    ng-options="variant.vType  for variant in selection |unique:'vType'"
+                                    ng-change="changeVariant(selectedVariant)"
+                                    ng-click="selectedVariant.buyQuantity = ''">
+                            </select> -->
                     </div>
+
+                    <div class="row my-4" *ngIf="Data.selection[1]">
+                        <label class="name-label col-md-4">{{Data.selection[1].name}}:</label>
+                         
+                        <div class="col col-50 align-left">
+                            <select [(ngModel)]="selectedVarient1" (ngModelChange)="changeVariant2(selectedVarient1)" >
+                                <option *ngFor="let c of selection1" [ngValue]="c.vType"> {{c.vType}} </option>
+                              </select>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row my-4" *ngIf="Data.selection[2]">
+                        <label class="name-label col-md-4">{{Data.selection[2].name}}:</label>
+                         
+                        <div class="col col-50 align-left">
+                            <select [(ngModel)]="selectedVarient3" (ngModelChange)="changeVariant3(selectedVarient3)" >
+                                <option *ngFor="let c of selection2" [ngValue]="c.vType"> {{c.vType}} </option>
+                              </select>
+                        </div>
+
+                    </div>
+                    
+                    <div class="row my-4" *ngIf="Data.selection[3]">
+                        <label class="name-label col-md-4">{{Data.selection[3].name}}:</label>
+                         
+                        <div class="col col-50 align-left">
+                            <select [(ngModel)]="selectedVarient4" (ngModelChange)="changeVariant4(selectedVarient4)" >
+                                <option *ngFor="let c of selection3" [ngValue]="c.vType"> {{c.vType}} </option>
+                              </select>
+                        </div>
+                    </div>
+
+
                     <div class="pb-4 border-bottom">
-                        <div class="d-inline quantity mr-2 p-2">
+
+                        <!-- <div class="d-inline quantity mr-2 p-2">
                                 <span>-</span>
                                 <input type="text" value="1" min="1" >
                                 <span>+</span>
+                        </div> -->
 
-                        </div>
-                        <button class="d-inline btn btn-lg btn-primary btn-effect">add to cart</button>
+                              <!-- Product not available in store -->
+                    <div class="col" *ngIf="selectedVariant.quantity == 0">
+                        <span class="animated zoomIn item-error-message">
+                            Product not available
+                        </span>
+            </div>
+
+            <div class="row">
+              <div class="col col-50 col-center align-right">
+                  Qty :
+              </div>
+              <div class="col col-50 align-left">
+                  <input type="number" min="1"
+                         class="item-buy"
+                         [(ngModel)]="selectedVariant.buyQuantity"
+                         (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)"
+                         >
+              </div>
+          </div>
+
+
+            <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+            <div class="col" *ngIf="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
+                        <span class="animated zoomIn item-error-message">
+                            Please enter a quantity of {{selectedVariant.quantity}} or less.
+                        </span>
+            </div>
+            <div class="col" *ngIf="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity == 1">
+                        <span class="animated zoomIn item-error-message">
+                            Please enter a quantity of {{selectedVariant.quantity}}.
+                        </span>
+            </div>
+
+                        <button (click) = 'addToCart()' class="d-inline btn btn-lg btn-primary btn-effect">add to cart</button>
                     </div>
+
+
+
                     <footer class="mt-5">
                       <div class="row">
                         <div class="col-12 name-label">Share:</div>
@@ -111,7 +198,6 @@
                       </div>
                     
                     </footer>
-                  </form>
     </div>
   </div>
 

@@ -6,7 +6,6 @@
  <div class="container">       
    	<div class="row">
     	<div class="col-md-9">
-			<form>
 				<div>
 					<table class="table table-bordered table-responsive" cellspacing="0">
 						<thead>
@@ -20,37 +19,33 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>
-									<a href="catalog-product.html">
-		                                <img width="80" height="80" src="http://lorempixel.com/160/180/fashion">
+							<tr *ngFor="let c of cartItems let i = index" >
+								<td >
+									<a>
+		                                <img width="80" height="80" src="{{imageUrl}}/{{c.imgURL[0].img}}"><br>
 		                            </a>						
 		                        </td>
-								<td data-title="Product">
+								<td data-title="Product" >
 									<div>
-										<a>Hyperion</a>							
+										<a [(ngModel)] = "c.name" ngDefaultControl>{{c.name}}</a>							
 									</div>
 								</td>
-								<td data-title="Price">
-									<span>
-										<span>£</span>
-										875.00
-									</span>						    
-								
+								<td data-title="Price" >
+							
+										<a >{{currency}}{{c.price}}</a>
+									
 								</td>
 								<td data-title="Quantity">
 									<div data-trigger="spinner">
-										<input type="text" data-rule="quantity" value="1" title="Qty" class="form-control">		
+										<input type="text" [(ngModel)]="c.qty"  value="{{c.qty}}" title="Qty" class="form-control" ngDefaultControl>		
 									</div>
 								</td>
 								<td data-title="Total">
-									<span>
-										<span>£</span>
-										875.00
-									</span>						
+										<a [(ngModel)] = "c.total" ngDefaultControl>{{currency}}{{c.total * c.qty}}</a>
+										
 								</td>
 								<td>
-									<a href="/" class="btn btn-remove" title="Remove this item" >
+									<a (click)="removeItem(index)" class="btn btn-remove" title="Remove this item" >
 										<i class="fa fa-trash fa-lg"></i>
 									</a>					
 								</td>
@@ -67,25 +62,23 @@
 						</tbody>
 					</table>
 				</div>
-			</form>
 
 			<div class="w-50 pull-right clearfix">
 				<h5>Cart Total</h5>
-				<table cellspacing="0" class="table table-responsive table-bordered">
+				<table cellspacing="0" class="table table-responsive table-bordered" >
 					<tbody>
-						<tr>
+						<tr >
 							<th width="82%">Subtotal</th>
 							<td data-title="Subtotal">
 								<span class="d-inline">£</span>
 								<span class="d-inline">875.00</span>
 							</td>
 						</tr>
-						<tr>
+						<tr >
 							<th>Total</th>
 							<td data-title="Total">
 								<strong>
-									<span class="d-inline">£</span>
-									<span class="d-inline">875.00</span>
+									<a [(ngModel)]="total" ngDefaultControl>{{currency}}{{getTotal()}}</a>
 								</strong> 
 							</td>
 						</tr>

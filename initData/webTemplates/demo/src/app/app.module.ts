@@ -8,9 +8,9 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AddonsModule } from './addons/addons.module';
 import { PageBodyModule } from './page-body/page-body.module';
-import {ShopComponent} from './page-body/shop/shop.component'
-import {HomepageComponent} from './page-body/homepage/homepage.component'
 import { RouterModule, Routes } from '@angular/router';
+import { RegisterComponent } from './page-body/register/register.component';
+import { LoginComponent } from './page-body/login/login.component';
 // https://ng-bootstrap.github.io/#/getting-started
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // https://github.com/mujtaba01/ng2-owl-carousel
@@ -19,23 +19,19 @@ import { OwlModule } from 'angular-owl-carousel';
 import { AgmCoreModule } from '@agm/core';
 // http://tb.github.io/ng2-nouislider/
 import { NouisliderModule } from 'ng2-nouislider';
+import { PagebodyServiceModule } from './page-body/page-body.service';
+import { LoginComponent } from './login/login.component' 
 
-const appRoutes: Routes = [
-  { path: 'shop/:id',component: ShopComponent
-}
-];
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    ),
+ 
     BrowserModule,
     FormsModule,
     HttpClientModule,
@@ -49,7 +45,7 @@ const appRoutes: Routes = [
     NouisliderModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [PagebodyServiceModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

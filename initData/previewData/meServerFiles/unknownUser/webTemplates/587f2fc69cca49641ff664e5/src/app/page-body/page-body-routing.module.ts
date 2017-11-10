@@ -10,12 +10,19 @@ import { ShopComponent } from './shop/shop.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductComponent } from './product/product.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
  { path: '',
     redirectTo: '/home',
     pathMatch: 'full'
   },
+  {
+    path: 'login',
+    component: LoginComponent,
+    data:{title:'Login Page'}
+  },
+
  {
     path: 'home',
     component: HomepageComponent,
@@ -42,7 +49,7 @@ const routes: Routes = [
     data:{title:'Contact Page'}
   },
   {
-    path: 'shop',
+    path: 'shop/:id/:name',
     component: ShopComponent,
     data:{title:'Shop Page'}
   },
@@ -52,7 +59,7 @@ const routes: Routes = [
     data:{title:'Cart Page'}
   },
   {
-    path: 'product',
+    path: 'product/:catName',
     component: ProductComponent,
     data:{title:'Product Page'}
   },

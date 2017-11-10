@@ -284,7 +284,7 @@ module.exports = {
         res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
     },
     viewWebImages : function(req,res){
-        res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/progressiveTemplates/' + req.param('appId') + '/img/'+ req.param('img'));
+        res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/progressiveTemplates/' + req.param('appId') + '/src/assets/images/'+ req.param('images'));
     },
 
     /**

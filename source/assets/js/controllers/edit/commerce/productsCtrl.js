@@ -17,7 +17,8 @@
         $scope.currency = $rootScope.currency;
         $scope.isNewProduct = true;
         $scope.skuFieldEnable = false;
-
+        $scope.isNew = $rootScope.tempNew;
+        console.log("$scope.isNew  : " + $scope.isNew)
 
         if(initialData.isNewItem)
         {
@@ -38,9 +39,17 @@
             }
         }
 
+        var tempImagePath;
         // Third Navigation Image Path ( Image get from server )
-        var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
-                            +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=thirdNavi/";
+       if($scope.isNew == 'true' || $scope.isNew == true){
+
+          tempImagePath =  SERVER_URL +"templates/viewWebImages?userId="+ $auth.getPayload().id
+               +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&images=thirdNavi/";
+       }else {
+
+           tempImagePath = SERVER_URL + "templates/viewImages?userId=" + $auth.getPayload().id
+               + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&img=thirdNavi/";
+       }
 
         function  disableTabs(selectedTab,tab1,tab2,tab3,tab4) {
             $log.debug(selectedTab);
@@ -343,7 +352,7 @@
          * add or update product
          */
         $scope.addOrUpdateProducts = function () {
-            console.log("publish products : ");
+            console.log("publish products : " + $rootScope.tempNew);
             if(initialData.product.id == '0'){
                   initialData.product.id = undefined;
                   $scope.product.id = undefined;

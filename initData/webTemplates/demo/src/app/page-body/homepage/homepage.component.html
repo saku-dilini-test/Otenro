@@ -6,7 +6,7 @@
 
 <div class="row" *ngFor="let item of results; let i = index">
 	<div class="card col col-50" > 
-		<a  [routerLink]="['/shop',item.id]">
+		<a  [routerLink]="['/shop',item.id,item.name]">
 			<div class="animated zoomIn">
 				<div class="padding">
 					<img width="100%" src= '{{imageUrl}}/{{item.imageUrl}}'>
@@ -17,7 +17,7 @@
 			</div>
 		</a>
 	</div>
-
+ 
 </div> 
 
 <div class="row">
