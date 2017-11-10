@@ -32,6 +32,7 @@ console.log("$stateParams.is new  : " + $stateParams.isNew);
         $scope.tempIsNew = $stateParams.isNew;
         $scope.appId = decParamAppId; //$stateParams.appId;
         $rootScope.appId = decParamAppId; //$stateParams.appId;
+        $rootScope.tempNew = $stateParams.isNew;
         $scope.userId = $auth.getPayload().id;
         $scope.isArticleApp = false;
 

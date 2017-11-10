@@ -54,7 +54,9 @@ module.exports = {
         var  finelImages = [];
         var  tmpImage = req.body.productImages;
         var  product =  req.body.product;
+        var isNew = req.body.isNew;
 
+        console.log("data :  " + isNew);
         if ( typeof product.tempImageArray == 'undefined'){
              product.tempImageArray=[];
         }
@@ -64,16 +66,28 @@ module.exports = {
 
             if (!tmpImage[i].match("http")){
                 var imgeFileName = randomstring.generate()+".png";
-
+                console.log("imgeFileName :  " + imgeFileName);
                 var data = tmpImage[i].replace(/^data:image\/\w+;base64,/, "");
                 var buf = new Buffer(data, 'base64');
                 // product images copy to app file server
-                fs.writeFile(config.APP_FILE_SERVER + req.userId + '/templates/' +
-                    req.body.product.appId +'/img/thirdNavi/'+imgeFileName, buf, function(err) {
-                    if(err) {
-                        if (err) res.send(err);
-                    }
-                });
+                if(isNew == 'true' || isNew == true){
+                    console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName);
+                    fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
+                        if (err) {
+                            return res.send(err);
+                        }
+                    });
+                }else {
+                    console.log("inside template ")
+                    fs.writeFile(config.APP_FILE_SERVER + req.userId + '/templates/' +
+                        req.body.product.appId + '/img/thirdNavi/' + imgeFileName, buf, function (err) {
+                        if (err) {
+                            return res.send(err);
+                        }
+                    });
+                }
                 product.tempImageArray.push({img:imgeFileName});
                 product.imageUrl = imgeFileName;
                 finelImages = null;
@@ -89,26 +103,33 @@ module.exports = {
         var sku =[];
         if(typeof req.body.product.id != 'undefined'){
             delete product["id"];
+            console.log( "product  : " +product);
             ThirdNavigation.update(searchQuery,product,function(err,main) {
-                if (err) return res.send(err);
+                if (err) {
+                    return res.send(err);
+                }
                 var data = {
                     userId: req.userId,
                     appId: product.appId,
                     productId:skuSearchQuery.productId
                 }
                 for(var i=0; i<product.variants.length; i++){
-                    sku.push(product.variants[i].sku)
+                    sku.push(product.variants[i].sku);
                 }
                 data.sku = sku;
                 Sku.update(skuSearchQuery,data,function(err,skuData){
-                    if (err) return res.send(err);
+                    if (err){
+                        return res.send(err);
+                    }
                     return res.send(200, {message: 'Shipping Collection successfully updated'});
-                })
+                });
 
             });
         }else{
             ThirdNavigation.create(product).exec(function (err, result) {
-                if (err) return res.send(err);
+                if (err) {
+                    return res.send(err);
+                }
                 var data = {
                     userId: req.userId,
                     appId: product.appId,
@@ -119,9 +140,11 @@ module.exports = {
                 }
                 data.sku = sku;
                  Sku.create(data,function(err,skuData){
-                     if (err) return res.send(err);
-                     return res.send(200, data);
-                 })
+                     if (err) {
+                         return res.send(err);
+                     }
+                     return res.send(200,data);
+                 });
             });
         }
     },

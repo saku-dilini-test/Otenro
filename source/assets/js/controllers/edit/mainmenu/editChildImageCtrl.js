@@ -11,7 +11,7 @@
 
         $scope.updateImage = function(file) {
 
-            commerceService.updateCategoryImage(file,imageUrl,child._id,$rootScope.appId).progress(function(evt) {
+            commerceService.updateCategoryImage(file,imageUrl,child._id,$rootScope.appId,$rootScope.tempNew).progress(function(evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
             }).success(function(data, status, headers, config) {

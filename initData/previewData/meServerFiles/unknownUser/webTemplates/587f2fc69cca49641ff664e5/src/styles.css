@@ -32,11 +32,11 @@ html {
     border-radius: 2px;
     background-clip: padding-box;
     margin: 0.5rem 0 1rem 0;
-    overflow: hidden; 
+    overflow: hidden;
   }
 
   .progress .indeterminate {
-    background-color: rgba(0, 0, 0, 0.76); 
+    background-color: rgba(0, 0, 0, 0.76);
   }
 
   .progress .indeterminate:before {
@@ -48,7 +48,7 @@ html {
       bottom: 0;
       will-change: left, right;
       -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-      animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite; 
+      animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
 }
 
 .progress .indeterminate:after {
@@ -62,7 +62,7 @@ html {
       -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
               animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
       -webkit-animation-delay: 1.15s;
-              animation-delay: 1.15s; 
+              animation-delay: 1.15s;
 }
 
 @-webkit-keyframes indeterminate {
@@ -74,7 +74,7 @@ html {
     right: -90%; }
   100% {
     left: 100%;
-    right: -90%; } 
+    right: -90%; }
 }
 @keyframes indeterminate {
   0% {
@@ -85,7 +85,7 @@ html {
     right: -90%; }
   100% {
     left: 100%;
-    right: -90%; } 
+    right: -90%; }
 }
 @-webkit-keyframes indeterminate-short {
   0% {
@@ -96,7 +96,7 @@ html {
     right: -8%; }
   100% {
     left: 107%;
-    right: -8%; } 
+    right: -8%; }
 }
 @keyframes indeterminate-short {
   0% {
@@ -107,7 +107,7 @@ html {
     right: -8%; }
   100% {
     left: 107%;
-    right: -8%; } 
+    right: -8%; }
 }
 
 
@@ -436,4 +436,40 @@ html {
 
 .border-bottom{
       border-bottom: 1px solid #eee;
+}
+
+
+
+/*####### Main style changes on Otenro ########*/
+
+.main-header-font{
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color:rgba(0,0,0,1);
+  font-family: Arial;
+  font-weight: bold;
+}
+.main-content-font{
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: rgb(255, 104, 55);
+  font-family: Arial;
+  font-weight: 400;
+}
+.main-background{
+  background-color: rgba(255,191,191,1) !important;
+}
+.main-navigation{
+  background-color: rgba(255,255,255,0);
+  color: #000;
+}
+.main-navigation li a{
+  color: inherit !important;
+}
+.main-button{
+  background-color: #0a568c;
+  border-color: rgba(255,255,255,0);
+  border-width: 0px;
+  color: #fff;
+  border-radius: 2px;
 }
