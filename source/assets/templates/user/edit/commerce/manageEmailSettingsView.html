@@ -1,4 +1,4 @@
-<md-dialog aria-label="Inventory" style="width:900px">
+<md-dialog aria-label="Inventory"  style="width:900px">
 
     <!--Google Analytics-->
     <script>
@@ -12,6 +12,7 @@
             <md-tab>
                 <md-tab-label>Email Delivery</md-tab-label>
                 <md-tab-body>
+
                     <div class="md-dialog-header">
                         <div class="md-dialog-header-nav clearfix">
                             <h1 class="pull-left">Email Delivery</h1>
@@ -19,47 +20,51 @@
                     </div>
                     <form name="emailDeliveryForm" novalidate>
                         <div class="md-dialog-main">
-                            <fieldset class="fieldset-default-size">
+                            <md-input-container class="md-block" flex="50">
                                 <label>from email</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input  type="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
-                                        name="fromEmail" required ng-model="emailDel.fromEmail"/>
-                                <span class="error"
-                                      ng-show="emailDeliveryForm.fromEmail.$error.email || emailDeliveryForm.fromEmail.$error.pattern">
-                                    Invalid Email Address
-                                </span>
-                            </fieldset >
-                            <fieldset class="fieldset-default-size">
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
+                                <input   ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                        name="fromEmail"  md-maxlength="50"  ng-required="true" ng-model="emailDel.fromEmail"/>
+                                <div ng-messages="emailDeliveryForm.fromEmail.$error" ng-show="emailDeliveryForm.fromEmail.$dirty">
+                                    <div ng-message="required">Email is required.</div>
+                                    <div ng-message="md-maxlength">The email must be less than 50 characters long.</div>
+                                    <div ng-message="pattern"> Invalid Email Address</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex="50">
                                 <label>reply to email</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
-                                       name="replyToEmail" required ng-model="emailDel.replyToEmail"/>
-                                <span class="error"
-                                      ng-show="emailDeliveryForm.replyToEmail.$error.email || emailDeliveryForm.replyToEmail.$error.pattern">
-                                    Invalid Email Address
-                                </span>
-                            </fieldset>
-                            <fieldset class="fieldset-default-size">
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
+                                <input   ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                        name="replyToEmail"  md-maxlength="50"  ng-required="true" ng-model="emailDel.replyToEmail"/>
+                                <div ng-messages="emailDeliveryForm.replyToEmail.$error" ng-show="emailDeliveryForm.replyToEmail.$dirty">
+                                    <div ng-message="required">Email is required.</div>
+                                    <div ng-message="md-maxlength">The email must be less than 50 characters long.</div>
+                                    <div ng-message="pattern"> Invalid Email Address</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex="50">
                                 <label>alert email</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
-                                       name="alertEmail" required ng-model="emailDel.alertEmail"/>
-                                <span class="error"
-                                      ng-show="emailDeliveryForm.alertEmail.$error.email || emailDeliveryForm.alertEmail.$error.pattern">
-                                    Invalid Email Address
-                                </span>
-                            </fieldset>
-                            <fieldset class="fieldset-default-size">
-                                <label>alert at (Percentage)</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12">
-                                <input type="input" ng-pattern="/^[0-9%]+$/" name="alertAt" class="input-shadow-border me-xs-input reset-inline" required
-                                       ng-model="emailDel.alertAt"/>
-                                <span class="error"
-                                      ng-show="emailDeliveryForm.alertAt.$error.pattern">
-                                    Numbers only
-                                </span>
-                               <!-- <span>%</span>-->
-                            </fieldset>
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
+                                <input   ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                        name="alertEmail"  md-maxlength="50"  ng-required="true" ng-model="emailDel.alertEmail"/>
+                                <div ng-messages="emailDeliveryForm.alertEmail.$error" ng-show="emailDeliveryForm.alertEmail.$dirty">
+                                    <div ng-message="required">Email is required.</div>
+                                    <div ng-message="md-maxlength">The email must be less than 50 characters long.</div>
+                                    <div ng-message="pattern"> Invalid Email Address</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex="30">
+                                <label>alert at (%)</label>
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
+                                <input   ng-pattern="/^[0-9%]+$/"
+                                        name="alertAt"  md-maxlength="2"  ng-required="true" ng-model="emailDel.alertAt"/>
+                                <div ng-messages="emailDeliveryForm.alertAt.$error" ng-show="emailDeliveryForm.alertAt.$dirty">
+                                    <div ng-message="required">Alert precentage is required.</div>
+                                    <div ng-message="md-maxlength">Only between 100 - 0</div>
+                                    <div ng-message="pattern">Numbers only</div>
+                                </div>
+                            </md-input-container>
+
 
                         </div>
 
@@ -137,83 +142,145 @@
                     </md-content>
                 </md-tab-body>
             </md-tab>
-            <md-tab ng-disabled=enableTab>
-                <md-tab-label>Header and Footer</md-tab-label>
-                <md-tab-body>
-                    <div class="md-dialog-header">
-                        <div class="md-dialog-header-nav clearfix">
-                            <h1 class="pull-left">Header and Footer</h1>
+            <!--<md-tab ng-disabled="enableTab">-->
+                <!--<md-tab-label>Header and Footer</md-tab-label>-->
+                <!--<md-tab-body>-->
+                    <!--<div class="md-dialog-header">-->
+                        <!--<div class="md-dialog-header-nav clearfix">-->
+                            <!--<h1 class="pull-left">Header and Footer</h1>-->
 
-                        </div>
-                    </div>
-                    <form name="headerFooterForm" novalidate>
-                    <div class="md-dialog-main">
-                        <fieldset>
-                            <label>Header</label>
-                            <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <div class="custom-trix">
-                                <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="emailHF.header" required></text-angular>
-                                <!--<trix-editor style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
-                            </div>
-                            <!--<div class="file-upload-wrapper clearfix">-->
-                                <!--<p class="file-upload-msg">Upload your product images</p>-->
-                                <!--<div class="pull-left">-->
-                                    <!--<div class="me-file-upload rounded">-->
-                                        <!--<div class="upload-wrapper">-->
-                                            <!--<input type="button" ngf-select ng-model="picFileHeader" ngf-accept="image/*"-->
-                                                   <!--aria-invalid="true" ngf-change="changeImage()" required/>-->
-                                            <!--<span>Browse Images</span>-->
-                                        <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<form name="headerFooterForm" novalidate>-->
+                    <!--<div class="md-dialog-main">-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-lg-7 col-md-7">-->
+                                <!--<div class="email-image-upload uploaded-section clearfix">-->
+                                    <!--<div class="uploaded-new-image3">-->
+                                        <!--<label>Insert Header Image</label><br>-->
+
+                                        <!--<button class="btn-material" ngf-select ng-model="picFileHeader" ngf-accept="image/*"-->
+                                                <!--aria-invalid="true" ngf-change="changeImage()" required>-->
+                                            <!--Upload Image-->
+                                        <!--</button>-->
+                                        <!--<p></p><br>-->
                                     <!--</div>-->
                                 <!--</div>-->
+                                <!--<label>Header</label>-->
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12">-->
+                                <!--<div class="custom-trix">-->
+                                    <!--<text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="emailHF.header" required></text-angular>-->
+                                    <!--&lt;!&ndash;<trix-editorsada style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>&ndash;&gt;-->
+                                <!--</div>-->
+                                <!--<p>-->
+                                    <!--<br>-->
+                                    <!--<label>Select below to add to the email</label>-->
+                                    <!--<md-checkbox aria-label="Delivery and shhipping Details" ng-model="data.delivery">-->
+                                        <!--Delivery and shhipping Details-->
+                                    <!--</md-checkbox>-->
+                                    <!--<br>-->
+
+                                    <!--<md-checkbox aria-label="Order" ng-model="data.order">-->
+                                        <!--Order-->
+                                    <!--</md-checkbox>-->
+                                    <!--<br>-->
+
+                                    <!--<md-checkbox aria-label="Store details">-->
+                                        <!--Store details-->
+                                    <!--</md-checkbox>-->
+                                <!--</p>-->
                             <!--</div>-->
-                            <div class="email-image-upload uploaded-section clearfix">
-                                <div class="uploaded-new-image3">
-                                    <p>Insert Header Image</p>
-                                    <img ng-if="picFileHeader == null" ng-src="../../../images/medium-placeholder.png" width="150"
-                                         height="150"/><br>
-                                    <img ng-if="picFileHeader != null" ngf-src="picFileHeader" width="150" height="150"/><br>
+                            <!--<div class="col-lg-5 col-md-5" style="zoom:0.7; background: #ebebeb;">-->
+                                <!--<img ng-if="picFileHeader == null" ng-src="images/medium-placeholder.png"  width="100%" height="80px" style="display: block;margin: auto;"/><br>-->
+                                <!--<img ng-if="picFileHeader != null" ngf-src="picFileHeader" width="100%"   height="100px" style="display:block; margin:auto;"> <br>-->
+                                <!--<p>-->
+                                    <!--<text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="emailHF.header" disabled></text-angular>-->
+                                <!--</p>-->
+                                <!--<p>-->
+                                    <!--<div class="row" ng-if="data.delivery">-->
+                                        <!--<div class="col-md-6">-->
+                                             <!--<span><b>Delivered to</b></span><br>-->
+                                            <!--<p>John Doe, 488, Kotte ROad, Pitakotte</p>-->
+                                         <!--</div>-->
+                                        <!--<div class="col-md-6">-->
+                                            <!--<span><b>Shipping Details</b></span><br>-->
+                                            <!--<p>Express Delivery</p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row" ng-if="data.order">-->
+                                        <!--<div class="col-md-12">-->
+                                            <!--<span><b>Your Order</b></span><br>-->
+                                            <!--<p>Order Number:1234567890</p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row"  ng-if="data.order">-->
+                                        <!--<div class="col-md-7">-->
+                                            <!--<span><b>Item Description</b></span>-->
+                                            <!--<br>-->
+                                            <!--<br>-->
+                                            <!--<p>-->
+                                                <!--<img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">-->
+                                                <!--<br>-->
+                                                <!--<span>Superman T-shir</span><br>-->
+                                                <!--<span>Blue- Blue/UK 9</span><br>-->
+                                                <!--<span>Qty : 1 product code: 12345</span>-->
+                                            <!--</p>-->
+                                        <!--</div>-->
+                                        <!--<div class="col-md-5">-->
+                                            <!--<span><b>LKR Rs.</b></span>-->
+                                            <!--<br>-->
+                                            <!--<br>-->
+                                            <!--<br>-->
+                                            <!--<p>560.00</p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="row"  ng-if="data.order">-->
+                                        <!--<div class="col-md-7">-->
+                                            <!--<p>-->
+                                                <!--<img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">-->
+                                                <!--<br>-->
+                                                <!--<span>Superman Shoes</span><br>-->
+                                                <!--<span>Black- Black/9</span><br>-->
+                                                <!--<span>Qty : 1 product code: 12345</span>-->
+                                            <!--</p>-->
+                                        <!--</div>-->
+                                        <!--<div class="col-md-5">-->
+                                            <!--<br>-->
+                                            <!--<p>6000.00</p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-12"  ng-if="data.order">-->
+                                            <!--<div class="col-md-7 text-right">Sub Total</div>-->
+                                            <!--<div class="col-md-5">6560.00</div>-->
+                                            <!--<div class="col-md-7 text-right">Delivery</div>-->
+                                            <!--<div class="col-md-5">0.00</div>-->
+                                            <!--<div class="col-md-7 text-right">TAX</div>-->
+                                            <!--<div class="col-md-5">200.00</div>-->
+                                            <!--<div class="col-md-7 text-right"><b>Total</b></div>-->
+                                            <!--<div class="col-md-5">6760.00</div>-->
+                                            <!--<div class="col-md-7 text-right"><b>Payment Method</b></div>-->
+                                            <!--<div class="col-md-5">Paypal</div>-->
+                                    <!--</div>-->
+                                 <!--</p>-->
+                                <!--<div class="text-center" style="clear: both;padding-top: 16px">-->
+                                    <!--<img width="20%" src="./images/logo.png">-->
+                                <!--</div>-->
+                                <!--<p  class="text-center" class="text-center"><span>Powered by www.Otenro.com</span> </p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--</form>-->
+                    <!--<div class="md-dialog-buttons">-->
+                        <!--<div class="inner-section">-->
+                            <!--<md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>-->
+                            <!--<md-button class="me-default-button" ng-click="updateHeaderFooterSettings(picFileHeader,emailHF,'save')">Save-->
+                            <!--</md-button>-->
+                            <!--<md-button class="me-default-button"  ng-click="updateHeaderFooterSettings(picFileHeader,emailHF,'next')">Next</md-button>-->
+                        <!--</div>-->
+                    <!--</div>-->
 
-                                    <button class="btn-material" ngf-select ng-model="picFileHeader" ngf-accept="image/*"
-                                            aria-invalid="true" ngf-change="changeImage()" required>Upload Image
-                                    </button>
-
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <label>footer</label>
-                            <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <div class="custom-trix">
-                                <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="emailHF.footer" required></text-angular>
-                                <!--<trix-editor style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.footer"></trix-editor>-->
-                            </div>
-                            <div class="email-image-upload uploaded-section clearfix">
-                                <div class="uploaded-new-image3">
-                                    <p>insert footer Image</p>
-                                    <img ng-if="picFileFooter == null" ng-src="../../../images/medium-placeholder.png" width="150"
-                                         height="150"/><br>
-                                    <img ng-if="picFileFooter != null" ngf-src="picFileFooter" width="150" height="150"/><br>
-
-                                    <button class="btn-material" ngf-select ng-model="picFileFooter" ngf-accept="image/*"
-                                            aria-invalid="true" ngf-change="changeImage()" required >Upload Image
-                                    </button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-                    </form>
-                    <div class="md-dialog-buttons">
-                        <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateHeaderFooterSettings(picFileHeader,picFileFooter,emailHF,'save')">Save
-                            </md-button>
-                            <md-button class="me-default-button"  ng-click="updateHeaderFooterSettings(picFileHeader,picFileFooter,emailHF,'next')">Next</md-button>
-                        </div>
-                    </div>
-
-                </md-tab-body>
-            </md-tab>
+                <!--</md-tab-body>-->
+            <!--</md-tab>-->
             <md-tab ng-disabled=enableTab>
                 <md-tab-label>Order Confirmation</md-tab-label>
                 <md-tab-body>
@@ -225,14 +292,129 @@
                     </div>
                     <form name="orderConfirmationForm" novalidate>
                     <div class="md-dialog-main">
-                        <fieldset>
-                            <label>order confirmed email</label>
-                            <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <div class="custom-trix">
-                                <text-angular rows="4" ng-model="OConfirm.orderConfirmedEmail" class="input-shadow-border" required></text-angular>
-                                <!--<trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="OConfirm.orderConfirmedEmail" required></trix-editor>-->
+
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="email-image-upload uploaded-section clearfix">
+                                    <div class="uploaded-new-image3">
+                                        <label>Insert Header Image</label><br>
+
+                                        <button class="btn-material" ngf-select ng-model="picFileHeader" ngf-accept="image/*"
+                                                aria-invalid="true" ngf-change="changeImage()" required>
+                                            Upload Image
+                                        </button>
+                                        <md-button class="md-icon-button" aria-label="Delete" ng-click="picFileHeader = null">
+                                            <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
+                                        </md-button>
+                                        <p></p><br>
+                                    </div>
+                                </div>
+                                <label>Header</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <div class="custom-trix">
+                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="OConfirm.orderConfirmedEmail" required></text-angular>
+                                    <!--<trix-editorsada style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
+                                </div>
+                                <p>
+                                    <br>
+                                    <label>Select below to add to the email</label>
+                                    <md-checkbox aria-label="Delivery and shhipping Details" ng-model="data.delivery">
+                                        Delivery and shhipping Details
+                                    </md-checkbox>
+                                    <br>
+
+                                    <md-checkbox aria-label="Order" ng-model="data.order">
+                                        Order
+                                    </md-checkbox>
+                                    <br>
+
+                                    <md-checkbox aria-label="Store details">
+                                        Store details
+                                    </md-checkbox>
+                                </p>
                             </div>
-                        </fieldset>
+                            <div class="col-lg-5 col-md-5" style="zoom:0.7; background: #ebebeb;">
+                                <img ng-if="picFileHeader == null" ng-src="images/1000x200.png"  width="100%" height="80px" style="display: block;margin: 16px auto 0 auto
+                                ;"/><br>
+                                <img ng-if="picFileHeader != null" ngf-src="picFileHeader" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
+                                <p>
+                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="OConfirm.orderConfirmedEmail" disabled></text-angular>
+                                </p>
+                                <p>
+                                    <div class="row" ng-if="data.delivery">
+                                        <div class="col-md-6">
+                                            <span><b>Delivered to</b></span><br>
+                                <p>John Doe, 488, Kotte ROad, Pitakotte</p>
+                            </div>
+                            <div class="col-md-6">
+                                <span><b>Shipping Details</b></span><br>
+                                <p>Express Delivery</p>
+                            </div>
+                        </div>
+                        <div class="row" ng-if="data.order">
+                            <div class="col-md-12">
+                                <span><b>Your Order</b></span><br>
+                                <p>Order Number:1234567890</p>
+                            </div>
+                        </div>
+                        <div class="row"  ng-if="data.order">
+                            <div class="col-md-7">
+                                <span><b>Item Description</b></span>
+                                <br>
+                                <br>
+                                <p>
+                                    <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
+                                    <br>
+                                    <span>Superman T-shir</span><br>
+                                    <span>Blue- Blue/UK 9</span><br>
+                                    <span>Qty : 1 product code: 12345</span>
+                                </p>
+                            </div>
+                            <div class="col-md-5">
+                                <span><b>LKR Rs.</b></span>
+                                <br>
+                                <br>
+                                <br>
+                                <p>560.00</p>
+                            </div>
+                        </div>
+                        <div class="row"  ng-if="data.order">
+                            <div class="col-md-7">
+                                <p>
+                                    <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
+                                    <br>
+                                    <span>Superman Shoes</span><br>
+                                    <span>Black- Black/9</span><br>
+                                    <span>Qty : 1 product code: 12345</span>
+                                </p>
+                            </div>
+                            <div class="col-md-5">
+                                <br>
+                                <p>6000.00</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12"  ng-if="data.order">
+                            <div class="col-md-7 text-right">Sub Total</div>
+                            <div class="col-md-5">6560.00</div>
+                            <div class="col-md-7 text-right">Delivery</div>
+                            <div class="col-md-5">0.00</div>
+                            <div class="col-md-7 text-right">TAX</div>
+                            <div class="col-md-5">200.00</div>
+                            <div class="col-md-7 text-right"><b>Total</b></div>
+                            <div class="col-md-5">6760.00</div>
+                            <div class="col-md-7 text-right"><b>Payment Method</b></div>
+                            <div class="col-md-5">Paypal</div>
+                        </div>
+                        </p>
+                        <div class="text-center" style="clear: both;padding-top: 16px">
+                            <img width="20%" src="./images/logo.png">
+                        </div>
+                        <div  class="text-center" class="text-center"><span>Powered by www.Otenro.com</span> </div>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                        </div>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order confirm')">send test email</md-button>
 
                     </div>
@@ -258,14 +440,128 @@
                     </div>
                     <form name="orderFulfillForm" novalidate>
                     <div class="md-dialog-main">
-                        <fieldset>
-                            <label>order fulfilled email</label>
-                            <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <div class="custom-trix">
-                                <text-angular rows="4" ng-model="Ofulfilled.orderFulfilledEmail" class="input-shadow-border" required></text-angular>
-                                <!--<trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="Ofulfilled.orderFulfilledEmail" required></trix-editor>-->
+
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="email-image-upload uploaded-section clearfix">
+                                    <div class="uploaded-new-image3">
+                                        <label>Insert Header Image</label><br>
+
+                                        <button class="btn-material" ngf-select ng-model="picFileHeader2" ngf-accept="image/*"
+                                                aria-invalid="true" ngf-change="changeImage()" required>
+                                            Upload Image
+                                        </button>
+                                        <md-button class="md-icon-button" aria-label="Delete" ng-click="picFileHeader2 = null">
+                                            <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
+                                        </md-button>
+                                        <p></p><br>
+                                    </div>
+                                </div>
+                                <label>Header</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <div class="custom-trix">
+                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="Ofulfilled.orderFulfilledEmail" required></text-angular>
+                                    <!--<trix-editorsada style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
+                                </div>
+                                <p>
+                                    <br>
+                                    <label>Select below to add to the email</label>
+                                    <md-checkbox aria-label="Delivery and shhipping Details" ng-model="data.delivery">
+                                        Delivery and shhipping Details
+                                    </md-checkbox>
+                                    <br>
+
+                                    <md-checkbox aria-label="Order" ng-model="data.order">
+                                        Order
+                                    </md-checkbox>
+                                    <br>
+
+                                    <md-checkbox aria-label="Store details">
+                                        Store details
+                                    </md-checkbox>
+                                </p>
                             </div>
-                        </fieldset>
+                            <div class="col-lg-5 col-md-5" style="zoom:0.7; background: #ebebeb;">
+                                <img ng-if="picFileHeader2 == null" ng-src="images/1000x200.png"  width="100%" height="80px" style="display: block;margin: 16px auto 0 auto;"/><br>
+                                <img ng-if="picFileHeader2 != null" ngf-src="picFileHeader2" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto;"> <br>
+                                <p>
+                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="Ofulfilled.orderFulfilledEmail" disabled></text-angular>
+                                </p>
+                                <p>
+                                    <div class="row" ng-if="data.delivery">
+                                        <div class="col-md-6">
+                                            <span><b>Delivered to</b></span><br>
+                                <p>John Doe, 488, Kotte ROad, Pitakotte</p>
+                            </div>
+                            <div class="col-md-6">
+                                <span><b>Shipping Details</b></span><br>
+                                <p>Express Delivery</p>
+                            </div>
+                        </div>
+                        <div class="row" ng-if="data.order">
+                            <div class="col-md-12">
+                                <span><b>Your Order</b></span><br>
+                                <p>Order Number:1234567890</p>
+                            </div>
+                        </div>
+                        <div class="row"  ng-if="data.order">
+                            <div class="col-md-7">
+                                <span><b>Item Description</b></span>
+                                <br>
+                                <br>
+                                <p>
+                                    <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
+                                    <br>
+                                    <span>Superman T-shir</span><br>
+                                    <span>Blue- Blue/UK 9</span><br>
+                                    <span>Qty : 1 product code: 12345</span>
+                                </p>
+                            </div>
+                            <div class="col-md-5">
+                                <span><b>LKR Rs.</b></span>
+                                <br>
+                                <br>
+                                <br>
+                                <p>560.00</p>
+                            </div>
+                        </div>
+                        <div class="row"  ng-if="data.order">
+                            <div class="col-md-7">
+                                <p>
+                                    <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
+                                    <br>
+                                    <span>Superman Shoes</span><br>
+                                    <span>Black- Black/9</span><br>
+                                    <span>Qty : 1 product code: 12345</span>
+                                </p>
+                            </div>
+                            <div class="col-md-5">
+                                <br>
+                                <p>6000.00</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12"  ng-if="data.order">
+                            <div class="col-md-7 text-right">Sub Total</div>
+                            <div class="col-md-5">6560.00</div>
+                            <div class="col-md-7 text-right">Delivery</div>
+                            <div class="col-md-5">0.00</div>
+                            <div class="col-md-7 text-right">TAX</div>
+                            <div class="col-md-5">200.00</div>
+                            <div class="col-md-7 text-right"><b>Total</b></div>
+                            <div class="col-md-5">6760.00</div>
+                            <div class="col-md-7 text-right"><b>Payment Method</b></div>
+                            <div class="col-md-5">Paypal</div>
+                        </div>
+                        </p>
+                        <div class="text-center" style="clear: both;padding-top: 16px">
+                            <img width="20%" src="./images/logo.png">
+                        </div>
+                        <div  class="text-center" class="text-center"><span>Powered by www.Otenro.com</span> </div>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                        </div>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order Fulfilled')">send test email</md-button>
                     </div>
                     </form>
@@ -290,14 +586,128 @@
                     </div>
                     <form name="orderRefundForm" novalidate>
                     <div class="md-dialog-main">
-                        <fieldset>
-                            <label>order refunded email</label>
-                            <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <div class="custom-trix">
-                                <text-angular rows="4" ng-model="ORefund.orderRefundEmail" class="input-shadow-border" required></text-angular>
-                                <!--<trix-editor angular-trix rows="4" class="input-shadow-border" ng-model="ORefund.orderRefundEmail" required></trix-editor>-->
+
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div class="email-image-upload uploaded-section clearfix">
+                                    <div class="uploaded-new-image3">
+                                        <label>Insert Header Image</label><br>
+
+                                        <button class="btn-material" ngf-select ng-model="picFileHeader3" ngf-accept="image/*"
+                                                aria-invalid="true" ngf-change="changeImage()" required>
+                                            Upload Image
+                                        </button>
+                                        <md-button class="md-icon-button" aria-label="Delete" ng-click="picFileHeader3 = null">
+                                            <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
+                                        </md-button>
+                                        <p></p><br>
+                                    </div>
+                                </div>
+                                <label>Header</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <div class="custom-trix">
+                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="ORefund.orderRefundEmail" required></text-angular>
+                                    <!--<trix-editorsada style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
+                                </div>
+                                <p>
+                                    <br>
+                                    <label>Select below to add to the email</label>
+                                    <md-checkbox aria-label="Delivery and shhipping Details" ng-model="data.delivery">
+                                        Delivery and shhipping Details
+                                    </md-checkbox>
+                                    <br>
+
+                                    <md-checkbox aria-label="Order" ng-model="data.order">
+                                        Order
+                                    </md-checkbox>
+                                    <br>
+
+                                    <md-checkbox aria-label="Store details">
+                                        Store details
+                                    </md-checkbox>
+                                </p>
                             </div>
-                        </fieldset>
+                            <div class="col-lg-5 col-md-5" style="zoom:0.7; background: #ebebeb;">
+                                <img ng-if="picFileHeader3 == null" ng-src="images/1000x200.png"  width="100%" height="80px" style="display: block;margin: 16px auto 0 auto"/><br>
+                                <img ng-if="picFileHeader3 != null" ngf-src="picFileHeader3" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
+                                <p>
+                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="ORefund.orderRefundEmail" disabled></text-angular>
+                                </p>
+                                <p>
+                                    <div class="row" ng-if="data.delivery">
+                                        <div class="col-md-6">
+                                            <span><b>Delivered to</b></span><br>
+                                <p>John Doe, 488, Kotte ROad, Pitakotte</p>
+                            </div>
+                            <div class="col-md-6">
+                                <span><b>Shipping Details</b></span><br>
+                                <p>Express Delivery</p>
+                            </div>
+                        </div>
+                        <div class="row" ng-if="data.order">
+                            <div class="col-md-12">
+                                <span><b>Your Order</b></span><br>
+                                <p>Order Number:1234567890</p>
+                            </div>
+                        </div>
+                        <div class="row"  ng-if="data.order">
+                            <div class="col-md-7">
+                                <span><b>Item Description</b></span>
+                                <br>
+                                <br>
+                                <p>
+                                    <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
+                                    <br>
+                                    <span>Superman T-shir</span><br>
+                                    <span>Blue- Blue/UK 9</span><br>
+                                    <span>Qty : 1 product code: 12345</span>
+                                </p>
+                            </div>
+                            <div class="col-md-5">
+                                <span><b>LKR Rs.</b></span>
+                                <br>
+                                <br>
+                                <br>
+                                <p>560.00</p>
+                            </div>
+                        </div>
+                        <div class="row"  ng-if="data.order">
+                            <div class="col-md-7">
+                                <p>
+                                    <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
+                                    <br>
+                                    <span>Superman Shoes</span><br>
+                                    <span>Black- Black/9</span><br>
+                                    <span>Qty : 1 product code: 12345</span>
+                                </p>
+                            </div>
+                            <div class="col-md-5">
+                                <br>
+                                <p>6000.00</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12"  ng-if="data.order">
+                            <div class="col-md-7 text-right">Sub Total</div>
+                            <div class="col-md-5">6560.00</div>
+                            <div class="col-md-7 text-right">Delivery</div>
+                            <div class="col-md-5">0.00</div>
+                            <div class="col-md-7 text-right">TAX</div>
+                            <div class="col-md-5">200.00</div>
+                            <div class="col-md-7 text-right"><b>Total</b></div>
+                            <div class="col-md-5">6760.00</div>
+                            <div class="col-md-7 text-right"><b>Payment Method</b></div>
+                            <div class="col-md-5">Paypal</div>
+                        </div>
+                        </p>
+                        <div class="text-center" style="clear: both;padding-top: 16px">
+                            <img width="20%" src="./images/logo.png">
+                        </div>
+                        <div  class="text-center" class="text-center"><span>Powered by www.Otenro.com</span> </div>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                        </div>
                         <md-button class="me-default-button col-1 pull-right reset-margin" ng-click="testEmail('Order Refund')">send test email</md-button>
                     </div>
                     </form>
