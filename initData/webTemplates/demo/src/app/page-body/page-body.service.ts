@@ -1,0 +1,26 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class PagebodyServiceModule {
+    
+  data:object;
+  userData:object;
+  cart = {cartItems:[],cartSize:0,totalPrice:0};
+  isUserLoggedIn = {check:false};
+  parseWeight;
+  position2;
+  parentobj = {userLog:false,cartSize:0,totalPrice:0};
+  parseQty;
+  parseIndex;
+  parseEnable;
+  finalDetails;
+  
+  constructor(){
+  
+    this.parentobj.cartSize = this.cart.cartSize;
+    this.parentobj.userLog = this.isUserLoggedIn.check;  
+    
+  };
+  
+
+}

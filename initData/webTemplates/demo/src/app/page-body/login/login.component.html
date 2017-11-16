@@ -1,0 +1,17 @@
+<div class="col-md-6 col-md-offset-3">
+  <h2>Login</h2>
+  <form name="form"  #f="ngForm">
+
+      <label for="username">Username</label>
+            <input type="text" class="form-control" name="username" [(ngModel)]="name" #username="ngModel" required />
+            <label for="password">Password</label>
+      <input type="password" class="form-control" name="password" [(ngModel)]="pass" #password="ngModel" required />
+    <br>
+      <div class="form-group">
+                      <button [disabled]="loading" (click) = 'login()' class="btn btn-primary">Login</button>
+                      <button [disabled]="loading" (click) = 'register()' class="btn btn-primary">Register</button>
+        </div>
+              
+    
+  </form>
+</div>
