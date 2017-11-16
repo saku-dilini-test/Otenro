@@ -55,7 +55,7 @@ const routes: Routes = [
     data:{title:'Contact Page'}
   },
   {
-    path: 'shop/:id/:name',
+    path: 'shop/:id/:name/:image',
     component: ShopComponent,
     data:{title:'Shop Page'}
   },

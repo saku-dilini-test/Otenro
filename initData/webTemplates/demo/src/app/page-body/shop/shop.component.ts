@@ -16,20 +16,34 @@ export class ShopComponent implements OnInit {
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
   public currency;
-  imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-  + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
-  constructor(private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient) {
-  }
   results: {};
   catId: any;
   catName: any;
-  ngOnInit() {
+  catImage: any;
+  slides:any;
 
+  constructor(private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient) {
+
+  }
+
+  imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+    + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+
+  imageUrl2 = SERVER_URL + "/templates/viewWebImages?userId="
+  +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&images=secondNavi";
+
+
+
+  ngOnInit() {
     this.router.params.subscribe(params => {
       this.catId = params['id']; // --> Name must match wanted parameter
       this.catName = params['name'];
+      this.catImage = params['image'];
       console.log("this.value : " + this.catId);
     });
+
+    this.slides = [
+      { src: this.imageUrl2+"/"+ this.catImage, title: this.catName }]
 
     this.http.get(SERVER_URL + '/templates/getProductsByCatId?appId=' + this.appId + '&childId=' + this.catId).subscribe(data => {
       // Read the result field from the JSON response.
@@ -37,12 +51,13 @@ export class ShopComponent implements OnInit {
       this.results = data;
       console.log("this.results  : " + JSON.stringify(this.results));
 
-    },
+      },
       error => {
         this.showErrorPage();
       });
     this.http.get(SERVER_URL + '/templates/getCurrency?appId=' + this.appId).subscribe(function (data) {
       this.currency = data;
+      console.log(this.currency)
     }, error => {
       this.showErrorPage();
     });
@@ -52,7 +67,7 @@ export class ShopComponent implements OnInit {
   navigateProd(val: String, item: object) {
     this.dataService.data = item;
     this.route.navigate([val, this.catName]);
-    // console.log("item  : " + JSON.stringify(item));
+    console.log("item  : " + JSON.stringify(this.dataService.data));
 
   }
 
@@ -65,9 +80,5 @@ export class ShopComponent implements OnInit {
     console.log('Value changed to', value);
   }
 
-  slides = SLIDES;
-
 }
 
-const SLIDES = [
-  { src: 'https://aos-articlesofstylel.netdna-ssl.com/wp-content/uploads/2014/01/Ebay.jpg', title: "Men's Wear" }]

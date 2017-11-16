@@ -28,19 +28,20 @@ export class HomepageComponent implements OnInit {
   public userId = (<any>data).userId;
   public categoryId;
   public categoryName;
+   imageUrl:any;
 
-  imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-  +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&images=secondNavi";
   results:{};
 
 constructor(private router: Router,private http: HttpClient) {}
 
   ngOnInit() {
+    this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+      +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&images=secondNavi";
     this.http.get('http://localhost:1337/templates/getSpecificChild?appId=' + this.appId).subscribe(data => {
       // Read the result field from the JSON response.
 
       this.results = data;
-      console.log("this.results  : " + JSON.stringify(this.results));
+      console.log(data);
       console.log(" cat id  : " + JSON.stringify((this.results[0].id)));
       this.categoryId = this.results[0].id;
       this.categoryName = this.results[0].name;
