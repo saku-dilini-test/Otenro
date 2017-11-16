@@ -20,17 +20,20 @@ import { AgmCoreModule } from '@agm/core';
 // http://tb.github.io/ng2-nouislider/
 import { NouisliderModule } from 'ng2-nouislider';
 import { PagebodyServiceModule } from './page-body/page-body.service';
-import { LoginComponent } from './login/login.component' 
-
+import { LocalStorageModule } from 'angular-2-local-storage';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
+    LocalStorageModule.withConfig({
+      prefix: 'my-app',
+      storageType: 'localStorage'
+  }),
  
     BrowserModule,
     FormsModule,
@@ -43,7 +46,7 @@ import { LoginComponent } from './login/login.component'
       apiKey: 'AIzaSyBanVJ_9ViC-HeJruJzhetGXUERg1eYXag'
     }),
     NouisliderModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [PagebodyServiceModule],
   bootstrap: [AppComponent]

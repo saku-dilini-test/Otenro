@@ -13,7 +13,7 @@
         <div class="d-inline px-3  hidden-sm-down">
             <a (click)="navigate('cart')">
               <i aria-hidden="true" class="fa fa-shopping-cart"></i>
-              <span class="badge bg-primary">3</span>
+              <span class="badge bg-primary">{{cartNo}}</span>
             </a>
         </div>
     </div>
@@ -47,6 +47,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" (click)="navigate('terms')">Terms & Conditions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="navigate('cart')">Cart</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" (click)="navigate('contact')">Contact</a>

@@ -47,7 +47,7 @@ export class ProductComponent implements OnInit {
     this.http.get(SERVER_URL + '/templates/getCurrency?appId='+ this.appId).subscribe(function(data) {
       this.currency = data;
       console.log("this.currency  : " + JSON.stringify(this.currency.sign));
-this.sign = this.currency.sign;
+      this.sign = this.currency.sign;
   }, error => {
     this.showErrorPage();
     
@@ -256,7 +256,7 @@ changeVariant4(variant){
                                 this.parentobj.cartSize = this.dataService.cart.cartSize;
                                 this.dataService.parseWeight = this.selectedVariant.weight;
                                 // $state.go('app.category');
-                                this.route.navigate(['cart']);
+                                this.route.navigate(['home']);
                                 break;
                             }
                             else if(i == (this.dataService.cart.cartItems.length -1)){
@@ -278,7 +278,7 @@ changeVariant4(variant){
                                 this.parentobj.cartSize = this.dataService.cart.cartSize;
                                 this.dataService.parseWeight = this.selectedVariant.weight;
                                 //  $state.go('app.category');
-                                this.route.navigate(['cart']);
+                                this.route.navigate(['home']);
                                 break;
                             }
                             i++;
@@ -303,13 +303,12 @@ changeVariant4(variant){
                     this.parentobj.cartSize = this.dataService.cart.cartSize;
                     this.dataService.parseWeight = this.selectedVariant.weight;
                     // $state.go('app.category');
-                    this.route.navigate(['cart']);
+                    this.route.navigate(['home']);
                     
                 }
             }
     
         };
-
 
           
   slides = SLIDES;
