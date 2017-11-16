@@ -20,7 +20,7 @@ import * as data from '../../madeEasy.json';
         transition('small <=> large', animate('300ms ease-in')),
     ]),
   ]
-   
+
 })
 export class HomepageComponent implements OnInit {
 
@@ -33,20 +33,17 @@ export class HomepageComponent implements OnInit {
   +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&images=secondNavi";
   results:{};
 
-constructor(private router: Router,private http: HttpClient) { 
-  console.log(this.imageUrl)}
-
-
+constructor(private router: Router,private http: HttpClient) {}
 
   ngOnInit() {
     this.http.get('http://localhost:1337/templates/getSpecificChild?appId=' + this.appId).subscribe(data => {
       // Read the result field from the JSON response.
-      
+
       this.results = data;
       console.log("this.results  : " + JSON.stringify(this.results));
-      console.log(" cat id  : " + JSON.stringify((this.results[0].id)));      
-   this.categoryId = this.results[0].id;
-this.categoryName = this.results[0].name;
+      console.log(" cat id  : " + JSON.stringify((this.results[0].id)));
+      this.categoryId = this.results[0].id;
+      this.categoryName = this.results[0].name;
     },
     error => {
       this.showErrorPage();
@@ -62,7 +59,7 @@ this.categoryName = this.results[0].name;
   }
 
   getData(){
-  
+
   }
   showErrorPage(){
     alert('Somthing went Wrong!');

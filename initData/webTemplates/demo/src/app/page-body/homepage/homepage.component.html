@@ -3,43 +3,35 @@
 	 [slides]="slides">
 </app-carousel>
 
-
-<div class="row" *ngFor="let item of results; let i = index">
-	<div class="card col col-50" > 
-		<a  [routerLink]="['/shop',item.id,item.name]">
-			<div class="animated zoomIn">
-				<div class="padding">
-					<img width="100%" src= '{{imageUrl}}/{{item.imageUrl}}'>
-				</div>
-				<div class="">
-					<div class=" center made-easy-header-font">{{item.name}}</div>
-				</div>
-			</div>
-		</a>
-	</div>
- 
-</div> 
-
 <div class="row">
-  	<div class="col-md-6 my-3">
-  		<img src="./assets/images/promotions/1.jpg" width="100%" />
+  <ng-template *ngFor="let item of results;let i = index" [ngIf]="i % 5 === 0">
+  	<div class="col-md-6 my-3" *ngIf="results[i]">
+      <a  [routerLink]="['/shop',item.id,item.name]">
+            <img src="{{imageUrl}}/{{results[i].imageUrl}}" class="img-responsive" width="100%" />
+      </a>
   	</div>
-  	<div class="col-md-6 my-3">
-  		<img src="./assets/images/promotions/2.jpg" class="img-responsive" width="100%" />
+  	<div class="col-md-6 my-3" *ngIf="results[i+1]">
+      <a  [routerLink]="['/shop',item.id,item.name]">
+          <img src="{{imageUrl}}/{{results[i+1].imageUrl}}" class="img-responsive" width="100%" />
+      </a>
   	</div>
-  </div>
- <div class="row">
-  	<div class="col-md-4 my-3">
-  		<img src="./assets/images/promotions/3.jpg" class="img-responsive" width="100%"/>
+    <div class="col-md-4 my-3" *ngIf="results[i+2]">
+      <a  [routerLink]="['/shop',item.id,item.name]">
+          <img src="{{imageUrl}}/{{results[i+2].imageUrl}}" class="img-responsive" width="100%"/>
+      </a>
   	</div>
-  	<div class="col-md-4 my-3">
-  		<img src="./assets/images/promotions/4.jpg" class="img-responsive" width="100%"/>
+  	<div class="col-md-4 my-3" *ngIf="results[i+3]">
+      <a  [routerLink]="['/shop',item.id,item.name]">
+         <img src="{{imageUrl}}/{{results[i+3].imageUrl}}" class="img-responsive" width="100%"/>
+      </a>
   	</div>
-  	<div class="col-md-4 my-3">
-  		<img src="./assets/images/promotions/5.jpg" class="img-responsive" width="100%"/>
+  	<div class="col-md-4 my-3" *ngIf="results[i+4]">
+      <a  [routerLink]="['/shop',item.id,item.name]">
+         <img src="{{imageUrl}}/{{results[i+4].imageUrl}}" class="img-responsive" width="100%"/>
+      </a>
   	</div>
-  </div>
-
+  </ng-template>
+ </div>
 
 	<h1 class="px-5 my-5">Popular Products</h1>
 		 <owl-carousel  [options]="owlOptions"
@@ -63,6 +55,3 @@
 
   <hr class="featurette-divider">
 
- <!--<p style="width: 200px; background:lightgray; padding: 100px;" [@myAnimation]='state' (click)="animateMe()">-->
-    <!--I Will Animate-->
- <!--</p>-->
