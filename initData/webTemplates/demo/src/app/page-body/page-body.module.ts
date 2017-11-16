@@ -18,6 +18,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -37,6 +38,6 @@ import { CheckoutComponent } from './checkout/checkout.component';
    exports:[
     PageBodyComponent
   ],
-  declarations: [HomepageComponent, PageBodyComponent, AboutusComponent, PoliciesComponent, TermsComponent, ContactComponent, ShopComponent, ProductComponent, CartComponent, CheckoutComponent]
+  declarations: [HomepageComponent, PageBodyComponent, AboutusComponent, PoliciesComponent, TermsComponent, ContactComponent, ShopComponent, ProductComponent, CartComponent, CheckoutComponent, RegisterComponent]
 })
 export class PageBodyModule { }

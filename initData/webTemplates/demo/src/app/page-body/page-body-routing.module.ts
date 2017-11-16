@@ -11,6 +11,7 @@ import { CartComponent } from './cart/cart.component';
 import { ProductComponent } from './product/product.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component'
 
 const routes: Routes = [
  { path: '',
@@ -18,9 +19,14 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'login',
+    path: 'login/:type',
     component: LoginComponent,
     data:{title:'Login Page'}
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data:{title:'Register Page'}
   },
 
  {
@@ -64,7 +70,7 @@ const routes: Routes = [
     data:{title:'Product Page'}
   },
   {
-    path: 'checkout',
+    path: 'checkout/:type',
     component: CheckoutComponent,
     data:{title:'Checkout Page'}
   }
