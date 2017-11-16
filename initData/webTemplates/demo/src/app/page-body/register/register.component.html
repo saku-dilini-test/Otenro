@@ -1,0 +1,52 @@
+<div class="col align-center">Create Your Account</div>
+
+<label> First Name : </label>
+  <input type="text" [(ngModel)] = "fname" placeholder=""  ng-required="true">
+<br><br>
+
+<label>Last Name : </label>
+  <input type="text" [(ngModel)] = "lname" placeholder=""  ng-required="true">
+<br><br>
+
+<label > Email Address : </label>
+  <input type="email" [(ngModel)] = "email" name="email" placeholder=""  ng-required="true">
+<br><br>
+<label>Password</label>
+  <input type="password" [(ngModel)] = "password" name="password" placeholder=""  ng-required="true" >
+ <br><br>
+
+<label >Street Number : </label>
+  <input type="text" [(ngModel)] = "streetNumber" placeholder=""  ng-required="true">
+  <br><br>
+
+<label >Street Name : </label>
+  <input type="text" [(ngModel)] = "streetName" placeholder="" ng-required="true">
+<br><br>
+
+  <label > City : </label>
+ <input type="text" [(ngModel)] = "city" placeholder=""  ng-required="true">
+<br>
+
+<label >Country:</label>
+<select [(ngModel)]="selectedCountry" (ngModelChange)="changeCountry(selectedCountry)" >
+  <option *ngFor="let c of countries"> {{c.countryName}} </option>
+</select>
+<br><br>
+<label>Zip / Postal Code  </label>
+  <input type="text" [(ngModel)] = "zip" placeholder=""  ng-required="true">
+<br><br>
+
+  <label>Phone Number</label>
+  <input type="text" [(ngModel)] = "phone" pattern="\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|
+                                      2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|
+                                      4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$"
+         name="phone" placeholder=""  ng-required="true">
+         <br>
+
+  <!-- Buy Qty error message -->
+
+
+<div class="row">
+  <button (click) = "signUp()" >Sign up
+  </button>
+</div>
