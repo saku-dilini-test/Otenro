@@ -2,303 +2,349 @@
 </app-carousel>
 
 <div class="container">
-	<div *ngIf = 'formType == "delivery"'>
-	<div class="row">
-		<div class="col-md-9 ">
-			<div>
-				<p>Have a coupon? <a>Click here to enter your code</a></p>
-				<!--         <form method="post">
+
+
+  <div *ngIf='formType == "delivery"'>
+    <div class="row">
+      <div class="col-md-9 ">
+        <div>
+          <p>Have a coupon? <a>Click here to enter your code</a></p>
+          <!--         <form method="post">
               <p>
                 <input type="text" name="coupon_code" placeholder="Coupon code" id="coupon_code" value="">
               </p>
               <p>
                 <input type="submit" class="button" name="apply_coupon" value="Apply Coupon">
               </p> -->
-				<!--    </form> -->
-				<div class="row">
-					<div class="col">
-						<h4 class="mb-4">Billing Details</h4>
-						<div class="form-group d-table-cell pr-4">
-							<label for="fname">First Name</label>
-							<input type="text" [(ngModel)]='fname' [value]="fname" class="form-control" id="fname" aria-describedby="fname">
-						</div>
-						<div class="form-group d-table-cell pb-4">
-							<label for="lname">Last Name</label>
-							<input type="text" class="form-control" id="lname" aria-describedby="lname">
-						</div>
-						<div class="form-group pb-4">
-							<label for="cname">City</label>
-							<input type="text" [(ngModel)]='city' [value]="city" class="form-control" id="cname" aria-describedby="cname">
-						</div>
-						<div class="form-group d-table-cell pr-4">
-							<label for="email">Email address</label>
-							<input type="email" [(ngModel)]='email' [value]="email" class="form-control" id="email" aria-describedby="emailHelp">
-						</div>
-						<div class="form-group d-table-cell pb-4">
-							<label for="phone">Phone</label>
-							<input type="tel" [(ngModel)]='phone' [value]="phone" class="form-control" id="phone" aria-describedby="phone">
-						</div>
-						<div class="form-group pb-4">
-							<label for="email">Street name</label>
-							<input type="email" [(ngModel)]='streetName' [value]="streetName" class="form-control" id="streetName" aria-describedby="streetName">
-						</div>
-						<div class="form-group pb-4">
-							<label for="phone">Street number</label>
-							<input type="tel" [(ngModel)]='streetNumber' [value]="streetNumber" class="form-control" id="streetNumber" aria-describedby="streetNumber">
-						</div>
-						<div class="form-group pb-4">
-							<label for="phone">zip</label>
-							<input type="tel" [(ngModel)]='zip' [value]="zip" class="form-control" id="zip" aria-describedby="zip">
-						</div>
-						<div class="form-group pb-4">
-							<label for="address">Address</label>
-							<textarea class="form-control" id="address" rows="3"></textarea>
-						</div>
-						<div class="form-group pb-4">
-							<select [(ngModel)]="country" (ngModelChange)="countryChanged(country)">
-							<option *ngFor="let c of countries" [selected]="country==c.countryName" value = '{{c.countryName}}'> {{c.countryName}} </option>
-						</select>
-						</div>
-					</div>
-					<div class="col">
-						<!-- <h4 class="mb-4">Additional Information</h4>
-	                    <div class="form-group">
-						    <label for="orderNotes">Order Notes</label>
-						    <textarea class="form-control" id="orderNotes" rows="5" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-						</div> -->
-					</div>
-				</div>
+          <!--    </form> -->
+          <div class="row">
+            <div class="col">
+              <h4 class="mb-4">Billing Details</h4>
+              <div class="form-group d-table-cell pr-4">
+                <label for="fname">First Name</label>
+                <input type="text" [(ngModel)]='fname' [value]="fname" class="form-control" id="fname" aria-describedby="fname">
+              </div>
+              <div class="form-group d-table-cell pb-4">
+                <label for="lname">Last Name</label>
+                <input type="text" class="form-control" id="lname" aria-describedby="lname">
+              </div>
+              <div class="form-group pb-4">
+                <label for="cname">City</label>
+                <input type="text" [(ngModel)]='city' [value]="city" class="form-control" id="cname" aria-describedby="cname">
+              </div>
+              <div class="form-group d-table-cell pr-4">
+                <label for="email">Email address</label>
+                <input type="email" [(ngModel)]='email' [value]="email" class="form-control" id="email" aria-describedby="emailHelp">
+              </div>
+              <div class="form-group d-table-cell pb-4">
+                <label for="phone">Phone</label>
+                <input type="tel" [(ngModel)]='phone' [value]="phone" class="form-control" id="phone" aria-describedby="phone">
+              </div>
+              <div class="form-group pb-4">
+                <label for="email">Street name</label>
+                <input type="email" [(ngModel)]='streetName' [value]="streetName" class="form-control" id="streetName" aria-describedby="streetName">
+              </div>
+              <div class="form-group pb-4">
+                <label for="phone">Street number</label>
+                <input type="tel" [(ngModel)]='streetNumber' [value]="streetNumber" class="form-control" id="streetNumber" aria-describedby="streetNumber">
+              </div>
+              <div class="form-group pb-4">
+                <label for="phone">zip</label>
+                <input type="tel" [(ngModel)]='zip' [value]="zip" class="form-control" id="zip" aria-describedby="zip">
+              </div>
+              <div class="form-group pb-4">
+                <label for="address">Address</label>
+                <textarea class="form-control" id="address" rows="3"></textarea>
+              </div>
+              <div class="form-group pb-4">
+                <select [(ngModel)]="country" (ngModelChange)="countryChanged(country)">
+                  <option *ngFor="let c of countries" [selected]="country==c.countryName" value = '{{c.countryName}}'> {{c.countryName}} </option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <!-- <h4 class="mb-4">Additional Information</h4>
+                        <div class="form-group">
+                            <label for="orderNotes">Order Notes</label>
+                            <textarea class="form-control" id="orderNotes" rows="5" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                        </div> -->
+            </div>
+          </div>
 
-				<!-- <div>
-	                <div class="form-check">
-				        <label class="form-check-label text-uppercase font-weight-bold">
-				            <input class="form-check-input" type="radio" name="paymentMethods" id="paymentMethods1" value="option1" checked>
-				            Payment Method 1
-				        </label>
-				    </div>
-				    <div class="form-check">
-				        <label class="form-check-label text-uppercase font-weight-bold">
-				            <input class="form-check-input" type="radio" name="paymentMethods" id="paymentMethods2" value="option2">
-				            Payment Method 2
-				        </label>
-				    </div> 
-				    <div class="form-check">
-				        <label class="form-check-label text-uppercase font-weight-bold">
-				            <input class="form-check-input" type="radio" name="paymentMethods" id="paymentMethods3" value="option3">
-				            Payment Method 3
-				        </label>
-				    </div>
+          <!-- <div>
+                    <div class="form-check">
+                        <label class="form-check-label text-uppercase font-weight-bold">
+                            <input class="form-check-input" type="radio" name="paymentMethods" id="paymentMethods1" value="option1" checked>
+                            Payment Method 1
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label text-uppercase font-weight-bold">
+                            <input class="form-check-input" type="radio" name="paymentMethods" id="paymentMethods2" value="option2">
+                            Payment Method 2
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label text-uppercase font-weight-bold">
+                            <input class="form-check-input" type="radio" name="paymentMethods" id="paymentMethods3" value="option3">
+                            Payment Method 3
+                        </label>
+                    </div>
                   <div>
                     <input type="submit" class="btn btn-secondary bg-inverse text-white btn-block text-uppercase"  id="place_order" value="Place order" data-value="Place order">
                   </div>
                 </div> -->
 
-			</div>
-		</div>
-		<!-- <div class="col-md-3">
+        </div>
+      </div>
+      <!-- <div class="col-md-3">
           <h5 class="text-uppercase my-3">Categories</h5>
-	        <ngb-accordion  [closeOthers]="true" #acc="ngbAccordion" activeIds="">
-			  <ngb-panel>
-			    <ng-template ngbPanelTitle >
-			      <span><i class="fa fa-caret-right pr-3  control-2"></i><i class="fa fa-caret-down pr-3 control-1" ></i> Clothing</span>
-			    </ng-template>
-			    <ng-template ngbPanelContent>
-			   		<ul>
-			   			<li>Jackets</li>
-			   			<li>Shorts</li>
-			   			<li>Pants</li>
-			   			<li>Shirts</li>
-			   			<li>Sweatshirts</li>
-			   		</ul>
-			    </ng-template>
-			  </ngb-panel>
-			  <ngb-panel>
-			    <ng-template ngbPanelTitle>
-			      <span><i class="fa fa-caret-right pr-3 control-2"></i><i class="fa fa-caret-down pr-3 control-1"></i> Shoes</span>
-			    </ng-template>
-			    <ng-template ngbPanelContent>
-			   		<ul>
-			   			<li>Jackets</li>
-			   			<li>Shorts</li>
-			   			<li>Pants</li>
-			   			<li>Shirts</li>
-			   			<li>Sweatshirts</li>
-			   		</ul>
-			    </ng-template>
-			  </ngb-panel>
-			  
-			</ngb-accordion>
-          
-				</div> -->
-		<div class="col-md-3">
-			<h5 class="text-uppercase my-3">shipping details</h5>
-			<div class="col align-center made-easy-header-font">Shipping Options</div>
-			<tr *ngFor="let ship of shippingData, let idx = index">
-				<td *ngIf='isAdded'>
-					<input #r type="radio" name="shipping" value="{{ship.optionName}}" [(ngModel)]="details.shipping" (change)='addShipping(ship)'>
-					<h3>{{ship.optionName}}</h3>
-					<span>{{ship.shippingOption}}</span>
+            <ngb-accordion  [closeOthers]="true" #acc="ngbAccordion" activeIds="">
+              <ngb-panel>
+                <ng-template ngbPanelTitle >
+                  <span><i class="fa fa-caret-right pr-3  control-2"></i><i class="fa fa-caret-down pr-3 control-1" ></i> Clothing</span>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                       <ul>
+                           <li>Jackets</li>
+                           <li>Shorts</li>
+                           <li>Pants</li>
+                           <li>Shirts</li>
+                           <li>Sweatshirts</li>
+                       </ul>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel>
+                <ng-template ngbPanelTitle>
+                  <span><i class="fa fa-caret-right pr-3 control-2"></i><i class="fa fa-caret-down pr-3 control-1"></i> Shoes</span>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                       <ul>
+                           <li>Jackets</li>
+                           <li>Shorts</li>
+                           <li>Pants</li>
+                           <li>Shirts</li>
+                           <li>Sweatshirts</li>
+                       </ul>
+                </ng-template>
+              </ngb-panel>
 
-				</td>
-			</tr>
-		</div>
+            </ngb-accordion>
 
-		<div *ngIf='isSelected'>
-			<h4 id="order_review_heading">Your order</h4>
-			<table class="table table-bordered table-responsive">
-				<thead>
-					<tr>
-						<th width="89%">Item</th>
-						<th width="100%">Qty</th>
-						<th width="100%">Price</th>
+                </div> -->
+      <div class="col-md-3">
+        <h5 class="text-uppercase my-3">shipping details</h5>
+        <div class="col align-center made-easy-header-font">Shipping Options</div>
+        <tr *ngFor="let ship of shippingData, let idx = index">
+          <td>
+            <input #r type="radio" name="shipping" value="{{ship.optionName}}" [(ngModel)]="details.shipping" (change)='addShipping(ship)'>
+            <h3>{{ship.optionName}}</h3>
+            <span>{{ship.shippingOption}}</span>
 
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let itm of cartItems">
-						<td> {{itm.name}}&nbsp;</td>
-						<td> {{itm.qty}}&nbsp;</td>
-						<td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr *ngIf = 'hideShipping'>
-						<th>Shipping</th>
-						<td>{{sign}}{{chkShippingCost}}</td>
-						<td><span>Tax({{chkTax}}%) {{sign}}{{taxTotal}}</span></td>
-					</tr>
-					<tr class="order-total">
-						<th>Total</th>
-						<td><strong>
-										<span>{{totalQuantity}}</span>
-										<span>{{sign}}{{totalPrice}}</span>
-									</strong>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
+          </td>
+        </tr>
+      </div>
 
-			<div class="col-md-3">
-				<h5 class="text-uppercase my-3">Payment details</h5>
-				<div class="col align-center made-easy-header-font">Payment Options</div>
-				<!-- <tr *ngFor="let ship of shippingData, let idx = index">
-							<td *ngIf = 'isAdded'>
-							<input #r type="radio" name="shipping"  value="{{ship.optionName}}" [(ngModel)] = "details.shipping" (change) = 'addShipping(ship)' >
-							<h3>{{ship.optionName}}</h3>
-							<span >{{ship.shippingOption}}</span>				
-						
-							</td>
-				</tr>	 -->
+      <div *ngIf='isSelected'>
+        <h4 id="order_review_heading">Your order</h4>
+        <table class="table table-bordered table-responsive">
+          <thead>
+          <tr>
+            <th width="89%">Item</th>
+            <th width="100%">Qty</th>
+            <th width="100%">Price</th>
 
-			</div>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let itm of cartItems">
+            <td> {{itm.name}}&nbsp;</td>
+            <td> {{itm.qty}}&nbsp;</td>
+            <td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr *ngIf='hideShipping'>
+            <th>Shipping</th>
+            <td>{{sign}}{{chkShippingCost}}</td>
+            <td><span>Tax({{chkTax}}%) {{sign}}{{taxTotal}}</span></td>
+          </tr>
+          <tr class="order-total">
+            <th>Total</th>
+            <td><strong>
+              <span>{{totalQuantity}}</span>
+              <span>{{sign}}{{totalPrice}}</span>
+            </strong>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
 
-		</div>
+        <!-- <div class="col-md-3">
+                <h5 class="text-uppercase my-3">Payment details</h5>
+                <div class="col align-center made-easy-header-font">Payment Options</div>
+                <!-- <tr *ngFor="let ship of shippingData, let idx = index">
+                            <td *ngIf = 'isAdded'>
+                            <input #r type="radio" name="shipping"  value="{{ship.optionName}}" [(ngModel)] = "details.shipping" (change) = 'addShipping(ship)' >
+                            <h3>{{ship.optionName}}</h3>
+                            <span >{{ship.shippingOption}}</span>
 
-	</div>
-	</div>
+                            </td>
+                </tr>	 -->
 
-<div *ngIf = 'formType == "pickup"'>
+      </div>
 
-		<h4 class="mb-4">Pickup Details</h4>
-		
-<div class="form-group d-table-cell pr-4">
-		<label for="name">Name</label>
-		<input type="text" [(ngModel)]='name' [value]="name" class="form-control" id="name" aria-describedby="name">
-	</div>
+    </div>
 
-	<div class="form-group d-table-cell pb-4">
-			<label for="pkPhone">Phone</label>
-			<input type="tel" [(ngModel)]='pkPhone' [value]="pkPhone" class="form-control" id="pkPhone" aria-describedby="pkPhone">
-		</div>
-
-
-		<div class="col-md-3">
-				<h5 class="text-uppercase my-3">Pickup details</h5>
-				<div class="col align-center made-easy-header-font">Pickup Options</div>
-				<tr *ngFor="let pick of pickup, let idx = index">
-					<td>
-						<input #r type="radio" name="pickup" value = "{{pick.locationName}}" (click) = 'checkout()'>
-						<h3>{{pick.locationName}}</h3>
-						<span>{{pick.number}}</span><br>
-						<span>{{pick.streetAddress}}</span><br>
-						<span>{{pick.city}}</span><br>
-						<span>{{pick.country}}</span>		<br>				
-						<span>{{pick.postalCode}}</span>						
-						
-						<!-- <div *ngIf="pick.locationName" class="col" [(ngModel)]="pickupData.locationName">{{pick.locationName}}</div>
-						<div class="content">
-								<div *ngIf="pick.number" class="col" [(ngModel)]="pickupData.number">{{pick.number}},</div>
-								<div *ngIf="pick.streetAddress" class="col" [(ngModel)]="pickupData.streetAddress">{{pick.streetAddress}},</div>
-								<div *ngIf="pick.city" class="col" [(ngModel)]="pickupData.city">{{pick.city}},</div>
-								<div *ngIf="pick.country" class="col" [(ngModel)]="pickupData.country"> {{pick.country}}.</div>
-								<div *ngIf="pick.postalCode" class="col" [(ngModel)]="pickupData.postalCode">{{pick.postalCode}}</div>
-						</div> -->
-	
-					</td>
-				</tr>
-
-				<div *ngIf='isSelected'>
-						<h4 id="order_review_heading">Your order</h4>
-						<table class="table table-bordered table-responsive">
-							<thead>
-								<tr>
-									<th width="89%">Item</th>
-									<th width="100%">Qty</th>
-									<th width="100%">Price</th>
-			
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let itm of cartItems">
-									<td> {{itm.name}}&nbsp;</td>
-									<td> {{itm.qty}}&nbsp;</td>
-									<td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>
-								</tr>
-							</tbody>
-							<tfoot>
-								<tr>
-									<th>Tax</th>
-									
-									<td><span>({{chkTax}}%) {{sign}}{{taxTotal}}</span></td>
-								</tr>
-								<tr class="order-total">
-									<th>Total</th>
-									<td><strong>
-													<span>{{totalQuantity}}</span>
-													<span>{{sign}}{{totalPrice}}</span>
-												</strong>
-									</td>
-								</tr>
-							</tfoot>
-						</table>
-			
-						<div class="col-md-3">
-							<h5 class="text-uppercase my-3">Payment details</h5>
-							<div class="col align-center made-easy-header-font">Payment Options</div>
-							<!-- <tr *ngFor="let ship of shippingData, let idx = index">
-										<td *ngIf = 'isAdded'>
-										<input #r type="radio" name="shipping"  value="{{ship.optionName}}" [(ngModel)] = "details.shipping" (change) = 'addShipping(ship)' >
-										<h3>{{ship.optionName}}</h3>
-										<span >{{ship.shippingOption}}</span>				
-									
-										</td>
-							</tr>	 -->
-			
-						</div>
-			
-					</div>
-			</div>
-
-
+  </div>
 </div>
+
+<div *ngIf='formType == "pickup"'>
+
+  <h4 class="mb-4">Pickup Details</h4>
+
+  <div class="form-group d-table-cell pr-4">
+    <label for="name">Name</label>
+    <input type="text" [(ngModel)]='name' class="form-control" id="name" aria-describedby="name">
+  </div>
+
+  <div class="form-group d-table-cell pb-4">
+    <label for="pkPhone">Phone</label>
+    <input type="tel" [(ngModel)]='pkPhone' class="form-control" id="pkPhone" aria-describedby="pkPhone">
+  </div>
+
+
+  <div class="col-md-3">
+    <h5 class="text-uppercase my-3">Pickup details</h5>
+    <div class="col align-center made-easy-header-font">Pickup Options</div>
+    <tr *ngFor="let pick of pickup, let idx = index">
+      <td>
+        <input #r type="radio" name="pickup" value="{{pick.locationName}}" (click)='checkout()'>
+        <h3>{{pick.locationName}}</h3>
+        <span>{{pick.number}}</span><br>
+        <span>{{pick.streetAddress}}</span><br>
+        <span>{{pick.city}}</span><br>
+        <span>{{pick.country}}</span> <br>
+        <span>{{pick.postalCode}}</span>
+
+        <!-- <div *ngIf="pick.locationName" class="col" [(ngModel)]="pickupData.locationName">{{pick.locationName}}</div>
+                        <div class="content">
+                                <div *ngIf="pick.number" class="col" [(ngModel)]="pickupData.number">{{pick.number}},</div>
+                                <div *ngIf="pick.streetAddress" class="col" [(ngModel)]="pickupData.streetAddress">{{pick.streetAddress}},</div>
+                                <div *ngIf="pick.city" class="col" [(ngModel)]="pickupData.city">{{pick.city}},</div>
+                                <div *ngIf="pick.country" class="col" [(ngModel)]="pickupData.country"> {{pick.country}}.</div>
+                                <div *ngIf="pick.postalCode" class="col" [(ngModel)]="pickupData.postalCode">{{pick.postalCode}}</div>
+                        </div> -->
+
+      </td>
+    </tr>
+
+    <div *ngIf='isSelected'>
+      <h4 id="order_review_heading">Your order</h4>
+      <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+          <th width="89%">Item</th>
+          <th width="100%">Qty</th>
+          <th width="100%">Price</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let itm of cartItems">
+          <td> {{itm.name}}&nbsp;</td>
+          <td> {{itm.qty}}&nbsp;</td>
+          <td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <th>Tax</th>
+
+          <td><span>({{chkTax}}%) {{sign}}{{taxTotal}}</span></td>
+        </tr>
+        <tr class="order-total">
+          <th>Total</th>
+          <td><strong>
+            <span>{{totalQuantity}}</span>
+            <span>{{sign}}{{totalPrice}}</span>
+          </strong>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+
+
+
+    </div>
+
+  </div>
+</div>
+
+
+
 <br>
 <div *ngIf="overWeight">Over weight. Cannot ship</div>
 <div *ngIf="underWeight">Under weight. Cannot ship</div>
-<br><br><br><br>
-	<div>
-		<input [disabled] = 'underWeight || overWeight' type="submit" class="btn btn-secondary bg-inverse text-white btn-block text-uppercase" id="place_order" value="Place order"
-		 data-value="Place order" (click)= 'paymentInit()'>
-	</div>
+<br>
+<!-- (change)='addShipping(ship) -->
+
+<br>
+<div>
+  <input [disabled]='underWeight || overWeight' type="submit" class="btn btn-secondary bg-inverse text-white btn-block text-uppercase"
+         id="place_order" value="Place order" data-value="Place order" (click)='pay("001")'>
+</div>
+
+<br><br>
+<div *ngIf='orderd'>
+  <div *ngIf="deliveryShow">
+    <input type="radio" name="deliveryShow" value="cashOnDelivery" [(ngModel)]="paymentType" (ngModelChange) = "ps=true">
+    <h3> Cash On Delivery</h3>
+  </div>
+
+  <div *ngIf="pickupShow">
+    <input type="radio" name="pickupShow" value="cashOnPickup" [(ngModel)]="paymentType" (ngModelChange) = "ps=true">
+    <h3>Cash On Pickup</h3>
+  </div>
+
+  <div *ngIf="paypalShow">
+    <input type="radio" name="paypalShow" value="paypal" [(ngModel)]="paymentType" (ngModelChange) = "ps=true">
+    <h3>Pay Pal</h3>
+  </div>
+
+  <div *ngIf="stripeShow">
+    <input type="radio" name="stripeShow" value="creditcard" [(ngModel)]="paymentType" (ngModelChange) = "ps=true">
+    <h3>Stripe</h3>
+  </div>
+
+  <div *ngIf="braintreeShow">
+    <input type="radio" name="braintreeShow" value="braintree" [(ngModel)]="paymentType" (ngModelChange) = "ps=true">
+    <h3>Braintree</h3>
+  </div>
+
+  <div *ngIf="authorizeNet">
+    <input *ngIf="authorizeNet" type="radio" name="authorizeNet" value="authorizeNet" [(ngModel)]="paymentType" (ngModelChange) = "ps=true" >
+    <h3>AuthorizeNet</h3>
+  </div>
+
+  <form *ngIf="ps" name="cashPaymentFrom" novalidate>
+    <div class="card-form list padding-right" *ngIf="paymentType == 'cashOnPickup' || paymentType == 'cashOnDelivery'">
+      <span class="col input-label" *ngIf="paymentType == 'cashOnDelivery'">Confirm payment by cash on delivery</span>
+      <span class="col input-label" *ngIf="paymentType == 'cashOnPickup'">Confirm payment by cash on pickup</span>
+      <div class="row cart-buttons">
+
+
+        <p>
+          <button class="btn btn-primary" (click)="confirmCashPayment()">Confirm</button>
+        </p>
+
+        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+
+      </div>
+    </div>
+
+  </form>
+
 </div>
 
 

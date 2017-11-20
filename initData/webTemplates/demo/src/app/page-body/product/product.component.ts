@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PagebodyServiceModule } from '../../page-body/page-body.service'; 
+import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { SERVER_URL } from '../../constantsService';
@@ -33,14 +33,14 @@ export class ProductComponent implements OnInit {
 
   imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
   +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+'&images=thirdNavi';
-  
-  constructor(private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) { 
-    
+
+  constructor(private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
+
     this.Data = this.dataService.data;
     console.log(this.imageUrl);
     this.init();
   }
-    
+
   currency : string;
   ngOnInit() {
 
@@ -50,7 +50,7 @@ export class ProductComponent implements OnInit {
       this.sign = this.currency.sign;
   }, error => {
     this.showErrorPage();
-    
+
  });
 
     this.router.params.subscribe(params => {
@@ -59,21 +59,21 @@ export class ProductComponent implements OnInit {
     });
     console.log("data  : " + JSON.stringify(this.dataService.data));
 
-    
+
   }
 
   showErrorPage(){
     alert('Somthing went Wrong!');
   }
 
-  
+
 init(){
     console.log('initcalled');
   if(this.Data){
       console.log("this.Data  : " + JSON.stringify(this.Data));
     this.foodInfo = this.Data;
     console.log("this.foodInfo  : " + JSON.stringify(this.foodInfo));
-    
+
     this.images = this.Data.tempImageArray;
 
       if(this.Data.variants.length > 0){
@@ -84,7 +84,7 @@ init(){
                     console.log("this.selection  : " + JSON.stringify(this.selection));
                 }
                 this.selectedVariant = this.Data.variants[0];
-                
+
             if(this.selectedVariant.quantity > 0 ){
                 var isBuyBtnDisable = false;
             }else{
@@ -96,25 +96,25 @@ init(){
 }
 changeVariant(variant){
     this.selectedVariant = this.Data.variants[0];
-    
+
     console.log("variant : " + variant);
     console.log("changeVariant called");
     console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
-    
+
   this.selectedVariant1  = variant;
   console.log("this.selectedVariant1  : " + JSON.stringify(this.selectedVariant1));
-  
+
   this.selectedVariant.buyQuantity = '';
 
   // $scope.lockBuyButton = true;
 
     if(this.foodInfo.selection.length ==1){
-        console.log("if called");        
+        console.log("if called");
       for(var i=0;i<this.foodInfo.variants.length;i++){
         if(this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1){
             this.selectedVariant = this.foodInfo.variants[i];
             console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
-            
+
             // $scope.lockBuyButton = false;
         }
       }
@@ -123,7 +123,7 @@ changeVariant(variant){
         for(var i=0;i <this.foodInfo.variants.length;i++){
             if(this.foodInfo.variants[i].selection[0].vType == variant){
                 this.selection1.push({'vType':this.foodInfo.variants[i].selection[1].vType});
-                console.log("this.selection1  : " + JSON.stringify(this.selection1) + JSON.stringify(this.selection));                
+                console.log("this.selection1  : " + JSON.stringify(this.selection1) + JSON.stringify(this.selection));
             }
         }
     }
@@ -150,13 +150,13 @@ changeVariant2(variant){
             // $scope.lockBuyButton = false;
 
         }
-      } 
+      }
     }else{
         console.log("else called");
         for(var i=0;i <this.foodInfo.variants.length;i++){
             if(this.foodInfo.variants[i].selection[1].vType == variant){
                 this.selection2.push({'vType':this.foodInfo.variants[i].selection[2].vType});
-                console.log("this.selection2  : " + JSON.stringify(this.selection2) + JSON.stringify(this.selection));                                
+                console.log("this.selection2  : " + JSON.stringify(this.selection2) + JSON.stringify(this.selection));
             }
         }
     }
@@ -188,7 +188,7 @@ changeVariant3(variant){
         for(var i=0;i <this.foodInfo.variants.length;i++){
             if(this.foodInfo.variants[i].selection[2].vType == variant){
                 this.selection3.push({'vType':this.foodInfo.variants[i].selection[3].vType});
-                console.log("this.selection3  : " + JSON.stringify(this.selection3) + JSON.stringify(this.selection));                                
+                console.log("this.selection3  : " + JSON.stringify(this.selection3) + JSON.stringify(this.selection));
             }
         }
     }
@@ -217,10 +217,10 @@ changeVariant4(variant){
     // Check buyQty input value.
     // If buyQty value is less than or equal Selected-Variant-Qty, Buy Button Enable
     changeBuyQuantity(buyQty) {
-      
+
               // default : Buy button set as Disable
               // $scope.isBuyBtnDisable = true;
-      
+
               // if buyQty value greater than 0
               if(buyQty > 0){
                   // Get Selected-Variant-Qty value
@@ -234,7 +234,7 @@ changeVariant4(variant){
                       if(buyQty <= selectVariantAvailableQty ){
                           // $scope.isBuyBtnDisable = false;
                       }
-                  } 
+                  }
               }
           };
 
@@ -270,9 +270,10 @@ changeVariant4(variant){
                                     price: this.selectedVariant.price,
                                     total : this.selectedVariant.price,
                                     imgURL : this.Data.tempImageArray,
+                                    varient: this.selectedVariant.selection,
                                     totalQty: this.selectedVariant.quantity,
                                     weight: this.selectedVariant.weight  //(new) added weight of each product
-    
+
                                 });
                                 this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
                                 this.parentobj.cartSize = this.dataService.cart.cartSize;
@@ -294,9 +295,10 @@ changeVariant4(variant){
                         price: this.selectedVariant.price,
                         total : this.selectedVariant.price,
                         imgURL : this.Data.tempImageArray,
+                        varient: this.selectedVariant.selection,
                         totalQty: this.selectedVariant.quantity,
                         weight: this.selectedVariant.weight //(new) added weight of each product
-    
+
                     });
                     this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
                     console.log('this.dataService.cart.cartSize  : ' + this.dataService.cart.cartSize);
@@ -304,13 +306,13 @@ changeVariant4(variant){
                     this.dataService.parseWeight = this.selectedVariant.weight;
                     // $state.go('app.category');
                     this.route.navigate(['home']);
-                    
+
                 }
             }
-    
+
         };
 
-          
+
   slides = SLIDES;
 }
 
