@@ -11,6 +11,7 @@ import { PageBodyModule } from './page-body/page-body.module';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './page-body/register/register.component';
 import { LoginComponent } from './page-body/login/login.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 // https://ng-bootstrap.github.io/#/getting-started
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // https://github.com/mujtaba01/ng2-owl-carousel
@@ -21,6 +22,7 @@ import { AgmCoreModule } from '@agm/core';
 import { NouisliderModule } from 'ng2-nouislider';
 import { PagebodyServiceModule } from './page-body/page-body.service';
 import { LocalStorageModule } from 'angular-2-local-storage';
+import { GithubAuthInterceptor } from './githubauth.interceptor';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,11 @@ import { LocalStorageModule } from 'angular-2-local-storage';
     NouisliderModule,
     BrowserAnimationsModule,
   ],
-  providers: [PagebodyServiceModule],
+  providers: [PagebodyServiceModule,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: GithubAuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

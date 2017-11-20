@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PagebodyServiceModule {
-    
+
   data:object;
   userData:object;
-  cart = {cartItems:[],cartSize:0,totalPrice:0};
+  cart = {cartItems:[],cartSize:0,totalPrice:0,totalQuantity:0};
   isUserLoggedIn = {check:false};
   parseWeight;
   position2;
@@ -14,13 +14,15 @@ export class PagebodyServiceModule {
   parseIndex;
   parseEnable;
   finalDetails;
-  
+  deliverItems;
+currency;
+
   constructor(){
-  
+
     this.parentobj.cartSize = this.cart.cartSize;
-    this.parentobj.userLog = this.isUserLoggedIn.check;  
-    
+    this.parentobj.userLog = this.isUserLoggedIn.check;
+
   };
-  
+
 
 }

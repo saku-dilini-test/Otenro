@@ -33,7 +33,7 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     console.log("cart size : " + this.dataService.cart.cartSize);
     this.user = (this.localStorageService.get('appLocalStorageUser'+this.appId));
-    
+
     this.http.get(SERVER_URL + '/edit/getTaxInfo?appId=' + this.appId).subscribe(function (data) {
       if (data == '') {
         this.hide = true;
@@ -68,7 +68,7 @@ export class CartComponent implements OnInit {
     console.log("cartItems  : " + JSON.stringify(this.cartItems));
 
     this.amount = this.getTotal();
-    
+
   }
 
   getTotal = function () {
@@ -130,30 +130,33 @@ export class CartComponent implements OnInit {
     //       $scope.buyButtonDisable = false;
     // }
   }
-  delivery() {
+  delivery(deliverItems) {
 
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       console.log("pickup : " + this.localStorageService.get('appLocalStorageUser' + this.appId));
       this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
       console.log("this.dataService.userData : " + this.dataService.userData)
       this.router.navigate(['checkout','delivery']);
-
+this.dataService.deliverItems = deliverItems
     }
     else {
       let status = 'delivery'
-      this.router.navigate(['login',status]);      
+      this.router.navigate(['login',status]);
       // $state.go('app.login', { item:status });
     }
   }
 
-  pickupDetails() {
+  pickupDetails(deliverItems) {
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
+      this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
       console.log("pickup : " + this.localStorageService.get('appLocalStorageUser' + this.appId));
       this.router.navigate(['checkout','pickup']);
+      this.dataService.deliverItems = deliverItems;
+
     }
     else {
       let status = 'pickup'
-      this.router.navigate(['login',status]);      
+      this.router.navigate(['login',status]);
       // $state.go('app.login', { item: $scope.status });
     }
   }
@@ -168,7 +171,7 @@ export class CartComponent implements OnInit {
 
   deliver(deliverDetails){
     console.log("deliverDetails : " + deliverDetails);
-    
+
             if(typeof deliverDetails.country == 'undefined'){
                 var localData = (this.localStorageService.get('appLocalStorageUser'+this.appId));
                 if(localData == null){

@@ -1,9 +1,9 @@
- 
+
 <app-carousel
-   [slides]="slides">   
+   [slides]="slides">
 </app-carousel>
 
- <div class="container">       
+ <div class="container">
    	<div class="row">
     	<div class="col-md-9">
 				<div>
@@ -23,31 +23,31 @@
 								<td >
 									<a>
 		                                <img width="80" height="80" src="{{imageUrl}}/{{c.imgURL[0].img}}"><br>
-		                            </a>						
+		                            </a>
 		                        </td>
 								<td data-title="Product" >
 									<div>
-										<a [(ngModel)] = "c.name" ngDefaultControl>{{c.name}}</a>							
+										<a [(ngModel)] = "c.name" ngDefaultControl>{{c.name}}</a>
 									</div>
 								</td>
 								<td data-title="Price" >
-							
+
 										<a >${{sign}}{{c.price}}</a>
-									
+
 								</td>
 								<td data-title="Quantity">
 									<div data-trigger="spinner">
-										<input type="number" min="1" [(ngModel)]="c.qty"  value="{{c.qty}}" title="Qty"  (change)="buttonDisable(c.qty,c.totalQty ,cartItems.indexOf(c))" ngDefaultControl>		
+										<input type="number" min="1" [(ngModel)]="c.qty"  value="{{c.qty}}" title="Qty"  (change)="buttonDisable(c.qty,c.totalQty ,cartItems.indexOf(c))" ngDefaultControl>
 									</div>
 								</td>
 								<td data-title="Total">
 										<a [(ngModel)] = "c.total" ngDefaultControl>${{sign}}{{c.total * c.qty}}</a>
-										
+
 								</td>
 								<td>
 									<a (click)="removeItem(index)" class="btn btn-remove" title="Remove this item" >
 										<i class="fa fa-trash fa-lg"></i>
-									</a>					
+									</a>
 								</td>
 							</tr>
 							<tr>
@@ -79,23 +79,23 @@
 							<td data-title="Total">
 								<strong>
 									<a [(ngModel)]="total" ngDefaultControl>${{sign}}{{getTotal()}}</a>
-								</strong> 
+								</strong>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 				<div>
 						<!-- [disabled]='cartItems.length<=0' -->
-					<button  class="btn btn-secondary bg-inverse text-white btn-block" (click)="delivery()">
+					<button  class="btn btn-secondary bg-inverse text-white btn-block" (click)="delivery(cartItems)">
 						Delivery
 					</button>
-					<button class="btn btn-secondary bg-inverse text-white btn-block" (click)='pickupDetails()'>
+					<button class="btn btn-secondary bg-inverse text-white btn-block" (click)='pickupDetails(cartItems)'>
 						pickup
 					</button>
 				</div>
 			</div>
        </div>
-              
+
         <div class="col-md-3">
         	<h5 class="text-uppercase my-3">Categories</h5>
 	        <ngb-accordion  [closeOthers]="true" #acc="ngbAccordion" activeIds="">
@@ -127,7 +127,7 @@
 			   		</ul>
 			    </ng-template>
 			  </ngb-panel>
-			  
+
 			</ngb-accordion>
         </div>
     </div>
