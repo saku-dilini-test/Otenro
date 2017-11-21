@@ -19,16 +19,16 @@
     border-radius: 2px;
     text-align: center;
     font-size: 100%;
-    background-color: #b67c5a;  
+    background-color: #b67c5a;
 }
 
 .filter button i{
   color: #b67c5a;
 }
 
-.filter .dropdown .dropdown-item{ 
+.filter .dropdown .dropdown-item{
   padding: 10px;
-} 
+}
 
 
 .filter .view i{
@@ -64,7 +64,7 @@
     font-size: 14px;
     font-weight: 500;
     color: #1c1f23;
-}  
+}
 
 .b-goods__price {
     display: inline-block;
@@ -94,7 +94,19 @@
 .b-goods-links:hover{
   opacity: 1;
 }
+.col-lg-2.col-md-3.col-xs-6.text-center:hover {
+  box-shadow: 0 5px 30px rgba(4, 4, 4, 0.1);
+}
+.col-lg-2.col-md-3.col-xs-6.text-center {
+  overflow: hidden;
+}
 
+.col-lg-2.col-md-3.col-xs-6.text-center:hover img {
+  transform: scale(1.1);
+}
+.col-lg-2.col-md-3.col-xs-6.text-center img {
+  transition: all 0.3s;
+}
 
 :host  /deep/  .page-link{
   border:0;
@@ -111,7 +123,7 @@
 :host  /deep/ .carousel-caption {
   z-index: 10;
   bottom: 3rem;
-  height: 55%;  
+  height: 55%;
 }
 
 /* Declare heights because of positioning of img element */
@@ -122,7 +134,7 @@
  :host  /deep/ .carousel-item > img {
   min-width: 100%;
   height: 100%;
-  object-fit: cover;  
+  object-fit: cover;
 }
 
 :host  /deep/ .carousel-control-prev, :host  /deep/ .carousel-control-next, :host  /deep/ .carousel-indicators{

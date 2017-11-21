@@ -1,10 +1,11 @@
 
 #carousel-custom {
-    height: 100%;
+  height: 579px;
 }
 #carousel-custom .carousel-indicators {
     margin: 0;
-    overflow-y: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: static;
     text-align: left;
     white-space: nowrap;
@@ -59,7 +60,7 @@
     text-align: center;
 }
 .quantity{
-    border: 1px solid #eaeaeb;
+    border:1px solid #d8d8d8;
     position: relative;
     top: 3px;
 }
@@ -101,6 +102,11 @@ footer .fa-random,footer .fa-heart-o{
         flex-direction: row;
         justify-content: space-between;
         margin-bottom: 5px;
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
+    #carousel-custom {
+      height: auto;
     }
 }
 @media (max-width: 400px){

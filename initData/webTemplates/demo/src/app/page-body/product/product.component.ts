@@ -212,6 +212,16 @@ changeVariant4(variant){
   }
 };
 
+  //increase decrease
+  descrease(){
+    if( this.selectedVariant.buyQuantity > 1){
+      this.selectedVariant.buyQuantity--
+    }
+  }
+  increase(){
+    this.selectedVariant.buyQuantity++
+  }
+
 
 
     // Check buyQty input value.
