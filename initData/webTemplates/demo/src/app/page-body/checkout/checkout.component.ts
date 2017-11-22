@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { SERVER_URL } from '../../constantsService';
@@ -7,6 +7,8 @@ import { HttpClient,HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime } from 'rxjs/operator/debounceTime';
+
+declare let paypal: any;
 
 @Component({
   selector: 'app-checkout',
@@ -80,6 +82,54 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+//----------------------------PAYPAL------------------------------------------------
+  // title = 'app';
+  
+  //   public didPaypalScriptLoad: boolean = false;
+  //   public loading: boolean = true;
+  
+  //   public paypalConfig: any = {
+  //     env: 'sandbox',
+  //     client: {
+  //       sandbox: 'AWlMGZwpQbS0dq_r2Dt0ejp1TxDm72JD7Pt4Uc2mYlihAE3FU5axxS9wr4HcnVc13gB7TcbYDVLp9Vne',
+  //       production: 'xxxxxxxxxx'
+  //     },
+  //     commit: true,
+  //     payment: (data, actions) => {
+  //       return actions.payment.create({
+  //         payment: {
+  //           transactions: [
+  //             { amount: { total: '1.00', currency: 'CAD' } }
+  //           ]
+  //         }
+  //       });
+  //     },
+  //     onAuthorize: (data, actions) => {
+  //       // show success page
+  //     }
+  //   };
+  
+  //   public ngAfterViewChecked(): void {
+  //     if(!this.didPaypalScriptLoad) {
+  //       this.loadPaypalScript().then(() => {
+  //         paypal.Button.render(this.paypalConfig, '#paypal-button');
+  //         this.loading = false;
+  //       });
+  //     }
+  //   }
+  
+  //   public loadPaypalScript(): Promise<any> {
+  //     this.didPaypalScriptLoad = true;
+  //     return new Promise((resolve, reject) => {
+  //       const scriptElement = document.createElement('script');
+  //       scriptElement.src = 'https://www.paypalobjects.com/api/checkout.js';
+  //       scriptElement.onload = resolve;
+  //       document.body.appendChild(scriptElement);
+  //     });
+  //   }
+
+
+    //------------------------------------------------------------------------
   ngOnInit() {
 
     this._success.next('hello');
@@ -529,20 +579,20 @@ export class CheckoutComponent implements OnInit {
   makeStripePaymentMethod(cardInformation) {
     cardInformation.appId = this.appId;
     cardInformation.userId = this.userId;
+console.log("cardInformation : " + JSON.stringify(cardInformation));
+    // this.http.post(SERVER_URL + '/templates/makeStripePayment', cardInformation)
 
-    this.http.post(SERVER_URL + '/templates/makeStripePayment', cardInformation)
+    //   .subscribe((res) => {
 
-      .subscribe((res) => {
+    //     if (res.status == 'succeeded') {
+    //       this.orderProcess();
+    //     } else {
+    //       alert('makeStripePayment failed');
 
-        if (res.status == 'succeeded') {
-          this.orderProcess();
-        } else {
-          alert('makeStripePayment failed');
-
-        }
-      }, function (err) {
-        alert('makeStripePayment failed');
-      })
+    //     }
+    //   },  (err)=> {
+    //     alert('makeStripePayment failed');
+    //   })
 
   };
 
@@ -573,39 +623,42 @@ export class CheckoutComponent implements OnInit {
       console.log("inside if : " + this.user.registeredUser);
 
       this.orderDetails = {
-        appId: this.appId,
-        registeredUser: this.user.registeredUser,
-        item: this.payInfo.cart,
-        amount: this.payInfo.amount,
-        customerName: this.user.name,
-        deliverName: this.fname,
-        deliveryNo: this.streetNumber,
-        deliveryStreet: this.streetName,
-        deliveryCity: this.city,
-        deliveryCountry: this.country,
-        deliveryZip: this.zip,
-        telNumber: this.phone,
-        tax: this.payInfo.taxTotal,
-        shippingCost: this.payInfo.shippingCost,
-        shippingOpt: this.payInfo.item.shippingOption,
-        email: this.payInfo.userEmail,
-        promotionCode: this.payInfo.promotionCode
+        'appId': this.appId,
+        'registeredUser': this.user.registeredUser,
+        'item': this.payInfo.cart,
+        'amount': this.payInfo.amount,
+        'customerName': this.user.name,
+        'deliverName': this.fname,
+        'deliveryNo': this.streetNumber,
+        'deliveryStreet': this.streetName,
+        'deliveryCity': this.city,
+        'deliveryCountry': this.country,
+        'deliveryZip': this.zip,
+        'telNumber': this.phone,
+        'tax': this.payInfo.taxTotal,
+        'shippingCost': this.payInfo.shippingCost,
+        'shippingOpt': this.payInfo.item.shippingOption,
+        'email': this.payInfo.userEmail,
+        'currency': this.dataService.currency,
+        'puckupId':null,
+        'promotionCode': this.payInfo.promotionCode
       };
     }
     else {
       console.log("inside else : " + this.user.registeredUser);
       this.orderDetails = {
-        appId: this.appId,
-        registeredUser: this.user.registeredUser,
-        item: this.payInfo.cart,
-        amount: this.payInfo.item.amount,
-        customerName: this.name,
-        telNumber: this.pkPhone,
-        tax: this.payInfo.taxTotal,
-        shippingCost: this.payInfo.shippingCost,
-        pickupId: this.payInfo.item.pickupId,
-        email: this.payInfo.userEmail,
-        promotionCode: this.payInfo.promotionCode
+        "appId": this.appId,
+        "registeredUser": this.user.registeredUser,
+        "item": this.payInfo.cart,
+        "amount": this.payInfo.amount,
+        "customerName": this.payInfo.item.deliverDetails.name,
+        "telNumber": this.payInfo.item.deliverDetails.number,
+        "tax": this.payInfo.taxTotal,
+        "shippingCost": this.payInfo.shippingCost,
+        "pickupId": this.payInfo.item.pickupId,
+        "email": this.payInfo.userEmail,
+        "currency": this.dataService.currency,
+        "promotionCode": this.payInfo.promotionCode
       }
     }
 
