@@ -23,6 +23,9 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { PagebodyServiceModule } from './page-body/page-body.service';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { GithubAuthInterceptor } from './githubauth.interceptor';
+import { OrderHistoryComponent } from './page-body/order-history/order-history.component';
+import { PaypalPaymentComponent } from './page-body/paypal-payment/paypal-payment.component';
+import { CheckoutComponent } from './page-body/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { GithubAuthInterceptor } from './githubauth.interceptor';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     LocalStorageModule.withConfig({

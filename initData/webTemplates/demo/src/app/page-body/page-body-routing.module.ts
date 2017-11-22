@@ -12,6 +12,8 @@ import { ProductComponent } from './product/product.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component'
+import { OrderHistoryComponent } from './order-history/order-history.component'
+import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component'
 
 const routes: Routes = [
  { path: '',
@@ -65,6 +67,11 @@ const routes: Routes = [
     data:{title:'Cart Page'}
   },
   {
+    path: 'order-history',
+    component: OrderHistoryComponent,
+    data:{title:'Order-History Page'}
+  },
+  {
     path: 'product/:catName',
     component: ProductComponent,
     data:{title:'Product Page'}
@@ -73,7 +80,9 @@ const routes: Routes = [
     path: 'checkout/:type',
     component: CheckoutComponent,
     data:{title:'Checkout Page'}
-  }
+  },  
+  { path: 'paypal/rest/execute', 
+  component: PaypalPaymentComponent }
 ];
 
 @NgModule({

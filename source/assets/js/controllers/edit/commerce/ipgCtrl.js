@@ -21,6 +21,7 @@
             // Set AppID
             IPGInfo.appId = $rootScope.appId;
             IPGInfo.userId = $auth.getPayload().id;
+            IPGInfo.isNew = $rootScope.tempNew;
 
             ipgService.updateIPGInfo(IPGInfo)
                 .success(function (result) {

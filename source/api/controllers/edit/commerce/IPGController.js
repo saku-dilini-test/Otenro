@@ -18,6 +18,9 @@ module.exports = {
      */
     updateIPGInfo : function(req,res){
 
+        var tempAppDirPath;
+        var filePathMobile = '/js/app.js';
+        var filePathweb = '/src/app/page-body/paypal-payment/paypal-payment.component.ts';
         var searchQuery = {
             id : req.body.id
         };
@@ -31,14 +34,29 @@ module.exports = {
             payPalEnv = "PayPalEnvironmentSandbox";
             authKey = 'sandbox-xxx';
         }
-        var tempAppDirPath = config.ME_SERVER + req.body.userId + '/templates/' + req.body.appId;
+
+        if(req.body.isNew == 'true' || req.body.isNew == true){
+            tempAppDirPath = config.ME_SERVER + req.body.userId + '/progressiveTemplates/' + req.body.appId;
+        }else{
+            tempAppDirPath = config.ME_SERVER + req.body.userId + '/templates/' + req.body.appId;
+        }
+
         var updateData = req.body;
         if(typeof req.body.id != 'undefined'){
             IPGDetails.update(searchQuery,updateData,function(err,ipg) {
                 if (err) return res.send(err);
                 console.log(JSON.stringify(ipg[0].paypalKey));
+                var appJsFilePath;
                 if (typeof ipg[0].paypalKey !='undefined'){
-                    var appJsFilePath = tempAppDirPath + '/js/app.js';
+
+                    if(req.body.isNew == 'true' || req.body.isNew == true){
+                        appJsFilePath = tempAppDirPath + filePathweb;
+
+                    }else{
+                        appJsFilePath = tempAppDirPath + filePathMobile;
+
+                    }
+
                     fs.readFile(appJsFilePath, 'utf-8',
                         function (err, data) {
                             if (err) return res.negotiate(err);
@@ -57,10 +75,16 @@ module.exports = {
         }else{
             IPGDetails.create(updateData).exec(function (err, ipg) {
                 if (err) return res.send(err);
+                var appJsFilePath;
                 console.log(JSON.stringify(ipg));
                 if (typeof ipg.paypalKey !='undefined'){
-                    var appJsFilePath = tempAppDirPath + '/js/app.js';
-                    fs.readFile(appJsFilePath, 'utf-8',
+                    if(req.body.isNew == 'true' || req.body.isNew == true){
+                        appJsFilePath = tempAppDirPath + filePathweb;
+
+                    }else{
+                        appJsFilePath = tempAppDirPath + filePathMobile;
+
+                    }                    fs.readFile(appJsFilePath, 'utf-8',
                         function (err, data) {
                             if (err) return res.negotiate(err);
 
