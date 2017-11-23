@@ -132,6 +132,8 @@ export class CartComponent implements OnInit {
   }
   delivery(deliverItems) {
 
+    console.log("deliverItems : " + JSON.stringify(deliverItems));
+
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       console.log("pickup : " + this.localStorageService.get('appLocalStorageUser' + this.appId));
       this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);

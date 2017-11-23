@@ -308,7 +308,7 @@
   </div>
 
   <div *ngIf="paypalShow">
-    <input type="radio" name="paypalShow" value="paypal" [(ngModel)]="paymentType" (ngModelChange)="ps=true">
+    <input type="radio" name="paypalShow" value="paypal" (click)="buyWithPayPal()" [(ngModel)]="paymentType" (ngModelChange)="ps=true">
     <h3>Pay Pal</h3>
   </div>
 

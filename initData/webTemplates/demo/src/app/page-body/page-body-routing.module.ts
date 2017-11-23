@@ -81,8 +81,14 @@ const routes: Routes = [
     component: CheckoutComponent,
     data:{title:'Checkout Page'}
   },  
-  { path: 'paypal/rest/execute', 
-  component: PaypalPaymentComponent }
+  { 
+    path: 'paypal/rest/execute', 
+  component: PaypalPaymentComponent 
+},
+// { 
+//   path: 'paypal', 
+// component: PaypalPaymentComponent 
+// }
 ];
 
 @NgModule({
