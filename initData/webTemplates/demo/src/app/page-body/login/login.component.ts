@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   public userId = (<any>data).userId;
   public params = [];
   name;pass;gate:boolean;
-  constructor(private localStorageService: LocalStorageService,private dataService : PagebodyServiceModule, private router: ActivatedRoute,private route: Router,private http: HttpClient) { 
-    
+  constructor(private localStorageService: LocalStorageService,private dataService : PagebodyServiceModule, private router: ActivatedRoute,private route: Router,private http: HttpClient) {
+
   }
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     // }else{
     //   alert('Wrong Credentials');
     // }
-    
+
     var data = {
       email : this.name,
       password : this.pass,
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   let requestParams;
     this.http.post(SERVER_URL+"/templatesAuth/authenticateForApp",data)
       .subscribe((res) =>{
-        
+
           requestParams = {
             "token": res.token,
             "email": data.email,
@@ -59,15 +59,15 @@ export class LoginComponent implements OnInit {
           this.localStorageService.set('appLocalStorageUser'+this.appId,(requestParams));
           this.dataService.isUserLoggedIn.check = true;
           this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
-        
+
           this.route.navigate(['home']);
-          
+
           // if($stateParams.item == 'delivery'){
           //   $state.go('app.cart');
           // }else{
           //   $state.go('app.category');
           // }
-          
+
         },
         function(err){
           alert('login failed');
@@ -79,4 +79,12 @@ export class LoginComponent implements OnInit {
     this.route.navigate(['register']);
   }
 
+  slides = SLIDES;
+
 }
+
+
+const SLIDES = [
+  {
+    src: 'https://www.hdwallpapers.in/walls/windows_xp_bliss-wide.jpg', title: 'Sign In'
+  }]

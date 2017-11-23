@@ -12,6 +12,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
 #carousel-custom .carousel-indicators li {
     background-color: transparent;
@@ -19,8 +20,10 @@
     border-radius: 0;
     display: inline-block;
     height:auto;
-    margin: 0 auto !important;
+    margin: 0 2px !important;
     max-width: 100%;
+    flex:0;
+    margin-top: 5px !important;
 }
 #carousel-custom .carousel-indicators li img {
     display: block;
@@ -100,7 +103,6 @@ footer .fa-random,footer .fa-heart-o{
 @media (max-width: 1200px){
     #carousel-custom .carousel-indicators {
         flex-direction: row;
-        justify-content: space-between;
         margin-bottom: 5px;
         overflow-y: hidden;
         overflow-x: auto;

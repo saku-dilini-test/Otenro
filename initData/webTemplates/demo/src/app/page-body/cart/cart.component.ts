@@ -189,7 +189,7 @@ this.dataService.deliverItems = deliverItems
                 }
             }
             deliverDetails.method = 'Delivery';
-            $state.go('app.shipping',{item:deliverDetails});
+            // $state.go('app.shipping',{item:deliverDetails});
         }
 
   slides = SLIDES;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PagebodyServiceModule } from '../../page-body/page-body.service'; 
+import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { SERVER_URL } from '../../constantsService';
@@ -19,27 +19,27 @@ export class RegisterComponent implements OnInit {
   public country = [];
   countries;
   selectedcountry;
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {  
-    
+  constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
+
   }
   changeCountry(data){
 console.log(data);
 this.selectedcountry = data;
   }
 
-  ngOnInit() {  
+  ngOnInit() {
 
       this.http.get(SERVER_URL+"/edit/getAllCountry")
       .subscribe((res) => {
           this.countries = res;
       });
-        
-    
+
+
   }
 
   signUp = function() {
     // this.localStorageService  = this.localStorageService.get('appLocalStorageUser'+this.appId);
-    
+
     var data = {
         firstName: this.fname,
         lastName: this.lname,
@@ -55,7 +55,7 @@ this.selectedcountry = data;
     };
     console.log("data : " + JSON.stringify(data));
     this.localStorageService.set('appLocalStorageUser'+this.appId, (data))
-    
+
     this.http.post(SERVER_URL+"/templatesAuth/register",data)
         .subscribe((res) =>{
 
@@ -90,6 +90,9 @@ this.selectedcountry = data;
             });
 }
 
+  slides = SLIDES;
+
+
 // authenticate = function(provider) {
 //   $auth.authenticate(provider).then(function(res){
 //       if(typeof res.data.token != 'undefined'){
@@ -107,3 +110,8 @@ this.selectedcountry = data;
 // };
 
 }
+
+const SLIDES = [
+  {
+    src: 'http://1.bp.blogspot.com/-w3nRkRuOiC4/TvzWH0yKgeI/AAAAAAAAAj0/bLA2ip6MFCA/s1600/CliffJumpWallpaper.jpg', title: 'Register'
+  }]

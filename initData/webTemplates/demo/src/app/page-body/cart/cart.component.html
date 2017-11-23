@@ -14,6 +14,7 @@
 								<td><span>Product</span></td>
 								<td><span>Price</span></td>
 								<td width="15%"><span>Quantity</span></td>
+								<td><span>Type</span></td>
 								<td><span>Total</span></td>
 								<td><span>remove</span></td>
 							</tr>
@@ -37,9 +38,14 @@
 								</td>
 								<td data-title="Quantity">
 									<div data-trigger="spinner">
-										<input type="number" min="1" [(ngModel)]="c.qty"  value="{{c.qty}}" title="Qty"  (change)="buttonDisable(c.qty,c.totalQty ,cartItems.indexOf(c))" ngDefaultControl>
+										<input class="form-control" type="number" min="1" [(ngModel)]="c.qty"  value="{{c.qty}}" title="Qty"  (change)="buttonDisable(c.qty,c.totalQty ,cartItems.indexOf(c))" ngDefaultControl>
 									</div>
 								</td>
+                <td data-title="Type">
+                  <div *ngFor="let v of c.varient">
+                    {{v.name}} : {{v.vType}}
+                  </div>
+                </td>
 								<td data-title="Total">
 										<a [(ngModel)] = "c.total" ngDefaultControl>${{sign}}{{c.total * c.qty}}</a>
 
@@ -53,10 +59,10 @@
 							<tr>
 								<td colspan="5" class="text-left">
 										<input type="text" placeholder="Coupon code" class="form-control w-50 d-inline align-middle">
-										<input type="submit" name="apply_coupon" value="Apply Coupon"  class="btn btn-primary">
+                  <button  name="apply_coupon"  class="btn btn-primary"> Apply Coupon </button>
 								</td>
 								<td colspan="1" class="text-right">
-									<input type="submit" name="update_cart" value="Update Cart" class="btn btn-primary">
+                  <button class="btn btn-primary"> Update Cart </button>
 								</td>
 							</tr>
 						</tbody>
