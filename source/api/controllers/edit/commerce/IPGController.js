@@ -27,12 +27,15 @@ module.exports = {
 
         var payPalEnv = '';
         var authKey = '';
+        var authKeyWeb = '';
         if (sails.config.environment === 'production'){
             payPalEnv = "PayPalEnvironmentProduction";
             authKey = 'prod-xxx';
+            authKeyWeb = 'live';
         }else {
             payPalEnv = "PayPalEnvironmentSandbox";
             authKey = 'sandbox-xxx';
+            authKeyWeb = 'sandbox';
         }
 
         if(req.body.isNew == 'true' || req.body.isNew == true){
@@ -40,8 +43,9 @@ module.exports = {
         }else{
             tempAppDirPath = config.ME_SERVER + req.body.userId + '/templates/' + req.body.appId;
         }
-
+        req.body.env = authKeyWeb;
         var updateData = req.body;
+        console.log("updateData : " + JSON.stringify(updateData));
         if(typeof req.body.id != 'undefined'){
             IPGDetails.update(searchQuery,updateData,function(err,ipg) {
                 if (err) return res.send(err);

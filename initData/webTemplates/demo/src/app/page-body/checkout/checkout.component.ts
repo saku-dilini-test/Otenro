@@ -84,10 +84,10 @@ export class CheckoutComponent implements OnInit {
 
 //----------------------------PAYPAL------------------------------------------------
   // title = 'app';
-  
+
   //   public didPaypalScriptLoad: boolean = false;
   //   public loading: boolean = true;
-  
+
   //   public paypalConfig: any = {
   //     env: 'sandbox',
   //     client: {
@@ -108,7 +108,7 @@ export class CheckoutComponent implements OnInit {
   //       // show success page
   //     }
   //   };
-  
+
   //   public ngAfterViewChecked(): void {
   //     if(!this.didPaypalScriptLoad) {
   //       this.loadPaypalScript().then(() => {
@@ -117,7 +117,7 @@ export class CheckoutComponent implements OnInit {
   //       });
   //     }
   //   }
-  
+
   //   public loadPaypalScript(): Promise<any> {
   //     this.didPaypalScriptLoad = true;
   //     return new Promise((resolve, reject) => {
@@ -244,7 +244,7 @@ export class CheckoutComponent implements OnInit {
 
     // -------------------pickup--------------------------------------------
 
-    
+
 
 
   }
@@ -552,6 +552,8 @@ export class CheckoutComponent implements OnInit {
     this.http.get(SERVER_URL + '/edit/getIPGInfo?appId=' + this.appId)
       .subscribe((data) => {
         this.paymentData = data;
+        this.dataService.paypalKey = this.paymentData.paypalKey;
+        this.dataService.env = this.paymentData.env;
         console.log("this.paymentData : " + JSON.stringify(this.paymentData));
         // $log.debug($scope.paymentData);
         if (this.formType == "delivery") {
@@ -761,16 +763,16 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
       }
       console.log("else details : " + JSON.stringify(this.orderDetails));
     }
-    
+
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails),{responseType: 'text'})
       .subscribe((res) => {
 
         console.log("web save res : " + JSON.stringify(res));
-        console.log("web save order");  
+        console.log("web save order");
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
           this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart,{responseType: 'text'})
             .subscribe(res => {
-              console.log("web update order");  
+              console.log("web update order");
               this.dataService.cart.cartItems = [];
               this.dataService.cart.cartSize = 0;
               this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
@@ -794,8 +796,8 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
 
               console.log("went through");
               this._success.subscribe((message) => this.successMessage = message);
-              debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);          
-              this._success.next(" 'Thank You', Your Order has been successfully processed");              
+              debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+              this._success.next(" 'Thank You', Your Order has been successfully processed");
               setTimeout(()=>{this.router.navigate(['home']); }, 3100)
 
               // alert({
@@ -809,7 +811,7 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
               // });
               // TODO : Currently back to cart
               //back to Main Menu
-              
+
             },
              (err)=> {
               console.log(err);
@@ -826,7 +828,7 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
   }
 
 
-  
+
 
 
   // Buy With PayPal
@@ -921,9 +923,9 @@ this.dataService.payPalDetails = this.orderDetails;
         //      (err)=> {
         //       console.log(err);
         //     });
-      
-      
-    
+
+
+
   }
 
 

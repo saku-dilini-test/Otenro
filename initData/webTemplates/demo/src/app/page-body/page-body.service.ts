@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable()
 export class PagebodyServiceModule {
@@ -15,8 +15,10 @@ export class PagebodyServiceModule {
   parseEnable;
   finalDetails;
   deliverItems;deliverItemsDelivery;
-currency;paypalCurrency;
-payPalDetails:object;
+  currency;paypalCurrency;
+  payPalDetails:object;
+  paypalKey;
+  env;
 
   constructor(){
 
@@ -24,6 +26,5 @@ payPalDetails:object;
     this.parentobj.userLog = this.isUserLoggedIn.check;
 
   };
-
 
 }

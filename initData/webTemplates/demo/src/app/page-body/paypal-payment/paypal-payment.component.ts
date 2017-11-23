@@ -20,44 +20,55 @@ export class PaypalPaymentComponent implements AfterViewChecked {
   public localData;
   public user;
   orderHistory = [];
+  env=this.dataService.env;
+  public sandBoxKey = this.dataService.paypalKey;
+  public productionKey = this.dataService.paypalKey;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
     this.localData = (this.localStorageService.get('appLocalStorageUser' + this.appId));
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
-    
+
+    console.log("pre env : " + this.dataService.env)
+
+    if(this.dataService.env == 'sandbox'){
+      this.paypalConfig.client.production = 'xxxxxxxx';
+      this.productionKey = 'xxxxxxxx';
+      console.log(this.paypalConfig.client.production)
+    }
+
   }
 
   title = 'app';
-  
-    public didPaypalScriptLoad: boolean = false;
-    public loading: boolean = true;
-  
-    public paypalConfig: any = {
-      env: 'sandbox',
-      client: {
-        sandbox: 'ARYPRpjZB-YjWT8bvDsymCWhFk4hr5z_1iyG6n92JX6ao63d-CCaTIYePznKnPOuW3PQEbBakkO0f3IL',
-        production: 'xxxxxxxxxx'
-      },
-      commit: true,
-      payment: (data, actions) => {
-        return actions.payment.create({
-          payment: {
-            transactions: [
-              { amount: { total: this.dataService.payPalDetails.amount, currency: this.dataService.paypalCurrency } }
-            ]
-          }
-        });
-      },
-      onAuthorize: (data, actions) => {
-        return actions.payment.execute().then(()=> {
 
-          this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.dataService.payPalDetails,{responseType: 'text'})
+  public didPaypalScriptLoad: boolean = false;
+  public loading: boolean = true;
+
+  public paypalConfig: any = {
+    env: this.dataService.env,
+    client: {
+      sandbox: this.sandBoxKey,
+      production: this.productionKey,
+    },
+    commit: true,
+    payment: (data, actions) => {
+      return actions.payment.create({
+        payment: {
+          transactions: [
+            { amount: { total: this.dataService.payPalDetails.amount, currency: this.dataService.paypalCurrency } }
+          ]
+        }
+      });
+    },
+    onAuthorize: (data, actions) => {
+      return actions.payment.execute().then(()=> {
+
+        this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.dataService.payPalDetails,{responseType: 'text'})
           .subscribe((res) => {
-            console.log("inside web save");
-            this.dataService.payPalDetails.id = this.dataService.cart.cartItems[0].id;
+              console.log("inside web save");
+              this.dataService.payPalDetails.id = this.dataService.cart.cartItems[0].id;
               this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.dataService.payPalDetails.item,{responseType: 'text'})
                 .subscribe((res)=> {
-                  console.log("inside web update");
+                    console.log("inside web update");
                     this.dataService.cart.cartItems = [];
                     this.dataService.cart.cartSize = 0;
                     this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
@@ -86,7 +97,7 @@ export class PaypalPaymentComponent implements AfterViewChecked {
                     console.log(err);
                   });
             },
-             (err)=> {
+            (err)=> {
               console.log(err);
             });
 
@@ -94,25 +105,25 @@ export class PaypalPaymentComponent implements AfterViewChecked {
 
         window.alert('Transaction Failed!');
       });        // show success page
-      }
-    };
-  
-    public ngAfterViewChecked(): void {
-      if(!this.didPaypalScriptLoad) {
-        this.loadPaypalScript().then(() => {
-          paypal.Button.render(this.paypalConfig, '#paypal-button');
-          this.loading = false;
-        });
-      }
     }
-  
-    public loadPaypalScript(): Promise<any> {
-      this.didPaypalScriptLoad = true;
-      return new Promise((resolve, reject) => {
-        const scriptElement = document.createElement('script');
-        scriptElement.src = 'https://www.paypalobjects.com/api/checkout.js';
-        scriptElement.onload = resolve;
-        document.body.appendChild(scriptElement);
+  };
+
+  public ngAfterViewChecked(): void {
+    if(!this.didPaypalScriptLoad) {
+      this.loadPaypalScript().then(() => {
+        paypal.Button.render(this.paypalConfig, '#paypal-button');
+        this.loading = false;
       });
     }
+  }
+
+  public loadPaypalScript(): Promise<any> {
+    this.didPaypalScriptLoad = true;
+    return new Promise((resolve, reject) => {
+      const scriptElement = document.createElement('script');
+      scriptElement.src = 'https://www.paypalobjects.com/api/checkout.js';
+      scriptElement.onload = resolve;
+      document.body.appendChild(scriptElement);
+    });
+  }
 }
