@@ -188,9 +188,10 @@ export class CheckoutComponent implements OnInit {
 
     this.http.get(SERVER_URL + '/templates/getCurrency?appId=' + this.appId).subscribe((data) => {
       this.currency = data;
-      console.log("this.currency  : " + JSON.stringify(this.currency.sign));
+      console.log("this.currency  : " + JSON.stringify(this.currency.currency));
       this.sign = this.currency.sign;
       this.dataService.currency = this.sign;
+      this.dataService.paypalCurrency = this.currency.currency;
       console.log("cart sign  : " + this.sign);
     }, error => {
       alert('error currency');
@@ -220,13 +221,8 @@ export class CheckoutComponent implements OnInit {
               'Policies Data loading error,Please check your connection!'
             );
           });
-    }
-    this.amount = this.getTotal();
-
-
-    // -------------------pickup--------------------------------------------
-
-    this.http.get(SERVER_URL + "/edit/getShippingPickupInfo?appId=" + this.appId)
+    }else{
+      this.http.get(SERVER_URL + "/edit/getShippingPickupInfo?appId=" + this.appId)
       .subscribe((data) => {
 
           this.pickup = data;
@@ -242,6 +238,13 @@ export class CheckoutComponent implements OnInit {
             'Policies Data loading error!,Please check your connection!'
           );
         });
+    }
+    this.amount = this.getTotal();
+
+
+    // -------------------pickup--------------------------------------------
+
+    
 
 
   }
@@ -639,7 +642,7 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
         'shippingCost': this.payInfo.shippingCost,
         'shippingOpt': this.payInfo.item.shippingOption,
         'email': this.payInfo.userEmail,
-        'currency': this.dataService.currency,
+        'currency': this.dataService.paypalCurrency,
         'puckupId':null,
         'promotionCode': this.payInfo.promotionCode
       };
@@ -657,15 +660,15 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
         "shippingCost": this.payInfo.shippingCost,
         "pickupId": this.payInfo.item.pickupId,
         "email": this.payInfo.userEmail,
-        "currency": this.dataService.currency,
+        "currency": this.dataService.paypalCurrency,
         "promotionCode": this.payInfo.promotionCode
       }
     }
 
-    this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails)
+    this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails,{responseType: 'text'})
       .subscribe((res) => {
           this.orderDetails.id = this.dataService.cart.cartItems[0].id;
-          this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.pickupData.cart)
+          this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.pickupData.cart,{responseType: 'text'})
             .subscribe((res) => {
                 this.dataService.cart.cartItems = [];
                 this.dataService.cart.cartSize = 0;
@@ -828,98 +831,99 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
 
   // Buy With PayPal
   buyWithPayPal() {
-    PaypalService.initPaymentUI().then(function () {
-      PaypalService.makePayment(this.payInfo.amount, "Total Amount").then(function (response) {
         if (this.formType == "delivery") {
           this.orderDetails = {
 
-            appId: this.appId,
-            registeredUser: this.user.registeredUser,
-            item: this.payInfo.cart,
-            amount: this.payInfo.amount,
-            customerName: this.user.name,
-            deliverName: this.fname,
-            deliveryNo: this.streetNumber,
-            deliveryStreet: this.streetName,
-            deliveryCity: this.city,
-            deliveryCountry: this.country,
-            deliveryZip: this.zip,
-            telNumber: this.phone,
-            tax: this.payInfo.taxTotal,
-            shippingCost: this.payInfo.shippingCost,
-            shippingOpt: this.payInfo.item.shippingOption,
-            email: this.payInfo.userEmail,
-            currency: this.dataService.currency,
-            promotionCode: this.payInfo.promotionCode
+            'appId': this.appId,
+            'registeredUser': this.user.registeredUser,
+            'item': this.payInfo.cart,
+            'amount': this.payInfo.amount,
+            'customerName': this.user.name,
+            'deliverName': this.fname,
+            'deliveryNo': this.streetNumber,
+            'deliveryStreet': this.streetName,
+            'deliveryCity': this.city,
+            'deliveryCountry': this.country,
+            'deliveryZip': this.zip,
+            'telNumber': this.phone,
+            'tax': this.payInfo.taxTotal,
+            'shippingCost': this.payInfo.shippingCost,
+            'shippingOpt': this.payInfo.item.shippingOption,
+            'email': this.payInfo.userEmail,
+            'currency': this.dataService.paypalCurrency,
+            'puckupId':null,
+            'promotionCode': this.payInfo.promotionCode
           };
         }
         else {
           this.orderDetails = {
-            appId: this.appId,
-            registeredUser: this.user.registeredUser,
-            item: this.payInfo.cart,
-            amount: this.payInfo.amount,
-            customerName: this.name,
-            telNumber: this.pkPhone,
-            tax: this.payInfo.taxTotal,
-            shippingCost: this.payInfo.shippingCost,
-            pickupId: this.payInfo.pickupId,
-            email: this.payInfo.userEmail,
-            currency: this.dataService.currency,
-            promotionCode: this.payInfo.promotionCode
+            "appId": this.appId,
+            "registeredUser": this.user.registeredUser,
+            "item": this.payInfo.cart,
+            "amount": this.payInfo.amount,
+            "customerName": this.payInfo.item.deliverDetails.name,
+            "telNumber": this.payInfo.item.deliverDetails.number,
+            "tax": this.payInfo.taxTotal,
+            "shippingCost": this.payInfo.shippingCost,
+            "pickupId": this.payInfo.item.pickupId,
+            "email": this.payInfo.userEmail,
+            "currency": this.dataService.paypalCurrency,
+            "promotionCode": this.payInfo.promotionCode
           }
         }
-        this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails)
-          .subscribe((res) => {
-            console.log("inside web save");
-            this.orderDetails.id = this.dataService.cart.cartItems[0].id;
-              this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart)
-                .then(function (res) {
-                  console.log("inside web update");
-                    this.dataService.cart.cartItems = [];
-                    this.dataService.cart.cartSize = 0;
-                    this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-                    this.dataService.cart.totalPrice = 0;
-                    this.dataService.cart.totalQuantity = 0;
 
-                    //Pushing into order purchase history
-                    if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
-                      this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-                    }
-                    this.orderHistory.push({
-                      orderHistoryKey: this.appId,
-                      createdDate: new Date(),
-                      item: this.payInfo.cart,
-                      amount: this.payInfo.amount,
-                    });
-                    this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.rderHistory));
+this.dataService.payPalDetails = this.orderDetails;
 
-                    alert({
-                      title: 'Thank You',
-                      subTitle: 'Your Order has been successfully processed',
-                      cssClass: 'ionicPopUp',
-                      buttons: [
-                        {
-                          text: 'OK',
-                          type: 'button-positive'
-                        },
-                      ]
-                    });
-                    // TODO : Currently back to cart
-                    //back to Main Menu
-                    this.router.navigate(['home'])
-                  },
-                  function (err) {
-                    console.log(err);
-                  });
-            },
-            function (err) {
-              console.log(err);
-            });
-      }, function (error) {
-        alert("Transaction Canceled");
-      });
-    });
+        // this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails)
+        //   .subscribe((res) => {
+        //     console.log("inside web save");
+        //     this.orderDetails.id = this.dataService.cart.cartItems[0].id;
+        //       this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart)
+        //         .subscribe(function (res) {
+        //           console.log("inside web update");
+        //             this.dataService.cart.cartItems = [];
+        //             this.dataService.cart.cartSize = 0;
+        //             this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+        //             this.dataService.cart.totalPrice = 0;
+        //             this.dataService.cart.totalQuantity = 0;
+
+        //             //Pushing into order purchase history
+        //             if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
+        //               this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+        //             }
+        //             this.orderHistory.push({
+        //               orderHistoryKey: this.appId,
+        //               createdDate: new Date(),
+        //               item: this.payInfo.cart,
+        //               amount: this.payInfo.amount,
+        //             });
+        //             this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.rderHistory));
+
+        //             alert({
+        //               title: 'Thank You',
+        //               subTitle: 'Your Order has been successfully processed',
+        //               cssClass: 'ionicPopUp',
+        //               buttons: [
+        //                 {
+        //                   text: 'OK',
+        //                   type: 'button-positive'
+        //                 },
+        //               ]
+        //             });
+        //             // TODO : Currently back to cart
+        //             //back to Main Menu
+        //             this.router.navigate(['home'])
+        //           },
+        //           function (err) {
+        //             console.log(err);
+        //           });
+        //     },
+        //      (err)=> {
+        //       console.log(err);
+        //     });
+      
+      
+    
   }
 
 

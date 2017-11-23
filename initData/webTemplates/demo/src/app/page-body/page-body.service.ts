@@ -14,8 +14,9 @@ export class PagebodyServiceModule {
   parseIndex;
   parseEnable;
   finalDetails;
-  deliverItems;
-currency;
+  deliverItems;deliverItemsDelivery;
+currency;paypalCurrency;
+payPalDetails:object;
 
   constructor(){
 
