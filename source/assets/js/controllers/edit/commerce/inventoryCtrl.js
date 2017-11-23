@@ -347,7 +347,8 @@
          * Show add product dialog
          */
         $scope.addProduct = function () {
-            return commerceService.showAddProductsDialog('products');
+            var State = true;
+            return commerceService.showAddProductsDialog('products',State);
         }
     }
     })();

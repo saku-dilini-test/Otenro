@@ -15,9 +15,8 @@
         $scope.product = initialData.product;
         $scope.selection = initialData.product.selection;
         $scope.currency = $rootScope.currency;
-        $scope.isNewProduct = true;
+        //$scope.isNewProduct = true;
         $scope.skuFieldEnable = false;
-
 
         if(initialData.isNewItem)
         {
@@ -138,6 +137,7 @@
          * @param variants
          */
         $scope.addVariant = function (selection,product,index,variants) {
+
             if(product.selection == undefined){
                  product.selection = [];
             }
@@ -793,9 +793,9 @@
         
         $scope.back = function(){
             if($scope.isNewProduct){
-                $mdDialog.hide();
-            }else{
                 return commerceService.showInventoryDialog();
+            }else{
+                $mdDialog.hide();
             }
 
 
@@ -869,6 +869,7 @@
                         $scope.vType = name;
                         $scope.vTypeRemove = name;
                         $scope.isNewProduct = isNewItem;
+
 
                         if ($scope.product.selection == undefined){
                             $scope.product.selection= [];
