@@ -42,6 +42,9 @@ module.exports = {
         },
         transactionKey : {
             type : 'string'
+        },
+        env : {
+            type : 'string'
         }
      }
     };

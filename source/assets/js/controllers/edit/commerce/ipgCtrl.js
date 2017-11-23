@@ -22,6 +22,7 @@
             IPGInfo.appId = $rootScope.appId;
             IPGInfo.userId = $auth.getPayload().id;
             IPGInfo.isNew = $rootScope.tempNew;
+            IPGInfo.env = '';
 
             ipgService.updateIPGInfo(IPGInfo)
                 .success(function (result) {
