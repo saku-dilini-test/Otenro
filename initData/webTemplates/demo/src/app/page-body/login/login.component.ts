@@ -16,13 +16,16 @@ export class LoginComponent implements OnInit {
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
   public params = [];
-  name;pass;gate:boolean;
+  name;pass;gate:boolean;navigate;
   constructor(private localStorageService: LocalStorageService,private dataService : PagebodyServiceModule, private router: ActivatedRoute,private route: Router,private http: HttpClient) {
 
   }
 
   ngOnInit() {
-
+    this.router.params.subscribe(params => {
+      this.navigate = params['type'];
+      console.log("this.value : " + this.navigate);
+    });
   }
   login(){
 
@@ -60,7 +63,12 @@ export class LoginComponent implements OnInit {
           this.dataService.isUserLoggedIn.check = true;
           this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 
-          this.route.navigate(['home']);
+          if(this.navigate == 'home'){
+            this.route.navigate(['home']);
+          }else{
+            this.route.navigate(['cart']);
+          }
+
 
           // if($stateParams.item == 'delivery'){
           //   $state.go('app.cart');
@@ -76,7 +84,7 @@ export class LoginComponent implements OnInit {
   }
 
   register(){
-    this.route.navigate(['register']);
+    this.route.navigate(['register',this.navigate]);
   }
 
   slides = SLIDES;

@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   public userId = (<any>data).userId;
   public country = [];
   countries;
-  selectedcountry;
+  selectedcountry;navigate;
   constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
 
   }
@@ -28,6 +28,10 @@ this.selectedcountry = data;
   }
 
   ngOnInit() {
+    this.router.params.subscribe(params => {
+      this.navigate = params['type'];
+      console.log("this.value : " + this.navigate);
+    });
 
       this.http.get(SERVER_URL+"/edit/getAllCountry")
       .subscribe((res) => {
@@ -79,11 +83,11 @@ this.selectedcountry = data;
                 this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
                 console.log(this.localStorageService.get('appLocalStorageUser'+this.appId));
 
-                // if($stateParams.item == 'delivery'){
-                //     $state.go('app.cart');
-                // }else{
-                //     $state.go('app.category');
-                // }
+                if(this.navigate == 'home'){
+                    this.route.navigate(['home']);
+                }else{
+                  this.route.navigate(['cart']);
+                }
             },
             function(err){
                 alert("signup error");
