@@ -359,17 +359,17 @@
   <div class="card-form list padding-right" *ngIf="paymentType == 'creditcard'">
     <!-- <form name="paymentForm" (ngSubmit)="makeStripePayment(card)" novalidate> -->
         <span class="col input-label">Select Card Type*</span>
-        <div class="row cards-list">
+
             <input type="radio"  [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'visa' ? 'selected' : ''" width='12px' height="12px"  value="'visa'" [ngModelOptions]="{standalone: true}">
                 <img src="assets/images/visa.png">
-           
+
                 <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'mastercard' ? 'selected' : ''" width='12px' height="12px" value="'mastercard'" [ngModelOptions]="{standalone: true}">
                 <img width="75px" src="assets/images/Mastercard.png">
-            
+
                 <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'amex' ? 'selected' : ''" width='12px' height="12px"  value="'amex'" [ngModelOptions]="{standalone: true}">
                 <img src="assets/images/amex.png">
 
-              </div>
+
         <!--<select placeholder="Card type" ng-model="card.cardType" ng-options="type for type in ['Visa', 'American Express', 'MasterCard']"></select>-->
 
         <label class="item item-input item-floating-label">
@@ -423,6 +423,77 @@
         -->
     <!-- </form> -->
 </div>
+
+
+<div class="card-form list padding-right" *ngIf="paymentType == 'authorizeNet'">
+  <!-- <form name="paymentForm" (ngSubmit)="makeStripePayment(card)" novalidate> -->
+      <span class="col input-label">Select Card Type*</span>
+
+          <input type="radio"  [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'visa' ? 'selected' : ''" width='12px' height="12px"  value="'visa'" [ngModelOptions]="{standalone: true}">
+              <img src="assets/images/visa.png">
+
+              <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'mastercard' ? 'selected' : ''" width='12px' height="12px" value="'mastercard'" [ngModelOptions]="{standalone: true}">
+              <img width="75px" src="assets/images/Mastercard.png">
+
+              <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'amex' ? 'selected' : ''" width='12px' height="12px"  value="'amex'" [ngModelOptions]="{standalone: true}">
+              <img src="assets/images/amex.png">
+
+
+      <!--<select placeholder="Card type" ng-model="card.cardType" ng-options="type for type in ['Visa', 'American Express', 'MasterCard']"></select>-->
+
+      <label class="item item-input item-floating-label">
+          <span class="input-label">Charge Amount</span>
+          <input placeholder="Charge Amount" type="text" [(ngModel)]="card.amount"  name="cardAmount" [ngModelOptions]="{standalone: true}">
+      </label>
+      <label class="item item-input item-floating-label">
+          <span class="input-label">Name on card</span>
+          <input placeholder="Name on card*" type="text" [(ngModel)]="card.userName" >
+      </label>
+
+      <label class="item item-input item-floating-label">
+          <span class="input-label">Card Number</span>
+          <input placeholder="Card Number*" type="text" [(ngModel)]="card.number" name="cardNumber" cc-number cc-type="card.cardType" [ngModelOptions]="{standalone: true}">
+      </label>
+      <label class="item item-input item-floating-label">
+          <span class="input-label">Card CVC</span>
+          <input placeholder="Card CVC*" type="text" [(ngModel)]="card.cvc" cc-type="cardNumber.$ccType"[ngModelOptions]="{standalone: true}">
+      </label>
+
+      <label class="item item-input item-stacked-label">
+          <span class="input-label">Expiration Date:</span>
+          <!-- <div cc-exp>
+            <input ng-model="card.exp_month" cc-exp-month style="height:30px;width:50px;border:1px solid grey; text-align:center" />
+            <input ng-model="card.exp_year" cc-exp-year style="height:30px;width:50px;border:1px solid grey; text-align:center" />
+          </div> -->
+          <div class="list row">
+              <label class="col col-33 item item-input ">
+                  <span class="input-label item-stacked-label">Month :</span>
+                  <input placeholder="06" type="text" [(ngModel)]="card.exp_month"  [ngModelOptions]="{standalone: true}">
+              </label>
+              <div class="col col-20"></div>
+              <label class="col col-33 item item-input item-stacked-label">
+                  <span class="input-label">Year :</span>
+                  <input placeholder="2016" type="text" [(ngModel)]="card.exp_year"  [ngModelOptions]="{standalone: true}">
+              </label>
+          </div>
+      </label>
+      <div class="row">
+          <div class="col col-top"></div>
+          <button type="submit" (click)='authorizeCreditCardMethod(card)' class="col col-67 button button-small button-block made-easy-button-setting">MAKE PAYMENT</button>
+          <div class="col col-top"></div>
+      </div>
+      <!--
+      <p ng-show="paymentForm.cardNumber.$error.ccNumberType">That's not a valid {{card.cardType}}</p>
+      <p ng-show="paymentForm.$invalid">That's not a valid Card Information</p>
+    --><!--
+              <pre style="font-size:smaller">{{paymentForm}}</pre>
+              <pre style="font-size:smaller">{{card | json}}</pre>
+              <pre style="font-size:smaller">{{cardNumber | json}}</pre>
+      -->
+  <!-- </form> -->
+</div>
+
+
 
 </div>
 

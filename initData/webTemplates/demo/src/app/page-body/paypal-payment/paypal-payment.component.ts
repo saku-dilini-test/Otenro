@@ -34,6 +34,10 @@ export class PaypalPaymentComponent implements AfterViewChecked {
       this.paypalConfig.client.production = 'xxxxxxxx';
       this.productionKey = 'xxxxxxxx';
       console.log(this.paypalConfig.client.production)
+    }else if(this.dataService.env == 'live'){
+      this.paypalConfig.client.sandbox = 'xxxxxxxx';
+      this.sandBoxKey = 'xxxxxxxx';
+      console.log(this.paypalConfig.client.sandbox)
     }
 
   }
