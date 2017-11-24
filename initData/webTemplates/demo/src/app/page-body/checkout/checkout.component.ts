@@ -585,41 +585,44 @@ export class CheckoutComponent implements OnInit {
     cardInformation.appId = this.appId;
     cardInformation.userId = this.userId;
 console.log("cardInformation : " + JSON.stringify(cardInformation));
-    // this.http.post(SERVER_URL + '/templates/makeStripePayment', cardInformation)
+    this.http.post(SERVER_URL + '/templates/makeStripePayment', cardInformation)
 
-    //   .subscribe((res) => {
+      .subscribe((res) => {
 
-    //     if (res.status == 'succeeded') {
-    //       this.orderProcess();
-    //     } else {
-    //       alert('makeStripePayment failed');
+        if (res.status == 'succeeded') {
+          this.orderProcess();
+        } else {
+          console.log("makeStripePayment failed")
+          alert('makeStripePayment failed');
 
-    //     }
-    //   },  (err)=> {
-    //     alert('makeStripePayment failed');
-    //   })
+        }
+      },  (err)=> {
+        console.log("makeStripePayment failed")
+        alert('makeStripePayment failed');
+      })
 
   };
 
   authorizeCreditCardMethod(card) {
 
     card.appId = this.appId
-    this.http.post(SERVER_URL + "/templateController/authorizeNetPay", card)
-      .subscribe((res) => {
-        // var alertPopup = $ionicPopup.alert({
-        //     subTitle: res.data.data,
-        //     cssClass: 'ionicPopUp',
-        //     buttons:[
-        //         {text:'OK',
-        //             type:'made-easy-button-setting'},
-        //     ]
-        // });
-        if (res.status == 'ok') {
-          this.orderProcess();
-        }
-      }, function (err) {
-        alert('authorizeCreditCard' + err)
-      })
+
+    // this.http.post(SERVER_URL + "/templateController/authorizeNetPay", card)
+    //   .subscribe((res) => {
+    //     // var alertPopup = $ionicPopup.alert({
+    //     //     subTitle: res.data.data,
+    //     //     cssClass: 'ionicPopUp',
+    //     //     buttons:[
+    //     //         {text:'OK',
+    //     //             type:'made-easy-button-setting'},
+    //     //     ]
+    //     // });
+    //     if (res.status == 'ok') {
+    //       this.orderProcess();
+    //     }
+    //   }, function (err) {
+    //     alert('authorizeCreditCard' + err)
+    //   })
   }
 
   orderProcess() {
