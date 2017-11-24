@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PagebodyServiceModule } from '../page-body/page-body.service'; 
+import { PagebodyServiceModule } from '../page-body/page-body.service';
 
 
 @Component({
@@ -10,13 +10,17 @@ import { PagebodyServiceModule } from '../page-body/page-body.service';
 })
 export class HeaderComponent {
   cartNo:number;
-  
-  constructor(private router: Router,private dataService : PagebodyServiceModule) { 
-    this.cartNo = this.dataService.cart.cartItems.length;    
+  loginStatus;
+  constructor(private router: Router,private dataService : PagebodyServiceModule) {
+    this.cartNo = this.dataService.cart.cartItems.length;
   }
 
   ngAfterContentChecked()	  {
     this.cartNo = this.dataService.cart.cartItems.length;
+    if(this.dataService.isUserLoggedIn.check == false){
+      this.loginStatus = "Not logged in" ;
+    }
+    this.loginStatus = "logged in ";
   }
 
   navigate(val:string){
