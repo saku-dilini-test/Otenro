@@ -360,13 +360,16 @@ export class CheckoutComponent implements OnInit {
 
 
 
-  checkout() {
+  checkout(data) {
+
+console.log("data : " + JSON.stringify(data));
 
     this.isSelected = true;
     this.pickupData = {
       item: this.dataService.deliverItems,
       delivery: { location: "Pick up", method: "Pick up" },
-      pickupId: this.pickup[0].id,
+      pickupId: data.id,
+      pickupCost:data.cost,
       deliverDetails: { name: this.name, number: this.pkPhone },
 
     }
@@ -438,7 +441,7 @@ export class CheckoutComponent implements OnInit {
         }
         // $log.debug($scope.isApplyShippingCharge);
         if (this.isApplyShippingCharge == true && this.formType != 'pickup') {
-
+console.log("inside chk if");
           // $log.debug($scope.shippingCost);
           var shipping = parseInt(this.chkShippingCost);
           total = total + shipping;
@@ -451,11 +454,16 @@ export class CheckoutComponent implements OnInit {
             this.cart.totalPrice = total;
           }
         } else {
+          console.log("inside chk else");
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
-          if (typeof this.chkShippingCost == "undefined") {
+          if (typeof this.finalDetails.pickupCost == "undefined") {
             this.chkShippingCost = 0;
+          }else{
+            this.chkShippingCost = this.finalDetails.pickupCost;
           }
+          console.log("this.chkShippingCost  : " + this.chkShippingCost );
+
           if (tax > 0) {
             total = total + tax;
             this.totalPrice = total + parseInt(this.chkShippingCost);
