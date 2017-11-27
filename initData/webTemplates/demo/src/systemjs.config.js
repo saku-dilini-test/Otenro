@@ -31,23 +31,27 @@
       'typescript': {
         "exports": "ts"
       },
-      '*.json': { loader: 'plugin-json'}
+      '*.json': { loader: 'plugin-json'},
+
+        lodash: { format: 'amd' }
+
     },
     paths: {
       // paths serve as alias
       'npm:': '/meServer/node_modules/'
     },
     // map tells the System loader where to look for things
-    // defaultJSExtensions: true,    
+    // defaultJSExtensions: true,
     map: {
+      lodash: 'npm:lodash/lodash.js',
       // our app is within the app folder
-      'angular-2-local-storage': 'npm:angular-2-local-storage/dist',      
+      'angular-2-local-storage': 'npm:angular-2-local-storage/dist',
       'app': 'app',
       'plugin-json': 'npm:systemjs-plugin-json/json.js',
       //  angular bundles
       '@angular/animations': 'npm:@angular/animations/bundles/animations.umd.js',
       '@angular/animations/browser': 'npm:@angular/animations/bundles/animations-browser.umd.js',
-      '@angular/platform-browser/animations': 'npm:@angular/platform-browser/bundles/platform-browser-animations.umd.js',   
+      '@angular/platform-browser/animations': 'npm:@angular/platform-browser/bundles/platform-browser-animations.umd.js',
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
       '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
@@ -70,15 +74,16 @@
       // other libraries
       'rxjs':                      'npm:rxjs',
       // 'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-      'ts':                        'https://unpkg.com/plugin-typescript@5.2.7/lib/plugin.js', 
+      'ts':                        'https://unpkg.com/plugin-typescript@5.2.7/lib/plugin.js',
       'typescript':                'npm:typescript/lib/typescript.js',
 
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
-      'angular-2-local-storage': { 
+
+      'angular-2-local-storage': {
         main: './index.js', defaultExtension: 'js'
-       } ,      
+       } ,
       app: {
         main: './main.ts',
         defaultExtension: 'ts'

@@ -26,7 +26,7 @@ const routes: Routes = [
     data:{title:'Login Page'}
   },
   {
-    path: 'register',
+    path: 'register/:type',
     component: RegisterComponent,
     data:{title:'Register Page'}
   },
@@ -80,14 +80,14 @@ const routes: Routes = [
     path: 'checkout/:type',
     component: CheckoutComponent,
     data:{title:'Checkout Page'}
-  },  
-  { 
-    path: 'paypal/rest/execute', 
-  component: PaypalPaymentComponent 
+  },
+  {
+    path: 'paypal/rest/execute',
+  component: PaypalPaymentComponent
 },
-// { 
-//   path: 'paypal', 
-// component: PaypalPaymentComponent 
+// {
+//   path: 'paypal',
+// component: PaypalPaymentComponent
 // }
 ];
 

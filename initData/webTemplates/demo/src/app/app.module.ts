@@ -33,14 +33,14 @@ import { CheckoutComponent } from './page-body/checkout/checkout.component';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    OrderHistoryComponent,
+    OrderHistoryComponent
   ],
   imports: [
     LocalStorageModule.withConfig({
       prefix: 'my-app',
       storageType: 'localStorage'
   }),
- 
+
     BrowserModule,
     FormsModule,
     HttpClientModule,
