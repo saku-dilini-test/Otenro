@@ -22,6 +22,7 @@ export class contactInfoModel{
 	address:string;
 	phone:string;
 	email:string;
+	website:string;
 	facebook:string;
 	twitter:string;
 	pinterest:string;

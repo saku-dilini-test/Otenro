@@ -138,6 +138,7 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant2(variant) {
+      this.selection2 = [];
         console.log("variant : " + variant);
         console.log("changeVariant2 called");
         console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
@@ -176,6 +177,7 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant3(variant) {
+      this.selection3 = [];
         console.log("variant : " + variant);
         console.log("changeVariant3 called");
         if (variant) {

@@ -35,11 +35,21 @@ this.imageURL = SERVER_URL
 
 try {
     this.appUserId = this.localStorageService.get("appLocalStorageUser"+this.appId);
-    this.orderHistory = (this.localStorageService.get("history"+this.appId+this.appUserId.registeredUser));
+    // this.orderHistory = (this.localStorageService.get("history"+this.appId+this.appUserId.registeredUser));
 }
 catch(err) {
     console.log("no orderHistory");
 }
+
+    this.http.get(SERVER_URL + '/templates/getOrdersOfUser?appId=' + this.appId + '&userId=' + this.appUserId.registeredUser)
+        .subscribe((data)=>{
+            this.orderHistory = (data);
+            console.log("this.orderHistory : " + JSON.stringify(this.orderHistory));
+        }),((err)=> {
+        alert('warning,Unable to get orders');
+    });
+
+
   }
 
 }
