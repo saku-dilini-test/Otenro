@@ -84,6 +84,8 @@ this.selectedcountry = data;
                 // }else{
                 //     $state.go('app.category');
                 // }
+
+                this.route.navigate(['home']);
             },
             function(err){
                 alert("signup error");

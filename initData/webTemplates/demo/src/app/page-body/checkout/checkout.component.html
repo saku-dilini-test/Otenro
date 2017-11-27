@@ -3,484 +3,389 @@
 
 <div class="container">
 
-
   <div *ngIf='formType == "delivery"'>
     <div class="row">
-      <div class="col-md-9 ">
-        <div>
-          <p>Have a coupon? <a>Click here to enter your code</a></p>
-          <!--         <form method="post">
-              <p>
-                <input type="text" name="coupon_code" placeholder="Coupon code" id="coupon_code" value="">
-              </p>
-              <p>
-                <input type="submit" class="button" name="apply_coupon" value="Apply Coupon">
-              </p> -->
-          <!--    </form> -->
+      <div class="col-md-7">
           <div class="row">
-            <div class="col">
-              <h4 class="mb-4">Billing Details</h4>
-              <div class="form-group d-table-cell pr-4">
+              <h4 class="col-sm-12">Billing Details</h4>
+              <div class="form-group col-sm-6 mt-3">
                 <label for="fname">First Name</label>
                 <input type="text" [(ngModel)]='fname' [value]="fname" class="form-control" id="fname" aria-describedby="fname">
               </div>
-              <div class="form-group d-table-cell pb-4">
+              <div class="form-group col-sm-6 mt-3">
                 <label for="lname">Last Name</label>
-                <input type="text" class="form-control" id="lname" aria-describedby="lname">
+                <input type="text" class="form-control" [(ngModel)]='lname' [value]="lname" id="lname" aria-describedby="lname">
               </div>
-              <div class="form-group pb-4">
-                <label for="cname">City</label>
-                <input type="text" [(ngModel)]='city' [value]="city" class="form-control" id="cname" aria-describedby="cname">
-              </div>
-              <div class="form-group d-table-cell pr-4">
+              <div class="form-group col-sm-6">
                 <label for="email">Email address</label>
                 <input type="email" [(ngModel)]='email' [value]="email" class="form-control" id="email" aria-describedby="emailHelp">
               </div>
-              <div class="form-group d-table-cell pb-4">
+              <div class="form-group col-sm-6">
                 <label for="phone">Phone</label>
                 <input type="tel" [(ngModel)]='phone' [value]="phone" class="form-control" id="phone" aria-describedby="phone">
               </div>
-              <div class="form-group pb-4">
-                <label for="email">Street name</label>
-                <input type="email" [(ngModel)]='streetName' [value]="streetName" class="form-control" id="streetName" aria-describedby="streetName">
-              </div>
-              <div class="form-group pb-4">
+              <div class="form-group col-sm-6">
                 <label for="phone">Street number</label>
                 <input type="tel" [(ngModel)]='streetNumber' [value]="streetNumber" class="form-control" id="streetNumber" aria-describedby="streetNumber">
               </div>
-              <div class="form-group pb-4">
+              <div class="form-group col-sm-6">
+                <label for="email">Street name</label>
+                <input type="email" [(ngModel)]='streetName' [value]="streetName" class="form-control" id="streetName" aria-describedby="streetName">
+              </div>
+              <div class="form-group col-sm-6">
+                <label for="cname">City</label>
+                <input type="text" [(ngModel)]='city' [value]="city" class="form-control" id="cname" aria-describedby="cname">
+              </div>
+              <div class="form-group col-sm-6">
                 <label for="phone">zip</label>
                 <input type="tel" [(ngModel)]='zip' [value]="zip" class="form-control" id="zip" aria-describedby="zip">
               </div>
-              <div class="form-group pb-4">
-                <label for="address">Address</label>
-                <textarea class="form-control" id="address" rows="3"></textarea>
-              </div>
-              <div class="form-group pb-4">
-                <select [(ngModel)]="country" (ngModelChange)="countryChanged(country)">
+              <div class="form-group col-sm-12">
+                <select [(ngModel)]="country" (ngModelChange)="countryChanged(country)" class="form-control">
                   <option *ngFor="let c of countries" [selected]="country==c.countryName" value = '{{c.countryName}}'> {{c.countryName}} </option>
                 </select>
               </div>
-            </div>
-            <div class="col">
-              <!-- <h4 class="mb-4">Additional Information</h4>
-                        <div class="form-group">
-                            <label for="orderNotes">Order Notes</label>
-                            <textarea class="form-control" id="orderNotes" rows="5" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                        </div> -->
-            </div>
           </div>
+      </div>
 
-          <!-- <div>
-                    <div class="form-check">
-                        <label class="form-check-label text-uppercase font-weight-bold">
-                            <input class="form-check-input" type="radio" name="paymentMethods" id="paymentMethods1" value="option1" checked>
-                            Payment Method 1
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label text-uppercase font-weight-bold">
-                            <input class="form-check-input" type="radio" name="paymentMethods" id="paymentMethods2" value="option2">
-                            Payment Method 2
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label class="form-check-label text-uppercase font-weight-bold">
-                            <input class="form-check-input" type="radio" name="paymentMethods" id="paymentMethods3" value="option3">
-                            Payment Method 3
-                        </label>
-                    </div>
-                  <div>
-                    <input type="submit" class="btn btn-secondary bg-inverse text-white btn-block text-uppercase"  id="place_order" value="Place order" data-value="Place order">
-                  </div>
-                </div> -->
-
+      <div class="col-md-5">
+        <h4>Shipping Options</h4>
+        <div>
+          <div class="custom-controls-stacked">
+            <label class="custom-control  mt-3"  *ngFor="let ship of shippingData, let idx = index">
+              <input  #r id="radioStacked1" name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping" (change)='addShipping(ship)'>
+              <span class="custom-control-indicator"></span>
+              <h5 class="custom-control-description pr-3">{{ship.optionName}}</h5>
+              <span>({{ship.shippingOption}})</span>
+            </label>
+          </div>
         </div>
-      </div>
-      <!-- <div class="col-md-3">
-          <h5 class="text-uppercase my-3">Categories</h5>
-            <ngb-accordion  [closeOthers]="true" #acc="ngbAccordion" activeIds="">
-              <ngb-panel>
-                <ng-template ngbPanelTitle >
-                  <span><i class="fa fa-caret-right pr-3  control-2"></i><i class="fa fa-caret-down pr-3 control-1" ></i> Clothing</span>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                       <ul>
-                           <li>Jackets</li>
-                           <li>Shorts</li>
-                           <li>Pants</li>
-                           <li>Shirts</li>
-                           <li>Sweatshirts</li>
-                       </ul>
-                </ng-template>
-              </ngb-panel>
-              <ngb-panel>
-                <ng-template ngbPanelTitle>
-                  <span><i class="fa fa-caret-right pr-3 control-2"></i><i class="fa fa-caret-down pr-3 control-1"></i> Shoes</span>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                       <ul>
-                           <li>Jackets</li>
-                           <li>Shorts</li>
-                           <li>Pants</li>
-                           <li>Shirts</li>
-                           <li>Sweatshirts</li>
-                       </ul>
-                </ng-template>
-              </ngb-panel>
-
-            </ngb-accordion>
-
-                </div> -->
-      <div class="col-md-3">
-        <h5 class="text-uppercase my-3">shipping details</h5>
-        <div class="col align-center made-easy-header-font">Shipping Options</div>
-        <tr *ngFor="let ship of shippingData, let idx = index">
-          <td>
-            <input #r type="radio" name="shipping" value="{{ship.optionName}}" [(ngModel)]="details.shipping" (change)='addShipping(ship)'>
-            <h3>{{ship.optionName}}</h3>
-            <span>{{ship.shippingOption}}</span>
-
-          </td>
-        </tr>
-      </div>
-
-      <div *ngIf='isSelected'>
-        <h4 id="order_review_heading">Your order</h4>
-        <table class="table table-bordered table-responsive">
-          <thead>
-            <tr>
-              <th width="89%">Item</th>
-              <th width="100%">Qty</th>
-              <th width="100%">Price</th>
-
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let itm of cartItems">
-              <td> {{itm.name}}&nbsp;</td>
-              <td> {{itm.qty}}&nbsp;</td>
-              <td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr *ngIf='hideShipping'>
-              <th>Shipping</th>
-              <td>{{sign}}{{chkShippingCost}}</td>
-              <td><span>Tax({{chkTax}}%) {{sign}}{{taxTotal}}</span></td>
-            </tr>
-            <tr class="order-total">
-              <th>Total</th>
-              <td><strong>
-              <span>{{totalQuantity}}</span>
-              <span>{{sign}}{{totalPrice}}</span>
-            </strong>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-
-        <!-- <div class="col-md-3">
-                <h5 class="text-uppercase my-3">Payment details</h5>
-                <div class="col align-center made-easy-header-font">Payment Options</div>
-                <!-- <tr *ngFor="let ship of shippingData, let idx = index">
-                            <td *ngIf = 'isAdded'>
-                            <input #r type="radio" name="shipping"  value="{{ship.optionName}}" [(ngModel)] = "details.shipping" (change) = 'addShipping(ship)' >
-                            <h3>{{ship.optionName}}</h3>
-                            <span >{{ship.shippingOption}}</span>
-
-                            </td>
-                </tr>	 -->
-
       </div>
 
     </div>
-
-  </div>
-</div>
-
-<div *ngIf='formType == "pickup"'>
-
-  <h4 class="mb-4">Pickup Details</h4>
-
-  <div class="form-group d-table-cell pr-4">
-    <label for="name">Name</label>
-    <input type="text" [(ngModel)]='name' class="form-control" id="name" aria-describedby="name">
-  </div>
-
-  <div class="form-group d-table-cell pb-4">
-    <label for="pkPhone">Phone</label>
-    <input type="tel" [(ngModel)]='pkPhone' class="form-control" id="pkPhone" aria-describedby="pkPhone">
   </div>
 
 
-  <div class="col-md-3">
-    <h5 class="text-uppercase my-3">Pickup details</h5>
-    <div class="col align-center made-easy-header-font">Pickup Options</div>
-    <tr *ngFor="let pick of pickup, let idx = index">
-      <td>
-        <input #r type="radio" name="pickup" value="{{pick.locationName}}" (click)='checkout()'>
-        <h3>{{pick.locationName}}</h3>
-        <span>{{pick.number}}</span><br>
-        <span>{{pick.streetAddress}}</span><br>
-        <span>{{pick.city}}</span><br>
-        <span>{{pick.country}}</span> <br>
-        <span>{{pick.postalCode}}</span>
+  <div class="row" *ngIf='formType == "pickup"'>
 
-        <!-- <div *ngIf="pick.locationName" class="col" [(ngModel)]="pickupData.locationName">{{pick.locationName}}</div>
-                        <div class="content">
-                                <div *ngIf="pick.number" class="col" [(ngModel)]="pickupData.number">{{pick.number}},</div>
-                                <div *ngIf="pick.streetAddress" class="col" [(ngModel)]="pickupData.streetAddress">{{pick.streetAddress}},</div>
-                                <div *ngIf="pick.city" class="col" [(ngModel)]="pickupData.city">{{pick.city}},</div>
-                                <div *ngIf="pick.country" class="col" [(ngModel)]="pickupData.country"> {{pick.country}}.</div>
-                                <div *ngIf="pick.postalCode" class="col" [(ngModel)]="pickupData.postalCode">{{pick.postalCode}}</div>
-                        </div> -->
+    <h4 class="col-sm-12 mb-4">Pickup Details</h4>
 
-      </td>
-    </tr>
+    <div class="form-group col-sm-6">
+      <label for="name">Name</label>
+      <input type="text" [(ngModel)]='name' class="form-control" id="name" aria-describedby="name">
+    </div>
 
-    <div *ngIf='isSelected'>
-      <h4 id="order_review_heading">Your order</h4>
-      <table class="table table-bordered table-responsive">
-        <thead>
-          <tr>
-            <th width="89%">Item</th>
-            <th width="100%">Qty</th>
-            <th width="100%">Price</th>
+    <div class="form-group col-sm-6">
+      <label for="pkPhone">Phone</label>
+      <input type="tel" [(ngModel)]='pkPhone' class="form-control" id="pkPhone" aria-describedby="pkPhone">
+    </div>
 
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let itm of cartItems">
-            <td> {{itm.name}}&nbsp;</td>
-            <td> {{itm.qty}}&nbsp;</td>
-            <td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th>Tax</th>
 
-            <td><span>({{chkTax}}%) {{sign}}{{taxTotal}}</span></td>
-          </tr>
-          <tr class="order-total">
-            <th>Total</th>
-            <td><strong>
+    <div class="col-sm-12">
+      <h4 class="my-3">Select a Location</h4>
+      <div  class="row">
+          <div class="custom-controls-stacked col-sm-4" *ngFor="let pick of pickup, let idx = index">
+            <label class="custom-control  mt-3">
+              <input  #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout()'>
+              <span class="custom-control-indicator"></span>
+              <h5 class="custom-control-description pr-3">{{pick.locationName}}</h5>
+            </label>
+            <span>{{pick.number}},</span>
+            <span>{{pick.streetAddress}},</span>
+            <span>{{pick.city}},</span>
+            <span>{{pick.postalCode}},</span>
+            <span>{{pick.country}}.</span>
+          </div>
+      </div>
+      <!--<div *ngIf='isSelected'>-->
+        <!--<h4 id="order_review_heading">Your order</h4>-->
+        <!--<table class="table table-bordered table-responsive">-->
+          <!--<thead>-->
+          <!--<tr>-->
+            <!--<th width="89%">Item</th>-->
+            <!--<th width="100%">Qty</th>-->
+            <!--<th width="100%">Price</th>-->
+
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+          <!--<tr *ngFor="let itm of cartItems">-->
+            <!--<td> {{itm.name}}&nbsp;</td>-->
+            <!--<td> {{itm.qty}}&nbsp;</td>-->
+            <!--<td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>-->
+          <!--</tr>-->
+          <!--</tbody>-->
+          <!--<tfoot>-->
+          <!--<tr>-->
+            <!--<th>Tax</th>-->
+
+            <!--<td><span>({{chkTax}}%) {{sign}}{{taxTotal}}</span></td>-->
+          <!--</tr>-->
+          <!--<tr class="order-total">-->
+            <!--<th>Total</th>-->
+            <!--<td><strong>-->
+              <!--<span>{{totalQuantity}}</span>-->
+              <!--<span>{{sign}}{{totalPrice}}</span>-->
+            <!--</strong>-->
+            <!--</td>-->
+          <!--</tr>-->
+          <!--</tfoot>-->
+        <!--</table>-->
+
+
+
+      <!--</div>-->
+
+    </div>
+  </div>
+
+
+  <hr class="featurette-divider">
+
+
+
+  <div *ngIf='isSelected'>
+    <h4 >Your order</h4>
+    <table class="table table-bordered table-responsive">
+      <thead>
+      <tr>
+        <th width="89%">Item</th>
+        <th width="100%">Qty</th>
+        <th width="100%">Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let itm of cartItems">
+        <td> {{itm.name}}&nbsp;</td>
+        <td> {{itm.qty}}&nbsp;</td>
+        <td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr *ngIf='hideShipping'>
+        <th>Shipping</th>
+        <td></td>
+        <td>{{sign}}{{chkShippingCost}}</td>
+      </tr>
+      <tr>
+        <th>Tax({{chkTax}}%)</th>
+        <td></td>
+        <td>{{sign}}{{taxTotal}}</td>
+      </tr>
+      <tr class="order-total">
+        <th>Total</th>
+        <td>
+          <strong>
             <span>{{totalQuantity}}</span>
+          </strong>
+        </td>
+        <td>
+          <strong>
             <span>{{sign}}{{totalPrice}}</span>
           </strong>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+
+  </div>
 
 
+  <br>
+  <div *ngIf="overWeight">Over weight. Cannot ship</div>
+  <div *ngIf="underWeight">Under weight. Cannot ship</div>
 
+  <div class="custom-controls-stacked" *ngIf='orderd'>
+    <h4>Select Payment Type</h4>
+    <div  *ngIf="deliveryShow" class="mt-3">
+        <label class="custom-control custom-radio">
+          <input  type="radio" name="deliveryShow" value="cashOnDelivery" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+          <span class="custom-control-indicator"></span>
+          <h5 class="custom-control-description"> Cash On Delivery</h5>
+        </label>
     </div>
 
-  </div>
-</div>
+    <div *ngIf="pickupShow" class="mt-3">
+      <label class="custom-control custom-radio">
+        <input type="radio" name="pickupShow" value="cashOnPickup" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <h5 class="custom-control-description">Cash On Pickup</h5>
+      </label>
+    </div>
 
+    <div *ngIf="paypalShow" class="mt-3">
+      <label class="custom-control custom-radio">
+        <input type="radio" name="paypalShow" value="paypal" (click)="buyWithPayPal()" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <h5 class="custom-control-description">PayPal</h5>
+      </label>
+    </div>
 
+    <div *ngIf="stripeShow" class="mt-3">
+      <label class="custom-control custom-radio">
+        <input type="radio" name="stripeShow" value="creditcard" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <h5 class="custom-control-description">Stripe</h5>
+      </label>
+    </div>
 
-<br>
-<div *ngIf="overWeight">Over weight. Cannot ship</div>
-<div *ngIf="underWeight">Under weight. Cannot ship</div>
-<br>
-<!-- (change)='addShipping(ship) -->
+    <div *ngIf="braintreeShow" class="mt-3">
+      <label class="custom-control custom-radio">
+        <input type="radio" name="braintreeShow" value="braintree" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <h5 class="custom-control-description">Braintree</h5>
+      </label>
+    </div>
 
-<br>
-<div>
-  <input [disabled]='underWeight || overWeight' type="submit" class="btn btn-secondary bg-inverse text-white btn-block text-uppercase"
-    id="place_order" value="Place order" data-value="Place order" (click)='pay("001")'>
-</div>
+    <div *ngIf="authorizeNet" class="mt-3">
+      <label class="custom-control custom-radio">
+        <input type="radio" name="authorizeNet" value="authorizeNet" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <h5 class="custom-control-description">AuthorizeNet</h5>
+      </label>
+    </div>
 
-<br><br>
-<div *ngIf='orderd'>
-  <div *ngIf="deliveryShow">
-    <input type="radio" name="deliveryShow" value="cashOnDelivery" [(ngModel)]="paymentType" (ngModelChange)="ps=true">
-    <h3> Cash On Delivery</h3>
-  </div>
-
-  <div *ngIf="pickupShow">
-    <input type="radio" name="pickupShow" value="cashOnPickup" [(ngModel)]="paymentType" (ngModelChange)="ps=true">
-    <h3>Cash On Pickup</h3>
-  </div>
-
-  <div *ngIf="paypalShow">
-    <input type="radio" name="paypalShow" value="paypal" (click)="buyWithPayPal()" [(ngModel)]="paymentType" (ngModelChange)="ps=true">
-    <h3>Pay Pal</h3>
-  </div>
-
-  <div *ngIf="stripeShow">
-    <input type="radio" name="stripeShow" value="creditcard" [(ngModel)]="paymentType" (ngModelChange)="ps=true">
-    <h3>Stripe</h3>
-  </div>
-
-  <div *ngIf="braintreeShow">
-    <input type="radio" name="braintreeShow" value="braintree" [(ngModel)]="paymentType" (ngModelChange)="ps=true">
-    <h3>Braintree</h3>
-  </div>
-
-  <div *ngIf="authorizeNet">
-    <input *ngIf="authorizeNet" type="radio" name="authorizeNet" value="authorizeNet" [(ngModel)]="paymentType" (ngModelChange)="ps=true">
-    <h3>AuthorizeNet</h3>
-  </div>
-
-  <form *ngIf="ps" name="cashPaymentFrom" novalidate>
-    <div class="card-form list padding-right" *ngIf="paymentType == 'cashOnPickup' || paymentType == 'cashOnDelivery'">
-      <span class="col input-label" *ngIf="paymentType == 'cashOnDelivery'">Confirm payment by cash on delivery</span>
-      <span class="col input-label" *ngIf="paymentType == 'cashOnPickup'">Confirm payment by cash on pickup</span>
-      <div class="row cart-buttons">
-
-
-        <p>
-          <button class="btn btn-primary" (click)="confirmCashPayment()">Confirm</button>
-        </p>
-
+    <form  *ngIf="paymentType == 'cashOnPickup' || paymentType == 'cashOnDelivery'" name="cashPaymentFrom" novalidate class="row my-4">
+      <div class="col-sm-12">
+        <h5 *ngIf="paymentType == 'cashOnDelivery'">Confirm payment by cash on delivery</h5>
+        <h5 *ngIf="paymentType == 'cashOnPickup'">Confirm payment by cash on pickup</h5>
+        <button class="btn btn-primary btn-lg" (click)="confirmCashPayment()">Confirm</button>
         <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
-
       </div>
-    </div>
+    </form>
 
-  </form>
-  <form name="cashPaymentFrom" novalidate>
-    <div class="card-form list padding-right" *ngIf="paymentType == 'paypal'">
-      <div class="row cart-buttons">
-        <div class="col-33"></div>
-        <!-- <button class="button button-raised  made-easy-button-setting" (click)="buyWithPayPal()">Buy with PayPal</button> -->
-        <!-- <h1 *ngIf="loading">Loading...</h1>
-        <div id="paypal-button"></div> -->
+    <form name="cashPaymentFrom" novalidate class="row my-4"  *ngIf="paymentType == 'paypal'">
+      <div class="col-sm-12">
+        <h5>Click to pay with PayPal</h5>
         <app-paypal-payment></app-paypal-payment>
       </div>
-    </div>
-  </form>
+    </form>
 
-  <div class="card-form list padding-right" *ngIf="paymentType == 'creditcard'">
-    <!-- <form name="paymentForm" (ngSubmit)="makeStripePayment(card)" novalidate> -->
-        <span class="col input-label">Select Card Type*</span>
+    <div class="row" *ngIf="paymentType == 'creditcard'">
+      <!-- <form name="paymentForm" (ngSubmit)="makeStripePayment(card)" novalidate> -->
+      <h4 class="col-sm-12">Select Card Type*</h4>
 
-            <input type="radio"  [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'visa' ? 'selected' : ''" width='12px' height="12px"  value="'visa'" [ngModelOptions]="{standalone: true}">
-                <img src="assets/images/visa.png">
+      <input type="radio"  [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'visa' ? 'selected' : ''" width='12px' height="12px"  value="'visa'" [ngModelOptions]="{standalone: true}">
+      <img src="assets/images/visa.png">
 
-                <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'mastercard' ? 'selected' : ''" width='12px' height="12px" value="'mastercard'" [ngModelOptions]="{standalone: true}">
-                <img width="75px" src="assets/images/Mastercard.png">
+      <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'mastercard' ? 'selected' : ''" width='12px' height="12px" value="'mastercard'" [ngModelOptions]="{standalone: true}">
+      <img width="75px" src="assets/images/Mastercard.png">
 
-                <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'amex' ? 'selected' : ''" width='12px' height="12px"  value="'amex'" [ngModelOptions]="{standalone: true}">
-                <img src="assets/images/amex.png">
-
-
-        <!--<select placeholder="Card type" ng-model="card.cardType" ng-options="type for type in ['Visa', 'American Express', 'MasterCard']"></select>-->
-
-        <label class="item item-input item-floating-label">
-            <span class="input-label">Charge Amount</span>
-            <input placeholder="Charge Amount" type="text" [(ngModel)]="card.amount"  name="cardAmount" [ngModelOptions]="{standalone: true}">
-        </label>
-        <label class="item item-input item-floating-label">
-            <span class="input-label">Name on card</span>
-            <input placeholder="Name on card*" type="text" [(ngModel)]="card.userName" >
-        </label>
-
-        <label class="item item-input item-floating-label">
-            <span class="input-label">Card Number</span>
-            <input placeholder="Card Number*" type="text" [(ngModel)]="card.number" name="cardNumber" cc-number cc-type="card.cardType" [ngModelOptions]="{standalone: true}">
-        </label>
-        <label class="item item-input item-floating-label">
-            <span class="input-label">Card CVC</span>
-            <input placeholder="Card CVC*" type="text" [(ngModel)]="card.cvc" cc-type="cardNumber.$ccType"[ngModelOptions]="{standalone: true}">
-        </label>
-
-        <label class="item item-input item-stacked-label">
-            <span class="input-label">Expiration Date:</span>
-            <!-- <div cc-exp>
-              <input ng-model="card.exp_month" cc-exp-month style="height:30px;width:50px;border:1px solid grey; text-align:center" />
-              <input ng-model="card.exp_year" cc-exp-year style="height:30px;width:50px;border:1px solid grey; text-align:center" />
-            </div> -->
-            <div class="list row">
-                <label class="col col-33 item item-input ">
-                    <span class="input-label item-stacked-label">Month :</span>
-                    <input placeholder="06" type="text" [(ngModel)]="card.exp_month"  [ngModelOptions]="{standalone: true}">
-                </label>
-                <div class="col col-20"></div>
-                <label class="col col-33 item item-input item-stacked-label">
-                    <span class="input-label">Year :</span>
-                    <input placeholder="2016" type="text" [(ngModel)]="card.exp_year"  [ngModelOptions]="{standalone: true}">
-                </label>
-            </div>
-        </label>
-        <div class="row">
-            <div class="col col-top"></div>
-            <button type="submit" (click)='makeStripePaymentMethod(card)' class="col col-67 button button-small button-block made-easy-button-setting">MAKE PAYMENT</button>
-            <div class="col col-top"></div>
-        </div>
-        <!--
-        <p ng-show="paymentForm.cardNumber.$error.ccNumberType">That's not a valid {{card.cardType}}</p>
-        <p ng-show="paymentForm.$invalid">That's not a valid Card Information</p>
-      --><!--
-                <pre style="font-size:smaller">{{paymentForm}}</pre>
-                <pre style="font-size:smaller">{{card | json}}</pre>
-                <pre style="font-size:smaller">{{cardNumber | json}}</pre>
-        -->
-    <!-- </form> -->
-</div>
-
-
-<div class="card-form list padding-right" *ngIf="paymentType == 'authorizeNet'">
-  <!-- <form name="paymentForm" (ngSubmit)="makeStripePayment(card)" novalidate> -->
-      <span class="col input-label">Select Card Type*</span>
-
-          <input type="radio"  [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'visa' ? 'selected' : ''" width='12px' height="12px"  value="'visa'" [ngModelOptions]="{standalone: true}">
-              <img src="assets/images/visa.png">
-
-              <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'mastercard' ? 'selected' : ''" width='12px' height="12px" value="'mastercard'" [ngModelOptions]="{standalone: true}">
-              <img width="75px" src="assets/images/Mastercard.png">
-
-              <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'amex' ? 'selected' : ''" width='12px' height="12px"  value="'amex'" [ngModelOptions]="{standalone: true}">
-              <img src="assets/images/amex.png">
+      <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'amex' ? 'selected' : ''" width='12px' height="12px"  value="'amex'" [ngModelOptions]="{standalone: true}">
+      <img src="assets/images/amex.png">
 
 
       <!--<select placeholder="Card type" ng-model="card.cardType" ng-options="type for type in ['Visa', 'American Express', 'MasterCard']"></select>-->
 
       <label class="item item-input item-floating-label">
-          <span class="input-label">Charge Amount</span>
-          <input placeholder="Charge Amount" type="text" [(ngModel)]="card.amount"  name="cardAmount" [ngModelOptions]="{standalone: true}">
+        <span class="input-label">Charge Amount</span>
+        <input placeholder="Charge Amount" type="text" [(ngModel)]="card.amount"  name="cardAmount" [ngModelOptions]="{standalone: true}">
       </label>
       <label class="item item-input item-floating-label">
-          <span class="input-label">Name on card</span>
-          <input placeholder="Name on card*" type="text" [(ngModel)]="card.userName" >
+        <span class="input-label">Name on card</span>
+        <input placeholder="Name on card*" type="text" [(ngModel)]="card.userName" >
       </label>
 
       <label class="item item-input item-floating-label">
-          <span class="input-label">Card Number</span>
-          <input placeholder="Card Number*" type="text" [(ngModel)]="card.number" name="cardNumber" cc-number cc-type="card.cardType" [ngModelOptions]="{standalone: true}">
+        <span class="input-label">Card Number</span>
+        <input placeholder="Card Number*" type="text" [(ngModel)]="card.number" name="cardNumber" cc-number cc-type="card.cardType" [ngModelOptions]="{standalone: true}">
       </label>
       <label class="item item-input item-floating-label">
-          <span class="input-label">Card CVC</span>
-          <input placeholder="Card CVC*" type="text" [(ngModel)]="card.cvc" cc-type="cardNumber.$ccType"[ngModelOptions]="{standalone: true}">
+        <span class="input-label">Card CVC</span>
+        <input placeholder="Card CVC*" type="text" [(ngModel)]="card.cvc" cc-type="cardNumber.$ccType"[ngModelOptions]="{standalone: true}">
       </label>
 
       <label class="item item-input item-stacked-label">
-          <span class="input-label">Expiration Date:</span>
-          <!-- <div cc-exp>
-            <input ng-model="card.exp_month" cc-exp-month style="height:30px;width:50px;border:1px solid grey; text-align:center" />
-            <input ng-model="card.exp_year" cc-exp-year style="height:30px;width:50px;border:1px solid grey; text-align:center" />
-          </div> -->
-          <div class="list row">
-              <label class="col col-33 item item-input ">
-                  <span class="input-label item-stacked-label">Month :</span>
-                  <input placeholder="06" type="text" [(ngModel)]="card.exp_month"  [ngModelOptions]="{standalone: true}">
-              </label>
-              <div class="col col-20"></div>
-              <label class="col col-33 item item-input item-stacked-label">
-                  <span class="input-label">Year :</span>
-                  <input placeholder="2016" type="text" [(ngModel)]="card.exp_year"  [ngModelOptions]="{standalone: true}">
-              </label>
-          </div>
+        <span class="input-label">Expiration Date:</span>
+        <!-- <div cc-exp>
+          <input ng-model="card.exp_month" cc-exp-month style="height:30px;width:50px;border:1px solid grey; text-align:center" />
+          <input ng-model="card.exp_year" cc-exp-year style="height:30px;width:50px;border:1px solid grey; text-align:center" />
+        </div> -->
+        <div class="list row">
+          <label class="col col-33 item item-input ">
+            <span class="input-label item-stacked-label">Month :</span>
+            <input placeholder="06" type="text" [(ngModel)]="card.exp_month"  [ngModelOptions]="{standalone: true}">
+          </label>
+          <div class="col col-20"></div>
+          <label class="col col-33 item item-input item-stacked-label">
+            <span class="input-label">Year :</span>
+            <input placeholder="2016" type="text" [(ngModel)]="card.exp_year"  [ngModelOptions]="{standalone: true}">
+          </label>
+        </div>
       </label>
       <div class="row">
-          <div class="col col-top"></div>
-          <button type="submit" (click)='authorizeCreditCardMethod(card)' class="col col-67 button button-small button-block made-easy-button-setting">MAKE PAYMENT</button>
-          <div class="col col-top"></div>
+        <div class="col col-top"></div>
+        <button type="submit" (click)='makeStripePaymentMethod(card)' class="col col-67 button button-small button-block made-easy-button-setting">MAKE PAYMENT</button>
+        <div class="col col-top"></div>
+      </div>
+      <!--
+      <p ng-show="paymentForm.cardNumber.$error.ccNumberType">That's not a valid {{card.cardType}}</p>
+      <p ng-show="paymentForm.$invalid">That's not a valid Card Information</p>
+    --><!--
+                <pre style="font-size:smaller">{{paymentForm}}</pre>
+                <pre style="font-size:smaller">{{card | json}}</pre>
+                <pre style="font-size:smaller">{{cardNumber | json}}</pre>
+        -->
+      <!-- </form> -->
+    </div>
+
+
+    <div class="card-form list padding-right" *ngIf="paymentType == 'authorizeNet'">
+      <!-- <form name="paymentForm" (ngSubmit)="makeStripePayment(card)" novalidate> -->
+      <span class="col input-label">Select Card Type*</span>
+
+      <input type="radio"  [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'visa' ? 'selected' : ''" width='12px' height="12px"  value="'visa'" [ngModelOptions]="{standalone: true}">
+      <img src="assets/images/visa.png">
+
+      <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'mastercard' ? 'selected' : ''" width='12px' height="12px" value="'mastercard'" [ngModelOptions]="{standalone: true}">
+      <img width="75px" src="assets/images/Mastercard.png">
+
+      <input type="radio" [(ngModel)]="card.cardType" [ngClass]="card.cardType == 'amex' ? 'selected' : ''" width='12px' height="12px"  value="'amex'" [ngModelOptions]="{standalone: true}">
+      <img src="assets/images/amex.png">
+
+
+      <!--<select placeholder="Card type" ng-model="card.cardType" ng-options="type for type in ['Visa', 'American Express', 'MasterCard']"></select>-->
+
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Charge Amount</span>
+        <input placeholder="Charge Amount" type="text" [(ngModel)]="card.amount"  name="cardAmount" [ngModelOptions]="{standalone: true}">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Name on card</span>
+        <input placeholder="Name on card*" type="text" [(ngModel)]="card.userName" >
+      </label>
+
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Card Number</span>
+        <input placeholder="Card Number*" type="text" [(ngModel)]="card.number" name="cardNumber" cc-number cc-type="card.cardType" [ngModelOptions]="{standalone: true}">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Card CVC</span>
+        <input placeholder="Card CVC*" type="text" [(ngModel)]="card.cvc" cc-type="cardNumber.$ccType"[ngModelOptions]="{standalone: true}">
+      </label>
+
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Expiration Date:</span>
+        <!-- <div cc-exp>
+          <input ng-model="card.exp_month" cc-exp-month style="height:30px;width:50px;border:1px solid grey; text-align:center" />
+          <input ng-model="card.exp_year" cc-exp-year style="height:30px;width:50px;border:1px solid grey; text-align:center" />
+        </div> -->
+        <div class="list row">
+          <label class="col col-33 item item-input ">
+            <span class="input-label item-stacked-label">Month :</span>
+            <input placeholder="06" type="text" [(ngModel)]="card.exp_month"  [ngModelOptions]="{standalone: true}">
+          </label>
+          <div class="col col-20"></div>
+          <label class="col col-33 item item-input item-stacked-label">
+            <span class="input-label">Year :</span>
+            <input placeholder="2016" type="text" [(ngModel)]="card.exp_year"  [ngModelOptions]="{standalone: true}">
+          </label>
+        </div>
+      </label>
+      <div class="row">
+        <div class="col col-top"></div>
+        <button type="submit" (click)='authorizeCreditCardMethod(card)' class="col col-67 button button-small button-block made-easy-button-setting">MAKE PAYMENT</button>
+        <div class="col col-top"></div>
       </div>
       <!--
       <p ng-show="paymentForm.cardNumber.$error.ccNumberType">That's not a valid {{card.cardType}}</p>
@@ -490,10 +395,18 @@
               <pre style="font-size:smaller">{{card | json}}</pre>
               <pre style="font-size:smaller">{{cardNumber | json}}</pre>
       -->
-  <!-- </form> -->
-</div>
+      <!-- </form> -->
+    </div>
 
 
+
+  </div>
+
+
+    <button [disabled]='underWeight || overWeight' type="submit" class="btn btn-secondary bg-inverse text-white btn-block text-uppercase"
+            id="place_order" data-value="Place order" (click)='pay("001")'>
+         Place Order
+    </button>
 
 </div>
 
