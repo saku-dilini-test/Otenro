@@ -80,6 +80,9 @@ export class ProductComponent implements OnInit {
             if (this.Data.variants.length > 0) {
                 this.selectedVariant = this.Data.variants[0];
                 this.selection = [];
+                this.selection1 = [];
+                this.selection2 = [];
+                this.selection3 = [];
                 console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
                 for (var i = 0; i < this.foodInfo.variants.length; i++) {
                     this.selection.push({ 'vType': this.foodInfo.variants[i].selection[0].vType });
@@ -101,7 +104,8 @@ export class ProductComponent implements OnInit {
     }
     changeVariant(variant) {
         this.selection1 = [];
-
+        this.selection2 = [];
+        this.selection3 = [];
         console.log("variant : " + variant);
         console.log("changeVariant called");
         console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
@@ -138,7 +142,8 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant2(variant) {
-      this.selection2 = [];
+        this.selection2 = [];
+        this.selection3 = [];
         console.log("variant : " + variant);
         console.log("changeVariant2 called");
         console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
@@ -165,7 +170,7 @@ export class ProductComponent implements OnInit {
         } else {
             console.log("else called");
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[1].vType == variant) {
+                if (this.foodInfo.variants[i].selection[1].vType == variant && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selection2.push({ 'vType': this.foodInfo.variants[i].selection[2].vType });
                 }
             }
@@ -177,7 +182,7 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant3(variant) {
-      this.selection3 = [];
+        this.selection3 = [];
         console.log("variant : " + variant);
         console.log("changeVariant3 called");
         if (variant) {
@@ -200,7 +205,7 @@ export class ProductComponent implements OnInit {
         } else {
             console.log("else called");
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[2].vType == variant) {
+                if (this.foodInfo.variants[i].selection[2].vType == variant && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 && this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
                     this.selection3.push({ 'vType': this.foodInfo.variants[i].selection[3].vType });
                     console.log("this.selection3  : " + JSON.stringify(this.selection3) + JSON.stringify(this.selection));
                 }
