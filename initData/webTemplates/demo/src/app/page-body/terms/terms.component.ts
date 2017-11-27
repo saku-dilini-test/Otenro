@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { SERVER_URL } from '../../constantsService';
+import * as data from '../../madeEasy.json';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-terms',
@@ -7,9 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsComponent implements OnInit {
 
-  constructor() { }
+  private appId = (<any>data).appId;
+  private userId = (<any>data).userId;
+  private terms;
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.get( SERVER_URL + '/templates/getTermsAndConditions?appId='+this.appId).subscribe((data)=> {
+      console.log("TermAndCondistion data " + data);
+      this.terms = data.termsAndCondition;
+  }),((err)=> {
+      alert('warning,Unable to get terms & condition info');
+  });
+
+this.terms = "This is terms and condition of this application ";
   }
 
 

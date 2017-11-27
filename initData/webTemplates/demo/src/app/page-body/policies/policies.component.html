@@ -1,15 +1,27 @@
- 
+
 <app-carousel
-   [slides]="slides">   
+   [slides]="slides">
 </app-carousel>
 
 
-<div class="container">
+<div class="card animated zoomIn">
+    <div class="content">
+
+        <div *ngIf="privacyPolicy" class="col align-center made-easy-header-font">privacyPolicy</div>
+        <div *ngIf="privacyPolicy" class="col align-center made-easy-content-font" [innerHTML]="privacyPolicy"></div>
+         <br>
+        <div *ngIf="returnPolicy" class="col align-center made-easy-header-font">ReturnPolicy</div>
+        <div *ngIf="returnPolicy" class="col align-center made-easy-content-font" [innerHTML]="returnPolicy"></div>
+
+    </div>
+</div>
+
+<!-- <div class="container">
   <div class="row">
     <div class="col-xs-12">
       <section class="section-policy">
-          
-          
+
+
         <h2>Privacy Policy</h2>
         <h3>Welcome to Otenro's Privacy Policy</h3>
         <p>1. Hi, we're Otenro Pty Ltd (ABN 11 119 159 741) and welcome to our privacy policy. This policy sets out how we handle personal information and applies across all of Otenro's businesses, including Otenro Market, Otenro Studio and Tuts+ (the Sites).</p>
@@ -86,4 +98,4 @@
       </section>
     </div>
   </div>
-</div>
+</div> -->

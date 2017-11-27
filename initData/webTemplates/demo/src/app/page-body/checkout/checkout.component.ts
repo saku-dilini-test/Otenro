@@ -40,7 +40,9 @@ export class CheckoutComponent implements OnInit {
   public zip;
   public taxTotal;
   public user;
-  public shippingData;
+  public shippingData = [];
+  public shippingDatas;
+
   public details = {};
   public finalDetails;
   public localData;
@@ -82,54 +84,6 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-//----------------------------PAYPAL------------------------------------------------
-  // title = 'app';
-
-  //   public didPaypalScriptLoad: boolean = false;
-  //   public loading: boolean = true;
-
-  //   public paypalConfig: any = {
-  //     env: 'sandbox',
-  //     client: {
-  //       sandbox: 'AWlMGZwpQbS0dq_r2Dt0ejp1TxDm72JD7Pt4Uc2mYlihAE3FU5axxS9wr4HcnVc13gB7TcbYDVLp9Vne',
-  //       production: 'xxxxxxxxxx'
-  //     },
-  //     commit: true,
-  //     payment: (data, actions) => {
-  //       return actions.payment.create({
-  //         payment: {
-  //           transactions: [
-  //             { amount: { total: '1.00', currency: 'CAD' } }
-  //           ]
-  //         }
-  //       });
-  //     },
-  //     onAuthorize: (data, actions) => {
-  //       // show success page
-  //     }
-  //   };
-
-  //   public ngAfterViewChecked(): void {
-  //     if(!this.didPaypalScriptLoad) {
-  //       this.loadPaypalScript().then(() => {
-  //         paypal.Button.render(this.paypalConfig, '#paypal-button');
-  //         this.loading = false;
-  //       });
-  //     }
-  //   }
-
-  //   public loadPaypalScript(): Promise<any> {
-  //     this.didPaypalScriptLoad = true;
-  //     return new Promise((resolve, reject) => {
-  //       const scriptElement = document.createElement('script');
-  //       scriptElement.src = 'https://www.paypalobjects.com/api/checkout.js';
-  //       scriptElement.onload = resolve;
-  //       document.body.appendChild(scriptElement);
-  //     });
-  //   }
-
-
-    //------------------------------------------------------------------------
   ngOnInit() {
 
     this._success.next('hello');
@@ -208,13 +162,16 @@ export class CheckoutComponent implements OnInit {
     if (this.formType == 'delivery') {
       this.http.post(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
         .subscribe((data) => {
-            this.shippingData = data;
+            this.shippingDatas = data;
+            console.log(" this.shippingData 1 : " + JSON.stringify( this.shippingDatas));
             // $log.debug($scope.shippingData);
-            for (var i = 0; i < this.shippingData.length; i++) {
-              if (this.shippingData[i].shippingOption == "Pick up") {
-                this.shippingData.splice([i], 1);
+            for (var i = 0; i < this.shippingDatas.length; i++) {
+              if (this.shippingDatas[i].shippingOption == "Flat Rate" ||
+                this.shippingDatas[i].shippingOption == "Weight Based") {
+                this.shippingData.push(this.shippingDatas[i]);
               }
             }
+            console.log(" this.shippingData 2 : " + JSON.stringify( this.shippingData));
           },
           function (err) {
             alert(
@@ -403,13 +360,16 @@ export class CheckoutComponent implements OnInit {
 
 
 
-  checkout() {
+  checkout(data) {
+
+console.log("data : " + JSON.stringify(data));
 
     this.isSelected = true;
     this.pickupData = {
       item: this.dataService.deliverItems,
       delivery: { location: "Pick up", method: "Pick up" },
-      pickupId: this.pickup[0].id,
+      pickupId: data.id,
+      pickupCost:data.cost,
       deliverDetails: { name: this.name, number: this.pkPhone },
 
     }
@@ -481,7 +441,7 @@ export class CheckoutComponent implements OnInit {
         }
         // $log.debug($scope.isApplyShippingCharge);
         if (this.isApplyShippingCharge == true && this.formType != 'pickup') {
-
+console.log("inside chk if");
           // $log.debug($scope.shippingCost);
           var shipping = parseInt(this.chkShippingCost);
           total = total + shipping;
@@ -494,11 +454,16 @@ export class CheckoutComponent implements OnInit {
             this.cart.totalPrice = total;
           }
         } else {
+          console.log("inside chk else");
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
-          if (typeof this.chkShippingCost == "undefined") {
+          if (typeof this.finalDetails.pickupCost == "undefined") {
             this.chkShippingCost = 0;
+          }else{
+            this.chkShippingCost = this.finalDetails.pickupCost;
           }
+          console.log("this.chkShippingCost  : " + this.chkShippingCost );
+
           if (tax > 0) {
             total = total + tax;
             this.totalPrice = total + parseInt(this.chkShippingCost);

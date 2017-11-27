@@ -15,7 +15,17 @@ SetUp Project
         > npm install
         > bower install
 
-(3) init preview data for templates preview
+
+Setup for Web-Applications
+===================================================================================================================
+(3) Node_modules for the web application:
+
+	goto --> initData --> previewData --> meServerFiles
+
+        > npm install
+		
+
+(4) init preview data for templates preview
 
     goto -> initData -> previewData - > importData.sh
 
@@ -30,7 +40,7 @@ SetUp Project
     (for windows platform  use cygwin (https://www.cygwin.com/) and Run 'sed -i 's/\r$//' importData.sh' and execute ./importData.sh )
 
 
-(4) Start project
+(5) Start project
 
 		goto -> config -> env -> development.js
 		goto -> assests -> js -> services -> appConfig.js
