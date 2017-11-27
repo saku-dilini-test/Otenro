@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SERVER_URL } from '../../constantsService';
+import * as data from '../../madeEasy.json';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-aboutus',
@@ -7,10 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutusComponent implements OnInit {
 
-  constructor() { }
+  private appId = (<any>data).appId;
+  private userId = (<any>data).userId;
+  private header;
+  private content;
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+
+    this.http.get(SERVER_URL + "/templates/getAboutUs?appId="+this.appId)
+    .subscribe( (data)=> {
+      console.log("data : " + JSON.stringify(data));
+        this.header = data.header;
+        this.content = data.content;
+    }, (err)=> {
+        alert(
+           'About us Data loading error!,Please check your connection!'
+        );
+    });
   }
+
 
   slides = SLIDES;
   lists = LISTS;

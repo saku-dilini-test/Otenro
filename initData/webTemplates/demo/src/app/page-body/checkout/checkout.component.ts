@@ -40,7 +40,9 @@ export class CheckoutComponent implements OnInit {
   public zip;
   public taxTotal;
   public user;
-  public shippingData;
+  public shippingData = [];
+  public shippingDatas;
+
   public details = {};
   public finalDetails;
   public localData;
@@ -82,54 +84,6 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-//----------------------------PAYPAL------------------------------------------------
-  // title = 'app';
-
-  //   public didPaypalScriptLoad: boolean = false;
-  //   public loading: boolean = true;
-
-  //   public paypalConfig: any = {
-  //     env: 'sandbox',
-  //     client: {
-  //       sandbox: 'AWlMGZwpQbS0dq_r2Dt0ejp1TxDm72JD7Pt4Uc2mYlihAE3FU5axxS9wr4HcnVc13gB7TcbYDVLp9Vne',
-  //       production: 'xxxxxxxxxx'
-  //     },
-  //     commit: true,
-  //     payment: (data, actions) => {
-  //       return actions.payment.create({
-  //         payment: {
-  //           transactions: [
-  //             { amount: { total: '1.00', currency: 'CAD' } }
-  //           ]
-  //         }
-  //       });
-  //     },
-  //     onAuthorize: (data, actions) => {
-  //       // show success page
-  //     }
-  //   };
-
-  //   public ngAfterViewChecked(): void {
-  //     if(!this.didPaypalScriptLoad) {
-  //       this.loadPaypalScript().then(() => {
-  //         paypal.Button.render(this.paypalConfig, '#paypal-button');
-  //         this.loading = false;
-  //       });
-  //     }
-  //   }
-
-  //   public loadPaypalScript(): Promise<any> {
-  //     this.didPaypalScriptLoad = true;
-  //     return new Promise((resolve, reject) => {
-  //       const scriptElement = document.createElement('script');
-  //       scriptElement.src = 'https://www.paypalobjects.com/api/checkout.js';
-  //       scriptElement.onload = resolve;
-  //       document.body.appendChild(scriptElement);
-  //     });
-  //   }
-
-
-    //------------------------------------------------------------------------
   ngOnInit() {
 
     this._success.next('hello');
@@ -208,13 +162,16 @@ export class CheckoutComponent implements OnInit {
     if (this.formType == 'delivery') {
       this.http.post(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
         .subscribe((data) => {
-            this.shippingData = data;
+            this.shippingDatas = data;
+            console.log(" this.shippingData 1 : " + JSON.stringify( this.shippingDatas));
             // $log.debug($scope.shippingData);
-            for (var i = 0; i < this.shippingData.length; i++) {
-              if (this.shippingData[i].shippingOption == "Pick up") {
-                this.shippingData.splice([i], 1);
+            for (var i = 0; i < this.shippingDatas.length; i++) {
+              if (this.shippingDatas[i].shippingOption == "Flat Rate" ||
+                this.shippingDatas[i].shippingOption == "Weight Based") {
+                this.shippingData.push(this.shippingDatas[i]);
               }
             }
+            console.log(" this.shippingData 2 : " + JSON.stringify( this.shippingData));
           },
           function (err) {
             alert(
