@@ -99,7 +99,7 @@ module.exports = {
           },
           function (err, httpResponse, body) {
               console.log(err, JSON.parse(body));
-              if (JSON.parse(body).success=='true'){
+              if (JSON.parse(body).success==true){
                   User.findOne({email: req.body.email}, function foundUser(err, user) {
                       if (err) return res.negotiate(err);
                       if (user) return res.status(409).json({error: 'already exists'});
