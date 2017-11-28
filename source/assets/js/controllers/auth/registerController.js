@@ -31,10 +31,13 @@
                     goog_report_conversion(O_SERVER_URL + "#templates");
                     $state.go('user.templates');
                 }
-            }).catch(function onError() {
-                toastr.error('Email already exists ' + $scope.user.email, 'Error', {
-                    closeButton: true
-                });
+            }).catch(function onError(err) {
+                if (err.data.error){
+                    toastr.error(err.data.error, 'Error', {
+                        closeButton: true
+                    });
+                }
+
             });
         };
         $scope.cancel = function () {
