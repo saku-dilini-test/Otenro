@@ -1,0 +1,12 @@
+<div class="list card" *ngFor="let order of orderHistory">
+  <div *ngFor="let item of order.item" class="item item-avatar">
+      <img src="{{imageURL}}/{{item.imgURL[0].img}}">
+      <h2>{{item.name}}</h2>
+      <h2>{{sign}}{{item.price}}</h2>
+      <h2>{{item.qty}}</h2>
+  </div>
+  <div class="item">
+      <p>Total - {{sign}}{{order.amount}}</p>
+      <p>Order Date - {{order.createdAt | date:'MM/dd/yyyy'}}</p>
+  </div>
+</div>
