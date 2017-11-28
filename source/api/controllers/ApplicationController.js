@@ -395,61 +395,75 @@ module.exports = {
                           /**
                            * If Only foodDemoApp or foodDemoApp2 Category & Product Feed to DB
                            */
+                          /**
+                           * ecommerce app details feed to DB
+                           */
+                          if(template[0].templateCategory=="2") {
+                              var searchAppInitialData = {
+                                  'templateName': templateName
+                              }
+                              AppInitialData.findOne(searchAppInitialData, function (err, appInitData) {
+                                  if (err) return done(err);
 
-                          // if(templateName == 'demo' ) {
-                          //     var mainNavi = [
-                          //     ];
-                          //
-                          //     var secondNavi = [];
-                          //
-                          //     var thirdNavi1 = [
-                          //
-                          //     ];
-                          //     var thirdNavi2 = [
-                          //
-                          //     ];
-                          //
-                          //     for (var i = 0; i < mainNavi.length; i++) {
-                          //         MainNavigation.create(mainNavi[i]).exec(function (err, mainN) {
-                          //             if (err) return err;
-                          //             /**
-                          //              * Add Second Navigation
-                          //              *
-                          //              */
-                          //
-                          //             if (mainN.name == "Category") {
-                          //                 for (var j = 0; j < secondNavi.length; j++) {
-                          //                     secondNavi[j].mainId = mainN.id;
-                          //                     SecondNavigation.create(secondNavi[j]).exec(function (err, secondN) {
-                          //                         if (err) return err;
-                          //
-                          //                         /**
-                          //                          * Add Third NavigatThirdNavigation.jsion
-                          //                          */
-                          //
-                          //                         if (j == 0) {
-                          //                             for (var z = 0; z < thirdNavi1.length; z++) {
-                          //                                 thirdNavi1[z].childId = secondN.id;
-                          //
-                          //                                 ThirdNavigation.create(thirdNavi1[z]).exec(function (err, thirdN) {
-                          //                                     if (err) return err;
-                          //                                 });
-                          //                             }
-                          //                         } else {
-                          //                             for (var z = 0; z < thirdNavi2.length; z++) {
-                          //                                 thirdNavi2[z].childId = secondN.id;
-                          //                                 ThirdNavigation.create(thirdNavi2[z]).exec(function (err, thirdN) {
-                          //                                     if (err) return err;
-                          //                                 });
-                          //
-                          //                             }
-                          //                         }
-                          //                     });
-                          //                 }
-                          //             }
-                          //         });
-                          //     }
-                          // }
+                                  /**
+                                   * add Second Navigation
+                                   */
+                                  var secondNaviList = appInitData.secondNavi;
+                                  secondNaviList.forEach(function(secondNavi){
+                                      var scondNaviAttribute = secondNavi.attribute;
+                                      scondNaviAttribute.templateName = appInitData.templateName;
+                                      scondNaviAttribute.appId = app.id;
+                                      var thirdNaviList = secondNavi.thirdNavi;
+                                      SecondNavigation.create(scondNaviAttribute).exec(function (err, secondN) {
+                                          if (err) return err;
+                                          /**
+                                           * Add Third Navigation
+                                           */
+                                          for (var j = 0; j < thirdNaviList.length; j++) {
+                                              thirdNaviList[j].appId = app.id;
+                                              thirdNaviList[j].childId = secondN.id;
+
+                                              ThirdNavigation.create(thirdNaviList[j]).exec(function (err, thirdN) {
+                                                  if (err) return err;
+                                              });
+                                          }
+                                      });
+
+                                  })
+                              });
+
+                              /**
+                               *  media app details feed to DB
+                               */
+                          }else if(template[0].templateCategory=="3"){
+
+                              var searchAppInitialData = {
+                                  'templateName' : templateName
+                              }
+                              AppInitialData.findOne(searchAppInitialData, function(err, appInitData) {
+                                  if (err) return done(err);
+                                  var articleCategoryList = appInitData.articleCategory;
+                                  articleCategoryList.forEach(function (articleCategory) {
+                                      var articleCategoryattribute = articleCategory.attribute;
+                                      articleCategoryattribute.appId = app.id;
+                                      var articalList = articleCategory.article;
+
+                                      ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+
+                                          articalList.forEach(function (article) {
+                                              var articalAttribute = article;
+                                              articalAttribute.appId = app.id;
+                                              articalAttribute.categoryId = articleCategory.id;
+                                              Article.create(articalAttribute).exec(function (err, artical) {
+                                                  if (err) return err;
+                                              });
+                                          });
+                                      })
+                                  })
+                              });
+                          }
+
+
                           res.send({
                               appId: app.id,
                               message: "New Application has been created"
