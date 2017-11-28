@@ -86,8 +86,8 @@
          *Live preview Area display
          */
         if ($scope.isNew == 'true' || $scope.isNew == true) {
-            $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/webTemplates' + '/' + $scope.appId + '/src';
-            $scope.urlPath1 = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/webTemplates' + '/' + $scope.appId + '/src';
+            $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/progressiveTemplates' + '/' + $scope.appId + '/src';
+            $scope.urlPath1 = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/progressiveTemplates' + '/' + $scope.appId + '/src';
 
         }else{
         $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/templates' + '/' + $scope.appId + '/';

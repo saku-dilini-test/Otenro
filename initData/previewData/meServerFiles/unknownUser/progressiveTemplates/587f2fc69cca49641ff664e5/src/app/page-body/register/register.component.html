@@ -1,0 +1,84 @@
+<app-carousel
+  [slides]="slides">
+</app-carousel>
+
+<div class="container">
+
+  <div class="form-group row">
+    <label for="fname" class="col-2 col-form-label">First Name</label>
+    <div class="col-10">
+      <input class="form-control" type="text" id="fname"  [(ngModel)] = "fname" placeholder="Arstina"  ng-required>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="lname" class="col-2 col-form-label">Last Name</label>
+    <div class="col-10">
+      <input class="form-control" type="text" placeholder="Kale" id="lname" [(ngModel)] = "lname" placeholder=""  ng-required>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="email" class="col-2 col-form-label">Email</label>
+    <div class="col-10">
+      <input class="form-control" type="email"  id="email"  [(ngModel)] = "email" name="email" placeholder="you@example.com"  ng-required>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="password" class="col-2 col-form-label">Password</label>
+    <div class="col-10">
+      <input class="form-control" type="password" id="password" [(ngModel)] = "password" name="password" ng-required >
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="streetNumber" class="col-2 col-form-label">Street Number</label>
+    <div class="col-10">
+      <input class="form-control" type="text" id="streetNumber" [(ngModel)] = "streetNumber" placeholder="#244 A"  ng-required>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="streetName" class="col-2 col-form-label">Street Name</label>
+    <div class="col-10">
+      <input class="form-control" type="text"  id="streetName" [(ngModel)] = "streetName" placeholder="Your Road" ng-required>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="city" class="col-2 col-form-label">City</label>
+    <div class="col-10">
+      <input class="form-control" type="text"  id="city" [(ngModel)] = "city" placeholder="Your City"  ng-required>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="selectedCountry" class="col-2 col-form-label">Country</label>
+    <div class="col-10">
+      <select class="form-control" id="selectedCountry" [(ngModel)]="selectedCountry" (ngModelChange)="changeCountry(selectedCountry)">
+        <option *ngFor="let c of countries">{{c.countryName}} </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="zip" class="col-2 col-form-label">Zip/ Postal Code</label>
+    <div class="col-10">
+      <input class="form-control" type="text" id="zip" [(ngModel)] = "zip" placeholder="70000"  ng-required>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="phone" class="col-2 col-form-label">Phone Number</label>
+    <div class="col-10">
+      <input class="form-control" type="tel" id="phone" [(ngModel)] = "phone" pattern="\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|
+                                      2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|
+                                      4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$"
+             name="phone" placeholder="0712345678"  ng-required>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <button class="btn btn-primary btn-lg" (click) = "signUp()" >Sign up </button>
+    </div>
+  </div>
+</div>
+
+<hr class="featurette-divider">
