@@ -1,9 +1,0 @@
-{
-  "name": "web",
-  "appId": "59fab86ea1aca4e840efe9f6",
-  "userId": "59ed6c1ba7399ab3144c6c04",
-  "serviceApi": {
-    "host": "http://localhost",
-    "port": 1337
-  }
-}
