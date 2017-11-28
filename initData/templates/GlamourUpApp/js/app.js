@@ -157,6 +157,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
     }
   })
   .state('app.login', {
+      cache: false,
       url: '/login',
       params:{
         item: null
@@ -168,6 +169,7 @@ mobileApp.config(function($stateProvider, $urlRouterProvider) {
       }
   })
   .state('app.register', {
+      cache: false,
       url: '/register',
       params:{
         item: null

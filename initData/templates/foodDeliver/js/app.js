@@ -199,11 +199,13 @@ mobileApp.config(function($routeProvider) {
             activePage: 'promoDetail'
         })
         .when('/register', {
+            cache: false,
             templateUrl: 'tpl/register.html',
             controller: 'registerController',
             activePage: 'register'
         })
         .when('/login', {
+            cache: false,
             templateUrl: 'tpl/login.html',
             controller: 'loginController',
             activePage: 'login'

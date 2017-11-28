@@ -141,6 +141,7 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
 
             // Each tab has its own nav history stack:
             .state('tab.login', {
+                cache: false,
                 url: '/login',
                 params:{
                     item: null
@@ -152,6 +153,7 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                 }
             })
             .state('tab.register', {
+                cache: false,
                 url: '/register',
                 params:{
                     item: null
