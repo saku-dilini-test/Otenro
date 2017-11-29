@@ -53,7 +53,7 @@
         <div>
           <div class="custom-controls-stacked">
             <label class="custom-control  mt-3"  *ngFor="let ship of shippingData, let idx = index">
-              <input  #r id="radioStacked1" name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping" (change)='addShipping(ship)'>
+              <input  #r id="radioStacked1" name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping" (change)='addShipping(ship,$event)'>
               <span class="custom-control-indicator"></span>
               <h5 class="custom-control-description pr-3">{{ship.optionName}}</h5>
               <span>({{ship.shippingOption}})</span>
@@ -86,7 +86,7 @@
       <div  class="row">
           <div class="custom-controls-stacked col-sm-4" *ngFor="let pick of pickup, let idx = index">
             <label class="custom-control  mt-3">
-              <input  #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout()'>
+              <input  #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx])'>
               <span class="custom-control-indicator"></span>
               <h5 class="custom-control-description pr-3">{{pick.locationName}}</h5>
             </label>
@@ -167,7 +167,7 @@
         <td></td>
         <td>{{sign}}{{chkShippingCost}}</td>
       </tr>
-      <tr *ngIf='chkShippingCost > 0'>
+      <tr *ngIf='chkPickupCost > 0'>
         <th>Pick up cost</th>
         <td></td>
         <td>{{sign}}{{chkShippingCost}}</td>
@@ -312,10 +312,10 @@
   </div>
 
 
-    <button [disabled]='underWeight || overWeight' type="submit" class="btn btn-secondary bg-inverse text-white btn-block text-uppercase"
-            id="place_order" data-value="Place order" (click)='pay("001")'>
-         Place Order
-    </button>
+    <!--<button [disabled]='underWeight || overWeight' type="submit" class="btn btn-secondary bg-inverse text-white btn-block text-uppercase"-->
+            <!--id="place_order" data-value="Place order" (click)='pay("001")'>-->
+         <!--Place Order-->
+    <!--</button>-->
 
 </div>
 
