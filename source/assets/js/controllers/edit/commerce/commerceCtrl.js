@@ -756,9 +756,10 @@
         $scope.nextStep1 = function () {
 
         };
-        $scope.updateEmailSettings = function (email, type) {
+        $scope.updateEmailSettings = function (email, type, emailType) {
 
-            //$log.debug(email);
+            var imageData ;
+
             if(email == undefined){
                 toastr.error('Please fill the all fields','Warning',{
                     closeButton: true
@@ -768,17 +769,40 @@
                 email.appId = $rootScope.appId;
                 commerceService.updateEmailSettings(email)
                     .success(function (data) {
-                        //$log.debug(data);
-                        if (type == "next") {
-                            var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
-                            $scope.selectedIndex = index;
+                        var data = {"emailType" : emailType,"appId":$rootScope.appId,"userId":$auth.getPayload().id};
+                        if (emailType=="orderConfirmedEmail"){
+                            imageData = $scope.picFileHeader;
+                        }else if (emailType=="orderFulfilledEmail"){
+                            imageData = $scope.picFileHeader2;
+                        }else {
+                            imageData = $scope.picFileHeader3;
                         }
-                        toastr.success('Email Settings has been changed ', 'Success', {
-                            closeButton: true
-                        });
-                        if ($scope.selectedIndex==6){
+
+                        console.log("imageData " + imageData);
+
+                        commerceService.updateHeaderFooterSettings(imageData,data).success(function (data) {
+
+
+                            if (type == "next") {
+                                var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
+                                $scope.selectedIndex = index;
+                            }
+
+                            if ($scope.selectedIndex==6){
+                                $mdDialog.hide();
+                            }
+
+                            toastr.success('Email Settings has been changed ', 'Success', {
+                                closeButton: true
+                           });
+
+                        }).error(function (err) {
+                            toastr.error('Unable to Create', 'Warning', {
+                                closeButton: true
+                            });
                             $mdDialog.hide();
-                        }
+                        })
+
 
 
                     }).error(function (err) {
@@ -790,7 +814,7 @@
             }
 
         };
-        $scope.updateHeaderFooterSettings = function (picFileHeader, picFileFooter, email, type) {
+        /*$scope.updateHeaderFooterSettings = function (picFileHeader, picFileFooter, email, type) {
 
             //$log.debug(email);
             if(email == undefined || email.footer == undefined || email.header == undefined || email.footer == '' || email.header == ''){
@@ -823,7 +847,7 @@
                 })
             }
 
-        };
+        };*/
         var prams = {
             appId: $rootScope.appId
         };
@@ -854,15 +878,17 @@
                     var imagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
                         +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=email/";
 
-                    $scope.picFileFooter =  imagePath + $scope.email.imageFooter;
-                    $scope.picFileHeader =  imagePath + $scope.email.imageHeader;
-                    $scope.OConfirm = {
+                    //$scope.picFileFooter =  imagePath + $scope.email.imageFooter;
+                    $scope.picFileHeader =  imagePath + $scope.email.orderConfirmedEmailImage;
+                    $scope.picFileHeader2 =  imagePath + $scope.email.orderFulfilledEmailImage;
+                    $scope.picFileHeader3 =  imagePath + $scope.email.orderRefundedEmailImage;
+                    $scope.orderConfirmedEmail = {
                         orderConfirmedEmail: $scope.email.orderConfirmedEmail
                     }
-                    $scope.Ofulfilled = {
+                    $scope.orderFulfilledEmail = {
                         orderFulfilledEmail: $scope.email.orderFulfilledEmail
                     }
-                    $scope.ORefund = {
+                    $scope.orderRefundEmail = {
                         orderRefundEmail: $scope.email.orderRefundEmail
                     }
                 }

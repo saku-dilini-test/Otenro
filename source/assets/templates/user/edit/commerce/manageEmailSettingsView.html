@@ -312,23 +312,23 @@
                                 <label>Header</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <div class="custom-trix">
-                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="OConfirm.orderConfirmedEmail" required></text-angular>
+                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="orderConfirmedEmail.orderConfirmedEmail.header" required></text-angular>
                                     <!--<trix-editorsada style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
                                 </div>
                                 <p>
                                     <br>
                                     <label>Select below to add to the email</label>
-                                    <md-checkbox aria-label="Delivery and shhipping Details" ng-model="data.delivery">
+                                    <md-checkbox aria-label="Delivery and shhipping Details" ng-model="orderConfirmedEmail.orderConfirmedEmail.delivery">
                                         Delivery and shhipping Details
                                     </md-checkbox>
                                     <br>
 
-                                    <md-checkbox aria-label="Order" ng-model="data.order">
+                                    <md-checkbox aria-label="Order" ng-model="orderConfirmedEmail.orderConfirmedEmail.order">
                                         Order
                                     </md-checkbox>
                                     <br>
 
-                                    <md-checkbox aria-label="Store details">
+                                    <md-checkbox aria-label="Store details" ng-model="orderConfirmedEmail.orderConfirmedEmail.storeDetails">
                                         Store details
                                     </md-checkbox>
                                 </p>
@@ -338,10 +338,10 @@
                                 ;"/><br>
                                 <img ng-if="picFileHeader != null" ngf-src="picFileHeader" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
                                 <p>
-                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="OConfirm.orderConfirmedEmail" disabled></text-angular>
+                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderConfirmedEmail.orderConfirmedEmail.header" disabled></text-angular>
                                 </p>
                                 <p>
-                                    <div class="row" ng-if="data.delivery">
+                                    <div class="row" ng-if="orderConfirmedEmail.orderConfirmedEmail.delivery">
                                         <div class="col-md-6">
                                             <span><b>Delivered to</b></span><br>
                                 <p>John Doe, 488, Kotte ROad, Pitakotte</p>
@@ -351,13 +351,13 @@
                                 <p>Express Delivery</p>
                             </div>
                         </div>
-                        <div class="row" ng-if="data.order">
+                        <div class="row" ng-if="orderConfirmedEmail.orderConfirmedEmail.order">
                             <div class="col-md-12">
                                 <span><b>Your Order</b></span><br>
                                 <p>Order Number:1234567890</p>
                             </div>
                         </div>
-                        <div class="row"  ng-if="data.order">
+                        <div class="row"  ng-if="orderConfirmedEmail.orderConfirmedEmail.order">
                             <div class="col-md-7">
                                 <span><b>Item Description</b></span>
                                 <br>
@@ -378,7 +378,7 @@
                                 <p>560.00</p>
                             </div>
                         </div>
-                        <div class="row"  ng-if="data.order">
+                        <div class="row"  ng-if="orderConfirmedEmail.orderConfirmedEmail.order">
                             <div class="col-md-7">
                                 <p>
                                     <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
@@ -393,7 +393,7 @@
                                 <p>6000.00</p>
                             </div>
                         </div>
-                        <div class="col-md-12"  ng-if="data.order">
+                        <div class="col-md-12"  ng-if="orderConfirmedEmail.orderConfirmedEmail.order">
                             <div class="col-md-7 text-right">Sub Total</div>
                             <div class="col-md-5">6560.00</div>
                             <div class="col-md-7 text-right">Delivery</div>
@@ -422,9 +422,9 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(OConfirm,'save')">Save
+                            <md-button class="me-default-button" ng-click="updateEmailSettings(orderConfirmedEmail,'save','orderConfirmedEmail')">Save
                             </md-button>
-                            <md-button class="me-default-button" ng-disabled="orderConfirmationForm.$invalid" ng-click="updateEmailSettings(OConfirm,'next')">Next</md-button>
+                            <md-button class="me-default-button" ng-disabled="orderConfirmationForm.$invalid" ng-click="updateEmailSettings(orderConfirmedEmail,'next')">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -446,7 +446,6 @@
                                 <div class="email-image-upload uploaded-section clearfix">
                                     <div class="uploaded-new-image3">
                                         <label>Insert Header Image</label><br>
-
                                         <button class="btn-material" ngf-select ng-model="picFileHeader2" ngf-accept="image/*"
                                                 aria-invalid="true" ngf-change="changeImage()" required>
                                             Upload Image
@@ -454,29 +453,28 @@
                                         <md-button class="md-icon-button" aria-label="Delete" ng-click="picFileHeader2 = null">
                                             <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
                                         </md-button>
-                                        <p></p><br>
                                     </div>
                                 </div>
                                 <label>Header</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <div class="custom-trix">
-                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="Ofulfilled.orderFulfilledEmail" required></text-angular>
+                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="orderFulfilledEmail.orderFulfilledEmail.header" required></text-angular>
                                     <!--<trix-editorsada style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
                                 </div>
                                 <p>
                                     <br>
                                     <label>Select below to add to the email</label>
-                                    <md-checkbox aria-label="Delivery and shhipping Details" ng-model="data.delivery">
+                                    <md-checkbox aria-label="Delivery and shhipping Details" ng-model="orderFulfilledEmail.orderFulfilledEmail.delivery">
                                         Delivery and shhipping Details
                                     </md-checkbox>
                                     <br>
 
-                                    <md-checkbox aria-label="Order" ng-model="data.order">
+                                    <md-checkbox aria-label="Order" ng-model="orderFulfilledEmail.orderFulfilledEmail.order">
                                         Order
                                     </md-checkbox>
                                     <br>
 
-                                    <md-checkbox aria-label="Store details">
+                                    <md-checkbox aria-label="Store details" ng-model="orderFulfilledEmail.orderFulfilledEmail.storeDetails" >
                                         Store details
                                     </md-checkbox>
                                 </p>
@@ -485,10 +483,10 @@
                                 <img ng-if="picFileHeader2 == null" ng-src="images/1000x200.png"  width="100%" height="80px" style="display: block;margin: 16px auto 0 auto;"/><br>
                                 <img ng-if="picFileHeader2 != null" ngf-src="picFileHeader2" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto;"> <br>
                                 <p>
-                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="Ofulfilled.orderFulfilledEmail" disabled></text-angular>
+                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderFulfilledEmail.orderFulfilledEmail.header" disabled></text-angular>
                                 </p>
                                 <p>
-                                    <div class="row" ng-if="data.delivery">
+                                    <div class="row" ng-if="orderFulfilledEmail.orderFulfilledEmail.delivery">
                                         <div class="col-md-6">
                                             <span><b>Delivered to</b></span><br>
                                 <p>John Doe, 488, Kotte ROad, Pitakotte</p>
@@ -498,13 +496,13 @@
                                 <p>Express Delivery</p>
                             </div>
                         </div>
-                        <div class="row" ng-if="data.order">
+                        <div class="row" ng-if="orderFulfilledEmail.orderFulfilledEmail.order">
                             <div class="col-md-12">
                                 <span><b>Your Order</b></span><br>
                                 <p>Order Number:1234567890</p>
                             </div>
                         </div>
-                        <div class="row"  ng-if="data.order">
+                        <div class="row"  ng-if="orderFulfilledEmail.orderFulfilledEmail.order">
                             <div class="col-md-7">
                                 <span><b>Item Description</b></span>
                                 <br>
@@ -525,7 +523,7 @@
                                 <p>560.00</p>
                             </div>
                         </div>
-                        <div class="row"  ng-if="data.order">
+                        <div class="row"  ng-if="orderFulfilledEmail.orderFulfilledEmail.order">
                             <div class="col-md-7">
                                 <p>
                                     <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
@@ -540,7 +538,7 @@
                                 <p>6000.00</p>
                             </div>
                         </div>
-                        <div class="col-md-12"  ng-if="data.order">
+                        <div class="col-md-12"  ng-if="orderFulfilledEmail.orderFulfilledEmail.order">
                             <div class="col-md-7 text-right">Sub Total</div>
                             <div class="col-md-5">6560.00</div>
                             <div class="col-md-7 text-right">Delivery</div>
@@ -568,9 +566,9 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(Ofulfilled,'save')">Save
+                            <md-button class="me-default-button" ng-click="updateEmailSettings(orderFulfilledEmail,'save','orderFulfilledEmail')">Save
                             </md-button>
-                            <md-button class="me-default-button" ng-disabled="orderFulfillForm.$invalid" ng-click="updateEmailSettings(Ofulfilled,'next')">Next</md-button>
+                            <md-button class="me-default-button" ng-disabled="orderFulfillForm.$invalid" ng-click="updateEmailSettings(orderFulfilledEmail,'next')">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -606,23 +604,23 @@
                                 <label>Header</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
                                 <div class="custom-trix">
-                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="ORefund.orderRefundEmail" required></text-angular>
+                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="orderRefundEmail.orderRefundEmail.header" required></text-angular>
                                     <!--<trix-editorsada style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
                                 </div>
                                 <p>
                                     <br>
                                     <label>Select below to add to the email</label>
-                                    <md-checkbox aria-label="Delivery and shhipping Details" ng-model="data.delivery">
+                                    <md-checkbox aria-label="Delivery and shhipping Details" ng-model="orderRefundEmail.orderRefundEmail.delivery">
                                         Delivery and shhipping Details
                                     </md-checkbox>
                                     <br>
 
-                                    <md-checkbox aria-label="Order" ng-model="data.order">
+                                    <md-checkbox aria-label="Order" ng-model="orderRefundEmail.orderRefundEmail.order">
                                         Order
                                     </md-checkbox>
                                     <br>
 
-                                    <md-checkbox aria-label="Store details">
+                                    <md-checkbox aria-label="Store details" ng-model="orderRefundEmail.orderRefundEmail.storeDetails">
                                         Store details
                                     </md-checkbox>
                                 </p>
@@ -631,10 +629,10 @@
                                 <img ng-if="picFileHeader3 == null" ng-src="images/1000x200.png"  width="100%" height="80px" style="display: block;margin: 16px auto 0 auto"/><br>
                                 <img ng-if="picFileHeader3 != null" ngf-src="picFileHeader3" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
                                 <p>
-                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="ORefund.orderRefundEmail" disabled></text-angular>
+                                    <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderRefundEmail.orderRefundEmail.header" disabled></text-angular>
                                 </p>
                                 <p>
-                                    <div class="row" ng-if="data.delivery">
+                                    <div class="row" ng-if="orderRefundEmail.orderRefundEmail.delivery">
                                         <div class="col-md-6">
                                             <span><b>Delivered to</b></span><br>
                                 <p>John Doe, 488, Kotte ROad, Pitakotte</p>
@@ -644,13 +642,13 @@
                                 <p>Express Delivery</p>
                             </div>
                         </div>
-                        <div class="row" ng-if="data.order">
+                        <div class="row" ng-if="orderRefundEmail.orderRefundEmail.order">
                             <div class="col-md-12">
                                 <span><b>Your Order</b></span><br>
                                 <p>Order Number:1234567890</p>
                             </div>
                         </div>
-                        <div class="row"  ng-if="data.order">
+                        <div class="row"  ng-if="orderRefundEmail.orderRefundEmail.order">
                             <div class="col-md-7">
                                 <span><b>Item Description</b></span>
                                 <br>
@@ -671,7 +669,7 @@
                                 <p>560.00</p>
                             </div>
                         </div>
-                        <div class="row"  ng-if="data.order">
+                        <div class="row"  ng-if="orderRefundEmail.orderRefundEmail.order">
                             <div class="col-md-7">
                                 <p>
                                     <img src="./images/small-placeholder.png" class="pull-left" style="margin-right: 5px;">
@@ -686,7 +684,7 @@
                                 <p>6000.00</p>
                             </div>
                         </div>
-                        <div class="col-md-12"  ng-if="data.order">
+                        <div class="col-md-12"  ng-if="orderRefundEmail.orderRefundEmail.order">
                             <div class="col-md-7 text-right">Sub Total</div>
                             <div class="col-md-5">6560.00</div>
                             <div class="col-md-7 text-right">Delivery</div>
@@ -714,9 +712,9 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(ORefund,'save')">Save
+                            <md-button class="me-default-button" ng-click="updateEmailSettings(orderRefundEmail,'save','orderRefundEmail')">Save
                             </md-button>
-                            <md-button class="me-default-button" ng-disabled="orderRefundForm.$invalid" ng-click="updateEmailSettings(ORefund,'next')">Finish</md-button>
+                            <md-button class="me-default-button" ng-disabled="orderRefundForm.$invalid" ng-click="updateEmailSettings(orderRefundEmail,'next')">Finish</md-button>
                         </div>
                     </div>
                 </md-tab-body>

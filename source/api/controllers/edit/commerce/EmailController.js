@@ -42,7 +42,7 @@ module.exports = {
     },
     updateEmailSettings : function(req,res){
 
-        sails.log.info(req.body);
+        console.log(req.body);
         var appId = req.param('appId');
         sails.log.info(appId);
         var saveData = req.body;
@@ -55,21 +55,22 @@ module.exports = {
             });
         });
     },
+
+
     updateHeaderFooterSettings : function(req,res){
 
         var appRoot = path.resolve();
         //var dePath= appRoot + '/assets/images/';
-        var appId = req.param('appId');
+        var appId = req.body.appId;
         var dePath      = config.APP_FILE_SERVER + req.body.userId + '/templates/' + appId + '/img/email/';
 
-        var appId = req.param('appId');
-        var saveData = req.body;
+        console.log("dePath " + dePath);
 
-        sails.log.info(dePath);
-        //sails.log.info(req.file('file'));
-        //sails.log.info(req.file('file'));
+        //var appId = req.param('appId');
+        var saveData ="";
 
-       // if(saveData.file != "") {
+        console.log(" req.body.emailType "+ JSON.stringify(req.body) + " appId " + appId);
+
 
             req.file('file').upload({
                 dirname: require('path').resolve(dePath)
@@ -82,19 +83,25 @@ module.exports = {
                     fs.rename(uploadedFiles[0].fd, dePath + '/' + newFileName, function (err) {
                         if (err) return res.send(err);
                     });
-                    var newFileName2 = Date.now() + uploadedFiles[1].filename;
-                    fs.rename(uploadedFiles[1].fd, dePath + '/' + newFileName2, function (err) {
-                        if (err) return res.send(err);
-                    });
 
-                    saveData.imageHeader = newFileName;
-                    saveData.imageFooter = newFileName2;
+                    console.log("newFileName " + newFileName);
+
+
+                    if( req.body.emailType=='orderConfirmedEmail'){
+                        console.log("1");
+                        saveData = {"orderConfirmedEmailImage" : newFileName };
+                    }else if (req.body.emailType=='orderRefundEmail'){
+                        console.log("2");
+                        saveData = {"orderRefundedEmailImage" : newFileName };
+                    }else if (req.body.emailType=='orderFulfilledEmail') {
+                        console.log("3");
+                        saveData = {"orderFulfilledEmailImage" : newFileName };
+
+                    }
+
                 }
 
-
-
-      //  }
-            sails.log.info(saveData);
+                console.log("saveData 2 "+ JSON.stringify(saveData));
 
             UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
                 if (err) return done(err);
@@ -106,6 +113,8 @@ module.exports = {
             });
 
     },
+
+
     getEmailSettings : function(req,res){
 
         sails.log.info(req.body);
