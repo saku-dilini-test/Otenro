@@ -62,8 +62,8 @@ export class CheckoutComponent implements OnInit {
   public name;
   public pickup;
   public pickupData;
-  underWeight;
-  overWeight;
+  underWeight = false;
+  overWeight = false;
   public paymentData;
   public deliveryShow;
   public pickupShow;
@@ -81,7 +81,7 @@ export class CheckoutComponent implements OnInit {
   public authorizeCreditCard;
   public orderDetails;
   public orderd = false;
-
+  
   constructor(private localStorageService: LocalStorageService, private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
 
   }
@@ -108,6 +108,7 @@ export class CheckoutComponent implements OnInit {
       this.isAdded = true;
 
       this.fname = this.dataService.userData.name;
+      this.lname = this.dataService.userData.lname;
       this.email = this.dataService.userData.email;
       this.phone = this.dataService.userData.phone;
       this.country = this.dataService.userData.country;
@@ -358,7 +359,7 @@ export class CheckoutComponent implements OnInit {
     this.chk(shippingDetails);
 
     setTimeout(()=>{ this.pay("001"); }, 500);
-
+    
 
   }
 

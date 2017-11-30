@@ -118,11 +118,11 @@
             <div class="pb-4 border-bottom">
               <div class="d-inline quantity mr-2 p-2">
                 <span (click)="descrease()"> - </span>
-                <input type="number"  min="1" value="selectedVariant.buyQuantity" [(ngModel)]="selectedVariant.buyQuantity" (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)">
+                <input type="number"  min="1" value="selectedVariant.buyQuantity" [disabled]="lockBuyButton == false" [(ngModel)]="selectedVariant.buyQuantity" (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)">
                 <span (click)="increase()"> + </span>
 
               </div>
-              <button (click) = 'addToCart()'  class="pull-right clearfix d-inline btn btn-lg btn-primary btn-effect" [disabled]=" selectedVariant.buyQuantity <= 0 ">add to cart</button>
+              <button (click) = 'addToCart()'  class="pull-right clearfix d-inline btn btn-lg btn-primary btn-effect" [disabled]=" selectedVariant.buyQuantity <= 0 || selectedVariant.buyQuantity == undefined">add to cart</button>
             </div>
 
                     <footer class="mt-5">

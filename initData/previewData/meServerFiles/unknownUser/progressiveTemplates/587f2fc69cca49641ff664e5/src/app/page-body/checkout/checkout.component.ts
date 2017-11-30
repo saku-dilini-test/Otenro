@@ -62,8 +62,8 @@ export class CheckoutComponent implements OnInit {
   public name;
   public pickup;
   public pickupData;
-  underWeight;
-  overWeight;
+  underWeight = false;
+  overWeight = false;
   public paymentData;
   public deliveryShow;
   public pickupShow;
@@ -76,10 +76,12 @@ export class CheckoutComponent implements OnInit {
   public card;
   orderHistory = [];
   history;
+  private chkPickupCost;
   public makeStripePayment;
   public authorizeCreditCard;
   public orderDetails;
   public orderd = false;
+  
   constructor(private localStorageService: LocalStorageService, private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
 
   }
@@ -106,6 +108,7 @@ export class CheckoutComponent implements OnInit {
       this.isAdded = true;
 
       this.fname = this.dataService.userData.name;
+      this.lname = this.dataService.userData.lname;
       this.email = this.dataService.userData.email;
       this.phone = this.dataService.userData.phone;
       this.country = this.dataService.userData.country;
@@ -235,7 +238,8 @@ export class CheckoutComponent implements OnInit {
     }
   };
 
-  addShipping(shippingDetails) {
+  addShipping(shippingDetails,e) {
+    console.log(e);
     this.isSelected = true;
     console.log('shippingDetails : ' + JSON.stringify(shippingDetails));
     var total = 0;
@@ -353,6 +357,10 @@ export class CheckoutComponent implements OnInit {
 
     // this.dataService.finalDetails = shippingDetails;
     this.chk(shippingDetails);
+
+    setTimeout(()=>{ this.pay("001"); }, 500);
+    
+
   }
 
 
@@ -375,6 +383,7 @@ console.log("data : " + JSON.stringify(data));
     }
     console.log("this.pickupData : " + JSON.stringify(this.pickupData));
     this.chk(this.pickupData);
+    setTimeout(()=>{ this.pay("001"); }, 500);
   };
 
 
@@ -458,18 +467,25 @@ console.log("inside chk if");
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
           if (typeof this.finalDetails.pickupCost == "undefined") {
-            this.chkShippingCost = 0;
+            this.chkPickupCost = 0;
           }else{
-            this.chkShippingCost = this.finalDetails.pickupCost;
+            this.chkPickupCost = this.finalDetails.pickupCost;
           }
           console.log("this.chkShippingCost  : " + this.chkShippingCost );
 
           if (tax > 0) {
             total = total + tax;
+            if(this.chkPickupCost == 0){
             this.totalPrice = total + parseInt(this.chkShippingCost);
+            }else{
+              this.totalPrice = total + parseInt(this.chkPickupCost);
+            }
           } else {
-            this.totalPrice = total + parseInt(this.chkShippingCost);
-          }
+            if(this.chkPickupCost == 0){
+              this.totalPrice = total + parseInt(this.chkShippingCost);
+              }else{
+                this.totalPrice = total + parseInt(this.chkPickupCost);
+              }          }
         }
 
       });
