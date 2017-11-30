@@ -170,7 +170,7 @@
       <tr *ngIf='chkPickupCost > 0'>
         <th>Pick up cost</th>
         <td></td>
-        <td>{{sign}}{{chkShippingCost}}</td>
+        <td>{{sign}}{{chkPickupCost}}</td>
       </tr>
       <tr>
         <th>Tax({{chkTax}}%)</th>
@@ -197,14 +197,14 @@
 
 
   <br>
-  <div *ngIf="overWeight">Over weight. Cannot ship</div>
-  <div *ngIf="underWeight">Under weight. Cannot ship</div>
+  <div *ngIf="overWeight" >Over weight. Cannot ship</div>
+  <div *ngIf="underWeight" >Under weight. Cannot ship</div>
 
-  <div class="custom-controls-stacked" *ngIf='orderd'>
+  <div class="custom-controls-stacked" *ngIf="!(overWeight || underWeight)">
     <h4>Select Payment Type</h4>
     <div  *ngIf="deliveryShow" class="mt-3">
         <label class="custom-control custom-radio">
-          <input  type="radio" name="deliveryShow" value="cashOnDelivery" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+          <input  type="radio" name="deliveryShow" [checked]="triggerd == false" value="cashOnDelivery" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
           <span class="custom-control-indicator"></span>
           <h5 class="custom-control-description"> Cash On Delivery</h5>
         </label>
@@ -311,11 +311,11 @@
 
   </div>
 
-
-    <!--<button [disabled]='underWeight || overWeight' type="submit" class="btn btn-secondary bg-inverse text-white btn-block text-uppercase"-->
-            <!--id="place_order" data-value="Place order" (click)='pay("001")'>-->
-         <!--Place Order-->
-    <!--</button>-->
+<!-- 
+    <button [disabled]='underWeight || overWeight' type="submit" class="btn btn-secondary bg-inverse text-white btn-block text-uppercase"
+            id="place_order" data-value="Place order" (click)='pay("001")'>
+         Place Order
+    </button> -->
 
 </div>
 
