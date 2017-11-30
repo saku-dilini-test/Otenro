@@ -244,38 +244,47 @@
                             <fieldset>
                                 <label>return policy</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea class="input-shadow-border" name="returnPolicy" rows="2" ng-model="storeSettings.returnPolicy"></textarea>
-                                <br />
-                                <div ng-hide="storeSettings.returnPolicy.length > maxReturnPolicy">
-                                    <span class="information">Characters left: {{maxReturnPolicy - storeSettings.returnPolicy.length}}</span>
+                                <div class="custom-trix">
+                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="storeSettings.returnPolicy" required></text-angular>
                                 </div>
-                                <div  ng-show="storeSettings.returnPolicy.length > maxReturnPolicy">
-                                    <span class="information">Characters left: </span> <span class="information"> {{maxReturnPolicy - storeSettings.returnPolicy.length}} </span>
-                                </div>
+                                <!--<textarea class="input-shadow-border" name="returnPolicy" rows="2" ng-model="storeSettings.returnPolicy"></textarea>-->
+                                <!--<br />-->
+                                <!--<div ng-hide="storeSettings.returnPolicy.length > maxReturnPolicy">-->
+                                    <!--<span class="information">Characters left: {{maxReturnPolicy - storeSettings.returnPolicy.length}}</span>-->
+                                <!--</div>-->
+                                <!--<div  ng-show="storeSettings.returnPolicy.length > maxReturnPolicy">-->
+                                    <!--<span class="information">Characters left: </span> <span class="information"> {{maxReturnPolicy - storeSettings.returnPolicy.length}} </span>-->
+                                <!--</div>-->
                             </fieldset>
                             <fieldset>
                                 <label>terms and conditions</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea class="input-shadow-border" name="termsAndCondition" rows="2" ng-model="storeSettings.termsAndCondition"></textarea>
-                                <br />
-                                <div ng-hide="storeSettings.termsAndCondition.length > maxTermsAndCondition">
-                                    <span class="information">Characters left: {{maxTermsAndCondition - storeSettings.termsAndCondition.length}}</span>
+                                <div class="custom-trix">
+                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="storeSettings.termsAndCondition" required></text-angular>
                                 </div>
-                                <div  ng-show="storeSettings.termsAndCondition.length > maxTermsAndCondition">
-                                    <span class="information">Characters left: </span> <span class="information"> {{maxTermsAndCondition - storeSettings.termsAndCondition.length}} </span>
-                                </div>
+                                <!--<textarea class="input-shadow-border" name="termsAndCondition" rows="2" ng-model="storeSettings.termsAndCondition"></textarea>-->
+                                <!--<br />-->
+                                <!--<div ng-hide="storeSettings.termsAndCondition.length > maxTermsAndCondition">-->
+                                    <!--<span class="information">Characters left: {{maxTermsAndCondition - storeSettings.termsAndCondition.length}}</span>-->
+                                <!--</div>-->
+                                <!--<div  ng-show="storeSettings.termsAndCondition.length > maxTermsAndCondition">-->
+                                    <!--<span class="information">Characters left: </span> <span class="information"> {{maxTermsAndCondition - storeSettings.termsAndCondition.length}} </span>-->
+                                <!--</div>-->
                             </fieldset>
                             <fieldset>
                                 <label>privacy policy</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea class="input-shadow-border" name="privacyPolicy" rows="2"  ng-model="storeSettings.privacyPolicy"></textarea>
-                                <br />
-                                <div ng-hide="storeSettings.privacyPolicy.length > maxPrivacyPolicy">
-                                    <span class="information">Characters left: {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}}</span>
+                                <div class="custom-trix">
+                                    <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="storeSettings.privacyPolicy" required></text-angular>
                                 </div>
-                                <div  ng-show="storeSettings.privacyPolicy.length > maxPrivacyPolicy">
-                                    <span class="information">Characters left: </span> <span class="information"> {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}} </span>
-                                </div>
+                                <!--<textarea class="input-shadow-border" name="privacyPolicy" rows="2"  ng-model="storeSettings.privacyPolicy"></textarea>-->
+                                <!--<br />-->
+                                <!--<div ng-hide="storeSettings.privacyPolicy.length > maxPrivacyPolicy">-->
+                                    <!--<span class="information">Characters left: {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}}</span>-->
+                                <!--</div>-->
+                                <!--<div  ng-show="storeSettings.privacyPolicy.length > maxPrivacyPolicy">-->
+                                    <!--<span class="information">Characters left: </span> <span class="information"> {{maxPrivacyPolicy - storeSettings.privacyPolicy.length}} </span>-->
+                                <!--</div>-->
                             </fieldset>
                         </form>
                     </div>
@@ -312,14 +321,12 @@
                         <fieldset>
                             <label>Content</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12">
-                            <textarea class="input-shadow-border" rows="4" name="content" ng-model="storeSettings.content"></textarea>
-                            <br />
-                            <div ng-hide="storeSettings.content.length > maxAboutUsContent">
-                                <span class="information">Characters left: {{maxAboutUsContent - storeSettings.content.length}}</span>
+                            <!--<trix-editor angular-trix rows="4" ng-model="storeSettings.content"></trix-editor>-->
+                            <div class="custom-trix">
+                                <text-angular style="width:75%" rows="4" class="input-shadow-border" ng-model="storeSettings.content" required></text-angular>
+                                <!--<trix-editor style="width:75%" angular-trix rows="4" class="input-shadow-border"  ng-model="emailHF.header" required></trix-editor>-->
                             </div>
-                            <div  ng-show="storeSettings.content.length > maxAboutUsContent">
-                                <span class="information">Characters left: </span> <span class="information"> {{maxAboutUsContent - storeSettings.content.length}} </span>
-                            </div>
+                            <!--<textarea class="input-shadow-border" rows="4" name="content" ng-model="storeSettings.content"></textarea>-->
                         </fieldset>
                         </form>
                     </div>

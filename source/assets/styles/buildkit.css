@@ -2019,6 +2019,14 @@ trix-toolbar .button_group input[type=button]{
     overflow-y: auto;
 }
 
+.custom-trix .ta-scroll-window > .ta-bind {
+    height: 300px;
+    min-height: 300px;
+    padding: 6px 12px;
+    width: 615px;
+    overflow: scroll;
+}
+
 .email-image-upload{
     position: relative;
     text-align:center;
