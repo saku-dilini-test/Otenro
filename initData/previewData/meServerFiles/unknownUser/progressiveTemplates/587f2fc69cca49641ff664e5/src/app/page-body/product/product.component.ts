@@ -31,6 +31,7 @@ export class ProductComponent implements OnInit {
     public Data;
     public parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     set1; set2;
+    private lockBuyButton = false;
 
     imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
     + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
@@ -103,6 +104,7 @@ export class ProductComponent implements OnInit {
 
     }
     changeVariant(variant) {
+        this.lockBuyButton = false;
         this.selection1 = [];
         this.selection2 = [];
         this.selection3 = [];
@@ -115,7 +117,6 @@ export class ProductComponent implements OnInit {
 
         this.selectedVariant.buyQuantity = '';
 
-        // $scope.lockBuyButton = true;
 
         if (this.foodInfo.selection.length == 1) {
             console.log("if called");
@@ -124,7 +125,7 @@ export class ProductComponent implements OnInit {
                     this.selectedVariant = this.foodInfo.variants[i];
                     console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
 
-                    // $scope.lockBuyButton = false;
+                    this.lockBuyButton = true;
                 }
             }
         } else {
@@ -142,6 +143,7 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant2(variant) {
+        this.lockBuyButton = false;        
         this.selection2 = [];
         this.selection3 = [];
         console.log("variant : " + variant);
@@ -153,7 +155,6 @@ export class ProductComponent implements OnInit {
             this.selectedVariant.buyQuantity = '';
 
         }
-        // $scope.lockBuyButton = true;
 
         if (this.foodInfo.selection.length == 2) {
             console.log("if called");
@@ -161,7 +162,7 @@ export class ProductComponent implements OnInit {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
                     this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
                     this.selectedVariant = this.foodInfo.variants[i];
-                    // $scope.lockBuyButton = false;
+                    this.lockBuyButton = true;
 
                 }
             }
@@ -182,6 +183,7 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant3(variant) {
+        this.lockBuyButton = false;        
         this.selection3 = [];
         console.log("variant : " + variant);
         console.log("changeVariant3 called");
@@ -189,7 +191,6 @@ export class ProductComponent implements OnInit {
             this.selectedVariant3 = variant;
             this.selectedVariant.buyQuantity = '';
         }
-        // $scope.lockBuyButton = true;
 
         if (this.foodInfo.selection.length == 3) {
             console.log("if called");
@@ -198,7 +199,7 @@ export class ProductComponent implements OnInit {
                     this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
                     this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3) {
                     this.selectedVariant = this.foodInfo.variants[i];
-                    //  $scope.lockBuyButton = false;
+                    this.lockBuyButton = true;
 
                 }
             }
@@ -226,7 +227,7 @@ export class ProductComponent implements OnInit {
                 this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3 &&
                 this.foodInfo.variants[i].selection[3].vType == this.selectedVariant4) {
                 this.selectedVariant = this.foodInfo.variants[i];
-                // $scope.lockBuyButton = false;
+                this.lockBuyButton = true;
 
             }
         }

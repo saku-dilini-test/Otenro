@@ -67,6 +67,7 @@ this.selectedcountry = data;
                     "token": res.token,
                     "email": data.email,
                     "name": data.firstName,
+                    "lname": data.lastName,
                     "phone": data.phone,
                     "streetNumber": data.streetNumber,
                     "streetName": data.streetName,

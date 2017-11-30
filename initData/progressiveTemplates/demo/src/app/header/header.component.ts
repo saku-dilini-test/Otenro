@@ -20,9 +20,8 @@ export class HeaderComponent {
     if(this.dataService.isUserLoggedIn.check == false){
       this.loginStatus = "Not logged in" ;
     }else{
-      this.loginStatus = "logged in ";
+    this.loginStatus = "logged in ";
     }
-
   }
 
   navigate(val:string){
