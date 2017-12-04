@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { FormGroup, FormControl, FormArray, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -17,17 +18,31 @@ export class RegisterComponent implements OnInit {
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
   public country = [];
-  countries;
-  selectedcountry;navigate;
+  navigate;
+  signUpButton;
+
+  private fname;
+  private lname;
+  private email;
+  private password;
+  private streetNumber;
+  private streetName;
+  private city;
+  private zip;
+  private selectedCountry = null;
+  private phone;
+  private myForm: FormGroup;
+
   constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
 
   }
   changeCountry(data){
 console.log(data);
-this.selectedcountry = data;
+this.selectedCountry = data;
   }
 
   ngOnInit() {
+    this.country.push('select a country')
     this.router.params.subscribe(params => {
       this.navigate = params['type'];
       console.log("this.value : " + this.navigate);
@@ -35,13 +50,38 @@ this.selectedcountry = data;
 
       this.http.get(SERVER_URL+"/edit/getAllCountry")
       .subscribe((res) => {
-          this.countries = res;
+        var data = JSON.stringify(res);
+        console.log("res : " + data);
+
+        for (let key in res) {
+          this.country.push(res[key].countryName);
+          console.log(res);
+        }
+
+          console.log("this.country : " + (this.country));
+
       });
 
 
   }
 
-  signUp = function() {
+
+
+  signUp=function(myForm) {
+
+    this.fname = myForm.fname;
+    this.lname = myForm.lname;
+    this.email = myForm.email;
+    this.password = myForm.password;
+    this.city = myForm.city;
+    this.phone = myForm.phone;
+    this.streetName = myForm.streetName;
+    this.streetNumber = myForm.streetNumber;
+    this.zip = myForm.zip;
+
+    // console.log("city : " +myForm.city)
+    // console.log(myForm)
+    // console.log(this.fname + this.lname+ " : " + this.city)
     // this.localStorageService  = this.localStorageService.get('appLocalStorageUser'+this.appId);
 
     var data = {
@@ -53,7 +93,7 @@ this.selectedcountry = data;
         streetName: this.streetName,
         city: this.city,
         zip: this.zip,
-        country: this.selectedcountry,
+        country: this.selectedCountry,
         phone: this.phone,
         appId: this.appId
     };

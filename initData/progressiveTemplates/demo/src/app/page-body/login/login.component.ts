@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
   public params = [];
-  name;pass;gate:boolean;navigate;
-  constructor(private localStorageService: LocalStorageService,private dataService : PagebodyServiceModule, private router: ActivatedRoute,private route: Router,private http: HttpClient) {
+  name; pass; gate: boolean; navigate;
+  constructor(private localStorageService: LocalStorageService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient) {
 
   }
 
@@ -27,64 +27,61 @@ export class LoginComponent implements OnInit {
       console.log("this.value : " + this.navigate);
     });
   }
-  login(){
+  login = function (myForm) {
 
-    // if(this.name == 'asd' && this.pass == 'asd'){
-    //   this.route.navigate(['home'])
-    // }else{
-    //   alert('Wrong Credentials');
-    // }
+    this.name = myForm.userEmail
+    this.password = myForm.password;
 
     var data = {
-      email : this.name,
-      password : this.pass,
-      appId : this.appId
+      email: this.name,
+      password: this.password,
+      appId: this.appId
     };
     console.log(data);
-  let requestParams;
-    this.http.post(SERVER_URL+"/templatesAuth/authenticateForApp",data)
-      .subscribe((res) =>{
+    let requestParams;
+    this.http.post(SERVER_URL + "/templatesAuth/authenticateForApp", data)
+      .subscribe((res) => {
 
-          requestParams = {
-            "token": res.token,
-            "email": data.email,
-            "name": res.user.name,
-            "phone": res.user.phone,
-            "streetNumber": res.user.streetNumber,
-            "streetName": res.user.streetName,
-            "country": res.user.country,
-            "city": res.user.city,
-            "zip": res.user.zip,
-            "type": 'internal',
-            "appId":res.user.appId,
-            "registeredUser": res.user.sub
-          };
-          this.localStorageService.set('appLocalStorageUser'+this.appId,(requestParams));
-          this.dataService.isUserLoggedIn.check = true;
-          this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
+        requestParams = {
+          "token": res.token,
+          "email": data.email,
+          "name": res.user.name,
+          "phone": res.user.phone,
+          "streetNumber": res.user.streetNumber,
+          "streetName": res.user.streetName,
+          "country": res.user.country,
+          "city": res.user.city,
+          "zip": res.user.zip,
+          "type": 'internal',
+          "appId": res.user.appId,
+          "registeredUser": res.user.sub
+        };
+        this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+        this.dataService.isUserLoggedIn.check = true;
+        this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 
-          if(this.navigate == 'home'){
-            this.route.navigate(['home']);
-          }else{
-            this.route.navigate(['cart']);
-          }
+        if (this.navigate == 'home') {
+          this.route.navigate(['home']);
+        } else {
+          this.route.navigate(['cart']);
+        }
 
 
-          // if($stateParams.item == 'delivery'){
-          //   $state.go('app.cart');
-          // }else{
-          //   $state.go('app.category');
-          // }
+        // if($stateParams.item == 'delivery'){
+        //   $state.go('app.cart');
+        // }else{
+        //   $state.go('app.category');
+        // }
 
-        },
-        function(err){
-          alert('login failed');
-        })
+      },
+      function (err) {
+        alert('login failed');
+      })
 
   }
 
-  register(){
-    this.route.navigate(['register',this.navigate]);
+  register() {
+    this.route.navigate(['register', this.navigate]);
   }
 
   slides = SLIDES;
