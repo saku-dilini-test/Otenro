@@ -6,6 +6,7 @@
 
     function aboutUsCtrl($scope, $rootScope, $mdDialog, toastr,ME_APP_SERVER, mySharedService,$auth, aboutUsService, SERVER_URL) {
 
+        $scope.isNew = $rootScope.tempNew;
         $scope.coords = "";
 
         aboutUsService.getContactUsInfo().success(function (result) {
@@ -62,10 +63,20 @@
                         closeButton: true
                     });
 
-                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                    $scope.appTemplateUrl = urlPath+'' +
-                        '#/app/aboutUs';
+                    var urlPath;
+                    if($scope.isNew){
+                        urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                            + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                        $scope.appTemplateUrl = urlPath + '' +
+                            'aboutUs';
+                    }else {
+                        urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                            + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                        $scope.appTemplateUrl = urlPath + '' +
+                            '#/app/aboutUs';
+                    }
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (data, status, headers, config) {
                 toastr.error('Error updating About Us', 'Warning', {

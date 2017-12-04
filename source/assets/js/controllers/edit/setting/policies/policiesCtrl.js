@@ -8,6 +8,8 @@
     function aboutUsCtrl($scope, $rootScope, $mdDialog, toastr,ME_APP_SERVER, mySharedService,$auth, policiesService,
             aboutUsService,SERVER_URL) {
 
+        $scope.isNew = $rootScope.tempNew;
+
         $scope.addPolicies= function (policies) {
 
             policies.appId = $rootScope.appId;
@@ -36,10 +38,19 @@
                     toastr.success('About us updated', 'Awesome!', {
                         closeButton: true
                     });
-                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                    $scope.appTemplateUrl = urlPath+'' +
-                        '#/app/aboutUs';
+                    var urlPath;
+                    if($scope.isNew){
+                        urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                            +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                        $scope.appTemplateUrl = urlPath+'' +
+                            'policies';
+                    }else{
+                        urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                            +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                        $scope.appTemplateUrl = urlPath+'' +
+                            '#/app/aboutUs';
+                    }
+
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                 }).error(function (data, status, headers, config) {
                 toastr.error('Error updating About Us', 'Warning', {
