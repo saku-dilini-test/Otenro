@@ -6,53 +6,53 @@
   <div *ngIf='formType == "delivery"'>
     <div class="row">
       <div class="col-md-7">
-          <div class="row">
-              <h4 class="col-sm-12">Billing Details</h4>
-              <div class="form-group col-sm-6 mt-3">
-                <label for="fname">First Name</label>
-                <input type="text" [(ngModel)]='fname' [value]="fname" class="form-control" id="fname" aria-describedby="fname">
-              </div>
-              <div class="form-group col-sm-6 mt-3">
-                <label for="lname">Last Name</label>
-                <input type="text" class="form-control" [(ngModel)]='lname' [value]="lname" id="lname" aria-describedby="lname">
-              </div>
-              <div class="form-group col-sm-6">
-                <label for="email">Email address</label>
-                <input type="email" [(ngModel)]='email' [value]="email" class="form-control" id="email" aria-describedby="emailHelp">
-              </div>
-              <div class="form-group col-sm-6">
-                <label for="phone">Phone</label>
-                <input type="tel" [(ngModel)]='phone' [value]="phone" class="form-control" id="phone" aria-describedby="phone">
-              </div>
-              <div class="form-group col-sm-6">
-                <label for="phone">Street number</label>
-                <input type="tel" [(ngModel)]='streetNumber' [value]="streetNumber" class="form-control" id="streetNumber" aria-describedby="streetNumber">
-              </div>
-              <div class="form-group col-sm-6">
-                <label for="email">Street name</label>
-                <input type="email" [(ngModel)]='streetName' [value]="streetName" class="form-control" id="streetName" aria-describedby="streetName">
-              </div>
-              <div class="form-group col-sm-6">
-                <label for="cname">City</label>
-                <input type="text" [(ngModel)]='city' [value]="city" class="form-control" id="cname" aria-describedby="cname">
-              </div>
-              <div class="form-group col-sm-6">
-                <label for="phone">zip</label>
-                <input type="tel" [(ngModel)]='zip' [value]="zip" class="form-control" id="zip" aria-describedby="zip">
-              </div>
-              <div class="form-group col-sm-12">
-                <select [(ngModel)]="country" (ngModelChange)="countryChanged(country)" class="form-control">
+        <div class="row">
+          <h4 class="col-sm-12">Billing Details</h4>
+          <div class="form-group col-sm-6 mt-3">
+            <label for="fname">First Name</label>
+            <input type="text" [(ngModel)]='fname' [value]="fname" class="form-control" id="fname" aria-describedby="fname">
+          </div>
+          <div class="form-group col-sm-6 mt-3">
+            <label for="lname">Last Name</label>
+            <input type="text" class="form-control" [(ngModel)]='lname' [value]="lname" id="lname" aria-describedby="lname">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="email">Email address</label>
+            <input type="email" [(ngModel)]='email' [value]="email" class="form-control" id="email" aria-describedby="emailHelp">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="phone">Phone</label>
+            <input type="tel" [(ngModel)]='phone' [value]="phone" class="form-control" id="phone" aria-describedby="phone">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="phone">Street number</label>
+            <input type="tel" [(ngModel)]='streetNumber' [value]="streetNumber" class="form-control" id="streetNumber" aria-describedby="streetNumber">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="email">Street name</label>
+            <input type="email" [(ngModel)]='streetName' [value]="streetName" class="form-control" id="streetName" aria-describedby="streetName">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="cname">City</label>
+            <input type="text" [(ngModel)]='city' [value]="city" class="form-control" id="cname" aria-describedby="cname">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="phone">zip</label>
+            <input type="tel" [(ngModel)]='zip' [value]="zip" class="form-control" id="zip" aria-describedby="zip">
+          </div>
+          <div class="form-group col-sm-12">
+            <select [(ngModel)]="country" (ngModelChange)="countryChanged(country)" class="form-control">
                   <option *ngFor="let c of countries" [selected]="country==c.countryName" value = '{{c.countryName}}'> {{c.countryName}} </option>
                 </select>
-              </div>
           </div>
+        </div>
       </div>
 
       <div class="col-md-5">
         <h4>Shipping Options</h4>
         <div>
           <div class="custom-controls-stacked">
-            <label class="custom-control  mt-3"  *ngFor="let ship of shippingData, let idx = index">
+            <label class="custom-control  mt-3" *ngFor="let ship of shippingData, let idx = index">
               <input  #r id="radioStacked1" name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping" (change)='addShipping(ship,$event)'>
               <span class="custom-control-indicator"></span>
               <h5 class="custom-control-description pr-3">{{ship.optionName}}</h5>
@@ -83,54 +83,54 @@
 
     <div class="col-sm-12">
       <h4 class="my-3">Select a Location</h4>
-      <div  class="row">
-          <div class="custom-controls-stacked col-sm-4" *ngFor="let pick of pickup, let idx = index">
-            <label class="custom-control  mt-3">
+      <div class="row">
+        <div class="custom-controls-stacked col-sm-4" *ngFor="let pick of pickup, let idx = index">
+          <label class="custom-control  mt-3">
               <input  #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx])'>
               <span class="custom-control-indicator"></span>
               <h5 class="custom-control-description pr-3">{{pick.locationName}}</h5>
             </label>
-            <span>{{pick.number}},</span>
-            <span>{{pick.streetAddress}},</span>
-            <span>{{pick.city}},</span>
-            <span>{{pick.postalCode}},</span>
-            <span>{{pick.country}}.</span>
-          </div>
+          <span>{{pick.number}},</span>
+          <span>{{pick.streetAddress}},</span>
+          <span>{{pick.city}},</span>
+          <span>{{pick.postalCode}},</span>
+          <span>{{pick.country}}.</span>
+        </div>
       </div>
       <!--<div *ngIf='isSelected'>-->
-        <!--<h4 id="order_review_heading">Your order</h4>-->
-        <!--<table class="table table-bordered table-responsive">-->
-          <!--<thead>-->
-          <!--<tr>-->
-            <!--<th width="89%">Item</th>-->
-            <!--<th width="100%">Qty</th>-->
-            <!--<th width="100%">Price</th>-->
+      <!--<h4 id="order_review_heading">Your order</h4>-->
+      <!--<table class="table table-bordered table-responsive">-->
+      <!--<thead>-->
+      <!--<tr>-->
+      <!--<th width="89%">Item</th>-->
+      <!--<th width="100%">Qty</th>-->
+      <!--<th width="100%">Price</th>-->
 
-          <!--</tr>-->
-          <!--</thead>-->
-          <!--<tbody>-->
-          <!--<tr *ngFor="let itm of cartItems">-->
-            <!--<td> {{itm.name}}&nbsp;</td>-->
-            <!--<td> {{itm.qty}}&nbsp;</td>-->
-            <!--<td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>-->
-          <!--</tr>-->
-          <!--</tbody>-->
-          <!--<tfoot>-->
-          <!--<tr>-->
-            <!--<th>Tax</th>-->
+      <!--</tr>-->
+      <!--</thead>-->
+      <!--<tbody>-->
+      <!--<tr *ngFor="let itm of cartItems">-->
+      <!--<td> {{itm.name}}&nbsp;</td>-->
+      <!--<td> {{itm.qty}}&nbsp;</td>-->
+      <!--<td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>-->
+      <!--</tr>-->
+      <!--</tbody>-->
+      <!--<tfoot>-->
+      <!--<tr>-->
+      <!--<th>Tax</th>-->
 
-            <!--<td><span>({{chkTax}}%) {{sign}}{{taxTotal}}</span></td>-->
-          <!--</tr>-->
-          <!--<tr class="order-total">-->
-            <!--<th>Total</th>-->
-            <!--<td><strong>-->
-              <!--<span>{{totalQuantity}}</span>-->
-              <!--<span>{{sign}}{{totalPrice}}</span>-->
-            <!--</strong>-->
-            <!--</td>-->
-          <!--</tr>-->
-          <!--</tfoot>-->
-        <!--</table>-->
+      <!--<td><span>({{chkTax}}%) {{sign}}{{taxTotal}}</span></td>-->
+      <!--</tr>-->
+      <!--<tr class="order-total">-->
+      <!--<th>Total</th>-->
+      <!--<td><strong>-->
+      <!--<span>{{totalQuantity}}</span>-->
+      <!--<span>{{sign}}{{totalPrice}}</span>-->
+      <!--</strong>-->
+      <!--</td>-->
+      <!--</tr>-->
+      <!--</tfoot>-->
+      <!--</table>-->
 
 
 
@@ -145,51 +145,51 @@
 
 
   <div *ngIf='isSelected'>
-    <h4 >Your order</h4>
+    <h4>Your order</h4>
     <table class="table table-bordered table-responsive">
       <thead>
-      <tr>
-        <th width="89%">Item</th>
-        <th width="100%">Qty</th>
-        <th width="100%">Price</th>
-      </tr>
+        <tr>
+          <th width="89%">Item</th>
+          <th width="100%">Qty</th>
+          <th width="100%">Price</th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let itm of cartItems">
-        <td> {{itm.name}}&nbsp;</td>
-        <td> {{itm.qty}}&nbsp;</td>
-        <td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>
-      </tr>
+        <tr *ngFor="let itm of cartItems">
+          <td> {{itm.name}}&nbsp;</td>
+          <td> {{itm.qty}}&nbsp;</td>
+          <td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>
+        </tr>
       </tbody>
       <tfoot>
-      <tr *ngIf='hideShipping'>
-        <th>Shipping</th>
-        <td></td>
-        <td>{{sign}}{{chkShippingCost}}</td>
-      </tr>
-      <tr *ngIf='chkPickupCost > 0'>
-        <th>Pick up cost</th>
-        <td></td>
-        <td>{{sign}}{{chkPickupCost}}</td>
-      </tr>
-      <tr>
-        <th>Tax({{chkTax}}%)</th>
-        <td></td>
-        <td>{{sign}}{{taxTotal}}</td>
-      </tr>
-      <tr class="order-total">
-        <th>Total</th>
-        <td>
-          <strong>
+        <tr *ngIf='hideShipping'>
+          <th>Shipping</th>
+          <td></td>
+          <td>{{sign}}{{chkShippingCost}}</td>
+        </tr>
+        <tr *ngIf='chkPickupCost > 0'>
+          <th>Pick up cost</th>
+          <td></td>
+          <td>{{sign}}{{chkPickupCost}}</td>
+        </tr>
+        <tr>
+          <th>Tax({{chkTax}}%)</th>
+          <td></td>
+          <td>{{sign}}{{taxTotal}}</td>
+        </tr>
+        <tr class="order-total">
+          <th>Total</th>
+          <td>
+            <strong>
             <span>{{totalQuantity}}</span>
           </strong>
-        </td>
-        <td>
-          <strong>
+          </td>
+          <td>
+            <strong>
             <span>{{sign}}{{totalPrice}}</span>
           </strong>
-        </td>
-      </tr>
+          </td>
+        </tr>
       </tfoot>
     </table>
 
@@ -197,13 +197,13 @@
 
 
   <br>
-  <div *ngIf="overWeight" >Over weight. Cannot ship</div>
-  <div *ngIf="underWeight" >Under weight. Cannot ship</div>
+  <div *ngIf="overWeight">Over weight. Cannot ship</div>
+  <div *ngIf="underWeight">Under weight. Cannot ship</div>
 
   <div class="custom-controls-stacked" *ngIf="!(overWeight || underWeight)">
     <h4>Select Payment Type</h4>
-    <div  *ngIf="deliveryShow" class="mt-3">
-        <label class="custom-control custom-radio">
+    <div *ngIf="deliveryShow" class="mt-3">
+      <label class="custom-control custom-radio">
           <input  type="radio" name="deliveryShow" [checked]="triggerd == false" value="cashOnDelivery" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
           <span class="custom-control-indicator"></span>
           <h5 class="custom-control-description"> Cash On Delivery</h5>
@@ -250,7 +250,7 @@
       </label>
     </div>
 
-    <form  *ngIf="paymentType == 'cashOnPickup' || paymentType == 'cashOnDelivery'" name="cashPaymentFrom" novalidate class="row my-4">
+    <form *ngIf="paymentType == 'cashOnPickup' || paymentType == 'cashOnDelivery'" name="cashPaymentFrom" novalidate class="row my-4">
       <div class="col-sm-12">
         <h5 *ngIf="paymentType == 'cashOnDelivery'">Confirm payment by cash on delivery</h5>
         <h5 *ngIf="paymentType == 'cashOnPickup'">Confirm payment by cash on pickup</h5>
@@ -259,7 +259,7 @@
       </div>
     </form>
 
-    <form name="cashPaymentFrom" novalidate class="row my-4"  *ngIf="paymentType == 'paypal'">
+    <form name="cashPaymentFrom" novalidate class="row my-4" *ngIf="paymentType == 'paypal'">
       <div class="col-sm-12">
         <h5>Click to pay with PayPal</h5>
         <app-paypal-payment></app-paypal-payment>
@@ -268,50 +268,71 @@
 
     <div class="row" *ngIf="paymentType == 'creditcard' || paymentType == 'authorizeNet'">
 
-      <label class="form-group col-sm-6">
+      <form #myForm="ngForm" (ngSubmit)="submit(myForm.value,paymentType)" novalidate>
+
+        <!-- <p>Is "myForm" valid? {{myForm.valid}}</p> -->
+
+        <label class="form-group col-sm-6">
         <label >Charge Amount</label>
-        <input class="form-control" placeholder="Charge Amount" type="text" [(ngModel)]="card.amount"  name="cardAmount" [ngModelOptions]="{standalone: true}" disabled>
-      </label>
-      <label class="form-group col-sm-6">
+        <input class="form-control" placeholder="Charge Amount" type="text" [(ngModel)]="card.amount" name="cardAmount" disabled>
+        </label>
+        <label class="form-group col-sm-6">
         <label>Name on card</label>
-        <input class="form-control" placeholder="Name on card*" type="text" [(ngModel)]="card.userName" >
-      </label>
+        <input class="form-control" placeholder="Name on card*" type="text"  #userName='ngModel' name = 'userName' ngModel required>
+        <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">
+          <div [hidden]="!userName.hasError('required')">User Name is required</div>
+          <!-- <div [hidden]="!streetNumber.hasError('pattern')">Your password should contain UpperCase, LowerCase and number</div> -->
+        </div>
+        </label>
 
-      <label class="form-group col-sm-6">
+        <label class="form-group col-sm-6">
         <label >Card Number</label>
-        <input class="form-control" placeholder="Card Number*" type="text" [(ngModel)]="card.number" name="cardNumber" cc-number cc-type="card.cardType" [ngModelOptions]="{standalone: true}">
-      </label>
-      <label class="form-group col-sm-6">
+        <input class="form-control" minlength="15" maxlength="19" placeholder="Card Number*" pattern="[0-9]+" type="text" name="cardNumber" #number='ngModel' cc-type="card.cardType" ngModel required>
+        <div [hidden]="number.valid || number.pristine" class="alert alert-danger">
+          <div [hidden]="!number.hasError('required')">Credit card required</div>
+          <div [hidden]="!number.hasError('pattern')">Credit card must consist of only numbers</div>
+          <div [hidden]="!number.hasError('minlength')">Credit card must be 15-19 digits</div>
+        </div>
+        </label>
+        <label class="form-group col-sm-6">
         <label class="input-label">Card CVC</label>
-        <input class="form-control" placeholder="Card CVC*" type="text" [(ngModel)]="card.cvc" cc-type="cardNumber.$ccType"[ngModelOptions]="{standalone: true}">
-      </label>
+        <input class="form-control" placeholder="Card CVC*" type="text" name ='cvc' minlength="3" maxlength="4" pattern="[0-9]+" #cvc='ngModel' cc-type="cardNumber.$ccType" ngModel required>
+        <div [hidden]="cvc.valid || cvc.pristine" class="alert alert-danger">
+          <div [hidden]="!cvc.hasError('required')">Security code required</div>
+          <div [hidden]="!cvc.hasError('pattern')">Security code must contain only numbers</div>
+          <div [hidden]="!cvc.hasError('minlength')">Security code must be 3-4 digits</div>
+        </div>
+        </label>
 
-      <div class="form-group col-sm-6">
-        <label >Expiration Date:</label>
-        <div class="row form-group col-sm-12">
-          <div class="form-group col-sm-6">
-              <label >Month :</label>
-              <input class="form-control" placeholder="06" type="text" [(ngModel)]="card.exp_month"  [ngModelOptions]="{standalone: true}">
-          </div>
-          <div class="form-group col-sm-6">
-             <label>Year :</label>
-              <input class="form-control" placeholder="2016" type="text" [(ngModel)]="card.exp_year"  [ngModelOptions]="{standalone: true}">
+        <div class="form-group col-sm-6">
+          <label>Expiration Date:</label>
+          <div class="row form-group col-sm-12">
+            <div class="form-group col-sm-6">
+              <label>Month :</label>
+              <select name="month" class="form-control" id="selectedMonth" ngModel required>
+                <option *ngFor="let m of months" [ngValue]="m">{{m}} </option>
+              </select>
+            </div>
+            <div class="form-group col-sm-6">
+              <label>Year :</label>
+              <select name="year" class="form-control" id="selectedYear" ngModel required>
+                <option *ngFor="let y of years" [ngValue]="y">{{y}} </option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group col-sm-12">
-        <button  *ngIf="paymentType == 'creditcard'" type="submit" (click)='makeStripePaymentMethod(card)' class="btn btn-primary btn-lg">MAKE PAYMENT</button>
-        <button  *ngIf="paymentType == 'authorizeNet'" type="submit" (click)='authorizeCreditCardMethod(card)' class="btn btn-primary btn-lg">MAKE PAYMENT</button>
-
-      </div>
-
+        <div class="form-group col-sm-12">
+          <button type="submit" class="btn btn-primary btn-lg" [disabled] = 'myForm.valid == false' >MAKE PAYMENT</button>
+          <!-- <button *ngIf="paymentType == 'authorizeNet'" type="submit" (click)='authorizeCreditCardMethod(card)' class="btn btn-primary btn-lg">MAKE PAYMENT</button> -->
+        </div>
+      </form>
     </div>
 
 
   </div>
 
-<!-- 
+  <!--
     <button [disabled]='underWeight || overWeight' type="submit" class="btn btn-secondary bg-inverse text-white btn-block text-uppercase"
             id="place_order" data-value="Place order" (click)='pay("001")'>
          Place Order

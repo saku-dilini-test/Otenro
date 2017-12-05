@@ -81,12 +81,20 @@ export class CheckoutComponent implements OnInit {
   public authorizeCreditCard;
   public orderDetails;
   public orderd = false;
-  
+  private years = [];
+  private months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+
   constructor(private localStorageService: LocalStorageService, private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
 
   }
 
   ngOnInit() {
+
+let date = (new Date()).getFullYear()
+console.log('date : ' + date)
+    for( let i=0;i<100;i++){
+this.years.push(date++);
+    }
 
     this._success.next('hello');
     console.log("chk params : " + JSON.stringify(this.dataService.data));
@@ -359,7 +367,7 @@ export class CheckoutComponent implements OnInit {
     this.chk(shippingDetails);
 
     setTimeout(()=>{ this.pay("001"); }, 500);
-    
+
 
   }
 
@@ -562,7 +570,22 @@ console.log("inside chk if");
 
   }
 
+
+  submit(data,type){
+    console.log("card data : " + JSON.stringify(data));
+    console.log("type : " + type);
+
+    if(type == 'creditcard'){
+      this.makeStripePaymentMethod(data);
+    }else{
+      this.authorizeCreditCardMethod(data);
+    }
+
+  }
+
   makeStripePaymentMethod(cardInformation) {
+
+    cardInformation.amount = this.card.amount;
     cardInformation.appId = this.appId;
     cardInformation.userId = this.userId;
 console.log("cardInformation : " + JSON.stringify(cardInformation));
@@ -584,26 +607,27 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
 
   };
 
-  authorizeCreditCardMethod(card) {
+  authorizeCreditCardMethod(cardInformation) {
 
-    card.appId = this.appId
+    cardInformation.amount = this.card.amount;
+    cardInformation.appId = this.appId
 
-    // this.http.post(SERVER_URL + "/templateController/authorizeNetPay", card)
-    //   .subscribe((res) => {
-    //     // var alertPopup = $ionicPopup.alert({
-    //     //     subTitle: res.data.data,
-    //     //     cssClass: 'ionicPopUp',
-    //     //     buttons:[
-    //     //         {text:'OK',
-    //     //             type:'made-easy-button-setting'},
-    //     //     ]
-    //     // });
-    //     if (res.status == 'ok') {
-    //       this.orderProcess();
-    //     }
-    //   }, function (err) {
-    //     alert('authorizeCreditCard' + err)
-    //   })
+    this.http.post(SERVER_URL + "/templateController/authorizeNetPay", cardInformation)
+      .subscribe((res) => {
+        // var alertPopup = $ionicPopup.alert({
+        //     subTitle: res.data.data,
+        //     cssClass: 'ionicPopUp',
+        //     buttons:[
+        //         {text:'OK',
+        //             type:'made-easy-button-setting'},
+        //     ]
+        // });
+        if (res.status == 'ok') {
+          this.orderProcess();
+        }
+      }, function (err) {
+        alert('authorizeCreditCard' + err)
+      })
   }
 
   orderProcess() {
