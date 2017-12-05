@@ -16,7 +16,7 @@
         $scope.maxAboutUsHeader = 20;
         $scope.maxAboutUsContent = 200;
         $scope.userId = $auth.getPayload().id;
-        
+        $scope.isNew = $rootScope.tempNew;
         // --- Config ----
         $scope.coords ="";
         contactUsService.getContactUsInfo().success(function(result){
@@ -220,10 +220,20 @@
                             toastr.success('About us updated', 'Awesome!', {
                                 closeButton: true
                             });
-                            var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                           +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                            $scope.appTemplateUrl = urlPath+'' +
-                                '#/app/aboutUs';
+
+                            var urlPath;
+                            if ($scope.isNew){
+                                urlPath =  SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
+                                    +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                $scope.appTemplateUrl = urlPath+'' +
+                                    'contact';
+                            }else{
+                                urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                    +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                $scope.appTemplateUrl = urlPath+'' +
+                                    '#/app/aboutUs';
+                            }
+
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             if(tab){
                                 disableTabs(tab,false,false,false);
