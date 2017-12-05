@@ -488,3 +488,15 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+
+
+@media only screen and (max-width: 610px) {
+  .display-1{
+    font-size: 3.5rem;
+  }
+  .carousel-caption{
+    left:0;
+    right:0;
+  }
+}

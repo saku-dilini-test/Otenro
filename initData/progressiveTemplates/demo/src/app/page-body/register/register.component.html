@@ -1,9 +1,7 @@
 <app-carousel [slides]="slides">
 </app-carousel>
 
-<form #myForm="ngForm" (ngSubmit)="signUp(myForm.value)" novalidate>
-
-  <p>Is "myForm" valid? {{myForm.valid}}</p>
+<form #myForm="ngForm" (ngSubmit)="signUp(myForm.value)" class="container" novalidate>
 
   <div class="form-group row">
     <label for="fname" class="col-2 col-form-label">First Name</label>

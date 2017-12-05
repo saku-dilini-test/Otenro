@@ -41,14 +41,15 @@ export class OrderHistoryComponent implements OnInit {
       console.log("no orderHistory");
     }
 
-    this.http.get(SERVER_URL + '/templates/getOrdersOfUser?appId=' + this.appId + '&userId=' + this.appUserId.registeredUser)
-      .subscribe((data)=>{
-        this.orderHistory = (data);
-        console.log("this.orderHistory : " + JSON.stringify(this.orderHistory));
-      }),((err)=> {
-      alert('warning,Unable to get orders');
-    });
-
+    if(this.appUserId) {
+      this.http.get(SERVER_URL + '/templates/getOrdersOfUser?appId=' + this.appId + '&userId=' + this.appUserId.registeredUser)
+        .subscribe((data) => {
+          this.orderHistory = (data);
+          console.log("this.orderHistory : " + JSON.stringify(this.orderHistory));
+        }), ((err) => {
+        alert('warning,Unable to get orders');
+      });
+    }
 
   }
 

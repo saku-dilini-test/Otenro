@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { SERVER_URL } from '../../constantsService';
+import * as data from '../../madeEasy.json';
 
 @Component({
   selector: 'app-contact-info',
@@ -7,12 +10,42 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ContactInfoComponent implements OnInit {
 
-  constructor() { }
+	private appId = (<any>data).appId;
+	private userId = (<any>data).userId;
+	private address;
+  private email;
+  private webSite;
+  private telPhone;
+	private description;
+	facebook = 'www.facebook.com';
+	twitter = 'www.twitter.com';
+	pinterest = 'www.pinterest.com';
+	linkedin = "www.linkedin.com"
+  // @Input('contact') contactInfo:contactInfoModel;
+
+  constructor(private http: HttpClient) {
+		this.http.get( SERVER_URL + '/templates/getContactUs?appId='+this.appId).subscribe((data)=> {
+
+						// console.log("contact data: " + JSON.stringify(data));
+						this.description = "bl abla bla"
+						this.address = data.address;
+						this.email = data.email;
+						this.website = data.webSite;
+						this.phone = data.telPhone;
+						this.coords =data.coords;
+
+						// this.lat = this.coords.latitude;
+						// this.lng = this.coords.longitude;
+
+
+				}),((err) =>{
+						alert('warning'+ " Unable to get contact us info");
+				});
+	 }
 
   ngOnInit() {
   }
 
-  @Input('contact') contactInfo:contactInfoModel;
 
 
 }
