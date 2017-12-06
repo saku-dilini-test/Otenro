@@ -5,10 +5,10 @@
 
  <div class="container">
    	<div class="row">
-    	<div class="col-md-9">
+    	<div class="col-md-12">
 				<div>
 					<table class="table table-bordered table-responsive" cellspacing="0">
-						<thead>
+						<thead class="main-header-font">
 							<tr>
 								<td width="80px">&nbsp;</td>
 								<td><span>Product</span></td>
@@ -19,7 +19,7 @@
 								<td><span>remove</span></td>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="main-content-font">
 							<tr *ngFor="let c of cartItems let i = index" >
 								<td >
 									<a>
@@ -56,23 +56,23 @@
 									</a>
 								</td>
 							</tr>
-							<tr>
-								<td colspan="5" class="text-left">
-										<input type="text" placeholder="Coupon code" class="form-control w-50 d-inline align-middle">
-                  <button  name="apply_coupon"  class="btn btn-primary"> Apply Coupon </button>
-								</td>
-								<td colspan="1" class="text-right">
-                  <button class="btn btn-primary"> Update Cart </button>
-								</td>
-							</tr>
+							<!--<tr>-->
+								<!--<td colspan="5" class="text-left">-->
+										<!--<input type="text" placeholder="Coupon code" class="form-control w-50 d-inline align-middle">-->
+                  <!--<button  name="apply_coupon"  class="btn main-button"> Apply Coupon </button>-->
+								<!--</td>-->
+								<!--<td colspan="1" class="text-right">-->
+                  <!--<button class="btn main-button"> Update Cart </button>-->
+								<!--</td>-->
+							<!--</tr>-->
 						</tbody>
 					</table>
 				</div>
 
 			<div class="w-50 pull-right clearfix">
-				<h5>Cart Total</h5>
+				<h5 class="main-header-font">Cart Total</h5>
 				<table cellspacing="0" class="table table-responsive table-bordered" >
-					<tbody>
+					<tbody class="main-content-font">
 						<tr >
 							<th>Total</th>
 							<td data-title="Total">
@@ -85,55 +85,55 @@
 				</table>
 				<div>
 						<!-- [disabled]='cartItems.length<=0' -->
-					<button  class="btn btn-secondary bg-inverse text-white btn-block" (click)="delivery(cartItems)">
+					<button  class="btn main-button button-inverse text-white btn-block" (click)="delivery(cartItems)">
 						Delivery
 					</button>
-					<button class="btn btn-secondary bg-inverse text-white btn-block" (click)='pickupDetails(cartItems)'>
+					<button class="btn main-button button-inverse text-white btn-block" (click)='pickupDetails(cartItems)'>
 						pickup
 					</button>
 				</div>
 			</div>
        </div>
 
-        <div class="col-md-3">
-        	<h5 class="text-uppercase my-3">Categories</h5>
-	        <ngb-accordion  [closeOthers]="true" #acc="ngbAccordion" activeIds="">
-			  <ngb-panel>
-			    <ng-template ngbPanelTitle >
-			      <span><i class="fa fa-caret-right pr-3  control-2"></i><i class="fa fa-caret-down pr-3 control-1" ></i> Clothing</span>
-			    </ng-template>
-			    <ng-template ngbPanelContent>
-			   		<ul>
-			   			<li>Jackets</li>
-			   			<li>Shorts</li>
-			   			<li>Pants</li>
-			   			<li>Shirts</li>
-			   			<li>Sweatshirts</li>
-			   		</ul>
-			    </ng-template>
-			  </ngb-panel>
-			  <ngb-panel>
-			    <ng-template ngbPanelTitle>
-			      <span><i class="fa fa-caret-right pr-3 control-2"></i><i class="fa fa-caret-down pr-3 control-1"></i> Shoes</span>
-			    </ng-template>
-			    <ng-template ngbPanelContent>
-			   		<ul>
-			   			<li>Jackets</li>
-			   			<li>Shorts</li>
-			   			<li>Pants</li>
-			   			<li>Shirts</li>
-			   			<li>Sweatshirts</li>
-			   		</ul>
-			    </ng-template>
-			  </ngb-panel>
+        <!--<div class="col-md-3">-->
+        	<!--<h5 class="text-uppercase my-3 main-header-font">Categories</h5>-->
+	        <!--<ngb-accordion  [closeOthers]="true" #acc="ngbAccordion" activeIds="">-->
+			  <!--<ngb-panel>-->
+			    <!--<ng-template ngbPanelTitle >-->
+			      <!--<span><i class="fa fa-caret-right pr-3  control-2"></i><i class="fa fa-caret-down pr-3 control-1" ></i> Clothing</span>-->
+			    <!--</ng-template>-->
+			    <!--<ng-template ngbPanelContent>-->
+			   		<!--<ul class="main-content-font">-->
+			   			<!--<li>Jackets</li>-->
+			   			<!--<li>Shorts</li>-->
+			   			<!--<li>Pants</li>-->
+			   			<!--<li>Shirts</li>-->
+			   			<!--<li>Sweatshirts</li>-->
+			   		<!--</ul>-->
+			    <!--</ng-template>-->
+			  <!--</ngb-panel>-->
+			  <!--<ngb-panel>-->
+			    <!--<ng-template ngbPanelTitle>-->
+			      <!--<span><i class="fa fa-caret-right pr-3 control-2"></i><i class="fa fa-caret-down pr-3 control-1"></i> Shoes</span>-->
+			    <!--</ng-template>-->
+			    <!--<ng-template ngbPanelContent>-->
+			   		<!--<ul>-->
+			   			<!--<li>Jackets</li>-->
+			   			<!--<li>Shorts</li>-->
+			   			<!--<li>Pants</li>-->
+			   			<!--<li>Shirts</li>-->
+			   			<!--<li>Sweatshirts</li>-->
+			   		<!--</ul>-->
+			    <!--</ng-template>-->
+			  <!--</ngb-panel>-->
 
-			</ngb-accordion>
-        </div>
+			<!--</ngb-accordion>-->
+        <!--</div>-->
     </div>
 </div>
 
 
 
-  <app-newsletter></app-newsletter>
+  <!--<app-newsletter></app-newsletter>-->
 
   <hr class="featurette-divider">

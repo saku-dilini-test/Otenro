@@ -6,7 +6,7 @@
 <div class="container">
   <!-- Content here -->
   <div>
-    <div class="row">
+    <div class="row main-header-font">
       <dt class="col">
         Item
       </dt>
@@ -28,7 +28,7 @@
     </div>
   </div>
   <div *ngFor="let order of orderHistory">
-    <div class="row"  *ngFor="let item of order.item" >
+    <div class="row main-content-font"  *ngFor="let item of order.item" >
       <div class="col my-3" >
         <img src="{{imageURL}}/{{item.imgURL[0].img}}" width="100%">
       </div>
@@ -51,7 +51,7 @@
   </div>
 </div>
 
-<app-newsletter></app-newsletter>
+<!--<app-newsletter></app-newsletter>-->
 
 
 <hr class="featurette-divider">

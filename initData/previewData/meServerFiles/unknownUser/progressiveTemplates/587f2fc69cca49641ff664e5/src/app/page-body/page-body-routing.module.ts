@@ -17,7 +17,7 @@ import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.componen
 
 const routes: Routes = [
  { path: '',
-    redirectTo: '/home',
+   component: HomepageComponent,
     pathMatch: 'full'
   },
   {
@@ -29,12 +29,6 @@ const routes: Routes = [
     path: 'register/:type',
     component: RegisterComponent,
     data:{title:'Register Page'}
-  },
-
- {
-    path: 'home',
-    component: HomepageComponent,
-    data:{title:'Home Page'}
   },
  {
     path: 'aboutus',
@@ -89,6 +83,8 @@ const routes: Routes = [
 //   path: 'paypal',
 // component: PaypalPaymentComponent
 // }
+  // otherwise redirect to home
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

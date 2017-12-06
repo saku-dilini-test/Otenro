@@ -33,25 +33,25 @@
   </ng-template>
 </div>
 
-	<h1 class="px-5 my-5">Popular Products</h1>
-		 <owl-carousel  [options]="owlOptions"
-		 [carouselClasses]="['owl-carousel', 'owl-theme', 'owl-theme_mod-a', 'enable-owl-carousel', 'js-zoom-gallery']">
-	       <div *ngFor="let img of images">
-	          <section>
-	              <div>
-	              	<a> <img src="http://lorempixel.com/160/180/{{img}}"/></a>
-	                <div class="name-category">category</div>
-	                <h4 >Epimetheus</h4>
-	                <div class="name-price main-content-font">$450</div>
-	                <div class="button-hover">
-                      <a class="btn btn-primary text-white" (click)="navigate('product')">add to cart</a>
-                  </div>
-	              </div>
-	            </section>
-	       </div>
-	    </owl-carousel>
+	<!--<h1 class="px-5 my-5 main-header-font">Popular Products</h1>-->
+		 <!--<owl-carousel  [options]="owlOptions"-->
+		 <!--[carouselClasses]="['owl-carousel', 'owl-theme', 'owl-theme_mod-a', 'enable-owl-carousel', 'js-zoom-gallery']">-->
+	       <!--<div *ngFor="let img of images">-->
+	          <!--<section>-->
+	              <!--<div>-->
+	              	<!--<a> <img src="http://lorempixel.com/160/180/{{img}}"/></a>-->
+	                <!--<div class="name-category  main-content-font">category</div>-->
+	                <!--<h4 class=" main-header-font">Epimetheus</h4>-->
+	                <!--<div class="name-price main-content-font">$450</div>-->
+	                <!--<div class="button-hover">-->
+                      <!--<a class="btn main-button" (click)="navigate('product')">add to cart</a>-->
+                  <!--</div>-->
+	              <!--</div>-->
+	            <!--</section>-->
+	       <!--</div>-->
+	    <!--</owl-carousel>-->
 
-  <app-newsletter></app-newsletter>
+  <!--<app-newsletter></app-newsletter>-->
 
   <hr class="featurette-divider">
 

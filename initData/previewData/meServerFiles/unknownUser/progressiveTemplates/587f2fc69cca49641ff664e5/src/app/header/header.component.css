@@ -27,6 +27,7 @@ a{
 }
 
 .navbar-brand{
-    font-size: 15px;
-    letter-spacing: 0.3	em;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  font-weight: bold;
 }

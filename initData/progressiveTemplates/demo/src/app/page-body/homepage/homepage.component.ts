@@ -4,22 +4,15 @@ import {  trigger,  state,  style,  animate,  transition} from '@angular/animati
 import { HttpClient } from '@angular/common/http';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
+import {fadeInAnimation}  from '../../animations/fade-in.animation';
+
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './app/page-body/homepage/homepage.component.html',
   styleUrls: ['./app/page-body/homepage/homepage.component.css'],
-  animations:[
-    trigger('myAnimation',[
-        state('small', style({
-          transform: 'scale(1)',
-        })),
-        state('large', style({
-          transform: 'scale(1.2)',
-        })),
-        transition('small <=> large', animate('300ms ease-in')),
-    ]),
-  ]
+  animations:[fadeInAnimation ],
+  host:{ '[@fadeInAnimation]' : ''}
 
 })
 export class HomepageComponent implements OnInit {
@@ -28,27 +21,27 @@ export class HomepageComponent implements OnInit {
   public userId = (<any>data).userId;
   public categoryId;
   public categoryName;
-   imageUrl:any;
+  imageUrl:any;
 
   results:{};
 
-constructor(private router: Router,private http: HttpClient) {}
+  constructor(private router: Router,private http: HttpClient) {}
 
   ngOnInit() {
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&images=secondNavi";
     this.http.get('http://localhost:1337/templates/getSpecificChild?appId=' + this.appId).subscribe(data => {
-      // Read the result field from the JSON response.
+        // Read the result field from the JSON response.
 
-      this.results = data;
-      console.log(data);
-      console.log(" cat id  : " + JSON.stringify((this.results[0].id)));
-      this.categoryId = this.results[0].id;
-      this.categoryName = this.results[0].name;
-    },
-    error => {
-      this.showErrorPage();
-   });
+        this.results = data;
+        console.log(data);
+        console.log(" cat id  : " + JSON.stringify((this.results[0].id)));
+        this.categoryId = this.results[0].id;
+        this.categoryName = this.results[0].name;
+      },
+      error => {
+        this.showErrorPage();
+      });
   }
 
   // Routing Method
@@ -70,20 +63,20 @@ constructor(private router: Router,private http: HttpClient) {}
   images: Array<string> = ['sports', 'abstract', 'people', 'transport', 'city', 'technics', 'nightlife', 'animals'];
 
   owlOptions = {
-      loop:true,
-      margin:10,
-      responsiveClass:true,
-      responsive:{
-        0:{
-            items:2
-        },
-        600:{
-            items:4
-        },
-        1000:{
-            items:6,
-            loop:true
-        }
+    loop:true,
+    margin:10,
+    responsiveClass:true,
+    responsive:{
+      0:{
+        items:2
+      },
+      600:{
+        items:4
+      },
+      1000:{
+        items:6,
+        loop:true
+      }
     }
   }
 

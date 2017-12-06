@@ -9,7 +9,7 @@
 :host  /deep/ .carousel-caption {
   z-index: 10;
   bottom: 3rem;
-  height: 55%;  
+  height: 55%;
 }
 
 /* Declare heights because of positioning of img element */
@@ -20,7 +20,7 @@
  :host  /deep/ .carousel-item > img {
   min-width: 100%;
   height: 100%;
-  object-fit: cover;	
+  object-fit: cover;
 }
 
 :host  /deep/ .carousel-control-prev, :host  /deep/ .carousel-control-next, :host  /deep/ .carousel-indicators{
@@ -31,7 +31,6 @@
 -------------------------------------------------- */
 
 table {
-  color:#7b7d7f;
   font-size: 12px;
 }
 table td{
@@ -40,7 +39,7 @@ table td{
 }
 
 table thead{
-    border-bottom: 2px solid #b67c5a !important;
+    border-bottom: 2px solid #eceeef !important;
 }
 table thead td{
   border-bottom-width: 0;
@@ -49,7 +48,6 @@ table thead td{
 table thead td{
   text-transform: uppercase;
   font-weight: 600;
-  color: #1c1f23;
 }
 
 /* CUSTOMIZE THE ACCORDIAN
@@ -72,5 +70,5 @@ table thead td{
 }
 :host /deep/ ngb-accordion .card-header{
   border:0;
-  padding: 0px 1.25rem ;  
+  padding: 0px 1.25rem ;
 }

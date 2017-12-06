@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router  } from '@angular/router';
 import { PagebodyServiceModule } from '../page-body/page-body.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import * as data from './../madeEasy.json';
+import {fadeInAnimation}  from '../animations/fade-in.animation';
 
 @Component({
   selector: 'app-header',
   templateUrl: './app/header/header.component.html',
-  styleUrls: ['./app/header/header.component.css']
+  styleUrls: ['./app/header/header.component.css'],
+  animations:[fadeInAnimation ],
+  host:{ '[@fadeInAnimation]' : ''}
 })
 export class HeaderComponent {
   public appId = (<any>data).appId;

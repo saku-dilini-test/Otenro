@@ -1,6 +1,6 @@
 <section>
-	<h2>Contact Info:</h2>
-	<p *ngIf="description">{{description}}</p>
+	<h2 class="main-header-font">Contact Info:</h2>
+	<p class="main-content-font" *ngIf="description">{{description}}</p>
 	<div>
 	  <div class="row" *ngIf="address">
 	    <div class="col-md-4">
@@ -34,18 +34,18 @@
 	      <div><a href="mailto:{{website}}">{{website}}</a></div>
 	    </div>
 	  </div>
-	  <div class="row">
-	    <div class="col-md-4">
-	      <div><i class="icon fa fa-user"></i> Share:</div>
-	    </div>
-	    <div class="col-md-8">
-	                <ul class="list-inline">
-	                  <li  *ngIf="facebook"><a href="{{facebook}}" target="_blank"><i class="icon fa fa-facebook"></i></a></li>
-	                  <li  *ngIf="twitter"><a href="{{twitter}}" target="_blank"><i class="icon fa fa-twitter"></i></a></li>
-	                  <li  *ngIf="pinterest"><a href="{{pinterest}}" target="_blank"><i class="icon fa fa-pinterest-p"></i></a></li>
-	                  <li  *ngIf="linkedin"><a href="{{linkedin}}" target="_blank"><i class="icon fa fa-linkedin"></i></a></li>
-	                </ul>
-	    </div>
-	  </div>
+	  <!--<div class="row">-->
+	    <!--<div class="col-md-4">-->
+	      <!--<div><i class="icon fa fa-user"></i> Share:</div>-->
+	    <!--</div>-->
+	    <!--<div class="col-md-8">-->
+	                <!--<ul class="list-inline">-->
+	                  <!--<li  *ngIf="facebook"><a href="{{facebook}}" target="_blank"><i class="icon fa fa-facebook"></i></a></li>-->
+	                  <!--<li  *ngIf="twitter"><a href="{{twitter}}" target="_blank"><i class="icon fa fa-twitter"></i></a></li>-->
+	                  <!--<li  *ngIf="pinterest"><a href="{{pinterest}}" target="_blank"><i class="icon fa fa-pinterest-p"></i></a></li>-->
+	                  <!--<li  *ngIf="linkedin"><a href="{{linkedin}}" target="_blank"><i class="icon fa fa-linkedin"></i></a></li>-->
+	                <!--</ul>-->
+	    <!--</div>-->
+	  <!--</div>-->
 	</div>
 </section>
