@@ -162,7 +162,7 @@
   <div *ngIf="overWeight">Over weight. Cannot ship</div>
   <div *ngIf="underWeight">Under weight. Cannot ship</div>
 
-  <div class="custom-controls-stacked" *ngIf="!(overWeight || underWeight)" *ngIf="deliveryShow">
+  <div class="custom-controls-stacked" *ngIf="deliveryShow || !(overWeight || underWeight)">
     <h4>Select Payment Type</h4>
     <div  class="mt-3">
       <label class="custom-control custom-radio">
