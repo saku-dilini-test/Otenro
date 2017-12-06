@@ -8,14 +8,29 @@ var request = require('request'),
     fs = require('fs-extra'),
     config = require('../services/config');
 var path = require('path');
+const nodemailer = require('nodemailer');
+var transporter = null;
 
 
-/*var server = email.server.connect({
-    user: "onbilabsttest@gmail.com",
-    password: "0nb1tl@b$",
-    host: "smtp.gmail.com",
-    ssl: true
-});*/
+nodemailer.createTestAccount((err, account) => {
+
+    // create reusable transporter object using the default SMTP transport
+     transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: 'communications@otenro.com', // generated ethereal user
+            pass: 'R&3%ee=r1'  // generated ethereal password
+        }
+    });
+
+});
+
+
+
+
+
 
 var server  = email.server.connect({
     user:    "communications@otenro.com",
@@ -546,18 +561,18 @@ module.exports = {
             console.log(data);
 
             var serverOrg=config.server.host+':'+config.server.port;
-            //var emailHeaderImage;
-            var emailHeaderImage = serverOrg +"templates/viewImages?userId="+ data.userId
-                +"&appId="+data.appId+"&"+new Date().getTime()+"&img=email/" +userEmail.orderConfirmedEmailImage;
+            var emailHeaderImage;
 
             var imagePath =  serverOrg +"/templates/viewImages?userId="+ data.userId
                 +"&appId="+data.appId+"&"+new Date().getTime()+"&img=thirdNavi/";
 
+            var  headerImagePath = config.APP_FILE_SERVER + data.userId + "/templates/"+data.appId+'/img/email/'+userEmail.orderConfirmedEmailImage;
 
-            fs.readFile("/var/www/html/meServer/temp/5a1bd2b1b444b1ac725169f7/templates/5a1bd2b3b444b1ac725169f9/img/email/1511940635529banner-background-11001.jpeg", function(err, imgData) {
+            console.log("headerImagePath" + headerImagePath);
+            fs.readFile(headerImagePath, function(err, imgData) {
                 var base64data = new Buffer(imgData).toString('base64');
 
-                   // emailHeaderImage  =base64data;
+                    emailHeaderImage  =base64data;
 
                 var mBody = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'+
                     '<html xmlns="http://www.w3.org/1999/xhtml" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
@@ -627,7 +642,7 @@ module.exports = {
                     '							<table width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                     '                              <tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                     '                                  <td class="content-block" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">'+
-                    '								<img src="data:image/png;base64,'+emailHeaderImage+'"></td>'+
+                    '								<img src="cid:note@example.com"/></td>'+
                     '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                     '                                   <td '+ userEmail.orderConfirmedEmail.header +  ' </td>'+
                     '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
@@ -698,27 +713,40 @@ module.exports = {
                     '	</tr></table></body>'+
                     '</html>';
 
-                var emailDetails = {
-                    text: "",
-                    from: "onbitlabs@gmail.com",
-                    to: data.email,
-                    subject: "You have ordered ",
-                    attachment: [
-                        {
-                            data: mBody,
-                            alternative: true
-                        }
-                    ]
+
+                // setup email data with unicode symbols
+                let mailOptions = {
+                from: 'onbitlabs@gmail.com', // sender address
+                to: data.email, // list of receivers
+                subject: 'You have ordered', // Subject line
+                html: mBody ,
+                attachments : [
+                    {
+                        filename: 'image.png',
+                        content: Buffer.from(
+                            emailHeaderImage,
+                            'base64'
+                        ),
+
+                        cid: 'note@example.com' // should be as unique as possible
+                    }
+                ]// html body,
                 };
 
-                server.send(emailDetails, function(err, message) {
-                    if (err) {
-                        console.log(err);
-                    }
-                    //console.log(message);
-                    //return res('done');
+
+                // send mail with defined transport object
+                transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: %s', info.messageId);
+                // Preview only available when sending through an Ethereal account
+                /*console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));*/
+
+                // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
+                // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
                 });
-            });
+                });
 
 
 

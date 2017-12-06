@@ -899,7 +899,8 @@
             //$log.debug('d');
             var sendType = {
                 type: type,
-                userId: $auth.getPayload().id
+                userId: $auth.getPayload().id,
+                appId:$rootScope.appId
             }
 
             var prams = {
