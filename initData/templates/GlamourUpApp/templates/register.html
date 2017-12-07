@@ -27,7 +27,7 @@
                 <span class="input-label">Email</span>
                 <input type="email" name="email" placeholder="Email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                         ng-model="data.email" ng-required="true">
-                <span class="help-block" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
+                <span class="item-error-message" ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
               Enter a proper email
             </span>
               </label>
@@ -36,10 +36,10 @@
                 <input type="password" name="password" placeholder="Password" ng-pattern="passwordRegularExpression" ng-model="data.password" ng-required="true" >
 
                 <span class="help-block register-pw-error-message" ng-show="signUpForm.password.$error.minlength">
-                <span class="error" ng-show="signUpForm.password.$error.minlength">Password should have at least 7 characters.</span>
+                <span class="item-error-message" ng-show="signUpForm.password.$error.minlength">Password should have at least 7 characters.</span>
                 </span>
                 <span class="help-block register-pw-error-message" ng-show="!(signUpForm.password.$error.minlength) && signUpForm.password.$error.pattern">
-                <span class="error">Password should have at least one lower or Upper letter and one number</span>
+                <span class="item-error-message">Password should have at least one lower or Upper letter and one number</span>
                 </span>
               </label>
               <label class="item item-input item-floating-label">

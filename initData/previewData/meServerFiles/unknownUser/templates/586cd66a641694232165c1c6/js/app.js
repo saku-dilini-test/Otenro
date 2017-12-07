@@ -54,6 +54,20 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                 });
             }
 
+            ionic.Platform.isIE = function() {
+                return ionic.Platform.ua.toLowerCase().indexOf('trident') > -1;
+            }
+
+            if (ionic.Platform.isIE()) {
+                console.log("this is IE ")
+                window.addEventListener('click', function(event) {
+                        if (Object.prototype.toString.call(event) == '[object PointerEvent]') {
+                            event.stopPropagation();
+                        }
+                    }
+                    , true);
+            }
+
         });
     }).config(function($ionicConfigProvider) {
         $ionicConfigProvider.views.forwardCache(true);
@@ -118,6 +132,7 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
 
             // Each tab has its own nav history stack:
             .state('tab.login', {
+                cache: false,
                 url: '/login',
                 params:{
                     item: null
@@ -129,6 +144,7 @@ var mobileApp = angular.module('starter', ['ionic','ionic.cloud','satellizer','s
                 }
             })
             .state('tab.register', {
+                cache: false,
                 url: '/register',
                 params:{
                     item: null

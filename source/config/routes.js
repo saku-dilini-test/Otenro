@@ -50,6 +50,8 @@ module.exports.routes = {
     'POST /api/updateUserAdNetwork': 'AuthController.updateUserAdNetwork',
     'GET /api/getYourselfReason': 'AuthController.getYourselfReason',
     'GET /fromAddNetwork': 'AuthController.fromAddNetwork',
+    'GET /fromAddNetwork2': 'AuthController.fromAddNetwork2',
+    'GET /fromAddNetwork3': 'AuthController.fromAddNetwork3',
 
     /***
      * Billing Data
@@ -264,6 +266,12 @@ module.exports.routes = {
     'GET /edit/getUserOrders': 'edit/engage/EngageController.getUserOrders',
     'POST /edit/saveSchedulePushMassage' : 'edit/engage/EngageController.saveSchedulePushMassage',
 
+
+    /**
+     * GetAssistanceController
+     */
+    'POST /edit/sendGetAssistance': 'edit/getAssistance/GetAssistanceController.sendGetAssistance',
+
     /***
      * Template Data
      ***/
@@ -284,6 +292,8 @@ module.exports.routes = {
     'GET /templates/getPolicies': 'template/TemplateController.getPolicies',
     'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
     'POST /templates/postDeviceId': 'template/TemplateController.postDeviceId',
+    'GET /templates/getOrdersOfUser': 'template/TemplateController.getOrdersOfUser',
+    'GET /templates/getTemplateData' : 'template/TemplateController.getTemplateByPreviewId',
 
 
     /**
@@ -331,9 +341,11 @@ module.exports.routes = {
 
     /***
      * Technical Support Controller
+     *
      **/  
      'GET  /edit/getAllAppsData': 'technicalSupport/TechnicalSupportController.getAllAppsData',
      'POST  /edit/getPublishDetails': 'technicalSupport/TechnicalSupportController.getPublishDetails',
+    'POST  /edit/getUserApps': 'technicalSupport/TechnicalSupportController.getUserApps',
      'GET    /edit/getPushConfigDetails': 'technicalSupport/TechnicalSupportController.getPushConfigDetails',
      'POST   /edit/savePushConfigDetails': 'technicalSupport/TechnicalSupportController.savePushConfigDetails',
      'POST   /edit/saveAdNetwork': 'technicalSupport/TechnicalSupportController.saveAdNetwork',

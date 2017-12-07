@@ -7,11 +7,11 @@
     function MainMenuCtrl(oblMenuService,$scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
                           mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log) {
 
-
         $scope.tmpImage = [];
         $scope.mainImg = null;
         $scope.topLevel  = '';
         $scope.tempplayer = "";
+
 
         // ----- Config -----
         $scope.initialData = initialData;
@@ -677,6 +677,30 @@
                 mainMenuService.showMainMenuDialog();
             }
         };
-
+        /**
+         * set second navigation aspect ratios to $scope
+         **/
+        $scope.setAspectRatio = function () {
+            mainMenuService.getApplicationData($rootScope.appId)
+                .success(function (data) {
+                    if (data.templateId){
+                        mainMenuService.getTemplateData(data.templateId)
+                            .success(function (templateData) {
+                                if(templateData.secondNaviAspectRatio){
+                                    $scope.secondNaviAspectRatio = parseFloat(templateData.secondNaviAspectRatio);
+                                }
+                            }).error(function (err) {
+                            toastr.error(err.message, 'Warning', {
+                                closeButton: true
+                            });
+                        });
+                    }
+                }).error(function (err) {
+                toastr.error(err.message, 'Warning', {
+                    closeButton: true
+                });
+            });
+        };
+        $scope.setAspectRatio();
     }
 })();

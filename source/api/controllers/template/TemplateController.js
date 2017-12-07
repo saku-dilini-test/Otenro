@@ -40,7 +40,7 @@ module.exports = {
     },
     /**
      * Return Application Store Setting Collection for Given App Id
-     * It has About Us
+     * It has About Us 
      * @param req
      * @param res
      */
@@ -73,7 +73,7 @@ module.exports = {
             res.json(app);
         });
     },
-
+    
     getTermsAndConditions : function(req,res){
 
         var appId = req.param('appId');
@@ -446,7 +446,7 @@ module.exports = {
             				}
             			}
             			else {
-
+            			
                             TansactionLogger.info("appId " +req.body.appId+ ","+ "error " + "Failed Transaction." );
             				if(response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null){
                                 TansactionLogger.info("appId " +req.body.appId+ ","+ "error " + response.getTransactionResponse().getErrors() );
@@ -473,23 +473,37 @@ module.exports = {
         });
     },
     /**
-          * Return all orders of a particular user
-          * @param req {appId : string, userId' : string }
-          * @param res {json}
-
+     * Return all orders of a particular user
+     * @param req {appId : string, userId' : string }
+     * @param res {json}
      */
-        getOrdersOfUser : function (req, res) {
-            var appId = req.param('appId');
-            var registeredUser = req.param('userId');
-            var searchApp = {
-                    appId : appId,
-                    registeredUser : registeredUser
+    getOrdersOfUser : function (req, res) {
+        var appId = req.param('appId');
+        var registeredUser = req.param('userId');
+        var searchApp = {
+            appId : appId,
+            registeredUser : registeredUser
 
-            };
-            ApplicationOrder.find().where(searchApp).exec(function (err, result) {
-                    if (err) return done(err);
-                    res.json(result);
-                });
-}
+        };
+        ApplicationOrder.find().where(searchApp).exec(function (err, result) {
+            if (err) return done(err);
+            res.json(result);
+        });
+     },
+
+     /**
+     * Get template data using previewId and return it as json response
+     * */
+    getTemplateByPreviewId : function (req, res) {
+        var templateId = req.param('templateId');
+        Template.findOne({ previewId : templateId })
+            .exec(function (err, template) {
+            if (err) return done(err);
+            res.json(template);
+
+        });
+    }
+
+
 
 };

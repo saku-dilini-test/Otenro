@@ -4,22 +4,23 @@
              <div class="logo-section text-center">
                   <img src="img/made-easy-logo.svg" alt="logo" width="150" />
                   <h4 style="color:#b4b4b4">Log into your Otenro account to start testing your Otenro apps </h4>
-            </div>
-            <form name="loginForm">
-                  <div class="list">
-                    <label class="item item-input item-floating-label">
-                      <span class="input-label">Email</span>
-                      <input type="text" name="username" placeholder="Email" ng-model="data.username" required>
-                    </label>
-                    <label class="item item-input item-floating-label">
-                      <span class="input-label">Password</span>
-                      <input type="password" name="password" placeholder="Password" ng-model="data.password" required>
-                    </label>
-                    <div class="col text-center">
-                      <button class="button button-positive button-full" ng-disabled="loginForm.$invalid" ng-click="login(data)">Login</button>
-                    </div>
-                  </div>
-            </form>
+
+                  <form name="loginForm">
+                        <div class="list">
+                          <label class="item item-input item-floating-label">
+                            <span class="input-label">Email</span>
+                            <input type="text" name="username" placeholder="Email" ng-model="data.username" required>
+                          </label>
+                          <label class="item item-input item-floating-label">
+                            <span class="input-label">Password</span>
+                            <input type="password" name="password" placeholder="Password" ng-model="data.password" required>
+                          </label>
+                          <div class="col text-center">
+                            <button class="button button-positive button-full" ng-disabled="loginForm.$invalid" ng-click="login(data)">Login</button>
+                          </div>
+                        </div>
+                  </form>
+             </div>
        </div>
   </ion-content>
 </ion-view>

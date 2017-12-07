@@ -16,7 +16,7 @@ angular.module('starter.controllers', [])
   /** --/-- Login Ctrl ------------------- **/
   .controller('LoginCtrl', function($scope, $state, $ionicPopup, AuthService) {
 
-
+$scope.status = "";
 
     // Check user already login
     // If login true, move to dashboard
@@ -55,6 +55,8 @@ angular.module('starter.controllers', [])
     $scope.fileUrl = fileServerUrl.data.fileServerUrl;
     $scope.date = new Date().getTime();
 
+
+
     // Set mobile application list
     $scope.appList = allApps.data;
      console.log($scope.appList);
@@ -72,10 +74,17 @@ angular.module('starter.controllers', [])
     },10000);
 
 
+     $scope.stopLoading = function (){
+
+       $ionicLoading.hide();
+     }
+
+
     // Open selected application in  Cordova.InAppBrowser
     $scope.openApp = function(userID,appId,appName){
-
+      $ionicLoading.hide();
       // ME SERVER URL for GIVEN User ID & AppId
+        //var url = 'http://192.168.8.35/meServer/temp/'+userID+'/templates/'+appId+'/#/';
         var url = 'http://cdn.otenro.com'+'/temp/'+userID+'/templates/'+appId+'/#/';
       console.log(url);
 
@@ -110,40 +119,61 @@ angular.module('starter.controllers', [])
         backButtonCanClose: true,
         hidden : true
       }).addEventListener(cordova.ThemeableBrowser.EVT_ERR, function(e) {
-        // console.error(e.message);
+         //console.error(e.message);
       }).addEventListener(cordova.ThemeableBrowser.EVT_WRN, function(e) {
-        // console.log(e.message);
+        //console.log(e.message);
+
       });
 
       //Event start when In App Browser start loading
       ref.addEventListener('loadstart', function(event) {
         // until load In App Browser loading spinner
         $ionicLoading.show({
-          template: '<ion-spinner icon="lines" ></ion-spinner>'
+          template: '<ion-spinner icon="spiral" ng-click="stopLoading()" ></ion-spinner>',
+          scope :$scope
         });
       });
 
       //Event start when In App Browser stop loading
       ref.addEventListener('loadstop', function(event){
+        $ionicLoading.hide();
         // Show In-App-Browser
         ref.show();
-        // Hide spinner
-        $ionicLoading.hide();
-        // refer css
-        ref.insertCSS({file: "/css/inappBrowser.css"});
       });
     };
 
   })
 
   /** --/-- User Ctrl ------------------- **/
-  .controller('userCtrl', function($scope,$state,AuthService) {
+  .controller('userCtrl', function($scope,$state,AuthService,$ionicPopup,dashBoardService) {
 
     // --- logout function --------
     $scope.logout = function () {
       AuthService.logout();
       $state.go('app.login');
     };
+
+
+    $scope.clearAllData = function () {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Clear All App Data',
+        template: 'Are you sure you want clear all app data?'
+      });
+      confirmPopup.then(function(res) {
+        if(res) {
+          console.log('You are sure');
+          var LOCAL_TOKEN_KEY = 'userToken';
+          var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
+
+          dashBoardService.clearAllAppData(JSON.parse(token).sub).success(function (data) {
+            console.log("delete done");
+          })
+        } else {
+          console.log('You are not sure');
+        }
+      });
+    }
+
 
   });
 

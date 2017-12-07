@@ -15,10 +15,9 @@
         $scope.product = initialData.product;
         $scope.selection = initialData.product.selection;
         $scope.currency = $rootScope.currency;
-        $scope.isNewProduct = true;
+        //$scope.isNewProduct = true;
         $scope.skuFieldEnable = false;
         $scope.isNew = $rootScope.tempNew;
-        console.log("$scope.isNew  : " + $scope.isNew)
 
         if(initialData.isNewItem)
         {
@@ -352,8 +351,7 @@
          * add or update product
          */
         $scope.addOrUpdateProducts = function () {
-            console.log("publish products : " + $rootScope.tempNew);
-            if(initialData.product.id == '0'){
+              if(initialData.product.id == '0'){
                   initialData.product.id = undefined;
                   $scope.product.id = undefined;
               }
@@ -391,7 +389,6 @@
 
         };
         $scope.saveAndPublishProducts = function () {
-            console.log("publish products : " + $rootScope.tempNew);
               if(initialData.product.id == '0'){
                     initialData.product.id = undefined;
                     $scope.product.id = undefined;
@@ -469,6 +466,7 @@
 ////        $scope.buttonName = "Browse Image";
 
         $scope.cropImage = function () {
+            $scope.setAspectRatio();
             $scope.myImage = null;
             var handleFileSelect=function(evt) {
 
@@ -803,9 +801,9 @@
         
         $scope.back = function(){
             if($scope.isNewProduct){
-                $mdDialog.hide();
-            }else{
                 return commerceService.showInventoryDialog();
+            }else{
+                $mdDialog.hide();
             }
 
 
@@ -1063,6 +1061,33 @@
 
 
             };
+
+        /**
+         * set third navigation aspect ratios to $scope
+         **/
+        $scope.setAspectRatio = function () {
+            mainMenuService.getApplicationData($rootScope.appId)
+                .success(function (data) {
+                    if (data.templateId){
+                        mainMenuService.getTemplateData(data.templateId)
+                            .success(function (templateData) {
+                                if(templateData.thirdNaviAspectRatio){
+                                    $scope.thirdNaviAspectRatio = parseFloat(templateData.thirdNaviAspectRatio);
+                                }
+                            }).error(function (err) {
+                            toastr.error(err.message, 'Warning', {
+                                closeButton: true
+                            });
+                        });
+                    }
+                }).error(function (err) {
+                toastr.error(err.message, 'Warning', {
+                    closeButton: true
+                });
+            });
+        };
+
+
 
     }
 })();

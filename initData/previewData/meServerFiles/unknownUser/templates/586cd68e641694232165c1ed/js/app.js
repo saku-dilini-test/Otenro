@@ -60,6 +60,20 @@ angular.module('starter', ['ionic','ionic.cloud','starter.services','starter.con
           });
         }
 
+          ionic.Platform.isIE = function() {
+              return ionic.Platform.ua.toLowerCase().indexOf('trident') > -1;
+          }
+
+          if (ionic.Platform.isIE()) {
+              console.log("this is IE ")
+              window.addEventListener('click', function(event) {
+                      if (Object.prototype.toString.call(event) == '[object PointerEvent]') {
+                          event.stopPropagation();
+                      }
+                  }
+                  , true);
+          }
+
       });
     })
     .config(function($ionicConfigProvider) {

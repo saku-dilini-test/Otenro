@@ -148,6 +148,9 @@
         }
         $scope.getArray = function(){
             $scope.exportArrayN = [];
+
+
+
             angular.forEach($scope.exportArray, function(value, key) {
                 if (value.quantity) {
                     value.quantity = value.quantity;
@@ -155,25 +158,17 @@
                     value.quantity = 'unlimited';
                 }
                 $scope.printVariants = function (selection) {
-                    selection.length
+                    $scope.selectionArray = [];
+                    $scope.value = "";
 
-                    if(selection.length == 1){
-                        $scope.selectionArray = selection[0].name + "-" + selection[0].vType;
-                    }else if(selection.length == 2){
-                        $scope.selectionArray = selection[0].name + "-" + selection[0].vType
-                            +"\n"+selection[1].name + "-" + selection[1].vType;
-                    }else if(selection.length == 3){
-                        $scope.selectionArray = selection[0].name + "-" + selection[0].vType;
-                        +"\n"+selection[1].name + "-" + selection[1].vType
-                        +"\n"+selection[2].name + "-" + selection[2].vType
-                    }else{
-                        $scope.selectionArray = selection[0].name + "-" + selection[0].vType;
-                        +"\n"+selection[1].name + "-" + selection[1].vType
-                        +"\n"+selection[2].name + "-" + selection[2].vType
-                        +"\n"+selection[3].name + "-" + selection[3].vType
-                    }
+                    angular.forEach(selection, function(value) {
+                        $scope.value = $scope.value  + value.name  + "-" + value.vType + "  ";
 
-                    return $scope.selectionArray;
+                    });
+
+                    $scope.selectionArray.push($scope.value);
+                    $scope.value = "";
+                    return $scope.selectionArray ;
                 }
 
                     $scope.exportArrayN.push({
@@ -352,7 +347,8 @@
          * Show add product dialog
          */
         $scope.addProduct = function () {
-            return commerceService.showAddProductsDialog('products');
+            var State = true;
+            return commerceService.showAddProductsDialog('products',State);
         }
     }
     })();

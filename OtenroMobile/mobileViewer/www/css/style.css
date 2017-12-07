@@ -146,7 +146,8 @@ body{
 }
 
 .logout{
-  margin-top:60%;
+  position: relative;
+  top: calc(22vh);
 }
 
 .settings {
@@ -157,13 +158,16 @@ body{
 }
 
 .card{
-    top: 10%;
+    top: 5%;
     position: relative;
-    height: 85%;
     overflow-y: auto;
     border-radius: 5px;
 }
 
 .scroll{
   height:100%;
+}
+
+.logo-section{
+  height:70vh;
 }

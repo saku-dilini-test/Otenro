@@ -33,6 +33,14 @@
     <link href="star-landing-page/css/style.css" rel="stylesheet">
     <link href="star-landing-page/css/bootstrap-social.css" rel="stylesheet">
 
+    <style>
+        .row:before{
+            display: none ;
+        }
+        .container:before, .container:after{
+            display: none;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -53,16 +61,21 @@
                             <p class="item-3">Build your FREE mobile app today!</p>
                         </div>
                         <div class="row star-social">
-                            <div class="col-md-8">
-                                <a class="btn btn-block btn-social btn-facebook" ng-click="authenticate('facebook')">
-                                    <span class="fa fa-facebook"></span> Sign in with Facebook
-                                </a>
-                            </div>
+                            <!--<div class="col-md-8">-->
+                                <!--<a class="btn btn-block btn-social btn-facebook" ng-click="authenticate('facebook')">-->
+                                    <!--<span class="fa fa-facebook"></span> Sign in with Facebook-->
+                                <!--</a>-->
+                            <!--</div>-->
                             <div class="col-md-8">
                                 <a class="btn btn-block btn-social btn-google" ng-click="authenticate('google')">
                                     <span class="fa fa-google"></span> Sign in with Google+
                                 </a>
                             </div>
+                            <!--<div class="col-md-8">-->
+                                <!--<a class="btn btn-block btn-social btn-twitter" ng-click="register()">-->
+                                    <!--<span style="left: 1px;" class="fa fa-at"></span> Sign in with Email-->
+                                <!--</a>-->
+                            <!--</div>-->
                         </div>
                     </div>
 
