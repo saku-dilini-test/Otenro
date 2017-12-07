@@ -25,9 +25,7 @@ export class AboutusComponent implements OnInit {
         this.header = data.header;
         this.content = data.content;
     }, (err)=> {
-        alert(
-           'About us Data loading error!,Please check your connection!'
-        );
+        console.log(err);
     });
   }
 

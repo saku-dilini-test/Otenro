@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
 
       },
       function (err) {
-        alert('login failed');
+        console.log(err);
       })
 
   }

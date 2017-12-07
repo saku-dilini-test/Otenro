@@ -22,9 +22,7 @@ export class PoliciesComponent implements OnInit {
         this.privacyPolicy = data.privacyPolicy;
         this.returnPolicy = data.returnPolicy;
     },(err)=> {
-        alert(
-            'Policies Data loading error!,Please check your connection!'
-        );
+        console.log(err);
     });
   }
 

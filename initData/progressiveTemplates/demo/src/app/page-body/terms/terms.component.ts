@@ -18,13 +18,11 @@ export class TermsComponent implements OnInit {
 
   ngOnInit() {
     this.http.get( SERVER_URL + '/templates/getTermsAndConditions?appId='+this.appId).subscribe((data)=> {
-      console.log("TermAndCondistion data " + data);
-      this.terms = data.termsAndCondition;
-  }),((err)=> {
-      alert('warning,Unable to get terms & condition info');
-  });
+        this.terms = data.termsAndCondition;
+    }),((err)=> {
+        console.log(err);
+    });
 
-this.terms = "This is terms and condition of this application ";
   }
 
 

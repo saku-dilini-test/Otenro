@@ -194,8 +194,6 @@ this.years.push(date++);
       .subscribe((data) => {
 
           this.pickup = data;
-          console.log("this.pickup : " + JSON.stringify(this.pickup));
-          console.log("this.pickup ID  : " + (this.pickup[0].id));
 
           /* $scope.header = data.header;
           $scope.content = data.content;*/
@@ -233,6 +231,7 @@ this.years.push(date++);
       var product = this.cartItems[i];
       amount = product.total;
       total += (amount);
+      console.log(total);
     }
     tax = total * this.tax / 100;
     this.taxTotal = total * this.tax / 100;
@@ -378,8 +377,6 @@ this.years.push(date++);
 
   checkout(data) {
 
-console.log("data : " + JSON.stringify(data));
-
     this.isSelected = true;
     this.pickupData = {
       item: this.dataService.deliverItems,
@@ -389,7 +386,6 @@ console.log("data : " + JSON.stringify(data));
       deliverDetails: { name: this.name, number: this.pkPhone },
 
     }
-    console.log("this.pickupData : " + JSON.stringify(this.pickupData));
     this.chk(this.pickupData);
     setTimeout(()=>{ this.pay("001"); }, 500);
   };
@@ -434,7 +430,6 @@ console.log("data : " + JSON.stringify(data));
     this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param)
       .subscribe((data) => {
 
-        console.log("tax data : " + JSON.stringify(data));
 
         if (data == '') {
           console.log('no Tax data');
@@ -442,9 +437,7 @@ console.log("data : " + JSON.stringify(data));
           this.chkTax = 0;
           this.isApplyShippingCharge = false;
         } else {
-          console.log('Tax data available');
           this.chkTax = data[0].taxAmount;
-          // $log.debug(data[0]);
           this.isApplyShippingCharge = data[0].isApplyShippingCharge;
           this.chkHide = false;
         }
@@ -458,7 +451,6 @@ console.log("data : " + JSON.stringify(data));
         }
         // $log.debug($scope.isApplyShippingCharge);
         if (this.isApplyShippingCharge == true && this.formType != 'pickup') {
-console.log("inside chk if");
           // $log.debug($scope.shippingCost);
           var shipping = parseInt(this.chkShippingCost);
           total = total + shipping;
@@ -471,26 +463,25 @@ console.log("inside chk if");
             this.cart.totalPrice = total;
           }
         } else {
-          console.log("inside chk else");
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
-          if (typeof this.finalDetails.pickupCost == "undefined") {
+          if (!this.finalDetails.pickupCost) {
             this.chkPickupCost = 0;
           }else{
             this.chkPickupCost = this.finalDetails.pickupCost;
           }
-          console.log("this.chkShippingCost  : " + this.chkShippingCost );
-
+          console.log("this.chkShippingCost  : " + this.chkShippingCost +"chkPickupCost" +this.chkPickupCost );
+          console.log("total"+total)
           if (tax > 0) {
             total = total + tax;
             if(this.chkPickupCost == 0){
-            this.totalPrice = total + parseInt(this.chkShippingCost);
+            this.totalPrice = total;
             }else{
               this.totalPrice = total + parseInt(this.chkPickupCost);
             }
           } else {
             if(this.chkPickupCost == 0){
-              this.totalPrice = total + parseInt(this.chkShippingCost);
+              this.totalPrice = total ;
               }else{
                 this.totalPrice = total + parseInt(this.chkPickupCost);
               }          }

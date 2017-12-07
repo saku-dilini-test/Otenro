@@ -102,8 +102,8 @@
 
         <div class="my-3">
             <section class="row py-3">
-              <div class="col-lg-2 col-md-3 col-xs-6 text-center px-0 m-3" *ngFor="let item of results;">
-                <a href="#"> <img src="{{imageUrl}}/{{item.imageUrl}}" width="100%" height="100px" /></a>
+              <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 text-center my-3" *ngFor="let item of results;">
+                <a href="#"> <img src="{{imageUrl}}/{{item.imageUrl}}" width="90%" /></a>
                 <div class="b-goods__category main-content-font">product</div>
                 <h3 class="b-goods__name main-header-font">{{item.name}}</h3>
                 <div class="b-goods__price main-content-font">{{currency}}{{item.variants[0].price}}</div>

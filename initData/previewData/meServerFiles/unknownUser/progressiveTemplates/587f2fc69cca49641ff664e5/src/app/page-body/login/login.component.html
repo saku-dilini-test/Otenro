@@ -4,14 +4,14 @@
 
 
 <div class="container">
-  <form #f="ngForm" (ngSubmit)="login(f.value)" novalidate class="main-content-font">
+  <form #f="ngForm" (ngSubmit)="login(f.value)" class="main-content-font">
     <div class="form-group row">
       <label for="username" class="col-sm-2 col-form-label col-form-label-lg">Email</label>
       <div class="col-sm-10">
         <input type="email" class="form-control form-control-lg" email pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" id="username" placeholder="you@example.com"  name="userEmail" userEmail='ngModel' #userEmail="ngModel" ngModel required >
-        <div [hidden]="userEmail.valid || userEmail.pristine" class="alert alert-danger">
-          <div [hidden]="!userEmail.hasError('required')">Email id is required</div>
-          <div [hidden]="!userEmail.hasError('pattern')">Invalid Email</div>
+        <div *ngIf="userEmail.invalid && (userEmail.touched || userEmail.dirty)" class="alert alert-danger">
+          <div *ngIf="userEmail.hasError('required')">Email id is required</div>
+          <div *ngIf="userEmail.hasError('pattern')">Invalid Email</div>
         </div>
       </div>
 
@@ -19,9 +19,9 @@
     <div class="form-group row">
       <label for="password" class="col-sm-2 col-form-label col-form-label-lg">Password</label>
       <div class="col-sm-10">
-        <input type="password" class="form-control form-control-lg" id="password"  name="password" password='ngModel' #password="ngModel" ngModel required>
-        <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-          <div [hidden]="!password.hasError('required')">Password id is required</div>
+        <input type="password" class="form-control form-control-lg" id="password"  name="password" password='ngModel' #password="ngModel" ngModel required ="required">
+        <div *ngIf="password.invalid && (password.touched || password.dirty)" class="alert alert-danger">
+          <div *ngIf="password.hasError('required')">Password id is required</div>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
 
   <div class="row">
     <div class="col-sm-6">
-       <button [disabled]="loading" type="submit" class="btn  main-button btn-lg btn-block">Login</button>
+       <button [disabled]="loading || userEmail.invalid || password.invalid" type="submit" class="btn  main-button btn-lg btn-block">Login</button>
     </div>
     <div class="col-sm-6">
        <button [disabled]="loading" (click) = 'register()' class="btn  main-button button-inverse btn-lg btn-block" (click)="register()">Register</button>
