@@ -2012,21 +2012,18 @@ trix-toolbar .button_group input[type=button]{
     border-bottom:unset;
 }
 
-.custom-trix trix-editor{
+.custom-trix .ta-scroll-window {
     width:100%;
-    height:207px;
+    min-height:75px;
+    height:75px;
     overflow-y: auto;
 }
 
 .email-image-upload{
     position: relative;
-    text-align:center;
 }
 .email-image-upload p{
     padding:unset;
-}
-.email-image-upload button{
-    margin: 1em 0 0 0;
 }
 
 .md-dialog-container{
@@ -2800,6 +2797,15 @@ footer.when-mobile{
     background-color: #222;
 }
 
+
+.email-template div:first-child {
+    display: none;
+}
+.email-template .ta-editor, .email-template .ta-bind {
+    border: none;
+    min-height: 100px;
+    background: transparent;
+}
 /*IE 10 and abouve specific css wirte inside this media quary*/
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     .fixed-inventory .tree-grid thead {
