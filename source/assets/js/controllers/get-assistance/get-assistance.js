@@ -49,23 +49,23 @@
                         $mdDialog.hide();
                       }
                     },
-                    template:`<md-dialog style="width:500px" aria-label="Thank you">
-                                <md-content >
-                                    <div class="md-dialog-header">
-                                        <h1>Thank you </h1>
-                                    </div>
-                                    <br>
-                                    <div class="md-dialog-header">
-                                         <lable>Thank you Shashan we will get back to you soon...</lable>
-                                    </div>
-                                    <br>
-                                    <div class="md-dialog-buttons">
-                                        <div class="inner-section">
-                                             <md-button class="me-default-button" ng-click="dialogCtrl.confirm()">ok</md-button>
-                                        </div>
-                                    </div>
-                                </md-content>
-                             </md-dialog>`
+                        template:'<md-dialog style="width:500px" aria-label="Thank you">'+
+                                '<md-content >'+
+                                    '<div class="md-dialog-header">'+
+                                        '<h1>Thank you </h1>'+
+                                    '</div>'+
+                                    '<br>'+
+                                    '<div class="md-dialog-header">'+
+                                         '<lable>Thank you we will get back to you soon...</lable>'+
+                                    '</div>'+
+                                    '<br>'+
+                                    '<div class="md-dialog-buttons">'+
+                                        '<div class="inner-section">'+
+                                             '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">ok</md-button>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</md-content>'+
+                             '</md-dialog>'
                 })
             })
         }
