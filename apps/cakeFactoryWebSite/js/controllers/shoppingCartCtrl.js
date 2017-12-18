@@ -16,7 +16,7 @@ angular.module('animateApp')
 
         $scope.load = function(){
 
-            if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0){
+/*            if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0){
                 var promise = $scope.loader();
                 promise.then(function(resolve) {
                     if(resolve == 'ok'){
@@ -27,11 +27,11 @@ angular.module('animateApp')
                     }
                 });
 
-            }else{
+            }else{*/
                 $scope.loader();
                 $scope.saveCartInServer();
-                $scope.cart.checkout('PayPal');
-            }
+/*                $scope.cart.checkout('PayPal');
+            }*/
         }
 
          $scope.loader = function() {
@@ -78,6 +78,11 @@ angular.module('animateApp')
             //cart info save api
             $http.post(SERVER_URL+"payment/saveShoppingCartWeb",shoppingCart)
                 .then(function (response) {
+                      setTimeout(function() {
+                            $scope.cart.checkout('PayPal');
+                      }, 1000);
+                },function(error){
+                    console.log(error)
                 });
 
                localStorage.clear();
