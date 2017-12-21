@@ -33,7 +33,7 @@
 								</td>
 								<td data-title="Price" >
 
-										<a >${{sign}}{{c.price}}</a>
+										<a >{{sign}}{{c.price}}</a>
 
 								</td>
 								<td data-title="Quantity">
@@ -47,7 +47,7 @@
                   </div>
                 </td>
 								<td data-title="Total">
-										<a [(ngModel)] = "c.total" ngDefaultControl>${{sign}}{{c.total * c.qty}}</a>
+										<a [(ngModel)] = "c.total" ngDefaultControl>{{sign}}{{c.total * c.qty}}</a>
 
 								</td>
 								<td>
@@ -77,7 +77,7 @@
 							<th>Total</th>
 							<td data-title="Total">
 								<strong>
-									<a [(ngModel)]="total" ngDefaultControl>${{sign}}{{getTotal()}}</a>
+									<a [(ngModel)]="total" ngDefaultControl>{{sign}}{{getTotal()}}</a>
 								</strong>
 							</td>
 						</tr>

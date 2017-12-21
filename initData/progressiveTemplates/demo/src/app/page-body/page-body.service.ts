@@ -4,7 +4,7 @@ import { Injectable, OnInit } from '@angular/core';
 export class PagebodyServiceModule {
 
   data:object;
-  userData:object;
+  userData;
   cart = {cartItems:[],cartSize:0,totalPrice:0,totalQuantity:0};
   isUserLoggedIn = {check:false};
   parseWeight;
@@ -16,10 +16,10 @@ export class PagebodyServiceModule {
   finalDetails;
   deliverItems;deliverItemsDelivery;
   currency;paypalCurrency;
-  payPalDetails:object;
+  payPalDetails;
   paypalKey;
   env;
-
+  catId;
   constructor(){
 
     this.parentobj.cartSize = this.cart.cartSize;

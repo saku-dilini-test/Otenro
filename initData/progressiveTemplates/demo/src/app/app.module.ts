@@ -26,6 +26,14 @@ import { GithubAuthInterceptor } from './githubauth.interceptor';
 import { OrderHistoryComponent } from './page-body/order-history/order-history.component';
 import { PaypalPaymentComponent } from './page-body/paypal-payment/paypal-payment.component';
 import { CheckoutComponent } from './page-body/checkout/checkout.component';
+import {PageBodyRoutingModule} from './page-body/page-body-routing.module';
+import {HomepageService} from './services/homepage.service';
+import {ShopService} from './services/shop.service';
+import {CurrencyService} from './services/currency.service';
+import {TaxService} from './services/taxinfo.service';
+import {ShippingInfoService} from './services/shippinginfo.service';
+import { PostService} from './services/post.service'
+import { AppDataService } from './services/appdatainfo.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +48,7 @@ import { CheckoutComponent } from './page-body/checkout/checkout.component';
       prefix: 'my-app',
       storageType: 'localStorage'
   }),
-
+    PageBodyRoutingModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
@@ -54,7 +62,9 @@ import { CheckoutComponent } from './page-body/checkout/checkout.component';
     NouisliderModule,
     BrowserAnimationsModule,
   ],
-  providers: [PagebodyServiceModule,{
+  providers: [PagebodyServiceModule,HomepageService,ShopService,
+    CurrencyService,TaxService,ShippingInfoService,PostService,
+    AppDataService,{
     provide: HTTP_INTERCEPTORS,
     useClass: GithubAuthInterceptor,
     multi: true

@@ -106,7 +106,7 @@
                 <a href="#"> <img src="{{imageUrl}}/{{item.imageUrl}}" width="90%" /></a>
                 <div class="b-goods__category main-content-font">product</div>
                 <h3 class="b-goods__name main-header-font">{{item.name}}</h3>
-                <div class="b-goods__price main-content-font">{{currency}}{{item.variants[0].price}}</div>
+                <div class="b-goods__price main-content-font">{{currency.sign}}{{item.variants[0].price}}</div>
                 <div class="b-goods-links">
                   <a (click)= "navigateProd('product',item)" class="btn main-button">add to cart</a>
                 </div>

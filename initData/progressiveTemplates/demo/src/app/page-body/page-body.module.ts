@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
+import {HttpModule} from '@angular/http';
 import { PageBodyRoutingModule } from './page-body-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PageBodyComponent } from './page-body.component';
@@ -32,8 +33,8 @@ import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.componen
     AgmCoreModule,
     NouisliderModule,
     FormsModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    HttpModule
   ],
    exports:[
     PageBodyComponent

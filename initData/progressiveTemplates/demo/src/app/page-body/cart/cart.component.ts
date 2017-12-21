@@ -5,11 +5,15 @@ import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { CurrencyService } from '../../services/currency.service';
+import { TaxService } from '../../services/taxinfo.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './app/page-body/cart/cart.component.html',
+  // templateUrl: './cart.component.html',
   styleUrls: ['./app/page-body/cart/cart.component.css']
+  // styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
 
@@ -20,9 +24,9 @@ export class CartComponent implements OnInit {
   hide: any;
   tax: any;
   user;
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule) { }
+  constructor(private taxService: TaxService, private currencyService: CurrencyService,private localStorageService: LocalStorageService, private router: Router, private dataService: PagebodyServiceModule) { }
   cartItems = this.dataService.cart.cartItems;
-  currency: string;
+  currency;sign;
 
   imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
   + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
@@ -31,10 +35,20 @@ export class CartComponent implements OnInit {
   @Output()
 
   ngOnInit() {
+
+    this.currencyService.getCurrencies().subscribe(data =>{
+      this.currency = data;
+      console.log("this.currency  : " + JSON.stringify(this.currency.sign));
+      this.sign = this.currency.sign;
+      console.log("cart sign  : " + this.sign);
+    }), error => {
+      alert('error getting currency');
+    };
+
     console.log("cart size : " + this.dataService.cart.cartSize);
     this.user = (this.localStorageService.get('appLocalStorageUser'+this.appId));
 
-    this.http.get(SERVER_URL + '/edit/getTaxInfo?appId=' + this.appId).subscribe(function (data) {
+    this.taxService.getTaxInfo().subscribe(data =>{
       if (data == '') {
         this.hide = true;
         this.tax = 0;
@@ -42,29 +56,17 @@ export class CartComponent implements OnInit {
         this.tax = data[0].taxAmount;
         this.hide = false;
       }
-    })
-
-    this.http.get(SERVER_URL + "/edit/getShippingInfo?appId="+this.appId)
-    .subscribe(function (data) {
-            this.shippingData=data;
-        },
-        function (err) {
-            alert({
-                title: 'Policies Data loading error!',
-                template: 'Please check your connection!'
-            });
-        });
+    }),err =>{
+      alert('error loading tax info')
+    }
 
 
-    this.http.get(SERVER_URL + '/templates/getCurrency?appId=' + this.appId).subscribe(function (data) {
-      this.currency = data;
-      console.log("this.currency  : " + JSON.stringify(this.currency.sign));
-      this.sign = this.currency.sign;
-      console.log("cart sign  : " + this.sign);
-    }, error => {
-      alert('error currency');
+    this.taxService.getShippingInfo().subscribe(data =>{
+        this.shippingData = data;
+    }),err =>{
+      alert('error loading shipping info')
+    }
 
-    });
     console.log("cartItems  : " + JSON.stringify(this.cartItems));
 
     this.amount = this.getTotal();
@@ -175,7 +177,7 @@ this.dataService.deliverItems = deliverItems
     console.log("deliverDetails : " + deliverDetails);
 
             if(typeof deliverDetails.country == 'undefined'){
-                var localData = (this.localStorageService.get('appLocalStorageUser'+this.appId));
+                var localData:any = (this.localStorageService.get('appLocalStorageUser'+this.appId));
                 if(localData == null){
                   this.router.navigate(['login']);
                 }else{

@@ -4,11 +4,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
-import * as _ from 'lodash'
+import * as _ from 'lodash';
+import { CurrencyService } from '../../services/currency.service';
 
 @Component({
     selector: 'app-product',
+    // templateUrl: './product.component.html',
     templateUrl: './app/page-body/product/product.component.html',
+    // styleUrls: ['./product.component.css'],
     styleUrls: ['./app/page-body/product/product.component.css'],
 })
 export class ProductComponent implements OnInit {
@@ -16,7 +19,7 @@ export class ProductComponent implements OnInit {
     public catName;
     public foodInfo;
     public images;
-    public selectedVariant = {};
+    public selectedVariant;
     public selectedVariant1;
     public selectedVariant2;
     public selectedVariant3;
@@ -30,30 +33,38 @@ export class ProductComponent implements OnInit {
     public selection3 = [];
     public Data;
     public parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
-    set1; set2;
     private lockBuyButton = false;
 
     imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
     + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
-    constructor(private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
+    constructor(private currencyService: CurrencyService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
 
         this.Data = this.dataService.data;
         console.log(this.imageUrl);
         this.init();
     }
 
-    currency: string;
+    currency: any;
     ngOnInit() {
+        // this.http.get(SERVER_URL + '/templates/getCurrency?appId=' + this.appId).subscribe(function (data) {
+        //     this.currency = data;
+        //     console.log("this.currency  : " + JSON.stringify(this.currency.sign));
+        //     this.sign = this.currency.sign;
+        // }, error => {
+        //     this.showErrorPage();
 
-        this.http.get(SERVER_URL + '/templates/getCurrency?appId=' + this.appId).subscribe(function (data) {
+        // });
+
+        this.currencyService.getCurrencies().subscribe(data =>{
             this.currency = data;
             console.log("this.currency  : " + JSON.stringify(this.currency.sign));
             this.sign = this.currency.sign;
-        }, error => {
+
+        }),error => {
             this.showErrorPage();
 
-        });
+        };
 
         this.router.params.subscribe(params => {
             this.catName = params['catName'];
@@ -91,7 +102,6 @@ export class ProductComponent implements OnInit {
 
                 this.selection = _.uniqBy(this.selection, 'vType');
                 console.log("this.selection  : " + JSON.stringify(this.selection));
-                console.log("this.set1  : " + JSON.stringify(this.set1));
                 this.selectedVariant = this.Data.variants[0];
 
                 if (this.selectedVariant.quantity > 0) {
@@ -143,7 +153,7 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant2(variant) {
-        this.lockBuyButton = false;        
+        this.lockBuyButton = false;
         this.selection2 = [];
         this.selection3 = [];
         console.log("variant : " + variant);
@@ -183,7 +193,7 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant3(variant) {
-        this.lockBuyButton = false;        
+        this.lockBuyButton = false;
         this.selection3 = [];
         console.log("variant : " + variant);
         console.log("changeVariant3 called");

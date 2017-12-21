@@ -3,17 +3,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
-import { HttpClient,HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime } from 'rxjs/operator/debounceTime';
+import { PostService } from '../../services/post.service';
+import { CurrencyService } from '../../services/currency.service'
+import { ShippingInfoService } from '../../services/shippinginfo.service'
 
 declare let paypal: any;
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './app/page-body/checkout/checkout.component.html',
+  // templateUrl: './checkout.component.html',
   styleUrls: ['./app/page-body/checkout/checkout.component.css']
+  // styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
 
@@ -82,18 +87,19 @@ export class CheckoutComponent implements OnInit {
   public orderDetails;
   public orderd = false;
   private years = [];
-  private months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+  private months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
+  constructor(private shippingInfo: ShippingInfoService, private currencyService: CurrencyService, private postService: PostService, private localStorageService: LocalStorageService,
+    private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
 
   }
 
   ngOnInit() {
 
-let date = (new Date()).getFullYear()
-console.log('date : ' + date)
-    for( let i=0;i<100;i++){
-this.years.push(date++);
+    let date = (new Date()).getFullYear()
+    console.log('date : ' + date)
+    for (let i = 0; i < 100; i++) {
+      this.years.push(date++);
     }
 
     this._success.next('hello');
@@ -105,7 +111,7 @@ this.years.push(date++);
       console.log("this.value : " + this.formType);
     });
 
-    this.http.get(SERVER_URL + "/edit/getAllCountry")
+    this.currencyService.getCountryData()
       .subscribe((res) => {
         this.countries = res;
       });
@@ -141,7 +147,8 @@ this.years.push(date++);
       'country': this.country
     };
 
-    this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
+    this.postService.createService(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
+
       if (data == '') {
         this.hide = true;
         this.tax = 0;
@@ -151,7 +158,7 @@ this.years.push(date++);
       }
     })
 
-    this.http.get(SERVER_URL + '/templates/getCurrency?appId=' + this.appId).subscribe((data) => {
+    this.currencyService.getCurrencies().subscribe((data) => {
       this.currency = data;
       console.log("this.currency  : " + JSON.stringify(this.currency.currency));
       this.sign = this.currency.sign;
@@ -170,34 +177,32 @@ this.years.push(date++);
       'appId': this.appId,
       'country': this.country
     };
+
     if (this.formType == 'delivery') {
-      this.http.post(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
+      this.postService.createService(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
         .subscribe((data) => {
-            this.shippingDatas = data;
-            console.log(" this.shippingData 1 : " + JSON.stringify( this.shippingDatas));
-            // $log.debug($scope.shippingData);
-            for (var i = 0; i < this.shippingDatas.length; i++) {
-              if (this.shippingDatas[i].shippingOption == "Flat Rate" ||
-                this.shippingDatas[i].shippingOption == "Weight Based") {
-                this.shippingData.push(this.shippingDatas[i]);
-              }
+          this.shippingDatas = data;
+          console.log(" this.shippingData 1 : " + JSON.stringify(this.shippingDatas));
+          // $log.debug($scope.shippingData);
+          for (var i = 0; i < this.shippingDatas.length; i++) {
+            if (this.shippingDatas[i].shippingOption == "Flat Rate" ||
+              this.shippingDatas[i].shippingOption == "Weight Based") {
+              this.shippingData.push(this.shippingDatas[i]);
             }
-            console.log(" this.shippingData 2 : " + JSON.stringify( this.shippingData));
-          },
-          function (err) {
-            alert(
-              'Policies Data loading error,Please check your connection!'
-            );
-          });
-    }else{
-      this.http.get(SERVER_URL + "/edit/getShippingPickupInfo?appId=" + this.appId)
-      .subscribe((data) => {
+          }
+          console.log(" this.shippingData 2 : " + JSON.stringify(this.shippingData));
+        },
+        function (err) {
+          alert(
+            'Policies Data loading error,Please check your connection!'
+          );
+        });
+    } else {
+      this.shippingInfo.getShippingPickupInfo()
+        .subscribe((data) => {
 
           this.pickup = data;
 
-          /* $scope.header = data.header;
-          $scope.content = data.content;*/
-          //$state.go('app.category');
         },
         function (err) {
           alert(
@@ -205,6 +210,7 @@ this.years.push(date++);
           );
         });
     }
+
     this.amount = this.getTotal();
 
 
@@ -245,7 +251,7 @@ this.years.push(date++);
     }
   };
 
-  addShipping(shippingDetails,e) {
+  addShipping(shippingDetails, e) {
     console.log(e);
     this.isSelected = true;
     console.log('shippingDetails : ' + JSON.stringify(shippingDetails));
@@ -365,7 +371,7 @@ this.years.push(date++);
     // this.dataService.finalDetails = shippingDetails;
     this.chk(shippingDetails);
 
-    setTimeout(()=>{ this.pay("001"); }, 500);
+    setTimeout(() => { this.pay("001"); }, 500);
 
 
   }
@@ -382,12 +388,12 @@ this.years.push(date++);
       item: this.dataService.deliverItems,
       delivery: { location: "Pick up", method: "Pick up" },
       pickupId: data.id,
-      pickupCost:data.cost,
+      pickupCost: data.cost,
       deliverDetails: { name: this.name, number: this.pkPhone },
 
     }
     this.chk(this.pickupData);
-    setTimeout(()=>{ this.pay("001"); }, 500);
+    setTimeout(() => { this.pay("001"); }, 500);
   };
 
 
@@ -427,7 +433,7 @@ this.years.push(date++);
 
     console.log("this.cartItems : " + JSON.stringify(this.cartItems));
 
-    this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param)
+    this.postService.createService(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param)
       .subscribe((data) => {
 
 
@@ -467,24 +473,25 @@ this.years.push(date++);
           this.taxTotal = total * this.chkTax / 100;
           if (!this.finalDetails.pickupCost) {
             this.chkPickupCost = 0;
-          }else{
+          } else {
             this.chkPickupCost = this.finalDetails.pickupCost;
           }
-          console.log("this.chkShippingCost  : " + this.chkShippingCost +"chkPickupCost" +this.chkPickupCost );
-          console.log("total"+total)
+          console.log("this.chkShippingCost  : " + this.chkShippingCost + "chkPickupCost" + this.chkPickupCost);
+          console.log("total" + total)
           if (tax > 0) {
             total = total + tax;
-            if(this.chkPickupCost == 0){
-            this.totalPrice = total;
-            }else{
+            if (this.chkPickupCost == 0) {
+              this.totalPrice = total;
+            } else {
               this.totalPrice = total + parseInt(this.chkPickupCost);
             }
           } else {
-            if(this.chkPickupCost == 0){
-              this.totalPrice = total ;
-              }else{
-                this.totalPrice = total + parseInt(this.chkPickupCost);
-              }          }
+            if (this.chkPickupCost == 0) {
+              this.totalPrice = total;
+            } else {
+              this.totalPrice = total + parseInt(this.chkPickupCost);
+            }
+          }
         }
 
       });
@@ -548,8 +555,8 @@ this.years.push(date++);
         this.braintreeShow = this.paymentData.braintreeEnable;
         this.authorizeNet = this.paymentData.authorizeNetEnable;
       }), function (err) {
-      alert('warning Unable to get Products Selected Category');
-    };
+        alert('warning Unable to get Products Selected Category');
+      };
 
     this.cardType = {};
     this.card = {
@@ -562,13 +569,13 @@ this.years.push(date++);
   }
 
 
-  submit(data,type){
+  submit(data, type) {
     console.log("card data : " + JSON.stringify(data));
     console.log("type : " + type);
 
-    if(type == 'creditcard'){
+    if (type == 'creditcard') {
       this.makeStripePaymentMethod(data);
-    }else{
+    } else {
       this.authorizeCreditCardMethod(data);
     }
 
@@ -579,8 +586,8 @@ this.years.push(date++);
     cardInformation.amount = this.card.amount;
     cardInformation.appId = this.appId;
     cardInformation.userId = this.userId;
-console.log("cardInformation : " + JSON.stringify(cardInformation));
-    this.http.post(SERVER_URL + '/templates/makeStripePayment', cardInformation)
+    console.log("cardInformation : " + JSON.stringify(cardInformation));
+    this.postService.createService(SERVER_URL + '/templates/makeStripePayment', cardInformation)
 
       .subscribe((res) => {
 
@@ -591,7 +598,7 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
           alert('makeStripePayment failed');
 
         }
-      },  (err)=> {
+      }, (err) => {
         console.log("makeStripePayment failed")
         alert('makeStripePayment failed');
       })
@@ -603,7 +610,7 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
     cardInformation.amount = this.card.amount;
     cardInformation.appId = this.appId
 
-    this.http.post(SERVER_URL + "/templateController/authorizeNetPay", cardInformation)
+    this.postService.createService(SERVER_URL + "/templateController/authorizeNetPay", cardInformation)
       .subscribe((res) => {
         // var alertPopup = $ionicPopup.alert({
         //     subTitle: res.data.data,
@@ -644,7 +651,7 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
         'shippingOpt': this.payInfo.item.shippingOption,
         'email': this.payInfo.userEmail,
         'currency': this.dataService.paypalCurrency,
-        'puckupId':null,
+        'puckupId': null,
         'promotionCode': this.payInfo.promotionCode
       };
     }
@@ -666,52 +673,52 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
       }
     }
 
-    this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails,{responseType: 'text'})
+    this.postService.orderService(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails)
       .subscribe((res) => {
-          this.orderDetails.id = this.dataService.cart.cartItems[0].id;
-          this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.pickupData.cart,{responseType: 'text'})
-            .subscribe((res) => {
-                this.dataService.cart.cartItems = [];
-                this.dataService.cart.cartSize = 0;
-                this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-                this.dataService.cart.totalPrice = 0;
-                this.dataService.cart.totalQuantity = 0;
+        this.orderDetails.id = this.dataService.cart.cartItems[0].id;
+        this.postService.orderService(SERVER_URL + "/templatesInventory/updateInventory", this.pickupData.cart)
+          .subscribe((res) => {
+            this.dataService.cart.cartItems = [];
+            this.dataService.cart.cartSize = 0;
+            this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+            this.dataService.cart.totalPrice = 0;
+            this.dataService.cart.totalQuantity = 0;
 
-                //Pushing into order purchase history
-                if (this.localStorageService.get("history" + this.appId + this.user.registeredUser) != null) {
-                  this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-                }
-                this.orderHistory.push({
-                  orderHistoryKey: this.appId,
-                  createdDate: new Date(),
-                  item: this.payInfo.cart,
-                  amount: this.payInfo.amount,
-                });
+            //Pushing into order purchase history
+            if (this.localStorageService.get("history" + this.appId + this.user.registeredUser) != null) {
+              this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+            }
+            this.orderHistory.push({
+              orderHistoryKey: this.appId,
+              createdDate: new Date(),
+              item: this.payInfo.cart,
+              amount: this.payInfo.amount,
+            });
 
-                this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
+            this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
 
-                alert({
-                  title: 'Thank You',
-                  subTitle: 'Your Order has been successfully processed',
-                  cssClass: 'ionicPopUp',
-                  buttons: [
-                    {
-                      text: 'OK',
-                      type: 'made-easy-button-setting'
-                    },
-                  ]
-                });
-                // TODO : Currently back to cart
-                //back to Main Menu
-                this.router.navigate(['home']);
-              },
-              function (err) {
-                console.log(err);
-              });
-        },
-        function (err) {
-          console.log(err);
-        });
+            alert({
+              title: 'Thank You',
+              subTitle: 'Your Order has been successfully processed',
+              cssClass: 'ionicPopUp',
+              buttons: [
+                {
+                  text: 'OK',
+                  type: 'made-easy-button-setting'
+                },
+              ]
+            });
+            // TODO : Currently back to cart
+            //back to Main Menu
+            this.router.navigate(['home']);
+          },
+          function (err) {
+            console.log(err);
+          });
+      },
+      function (err) {
+        console.log(err);
+      });
   }
 
 
@@ -736,7 +743,7 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
         'shippingOpt': this.payInfo.item.shippingOption,
         'email': this.payInfo.userEmail,
         'currency': this.dataService.currency,
-        'puckupId':null,
+        'puckupId': null,
         'promotionCode': this.payInfo.promotionCode
       };
       console.log("if details : " + this.orderDetails)
@@ -763,165 +770,150 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
       console.log("else details : " + JSON.stringify(this.orderDetails));
     }
 
-    this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails),{responseType: 'text'})
+    this.postService.orderService(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails))
       .subscribe((res) => {
 
         console.log("web save res : " + JSON.stringify(res));
         console.log("web save order");
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
-          this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart,{responseType: 'text'})
-            .subscribe(res => {
-              console.log("web update order");
-              this.dataService.cart.cartItems = [];
-              this.dataService.cart.cartSize = 0;
-              this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-              this.dataService.cart.totalPrice = 0;
-              this.dataService.cart.totalQuantity = 0;
+        this.postService.orderService(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart)
+          .subscribe(res => {
+            console.log("web update order");
+            this.dataService.cart.cartItems = [];
+            this.dataService.cart.cartSize = 0;
+            this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+            this.dataService.cart.totalPrice = 0;
+            this.dataService.cart.totalQuantity = 0;
 
-              //Pushing into order purchase history
-              if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
-                this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-              }
-              this.orderHistory.push({
-                orderHistoryKey: this.appId,
-                createdDate: new Date(),
-                item: this.payInfo.cart,
-                amount: this.payInfo.amount,
-              });
-
-              this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
-
-              this._success.next('Your Order has been successfully processed');
-
-              console.log("went through");
-              this._success.subscribe((message) => this.successMessage = message);
-              debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
-              this._success.next(" 'Thank You', Your Order has been successfully processed");
-              setTimeout(()=>{this.router.navigate(['home']); }, 3100)
-
-              // alert({
-              //     title: 'Thank You',
-              //     subTitle: 'Your Order has been successfully processed',
-              //     cssClass: 'ionicPopUp',
-              //     buttons:[
-              //         {text:'OK',
-              //             type:'button-positive'},
-              //     ]
-              // });
-              // TODO : Currently back to cart
-              //back to Main Menu
-
-            },
-             (err)=> {
-              console.log(err);
+            //Pushing into order purchase history
+            if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
+              this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+            }
+            this.orderHistory.push({
+              orderHistoryKey: this.appId,
+              createdDate: new Date(),
+              item: this.payInfo.cart,
+              amount: this.payInfo.amount,
             });
-        },
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-          console.log(err);
-        });
+
+            this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
+
+            this._success.next('Your Order has been successfully processed');
+
+            console.log("went through");
+            this._success.subscribe((message) => this.successMessage = message);
+            debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+            this._success.next(" 'Thank You', Your Order has been successfully processed");
+            setTimeout(() => { this.router.navigate(['home']); }, 3100)
+
+          },
+          (err) => {
+            console.log(err);
+          });
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log("Client-side error occured.");
+        } else {
+          console.log("Server-side error occured.");
+        }
+        console.log(err);
+      });
   }
-
-
-
 
 
   // Buy With PayPal
   buyWithPayPal() {
-        if (this.formType == "delivery") {
-          this.orderDetails = {
+    if (this.formType == "delivery") {
+      this.orderDetails = {
 
-            'appId': this.appId,
-            'registeredUser': this.user.registeredUser,
-            'item': this.payInfo.cart,
-            'amount': this.payInfo.amount,
-            'customerName': this.user.name,
-            'deliverName': this.fname,
-            'deliveryNo': this.streetNumber,
-            'deliveryStreet': this.streetName,
-            'deliveryCity': this.city,
-            'deliveryCountry': this.country,
-            'deliveryZip': this.zip,
-            'telNumber': this.phone,
-            'tax': this.payInfo.taxTotal,
-            'shippingCost': this.payInfo.shippingCost,
-            'shippingOpt': this.payInfo.item.shippingOption,
-            'email': this.payInfo.userEmail,
-            'currency': this.dataService.paypalCurrency,
-            'puckupId':null,
-            'promotionCode': this.payInfo.promotionCode
-          };
-        }
-        else {
-          this.orderDetails = {
-            "appId": this.appId,
-            "registeredUser": this.user.registeredUser,
-            "item": this.payInfo.cart,
-            "amount": this.payInfo.amount,
-            "customerName": this.payInfo.item.deliverDetails.name,
-            "telNumber": this.payInfo.item.deliverDetails.number,
-            "tax": this.payInfo.taxTotal,
-            "shippingCost": this.payInfo.shippingCost,
-            "pickupId": this.payInfo.item.pickupId,
-            "email": this.payInfo.userEmail,
-            "currency": this.dataService.paypalCurrency,
-            "promotionCode": this.payInfo.promotionCode
-          }
-        }
+        'appId': this.appId,
+        'registeredUser': this.user.registeredUser,
+        'item': this.payInfo.cart,
+        'amount': this.payInfo.amount,
+        'customerName': this.user.name,
+        'deliverName': this.fname,
+        'deliveryNo': this.streetNumber,
+        'deliveryStreet': this.streetName,
+        'deliveryCity': this.city,
+        'deliveryCountry': this.country,
+        'deliveryZip': this.zip,
+        'telNumber': this.phone,
+        'tax': this.payInfo.taxTotal,
+        'shippingCost': this.payInfo.shippingCost,
+        'shippingOpt': this.payInfo.item.shippingOption,
+        'email': this.payInfo.userEmail,
+        'currency': this.dataService.paypalCurrency,
+        'puckupId': null,
+        'promotionCode': this.payInfo.promotionCode
+      };
+    }
+    else {
+      this.orderDetails = {
+        "appId": this.appId,
+        "registeredUser": this.user.registeredUser,
+        "item": this.payInfo.cart,
+        "amount": this.payInfo.amount,
+        "customerName": this.payInfo.item.deliverDetails.name,
+        "telNumber": this.payInfo.item.deliverDetails.number,
+        "tax": this.payInfo.taxTotal,
+        "shippingCost": this.payInfo.shippingCost,
+        "pickupId": this.payInfo.item.pickupId,
+        "email": this.payInfo.userEmail,
+        "currency": this.dataService.paypalCurrency,
+        "promotionCode": this.payInfo.promotionCode
+      }
+    }
 
-this.dataService.payPalDetails = this.orderDetails;
+    this.dataService.payPalDetails = this.orderDetails;
 
-        // this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails)
-        //   .subscribe((res) => {
-        //     console.log("inside web save");
-        //     this.orderDetails.id = this.dataService.cart.cartItems[0].id;
-        //       this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart)
-        //         .subscribe(function (res) {
-        //           console.log("inside web update");
-        //             this.dataService.cart.cartItems = [];
-        //             this.dataService.cart.cartSize = 0;
-        //             this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-        //             this.dataService.cart.totalPrice = 0;
-        //             this.dataService.cart.totalQuantity = 0;
+    // this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails)
+    //   .subscribe((res) => {
+    //     console.log("inside web save");
+    //     this.orderDetails.id = this.dataService.cart.cartItems[0].id;
+    //       this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart)
+    //         .subscribe(function (res) {
+    //           console.log("inside web update");
+    //             this.dataService.cart.cartItems = [];
+    //             this.dataService.cart.cartSize = 0;
+    //             this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+    //             this.dataService.cart.totalPrice = 0;
+    //             this.dataService.cart.totalQuantity = 0;
 
-        //             //Pushing into order purchase history
-        //             if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
-        //               this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-        //             }
-        //             this.orderHistory.push({
-        //               orderHistoryKey: this.appId,
-        //               createdDate: new Date(),
-        //               item: this.payInfo.cart,
-        //               amount: this.payInfo.amount,
-        //             });
-        //             this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.rderHistory));
+    //             //Pushing into order purchase history
+    //             if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
+    //               this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+    //             }
+    //             this.orderHistory.push({
+    //               orderHistoryKey: this.appId,
+    //               createdDate: new Date(),
+    //               item: this.payInfo.cart,
+    //               amount: this.payInfo.amount,
+    //             });
+    //             this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.rderHistory));
 
-        //             alert({
-        //               title: 'Thank You',
-        //               subTitle: 'Your Order has been successfully processed',
-        //               cssClass: 'ionicPopUp',
-        //               buttons: [
-        //                 {
-        //                   text: 'OK',
-        //                   type: 'button-positive'
-        //                 },
-        //               ]
-        //             });
-        //             // TODO : Currently back to cart
-        //             //back to Main Menu
-        //             this.router.navigate(['home'])
-        //           },
-        //           function (err) {
-        //             console.log(err);
-        //           });
-        //     },
-        //      (err)=> {
-        //       console.log(err);
-        //     });
+    //             alert({
+    //               title: 'Thank You',
+    //               subTitle: 'Your Order has been successfully processed',
+    //               cssClass: 'ionicPopUp',
+    //               buttons: [
+    //                 {
+    //                   text: 'OK',
+    //                   type: 'button-positive'
+    //                 },
+    //               ]
+    //             });
+    //             // TODO : Currently back to cart
+    //             //back to Main Menu
+    //             this.router.navigate(['home'])
+    //           },
+    //           function (err) {
+    //             console.log(err);
+    //           });
+    //     },
+    //      (err)=> {
+    //       console.log(err);
+    //     });
 
 
 

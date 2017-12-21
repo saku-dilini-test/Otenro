@@ -12,6 +12,8 @@ declare let paypal: any;
   selector: 'app-paypal-payment',
   templateUrl: './app/page-body/paypal-payment/paypal-payment.component.html',
   styleUrls: ['./app/page-body/paypal-payment/paypal-payment.component.css']
+  // templateUrl: './paypal-payment.component.html',
+  // styleUrls: ['./paypal-payment.component.css']
 })
 export class PaypalPaymentComponent implements AfterViewChecked {
 
@@ -20,7 +22,7 @@ export class PaypalPaymentComponent implements AfterViewChecked {
   public localData;
   public user;
   orderHistory = [];
-  env=this.dataService.env;
+  env = this.dataService.env;
   public sandBoxKey = this.dataService.paypalKey;
   public productionKey = this.dataService.paypalKey;
 

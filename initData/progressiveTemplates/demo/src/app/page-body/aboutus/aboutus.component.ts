@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
-import { HttpClient } from '@angular/common/http';
+import { AppDataService } from '../../services/appdatainfo.service';
 
 @Component({
   selector: 'app-aboutus',
@@ -15,11 +15,11 @@ export class AboutusComponent implements OnInit {
   private header;
   private content;
 
-  constructor(private http: HttpClient) { }
+  constructor(private appDataService:AppDataService) { }
 
   ngOnInit() {
 
-    this.http.get(SERVER_URL + "/templates/getAboutUs?appId="+this.appId)
+    this.appDataService.getAboutUs()
     .subscribe( (data)=> {
       console.log("data : " + JSON.stringify(data));
         this.header = data.header;

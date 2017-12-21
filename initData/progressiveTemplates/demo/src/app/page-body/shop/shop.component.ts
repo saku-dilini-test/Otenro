@@ -4,11 +4,15 @@ import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
+import { ShopService } from '../../services/shop.service';
+import { CurrencyService } from '../../services/currency.service';
 
 @Component({
   selector: 'app-shop',
+  // templateUrl: './shop.component.html',
   templateUrl: './app/page-body/shop/shop.component.html',
   styleUrls: ['./app/page-body/shop/shop.component.css'],
+  // styleUrls: ['./shop.component.css'],
 })
 
 export class ShopComponent implements OnInit {
@@ -20,21 +24,28 @@ export class ShopComponent implements OnInit {
   catId: any;
   catName: any;
   catImage: any;
-  slides:any;
+  slides: any;
 
-  constructor(private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient) {
+  constructor(private currencyService: CurrencyService, private shopService: ShopService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
 
   }
 
   imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-    + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+  + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
   imageUrl2 = SERVER_URL + "/templates/viewWebImages?userId="
-  +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&images=secondNavi";
+  + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
 
 
 
   ngOnInit() {
+
+    this.currencyService.getCurrencies().subscribe(data => {
+      this.currency = data;
+      console.log(this.currency)
+    }), error => {
+      this.showErrorPage();
+    };
     this.router.params.subscribe(params => {
       this.catId = params['id']; // --> Name must match wanted parameter
       this.catName = params['name'];
@@ -43,24 +54,25 @@ export class ShopComponent implements OnInit {
     });
 
     this.slides = [
-      { src: this.imageUrl2+"/"+ this.catImage, title: this.catName }]
+      { src: this.imageUrl2 + "/" + this.catImage, title: this.catName }]
 
-    this.http.get(SERVER_URL + '/templates/getProductsByCatId?appId=' + this.appId + '&childId=' + this.catId).subscribe(data => {
-      // Read the result field from the JSON response.
 
+    this.shopService.getProducts().subscribe(data => {
       this.results = data;
       console.log("this.results  : " + JSON.stringify(this.results));
-
-      },
-      error => {
-        this.showErrorPage();
-      });
-    this.http.get(SERVER_URL + '/templates/getCurrency?appId=' + this.appId).subscribe(function (data) {
-      this.currency = data;
-      console.log(this.currency)
-    }, error => {
+    }), err => {
       this.showErrorPage();
-    });
+    }
+
+
+    // this.http.get(SERVER_URL + '/templates/getCurrency?appId=' + this.appId)
+    // .subscribe(function (data) {
+    //   this.currency = data;
+    //   console.log(this.currency)
+    // }, error => {
+    //   this.showErrorPage();
+    // });
+
 
   }
 

@@ -6,6 +6,8 @@ import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { FormGroup, FormControl, FormArray, NgForm } from '@angular/forms';
+import {PostService} from '../../services/post.service';
+import { CurrencyService } from '../../services/currency.service';
 
 @Component({
   selector: 'app-register',
@@ -33,7 +35,7 @@ export class RegisterComponent implements OnInit {
   private phone;
   private myForm: FormGroup;
 
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
+  constructor(private currencyService: CurrencyService,private localStorageService: LocalStorageService, private postService: PostService,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
 
   }
   changeCountry(data){
@@ -48,7 +50,7 @@ this.selectedCountry = data;
       console.log("this.value : " + this.navigate);
     });
 
-      this.http.get(SERVER_URL+"/edit/getAllCountry")
+      this.currencyService.getCountryData()
       .subscribe((res) => {
         var data = JSON.stringify(res);
         console.log("res : " + data);
@@ -100,7 +102,7 @@ this.selectedCountry = data;
     console.log("data : " + JSON.stringify(data));
     this.localStorageService.set('appLocalStorageUser'+this.appId, (data))
 
-    this.http.post(SERVER_URL+"/templatesAuth/register",data)
+    this.postService.createService(SERVER_URL+"/templatesAuth/register",data)
         .subscribe((res) =>{
 
                 var requestParams = {

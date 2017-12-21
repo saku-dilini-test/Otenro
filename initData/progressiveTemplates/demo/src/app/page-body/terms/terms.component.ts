@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { HttpClient } from '@angular/common/http';
-
+import { AppDataService } from '../../services/appdatainfo.service'
 
 @Component({
   selector: 'app-terms',
+  // templateUrl: './terms.component.html',
   templateUrl: './app/page-body/terms/terms.component.html',
+  // styleUrls: ['./terms.component.css']
   styleUrls: ['./app/page-body/terms/terms.component.css']
 })
 export class TermsComponent implements OnInit {
@@ -14,10 +16,10 @@ export class TermsComponent implements OnInit {
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private terms;
-  constructor(private http: HttpClient) { }
+  constructor(private appDataService: AppDataService,private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get( SERVER_URL + '/templates/getTermsAndConditions?appId='+this.appId).subscribe((data)=> {
+    this.appDataService.getTerms().subscribe((data)=> {
         this.terms = data.termsAndCondition;
     }),((err)=> {
         console.log(err);
