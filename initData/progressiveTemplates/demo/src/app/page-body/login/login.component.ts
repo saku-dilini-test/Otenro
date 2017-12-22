@@ -62,7 +62,7 @@ this.postService.createService(SERVER_URL + "/templatesAuth/authenticateForApp",
     "appId": res.user.appId,
     "registeredUser": res.user.sub
   };
-  this.localStorage.set('appLocalStorageUser' + this.appId, (requestParams));
+  this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
   this.dataService.isUserLoggedIn.check = true;
   this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 
