@@ -14,19 +14,45 @@ export class AboutusComponent implements OnInit {
   private userId = (<any>data).userId;
   private header;
   private content;
+  private openHours;
+  private openWeekdays;
+  private openSunday;
+  private openSaturday;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
 
-    this.http.get(SERVER_URL + "/templates/getAboutUs?appId="+this.appId)
-    .subscribe( (data)=> {
-      console.log("data : " + JSON.stringify(data));
+    this.http.get(SERVER_URL + "/templates/getAboutUs?appId=" + this.appId)
+      .subscribe((data: any) => {
+        console.log("data : " + JSON.stringify(data));
         this.header = data.header;
         this.content = data.content;
-    }, (err)=> {
+        this.openHours = (data.OpenHours);
+        var objSize = Object.keys(this.openHours).length;
+
+        if (this.openHours.weekDaysOpenHour != undefined) {
+          this.openWeekdays = this.openHours.weekDaysOpenHour + " to " + this.openHours.weekDaysCloseHour;
+        }else{
+          this.openWeekdays = "we are closed"
+        }
+
+        if (this.openHours.saturdayOpenHour != undefined) {
+          this.openSaturday = this.openHours.saturdayOpenHour + " to " + this.openHours.saturdayCloseHour;
+        }else{
+          this.openSaturday = "we are closed"
+        }
+
+        if (this.openHours.sundayOpenHour != undefined) {
+          this.openSunday = this.openHours.sundayOpenHour + " to " + this.openHours.sundayCloseHour;
+        }else{
+          this.openSunday = "we are closed"
+        }
+      }, (err) => {
         console.log(err);
-    });
+      });
+
+
   }
 
 
@@ -34,9 +60,11 @@ export class AboutusComponent implements OnInit {
   lists = LISTS;
 }
 const LISTS = [
-  { src:'https://ae01.alicdn.com/kf/HTB1RuZKPVXXXXaMapXXq6xXFXXXO/Artka-Women-s-2017-Spring-New-Vintage-Appliques-Dress-Fashion-Square-Collar-Butterfly-Sleeve-Empire-Waist.jpg', title1:'First featurette heading. ', title2:'It ll blow your mind.',
-   description:'Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.' }
-   ];
+  {
+    src: 'https://ae01.alicdn.com/kf/HTB1RuZKPVXXXXaMapXXq6xXFXXXO/Artka-Women-s-2017-Spring-New-Vintage-Appliques-Dress-Fashion-Square-Collar-Butterfly-Sleeve-Empire-Waist.jpg', title1: 'First featurette heading. ', title2: 'It ll blow your mind.',
+    description: 'Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.'
+  }
+];
 
 const SLIDES = [
-  { src:'https://wallpaperscraft.com/image/the_black_keys_sofa_shoes_clothes_relax_5290_1920x1080.jpg', title:'About Us' }]
+  { src: 'https://wallpaperscraft.com/image/the_black_keys_sofa_shoes_clothes_relax_5290_1920x1080.jpg', title: 'About Us' }]
