@@ -10,6 +10,8 @@
              SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
              contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,sendDate,$log) {
 
+        $scope.isNew = $rootScope.tempNew;
+
         $scope.refund = [];
         $scope.unfulfilled = [];
         $scope.fulfill = [];
@@ -581,10 +583,21 @@
                             toastr.success('About Us has been added successfully', 'Awesome', {
                                 closeButton: true
                             });
-                            var urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
-                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-                            $scope.appTemplateUrl = urlPath + '' +
-                                '#/app/aboutUs';
+                            var urlPath;
+                            console.log('wtf');
+                            console.log('$scope isNew ' + $scope.isNew);
+                            if($scope.isNew == 'true'){
+                            urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                                                                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                                                                    $scope.appTemplateUrl = urlPath + '' +
+                                                                                        'aboutus';
+                            }else{
+                            urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                                            + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                                        $scope.appTemplateUrl = urlPath + '' +
+                                                            '#/app/aboutUs';
+                            }
+
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             $scope.selectedTab = current;
                         }).error(function (data, status, headers, config) {
