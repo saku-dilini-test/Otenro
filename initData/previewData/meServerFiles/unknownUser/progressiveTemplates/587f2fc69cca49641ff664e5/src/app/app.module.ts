@@ -42,6 +42,7 @@ import { CheckoutComponent } from './page-body/checkout/checkout.component';
   }),
 
     BrowserModule,
+    RouterModule,
     FormsModule,
     HttpClientModule,
     AddonsModule,
