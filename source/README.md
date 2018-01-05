@@ -33,8 +33,7 @@ SetUp Project
 (4) Start project
 
 		goto -> config -> env -> development.js
-		goto -> assests -> js -> services -> appConfig.js
-
+		
 		 	> set server IP and Port
 		 	> set meSever IP and Port
 
