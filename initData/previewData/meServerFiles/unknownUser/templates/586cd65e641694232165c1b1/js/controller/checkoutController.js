@@ -49,7 +49,7 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
             for(var i = 0; i < $scope.cartItems.length; i++){
                 var product = $scope.cartItems[i];
                 amount = product.total;
-                total += (amount);
+                total += (amount*product.qty);
             }
 
             if($scope.isApplyShippingCharge == true && $stateParams.item.delivery.location != "Pick up"){
@@ -72,9 +72,9 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
                 }
                 if (tax > 0) {
                     total = total + tax;
-                    $scope.totalPrice = total + $scope.shippingCost;
+                    $scope.totalPrice = total + parseInt($scope.shippingCost);
                 } else {
-                    $scope.totalPrice = total + $scope.shippingCost;
+                    $scope.totalPrice = total + parseInt($scope.shippingCost);
                 }
             }
 
