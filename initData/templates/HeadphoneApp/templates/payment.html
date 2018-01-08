@@ -81,7 +81,7 @@
                         </div>
                     </label>
                     <div class="row">
-                        <button type="submit" class="col button button-raised  made-easy-button-setting">MAKE PAYMENT</button>
+                        <button type="submit" class="col button button-raised button-small  made-easy-button-setting">MAKE PAYMENT</button>
 
                     </div>
                     <!--
@@ -180,7 +180,7 @@
                         </label>
                     </div>
                     <div class="padding">
-                        <button class="button button-block button-positive" ng-click="saveCard(card)" ng-disabled="!ready">Save</button>
+                        <button class="button button-small button-block button-positive" ng-click="saveCard(card)" ng-disabled="!ready">Save</button>
                     </div>
                 </div>
 
@@ -188,7 +188,7 @@
                 <div ng-show="step == 'checkout'">
                     <span class="made-easy-content-font">{{currency}} : {{amount}}  </span>
                     <div class="padding">
-                        <button class="button button-block button-positive" ng-click="pay()" ng-disabled="!ready">Pay</button>
+                        <button class="button button-small button-block button-positive" ng-click="pay()" ng-disabled="!ready">Pay</button>
                     </div>
                 </div>
 
@@ -210,7 +210,7 @@
             <form name="cashPaymentFrom" novalidate>
                 <div class="list" ng-if="payment.type == 'paypal'">
                     <div class="row">
-                        <button class="col button button-raised  made-easy-button-setting" ng-click="buyWithPayPal()" >Buy with PayPal</button>
+                        <button class="col button-small button button-raised  made-easy-button-setting" ng-click="buyWithPayPal()" >Buy with PayPal</button>
                     </div>
                 </div>
             </form>
