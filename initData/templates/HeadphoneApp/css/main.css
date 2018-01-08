@@ -63,9 +63,7 @@ ion-content{
     font-family: sans-serif;
     font-weight: bolder;
     line-height:normal;
-    background-color: rgba(255, 255, 255, 0.42);
     border-radius: 10px;
-    margin: 5px;
 }
 
 /* ----- Content Font Settings ----- */
@@ -82,7 +80,7 @@ ion-content{
     border-color: #444 !important;
     background-color: #ffffff;
     color: #444;
-    border-width: 3px !important;
+    border-width: 1px !important;
     border-radius: 20px;
     cursor: url(../img/cursor.cur), auto;
     border: solid;

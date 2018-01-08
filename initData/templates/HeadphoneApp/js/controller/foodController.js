@@ -23,13 +23,21 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             }
         }
 
-    $scope.getRandomColor = function () {
-            var letters = '0123456789ABCDEF';
-            var color = 'background-color:#';
-            for (var i = 0; i < 6; i++ ) {
-                color += letters[Math.floor(Math.random() * 16)];
+     var check ='background-color:#';
+     var color = 'background-color:#';
+     $scope.getRandomColor = function () {
+        var letters = ["CFBDAC", "D0DDDE", "EEEEEE", "FFDE8B", "DEBBAF", "C6D3E4"];
+
+        while(true){
+            console.log(color);
+            if(check !== color){
+                check = color;
+                return color;
+            }else {
+                color = 'background-color:#';
+                color += letters[Math.floor(Math.random()*letters.length)];
             }
-            return color;
+        }
     };
 
     $scope.color = [];
