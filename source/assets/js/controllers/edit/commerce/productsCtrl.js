@@ -1067,6 +1067,9 @@
                                 if(templateData.thirdNaviAspectRatio){
                                     $scope.thirdNaviAspectRatio = parseFloat(templateData.thirdNaviAspectRatio);
                                 }
+                                if(templateData.iSizeThird){
+                                    $scope.iSizeThird={w:templateData.iSizeThird.w,h:templateData.iSizeThird.h};
+                                }
                             }).error(function (err) {
                             toastr.error(err.message, 'Warning', {
                                 closeButton: true

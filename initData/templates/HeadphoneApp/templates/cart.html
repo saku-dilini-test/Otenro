@@ -30,17 +30,17 @@
            {{currency}}{{getTotal()}}
        </div>
        <div class="center row padding">
-           <div class="col no-padding button-small button button-raised  made-easy-button-setting"
+           <button class="col no-padding button-small button button-raised  made-easy-button-setting"
                    ng-disabled="!getTotal() || buyButtonDisable"
                    ng-click="pickupDetails(cartItems)">
                    Pickup
-           </div>
+           </button>
            <span>&nbsp;</span>
-           <div class="col no-padding button-small button button-raised  made-easy-button-setting "
+           <button class="col no-padding button-small button button-raised  made-easy-button-setting "
                    ng-disabled="!getTotal() || buyButtonDisable"
                ng-click="delivery(cartItems)">
                Delivery
-           </div>
+           </button>
        </div>
     </div>
   </ion-content>
