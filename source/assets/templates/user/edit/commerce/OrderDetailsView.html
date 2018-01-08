@@ -92,18 +92,23 @@
 
                 <table class="me-simple-table table-ordered-data">
                 <thead>
-                <th width="30%">Product</th>
-                <th width="25%">Individual Price</th>
+                <th width="25%">Product</th>
+                <th width="20%">Variant</th>
+                <th width="20%">Individual Price</th>
                 <th width="20%">Qty</th>
                 <th width="25%">Price ({{currency}})</th>
                 </thead>
                 <tbody>
                 <tr ng-repeat="orders in oderData.entity.item">
                     <td><img width="50px" height="50px" style="float:left;padding:3px;" src="{{imageURL}}/{{orders.imgURL[0].img}}"> {{orders.name}}</td>
+                    <td>
+                        <div  ng-repeat = "value in variantArray">{{value.name}} : {{value.vType}}</div>
+                    </td>
                     <td>{{orders.price}}</td>
                     <td>{{orders.qty}}</td>
                     <td>{{orders.price*orders.qty}} </td>
                 </tr>
+
                 <tr>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>

@@ -121,6 +121,20 @@
                     $scope.oderData = row;
                     // $log.debug(row);
 
+                    var array = $scope.oderData.entity.item[0].variant;
+
+                    $scope.variantArray = [];
+
+                        console.log(array);
+                        for(var i =0;i<array.length;i++){
+//                            console.log(array[i])
+                             $scope.variantArray.push(array[i])
+                        }
+
+                        angular.forEach($scope.variantArray, function(value, key) {
+                          console.log(key + ': ' + value.name + ' ' + value.vType);
+                        });
+
                     //$scope.curruntDate = new Date();
                     //var sDate = $scope.oderData.entity.fulfilledDate;
                     //var fDate = $scope.oderData.entity.refundedDate;
