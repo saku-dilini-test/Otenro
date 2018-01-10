@@ -61,7 +61,7 @@ a {
 /* food page */
 
 .food .item{
-	border-right: 0;
+    border: 0;
 }
 
 .food input{
@@ -179,6 +179,7 @@ input[type=number] {
   height: inherit;
   line-height: normal;
   padding-top: 0;
+  background: transparent;
 }
 
 
