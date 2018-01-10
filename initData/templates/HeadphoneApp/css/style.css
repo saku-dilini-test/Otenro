@@ -194,3 +194,7 @@ input {
 .login .item {
     width: auto;
 }
+
+ion-slide{
+    background: transparent;
+}
