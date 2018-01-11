@@ -60,6 +60,7 @@
                         im[0] = $scope.picFile;
                         $scope.tmpImage = im;
                         $scope.mainImg = img;
+                        $scope.myImage = null;
                         toastr.success('Image has been uploaded successfully', 'message', {
                            closeButton: true
                         });
