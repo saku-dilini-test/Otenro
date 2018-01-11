@@ -620,6 +620,9 @@
                                 if(templateData.secondNaviAspectRatio){
                                     $scope.secondNaviAspectRatio = parseFloat(templateData.secondNaviAspectRatio);
                                 }
+                                if(templateData.iSizeSecond){
+                                    $scope.iSizeSecond={w:templateData.iSizeSecond.w,h:templateData.iSizeSecond.h};
+                                }
                             }).error(function (err) {
                             toastr.error(err.message, 'Warning', {
                                 closeButton: true

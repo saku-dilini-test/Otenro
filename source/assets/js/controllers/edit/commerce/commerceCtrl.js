@@ -121,6 +121,24 @@
                     $scope.oderData = row;
                     // $log.debug(row);
 
+                    var array = $scope.oderData.entity.item[0].variant;
+                        console.log(JSON.stringify(array));
+                        console.log("$scope.oderData.entity.item : " + $scope.oderData.entity.item.length)
+
+                           $scope.variantArray1 = [];
+                           $scope.variantArray2 = [];
+                    for(var j =0;j<$scope.oderData.entity.item.length;j++){
+                        $scope.variantArray1.push($scope.oderData.entity.item[j].variant)
+                    }
+
+//                   for(var i =0;i<$scope.variantArray1.length;i++){
+//                    $scope.variantArray2.push($scope.variantArray1[i][i].name)
+//                   }
+
+
+console.log("$scope.variantArray1 : " + JSON.stringify($scope.variantArray1));
+console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0].name));
+
                     //$scope.curruntDate = new Date();
                     //var sDate = $scope.oderData.entity.fulfilledDate;
                     //var fDate = $scope.oderData.entity.refundedDate;

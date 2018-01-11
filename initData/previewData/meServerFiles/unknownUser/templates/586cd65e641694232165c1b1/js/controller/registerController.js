@@ -5,7 +5,7 @@
 
 mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopup,$state,$stateParams,$auth,constants,$log) {
     $scope.data = {};
-
+    $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
 
     $http.get(constants.SERVER_URL+"/edit/getAllCountry")
         .then(function(res){
@@ -39,11 +39,12 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
                         "city": data.city,
                         "zip": data.zip,
                         "type": 'internal',
-                        "appId":data.appId
+                        "appId":data.appId,
+                        "registeredUser": res.data.user.sub
                     };
                     localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
                     $rootScope.isUserLoggedIn.check = true;
-                    $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
+                    $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
                     $log.debug(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
                     if($stateParams.item == 'delivery'){
                         $state.go('app.cart');

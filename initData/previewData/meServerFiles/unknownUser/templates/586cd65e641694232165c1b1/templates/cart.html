@@ -1,6 +1,6 @@
 <ion-view view-title="Shopping Cart">
     <ion-nav-buttons side="left">
-        <button class="button back-button buttons icon ion-ios-arrow-back header-item"ng-click="doSomething()">
+        <button class="icon ion-ios-arrow-back header-item"ng-click="doSomething()">
         </button>
     </ion-nav-buttons>
   <ion-content class="made-easy-background-image made-easy-background-color cart">
@@ -9,7 +9,7 @@
        <a class="item item-avatar"  ng-repeat="item in cartItems" >
            <img src="{{imageURL}}/{{item.imgURL[0].img}}">
            <h2 ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}
-               <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></span>
+               <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty,cartItems.indexOf(item) )"></span>
                <i class="dark icon ion-trash-a right" ng-click="removeItem($index)"></i>
            </h2>
            <p>{{currency}}{{item.total*item.qty}}</p>
@@ -29,13 +29,14 @@
        <div class="col center made-easy-header-font">
            {{currency}}{{getTotal()}}
        </div>
-       <div class="center">
-           <button class="button button-raised  made-easy-button-setting"
+       <div class="center row padding">
+           <button class="col no-padding button-small button button-raised  made-easy-button-setting"
                    ng-disabled="!getTotal() || buyButtonDisable"
                    ng-click="pickupDetails(cartItems)">
                    Pickup
            </button>
-           <button class="button button-raised  made-easy-button-setting "
+           <span>&nbsp;</span>
+           <button class="col no-padding button-small button button-raised  made-easy-button-setting "
                    ng-disabled="!getTotal() || buyButtonDisable"
                ng-click="delivery(cartItems)">
                Delivery
