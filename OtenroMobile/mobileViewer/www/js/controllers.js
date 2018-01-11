@@ -175,5 +175,11 @@ $scope.status = "";
     }
 
 
+    $scope.openTerms = function () {
+      console.log("Opening Terms...");
+      var ref =  cordova.ThemeableBrowser.open('https://www.otenro.com/terms.pdf', '_system');
+    }
+
+
   });
 
