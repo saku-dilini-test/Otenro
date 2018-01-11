@@ -181,5 +181,10 @@ $scope.status = "";
     }
 
 
+    $scope.openInstructions = function () {
+      console.log("Opening Instructions...");
+      var ref =  cordova.ThemeableBrowser.open('https://otenro.com/help', '_system');
+    }
+
   });
 
