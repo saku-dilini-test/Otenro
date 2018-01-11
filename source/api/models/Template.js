@@ -46,6 +46,12 @@ module.exports = {
         thirdNaviAspectRatio : {
             type: 'float'
         },
+        iSizeSecond: {
+            type: 'json'
+        },
+        iSizeThird: {
+            type: 'json'
+        }
     }
     /*,
     seedData: [

@@ -454,8 +454,7 @@
             $scope.child = newChild;
         };
 
-//        $scope.imageSelected = true;
-////        $scope.buttonName = "Browse Image";
+        $scope.buttonName = "Select Image";
 
         $scope.cropImage = function () {
             $scope.setAspectRatio();
@@ -473,7 +472,7 @@
                 };
                 reader.readAsDataURL(file);
                 $scope.imageSelected =false;
-                $scope.buttonName = "Crop";
+                $scope.buttonName = "Crop Image";
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         };
@@ -500,8 +499,7 @@
                 });
             }
 
-//             $scope.imageSelected = true;
-//             $scope.buttonName = "Browse Image";
+           $scope.buttonName = "Select Image";
         };
 
         $scope.deleteImg = function (index) {
@@ -1066,6 +1064,9 @@
                             .success(function (templateData) {
                                 if(templateData.thirdNaviAspectRatio){
                                     $scope.thirdNaviAspectRatio = parseFloat(templateData.thirdNaviAspectRatio);
+                                }
+                                if(templateData.iSizeThird){
+                                    $scope.iSizeThird={w:templateData.iSizeThird.w,h:templateData.iSizeThird.h};
                                 }
                             }).error(function (err) {
                             toastr.error(err.message, 'Warning', {
