@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -26,6 +27,7 @@ import { GithubAuthInterceptor } from './githubauth.interceptor';
 import { OrderHistoryComponent } from './page-body/order-history/order-history.component';
 import { PaypalPaymentComponent } from './page-body/paypal-payment/paypal-payment.component';
 import { CheckoutComponent } from './page-body/checkout/checkout.component';
+import { PushNotificationService } from './services/push-notification.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { CheckoutComponent } from './page-body/checkout/checkout.component';
 
     BrowserModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule,HttpModule,
     AddonsModule,
     PageBodyModule,
     NgbModule.forRoot(),
@@ -54,7 +56,7 @@ import { CheckoutComponent } from './page-body/checkout/checkout.component';
     NouisliderModule,
     BrowserAnimationsModule,
   ],
-  providers: [PagebodyServiceModule,{
+  providers: [PagebodyServiceModule,PushNotificationService,{
     provide: HTTP_INTERCEPTORS,
     useClass: GithubAuthInterceptor,
     multi: true
