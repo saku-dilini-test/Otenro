@@ -31,14 +31,21 @@
             </span>
                             </label>
                             <label class="item item-input item-stacked-label">
-                            <span class="input-label">Password</span>
-                            <input type="password" name="password" placeholder="" ng-pattern="passwordRegularExpression" ng-model="data.password" ng-required="true" >
-                            <span class="help-block register-pw-error-message" ng-show="signUpForm.password.$error.minlength">
-                            <span class="item-error-message" ng-show="signUpForm.password.$error.minlength">Password should have at least 7 characters.</span>
-                            </span>
-                            <span class="help-block register-pw-error-message" ng-show="!(signUpForm.password.$error.minlength) && signUpForm.password.$error.pattern">
-                            <span class="item-error-message">Password should have at least one lower or Upper letter and one number</span>
-                            </span>
+                                <span class="input-label">Password</span>
+                                <input type="password" name="password" placeholder="" ng-pattern="passwordRegularExpression" ng-model="data.password" ng-required="true" >
+                                <span class="help-block register-pw-error-message" ng-show="signUpForm.password.$error.minlength">
+                                <span class="item-error-message" ng-show="signUpForm.password.$error.minlength">Password should have at least 7 characters.</span>
+                                </span>
+                                <span class="help-block register-pw-error-message" ng-show="!(signUpForm.password.$error.minlength) && signUpForm.password.$error.pattern">
+                                <span class="item-error-message">Password should have at least one lower or Upper letter and one number</span>
+                                </span>
+                            </label>
+                            <label class="item item-input item-stacked-label">
+                                <span class="input-label">Confirm Password </span>
+                                <input type="password" name="passwordCon" placeholder="Re-enter the password" ng-model="data.passwordCon" ng-required="true" >
+                                <span class="help-block register-pw-error-message" ng-show="signUpForm.passwordCon.$dirty && data.password != data.passwordCon">
+                                    <span class="item-error-message"> Passwords do not match.</span>
+                                </span>
                             </label>
                             <label class="item item-input item-stacked-label">
                                 <span class="input-label">Street Number</span>
@@ -88,7 +95,7 @@
                                 </div>
                             </label>
                             <div class="row">
-                                <button class="button button-small button-block made-easy-button-setting" ng-click="signUpForm.$valid && signUp()" ng-disabled="signUpForm.$invalid">
+                                <button class="button button-small button-block made-easy-button-setting" ng-click="signUpForm.$valid && signUp()" ng-disabled="signUpForm.$invalid || (data.password !== data.passwordCon)">
                                     Sign up
                                 </button>
                             </div>

@@ -37,6 +37,13 @@
                 </span>
               </label>
               <label class="item item-input item-floating-label">
+                <span class="input-label">Confirm Password </span>
+                <input type="password" name="passwordCon" placeholder="Re-enter the password" ng-model="data.passwordCon" ng-required="true" >
+                <span class="help-block register-pw-error-message" ng-show="signUpForm.passwordCon.$dirty && data.password != data.passwordCon">
+                    <span class="item-error-message"> Passwords do not match.</span>
+                </span>
+              </label>
+              <label class="item item-input item-floating-label">
                 <span class="input-label">Street Number</span>
                 <input type="text" placeholder="Street Number" ng-model="data.streetNumber" ng-required="true">
               </label>
@@ -83,7 +90,7 @@
                 </div>
               </label>
               <label class="item">
-                <button class="button button-block button-raised  made-easy-button-setting" ng-click="signUpForm.$valid && signUp()" ng-disabled="signUpForm.$invalid">
+                <button class="button button-block button-raised  made-easy-button-setting" ng-click="signUpForm.$valid && signUp()" ng-disabled="signUpForm.$invalid || (data.password !== data.passwordCon)">
                   Sign up
                 </button>
               </label>
