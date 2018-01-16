@@ -12,10 +12,27 @@ mobileApp.controller('contactUsCtrl', function($scope,$rootScope,$http,constants
         $scope.webSite = data.webSite;
         $scope.telPhone = data.telPhone;
         $scope.coords =data.coords;
-        $scope.googleMap = data;;
+        $scope.googleMap = data;
+
+        $scope.myLatLng = {lat: $scope.coords.latitude, lng: $scope.coords.longitude};
+        $scope.map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: $scope.myLatLng
+        });
+
+        $scope.marker = new google.maps.Marker({
+            position: $scope.myLatLng,
+            map:  $scope.map,
+            title: data.address
+        });
+
 
     }).error(function(err) {
         alert('warning', "Unable to get contact us info", err.message);
     });
+    
+    
+    
+    
     
 });

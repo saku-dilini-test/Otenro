@@ -13,6 +13,8 @@
                         <div class="content">
                             <h2 class="made-easy-header-font">{{foods[$index].name}}</h2>
                             <p class="made-easy-content-font">{{currency.sign}} {{foods[$index].variants[0].price}}</p>
+                            <div class="made-easy-header-font">{{salesandpromotion.discountType}}</div>
+                            <div class="made-easy-header-font">{{salesandpromotion.discount}}</div>
                         </div>
                     </div>
                 </a>
@@ -28,6 +30,8 @@
                         <div class="content">
                             <h2 class="made-easy-header-font">{{foods[$index+1].name}}</h2>
                             <p class="made-easy-content-font">{{currency.sign}} {{foods[$index+1].variants[0].price}}</p>
+                            <div class="made-easy-header-font">{{salesandpromotion.discountType}}</div>
+                            <div class="made-easy-header-font">{{salesandpromotion.discount}}</div>
                         </div>
                     </div>
                 </a>

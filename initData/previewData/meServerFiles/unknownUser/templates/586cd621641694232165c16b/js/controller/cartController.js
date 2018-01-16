@@ -7,27 +7,35 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
+    // $rootScope.parseEnable = false;
+    var path = $location.path();
+    if (path.indexOf('app/cart') != -1){
+        $ionicNavBarDelegate.showBackButton(false);
+    }
+    else{
+        $ionicNavBarDelegate.showBackButton(true);
+    }
+    $scope.$on('$stateChangeStart', function () {
+        $ionicNavBarDelegate.showBackButton(true);
+    });
 
-       var path = $location.path();
-       if (path.indexOf('app/cart') != -1){
-         $ionicNavBarDelegate.showBackButton(false);
-       }
-       else{
-         $ionicNavBarDelegate.showBackButton(true);
-       }
-       $scope.$on('$stateChangeStart', function () {
-          $ionicNavBarDelegate.showBackButton(true);
-        });
+    $scope.doSomething = function(){
+        $state.go('app.category');
+    }
 
-       $scope.doSomething = function(){
-            $state.go('app.category');
-       }
+    $scope.buttonDisable = function(qty,totalQty,index){
 
-    $scope.buttonDisable = function(qty,totalQty){
+
+        // Parsing index, changed quantity and the state shows whether value changed
+        $rootScope.parseIndex = index;
+        $rootScope.parseEnable = true;
+        $rootScope.parseQty = qty;
+        $rootScope.cart.cartItems[index].totWeight = $rootScope.cart.cartItems[index].weight *$rootScope.parseQty;
+        //----------------------------------------------------------------------
         if(qty > totalQty && totalQty > 1){
-              $scope.buyButtonDisable = true;
+            $scope.buyButtonDisable = true;
         }else{
-              $scope.buyButtonDisable = false;
+            $scope.buyButtonDisable = false;
         }
     }
 
@@ -37,6 +45,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         });
 
     $rootScope.cartItems = $rootScope.cart.cartItems;
+    console.log($rootScope.cartItems)
     $scope.hide = true;
     $http.get(constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId).success(function(data) {
         if(data == ''){
@@ -74,12 +83,14 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             var product = $rootScope.cartItems[i];
             quantity += product.qty;
         }
+
         $rootScope.cart.totalQuantity = quantity;
         return quantity;
     };
 
     $scope.removeItem = function(index){
         $rootScope.cartItems.splice(index, 1);
+        $rootScope.parseIndex = $rootScope.parseIndex -1;
         $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
         $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
     };
@@ -146,13 +157,13 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             if(localData == null){
                 $state.go('app.login')
             }else{
-            deliverDetails.name = localData.name;
-            deliverDetails.streetNumber = localData.streetNumber;
-            deliverDetails.streetName = localData.streetName;
-            deliverDetails.country = localData.country;
-            deliverDetails.city = localData.city;
-            deliverDetails.zip = localData.zip;
-            deliverDetails.phone = localData.phone;
+                deliverDetails.name = localData.name;
+                deliverDetails.streetNumber = localData.streetNumber;
+                deliverDetails.streetName = localData.streetName;
+                deliverDetails.country = localData.country;
+                deliverDetails.city = localData.city;
+                deliverDetails.zip = localData.zip;
+                deliverDetails.phone = localData.phone;
             }
         }
         $log.debug(deliverDetails);
