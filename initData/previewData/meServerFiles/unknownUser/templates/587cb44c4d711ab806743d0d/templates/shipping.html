@@ -13,6 +13,7 @@
                     <div class="col col-top"> </div>
                     <div class="col col-67 col-center">
                         <button class="col button button-small button-block made-easy-button-setting"
+                                ng-disabled="!details.shipping || details.$invalid"
                                 ng-click="addShipping(details)" >
                             Check Out
                         </button>

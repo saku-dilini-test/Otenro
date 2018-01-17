@@ -187,11 +187,10 @@ angular.module('starter.controllers', [])
             alert('Item Loading error');
         });
 
-    $scope.lockBuyButton = true;
+    $scope.lockBuyButton = false;
     $scope.changeVariant = function(variant){
       $scope.selection1 =[];
       $scope.selectedVariant1  =variant.vType;
-      $scope.selectedVariant.buyQuantity = '';
 
       $scope.lockBuyButton = true;
 
@@ -216,7 +215,6 @@ angular.module('starter.controllers', [])
       $scope.selection2 =[];
       if(variant){
             $scope.selectedVariant2  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
       }
       $scope.lockBuyButton = true;
@@ -244,7 +242,6 @@ angular.module('starter.controllers', [])
       $scope.selection3 =[];
       if(variant){
             $scope.selectedVariant3  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
       }
       $scope.lockBuyButton = true;
@@ -270,7 +267,6 @@ angular.module('starter.controllers', [])
     $scope.changeVariant4 = function(variant){
         if(variant){
             $scope.selectedVariant4  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
         }
 
@@ -290,6 +286,16 @@ angular.module('starter.controllers', [])
     // Check buyQty input value.
     // If buyQty value is less than or equal Selected-Variant-Qty, Buy Button Enable
     $scope.changeBuyQuantity = function (buyQty) {
+        if($scope.item.selection.length == 1 && $scope.selectedVariant1 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 2 && $scope.selectedVariant2 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 3 && $scope.selectedVariant3 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 4 && $scope.selectedVariant4 == undefined){
+            $scope.lockBuyButton = true;
+        }
+
 
         // default : Buy button set as Disable
         $scope.isBuyBtnDisable = true;
@@ -313,10 +319,17 @@ angular.module('starter.controllers', [])
 
     // item add function for cart
  $scope.addToCart = function() {
-        if($scope.selectedVariant.buyQuantity == null){
+        if($scope.item.selection.length == 1 && $scope.selectedVariant1 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 2 && $scope.selectedVariant2 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 3 && $scope.selectedVariant3 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 4 && $scope.selectedVariant4 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.selectedVariant.buyQuantity == null){
             $ionicPopup.alert({
                 title: 'Please enter a quantity',
-                template: 'Warning!!!',
                 cssClass: 'ionicPopUp',
                 buttons:[
                     {text:'OK',

@@ -1,6 +1,6 @@
 <ion-view view-title="Shopping Cart" class="made-easy-background-color cart">
     <ion-nav-buttons side="left">
-        <button class="button back-button buttons icon ion-ios-arrow-back header-item"ng-click="doSomething()">
+        <button class="icon ion-ios-arrow-back header-item"ng-click="doSomething()">
         </button>
     </ion-nav-buttons>
   <ion-content >
@@ -11,7 +11,7 @@
                <a class="item item-thumbnail-left"  >
                    <img src="{{imageURL}}/{{item.imgURL[0].img}}">
                    <h2 ng-model="item.name" class="made-easy-content-font" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}
-                       <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty )"></span>
+                       <span class="made-easy-content-font"> x <input type="number" min="1" value="{{item.qty}}" style="width: 100%;" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty,cartItems.indexOf(item) )"></span>
 
                    </h2>
                    <span class="made-easy-header-font">{{currency}}{{item.total*item.qty}}</span>

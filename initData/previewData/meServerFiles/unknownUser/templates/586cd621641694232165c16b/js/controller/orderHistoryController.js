@@ -16,6 +16,17 @@ mobileApp.controller('orderHistoryCtrl', function($scope,$rootScope,constants,$h
            +"/templates/viewImages?userId="
            +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
 
-    $scope.orderHistory = angular.fromJson(localStorage.getItem('history'));
-
+    try {
+        $scope.appUserId = angular.fromJson(localStorage.getItem("appLocalStorageUser"+$rootScope.appId)).registeredUser;
+    }
+    catch(err) {
+        console.log("no orderHistory");
+    }
+    //get orders history
+    $http.get(constants.SERVER_URL + '/templates/getOrdersOfUser?appId=' + $scope.appId + '&userId=' + $scope.appUserId)
+        .success(function(data){
+            $scope.orderHistory = angular.fromJson(data);
+        }).error(function(err) {
+        alert('warning', "Unable to get Products Selected Category", err.message);
+    });
 });
