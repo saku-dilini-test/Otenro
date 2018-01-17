@@ -37,17 +37,23 @@
             <p>@Otenro</p>
           </a>
         </ion-item>
-        <ion-item menu-close ui-sref="" ng-click="clearAllData()">
-          <i class="icon ion-android-checkmark-circle"></i> Clear all app data
+        <ion-item menu-close ng-click="clearAllData()">
+          <a class="item-content">
+            <i class="icon ion-android-checkmark-circle"></i> Clear all app data
+          </a>
         </ion-item>
         <ion-item menu-close ui-sref="app.dash">
           <i class="icon ion-android-checkmark-circle"></i> My Apps
         </ion-item>
-        <ion-item menu-close ui-sref="" ng-click="openInstructions()">
-          <i class="icon ion-ios-paper-outline"></i> Instructions
+        <ion-item menu-close ng-click="openInstructions()">
+          <a class="item-content">
+            <i class="icon ion-ios-paper-outline"></i> Instructions
+          </a>
         </ion-item>
-        <ion-item menu-close ui-sref="" ng-click="openTerms()">
-          <i class="icon ion-ios-cog-outline"></i> Term of services
+        <ion-item menu-close ng-click="openTerms()">
+          <a class="item-content">
+            <i class="icon ion-ios-cog-outline"></i> Term of services
+          </a>
         </ion-item>
         <!--<ion-item menu-close ui-sref="app.dash">-->
           <!--<i class="icon ion-ios-person-outline"></i> Privacy Policy-->
