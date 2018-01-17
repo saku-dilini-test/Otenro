@@ -80,7 +80,7 @@
 
 
         stylesService.getAppSettings({'appId':appId}).success(function (data) {
-            console.log(data)
+
             var appSettings = data.appSettings;
 
             $scope.appUpdateLocation = data.appUpdateLocationSetting;
