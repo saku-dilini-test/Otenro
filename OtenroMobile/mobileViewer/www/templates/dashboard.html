@@ -19,7 +19,7 @@
     <div class="list card" style="height:85%">
       <a class="item item-thumbnail-left" ng-repeat="oneApp in appList"
          ng-click="openApp('{{oneApp.userId}}','{{oneApp.id}}','{{oneApp.appName}}')">
-        <img  ng-src="https://dashboard.otenro.com/templates/viewImages?userId={{oneApp.userId}}&appId={{oneApp.id}}&{{date}}&img=publish/0.png"  err-src="img/no-preview.jpg" alt="published image">
+        <img  ng-src="https://dashboard.otenro.com/templates/viewImages?userId={{oneApp.userId}}&appId={{oneApp.id}}&{{date}}&img=publish/0.png"  err-src="img/default-app-icon.png" alt="published image">
         <h2>{{oneApp.appName}}</h2>
       </a>
     </div>
