@@ -18,6 +18,13 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
      $scope.modal = modal;
     });
     $scope.openItem = function(food) {
+
+        $scope.selectedVariant1 = undefined;
+        $scope.selectedVariant2 = undefined;
+        $scope.selectedVariant3 = undefined;
+        $scope.selectedVariant4 = undefined;
+        $scope.selectedVariant4 = undefined;
+        $scope.selectedVariant.buyQuantity = undefined;
         $scope.modal.show();
         $scope.foodInfo = food;
         $scope.images = food.tempImageArray;
@@ -77,27 +84,28 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.menuName = $stateParams.categoryName;
 
     $scope.lockBuyButton = false;
-    $scope.changeVariant = function(variant){
-      $scope.selection1 =[];
-      $scope.selectedVariant1  =variant.vType;
+    $scope.changeVariant = function (variant) {
+            $scope.selection1 = [];
+            if(variant){
+                $scope.selectedVariant1 = variant.vType;
 
-      $scope.lockBuyButton = true;
+                $scope.lockBuyButton = true;
 
-        if($scope.foodInfo.selection.length==1){
-          for(var i=0;i<$scope.foodInfo.variants.length;i++){
-            if($scope.foodInfo.variants[i].selection[0].vType == $scope.selectedVariant1){
-                $scope.selectedVariant = $scope.foodInfo.variants[i];
-                $scope.lockBuyButton = false;
-            }
-          }
-        }else{
-            for(var i=0;i <$scope.foodInfo.variants.length;i++){
-                if($scope.foodInfo.variants[i].selection[0].vType == variant.vType){
-                    $scope.selection1.push({'vType':$scope.foodInfo.variants[i].selection[1].vType});
+                if ($scope.foodInfo.selection.length == 1) {
+                    for (var i = 0; i < $scope.foodInfo.variants.length; i++) {
+                        if ($scope.foodInfo.variants[i].selection[0].vType == $scope.selectedVariant1) {
+                            $scope.selectedVariant = $scope.foodInfo.variants[i];
+                            $scope.lockBuyButton = false;
+                        }
+                    }
+                } else {
+                    for (var i = 0; i < $scope.foodInfo.variants.length; i++) {
+                        if ($scope.foodInfo.variants[i].selection[0].vType == variant.vType) {
+                            $scope.selection1.push({'vType': $scope.foodInfo.variants[i].selection[1].vType});
+                        }
+                    }
                 }
             }
-        }
-
     };
 
     $scope.changeVariant2 = function(variant){
