@@ -25,9 +25,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services',])
 
         // When click back button in dashboard, app close
         if((fromState.name == 'app.dash') && (next.name == 'app.login')){
-          navigator.app.exitApp();
+          //navigator.app.exitApp();
         }
 
+      });
+
+      $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams) {
+        if(toState.name == 'app.dash'){
+          event.preventDefault();
+          $state.go('app.login');
+        }
       });
 
 
