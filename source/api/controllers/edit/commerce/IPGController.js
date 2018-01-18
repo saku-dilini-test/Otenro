@@ -52,7 +52,7 @@ module.exports = {
                             });
                         });
                 }
-                return res.send(200, {message: 'IPG Details successfully updated'});
+                return res.send(200, {message: 'Payment Settings Successfully Updated'});
             });
         }else{
             IPGDetails.create(updateData).exec(function (err, ipg) {
