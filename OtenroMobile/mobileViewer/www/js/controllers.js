@@ -44,7 +44,7 @@ $scope.status = "";
 
   /** --/-- Dash-board Ctrl ------------------- **/
    .controller('DashCtrl', function($scope,$ionicLoading,
-     dashBoardService,meServerUrl,fileServerUrl,allApps,$state,$interval,$ionicSideMenuDelegate, AuthService) {
+     dashBoardService,meServerUrl,fileServerUrl,allApps,$state,$interval,$ionicSideMenuDelegate, AuthService, $timeout) {
 
       $scope.menuToggle = function() {
          $ionicSideMenuDelegate.toggleLeft();
@@ -141,6 +141,12 @@ $scope.status = "";
         $ionicLoading.hide();
         // Show In-App-Browser
         ref.show();
+      });
+
+      ref.addEventListener('exit', function(event) {
+        $timeout(function(){
+          $ionicLoading.hide();
+        }, 1000);
       });
     };
 
