@@ -45,6 +45,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         });
 
     $rootScope.cartItems = $rootScope.cart.cartItems;
+    console.log($rootScope.cartItems)
     $scope.hide = true;
     $http.get(constants.SERVER_URL + '/edit/getTaxInfo?appId='+$rootScope.appId).success(function(data) {
         if(data == ''){

@@ -1,0 +1,10 @@
+// used this quary for update the databases of prod and preprod.(already updated and changed in dataFiles too)
+
+db.currency.update(
+   { "symbol":"lkr" },
+   {
+     $set: {
+       "sign": "LKR",
+     }
+   }
+)

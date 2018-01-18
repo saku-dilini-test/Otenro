@@ -14,9 +14,9 @@ mobileApp.controller('appCtrl', function($scope, $ionicModal, $timeout,$rootScop
     }
 
 
-    $scope.parentobj = {};
-    $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-    $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
+    $rootScope.parentobj = {};
+    $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
+    $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
     // show & hide menu icon button
     $scope.showMenu = true;
     $scope.$on('hideMenu', function(){
@@ -28,8 +28,11 @@ mobileApp.controller('appCtrl', function($scope, $ionicModal, $timeout,$rootScop
 
     $scope.logout = function(){
         localStorage.removeItem('appLocalStorageUser'+$rootScope.appId);
+        $rootScope.cart.cartSize = 0;
+        $rootScope.cart.cartItems = [];
+        $rootScope.parentobj.cartSize = 0;
         $rootScope.isUserLoggedIn.check = false;
-        $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
+        $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
          $ionicSideMenuDelegate.toggleLeft();
     }
 

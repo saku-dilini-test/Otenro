@@ -40,7 +40,10 @@
                                     ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </label>
-                        <label class="col item-input item-select padding-vertical no-padding-left no-padding-right" ng-if="foodInfo.selection[1]">
+                        <div class="item-error-message text-right"  ng-if="lockBuyButton && foodInfo.selection[0].name && !selectedVariant1">
+                            Please select a {{foodInfo.selection[0].name}}.
+                        </div>
+                        <label class="col item-input item-select padding-vertical no-padding-left no-padding-right" ng-if="foodInfo.selection[1] && selectedVariant1">
                             <div class="made-easy-content-font ">
                                 Select {{foodInfo.selection[1].name}}
                             </div>
@@ -51,7 +54,10 @@
                                     ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </label>
-                        <label class="col item-input item-select padding-vertical no-padding-left no-padding-right" ng-if="foodInfo.selection[2]">
+                        <div class="item-error-message text-right" ng-if="lockBuyButton && foodInfo.selection[1].name && !selectedVariant2 && selectedVariant1" >
+                            Please select a {{foodInfo.selection[1].name}}.
+                        </div>
+                        <label class="col item-input item-select padding-vertical no-padding-left no-padding-right" ng-if="foodInfo.selection[2] && selectedVariant2">
                             <div class="made-easy-content-font">
                                 Select {{foodInfo.selection[2].name}}
                             </div>
@@ -62,7 +68,10 @@
                                     ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </label>
-                        <label class="col item-input item-select padding-vertical no-padding-left no-padding-right" ng-if="foodInfo.selection[3]">
+                        <div class="item-error-message text-right" ng-if="lockBuyButton && foodInfo.selection[2].name && !selectedVariant3 && selectedVariant2">
+                            Please select a {{foodInfo.selection[2].name}}.
+                        </div>
+                        <label class="col item-input item-select padding-vertical no-padding-left no-padding-right" ng-if="foodInfo.selection[3] && selectedVariant3">
                             <div class="made-easy-content-font">
                                 Select {{foodInfo.selection[3].name}}
                             </div>
@@ -73,7 +82,9 @@
                                     ng-click="selectedVariant.buyQuantity = ''">
                             </select>
                         </label>
-
+                        <div class="item-error-message text-right" ng-if="lockBuyButton && foodInfo.selection[3].name && !selectedVariant4 && selectedVariant3">
+                            Please select a {{foodInfo.selection[3].name}}.
+                        </div>
                     </a>
 
                     <a class="item item-icon-right" >
@@ -81,8 +92,7 @@
                             <input type="number" min="1"
                                    placeholder="Enter Quantity"
                                    ng-model="selectedVariant.buyQuantity"
-                                   ng-change="changeBuyQuantity(selectedVariant.buyQuantity)"
-                                   ng-disabled="lockBuyButton">
+                                   ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
                         </h2>
                         <i class="icon ion-pricetags"></i>
                     </a>
@@ -121,7 +131,7 @@
         <div class="row item center ">
             <div class="col col-center">
                 <button class="col col-80 button button-raised button-small made-easy-button-setting icon-left ion-ios-cart "
-                        ng-disabled="isBuyBtnDisable || !selectedVariant.buyQuantity || lockBuyButton"
+                        ng-disabled="isBuyBtnDisable "
                         ng-click="addToCart()">
                     Add to cart
                 </button>

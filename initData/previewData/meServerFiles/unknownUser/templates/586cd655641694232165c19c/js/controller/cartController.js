@@ -24,7 +24,14 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             $state.go('app.category');
        }
 
-    $scope.buttonDisable = function(qty,totalQty){
+    $scope.buttonDisable = function(qty,totalQty,index){
+
+        // Parsing index, changed quantity and the state shows whether value changed
+        $rootScope.parseIndex = index;
+        $rootScope.parseEnable = true;
+        $rootScope.parseQty = qty;
+        $rootScope.cart.cartItems[index].totWeight = $rootScope.cart.cartItems[index].weight *$rootScope.parseQty;
+        //----------------------------------------------------------------------
             if(qty > totalQty && totalQty > 1){
                   $scope.buyButtonDisable = true;
             }else{
@@ -153,7 +160,6 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             deliverDetails.city = localData.city;
             deliverDetails.zip = localData.zip;
             deliverDetails.phone = localData.phone;
-            
         }
         $log.debug(deliverDetails);
         deliverDetails.method = 'Delivery';

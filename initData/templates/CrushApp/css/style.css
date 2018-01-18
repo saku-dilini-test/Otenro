@@ -262,8 +262,10 @@ input[type=number] {
 
 
 .item-error-message{
-    color:red;
+    color: white;
+    background: #da0000;
     font-size: 70%;
+    padding: 2px 16px;
     white-space: normal;
 }
 
