@@ -286,7 +286,12 @@ module.exports.routes = {
     'GET /templates/getCurrency': 'template/TemplateController.getCurrency',
     'GET /templates/viewImages': 'template/TemplateController.viewImages',
     'GET /templates/viewWebImages': 'template/TemplateController.viewWebImages',
+
     'GET /templates/getProductsByCatId': 'template/TemplateController.getThirdBySecondId',
+    'GET /templates/getProductsByAppId': 'template/TemplateController.getAllThirdByAppId',
+    'GET /templates/getCategoryByProdId': 'template/TemplateController.getSecondByThirdId',
+
+
     'POST /templates/deletePreviewTemp': 'template/TemplateController.deletePreviewTemp',
     'GET /templates/getAboutUs': 'template/TemplateController.getAboutUs',
     'GET /templates/getPolicies': 'template/TemplateController.getPolicies',
