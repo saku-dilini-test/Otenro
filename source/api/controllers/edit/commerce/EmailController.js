@@ -95,16 +95,22 @@ module.exports = {
         console.log(" req.body.emailType "+ JSON.stringify(req.body) + " appId " + appId);
 
 
+
             req.file('file').upload({
                 dirname: require('path').resolve(dePath)
             }, function (err, uploadedFiles) {
+                if (err) return res.serverError(err);
 
                 //sails.log.info(uploadedFiles);
                 if (0 < uploadedFiles.length) {
 
                     var newFileName = Date.now() + uploadedFiles[0].filename;
                     fs.rename(uploadedFiles[0].fd, dePath + '/' + newFileName, function (err) {
-                        if (err) return res.send(err);
+                        if (err) {
+                            console.log("error  " + err);
+                            res.send(err);
+
+                        }
                     });
 
                     console.log("newFileName " + newFileName);
@@ -122,16 +128,27 @@ module.exports = {
 
                     }
 
+                    console.log("saveData 2 "+ JSON.stringify(saveData));
+
+                    UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
+                        if (err) {
+                            console.log("error  " + err);
+                            res.send(err);
+
+                        }
+                        res.send({
+                            message: "Email Settings has been successfully added"
+                        });
+                    });
+
+
+                }else {
+                    res.send({
+                        message: "Email Settings has been successfully added"
+                    });
                 }
 
-                console.log("saveData 2 "+ JSON.stringify(saveData));
 
-            UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
-                if (err) return done(err);
-                res.send({
-                    message: "Email Settings has been successfully added"
-                });
-            });
 
             });
 
