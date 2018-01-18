@@ -44,7 +44,9 @@ module.exports = {
    },
 
     getAllCurrency: function(req,res){
-         Currency.find().exec(function(err, app) {
+
+    var sort = { currency: 1 };
+         Currency.find().sort(sort).exec(function(err, app) {
               if (err) res.send(err);
               res.send(app);
          });
