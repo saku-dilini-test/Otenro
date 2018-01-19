@@ -111,13 +111,25 @@
             $scope.picFile = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/article/'+initialData.imageUrl;
             $scope.tmpImage[0] = SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article/"+initialData.imageUrl;
-
+            $scope.dummyCat =[];
 
             $scope.seletedCategoryId = initialData.categoryId;
 
             articleService.getArticleCategoryByAppId()
                 .success(function (data) {
-                 
+                    $scope.dummyCat.push({id:1,name:"Create New Category"});
+
+                    data.forEach(function(articaleCat) {
+                        var cat = {id:articaleCat.id,name:articaleCat.name};
+
+                        //Sets the Article Category
+                        $scope.dummyCat.push(cat);
+
+                        if(articaleCat.id === initialData.categoryId){
+                            $scope.dummyCat.id = cat;
+                        }
+                    });
+
                     $scope.articleCat = {
                         "value" : initialData.categoryId,
                         "values":  data
