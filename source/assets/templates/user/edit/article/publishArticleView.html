@@ -17,7 +17,7 @@
                 <label>Article Category</label>
                     <select class="input-shadow-border" ng-model="dummyCat.id"
                             ng-options="v.name for v in dummyCat"
-                            ng-click="changeArticleCat(dummyCat.id)" required>
+                            ng-change="changeArticleCat(dummyCat.id)" required>
                     </select>
             </fieldset>
             <fieldset>
