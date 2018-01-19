@@ -558,21 +558,22 @@ module.exports = {
         UserEmail.findOne(searchApp).exec(function (err, userEmail) {
 
 
-            console.log(data);
-
             var serverOrg=config.server.host+':'+config.server.port;
             var emailHeaderImage;
 
             var imagePath =  serverOrg +"/templates/viewImages?userId="+ data.userId
                 +"&appId="+data.appId+"&"+new Date().getTime()+"&img=thirdNavi/";
 
-            var  headerImagePath = config.APP_FILE_SERVER + data.userId + "/templates/"+data.appId+'/img/email/'+userEmail.orderConfirmedEmailImage;
+            //console.log(config.APP_FILE_SERVER + data.userId + "/templates/"+data.appId+'/img/email/'+userEmail.orderConfirmedEmailImage);
 
-            console.log("headerImagePath" + headerImagePath);
-            fs.readFile(headerImagePath, function(err, imgData) {
-                var base64data = new Buffer(imgData).toString('base64');
 
-                    emailHeaderImage  =base64data;
+            if( typeof userEmail==='undefined'){
+                console.log("Please Update Email Setting ");
+
+            }else {
+                console.log("typeof userEmail.orderConfirmedEmailImage "  + typeof userEmail.orderConfirmedEmailImage);
+                if(typeof userEmail.orderConfirmedEmailImage !=='undefined'){
+                    var  headerImagePath = config.APP_FILE_SERVER + data.userId + "/templates/"+data.appId+'/img/email/'+userEmail.orderConfirmedEmailImage;
 
                 var mBody = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'+
                     '<html xmlns="http://www.w3.org/1999/xhtml" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
@@ -714,43 +715,60 @@ module.exports = {
                     '</html>';
 
 
-                // setup email data with unicode symbols
-                let mailOptions = {
-                from: 'onbitlabs@gmail.com', // sender address
-                to: data.email, // list of receivers
-                subject: 'You have ordered', // Subject line
-                html: mBody ,
-                attachments : [
-                    {
-                        filename: 'image.png',
-                        content: Buffer.from(
-                            emailHeaderImage,
-                            'base64'
-                        ),
 
-                        cid: 'note@example.com' // should be as unique as possible
-                    }
-                ]// html body,
-                };
+
+
+
+            console.log("headerImagePath" + headerImagePath);
+            fs.readFile(headerImagePath, function(err, imgData) {
+                let  mailOptions;
+
+                if (err){
+
+                    mailOptions = {
+                        from: 'onbitlabs@gmail.com', // sender address
+                        to: 'onbitlabs@gmail.com', // list of receivers
+                        subject: 'You have ordered', // Subject line
+                        html: mBody
+                    };
+
+                }else {
+                    // setup email data with unicode symbols
+                    var base64data = new Buffer(imgData).toString('base64');
+                    emailHeaderImage  =base64data;
+                    mailOptions = {
+                        from: 'onbitlabs@gmail.com', // sender address
+                        to: 'onbitlabs@gmail.com', // list of receivers
+                        subject: 'You have ordered', // Subject line
+                        html: mBody ,
+                        attachments : [
+                            {
+                                filename: 'image.png',
+                                content: Buffer.from(
+                                    emailHeaderImage,
+                                    'base64'
+                                ),
+
+                                cid: 'note@example.com' // should be as unique as possible
+                            }
+                        ]// html body,
+                    };
+
+                }
 
 
                 // send mail with defined transport object
                 transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    return console.log(error);
+                    if (error) {
+                        //return console.log(error);
+                        return  res.send(500);
+                    }
+                    console.log('Message sent: %s', info.messageId);
+                return res.send('ok');
+            });
+            });
                 }
-                console.log('Message sent: %s', info.messageId);
-                // Preview only available when sending through an Ethereal account
-                /*console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));*/
-
-                // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
-                // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-                });
-                });
-
-
-
-
+            }
 
         });
 
