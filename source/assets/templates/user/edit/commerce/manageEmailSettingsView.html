@@ -424,7 +424,7 @@
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
                             <md-button class="me-default-button" ng-click="updateEmailSettings(orderConfirmedEmail,'save','orderConfirmedEmail')">Save
                             </md-button>
-                            <md-button class="me-default-button" ng-disabled="orderConfirmationForm.$invalid" ng-click="updateEmailSettings(orderConfirmedEmail,'next')">Next</md-button>
+                            <md-button class="me-default-button" ng-disabled="orderConfirmationForm.$invalid" ng-click="updateEmailSettings(orderConfirmedEmail,'next','orderConfirmedEmail')">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -714,7 +714,7 @@
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
                             <md-button class="me-default-button" ng-click="updateEmailSettings(orderRefundEmail,'save','orderRefundEmail')">Save
                             </md-button>
-                            <md-button class="me-default-button" ng-disabled="orderRefundForm.$invalid" ng-click="updateEmailSettings(orderRefundEmail,'next')">Finish</md-button>
+                            <md-button class="me-default-button" ng-disabled="orderRefundForm.$invalid" ng-click="updateEmailSettings(orderRefundEmail,'next','orderRefundEmail')">Finish</md-button>
                         </div>
                     </div>
                 </md-tab-body>
