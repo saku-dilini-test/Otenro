@@ -23,7 +23,7 @@
         $scope.maxPrivacyPolicy = 100;
         // About us
         $scope.maxAboutUsHeader = 20;
-        $scope.maxAboutUsContent = 100;
+        $scope.maxAboutUsContent = 500;
         $scope.currency = $rootScope.currency;
 
 
