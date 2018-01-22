@@ -1094,7 +1094,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             Contact us controller
         */
         // --/-- Characters length config
-        $scope.maxBasicInfoAddress = 50;
+        $scope.maxBasicInfoAddress = 100;
 
         // --- Config ----
         $scope.coords ="";
