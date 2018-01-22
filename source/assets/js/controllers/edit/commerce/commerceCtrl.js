@@ -806,7 +806,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                                 $scope.selectedIndex = index;
                             }
 
-                            if ($scope.selectedIndex==6){
+                            if ($scope.selectedIndex==6||type == "finish"){
                                 $mdDialog.hide();
                             }
 
