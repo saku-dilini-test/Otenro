@@ -5,9 +5,12 @@
  * Edited by Shashan on 01/11/16.
  */
 
-mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService,$log) {
+mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService,$log,$ionicHistory) {
 
     $scope.$emit('hideMenu',{});
+    $ionicHistory.nextViewOptions({
+        disableBack: true
+    });
 
     if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId) == null){
         $state.go('app.login')

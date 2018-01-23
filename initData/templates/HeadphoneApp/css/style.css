@@ -208,3 +208,12 @@ ion-slide{
 .cart a.item {
     padding-left: 65px;
 }
+
+.bar .button{
+    min-height: 44px;
+    min-width: 25px;
+    max-width: 25px;
+    margin-bottom: 0;
+    max-height: 25px;
+    width: 25px;
+}
