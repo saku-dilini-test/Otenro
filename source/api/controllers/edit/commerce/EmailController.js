@@ -65,17 +65,21 @@ module.exports = {
     },
     updateEmailSettings : function(req,res){
 
-        console.log(req.body);
-        var appId = req.param('appId');
-        sails.log.info(appId);
+        //console.log(req.body);
+        var appId = req.body.appId;
+        //sails.log.info(appId);
         var saveData = req.body;
 
         console.log("saveData " + JSON.stringify(saveData));
 
         UserEmail.update({ appId :appId }, saveData).exec(function(err,r){
-            if (err) return done(err);
+            if (err){
+                console.log("error "+err);
+                return done(err);
+            }
             res.send({
-                message: "Email Settings has been successfully added "
+                appId: req.body.appId,
+                message: "Email Settings has been successfully Updated "
             });
         });
     },
@@ -347,7 +351,7 @@ module.exports = {
 
                      mailOptions = {
                         from: 'onbitlabs@gmail.com', // sender address
-                        to: 'onbitlabs@gmail.com', // list of receivers
+                        to: userEmail.fromEmail, // list of receivers
                         subject: 'You have ordered', // Subject line
                         html: mBody
                     };
@@ -358,7 +362,7 @@ module.exports = {
                     emailHeaderImage  =base64data;
                     mailOptions = {
                         from: 'onbitlabs@gmail.com', // sender address
-                        to: 'onbitlabs@gmail.com', // list of receivers
+                        to: userEmail.fromEmail, // list of receivers
                         subject: 'You have ordered', // Subject line
                         html: mBody ,
                         attachments : [

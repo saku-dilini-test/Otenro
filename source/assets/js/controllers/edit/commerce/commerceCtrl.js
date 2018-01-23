@@ -777,6 +777,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
         $scope.updateEmailSettings = function (email, type, emailType) {
 
             var imageData ;
+            var isUpdateHImg = true;
 
             if(email == undefined){
                 toastr.error('Please fill the all fields','Warning',{
@@ -792,34 +793,65 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                             imageData = $scope.picFileHeader;
                         }else if (emailType=="orderFulfilledEmail"){
                             imageData = $scope.picFileHeader2;
-                        }else {
+                        }else if (emailType=="orderRefundEmail"){
                             imageData = $scope.picFileHeader3;
+                        }else {
+                            isUpdateHImg = false;
+
                         }
 
                         console.log("imageData " + imageData);
+                        if (isUpdateHImg){
+                            commerceService.updateHeaderFooterSettings(imageData,data).success(function (data) {
 
-                        commerceService.updateHeaderFooterSettings(imageData,data).success(function (data) {
 
+                                if (type == "next") {
+                                    var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
+                                    $scope.selectedIndex = index;
+                                }
 
-                            if (type == "next") {
-                                var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
-                                $scope.selectedIndex = index;
-                            }
+                                if ($scope.selectedIndex==6){
+                                    $mdDialog.hide();
+                                }
 
-                            if ($scope.selectedIndex==6){
+                                toastr.success('Email Settings has been changed ', 'Success', {
+                                    closeButton: true
+                                });
+
+                            }).error(function (err) {
+                                toastr.error('Unable to Create', 'Warning', {
+                                    closeButton: true
+                                });
                                 $mdDialog.hide();
-                            }
+                            })
 
-                            toastr.success('Email Settings has been changed ', 'Success', {
-                                closeButton: true
-                           });
+                        }else {
+                            commerceService.updateEmailSettings(data).success(function (data) {
 
-                        }).error(function (err) {
-                            toastr.error('Unable to Create', 'Warning', {
-                                closeButton: true
-                            });
-                            $mdDialog.hide();
-                        })
+
+                                if (type == "next") {
+                                    var index = ($scope.selectedIndex == $scope.max) ? 0 : $scope.selectedIndex + 1;
+                                    $scope.selectedIndex = index;
+                                }
+
+                                if ($scope.selectedIndex==6){
+                                    $mdDialog.hide();
+                                }
+
+                                toastr.success('Email Settings has been changed ', 'Success', {
+                                    closeButton: true
+                                });
+
+                            }).error(function (err) {
+                                toastr.error('Unable to Create', 'Warning', {
+                                    closeButton: true
+                                });
+                                $mdDialog.hide();
+                            })
+
+
+                        }
+
 
 
 
