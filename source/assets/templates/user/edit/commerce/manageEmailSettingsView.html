@@ -133,9 +133,9 @@
                             <div class="md-dialog-buttons">
                                 <div class="inner-section">
                                     <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                                    <md-button class="me-default-button" ng-click="updateEmailSettings(emailSettings,'save')">Save
+                                    <md-button class="me-default-button" ng-click="updateEmailSettings(emailSettings,'save','emailSettings')">Save
                                     </md-button>
-                                    <md-button class="me-default-button" ng-disabled="emailSettingsForm.$invalid"  ng-click="updateEmailSettings(emailSettings,'next')">Next</md-button>
+                                    <md-button class="me-default-button" ng-disabled="emailSettingsForm.$invalid"  ng-click="updateEmailSettings(emailSettings,'next','emailSettings')">Next</md-button>
                                 </div>
                             </div>
                         </form>
@@ -568,7 +568,7 @@
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
                             <md-button class="me-default-button" ng-click="updateEmailSettings(orderFulfilledEmail,'save','orderFulfilledEmail')">Save
                             </md-button>
-                            <md-button class="me-default-button" ng-disabled="orderFulfillForm.$invalid" ng-click="updateEmailSettings(orderFulfilledEmail,'next')">Next</md-button>
+                            <md-button class="me-default-button" ng-disabled="orderFulfillForm.$invalid" ng-click="updateEmailSettings(orderFulfilledEmail,'next','orderFulfilledEmail')">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
