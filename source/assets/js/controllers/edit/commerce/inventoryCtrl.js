@@ -16,6 +16,8 @@
             $scope.SERVER_URL = SERVER_URL;
             $scope.isValideForm = true;
             $scope.inventoryList = [];
+            $rootScope.currentProduct = null;
+            $rootScope.hasCurrentProduct = false;
 
 
             $scope.refreshData = function() {
@@ -214,6 +216,10 @@
             //             })
             //}
              $scope.goToEditProductWindow = function(item){
+                 //set clicked product as the currentProduct
+                 $rootScope.currentProduct = item;
+                 //this is true when there is a currentProduct
+                 $rootScope.hasCurrentProduct = true;
                  return commerceService.showAddProductsDialog(item);
 //               $state.go('user.editApp',{appId: item.id});
              };
