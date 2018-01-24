@@ -36,7 +36,7 @@
                             <div class="col-md-5  col-md-offset-1">
                                 <ul class="grid obl-app-templates clearfix">
                                     <li>
-                                        <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
+                                        <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.prog_template_name,template.templateCategory,template.previewId,template.isNew)" >
                                             <div  id ="image">
                                                 <img class = "main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
                                                 <img class ="second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
@@ -58,7 +58,7 @@
                                     <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" ng-src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail">
                                 </div>
                                 <h4 class="text-center">
-                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)">
+                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.prog_template_name,template.templateCategory,template.previewId,template.isNew)">
                                         Select
                                     </button>
                                 </h4>
@@ -73,13 +73,13 @@
                             <div class="col-sm-10 col-md-8 col-lg-7">
                                 <ul class="grid obl-app-templates2 clearfix">
                                     <li>
-                                        <a class="mobile" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)" >
+                                        <a class="mobile" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.prog_template_name,template.templateCategory,template.previewId,template.isNew)" >
                                             <div id ="image">
                                                 <img class = "img-mobile main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
                                                 <img class ="img-mobile second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
                                             </div>
                                         </a>
-                                        <a class="screen" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)" >
+                                        <a class="screen" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.prog_template_name,template.templateCategory,template.previewId,template.isNew)" >
                                             <div id ="image">
                                                 <img class = "img-screen main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
                                                 <img class ="img-screen second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
@@ -100,7 +100,7 @@
                                     <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" ng-src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail2">
                                 </div>
                                 <h4 class="text-center">
-                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)">
+                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.prog_template_name,template.templateCategory,template.previewId,template.isNew)">
                                         Select
                                     </button>
                                 </h4>
@@ -120,7 +120,7 @@
                             <div class="col-md-5  col-md-offset-1">
                                 <ul class="grid obl-app-templates clearfix">
                                     <li >
-                                        <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)" >
+                                        <a ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.prog_template_name,template.templateCategory,template.previewId,template.isNew)" >
                                             <div  id ="image">
                                                 <img class = "main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
                                                 <img class ="second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
@@ -141,7 +141,7 @@
                                     <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" ng-src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail">
                                 </div>
                                 <h4 class="text-center">
-                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId)">
+                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.prog_template_name,template.templateCategory,template.previewId,template.isNew)">
                                         Select
                                     </button>
                                 </h4>
@@ -155,13 +155,13 @@
                             <div class="col-sm-10 col-md-8 col-lg-7">
                                 <ul class="grid obl-app-templates2 clearfix">
                                     <li>
-                                        <a class="mobile" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)" >
+                                        <a class="mobile" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.prog_template_name,template.templateCategory,template.previewId,template.isNew)" >
                                             <div id ="image">
                                                 <img class = "img-mobile main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
                                                 <img class ="img-mobile second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
                                             </div>
                                         </a>
-                                        <a class="screen" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)" >
+                                        <a class="screen" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.prog_template_name,template.templateCategory,template.previewId,template.isNew)" >
                                             <div id ="image">
                                                 <img class = "img-screen main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
                                                 <img class ="img-screen second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
@@ -182,7 +182,7 @@
                                     <img ng-click="showSampleImage($event,template.imageUrl, 'sample3.png')" ng-src="images/templates/{{template.imageUrl}}sample3.png" class="img-thumbnail2">
                                 </div>
                                 <h4 class="text-center">
-                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)">
+                                    <button class="btn-material" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.prog_template_name,template.templateCategory,template.previewId,template.isNew)">
                                         Select
                                     </button>
                                 </h4>

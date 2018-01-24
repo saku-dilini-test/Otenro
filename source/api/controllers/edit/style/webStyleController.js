@@ -40,11 +40,11 @@ module.exports = {
         Application.update(query,
             { $set:
             {
-                'appSettings.header' : header,
-                'appSettings.color' : color,
-                'appSettings.font' : font,
-                'appSettings.fontSize' : fontSize,
-                'appSettings.backImg' : backImg
+                'webAppSettings.header' : header,
+                'webAppSettings.color' : color,
+                'webAppSettings.font' : font,
+                'webAppSettings.fontSize' : fontSize,
+                'webAppSettings.backImg' : backImg
             }
             });
         /**
@@ -326,7 +326,7 @@ module.exports = {
         Application.findOne(findQuery).exec(function(err, app) {
             if (err) res.send(err);
 
-            app.appSettings.isApplyBGImage = isApplyBGImage;
+            app.webAppSettings.isApplyBGImage = isApplyBGImage;
             Application.update(findQuery,app).exec(function(err, appUpdate) {
                 if (err) return res.send(err);
 
@@ -546,55 +546,55 @@ module.exports = {
         var type = req.body.type;
         var colorTypeCss = '';
 
-        console.log("type  : " + type);
-        // var query = { id : appId };
-        //
-        // Application.findOne(query).exec(function(err, app) {
-        //     if (err) res.send(err);
+        var query = { id : appId };
+
+        Application.findOne(query).exec(function(err, app) {
+            if (err) res.send(err);
 
             // here update background-color in Css class
             if(type == 'backgroundColor'){
-                // app.appSettings.backgroundColor= styleColor;
+                 app.webAppSettings.backgroundColor= styleColor;
                 colorTypeCss = ".main-background";
             }else if(type == 'navigationBarColor'){
-                // app.appSettings.navigationBarColor= styleColor;
+                 app.webAppSettings.navigationBarColor= styleColor;
                 colorTypeCss = ".main-navigation";
             }else if(type == 'footerColor'){
-                // app.appSettings.footerColor =  styleColor;
+                 app.webAppSettings.footerColor =  styleColor;
                 colorTypeCss = ".made-easy-footerColor";
             }else if(type == 'buttonColor'){
-                // app.appSettings.buttonColor = styleColor  ;
+                 app.webAppSettings.buttonColor = styleColor  ;
                 colorTypeCss = ".main-button";
             }
             // here to update button border color
             else if(type == 'buttonBorderColor'){
-                // app.appSettings.buttonBorderColor = styleColor  ;
+                 app.webAppSettings.buttonBorderColor = styleColor  ;
                 colorTypeCss = ".main-button";
             }
             // here update color in Css class
             else if(type == 'navigationBarFontColor') {
-                // app.appSettings.navigationBarFontColor = styleColor;
+                 app.webAppSettings.navigationBarFontColor = styleColor;
                 colorTypeCss = ".main-navigation";
             }
             else if(type == 'buttonFontColor') {
-                // app.appSettings.buttonFontColor = styleColor;
+                 app.webAppSettings.buttonFontColor = styleColor;
                 colorTypeCss = ".main-button";
             }
             else if(type == 'headerFontColor') {
-                // app.appSettings.headerFontColor = styleColor;
+                 app.webAppSettings.headerFontColor = styleColor;
                 colorTypeCss = ".main-header-font";
             }
             else if(type == 'contentFontColor') {
-                // app.appSettings.contentFontColor = styleColor;
+                 app.webAppSettings.contentFontColor = styleColor;
                 colorTypeCss = ".main-content-font";
             }
             else if(type == 'footerFontColor') {
-                // app.appSettings.footerFontColor = styleColor;
+                 app.webAppSettings.footerFontColor = styleColor;
                 colorTypeCss = ".made-easy-footer-font";
             }
 
-            // Application.update(query,app).exec(function(err, appUpdate) {
-            //     if (err) res.send(err);
+
+            Application.update(query,app).exec(function(err, appUpdate) {
+                if (err) res.send(err);
 
                 // here update color in Css class
                 if(type == 'buttonFontColor' || type == 'navigationBarFontColor' || type == 'headerFontColor' || type == 'contentFontColor' || type == 'footerFontColor'){
@@ -627,11 +627,11 @@ module.exports = {
                         sails.log.info((err));
                     });
                 }
-                res.send("success");
+                res.send(appUpdate);
 
-            // });
+            });
 
-        // });
+        });
 
         /**
          * update css file with new changes
@@ -673,7 +673,7 @@ module.exports = {
        // var mainCssFile = "/home/dilakshan/Desktop/regex.ts";
         var data = req.body.jsdata;
 
-        console.log("req.data :  " + JSON.stringify(data))
+//        console.log("req.data :  " + JSON.stringify(data))
 
         updateFile(mainCssFile, [{
             attribute: 'title',
@@ -734,54 +734,42 @@ module.exports = {
         var fontFamilyCss = '';
         var data = req.body;
 
-        console.log("req.data :  " + JSON.stringify(data))
+//        console.log("req.data :  " + JSON.stringify(data))
 
-        // var query = {id:appId};
-        //
-        // Application.findOne(query).exec(function(err, app) {
-        //     if (err) res.send(err);
+        var query = {id:appId};
+
+        Application.findOne(query).exec(function(err, app) {
+            if (err) res.send(err);
 
             if(type == 'headerFont'){
-                // app.appSettings.headerFontFamily = styleFontFamily;
+                 app.webAppSettings.headerFontFamily = styleFontFamily;
                 fontFamilyCss = ".main-header-font";
-
-                updateFile(mainCssFile, [{
-                    rule: fontFamilyCss,
-                    target: "font-family",
-                    replacer: styleFontFamily
-                }], function (err) {
-                    sails.log.info((err));
-                });
-
-                res.send("success");
             }else if(type == 'contentFont'){
-                // app.appSettings.contentFontFamily = styleFontFamily;
+                 app.webAppSettings.contentFontFamily = styleFontFamily;
                 fontFamilyCss = ".main-content-font";
-
-                updateFile(mainCssFile, [{
-                    rule: fontFamilyCss,
-                    target: "font-family",
-                    replacer: styleFontFamily
-                }], function (err) {
-                    sails.log.info((err));
-                });
-
-                res.send("success");
             }else if(type == 'footerFont'){
-                // app.appSettings.footerFontFamily = styleFontFamily;
+                 app.webAppSettings.footerFontFamily = styleFontFamily;
                 fontFamilyCss = ".made-easy-footer-font";
             }else if(type == 'buttonFont'){
-                // app.appSettings.buttonFontFamily = styleFontFamily;
+                 app.webAppSettings.buttonFontFamily = styleFontFamily;
                 fontFamilyCss = ".made-easy-button-setting";
             }
 
-            // Application.update(query,app).exec(function(err, appUpdate) {
-            //     if (err) res.send(err);
+             Application.update(query,app).exec(function(err, appUpdate) {
+                 if (err) res.send(err);
 
+                updateFile(mainCssFile, [{
+                    rule: fontFamilyCss,
+                    target: "font-family",
+                    replacer: styleFontFamily
+                }], function (err) {
+                    sails.log.info((err));
+                });
 
-            // });
+                 res.send(appUpdate);
+             });
 
-        // });
+         });
 
         /**
          * update css file with new changes
@@ -824,64 +812,36 @@ module.exports = {
         var data = {};
         var fontSizeCss = '';
 
-        // var query = {id:appId};
-        //
-        // Application.findOne(query).exec(function(err, app) {
-        //     if (err) res.send(err);
+        var query = {id:appId};
+
+        Application.findOne(query).exec(function(err, app) {
+            if (err) res.send(err);
 
             if(type == 'headerFont'){
-                // app.appSettings.headerFontSize = styleFontSize;
+                 app.webAppSettings.headerFontSize = styleFontSize;
                 fontSizeCss = ".main-header-font";
-
-                updateFile(mainCssFile, [{
-                    rule: fontSizeCss,
-                    target: "font-size",
-                    replacer: styleFontSize +'vh'
-                }], function (err) {
-                    sails.log.info((err));
-                });
-                res.send("success");
-
             }else if(type == 'contentFont'){
-                // app.appSettings.contentFontSize= styleFontSize;
+                 app.webAppSettings.contentFontSize= styleFontSize;
                 fontSizeCss = ".main-content-font";
-
-                updateFile(mainCssFile, [{
-                    rule: fontSizeCss,
-                    target: "font-size",
-                    replacer: styleFontSize +'vh'
-                }], function (err) {
-                    sails.log.info((err));
-                });
-                res.send("success");
-
             }else if(type == 'footerFont'){
-                // app.appSettings.footerFontSize = styleFontSize;
+                 app.webAppSettings.footerFontSize = styleFontSize;
                 fontSizeCss = ".made-easy-footer-font"
-
-                updateFile(mainCssFile, [{
-                    rule: fontSizeCss,
-                    target: "font-size",
-                    replacer: styleFontSize +'vh'
-                }], function (err) {
-                    sails.log.info((err));
-                });
-                res.send("success");
             }
 
-            // Application.update(query,app).exec(function(err, appUpdate) {
-            //     if (err) res.send(err);
-            //         updateFile(mainCssFile, [{
-            //             rule: fontSizeCss,
-            //             target: "font-size",
-            //             replacer: styleFontSize +'vh'
-            //         }], function (err) {
-            //             sails.log.info((err));
-            //         });
-            //     res.send(appUpdate);
-            // });
+             Application.update(query,app).exec(function(err, appUpdate) {
+                 if (err) res.send(err);
+                         updateFile(mainCssFile, [{
+                             rule: fontSizeCss,
+                             target: "font-size",
+                             replacer: styleFontSize +'vh'
+                         }], function (err) {
+                             sails.log.info((err));
+                         });
 
-        // });
+                 res.send(appUpdate);
+             });
+
+         });
 
 
         /**
@@ -925,52 +885,39 @@ module.exports = {
         var type = req.body.type;
         var fontWeightCss = '';
 
-        // var query = {id:appId};
-        //
-        // Application.findOne(query).exec(function(err, app) {
-        //     if (err) res.send(err);
+        var query = {id:appId};
+
+        Application.findOne(query).exec(function(err, app) {
+            if (err) res.send(err);
 
             if(type == 'headerFont'){
-                // app.appSettings.headerFontWeight = styleFontWeight;
+                 app.webAppSettings.headerFontWeight = styleFontWeight;
                 fontWeightCss = ".main-header-font";
-
-                updateFile(mainCssFile, [{
-                    rule: fontWeightCss,
-                    target: "font-weight",
-                    replacer: styleFontWeight
-                }], function (err) {
-                    sails.log.info((err));
-                });
-
-                res.send("success");
-
-            }else if(type == 'contentFont'){
-                // app.appSettings.contentFontWeight = styleFontWeight;
+          }else if(type == 'contentFont'){
+                 app.webAppSettings.contentFontWeight = styleFontWeight;
                 fontWeightCss = ".main-content-font";
 
-                updateFile(mainCssFile, [{
-                    rule: fontWeightCss,
-                    target: "font-weight",
-                    replacer: styleFontWeight
-                }], function (err) {
-                    sails.log.info((err));
-                });
-
-                res.send("success");
-
             }else if(type == 'footerFont'){
-                // app.appSettings.footerFontWeight = styleFontWeight;
+                 app.webAppSettings.footerFontWeight = styleFontWeight;
                 fontWeightCss = ".made-easy-footer-font";
             }
 
-            // Application.update(query,app).exec(function(err, appUpdate) {
-            //     if (err) res.send(err);
+             Application.update(query,app).exec(function(err, appUpdate) {
+                 if (err) res.send(err);
 
+                updateFile(mainCssFile, [{
+                    rule: fontWeightCss,
+                    target: "font-weight",
+                    replacer: styleFontWeight
+                }], function (err) {
+                    sails.log.info((err));
+                });
 
+                 res.send(appUpdate);
 
-            // });
+             });
 
-        // });
+         });
         /**
          * update css file with new changes
          *
@@ -1011,13 +958,13 @@ module.exports = {
         var buttonBorderWidth = req.body.styleButtonBorderWidth;
         var buttonBorderWidthCss = '.main-button';
 
-        // var query = {id:appId};
-        //
-        // Application.findOne(query).exec(function(err, app) {
-        //     if (err) res.send(err);
-        //     app.appSettings.buttonBorderWidth = buttonBorderWidth;
-        //     Application.update(query, app).exec(function (err, appUpdate) {
-        //         if (err) res.send(err);
+         var query = {id:appId};
+
+         Application.findOne(query).exec(function(err, app) {
+             if (err) res.send(err);
+             app.webAppSettings.buttonBorderWidth = buttonBorderWidth;
+             Application.update(query, app).exec(function (err, appUpdate) {
+                 if (err) res.send(err);
 
                 updateFile(mainCssFile, [{
                     rule: buttonBorderWidthCss,
@@ -1027,10 +974,10 @@ module.exports = {
                     sails.log.info((err));
                 });
 
-                res.send("success");
-            // });
+                res.send(appUpdate);
+            });
 
-        // });
+        });
 
         /**
          * update css file with new changes
@@ -1073,13 +1020,13 @@ module.exports = {
         var buttonBorderRadius = req.body.styleButtonBorderRadius;
         var buttonBorderRadiusCss = '.main-button';
 
-        // var query = {id:appId};
-        //
-        // Application.findOne(query).exec(function(err, app) {
-        //     if (err) res.send(err);
-        //     app.appSettings.buttonBorderRadius = buttonBorderRadius;
-        //     Application.update(query, app).exec(function (err, appUpdate) {
-        //         if (err) res.send(err);
+         var query = {id:appId};
+
+         Application.findOne(query).exec(function(err, app) {
+             if (err) res.send(err);
+             app.webAppSettings.buttonBorderRadius = buttonBorderRadius;
+             Application.update(query, app).exec(function (err, appUpdate) {
+                 if (err) res.send(err);
 
                 updateFile(mainCssFile, [{
                     rule: buttonBorderRadiusCss,
@@ -1089,10 +1036,10 @@ module.exports = {
                     sails.log.info((err));
                 });
 
-                res.send("success");
-            // });
+                res.send(appUpdate);
+            });
 
-        // });
+        });
 
 
         /**
@@ -1135,7 +1082,7 @@ module.exports = {
         var fontSize = req.body.fontSize;
 
         var data = {
-            appSettings: {
+            webAppSettings: {
                 font: font,
                 fontSize: fontSize
             }

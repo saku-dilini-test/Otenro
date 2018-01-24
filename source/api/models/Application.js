@@ -51,6 +51,9 @@ module.exports = {
         appSettings:{
             type : 'json'
         },
+        webAppSettings:{
+            type : 'json'
+        },
         appUpdateLocationSetting : {
             type : 'json'
         }
