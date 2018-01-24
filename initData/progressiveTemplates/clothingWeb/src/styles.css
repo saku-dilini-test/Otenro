@@ -454,7 +454,7 @@ html {
   letter-spacing: 0.1em;
   color: rgb(255, 104, 55);
   font-family: Arial;
-  font-weight: 400;
+  font-weight: bold;
 }
 .main-background{
   background-color: rgb(255, 255, 255) !important;

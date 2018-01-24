@@ -21,7 +21,7 @@
                         <!--
                         <obl-menu-button label="Styles" icon="fa fa-file-image-o" click-title="styles"></obl-menu-button>
                         -->
-                        <div ng-if="tempIsNew == 'true' || tempIsNew == true">
+                        <div ng-if="deviceView == 'web'">
                             <div class="styles-settings" ng-controller="webStylesCtrl">
                                 <div class="color-settings" >
                                     <h1>Web App Background</h1>
@@ -222,7 +222,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div ng-if="tempIsNew == 'false' || tempIsNew == 'undefined'">
+                        <div ng-if="deviceView == 'mobile' || deviceView == 'tabletView'">
                             <div class="styles-settings" ng-controller="StylesCtrl">
                                 <div class="color-settings" >
                                     <h1>Background</h1>

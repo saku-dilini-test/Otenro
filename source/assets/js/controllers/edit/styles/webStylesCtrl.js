@@ -58,7 +58,7 @@
 
 
         webStylesService.getAppSettings({'appId':appId}).success(function (data) {
-            var appSettings = data.appSettings;
+            var appSettings = data.webAppSettings;
 
             $scope.appUpdateLocation = data.appUpdateLocationSetting;
 
