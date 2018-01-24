@@ -1,0 +1,142 @@
+<div class="page-container">
+
+
+
+	<div class="bloc bgc-white l-bloc" id="bloc-2">
+		<div class="container bloc-sm">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="carousel-1" class="carousel no-shadows slide animated puffIn" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#carousel-1" data-slide-to="0" class="active">
+							</li>
+							<li data-target="#carousel-1" data-slide-to="1">
+							</li>
+							<li data-target="#carousel-1" data-slide-to="2">
+							</li>
+						</ol>
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="./assets/images/SLIDER%201.png" />
+								<div class="carousel-caption">
+								</div>
+							</div>
+							<div class="item">
+								<img src="./assets/images/SLIDER%202.png" />
+								<div class="carousel-caption">
+								</div>
+							</div>
+							<div class="item">
+								<img src="./assets/images/SLIDER%203.png" />
+								<div class="carousel-caption">
+								</div>
+							</div>
+						</div>
+						<a class="left carousel-control" href="#carousel-1" role="button" data-slide="prev">
+							<span class="fa fa-chevron-left"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#carousel-1" role="button" data-slide="next">
+							<span class="fa fa-chevron-right"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="bloc bgc-white l-bloc">
+				<ng-template *ngFor="let item of results;let i = index" [ngIf]="i % 4 === 0">
+					<div class="row voffset">
+						<div class="row">
+							<div class="col-sm-3" *ngIf="results[i]">
+								<a (click)="navigateShop('shop',results[i].id,results[i].name)">
+									<img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{results[i].imageUrl}}" class="img-responsive animated puffIn animDelay02 lazyload"
+									 width="100%" height="100%">
+									<!-- <img src="{{imageUrl}}/{{results[i].imageUrl}}" class="img-responsive" height="100%" width="100%" /> -->
+								</a>
+							</div>
+							<div class="col-sm-3" *ngIf="results[i+1]">
+								<a (click)="navigateShop('shop',results[i+1].id,results[i+1].name)">
+									<img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{results[i+1].imageUrl}}" class="img-responsive animated puffIn animDelay02 lazyload"
+									 width="100%" height="100%">
+								</a>
+							</div>
+							<div class="col-sm-3" *ngIf="results[i+2]">
+								<a (click)="navigateShop('shop',results[i+2].id,results[i+2].name)">
+									<img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{results[i+2].imageUrl}}" class="img-responsive animated puffIn animDelay02 lazyload"
+									 width="100%" height="100%">
+								</a>
+							</div>
+							<div class="col-sm-3" *ngIf="results[i+3]">
+								<a (click)="navigateShop('shop',results[i+3].id,results[i+3].name)">
+									<img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{results[i+3].imageUrl}}" class="img-responsive animated puffIn animDelay02 lazyload"
+									 width="100%" height="100%">
+								</a>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</div>
+		</div>
+	</div>
+
+	<!-- bloc-3 -->
+	<div class="bloc bgc-white l-bloc" id="bloc-3">
+		<div class="container bloc-lg">
+			<div class="row bgc-gainsboro raw">
+				<div class="col-sm-6 col-sm-push-6">
+					<img src="./assets/images/lazyload-ph.png" data-src="./assets/images/elliptical-trainer-png-download-elliptical-trainer-png-images-transparent-gallery-advertisement-992.png"
+					 class="img-responsive lazyload" height="496" width="502" />
+				</div>
+				<div class="col-sm-6 col-sm-pull-6">
+					<h2 class="mg-lg sub-header-text ">
+						Feature title
+					</h2>
+					<h2 class="spacing1 mg-clear ">
+						A more descriptive sub heading.
+					</h2>
+					<p class=" content-index mg-sm">
+						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+						penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
+						pretium quis, sem. Nulla consequat massa quis enim.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+						commodo ligula eget dolor.
+					</p>
+					<a href="index.html" class="btn btn-d btn-lg button-circular-radius">More Info</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- bloc-3 END -->
+
+	<!-- bloc-4 -->
+	<div class="bloc bgc-white l-bloc" id="bloc-4">
+		<div class="container">
+			<div class="row raw bgc-pale-silver">
+				<div class="col-sm-6">
+					<img src="./assets/images/lazyload-ph.png" data-src="./assets/images/proform-upright-girl.png" class="img-responsive lazyload"
+					 height="474" width="474" />
+				</div>
+				<div class="col-sm-6">
+					<h2 class="mg-lg sub-header-text ">
+						Feature title
+					</h2>
+					<h2 class="mg-sm spacing1 ">
+						A more descriptive sub heading.
+					</h2>
+					<p class="mg-lg  content-index">
+						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+						penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,&nbsp;
+					</p>
+					<a href="index.html" class="btn btn-d btn-lg button-circular-radius">More Info</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- bloc-4 END -->
+</div>
+
+<div class="bloc bgc-white l-bloc" id="bloc-0">
+	<div class="container bloc-sm">
+	</div>
+</div>
+
+<!--<app-newsletter></app-newsletter>-->

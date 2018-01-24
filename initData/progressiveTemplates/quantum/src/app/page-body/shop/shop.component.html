@@ -1,0 +1,145 @@
+<!-- bloc-6 -->
+<div class="bloc bgc-white l-bloc" id="bloc-6">
+  <div class="container bloc-sm">
+    <div class="row">
+      <div class="col-sm-12">
+        <img src="./assets/images/lazyload-ph.png" data-src="./assets/images/SLIDER%203.png" class="img-responsive animated vanishIn lazyload"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bloc-6 END -->
+
+<!-- bloc-7 -->
+<div class="bloc bgc-white l-bloc" id="bloc-7">
+  <div class="container bloc-sm">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class=" mg-clear">
+          Heading content
+        </h1>
+
+        <div class="divider-h">
+          <span class="divider"></span>
+        </div>
+
+        <div class="btn-group btn-dropdown">
+          <a href="#" class="btn dropdown-toggle   btn-lg dopdown-list btn-d" data-toggle="dropdown" aria-expanded="true">Select a catagory
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li *ngFor='let test of array; let i = index'>
+              <a (click)='print(array[i])' class="a-btn pull-left-block a-block dropdown">{{test.name}}</a>
+            </li>
+          </ul>
+        </div>
+
+        <span class="feather-icon icon-search pull-right icon icon-sm"></span>
+        <div class="divider-h">
+          <span class="divider"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bloc-7 END -->
+
+
+<div class="bloc bgc-white l-bloc">
+  <ng-template *ngFor="let items of results; let i = index" [ngIf]="i % 2 == 0">
+    <div class="row voffset">
+      <div class="col-sm-6" *ngIf="results[i]">
+        <div class="row row-no-gutters" [ngStyle]="{'background-color':'#'+getColor(i)}">
+          <div class="col-sm-5">
+            <div class="row">
+              <div class="col-sm-12">
+                <form id="form_40941" novalidate>
+                  <div class="form-group">
+                    <label class="name-label ">
+                      {{results[i].name}}
+                    </label>
+                  </div>
+                  <div class="divider-h divider">
+                    <span class="divider"></span>
+                  </div>
+                  <div class="form-group">
+                    <label class=" price-label text-center">
+                      {{currency}} {{results[i].variants[0].price}}
+                    </label>
+                  </div>
+                  <div class="text-center">
+                    <a href="index.html" class="btn btn-d btn-lg button-circular-radius-small button-circular-radius button-margin">DETAILS
+                      <br>
+                    </a>
+                  </div>
+                  <div class="text-center">
+                    <a (click)="navigateProd('product',results[i])" class="btn btn-d btn-lg button-circular-radius-small button-circular-radius shoping-cart">Add to cart</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-7">
+            <img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{results[i].imageUrl}}" class="lazyload" height="353"
+              width="100%" />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="results[i+1]">
+        <div class="row row-no-gutters" [ngStyle]="{'background-color':'#'+getColor(i)}">
+          <div class="col-sm-5">
+            <div class="form-group">
+              <label class="name-label ">
+                {{results[i+1].name}}
+              </label>
+            </div>
+            <div class="divider-h divider">
+              <span class="divider"></span>
+            </div>
+            <div class="form-group">
+              <label class=" price-label text-center">
+                {{currency}} {{results[i+1].variants[0].price}}
+              </label>
+            </div>
+            <div class="text-center">
+              <a href="index.html" class="btn btn-d btn-lg button-circular-radius-small button-circular-radius button-margin">DETAILS
+                <br>
+              </a>
+            </div>
+            <div class="text-center">
+              <a (click)="navigateProd('product',results[i])" class="btn btn-d btn-lg button-circular-radius-small button-circular-radius shoping-cart">Add to cart</a>
+            </div>
+          </div>
+          <div class="col-sm-7">
+            <img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{results[i+1].imageUrl}}" class="lazyload" height="353"
+              width="100%" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+
+<!-- bloc-9 -->
+<div class="bloc bgc-white l-bloc" id="bloc-9">
+  <div class="container bloc-lg">
+    <div class="row">
+      <div class="col-sm-12">
+        <a href="index.html" class="btn btn-d btn-lg pull-right button-circular-radius-small button-circular-radius">3</a>
+        <a href="index.html" class="btn btn-d btn-lg pull-right button-circular-radius-small button-circular-radius">2</a>
+        <a href="index.html" class="btn btn-d btn-lg pull-right button-circular-radius-small button-circular-radius">1</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- bloc-9 END -->
+
+<!-- ScrollToTop Button -->
+<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')">
+  <span class="fa fa-chevron-up"></span>
+</a>
+<!-- ScrollToTop Button END-->
+
+<!--<app-newsletter></app-newsletter>-->

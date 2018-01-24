@@ -51,7 +51,8 @@ module.exports = {
         };
         sails.log.info(searchApp);
         ApplicationStoreSettings.findOne(searchApp).exec(function (err, app) {
-            if (err) return err;
+            if (err){ console.log('err : '+ err); return err;}
+
             res.json(app);
         });
     },
@@ -198,7 +199,35 @@ module.exports = {
 
 
     },
+        getAllThirdByAppId : function(req,res){
+            var appId = req.param('appId');
+            var searchApp = {
+                appId: appId,
+                published : 'YES'
+            };
+            var thirdNavi = [];
+            ThirdNavigation.find().where(searchApp).exec(function(err, app) {
+                if (err) return done(err);
+                return res.send(app);
+            });
 
+
+        },
+
+    getSecondByThirdId: function(req,res){
+            var Id = req.param('id');
+
+            var searchApp = {
+                id: Id,
+            };
+
+            SecondNavigation.find(searchApp).exec(function (err, app) {
+
+                console.log(app)
+              if (err) return done(err);
+                res.send(app);
+            });
+    },
     /**
      * Template Category Function Start
      *
@@ -263,6 +292,7 @@ module.exports = {
             res.json(result);
         });
     },
+
     getArticleById : function(req,res) {
 
         var id = req.param('articleId');
@@ -274,6 +304,7 @@ module.exports = {
             res.json(artilce);
         });
     },
+
 
     /**
      * return images for given userID & appID & img ( Path + Image name )
