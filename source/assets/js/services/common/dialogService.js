@@ -40,24 +40,9 @@
                 //     return comingSoonService.showComingSoonDialog();
                 // if ('detectionTools'==clickTitle)
                 //     return comingSoonService.showComingSoonDialog();
-                if ('sales'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('traffic'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('mobile'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('app'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('popularContent'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('searchEngineQueries'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('siteSearch'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('worldMap'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
-                if ('analyticsIntegration'==clickTitle)
-                    return comingSoonService.showComingSoonDialog();
+
+                if ('analytics'==clickTitle)
+                    return commerceService.showAnalyticsDialog();
                 // if ('website'==clickTitle)
                 //     return comingSoonService.showComingSoonDialog();
               /*  if ('appStore'==clickTitle)
