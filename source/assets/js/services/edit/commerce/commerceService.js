@@ -402,7 +402,20 @@
                     '</md-content>' +
                     '</md-dialog>'
                 })
-            }
+            },
+            //Get  One order Details
+            showAnalyticsDialog: function() {
+                return $mdDialog.show({
+                    controller: 'analyticsCtrl',
+                    templateUrl: 'user/edit/analytics/analytics.html',
+                    clickOutsideToClose: true
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+
         };
     }
 })();
