@@ -604,6 +604,10 @@
             if($scope.data == true){
                 $mdDialog.hide();
                 return commerceService.showAddProductsDialog(initialData.prodItem,true, null,'0', false)
+            }else if($rootScope.hasCurrentProduct){
+                $rootScope.hasCurrentProduct = false;
+                $mdDialog.hide();
+                return commerceService.showAddProductsDialog($rootScope.currentProduct);
             }else{
                 $mdDialog.hide();
                 mainMenuService.showMainMenuDialog();
