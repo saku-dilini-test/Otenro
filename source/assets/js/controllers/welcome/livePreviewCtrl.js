@@ -21,6 +21,7 @@
         var decParams = atob($scope.encParam);
         console.log("decParams  : " + decParams);
         var splitParams = decParams.split("/");
+        console.log("splitParams  : " + splitParams);
 
         welcomeTemplatesResource.getTemplates().success(function (data) {
             $cookies.temp = data;
@@ -72,8 +73,9 @@
         $scope.appId = splitParams[1]; //$stateParams.appId;
         $scope.tempUrl = splitParams[2];
         $scope.tempName = splitParams[4];
-        $scope.tempCategory = splitParams[5];
-        $scope.isNew = splitParams[6];
+        $scope.progTempName = splitParams[5];
+        $scope.tempCategory = splitParams[6];
+        $scope.isNew = splitParams[7];
         $scope.contentUrl = true;
         console.log("$scope.isNew  : " + $scope.isNew);
         var userID = splitParams[0];
@@ -85,14 +87,14 @@
         /*
          *Live preview Area display
          */
-        if ($scope.isNew == 'true' || $scope.isNew == true) {
-            $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/progressiveTemplates' + '/' + $scope.appId + '/src';
+//        if ($scope.isNew == 'true' || $scope.isNew == true) {
+//            $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/progressiveTemplates' + '/' + $scope.appId + '/src';
             $scope.urlPath1 = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/progressiveTemplates' + '/' + $scope.appId + '/src';
 
-        }else{
+//        }else{
         $scope.appTemplateUrl = ME_APP_SERVER + 'temp' + '/' + $scope.userId + '/templates' + '/' + $scope.appId + '/';
         // $scope.urlPath1 = ME_APP_SERVER+'/temp'+'/'+$scope.userId+'/webTemplates'+'/'+$scope.appId+'/';
-    }
+//    }
 
 
         // App URL get from cookiesStore
@@ -122,8 +124,9 @@
             });
         };
 
-        $scope.answer = function(answer,templateId, templateUrl, templateName,templateCategory,isNew) {
+        $scope.answer = function(answer,templateId, templateUrl, templateName,progTemplateName,templateCategory,isNew) {
             console.log("templateName  : " + templateName);
+            console.log("progtemplateName  : " + progTemplateName);
             console.log("isNew  : " + isNew);
 
             var agentInfo = {
@@ -145,6 +148,7 @@
                         'appName': $scope.appName,
                         'templateId': templateId,
                         'templateName': templateName,
+                        'progTemplateName': progTemplateName,
                         'templateUrl':templateUrl,
                         'templateCategory' : templateCategory,
                         'userId':$auth.getPayload().id
@@ -152,28 +156,28 @@
                     };
                     console.log('live preview is new :  ' + isNew);
 
-                    if(isNew == 'true' || isNew == true){
-                        console.log('inside web');
-
-                        welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
-                                            if(data.data.appId == -1)
-                                            {
-                                                toastr.error(data.data.message, 'Warning', {
-                                                    closeButton: true
-                                                });
-                                            }else{
-                                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
-
-                                                mySharedService.prepForBroadcast(url);
-
-                                                var encParam = btoa(data.data.appId);
-                                                $state.go('user.editApp',{isNew:isNew, appId:data.data.appId, p:encParam });
-                                            }
-
-                                        });
-
-                    }else {
+//                    if(isNew == 'true' || isNew == true){
+//                        console.log('inside web');
+//
+//                        welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
+//                                            if(data.data.appId == -1)
+//                                            {
+//                                                toastr.error(data.data.message, 'Warning', {
+//                                                    closeButton: true
+//                                                });
+//                                            }else{
+//                                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+//                                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
+//
+//                                                mySharedService.prepForBroadcast(url);
+//
+//                                                var encParam = btoa(data.data.appId);
+//                                                $state.go('user.editApp',{isNew:isNew, appId:data.data.appId, p:encParam });
+//                                            }
+//
+//                                        });
+//
+//                    }else {
 
                         console.log('inside mobile');
                         welcomeTemplatesResource.createApp(tempAppParams).then(function (data) {
@@ -194,7 +198,8 @@
                             }
 
                         });
-                    }
+//                    }
+
                     $mdDialog.hide(answer);
                 }else{
                     loginFunction(agentInfo).then(function(id){
@@ -208,45 +213,45 @@
                             'userId':$auth.getPayload().id
                         };
 
-                        if(isNew == 'true' || isNew == true){
-
-                                        welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
-                                            if(data.data.appId == -1)
-                                            {
-                                                toastr.error(data.data.message, 'Warning', {
-                                                    closeButton: true
-                                                });
-
-                                                var encUserId = 'unknownUser' + "/";
-                                                var encAppId = templateId + "/";
-                                                var encTempUrl = templateUrl + "//";
-                                                var encTempName = templateName + "/";
-                                                var encTempCategory = templateCategory + "/";
-                                                var encIsNew = isNew + "/";
-
-                                                var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory + encIsNew);
-
-                                                $state.go('anon.livePreview', {
-                                                    userId: 'unknownUser',
-                                                    appId: templateId,
-                                                    tempUrl: templateUrl,
-                                                    tempName: templateName,
-                                                    tempCategory: templateCategory,
-                                                    p: encryptedURL
-                                                });
-
-                                            }else {
-                                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
-
-                                                mySharedService.prepForBroadcast(url);
-
-                                                var encParam = btoa(data.data.appId);
-                                                $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
-                                            }
-                                        });
-
-                        }else {
+//                        if(isNew == 'true' || isNew == true){
+//
+//                                        welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
+//                                            if(data.data.appId == -1)
+//                                            {
+//                                                toastr.error(data.data.message, 'Warning', {
+//                                                    closeButton: true
+//                                                });
+//
+//                                                var encUserId = 'unknownUser' + "/";
+//                                                var encAppId = templateId + "/";
+//                                                var encTempUrl = templateUrl + "//";
+//                                                var encTempName = templateName + "/";
+//                                                var encTempCategory = templateCategory + "/";
+//                                                var encIsNew = isNew + "/";
+//
+//                                                var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory + encIsNew);
+//
+//                                                $state.go('anon.livePreview', {
+//                                                    userId: 'unknownUser',
+//                                                    appId: templateId,
+//                                                    tempUrl: templateUrl,
+//                                                    tempName: templateName,
+//                                                    tempCategory: templateCategory,
+//                                                    p: encryptedURL
+//                                                });
+//
+//                                            }else {
+//                                                var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
+//                                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
+//
+//                                                mySharedService.prepForBroadcast(url);
+//
+//                                                var encParam = btoa(data.data.appId);
+//                                                $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
+//                                            }
+//                                        });
+//
+//                        }else {
 
                             welcomeTemplatesResource.createApp(tempAppParams).then(function (data) {
                                 if (data.data.appId == -1) {
@@ -283,7 +288,7 @@
                                     $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
                                 }
                             });
-                        }
+//                        }
                         $mdDialog.hide(answer);
                     });
                     commerceService.showRemoveDefaultDataDialog("remove");
