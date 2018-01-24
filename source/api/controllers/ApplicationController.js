@@ -116,6 +116,34 @@ module.exports = {
                               buttonBorderWidth : "0px",
                               buttonBorderRadius : "0px"
                           },
+                          webAppSettings:{
+                                                        appCurrency:{
+                                                           sign : "$",
+                                                           currency: "USD",
+                                                           symbol: "usd"
+                                                        },
+                                                        isApplyBGImage : true,
+                                                        isApplyStyle : isApplyStyle,
+                                                        backgroundColor : "#FFFFFF",
+                                                        navigationBarColor : "#FFFFFF",
+                                                        footerColor : "#FFFFFF",
+                                                        headerFontColor : "#FFFFFF",
+                                                        contentFontColor : "#FFFFFF",
+                                                        footerFontColor : "#FFFFFF",
+                                                        buttonColor : "#FFFFFF",
+                                                        headerFontFamily : "Arial",
+                                                        contentFontFamily : "Arial",
+                                                        footerFontFamily : "Arial",
+                                                        buttonFontFamily : "Arial",
+                                                        headerFontSize : 10,
+                                                        contentFontSize : 10,
+                                                        footerFontSize : 10,
+                                                        headerFontWeight : "normal",
+                                                        contentFontWeight : "normal",
+                                                        footerFontWeight : "normal",
+                                                        buttonBorderWidth : "0px",
+                                                        buttonBorderRadius : "0px"
+                                                    },
                           appUpdateLocationSetting : {
                               loginUrl : loginPath
                           }
@@ -461,6 +489,7 @@ module.exports = {
                               buttonBorderWidth : "0px",
                               buttonBorderRadius : "0px"
                           },
+
                           appUpdateLocationSetting : {
                               loginUrl : loginPath
                           }
