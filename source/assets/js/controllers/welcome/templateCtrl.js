@@ -50,13 +50,14 @@
           })
         };
 
-        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory,previewId,isNew) {
+        $scope.viewApp = function(templateId, templateUrl, templateName,progTemplateName,templateCategory,previewId,isNew) {
 
             $rootScope.checkId = previewId;
            console.log("templateId  :" + templateId);
             console.log("templateName : " + templateName);
             console.log("previewId  :" + previewId );
             console.log("isNew  :" + isNew );
+            console.log("prog Template name  :" + progTemplateName );
 
 
             var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
@@ -70,11 +71,12 @@
             var encAppId = previewId + "/";
             var encTempUrl = templateUrl + "/";
             var encTempName = templateName + "/";
+            var encProgTempName = progTemplateName + "/";
             var encTempCategory = templateCategory + "/";
             var encIsNew = isNew + "/";
 
 
-            var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory + encIsNew);
+            var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encProgTempName + encTempCategory + encIsNew);
 
 
             var encParam = btoa(previewId);
@@ -84,6 +86,7 @@
                 isNew: isNew,
                 tempUrl: templateUrl,
                 tempName: templateName,
+                progTemplateName: progTemplateName,
                 tempCategory: templateCategory,
                 p:encryptedURL
             });

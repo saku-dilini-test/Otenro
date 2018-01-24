@@ -1,11 +1,12 @@
 {
   "name": "Otenro-test-shell",
+  "gcm_sender_id": "541835852783",
   "short_name": "Otenro-test-shell",
   "theme_color": "#000000",
   "background_color": "#e0e0e0",
   "display": "standalone",
   "Scope": "/",
-  "start_url": "/index.html",
+  "start_url": "../../src/index.html",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

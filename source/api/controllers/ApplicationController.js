@@ -31,11 +31,13 @@ module.exports = {
 
     viewTemplate : function(req,res){
 
-        var templateName = req.body.templateName,
+        var templateName = req.body.templateName,progTemplateName = req.body.progTemplateName
             templateCategory = req.body.templateCategory,
             userId = req.body.userId,
             tempAppDirPath = config.ME_SERVER + userId + '/templates/',
+            progTempAppDirPath = config.ME_SERVER + userId + '/progressiveTemplates/',
             templatePath = config.TEMPLATES_PATH + templateName,
+            progTemplatePath = config.PROGRESSIVE_TEMPLATES_PATH + progTemplateName,
             appName = req.body.appName,
             serverTmp="http://localhost:port",
             serverOrg=config.server.host,
@@ -189,6 +191,41 @@ module.exports = {
                               );
 
                           });
+
+                             fs.copy(progTemplatePath, progTempAppDirPath + app.id, function(err) {
+                                                        console.log("app.id "   + app.id );
+
+                                                        if (err) return console.error(err);
+                                                        var madeEasyFilePath = progTempAppDirPath +app.id+'/src/app/madeEasy.json';
+                                                        var madeEasyFileContent = {
+                                                            name : appName,
+                                                            appId : app.id,
+                                                            userId : userId,
+                                                            serviceApi: config.server
+                                                        };
+                                                        fs.outputJson(madeEasyFilePath,madeEasyFileContent, function (err) {
+                                                            if(err) return console.error(err);
+                                                        });
+//
+//                                                        /** config -|- copy template images to App File Server
+//                                                         * TODO : future development, Template dummy data move to another folder
+//                                                         * **/
+                                                        var appFileServerPath  = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + app.id +'/';
+                                                        var tempDummyImagesPath = progTemplatePath + '/src/assets/images/';
+                                                        var tempDummyImagesDesPath = appFileServerPath +  '/src/assets/images/';
+                                                        /** Copy Template Dummy Images to APP File Server for given userID & appID **/
+                                                        fs.copy(tempDummyImagesPath,tempDummyImagesDesPath,function (err) {
+                                                                if (err) return res.negotiate(err);
+                                                                sails.log('Third-navigation images copy to app-File-Server');
+                                                            }
+                                                        );
+
+                                                    });
+
+
+
+
+
                          /**
                            * ecommerce app details feed to DB
                            */
@@ -256,6 +293,80 @@ module.exports = {
                                   })
                               });
                           }
+
+                          //----------------------------------------------------------------------
+
+//                                        if(template[0].templateCategory=="2") {
+//                                        console.log("inside web initial");
+//                                                        var searchAppInitialData = {
+//                                                            'templateName': progTemplateName
+//                                                        }
+//                                                        AppInitialData.findOne(searchAppInitialData, function (err, appInitData) {
+//                                                            if (err) return done(err);
+//                                                                console.log("appInitData : " + appInitData);
+//                                                            /**
+//                                                             * add Second Navigation
+//                                                             */
+////                                                            var secondNaviList = appInitData.secondNavi;
+////                                                            secondNaviList.forEach(function(secondNavi){
+////                                                                var scondNaviAttribute = secondNavi.attribute;
+////                                                                scondNaviAttribute.templateName = appInitData.templateName;
+////                                                                scondNaviAttribute.appId = app.id;
+////                                                                var thirdNaviList = secondNavi.thirdNavi;
+////                                                                SecondNavigation.create(scondNaviAttribute).exec(function (err, secondN) {
+////                                                                    if (err) return err;
+////                                                                    /**
+////                                                                     * Add Third Navigation
+////                                                                     */
+////                                                                    for (var j = 0; j < thirdNaviList.length; j++) {
+////                                                                        thirdNaviList[j].appId = app.id;
+////                                                                        thirdNaviList[j].childId = secondN.id;
+////
+////                                                                        ThirdNavigation.create(thirdNaviList[j]).exec(function (err, thirdN) {
+////                                                                            if (err) return err;
+////                                                                        });
+////                                                                    }
+////                                                                });
+////
+////                                                            })
+//                                                        });
+//
+//                                                        /**
+//                                                         *  media app details feed to DB
+//                                                         */
+//                                                    }else if(template[0].templateCategory=="3"){
+//
+////                                                        var searchAppInitialData = {
+////                                                            'templateName' : templateName
+////                                                        }
+////                                                        AppInitialData.findOne(searchAppInitialData, function(err, appInitData) {
+////                                                            if (err) return done(err);
+////                                                            var articleCategoryList = appInitData.articleCategory;
+////                                                            articleCategoryList.forEach(function (articleCategory) {
+////                                                                var articleCategoryattribute = articleCategory.attribute;
+////                                                                articleCategoryattribute.appId = app.id;
+////                                                                var articalList = articleCategory.article;
+////
+////                                                                ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
+////
+////                                                                    articalList.forEach(function (article) {
+////                                                                        var articalAttribute = article;
+////                                                                        articalAttribute.appId = app.id;
+////                                                                        articalAttribute.categoryId = articleCategory.id;
+////                                                                        Article.create(articalAttribute).exec(function (err, artical) {
+////                                                                            if (err) return err;
+////                                                                        });
+////                                                                    });
+////                                                                })
+////                                                            })
+////                                                        });
+//                                                    }
+//
+//                                                    //----------------------------------------------------
+//
+
+
+
                           res.send({
                               appId: app.id,
                               message: "New Application has been created"

@@ -1,0 +1,9 @@
+{
+  "name": "test",
+  "appId": "5a60951e66450f366f6dcab4",
+  "userId": "5a4f03289aa69b7036fe712a",
+  "serviceApi": {
+    "host": "http://localhost",
+    "port": 1337
+  }
+}
