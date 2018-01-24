@@ -817,7 +817,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                                 if ($scope.selectedIndex==6||type == "finish"){
 
                                     $mdDialog.hide();
-                                })
+                                }
 
                                 toastr.success('Email Settings has been changed ', 'Success', {
                                     closeButton: true
@@ -827,6 +827,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                                 toastr.error('Unable to Create', 'Warning', {
                                     closeButton: true
                                 });
+                            })
                         }else {
                             commerceService.updateEmailSettings(data).success(function (data) {
 
@@ -850,19 +851,13 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                                 });
                                 $mdDialog.hide();
                             })
-
-
                         }
-
-
-
-
-                    }).error(function (err) {
-                        toastr.error('Unable to Create', 'Warning', {
-                            closeButton: true
-                        });
-                        $mdDialog.hide();
-                    })
+                }).error(function (err) {
+                    toastr.error('Unable to Create', 'Warning', {
+                        closeButton: true
+                    });
+                    $mdDialog.hide();
+                })
             }
 
         };
