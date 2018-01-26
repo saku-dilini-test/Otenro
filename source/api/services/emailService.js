@@ -88,9 +88,10 @@ module.exports = {
                 appType:data.appType,
                 appName:data.appName,
                 userName:data.userName,
-                userEmail:data.userEmail
+                userEmail:data.userEmail,
+                userNumber:data.userNumber
             };
-            var replaceMailBody = mailbody.replace(/imgUrl|appType|appName|userName|userEmail/g, function(matched){
+            var replaceMailBody = mailbody.replace(/imgUrl|appType|appName|userName|userEmail|userNumber/g, function(matched){
                 return mapObj[matched];
             });
 
