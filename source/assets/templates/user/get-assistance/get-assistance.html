@@ -13,11 +13,12 @@
             <label>Help us to identify your business</label>
             <h1 class="margin-top">Your Details</h1>
         </div>
+        <form name="form" novalidate>
         <div class="md-dialog-main clearfix">
             <table class="me-simple-table">
                 <tr>
-                    <th width="50%">APP NAME</th>
-                    <td>- {{appData.appName}}</td>
+                    <th width="50%">TEMPLATE NAME</th>
+                    <td>- {{templateName}}</td>
                 </tr>
                 <tr>
                     <th width="50%">APP TYPE</th>
@@ -31,13 +32,23 @@
                     <th width="50%">E-MAIL</th>
                     <td>- {{user.email}}</td>
                 </tr>
+                <tr>
+                    <th width="50%">CONTACT NUMBER</th>
+                    <td>
+                        <input class="input-shadow-border no-margin" type="text" name="number" ng-model="number" ng-pattern="/[0-9]+/" ui-mask="+99 99-9999-999" required >
+                        <div ng-show="form.$submitted || form.number.$touched">
+                            <div ng-show="form.number.$error.required">↑ Tell us your contact number .</div>
+                        </div>
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="md-dialog-buttons">
             <div class="inner-section">
-                <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                <md-button class="me-default-button" ng-click="request(appData,appType,user)">Request</md-button>
+                <md-button class="me-default-button" ng-click="cancel()">close</md-button>
+                <md-button type="submit" class="me-default-button" ng-click="request(templateName,appType,user,number)">Request</md-button>
             </div>
         </div>
+        </form>
     </md-dialog-content>
 </md-dialog>
