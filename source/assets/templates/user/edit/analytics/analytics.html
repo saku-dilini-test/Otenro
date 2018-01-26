@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                             <div layout-gt-xs="row" class="margin">
-                                <div flex="50" class="padding">
+                                <div flex="50" class="padding-vertical">
                                     <table width="100%" class="analytic-table">
                                         <tr>
                                             <th>Product</th>
@@ -75,6 +75,141 @@
                                    <h4>Total Revenue</h4>
                                     <h3><b>$ 4200.00</b></h3>
                                 </div>
+                            </div>
+                            <div layout-gt-xs="row" class="margin-horizontal">
+                                <a href="">Download Full Report</a>
+                            </div>
+                        </div>
+                        <div class="md-dialog-buttons padding-top">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="close()">Close</md-button>
+                            </div>
+                        </div>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Tax</md-tab-label>
+                <md-tab-body>
+                    <md-content>
+                        <div class="md-dialog-header">
+                            <h1>Store Analytics</h1>
+                        </div>
+                        <div class="md-dialog-main" style="max-height: 65vh">
+                            <label class="margin">Select Period</label>
+                            <div layout-gt-xs="row" class="margin">
+                                <div flex="33">
+                                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="Start date" md-open-on-focus></md-datepicker>
+                                </div>
+                                <div flex="33">
+                                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="End date" md-open-on-focus></md-datepicker>
+
+                                </div>
+                            </div>
+
+                            <label class="margin">Revenue</label>
+                            <div layout-gt-xs="row" class="margin  padding-bottom">
+                                <div flex="100">
+                                    <canvas id="line" class="chart chart-line" chart-data="data"
+                                            chart-labels="labels" chart-series="series" chart-options="options"
+                                            chart-dataset-override="datasetOverride" chart-click="onClick">
+                                    </canvas>
+                                </div>
+                            </div>
+                            <md-input-container class="margin-horizontal" flex="33">
+                                <label>Search Country</label>
+                                <input ng-model="user.title">
+                            </md-input-container>
+                            <div layout-gt-xs="row" class="margin-horizontal">
+                                <div flex="50">
+                                    <table width="100%" class="analytic-table">
+                                        <tr>
+                                            <th>Country</th>
+                                            <th>Sales $</th>
+                                            <th>Tax $</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Sri Lanka</td>
+                                            <td>4200.00</td>
+                                            <td>300.00</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div flex="20"></div>
+                                <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
+                                   <h4>Total Tax</h4>
+                                    <h3><b>$ 300.00</b></h3>
+                                </div>
+                            </div>
+                            <div layout-gt-xs="row" class="margin-horizontal">
+                                <a href="">Download Full Report</a>
+                            </div>
+                        </div>
+                        <div class="md-dialog-buttons padding-top">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="close()">Close</md-button>
+                            </div>
+                        </div>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>shipping</md-tab-label>
+                <md-tab-body>
+                    <md-content>
+                        <div class="md-dialog-header">
+                            <h1>Store Analytics</h1>
+                        </div>
+                        <div class="md-dialog-main" style="max-height: 65vh">
+                            <label class="margin">Select Period</label>
+                            <div layout-gt-xs="row" class="margin">
+                                <div flex="33">
+                                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="Start date" md-open-on-focus></md-datepicker>
+                                </div>
+                                <div flex="33">
+                                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="End date" md-open-on-focus></md-datepicker>
+
+                                </div>
+                            </div>
+
+                            <label class="margin">Revenue</label>
+                            <div layout-gt-xs="row" class="margin  padding-bottom">
+                                <div flex="100">
+                                    <canvas id="line" class="chart chart-line" chart-data="data"
+                                            chart-labels="labels" chart-series="series" chart-options="options"
+                                            chart-dataset-override="datasetOverride" chart-click="onClick">
+                                    </canvas>
+                                </div>
+                            </div>
+                            <md-input-container class="margin-horizontal" flex="33">
+                                <label>Search Country</label>
+                                <input ng-model="user.title">
+                            </md-input-container>
+                            <div layout-gt-xs="row" class="margin-horizontal">
+                                <div flex="50">
+                                    <table width="100%" class="analytic-table">
+                                        <tr>
+                                            <th>Country</th>
+                                            <th>Flat Rate</th>
+                                            <th>Weight Base</th>
+                                            <th>Shipping $</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Sri Lanka</td>
+                                            <td>2</td>
+                                            <td>1</td>
+                                            <td>4200.00</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div flex="20"></div>
+                                <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
+                                   <h4>Total Tax</h4>
+                                    <h3><b>$ 4200.00</b></h3>
+                                </div>
+                            </div>
+                            <div layout-gt-xs="row" class="margin-horizontal">
+                                <a href="">Download Full Report</a>
                             </div>
                         </div>
                         <div class="md-dialog-buttons padding-top">
