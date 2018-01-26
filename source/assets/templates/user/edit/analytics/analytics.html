@@ -2,7 +2,7 @@
 
     <!--Google Analytics-->
     <script>
-        ga('set', 'page', 'add-product');
+        ga('set', 'page', 'manage-products');
         ga('send', 'pageview');
     </script>
 
@@ -53,6 +53,27 @@
                                             chart-labels="labels" chart-series="series" chart-options="options"
                                             chart-dataset-override="datasetOverride" chart-click="onClick">
                                     </canvas>
+                                </div>
+                            </div>
+                            <div layout-gt-xs="row" class="margin">
+                                <div flex="50" class="padding">
+                                    <table width="100%" class="analytic-table">
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Revenue $</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Rock Shoe</td>
+                                            <td>23</td>
+                                            <td>4200.00</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div flex="20"></div>
+                                <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
+                                   <h4>Total Revenue</h4>
+                                    <h3><b>$ 4200.00</b></h3>
                                 </div>
                             </div>
                         </div>

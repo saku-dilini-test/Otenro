@@ -2829,6 +2829,12 @@ table.md-calendar-day-header{
 .selectdemoSelectHeader md-content._md {
     max-height: 240px; }
 
+
+.analytic-table th,.analytic-table td{
+    padding:5px;
+    letter-spacing: 1px;
+}
+
 /*IE 10 and abouve specific css wirte inside this media quary*/
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     .fixed-inventory .tree-grid thead {
