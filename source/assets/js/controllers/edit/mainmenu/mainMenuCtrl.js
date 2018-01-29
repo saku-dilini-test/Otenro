@@ -187,10 +187,19 @@
                         if($scope.templateCategory == tempCatBusiness){
                             mainMenuService.deleteData(item).success(function(data) {
 
-                                var urlPath;
+                                var urlPath;var view;
                                 if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
-                                    urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                                view = localStorage.getItem('view');
+
+                                if(view == 'mobile' || view == 'tab'){
+                                 urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                                                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                                }else{
+                                urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                }
 
                                 }else {
 
@@ -268,10 +277,19 @@
                 mainMenuService.addMenu(file,$rootScope.appId,menu.name,$rootScope.tempNew).success(function(data) {
 
                     console.log("$rootScope.tempNew : " + $rootScope.tempNew);
-                    var urlPath;
+                    var urlPath;var view;
                     if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
-                        urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                            + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                        view = localStorage.getItem('view');
+
+                                                       if(view == 'mobile' || view == 'tab'){
+                                                        urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                                                                               + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                                                       }else{
+                                                       urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                                       + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                                       }
+
 
                     }else {
 
@@ -309,11 +327,18 @@
                 //$log.debug("Only Update Menu Name ");
                 mainMenuService.updateSecondNavi(menu).success(function(data) {
 
-                    var urlPath;
+                    var urlPath;var view;
                     if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
-                        urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                            + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                       view = localStorage.getItem('view');
 
+                                                      if(view == 'mobile' || view == 'tab'){
+                                                       urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                                                                              + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                                                      }else{
+                                                      urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                                      + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                                      }
                     }else {
 
                         urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
@@ -344,11 +369,18 @@
                     // update image name set to imageUrl in menu collection
                     menu.imageUrl = data.imageUrl;
                     mainMenuService.updateSecondNavi(menu).success(function(data) {
-                        var urlPath;
+                        var urlPath;var view;
                         if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
-                            urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                            view = localStorage.getItem('view');
 
+                                                           if(view == 'mobile' || view == 'tab'){
+                                                            urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                                                                                   + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                                                           }else{
+                                                           urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                                           + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                                           }
                         }else {
 
                             urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
@@ -399,11 +431,18 @@
             if($scope.initialData.menu == 'addNewMenuCategory') {
                 mainMenuService.addNewCategory(file, $rootScope.appId, menu.name,$rootScope.tempNew)
                     .success(function (data) {
-                        var urlPath;
+                        var urlPath;var view;
                         if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
-                            urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                            view = localStorage.getItem('view');
 
+                                                           if(view == 'mobile' || view == 'tab'){
+                                                            urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                                                                                   + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                                                           }else{
+                                                           urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                                           + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                                           }
                         }else {
 
                             urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
@@ -425,7 +464,7 @@
             if($scope.mainImg == $scope.serverImage){
                 articleService.editCategory(menu)
                     .success(function (data) {
-                        var urlPath;
+                        var urlPath;var view;
                         if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
                             urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
@@ -458,11 +497,18 @@
                     articleService.editCategory(menu)
                         .success(function (data) {
 
-                            var urlPath;
+                            var urlPath;var view;
                             if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
-                                urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                                    + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                              view = localStorage.getItem('view');
 
+                                                             if(view == 'mobile' || view == 'tab'){
+                                                              urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                                                                                     + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+                                                             }else{
+                                                             urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                                             + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                                             }
                             }else {
 
                                 urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
