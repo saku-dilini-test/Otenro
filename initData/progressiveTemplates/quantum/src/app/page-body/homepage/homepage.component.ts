@@ -31,8 +31,8 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
 
-    this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
+    this.imageUrl = SERVER_URL + "/templates/viewImages?userId="
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&img=secondNavi";
 
     this.categoryService.getCategories().subscribe(data => {
       // Read the result field from the JSON response.

@@ -31,6 +31,8 @@ module.exports = {
 
     viewTemplate : function(req,res){
 
+        var isNew = req.body.isNew;
+
         var templateName = req.body.templateName,progTemplateName = req.body.progTemplateName
             templateCategory = req.body.templateCategory,
             userId = req.body.userId,
@@ -83,7 +85,7 @@ module.exports = {
                           appName : req.body.appName,
                           appTempPath :tempAppDirPath,
                           templateId : req.body.templateId,
-                          isNew : false,
+                          isNew : isNew,
                           userId : userId,
                           status : "DRAFT",
                           displayImage: req.body.templateUrl,

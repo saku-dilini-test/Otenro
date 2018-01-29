@@ -95,12 +95,12 @@ module.exports = {
         var isNew = req.body.isNew;
 
         var dePath;
-        if(isNew == 'true' || isNew == true){
-            dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/secondNavi/';
+//        if(isNew == 'true' || isNew == true){
+//            dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/secondNavi/';
 
-        }else {
+//        }else {
             dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/secondNavi/';
-        }
+//        }
 
         req.file('file').upload({
             dirname: require('path').resolve(dePath)

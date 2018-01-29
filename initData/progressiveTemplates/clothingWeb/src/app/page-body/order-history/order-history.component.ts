@@ -30,8 +30,8 @@ export class OrderHistoryComponent implements OnInit {
 
     //get image url
     this.imageURL = SERVER_URL
-      +"/templates/viewWebImages?userId="
-      +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&images=thirdNavi";
+      +"/templates/viewImages?userId="
+      +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&img=thirdNavi";
 
     try {
       this.appUserId = this.localStorageService.get("appLocalStorageUser"+this.appId);

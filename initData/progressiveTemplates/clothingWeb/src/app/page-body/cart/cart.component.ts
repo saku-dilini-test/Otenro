@@ -24,8 +24,8 @@ export class CartComponent implements OnInit {
   cartItems = this.dataService.cart.cartItems;
   currency: string;
 
-  imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-  + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+  imageUrl = SERVER_URL + "/templates/viewImages?userId="
+  + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&img=thirdNavi';
 
   @Input()
   @Output()

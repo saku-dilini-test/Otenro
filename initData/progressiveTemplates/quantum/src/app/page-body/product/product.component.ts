@@ -33,8 +33,8 @@ export class ProductComponent implements OnInit {
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     private lockBuyButton = false;
 
-    private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+    private imageUrl = SERVER_URL + "/templates/viewImages?userId="
+        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&img=thirdNavi';
 
     constructor(private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
 
