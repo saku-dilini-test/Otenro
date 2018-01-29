@@ -16,7 +16,7 @@ export class AppComponent {
 
   constructor(private pushService: PushNotificationService) {
 
-    this.pushSubData = localStorage.getItem('sub');
+    this.pushSubData = JSON.parse(localStorage.getItem('sub'));
     console.log('pushSubData : ' + this.pushSubData)
 
   }

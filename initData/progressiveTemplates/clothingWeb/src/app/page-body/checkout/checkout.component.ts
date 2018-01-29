@@ -4,7 +4,6 @@ import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { HttpClient,HttpErrorResponse } from '@angular/common/http';
-import { LocalStorageService } from 'angular-2-local-storage';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime } from 'rxjs/operator/debounceTime';
 
@@ -84,7 +83,7 @@ export class CheckoutComponent implements OnInit {
   private years = [];
   private months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
 
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
 
   }
 
@@ -126,7 +125,7 @@ this.years.push(date++);
       this.zip = this.dataService.userData.zip;
       console.log("this.country : " + this.country);
     }
-    this.localData = (this.localStorageService.get('appLocalStorageUser' + this.appId));
+    this.localData = JSON.parse(localStorage.getItem('appLocalStorageUser' + this.appId));
     console.log('localData : ' + JSON.stringify(this.localData));
 
     if (this.localData == null) {
@@ -163,7 +162,7 @@ this.years.push(date++);
 
     });
 
-    this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
+    this.user = JSON.parse(localStorage.getItem('appLocalStorageUser' + this.appId));
 
     // get the shipping options
     var param2 = {
@@ -527,7 +526,7 @@ this.years.push(date++);
   paymentInit(paymentParams) {
 
     this.orderd = true;
-    this.history = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+    this.history = JSON.parse(localStorage.getItem("history" + this.appId + this.user.registeredUser));
 
     this.http.get(SERVER_URL + '/edit/getIPGInfo?appId=' + this.appId)
       .subscribe((data) => {
@@ -678,17 +677,18 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
                 this.dataService.cart.totalQuantity = 0;
 
                 //Pushing into order purchase history
-                if (this.localStorageService.get("history" + this.appId + this.user.registeredUser) != null) {
-                  this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+                if (localStorage.getItem("history" + this.appId + this.user.registeredUser) != null) {
+                  this.orderHistory = JSON.parse(localStorage.getItem("history" + this.appId + this.user.registeredUser));
                 }
-                this.orderHistory.push({
+               var orderHistory =[];
+                orderHistory.push({
                   orderHistoryKey: this.appId,
                   createdDate: new Date(),
                   item: this.payInfo.cart,
                   amount: this.payInfo.amount,
                 });
 
-                this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
+                localStorage.setItem("history" + this.appId + this.user.registeredUser, JSON.stringify(orderHistory));
 
                 alert({
                   title: 'Thank You',
@@ -779,17 +779,18 @@ console.log("cardInformation : " + JSON.stringify(cardInformation));
               this.dataService.cart.totalQuantity = 0;
 
               //Pushing into order purchase history
-              if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
-                this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+              if ((localStorage.getItem("history" + this.appId + this.user.registeredUser)) != null) {
+                this.orderHistory = JSON.parse(localStorage.get("history" + this.appId + this.user.registeredUser));
               }
-              this.orderHistory.push({
+              var orderHistory = [];
+              orderHistory.push({
                 orderHistoryKey: this.appId,
                 createdDate: new Date(),
                 item: this.payInfo.cart,
                 amount: this.payInfo.amount,
               });
 
-              this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
+              localStorage.setItem("history" + this.appId + this.user.registeredUser, (this.orderHistory));
 
               this._success.next('Your Order has been successfully processed');
 
