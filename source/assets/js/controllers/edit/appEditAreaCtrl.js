@@ -28,7 +28,7 @@ console.log("$stateParams.is new  : " + $stateParams.isNew);
                 $state.go('user.dashboard');
             }
         }
-
+        localStorage.setItem('view', 'mobile');
         $scope.tempIsNew = $stateParams.isNew;
         $scope.appId = decParamAppId; //$stateParams.appId;
         $rootScope.appId = decParamAppId; //$stateParams.appId;
@@ -233,12 +233,14 @@ console.log("$stateParams.is new  : " + $stateParams.isNew);
 
             if(deviceType == "mobile"){
                 $scope.deviceView = "mobile";
+                localStorage.setItem('view','mobile');
             }else if(deviceType == "tablet"){
                 $scope.deviceView = "tabletView";
+                localStorage.setItem('view','tab');
 
             }else if(deviceType == "web"){
                 $scope.deviceView = "web";
-
+                localStorage.setItem('view','web');
             }
 
 //console.log("$scope.deviceView : " + $scope.deviceView)
