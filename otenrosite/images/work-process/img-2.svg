@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="129px" height="128px" viewBox="0 0 129 128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+    <title>img-2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0.931443299,4.26319588 C0.931443299,2.09072165 2.69783505,0.329690722 4.86494845,0.329690722 L78.8309278,0.329690722 C81.0034021,0.329690722 82.764433,2.09608247 82.764433,4.26319588 L82.764433,78.2291753 C82.764433,80.4016495 80.9980412,82.1626804 78.8309278,82.1626804 L4.86494845,82.1626804 C2.69247423,82.1626804 0.931443299,80.3962887 0.931443299,78.2291753 L0.931443299,4.26319588 L0.931443299,4.26319588 Z" id="path-1"></path>
+        <rect id="path-3" x="0.057628866" y="0.304226804" width="75.5380412" height="65.3082474"></rect>
+        <rect id="path-5" x="0.057628866" y="0.304226804" width="75.5380412" height="65.3082474"></rect>
+        <rect id="path-7" x="0.0924742268" y="1.32412371" width="50.3582474" height="60.5880412"></rect>
+        <ellipse id="path-9" cx="3.04494845" cy="2.99670103" rx="2.75412371" ry="2.75412371"></ellipse>
+        <ellipse id="path-11" cx="3.42556701" cy="2.99670103" rx="2.75412371" ry="2.75412371"></ellipse>
+        <ellipse id="path-13" cx="3.80618557" cy="2.99670103" rx="2.75412371" ry="2.75412371"></ellipse>
+        <path d="M1.12309278,5.18659794 C1.12309278,3.01412371 2.88814433,1.25309278 5.05659794,1.25309278 L44.3996907,1.25309278 C46.5721649,1.25309278 48.3331959,3.01948454 48.3331959,5.18659794 L48.3331959,79.1525773 C48.3331959,81.3250515 46.5681443,83.0860825 44.3996907,83.0860825 L5.05659794,83.0860825 C2.88412371,83.0860825 1.12309278,81.3196907 1.12309278,79.1525773 L1.12309278,5.18659794 L1.12309278,5.18659794 Z" id="path-15"></path>
+        <rect id="path-17" x="0.482474227" y="0.761237113" width="37.7683505" height="61.3747423"></rect>
+        <rect id="path-19" x="0.482474227" y="0.761237113" width="37.7683505" height="61.3747423"></rect>
+        <rect id="path-21" x="0.163505155" y="0.623195876" width="33.0481443" height="28.3265979"></rect>
+        <path d="M0.544123711,2.74072165 C0.544123711,1.87092784 1.25041237,1.16731959 2.12154639,1.16731959 L17.8502062,1.16731959 C18.7213402,1.16731959 19.4276289,1.86556701 19.4276289,2.74072165 C19.4276289,3.61051546 18.7213402,4.31412371 17.8502062,4.31412371 L2.12154639,4.31412371 C1.25041237,4.31546392 0.544123711,3.61587629 0.544123711,2.74072165 L0.544123711,2.74072165 Z" id="path-23"></path>
+        <ellipse id="path-25" cx="2.73134021" cy="2.52628866" rx="2.36010309" ry="2.36010309"></ellipse>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="img-2" transform="translate(0.000000, -1.000000)">
+            <ellipse id="Oval" fill="#3ECB74" cx="59.5654639" cy="70.1839175" rx="58.5857732" ry="58.5857732"></ellipse>
+            <g id="Clipped" transform="translate(16.082474, 30.824742)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="SVGID_1_"></g>
+                <rect id="Rectangle-path" fill="#344A5E" mask="url(#mask-2)" x="-3.00340206" y="-3.60515464" width="89.7013402" height="89.7013402"></rect>
+            </g>
+            <g id="Clipped" transform="translate(20.103093, 44.226804)">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="SVGID_3_"></g>
+                <rect id="Rectangle-path" fill="#20A185" mask="url(#mask-4)" x="0.057628866" y="0.304226804" width="75.5380412" height="65.3082474"></rect>
+            </g>
+            <g id="Clipped" transform="translate(20.103093, 44.226804)">
+                <mask id="mask-6" fill="white">
+                    <use xlink:href="#path-5"></use>
+                </mask>
+                <g id="SVGID_5_"></g>
+                <rect id="Rectangle-path" stroke="#ECF0F1" stroke-width="3.5227" mask="url(#mask-6)" x="0.057628866" y="0.304226804" width="75.5380412" height="65.3082474"></rect>
+            </g>
+            <g id="Clipped" transform="translate(42.886598, 45.567010)">
+                <mask id="mask-8" fill="white">
+                    <use xlink:href="#path-7"></use>
+                </mask>
+                <g id="SVGID_7_"></g>
+                <rect id="Rectangle-path" fill="#27BD9C" mask="url(#mask-8)" x="-3.84103093" y="-2.60938144" width="58.2265979" height="68.4563918"></rect>
+            </g>
+            <g id="Clipped" transform="translate(21.443299, 34.845361)">
+                <mask id="mask-10" fill="white">
+                    <use xlink:href="#path-9"></use>
+                </mask>
+                <g id="SVGID_9_"></g>
+                <rect id="Rectangle-path" fill="#D05216" mask="url(#mask-10)" x="-3.64268041" y="-3.69092784" width="13.3765979" height="13.3765979"></rect>
+            </g>
+            <g id="Clipped" transform="translate(28.144330, 34.845361)">
+                <mask id="mask-12" fill="white">
+                    <use xlink:href="#path-11"></use>
+                </mask>
+                <g id="SVGID_11_"></g>
+                <rect id="Rectangle-path" fill="#F09A27" mask="url(#mask-12)" x="-3.26206186" y="-3.69092784" width="13.3765979" height="13.3765979"></rect>
+            </g>
+            <g id="Clipped" transform="translate(34.845361, 34.845361)">
+                <mask id="mask-14" fill="white">
+                    <use xlink:href="#path-13"></use>
+                </mask>
+                <g id="SVGID_13_"></g>
+                <rect id="Rectangle-path" fill="#3ECB74" mask="url(#mask-14)" x="-2.8814433" y="-3.69092784" width="13.3765979" height="13.3765979"></rect>
+            </g>
+            <g id="Clipped" transform="translate(80.412371, 0.000000)">
+                <mask id="mask-16" fill="white">
+                    <use xlink:href="#path-15"></use>
+                </mask>
+                <g id="SVGID_15_"></g>
+                <rect id="Rectangle-path" fill="#344A5E" mask="url(#mask-16)" x="-2.81175258" y="-2.68041237" width="55.0797938" height="89.7013402"></rect>
+            </g>
+            <g id="Clipped" transform="translate(85.773196, 10.721649)">
+                <mask id="mask-18" fill="white">
+                    <use xlink:href="#path-17"></use>
+                </mask>
+                <g id="SVGID_17_"></g>
+                <rect id="Rectangle-path" fill="#20A185" mask="url(#mask-18)" x="0.482474227" y="0.761237113" width="37.7683505" height="61.3747423"></rect>
+            </g>
+            <g id="Clipped" transform="translate(85.773196, 10.721649)">
+                <mask id="mask-20" fill="white">
+                    <use xlink:href="#path-19"></use>
+                </mask>
+                <g id="SVGID_19_"></g>
+                <rect id="Rectangle-path" stroke="#ECF0F1" stroke-width="3.5227" mask="url(#mask-20)" x="0.482474227" y="0.761237113" width="37.7683505" height="61.3747423"></rect>
+            </g>
+            <g id="Clipped" transform="translate(88.453608, 41.546392)">
+                <mask id="mask-22" fill="white">
+                    <use xlink:href="#path-21"></use>
+                </mask>
+                <g id="SVGID_21_"></g>
+                <rect id="Rectangle-path" fill="#27BD9C" mask="url(#mask-22)" x="-3.77134021" y="-3.31030928" width="40.9164948" height="36.1949485"></rect>
+            </g>
+            <g id="Clipped" transform="translate(95.154639, 4.020619)">
+                <mask id="mask-24" fill="white">
+                    <use xlink:href="#path-23"></use>
+                </mask>
+                <g id="SVGID_23_"></g>
+                <rect id="Rectangle-path" fill="#2A3B4B" mask="url(#mask-24)" x="-3.39072165" y="-2.76618557" width="26.7531959" height="11.0164948"></rect>
+            </g>
+            <g id="Clipped" transform="translate(103.195876, 75.051546)">
+                <mask id="mask-26" fill="white">
+                    <use xlink:href="#path-25"></use>
+                </mask>
+                <g id="SVGID_25_"></g>
+                <rect id="Rectangle-path" fill="#2A3B4B" mask="url(#mask-26)" x="-3.56360825" y="-3.76731959" width="12.5898969" height="12.5898969"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
