@@ -54,7 +54,7 @@
         })
         };
   
-        $scope.viewApp = function(templateId, templateUrl, templateName,templateCategory,previewId,isNew) {
+        $scope.viewApp = function(templateId, templateUrl, templateName,progTemplateName,templateCategory,previewId,isNew) {
                     var userId = '';
                     var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId=unknownUser"
                                     +"&appId="+previewId+"&"+new Date().getTime()+"/";

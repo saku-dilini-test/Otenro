@@ -147,6 +147,7 @@
                     var tempAppParams = {
                         'appName': $scope.appName,
                         'templateId': templateId,
+                        'isNew': $scope.isNew,
                         'templateName': templateName,
                         'progTemplateName': progTemplateName,
                         'templateUrl':templateUrl,
@@ -207,6 +208,7 @@
                         var tempAppParams = {
                             'appName': $scope.appName,
                             'templateId': templateId,
+                            'isNew': $scope.isNew,
                             'templateName': templateName,
                             'templateUrl':templateUrl,
                             'templateCategory' : templateCategory,

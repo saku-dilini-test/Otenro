@@ -37,11 +37,11 @@ export class ShopComponent implements OnInit {
 
   }
 
-  private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-    + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+  private imageUrl = SERVER_URL + "/templates/viewImages?userId="
+    + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&img=thirdNavi';
 
-  private imageUrl2 = SERVER_URL + "/templates/viewWebImages?userId="
-    + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
+  private imageUrl2 = SERVER_URL + "/templates/viewImages?userId="
+    + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&img=secondNavi";
 
 
 

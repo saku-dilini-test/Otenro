@@ -70,16 +70,16 @@ module.exports = {
                 var data = tmpImage[i].replace(/^data:image\/\w+;base64,/, "");
                 var buf = new Buffer(data, 'base64');
                 // product images copy to app file server
-                if(isNew == 'true' || isNew == true){
-                    console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName);
-                    fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
-                        if (err) {
-                            return res.send(err);
-                        }
-                    });
-                }else {
+//                if(isNew == 'true' || isNew == true){
+//                    console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+//                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName);
+//                    fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+//                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
+//                        if (err) {
+//                            return res.send(err);
+//                        }
+//                    });
+//                }else {
                     console.log("inside template ")
                     fs.writeFile(config.APP_FILE_SERVER + req.userId + '/templates/' +
                         req.body.product.appId + '/img/thirdNavi/' + imgeFileName, buf, function (err) {
@@ -87,7 +87,7 @@ module.exports = {
                             return res.send(err);
                         }
                     });
-                }
+//                }
                 product.tempImageArray.push({img:imgeFileName});
                 product.imageUrl = imgeFileName;
                 finelImages = null;

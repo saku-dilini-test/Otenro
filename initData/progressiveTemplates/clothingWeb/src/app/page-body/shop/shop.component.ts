@@ -26,11 +26,11 @@ export class ShopComponent implements OnInit {
 
   }
 
-  imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-    + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+  imageUrl = SERVER_URL + "/templates/viewImages?userId="
+    + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&img=thirdNavi';
 
-  imageUrl2 = SERVER_URL + "/templates/viewWebImages?userId="
-  +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&images=secondNavi";
+  imageUrl2 = SERVER_URL + "/templates/viewImages?userId="
+  +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&img=secondNavi";
 
 
 

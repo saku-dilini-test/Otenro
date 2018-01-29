@@ -28,8 +28,8 @@ export class HomepageComponent implements OnInit {
   constructor(private router: Router,private http: HttpClient) {}
 
   ngOnInit() {
-    this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-      +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&images=secondNavi";
+    this.imageUrl = SERVER_URL + "/templates/viewImages?userId="
+      +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&img=secondNavi";
     this.http.get('http://localhost:1337/templates/getSpecificChild?appId=' + this.appId).subscribe(data => {
         // Read the result field from the JSON response.
 

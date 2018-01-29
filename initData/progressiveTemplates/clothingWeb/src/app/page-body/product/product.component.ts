@@ -33,8 +33,8 @@ export class ProductComponent implements OnInit {
     set1; set2;
     private lockBuyButton = false;
 
-    imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
-    + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+    imageUrl = SERVER_URL + "/templates/viewImages?userId="
+    + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&img=thirdNavi';
 
     constructor(private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
 
