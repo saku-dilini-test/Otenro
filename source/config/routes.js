@@ -256,6 +256,7 @@ module.exports.routes = {
      * GetAssistanceController
      */
     'POST /edit/sendGetAssistance': 'edit/getAssistance/GetAssistanceController.sendGetAssistance',
+    'POST /edit/getTemplateNameByID': 'edit/getAssistance/GetAssistanceController.getTemplateName',
 
     /***
      * Template Data
