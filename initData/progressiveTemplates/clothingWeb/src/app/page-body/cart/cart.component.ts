@@ -4,7 +4,6 @@ import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { HttpClient } from '@angular/common/http';
-import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-cart',
@@ -20,7 +19,7 @@ export class CartComponent implements OnInit {
   hide: any;
   tax: any;
   user;
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule) { }
+  constructor(private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule) { }
   cartItems = this.dataService.cart.cartItems;
   currency: string;
 
@@ -32,7 +31,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     console.log("cart size : " + this.dataService.cart.cartSize);
-    this.user = (this.localStorageService.get('appLocalStorageUser'+this.appId));
+    this.user = JSON.parse(localStorage.getItem('appLocalStorageUser'+this.appId));
 
     this.http.get(SERVER_URL + '/edit/getTaxInfo?appId=' + this.appId).subscribe(function (data) {
       if (data == '') {
@@ -134,9 +133,9 @@ export class CartComponent implements OnInit {
 
     console.log("deliverItems : " + JSON.stringify(deliverItems));
 
-    if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
-      console.log("pickup : " + this.localStorageService.get('appLocalStorageUser' + this.appId));
-      this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
+    if (localStorage.getItem('appLocalStorageUser' + this.appId) !== null) {
+      console.log("pickup : " + localStorage.getItem('appLocalStorageUser' + this.appId));
+      this.dataService.userData = JSON.parse(localStorage.getItem('appLocalStorageUser' + this.appId));
       console.log("this.dataService.userData : " + this.dataService.userData)
       this.router.navigate(['checkout','delivery']);
 this.dataService.deliverItems = deliverItems
@@ -149,9 +148,9 @@ this.dataService.deliverItems = deliverItems
   }
 
   pickupDetails(deliverItems) {
-    if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
-      this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
-      console.log("pickup : " + this.localStorageService.get('appLocalStorageUser' + this.appId));
+    if (localStorage.getItem('appLocalStorageUser' + this.appId) !== null) {
+      this.dataService.userData = JSON.parse(localStorage.getItem('appLocalStorageUser' + this.appId));
+      console.log("pickup : " + localStorage.get('appLocalStorageUser' + this.appId));
       this.router.navigate(['checkout','pickup']);
       this.dataService.deliverItems = deliverItems;
 
@@ -175,7 +174,7 @@ this.dataService.deliverItems = deliverItems
     console.log("deliverDetails : " + deliverDetails);
 
             if(typeof deliverDetails.country == 'undefined'){
-                var localData = (this.localStorageService.get('appLocalStorageUser'+this.appId));
+                var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'+this.appId));
                 if(localData == null){
                   this.router.navigate(['login']);
                 }else{

@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
-import { LocalStorageService } from 'angular-2-local-storage';
 import { FormGroup, FormControl, FormArray, NgForm } from '@angular/forms';
 
 @Component({
@@ -33,7 +32,7 @@ export class RegisterComponent implements OnInit {
   private phone;
   private myForm: FormGroup;
 
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
+  constructor(private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
 
   }
   changeCountry(data){
@@ -79,11 +78,6 @@ this.selectedCountry = data;
     this.streetNumber = myForm.streetNumber;
     this.zip = myForm.zip;
 
-    // console.log("city : " +myForm.city)
-    // console.log(myForm)
-    // console.log(this.fname + this.lname+ " : " + this.city)
-    // this.localStorageService  = this.localStorageService.get('appLocalStorageUser'+this.appId);
-
     var data = {
         firstName: this.fname,
         lastName: this.lname,
@@ -98,7 +92,7 @@ this.selectedCountry = data;
         appId: this.appId
     };
     console.log("data : " + JSON.stringify(data));
-    this.localStorageService.set('appLocalStorageUser'+this.appId, (data))
+    localStorage.setItem('appLocalStorageUser'+this.appId, JSON.stringify(data))
 
     this.http.post(SERVER_URL+"/templatesAuth/register",data)
         .subscribe((res) =>{
@@ -119,10 +113,10 @@ this.selectedCountry = data;
                     "registeredUser": res.user.sub
                 };
 
-                this.localStorageService.set('appLocalStorageUser'+this.appId,(requestParams));
+                localStorage.setItem('appLocalStorageUser'+this.appId,JSON.stringify(requestParams));
                 this.dataService.isUserLoggedIn.check = true;
                 this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
-                console.log(this.localStorageService.get('appLocalStorageUser'+this.appId));
+                console.log(localStorage.getItem('appLocalStorageUser'+this.appId));
 
                 if(this.navigate == 'home'){
                     this.route.navigate(['home']);

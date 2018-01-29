@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
-import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-order-history',
@@ -15,7 +14,7 @@ export class OrderHistoryComponent implements OnInit {
   public userId = (<any>data).userId;
   currency;imageURL;appUserId;orderHistory;sign;
 
-  constructor(private http : HttpClient,private localStorageService: LocalStorageService) { }
+  constructor(private http : HttpClient) { }
 
   ngOnInit() {
     //get currency
@@ -34,8 +33,7 @@ export class OrderHistoryComponent implements OnInit {
       +this.userId+"&appId="+this.appId+"&"+new Date().getTime()+"&img=thirdNavi";
 
     try {
-      this.appUserId = this.localStorageService.get("appLocalStorageUser"+this.appId);
-      // this.orderHistory = (this.localStorageService.get("history"+this.appId+this.appUserId.registeredUser));
+      this.appUserId = JSON.parse(localStorage.get("appLocalStorageUser"+this.appId));
     }
     catch(err) {
       console.log("no orderHistory");

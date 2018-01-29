@@ -4,7 +4,6 @@ import * as data from '../../madeEasy.json';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { HttpClient } from '@angular/common/http';
-import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +16,7 @@ export class LoginComponent implements OnInit {
   public userId = (<any>data).userId;
   public params = [];
   name; pass; gate: boolean; navigate;
-  constructor(private localStorageService: LocalStorageService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient) {
+  constructor(private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient) {
 
   }
 
@@ -56,7 +55,7 @@ export class LoginComponent implements OnInit {
           "appId": res.user.appId,
           "registeredUser": res.user.sub
         };
-        this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+        localStorage.setItem('appLocalStorageUser' + this.appId, (requestParams));
         this.dataService.isUserLoggedIn.check = true;
         this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 

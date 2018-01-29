@@ -2,9 +2,9 @@ import { Component, AfterViewChecked } from '@angular/core';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { HttpClient,HttpErrorResponse } from '@angular/common/http';
-import { LocalStorageService } from 'angular-2-local-storage';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import Json from 'json!*';
 
 declare let paypal: any;
 
@@ -24,9 +24,9 @@ export class PaypalPaymentComponent implements AfterViewChecked {
   public sandBoxKey = this.dataService.paypalKey;
   public productionKey = this.dataService.paypalKey;
 
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
-    this.localData = (this.localStorageService.get('appLocalStorageUser' + this.appId));
-    this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
+    this.localData = Json.parse(localStorage.getItem('appLocalStorageUser' + this.appId));
+    this.user = JSON.parse(localStorage.getItem('appLocalStorageUser' + this.appId));
 
     console.log("pre env : " + this.dataService.env)
 
@@ -81,16 +81,17 @@ export class PaypalPaymentComponent implements AfterViewChecked {
                     this.dataService.payPalDetails = {};
 
                     //Pushing into order purchase history
-                    if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
-                      this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+                    if ((localStorage.getItem("history" + this.appId + this.user.registeredUser)) != null) {
+                      this.orderHistory = JSON.parse(localStorage.getItem("history" + this.appId + this.user.registeredUser));
                     }
-                    this.orderHistory.push({
+                    var orderHistory = [];
+                    orderHistory.push({
                       orderHistoryKey: this.appId,
                       createdDate: new Date(),
                       item: this.dataService.payPalDetails.item,
                       amount: this.dataService.payPalDetails.amount,
                     });
-                    this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
+                    localStorage.setItem("history" + this.appId + this.user.registeredUser, JSON.stringify(orderHistory));
 
                     alert('Thank You,  Your Order has been successfully processed');
                     // TODO : Currently back to cart
