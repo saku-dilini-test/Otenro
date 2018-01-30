@@ -416,6 +416,10 @@
                 });
             },
 
+            getSalesSummary :function (data) {
+                return $http.post(SERVER_URL + 'reports/getSalesSummary', data);
+            }
+
         };
     }
 })();

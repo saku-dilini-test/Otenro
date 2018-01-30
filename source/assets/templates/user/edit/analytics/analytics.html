@@ -21,28 +21,28 @@
                             <label class="margin">Select Period</label>
                             <div layout-gt-xs="row" class="margin">
                                 <div flex="33">
-                                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="Start date" md-open-on-focus></md-datepicker>
+                                    <md-datepicker ng-model="sales.fromDate" md-placeholder="Start date" md-open-on-focus></md-datepicker>
                                 </div>
                                 <div flex="33">
-                                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="End date" md-open-on-focus></md-datepicker>
+                                    <md-datepicker ng-model="sales.toDate" md-placeholder="End date" md-open-on-focus></md-datepicker>
 
                                 </div>
                             </div>
                             <label class="margin">Select Product</label>
                             <div layout-gt-xs="row" class="margin">
                                 <div flex="50">
-                                    <md-select ng-model="selectedProducts"
+                                    <md-select ng-model="sales.selectedProducts"
                                                md-on-close="clearSearchTerm()"
                                                data-md-container-class="selectdemoSelectHeader"
                                                aria-label="select product"
                                                multiple>
                                         <md-optgroup>
-                                            <md-option ng-value="product" ng-repeat="product in products | filter:searchTerm">{{product}}</md-option>
+                                            <md-option ng-value="product.name" ng-repeat="product in products | filter:searchTerm">{{product.name}}</md-option>
                                         </md-optgroup>
                                     </md-select>
                                 </div>
                                 <div flex="50">
-                                    <md-button class="no-margin margin-horizontal md-raised" style="top:-3px;background:#bdbdbd;color:#fff">Apply</md-button>
+                                    <md-button ng-click="getSalesSummary(sales)" class="no-margin margin-horizontal md-raised" style="top:-3px;background:#bdbdbd;color:#fff">Apply</md-button>
                                 </div>
                             </div>
 
@@ -63,17 +63,18 @@
                                             <th>Quantity</th>
                                             <th>Revenue $</th>
                                         </tr>
-                                        <tr>
-                                            <td>Rock Shoe</td>
-                                            <td>23</td>
-                                            <td>4200.00</td>
+
+                                        <tr ng-repeat="sales in salesList">
+                                            <td>{{ sales._id.name }}</td>
+                                            <td>{{ sales.count }}</td>
+                                            <td>{{ sales.totalPrice }}</td>
                                         </tr>
                                     </table>
                                 </div>
                                 <div flex="20"></div>
                                 <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
                                    <h4>Total Revenue</h4>
-                                    <h3><b>$ 4200.00</b></h3>
+                                    <h3><b>$ {{total}}</b></h3>
                                 </div>
                             </div>
                             <div layout-gt-xs="row" class="margin-horizontal">

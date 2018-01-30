@@ -358,5 +358,13 @@ module.exports.routes = {
     'GET /edit/getListOfSalesAndPromotions': 'edit/salesAndPromotion/SalesAndPromotionController.getListOfSalesAndPromotions',
 
     'POST /edit/transcationLog': 'TranscationLog.saveSalesAndPromotion',
-    'POST /templates/makeStripePayment': 'template/StripeController.makePayment'
+    'POST /templates/makeStripePayment': 'template/StripeController.makePayment',
+
+    /**
+     * StoreAnalyticsController
+     */
+
+    'POST /reports/getSalesSummary': 'reports/StoreAnalyticsController.getSalesSummary'
+
+
 };
