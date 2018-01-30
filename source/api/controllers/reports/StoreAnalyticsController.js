@@ -29,7 +29,9 @@ module.exports = {
                 return;
             }
 
-            collection.aggregate([{$unwind:'$item'},{ "$match" : { $and: [{$and:[{updatedAt:{$gte:  new Date(fromDate)}},{updatedAt:{$lte: new Date(toDate)}}]},{ appId: appId}, {$or:selectedProductData}] } },
+            collection.aggregate([{$unwind:'$item'},{ "$match" :
+                    { $and: [{$and:[{updatedAt:{$gte:  new Date(fromDate)}},
+                                {updatedAt:{$lte: new Date(toDate)}}]},{ appId: appId}, {$or:selectedProductData}] } },
                 {
 
                     $group : {
