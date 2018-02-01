@@ -98,12 +98,18 @@ module.exports.policies = {
   },
 
   'mobileViewer/MobileController' : {
+
     '*': ['jwtAuth'],
       sendPayHereForm:true,
       notifyUrl:true,
       payHereSuccess:true,
       cancelUrl:true
-  }
+  },
+  'reports/StoreAnalyticsController' :{
+        '*': ['jwtAuth'],
+        getOrderData:true
+
+    }
 
 	// Here's an example of mapping some policies to run before
   // a controller and its actions

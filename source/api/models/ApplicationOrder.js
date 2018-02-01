@@ -73,13 +73,13 @@ module.exports = {
             type: 'json'
         },
         amount:{
-            type: 'string'
+            type: 'float'
         },
         createAt: {
             type: 'date'
         },
         tax: {
-            type:'string'
+            type:'float'
         },
         shippingOpt: {
             type:'string'

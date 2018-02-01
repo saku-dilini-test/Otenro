@@ -416,6 +416,19 @@
                 });
             },
 
+            getSalesSummary :function (data) {
+                return $http.post(SERVER_URL + 'reports/getSalesSummary', data);
+            },
+            getTaxSummary :function (data) {
+                return $http.post(SERVER_URL + 'reports/getTaxSummary', data);
+            },
+            getShippingSummary :function (data) {
+                return $http.post(SERVER_URL + 'reports/getShippingSummary', data);
+            },
+            getChartData :function (data) {
+                return $http.post(SERVER_URL + 'reports/getChartData', data);
+            }
+
         };
     }
 })();
