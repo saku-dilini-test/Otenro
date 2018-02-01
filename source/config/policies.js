@@ -101,7 +101,8 @@ module.exports.policies = {
     '*': ['jwtAuth']
   },
     'reports/StoreAnalyticsController' :{
-        '*': ['jwtAuth']
+        '*': ['jwtAuth'],
+        getOrderData:true
 
     }
 

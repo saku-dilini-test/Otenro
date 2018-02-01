@@ -364,7 +364,11 @@ module.exports.routes = {
      * StoreAnalyticsController
      */
 
-    'POST /reports/getSalesSummary': 'reports/StoreAnalyticsController.getSalesSummary'
+    'POST /reports/getSalesSummary': 'reports/StoreAnalyticsController.getSalesSummary',
+    'POST /reports/getTaxSummary': 'reports/StoreAnalyticsController.getTaxSummary',
+    'POST /reports/getShippingSummary': 'reports/StoreAnalyticsController.getShippingSummary',
+    'POST /reports/getOrderData': 'reports/StoreAnalyticsController.getOrderData',
+
 
 
 };

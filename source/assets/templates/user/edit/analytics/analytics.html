@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                             <div layout-gt-xs="row" class="margin-horizontal">
-                                <a href="">Download Full Report</a>
+                                <a href="" ng-click="downloadFile(sales,'sales')">Download Full Report</a>
                             </div>
                         </div>
                         <div class="md-dialog-buttons padding-top">
@@ -100,11 +100,15 @@
                             <label class="margin">Select Period</label>
                             <div layout-gt-xs="row" class="margin">
                                 <div flex="33">
-                                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="Start date" md-open-on-focus></md-datepicker>
+                                    <md-datepicker ng-model="tax.fromDate" md-placeholder="Start date" md-open-on-focus></md-datepicker>
                                 </div>
                                 <div flex="33">
-                                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="End date" md-open-on-focus></md-datepicker>
+                                    <md-datepicker ng-model="tax.toDate" md-placeholder="End date" md-open-on-focus></md-datepicker>
 
+                                </div>
+
+                                <div flex="50">
+                                    <md-button ng-click="getTaxSummary(tax)" class="no-margin margin-horizontal md-raised" style="top:-3px;background:#bdbdbd;color:#fff">Apply</md-button>
                                 </div>
                             </div>
 
@@ -119,7 +123,7 @@
                             </div>
                             <md-input-container class="margin-horizontal" flex="33">
                                 <label>Search Country</label>
-                                <input ng-model="user.title">
+                                <input ng-model="tax.country">
                             </md-input-container>
                             <div layout-gt-xs="row" class="margin-horizontal">
                                 <div flex="50">
@@ -129,21 +133,27 @@
                                             <th>Sales $</th>
                                             <th>Tax $</th>
                                         </tr>
-                                        <tr>
+
+                                        <tr ng-repeat="tax in taxList">
+                                            <td>{{ tax._id.country }}</td>
+                                            <td>{{ tax.totalSales }}</td>
+                                            <td>{{ tax.taxTotal }}</td>
+                                        </tr>
+                                        <!--<tr>
                                             <td>Sri Lanka</td>
                                             <td>4200.00</td>
                                             <td>300.00</td>
-                                        </tr>
+                                        </tr>-->
                                     </table>
                                 </div>
                                 <div flex="20"></div>
                                 <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
                                    <h4>Total Tax</h4>
-                                    <h3><b>$ 300.00</b></h3>
+                                    <h3><b>$ {{tax_total}}</b></h3>
                                 </div>
                             </div>
                             <div layout-gt-xs="row" class="margin-horizontal">
-                                <a href="">Download Full Report</a>
+                                <a href="" ng-click="downloadFile(tax,'tax')">Download Full Report</a>
                             </div>
                         </div>
                         <div class="md-dialog-buttons padding-top">
@@ -165,11 +175,15 @@
                             <label class="margin">Select Period</label>
                             <div layout-gt-xs="row" class="margin">
                                 <div flex="33">
-                                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="Start date" md-open-on-focus></md-datepicker>
+                                    <md-datepicker ng-model="shipping.fromDate" md-placeholder="Start date" md-open-on-focus></md-datepicker>
                                 </div>
                                 <div flex="33">
-                                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="End date" md-open-on-focus></md-datepicker>
+                                    <md-datepicker ng-model="shipping.toDate" md-placeholder="End date" md-open-on-focus></md-datepicker>
 
+                                </div>
+
+                                <div flex="50">
+                                    <md-button ng-click="getShippingSummary(shipping)" class="no-margin margin-horizontal md-raised" style="top:-3px;background:#bdbdbd;color:#fff">Apply</md-button>
                                 </div>
                             </div>
 
@@ -191,26 +205,25 @@
                                     <table width="100%" class="analytic-table">
                                         <tr>
                                             <th>Country</th>
-                                            <th>Flat Rate</th>
-                                            <th>Weight Base</th>
+                                            <th>Shipping Type </th>
                                             <th>Shipping $</th>
                                         </tr>
-                                        <tr>
-                                            <td>Sri Lanka</td>
-                                            <td>2</td>
-                                            <td>1</td>
-                                            <td>4200.00</td>
+
+                                        <tr ng-repeat="shipping in shppingList">
+                                            <td>{{ shipping._id.country }}</td>
+                                            <td>{{ shipping._id.shippingOpt }}</td>
+                                            <td>{{ shipping.totalShippingCost }}</td>
                                         </tr>
                                     </table>
                                 </div>
                                 <div flex="20"></div>
                                 <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
-                                   <h4>Total Tax</h4>
-                                    <h3><b>$ 4200.00</b></h3>
+                                   <h4>Total Shipping</h4>
+                                    <h3><b>$ {{shpping_total}}</b></h3>
                                 </div>
                             </div>
                             <div layout-gt-xs="row" class="margin-horizontal">
-                                <a href="">Download Full Report</a>
+                                <a href="" ng-click="downloadFile(shipping,'shipping')">Download Full Report</a>
                             </div>
                         </div>
                         <div class="md-dialog-buttons padding-top">
