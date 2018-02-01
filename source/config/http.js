@@ -17,13 +17,22 @@ module.exports.http = {
 
       superBodyParser: function (req, res, next) {
           if(req.path.indexOf('addStyleImage') != -1){
+
               return require('body-parser')({limit:10000000, parameterLimit:10000})(req, res, next);
           }
           else {
               require('skipper');
-              return next();
+              return require('body-parser')({limit:10000000, parameterLimit:10000})(req, res, next);
           }
       },
+      // bodyParser: (function () {
+      //     var opts = {limit:10000000, parameterLimit:10000};
+      //     var fn;
+      //
+      //     // Default to built-in bodyParser:
+      //     fn = require('skipper');
+      //     return fn(opts);
+      // })(),
 
     order: [
       'startRequestTimer',
