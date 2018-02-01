@@ -86,6 +86,8 @@
                     return stylesService.showStyleDialog(clickTitle);
                 if ('logoAndTitle' == clickTitle)
                     return logoAndTittleService.showLogoAndTittleDialog(clickTitle);
+                if ('carouselBanner' == clickTitle)
+                    return carouselService.showCarouselBannerDialog(clickTitle);
                 if ('users' == clickTitle)
                     return engageService.showAppUserDialog(clickTitle);
                 /*if ('navigation' == clickTitle)
