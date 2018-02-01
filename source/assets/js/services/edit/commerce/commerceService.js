@@ -424,6 +424,9 @@
             },
             getShippingSummary :function (data) {
                 return $http.post(SERVER_URL + 'reports/getShippingSummary', data);
+            },
+            getChartData :function (data) {
+                return $http.post(SERVER_URL + 'reports/getChartData', data);
             }
 
         };

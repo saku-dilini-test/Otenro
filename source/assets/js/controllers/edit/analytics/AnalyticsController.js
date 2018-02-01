@@ -10,6 +10,25 @@
     function analyticsCtrl($scope,$rootScope,$mdDialog,toastr,commerceService,$http) {
         console.log("analytics controller working")
 
+        var emptyChart = {
+            labels : [""],
+            series : [''],
+            data   : [null],
+            datasetOverride : [{ yAxisID: 'y-axis-1' }],
+            options : {
+                scales: {
+                    yAxes: [
+                        {
+                            id: 'y-axis-1',
+                            type: 'linear',
+                            display: true,
+                            position: 'left'
+                        }
+                    ]
+                }
+            }
+        }
+
         $scope.appId_ =$rootScope.appId;
 
         $scope.salesList = [];
@@ -39,8 +58,12 @@
 
         $scope.getSalesSummary  = function (data) {
 
-            commerceService.getSalesSummary({
-                appId:$rootScope.appId,selectedProducts:data.selectedProducts,fromDate:data.fromDate,toDate:data.toDate})
+            var postData = { appId: $rootScope.appId,
+                             selectedProducts: data.selectedProducts, 
+                             fromDate: data.fromDate,
+                             toDate: data.toDate };            
+
+            commerceService.getSalesSummary(postData)
                 .success(function (result) {
                     $scope.total=0;
                     $scope.salesList = result.data;
@@ -55,13 +78,24 @@
                 });
             });
 
+            commerceService.getChartData(postData)
+                .success(function(result){
+                    $scope.salesChartdata = result.data;
+                }).error(function(error){
+                console.log("Error on commerceService.getChartData \n" + JSON.stringify(error, null, 2));
+                $scope.salesChartdata = emptyChart;
+            });
+
         };
 
 
         $scope.getTaxSummary = function (data) {
 
-            commerceService.getTaxSummary({
-                appId:$rootScope.appId,fromDate:data.fromDate,toDate:data.toDate})
+            var postData = { appId: $rootScope.appId, 
+                             fromDate: data.fromDate,
+                             toDate: data.toDate }            
+
+            commerceService.getTaxSummary(postData)
                 .success(function (result) {
 
                     $scope.tax_total=0;
@@ -77,12 +111,23 @@
                 });
             });
 
+            commerceService.getChartData(postData)
+                .success(function(result){
+                    $scope.taxChartdata = result.data;
+                }).error(function(error){
+                console.log("Error on commerceService.getChartData \n" + JSON.stringify(error, null, 2));
+                $scope.taxChartdata = emptyChart;
+            });                
+
         };
 
         $scope.getShippingSummary = function (data) {
 
-            commerceService.getShippingSummary({
-                appId:$rootScope.appId,fromDate:data.fromDate,toDate:data.toDate})
+            var postData = { appId: $rootScope.appId, 
+                             fromDate: data.fromDate,
+                             toDate: data.toDate }   
+
+            commerceService.getShippingSummary(postData)
                 .success(function (result) {
 
                     $scope.shpping_total=0;
@@ -99,42 +144,15 @@
                 });
             });
 
+            commerceService.getChartData(postData)
+                .success(function(result){
+                    $scope.shippingChartdata = result.data;
+                }).error(function(error){
+                console.log("Error on commerceService.getChartData \n" + JSON.stringify(error, null, 2));
+                $scope.shippingChartdata = emptyChart;
+            });                
+
         };
-
-
-        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-
-        $scope.series = ['Series A', 'Series B'];
-
-        $scope.data = [
-            [65, 59, 80, 81, 56, 55, 40],
-            [10, 20,30, 40, 50, 60, 70]
-        ];
-
-        $scope.onClick = function (points, evt) {
-            console.log(points, evt);
-        };
-
-        $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
-        $scope.options = {
-            scales: {
-                yAxes: [
-                    {
-                        id: 'y-axis-1',
-                        type: 'linear',
-                        display: true,
-                        position: 'left'
-                    },
-                    {
-                        id: 'y-axis-2',
-                        type: 'linear',
-                        display: true,
-                        position: 'right'
-                    }
-                ]
-            }
-        };
-
 
         $scope.downloadFile = function (data,type) {
 

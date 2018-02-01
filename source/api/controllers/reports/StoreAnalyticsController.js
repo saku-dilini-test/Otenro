@@ -12,6 +12,12 @@ var selectedProductData = [];
 var fromDate;
 var toDate;
 
+var DAILY = 1;
+var WEEKLY = 2;
+var MONTHLY = 3;
+var YEARLY = 4;
+
+var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
 module.exports = {
 
@@ -298,6 +304,165 @@ module.exports = {
 
         });
 
+    },
+
+
+    makeChartData: function (cb) {
+        var chartData = {
+            labels : [],
+            series : ['Qty'],
+            data   : [[]],
+            datasetOverride : [{ yAxisID: 'y-axis-1' }],
+            options : {
+                scales: {
+                    yAxes: [
+                        {
+                            id: 'y-axis-1',
+                            type: 'linear',
+                            display: true,
+                            position: 'left'
+                        }
+                    ]
+                }
+            }
+        };
+
+        ApplicationOrder.native(function(err, collection){
+            if(err || !collection){
+                cb({msg: "nothing found"}, null);
+                return;
+            }
+
+            var match;
+            
+            if(selectedProductData.length>0){
+                console.log("selectedProductData > 0");
+                match = { $and: [{ $and:[{ updatedAt: { $gte:  new Date(fromDate) }},
+                        { updatedAt: { $lte: new Date(toDate) }}]},
+                        { appId: appId,fulfillmentStatus:"Successful"},
+                        { $or: selectedProductData }]};
+            }else{
+                console.log("selectedProductData = 0");
+                match = { $and: [{ $and:[{ updatedAt: { $gte:  new Date(fromDate) }},
+                        { updatedAt: { $lte: new Date(toDate) }}]},
+                        { appId: appId,fulfillmentStatus:"Successful"}]};
+            }
+
+            collection.aggregate([
+                { $unwind: '$item' },
+                { $match: match },
+                { $group: { _id : { month: { $month: "$updatedAt" }, day: { $dayOfMonth: "$updatedAt" }, year: { $year: "$updatedAt" } },
+                    totalQty : { $sum : "$item.qty" }}},
+                { $sort : { _id : 1 }}
+            ]).toArray(function (err, results) {
+                if(err || !results || results.length == 0) {
+                    cb({msg: "Nothing found"}, null);
+                    return;
+                }
+
+                //Find the min and max dates and break the chart into daily/weekly/monthly/yearly using that
+                var grouping;
+                var timeFrame;
+                var dayDifference = 0;
+
+                if(results.length >= 2){
+                    var lastIndex     = results.length - 1;
+                    var minDateStr    = results[0]._id.month + "/" + results[0]._id.day + "/" + results[0]._id.year;
+                    var maxDateStr    = results[lastIndex]._id.month + "/" + results[lastIndex]._id.day + "/" + results[lastIndex]._id.year;
+                    var minDate       = new Date(minDateStr);
+                    var maxDate       = new Date(maxDateStr);
+                    var timeDiff      = Math.abs(maxDate.getTime() - minDate.getTime());
+                    dayDifference = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                }   
+
+                if(dayDifference <= 31){//Daily
+                    timeFrame = DAILY;
+                    grouping = { month: { $month: "$updatedAt" }, day: { $dayOfMonth: "$updatedAt" }, year: { $year: "$updatedAt" } };
+                }else if(dayDifference <= 90){//Weekly
+                    timeFrame = WEEKLY;
+                    grouping = { week: { $week: "$updatedAt" }, month: { $month: "$updatedAt" }, year: { $year: "$updatedAt" }};
+                }else if(dayDifference <= 365){//Monthly
+                    timeFrame = MONTHLY;
+                    grouping = { month: { $month: "$updatedAt" }, year: { $year: "$updatedAt" }};
+                }else{//Yearly
+                    timeFrame = YEARLY;
+                    grouping = { year: { $year: "$updatedAt" }};
+                }
+
+                collection.aggregate([
+                    { $unwind: '$item' },
+                    { $match: match },
+                    { $group: { _id : grouping,
+                        totalQty : { $sum : "$item.qty" }}},
+                    { $sort : { _id : 1 }}
+                ]).toArray(function (err, results) {
+                    if(err || !results || results.length == 0) {
+                        cb({msg: "Nothing found"}, null);
+                        return;
+                    }
+
+                    var labels = [];
+                    var data = [];
+                    var date;
+                    results.forEach(tuple => {
+
+                        switch (timeFrame) {
+                        case DAILY:
+                                date = MONTHS[tuple._id.month-1] + "/" + tuple._id.day + "/" + tuple._id.year;
+                            break;
+                        case WEEKLY:
+                                var week = tuple._id.week;
+                            if(week === 0){
+                                week = 1;
+                            }else{
+                                week++;
+                            }
+
+                            date = "Week " + week + ":" + tuple._id.year;
+                            break;
+                        case MONTHLY:
+                                date = MONTHS[tuple._id.month-1] + ":" + tuple._id.year;
+                            break;
+                        default:
+                            date = tuple._id.year;
+                        }
+
+                        var qty = tuple.totalQty;
+
+                        chartData.labels.push(date);
+                        chartData.data[0].push(qty);
+                    });
+
+                    cb(null, chartData);
+
+                });
+            });
+        });
+    },
+
+    getChartData: function (req, res) {
+        console.log("Exec getChartData");
+        appId = req.body.appId;
+        var selectedProducts= req.body.selectedProducts;
+        fromDate = req.body.fromDate;
+        toDate = req.body.toDate;
+
+        if(selectedProducts){
+            selectedProducts.forEach(function(element) {
+                var data = {"item.name":element};
+                selectedProductData.push(data);
+            });    
+        }    
+
+        this.makeChartData((err, chartData) => {
+            if(err) {
+                console.log("Error, " + JSON.stringify(err, null, 2));
+            }
+
+            return res.send({
+                "data": chartData
+            });
+        });
     }
 
 
