@@ -98,9 +98,14 @@ module.exports.policies = {
   },
 
   'mobileViewer/MobileController' : {
-    '*': ['jwtAuth']
+
+    '*': ['jwtAuth'],
+      sendPayHereForm:true,
+      notifyUrl:true,
+      payHereSuccess:true,
+      cancelUrl:true
   },
-    'reports/StoreAnalyticsController' :{
+  'reports/StoreAnalyticsController' :{
         '*': ['jwtAuth'],
         getOrderData:true
 

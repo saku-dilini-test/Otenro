@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="130px" height="130px" viewBox="0 0 130 130" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+    <title>img-4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <ellipse id="path-1" cx="30.2824859" cy="30.6690141" rx="30.2824859" ry="30.6690141"></ellipse>
+        <ellipse id="path-3" cx="30.2824859" cy="30.6690141" rx="30.2824859" ry="30.6690141"></ellipse>
+        <ellipse id="path-5" cx="30.2824859" cy="30.6690141" rx="30.2824859" ry="30.6690141"></ellipse>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="img-4">
+            <g id="Page-1">
+                <g id="放大对号">
+                    <ellipse id="Oval-17" fill="#2FBC9C" cx="53.7853107" cy="75.528169" rx="53.7853107" ry="54.4718311"></ellipse>
+                    <path d="M43.0435875,90.4521504 L48.4195815,94.8055445 C50.0887323,96.1571962 52.5386989,95.8984264 53.8907054,94.2288376 L95.8142673,42.4575501 L87.7250126,35.9070007 L53.2979511,78.4208811 C51.9497978,80.0857117 49.4848267,80.3523612 47.8092511,78.9955068 L38.2997259,71.2948452 L38.2212965,71.3916975 L35.1456407,68.9010806 C33.4711311,67.5450894 31.0225643,67.7932484 29.6566669,69.4799911 L27.0669363,72.6780422 C25.7099693,74.3537569 25.9586644,76.8043753 27.6387455,78.1648782 L42.9519728,90.5652851 L43.0435875,90.4521504 L43.0435875,90.4521504 Z" id="Rectangle-52" fill="#FFFFFF"></path>
+                    <g id="放大镜" transform="translate(68.700564, 0.000000)">
+                        <g id="Oval-18">
+                            <g id="path-1-link" fill="#000000">
+                                <ellipse id="path-1" cx="30.2824859" cy="30.6690141" rx="30.2824859" ry="30.6690141"></ellipse>
+                            </g>
+                            <g id="Clipped">
+                                <mask id="mask-2" fill="white">
+                                    <use xlink:href="#path-1"></use>
+                                </mask>
+                                <g id="path-1"></g>
+                                <g id="path-1-link" mask="url(#mask-2)" stroke="#ECF0F1" stroke-width="8" fill="#2FBC9C">
+                                    <ellipse id="path-1" cx="30.2824859" cy="30.6690141" rx="30.2824859" ry="30.6690141"></ellipse>
+                                </g>
+                            </g>
+                        </g>
+                        <rect id="Rectangle-54" fill="#FFFFFF" transform="translate(24.118445, 37.922078) rotate(-51.000000) translate(-24.118445, -37.922078) " x="5.99210133" y="27.9211788" width="36.2526873" height="20.0017987"></rect>
+                        <g id="Oval-19-Clipped">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <g id="path-4"></g>
+                            <g id="Oval-19" mask="url(#mask-4)">
+                                <g id="Clipped">
+                                    <mask id="mask-6" fill="white">
+                                        <use xlink:href="#path-5"></use>
+                                    </mask>
+                                    <g id="path-4"></g>
+                                    <ellipse id="path-4" stroke="#ECF0F1" stroke-width="8" mask="url(#mask-6)" cx="30.2824859" cy="30.6690141" rx="30.2824859" ry="30.6690141"></ellipse>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
