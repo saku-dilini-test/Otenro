@@ -44,21 +44,19 @@ $scope.status = "";
 
   /** --/-- Dash-board Ctrl ------------------- **/
    .controller('DashCtrl', function($scope,$ionicLoading,
-     dashBoardService,meServerUrl,fileServerUrl,allApps,$state,$interval,$ionicSideMenuDelegate) {
+     dashBoardService,meServerUrl,fileServerUrl,allApps,$state,$interval,$ionicSideMenuDelegate, AuthService, $timeout) {
 
       $scope.menuToggle = function() {
          $ionicSideMenuDelegate.toggleLeft();
        };
 
-    // Set me Server URL
-    var meServerURL = meServerUrl.data.meServerUrl;
-    $scope.fileUrl = fileServerUrl.data.fileServerUrl;
+    $scope.fileUrl = (fileServerUrl)?fileServerUrl.data.fileServerUrl:"";
     $scope.date = new Date().getTime();
 
 
 
     // Set mobile application list
-    $scope.appList = allApps.data;
+     $scope.appList = (allApps)?allApps.data:[];
      console.log($scope.appList);
 
     // Every 10 s get update application list
@@ -69,7 +67,11 @@ $scope.status = "";
       if(currentState.name == 'app.dash'){
         dashBoardService.getAllApps().success(function (data) {
           $scope.appList = data;
-        })
+        }).error(function(error){
+          console.log(JSON.stringify(error, null, 2));
+          AuthService.logout();
+          $state.go('app.login');
+        });
       }
     },10000);
 
@@ -140,6 +142,12 @@ $scope.status = "";
         // Show In-App-Browser
         ref.show();
       });
+
+      ref.addEventListener('exit', function(event) {
+        $timeout(function(){
+          $ionicLoading.hide();
+        }, 1000);
+      });
     };
 
   })
@@ -174,6 +182,17 @@ $scope.status = "";
       });
     }
 
+
+    $scope.openTerms = function () {
+      console.log("Opening Terms...");
+      var ref =  cordova.ThemeableBrowser.open('https://www.otenro.com/terms.pdf', '_system');
+    }
+
+
+    $scope.openInstructions = function () {
+      console.log("Opening Instructions...");
+      var ref =  cordova.ThemeableBrowser.open('https://otenro.com/help', '_system');
+    }
 
   });
 

@@ -7,7 +7,6 @@
 mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $stateParams, $ionicPopup, constants,readMadeEasy,PaypalService,$log,$ionicNavBarDelegate,$location) {
 
    var path = $location.path();
-   console.log(path.indexOf('tab/cart'))
    if (path.indexOf('tab/cart') != -1){
      $ionicNavBarDelegate.showBackButton(false);
    }
@@ -22,7 +21,8 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
         $state.go('tab.menu');
    }
 
-    
+
+
             $http.get(constants.SERVER_URL+"/edit/getAllCountry")
                     .then(function(res){
                         $scope.countries = res.data;
@@ -53,11 +53,22 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
             // -- Config --
             $scope.userId = $rootScope.userId;
             $scope.appId = $rootScope.appId;
-            $scope.cartItems = $rootScope.cart.cartItems;
+    $scope.imageURL = constants.SERVER_URL
+        +"/templates/viewImages?userId="
+        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+
+    $scope.cartItems = $rootScope.cart.cartItems;
             // default : tax info hide 
             $scope.isShowTaxInfo = false;
 
-              $scope.buttonDisable = function(qty,totalQty){
+    $scope.buttonDisable = function(qty,totalQty,index){
+
+        // Parsing index, changed quantity and the state shows whether value changed
+        $rootScope.parseIndex = index;
+        $rootScope.parseEnable = true;
+        $rootScope.parseQty = qty;
+        $rootScope.cart.cartItems[index].totWeight = $rootScope.cart.cartItems[index].weight *$rootScope.parseQty;
+        //----------------------------------------------------------------------
                     if(qty > totalQty && totalQty > 1){
                           $scope.buyButtonDisable = true;
                     }else{
@@ -135,6 +146,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
 
             $scope.removeItem = function (index) {
                 $scope.cartItems.splice(index, 1);
+                $rootScope.parseIndex = $rootScope.parseIndex -1;
                 $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                 $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
             };
@@ -168,7 +180,7 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
 
     //get the currency
     $http.get(constants.SERVER_URL + '/templates/getCurrency?appId='+$scope.appId).success(function(data) {
-        $scope.currency = data.sign;
+           $scope.currency = data.sign;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });

@@ -25,6 +25,9 @@ module.exports = {
         braintreeEnable : {
             type: 'boolean'
         },
+        payHereEnable:{
+            type: 'boolean'
+        },
         stripeKey: {
             type: 'string'
         },
@@ -43,9 +46,13 @@ module.exports = {
         transactionKey : {
             type : 'string'
         },
+        payHereMerchantId :{
+            type : 'string'
+        },
         env : {
             type : 'string'
         }
+
      }
     };
 

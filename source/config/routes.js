@@ -271,6 +271,7 @@ module.exports.routes = {
      * GetAssistanceController
      */
     'POST /edit/sendGetAssistance': 'edit/getAssistance/GetAssistanceController.sendGetAssistance',
+    'POST /edit/getTemplateNameByID': 'edit/getAssistance/GetAssistanceController.getTemplateName',
 
     /***
      * Template Data
@@ -325,9 +326,12 @@ module.exports.routes = {
     'POST /templatesAuth/facebook': 'template/TemplateAuthController.facebookAuth',
     'POST /templatesAuth/google': 'template/TemplateAuthController.googleAuth',
 
+
+
     /***
      * Template Order Controller
      */
+    'POST /templatesOrder/savePendingOrder': 'template/TemplateOrderController.savePendingOrder',
     'POST /templatesOrder/saveOrder': 'template/TemplateOrderController.saveOrder',
     'POST /templatesOrder/getTaxInfoByCountry': 'template/TemplateOrderController.getTaxInfoByCountry',
     'GET /templates/getOrdersOfUser': 'template/TemplateController.getOrdersOfUser',
@@ -343,6 +347,12 @@ module.exports.routes = {
     'GET /mobile/allApps': 'mobileViewer/MobileController.allApps',
     'GET /mobile/meServerUrl': 'mobileViewer/MobileController.meServerUrl',
     'GET /mobile/fileServerUrl': 'mobileViewer/MobileController.fileServerUrl',
+    'GET /mobile/getPayHereForm': 'mobileViewer/MobileController.sendPayHereForm',
+    'GET /mobile/payHereSuccess': 'mobileViewer/MobileController.payHereSuccess',
+    'POST /mobile/notifyUrl': 'mobileViewer/MobileController.notifyUrl',
+    'GET /mobile/cancelUrl': 'mobileViewer/MobileController.cancelUrl',
+
+
 
     /***
      * Technical Support Controller
@@ -381,5 +391,7 @@ module.exports.routes = {
     'GET /edit/getListOfSalesAndPromotions': 'edit/salesAndPromotion/SalesAndPromotionController.getListOfSalesAndPromotions',
 
     'POST /edit/transcationLog': 'TranscationLog.saveSalesAndPromotion',
-    'POST /templates/makeStripePayment': 'template/StripeController.makePayment'
+    'POST /templates/makeStripePayment': 'template/StripeController.makePayment',
+
+
 };

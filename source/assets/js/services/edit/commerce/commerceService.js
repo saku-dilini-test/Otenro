@@ -265,11 +265,11 @@
             updateEmailSettings: function (data) {
                 return $http.post(SERVER_URL + 'edit/updateEmailSettings', data);
             },
-            updateHeaderFooterSettings: function (fileHeader,fileFooter, data) {
+            updateHeaderFooterSettings: function (fileHeader, data) {
                 return Upload.upload({
                     url: SERVER_URL + 'edit/updateHeaderFooterSettings',
                     fields: data,
-                    file: [fileHeader,fileFooter]
+                    file: [fileHeader]
                 });
             },
             sendTestEmail: function (data) {
@@ -402,7 +402,20 @@
                     '</md-content>' +
                     '</md-dialog>'
                 })
-            }
+            },
+            //Get  One order Details
+            showAnalyticsDialog: function() {
+                return $mdDialog.show({
+                    controller: 'analyticsCtrl',
+                    templateUrl: 'user/edit/analytics/analytics.html',
+                    clickOutsideToClose: true
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+
         };
     }
 })();

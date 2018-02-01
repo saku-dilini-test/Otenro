@@ -171,15 +171,17 @@
 }
 
 .website-area{
-     width: 40%;
+     width: 38%;
      padding: 10px 25px 0 15px;
      text-align: left;
 }
 
 .user-area{
-    padding: 17px 0 20px 8px;
+    padding: 10px 0;
 }
-
+.user-settings-button {
+    margin: 0 10px;
+}
 .user-area button{
     border: medium none;
 }

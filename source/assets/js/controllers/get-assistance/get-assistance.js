@@ -4,7 +4,7 @@
 
 (function() {
     'use strict';
-    angular.module("appEdit").controller("GetAssistanceCtrl", ['$scope','userProfileResource','appEditResource','$mdDialog','$rootScope','getAssistanceService', GetAssistanceCtrl]);
+    angular.module("appEdit").controller("GetAssistanceCtrl", ['$scope','userProfileResource','appEditResource','$mdDialog','$rootScope','getAssistanceService','welcomeTemplatesResource', GetAssistanceCtrl]);
 
 
     function GetAssistanceCtrl($scope,userProfileResource,appEditResource,$mdDialog,$rootScope,getAssistanceService) {
@@ -26,48 +26,60 @@
                 }else{
                     $scope.appType = 'Article';
                 }
+
+
+                getAssistanceService.getTemplatesNameByID({id:$scope.appData.templateId}).success(function(data){
+                    $scope.templateName = data;
+                });
             }).error(function(err) {
 
         });
 
+
+
         //Send an Email
-        $scope.request = function(app,appType,user) {
-            $scope.data = {
-                appName: app.appName,
-                appType: appType,
-                userName: user.firstName +" "+ user.lastName,
-                userEmail: user.email
-            }
+        $scope.request = function(templateName,appType,user,number) {
+            if(number == undefined){
+                console.log("Number is not defined")
+            }else{
+                $scope.data = {
+                    appName: templateName,
+                    appType: appType,
+                    userName: user.firstName +" "+ user.lastName,
+                    userEmail: user.email,
+                    userNumber: number
+                }
 
-            getAssistanceService.sendGetAssistance($scope.data).success(function () {
-                $mdDialog.hide();
+                getAssistanceService.sendGetAssistance($scope.data).success(function () {
+                    $mdDialog.hide();
 
-                $mdDialog.show({
-                    controllerAs: 'dialogCtrl',
-                    controller: function($mdDialog){
-                      this.confirm = function click(){
-                        $mdDialog.hide();
-                      }
-                    },
-                    template:`<md-dialog style="width:500px" aria-label="Thank you">
-                                <md-content >
-                                    <div class="md-dialog-header">
-                                        <h1>Thank you </h1>
-                                    </div>
-                                    <br>
-                                    <div class="md-dialog-header">
-                                         <lable>Thank you Shashan we will get back to you soon...</lable>
-                                    </div>
-                                    <br>
-                                    <div class="md-dialog-buttons">
-                                        <div class="inner-section">
-                                             <md-button class="me-default-button" ng-click="dialogCtrl.confirm()">ok</md-button>
-                                        </div>
-                                    </div>
-                                </md-content>
-                             </md-dialog>`
+                    $mdDialog.show({
+                        controllerAs: 'dialogCtrl',
+                        controller: function($mdDialog){
+                          this.confirm = function click(){
+                            $mdDialog.hide();
+                          }
+                        },
+                            template:'<md-dialog style="width:500px" aria-label="Thank you">'+
+                                    '<md-content >'+
+                                        '<div class="md-dialog-header">'+
+                                            '<h1>Thank you </h1>'+
+                                        '</div>'+
+                                        '<br>'+
+                                        '<div class="md-dialog-header">'+
+                                             '<lable>Thank you we will get back to you soon...</lable>'+
+                                        '</div>'+
+                                        '<br>'+
+                                        '<div class="md-dialog-buttons">'+
+                                            '<div class="inner-section">'+
+                                                 '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">ok</md-button>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</md-content>'+
+                                 '</md-dialog>'
+                    })
                 })
-            })
+            }
         }
 
         // --- cancel dialog -----

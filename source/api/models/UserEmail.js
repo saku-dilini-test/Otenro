@@ -23,13 +23,13 @@ module.exports = {
             type: 'string'
         },
         orderConfirmedEmail:{
-            type: 'string'
+            type: 'json'
         },
         orderFulfilledEmail:{
-            type: 'string'
+            type: 'json'
         },
         orderRefundEmail:{
-            type: 'string'
+            type: 'json'
         },
         header:{
             type: 'string'
@@ -54,6 +54,15 @@ module.exports = {
         },
         sslEnabled:{
             type: 'boolean'
+        },
+        orderConfirmedEmailImage :{
+            type: 'string'
+        },
+        orderFulfilledEmailImage:{
+            type: 'string'
+        },
+        orderRefundedEmailImage:{
+            type: 'string'
         }
     }
 };

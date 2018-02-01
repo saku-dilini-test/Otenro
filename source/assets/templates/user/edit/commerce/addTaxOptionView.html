@@ -34,6 +34,8 @@
                     <div class="col-md-6 country-list">
                         <label>Country List</label>
                         <br>
+                        <input type="text" class="input-shadow-border"  ng-model="searchCountry">
+                        <br>
                         <md-checkbox aria-label="Select All"
                                      ng-checked="isChecked()"
                                      md-indeterminate="isIndeterminate()"
@@ -41,7 +43,7 @@
                             <span ng-if="isChecked()">Un-</span>Select All
                         </md-checkbox>
 
-                        <div ng-repeat="oneCountry in countryList | orderBy:'countryName'"
+                        <div ng-repeat="oneCountry in countryList | orderBy:'countryName'  | filter:searchCountry"
                              ng-model="country" required>
                             <md-checkbox ng-checked="exists(oneCountry, selected)"
                                          ng-click="toggle(oneCountry, selected)"
@@ -50,7 +52,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 country-list">
-                        <label>Restricted Countries</label>
+                        <label>Selected Countries</label>
                         <div ng-if ="IsSingleSelection === false" class="md-label" ng-repeat="country in selected">
                             <!--<span>{{country.countryName}}</span>-->
                             <md-checkbox ng-checked="exists(country, selected)"

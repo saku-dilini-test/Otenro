@@ -62,11 +62,10 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.menuName = $stateParams.categoryName;
 
-    $scope.lockBuyButton = true;
+    $scope.lockBuyButton = false;
     $scope.changeVariant = function(variant){
       $scope.selection1 =[];
       $scope.selectedVariant1  =variant.vType;
-      $scope.selectedVariant.buyQuantity = '';
 
       $scope.lockBuyButton = true;
 
@@ -91,7 +90,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
       $scope.selection2 =[];
       if(variant){
             $scope.selectedVariant2  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
       }
       $scope.lockBuyButton = true;
@@ -119,7 +117,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
       $scope.selection3 =[];
       if(variant){
             $scope.selectedVariant3  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
       }
       $scope.lockBuyButton = true;
@@ -145,7 +142,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.changeVariant4 = function(variant){
         if(variant){
             $scope.selectedVariant4  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
         }
 
@@ -165,6 +161,16 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     // Check buyQty input value.
     // If buyQty value is less than or equal Selected-Variant-Qty, Buy Button Enable
     $scope.changeBuyQuantity = function (buyQty) {
+        if($scope.foodInfo.selection.length == 1 && $scope.selectedVariant1 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.foodInfo.selection.length == 2 && $scope.selectedVariant2 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.foodInfo.selection.length == 3 && $scope.selectedVariant3 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.foodInfo.selection.length == 4 && $scope.selectedVariant4 == undefined){
+            $scope.lockBuyButton = true;
+        }
+
 
         // default : Buy button set as Disable
         $scope.isBuyBtnDisable = true;
@@ -188,10 +194,17 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
         // Products Add to cart
       $scope.addToCart = function() {
-        if($scope.selectedVariant.buyQuantity == null){
+          if($scope.foodInfo.selection.length == 1 && $scope.selectedVariant1 == undefined){
+              $scope.lockBuyButton = true;
+          }else if($scope.foodInfo.selection.length == 2 && $scope.selectedVariant2 == undefined){
+              $scope.lockBuyButton = true;
+          }else if($scope.foodInfo.selection.length == 3 && $scope.selectedVariant3 == undefined){
+              $scope.lockBuyButton = true;
+          }else if($scope.foodInfo.selection.length == 4 && $scope.selectedVariant4 == undefined){
+              $scope.lockBuyButton = true;
+          }else if($scope.selectedVariant.buyQuantity == null){
             $ionicPopup.alert({
                 title: 'Please enter a quantity',
-                template: 'Warning!!!',
                 cssClass: 'ionicPopUp',
                 buttons:[
                     {text:'OK',
@@ -219,6 +232,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                                 id: $scope.foodInfo.id,
                                 name: $scope.foodInfo.name,
                                 qty: $scope.selectedVariant.buyQuantity,
+                                variant: $scope.selectedVariant.selection,
                                 sku: $scope.selectedVariant.sku,
                                 totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                                 price: $scope.selectedVariant.price,
@@ -242,6 +256,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                     id: $scope.foodInfo.id,
                     name: $scope.foodInfo.name,
                     qty: $scope.selectedVariant.buyQuantity,
+                    variant: $scope.selectedVariant.selection,
                     sku: $scope.selectedVariant.sku,
                     totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                     price: $scope.selectedVariant.price,

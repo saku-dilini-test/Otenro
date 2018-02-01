@@ -12,6 +12,10 @@
         $scope.myImage='';
         $scope.myCroppedImage='';
         $scope.picFile='';
+        $scope.buttonName = "Select Image";
+        $scope.tmpImage = [];
+        $scope.path = ME_APP_SERVER+"temp/";
+
 
         $scope.cropImage = function () {
             var handleFileSelect=function(evt) {
@@ -24,9 +28,27 @@
                     });
                 };
                 reader.readAsDataURL(file);
+                $scope.buttonName = "Crop Image";
             };
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         }
+
+        $scope.addImage = function(img){
+            if(angular.element('#fileInput').val() == ''){
+                toastr.error('Please choose an image to upload', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else{
+                $scope.tmpImage[0] = img;
+                $scope.myImage = null;
+                toastr.success('Image has been uploaded successfully', 'message', {
+                    closeButton: true
+                });
+            }
+
+            $scope.buttonName = "Browse Image";
+        };
 
 
         $scope.loadFonts = function() {
@@ -58,6 +80,7 @@
 
 
         stylesService.getAppSettings({'appId':appId}).success(function (data) {
+
             var appSettings = data.appSettings;
 
             $scope.appUpdateLocation = data.appUpdateLocationSetting;
@@ -123,6 +146,8 @@
                 "value": appSettings.buttonBorderRadius,
                 "values": $scope.buttonBorderRadiusList
             };
+
+            $scope.tmpImage[0] = $scope.path+data.userId+"/templates/"+data.id+"/img/background.jpg";
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
                 closeButton: true
@@ -405,6 +430,7 @@
                         // var tempUrl = mySharedService.url;
                         // mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
 
+
                     }).error(function(err) {
                         toastr.error( type , 'Update failed ', {
                             closeButton: true
@@ -431,5 +457,7 @@
         $scope.hide = function () {
             $mdDialog.hide();
         };
+
+
     }
 })();

@@ -23,7 +23,11 @@
 
             sendGetAssistance: function(data) {
                 return $http.post(SERVER_URL + 'edit/sendGetAssistance', data);
-            }
+            },
+
+            getTemplatesNameByID:function(data){
+                return $http.post(SERVER_URL + 'edit/getTemplateNameByID',data);
+            },
         };
     }
 })();

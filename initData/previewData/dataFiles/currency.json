@@ -50,7 +50,7 @@
 {"_id":{"$oid":"589c475d3685292e2266708c"},"sign":"₩","currency":"South Korean Won","symbol":"krw","createdAt":{"$date":"2017-02-09T10:41:33.113Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.113Z"}}
 {"_id":{"$oid":"589c475d3685292e2266708d"},"sign":"KZT","currency":"Kazakhstani Tenge","symbol":"kzt","createdAt":{"$date":"2017-02-09T10:41:33.113Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.113Z"}}
 {"_id":{"$oid":"589c475d3685292e2266708e"},"sign":"LB£","currency":"Lebanese Pound","symbol":"lbp","createdAt":{"$date":"2017-02-09T10:41:33.113Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.113Z"}}
-{"_id":{"$oid":"589c475d3685292e2266708f"},"sign":"SLRs","currency":"Sri Lankan Rupee","symbol":"lkr","createdAt":{"$date":"2017-02-09T10:41:33.114Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.114Z"}}
+{"_id":{"$oid":"589c475d3685292e2266708f"},"sign":"LKR","currency":"Sri Lankan Rupee","symbol":"lkr","createdAt":{"$date":"2017-02-09T10:41:33.114Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.114Z"}}
 {"_id":{"$oid":"589c475d3685292e22667090"},"sign":"MAD","currency":"Moroccan Dirham","symbol":"mad","createdAt":{"$date":"2017-02-09T10:41:33.114Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.114Z"}}
 {"_id":{"$oid":"589c475d3685292e22667091"},"sign":"MDL","currency":"Moldovan Leu","symbol":"mdl","createdAt":{"$date":"2017-02-09T10:41:33.115Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.115Z"}}
 {"_id":{"$oid":"589c475d3685292e22667092"},"sign":"MGA","currency":"Malagasy Ariary","symbol":"mga","createdAt":{"$date":"2017-02-09T10:41:33.115Z"},"updatedAt":{"$date":"2017-02-09T10:41:33.115Z"}}

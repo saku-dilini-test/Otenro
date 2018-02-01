@@ -18,24 +18,35 @@
                     <div class="md-dialog-main">
                        <div class="file-upload-wrapper clearfix">
                            <div class="cropArea">
-                               <img-crop image="myImage" area-type="rectangle" result-image-size='{w: 770,h: 1325}' aspect-ratio="0.6" result-image="picFile"
-                               >
-                               </img-crop>
+                               <img-crop image="myImage" area-type="rectangle" result-image-size='{w: 770,h: 1325}' aspect-ratio="0.6" result-image="picFile"></img-crop>
                            </div>
                            <div class="inputField btn-material img-up">
-                               <span>Select Image</span>
-                               <div class="img-up1">
-                                   <input  type="file" ng-click = "cropImage()" id="fileInput" />
-                               </div>
-                           </div>
+                                   <span>{{buttonName}}</span>
+                                   <div class="img-up1" ng-if="!picFile">
+                                       <input  type="file" value="file" ng-click = "cropImage()" id="fileInput" />
+                                   </div>
+                                   <div  ng-if="picFile" class="img-up1" ng-click="addImage(picFile)"></div>
+                            </div>
                         </div>
 
-                        <div class="uploaded-section pull-left clearfix">
-                            <div class="uploaded-new-image">
-                                <br>
+                        <div class="uploaded-section image-upload clearfix" style="width: 35%;">
+                            <div class="uploaded-new-image2">
                                 <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
                                      height="150" style="display:none" />
                                 <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
+                            </div>
+                            <div class="uploaded-old-images">
+                                <p>Uploaded Product Images</p>
+                                <div class="old-images clearfix">
+                                    <div class="old-image">
+                                        <input type="button" ng-click="deleteImg(0)" value='delete'
+                                               class="image-delete-button"/>
+                                        <img ng-click="setImage()" ng-if="tmpImage[0] == null"
+                                             src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                        <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
+                                             width="80" height="80"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

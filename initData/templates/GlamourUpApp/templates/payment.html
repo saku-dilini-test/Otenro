@@ -25,6 +25,9 @@
                 <ion-checkbox ng-show="authorizeNet"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'authorizeNet'">
                     <h3>AuthorizeNet</h3>
                 </ion-checkbox >
+                <ion-checkbox ng-change="openAppBrowser()" ng-show="payHere"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'payHere'">
+                    <h3>PayHere</h3>
+                </ion-checkbox >
 
             </form>
 

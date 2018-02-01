@@ -270,10 +270,10 @@
                 </md-tab-body>
             </md-tab>
             <md-tab ng-disabled="shippingOptionParams.countrySelectionLocked">
-                <md-tab-label>country restrictions</md-tab-label>
+                <md-tab-label>Country Selections</md-tab-label>
                 <md-tab-body>
                     <div class="md-dialog-header">
-                        <h1>country restrictions</h1>
+                        <h1>Country Selections</h1>
                     </div>
                     <div class="md-dialog-main clearfix">
                         <form class="clearfix" novalidate>
@@ -309,6 +309,8 @@
                                 <div class="col-md-6 country-list">
                                     <label>Country List</label>
                                     <br>
+                                    <input type="text" class="input-shadow-border"  ng-model="searchCountry">
+                                    <br>
                                     <md-checkbox aria-label="Select All"
                                                  ng-checked="isChecked()"
                                                  md-indeterminate="isIndeterminate()"
@@ -316,7 +318,7 @@
                                         <span ng-if="isChecked()">Un-</span>Select All
                                     </md-checkbox>
 
-                                    <div ng-repeat="oneCountry in countryList | orderBy:'countryName'"
+                                    <div ng-repeat="oneCountry in countryList | orderBy:'countryName' | filter:searchCountry"
                                          ng-model="country" required>
                                         <md-checkbox ng-checked="exists(oneCountry, selected)"
                                                      ng-click="toggle(oneCountry, selected)"
@@ -325,7 +327,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 country-list">
-                                    <label>Restricted Countries</label>
+                                    <label>Selected Countries</label>
                                         <div ng-if ="IsSingleSelection === false" class="md-label" ng-repeat="country in selected">
                                             <!--<span>{{country.countryName}}</span>-->
                                             <md-checkbox ng-checked="exists(country, selected)"

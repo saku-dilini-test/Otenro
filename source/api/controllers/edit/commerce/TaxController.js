@@ -79,9 +79,11 @@ module.exports = {
     },
 
     getAllCountry : function(req,res){
-        Country.find().exec(function(err, result) {
+    var sort = { countryName: 1 };
+        Country.find().sort(sort).exec(function(err, result) {
             if (err) return res.send(err);
             return res.send(result);
+            console.log(result);
         }); 
         
     }

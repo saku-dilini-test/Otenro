@@ -7,11 +7,11 @@
       <div class="bar bar-header">
         <ion-nav-back-button class="icon ion-ios-arrow-back"></ion-nav-back-button>
           <ion-nav-buttons side="left">
-            <button class="button icon ion-navicon" menu-toggle="left" ng-if="showMenu"></button>
+            <button class="button icon ion-navicon" menu-toggle="left"></button>
           </ion-nav-buttons>
           <ion-nav-buttons side="right">
             <button ui-sref="app.cart" class="button icon ion-ios-cart"></button>
-            <span class="badge2">{{parentobj.cartSize}}</span>
+            <span class="badge2">{{$root.parentobj.cartSize}}</span>
           </ion-nav-buttons>
       </div>
     </ion-nav-bar>

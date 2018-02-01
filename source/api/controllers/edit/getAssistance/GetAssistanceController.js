@@ -16,6 +16,13 @@ module.exports = {
         {
             res.send(msg);
         });
+    },
+
+    getTemplateName : function(req,res){
+        Template.find({"previewId":req.body.id}).exec(function(err, template) {
+            if (err) res.send(err);
+            res.send(template[0].templateViewName);
+        });
     }
 
 
