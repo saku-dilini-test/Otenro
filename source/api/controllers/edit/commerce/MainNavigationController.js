@@ -122,16 +122,8 @@ module.exports = {
     },
 
     addNewCategory : function (req,res) {
+        var dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
 
-        var isNew = req.body.isNew;
-
-        var dePath;
-        if(isNew == 'true' || isNew == true){
-            dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/secondNavi/';
-
-        }else {
-            dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/secondNavi/';
-        }
         req.file('file').upload({
             dirname: require('path').resolve(dePath)
         },function (err, uploadedFiles) {
@@ -146,7 +138,7 @@ module.exports = {
                 articleCategoryattribute.imageUrl = newFileName;
             ArticleCategory.create(articleCategoryattribute).exec(function (err, articleCategory) {
                 if (err){
-                    res.send(err);
+                    res.send(err)
                 }else{
                     res.json(articleCategory);
                 }

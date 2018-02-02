@@ -465,26 +465,27 @@ this.years.push(date++);
         } else {
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
-          if (!this.finalDetails.pickupCost) {
+          if (!this.finalDetails.pickupCost || this.finalDetails.pickupCost == 0) {
             this.chkPickupCost = 0;
-          }else{
+          } else {
             this.chkPickupCost = this.finalDetails.pickupCost;
           }
-          console.log("this.chkShippingCost  : " + this.chkShippingCost +"chkPickupCost" +this.chkPickupCost );
-          console.log("total"+total)
+          console.log("this.chkShippingCost  : " + this.chkShippingCost + "chkPickupCost" + this.chkPickupCost);
+          console.log("total: " + total)
           if (tax > 0) {
             total = total + tax;
-            if(this.chkPickupCost == 0){
-            this.totalPrice = total;
-            }else{
+            if (this.chkPickupCost == 0) {
+              this.totalPrice = total + this.chkShippingCost;
+            } else {
               this.totalPrice = total + parseInt(this.chkPickupCost);
             }
           } else {
-            if(this.chkPickupCost == 0){
-              this.totalPrice = total ;
-              }else{
-                this.totalPrice = total + parseInt(this.chkPickupCost);
-              }          }
+            if (this.chkPickupCost == 0) {
+              this.totalPrice = total + this.chkShippingCost;
+            } else {
+              this.totalPrice = total + parseInt(this.chkPickupCost);
+            }
+          }
         }
 
       });
