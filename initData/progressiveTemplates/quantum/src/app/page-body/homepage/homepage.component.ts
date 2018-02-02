@@ -8,6 +8,7 @@ import { fadeInAnimation } from '../../animations/fade-in.animation';
 import { CategoriesService } from '../../services/categories/categories.service'
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { forEach } from '@angular/router/src/utils/collection';
+import { ProductsService } from '../../services/products/products.service';
 
 @Component({
   selector: 'app-homepage',
@@ -24,12 +25,18 @@ export class HomepageComponent implements OnInit {
   private categoryId;
   private categoryName;
   private imageUrl: any;
-
+  private randomProducts: any;
   private results: {};
-
-  constructor(private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService) { }
+  private randomIndex;
+  private imageUrlProd;
+  private testArr = [];
+  constructor(private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService) { }
 
   ngOnInit() {
+
+    this.imageUrlProd = SERVER_URL + "/templates/viewWebImages?userId="
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+
 
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
@@ -47,6 +54,40 @@ export class HomepageComponent implements OnInit {
         console.log('Error retrieving categories');
       });
 
+
+    let min; let max;
+
+    this.productService.getAllProducts().subscribe(data => {
+      this.randomProducts = data;
+      console.log("data : " + JSON.stringify(this.randomProducts[0]))
+      min = 0
+      max = Object.keys(this.randomProducts).length;
+      console.log("max : " + max)
+
+
+      // console.log("this.randomIndex : " + this.randomIndex)
+      // [Math.floor(Math.random()*letters.length)]
+      var test ;
+
+      while(test){
+
+      }
+      for (let i = 0; i < 2; i++) {
+        this.randomIndex = Math.floor(Math.random() * max);
+        console.log(this.randomIndex)
+        this.testArr.push(this.randomProducts[this.randomIndex])
+
+      }
+
+      console.log(this.testArr);
+    }, err => {
+      console.log('Error retrieving all products');
+    })
+
+
+
+
+    console.log()
 
   }
 
