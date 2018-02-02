@@ -16,6 +16,7 @@ var DAILY = 1;
 var WEEKLY = 2;
 var MONTHLY = 3;
 var YEARLY = 4;
+var dateFormat = require('dateformat');
 
 var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
@@ -284,14 +285,15 @@ module.exports = {
 
             }
 
-            var file = config.ME_SERVER +new Date()+'.csv';
+
+            var file = config.ME_SERVER +type+"-"+dateFormat(req.body.fromDate, "yyyy-mm-dd")+"-"+dateFormat(req.body.toDate, "yyyy-mm-dd")+'.csv';
 
             fs.writeFile(file, reportData, function(err) {
                 if (!err) {
 
                     var filename = path.basename(file);
                     var mimetype = mime.lookup(file);
-                    res.setHeader('x-filename', 'attachment; filename=' + filename);
+                    res.setHeader('x-filename', filename);
                     res.setHeader('Content-disposition', 'attachment; filename=' + filename);
                     res.setHeader('Content-type', mimetype);
                     var filestream = fs.createReadStream(file);
