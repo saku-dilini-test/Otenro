@@ -446,35 +446,8 @@
                 </obl-menu-group>
 
 
-                <obl-menu-group label="Analytics" icon="fa-pencil-square-o">
-                    <obl-menu-group label="Sales" icon="fa-pencil-square-o" class="md-sub-menu">
-                        <obl-menu-button label="Sales" icon="fa fa-file-image-o" click-title="sales"></obl-menu-button>
-                    </obl-menu-group>
-                    <obl-menu-group label="Traffic" icon="fa-pencil-square-o" class="md-sub-menu">
-                        <obl-menu-button label="Traffic" icon="fa fa-file-image-o" click-title="traffic"></obl-menu-button>
-                    </obl-menu-group>
-                    <obl-menu-group label="Mobile" icon="fa-pencil-square-o" class="md-sub-menu">
-                        <obl-menu-button label="Mobile" icon="fa fa-file-image-o" click-title="mobile"></obl-menu-button>
-                    </obl-menu-group>
-                    <obl-menu-group label="App" icon="fa-pencil-square-o" class="md-sub-menu">
-                        <obl-menu-button label="App" icon="fa fa-file-image-o" click-title="app"></obl-menu-button>
-                    </obl-menu-group>
-                    <obl-menu-group label="Popular Content" icon="fa-pencil-square-o" class="md-sub-menu">
-                        <obl-menu-button label="Popular Content" icon="fa fa-file-image-o" click-title="popularContent"></obl-menu-button>
-                    </obl-menu-group>
-                    <obl-menu-group label="Search Engine Queries" icon="fa-pencil-square-o" class="md-sub-menu">
-                        <obl-menu-button label="Search Engine Queries" icon="fa fa-file-image-o" click-title="searchEngineQueries"></obl-menu-button>
-                    </obl-menu-group>
-                    <obl-menu-group label="Site Search" icon="fa-pencil-square-o" class="md-sub-menu">
-                        <obl-menu-button label="Site Search" icon="fa fa-file-image-o" click-title="siteSearch"></obl-menu-button>
-                    </obl-menu-group>
-                    <obl-menu-group label="World Map" icon="fa-pencil-square-o" class="md-sub-menu">
-                        <obl-menu-button label="World Map" icon="fa fa-file-image-o" click-title="worldMap"></obl-menu-button>
-                    </obl-menu-group>
-                    <obl-menu-group label="Analytics Integration" icon="fa-pencil-square-o" class="md-sub-menu">
-                        <obl-menu-button label="Analytics Integration" icon="fa fa-file-image-o" click-title="analyticsIntegration"></obl-menu-button>
-                    </obl-menu-group>
-                </obl-menu-group>
+                <obl-menu-button label="Analytics" icon="fa-pencil-square-o"  click-title="analytics">  </obl-menu-button>
+
                 <obl-menu-group label="Publish" icon="fa-pencil-square-o">
                     <!--<obl-menu-group label="Website" icon="fa-pencil-square-o" class="md-sub-menu">-->
                         <!--<obl-menu-button label="Website" icon="fa fa-file-image-o" click-title="website"></obl-menu-button>-->
@@ -530,7 +503,7 @@
                     </li>
                 </a>
 
-                <obl-menu-button label="Free App Design" icon="fa-cogs" class="get-assistance" click-title="get-assistance"></obl-menu-button>
+                <obl-menu-button label="Design my APP" icon="fa-cogs" class="get-assistance" click-title="get-assistance"></obl-menu-button>
 
             </obl-menu>
         </obl-framework>
@@ -563,8 +536,8 @@
                 <!--</div>-->
             </div>
             <div class="user-area">
-                <button class="user-settings-button" ng-click="downloadMobileViewer()" type="button">
-                    <img src="images/download-mobile.PNG" alt="download mobile viewer" />
+                <button class="user-settings-button" ng-click="downloadMobileViewer()" type="button" style="margin: 0 10px;">
+                    <img src="images/download-mobile.PNG" alt="download mobile viewer" width="23"/>
                 </button>
                 <button class="user-settings-button" ng-click="profileView()" type="button">
                     <img src="images/user-icon.svg" alt="User Logo" />

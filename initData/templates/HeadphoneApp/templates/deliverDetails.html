@@ -68,8 +68,8 @@
                 </div>
 
                 <div class="center col">
-                    <button class="button button-raised  made-easy-button-setting" ng-click="details = ''">Clear</button>
-                    <button class="button button-raised  made-easy-button-setting" ng-disabled="!details.location || delivery.$invalid" ng-click="deliver(details)" >Next</button>
+                    <button class="button button-raised button-small  made-easy-button-setting"  type="reset"  ng-click="details.name='';details.streetNumber='';details.streetName='';details.city='';details.country='';details.zip='';details.phone=''">Clear</button>
+                    <button class="button button-raised button-small  made-easy-button-setting" ng-disabled="!details.location || delivery.$invalid" ng-click="deliver(details)" >Next</button>
                 </div>
             </form>
 

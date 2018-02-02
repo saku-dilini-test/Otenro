@@ -60,6 +60,7 @@
                         im[0] = $scope.picFile;
                         $scope.tmpImage = im;
                         $scope.mainImg = img;
+                        $scope.myImage = null;
                         toastr.success('Image has been uploaded successfully', 'message', {
                            closeButton: true
                         });
@@ -672,6 +673,10 @@
             if($scope.data == true){
                 $mdDialog.hide();
                 return commerceService.showAddProductsDialog(initialData.prodItem,true, null,'0', false)
+            }else if($rootScope.hasCurrentProduct){
+                $rootScope.hasCurrentProduct = false;
+                $mdDialog.hide();
+                return commerceService.showAddProductsDialog($rootScope.currentProduct);
             }else{
                 $mdDialog.hide();
                 mainMenuService.showMainMenuDialog();
@@ -688,6 +693,9 @@
                             .success(function (templateData) {
                                 if(templateData.secondNaviAspectRatio){
                                     $scope.secondNaviAspectRatio = parseFloat(templateData.secondNaviAspectRatio);
+                                }
+                                if(templateData.iSizeSecond){
+                                    $scope.iSizeSecond={w:templateData.iSizeSecond.w,h:templateData.iSizeSecond.h};
                                 }
                             }).error(function (err) {
                             toastr.error(err.message, 'Warning', {

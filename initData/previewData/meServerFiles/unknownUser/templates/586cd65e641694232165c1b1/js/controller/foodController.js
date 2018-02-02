@@ -5,7 +5,7 @@
 mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants,$log) {
 
     $scope.$emit('hideMenu',{});
-
+    $rootScope.parseWeight;
     $scope.buyQuantity=0;
     $rootScope.timestamp = new Date().getTime();
     $scope.userId=$rootScope.userId;
@@ -23,13 +23,20 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
             }
         }
 
-    $scope.getRandomColor = function () {
-            var letters = '0123456789ABCDEF';
-            var color = 'background-color:#';
-            for (var i = 0; i < 6; i++ ) {
-                color += letters[Math.floor(Math.random() * 16)];
+     var check ='background-color:#';
+     var color = 'background-color:#';
+     $scope.getRandomColor = function () {
+        var letters = ["CFBDAC", "D0DDDE", "EEEEEE", "FFDE8B", "DEBBAF", "C6D3E4"];
+
+        while(true){
+            if(check !== color){
+                check = color;
+                return color;
+            }else {
+                color = 'background-color:#';
+                color += letters[Math.floor(Math.random()*letters.length)];
             }
-            return color;
+        }
     };
 
     $scope.color = [];
@@ -80,11 +87,10 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
     $scope.menuName = $stateParams.categoryName;
 
-    $scope.lockBuyButton = true;
+    $scope.lockBuyButton = false;
     $scope.changeVariant = function(variant){
       $scope.selection1 =[];
       $scope.selectedVariant1  =variant.vType;
-      $scope.selectedVariant.buyQuantity = '';
 
       $scope.lockBuyButton = true;
 
@@ -109,7 +115,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
       $scope.selection2 =[];
       if(variant){
             $scope.selectedVariant2  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
       }
       $scope.lockBuyButton = true;
@@ -137,7 +142,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
       $scope.selection3 =[];
       if(variant){
             $scope.selectedVariant3  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
       }
       $scope.lockBuyButton = true;
@@ -163,7 +167,6 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     $scope.changeVariant4 = function(variant){
         if(variant){
             $scope.selectedVariant4  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
         }
 
@@ -183,6 +186,16 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     // Check buyQty input value.
     // If buyQty value is less than or equal Selected-Variant-Qty, Buy Button Enable
     $scope.changeBuyQuantity = function (buyQty) {
+        if($scope.foodInfo.selection.length == 1 && $scope.selectedVariant1 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.foodInfo.selection.length == 2 && $scope.selectedVariant2 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.foodInfo.selection.length == 3 && $scope.selectedVariant3 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.foodInfo.selection.length == 4 && $scope.selectedVariant4 == undefined){
+            $scope.lockBuyButton = true;
+        }
+
 
         // default : Buy button set as Disable
         $scope.isBuyBtnDisable = true;
@@ -206,7 +219,15 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
 
         // Products Add to cart
       $scope.addToCart = function() {
-        if($scope.selectedVariant.buyQuantity == null){
+          if($scope.foodInfo.selection.length == 1 && $scope.selectedVariant1 == undefined){
+              $scope.lockBuyButton = true;
+          }else if($scope.foodInfo.selection.length == 2 && $scope.selectedVariant2 == undefined){
+              $scope.lockBuyButton = true;
+          }else if($scope.foodInfo.selection.length == 3 && $scope.selectedVariant3 == undefined){
+              $scope.lockBuyButton = true;
+          }else if($scope.foodInfo.selection.length == 4 && $scope.selectedVariant4 == undefined){
+              $scope.lockBuyButton = true;
+          }else if($scope.selectedVariant.buyQuantity == null){
             $ionicPopup.alert({
                 title: 'Warning !!!',
                 subTitle: 'Please enter a quantity',
@@ -221,25 +242,33 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                     var i=0;
                     while(i < $rootScope.cart.cartItems.length){
                         if($scope.foodInfo.id == $rootScope.cart.cartItems[i].id && $scope.selectedVariant.sku == $rootScope.cart.cartItems[i].sku){
+                            $rootScope.position2 = false;
+                            //increasing weight when we add same product again.
+                            $rootScope.cart.cartItems[i].totWeight += $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartItems[i].qty += $scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                            $rootScope.parseWeight = $scope.selectedVariant.weight;
                             $state.go('app.category');
                             break;
                         }
                         else if(i == ($rootScope.cart.cartItems.length -1)){
+                            $rootScope.position2 = true;
                             $rootScope.cart.cartItems.push({
                                 id: $scope.foodInfo.id,
                                 name: $scope.foodInfo.name,
                                 qty: $scope.selectedVariant.buyQuantity,
+                                variant: $scope.selectedVariant.selection,
                                 sku: $scope.selectedVariant.sku,
                                 totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                                 price: $scope.selectedVariant.price,
                                 total : $scope.selectedVariant.price,
                                 imgURL : $stateParams.item.tempImageArray,
-                                totalQty: $scope.selectedVariant.quantity
+                                totalQty: $scope.selectedVariant.quantity,
+                                weight: $scope.selectedVariant.weight  //(new) added weight of each product
 
                             });
+                            // $rootScope.cart.cartItems[i].totWeight = $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity + $scope.insideWeight;
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
                             $state.go('app.category');
@@ -253,15 +282,19 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
                     id: $scope.foodInfo.id,
                     name: $scope.foodInfo.name,
                     qty: $scope.selectedVariant.buyQuantity,
+                    variant: $scope.selectedVariant.selection,
                     sku: $scope.selectedVariant.sku,
                     totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                     price: $scope.selectedVariant.price,
                     total : $scope.selectedVariant.price,
                     imgURL : $stateParams.item.tempImageArray,
-                    totalQty: $scope.selectedVariant.quantity
+                    totalQty: $scope.selectedVariant.quantity,
+                    weight: $scope.selectedVariant.weight //(new) added weight of each product
+
                 });
                 $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                 $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                $rootScope.parseWeight = $scope.selectedVariant.weight;
                 $state.go('app.category');
             }
         }

@@ -33,8 +33,7 @@
                            class="item-buy"
                            placeholder="Quantity"
                            ng-model="selectedVariant.buyQuantity"
-                           ng-change="changeBuyQuantity(selectedVariant.buyQuantity)"
-                           ng-hide="lockBuyButton">
+                           ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">
 
                 </div>
             </label>
@@ -51,7 +50,10 @@
                         ng-click="selectedVariant.buyQuantity = ''">
                 </select>
             </label>
-            <label class="col item item-input item-select" ng-if="foodInfo.selection[1]">
+            <div class="item-error-message text-right"  ng-if="lockBuyButton && foodInfo.selection[0].name && !selectedVariant1">
+                Please select a {{foodInfo.selection[0].name}}.
+            </div>
+            <label class="col item item-input item-select" ng-if="foodInfo.selection[1] && selectedVariant1">
                 <div class="input-label">
                     {{foodInfo.selection[1].name}}
                 </div>
@@ -61,7 +63,10 @@
                         ng-click="selectedVariant.buyQuantity = ''">
                 </select>
             </label>
-            <label class="col item item-input item-select" ng-if="foodInfo.selection[2]">
+            <div class="item-error-message text-right" ng-if="lockBuyButton && foodInfo.selection[1].name && !selectedVariant2 && selectedVariant1" >
+                Please select a {{foodInfo.selection[1].name}}.
+            </div>
+            <label class="col item item-input item-select" ng-if="foodInfo.selection[2] && selectedVariant2">
                 <div class="input-label">
                     {{foodInfo.selection[2].name}}
                 </div>
@@ -71,7 +76,10 @@
                         ng-click="selectedVariant.buyQuantity = ''">
                 </select>
             </label>
-            <label class="col item item-input item-select" ng-if="foodInfo.selection[3]">
+            <div class="item-error-message text-right" ng-if="lockBuyButton && foodInfo.selection[2].name && !selectedVariant3 && selectedVariant2">
+                Please select a {{foodInfo.selection[2].name}}.
+            </div>
+            <label class="col item item-input item-select" ng-if="foodInfo.selection[3] && selectedVariant3">
                 <div class="input-label">
                     {{foodInfo.selection[3].name}}
                 </div>
@@ -81,6 +89,9 @@
                         ng-click="selectedVariant.buyQuantity = ''">
                 </select>
             </label>
+            <div class="item-error-message text-right" ng-if="lockBuyButton && foodInfo.selection[3].name && !selectedVariant4 && selectedVariant3">
+                Please select a {{foodInfo.selection[3].name}}.
+            </div>
         </div>
 
                     <!-- Buy Qty error message -->
@@ -108,7 +119,7 @@
                         <div class="col col-top"> </div>
                         <div class="col col-67 col-center">
                             <button class="button button-raised  made-easy-button-setting"
-                                    ng-disabled="isBuyBtnDisable || !selectedVariant.buyQuantity"
+                                    ng-disabled="isBuyBtnDisable"
                                     ng-click="addToCart()">
                                 Add to cart
                             </button>

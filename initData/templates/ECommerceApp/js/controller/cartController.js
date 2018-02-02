@@ -51,7 +51,12 @@ mobileApp.controller('CartCtrl', function ($scope, $rootScope, $http, $state, $s
             // -- Config --
             $scope.userId = $rootScope.userId;
             $scope.appId = $rootScope.appId;
-            $scope.cartItems = $rootScope.cart.cartItems;
+
+    $scope.imageURL = constants.SERVER_URL
+        +"/templates/viewImages?userId="
+        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+
+    $scope.cartItems = $rootScope.cart.cartItems;
             // default : tax info hide 
             $scope.isShowTaxInfo = false;
 

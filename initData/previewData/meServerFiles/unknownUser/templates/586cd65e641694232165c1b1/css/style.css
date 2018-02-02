@@ -9,6 +9,7 @@
 
 .item-select select{
     background:transparent;
+    height: 100%;
 }
 
 a {
@@ -45,13 +46,14 @@ a {
 }
 
 .button-main{
-	background: #000000;
-	border-radius: 30px;
-	font-size: 12px;
-	color: #FFFFFF;
-	letter-spacing: 0.01px;
-	height: 60px;
-	padding: 8px
+    background: #0000000d;
+    border-radius: 30px;
+    font-size: 12px;
+    color: #151515;
+    letter-spacing: 0.01px;
+    height: 60px;
+    padding: 8px;
+    border: 1px solid #000;
 }
 
 
@@ -59,7 +61,7 @@ a {
 /* food page */
 
 .food .item{
-	border-right: 0;
+    border: 0;
 }
 
 .food input{
@@ -177,6 +179,7 @@ input[type=number] {
   height: inherit;
   line-height: normal;
   padding-top: 0;
+  background: transparent;
 }
 
 
@@ -191,4 +194,26 @@ input {
 }
 .login .item {
     width: auto;
+}
+
+ion-slide{
+    background: transparent;
+}
+
+
+.cart i{
+    right: 5px !important;
+    font-size: 20px !important;
+}
+.cart a.item {
+    padding-left: 65px;
+}
+
+.bar .button{
+    min-height: 44px;
+    min-width: 25px;
+    max-width: 25px;
+    margin-bottom: 0;
+    max-height: 25px;
+    width: 25px;
 }

@@ -5,9 +5,13 @@
  * Edited by Shashan on 01/11/16.
  */
 
-mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService,$log) {
+mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$http, constants, $ionicPopup, $state,PaypalService,$log,$ionicHistory) {
 
     $scope.$emit('hideMenu',{});
+
+    $ionicHistory.nextViewOptions({
+        disableBack: true
+    });
 
     if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId) == null){
         $state.go('app.login')
@@ -44,6 +48,8 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         $scope.stripeShow = data.stripeEnable;
         $scope.braintreeShow = data.braintreeEnable;
         $scope.authorizeNet = data.authorizeNetEnable;
+        $scope.payHere = data.payHereEnable;
+        $scope.payHereMID = data.payHereMerchantId;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
     });
@@ -541,5 +547,170 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
             },function (error) {
                 alert("Transaction Canceled");
             });
+    };
+
+    $scope.openAppBrowser = function() {
+
+        if($stateParams.item.delivery.method == "Delivery"){
+            $scope.details ={
+
+                appId : $rootScope.appId,
+                item : $stateParams.item.cart,
+                amount : $stateParams.item.amount,
+                registeredUser: $scope.user.registeredUser,
+                customerName : $scope.user.name,
+                deliverName : $stateParams.item.delivery.name,
+                deliveryNo : $stateParams.item.delivery.streetNumber,
+                deliveryStreet : $stateParams.item.delivery.streetName,
+                deliveryCity : $stateParams.item.delivery.city,
+                deliveryCountry : $stateParams.item.delivery.country,
+                deliveryZip : $stateParams.item.delivery.zip,
+                telNumber : $stateParams.item.delivery.phone,
+                tax :   $stateParams.item.taxTotal,
+                shippingCost :   $stateParams.item.shippingCost,
+                shippingOpt : $stateParams.item.shipping.shippingOption,
+                email: $stateParams.item.userEmail,
+                promotionCode: $stateParams.item.promotionCode
+            };
+        }
+        else{
+            $scope.details ={
+                appId : $rootScope.appId,
+                item : $stateParams.item.cart,
+                registeredUser: $scope.user.registeredUser,
+                amount : $stateParams.item.amount,
+                customerName : $stateParams.item.deliverDetails.name,
+                telNumber : $stateParams.item.deliverDetails.phone,
+                tax :   $stateParams.item.taxTotal,
+                shippingCost :   $stateParams.item.shippingCost,
+                pickupId: $stateParams.item.pickupId,
+                email: $stateParams.item.userEmail,
+                promotionCode: $stateParams.item.promotionCode
+            }
+        }
+
+        $http.post(constants.SERVER_URL+"/templatesOrder/savePendingOrder",$scope.details)
+            .then(function(orderRes){
+
+                    $http.post(constants.SERVER_URL+"/templatesInventory/updateInventory",$stateParams.item.cart)
+                        .then(function(res){
+                                $rootScope.cart.cartItems = [];
+                                $rootScope.cart.cartSize = 0;
+                                $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
+                                $rootScope.cart.totalPrice = 0;
+                                $rootScope.cart.totalQuantity = 0;
+
+                                //Pushing into order purchase history
+                                if(angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser)) != null){
+                                    orderHistory = angular.fromJson(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser));
+                                }
+                                orderHistory.push({
+                                    orderHistoryKey : $rootScope.appId,
+                                    createdDate: new Date(),
+                                    item :   $stateParams.item.cart,
+                                    amount :  $stateParams.item.amount,
+                                });
+                                localStorage.setItem("history"+$rootScope.appId+$scope.user.registeredUser, JSON.stringify(orderHistory));
+
+                                showHelp(constants.SERVER_URL+'/mobile/getPayHereForm/?name='+
+                                    $scope.details.customerName+"&amount="+
+                                    $scope.details.amount+"&currency="+
+                                    $rootScope.symbol+"&email="+
+                                    $scope.details.email+"&telNumber="+
+                                    $scope.details.telNumber+"&item="+
+                                    $scope.details.item[0].name+"&address="+
+                                    $scope.details.deliveryNo + " "+ $scope.details.deliveryStreet  + "&city="+
+                                    $scope.details.deliveryCity+"&appId="+orderRes.data.orderData.appId+
+                                    "&orderId="+orderRes.data.orderData.orderId+"&payHereMerchantId=" +$scope.payHereMID);
+
+                                /*var alertPopup = $ionicPopup.alert({
+                                    title: 'Thank You',
+                                    subTitle: 'Your Order has been successfully processed',
+                                    cssClass: 'ionicPopUp',
+                                    buttons:[
+                                        {text:'OK',
+                                            type:'button-positive'},
+                                    ]
+                                });*/
+                                // TODO : Currently back to cart
+                                //back to Main Menu
+                                $state.go('app.category');
+                            },
+                            function(err){
+                                $log.debug(err);
+                            });
+
+
+
+                },
+                function(err){
+                    $log.debug(err);
+                });
+
+
+        var inAppBrowserRef;
+
+        function showHelp(url) {
+
+            var target = "_blank";
+
+            var options = "location=yes,hidden=yes";
+
+            inAppBrowserRef = window.open (url, target, options);
+
+            inAppBrowserRef.addEventListener('loadstart', loadStartCallBack);
+
+            inAppBrowserRef.addEventListener('loadstop', loadStopCallBack);
+
+            inAppBrowserRef.addEventListener('loaderror', loadErrorCallBack);
+
+        }
+
+        function loadStartCallBack() {
+
+            $('#status-message').text("loading please wait ...");
+
+        }
+
+        function loadStopCallBack() {
+
+            if (inAppBrowserRef != undefined) {
+
+                inAppBrowserRef.insertCSS({ code: "body{font-size: 25px;" });
+
+                $('#status-message').text("");
+
+                inAppBrowserRef.show();
+            }
+
+        }
+
+        function loadErrorCallBack(params) {
+
+            $('#status-message').text("");
+
+            var scriptErrorMesssage =
+                "alert('Sorry we cannot open that page. Message from the server is : "
+                + params.message + "');"
+
+            inAppBrowserRef.executeScript({ code: scriptErrorMesssage }, executeScriptCallBack);
+
+            inAppBrowserRef.close();
+
+            inAppBrowserRef = undefined;
+
+        }
+
+        function executeScriptCallBack(params) {
+
+            if (params[0] == null) {
+
+                $('#status-message').text(
+                    "Sorry we couldn't open that page. Message from the server is : '"
+                    + params.message + "'");
+            }
+
+        }
+
     };
 });

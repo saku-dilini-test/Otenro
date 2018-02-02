@@ -2013,9 +2013,10 @@ trix-toolbar .button_group input[type=button]{
     border-bottom:unset;
 }
 
-.custom-trix trix-editor{
+.custom-trix .ta-scroll-window {
     width:100%;
-    height:207px;
+    min-height:75px;
+    height:75px;
     overflow-y: auto;
 }
 
@@ -2029,13 +2030,9 @@ trix-toolbar .button_group input[type=button]{
 
 .email-image-upload{
     position: relative;
-    text-align:center;
 }
 .email-image-upload p{
     padding:unset;
-}
-.email-image-upload button{
-    margin: 1em 0 0 0;
 }
 
 .md-dialog-container{
@@ -2393,11 +2390,11 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
 
 .download-mobile-viewer{
     width: 700px;
-    height: 400px;
 }
 .download-mobile-viewer h3,
 .download-mobile-viewer h4{
     color: #747474;
+    cursor: pointer;
 }
 /*ADD NETWORK CSS*/
 
@@ -2809,6 +2806,44 @@ footer.when-mobile{
     background-color: #222;
 }
 
+
+.email-template div:first-child {
+    display: none;
+}
+.email-template .ta-editor, .email-template .ta-bind {
+    border: none;
+    min-height: 100px;
+    background: transparent;
+}
+
+table.md-calendar-day-header{
+    width: initial;
+}
+
+.selectdemoSelectHeader .demo-header-searchbox {
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: 0; }
+.selectdemoSelectHeader .demo-select-header {
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+    padding-left: 10.667px;
+    height: 48px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto; }
+.selectdemoSelectHeader md-content._md {
+    max-height: 240px; }
+
+
+.analytic-table th,.analytic-table td{
+    padding:5px;
+    letter-spacing: 1px;
+}
+
 /*IE 10 and abouve specific css wirte inside this media quary*/
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     .fixed-inventory .tree-grid thead {
@@ -2829,4 +2864,67 @@ footer.when-mobile{
         left: 20px;
         margin-top: -1px;
     }
+}
+.no-padding{
+    padding:0;
+}
+.padding-left{
+    padding-left: 16px;
+}
+
+.padding-right{
+    padding-right:16px;
+}
+
+.padding-top{
+    padding-top: 16px;
+}
+
+.padding-bottom{
+    padding-bottom: 16px;
+}
+
+.padding-vertical{
+    padding-top:16px;
+    padding-bottom: 16px;
+}
+
+.padding-horizontal{
+    padding: 0 16px;
+}
+
+.padding{
+    padding: 16px !important;
+}
+
+.no-margin{
+    margin:0;
+}
+
+.margin-left{
+    margin-left: 16px;
+}
+
+.margin-right{
+    margin-right:16px;
+}
+
+.margin-top{
+    margin-top: 16px;
+}
+
+.margin-bottom{
+    margin-bottom: 16px;
+}
+
+.margin-vertical{
+    margin: 16px 0;
+}
+
+.margin-horizontal{
+    margin: 0 16px;
+}
+
+.margin{
+    margin: 16px !important;
 }

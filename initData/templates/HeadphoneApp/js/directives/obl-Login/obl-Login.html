@@ -17,14 +17,17 @@
 							</label>
 
 							<label class="item">
-								<button class="button button-block button-raised  made-easy-button-setting" ng-click="loginForm.$valid && login()" ng-disabled="loginForm.$invalid">Login</button>
+								<button class="button button-small button-block button-raised  made-easy-button-setting" ng-click="loginForm.$valid && login()" ng-disabled="loginForm.$invalid">Login</button>
 							</label>
 
 						</div>
 				</div>
 			</form>
 
-			<div class="col center">Don't Have an Account?</div>
-				<button class="col center button made-easy-button-setting" ui-sref="app.register">Register</button>
+			<div class="col center">
+				<div>Don't Have an Account?</div>
+				<br>
+				<button class="button button-small made-easy-button-setting" ui-sref="app.register">Register</button>
+			</div>
 	</ion-content>
 </ion-view>

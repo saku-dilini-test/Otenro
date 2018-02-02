@@ -35,6 +35,6 @@ mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPop
             deliverDetails :$stateParams.deliverDetails ,
             pickupId :$scope.pickup.opt
         }
-        $state.go('app.checkout',{item: $scope.pickupData});
+        $state.go('tab.checkout',{item: $scope.pickupData});
     };
 });

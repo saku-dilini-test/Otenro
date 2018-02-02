@@ -1,7 +1,7 @@
 
 <ion-view view-title="Register" >
 
-  <ion-content class="im-wrapper login made-easy-background-image made-easy-background-color ">
+  <ion-content class="login made-easy-background-image made-easy-background-color ">
     <div class="col">
       <h1>Register.</h1>
     </div>
@@ -25,9 +25,9 @@
               Enter a proper email
             </span>
               </label>
-              <label class="item item-input item-stacked-label">
+              <label class="item item-input item-floating-label">
                 <span class="input-label">Password</span>
-                <input type="password" name="password" placeholder="" ng-pattern="passwordRegularExpression" ng-model="data.password" ng-required="true" >
+                <input type="password" name="password" placeholder="Password" ng-pattern="passwordRegularExpression" ng-model="data.password" ng-required="true" >
                 <span class="help-block register-pw-error-message" ng-show="signUpForm.password.$error.minlength">
                 <span class="item-error-message" ng-show="signUpForm.password.$error.minlength">Password should have at least 7 characters.</span>
                 </span>
@@ -35,8 +35,15 @@
                 <span class="item-error-message">Password should have at least one lower or Upper letter and one number</span>
                 </span>
               </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Confirm Password </span>
+                <input type="password" name="passwordCon" placeholder="Re-enter the password" ng-model="data.passwordCon" ng-required="true" >
+                <span class="help-block register-pw-error-message" ng-show="signUpForm.passwordCon.$dirty && data.password != data.passwordCon">
+                    <span class="item-error-message"> Passwords do not match.</span>
+                </span>
+              </label>
               <label class="item item-input item-floating-label">
-                <span class="input-label">Street Number</span>
+                <span class="input-label">House/Apartment Number</span>
                 <input type="text" placeholder="Street Number" ng-model="data.streetNumber" ng-required="true">
               </label>
               <label class="item item-input item-floating-label">
@@ -55,7 +62,7 @@
                 </select>
               </label>
               <label class="item item-input item-floating-label">
-                <span class="input-label">Zip / Postal Code</span>
+                <span class="input-label">Postal Code/ZIP</span>
                 <input type="text" placeholder="Zip / Postal Code" ng-model="data.zip" ng-required="true">
               </label>
               <label class="item item-input item-floating-label removeAr">
@@ -73,9 +80,9 @@
                   </div>
                 </div>
               </label>
-              <label class="item item-input item-stacked-label ">
+              <label class="item item-input item-stacked-label " ng-if="signUpForm.$error.required && signUpForm.$dirty">
                 <div class="row">
-                  <div ng-if="signUpForm.$error.required && signUpForm.$dirty">
+                  <div >
                                                     <span class="animated zoomIn item-error-message">
                                                         All the fields needs to be filled
                                                     </span>
@@ -83,7 +90,7 @@
                 </div>
               </label>
               <label class="item">
-                <button class="button button-block button-raised  made-easy-button-setting" ng-click="signUpForm.$valid && signUp()">
+                <button class="button button-block button-raised  made-easy-button-setting" ng-click="signUpForm.$valid && signUp()" ng-disabled="signUpForm.$invalid || (data.password !== data.passwordCon)">
                   Sign up
                 </button>
               </label>

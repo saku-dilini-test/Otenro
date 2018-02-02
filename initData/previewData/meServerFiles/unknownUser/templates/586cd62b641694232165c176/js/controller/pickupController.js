@@ -29,15 +29,12 @@ mobileApp.controller('pickupCtrl', function ($scope, $http, $rootScope,$ionicPop
                         });
                     };
 
-                    $scope.checkout = function(pickup){
-
-                        pickup.item = $stateParams.item;
-                        pickup.delivery = {
-                            location : "Pick up"
-                        };
-                        pickup.deliverDetails = $stateParams.deliverDetails;
-                        pickup.pickupId = $scope.pickup.opt;
-                        $log.debug(pickup);
-                        $state.go('app.checkout',{item:pickup});
-                    };
+    $scope.checkout = function(){
+        $scope.pickupData  = {item:$stateParams.item,
+            delivery:{location : "Pick up",method:"Pick up"},
+            deliverDetails :$stateParams.deliverDetails ,
+            pickupId :$scope.pickup.opt
+        }
+        $state.go('app.checkout',{item: $scope.pickupData});
+    };
 });

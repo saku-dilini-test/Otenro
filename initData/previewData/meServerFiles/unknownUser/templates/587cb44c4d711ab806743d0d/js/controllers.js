@@ -29,7 +29,6 @@ angular.module('starter.controllers', [])
           $scope.showMenu = true;
       });
 
-
     $scope.logout = function(){
         localStorage.removeItem('appLocalStorageUser'+$rootScope.appId);
         $rootScope.cart.cartSize = 0;
@@ -39,6 +38,7 @@ angular.module('starter.controllers', [])
         $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
         $ionicSideMenuDelegate.toggleLeft();
     }
+
 
 })
 
@@ -204,11 +204,10 @@ angular.module('starter.controllers', [])
             alert('Item Loading error');
         });
 
-    $scope.lockBuyButton = true;
+    $scope.lockBuyButton = false;
     $scope.changeVariant = function(variant){
       $scope.selection1 =[];
       $scope.selectedVariant1  =variant.vType;
-      $scope.selectedVariant.buyQuantity = '';
 
       $scope.lockBuyButton = true;
 
@@ -233,7 +232,6 @@ angular.module('starter.controllers', [])
       $scope.selection2 =[];
       if(variant){
             $scope.selectedVariant2  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
       }
       $scope.lockBuyButton = true;
@@ -261,7 +259,6 @@ angular.module('starter.controllers', [])
       $scope.selection3 =[];
       if(variant){
             $scope.selectedVariant3  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
       }
       $scope.lockBuyButton = true;
@@ -287,7 +284,6 @@ angular.module('starter.controllers', [])
     $scope.changeVariant4 = function(variant){
         if(variant){
             $scope.selectedVariant4  =variant.vType;
-            $scope.selectedVariant.buyQuantity = '';
 
         }
 
@@ -307,6 +303,16 @@ angular.module('starter.controllers', [])
     // Check buyQty input value.
     // If buyQty value is less than or equal Selected-Variant-Qty, Buy Button Enable
     $scope.changeBuyQuantity = function (buyQty) {
+        if($scope.item.selection.length == 1 && $scope.selectedVariant1 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 2 && $scope.selectedVariant2 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 3 && $scope.selectedVariant3 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 4 && $scope.selectedVariant4 == undefined){
+            $scope.lockBuyButton = true;
+        }
+
 
         // default : Buy button set as Disable
         $scope.isBuyBtnDisable = true;
@@ -328,12 +334,19 @@ angular.module('starter.controllers', [])
         }
     };
 
-      // Products Add to cart
-      $scope.addToCart = function() {
-        if($scope.selectedVariant.buyQuantity == null){
+    // item add function for cart
+ $scope.addToCart = function() {
+        if($scope.item.selection.length == 1 && $scope.selectedVariant1 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 2 && $scope.selectedVariant2 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 3 && $scope.selectedVariant3 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.item.selection.length == 4 && $scope.selectedVariant4 == undefined){
+            $scope.lockBuyButton = true;
+        }else if($scope.selectedVariant.buyQuantity == null){
             $ionicPopup.alert({
                 title: 'Please enter a quantity',
-                template: 'Warning!!!',
                 cssClass: 'ionicPopUp',
                 buttons:[
                     {text:'OK',
@@ -345,27 +358,36 @@ angular.module('starter.controllers', [])
                     var i=0;
                     while(i < $rootScope.cart.cartItems.length){
                         if($scope.item.id == $rootScope.cart.cartItems[i].id && $scope.selectedVariant.sku == $rootScope.cart.cartItems[i].sku){
+                            $rootScope.position2 = false;
+                            //increasing weight when we add same product again.
+                            $rootScope.cart.cartItems[i].totWeight += $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartItems[i].qty += $scope.selectedVariant.buyQuantity;
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                            $rootScope.parseWeight = $scope.selectedVariant.weight;
                             $state.go('tab.menu');
                             break;
                         }
                         else if(i == ($rootScope.cart.cartItems.length -1)){
+                            $rootScope.position2 = true;
                             $rootScope.cart.cartItems.push({
                                 id: $scope.item.id,
                                 name: $scope.item.name,
                                 qty: $scope.selectedVariant.buyQuantity,
+                                variant: $scope.selectedVariant.selection,
                                 sku: $scope.selectedVariant.sku,
                                 totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                                 price: $scope.selectedVariant.price,
                                 total : $scope.selectedVariant.price,
                                 imgURL : $stateParams.item.tempImageArray,
-                                totalQty: $scope.selectedVariant.quantity
+                                totalQty: $scope.selectedVariant.quantity,
+                                weight: $scope.selectedVariant.weight  //(new) added weight of each product
+
                             });
                             $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                             $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-                            $state.go('tab.menu');
+                            $rootScope.parseWeight = $scope.selectedVariant.weight;
+                           $state.go('tab.menu');
                             break;
                         }
                         i++;
@@ -376,15 +398,19 @@ angular.module('starter.controllers', [])
                     id: $scope.item.id,
                     name: $scope.item.name,
                     qty: $scope.selectedVariant.buyQuantity,
+                    variant: $scope.selectedVariant.selection,
                     sku: $scope.selectedVariant.sku,
                     totWeight: $scope.selectedVariant.weight*$scope.selectedVariant.buyQuantity,
                     price: $scope.selectedVariant.price,
                     total : $scope.selectedVariant.price,
                     imgURL : $stateParams.item.tempImageArray,
-                    totalQty: $scope.selectedVariant.quantity
+                    totalQty: $scope.selectedVariant.quantity,
+                    weight: $scope.selectedVariant.weight //(new) added weight of each product
+
                 });
                 $rootScope.cart.cartSize = $rootScope.cart.cartItems.length;
                 $scope.parentobj.cartSize = $rootScope.cart.cartSize;
+                $rootScope.parseWeight = $scope.selectedVariant.weight;
                 $state.go('tab.menu');
             }
 

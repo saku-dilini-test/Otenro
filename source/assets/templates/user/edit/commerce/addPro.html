@@ -377,30 +377,28 @@
                     </div>
                     <div class="md-dialog-main">
                         <div class="file-upload-wrapper2 clearfix">
-                            <div class="cropArea "> <div class="img-upl " >
+                            <div class="cropArea ">
 
-                                <!--browse image-->
-                                <div class="fileinputs img-browse ">
-
-                                    <input type="file" value="" ng-click = "cropImage();"  id="fileInput" class="file" size="100">
-                                    <div ng-if="!picFile" class="fakefile  glyphicon glyphicon-upload"  >
-                                    </div>
-                                    <div ng-if="picFile" style="display:none"  >
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                                <img-crop image="myImage" area-type="rectangle" aspect-ratio="thirdNaviAspectRatio" result-image="picFile">
+                                <img-crop image="myImage" area-type="rectangle" aspect-ratio="thirdNaviAspectRatio" result-image="picFile" result-image-size="iSizeThird">
                                 </img-crop>
 
                             </div>
 
-                            <div ng-if="picFile" class="inputField btn-material img-up">
-                                <span> Crop </span>
-                                <div   class="img-up1 " ng-click="addImage(picFile)"></div>
+                            <div class="inputField btn-material img-up">
+                                <span >{{buttonName}}</span>
+                                <div class="img-up1" ng-if="!picFile">
+                                    <input type="file" value="" ng-click = "cropImage();"  id="fileInput" class="file" size="100">
+
+                                </div>
+                                <div  ng-if="picFile" class="img-up1" ng-click="addImage(picFile)"></div>
+
                             </div>
+
+
+                            <!--<div ng-if="picFile" class="inputField btn-material img-up">-->
+                                <!--<span> Crop </span>-->
+                                <!--<div   class="img-up1 " ng-click="addImage(picFile)"></div>-->
+                            <!--</div>-->
                         </div>
 
 

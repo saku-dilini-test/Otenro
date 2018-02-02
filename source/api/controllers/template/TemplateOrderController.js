@@ -8,6 +8,44 @@ var sentMails = require('../../services/emailService');
 module.exports = {
 
 
+    savePendingOrder : function (req,res) {
+
+
+        var data = req.body;
+        data['paymentStatus'] = 'Pending';
+        data['fulfillmentStatus'] = 'Pending';
+
+        sails.log.info(data);
+        if(data.pickupId == null){
+            ApplicationOrder.create(data).exec(function (err, order) {
+                sails.log.info(order);
+
+                if (err) res.send(err);
+                var searchApp = {
+                    appId: order.appId,
+                    orderId:order.id
+                };
+                sails.log.info(searchApp);
+                res.send({orderData:searchApp});
+            });
+        }
+        else{
+            ShippingDetails.find({id:data.pickupId,appId:data.appId}).exec(function(err,pickUp){
+                if(err) res.send(err);
+                data.pickUp = pickUp[0];
+                data.option = 'pickUp';
+                ApplicationOrder.create(data).exec(function (err, order) {
+                    if (err) res.send(err);
+                    var searchApp = {
+                        id: order.appId
+                    };
+                    sails.log.info(searchApp);
+                    res.send('ok');
+                });
+            });
+        }
+    },
+
     saveOrder : function(req,res) {
 
         var data = req.body;
