@@ -70,8 +70,8 @@ console.log("$stateParams.is new  : " + $stateParams.isNew);
         }else{
 
             console.log('inside mobile urls');
-            $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+//            $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+//                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
 
             $scope.appTemplateUrl = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
@@ -237,7 +237,16 @@ console.log("$stateParams.is new  : " + $stateParams.isNew);
                 $scope.deviceView = "tabletView";
 
             }else if(deviceType == "web"){
+
+            if($scope.tempIsNew == 'true'){
+
                 $scope.deviceView = "web";
+
+            }else{
+
+                $scope.deviceView = "web";
+                $scope.temporaryMessage();
+            }
 
             }
 
