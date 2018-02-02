@@ -5,13 +5,13 @@
     angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService',
         'commerceService','articleService','mainMenuService', 'currencyService',
         'publishService', 'engageService', 'logoAndTittleService','aboutUsService',
-        'policiesService','comingSoonService', 'templateService','salesAndPromotionService','getAssistanceService',dialogService]);
+        'policiesService','comingSoonService', 'templateService','salesAndPromotionService','getAssistanceService','carouselService',dialogService]);
 
 
     function dialogService(stylesService, contactUsService,
                            commerceService, articleService ,mainMenuService,
                            currencyService, publishService, engageService,
-                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService,salesAndPromotionService,getAssistanceService) {
+                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService,salesAndPromotionService,getAssistanceService,carouselService) {
 
         return {
             showDialog: function(clickTitle) {
@@ -71,6 +71,8 @@
                     return stylesService.showStyleDialog(clickTitle);
                 if ('logoAndTitle' == clickTitle)
                     return logoAndTittleService.showLogoAndTittleDialog(clickTitle);
+                if ('carouselBanner' == clickTitle)
+                    return carouselService.showCarouselBannerDialog(clickTitle);
                 if ('users' == clickTitle)
                     return engageService.showAppUserDialog(clickTitle);
                 /*if ('navigation' == clickTitle)
