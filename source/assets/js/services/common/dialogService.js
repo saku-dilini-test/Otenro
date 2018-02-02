@@ -5,13 +5,13 @@
     angular.module('appEdit').service('dialogService', ['stylesService', 'contactUsService',
         'commerceService','articleService','mainMenuService', 'currencyService',
         'publishService', 'engageService', 'logoAndTittleService','aboutUsService',
-        'policiesService','comingSoonService', 'templateService','salesAndPromotionService','getAssistanceService',dialogService]);
+        'policiesService','comingSoonService', 'templateService','salesAndPromotionService','getAssistanceService','carouselService',dialogService]);
 
 
     function dialogService(stylesService, contactUsService,
                            commerceService, articleService ,mainMenuService,
                            currencyService, publishService, engageService,
-                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService,salesAndPromotionService,getAssistanceService) {
+                           logoAndTittleService,aboutUsService,policiesService,comingSoonService,templateService,salesAndPromotionService,getAssistanceService,carouselService) {
 
         return {
             showDialog: function(clickTitle) {

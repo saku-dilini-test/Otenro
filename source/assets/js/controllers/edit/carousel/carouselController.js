@@ -4,7 +4,7 @@
 
 (function() {
     'use strict';
-    angular.module("appEdit").controller("GetAssistanceCtrl", ['$scope','$mdDialog', CarouselCtrl]);
+    angular.module("appEdit").controller("CarouselCtrl", ['$scope','$mdDialog', CarouselCtrl]);
 
 
     function CarouselCtrl($scope,$mdDialog) {

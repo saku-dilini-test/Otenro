@@ -2,11 +2,11 @@
  * Created by udeshikaperera on 26/08/2015.
  **/
 (function() {
-    angular.module('appEdit').service('engageService', [
-        '$mdDialog', engageService
+    angular.module('appEdit').service('carouselService', [
+        '$mdDialog', carouselService
     ]);
 
-    function engageService($mdDialog) {
+    function carouselService($mdDialog) {
         return {
             showCarouselBannerDialog: function() {
                 return $mdDialog.show({

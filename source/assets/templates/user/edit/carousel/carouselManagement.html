@@ -1,52 +1,44 @@
 <!-- Created by Shashan on 06/11/2017 -->
 
-<md-dialog aria-label="Get Assistance" >
+<md-dialog aria-label="Carousel Management" >
 
     <!--Google Analytics-->
     <script>
-        ga('set', 'page', 'show-get-assistance');
+        ga('set', 'page', 'show-carousel-management');
         ga('send', 'pageview');
     </script>
 
-    <md-dialog-content>
+    <md-dialog-content >
         <div class="md-dialog-header">
             <label>Help us to identify your business</label>
-            <h1 class="margin-top">Your Details</h1>
+            <h1 class="margin-top">Manage Carousel</h1>
         </div>
         <form name="form" novalidate>
             <div class="md-dialog-main clearfix">
-                <table class="me-simple-table">
+                <md-button class="no-margin margin-horizontal md-raised" style="padding: 0 13px;background:#E9E8E9 ;color:#666;font-size: 11px;">Add Image</md-button>
+                <md-button class="no-margin margin-horizontal md-raised" style="padding: 0 13px;background:#E9E8E9 ;color:#666;font-size: 11px;">Clear Default Data</md-button>
+
+                <table class="me-simple-table text-center">
                     <tr>
-                        <th width="50%">TEMPLATE NAME</th>
-                        <td>- {{templateName}}</td>
+                        <th class="text-center">Slide Name</th>
+                        <th wdith="25%" class="text-center">Image</th>
+                        <th class="text-center">Category/ Product</th>
+                        <th class="text-center">Edit</th>
+                        <th class="text-center">Delete</th>
                     </tr>
                     <tr>
-                        <th width="50%">APP TYPE</th>
-                        <td>- {{appType}}</td>
-                    </tr>
-                    <tr>
-                        <th width="50%">CUSTOMER NAME</th>
-                        <td>- {{user.firstName}} {{user.lastName}}</td>
-                    </tr>
-                    <tr>
-                        <th width="50%">E-MAIL</th>
-                        <td>- {{user.email}}</td>
-                    </tr>
-                    <tr>
-                        <th width="50%">CONTACT NUMBER</th>
-                        <td>
-                            <input class="input-shadow-border no-margin" type="text" name="number" ng-model="number" ng-pattern="/[0-9]+/" ui-mask="+99 99-9999-999" required >
-                            <div ng-show="form.$submitted || form.number.$touched">
-                                <div ng-show="form.number.$error.required">↑ Tell us your contact number .</div>
-                            </div>
-                        </td>
+                        <td>Style</td>
+                        <td><img class="padding" src="/images/aimp(512x512).png" width="100px"></td>
+                        <td>Lace Blouse</td>
+                        <td><img width="15%" src="../../../images/edit-icon.svg"></td>
+                        <td><img width="15%" src="../../../images/delete-icon.svg"></td>
                     </tr>
                 </table>
             </div>
             <div class="md-dialog-buttons">
                 <div class="inner-section">
                     <md-button class="me-default-button" ng-click="cancel()">close</md-button>
-                    <md-button type="submit" class="me-default-button" ng-click="request(templateName,appType,user,number)">Request</md-button>
+                    <md-button type="submit" class="me-default-button" >Save & Publish</md-button>
                 </div>
             </div>
         </form>
