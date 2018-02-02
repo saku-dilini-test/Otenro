@@ -88,10 +88,10 @@ export class CheckoutComponent implements OnInit {
   private months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
 
   constructor(private ordersService : OrdersService,
-    private shippingService: ShippingService, 
+    private shippingService: ShippingService,
     private currencyService :CurrencyService,
     private localStorageService: LocalStorageService,
-     private http: HttpClient, private route: ActivatedRoute, 
+     private http: HttpClient, private route: ActivatedRoute,
      private router: Router, private dataService: PagebodyServiceModule) {
 
   }
@@ -121,7 +121,7 @@ this.years.push(date++);
     console.log(this.dataService.userData);
     if (this.cartItems.length > 0 && this.formType == 'delivery') {
 
-      this.isAdded = true; 
+      this.isAdded = true;
 
       this.fname = this.dataService.userData.name;
       this.lname = this.dataService.userData.lname;
@@ -475,26 +475,27 @@ this.years.push(date++);
         } else {
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
-          if (!this.finalDetails.pickupCost) {
+          if (!this.finalDetails.pickupCost || this.finalDetails.pickupCost == 0) {
             this.chkPickupCost = 0;
-          }else{
+          } else {
             this.chkPickupCost = this.finalDetails.pickupCost;
           }
-          console.log("this.chkShippingCost  : " + this.chkShippingCost +"chkPickupCost" +this.chkPickupCost );
-          console.log("total"+total)
+          console.log("this.chkShippingCost  : " + this.chkShippingCost + "chkPickupCost" + this.chkPickupCost);
+          console.log("total: " + total)
           if (tax > 0) {
             total = total + tax;
-            if(this.chkPickupCost == 0){
-            this.totalPrice = total;
-            }else{
+            if (this.chkPickupCost == 0) {
+              this.totalPrice = total + this.chkShippingCost;
+            } else {
               this.totalPrice = total + parseInt(this.chkPickupCost);
             }
           } else {
-            if(this.chkPickupCost == 0){
-              this.totalPrice = total ;
-              }else{
-                this.totalPrice = total + parseInt(this.chkPickupCost);
-              }          }
+            if (this.chkPickupCost == 0) {
+              this.totalPrice = total + this.chkShippingCost;
+            } else {
+              this.totalPrice = total + parseInt(this.chkPickupCost);
+            }
+          }
         }
 
       });
