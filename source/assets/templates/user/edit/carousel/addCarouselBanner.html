@@ -1,43 +1,98 @@
 <!-- Created by Shashan on 02/02/2018 -->
 
-<md-dialog aria-label="Carousel Management" style="width:750px;height:750px">
+<md-dialog aria-label="Carousel Management" style="width:800px;height:635px">
 
     <!--Google Analytics-->
     <script>
-        ga('set', 'page', 'show-carousel-management');
+        ga('set', 'page', 'add-carousel-banner');
         ga('send', 'pageview');
     </script>
 
     <md-dialog-content >
         <div class="md-dialog-header">
-            <label>Help us to identify your business</label>
-            <h1 class="margin-top">Manage Carousel</h1>
+            <h1 class="margin-top">Upload Carousel Image</h1>
         </div>
         <form name="form" novalidate>
-            <div class="md-dialog-main clearfix">
-                <md-button ng-click="addCarouselBanner()" class="no-margin md-raised" style="background:#E9E8E9 ;color:#666;font-size: 11px;">Add Image</md-button>
-                <md-button class="no-margin margin-horizontal md-raised" style="background:#E9E8E9 ;color:#666;font-size: 11px;">Clear Default Data</md-button>
+            <div class="md-dialog-main clearfix" style="max-height: 60vh">
 
-                <table class="table margin-vertical text-center">
-                    <tr>
-                        <th class="text-center">Slide Name</th>
-                        <th wdith="25%" class="text-center">Image</th>
-                        <th class="text-center">Category/ Product</th>
-                        <th class="text-center">Edit</th>
-                        <th class="text-center">Delete</th>
-                    </tr>
-                    <tr>
-                        <td >Style</td>
-                        <td><img src="/images/aimp(512x512).png" width="70px"></td>
-                        <td>Lace Blouse</td>
-                        <td><img width="15%" src="../../../images/edit-icon.svg"></td>
-                        <td><img width="15%" src="../../../images/delete-icon.svg"></td>
-                    </tr>
-                </table>
+                <div layout-gt-xs="row" class="margin">
+                    <div class="file-upload-wrapper clearfix">
+                        <div class="cropArea">
+                            <img-crop image="myImage" area-type="rectangle" aspect-ratio="secondNaviAspectRatio" result-image="picFile" result-image-size="iSizeSecond">
+                            </img-crop>
+                        </div>
+
+                        <div class="inputField btn-material img-up">
+                            <span >{{buttonName}}</span>
+                            <div class="img-up1" ng-if="imageSelected">
+                                <input type="file" value="file"  ng-click = "cropImage();" id="fileInput" >
+                            </div>
+                            <div  ng-if="!imageSelected" class="img-up1" ng-click="addImage(picFile)"></div>
+
+                        </div>
+
+                    </div>
+                    <div class="uploaded-section image-upload clearfix" style="width:35%">
+                        <div class="uploaded-new-image">
+                            <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                 height="150" style="display:none" />
+                            <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
+                        </div>
+                        <div class="uploaded-old-images">
+                            <p>Uploaded Product Images</p>
+                            <div class="old-images clearfix">
+                                <div class="old-image">
+                                    <input type="button" ng-click="deleteImg(0)" value='delete'
+                                           class="image-delete-button"/>
+                                    <img ng-click="setImage()" ng-if="tmpImage[0] == null"
+                                         src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                    <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
+                                         width="80" height="80"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div layout-gt-xs="row" class="margin">
+                    <label flex="30" style="margin-top: 6px;">Select Category</label>
+                    <div flex="50">
+                        <md-select ng-model=""
+                                   data-md-container-class="selectdemoSelectHeader"
+                                   aria-label="select category">
+                            <md-optgroup>
+                                <md-option ng-value="Cat1" >Cat1</md-option>
+                                <md-option ng-value="Cat1" >Cat2</md-option>
+                                <md-option ng-value="Cat1" >Cat3</md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </div>
+                    <div flex="20" class="margin-horizontal">
+                        <img width="15%" style="margin-top: 6px;" src="../../../images/delete-icon.svg">
+                    </div>
+                </div>
+                <div layout-gt-xs="row" class="margin">
+                    <label flex="30" style="margin-top: 6px;">Select Product</label>
+                    <div flex="50">
+                        <md-select ng-model=""
+                                   data-md-container-class="selectdemoSelectHeader"
+                                   aria-label="select product">
+                            <md-optgroup>
+                                <md-option ng-value="prod1">prod1</md-option>
+                                <md-option ng-value="prod1">prod2</md-option>
+                                <md-option ng-value="prod1">prod </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </div>
+                    <div flex="20" class="margin-horizontal"class="margin-horizontal">
+                        <img width="15%" style="margin-top: 6px;" src="../../../images/delete-icon.svg">
+                    </div>
+                </div>
             </div>
+
             <div class="md-dialog-buttons">
                 <div class="inner-section">
-                    <md-button class="me-default-button" ng-click="cancel()">close</md-button>
+                    <md-button class="me-default-button" ng-click="cancel()">Close</md-button>
                     <md-button type="submit" class="me-default-button" >Save & Publish</md-button>
                 </div>
             </div>
