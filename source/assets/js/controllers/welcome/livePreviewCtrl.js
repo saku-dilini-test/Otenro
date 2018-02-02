@@ -48,6 +48,31 @@
             return deferred.promise;
         }
 
+        $scope.temporaryMessage = function (scope) {
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+
+                    this.confirm = function click(){
+                        $mdDialog.hide();
+                    }
+                },
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                '<md-content >' +
+                '<div class="md-dialog-header">' +
+                '<h1>Coming soon !!!!!</h1>' +
+                '                </div> <br>'+
+                ' <div style="text-align:center"><lable> This Feature will be coming soon! </lable></div>' +
+                '<br><br><div class="md-dialog-buttons">'+
+                '<div class="inner-section">'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Ok</md-button>'+
+                '</div>'+
+                '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
+
+        };
 
         $scope.deviceView = "mobile";
         $scope.changeDevice = function(deviceType){
@@ -60,7 +85,14 @@
                 $scope.deviceView = "tabletView";
 
             }else if(deviceType == "web"){
-                $scope.deviceView = "web";
+
+                if($scope.isNew == 'true'){
+                    $scope.deviceView = "web";
+                }else{
+                    $scope.temporaryMessage();
+                    $scope.deviceView = "web";
+            }
+
 
             }
 

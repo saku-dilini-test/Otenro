@@ -237,7 +237,16 @@ console.log("$stateParams.is new  : " + $stateParams.isNew);
                 $scope.deviceView = "tabletView";
 
             }else if(deviceType == "web"){
+
+            if($scope.tempIsNew == 'true'){
+
                 $scope.deviceView = "web";
+
+            }else{
+
+                $scope.deviceView = "web";
+                $scope.temporaryMessage();
+            }
 
             }
 

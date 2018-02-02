@@ -791,6 +791,7 @@ legend{
 ******************************************************/
 table{
     width: 100%;
+    vertical-align: middle!important;
 }
 
 /* Hours Table */
