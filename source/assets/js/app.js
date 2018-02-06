@@ -49,7 +49,8 @@ angular.module('app', [
   'disableAll',
   'textAngular',
   'ngImgCrop',
-  'ngAnimate'
+  'ngAnimate',
+  'chart.js'
 
 
 ]).run(function($rootScope, $state, $auth,Auth,Permission,$log) {

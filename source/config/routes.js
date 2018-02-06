@@ -370,5 +370,15 @@ module.exports.routes = {
     'POST /edit/transcationLog': 'TranscationLog.saveSalesAndPromotion',
     'POST /templates/makeStripePayment': 'template/StripeController.makePayment',
 
+    /**
+     * StoreAnalyticsController
+     */
+
+    'POST /reports/getSalesSummary': 'reports/StoreAnalyticsController.getSalesSummary',
+    'POST /reports/getTaxSummary': 'reports/StoreAnalyticsController.getTaxSummary',
+    'POST /reports/getShippingSummary': 'reports/StoreAnalyticsController.getShippingSummary',
+    'POST /reports/getOrderData': 'reports/StoreAnalyticsController.getOrderData',
+    'POST /reports/getChartData': 'reports/StoreAnalyticsController.getChartData'
+
 
 };
