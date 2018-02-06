@@ -85,7 +85,7 @@ module.exports = {
             type:'string'
         },
         shippingCost: {
-            type:'string'
+            type:'double'
         },
         pickUp :{
             type: 'json'
