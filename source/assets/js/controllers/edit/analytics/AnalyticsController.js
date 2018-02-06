@@ -10,6 +10,10 @@
     function analyticsCtrl($scope,$rootScope,$mdDialog,toastr,commerceService,$http) {
         console.log("analytics controller working")
 
+        var SALES = 1;
+        var TAX = 2;  
+        var SHIPPING = 3;      
+
         var emptyChart = {
             labels : [""],
             series : [''],
@@ -78,12 +82,19 @@
                     });
                 }
 
+
             }catch(e){
                 fromDate =null;
                 toDate=null;
                 toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
                 });
+
+            var postData = { appId: $rootScope.appId,
+                             selectedTab : SALES,
+                             selectedProducts: data.selectedProducts, 
+                             fromDate: data.fromDate,
+                             toDate: data.toDate };            
 
             }
 
@@ -152,7 +163,13 @@
                     closeButton: true
                 });
 
+
             }
+
+            var postData = { appId: $rootScope.appId, 
+                             selectedTab : TAX,
+                             fromDate: data.fromDate,
+                             toDate: data.toDate }            
 
             if(fromDate!=null&&toDate!=null) {
 
@@ -185,6 +202,7 @@
                         });
                     });
 
+
                     commerceService.getChartData(postData)
                         .success(function (result) {
                             $scope.taxChartdata = result.data;
@@ -192,6 +210,11 @@
                         console.log("Error on commerceService.getChartData \n" + JSON.stringify(error, null, 2));
                         $scope.taxChartdata = emptyChart;
                     });
+
+            var postData = { appId: $rootScope.appId, 
+                             selectedTab : SHIPPING,
+                             fromDate: data.fromDate,
+                             toDate: data.toDate }   
 
                 }
 

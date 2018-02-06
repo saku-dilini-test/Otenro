@@ -9,6 +9,7 @@
 var config = require('../../services/config');
 var appId = "";
 var selectedProductData = [];
+var selectedProductsForCharts = [];
 var fromDate;
 var toDate;
 
@@ -19,6 +20,11 @@ var YEARLY = 4;
 var dateFormat = require('dateformat');
 var moment = require('moment');
 var date = require('date-and-time');
+
+var SALES = 1;
+var TAX = 2;  
+var SHIPPING = 3;  
+var selectedTab;
 
 var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
@@ -319,7 +325,7 @@ module.exports = {
     makeChartData: function (cb) {
         var chartData = {
             labels : [],
-            series : ['Qty'],
+            series : [],
             data   : [[]],
             datasetOverride : [{ yAxisID: 'y-axis-1' }],
             options : {
@@ -344,12 +350,12 @@ module.exports = {
 
             var match;
             
-            if(selectedProductData.length>0){
+            if(selectedProductsForCharts.length>0){
                 console.log("selectedProductData > 0");
                 match = { $and: [{ $and:[{ updatedAt: { $gte:  new Date(fromDate) }},
                         { updatedAt: { $lte: new Date(toDate) }}]},
                         { appId: appId,fulfillmentStatus:"Successful"},
-                        { $or: selectedProductData }]};
+                        { "item.name": { $in: selectedProductsForCharts }}]};
             }else{
                 console.log("selectedProductData = 0");
                 match = { $and: [{ $and:[{ updatedAt: { $gte:  new Date(fromDate) }},
@@ -399,10 +405,11 @@ module.exports = {
                 }
 
                 collection.aggregate([
-                    { $unwind: '$item' },
+                    // { $unwind: '$item' },
+                    { $addFields: { totalQty: { $sum: "$item.qty" }}},
                     { $match: match },
                     { $group: { _id : grouping,
-                        totalQty : { $sum : "$item.qty" }}},
+                        totalQty : { $sum : "$totalQty" }, totalTax: { $sum: "$tax"}, totalNoOfOrders : { $sum : 1 }}},
                     { $sort : { _id : 1 }}
                 ]).toArray(function (err, results) {
                     if(err || !results || results.length == 0) {
@@ -436,11 +443,26 @@ module.exports = {
                             date = tuple._id.year;
                         }
 
-                        var qty = tuple.totalQty;
+                        switch (selectedTab) {
+                        case SALES:
+                            chartData.data[0].push(tuple.totalQty);
+                            chartData.series[0] = 'Qty';
+                            break;
+                        case TAX:
+                            chartData.data[0].push(tuple.totalTax);
+                            chartData.series[0] = 'Tax';
+                            break;
+                        default:
+                            chartData.data[0].push(tuple.totalNoOfOrders);
+                            chartData.series[0] = 'Shipments';
+                        }                        
 
                         chartData.labels.push(date);
-                        chartData.data[0].push(qty);
                     });
+
+                    if(chartData.labels.length === 1){
+                        chartData.labels.push("");
+                    }
 
                     cb(null, chartData);
 
@@ -452,16 +474,10 @@ module.exports = {
     getChartData: function (req, res) {
         console.log("Exec getChartData");
         appId = req.body.appId;
-        var selectedProducts= req.body.selectedProducts;
+        selectedProductsForCharts = req.body.selectedProducts;
         fromDate = req.body.fromDate;
         toDate = req.body.toDate;
-
-        if(selectedProducts){
-            selectedProducts.forEach(function(element) {
-                var data = {"item.name":element};
-                selectedProductData.push(data);
-            });    
-        }    
+        selectedTab = req.body.selectedTab;
 
         this.makeChartData((err, chartData) => {
             if(err) {
