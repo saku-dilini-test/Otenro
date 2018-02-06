@@ -17,6 +17,8 @@ var WEEKLY = 2;
 var MONTHLY = 3;
 var YEARLY = 4;
 var dateFormat = require('dateformat');
+var moment = require('moment');
+var date = require('date-and-time');
 
 var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
@@ -36,9 +38,12 @@ module.exports = {
                 return;
             }
 
+
             collection.aggregate([{$unwind:'$item'},{ "$match" :
                     { $and: [{$and:[{updatedAt:{$gte:  new Date(fromDate)}},
-                                {updatedAt:{$lte: new Date(toDate)}}]},{ appId: appId,fulfillmentStatus:"Successful"}, {$or:selectedProductData}] } },
+                                {updatedAt:{$lte: date.addDays(new Date(toDate), +1)}}]},
+                            { appId: appId,fulfillmentStatus:"Successful"},
+                            {$or:selectedProductData}] } },
                 {
 
                     $group : {
@@ -102,7 +107,8 @@ module.exports = {
 
             collection.aggregate([{ "$match" :
                     { $and: [{$and:[{updatedAt:{$gte:  new Date(fromDate)}},
-                                {updatedAt:{$lte: new Date(toDate)}}]},{ appId: appId,fulfillmentStatus:"Successful"}] } },
+                                {updatedAt:{$lte: date.addDays(new Date(toDate), +1)}}]},
+                            { appId: appId,fulfillmentStatus:"Successful"}] } },
                 {
 
                     $group : {
@@ -156,7 +162,8 @@ module.exports = {
 
             collection.aggregate([{ "$match" :
                     { $and: [{$and:[{updatedAt:{$gte:  new Date(fromDate)}},
-                                {updatedAt:{$lte: new Date(toDate)}}]},{ appId: appId,fulfillmentStatus:"Successful"}] } },
+                                {updatedAt:{$lte: date.addDays(new Date(toDate), +1)}}]},
+                            { appId: appId,fulfillmentStatus:"Successful"}] } },
                 {
 
                     $group : {
@@ -225,13 +232,13 @@ module.exports = {
             });
 
             searchBy = {appId:req.body.appId,or:selectedProductData,fulfillmentStatus:"Successful",
-                updatedAt:{">=":new Date(req.body.fromDate),"<=":new Date(req.body.toDate) }
+                updatedAt:{">=":new Date(req.body.fromDate),"<=":date.addDays(new Date(req.body.toDate), +1)}
                 }
 
         }else {
 
             searchBy = {appId:req.body.appId,fulfillmentStatus:"Successful",
-                updatedAt:{">=":new Date(req.body.fromDate),"<=":new Date(req.body.toDate) }
+                updatedAt:{">=":new Date(req.body.fromDate),"<=":date.addDays(new Date(req.body.toDate), +1)}
             }
 
         }
@@ -256,7 +263,7 @@ module.exports = {
                 //shipping
 
                 reportData.push(" , "+"Country"+","+ "Customer" +"," + "Order ID" + "," +
-                    "Date" + ","+ "Amount"+"," +"Shipping Type" +","+ "Shipping Cost" +'\r\n');
+                    "Date" + ","+ "Amount"+","+"," +"Shipping Type" +","+ "Shipping Cost" +'\r\n');
                 Order.forEach(function(order) {
 
                             var data = order.deliveryCountry+","+order.customerName + ","+
@@ -286,7 +293,7 @@ module.exports = {
             }
 
 
-            var file = config.ME_SERVER +type+"-"+dateFormat(req.body.fromDate, "yyyy-mm-dd")+"-"+dateFormat(req.body.toDate, "yyyy-mm-dd")+'.csv';
+            var file = config.ME_SERVER +type+"-"+dateFormat(req.body.fromDate, "yyyy-mm-dd")+""+'.csv';
 
             fs.writeFile(file, reportData, function(err) {
                 if (!err) {
