@@ -9,6 +9,7 @@
 var config = require('../../services/config');
 var appId = "";
 var selectedProductData = [];
+var selectedProductsForCharts = [];
 var fromDate;
 var toDate;
 
@@ -16,6 +17,9 @@ var DAILY = 1;
 var WEEKLY = 2;
 var MONTHLY = 3;
 var YEARLY = 4;
+var dateFormat = require('dateformat');
+var moment = require('moment');
+var date = require('date-and-time');
 
 var SALES = 1;
 var TAX = 2;  
@@ -40,9 +44,12 @@ module.exports = {
                 return;
             }
 
+
             collection.aggregate([{$unwind:'$item'},{ "$match" :
                     { $and: [{$and:[{updatedAt:{$gte:  new Date(fromDate)}},
-                                {updatedAt:{$lte: new Date(toDate)}}]},{ appId: appId,fulfillmentStatus:"Successful"}, {$or:selectedProductData}] } },
+                                {updatedAt:{$lte: date.addDays(new Date(toDate), +1)}}]},
+                            { appId: appId,fulfillmentStatus:"Successful"},
+                            {$or:selectedProductData}] } },
                 {
 
                     $group : {
@@ -106,7 +113,8 @@ module.exports = {
 
             collection.aggregate([{ "$match" :
                     { $and: [{$and:[{updatedAt:{$gte:  new Date(fromDate)}},
-                                {updatedAt:{$lte: new Date(toDate)}}]},{ appId: appId,fulfillmentStatus:"Successful"}] } },
+                                {updatedAt:{$lte: date.addDays(new Date(toDate), +1)}}]},
+                            { appId: appId,fulfillmentStatus:"Successful"}] } },
                 {
 
                     $group : {
@@ -160,7 +168,8 @@ module.exports = {
 
             collection.aggregate([{ "$match" :
                     { $and: [{$and:[{updatedAt:{$gte:  new Date(fromDate)}},
-                                {updatedAt:{$lte: new Date(toDate)}}]},{ appId: appId,fulfillmentStatus:"Successful"}] } },
+                                {updatedAt:{$lte: date.addDays(new Date(toDate), +1)}}]},
+                            { appId: appId,fulfillmentStatus:"Successful"}] } },
                 {
 
                     $group : {
@@ -229,13 +238,13 @@ module.exports = {
             });
 
             searchBy = {appId:req.body.appId,or:selectedProductData,fulfillmentStatus:"Successful",
-                updatedAt:{">=":new Date(req.body.fromDate),"<=":new Date(req.body.toDate) }
+                updatedAt:{">=":new Date(req.body.fromDate),"<=":date.addDays(new Date(req.body.toDate), +1)}
                 }
 
         }else {
 
             searchBy = {appId:req.body.appId,fulfillmentStatus:"Successful",
-                updatedAt:{">=":new Date(req.body.fromDate),"<=":new Date(req.body.toDate) }
+                updatedAt:{">=":new Date(req.body.fromDate),"<=":date.addDays(new Date(req.body.toDate), +1)}
             }
 
         }
@@ -289,14 +298,15 @@ module.exports = {
 
             }
 
-            var file = config.ME_SERVER +new Date()+'.csv';
+
+            var file = config.ME_SERVER +type+"-"+dateFormat(req.body.fromDate, "yyyy-mm-dd")+""+'.csv';
 
             fs.writeFile(file, reportData, function(err) {
                 if (!err) {
 
                     var filename = path.basename(file);
                     var mimetype = mime.lookup(file);
-                    res.setHeader('x-filename', 'attachment; filename=' + filename);
+                    res.setHeader('x-filename', filename);
                     res.setHeader('Content-disposition', 'attachment; filename=' + filename);
                     res.setHeader('Content-type', mimetype);
                     var filestream = fs.createReadStream(file);
@@ -340,12 +350,12 @@ module.exports = {
 
             var match;
             
-            if(selectedProductData.length>0){
+            if(selectedProductsForCharts.length>0){
                 console.log("selectedProductData > 0");
                 match = { $and: [{ $and:[{ updatedAt: { $gte:  new Date(fromDate) }},
                         { updatedAt: { $lte: new Date(toDate) }}]},
                         { appId: appId,fulfillmentStatus:"Successful"},
-                        { $or: selectedProductData }]};
+                        { "item.name": { $in: selectedProductsForCharts }}]};
             }else{
                 console.log("selectedProductData = 0");
                 match = { $and: [{ $and:[{ updatedAt: { $gte:  new Date(fromDate) }},
@@ -450,8 +460,13 @@ module.exports = {
                         chartData.labels.push(date);
                     });
 
-                    cb(null, chartData);
+                    //If the chart contains only a single label and single value, then the chart is not displaying properly.
+                    //Here adding an another empmty label will shiw the Chart properly for a single data value
+                    if(chartData.labels.length === 1){
+                        chartData.labels.push("");
+                    }
 
+                    cb(null, chartData);
                 });
             });
         });
@@ -460,17 +475,10 @@ module.exports = {
     getChartData: function (req, res) {
         console.log("Exec getChartData");
         appId = req.body.appId;
-        var selectedProducts= req.body.selectedProducts;
+        selectedProductsForCharts = req.body.selectedProducts;
         fromDate = req.body.fromDate;
         toDate = req.body.toDate;
         selectedTab = req.body.selectedTab;
-
-        if(selectedTab === SALES && selectedProducts){
-            selectedProducts.forEach(function(element) {
-                var data = {"item.name":element};
-                selectedProductData.push(data);
-            });    
-        }    
 
         this.makeChartData((err, chartData) => {
             if(err) {
