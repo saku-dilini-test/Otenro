@@ -65,7 +65,7 @@ module.exports = {
                         "action=\"https://sandbox.payhere.lk/pay/checkout\">  " +
                         " <h3 style=\"color: #2957de;\">Item Details</h3>" +
                         " <ul class=\"list-group\" style=\"margin-top: 15px\"> " +
-                        "<li class=\"list-group-item\"><input class=\"form-control\" type=\"text\" name=\"items\" value=\""+req.param("item")+"\" style=\"width:48%;display:inline;margin-right:5px\"><input class=\"form-control\" style=\"width:50%;display:inline;\" type=\"text\" name=\"amount\" value=\""+req.param("amount")+"\"></li> " +
+                        "<li class=\"list-group-item\"><input class=\"form-control\" type=\"text\" name=\"items\" value=\""+req.param("item")+"\" style=\"width:48%;display:inline;margin-right:5px\"><input readonly class=\"form-control\" style=\"width:50%;display:inline;\" type=\"text\" name=\"amount\" value=\""+req.param("amount")+"\"></li> " +
                         "</ul> " +
                         "<input type=\"hidden\" name=\"custom_1\" value=\""+req.param("appId")+"\">   " +
                         "<input type=\"hidden\" name=\"merchant_id\" value=\""+req.param("payHereMerchantId")+"\">" +

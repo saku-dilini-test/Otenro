@@ -25,7 +25,7 @@
                 <ion-checkbox ng-show="authorizeNet"  ng-model="payment.type"  class="checkbox-dark" ng-true-value="'authorizeNet'">
                     <h3>AuthorizeNet</h3>
                 </ion-checkbox >
-                <ion-checkbox ng-change="openAppBrowser()" ng-show="payHere"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'payHere'">
+                <ion-checkbox  ng-show="payHere"  ng-model="payment.type"  class="checkbox-positive" ng-true-value="'payHere'">
                     <h3>PayHere</h3>
                 </ion-checkbox >
 
@@ -206,6 +206,16 @@
                     <div class="row cart-buttons">
                         <div class="col-33"></div>
                         <button class="button button-block button-small made-easy-button-setting" ng-click="confirmCashPayment()" >Confirm</button>
+                    </div>
+                </div>
+
+            </form>
+            <form name="payHere" novalidate>
+                <div class="card-form list padding-right" ng-if="payment.type == 'payHere'">
+                    <span class="col input-label" ng-if="payment.type == 'payHere'">Confirm payment by payHere</span>
+                    <div class="row cart-buttons">
+                        <div class="col-33"></div>
+                        <button class="button button-block button-small made-easy-button-setting" ng-click="openAppBrowser()" >Confirm</button>
                     </div>
                 </div>
 
