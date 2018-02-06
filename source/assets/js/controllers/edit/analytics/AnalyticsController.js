@@ -88,14 +88,7 @@
                 toDate=null;
                 toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
-                });
-
-            var postData = { appId: $rootScope.appId,
-                             selectedTab : SALES,
-                             selectedProducts: data.selectedProducts, 
-                             fromDate: data.fromDate,
-                             toDate: data.toDate };            
-
+                });         
             }
 
             if(fromDate&&toDate&&selectedData.length > 0){
@@ -106,12 +99,11 @@
                     });
                 }else {
 
-                    var postData = {
-                        appId: $rootScope.appId,
-                        selectedProducts: data.selectedProducts,
-                        fromDate: data.fromDate,
-                        toDate: data.toDate
-                    };
+                    var postData = { appId: $rootScope.appId,
+                             selectedTab : SALES,
+                             selectedProducts: data.selectedProducts, 
+                             fromDate: data.fromDate,
+                             toDate: data.toDate };   
 
                     commerceService.getSalesSummary(postData)
                         .success(function (result) {
@@ -164,12 +156,7 @@
                 });
 
 
-            }
-
-            var postData = { appId: $rootScope.appId, 
-                             selectedTab : TAX,
-                             fromDate: data.fromDate,
-                             toDate: data.toDate }            
+            }         
 
             if(fromDate!=null&&toDate!=null) {
 
@@ -180,11 +167,10 @@
                     });
                 } else {
 
-                    var postData = {
-                        appId: $rootScope.appId,
-                        fromDate: data.fromDate,
-                        toDate: data.toDate
-                    }
+                    var postData = { appId: $rootScope.appId, 
+                             selectedTab : TAX,
+                             fromDate: data.fromDate,
+                             toDate: data.toDate }   
 
                     commerceService.getTaxSummary(postData)
                         .success(function (result) {
@@ -210,12 +196,6 @@
                         console.log("Error on commerceService.getChartData \n" + JSON.stringify(error, null, 2));
                         $scope.taxChartdata = emptyChart;
                     });
-
-            var postData = { appId: $rootScope.appId, 
-                             selectedTab : SHIPPING,
-                             fromDate: data.fromDate,
-                             toDate: data.toDate }   
-
                 }
 
             }
@@ -253,12 +233,10 @@
                         closeButton: true
                     });
                 } else {
-
-                    var postData = {
-                        appId: $rootScope.appId,
-                        fromDate: data.fromDate,
-                        toDate: data.toDate
-                    }
+                    var postData = { appId: $rootScope.appId, 
+                                     selectedTab : SHIPPING,
+                                     fromDate: data.fromDate,
+                                     toDate: data.toDate }                       
 
                     commerceService.getShippingSummary(postData)
                         .success(function (result) {
@@ -298,14 +276,18 @@
             $scope.salesList = null;
 
             try {
+                data.fromDate.toString().length;
+                data.toDate.toString().length;
 
                 fromDate = data.fromDate;
                 toDate = data.toDate;
                 selectedData = data.selectedProducts;
-                if (selectedData.length < 1) {
+
+                if (type === 'sales' && selectedData.length < 1) {
                     toastr.error('Please fill all fields', 'Warning', {
                         closeButton: true
                     });
+                    return;
                 }
 
             } catch (e) {
@@ -315,7 +297,7 @@
 
             }
 
-            if (fromDate && toDate && selectedData.length > 0) {
+            if (fromDate && toDate) {
 
                 if (fromDate > toDate) {
 
