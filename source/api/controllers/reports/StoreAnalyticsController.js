@@ -44,10 +44,9 @@ module.exports = {
                 return;
             }
 
-
             collection.aggregate([{$unwind:'$item'},{ "$match" :
-                    { $and: [{$and:[{updatedAt:{$gte:  new Date(fromDate)}},
-                                {updatedAt:{$lte: date.addDays(new Date(toDate), +1)}}]},
+                    { $and: [{$and:[{updatedAt:{$gte: getStartOfDate(fromDate)}},
+                                {updatedAt:{$lte: getEndOfDate(toDate)}}]},
                             { appId: appId,fulfillmentStatus:"Successful"},
                             {$or:selectedProductData}] } },
                 {
@@ -112,8 +111,8 @@ module.exports = {
             }
 
             collection.aggregate([{ "$match" :
-                    { $and: [{$and:[{updatedAt:{$gte:  new Date(fromDate)}},
-                                {updatedAt:{$lte: date.addDays(new Date(toDate), +1)}}]},
+                    { $and: [{$and:[{updatedAt:{$gte:  getStartOfDate(fromDate)}},
+                                {updatedAt:{$lte: getEndOfDate(toDate)}}]},
                             { appId: appId,fulfillmentStatus:"Successful"}] } },
                 {
 
@@ -167,8 +166,8 @@ module.exports = {
             }
 
             collection.aggregate([{ "$match" :
-                    { $and: [{$and:[{updatedAt:{$gte:  new Date(fromDate)}},
-                                {updatedAt:{$lte: date.addDays(new Date(toDate), +1)}}]},
+                    { $and: [{$and:[{updatedAt:{$gte: getStartOfDate(fromDate)}},
+                                {updatedAt:{$lte: getEndOfDate(toDate)}}]},
                             { appId: appId,fulfillmentStatus:"Successful"}] } },
                 {
 
@@ -238,13 +237,13 @@ module.exports = {
             });
 
             searchBy = {appId:req.body.appId,or:selectedProductData,fulfillmentStatus:"Successful",
-                updatedAt:{">=":new Date(req.body.fromDate),"<=":date.addDays(new Date(req.body.toDate), +1)}
+                updatedAt:{">=":getStartOfDate(req.body.fromDate),"<=":getEndOfDate(req.body.toDate)}
                 }
 
         }else {
 
             searchBy = {appId:req.body.appId,fulfillmentStatus:"Successful",
-                updatedAt:{">=":new Date(req.body.fromDate),"<=":date.addDays(new Date(req.body.toDate), +1)}
+                updatedAt:{">=":getStartOfDate(req.body.fromDate),"<=":getEndOfDate(req.body.toDate)}
             }
 
         }
@@ -350,16 +349,16 @@ module.exports = {
 
             var match;
             
-            if(selectedProductsForCharts.length>0){
+            if(selectedTab === SALES && selectedProductsForCharts.length>0){
                 console.log("selectedProductData > 0");
-                match = { $and: [{ $and:[{ updatedAt: { $gte:  new Date(fromDate) }},
-                        { updatedAt: { $lte: new Date(toDate) }}]},
+                match = { $and: [{ $and:[{ updatedAt: { $gte: getStartOfDate(fromDate) }},
+                        { updatedAt: { $lte: getEndOfDate(toDate) }}]},
                         { appId: appId,fulfillmentStatus:"Successful"},
                         { "item.name": { $in: selectedProductsForCharts }}]};
             }else{
                 console.log("selectedProductData = 0");
-                match = { $and: [{ $and:[{ updatedAt: { $gte:  new Date(fromDate) }},
-                        { updatedAt: { $lte: new Date(toDate) }}]},
+                match = { $and: [{ $and:[{ updatedAt: { $gte:  getStartOfDate(fromDate) }},
+                        { updatedAt: { $lte: getEndOfDate(toDate) }}]},
                         { appId: appId,fulfillmentStatus:"Successful"}]};
             }
 
@@ -491,5 +490,13 @@ module.exports = {
         });
     }
 
-
 };
+
+function getStartOfDate(date){
+    return new Date((new Date(date)).setHours(0,0,0,0));
+        var toDateEnd = new Date((new Date(toDate)).setHours(23,59,59,999));
+}
+
+function getEndOfDate(date){
+    return new Date((new Date(date)).setHours(23,59,59,999));
+}
