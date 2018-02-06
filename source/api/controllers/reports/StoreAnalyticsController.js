@@ -451,12 +451,13 @@ module.exports = {
                         chartData.labels.push(date);
                     });
 
+                    //If the chart contains only a single label and single value, then the chart is not displaying properly.
+                    //Here adding an another empmty label will shiw the Chart properly for a single data value
                     if(chartData.labels.length === 1){
                         chartData.labels.push("");
                     }
 
                     cb(null, chartData);
-
                 });
             });
         });
