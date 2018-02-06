@@ -9,6 +9,7 @@
 var config = require('../../services/config');
 var appId = "";
 var selectedProductData = [];
+var selectedProductsForCharts = [];
 var fromDate;
 var toDate;
 
@@ -340,12 +341,12 @@ module.exports = {
 
             var match;
             
-            if(selectedProductData.length>0){
+            if(selectedProductsForCharts.length>0){
                 console.log("selectedProductData > 0");
                 match = { $and: [{ $and:[{ updatedAt: { $gte:  new Date(fromDate) }},
                         { updatedAt: { $lte: new Date(toDate) }}]},
                         { appId: appId,fulfillmentStatus:"Successful"},
-                        { $or: selectedProductData }]};
+                        { "item.name": { $in: selectedProductsForCharts }}]};
             }else{
                 console.log("selectedProductData = 0");
                 match = { $and: [{ $and:[{ updatedAt: { $gte:  new Date(fromDate) }},
@@ -450,6 +451,10 @@ module.exports = {
                         chartData.labels.push(date);
                     });
 
+                    if(chartData.labels.length === 1){
+                        chartData.labels.push("");
+                    }
+
                     cb(null, chartData);
 
                 });
@@ -460,17 +465,10 @@ module.exports = {
     getChartData: function (req, res) {
         console.log("Exec getChartData");
         appId = req.body.appId;
-        var selectedProducts= req.body.selectedProducts;
+        selectedProductsForCharts = req.body.selectedProducts;
         fromDate = req.body.fromDate;
         toDate = req.body.toDate;
         selectedTab = req.body.selectedTab;
-
-        if(selectedTab === SALES && selectedProducts){
-            selectedProducts.forEach(function(element) {
-                var data = {"item.name":element};
-                selectedProductData.push(data);
-            });    
-        }    
 
         this.makeChartData((err, chartData) => {
             if(err) {
