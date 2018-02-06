@@ -10,6 +10,10 @@
     function analyticsCtrl($scope,$rootScope,$mdDialog,toastr,commerceService,$http) {
         console.log("analytics controller working")
 
+        var SALES = 1;
+        var TAX = 2;  
+        var SHIPPING = 3;      
+
         var emptyChart = {
             labels : [""],
             series : [''],
@@ -59,6 +63,7 @@
         $scope.getSalesSummary  = function (data) {
 
             var postData = { appId: $rootScope.appId,
+                             selectedTab : SALES,
                              selectedProducts: data.selectedProducts, 
                              fromDate: data.fromDate,
                              toDate: data.toDate };            
@@ -92,6 +97,7 @@
         $scope.getTaxSummary = function (data) {
 
             var postData = { appId: $rootScope.appId, 
+                             selectedTab : TAX,
                              fromDate: data.fromDate,
                              toDate: data.toDate }            
 
@@ -124,6 +130,7 @@
         $scope.getShippingSummary = function (data) {
 
             var postData = { appId: $rootScope.appId, 
+                             selectedTab : SHIPPING,
                              fromDate: data.fromDate,
                              toDate: data.toDate }   
 
