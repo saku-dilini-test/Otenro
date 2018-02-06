@@ -419,7 +419,7 @@ module.exports = {
                     var labels = [];
                     var data = [];
                     var date;
-                    results.forEach(tuple => {
+                    results.forEach(function(tuple){
 
                         switch (timeFrame) {
                         case DAILY:
@@ -479,7 +479,7 @@ module.exports = {
         toDate = req.body.toDate;
         selectedTab = req.body.selectedTab;
 
-        this.makeChartData((err, chartData) => {
+        this.makeChartData(function(err, chartData){
             if(err) {
                 console.log("Error, " + JSON.stringify(err, null, 2));
             }
