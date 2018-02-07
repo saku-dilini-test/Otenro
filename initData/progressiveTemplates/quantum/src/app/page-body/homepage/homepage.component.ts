@@ -25,18 +25,25 @@ export class HomepageComponent implements OnInit {
   private categoryId;
   private categoryName;
   private imageUrl: any;
-  private randomProducts: any;
+  private products: any;
   private results: {};
   private randomIndex;
   private imageUrlProd;
-  private testArr = [];
-  constructor(private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService) { }
+  private randomedArr = [];
+  constructor(private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService) {
+    for(let i=0;i<2;i++){
+      this.randomedArr.push({
+        imageUrl : 'lazyload-ph.png'
+      });
+    }
+  }
+
+
 
   ngOnInit() {
 
     this.imageUrlProd = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
-
 
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
@@ -44,7 +51,6 @@ export class HomepageComponent implements OnInit {
     this.categoryService.getCategories().subscribe(data => {
       // Read the result field from the JSON response.
       this.results = data;
-      console.log(data);
       data.forEach(element => {
         this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
       });
@@ -55,39 +61,34 @@ export class HomepageComponent implements OnInit {
       });
 
 
-    let min; let max;
+    let max;
 
     this.productService.getAllProducts().subscribe(data => {
-      this.randomProducts = data;
-      console.log("data : " + JSON.stringify(this.randomProducts[0]))
-      min = 0
-      max = Object.keys(this.randomProducts).length;
-      console.log("max : " + max)
+      this.products = data;
+      max = Object.keys(this.products).length;
 
-
-      // console.log("this.randomIndex : " + this.randomIndex)
-      // [Math.floor(Math.random()*letters.length)]
-      var test ;
-
-      while(test){
-
-      }
-      for (let i = 0; i < 2; i++) {
+      let lastIndex = null;
+      this.randomedArr = [];
+      while(true){
         this.randomIndex = Math.floor(Math.random() * max);
-        console.log(this.randomIndex)
-        this.testArr.push(this.randomProducts[this.randomIndex])
+        if( this.randomedArr.length == 2){
+          break;
+        }
+
+        if(lastIndex != null && this.randomedArr.length == 1){
+          if(lastIndex != this.randomIndex){
+            this.randomedArr.push(this.products[this.randomIndex]);
+            break;
+          }
+        }else{
+          this.randomedArr.push(this.products[this.randomIndex]);
+          lastIndex = this.randomIndex;
+        }
 
       }
-
-      console.log(this.testArr);
     }, err => {
       console.log('Error retrieving all products');
     })
-
-
-
-
-    console.log()
 
   }
 

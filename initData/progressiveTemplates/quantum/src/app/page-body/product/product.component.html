@@ -2,9 +2,7 @@
   <div class="bloc bgc-white l-bloc" id="bloc-13">
     <div class="container bloc-sm">
       <div class="row">
-        <div class="col-sm-12">
           <img src="./assets/images/lazyload-ph.png" data-src="./assets/images/T-212%20.png" class="img-responsive lazyload" />
-        </div>
       </div>
     </div>
   </div>
@@ -16,38 +14,6 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="row bgc-gainsboro voffset-md row3">
-            <div class="col-sm-6">
-              <div class="panel-heading">
-                <h3 class="mg-clear link1 ">
-                  <a class="link-2" href="#" data-toggle-visibility="details">Product Details</a>
-                  <br>
-                </h3>
-              </div>
-              <p class=" text-left object-hidden product-detail" id="details">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-              </p>
-              <div class="panel-heading">
-                <h3 class="mg-clear link1 ">
-                  <a class="link-2" href="#" data-toggle-visibility="reviews">Reviews</a>
-                  <br>
-                </h3>
-              </div>
-              <p class=" text-left object-hidden product-detail" id="reviews">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-              </p>
-              <div class="panel-heading">
-                <h3 class="mg-clear link1 ">
-                  <a class="link-2" href="#" data-toggle-visibility="warranty">Warranty</a>
-                  <br>
-                </h3>
-              </div>
-              <p class=" text-left object-hidden product-detail" id="warranty">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-                penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-              </p>
-            </div>
             <div class="col-sm-6">
               <div class="panel panel-detail">
                 <div class="panel-heading">
@@ -64,30 +30,28 @@
                   </div>
 
 
-                  <div class="row my-4" *ngIf="Data.selection[0]">
-                    <label class="col-md-4 name-label">{{Data.selection[0].name}}:</label>
-                    <div class="col-md-8">
+                  <div class="row" *ngIf="Data.selection[0]">
+                    <p class="col-md-3">{{Data.selection[0].name}}:</p>
+                    <div class="col-md-9">
                       <select class="form-control" [(ngModel)]="selectedVariant1" (ngModelChange)="changeVariant(selectedVariant1)">
                         <option *ngFor="let c of selection">{{c.vType}}</option>
                       </select>
                     </div>
                   </div>
+                  <div class="row" *ngIf="Data.selection[1]">
+                    <p class="col-md-3">{{Data.selection[1].name}}:</p>
 
-                  <div class="row my-4" *ngIf="Data.selection[1]">
-                    <label class="name-label col-md-4">{{Data.selection[1].name}}:</label>
-
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       <select class="form-control" [(ngModel)]="selectedVarient2" (ngModelChange)="changeVariant2(selectedVarient2)">
                         <option *ngFor="let c of selection1" [ngValue]="c.vType"> {{c.vType}} </option>
                       </select>
                     </div>
 
                   </div>
-                  <!-- *ngIf="selection2.length !=0" -->
-                  <div class="row my-4" *ngIf="Data.selection[2]">
-                    <label class="name-label col-md-4">{{Data.selection[2].name}}:</label>
+                  <div class="row" *ngIf="Data.selection[2]">
+                    <p class="col-md-3">{{Data.selection[2].name}}:</p>
 
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       <select class="form-control" [(ngModel)]="selectedVarient3" (ngModelChange)="changeVariant3(selectedVarient3)">
                         <option *ngFor="let c of selection2" [ngValue]="c.vType"> {{c.vType}} </option>
                       </select>
@@ -95,23 +59,38 @@
 
                   </div>
 
-                  <div class="row my-4" *ngIf="Data.selection[3]">
-                    <label class="name-label col-md-4">{{Data.selection[3].name}}:</label>
+                  <div class="row" *ngIf="Data.selection[3]">
+                    <p class="col-md-3">{{Data.selection[3].name}}:</p>
 
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                       <select class="form-control" [(ngModel)]="selectedVarient4" (ngModelChange)="changeVariant4(selectedVarient4)">
                         <option *ngFor="let c of selection3" [ngValue]="c.vType"> {{c.vType}} </option>
                       </select>
                     </div>
                   </div>
+                  <br>
+                  <div class="row">
+                      <div class="col-md-3">
+                        <p>Enter Quantity:</p>
+                      </div>
+                      <div class="col-md-9">
+                        <span>
+                            <button class="btn btn-default" (click)="descrease()" type="button" id="btn-plus"><span class="glyphicon glyphicon-minus"></span></button>
+                        </span>
+                        <input type="text" class="form-control" name="qty" id="qty" value="selectedVariant.buyQuantity" [disabled]="lockBuyButton == false" [(ngModel)]="selectedVariant.buyQuantity"
+                               (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)" style="display: inline;width: 76%;position: relative;top: 1px">
+                        <span>
+                            <button class="btn btn-default" (click)="increase()" type="button" id="btn-minus"><span class="glyphicon glyphicon-plus"></span></button>
+                        </span>
+                      </div><!-- /input-group -->
+                  </div><!-- /.row -->
 
                   <!-- Product not available in store -->
-                  <div class="col" *ngIf="selectedVariant.quantity == 0">
-                    <span>
-                      Product not available
-                    </span>
-                  </div>
-
+                    <div class="col" *ngIf="selectedVariant.quantity == 0">
+                      <span>
+                        Product not available
+                      </span>
+                    </div>
 
                   <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
                   <div class="col" *ngIf="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
@@ -125,9 +104,6 @@
                     </span>
                   </div>
 
-                  <br>
-                  <br>
-
                   <!-- <div class="btn-group btn-dropdown">
                     <a href="#" class="btn dropdown-toggle  btn-d  btn-lg btn-rd" data-toggle="dropdown" aria-expanded="false">1<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -140,43 +116,41 @@
                     </ul>
                   </div> -->
 
-                  <div class="container">
-                      <div class="row">
-                      <div class="col-lg-2">
-                        <div class="input-group">Enter Quantity:
-                          <span class="input-group-btn">
-                            <button class="btn btn-default" (click)="descrease()" type="button" id="btn-plus"><span class="glyphicon glyphicon-minus"></span></button>
-                          </span>
-                          <input type="text" class="form-control" name="qty" id="qty" value="selectedVariant.buyQuantity" [disabled]="lockBuyButton == false" [(ngModel)]="selectedVariant.buyQuantity"
-                          (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)">
-                          <span class="input-group-btn">
-                            <button class="btn btn-default" (click)="increase()" type="button" id="btn-minus"><span class="glyphicon glyphicon-plus"></span></button>
-                          </span>
-                        </div><!-- /input-group -->
-                      </div><!-- /.col-lg-6 -->
-                    </div><!-- /.row -->
+
+
+
+                  <!-- <div>
+                    <span (click)="descrease()"> - </span>
+                    <input type="number" min="1" value="selectedVariant.buyQuantity" [disabled]="lockBuyButton == false" [(ngModel)]="selectedVariant.buyQuantity"
+                      (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)">
+                    <span (click)="increase()"> + </span>
+                  </div> -->
+
+
+                  <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9 text-center">
+                      <a (click)='addToCart()' class="btn btn-d btn-lg button-circular-radius button-circular-radius-small shoping-cart">add to cart</a>
                     </div>
-
-                    <!-- <div>
-                      <span (click)="descrease()"> - </span>
-                      <input type="number" min="1" value="selectedVariant.buyQuantity" [disabled]="lockBuyButton == false" [(ngModel)]="selectedVariant.buyQuantity"
-                        (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)">
-                      <span (click)="increase()"> + </span>
-                    </div> -->
-                  <br>
-
-                  <a (click)='addToCart()' class="btn btn-d btn-lg button-circular-radius button-circular-radius-small shoping-cart">add to cart</a>
+                  </div>
                 </div>
               </div>
-              <p class=" content-bold">
-                SKU: QT-BODYTR-ELITE
-                <br>Categories: {{catName}}
-                <br>
+            </div>
+            <div class="col-sm-6">
+              <div class="panel-heading">
+                <h3 class="mg-clear link1 ">
+                  <a class="link-2">Product Details</a>
+                  <br>
+                </h3>
+              </div>
+              <p class=" text-left product-detail" id="details">
+                {{Data.detailedDesc}}
               </p>
-              <p class="prices  social-media-details-heading">
+
+              <p class="prices product-detail social-media-details-heading">
                 SHARE IT ON:
               </p>
-              <div class="row social-media-details">
+              <div class="row social-media-details product-detail">
                 <div class="col-sm-12">
                   <div class="row social-media-details">
                     <div class="col-sm-3">
@@ -202,6 +176,26 @@
                   </div>
                 </div>
               </div>
+              <!--<div class="panel-heading">-->
+                <!--<h3 class="mg-clear link1 ">-->
+                  <!--<a class="link-2" href="#" data-toggle-visibility="reviews">Reviews</a>-->
+                  <!--<br>-->
+                <!--</h3>-->
+              <!--</div>-->
+              <!--<p class=" text-left object-hidden product-detail" id="reviews">-->
+                <!--Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque-->
+                <!--penatibus et magnis dis parturient montes, nascetur ridiculus mus.-->
+              <!--</p>-->
+              <!--<div class="panel-heading">-->
+                <!--<h3 class="mg-clear link1 ">-->
+                  <!--<a class="link-2" href="#" data-toggle-visibility="warranty">Warranty</a>-->
+                  <!--<br>-->
+                <!--</h3>-->
+              <!--</div>-->
+              <!--<p class=" text-left object-hidden product-detail" id="warranty">-->
+                <!--Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque-->
+                <!--penatibus et magnis dis parturient montes, nascetur ridiculus mus.-->
+              <!--</p>-->
             </div>
           </div>
         </div>
@@ -210,12 +204,6 @@
   </div>
   <!-- bloc-14 END -->
 
-  <!-- bloc-15 -->
-  <div class="bloc bgc-white l-bloc" id="bloc-15">
-    <div class="container bloc-sm">
-    </div>
-  </div>
-  <!-- bloc-15 END -->
 
   <!-- bloc-16 -->
   <!-- <div class="bloc bgc-white l-bloc" id="bloc-16">

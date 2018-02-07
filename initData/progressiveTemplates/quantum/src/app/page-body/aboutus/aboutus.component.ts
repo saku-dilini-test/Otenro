@@ -83,8 +83,6 @@ export class AboutusComponent implements OnInit {
       }, (err) => {
         console.log(err);
       });
-
-
   }
 
 

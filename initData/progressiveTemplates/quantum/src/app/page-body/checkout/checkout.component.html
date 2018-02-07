@@ -1,7 +1,5 @@
-<app-carousel [slides]="slides">
-</app-carousel>
-
 <div class="container">
+  <app-carousel [slides]="slides"></app-carousel>
 
   <div *ngIf='formType == "delivery"'>
     <div class="row">
@@ -50,15 +48,12 @@
 
       <div class="col-md-5">
         <h4 class="main-header-font">Shipping Options</h4>
-        <div>
-          <div class="custom-controls-stacked custom-radio main-content-font">
-            <label class="custom-control  mt-3" *ngFor="let ship of shippingData, let idx = index">
-              <input  #r id="radioStacked1" name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping" (change)='addShipping(ship,$event)'>
-              <span class="custom-control-indicator main-button"></span>
-              <h5 class="custom-control-description pr-3">{{ship.optionName}}</h5>
-              <span>({{ship.shippingOption}})</span>
-            </label>
-          </div>
+
+        <div class="radio" *ngFor="let ship of shippingData, let idx = index">
+          <label>
+            <input  #r  name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping" (change)='addShipping(ship,$event)'>
+            {{ship.optionName}} <span>({{ship.shippingOption}})</span>
+          </label>
         </div>
       </div>
     </div>
@@ -83,17 +78,12 @@
     <div class="col-sm-12">
       <h4 class="my-3 main-header-font">Select a Location</h4>
       <div class="row main-content-font">
-        <div class="custom-controls-stacked col-sm-4" *ngFor="let pick of pickup, let idx = index">
-          <label class="custom-control  mt-3">
+        <div class="radio" *ngFor="let pick of pickup, let idx = index">
+          <label>
             <input  #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx])'>
-            <span class="custom-control-indicator  main-button"></span>
-            <h5 class="custom-control-description pr-3">{{pick.locationName}}</h5>
+            <b>{{pick.locationName}}</b>
+            <div>{{pick.number}}, {{pick.streetAddress}}, {{pick.city}}, {{pick.postalCode}}, {{pick.country}}.</div>
           </label>
-          <span>{{pick.number}},</span>
-          <span>{{pick.streetAddress}},</span>
-          <span>{{pick.city}},</span>
-          <span>{{pick.postalCode}},</span>
-          <span>{{pick.country}}.</span>
         </div>
       </div>
 
@@ -164,51 +154,58 @@
   <div class="custom-controls-stacked main-content-font" *ngIf="isSelected && !(overWeight || underWeight)">
     <h4 class="main-header-font">Select Payment Type</h4>
     <div *ngIf="deliveryShow"  class="mt-3">
-      <label class="custom-control custom-radio">
-        <input  type="radio" name="deliveryShow"  value="cashOnDelivery" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-        <span class="custom-control-indicator  main-button"></span>
-        <h5 class="custom-control-description"> Cash On Delivery</h5>
-      </label>
+
+      <div class="radio">
+        <label>
+          <input  type="radio" name="deliveryShow"  value="cashOnDelivery" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+          Cash On Delivery
+        </label>
+      </div>
     </div>
 
     <div *ngIf="pickupShow" class="mt-3">
-      <label class="custom-control custom-radio">
-        <input type="radio" name="pickupShow" value="cashOnPickup" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-        <span class="custom-control-indicator  main-button"></span>
-        <h5 class="custom-control-description">Cash On Pickup</h5>
-      </label>
+      <div class="radio">
+        <label>
+          <input type="radio" name="pickupShow" value="cashOnPickup" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+          Cash On Pickup
+        </label>
+      </div>
     </div>
 
     <div *ngIf="paypalShow" class="mt-3">
-      <label class="custom-control custom-radio">
-        <input type="radio" name="paypalShow" value="paypal" (click)="buyWithPayPal()" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-        <span class="custom-control-indicator  main-button"></span>
-        <h5 class="custom-control-description">PayPal</h5>
-      </label>
+      <div class="radio">
+        <label>
+          <input type="radio" name="paypalShow" value="paypal" (click)="buyWithPayPal()" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+          PayPal
+        </label>
+      </div>
     </div>
 
     <div *ngIf="stripeShow" class="mt-3">
-      <label class="custom-control custom-radio">
-        <input type="radio" name="stripeShow" value="creditcard" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-        <span class="custom-control-indicator  main-button"></span>
-        <h5 class="custom-control-description">Stripe</h5>
-      </label>
+      <div class="radio">
+        <label>
+          <input type="radio" name="stripeShow" value="creditcard" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+          Stripe
+        </label>
+      </div>
     </div>
 
     <div *ngIf="braintreeShow" class="mt-3">
-      <label class="custom-control custom-radio">
-        <input type="radio" name="braintreeShow" value="braintree" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-        <span class="custom-control-indicator  main-button"></span>
-        <h5 class="custom-control-description">Braintree</h5>
-      </label>
+      <div class="radio">
+        <label>
+          <input type="radio" name="braintreeShow" value="braintree" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+          Braintree
+        </label>
+      </div>
     </div>
 
     <div *ngIf="authorizeNet" class="mt-3">
-      <label class="custom-control custom-radio">
-        <input type="radio" name="authorizeNet" value="authorizeNet" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-        <span class="custom-control-indicator  main-button"></span>
-        <h5 class="custom-control-description">AuthorizeNet</h5>
-      </label>
+      <div class="radio">
+        <label>
+          <input type="radio" name="authorizeNet" value="authorizeNet" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
+          AuthorizeNet
+        </label>
+      </div>
     </div>
 
     <form *ngIf="paymentType == 'cashOnPickup' || paymentType == 'cashOnDelivery'" name="cashPaymentFrom" novalidate class="row my-4">
@@ -216,7 +213,9 @@
         <h5 *ngIf="paymentType == 'cashOnDelivery'">Confirm payment by cash on delivery</h5>
         <h5 *ngIf="paymentType == 'cashOnPickup'">Confirm payment by cash on pickup</h5>
         <button class="btn  main-button btn-lg" (click)="confirmCashPayment()">Confirm</button>
-        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+      </div>
+      <div class="col-sm-12" style="margin: 10px 0">
+        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null" >{{ successMessage }}</ngb-alert>
       </div>
     </form>
 

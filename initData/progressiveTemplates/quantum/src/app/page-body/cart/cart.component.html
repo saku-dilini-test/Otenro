@@ -1,11 +1,9 @@
-<div class="bloc bgc-white l-bloc">
-	<app-carousel [slides]="slides">
-	</app-carousel>
-</div>
 
 <div class="bloc bgc-white l-bloc" id="bloc-0">
 	<div class="container bloc-sm">
-	</div>
+      <app-carousel [slides]="slides">
+      </app-carousel>
+  </div>
 </div>
 
 <div class="container">
@@ -88,32 +86,36 @@
 				</table>
 			</div>
 
-			<div class="w-50 pull-right clearfix">
-				<h5 class="main-header-font">Cart Total</h5>
-				<table cellspacing="0" class="table table-responsive table-bordered">
-					<tbody class="main-content-font">
-						<tr>
-							<th>Total</th>
-							<td data-title="Total">
-								<strong>
-									<a [(ngModel)]="total" ngDefaultControl>${{sign}}{{getTotal()}}</a>
-								</strong>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<div>
-					<!-- [disabled]='cartItems.length<=0' -->
-					<button class="btn main-button button-inverse text-white btn-block" (click)="delivery(cartItems)">
-						Delivery
-					</button>
-					<button class="btn main-button button-inverse text-white btn-block" (click)='pickupDetails(cartItems)'>
-						pickup
-					</button>
-				</div>
-			</div>
-		</div>
+			<div class="row">
+        <div class="col-md-12">
+          <h5 class="main-header-font">Cart Total</h5>
+          <table cellspacing="0" class="table table-responsive table-bordered">
+            <tbody class="main-content-font">
+              <tr>
+                <th>Total</th>
+                <td data-title="Total">
+                  <strong>
+                    <a [(ngModel)]="total" ngDefaultControl>${{sign}}{{getTotal()}}</a>
+                  </strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6">
+          <!-- [disabled]='cartItems.length<=0' -->
+          <button class="btn main-button button-inverse text-white btn-block" (click)="delivery(cartItems)">
+            Delivery
+          </button>
+        </div>
+        <div class="col-md-6">
+          <button class="btn main-button button-inverse text-white btn-block" (click)='pickupDetails(cartItems)'>
+            pickup
+          </button>
+        </div>
+      </div>
 
+		</div>
 	</div>
 </div>
 
