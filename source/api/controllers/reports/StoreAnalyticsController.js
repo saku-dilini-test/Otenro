@@ -9,7 +9,6 @@
 var config = require('../../services/config');
 var appId = "";
 var selectedProductData = [];
-var selectedProductsForCharts = [];
 var fromDate;
 var toDate;
 
@@ -48,11 +47,11 @@ module.exports = {
                     { $and: [{$and:[{updatedAt:{$gte: getStartOfDate(fromDate)}},
                                 {updatedAt:{$lte: getEndOfDate(toDate)}}]},
                             { appId: appId,fulfillmentStatus:"Successful"},
-                            {$or:selectedProductData}] } },
+                            { "item.name": { $in: selectedProductData }}] } },
                 {
 
                     $group : {
-                        _id:{name:"$item.name"}, totalPrice: { $sum: "$item.total"}, count: { $sum: 1 }
+                        _id:{name:"$item.name"}, itemPrice: { $max: "$item.price"}, count: { $sum: "$item.qty" }
                     }
                 }
             ]).toArray(function (err, results) {
@@ -60,7 +59,20 @@ module.exports = {
                     cb({msg: "Nothing found"}, null);
                     return;
                 }
-                cb(null, results);
+
+
+                var modifiedResults = [];
+                results.forEach(function(tuple){
+                    var itemId = tuple._id;
+                    var itemPrice = tuple.itemPrice;
+                    var qtySum = tuple.count;
+
+                    var totalPrice = itemPrice * qtySum;
+
+                    modifiedResults.push({ _id: itemId, count: qtySum, totalPrice: totalPrice });
+                });
+
+                cb(null, modifiedResults);
             });
 
         });
@@ -71,20 +83,12 @@ module.exports = {
 
     getSalesSummary: function (req, res) {
         appId = req.body.appId;
-        var selectedProducts= req.body.selectedProducts;
+        selectedProductData= req.body.selectedProducts;
         fromDate = req.body.fromDate;
         toDate = req.body.toDate;
 
         console.log("fromDate " + fromDate);
         console.log("toDate " + toDate);
-
-
-        selectedProducts.forEach(function(element) {
-            var data = {"item.name":element};
-            selectedProductData.push(data);
-        });
-
-
 
         this.getSalesData(function (err, results) {
             if(err) {
@@ -229,14 +233,9 @@ module.exports = {
 
         if (type=='sales'){
 
-            var selectedProducts= req.body.selectedProducts;
+            selectedProductData = req.body.selectedProducts;
 
-            selectedProducts.forEach(function(element) {
-                var data = {"item.name":element};
-                selectedProductData.push(data);
-            });
-
-            searchBy = {appId:req.body.appId,or:selectedProductData,fulfillmentStatus:"Successful",
+            searchBy = {appId:req.body.appId,"item.name": { $in: selectedProductData },fulfillmentStatus:"Successful",
                 updatedAt:{">=":getStartOfDate(req.body.fromDate),"<=":getEndOfDate(req.body.toDate)}
                 }
 
@@ -349,12 +348,12 @@ module.exports = {
 
             var match;
             
-            if(selectedTab === SALES && selectedProductsForCharts.length>0){
+            if(selectedTab === SALES && selectedProductData.length>0){
                 console.log("selectedProductData > 0");
                 match = { $and: [{ $and:[{ updatedAt: { $gte: getStartOfDate(fromDate) }},
                         { updatedAt: { $lte: getEndOfDate(toDate) }}]},
                         { appId: appId,fulfillmentStatus:"Successful"},
-                        { "item.name": { $in: selectedProductsForCharts }}]};
+                        { "item.name": { $in: selectedProductData }}]};
             }else{
                 console.log("selectedProductData = 0");
                 match = { $and: [{ $and:[{ updatedAt: { $gte:  getStartOfDate(fromDate) }},
@@ -404,8 +403,7 @@ module.exports = {
                 }
 
                 collection.aggregate([
-                    // { $unwind: '$item' },
-                    { $addFields: { totalQty: { $sum: "$item.qty" }}},
+                    { $project: { updatedAt: 1, tax: 1, appId : 1, fulfillmentStatus : 1, "item.name" : 1, totalQty: { $sum: "$item.qty" }}},
                     { $match: match },
                     { $group: { _id : grouping,
                         totalQty : { $sum : "$totalQty" }, totalTax: { $sum: "$tax"}, totalNoOfOrders : { $sum : 1 }}},
@@ -474,7 +472,7 @@ module.exports = {
     getChartData: function (req, res) {
         console.log("Exec getChartData");
         appId = req.body.appId;
-        selectedProductsForCharts = req.body.selectedProducts;
+        selectedProductData = req.body.selectedProducts;
         fromDate = req.body.fromDate;
         toDate = req.body.toDate;
         selectedTab = req.body.selectedTab;
@@ -494,7 +492,6 @@ module.exports = {
 
 function getStartOfDate(date){
     return new Date((new Date(date)).setHours(0,0,0,0));
-        var toDateEnd = new Date((new Date(toDate)).setHours(23,59,59,999));
 }
 
 function getEndOfDate(date){
