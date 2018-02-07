@@ -319,7 +319,6 @@ module.exports = {
 
     },
 
-
     makeChartData: function (cb) {
         var chartData = {
             labels : [],
@@ -403,7 +402,7 @@ module.exports = {
                 }
 
                 collection.aggregate([
-                    { $project: { updatedAt: 1, tax: 1, appId : 1, fulfillmentStatus : 1, "item.name" : 1, totalQty: { $sum: "$item.qty" }}},
+                    { $project: { updatedAt: 1, tax: 1, appId : 1, fulfillmentStatus : 1, "item.name" : 1, totalQty: "$item.qty" }},
                     { $match: match },
                     { $group: { _id : grouping,
                         totalQty : { $sum : "$totalQty" }, totalTax: { $sum: "$tax"}, totalNoOfOrders : { $sum : 1 }}},
@@ -412,58 +411,76 @@ module.exports = {
                     if(err || !results || results.length == 0) {
                         cb({msg: "Nothing found at second aggregate call" , error: err}, null);
                         return;
-                    }
+                    }                  
 
-                    var labels = [];
-                    var data = [];
-                    var date;
-                    results.forEach(function(tuple){
-
-                        switch (timeFrame) {
-                        case DAILY:
-                                date = MONTHS[tuple._id.month-1] + "/" + tuple._id.day + "/" + tuple._id.year;
-                            break;
-                        case WEEKLY:
-                                var week = tuple._id.week;
-                            if(week === 0){
-                                week = 1;
-                            }else{
-                                week++;
+                    getSalesOrdersByDateMap(timeFrame, function(err, ordersByDateMap){
+                        if(selectedTab === SALES){
+                            if(err) {
+                                return res.send({
+                                    "success": false,
+                                    "message": (err.msg) ? err.msg : "Nothing found"
+                                });
                             }
-
-                            date = "Week " + week + ":" + tuple._id.year;
-                            break;
-                        case MONTHLY:
-                                date = MONTHS[tuple._id.month-1] + ":" + tuple._id.year;
-                            break;
-                        default:
-                            date = tuple._id.year;
                         }
 
-                        switch (selectedTab) {
-                        case SALES:
-                            chartData.data[0].push(tuple.totalQty);
-                            chartData.series[0] = 'Qty';
-                            break;
-                        case TAX:
-                            chartData.data[0].push(tuple.totalTax);
-                            chartData.series[0] = 'Tax';
-                            break;
-                        default:
-                            chartData.data[0].push(tuple.totalNoOfOrders);
-                            chartData.series[0] = 'Shipments';
-                        }                        
+                        var labels = [];
+                        var data = [];
+                        var date;
+                        results.forEach(function(tuple){
 
-                        chartData.labels.push(date);
+                            switch (timeFrame) {
+                            case DAILY:
+                                    date = MONTHS[tuple._id.month-1] + "/" + tuple._id.day + "/" + tuple._id.year;
+                                break;
+                            case WEEKLY:
+                                    var week = tuple._id.week;
+                                if(week === 0){
+                                    week = 1;
+                                }else{
+                                    week++;
+                                }
+
+                                date = "Week " + week + ":" + tuple._id.year;
+                                break;
+                            case MONTHLY:
+                                    date = MONTHS[tuple._id.month-1] + ":" + tuple._id.year;
+                                break;
+                            default:
+                                date = tuple._id.year;
+                            }
+
+                            switch (selectedTab) {
+                            case SALES:
+                                var totalQtyByDate = 0;
+
+                                if(ordersByDateMap && ordersByDateMap[date])
+                                {
+                                    totalQtyByDate = ordersByDateMap[date];
+                                }
+
+                                chartData.data[0].push(totalQtyByDate);
+                                chartData.series[0] = 'Qty';
+                                break;
+                            case TAX:
+                                chartData.data[0].push(tuple.totalTax);
+                                chartData.series[0] = 'Tax';
+                                break;
+                            default:
+                                chartData.data[0].push(tuple.totalNoOfOrders);
+                                chartData.series[0] = 'Shipments';
+                            }                        
+
+                            chartData.labels.push(date);
+                        });
+
+                        //If the chart contains only a single label and single value, then the chart is not displaying properly.
+                        //Here adding an another empmty label will shiw the Chart properly for a single data value
+                        if(chartData.labels.length === 1){
+                            chartData.labels.push("");
+                        }
+
+                        cb(null, chartData);
                     });
-
-                    //If the chart contains only a single label and single value, then the chart is not displaying properly.
-                    //Here adding an another empmty label will shiw the Chart properly for a single data value
-                    if(chartData.labels.length === 1){
-                        chartData.labels.push("");
-                    }
-
-                    cb(null, chartData);
                 });
             });
         });
@@ -496,4 +513,79 @@ function getStartOfDate(date){
 
 function getEndOfDate(date){
     return new Date((new Date(date)).setHours(23,59,59,999));
+}
+
+
+function getSalesOrdersByDateMap(timeFrame, cb) {
+    //This is only applicable for Sales, Couldn't use the aggregate functions in MongoDB since the current DB version not supported(2.6.x)
+    if(selectedTab === SALES){
+        var ordersByDateMap = new Object();
+
+        var searchBy =  { appId: appId,
+                          "item.name": { $in: selectedProductData },
+                          fulfillmentStatus: "Successful",
+                          updatedAt: { ">=": getStartOfDate(fromDate), "<=": getEndOfDate(toDate) }
+                        }       
+
+        ApplicationOrder.find(searchBy).exec(function (err, Orders) {
+
+            if (err){
+                console.log("Error: " + JSON.stringify(err, null, 2));
+                cb(err, null);
+                return;
+            }
+
+            Orders.forEach(function(order) {
+                var date = new Date(order.updatedAt);
+                var month = date.getMonth();
+                var day = date.getDate();
+                var year = date.getFullYear();
+                var items = order.item;
+
+                switch (timeFrame) {
+                case DAILY:
+                        dateStr = MONTHS[month] + "/" + day + "/" + year;
+                    break;
+                case WEEKLY:
+                        var week = getWeekOfMonth(day);
+                    if(week === 0){
+                        week = 1;
+                    }else{
+                        week++;
+                    }
+
+                    dateStr = "Week " + week + ":" + year;
+                    break;
+                case MONTHLY:
+                    dateStr = MONTHS[month] + ":" + year;
+                    break;
+                default:
+                    dateStr = year;
+                }                
+
+                items.forEach(function(item){
+                    if(ordersByDateMap[dateStr]){
+                        ordersByDateMap[dateStr] += item.qty;
+                    }else{
+                        ordersByDateMap[dateStr] = item.qty;
+                    }
+                });                                    
+            });
+
+            cb(null, ordersByDateMap);
+        });   
+    }else{
+        cb(null, null);
+    }
+}
+
+function getWeekOfMonth(day) {
+  day-=(day==0?6:date.getDay()-1);//get monday of this week
+  //special case handling for 0 (sunday)
+
+  day+=7;
+  //for the first non full week the value was negative
+
+  prefixes = ['0', '1', '2', '3', '4', '5'];
+  return prefixes[0 | (day) / 7];
 }
