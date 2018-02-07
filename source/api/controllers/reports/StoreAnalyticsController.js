@@ -369,7 +369,7 @@ module.exports = {
                 { $sort : { _id : 1 }}
             ]).toArray(function (err, results) {
                 if(err || !results || results.length == 0) {
-                    cb({msg: "Nothing found"}, null);
+                    cb({msg: "Nothing found at first aggregate call" , error: err}, null);
                     return;
                 }
 
@@ -410,7 +410,7 @@ module.exports = {
                     { $sort : { _id : 1 }}
                 ]).toArray(function (err, results) {
                     if(err || !results || results.length == 0) {
-                        cb({msg: "Nothing found"}, null);
+                        cb({msg: "Nothing found at second aggregate call" , error: err}, null);
                         return;
                     }
 
