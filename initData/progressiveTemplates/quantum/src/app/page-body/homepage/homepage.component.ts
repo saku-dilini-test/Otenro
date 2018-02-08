@@ -92,6 +92,17 @@ export class HomepageComponent implements OnInit {
 
   }
 
+
+  getWidth(index,length){
+    let styles = {
+      'width': '100%'
+    };
+    let vw = window.innerWidth;
+    if(vw <768 && length-1 === index && index % 2 === 0){
+      return styles;
+    }
+  }
+
   // Routing Method
   navigateShop(val: string, id, name) {
     console.log(val);
@@ -101,7 +112,6 @@ export class HomepageComponent implements OnInit {
 
 
 
-  //   slides = SLIDES;
   //   images: Array<string> = ['sports', 'abstract', 'people', 'transport', 'city', 'technics', 'nightlife', 'animals'];
 
   //   owlOptions = {
@@ -133,9 +143,11 @@ export class HomepageComponent implements OnInit {
 
   // }
 
-  // const SLIDES = [
-  //   { src: './assets/images/slider/1.jpg', title: 'Final Sale' },
-  //   { src: './assets/images/slider/2.jpg', title: 'Final Sale' },
-  //   { src: './assets/images/slider/3.jpg', title: 'Final Sale' },
-  // ];
+    slides = SLIDES;
+
 }
+const SLIDES = [
+  { src: './assets/images/SLIDER%201.png'  },
+  { src: './assets/images/SLIDER%202.png' },
+  { src: './assets/images/SLIDER%203.png' },
+];
