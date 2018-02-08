@@ -284,13 +284,15 @@ module.exports = {
                     "Date" + ","+ "Amount"+","+ "SKU"+"," +"variant"  +'\r\n');
                 Order.forEach(function(order) {
                     order.item.forEach(function (item) {
-                        item.variant.forEach(function (variant) {
-                            var data = order.deliveryCountry+","+order.customerName + ","+
-                                item.name + ","+ order.updatedAt+","+item.total+","+item.sku+"," +
-                                ""+variant.name+"-"+variant.vType+'\r\n';
-                            reportData.push(data);
-                        })
-
+                        if(selectedProductData.indexOf(item.name) > -1){
+                            var itemTotal = item.qty * item.price;
+                            item.variant.forEach(function (variant) {
+                                var data = order.deliveryCountry+","+order.customerName + ","+
+                                    item.name + ","+ order.updatedAt+","+itemTotal+","+item.sku+"," +
+                                    ""+variant.name+"-"+variant.vType+'\r\n';
+                                reportData.push(data);
+                            })
+                        }
                     })
                 });
 
@@ -516,6 +518,9 @@ function getEndOfDate(date){
 }
 
 
+/*
+    This sub function will make a map which has the key as the date/week/months/year grouping and Sum of the Qty's as the Value
+*/
 function getSalesOrdersByDateMap(timeFrame, cb) {
     //This is only applicable for Sales, Couldn't use the aggregate functions in MongoDB since the current DB version not supported(2.6.x)
     if(selectedTab === SALES){
@@ -564,10 +569,12 @@ function getSalesOrdersByDateMap(timeFrame, cb) {
                 }                
 
                 items.forEach(function(item){
-                    if(ordersByDateMap[dateStr]){
-                        ordersByDateMap[dateStr] += item.qty;
-                    }else{
-                        ordersByDateMap[dateStr] = item.qty;
+                    if(selectedProductData.indexOf(item.name) > -1){
+                        if(ordersByDateMap[dateStr]){
+                            ordersByDateMap[dateStr] += item.qty;
+                        }else{
+                            ordersByDateMap[dateStr] = item.qty;
+                        }
                     }
                 });                                    
             });
