@@ -298,8 +298,7 @@ module.exports = {
 
             }
 
-
-            var file = config.ME_SERVER +type+"-"+dateFormat(req.body.fromDate, "yyyy-mm-dd")+""+'.csv';
+            var file = config.ME_SERVER +type+"-"+dateFormat(req.body.fromDate, "yyyy-mm-dd")+"-"+dateFormat(req.body.toDate, "yyyy-mm-dd")+'.csv';
 
             fs.writeFile(file, reportData, function(err) {
                 if (!err) {
