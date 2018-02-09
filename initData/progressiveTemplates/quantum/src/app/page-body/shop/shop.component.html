@@ -46,6 +46,7 @@
     <div class="bloc bgc-white l-bloc">
       <ng-template *ngFor="let items of results; let i = index" [ngIf]="i % 2 == 0">
         <div class="row voffset animated flipInX">
+
           <div class="col-xs-12 col-sm-6" *ngIf="results[i]">
             <div class="row row-no-gutters" [ngStyle]="{'background-color':'#'+getColor(i)}">
               <div class="col-xs-6 col-sm-6">
@@ -72,8 +73,9 @@
               </div>
             </div>
           </div>
+
           <div class="col-xs-12 col-sm-6" *ngIf="results[i+1]">
-            <div class="row row-no-gutters" [ngStyle]="{'background-color':'#'+getColor(i)}">
+            <div class="row row-no-gutters" [ngStyle]="{'background-color':'#'+getColor(i+1)}">
               <div class="col-xs-6 col-sm-6">
                 <div class="form-group">
                   <label class="name-label ">
@@ -98,6 +100,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </ng-template>
     </div>
