@@ -33,8 +33,8 @@ export class HomepageComponent implements OnInit {
   private randomedArr = [];
   private sliderData: any;
   private imageUrlSlider;
-
-  constructor(private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService) {
+  private catName;
+  constructor(private route: Router,private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService) {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
       this.sliderData = data;
@@ -132,6 +132,20 @@ export class HomepageComponent implements OnInit {
     this.router.navigate(['/' + val, id, name]);
   }
 
+  navigateFeaturedProd(val, item){
+    console.log(item)
+    console.log(val)
+
+    this.productService.getCategoryData(item.childId).subscribe((data: any) => {
+      // console.log(data[0].name);
+      this.catName = data[0].name
+      this.dataService.data = item;
+      this.route.navigate([val, this.catName]);
+    }), err => {
+      console.log(err)
+    }
+
+  }
 
 
   //   images: Array<string> = ['sports', 'abstract', 'people', 'transport', 'city', 'technics', 'nightlife', 'animals'];
