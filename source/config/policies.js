@@ -54,6 +54,9 @@ module.exports.policies = {
     '*': ['jwtAuth']
   },
 
+  'edit/commerce/SliderController': {
+    '*': ['jwtAuth']
+  },
   'edit/commerce/ThirdNavigationController': {
     '*': ['jwtAuth']
   },

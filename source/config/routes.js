@@ -137,6 +137,7 @@ module.exports.routes = {
     'POST /edit/checkSecondNavi': 'edit/commerce/SecondNavigationController.checkNavi',
     'POST /edit/deleteSecondNavi': 'edit/commerce/SecondNavigationController.deleteSecondNavi',
     'POST /edit/updateSecondNaviImage': 'edit/commerce/SecondNavigationController.updateSecondNaviImage',
+    'POST /edit/updateSliderImage': 'edit/commerce/SliderController.updateSliderImage',
     //'POST /edit/updateProductImage': '',
     //'POST /edit/updateCategoryImage': '',
     //'POST /edit/addProducts': '
@@ -187,10 +188,13 @@ module.exports.routes = {
     'GET /edit/getChild': 'edit/commerce/ThirdNavigationController.getChild',
     'GET /edit/getUpdates': 'edit/commerce/ThirdNavigationController.getUpdates',
     'POST /edit/deleteItem': 'edit/commerce/MainNavigationController.deleteItem',
+    'POST /edit/deleteSlider': 'edit/commerce/SliderController.deleteSlider',
     'POST /edit/setCurrency': 'edit/setting/CurrencyController.setCurrency',
     'GET /edit/getCurrency': 'edit/setting/CurrencyController.getCurrency',
     'GET /edit/getAllCurrency': 'edit/setting/CurrencyController.getAllCurrency',
-
+    'POST /edit/addNewSlider': 'edit/commerce/SliderController.addNewSlider',
+    'GET /edit/getSliderData': 'edit/commerce/SliderController.getSliderData',
+    'POST /edit/updateSliderData': 'edit/commerce/SliderController.UpdateSlider',
 
     'GET /edit/getContactUs': 'edit/setting/ContactUsController.getContactUs',
     'POST /edit/setPublishDetails': 'edit/publish/publishDetailController.setPublishDetails',
