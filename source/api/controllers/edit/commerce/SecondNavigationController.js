@@ -118,30 +118,64 @@ module.exports = {
 
     updateSecondNaviImage : function(req,res){
 
+    if(req.body.isNew == 'true' || req.body.isNew == true){
+
+        var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/secondNavi/'+ req.body.imageUrl;
+
+        var desPath  = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/src/assets/images/secondNavi/';
+
+                    req.file('file').upload({
+                        dirname: require('path').resolve(desPath)
+                    },function (err, uploadedFiles) {
+                        if (err) return res.send(500, err);
+
+                        fs.unlink(filePath, function (err) {
+                            if (err) return console.error(err);
+                        });
+
+                        sails.log.info("req.body.imageUrl, " + req.body.imageUrl);
+                        if (typeof req.body.imageUrl != "undefined") {
+                            // Create new img file name using date.now()
+                            var fileName = Date.now() + '.jpg';
+                            fs.rename(uploadedFiles[0].fd, desPath + fileName , function (err) {
+                                if (err) return res.send(err);
+                                // New img file name send back to update to menu collection
+                                res.json({ok: true,imageUrl : fileName});
+                            });
+                        }else {
+                            res.json({ok: true});
+                        }
+                    });
+
+    }else{
+
         var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/'+ req.body.imageUrl;
-        var desPath  = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
+            var desPath  = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
 
-        req.file('file').upload({
-            dirname: require('path').resolve(desPath)
-        },function (err, uploadedFiles) {
-            if (err) return res.send(500, err);
+            req.file('file').upload({
+                dirname: require('path').resolve(desPath)
+            },function (err, uploadedFiles) {
+                if (err) return res.send(500, err);
 
-            fs.unlink(filePath, function (err) {
-                if (err) return console.error(err);
-            });
-
-            sails.log.info("req.body.imageUrl, " + req.body.imageUrl);
-            if (typeof req.body.imageUrl != "undefined") {
-                // Create new img file name using date.now() 
-                var fileName = Date.now() + '.jpg';
-                fs.rename(uploadedFiles[0].fd, desPath + fileName , function (err) {
-                    if (err) return res.send(err);
-                    // New img file name send back to update to menu collection 
-                    res.json({ok: true,imageUrl : fileName});
+                fs.unlink(filePath, function (err) {
+                    if (err) return console.error(err);
                 });
-            }else {
-                res.json({ok: true});
-            }
-        });
+
+                sails.log.info("req.body.imageUrl, " + req.body.imageUrl);
+                if (typeof req.body.imageUrl != "undefined") {
+                    // Create new img file name using date.now()
+                    var fileName = Date.now() + '.jpg';
+                    fs.rename(uploadedFiles[0].fd, desPath + fileName , function (err) {
+                        if (err) return res.send(err);
+                        // New img file name send back to update to menu collection
+                        res.json({ok: true,imageUrl : fileName});
+                    });
+                }else {
+                    res.json({ok: true});
+                }
+            });
+    }
+
+
     }
 };

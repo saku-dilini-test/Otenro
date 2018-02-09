@@ -75,7 +75,7 @@
             },
 
 
-            updateCategoryImage: function (file, imageUrl, catId, appId) {
+            updateCategoryImage: function (file, imageUrl, catId, appId, isNew) {
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -94,7 +94,8 @@
                     fields: {
                         'imageUrl': imageUrl,
                         'categoryId': catId,
-                        'appId': appId
+                        'appId': appId,
+                        'isNew': isNew
                     },
                     file: UploadFile
                 });

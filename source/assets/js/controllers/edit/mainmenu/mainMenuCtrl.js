@@ -125,11 +125,19 @@
                 $scope.mainImg = $scope.menu.imageUrl;
 
                 // defined Navigation or Article Category image path
-                var imageURL = SERVER_URL +"templates/viewImages?" +
+                var imageURL;
+                if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
+                imageURL= SERVER_URL +"templates/viewWebImages?" +
+                                    "userId="+ $auth.getPayload().id +
+                                    "&appId="+$rootScope.appId+"&"+new Date().getTime()+
+                                    "&images="+imgLocation+"/"+$scope.menu.imageUrl;
+                }else{
+
+                 imageURL= SERVER_URL +"templates/viewImages?" +
                     "userId="+ $auth.getPayload().id +
                     "&appId="+$rootScope.appId+"&"+new Date().getTime()+
                     "&img="+imgLocation+"/"+$scope.menu.imageUrl;
-
+                }
                 $scope.tmpImage[0] = imageURL;
                 $scope.picFile     = imageURL;
             }
@@ -338,7 +346,7 @@
             // If Update Both Menu name and Image
             if($scope.mainImg != $scope.serverImage && !($scope.initialData.menu == 'addNewMenuNavigation')){
                 //$log.debug("If Update Both Menu name and Image");
-                commerceService.updateCategoryImage(file,menu.imageUrl,menu.id,$rootScope.appId).progress(function(evt) {
+                commerceService.updateCategoryImage(file,menu.imageUrl,menu.id,$rootScope.appId,$rootScope.tempNew).progress(function(evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function(data, status, headers, config) {
