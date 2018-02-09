@@ -86,7 +86,7 @@
                                    data-md-container-class="selectdemoSelectHeader"
                                    aria-label="select product">
                             <md-optgroup>
-                                <md-option ng-if="isSelectCat" ng-repeat="prod in products" ng-value="prod" >{{prod.name}}</md-option>
+                                <md-option ng-if="catModel" ng-repeat="prod in products" ng-value="prod" >{{prod.name}}</md-option>
 
                             </md-optgroup>
                         </md-select>

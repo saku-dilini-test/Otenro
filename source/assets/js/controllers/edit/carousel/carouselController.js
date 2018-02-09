@@ -31,6 +31,7 @@
         // --- cancel dialog -----
         $scope.cancel = function () {
             $mdDialog.cancel();
+            return carouselService.showCarouselBannerDialog();
         };
 
         //retrieving slider data
@@ -69,6 +70,7 @@
         //category on select
         $scope.changeCat = function (category) {
             $scope.selectedCategory = category;
+//            $scope.catModel = category;
             console.log("category selected : " + JSON.stringify(category));
 
             $http.get(SERVER_URL + 'templates/getProductsByCatId?appId=' + $rootScope.appId + '&childId=' + category.id).success(function (data) {
