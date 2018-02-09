@@ -12,9 +12,19 @@
         <div class="md-dialog-header">
             <h1 class="margin-top">Upload Carousel Image</h1>
         </div>
+
+
         <form name="form" novalidate>
             <div class="md-dialog-main clearfix" style="max-height: 60vh">
 
+                <fieldset>
+                    <label for="input-title">Name</label>
+                    <input class="input-shadow-border" type="text" name="name" id="input-title" ng-model="menu.name"
+                           maxlength="{{maxMenuSlider}}"/>
+                    <br>
+                    <span class="information">Characters left: {{maxMenuSlider - menu.name.length}}</span>
+                </fieldset>
+                <br>
                 <div layout-gt-xs="row" class="margin">
                     <div class="file-upload-wrapper clearfix">
                         <div class="cropArea">
@@ -57,35 +67,32 @@
                 <div layout-gt-xs="row" class="margin">
                     <label flex="30" style="margin-top: 6px;">Select Category</label>
                     <div flex="50">
-                        <md-select ng-model=""
+                        <md-select ng-model="catModel" ng-change="changeCat(catModel,'{{cat.id}}')"
                                    data-md-container-class="selectdemoSelectHeader"
                                    aria-label="select category">
                             <md-optgroup>
-                                <md-option ng-value="Cat1" >Cat1</md-option>
-                                <md-option ng-value="Cat1" >Cat2</md-option>
-                                <md-option ng-value="Cat1" >Cat3</md-option>
+                                <md-option ng-repeat="cat in categories" ng-value="cat" >{{cat.name}}</md-option>
                             </md-optgroup>
                         </md-select>
                     </div>
                     <div flex="20" class="margin-horizontal">
-                        <img width="15%" style="margin-top: 6px;" src="../../../images/delete-icon.svg">
+                        <img width="15%" style="margin-top: 6px;" src="../../../images/delete-icon.svg" ng-click="deleteSelctedCat()">
                     </div>
                 </div>
                 <div layout-gt-xs="row" class="margin">
                     <label flex="30" style="margin-top: 6px;">Select Product</label>
                     <div flex="50">
-                        <md-select ng-model=""
+                        <md-select ng-model="prodModel" ng-change="changeProd(prodModel,'{{prod.id}}')"
                                    data-md-container-class="selectdemoSelectHeader"
                                    aria-label="select product">
                             <md-optgroup>
-                                <md-option ng-value="prod1">prod1</md-option>
-                                <md-option ng-value="prod1">prod2</md-option>
-                                <md-option ng-value="prod1">prod </md-option>
+                                <md-option ng-if="isSelectCat" ng-repeat="prod in products" ng-value="prod" >{{prod.name}}</md-option>
+
                             </md-optgroup>
                         </md-select>
                     </div>
                     <div flex="20" class="margin-horizontal"class="margin-horizontal">
-                        <img width="15%" style="margin-top: 6px;" src="../../../images/delete-icon.svg">
+                        <img width="15%" style="margin-top: 6px;" src="../../../images/delete-icon.svg" ng-click="deleteSelctedProd()">
                     </div>
                 </div>
             </div>
@@ -93,7 +100,7 @@
             <div class="md-dialog-buttons">
                 <div class="inner-section">
                     <md-button class="me-default-button" ng-click="cancel()">Close</md-button>
-                    <md-button type="submit" class="me-default-button" >Save & Publish</md-button>
+                    <md-button type="submit" class="me-default-button" ng-click="addSliderImage(mainImg,menu,catModel,prodModel)" >Save & Publish</md-button>
                 </div>
             </div>
         </form>
