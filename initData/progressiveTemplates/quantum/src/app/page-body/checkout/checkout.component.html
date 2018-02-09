@@ -64,30 +64,58 @@
 
     <h4 class="col-sm-12 mb-4 main-header-font">Pickup Details</h4>
 
-    <div class="form-group col-sm-6">
+    <form #myForm="ngForm" (ngSubmit)="signUp(myForm.value)" class="container main-content-font" novalidate>
+      <!-- <p>Is "myForm" valid? {{myForm.valid}}</p> -->
+      <div class="form-group row">
+        <label for="name" class="col-2 col-form-label">Name</label>
+        <div class="col-10">
+          <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" type="text" #name='ngModel' name="name" id="name" placeholder="Arstina"
+            ngModel required>
+          <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+            <div [hidden]="!name.hasError('required')">First Name is required</div>
+            <div [hidden]="!name.hasError('pattern')">Only alphabetsallowed</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="pkPhone" class="col-2 col-form-label">Phone Number</label>
+        <div class="col-10">
+          <input class="form-control" #pkPhone='ngModel' type="tel" id="pkPhone" name="pkPhone" pattern="[0-9]{10}" name="phone" placeholder="0712345678"
+            ngModel required>
+          <div [hidden]="pkPhone.valid || pkPhone.pristine" class="alert alert-danger">
+            <div [hidden]="!pkPhone.hasError('required')">Phone Number is required</div>
+            <div [hidden]="!pkPhone.hasError('pattern')">Invalid Phone number (+9411 111 111 1)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12" *ngIf="myForm.valid">
+        <h4 class="my-3 main-header-font">Select a Location</h4>
+        <div class="row main-content-font">
+          <div class="radio" *ngFor="let pick of pickup, let idx = index">
+            <label>
+              <input  #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx],myForm.value)'>
+              <b>{{pick.locationName}}</b>
+              <div>{{pick.number}}, {{pick.streetAddress}}, {{pick.city}}, {{pick.postalCode}}, {{pick.country}}.</div>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </form>
+    <!-- <div class="form-group col-sm-6">
       <label for="name">Name</label>
-      <input type="text" [(ngModel)]='name' class="form-control" id="name" aria-describedby="name">
+      <input type="text" [(ngModel)]='name' class="form-control" id="name" aria-describedby="name" required>
     </div>
 
     <div class="form-group col-sm-6">
       <label for="pkPhone">Phone</label>
-      <input type="tel" [(ngModel)]='pkPhone' class="form-control" id="pkPhone" aria-describedby="pkPhone">
-    </div>
+      <input type="tel" [(ngModel)]='pkPhone' class="form-control" id="pkPhone" aria-describedby="pkPhone" required>
+    </div> -->
 
 
-    <div class="col-sm-12">
-      <h4 class="my-3 main-header-font">Select a Location</h4>
-      <div class="row main-content-font">
-        <div class="radio" *ngFor="let pick of pickup, let idx = index">
-          <label>
-            <input  #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx])'>
-            <b>{{pick.locationName}}</b>
-            <div>{{pick.number}}, {{pick.streetAddress}}, {{pick.city}}, {{pick.postalCode}}, {{pick.country}}.</div>
-          </label>
-        </div>
-      </div>
 
-    </div>
   </div>
 
 
