@@ -9,6 +9,7 @@ import { CategoriesService } from '../../services/categories/categories.service'
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { forEach } from '@angular/router/src/utils/collection';
 import { ProductsService } from '../../services/products/products.service';
+import { SliderService } from '../../services/slider/slider.service';
 
 @Component({
   selector: 'app-homepage',
@@ -30,10 +31,25 @@ export class HomepageComponent implements OnInit {
   private randomIndex;
   private imageUrlProd;
   private randomedArr = [];
-  constructor(private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService) {
-    for(let i=0;i<2;i++){
+  private sliderData: any;
+  private imageUrlSlider;
+
+  constructor(private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService) {
+
+    this.sliderService.retrieveSliderData().subscribe(data => {
+      this.sliderData = data;
+      console.log("sliderData");
+      console.log(data);
+      var size = Object.keys(this.sliderData).length;
+    }, err => {
+      console.log(err);
+    });
+
+
+
+    for (let i = 0; i < 2; i++) {
       this.randomedArr.push({
-        imageUrl : 'lazyload-ph.png'
+        imageUrl: 'lazyload-ph.png'
       });
     }
   }
@@ -42,12 +58,18 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
 
+
+
     this.imageUrlProd = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
 
+    this.imageUrlSlider = SERVER_URL + "/templates/viewWebImages?userId="
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
+
+      console.log(this.imageUrlSlider);
     this.categoryService.getCategories().subscribe(data => {
       // Read the result field from the JSON response.
       this.results = data;
@@ -69,18 +91,18 @@ export class HomepageComponent implements OnInit {
 
       let lastIndex = null;
       this.randomedArr = [];
-      while(true){
+      while (true) {
         this.randomIndex = Math.floor(Math.random() * max);
-        if( this.randomedArr.length == 2){
+        if (this.randomedArr.length == 2) {
           break;
         }
 
-        if(lastIndex != null && this.randomedArr.length == 1){
-          if(lastIndex != this.randomIndex){
+        if (lastIndex != null && this.randomedArr.length == 1) {
+          if (lastIndex != this.randomIndex) {
             this.randomedArr.push(this.products[this.randomIndex]);
             break;
           }
-        }else{
+        } else {
           this.randomedArr.push(this.products[this.randomIndex]);
           lastIndex = this.randomIndex;
         }
@@ -93,12 +115,12 @@ export class HomepageComponent implements OnInit {
   }
 
 
-  getWidth(index,length){
+  getWidth(index, length) {
     let styles = {
       'width': '100%'
     };
     let vw = window.innerWidth;
-    if(vw <768 && length-1 === index && index % 2 === 0){
+    if (vw < 768 && length - 1 === index && index % 2 === 0) {
       return styles;
     }
   }
@@ -143,11 +165,11 @@ export class HomepageComponent implements OnInit {
 
   // }
 
-    slides = SLIDES;
+  slides = SLIDES;
 
 }
 const SLIDES = [
-  { src: './assets/images/SLIDER%201.png'  },
+  { src: './assets/images/SLIDER%201.png' },
   { src: './assets/images/SLIDER%202.png' },
   { src: './assets/images/SLIDER%203.png' },
 ];

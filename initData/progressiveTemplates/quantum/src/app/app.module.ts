@@ -36,6 +36,7 @@ import { TaxService } from './services/tax/tax.service';
 import { ShippingService } from './services/shipping/shipping.service';
 import { AppDataService } from './services/appdata-info/appdata-info.service';
 import { OrdersService } from './services/orders/orders.service';
+import { SliderService } from './services/slider/slider.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { OrdersService } from './services/orders/orders.service';
     TaxService,
     ShippingService,
     AppDataService,
-    OrdersService,{
+    OrdersService,
+    SliderService,{
     provide: HTTP_INTERCEPTORS,
     useClass: GithubAuthInterceptor,
     multi: true

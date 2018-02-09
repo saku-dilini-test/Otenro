@@ -304,6 +304,20 @@ module.exports = {
             res.json(artilce);
         });
     },
+        getSliderData: function (req, res) {
+            console.log('req.body.appId : ' + req.param('appId'))
+
+            var appId = req.param('appId');
+
+            var searchApp = {
+                appId: appId
+            };
+
+            Slider.find(searchApp, function (err, app) {
+                if (err) return done(err);
+                res.send(app);
+            });
+        },
 
 
     /**

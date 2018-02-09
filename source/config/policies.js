@@ -88,7 +88,8 @@ module.exports.policies = {
     getArticleById : true,
     getArticleCategoryByAppId : true,
     getArticleCategoryById : true,
-    getCommentsDummy : true
+    getCommentsDummy : true,
+    getSliderData : true
 
   },
 
