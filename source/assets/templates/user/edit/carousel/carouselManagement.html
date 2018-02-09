@@ -17,7 +17,6 @@
             <div class="md-dialog-main clearfix">
                 <md-button ng-click="addCarouselBanner()" class="no-margin md-raised" style="background:#E9E8E9 ;color:#666;font-size: 11px;">Add Image</md-button>
                 <md-button class="no-margin margin-horizontal md-raised" style="background:#E9E8E9 ;color:#666;font-size: 11px;">Clear Default Data</md-button>
-
                 <table class="table margin-vertical text-center">
                     <tr>
                         <th class="text-center">Slide Name</th>
@@ -26,12 +25,13 @@
                         <th class="text-center">Edit</th>
                         <th class="text-center">Delete</th>
                     </tr>
-                    <tr>
-                        <td >Style</td>
-                        <td><img src="/images/aimp(512x512).png" width="70px"></td>
-                        <td>Lace Blouse</td>
-                        <td><img width="15%" src="../../../images/edit-icon.svg"></td>
-                        <td><img width="15%" src="../../../images/delete-icon.svg"></td>
+                    <tr ng-repeat="slider in sliderData">
+                        <td >{{slider.name}}</td>
+                        <td><img src="{{imageUrl}}/{{slider.imageUrl}}" width="70px"></td>
+                        <td ng-if="slider.optionals[0].name">{{slider.optionals[0].name}}</td>
+                        <td ng-if="!slider.optionals[0].name">None</td>
+                        <td><img width="15%" src="../../../images/edit-icon.svg" ng-click="goToEditSliderView(slider)"></td>
+                        <td><img width="15%" src="../../../images/delete-icon.svg" ng-click="deleteSlider(slider)"></td>
                     </tr>
                 </table>
             </div>
