@@ -385,19 +385,19 @@ this.years.push(date++);
 
 
 
-  checkout(data) {
-
+  checkout(data,details) {
+    // console.log(details)
     this.isSelected = true;
     this.pickupData = {
       item: this.dataService.deliverItems,
       delivery: { location: "Pick up", method: "Pick up" },
       pickupId: data.id,
-      pickupCost:data.cost,
-      deliverDetails: { name: this.name, number: this.pkPhone },
+      pickupCost: data.cost,
+      deliverDetails: { name: details.name, number: details.phone },
 
     }
     this.chk(this.pickupData);
-    setTimeout(()=>{ this.pay("001"); }, 500);
+    setTimeout(() => { this.pay("001"); }, 500);
   };
 
 
@@ -485,14 +485,21 @@ this.years.push(date++);
           if (tax > 0) {
             total = total + tax;
             if (this.chkPickupCost == 0) {
-              this.totalPrice = total + this.chkShippingCost;
+              if (this.chkShippingCost) {
+                this.totalPrice = total + this.chkShippingCost;
+              } else {
+                this.totalPrice = total;
+              }
             } else {
               this.totalPrice = total + parseInt(this.chkPickupCost);
             }
           } else {
             if (this.chkPickupCost == 0) {
-              this.totalPrice = total + this.chkShippingCost;
-            } else {
+              if (this.chkShippingCost) {
+                this.totalPrice = total + this.chkShippingCost;
+              } else {
+                this.totalPrice = total;
+              }            } else {
               this.totalPrice = total + parseInt(this.chkPickupCost);
             }
           }
@@ -559,8 +566,8 @@ this.years.push(date++);
         this.braintreeShow = this.paymentData.braintreeEnable;
         this.authorizeNet = this.paymentData.authorizeNetEnable;
       }), function (err) {
-      alert('warning Unable to get Products Selected Category');
-    };
+        alert('warning Unable to get Products Selected Category');
+      };
 
     this.cardType = {};
     this.card = {
@@ -573,13 +580,13 @@ this.years.push(date++);
   }
 
 
-  submit(data,type){
+  submit(data, type) {
     console.log("card data : " + JSON.stringify(data));
     console.log("type : " + type);
 
-    if(type == 'creditcard'){
+    if (type == 'creditcard') {
       this.makeStripePaymentMethod(data);
-    }else{
+    } else {
       this.authorizeCreditCardMethod(data);
     }
 
@@ -590,10 +597,10 @@ this.years.push(date++);
     cardInformation.amount = this.card.amount;
     cardInformation.appId = this.appId;
     cardInformation.userId = this.userId;
-console.log("cardInformation : " + JSON.stringify(cardInformation));
+    console.log("cardInformation : " + JSON.stringify(cardInformation));
     this.http.post(SERVER_URL + '/templates/makeStripePayment', cardInformation)
 
-      .subscribe((res:any) => {
+      .subscribe((res: any) => {
 
         if (res.status == 'succeeded') {
           this.orderProcess();
