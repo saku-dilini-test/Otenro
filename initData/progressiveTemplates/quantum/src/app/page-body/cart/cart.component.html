@@ -1,121 +1,65 @@
 
-<div class="bloc bgc-white l-bloc" id="bloc-0">
+<div class="bloc bgc-white l-bloc visible-lg-block visible-md-block" id="bloc-0">
 	<div class="container bloc-sm">
       <app-carousel [slides]="slides">   </app-carousel>
   </div>
 </div>
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div>
-				<table class="table table-bordered table-responsive" cellspacing="0">
-					<thead class="main-header-font">
-						<tr>
-							<td width="80px">&nbsp;</td>
-							<td>
-								<span>Product</span>
-							</td>
-							<td>
-								<span>Price</span>
-							</td>
-							<td width="15%">
-								<span>Quantity</span>
-							</td>
-							<td>
-								<span>Type</span>
-							</td>
-							<td>
-								<span>Total</span>
-							</td>
-							<td>
-								<span>remove</span>
-							</td>
-						</tr>
-					</thead>
-					<tbody class="main-content-font">
-						<tr *ngFor="let c of cartItems let i = index">
-							<td>
-								<a>
-									<img width="80" height="80" src="{{imageUrl}}/{{c.imgURL[0].img}}">
-									<br>
-								</a>
-							</td>
-							<td data-title="Product">
-								<div>
-									<a [(ngModel)]="c.name" ngDefaultControl>{{c.name}}</a>
-								</div>
-							</td>
-							<td data-title="Price">
-
-								<a>{{currency}}{{c.price}}</a>
-
-							</td>
-							<td data-title="Quantity">
-								<div data-trigger="spinner">
-									<input class="form-control" type="number" min="1" [(ngModel)]="c.qty" value="{{c.qty}}" title="Qty" (change)="buttonDisable(c.qty,c.totalQty ,cartItems.indexOf(c))"
-									 ngDefaultControl>
-								</div>
-							</td>
-							<td data-title="Type">
-								<div *ngFor="let v of c.varient">
-									{{v.name}} : {{v.vType}}
-								</div>
-							</td>
-							<td data-title="Total">
-								<a [(ngModel)]="c.total" ngDefaultControl>{{currency}}{{c.total * c.qty}}</a>
-
-							</td>
-							<td>
-								<a (click)="removeItem(index)" class="btn btn-remove" title="Remove this item">
-									<i class="fa fa-trash fa-lg"></i>
-								</a>
-							</td>
-						</tr>
-						<!--<tr>-->
-						<!--<td colspan="5" class="text-left">-->
-						<!--<input type="text" placeholder="Coupon code" class="form-control w-50 d-inline align-middle">-->
-						<!--<button  name="apply_coupon"  class="btn main-button"> Apply Coupon </button>-->
-						<!--</td>-->
-						<!--<td colspan="1" class="text-right">-->
-						<!--<button class="btn main-button"> Update Cart </button>-->
-						<!--</td>-->
-						<!--</tr>-->
-					</tbody>
-				</table>
-			</div>
-
-			<div class="row">
-        <div class="col-md-12">
-          <h5 class="main-header-font">Cart Total</h5>
-          <table cellspacing="0" class="table table-responsive table-bordered">
-            <tbody class="main-content-font">
-              <tr>
-                <th>Total</th>
-                <td data-title="Total">
-                  <strong>
-                    <a [(ngModel)]="total" ngDefaultControl>${{sign}}{{getTotal()}}</a>
-                  </strong>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <h1>Order</h1>
+  <div class="row cart" *ngFor="let item of cartItems">
+    <div class="col-md-1 col-xs-2 no-m-padding">
+      <img src="{{imageUrl}}/{{item.imgURL[0].img}}">
+    </div>
+    <div class="col-md-8 col-xs-6">
+      <div class="row">
         <div class="col-md-6">
-          <!-- [disabled]='cartItems.length<=0' -->
-          <button class="btn main-button button-inverse text-white btn-block" (click)="delivery(cartItems)">
-            Delivery
-          </button>
+          <label class="no-m-margin">{{item.name}}</label>
+          <span class="single-price"> {{currency}} {{item.price}}</span>
         </div>
-        <div class="col-md-6">
-          <button class="btn main-button button-inverse text-white btn-block" (click)='pickupDetails(cartItems)'>
-            pickup
-          </button>
+        <div class="col-md-3">
+          <div class="variants text-center no-m-margin">
+            <span  *ngFor="let v of item.variant">{{v.name}} : {{v.vType}}<br></span>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <input class="form-control no-m-margin" name="qty" id="qty" type="number" min="1" [(ngModel)]="item.qty" value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))" ngDefaultControl>
         </div>
       </div>
+    </div>
+    <div class="col-md-2 col-xs-3 no-m-padding">
+     <div class="total-price text-center">
+       {{currency}} {{item.total * item.qty}}
+     </div>
+    </div>
+    <div class="col-md-1 col-xs-1 no-m-padding">
+     <div class="delete text-center">
+       <a (click)="removeItem(index)" class="btn btn-remove" title="Remove this item">
+         <i class="fa fa-trash fa-lg"></i>
+       </a>
+     </div>
+    </div>
+  </div>
 
-		</div>
+
+
+	<div class="row text-center">
+		<div class="col-md-12 text-center margin-vertical">
+      <h4 [(ngModel)]="total" ngDefaultControl>Cart Total: {{currency}} {{getTotal()}}</h4>
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <!-- [disabled]='cartItems.length<=0' -->
+      <button class="btn main-button button-inverse text-white btn-block" (click)="delivery(cartItems)">
+        Delivery
+      </button>
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <button class="btn main-button button-inverse text-white btn-block" (click)='pickupDetails(cartItems)'>
+        pickup
+      </button>
+    </div>
 	</div>
+
 </div>
 
 <div class="bloc bgc-white l-bloc" id="bloc-0">

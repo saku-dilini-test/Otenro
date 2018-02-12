@@ -79,7 +79,7 @@ cd meServerFiles/unknownUser/templates/
 cd ../../../
 cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
 cp -r ./meServerFiles/unknownUser $MESERVER
-cp -r ./meServerFiles/node_modules $NODE
+#cp -r ./meServerFiles/node_modules $NODE
 
 
 

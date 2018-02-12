@@ -336,7 +336,6 @@ a:hover{text-decoration: none; cursor:pointer;}
 	background:transparent;
 }
 .navbar-toggle{
-	margin: 10px 10px 0 0;
 	border: 0px;
 }
 .navbar-toggle:hover{
@@ -787,7 +786,6 @@ label{
 	width:100%;
 }
 .button-margin{
-	margin-top:40%;
 	margin-bottom:10px;
 }
 .button-outline{
@@ -1076,6 +1074,9 @@ label{
         padding-left: 0;
         padding-right: 0;
     }
+    .bloc-sm {
+      padding: 0;
+    }
     .bloc-xxl,.bloc-xl,.bloc-lg{
         padding: 40px 0;
     }
@@ -1136,17 +1137,81 @@ label{
 @media (max-width: 767px){
 	.bloc-mob-center-text{
 	text-align:center;
+  }
+  .blocs-team-avatar{
+    max-width:280px;
+  }
+  .blocs-team-header{
+    text-align:center;
+  }
+  .blocs-team-details{
+    text-align:center;
+  }
+  .blocs-team-first-social{
+    margin-left:41%;
+  }
 }
-.blocs-team-avatar{
-	max-width:280px;
+
+.no-padding{
+  padding:0;
 }
-.blocs-team-header{
-	text-align:center;
+.padding-left{
+  padding-left: 16px;
 }
-.blocs-team-details{
-	text-align:center;
+
+.padding-right{
+  padding-right:16px;
 }
-.blocs-team-first-social{
-	margin-left:41%;
+
+.padding-top{
+  padding-top: 16px;
 }
- }
+
+.padding-bottom{
+  padding-bottom: 16px;
+}
+
+.padding-vertical{
+  padding-top:16px;
+  padding-bottom: 16px;
+}
+
+.padding-horizontal{
+  padding: 0 16px;
+}
+
+.padding{
+  padding: 16px !important;
+}
+
+.no-margin{
+  margin:0;
+}
+
+.margin-left{
+  margin-left: 16px;
+}
+
+.margin-right{
+  margin-right:16px;
+}
+
+.margin-top{
+  margin-top: 16px;
+}
+
+.margin-bottom{
+  margin-bottom: 16px;
+}
+
+.margin-vertical{
+  margin: 16px 0;
+}
+
+.margin-horizontal{
+  margin: 0 16px;
+}
+
+.margin{
+  margin: 16px !important;
+}
