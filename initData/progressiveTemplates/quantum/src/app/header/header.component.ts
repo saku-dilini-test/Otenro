@@ -17,7 +17,7 @@ export class HeaderComponent {
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private cartNo: number;
-  
+
   public loginStatus;
 
   constructor(private localStorageService: LocalStorageService, private router: Router, private dataService: PagebodyServiceModule) {
@@ -28,9 +28,9 @@ export class HeaderComponent {
     this.cartNo = this.dataService.cart.cartItems.length;
 
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
-      this.loginStatus = "logged in";
+      this.loginStatus = true;
     } else {
-      this.loginStatus = "Not logged in";
+      this.loginStatus = false;
     }
 
   }
