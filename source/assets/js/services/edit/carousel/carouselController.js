@@ -12,7 +12,7 @@
                 return $mdDialog.show({
                     controller: 'CarouselCtrl',
                     templateUrl: 'user/edit/carousel/carouselManagement.html',
-                    clickOutsideToClose: true,
+                    clickOutsideToClose: false,
                     locals: {
                         initialData: null
                     }
@@ -51,7 +51,7 @@
                 return $mdDialog.show({
                     controller: 'CarouselCtrl',
                     templateUrl: 'user/edit/carousel/addCarouselBanner.html',
-                    clickOutsideToClose: true,
+                    clickOutsideToClose: false,
                     locals: {
                         initialData: {
                             menu: data,
