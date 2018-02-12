@@ -23,7 +23,27 @@
           </div>
         </div>
         <div class="col-md-3">
-          <input class="form-control no-m-margin" name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');" [(ngModel)]="item.qty" value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))" ngDefaultControl>
+          <input class="form-control no-m-margin" name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');" [(ngModel)]="item.qty"
+            value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))" ngDefaultControl>
+        </div>
+
+        <!-- Product not available in store -->
+        <div class="col" *ngIf="cartItems[0].totalQty == 0">
+          <span>
+            Product not available
+          </span>
+        </div>
+
+        <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+        <div class="col" *ngIf="item.qty > cartItems[0].totalQty && cartItems[0].totalQty > 1">
+          <span>
+            Please enter a quantity of {{cartItems[0].totalQty}} or less.
+          </span>
+        </div>
+        <div class="col" *ngIf="item.qty > cartItems[0].totalQty && cartItems[0].totalQty == 1">
+          <span>
+            Please enter a quantity of {{cartItems[0].totalQty}}.
+          </span>
         </div>
       </div>
     </div>
