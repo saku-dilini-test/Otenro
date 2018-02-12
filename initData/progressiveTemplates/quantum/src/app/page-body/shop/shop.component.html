@@ -22,7 +22,8 @@
             </div>
 
             <div class="btn-group btn-dropdown">
-              <a href="#" class="btn dropdown-toggle   btn-lg dopdown-list btn-d" data-toggle="dropdown" aria-expanded="true">Select a catagory
+              <a href="#" class="btn dropdown-toggle   btn-lg dopdown-list btn-d" data-toggle="dropdown" aria-expanded="true">
+                Select a catagory
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" role="menu">
@@ -50,7 +51,7 @@
           <div class="col-xs-12 col-sm-6" *ngIf="results[i]">
             <div class="row row-no-gutters" [ngStyle]="{'background-color':'#'+getColor(i)}">
               <div class="col-xs-6 col-sm-6">
-                <img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{results[i].imageUrl}}" class="lazyload" width="100%" />
+                <img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{results[i].imageUrl}}" class="lazyload" width="100%" height="100%"/>
               </div>
               <div class="col-xs-6 col-sm-6">
                   <div class="form-group">
@@ -96,7 +97,7 @@
                 </div>
               </div>
               <div class="col-xs-6 col-sm-6">
-                <img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{results[i+1].imageUrl}}" class="lazyload" width="100%" />
+                <img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{results[i+1].imageUrl}}" class="lazyload" width="100%" height="100%"/>
               </div>
             </div>
           </div>
