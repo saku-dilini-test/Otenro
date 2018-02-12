@@ -44,7 +44,7 @@ export class ProductComponent implements OnInit {
     }
 
     currency: string;
-    
+
     ngOnInit() {
 
         this.CurrencyService.getCurrencies().subscribe(data => {
@@ -296,7 +296,7 @@ export class ProductComponent implements OnInit {
                             price: this.selectedVariant.price,
                             total: this.selectedVariant.price,
                             imgURL: this.Data.tempImageArray,
-                            varient: this.selectedVariant.selection,
+                            variant: this.selectedVariant.selection,
                             totalQty: this.selectedVariant.quantity,
                             weight: this.selectedVariant.weight  //(new) added weight of each product
 
@@ -321,7 +321,7 @@ export class ProductComponent implements OnInit {
                     price: this.selectedVariant.price,
                     total: this.selectedVariant.price,
                     imgURL: this.Data.tempImageArray,
-                    varient: this.selectedVariant.selection,
+                    variant: this.selectedVariant.selection,
                     totalQty: this.selectedVariant.quantity,
                     weight: this.selectedVariant.weight //(new) added weight of each product
 
