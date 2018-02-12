@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="col-md-3">
-          <input class="form-control no-m-margin" name="qty" id="qty" type="number" min="1" [(ngModel)]="item.qty" value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))" ngDefaultControl>
+          <input class="form-control no-m-margin" name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');" [(ngModel)]="item.qty" value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))" ngDefaultControl>
         </div>
       </div>
     </div>

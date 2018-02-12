@@ -29,9 +29,14 @@
         }
 
         // --- cancel dialog -----
-        $scope.cancel = function () {
+        $scope.cancelAdd = function () {
             $mdDialog.cancel();
             return carouselService.showCarouselBannerDialog();
+        };
+
+         // --- cancel dialog -----
+        $scope.cancel = function () {
+            $mdDialog.cancel();
         };
 
         //retrieving slider data
