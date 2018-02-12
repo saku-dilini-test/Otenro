@@ -73,6 +73,7 @@ this.selectedCountry = data;
     this.lname = myForm.lname;
     this.email = myForm.email;
     this.password = myForm.password;
+    let passwordCon = myForm.passwordCon;
     this.city = myForm.city;
     this.phone = myForm.phone;
     this.streetName = myForm.streetName;
@@ -83,6 +84,8 @@ this.selectedCountry = data;
     // console.log(myForm)
     // console.log(this.fname + this.lname+ " : " + this.city)
     // this.localStorageService  = this.localStorageService.get('appLocalStorageUser'+this.appId);
+if(passwordCon != this.password){
+
 
     var data = {
         firstName: this.fname,
@@ -133,6 +136,10 @@ this.selectedCountry = data;
             function(err){
                 alert("signup error");
             });
+
+          }else{
+            alert("password miss match")
+          }
 }
 
   slides = SLIDES;
