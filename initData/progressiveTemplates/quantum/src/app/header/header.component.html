@@ -41,8 +41,11 @@
             <li>
               <a class="nav-link" (click)="navigate('cart')">Cart</a>
             </li>
-            <li>
-              <a class="nav-link" (click)="navigate('login/home')">Sign In</a>
+            <li *ngIf="loginStatus">
+              <a class="nav-link" (click)="logout()" >Log Out</a>
+            </li>
+            <li *ngIf="!loginStatus">
+              <a class="nav-link"(click)="navigate('login/home')" >Sign In</a>
             </li>
             <!--<li>-->
               <!--<div class="row social-header">-->
