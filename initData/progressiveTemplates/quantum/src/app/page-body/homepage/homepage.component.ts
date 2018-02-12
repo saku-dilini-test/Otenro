@@ -34,18 +34,24 @@ export class HomepageComponent implements OnInit {
   private sliderData: any;
   private imageUrlSlider;
   private catName;
+  private isSliderDataAvailable:boolean = false;
   constructor(private route: Router,private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService) {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
       this.sliderData = data;
       console.log("sliderData");
       console.log(data);
-      var size = Object.keys(this.sliderData).length;
+       var size = Object.keys(this.sliderData).length;
+       if(size >0){
+        this.isSliderDataAvailable = true;
+       }else{
+        this.isSliderDataAvailable = false;
+       }
     }, err => {
       console.log(err);
     });
 
-
+ console.log(this.isSliderDataAvailable)
 
     for (let i = 0; i < 2; i++) {
       this.randomedArr.push({
