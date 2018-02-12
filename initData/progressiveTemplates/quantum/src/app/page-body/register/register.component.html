@@ -51,6 +51,20 @@
     </div>
   </div>
   <div class="form-group row">
+    <label for="passwordCon" class="col-2 col-form-label">Confirm Password</label>
+    <div class="col-10">
+      <input class="form-control" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" type="password" #passwordCon='ngModel' name="passwordCon"
+        id="passwordCon" ngModel required>
+      <div [hidden]="passwordCon.valid || passwordCon.pristine" class="alert alert-danger">
+        <div [hidden]="!passwordCon.hasError('required')">Password is required</div>
+        <div [hidden]="!passwordCon.hasError('pattern')">Your password should contain UpperCase, LowerCase and number</div>
+      </div>
+      <span class="help-block register-pw-error-message" ng-show="signUpForm.passwordCon.$dirty && data.password != data.passwordCon">
+        <span class="item-error-message"> Passwords do not match.</span>
+    </span>
+    </div>
+  </div>
+  <div class="form-group row">
     <label for="streetNumber" class="col-2 col-form-label">Street Number</label>
     <div class="col-10">
       <input class="form-control" #streetNumber='ngModel' type="text" id="streetNumber" name="streetNumber" placeholder="#244 A"
