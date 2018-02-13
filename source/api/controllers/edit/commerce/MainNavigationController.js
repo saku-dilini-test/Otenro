@@ -140,26 +140,26 @@ module.exports = {
         });
     },
 
-    deleteItem : function (req,res) {
-    MainNavigation.find({id: req.body.id}).exec(function(err,main){
+    deleteItems : function (req,res,itemIds) {
+    MainNavigation.find({id: itemIds}).exec(function(err,main){
         if (err) res.send(err);
         if (main != ""){
-            MainNavigation.destroy({ id : req.body.id}).exec(function (err) {
+            MainNavigation.destroy({ id : itemIds}).exec(function (err) {
                 if (err) return callback("Error while deleting " + err.message);
                 res.send(200,{message:' Main Navigation deleted'});
             })
         }
         else {
-            SecondNavigation.find({id: req.body.id}).exec(function(err,second){
+            SecondNavigation.find({id: itemIds}).exec(function(err,second){
                 if (err) res.send(err);
                 if (second != ""){
-                    SecondNavigation.destroy({ id : req.body.id}).exec(function (err) {
+                    SecondNavigation.destroy({ id : itemIds}).exec(function (err) {
                         if (err) return callback("Error while deleting " + err.message);
-                        ThirdNavigation.find({childId: req.body.id}).exec(function(err,child){
+                        ThirdNavigation.find({childId: itemIds}).exec(function(err,child){
                             if (err) return callback("Error while deleting " + err.message);
                             if (child){
                             child.forEach(function(product){
-                                ThirdNavigation.destroy({ childId : req.body.id}).exec(function (err) {
+                                ThirdNavigation.destroy({ childId : itemIds}).exec(function (err) {
                                     if (err) return callback("Error while deleting " + err.message);
                                 })
                             })
@@ -169,10 +169,10 @@ module.exports = {
                     })
                 }
                 else{
-                    ThirdNavigation.find({id: req.body.id}).exec(function(err,third){
+                    ThirdNavigation.find({id: itemIds}).exec(function(err,third){
                         if (err) res.send(err);
                         if (third !=""){
-                            ThirdNavigation.destroy({ id : req.body.id}).exec(function (err) {
+                            ThirdNavigation.destroy({ id : itemIds}).exec(function (err) {
                                 if (err) return callback("Error while deleting " + err.message);
                                 res.send(200,{message:' Main Navigation deleted'});
                             })
@@ -182,39 +182,16 @@ module.exports = {
             })
         }
     })
+    },
 
+    deleteItem : function (req,res) {
+        console.log("Executing deleteItem");
+        return this.deleteItems(req,res,[req.body.id]);
+    },
 
-//        if(req.body.icon){
-//        sails.log.info("1");
-//            MainNavigation.destroy({ id : req.body.id}).exec(function (err) {
-//            sails.log.info("1");
-//                if (err) return callback("Error while deleting " + err.message);
-//                res.send(200,{message:'Deleted Main Navigation'});
-//            });
-//
-//        }if(req.body.mainId){
-//        sails.log.info("2");
-//            SecondNavigation.destroy({ id : req.body.id}).exec(function (err) {
-//            sails.log.info("1");
-//                if (err) return callback("Error while deleting " + err.message);
-//                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/'+ req.body.imageUrl;
-//                fs.unlink(filePath, function (err) {
-//                    if (err) throw err;
-//                    res.send(200,{message:'Deleted Second Navigation'});
-//                });
-//            });
-//
-//        }if(req.body.childId){
-//        sails.log.info("3");
-//            ThirdNavigation.destroy({ id : req.body.id}).exec(function (err) {
-//            sails.log.info("1");
-//                if (err) return callback("Error while deleting " + err.message);
-//                var filePath =config.ME_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/thirdNavi/'+ req.body.imageUrl;
-//                fs.unlink(filePath, function (err) {
-//                    if (err) throw err;
-//                    res.send(200,{message:'Deleted Third Navigation'});
-//                });
-//            });
-//        }
+    deleteCategories : function (req,res) {
+        console.log("Executing deleteCategories");
+        var categoryIds = req.body;
+        return this.deleteItems(req,res,categoryIds);
     }
 };

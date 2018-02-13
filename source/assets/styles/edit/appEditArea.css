@@ -123,11 +123,22 @@
     float: left;
 }
 
-.mobile-area{
+/* ME-2778 Hide all tasks which say coming soon <- made changes to hide the Desktop view since it is comming soon */
+/*.mobile-area{
     width: 50%;
     text-align: right;
     padding: 10px 15px 0 0;
     border-right: 1px solid #CCC;
+}*/
+
+
+.mobile-area{
+    width: 50%;
+    text-align: center;
+    padding: 10px 15px 0 0;
+    border-right: 1px solid #CCC;
+    width: 88%;
+    padding: 5px 25px 0px 14%;
 }
 
 .mobile-area a, .website-area a{

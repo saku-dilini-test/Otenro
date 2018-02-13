@@ -35,7 +35,6 @@
 
         $scope.appId_ =$rootScope.appId;
 
-        $scope.salesList = [];
         $scope.dataCount=[];
 
         $scope.close = function () {
@@ -51,11 +50,6 @@
             });
         });
 
-
-
-
-
-
         $scope.searchTerm;
         $scope.clearSearchTerm = function() {
             $scope.searchTerm = '';
@@ -66,7 +60,6 @@
             var toDate ;
             var selectedData;
             $scope.total=null;
-            $scope.salesChartdata =null;
             $scope.salesList=null;
             $scope.salesChartdata=null;
 
@@ -139,7 +132,6 @@
             var toDate ;
             var selectedData;
             $scope.tax_total=null;
-            $scope.salesChartdata =null;
             $scope.taxList=null;
             $scope.taxChartdata =null;
 
@@ -208,7 +200,6 @@
             var toDate ;
             var selectedData;
             $scope.shpping_total=null;
-            $scope.salesChartdata =null;
             $scope.shppingList =null;
             $scope.shippingChartdata =null;
 
@@ -272,8 +263,6 @@
             var toDate;
             var selectedData;
             $scope.total = null;
-            $scope.salesChartdata = null;
-            $scope.salesList = null;
 
             try {
                 data.fromDate.toString().length;

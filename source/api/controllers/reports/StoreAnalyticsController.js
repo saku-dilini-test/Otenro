@@ -51,7 +51,7 @@ module.exports = {
                 {
 
                     $group : {
-                        _id:{name:"$item.name"}, itemPrice: { $max: "$item.price"}, count: { $sum: "$item.qty" }
+                        _id:{name:"$item.name"}, itemPrice: { $max: "$item.price"}, count: { $sum: "$item.qty" }, currency: { $first: "$currency" }
                     }
                 }
             ]).toArray(function (err, results) {
@@ -66,10 +66,11 @@ module.exports = {
                     var itemId = tuple._id;
                     var itemPrice = tuple.itemPrice;
                     var qtySum = tuple.count;
+                    var currency = tuple.currency;
 
                     var totalPrice = itemPrice * qtySum;
 
-                    modifiedResults.push({ _id: itemId, count: qtySum, totalPrice: totalPrice });
+                    modifiedResults.push({ _id: itemId, count: qtySum, totalPrice: totalPrice, currency: currency });
                 });
 
                 cb(null, modifiedResults);
@@ -121,7 +122,7 @@ module.exports = {
                 {
 
                     $group : {
-                        _id:{country:"$deliveryCountry"}, totalSales: { $sum: "$amount"}, count: { $sum: 1 },taxTotal: { $sum: "$tax"}
+                        _id:{country:"$deliveryCountry"}, totalSales: { $sum: "$amount"}, count: { $sum: 1 },taxTotal: { $sum: "$tax"}, currency: { $first: "$currency" }
                     }
                 }
             ]).toArray(function (err, results) {
@@ -176,7 +177,7 @@ module.exports = {
                 {
 
                     $group : {
-                        _id:{country:"$deliveryCountry",shippingOpt:"$shippingOpt"}, totalShippingCost: { $sum: "$shippingCost"}
+                        _id:{country:"$deliveryCountry",shippingOpt:"$shippingOpt"}, totalShippingCost: { $sum: "$shippingCost"}, currency: { $first: "$currency" }
                     }
                 }
             ]).toArray(function (err, results) {

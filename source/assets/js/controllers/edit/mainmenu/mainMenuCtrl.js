@@ -135,17 +135,48 @@
             }
         }
 
+        //Delete Categories related
+        $scope.selected = [];
+        $scope.toggleDelete = function (itemId, list) {
+            if(list && list.length > 0){
+                var idx = list.indexOf(itemId);
+                if (idx > -1) {
+                  list.splice(idx, 1);
+                  return;
+                }
+            }
+              
+            list.push(itemId);
+        };
+
+        $scope.exists = function (itemId, list) {
+            return list.indexOf(itemId) > -1;
+        };
+
+        $scope.isChecked = function() {
+            return $scope.selected && $scope.selected.length > 0 && $scope.menuItems && ($scope.selected.length === $scope.menuItems.length);
+        };
+
+        $scope.toggleAll = function() {
+        if ($scope.selected.length === $scope.menuItems.length) {
+          $scope.selected = [];
+        } else if ($scope.selected.length === 0 || $scope.selected.length > 0 && $scope.menuItems.length > 0) {
+          $scope.selected = [];  
+          $scope.menuItems.forEach(function(item){
+            $scope.selected.push(item.id);
+          });  
+        }
+      };        
+
         // Add New Menu
         $scope.goToAddNewMenuItemView = function () {
             if($scope.templateCategory == tempCatBusiness){
-            $log.debug(tempCatBusiness);
-            $log.debug($scope.templateCategory );
-            $log.debug("1111111");
+                $log.debug(tempCatBusiness);
+                $log.debug($scope.templateCategory );
                 mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',$scope.templateCategory);
             }else if($scope.templateCategory == tempCatMedia){
-             $log.debug(tempCatMedia);
-             $log.debug("sasdasdasdasd");
-                        $log.debug($scope.templateCategory );
+                $log.debug(tempCatMedia);
+                $log.debug($scope.templateCategory );
                 mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory',$scope.templateCategory);
             }
         };
@@ -237,6 +268,57 @@
                 '</md-dialog>'
             })
         };
+
+        // Delete Categories
+        $scope.deleteCategories = function(catogoryIds){
+            if(!(catogoryIds && catogoryIds.length>0)){
+                return;
+            }
+
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+                    this.confirm = function click(){
+                        if($scope.templateCategory == tempCatBusiness){
+                            mainMenuService.deleteCategories(catogoryIds).success(function(data) {
+
+                                var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                               +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                $scope.appTemplateUrl = urlPath+'' +
+                                    '#/app/update?'+new Date().getTime();
+                                mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                                return mainMenuService.showMainMenuDialog();
+                            }).error(function(err) {
+                                $mdDialog.hide();
+                            });
+                        }
+                    },
+                    this.cancel = function click(){
+                        $mdDialog.hide();
+                        return mainMenuService.showMainMenuDialog();
+                    }
+                },
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                '<md-content >' +
+                    '<div class="md-dialog-header">' +
+                        '<h1>Deleting category</h1>' +
+                    '</div>'+
+                    '<br>'+
+                    '<div style="text-align:center">' +
+                        '<lable>Are you sure, you want to delete the selected Categories?</lable>' +
+                    '</div>' +
+                    '<br>' +
+                    '<br>' +
+                    '<div class="md-dialog-buttons">'+
+                        '<div class="inner-section">'+
+                            '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">NO</md-button>'+
+                            '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">YES</md-button>'+
+                        '</div>'+
+                    '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
+        };        
 
         // Add menu navigation
         $scope.addMenuNavigation = function(file,menu){
