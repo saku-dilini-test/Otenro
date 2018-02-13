@@ -36,29 +36,25 @@ export class RegisterComponent implements OnInit {
   constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
 
   }
+
   changeCountry(data){
-console.log(data);
-this.selectedCountry = data;
+      this.selectedCountry = data;
   }
 
   ngOnInit() {
     this.country.push('select a country')
     this.router.params.subscribe(params => {
       this.navigate = params['type'];
-      console.log("this.value : " + this.navigate);
     });
 
       this.http.get(SERVER_URL+"/edit/getAllCountry")
       .subscribe((res) => {
         var data = JSON.stringify(res);
-        console.log("res : " + data);
 
         for (let key in res) {
           this.country.push(res[key].countryName);
-          console.log(res);
         }
 
-          console.log("this.country : " + (this.country));
 
       });
 
@@ -80,12 +76,6 @@ this.selectedCountry = data;
     this.streetNumber = myForm.streetNumber;
     this.zip = myForm.zip;
 
-    // console.log("city : " +myForm.city)
-    // console.log(myForm)
-    // console.log(this.fname + this.lname+ " : " + this.city)
-    // this.localStorageService  = this.localStorageService.get('appLocalStorageUser'+this.appId);
-if(passwordCon != this.password){
-
 
     var data = {
         firstName: this.fname,
@@ -100,7 +90,7 @@ if(passwordCon != this.password){
         phone: this.phone,
         appId: this.appId
     };
-    console.log("data : " + JSON.stringify(data));
+
     this.localStorageService.set('appLocalStorageUser'+this.appId, (data))
 
     this.http.post(SERVER_URL+"/templatesAuth/register",data)
@@ -125,7 +115,6 @@ if(passwordCon != this.password){
                 this.localStorageService.set('appLocalStorageUser'+this.appId,(requestParams));
                 this.dataService.isUserLoggedIn.check = true;
                 this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
-                console.log(this.localStorageService.get('appLocalStorageUser'+this.appId));
 
                 if(this.navigate == 'home'){
                     this.route.navigate(['home']);
@@ -137,33 +126,16 @@ if(passwordCon != this.password){
                 alert("signup error");
             });
 
-          }else{
-            alert("password miss match")
-          }
-}
 
-  slides = SLIDES;
+  }
 
+    slides = SLIDES;
 
-// authenticate = function(provider) {
-//   $auth.authenticate(provider).then(function(res){
-//       if(typeof res.data.token != 'undefined'){
-//           if($stateParams.item == 'delivery'){
-//               $state.go('app.cart');
-//           }else{
-//               $state.go('app.category');
-//           }
-//       }else{
-//           alert(provider+' Login error');
-//       }
-//   },function(err){
-//       alert(provider+' Login error');
-//   });
-// };
 
 }
 
 const SLIDES = [
   {
-    src: 'http://1.bp.blogspot.com/-w3nRkRuOiC4/TvzWH0yKgeI/AAAAAAAAAj0/bLA2ip6MFCA/s1600/CliffJumpWallpaper.jpg', title: 'Register'
-  }]
+    src: 'http://1.bp.blogspot.com/-w3nRkRuOiC4/TvzWH0yKgeI/AAAAAAAAAj0/bLA2ip6MFCA/s1600/CliffJumpWallpaper.jpg'
+  }
+]

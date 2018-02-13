@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.router.params.subscribe(params => {
       this.navigate = params['type'];
-      console.log("this.value : " + this.navigate);
     });
   }
+
   login = function (myForm) {
 
     this.name = myForm.userEmail
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       password: this.password,
       appId: this.appId
     };
-    console.log(data);
+
     let requestParams;
     this.http.post(SERVER_URL + "/templatesAuth/authenticateForApp", data)
       .subscribe((res) => {
@@ -65,14 +65,6 @@ export class LoginComponent implements OnInit {
         } else {
           this.route.navigate(['cart']);
         }
-
-
-        // if($stateParams.item == 'delivery'){
-        //   $state.go('app.cart');
-        // }else{
-        //   $state.go('app.category');
-        // }
-
       },
       function (err) {
         console.log(err);
