@@ -39,8 +39,6 @@ export class HomepageComponent implements OnInit {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
       this.sliderData = data;
-      console.log("sliderData");
-      console.log(data);
        var size = Object.keys(this.sliderData).length;
        if(size >0){
         this.isSliderDataAvailable = true;
@@ -50,8 +48,6 @@ export class HomepageComponent implements OnInit {
     }, err => {
       console.log(err);
     });
-
- console.log(this.isSliderDataAvailable)
 
     for (let i = 0; i < 2; i++) {
       this.randomedArr.push({
@@ -75,7 +71,6 @@ export class HomepageComponent implements OnInit {
     this.imageUrlSlider = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
 
-      console.log(this.imageUrlSlider);
     this.categoryService.getCategories().subscribe(data => {
       // Read the result field from the JSON response.
       this.results = data;
@@ -133,14 +128,11 @@ export class HomepageComponent implements OnInit {
 
   // Routing Method
   navigateShop(val: string, id, name) {
-    console.log(val);
     this.dataService.catId = id;
     this.router.navigate(['/' + val, id, name]);
   }
 
   navigateFeaturedProd(val, item){
-    console.log(item)
-    console.log(val)
 
     this.productService.getCategoryData(item.childId).subscribe((data: any) => {
       // console.log(data[0].name);
@@ -153,43 +145,4 @@ export class HomepageComponent implements OnInit {
 
   }
 
-
-  //   images: Array<string> = ['sports', 'abstract', 'people', 'transport', 'city', 'technics', 'nightlife', 'animals'];
-
-  //   owlOptions = {
-  //     loop: true,
-  //     margin: 10,
-  //     responsiveClass: true,
-  //     responsive: {
-  //       0: {
-  //         items: 2
-  //       },
-  //       600: {
-  //         items: 4
-  //       },
-  //       1000: {
-  //         items: 6,
-  //         loop: true
-  //       }
-  //     }
-  //   }
-
-
-  //   state: string = 'small';
-
-  //   animateMe() {
-  //     this.state = (this.state === 'small' ? 'large' : 'small');
-  //   }
-
-
-
-  // }
-
-  slides = SLIDES;
-
 }
-const SLIDES = [
-  { src: './assets/images/SLIDER%201.png' },
-  { src: './assets/images/SLIDER%202.png' },
-  { src: './assets/images/SLIDER%203.png' },
-];

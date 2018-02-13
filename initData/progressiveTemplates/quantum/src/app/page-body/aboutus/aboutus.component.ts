@@ -26,7 +26,6 @@ export class AboutusComponent implements OnInit {
 
     this.appdataService.getAboutUs()
       .subscribe((data: any) => {
-        console.log("data : " + JSON.stringify(data));
         this.header = data.header;
         this.content = data.content;
         this.openHours = (data.OpenHours);

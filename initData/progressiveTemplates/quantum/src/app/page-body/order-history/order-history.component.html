@@ -1,56 +1,38 @@
-<div class="bloc bgc-white l-bloc" id="bloc-0">
-  <div class="container bloc-sm">
-      <app-carousel [slides]="slides">
-      </app-carousel>
-  </div>
-</div>
-
 <div class="container">
-  <!-- Content here -->
-  <div class="row">
-    <div class=" col-md-3 text-center">
-      <div class="cliente">Item</div>
-    </div>
-    <div class="col-md-2 text-center">
-      <div class="cliente">Order Date</div>
-    </div>
-    <div class=" col-md-2 text-center">
-      <div class="cliente">Item Name</div>
-    </div>
-    <div class=" col-md-2 text-center">
-      <div class="cliente">Price</div>
-    </div>
-    <div class=" col-md-1 text-center">
-      <div class="cliente">Quantity</div>
-    </div>
-    <div class=" col-md-2 text-center">
-      <div class="cliente">Total</div>
+
+  <div class="bloc bgc-white l-bloc" id="bloc-0">
+    <div class="container bloc-sm">
     </div>
   </div>
-  <hr><br>
-  <div *ngFor="let order of orderHistory">
-    <div class="row main-content-font" *ngFor="let item of order.item">
-      <div class="col-md-3 text-center">
-        <img src="{{imageURL}}/{{item.imgURL[0].img}}" width="35%">
+
+  <h1>Order History</h1>
+  <div  *ngFor="let order of orderHistory">
+    <div class="row cart" *ngFor="let item of order.item">
+      <div class="col-md-1 col-xs-2 no-m-padding">
+        <img src="{{imageURL}}/{{item.imgURL[0].img}}">
       </div>
-      <div class="col-md-2 text-center align-middle">
-        <div class="orderItem">{{order.createdAt | date:'MM/dd/yyyy'}}
+      <div class="col-md-8 col-xs-6">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="no-m-margin">{{item.name}}</label>
+            <span class="single-price"> {{sign}} {{item.price}}</span>
+          </div>
+          <div class="col-md-3">
+            <div class="variants text-center no-m-margin">
+              <span  *ngFor="let v of item.variant">{{v.name}} : {{v.vType}}<br></span>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <span class="no-m-margin" id="qty">Qty: {{item.qty}}</span>
+          </div>
         </div>
       </div>
-      <div class="col-md-2 text-center align-middle">
-        <div class="orderItem"> {{item.name}}</div>
-      </div>
-      <div class="col-md-2 text-center align-middle">
-        <div class="orderItem"> {{sign}}{{item.price}}</div>
-      </div>
-      <div class="col-md-1 text-center align-middle">
-        <div class="orderItem"> {{item.qty}}</div>
-      </div>
-      <div class="col-md-2 text-center align-middle">
-        <div class="orderItem"> {{sign}}{{order.amount}}</div>
+      <div class="col-md-3 col-xs-4 no-m-padding">
+        <div class="total-price text-center">
+          {{sign}} {{order.amount}}
+        </div>
       </div>
     </div>
-    <br>
   </div>
 
 
@@ -59,50 +41,4 @@
     </div>
   </div>
 
-  <!-- <div>
-    <div class="row main-header-font">
-      <dt class="col">
-        Item
-      </dt>
-      <dt class="col">
-        Order Date
-      </dt>
-      <dt class="col">
-        Item Name
-      </dt>
-      <dt class="col">
-        Price
-      </dt>
-      <dt class="col">
-        Quantity
-      </dt>
-      <dt class="col">
-        Total
-      </dt>
-    </div>
-  </div>
-  <div *ngFor="let order of orderHistory">
-    <div class="row main-content-font"  *ngFor="let item of order.item" >
-      <div class="col my-3" >
-        <img src="{{imageURL}}/{{item.imgURL[0].img}}" width="100%">
-      </div>
-      <div class="col my-auto">
-        {{order.createdAt | date:'MM/dd/yyyy'}}
-      </div>
-      <div class="col my-auto">
-        {{item.name}}
-      </div>
-      <div class="col my-auto">
-        {{sign}}{{item.price}}
-      </div>
-      <div class="col my-auto">
-        {{item.qty}}
-      </div>
-      <div class="col my-auto">
-        {{sign}}{{order.amount}}
-      </div>
-    </div>
-  </div>
-</div> -->
-
-  <!--<app-newsletter></app-newsletter>-->
+</div>
