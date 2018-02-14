@@ -49,8 +49,6 @@ export class ShopComponent implements OnInit {
 
     this.currencyService.getCurrencies().subscribe(data => {
       this.currency = data.sign;
-      console.log(this.currency)
-      console.log(data)
     }, error => {
       console.log("Error retrieving currency");
     });
@@ -59,7 +57,6 @@ export class ShopComponent implements OnInit {
       this.catId = params['id']; // --> Name must match wanted parameter
       this.catName = params['name'];
       this.catImage = params['image'];
-      console.log("this.value : " + this.catId);
     });
 
     this.slides = [
@@ -69,7 +66,6 @@ export class ShopComponent implements OnInit {
       this.productService.getProducts().subscribe(data => {
         // Read the result field from the JSON response.
         this.results = data;
-        console.log("this.results  : " + JSON.stringify(this.results));
       },
         error => {
           console.log('Error shop service');
@@ -120,9 +116,6 @@ export class ShopComponent implements OnInit {
     }), err => {
       console.log(err)
     }
-
-    console.log('item : ' + JSON.stringify(item))
-    // console.log("item  : " + JSON.stringify(this.dataService.data));
 
   }
 

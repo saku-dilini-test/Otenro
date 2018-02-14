@@ -40,6 +40,7 @@ export class ProductComponent implements OnInit {
 
         this.Data = this.dataService.data;
         console.log(this.imageUrl);
+        console.log(this.Data);
         this.init();
     }
 
@@ -49,27 +50,21 @@ export class ProductComponent implements OnInit {
 
         this.CurrencyService.getCurrencies().subscribe(data => {
             this.currency = data.currency;
-            console.log("this.currency  : " + this.currency);
         }, error => {
             console.log('Error retrieving currency');
         });
 
         this.router.params.subscribe(params => {
             this.catName = params['catName'];
-            console.log("this.value : " + this.catName);
         });
-        console.log("data  : " + JSON.stringify(this.dataService.data));
 
 
     }
 
 
     init() {
-        console.log('initcalled');
         if (this.Data) {
-            console.log("this.Data  : " + JSON.stringify(this.Data));
             this.foodInfo = this.Data;
-            console.log("this.foodInfo  : " + JSON.stringify(this.foodInfo));
 
             this.images = this.Data.tempImageArray;
 
@@ -79,13 +74,11 @@ export class ProductComponent implements OnInit {
                 this.selection1 = [];
                 this.selection2 = [];
                 this.selection3 = [];
-                console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
                 for (var i = 0; i < this.foodInfo.variants.length; i++) {
                     this.selection.push({ 'vType': this.foodInfo.variants[i].selection[0].vType });
                 }
 
                 this.selection = _.uniqBy(this.selection, 'vType');
-                console.log("this.selection  : " + JSON.stringify(this.selection));
                 this.selectedVariant = this.Data.variants[0];
 
                 if (this.selectedVariant.quantity > 0) {
@@ -103,28 +96,22 @@ export class ProductComponent implements OnInit {
         this.selection1 = [];
         this.selection2 = [];
         this.selection3 = [];
-        console.log("variant : " + variant);
-        console.log("changeVariant called");
-        console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
+
 
         this.selectedVariant1 = variant;
-        console.log("this.selectedVariant1  : " + JSON.stringify(this.selectedVariant1));
 
         this.selectedVariant.buyQuantity = '';
 
 
         if (this.foodInfo.selection.length == 1) {
-            console.log("if called");
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selectedVariant = this.foodInfo.variants[i];
-                    console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
 
                     this.lockBuyButton = true;
                 }
             }
         } else {
-            console.log("else called");
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == variant) {
 
@@ -132,7 +119,6 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.selection1 = _.uniqBy(this.selection1, 'vType');
-            console.log("this.selection1  : " + JSON.stringify(this.selection1) + JSON.stringify(this.selection));
         }
 
     };
@@ -141,9 +127,6 @@ export class ProductComponent implements OnInit {
         this.lockBuyButton = false;
         this.selection2 = [];
         this.selection3 = [];
-        console.log("variant : " + variant);
-        console.log("changeVariant2 called");
-        console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
 
         if (variant) {
             this.selectedVariant2 = variant;
@@ -152,7 +135,6 @@ export class ProductComponent implements OnInit {
         }
 
         if (this.foodInfo.selection.length == 2) {
-            console.log("if called");
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
                     this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
@@ -161,17 +143,14 @@ export class ProductComponent implements OnInit {
 
                 }
             }
-            console.log("this.selectedVariant  : " + JSON.stringify(this.selectedVariant));
 
         } else {
-            console.log("else called");
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[1].vType == variant && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selection2.push({ 'vType': this.foodInfo.variants[i].selection[2].vType });
                 }
             }
             this.selection2 = _.uniqBy(this.selection2, 'vType');
-            console.log("this.selection2  : " + JSON.stringify(this.selection2) + JSON.stringify(this.selection));
 
         }
 
@@ -180,15 +159,13 @@ export class ProductComponent implements OnInit {
     changeVariant3(variant) {
         this.lockBuyButton = false;
         this.selection3 = [];
-        console.log("variant : " + variant);
-        console.log("changeVariant3 called");
+
         if (variant) {
             this.selectedVariant3 = variant;
             this.selectedVariant.buyQuantity = '';
         }
 
         if (this.foodInfo.selection.length == 3) {
-            console.log("if called");
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
                     this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
@@ -199,11 +176,9 @@ export class ProductComponent implements OnInit {
                 }
             }
         } else {
-            console.log("else called");
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[2].vType == variant && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 && this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
                     this.selection3.push({ 'vType': this.foodInfo.variants[i].selection[3].vType });
-                    console.log("this.selection3  : " + JSON.stringify(this.selection3) + JSON.stringify(this.selection));
                 }
             }
             this.selection3 = _.uniqBy(this.selection3, 'vType');
@@ -266,9 +241,8 @@ export class ProductComponent implements OnInit {
 
 
     addToCart() {
-        console.log("this.selectedVariant.buyQuantity  : " + this.selectedVariant.buyQuantity);
         if (this.selectedVariant.buyQuantity == null) {
-            alert(' error');
+            console.log(' error');
         } else {
             if (this.dataService.cart.cartItems.length != 0) {
                 var i = 0;
@@ -327,7 +301,6 @@ export class ProductComponent implements OnInit {
 
                 });
                 this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
-                console.log('this.dataService.cart.cartSize  : ' + this.dataService.cart.cartSize);
                 this.parentobj.cartSize = this.dataService.cart.cartSize;
                 this.dataService.parseWeight = this.selectedVariant.weight;
                 // $state.go('app.category');
@@ -339,11 +312,5 @@ export class ProductComponent implements OnInit {
     };
 
 
-    slides = SLIDES;
 }
 
-
-
-const SLIDES = [
-    { src: './assets/images/slider/1.jpg', title: 'Final Sale' },
-];

@@ -14,10 +14,31 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="row bgc-gainsboro voffset-md">
-            <div class="col-sm-6">
+            <div class="col-sm-4 product-carousel">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                      <img src="{{imageUrl}}/{{Data.tempImageArray[0].img}}" alt="{{Data.name}}">
+                    </div>
+                    <div class="item" *ngFor="let item of Data.tempImageArray |slice:1" >
+                      <img src="{{imageUrl}}/{{item.img}}" alt="{{item.name}}">
+                    </div>
+                  </div>
+
+                  <!-- Controls -->
+                  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-8">
 
               <div class="panel panel-detail">
                 <div class="panel-heading">
@@ -45,7 +66,7 @@
 
                   <div class="row" *ngIf="Data.selection[0]">
                     <p class="col-md-3">{{Data.selection[0].name}}:</p>
-                    <div class="col-md-9">
+                    <div class="col-md-6">
                       <select class="form-control" [(ngModel)]="selectedVariant1" (ngModelChange)="changeVariant(selectedVariant1)">
                         <option *ngFor="let c of selection">{{c.vType}}</option>
                       </select>
@@ -54,7 +75,7 @@
                   <div class="row" *ngIf="Data.selection[1]">
                     <p class="col-md-3">{{Data.selection[1].name}}:</p>
 
-                    <div class="col-md-9">
+                    <div class="col-md-6">
                       <select class="form-control" [(ngModel)]="selectedVariant2" (ngModelChange)="changeVariant2(selectedVariant2)">
                         <option *ngFor="let c of selection1" [ngValue]="c.vType"> {{c.vType}} </option>
                       </select>
@@ -64,7 +85,7 @@
                   <div class="row" *ngIf="Data.selection[2]">
                     <p class="col-md-3">{{Data.selection[2].name}}:</p>
 
-                    <div class="col-md-9">
+                    <div class="col-md-6">
                       <select class="form-control" [(ngModel)]="selectedVariant3" (ngModelChange)="changeVariant3(selectedVariant3)">
                         <option *ngFor="let c of selection2" [ngValue]="c.vType"> {{c.vType}} </option>
                       </select>
@@ -75,7 +96,7 @@
                   <div class="row" *ngIf="Data.selection[3]">
                     <p class="col-md-3">{{Data.selection[3].name}}:</p>
 
-                    <div class="col-md-9">
+                    <div class="col-md-6">
                       <select class="form-control" [(ngModel)]="selectedVariant4" (ngModelChange)="changeVariant4(selectedVariant4)">
                         <option *ngFor="let c of selection3" [ngValue]="c.vType"> {{c.vType}} </option>
                       </select>
@@ -86,7 +107,7 @@
                     <div class="col-md-3">
                       <p>Enter Quantity:</p>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-6">
                       <!--<span>-->
                       <!--<button class="btn btn-default" (click)="descrease()" type="button" id="btn-plus"><span class="glyphicon glyphicon-minus"></span></button>-->
                       <!--</span>-->
@@ -120,7 +141,7 @@
 
                   <div class="row">
                     <div class="col-md-3"></div>
-                    <div class="col-md-9 text-center margin-top">
+                    <div class="col-md-6 text-center margin-top">
                       <a (click)='addToCart()' class="btn btn-d btn-lg button-circular-radius button-circular-radius-small shoping-cart">add to cart</a>
                     </div>
                   </div>
