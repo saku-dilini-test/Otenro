@@ -80,7 +80,7 @@ module.exports = {
         var templateCategoryId = req.param('templateCategoryId');
         var searchQuery = {
             templateCategoryId: templateCategoryId,
-            menuTitle: { "!" : "Payment Activities"} //ME-2778 Hide all tasks which say coming soon
+            menuTitle: { "!" : ["Payment Activities","Featured","Secondary","Ads","Subscriptions","View Controls","Payment Settings","Communication"]} //ME-2778,2781 Hide all tasks which say coming soon
         };
         var firstMenuLabel = '';
         if (templateCategoryId == '2') {
