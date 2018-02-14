@@ -1197,6 +1197,11 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     'telPhone': basicInfo.telPhone,
                     'email': webInfo.email,
                     'webSite': webInfo.webSite,
+                    'twitter': webInfo.twitter,
+                    'facebook': webInfo.facebook,
+                    'instagram': webInfo.instagram,
+                    'linkedin': webInfo.linkedin,
+                    'pinterest': webInfo.pinterest,
                     'coords': $scope.map.markers[0].coords
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)

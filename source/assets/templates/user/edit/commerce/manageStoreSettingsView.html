@@ -384,6 +384,41 @@
                                 <br/>
                                 <span class="error" ng-show="basicInfoForm.website.$error.pattern">Invalid url!</span>
                             </fieldset>
+                            <fieldset>
+                                <label>Twitter</label>
+                                <input class="input-shadow-border" type="text" name="twitter" ng-model="webInfo.twitter" 
+                                       ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" />
+                                <br/>
+                                <span class="error" ng-show="basicInfoForm.twitter.$error.pattern">Invalid url!</span>                                
+                            </fieldset> 
+                            <fieldset>
+                                <label>Facebook</label>
+                                <input class="input-shadow-border" type="text" name="facebook" ng-model="webInfo.facebook" 
+                                       ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" />
+                                <br/>
+                                <span class="error" ng-show="basicInfoForm.facebook.$error.pattern">Invalid url!</span>                                
+                            </fieldset>  
+                            <fieldset>
+                                <label>Instagram</label>
+                                <input class="input-shadow-border" type="text" name="instagram" ng-model="webInfo.instagram" 
+                                       ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" />
+                                <br/>
+                                <span class="error" ng-show="basicInfoForm.instagram.$error.pattern">Invalid url!</span>                                
+                            </fieldset>  
+                            <fieldset>
+                                <label>LinkedIn</label>
+                                <input class="input-shadow-border" type="text" name="linkedin" ng-model="webInfo.linkedin" 
+                                       ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" />
+                                <br/>
+                                <span class="error" ng-show="basicInfoForm.linkedin.$error.pattern">Invalid url!</span>                                
+                            </fieldset>    
+                            <fieldset>
+                                <label>Pinterest</label>
+                                <input class="input-shadow-border" type="text" name="pinterest" ng-model="webInfo.pinterest" 
+                                       ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" />
+                                <br/>
+                                <span class="error" ng-show="basicInfoForm.pinterest.$error.pattern">Invalid url!</span>                                
+                            </fieldset>                                                                                                                                           
                             <div class="google-map-wrapper">
                                 <md-checkbox aria-label="Show Map">
                                     Show the map on the app

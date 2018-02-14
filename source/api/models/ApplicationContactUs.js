@@ -23,6 +23,21 @@ module.exports = {
         webSite: {
             type: 'string'
         },
+        twitter: {
+            type: 'string'
+        },
+        facebook: {
+            type: 'string'
+        },
+        instagram: {
+            type: 'string'
+        },
+        linkedin: {
+            type: 'string'
+        },
+        pinterest: {
+            type: 'string'
+        },
         coords : {
             type : 'json'
         },
