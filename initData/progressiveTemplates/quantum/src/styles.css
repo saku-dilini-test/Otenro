@@ -129,6 +129,12 @@ a:hover{text-decoration: none; cursor:pointer;}
 	background-size: cover;
 	position:relative;
 }
+
+  .bloc{
+	padding: 0;
+}
+
+
 .bloc .container{
 	padding-left:0;
 	padding-right:0;
@@ -884,7 +890,7 @@ label{
 	margin-top:1%;
 }
 .panel-detail{
-	margin-top:3%;
+	margin-top:20px;
 }
 .social-media-details{
 	margin-top:10px;
@@ -955,7 +961,7 @@ label{
 
 /* = Mobile adjustments
 -------------------------------------------------------------- */
-@media (max-width: 1024px)
+@media (max-width: 1120px)
 {
     .bloc{
         padding-left: 20px;
