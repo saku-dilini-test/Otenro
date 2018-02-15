@@ -28,6 +28,10 @@
         $scope.maxAboutUsContent = 500;
         $scope.currency = $rootScope.currency;
 
+        $scope.uploadedFiles = null;
+        $scope.uploadedFileType = null;
+        $scope.aboutUsImageName = null;
+        $scope.selectedAboutUsImageName = '';
 
         $scope.refreshData = function() {
         $scope.gridOptions1.data = $filter('filter')($scope.ordersList, $scope.search, undefined);
@@ -597,34 +601,76 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 if (storeSettings.header && storeSettings.content) {
                     storeSettings.userId = $scope.userId;
                     storeSettings.appId = $rootScope.appId;
-                    commerceService.saveStoreSettings(storeSettings)
-                        .success(function (data, status, headers, config) {
-                            toastr.success('About Us has been added successfully', 'Awesome', {
+
+                    var file = $scope.uploadedFiles;
+                    var uploadedFileType = $scope.uploadedFileType;
+
+                    if(file){
+                        commerceService.uploadFile(file,storeSettings.appId,storeSettings.userId,uploadedFileType).success(function(data) {
+                            storeSettings.aboutUsImageName = $scope.aboutUsImageName;
+
+                            commerceService.saveStoreSettings(storeSettings)
+                                .success(function (data, status, headers, config) {
+                                    toastr.success('About Us has been added successfully', 'Awesome', {
+                                        closeButton: true
+                                    });
+                                    var urlPath;
+                                    console.log('wtf');
+                                    console.log('$scope isNew ' + $scope.isNew);
+                                    if($scope.isNew == 'true'){
+                                    urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                                                                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                                                                            $scope.appTemplateUrl = urlPath + '' +
+                                                                                                'aboutus';
+                                    }else{
+                                    urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                                                    + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                                                $scope.appTemplateUrl = urlPath + '' +
+                                                                    '#/app/aboutUs';
+                                    }
+
+                                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                                    $scope.selectedTab = current;
+                                }).error(function (data, status, headers, config) {
+                                toastr.error('Unable to Add', 'Warning', {
+                                    closeButton: true
+                                });
+                            })        
+
+                        }).error(function(err) {
+                            toastr.error(err.message, 'Warning', {
                                 closeButton: true
                             });
-                            var urlPath;
-                            console.log('wtf');
-                            console.log('$scope isNew ' + $scope.isNew);
-                            if($scope.isNew == 'true'){
-                            urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                                                                                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-                                                                                    $scope.appTemplateUrl = urlPath + '' +
-                                                                                        'aboutus';
-                            }else{
-                            urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
-                                                            + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-                                                        $scope.appTemplateUrl = urlPath + '' +
-                                                            '#/app/aboutUs';
-                            }
-
-                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                            $scope.selectedTab = current;
-                        }).error(function (data, status, headers, config) {
-                        toastr.error('Unable to Add', 'Warning', {
-                            closeButton: true
                         });
-                    })
+                    }else{
+                        commerceService.saveStoreSettings(storeSettings)
+                            .success(function (data, status, headers, config) {
+                                toastr.success('About Us has been added successfully', 'Awesome', {
+                                    closeButton: true
+                                });
+                                var urlPath;
+                                console.log('wtf');
+                                console.log('$scope isNew ' + $scope.isNew);
+                                if($scope.isNew == 'true'){
+                                urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                                                                            + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                                                                        $scope.appTemplateUrl = urlPath + '' +
+                                                                                            'aboutus';
+                                }else{
+                                urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                                                            $scope.appTemplateUrl = urlPath + '' +
+                                                                '#/app/aboutUs';
+                                }
 
+                                mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                                $scope.selectedTab = current;
+                            }).error(function (data, status, headers, config) {
+                            toastr.error('Unable to Add', 'Warning', {
+                                closeButton: true
+                            });
+                        })   
+                    }
                 } else {
 
                     $scope.selectedTab = current;
@@ -640,6 +686,23 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
         }).error(function (err) {
             toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
         });
+
+        $scope.uploadFile = function (files, type) {
+            var file=files[0];
+
+            $scope.uploadedFiles = null;
+            $scope.uploadedFileType = type;
+            $scope.aboutUsImageName = file.name;
+            $scope.selectedAboutUsImageName = file.name;
+
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                $scope.$apply(function($scope){
+                    $scope.uploadedFiles=evt.target.result;
+                });
+            };
+            reader.readAsDataURL(file);            
+        };        
 
 
         $scope.savePolicies = function (current, storeSettings) {

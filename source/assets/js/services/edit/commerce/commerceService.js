@@ -428,7 +428,31 @@
             },
             getChartData :function (data) {
                 return $http.post(SERVER_URL + 'reports/getChartData', data);
-            }
+            },
+            uploadFile: function(file,appId,userId,uploadedFileType){
+                var dataURItoBlob = function(dataURI) {
+                    var binary = atob(dataURI.split(',')[1]);
+                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+                    var array = [];
+                    for(var i = 0; i < binary.length; i++) {
+                        array.push(binary.charCodeAt(i));
+                    }
+                    return new Blob([new Uint8Array(array)], {type: mimeString});
+                };
+
+                var blob = dataURItoBlob(file);
+                var UploadFile = new File([blob], 'imageFileName.png');
+
+                return Upload.upload({
+                    url: SERVER_URL + 'edit/uploadFile',
+                    fields: {
+                        'appId' : appId,
+                        'userId' : userId,
+                        'uploadedFileType' : uploadedFileType
+                    },
+                    file: UploadFile
+                });
+            }            
 
         };
     }

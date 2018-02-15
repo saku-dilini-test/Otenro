@@ -74,6 +74,9 @@
             },
             content:{
              type: 'string'
+            },
+            aboutUsImageName:{
+             type: 'string'
             }
 
             }
