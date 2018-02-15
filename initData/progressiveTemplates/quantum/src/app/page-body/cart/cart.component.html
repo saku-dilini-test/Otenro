@@ -8,16 +8,16 @@
     <div class="col-md-8 col-xs-6">
       <div class="row">
         <div class="col-md-6">
-          <label class="no-m-margin">{{item.name}}</label>
-          <span class="single-price"> {{currency}} {{item.price}}</span>
+          <label class="no-m-margin main-header-font">{{item.name}}</label>
+          <span class="single-price main-content-font"> {{currency}} {{item.price}}</span>
         </div>
         <div class="col-md-3">
-          <div class="variants text-center no-m-margin">
-            <span  *ngFor="let v of item.variant">{{v.name}} : {{v.vType}}<br></span>
+          <div class="variants text-center no-m-margin main-content-font">
+            <span *ngFor="let v of item.variant">{{v.name}} : {{v.vType}}<br></span>
           </div>
         </div>
         <div class="col-md-3">
-          <input class="form-control no-m-margin" name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');" [(ngModel)]="item.qty"
+          <input class="form-control no-m-margin main-content-font" name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');" [(ngModel)]="item.qty"
             value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))" ngDefaultControl>
         </div>
 
@@ -42,14 +42,14 @@
       </div>
     </div>
     <div class="col-md-2 col-xs-3 no-m-padding">
-     <div class="total-price text-center">
+     <div class="total-price  main-content-font text-center">
        {{currency}} {{item.total * item.qty}}
      </div>
     </div>
     <div class="col-md-1 col-xs-1 no-m-padding">
-     <div class="delete text-center">
+     <div class="delete text-center  main-content-font">
        <a (click)="removeItem(index)" class="btn btn-remove" title="Remove this item">
-         <i class="fa fa-trash fa-lg"></i>
+         <i class="fa fa-trash fa-lg  main-content-font"></i>
        </a>
      </div>
     </div>
@@ -58,17 +58,17 @@
 
 
 	<div class="row text-center">
-		<div class="col-md-12 text-center margin-vertical">
+		<div class="col-md-12 text-center margin-vertical main-content-font">
       <h4 [(ngModel)]="total" ngDefaultControl>Cart Total: {{currency}} {{getTotal()}}</h4>
     </div>
     <div class="col-md-6 col-xs-6">
       <!-- [disabled]='cartItems.length<=0' -->
-      <button class="btn main-button button-inverse text-white btn-block" (click)="delivery(cartItems)">
+      <button class="btn main-button text-white btn-block" (click)="delivery(cartItems)">
         Delivery
       </button>
     </div>
     <div class="col-md-6 col-xs-6">
-      <button class="btn main-button button-inverse text-white btn-block" (click)='pickupDetails(cartItems)'>
+      <button class="btn main-button text-white btn-block" (click)='pickupDetails(cartItems)'>
         pickup
       </button>
     </div>

@@ -15,11 +15,13 @@
         <h3 class="mg-md bloc-mob-center-text" *ngIf="isShowFollowUs()">
           Follow Us
         </h3>
-        <a *ngIf="isTwitterUrlExists()" href="{{ getTwitterUrl() }}" class="a-btn a-block bloc-mob-center-text text-center">Twitter</a>
-        <a *ngIf="isFacebookUrlExists()" href="{{ getFacebookUrl() }}" class="a-btn a-block bloc-mob-center-text text-center">Facebook</a>
-        <a *ngIf="isInstagramUrlExists()" href="{{ getInstagramrUrl() }}" class="a-btn a-block bloc-mob-center-text text-center">Instagram</a>
-        <a *ngIf="isPinterestUrlExists()" href="{{ getPinterestrUrl() }}" class="a-btn a-block bloc-mob-center-text text-center">Pinterest</a>
-        <a *ngIf="isLinkedInUrlExists()" href="{{ getLinkedInUrl() }}" class="a-btn a-block bloc-mob-center-text text-center">LinkedIn</a>
+        <div class="social-media">
+          <a *ngIf="isTwitterUrlExists()" href="{{ getTwitterUrl() }}" class="a-btn a-block bloc-mob-center-text text-center"><i class="icon fa fa-twitter"></i></a>
+          <a *ngIf="isFacebookUrlExists()" href="{{ getFacebookUrl() }}" class="a-btn a-block bloc-mob-center-text text-center"><i class="icon fa fa-facebook"></i></a>
+          <a *ngIf="isInstagramUrlExists()" href="{{ getInstagramrUrl() }}" class="a-btn a-block bloc-mob-center-text text-center"><i class="icon fa fa-instagram"></i></a>
+          <a *ngIf="isPinterestUrlExists()" href="{{ getPinterestrUrl() }}" class="a-btn a-block bloc-mob-center-text text-center"><i class="icon fa fa-pinterest-p"></i></a>
+          <a *ngIf="isLinkedInUrlExists()" href="{{ getLinkedInUrl() }}" class="a-btn a-block bloc-mob-center-text text-center"><i class="icon fa fa-linkedin"></i></a>
+        </div>
       </div>
       <div class="col-sm-4">
         <h3 class="mg-md bloc-mob-center-text">

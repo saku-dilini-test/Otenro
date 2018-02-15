@@ -13,21 +13,21 @@
       <div class="col-md-8 col-xs-6">
         <div class="row">
           <div class="col-md-6">
-            <label class="no-m-margin">{{item.name}}</label>
-            <span class="single-price"> {{sign}} {{item.price}}</span>
+            <label class="no-m-margin main-header-font">{{item.name}}</label>
+            <span class="main-content-font"> {{sign}} {{item.price}}</span>
           </div>
           <div class="col-md-3">
-            <div class="variants text-center no-m-margin">
+            <div class="variants text-center no-m-margin main-content-font">
               <span  *ngFor="let v of item.variant">{{v.name}} : {{v.vType}}<br></span>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 main-content-font">
             <span class="no-m-margin" id="qty">Qty: {{item.qty}}</span>
           </div>
         </div>
       </div>
       <div class="col-md-3 col-xs-4 no-m-padding">
-        <div class="total-price text-center">
+        <div class="total-price text-center main-content-font">
           {{sign}} {{order.amount}}
         </div>
       </div>

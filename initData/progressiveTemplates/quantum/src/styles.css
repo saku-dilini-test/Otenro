@@ -269,6 +269,11 @@ a:hover{text-decoration: none; cursor:pointer;}
 .navbar-toggle:hover{
 	background:transparent!important;
 }
+/*.navbar-toggle .icon-bar{*/
+	/*background-color: rgba(0,0,0,.5);*/
+	/*width: 26px;*/
+/*}*/
+ /* Inverted navbar */
 
 .nav-invert .navbar .nav{
 	float:left;
@@ -575,9 +580,9 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 .sub-header-text{
 	font-size:44px;
 	letter-spacing:5px;
-	font-weight:800;
+	font-weight:800 !important;
 	text-transform:uppercase;
-	color:#5A6079!important;
+	color:#5A6079;
 	font-family:""Open Sans"";
 	text-decoration:none;
 	padding:13px 13px 13px 13px;
@@ -585,28 +590,16 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 .spacing1{
 	padding:0px 0px 0px 13px;
 	height:45px;
-	color:#677089!important;
+	color:#677089;
 	border-style:solid;
 	border-width:0px 0px 2px 0px;
 	margin-bottom:51px;
 	border-color:rgba(255,255,255,0.4);
 	font-family:"Lato";
-	font-weight:700;
+	font-weight:700 !important;
 	margin-top:-20px;
 }
-.content-index{
-	color:#6C788E!important;
-	text-align:justified;
-	text-decoration:none;
-	text-transform:none;
-	font-family:""Open Sans"";
-	font-weight:400;
-	padding-right:13px;
-	padding-bottom:13px;
-	padding-left:13px;
-	font-size:12px;
-	margin-top:-7%;
-}
+
 .button-circular-radius{
 	border-radius:60px 60px 60px 60px;
 	background-color:#838399;
@@ -616,19 +609,7 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 	padding:10px 15px 10px 15px;
 	font-size:16px;
 }
-.about-us-heading{
-	font-family:""Open Sans"";
-	font-weight:600;
-	text-transform:capitalize;
-	border-bottom-width:2px;
-	border-color:#1872A3;
-	border-style:none;
-	font-size:28px;
-	color:#163170!important;
-	text-align:justified;
-	padding:10px 10px 10px 10px;
-	margin-top:3%;
-}
+
 .divider{
 	background-color:transparent;
 	border-color:#112C42;
@@ -636,19 +617,11 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 	padding-top:0px;
 	text-shadow:0px 0px 0px #000000;
 }
-.prices{
-	font-size:20px;
-	font-family:""Open Sans"";
-	font-weight:800;
-	color:#626A83!important;
-	border-color:#FFFFFF;
-}
+
 .button-circular-radius-small{
 	font-size:14px;
 }
-.shoping-cart{
-	background-color:#F1C123;
-}
+
 .column-1{
 	background-image:url("images/inversion trainer.png");
 }
@@ -743,16 +716,6 @@ label{
 	padding:20px 20px 20px 28px;
 	width:3%;
 }
-.icon:hover{
-}
-.icon{
-	background-color:#8FA2B5;
-	border-radius:30px;
-	padding:6px !important;
-	margin-bottom:1%;
-	margin-left:1%;
-	color:#FBFBFB!important;
-}
 .raw{
   padding: 10px 0px 10px 0px;
 }
@@ -774,7 +737,7 @@ label{
 .link1{
 	font-size:24px;
 	color:#FEFFFF!important;
-	background-color:#87ADB8;
+	background-color:#c3c3c3;
 	padding:11px 11px 11px 11px;
 	border-color:rgba(0,0,0,0.0);
 }
@@ -803,9 +766,6 @@ label{
 	padding-right:0px;
 	margin:29px 0px 0px 30px;
 }
-.content-index-2{
-	margin-top:1%;
-}
 .panel-detail{
 	margin-top:20px;
 }
@@ -833,9 +793,6 @@ label{
 
 /* Background colour styles */
 
-.bgc-white{
-	background-color:#ffffff;
-}
 .bgc-gainsboro{
 	background-color:#CDDAE0;
 }
@@ -1015,7 +972,7 @@ label{
        display:none;
     }
     .voffset{
-        margin-top:5px;
+        margin-top:0px;
     }
     .voffset-md{
         margin-top:20px;

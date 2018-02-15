@@ -44,18 +44,14 @@
   margin-top: 20px;
   margin-bottom: 0;
 }
-.cart .single-price{
-  color: #656565;
-}
+
 .cart .total-price{
-  color: #656565;
   margin-top: 26px;
   font-size: 16px;
   font-weight: 600;
   overflow: auto;
 }
 .cart .variants{
-  color: #656565;
   font-size: 15px;
   font-weight: 600;
   vertical-align: middle;
@@ -86,9 +82,7 @@
 .cart .delete{
   margin-top: 18px;
 }
-.cart .delete i{
-  color: #656565;
-}
+
 
 
 @media (max-width: 767px) {

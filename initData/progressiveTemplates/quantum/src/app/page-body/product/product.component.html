@@ -47,16 +47,16 @@
                     <br>
                   </h3>
                 </div>
-                <p class=" text-left product-detail" id="details">
+                <p class=" text-left product-detail main-content-font" id="details">
                   {{Data.detailedDesc}}
                 </p>
                 <div class="panel-heading">
-                  <h3 class="mg-clear ">
+                  <h3 class="mg-clear main-header-font">
                     {{Data.name}}
                   </h3>
                 </div>
                 <div class="panel-body">
-                  <p class="prices ">
+                  <p class="prices main-content-font">
                     {{currency}} {{Data.variants[0].price}}
                   </p>
                   <div class="divider-h">
@@ -64,46 +64,46 @@
                   </div>
 
 
-                  <div class="row" *ngIf="Data.selection[0]">
+                  <div class="row main-content-font" *ngIf="Data.selection[0]">
                     <p class="col-md-3">{{Data.selection[0].name}}:</p>
                     <div class="col-md-6">
-                      <select class="form-control" [(ngModel)]="selectedVariant1" (ngModelChange)="changeVariant(selectedVariant1)">
+                      <select class="form-control main-content-font" [(ngModel)]="selectedVariant1" (ngModelChange)="changeVariant(selectedVariant1)">
                         <option *ngFor="let c of selection">{{c.vType}}</option>
                       </select>
                     </div>
                   </div>
-                  <div class="row" *ngIf="Data.selection[1]">
+                  <div class="row main-content-font" *ngIf="Data.selection[1]">
                     <p class="col-md-3">{{Data.selection[1].name}}:</p>
 
                     <div class="col-md-6">
-                      <select class="form-control" [(ngModel)]="selectedVariant2" (ngModelChange)="changeVariant2(selectedVariant2)">
+                      <select class="form-control main-content-font" [(ngModel)]="selectedVariant2" (ngModelChange)="changeVariant2(selectedVariant2)">
                         <option *ngFor="let c of selection1" [ngValue]="c.vType"> {{c.vType}} </option>
                       </select>
                     </div>
 
                   </div>
-                  <div class="row" *ngIf="Data.selection[2]">
+                  <div class="row main-content-font" *ngIf="Data.selection[2]">
                     <p class="col-md-3">{{Data.selection[2].name}}:</p>
 
                     <div class="col-md-6">
-                      <select class="form-control" [(ngModel)]="selectedVariant3" (ngModelChange)="changeVariant3(selectedVariant3)">
+                      <select class="form-control main-content-font" [(ngModel)]="selectedVariant3" (ngModelChange)="changeVariant3(selectedVariant3)">
                         <option *ngFor="let c of selection2" [ngValue]="c.vType"> {{c.vType}} </option>
                       </select>
                     </div>
 
                   </div>
 
-                  <div class="row" *ngIf="Data.selection[3]">
+                  <div class="row main-content-font" *ngIf="Data.selection[3]">
                     <p class="col-md-3">{{Data.selection[3].name}}:</p>
 
                     <div class="col-md-6">
-                      <select class="form-control" [(ngModel)]="selectedVariant4" (ngModelChange)="changeVariant4(selectedVariant4)">
+                      <select class="form-control main-content-font" [(ngModel)]="selectedVariant4" (ngModelChange)="changeVariant4(selectedVariant4)">
                         <option *ngFor="let c of selection3" [ngValue]="c.vType"> {{c.vType}} </option>
                       </select>
                     </div>
                   </div>
                   <br>
-                  <div class="row">
+                  <div class="row main-content-font">
                     <div class="col-md-3">
                       <p>Enter Quantity:</p>
                     </div>
@@ -111,7 +111,7 @@
                       <!--<span>-->
                       <!--<button class="btn btn-default" (click)="descrease()" type="button" id="btn-plus"><span class="glyphicon glyphicon-minus"></span></button>-->
                       <!--</span>-->
-                      <input type="number" class="form-control" name="qty" id="qty" value="selectedVariant.buyQuantity" [disabled]="lockBuyButton == false" [(ngModel)]="selectedVariant.buyQuantity"
+                      <input type="number" class="form-control  main-content-font" name="qty" id="qty" value="selectedVariant.buyQuantity" [disabled]="lockBuyButton == false" [(ngModel)]="selectedVariant.buyQuantity"
                              (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)" style="display: inline;width: 100%;position: relative;top: 1px">
                       <!--<span>-->
                       <!--<button class="btn btn-default" (click)="increase()" type="button" id="btn-minus"><span class="glyphicon glyphicon-plus"></span></button>-->
@@ -142,7 +142,7 @@
                   <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6 text-center margin-top">
-                      <a (click)='addToCart()' class="btn btn-d btn-lg button-circular-radius button-circular-radius-small shoping-cart">add to cart</a>
+                      <a (click)='addToCart()' class="btn btn-d btn-lg main-button">add to cart</a>
                     </div>
                   </div>
                 </div>

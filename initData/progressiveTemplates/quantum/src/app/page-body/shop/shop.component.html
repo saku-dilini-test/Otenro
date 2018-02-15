@@ -10,8 +10,8 @@
               <span class="divider"></span>
             </div>
 
-            <div class="btn-group btn-dropdown padding-left">
-              <a href="#" class="btn dropdown-toggle btn-lg dopdown-list btn-d" data-toggle="dropdown" aria-expanded="true">
+            <div class="btn-group btn-dropdown margin-left">
+              <a href="#" class="btn dropdown-toggle btn-lg dopdown-list btn-d main-button" data-toggle="dropdown" aria-expanded="true">
                 Select a catagory
                 <span class="caret"></span>
               </a>
@@ -42,7 +42,7 @@
               </div>
               <div class="col-xs-6 col-sm-6">
                   <div class="form-group">
-                    <label class="name-label ">
+                    <label class="name-label main-header-font">
                       {{results[i].name}}
                     </label>
                   </div>
@@ -50,13 +50,13 @@
                     <span class="divider"></span>
                   </div>
                   <div class="form-group">
-                    <label class=" price-label text-center">
+                    <label class=" price-label text-center main-content-font">
                       {{currency}} {{results[i].variants[0].price}}
                     </label>
                   </div>
 
                   <div class="text-center button-margin">
-                    <a (click)="navigateProd('product',results[i])" class="btn btn-d btn-lg button-circular-radius-small button-circular-radius shoping-cart">Add to cart</a>
+                    <a (click)="navigateProd('product',results[i])" class="btn btn-d btn-lg main-button">Add to cart</a>
                   </div>
               </div>
             </div>
@@ -66,7 +66,7 @@
             <div class="row row-no-gutters shop" [ngStyle]="{'background-color':'#'+getColor(i+1)}">
               <div class="col-xs-6 col-sm-6">
                 <div class="form-group">
-                  <label class="name-label ">
+                  <label class="name-label main-header-font">
                     {{results[i+1].name}}
                   </label>
                 </div>
@@ -74,13 +74,13 @@
                   <span class="divider"></span>
                 </div>
                 <div class="form-group">
-                  <label class=" price-label text-center">
+                  <label class=" price-label text-center main-content-font">
                     {{currency}} {{results[i+1].variants[0].price}}
                   </label>
                 </div>
 
                 <div class="text-center button-margin">
-                  <a (click)="navigateProd('product',results[i+1])" class="btn btn-d btn-lg button-circular-radius-small button-circular-radius shoping-cart">Add to cart</a>
+                  <a (click)="navigateProd('product',results[i+1])" class="btn btn-d btn-lg main-button">Add to cart</a>
                 </div>
               </div>
               <div class="col-xs-6 col-sm-6">
