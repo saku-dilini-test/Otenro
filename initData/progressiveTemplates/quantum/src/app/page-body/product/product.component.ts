@@ -6,6 +6,7 @@ import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import * as _ from 'lodash';
 import { CurrencyService } from '../../services/currency/currency.service';
+import { TitleService } from '../../services/title.service';
 
 @Component({
     selector: 'app-product',
@@ -36,12 +37,12 @@ export class ProductComponent implements OnInit {
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
-    constructor(private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
+    constructor(private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,private title: TitleService) {
 
         this.Data = this.dataService.data;
-        console.log(this.imageUrl);
-        console.log(this.Data);
         this.init();
+
+        this.title.changeTitle("Product Details")
     }
 
     currency: string;
@@ -310,7 +311,5 @@ export class ProductComponent implements OnInit {
         }
 
     };
-
-
 }
 

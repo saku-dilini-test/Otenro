@@ -10,8 +10,8 @@
           <button id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-2">
             <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
           </button>
-          <div class="mobile-title visible-xs">title</div>
-          <div class="mobile-cart visible-xs"><i class="fa fa-shopping-cart" (click)="navigate('cart')"></i> <span class="badge">{{cartNo}}</span></div>
+          <div class="mobile-title visible-xs">{{title}}</div>
+          <div class="mobile-cart visible-xs"><i class="fa fa-shopping-cart" (click)="navigate('cart','Shopping Cart')"></i> <span class="badge">{{cartNo}}</span></div>
         </div>
         <div class="navbar-1">
           <ul class="site-navigation nav navbar-nav">
@@ -77,33 +77,33 @@
         <div class="collapse navbar-collapse navbar-2">
           <ul class="site-navigation nav navbar-nav">
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('')">Home
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('','Home')">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('aboutus')">About Us</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('aboutus','About Us')">About Us</a>
             </li>
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('shop')">Store</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('shop', 'Shop')">Store</a>
             </li>
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('contact')">Contact Us</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('contact', 'Contact Us')">Contact Us</a>
             </li>
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('policies')">Policies</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('policies', 'Policies')">Policies</a>
             </li>
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('terms')">Terms & Conditions</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('terms', 'Terms & Conditions')">Terms & Conditions</a>
             </li>
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('order-history')">Order History</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('order-history','Order History')">Order History</a>
             </li>
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('cart')">Cart</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('cart', 'Shopping Cart')">Cart</a>
             </li>
             <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('login/home')">Sign In</a>
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('login/home','Login')">Sign In</a>
             </li>
           </ul>
         </div>

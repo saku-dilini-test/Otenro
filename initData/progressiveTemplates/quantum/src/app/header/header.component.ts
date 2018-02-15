@@ -4,6 +4,7 @@ import { PagebodyServiceModule } from '../page-body/page-body.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import * as data from './../madeEasy.json';
 import { fadeInAnimation } from '../animations/fade-in.animation';
+import { TitleService } from "../services/title.service";
 
 @Component({
   selector: 'app-header',
@@ -12,16 +13,20 @@ import { fadeInAnimation } from '../animations/fade-in.animation';
   animations: [fadeInAnimation],
   host: { '[@fadeInAnimation]': '' }
 })
-export class HeaderComponent {
 
+export class HeaderComponent implements OnInit{
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private cartNo: number;
-
+  public title:string;
   public loginStatus;
-
-  constructor(private localStorageService: LocalStorageService, private router: Router, private dataService: PagebodyServiceModule) {
+  constructor(private localStorageService: LocalStorageService, private router: Router, private dataService: PagebodyServiceModule,private titleServ: TitleService) {
     this.cartNo = this.dataService.cart.cartItems.length;
+    this.title = 'Home';
+  }
+
+  ngOnInit() {
+    this.titleServ.currentTitle.subscribe(message => this.title = message)
   }
 
   ngAfterContentChecked() {
@@ -41,9 +46,10 @@ export class HeaderComponent {
     this.router.navigate(['home']);
   }
 
-  navigate(val: string) {
-    this.router.navigate([val])
+  navigate(route: string, name: string) {
+    this.title = name;
+
+    this.router.navigate([route]);
   }
 
-  title: string = 'hello';
 }

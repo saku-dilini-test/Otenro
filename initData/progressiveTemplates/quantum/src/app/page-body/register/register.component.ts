@@ -6,6 +6,7 @@ import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { FormGroup, FormControl, FormArray, NgForm } from '@angular/forms';
+import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-register',
@@ -33,7 +34,9 @@ export class RegisterComponent implements OnInit {
   private phone;
   private myForm: FormGroup;
 
-  constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
+  constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
+              private title: TitleService) {
+    this.title.changeTitle("Register");
 
   }
 
@@ -125,17 +128,6 @@ export class RegisterComponent implements OnInit {
             function(err){
                 alert("signup error");
             });
-
-
   }
-
-    slides = SLIDES;
-
 
 }
-
-const SLIDES = [
-  {
-    src: 'http://1.bp.blogspot.com/-w3nRkRuOiC4/TvzWH0yKgeI/AAAAAAAAAj0/bLA2ip6MFCA/s1600/CliffJumpWallpaper.jpg'
-  }
-]

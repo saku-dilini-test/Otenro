@@ -3,6 +3,7 @@ import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { HttpClient } from '@angular/common/http';
 import { AppDataService } from '../../services/appdata-info/appdata-info.service';
+import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-aboutus',
@@ -20,7 +21,9 @@ export class AboutusComponent implements OnInit {
   private openSunday = "we are closed";
   private openSaturday = "we are closed";
 
-  constructor(private http: HttpClient, private appdataService: AppDataService) { }
+  constructor(private http: HttpClient, private appdataService: AppDataService,private title: TitleService) {
+    this.title.changeTitle("About Us");
+  }
 
   ngOnInit() {
 

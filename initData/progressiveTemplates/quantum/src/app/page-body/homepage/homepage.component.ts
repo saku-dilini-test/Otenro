@@ -10,6 +10,7 @@ import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { forEach } from '@angular/router/src/utils/collection';
 import { ProductsService } from '../../services/products/products.service';
 import { SliderService } from '../../services/slider/slider.service';
+import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-homepage',
@@ -35,7 +36,7 @@ export class HomepageComponent implements OnInit {
   private imageUrlSlider;
   private catName;
   private isSliderDataAvailable:boolean = false;
-  constructor(private route: Router,private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService) {
+  constructor(private route: Router,private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService,private title: TitleService) {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
       this.sliderData = data;
@@ -54,6 +55,9 @@ export class HomepageComponent implements OnInit {
         imageUrl: 'lazyload-ph.png'
       });
     }
+
+    this.title.changeTitle("Home");
+
   }
 
 
@@ -135,7 +139,6 @@ export class HomepageComponent implements OnInit {
   navigateFeaturedProd(val, item){
 
     this.productService.getCategoryData(item.childId).subscribe((data: any) => {
-      // console.log(data[0].name);
       this.catName = data[0].name
       this.dataService.data = item;
       this.route.navigate([val, this.catName]);

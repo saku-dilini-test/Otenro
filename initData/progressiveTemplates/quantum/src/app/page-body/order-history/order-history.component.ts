@@ -4,6 +4,7 @@ import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { CurrencyService } from '../../services/currency/currency.service';
+import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-order-history',
@@ -16,7 +17,9 @@ export class OrderHistoryComponent implements OnInit {
   public userId = (<any>data).userId;
   currency;imageURL;appUserId;orderHistory;sign;
 
-  constructor(private currencyService : CurrencyService,private localStorageService: LocalStorageService) { }
+  constructor(private currencyService : CurrencyService,private localStorageService: LocalStorageService,  private title: TitleService) {
+    this.title.changeTitle("Order History");
+  }
 
   ngOnInit() {
     //get currency
@@ -24,7 +27,6 @@ export class OrderHistoryComponent implements OnInit {
     subscribe(data=> {
       this.currency = data;
       this.sign = this.currency.sign;
-      console.log(this.sign);
     },err =>{
       console.log('Unable to get Products Selected Category');
     });
@@ -46,18 +48,9 @@ export class OrderHistoryComponent implements OnInit {
       this.currencyService.getOrders(this.appUserId.registeredUser)
         .subscribe((data) => {
           this.orderHistory = (data);
-          console.log("this.orderHistory : " + JSON.stringify(this.orderHistory));
         }), ((err) => {
         console.log('Unable to get orders');
       });
     }
-
   }
-
-
-  slides = SLIDES;
-
 }
-
-const SLIDES = [
-  { src:'https://s-media-cache-ak0.pinimg.com/originals/e1/2f/95/e12f95f3faefd9a5f62d345544a564b3.jpg', title:'Order History' }]
