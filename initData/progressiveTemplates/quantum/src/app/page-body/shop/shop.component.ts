@@ -37,7 +37,15 @@ export class ShopComponent implements OnInit {
     //use loadash to filter by unique by name
     this.array = _.uniqBy(this.array, 'name');
 
-    this.title.changeTitle("Shop");
+    this.router.params.subscribe(params => {
+      let catName = params['name'];
+
+      if(catName){
+        this.title.changeTitle(catName);
+      }else{
+        this.title.changeTitle("Store");
+      }
+    }); 
 
   }
 
