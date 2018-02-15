@@ -132,21 +132,23 @@
 
 .obl-app-templates2 li .screen{
     left: 0;
+    top: 0;
     display: block;
     width: 800px;
-    height: 484px;
+    height: 645px;
     position: relative;
     background: url(../../../images/responsiveness-screen.svg) no-repeat;
-    background-size: 76%;
+    background-size: 100%;
 }
+
 .obl-app-templates2 li .mobile{
     display: block;
     width: 210px;
     height: 430px;
-    position: absolute;
+    position: relative;
     z-index: 4;
-    top: 45px;
-    right: 52px;
+    top: -618px;
+    left: 480px;
     background: url(../../../images/responsiveness-mobile.png) no-repeat;
     background-size: 100%;
 }
@@ -162,10 +164,10 @@
 .obl-app-templates2 li a .img-screen{
     height: auto;
     position: absolute;
-    top: 30px;
-    width: 553px;
-    height: 362px;
-    left: 31px;
+    top: 40px;
+    width: 726px;
+    height: 474px;
+    left: 42px;
     border-radius: 3px;
 }
 .obl-app-templates2 li a .img-mobile{
@@ -177,6 +179,30 @@
     left: 13px;
     border-radius: 3px;
 }
+
+@media (min-width: 996px) and (max-width: 1350px) {
+    .obl-app-templates2 li .screen{
+        width: 660px;
+        left: 28px;
+    }
+    .obl-app-templates2 li .mobile{
+        width: 185px;
+        left: 418px;
+    }
+    .obl-app-templates2 li a .img-screen{
+        top: 32px;
+        width: 599px;
+        height: 393px;
+        left: 35px;
+    }
+    .obl-app-templates2 li a .img-mobile{
+        top: 48px;
+        width: 163px;
+        height: 288px;
+        left: 11px;
+    }
+}
+
 
 .me-dialog-phone-view{
     float: left;

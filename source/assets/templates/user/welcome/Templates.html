@@ -53,25 +53,25 @@
 
                     <div class="col-md-12" ng-repeat="template in templates">
                         <div class="row" ng-if="template.isNew == true">
-                            <div class="col-sm-10 col-md-8 col-lg-7">
+                            <div class="col-md-7">
                                 <ul class="grid obl-app-templates2 clearfix">
                                     <li>
-                                        <a class="mobile" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)" >
-                                            <div id ="image">
-                                                <img class = "img-mobile main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
-                                                <img class ="img-mobile second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
-                                            </div>
-                                        </a>
                                         <a class="screen" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)" >
                                             <div id ="image">
                                                 <img class = "img-screen main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
                                                 <img class ="img-screen second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
                                             </div>
                                         </a>
+                                        <a class="mobile" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)" >
+                                            <div id ="image">
+                                                <img class = "img-mobile main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
+                                                <img class ="img-mobile second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
+                                            </div>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-sm-12 col-md-4 col-lg-5  text-left">
+                            <div class="col-md-5 text-left">
                                 <h3><span>Style Name :</span>  <br>{{template.templateViewName}}</h3>
                                 <span>App Type : </span>
                                 <span><h5>{{template.templateType}}</h5></span>
@@ -145,25 +145,25 @@
 
                         <div class="col-md-12" ng-repeat="template in templates" ng-if="type == template.templateType">
                             <div class="row" ng-if="template.isNew == true" >
-                                <div class="col-sm-10 col-md-8 col-lg-7">
+                                <div class="col-md-7">
                                     <ul class="grid obl-app-templates2 clearfix">
                                         <li>
-                                            <a class="mobile" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)" >
-                                                <div id ="image">
-                                                    <img class = "img-mobile main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
-                                                    <img class ="img-mobile second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
-                                                </div>
-                                            </a>
                                             <a class="screen" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)" >
                                                 <div id ="image">
                                                     <img class = "img-screen main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
                                                     <img class ="img-screen second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
                                                 </div>
                                             </a>
+                                            <a class="mobile" ng-click="viewApp(template.id,template.imageUrl,template.template_name,template.templateCategory,template.previewId,template.isNew)" >
+                                                <div id ="image">
+                                                    <img class = "img-mobile main_image" ng-src="images/templates/{{template.imageUrl}}appGif.png" />
+                                                    <img class ="img-mobile second_image"  ng-src="images/templates/{{template.imageUrl}}appView.png" />
+                                                </div>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-sm-12 col-md-4 col-lg-5 text-left">
+                                <div class="col-md-5 text-left">
                                     <h3><span>Style Name :</span>  <br>{{template.templateViewName}}</h3>
                                     <span>App Type : </span>
                                     <span><h5>{{template.templateType}}</h5></span>

@@ -1,5 +1,5 @@
 .mobile-title{
-  margin-top: 5px;
+  margin-top: 9px;
   margin-right: 0;
   padding: 5px 0px;
   width: 100%;
@@ -11,7 +11,7 @@
   text-transform: capitalize;
 }
 .mobile-cart{
-  margin-top: 5px;
+  margin-top: 8px;
   margin-right: 0;
   padding: 5px 10px;
   width: 100%;
@@ -22,8 +22,8 @@
 }
 .ui-navbar-toggle{
   z-index: 1;
+  font-size: 18px;
 }
 .navbar-2 ul, .navbar-2 li{
   border: 0;
-  background: #fff;
 }
