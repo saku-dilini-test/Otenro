@@ -547,57 +547,65 @@ module.exports = {
         var colorTypeCss = '';
 
         console.log("type  : " + type);
-        // var query = { id : appId };
-        //
-        // Application.findOne(query).exec(function(err, app) {
-        //     if (err) res.send(err);
+         var query = { id : appId };
+
+         Application.findOne(query).exec(function(err, app) {
+             if (err) res.send(err);
 
             // here update background-color in Css class
             if(type == 'backgroundColor'){
-                // app.appSettings.backgroundColor= styleColor;
+                 app.appSettings.backgroundColor= styleColor;
                 colorTypeCss = ".main-background";
             }else if(type == 'navigationBarColor'){
-                // app.appSettings.navigationBarColor= styleColor;
+                 app.appSettings.navigationBarColor= styleColor;
                 colorTypeCss = ".main-navigation";
             }else if(type == 'footerColor'){
-                // app.appSettings.footerColor =  styleColor;
+                 app.appSettings.footerColor =  styleColor;
                 colorTypeCss = ".made-easy-footerColor";
             }else if(type == 'buttonColor'){
-                // app.appSettings.buttonColor = styleColor  ;
+                 app.appSettings.buttonColor = styleColor  ;
                 colorTypeCss = ".main-button";
             }
             // here to update button border color
             else if(type == 'buttonBorderColor'){
-                // app.appSettings.buttonBorderColor = styleColor  ;
+                 app.appSettings.buttonBorderColor = styleColor  ;
                 colorTypeCss = ".main-button";
             }
             // here update color in Css class
             else if(type == 'navigationBarFontColor') {
-                // app.appSettings.navigationBarFontColor = styleColor;
+                 app.appSettings.navigationBarFontColor = styleColor;
                 colorTypeCss = ".main-navigation";
             }
             else if(type == 'buttonFontColor') {
-                // app.appSettings.buttonFontColor = styleColor;
+                 app.appSettings.buttonFontColor = styleColor;
                 colorTypeCss = ".main-button";
             }
             else if(type == 'headerFontColor') {
-                // app.appSettings.headerFontColor = styleColor;
+                 app.appSettings.headerFontColor = styleColor;
                 colorTypeCss = ".main-header-font";
             }
             else if(type == 'contentFontColor') {
-                // app.appSettings.contentFontColor = styleColor;
+                 app.appSettings.contentFontColor = styleColor;
                 colorTypeCss = ".main-content-font";
             }
+            else if(type == 'footerBackColor') {
+                 app.appSettings.footerColor = styleColor;
+                colorTypeCss = ".main-footer-back";
+            }
             else if(type == 'footerFontColor') {
-                // app.appSettings.footerFontColor = styleColor;
-                colorTypeCss = ".made-easy-footer-font";
+                 app.appSettings.footerFontColor = styleColor;
+                colorTypeCss = ".main-footer-font";
+            }
+            else if(type == 'footerHeaderFontColor') {
+                 app.appSettings.footerHeaderFontColor = styleColor;
+                colorTypeCss = ".main-footer-header";
             }
 
-            // Application.update(query,app).exec(function(err, appUpdate) {
-            //     if (err) res.send(err);
+             Application.update(query,app).exec(function(err, appUpdate) {
+                 if (err) res.send(err);
 
                 // here update color in Css class
-                if(type == 'buttonFontColor' || type == 'navigationBarFontColor' || type == 'headerFontColor' || type == 'contentFontColor' || type == 'footerFontColor'){
+                if(type == 'buttonFontColor' || type == 'navigationBarFontColor' || type == 'headerFontColor' || type == 'contentFontColor' || type == 'footerFontColor' || type == 'footerHeaderFontColor'){
                     updateFile(mainCssFile, [{
                         rule: colorTypeCss,
                         target: "color",
@@ -629,9 +637,9 @@ module.exports = {
                 }
                 res.send("success");
 
-            // });
+             });
 
-        // });
+         });
 
         /**
          * update css file with new changes

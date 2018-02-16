@@ -88,8 +88,6 @@
                                         <input colorpicker="rgba" ng-model="navigationBarFontColor" type="text">
                                     </div>
                                 </div>
-
-
                                 <h1>Typography</h1>
                                 <div ng-if="isApplyStyle.typography.header">
                                     <div class="other-setting">
@@ -147,31 +145,35 @@
                                     </div>
                                 </div>
                                 <div ng-if="isApplyStyle.typography.footer">
-                                    <div class="other-setting">
-                                        <h2>Footer Font</h2>
-                                        <div class="">
-                                            <select ng-model="footerFontFamilyProp.value" ng-options="v for v in footerFontFamilyProp.values" ng-change="styleFontFamilyChange(footerFontFamilyProp.value,'footerFont')">
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="other-setting">
-                                        <h2>Font Size</h2>
-                                        <select ng-model="footerFontSizeProp.value" ng-options="v for v in footerFontSizeProp.values" ng-change="styleFontSizeChange(footerFontSizeProp.value,'footerFont')">
-                                        </select>
-                                    </div>
-                                    <div class="other-setting">
-                                        <h2>Font Weight</h2>
-                                        <select ng-model="footerFontWeightProp.value" ng-options="v for v in footerFontWeightProp.values" ng-change="styleFontWeightChange(footerFontWeightProp.value,'footerFont')">
-                                        </select>
-                                    </div>
+                                    <h1>Footer</h1>
                                     <div class="color-setting">
+                                        <div class="color-section">Footer Background Color</div>
                                         <button class="color-picker-button pull-left"
                                                 colorpicker="rgba"
                                                 colorpicker-parent="true"
-                                                ng-model="footerFontColor" type="text"
+                                                ng-model="footerBackColor"  type="text"
+                                                style="background-color: {{footerBackColor}}; color: {{footerBackColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="footerBackColor" type="text">
+                                    </div>
+                                    <div class="color-setting">
+                                        <div class="color-section">Footer header Color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="footerHeaderFontColor"  type="text"
+                                                style="background-color: {{footerHeaderFontColor}}; color: {{footerHeaderFontColor}};" >
+                                        </button>
+                                        <input colorpicker="rgba" ng-model="footerHeaderFontColor" type="text">
+                                    </div>
+                                    <div class="color-setting">
+                                        <div class="color-section">Footer content Color</div>
+                                        <button class="color-picker-button pull-left"
+                                                colorpicker="rgba"
+                                                colorpicker-parent="true"
+                                                ng-model="footerFontColor"  type="text"
                                                 style="background-color: {{footerFontColor}}; color: {{footerFontColor}};" >
                                         </button>
-                                        <div class="color-section">Footer Font Color</div>
                                         <input colorpicker="rgba" ng-model="footerFontColor" type="text">
                                     </div>
                                 </div>

@@ -335,6 +335,7 @@ module.exports = {
                               footerColor : "#FFFFFF",
                               headerFontColor : "#FFFFFF",
                               contentFontColor : "#FFFFFF",
+                              footerHeaderFontColor : "#FFFFFF",
                               footerFontColor : "#FFFFFF",
                               buttonColor : "#FFFFFF",
                               headerFontFamily : "Arial",
