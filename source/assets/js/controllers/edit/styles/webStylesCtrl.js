@@ -67,10 +67,11 @@
             $scope.isApplyStyle = appSettings.isApplyStyle;
             $scope.backgroundColor = appSettings.backgroundColor;
             $scope.navigationBarColor = appSettings.navigationBarColor;
-            $scope.footerColor = appSettings.footerColor;
+            $scope.footerBackColor = appSettings.footerColor;
             $scope.navigationBarFontColor = appSettings.navigationBarFontColor;
             $scope.headerFontColor = appSettings.headerFontColor;
             $scope.contentFontColor = appSettings.contentFontColor;
+            $scope.footerHeaderFontColor = appSettings.footerHeaderFontColor;
             $scope.footerFontColor = appSettings.footerFontColor;
             $scope.buttonColor = appSettings.buttonColor;
             $scope.buttonFontColor = appSettings.buttonFontColor;
@@ -403,7 +404,7 @@
                     styleColor : colorValue,
                     type : type
                 };
-
+console.log(styleColorData);
                 webStylesService.addWebStyleColor(styleColorData)
                     .success(function(data) {
                         if(type == 'backgroundColor'){
@@ -431,7 +432,23 @@
                         else if(type == 'contentFontColor') {
                             toastr.success('Content Font Color Successfully Updated', {
                                 closeButton: true
-                            });}
+                        });}
+                        else if(type == 'footerBackColor'){
+                            toastr.success('Footer Background Color Successfully Updated', {
+                                closeButton: true
+                             });
+                        }
+                        else if(type == 'footerHeaderFontColor'){
+                            toastr.success('Footer Header Font Color Successfully Updated', {
+                                closeButton: true
+                            });
+                        }else if(type == 'footerFontColor'){
+                            toastr.success('Footer Content Font Color Successfully Updated', {
+                                closeButton: true
+                            });
+                        }
+
+
                       //   var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
                       //                  +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
                       //   $scope.appTemplateUrl = urlPath+'/?'+new Date().getTime();
