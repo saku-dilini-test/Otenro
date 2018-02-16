@@ -45,7 +45,7 @@
 
         $scope.showSampleImage = function(ev,path, image) {
         $mdDialog.show({
-          template:  '<md-dialog aria-label="sample images" class="dashboard-dialog">' +
+          template:  '<md-dialog aria-label="sample images"  style="width:initial">' +
                      '<img src="images/templates/'+path+image+'" class="img-thumbnail">'+
                      '</md-dialog>',
           parent: angular.element(document.body),
