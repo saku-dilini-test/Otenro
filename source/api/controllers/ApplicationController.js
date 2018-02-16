@@ -431,6 +431,16 @@ module.exports = {
                                       });
 
                                   })
+
+                                  var slider = appInitData.slider;
+                                  slider.forEach(function (slider){
+                                    slider.templateName = appInitData.templateName;
+                                    slider.appId = app.id;
+
+                                    Slider.create(slider).exec(function (err, slider){
+                                        if(err) return err;
+                                    });
+                                  })
                               });
 
                               /**

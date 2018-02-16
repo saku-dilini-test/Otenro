@@ -66,12 +66,19 @@ module.exports = {
                                 }
                             });
                         });
+                        Slider.destroy({'appId': req.param('appId')}).exec(function (err, slider){
+                             if (err) return res.negotiate(err);
+                        });
+
                         res.json(app);
                     });
                 }else {
                     res.json({massage:"can not delete"});
                 }
             }
+
+
+
         });
 
     },
