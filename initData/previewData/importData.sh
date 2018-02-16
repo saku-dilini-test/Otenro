@@ -1,9 +1,9 @@
 #!/bin/bash
 echo  'start....'
 
-MESERVER='c:/xampp/htdocs/meServer/temp/';
-NODE='c:/xampp/htdocs/meServer/';
-APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
+MESERVER='/var/www/html/meServer/temp';
+NODE='/var/www/html/meServer/node_modules';
+APPFILESERVER='/home/dilakshan/Desktop/appFileServer/';
 
 ENV='dev'   #this is for development
 #ENV='pro'  #this is for production
@@ -41,6 +41,7 @@ mongoimport --db $DB --collection article --file dataFiles/article.json
 mongoimport --db $DB --collection articlecategory --file dataFiles/articlecategory.json
 mongoimport --db $DB --collection secondnavigation --file dataFiles/secondnavigation.json
 mongoimport --db $DB --collection thirdnavigation --file dataFiles/thirdnavigation.json
+mongoimport --db $DB --collection slider --file dataFiles/slider.json
 
 #for export data
 #mongoexport --db $DB --collection accounttype --out accounttype.json
@@ -64,6 +65,7 @@ mongoimport --db $DB --collection thirdnavigation --file dataFiles/thirdnavigati
 #mongoexport --db $DB --collection articlecategory --out articlecategory.json
 #mongoexport --db $DB --collection secondnavigation --out secondnavigation.json
 #mongoexport --db $DB --collection thirdnavigation --out thirdnavigation.json
+#mongoimport --db $DB --collection slider --out slider.json
 
 echo $MESERVER
 echo $NODE

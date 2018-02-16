@@ -97,6 +97,12 @@
             deleteData : function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteSlider',data);
             },
+            getApplicationData : function (appId) {
+                return $http.get( SERVER_URL + 'edit/getApplicationData?appId=' + appId );
+            },
+            getTemplateData : function (templateId) {
+                return $http.get( SERVER_URL + 'templates/getTemplateData?templateId=' + templateId );
+            },
         };
     }
 })();
