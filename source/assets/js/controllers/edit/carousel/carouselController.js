@@ -28,6 +28,7 @@
             carouselService.showEditSliderDialog("addNewSlider")
         }
 
+
         // --- cancel dialog -----
         $scope.cancelAdd = function () {
             $mdDialog.cancel();
@@ -53,6 +54,7 @@
 
         //go to edit slider data
         $scope.goToEditSliderView = function (item) {
+
             $scope.SliderEditData = item;
             $scope.catModel = $scope.SliderEditData.optionals[0];
             $scope.prodModel = $scope.SliderEditData.optionals[1];
@@ -102,6 +104,7 @@
 
         // image crop function
         $scope.cropImage = function () {
+                    $scope.setAspectRatio();
             var handleFileSelect = function (evt) {
                 var file = evt.currentTarget.files[0];
                 var reader = new FileReader();
@@ -220,56 +223,12 @@
                 tempOptArr[0] = (cat);
                 tempOptArr[1] = (prod);
 
+                if( !menu.name){
+                  toastr.error("Please enter a name", 'Message', { closeButton: true });
+                }else{
+                    carouselService.addSlider(file, $rootScope.appId, menu.name, $rootScope.tempNew, tempOptArr).success(function (data) {
 
-                carouselService.addSlider(file, $rootScope.appId, menu.name, $rootScope.tempNew, tempOptArr).success(function (data) {
-
-                    console.log("$rootScope.tempNew : " + $rootScope.tempNew);
-
-                    var urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                        + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-
-
-                    $scope.appTemplateUrl = urlPath + '' +
-                        '#/app/home/' + data.id + '?' + new Date().getTime();
-
-                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
-
-                    toastr.success("New Image Slider Added", 'Message', { closeButton: true });
-                    $mdDialog.hide();
-
-
-                }).error(function (err) {
-                    toastr.error(err.message, 'Warning', {
-                        closeButton: true
-                    });
-                });
-
-
-            } else {
-
-//                console.log("inside edit")
-//                if (file) {
-//                    console.log("old file : " + $scope.menu.imageUrl);
-//                    console.log('file available');
-//                    console.log(file)
-//                    console.log(file.length)
-//                } else {
-//                    console.log('file not available');
-//                }
-//                console.log(menu.name);
-//                console.log(cat);
-//                console.log(prod);
-
-
-                if (file.length > 50) {
-
-                    var tempOptArr = [];
-
-                    tempOptArr[0] = (cat);
-                    tempOptArr[1] = (prod);
-
-                    carouselService.updateSliderImage(file, $scope.menu.imageUrl, menu.name, $scope.menu.id, $rootScope.appId, tempOptArr).success(function (data) {
-
+                        console.log("$rootScope.tempNew : " + $rootScope.tempNew);
 
                         var urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                             + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
@@ -280,14 +239,52 @@
 
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
-                        toastr.success("New Image Updated", 'Message', { closeButton: true });
+                        toastr.success("New Image Slider Added", 'Message', { closeButton: true });
                         $mdDialog.hide();
+
 
                     }).error(function (err) {
                         toastr.error(err.message, 'Warning', {
                             closeButton: true
                         });
                     });
+                }
+
+
+            } else {
+
+
+                if (file.length > 50) {
+
+                    var tempOptArr = [];
+
+                    tempOptArr[0] = (cat);
+                    tempOptArr[1] = (prod);
+
+
+                    if( !menu.name){
+                      toastr.error("Please enter a name", 'Message', { closeButton: true });
+                    }else{carouselService.updateSliderImage(file, $scope.menu.imageUrl, menu.name, $scope.menu.id, $rootScope.appId, tempOptArr).success(function (data) {
+
+
+                            var urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+
+
+                            $scope.appTemplateUrl = urlPath + '' +
+                                '#/app/home/' + data.id + '?' + new Date().getTime();
+
+                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
+
+                            toastr.success("New Image Updated", 'Message', { closeButton: true });
+                            $mdDialog.hide();
+
+                        }).error(function (err) {
+                            toastr.error(err.message, 'Warning', {
+                                closeButton: true
+                            });
+                        });
+                    }
 
 
                 } else {
@@ -303,26 +300,30 @@
                         'optArr': tempOptArr
                     }
 
-                    carouselService.updateSliderData(updateData).success(function (data) {
 
-                        var urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                            + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                    if( !menu.name){
+                      toastr.error("Please enter a name", 'Message', { closeButton: true });
+                    }else{
+                        carouselService.updateSliderData(updateData).success(function (data) {
+
+                            var urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
 
-                        $scope.appTemplateUrl = urlPath + '' +
-                            '#/app/home/' + data.id + '?' + new Date().getTime();
+                            $scope.appTemplateUrl = urlPath + '' +
+                                '#/app/home/' + data.id + '?' + new Date().getTime();
 
-                        mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                            mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
-                        toastr.success("Slider Data Updated", 'Message', { closeButton: true });
-                        $mdDialog.hide();
+                            toastr.success("Slider Data Updated", 'Message', { closeButton: true });
+                            $mdDialog.hide();
 
-                    }).error(function (err) {
-                        toastr.error(err.message, 'Warning', {
-                            closeButton: true
+                        }).error(function (err) {
+                            toastr.error(err.message, 'Warning', {
+                                closeButton: true
+                            });
                         });
-                    });
-
+                    }
                 }
 
             }
@@ -393,6 +394,31 @@
         $scope.deleteSelctedProd = function(){
                 $scope.prodModel = null;
         }
+
+        $scope.setAspectRatio = function () {
+            carouselService.getApplicationData($rootScope.appId)
+                .success(function (data) {
+                    if (data.templateId){
+                        carouselService.getTemplateData(data.templateId)
+                            .success(function (templateData) {
+                                if(templateData.sliderSize){
+                                    $scope.aspectRatio = parseFloat(templateData.sliderSize.aspectRatio);
+                                }
+                                if(templateData.iSizeThird){
+                                    $scope.size={w:templateData.sliderSize.w,h:templateData.sliderSize.h};
+                                }
+                            }).error(function (err) {
+                            toastr.error(err.message, 'Warning', {
+                                closeButton: true
+                            });
+                        });
+                    }
+                }).error(function (err) {
+                toastr.error(err.message, 'Warning', {
+                    closeButton: true
+                });
+            });
+        };
 
 
 

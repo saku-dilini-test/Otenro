@@ -28,7 +28,7 @@
                 <div layout-gt-xs="row" class="margin">
                     <div class="file-upload-wrapper clearfix">
                         <div class="cropArea">
-                            <img-crop image="myImage" area-type="rectangle" aspect-ratio="2.4" result-image="picFile" result-image-size="{w:1893, h:745}">
+                            <img-crop image="myImage" area-type="rectangle" aspect-ratio="aspectRatio" result-image="picFile" result-image-size="size">
                             </img-crop>
                         </div>
 
@@ -100,7 +100,7 @@
             <div class="md-dialog-buttons">
                 <div class="inner-section">
                     <md-button class="me-default-button" ng-click="cancelAdd()">Close</md-button>
-                    <md-button type="submit" class="me-default-button" ng-click="addSliderImage(mainImg,menu,catModel,prodModel)" >Save & Publish</md-button>
+                    <md-button type="submit" class="me-default-button" ng-click="addSliderImage(mainImg,menu,catModel,prodModel)" >Save</md-button>
                 </div>
             </div>
         </form>
