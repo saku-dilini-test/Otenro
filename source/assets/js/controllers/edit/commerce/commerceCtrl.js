@@ -615,8 +615,6 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                                         closeButton: true
                                     });
                                     var urlPath;
-                                    console.log('wtf');
-                                    console.log('$scope isNew ' + $scope.isNew);
                                     if($scope.isNew == 'true'){
                                     urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                                                                                                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";

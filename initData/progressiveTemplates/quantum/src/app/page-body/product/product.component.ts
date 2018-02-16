@@ -31,6 +31,7 @@ export class ProductComponent implements OnInit {
     private selection2 = [];
     private selection3 = [];
     private Data;
+    private isBuyBtnDisable:boolean;
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     private lockBuyButton = false;
 
@@ -41,6 +42,7 @@ export class ProductComponent implements OnInit {
 
         this.Data = this.dataService.data;
         this.init();
+        this.isBuyBtnDisable = true;
     }
 
     currency: string;
@@ -81,9 +83,9 @@ export class ProductComponent implements OnInit {
                 this.selectedVariant = this.Data.variants[0];
 
                 if (this.selectedVariant.quantity > 0) {
-                    var isBuyBtnDisable = false;
+                    this.isBuyBtnDisable = false;
                 } else {
-                    var isBuyBtnDisable = true;
+                    this.isBuyBtnDisable = true;
                 }
             }
         }
@@ -219,7 +221,7 @@ export class ProductComponent implements OnInit {
     changeBuyQuantity(buyQty) {
 
         // default : Buy button set as Disable
-        // $scope.isBuyBtnDisable = true;
+         this.isBuyBtnDisable = true;
 
         // if buyQty value greater than 0
         if (buyQty > 0) {
@@ -227,12 +229,12 @@ export class ProductComponent implements OnInit {
             var selectVariantAvailableQty = this.selectedVariant.quantity;
             //If quantity is unlimited enable buy button
             if (this.selectedVariant.unlimited == true) {
-                // $scope.isBuyBtnDisable = false;
+                 this.isBuyBtnDisable = false;
             }
             else if (typeof selectVariantAvailableQty != 'undefined') {
                 // If buyQty less than or equal Selected-Variant-Qty, buy button enable
                 if (buyQty <= selectVariantAvailableQty) {
-                    // $scope.isBuyBtnDisable = false;
+                     this.isBuyBtnDisable = false;
                 }
             }
         }
