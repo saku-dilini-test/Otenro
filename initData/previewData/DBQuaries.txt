@@ -1,10 +1,5 @@
 // used this quary for update the databases of prod and preprod.(already updated and changed in dataFiles too)
 
-db.currency.update(
-   { "symbol":"lkr" },
-   {
-     $set: {
-       "sign": "LKR",
-     }
-   }
-)
+//sprint 6
+drop templatemetadata
+mongoimport --db $DB --collection templatemetadata --file dataFiles/templatemetadata.json
