@@ -189,6 +189,7 @@ module.exports.routes = {
     'GET /edit/getChild': 'edit/commerce/ThirdNavigationController.getChild',
     'GET /edit/getUpdates': 'edit/commerce/ThirdNavigationController.getUpdates',
     'POST /edit/deleteItem': 'edit/commerce/MainNavigationController.deleteItem',
+    'POST /edit/deleteCategories': 'edit/commerce/MainNavigationController.deleteCategories',
     'POST /edit/deleteSlider': 'edit/commerce/SliderController.deleteSlider',
     'POST /edit/setCurrency': 'edit/setting/CurrencyController.setCurrency',
     'GET /edit/getCurrency': 'edit/setting/CurrencyController.getCurrency',

@@ -15,9 +15,9 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
     }
 
 
-    $scope.parentobj = {};
-    $scope.parentobj.cartSize = $rootScope.cart.cartSize;
-    $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
+    $rootScope.parentobj = {};
+    $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
+    $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
     // show & hide menu icon button
     $scope.showMenu = true;
     $scope.$on('hideMenu', function(){
@@ -67,6 +67,7 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
             $scope.loginModel.hide();
         }
      $scope.modal.show();
+     document.getElementById("signUpForm").reset();
     };
 
     // Triggered in the login modal to close it
@@ -115,7 +116,7 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
                         };
                         localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
                         $rootScope.isUserLoggedIn.check = true;
-                        $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
+                        $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
                         if($stateParams.item == 'delivery'){
                             $state.go('app.cart');
                         }else{
@@ -149,9 +150,12 @@ mobileApp.controller('appCtrl', function($scope,  $ionicModal, $timeout,$rootSco
 
     $scope.logout = function(){
         localStorage.removeItem('appLocalStorageUser'+$rootScope.appId);
+        $rootScope.cart.cartSize = 0;
+        $rootScope.cart.cartItems = [];
+        $rootScope.parentobj.cartSize = 0;
         $rootScope.isUserLoggedIn.check = false;
-        $scope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
-         $ionicSideMenuDelegate.toggleLeft();
+        $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
+        $ionicSideMenuDelegate.toggleLeft();
     }
 
 });

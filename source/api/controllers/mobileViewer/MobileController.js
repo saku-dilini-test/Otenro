@@ -53,8 +53,8 @@ module.exports = {
 
              //var currency = req.param("currency");
              var currency = "LKR";
-             //var sever = config.server.host+':'+config.server.port;
-             var  sever = "http://76c8163f.ngrok.io";
+             var sever = config.server.host+':'+config.server.port;
+             //var  sever = "http://76c8163f.ngrok.io";
 
         var htmlForm ="<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> " +
                         "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> " +
@@ -65,7 +65,7 @@ module.exports = {
                         "action=\"https://sandbox.payhere.lk/pay/checkout\">  " +
                         " <h3 style=\"color: #2957de;\">Item Details</h3>" +
                         " <ul class=\"list-group\" style=\"margin-top: 15px\"> " +
-                        "<li class=\"list-group-item\"><input class=\"form-control\" type=\"text\" name=\"items\" value=\""+req.param("item")+"\" style=\"width:48%;display:inline;margin-right:5px\"><input class=\"form-control\" style=\"width:50%;display:inline;\" type=\"text\" name=\"amount\" value=\""+req.param("amount")+"\"></li> " +
+                        "<li class=\"list-group-item\"><input class=\"form-control\" type=\"text\" name=\"items\" value=\""+req.param("item")+"\" style=\"width:48%;display:inline;margin-right:5px\"><input readonly class=\"form-control\" style=\"width:50%;display:inline;\" type=\"text\" name=\"amount\" value=\""+req.param("amount")+"\"></li> " +
                         "</ul> " +
                         "<input type=\"hidden\" name=\"custom_1\" value=\""+req.param("appId")+"\">   " +
                         "<input type=\"hidden\" name=\"merchant_id\" value=\""+req.param("payHereMerchantId")+"\">" +

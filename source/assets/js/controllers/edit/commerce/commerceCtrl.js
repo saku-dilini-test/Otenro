@@ -20,9 +20,9 @@
         $scope.maxLengthNextOrderNumber = 8; // max characters length of NextOrderNumber in product
         $scope.maxLengthAppName = 20;
         // Policy
-        $scope.maxReturnPolicy = 100;
-        $scope.maxTermsAndCondition = 100;
-        $scope.maxPrivacyPolicy = 100;
+        $scope.maxReturnPolicy = 500;
+        $scope.maxTermsAndCondition = 500;
+        $scope.maxPrivacyPolicy = 500;
         // About us
         $scope.maxAboutUsHeader = 20;
         $scope.maxAboutUsContent = 500;

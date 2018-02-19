@@ -61,7 +61,7 @@
                                         <tr>
                                             <th>Product</th>
                                             <th>Quantity</th>
-                                            <th>Revenue $</th>
+                                            <th>Revenue {{ salesList[0].currency }}</th>
                                         </tr>
 
                                         <tr ng-repeat="sales in salesList">
@@ -74,7 +74,7 @@
                                 <div flex="20"></div>
                                 <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
                                    <h4>Total Revenue</h4>
-                                    <h3><b>$ {{total}}</b></h3>
+                                    <h3><b>{{ salesList[0].currency }} {{total}}</b></h3>
                                 </div>
                             </div>
                             <div layout-gt-xs="row" class="margin-horizontal">
@@ -112,7 +112,7 @@
                                 </div>
                             </div>
 
-                            <label class="margin">Sales</label>
+                            <label class="margin">Tax</label>
                             <div layout-gt-xs="row" class="margin  padding-bottom">
                                 <div flex="100">
                                     <canvas id="line" class="chart chart-line" chart-data="taxChartdata.data"
@@ -130,8 +130,8 @@
                                     <table width="100%" class="analytic-table">
                                         <tr>
                                             <th>Country</th>
-                                            <th>Sales $</th>
-                                            <th>Tax $</th>
+                                            <th>Sales {{ taxList[0].currency }}</th>
+                                            <th>Tax {{ taxList[0].currency }}</th>
                                         </tr>
 
                                         <tr ng-repeat="tax in taxList">
@@ -149,7 +149,7 @@
                                 <div flex="20"></div>
                                 <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
                                    <h4>Total Tax</h4>
-                                    <h3><b>$ {{tax_total}}</b></h3>
+                                    <h3><b>{{ taxList[0].currency }} {{tax_total}}</b></h3>
                                 </div>
                             </div>
                             <div layout-gt-xs="row" class="margin-horizontal">
@@ -187,7 +187,7 @@
                                 </div>
                             </div>
 
-                            <label class="margin">Sales</label>
+                            <label class="margin">Shipments</label>
                             <div layout-gt-xs="row" class="margin  padding-bottom">
                                 <div flex="100">
                                     <canvas id="line" class="chart chart-line" chart-data="shippingChartdata.data"
@@ -206,7 +206,7 @@
                                         <tr>
                                             <th>Country</th>
                                             <th>Shipping Type </th>
-                                            <th>Shipping $</th>
+                                            <th>Shipping {{ shppingList[0].currency }}</th>
                                         </tr>
 
                                         <tr ng-repeat="shipping in shppingList">
@@ -219,7 +219,7 @@
                                 <div flex="20"></div>
                                 <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
                                    <h4>Total Shipping</h4>
-                                    <h3><b>$ {{shpping_total}}</b></h3>
+                                    <h3><b>{{ shppingList[0].currency }} {{shpping_total}}</b></h3>
                                 </div>
                             </div>
                             <div layout-gt-xs="row" class="margin-horizontal">

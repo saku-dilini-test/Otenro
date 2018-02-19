@@ -138,28 +138,28 @@
                         <h1>Price & Variants</h1>
                     </div>
                     <form name="priceAndVariantsForm" novalidate>
-                        <div class="md-dialog-main">
+                        <div class="md-dialog-main custom-add-products">
                             <table class="me-hours-table">
                                 <thead>
-                                <th width="25%">Product Name</th>
-                                <th >Sku</th>
-                                <th>Price({{currency}})</th>
-                                <th>Quantity</th>
-                                <th>Weight(kg)</th>
+                                <th width="15%">Product Name</th>
+                                <th width="8%">Sku</th>
+                                <th width="8%">Price({{currency}})</th>
+                                <th width="10%">Quantity</th>
+                                <th width="10%">Weight(kg)</th>
                                 <!--<th width="28%"><input type="text" required name="variantType" ng-model="selection" placeholder="Variant Name" list="variantType"/>-->
                                     <!--<datalist id="variantType">-->
                                         <!--<option value="Size">Size</option>-->
                                         <!--<option value="Weight">Weight</option>-->
                                         <!--<option value="Color">Color</option>-->
                                     <!--</datalist></th>-->
-                                <th data-ng-repeat="data in product.selection">
+                                <th width="10%" data-ng-repeat="data in product.selection">
                                     <a data-ng-click="addNewVariant(product, data.name)">{{data.name}}</a>
                                 </th>
-                                <th style="text-align: center;" >
+                                <th width="5%" style="text-align: center;" >
                                     Add Variant
                                     <div class="add-icon icon icon-plus" ng-click="addNewVariant(product)"></div>
                                 </th>
-                                <th>Delete</th>
+                                <th width="4%">Delete</th>
                                 </thead>
                                 <tbody>
 
@@ -174,9 +174,7 @@
                                     </td>
                                     <td>
                                         <md-input-container style="width: 80px;">
-
                                             <input ng-blur="checkValidity(data.sku, $index)"  maxlength="10"
-
                                                    required
                                                    aria-label="SKU"
                                                    ng-disabled="initSku($index)&&!isNewProduct"
@@ -186,9 +184,7 @@
                                                    ng-pattern="/^\d*[1-9]\d*$/"
                                                    ng-readonly="data.checked"
                                                    ng-click="check($index)">
-
                                             <div class="error" ng-if="exist && $index == position">Sku already exist</div>
-
                                             <div ng-messages="priceAndVariantsForm['sku_'+$index].$error" ng-show="priceAndVariantsForm['sku_'+$index].$dirty">
                                                 <div ng-message="required">SKU is required.</div>
                                                 <div ng-message="pattern" style="line-height:13px;" class="my-message">Invalid SKU</div>
@@ -233,7 +229,8 @@
                                                 <div ng-message="required" class="my-message">Required!</div>
                                             </div>
                                         </md-input-container>
-                                        <md-checkbox ng-change = 'setValue({{$index}})' ng-disable="data.quantity.$invalid" ng-model="data.unlimited" aria-label="Unlimited">
+                                        <md-checkbox ng-change = 'setValue({{$index}})' ng-disable="data.quantity.$invalid"
+                                                     ng-model="data.unlimited" aria-label="Unlimited">
                                             Unlimited
                                         </md-checkbox>
 
@@ -284,16 +281,14 @@
                                     <!--</td>-->
 
                                     <!--<span ng-show="priceAndVariantsForm['qty_' + $index].$error.maxlength">Too lengthy</span></td>-->
-                                    <td data-ng-repeat="data in data.selection">
+                                    <td data-ng-repeat="SAD in data.selection">
                                         <md-input-container class="md-container-modify md-text-input-custom">
-                                            <input ng-blur="validateInputValueVType(data.vType,'vType')" id ='vType_{{$index}}'  type="text" name="vType_{{$index}}" min="1"
+                                            <input ng-blur="validateInputValueVType(SAD.vType,'vType')" id ='vType_{{$index}}'  type="text" name="vType_{{$index}}" min="1"
                                                    ng-pattern="/^\w+/"
-                                                   maxlength="12" ng-model="data.vType" placeholder="Variant Type"
-                                                   ng-required="data.unlimited == false" ignore-mouse-wheel >
-                                            <div ng-messages="priceAndVariantsForm['vType_' + $index].$error"
-                                                 ng-show="priceAndVariantsForm['vType_' + $index].$dirty">
-                                                <div ng-message="pattern">Invalid variant type</div>
-                                                <div ng-message="required" class="my-message">Required!</div>
+                                                   maxlength="12" ng-model="SAD.vType" placeholder="Variant Type"
+                                                   required>
+                                            <div ng-messages="priceAndVariantsForm['vType_' + $index].$error">
+                                                <div ng-message="required" >Required!</div>
                                             </div>
                                         </md-input-container>
                                     </td>

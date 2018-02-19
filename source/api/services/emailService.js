@@ -517,7 +517,9 @@ module.exports = {
                     //update the resetToken in the database
                     User.update(searchApp,{resetToken:resetToken}).exec(function(err,created){
                         if(err) console.log(err);
-                        var serverOrg=config.server.host+':'+config.server.port;
+
+                        var serverOrg=config.server.host;
+
                         var emailDetails = {
                             text: "Email verification",
                             from: 'sallayshamila93@gmail.com',

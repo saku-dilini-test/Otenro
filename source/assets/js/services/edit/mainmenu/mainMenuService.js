@@ -201,6 +201,9 @@
             deleteData : function(data){
                 return $http.post(SERVER_URL+ 'edit/deleteItem',data);
             },
+            deleteCategories : function(data){
+                return $http.post(SERVER_URL+ 'edit/deleteCategories',data);
+            },            
             updateSecondNavi : function(data) {
                 return $http.post(SERVER_URL+ 'edit/updateSecondNavi',data);
             },

@@ -79,7 +79,8 @@ module.exports = {
     getTemplateMetaData: function (req, res) {
         var templateCategoryId = req.param('templateCategoryId');
         var searchQuery = {
-            templateCategoryId: templateCategoryId
+            templateCategoryId: templateCategoryId,
+            menuTitle: { "!" : ["Payment Activities","Featured","Secondary","Ads","Subscriptions","View Controls","Communication"]} //ME-2778,2781 Hide all tasks which say coming soon
         };
         var firstMenuLabel = '';
         if (templateCategoryId == '2') {

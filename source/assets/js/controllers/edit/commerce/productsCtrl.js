@@ -146,6 +146,7 @@
          * @param variants
          */
         $scope.addVariant = function (selection,product,index,variants) {
+
             if(product.selection == undefined){
                  product.selection = [];
             }
