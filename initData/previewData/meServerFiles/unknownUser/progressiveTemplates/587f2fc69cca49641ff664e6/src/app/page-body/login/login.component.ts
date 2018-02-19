@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +18,17 @@ export class LoginComponent implements OnInit {
   public userId = (<any>data).userId;
   public params = [];
   name; pass; gate: boolean; navigate;
-  constructor(private localStorageService: LocalStorageService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient) {
-
+  constructor(private localStorageService: LocalStorageService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient,
+              private title: TitleService) {
+    this.title.changeTitle("Login");
   }
 
   ngOnInit() {
     this.router.params.subscribe(params => {
       this.navigate = params['type'];
-      console.log("this.value : " + this.navigate);
     });
   }
+
   login = function (myForm) {
 
     this.name = myForm.userEmail
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
       password: this.password,
       appId: this.appId
     };
-    console.log(data);
+
     let requestParams;
     this.http.post(SERVER_URL + "/templatesAuth/authenticateForApp", data)
       .subscribe((res) => {
@@ -65,14 +67,6 @@ export class LoginComponent implements OnInit {
         } else {
           this.route.navigate(['cart']);
         }
-
-
-        // if($stateParams.item == 'delivery'){
-        //   $state.go('app.cart');
-        // }else{
-        //   $state.go('app.category');
-        // }
-
       },
       function (err) {
         console.log(err);
@@ -84,12 +78,4 @@ export class LoginComponent implements OnInit {
     this.route.navigate(['register', this.navigate]);
   }
 
-  slides = SLIDES;
-
 }
-
-
-const SLIDES = [
-  {
-    src: 'https://www.hdwallpapers.in/walls/windows_xp_bliss-wide.jpg', title: 'Sign In'
-  }]

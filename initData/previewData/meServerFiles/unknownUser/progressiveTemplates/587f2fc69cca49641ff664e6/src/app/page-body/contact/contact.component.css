@@ -9,7 +9,7 @@
 :host  /deep/ .carousel-caption {
   z-index: 10;
   bottom: 3rem;
-  height: 55%;  
+  height: 55%;
 }
 
 /* Declare heights because of positioning of img element */
@@ -20,7 +20,7 @@
  :host  /deep/ .carousel-item > img {
   min-width: 100%;
   height: 100%;
-  object-fit: cover;	
+  object-fit: cover;
 }
 
 :host  /deep/ .carousel-control-prev, :host  /deep/ .carousel-control-next, :host  /deep/ .carousel-indicators{
@@ -29,4 +29,11 @@
 
 agm-map {
   height: 600px;
+}
+
+@media (max-width: 767px){
+  agm-map {
+    height: 360px;
+  }
+
 }

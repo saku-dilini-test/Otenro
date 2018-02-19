@@ -3,42 +3,42 @@
 	<p class="main-content-font" *ngIf="description">{{description}}</p>
 	<div>
 		<div class="row" *ngIf="address">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div>
-					<i class="icon fa fa-map-marker"></i> Address:</div>
+					<i class="main-button fa fa-map-marker"></i> <span class="main-content-font">Address:</span></div>
 			</div>
-			<div class="col-md-8">
-				<div class="b-info__info">{{address}}</div>
+			<div class="col-md-9">
+				<div class="main-content-font">{{address}}</div>
 			</div>
 		</div>
 		<div class="row" *ngIf="phone">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div>
-					<i class="icon fa fa-phone"></i> Phone:</div>
+          <i class="main-button fa fa-phone"></i>  <span class="main-content-font">Phone:</span></div>
 			</div>
-			<div class="col-md-8">
-				<div class="b-info__info">{{phone}}</div>
+			<div class="col-md-9">
+				<div class="main-content-font">{{phone}}</div>
 			</div>
 		</div>
 		<div class="row" *ngIf="email">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div>
-					<i class="icon fa fa-envelope"></i> Email:</div>
+          <i class="main-button fa fa-envelope"></i>  <span class="main-content-font">Email:</span></div>
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-9">
 				<div>
-					<a href="mailto:{{email}}">{{email}}</a>
+					<a class="main-content-font" href="mailto:{{email}}">{{email}}</a>
 				</div>
 			</div>
 		</div>
 		<div class="row" *ngIf="website">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<div>
-					<i class="icon fa fa-file-text-o"></i> WebSite:</div>
+          <i class="main-button  fa fa-file-text-o"></i>  <span class="main-content-font">WebSite:</span></div>
 			</div>
-			<div class="col-md-8">
+			<div class="col-md-9">
 				<div>
-					<a href="mailto:{{website}}">{{website}}</a>
+					<a class="main-content-font" href="mailto:{{website}}">{{website}}</a>
 				</div>
 			</div>
 		</div>

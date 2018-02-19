@@ -21,7 +21,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'login/:type', 
+    path: 'login/:type',
     component: LoginComponent,
     data:{title:'Login Page'}
   },

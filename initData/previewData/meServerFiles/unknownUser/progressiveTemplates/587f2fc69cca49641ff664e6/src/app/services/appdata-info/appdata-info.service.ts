@@ -33,4 +33,9 @@ export class AppDataService {
         return this.http.get(SERVER_URL + "/templates/getAboutUs?appId="+this.appId)
             .map(res => res.json());
     }
+
+    getContactUsInfo() {
+      return this.http.get(SERVER_URL + "/edit/getContactUs?appId="+this.appId)
+        .map(res => res.json());
+    }
 }
