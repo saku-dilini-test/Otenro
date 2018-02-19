@@ -1,23 +1,40 @@
 #!/bin/bash
 echo  'start....'
 
-MESERVER='/var/www/html/meServer/temp';
-NODE='/var/www/html/meServer/node_modules';
-APPFILESERVER='/home/dilakshan/Desktop/appFileServer/';
+#leave and comment other env
+#local
+#MESERVER='/var/www/html/meServer/temp';
+#NODE='/var/www/html/meServer/node_modules';
+#APPFILESERVER='/home/dilakshan/Desktop/appFileServer/';
+
+#stag
+MESERVER='https://testcdn.otenro.com/temp/';
+NODE='https://testcdn.otenro.com/node_modules';
+APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
+
+#prod
+#MESERVER='https://cdn.otenro.com/temp/';
+#NODE='https://cdn.otenro.com/node_modules';
+#APPFILESERVER='/home/otenro/appFileServer/';
 
 ENV='dev'   #this is for development
 #ENV='pro'  #this is for production
+#ENV='stag'  #this is for staging
 DB=''
 
 if [ $ENV == 'dev' ]
 then
 	DB='appBuilder'
 	serverUrl='http://localhost:1337'
+
+else if [ $ENV == 'stag' ]
+	DB='otenroTest'
+	serverUrl='https://testdashboard.otenro.com'
+
 else
 	DB='otenro'
-	serverUrl='http://dashboard.otenro.com'
+	serverUrl='https://dashboard.otenro.com'
 fi
-
 echo $DB
 echo $serverUrl
 
@@ -78,10 +95,18 @@ cd meServerFiles/unknownUser/templates/
        cd -
     done
 
+cd meServerFiles/unknownUser/progressiveTemplates/
+   for d in ./*;do
+       cd $d/src/app/
+       ls
+       sed -i "s@serverUrl@$serverUrl@" constantsService.js
+       cd -
+    done
+
 cd ../../../
 cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
 cp -r ./meServerFiles/unknownUser $MESERVER
-#cp -r ./meServerFiles/node_modules $NODE
+cp -r ./meServerFiles/node_modules $NODE
 
 
 

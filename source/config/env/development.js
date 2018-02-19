@@ -27,7 +27,7 @@ module.exports = {
 
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'http://localhost',
+  HOST_URL : 'http://localhost:1337',
   // ME SERVER Config
   ME_SERVER_URL : 'http://localhost:80/meServer/temp/',
   ME_SERVER : 'c:/xampp/htdocs/meServer/temp/',

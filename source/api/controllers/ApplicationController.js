@@ -276,7 +276,7 @@ module.exports = {
                 templatePath = config.PROGRESSIVE_TEMPLATES_PATH + templateName,
                 appName = req.body.appName,
                 serverTmp="http://localhost:port",
-                serverOrg=config.server.host+":1337",
+                serverOrg=config.server.host,
                 isAppNameAvailable=false;
 
         var appQuery = { 
@@ -374,6 +374,15 @@ module.exports = {
                               fs.outputJson(madeEasyFilePath,madeEasyFileContent, function (err) {
                                   if(err) return console.error(err);
                               });
+
+                              fs.readFile(tempAppDirPath +app.id+'src/app/constantsService.js', 'utf-8',
+                                  function(err, data) {
+                                      if (err) return res.negotiate(err);
+                                      fs.writeFile(tempAppDirPath +app.id+'/src/app/constantsService.js', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
+                                          if (err) return res.negotiate(err);
+                                      });
+                                  });
+
 
                               /** config -|- copy template images to App File Server
                                * TODO : future development, Template dummy data move to another folder
