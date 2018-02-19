@@ -160,10 +160,10 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             deliverDetails.city = localData.city;
             deliverDetails.zip = localData.zip;
             deliverDetails.phone = localData.phone;
-            
-
         }
+
         $log.debug(deliverDetails);
+
         deliverDetails.method = 'Delivery';
         $state.go('app.shipping',{item:deliverDetails});
     }

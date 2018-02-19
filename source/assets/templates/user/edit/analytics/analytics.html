@@ -74,7 +74,7 @@
                                 <div flex="20"></div>
                                 <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
                                    <h4>Total Revenue</h4>
-                                    <h3><b>{{ salesList[0].currency }} {{total}}</b></h3>
+                                    <h3><b>{{ currency }} {{total}}</b></h3>
                                 </div>
                             </div>
                             <div layout-gt-xs="row" class="margin-horizontal">
@@ -149,7 +149,7 @@
                                 <div flex="20"></div>
                                 <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
                                    <h4>Total Tax</h4>
-                                    <h3><b>{{ taxList[0].currency }} {{tax_total}}</b></h3>
+                                    <h3><b>{{ currency}} {{tax_total}}</b></h3>
                                 </div>
                             </div>
                             <div layout-gt-xs="row" class="margin-horizontal">
@@ -198,7 +198,7 @@
                             </div>
                             <md-input-container class="margin-horizontal" flex="33">
                                 <label>Search Country</label>
-                                <input ng-model="user.title">
+                                <input type="text" ng-model="shipping.country"  ng-change="countrySearch(shipping.country)">
                             </md-input-container>
                             <div layout-gt-xs="row" class="margin-horizontal">
                                 <div flex="50">
@@ -209,7 +209,7 @@
                                             <th>Shipping {{ shppingList[0].currency }}</th>
                                         </tr>
 
-                                        <tr ng-repeat="shipping in shppingList">
+                                        <tr ng-repeat="shipping in shppingList | filter : {'country' :countryName}">
                                             <td>{{ shipping._id.country }}</td>
                                             <td>{{ shipping._id.shippingOpt }}</td>
                                             <td>{{ shipping.totalShippingCost }}</td>
@@ -219,7 +219,7 @@
                                 <div flex="20"></div>
                                 <div flex="20" class="text-right padding" style="border-left: 1px solid #ccc;">
                                    <h4>Total Shipping</h4>
-                                    <h3><b>{{ shppingList[0].currency }} {{shpping_total}}</b></h3>
+                                    <h3><b>{{ currency }} {{shpping_total}}</b></h3>
                                 </div>
                             </div>
                             <div layout-gt-xs="row" class="margin-horizontal">
