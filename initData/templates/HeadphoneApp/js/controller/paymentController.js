@@ -39,9 +39,10 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     });
 
 
+
+
     $http.get(constants.SERVER_URL + '/edit/getIPGInfo?appId='+$scope.appId).success(function(data) {
         $scope.paymentData = data;
-        $log.debug($scope.paymentData);
         if($stateParams.item.delivery.method == "Delivery") {
             $scope.deliveryShow = data.cashOnDeliveryEnable;
             $scope.pickupShow = false;
