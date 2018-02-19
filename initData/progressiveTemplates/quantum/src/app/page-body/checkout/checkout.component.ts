@@ -11,6 +11,7 @@ import { CurrencyService } from '../../services/currency/currency.service';
 import { ShippingService } from '../../services/shipping/shipping.service';
 import { OrdersService } from '../../services/orders/orders.service';
 import { TitleService } from '../../services/title.service';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 declare let paypal: any;
 
@@ -25,7 +26,7 @@ export class CheckoutComponent implements OnInit {
 
   staticAlertClosed = false;
   successMessage: string;
-
+  complexForm : FormGroup;
 
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
@@ -87,8 +88,9 @@ export class CheckoutComponent implements OnInit {
   public orderd = false;
   private years = [];
   private months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+  private emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
-  constructor(private ordersService : OrdersService,
+  constructor(fb: FormBuilder,private ordersService : OrdersService,
     private shippingService: ShippingService,
     private currencyService :CurrencyService,
     private localStorageService: LocalStorageService,
@@ -96,6 +98,22 @@ export class CheckoutComponent implements OnInit {
      private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
 
     this.title.changeTitle("Checkout");
+
+    this.complexForm = fb.group({
+      // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
+      'fName' : new FormControl(this.dataService.userData.name,Validators.compose([Validators.required])),
+      'lName': new FormControl (this.dataService.userData.lname,Validators.compose([Validators.required])),
+      'email' : new FormControl(this.dataService.userData.email,Validators.compose([Validators.required,Validators.pattern(this.emailPattern)])),
+      'phone' : new FormControl(this.dataService.userData.phone,Validators.compose([Validators.required,Validators.pattern(/^\d+$/)])),
+      'streetNo' : new FormControl(this.dataService.userData.streetNumber,Validators.compose([Validators.required])),
+      'streetName' : new FormControl(this.dataService.userData.streetName,Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)])),
+      'city': new FormControl(this.dataService.userData.city,Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)])),
+      'zip' : new FormControl(this.dataService.userData.zip,Validators.compose([Validators.required,Validators.pattern(/^\d+$/)])),
+      'country' : new FormControl(null)
+
+    })
+    this.complexForm.controls['country'].setValue(this.dataService.userData.country, {onlySelf: true});
+
   }
 
   ngOnInit() {
@@ -121,15 +139,7 @@ this.years.push(date++);
 
       this.isAdded = true;
 
-      this.fname = this.dataService.userData.name;
-      this.lname = this.dataService.userData.lname;
-      this.email = this.dataService.userData.email;
-      this.phone = this.dataService.userData.phone;
-      this.country = this.dataService.userData.country;
-      this.city = this.dataService.userData.city;
-      this.streetName = this.dataService.userData.streetName;
-      this.streetNumber = this.dataService.userData.streetNumber;
-      this.zip = this.dataService.userData.zip;
+
     }
     this.localData = (this.localStorageService.get('appLocalStorageUser' + this.appId));
 
@@ -142,7 +152,7 @@ this.years.push(date++);
 
     var param = {
       'appId': this.appId,
-      'country': this.country
+      'country': this.dataService.userData.country
     };
 
     this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
@@ -170,9 +180,8 @@ this.years.push(date++);
     // get the shipping options
     var param2 = {
       'appId': this.appId,
-      'country': this.country
+      'country': this.dataService.userData.country
     };
-
     if (this.formType == 'delivery') {
       this.http.post(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
         .subscribe((data) => {
@@ -219,12 +228,6 @@ this.years.push(date++);
 
 
 
-
-  public change() {
-
-  }
-
-
   getTotal() {
     var total = 0;
     var amount = 0;
@@ -246,7 +249,23 @@ this.years.push(date++);
     }
   };
 
-  addShipping(shippingDetails,e) {
+
+  addShipping(shippingDetails,e,test) {
+
+    this.fname = test.fName;
+    this.lname = test.lName;
+    this.email = test.email;
+    this.phone = test.phone;
+    this.country = test.country;
+    this.city = test.country;
+    this.streetName = test.streetName;
+    this.streetNumber = test.streetNumber;
+    this.zip = test.zip;
+
+    console.log(shippingDetails)
+    console.log(e)
+    console.log(test)
+
     this.isSelected = true;
     var total = 0;
 
@@ -387,6 +406,11 @@ this.years.push(date++);
 
 checkForm(asd){
   this.isSelected = false;
+  var deliver = <HTMLInputElement>document.getElementById('delivery');
+  deliver.checked = false;
+
+  var pickup = <HTMLInputElement>document.getElementById('pickup');
+  pickup.checked = false;
 }
   //------------------------------checkout---------------------------------------
   chk(final) {
@@ -837,6 +861,7 @@ checkForm(asd){
 
   countryChanged(data) {
     console.log(data)
+    this.isSelected = false;
   }
 
 

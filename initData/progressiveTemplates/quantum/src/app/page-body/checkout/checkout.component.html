@@ -2,44 +2,53 @@
   <!--<app-carousel [slides]="slides"></app-carousel>-->
 
   <div *ngIf='formType == "delivery"'>
-    <div class="row padding-vertical">
+
+    <!-- <div class="row padding-vertical">
+            <form name="test" #myForm="ngForm" (ngSubmit)="test()" class="container main-content-font" novalidate>
+                <p>Is "myForm" valid? {{myForm.valid}}</p>
       <div class="col-md-7">
         <div class="row main-content-font">
           <h3 class="col-sm-12 main-header-font">Billing Details</h3>
           <div class="form-group col-sm-6 mt-3">
             <label for="fname">First Name</label>
-            <input type="text" [(ngModel)]='fname' [value]="fname" class="form-control" id="fname" aria-describedby="fname">
-          </div>
+            <div>
+                <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" type="text" #fname='ngModel' name="fname" id="fname" placeholder="Arstina"
+                       ngModel required>
+                <div [hidden]="fname.valid || fname.pristine" class="alert alert-danger">
+                  <div [hidden]="!fname.hasError('required')">First Name is required</div>
+                  <div [hidden]="!fname.hasError('pattern')">Only alphabetsallowed</div>
+                </div>
+              </div>          </div>
           <div class="form-group col-sm-6 mt-3">
             <label for="lname">Last Name</label>
-            <input type="text" class="form-control" [(ngModel)]='lname' [value]="lname" id="lname" aria-describedby="lname">
+            <input type="text" class="form-control" [(ngModel)]='lname' name="lname" [value]="lname" id="lname" aria-describedby="lname">
           </div>
           <div class="form-group col-sm-6">
             <label for="email">Email address</label>
-            <input type="email" [(ngModel)]='email' [value]="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <input type="email" [(ngModel)]='email' name="address" [value]="email" class="form-control" id="email" aria-describedby="emailHelp">
           </div>
           <div class="form-group col-sm-6">
             <label for="phone">Phone</label>
-            <input type="tel" [(ngModel)]='phone' [value]="phone" class="form-control" id="phone" aria-describedby="phone">
+            <input type="tel" [(ngModel)]='phone' name="phone" [value]="phone" class="form-control" id="phone" aria-describedby="phone">
           </div>
           <div class="form-group col-sm-6">
-            <label for="phone">Street number</label>
-            <input type="tel" [(ngModel)]='streetNumber' [value]="streetNumber" class="form-control" id="streetNumber" aria-describedby="streetNumber">
+            <label for="phone">House/Apartment Number</label>
+            <input type="text" [(ngModel)]='streetNumber' name="streetNo" [value]="streetNumber" class="form-control" id="streetNumber" aria-describedby="streetNumber">
           </div>
           <div class="form-group col-sm-6">
-            <label for="email">Street name</label>
-            <input type="email" [(ngModel)]='streetName' [value]="streetName" class="form-control" id="streetName" aria-describedby="streetName">
+            <label for="email">street Name</label>
+            <input type="email" [(ngModel)]='streetName' name="streetName" [value]="streetName" class="form-control" id="streetName" aria-describedby="streetName">
           </div>
           <div class="form-group col-sm-6">
             <label for="cname">City</label>
-            <input type="text" [(ngModel)]='city' [value]="city" class="form-control" id="cname" aria-describedby="cname">
+            <input type="text" [(ngModel)]='city' name="city" [value]="city" class="form-control" id="cname" aria-describedby="cname">
           </div>
           <div class="form-group col-sm-6">
-            <label for="phone">zip</label>
-            <input type="tel" [(ngModel)]='zip' [value]="zip" class="form-control" id="zip" aria-describedby="zip">
+            <label for="phone">Postal Code/ZIP</label>
+            <input type="number" [(ngModel)]='zip' name="postal" [value]="zip" class="form-control" id="zip" aria-describedby="zip">
           </div>
           <div class="form-group col-sm-12">
-            <select [(ngModel)]="country" (ngModelChange)="countryChanged(country)" class="form-control">
+            <select name="country" [(ngModel)]="country" (ngModelChange)="countryChanged(country)" class="form-control">
               <option *ngFor="let c of countries" [selected]="country==c.countryName" value = '{{c.countryName}}'> {{c.countryName}} </option>
             </select>
           </div>
@@ -56,7 +65,140 @@
           </label>
         </div>
       </div>
-    </div>
+    </form>
+    </div> -->
+
+    <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
+      <div class="form-group">
+        <label>First Name:</label>
+        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+        <input id=fname class="form-control" type="text" placeholder="John" [formControl]="complexForm.controls['fName']" (ngModelChange)="checkForm($event)" required>
+
+        <div *ngIf="complexForm.controls['fName'].hasError('required')
+        && complexForm.controls['fName'].touched" class="alert alert-danger">
+          You must include a First name.
+        </div>
+        <!-- <div *ngIf="complexForm.controls['fName'].hasError('minlength')
+        && complexForm.controls['fName'].touched" class="alert alert-danger">
+          Your first name must be at least 4 characters long.
+        </div>
+        <div *ngIf="complexForm.controls['fName'].hasError('maxlength')
+        && complexForm.controls['fName'].touched" class="alert alert-danger">
+          Your last name cannot exceed 10 characters.
+        </div> -->
+
+      </div>
+      <div class="form-group">
+        <label>Last Name:</label>
+        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['lName']" (ngModelChange)="checkForm($event)">
+
+        <div *ngIf="complexForm.controls['lName'].hasError('required')
+        && complexForm.controls['lName'].touched" class="alert alert-danger">
+          You must include a Last name.
+        </div>
+        <!-- <div *ngIf="complexForm.controls['lName'].hasError('minlength')
+        && complexForm.controls['lName'].touched" class="alert alert-danger">
+          Your first name must be at least 4 characters long.
+        </div>
+        <div *ngIf="complexForm.controls['lName'].hasError('maxlength')
+        && complexForm.controls['lName'].touched" class="alert alert-danger">
+          Your last name cannot exceed 10 characters.
+        </div> -->
+
+      </div>
+      <div class="form-group">
+        <label>Email:</label>
+        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['email']" (ngModelChange)="checkForm($event)">
+
+        <div *ngIf="complexForm.controls['email'].hasError('required')
+        && complexForm.controls['email'].touched" class="alert alert-danger">
+          You must include an email.
+        </div>
+        <div *ngIf = "!complexForm.controls['email'].valid" class="alert alert-danger">
+            invalid Email
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label>Phone:</label>
+        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['phone']" (ngModelChange)="checkForm($event)">
+
+        <div *ngIf="complexForm.controls['phone'].hasError('required')
+        && complexForm.controls['phone'].touched" class="alert alert-danger">
+          You must include a Phone Number.
+        </div>
+        <div *ngIf = "!complexForm.controls['phone'].valid" class="alert alert-danger">
+            Enter a valid Phone Number (ex: 94712345678)
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label>House/Apartment Number:</label>
+        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['streetNo']" (ngModelChange)="checkForm($event)">
+
+        <div *ngIf="complexForm.controls['streetNo'].hasError('required')
+        && complexForm.controls['streetNo'].touched" class="alert alert-danger">
+          You must include Street Number.
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label>street Name:</label>
+        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['streetName']" (ngModelChange)="checkForm($event)">
+
+        <div *ngIf="complexForm.controls['streetName'].hasError('required')
+        && complexForm.controls['streetName'].touched" class="alert alert-danger">
+          You must include Street Name.
+        </div>
+      </div>
+      <div class="form-group">
+        <label>City:</label>
+        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['city']" (ngModelChange)="checkForm($event)">
+
+        <div *ngIf="complexForm.controls['city'].hasError('required')
+        && complexForm.controls['city'].touched" class="alert alert-danger">
+          You must include a City.
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label>Postal Code/ZIP:</label>
+        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['zip']" (ngModelChange)="checkForm($event)">
+
+        <div *ngIf="complexForm.controls['zip'].hasError('required')
+        && complexForm.controls['zip'].touched" class="alert alert-danger">
+          You must include zip code.
+        </div>
+        <div *ngIf = "!complexForm.controls['zip'].valid" class="alert alert-danger">
+            invalid zip code
+        </div>
+      </div>
+      <select id="country" class="form-control" formControlName="country" (change)="countryChanged()">
+        <option *ngFor="let c of countries" [ngValue]="c.countryName">
+          {{c.countryName}}
+        </option>
+      </select>
+      <br>
+      <div class="col-md-5" *ngIf = "complexForm.valid">
+        <h3 class="main-header-font">Shipping Options</h3>
+
+        <div class="radio main-content-font" *ngFor="let ship of shippingData, let idx = index">
+          <label>
+            <input id="delivery" #r name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping"
+              (change)='addShipping(ship,$event,complexForm.value)' [ngModelOptions]="{standalone: true}"> {{ship.optionName}}
+            <span>({{ship.shippingOption}})</span>
+          </label>
+        </div>
+      </div>
+    </form>
+
   </div>
 
 
@@ -69,8 +211,8 @@
       <div class="form-group">
         <label for="name" class="col-2 col-form-label">Name</label>
         <div class="col-10">
-          <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" type="text" #name='ngModel' (ngModelChange)="checkForm($event)" name="name" id="name" placeholder="Arstina"
-            ngModel required>
+          <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" type="text" #name='ngModel' (ngModelChange)="checkForm($event)"
+            name="name" id="name" placeholder="Arstina" ngModel required>
           <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
             <div [hidden]="!name.hasError('required')">First Name is required</div>
             <div [hidden]="!name.hasError('pattern')">Only alphabetsallowed</div>
@@ -81,10 +223,10 @@
       <div class="form-group">
         <label for="pkPhone" class="col-2 col-form-label">Phone Number</label>
         <div class="col-10">
-          <input class="form-control" #pkPhone='ngModel' (ngModelChange)="checkForm($event)" type="tel" id="pkPhone" name="pkPhone" pattern="\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|
+          <input class="form-control" #pkPhone='ngModel' (ngModelChange)="checkForm($event)" type="tel" id="pkPhone" name="pkPhone"
+            pattern="\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|
           2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|
-          4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$" name="phone" placeholder="0712345678"
-            ngModel required>
+          4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$" name="phone" placeholder="0712345678" ngModel required>
           <div [hidden]="pkPhone.valid || pkPhone.pristine" class="alert alert-danger">
             <div [hidden]="!pkPhone.hasError('required')">Phone Number is required</div>
             <div [hidden]="!pkPhone.hasError('pattern')">Invalid Phone number (+9411 111 111 1)</div>
@@ -94,10 +236,10 @@
 
       <div class="col-sm-12" *ngIf="myForm.valid">
         <h4 class="my-3 main-header-font">Select a Location</h4>
-        <div class="row main-content-font" >
+        <div class="row main-content-font">
           <div class="radio" *ngFor="let pick of pickup, let idx = index">
             <label>
-              <input  #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx],myForm.value,myForm.valid)'>
+              <input id="pickup" #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx],myForm.value,myForm.valid)'>
               <b>{{pick.locationName}}</b>
               <div>{{pick.number}}, {{pick.streetAddress}}, {{pick.city}}, {{pick.postalCode}}, {{pick.country}}.</div>
             </label>
@@ -129,48 +271,50 @@
     <h3 class="main-header-font">Your order</h3>
     <table class="table table-responsive">
       <thead class="main-header-font">
-      <tr>
-        <th width="89%">Item</th>
-        <th width="100%">Qty</th>
-        <th width="100%">Price</th>
-      </tr>
+        <tr>
+          <th width="89%">Item</th>
+          <th width="100%">Qty</th>
+          <th width="100%">Price</th>
+        </tr>
       </thead>
       <tbody class="main-content-font">
-      <tr *ngFor="let itm of cartItems">
-        <td> {{itm.name}}&nbsp;</td>
-        <td> {{itm.qty}}&nbsp;</td>
-        <td><span>{{sign}}{{(itm.total)*(itm.qty)}}</span></td>
-      </tr>
+        <tr *ngFor="let itm of cartItems">
+          <td> {{itm.name}}&nbsp;</td>
+          <td> {{itm.qty}}&nbsp;</td>
+          <td>
+            <span>{{sign}}{{(itm.total)*(itm.qty)}}</span>
+          </td>
+        </tr>
       </tbody>
       <tfoot>
-      <tr *ngIf='hideShipping'>
-        <th>Shipping</th>
-        <td></td>
-        <td>{{sign}}{{chkShippingCost}}</td>
-      </tr>
-      <tr *ngIf='chkPickupCost > 0'>
-        <th>Pick up cost</th>
-        <td></td>
-        <td>{{sign}}{{chkPickupCost}}</td>
-      </tr>
-      <tr>
-        <th>Tax({{chkTax}}%)</th>
-        <td></td>
-        <td>{{sign}}{{taxTotal}}</td>
-      </tr>
-      <tr class="order-total">
-        <th class="main-header-font">Total</th>
-        <td>
-          <strong>
-            <span class="main-header-font">{{totalQuantity}}</span>
-          </strong>
-        </td>
-        <td>
-          <strong>
-            <span class="main-header-font">{{sign}}{{totalPrice}}</span>
-          </strong>
-        </td>
-      </tr>
+        <tr *ngIf='hideShipping'>
+          <th>Shipping</th>
+          <td></td>
+          <td>{{sign}}{{chkShippingCost}}</td>
+        </tr>
+        <tr *ngIf='chkPickupCost > 0'>
+          <th>Pick up cost</th>
+          <td></td>
+          <td>{{sign}}{{chkPickupCost}}</td>
+        </tr>
+        <tr>
+          <th>Tax({{chkTax}}%)</th>
+          <td></td>
+          <td>{{sign}}{{taxTotal}}</td>
+        </tr>
+        <tr class="order-total">
+          <th class="main-header-font">Total</th>
+          <td>
+            <strong>
+              <span class="main-header-font">{{totalQuantity}}</span>
+            </strong>
+          </td>
+          <td>
+            <strong>
+              <span class="main-header-font">{{sign}}{{totalPrice}}</span>
+            </strong>
+          </td>
+        </tr>
       </tfoot>
     </table>
 
@@ -183,12 +327,11 @@
 
   <div class="custom-controls-stacked main-content-font" *ngIf="isSelected && !(overWeight || underWeight)">
     <h3 class="main-header-font">Select Payment Type</h3>
-    <div *ngIf="deliveryShow"  class="mt-3">
+    <div *ngIf="deliveryShow" class="mt-3">
 
       <div class="radio">
         <label>
-          <input  type="radio" name="deliveryShow"  value="cashOnDelivery" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-          Cash On Delivery
+          <input type="radio" name="deliveryShow" value="cashOnDelivery" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input"> Cash On Delivery
         </label>
       </div>
     </div>
@@ -196,8 +339,7 @@
     <div *ngIf="pickupShow" class="mt-3">
       <div class="radio">
         <label>
-          <input type="radio" name="pickupShow" value="cashOnPickup" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-          Cash On Pickup
+          <input type="radio" name="pickupShow" value="cashOnPickup" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input"> Cash On Pickup
         </label>
       </div>
     </div>
@@ -205,8 +347,8 @@
     <div *ngIf="paypalShow" class="mt-3">
       <div class="radio">
         <label>
-          <input type="radio" name="paypalShow" value="paypal" (click)="buyWithPayPal()" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-          PayPal
+          <input type="radio" name="paypalShow" value="paypal" (click)="buyWithPayPal()" [(ngModel)]="paymentType" (ngModelChange)="ps=true"
+            class="custom-control-input"> PayPal
         </label>
       </div>
     </div>
@@ -214,8 +356,7 @@
     <div *ngIf="stripeShow" class="mt-3">
       <div class="radio">
         <label>
-          <input type="radio" name="stripeShow" value="creditcard" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-          Stripe
+          <input type="radio" name="stripeShow" value="creditcard" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input"> Stripe
         </label>
       </div>
     </div>
@@ -223,8 +364,7 @@
     <div *ngIf="braintreeShow" class="mt-3">
       <div class="radio">
         <label>
-          <input type="radio" name="braintreeShow" value="braintree" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-          Braintree
+          <input type="radio" name="braintreeShow" value="braintree" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input"> Braintree
         </label>
       </div>
     </div>
@@ -232,8 +372,7 @@
     <div *ngIf="authorizeNet" class="mt-3">
       <div class="radio">
         <label>
-          <input type="radio" name="authorizeNet" value="authorizeNet" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input">
-          AuthorizeNet
+          <input type="radio" name="authorizeNet" value="authorizeNet" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input"> AuthorizeNet
         </label>
       </div>
     </div>
@@ -245,7 +384,7 @@
         <button class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="confirmCashPayment()">Confirm</button>
       </div>
       <div class="col-sm-12" style="margin: 10px 0">
-        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null" >{{ successMessage }}</ngb-alert>
+        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
       </div>
     </form>
 
@@ -262,12 +401,12 @@
       <!-- <p>Is "myForm" valid? {{myForm.valid}}</p> -->
 
       <label class="form-group col-sm-6">
-        <label >Charge Amount</label>
+        <label>Charge Amount</label>
         <input class="form-control" placeholder="Charge Amount" type="text" [(ngModel)]="card.amount" name="cardAmount" disabled>
       </label>
       <label class="form-group col-sm-6">
         <label>Name on card</label>
-        <input class="form-control" placeholder="Name on card*" type="text"  #userName='ngModel' name = 'userName' ngModel required>
+        <input class="form-control" placeholder="Name on card*" type="text" #userName='ngModel' name='userName' ngModel required>
         <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">
           <div [hidden]="!userName.hasError('required')">User Name is required</div>
           <!-- <div [hidden]="!streetNumber.hasError('pattern')">Your password should contain UpperCase, LowerCase and number</div> -->
@@ -275,8 +414,9 @@
       </label>
 
       <label class="form-group col-sm-6">
-        <label >Card Number</label>
-        <input class="form-control" minlength="15" maxlength="19" placeholder="Card Number*" pattern="[0-9]+" type="text" name="cardNumber" #number='ngModel' cc-type="card.cardType" ngModel required>
+        <label>Card Number</label>
+        <input class="form-control" minlength="15" maxlength="19" placeholder="Card Number*" pattern="[0-9]+" type="text" name="cardNumber"
+          #number='ngModel' cc-type="card.cardType" ngModel required>
         <div [hidden]="number.valid || number.pristine" class="alert alert-danger">
           <div [hidden]="!number.hasError('required')">Credit card required</div>
           <div [hidden]="!number.hasError('pattern')">Credit card must consist of only numbers</div>
@@ -285,7 +425,8 @@
       </label>
       <label class="form-group col-sm-6">
         <label class="input-label">Card CVC</label>
-        <input class="form-control" placeholder="Card CVC*" type="text" name ='cvc' minlength="3" maxlength="4" pattern="[0-9]+" #cvc='ngModel' cc-type="cardNumber.$ccType" ngModel required>
+        <input class="form-control" placeholder="Card CVC*" type="text" name='cvc' minlength="3" maxlength="4" pattern="[0-9]+" #cvc='ngModel'
+          cc-type="cardNumber.$ccType" ngModel required>
         <div [hidden]="cvc.valid || cvc.pristine" class="alert alert-danger">
           <div [hidden]="!cvc.hasError('required')">Security code required</div>
           <div [hidden]="!cvc.hasError('pattern')">Security code must contain only numbers</div>
@@ -312,7 +453,7 @@
       </div>
 
       <div class="form-group col-sm-12">
-        <button type="submit" class="btn  main-button btn-lg" [disabled] = 'myForm.valid == false' >Make Payment</button>
+        <button type="submit" class="btn  main-button btn-lg" [disabled]='myForm.valid == false'>Make Payment</button>
         <!-- <button *ngIf="paymentType == 'authorizeNet'" type="submit" (click)='authorizeCreditCardMethod(card)' class="btn btn-primary btn-lg">MAKE PAYMENT</button> -->
       </div>
     </form>
