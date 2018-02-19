@@ -39,9 +39,10 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     });
 
 
+
+
     $http.get(constants.SERVER_URL + '/edit/getIPGInfo?appId='+$scope.appId).success(function(data) {
         $scope.paymentData = data;
-        $log.debug($scope.paymentData);
         if($stateParams.item.delivery.method == "Delivery") {
             $scope.deliveryShow = data.cashOnDeliveryEnable;
             $scope.pickupShow = false;
@@ -53,7 +54,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         $scope.stripeShow = data.stripeEnable;
         $scope.braintreeShow = data.braintreeEnable;
         $scope.authorizeNet = data.authorizeNetEnable;
-        $scope.payHere = data.payHereEnable;
+        $scope.payHereShow = data.payHereEnable;
         $scope.payHereMID = data.payHereMerchantId;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
