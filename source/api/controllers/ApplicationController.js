@@ -375,10 +375,10 @@ module.exports = {
                                   if(err) return console.error(err);
                               });
 
-                              fs.readFile(tempAppDirPath +app.id+'src/app/constantsService.js', 'utf-8',
+                              fs.readFile(tempAppDirPath +app.id+'/src/app/constantsService.ts', 'utf-8',
                                   function(err, data) {
                                       if (err) return res.negotiate(err);
-                                      fs.writeFile(tempAppDirPath +app.id+'/src/app/constantsService.js', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
+                                      fs.writeFile(tempAppDirPath +app.id+'/src/app/constantsService.ts', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
                                           if (err) return res.negotiate(err);
                                       });
                                   });
