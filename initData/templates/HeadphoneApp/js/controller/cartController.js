@@ -7,22 +7,28 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $scope.$emit('hideMenu',{});
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
+    $scope.isDisable=true;
+    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
+    if($scope.user){
+        $scope.isDisable=false;
+    }else {
+        $scope.isDisable=true;
+    }
 
+    var path = $location.path();
+    if (path.indexOf('app/cart') != -1){
+        $ionicNavBarDelegate.showBackButton(false);
+    }
+    else{
+        $ionicNavBarDelegate.showBackButton(true);
+    }
+    $scope.$on('$stateChangeStart', function () {
+        $ionicNavBarDelegate.showBackButton(true);
+    });
 
-       var path = $location.path();
-       if (path.indexOf('app/cart') != -1){
-         $ionicNavBarDelegate.showBackButton(false);
-       }
-       else{
-         $ionicNavBarDelegate.showBackButton(true);
-       }
-       $scope.$on('$stateChangeStart', function () {
-          $ionicNavBarDelegate.showBackButton(true);
-        });
-
-       $scope.doSomething = function(){
-            $state.go('app.category');
-       }
+    $scope.doSomething = function(){
+        $state.go('app.category');
+    }
 
     $scope.buttonDisable = function(qty,totalQty,index){
 
@@ -33,9 +39,9 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
         $rootScope.cart.cartItems[index].totWeight = $rootScope.cart.cartItems[index].weight *$rootScope.parseQty;
         //----------------------------------------------------------------------
         if(qty > totalQty && totalQty > 1){
-              $scope.buyButtonDisable = true;
+            $scope.buyButtonDisable = true;
         }else{
-              $scope.buyButtonDisable = false;
+            $scope.buyButtonDisable = false;
         }
     }
 
@@ -44,9 +50,9 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             $scope.countries = res.data;
         });
 
-     $scope.imageURL = constants.SERVER_URL
-            +"/templates/viewImages?userId="
-            +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
+    $scope.imageURL = constants.SERVER_URL
+        +"/templates/viewImages?userId="
+        +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
 
     $scope.cartItems = $rootScope.cart.cartItems;
     $scope.hide = true;
@@ -99,22 +105,27 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
 
     $scope.delivery = function(deliverItems){
 
-        if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId)!==null){
+
+        $state.go('app.deliverDetails',{item:deliverItems});
+
+        /*if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId)!==null){
             $state.go('app.deliverDetails',{item:deliverItems});
         }
         else{
             $scope.status = 'delivery'
             $state.go('app.login',{item:$scope.status});
-        }
+        }*/
     }
     $scope.pickupDetails = function (deliverItems) {
-        if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId)!==null){
+
+        $state.go('app.pickupDetails',{item:deliverItems});
+        /*if(localStorage.getItem('appLocalStorageUser'+$rootScope.appId)!==null){
             $state.go('app.pickupDetails',{item:deliverItems});
         }
         else{
             $scope.status = 'pickUp'
             $state.go('app.login',{item:$scope.status});
-        }
+        }*/
     }
     $scope.pickUp = function (details) {
         $state.go('app.pickup',{
@@ -134,6 +145,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     //get the user's registered address
     $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
+
     // get the shipping options
     $http.get(constants.SERVER_URL + "/edit/getShippingInfo?appId="+$rootScope.appId)
         .success(function (data) {
@@ -150,7 +162,6 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
     $scope.amount = $scope.getTotal();
     $scope.deliver = function(deliverDetails){
 
-
         if(typeof deliverDetails.country == 'undefined'){
             var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
             deliverDetails.name = localData.name;
@@ -160,10 +171,10 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             deliverDetails.city = localData.city;
             deliverDetails.zip = localData.zip;
             deliverDetails.phone = localData.phone;
+
+
         }
-
         $log.debug(deliverDetails);
-
         deliverDetails.method = 'Delivery';
         $state.go('app.shipping',{item:deliverDetails});
     }
