@@ -7,6 +7,7 @@ import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { CurrencyService } from '../../services/currency/currency.service';
 import { ProductsService } from '../../services/products/products.service';
 import * as _ from 'lodash';
+import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-shop',
@@ -28,12 +29,23 @@ export class ShopComponent implements OnInit {
   private colorArray = ["CFBDAC", "D0DDDE", "EEEEEE", "FFDE8B", "DEBBAF", "C6D3E4"]
 
   constructor(private currencyService: CurrencyService, private productService: ProductsService,
-    private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router) {
+    private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
+    private title: TitleService) {
 
     this.array = this.dataService.searchArray;
 
     //use loadash to filter by unique by name
     this.array = _.uniqBy(this.array, 'name');
+
+    this.router.params.subscribe(params => {
+      let catName = params['name'];
+
+      if(catName){
+        this.title.changeTitle(catName);
+      }else{
+        this.title.changeTitle("Store");
+      }
+    }); 
 
   }
 
@@ -49,8 +61,6 @@ export class ShopComponent implements OnInit {
 
     this.currencyService.getCurrencies().subscribe(data => {
       this.currency = data.sign;
-      console.log(this.currency)
-      console.log(data)
     }, error => {
       console.log("Error retrieving currency");
     });
@@ -59,7 +69,6 @@ export class ShopComponent implements OnInit {
       this.catId = params['id']; // --> Name must match wanted parameter
       this.catName = params['name'];
       this.catImage = params['image'];
-      console.log("this.value : " + this.catId);
     });
 
     this.slides = [
@@ -69,7 +78,6 @@ export class ShopComponent implements OnInit {
       this.productService.getProducts().subscribe(data => {
         // Read the result field from the JSON response.
         this.results = data;
-        console.log("this.results  : " + JSON.stringify(this.results));
       },
         error => {
           console.log('Error shop service');
@@ -78,7 +86,6 @@ export class ShopComponent implements OnInit {
       this.productService.getAllProducts().subscribe(data => {
         // Read the result field from the JSON response.
         this.results = data;
-        console.log("this.results  : " + JSON.stringify(this.results));
       },
         error => {
           console.log('Error shop service all');
@@ -89,7 +96,6 @@ export class ShopComponent implements OnInit {
 
   print(test) {
     this.dataService.catId = test.id;
-    console.log('test : ' + JSON.stringify(test));
     this.catName = test.name;
     this.productService.getProducts().subscribe(data => {
       this.results = data;
@@ -102,7 +108,6 @@ export class ShopComponent implements OnInit {
 
     if (index > this.colorArray.length) {
       index = index % this.colorArray.length;
-      // console.log(index);
     }
 
     var color = this.colorArray[index];
@@ -113,7 +118,6 @@ export class ShopComponent implements OnInit {
   navigateProd(val: String, item: any) {
 
     this.productService.getCategoryData(item.childId).subscribe((data: any) => {
-      // console.log(data[0].name);
       this.catName = data[0].name
       this.dataService.data = item;
       this.route.navigate([val, this.catName]);
@@ -121,16 +125,11 @@ export class ShopComponent implements OnInit {
       console.log(err)
     }
 
-    console.log('item : ' + JSON.stringify(item))
-    // console.log("item  : " + JSON.stringify(this.dataService.data));
-
   }
 
   onChange(value: any) {
     console.log('Value changed to', value);
   }
-
-
 
 }
 

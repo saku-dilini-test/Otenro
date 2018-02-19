@@ -148,3 +148,14 @@
     font-size: 16px;
     letter-spacing: 0.5px;
 }
+
+
+.shop {
+  display: flex;
+}
+
+.shop .col-xs-6{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

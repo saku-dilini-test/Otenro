@@ -370,7 +370,8 @@ this.years.push(date++);
 
 
 
-  checkout(data,details) {
+  checkout(data,details,form) {
+    console.log(form);
     this.isSelected = true;
     this.pickupData = {
       item: this.dataService.deliverItems,
@@ -384,7 +385,9 @@ this.years.push(date++);
     setTimeout(() => { this.pay("001"); }, 500);
   };
 
-
+checkForm(asd){
+  this.isSelected = false;
+}
   //------------------------------checkout---------------------------------------
   chk(final) {
 

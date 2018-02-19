@@ -3,6 +3,7 @@ import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { HttpClient } from '@angular/common/http';
 import { AppDataService } from '../../services/appdata-info/appdata-info.service';
+import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'app-policies',
@@ -15,7 +16,9 @@ export class PoliciesComponent implements OnInit {
   private userId = (<any>data).userId;
   private privacyPolicy;
   private returnPolicy;
-  constructor(private http: HttpClient, private appdataService: AppDataService) { }
+  constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {
+    this.title.changeTitle("Privacy Policy");
+  }
 
   ngOnInit() {
 
@@ -27,11 +30,4 @@ export class PoliciesComponent implements OnInit {
         console.log(err);
       });
   }
-
-
-  slides = SLIDES;
-
 }
-
-const SLIDES = [
-  { src: 'http://www.artleathercanada.com/images/1.jpg', title: 'Privacy Policy' }]

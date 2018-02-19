@@ -1,62 +1,10 @@
-/* CUSTOMIZE THE CAROUSEL
--------------------------------------------------- */
-
-/* Carousel base class */
-:host  /deep/ .carousel {
-  margin-bottom: 1.5rem;
+.category a{
+  position: relative;
 }
-/* Since positioning the image, we need to help out the caption */
-:host  /deep/ .carousel-caption {
-  z-index: 10;
-  bottom: 3rem;
-  height: 55%;  
-}
-
-/* Declare heights because of positioning of img element */
-:host  /deep/ .carousel-item {
-  height: calc(100vh - 66px);
-  background-color: #777;
-}
- :host  /deep/ .carousel-item > img {
-    min-width: 100%;
-    object-fit: cover;
-}
-
-@media (max-width: 1199px){
-   :host  /deep/ .carousel-item {
-      height: 500px;
-  }
-
-}
-
-@media (max-width: 991px){
-   :host  /deep/ .carousel-item {
-      height: 350px;
-  }
-}
-
-@media (max-width: 767px){
-   :host  /deep/ .carousel-item{
-      height: 160px;
-      margin-top: 0;
-  }
-
-  :host  /deep/ .carousel-caption {
-    display: none;
-  }
-}
-
-@media (max-width: 480px){
-  :host  /deep/ .carousel-item{
-      height: 150px;
-  }
-}
-/* owl carousel
-------------------------- */
-
-
-:host  /deep/ .owl-item section{
-  text-align:center;
+.category a div{
+  position: absolute;
+  z-index: 1;
+  padding: 10px;
 }
 
 .button-hover {
@@ -116,9 +64,26 @@
   }
 }
 
+@media (max-width: 767px) {
+ .category{
+   margin: 0;
+ }
+ .category div{
+   padding: 0;
+ }
+}
 
 
 
+.featured{
+  display:flex;
+}
+
+.featured .col-sm-6{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 
 

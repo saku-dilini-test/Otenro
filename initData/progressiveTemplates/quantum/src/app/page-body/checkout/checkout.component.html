@@ -64,12 +64,12 @@
 
     <h3 class="col-sm-12 mb-4 main-header-font">Pickup Details</h3>
 
-    <form #myForm="ngForm" (ngSubmit)="signUp(myForm.value)" class="container main-content-font" novalidate>
+    <form name="test" #myForm="ngForm" (ngSubmit)="signUp(myForm.value)" class="container main-content-font" novalidate>
       <!-- <p>Is "myForm" valid? {{myForm.valid}}</p> -->
       <div class="form-group">
         <label for="name" class="col-2 col-form-label">Name</label>
         <div class="col-10">
-          <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" type="text" #name='ngModel' name="name" id="name" placeholder="Arstina"
+          <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" type="text" #name='ngModel' (ngModelChange)="checkForm($event)" name="name" id="name" placeholder="Arstina"
             ngModel required>
           <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
             <div [hidden]="!name.hasError('required')">First Name is required</div>
@@ -81,7 +81,7 @@
       <div class="form-group">
         <label for="pkPhone" class="col-2 col-form-label">Phone Number</label>
         <div class="col-10">
-          <input class="form-control" #pkPhone='ngModel' type="tel" id="pkPhone" name="pkPhone" pattern="\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|
+          <input class="form-control" #pkPhone='ngModel' (ngModelChange)="checkForm($event)" type="tel" id="pkPhone" name="pkPhone" pattern="\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|
           2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|
           4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$" name="phone" placeholder="0712345678"
             ngModel required>
@@ -94,10 +94,10 @@
 
       <div class="col-sm-12" *ngIf="myForm.valid">
         <h4 class="my-3 main-header-font">Select a Location</h4>
-        <div class="row main-content-font">
+        <div class="row main-content-font" >
           <div class="radio" *ngFor="let pick of pickup, let idx = index">
             <label>
-              <input  #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx],myForm.value)'>
+              <input  #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx],myForm.value,myForm.valid)'>
               <b>{{pick.locationName}}</b>
               <div>{{pick.number}}, {{pick.streetAddress}}, {{pick.city}}, {{pick.postalCode}}, {{pick.country}}.</div>
             </label>
