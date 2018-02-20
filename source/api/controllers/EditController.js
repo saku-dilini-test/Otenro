@@ -9,6 +9,7 @@ var fs = require('fs-extra'),
     xml2js = require('xml2js'),
     zipFolder = require('zip-folder');
 
+var rimraf = require('rimraf');
 
 
 module.exports = {
@@ -33,7 +34,9 @@ module.exports = {
     },
 
     deleteSelectedApp : function(req,res){
+
         var appId = req.param('appId');
+        var tempNew = req.param('isNew');
         var searchApp = {
             id: appId
         };
@@ -45,24 +48,35 @@ module.exports = {
                         if (err) return res.negotiate(err);
 
                         var resourcesPath  = [];
-                        var applicationPath = config.APP_FILE_SERVER + req.param('userId') + '/templates/' + appId + '/';
-                        var appPath = config.APP_FILE_SERVER + req.param('userId') + '/templates/' + appId + '/';
+                        var applicationPath;
+                        var appPath;
+                        if(tempNew == 'true'){
+                            applicationPath= config.APP_FILE_SERVER + req.param('userId') + '/progressiveTemplates/' + appId;
+                            appPath= config.ME_SERVER+ req.param('userId') + '/progressiveTemplates/' + appId;
 
+                        }else{
+                            applicationPath= config.APP_FILE_SERVER + req.param('userId') + '/templates/' + appId + '/';
+                            appPath= config.ME_SERVER+ req.param('userId') + '/templates/' + appId + '/';
+                        }
                         resourcesPath.push(applicationPath);
                         resourcesPath.push(appPath);
 
                         resourcesPath.forEach(function(path){
+                        console.log(path)
                             fs.stat(path, function (err, fileStat) {
                                 if (err) {
                                     if (err.code == 'ENOENT') {
                                         sails.log.info('Does not exist.');
                                     }
                                 } else {
-                                    if (fileStat.isFile()) {
-                                        fs.unlinkSync(path);
-                                    } else if (fileStat.isDirectory()) {
-                                        sails.log.info('Directory found.');
-                                    }
+//                                    if (fileStat.isFile()) {
+                                   rimraf(path, function () {
+                                       console.log('done');
+                                   });
+
+                            //     } else if (fileStat.isDirectory()) {
+//                                        sails.log.info('Directory found.');
+//                                    }
                                 }
                             });
                         });

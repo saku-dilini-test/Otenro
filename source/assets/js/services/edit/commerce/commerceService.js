@@ -308,7 +308,7 @@
                     controllerAs: 'dialogCtrl',
                     controller: function($mdDialog,appEditResource,toastr,$rootScope,$state){
                         this.confirm = function click(){
-                            appEditResource.deleteSelectedApp({appId:$rootScope.appId}).success(function(data) {
+                            appEditResource.deleteSelectedApp({appId:$rootScope.appId,isNew:$rootScope.tempNew,userId:$rootScope.userId}).success(function(data) {
                                 if (data.massage){
                                     toastr.success('You cant delete this app because this app already have send for publishing ', 'Sorry!', {
                                         closeButton: true
