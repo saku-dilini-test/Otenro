@@ -8,13 +8,13 @@ NODE='c:/xampp/htdocs/meServer/node_modules/';
 APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
 
 #stag
-#MESERVER='https://testcdn.otenro.com/temp/';
-#NODE='https://testcdn.otenro.com/node_modules';
+#MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
+#NODE='/home/admin/web/testcdn.otenro.com/public_html/node_modules/';
 #APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
 
 #prod
-#MESERVER='https://cdn.otenro.com/temp/';
-#NODE='https://cdn.otenro.com/node_modules';
+#MESERVER='/home/admin/web/cdn.otenro.com/public_html/temp/';
+#NODE='/home/admin/web/cdn.otenro.com/public_html/node_modules/';
 #APPFILESERVER='/home/otenro/appFileServer/';
 
 ENV='dev'   #this is for development
@@ -107,7 +107,7 @@ cd progressiveTemplates/
 cd ../../../
 cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
 cp -r ./meServerFiles/unknownUser $MESERVER
-#cp -r ./meServerFiles/node_modules $NODE
+cp -r ./meServerFiles/node_modules $NODE
 
 
 
