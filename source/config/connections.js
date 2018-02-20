@@ -65,6 +65,14 @@ module.exports.connections = {
     database: 'appBuilder'
   },
 
+  stagingMongodbServer: {
+    adapter: 'sails-mongo',
+    host: 'localhost',
+    port: 27017,
+    // user: 'username',
+    // password: 'password',
+    database: 'otenroTest'
+  },
   productionMongodbServer: {
     adapter: 'sails-mongo',
     host: 'localhost',
