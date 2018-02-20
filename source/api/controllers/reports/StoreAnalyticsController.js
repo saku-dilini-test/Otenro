@@ -122,7 +122,7 @@ module.exports = {
                 {
 
                     $group : {
-                        _id:{country:"$deliveryCountry"}, totalSales: { $sum: "$amount"}, count: { $sum: 1 },taxTotal: { $sum: "$tax"}, currency: { $first: "$currency" }
+                        _id:{country: {$ifNull : ["$deliveryCountry", "$pickUp.country"]}}, totalSales: { $sum: "$amount"}, count: { $sum: 1 },taxTotal: { $sum: "$tax"}, currency: { $first: "$currency" }
                     }
                 }
             ]).toArray(function (err, results) {
@@ -177,7 +177,8 @@ module.exports = {
                 {
 
                     $group : {
-                        _id:{country:"$deliveryCountry",shippingOpt:"$shippingOpt"}, totalShippingCost: { $sum: "$shippingCost"}, currency: { $first: "$currency" }
+                        _id:{country: { $ifNull: ["$deliveryCountry", "$pickUp.country"]},shippingOpt: { $ifNull: ["$shippingOpt", "$pickUp.shippingOption" ]}}, totalShippingCost: { $sum: { $ifNull :["$shippingCost", "$pickUp.cost"]}}, currency: { $first: "$currency" }
+                        // _id:{country:"$deliveryCountry",shippingOpt:"$shippingOpt"}, totalShippingCost: { $sum: "$shippingCost"}, currency: { $first: "$currency" }
                     }
                 }
             ]).toArray(function (err, results) {
