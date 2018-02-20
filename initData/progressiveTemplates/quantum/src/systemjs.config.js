@@ -24,7 +24,7 @@
       "sourceMap": true,
       "declaration": false,
       "typeRoots": [
-        "/meServer/node_modules/@types"
+        "../../../../../node_modules/@types"
       ],
     },
     meta: {
@@ -38,7 +38,7 @@
     },
     paths: {
       // paths serve as alias
-      'npm:': '/meServer/node_modules/'
+      'npm:': '../../../../../node_modules/'
     },
     // map tells the System loader where to look for things
     // defaultJSExtensions: true,
