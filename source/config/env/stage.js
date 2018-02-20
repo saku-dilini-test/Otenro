@@ -43,7 +43,7 @@ module.exports = {
 
   /** ****** Custom Config ****** **/
   // HOST URL
-  HOST_URL : 'https://testdashboard.otenro.com',
+  HOST_URL : 'https://testdashboard.otenro.com:1448',
   // ME SERVER Config
   ME_SERVER_URL : 'https://testcdn.otenro.com/temp/',
   ME_SERVER : '/home/admin/web/testcdn.otenro.com/public_html/temp/',
