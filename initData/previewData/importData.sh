@@ -3,14 +3,14 @@ echo  'start....'
 
 #leave and comment other env
 #local
-#MESERVER='/var/www/html/meServer/temp';
-#NODE='/var/www/html/meServer/node_modules';
-#APPFILESERVER='/home/dilakshan/Desktop/appFileServer/';
+MESERVER='c:/xampp/htdocs/meServer/temp/';
+NODE='c:/xampp/htdocs/meServer/node_modules/';
+APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
 
 #stag
-MESERVER='https://testcdn.otenro.com/temp/';
-NODE='https://testcdn.otenro.com/node_modules';
-APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
+#MESERVER='https://testcdn.otenro.com/temp/';
+#NODE='https://testcdn.otenro.com/node_modules';
+#APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
 
 #prod
 #MESERVER='https://cdn.otenro.com/temp/';
@@ -26,11 +26,10 @@ if [ $ENV == 'dev' ]
 then
 	DB='appBuilder'
 	serverUrl='http://localhost:1337'
-
-else if [ $ENV == 'stag' ]
+elif [ $ENV == 'stag' ]
+then
 	DB='otenroTest'
 	serverUrl='https://testdashboard.otenro.com'
-
 else
 	DB='otenro'
 	serverUrl='https://dashboard.otenro.com'
@@ -95,18 +94,20 @@ cd meServerFiles/unknownUser/templates/
        cd -
     done
 
-cd meServerFiles/unknownUser/progressiveTemplates/
+cd ../
+pwd
+cd progressiveTemplates/
    for d in ./*;do
        cd $d/src/app/
        ls
-       sed -i "s@serverUrl@$serverUrl@" constantsService.js
+       sed -i "s@serverUrl@$serverUrl@" constantsService.ts
        cd -
     done
 
 cd ../../../
 cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
 cp -r ./meServerFiles/unknownUser $MESERVER
-cp -r ./meServerFiles/node_modules $NODE
+#cp -r ./meServerFiles/node_modules $NODE
 
 
 
