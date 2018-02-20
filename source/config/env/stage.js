@@ -45,7 +45,7 @@ module.exports = {
   // HOST URL
   HOST_URL : 'https://testdashboard.otenro.com:1448',
   // ME SERVER Config
-  ME_SERVER_URL : 'https://testcdn.otenro.com:1448/temp/',
+  ME_SERVER_URL : 'https://testdashboard.otenro.com:1448/temp/',
   ME_SERVER : '/home/admin/web/testcdn.otenro.com/public_html/temp/',
   ME_SERVER_PORT : 8081,
   // APP FILE SERVER Config
