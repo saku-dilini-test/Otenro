@@ -41,11 +41,11 @@ module.exports.cors = {
 
   // Which methods should be allowed for CORS requests?  This is only used
   // in response to preflight requests (see article linked above for more info)
-  methods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
+  // methods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
 
   // Which headers should be allowed for CORS requests?  This is only used
   // in response to preflight requests.
  // headers: 'content-type'
-  headers: 'content-type,Authorization,Access-Control-Allow-Origin'
+ //    headers: 'content-type,Authorization,Access-Control-Allow-Origin'
 
 };
