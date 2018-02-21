@@ -11,7 +11,10 @@
             <i class="fa fa-bars"></i>
           </button>
           <div class="mobile-title visible-xs">{{title}}</div>
-          <div class="mobile-cart visible-xs"><i class="fa fa-shopping-cart" (click)="navigate('cart','Shopping Cart')"></i> <span class="badge main-button">{{cartNo}}</span></div>
+          <div class="mobile-cart visible-xs">
+            <i class="fa fa-shopping-cart" (click)="navigate('cart','Shopping Cart')"></i>
+            <span class="badge main-button">{{cartNo}}</span>
+          </div>
         </div>
         <div class="navbar-1">
           <ul class="site-navigation nav navbar-nav">
@@ -42,35 +45,35 @@
               <a class="nav-link" (click)="navigate('cart')">Cart</a>
             </li>
             <li *ngIf="loginStatus">
-              <a class="nav-link" (click)="logout()" >Log Out</a>
+              <a class="nav-link" (click)="logout()">Log Out</a>
             </li>
             <li *ngIf="!loginStatus">
-              <a class="nav-link"(click)="navigate('login/home')" >Sign In</a>
+              <a class="nav-link" (click)="navigate('login/home')">Sign In</a>
             </li>
             <!--<li>-->
-              <!--<div class="row social-header">-->
-                <!--<div class="col-sm-4">-->
-                  <!--<div class="text-center">-->
-                    <!--<a class="social" href="index.html">-->
-                      <!--<span class="fa fa-twitter icon-sm"></span>-->
-                    <!--</a>-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div class="col-sm-4">-->
-                  <!--<div class="text-center">-->
-                    <!--<a class="social" href="index.html">-->
-                      <!--<span class="fa fa-facebook icon-sm"></span>-->
-                    <!--</a>-->
-                  <!--</div>-->
-                <!--</div>-->
-                <!--<div class="col-sm-4">-->
-                  <!--<div class="text-center">-->
-                    <!--<a class="social" href="index.html">-->
-                      <!--<span class="fa fa-instagram icon-sm"></span>-->
-                    <!--</a>-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
+            <!--<div class="row social-header">-->
+            <!--<div class="col-sm-4">-->
+            <!--<div class="text-center">-->
+            <!--<a class="social" href="index.html">-->
+            <!--<span class="fa fa-twitter icon-sm"></span>-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-sm-4">-->
+            <!--<div class="text-center">-->
+            <!--<a class="social" href="index.html">-->
+            <!--<span class="fa fa-facebook icon-sm"></span>-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-sm-4">-->
+            <!--<div class="text-center">-->
+            <!--<a class="social" href="index.html">-->
+            <!--<span class="fa fa-instagram icon-sm"></span>-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
             <!--</li>-->
           </ul>
         </div>
@@ -102,8 +105,11 @@
             <li>
               <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('cart', 'Shopping Cart')">Cart</a>
             </li>
-            <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('login/home','Login')">Sign In</a>
+            <li *ngIf="loginStatus">
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="logout()">Log Out</a>
+            </li>
+            <li *ngIf="!loginStatus">
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('login/home')">Sign In</a>
             </li>
           </ul>
         </div>
