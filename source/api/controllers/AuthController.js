@@ -126,6 +126,9 @@ module.exports = {
                       });
                   });
               }else {
+                if ((JSON.parse(body).success!== undefined) && (JSON.parse(body).success==false)) {
+                  return res.status(409).json({error: 'The reCAPTCHA verification failed.'})
+                }
                   return res.status(409).json({error: 'Registration Error'})
               }
           });
