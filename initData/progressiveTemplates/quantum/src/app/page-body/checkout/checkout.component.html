@@ -72,7 +72,7 @@
       <div class="form-group">
         <label>First Name:</label>
         <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
-        <input id=fname class="form-control" type="text" placeholder="John" [formControl]="complexForm.controls['fName']" (ngModelChange)="checkForm($event)" required>
+        <input id=fname class="form-control" type="text" placeholder="Arstina" [formControl]="complexForm.controls['fName']" (ngModelChange)="checkForm($event)" required>
 
         <div *ngIf="complexForm.controls['fName'].hasError('required')
         && complexForm.controls['fName'].touched" class="alert alert-danger">
@@ -91,7 +91,7 @@
       <div class="form-group">
         <label>Last Name:</label>
         <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
-        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['lName']" (ngModelChange)="checkForm($event)">
+        <input class="form-control" type="text" placeholder="kale" [formControl]="complexForm.controls['lName']" (ngModelChange)="checkForm($event)">
 
         <div *ngIf="complexForm.controls['lName'].hasError('required')
         && complexForm.controls['lName'].touched" class="alert alert-danger">
@@ -110,7 +110,7 @@
       <div class="form-group">
         <label>Email:</label>
         <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
-        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['email']" (ngModelChange)="checkForm($event)">
+        <input class="form-control" type="text" placeholder="you@example.com" [formControl]="complexForm.controls['email']" (ngModelChange)="checkForm($event)">
 
         <div *ngIf="complexForm.controls['email'].hasError('required')
         && complexForm.controls['email'].touched" class="alert alert-danger">
@@ -124,21 +124,21 @@
       <div class="form-group">
         <label>Phone:</label>
         <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
-        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['phone']" (ngModelChange)="checkForm($event)">
+        <input class="form-control" type="text" placeholder="0712345678" [formControl]="complexForm.controls['phone']" (ngModelChange)="checkForm($event)">
 
         <div *ngIf="complexForm.controls['phone'].hasError('required')
         && complexForm.controls['phone'].touched" class="alert alert-danger">
           You must include a Phone Number.
         </div>
         <div *ngIf = "!complexForm.controls['phone'].valid" class="alert alert-danger">
-            Enter a valid Phone Number (ex: 94712345678)
+            Enter a valid Phone Number (ex: +94123456789)
         </div>
 
       </div>
       <div class="form-group">
         <label>House/Apartment Number:</label>
         <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
-        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['streetNo']" (ngModelChange)="checkForm($event)">
+        <input class="form-control" type="text" placeholder="#244 A" [formControl]="complexForm.controls['streetNo']" (ngModelChange)="checkForm($event)">
 
         <div *ngIf="complexForm.controls['streetNo'].hasError('required')
         && complexForm.controls['streetNo'].touched" class="alert alert-danger">
@@ -149,7 +149,7 @@
       <div class="form-group">
         <label>street Name:</label>
         <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
-        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['streetName']" (ngModelChange)="checkForm($event)">
+        <input class="form-control" type="text" placeholder="Your Road" [formControl]="complexForm.controls['streetName']" (ngModelChange)="checkForm($event)">
 
         <div *ngIf="complexForm.controls['streetName'].hasError('required')
         && complexForm.controls['streetName'].touched" class="alert alert-danger">
@@ -159,7 +159,7 @@
       <div class="form-group">
         <label>City:</label>
         <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
-        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['city']" (ngModelChange)="checkForm($event)">
+        <input class="form-control" type="text" placeholder="Your City" [formControl]="complexForm.controls['city']" (ngModelChange)="checkForm($event)">
 
         <div *ngIf="complexForm.controls['city'].hasError('required')
         && complexForm.controls['city'].touched" class="alert alert-danger">
@@ -170,7 +170,7 @@
       <div class="form-group">
         <label>Postal Code/ZIP:</label>
         <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
-        <input class="form-control" type="text" placeholder="lol" [formControl]="complexForm.controls['zip']" (ngModelChange)="checkForm($event)">
+        <input class="form-control" type="text" placeholder="70000" [formControl]="complexForm.controls['zip']" (ngModelChange)="checkForm($event)">
 
         <div *ngIf="complexForm.controls['zip'].hasError('required')
         && complexForm.controls['zip'].touched" class="alert alert-danger">
