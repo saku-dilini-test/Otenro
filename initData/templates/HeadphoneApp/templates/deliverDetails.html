@@ -6,7 +6,7 @@
             </div>
 
 
-            <ion-checkbox ng-model="details.location"  class="checkbox-dark" ng-true-value="'old'">
+            <ion-checkbox  ng-model="details.location" ng-disabled="isDisable" checked="true" class="checkbox-dark" ng-true-value="'old'">
                 <label >
                     <h3>Home</h3>
                     <div ng-if="user.name">{{user.name}}</div>
@@ -14,17 +14,25 @@
                 </label>
             </ion-checkbox >
 
-            <ion-checkbox ng-model="details.location"  class="checkbox-dark" ng-true-value="'New'">
+
+
+
+            <ion-checkbox  ng-model="details.location"  class="checkbox-dark" ng-true-value="'New'">
                 <label >
                     <h3>New Location</h3>
                 </label>
             </ion-checkbox>
+
 
             <form name="delivery" novalidate>
                 <div class="list"   ng-if="details.location == 'New'">
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Name</span>
                         <input type="text" ng-model="details.name" placeholder="Name" required>
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Email</span>
+                        <input type="email" ng-model="details.Email" placeholder="Email" required>
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Street Number</span>

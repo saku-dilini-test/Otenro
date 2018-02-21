@@ -5,14 +5,14 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("analyticsCtrl", [
-        '$scope', '$rootScope', '$mdDialog','toastr','commerceService','$http',
+        '$scope', '$rootScope', '$mdDialog','toastr','commerceService','$http','currencyService',
         analyticsCtrl]);
-    function analyticsCtrl($scope,$rootScope,$mdDialog,toastr,commerceService,$http) {
+    function analyticsCtrl($scope,$rootScope,$mdDialog,toastr,commerceService,$http,currencyService) {
         console.log("analytics controller working")
 
         var SALES = 1;
-        var TAX = 2;  
-        var SHIPPING = 3;      
+        var TAX = 2;
+        var SHIPPING = 3;
 
         var emptyChart = {
             labels : [""],
@@ -34,6 +34,14 @@
         }
 
         $scope.appId_ =$rootScope.appId;
+        currencyService.getCurrency()
+            .success(function (result) {
+                {
+                    $scope.currency = result;
+                }
+
+            }).error(function (error) {
+        })
 
         $scope.dataCount=[];
 
@@ -54,6 +62,13 @@
         $scope.clearSearchTerm = function() {
             $scope.searchTerm = '';
         };
+
+
+        $scope.countrySearch= function (country) {
+            alert($scope.countryName);
+            $scope.countryName = country;
+        };
+
 
         $scope.getSalesSummary  = function (data) {
             var fromDate ;
@@ -81,7 +96,7 @@
                 toDate=null;
                 toastr.error('Please fill all fields', 'Warning', {
                     closeButton: true
-                });         
+                });
             }
 
             if(fromDate&&toDate&&selectedData.length > 0){
@@ -93,10 +108,10 @@
                 }else {
 
                     var postData = { appId: $rootScope.appId,
-                             selectedTab : SALES,
-                             selectedProducts: data.selectedProducts, 
-                             fromDate: data.fromDate,
-                             toDate: data.toDate };   
+                        selectedTab : SALES,
+                        selectedProducts: data.selectedProducts,
+                        fromDate: data.fromDate,
+                        toDate: data.toDate };
 
                     commerceService.getSalesSummary(postData)
                         .success(function (result) {
@@ -148,7 +163,7 @@
                 });
 
 
-            }         
+            }
 
             if(fromDate!=null&&toDate!=null) {
 
@@ -159,10 +174,10 @@
                     });
                 } else {
 
-                    var postData = { appId: $rootScope.appId, 
-                             selectedTab : TAX,
-                             fromDate: data.fromDate,
-                             toDate: data.toDate }   
+                    var postData = { appId: $rootScope.appId,
+                        selectedTab : TAX,
+                        fromDate: data.fromDate,
+                        toDate: data.toDate }
 
                     commerceService.getTaxSummary(postData)
                         .success(function (result) {
@@ -224,10 +239,10 @@
                         closeButton: true
                     });
                 } else {
-                    var postData = { appId: $rootScope.appId, 
-                                     selectedTab : SHIPPING,
-                                     fromDate: data.fromDate,
-                                     toDate: data.toDate }                       
+                    var postData = { appId: $rootScope.appId,
+                        selectedTab : SHIPPING,
+                        fromDate: data.fromDate,
+                        toDate: data.toDate }
 
                     commerceService.getShippingSummary(postData)
                         .success(function (result) {

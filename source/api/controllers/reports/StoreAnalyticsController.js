@@ -268,7 +268,7 @@ module.exports = {
                 //shipping
 
                 reportData.push(" , "+"Country"+","+ "Customer" +"," + "Order ID" + "," +
-                    "Date" + ","+ "Amount"+","+"," +"Shipping Type" +","+ "Shipping Cost" +'\r\n');
+                    "Date" + ","+ "Amount"+"," +"Shipping Type" +","+ "Shipping Cost" +'\r\n');
                 Order.forEach(function(order) {
 
                             var data = order.deliveryCountry+","+order.customerName + ","+

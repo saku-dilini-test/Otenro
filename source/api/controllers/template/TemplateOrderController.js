@@ -52,7 +52,7 @@ module.exports = {
         data['paymentStatus'] = 'Pending';
         data['fulfillmentStatus'] = 'Pending';
 
-        sails.log.info(data);
+        console.log(JSON.stringify(data));
         if(data.pickupId == null){
             ApplicationOrder.create(data).exec(function (err, order) {
                 sails.log.info(order);
