@@ -1,5 +1,10 @@
 // used this quary for update the databases of prod and preprod.(already updated and changed in dataFiles too)
 
-//sprint 6
-drop templatemetadata
+//sprint 6 - shashan
+db.templatemetadata.drop()
 mongoimport --db $DB --collection templatemetadata --file dataFiles/templatemetadata.json
+
+//sprint 7 -shashan
+
+db.template.drop()
+mongoimport --db $DB --collection template --file dataFiles/template.json
