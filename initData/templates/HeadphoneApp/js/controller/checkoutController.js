@@ -15,6 +15,7 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
     if(typeof $scope.shippingCost == 'undefined'){
         $scope.hideShipping = false;
     }
+    $scope.isEnable=false;
 
     var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
@@ -43,40 +44,40 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
             $scope.isApplyShippingCharge = data[0].isApplyShippingCharge;
             $scope.hide = false;
         }
-            var total = 0;
-            var amount = 0;
-            var tax = 0;
-            for(var i = 0; i < $scope.cartItems.length; i++){
-                var product = $scope.cartItems[i];
-                amount = product.total;
-                total += (amount*product.qty);
-            }
+        var total = 0;
+        var amount = 0;
+        var tax = 0;
+        for(var i = 0; i < $scope.cartItems.length; i++){
+            var product = $scope.cartItems[i];
+            amount = product.total;
+            total += (amount*product.qty);
+        }
 
-            if($scope.isApplyShippingCharge == true && $stateParams.item.delivery.location != "Pick up"){
+        if($scope.isApplyShippingCharge == true && $stateParams.item.delivery.location != "Pick up"){
 
-                var shipping = parseInt($scope.shippingCost);
-                total = total + shipping;
-                tax = total * $scope.tax / 100;
-                $scope.taxTotal = total * $scope.tax / 100;
-                if (tax > 0) {
-                    total = total + tax;
-                    $scope.totalPrice = total;
-                } else {
-                    $scope.cart.totalPrice = total;
-                }
-            }else {
-                tax = total * $scope.tax / 100;
-                $scope.taxTotal = total * $scope.tax / 100;
-                if(typeof $scope.shippingCost == "undefined"){
-                    $scope.shippingCost = 0;
-                }
-                if (tax > 0) {
-                    total = total + tax;
-                    $scope.totalPrice = total + parseInt($scope.shippingCost);
-                } else {
-                    $scope.totalPrice = total + parseInt($scope.shippingCost);
-                }
+            var shipping = parseInt($scope.shippingCost);
+            total = total + shipping;
+            tax = total * $scope.tax / 100;
+            $scope.taxTotal = total * $scope.tax / 100;
+            if (tax > 0) {
+                total = total + tax;
+                $scope.totalPrice = total;
+            } else {
+                $scope.cart.totalPrice = total;
             }
+        }else {
+            tax = total * $scope.tax / 100;
+            $scope.taxTotal = total * $scope.tax / 100;
+            if(typeof $scope.shippingCost == "undefined"){
+                $scope.shippingCost = 0;
+            }
+            if (tax > 0) {
+                total = total + tax;
+                $scope.totalPrice = total + parseInt($scope.shippingCost);
+            } else {
+                $scope.totalPrice = total + parseInt($scope.shippingCost);
+            }
+        }
 
     });
 
@@ -89,16 +90,17 @@ mobileApp.controller('checkoutCtrl', function($scope,$rootScope,$http,$state,$st
     });
 
     //get the user's registered address
-    $scope.user = angular.fromJson(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
+
 
 
     $scope.pay = function(promotionCode){
+
 
         var payInfo = $stateParams.item;
         payInfo.amount = $scope.totalPrice;
         payInfo.taxTotal = $scope.taxTotal;
         payInfo.cart = $rootScope.cart.cartItems;
-        payInfo.userEmail = localData.email;
+        payInfo.userEmail = localData ? localData.email :$stateParams.item.Email ;
         payInfo.promotionCode = promotionCode;
         $state.go('app.payment',{item:payInfo});
     }

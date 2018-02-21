@@ -47,7 +47,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
         $scope.stripeShow = data.stripeEnable;
         $scope.braintreeShow = data.braintreeEnable;
         $scope.authorizeNet = data.authorizeNetEnable;
-        $scope.payHere = data.payHereEnable;
+        $scope.payHereShow = data.payHereEnable;
         $scope.payHereMID = data.payHereMerchantId;
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
