@@ -75,6 +75,7 @@ export class ProductComponent implements OnInit {
                 this.selection1 = [];
                 this.selection2 = [];
                 this.selection3 = [];
+                this.selection.push({ 'vType': 'Please Select' });
                 for (var i = 0; i < this.foodInfo.variants.length; i++) {
                     this.selection.push({ 'vType': this.foodInfo.variants[i].selection[0].vType });
                 }
@@ -92,17 +93,17 @@ export class ProductComponent implements OnInit {
 
     }
 
-    changeVariant(variant) {
+    changeVariant(variant1) {
         this.lockBuyButton = false;
         this.selection1 = [];
         this.selection2 = [];
         this.selection3 = [];
 
-
-        this.selectedVariant1 = variant;
-
+        if(variant1){
+        this.selectedVariant1 = variant1;
+        this.selectedVariant2 = null;
         this.selectedVariant.buyQuantity = '';
-
+        }
 
         if (this.foodInfo.selection.length == 1) {
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
@@ -113,24 +114,31 @@ export class ProductComponent implements OnInit {
                 }
             }
         } else {
+
+            if(variant1 == "Please Select"){
+            }else{
+                this.selection1.push({ 'vType': 'Please Select' });
+            }
+
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[0].vType == variant) {
+                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
 
                     this.selection1.push({ 'vType': this.foodInfo.variants[i].selection[1].vType });
                 }
             }
             this.selection1 = _.uniqBy(this.selection1, 'vType');
+
         }
 
     };
 
-    changeVariant2(variant) {
+    changeVariant2(variant2) {
         this.lockBuyButton = false;
         this.selection2 = [];
         this.selection3 = [];
 
-        if (variant) {
-            this.selectedVariant2 = variant;
+        if (variant2) {
+            this.selectedVariant2 = variant2;
             this.selectedVariant.buyQuantity = '';
 
         }
@@ -141,13 +149,13 @@ export class ProductComponent implements OnInit {
                     this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
                     this.selectedVariant = this.foodInfo.variants[i];
                     this.lockBuyButton = true;
-
                 }
             }
 
         } else {
+            this.selection2.push({ 'vType': 'Please Select' });
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[1].vType == variant && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
+                if (this.foodInfo.variants[i].selection[1].vType == variant2 && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selection2.push({ 'vType': this.foodInfo.variants[i].selection[2].vType });
                 }
             }
@@ -157,12 +165,12 @@ export class ProductComponent implements OnInit {
 
     };
 
-    changeVariant3(variant) {
+    changeVariant3(variant3) {
         this.lockBuyButton = false;
         this.selection3 = [];
 
-        if (variant) {
-            this.selectedVariant3 = variant;
+        if (variant3) {
+            this.selectedVariant3 = variant3;
             this.selectedVariant.buyQuantity = '';
         }
 
@@ -173,21 +181,21 @@ export class ProductComponent implements OnInit {
                     this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3) {
                     this.selectedVariant = this.foodInfo.variants[i];
                     this.lockBuyButton = true;
-
                 }
             }
         } else {
+            this.selection3.push({ 'vType': 'Please Select' });
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
-                if (this.foodInfo.variants[i].selection[2].vType == variant && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 && this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
+                if (this.foodInfo.variants[i].selection[2].vType == variant3 && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 && this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
                     this.selection3.push({ 'vType': this.foodInfo.variants[i].selection[3].vType });
                 }
             }
             this.selection3 = _.uniqBy(this.selection3, 'vType');
         }
     };
-    changeVariant4(variant) {
-        if (variant) {
-            this.selectedVariant4 = variant;
+    changeVariant4(variant4) {
+        if (variant4) {
+            this.selectedVariant4 = variant4;
             this.selectedVariant.buyQuantity = '';
 
         }
