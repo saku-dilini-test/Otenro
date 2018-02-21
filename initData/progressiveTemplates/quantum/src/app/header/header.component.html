@@ -11,10 +11,7 @@
             <i class="fa fa-bars"></i>
           </button>
           <div class="mobile-title visible-xs">{{title}}</div>
-          <div class="mobile-cart visible-xs">
-            <i class="fa fa-shopping-cart" (click)="navigate('cart','Shopping Cart')"></i>
-            <span class="badge main-button">{{cartNo}}</span>
-          </div>
+          <div class="mobile-cart visible-xs"><i class="fa fa-shopping-cart" data-toggle="collapse" data-target=".navbar-collapse" (click)="navigate('cart','Shopping Cart')"></i> <span class="badge main-button" data-toggle="collapse" data-target=".navbar-collapse" (click)="navigate('cart','Shopping Cart')">{{cartNo}}</span></div>
         </div>
         <div class="navbar-1">
           <ul class="site-navigation nav navbar-nav">
