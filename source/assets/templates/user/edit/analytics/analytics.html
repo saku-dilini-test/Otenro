@@ -134,7 +134,7 @@
                                             <th>Tax {{ taxList[0].currency }}</th>
                                         </tr>
 
-                                        <tr ng-repeat="tax in taxList">
+                                        <tr ng-repeat="tax in taxList| filter: {_id: { country : tax.country }}">
                                             <td>{{ tax._id.country }}</td>
                                             <td>{{ tax.totalSales }}</td>
                                             <td>{{ tax.taxTotal }}</td>
@@ -198,7 +198,7 @@
                             </div>
                             <md-input-container class="margin-horizontal" flex="33">
                                 <label>Search Country</label>
-                                <input type="text" ng-model="shipping.country"  ng-change="countrySearch(shipping.country)">
+                                <input type="text" ng-model="shipping.country" >
                             </md-input-container>
                             <div layout-gt-xs="row" class="margin-horizontal">
                                 <div flex="50">
@@ -209,7 +209,7 @@
                                             <th>Shipping {{ shppingList[0].currency }}</th>
                                         </tr>
 
-                                        <tr ng-repeat="shipping in shppingList | filter : {'country' :countryName}">
+                                        <tr ng-repeat="shipping in shppingList | filter : {_id:{country: shipping.country}}">
                                             <td>{{ shipping._id.country }}</td>
                                             <td>{{ shipping._id.shippingOpt }}</td>
                                             <td>{{ shipping.totalShippingCost }}</td>

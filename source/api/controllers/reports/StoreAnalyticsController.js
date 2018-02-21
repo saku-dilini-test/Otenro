@@ -122,7 +122,7 @@ module.exports = {
                 {
 
                     $group : {
-                        _id:{country:"$deliveryCountry"}, totalSales: { $sum: "$amount"}, count: { $sum: 1 },taxTotal: { $sum: "$tax"}, currency: { $first: "$currency" }
+                        _id:{country: {$ifNull : ["$deliveryCountry", "$pickUp.country"]}}, totalSales: { $sum: "$amount"}, count: { $sum: 1 },taxTotal: { $sum: "$tax"}, currency: { $first: "$currency" }
                     }
                 }
             ]).toArray(function (err, results) {
@@ -177,7 +177,8 @@ module.exports = {
                 {
 
                     $group : {
-                        _id:{country:"$deliveryCountry",shippingOpt:"$shippingOpt"}, totalShippingCost: { $sum: "$shippingCost"}, currency: { $first: "$currency" }
+                        _id:{country: { $ifNull: ["$deliveryCountry", "$pickUp.country"]},shippingOpt: { $ifNull: ["$shippingOpt", "$pickUp.shippingOption" ]}}, totalShippingCost: { $sum: { $ifNull :["$shippingCost", "$pickUp.cost"]}}, currency: { $first: "$currency" }
+                        // _id:{country:"$deliveryCountry",shippingOpt:"$shippingOpt"}, totalShippingCost: { $sum: "$shippingCost"}, currency: { $first: "$currency" }
                     }
                 }
             ]).toArray(function (err, results) {
@@ -258,9 +259,21 @@ module.exports = {
                 reportData.push(" , "+"Country"+","+ "Customer" +"," +
                     "Order ID" + "," +  "Date" + ","+ "Amount"+ ","+"Tax"+'\r\n');
                 Order.forEach(function(order) {
-                    var data = order.deliveryCountry+","+order.customerName +
-                        ","+ order.id + ","+ order.updatedAt+","+order.amount+","+order.tax+'\r\n';
-                    reportData.push(data);
+
+                    var data = null;
+                    if (order.shippingOpt != null) {
+                        if (order.shippingOpt == "Weight Based" || order.shippingOpt == "Flat Rate"){
+                            data = order.deliveryCountry+","+order.customerName +
+                                ","+ order.id + ","+ order.updatedAt+","+order.amount+","+order.tax+'\r\n';
+                        }
+                    }
+                    else if (order.pickUp != null){
+                            data = order.pickUp.country+","+order.customerName +
+                            ","+ order.id + ","+ order.updatedAt+","+order.amount+","+order.tax+'\r\n';
+                    }
+                    if (data != null){
+                        reportData.push(data);
+                    }
                 });
 
             }else if (type=='shipping'){
@@ -271,16 +284,28 @@ module.exports = {
                     "Date" + ","+ "Amount"+"," +"Shipping Type" +","+ "Shipping Cost" +'\r\n');
                 Order.forEach(function(order) {
 
-                            var data = order.deliveryCountry+","+order.customerName + ","+
+                    var data = null;
+                    if (order.shippingOpt != null) {
+                        if (order.shippingOpt == "Weight Based" || order.shippingOpt == "Flat Rate"){
+                            data = order.deliveryCountry+","+order.customerName + ","+
                                 order.id + ","+ order.updatedAt+","+order.amount+","+
                                 order.shippingOpt+","+order.shippingCost+'\r\n';
-                            reportData.push(data);
+                        }
+                    }
+                    else if (order.pickUp != null){
+                        data = order.pickUp.country+","+order.customerName + ","+
+                            order.id + ","+ order.updatedAt+","+order.amount+","+
+                            order.pickUp.shippingOption+","+order.pickUp.cost+'\r\n';
+                    }
+                    if (data != null){
+                        reportData.push(data);
+                    }
+
                 });
 
             }else if (type=='sales'){
 
                 //sales
-
                 reportData.push(" , "+"Country"+","+ "Customer" +"," + "Product" + "," +
                     "Date" + ","+ "Amount"+","+ "SKU"+"," +"variant"  +'\r\n');
                 Order.forEach(function(order) {
@@ -288,10 +313,23 @@ module.exports = {
                         if(selectedProductData.indexOf(item.name) > -1){
                             var itemTotal = item.qty * item.price;
                             item.variant.forEach(function (variant) {
-                                var data = order.deliveryCountry+","+order.customerName + ","+
-                                    item.name + ","+ order.updatedAt+","+itemTotal+","+item.sku+"," +
-                                    ""+variant.name+"-"+variant.vType+'\r\n';
-                                reportData.push(data);
+
+                                var data = null;
+                                if (order.shippingOpt != null) {
+                                    if (order.shippingOpt == "Weight Based" || order.shippingOpt == "Flat Rate"){
+                                        data = order.deliveryCountry+","+order.customerName + ","+
+                                            item.name + ","+ order.updatedAt+","+itemTotal+","+item.sku+"," +
+                                            ""+variant.name+"-"+variant.vType+'\r\n';
+                                    }
+                                }
+                                else if (order.pickUp != null){
+                                        data = order.pickUp.country+","+order.customerName + ","+
+                                        item.name + ","+ order.updatedAt+","+itemTotal+","+item.sku+"," +
+                                        ""+variant.name+"-"+variant.vType+'\r\n';
+                                }
+                                if (data != null){
+                                    reportData.push(data);
+                                }
                             })
                         }
                     })
