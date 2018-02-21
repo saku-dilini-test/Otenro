@@ -5,24 +5,37 @@
                 <div class="col center made-easy-header-font">Select a location</div>
             </div>
 
+             
+                 <ion-checkbox  ng-model="details.location" ng-disabled="isDisable" checked="true" class="checkbox-dark" ng-true-value="'old'">
+                    <label >
+                        <h3>Home</h3>
+                        <div ng-if="user.name">{{user.name}}</div>
+                        <div ng-if="user.streetNumber">{{user.streetNumber}},{{user.streetName}},{{user.city}},{{user.zip}},{{user.country}}</div>
+                    </label>
+                </ion-checkbox >
+                 
+      
+             
+           
+                <ion-checkbox  ng-model="details.location"  class="checkbox-dark" ng-true-value="'New'">
+                    <label >
+                        <h3>New Location</h3>
+                    </label>
+                </ion-checkbox>
 
-            <ion-checkbox  ng-model="details.location" ng-disabled="isDisable" checked="true" class="checkbox-dark" ng-true-value="'old'">
-                <label >
-                    <h3>Home</h3>
-                    <div ng-if="user.name">{{user.name}}</div>
-                    <div ng-if="user.streetNumber">{{user.streetNumber}},{{user.streetName}},{{user.city}},{{user.zip}},{{user.country}}</div>
-                </label>
-            </ion-checkbox >
+                <div ng-if="!parentobj.userLog" class="row">
+                    <div class="col center">
+                        <!--  <ion-item menu-close ui-sref="app.login,{item:"abc"}" ng-if="!parentobj.userLog ">
+                        Login
+                        </ion-item> -->
+                         <a ng-href='' ng-click='login()' > Returning customer? Click here to login</a> 
+                    </div>
+                </div>
+                
+               
 
-
-
-
-            <ion-checkbox  ng-model="details.location"  class="checkbox-dark" ng-true-value="'New'">
-                <label >
-                    <h3>New Location</h3>
-                </label>
-            </ion-checkbox>
-
+               
+         
 
             <form name="delivery" novalidate>
                 <div class="list"   ng-if="details.location == 'New'">
@@ -69,9 +82,10 @@
                 </div>
 
 
+
                 <div class="row">
                     <div class="col center">
-                        <h6>Total Amount : {{currency.sign}}{{amount}}</h6>
+                        <h6>Total Amount : {{amount|currency: "Rs."}}</h6>
                     </div>
                 </div>
 

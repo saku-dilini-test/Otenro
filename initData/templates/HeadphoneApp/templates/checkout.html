@@ -13,21 +13,21 @@
                 <div class="row shopping-cart-items">
                     <div class="col col-50" ng-model="item.name" ng-class="{hideName: !setActive, showName: setActive}" ng-click="setActive = !setActive ">{{item.name}}</div>
                     <div class="col" ng-model="item.qty" >{{item.qty}}</div>
-                    <div class="col" ng-model="item.total" >{{currency}}{{(item.total)*(item.qty)}}</div>
+                    <div class="col" ng-model="item.total" >{{(item.total)*(item.qty)}|currency: "Rs."}</div>
                 </div>
             </div>
             <div ng-if="hideShipping">
                 <div class="row">
                     <div class="col"></div>
                     <div class="right col col-50">Shipping</div>
-                    <div class="col" ng-model="shipping" >{{currency}}{{shippingCost}}</div>
+                    <div class="col" ng-model="shipping" >{{shippingCost|currency: "Rs."}}</div>
                 </div>
             </div>
             <div ng-hide="hide" >
                 <div class="row">
                     <div class="col"  ></div>
                     <div class="align-right col col-50" ng-model="tax" >Tax({{tax}}%)</div>
-                    <div class="col" ng-model="tax" >{{currency}}{{taxTotal}}</div>
+                    <div class="col" ng-model="tax" >{{taxTotal|currency: "Rs."}}</div>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                 <div class="row shopping-cart-total">
                     <div class="col col-50">Total Price</div>
                     <div class="col" ng-model="quantity">{{totalQuantity}}</div>
-                    <div class="col" ng-model="total" >{{currency}}{{totalPrice}}</div>
+                    <div class="col" ng-model="total" >{{totalPrice|currency: "Rs."}}</div>
                 </div>
             </div>
 

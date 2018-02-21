@@ -13,7 +13,7 @@
               <h2>{{item.name}}</h2>
               <p ng-repeat="variant in item.variant">{{variant.name}} : {{variant.vType}}</p>
               <p><span>Qty: </span><input type="number" min="1" value="{{item.qty}}" style="display: inline" ng-model="item.qty" ng-change="buttonDisable(item.qty,item.totalQty, cartItems.indexOf(item))"></p>
-              <p>Price: {{currency}} {{item.total*item.qty}}</p>
+              <p>Price: {{item.total*item.qty|currency: "RS."}}</p>
               <!-- Buy Qty error message -->
               <div class="text-left">
                   <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
@@ -27,7 +27,7 @@
       </div>
 
       <div class="col text-center padding made-easy-header-font">
-          Total: {{currency}} {{getTotal()}}
+          Total: {{getTotal()|currency: "Rs."}}
       </div>
       <div class="center row padding">
           <button class="col no-padding button-small button button-raised  made-easy-button-setting"

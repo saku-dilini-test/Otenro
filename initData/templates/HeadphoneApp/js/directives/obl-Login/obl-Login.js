@@ -28,7 +28,8 @@
 											"city": res.data.user.city,
 											"zip": res.data.user.zip,
 											"type": 'internal',
-											"appId":res.data.user.appId
+											"appId":res.data.user.appId,
+											"registeredUser": res.data.user.sub
 										};
 										localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
                                         $rootScope.isUserLoggedIn.check = true;

@@ -50,6 +50,7 @@ mobileApp.controller('cartCtrl', function($scope,$rootScope,$http,$state,$stateP
             $scope.countries = res.data;
         });
 
+
     $scope.imageURL = constants.SERVER_URL
         +"/templates/viewImages?userId="
         +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
