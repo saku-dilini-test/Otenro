@@ -125,6 +125,7 @@
                 templateUrl: 'user/edit/commerce/OrderDetailsView.html',
                 controller: function DialogController($scope, $mdDialog, $auth) {
                     $scope.oderData = row;
+                    console.log($scope.oderData)
                     // $log.debug(row);
 
                     var array = $scope.oderData.entity.item[0].variant;
@@ -187,10 +188,16 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                         return commerceService.showOrderDialog();
                     }
 
+                    if($rootScope.tempNew == 'true'){
+                      $scope.imageURL = SERVER_URL
+                                        +"templates/viewWebImages?userId="
+                                        +$auth.getPayload().id+"&appId="+$scope.oderData.entity.appId+"&"+new Date().getTime()+"&images=thirdNavi";
+
+                    }else{
                      $scope.imageURL = SERVER_URL
                                     +"templates/viewImages?userId="
                                     +$auth.getPayload().id+"&appId="+$scope.oderData.entity.appId+"&"+new Date().getTime()+"&img=thirdNavi";
-
+                    }
                 }
             });
 

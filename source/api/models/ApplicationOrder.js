@@ -101,6 +101,9 @@ module.exports = {
         },
         promotionCode:{
             type: 'string'
+        },
+        pickupCost:{
+            type: 'float'
         }
     }
 };

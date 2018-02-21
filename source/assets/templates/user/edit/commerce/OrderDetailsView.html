@@ -115,7 +115,13 @@
                     <td>+Tax</td>
                     <td>{{oderData.entity.tax || 0}}</td>
                 </tr>
-                <tr>
+                <tr ng-if="oderData.entity.pickupCost">
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>+Pickup Cost</td>
+                    <td>{{oderData.entity.pickupCost || 0}}</td>
+                </tr>
+                <tr ng-if="!oderData.entity.pickupCost">
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>+Shipping Cost</td>
