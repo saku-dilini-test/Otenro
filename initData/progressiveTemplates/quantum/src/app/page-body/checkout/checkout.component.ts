@@ -104,7 +104,7 @@ export class CheckoutComponent implements OnInit {
       'fName' : new FormControl(this.dataService.userData.name,Validators.compose([Validators.required])),
       'lName': new FormControl (this.dataService.userData.lname,Validators.compose([Validators.required])),
       'email' : new FormControl(this.dataService.userData.email,Validators.compose([Validators.required,Validators.pattern(this.emailPattern)])),
-      'phone' : new FormControl(this.dataService.userData.phone,Validators.compose([Validators.required,Validators.pattern(/^[+]94\d{9}$/)])),
+      'phone' : new FormControl(this.dataService.userData.phone,Validators.compose([Validators.required,Validators.pattern(/^[().+\d -]{10,15}$/)])),
       'streetNo' : new FormControl(this.dataService.userData.streetNumber,Validators.compose([Validators.required])),
       'streetName' : new FormControl(this.dataService.userData.streetName,Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)])),
       'city': new FormControl(this.dataService.userData.city,Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)])),

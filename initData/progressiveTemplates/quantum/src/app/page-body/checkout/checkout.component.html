@@ -124,7 +124,7 @@
       <div class="form-group">
         <label>Phone:</label>
         <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
-        <input class="form-control" type="text" placeholder="0712345678" [formControl]="complexForm.controls['phone']" (ngModelChange)="checkForm($event)">
+        <input class="form-control" type="text" placeholder="+94712345678" [formControl]="complexForm.controls['phone']" (ngModelChange)="checkForm($event)">
 
         <div *ngIf="complexForm.controls['phone'].hasError('required')
         && complexForm.controls['phone'].touched" class="alert alert-danger">
@@ -224,12 +224,10 @@
         <label for="pkPhone" class="col-2 col-form-label">Phone Number</label>
         <div class="col-10">
           <input class="form-control" #pkPhone='ngModel' (ngModelChange)="checkForm($event)" type="tel" id="pkPhone" name="pkPhone"
-            pattern="\+(9[976]\d|8[987530]\d|6[987]\d|5[90]\d|42\d|3[875]\d|
-          2[98654321]\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|
-          4[987654310]|3[9643210]|2[70]|7|1)\d{1,14}$" name="phone" placeholder="0712345678" ngModel required>
+            pattern="^[().+\d -]{10,15}$" name="phone" placeholder="+94712345678" ngModel required>
           <div [hidden]="pkPhone.valid || pkPhone.pristine" class="alert alert-danger">
             <div [hidden]="!pkPhone.hasError('required')">Phone Number is required</div>
-            <div [hidden]="!pkPhone.hasError('pattern')">Invalid Phone number (+9411 111 111 1)</div>
+            <div [hidden]="!pkPhone.hasError('pattern')">Invalid Phone number (+94123456789)</div>
           </div>
         </div>
       </div>
