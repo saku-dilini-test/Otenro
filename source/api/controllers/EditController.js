@@ -99,6 +99,7 @@ module.exports = {
 
     deleteDefaultData : function(req,res){
         var appId = req.param('appId');
+        var isNew = req.param('isNew');
         var searchApp = {
             appId: appId,
             enteredBy:'demo'
@@ -115,6 +116,13 @@ module.exports = {
                 });
             }
         });
+
+        if(isNew == 'true'){
+             Slider.destroy({'appId': appId}).exec(function (err, slider){
+                    if (err) return res.negotiate(err);
+             });
+        }
+
         ArticleCategory.destroy(searchApp).exec(function (err, app) {
             if (err) {return res.negotiate(err);}
             else {

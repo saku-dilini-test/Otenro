@@ -300,10 +300,19 @@
                         if($scope.templateCategory == tempCatBusiness){
                             mainMenuService.deleteCategories(catogoryIds).success(function(data) {
 
-                                var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                               +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                                $scope.appTemplateUrl = urlPath+'' +
-                                    '#/app/update?'+new Date().getTime();
+                                var urlPath;
+
+                                if($rootScope.tempNew == 'true'){
+                                urlPath =  SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
+                                                                               +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                                                $scope.appTemplateUrl = urlPath +
+                                                                    'src'+new Date().getTime();
+                                }else{
+                                urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                                                               +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                                                $scope.appTemplateUrl = urlPath+'' +
+                                                                    '#/app/update?'+new Date().getTime();
+                                }
                                 mySharedService.prepForBroadcast($scope.appTemplateUrl);
                                 return mainMenuService.showMainMenuDialog();
                             }).error(function(err) {
@@ -364,14 +373,17 @@
                         urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                             + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
+                                        $scope.appTemplateUrl = urlPath +
+                                            'src' + data.id + '?' + new Date().getTime();
                     }else {
 
                         urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
                             + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
+                                        $scope.appTemplateUrl = urlPath + '' +
+                                            '#/app/home/' + data.id + '?' + new Date().getTime();
                     }
-                    $scope.appTemplateUrl = urlPath + '' +
-                        '#/app/home/' + data.id + '?' + new Date().getTime();
+
 
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     toastr.success("New Category Added", 'Message', {closeButton: true});
@@ -405,15 +417,18 @@
                         urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                             + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
+                    $scope.appTemplateUrl = urlPath +
+                        'src'+data.id+'?'+new Date().getTime();
                     }else {
 
                         urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
                             + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
-                    }
-
                     $scope.appTemplateUrl = urlPath+'' +
                         '#/app/home/'+data.id+'?'+new Date().getTime();
+                    }
+
+
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     toastr.success("Successfully updated category", 'Message', {closeButton: true});
                     $mdDialog.hide();
@@ -440,14 +455,17 @@
                             urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
+                        $scope.appTemplateUrl = urlPath +
+                            'src'+data.id+'?'+new Date().getTime();
                         }else {
 
                             urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
                                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
-                        }
                         $scope.appTemplateUrl = urlPath+'' +
                             '#/app/home/'+data.id+'?'+new Date().getTime();
+                        }
+
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                         toastr.success("New Category Added", 'Message', {closeButton: true});
                         $mdDialog.hide();
@@ -495,14 +513,17 @@
                             urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
+                        $scope.appTemplateUrl = urlPath +
+                            'src' + data.id + '?' + new Date().getTime();
                         }else {
 
                             urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
                                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
-                        }
                         $scope.appTemplateUrl = urlPath + '' +
                             '#/app/home/' + data.id + '?' + new Date().getTime();
+                        }
+
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                         toastr.success("New category has been added successfully", 'Message', {closeButton: true});
                         $mdDialog.hide();
@@ -521,14 +542,17 @@
                             urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
+                        $scope.appTemplateUrl = urlPath +
+                            'src' + data.id + '?' + new Date().getTime();
                         }else {
 
                             urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
                                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
-                        }
                         $scope.appTemplateUrl = urlPath + '' +
                             '#/app/home/' + data.id + '?' + new Date().getTime();
+                        }
+
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                         toastr.success("New category has been added successfully", 'Message', {closeButton: true});
                         $mdDialog.hide();
@@ -554,14 +578,17 @@
                                 urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                                     + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
+                            $scope.appTemplateUrl = urlPath +
+                                'src' + data.id + '?' + new Date().getTime();
                             }else {
 
                                 urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
                                     + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
-                            }
                             $scope.appTemplateUrl = urlPath + '' +
                                 '#/app/home/' + data.id + '?' + new Date().getTime();
+                            }
+
                             mySharedService.prepForBroadcast($scope.appTemplateUrl);
                             toastr.success("Successfully edited category", 'Message', {closeButton: true});
                             $mdDialog.hide();

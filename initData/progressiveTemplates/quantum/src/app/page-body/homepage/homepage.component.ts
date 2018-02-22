@@ -35,17 +35,25 @@ export class HomepageComponent implements OnInit {
   private sliderData: any;
   private imageUrlSlider;
   private catName;
-  private isSliderDataAvailable:boolean = false;
-  constructor(private route: Router,private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService,private title: TitleService) {
+  private isSliderDataAvailable: boolean = false;
+  private isRandomProducts;
+
+  constructor(private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
-      this.sliderData = data;
-       var size = Object.keys(this.sliderData).length;
-       if(size >0){
-        this.isSliderDataAvailable = true;
-       }else{
+      if (data.length > 0) {
+        this.sliderData = data;
+        var size = Object.keys(this.sliderData).length;
+        if (size > 0) {
+          this.isSliderDataAvailable = true;
+        } else {
+          this.isSliderDataAvailable = false;
+        }
+      } else {
+        this.sliderData = null;
         this.isSliderDataAvailable = false;
-       }
+      }
+
     }, err => {
       console.log(err);
     });
@@ -76,14 +84,13 @@ export class HomepageComponent implements OnInit {
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
 
     this.categoryService.getCategories().subscribe(data => {
-      if(data.length){
-      // Read the result field from the JSON response.
-      this.results = data;
-      data.forEach(element => {
-        this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
-      });
-      }else{
-        console.log('inside cat else');
+      if (data.length > 0) {
+        // Read the result field from the JSON response.
+        this.results = data;
+        data.forEach(element => {
+          this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
+        });
+      } else {
         this.results = null;
       }
 
@@ -98,10 +105,12 @@ export class HomepageComponent implements OnInit {
 
     this.productService.getAllProducts().subscribe(data => {
 
-      if(data.length){
+      if (data.length >= 2) {
         this.products = data;
         max = Object.keys(this.products).length;
-
+        if (max >= 2) {
+          this.isRandomProducts = true;
+        }
         let lastIndex = null;
         this.randomedArr = [];
         while (true) {
@@ -121,7 +130,7 @@ export class HomepageComponent implements OnInit {
           }
 
         }
-      }else{
+      } else {
         this.products = null;
       }
 
@@ -148,7 +157,7 @@ export class HomepageComponent implements OnInit {
     this.router.navigate(['/' + val, id, name]);
   }
 
-  navigateFeaturedProd(val, item){
+  navigateFeaturedProd(val, item) {
 
     this.productService.getCategoryData(item.childId).subscribe((data: any) => {
       this.catName = data[0].name
