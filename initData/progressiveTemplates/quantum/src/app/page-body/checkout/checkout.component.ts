@@ -262,9 +262,6 @@ this.years.push(date++);
     this.streetNumber = test.streetNumber;
     this.zip = test.zip;
 
-    console.log(shippingDetails)
-    console.log(e)
-    console.log(test)
 
     this.isSelected = true;
     var total = 0;
@@ -379,7 +376,7 @@ this.years.push(date++);
     // this.dataService.finalDetails = shippingDetails;
     this.chk(shippingDetails);
 
-    setTimeout(()=>{ this.pay("001"); }, 500);
+    // setTimeout(()=>{ this.pay("001"); }, 500);
 
 
   }
@@ -401,17 +398,9 @@ this.years.push(date++);
 
     }
     this.chk(this.pickupData);
-    setTimeout(() => { this.pay("001"); }, 500);
+    // setTimeout(() => {  }, 500);
   };
 
-checkForm(asd){
-  this.isSelected = false;
-  var deliver = <HTMLInputElement>document.getElementById('delivery');
-  deliver.checked = false;
-
-  var pickup = <HTMLInputElement>document.getElementById('pickup');
-  pickup.checked = false;
-}
   //------------------------------checkout---------------------------------------
   chk(final) {
 
@@ -509,7 +498,7 @@ checkForm(asd){
             }
           }
         }
-
+        this.pay("001");
       });
 
 
