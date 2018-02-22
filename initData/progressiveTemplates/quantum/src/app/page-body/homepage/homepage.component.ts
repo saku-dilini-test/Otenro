@@ -76,11 +76,17 @@ export class HomepageComponent implements OnInit {
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
 
     this.categoryService.getCategories().subscribe(data => {
+      if(data.length){
       // Read the result field from the JSON response.
       this.results = data;
       data.forEach(element => {
         this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
       });
+      }else{
+        console.log('inside cat else');
+        this.results = null;
+      }
+
 
     },
       error => {
@@ -91,28 +97,34 @@ export class HomepageComponent implements OnInit {
     let max;
 
     this.productService.getAllProducts().subscribe(data => {
-      this.products = data;
-      max = Object.keys(this.products).length;
 
-      let lastIndex = null;
-      this.randomedArr = [];
-      while (true) {
-        this.randomIndex = Math.floor(Math.random() * max);
-        if (this.randomedArr.length == 2) {
-          break;
-        }
+      if(data.length){
+        this.products = data;
+        max = Object.keys(this.products).length;
 
-        if (lastIndex != null && this.randomedArr.length == 1) {
-          if (lastIndex != this.randomIndex) {
-            this.randomedArr.push(this.products[this.randomIndex]);
+        let lastIndex = null;
+        this.randomedArr = [];
+        while (true) {
+          this.randomIndex = Math.floor(Math.random() * max);
+          if (this.randomedArr.length == 2) {
             break;
           }
-        } else {
-          this.randomedArr.push(this.products[this.randomIndex]);
-          lastIndex = this.randomIndex;
-        }
 
+          if (lastIndex != null && this.randomedArr.length == 1) {
+            if (lastIndex != this.randomIndex) {
+              this.randomedArr.push(this.products[this.randomIndex]);
+              break;
+            }
+          } else {
+            this.randomedArr.push(this.products[this.randomIndex]);
+            lastIndex = this.randomIndex;
+          }
+
+        }
+      }else{
+        this.products = null;
       }
+
     }, err => {
       console.log('Error retrieving all products');
     })

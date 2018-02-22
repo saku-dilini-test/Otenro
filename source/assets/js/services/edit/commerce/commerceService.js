@@ -365,10 +365,24 @@
                                     toastr.success('Successfully Removed ', 'Done!', {
                                         closeButton: true
                                     });
-                                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                    var urlPath;
+
+                                    if($rootScope.tempNew == 'true' || $rootScope.tempNew == true){
+                                     urlPath =  SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
+                                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+
+                                    $scope.appTemplateUrl = urlPath +
+                                    'src'+new Date().getTime();
+                                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                                    }else{
+                                    urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
                                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+
                                     $scope.appTemplateUrl = urlPath+'' +
-                                        '#/app/home/id?'+new Date().getTime();
+                                                                        '#/app/home/id?'+new Date().getTime();
+                                    }
+                                    $scope.appTemplateUrl = urlPath+'' +
+                                    '#/app/home/id?'+new Date().getTime();
                                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                                     //$state.go('user.dashboard');
                                 }

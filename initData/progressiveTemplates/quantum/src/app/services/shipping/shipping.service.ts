@@ -16,11 +16,11 @@ export class ShippingService {
 
   getShippingInfo() {
     return this.http.get(SERVER_URL + "/edit/getShippingInfo?appId=" + this.appId)
-      .map(res => res.json());
+      .map(res => res.text() ? res.json() : res);
   }
 
   getShippingPickupInfo() {
     return this.http.get(SERVER_URL + "/edit/getShippingPickupInfo?appId=" + this.appId)
-      .map(res => res.json());
+      .map(res => res.text() ? res.json() : res);
   }
 }

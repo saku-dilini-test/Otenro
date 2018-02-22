@@ -16,16 +16,16 @@ export class ProductsService {
 
   getProducts() {
     return this.http.get(SERVER_URL + '/templates/getProductsByCatId?appId=' + this.appId + '&childId=' + this.dataService.catId)
-      .map(res => res.json());
+      .map(res => res.text() ? res.json() : null);
   }
 
   getAllProducts() {
     return this.http.get(SERVER_URL + '/templates/getProductsByAppId?appId=' + this.appId)
-      .map(res => res.json());
+      .map(res => res.text() ? res.json() : null);
   }
 
   getCategoryData(id:any){
     return this.http.get(SERVER_URL+'/templates/getCategoryByProdId?id='+id)
-      .map(res => res.json());
+      .map(res => res.text() ? res.json() : null);
   }
 }

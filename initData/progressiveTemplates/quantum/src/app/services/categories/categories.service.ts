@@ -13,9 +13,9 @@ export class CategoriesService {
 
   constructor(private http: Http) { }
 
-  getCategories() {    
+  getCategories() {
     return this.http.get(SERVER_URL+'/templates/getSpecificChild?appId=' + this.appId)
-                    .map(res => res.json());
+                    .map(res => res.text() ? res.json() : null);
   }
 
 }
