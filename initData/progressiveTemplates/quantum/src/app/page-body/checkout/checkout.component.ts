@@ -237,12 +237,6 @@ export class CheckoutComponent implements OnInit {
       this.isSelected = false;
     }
 
-    console.log(this.isSelected);
-    console.log(this.complexForm.valid);
-
-    // if(!this.complexForm.valid){
-    //   this.isSelected = false;
-    // }
   }
 
 
