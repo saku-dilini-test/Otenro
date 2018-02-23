@@ -276,6 +276,8 @@
 
                                                 var encParam = btoa(data.data.appId);
                                                 $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
+                                                commerceService.showRemoveDefaultDataDialog("remove");
+
                                             }
                                         });
 
@@ -314,12 +316,12 @@
 
                                     var encParam = btoa(data.data.appId);
                                     $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
+                                    commerceService.showRemoveDefaultDataDialog("remove");
                                 }
                             });
                         }
                         $mdDialog.hide(answer);
                     });
-                    commerceService.showRemoveDefaultDataDialog("remove");
 
                 }
                 }

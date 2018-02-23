@@ -63,7 +63,7 @@
 			</div>
 
       <!-- bloc-3 -->
-      <div class="bloc bgc-white l-bloc visible-lg-block visible-md-block padding-vertical" id="bloc-3">
+      <div *ngIf="isRandomProducts" class="bloc bgc-white l-bloc visible-lg-block visible-md-block padding-vertical" id="bloc-3">
           <div class="row bgc-gainsboro raw featured no-margin">
             <div class="col-sm-6">
               <h2 class="mg-lg sub-header-text main-header-font">
@@ -86,7 +86,7 @@
       <!-- bloc-3 END -->
 
       <!-- bloc-4 -->
-      <div class="bloc bgc-white l-bloc visible-lg-block visible-md-block padding-vertical" id="bloc-4">
+      <div *ngIf="isRandomProducts" class="bloc bgc-white l-bloc visible-lg-block visible-md-block padding-vertical" id="bloc-4">
           <div class="row raw bgc-pale-silver featured no-margin">
             <div class="col-sm-6">
               <img src="{{imageUrlProd}}/{{randomedArr[1].imageUrl}}" class="img-responsive lazyload"
