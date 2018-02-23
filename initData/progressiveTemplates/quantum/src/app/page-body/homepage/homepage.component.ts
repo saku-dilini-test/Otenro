@@ -177,14 +177,5 @@ export class HomepageComponent implements OnInit {
       this.route.navigate([val, this.catName]);
     }
 
-
-    // this.productService.getCategoryData(item.childId).subscribe((data: any) => {
-    //   this.catName = data[0].name
-    //   this.dataService.data = item;
-    //   this.route.navigate([val, this.catName]);
-    // }), err => {
-    //   console.log(err)
-    // }
-
   }
 }
