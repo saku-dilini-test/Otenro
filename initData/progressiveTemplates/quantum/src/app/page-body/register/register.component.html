@@ -38,6 +38,9 @@
             <div [hidden]="!email.hasError('required')">email is required</div>
             <div [hidden]="!email.hasError('pattern')">Invalid Email ID</div>
           </div>
+          <div *ngIf = "isEmailDuplicate == true" class="alert alert-danger">
+            <div>This email is already available</div>
+          </div>
         </div>
       </div>
       <div class="form-group col-xs-6">
