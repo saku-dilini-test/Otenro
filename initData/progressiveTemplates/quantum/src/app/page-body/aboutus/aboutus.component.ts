@@ -82,21 +82,13 @@ export class AboutusComponent implements OnInit {
         //   this.openSunday = "we are closed"
         // }
 
+
+        this.aboutUsUrl = SERVER_URL + "/templates/viewWebImages?userId="
+          + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=';
+
       }, (err) => {
         console.log(err);
       });
   }
-
-
-  slides = SLIDES;
-  lists = LISTS;
 }
-const LISTS = [
-  {
-    src: 'https://ae01.alicdn.com/kf/HTB1RuZKPVXXXXaMapXXq6xXFXXXO/Artka-Women-s-2017-Spring-New-Vintage-Appliques-Dress-Fashion-Square-Collar-Butterfly-Sleeve-Empire-Waist.jpg', title1: 'First featurette heading. ', title2: 'It ll blow your mind.',
-    description: 'Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.'
-  }
-];
 
-const SLIDES = [
-  { src: 'https://wallpaperscraft.com/image/the_black_keys_sofa_shoes_clothes_relax_5290_1920x1080.jpg', title: 'About Us' }]

@@ -3,12 +3,12 @@
   <div class="container bloc-sm">
     <div class="row">
       <div class="col-sm-12">
-        <img src="./assets/images/lazyload-ph.png" data-src="./assets/images/ABOUTUS.png" class="img-responsive lazyload visible-lg-block visible-md-block" />
+        <img  data-src="{{aboutUsUrl}}/ABOUTUS.png" class="img-responsive lazyload visible-lg-block visible-md-block" />
         <h1 class="text-center margin-top padding-vertical main-header-font" [innerHTML]="header"></h1>
 
         <p class="main-content-font" [innerHTML]="content"> </p>
 
-        <div class="container padding">
+        <div class="container">
           <h2 class="main-header-font">Open Hours</h2>
           <p class="main-content-font">Weekdays : {{openWeekdays}}</p>
           <p class="main-content-font">Saturday : {{openSaturday}}</p>
