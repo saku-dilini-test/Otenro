@@ -241,6 +241,7 @@
 
                         toastr.success("New Image Slider Added", 'Message', { closeButton: true });
                         $mdDialog.hide();
+            return carouselService.showCarouselBannerDialog();
 
 
                     }).error(function (err) {
@@ -278,6 +279,7 @@
 
                             toastr.success("New Image Updated", 'Message', { closeButton: true });
                             $mdDialog.hide();
+                            return carouselService.showCarouselBannerDialog();
 
                         }).error(function (err) {
                             toastr.error(err.message, 'Warning', {
@@ -317,6 +319,7 @@
 
                             toastr.success("Slider Data Updated", 'Message', { closeButton: true });
                             $mdDialog.hide();
+                            return carouselService.showCarouselBannerDialog();
 
                         }).error(function (err) {
                             toastr.error(err.message, 'Warning', {
@@ -327,8 +330,6 @@
                 }
 
             }
-
-
 
 
         }
@@ -381,6 +382,7 @@
                     '</md-content>' +
                     '</md-dialog>'
             })
+
         };
 
         $scope.sliderDefault = function(){
