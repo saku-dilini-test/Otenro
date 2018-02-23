@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
   private selectedCountry = null;
   private phone;
   private myForm: FormGroup;
+  private isEmailDuplicate;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
               private title: TitleService) {
@@ -124,9 +125,11 @@ export class RegisterComponent implements OnInit {
                 }else{
                   this.route.navigate(['cart']);
                 }
-            },
-            function(err){
-                alert("signup error");
+            },err =>{
+
+              if(err.status == 409){
+                this.isEmailDuplicate = true;
+              }
             });
   }
 
