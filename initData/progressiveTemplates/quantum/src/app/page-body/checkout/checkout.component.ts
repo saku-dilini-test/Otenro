@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
-import { HttpClient,HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime } from 'rxjs/operator/debounceTime';
@@ -26,7 +26,8 @@ export class CheckoutComponent implements OnInit {
 
   staticAlertClosed = false;
   successMessage: string;
-  complexForm : FormGroup;
+  complexForm: FormGroup;
+  pickupForm: FormGroup;
 
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
@@ -87,40 +88,46 @@ export class CheckoutComponent implements OnInit {
   public orderDetails;
   public orderd = false;
   private years = [];
-  private months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
+  private months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
   private emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
-  constructor(fb: FormBuilder,private ordersService : OrdersService,
+  constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
-    private currencyService :CurrencyService,
+    private currencyService: CurrencyService,
     private localStorageService: LocalStorageService,
-     private http: HttpClient, private route: ActivatedRoute,
-     private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
+    private http: HttpClient, private route: ActivatedRoute,
+    private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
 
     this.title.changeTitle("Checkout");
 
     this.complexForm = fb.group({
       // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
-      'fName' : new FormControl(this.dataService.userData.name,Validators.compose([Validators.required])),
-      'lName': new FormControl (this.dataService.userData.lname,Validators.compose([Validators.required])),
-      'email' : new FormControl(this.dataService.userData.email,Validators.compose([Validators.required,Validators.pattern(this.emailPattern)])),
-      'phone' : new FormControl(this.dataService.userData.phone,Validators.compose([Validators.required,Validators.pattern(/^[().+\d -]{10,15}$/)])),
-      'streetNo' : new FormControl(this.dataService.userData.streetNumber,Validators.compose([Validators.required])),
-      'streetName' : new FormControl(this.dataService.userData.streetName,Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)])),
-      'city': new FormControl(this.dataService.userData.city,Validators.compose([Validators.required,Validators.pattern(/^[a-zA-Z ]*$/)])),
-      'zip' : new FormControl(this.dataService.userData.zip,Validators.compose([Validators.required,Validators.pattern(/^\d+$/)])),
-      'country' : new FormControl(null)
+      'fName': new FormControl(this.dataService.userData.name, Validators.compose([Validators.required,Validators.pattern(/^[A-z]+$/)])),
+      'lName': new FormControl(this.dataService.userData.lname, Validators.compose([Validators.required,Validators.pattern(/^[A-z]+$/)])),
+      'email': new FormControl(this.dataService.userData.email, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
+      'phone': new FormControl(this.dataService.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[().+\d -]{10,15}$/)])),
+      'streetNo': new FormControl(this.dataService.userData.streetNumber, Validators.compose([Validators.required])),
+      'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
+      'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
+      'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])),
+      'country': new FormControl(null)
 
-    })
-    this.complexForm.controls['country'].setValue(this.dataService.userData.country, {onlySelf: true});
+    });
+    this.complexForm.controls['country'].setValue(this.dataService.userData.country, { onlySelf: true });
 
+    this.pickupForm = fb.group({
+      'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
+      'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[().+\d -]{10,15}$/), Validators.minLength(12)])),
+
+    });
   }
+
 
   ngOnInit() {
 
-let date = (new Date()).getFullYear()
-    for( let i=0;i<100;i++){
-this.years.push(date++);
+    let date = (new Date()).getFullYear()
+    for (let i = 0; i < 100; i++) {
+      this.years.push(date++);
     }
 
     this._success.next('hello');
@@ -185,24 +192,24 @@ this.years.push(date++);
     if (this.formType == 'delivery') {
       this.http.post(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
         .subscribe((data) => {
-            this.shippingDatas = data;
-            // $log.debug($scope.shippingData);
-            for (var i = 0; i < this.shippingDatas.length; i++) {
-              if (this.shippingDatas[i].shippingOption == "Flat Rate" ||
-                this.shippingDatas[i].shippingOption == "Weight Based") {
-                this.shippingData.push(this.shippingDatas[i]);
-              }
+          this.shippingDatas = data;
+          // $log.debug($scope.shippingData);
+          for (var i = 0; i < this.shippingDatas.length; i++) {
+            if (this.shippingDatas[i].shippingOption == "Flat Rate" ||
+              this.shippingDatas[i].shippingOption == "Weight Based") {
+              this.shippingData.push(this.shippingDatas[i]);
             }
-          },
-          function (err) {
-            alert(
-              'Policies Data loading error,Please check your connection!'
-            );
-          });
-    }else{
+          }
+        },
+        function (err) {
+          alert(
+            'Policies Data loading error,Please check your connection!'
+          );
+        });
+    } else {
 
       this.shippingService.getShippingPickupInfo()
-      .subscribe((data) => {
+        .subscribe((data) => {
 
           this.pickup = data;
 
@@ -225,7 +232,18 @@ this.years.push(date++);
 
 
   }
+  ngAfterContentChecked(){
+    if(this.formType == "pickup" && !this.pickupForm.valid){
+      this.isSelected = false;
+    }
 
+    console.log(this.isSelected);
+    console.log(this.complexForm.valid);
+
+    // if(!this.complexForm.valid){
+    //   this.isSelected = false;
+    // }
+  }
 
 
   getTotal() {
@@ -250,8 +268,9 @@ this.years.push(date++);
   };
 
 
-  addShipping(shippingDetails,e,test) {
+  addShipping(shippingDetails, e, test) {
 
+    this.isSelected = true;
     this.fname = test.fName;
     this.lname = test.lName;
     this.email = test.email;
@@ -263,7 +282,6 @@ this.years.push(date++);
     this.zip = test.zip;
 
 
-    this.isSelected = true;
     var total = 0;
 
     var totalWeight = 0;
@@ -386,8 +404,7 @@ this.years.push(date++);
 
 
 
-  checkout(data,details,form) {
-    console.log(form);
+  checkout(data, details) {
     this.isSelected = true;
     this.pickupData = {
       item: this.dataService.deliverItems,
@@ -493,7 +510,8 @@ this.years.push(date++);
                 this.totalPrice = total + this.chkShippingCost;
               } else {
                 this.totalPrice = total;
-              }            } else {
+              }
+            } else {
               this.totalPrice = total + parseInt(this.chkPickupCost);
             }
           }
@@ -593,7 +611,7 @@ this.years.push(date++);
           console.log("makeStripePayment failed");
 
         }
-      },  (err)=> {
+      }, (err) => {
         alert('makeStripePayment failed');
       })
 
@@ -605,7 +623,7 @@ this.years.push(date++);
     cardInformation.appId = this.appId
 
     this.http.post(SERVER_URL + "/templateController/authorizeNetPay", cardInformation)
-      .subscribe((res:any) => {
+      .subscribe((res: any) => {
         // var alertPopup = $ionicPopup.alert({
         //     subTitle: res.data.data,
         //     cssClass: 'ionicPopUp',
@@ -643,7 +661,7 @@ this.years.push(date++);
         'shippingOpt': this.payInfo.item.shippingOption,
         'email': this.payInfo.userEmail,
         'currency': this.dataService.paypalCurrency,
-        'puckupId':null,
+        'puckupId': null,
         'promotionCode': this.payInfo.promotionCode
       };
     }
@@ -664,52 +682,52 @@ this.years.push(date++);
       }
     }
 
-    this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails,{responseType: 'text'})
+    this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails, { responseType: 'text' })
       .subscribe((res) => {
-          this.orderDetails.id = this.dataService.cart.cartItems[0].id;
-          this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.pickupData.cart,{responseType: 'text'})
-            .subscribe((res) => {
-                this.dataService.cart.cartItems = [];
-                this.dataService.cart.cartSize = 0;
-                this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-                this.dataService.cart.totalPrice = 0;
-                this.dataService.cart.totalQuantity = 0;
+        this.orderDetails.id = this.dataService.cart.cartItems[0].id;
+        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.pickupData.cart, { responseType: 'text' })
+          .subscribe((res) => {
+            this.dataService.cart.cartItems = [];
+            this.dataService.cart.cartSize = 0;
+            this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+            this.dataService.cart.totalPrice = 0;
+            this.dataService.cart.totalQuantity = 0;
 
-                //Pushing into order purchase history
-                if (this.localStorageService.get("history" + this.appId + this.user.registeredUser) != null) {
-                  this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-                }
-                this.orderHistory.push({
-                  orderHistoryKey: this.appId,
-                  createdDate: new Date(),
-                  item: this.payInfo.cart,
-                  amount: this.payInfo.amount,
-                });
+            //Pushing into order purchase history
+            if (this.localStorageService.get("history" + this.appId + this.user.registeredUser) != null) {
+              this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+            }
+            this.orderHistory.push({
+              orderHistoryKey: this.appId,
+              createdDate: new Date(),
+              item: this.payInfo.cart,
+              amount: this.payInfo.amount,
+            });
 
-                this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
+            this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
 
-                alert({
-                  title: 'Thank You',
-                  subTitle: 'Your Order has been successfully processed',
-                  cssClass: 'ionicPopUp',
-                  buttons: [
-                    {
-                      text: 'OK',
-                      type: 'made-easy-button-setting'
-                    },
-                  ]
-                });
-                // TODO : Currently back to cart
-                //back to Main Menu
-                this.router.navigate(['home']);
-              },
-              function (err) {
-                console.log(err);
-              });
-        },
-        function (err) {
-          console.log(err);
-        });
+            alert({
+              title: 'Thank You',
+              subTitle: 'Your Order has been successfully processed',
+              cssClass: 'ionicPopUp',
+              buttons: [
+                {
+                  text: 'OK',
+                  type: 'made-easy-button-setting'
+                },
+              ]
+            });
+            // TODO : Currently back to cart
+            //back to Main Menu
+            this.router.navigate(['home']);
+          },
+          function (err) {
+            console.log(err);
+          });
+      },
+      function (err) {
+        console.log(err);
+      });
   }
 
 
@@ -733,7 +751,7 @@ this.years.push(date++);
         'shippingOpt': this.payInfo.item.shippingOption,
         'email': this.payInfo.userEmail,
         'currency': this.dataService.currency,
-        'puckupId':null,
+        'puckupId': null,
         'promotionCode': this.payInfo.promotionCode
       };
 
@@ -755,94 +773,94 @@ this.years.push(date++);
       }
     }
 
-    this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails),{responseType: 'text'})
+    this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails), { responseType: 'text' })
       .subscribe((res) => {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
-          this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart,{responseType: 'text'})
-            .subscribe(res => {
-              this.dataService.cart.cartItems = [];
-              this.dataService.cart.cartSize = 0;
-              this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-              this.dataService.cart.totalPrice = 0;
-              this.dataService.cart.totalQuantity = 0;
+        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
+          .subscribe(res => {
+            this.dataService.cart.cartItems = [];
+            this.dataService.cart.cartSize = 0;
+            this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+            this.dataService.cart.totalPrice = 0;
+            this.dataService.cart.totalQuantity = 0;
 
-              //Pushing into order purchase history
-              if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
-                this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-              }
-              this.orderHistory.push({
-                orderHistoryKey: this.appId,
-                createdDate: new Date(),
-                item: this.payInfo.cart,
-                amount: this.payInfo.amount,
-              });
-
-              this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
-
-              this._success.next('Your Order has been successfully processed');
-
-              this._success.subscribe((message) => this.successMessage = message);
-              debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
-              this._success.next("Thank You, Your order has been successfully processed");
-              setTimeout(()=>{this.router.navigate(['home']); }, 3100)
-
-            },
-             (err)=> {
-              console.log(err);
+            //Pushing into order purchase history
+            if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
+              this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+            }
+            this.orderHistory.push({
+              orderHistoryKey: this.appId,
+              createdDate: new Date(),
+              item: this.payInfo.cart,
+              amount: this.payInfo.amount,
             });
-        },
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-          console.log(err);
-        });
+
+            this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
+
+            this._success.next('Your Order has been successfully processed');
+
+            this._success.subscribe((message) => this.successMessage = message);
+            debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+            this._success.next("Thank You, Your order has been successfully processed");
+            setTimeout(() => { this.router.navigate(['home']); }, 3100)
+
+          },
+          (err) => {
+            console.log(err);
+          });
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log("Client-side error occured.");
+        } else {
+          console.log("Server-side error occured.");
+        }
+        console.log(err);
+      });
   }
 
   // Buy With PayPal
   buyWithPayPal() {
-        if (this.formType == "delivery") {
-          this.orderDetails = {
+    if (this.formType == "delivery") {
+      this.orderDetails = {
 
-            'appId': this.appId,
-            'registeredUser': this.user.registeredUser,
-            'item': this.payInfo.cart,
-            'amount': this.payInfo.amount,
-            'customerName': this.user.name,
-            'deliverName': this.fname,
-            'deliveryNo': this.streetNumber,
-            'deliveryStreet': this.streetName,
-            'deliveryCity': this.city,
-            'deliveryCountry': this.country,
-            'deliveryZip': this.zip,
-            'telNumber': this.phone,
-            'tax': this.payInfo.taxTotal,
-            'shippingCost': this.chkShippingCost,
-            'shippingOpt': this.payInfo.item.shippingOption,
-            'email': this.payInfo.userEmail,
-            'currency': this.dataService.paypalCurrency,
-            'puckupId':null,
-            'promotionCode': this.payInfo.promotionCode
-          };
-        }
-        else {
-          this.orderDetails = {
-            "appId": this.appId,
-            "registeredUser": this.user.registeredUser,
-            "item": this.payInfo.cart,
-            "amount": this.payInfo.amount,
-            "customerName": this.payInfo.item.deliverDetails.name,
-            "telNumber": this.payInfo.item.deliverDetails.number,
-            "tax": this.payInfo.taxTotal,
-            "pickupId": this.payInfo.item.pickupId,
-            "pickupCost": this.chkPickupCost,
-            "email": this.payInfo.userEmail,
-            "currency": this.dataService.paypalCurrency,
-            "promotionCode": this.payInfo.promotionCode
-          }
-        }
+        'appId': this.appId,
+        'registeredUser': this.user.registeredUser,
+        'item': this.payInfo.cart,
+        'amount': this.payInfo.amount,
+        'customerName': this.user.name,
+        'deliverName': this.fname,
+        'deliveryNo': this.streetNumber,
+        'deliveryStreet': this.streetName,
+        'deliveryCity': this.city,
+        'deliveryCountry': this.country,
+        'deliveryZip': this.zip,
+        'telNumber': this.phone,
+        'tax': this.payInfo.taxTotal,
+        'shippingCost': this.chkShippingCost,
+        'shippingOpt': this.payInfo.item.shippingOption,
+        'email': this.payInfo.userEmail,
+        'currency': this.dataService.paypalCurrency,
+        'puckupId': null,
+        'promotionCode': this.payInfo.promotionCode
+      };
+    }
+    else {
+      this.orderDetails = {
+        "appId": this.appId,
+        "registeredUser": this.user.registeredUser,
+        "item": this.payInfo.cart,
+        "amount": this.payInfo.amount,
+        "customerName": this.payInfo.item.deliverDetails.name,
+        "telNumber": this.payInfo.item.deliverDetails.number,
+        "tax": this.payInfo.taxTotal,
+        "pickupId": this.payInfo.item.pickupId,
+        "pickupCost": this.chkPickupCost,
+        "email": this.payInfo.userEmail,
+        "currency": this.dataService.paypalCurrency,
+        "promotionCode": this.payInfo.promotionCode
+      }
+    }
 
     this.dataService.payPalDetails = this.orderDetails;
 
