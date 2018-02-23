@@ -140,6 +140,25 @@ module.exports = {
         });
 
     },
+        deleteDefaultSliderData : function(req,res){
+            var appId = req.param('appId');
+            var searchApp = {
+                appId: appId,
+                enteredBy:'demo'
+            };
+            sails.log.info(searchApp);
+
+                 Slider.destroy({'appId': appId}).exec(function (err, slider){
+                        if (err) return res.negotiate(err);
+                 });
+
+
+            res.send({
+                appId: appId,
+                message: "All data Removed"
+            });
+
+        },
 
     viewImages : function(req,res){
         res.sendfile(config.ME_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));

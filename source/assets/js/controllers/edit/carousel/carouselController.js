@@ -361,14 +361,14 @@
                             return carouselService.showCarouselBannerDialog();
                         }
                 },
-                template: '<md-dialog aria-label="Edit Child Menu">' +
+                template: '<md-dialog aria-label="Delete Slider">' +
                     '<md-content >' +
                     '<div class="md-dialog-header">' +
-                    '<h1>Deleting category</h1>' +
+                    '<h1>Deleting slider</h1>' +
                     '</div>' +
                     '<br>' +
                     '<div style="text-align:center">' +
-                    '<lable>Are you sure, you want to delete this category ?</lable>' +
+                    '<lable>Are you sure, you want to delete this Slider ?</lable>' +
                     '</div>' +
                     '<br>' +
                     '<br>' +
@@ -383,6 +383,9 @@
             })
         };
 
+        $scope.sliderDefault = function(){
+            carouselService.showRemoveDefaultDataDialog();
+        }
 
         //remove selected category
         $scope.deleteSelctedCat = function(){

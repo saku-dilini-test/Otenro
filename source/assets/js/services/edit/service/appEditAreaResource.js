@@ -18,6 +18,9 @@
             },
             deleteDefaultData: function(params){
                 return  $http.post(SERVER_URL + 'edit/deleteDefaultData',params);
+            },
+            deleteDefaultSliderData: function(params){
+                return  $http.post(SERVER_URL + 'edit/deleteDefaultSliderData',params);
             }
         }
     }
