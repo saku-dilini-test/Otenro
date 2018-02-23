@@ -17,6 +17,6 @@ export class TaxService extends ShippingService{
 
   getTaxInfo() {
     return this.http.get(SERVER_URL + '/edit/getTaxInfo?appId=' + this.appId)
-      .map(res => res.json());
+      .map(res => res.text() ? res.json() : res);
   }
 }

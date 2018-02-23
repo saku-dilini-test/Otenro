@@ -15,7 +15,7 @@ export class FooterComponent{
   webInfo: any;
 
   constructor(private router: Router, private appDataService: AppDataService) {
-    this.appDataService.getContactUsInfo().subscribe((data: any) => {
+    this.appDataService.getContactUs().subscribe((data: any) => {
       this.webInfo = data;
     }),((err) => {
       console.log("Error when fetching ContactUsInfo: " + JSON.stringify(err));

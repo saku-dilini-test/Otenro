@@ -30,7 +30,7 @@ export class OrdersService {
   options: RequestOptions;
 
   constructor(private http: Http) {
-      this.headers = new Headers({ 'Content-Type': 'appliation/json', 
+      this.headers = new Headers({ 'Content-Type': 'appliation/json',
                                    'Accept': 'q=0.8;appliation/json;q=0.9' });
       this.options = new RequestOptions({ headers: this.headers });
   }
@@ -41,8 +41,8 @@ export class OrdersService {
       .post(url, body, this.options)
       .map(this.extractData)
       .catch(this.handleError);
-  } 
-  
+  }
+
   orderService(url: string, param: any): Observable<any> {
       let body = JSON.stringify(param);
       return this.http
@@ -65,7 +65,7 @@ export class OrdersService {
 
   getIPGinfo(){
     return this.http.get(SERVER_URL + '/edit/getIPGInfo?appId=' + this.appId)
-    .map(res => res.json());
+    .map(res => res.text() ? res.json() : res);
   }
 
 }

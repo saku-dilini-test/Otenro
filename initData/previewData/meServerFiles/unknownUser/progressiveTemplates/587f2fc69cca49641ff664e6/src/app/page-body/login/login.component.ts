@@ -18,9 +18,11 @@ export class LoginComponent implements OnInit {
   public userId = (<any>data).userId;
   public params = [];
   name; pass; gate: boolean; navigate;
+  ifInvalidUserPassword:boolean;
   constructor(private localStorageService: LocalStorageService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient,
               private title: TitleService) {
     this.title.changeTitle("Login");
+     this.ifInvalidUserPassword = false;
   }
 
   ngOnInit() {
@@ -41,6 +43,8 @@ export class LoginComponent implements OnInit {
     };
 
     let requestParams;
+    let keepThis = this;
+    this.ifInvalidUserPassword = false;
     this.http.post(SERVER_URL + "/templatesAuth/authenticateForApp", data)
       .subscribe((res) => {
 
@@ -69,6 +73,7 @@ export class LoginComponent implements OnInit {
         }
       },
       function (err) {
+        keepThis.ifInvalidUserPassword =true;
         console.log(err);
       })
 

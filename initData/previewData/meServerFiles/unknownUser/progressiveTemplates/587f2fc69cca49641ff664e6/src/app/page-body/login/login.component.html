@@ -12,7 +12,7 @@
         <input type="email" class="form-control form-control-lg" email pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
           id="username" placeholder="you@example.com" name="userEmail" userEmail='ngModel' #userEmail="ngModel" ngModel required>
         <div *ngIf="userEmail.invalid && (userEmail.touched || userEmail.dirty)" class="alert alert-danger">
-          <div *ngIf="userEmail.hasError('required')">Email id is required</div>
+          <div *ngIf="userEmail.hasError('required')">Email is required</div>
           <div *ngIf="userEmail.hasError('pattern')">Invalid Email</div>
         </div>
       </div>
@@ -24,12 +24,14 @@
         <input type="password" class="form-control form-control-lg" id="password" name="password" password='ngModel' #password="ngModel"
           ngModel required="required">
         <div *ngIf="password.invalid && (password.touched || password.dirty)" class="alert alert-danger">
-          <div *ngIf="password.hasError('required')">Password id is required</div>
+          <div *ngIf="password.hasError('required')">Password is required</div>
         </div>
       </div>
     </div>
 
-
+    <div  *ngIf="ifInvalidUserPassword"  class="alert alert-danger row padding text-center">
+      <div><i class="fa fa-exclamation-triangle"></i> Email or password is not correct. Please try again.</div>
+    </div>
     <div class="row padding">
       <div class="col-xs-6">
 

@@ -35,17 +35,25 @@ export class HomepageComponent implements OnInit {
   private sliderData: any;
   private imageUrlSlider;
   private catName;
-  private isSliderDataAvailable:boolean = false;
-  constructor(private route: Router,private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService,private title: TitleService) {
+  private isSliderDataAvailable: boolean = false;
+  private isRandomProducts;
+
+  constructor(private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
-      this.sliderData = data;
-       var size = Object.keys(this.sliderData).length;
-       if(size >0){
-        this.isSliderDataAvailable = true;
-       }else{
+      if (data.length > 0) {
+        this.sliderData = data;
+        var size = Object.keys(this.sliderData).length;
+        if (size > 0) {
+          this.isSliderDataAvailable = true;
+        } else {
+          this.isSliderDataAvailable = false;
+        }
+      } else {
+        this.sliderData = null;
         this.isSliderDataAvailable = false;
-       }
+      }
+
     }, err => {
       console.log(err);
     });
@@ -76,11 +84,16 @@ export class HomepageComponent implements OnInit {
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
 
     this.categoryService.getCategories().subscribe(data => {
-      // Read the result field from the JSON response.
-      this.results = data;
-      data.forEach(element => {
-        this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
-      });
+      if (data.length > 0) {
+        // Read the result field from the JSON response.
+        this.results = data;
+        data.forEach(element => {
+          this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
+        });
+      } else {
+        this.results = null;
+      }
+
 
     },
       error => {
@@ -91,28 +104,36 @@ export class HomepageComponent implements OnInit {
     let max;
 
     this.productService.getAllProducts().subscribe(data => {
-      this.products = data;
-      max = Object.keys(this.products).length;
 
-      let lastIndex = null;
-      this.randomedArr = [];
-      while (true) {
-        this.randomIndex = Math.floor(Math.random() * max);
-        if (this.randomedArr.length == 2) {
-          break;
+      if (data.length >= 2) {
+        this.products = data;
+        max = Object.keys(this.products).length;
+        if (max >= 2) {
+          this.isRandomProducts = true;
         }
-
-        if (lastIndex != null && this.randomedArr.length == 1) {
-          if (lastIndex != this.randomIndex) {
-            this.randomedArr.push(this.products[this.randomIndex]);
+        let lastIndex = null;
+        this.randomedArr = [];
+        while (true) {
+          this.randomIndex = Math.floor(Math.random() * max);
+          if (this.randomedArr.length == 2) {
             break;
           }
-        } else {
-          this.randomedArr.push(this.products[this.randomIndex]);
-          lastIndex = this.randomIndex;
-        }
 
+          if (lastIndex != null && this.randomedArr.length == 1) {
+            if (lastIndex != this.randomIndex) {
+              this.randomedArr.push(this.products[this.randomIndex]);
+              break;
+            }
+          } else {
+            this.randomedArr.push(this.products[this.randomIndex]);
+            lastIndex = this.randomIndex;
+          }
+
+        }
+      } else {
+        this.products = null;
       }
+
     }, err => {
       console.log('Error retrieving all products');
     })
@@ -125,7 +146,8 @@ export class HomepageComponent implements OnInit {
       'width': '100%'
     };
     let vw = window.innerWidth;
-    if (vw < 768 && length - 1 === index && index % 2 === 0) {
+    if (vw < 768 && length - 1 === index && length % 2 === 1) {
+      console.log("returned")
       return styles;
     }
   }
@@ -136,7 +158,7 @@ export class HomepageComponent implements OnInit {
     this.router.navigate(['/' + val, id, name]);
   }
 
-  navigateFeaturedProd(val, item){
+  navigateFeaturedProd(val, item) {
 
     this.productService.getCategoryData(item.childId).subscribe((data: any) => {
       this.catName = data[0].name
@@ -148,4 +170,21 @@ export class HomepageComponent implements OnInit {
 
   }
 
+  navigateSliderProd(val, item) {
+    if(item.optionals.length == 2){
+      this.catName = item.optionals[0].name
+      this.dataService.data = item.optionals[1];
+      this.route.navigate([val, this.catName]);
+    }
+
+
+    // this.productService.getCategoryData(item.childId).subscribe((data: any) => {
+    //   this.catName = data[0].name
+    //   this.dataService.data = item;
+    //   this.route.navigate([val, this.catName]);
+    // }), err => {
+    //   console.log(err)
+    // }
+
+  }
 }

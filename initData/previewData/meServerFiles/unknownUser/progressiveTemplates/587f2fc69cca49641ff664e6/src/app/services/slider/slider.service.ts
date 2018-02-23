@@ -16,7 +16,7 @@ export class SliderService {
 
   retrieveSliderData() {
     return this.http.get(SERVER_URL + '/templates/getSliderData?appId=' + this.appId)
-      .map(res => res.json());
+      .map(res => res.text() ? res.json() : res);
   }
 
 }

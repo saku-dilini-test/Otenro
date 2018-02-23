@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import 'rxjs/add/operator/map';
+import {Observable} from "rxjs/Rx";
 
 
 @Injectable()
@@ -16,26 +17,22 @@ export class AppDataService {
 
     getTerms() {
         return this.http.get(SERVER_URL + '/templates/getTermsAndConditions?appId='+this.appId)
-            .map(res => res.json());
+            .map(res => res.text() ? res.json() : res);
     }
 
     getPolicies() {
         return this.http.get(SERVER_URL + "/templates/getPolicies?appId="+this.appId)
-            .map(res => res.json());
+            .map(res => res.text() ? res.json() : res);
     }
 
     getContactUs() {
         return this.http.get(SERVER_URL + '/templates/getContactUs?appId='+this.appId)
-            .map(res => res.json());
+            .map(res => res.text() ? res.json() : res);
     }
 
     getAboutUs() {
         return this.http.get(SERVER_URL + "/templates/getAboutUs?appId="+this.appId)
-            .map(res => res.json());
+            .map(res => res.text() ? res.json() : res);
     }
 
-    getContactUsInfo() {
-      return this.http.get(SERVER_URL + "/edit/getContactUs?appId="+this.appId)
-        .map(res => res.json());
-    }
 }

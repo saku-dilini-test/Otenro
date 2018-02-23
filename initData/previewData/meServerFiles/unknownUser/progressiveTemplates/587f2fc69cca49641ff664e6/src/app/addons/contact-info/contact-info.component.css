@@ -18,18 +18,12 @@ p{
     line-height: 30px;
     border-bottom: 1px dotted #b3b3b3;
 }
+.social-media{
+  display: flex;
+}
 
-i, li{
-	display: inline-block;
-	font-size:14px;
-    margin-top: 2px;
-    margin-bottom: 18px;
-    padding-right: 19px;
-    font-size: 12px;
-    font-weight: 600;
-    color: #2a2d32;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+.row{
+  margin: 10px -15px;
 }
 
 @media (max-width: 767px){
