@@ -170,4 +170,21 @@ export class HomepageComponent implements OnInit {
 
   }
 
+  navigateSliderProd(val, item) {
+    if(item.optionals.length == 2){
+      this.catName = item.optionals[0].name
+      this.dataService.data = item.optionals[1];
+      this.route.navigate([val, this.catName]);
+    }
+
+
+    // this.productService.getCategoryData(item.childId).subscribe((data: any) => {
+    //   this.catName = data[0].name
+    //   this.dataService.data = item;
+    //   this.route.navigate([val, this.catName]);
+    // }), err => {
+    //   console.log(err)
+    // }
+
+  }
 }

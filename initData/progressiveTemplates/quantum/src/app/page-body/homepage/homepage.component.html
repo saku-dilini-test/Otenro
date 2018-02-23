@@ -6,12 +6,12 @@
 					<div *ngIf="isSliderDataAvailable == true"id="carousel-1" class="carousel no-shadows slide animated puffIn col-sm-12" data-ride="carousel">
 					<div class="carousel-inner" *ngIf="isSliderDataAvailable == true">
 							<div class="item active">
-								<img src="{{imageUrlSlider}}/{{sliderData[0].imageUrl}}" />
-								<div class="carousel-caption">
+								<img src="{{imageUrlSlider}}/{{sliderData[0].imageUrl}}" (click)="navigateSliderProd('product',sliderData[0])"/>
+								<div  class="carousel-caption">
 								</div>
 							</div>
 							<div class="item" *ngFor="let slider of sliderData | slice:1;let i = index">
-								<img src="{{imageUrlSlider}}/{{slider.imageUrl}}" />
+								<img src="{{imageUrlSlider}}/{{slider.imageUrl}}" (click)="navigateSliderProd('product',sliderData[i+1])"/>
 								<div class="carousel-caption">
 								</div>
 							</div>
@@ -75,7 +75,7 @@
               <p class="content-index mg-lg main-content-font">
                 {{randomedArr[0].detailedDesc}}
               </p>
-              <a class="col-sm-6 btn btn-d btn-lg main-button" (click)="navigateFeaturedProd('product',randomedArr[1])">More Info</a>
+              <a class="col-sm-6 btn btn-d btn-lg main-button" (click)="navigateFeaturedProd('product',randomedArr[0])">More Info</a>
             </div>
             <div class="col-sm-6">
               <img src="{{imageUrlProd}}/{{randomedArr[0].imageUrl}}"
