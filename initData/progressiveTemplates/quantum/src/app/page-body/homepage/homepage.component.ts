@@ -144,7 +144,6 @@ export class HomepageComponent implements OnInit {
     };
     let vw = window.innerWidth;
     if (vw < 768 && length - 1 === index && length % 2 === 1) {
-      console.log("returned")
       return styles;
     }
   }

@@ -49,7 +49,9 @@
   width: 80px;
   height: 80px;
 }
-
+.container{
+  min-height:calc(100vh - 410px);
+}
 
 @media (max-width: 767px) {
   .cart img{
