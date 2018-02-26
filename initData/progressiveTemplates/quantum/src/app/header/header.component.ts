@@ -26,7 +26,17 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.titleServ.currentTitle.subscribe(message => this.title = message)
+    this.titleServ.currentTitle.subscribe(message => this.title = message);
+
+    $(".navbar-2").on('show.bs.collapse', function(){
+      $('.mobileTitle').removeClass('visible-xs');
+      $('.mobileTitle').addClass('hidden');
+    });
+
+    $(".navbar-2").on('hide.bs.collapse', function(){
+      $('.mobileTitle').addClass('visible-xs');
+      $('.mobileTitle').removeClass('hidden');
+    });
   }
 
   ngAfterContentChecked() {
@@ -50,6 +60,14 @@ export class HeaderComponent implements OnInit{
     this.title = name;
 
     this.router.navigate([route]);
+  }
+
+  manualToggle() {
+
+    this.titleServ.changeTitle("Shopping Cart");
+    $('.navbar-2').removeClass('in');
+    $('.mobileTitle').addClass('visible-xs');
+    $('.mobileTitle').removeClass('hidden');
   }
 
 }
