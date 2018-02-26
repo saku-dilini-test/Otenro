@@ -11,7 +11,7 @@
               <div class="col col-50 no-padding col-center text-center ">
                   <div class="item-text-wrap made-easy-header-font">
                       <div class="catagories_text">{{foods[$index].name}}</div>
-                      <a class="button-main">{{currency.sign}} {{foods[$index].variants[0].price}} | BUY</a>
+                      <a class="button-main">{{foods[$index].variants[0].price|currency: "Rs."}} | BUY</a>
                   </div>
               </div>
           </div>
@@ -20,7 +20,7 @@
               <div class="col col-50 no-padding col-center text-center">
                   <div class="item-text-wrap made-easy-header-font">
                       <div class="catagories_text">{{foods[$index+1].name}}</div>
-                      <a class="button-main"> {{currency.sign}} {{foods[$index+1].variants[0].price}} | BUY</a>
+                      <a class="button-main"> {{foods[$index+1].variants[0].price|currency: "Rs."}} | BUY</a>
                   </div>
               </div>
 

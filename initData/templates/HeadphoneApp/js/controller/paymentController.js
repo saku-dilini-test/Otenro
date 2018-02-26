@@ -24,9 +24,9 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     //setting Order Purchase History
     var orderHistory = [];
     if($scope.user){
-        $scope.history  = JSON.parse(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser));
+         $scope.history  = JSON.parse(localStorage.getItem("history"+$rootScope.appId+$scope.user.registeredUser));
     }
-
+   
 
     // --/-- Here start retrieving the currency --/--//
     $scope.userId = $rootScope.userId;
@@ -39,10 +39,12 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     });
 
 
-
+    
 
     $http.get(constants.SERVER_URL + '/edit/getIPGInfo?appId='+$scope.appId).success(function(data) {
         $scope.paymentData = data;
+        $log.debug($scope.paymentData);
+
         if($stateParams.item.delivery.method == "Delivery") {
             $scope.deliveryShow = data.cashOnDeliveryEnable;
             $scope.pickupShow = false;
@@ -137,7 +139,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
             $log.debug($scope.user.registeredUser);
             $scope.details ={
                 appId : $rootScope.appId,
-                registeredUser: $scope.user ? $scope.user.registeredUser : 'unRegisterdUser',
+                registeredUser: $scope.user ? $scope.user.registeredUser : 'unRegisterdUser', 
                 item : $stateParams.item.cart,
                 amount : $stateParams.item.amount,
                 customerName : $stateParams.item.delivery.name,
@@ -220,11 +222,11 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
     // --/-- Here start Cash Payment Function --/--
 
     $scope.confirmCashPayment = function(){
-
+    
         if($stateParams.item.delivery.method == "Delivery"){
             $scope.details ={
                 appId : $rootScope.appId,
-                registeredUser: $scope.user ? $scope.user.registeredUser : 'unRegisterdUser',
+                registeredUser: $scope.user ? $scope.user.registeredUser : 'unRegisterdUser',  
                 item : $stateParams.item.cart,
                 amount : $stateParams.item.amount,
                 customerName : $stateParams.item.delivery.name,
@@ -244,7 +246,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
             };
         }
         else{
-
+         
             $scope.details ={
                 appId : $rootScope.appId,
                 registeredUser: $scope.user ? $scope.user.registeredUser : 'unRegisterdUser',
@@ -287,7 +289,7 @@ mobileApp.controller('paymentCtrl', function($scope,$rootScope, $stateParams,$ht
                                     localStorage.setItem("history"+$rootScope.appId+$scope.user.registeredUser, JSON.stringify(orderHistory));
 
                                 }
-
+                                
 
 
 

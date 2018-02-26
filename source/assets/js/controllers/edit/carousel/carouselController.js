@@ -43,7 +43,6 @@
         //retrieving slider data
         $http.get(SERVER_URL + 'edit/getSliderData?appId=' + $rootScope.appId).success(function (data) {
             $scope.sliderData = (data);
-            console.log("slider data" + JSON.stringify($scope.sliderData))
         });
 
         $scope.imageUrl = SERVER_URL + "templates/viewWebImages?userId="
@@ -58,9 +57,7 @@
             $scope.SliderEditData = item;
             $scope.catModel = $scope.SliderEditData.optionals[0];
             $scope.prodModel = $scope.SliderEditData.optionals[1];
-            console.log('$scope.catModel : ' + $scope.catModel)
-            console.log('$scope.prodModel : ' + $scope.prodModel)
-            console.log('item : ' + JSON.stringify(item))
+
             carouselService.showEditSliderDialog(item);
         };
 
@@ -68,7 +65,6 @@
 
         //retrieving categories data
         $http.get(SERVER_URL + 'templates/getSpecificChild?appId=' + $rootScope.appId).success(function (data) {
-            console.log('data : ' + JSON.stringify(data));
             $scope.categories = data;
 
         });
@@ -78,10 +74,8 @@
         $scope.changeCat = function (category) {
             $scope.selectedCategory = category;
 //            $scope.catModel = category;
-            console.log("category selected : " + JSON.stringify(category));
 
             $http.get(SERVER_URL + 'templates/getProductsByCatId?appId=' + $rootScope.appId + '&childId=' + category.id).success(function (data) {
-                console.log('data : ' + JSON.stringify(data));
                 $scope.products = data;
 
             });
@@ -91,7 +85,6 @@
         //product on select
         $scope.changeProd = function (product) {
             $scope.selectedProduct = product;
-            console.log("category product : " + JSON.stringify(product));
 
         }
 
@@ -148,12 +141,10 @@
 
 
 
-        console.log("$scope.initialData : " + $scope.initialData)
 
         //check for initial data **controller parse data
         if ($scope.initialData == null) {
-            console.log('initial data null')
-            console.log($scope.initialData)
+
         }
         else if ($scope.initialData) {
 
@@ -163,11 +154,9 @@
             }
 
             else if ($scope.initialData.menu) {
-                console.log('initial data available')
-                console.log($scope.initialData)
+
                 $scope.catModel = $scope.initialData.menu.optionals[0];
                 $scope.prodModel = $scope.initialData.menu.optionals[1];
-                console.log()
 
                 $scope.menu = $scope.initialData.menu;
                 $scope.serverImage = $scope.menu.imageUrl;
@@ -228,7 +217,6 @@
                 }else{
                     carouselService.addSlider(file, $rootScope.appId, menu.name, $rootScope.tempNew, tempOptArr).success(function (data) {
 
-                        console.log("$rootScope.tempNew : " + $rootScope.tempNew);
 
                         var urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                             + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";

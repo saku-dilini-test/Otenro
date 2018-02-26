@@ -2,7 +2,7 @@
  * Created by amila on 3/31/16.
  */
 
-mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants,$log) {
+mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$state,$ionicPopup,constants,$log,$ionicLoading) {
 
     $scope.$emit('hideMenu',{});
     $rootScope.parseWeight;
@@ -14,6 +14,11 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
         +"/templates/viewImages?userId="
         +$scope.userId+"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=thirdNavi";
     $scope.selectedVariant = {};
+    
+    $ionicLoading.show({
+        template: '<ion-spinner icon="spiral"></ion-spinner>',
+    });
+
 
     $http.get(constants.SERVER_URL + '/templates/getProductsByCatId?appId='+$scope.appId+'&childId='+$stateParams.categoryId).success(function(data) {
     $scope.foods = data;
@@ -43,6 +48,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     for ( var i=0; i<$scope.foods.length ; i++){
         $scope.color.push($scope.getRandomColor());
     }
+     $ionicLoading.hide();
 
     }).error(function(err) {
         alert('warning', "Unable to get Products Selected Category", err.message);
@@ -186,6 +192,7 @@ mobileApp.controller('foodCtrl', function($scope,$stateParams,$rootScope,$http,$
     // Check buyQty input value.
     // If buyQty value is less than or equal Selected-Variant-Qty, Buy Button Enable
     $scope.changeBuyQuantity = function (buyQty) {
+
         if($scope.foodInfo.selection.length == 1 && $scope.selectedVariant1 == undefined){
             $scope.lockBuyButton = true;
         }else if($scope.foodInfo.selection.length == 2 && $scope.selectedVariant2 == undefined){

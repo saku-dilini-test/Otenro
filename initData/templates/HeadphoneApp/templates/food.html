@@ -22,7 +22,7 @@
                 <div class="list">
 
                     <a class="item item-icon-right" >
-                        <h2 class="made-easy-content-font"> Price - {{currency.sign}} {{selectedVariant.price}}</h2>
+                        <h2 class="made-easy-content-font"> Price -  {{selectedVariant.price|currency: "Rs."}}</h2>
                         <i class="icon ion-cash"></i>
                     </a>
 
@@ -37,7 +37,7 @@
                                     class="made-easy-content-font"
                                     ng-options="variant.vType  for variant in selection |unique:'vType' "
                                     ng-change="changeVariant(selectedVariant)"
-                                    ng-click="selectedVariant.buyQuantity = ''">
+                                    >
                             </select>
                         </label>
                         <div class="item-error-message text-right"  ng-if="lockBuyButton && foodInfo.selection[0].name && !selectedVariant1">
@@ -51,7 +51,7 @@
                                     class="made-easy-content-font"
                                     ng-options="variant.vType  for variant in selection1 |unique:'vType' "
                                     ng-change="changeVariant2(selectedVariant1)"
-                                    ng-click="selectedVariant.buyQuantity = ''">
+                                    >
                             </select>
                         </label>
                         <div class="item-error-message text-right" ng-if="lockBuyButton && foodInfo.selection[1].name && !selectedVariant2 && selectedVariant1" >
@@ -65,7 +65,7 @@
                                     class="made-easy-content-font"
                                     ng-options="variant.vType  for variant in selection2 |unique:'vType'"
                                     ng-change="changeVariant3(selectedVariant3)"
-                                    ng-click="selectedVariant.buyQuantity = ''">
+                                    >
                             </select>
                         </label>
                         <div class="item-error-message text-right" ng-if="lockBuyButton && foodInfo.selection[2].name && !selectedVariant3 && selectedVariant2">
@@ -79,7 +79,7 @@
                                     class="made-easy-content-font"
                                     ng-options="variant.vType  for variant in selection3 |unique:'vType'"
                                     ng-change="changeVariant4(selectedVariant4)"
-                                    ng-click="selectedVariant.buyQuantity = ''">
+                                    >
                             </select>
                         </label>
                         <div class="item-error-message text-right" ng-if="lockBuyButton && foodInfo.selection[3].name && !selectedVariant4 && selectedVariant3">
@@ -89,7 +89,7 @@
 
                     <a class="item item-icon-right" >
                         <h2 class="made-easy-content-font">
-                            <input type="number" min="1"
+                            <input value="" autocomplete=”off” type="number" min="1"
                                    placeholder="Enter Quantity"
                                    ng-model="selectedVariant.buyQuantity"
                                    ng-change="changeBuyQuantity(selectedVariant.buyQuantity)">

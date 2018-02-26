@@ -28,11 +28,13 @@
 											"city": res.data.user.city,
 											"zip": res.data.user.zip,
 											"type": 'internal',
-											"appId":res.data.user.appId
+											"appId":res.data.user.appId,
+											"registeredUser": res.data.user.sub
 										};
 										localStorage.setItem('appLocalStorageUser'+$rootScope.appId, JSON.stringify(requestParams));
                                         $rootScope.isUserLoggedIn.check = true;
                                         $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
+                                        $rootScope.cart.cartItems = $rootScope.cart.cartItems;
 										if($stateParams.item == 'delivery'){
 											$state.go('app.cart');
 										}else{
