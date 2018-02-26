@@ -35,9 +35,9 @@
                 <span class="item-error-message">Password should have at least one lower or Upper letter and one number</span>
                 </span>
               </label>
-              <label class="item item-input item-stacked-label">
+              <label class="item item-input item-floating-label">
                 <span class="input-label">Confirm Password </span>
-                <input type="password" name="passwordCon" placeholder="Re-enter the password" ng-model="data.passwordCon" ng-required="true" >
+                <input type="password" name="passwordCon" placeholder="Confirm Password" ng-model="data.passwordCon" ng-required="true" >
                 <span class="help-block register-pw-error-message" ng-show="signUpForm.passwordCon.$dirty && data.password != data.passwordCon">
                     <span class="item-error-message"> Passwords do not match.</span>
                 </span>
@@ -57,8 +57,9 @@
               <label class="item item-input item-select">
                 <span class="input-label">Country</span>
                 <select  placeholder="Select Category" ng-model="data.country" required>
-                  <option ng-value="country.countryName" ng-repeat="country in countries">{{country.countryName}}
-                  </option>
+                  <!-- <option ng-value="country.countryName" ng-repeat="country in countries">{{country.countryName}}
+                  </option> -->
+                  <option ng-selected="Sri Lanka">Sri Lanka</option>
                 </select>
               </label>
               <label class="item item-input item-floating-label">

@@ -3,7 +3,7 @@
  */
 
 
-mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants,readMadeEasy) {
+mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$http,constants,readMadeEasy,$ionicLoading) {
 
     if (typeof $rootScope.appId === 'undefined'){
 
@@ -28,6 +28,9 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
 
     $scope.userId=$rootScope.userId;
     $scope.appId=$rootScope.appId;
+    $ionicLoading.show({
+        template: '<ion-spinner icon="spiral"></ion-spinner>',
+    });
 
     readMadeEasy.readFile().success(function(data){
         $scope.appId = data.appId;
@@ -38,7 +41,9 @@ mobileApp.controller('categoryCtrl', function($scope,$stateParams,$rootScope,$ht
 
         
       $http.get(constants.SERVER_URL + '/templates/getSpecificChild?appId='+$scope.appId).success(function(data) {
+        
           $scope.categories = data;
+           $ionicLoading.hide();
       }).error(function(err) {
           alert('warning', "Unable to get categories", err.message);
       });

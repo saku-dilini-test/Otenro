@@ -9,6 +9,8 @@ mobileApp.controller('shippingCtrl', function($scope,$rootScope,$http,$state,$st
     $scope.appId=$rootScope.appId;
 
 
+
+    
     var localData = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
 
     if($stateParams.item.location == "old"){

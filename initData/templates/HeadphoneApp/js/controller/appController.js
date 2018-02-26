@@ -14,6 +14,7 @@ mobileApp.controller('appCtrl', function($scope,$rootScope, $state,$ionicSideMen
     }
 
 
+
     $rootScope.parentobj = {};
     $rootScope.parentobj.cartSize = $rootScope.cart.cartSize;
     $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
@@ -28,9 +29,9 @@ mobileApp.controller('appCtrl', function($scope,$rootScope, $state,$ionicSideMen
 
     $scope.logout = function(){
         localStorage.removeItem('appLocalStorageUser'+$rootScope.appId);
-        $rootScope.cart.cartSize = 0;
+/*        $rootScope.cart.cartSize = 0;
         $rootScope.cart.cartItems = [];
-        $rootScope.parentobj.cartSize = 0;
+        $rootScope.parentobj.cartSize = 0;*/
         $rootScope.isUserLoggedIn.check = false;
         $rootScope.parentobj.userLog = $rootScope.isUserLoggedIn.check;
         $ionicSideMenuDelegate.toggleLeft();

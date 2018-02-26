@@ -7,9 +7,12 @@ mobileApp.controller('registerCtrl', function($scope,$rootScope,$http,$ionicPopu
     $scope.data = {};
     $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
 
-    $http.get(constants.SERVER_URL+"/edit/getAllCountry")
+     $http.get(constants.SERVER_URL+"/edit/getAllCountry")
         .then(function(res){
-            $scope.countries = res.data;
+            var countries = [{"countryCode":"LK","countryName":"Sri Lanka"}]
+/*            alert("res.data " + JSON.stringify(countries))*/
+            //$scope.countries = "Sri Lanka";
+            $scope.data.country =  "Sri Lanka";
         });
     $scope.signUp = function() {
         $scope.appLocalStorageUser  = JSON.parse(localStorage.getItem('appLocalStorageUser'+$rootScope.appId));
