@@ -16,10 +16,10 @@ export class PagebodyServiceModule {
   finalDetails;
   deliverItems; deliverItemsDelivery;
   currency; paypalCurrency;
-  payPalDetails: object;
+  payPalDetails: any;
   paypalKey;
   env;
-  catId; 
+  catId;
   sign;
   searchArray = [];
   constructor() {
