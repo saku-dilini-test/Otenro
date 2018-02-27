@@ -13,20 +13,21 @@ declare var userId : string;
 if (environment.production) {
   enableProdMode();
 }
-
 // appId = (<any>data).appId;
 // userId = (<any>data).userId;
+// console.log( (<any>data).appId);
+// console.log( appId);
 
 // Notification.requestPermission(function(status) {
 //   console.log('Notification permission status:', status);
 // });
 
 
-// if ('serviceWorker' in navigator) {
-//   navigator.serviceWorker.register('./service-worker.js', { scope: './' }).then(function (registration) {
-//     // Registration was successful
-//     console.log('ServiceWorker registration successful with scope: ', registration.scope);
-//     console.log('registration: ', (registration));
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service-worker.js', { scope: './' }).then(function (registration) {
+    // Registration was successful
+    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    console.log('registration: ', (registration));
 //     navigator.serviceWorker.ready.then(reg => {
 //       reg.pushManager.getSubscription().then(sub => {
 //         if (sub == undefined) {
@@ -51,13 +52,12 @@ if (environment.production) {
 //       },err=>{
 //         console.log('registration error occured: ' + err);
 //       });
-
+//
 //     })
-//   }).catch(function (err) {
-//     // registration failed :(
-//     console.log('ServiceWorker registration failed: ', err);
-//   });
-// }
+  }).catch(function (err) {
+    // registration failed :(
+    console.log('ServiceWorker registration failed: ', err);
+  });
+}
 
-console.log('main . ts')
 platformBrowserDynamic().bootstrapModule(AppModule);

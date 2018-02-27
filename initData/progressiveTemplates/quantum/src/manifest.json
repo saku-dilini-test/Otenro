@@ -1,7 +1,7 @@
 {
   "name": "Otenro-test-shell",
   "gcm_sender_id": "541835852783",
-  "short_name": "Otenro-test-shell",
+  "short_name": "Q App",
   "theme_color": "#000000",
   "background_color": "#e0e0e0",
   "display": "standalone",
