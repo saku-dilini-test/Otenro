@@ -14,9 +14,6 @@
 
         $rootScope.bodyClass = 'appEdit';
         $scope.contentUrl = true;
-console.log("$stateParams.is new  : " + $stateParams.isNew);
-        console.log("$stateParams.appId  : " + $stateParams.appId);
-        console.log("$stateParams.p  : " + $stateParams.p);
         var encParam = $stateParams.p;
         var decParamAppId = atob(encParam);
         var templateCheck = $stateParams.isNew;
@@ -61,7 +58,6 @@ console.log("$stateParams.is new  : " + $stateParams.isNew);
 
         if(templateCheck == true || templateCheck == 'true'){
 
-            console.log('inside web urls');
             $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
@@ -79,8 +75,6 @@ console.log("$stateParams.is new  : " + $stateParams.isNew);
                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
         }
-        console.log("server URL :  "  + $scope.urlPath1);
-        console.log("server URL :  "  + $scope.appTemplateUrl);
 
         // $http.get(urlPath)
         //     .success(function(){

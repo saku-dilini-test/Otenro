@@ -101,6 +101,7 @@ module.exports.routes = {
     'POST /edit/addStyleImage/addHeaderImage': 'edit/style/StyleController.addHeaderImage',
     'POST /edit/applyStyleImage/applyBackgroundImage': 'edit/style/StyleController.applyBackgroundImage',
     'POST /edit/addStyleImage/addBackgroundImage': 'edit/style/StyleController.addBackgroundImage',
+    'POST /edit/addStyleImage/addLogoImage': 'edit/style/StyleController.addLogoImage',
     'POST /edit/addStyleColor': 'edit/style/StyleController.addStyleColor',
     'POST /edit/addWebStyleColor': 'edit/style/webStyleController.addWebStyleColor',
 

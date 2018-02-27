@@ -111,6 +111,8 @@
                     return engageService.showProfileDialog(clickTitle);
                 if ('styleEditBackgroundImage' == clickTitle)
                     return stylesService.showStyleEditBackgorundImageDialog(clickTitle);
+                if ('styleAddLogoImage' == clickTitle)
+                    return stylesService.showStyleAddLogoImageDialog(clickTitle);
                 if ('publishArticle' == clickTitle)
                     return articleService.showPublishArticleDialog(clickTitle);
                 if ('previewArticles' == clickTitle)

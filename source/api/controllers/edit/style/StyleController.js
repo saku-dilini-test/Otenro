@@ -471,6 +471,42 @@ module.exports = {
             });
         }*/
     },
+    addLogoImage : function(req,res){
+
+        var userId = req.userId;
+        var appId = req.body.appId;
+        var logoImg = req.body.logo;
+        var data = logoImg;
+        var backgroundExist;
+        if(req.body.tempNew === 'true' || req.body.tempNew  === true){
+             backgroundExist = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'logo.png';
+        }else{
+             backgroundExist = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'logo.png';
+        }
+        var backgroundDimensions = sizeOf(backgroundExist);
+
+
+        var data = logoImg.replace(/^data:image\/\w+;base64,/, "");
+        var buf = new Buffer(data, 'base64');
+        // product images copy to app file server
+        if(req.body.tempNew === 'true' || req.body.tempNew  === true){
+            fs.writeFile(config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'logo.png', buf, function(err) {
+                if(err) {
+                    res.send(err);
+                }
+                res.send('ok');
+            });
+        }else{
+            fs.writeFile(config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'logo.png', buf, function(err) {
+                if(err) {
+                    res.send(err);
+                }
+                res.send('ok');
+            });
+        }
+
+
+    },
     ///**
     // * Update Background Color given appId
     // */

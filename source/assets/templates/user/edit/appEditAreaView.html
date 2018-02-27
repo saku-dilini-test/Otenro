@@ -14,6 +14,7 @@
 
                 <obl-menu-group label="Design" icon="fa-pencil-square-o">
                     <obl-menu-button ng-if="tempIsNew == 'false' || tempIsNew == 'undefined'" label="Templates" icon="fa fa-file-image-o" click-title="templates"></obl-menu-button>
+                    <obl-menu-button  label="Add Logo" icon="fa fa-file-image-o" click-title="styleAddLogoImage"></obl-menu-button>
                    <!-- <obl-menu-button label="Navigation" icon="fa-pencil-square-o" class="md-sub-menu" click-title="navigation"></obl-menu-button>-->
                     <!--<obl-menu-button label="Logo and Title" icon="fa fa-file-image-o" click-title="logoAndTitle"></obl-menu-button>-->
 
@@ -51,20 +52,19 @@
                                         <input colorpicker="rgba" ng-model="footerColor" type="text">
                                     </div>
                                 </div>
-                                <div class="other-settings">
-                                    <!--<h1>Background Image</h1>-->
-                                    <div class="other-setting">
-                                        <md-checkbox md-no-ink ng-model="editBackgroundImage"
-                                                     aria-label="Apply Background Image"
-                                                     ng-change="applyBackgroundImage(editBackgroundImage)">
-                                            Background Image
-                                        </md-checkbox>
-                                        <div ng-show="editBackgroundImage" class="edit-bg-wrapper">
-                                            <obl-menu-button label="Edit Image" icon="fa fa-file-image-o" click-title="styleEditBackgroundImage"></obl-menu-button>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <!--<div class="other-settings">-->
+                                    <!--&lt;!&ndash;<h1>Background Image</h1>&ndash;&gt;-->
+                                    <!--<div class="other-setting">-->
+                                        <!--<md-checkbox md-no-ink ng-model="editBackgroundImage"-->
+                                                     <!--aria-label="Apply Background Image"-->
+                                                     <!--ng-change="applyBackgroundImage(editBackgroundImage)">-->
+                                            <!--Background Image-->
+                                        <!--</md-checkbox>-->
+                                        <!--<div ng-show="editBackgroundImage" class="edit-bg-wrapper">-->
+                                            <!--<obl-menu-button label="Edit Image" icon="fa fa-file-image-o" click-title="styleEditBackgroundImage"></obl-menu-button>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
                                 <div ng-if="isApplyStyle.color.navigationColor">
                                     <h1>Navigation</h1>
                                     <div class="color-setting">

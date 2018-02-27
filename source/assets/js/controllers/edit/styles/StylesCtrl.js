@@ -14,6 +14,7 @@
         $scope.picFile='';
         $scope.buttonName = "Select Image";
         $scope.tmpImage = [];
+        $scope.tmpLogo= [];
         $scope.path = ME_APP_SERVER+"temp/";
 
 
@@ -65,8 +66,8 @@
             }, 650);
         };
 
-        $scope.headerImg = ME_APP_SERVER +'temp/' +$auth.getPayload().id+'/templates/'+appId+'/img/header.jpg?time='+new Date().getTime();
-        $scope.backgroundImg = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+appId+'/img/background.jpg?time='+new Date().getTime();
+        $scope.headerImg = ME_APP_SERVER +'temp/' +$auth.getPayload().id+'/templates/'+appId+'/img/header.jpg?time='+new Date();
+        $scope.backgroundImg = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+appId+'/img/background.jpg?time='+new Date();
         $scope.fonts = {
             font : 'Arial',
             fontSize : 11
@@ -148,6 +149,11 @@
             };
 
             $scope.tmpImage[0] = $scope.path+data.userId+"/templates/"+data.id+"/img/background.jpg";
+            if($rootScope.tempNew === 'true' || $rootScope.tempNew === true){
+                $scope.tmpLogo[0] = $scope.path+data.userId+"/progressiveTemplates/"+data.id+"/src/assets/images/logo.png";
+            }else {
+                $scope.tmpLogo[0] = $scope.path+data.userId+"/templates/"+data.id+"/img/logo.png";
+            }
         }).error(function (err) {
             toastr.error(err.error, 'Error', {
                 closeButton: true
@@ -184,7 +190,7 @@
                     }
 
                     var tempUrl = mySharedService.url;
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date());
 
                 }).error(function(err) {
                     toastr.error( type ,'Update Failed ', {
@@ -220,7 +226,7 @@
                     }
 
                     var tempUrl = mySharedService.url;
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date());
                 }).error(function(err) {
                     toastr.error( type , 'Update Failed ', {
                         closeButton: true
@@ -256,7 +262,7 @@
                     }
 
                     var tempUrl = mySharedService.url;
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date());
 
                 }).error(function(err) {
                     toastr.error( type , 'Update failed ', {
@@ -278,7 +284,7 @@
                     });
 
                     var tempUrl = mySharedService.url;
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date());
 
                 }).error(function(err) {
                     toastr.error('Unable to update Button Border Width', {
@@ -300,7 +306,7 @@
                     });
 
                     var tempUrl = mySharedService.url;
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date());
 
                 }).error(function(err) {
                     toastr.error('Unable to update Button Border Radius', {
@@ -343,10 +349,8 @@
             stylesService.applyBackgroundImage(requestData)
                 .success(function (res) {
                     var tempUrl = mySharedService.url;
-                    console.log("tempUrl "  + tempUrl);
-                    console.log("$scope.appUpdateLocation.loginUrl "  + $scope.appUpdateLocation.loginUrl);
 
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime(),$auth.getPayload().id,$rootScope.appId);
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date(),$auth.getPayload().id,$rootScope.appId);
                     toastr.success('Background image changed ', 'Message', {
                         closeButton: true
                     });
@@ -365,8 +369,8 @@
             stylesService.addBackgroundImage($scope.backgroundImgData)
                 .success(function (res) {
                     var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                   +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                    $scope.appTemplateUrl = urlPath+'/?'+new Date().getTime();
+                                   +"&appId="+$rootScope.appId+"&"+new Date()+"/";
+                    $scope.appTemplateUrl = urlPath;
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     $mdDialog.hide();
                     toastr.success('Background Image Updated Saved', 'Message', {
@@ -422,8 +426,8 @@
                                 closeButton: true
                             });}
                         var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                       +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                        $scope.appTemplateUrl = urlPath+'/?'+new Date().getTime();
+                                       +"&appId="+$rootScope.appId+"&"+new Date()+"/";
+                        $scope.appTemplateUrl = urlPath;
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                       /*  $log.debug($scope.appTemplateUrl);*/
 
@@ -449,15 +453,76 @@
                     toastr.success({title: "Fonts Successfully Updated"});
 
                     var tempUrl = mySharedService.url;
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().getTime());
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date());
 
-                })
+                });
         };
 
         $scope.hide = function () {
             $mdDialog.hide();
         };
 
+
+        $scope.uploadLogoToArea = function () {
+            var handleFileSelect=function(evt) {
+                var file=evt.currentTarget.files[0];
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $scope.$apply(function($scope){
+                        $scope.myImage=evt.target.result;
+                        $scope.picFile =  $scope.myImage;
+                    });
+                };
+                reader.readAsDataURL(file);
+                $scope.buttonName = "Upload Logo";
+            };
+            angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+        }
+
+        $scope.uploadLogo = function(logo){
+            if(angular.element('#fileInput').val() == ''){
+                toastr.error('Please choose an logo to upload', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else{
+                $scope.myImage = null;
+                $scope.logoImgData = {
+                    appId: appId,
+                    logo: logo,
+                    tempNew: $rootScope.tempNew
+                };
+                stylesService.addLogoImage($scope.logoImgData)
+                    .success(function (res) {
+                        var urlPath;
+                        if($rootScope.tempNew === 'true' || $rootScope.tempNew === true){
+                            urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                + "&appId=" + $rootScope.appId + "&" + new Date()+ "/";
+
+                        }else {
+
+                            urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                                + "&appId=" + $rootScope.appId + "&" + new Date() + "/";
+
+                        }
+                        $scope.appTemplateUrl = urlPath;
+                        mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                        $scope.picFile = null;
+                        $scope.tmpLogo[0] = logo;
+                        toastr.success('Logo has been uploaded successfully', 'message', {
+                            closeButton: true
+                        });
+
+                        $scope.buttonName = "Browse Image";
+                     })
+                    .error(function (res) {
+                        toastr.error('Cant Change logo', 'Waring', {
+                            closeButton: true
+                        });
+                    });
+            }
+
+        };
 
     }
 })();

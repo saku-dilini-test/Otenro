@@ -32,6 +32,18 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
+            showStyleAddLogoImageDialog: function(){
+                return $mdDialog.show({
+                    controller: 'StylesCtrl',
+                    templateUrl: 'user/edit/styles/manageLogoImageView.html',
+                    clickOutsideToClose:true
+                }).then(function(answer) {
+
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
             addHeaderImage: function(Data){
                 return $http.post(SERVER_URL + 'edit/addStyleImage/addHeaderImage', Data);
             },
@@ -40,6 +52,9 @@
             },
             addBackgroundImage: function(Data){
                 return $http.post(SERVER_URL + 'edit/addStyleImage/addBackgroundImage', Data);
+            },
+            addLogoImage: function(Data){
+                return $http.post(SERVER_URL + 'edit/addStyleImage/addLogoImage', Data);
             },
             // add background, navigation bar and footer color common function
             addStyleColor: function(Data){
