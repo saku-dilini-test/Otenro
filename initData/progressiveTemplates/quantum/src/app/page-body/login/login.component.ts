@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
           "token": res.token,
           "email": data.email,
           "name": res.user.name,
+          "lname": res.user.lname,
           "phone": res.user.phone,
           "streetNumber": res.user.streetNumber,
           "streetName": res.user.streetName,
