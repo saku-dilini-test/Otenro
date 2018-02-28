@@ -84,6 +84,7 @@ export class HomepageComponent implements OnInit {
       if (data.length > 0) {
         // Read the result field from the JSON response.
         this.results = data;
+        this.dataService.searchArray = [];
         data.forEach(element => {
           this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
         });

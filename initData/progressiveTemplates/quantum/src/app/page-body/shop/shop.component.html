@@ -16,8 +16,8 @@
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" role="menu">
-                <li *ngFor='let test of array; let i = index'>
-                  <a (click)='print(array[i])' class="a-btn pull-left-block a-block dropdown">{{test.name}}</a>
+                <li *ngFor='let cat of categories; let i = index'>
+                  <a (click)='filterProducts(categories[i])' class="a-btn pull-left-block a-block dropdown">{{cat.name}}</a>
                 </li>
               </ul>
             </div>

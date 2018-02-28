@@ -74,16 +74,7 @@ this.addEventListener('install', event => {
         .then(self.skipWaiting())
     );
 });
-//  self.addEventListener('install', function(event) {
-//    event.waitUntil(
-//      caches.open('precache-v1').then(function(cache) {
-//        return cache.addAll([
-//          './index.html',
-//          // etc
-//        ]);
-//      })
-//    );
-//  });
+
 // The activate handler takes care of cleaning up old caches.
 this.addEventListener('activate', event => {
     const currentCaches = [PRECACHE, RUNTIME];
