@@ -33,7 +33,7 @@
         <label for="email" class="col-2 col-form-label">Email</label>
         <div class="col-10">
           <input class="form-control" #email='ngModel' type="email" name="email" id="email" #contactEmail="ngModel" placeholder="you@example.com"
-                 email pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" ngModel required>
+          (ngModelChange)="modelChanged($event)" email pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" ngModel required>
           <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
             <div [hidden]="!email.hasError('required')">email is required</div>
             <div [hidden]="!email.hasError('pattern')">Invalid Email ID</div>
