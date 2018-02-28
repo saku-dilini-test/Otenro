@@ -66,73 +66,60 @@ const PRECACHE_URLS = [
   './assets/js/zone.js',
 ];
 
-// The install handler takes care of precaching the resources we always need.
-this.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open(PRECACHE)
-            .then(cache => cache.addAll(PRECACHE_URLS))
-        .then(self.skipWaiting())
-    );
-});
-
-// The activate handler takes care of cleaning up old caches.
-this.addEventListener('activate', event => {
-    const currentCaches = [PRECACHE, RUNTIME];
-    event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
-    }).then(cachesToDelete => {
-            return Promise.all(cachesToDelete.map(cacheToDelete => {
-                return caches.delete(cacheToDelete);
-            }));
-        }).then(() => self.clients.claim())
-    );
-});
-
-
-
- this.addEventListener('fetch', function(event) {
-   // var dataUrl = 'https://mpfc.staging.wpengine.com';
-   // if (e.request.url.indexOf(dataUrl) > -1) {
-   if (event.request.url.startsWith(self.location.origin) || event.request.method == 'GET') {
-
-     /*
-      * When the request URL contains dataUrl, the app is asking for fresh
-      * data. In this case, the service worker always goes to the
-      * network and then caches the response. This is called the "Cache then
-      * network" strategy:
-      * https://jakearchibald.com/2014/offline-cookbook/#cache-then-network
-      */
-     event.respondWith(
-       caches.open(RUNTIME).then(function(cache) {
-         return fetch(event.request).then(function(response){
-           if (response != undefined){
-             return cache.put(event.request, response.clone()).then(() => {
-                 return response;
-           });
-           }
-         }).catch(function(e) {
-           return caches.match(event.request).then(cachedResponse => {
-               if (cachedResponse) {
-                 return cachedResponse;
-               }
-             });
-         })
-       })
-     );
-   } else {
-     /*
-      * The app is asking for app shell files. In this scenario the app uses the
-      * "Cache, falling back to the network" offline strategy:
-      * https://jakearchibald.com/2014/offline-cookbook/#cache-falling-back-to-network
-      */
-     event.respondWith(
-       caches.match(event.request).then(function(response) {
-         return response || fetch(event.request);
-       })
-     );
-   }
+ // The install handler takes care of precaching the resources we always need.
+ self.addEventListener('install', event => {
+     event.waitUntil(
+     caches.open(PRECACHE)
+       .then(cache => cache.addAll(PRECACHE_URLS))
+     .then(self.skipWaiting())
+   );
  });
+
+ // The activate handler takes care of cleaning up old caches.
+ self.addEventListener('activate', event => {
+   const currentCaches = [PRECACHE, RUNTIME];
+   event.waitUntil(
+         caches.keys().then(cacheNames => {
+           return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+       }).then(cachesToDelete => {
+         return Promise.all(cachesToDelete.map(cacheToDelete => {
+             return caches.delete(cacheToDelete);
+       }));
+     }).then(() => self.clients.claim())
+   );
+ });
+
+ // The fetch handler serves responses for same-origin resources from a cache.
+ // If no response is found, it populates the runtime cache with the response
+ // from the network before returning it to the page.
+ self.addEventListener('fetch', event => {
+     // Skip cross-origin requests, like those for Google Analytics.
+     if (event.request.url.startsWith(self.location.origin)) {
+       event.respondWith(
+           caches.match(event.request).then(cachedResponse => {
+               if (event.request.url == (registration.scope+'styles.css')) {
+                 return fetch(event.request).then(response => {
+                       return response;
+                 });
+               }
+               else if(cachedResponse){
+                 return cachedResponse;
+
+               }else{
+                   return caches.open(RUNTIME).then(cache => {
+                       return fetch(event.request).then(response => {
+                         // Put a copy of the response in the runtime cache.
+                         return cache.put(event.request, response.clone()).then(() => {
+                           return response;
+                          });
+                      });
+                    });
+               }
+            })
+       );
+     }
+ });
+
 
 //
 // self.addEventListener('notificationclose', function(e) {

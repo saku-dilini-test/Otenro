@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
+import * as _ from 'lodash';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
 
@@ -79,7 +80,7 @@ export class ProductComponent implements OnInit {
                     this.selection.push({ 'vType': this.foodInfo.variants[i].selection[0].vType });
                 }
 
-                // this.selection = _.uniqBy(this.selection, 'vType');
+                this.selection = _.uniqBy(this.selection, 'vType');
                 this.selectedVariant = this.Data.variants[0];
 
                 if (this.selectedVariant.quantity > 0) {
@@ -125,7 +126,7 @@ export class ProductComponent implements OnInit {
                     this.selection1.push({ 'vType': this.foodInfo.variants[i].selection[1].vType });
                 }
             }
-            // this.selection1 = _.uniqBy(this.selection1, 'vType');
+            this.selection1 = _.uniqBy(this.selection1, 'vType');
 
         }
 
@@ -158,7 +159,7 @@ export class ProductComponent implements OnInit {
                     this.selection2.push({ 'vType': this.foodInfo.variants[i].selection[2].vType });
                 }
             }
-            // this.selection2 = _.uniqBy(this.selection2, 'vType');
+            this.selection2 = _.uniqBy(this.selection2, 'vType');
 
         }
 
@@ -189,7 +190,7 @@ export class ProductComponent implements OnInit {
                     this.selection3.push({ 'vType': this.foodInfo.variants[i].selection[3].vType });
                 }
             }
-            // this.selection3 = _.uniqBy(this.selection3, 'vType');
+            this.selection3 = _.uniqBy(this.selection3, 'vType');
         }
     };
     changeVariant4(variant4) {
