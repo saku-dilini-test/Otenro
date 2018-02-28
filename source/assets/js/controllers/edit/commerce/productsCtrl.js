@@ -72,7 +72,7 @@
 
         // Maximum Product Name, Des and Sku Length Defined
         $scope.maxLengthName = 15;
-        $scope.maxLengthDesc = 100;
+        //$scope.maxLengthDesc = 100;
         $scope.maxLengthSku = 10;
         $scope.enableTab = "true";
         $scope.productTypes = [
@@ -869,12 +869,6 @@
 
                                         }
                                         break;
-                                   }else{
-
-
-                                        return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants);
-
-                                        break;
                                    }else if( i == $scope.product.selection.length -1){
                                         $scope.product.selection.push({
                                             name:vName,
@@ -895,6 +889,12 @@
                                             return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,null, true);
                                         }
                                         break;
+                                   }else{
+
+
+                                       return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants);
+
+                                       break;
                                    }
                                  }
                             }else{
