@@ -11,7 +11,8 @@ var Passwords = require('machinepack-passwords'),
     config = require('../services/config'),
     moment = require('moment'),
     createToken = require('../services/jwt');
-    
+var sentMails = require('./../services/emailService');
+
 
 module.exports = {
 
@@ -262,6 +263,15 @@ module.exports = {
                   googleId : googleId,
                     lastLoginTime : new Date()
                 }).exec(function(err, newUser) {
+
+                var data = {
+                            email: googleEmail
+                        }
+
+                var msg = sentMails.sendRegisterConfirmation(data, function (msg)
+                        {
+//                            res.send(msg);
+                        });
 
                   if (err) return res.negotiate(err);
                     newUser.isNew = true;

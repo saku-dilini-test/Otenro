@@ -25,6 +25,8 @@ nodemailer.createTestAccount((err, account) => {
         }
     });
 
+
+
 });
 
 
@@ -43,38 +45,63 @@ module.exports = {
 
 
     sendRegisterConfirmation: function(data, callback){
-        var emailBody = "";
+
         var approot = path.resolve();
-        //var file = path.join(__dirname,  'output', index.html');
-        var serverOrg=config.server.host;
-        var imgPath = serverOrg + '/images/emailtemplates';
-        fs.readFile(approot + '/assets/templates/user/common/emailtemplates/index.html','utf8',function (err, mailbody) {
-            var replaceMailBody = mailbody.replace(/#img#/g,imgPath);
 
-            var emailDetails = {
-                text: "",
-                from: "Otenro<communications@otenro.com>",
-                to: data.email,
-                subject: "Welcome to Otenro ",
-                attachment: [
+                var mailOptions = {
+                    from: "Otenro<communications@otenro.com>",
+                    to: data.email,
+                    subject: "Welcome to Otenro ",
+                    html: {path:'/home/dilakshan/Desktop/Otenro/source/assets/templates/user/common/emailtemplates/index.html'},
+                    attachments: [
                     {
-                        data: replaceMailBody,
-                        alternative: true
+                        filename: 'Otenro-Logo.png',
+                        path: approot + '/assets/images/emailtemplates/Otenro-Logo.png',
+                        cid: 'otenrologo'
+                    },{
+                        filename: 'android-platform_318-32015.png',
+                        path: approot + '/assets/images/emailtemplates/android-platform_318-32015.png',
+                        cid: 'android'
+                    },{
+                        filename: 'apple_4096_black.png',
+                        path: approot + '/assets/images/emailtemplates/apple_4096_black.png',
+                        cid: 'apple'
                     }
-                ]
-            };
-           
-            server.send(emailDetails, function (err, message) {
-                //sails.log.info(err || message);
-                console.log(err);
-                if (err) {
-                    return callback(err);
-                }
-                callback(null, 'ok');
-            });
-        });
-    },
+                    ,{
+                        filename: 'img7.png',
+                        path: approot + '/assets/images/emailtemplates/img7.png',
+                        cid: 'img7'
+                    },{
+                        filename: 'img8.png',
+                        path: approot + '/assets/images/emailtemplates/img8.png',
+                        cid: 'img8'
+                    },{
+                        filename: 'img9.png',
+                        path: approot + '/assets/images/emailtemplates/img9.png',
+                        cid: 'img9'
+                    },{
+                        filename: 'img10.png',
+                        path: approot + '/assets/images/emailtemplates/img10.png',
+                        cid: 'img10'
+                    },{
+                        filename: 'img16.jpg',
+                        path: approot + '/assets/images/emailtemplates/img16.jpg',
+                        cid: 'img16'
+                    }
+                    ]
+                };
 
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error);
+            }
+            console.log('Message sent: %s', info.messageId);
+            // Preview only available when sending through an Ethereal account
+            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+            return callback.send('ok');
+            });
+    },
     sendGetAssistance: function(data, callback){
         console.log(data.appName)
         var emailBody = "";
