@@ -279,10 +279,10 @@ module.exports = {
                 serverOrg=config.server.host,
                 isAppNameAvailable=false;
 
-        var appQuery = { 
-                "userId":userId, 
-                "appName":req.body.appName
-             }
+            var appQuery = { 
+                    "userId":userId, 
+                    "appName":req.body.appName
+                 }
               
             Application.find(appQuery, function(err, app) { 
                   if (err) res.negotiate(err);
@@ -361,7 +361,6 @@ module.exports = {
 
 
                           fs.copy(templatePath, tempAppDirPath + app.id, function(err) {
-                              console.log("app.id "   + app.id );
 
                               if (err) return console.error(err);
                               var madeEasyFilePath = tempAppDirPath +app.id+'/src/app/madeEasy.json';
@@ -394,6 +393,10 @@ module.exports = {
                               fs.copy(tempDummyImagesPath,tempDummyImagesDesPath,function (err) {
                                       if (err) return res.negotiate(err);
                                       sails.log('Third-navigation images copy to app-File-Server');
+                                      res.send({
+                                          appId: app.id,
+                                          message: "New Application has been created"
+                                      });
                                   }
                               );
 
@@ -483,11 +486,6 @@ module.exports = {
                               });
                           }
 
-
-                          res.send({
-                              appId: app.id,
-                              message: "New Application has been created"
-                          });
                       });
                   });
                 }

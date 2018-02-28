@@ -92,7 +92,6 @@ this.addEventListener('activate', event => {
 
 
  this.addEventListener('fetch', function(event) {
-   console.log('[Service Worker] Fetch', event.request.url);
    // var dataUrl = 'https://mpfc.staging.wpengine.com';
    // if (e.request.url.indexOf(dataUrl) > -1) {
    if (event.request.url.startsWith(self.location.origin) || event.request.method == 'GET') {
