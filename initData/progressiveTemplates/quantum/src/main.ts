@@ -23,11 +23,11 @@ if (environment.production) {
 // });
 
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js', { scope: './' }).then(function (registration) {
-    // Registration was successful
-    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    console.log('registration: ', (registration));
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker.register('./service-worker.js', { scope: './' }).then(function (registration) {
+//     // Registration was successful
+//     console.log('ServiceWorker registration successful with scope: ', registration.scope);
+//     console.log('registration: ', (registration));
 //     navigator.serviceWorker.ready.then(reg => {
 //       reg.pushManager.getSubscription().then(sub => {
 //         if (sub == undefined) {
@@ -54,10 +54,10 @@ if ('serviceWorker' in navigator) {
 //       });
 //
 //     })
-  }).catch(function (err) {
-    // registration failed :(
-    console.log('ServiceWorker registration failed: ', err);
-  });
-}
+//   }).catch(function (err) {
+//     // registration failed :(
+//     console.log('ServiceWorker registration failed: ', err);
+//   });
+// }
 
 platformBrowserDynamic().bootstrapModule(AppModule);
