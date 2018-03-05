@@ -103,24 +103,26 @@ module.exports = {
     }
 
   }
-
-  ,
-
-  beforeUpdate : function(values, next) {
-    console.log("value"+values);
-    Passwords.encryptPassword({
-      password: values.password,
-      difficulty: 10
-    }).exec({
-      error: function(err) {
-        return res.negotiate(err);
-      },
-      success: function(hash) {
-        values.password = hash;
-        next();
-      }
-    });
-
-  }
+//
+//  ,
+//
+//  beforeUpdate : function(values, next) {
+//    console.log("value");
+//    console.log(values);
+//    if(values.password){
+//    Passwords.encryptPassword({
+//      password: values.password,
+//      difficulty: 10
+//    }).exec({
+//      error: function (err) {
+//        return res.negotiate(err);
+//      },
+//      success: function(hash) {
+//        values.password = hash;
+//        next();
+//      }
+//    });
+//    }
+//  }
 };
 

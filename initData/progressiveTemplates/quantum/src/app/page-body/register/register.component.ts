@@ -66,7 +66,6 @@ export class RegisterComponent implements OnInit {
   }
 
   modelChanged(e){
-    console.log(this.email)
     this.isEmailDuplicate = false;
     if(e == this.email){
       this.isEmailDuplicate = true;

@@ -309,6 +309,9 @@ module.exports.routes = {
     'GET /templates/getOrdersOfUser': 'template/TemplateController.getOrdersOfUser',
     'GET /templates/getTemplateData' : 'template/TemplateController.getTemplateByPreviewId',
 
+    'POST /templates/updateUser' : 'template/TemplateAuthController.editAppUser',
+    'POST /templates/updateUserEmail' : 'template/TemplateAuthController.editAppUserEmail',
+    'POST /templates/updateUserPassword' : 'template/TemplateAuthController.editAppUserPassword',
 
     /**
      * Template Data for App Category Media

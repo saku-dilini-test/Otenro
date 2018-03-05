@@ -20,6 +20,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { RegisterComponent } from './register/register.component';
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
+import { AppUserComponent } from './app-user/app-user.component';
 
 
 @NgModule({
@@ -38,6 +39,6 @@ import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.componen
    exports:[
     PageBodyComponent
   ],
-  declarations: [HomepageComponent, PageBodyComponent, AboutusComponent, PoliciesComponent, TermsComponent, ContactComponent, ShopComponent, ProductComponent, CartComponent, CheckoutComponent, RegisterComponent,PaypalPaymentComponent]
+  declarations: [HomepageComponent, PageBodyComponent, AboutusComponent, PoliciesComponent, TermsComponent, ContactComponent, ShopComponent, ProductComponent, CartComponent, CheckoutComponent, RegisterComponent,PaypalPaymentComponent, AppUserComponent]
 })
 export class PageBodyModule { }

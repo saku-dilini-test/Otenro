@@ -44,6 +44,9 @@
               <a class="nav-link" (click)="navigate('cart')">Cart</a>
             </li>
             <li *ngIf="loginStatus">
+              <a class="nav-link" (click)="navigate('appUser')">Edit User Details</a>
+            </li>
+            <li *ngIf="loginStatus">
               <a class="nav-link" (click)="logout()">Log Out</a>
             </li>
             <li *ngIf="!loginStatus">
@@ -79,6 +82,9 @@
             </li>
             <li>
               <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('cart', 'Shopping Cart')">Cart</a>
+            </li>
+            <li *ngIf="loginStatus">
+              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('appUser','appUser')">Edit User Details</a>
             </li>
             <li *ngIf="loginStatus">
               <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="logout()">Log Out</a>

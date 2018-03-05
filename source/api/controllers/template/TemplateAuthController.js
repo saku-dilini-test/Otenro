@@ -298,5 +298,116 @@ module.exports = {
             }
         });
     },
+    editAppUser: function(req,res){
+
+    var updateData;
+        if(req.body.firstName){
+            updateData = {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+            }
+        }else if(req.body.zip){
+            updateData = {
+                streetNumber: req.body.streetNo,
+                streetName: req.body.streetName,
+                city: req.body.city,
+                country: req.body.country,
+                zip: req.body.zip
+            }
+        }else{
+            updateData = {
+                phone: req.body.phone
+            }
+        }
+
+console.log(req.body);
+         AppUser.update({email:req.body.email},updateData).exec(function(err,user){
+
+                if (err) res.send(err);
+
+                    res.json(user);
+
+         });
+    },
+
+    editAppUserEmail: function(req,res){
+
+        var searchParam ={
+            appId:req.body.appId,
+            email: req.body.email
+        }
+
+        AppUser.update(searchParam, {email:req.body.emailRe}).exec(function(err,user){
+            console.log(user);
+
+                if (err) res.send(err);
+
+                    res.json(user);
+
+                 });
+    },
+
+    editAppUserPassword: function(req,res){
+
+        var newPassword = req.body.passwordNew;
+        var searchParam = {
+            email: req.body.email,
+            appId : req.body.appId
+        }
+            AppUser.findOne(
+                searchParam
+            , function foundUser(err, user) {
+                if (err) return res.negotiate(err);
+                if (!user) return res.notFound();
+
+                console.log(user);
+                console.log('--------');
+
+                Passwords.checkPassword({
+                    passwordAttempt: req.body.password,
+                    encryptedPassword: user.password
+                }).exec({
+
+                    error: function (err){
+                        sails.log.info(err);
+                        return res.negotiate(err);
+                    },
+
+                    incorrect: function (){
+                    console.log('not found');
+                    console.log('************');
+                        return res.notFound();
+                    },
+
+                    success: function (){
+                    console.log('ok');
+
+                        Passwords.encryptPassword({
+                          password: newPassword,
+                          difficulty: 10
+                        }).exec({
+                          error: function (err) {
+                            return res.negotiate(err);
+                          },
+                          success: function(hash) {
+                            newPassword = hash;
+
+                                AppUser.update(searchParam, {password: newPassword}).exec(function(err,user){
+                                    console.log('******');
+                                    console.log(user);
+
+                                        if (err) res.send(err);
+
+                                            res.send('ok');
+
+                                });
+                            }
+                          });
+
+                    }
+                });
+            });
+
+    }
 };
 

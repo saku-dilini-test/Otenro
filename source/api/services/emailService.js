@@ -47,45 +47,46 @@ module.exports = {
     sendRegisterConfirmation: function(data, callback){
 
         var approot = path.resolve();
+        var imgPath = approot + '/assets/images/emailtemplates/';
 
                 var mailOptions = {
                     from: "Otenro<communications@otenro.com>",
                     to: data.email,
                     subject: "Welcome to Otenro ",
-                    html: {path:'/home/dilakshan/Desktop/Otenro/source/assets/templates/user/common/emailtemplates/index.html'},
+                    html: {path: approot + '/assets/templates/user/common/emailtemplates/index.html'},
                     attachments: [
                     {
                         filename: 'Otenro-Logo.png',
-                        path: approot + '/assets/images/emailtemplates/Otenro-Logo.png',
+                        path: imgPath + 'Otenro-Logo.png',
                         cid: 'otenrologo'
                     },{
                         filename: 'android-platform_318-32015.png',
-                        path: approot + '/assets/images/emailtemplates/android-platform_318-32015.png',
+                        path: imgPath + 'android-platform_318-32015.png',
                         cid: 'android'
                     },{
                         filename: 'apple_4096_black.png',
-                        path: approot + '/assets/images/emailtemplates/apple_4096_black.png',
+                        path: imgPath + 'apple_4096_black.png',
                         cid: 'apple'
                     }
                     ,{
                         filename: 'img7.png',
-                        path: approot + '/assets/images/emailtemplates/img7.png',
+                        path: imgPath + 'img7.png',
                         cid: 'img7'
                     },{
                         filename: 'img8.png',
-                        path: approot + '/assets/images/emailtemplates/img8.png',
+                        path: imgPath + 'img8.png',
                         cid: 'img8'
                     },{
                         filename: 'img9.png',
-                        path: approot + '/assets/images/emailtemplates/img9.png',
+                        path: imgPath + 'img9.png',
                         cid: 'img9'
                     },{
                         filename: 'img10.png',
-                        path: approot + '/assets/images/emailtemplates/img10.png',
+                        path: imgPath + 'img10.png',
                         cid: 'img10'
                     },{
                         filename: 'img16.jpg',
-                        path: approot + '/assets/images/emailtemplates/img16.jpg',
+                        path: imgPath + 'img16.jpg',
                         cid: 'img16'
                     }
                     ]
