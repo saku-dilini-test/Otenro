@@ -2,10 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService','productService','inventoryService', '$rootScope', '$auth', 'SERVER_URL','initialData',
-        'mainMenuService','$log', ProductCtrl]);
+        'mainMenuService','$log','$q', ProductCtrl]);
 
     function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService,inventoryService, $rootScope,  $auth, SERVER_URL,initialData,
-    mainMenuService,$log) {
+    mainMenuService,$log,$q) {
         var size, weight;
         var variants;
 
@@ -124,18 +124,24 @@
          */
         $scope.generalDetails = function (product, current) {
             //When new product is adding to the system
+            $scope.checkValidity(product.sku).then(function (result) {
+                if(result === false){
+                    if(!$scope.product.variants){
+                        $scope.product.variants = [];
+                        $scope.product.variants.push({"sku":product.sku,"name":product.name})
+                    }
+                    if(product.childId == 'Create New Category') {
+                        toastr.error('Please select a category continue ', 'Warning', {
+                            closeButton: true
+                        });
+                    }else {
+                        disableTabs(current, true, true, false, true);
+                    }
+                }
+            }, function(reason) {
+                console.error('SKU already exists');
+            });
 
-            if(!$scope.product.variants){
-                $scope.product.variants = [];
-                $scope.product.variants.push({"sku":product.sku,"name":product.name})
-            }
-            if(product.childId == 'Create New Category') {
-                toastr.error('Please select a category continue ', 'Warning', {
-                    closeButton: true
-                });
-            }else {
-                disableTabs(current, true, true, false, true);
-            }
         };
 
 
@@ -601,43 +607,52 @@
         *
         */
         $scope.checkValidity = function(sku, position){
-            $scope.exist = false;
-            var skuData = {
-                userId: $auth.getPayload().id,
-                appId: $rootScope.appId,
-                sku: sku
-            }
-            commerceService.checkUniqueSku(skuData)
-            .success(function(result){
-                if(result == 'true'){
-                     $scope.exist = true;
-                     $scope.position = position;
-                     if(position) {
-                         $scope.product.variants[position].sku = '';
-                     }
 
-                    toastr.error('Can not add duplicate SKU values', 'Warning', {
-                        closeButton: true
-                    });
-                }else if($scope.product.variants){
-                    var count = 0;
-                    for(var i=0; i<$scope.product.variants.length; i++){
-                        if($scope.product.variants[i].sku == sku){
-                            count = count +1;
-                            if(count == 2) {
-                                $scope.exist = true;
-                                $scope.position = position;
-                                $scope.product.variants[position].sku = '';
-                                toastr.error('Can not add duplicate SKU values', 'Warning', {
-                                    closeButton: true
-                                });
-                            }
-                        }
+            return $q(function(resolve, reject) {
+                    $scope.exist = false;
+                    var skuData = {
+                        userId: $auth.getPayload().id,
+                        appId: $rootScope.appId,
+                        sku: sku
                     }
-                }
-            }).error(function (error) {
-                $log.debug(error);
-            })
+                    commerceService.checkUniqueSku(skuData)
+                    .success(function(result){
+                        if(result == 'true'){
+                             $scope.exist = true;
+                             $scope.position = position;
+                             if(position) {
+                                 $scope.product.variants[position].sku = '';
+                             }
+
+                            toastr.error('Can not add duplicate SKU values', 'Warning', {
+                                closeButton: true
+                            });
+                             reject($scope.exist);
+                        }else if($scope.product.variants){
+                            var count = 0;
+                            for(var i=0; i<$scope.product.variants.length; i++){
+                                if($scope.product.variants[i].sku == sku){
+                                    count = count +1;
+                                    if(count == 2) {
+                                        $scope.exist = true;
+                                        $scope.position = position;
+                                        $scope.product.variants[position].sku = '';
+                                        toastr.error('Can not add duplicate SKU values', 'Warning', {
+                                            closeButton: true
+                                        });
+
+                                        reject($scope.exist);
+                                    }
+                                }
+                            }
+                        }else{
+                            $scope.exist = false;
+                            resolve($scope.exist);
+                        }
+                    }).error(function (error) {
+                        $log.debug(error);
+                    })
+             });
         };
 
         /**

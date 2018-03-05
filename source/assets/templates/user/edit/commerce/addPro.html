@@ -72,8 +72,7 @@
 
                                     <md-input-container class="md-block">
                                         <label>SKU</label>
-                                        <input ng-blur="checkValidity(product.sku)"
-                                               md-maxlength="10"
+                                        <input md-maxlength="10"
                                                required
                                                ng-disabled="skuFieldEnable"
                                                name="sku"
@@ -81,7 +80,7 @@
                                                ng-pattern="/^\d*[1-9]\d*$/"
                                                ng-readonly="product.checked"
                                                >
-                                        <div class="error" ng-if="exist">Sku already exist</div>
+                                        <!--<div class="error" ng-if="exist">Sku already exist</div>-->
                                         <div ng-messages="productForm.sku.$error" ng-show="productForm.sku.$dirty">
                                             <div ng-message="required">SKU is required.</div>
                                             <div ng-message="md-maxlength">The SKU must be less than 10 characters long.</div>
@@ -106,7 +105,7 @@
                                         <label>Sub Category</label>
                                         <md-select class="" placeholder="Sub Category" ng-model="product.childId"
                                                    required>
-                                            <md-option ng-value="child.id" ng-repeat="child in child ">{{child.name}}
+                                            <md-option ng-value="ch.id" ng-repeat="ch in child ">{{ch.name}}
                                             </md-option>
 
                                             <!--// create new catergory-->
@@ -122,7 +121,7 @@
 
                                     <md-button class="me-default-button" ng-click="back()">Cancel</md-button>
                                     <!--<md-button class="me-default-button" ng-hide="product.sku" ng-click="answer('cancel')">Cancel</md-button>-->
-                                    <md-button class="me-default-button" ng-disabled="productForm.$invalid || exist" ng-click="generalDetails(product,2)">Next</md-button>
+                                    <md-button class="me-default-button" ng-disabled="productForm.$invalid" ng-click="generalDetails(product,2)">Next</md-button>
                                 </div>
                             </div>
                         </form>
