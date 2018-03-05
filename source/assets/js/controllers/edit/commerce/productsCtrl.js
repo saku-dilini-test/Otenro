@@ -122,25 +122,39 @@
          * @param product
          * @param current
          */
-        $scope.generalDetails = function (product, current) {
-            //When new product is adding to the system
-            $scope.checkValidity(product.sku).then(function (result) {
-                if(result === false){
-                    if(!$scope.product.variants){
-                        $scope.product.variants = [];
-                        $scope.product.variants.push({"sku":product.sku,"name":product.name})
+        $scope.generalDetails = function (product, current, skuFieldEnable) {
+            if(skuFieldEnable === false){
+                //When new product is adding to the system
+                $scope.checkValidity(product.sku).then(function (result) {
+                    if(result === false){
+                        if(!$scope.product.variants){
+                            $scope.product.variants = [];
+                            $scope.product.variants.push({"sku":product.sku,"name":product.name})
+                        }
+                        if(product.childId == 'Create New Category') {
+                            toastr.error('Please select a category continue ', 'Warning', {
+                                closeButton: true
+                            });
+                        }else {
+                            disableTabs(current, true, true, false, true);
+                        }
                     }
-                    if(product.childId == 'Create New Category') {
-                        toastr.error('Please select a category continue ', 'Warning', {
-                            closeButton: true
-                        });
-                    }else {
-                        disableTabs(current, true, true, false, true);
-                    }
+                }, function(reason) {
+                    console.error('SKU already exists');
+                });
+            }else{
+                if(!$scope.product.variants){
+                    $scope.product.variants = [];
+                    $scope.product.variants.push({"sku":product.sku,"name":product.name})
                 }
-            }, function(reason) {
-                console.error('SKU already exists');
-            });
+                if(product.childId == 'Create New Category') {
+                    toastr.error('Please select a category continue ', 'Warning', {
+                        closeButton: true
+                    });
+                }else {
+                    disableTabs(current, true, true, false, true);
+                }
+            }
 
         };
 
