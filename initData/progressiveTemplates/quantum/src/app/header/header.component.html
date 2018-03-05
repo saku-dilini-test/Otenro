@@ -37,7 +37,7 @@
             <li>
               <a class="nav-link" (click)="navigate('terms')">Terms & Conditions</a>
             </li>
-            <li>
+            <li *ngIf="loginStatus">
               <a class="nav-link" (click)="navigate('order-history')">Order History</a>
             </li>
             <li>
