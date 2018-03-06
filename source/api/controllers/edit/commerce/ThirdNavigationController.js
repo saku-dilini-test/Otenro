@@ -49,13 +49,14 @@ module.exports = {
      */
     addOrUpdateProduct: function (req,res) {
 
+        var defImg = req.body.defImg;
         var randomstring = require("randomstring");
 
         var  finelImages = [];
         var  tmpImage = req.body.productImages;
         var  product =  req.body.product;
         var isNew = req.body.isNew;
-
+            product.defaultImage = defImg;
         console.log("data :  " + isNew);
         if ( typeof product.tempImageArray == 'undefined'){
              product.tempImageArray=[];
@@ -103,7 +104,8 @@ module.exports = {
         var sku =[];
         if(typeof req.body.product.id != 'undefined'){
             delete product["id"];
-            console.log( "product  : " +product);
+            console.log( "product  :");
+            console.log(product);
             ThirdNavigation.update(searchQuery,product,function(err,main) {
                 if (err) {
                     return res.send(err);
