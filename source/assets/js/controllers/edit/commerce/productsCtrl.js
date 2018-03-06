@@ -919,7 +919,13 @@
                                  toastr.error('You can only add 4 variants', 'Error!', {
                                       closeButton: true
                                  });
-                                  return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null, true);
+                                if(initialData.product.id == undefined || initialData.product.id == '0'){
+                                    return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,'0', true);
+
+                                }else {
+                                    return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
+
+                                }
                             }else if($scope.product.selection.length > 0 ){
                                 for (var i = 0; i < $scope.product.selection.length; i++){
                                    if( $scope.product.selection[i].name.toLowerCase() ==  $scope.vType.toLowerCase()){
