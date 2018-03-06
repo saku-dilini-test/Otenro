@@ -43,7 +43,7 @@
                     displayName:'Variants',
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                     "<md-input-container class='md-container-modify' ng-repeat='x in row.branch.selection'>"+
-                    "<div class='md-input input-modify color-link' ng-click='cellTemplateScope.click(row.branch)'>{{x.name}} - {{x.vType}}</div>"+
+                    "<div class=' input-modify color-link' ng-click='cellTemplateScope.click(row.branch)'>{{x.name}} - {{x.vType}}</div>"+
                     "</md-input-container>"+ "</div>",
                     cellTemplateScope: {
                         click: function(data) {
