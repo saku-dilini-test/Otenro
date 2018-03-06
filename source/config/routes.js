@@ -310,7 +310,6 @@ module.exports.routes = {
     'GET /templates/getTemplateData' : 'template/TemplateController.getTemplateByPreviewId',
 
     'POST /templates/updateUser' : 'template/TemplateAuthController.editAppUser',
-    'POST /templates/updateUserEmail' : 'template/TemplateAuthController.editAppUserEmail',
     'POST /templates/updateUserPassword' : 'template/TemplateAuthController.editAppUserPassword',
 
     /**

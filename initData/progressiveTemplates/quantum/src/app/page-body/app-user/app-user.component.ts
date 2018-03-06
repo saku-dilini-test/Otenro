@@ -25,12 +25,12 @@ export class AppUserComponent implements OnInit {
   private country = [];
   private countries;
   private passwordEditable;
-  private emailEditable;
-  private nameEditable;
-  private addressEditable;
-  private phoneEditable;
   private userData;
-  private emailChange;
+  private isEmailDuplicate:boolean =false;
+  private isInvalidPassword:boolean =false;
+  private isSuccessDetails:boolean =false;
+  private isSuccessPassword:boolean =false;
+
   constructor(fb: FormBuilder, private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
     private title: TitleService, private currencyService: CurrencyService, ) {
     this.title.changeTitle("Edit User");
@@ -42,13 +42,13 @@ export class AppUserComponent implements OnInit {
       'fName': new FormControl(this.userData.name, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
       'lName': new FormControl(this.userData.lname, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
       'email': new FormControl(this.userData.email, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
-      'emailRe': new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
+      'emailRe': new FormControl('', Validators.compose([ Validators.pattern(this.emailPattern)])),
       'phone': new FormControl(this.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[().+\d -]{10,15}$/)])),
       'streetNo': new FormControl(this.userData.streetNumber, Validators.compose([Validators.required])),
       'streetName': new FormControl(this.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
       'city': new FormControl(this.userData.city, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
       'zip': new FormControl(this.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])),
-      'password': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)])),
+      'password': new FormControl('',Validators.compose([Validators.required])),
       'passwordNew': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)])),
       'passwordConfirm': new FormControl('',Validators.compose([Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)])),
       'country': new FormControl(null)
@@ -84,157 +84,57 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
     this.selectedCountry = data;
   }
 
-  toggleEmail(event) {
-    if (event.target.checked) {
-      this.emailEditable = true;
-      this.passwordEditable = false;
-      this.nameEditable = false;
-      this.addressEditable = false;
-      this.phoneEditable = false;
-    } else {
-      this.emailEditable = false;
-    }
-  }
   togglePassword(event) {
-    if (event.target.checked) {
       this.passwordEditable = true;
-      this.nameEditable = false;
-      this.emailEditable = false;
-      this.addressEditable = false;
-      this.phoneEditable = false;
-    } else {
-      this.passwordEditable = false;
-    }
-  }
-  toggleName(event) {
-    if (event.target.checked) {
-      this.nameEditable = true;
-      this.emailEditable = false;
-      this.passwordEditable = false;
-      this.addressEditable = false;
-      this.phoneEditable = false;
-    } else {
-      this.nameEditable = false;
-    }
-  }
-  toggleAddress(event) {
-    if (event.target.checked) {
-      this.addressEditable = true;
-      this.nameEditable = false;
-      this.passwordEditable = false;
-      this.emailEditable = false;
-      this.phoneEditable = false;
-    } else {
-      this.addressEditable = false;
-    }
-  }
-  togglePhone(event) {
-    if (event.target.checked) {
-      this.phoneEditable = true;
-      this.nameEditable = false;
-      this.passwordEditable = false;
-      this.emailEditable = false;
-      this.addressEditable = false;
-    } else {
-      this.phoneEditable = false;
-    }
   }
 
-  editUserName(user) {
-    console.log(user);
+
+  editUserDetails(user) {
     let userData = {
-      'email': user.email,
       'firstName': user.fName,
       'lastName': user.lName,
-    }
-    this.http.post(SERVER_URL + "/templates/updateUser", (userData), { responseType: 'json' })
-      .subscribe((res) => {
-        console.log(res)
-        this.phoneEditable = false;
-        this.nameEditable = false;
-        this.emailEditable = false;
-        this.passwordEditable = false;
-        this.addressEditable = false;
-
-        this.userData.name = res[0].firstName;
-        this.userData.lname = res[0].lastName;
-        this.localStorageService.set('appLocalStorageUser' + this.appId,this.userData)
-     
-      });
-  }
-  editUserAddress(user) {
-    console.log(user);
-    let userData = {
+      'phone': user.phone,
       'email': user.email,
+      'emailRe': user.emailRe,
       'streetNo': user.streetNo,
       'streetName': user.streetName,
       'city': user.city,
       'country': user.country,
-      'zip': user.zip
+      'zip': user.zip,
+      'appId': this.appId,
     }
     this.http.post(SERVER_URL + "/templates/updateUser", (userData), { responseType: 'json' })
       .subscribe((res) => {
-        console.log(res)
-        this.phoneEditable = false;
-        this.nameEditable = false;
-        this.emailEditable = false;
-        this.passwordEditable = false;
-        this.addressEditable = false;
-
+        this.userData.name = res[0].firstName;
+        this.userData.lname = res[0].lastName;
+        this.userData.phone = res[0].phone;
+        if(res[0].emailRe){
+          this.userData.email = res[0].emailRe;
+        }else{
+          this.userData.email = res[0].email;
+        }
         this.userData.streetNumber = res[0].streetNumber;
         this.userData.streetName = res[0].streetName;
         this.userData.city = res[0].city;
         this.userData.country = res[0].country;
         this.userData.zip = res[0].zip;
         this.localStorageService.set('appLocalStorageUser' + this.appId,this.userData)
-     
+        this.isSuccessDetails = true;
+        setTimeout(() => {
+          this.isSuccessDetails = false;
+        }, 5000)
+      },(err) =>{
+        if(err.status == 409){
+          this.isEmailDuplicate = true;
+          setTimeout(() => {
+            this.isEmailDuplicate = false;
+          }, 3000);
+        }
       });
-  }
-  editUserPhone(user) {
-    console.log(user);
-    let userData = {
-      'email': user.email,
-      'phone': user.phone
-    }
-    this.http.post(SERVER_URL + "/templates/updateUser", (userData), { responseType: 'json' })
-      .subscribe((res:any) => {
 
-        this.phoneEditable = false;
-        this.nameEditable = false;
-        this.emailEditable = false;
-        this.passwordEditable = false;
-        this.addressEditable = false;
-
-        this.userData.phone = res[0].phone;
-        this.localStorageService.set('appLocalStorageUser' + this.appId,this.userData)
-      });
-  }
-
-  changeEmail(user){
-    console.log(user);
-
-    let userData = {
-      'appId': this.appId,
-      'email': user.email,
-      'emailRe': user.emailRe
-    }
-
-    this.http.post(SERVER_URL + "/templates/updateUserEmail", (userData), { responseType: 'json' })
-    .subscribe((res:any) => {
-
-      this.phoneEditable = false;
-      this.nameEditable = false;
-      this.emailEditable = false;
-      this.passwordEditable = false;
-      this.addressEditable = false;
-
-      this.userData.email = res[0].email;
-      this.localStorageService.set('appLocalStorageUser' + this.appId,this.userData)
-    });
   }
 
   changePassword(user){
-    console.log(user);
 
     let userData = {
       'appId': this.appId,
@@ -245,8 +145,16 @@ checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
 
     this.http.post(SERVER_URL + "/templates/updateUserPassword", (userData), { responseType: 'text' })
     .subscribe((res:any) => {
-      
-    });
+      this.isSuccessPassword = true;
+      setTimeout(() => {
+        this.isSuccessPassword = false;
+      }, 5000)
+    },(err) =>{
+        this.isInvalidPassword = true;
+        setTimeout(() => {
+          this.isInvalidPassword = false;
+        }, 3000);
+    })
   }
 
 }

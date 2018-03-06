@@ -300,51 +300,69 @@ module.exports = {
     },
     editAppUser: function(req,res){
 
-    var updateData;
-        if(req.body.firstName){
+        var updateData;
+
+        //if changed email
+        if(req.body.emailRe){
+            var checkExistingEmail ={
+                appId:req.body.appId,
+                email: req.body.emailRe
+            }
+            AppUser.findOne(checkExistingEmail).exec(function(err,email){
+                if (err) res.send(err);
+                if(email){
+                    res.status(409).send('This email already exists');
+                }
+                if (email === undefined){
+                    updateData = {
+                        firstName: req.body.firstName,
+                        lastName: req.body.lastName,
+                        email:req.body.emailRe,
+                        streetNumber: req.body.streetNo,
+                        streetName: req.body.streetName,
+                        city: req.body.city,
+                        country: req.body.country,
+                        zip: req.body.zip,
+                        phone: req.body.phone
+                    };
+
+                    var findUser ={
+                        appId:req.body.appId,
+                        email: req.body.email
+                    }
+
+                    AppUser.update(findUser,updateData,{ upsert: true }).exec(function(err,updatedUser){
+
+                        if (err) res.send(err);
+                        res.json(updatedUser);
+
+                    });
+                }
+
+            });
+        }else{
             updateData = {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
-            }
-        }else if(req.body.zip){
-            updateData = {
                 streetNumber: req.body.streetNo,
                 streetName: req.body.streetName,
                 city: req.body.city,
                 country: req.body.country,
-                zip: req.body.zip
-            }
-        }else{
-            updateData = {
+                zip: req.body.zip,
                 phone: req.body.phone
+            };
+            var findUser ={
+                appId:req.body.appId,
+                email: req.body.email
             }
-        }
-
-console.log(req.body);
-         AppUser.update({email:req.body.email},updateData).exec(function(err,user){
+            AppUser.update(findUser,updateData,{ upsert: true }).exec(function(err,updatedUser){
 
                 if (err) res.send(err);
+                res.json(updatedUser);
 
-                    res.json(user);
-
-         });
-    },
-
-    editAppUserEmail: function(req,res){
-
-        var searchParam ={
-            appId:req.body.appId,
-            email: req.body.email
+            });
         }
 
-        AppUser.update(searchParam, {email:req.body.emailRe}).exec(function(err,user){
-            console.log(user);
-
-                if (err) res.send(err);
-
-                    res.json(user);
-
-                 });
     },
 
     editAppUserPassword: function(req,res){
