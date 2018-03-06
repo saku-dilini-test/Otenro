@@ -79,7 +79,7 @@
 
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
-                            <md-button class="me-default-button" ng-click="hide()">Cancel</md-button>
+                            <md-button class="me-default-button" ng-click="hide()">Close</md-button>
                             <md-button class="me-default-button" ng-click="addProduct()">Add Product</md-button>
                             <md-button ng-csv="getArray()" csv-header="['Name', 'SKU', 'Price', 'Quantity', 'Weight','Variants']" filename="products.csv"  class="me-default-button">export as csv</md-button>
                             <md-button class="me-default-button" ng-disabled="inventoryForm.$invalid" type="submit"ng-click="updateInventory()">Save</md-button>
@@ -111,7 +111,7 @@
                                 <span class="me-percentage-placeholder">%</span>
                             </fieldset>
                             <fieldset class="text-right reset-margin">
-                                <button class="me-default-button" ng-click="closeMiniLightBox()">cancel</button>
+                                <button class="me-default-button" ng-click="closeMiniLightBox()">close</button>
                                 <button class="me-default-button">save</button>
                             </fieldset>
                         </form>
