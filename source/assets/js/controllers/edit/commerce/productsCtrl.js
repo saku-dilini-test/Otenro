@@ -381,8 +381,8 @@
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
-              }if(!$scope.defaultImage){
-                    toastr.error('Please add an image ', 'Warning', {
+              }if($scope.defaultImage == null || $scope.defaultImage == undefined){
+                    toastr.error('Please select a default Image ', 'Warning', {
                         closeButton: true
                     });
               }else {
@@ -421,8 +421,8 @@
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
-              }if(!$scope.defaultImage){
-                  toastr.error('Please add an image ', 'Warning', {
+              }if($scope.defaultImage == null || $scope.defaultImage == undefined){
+                  toastr.error('Please select a default Image ', 'Warning', {
                       closeButton: true
                   });
                 }else {
@@ -543,6 +543,7 @@
         };
 
         $scope.deleteImg = function (index) {
+            $scope.defaultImage = null;
             $scope.tmpImage.splice(index, 1);
             if ($scope.product.tempImageArray&&$scope.product.tempImageArray.length > 0){
                 $scope.product.tempImageArray.splice(index, 1);
