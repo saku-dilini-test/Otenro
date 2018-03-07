@@ -24,6 +24,7 @@
                 $scope.inventoryList = initialData.inventoryList;
                 $scope.inventoryList = $filter('filter')($scope.inventoryList, $scope.search.name, undefined);
             }
+
             $scope.col_defs =[
                 {
                     field:'sku',
@@ -59,7 +60,8 @@
                     cellTemplate:   "<div ng-if='row.level == 2'>" +
                                        "<ng-form name='quantityForm'>"+
                                             "<md-input-container class='md-container-modify'>"+
-                                                "<input class='color-link' aria-label='Quantity' name='quantity' ng-model='row.branch[col.field]' maxlength='8' ng-pattern='/^[0-9]*$/' ng-click='cellTemplateScope.click(row.branch)' required/>"+
+                                                "<input ng-if='row.branch[col.field] !== null ' class='color-link' aria-label='Quantity' name='quantity' ng-model='row.branch[col.field]' maxlength='8' ng-pattern='/^[0-9]*$/' ng-click='cellTemplateScope.click(row.branch)' required/>"+
+                                                "<input ng-if='row.branch[col.field] === null' class='color-link' aria-label='Quantity' name='quantity' value='Unlimited' ng-click='cellTemplateScope.click(row.branch)' required/>"+
                                                 "<div ng-messages='quantityForm.quantity.$error' ng-show='quantityForm.quantity.$dirty'>"+
                                                     "<div ng-message='required'>Required!</div>"+
                                                     "<div ng-message='pattern'>Invalid Character!</div>"+
