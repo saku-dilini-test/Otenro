@@ -543,6 +543,7 @@
         };
 
         $scope.deleteImg = function (index) {
+            $scope.defaultImage = null;
             $scope.tmpImage.splice(index, 1);
             if ($scope.product.tempImageArray&&$scope.product.tempImageArray.length > 0){
                 $scope.product.tempImageArray.splice(index, 1);
