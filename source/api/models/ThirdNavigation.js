@@ -58,6 +58,9 @@ module.exports = {
         },
         createdDate: {
             type: 'string'
+        },
+        defaultImage:{
+            type : 'integer'
         }
     }
 };

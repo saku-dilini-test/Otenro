@@ -8,7 +8,7 @@
     mainMenuService,$log,$q) {
         var size, weight;
         var variants;
-
+        console.log($scope.defaultImage);
         $scope.customPattern =   /^[0-9a-zA-Z ]+$/;
         $scope.qtyPattern = '/^\d+(?:[.]\d{1,}|$)$/';
         $scope.tmpImage = [];
@@ -381,12 +381,15 @@
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
+              }if(!$scope.defaultImage){
+                    toastr.error('Please add an image ', 'Warning', {
+                        closeButton: true
+                    });
               }else {
-
 
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'NO';
-                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product,'isNew': $rootScope.tempNew}).success(function (result) {
+                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product,'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage}).success(function (result) {
                       toastr.success('Product added successfully', 'Awsome!', {
                           closeButton: true
                       });
@@ -418,12 +421,16 @@
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
-              }else {
+              }if(!$scope.defaultImage){
+                  toastr.error('Please add an image ', 'Warning', {
+                      closeButton: true
+                  });
+                }else {
 
 
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'YES';
-                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product, 'isNew': $rootScope.tempNew}).success(function (result) {
+                  commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product, 'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage}).success(function (result) {
                       toastr.success('Product added successfully', 'Awesome!', {
                           closeButton: true
                       });
@@ -448,6 +455,10 @@
         };
 
 
+        $scope.defImg = function(img){
+            $scope.defaultImage = img;
+            console.log($scope.defaultImage);
+        }
         
         $scope.setImage = function (img) {
 
