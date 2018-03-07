@@ -98,18 +98,18 @@ module.exports = {
             var searchApp = {
                 appId: appId
             };
-            SecondNavigation.find(searchApp).exec(function(err, app) {
+            SecondNavigation.find(searchApp).sort({createdAt: -1}).exec(function(err, results) {
                 if (err) return done(err);
-                res.send(app);
+                res.send(results);
             });
         }else {
             var searchApp = {
                 appId: appId,
                 mainId: mainId
             };
-            SecondNavigation.find(searchApp).exec(function (err, app) {
+            SecondNavigation.find(searchApp).sort({createdAt: -1}).exec(function (err, results) {
                 if (err) return done(err);
-                res.send(app);
+                res.send(results);
             });
         }
     },
@@ -121,7 +121,6 @@ module.exports = {
      * @param res
      */
     getSubChildsByAppId : function(req,res){
-
         var appId = req.param('appId');
         var searchApp = {
             appId : appId
