@@ -382,7 +382,7 @@
                       closeButton: true
                   });
               }if(!$scope.defaultImage){
-                    toastr.error('Please add an image ', 'Warning', {
+                    toastr.error('Please select a default Image ', 'Warning', {
                         closeButton: true
                     });
               }else {
@@ -422,7 +422,7 @@
                       closeButton: true
                   });
               }if(!$scope.defaultImage){
-                  toastr.error('Please add an image ', 'Warning', {
+                  toastr.error('Please select a default Image ', 'Warning', {
                       closeButton: true
                   });
                 }else {
