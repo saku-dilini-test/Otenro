@@ -381,7 +381,7 @@
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
-              }if(!$scope.defaultImage){
+              }if($scope.defaultImage == null || $scope.defaultImage == undefined){
                     toastr.error('Please select a default Image ', 'Warning', {
                         closeButton: true
                     });
@@ -421,7 +421,7 @@
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
-              }if(!$scope.defaultImage){
+              }if($scope.defaultImage == null || $scope.defaultImage == undefined){
                   toastr.error('Please select a default Image ', 'Warning', {
                       closeButton: true
                   });
