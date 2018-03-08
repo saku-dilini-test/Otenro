@@ -105,7 +105,7 @@ export class CheckoutComponent implements OnInit {
       'fName': new FormControl(this.dataService.userData.name, Validators.compose([Validators.required,Validators.pattern(/^[A-z]+$/)])),
       'lName': new FormControl(this.dataService.userData.lname, Validators.compose([Validators.required,Validators.pattern(/^[A-z]+$/)])),
       'email': new FormControl(this.dataService.userData.email, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
-      'phone': new FormControl(this.dataService.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[().+\d -]{10,15}$/)])),
+      'phone': new FormControl(this.dataService.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/)])),
       'streetNo': new FormControl(this.dataService.userData.streetNumber, Validators.compose([Validators.required])),
       'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
       'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
@@ -117,7 +117,7 @@ export class CheckoutComponent implements OnInit {
 
     this.pickupForm = fb.group({
       'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
-      'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[().+\d -]{10,15}$/), Validators.minLength(12)])),
+      'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/), Validators.minLength(12)])),
 
     });
   }

@@ -64,7 +64,7 @@
       <div class="form-group col-xs-12">
         <label>Phone :</label>
         <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the userEditForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
-        <input class="form-control" type="text" placeholder="+94712345678" [formControl]="userEditForm.controls['phone']">
+        <input class="form-control" type="text" placeholder="+94712345678" maxlength="16" [formControl]="userEditForm.controls['phone']">
 
         <div *ngIf="userEditForm.controls['phone'].hasError('required')
         && userEditForm.controls['phone'].touched" class="alert alert-danger">
