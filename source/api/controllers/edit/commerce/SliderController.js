@@ -31,70 +31,71 @@ module.exports = {
 
     updateSliderImage: function (req, res) {
 
+        var isNew = req.body.isNew;
+        var randomstring = require("randomstring");
+        var tmpImage = req.body.file;
+        var appId = req.body.appId;
+
+        var imgeFileName = randomstring.generate()+".png";
+        var data = tmpImage[0].replace(/^data:image\/\w+;base64,/, "");
+        var buf = new Buffer(data, 'base64');
 
         var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/slider/' + req.body.imageUrl;
         var desPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/slider/';
 
-        req.file('file').upload({
-            dirname: require('path').resolve(desPath)
-        }, function (err, uploadedFiles) {
-            if (err) return res.send(500, err);
+
 
             fs.unlink(filePath, function (err) {
                 if (err) return console.error(err);
             });
 
-            sails.log.info("req.body.imageUrl, " + req.body.imageUrl);
-
-            var fileName = Date.now() + '.jpg';
-            fs.rename(uploadedFiles[0].fd, desPath + fileName, function (err) {
-                if (err) return res.send(err);
+             fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+                appId + '/src/assets/images/slider/' + imgeFileName, buf, function (err) {
+                if (err) {
+                    return res.send(err);
+                }
             });
+
 
             var query = {
                 'appId': req.body.appId,
                 'name': req.body.name,
                 'optionals': req.body.optionals,
             }
-            query.imageUrl = fileName;
+            query.imageUrl = imgeFileName;
             Slider.update({ _id: req.body.id }, query).exec(function (err) {
                 if (err) res.send(err);
                 res.send('ok');
             });
 
-
-        });
     },
     addNewSlider: function (req, res) {
         var isNew = req.body.isNew;
+        var randomstring = require("randomstring");
+        var tmpImage = req.body.file;
+        var appId = req.body.appId;
 
-        console.log("req.body : " + (req.body.optionals));
+        var imgeFileName = randomstring.generate()+".png";
+        var data = tmpImage[0].replace(/^data:image\/\w+;base64,/, "");
+        var buf = new Buffer(data, 'base64');
 
         var dePath;
-        //            if(isNew == 'true' || isNew == true){
-        dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/slider/';
 
-        //            }else {
-        //                dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/secondNavi/';
-        //            }
-
-        req.file('file').upload({
-            dirname: require('path').resolve(dePath)
-        }, function (err, uploadedFiles) {
-            if (err) return res.send(500, err);
-
-            var newFileName = Date.now() + '.png';
-            fs.rename(uploadedFiles[0].fd, dePath + '/' + newFileName, function (err) {
-                if (err) return res.send(err);
-            });
+        dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + appId + '/src/assets/images/slider/';
+        fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
+                        appId + '/src/assets/images/slider/' + imgeFileName, buf, function (err) {
+                        if (err) {
+                            return res.send(err);
+                        }
+                    });
 
             var slider = req.body;
-            slider.imageUrl = newFileName;
+            slider.imageUrl = imgeFileName;
             Slider.create(slider).exec(function (err, newSlider) {
                 if (err) res.send(err);
                 res.json(newSlider);
             });
-        });
+
     },
     getSliderData: function (req, res) {
         console.log('req.body.appId : ' + req.param('appId'))
