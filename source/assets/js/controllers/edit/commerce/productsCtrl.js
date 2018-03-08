@@ -8,7 +8,7 @@
     mainMenuService,$log,$q) {
         var size, weight;
         var variants;
-        console.log($scope.defaultImage);
+        $scope.defaultImage;
         $scope.customPattern =   /^[0-9a-zA-Z ]+$/;
         $scope.qtyPattern = '/^\d+(?:[.]\d{1,}|$)$/';
         $scope.tmpImage = [];
@@ -68,6 +68,7 @@
         if (initialData.product.tempImageArray){
             for (var i=0; i<initialData.product.tempImageArray.length; i++) {
                 var tempImageUrl = tempImagePath + initialData.product.tempImageArray[i].img;
+                $scope.defaultImage = initialData.product.defaultImage;
                 $scope.tmpImage.push(tempImageUrl);
             }
         }
@@ -372,7 +373,7 @@
          * add or update product
          */
         $scope.addOrUpdateProducts = function () {
-              if(initialData.product.id == '0'){
+              if(initialData.product.id === '0'){
                   initialData.product.id = undefined;
                   $scope.product.id = undefined;
               }
@@ -381,8 +382,8 @@
                   toastr.error('Please add an image ', 'Warning', {
                       closeButton: true
                   });
-              }if($scope.defaultImage == null || $scope.defaultImage == undefined){
-                    toastr.error('Please select a default Image ', 'Warning', {
+              }if($scope.defaultImage === null || $scope.defaultImage === undefined){
+                    toastr.error('Please select a default Image from uploaded product images', 'Warning', {
                         closeButton: true
                     });
               }else {
@@ -457,7 +458,6 @@
 
         $scope.defImg = function(img){
             $scope.defaultImage = img;
-            console.log($scope.defaultImage);
         }
         
         $scope.setImage = function (img) {

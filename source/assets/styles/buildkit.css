@@ -2845,6 +2845,11 @@ table.md-calendar-day-header{
     letter-spacing: 1px;
 }
 
+
+.special{
+    border: 3px solid #31bd00 !important;
+}
+
 /*IE 10 and abouve specific css wirte inside this media quary*/
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     .fixed-inventory .tree-grid thead {

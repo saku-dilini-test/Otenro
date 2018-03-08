@@ -414,7 +414,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[0] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="1" ng-click="defImg(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
+                                        <img id="1" ng-class="{special: defaultImage == 0}" ng-click="defImg(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -422,7 +422,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[1] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img  id="2" ng-click="defImg(1)" ng-if="tmpImage[1] !== null" ngf-src="tmpImage[1]"
+                                        <img  id="2" ng-class="{special: defaultImage == 1}"  ng-click="defImg(1)" ng-if="tmpImage[1] !== null" ngf-src="tmpImage[1]"
                                               width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -430,7 +430,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[2] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="3" ng-click="defImg(2)" ng-if="tmpImage[2] !== null" ngf-src="tmpImage[2]"
+                                        <img id="3" ng-class="{special: defaultImage == 2}"  ng-click="defImg(2)" ng-if="tmpImage[2] !== null" ngf-src="tmpImage[2]"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -438,7 +438,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[3] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="4" ng-click="defImg(3)" ng-if="tmpImage[3] !== null" ngf-src="tmpImage[3]"
+                                        <img id="4" ng-class="{special: defaultImage == 3}"  ng-click="defImg(3)" ng-if="tmpImage[3] !== null" ngf-src="tmpImage[3]"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -446,7 +446,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[4] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="5" ng-click="defImg(4)" ng-if="tmpImage[4] !== null" ngf-src="tmpImage[4]"
+                                        <img id="5" ng-class="{special: defaultImage == 4}"  ng-click="defImg(4)" ng-if="tmpImage[4] !== null" ngf-src="tmpImage[4]"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -454,7 +454,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[5] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="6" ng-click="defImg(5)" ng-if="tmpImage[5] !== null" ngf-src="tmpImage[5]"
+                                        <img id="6" ng-class="{special: defaultImage == 5}"  ng-click="defImg(5)" ng-if="tmpImage[5] !== null" ngf-src="tmpImage[5]"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -462,7 +462,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[6] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="7" ng-click="defImg(6)" ng-if="tmpImage[6] !== null" ngf-src="tmpImage[6]"
+                                        <img id="7" ng-class="{special: defaultImage == 6}"  ng-click="defImg(6)" ng-if="tmpImage[6] !== null" ngf-src="tmpImage[6]"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -470,7 +470,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[7] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="8" ng-click="defImg(7)" ng-if="tmpImage[7] !== null" ngf-src="tmpImage[7]"
+                                        <img id="8" ng-class="{special: defaultImage == 7}"  ng-click="defImg(7)" ng-if="tmpImage[7] !== null" ngf-src="tmpImage[7]"
                                              width="80" height="80"/>
                                     </div>
 
