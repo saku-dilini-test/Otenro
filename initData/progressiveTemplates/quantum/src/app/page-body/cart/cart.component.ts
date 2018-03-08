@@ -128,8 +128,10 @@ export class CartComponent implements OnInit {
   }
   delivery(deliverItems) {
 
+    this.router.navigate(['checkout', 'delivery']);
+    this.dataService.deliverItems = deliverItems
 
-    if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
+    /*if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
       this.router.navigate(['checkout', 'delivery']);
       this.dataService.deliverItems = deliverItems
@@ -138,11 +140,13 @@ export class CartComponent implements OnInit {
       let status = 'delivery'
       this.router.navigate(['login', status]);
       // $state.go('app.login', { item:status });
-    }
+    }*/
   }
 
   pickupDetails(deliverItems) {
-    if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
+    this.router.navigate(['checkout', 'pickup']);
+    this.dataService.deliverItems = deliverItems;
+    /*if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
       this.router.navigate(['checkout', 'pickup']);
       this.dataService.deliverItems = deliverItems;
@@ -152,7 +156,7 @@ export class CartComponent implements OnInit {
       let status = 'pickup'
       this.router.navigate(['login', status]);
       // $state.go('app.login', { item: $scope.status });
-    }
+    }*/
   }
 
   pickUp(details) {

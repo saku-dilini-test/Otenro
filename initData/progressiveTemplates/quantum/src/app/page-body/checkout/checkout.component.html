@@ -186,7 +186,7 @@
           invalid zip code
         </div>
       </div>
-      <select id="country" class="form-control" formControlName="country" (change)="countryChanged()">
+      <select  id="country" class="form-control" formControlName="country" (change)="countryChanged($event.target.value)">
         <option *ngFor="let c of countries" [ngValue]="c.countryName">
           {{c.countryName}}
         </option>

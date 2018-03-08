@@ -100,6 +100,22 @@ export class CheckoutComponent implements OnInit {
 
     this.title.changeTitle("Checkout");
 
+
+
+      var userData = {
+        name:"",
+        lname:"",
+        email:"",
+        phone:0,
+        country:"Sri Lanka",
+        city:"",
+        streetName:"",
+        streetNumber:0,
+        zip:""
+      };
+
+    this.dataService.userData = userData;
+
     this.complexForm = fb.group({
       // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
       'fName': new FormControl(this.dataService.userData.name, Validators.compose([Validators.required,Validators.pattern(/^[A-z]+$/)])),
@@ -121,6 +137,10 @@ export class CheckoutComponent implements OnInit {
 
     });
   }
+
+
+
+
 
 
   ngOnInit() {
@@ -150,27 +170,12 @@ export class CheckoutComponent implements OnInit {
     }
     this.localData = (this.localStorageService.get('appLocalStorageUser' + this.appId));
 
-    if (this.localData == null) {
+    /*if (this.localData == null) {
       this.router.navigate(['login'])
     }
+*/
 
 
-    this.hide = true;
-
-    var param = {
-      'appId': this.appId,
-      'country': this.dataService.userData.country
-    };
-
-    this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
-      if (data == '') {
-        this.hide = true;
-        this.tax = 0;
-      } else {
-        this.tax = data[0].taxAmount;
-        this.hide = false;
-      }
-    })
 
     this.currencyService.getCurrencies().subscribe((data) => {
       this.currency = data;
@@ -861,8 +866,24 @@ export class CheckoutComponent implements OnInit {
   }
 
   countryChanged(data) {
-    console.log(data)
+    this.hide = true;
     this.isSelected = false;
+
+    var param = {
+      'appId': this.appId,
+      'country': data
+    };
+
+    this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
+      if (data == '') {
+        this.hide = true;
+        this.tax = 0;
+      } else {
+        this.tax = data[0].taxAmount;
+        this.hide = false;
+      }
+    })
+
   }
 
 
