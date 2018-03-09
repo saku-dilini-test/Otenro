@@ -75,10 +75,10 @@
         <input id=fname class="form-control" type="text" placeholder="Arstina" [formControl]="complexForm.controls['fName']" required>
 
         <div *ngIf="complexForm.controls['fName'].hasError('required')
-        && complexForm.controls['fName'].touched" class="alert alert-danger">
+        && complexForm.controls['fName'].touched && complexForm.controls['fName'].dirty" class="alert alert-danger">
           You must include a First name.
         </div>
-        <div *ngIf="!complexForm.controls['fName'].valid" class="alert alert-danger">
+        <div *ngIf="!complexForm.controls['fName'].valid && complexForm.controls['fName'].touched && complexForm.controls['fName'].dirty" class="alert alert-danger">
           First Name must only include Alphabetic character
         </div>
         <!-- <div *ngIf="complexForm.controls['fName'].hasError('minlength')
@@ -97,10 +97,10 @@
         <input class="form-control" type="text" placeholder="kale" [formControl]="complexForm.controls['lName']">
 
         <div *ngIf="complexForm.controls['lName'].hasError('required')
-        && complexForm.controls['lName'].touched" class="alert alert-danger">
+        && complexForm.controls['lName'].touched && complexForm.controls['lName'].dirty" class="alert alert-danger">
           You must include a Last name.
         </div>
-        <div *ngIf="!complexForm.controls['lName'].valid" class="alert alert-danger">
+        <div *ngIf="!complexForm.controls['lName'].valid && complexForm.controls['lName'].touched && complexForm.controls['lName'].dirty" class="alert alert-danger">
           Last Name must only include Alphabetic character
         </div>
         <!-- <div *ngIf="complexForm.controls['lName'].hasError('minlength')
@@ -119,10 +119,10 @@
         <input class="form-control" type="text" placeholder="you@example.com" [formControl]="complexForm.controls['email']">
 
         <div *ngIf="complexForm.controls['email'].hasError('required')
-        && complexForm.controls['email'].touched" class="alert alert-danger">
+        && complexForm.controls['email'].touched && complexForm.controls['email'].dirty" class="alert alert-danger">
           You must include an email.
         </div>
-        <div *ngIf="!complexForm.controls['email'].valid" class="alert alert-danger">
+        <div *ngIf="!complexForm.controls['email'].valid && complexForm.controls['email'].touched && complexForm.controls['email'].dirty" class="alert alert-danger">
           invalid Email
         </div>
 
@@ -133,10 +133,10 @@
         <input class="form-control" type="text" placeholder="+94712345678" maxlength="16" [formControl]="complexForm.controls['phone']">
 
         <div *ngIf="complexForm.controls['phone'].hasError('required')
-        && complexForm.controls['phone'].touched" class="alert alert-danger">
+        && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty" class="alert alert-danger">
           You must include a Phone Number.
         </div>
-        <div *ngIf="!complexForm.controls['phone'].valid" class="alert alert-danger">
+        <div *ngIf="!complexForm.controls['phone'].valid && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty" class="alert alert-danger">
           Enter a valid Phone Number (ex: +94123456789)
         </div>
 
@@ -147,7 +147,7 @@
         <input class="form-control" type="text" placeholder="#244 A" [formControl]="complexForm.controls['streetNo']">
 
         <div *ngIf="complexForm.controls['streetNo'].hasError('required')
-        && complexForm.controls['streetNo'].touched" class="alert alert-danger">
+        && complexForm.controls['streetNo'].touched && complexForm.controls['streetNo'].dirty" class="alert alert-danger">
           You must include Street Number.
         </div>
 
@@ -158,7 +158,7 @@
         <input class="form-control" type="text" placeholder="Your Road" [formControl]="complexForm.controls['streetName']">
 
         <div *ngIf="complexForm.controls['streetName'].hasError('required')
-        && complexForm.controls['streetName'].touched" class="alert alert-danger">
+        && complexForm.controls['streetName'].touched  && complexForm.controls['streetName'].dirty" class="alert alert-danger">
           You must include Street Name.
         </div>
       </div>
@@ -168,7 +168,7 @@
         <input class="form-control" type="text" placeholder="Your City" [formControl]="complexForm.controls['city']">
 
         <div *ngIf="complexForm.controls['city'].hasError('required')
-        && complexForm.controls['city'].touched" class="alert alert-danger">
+        && complexForm.controls['city'].touched && complexForm.controls['city'].dirty" class="alert alert-danger">
           You must include a City.
         </div>
 
@@ -179,10 +179,10 @@
         <input class="form-control" type="text" placeholder="70000" [formControl]="complexForm.controls['zip']">
 
         <div *ngIf="complexForm.controls['zip'].hasError('required')
-        && complexForm.controls['zip'].touched" class="alert alert-danger">
+        && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty" class="alert alert-danger">
           You must include zip code.
         </div>
-        <div *ngIf="!complexForm.controls['zip'].valid" class="alert alert-danger">
+        <div *ngIf="!complexForm.controls['zip'].valid && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty" class="alert alert-danger">
           invalid zip code
         </div>
       </div>
