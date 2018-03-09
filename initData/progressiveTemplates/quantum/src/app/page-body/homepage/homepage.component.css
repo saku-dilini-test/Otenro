@@ -71,6 +71,9 @@
  .category div{
    padding: 0;
  }
+ .category img{
+   min-height: calc(100vw / 2);
+ }
 }
 
 

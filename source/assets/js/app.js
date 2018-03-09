@@ -50,7 +50,8 @@ angular.module('app', [
   'textAngular',
   'ngImgCrop',
   'ngAnimate',
-  'chart.js'
+  'chart.js',
+  'uiCropper'
 
 
 ]).run(function($rootScope, $state, $auth,Auth,Permission,$log) {

@@ -97,14 +97,13 @@
 
         // image crop function
         $scope.cropImage = function () {
-                    $scope.setAspectRatio();
             var handleFileSelect = function (evt) {
                 var file = evt.currentTarget.files[0];
                 var reader = new FileReader();
                 reader.onload = function (evt) {
                     $scope.$apply(function ($scope) {
                         $scope.myImage = evt.target.result;
-                        $scope.picFile = $scope.myImage
+                        $scope.picFile = $scope.myImage;
                     });
                 };
                 reader.readAsDataURL(file);
@@ -412,12 +411,6 @@
                 });
             });
         };
-
-
-
-    };
-
-
-
-
+        $scope.setAspectRatio();
+    }
 })();

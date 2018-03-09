@@ -38,7 +38,7 @@
                 reader.onload = function (evt) {
                     $scope.$apply(function($scope){
                         $scope.myImage=evt.target.result;
-                        $scope.picFile =  $scope.myImage
+                        $scope.picFile =  $scope.myImage;
                     });
                 };
                 reader.readAsDataURL(file);
