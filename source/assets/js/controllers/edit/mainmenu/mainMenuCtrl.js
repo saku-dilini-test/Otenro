@@ -365,7 +365,7 @@
             if($scope.initialData.menu == 'addNewMenuNavigation'){
                 console.dir(initialData.prodItem)
                 //$log.debug("Add new Menu Navigation ");
-                mainMenuService.addMenu(file,$rootScope.appId,menu.name,$rootScope.tempNew).success(function(data) {
+                mainMenuService.addMenu({"file":$scope.tmpImage, "appId":$rootScope.appId, "name":menu.name,"isNew":$rootScope.tempNew}).success(function(data) {
 
                     console.log("$rootScope.tempNew : " + $rootScope.tempNew);
                     var urlPath;
@@ -440,13 +440,17 @@
                 });
             }
 
+//************************************************************
+//                  .progress(function(evt) {
+//                      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+//                      $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+//                  })
+
             // If Update Both Menu name and Image
             if($scope.mainImg != $scope.serverImage && !($scope.initialData.menu == 'addNewMenuNavigation')){
                 //$log.debug("If Update Both Menu name and Image");
-                commerceService.updateCategoryImage(file,menu.imageUrl,menu.id,$rootScope.appId,$rootScope.tempNew).progress(function(evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-                }).success(function(data, status, headers, config) {
+                commerceService.updateCategoryImage({"file":$scope.tmpImage, "imageUrl":menu.imageUrl, "categoryId":menu.id, "appId":$rootScope.appId,"isNew":$rootScope.tempNew}).success(function(data, status, headers, config) {
+                console.log(data);
                     // update image name set to imageUrl in menu collection
                     menu.imageUrl = data.imageUrl;
                     mainMenuService.updateSecondNavi(menu).success(function(data) {
@@ -457,19 +461,26 @@
 
                         $scope.appTemplateUrl = urlPath +
                             'src'+data.id+'?'+new Date().getTime();
+
                         }else {
 
                             urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
                                 + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
 
-                        $scope.appTemplateUrl = urlPath+'' +
+//                        $scope.appTemplate.progress is not a functionUrl = urlPath+'' +
+//                            '#/app/home/'+data.id+'?'+new Date().getTime();
+//                        }
+
+                        $scope.appTemplateUrl = urlPath +
                             '#/app/home/'+data.id+'?'+new Date().getTime();
+
                         }
 
-                        mySharedService.prepForBroadcast($scope.appTemplateUrl);
-                        toastr.success("New Category Added", 'Message', {closeButton: true});
-                        $mdDialog.hide();
-                        mainMenuService.showMainMenuDialog();
+                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                           toastr.success("Successfully updated category", 'Message', {closeButton: true});
+                           $mdDialog.hide();
+                           mainMenuService.showMainMenuDialog();
+
                     }).error(function(err) {
                         toastr.error(err.message, 'Warning', {
                             closeButton: true

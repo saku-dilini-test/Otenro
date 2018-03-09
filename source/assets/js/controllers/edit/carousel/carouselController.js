@@ -130,7 +130,7 @@
                     closeButton: true
                 });
             }
-
+            console.log($scope.tmpImage);
             $scope.imageSelected = true;
             $scope.buttonName = "Browse Image";
         };
@@ -197,7 +197,7 @@
 
 
 
-        $scope.addSliderImage = function (file, menu, cat, prod) {
+        $scope.addSliderImage = function (file,menu, cat, prod) {
 
             if ($scope.tmpImage[0] == null) {
                 toastr.error('Please upload an image', 'Warning', { closeButton: true });
@@ -211,10 +211,10 @@
                 tempOptArr[0] = (cat);
                 tempOptArr[1] = (prod);
 
-                if( !menu.name){
+                if(!menu.name){
                   toastr.error("Please enter a name", 'Message', { closeButton: true });
                 }else{
-                    carouselService.addSlider(file, $rootScope.appId, menu.name, $rootScope.tempNew, tempOptArr).success(function (data) {
+                    carouselService.addSlider({"file":$scope.tmpImage, "appId":$rootScope.appId, "name":menu.name, "isNew": $rootScope.tempNew, "optionals": tempOptArr}).success(function (data) {
 
 
                         var urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
@@ -252,7 +252,7 @@
 
                     if( !menu.name){
                       toastr.error("Please enter a name", 'Message', { closeButton: true });
-                    }else{carouselService.updateSliderImage(file, $scope.menu.imageUrl, menu.name, $scope.menu.id, $rootScope.appId, tempOptArr).success(function (data) {
+                    }else{carouselService.updateSliderImage({"file":$scope.tmpImage, "imageUrl":$scope.menu.imageUrl, "name": menu.name, "id":$scope.menu.id, "appId":$rootScope.appId, "optionals":tempOptArr}).success(function (data) {
 
 
                             var urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id

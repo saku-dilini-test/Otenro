@@ -128,20 +128,25 @@ export class CartComponent implements OnInit {
   }
   delivery(deliverItems) {
 
-
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
       this.router.navigate(['checkout', 'delivery']);
       this.dataService.deliverItems = deliverItems
     }
     else {
-      let status = 'delivery'
-      this.router.navigate(['login', status]);
+      this.dataService.userData = null;
+      this.router.navigate(['checkout', 'delivery']);
+      this.dataService.deliverItems = deliverItems
+
+      // let status = 'delivery'
+      // this.router.navigate(['login', status]);
       // $state.go('app.login', { item:status });
     }
   }
 
   pickupDetails(deliverItems) {
+    // this.router.navigate(['checkout', 'pickup']);
+    // this.dataService.deliverItems = deliverItems;
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
       this.router.navigate(['checkout', 'pickup']);

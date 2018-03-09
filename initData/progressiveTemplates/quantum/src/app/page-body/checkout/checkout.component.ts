@@ -100,27 +100,49 @@ export class CheckoutComponent implements OnInit {
 
     this.title.changeTitle("Checkout");
 
-    this.complexForm = fb.group({
-      // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
-      'fName': new FormControl(this.dataService.userData.name, Validators.compose([Validators.required,Validators.pattern(/^[A-z]+$/)])),
-      'lName': new FormControl(this.dataService.userData.lname, Validators.compose([Validators.required,Validators.pattern(/^[A-z]+$/)])),
-      'email': new FormControl(this.dataService.userData.email, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
-      'phone': new FormControl(this.dataService.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[().+\d -]{10,15}$/)])),
-      'streetNo': new FormControl(this.dataService.userData.streetNumber, Validators.compose([Validators.required])),
-      'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
-      'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
-      'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])),
-      'country': new FormControl(null)
 
-    });
-    this.complexForm.controls['country'].setValue(this.dataService.userData.country, { onlySelf: true });
+    if (this.dataService.userData == null) {
+      var userData = {
+        name: "",
+        lname: "",
+        email: "",
+        phone: "",
+        country: "Sri Lanka",
+        city: "",
+        streetName: "",
+        streetNumber: "",
+        zip: ""
+      };
 
-    this.pickupForm = fb.group({
-      'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
-      'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[().+\d -]{10,15}$/), Validators.minLength(12)])),
+      this.dataService.userData = userData;
 
-    });
-  }
+    }
+
+      this.complexForm = fb.group({
+        // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
+        'fName': new FormControl(this.dataService.userData.name, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
+        'lName': new FormControl(this.dataService.userData.lname, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
+        'email': new FormControl(this.dataService.userData.email, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
+        'phone': new FormControl(this.dataService.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/)])),
+        'streetNo': new FormControl(this.dataService.userData.streetNumber, Validators.compose([Validators.required])),
+        'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
+        'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
+        'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])),
+        'country': new FormControl(null)
+
+      });
+      this.complexForm.controls['country'].setValue(this.dataService.userData.country, { onlySelf: true });
+
+      this.pickupForm = fb.group({
+        'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
+        'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/), Validators.minLength(12)])),
+
+      });
+    }
+
+
+
+
 
 
   ngOnInit() {
@@ -150,27 +172,12 @@ export class CheckoutComponent implements OnInit {
     }
     this.localData = (this.localStorageService.get('appLocalStorageUser' + this.appId));
 
-    if (this.localData == null) {
+    /*if (this.localData == null) {
       this.router.navigate(['login'])
     }
+*/
 
 
-    this.hide = true;
-
-    var param = {
-      'appId': this.appId,
-      'country': this.dataService.userData.country
-    };
-
-    this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
-      if (data == '') {
-        this.hide = true;
-        this.tax = 0;
-      } else {
-        this.tax = data[0].taxAmount;
-        this.hide = false;
-      }
-    })
 
     this.currencyService.getCurrencies().subscribe((data) => {
       this.currency = data;
@@ -185,6 +192,7 @@ export class CheckoutComponent implements OnInit {
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
 
     // get the shipping options
+
     var param2 = {
       'appId': this.appId,
       'country': this.dataService.userData.country
@@ -232,8 +240,8 @@ export class CheckoutComponent implements OnInit {
 
 
   }
-  ngAfterContentChecked(){
-    if(this.formType == "pickup" && !this.pickupForm.valid){
+  ngAfterContentChecked() {
+    if (this.formType == "pickup" && !this.pickupForm.valid) {
       this.isSelected = false;
     }
 
@@ -262,18 +270,18 @@ export class CheckoutComponent implements OnInit {
   };
 
 
-  addShipping(shippingDetails, e, test) {
+  addShipping(shippingDetails, e, formData) {
 
     this.isSelected = true;
-    this.fname = test.fName;
-    this.lname = test.lName;
-    this.email = test.email;
-    this.phone = test.phone;
-    this.country = test.country;
-    this.city = test.country;
-    this.streetName = test.streetName;
-    this.streetNumber = test.streetNumber;
-    this.zip = test.zip;
+    this.fname = formData.fName;
+    this.lname = formData.lName;
+    this.email = formData.email;
+    this.phone = formData.phone;
+    this.country = formData.country;
+    this.city = formData.country;
+    this.streetName = formData.streetName;
+    this.streetNumber = formData.streetNumber;
+    this.zip = formData.zip;
 
 
     var total = 0;
@@ -437,7 +445,11 @@ export class CheckoutComponent implements OnInit {
     //   this.chkCountry = this.finalDetails.delivery.country;
     // }
 
-    this.chkCountry = this.localData.country;
+    if(this.localData){
+      this.chkCountry = this.localData.country;
+    }else{
+      this.chkCountry = this.country;
+    }
 
     var param = {
       'appId': this.appId,
@@ -521,11 +533,18 @@ export class CheckoutComponent implements OnInit {
 
   pay(promotionCode) {
 
+    let email;
+    if(this.localData){
+      email = this.localData.email
+    }else{
+      email = this.email
+    }
+
     this.payInfo = {
       'item': this.finalDetails,
       'taxTotal': this.taxTotal,
       'cart': this.dataService.cart.cartItems,
-      'userEmail': this.localData.email,
+      'userEmail': email,
       'amount': this.totalPrice,
       'promotionCode': promotionCode
     }
@@ -546,7 +565,7 @@ export class CheckoutComponent implements OnInit {
   paymentInit(paymentParams) {
 
     this.orderd = true;
-    this.history = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+    // this.history = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
 
     this.ordersService.getIPGinfo()
       .subscribe((data) => {
@@ -637,29 +656,53 @@ export class CheckoutComponent implements OnInit {
   orderProcess() {
     if (this.formType == "delivery") {
 
-      this.orderDetails = {
-        'appId': this.appId,
-        'registeredUser': this.user.registeredUser,
-        'item': this.payInfo.cart,
-        'amount': this.payInfo.amount,
-        'customerName': this.user.name,
-        'deliverName': this.fname,
-        'deliveryNo': this.streetNumber,
-        'deliveryStreet': this.streetName,
-        'deliveryCity': this.city,
-        'deliveryCountry': this.country,
-        'deliveryZip': this.zip,
-        'telNumber': this.phone,
-        'tax': this.payInfo.taxTotal,
-        'shippingCost': this.chkShippingCost,
-        'shippingOpt': this.payInfo.item.shippingOption,
-        'email': this.payInfo.userEmail,
-        'currency': this.dataService.paypalCurrency,
-        'puckupId': null,
-        'promotionCode': this.payInfo.promotionCode
-      };
-    }
-    else {
+      if(this.user){
+        this.orderDetails = {
+          'appId': this.appId,
+          'registeredUser': this.user.registeredUser,
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.user.name,
+          'deliverName': this.fname,
+          'deliveryNo': this.streetNumber,
+          'deliveryStreet': this.streetName,
+          'deliveryCity': this.city,
+          'deliveryCountry': this.country,
+          'deliveryZip': this.zip,
+          'telNumber': this.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.currency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode
+        };
+
+      }else{
+        this.orderDetails = {
+          'appId': this.appId,
+          'registeredUser': 'Unknown User',
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.fname,
+          'deliverName': this.fname,
+          'deliveryNo': this.streetNumber,
+          'deliveryStreet': this.streetName,
+          'deliveryCity': this.city,
+          'deliveryCountry': this.country,
+          'deliveryZip': this.zip,
+          'telNumber': this.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.currency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode
+        };
+      }
+    }else {
       this.orderDetails = {
         "appId": this.appId,
         "registeredUser": this.user.registeredUser,
@@ -727,30 +770,55 @@ export class CheckoutComponent implements OnInit {
 
   confirmCashPayment() {
     if (this.formType == "delivery") {
-      this.orderDetails = {
-        'appId': this.appId,
-        'registeredUser': this.user.registeredUser,
-        'item': this.payInfo.cart,
-        'amount': this.payInfo.amount,
-        'customerName': this.user.name,
-        'deliverName': this.fname,
-        'deliveryNo': this.streetNumber,
-        'deliveryStreet': this.streetName,
-        'deliveryCity': this.city,
-        'deliveryCountry': this.country,
-        'deliveryZip': this.zip,
-        'telNumber': this.phone,
-        'tax': this.payInfo.taxTotal,
-        'shippingCost': this.chkShippingCost,
-        'shippingOpt': this.payInfo.item.shippingOption,
-        'email': this.payInfo.userEmail,
-        'currency': this.dataService.currency,
-        'puckupId': null,
-        'promotionCode': this.payInfo.promotionCode
-      };
+      if(this.user){
+        this.orderDetails = {
+          'appId': this.appId,
+          'registeredUser': this.user.registeredUser,
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.user.name,
+          'deliverName': this.fname,
+          'deliveryNo': this.streetNumber,
+          'deliveryStreet': this.streetName,
+          'deliveryCity': this.city,
+          'deliveryCountry': this.country,
+          'deliveryZip': this.zip,
+          'telNumber': this.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.currency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode
+        };
 
-    }
-    else {
+      }else{
+        this.orderDetails = {
+          'appId': this.appId,
+          'registeredUser': 'Unknown User',
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.fname,
+          'deliverName': this.fname,
+          'deliveryNo': this.streetNumber,
+          'deliveryStreet': this.streetName,
+          'deliveryCity': this.city,
+          'deliveryCountry': this.country,
+          'deliveryZip': this.zip,
+          'telNumber': this.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.currency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode
+        };
+      }
+
+
+    }else {
       this.orderDetails = {
         "appId": this.appId,
         "registeredUser": this.user.registeredUser,
@@ -779,17 +847,17 @@ export class CheckoutComponent implements OnInit {
             this.dataService.cart.totalQuantity = 0;
 
             //Pushing into order purchase history
-            if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
-              this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-            }
-            this.orderHistory.push({
-              orderHistoryKey: this.appId,
-              createdDate: new Date(),
-              item: this.payInfo.cart,
-              amount: this.payInfo.amount,
-            });
+            // if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
+            //   this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+            // }
+            // this.orderHistory.push({
+            //   orderHistoryKey: this.appId,
+            //   createdDate: new Date(),
+            //   item: this.payInfo.cart,
+            //   amount: this.payInfo.amount,
+            // });
 
-            this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
+            // this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
 
             this._success.next('Your Order has been successfully processed');
 
@@ -816,30 +884,56 @@ export class CheckoutComponent implements OnInit {
   // Buy With PayPal
   buyWithPayPal() {
     if (this.formType == "delivery") {
-      this.orderDetails = {
+      if(this.user){
+        this.orderDetails = {
 
-        'appId': this.appId,
-        'registeredUser': this.user.registeredUser,
-        'item': this.payInfo.cart,
-        'amount': this.payInfo.amount,
-        'customerName': this.user.name,
-        'deliverName': this.fname,
-        'deliveryNo': this.streetNumber,
-        'deliveryStreet': this.streetName,
-        'deliveryCity': this.city,
-        'deliveryCountry': this.country,
-        'deliveryZip': this.zip,
-        'telNumber': this.phone,
-        'tax': this.payInfo.taxTotal,
-        'shippingCost': this.chkShippingCost,
-        'shippingOpt': this.payInfo.item.shippingOption,
-        'email': this.payInfo.userEmail,
-        'currency': this.dataService.paypalCurrency,
-        'puckupId': null,
-        'promotionCode': this.payInfo.promotionCode
-      };
-    }
-    else {
+          'appId': this.appId,
+          'registeredUser': this.user.registeredUser,
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.user.name,
+          'deliverName': this.fname,
+          'deliveryNo': this.streetNumber,
+          'deliveryStreet': this.streetName,
+          'deliveryCity': this.city,
+          'deliveryCountry': this.country,
+          'deliveryZip': this.zip,
+          'telNumber': this.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.paypalCurrency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode
+        };
+
+      }else{
+        this.orderDetails = {
+
+          'appId': this.appId,
+          'registeredUser': "Unknown User",
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.fname,
+          'deliverName': this.fname,
+          'deliveryNo': this.streetNumber,
+          'deliveryStreet': this.streetName,
+          'deliveryCity': this.city,
+          'deliveryCountry': this.country,
+          'deliveryZip': this.zip,
+          'telNumber': this.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.paypalCurrency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode
+        };
+      }
+
+    }else {
       this.orderDetails = {
         "appId": this.appId,
         "registeredUser": this.user.registeredUser,
@@ -861,8 +955,24 @@ export class CheckoutComponent implements OnInit {
   }
 
   countryChanged(data) {
-    console.log(data)
+    this.hide = true;
     this.isSelected = false;
+
+    var param = {
+      'appId': this.appId,
+      'country': data
+    };
+
+    this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
+      if (data == '') {
+        this.hide = true;
+        this.tax = 0;
+      } else {
+        this.tax = data[0].taxAmount;
+        this.hide = false;
+      }
+    })
+
   }
 
 

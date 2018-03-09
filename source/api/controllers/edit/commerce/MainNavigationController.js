@@ -93,6 +93,12 @@ module.exports = {
 
     addNewNavi : function(req,res){
         var isNew = req.body.isNew;
+        var randomstring = require("randomstring");
+        var tmpImage = req.body.file;
+
+        var imgeFileName = randomstring.generate()+".png";
+        var data = tmpImage[0].replace(/^data:image\/\w+;base64,/, "");
+        var buf = new Buffer(data, 'base64');
 
         var dePath;
         if(isNew == 'true' || isNew == true){
@@ -102,23 +108,21 @@ module.exports = {
             dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/secondNavi/';
         }
 
-        req.file('file').upload({
-            dirname: require('path').resolve(dePath)
-        },function (err, uploadedFiles) {
-            if (err) return res.send(500, err);
 
-            var newFileName=Date.now()+'.png';
-            fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
-                if (err) return res.send(err);
-            });
+        fs.writeFile(dePath + imgeFileName, buf, function (err) {
+            if (err) {
+                return res.send(err);
+            }
+        });
+
 
             var secondNavi =req.body;
-            secondNavi.imageUrl = newFileName;
+            secondNavi.imageUrl = imgeFileName;
             SecondNavigation.create(secondNavi).exec(function(err, newMenu) {
                 if (err) res.send(err);
                 res.json(newMenu);
             });
-        });
+
     },
 
     addNewCategory : function (req,res) {

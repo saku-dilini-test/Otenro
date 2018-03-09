@@ -75,30 +75,10 @@
             },
 
 
-            updateCategoryImage: function (file, imageUrl, catId, appId, isNew) {
-                var dataURItoBlob = function(dataURI) {
-                    var binary = atob(dataURI.split(',')[1]);
-                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-                    var array = [];
-                    for(var i = 0; i < binary.length; i++) {
-                        array.push(binary.charCodeAt(i));
-                    }
-                    return new Blob([new Uint8Array(array)], {type: mimeString});
-                };
+            updateCategoryImage: function (Data) {
 
-                var blob = dataURItoBlob(file);
-                var UploadFile = new File([blob], 'imageFileName.png');
+                return $http.post(SERVER_URL + 'edit/updateSecondNaviImage', Data);
 
-                return Upload.upload({
-                    url: SERVER_URL + 'edit/updateSecondNaviImage',
-                    fields: {
-                        'imageUrl': imageUrl,
-                        'categoryId': catId,
-                        'appId': appId,
-                        'isNew': isNew
-                    },
-                    file: UploadFile
-                });
             },
             
             
