@@ -126,8 +126,16 @@ module.exports = {
 
     },
     deleteSlider: function (req, res){
-      Slider.destroy({_id : req.body.id}).exec(function (err) {
+    console.log(req.userId);
+    console.log(req.body);
+        var sliderPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + "/src/assets/images/slider/" + req.body.imageUrl;
+      Slider.destroy({_id : req.body.id}).exec(function (err,slider) {
             if (err) return callback("Error while deleting " + err.message);
+
+            fs.unlink(sliderPath, function (err) {
+                if (err) return console.error(err);
+            });
+
             res.send(200,{message:' Slider deleted'});
       })
     }
