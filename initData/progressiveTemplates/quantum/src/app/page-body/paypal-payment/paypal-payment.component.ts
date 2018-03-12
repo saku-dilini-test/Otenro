@@ -15,14 +15,15 @@ declare let paypal: any;
 })
 export class PaypalPaymentComponent implements AfterViewChecked {
 
-  public appId = (<any>data).appId;
-  public userId = (<any>data).userId;
-  public localData;
-  public user;
+  private appId = (<any>data).appId;
+  private userId = (<any>data).userId;
+  private localData;
+  private user;
+  private description = '';
   orderHistory = [];
-  env=this.dataService.env;
-  public sandBoxKey = this.dataService.paypalKey;
-  public productionKey = this.dataService.paypalKey;
+  env = this.dataService.env;
+  private sandBoxKey = this.dataService.paypalKey;
+  private productionKey = this.dataService.paypalKey;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient, private route: ActivatedRoute, private router: Router, private dataService: PagebodyServiceModule) {
     this.localData = (this.localStorageService.get('appLocalStorageUser' + this.appId));
@@ -30,16 +31,22 @@ export class PaypalPaymentComponent implements AfterViewChecked {
 
     console.log("pre env : " + this.dataService.env)
 
-    if(this.dataService.env == 'sandbox'){
+    if (this.dataService.env == 'sandbox') {
       this.paypalConfig.client.production = 'xxxxxxxx';
       this.productionKey = 'xxxxxxxx';
       this.sandBoxKey = this.dataService.paypalKey;
 
-    }else if(this.dataService.env == 'live'){
+    } else if (this.dataService.env == 'live') {
       this.paypalConfig.client.sandbox = 'xxxxxxxx';
       this.sandBoxKey = 'xxxxxxxx';
       this.productionKey = this.dataService.paypalKey;
     }
+
+    for(let i =0;i < this.dataService.cart.cartItems.length;i++){
+      // this.description.push(this.dataService.cart.cartItems[i].name);
+    this.description = this.description + this.dataService.cart.cartItems[i].name+',\n';
+    }
+    console.log(this.description);
 
   }
 
@@ -59,54 +66,57 @@ export class PaypalPaymentComponent implements AfterViewChecked {
       return actions.payment.create({
         payment: {
           transactions: [
-            { amount: { total: this.dataService.payPalDetails.amount, currency: this.dataService.paypalCurrency } }
+            {
+              amount: { total: this.dataService.payPalDetails.amount, currency: this.dataService.paypalCurrency },
+              description: this.description
+            }
           ]
         }
       });
     },
     onAuthorize: (data, actions) => {
-      return actions.payment.execute().then(()=> {
+      return actions.payment.execute().then(() => {
 
-        this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.dataService.payPalDetails,{responseType: 'text'})
+        this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.dataService.payPalDetails, { responseType: 'text' })
           .subscribe((res) => {
-              console.log("inside web save");
-              this.dataService.payPalDetails.id = this.dataService.cart.cartItems[0].id;
-              this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.dataService.payPalDetails.item,{responseType: 'text'})
-                .subscribe((res)=> {
-                    console.log("inside web update");
-                    this.dataService.cart.cartItems = [];
-                    this.dataService.cart.cartSize = 0;
-                    this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-                    this.dataService.cart.totalPrice = 0;
-                    this.dataService.cart.totalQuantity = 0;
-                    this.dataService.payPalDetails = {};
+            console.log("inside web save");
+            this.dataService.payPalDetails.id = this.dataService.cart.cartItems[0].id;
+            this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.dataService.payPalDetails.item, { responseType: 'text' })
+              .subscribe((res) => {
+                console.log("inside web update");
+                this.dataService.cart.cartItems = [];
+                this.dataService.cart.cartSize = 0;
+                this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+                this.dataService.cart.totalPrice = 0;
+                this.dataService.cart.totalQuantity = 0;
+                this.dataService.payPalDetails = {};
 
-                    //Pushing into order purchase history
-                    if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
-                      this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-                    }
-                    this.orderHistory.push({
-                      orderHistoryKey: this.appId,
-                      createdDate: new Date(),
-                      item: this.dataService.payPalDetails.item,
-                      amount: this.dataService.payPalDetails.amount,
-                    });
-                    this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
+                //Pushing into order purchase history
+                if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
+                  this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+                }
+                this.orderHistory.push({
+                  orderHistoryKey: this.appId,
+                  createdDate: new Date(),
+                  item: this.dataService.payPalDetails.item,
+                  amount: this.dataService.payPalDetails.amount,
+                });
+                this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
 
-                    alert('Thank You,  Your Order has been successfully processed');
-                    // TODO : Currently back to cart
-                    //back to Main Menu
-                    this.router.navigate(['home'])
-                  },
-                  function (err) {
-                    console.log(err);
-                  });
-            },
-            (err)=> {
-              console.log(err);
-            });
+                alert('Thank You,  Your Order has been successfully processed');
+                // TODO : Currently back to cart
+                //back to Main Menu
+                this.router.navigate(['home'])
+              },
+              function (err) {
+                console.log(err);
+              });
+          },
+          (err) => {
+            console.log(err);
+          });
 
-      },err=>{
+      }, err => {
 
         window.alert('Transaction Failed!');
       });        // show success page
@@ -114,7 +124,7 @@ export class PaypalPaymentComponent implements AfterViewChecked {
   };
 
   public ngAfterViewChecked(): void {
-    if(!this.didPaypalScriptLoad) {
+    if (!this.didPaypalScriptLoad) {
       this.loadPaypalScript().then(() => {
         paypal.Button.render(this.paypalConfig, '#paypal-button');
         this.loading = false;
