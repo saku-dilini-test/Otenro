@@ -192,6 +192,10 @@ module.exports = {
         var item = req.body.item;
         var query = {'id':item.id};
         var skuQuery = {productId:item.id};
+        var thirdNaviPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/';
+        var thirdNaviPath2 = '/src/assets/images/thirdNavi/';
+        console.log(req.userId);
+
         //Variant of a Product
         if(item.sku){
             ThirdNavigation.findOne(query).exec(function(err,product){
@@ -242,7 +246,15 @@ module.exports = {
         }else{
             //When User delete the whole product
             ThirdNavigation.destroy(query).exec(function(err,deletedItem){
+
                 if(err) sails.log.error(new Error("Error while deleting the Product by ID : "+ item.id));
+
+                deletedItem.forEach(function(data){
+                    fs.unlink(thirdNaviPath + data.appId + thirdNaviPath2 + data.imageUrl, function (err) {
+                        if (err) return console.error(err);
+                    });
+                });
+
                 sails.log.info("Successfully Delete the Product"+ JSON.stringify(deletedItem));
                 Sku.destroy(skuQuery).exec(function(err,deletedSku){
                     if(err) sails.log.error(new Error("Error while deleting the Sku array by productId : "+ item.id));

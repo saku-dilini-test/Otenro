@@ -4,10 +4,10 @@
  (function() {
     'use strict';
     angular.module("appEdit").controller("InventoryCtrl", [
-    '$scope', 'inventoryService','commerceService','$rootScope','SERVER_URL','$auth','toastr','$mdDialog','initialData',
+    '$scope', 'inventoryService','commerceService','$rootScope','mySharedService','SERVER_URL','$auth','toastr','$mdDialog','initialData',
     'productService','$filter','$http','$log',
     InventoryCtrl]);
-    function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,SERVER_URL,$auth,toastr,$mdDialog,
+    function InventoryCtrl($scope, inventoryService,commerceService,$rootScope,mySharedService,SERVER_URL,$auth,toastr,$mdDialog,
     initialData,productService,$filter,$http,currencyService,$log) {
             $scope.currentPage = 1;
             $scope.pageSize = 5;
@@ -297,6 +297,7 @@
          */
         $scope.deletePro = function (item,inventory) {
             var itemLength = item.children.length;
+            var urlPath;
             return $mdDialog.show({
                 controllerAs: 'dialogCtrl',
                 controller: function($mdDialog){
@@ -314,6 +315,20 @@
                                 closeButton: true
                             });
                             $mdDialog.hide();
+                        if($rootScope.tempNew == 'true'){
+                              urlPath =  SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
+                                                                             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                                              $scope.appTemplateUrl = urlPath +
+                                                                  'src'+new Date().getTime();
+                              }else{
+                              urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                                                             +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                                              $scope.appTemplateUrl = urlPath+'' +
+                                                                  '#/app/update?'+new Date().getTime();
+                              }
+
+                              mySharedService.prepForBroadcast($scope.appTemplateUrl);
+
                             return commerceService.showInventoryDialog();
                         });
                     },
