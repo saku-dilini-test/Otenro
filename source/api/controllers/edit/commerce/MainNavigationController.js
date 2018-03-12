@@ -152,7 +152,13 @@ module.exports = {
     },
 
     deleteItems : function (req,res,itemIds) {
+
+        var secondNaviPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/';
+        var secondNaviPath2 = '/src/assets/images/secondNavi/';
+
     MainNavigation.find({id: itemIds}).exec(function(err,main){
+
+
         if (err) res.send(err);
         if (main != ""){
             MainNavigation.destroy({ id : itemIds}).exec(function (err) {
@@ -163,6 +169,14 @@ module.exports = {
         else {
             SecondNavigation.find({id: itemIds}).exec(function(err,second){
                 if (err) res.send(err);
+
+                    second.forEach(function(second){
+                        fs.unlink(secondNaviPath + second.appId + secondNaviPath2 + second.imageUrl, function (err) {
+                            if (err) return console.error(err);
+                    });
+                });
+
+                console.log(second);
                 if (second != ""){
                     SecondNavigation.destroy({ id : itemIds}).exec(function (err) {
                         if (err) return callback("Error while deleting " + err.message);
@@ -202,6 +216,7 @@ module.exports = {
 
     deleteCategories : function (req,res) {
         console.log("Executing deleteCategories");
+        console.log(req.body);
         var categoryIds = req.body;
         return this.deleteItems(req,res,categoryIds);
     }
