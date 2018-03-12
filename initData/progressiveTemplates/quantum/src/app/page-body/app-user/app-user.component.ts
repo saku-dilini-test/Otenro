@@ -33,7 +33,7 @@ export class AppUserComponent implements OnInit {
 
   constructor(fb: FormBuilder, private localStorageService: LocalStorageService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
     private title: TitleService, private currencyService: CurrencyService, ) {
-    this.title.changeTitle("Edit User");
+    this.title.changeTitle("My Account");
 
     this.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
 

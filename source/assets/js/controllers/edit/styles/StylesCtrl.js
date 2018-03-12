@@ -462,21 +462,39 @@
             $mdDialog.hide();
         };
 
-
-        $scope.uploadLogoToArea = function () {
-            var handleFileSelect=function(evt) {
-                var file=evt.currentTarget.files[0];
-                var reader = new FileReader();
-                reader.onload = function (evt) {
-                    $scope.$apply(function($scope){
-                        $scope.myImage=evt.target.result;
-                        $scope.picFile =  $scope.myImage;
+        $scope.validateSize = function(image,width,height){
+            if(image === null){
+                return;
+            }
+            else if(image.width > width || image.height > height) {
+                toastr.error('Image should be less than 250x150 px', 'Warning', {
+                    closeButton: true
+                });
+            }else {
+                var file = image.blobUrl;
+                    $scope.$apply(function ($scope) {
+                        $scope.myImage = file;
                     });
-                };
-                reader.readAsDataURL(file);
                 $scope.buttonName = "Upload Logo";
+
+            }
+
+        };
+
+        $scope.uploadLogoToArea = function() {
+
+            var handleFileSelect = function (evt) {
+                    var file = evt.currentTarget.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function (evt) {
+                        $scope.$apply(function ($scope) {
+                            $scope.picFile = evt.target.result;
+                        });
+                    };
+                    reader.readAsDataURL(file);
             };
-            angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+            angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
+
         }
 
         $scope.uploadLogo = function(logo){
@@ -508,6 +526,7 @@
                         $scope.appTemplateUrl = urlPath;
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                         $scope.picFile = null;
+                        $scope.myImage = null;
                         $scope.tmpLogo[0] = logo;
                         toastr.success('Logo has been uploaded successfully', 'message', {
                             closeButton: true
