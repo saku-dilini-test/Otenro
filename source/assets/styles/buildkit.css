@@ -1269,6 +1269,7 @@ md-dialog{
 }
 
 .md-dialog-main{
+    min-height: 375px;
     max-height: 390px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -2375,6 +2376,7 @@ md-tabs-wrapper md-prev-button md-icon, md-tabs-wrapper md-next-button md-icon {
     padding:0;
     margin:25px 40px 0;
     padding-bottom: 10px;
+    max-height: 375px;
 }
 
 .custom-add-products .me-hours-table{

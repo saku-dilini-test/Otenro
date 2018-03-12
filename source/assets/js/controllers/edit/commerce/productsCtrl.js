@@ -99,8 +99,8 @@
         $scope.enableTab = "true";
         $scope.productTypes = [
                                 {type:'Physical', description:'An item that is shipped to your customers',status:''},
-                                {type:'Digital', description:'Content that is downloaded',status:'[Coming Soon]'},
-                                {type:'Services', description:'Provide a Service',status:'[Coming Soon]'}
+                                // {type:'Digital', description:'Content that is downloaded',status:'[Coming Soon]'},
+                                // {type:'Services', description:'Provide a Service',status:'[Coming Soon]'}
                              ];
 
         $scope.myImage='';
