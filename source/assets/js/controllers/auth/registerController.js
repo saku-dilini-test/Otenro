@@ -18,19 +18,20 @@
             }
             console.log(user);
 
-            Auth.register(user).success(function () {
+            Auth.register(user).success(function (data) {
 
                 if($stateParams.data && $stateParams.data.addname) {
                     //Auth.sendAgentInfo($stateParams.data);
                 }
-                toastr.success('Register Successful ', 'Congratulations ! ', {closeButton: true});
                 if ($scope.user.email== 'support@otenro.com'){
                     $state.go('user.technicalSupporter');
                 }else {
-                    commerceService.sendRegisterVerificationLinkEmail(user);
+//                    commerceService.sendRegisterVerificationLinkEmail(user);
                     goog_report_conversion(O_SERVER_URL + "#templates");
                     $state.go('user.templates');
                 }
+                    toastr.success('Register Successful ', 'Congratulations ! ', {closeButton: true});
+
             }).catch(function onError(err) {
                 if (err.data.error){
                     toastr.error(err.data.error, 'Error', {

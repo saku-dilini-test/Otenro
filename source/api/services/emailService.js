@@ -44,7 +44,7 @@ var server  = email.server.connect({
 module.exports = {
 
 
-    sendRegisterConfirmation: function(data, callback){
+    sendRegisterConfirmation: function(data, res){
 
         var approot = path.resolve();
         var imgPath = approot + '/assets/images/emailtemplates/';
@@ -95,12 +95,15 @@ module.exports = {
             // send mail with defined transport object
             transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                return console.log(error);
+//                return console.log(error);
+                return  res.send(500);
             }
+
             console.log('Message sent: %s', info.messageId);
             // Preview only available when sending through an Ethereal account
-            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-            return callback.send('ok');
+//            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+            return res.send('ok');
+
             });
     },
     sendGetAssistance: function(data, callback){

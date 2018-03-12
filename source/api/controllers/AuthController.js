@@ -122,6 +122,15 @@ module.exports = {
                               return res.negotiate(err);
                           }
                           if (user) {
+                          var data = {
+                              email: user.email
+                          }
+
+                          var msg = sentMails.sendRegisterConfirmation(data, function (msg){
+                                console.log(msg);
+                                res.send(msg);
+                          });
+
                               createToken(user,res);
                           }
                       });
