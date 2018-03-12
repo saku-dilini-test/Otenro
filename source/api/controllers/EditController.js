@@ -80,8 +80,17 @@ module.exports = {
                                 }
                             });
                         });
+
                         Slider.destroy({'appId': req.param('appId')}).exec(function (err, slider){
                              if (err) return res.negotiate(err);
+                        });
+
+                        ThirdNavigation.destroy({'appId': req.param('appId')}).exec(function (err, thirdNavi){
+                            if(err) return res.negotiate(err);
+                        });
+
+                        SecondNavigation.destroy({'appId': req.param('appId')}).exec(function (err, thirdNavi){
+                            if(err) return res.negotiate(err);
                         });
 
                         res.json(app);
@@ -100,19 +109,40 @@ module.exports = {
     deleteDefaultData : function(req,res){
         var appId = req.param('appId');
         var isNew = req.param('isNew');
+        var userId = req.param('userId');
         var searchApp = {
             appId: appId,
             enteredBy:'demo'
         };
+
+        var secondNaviPath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/" + appId + '/src/assets/images/secondNavi/';
+        var thirdNaviPath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/" + appId + '/src/assets/images/thirdNavi/';
+        var sliderPath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/" + appId + '/src/assets/images/slider/';
+
+        console.log(searchApp);
+
         sails.log.info(searchApp);
         SecondNavigation.destroy(searchApp).exec(function (err, app) {
+
+            var data = app;
+
             if (err) {return res.negotiate(err);}
             else {
+              data.forEach(function(sec){
+                    fs.unlink(secondNaviPath + sec.imageUrl, function (err) {
+                        if (err) return console.error(err);
+                    });
+                });
+
                 ThirdNavigation.destroy(searchApp).exec(function (err, app) {
                     if (err) return res.negotiate(err);
-                    else {
 
-                    }
+                    app.forEach(function(third){
+                        fs.unlink(thirdNaviPath + third.imageUrl, function (err) {
+                            if (err) return console.error(err);
+                        });
+                    });
+
                 });
             }
         });
@@ -120,6 +150,12 @@ module.exports = {
         if(isNew == 'true'){
              Slider.destroy({'appId': appId}).exec(function (err, slider){
                     if (err) return res.negotiate(err);
+
+                    slider.forEach(function(slider){
+                        fs.unlink(sliderPath + slider.imageUrl, function (err) {
+                            if (err) return console.error(err);
+                        });
+                    });
              });
         }
 

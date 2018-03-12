@@ -336,7 +336,7 @@
                     controllerAs: 'dialogCtrl',
                     controller: function($mdDialog,appEditResource,toastr,$rootScope,$state,ME_APP_SERVER,mySharedService,$auth,$scope){
                         this.confirm = function click(){
-                            appEditResource.deleteDefaultData({appId:$rootScope.appId,isNew:$rootScope.tempNew}).success(function(data) {
+                            appEditResource.deleteDefaultData({appId:$rootScope.appId,isNew:$rootScope.tempNew,userId:$auth.getPayload().id}).success(function(data) {
                                 if (data.massage){
                                     toastr.success('You cant delete this app because this app already have send for publishing ', 'Sorry!', {
                                         closeButton: true
