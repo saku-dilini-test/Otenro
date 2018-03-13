@@ -1269,11 +1269,13 @@ md-dialog{
 }
 
 .md-dialog-main{
-    min-height: 375px;
     max-height: 390px;
     overflow-x: hidden;
     overflow-y: auto;
     padding: 25px 40px 0;
+}
+.add-prod{
+    min-height: 375px;
 }
 .md-dialog-main1{
     height: 322px;
