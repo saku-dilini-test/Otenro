@@ -2854,6 +2854,11 @@ table.md-calendar-day-header{
     border: 3px solid #31bd00 !important;
 }
 
+.engage-user tr td{
+    vertical-align: top;
+    cursor: pointer;
+}
+
 /*IE 10 and abouve specific css wirte inside this media quary*/
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     .fixed-inventory .tree-grid thead {

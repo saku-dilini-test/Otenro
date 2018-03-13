@@ -1,4 +1,4 @@
-<md-dialog aria-label="AppUser">
+<md-dialog aria-label="AppUser" style="width:65vw">
     <md-dialog-content>
         <div class="md-dialog-header">
             <h1>users</h1>
@@ -13,7 +13,7 @@
                 ga('send', 'pageview');
             </script>
 
-            <table class="me-simple-table">
+            <table class="me-simple-table engage-user">
                 <thead>
                 <th>Name</th>
                 <th>Email</th>
@@ -22,10 +22,10 @@
                 <th>Registered Date</th>
                 </thead>
                 <tbody>
-                <tr ng-repeat="data in appuserList">
+                <tr ng-repeat="data in appuserList" ng-click="redirect(data)">
 
                     <td>{{data.firstName}} {{data.lastName}}</td>
-                    <th><md-button ng-click="redirect(data)" class="ocolor" >{{data.email}}</md-button> </th>
+                    <td>{{data.email}}</td>
                     <td>{{data.phone}}</td>
                     <td>{{data.streetNumber}}
                         {{data.streetName}}<br>
