@@ -96,7 +96,7 @@ module.exports = {
         var randomstring = require("randomstring");
         var tmpImage = req.body.file;
 
-        var imgeFileName = randomstring.generate()+".png";
+        var imgeFileName = randomstring.generate()+".jpeg";
         var data = tmpImage[0].replace(/^data:image\/\w+;base64,/, "");
         var buf = new Buffer(data, 'base64');
 
