@@ -28,11 +28,12 @@ background-size: 230px 480px;
     height: 500px;
     width: 100%;
     display: inline-grid;
+    display: -ms-inline-grid;
     justify-content: center;
 }
 .obl-dashboard-apps ul li.obl-dashboard-createApp{
-    height: initial;
-    width: initial;
+    height: auto;
+    width: auto;
 }
 
 .obl-dashboard-createApp button{
