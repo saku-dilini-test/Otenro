@@ -858,7 +858,7 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                             isUpdateHImg = false;
 
                         }
-
+                        data.isNew = $rootScope.tempNew;
                         console.log("imageData " + imageData);
                         if (isUpdateHImg){
                             commerceService.updateHeaderFooterSettings(imageData,data).success(function (data) {
@@ -981,8 +981,17 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                         emailPassword: $scope.email.emailPassword,
                         sslEnabled: $scope.email.sslEnabled
                     }
-                    var imagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
-                        +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=email/";
+                    var imagePath;
+
+                    if($rootScope.tempNew == true || $rootScope.tempNew == "true"){
+                    imagePath=  SERVER_URL +"templates/viewWebImages?userId="+ $auth.getPayload().id
+                                            +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&images=email/";
+
+                    }else{
+                    imagePath=  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
+                                            +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=email/";
+
+                    }
 
                     //$scope.picFileFooter =  imagePath + $scope.email.imageFooter;
                     $scope.picFileHeader =  imagePath + $scope.email.orderConfirmedEmailImage;
@@ -1097,6 +1106,11 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                         $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
                         $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
                         $scope.gridOptions3.data = $scope.unfulfilled;
+
+                        for(var i =0;i<$scope.selectedRow.length;i++){
+                            $scope.selectedRow[i].userId = $auth.getPayload().id;
+                        }
+
                         commerceService.updateOrders($scope.selectedRow)
                             .success(function (data) {
                                 toastr.success('Order status changed to refunded  ', 'Success', {
@@ -1159,6 +1173,11 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                 $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
                 $scope.gridApi1.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
                 $scope.gridOptions3.data = $scope.unfulfilled;
+
+                for(var i =0;i<$scope.row.length;i++){
+                    $scope.row[i].userId = $auth.getPayload().id;
+                }
+
                 commerceService.updateOrders($scope.row)
                 .success(function (data) {
                     toastr.success('Order status changed to fulfilled ', 'Success', {

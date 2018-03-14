@@ -278,9 +278,9 @@ export class CheckoutComponent implements OnInit {
     this.email = formData.email;
     this.phone = formData.phone;
     this.country = formData.country;
-    this.city = formData.country;
+    this.city = formData.city;
     this.streetName = formData.streetName;
-    this.streetNumber = formData.streetNumber;
+    this.streetNumber = formData.streetNo;
     this.zip = formData.zip;
 
 

@@ -92,7 +92,15 @@ module.exports = {
         var appRoot = path.resolve();
         //var dePath= appRoot + '/assets/images/';
         var appId = req.body.appId;
-        var dePath      = config.APP_FILE_SERVER + req.body.userId + '/templates/' + appId + '/img/email/';
+        var dePath;
+
+        if(req.body.isNew == true || req.body.isNew == 'true'){
+          dePath = config.APP_FILE_SERVER + req.body.userId + '/progressiveTemplates/' + appId + '/src/assets/images/email/';
+
+        }else{
+          dePath = config.APP_FILE_SERVER + req.body.userId + '/templates/' + appId + '/img/email/';
+
+        }
 
         console.log("dePath " + dePath);
 

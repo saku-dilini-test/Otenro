@@ -64,6 +64,7 @@ module.exports = {
                 sails.log.info(searchApp);
                 Application.findOne(searchApp).exec(function (err, app) {
                     order['userId'] = app.userId;
+                    order.isNew = req.body.isNew;
                 sentMails.sendOrderEmail(order,function (err,msg) {
                     sails.log.info(err);
                     if (err) {
@@ -88,6 +89,7 @@ module.exports = {
                 sails.log.info(searchApp);
                 Application.findOne(searchApp).exec(function (err, app) {
                     order['userId'] = app.userId;
+                    order.isNew = req.body.isNew;
                     sentMails.sendOrderEmail(order,function (err,msg) {
                         sails.log.info(err);
                         if (err) {

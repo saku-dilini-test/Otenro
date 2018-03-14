@@ -581,20 +581,27 @@ module.exports = {
              }
         });
     },
+
+
+
+
+
+
     sendOrderEmail:function (data,res) {
 
-        var searchApp = {
-            appId: data.appId
-        };
+        console.log("-------------------------------");
+        console.log(data);
+        console.log(data.paymentStatus);
+                var searchApp = {
+                    appId: data.appId
+                };
+
+
 
         UserEmail.findOne(searchApp).exec(function (err, userEmail) {
 
 
-            var serverOrg=config.server.host+':'+config.server.port;
-            var emailHeaderImage;
 
-            var imagePath =  serverOrg +"/templates/viewImages?userId="+ data.userId
-                +"&appId="+data.appId+"&"+new Date().getTime()+"&img=thirdNavi/";
 
             //console.log(config.APP_FILE_SERVER + data.userId + "/templates/"+data.appId+'/img/email/'+userEmail.orderConfirmedEmailImage);
 
@@ -603,9 +610,69 @@ module.exports = {
                 console.log("Please Update Email Setting ");
 
             }else {
+
+                        var headerImagePath;
+                        var headerFileName;
+                        var subject;
+
+//                        var imagePath =  serverOrg +"/templates/viewWebImages?userId="+ data.userId
+
+                        if(data.paymentStatus == 'Pending'){
+                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
+                            headerFileName = userEmail.orderConfirmedEmailImage;
+                            subject = 'You have orderd';
+                        }
+                        if(data.paymentStatus == 'Successful'){
+                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderFulfilledEmailImage;
+                            headerFileName = userEmail.orderFulfilledEmailImage;
+                            subject = 'Order fulfilled';
+                        }
+                        if(data.paymentStatus == 'Refunded'){
+                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderRefundedEmailImage;
+                            headerFileName = userEmail.orderRefundedEmailImage;
+                            subject = 'Order Refunded';
+                        }
+
+
+                        var  testPath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/thirdNavi/';
+
+                        var test = [];
+                        test.push({
+                               filename: headerFileName,
+                               path: headerImagePath,
+                               cid: 'note@example.com' // should be as unique as possible
+                              }
+                              );
+
+                        for(var i =0;i<data.item.length;i++){
+                            test.push({
+                                    filename: data.item[i].imgURL[0].img,
+                                    path: testPath + data.item[i].imgURL[0].img,
+                                    cid: 'prod'+i
+                                })
+                        }
+
+                        console.log("--------------------");
+                        console.log("test=>" + JSON.stringify(test, null, 2));
+                        console.log("-----------------------");
+
+//                        var serverOrg=config.server.host+':'+config.server.port;
+//                        var emailHeaderImage;
+//
+//                        var imagePath
+//                        if(data.isNew == true || data.isNew == 'true'){
+//
+//                            imagePath =  serverOrg +"/templates/viewWebImages?userId="+ data.userId
+//                                                    +"&appId="+data.appId+"&"+new Date().getTime()+"&images=thirdNavi/";
+//
+//                        }else{
+//                            imagePath =  serverOrg +"/templates/viewImages?userId="+ data.userId
+//                                            +"&appId="+data.appId+"&"+new Date().getTime()+"&img=thirdNavi/";
+//                        }
+
                 console.log("typeof userEmail.orderConfirmedEmailImage "  + typeof userEmail.orderConfirmedEmailImage);
                 if(typeof userEmail.orderConfirmedEmailImage !=='undefined'){
-                    var  headerImagePath = config.APP_FILE_SERVER + data.userId + "/templates/"+data.appId+'/img/email/'+userEmail.orderConfirmedEmailImage;
+                    var  headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
 
                 var mBody = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'+
                     '<html xmlns="http://www.w3.org/1999/xhtml" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
@@ -676,11 +743,23 @@ module.exports = {
                     '                              <tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                     '                                  <td class="content-block" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">'+
                     '								<img src="cid:note@example.com"/></td>'+
-                    '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
-                    '                                   <td '+ userEmail.orderConfirmedEmail.header +  ' </td>'+
-                    '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
+                    '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">';
+                    if(data.paymentStatus == 'Pending' && userEmail.orderConfirmedEmail.header){
+                                        mBody += '<td '+ userEmail.orderConfirmedEmail.header +  ' </td>';
+
+                    }
+                     if(data.paymentStatus == 'Successful' && userEmail.orderFulfilledEmail.header){
+                                        mBody += '<td '+ userEmail.orderFulfilledEmail.header +  ' </td>';
+
+                    }
+                    if(data.paymentStatus == 'Refunded' && userEmail.orderRefundEmail.header){
+                                        mBody += '<td '+ userEmail.orderRefundEmail.header +  ' </td>';
+
+                    }
+
+                    mBody +='								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
                     '										<table class="invoice" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 80%; margin: 40px auto;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">';
-                if(typeof data.deliveryCountry != 'undefined'&&userEmail.orderConfirmedEmail.delivery==true ) {
+                if(typeof data.deliveryCountry != 'undefined' && data.pickUp == 'undefined' && userEmail.orderConfirmedEmail.delivery == true ) {
                     mBody += '  <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Delivered to</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />' + data.deliveryNo + '<br>' + data.deliveryStreet + '<br>' + data.deliveryCity + ' <br>' + data.deliveryCountry;
                 }else{
                     mBody += '  <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Delivered to</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />'+data.pickUp.locationName + '<br>' + data.pickUp.number + '<br>' + data.pickUp.streetAddress + '<br>' + data.pickUp.city+ '<br>' + data.pickUp.country+ '<br>' + data.pickUp.postalCode ;
@@ -702,7 +781,7 @@ module.exports = {
 
 
                         mBody += '<tr  style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top">'+
-                            '															<div style="display: inline-block;padding: 5px"><img  alt="prodcut" src="'+imagePath+data.item[j].imgURL[0].img+'" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
+                            '															<div style="display: inline-block;padding: 5px"><img src="cid:'+test[j+1].cid+'" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
                             '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">'+
                             '															<br><div> '+data.currency + parseFloat(data.item[j].total).toFixed(2)+'</div></td></tr>';
                     }
@@ -751,54 +830,46 @@ module.exports = {
 
 
 
-            console.log("headerImagePath" + headerImagePath);
-            fs.readFile(headerImagePath, function(err, imgData) {
                 let  mailOptions;
 
-                if (err){
+//                if (err){
+//                       console.log('*****************');
+//                       console.log(err);
+//                    mailOptions = {
+//                        from: 'onbitlabs@gmail.com', // sender address
+//                        to: 'onbitlabs@gmail.com', // list of receivers
+//                        subject: 'You have ordered', // Subject line
+//                        html: mBody
+//                    };
+//
+//                }else {
+                   console.log('------------------');
 
-                    mailOptions = {
-                        from: 'onbitlabs@gmail.com', // sender address
-                        to: 'onbitlabs@gmail.com', // list of receivers
-                        subject: 'You have ordered', // Subject line
-                        html: mBody
-                    };
-
-                }else {
                     // setup email data with unicode symbols
-                    var base64data = new Buffer(imgData).toString('base64');
-                    emailHeaderImage  =base64data;
-                    mailOptions = {
-                        from: 'onbitlabs@gmail.com', // sender address
-                        to: 'onbitlabs@gmail.com', // list of receivers
-                        subject: 'You have ordered', // Subject line
-                        html: mBody ,
-                        attachments : [
-                            {
-                                filename: 'image.png',
-                                content: Buffer.from(
-                                    emailHeaderImage,
-                                    'base64'
-                                ),
 
-                                cid: 'note@example.com' // should be as unique as possible
-                            }
-                        ]// html body,
+                    mailOptions = {
+                        from: userEmail.domainName + '<'+userEmail.replyToEmail + '>', // sender address
+                        to: data.email, // list of receivers
+                        subject: subject, // Subject line
+                        html: mBody ,
+                        attachments : test
+
                     };
 
-                }
+//                }
 
 
                 // send mail with defined transport object
                 transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
-                        //return console.log(error);
+                        console.log("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
+                        alert("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
                         return  res.send(500);
                     }
                     console.log('Message sent: %s', info.messageId);
                 return res.send('ok');
             });
-            });
+
                 }
             }
 
