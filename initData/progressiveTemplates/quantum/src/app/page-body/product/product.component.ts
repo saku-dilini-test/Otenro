@@ -94,7 +94,6 @@ export class ProductComponent implements OnInit {
     }
 
     changeVariant(variant1) {
-        this.lockBuyButton = false;
         this.selection1 = [];
         this.selection2 = [];
         this.selection3 = [];
@@ -105,7 +104,7 @@ export class ProductComponent implements OnInit {
         this.selectedVariant.buyQuantity = '';
         }
 
-        if (this.foodInfo.selection.length == 1) {
+        if (this.foodInfo.selection.length == 1 && variant1 != 'Please Select') {
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selectedVariant = this.foodInfo.variants[i];
@@ -133,27 +132,40 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant2(variant2) {
-        this.lockBuyButton = false;
         this.selection2 = [];
         this.selection3 = [];
+        //for IE specific issue
+        variant2 = variant2.replace(/\s/g, '');
+
+        console.log(variant2);
+        console.log(this.lockBuyButton);
+
+
 
         if (variant2) {
+            if(variant2 == "PleaseSelect"){
+                console.log('inside check if');
+                this.lockBuyButton = false;
+            }
             this.selectedVariant2 = variant2;
             this.selectedVariant.buyQuantity = '';
-
+            console.log(this.lockBuyButton);
         }
 
-        if (this.foodInfo.selection.length == 2) {
+        if (this.foodInfo.selection.length == 2 && variant2 != 'PleaseSelect') {
+           console.log('inside if');
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
                     this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
                     this.selectedVariant = this.foodInfo.variants[i];
-                    this.lockBuyButton = true;
                 }
             }
+            this.lockBuyButton = true;
 
         } else {
-            this.selection2.push({ 'vType': 'Please Select' });
+            if(variant2 != 'PleaseSelect'){
+                this.selection2.push({ 'vType': 'Please Select' });
+            }
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[1].vType == variant2 && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selection2.push({ 'vType': this.foodInfo.variants[i].selection[2].vType });
@@ -166,25 +178,33 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant3(variant3) {
-        this.lockBuyButton = false;
+
+        //for IE specific issue
+        variant3 = variant3.replace(/\s/g, '');
         this.selection3 = [];
 
         if (variant3) {
+            if(variant3 == 'PleaseSelect'){
+                this.lockBuyButton = false;
+            }
             this.selectedVariant3 = variant3;
             this.selectedVariant.buyQuantity = '';
         }
 
-        if (this.foodInfo.selection.length == 3) {
+        if (this.foodInfo.selection.length == 3 && variant3 != 'PleaseSelect') {
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
                     this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
                     this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3) {
                     this.selectedVariant = this.foodInfo.variants[i];
-                    this.lockBuyButton = true;
                 }
             }
+            this.lockBuyButton = true;
+
         } else {
-            this.selection3.push({ 'vType': 'Please Select' });
+            if(variant3 != 'PleaseSelect'){
+                this.selection3.push({ 'vType': 'Please Select' });
+            }
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[2].vType == variant3 && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 && this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
                     this.selection3.push({ 'vType': this.foodInfo.variants[i].selection[3].vType });
@@ -194,11 +214,20 @@ export class ProductComponent implements OnInit {
         }
     };
     changeVariant4(variant4) {
+        //for IE specific issue
+        variant4 = variant4.replace(/\s/g, '');
+
         if (variant4) {
+            if(variant4 == 'PleaseSelect'){
+                this.lockBuyButton = false;
+            }
             this.selectedVariant4 = variant4;
             this.selectedVariant.buyQuantity = '';
 
         }
+
+        if(this.foodInfo.selection.length == 4 && variant4 != 'PleaseSelect'){
+
 
         for (var i = 0; i < this.foodInfo.variants.length; i++) {
             if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
@@ -206,10 +235,11 @@ export class ProductComponent implements OnInit {
                 this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3 &&
                 this.foodInfo.variants[i].selection[3].vType == this.selectedVariant4) {
                 this.selectedVariant = this.foodInfo.variants[i];
-                this.lockBuyButton = true;
 
             }
         }
+            this.lockBuyButton = true;
+         }
     };
 
     //increase decrease
