@@ -36,7 +36,7 @@ export class AboutusComponent implements OnInit {
 
         try {
           if (this.openHours.sundayOpenHour) {
-            this.openSunday = this.openHours.sundayOpenHour + " to " + this.openHours.sundayCloseHour;
+            this.openSunday = this.openHours.sundayOpenHour + '.' + this.openHours.sundayOpenMinute + " to " + this.openHours.sundayCloseHour + '.' + this.openHours.sundayCloseMinute;
           }
         } catch (e) {
           this.openSunday = "we are closed";
@@ -45,7 +45,7 @@ export class AboutusComponent implements OnInit {
 
         try {
           if (this.openHours.saturdayOpenHour) {
-            this.openSaturday = this.openHours.saturdayOpenHour + " to " + this.openHours.saturdayCloseHour;
+            this.openSaturday = this.openHours.saturdayOpenHour + '.' + this.openHours.saturdayOpenMinute + " to " + this.openHours.saturdayCloseHour + '.' + this.openHours.saturdayCloseMinute;
           }
         } catch (e) {
           this.openSaturday = "we are closed";
@@ -54,7 +54,7 @@ export class AboutusComponent implements OnInit {
 
         try {
           if (this.openHours.weekDaysOpenHour) {
-            this.openWeekdays = this.openHours.weekDaysOpenHour + " to " + this.openHours.weekDaysCloseHour;
+            this.openWeekdays = this.openHours.weekDaysOpenHour + '.' + this.openHours.weekDaysOpenMinute + " to " + this.openHours.weekDaysCloseHour + '.' + this.openHours.weekDaysCloseMinute;
           }
         } catch (e) {
           this.openWeekdays = "we are closed";
