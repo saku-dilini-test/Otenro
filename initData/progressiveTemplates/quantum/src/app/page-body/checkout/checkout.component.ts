@@ -183,7 +183,7 @@ export class CheckoutComponent implements OnInit {
       this.currency = data;
       this.sign = this.currency.sign;
       this.dataService.currency = this.sign;
-      this.dataService.paypalCurrency = this.currency.currency;
+      this.dataService.paypalCurrency = this.currency.symbol.toUpperCase();
     }, error => {
       alert('error currency');
 
