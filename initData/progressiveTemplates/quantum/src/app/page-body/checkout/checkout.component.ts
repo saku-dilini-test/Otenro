@@ -503,7 +503,7 @@ export class CheckoutComponent implements OnInit {
             total = total + tax;
             if (this.chkPickupCost == 0) {
               if (this.chkShippingCost) {
-                this.totalPrice = total + this.chkShippingCost;
+                this.totalPrice = total + parseInt(this.chkShippingCost);
               } else {
                 this.totalPrice = total;
               }
@@ -513,7 +513,7 @@ export class CheckoutComponent implements OnInit {
           } else {
             if (this.chkPickupCost == 0) {
               if (this.chkShippingCost) {
-                this.totalPrice = total + this.chkShippingCost;
+                this.totalPrice = total + parseInt(this.chkShippingCost);
               } else {
                 this.totalPrice = total;
               }
