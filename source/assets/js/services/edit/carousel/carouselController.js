@@ -74,6 +74,18 @@
                                     },
                                         this.cancel = function click(){
                                             $mdDialog.hide();
+                                            return $mdDialog.show({
+                                                                controller: 'CarouselCtrl',
+                                                                templateUrl: 'user/edit/carousel/carouselManagement.html',
+                                                                clickOutsideToClose: false,
+                                                                locals: {
+                                                                    initialData: null
+                                                                }
+                                                            }).then(function (answer) {
+                                                                //$scope.status = 'You said the information was "' + answer + '".';
+                                                            }, function () {
+                                                                //$scope.status = 'You cancelled the dialog.';
+                                                            });
                                         }
                                 },
                                 template:'<md-dialog aria-label="Edit Child Menu">'+
