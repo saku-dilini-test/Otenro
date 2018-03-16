@@ -101,8 +101,6 @@ export class RegisterComponent implements OnInit {
         appId: this.appId
     };
 
-    this.localStorageService.set('appLocalStorageUser'+this.appId, (data))
-
     this.http.post(SERVER_URL+"/templatesAuth/register",data)
         .subscribe((res) =>{
 
