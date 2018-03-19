@@ -11,7 +11,7 @@
 
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
-
+        console.log(initialData);
         $scope.maxFlatRate = 20;
         $scope.maxWeightRate = 20;
         $scope.maxPickup = 50;
@@ -123,7 +123,8 @@
             if($scope.initialData.shippingOption == 'Weight Based'){
                 $scope.weightRate = $scope.initialData;
                 $scope.addNewWeightRange = function(){
-                    $scope.weightRate.weightRanges.push({startWeight : '',endWeight : '',cost : ''})
+                    var lastEndWeight = parseFloat($scope.initialData.weightRanges[$scope.initialData.weightRanges.length - 1].endWeight)  + 0.1+"";
+                    $scope.weightRate.weightRanges.push({startWeight : lastEndWeight ,endWeight : '',cost : ''})
                 };
                 $scope.data ={
                     group : $scope.initialData.selection
