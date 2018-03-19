@@ -13,6 +13,7 @@
             var appId = $rootScope.appId;
         // --/-- Configuration Data --/--
         $scope.initialData = initialData;
+        console.log($scope.initialData);
         $scope.selected = [];
         $scope.countryList = [];
         $scope.maxTax = 20;
@@ -149,6 +150,7 @@
 
                         taxService.deleteTaxInfo(item)
                         .success(function (result) {
+                            $scope.initialData = "newTaxOption";
                             toastr.success('Successfully Deleted ', 'Saved', {
                                 closeButton: true
                             });

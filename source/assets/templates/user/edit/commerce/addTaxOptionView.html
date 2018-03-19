@@ -9,7 +9,8 @@
     <md-dialog-content>
         <form name="taxOption" novalidate>
             <div class="md-dialog-header">
-                <h1>Add Tax Option</h1>
+                <h1 data-ng-if="initialData == 'newTaxOption'">Add Tax Option</h1>
+                <h1 data-ng-if="initialData != 'newTaxOption'">Edit Tax Option</h1>
             </div>
             <div class="md-dialog-main">
                 <fieldset>
@@ -86,7 +87,8 @@
             <div class="md-dialog-buttons">
                 <div class="inner-section">
                     <md-button class="me-default-button" ng-click="backToTaxesView()">cancel</md-button>
-                    <md-button class="me-default-button" ng-click="addNewTaxOption(tax,selected)">add</md-button>
+                    <md-button data-ng-if="initialData == 'newTaxOption'" class="me-default-button" ng-click="addNewTaxOption(tax,selected)">add</md-button>
+                    <md-button data-ng-if="initialData != 'newTaxOption'" class="me-default-button" ng-click="addNewTaxOption(tax,selected)">save</md-button>
 
                 </div>
             </div>
