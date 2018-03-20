@@ -10,7 +10,75 @@
  * http://links.sailsjs.org/docs/config/log
  */
 
-module.exports = {
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, label, printf,colorize } = format;
+var moment = require('moment');
+
+const myCustomLevels = {
+ levels: {
+     error: 0,
+     warn: 1,
+     info: 2,
+     http: 3,
+     sql: 4,
+     debug: 5
+   },
+   colors: {
+     error: "red",
+     warn: "darkred",
+     info: "black",
+     http: "green",
+     sql: "blue",
+     debug: "gray"
+   }
+};
+
+const myFormat = printf(info => {
+  return `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`;
+});
+
+
+const appendTimestamp = format((info, opts) => {
+  if(opts.tz)
+    info.timestamp = moment().tz(opts.tz).format();
+  return info;
+});
+
+var logger = createLogger({
+levels: myCustomLevels.levels,
+
+  format: combine(
+    appendTimestamp({ tz: 'Asia/Colombo' }),
+    myFormat,
+    colorize()
+  ),
+  transports: [
+  new transports.Console({
+        colorize: true,
+        handleExceptions: true
+  }),
+  new transports.File({
+        name: 'info-file',
+        level: 'info',
+        filename: 'combined.log',
+        colorize: true,
+        handleExceptions: true
+  }),
+  new transports.File({
+        name: 'error-file',
+        filename: 'error.log',
+        level: 'warn',
+        colorize: true,
+        handleExceptions: true
+  })
+
+  ],
+    exceptionHandlers: [
+      new transports.File({ filename: 'exceptions.log' })
+    ]
+});
+
+module.exports.logging = {
 
   // Valid `level` configs:
   // i.e. the minimum log level to capture with sails.log.*()
@@ -24,7 +92,7 @@ module.exports = {
   //log: {
   //  level: 'info'
   //}
-
-  level: 'info'
+    custom: logger,
+    level: 'silly'
 
 };
