@@ -52,10 +52,9 @@ export class CartComponent implements OnInit {
     this.taxService.getShippingInfo().subscribe(data => {
       this.shippingData = data;
     }, err => {
-      alert({
-        title: 'Policies Data loading error!',
-        template: 'Please check your connection!'
-      });
+      alert(
+        'Error loading shippingInfo!\n Please check your connection.'
+      );
     });
 
 

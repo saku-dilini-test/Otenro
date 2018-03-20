@@ -185,8 +185,7 @@ export class CheckoutComponent implements OnInit {
       this.dataService.currency = this.sign;
       this.dataService.paypalCurrency = this.currency.symbol.toUpperCase();
     }, error => {
-      alert('error currency');
-
+      alert('Error Retrieving currencies!\n Please check your connection.');
     });
 
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
@@ -208,10 +207,9 @@ export class CheckoutComponent implements OnInit {
               this.shippingData.push(this.shippingDatas[i]);
             }
           }
-        },
-        function (err) {
+        },(err)=> {
           alert(
-            'Policies Data loading error,Please check your connection!'
+            'Error Retrieving shipping details!\n Please check your connection.'
           );
         });
     } else {
@@ -224,10 +222,9 @@ export class CheckoutComponent implements OnInit {
           /* $scope.header = data.header;
           $scope.content = data.content;*/
           //$state.go('app.category');
-        },
-        function (err) {
+        }, (err)=> {
           alert(
-            'Policies Data loading error!,Please check your connection!'
+            'Error Retrieving Pickup details!\n Please check your connection.'
           );
         });
     }
@@ -589,8 +586,8 @@ export class CheckoutComponent implements OnInit {
         this.stripeShow = this.paymentData.stripeEnable;
         this.braintreeShow = this.paymentData.braintreeEnable;
         this.authorizeNet = this.paymentData.authorizeNetEnable;
-      }), function (err) {
-        alert('warning Unable to get Products Selected Category');
+      }), (err) => {
+        alert('warning!\n Unable to get Products Selected Category,\n Please check your connection!');
       };
 
     this.cardType = {};
@@ -653,7 +650,7 @@ export class CheckoutComponent implements OnInit {
         if (res.status == 'ok') {
           this.orderProcess();
         }
-      }, function (err) {
+      }, (err) =>{
         alert('authorizeCreditCard' + err)
       })
   }
@@ -748,26 +745,17 @@ export class CheckoutComponent implements OnInit {
 
             this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
 
-            alert({
-              title: 'Thank You',
-              subTitle: 'Your Order has been successfully processed',
-              cssClass: 'ionicPopUp',
-              buttons: [
-                {
-                  text: 'OK',
-                  type: 'made-easy-button-setting'
-                },
-              ]
-            });
-            // TODO : Currently back to cart
-            //back to Main Menu
-            this.router.navigate(['home']);
-          },
-          function (err) {
+            this._success.next('Your Order has been successfully processed');
+
+            this._success.subscribe((message) => this.successMessage = message);
+            debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+            this._success.next("Thank You, Your order has been successfully processed");
+            setTimeout(() => { this.router.navigate(['home']); }, 3100)
+
+          }, (err)=> {
             console.log(err);
           });
-      },
-      function (err) {
+      },(err)=> {
         console.log(err);
       });
   }
