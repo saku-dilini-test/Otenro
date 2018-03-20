@@ -16,7 +16,7 @@ export class ContactComponent {
   private googleMap;
   lat; lng;
   finish: boolean;
-  CONTACNTINFO=[];
+  CONTACNTINFO = [];
   constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {
 
     this.appdataService.getContactUs().subscribe(data => {

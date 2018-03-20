@@ -118,27 +118,27 @@ export class CheckoutComponent implements OnInit {
 
     }
 
-      this.complexForm = fb.group({
-        // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
-        'fName': new FormControl(this.dataService.userData.name, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
-        'lName': new FormControl(this.dataService.userData.lname, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
-        'email': new FormControl(this.dataService.userData.email, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
-        'phone': new FormControl(this.dataService.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/)])),
-        'streetNo': new FormControl(this.dataService.userData.streetNumber, Validators.compose([Validators.required])),
-        'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
-        'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
-        'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])),
-        'country': new FormControl(null)
+    this.complexForm = fb.group({
+      // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
+      'fName': new FormControl(this.dataService.userData.name, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
+      'lName': new FormControl(this.dataService.userData.lname, Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
+      'email': new FormControl(this.dataService.userData.email, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
+      'phone': new FormControl(this.dataService.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/)])),
+      'streetNo': new FormControl(this.dataService.userData.streetNumber, Validators.compose([Validators.required])),
+      'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
+      'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
+      'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])),
+      'country': new FormControl(null)
 
-      });
-      this.complexForm.controls['country'].setValue(this.dataService.userData.country, { onlySelf: true });
+    });
+    this.complexForm.controls['country'].setValue(this.dataService.userData.country, { onlySelf: true });
 
-      this.pickupForm = fb.group({
-        'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
-        'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/), Validators.minLength(12)])),
+    this.pickupForm = fb.group({
+      'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
+      'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/), Validators.minLength(12)])),
 
-      });
-    }
+    });
+  }
 
 
 
@@ -207,7 +207,7 @@ export class CheckoutComponent implements OnInit {
               this.shippingData.push(this.shippingDatas[i]);
             }
           }
-        },(err)=> {
+        }, (err) => {
           alert(
             'Error Retrieving shipping details!\n Please check your connection.'
           );
@@ -222,7 +222,7 @@ export class CheckoutComponent implements OnInit {
           /* $scope.header = data.header;
           $scope.content = data.content;*/
           //$state.go('app.category');
-        }, (err)=> {
+        }, (err) => {
           alert(
             'Error Retrieving Pickup details!\n Please check your connection.'
           );
@@ -374,8 +374,8 @@ export class CheckoutComponent implements OnInit {
         if (weightRange.startWeight <= totalWeight && weightRange.endWeight >= totalWeight) {
           shippingCost = shippingDetails.weightRanges[i].cost;
         }
-        if(i != shippingDetails.weightRanges.length -1){
-          if(weightRange.endWeight < totalWeight && shippingDetails.weightRanges[i+1].startWeight > totalWeight){
+        if (i != shippingDetails.weightRanges.length - 1) {
+          if (weightRange.endWeight < totalWeight && shippingDetails.weightRanges[i + 1].startWeight > totalWeight) {
             shippingCost = shippingDetails.weightRanges[i].cost;
           }
         }
@@ -447,9 +447,9 @@ export class CheckoutComponent implements OnInit {
     //   this.chkCountry = this.finalDetails.delivery.country;
     // }
 
-    if(this.localData){
+    if (this.localData) {
       this.chkCountry = this.localData.country;
-    }else{
+    } else {
       this.chkCountry = this.country;
     }
 
@@ -536,9 +536,9 @@ export class CheckoutComponent implements OnInit {
   pay(promotionCode) {
 
     let email;
-    if(this.localData){
+    if (this.localData) {
       email = this.localData.email
-    }else{
+    } else {
       email = this.email
     }
 
@@ -650,7 +650,7 @@ export class CheckoutComponent implements OnInit {
         if (res.status == 'ok') {
           this.orderProcess();
         }
-      }, (err) =>{
+      }, (err) => {
         alert('authorizeCreditCard' + err)
       })
   }
@@ -658,7 +658,7 @@ export class CheckoutComponent implements OnInit {
   orderProcess() {
     if (this.formType == "delivery") {
 
-      if(this.user){
+      if (this.user) {
         this.orderDetails = {
           'appId': this.appId,
           'registeredUser': this.user.registeredUser,
@@ -681,7 +681,7 @@ export class CheckoutComponent implements OnInit {
           'promotionCode': this.payInfo.promotionCode
         };
 
-      }else{
+      } else {
         this.orderDetails = {
           'appId': this.appId,
           'registeredUser': 'Unknown User',
@@ -704,7 +704,7 @@ export class CheckoutComponent implements OnInit {
           'promotionCode': this.payInfo.promotionCode
         };
       }
-    }else {
+    } else {
       this.orderDetails = {
         "appId": this.appId,
         "registeredUser": this.user.registeredUser,
@@ -732,18 +732,18 @@ export class CheckoutComponent implements OnInit {
             this.dataService.cart.totalPrice = 0;
             this.dataService.cart.totalQuantity = 0;
 
-            //Pushing into order purchase history
-            if (this.localStorageService.get("history" + this.appId + this.user.registeredUser) != null) {
-              this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-            }
-            this.orderHistory.push({
-              orderHistoryKey: this.appId,
-              createdDate: new Date(),
-              item: this.payInfo.cart,
-              amount: this.payInfo.amount,
-            });
+            // //Pushing into order purchase history
+            // if (this.localStorageService.get("history" + this.appId + this.user.registeredUser) != null) {
+            //   this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
+            // }
+            // this.orderHistory.push({
+            //   orderHistoryKey: this.appId,
+            //   createdDate: new Date(),
+            //   item: this.payInfo.cart,
+            //   amount: this.payInfo.amount,
+            // });
 
-            this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
+            // this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
 
             this._success.next('Your Order has been successfully processed');
 
@@ -752,10 +752,20 @@ export class CheckoutComponent implements OnInit {
             this._success.next("Thank You, Your order has been successfully processed");
             setTimeout(() => { this.router.navigate(['home']); }, 3100)
 
-          }, (err)=> {
+          }, (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log("Error Updating Inventory!\n Please check your connection.");
+            } else {
+              console.log("Server-side error occured.");
+            }
             console.log(err);
           });
-      },(err)=> {
+      }, (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log("Error processing order!\n Please check your connection.");
+        } else {
+          console.log("Server-side error occured.");
+        }
         console.log(err);
       });
   }
@@ -763,7 +773,7 @@ export class CheckoutComponent implements OnInit {
 
   confirmCashPayment() {
     if (this.formType == "delivery") {
-      if(this.user){
+      if (this.user) {
         this.orderDetails = {
           'appId': this.appId,
           'registeredUser': this.user.registeredUser,
@@ -786,7 +796,7 @@ export class CheckoutComponent implements OnInit {
           'promotionCode': this.payInfo.promotionCode
         };
 
-      }else{
+      } else {
         this.orderDetails = {
           'appId': this.appId,
           'registeredUser': 'Unknown User',
@@ -811,7 +821,7 @@ export class CheckoutComponent implements OnInit {
       }
 
 
-    }else {
+    } else {
       this.orderDetails = {
         "appId": this.appId,
         "registeredUser": this.user.registeredUser,
@@ -859,14 +869,18 @@ export class CheckoutComponent implements OnInit {
             this._success.next("Thank You, Your order has been successfully processed");
             setTimeout(() => { this.router.navigate(['home']); }, 3100)
 
-          },
-          (err) => {
+          }, (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log("Error Updating Inventory!\n Please check your connection.");
+            } else {
+              console.log("Server-side error occured.");
+            }
             console.log(err);
           });
       },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
-          console.log("Client-side error occured.");
+          console.log("Error Processing order!\n Please check your connection.");
         } else {
           console.log("Server-side error occured.");
         }
@@ -877,7 +891,7 @@ export class CheckoutComponent implements OnInit {
   // Buy With PayPal
   buyWithPayPal() {
     if (this.formType == "delivery") {
-      if(this.user){
+      if (this.user) {
         this.orderDetails = {
 
           'appId': this.appId,
@@ -901,7 +915,7 @@ export class CheckoutComponent implements OnInit {
           'promotionCode': this.payInfo.promotionCode
         };
 
-      }else{
+      } else {
         this.orderDetails = {
 
           'appId': this.appId,
@@ -926,7 +940,7 @@ export class CheckoutComponent implements OnInit {
         };
       }
 
-    }else {
+    } else {
       this.orderDetails = {
         "appId": this.appId,
         "registeredUser": this.user.registeredUser,
