@@ -10,22 +10,22 @@
       <div class="form-group col-xs-6">
         <label for="fname">First Name</label>
         <div>
-          <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" type="text" #fname='ngModel' name="fname" id="fname" placeholder="Arstina"
+          <input class="form-control" pattern="[a-zA-Z]+" type="text" #fname='ngModel' name="fname" id="fname" placeholder="Arstina"
                  ngModel required>
           <div [hidden]="fname.valid || fname.pristine" class="alert alert-danger">
             <div [hidden]="!fname.hasError('required')">First Name is required</div>
-            <div [hidden]="!fname.hasError('pattern')">Only alphabetsallowed</div>
+            <div [hidden]="!fname.hasError('pattern')">Only alphabetsallowed and no spaces</div>
           </div>
         </div>
       </div>
       <div class="form-group col-xs-6">
         <label for="lname" class="col-2 col-form-label">Last Name</label>
         <div class="col-10">
-          <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" type="text" #lname='ngModel' name="lname" id="lname" placeholder="kale"
+          <input class="form-control" pattern="[a-zA-Z]+" type="text" #lname='ngModel' name="lname" id="lname" placeholder="kale"
                  ngModel required>
           <div [hidden]="lname.valid || lname.pristine" class="alert alert-danger">
             <div [hidden]="!lname.hasError('required')">Last Name is required</div>
-            <div [hidden]="!lname.hasError('pattern')">Only alphabetsallowed</div>
+            <div [hidden]="!lname.hasError('pattern')">Only alphabetsallowed  and no spaces</div>
           </div>
         </div>
       </div>

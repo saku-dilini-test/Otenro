@@ -79,7 +79,7 @@
           You must include a First name.
         </div>
         <div *ngIf="!complexForm.controls['fName'].valid && complexForm.controls['fName'].touched && complexForm.controls['fName'].dirty" class="alert alert-danger">
-          First Name must only include Alphabetic character
+          First Name must only include Alphabetic character and no spaces.
         </div>
         <!-- <div *ngIf="complexForm.controls['fName'].hasError('minlength')
         && complexForm.controls['fName'].touched" class="alert alert-danger">
@@ -101,7 +101,7 @@
           You must include a Last name.
         </div>
         <div *ngIf="!complexForm.controls['lName'].valid && complexForm.controls['lName'].touched && complexForm.controls['lName'].dirty" class="alert alert-danger">
-          Last Name must only include Alphabetic character
+          Last Name must only include Alphabetic character and no spaces.
         </div>
         <!-- <div *ngIf="complexForm.controls['lName'].hasError('minlength')
         && complexForm.controls['lName'].touched" class="alert alert-danger">
