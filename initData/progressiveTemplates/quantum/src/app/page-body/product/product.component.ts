@@ -66,7 +66,7 @@ export class ProductComponent implements OnInit {
     init() {
         if (this.Data) {
             this.foodInfo = this.Data;
-            this.title.changeTitle(this.foodInfo.name);
+            this.title.changeTitle(" ");
             this.images = this.Data.tempImageArray;
 
             if (this.Data.variants.length > 0) {
