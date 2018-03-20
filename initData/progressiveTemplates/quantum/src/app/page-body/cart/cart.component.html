@@ -6,7 +6,7 @@
       <img src="{{imageUrl}}/{{item.imgURL[0].img}}">
     </div>
     <div class="col-md-8 col-xs-6">
-      <div class="row">
+      <div *ngIf="cartItems.length > 0" class="row">
         <div class="col-md-6">
           <label class="no-m-margin main-header-font">{{item.name}}</label>
           <span class="single-price main-content-font"> {{currency}} {{item.price}}</span>
@@ -59,16 +59,17 @@
 
 	<div class="row text-center">
 		<div class="col-md-12 text-center margin-vertical main-content-font">
-      <h4 [(ngModel)]="total" ngDefaultControl>Cart Total: {{currency}} {{getTotal()}}</h4>
+      <h4 *ngIf="cartItems.length > 0" [(ngModel)]="total" ngDefaultControl>Cart Total: {{currency}} {{getTotal()}}</h4>
+      <h4 *ngIf="cartItems.length == 0">There are no Products added to the cart</h4>
     </div>
     <div class="col-md-6 col-xs-6">
       <!-- [disabled]='cartItems.length<=0' -->
-      <button class="btn main-button text-white btn-block" (click)="delivery(cartItems)">
+      <button *ngIf="cartItems.length > 0" class="btn main-button text-white btn-block" (click)="delivery(cartItems)">
         Delivery
       </button>
     </div>
     <div class="col-md-6 col-xs-6">
-      <button class="btn main-button text-white btn-block" (click)='pickupDetails(cartItems)'>
+      <button *ngIf="cartItems.length > 0" class="btn main-button text-white btn-block" (click)='pickupDetails(cartItems)'>
         pickup
       </button>
     </div>
