@@ -53,6 +53,7 @@ export class HeaderComponent implements OnInit{
   logout() {
     this.localStorageService.remove('appLocalStorageUser' + this.appId);
     this.dataService.isUserLoggedIn.check = false;
+    this.dataService.cart.cartItems = [];
     this.router.navigate(['home']);
   }
 
