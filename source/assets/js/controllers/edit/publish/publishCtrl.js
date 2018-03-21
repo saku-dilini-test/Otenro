@@ -92,10 +92,17 @@
                             $scope.playStoreData ={language: $scope.defaultLanguage.language};
                      }
                      else{
-                            var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
-                            +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=publish/";
+                            console.log($scope.existingData)
+                            var tempImagePath;
+                            if($scope.existingData[0].isNew === true) {
 
+                                tempImagePath = SERVER_URL + "templates/viewWebImages?userId=" + $auth.getPayload().id
+                                    + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&images=publish/";
+                            }else {
 
+                                tempImagePath = SERVER_URL + "templates/viewImages?userId=" + $auth.getPayload().id
+                                    + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&img=publish/";
+                            }
 
                                 for (var i=0; i< 6; i++) {
                                     var tempImageUrl = tempImagePath + i+'.png';
@@ -134,7 +141,7 @@
             }
             else {
                     playStoreData.category = 'GooglePlay';
-                    publishService.addGooglePlayInfo(playStoreData)
+                    publishService.addGooglePlayInfo(playStoreData,$rootScope.tempNew)
                         .success(function(data, status, headers, config) {
                             toastr.success('General information has been added successfully', 'Saved', {
                                 closeButton: true
@@ -144,10 +151,10 @@
                             closeButton: true
                         });
                     });
-                    
+
                     splash.forEach(function(splash){
                         if (JSON.stringify(splash).match("blobUrl")){
-                            publishService.uploadPublishFiles(splash,$scope.count)
+                            publishService.uploadPublishFiles(splash,$scope.count,$rootScope.tempNew)
                                 .success(function (data, status, headers, config) {
 
                                 }).error(function (data, status, headers, config) {

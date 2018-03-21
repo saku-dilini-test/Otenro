@@ -3,3 +3,4 @@
  */
 O_SERVER_URL = 'https://dashboard.otenro.com/';
 O_MESERVER_URL = 'https://cdn.otenro.com/';
+O_ME_SERVER = '/home/admin/web/cdn.otenro.com/public_html/temp/';

@@ -45,6 +45,9 @@ module.exports = {
         appType : {
             type: 'string' 
         },
+        isNew : {
+            type: 'boolean'
+        },
         copyrights:{
             type: 'string'
         },
