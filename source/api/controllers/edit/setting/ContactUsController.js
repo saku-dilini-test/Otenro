@@ -13,11 +13,11 @@ module.exports = {
             appId: req.body.appId
         };
 
-
+        data.telPhone = "+" + data.telPhone;
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
             if (app.length == 0) {
-            
-                data.telPhone = "+" + data.telPhone;
+
+
                 ApplicationContactUs.create(data).exec(function (err, appContactUs) {
                     if (err) res.send(err);
 
