@@ -186,7 +186,7 @@
                             $scope.taxList = result.data;
 
                             angular.forEach($scope.taxList, function (tax) {
-                                $scope.tax_total = $scope.tax_total + tax.taxTotal;
+                                $scope.tax_total = $scope.tax_total + Math.round(tax.taxTotal * 100) / 100;
                             })
 
                         }).error(function (error) {
