@@ -16,6 +16,8 @@ module.exports = {
 
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
             if (app.length == 0) {
+            
+                data.telPhone = "+" + data.telPhone;
                 ApplicationContactUs.create(data).exec(function (err, appContactUs) {
                     if (err) res.send(err);
 
@@ -40,7 +42,7 @@ module.exports = {
         var searchApp = {
             appId: req.body.appId
         };
-
+                data.telPhone = "+" + data.telPhone;
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
             if(err) return err;
 
@@ -69,6 +71,7 @@ module.exports = {
         var searchApp = {
             appId: req.body.appId
         };
+                        data.telPhone = "+" + data.telPhone;
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
             if (app.length == 0) {
                 ApplicationContactUs.create(data).exec(function (err, appContactUs) {
@@ -94,6 +97,7 @@ module.exports = {
         var searchApp = {
             appId: req.body.appId
         };
+                        data.telPhone = "+" + data.telPhone;
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
             if (app.length == 0) {
                 ApplicationContactUs.create(data).exec(function (err, appContactUs) {
@@ -119,6 +123,7 @@ module.exports = {
         var searchApp = {
             appId: req.body.appId
         };
+                        data.telPhone = "+" + data.telPhone;
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
             if(err) sails.log.info(err);
             if (app.length == 0) {
