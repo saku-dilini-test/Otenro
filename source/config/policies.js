@@ -53,7 +53,9 @@ module.exports.policies = {
   'edit/commerce/SecondNavigationController': {
     '*': ['jwtAuth']
   },
-
+  'edit/commerce/UserSettingsController':{
+    '*': ['jwtAuth']
+  },
   'edit/commerce/SliderController': {
     '*': ['jwtAuth']
   },

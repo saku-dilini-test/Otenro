@@ -304,14 +304,47 @@
                         <h1>About Us</h1>
                     </div>
                     <div class="md-dialog-main">
-                        <form name="aboutUs" novalidate>
-                            <fieldset class="btn-material inputField">
-                                choose Image
-                                <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files,'ABOUTUS')" />
-                            </fieldset>
-                            <label class="padding-left">Selected Image: </label><span>{{ selectedAboutUsImageName }}</span>
-                            <div class="padding-bottom"><label>Uploaded Image: </label><span>{{ storeSettings.aboutUsImageName }}</span></div>
-                        <fieldset>
+                        <!--<input type="file" ngf-select="uploadPic(picFile)" ng-model="picFile" name="file" ngf-accept="'image/*'" required="">-->
+                        <label>Select Image</label>
+                        <div layout-gt-xs="row" class="margin">
+                            <div class="file-upload-wrapper clearfix">
+                                <div class="cropArea">
+                                    <ui-cropper image="myImage" area-type="rectangle" aspect-ratio="aspectRatio" result-image="picFile" result-image-size="size"   result-image-format="image/jpeg" result-image-quality="0.5">
+                                    </ui-cropper>
+                                </div>
+
+                                <div class="inputField btn-material img-up">
+                                    <span >{{buttonName}}</span>
+                                    <div class="img-up1" ng-if="imageSelected">
+                                        <input type="file" value="file"  ng-click = "cropImage($event);" id="fileInput" >
+                                    </div>
+                                    <div  ng-if="!imageSelected" class="img-up1" ng-click="addImage(picFile)"></div>
+
+                                </div>
+
+                            </div>
+                            <div class="uploaded-section image-upload clearfix" style="width:35%">
+                                <div class="uploaded-new-image">
+                                    <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                         height="150" style="display:none" />
+                                    <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
+                                </div>
+                                <div class="uploaded-old-images">
+                                    <p>Uploaded AboutUs Image</p>
+                                    <div class="old-images clearfix">
+                                        <div class="old-image">
+                                            <input data-ng-if="tmpImage[0]" type="button" ng-click="deleteImg(0)" value='delete'
+                                                   class="image-delete-button"/>
+                                            <img ng-click="" ng-if="tmpImage[0] == null"
+                                                 src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                            <img ng-click="" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
+                                                 width="80" height="80"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                             <label>Heading</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
                             <input class="input-shadow-border" type="text" name="header" ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="storeSettings.header" required  />

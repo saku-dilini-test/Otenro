@@ -96,22 +96,40 @@ module.exports = {
     },    
     uploadFile : function(req,res){
       console.log("Exec uploadFile!!!");
-        var uploadedFileType = req.body.uploadedFileType;
 
-        var dePath = config.APP_FILE_SERVER + req.body.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/';
 
-        req.file('file').upload({
-            dirname: require('path').resolve(dePath)
-        },function (err, uploadedFiles) {
-            if (err) return res.send(500, err);
+        var tmpImage = req.body.file;
+        console.log(tmpImage);
+        var data = tmpImage[0].replace(/^data:image\/\w+;base64,/, "");
+        var buf = new Buffer(data, 'base64');
 
-            var newFileName = uploadedFileType+'.png';
-            fs.rename(uploadedFiles[0].fd, dePath+'/'+newFileName, function (err) {
-                if (err) return res.send(err);
-            });
+        var dePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/';
+        var filePath = config.APP_FILE_SERVER + req.body.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/ABOUTUS.png';
 
-            res.send('ok');
-        });
+
+                     fs.writeFile(filePath, buf, function (err) {
+                        if (err) {
+                            return res.send(err);
+                        }
+                        res.send('ok');
+                    });
+
     },
+        deleteAboutUsImage: function (req, res){
+        console.log(req.userId);
+        console.log(req.body);
+            var ImagePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + "/src/assets/images/ABOUTUS.png";
+
+                fs.unlink(ImagePath, function (err) {
+                    if (err){
+                        sails.config.logging.custom.error("Error deleting image UserID: " +req.userId );
+                        return console.error(err);
+                    }
+                    sails.config.logging.custom.info("About us Image deleted Successfully! UserID: " + req.userId );
+                    res.send(200,{message:' About us Image deleted!'});
+                });
+
+
+        }
 
 };

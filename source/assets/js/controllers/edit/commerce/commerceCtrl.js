@@ -1,12 +1,12 @@
 (function () {
     'use strict';
     angular.module("appEdit").controller("CommerceCtrl", [
-        '$scope', '$mdDialog', 'toastr', 'commerceService', 'currencyService', 'publishService', '$rootScope',
+        '$scope', '$mdDialog', 'toastr', 'commerceService','carouselService', 'currencyService', 'publishService', '$rootScope',
         'SERVER_URL', '$auth', 'ME_APP_SERVER', '$interval', '$q','aboutUsService','mySharedService','comingSoonService',
         '$filter','contactUsService','uiGmapGoogleMapApi','uiGridConstants','$templateCache','uiGridExporterConstants','uiGridExporterService','$log',
         CommerceCtrl]);
 
-    function CommerceCtrl($scope, $mdDialog, toastr, commerceService, currencyService, publishService, $rootScope,
+    function CommerceCtrl($scope, $mdDialog, toastr, commerceService,carouselService, currencyService, publishService, $rootScope,
              SERVER_URL, $auth, ME_APP_SERVER, $interval, $q,aboutUsService,mySharedService,comingSoonService, $filter,
              contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,sendDate,$log) {
 
@@ -585,6 +585,89 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             }
         };
 
+//-----------------------aboutUs image crop ----------------------------------
+        $scope.tmpImage = [];
+        $scope.imageSelected = true;
+        $scope.buttonName = "Browse Image";
+
+        // image crop function
+        $scope.cropImage = function () {
+            var handleFileSelect = function (evt) {
+                var file = evt.currentTarget.files[0];
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $scope.$apply(function ($scope) {
+                        $scope.myImage = evt.target.result;
+                        $scope.picFile = $scope.myImage;
+                    });
+                };
+                reader.readAsDataURL(file);
+                $scope.imageSelected = false;
+                $scope.buttonName = "Upload";
+            };
+            angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
+        }
+
+        //add image
+        $scope.addImage = function (img) {
+            if (angular.element('#fileInput').val() == '') {
+                toastr.error('Please choose an image to upload', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else {
+                var im = $scope.tmpImage;
+                im[0] = $scope.picFile;
+                $scope.tmpImage = im;
+                $scope.mainImg = img;
+                $scope.myImage = null;
+                toastr.success('Image has been uploaded successfully', 'message', {
+                    closeButton: true
+                });
+            }
+            $scope.imageSelected = true;
+            $scope.buttonName = "Browse Image";
+        };
+
+        //--------------------aboutUs image crop ratio from sliders ---------------------
+
+                $scope.setAspectRatio = function () {
+                    carouselService.getApplicationData($rootScope.appId)
+                        .success(function (data) {
+                            if (data.templateId){
+                                carouselService.getTemplateData(data.templateId)
+                                    .success(function (templateData) {
+                                        if(templateData.sliderSize){
+                                            $scope.aspectRatio = parseFloat(templateData.sliderSize.aspectRatio);
+                                        }
+                                        if(templateData.iSizeThird){
+                                            $scope.size={w:templateData.sliderSize.w,h:templateData.sliderSize.h};
+                                        }
+                                    }).error(function (err) {
+                                    toastr.error(err.message, 'Warning', {
+                                        closeButton: true
+                                    });
+                                });
+                            }
+                        }).error(function (err) {
+                        toastr.error(err.message, 'Warning', {
+                            closeButton: true
+                        });
+                    });
+                };
+
+                $scope.setAspectRatio();
+
+//---------------------------- delete about us image ---------------------------------
+
+         $scope.deleteImg = function(img){
+            $scope.tmpImage[img] = null;
+            commerceService.deleteAboutUsImage({"appId": $rootScope.appId}).success(function(data){
+                toastr.success('AboutUs image deleted!', 'Message', { closeButton: true });
+            });
+         }
+
+
         $scope.addAboutUs = function (current,storeSettings) {
             // Validate, About Us Header maximum characters length
             var header = storeSettings.header;
@@ -604,16 +687,19 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     closeButton: true
                 });
 
+            }else if ($scope.tmpImage[0] == null) {
+                  toastr.error('Please upload an image', 'Warning', { closeButton: true });
+                  return;
             }else {
                 if (storeSettings.header && storeSettings.content) {
                     storeSettings.userId = $scope.userId;
                     storeSettings.appId = $rootScope.appId;
 
-                    var file = $scope.uploadedFiles;
+                    var file = $scope.tmpImage;
                     var uploadedFileType = $scope.uploadedFileType;
 
                     if(file){
-                        commerceService.uploadFile(file,storeSettings.appId,storeSettings.userId,uploadedFileType).success(function(data) {
+                        commerceService.uploadFile({"file":$scope.tmpImage,"appId":storeSettings.appId,"userId":storeSettings.userId}).success(function(data) {
                             storeSettings.aboutUsImageName = $scope.aboutUsImageName;
 
                             commerceService.saveStoreSettings(storeSettings)
@@ -683,31 +769,49 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
             }
 
         };
+//------------------------ Gettings store settings -----------------------------
+
 
         commerceService.showStoreSettings($rootScope.appId).success(function (data) {
             $scope.storeSettings = data[0];
+            if( typeof $scope.storeSettings.header != undefined){
+
+                            var imageURL = SERVER_URL + "templates/viewWebImages?" +
+                                                "userId=" + $auth.getPayload().id +
+                                                "&appId=" + $rootScope.appId + "&" + new Date().getTime() +
+                                                "&images=ABOUTUS.png";
+
+                                            $scope.tmpImage[0] = imageURL;
+                                            $scope.picFile = imageURL;
+
+            }
             $scope.storeSettings.currency = data[0].currencySign;
             $scope.openHours = data[0].OpenHours;
         }).error(function (err) {
             toastr.error(' warning', "Unable to get Store Settings", {closeButton: true});
         });
 
-        $scope.uploadFile = function (files, type) {
-            var file=files[0];
 
-            $scope.uploadedFiles = null;
-            $scope.uploadedFileType = type;
-            $scope.aboutUsImageName = file.name;
-            $scope.selectedAboutUsImageName = file.name;
+       //-----------------------------------------------------------------------
 
-            var reader = new FileReader();
-            reader.onload = function (evt) {
-                $scope.$apply(function($scope){
-                    $scope.uploadedFiles=evt.target.result;
-                });
-            };
-            reader.readAsDataURL(file);            
-        };        
+
+//
+//        $scope.uploadFile = function (files) {
+//
+//            var file=files;
+//             var reader = new FileReader();
+//            reader.readAsDataURL(file);
+//               reader.onload = function () {
+//                 console.log(reader.result);
+//                 $scope.uploadedFiles = reader.result;
+//               };
+//               reader.onerror = function (error) {
+//                 console.log('Error: ', error);
+//               };
+//            console.log($scope.uploadedFiles);
+//            console.log($scope.uploadedFiles);
+//
+//        };
 
 
         $scope.savePolicies = function (current, storeSettings) {

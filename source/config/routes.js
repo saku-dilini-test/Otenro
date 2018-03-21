@@ -84,6 +84,7 @@ module.exports.routes = {
     'POST /edit/saveStoreSettings': 'edit/commerce/UserSettingsController.saveStoreSettings',
     'POST /edit/savePolicies': 'edit/commerce/UserSettingsController.savePolicies',
     'POST /edit/uploadFile': 'edit/commerce/UserSettingsController.uploadFile',
+    'POST /edit/deleteFile': 'edit/commerce/UserSettingsController.deleteAboutUsImage',
     'GET /edit/showStoreSettings': 'edit/commerce/UserSettingsController.showStoreSettings',
     'GET /edit/getAllSiteType': 'edit/commerce/UserSettingsController.getAllSiteType',
     'GET /edit/getAllMeasurementType': 'edit/commerce/UserSettingsController.getAllMeasurementType',
