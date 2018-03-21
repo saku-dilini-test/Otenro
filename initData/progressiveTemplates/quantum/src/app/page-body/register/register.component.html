@@ -33,7 +33,7 @@
         <label for="email" class="col-2 col-form-label">Email</label>
         <div class="col-10">
           <input class="form-control" #email='ngModel' type="email" name="email" id="email" #contactEmail="ngModel" placeholder="you@example.com"
-          (ngModelChange)="modelChanged($event)" email pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" ngModel required>
+          (ngModelChange)="modelChanged($event)" email pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$" ngModel required>
           <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
             <div [hidden]="!email.hasError('required')">email is required</div>
             <div [hidden]="!email.hasError('pattern')">Invalid Email ID</div>
@@ -46,11 +46,11 @@
       <div class="form-group col-xs-6">
         <label for="password" class="col-2 col-form-label">Password</label>
         <div class="col-10">
-          <input class="form-control" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" type="password" #password='ngModel' name="password"
+          <input class="form-control" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$" type="password" #password='ngModel' name="password"
                  id="password" ngModel required>
           <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
             <div [hidden]="!password.hasError('required')">Password is required</div>
-            <div [hidden]="!password.hasError('pattern')">Your password should contain UpperCase, LowerCase and number</div>
+            <div [hidden]="!password.hasError('pattern')">Your password should be at least 8 characters long and should contain UpperCase, LowerCase and Number</div>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
                  id="passwordCon" ngModel required>
           <div [hidden]="passwordCon.valid || passwordCon.pristine" class="alert alert-danger">
             <div [hidden]="!passwordCon.hasError('required')">Password is required</div>
-            <div [hidden]="!passwordCon.hasError('pattern')">Your password should contain UpperCase, LowerCase and number</div>
+            <div [hidden]="!passwordCon.hasError('pattern')">Your password should be at least 8 characters long and should contain UpperCase, LowerCase and Number</div>
           </div>
           <div class="alert alert-danger"  [hidden]="passwordCon.pristine || password.value == passwordCon.value">
             <div> Passwords do not match.</div>
