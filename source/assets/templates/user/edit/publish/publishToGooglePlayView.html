@@ -100,7 +100,7 @@
                         </div>
                         <div class="row">
                             <fieldset class="col-md-3">
-                                <label class="reset-inline">Hi-res icon(512 x 512)</label>
+                                <label class="reset-inline">Hi-res icon<br>(512 x 512)</label>
                                 <a class="feature01 logo-upload">
                                     <span class="overlay01">
                                         <span class="caption01">
@@ -116,7 +116,7 @@
                             </fieldset>
 
                             <fieldset class="col-md-4">
-                                <label class="reset-inline">Feature Graphic(1024 w x 500 h)</label>
+                                <label class="reset-inline">Feature Graphic<br>(1024 w x 500 h)</label>
                                 <a class="feature01 logo-upload">
                                     <span class="overlay01">
                                         <span class="caption01">
@@ -128,6 +128,22 @@
                                     <img ng-if="splash[1] != null" ngf-src="splash[1]"  style="width:120px; height:120px;" id="FeatureGraphic"/>
                                     <!--                             <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />-->
                                     <img ng-show="splash[1] == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="307" height="150" />
+                                </a>
+                            </fieldset>
+
+                            <fieldset class="col-md-4">
+                                <label class="reset-inline">Splash Screen<br>(2732 w x 2732 h)</label>
+                                <a class="feature01 logo-upload">
+                                    <span class="overlay01">
+                                        <span class="caption01">
+                                           <input type="button" class="me-default-button" ngf-select
+                                                  ng-model="splash[6]" ngf-accept="image/*" ngf-change="validateSize(splash[6],'2732','2732')"
+                                                  value="Add Image" ngf-validate="{width: {min: 2732, max:2732}, height: {min: 2732, max: 2732}}" />
+                                        </span>
+                                    </span>
+                                    <img ng-if="splash[6] != null" ngf-src="splash[6]"  style="width:120px; height:120px;" id="FeatureGraphic"/>
+                                    <!--                             <img ng-show="picFile != null" ngf-src="picFile" style="width:120px; height:120px;" />-->
+                                    <img ng-show="splash[6] == null" ng-src="{{thumbPic}}" ng-model="thumbPic" width="307" height="150" />
                                 </a>
                             </fieldset>
                         </div>

@@ -104,7 +104,7 @@
                                     + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&img=publish/";
                             }
 
-                                for (var i=0; i< 6; i++) {
+                                for (var i=0; i< 7; i++) {
                                     var tempImageUrl = tempImagePath + i+'.png';
                                     $scope.splash.push(tempImageUrl);
                                 }
@@ -130,7 +130,7 @@
         $scope.addGooglePlayInfo = function(file, playStoreData, splash) {
              $scope.isValidFormData = true;
              $scope.count = 0;
-            if(splash[0] == null || splash[1] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
+            if(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
                 playStoreData.language == null ||
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
                 playStoreData.email==null){

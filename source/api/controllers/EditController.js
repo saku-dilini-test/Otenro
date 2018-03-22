@@ -591,18 +591,19 @@ module.exports = {
      * @param res
      */
     buildSourceProg : function(req,res){
-        var isNew = req.param('isNew');
-
         var userId = req.param('userId'),
             appId = req.param('appId'),
             copyDirPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/',
             moveConfigFile = copyDirPath + 'config.xml',
             appIconFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/0.png',
+            appSplashFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/6.png',
             appIconFileDES = copyDirPath + 'resources' + '/' + 'icon.png',
+            appSplashFileDES = copyDirPath + 'resources' + '/' + 'splash.png',
             replacePointerAppLink = config.ME_SERVER_URL+userId+'/progressiveTemplates/'+appId,
             selectedTemplatePath= config.ME_SERVER + userId + '/progressiveTemplates/' + appId +'/',
             indexPath = selectedTemplatePath + 'src/index.html',
             srcPath = sails.config.appPath + '/api/src/progPointerApp/',
+            isNew = req.param('isNew');
 
 
         fs.readFile(moveConfigFile, 'utf-8',
@@ -617,7 +618,7 @@ module.exports = {
                         };
                         Application.findOne(searchApp).exec(function (err, app) {
                             if (err) return res.negotiate(err);
-                            replaceAppNameNIcon(app.appName, appIconFileRES);
+                            replaceAppNameNIcon(app.appName, appIconFileRES, appSplashFileRES);
                         });
                     });
 
@@ -661,7 +662,7 @@ module.exports = {
                 }
             });
 
-            function replaceAppNameNIcon(appName, icon) {
+            function replaceAppNameNIcon(appName, icon, splash) {
                 var parser = new xml2js.Parser(),
                     xmlBuilder = new xml2js.Builder();
                 fs.readFile(moveConfigFile, 'utf-8',
@@ -683,6 +684,9 @@ module.exports = {
                             });
 
                             fs.copy(icon, appIconFileDES, 'base64', function(err) {
+                               if (err) return res.negotiate(err);
+                            });
+                            fs.copy(splash, appSplashFileDES, 'base64', function(err) {
                                if (err) return res.negotiate(err);
                             });
                             console.log(result.widget.name)
@@ -726,7 +730,7 @@ module.exports = {
 
                 shell.cd(appPath);
 
-                shell.exec('ionic cordova resources', {async: true}, function (code, stdout, stderr) {
+                shell.exec('ionic cordova resources android --force', {async: true}, function (code, stdout, stderr) {
 
                     if (code == 0) {
 
@@ -758,8 +762,8 @@ module.exports = {
                                                         }
                                                     }
                                                 });
-                                                shell.exec('"C:/Program Files (x86)/android/Android-sdk/build-tools/26.0.2/zipalign" -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
-                                                //shell.exec('/opt/android-sdk-linux/build-tools/23.0.1/zipalign -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
+                                                // shell.exec('"C:/Program Files (x86)/android/Android-sdk/build-tools/26.0.2/zipalign" -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
+                                                shell.exec('/opt/android-sdk-linux/build-tools/23.0.1/zipalign -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
                                                     if (code5 == 0) {
 
                                                         var file = appPath + 'platforms/android/build/outputs/apk/' + appName.replace(/\s/g, '') + '.apk';
