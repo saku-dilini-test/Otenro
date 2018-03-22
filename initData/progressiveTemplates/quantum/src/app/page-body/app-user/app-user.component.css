@@ -5,3 +5,11 @@
 .container{
   min-height:calc(100vh - 463px);
 }
+.edit-header{
+  display: block;
+ }
+@media (max-width: 767px) {
+  .edit-header{
+   display: none;
+  }
+}
