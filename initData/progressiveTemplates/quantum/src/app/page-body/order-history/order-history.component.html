@@ -6,30 +6,35 @@
   </div>
 
   <div  *ngFor="let order of orderHistory">
-    <div class="row cart" *ngFor="let item of order.item">
-      <div class="col-md-1 col-xs-2 no-m-padding">
-        <img src="{{imageURL}}/{{item.imgURL[0].img}}">
-      </div>
-      <div class="col-md-8 col-xs-6">
-        <div class="row">
-          <div class="col-md-6">
-            <label class="no-m-margin main-header-font">{{item.name}}</label>
-            <span class="main-content-font"> {{sign}} {{item.price}}</span>
+    <div class="row cart">
+      <h5 class="col-md-12 main-content-font">ORDER DATE: {{order.createdAt | date: 'dd/MM/yyyy'}}</h5>
+      <div class="col-md-8">
+        <div class="row order" *ngFor="let item of order.item">
+          <div class="col-md-2 col-xs-2 no-m-padding">
+            <img src="{{imageURL}}/{{item.imgURL[0].img}}">
           </div>
-          <div class="col-md-3">
-            <div class="variants text-center no-m-margin main-content-font">
-              <span  *ngFor="let v of item.variant">{{v.name}} : {{v.vType}}<br></span>
+          <div class="col-md-10 col-xs-6">
+            <div class="row">
+              <div class="col-md-6">
+                <label class="no-m-margin main-header-font">{{item.name}}</label>
+                <span class="main-content-font">ITEM PRICE:<br> {{sign}} {{item.price}}</span>
+              </div>
+              <div class="col-md-3">
+                <div class="variants text-center no-m-margin main-content-font">
+                  <span  *ngFor="let v of item.variant">{{v.name}} : {{v.vType}}<br></span>
+                </div>
+              </div>
+              <div class="col-md-3 main-content-font">
+                <span class="no-m-margin" id="qty">Quantity: {{item.qty}}</span>
+              </div>
             </div>
           </div>
-          <div class="col-md-3 main-content-font">
-            <span class="no-m-margin" id="qty">Qty: {{item.qty}}</span>
-          </div>
         </div>
       </div>
-      <div class="col-md-3 col-xs-4 no-m-padding">
-        <div class="total-price text-center main-content-font">
-          {{sign}} {{order.amount}}
-        </div>
+      <div class="col-md-4 col-xs-4 no-m-padding">
+          <div class="total-price text-center main-content-font">
+            ORDER TOTAL<br> {{sign}} {{order.amount}}
+          </div>
       </div>
     </div>
   </div>
