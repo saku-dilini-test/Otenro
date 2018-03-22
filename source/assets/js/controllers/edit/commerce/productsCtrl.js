@@ -933,9 +933,11 @@
                         $scope.vType = name;
                         $scope.vTypeRemove = name;
                         $scope.isNewProduct = isNewItem;
-
+                        var n = 0;
                         if ($scope.product.selection == undefined){
                             $scope.product.selection= [];
+                        }else{
+                            n = $scope.product.selection.length - 1;
                         }
                         this.confirm = function click(vName){
                             if(!vName){
@@ -955,7 +957,7 @@
 
                                 }
                             }else if($scope.product.selection.length > 0 ){
-                                for (var i = 0; i < $scope.product.selection.length; i++){
+                                for (var i = n; i < $scope.product.selection.length; i++){
                                    if( $scope.product.selection[i].name.toLowerCase() ==  $scope.vType.toLowerCase()){
                                          toastr.error('Cannot rename or add by the same name', 'Error!', {
                                               closeButton: true
