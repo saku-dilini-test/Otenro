@@ -31,14 +31,14 @@ export class ProductComponent implements OnInit {
     private selection2 = [];
     private selection3 = [];
     private Data;
-    private isBuyBtnDisable:boolean;
+    private isBuyBtnDisable: boolean;
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     private lockBuyButton = false;
-
+    private dialogVariants;
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
-    constructor(private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,private title: TitleService) {
+    constructor(private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
 
         this.Data = this.dataService.data;
         this.init();
@@ -50,7 +50,7 @@ export class ProductComponent implements OnInit {
     ngOnInit() {
 
         this.CurrencyService.getCurrencies().subscribe(data => {
-            this.currency = data.currency;
+            this.currency = data.sign;
         }, error => {
             console.log('Error retrieving currency');
         });
@@ -98,24 +98,31 @@ export class ProductComponent implements OnInit {
         this.selection2 = [];
         this.selection3 = [];
 
-        if(variant1){
-        this.selectedVariant1 = variant1;
-        this.selectedVariant2 = null;
-        this.selectedVariant.buyQuantity = '';
+        variant1 = variant1.replace(/\s/g, '');
+
+        if (variant1) {
+            if (variant1 == "PleaseSelect") {
+                this.lockBuyButton = false;
+                this.isBuyBtnDisable = true;
+            }
+            this.selectedVariant1 = variant1;
+            this.selectedVariant2 = null;
+            this.selectedVariant.buyQuantity = '';
         }
 
-        if (this.foodInfo.selection.length == 1 && variant1 != 'Please Select') {
+        if (this.foodInfo.selection.length == 1 && variant1 != 'PleaseSelect') {
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selectedVariant = this.foodInfo.variants[i];
 
-                    this.lockBuyButton = true;
+
                 }
             }
+            this.lockBuyButton = true;
         } else {
 
-            if(variant1 == "Please Select"){
-            }else{
+            if (variant1 == "Please Select") {
+            } else {
                 this.selection1.push({ 'vType': 'Please Select' });
             }
 
@@ -137,23 +144,17 @@ export class ProductComponent implements OnInit {
         //for IE specific issue
         variant2 = variant2.replace(/\s/g, '');
 
-        console.log(variant2);
-        console.log(this.lockBuyButton);
-
-
-
         if (variant2) {
-            if(variant2 == "PleaseSelect"){
-                console.log('inside check if');
+            if (variant2 == "PleaseSelect") {
                 this.lockBuyButton = false;
+                this.isBuyBtnDisable = true;
+
             }
             this.selectedVariant2 = variant2;
             this.selectedVariant.buyQuantity = '';
-            console.log(this.lockBuyButton);
         }
 
         if (this.foodInfo.selection.length == 2 && variant2 != 'PleaseSelect') {
-           console.log('inside if');
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
                     this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
@@ -163,7 +164,7 @@ export class ProductComponent implements OnInit {
             this.lockBuyButton = true;
 
         } else {
-            if(variant2 != 'PleaseSelect'){
+            if (variant2 != 'PleaseSelect') {
                 this.selection2.push({ 'vType': 'Please Select' });
             }
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
@@ -184,8 +185,9 @@ export class ProductComponent implements OnInit {
         this.selection3 = [];
 
         if (variant3) {
-            if(variant3 == 'PleaseSelect'){
+            if (variant3 == 'PleaseSelect') {
                 this.lockBuyButton = false;
+                this.isBuyBtnDisable = true;
             }
             this.selectedVariant3 = variant3;
             this.selectedVariant.buyQuantity = '';
@@ -202,7 +204,7 @@ export class ProductComponent implements OnInit {
             this.lockBuyButton = true;
 
         } else {
-            if(variant3 != 'PleaseSelect'){
+            if (variant3 != 'PleaseSelect') {
                 this.selection3.push({ 'vType': 'Please Select' });
             }
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
@@ -218,28 +220,30 @@ export class ProductComponent implements OnInit {
         variant4 = variant4.replace(/\s/g, '');
 
         if (variant4) {
-            if(variant4 == 'PleaseSelect'){
+            if (variant4 == 'PleaseSelect') {
                 this.lockBuyButton = false;
+                this.isBuyBtnDisable = true;
+
             }
             this.selectedVariant4 = variant4;
             this.selectedVariant.buyQuantity = '';
 
         }
 
-        if(this.foodInfo.selection.length == 4 && variant4 != 'PleaseSelect'){
+        if (this.foodInfo.selection.length == 4 && variant4 != 'PleaseSelect') {
 
 
-        for (var i = 0; i < this.foodInfo.variants.length; i++) {
-            if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
-                this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
-                this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3 &&
-                this.foodInfo.variants[i].selection[3].vType == this.selectedVariant4) {
-                this.selectedVariant = this.foodInfo.variants[i];
+            for (var i = 0; i < this.foodInfo.variants.length; i++) {
+                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
+                    this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
+                    this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3 &&
+                    this.foodInfo.variants[i].selection[3].vType == this.selectedVariant4) {
+                    this.selectedVariant = this.foodInfo.variants[i];
 
+                }
             }
-        }
             this.lockBuyButton = true;
-         }
+        }
     };
 
     //increase decrease
@@ -259,7 +263,7 @@ export class ProductComponent implements OnInit {
     changeBuyQuantity(buyQty) {
 
         // default : Buy button set as Disable
-         this.isBuyBtnDisable = true;
+        this.isBuyBtnDisable = true;
 
         // if buyQty value greater than 0
         if (buyQty > 0) {
@@ -267,21 +271,38 @@ export class ProductComponent implements OnInit {
             var selectVariantAvailableQty = this.selectedVariant.quantity;
             //If quantity is unlimited enable buy button
             if (this.selectedVariant.unlimited == true) {
-                 this.isBuyBtnDisable = false;
+                this.isBuyBtnDisable = false;
             }
             else if (typeof selectVariantAvailableQty != 'undefined') {
                 // If buyQty less than or equal Selected-Variant-Qty, buy button enable
                 if (buyQty <= selectVariantAvailableQty) {
-                     this.isBuyBtnDisable = false;
+                    this.isBuyBtnDisable = false;
                 }
             }
         }
     };
+    test(data) {
+        this.dialogVariants = data;
+        $('#myModal').modal('show')
+    }
+    close() {
+        $('#myModal').modal('hide')
+    }
 
+    goToHome() {
+        $('#myModal').on('hidden.bs.modal',  (e)=> {
+            this.route.navigate(['home']);
+        })
+    }
+    goToCart() {
+        $('#myModal').on('hidden.bs.modal',  (e)=> {
+            this.route.navigate(['cart']);
+        })    }
 
-    addToCart() {
+    addToCart(navi) {
+
         if (this.selectedVariant.buyQuantity == null) {
-            console.log(' error');
+            console.log(' error please select buy quantity');
         } else {
             if (this.dataService.cart.cartItems.length != 0) {
                 var i = 0;
@@ -295,7 +316,9 @@ export class ProductComponent implements OnInit {
                         this.parentobj.cartSize = this.dataService.cart.cartSize;
                         this.dataService.parseWeight = this.selectedVariant.weight;
                         // $state.go('app.category');
-                        this.route.navigate(['home']);
+                        if (navi == "buyNowCart") {
+                            this.route.navigate(['cart']);
+                        }
                         break;
                     }
                     else if (i == (this.dataService.cart.cartItems.length - 1)) {
@@ -318,13 +341,16 @@ export class ProductComponent implements OnInit {
                         this.parentobj.cartSize = this.dataService.cart.cartSize;
                         this.dataService.parseWeight = this.selectedVariant.weight;
                         //  $state.go('app.category');
-                        this.route.navigate(['home']);
+                        if (navi == "buyNowCart") {
+                            this.route.navigate(['cart']);
+                        }
                         break;
                     }
                     i++;
                 }
             }
             else {
+
                 this.dataService.cart.cartItems.push({
                     id: this.foodInfo.id,
                     name: this.foodInfo.name,
@@ -343,8 +369,9 @@ export class ProductComponent implements OnInit {
                 this.parentobj.cartSize = this.dataService.cart.cartSize;
                 this.dataService.parseWeight = this.selectedVariant.weight;
                 // $state.go('app.category');
-                this.route.navigate(['home']);
-
+                if (navi == "buyNowCart") {
+                    this.route.navigate(['cart']);
+                }
             }
         }
 
