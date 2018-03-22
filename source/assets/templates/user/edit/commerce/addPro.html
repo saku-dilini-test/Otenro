@@ -154,9 +154,10 @@
                                 <th width="10%" data-ng-repeat="data in product.selection">
                                     <a data-ng-click="addNewVariant(product, data.name)">{{data.name}}</a>
                                 </th>
-                                <th width="5%" style="text-align: center;" >
-                                    Add Variant
-                                    <div class="add-icon icon icon-plus" ng-click="addNewVariant(product)"></div>
+                                <th  width="5%" style="text-align: center;" >
+                                    <div data-ng-if="product.selection.length <=3 || product.selection.length==undefined">Add Variant
+                                    <div  class="add-icon icon icon-plus" ng-click="addNewVariant(product)"></div>
+                                    </div>
                                 </th>
                                 <th width="4%">Delete</th>
                                 </thead>
