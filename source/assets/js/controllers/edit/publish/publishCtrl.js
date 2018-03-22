@@ -92,12 +92,19 @@
                             $scope.playStoreData ={language: $scope.defaultLanguage.language};
                      }
                      else{
-                            var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
-                            +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=publish/";
+                            console.log($scope.existingData)
+                            var tempImagePath;
+                            if($scope.existingData[0].isNew === true) {
 
+                                tempImagePath = SERVER_URL + "templates/viewWebImages?userId=" + $auth.getPayload().id
+                                    + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&images=publish/";
+                            }else {
 
+                                tempImagePath = SERVER_URL + "templates/viewImages?userId=" + $auth.getPayload().id
+                                    + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&img=publish/";
+                            }
 
-                                for (var i=0; i< 6; i++) {
+                                for (var i=0; i< 7; i++) {
                                     var tempImageUrl = tempImagePath + i+'.png';
                                     $scope.splash.push(tempImageUrl);
                                 }
@@ -123,7 +130,7 @@
         $scope.addGooglePlayInfo = function(file, playStoreData, splash) {
              $scope.isValidFormData = true;
              $scope.count = 0;
-            if(splash[0] == null || splash[1] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
+            if(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
                 playStoreData.language == null ||
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
                 playStoreData.email==null){
@@ -134,7 +141,7 @@
             }
             else {
                     playStoreData.category = 'GooglePlay';
-                    publishService.addGooglePlayInfo(playStoreData)
+                    publishService.addGooglePlayInfo(playStoreData,$rootScope.tempNew)
                         .success(function(data, status, headers, config) {
                             toastr.success('General information has been added successfully', 'Saved', {
                                 closeButton: true
@@ -144,10 +151,10 @@
                             closeButton: true
                         });
                     });
-                    
+
                     splash.forEach(function(splash){
                         if (JSON.stringify(splash).match("blobUrl")){
-                            publishService.uploadPublishFiles(splash,$scope.count)
+                            publishService.uploadPublishFiles(splash,$scope.count,$rootScope.tempNew)
                                 .success(function (data, status, headers, config) {
 
                                 }).error(function (data, status, headers, config) {

@@ -12,42 +12,21 @@
     'use strict';
     angular.module('app')
         .controller('technicalSupportCtrl',
-            ['$scope','technicalSupportService','$auth','toastr','$state','$stateParams','SERVER_URL',
+            ['$scope','technicalSupportService','$auth','toastr','$state','$stateParams','SERVER_URL','ME_SERVER',
                 technicalSupportCtrl
             ]);
 
-    function technicalSupportCtrl($scope,technicalSupportService,$auth,toastr,$state,$stateParams,SERVER_URL) {
-
+    function technicalSupportCtrl($scope,technicalSupportService,$auth,toastr,$state,$stateParams,SERVER_URL,ME_SERVER) {
 
             $scope.splash = [];
             $scope.publishSplash = [];
+            var tempImagePath;
 
             if($stateParams){
 
                 $scope.userId = $stateParams.userId;
                 $scope.appId = $stateParams.appId;
-                $scope.sourcePath = "/home/admin/web/" +
-                    "otenro.com/public_html/meAppServer/temp/"+$scope.userId +'/templates' + "/"+$scope.appId ;
-                
-                var tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $scope.userId
-                    +"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=publish/";
 
-
-                for (var i=0; i< 6; i++) {
-                    try {
-                        var tempImageUrl = tempImagePath + i+'.png';
-                        $scope.splash.push(tempImageUrl);
-
-                        if(i<=5){
-
-                            var iosTempImageUrl = tempImagePath + i+'ios'+'.png';
-                            $scope.publishSplash.push(iosTempImageUrl);
-                        }
-
-                    }catch (err){
-                        console.log(err);
-                    }
-                }
 
                 // if pushConfigData undefined
                 if(typeof $scope.pushConfigData == 'undefined'){
@@ -106,7 +85,39 @@
                         try{
                             $scope.publishDetails = result;
                             $scope.iosPublishDetails = $scope.publishDetails[1];
-                         }catch(err) {
+                            $scope.tempNew = $scope.publishDetails[0].isNew;
+
+                            if($scope.tempNew === true){
+                                $scope.sourcePath = ME_SERVER+$scope.userId +'/progressiveTemplates' + "/"+$scope.appId ;
+                                tempImagePath =  SERVER_URL +"templates/viewWebImages?userId="+ $scope.userId
+                                    +"&appId="+$scope.appId+"&"+new Date().getTime()+"&images=publish/";
+                                $scope.buildSource = '/edit/buildSourceProg?appId='+$scope.appId+'&userId='+ $scope.userId+'&isNew='+$scope.tempNew;
+                            }else{
+
+                                $scope.sourcePath = ME_SERVER+$scope.userId +'/templates' + "/"+$scope.appId ;
+                                tempImagePath =  SERVER_URL +"templates/viewImages?userId="+ $scope.userId
+                                    +"&appId="+$scope.appId+"&"+new Date().getTime()+"&img=publish/";
+                                $scope.buildSource = '/edit/buildSource?appId='+$scope.appId+'&userId='+ $scope.userId;
+                            }
+
+
+                            for (var i=0; i< 6; i++) {
+                                try {
+                                    var tempImageUrl = tempImagePath + i+'.png';
+                                    $scope.splash.push(tempImageUrl);
+
+                                    if(i<=5){
+
+                                        var iosTempImageUrl = tempImagePath + i+'ios'+'.png';
+                                        $scope.publishSplash.push(iosTempImageUrl);
+                                    }
+
+                                }catch (err){
+                                    console.log(err);
+                                }
+                            }
+
+                        }catch(err) {
                            console.log(err);
                         }
 
@@ -192,7 +203,6 @@
                             }
                         }
                         $scope.adUserList = result;
-                        console.log($scope.adUserList);
                     }).error(function (error) {
                     toastr.error('Loading Error', 'Warning', {
                         closeButton: true

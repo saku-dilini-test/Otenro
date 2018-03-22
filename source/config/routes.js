@@ -128,6 +128,7 @@ module.exports.routes = {
     'POST /edit/addFonts': 'edit/style/StyleController.addFonts',
     'GET /edit/viewImages': 'EditController.viewImages',
     'GET /edit/buildSource': 'EditController.buildSource',
+    'GET /edit/buildSourceProg': 'EditController.buildSourceProg',
     'GET /edit/getSelectedApp': 'EditController.getSelectedApp',
     'GET /edit/deleteSelectedApp': 'EditController.deleteSelectedApp',
     'GET /edit/deleteDefaultData': 'EditController.deleteDefaultData',

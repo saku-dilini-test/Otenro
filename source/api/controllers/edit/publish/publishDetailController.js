@@ -17,7 +17,6 @@ module.exports = {
 
     setPublishDetails: function(req,res){
             var details = req.body;
-
             var searchApp = {
                 appId :req.body.appId,
                 appType: req.body.appType
@@ -76,14 +75,18 @@ module.exports = {
 
     /* image uploading with validation*/
     uploadPublishFiles :function (req,res) {
+        var imagePath;
+        if(req.body.isNew == true || req.body.isNew == 'true'){
+            imagePath = config.APP_FILE_SERVER+req.userId + '/progressiveTemplates/' + req.body.appId +'/src/assets/images/publish/';
+        } else{
+            imagePath = config.APP_FILE_SERVER+req.userId + '/templates/' + req.body.appId +'/img/publish/';
+        }
          req.file('file').upload({
-            dirname: require('path').resolve(config.APP_FILE_SERVER+req.userId + '/templates/' +
-                req.body.appId +'/img/publish/')
+            dirname: require('path').resolve(imagePath)
          },function (err, uploadedFiles) {
              if (err) return res.negotiate(err);
              else {
-                 fs.rename(uploadedFiles[0].fd, config.APP_FILE_SERVER+req.userId + '/templates/' +
-                     req.body.appId +'/img/publish/'+req.body.imgId+'.png', function (err) {
+                 fs.rename(uploadedFiles[0].fd, imagePath+req.body.imgId+'.png', function (err) {
 
                      if (err) return res.send(err);
                      else {

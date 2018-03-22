@@ -36,7 +36,7 @@
                     //$scope.status = 'You cancelled the dialog.';
                 });
             },
-            addGooglePlayInfo: function(playStoreData ){
+            addGooglePlayInfo: function(playStoreData,isNew ){
                 return Upload.upload({
                     url: SERVER_URL + 'edit/setPublishDetails',
                     fields: {
@@ -55,7 +55,8 @@
                      'applicationType':"Application",
                      'contentRating': "Everyone",
                      'email':playStoreData.email,
-                     'appType':'GooglePlay'
+                     'appType':'GooglePlay',
+                     'isNew':isNew
                      },
                     file:null
                 });
@@ -85,12 +86,13 @@
             },
 
 
-            uploadPublishFiles: function(file,imgId){
+            uploadPublishFiles: function(file,imgId,isNew){
                 return Upload.upload({
                         url: SERVER_URL + 'edit/uploadPublishFiles',
                         fields: {
                             'appId':$rootScope.appId,
-                            'imgId':imgId
+                            'imgId':imgId,
+                            'isNew':isNew,
                         },
                         file: file
                     });
