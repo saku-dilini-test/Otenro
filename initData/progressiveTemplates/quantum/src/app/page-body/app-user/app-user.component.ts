@@ -10,7 +10,7 @@ import { TitleService } from '../../services/title.service';
 import { CurrencyService } from '../../services/currency/currency.service';
 
 @Component({
-  selector: 'app-app-user',
+  selector: 'app-user',
   templateUrl: './app/page-body/app-user/app-user.component.html',
   styleUrls: ['./app/page-body/app-user/app-user.component.css']
 })
