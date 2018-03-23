@@ -9,15 +9,31 @@
   border-bottom: 1px solid #ccc;
 }
 
+.order{
+  margin: 10px 0;
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+.order:first-child{
+  border-top:none;
+}
+.order:last-child{
+  border-bottom:none;
+}
+.order+.order{
+  border-top: 0;
+}
+
 .cart label{
   font-size: 18px;
   display: block;
-  margin-top: 20px;
+  margin-top: 6px;
   margin-bottom: 0;
 }
 
 .cart .total-price{
-  margin-top: 29px;
+  margin-top: 41px;
   font-size: 16px;
   font-weight: 600;
   overflow: auto;
@@ -38,7 +54,6 @@
   margin-top: 29px;
   position: relative;
   top:1px;
-  width: 50%;
 }
 
 .cart+.cart{

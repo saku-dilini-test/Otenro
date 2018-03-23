@@ -145,31 +145,27 @@
                     </div>
                   </div>
 
-                  <!-- Button trigger modal -->
-                  <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button> -->
 
                   <!-- Modal -->
                   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
-                        <div class="modal-header">
-
-                          <h4 class="modal-title" id="myModalLabel">Your Product added to the cart!</h4>
+                        <div class="modal-header text-center">
+                          <h3 class="modal-title main-header-font" id="myModalLabel">Your Product added to the cart!</h3>
                         </div>
-                        <div class="modal-body">
-                          <table style="width:100%">
-
-                            <tr>
-                              <td width="80%" height="80%"><div><img src="{{imageUrl}}/{{Data.tempImageArray[0].img}}" width="30%" height="30%"></div></td>
-                              <td>{{Data.name}} <div *ngFor ="let v of dialogVariants">{{v.vType}}</div>{{currency}} {{selectedVariant.price}}</td>
-                            </tr>
-                          </table>
+                        <div class="row">
+                          <div class="col-xs-5 text-center">
+                            <img src="{{imageUrl}}/{{Data.tempImageArray[0].img}}" width="80%">
+                          </div>
+                          <div class="col-xs-7">
+                                <h3 class="main-content-font">{{Data.name}}</h3>
+                                <h4 *ngFor ="let v of dialogVariants">{{v.name}}:{{v.vType}}</h4>
+                                <h4> {{currency}} {{selectedVariant.price}}</h4>
+                          </div>
                         </div>
                         <div class="modal-footer">
-                          <button (click)="close();goToHome();" class="btn btn-primary">Continue Shopping</button>
-                          <button (click)="close();goToCart();" class="btn btn-primary">Checkout</button>
+                          <button (click)="close();goToHome();" class="btn main-button">Continue Shopping</button>
+                          <button (click)="close();goToCart();" class="btn main-button">Checkout</button>
                         </div>
                       </div>
                     </div>
@@ -178,9 +174,9 @@
                   <div class="row">
                     <div class="col-md-3"></div>
                     <div class="col-md-6 text-center margin-top">
-                      <button (click)='addToCart("buyNowCart")' [disabled]="isBuyBtnDisable" class="btn btn-d btn-lg main-button">buy now</button>
+                      <button (click)='addToCart("buyNowCart")' [disabled]="isBuyBtnDisable" class="btn btn-d btn-lg main-button margin-right">Buy now</button>
 
-                      <button (click)= "addToCart('');test(this.selectedVariant.selection);" [disabled]="isBuyBtnDisable" class="btn btn-d btn-lg main-button" data-toggle="modal">add to cart</button>
+                      <button (click)= "addToCart('');test(this.selectedVariant.selection);" [disabled]="isBuyBtnDisable" class="btn btn-d btn-lg main-button" data-toggle="modal">Add to cart</button>
                     </div>
 
                   </div>
