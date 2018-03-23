@@ -47,6 +47,7 @@
     // defaultJSExtensions: true,
     map: {
       lodash: 'npm:lodash/lodash.js',
+      'ng4-loading-spinner':'npm:ng4-loading-spinner/index.js',
       // our app is within the app folder
       'angular-2-local-storage': 'npm:angular-2-local-storage/dist',
       'app': 'app',

@@ -38,6 +38,7 @@ import { AppDataService } from './services/appdata-info/appdata-info.service';
 import { OrdersService } from './services/orders/orders.service';
 import { SliderService } from './services/slider/slider.service';
 import { TitleService } from './services/title.service';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { TitleService } from './services/title.service';
     }),
     NouisliderModule,
     BrowserAnimationsModule,
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [PagebodyServiceModule,PushNotificationService,
     CategoriesService,

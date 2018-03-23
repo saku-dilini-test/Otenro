@@ -12,6 +12,7 @@ import { ShippingService } from '../../services/shipping/shipping.service';
 import { OrdersService } from '../../services/orders/orders.service';
 import { TitleService } from '../../services/title.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 declare let paypal: any;
 
@@ -96,7 +97,8 @@ export class CheckoutComponent implements OnInit {
     private currencyService: CurrencyService,
     private localStorageService: LocalStorageService,
     private http: HttpClient, private route: ActivatedRoute,
-    private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
+    private router: Router, private dataService: PagebodyServiceModule, private title: TitleService,
+    private spinner: Ng4LoadingSpinnerService) {
 
     this.title.changeTitle("Checkout");
 
@@ -146,7 +148,7 @@ export class CheckoutComponent implements OnInit {
 
 
   ngOnInit() {
-
+    this.spinner.show();
     let date = (new Date()).getFullYear()
     for (let i = 0; i < 100; i++) {
       this.years.push(date++);
@@ -162,6 +164,9 @@ export class CheckoutComponent implements OnInit {
     this.currencyService.getCountryData()
       .subscribe((res) => {
         this.countries = res;
+      }, err => {
+        this.spinner.hide();
+        console.log("Error Retrieving country data!");
       });
 
     if (this.cartItems.length > 0 && this.formType == 'delivery') {
@@ -185,8 +190,14 @@ export class CheckoutComponent implements OnInit {
       this.dataService.currency = this.sign;
       this.dataService.paypalCurrency = this.currency.symbol.toUpperCase();
     }, error => {
+      this.spinner.hide();
       alert('Error Retrieving currencies!\n Please check your connection.');
     });
+
+    //-------- hiding spinner after currencies and countries loaded --------
+    if (this.sign && this.countries) {
+      this.spinner.hide();
+    }
 
     this.user = (this.localStorageService.get('appLocalStorageUser' + this.appId));
 
@@ -197,8 +208,10 @@ export class CheckoutComponent implements OnInit {
       'country': this.dataService.userData.country
     };
     if (this.formType == 'delivery') {
+      this.spinner.show();
       this.http.post(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
         .subscribe((data) => {
+          this.spinner.hide();
           this.shippingDatas = data;
           // $log.debug($scope.shippingData);
           for (var i = 0; i < this.shippingDatas.length; i++) {
@@ -208,21 +221,23 @@ export class CheckoutComponent implements OnInit {
             }
           }
         }, (err) => {
+          this.spinner.hide();
           alert(
             'Error Retrieving shipping details!\n Please check your connection.'
           );
         });
     } else {
-
+      this.spinner.show();
       this.shippingService.getShippingPickupInfo()
         .subscribe((data) => {
-
+          this.spinner.hide();
           this.pickup = data;
-
+          // this.spinner.hide();
           /* $scope.header = data.header;
           $scope.content = data.content;*/
           //$state.go('app.category');
         }, (err) => {
+          this.spinner.hide();
           alert(
             'Error Retrieving Pickup details!\n Please check your connection.'
           );
@@ -268,7 +283,7 @@ export class CheckoutComponent implements OnInit {
 
 
   addShipping(shippingDetails, e, formData) {
-
+    this.spinner.show();
     this.isSelected = true;
     this.fname = formData.fName;
     this.lname = formData.lName;
@@ -394,7 +409,10 @@ export class CheckoutComponent implements OnInit {
 
     shippingDetails.delivery = this.dataService.data;
     shippingDetails.shippingCost = shippingCost;
-
+    //---------------------- hide spinner after getting shipping cost -------
+    if (shippingDetails.shippingCost) {
+      this.spinner.hide();
+    }
     // this.dataService.finalDetails = shippingDetails;
     this.chk(shippingDetails);
 
@@ -458,10 +476,12 @@ export class CheckoutComponent implements OnInit {
       'country': this.chkCountry
     };
 
+    this.spinner.show();
 
     this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param)
       .subscribe((data) => {
 
+        this.spinner.hide();
 
         if (data == '') {
           this.chkHide = true;
@@ -525,6 +545,9 @@ export class CheckoutComponent implements OnInit {
           }
         }
         this.pay("001");
+      }, err => {
+        this.spinner.hide();
+        console.log("Error retrieving TaxInfo!,\n Please check Your connection");
       });
 
 
