@@ -515,15 +515,16 @@
                         var urlPath;
                         if($rootScope.tempNew === 'true' || $rootScope.tempNew === true){
                             urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                                + "&appId=" + $rootScope.appId + "&" + new Date()+ "/";
+                                + "&appId=" + $rootScope.appId + "&" + new Date().toISOString()+ "/";
 
                         }else {
 
                             urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
-                                + "&appId=" + $rootScope.appId + "&" + new Date() + "/";
+                                + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
 
                         }
                         $scope.appTemplateUrl = urlPath;
+                        console.log($scope.appTemplateUrl)
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                         $scope.picFile = null;
                         $scope.myImage = null;

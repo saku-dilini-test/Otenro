@@ -195,7 +195,7 @@
                                                 });
                                             }else{
                                                 var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
+                                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().toISOString();
 
                                                 mySharedService.prepForBroadcast(url);
 
@@ -216,7 +216,7 @@
                                 });
                             } else {
                                 var url = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
-                                    + '/templates/' + data.data.appId + '/?' + new Date().getTime();
+                                    + '/templates/' + data.data.appId + '/?' + new Date().toISOString();
 
                                 mySharedService.prepForBroadcast(url);
 
@@ -270,7 +270,7 @@
 
                                             }else {
                                                 var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
-                                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().getTime();
+                                                    +'/progressiveTemplates/'+data.data.appId+'/?'+new Date().toISOString();
 
                                                 mySharedService.prepForBroadcast(url);
 
@@ -310,7 +310,7 @@
 
                                 } else {
                                     var url = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
-                                        + '/templates/' + data.data.appId + '/?' + new Date().getTime();
+                                        + '/templates/' + data.data.appId + '/?' + new Date().toISOString();
 
                                     mySharedService.prepForBroadcast(url);
 

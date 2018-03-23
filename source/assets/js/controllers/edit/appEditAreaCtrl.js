@@ -59,10 +59,10 @@
         if(templateCheck == true || templateCheck == 'true'){
 
             $scope.urlPath1 = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
 
             $scope.appTemplateUrl = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
 
         }else{
 
@@ -72,7 +72,7 @@
 
 
             $scope.appTemplateUrl = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
-                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
 
         }
 
@@ -159,7 +159,7 @@
 //                        var url= ME_APP_SERVER+'temp/'+$auth.getPayload().id
 //                            +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
                         var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                      +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                                      +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
 
                         mySharedService.prepForBroadcast(urlPath);
                         $rootScope.changeTemplate = false;
@@ -174,7 +174,7 @@
 //                    +'/templates/'+$rootScope.appId+'/?'+new Date().getTime();
 
                 var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                              +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
+                              +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
 
                 mySharedService.prepForBroadcast(urlPath);
 
@@ -187,7 +187,7 @@
 
         };
 
-        $scope.thumbPic = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/header.jpg?time='+new Date().getTime();
+        $scope.thumbPic = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/header.jpg?time='+new Date().toISOString();
 
         $scope.fonts = {
             font : 'Arial',
