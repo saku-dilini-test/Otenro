@@ -427,19 +427,39 @@
             shippingService.updateShippingInfo($scope.shipping)
             .success(function (result) {
                 if($scope.shipping.shippingOption == "Flat Rate"){
-                    toastr.success('Flat rate option has been added successfully ', 'Saved', {
-                        closeButton: true
-                    });
+                    if($scope.initialData.shippingOption == 'Flat Rate'){
+                        toastr.success('Flat rate option has been edited successfully ', 'Saved', {
+                            closeButton: true
+                        });
+                    }else{
+                         toastr.success('Flat rate option has been added successfully ', 'Saved', {
+                            closeButton: true
+                        });
+                    }
+
                 }
                 else if ($scope.shipping.shippingOption == "Weight Based"){
-                    toastr.success('Weight Based Option has been added successfully ', 'Saved', {
-                        closeButton: true
-                    });
+                    if($scope.initialData.shippingOption == 'Weight Based'){
+                        toastr.success('Weight Based Option has been edited successfully ', 'Saved', {
+                            closeButton: true
+                        });
+                    }else{
+                        toastr.success('Weight Based Option has been added successfully ', 'Saved', {
+                            closeButton: true
+                        });
+                    }
+
                 }
                 else{
-                    toastr.success('Pick up Option has been added successfully ', 'Saved', {
-                        closeButton: true
-                    });
+                    if($scope.initialData.shippingOption == 'Pick up'){
+                        toastr.success('Pick up Option has been edited successfully ', 'Saved', {
+                            closeButton: true
+                        });
+                    }else{
+                        toastr.success('Pick up Option has been added successfully ', 'Saved', {
+                            closeButton: true
+                        });
+                    }
                 }
                 $scope.shipping = null;
                 // This part should change according requirement
