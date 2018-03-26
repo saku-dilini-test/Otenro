@@ -99,7 +99,7 @@
                         <fieldset>
                             <label>option name</label>
                             <img src="../../../images/question-mark.svg" width="12" height="12" />
-                            <input class="input-shadow-border" type="text" name="name"  ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="weightRate.optionName" required/>
+                            <input class="input-shadow-border" type="text" name="name"  ng-pattern='/^[a-zA-Z0-9_ !-@#$&()\\-`.~+,=^<>{}[%*/\"]*$/' ng-model="weightRate.optionName" required/>
                             <br />
                             <!--<span class="error" ng-show="weightBased.name.$error.pattern">No symbols</span>-->
                             <div ng-hide="weightRate.optionName.length > maxWeightRate">
