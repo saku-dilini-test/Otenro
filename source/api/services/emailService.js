@@ -588,7 +588,7 @@ module.exports = {
 
 
     sendOrderEmail:function (data,res) {
-
+        var attachment = false;
         console.log("-------------------------------");
         console.log(data);
         console.log(data.paymentStatus);
@@ -621,16 +621,25 @@ module.exports = {
                             headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
                             headerFileName = userEmail.orderConfirmedEmailImage;
                             subject = 'You have orderd';
+                            if(userEmail.orderConfirmedEmail.order){
+                                attachment = true;
+                            }
                         }
                         if(data.paymentStatus == 'Successful'){
                             headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderFulfilledEmailImage;
                             headerFileName = userEmail.orderFulfilledEmailImage;
                             subject = 'Order fulfilled';
+                            if(userEmail.orderFulfilled.order){
+                                attachment = true;
+                            }
                         }
                         if(data.paymentStatus == 'Refunded'){
                             headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderRefundedEmailImage;
                             headerFileName = userEmail.orderRefundedEmailImage;
                             subject = 'Order Refunded';
+                            if(userEmail.orderRefunded.order){
+                                attachment = true;
+                            }
                         }
 
 
@@ -759,21 +768,23 @@ module.exports = {
 
                     mBody +='								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
                     '										<table class="invoice" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 80%; margin: 40px auto;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">';
-                if(typeof data.deliveryCountry != 'undefined' && data.pickUp == 'undefined' && userEmail.orderConfirmedEmail.delivery == true ) {
+                if(typeof data.deliveryCountry != 'undefined' && typeof data.pickUp == 'undefined' && userEmail.orderConfirmedEmail.delivery == true ) {
                     mBody += '  <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Delivered to</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />' + data.deliveryNo + '<br>' + data.deliveryStreet + '<br>' + data.deliveryCity + ' <br>' + data.deliveryCountry;
-                }else{
+                }
+                if(typeof data.deliveryCountry != 'undefined' && typeof data.pickUp != 'undefined' && userEmail.orderConfirmedEmail.delivery == true ) {
                     mBody += '  <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Delivered to</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />'+data.pickUp.locationName + '<br>' + data.pickUp.number + '<br>' + data.pickUp.streetAddress + '<br>' + data.pickUp.city+ '<br>' + data.pickUp.country+ '<br>' + data.pickUp.postalCode ;
                 }
                 mBody += '<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />'+ new Date().toJSON().slice(0,10)+'</td>';
                 if(typeof data.shippingOpt != 'undefined'&&userEmail.orderConfirmedEmail.delivery==true) {
                     mBody += '                                           <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Shipping Details</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />' + data.shippingOpt + '</td>';
-                }else {
+                }
+                if(typeof data.option != 'undefined'&&userEmail.orderConfirmedEmail.delivery==true) {
                     mBody += '                                           <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Shipping Details</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />' + data.option + '</td>';
                 }
                 if (userEmail.orderConfirmedEmail.order==true){
                     mBody += '											</tr>'+
                         '											<tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
-                        '												<td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top">What you ordred:'+
+                        '												<td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top">What you ordered:'+
                         '													<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />Order number: '+data.id+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" /></td>'+
                         '											</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td colspan="2" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top">'+
                         '													<table class="invoice-items" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; margin: 0;">';
@@ -846,15 +857,28 @@ module.exports = {
                    console.log('------------------');
 
                     // setup email data with unicode symbols
+                    if(attachment){
 
-                    mailOptions = {
-                        from: userEmail.domainName + '<'+userEmail.replyToEmail + '>', // sender address
-                        to: data.email, // list of receivers
-                        subject: subject, // Subject line
-                        html: mBody ,
-                        attachments : test
+                        mailOptions = {
+                            from: userEmail.domainName + '<'+userEmail.replyToEmail + '>', // sender address
+                            to: data.email, // list of receivers
+                            subject: subject, // Subject line
+                            html: mBody ,
+                            attachments : test
 
-                    };
+                        };
+                    }else{
+                        mailOptions = {
+
+                            from: userEmail.domainName + '<'+userEmail.replyToEmail + '>', // sender address
+                            to: data.email, // list of receivers
+                            subject: subject, // Subject line
+                            html: mBody
+
+                        };
+
+                    }
+
 
 //                }
 

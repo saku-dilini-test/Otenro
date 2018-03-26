@@ -89,58 +89,58 @@ module.exports = {
 
         console.log("updateHeaderFooterSettings " );
 
+        var randomstring = require("randomstring");
+        var tmpImage = req.body.file;
+        var appId = req.body.data.appId;
+
+        var imgeFileName = randomstring.generate()+".png";
+        var data = tmpImage[0].replace(/^data:image\/\w+;base64,/, "");
+        var buf = new Buffer(data, 'base64');
+        console.log(buf);
         var appRoot = path.resolve();
         //var dePath= appRoot + '/assets/images/';
-        var appId = req.body.appId;
+        var appId = req.body.data.appId;
         var dePath;
 
         if(req.body.isNew == true || req.body.isNew == 'true'){
-          dePath = config.APP_FILE_SERVER + req.body.userId + '/progressiveTemplates/' + appId + '/src/assets/images/email/';
+          dePath = config.APP_FILE_SERVER + req.body.data.userId + '/progressiveTemplates/' + appId + '/src/assets/images/email/';
 
         }else{
-          dePath = config.APP_FILE_SERVER + req.body.userId + '/templates/' + appId + '/img/email/';
+          dePath = config.APP_FILE_SERVER + req.body.data.userId + '/templates/' + appId + '/img/email/';
 
         }
 
-        console.log("dePath " + dePath);
+            if(req.body.oldImage){
+                fs.unlink(dePath + req.body.oldImage, function (err) {
+                    if (err) return console.error(err);
+                    sails.config.logging.custom.info("file deleted" + req.body.oldImage);
 
-        //var appId = req.param('appId');
-        var saveData ="";
-
-        console.log(" req.body.emailType "+ JSON.stringify(req.body) + " appId " + appId);
-
-        console.log("req.body " + JSON.stringify(req.body));
-
-
-        req.file('file').upload({
-            dirname: require('path').resolve(dePath)
-        }, function (err, uploadedFiles) {
-            if (err) return res.serverError(err);
-
-            //sails.log.info(uploadedFiles);
-            if (0 < uploadedFiles.length) {
-
-                var newFileName = Date.now() + uploadedFiles[0].filename;
-                fs.rename(uploadedFiles[0].fd, dePath + '/' + newFileName, function (err) {
-                    if (err) {
-                        console.log("error  " + err);
-                        res.send(err);
-
-                    }
                 });
+            }
 
-                console.log("newFileName " + newFileName);
+         fs.writeFile(dePath + imgeFileName, buf, function (err) {
+            if (err) {
+            console.log(err);
+                return res.send(err);
+            }
+            sails.config.logging.custom.info("file saved" + imgeFileName);
+                console.log("dePath " + dePath);
+
+                //var appId = req.param('appId');
+                var saveData ="";
+
+                console.log("newFileName " + imgeFileName);
 
 
-                if( req.body.emailType=='orderConfirmedEmail'){
+                if( req.body.data.emailType=='orderConfirmedEmail'){
                     console.log("1");
-                    saveData = {"orderConfirmedEmailImage" : newFileName };
-                }else if (req.body.emailType=='orderRefundEmail'){
+                    saveData = {"orderConfirmedEmailImage" : imgeFileName };
+                }else if (req.body.data.emailType=='orderRefundEmail'){
                     console.log("2");
-                    saveData = {"orderRefundedEmailImage" : newFileName };
-                }else if (req.body.emailType=='orderFulfilledEmail') {
+                    saveData = {"orderRefundedEmailImage" : imgeFileName };
+                }else if (req.body.data.emailType=='orderFulfilledEmail') {
                     console.log("3");
-                    saveData = {"orderFulfilledEmailImage" : newFileName };
+                    saveData = {"orderFulfilledEmailImage" : imgeFileName };
 
                 }
 
@@ -157,16 +157,42 @@ module.exports = {
                     });
                 });
 
-
-            }else {
-                res.send({
-                    message: "Email Settings has been successfully added"
-                });
-            }
-
-
-
         });
+
+
+
+//        console.log(" req.body.emailType "+ JSON.stringify(req.body) + " appId " + appId);
+//
+//        console.log("req.body " + JSON.stringify(req.body));
+
+
+//        req.file('file').upload({
+//            dirname: require('path').resolve(dePath)
+//        }, function (err, uploadedFiles) {
+//            if (err) return res.serverError(err);
+//
+//            //sails.log.info(uploadedFiles);
+//            if (0 < uploadedFiles.length) {
+//
+//                var newFileName = Date.now() + uploadedFiles[0].filename;
+//                fs.rename(uploadedFiles[0].fd, dePath + '/' + newFileName, function (err) {
+//                    if (err) {
+//                        console.log("error  " + err);
+//                        res.send(err);
+//
+//                    }
+//                });
+
+
+//            }else {
+//                res.send({
+//                    message: "Email Settings has been successfully added"
+//                });
+//            }
+
+
+
+
 
     },
 

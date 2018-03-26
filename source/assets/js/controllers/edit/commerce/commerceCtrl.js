@@ -11,7 +11,9 @@
              contactUsService,uiGmapGoogleMapApi,uiGridConstants,$templateCache,uiGridExporterConstants,uiGridExporterService,sendDate,$log) {
 
         $scope.isNew = $rootScope.tempNew;
-
+        $scope.picFileHeader = [];
+        $scope.picFileHeader2 = [];
+        $scope.picFileHeader3 = [];
         $scope.refund = [];
         $scope.unfulfilled = [];
         $scope.fulfill = [];
@@ -937,9 +939,155 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
         $scope.nextStep1 = function () {
 
         };
+
+
+        $scope.confirmPicImageSelected = true;
+        $scope.fulfillPicImageSelected = true;
+        $scope.refundPicImageSelected = true;
+        $scope.buttonNameHeader = "Browse Image";
+        $scope.buttonNameFulfill = "Browse Image";
+        $scope.buttonNameRefund = "Browse Image";
+
+// ********************* Email Images ********************************
+
+
+// ---------------------- confirm email -------------------------------
+
+        // image crop function confirm email
+        $scope.cropImageConfirm = function () {
+            var handleFileSelect = function (evt) {
+                var file = evt.currentTarget.files[0];
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $scope.$apply(function ($scope) {
+                        $scope.myImageHeaderConfirm = evt.target.result;
+                        $scope.confirmPic = $scope.myImageHeaderConfirm;
+                    });
+                };
+                reader.readAsDataURL(file);
+                $scope.confirmPicImageSelected = false;
+                $scope.buttonNameHeader = "Upload";
+            };
+            angular.element(document.querySelector('#fileInput1')).on('change', handleFileSelect);
+        }
+
+        //add image function confirm email
+        $scope.addImageConfirm = function (img) {
+            if (angular.element('#fileInput1').val() == '') {
+                toastr.error('Please choose an image to upload', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else {
+                var im = $scope.tmpImage;
+                im[0] = $scope.confirmPic;
+                $scope.tmpImage = im;
+                $scope.mainImg = img;
+                $scope.myImageHeaderConfirm = null;
+                toastr.success('Image has been uploaded successfully', 'message', {
+                    closeButton: true
+                });
+            }
+            $scope.picFileHeader = $scope.tmpImage;
+            console.log($scope.tmpImage);
+            $scope.confirmPicImageSelected = true;
+            $scope.buttonNameHeader = "Browse Image";
+        };
+
+//-------------------------fullfill email----------------------------------------
+
+               // image crop function fulfill email
+        $scope.cropImageFulfill = function () {
+            var handleFileSelect = function (evt) {
+                var file = evt.currentTarget.files[0];
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $scope.$apply(function ($scope) {
+                        $scope.myImageHeaderFulfill = evt.target.result;
+                        $scope.fulfillPic = $scope.myImageHeaderFulfill;
+                    });
+                };
+                reader.readAsDataURL(file);
+                $scope.fulfillPicImageSelected = false;
+                $scope.buttonNameFulfill = "Upload";
+            };
+            angular.element(document.querySelector('#fileInput2')).on('change', handleFileSelect);
+        }
+
+        //add image function fulfill email
+        $scope.addImageFulfill = function (img) {
+            if (angular.element('#fileInput2').val() == '') {
+                toastr.error('Please choose an image to upload', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else {
+                var im = $scope.tmpImage;
+                im[0] = $scope.fulfillPic;
+                $scope.tmpImage = im;
+                $scope.mainImg = img;
+                $scope.myImageHeaderFulfill = null;
+                toastr.success('Image has been uploaded successfully', 'message', {
+                    closeButton: true
+                });
+            }
+            $scope.picFileHeader2 = $scope.tmpImage;
+            console.log($scope.tmpImage);
+            $scope.fulfillPicImageSelected = true;
+            $scope.buttonNameFulfill = "Browse Image";
+        };
+
+//-------------------------refund email----------------------------------------
+
+               // image crop function fulfill email
+        $scope.cropImageRefund = function () {
+            var handleFileSelect = function (evt) {
+                var file = evt.currentTarget.files[0];
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $scope.$apply(function ($scope) {
+                        $scope.myImageHeaderRefund = evt.target.result;
+                        $scope.refundPic = $scope.myImageHeaderRefund;
+                    });
+                };
+                reader.readAsDataURL(file);
+                $scope.refundPicImageSelected = false;
+                $scope.buttonNameRefund = "Upload";
+            };
+            angular.element(document.querySelector('#fileInput3')).on('change', handleFileSelect);
+        }
+
+        //add image function fulfill email
+        $scope.addImageRefund = function (img) {
+            if (angular.element('#fileInput3').val() == '') {
+                toastr.error('Please choose an image to upload', 'Warning', {
+                    closeButton: true
+                });
+            }
+            else {
+                var im = $scope.tmpImage;
+                im[0] = $scope.refundPic;
+                $scope.tmpImage = im;
+                $scope.mainImg = img;
+                $scope.myImageHeaderRefund = null;
+                toastr.success('Image has been uploaded successfully', 'message', {
+                    closeButton: true
+                });
+            }
+            $scope.picFileHeader3 = $scope.tmpImage;
+            console.log($scope.tmpImage);
+            $scope.refundPicImageSelected = true;
+            $scope.buttonNameRefund = "Browse Image";
+        };
+
+
+
+
+
         $scope.updateEmailSettings = function (email, type, emailType) {
 
             var imageData ;
+            var oldImage ;
             var isUpdateHImg = true;
 
             if(email == undefined){
@@ -953,19 +1101,24 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     .success(function (data) {
                         var data = {"emailType" : emailType,"appId":$rootScope.appId,"userId":$auth.getPayload().id};
                         if (emailType=="orderConfirmedEmail"){
+                            oldImage = $scope.oldImage1
                             imageData = $scope.picFileHeader;
                         }else if (emailType=="orderFulfilledEmail"){
+                            oldImage = $scope.oldImage2
                             imageData = $scope.picFileHeader2;
                         }else if (emailType=="orderRefundEmail"){
+                            oldImage = $scope.oldImage3
                             imageData = $scope.picFileHeader3;
                         }else {
                             isUpdateHImg = false;
 
                         }
-                        data.isNew = $rootScope.tempNew;
-                        console.log("imageData " + imageData);
-                        if (isUpdateHImg){
-                            commerceService.updateHeaderFooterSettings(imageData,data).success(function (data) {
+
+
+
+                        if ((emailType=="orderConfirmedEmail" && $scope.picFileHeader[0].length >500) || (emailType=="orderFulfilledEmail" && $scope.picFileHeader2[0].length > 500) || (emailType=="orderRefundEmail" && $scope.picFileHeader3[0].length > 500)) {
+
+                            commerceService.updateHeaderFooterSettings({"file":imageData,"data":data,"oldImage":oldImage,"isNew":$rootScope.tempNew}).success(function (data) {
 
 
                                 if (type == "next") {
@@ -1007,6 +1160,9 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                                 toastr.success('Email Settings has been changed ', 'Success', {
                                     closeButton: true
                                 });
+                                if(emailType=="orderRefundEmail"){
+                                    $mdDialog.hide();
+                                }
 
                             }).error(function (err) {
                                 toastr.error('Unable to Create', 'Warning', {
@@ -1098,9 +1254,16 @@ console.log("$scope.variantArray2 : " + JSON.stringify($scope.variantArray1[0][0
                     }
 
                     //$scope.picFileFooter =  imagePath + $scope.email.imageFooter;
-                    $scope.picFileHeader =  imagePath + $scope.email.orderConfirmedEmailImage;
-                    $scope.picFileHeader2 =  imagePath + $scope.email.orderFulfilledEmailImage;
-                    $scope.picFileHeader3 =  imagePath + $scope.email.orderRefundedEmailImage;
+                    $scope.picFileHeader[0] =  imagePath + $scope.email.orderConfirmedEmailImage;
+                    $scope.picFileHeader2[0] =  imagePath + $scope.email.orderFulfilledEmailImage;
+                    $scope.picFileHeader3[0] =  imagePath + $scope.email.orderRefundedEmailImage;
+
+                    $scope.oldImage1 = $scope.email.orderConfirmedEmailImage;
+                    $scope.oldImage2 = $scope.email.orderFulfilledEmailImage;
+                    $scope.oldImage3 = $scope.email.orderRefundedEmailImage;
+
+
+
                     $scope.orderConfirmedEmail = {
                         orderConfirmedEmail: $scope.email.orderConfirmedEmail
                     }

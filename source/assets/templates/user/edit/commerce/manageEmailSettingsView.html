@@ -295,19 +295,24 @@
 
                         <div class="row">
                             <div class="col-lg-7 col-md-7">
-                                <div class="email-image-upload uploaded-section clearfix">
-                                    <div class="uploaded-new-image3">
-                                        <label>Insert Header Image</label><br>
-
-                                        <button class="btn-material" ngf-select ng-model="picFileHeader" ngf-accept="image/*"
-                                                aria-invalid="true" ngf-change="changeImage()" required>
-                                            Upload Image
-                                        </button>
-                                        <md-button class="md-icon-button" aria-label="Delete" ng-click="picFileHeader = null">
-                                            <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
-                                        </md-button>
-                                        <p></p><br>
+                                <label>Insert Header Image</label><br>
+                                <div class="file-upload-wrapper clearfix">
+                                    <div class="cropArea">
+                                        <ui-cropper image="myImageHeaderConfirm" area-type="rectangle" aspect-ratio="aspectRatio" result-image="confirmPic" result-image-size="{w:1000,h:400}"   result-image-format="image/jpeg" result-image-quality="0.5">
+                                        </ui-cropper>
                                     </div>
+
+                                    <div class="inputField btn-material img-up">
+                                        <span >{{buttonNameHeader}}</span>
+                                        <div class="img-up1" ng-if="confirmPicImageSelected">
+                                            <input type="file" value="file"  ng-click = "cropImageConfirm($event,'1');" id="fileInput1" >
+                                        </div>
+                                        <div  ng-if="!confirmPicImageSelected" class="img-up1" ng-click="addImageConfirm(confirmPic,'confirmEmail')"></div>
+
+                                    </div>
+                                    <md-button class="md-icon-button" aria-label="Delete" ng-click="picFileHeader = null">
+                                        <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
+                                    </md-button>
                                 </div>
                                 <label>Header</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
@@ -336,7 +341,7 @@
                             <div class="col-lg-5 col-md-5" style="zoom:0.7; background: #ebebeb;">
                                 <img ng-if="picFileHeader == null" ng-src="images/1000x200.png"  width="100%" height="80px" style="display: block;margin: 16px auto 0 auto
                                 ;"/><br>
-                                <img ng-if="picFileHeader != null" ngf-src="picFileHeader" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
+                                <img ng-if="picFileHeader != null" ngf-src="picFileHeader[0]" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
                                 <p>
                                     <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderConfirmedEmail.orderConfirmedEmail.header" disabled></text-angular>
                                 </p>
@@ -422,9 +427,9 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(orderConfirmedEmail,'save','orderConfirmedEmail')">Save
+                            <md-button class="me-default-button" ng-disabled="!orderConfirmedEmail.orderConfirmedEmail.header || picFileHeader == null" ng-click="updateEmailSettings(orderConfirmedEmail,'save','orderConfirmedEmail')">Save
                             </md-button>
-                            <md-button class="me-default-button" ng-disabled="orderConfirmationForm.$invalid" ng-click="updateEmailSettings(orderConfirmedEmail,'next','orderConfirmedEmail')">Next</md-button>
+                            <md-button class="me-default-button" ng-disabled="!orderConfirmedEmail.orderConfirmedEmail.header || picFileHeader == null" ng-click="updateEmailSettings(orderConfirmedEmail,'next','orderConfirmedEmail')">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -443,17 +448,24 @@
 
                         <div class="row">
                             <div class="col-lg-7 col-md-7">
-                                <div class="email-image-upload uploaded-section clearfix">
-                                    <div class="uploaded-new-image3">
-                                        <label>Insert Header Image</label><br>
-                                        <button class="btn-material" ngf-select ng-model="picFileHeader2" ngf-accept="image/*"
-                                                aria-invalid="true" ngf-change="changeImage()" required>
-                                            Upload Image
-                                        </button>
-                                        <md-button class="md-icon-button" aria-label="Delete" ng-click="picFileHeader2 = null">
-                                            <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
-                                        </md-button>
+                                <label>Insert Header Image</label><br>
+                                <div class="file-upload-wrapper clearfix">
+                                    <div class="cropArea">
+                                        <ui-cropper image="myImageHeaderFulfill" area-type="rectangle" aspect-ratio="aspectRatio" result-image="fulfillPic" result-image-size="{w:1000,h:200}"   result-image-format="image/jpeg" result-image-quality="0.5">
+                                        </ui-cropper>
                                     </div>
+
+                                    <div class="inputField btn-material img-up">
+                                        <span >{{buttonNameFulfill}}</span>
+                                        <div class="img-up1" ng-if="fulfillPicImageSelected">
+                                            <input type="file" value="file"  ng-click = "cropImageFulfill($event,'2');" id="fileInput2" >
+                                        </div>
+                                        <div  ng-if="!fulfillPicImageSelected" class="img-up1" ng-click="addImageFulfill(fulfillPic,'fulfillEmail')"></div>
+
+                                    </div>
+                                    <md-button class="md-icon-button" aria-label="Delete" ng-click="picFileHeader2 = null">
+                                        <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
+                                    </md-button>
                                 </div>
                                 <label>Header</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
@@ -481,7 +493,7 @@
                             </div>
                             <div class="col-lg-5 col-md-5" style="zoom:0.7; background: #ebebeb;">
                                 <img ng-if="picFileHeader2 == null" ng-src="images/1000x200.png"  width="100%" height="80px" style="display: block;margin: 16px auto 0 auto;"/><br>
-                                <img ng-if="picFileHeader2 != null" ngf-src="picFileHeader2" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto;"> <br>
+                                <img ng-if="picFileHeader2 != null" ngf-src="picFileHeader2[0]" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto;"> <br>
                                 <p>
                                     <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderFulfilledEmail.orderFulfilledEmail.header" disabled></text-angular>
                                 </p>
@@ -566,9 +578,9 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(orderFulfilledEmail,'save','orderFulfilledEmail')">Save
+                            <md-button class="me-default-button" ng-disabled="!orderFulfilledEmail.orderFulfilledEmail.header || picFileHeader2 == null" ng-click="updateEmailSettings(orderFulfilledEmail,'save','orderFulfilledEmail')">Save
                             </md-button>
-                            <md-button class="me-default-button" ng-disabled="orderFulfillForm.$invalid" ng-click="updateEmailSettings(orderFulfilledEmail,'next','orderFulfilledEmail')">Next</md-button>
+                            <md-button class="me-default-button" ng-disabled="!orderFulfilledEmail.orderFulfilledEmail.header || picFileHeader2 == null" ng-click="updateEmailSettings(orderFulfilledEmail,'next','orderFulfilledEmail')">Next</md-button>
                         </div>
                     </div>
                 </md-tab-body>
@@ -587,19 +599,24 @@
 
                         <div class="row">
                             <div class="col-lg-7 col-md-7">
-                                <div class="email-image-upload uploaded-section clearfix">
-                                    <div class="uploaded-new-image3">
-                                        <label>Insert Header Image</label><br>
-
-                                        <button class="btn-material" ngf-select ng-model="picFileHeader3" ngf-accept="image/*"
-                                                aria-invalid="true" ngf-change="changeImage()" required>
-                                            Upload Image
-                                        </button>
-                                        <md-button class="md-icon-button" aria-label="Delete" ng-click="picFileHeader3 = null">
-                                            <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
-                                        </md-button>
-                                        <p></p><br>
+                                <label>Insert Header Image</label><br>
+                                <div class="file-upload-wrapper clearfix">
+                                    <div class="cropArea">
+                                        <ui-cropper image="myImageHeaderRefund" area-type="rectangle" aspect-ratio="aspectRatio" result-image="refundPic" result-image-size="{w:1000,h:200}"   result-image-format="image/jpeg" result-image-quality="0.5">
+                                        </ui-cropper>
                                     </div>
+
+                                    <div class="inputField btn-material img-up">
+                                        <span >{{buttonNameRefund}}</span>
+                                        <div class="img-up1" ng-if="refundPicImageSelected">
+                                            <input type="file" value="file"  ng-click = "cropImageRefund($event,'3');" id="fileInput3" >
+                                        </div>
+                                        <div  ng-if="!refundPicImageSelected" class="img-up1" ng-click="addImageRefund(refundPic,'refundEmail')"></div>
+
+                                    </div>
+                                    <md-button class="md-icon-button" aria-label="Delete" ng-click="picFileHeader3 = null">
+                                        <md-icon md-svg-icon="images/delete-icon.svg"></md-icon>
+                                    </md-button>
                                 </div>
                                 <label>Header</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12">
@@ -627,7 +644,7 @@
                             </div>
                             <div class="col-lg-5 col-md-5" style="zoom:0.7; background: #ebebeb;">
                                 <img ng-if="picFileHeader3 == null" ng-src="images/1000x200.png"  width="100%" height="80px" style="display: block;margin: 16px auto 0 auto"/><br>
-                                <img ng-if="picFileHeader3 != null" ngf-src="picFileHeader3" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
+                                <img ng-if="picFileHeader3 != null" ngf-src="picFileHeader3[0]" width="100%"   height="100px" style="display:block; margin: 16px auto 0 auto"> <br>
                                 <p>
                                     <text-angular style="height: 150px" rows="4" rows="1" class="email-template input-shadow-border" ng-model="orderRefundEmail.orderRefundEmail.header" disabled></text-angular>
                                 </p>
@@ -712,9 +729,9 @@
                     <div class="md-dialog-buttons">
                         <div class="inner-section">
                             <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="updateEmailSettings(orderRefundEmail,'save','orderRefundEmail')">Save
+                            <md-button class="me-default-button" ng-disabled="!orderRefundEmail.orderRefundEmail.header || picFileHeader3 == null" ng-click="updateEmailSettings(orderRefundEmail,'save','orderRefundEmail')">Save
                             </md-button>
-                            <md-button class="me-default-button" ng-disabled="orderRefundForm.$invalid" ng-click="updateEmailSettings(orderRefundEmail,'finish','orderRefundEmail')">Finish</md-button>
+                            <md-button class="me-default-button" ng-disabled="!orderRefundEmail.orderRefundEmail.header || picFileHeader3 == null" ng-click="updateEmailSettings(orderRefundEmail,'finish','orderRefundEmail')">Finish</md-button>
                         </div>
                     </div>
                 </md-tab-body>
