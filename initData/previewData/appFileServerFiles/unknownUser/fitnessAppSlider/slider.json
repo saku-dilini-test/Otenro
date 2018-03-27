@@ -1,0 +1,16 @@
+{
+  "slider": [
+    {
+      "image": "slider1.png",
+      "product": null
+    },
+    {
+      "image": "slider2.png",
+      "product": null
+    },
+    {
+      "image": "slider3.png",
+      "product": null
+    }
+  ]
+}

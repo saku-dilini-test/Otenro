@@ -284,6 +284,11 @@ module.exports = {
         res.sendfile(config.APP_FILE_SERVER + req.param('userId') + '/templates/' + req.param('appId') + '/img/'+ req.param('img'));
     },
 
+    viewDummySliderImages : function(req,res){
+    console.log(config.APP_FILE_SERVER + "fitnessAppSlider/images/"+ req.param('img'));
+        res.sendfile(config.APP_FILE_SERVER + "unknownUser/fitnessAppSlider/images/"+ req.param('img'));
+    },
+
     /**
      * return template url for given userID & appID & img ( template path )
      * @param req
@@ -496,8 +501,22 @@ module.exports = {
             res.json(template);
 
         });
-    }
+    },
 
+    getDummy : function(req,res){
+        var path = require('path');
+          var path2 = path.resolve();
+          console.log(path2);
+
+          fs.readFile(config.APP_FILE_SERVER + "unknownUser/fitnessAppSlider/slider.json", 'utf8', function (err, data) {
+              if (err){
+                console.log(err)
+              }
+                 // error handling
+             res.send(data);
+          });
+
+    }
 
 
 };
