@@ -8,7 +8,7 @@
     mainMenuService,$log) {
         var size, weight;
         var variants;
-
+        console.log(initialData);
         $scope.customPattern =   /^[0-9a-zA-Z ]+$/;
         $scope.qtyPattern = '/^\d+(?:[.]\d{1,}|$)$/';
         $scope.tmpImage = [];
@@ -17,16 +17,23 @@
         $scope.currency = $rootScope.currency;
         //$scope.isNewProduct = true;
         $scope.skuFieldEnable = false;
-
         if(initialData.isNewItem)
         {
             $scope.isNewProduct = initialData.isNewItem;
 
         }else if($scope.product.sku){
+            if(!$scope.product.mainType){
+                $scope.product.mainType = "Main";
+            }
             $scope.isNewProduct = false;
             $scope.skuFieldEnable = true;
             $scope.initSkuLength = initialData.product.variants.length;
         }
+
+        commerceService.getProdTypeData().success(function (res) {
+                console.log(JSON.parse(res));
+               $scope.types = JSON.parse(res).data;
+        });
 
         $scope.initSku = function(index){
             if(index<$scope.initSkuLength || index == 0){
@@ -115,7 +122,7 @@
          */
         $scope.generalDetails = function (product, current) {
             //When new product is adding to the system
-
+             console.log(product);
             if(!$scope.product.variants){
                 $scope.product.variants = [];
                 $scope.product.variants.push({"sku":product.sku,"name":product.name})

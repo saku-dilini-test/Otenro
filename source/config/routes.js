@@ -382,5 +382,10 @@ module.exports.routes = {
     'POST /reports/getOrderData': 'reports/StoreAnalyticsController.getOrderData',
     'POST /reports/getChartData': 'reports/StoreAnalyticsController.getChartData',
 
-    'GET /get/dummySlider' : 'template/TemplateController.getDummy'
+    /**
+     *Fitness app
+     */
+    'GET /get/dummySlider' : 'template/TemplateController.getDummy',
+    'GET /get/provinces' : 'template/TemplateController.getProvinces',
+    'GET /get/getMainProdTypes' : 'template/TemplateController.getMainProdTypes'
 };

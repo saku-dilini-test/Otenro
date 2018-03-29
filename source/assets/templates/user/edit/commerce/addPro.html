@@ -88,10 +88,21 @@
                                         </div>
                                     </md-input-container>
 
+                                    <md-input-container class="md-block" flex="50">
+                                        <label>Product type</label>
+                                        <md-select
+                                                md-no-asterisk = false
+                                                placeholder="Select Product Type"
+                                                ng-model="product.mainType" ng-selected="Main">
+                                            <md-option ng-value="type" ng-repeat="type in types">{{type}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+
                                     <md-input-container class="md-block" flex="50" ng-hide="mainMenuHide">
                                         <label>Main Menu</label>
                                         <md-select
-                                                md-no-asterisk = flase
+                                                md-no-asterisk = false
                                                 placeholder="Select Main Menu"
                                                 ng-model="product.mainId"
                                                 ng-change="setChild(product.mainId)">
