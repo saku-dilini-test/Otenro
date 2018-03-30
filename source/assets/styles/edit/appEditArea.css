@@ -357,11 +357,11 @@
     margin-left: 12px;
 }
 
-.glyphicon{
-    font-size: 20px;
-    line-height: 2em !important;
-    top: 6px;
-}
+/*.glyphicon{*/
+    /*font-size: 20px;*/
+    /*line-height: 2em !important;*/
+    /*top: 6px;*/
+/*}*/
 
 .angular-ui-tree-handle {
     background: #f8faff;

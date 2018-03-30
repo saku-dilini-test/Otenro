@@ -89,6 +89,23 @@
                 },function() {
 
                 });
+            }, showEditMenuNavigationDialogNode: function(data,id, parentId){
+                return $mdDialog.show({
+                    controller: 'MainMenuCtrl',
+                    templateUrl: 'user/edit/mainmenu/editMenuNavigation.html',
+                    clickOutsideToClose: true,
+                    locals : {
+                        initialData : {
+                            menu : data,
+                            templateCategory : id,
+                            parentId: parentId
+                        }
+                    }
+                }).then(function(answer) {
+
+                },function() {
+
+                });
             },
             showEditMenuCategoryDialog: function(data,id){
                 return $mdDialog.show({
@@ -143,7 +160,7 @@
                 return $http.post(SERVER_URL+ 'edit/specificThirdNavi?appId='+$rootScope.appId,Data);
             },
 
-            addMenu: function(file,appId,name){
+            addMenu: function(file,appId,name,parentId){
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -162,6 +179,7 @@
                     fields: {
                         'appId' : appId,
                         'name' : name,
+                        'parentId' : parentId,
                     },
                     file: UploadFile
                 });

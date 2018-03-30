@@ -92,9 +92,10 @@ module.exports = {
     },
 
     addNewNavi : function(req,res){
-        
+        console.log(req.body)
+        // console.log((JSON.parse(req.body.nodes)).id)
         var dePath      = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/secondNavi/';
-        
+
         req.file('file').upload({
             dirname: require('path').resolve(dePath)
         },function (err, uploadedFiles) {
@@ -105,12 +106,46 @@ module.exports = {
                 if (err) return res.send(err);
             });
 
-            var secondNavi =req.body;
-            secondNavi.imageUrl = newFileName;
-            SecondNavigation.create(secondNavi).exec(function(err, newMenu) {
-                if (err) res.send(err);
-                res.json(newMenu);
-            });
+
+            if(req.body.parentId){
+                var secondSubNavi =req.body;
+                secondSubNavi.imageUrl = newFileName;
+                secondSubNavi.nodes = [];
+                SecondNavigation.create(secondSubNavi).exec(function(err, newMenu) {
+                    if (err) res.send(err);
+
+                    if(newMenu){
+                        SecondNavigation.find({id :req.body.parentId}).exec(function(err,parent) {
+                            if (err) res.send(err);
+                            if(parent){
+                                var newParent = {};
+                                newParent.nodes = [];
+                                if(parent[0].nodes){
+                                    newParent.nodes = parent[0].nodes;
+                                }
+                                newParent.nodes.push(newMenu.id);
+                                SecondNavigation.update({id :req.body.parentId},newParent).exec(function(err) {
+                                    if (err) {
+                                        res.send(err)
+                                    }else{
+                                        res.send('ok');
+                                    }
+                                });
+                            }
+
+                        });
+                    }
+                });
+
+            }else{
+                var secondNavi =req.body;
+                secondNavi.imageUrl = newFileName;
+                secondNavi.nodes = [];
+                SecondNavigation.create(secondNavi).exec(function(err, newMenu) {
+                    if (err) res.send(err);
+                    res.json(newMenu);
+                });
+            }
         });
     },
 

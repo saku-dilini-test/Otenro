@@ -7,6 +7,86 @@
     function MainMenuCtrl(oblMenuService,$scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
                           mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log) {
 
+        console.log("mainMenu Ctrl")
+        $scope.remove = function (scope) {
+            scope.remove();
+        };
+
+        $scope.toggle = function (scope) {
+            scope.toggle();
+        };
+
+        $scope.moveLastToTheBeginning = function () {
+            var a = $scope.data.pop();
+            $scope.data.splice(0, 0, a);
+        };
+
+        $scope.newSubItem1 = function (scope) {
+            var nodeData = scope.$modelValue;
+            nodeData.nodes.push({
+                id: nodeData.id * 10 + nodeData.nodes.length,
+                title: nodeData.title + '.' + (nodeData.nodes.length + 1),
+                nodes: []
+            });
+        };
+
+        $scope.collapseAll = function () {
+            $scope.$broadcast('angular-ui-tree:collapse-all');
+        };
+
+        $scope.expandAll = function () {
+            $scope.$broadcast('angular-ui-tree:expand-all');
+        };
+
+        // $scope.data = [{
+        //     'id': 1,
+        //     'title': 'node1',
+        //     'nodes': [
+        //         {
+        //             'id': 11,
+        //             'title': 'node1.1',
+        //             'nodes': [
+        //                 {
+        //                     'id': 111,
+        //                     'title': 'node1.1.1',
+        //                     'nodes': []
+        //                 }
+        //             ]
+        //         },
+        //         {
+        //             'id': 12,
+        //             'title': 'node1.2',
+        //             'nodes': []
+        //         }
+        //     ]
+        // }, {
+        //     'id': 2,
+        //     'title': 'node2',
+        //     'nodrop': true, // An arbitrary property to check in custom template for nodrop-enabled
+        //     'nodes': [
+        //         {
+        //             'id': 21,
+        //             'title': 'node2.1',
+        //             'nodes': []
+        //         },
+        //         {
+        //             'id': 22,
+        //             'title': 'node2.2',
+        //             'nodes': []
+        //         }
+        //     ]
+        // }, {
+        //     'id': 3,
+        //     'title': 'node3',
+        //     'nodes': [
+        //         {
+        //             'id': 31,
+        //             'title': 'node3.1',
+        //             'nodes': []
+        //         }
+        //     ]
+        // }];
+
         $scope.tmpImage = [];
         $scope.mainImg = null;
         $scope.topLevel  = '';
@@ -70,6 +150,29 @@
                      $scope.buttonName = "Browse Image";
                 };
 
+        $scope.newMenuItems = [];
+        $scope.makeCategoryArray = function (parentNodes) {
+            // console.log($scope.menuItems)
+             $scope.newMenuItems = parentNodes;
+            for(var i = 0; i < parentNodes.length; i++){
+
+                // $scope.newMenuItems.push(parentNodes[i]);
+
+                if(parentNodes[i].nodes && !parentNodes[i].nodes.id){
+                    $scope.makeCategoryArray(parentNodes[i].nodes);
+                }else{
+                    var nodeId = parentNodes[i];
+                    for(var j=0; j< $scope.menuItems.length; j++){
+                        if(nodeId == $scope.menuItems[j].id){
+                            parentNodes[i] = $scope.menuItems[j];
+                        }
+                    }
+                }
+
+            }
+
+        }
+
 
         // Main Menu view
         if($scope.initialData == null ) {
@@ -82,6 +185,14 @@
                         commerceService.getCategoryList()
                             .success(function (secondNaviList) {
                                 $scope.menuItems = secondNaviList;
+                                $scope.parentMenuItems =[];
+                                for(var i = 0; i < $scope.menuItems.length; i++){
+                                    if(!$scope.menuItems[i].parentId){
+                                        $scope.parentMenuItems.push($scope.menuItems[i]);
+                                    }
+                                }
+                                $scope.makeCategoryArray($scope.parentMenuItems);
+
                             }).error(function (error) {
                                 toastr.error('Menu Loading Error', 'Warning', {closeButton: true});
                             });
@@ -169,10 +280,12 @@
       };        
 
         // Add New Menu
-        $scope.goToAddNewMenuItemView = function () {
+        $scope.goToAddNewMenuItemView = function (scope) {
+            if(scope){
+                console.log(scope)
+                console.log(scope.$modelValue)
+            }
             if($scope.templateCategory == tempCatBusiness){
-                $log.debug(tempCatBusiness);
-                $log.debug($scope.templateCategory );
                 mainMenuService.showEditMenuNavigationDialog('addNewMenuNavigation',$scope.templateCategory);
             }else if($scope.templateCategory == tempCatMedia){
                 $log.debug(tempCatMedia);
@@ -180,6 +293,14 @@
                 mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory',$scope.templateCategory);
             }
         };
+        // Add New node
+                $scope.goToAddNewNode = function (id) {
+
+                        console.log(id)
+                    if($scope.templateCategory == tempCatBusiness){
+                        mainMenuService.showEditMenuNavigationDialogNode('addNewMenuNavigation',$scope.templateCategory,id);
+                    }
+                };
 
 
         $scope.clearDefaultData = function () {
@@ -321,9 +442,10 @@
         };        
 
         // Add menu navigation
-        $scope.addMenuNavigation = function(file,menu){
+        $scope.addMenuNavigation = function(file,menu,nodes){
 
             $log.debug(menu);
+            console.log(menu);
             if($scope.tmpImage[0] == null){
                 toastr.error('Please upload an image', 'Warning', {closeButton: true});
                 return;
@@ -336,9 +458,8 @@
 
             // If Add new Menu Navigation
             if($scope.initialData.menu == 'addNewMenuNavigation'){
-                console.dir(initialData.prodItem)
                 //$log.debug("Add new Menu Navigation ");
-                mainMenuService.addMenu(file,$rootScope.appId,menu.name).success(function(data) {
+                mainMenuService.addMenu(file,$rootScope.appId,menu.name,nodes).success(function(data) {
                     var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
                                    +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
                     $scope.appTemplateUrl = urlPath+'' +

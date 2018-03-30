@@ -36,6 +36,12 @@ module.exports = {
         },
         createdDate: {
             type: 'date'
+        },
+        parentId:{
+            type: 'string'
+        },
+        nodes:{
+            type:'json'
         }
     }
 };

@@ -1,11 +1,12 @@
     <md-dialog aria-label="Edit Child Menu">
     <md-dialog-content>
         <div class="md-dialog-header">
-            <h1>Add Category</h1>
+            <h1>Add Category1 </h1>
         </div>
         <form name="catForm" novalidate>
         <div class="md-dialog-main">
 
+            <pre class="code">{{ initialData.nodes | json }}</pre>
                 <fieldset>
                     <label for="input-title">Name</label>
                     <input class="input-shadow-border" type="text" name="name" id="input-title" ng-model="menu.name"
@@ -79,7 +80,7 @@
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="cancelEdit()">Cancel</md-button>
-                <md-button class="me-default-button" ng-click="addMenuNavigation(mainImg,menu)">Save</md-button>
+                <md-button class="me-default-button" ng-click="addMenuNavigation(mainImg,menu,initialData.parentId)">Save</md-button>
             </div>
         </div>
         </form>

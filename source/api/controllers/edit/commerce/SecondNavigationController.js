@@ -68,6 +68,9 @@ module.exports = {
         });
     },
     updateSecondNavi : function(req,res){
+         console.log('updateseconnavi')
+         console.log(req.body)
+         console.log(req.body.childList)
         if(req.body.childList){
             var childList=req.body.childList;
             for (var i = 0; i < childList.length; i++) {

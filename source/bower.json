@@ -33,7 +33,7 @@
     "angular-ui-grid": "https://github.com/angular-ui/bower-ui-grid.git#a091aadc72ca5a8623bbf86813f2575d06e52de9",
     "angular-ui-mask": "https://github.com/angular-ui/ui-mask.git#4d01287649a9f1c1a51c20c5396adfdcf5375d67",
     "angular-ui-router": "https://github.com/angular-ui/ui-router.git#ec6ca36b625e578e59e631b3c9e786a6ac70678c",
-    "angular-ui-tree": "https://github.com/JimLiu/angular-ui-tree.git#e8cf4596fe7b3e821d14dc6fd37d869d05f28c0e",
+    "angular-ui-tree": "^2.22.6",
     "angularUtils-pagination": "https://github.com/michaelbromley/angularUtils-pagination.git#b1f2290811e95d706d4969e7bec2a0f24b32142a",
     "bootstrap": "https://github.com/twbs/bootstrap.git#0b9c4a4007c44201dce9a6cc1a38407005c26c86",
     "font-awesome": "https://github.com/FortAwesome/Font-Awesome.git#a3fe90fa5f6fac55d197f9cbd18e3f57dafb716c",
