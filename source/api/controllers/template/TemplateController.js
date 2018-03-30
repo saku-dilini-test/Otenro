@@ -516,6 +516,38 @@ module.exports = {
              res.send(data);
           });
 
+    },
+
+    getProvinces : function(req,res){
+        var path = require('path');
+          var path2 = path.resolve();
+          console.log(path2);
+
+          fs.readFile(config.APP_FILE_SERVER + "unknownUser/fitnessAppSlider/provinces.json", 'utf8', function (err, data) {
+              if (err){
+                console.log(err)
+              }
+                 // error handling
+             res.send(data);
+          });
+
+    }
+    ,
+
+    getMainProdTypes : function(req,res){
+        var path = require('path');
+          var path2 = path.resolve();
+          console.log(path2);
+
+          fs.readFile(config.APP_FILE_SERVER + "unknownUser/fitnessAppSlider/productType.json", 'utf8', function (err, data) {
+              if (err){
+                console.log(err)
+              }
+              console.log(data);
+                 // error handling
+             res.json(data);
+          });
+
     }
 
 

@@ -427,6 +427,9 @@
             },
             getChartData :function (data) {
                 return $http.post(SERVER_URL + 'reports/getChartData', data);
+            },
+            getProdTypeData: function(){
+                return $http.get(SERVER_URL + "get/getMainProdTypes");
             }
 
         };

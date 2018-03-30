@@ -1,0 +1,9 @@
+{
+  "name": "Quantum app",
+  "appId": "5a56f4f755d30ede54da47d5",
+  "userId": "5a4b5b853e83e7020eeaaab0",
+  "serviceApi": {
+    "host": "https://dashboard.otenro.com",
+    "port": 1338
+  }
+}
