@@ -388,6 +388,29 @@
                                 </img-crop>
 
                             </div>
+                            <br>
+                            <!--ng-model="IPGSettings.authorizeNetEnable"-->
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Video Url</label>
+                                    </div>
+                                    <!--<div class="col-md-3">-->
+                                        <!--<div class="on-off-switch">-->
+                                            <!--<input type="checkbox"  name="on-off-switch" class="on-off-switch-checkbox" id="on-off-switch-5">-->
+                                            <!--<label class="input-shadow-border on-off-switch-label" for="on-off-switch-5">-->
+                                                <!--<span class="on-off-switch-inner"></span>-->
+                                                <!--<span class="on-off-switch-switch"></span>-->
+                                            <!--</label>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                </div>
+
+                                <input class="apikey input-shadow-border" type="text" ng-model="product.videoUrl"
+                                       name="url" placeholder="Paste your video URL" required /><br /><br />
+
+                            </fieldset>
+                            <br>
 
                             <div class="inputField btn-material img-up">
                                 <span >{{buttonName}}</span>
@@ -395,7 +418,7 @@
                                     <input type="file" value="" ng-click = "cropImage();"  id="fileInput" class="file" size="100">
 
                                 </div>
-                                <div  ng-if="picFile" class="img-up1" ng-click="addImage(picFile)"></div>
+                                <div  ng-if="picFile" class="img-up1" ng-click="addImage(picFile,product.videoUrl)"></div>
 
                             </div>
 
@@ -425,7 +448,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[0] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="1" ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
+                                        <img id="1" ng-click="setImage(0)" ng-if="tmpImage[0].img !== null" ngf-src="tmpImage[0].img"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -433,7 +456,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[1] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img  id="2" ng-click="setImage(1)" ng-if="tmpImage[1] !== null" ngf-src="tmpImage[1]"
+                                        <img  id="2" ng-click="setImage(1)" ng-if="tmpImage[1].img !== null" ngf-src="tmpImage[1].img"
                                               width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -441,7 +464,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[2] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="3" ng-click="setImage(2)" ng-if="tmpImage[2] !== null" ngf-src="tmpImage[2]"
+                                        <img id="3" ng-click="setImage(2)" ng-if="tmpImage[2].img !== null" ngf-src="tmpImage[2].img"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -449,7 +472,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[3] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="4" ng-click="setImage(3)" ng-if="tmpImage[3] !== null" ngf-src="tmpImage[3]"
+                                        <img id="4" ng-click="setImage(3)" ng-if="tmpImage[3].img !== null" ngf-src="tmpImage[3].img"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -457,7 +480,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[4] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="5" ng-click="setImage(4)" ng-if="tmpImage[4] !== null" ngf-src="tmpImage[4]"
+                                        <img id="5" ng-click="setImage(4)" ng-if="tmpImage[4].img !== null" ngf-src="tmpImage[4].img"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -465,7 +488,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[5] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="6" ng-click="setImage(5)" ng-if="tmpImage[5] !== null" ngf-src="tmpImage[5]"
+                                        <img id="6" ng-click="setImage(5)" ng-if="tmpImage[5].img !== null" ngf-src="tmpImage[5].img"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -473,7 +496,7 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[6] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="7" ng-click="setImage(6)" ng-if="tmpImage[6] !== null" ngf-src="tmpImage[6]"
+                                        <img id="7" ng-click="setImage(6)" ng-if="tmpImage[6].img !== null" ngf-src="tmpImage[6].img"
                                              width="80" height="80"/>
                                     </div>
                                     <div class="old-image">
@@ -481,13 +504,17 @@
                                                class="image-delete-button"/>
                                         <img ng-click="setImage()" ng-if="tmpImage[7] == null"
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                        <img id="8" ng-click="setImage(7)" ng-if="tmpImage[7] !== null" ngf-src="tmpImage[7]"
+                                        <img id="8" ng-click="setImage(7)" ng-if="tmpImage[7].img !== null" ngf-src="tmpImage[7].img"
                                              width="80" height="80"/>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
+
+
+
+
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">

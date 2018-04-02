@@ -66,7 +66,16 @@
         if (initialData.product.tempImageArray){
             for (var i=0; i<initialData.product.tempImageArray.length; i++) {
                 var tempImageUrl = tempImagePath + initialData.product.tempImageArray[i].img;
-                $scope.tmpImage.push(tempImageUrl);
+
+                var tempVideoUrl;
+                if(!initialData.product.tempImageArray[i].videoUrl){
+                    tempVideoUrl = initialData.product.tempImageArray[i].videoUrl;
+                }else{
+                    tempVideoUrl = null;
+                }
+
+
+                $scope.tmpImage.push({'img':tempImageUrl,'videoUrl':tempVideoUrl});
             }
         }
 
@@ -484,10 +493,11 @@
             angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
         };
 
-        $scope.addImage = function (img) {
+        $scope.addImage = function (img,url) {
+        console.log(url);
 
             if($scope.tmpImage.length < 8 && img && angular.element('#fileInput').val()!=''){
-                $scope.tmpImage.push(img);
+                $scope.tmpImage.push({'img':img, 'videoUrl':url});
                 angular.element('#fileInput').val(null);
                 $scope.picFile = null;
                 $scope.myImage=null;
