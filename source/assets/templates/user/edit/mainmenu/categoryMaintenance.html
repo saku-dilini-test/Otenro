@@ -1,0 +1,60 @@
+<md-dialog aria-label="Menu Tree">
+    <md-dialog-content>
+        <form novalidate>
+            <div class="md-dialog-header">
+                <h1>Categories</h1>
+                <ul class="md-dialog-header-nav clearfix">
+                    <li>
+                        <a class="add-new-item"  ng-click="goToAddNewMenuItemView()">Add New Menu</a>
+                    </li>
+                    <li>
+                        <a class="add-new-item"  ng-click="clearDefaultData()">Clear Default Data</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="md-dialog-main">
+                <table class="me-simple-table">
+                    <thead>
+                    <tr>
+                        <th width="100%">Name</th>
+                    </tr>
+                    </thead>
+                </table>
+                <div ui-tree id="tree-root" data-drag-enabled="false">
+                    <ol ui-tree-nodes ng-model="menuItems">
+                        <li ng-repeat="node in menuItems"  ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- TODO : Later, ui-tree may be use -->
+            <script type="text/ng-template" id="nodes_renderer.html">
+                <div ui-tree-handle class="tree-node tree-node-content">
+                    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)">
+                        <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                    </a>
+                    {{node.name}}
+                    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="deleteNodes(node.id)"><span
+                            class="glyphicon glyphicon-remove"></span></a>
+                    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="goToAddNewNode(node.id)" style="margin-right: 8px;"><span
+                            class="glyphicon glyphicon-plus"></span></a>
+                    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="goToEditMenuItemView(node)" style="margin-right: 8px;"><span
+                            class="glyphicon glyphicon-pencil"></span></a>
+                </div>
+                <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                    <li ng-repeat="node in node.childNodes" ui-tree-node ng-include="'nodes_renderer.html'">
+                    </li>
+                </ol>
+
+            </script>
+
+            <div class="md-dialog-buttons">
+                <div class="inner-section">
+                    <md-button class="me-default-button" ng-click="deleteCategories(selected)">Delete</md-button>
+                    <md-button class="me-default-button" ng-click="cancel()">Cancel</md-button>
+                    <md-button class="me-default-button" ng-click="hide()">OK</md-button>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+</md-dialog>

@@ -143,6 +143,8 @@ module.exports.routes = {
     'POST /edit/deleteSecondNavi': 'edit/commerce/SecondNavigationController.deleteSecondNavi',
     'POST /edit/updateSecondNaviImage': 'edit/commerce/SecondNavigationController.updateSecondNaviImage',
     'POST /edit/updateSliderImage': 'edit/commerce/SliderController.updateSliderImage',
+    'POST /edit/updateCategory': 'edit/commerce/MainCategoryController.updateCategory',
+    'POST /edit/updateCategoryName': 'edit/commerce/MainCategoryController.updateCategoryName',
     //'POST /edit/updateProductImage': '',
     //'POST /edit/updateCategoryImage': '',
     //'POST /edit/addProducts': '
@@ -169,6 +171,7 @@ module.exports.routes = {
 
     'GET /edit/getMainNavigation': 'edit/commerce/MainNavigationController.getMainNavigation',
     'GET /edit/getSecondNavigation': 'edit/commerce/SecondNavigationController.getSecondNavigation',
+    'GET /edit/getCategoryListCommerce': 'edit/commerce/MainCategoryController.getCategoryList',
     'GET /edit/getThirdNavigation': 'edit/commerce/ThirdNavigationController.getThirdNavigation',
     'GET /edit/getOrders': 'edit/commerce/OrderController.getOrders',
     'POST /edit/updateOrders': 'edit/commerce/OrderController.updateOrders',
@@ -179,6 +182,7 @@ module.exports.routes = {
     //'POST /templates/specificSecondNavi' : 'edit/commerce/MainNavigationController',
     //'POST /templates/specificThirdNavi': 'edit/commerce/MainNavigationController',
     'POST /edit/addNewMenu': 'edit/commerce/MainNavigationController.addNewNavi',
+    'POST /edit/addNewCategoryToMaintenance': 'edit/commerce/MainCategoryController.addNewCategory',
     'POST /edit/addNewCategory': 'edit/commerce/MainNavigationController.addNewCategory',
     'POST /edit/addChildMenu': 'edit/commerce/SecondNavigationController.addNewNavi',
     'POST /edit/updateSecondNavi': 'edit/commerce/SecondNavigationController.updateSecondNavi',

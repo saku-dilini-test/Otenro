@@ -1,0 +1,68 @@
+<md-dialog aria-label="Edit Child Menu">
+    <md-dialog-content>
+        <div class="md-dialog-header">
+            <h1>Add Category</h1>
+        </div>
+        <form name="catForm" novalidate>
+            <div class="md-dialog-main">
+
+                <fieldset>
+                    <label for="input-title">Name</label>
+                    <input class="input-shadow-border" type="text" name="name" id="input-title" ng-model="menu.name"
+                           maxlength="{{maxMenuNavigation}}"/>
+                    <br>
+                    <span class="information">Characters left: {{maxMenuNavigation - menu.name.length}}</span>
+                </fieldset>
+                <br>
+                <fieldset>
+
+                    <div class="file-upload-wrapper clearfix">
+                        <div class="cropArea">
+                            <img-crop image="myImage" area-type="rectangle" aspect-ratio="secondNaviAspectRatio" result-image="picFile" result-image-size="iSizeSecond">
+                            </img-crop>
+                        </div>
+
+                        <div class="inputField btn-material img-up">
+                            <span >{{buttonName}}</span>
+                            <div class="img-up1" ng-if="imageSelected">
+                                <input type="file" value="file"  ng-click = "cropImage()" id="fileInput" >
+                            </div>
+                            <div  ng-if="!imageSelected" class="img-up1" ng-click="addImage(picFile)"></div>
+
+                        </div>
+
+                    </div>
+                    <div class="uploaded-section image-upload clearfix" style="width:35%">
+                        <div class="uploaded-new-image">
+                            <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
+                                 height="150" style="display:none" />
+                            <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
+                        </div>
+                        <div class="uploaded-old-images">
+                            <p>Uploaded Product Images</p>
+                            <div class="old-images clearfix">
+                                <div class="old-image">
+                                    <input type="button" ng-click="deleteImg()" value='delete'
+                                           class="image-delete-button"/>
+                                    <img  ng-if="tmpImage[0] == null"
+                                          src="../../../images/small-placeholder.png" width="80" height="80"/>
+                                    <img ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
+                                         width="80" height="80"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+            </div>
+            <div class="md-dialog-buttons">
+                <div class="inner-section">
+                    <md-button class="me-default-button" ng-click="cancelEdit()">Cancel</md-button>
+                    <md-button class="me-default-button" ng-click="saveCategory(mainImg,menu,initialData.parentId)">Save</md-button>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+
+</md-dialog>

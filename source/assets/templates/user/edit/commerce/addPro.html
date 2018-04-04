@@ -100,10 +100,10 @@
                                         </md-select>
                                     </md-input-container>
 
-                                    <!--Disabled for now-->
+                                    <!--working-->
                                     <md-input-container class="md-block" flex="50" ng-hide="childMenuHide">
-                                        <label>Sub Category</label>
-                                        <md-select class="" placeholder="Sub Category" ng-model="product.childId"
+                                        <label>Select Category</label>
+                                        <md-select class="" placeholder="Select Category" ng-model="product.childId"
                                                    required>
                                             <md-option ng-value="ch.id" ng-repeat="ch in child ">{{ch.name}}
                                             </md-option>
