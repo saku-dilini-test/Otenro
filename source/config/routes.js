@@ -379,7 +379,10 @@ module.exports.routes = {
     'POST /reports/getTaxSummary': 'reports/StoreAnalyticsController.getTaxSummary',
     'POST /reports/getShippingSummary': 'reports/StoreAnalyticsController.getShippingSummary',
     'POST /reports/getOrderData': 'reports/StoreAnalyticsController.getOrderData',
-    'POST /reports/getChartData': 'reports/StoreAnalyticsController.getChartData'
+    'POST /reports/getChartData': 'reports/StoreAnalyticsController.getChartData',
+
+
+    'POST /payment/savePaymentUserData': 'payment/PaymentController.savePaymentUserData'
 
 
 };
