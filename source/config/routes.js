@@ -172,6 +172,7 @@ module.exports.routes = {
     'GET /edit/getMainNavigation': 'edit/commerce/MainNavigationController.getMainNavigation',
     'GET /edit/getSecondNavigation': 'edit/commerce/SecondNavigationController.getSecondNavigation',
     'GET /edit/getCategoryListCommerce': 'edit/commerce/MainCategoryController.getCategoryList',
+    'GET /edit/getNodesListCommerce': 'edit/commerce/MainCategoryController.getNodesList',
     'GET /edit/getThirdNavigation': 'edit/commerce/ThirdNavigationController.getThirdNavigation',
     'GET /edit/getOrders': 'edit/commerce/OrderController.getOrders',
     'POST /edit/updateOrders': 'edit/commerce/OrderController.updateOrders',

@@ -304,7 +304,7 @@
                 .success(function (result) {
                     if (result == '') {
                         $scope.mainMenuHide = true;
-                        categoryMaintenanceService.getCategoryList()
+                        categoryMaintenanceService.getNodesList()
                             .success(function (secondResult) {
                                 $scope.child = secondResult;
                                 console.log($scope.child)

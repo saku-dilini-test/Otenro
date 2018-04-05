@@ -99,6 +99,9 @@
             getCategoryList: function () {
                 return $http.get(SERVER_URL + 'edit/getCategoryListCommerce?appId=' + $rootScope.appId);
             },
+            getNodesList: function () {
+                return $http.get(SERVER_URL + 'edit/getNodesListCommerce?appId=' + $rootScope.appId);
+            },
             deleteNodes : function(id){
                 return $http.post(SERVER_URL+ 'edit/deleteNodes',id);
             },

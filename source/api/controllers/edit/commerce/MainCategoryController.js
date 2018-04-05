@@ -180,6 +180,20 @@ module.exports = {
             res.send('ok');
         });
     },
+    getNodesList : function(req,res){
+
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId
+        };
+        MainCategory.find(searchApp, function(err, list) {
+            if (err) return done(err);
+
+            res.send(list);
+
+            // res.send(app);
+        });
+    },
 
 
 };
