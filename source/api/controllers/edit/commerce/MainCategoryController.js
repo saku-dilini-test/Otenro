@@ -70,8 +70,54 @@ module.exports = {
         });
     },
 
-    getCategoryList : function(req,res){
+    getMadeCategories : function (list) {
+        var parentMenuItems =[];
+        for(var i = 0; i < list.length; i++){
+            if(!list[i].parentId){
+                parentMenuItems.push(list[i]);
+            }
+        }
+        return makeCategoryArray(parentMenuItems);
 
+
+        function makeCategoryArray(parentNodes) {
+            var newMenuItems =[];
+
+            // console.log("makeCategoryArray");
+            // console.log(JSON.stringify(list, null, 2));
+            for(var i = 0; i < parentNodes.length; i++){
+                var parentNode = parentNodes[i];
+                parentNode.childNodes = [];
+                var parentNodeWithChillds = attachChildCategoriesByParentNode(parentNode);
+                // console.log(parentNodeWithChillds)
+                newMenuItems.push(parentNodeWithChillds);
+            }
+            return newMenuItems;
+            // console.log("newMenuItems=> " + JSON.stringify(newMenuItems, null, 2));
+        }
+
+        function attachChildCategoriesByParentNode(parentNode) {
+            // console.log("attachChildCategoriesByParentNode :: " + parentNode.id);
+            if(parentNode.nodes && parentNode.nodes.length>0){
+                var childNodes = parentNode.nodes;
+                for(var i = 0; i < childNodes.length; i++){
+                    // console.log("process child node :: " + childNodes[i]);
+                    // var childNodeArray = $filter('filter')(list, {"id": childNodes[i]});
+                    var childNodeArray = list.filter(list =>  list.id == childNodes[i]);
+                    var childNode = childNodeArray[0];//Will contains only one item
+                    childNode.childNodes = [];
+                    // console.log("childNode=>" + JSON.stringify(childNode, null, 2));
+                    parentNode.childNodes.push(attachChildCategoriesByParentNode(childNode));
+                    // console.log("end push");
+                }
+            }
+            // console.log("parentNode=>" + JSON.stringify(parentNode, null, 2));
+            return parentNode;
+        }
+    },
+
+    getCategoryList : function(req,res){
+        var fu = this;
         var appId = req.param('appId');
         var searchApp = {
             appId: appId
@@ -80,50 +126,8 @@ module.exports = {
             if (err) return done(err);
 
             if(list){
-
-                var parentMenuItems =[];
-                for(var i = 0; i < list.length; i++){
-                    if(!list[i].parentId){
-                        parentMenuItems.push(list[i]);
-                    }
-                }
-                res.send(makeCategoryArray(parentMenuItems));
-
-
-                function makeCategoryArray(parentNodes) {
-                    var newMenuItems =[];
-
-                    // console.log("makeCategoryArray");
-                    // console.log(JSON.stringify(list, null, 2));
-                    for(var i = 0; i < parentNodes.length; i++){
-                        var parentNode = parentNodes[i];
-                        parentNode.childNodes = [];
-                        var parentNodeWithChillds = attachChildCategoriesByParentNode(parentNode);
-                        // console.log(parentNodeWithChillds)
-                        newMenuItems.push(parentNodeWithChillds);
-                    }
-                    return newMenuItems;
-                    // console.log("newMenuItems=> " + JSON.stringify(newMenuItems, null, 2));
-                }
-
-                function attachChildCategoriesByParentNode(parentNode) {
-                    // console.log("attachChildCategoriesByParentNode :: " + parentNode.id);
-                    if(parentNode.nodes && parentNode.nodes.length>0){
-                        var childNodes = parentNode.nodes;
-                        for(var i = 0; i < childNodes.length; i++){
-                            // console.log("process child node :: " + childNodes[i]);
-                            // var childNodeArray = $filter('filter')(list, {"id": childNodes[i]});
-                            var childNodeArray = list.filter(list =>  list.id == childNodes[i]);
-                            var childNode = childNodeArray[0];//Will contains only one item
-                            childNode.childNodes = [];
-                            // console.log("childNode=>" + JSON.stringify(childNode, null, 2));
-                            parentNode.childNodes.push(attachChildCategoriesByParentNode(childNode));
-                            // console.log("end push");
-                        }
-                    }
-                    // console.log("parentNode=>" + JSON.stringify(parentNode, null, 2));
-                    return parentNode;
-                }
+               var madeList = fu.getMadeCategories(list);
+               res.send(madeList);
 
             }
 
