@@ -324,34 +324,34 @@
                                 $mdDialog.hide();
                             });
                         }
-//                         if($scope.templateCategory == tempCatMedia){
-//
-//                            articleService.deleteCategory({'id':catogoryIds,'appId':$rootScope.appId}).success(function(data) {
-//
-//                                var urlPath;
-//
-//                                if($rootScope.tempNew == true || $rootScope.tempNew == 'true'){
-//
-//                                      urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-//                                                                     + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
-//                                      $scope.appTemplateUrl = urlPath +
-//                                         'src' + data.id + '?' + new Date().toISOString();
-//
-//                                }else{
-//
-//                                     urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-//                                                   +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
-//                                     $scope.appTemplateUrl = urlPath+'' +'#/app/update?'+new Date().toISOString();
-//                                }
-//
-//
-//                                mySharedService.prepForBroadcast($scope.appTemplateUrl);
-//                                return mainMenuService.showMainMenuDialog();
-//
-//                            }).error(function(err) {
-//                                $mdDialog.hide();
-//                            });
-//                        }
+                         if($scope.templateCategory == tempCatMedia){
+
+                            articleService.deleteCategory({'id':catogoryIds,'appId':$rootScope.appId}).success(function(data) {
+
+                                var urlPath;
+
+                                if($rootScope.tempNew == true || $rootScope.tempNew == 'true'){
+
+                                      urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                                                     + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
+                                      $scope.appTemplateUrl = urlPath +
+                                         'src' + data.id + '?' + new Date().toISOString();
+
+                                }else{
+
+                                     urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                                   +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
+                                     $scope.appTemplateUrl = urlPath+'' +'#/app/update?'+new Date().toISOString();
+                                }
+
+
+                                mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                                return mainMenuService.showMainMenuDialog();
+
+                            }).error(function(err) {
+                                $mdDialog.hide();
+                            });
+                        }
                     },
                     this.cancel = function click(){
                         $mdDialog.hide();

@@ -91,7 +91,9 @@ module.exports = {
         var deleteQuery = {
             id : id
         };
+ArticleCategory.find(deleteQuery).exec(function(err,main){
 
+    if (err) res.send(err);
         ArticleCategory.destroy(deleteQuery).exec(function(err,result) {
            if (err){
                sails.log.error("Article Category Delete Error");
@@ -113,18 +115,20 @@ module.exports = {
                         Article.destroy({ categoryId : id}).exec(function (err, result) {
                             if (err) return callback("Error while deleting " + err.message);
 
-                            result.forEach(function(result){
-                                    fs.unlink(filePathArticle + result.imageUrl, function (err) {
+                            result.forEach(function(results){
+                                    fs.unlink(filePathArticle + results.imageUrl, function (err) {
                                         if (err) return console.error(err);
                                 });
                             });
-                            res.send(200,{message:' Category deleted'});
+
                         })
                     })
                     }
 
                 })
+                res.send(200,{message:' Category deleted'});
 
+        });
         });
     },
 
