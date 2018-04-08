@@ -65,10 +65,10 @@ module.exports = {
 
         for (var i=0; i<tmpImage.length; i++) {
 
-            if (!tmpImage[i].match("http")){
+            if (!tmpImage[i].img.match("http")){
                 var imgeFileName = randomstring.generate()+".png";
                 console.log("imgeFileName :  " + imgeFileName);
-                var data = tmpImage[i].replace(/^data:image\/\w+;base64,/, "");
+                var data = tmpImage[i].img.replace(/^data:image\/\w+;base64,/, "");
                 var buf = new Buffer(data, 'base64');
                 // product images copy to app file server
                 if(isNew == 'true' || isNew == true){
@@ -89,7 +89,14 @@ module.exports = {
                         }
                     });
                 }
-                product.tempImageArray.push({img:imgeFileName});
+                 var videoUrl;
+
+                                if(tmpImage[i].videoUrl){
+                                    videoUrl = tmpImage[i].videoUrl
+                                }else{
+                                    videoUrl = null;
+                                }
+                product.tempImageArray.push({img:imgeFileName,videoUrl:videoUrl});
                 product.imageUrl = imgeFileName;
                 finelImages = null;
             }

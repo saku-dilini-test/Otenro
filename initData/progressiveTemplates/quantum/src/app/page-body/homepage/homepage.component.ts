@@ -69,7 +69,27 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
 
+    $(".carousel").swipe({
+      swipe:  (event, direction, distance, duration, fingerCount, fingerData) => {
+        console.log(direction);
+        if (direction == 'left') $(this).carousel('next');
+        if (direction == 'right') $(this).carousel('prev');
 
+      },
+      allowPageScroll: "vertical"
+
+    });
+
+
+    $(() => {
+      var carouselEl = $('.carousel');
+      var carouselItems = carouselEl.find('.item');
+      carouselEl.carousel({
+          interval: 100000
+      }).on('slid.bs.carousel', (event) => {
+        console.log(event);
+      });
+    });
 
     this.imageUrlProd = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
@@ -138,6 +158,9 @@ export class HomepageComponent implements OnInit {
 
   }
 
+  ngAfterViewInit() {
+
+  }
 
   getWidth(index, length) {
     let styles = {
@@ -168,7 +191,7 @@ export class HomepageComponent implements OnInit {
   }
 
   navigateSliderProd(val, item) {
-    if(item.optionals.length == 2){
+    if (item.optionals.length == 2) {
       this.catName = item.optionals[0].name
       this.dataService.data = item.optionals[1];
       this.route.navigate([val, this.catName]);

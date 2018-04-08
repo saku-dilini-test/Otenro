@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -7,6 +7,8 @@ import * as data from '../../madeEasy.json';
 import * as _ from 'lodash';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import * as Player from '@vimeo/player';
 
 @Component({
     selector: 'app-product',
@@ -37,18 +39,27 @@ export class ProductComponent implements OnInit {
     private dialogVariants;
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+    private player: Player;
 
-    constructor(private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
-
+    constructor(public sanitizer: DomSanitizer, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
+        this.sanitizer = sanitizer;
         this.Data = this.dataService.data;
         this.init();
         this.isBuyBtnDisable = true;
+        console.log(this.Data.tempImageArray);
+    }
+
+    cleanURL(oldURL: string): SafeResourceUrl {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(oldURL);
     }
 
     currency: string;
+    clicked = false;
+    slided = false;
+    tests;
+    @ViewChild('iframePlayer') playerContainer;
 
     ngOnInit() {
-
         this.CurrencyService.getCurrencies().subscribe(data => {
             this.currency = data.sign;
         }, error => {
@@ -59,8 +70,256 @@ export class ProductComponent implements OnInit {
             this.catName = params['catName'];
         });
 
+        $(() => {
+            var carouselEl = $('.carousel');
+            var carouselItems = carouselEl.find('.item');
+            carouselEl.carousel({
+                interval: 100000
+            }).on('slid.bs.carousel', (event) => {
+                console.log(event);
+                let index;
+                let playerIndex;
+
+                if (event.direction == 'right') {
+
+                    if (carouselItems.siblings('.active').index() == (this.Data.tempImageArray.length - 1)) {
+                        // console.log('inside if');
+                        playerIndex = 0;
+                        index = this.Data.tempImageArray.length - 1
+                        document.getElementById('player' + playerIndex).style.display = 'none';
+                        document.getElementById('image' + playerIndex).style.display = 'block';
+
+                        var iframePlayer = new Player('player' + playerIndex);
+                        iframePlayer.unload().then(function () {
+                            // the video was unloaded
+                            console.log('player unloaded if');
+                        }).catch(function (error) {
+                            // an error occurred
+                        });
+
+                    } else {
+                        // console.log('inside else');
+                        index = carouselItems.siblings('.active').index();
+                        if (carouselItems.siblings('.active').index() == -1) {
+                            index = 0;
+                            playerIndex = index + 1;
+                        } else {
+                            index = carouselItems.siblings('.active').index();
+                            playerIndex = index + 1;
+                        }
+                        document.getElementById('player' + playerIndex).style.display = 'none';
+                        document.getElementById('image' + playerIndex).style.display = 'block';
+
+                        var iframePlayer = new Player('player' + playerIndex);
+                        iframePlayer.unload().then(function () {
+                            // the video was unloaded
+                            console.log('player unloaded else');
+                        }).catch(function (error) {
+                            // an error occurred
+                        });
+                    }
+
+                } else {
+
+                    if (carouselItems.siblings('.active').index() == -1) {
+                        index = 0;
+                        playerIndex = this.Data.tempImageArray.length - 1;
+                        document.getElementById('player' + (this.Data.tempImageArray.length - 1)).style.display = 'none';
+                        document.getElementById('image' + (this.Data.tempImageArray.length - 1)).style.display = 'block';
+                    } else {
+                        index = carouselItems.siblings('.active').index();
+                        playerIndex = index - 1;
+                        document.getElementById('player' + (index - 1)).style.display = 'none';
+                        document.getElementById('image' + (index - 1)).style.display = 'block';
+                    }
+
+                    // console.log(document.getElementById('image' + index).style);
+                    // console.log(document.getElementById('player' + index).style);
+                    var iframePlayer = new Player('player' + playerIndex);
+                    iframePlayer.unload().then(function () {
+                        // the video was unloaded
+                        console.log('player unloaded left');
+                    }).catch(function (error) {
+                        // an error occurred
+                    });
+
+
+                }
+
+
+                // var iframe = document.querySelector('iframe');
+                // // console.log(iframe);
+                // var iframePlayer = new Player(iframe);
+                // // console.log(iframePlayer);
+
+                // iframePlayer.unload().then(function () {
+                //     // the video was unloaded
+                //     console.log('player unloaded');
+                // }).catch(function (error) {
+                //     // an error occurred
+                // });
+                console.log(index);
+            })
+        })
+        // console.log(this.clicked);
+    }
+
+    ngAfterContentChecked() {
+    }
+
+    ngAfterViewChecked() {
+    }
+
+    ngOnChanges() {
+    }
+
+    ngAfterViewInit() {
+        this.clicked = false;
+        this.slided = true;
+
+        $(".carousel").swipe({
+
+            swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+
+              if (direction == 'left') $(this).carousel('next');
+              if (direction == 'right') $(this).carousel('prev');
+
+            },
+            allowPageScroll:"vertical"
+
+          });
+        // console.log(document.getElementById('iframePlayer'));
+        // this.player = new Player(this.playerContainer.nativeElement);
+    }
+
+    video(index, id) {
+
+        console.log(index);
+        console.log(id);
+
+        // console.log(document.getElementById('image' + index).style.display);
+        document.getElementById('image' + index).style.display = 'none';
+        document.getElementById('player' + index).style.display = 'block';
+
+        // this.player = new Player(document.getElementById('handstick'));
+
+        // this.player.play().then(function (id) {
+        //     // the video successfully loaded
+        //     console.log('video successfully loaded');
+        // }).catch(function (error) {
+        //     switch (error.name) {
+        //         case 'TypeError':
+        //             // the id was not a number
+        //             break;
+
+        //         case 'PasswordError':
+        //             // the video is password-protected and the viewer needs to enter the
+        //             // password first
+        //             break;
+
+        //         case 'PrivacyError':
+        //             // the video is password-protected or private
+        //             break;
+
+        //         default:
+        //             // some other error occurred
+        //             break;
+        //     }
+        // });
+
+        var options = {
+            id: id,
+            width: 360,
+            height: 360,
+            loop: true,
+            autoplay: true
+        };
+        if (id) {
+            var player = new Player('player' + index,options);
+            console.log(player);
+
+            player.ready().then(function () {
+                console.log('player is ready');
+                // player.getVideoEmbedCode().then(function(embedCode) {
+                //     // embedCode = <iframe> embed code
+                //     console.log(embedCode);
+                // }).catch(function(error) {
+                //     // an error occurred
+                // });
+                // player.loadVideo(id).then(function (id) {
+
+                //     console.log('video loaded');
+                //     // player.play();
+                //     // the video successfully loaded
+                // }).catch(function (error) {
+                //     switch (error.name) {
+                //         case 'TypeError':
+                //             // the id was not a number
+                //             break;
+
+                //         case 'PasswordError':
+                //             // the video is password-protected and the viewer needs to enter the
+                //             // password first
+                //             break;
+
+                //         case 'PrivacyError':
+                //             // the video is password-protected or private
+                //             break;
+
+                //         default:
+                //             // some other error occurred
+                //             break;
+                //     }
+                // });
+                // player.on('play', function() {
+                //     console.log('played the video!');
+                // });
+
+                player.play().then(function() {
+                    // the video was played
+                    console.log('vido played');
+                }).catch(function(error) {
+                    switch (error.name) {
+                        case 'PasswordError':
+                            // the video is password-protected and the viewer needs to enter the
+                            // password first
+                            break;
+
+                        case 'PrivacyError':
+                            // the video is private
+                            break;
+
+                        default:
+                            // some other error occurred
+                            break;
+                    }
+                });
+
+            });
+        }
+
+        // player.setVolume(0);
+
+        // player.on('play',  ()=> {
+        //     console.log('played the video!');
+        // },err=>{
+        //     console.log(err);
+        // });
+
+        // var iframe = document.querySelector('iframe');
+        // var player = new Player(iframe);
+
+        // this.clicked = true;
+        // this.slided = false;
+
+        // this.player.on('play', function () {
+        //     console.log('played the video!');
+        // });
+
+
 
     }
+
 
 
     init() {
@@ -290,14 +549,15 @@ export class ProductComponent implements OnInit {
     }
 
     goToHome() {
-        $('#myModal').on('hidden.bs.modal',  (e)=> {
+        $('#myModal').on('hidden.bs.modal', (e) => {
             this.route.navigate(['home']);
         })
     }
     goToCart() {
-        $('#myModal').on('hidden.bs.modal',  (e)=> {
+        $('#myModal').on('hidden.bs.modal', (e) => {
             this.route.navigate(['cart']);
-        })    }
+        })
+    }
 
     addToCart(navi) {
 
