@@ -1,0 +1,9 @@
+{
+  "name": "ideadroi article",
+  "appId": "5ac8496ebdf723480ecd9baf",
+  "userId": "58905f44ebabf27c134706c3",
+  "serviceApi": {
+    "host": "http://localhost:1337",
+    "port": 1337
+  }
+}
