@@ -229,7 +229,8 @@ module.exports = {
                               /**
                                *  media app details feed to DB
                                */
-                          }else if(template[0].templateCategory=="3"){
+                          }
+                          else if(template[0].templateCategory=="3"){
 
                               var searchAppInitialData = {
                                   'templateName' : templateName
@@ -458,7 +459,7 @@ module.exports = {
                               /**
                                *  media app details feed to DB
                                */
-                          }else if(template[0].templateCategory=="3"){
+                          } else if(template[0].templateCategory=="3"){
 
                               var searchAppInitialData = {
                                   'templateName' : templateName

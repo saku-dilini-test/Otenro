@@ -86,6 +86,7 @@ module.exports = {
      */
     deleteCategory : function(req,res){
 
+    console.log("deleted");
         var id = req.body.id;
         var deleteQuery = {
             id : id
@@ -96,7 +97,34 @@ module.exports = {
                sails.log.error("Article Category Delete Error");
                return res.send(err);
            }
-            res.send(result);
+
+           var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/src/assets/images/secondNavi/';
+           var filePathArticle = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/src/assets/images/thirdNavi/';
+
+                result.forEach(function(result){
+                        fs.unlink(filePath + result.imageUrl, function (err) {
+                            if (err) return console.error(err);
+                    });
+                });
+                Article.find({categoryId: id}).exec(function(err,child){
+                    if (err) return callback("Error while deleting " + err.message);
+                    if (child){
+                    child.forEach(function(product){
+                        Article.destroy({ categoryId : id}).exec(function (err, result) {
+                            if (err) return callback("Error while deleting " + err.message);
+
+                            result.forEach(function(result){
+                                    fs.unlink(filePathArticle + result.imageUrl, function (err) {
+                                        if (err) return console.error(err);
+                                });
+                            });
+                            res.send(200,{message:' Category deleted'});
+                        })
+                    })
+                    }
+
+                })
+
         });
     },
 
@@ -129,8 +157,18 @@ module.exports = {
      */
     updateCategoryImage : function(req,res){
 
-        var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/'+ req.body.imageUrl;
-        var fileDir  = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
+        var isNew = req.body.isNew;
+
+        var filePath;
+        var fileDir;
+
+        if(isNew == 'true' || isNew == true){
+            filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/src/assets/images/secondNavi/'+ req.body.imageUrl;
+            fileDir= config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/src/assets/images/secondNavi/';
+        }else{
+            filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/'+ req.body.imageUrl;
+            fileDir= config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/category/';
+        }
 
         req.file('file').upload({
             dirname: require('path').resolve(fileDir)
@@ -163,10 +201,15 @@ module.exports = {
      * @param res
      */
     publishArticle : function(req,res){
-        
-        var article = req.body;
-        var fileDir = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/article/';
 
+        var isNew = req.body.isNew;
+        var article = req.body;
+        var fileDir;
+         if(isNew == true || isNew == 'true'){
+            fileDir= config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/thirdNavi/';
+         }else{
+            fileDir= config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/article/';
+         }
         if(article.isNewArticle == 'true'){
             req.file('file').upload({
                 dirname: require('path').resolve(fileDir)

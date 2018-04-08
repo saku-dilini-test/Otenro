@@ -59,7 +59,7 @@
                     }
                 });
             },
-            publishArticle: function(file,id,categoryId,title,desc,appId,isNewArticle,isImageUpdate){
+            publishArticle: function(file,id,categoryId,title,desc,appId,isNewArticle,isImageUpdate,isNew){
                 var UploadFile = '';
                 if(isImageUpdate == true){
                 var dataURItoBlob = function(dataURI) {
@@ -84,13 +84,14 @@
                         'desc' : desc,
                         'appId' : appId,
                         'isNewArticle' : isNewArticle,
-                        'isImageUpdate' : isImageUpdate
+                        'isImageUpdate' : isImageUpdate,
+                        'isNew' : isNew
                     },
                     file: UploadFile
                 });
             },
 
-            updateCategoryImage: function (file, imageUrl, appId) {
+            updateCategoryImage: function (file, imageUrl, appId,isNew) {
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -106,7 +107,8 @@
                     url: SERVER_URL + 'edit/updateCategoryImage',
                     fields: {
                         'imageUrl': imageUrl,
-                        'appId': appId
+                        'appId': appId,
+                        'isNew': isNew
                     },
                     file: UploadFile
                 });

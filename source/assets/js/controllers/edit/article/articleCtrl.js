@@ -58,7 +58,7 @@
                 closeButton: true
             });
         });
-
+console.log(initialData);
         if(initialData == 'publishArticle'){
             $scope.isNewArticle = true;
             $scope.dummyCat =[];
@@ -109,8 +109,15 @@
             $scope.serverImg = initialData.imageUrl;
             $scope.mainImg = initialData.imageUrl;
             $scope.picFile = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+$rootScope.appId+'/img/article/'+initialData.imageUrl;
-            $scope.tmpImage[0] = SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
-            +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article/"+initialData.imageUrl;
+
+            if(initialData.isNew == 'true' || initialData.isNew == true){
+                $scope.tmpImage[0] = SERVER_URL +"templates/viewWebImages?userId="+ $auth.getPayload().id
+                +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&images=thirdNavi/"+initialData.imageUrl;
+            }else{
+                $scope.tmpImage[0] = SERVER_URL +"templates/viewImages?userId="+ $auth.getPayload().id
+                +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"&img=article/"+initialData.imageUrl;
+            }
+
             $scope.dummyCat =[];
 
             $scope.seletedCategoryId = initialData.categoryId;
@@ -237,7 +244,7 @@
                 }
 
                 articleService.publishArticle(file,article.id,$scope.seletedCategoryId,article.title, article.desc,
-                                              $rootScope.appId,$scope.isNewArticle,isImageUpdate)
+                                              $rootScope.appId,$scope.isNewArticle,isImageUpdate,$rootScope.tempNew)
                     .progress(function (evt) {
                         
                         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
