@@ -91,45 +91,45 @@ module.exports = {
         var deleteQuery = {
             id : id
         };
-ArticleCategory.find(deleteQuery).exec(function(err,main){
+            ArticleCategory.find(deleteQuery).exec(function(err,main){
 
-    if (err) res.send(err);
-        ArticleCategory.destroy(deleteQuery).exec(function(err,result) {
-           if (err){
-               sails.log.error("Article Category Delete Error");
-               return res.send(err);
-           }
+                if (err) res.send(err);
+                    ArticleCategory.destroy(deleteQuery).exec(function(err,result) {
+                       if (err){
+                           sails.log.error("Article Category Delete Error");
+                           return res.send(err);
+                       }
 
-           var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/src/assets/images/secondNavi/';
-           var filePathArticle = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/src/assets/images/thirdNavi/';
+                       var filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/src/assets/images/secondNavi/';
+                       var filePathArticle = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId+ '/src/assets/images/thirdNavi/';
 
-                result.forEach(function(result){
-                        fs.unlink(filePath + result.imageUrl, function (err) {
-                            if (err) return console.error(err);
-                    });
-                });
-                Article.find({categoryId: id}).exec(function(err,child){
-                    if (err) return callback("Error while deleting " + err.message);
-                    if (child){
-                    child.forEach(function(product){
-                        Article.destroy({ categoryId : id}).exec(function (err, result) {
-                            if (err) return callback("Error while deleting " + err.message);
-
-                            result.forEach(function(results){
-                                    fs.unlink(filePathArticle + results.imageUrl, function (err) {
+                            result.forEach(function(result){
+                                    fs.unlink(filePath + result.imageUrl, function (err) {
                                         if (err) return console.error(err);
                                 });
                             });
+                            Article.find({categoryId: id}).exec(function(err,child){
+                                if (err) return callback("Error while deleting " + err.message);
+                                if (child){
+                                child.forEach(function(product){
+                                    Article.destroy({ categoryId : id}).exec(function (err, result) {
+                                        if (err) return callback("Error while deleting " + err.message);
 
-                        })
-                    })
-                    }
+                                        result.forEach(function(results){
+                                                fs.unlink(filePathArticle + results.imageUrl, function (err) {
+                                                    if (err) return console.error(err);
+                                            });
+                                        });
 
-                })
-                res.send(200,{message:' Category deleted'});
+                                    })
+                                })
+                                }
 
-        });
-        });
+                            })
+                            res.send(200,{message:' Category deleted'});
+
+                    });
+                    });
     },
 
     /**
@@ -208,6 +208,9 @@ ArticleCategory.find(deleteQuery).exec(function(err,main){
 
         var isNew = req.body.isNew;
         var article = req.body;
+        console.log("**************");
+        console.log(article);
+        console.log("**************");
         var fileDir;
          if(isNew == true || isNew == 'true'){
             fileDir= config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/thirdNavi/';
@@ -247,6 +250,11 @@ ArticleCategory.find(deleteQuery).exec(function(err,main){
                 if (err) return res.send(500, err);
 
                 var newFileName=Date.now()+'.png';
+
+                fs.unlink(fileDir + article.oldImg, function (err) {
+                    if (err) return console.error(err);
+                });
+
                 fs.rename(uploadedFiles[0].fd, fileDir+'/'+newFileName, function (err) {
                     if (err) return res.send(err);
                 });
@@ -271,14 +279,21 @@ ArticleCategory.find(deleteQuery).exec(function(err,main){
      * @param res :
      */
     deleteArticle : function(req,res){
-
+        var isNew = req.body.isNew;
         var appId = req.body.appId;
         var imageUrl = req.body.imageUrl;
         var deleteQuery = {
              id : req.body.id
         }
 
-        var filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + appId+ '/img/article/'+ imageUrl;
+        var filePath;
+
+        if(isNew == true || isNew == 'true'){
+            filePath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/thirdNavi/' + imageUrl;;
+        }else{
+            filePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId + '/img/article/'+ imageUrl;
+        }
+
 
         Article.destroy(deleteQuery).exec(function (err) {
             if (err) return res.send(err);
