@@ -237,14 +237,13 @@ console.log(initialData);
                 return;
             }
             else {
-
                 var isImageUpdate = true;
                 if($scope.mainImg == $scope.serverImg){
                     isImageUpdate = false;
                 }
 
                 articleService.publishArticle(file,article.id,$scope.seletedCategoryId,article.title, article.desc,
-                                              $rootScope.appId,$scope.isNewArticle,isImageUpdate,$rootScope.tempNew)
+                                              $rootScope.appId,$scope.isNewArticle,isImageUpdate,$rootScope.tempNew,$scope.serverImg)
                     .progress(function (evt) {
                         
                         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
@@ -255,10 +254,19 @@ console.log(initialData);
                         });
 
                         var catId = result.categoryId;
-                        var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                       +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                        $scope.appTemplateUrl = urlPath+'' +
-                            '#/app/home/'+catId+'?'+new Date().getTime();
+                        var urlPath;
+                        if($rootScope.tempNew == true || $rootScope.tempNew == 'true'){
+                            urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                      + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
+                              $scope.appTemplateUrl = urlPath +
+                                 'src' + catId + '?' + new Date().toISOString();
+                        }else{
+                           urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                                       +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
+                           $scope.appTemplateUrl = urlPath+'' +
+                            '#/app/home/'+catId+'?'+new Date().toISOString();
+                        }
+
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
                         articleService.showPreviewArticslesDilog('previewArticles');
@@ -276,6 +284,7 @@ console.log(initialData);
 
         }
         $scope.deleteArticle = function (index,article) {
+            article.isNew = $rootScope.tempNew;
             return $mdDialog.show({
                 controllerAs: 'dialogCtrl',
                 controller: function($mdDialog){

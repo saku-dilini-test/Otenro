@@ -59,7 +59,7 @@
                     }
                 });
             },
-            publishArticle: function(file,id,categoryId,title,desc,appId,isNewArticle,isImageUpdate,isNew){
+            publishArticle: function(file,id,categoryId,title,desc,appId,isNewArticle,isImageUpdate,isNew,oldImg){
                 var UploadFile = '';
                 if(isImageUpdate == true){
                 var dataURItoBlob = function(dataURI) {
@@ -85,7 +85,8 @@
                         'appId' : appId,
                         'isNewArticle' : isNewArticle,
                         'isImageUpdate' : isImageUpdate,
-                        'isNew' : isNew
+                        'isNew' : isNew,
+                        'oldImg' : oldImg
                     },
                     file: UploadFile
                 });
