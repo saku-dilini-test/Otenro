@@ -1,13 +1,19 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("EngageCtrl", ['$scope', '$mdDialog', '$rootScope', '$auth', 'toastr',
-        'engageService', '$http', 'SERVER_URL', EngageCtrl]);
+        'engageService', '$http', 'SERVER_URL','$log','initialData', EngageCtrl]);
 
 
 
 
-    function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL,$log ) {
+    function EngageCtrl($scope, $mdDialog, $rootScope, $auth, toastr, engageService, $http, SERVER_URL,$log ,initialData) {
 
+        $scope.url = SERVER_URL;
+        $scope.pushMessage = {};
+        $scope.pushMessage.type = "A";
+        if (initialData){
+            $scope.pushMessage = initialData;
+        }
 
         // //get all app registered user details
         //
@@ -33,6 +39,156 @@
         // $scope.redirect = function(data){
         //     return engageService.showAllordersView(data);
         // }
+
+        $scope.downLoadSampleFile = function () {
+
+          alert("downLoadSampleFile" + SERVER_URL);
+            $http({
+                method: 'POST',
+                url: SERVER_URL+"edit/sendSampleFile" ,
+                data: {file:""},
+                responseType: 'arraybuffer'
+            }).success(function (data, status, headers) {
+                headers = headers();
+
+                var filename = headers['x-filename'];
+                var contentType = headers['content-type'];
+
+                var linkElement = document.createElement('a');
+                try {
+                    var blob = new Blob([data], {type: contentType});
+                    var url = window.URL.createObjectURL(blob);
+
+                    linkElement.setAttribute('href', url);
+                    linkElement.setAttribute("download", filename);
+
+                    var clickEvent = new MouseEvent("click", {
+                        "view": window,
+                        "bubbles": true,
+                        "cancelable": false
+                    });
+                    linkElement.dispatchEvent(clickEvent);
+                } catch (ex) {
+                    console.log(ex);
+                }
+            }).error(function (data) {
+                console.log(data);
+            });
+        };
+
+
+        $scope.edit =function (data) {
+
+            return engageService.showPushMessageEditDialog(data);
+
+        };
+
+        $scope.delete = function (data) {
+
+            return $mdDialog.show({
+                controllerAs: 'dialogCtrl',
+                controller: function($mdDialog){
+
+                    this.message = "Are you sure you want to delete this record ?";
+
+                    this.confirm = function click(){
+
+                        engageService.deletePushMessage(data)
+                            .success(function(data){
+                                toastr.success('Successfully Deleted ', 'Deleted', {
+                                    closeButton: true
+                                });
+                                $mdDialog.hide();
+                                return engageService.showPushMessageDialog();
+                            })
+                            .error(function(err){
+                                $mdDialog.hide();
+                                toastr.error('Error on deleting push message record', 'Warning', {
+                                    closeButton: true
+                                });
+                            })
+
+
+
+                    },
+                        this.cancel = function click(){
+                            $mdDialog.hide();
+                            return engageService.showPushMessageDialog();
+
+                        }
+                },
+                template:'<md-dialog aria-label="Edit Child Menu">'+
+                '<md-content >' +
+                '<div class="md-dialog-header">' +
+                '<h1>Deleting Push Message Record </h1>' +
+                '</div>' +
+                '<br>'+
+                '<div style="text-align:center">' +
+                '<lable>{{dialogCtrl.message}}</lable>' +
+                '</div>' +
+                '<br><br>' +
+                '<div class="md-dialog-buttons">'+
+                '<div class="inner-section">'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.cancel()">No</md-button>'+
+                '<md-button class="me-default-button" ng-click="dialogCtrl.confirm()">Yes</md-button>'+
+                '</div>'+
+                '</div>' +
+                '</md-content>' +
+                '</md-dialog>'
+            })
+
+        },
+
+         $scope.isSent  = function (data) {
+
+            if (data.status == 'sent'){
+
+                return true;
+            }else {
+
+                return false;
+            }
+
+         }
+
+
+        $scope.uploadFile = function(){
+
+            var file = $scope.myFile;
+            console.log('file is '  + file);
+            console.dir(file);
+
+            var uploadUrl = SERVER_URL+"edit/saveSchedulePushMassageFile";
+
+
+            var fd = new FormData();
+            fd.append("appId",$rootScope.appId);
+            fd.append('file', file);
+
+            if (file){
+                $http.post(uploadUrl, fd, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                }).success(function(data){
+                    alert("success " + JSON.stringify(data));
+                    return engageService.showPushMessageDialog();
+
+                }).error(function(error){
+                    alert("success " + JSON.stringify(data));
+                    toastr.error(error, 'Warning', {
+                        closeButton: true
+                    });
+
+                });
+
+            }else {
+
+                toastr.error('Please add a file to upload', 'Warning', {
+                    closeButton: true
+                });
+            }
+        };
+
 
         $scope.sendPushMessage=function(){
             return engageService.showPushMessageSendDialog();
@@ -79,8 +235,11 @@
         };
 
         $scope.save = function(message){
+
             message.appId = $rootScope.appId;
             message.userId = $auth.getPayload().id;
+
+
                 engageService.saveSchedulePushMassage(message)
                   .success(function(data){
                     toastr.success('Successfully Saved ', 'Saved', {

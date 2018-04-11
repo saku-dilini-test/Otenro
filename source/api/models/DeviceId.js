@@ -9,6 +9,9 @@ module.exports = {
             },
             appId:{
                 type: 'string'
+            },
+            lastAccessTime:{
+                type:'string'
             }
         }
 }

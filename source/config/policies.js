@@ -115,6 +115,10 @@ module.exports.policies = {
         '*': ['jwtAuth'],
         getOrderData:true
 
+    },
+    'edit/engage/EngageController':{
+        '*': ['jwtAuth'],
+        sendSampleFile:true
     }
 
 	// Here's an example of mapping some policies to run before
