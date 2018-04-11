@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import * as _ from 'lodash';
-import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
 
 @Component({
@@ -38,7 +37,7 @@ export class ProductComponent implements OnInit {
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
-    constructor(private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
+    constructor(private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
 
         this.Data = this.dataService.data;
         this.init();

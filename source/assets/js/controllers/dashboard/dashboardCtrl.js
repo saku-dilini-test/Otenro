@@ -49,13 +49,13 @@
             if(item.isNew == 'true' || item.isNew == true){
 
                 urlPath  =  SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                    + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                    + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
                 $state.go('user.editApp',{tempName:item.templateName,isNew:item.isNew ,appId: item.id, p:encParam});
 
             }else{
 
                 urlPath  =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                    +"&appId="+item.id+"&"+new Date().getTime()+"/";
+                    +"&appId="+item.id+"&"+new Date().toISOString()+"/";
                 $state.go('user.editApp',{tempName:item.templateName,isNew:item.isNew ,appId: item.id, p:encParam});
 
             }

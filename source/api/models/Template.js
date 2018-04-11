@@ -15,6 +15,9 @@ module.exports = {
         templateViewName: {
             type: 'string'
         },
+        isMobile:{
+          type: 'boolean'
+        },
         templateType: {
             type: 'string'
         },
