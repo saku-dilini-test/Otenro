@@ -344,13 +344,20 @@
             }
             var requestData = {
                 appId: appId,
-                isApplyBGImage : isApplyUpdate
+                isApplyBGImage : isApplyUpdate,
+                tempNew:$rootScope.tempNew
             };
             stylesService.applyBackgroundImage(requestData)
                 .success(function (res) {
-                    var tempUrl = mySharedService.url;
-
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date(),$auth.getPayload().id,$rootScope.appId);
+                    var urlPath;
+                    if($rootScope.tempNew == 'true' || $rootScope.tempNew == true) {
+                        urlPath =  SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
+                            +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
+                    }else{
+                        urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                            +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
+                    }
+                    mySharedService.prepForBroadcast(urlPath,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().toISOString(),$auth.getPayload().id,$rootScope.appId);
                     toastr.success('Background image changed ', 'Message', {
                         closeButton: true
                     });
@@ -364,12 +371,19 @@
         $scope.addBackgroundImage = function(backgroundImg) {
             $scope.backgroundImgData = {
                 appId: appId,
-                backgroundImg: backgroundImg
+                backgroundImg: backgroundImg,
+                tempNew:$rootScope.tempNew
             };
             stylesService.addBackgroundImage($scope.backgroundImgData)
                 .success(function (res) {
-                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                   +"&appId="+$rootScope.appId+"&"+new Date()+"/";
+                    var urlPath;
+                    if($rootScope.tempNew == 'true' || $rootScope.tempNew == true) {
+                        urlPath =  SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
+                            +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
+                    }else{
+                        urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                            +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
+                    }
                     $scope.appTemplateUrl = urlPath;
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     $mdDialog.hide();
@@ -524,7 +538,6 @@
 
                         }
                         $scope.appTemplateUrl = urlPath;
-                        console.log($scope.appTemplateUrl)
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                         $scope.picFile = null;
                         $scope.myImage = null;

@@ -40,7 +40,7 @@ module.exports = {
     },
     /**
      * Return Application Store Setting Collection for Given App Id
-     * It has About Us 
+     * It has About Us
      * @param req
      * @param res
      */
@@ -74,7 +74,7 @@ module.exports = {
             res.json(app);
         });
     },
-    
+
     getTermsAndConditions : function(req,res){
 
         var appId = req.param('appId');
@@ -244,7 +244,7 @@ module.exports = {
             appId: appId,
             categoryId : categoryId
         };
-        Article.find({ select: ['appId','title','imageUrl','categoryId']}).where(searchApp).exec(function (err, result) {
+        Article.find({ select: ['appId','title','imageUrl','categoryId','desc']}).where(searchApp).exec(function (err, result) {
             if (err) return done(err);
             //sails.log.info(result);
             res.json(result);
@@ -490,7 +490,7 @@ module.exports = {
             				}
             			}
             			else {
-            			
+
                             TansactionLogger.info("appId " +req.body.appId+ ","+ "error " + "Failed Transaction." );
             				if(response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null){
                                 TansactionLogger.info("appId " +req.body.appId+ ","+ "error " + response.getTransactionResponse().getErrors() );

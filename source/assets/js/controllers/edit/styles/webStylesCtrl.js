@@ -43,8 +43,8 @@
             }, 650);
         };
 
-        $scope.headerImg = ME_APP_SERVER +'temp/' +$auth.getPayload().id+'/templates/'+appId+'/img/header.jpg?time='+new Date();
-        $scope.backgroundImg = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+appId+'/img/background.jpg?time='+new Date();
+        $scope.headerImg = ME_APP_SERVER +'temp/' +$auth.getPayload().id+'/templates/'+appId+'/img/header.jpg?time='+new Date().toISOString();
+        $scope.backgroundImg = ME_APP_SERVER+'temp/' +$auth.getPayload().id+'/templates/'+appId+'/img/background.jpg?time='+new Date().toISOString();
         $scope.fonts = {
             font : 'Arial',
             fontSize : 11
@@ -144,7 +144,7 @@
 
 
                     mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                        + "&appId=" + $rootScope.appId + "&" + new Date());
+                        + "&appId=" + $rootScope.appId + "&" + new Date().toISOString());
 
 
                 }).error(function(err) {
@@ -186,7 +186,7 @@
 
                     // var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                        + "&appId=" + $rootScope.appId + "&" + new Date());
+                        + "&appId=" + $rootScope.appId + "&" + new Date().toISOString());
 
                 }).error(function(err) {
                     toastr.error( type ,'Update Failed ', {
@@ -224,7 +224,7 @@
 
                     // var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                        + "&appId=" + $rootScope.appId + "&" + new Date());
+                        + "&appId=" + $rootScope.appId + "&" + new Date().toISOString());
 
                 }).error(function(err) {
                     toastr.error( type , 'Update Failed ', {
@@ -263,7 +263,7 @@
 
                     // var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                        + "&appId=" + $rootScope.appId + "&" + new Date());
+                        + "&appId=" + $rootScope.appId + "&" + new Date().toISOString());
 
                 }).error(function(err) {
                     toastr.error( type , 'Update failed ', {
@@ -287,7 +287,7 @@
 
                     // var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                        + "&appId=" + $rootScope.appId + "&" + new Date());
+                        + "&appId=" + $rootScope.appId + "&" + new Date().toISOString());
 
                 }).error(function(err) {
                     toastr.error('Unable to update Button Border Width', {
@@ -311,7 +311,7 @@
 
                     // var tempUrl = mySharedService.url;
                     mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                        + "&appId=" + $rootScope.appId + "&" + new Date());
+                        + "&appId=" + $rootScope.appId + "&" + new Date().toISOString());
 
                 }).error(function(err) {
                     toastr.error('Unable to update Button Border Radius', {
@@ -349,15 +349,17 @@
             }
             var requestData = {
                 appId: appId,
-                isApplyBGImage : isApplyUpdate
+                isApplyBGImage : isApplyUpdate,
+                tempNew:$rootScope.tempNew
             };
             webStylesService.applyBackgroundImage(requestData)
                 .success(function (res) {
-                    var tempUrl = mySharedService.url;
-                    console.log("tempUrl "  + tempUrl);
-                    console.log("$scope.appUpdateLocation.loginUrl "  + $scope.appUpdateLocation.loginUrl);
+                    console.log(res)
+                    var tempUrl = SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
+                        +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
 
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date(),$auth.getPayload().id,$rootScope.appId);
+                    $scope.appTemplateUrl = urlPath;
+                    mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     toastr.success('Background image changed ', 'Message', {
                         closeButton: true
                     });
@@ -371,12 +373,13 @@
         $scope.addBackgroundImage = function(backgroundImg) {
             $scope.backgroundImgData = {
                 appId: appId,
-                backgroundImg: backgroundImg
+                backgroundImg: backgroundImg,
+                tempNew:$rootScope.tempNew
             };
             webStylesService.addBackgroundImage($scope.backgroundImgData)
                 .success(function (res) {
-                    var urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                   +"&appId="+$rootScope.appId+"&"+new Date()+"/";
+                    var urlPath =  SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
+                        +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
                     $scope.appTemplateUrl = urlPath;
                     mySharedService.prepForBroadcast($scope.appTemplateUrl);
                     $mdDialog.hide();
@@ -456,7 +459,7 @@
 
                         // var tempUrl = mySharedService.url;
                         mySharedService.prepForBroadcast(SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                            + "&appId=" + $rootScope.appId + "&" + new Date());
+                            + "&appId=" + $rootScope.appId + "&" + new Date().toISOString());
 
                     }).error(function(err) {
                         toastr.error( type , 'Update failed ', {
@@ -476,7 +479,7 @@
                     toastr.success({title: "Fonts Successfully Updated"});
 
                     var tempUrl = mySharedService.url;
-                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date());
+                    mySharedService.prepForBroadcast(tempUrl,$scope.appUpdateLocation.loginUrl,'#updateCss='+new Date().toISOString());
 
                 })
         };

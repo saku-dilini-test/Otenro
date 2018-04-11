@@ -124,6 +124,12 @@
                     'telPhone': basicInfo.telPhone,
                     'email': webInfo.email,
                     'webSite': webInfo.webSite,
+                    'twitter': webInfo.twitter,
+                    'facebook': webInfo.facebook,
+                    'instagram': webInfo.instagram,
+                    'linkedin': webInfo.linkedin,
+                    'pinterest': webInfo.pinterest,
+                    'showMap': webInfo.showMap,
                     'coords': $scope.map.markers[0].coords
                 };
                 contactUsService.saveBasicInfo(basicInfoResponse)

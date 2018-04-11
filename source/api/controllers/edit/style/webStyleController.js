@@ -319,7 +319,7 @@ module.exports = {
     applyBackgroundImage : function(req,res){
         var userId = req.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/templates/' + appId + '/css/main.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
         var isApplyBGImage = req.body.isApplyBGImage;
         var findQuery = { id : appId };
 
@@ -334,7 +334,7 @@ module.exports = {
                     updateFile(mainCssFile, [{
                         rule: 'made-easy-background-image',
                         target: "background",
-                        replacer: "url(../img/background.jpg) center"
+                        replacer: "url(assets/images/background.png)"
                     }], function (err) {
                         sails.log.info((err));
                     });
@@ -391,14 +391,14 @@ module.exports = {
         var appId = req.body.appId;
         var backImg = req.body.backgroundImg;
         var data = backImg;
-        var backgroundExist = config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'background.jpg';
+        var backgroundExist = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'background.png';
         var backgroundDimensions = sizeOf(backgroundExist);
 
 
         var data = backImg.replace(/^data:image\/\w+;base64,/, "");
         var buf = new Buffer(data, 'base64');
         // product images copy to app file server
-        fs.writeFile(config.ME_SERVER + userId + '/templates/' + appId + '/img/'+ 'background.jpg', buf, function(err) {
+        fs.writeFile(config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/'+ 'background.png', buf, function(err) {
             if(err) {
                 if (err) res.send(err);
             }

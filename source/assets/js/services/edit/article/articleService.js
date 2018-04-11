@@ -59,38 +59,43 @@
                     }
                 });
             },
-            publishArticle: function(file,id,categoryId,title,desc,appId,isNewArticle,isImageUpdate){
-                var UploadFile = '';
-                if(isImageUpdate == true){
-                var dataURItoBlob = function(dataURI) {
-                    var binary = atob(dataURI.split(',')[1]);
-                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-                    var array = [];
-                    for(var i = 0; i < binary.length; i++) {
-                        array.push(binary.charCodeAt(i));
-                    }
-                    return new Blob([new Uint8Array(array)], {type: mimeString});
-                };
-                var blob = dataURItoBlob(file);
-                UploadFile = new File([blob], 'imageFileName.png');
-                }
+            publishArticle: function(appParams){
 
-                return Upload.upload({
-                    url: SERVER_URL + 'edit/publishArticle',
-                    fields: {
-                        'id' : id,
-                        'categoryId' : categoryId,
-                        'title' : title,
-                        'desc' : desc,
-                        'appId' : appId,
-                        'isNewArticle' : isNewArticle,
-                        'isImageUpdate' : isImageUpdate
-                    },
-                    file: UploadFile
-                });
+                return $http.post(SERVER_URL + 'edit/publishArticle', appParams);
+
+//                var UploadFile = '';
+//                if(isImageUpdate == true){
+//                var dataURItoBlob = function(dataURI) {
+//                    var binary = atob(dataURI.split(',')[1]);
+//                    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+//                    var array = [];
+//                    for(var i = 0; i < binary.length; i++) {
+//                        array.push(binary.charCodeAt(i));
+//                    }
+//                    return new Blob([new Uint8Array(array)], {type: mimeString});
+//                };
+//                var blob = dataURItoBlob(file);
+//                UploadFile = new File([blob], 'imageFileName.png');
+//                }
+//
+//                return Upload.upload({
+//                    url: SERVER_URL + 'edit/publishArticle',
+//                    fields: {
+//                        'id' : id,
+//                        'categoryId' : categoryId,
+//                        'title' : title,
+//                        'desc' : desc,
+//                        'appId' : appId,
+//                        'isNewArticle' : isNewArticle,
+//                        'isImageUpdate' : isImageUpdate,
+//                        'isNew' : isNew,
+//                        'oldImg' : oldImg
+//                    },
+//                    file: UploadFile
+//                });
             },
 
-            updateCategoryImage: function (file, imageUrl, appId) {
+            updateCategoryImage: function (file, imageUrl, appId,isNew) {
                 var dataURItoBlob = function(dataURI) {
                     var binary = atob(dataURI.split(',')[1]);
                     var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -106,7 +111,8 @@
                     url: SERVER_URL + 'edit/updateCategoryImage',
                     fields: {
                         'imageUrl': imageUrl,
-                        'appId': appId
+                        'appId': appId,
+                        'isNew': isNew
                     },
                     file: UploadFile
                 });

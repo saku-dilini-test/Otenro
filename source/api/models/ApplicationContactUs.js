@@ -38,6 +38,9 @@ module.exports = {
         pinterest: {
             type: 'string'
         },
+        showMap: {
+            type: 'boolean'
+        },
         coords : {
             type : 'json'
         },

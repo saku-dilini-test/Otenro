@@ -70,9 +70,10 @@
                      $scope.buttonName = "Browse Image";
                 };
 
-
+        console.log($scope.initialData);
         // Main Menu view
         if($scope.initialData == null ) {
+        $scope.heading = "Add Category";
             // check ID of templateCategory and load related collection to navigation
             dashboardService.getApplicationData($rootScope.appId)
                 .success(function (data) {
@@ -103,6 +104,7 @@
                 });
         }   // Menu-Navigation or Menu-Category (Article Category) -> Add / Update
         else if($scope.initialData){
+         $scope.heading = "Edit Category";
             // Config
             $scope.templateCategory = $scope.initialData.templateCategory;
             // Add new Menu Navigation
@@ -119,6 +121,9 @@
                 }
                 if($scope.templateCategory == tempCatMedia){
                     imgLocation = "category";
+                }
+                if(($scope.templateCategory == tempCatMedia && $scope.initialData.menu.isNew == 'true') || ($scope.templateCategory == tempCatMedia && $scope.initialData.menu.isNew == true)){
+                    imgLocation = "secondNavi";
                 }
                 $scope.menu = $scope.initialData.menu;
                 $scope.serverImage = $scope.menu.imageUrl;
@@ -292,7 +297,7 @@
             if(!(catogoryIds && catogoryIds.length>0)){
                 return;
             }
-
+            console.log(catogoryIds);
             return $mdDialog.show({
                 controllerAs: 'dialogCtrl',
                 controller: function($mdDialog){
@@ -315,6 +320,34 @@
                                 }
                                 mySharedService.prepForBroadcast($scope.appTemplateUrl);
                                 return mainMenuService.showMainMenuDialog();
+                            }).error(function(err) {
+                                $mdDialog.hide();
+                            });
+                        }
+                         if($scope.templateCategory == tempCatMedia){
+
+                            articleService.deleteCategory({'id':catogoryIds,'appId':$rootScope.appId}).success(function(data) {
+
+                                var urlPath;
+
+                                if($rootScope.tempNew == true || $rootScope.tempNew == 'true'){
+
+                                      urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                                                                     + "&appId=" + $rootScope.appId + "&" + new Date().toISOString() + "/";
+                                      $scope.appTemplateUrl = urlPath +
+                                         'src' + data.id + '?' + new Date().toISOString();
+
+                                }else{
+
+                                     urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
+                                                   +"&appId="+$rootScope.appId+"&"+new Date().toISOString()+"/";
+                                     $scope.appTemplateUrl = urlPath+'' +'#/app/update?'+new Date().toISOString();
+                                }
+
+
+                                mySharedService.prepForBroadcast($scope.appTemplateUrl);
+                                return mainMenuService.showMainMenuDialog();
+
                             }).error(function(err) {
                                 $mdDialog.hide();
                             });
@@ -574,7 +607,7 @@
             }
             if($scope.mainImg != $scope.serverImage && !($scope.initialData.menu == 'addNewMenuCategory')){
                 $log.debug('imageUpdate true');
-                articleService.updateCategoryImage(file,menu.imageUrl,$rootScope.appId).progress(function(evt) {
+                articleService.updateCategoryImage(file,menu.imageUrl,$rootScope.appId,$rootScope.tempNew).progress(function(evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     $log.debug('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function(data, status, headers, config) {
