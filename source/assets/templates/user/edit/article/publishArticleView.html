@@ -11,99 +11,199 @@
             <h1>publish an article</h1>
         </div>
         <form name="articleForm" novalidate>
-        <div class="md-dialog-main clearfix">
+            <div class="md-dialog-main clearfix">
 
-            <fieldset>
-                <label>Article Category</label>
-                    <select class="input-shadow-border" ng-model="dummyCat.id"
-                            ng-options="v.name for v in dummyCat"
-                            ng-change="changeArticleCat(dummyCat.id)" required>
+                <fieldset>
+                    <label>Article Category</label>
+                    <select class="input-shadow-border" ng-model="dummyCat.id" ng-options="v.name for v in dummyCat" ng-change="changeArticleCat(dummyCat.id)"
+                            required>
                     </select>
-            </fieldset>
-            <fieldset>
-                <label>Title</label>
-                <input class="input-shadow-border" type="text" name="title" ng-pattern="/^[a-zA-Z0-9_ ]*$/"
-                       ng-model="article.title" max-length="maxArticleTitle" required />
-                <br />
-                <span ng-show="articleForm.title.$error.pattern" class="error">No symbols</span>
-                <div ng-hide="article.title.length > maxArticleTitle">
-                    <span class="information">Characters left: {{maxArticleTitle - article.title.length}}</span>
-                </div>
-                <div  ng-show="article.title.length > maxArticleTitle">
-                    <span class="information">Characters left: {{maxArticleTitle - article.title.length}} </span>
-                </div>
-            </fieldset>
-            <span ng-show="articleForm.title.$error.maxlength" class="error">Too lengthy</span></td>
-            <fieldset>
-               <!-- <div class="md-dialog-header">
+                </fieldset>
+                <fieldset>
+                    <label>Title</label>
+                    <input class="input-shadow-border" type="text" name="title" ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="article.title" max-length="maxArticleTitle"
+                           required />
+                    <br />
+                    <span ng-show="articleForm.title.$error.pattern" class="error">No symbols</span>
+                    <div ng-hide="article.title.length > maxArticleTitle">
+                        <span class="information">Characters left: {{maxArticleTitle - article.title.length}}</span>
+                    </div>
+                    <div ng-show="article.title.length > maxArticleTitle">
+                        <span class="information">Characters left: {{maxArticleTitle - article.title.length}} </span>
+                    </div>
+                </fieldset>
+                <span ng-show="articleForm.title.$error.maxlength" class="error">Too lengthy</span>
+                </td>
+                <fieldset>
+                    <!-- <div class="md-dialog-header">
                     <h1>Upload Image</h1>
                 </div>-->
 
-                <!--<div class="md-dialog-main">-->
-                    <div class="file-upload-wrapper clearfix">
-                        <div class="cropArea">
-                            <img-crop image="myImage" area-type="rectangle" aspect-ratio="thirdNaviAspectRatio" result-image="picFile" result-image-size="iSizeThird">
-                            </img-crop>
-                        </div>
-
-                        <div class="inputField btn-material img-up">
-                            <span >{{buttonName}}</span>
-                            <div class="img-up1" ng-if="imageSelected">
-                                <input type="file" value="file" type="file" ng-click = "cropImage(); change()" id="fileInput" >
-                            </div>
-                            <div  ng-if="!imageSelected" class="img-up1" ng-disabled="picFile == null" ng-click="addImage(picFile)"></div>
-
-                        </div>
+                    <!--<div class="md-dialog-main">-->
+                    <div class="md-dialog-header">
+                        <h1>Upload Image</h1>
                     </div>
+                    <div class="md-dialog-main">
+                        <div class="file-upload-wrapper2 clearfix">
+                            <div class="cropArea ">
 
-                    <div class="uploaded-section image-upload clearfix" style="width:35%">
-                        <div class="uploaded-new-image">
-                            <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150"
-                                 height="150" style="display:none" />
-                            <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
+                                <ui-cropper image="myImage" area-type="rectangle" aspect-ratio="thirdNaviAspectRatio" result-image="picFile" result-image-size="iSizeThird"
+                                            result-image-format="image/jpeg" result-image-quality="0.5">
+                                </ui-cropper>
 
+                            </div>
+
+                            <div class="inputField btn-material img-up">
+                                <span>{{buttonName}}</span>
+                                <div class="img-up1" ng-if="!picFile">
+                                    <input type="file" value="" ng-click="cropImage();" id="fileInput" class="file" size="100">
+
+                                </div>
+                                <div ng-if="picFile" class="img-up1" ng-click="addImage(picFile)"></div>
+
+                            </div>
+
+
+                            <!--<div ng-if="picFile" class="inputField btn-material img-up">-->
+                            <!--<span> Crop </span>-->
+                            <!--<div   class="img-up1 " ng-click="addImage(picFile)"></div>-->
+                            <!--</div>-->
                         </div>
-                        <div class="uploaded-old-images">
-                            <p>Uploaded Product Images</p>
-                            <div class="old-images clearfix">
-                                <div class="old-image">
-                                    <input type="button" ng-click="deleteImg(0)" value='delete'
-                                           class="image-delete-button"/>
-                                    <img ng-click="setImage()" ng-if="tmpImage[0] == null"
-                                         src="../../../images/small-placeholder.png" width="80" height="80"/>
-                                    <img ng-click="setImage(0)" ng-if="tmpImage[0] !== null" ngf-src="tmpImage[0]"
-                                         width="80" height="80" required/>
+
+
+
+
+
+
+                        <div class="uploaded-section image-upload clearfix">
+                            <div class="uploaded-new-image2">
+                                <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150" height="150" style="display:none"
+                                />
+                                <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
+                            </div>
+                            <div class="uploaded-old-images">
+                                <p>Uploaded Product Images</p>
+                                <div class="old-images clearfix">
+                                    <table>
+
+                                        <tr>
+                                            <td>
+                                                <div class="old-image">
+                                                    <input type="button" ng-click="deleteImg(0)" value='delete' class="image-delete-button" />
+                                                    <img ng-click="setImage()" ng-if="tmpImage[0].img == null" src="../../../images/small-placeholder.png" width="80" height="80"
+                                                    />
+                                                    <img id="1" ng-click="defImg(0)" ng-if="tmpImage[0].img !== null" ngf-src="tmpImage[0].img" width="80" height="80" />
+                                                </div>
+                                                <md-checkbox ng-model="tmpImage[0].url" aria-label="Checkbox 1">
+                                                    Add Youtube Video
+                                                </md-checkbox>
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[0].url" class="input-shadow-border" type="text" name="videoUrl1"
+                                                       ng-model="tmpImage[0].videoUrl" width="10px" required />
+                                            </td>
+
+                                            <td>
+                                                <div class="old-image">
+                                                    <input type="button" ng-click="deleteImg(1)" value='delete' class="image-delete-button" />
+                                                    <img ng-click="setImage()" ng-if="tmpImage[1].img == null" src="../../../images/small-placeholder.png" width="80" height="80"
+                                                    />
+                                                    <img id="2" ng-click="defImg(1)" ng-if="tmpImage[1].img !== null" ngf-src="tmpImage[1].img" width="80" height="80" />
+                                                </div>
+                                                <md-checkbox ng-model="tmpImage[1].url" aria-label="Checkbox 1">
+                                                    Add Youtube Video
+                                                </md-checkbox>
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[1].url" class="input-shadow-border" type="text" name="videoUrl2"
+                                                      ng-model="tmpImage[1].videoUrl" width="10px" required />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <div>
+                                                <div class="old-image">
+                                                    <input type="button" ng-click="deleteImg(2)" value='delete' class="image-delete-button" />
+                                                    <img ng-click="setImage()" ng-if="tmpImage[2].img == null" src="../../../images/small-placeholder.png" width="80" height="80"
+                                                    />
+                                                    <img id="3" ng-click="defImg(2)" ng-if="tmpImage[2].img !== null" ngf-src="tmpImage[2].img" width="80" height="80" />
+                                                </div>
+                                                <md-checkbox ng-model="tmpImage[2].url" aria-label="Checkbox 1">
+                                                    Add Youtube Video
+                                                </md-checkbox>
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[2].url" class="input-shadow-border" type="text" name="videoUrl3"
+                                                       ng-model="tmpImage[2].videoUrl" width="10px" required />
+                                            </div>
+
+                                            <td>
+                                                <div class="old-image">
+                                                    <input type="button" ng-click="deleteImg(3)" value='delete' class="image-delete-button" />
+                                                    <img ng-click="setImage()" ng-if="tmpImage[3].img == null" src="../../../images/small-placeholder.png" width="80" height="80"
+                                                    />
+                                                    <img id="4" ng-click="defImg(3)" ng-if="tmpImage[3].img !== null" ngf-src="tmpImage[3].img" width="80" height="80" />
+                                                </div>
+                                                <md-checkbox ng-model="tmpImage[3].url" aria-label="Checkbox 1">
+                                                    Add Youtube Video
+                                                </md-checkbox>
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[3].url" class="input-shadow-border" type="text" name="videoUrl4"
+                                                       ng-model="tmpImage[3].videoUrl" width="10px" required />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="old-image">
+                                                    <input type="button" ng-click="deleteImg(4)" value='delete' class="image-delete-button" />
+                                                    <img ng-click="setImage()" ng-if="tmpImage[4].img == null" src="../../../images/small-placeholder.png" width="80" height="80"
+                                                    />
+                                                    <img id="5" ng-click="defImg(4)" ng-if="tmpImage[4].img !== null" ngf-src="tmpImage[4].img" width="80" height="80" />
+                                                </div>
+                                                <md-checkbox ng-model="tmpImage[4].url" aria-label="Checkbox 1">
+                                                    Add Youtube Video
+                                                </md-checkbox>
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[4].url" class="input-shadow-border" type="text" name="videoUrl5"
+                                                       ng-model="tmpImage[4].videoUrl" width="10px" required />
+                                            </td>
+
+                                            <td>
+                                                <div class="old-image">
+                                                    <input type="button" ng-click="deleteImg(5)" value='delete' class="image-delete-button" />
+                                                    <img ng-click="setImage()" ng-if="tmpImage[5].img == null" src="../../../images/small-placeholder.png" width="80" height="80"
+                                                    />
+                                                    <img id="6" ng-click="defImg(5)" ng-if="tmpImage[5].img !== null" ngf-src="tmpImage[5].img" width="80" height="80" />
+                                                </div>
+                                                <md-checkbox ng-model="tmpImage[5].url" aria-label="Checkbox 1">
+                                                    Add Youtube Video
+                                                </md-checkbox>
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[5].url" class="input-shadow-border" type="text" name="videoUrl6"
+                                                       ng-model="tmpImage[5].videoUrl" width="10px" required />
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-               <!-- </div>-->
-            </fieldset>
+                    <!-- </div>-->
+                </fieldset>
 
-            <fieldset style="clear:both">
-                <label>Description</label>
-                <div class="custom-trix">
-                    <!--<trix-editor class="textEditor input-shadow-border"-->
-                                 <!--name="editorText"-->
-                                 <!--ng-maxlength="1000"-->
-                                 <!--angular-trix ng-model="article.desc"-->
-                                 <!--required></trix-editor>-->
-                    <text-angular name="editorText"
-                                  ng-maxlength="1000"
-                                  ng-model="article.desc" required></text-angular>
+                <fieldset style="clear:both">
+                    <label>Description</label>
+                    <div class="custom-trix">
+                        <!--<trix-editor class="textEditor input-shadow-border"-->
+                        <!--name="editorText"-->
+                        <!--ng-maxlength="1000"-->
+                        <!--angular-trix ng-model="article.desc"-->
+                        <!--required></trix-editor>-->
+                        <text-angular name="editorText" ng-maxlength="1000" ng-model="article.desc" required></text-angular>
 
-                </div>
+                    </div>
 
-            </fieldset>
-            <fieldset style="margin-bottom:0px;">
-            <span ng-show="articleForm.editorText.$error.maxlength">Too lengthy</span></td>
-            </fieldset>
-        </div>
+                </fieldset>
+                <fieldset style="margin-bottom:0px;">
+                    <span ng-show="articleForm.editorText.$error.maxlength">Too lengthy</span>
+                    </td>
+                </fieldset>
+            </div>
         </form>
         <div class="md-dialog-buttons">
             <div class="inner-section">
                 <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
-                <md-button class="me-default-button" ng-disabled="articleForm.$invalid" ng-click="publishArticle(mainImg,article)">Publish</md-button>
+                <md-button class="me-default-button" ng-disabled="!dummyCat.id || !article.title || !tmpImage[0] || !article.desc" ng-click="publishArticle(mainImg,article)">Publish</md-button>
             </div>
         </div>
     </md-dialog-content>
