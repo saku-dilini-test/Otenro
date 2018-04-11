@@ -19,6 +19,12 @@ schema: true,
                 date:{
                     type: 'string'
                 },
+                type:{
+                    type: 'string'
+                },
+                id:{
+                  type:'ObjectId'
+                }
 
         }
 }

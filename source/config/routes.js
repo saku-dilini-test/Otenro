@@ -275,6 +275,9 @@ module.exports.routes = {
     'GET /edit/getAppUserData': 'edit/engage/EngageController.getAppUserData',
     'GET /edit/getUserOrders': 'edit/engage/EngageController.getUserOrders',
     'POST /edit/saveSchedulePushMassage' : 'edit/engage/EngageController.saveSchedulePushMassage',
+    'POST /edit/saveSchedulePushMassageFile' : 'edit/engage/EngageController.saveSchedulePushMassageFile',
+    'POST /edit/sendSampleFile' : 'edit/engage/EngageController.sendSampleFile',
+    'POST /edit/deletePushMessage' : 'edit/engage/EngageController.deletePushMessage',
 
 
     /**

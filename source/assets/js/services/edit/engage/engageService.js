@@ -12,7 +12,10 @@
                 return $mdDialog.show({
                     controller: 'EngageCtrl',
                     templateUrl: 'user/edit/engage/pushMessageView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals: {
+                        initialData: null
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
@@ -20,10 +23,30 @@
                 });
             },
             showPushMessageSendDialog: function() {
+
                 return $mdDialog.show({
                     controller: 'EngageCtrl',
                     templateUrl: 'user/edit/engage/pushMessageSendView.html',
-                    clickOutsideToClose: true
+                    clickOutsideToClose: true,
+                    locals: {
+                        initialData: null
+                    }
+
+                }).then(function(answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
+            showPushMessageEditDialog: function(data) {
+
+                return $mdDialog.show({
+                    controller: 'EngageCtrl',
+                    templateUrl: 'user/edit/engage/pushMessageSendView.html',
+                    clickOutsideToClose: true,
+                    locals: {
+                        initialData: data
+                    }
                 }).then(function(answer) {
                     //$scope.status = 'You said the information was "' + answer + '".';
                 }, function() {
@@ -100,6 +123,9 @@
             },
             saveSchedulePushMassage :function (data) {
                 return $http.post(SERVER_URL+ 'edit/saveSchedulePushMassage',data);
+            },
+            deletePushMessage: function(data){
+                return $http.post(SERVER_URL+ 'edit/deletePushMessage',data);
             }
         };
     }

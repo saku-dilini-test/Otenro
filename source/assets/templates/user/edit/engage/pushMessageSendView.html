@@ -10,7 +10,16 @@
         <div class="md-dialog-header">
             <h1>push message</h1>
         </div>
+
         <div class="md-dialog-main">
+            <fieldset>
+                <md-radio-group ng-model='pushMessage.type' layout="row">
+                    <md-radio-button value="A">All Users</md-radio-button>
+                    <md-radio-button value="I">Inactive Users </md-radio-button>
+                   <!-- (Who have not used the app for more than 2 days)-->
+                </md-radio-group>
+            </fieldset>
+
             <fieldset>
                 <label>Message</label>
                 <textarea class="input-shadow-border" ng-model="pushMessage.message" rows="3"></textarea>
