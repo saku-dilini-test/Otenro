@@ -23,6 +23,13 @@ a.feature01{
 	display:block;
 	text-align:center;
 }
+.md-dialog-main .file-upload-wrapper-article{
+    margin-bottom: 15px;
+    width: 40%;
+    margin: auto;
+    display: block;
+    text-align: center
+}
 
 .inputField {
     position: relative;
@@ -571,6 +578,10 @@ overriding pull-left changes other styles too therefor commented
     padding: 0 21px;
     margin-top: unset !important;
 }
+.article-youtube{
+    width: 72% !important;
+}
+
 .disable-all {
     cursor: not-allowed;
 }

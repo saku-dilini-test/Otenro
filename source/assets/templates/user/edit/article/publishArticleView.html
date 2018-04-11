@@ -1,4 +1,4 @@
-<md-dialog aria-label="publish-article">
+<md-dialog aria-label="publish-article" style="width:850px;">
 
     <!--Google Analytics-->
     <script>
@@ -35,16 +35,8 @@
                 <span ng-show="articleForm.title.$error.maxlength" class="error">Too lengthy</span>
                 </td>
                 <fieldset>
-                    <!-- <div class="md-dialog-header">
-                    <h1>Upload Image</h1>
-                </div>-->
 
-                    <!--<div class="md-dialog-main">-->
-                    <div class="md-dialog-header">
-                        <h1>Upload Image</h1>
-                    </div>
-                    <div class="md-dialog-main">
-                        <div class="file-upload-wrapper2 clearfix">
+                        <div class="file-upload-wrapper-article clearfix">
                             <div class="cropArea ">
 
                                 <ui-cropper image="myImage" area-type="rectangle" aspect-ratio="thirdNaviAspectRatio" result-image="picFile" result-image-size="iSizeThird"
@@ -62,30 +54,13 @@
                                 <div ng-if="picFile" class="img-up1" ng-click="addImage(picFile)"></div>
 
                             </div>
-
-
-                            <!--<div ng-if="picFile" class="inputField btn-material img-up">-->
-                            <!--<span> Crop </span>-->
-                            <!--<div   class="img-up1 " ng-click="addImage(picFile)"></div>-->
-                            <!--</div>-->
                         </div>
 
-
-
-
-
-
-                        <div class="uploaded-section image-upload clearfix">
-                            <div class="uploaded-new-image2">
-                                <img ng-if="picFile == null" ng-src="../../../images/medium-placeholder.png" width="150" height="150" style="display:none"
-                                />
-                                <img ng-if="picFile != null" ngf-src="picFile" width="150" height="150" style="display:none" />
-                            </div>
+                        <div class="uploaded-section clearfix">
                             <div class="uploaded-old-images">
-                                <p>Uploaded Product Images</p>
+                                <p>Uploaded Product Images/ Videos</p>
                                 <div class="old-images clearfix">
                                     <table>
-
                                         <tr>
                                             <td>
                                                 <div class="old-image">
@@ -94,10 +69,10 @@
                                                     />
                                                     <img id="1" ng-click="defImg(0)" ng-if="tmpImage[0].img !== null" ngf-src="tmpImage[0].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox ng-model="tmpImage[0].url" aria-label="Checkbox 1">
+                                                <md-checkbox class="padding-top" ng-model="tmpImage[0].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
-                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[0].url" class="input-shadow-border" type="text" name="videoUrl1"
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[0].url" class="input-shadow-border article-youtube" type="text" name="videoUrl1"
                                                        ng-model="tmpImage[0].videoUrl" width="10px" required />
                                             </td>
 
@@ -108,27 +83,27 @@
                                                     />
                                                     <img id="2" ng-click="defImg(1)" ng-if="tmpImage[1].img !== null" ngf-src="tmpImage[1].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox ng-model="tmpImage[1].url" aria-label="Checkbox 1">
+                                                <md-checkbox class="padding-top" ng-model="tmpImage[1].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
-                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[1].url" class="input-shadow-border" type="text" name="videoUrl2"
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[1].url" class="input-shadow-border article-youtube" type="text" name="videoUrl2"
                                                       ng-model="tmpImage[1].videoUrl" width="10px" required />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <div>
+                                            <td>
                                                 <div class="old-image">
                                                     <input type="button" ng-click="deleteImg(2)" value='delete' class="image-delete-button" />
                                                     <img ng-click="setImage()" ng-if="tmpImage[2].img == null" src="../../../images/small-placeholder.png" width="80" height="80"
                                                     />
                                                     <img id="3" ng-click="defImg(2)" ng-if="tmpImage[2].img !== null" ngf-src="tmpImage[2].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox ng-model="tmpImage[2].url" aria-label="Checkbox 1">
+                                                <md-checkbox class="padding-top" ng-model="tmpImage[2].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
-                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[2].url" class="input-shadow-border" type="text" name="videoUrl3"
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[2].url" class="input-shadow-border article-youtube" type="text" name="videoUrl3"
                                                        ng-model="tmpImage[2].videoUrl" width="10px" required />
-                                            </div>
+                                            </td>
 
                                             <td>
                                                 <div class="old-image">
@@ -137,10 +112,10 @@
                                                     />
                                                     <img id="4" ng-click="defImg(3)" ng-if="tmpImage[3].img !== null" ngf-src="tmpImage[3].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox ng-model="tmpImage[3].url" aria-label="Checkbox 1">
+                                                <md-checkbox class="padding-top" ng-model="tmpImage[3].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
-                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[3].url" class="input-shadow-border" type="text" name="videoUrl4"
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[3].url" class="input-shadow-border article-youtube" type="text" name="videoUrl4"
                                                        ng-model="tmpImage[3].videoUrl" width="10px" required />
                                             </td>
                                         </tr>
@@ -152,24 +127,23 @@
                                                     />
                                                     <img id="5" ng-click="defImg(4)" ng-if="tmpImage[4].img !== null" ngf-src="tmpImage[4].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox ng-model="tmpImage[4].url" aria-label="Checkbox 1">
+                                                <md-checkbox class="padding-top" ng-model="tmpImage[4].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
-                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[4].url" class="input-shadow-border" type="text" name="videoUrl5"
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[4].url" class="input-shadow-border article-youtube" type="text" name="videoUrl5"
                                                        ng-model="tmpImage[4].videoUrl" width="10px" required />
                                             </td>
-
-                                            <td>
+                                            <s></s><td>
                                                 <div class="old-image">
                                                     <input type="button" ng-click="deleteImg(5)" value='delete' class="image-delete-button" />
                                                     <img ng-click="setImage()" ng-if="tmpImage[5].img == null" src="../../../images/small-placeholder.png" width="80" height="80"
                                                     />
                                                     <img id="6" ng-click="defImg(5)" ng-if="tmpImage[5].img !== null" ngf-src="tmpImage[5].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox ng-model="tmpImage[5].url" aria-label="Checkbox 1">
+                                                <md-checkbox class="padding-top" ng-model="tmpImage[5].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
-                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[5].url" class="input-shadow-border" type="text" name="videoUrl6"
+                                                <input placeholder="https://www.youtube.com" ng-disabled="!tmpImage[5].url" class="input-shadow-border article-youtube" type="text" name="videoUrl6"
                                                        ng-model="tmpImage[5].videoUrl" width="10px" required />
                                             </td>
                                         </tr>
@@ -177,7 +151,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <!-- </div>-->
                 </fieldset>
 
