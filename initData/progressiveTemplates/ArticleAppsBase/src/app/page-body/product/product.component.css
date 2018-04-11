@@ -1,3 +1,8 @@
 .desc{
   padding-bottom: 60px;
 }
+.carousel .item img {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}

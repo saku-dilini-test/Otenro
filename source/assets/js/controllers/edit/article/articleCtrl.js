@@ -161,6 +161,9 @@
                                                                + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&images=thirdNavi/" + initialData.tempImageArray[i].img;
                     //                $scope.defaultImage = initialData.product.defaultImage;
 
+                    if(!tempImageUrl){
+                        tempImageUrl = null;
+                    }
                     $scope.tmpImage.push({"img": tempImageUrl,"videoUrl": initialData.tempImageArray[i].videoUrl,"url":initialData.tempImageArray[i].url});
 
                     $scope.tempImageDel.push(initialData.tempImageArray[i].img)

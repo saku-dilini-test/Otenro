@@ -244,7 +244,7 @@ module.exports = {
             appId: appId,
             categoryId : categoryId
         };
-        Article.find({ select: ['appId','title','imageUrl','categoryId','desc']}).where(searchApp).exec(function (err, result) {
+        Article.find({ select: ['appId','title','imageUrl','categoryId','desc','tempImageArray']}).where(searchApp).exec(function (err, result) {
             if (err) return done(err);
             //sails.log.info(result);
             res.json(result);
