@@ -237,6 +237,7 @@ module.exports = {
         }
 
         for (var i = 0; i < tmpImage.length; i++) {
+
             if(tmpImage[i].img){
                 if (!tmpImage[i].img.match("http")) {
                     var imgeFileName = randomstring.generate() + ".png";
@@ -277,12 +278,24 @@ module.exports = {
               }
             }else if (!tmpImage[i].img && tmpImage[i].videoUrl){
 
-                     if(tmpImage[i].videoUrl){
-                            article.tempImageArray[i].videoUrl = tmpImage[i].videoUrl;
-                            article.tempImageArray[i].url = tmpImage[i].url;
-                      }else{
-                            article.tempImageArray.push({ img: null, videoUrl: tmpImage[i].videoUrl, url:tmpImage[i].url});
-                      }
+                    if(tmpImage.length == article.tempImageArray.length){
+                        article.tempImageArray[i].videoUrl = tmpImage[i].videoUrl;
+                        article.tempImageArray[i].url = tmpImage[i].url;
+                    }else{
+                        article.tempImageArray.push({ img: null, videoUrl: tmpImage[i].videoUrl, url:tmpImage[i].url});
+                    }
+
+
+//                    for(var i =0: i < article.tempImageArray.length; i++){
+//                        if(article.tempImageArray[i].){
+//
+//                        }
+//                    }
+//                     if(!article.tempImageArray[i].videoUrl){
+//                            article.tempImageArray[i].videoUrl = tmpImage[i].videoUrl;
+//                            article.tempImageArray[i].url = tmpImage[i].url;
+//                      }else{
+//                      }
 
             }
         }

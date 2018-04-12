@@ -26,12 +26,12 @@
                             <div class="me-app-name">
                                 {{item.appName}}
                             </div>
-                            <div  ng-if="!item.isNew">
+                            <div  ng-if="item.isMobile">
 
                             <div class="me-app-box-view">
                                 <img class="me-app-icon" height="340" width="189" ng-src="{{path}}{{item.userId}}/templates/{{item.id}}/img/background.jpg"></div>
                             </div>
-                          <div  ng-if="item.isNew">
+                          <div  ng-if="!item.isMobile">
 
                             <div class="me-app-box-view">
                                 <img class="me-app-icon" height="340" width="189" ng-src="{{path}}{{item.userId}}/progressiveTemplates/{{item.id}}/src/assets/images/test.png"></div>

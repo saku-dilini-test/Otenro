@@ -1,4 +1,8 @@
 {
   "name": "hybrid",
-  "app_id": ""
+  "app_id": "",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic1"
 }

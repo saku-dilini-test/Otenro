@@ -72,6 +72,9 @@ module.exports = {
     phone:{
         type: 'string'
     },
+    lastAccessTime:{
+        type: 'date'
+    },
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;

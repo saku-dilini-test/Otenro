@@ -2020,7 +2020,6 @@ trix-toolbar .button_group input[type=button]{
 .custom-trix .ta-scroll-window {
     width:100%;
     min-height:75px;
-    height:75px;
     overflow-y: auto;
 }
 
@@ -2028,7 +2027,6 @@ trix-toolbar .button_group input[type=button]{
     height: 300px;
     min-height: 300px;
     padding: 6px 12px;
-    width: 615px;
     overflow: scroll;
 }
 
