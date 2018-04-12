@@ -23,7 +23,7 @@ export class ProductComponent implements OnInit {
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     private lockBuyButton = false;
     private dialogVariants;
-    private player;
+    private player:any;
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
@@ -32,13 +32,17 @@ export class ProductComponent implements OnInit {
         this.Data = this.dataService.data;
     }
 
-    ngAfterViewInit() {
-        const doc = (<any>window).document;
-        let playerApiScript = doc.createElement('script');
-        playerApiScript.type = 'text/javascript';
-        playerApiScript.src = 'https://www.youtube.com/iframe_api';
-        doc.body.appendChild(playerApiScript);
-    }
+    // ngAfterViewInit() {
+    //     var tag = document.createElement('script');
+    //     tag.src = "//www.youtube.com/player_api";
+    //     var firstScriptTag = document.getElementsByTagName('script')[0];
+    //     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    // }
+
+    click(index){
+        // $('#video')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+        console.log($('#video'+index)[0])
+        }
 
     ngOnInit() {
 
@@ -54,7 +58,7 @@ export class ProductComponent implements OnInit {
                 interval: 100000
             }).on('slid.bs.carousel', (event) => {
                 console.log(event);
-                let index;
+                let index:any;
                 let playerIndex;
 
                 if (event.direction == 'right') {
@@ -65,18 +69,15 @@ export class ProductComponent implements OnInit {
                         index = this.Data.tempImageArray.length - 1
                         // document.getElementById('player' + playerIndex).style.display = 'none';
                         // document.getElementById('image' + playerIndex).style.display = 'block';
-
-                        // var iframePlayer = new Player('player' + playerIndex);
-                        // iframePlayer.unload().then(function () {
-                        //     // the video was unloaded
-                        //     console.log('player unloaded if');
-                        // }).catch(function (error) {
-                        //     // an error occurred
-                        // });
-
+                        // if(this.Data.tempImageArray[index].videoUrl){
+                        //     $('#video'+index)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                        // }
+                        // this.click(index);
+                        // $('.myVideoClass').each(()=>{
+                        //     $(this).stopVideo();
+                        //   });
                     } else {
                         // console.log('inside else');
-                        index = carouselItems.siblings('.active').index();
                         if (carouselItems.siblings('.active').index() == -1) {
                             index = 0;
                             playerIndex = index + 1;
@@ -87,13 +88,13 @@ export class ProductComponent implements OnInit {
                         // document.getElementById('player' + playerIndex).style.display = 'none';
                         // document.getElementById('image' + playerIndex).style.display = 'block';
 
-                        // var iframePlayer = new Player('player' + playerIndex);
-                        // iframePlayer.unload().then(function () {
-                        //     // the video was unloaded
-                        //     console.log('player unloaded else');
-                        // }).catch(function (error) {
-                        //     // an error occurred
-                        // });
+                        if(this.Data.tempImageArray[playerIndex].videoUrl && index != this.Data.tempImageArray.length ){
+                            $('#video'+playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                            this.click(playerIndex);
+                        }
+                        // $('.myVideoClass').each(()=>{
+                        //     $(this).stopVideo();
+                        //   });
                     }
 
                 } else {
@@ -104,11 +105,29 @@ export class ProductComponent implements OnInit {
                         playerIndex = this.Data.tempImageArray.length - 1;
                         // document.getElementById('player' + (this.Data.tempImageArray.length - 1)).style.display = 'none';
                         // document.getElementById('image' + (this.Data.tempImageArray.length - 1)).style.display = 'block';
+
+                        if(this.Data.tempImageArray[playerIndex].videoUrl && index != 1){
+                            $('#video'+playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                            this.click(playerIndex);
+                        }
+
+                        // $('.myVideoClass').each(()=>{
+                        //     $(this).stopVideo();
+                        //   });
+
                     } else {
                         index = carouselItems.siblings('.active').index();
                         playerIndex = index - 1;
                         // document.getElementById('player' + (index - 1)).style.display = 'none';
                         // document.getElementById('image' + (index - 1)).style.display = 'block';
+
+                        if(this.Data.tempImageArray[playerIndex].videoUrl && index != 1){
+                            $('#video'+playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                            this.click(playerIndex);
+                        }
+                                                // $('.myVideoClass').each(()=>{
+                        //     $(this).stopVideo();
+                        //   });
                     }
 
                 }

@@ -278,6 +278,14 @@ module.exports = {
               }
             }else if (!tmpImage[i].img && tmpImage[i].videoUrl){
 
+                    if(tmpImage.length == article.tempImageArray.length){
+                        article.tempImageArray[i].videoUrl = tmpImage[i].videoUrl;
+                        article.tempImageArray[i].url = tmpImage[i].url;
+                    }else{
+                        article.tempImageArray.push({ img: null, videoUrl: tmpImage[i].videoUrl, url:tmpImage[i].url});
+                    }
+
+
 //                    for(var i =0: i < article.tempImageArray.length; i++){
 //                        if(article.tempImageArray[i].){
 //
@@ -287,7 +295,6 @@ module.exports = {
 //                            article.tempImageArray[i].videoUrl = tmpImage[i].videoUrl;
 //                            article.tempImageArray[i].url = tmpImage[i].url;
 //                      }else{
-                            article.tempImageArray.push({ img: null, videoUrl: tmpImage[i].videoUrl, url:tmpImage[i].url});
 //                      }
 
             }
