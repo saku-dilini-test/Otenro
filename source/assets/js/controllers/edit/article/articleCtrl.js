@@ -157,13 +157,17 @@
 
             if (initialData.tempImageArray) {
                 for (var i = 0; i < initialData.tempImageArray.length; i++) {
-                    var tempImageUrl = SERVER_URL + "templates/viewWebImages?userId=" + $auth.getPayload().id
-                                                               + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&images=thirdNavi/" + initialData.tempImageArray[i].img;
-                    //                $scope.defaultImage = initialData.product.defaultImage;
 
-                    if(!tempImageUrl){
+                    var tempImageUrl;
+
+                    if(initialData.tempImageArray[i].img){
+                        tempImageUrl = SERVER_URL + "templates/viewWebImages?userId=" + $auth.getPayload().id
+                                      + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "&images=thirdNavi/" + initialData.tempImageArray[i].img;
+                    }else{
                         tempImageUrl = null;
                     }
+                    //                $scope.defaultImage = initialData.product.defaultImage;
+
                     $scope.tmpImage.push({"img": tempImageUrl,"videoUrl": initialData.tempImageArray[i].videoUrl,"url":initialData.tempImageArray[i].url});
 
                     $scope.tempImageDel.push(initialData.tempImageArray[i].img)
@@ -234,8 +238,67 @@
 //        };
 
 
-
         $scope.publishArticle = function (file, article) {
+
+        var urlError = "Please add the Youtube link";
+
+        var videoUrl2 = document.forms["articleForm"]["videoUrl2"].value;
+
+        var videoUrl3 = document.forms["articleForm"]["videoUrl3"].value;
+
+        var videoUrl4 = document.forms["articleForm"]["videoUrl4"].value;
+
+        var videoUrl5 = document.forms["articleForm"]["videoUrl5"].value;
+
+        var videoUrl6 = document.forms["articleForm"]["videoUrl6"].value;
+
+            if($scope.tmpImage[1].url == true){
+                if (videoUrl2 == null || videoUrl2 == "") {
+
+                    document.getElementById("err_videoUrl2").innerHTML = urlError;
+                    return;
+                }
+
+            }
+
+            if($scope.tmpImage.length >2){
+                if($scope.tmpImage[2].url == true){
+                    if (videoUrl3 == null || videoUrl3 == "") {
+
+                        document.getElementById("err_videoUrl3").innerHTML = urlError;
+                        return;
+                    }
+                }
+            }
+
+            if($scope.tmpImage.length >3){
+                if($scope.tmpImage[3].url == true){
+                    if (videoUrl4 == null || videoUrl4 == "") {
+
+                        document.getElementById("err_videoUrl4").innerHTML = urlError;
+                        return;
+                    }
+                }
+            }
+            if($scope.tmpImage.length >4){
+                if($scope.tmpImage[4].url == true){
+                    if (videoUrl5 == null || videoUrl5 == "") {
+
+                        document.getElementById("err_videoUrl5").innerHTML = urlError;
+                        return;
+                    }
+                }
+            }
+            if($scope.tmpImage.length >5){
+                if($scope.tmpImage[5].url == true){
+                    if (videoUrl6 == null || videoUrl5 == "") {
+
+                        document.getElementById("err_videoUrl6").innerHTML = urlError;
+                        return;
+                    }
+                }
+            }
+
             if ($scope.seletedCategoryId == null) {
                 toastr.error('Please select a category', 'Warning', {
                     closeButton: true
