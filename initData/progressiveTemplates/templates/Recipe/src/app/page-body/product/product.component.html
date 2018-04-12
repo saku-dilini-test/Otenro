@@ -1,0 +1,55 @@
+<div class="page-container">
+
+
+    <div id="carousel-example-generic" class="carousel no-shadows slide" data-ride="carousel">
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <div id="image0" style="display:none1">
+            <img style="width:100vw;height:100vw" src="{{imageUrl}}/{{Data.tempImageArray[0].img}}" alt="{{Data.name}}">
+            <!-- <button *ngIf="Data.tempImageArray[0].videoUrl" type="button" (click)="video(0,Data.tempImageArray[0].videoUrl)" class="video-h8 btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-play"></span> Play</button> -->
+          </div>
+        </div>
+        <div class="item" *ngFor="let item of Data.tempImageArray |slice:1; let i = index">
+          <!-- <div class="item"> -->
+            <!-- <div id="image{{i+1}}" style="display:block"> -->
+            <img *ngIf="!item.videoUrl" style="width:100vw;height:100vw" src="{{imageUrl}}/{{item.img}}" alt="{{item.name}}">
+            <iframe id="video{{i+1}}" class="myVideoClass" *ngIf="item.videoUrl" style="width:100vw;height:100vw" [src]="sanitizer.bypassSecurityTrustResourceUrl(item.videoUrl)" frameborder="0" allow="encrypted-media" allowfullscreen="true" allowscriptaccess="always"></iframe>
+            <!-- <button *ngIf="item.videoUrl" type="button" (click)="video(i+1,item.videoUrl)" class="video-h8 btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-play"></span> Play</button>
+          </div> -->
+          <!-- <div style="display:none;width:100%" id="player{{i+1}}"></div> -->
+
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <a  class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+<!-- <button id="pause-button" (click)="click()">click</button> -->
+  <!-- <img src="{{imageUrl}}/{{Data.imageUrl}}" width="100%"> -->
+
+
+  <div class="padding">
+    <h4 class="text-center main-header-font">{{Data.title}}</h4>
+    <div class="desc main-content-font" [innerHtml]="Data.desc"> </div>
+  </div>
+
+  <!-- bloc-17 END -->
+
+  <!-- ScrollToTop Button -->
+  <a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')">
+    <span class="fa fa-chevron-up"></span>
+  </a>
+  <!-- ScrollToTop Button END-->
+
+</div>
