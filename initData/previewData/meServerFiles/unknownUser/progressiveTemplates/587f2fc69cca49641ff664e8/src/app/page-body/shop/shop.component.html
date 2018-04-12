@@ -4,7 +4,7 @@
       <img class="cat-image" src="{{imageUrl1}}/{{catImage}}" width="100%">
       <div class="grey text-center margin-l">CATEGORY</div>
       <h3 class="text-center margin-l">{{catName}}</h3>
-      <div class="text-center grey margin-l"  *ngIf="results">{{results.length}} Recipes</div>
+      <div class="text-center grey margin-l">{{results.length}} Recipes</div>
       <div class="row padding" *ngFor="let article of results" (click)="navigateProd('product',article)">
           <div class="col-xs-12 prod">
               <img src="{{imageUrl}}/{{article.tempImageArray[0].img}}" width="100%">
