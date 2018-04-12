@@ -32,12 +32,19 @@ export class ProductComponent implements OnInit {
         this.Data = this.dataService.data;
     }
 
-    // ngAfterViewInit() {
-    //     var tag = document.createElement('script');
-    //     tag.src = "//www.youtube.com/player_api";
-    //     var firstScriptTag = document.getElementsByTagName('script')[0];
-    //     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    // }
+    ngAfterViewInit() {
+        $(".carousel").swipe({
+
+            swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+
+              if (direction == 'left') $(this).carousel('next');
+              if (direction == 'right') $(this).carousel('prev');
+
+            },
+            allowPageScroll:"vertical"
+
+          });
+    }
 
     click(index){
         // $('#video')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
