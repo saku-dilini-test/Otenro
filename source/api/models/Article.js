@@ -19,7 +19,14 @@ module.exports = {
     },
     categoryId : {
       type: 'string'
+    },
+      expiryDate:{
+      type:'string'
+    },
+    publishDate:{
+      type:'string'
     }
+
   }
 };
 

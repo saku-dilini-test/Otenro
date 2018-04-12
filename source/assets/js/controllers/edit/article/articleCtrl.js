@@ -294,7 +294,8 @@
 
                 articleService.publishArticle({
                     'articleImages': $scope.tmpImage, 'id': article.id, 'categoryId': $scope.seletedCategoryId, 'title': article.title, 'desc': article.desc,
-                    'appId': $rootScope.appId, 'isNewArticle': $scope.isNewArticle, 'isImageUpdate': isImageUpdate, 'isNew': $rootScope.tempNew, 'oldImg': $scope.serverImg, 'tempImageArray':article.tempImageArray,"deleteImages":$scope.deleteImages
+                    'appId': $rootScope.appId, 'isNewArticle': $scope.isNewArticle, 'isImageUpdate': isImageUpdate, 'isNew': $rootScope.tempNew, 'oldImg': $scope.serverImg,
+                    'tempImageArray':article.tempImageArray,"deleteImages":$scope.deleteImages,'publishDate':article.publishDate,'expiryDate':article.expiryDate
                 })
                     .success(function (result) {
                         toastr.success('Your article has successfully been published ', 'Saved', {
