@@ -132,17 +132,27 @@
 
         } else if (initialData == 'previewArticles') {
             articleService.getArticleList($scope.appId)
-                .success(function (data) {
+                .success(function (responseData) {
 
-                    for (var i = 0; i < data.length; i++) {
-                        var date = new Date(data[i].createdAt);
-                        $scope.displayDate = date.toLocaleString();
-                        $scope.year = date.getFullYear();
-                        $scope.month = date.getMonth() + 1;
-                        $scope.date = date.getDate();
-                        data[i].createdDate = $scope.year + "-" + $scope.month + "-" + $scope.date;
-                    }
-                    $scope.articleList = data;
+                    console.log(responseData);
+                    $scope.tempArticleList = [];
+
+                    responseData.forEach(function (data) {
+
+                        articleService.getCategory(data.categoryId)
+                                .success(function (articleByCategoryResponseData) {
+                                    data.categoryName = articleByCategoryResponseData[0].name;
+                                    $scope.tempArticleList.push(data);
+
+                        }).error(function (error) {
+                            toastr.error('ArticlesLoading Error', 'Message', {
+                                closeButton: true
+                            });
+                        })
+
+                    });
+                    $scope.articleList = $scope.tempArticleList;
+
                 }).error(function (error) {
                     toastr.error('ArticlesLoading Error', 'Message', {
                         closeButton: true
@@ -348,6 +358,18 @@
 
             if (article.desc == null) {
                 toastr.error('Article description required', 'Warning', {
+                    closeButton: true
+                });
+                return;
+            }
+            if (article.publishDate== null){
+                toastr.error('Article publish date and time  required', 'Warning', {
+                    closeButton: true
+                });
+                return;
+            }
+            if (article.expiryDate== null){
+                toastr.error('Article expiry date and time  required', 'Warning', {
                     closeButton: true
                 });
                 return;

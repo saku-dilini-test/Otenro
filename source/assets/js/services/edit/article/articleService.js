@@ -139,6 +139,9 @@
             },
             editCategory:function(data){
                 return $http.post(SERVER_URL+ 'edit/editCategory',data);
+            },
+            getCategory:function(categoryId){
+                return $http.get(SERVER_URL+ 'templates/getCategory?categoryId='+categoryId);
             }
         };
     }

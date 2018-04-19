@@ -246,8 +246,8 @@ module.exports = {
             appId: appId,
             categoryId : categoryId
         };
-        Article.find({ select: ['appId','title','imageUrl','categoryId','desc','publishDate','expiryDate']}).where(searchApp).exec(function (err, result) {
-        Article.find({ select: ['appId','title','imageUrl','categoryId','desc','tempImageArray']}).where(searchApp).exec(function (err, result) {
+
+        Article.find({ select: ['appId','title','imageUrl','categoryId','desc','tempImageArray','publishDate','expiryDate']}).where(searchApp).exec(function (err, result) {
             if (err) return done(err);
             //sails.log.info(result);
 
@@ -330,6 +330,27 @@ module.exports = {
             });
         },
 
+        /**
+         * return collection of article given appId
+         *
+         * @param req appId
+         * @param res collection articles for given appId
+         */
+        getCategory: function (req, res) {
+
+            var categoryId = req.param('categoryId');
+            var searchQuery = {
+                id:categoryId
+            };
+
+            ArticleCategory.find(searchQuery).exec(function (err, result) {
+                if (err) {
+                    sails.log.error("Article Category Collection find Error for given appId : " + appId);
+                    return done(err);
+                }
+                res.send(result);
+            });
+        },
 
     /**
      * return images for given userID & appID & img ( Path + Image name )
