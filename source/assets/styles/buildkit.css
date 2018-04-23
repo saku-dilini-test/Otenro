@@ -2943,3 +2943,14 @@ table.md-calendar-day-header{
 .margin{
     margin: 16px !important;
 }
+
+.analitics-1{
+    font-size: 30px;
+    font-weight: 900;
+    color:#444;
+}
+.analitics-2{
+    font-size: 50px;
+    font-weight: 900;
+    color:#444;
+}

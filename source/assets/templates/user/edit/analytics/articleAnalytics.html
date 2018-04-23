@@ -1,4 +1,4 @@
-<md-dialog aria-label="Manage Products" style="width:100%; height:100%">
+<md-dialog aria-label="Manage Products" style="width:100% ">
 
     <!--Google Analytics-->
     <script>
@@ -11,7 +11,7 @@
                   md-dynamic-height="true">
             <!--Add Product Tab 1 content -->
             <md-tab>
-                <md-tab-label>Analytics</md-tab-label>
+                <md-tab-label><span class="analitics-1" style="font-size: 20px;">Analytics</span></md-tab-label>
                 <md-tab-body>
                     <md-content>
 
@@ -19,20 +19,22 @@
                         <br>
 
                         <div align="center">
-                            <font size="6">TOTAL</font>
+                            <div class="analitics-1">TOTAL</div>
                         </div>
-                        <div align="center">
-                            <label class="margin">subscribers</label>
-                            <font size="8">{{allUsersCount}}</font>
-                            <label class="margin">active users</label>
-                            <font size="8">{{activeUser}}</font>
-                        </div>
+                        <table  class="text-center">
+                            <tr>
+                                <td class="analitics-2 margin">{{allUsersCount}}</td>
+                                <td class="analitics-2 margin">{{activeUser}}</td>
+                            </tr>
+                            <tr>
+                                <td  class="analitics-1 margin">active users</td>
+                                <td  class="analitics-1 margin">subscribers</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <br>
+                        <hr>
 
-                        <!--<div align="center">
-                            <label class="margin">subscribers</label>
-                            <label class="margin">active users</label>
-
-                        </div>-->
 
                         <div class="md-dialog-main" style="max-height: 65vh">
                             <label class="margin">Select Period</label>
@@ -46,16 +48,24 @@
                                 </div>
                             </div>
 
-                            <div align="center">
-                                <label class="margin">Article Views</label>
-                                <font size="8">{{allArticleViewsForDateRange}}</font>
-                                <label class="margin">Subscribres</label>
-                                <font size="8">{{allUbscribersForDateRange}}</font>
-                                <label class="margin">Active Users</label>
-                                <font size="8">{{activeUsersForDateRange}}</font>
-                            </div>
 
-
+                            <br>
+                            <br>
+                            <table class="text-center">
+                                <tr>
+                                    <td class="analitics-1 margin">Article Views</td>
+                                    <td class="analitics-1 margin">Subscribres</td>
+                                    <td class="analitics-1 margin">Active Users</td>
+                                </tr>
+                                <tr>
+                                    <td  class="analitics-2 margin">{{allArticleViewsForDateRange}} </td>
+                                    <td  class="analitics-2 margin">{{allUbscribersForDateRange}}</td>
+                                    <td  class="analitics-2 margin">{{activeUsersForDateRange}}</td>
+                                </tr>
+                            </table>
+                            <br>
+                            <br>
+                            <br>
 
                         </div>
                        <!-- <div class="md-dialog-buttons padding-top">
