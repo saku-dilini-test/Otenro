@@ -14,3 +14,10 @@
   font-weight: 600;
   font-size: 14px;
 }
+
+.flex-row:last-child{
+  padding-bottom: 60px;
+}
+.flex-row:first-child{
+  padding-top: 69px;
+}

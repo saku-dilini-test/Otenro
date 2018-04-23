@@ -8,19 +8,11 @@ import { PageBodyComponent } from './page-body.component';
 import {  AddonsModule } from '../addons/addons.module';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { OwlModule } from 'angular-owl-carousel';
 import { PoliciesComponent } from './policies/policies.component';
-import { TermsComponent } from './terms/terms.component';
 import { ContactComponent } from './contact/contact.component';
 import { AgmCoreModule } from '@agm/core';
 import { ShopComponent } from './shop/shop.component';
-import { NouisliderModule } from 'ng2-nouislider';
 import { ProductComponent } from './product/product.component';
-import { CartComponent } from './cart/cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { RegisterComponent } from './register/register.component';
-import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
-import { AppUserComponent } from './app-user/app-user.component';
 
 
 @NgModule({
@@ -29,9 +21,7 @@ import { AppUserComponent } from './app-user/app-user.component';
     PageBodyRoutingModule,
     AddonsModule,
     NgbModule,
-    OwlModule,
     AgmCoreModule,
-    NouisliderModule,
     FormsModule,
     ReactiveFormsModule
 
@@ -39,6 +29,6 @@ import { AppUserComponent } from './app-user/app-user.component';
    exports:[
     PageBodyComponent
   ],
-  declarations: [HomepageComponent, PageBodyComponent, AboutusComponent, PoliciesComponent, TermsComponent, ContactComponent, ShopComponent, ProductComponent, CartComponent, CheckoutComponent, RegisterComponent,PaypalPaymentComponent, AppUserComponent]
+  declarations: [HomepageComponent, PageBodyComponent, AboutusComponent, PoliciesComponent, ContactComponent, ShopComponent, ProductComponent]
 })
 export class PageBodyModule { }

@@ -1,4 +1,4 @@
-<div class="page-container">
+<div class="page-container header">
 
   <!-- bloc-1 -->
 
@@ -7,10 +7,10 @@
       <nav class="navbar">
         <div class="navbar-header">
           <button aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" (click)="openNav()">
-            <div class="hamburger-menu"></div>
+            <i class="fa fa-bars lg"></i>
           </button>
           <div class="mobile-title visible-xs mobileTitle" >{{title}}</div>
-      
+
         </div>
         <div class="navbar-1">
           <ul class="site-navigation nav navbar-nav">
@@ -26,31 +26,10 @@
               <a class="nav-link" (click)="navigate('aboutus')">About Us</a>
             </li>
             <li>
-              <a class="nav-link" (click)="navigate('shop')">Store</a>
-            </li>
-            <li>
               <a class="nav-link" (click)="navigate('contact')">Contact Us</a>
             </li>
             <li>
               <a class="nav-link" (click)="navigate('policies')">Policies</a>
-            </li>
-            <li>
-              <a class="nav-link" (click)="navigate('terms')">Terms & Conditions</a>
-            </li>
-            <li *ngIf="loginStatus">
-              <a class="nav-link" (click)="navigate('order-history')">Order History</a>
-            </li>
-            <li>
-              <a class="nav-link" (click)="navigate('cart')">Cart</a>
-            </li>
-            <li *ngIf="loginStatus">
-              <a class="nav-link" (click)="navigate('appUser')">My Account</a>
-            </li>
-            <li *ngIf="loginStatus">
-              <a class="nav-link" (click)="logout()">Log Out</a>
-            </li>
-            <li *ngIf="!loginStatus">
-              <a class="nav-link" (click)="navigate('login/home')">Sign In</a>
             </li>
 
           </ul>
@@ -61,7 +40,7 @@
   <!-- bloc-1 END -->
 
   <!-- Mobile Navigation -->
-  <div id="mySidenav" class="sidenav">
+  <div id="mySidenav" class="sidenav  main-navigation">
     <div  class="closebtn" (click)="closeNav()">&times;</div>
     <a (click)="navigate('','Home')">Home</a>
     <a data-toggle="modal" data-target="#registerModel">Register</a>

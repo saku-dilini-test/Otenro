@@ -45,7 +45,6 @@ export class ProductComponent implements OnInit {
         this.router.params.subscribe(params => {
             this.catName = params['catName'];
         });
-        console.log(this.Data);
 
         $(() => {
             var carouselEl = $('.carousel');

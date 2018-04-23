@@ -11,6 +11,7 @@
   object-fit: cover;
   border-radius: 50%;
   color: #a5a5a5;
+  min-width: 55px;
 }
 
 .flex-row p{
@@ -32,3 +33,11 @@
   background: #fff;
   border-top:1px solid #ccc;
 }
+
+.flex-row:last-child {
+  padding-bottom: 60px;
+}
+.flex-row:first-child{
+  padding-top: 69px;
+}
+

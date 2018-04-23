@@ -1,50 +1,25 @@
 <div class="page-container">
 
-	<div class="bloc bgc-white l-bloc" id="bloc-2">
-		<div class="container bloc-sm">
+  <div class="bloc bgc-white l-bloc" id="bloc-2">
+    <div class="container bloc-sm">
 
+      <ng-template *ngFor="let category of results;let i = index" [ngIf]="i % 3 === 0">
         <div class="flex-row">
-          <div class="flex-col" >
-            <img src="assets/images/secondNavi/1.png" >
-            <div>Aris</div>
+          <div class="flex-col" (click)="navigateShop('shop',results[i].id,results[i].name)" *ngIf="results[i]">
+            <img src="{{imageUrl}}/{{results[i].imageUrl}}" >
+            <div class="main-header-font">{{results[i].name}}</div>
           </div>
-          <div class="flex-col">
-            <img src="assets/images/secondNavi/2.png" >
-            <div>Leo</div>
+          <div class="flex-col" (click)="navigateShop('shop',results[i+1].id,results[i+1].name)" *ngIf="results[i+1]">
+            <img src="{{imageUrl}}/{{results[i+1].imageUrl}}" >
+            <div class="main-header-font">{{results[i+1].name}}</div>
           </div>
-          <div class="flex-col">
-            <img src="assets/images/secondNavi/3.png">
-            <div>Sagittarius</div>
-          </div>
-        </div>
-
-         <div class="flex-row">
-          <div class="flex-col">
-            <img src="assets/images/secondNavi/4.png" >
-            <div>Taurus</div>
-          </div>
-          <div class="flex-col">
-            <img src="assets/images/secondNavi/5.png" >
-            <div>Virgo</div>
-          </div>
-          <div class="flex-col">
-            <img src="assets/images/secondNavi/6.png">
-            <div>Capricorn</div>
+          <div class="flex-col" (click)="navigateShop('shop',results[i+2].id,results[i+2].name)" *ngIf="results[i+2]">
+            <img src="{{imageUrl}}/{{results[i+2].imageUrl}}">
+            <div class="main-header-font">{{results[i+2].name}}</div>
           </div>
         </div>
+      </ng-template>
 
-        <div class="flex-row" *ngFor="let category of results">
-          <div class="flex-col" (click)="navigateShop('shop',category.id,category.name)">
-            <img src="{{imageUrl}}/{{category.imageUrl}}" >
-            <div>{{category.name}}</div>
-          </div>
-        </div>
-
-  
     </div>
-  </div>
-
-<div class="bloc bgc-white l-bloc" id="bloc-0">
-  <div class="container bloc-sm">
   </div>
 </div>
