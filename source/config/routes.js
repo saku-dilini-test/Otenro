@@ -328,6 +328,8 @@ module.exports.routes = {
     'GET /templates/getArticleById': 'template/TemplateController.getArticleById',
     'GET /templates/getCommentsDummy': 'template/TemplateController.getCommentsDummy',
     'GET /templates/getCategory': 'template/TemplateController.getCategory',
+    'GET /templates/getArticleViewDataInfo': 'template/AnalyticsController.getArticleViewDataInfo',
+    'GET /templates/getAppVisitDataInfo': 'template/AnalyticsController.getAppVisitDataInfo',
 
 
 
@@ -353,6 +355,12 @@ module.exports.routes = {
     'POST /templatesOrder/saveOrder': 'template/TemplateOrderController.saveOrder',
     'POST /templatesOrder/getTaxInfoByCountry': 'template/TemplateOrderController.getTaxInfoByCountry',
     'GET /templates/getOrdersOfUser': 'template/TemplateController.getOrdersOfUser',
+    'GET /templates/createArticleViewDataInfo': 'template/TemplateController.createArticleViewDataInfo',
+    'GET /templates/createAppVisitDataInfo': 'template/TemplateController.createAppVisitDataInfo',
+
+
+
+
 
     /***
      * Template Inventory Controller
@@ -419,7 +427,21 @@ module.exports.routes = {
     'POST /reports/getTaxSummary': 'reports/StoreAnalyticsController.getTaxSummary',
     'POST /reports/getShippingSummary': 'reports/StoreAnalyticsController.getShippingSummary',
     'POST /reports/getOrderData': 'reports/StoreAnalyticsController.getOrderData',
-    'POST /reports/getChartData': 'reports/StoreAnalyticsController.getChartData'
+    'POST /reports/getChartData': 'reports/StoreAnalyticsController.getChartData',
+
+
+    /**
+     * AnalyticsController (ideaDroid)
+     */
+
+    'POST /reports/getSubscribeUsersCount': 'reports/AnalyticsController.getSubscribeUsersCount',
+    'POST /reports/getSubscribeUsersCountForDateRange': 'reports/AnalyticsController.getSubscribeUsersCountForDateRange',
+    'POST /reports/getArticleViewDataForDateRange': 'reports/AnalyticsController.getArticleViewDataForDateRange'
+
+
+
+
+
 
 
 };

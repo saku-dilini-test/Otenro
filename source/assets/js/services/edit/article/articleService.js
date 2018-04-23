@@ -9,6 +9,21 @@
 
     function articleService($mdDialog,$http,$rootScope,Upload,SERVER_URL) {
         return {
+
+            showArticleAnalyticsDialog: function () {
+                return $mdDialog.show({
+                    controller: 'articleAnalyticsCtrl',
+                    templateUrl: 'user/edit/analytics/articleAnalytics.html',
+                    clickOutsideToClose: true,
+                    locals: {
+                        initialData: null
+                    }
+                }).then(function (answer) {
+                    //$scope.status = 'You said the information was "' + answer + '".';
+                }, function () {
+                    //$scope.status = 'You cancelled the dialog.';
+                });
+            },
             showPublishArticleDialog: function(data) {
                 return $mdDialog.show({
                     controller: 'ArticleCtrl',
@@ -142,7 +157,22 @@
             },
             getCategory:function(categoryId){
                 return $http.get(SERVER_URL+ 'templates/getCategory?categoryId='+categoryId);
-            }
+            },
+            getSubscribeUsersCount:function(data){
+                return $http.post(SERVER_URL+ 'reports/getSubscribeUsersCount',data);
+            },
+            getSubscribeUsersCountForDateRange:function(data){
+                return $http.post(SERVER_URL+ 'reports/getSubscribeUsersCountForDateRange',data);
+            },
+            getArticleViewDataForDateRange:function(data){
+                return $http.post(SERVER_URL+ 'reports/getArticleViewDataForDateRange',data);
+            },
+
+
+
+
+
+
         };
     }
 })();
