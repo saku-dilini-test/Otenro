@@ -39,7 +39,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #e6e8eaeb;
+    background-color: rgba(230, 232, 234, 0.9);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
