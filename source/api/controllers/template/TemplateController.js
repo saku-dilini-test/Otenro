@@ -10,6 +10,7 @@
 var fs = require('fs-extra');
 var ApiContracts = require('authorizenet').APIContracts;
 var ApiControllers = require('authorizenet').APIControllers;
+var dateFormat = require('dateformat');
 
 module.exports = {
 
@@ -578,6 +579,55 @@ module.exports = {
             if (err) return done(err);
             res.json(template);
 
+        });
+    },
+
+
+
+    createArticleViewDataInfo : function(req,res){
+
+
+        var appId = req.param('appId');
+        var msisdn = req.param('msisdn');
+        var articleName = req.param('articleName');
+
+        var data = {
+            appId:appId,
+            msisdn:msisdn,
+            articleName:articleName,
+            viewDate:dateFormat(new Date().toLocaleString(),"yyyy-mm-dd")
+        };
+
+
+        ArticleViewLogData.create(data).exec(function (err, result) {
+            if (err) {
+                sails.log.error("ArticleViewDataLog Create Error");
+                return done(err);
+            }
+            res.send(result);
+        });
+
+    },
+
+
+    createAppVisitDataInfo : function(req,res){
+
+
+        var appId = req.param('appId');
+        var msisdn = req.param('msisdn');
+
+        var data = {
+            appId:appId,
+            msisdn:msisdn
+        };
+
+
+        AppVisitDataLog.create(data).exec(function (err, result) {
+            if (err) {
+                sails.log.error("ArticleViewDataLog Create Error");
+                return done(err);
+            }
+            res.send(result);
         });
     }
 

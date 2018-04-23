@@ -1,0 +1,72 @@
+<md-dialog aria-label="Manage Products" style="width:100%; height:100%">
+
+    <!--Google Analytics-->
+    <script>
+        ga('set', 'page', 'manage-products');
+        ga('send', 'pageview');
+    </script>
+
+    <md-dialog-content>
+        <md-tabs  md-no-ink-bar ="false" md-no-ink="true" md-no-bar  md-center-tabs="false" md-selected="selectedTab"  md-autoselect="false"
+                  md-dynamic-height="true">
+            <!--Add Product Tab 1 content -->
+            <md-tab>
+                <md-tab-label>Analytics</md-tab-label>
+                <md-tab-body>
+                    <md-content>
+
+                        <br>
+                        <br>
+
+                        <div align="center">
+                            <font size="6">TOTAL</font>
+                        </div>
+                        <div align="center">
+                            <label class="margin">subscribers</label>
+                            <font size="8">{{allUsersCount}}</font>
+                            <label class="margin">active users</label>
+                            <font size="8">{{activeUser}}</font>
+                        </div>
+
+                        <!--<div align="center">
+                            <label class="margin">subscribers</label>
+                            <label class="margin">active users</label>
+
+                        </div>-->
+
+                        <div class="md-dialog-main" style="max-height: 65vh">
+                            <label class="margin">Select Period</label>
+                            <div layout-gt-xs="row" class="margin">
+                                <div flex="33">
+                                    <md-datepicker ng-model="analytics.fromDate" md-placeholder="Start date" md-open-on-focus></md-datepicker>
+                                </div>
+                                <div flex="33">
+                                    <md-datepicker ng-model="analytics.toDate" md-placeholder="End date" md-open-on-focus></md-datepicker>
+                                    <md-button ng-click="getDateForRange(analytics)" class="no-margin margin-horizontal md-raised" style="top:-3px;background:#bdbdbd;color:#fff">Apply</md-button>
+                                </div>
+                            </div>
+
+                            <div align="center">
+                                <label class="margin">Article Views</label>
+                                <font size="8">{{allArticleViewsForDateRange}}</font>
+                                <label class="margin">Subscribres</label>
+                                <font size="8">{{allUbscribersForDateRange}}</font>
+                                <label class="margin">Active Users</label>
+                                <font size="8">{{activeUsersForDateRange}}</font>
+                            </div>
+
+
+
+                        </div>
+                       <!-- <div class="md-dialog-buttons padding-top">
+                            <div class="inner-section">
+                                <md-button class="me-default-button" ng-click="close()">Close</md-button>
+                            </div>
+                        </div>-->
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+
+        </md-tabs>
+    </md-dialog-content>
+</md-dialog>

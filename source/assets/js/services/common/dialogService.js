@@ -125,6 +125,11 @@
                     return commerceService.showRemoveDefaultDataDialog(clickTitle);
                 if('get-assistance' == clickTitle)
                     return getAssistanceService.showGetAssistanceDialog();
+                if('articleAnalytics' == clickTitle)
+                    return articleService.showArticleAnalyticsDialog();
+
+
+
             }
         }
     }

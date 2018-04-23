@@ -7,6 +7,7 @@ import * as data from '../../madeEasy.json';
 import * as _ from 'lodash';
 import { TitleService } from '../../services/title.service';
 import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
+import { ProductsService } from '../../services/products/products.service';
 @Component({
     selector: 'app-product',
     templateUrl: './app/page-body/product/product.component.html',
@@ -27,7 +28,7 @@ export class ProductComponent implements OnInit {
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
-    constructor(private sanitizer: DomSanitizer,private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
+    constructor(private productService: ProductsService,private sanitizer: DomSanitizer,private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
 
         this.Data = this.dataService.data;
     }
@@ -55,6 +56,15 @@ export class ProductComponent implements OnInit {
 
         this.router.params.subscribe(params => {
             this.catName = params['catName'];
+            if(this.catName){
+              this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
+                  // Read the result field from the JSON response.
+                  this.results = data;
+                },
+                error => {
+                  console.log('Error on create record');
+                });
+            }
         });
         console.log(this.Data);
 
