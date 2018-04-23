@@ -30,12 +30,12 @@ module.exports = {
   HOST_URL : 'http://localhost:1337',
   // ME SERVER Config
   ME_SERVER_URL : 'http://localhost:80/meServer/temp/',
-  ME_SERVER : 'c:/xampp/htdocs/meServer/temp/',
+  ME_SERVER : '/var/www/html/meServer/temp/',
   ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : 'c:/xampp/htdocs/meServer/temp/',
+  APP_FILE_SERVER : '/var/www/html/meServer/temp/',
   CLIENT_SECRET : '44f4f3be572ec33711a40a5b8b4',
-  TEMPLATES_PATH : 'd:/OfficeWork/Otenro/Otenro/initData/templates/',
-  PROGRESSIVE_TEMPLATES_PATH : 'd:/OfficeWork/Otenro/Otenro/initData/progressiveTemplates/',
+  TEMPLATES_PATH : '/home/madhuranga/project/Otenro/initData/templates/',
+  PROGRESSIVE_TEMPLATES_PATH : '/home/madhuranga/project/Otenro/initData/progressiveTemplates/',
   REDIRECT_URL : 'http://localhost:1337',
 };

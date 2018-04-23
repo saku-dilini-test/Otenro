@@ -327,6 +327,9 @@ module.exports.routes = {
     'GET /templates/getArticleByCategoryId': 'template/TemplateController.getArticleByCategoryId',
     'GET /templates/getArticleById': 'template/TemplateController.getArticleById',
     'GET /templates/getCommentsDummy': 'template/TemplateController.getCommentsDummy',
+    'GET /templates/getCategory': 'template/TemplateController.getCategory',
+
+
 
     /**
     * Pay by authorizeNet in templates

@@ -39,7 +39,7 @@ module.exports = {
             appName = req.body.appName,
             serverTmp="http://localhost:port",
             serverOrg=config.server.host,
-            //serverOrg='http://localhost:1337',
+            // serverOrg='http://localhost:1337',
             isAppNameAvailable=false;
 
         var appQuery = { 

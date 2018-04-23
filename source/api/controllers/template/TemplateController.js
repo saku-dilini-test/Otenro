@@ -236,6 +236,8 @@ module.exports = {
      */
 
     getArticles : function(req,res) {
+        var dateFormat = require('dateformat');
+        var articalData = [];
 
         var appId = req.param('appId');
         var categoryId = req.param('categoryId');
@@ -244,10 +246,20 @@ module.exports = {
             appId: appId,
             categoryId : categoryId
         };
-        Article.find({ select: ['appId','title','imageUrl','categoryId','desc','tempImageArray']}).where(searchApp).exec(function (err, result) {
+
+        Article.find({ select: ['appId','title','imageUrl','categoryId','desc','tempImageArray','publishDate','expiryDate']}).where(searchApp).exec(function (err, result) {
             if (err) return done(err);
             //sails.log.info(result);
-            res.json(result);
+
+            result.forEach(function(article) {
+                if(new Date(new Date(dateFormat(article.publishDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) <= new Date(new Date().toLocaleString())){
+                    if(new Date(new Date(dateFormat(article.expiryDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) >= new Date(new Date().toLocaleString())) {
+                        articalData.push(article);
+                    }
+                }
+            });
+
+            res.json(articalData);
         });
     },
 
@@ -318,6 +330,27 @@ module.exports = {
             });
         },
 
+        /**
+         * return collection of article given appId
+         *
+         * @param req appId
+         * @param res collection articles for given appId
+         */
+        getCategory: function (req, res) {
+
+            var categoryId = req.param('categoryId');
+            var searchQuery = {
+                id:categoryId
+            };
+
+            ArticleCategory.find(searchQuery).exec(function (err, result) {
+                if (err) {
+                    sails.log.error("Article Category Collection find Error for given appId : " + appId);
+                    return done(err);
+                }
+                res.send(result);
+            });
+        },
 
     /**
      * return images for given userID & appID & img ( Path + Image name )

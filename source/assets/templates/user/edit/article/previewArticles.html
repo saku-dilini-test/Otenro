@@ -23,13 +23,19 @@
             <table class="table">
                 <thead>
                 <th>Title</th>
-                <th>Publish Date</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Publish<br><font style="font-size:9px">Date & Time</font></th>
+                <th>Expiry<br><font style="font-size:9px">Date & Time</font></th>
                 <th>Action</th>
                 </thead>
                 <tbody>
                 <tr dir-paginate="article in articleList | filter:search | itemsPerPage: pageSize">
                     <td>{{article.title}}</td>
-                    <td>{{article.createdDate}}</td>
+                    <td>{{article.categoryName}}</td>
+                    <td>{{article.status}}</td>
+                    <td>{{article.publishDate}}</td>
+                    <td>{{article.expiryDate}}</td>
                     <td>
                         <a data-ng-click="editArticle(article)">Edit</a> /
                         <a data-ng-click="deleteArticle($index,article)">Delete</a>

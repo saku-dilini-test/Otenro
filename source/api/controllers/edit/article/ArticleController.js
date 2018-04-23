@@ -18,20 +18,43 @@ module.exports = {
      */
     getArticles: function (req, res) {
 
+        var dateFormat = require('dateformat');
         var appId = req.param('appId');
         var searchQuery = {
             appId: appId
         };
-
+        var articleData = [];
 
         Article.find(searchQuery).exec(function (err, result) {
             if (err) {
                 sails.log.error("Article Collection find Error for given appId : " + appId);
                 return done(err);
+            }else {
+
+                result.forEach(function(article) {
+                    article.status = "";
+
+                    if(new Date(new Date(dateFormat(article.publishDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) <= new Date(new Date().toLocaleString())){
+                        if(new Date(new Date(dateFormat(article.expiryDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) >= new Date(new Date().toLocaleString())) {
+                            article.status = "Live";
+
+                        }else {
+                            article.status = "Expired";
+
+                        }
+                    }else {
+                        article.status = "To be published";
+
+                    }
+
+                    articleData.push(article);
+                });
+                res.send(articleData);
             }
-            res.send(result);
         });
     },
+
+
 
 
 

@@ -16,6 +16,11 @@ module.exports = {
     },
     imageUrl : {
       type : 'string'
+    },
+    id : {
+
+     type : 'ObjectId'
+
     }
   }
 };

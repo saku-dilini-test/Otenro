@@ -3,9 +3,9 @@ echo  'start....'
 
 #leave and comment other env
 #local
-MESERVER='c:/xampp/htdocs/meServer/temp/';
-NODE='c:/xampp/htdocs/meServer/node_modules/';
-APPFILESERVER='c:/xampp/htdocs/meServer/temp/';
+MESERVER='/var/www/html/meServer/temp/';
+NODE='/var/www/html/meServer/node_modules/';
+APPFILESERVER='/var/www/html/meServer/temp/';
 
 #stag
 #MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
