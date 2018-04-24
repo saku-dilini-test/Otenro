@@ -23,6 +23,8 @@ import { ProductsService } from './services/products/products.service';
 import { AppDataService } from './services/appdata-info/appdata-info.service';
 import { TitleService } from './services/title.service';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import {SMSService} from "./services/cordova-plugin-services/sms.service";
+import {CordovaPluginFirebaseService} from "./services/cordova-plugin-services/cordova-plugin-firebase.service";
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     CategoriesService,
     ProductsService,
     AppDataService,
-    TitleService
+    TitleService,
+    SMSService,
+    CordovaPluginFirebaseService
     ],
   bootstrap: [AppComponent]
 })
