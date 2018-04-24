@@ -85,3 +85,18 @@ Do the below changes in apache2.conf file
 Restart Apache server by the command "sudo service apache2 restart"
 
 
+Firebase configuration for push notifications
+======================================================================================
+
+Firebase console url: https://console.firebase.google.com/u/1/
+User: spdonbit@gmail.com
+pwd: ABcd@#1234
+Firebase Project name: Ideadroid
+
+Below should be in the source/api/service/config.js(Note: AUTHORIZATION key may differ, check the firebase project to find the key)
+---------------------------------------------------
+PUSH_API_URL : 'https://fcm.googleapis.com/fcm/send',
+AUTHORIZATION : 'key=AAAA_PMyt6w:APA91bGc83P6ymZoLGooHVrGc7IO8iSAMVN59JoElyzZylSYwMZVnQFXpvGgAiLmHi1wkYSTT4XxHKMDVshwwYIJyXfRAEYXpAAwhk9UYcB755kW73uRRO7oiAsNGcEFR8iboHON5X-9'
+
+
+
