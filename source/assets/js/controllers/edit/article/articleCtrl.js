@@ -250,19 +250,19 @@
 
         $scope.publishArticle = function (file, article) {
 
-        var urlError = "Please add the Youtube link";
+            var urlError = "Please add the Youtube link";
 
-        var videoUrl2 = document.forms["articleForm"]["videoUrl2"].value;
+            var videoUrl2 = document.forms["articleForm"]["videoUrl2"].value;
 
-        var videoUrl3 = document.forms["articleForm"]["videoUrl3"].value;
+            var videoUrl3 = document.forms["articleForm"]["videoUrl3"].value;
 
-        var videoUrl4 = document.forms["articleForm"]["videoUrl4"].value;
+            var videoUrl4 = document.forms["articleForm"]["videoUrl4"].value;
 
-        var videoUrl5 = document.forms["articleForm"]["videoUrl5"].value;
+            var videoUrl5 = document.forms["articleForm"]["videoUrl5"].value;
 
-        var videoUrl6 = document.forms["articleForm"]["videoUrl6"].value;
+            var videoUrl6 = document.forms["articleForm"]["videoUrl6"].value;
 
-            if($scope.tmpImage[1].url == true){
+            if($scope.tmpImage[1] && $scope.tmpImage[1].url == true){
                 if (videoUrl2 == null || videoUrl2 == "") {
 
                     document.getElementById("err_videoUrl2").innerHTML = urlError;

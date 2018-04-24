@@ -20,7 +20,7 @@ module.exports = {
     categoryId : {
       type: 'string'
     },
-      expiryDate:{
+    expiryDate:{
       type:'string'
     },
     publishDate:{

@@ -36,8 +36,6 @@ export class HomepageComponent implements OnInit {
 
   }
 
-
-
   ngOnInit() {
 
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
@@ -70,5 +68,5 @@ export class HomepageComponent implements OnInit {
     this.router.navigate(['/' + val, id, name]);
   }
 
- 
+
 }
