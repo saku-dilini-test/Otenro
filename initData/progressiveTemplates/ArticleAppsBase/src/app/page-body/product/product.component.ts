@@ -66,7 +66,6 @@ export class ProductComponent implements OnInit {
                 });
             }
         });
-        console.log(this.Data);
 
         $(() => {
             var carouselEl = $('.carousel');

@@ -277,7 +277,7 @@ module.exports = {
                 appBasePath = config.PROGRESSIVE_TEMPLATES_PATH;
                 templatePath = config.PROGRESSIVE_TEMPLATES_PATH + '/templates/' + templateName,
                 appName = req.body.appName,
-                serverTmp="http://localhost:port",
+                serverTmp="serverUrl",
                 serverOrg=config.server.host,
                 isAppNameAvailable=false;
 
