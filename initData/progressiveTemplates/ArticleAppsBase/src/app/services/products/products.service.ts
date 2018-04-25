@@ -36,4 +36,6 @@ export class ProductsService {
     return this.http.get(SERVER_URL + '/templates/createArticleViewDataInfo?appId=' + this.appId+"&articleName="+articleName)
       .map(res => res.text() ? res.json() : null);
   }
+
+
 }

@@ -5,6 +5,9 @@ import * as data from '../../madeEasy.json';
 import { CategoriesService } from '../../services/categories/categories.service'
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { TitleService } from '../../services/title.service';
+import {CordovaPluginFirebaseService} from "../../services/cordova-plugin-services/cordova-plugin-firebase.service";
+
+var homePageCmp;
 
 @Component({
   selector: 'app-homepage',
@@ -30,13 +33,16 @@ export class HomepageComponent implements OnInit {
   private isSliderDataAvailable: boolean = false;
   private isRandomProducts;
 
-  constructor(private route: Router, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
+  constructor(private route: Router, private dataService: PagebodyServiceModule,
+              private router: Router, private categoryService: CategoriesService,
+              private title: TitleService,private  push: CordovaPluginFirebaseService) {
 
     this.title.changeTitle("Your Horoscope");
-
+    homePageCmp = this;
   }
 
   ngOnInit() {
+    this.generatePushToken();
 
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
@@ -66,6 +72,30 @@ export class HomepageComponent implements OnInit {
   navigateShop(val: string, id, name) {
     this.dataService.catId = id;
     this.router.navigate(['/' + val, id, name]);
+  }
+
+  pushSuccessCallback(results: any){
+    alert(results);
+
+    try {
+      homePageCmp.categoryService.sendDeviceToken(results).subscribe(data => {
+          //console.log();
+          alert(data);
+        },
+        error => {
+          alert('Error retrieving categories');
+        });
+    }catch(err){
+      alert(err);
+    }
+  }
+
+  pushErrorCallback(error: any){
+    alert("pushErrorCallback=>" + error);
+  }
+
+  generatePushToken(){
+    this.push.getToken(this.pushSuccessCallback, this.pushErrorCallback);
   }
 
 
