@@ -595,8 +595,9 @@ module.exports = {
             appId = req.param('appId'),
             copyDirPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/',
             moveConfigFile = copyDirPath + 'config.xml',
+            homeFile = copyDirPath + 'src/pages/home/home.html',
             appIconFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/0.png',
-            appSplashFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/6.png',
+            appSplashFileRES = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId + '/src/assets/images/publish/2.png',
             appIconFileDES = copyDirPath + 'resources' + '/' + 'icon.png',
             appSplashFileDES = copyDirPath + 'resources' + '/' + 'splash.png',
             replacePointerAppLink = config.ME_SERVER_URL+userId+'/progressiveTemplates/'+appId,
@@ -672,9 +673,7 @@ module.exports = {
                         }
 
                         parser.parseString(data, function (err, result) {
-
                             result.widget.name = appName;
-                            result.widget.content[0]['$'].src = replacePointerAppLink+'/src/index.html';
                             result.widget['$'].id='io.ionic.prog'+appId;
                             var xml = xmlBuilder.buildObject(result);
 
@@ -689,20 +688,31 @@ module.exports = {
                             fs.copy(splash, appSplashFileDES, 'base64', function(err) {
                                if (err) return res.negotiate(err);
                             });
-                            console.log(result.widget.name)
                             BuildVersion.create({
                                 appId: appId,
                                 previousVersion:result.widget['$'].version,
                                 version : result.widget['$'].version
                             }).exec(function(err,build){
                                 if (err) return res.negotiate(err);
-                                if(build) {
-                                   buildApkFile(copyDirPath,appName);
-                                }
+
+                                    var html='<ion-content>'+
+                                        '<iframe class= "webPage" name= "samplePage" id="appframe" src="'+replacePointerAppLink+'/src/index.html">'+
+                                        '</iframe>'+
+                                        '</ion-content>'
+                                    fs.writeFile(homeFile, html, function(err) {
+
+                                            if (err) return res.negotiate(err);
+                                            buildApkFile(copyDirPath,appName);
+
+                                    });
+
                             });
                         });
                     }
                 );
+
+
+
             }
 
             function increaseVersion(version){
@@ -729,44 +739,50 @@ module.exports = {
                 var mime = require('mime');
 
                 shell.cd(appPath);
-
+                console.log('next resourses')
                 shell.exec('ionic cordova resources android --force', {async: true}, function (code, stdout, stderr) {
 
                     if (code == 0) {
+                        console.log('next build android')
 
                         shell.exec('ionic cordova build android', {async: true}, function (code, stdout, stderr) {
 
                             if (code == 0) {
                                 /*shell.exec('cordova plugin rm cordova-plugin-console', {async: true}, function (code1, stdout, stderr) {
                                  if (code1==0){*/
-                                shell.exec('ionic cordova build --release android', {async: true}, function (code2, stdout, stderr) {
+                                console.log('next build android --release')
+
+                                shell.exec('ionic cordova build android  --release', {async: true}, function (code2, stdout, stderr) {
 
                                     if (code2 == 0) {
-                                        shell.mv('-n', 'my-release-key.keystore', appPath + '/platforms/android/build/outputs/apk/');
-                                        shell.cd(appPath + '/platforms/android/build/outputs/apk/');
+                                        console.log('next move cd and execute jarsigner')
+
+                                        shell.mv('-n', 'my-release-key.keystore', appPath + '/platforms/android/build/outputs/apk/release');
+                                        shell.cd(appPath + '/platforms/android/build/outputs/apk/release');
                                         shell.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg ' +
                                             'SHA1 -keystore my-release-key.keystore android-release-unsigned.apk ' +
                                             'alias_name -storepass abcd1234 -keypass abcd1234 ', {async: true}, function (code4, stdout, stderr) {
                                             if (code4 == 0) {
+                                                console.log('exec ziplign')
 
-                                                fs.stat(appPath + '/platforms/android/build/outputs/apk/' + appName.replace(/\s/g, '') + '.apk', function (err, fileStat) {
+                                                fs.stat(appPath + '/platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk', function (err, fileStat) {
                                                     if (err) {
                                                         if (err.code == 'ENOENT') {
                                                             sails.log.info('Does not exist.');
                                                         }
                                                     } else {
                                                         if (fileStat.isFile()) {
-                                                            fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/' + appName.replace(/\s/g, '') + '.apk');
+                                                            fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk');
                                                         } else if (fileStat.isDirectory()) {
                                                             sails.log.info('Directory found.');
                                                         }
                                                     }
                                                 });
-                                                // shell.exec('"C:/Program Files (x86)/android/Android-sdk/build-tools/26.0.2/zipalign" -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
-                                                shell.exec('/opt/android-sdk-linux/build-tools/23.0.1/zipalign -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
-                                                    if (code5 == 0) {
+                                                 shell.exec('"C:/Program Files (x86)/android/Android-sdk/build-tools/26.0.2/zipalign" -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
+                                                // shell.exec('/opt/android-sdk-linux/build-tools/23.0.1/zipalign -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
+                                                     if (code5 == 0) {
 
-                                                        var file = appPath + 'platforms/android/build/outputs/apk/' + appName.replace(/\s/g, '') + '.apk';
+                                                        var file = appPath + 'platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
                                                         var resourcesPath = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' +
                                                             appId + '/src/assets/images/publish/';
                                                         var publishPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/publish';

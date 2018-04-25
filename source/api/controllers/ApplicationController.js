@@ -388,7 +388,7 @@ module.exports = {
                               }
                               
                               console.log("copyied the template");
-                              appCtrl.createProgWebAppCont(res,tempAppDirPath,app.id,madeEasyFileContent,serverTmp,serverOrg,userId,appBasePath);
+                              appCtrl.createProgWebAppCont(res,tempAppDirPath,app.id,madeEasyFileContent,serverTmp,serverOrg,userId,templatePath);
                             });  
                           });
                           /**
@@ -481,7 +481,7 @@ module.exports = {
                 }
             });
         },
-    createProgWebAppCont :function(res,tempAppDirPath,appId,madeEasyFileContent,serverTmp,serverOrg,userId,appBasePath){
+    createProgWebAppCont :function(res,tempAppDirPath,appId,madeEasyFileContent,serverTmp,serverOrg,userId,templatePath){
       var madeEasyFilePath = tempAppDirPath + appId +'/src/app/madeEasy.json';
 
       fs.outputJson(madeEasyFilePath,madeEasyFileContent, function (err) {
@@ -501,7 +501,7 @@ module.exports = {
        * TODO : future development, Template dummy data move to another folder
        * **/
       var appFileServerPath  = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId +'/';
-      var tempDummyImagesPath = appBasePath + '/src/assets/images/';
+      var tempDummyImagesPath = templatePath + '/src/assets/images/';
       var tempDummyImagesDesPath = appFileServerPath +  '/src/assets/images/';
       /** Copy Template Dummy Images to APP File Server for given userID & appID **/
       fs.copy(tempDummyImagesPath,tempDummyImagesDesPath,function (err) {
