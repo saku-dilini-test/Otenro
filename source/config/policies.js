@@ -94,7 +94,8 @@ module.exports.policies = {
     getSliderData : true,
     getCategory : true,
     createAppVisitDataInfo:true,
-    createArticleViewDataInfo:true
+    createArticleViewDataInfo:true,
+      postDeviceId:true
 
   },
 

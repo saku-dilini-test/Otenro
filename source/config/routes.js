@@ -310,7 +310,7 @@ module.exports.routes = {
     'GET /templates/getAboutUs': 'template/TemplateController.getAboutUs',
     'GET /templates/getPolicies': 'template/TemplateController.getPolicies',
     'GET /templates/getTermsAndConditions': 'template/TemplateController.getTermsAndConditions',
-    'POST /templates/postDeviceId': 'template/TemplateController.postDeviceId',
+    'GET /templates/postDeviceId': 'template/TemplateController.postDeviceId',
     'GET /templates/getOrdersOfUser': 'template/TemplateController.getOrdersOfUser',
     'GET /templates/getTemplateData' : 'template/TemplateController.getTemplateByPreviewId',
 
