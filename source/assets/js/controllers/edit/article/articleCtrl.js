@@ -247,6 +247,13 @@
 //            }
 //        };
 
+        $scope.change = function() {
+            document.getElementById("err_videoUrl2").innerHTML = '';
+            document.getElementById("err_videoUrl3").innerHTML = '';
+            document.getElementById("err_videoUrl4").innerHTML = '';
+            document.getElementById("err_videoUrl5").innerHTML = '';
+            document.getElementById("err_videoUrl6").innerHTML = '';
+          };
 
         $scope.publishArticle = function (file, article) {
 
