@@ -268,7 +268,7 @@ module.exports = {
 
     var appId = req.param('appId');
     var searchApp = {
-        appId: appId,
+        appId: appId
     };
         ArticleCategory.find().where(searchApp).exec(function (err, result) {
             if (err) return done(err);
@@ -439,8 +439,9 @@ module.exports = {
 
     },
     postDeviceId: function(req,res){
-        var data = req.body;
-        var deviceId =  req.body.deviceId;
+        //var data = req.body
+        var deviceId =  req.param('deviceId');
+        var appId = req.param('appId');
         var searchQuery  = {
             deviceId : deviceId
         };
@@ -452,15 +453,25 @@ module.exports = {
             // if not device ID in db collections
             if (result.length == 0) {
                 // create new Device ID Collection
-                DeviceId.create(data).exec(function(err,result) {
+                DeviceId.create({appId:appId,deviceId:deviceId,lastAccessTime:new Date().toLocaleString()}).exec(function(err,result) {
                     if(err) return console.error(err);
                     res.send("success");
                 });
             }else{
+
                 if(err) return console.error(err);
-                res.send("success");
+
+                DeviceId.update(searchQuery,{lastAccessTime:new Date().toLocaleString()}).exec(function(err,data){
+                        if(err) return done(err);
+                        else {
+                            res.send(data);
+                        }
+                });
+
             }
         });
+
+
     },
     authorizeNetPay: function(req,res){
         var expDate = req.body.exp_year+'-'+req.body.exp_month,

@@ -31,6 +31,15 @@ module.exports.bootstrap = function(cb) {
     Country.seed,
     YourselfReason.seed  
 
-  ], cb);
+  ]);
+
+
+    sails.on('lifted', function() {
+
+        var EngageController = require('../api/controllers/edit/engage/EngageController.js');
+        console.log("it started ......");
+        EngageController.startSchedulingJob();
+    });
+    cb();
 
 };
