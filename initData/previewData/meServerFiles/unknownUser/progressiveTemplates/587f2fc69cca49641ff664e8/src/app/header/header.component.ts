@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit{
   public title:string;
   constructor(private router: Router, private dataService: PagebodyServiceModule,private titleServ: TitleService) {
     this.cartNo = this.dataService.cart.cartItems.length;
-    this.title = 'Your Horoscope';
+    this.title = 'Home';
   }
 
   ngOnInit() {
