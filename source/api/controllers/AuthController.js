@@ -95,19 +95,19 @@ module.exports = {
       console.log("req.body.cap "+req.body.cap);
 
 
-      var postData = {
-          secret: '6LdkazYUAAAAAK-iSfM23fREPrdyfxCtztJoYaYY',
-          response: req.body.cap,
-          remoteip :''
-      }
+//      var postData = {
+//          secret: '6LdkazYUAAAAAK-iSfM23fREPrdyfxCtztJoYaYY',
+//          response: req.body.cap,
+//          remoteip :''
+//      }
 
-      request.post({
-              url: 'https://www.google.com/recaptcha/api/siteverify',
-              form: postData
-          },
-          function (err, httpResponse, body) {
-              console.log(err, JSON.parse(body));
-              if (JSON.parse(body).success==true){
+//      request.post({
+//              url: 'https://www.google.com/recaptcha/api/siteverify',
+//              form: postData
+//          },
+//          function (err, httpResponse, body) {
+//              console.log(err, JSON.parse(body));
+//              if (JSON.parse(body).success==true){
                   User.findOne({email: req.body.email}, function foundUser(err, user) {
                       if (err) return res.negotiate(err);
                       if (user) return res.status(409).json({error: 'already exists'});
@@ -142,11 +142,11 @@ module.exports = {
                           }
                       });
                   });
-              }else {
-                  sails.config.logging.custom.warn({message:'Registration Error'});
-                  return res.status(409).json({error: 'Registration Error'})
-              }
-          });
+//              }else {
+//                  sails.config.logging.custom.warn({message:'Registration Error'});
+//                  return res.status(409).json({error: 'Registration Error'})
+//              }
+//          });
 
 
 

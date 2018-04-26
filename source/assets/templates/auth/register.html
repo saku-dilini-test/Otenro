@@ -37,25 +37,25 @@ chosen link or button. -->
     ga('send', 'pageview');
 </script>
 
-<script type="text/javascript">
-    var verifyCallback = function(response) {
-        document.getElementById('recaptcha_response_field').value=response;
-    };
+<!--<script type="text/javascript">-->
+    <!--var verifyCallback = function(response) {-->
+        <!--document.getElementById('recaptcha_response_field').value=response;-->
+    <!--};-->
 
 
-    var onloadCallback = function() {
-        grecaptcha.render('recaptcha_widget', {
-            'sitekey' : '6LdkazYUAAAAACFDe56WJ5pgdy2g3_PFOG7dtG1v',
-            'callback' : verifyCallback,
-        });
+    <!--var onloadCallback = function() {-->
+        <!--grecaptcha.render('recaptcha_widget', {-->
+            <!--'sitekey' : '6LdkazYUAAAAACFDe56WJ5pgdy2g3_PFOG7dtG1v',-->
+            <!--'callback' : verifyCallback,-->
+        <!--});-->
 
 
-    };
-</script>
+    <!--};-->
+<!--</script>-->
 
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        async defer>
-</script>
+<!--<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"-->
+        <!--async defer>-->
+<!--</script>-->
 
 
 
@@ -138,11 +138,11 @@ chosen link or button. -->
         </md-checkbox>
       </fieldset>
        <br>
-      <fieldset>
-        <div  id="recaptcha_widget">
-        </div>
-        <input ng-model="user.captcha" type="hidden" id="recaptcha_response_field" name="recaptcha_response_field" />
-      </fieldset>
+      <!--<fieldset>-->
+        <!--<div  id="recaptcha_widget">-->
+        <!--</div>-->
+        <!--<input ng-model="user.captcha" type="hidden" id="recaptcha_response_field" name="recaptcha_response_field" />-->
+      <!--</fieldset>-->
 
       <fieldset class="set-register">
         <input type="button" class="me-default-button" ng-model="cancel" ng-click="cancel()" name="cancel" value="Cancel" />
