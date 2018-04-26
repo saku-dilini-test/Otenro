@@ -69,9 +69,9 @@ export class HomepageComponent implements OnInit {
 
 
     // Routing Method
-    navigateShop(val: string, id, name) {
+    navigateShop(val: string, id, name,image) {
         this.dataService.catId = id;
-        this.router.navigate(['/' + val, id, name]);
+        this.router.navigate(['/' + val, id, name,image]);
     }
 
     pushSuccessCallback(results: any){
