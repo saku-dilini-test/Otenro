@@ -443,7 +443,8 @@ module.exports = {
         var deviceId =  req.param('deviceId');
         var appId = req.param('appId');
         var searchQuery  = {
-            deviceId : deviceId
+            deviceId : deviceId,
+            appId : appId
         };
 
         sails.log.info("deviceId " + deviceId);

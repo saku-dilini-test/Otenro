@@ -71,7 +71,7 @@ export class ProductComponent implements OnInit {
             var carouselEl = $('.carousel');
             var carouselItems = carouselEl.find('.item');
             carouselEl.carousel({
-                interval: 100000
+                interval: 10000000
             }).on('slid.bs.carousel', (event) => {
                 console.log(event);
                 let index:any;
