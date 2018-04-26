@@ -92,7 +92,7 @@ module.exports = {
   register: function(req, res) {
 
 
-      console.log("req.body.cap "+req.body.cap);
+//      console.log("req.body.cap "+req.body.cap);
 
 
 //      var postData = {
