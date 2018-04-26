@@ -32,7 +32,7 @@ export class HomepageComponent implements OnInit {
 
   constructor(private route: Router, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
 
-    this.title.changeTitle("Your Horoscope");
+    this.title.changeTitle("Home");
 
   }
 
@@ -70,5 +70,5 @@ export class HomepageComponent implements OnInit {
     this.router.navigate(['/' + val, id, name,image]);
   }
 
- 
+
 }
