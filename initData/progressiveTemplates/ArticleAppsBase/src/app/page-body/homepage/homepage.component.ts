@@ -48,19 +48,19 @@ export class HomepageComponent implements OnInit {
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
 
     this.categoryService.getCategories().subscribe(data => {
-      if (data.length > 0) {
-        // Read the result field from the JSON response.
-        this.results = data;
-        this.dataService.searchArray = [];
-        data.forEach(element => {
-          this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
-        });
-      } else {
-        this.results = null;
-      }
+        if (data.length > 0) {
+          // Read the result field from the JSON response.
+          this.results = data;
+          this.dataService.searchArray = [];
+          data.forEach(element => {
+            this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
+          });
+        } else {
+          this.results = null;
+        }
 
 
-    },
+      },
       error => {
         console.log('Error retrieving categories');
       });
@@ -75,23 +75,19 @@ export class HomepageComponent implements OnInit {
   }
 
   pushSuccessCallback(results: any){
-    alert(results);
-
     try {
       homePageCmp.categoryService.sendDeviceToken(results).subscribe(data => {
-          //console.log();
-          alert(data);
         },
         error => {
-          alert('Error retrieving categories');
+          console.log('Error retrieving categories');
         });
     }catch(err){
-      alert(err);
+      console.log
     }
   }
 
   pushErrorCallback(error: any){
-    alert("pushErrorCallback=>" + error);
+    console.log("pushErrorCallback=>" + error);
   }
 
   generatePushToken(){

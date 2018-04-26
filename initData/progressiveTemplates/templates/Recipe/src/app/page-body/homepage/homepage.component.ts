@@ -75,23 +75,19 @@ export class HomepageComponent implements OnInit {
     }
 
     pushSuccessCallback(results: any){
-        alert(results);
-
         try {
             homePageCmp.categoryService.sendDeviceToken(results).subscribe(data => {
-                    //console.log();
-                    alert(data);
                 },
                 error => {
-                    alert('Error retrieving categories');
+                    console.log('Error retrieving categories');
                 });
         }catch(err){
-            alert(err);
+            console.log
         }
     }
 
     pushErrorCallback(error: any){
-        alert("pushErrorCallback=>" + error);
+        console.log("pushErrorCallback=>" + error);
     }
 
     generatePushToken(){

@@ -42,7 +42,6 @@
 
         $scope.downLoadSampleFile = function () {
 
-          alert("downLoadSampleFile" + SERVER_URL);
             $http({
                 method: 'POST',
                 url: SERVER_URL+"edit/sendSampleFile" ,
@@ -170,11 +169,9 @@
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 }).success(function(data){
-                    alert("success " + JSON.stringify(data));
                     return engageService.showPushMessageDialog();
 
                 }).error(function(error){
-                    alert("success " + JSON.stringify(data));
                     toastr.error(error, 'Warning', {
                         closeButton: true
                     });
