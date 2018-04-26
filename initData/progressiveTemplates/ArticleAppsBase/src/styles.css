@@ -11,90 +11,38 @@
   background-color:lavender;
 }
 .progress {
+  margin: 0;
+  background: url(assets/images/test.png);
+  background-size: 100%;
   position: relative;
-  height: 4px;
+  height: 100vh;
   display: block;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.29);
-  border-radius: 2px;
-  background-clip: padding-box;
-  margin: 0.5rem 0 1rem 0;
+  width: 100vw;
   overflow: hidden;
 }
 
-.progress .indeterminate {
-  background-color: rgba(0, 0, 0, 0.76);
+.progress-circle{
+  position: relative;
+  top: calc(50% - 50px);
+  left: calc(50vw - 50px);
 }
 
-.progress .indeterminate:before {
-  content: '';
-  position: absolute;
-  background-color: inherit;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  will-change: left, right;
-  -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-  animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+.progress-circle.indefinite .progress {
+  stroke: #00b8ff;
+  stroke-width: 2;
+  stroke-dashoffset: 0;
+  stroke-dasharray: 63 188;
+  animation: progress-indef 2s linear infinite;
 }
 
-.progress .indeterminate:after {
-  content: '';
-  position: absolute;
-  background-color: inherit;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  will-change: left, right;
-  -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-  animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-  -webkit-animation-delay: 1.15s;
-  animation-delay: 1.15s;
+.progress-circle.indefinite .bg {
+  stroke: #eee;
+  stroke-width: 2;
 }
 
-@-webkit-keyframes indeterminate {
-  0% {
-    left: -35%;
-    right: 100%; }
-  60% {
-    left: 100%;
-    right: -90%; }
-  100% {
-    left: 100%;
-    right: -90%; }
-}
-@keyframes indeterminate {
-  0% {
-    left: -35%;
-    right: 100%; }
-  60% {
-    left: 100%;
-    right: -90%; }
-  100% {
-    left: 100%;
-    right: -90%; }
-}
-@-webkit-keyframes indeterminate-short {
-  0% {
-    left: -200%;
-    right: 100%; }
-  60% {
-    left: 107%;
-    right: -8%; }
-  100% {
-    left: 107%;
-    right: -8%; }
-}
-@keyframes indeterminate-short {
-  0% {
-    left: -200%;
-    right: 100%; }
-  60% {
-    left: 107%;
-    right: -8%; }
-  100% {
-    left: 107%;
-    right: -8%; }
+@keyframes progress-indef {
+  0% { stroke-dashoffset: 251; }
+  100% { stroke-dashoffset: 0; }
 }
 
 /*-----------------------------------------------------------------------------------
@@ -113,7 +61,7 @@ body{
 a,button{transition: all .3s ease-in-out;outline: none!important;} /* Prevent ugly blue glow on chrome and safari */
 a:hover{text-decoration: none; cursor:pointer;}
 
-#page-loading-blocs-notifaction{position: fixed;top: 0;bottom: 0;width: 100%;z-index:100000;background:#FFFFFF url("./assets/images/pageload-spinner.gif") no-repeat center center;}
+/*#page-loading-blocs-notifaction{position: fixed;top: 0;bottom: 0;width: 100%;z-index:100000;background:#FFFFFF url("./assets/images/pageload-spinner.gif") no-repeat center center;}*/
 
 /* = Blocs
 -------------------------------------------------------------- */
