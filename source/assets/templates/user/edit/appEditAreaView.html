@@ -435,7 +435,7 @@
                     <!--<obl-menu-button label="Made Easy Badge" icon="fa fa-file-image-o" click-title="madeEasyBadge"></obl-menu-button>-->
                 </obl-menu-group>
 
-                <obl-menu-button ng-if="tempIsNew == 'true' || tempIsNew == true"  label="Carousel Banner" icon="fa fa-file-image-o" click-title="carouselBanner"></obl-menu-button>
+                <!--<obl-menu-button ng-if="tempIsNew == 'true' || tempIsNew == true"  label="Carousel Banner" icon="fa fa-file-image-o" click-title="carouselBanner"></obl-menu-button>-->
                 <obl-menu-button ng-if="tempIsNew == 'true' || tempIsNew == true"  label="Analytics" icon="fa fa-file-image-o" click-title="articleAnalytics"></obl-menu-button>
 
                 <!--For the beta release-->
@@ -522,12 +522,12 @@
                 <a class="mobile-icon" href ng-click="changeDevice('mobile')" ng-class="{'current-device': deviceView == 'mobile'}"></a>
                 <a class="tablet-icon" href ng-click="changeDevice('tablet')" ng-class="{'current-device': deviceView == 'tabletView'}"></a>
             </div>
-            <div class="website-area">
-                <div class="pull-left">
-                    <p>Website</p>
-                    <a  href ng-click="changeDevice('web')" class="desktop-icon size-fix" ng-class="{'current-device': deviceView == 'web'}"></a>
-                    <!--<a  href ng-click="temporaryMessage()" class="tablet-icon"></a>-->
-                </div>
+            <!--<div class="website-area">-->
+                <!--<div class="pull-left">-->
+                    <!--<p>Website</p>-->
+                    <!--<a  href ng-click="changeDevice('web')" class="desktop-icon size-fix" ng-class="{'current-device': deviceView == 'web'}"></a>-->
+                    <!--&lt;!&ndash;<a  href ng-click="temporaryMessage()" class="tablet-icon"></a>&ndash;&gt;-->
+                <!--</div>-->
 
                 <!--<div class="website-area">-->
                     <!--<div class="pull-left">-->
@@ -539,7 +539,7 @@
                   <!--&lt;!&ndash;  <a href ng-click="buildSource()" class="download-link"></a>&ndash;&gt;-->
                     <!--<a href="/edit/buildSource?appId={{appId}}&userId={{userId}}" target="_self" class="download-link"></a>-->
                 <!--</div>-->
-            </div>
+            <!--</div>-->
             <div class="user-area">
                 <button class="user-settings-button" ng-click="downloadMobileViewer()" type="button" style="margin: 0 10px;">
                     <img src="images/download-mobile.PNG" alt="download mobile viewer" width="23"/>
@@ -556,13 +556,13 @@
 
             </div>
         </div>
-        <div class="device-preview" ng-class="deviceView" ng-if="deviceView == 'web'">
-            <div overflow="scroll">
-                    <!--<me-tablet ng-show="tabletView" tmp-url="{{appTemplateUrl}}"></me-tablet>-->
-                    <me-iphone device-path="{{deviceView}}" tmp-url="{{urlPath1}}"></me-iphone>
+        <!--<div class="device-preview" ng-class="deviceView" ng-if="deviceView == 'web'">-->
+            <!--<div overflow="scroll">-->
+                    <!--&lt;!&ndash;<me-tablet ng-show="tabletView" tmp-url="{{appTemplateUrl}}"></me-tablet>&ndash;&gt;-->
+                    <!--<me-iphone device-path="{{deviceView}}" tmp-url="{{urlPath1}}"></me-iphone>-->
 
-            </div>
-        </div>
+            <!--</div>-->
+        <!--</div>-->
     </div>
     <div class="change-template-notifi" ng-show="changeTemplate">Please confirm if you are satisfied with this selection <a class="btn-material" ng-click="changePermanently('yes')" >Yes</a> <a class="btn-material" ng-click="changePermanently('no')">no</a></div>
 </div>
