@@ -226,7 +226,7 @@
 
         $scope.changeArticleCat = function (catId) {
             if (catId.id == 1) {
-                mainMenuService.showMainMenuDialog();
+                mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory',3,'fromPublishArticle');
             }
             $scope.seletedCategoryId = catId.id;
         }

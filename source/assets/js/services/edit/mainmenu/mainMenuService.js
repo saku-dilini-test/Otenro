@@ -90,7 +90,7 @@
 
                 });
             },
-            showEditMenuCategoryDialog: function(data,id){
+            showEditMenuCategoryDialog: function(data,id,from){
                 return $mdDialog.show({
                     controller: 'MainMenuCtrl',
                     templateUrl: 'user/edit/mainmenu/editMenuCategory.html',
@@ -98,7 +98,8 @@
                     locals : {
                         initialData : {
                             menu : data,
-                            templateCategory : id
+                            templateCategory : id,
+                            from: from
                         }
                     }
                 }).then(function(answer) {
