@@ -7,7 +7,7 @@
       <div class="carousel-inner" role="listbox">
         <div class="item active">
           <div id="image0" style="display:none1">
-            <img style="width:100vw;height:100vw" src="{{imageUrl}}/{{Data.tempImageArray[0].img}}" alt="{{Data.name}}">
+            <img style="width:100vw;" src="{{imageUrl}}/{{Data.tempImageArray[0].img}}" alt="{{Data.name}}">
             <!-- <button *ngIf="Data.tempImageArray[0].videoUrl" type="button" (click)="video(0,Data.tempImageArray[0].videoUrl)" class="video-h8 btn btn-default btn-sm">
               <span class="glyphicon glyphicon-play"></span> Play</button> -->
           </div>
@@ -15,8 +15,8 @@
         <div class="item" *ngFor="let item of Data.tempImageArray |slice:1; let i = index">
           <!-- <div class="item"> -->
             <!-- <div id="image{{i+1}}" style="display:block"> -->
-            <img *ngIf="!item.videoUrl" style="width:100vw;height:100vw" src="{{imageUrl}}/{{item.img}}" alt="{{item.name}}">
-            <iframe id="video{{i+1}}" class="myVideoClass" *ngIf="item.videoUrl" style="width:100vw;height:100vw" [src]="sanitizer.bypassSecurityTrustResourceUrl(item.videoUrl)" frameborder="0" allow="encrypted-media" allowfullscreen="true" allowscriptaccess="always"></iframe>
+            <img *ngIf="!item.videoUrl" style="width:100vw;" src="{{imageUrl}}/{{item.img}}" alt="{{item.name}}">
+            <iframe id="video{{i+1}}" class="myVideoClass" *ngIf="item.videoUrl" style="width:100vw;height:100vw" [src]="checkUrl(item.videoUrl)" frameborder="0" allow="encrypted-media" allowfullscreen="true" allowscriptaccess="always"></iframe>
             <!-- <button *ngIf="item.videoUrl" type="button" (click)="video(i+1,item.videoUrl)" class="video-h8 btn btn-default btn-sm">
               <span class="glyphicon glyphicon-play"></span> Play</button>
           </div> -->

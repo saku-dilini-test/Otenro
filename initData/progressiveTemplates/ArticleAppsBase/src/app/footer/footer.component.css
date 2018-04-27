@@ -33,3 +33,6 @@
   left: -5px;
   bottom: -14px;
 }
+.btn-default:hover{
+  background-color: #fff;
+}

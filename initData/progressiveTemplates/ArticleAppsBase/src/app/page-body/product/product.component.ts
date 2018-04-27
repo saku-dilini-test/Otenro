@@ -6,7 +6,7 @@ import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import * as _ from 'lodash';
 import { TitleService } from '../../services/title.service';
-import { DomSanitizer, SafeUrl  } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ProductsService } from '../../services/products/products.service';
 @Component({
     selector: 'app-product',
@@ -24,46 +24,60 @@ export class ProductComponent implements OnInit {
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     private lockBuyButton = false;
     private dialogVariants;
-    private player:any;
+    private player: any;
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
 
-    constructor(private productService: ProductsService,private sanitizer: DomSanitizer,private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
+    constructor(private productService: ProductsService, private sanitizer: DomSanitizer, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
 
         this.Data = this.dataService.data;
+    }
+
+    checkUrl(url) {
+
+        let id,URL;
+        let res = url.slice(8);
+        let res2 = res.split(/\/|&|=/);
+        if (res2.length > 2) {
+            id = res2[2];
+        }else{
+            id = res2[1];
+        }
+        URL = "https://www.youtube.com/embed/" + id + "?rel=0&color=white&version=3&enablejsapi=1"
+        return this.sanitizer.bypassSecurityTrustResourceUrl(URL);
     }
 
     ngAfterViewInit() {
         $(".carousel").swipe({
 
-            swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+            swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
 
-              if (direction == 'left') $(this).carousel('next');
-              if (direction == 'right') $(this).carousel('prev');
+                if (direction == 'left') $(this).carousel('next');
+                if (direction == 'right') $(this).carousel('prev');
 
             },
-            allowPageScroll:"vertical"
+            allowPageScroll: "vertical"
 
-          });
+        });
     }
 
-    click(index){
+    click(index) {
         // $('#video')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
-        console.log($('#video'+index)[0])
-        }
+        console.log($('#video' + index)[0])
+    }
 
     ngOnInit() {
 
         this.router.params.subscribe(params => {
             this.catName = params['catName'];
-            if(this.catName){
-              this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
-                  // Read the result field from the JSON response.
-                  this.results = data;
+            if (this.catName) {
+                this.productService.createArticleViewDataInfo(this.catName).subscribe(data => {
+                    // Read the result field from the JSON response.
+                    this.results = data;
                 },
-                error => {
-                  console.log('Error on create record');
-                });
+                    error => {
+                        console.log('Error on create record');
+                    });
             }
         });
 
@@ -74,7 +88,7 @@ export class ProductComponent implements OnInit {
                 interval: 10000000
             }).on('slid.bs.carousel', (event) => {
                 console.log(event);
-                let index:any;
+                let index: any;
                 let playerIndex;
 
                 if (event.direction == 'right') {
@@ -104,8 +118,8 @@ export class ProductComponent implements OnInit {
                         // document.getElementById('player' + playerIndex).style.display = 'none';
                         // document.getElementById('image' + playerIndex).style.display = 'block';
 
-                        if(this.Data.tempImageArray[playerIndex].videoUrl && index != this.Data.tempImageArray.length ){
-                            $('#video'+playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                        if (this.Data.tempImageArray[playerIndex].videoUrl && index != this.Data.tempImageArray.length) {
+                            $('#video' + playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
                             this.click(playerIndex);
                         }
                         // $('.myVideoClass').each(()=>{
@@ -122,8 +136,8 @@ export class ProductComponent implements OnInit {
                         // document.getElementById('player' + (this.Data.tempImageArray.length - 1)).style.display = 'none';
                         // document.getElementById('image' + (this.Data.tempImageArray.length - 1)).style.display = 'block';
 
-                        if(this.Data.tempImageArray[playerIndex].videoUrl && index != 1){
-                            $('#video'+playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                        if (this.Data.tempImageArray[playerIndex].videoUrl && index != 1) {
+                            $('#video' + playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
                             this.click(playerIndex);
                         }
 
@@ -137,11 +151,11 @@ export class ProductComponent implements OnInit {
                         // document.getElementById('player' + (index - 1)).style.display = 'none';
                         // document.getElementById('image' + (index - 1)).style.display = 'block';
 
-                        if(this.Data.tempImageArray[playerIndex].videoUrl && index != 1){
-                            $('#video'+playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                        if (this.Data.tempImageArray[playerIndex].videoUrl && index != 1) {
+                            $('#video' + playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
                             this.click(playerIndex);
                         }
-                                                // $('.myVideoClass').each(()=>{
+                        // $('.myVideoClass').each(()=>{
                         //     $(this).stopVideo();
                         //   });
                     }
