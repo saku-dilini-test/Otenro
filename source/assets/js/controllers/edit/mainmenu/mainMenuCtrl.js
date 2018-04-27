@@ -104,7 +104,12 @@
                 });
         }   // Menu-Navigation or Menu-Category (Article Category) -> Add / Update
         else if($scope.initialData){
-         $scope.heading = "Edit Category";
+            if(initialData.from == 'fromPublishArticle'){
+                $scope.heading = "Add Category";
+
+            }else{
+                $scope.heading = "Edit Category";
+            }
             // Config
             $scope.templateCategory = $scope.initialData.templateCategory;
             // Add new Menu Navigation
@@ -571,7 +576,11 @@
                         mySharedService.prepForBroadcast($scope.appTemplateUrl);
                         toastr.success("New category has been added successfully", 'Message', {closeButton: true});
                         $mdDialog.hide();
-                        mainMenuService.showMainMenuDialog();
+                        if(initialData.from == 'fromPublishArticle'){
+                            articleService.showPublishArticleDialog('publishArticle');
+                        }else {
+                            mainMenuService.showMainMenuDialog();
+                        }
                     }).error(function (err) {
                         toastr.error(err.message, 'Warning', {
                             closeButton: true
@@ -825,7 +834,11 @@
 
         $scope.cancelCategory = function() {
             $mdDialog.hide();
-            mainMenuService.showMainMenuDialog();
+            if(initialData.from == 'fromPublishArticle'){
+                articleService.showPublishArticleDialog('publishArticle');
+            }else {
+                mainMenuService.showMainMenuDialog();
+            }
         };
 
         $scope.cancelEdit = function() {
