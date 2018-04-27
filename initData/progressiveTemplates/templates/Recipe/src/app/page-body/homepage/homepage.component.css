@@ -12,5 +12,5 @@ div .row:first-child{
 }
 
 div .row:last-child{
-  padding-bottom: 60;
+  padding-bottom: 60px;
 }
