@@ -226,7 +226,7 @@
 
         $scope.changeArticleCat = function (catId) {
             if (catId.id == 1) {
-                mainMenuService.showMainMenuDialog();
+                mainMenuService.showEditMenuCategoryDialog('addNewMenuCategory',3,'fromPublishArticle');
             }
             $scope.seletedCategoryId = catId.id;
         }
@@ -381,10 +381,26 @@
                 });
                 return;
             }
+
+
             else {
                 var isImageUpdate = true;
                 if ($scope.mainImg == $scope.serverImg) {
                     isImageUpdate = false;
+                }
+
+                if (article.expiryDate&&article.publishDate){
+
+                    var expiryDate = new Date(article.expiryDate);
+                    var publishDate = new Date(article.publishDate);
+
+                    if (expiryDate<publishDate){
+
+                        toastr.error('Invalid date range', 'Warning', {
+                            closeButton: true
+                        });
+                        return ;
+                    }
                 }
 
                 articleService.publishArticle({
