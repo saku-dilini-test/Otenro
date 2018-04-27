@@ -86,17 +86,8 @@ mongoimport --db $DB --collection slider --file dataFiles/slider.json
 echo $MESERVER
 echo $NODE
 
-cd meServerFiles/unknownUser/templates/
-   for d in ./*;do
-       cd $d/js/
-       ls
-       sed -i "s@serverUrl@$serverUrl@" constantsService.js
-       cd -
-    done
-
-cd ../
 pwd
-cd progressiveTemplates/
+cd meServerFiles/unknownUser/progressiveTemplates/
    for d in ./*;do
        cd $d/src/app/
        ls
@@ -105,9 +96,12 @@ cd progressiveTemplates/
     done
 
 cd ../../../
+pwd
 cp -r ./appFileServerFiles/unknownUser $APPFILESERVER
 cp -r ./meServerFiles/unknownUser $MESERVER
 cp -r ./meServerFiles/node_modules $NODE
+cp -r ./sample.csv $MESERVER
+
 
 
 
