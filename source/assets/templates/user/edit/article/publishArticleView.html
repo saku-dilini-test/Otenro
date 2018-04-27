@@ -35,14 +35,14 @@
                 <span ng-show="articleForm.title.$error.maxlength" class="error">Too lengthy</span>
 
                 <fieldset>
-                    <label>publish time</label>
+                    <label>publish date and time</label>
                     <div class="clearfix">
                         <adm-dtp ng-disabled="true" ng-model='article.publishDate' options='{calType: "gregorian", default: today}'></adm-dtp>
                         <!-- <input type="date" ng-model='pushMessage.date'>-->
                     </div>
                 </fieldset>
                 <fieldset>
-                    <label>Expiry time</label>
+                    <label>Expiry date and time</label>
                     <div class="clearfix">
                         <adm-dtp ng-disabled="true" ng-model='article.expiryDate' options='{calType: "gregorian", default: today}'></adm-dtp>
                         <!-- <input type="date" ng-model='pushMessage.date'>-->
