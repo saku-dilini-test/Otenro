@@ -70,7 +70,6 @@
                      $scope.buttonName = "Browse Image";
                 };
 
-        console.log($scope.initialData);
         // Main Menu view
         if($scope.initialData == null ) {
         $scope.heading = "Add Category";
