@@ -1,4 +1,4 @@
-<md-dialog aria-label="Push Message">
+<md-dialog aria-label="Push Message" style="width: 1000px">
 
     <!--Google Analytics-->
     <script>
@@ -13,13 +13,21 @@
                 <li>
                     <a class="add-new-item" ng-click="sendPushMessage()">Add New Message</a>
                 </li>
-                <li>
-                    <input ng-model="data.file" type = "file" accept=".csv" file-model = "myFile"/>
+                <li class="pull-right">
+                    <table>
+                        <tr>
+                            <td>
+                                <input class="custom-file-input  pull-left" ng-model="data.file" type = "file" accept=".csv" file-model = "myFile"/>
+                                <button class="btn-material pull-right"  ng-click = "uploadFile()">upload</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href=""  ng-click = "downLoadSampleFile()">Download csv template</a>
+                            </td>
+                        </tr>
+                    </table>
                 </li>
-                <li>
-                    <button  ng-click = "uploadFile()">upload</button>
-                </li>
-                <a href=""  ng-click = "downLoadSampleFile()">Download csv template</a>
             </ul>
         </div>
         <div class="md-dialog-main">
