@@ -34,8 +34,9 @@ module.exports = {
                 result.forEach(function(article) {
                     article.status = "";
 
-                    if(new Date(new Date(dateFormat(article.publishDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) <= new Date(new Date().toLocaleString())){
-                        if(new Date(new Date(dateFormat(article.expiryDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) >= new Date(new Date().toLocaleString())) {
+
+                    if(new Date(new Date(dateFormat(article.publishDate, "yyyy-mm-dd hh:MM:ss TT"))) <= new Date(new Date())){
+                        if(new Date(new Date(dateFormat(article.expiryDate, "yyyy-mm-dd hh:MM:ss TT"))) >= new Date(new Date())) {
                             article.status = "Live";
 
                         }else {
