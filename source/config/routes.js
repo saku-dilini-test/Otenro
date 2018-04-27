@@ -214,6 +214,9 @@ module.exports.routes = {
     'GET /edit/getLanguage': 'edit/publish/publishDetailController.getLanguage',
     'GET /edit/getAllPrimaryCategories': 'edit/publish/publishDetailController.getAllPrimaryCategories',
     'GET /edit/getAllSecondaryCategories': 'edit/publish/publishDetailController.getAllSecondaryCategories',
+    'GET /edit/getAllPorts': 'edit/publish/publishDetailController.getAllPorts',
+    'GET /edit/getAllPrice': 'edit/publish/publishDetailController.getAllPrice',
+    'GET /edit/getKeywordLength': 'edit/publish/publishDetailController.getKeywordLength',
 
     /**
      * Edit / Article Data

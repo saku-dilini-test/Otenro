@@ -15,7 +15,6 @@
         $scope.splash = [];
         $scope.publishSplash = [];
 
-
         // Mobile App-App Store-Config
         $scope.maxName = 20;
         $scope.maxSpringBoardName = 20;
@@ -83,6 +82,28 @@
            }).error(function(err){
                //alert("MainMenu Loading Error : " + err);
            });
+
+       publishService.getAllPorts().
+           success(function(data){
+               $scope.Ports = data.ports;
+           }).error(function(err){
+               //alert("MainMenu Loading Error : " + err);
+       });
+
+       publishService.getAllPrice().
+           success(function(data){
+               $scope.Price = data.price;
+           }).error(function(err){
+               //alert("MainMenu Loading Error : " + err);
+       });
+
+       publishService.getKeywordLength().
+           success(function(data){
+           console.log(data);
+               $scope.keywordLength = data.length;
+           }).error(function(err){
+               //alert("MainMenu Loading Error : " + err);
+       });
         
         if(item == 'GooglePlay'){
            publishService.getExistingData(item).

@@ -162,6 +162,15 @@
             getAllSecondaryCategories:function(){
                 return $http.get(SERVER_URL + 'edit/getAllSecondaryCategories?appId='+$rootScope.appId);
             },
+            getAllPorts:function(){
+                return $http.get(SERVER_URL + 'edit/getAllPorts');
+            },
+            getAllPrice:function(){
+                return $http.get(SERVER_URL + 'edit/getAllPrice');
+            },
+            getKeywordLength:function(){
+                return $http.get(SERVER_URL + 'edit/getKeywordLength');
+            },
 //addGooglePlayInfo: function(file,playStoreData){
 //$log.debug('playStoreData.name '+playStoreData.name);
 //                 return $http.post(SERVER_URL+ 'edit/setPublishDetails'+ playStoreData   );
