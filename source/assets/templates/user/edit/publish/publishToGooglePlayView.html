@@ -224,6 +224,38 @@
                                 </span>
                             </fieldset>
                         </div>
+                        <div class="clearfix">
+                            <fieldset>
+                                <label>Keyword</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input class="input-shadow-border"
+                                       type="text"
+                                       ng-pattern=""
+                                       name="keyword" maxlength="{{keywordLength}}"  ng-model="playStoreData.keyword" required/>
+                                    <br>
+                                <span class="information">Characters left: {{keywordLength - playStoreData.keyword.length}} </span>
+
+                                </fieldset>
+                        </div>
+                        <div class="clearfix">
+                            <fieldset class="col-3">
+                                <label>Select Port</label>
+                                <select class="input-shadow-border form-control"
+                                        ng-model="playStoreData.port"
+                                        ng-options="port for port in Ports"
+                                        required>
+                                </select>
+                            </fieldset>
+                            <fieldset class="col-3">
+                                <label>Select Price</label>
+                                <select class="input-shadow-border form-control"
+                                        ng-model="playStoreData.price"
+                                        ng-options="price for price in Price"
+                                        required>
+                                </select>
+                            </fieldset>
+
+                        </div>
                     </div>
                     <div class="md-dialog-buttons">
                         <div class="inner-section">

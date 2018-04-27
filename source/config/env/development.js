@@ -26,7 +26,8 @@ module.exports = {
   },
 
   /** ****** Custom Config ****** **/
-  // HOST URL 
+  // HOST URL
+  KEYWORD_LENGTH : 5,
   HOST_URL : 'http://localhost:1337',
   // ME SERVER Config
   ME_SERVER_URL : 'http://localhost:80/meServer/temp/',
