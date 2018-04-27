@@ -1070,7 +1070,7 @@ body::-webkit-scrollbar-thumb {
   background-size: cover;
 }
 .main-navigation{
-  background-color: rgba(245, 245, 245, 0.78) !important !important;
+  background-color: rgba(245, 245, 245, 1) !important;
   color: #000;
 }
 .main-navigation a{
