@@ -1,3 +1,4 @@
+var fs1 = require('fs');
 
 var fs = require('fs-extra'),
     config = require('../../../services/config'),
@@ -215,6 +216,30 @@ module.exports = {
                 if (err) res.send(err);
                 res.send(app);
         });
+    },
+
+    getAllPorts : function(req,res){
+
+
+       fs1.readFile('/home/dilakshan/Desktop/Otenro/source/api/services/port.json', (err, data) => {
+           if (err) throw err;
+            let ports = JSON.parse(data);
+           res.send(ports);
+       });
+    },
+
+    getAllPrice : function(req,res){
+
+       fs1.readFile('/home/dilakshan/Desktop/Otenro/source/api/services/price.json', (err, data) => {
+           if (err) throw err;
+            let price = JSON.parse(data);
+           res.send(price);
+       });
+    },
+
+    getKeywordLength : function(req,res){
+        console.log(config.KEYWORD_LENGTH);
+        res.json({length:config.KEYWORD_LENGTH});
     }
 
 }
