@@ -60,6 +60,7 @@
                     $scope.allUbscribersForDateRange = 0;
                     $scope.activeUsersForDateRange = 0;
                     $scope.inactiveusersForDateRange = 0;
+                    $scope.allArticleViewsForDateRange=0;
 
                     var data = {fromDate: article.fromDate, toDate: article.toDate,appId:$rootScope.appId};
 
