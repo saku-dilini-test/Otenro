@@ -1,5 +1,6 @@
 img{
-	height: calc((100vh - 190px) / 3)
+	height: calc((100vh - 190px) / 3);
+	object-fit: cover;
 }
 
 div .row:first-child{

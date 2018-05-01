@@ -26,7 +26,7 @@
         $log.debug("catName " + $scope.catName);
 
         // Characters length config (Article)
-        $scope.maxArticleTitle = 20;
+        // $scope.maxArticleTitle = 40;
         $scope.maxArticleDesc = 200;
 
         $scope.myImage = '';
@@ -60,18 +60,28 @@
             console.log(asd,index);
             if(asd == false && !$scope.tmpImage[index].img){
                 $scope.tmpImage.splice(index, 1);
+            }else if(asd == false && $scope.tmpImage[index].img){
+            console.log("else if");
+                $scope.tmpImage[index].videoUrl = null;
+                $scope.tmpImage[index].url = null
             }
 
         }
 
         $scope.addImage = function (img) {
-
+            $scope.addNew = true
             if ($scope.tmpImage.length < 6 && img && angular.element('#fileInput').val() != '') {
                 console.log($scope.tmpImage.length);
                 for(var i =0;i<$scope.tmpImage.length;i++){
 
+                    if($scope.tmpImage.length > 1 && $scope.tmpImage[0].img == null){
+                        console.log('inside if 1');
+                        $scope.tmpImage[0].img = img
+                        $scope.addNew = false;
+                        break
+                    }
                     if($scope.tmpImage[i].url && !$scope.tmpImage[i].img){
-                    console.log('inside if');
+                    console.log('inside if 2');
                     console.log(i);
                     console.log($scope.tmpImage[i]);
                         $scope.tmpImage[i].img = img
@@ -117,9 +127,16 @@
            console.log($scope.tempImageDel[index]);
            var image = $scope.tempImageDel[index];
            $scope.deleteImages.push({'img':image});
-           $scope.tmpImage.splice(index, 1);
-           if ($scope.article.tempImageArray && $scope.article.tempImageArray.length > 0){
-               $scope.article.tempImageArray.splice(index, 1);
+
+           if(index == 0){
+                $scope.tmpImage[0].img = null;
+                console.log($scope.tmpImage[0].img);
+                $scope.article.tempImageArray[0].img = null;
+           }else{
+               $scope.tmpImage.splice(index, 1);
+               if ($scope.article.tempImageArray && $scope.article.tempImageArray.length > 0){
+                   $scope.article.tempImageArray.splice(index, 1);
+               }
            }
        };
 
@@ -381,14 +398,14 @@
                 return;
             }
 
-            // If article title not undefined, check maximum letter length is exceed
-            if ((typeof article.title != 'undefined') && (article.title.length > $scope.maxArticleTitle)) {
-                toastr.error('Article Title should be less than ' + $scope.maxArticleTitle + ' letters.',
-                    'Warning', { closeButton: true }
-                );
-                return;
-            }
-            if ($scope.tmpImage[0] == null) {
+            // // If article title not undefined, check maximum letter length is exceed
+            // if ((typeof article.title != 'undefined') && (article.title.length > $scope.maxArticleTitle)) {
+            //     toastr.error('Article Title should be less than ' + $scope.maxArticleTitle + ' letters.',
+            //         'Warning', { closeButton: true }
+            //     );
+            //     return;
+            // }
+            if ($scope.tmpImage[0].img == null) {
                 toastr.error('Please upload an image', 'Warning', {
                     closeButton: true
                 });
@@ -520,6 +537,11 @@
         };
 
         $scope.answer = function () {
+            $mdDialog.hide();
+             return articleService.showPreviewArticslesDilog('previewArticles');
+        };
+
+        $scope.ok = function () {
             $mdDialog.hide();
         };
 

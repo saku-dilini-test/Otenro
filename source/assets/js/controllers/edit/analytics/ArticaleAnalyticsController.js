@@ -8,6 +8,9 @@
 
 
     function articleAnalyticsCtrl($scope, $mdDialog, toastr, articleService, carouselService, $rootScope, $http, SERVER_URL, $auth) {
+        $scope.activeUser = 0;
+        $scope.inactiveUsers=0;
+        $scope.allUsersCount =0;
 
         articleService.getSubscribeUsersCount({appId:$rootScope.appId})
             .success(function (result) {
@@ -57,6 +60,7 @@
                     $scope.allUbscribersForDateRange = 0;
                     $scope.activeUsersForDateRange = 0;
                     $scope.inactiveusersForDateRange = 0;
+                    $scope.allArticleViewsForDateRange=0;
 
                     var data = {fromDate: article.fromDate, toDate: article.toDate,appId:$rootScope.appId};
 
