@@ -21,10 +21,10 @@
                 </fieldset>
                 <fieldset>
                     <label>Title</label>
-                    <input class="input-shadow-border" type="text" name="title" ng-pattern="/^[a-zA-Z0-9_ ]*$/" ng-model="article.title" max-length="maxArticleTitle"
+                    <input class="input-shadow-border" type="text" name="title" ng-model="article.title" max-length="maxArticleTitle"
                            required />
                     <br />
-                    <span ng-show="articleForm.title.$error.pattern" class="error">No symbols</span>
+                    <!--<span ng-show="articleForm.title.$error.pattern" class="error">No symbols</span>-->
                     <div ng-hide="article.title.length > maxArticleTitle">
                         <span class="information">Characters left: {{maxArticleTitle - article.title.length}}</span>
                     </div>
@@ -73,7 +73,8 @@
 
                         <div class="uploaded-section clearfix">
                             <div class="uploaded-old-images">
-                                <p>Uploaded Product Images/ Videos</p>{{tmpImage.length}}
+                                <p>Uploaded Product Images/ Videos</p>
+                                <!--{{tmpImage.length}}-->
                                 <div class="old-images clearfix">
                                     <table>
                                         <tr>
@@ -93,7 +94,7 @@
                                                     />
                                                     <img id="2" ng-click="defImg(1)" ng-if="tmpImage[1].img !== null" ngf-src="tmpImage[1].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox id="chk_videoUrl2" class="padding-top" ng-model="tmpImage[1].url" aria-label="Checkbox 1">
+                                                <md-checkbox ng-change="chng(tmpImage[1].url, 1)" id="chk_videoUrl2" class="padding-top" ng-model="tmpImage[1].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
                                                 <input placeholder="https://www.youtube.com" ng-pattern="/^(https\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/" ng-disabled="!tmpImage[1].url" class="input-shadow-border article-youtube" type="text" id="videoUrl2" name="videoUrl2"
@@ -110,7 +111,7 @@
                                                     />
                                                     <img id="3" ng-click="defImg(2)" ng-if="tmpImage[2].img !== null" ngf-src="tmpImage[2].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox ng-change="chng(tmpImage[2].url, 2)" ng-disabled = "!(tmpImage[1].url || (tmpImage[1].img && tmpImage[1].videoUrl))" id="chk_videoUrl3" class="padding-top" ng-model="tmpImage[2].url" aria-label="Checkbox 1">
+                                                <md-checkbox ng-change="chng(tmpImage[2].url, 2)" ng-disabled = "!(tmpImage[1].url || (tmpImage[1].img && tmpImage[1].videoUrl || tmpImage[2].img))" id="chk_videoUrl3" class="padding-top" ng-model="tmpImage[2].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
                                                 <input  placeholder="https://www.youtube.com" ng-pattern="/^(https\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/" ng-disabled="!tmpImage[2].url" class="input-shadow-border article-youtube" type="text" id="videoUrl3" name="videoUrl3"
@@ -126,7 +127,7 @@
                                                     />
                                                     <img id="4" ng-click="defImg(3)" ng-if="tmpImage[3].img !== null" ngf-src="tmpImage[3].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox ng-change="chng(tmpImage[3].url, 3)" ng-disabled = "!(tmpImage[2].url || tmpImage[2].img)" id="chk_videoUrl4" class="padding-top" ng-model="tmpImage[3].url" aria-label="Checkbox 1">
+                                                <md-checkbox ng-change="chng(tmpImage[3].url, 3)" ng-disabled = "!(tmpImage[2].url || tmpImage[2].img || tmpImage[3].img)" id="chk_videoUrl4" class="padding-top" ng-model="tmpImage[3].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
                                                 <input placeholder="https://www.youtube.com" ng-pattern="/^(https\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/" ng-disabled="!tmpImage[3].url" class="input-shadow-border article-youtube" type="text" id="videoUrl4" name="videoUrl4"
@@ -143,7 +144,7 @@
                                                     />
                                                     <img id="5" ng-click="defImg(4)" ng-if="tmpImage[4].img !== null" ngf-src="tmpImage[4].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox ng-change="chng(tmpImage[4].url, 4)" ng-disabled = "!(tmpImage[3].url || tmpImage[3].img)" id="chk_videoUrl5" class="padding-top" ng-model="tmpImage[4].url" aria-label="Checkbox 1">
+                                                <md-checkbox ng-change="chng(tmpImage[4].url, 4)" ng-disabled = "!(tmpImage[3].url || tmpImage[3].img || tmpImage[4].img)" id="chk_videoUrl5" class="padding-top" ng-model="tmpImage[4].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
                                                 <input  placeholder="https://www.youtube.com" ng-pattern="/^(https\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/" ng-disabled="!tmpImage[4].url" class="input-shadow-border article-youtube" type="text" id="videoUrl5" name="videoUrl5"
@@ -158,7 +159,7 @@
                                                     />
                                                     <img id="6" ng-click="defImg(5)" ng-if="tmpImage[5].img !== null" ngf-src="tmpImage[5].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox ng-change="chng(tmpImage[5].url, 5)" ng-disabled = "!(tmpImage[4].url || tmpImage[4].img)" id="chk_videoUrl6" class="padding-top" ng-model="tmpImage[5].url" aria-label="Checkbox 1">
+                                                <md-checkbox ng-change="chng(tmpImage[5].url, 5)" ng-disabled = "!(tmpImage[4].url || tmpImage[4].img || tmpImage[5].img)" id="chk_videoUrl6" class="padding-top" ng-model="tmpImage[5].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
                                                 <input placeholder="https://www.youtube.com" ng-pattern="/^(https\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/" ng-disabled="!tmpImage[5].url" class="input-shadow-border article-youtube" type="text" id="videoUrl6" name="videoUrl6"
@@ -195,7 +196,7 @@
         </form>
         <div class="md-dialog-buttons">
             <div class="inner-section">
-                <md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>
+                <md-button class="me-default-button" ng-click="ok('cancel')">Cancel</md-button>
                 <md-button class="me-default-button" ng-disabled="!dummyCat.id || !article.title || !tmpImage[0] || !article.desc || articleForm.videoUrl5.$error.pattern || articleForm.videoUrl6.$error.pattern
                             || articleForm.videoUrl4.$error.pattern || articleForm.videoUrl3.$error.pattern || articleForm.videoUrl2.$error.pattern"
                            ng-click="publishArticle(mainImg,article)">Publish</md-button>
