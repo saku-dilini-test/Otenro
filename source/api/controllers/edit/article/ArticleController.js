@@ -287,7 +287,8 @@ module.exports = {
                             });
                     }
                     if(tmpImage[i].videoUrl){
-                            article.tempImageArray.push({ img: imgeFileName,videoUrl: tmpImage[i].videoUrl, url : true});
+                            article.tempImageArray[i].img= imgeFileName;
+                            
                     }else{
                             article.tempImageArray.push({ img: imgeFileName, videoUrl: null, url:null});
                     }

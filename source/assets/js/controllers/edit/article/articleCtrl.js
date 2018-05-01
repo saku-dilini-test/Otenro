@@ -56,11 +56,41 @@
             angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
         };
 
+        $scope.chng = function(asd,index){
+            console.log(asd,index);
+            if(asd == false && !$scope.tmpImage[index].img){
+                $scope.tmpImage.splice(index, 1);
+            }
+
+        }
 
         $scope.addImage = function (img) {
 
             if ($scope.tmpImage.length < 6 && img && angular.element('#fileInput').val() != '') {
-                $scope.tmpImage.push({'img': img, 'videoUrl': null});
+                console.log($scope.tmpImage.length);
+                for(var i =0;i<$scope.tmpImage.length;i++){
+
+                    if($scope.tmpImage[i].url && !$scope.tmpImage[i].img){
+                    console.log('inside if');
+                    console.log(i);
+                    console.log($scope.tmpImage[i]);
+                        $scope.tmpImage[i].img = img
+                        $scope.addNew = false;
+                        break;
+                    }
+                    else{
+                    console.log('inside else ' + $scope.tmpImage.length);
+                        $scope.addNew = true;
+                    }
+                }
+                if($scope.addNew == true){
+                console.log('inside else function');
+                    if($scope.tmpImage.length <= 6){
+                        $scope.tmpImage.push({'img': img});
+                    }
+
+                }
+
                 angular.element('#fileInput').val(null);
                 $scope.picFile = null;
                 $scope.myImage = null;
@@ -257,16 +287,18 @@
 
         $scope.publishArticle = function (file, article) {
 
+            document.getElementById("err_videoUrl2").innerHTML = "";
+            document.getElementById("err_videoUrl3").innerHTML = "";
+            document.getElementById("err_videoUrl4").innerHTML = "";
+            document.getElementById("err_videoUrl5").innerHTML = "";
+            document.getElementById("err_videoUrl6").innerHTML = "";
+
             var urlError = "Please add the Youtube link";
 
             var videoUrl2 = document.forms["articleForm"]["videoUrl2"].value;
-
             var videoUrl3 = document.forms["articleForm"]["videoUrl3"].value;
-
             var videoUrl4 = document.forms["articleForm"]["videoUrl4"].value;
-
             var videoUrl5 = document.forms["articleForm"]["videoUrl5"].value;
-
             var videoUrl6 = document.forms["articleForm"]["videoUrl6"].value;
 
             if($scope.tmpImage[1] && $scope.tmpImage[1].url == true){
@@ -308,7 +340,7 @@
             }
             if($scope.tmpImage.length >5){
                 if($scope.tmpImage[5].url == true){
-                    if (videoUrl6 == null || videoUrl5 == "") {
+                    if (videoUrl6 == null || videoUrl6 == "") {
 
                         document.getElementById("err_videoUrl6").innerHTML = urlError;
                         return;
