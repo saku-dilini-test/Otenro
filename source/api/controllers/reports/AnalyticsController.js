@@ -42,8 +42,8 @@ module.exports = {
 
             if (err) return res.serverError(err);
 
-            collection.aggregate([  {"$match":{appId:data.appId,viewDate : { "$gt" : new Date(dateFrom).toISOString(),
-                                                            "$lt" : new Date(dateTo).toISOString()}}},
+            collection.aggregate([  {"$match":{appId:data.appId,viewDate : { "$gte" : dateFrom,
+                                                            "$lte" : dateTo}}},
                 { $group: { _id: null, count: { $sum: 1 } } }
 
             ]).toArray(function (err, results) {
@@ -67,8 +67,8 @@ module.exports = {
         AppUser.native(function(err, collection) {
             if (err) return res.serverError(err);
 
-            collection.aggregate([  {"$match":{appId:data.appId,registeredDate : { "$gt" : new Date(dateFrom).toISOString(),
-                                                                  "$lt" : new Date(dateTo).toISOString()}}},
+            collection.aggregate([  {"$match":{appId:data.appId,registeredDate : { "$gte" : dateFrom,
+                                                                  "$lte" : dateTo}}},
                                     {"$group" : {_id:{status:"$status"}, count:{$sum:1}}}
 
             ]).toArray(function (err, results) {
