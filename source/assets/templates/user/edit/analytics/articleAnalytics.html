@@ -13,67 +13,68 @@
             <md-tab>
                 <md-tab-label><span class="analitics-1" style="font-size: 20px;">Analytics</span></md-tab-label>
                 <md-tab-body>
-                    <md-content>
+                    <md-dialog-content>
+                        <div class="md-dialog-main">
+                            <br>
+                            <br>
 
-                        <br>
-                        <br>
-
-                        <div align="center">
-                            <div class="analitics-1">TOTAL</div>
-                        </div>
-                        <table  class="text-center">
-                            <tr>
-                                <td class="analitics-2 margin">{{allUsersCount}}</td>
-                                <td class="analitics-2 margin">{{activeUser}}</td>
-                            </tr>
-                            <tr>
-                                <td  class="analitics-1 margin">active users</td>
-                                <td  class="analitics-1 margin">subscribers</td>
-                            </tr>
-                        </table>
-                        <br>
-                        <br>
-                        <hr>
-
-
-                        <div class="md-dialog-main" style="max-height: 65vh">
-                            <label class="margin">Select Period</label>
-                            <div layout-gt-xs="row" class="margin">
-                                <div flex="33">
-                                    <md-datepicker ng-model="analytics.fromDate" md-placeholder="Start date" md-open-on-focus></md-datepicker>
-                                </div>
-                                <div flex="33">
-                                    <md-datepicker ng-model="analytics.toDate" md-placeholder="End date" md-open-on-focus></md-datepicker>
-                                    <md-button ng-click="getDateForRange(analytics)" class="no-margin margin-horizontal md-raised" style="top:-3px;background:#bdbdbd;color:#fff">Apply</md-button>
-                                </div>
+                            <div align="center">
+                                <div class="analitics-1">TOTAL</div>
                             </div>
-
-
-                            <br>
-                            <br>
-                            <table class="text-center">
+                            <table  class="text-center">
                                 <tr>
-                                    <td class="analitics-1 margin">Article Views</td>
-                                    <td class="analitics-1 margin">Subscribres</td>
-                                    <td class="analitics-1 margin">Active Users</td>
+                                    <td class="analitics-2 margin">{{allUsersCount}}</td>
+                                    <td class="analitics-2 margin">{{activeUser}}</td>
                                 </tr>
                                 <tr>
-                                    <td  class="analitics-2 margin">{{allArticleViewsForDateRange}} </td>
-                                    <td  class="analitics-2 margin">{{allUbscribersForDateRange}}</td>
-                                    <td  class="analitics-2 margin">{{activeUsersForDateRange}}</td>
+                                    <td  class="analitics-1 margin">SUBSCRIBERS</td>
+                                    <td  class="analitics-1 margin">ACTIVE USERS</td>
                                 </tr>
                             </table>
                             <br>
                             <br>
-                            <br>
+                            <hr>
 
-                        </div>
-                       <!-- <div class="md-dialog-buttons padding-top">
-                            <div class="inner-section">
-                                <md-button class="me-default-button" ng-click="close()">Close</md-button>
+
+                            <div class="md-dialog-main" style="max-height: 65vh">
+                                <label class="margin">Select Period</label>
+                                <div layout-gt-xs="row" class="margin">
+                                    <div flex="33">
+                                        <md-datepicker ng-model="analytics.fromDate" md-placeholder="Start date" md-open-on-focus></md-datepicker>
+                                    </div>
+                                    <div flex="33">
+                                        <md-datepicker ng-model="analytics.toDate" md-placeholder="End date" md-open-on-focus></md-datepicker>
+                                        <md-button ng-click="getDateForRange(analytics)" class="no-margin margin-horizontal md-raised" style="top:-3px;background:#bdbdbd;color:#fff">Apply</md-button>
+                                    </div>
+                                </div>
+
+
+                                <br>
+                                <br>
+                                <table class="text-center">
+                                    <tr>
+                                        <td class="analitics-1 margin">Article Views</td>
+                                        <td class="analitics-1 margin">Subscribres</td>
+                                        <td class="analitics-1 margin">Active Users</td>
+                                    </tr>
+                                    <tr>
+                                        <td  class="analitics-2 margin">{{allArticleViewsForDateRange}} </td>
+                                        <td  class="analitics-2 margin">{{allUbscribersForDateRange}}</td>
+                                        <td  class="analitics-2 margin">{{activeUsersForDateRange}}</td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <br>
+                                <br>
+
                             </div>
-                        </div>-->
-                    </md-content>
+                           <!-- <div class="md-dialog-buttons padding-top">
+                                <div class="inner-section">
+                                    <md-button class="me-default-button" ng-click="close()">Close</md-button>
+                                </div>
+                            </div>-->
+                        </div>
+                    </md-dialog-content>
                 </md-tab-body>
             </md-tab>
 
