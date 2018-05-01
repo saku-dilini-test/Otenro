@@ -6,6 +6,9 @@
     <div class="container">
       <nav class="navbar">
         <div class="navbar-header">
+          <button *ngIf="hideBackOnHome" aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" (click)="goBack()">
+            <i class="fa fa-arrow-left"></i>
+          </button>
           <button aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" (click)="openNav()">
             <i class="fa fa-bars lg"></i>
           </button>
@@ -42,7 +45,7 @@
   <!-- Mobile Navigation -->
   <div id="mySidenav" class="sidenav  main-navigation">
     <div  class="closebtn" (click)="closeNav()">&times;</div>
-    <a (click)="navigate('','Home')">Home</a>
+    <a (click)="navigate('','Your Horoscope')">Home</a>
     <a data-toggle="modal" data-target="#registerModel">Register</a>
     <a  data-toggle="modal" data-target="#myAccountModel">My Account</a>
     <a (click)="navigate('contact','Contact us')">Contact Us</a>
@@ -69,7 +72,7 @@
       <div class="modal-body text-center">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-        <h3 class="padding-bottom">Subscribe</h3>
+        <h3 class="padding-bottom">My Account</h3>
         <p>Rs.20+tax per day</p>
         <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
         <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
@@ -90,7 +93,7 @@
       <div class="modal-body text-center">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-        <h3 class="padding-bottom">Subscribe</h3>
+        <h3 class="padding-bottom">My Account</h3>
         <p>Rs.20+tax per day</p>
         <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>
         <p>You will be charged on your Dialog mobile and your subscription will be renewed automatically.</p>

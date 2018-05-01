@@ -6,6 +6,9 @@
     <div class="container">
       <nav class="navbar">
         <div class="navbar-header">
+          <button *ngIf="hideBackOnHome" aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" (click)="goBack()">
+            <i class="fa fa-arrow-left"></i>
+          </button>
           <button aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle" (click)="openNav()">
             <i class="fa fa-bars lg"></i>
           </button>
