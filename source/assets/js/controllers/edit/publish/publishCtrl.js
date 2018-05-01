@@ -138,7 +138,12 @@
                                 title: $scope.existingData[0].title,
                                 shortDescription: $scope.existingData[0].shortDescription,
                                 fullDescription: $scope.existingData[0].fullDescription,
-                                email: $scope.existingData[0].email
+                                email: $scope.existingData[0].email,
+                                keyword: $scope.existingData[0].keyword,
+                                serviceID: $scope.existingData[0].serviceID,
+                                port: $scope.existingData[0].port,
+                                price: $scope.existingData[0].price
+
                             /*  keywords: $scope.existingData[0].keywords,*/
                             };
                      }
@@ -154,7 +159,8 @@
             if(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
                 playStoreData.language == null ||
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
-                playStoreData.email==null){
+                playStoreData.email==null || playStoreData.keyword==null || playStoreData.serviceID==null || playStoreData.port==null
+                || playStoreData.price==null){
 
                         toastr.error('Please fill all fields  ', 'Warning', {
                               closeButton: true

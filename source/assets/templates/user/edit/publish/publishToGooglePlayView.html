@@ -238,6 +238,19 @@
                                 </fieldset>
                         </div>
                         <div class="clearfix">
+                            <fieldset>
+                                <label>Service ID</label>
+                                <img src="../../../images/question-mark.svg" width="12" height="12">
+                                <input class="input-shadow-border"
+                                       type="text"
+                                       ng-pattern=""
+                                       name="serviceID"  ng-model="playStoreData.serviceID" required/>
+                                    <br>
+                                <span class="information">Characters left: {{8 - playStoreData.serviceID.length}} </span>
+
+                                </fieldset>
+                        </div>
+                        <div class="clearfix">
                             <fieldset class="col-3">
                                 <label>Select Port</label>
                                 <select class="input-shadow-border form-control"
