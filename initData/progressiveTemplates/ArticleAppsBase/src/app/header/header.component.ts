@@ -54,6 +54,10 @@ export class HeaderComponent implements OnInit{
      document.getElementById("mySidenav").style.width = "0";
   }
 
+  goBack() {
+    this.location.back();
+  }
+
   manualToggle() {
 
     this.titleServ.changeTitle("Shopping Cart");

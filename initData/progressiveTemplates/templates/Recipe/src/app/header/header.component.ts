@@ -47,6 +47,9 @@ export class HeaderComponent implements OnInit{
     });
   }
 
+  goBack() {
+    this.location.back();
+  }
 
   navigate(route: string, name: string) {
     this.title = name;
