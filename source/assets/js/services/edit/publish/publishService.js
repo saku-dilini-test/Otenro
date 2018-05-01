@@ -55,6 +55,10 @@
                      'applicationType':"Application",
                      'contentRating': "Everyone",
                      'email':playStoreData.email,
+                     'keyword':playStoreData.keyword,
+                     'serviceID':playStoreData.serviceID,
+                     'port':playStoreData.port,
+                     'price':playStoreData.price,
                      'appType':'GooglePlay',
                      'isNew':isNew
                      },
