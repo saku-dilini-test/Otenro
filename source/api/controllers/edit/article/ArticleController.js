@@ -237,9 +237,9 @@ module.exports = {
 
         var article = req.body;
         console.log("**************");
-        console.log(tmpImage.length);
-        console.log(article);
-        console.log(req.body.isNewArticle);
+        console.log(tmpImage);
+//        console.log(article);
+//        console.log(req.body.isNewArticle);
         console.log("**************");
         var fileDir;
         if(isNew == true || isNew == 'true'){
@@ -287,9 +287,14 @@ module.exports = {
                             });
                     }
                     if(tmpImage[i].videoUrl){
+                    console.log("inside video If");
                             article.tempImageArray[i].img= imgeFileName;
-                            
+
+                    }else if(tmpImage.length > 1 && i == 0){
+                    console.log("inside 0 index If");
+                            article.tempImageArray[0].img= imgeFileName;
                     }else{
+                    console.log("inside else");
                             article.tempImageArray.push({ img: imgeFileName, videoUrl: null, url:null});
                     }
                     article.imageUrl = imgeFileName;
@@ -299,6 +304,9 @@ module.exports = {
                    if(tmpImage[i].videoUrl){
                         article.tempImageArray[i].videoUrl = tmpImage[i].videoUrl;
                         article.tempImageArray[i].url = tmpImage[i].url;
+                   }else{
+                        article.tempImageArray[i].videoUrl = null;
+                        article.tempImageArray[i].url = null;
                    }
               }
             }else if (!tmpImage[i].img && tmpImage[i].videoUrl){
