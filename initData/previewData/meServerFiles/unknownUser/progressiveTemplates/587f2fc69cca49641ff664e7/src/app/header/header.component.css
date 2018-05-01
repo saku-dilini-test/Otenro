@@ -6,7 +6,7 @@
   text-align: center;
   margin-left: 0;
   position: absolute;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   text-transform: capitalize;
 }
@@ -14,6 +14,9 @@
 .ui-navbar-toggle{
   z-index: 1;
   font-size: 18px;
+  margin-top: 5px;
+  margin-right: 0;
+  margin-bottom: 0;
 }
 .navbar-2 ul, .navbar-2 li{
   border: 0;
@@ -39,7 +42,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #e6e8eaeb;
+    background-color: rgba(230, 232, 234, 0.9);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
