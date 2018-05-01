@@ -236,11 +236,11 @@ module.exports = {
         var delImages = req.body.deleteImages;
 
         var article = req.body;
-        console.log("**************");
-        console.log(tmpImage);
+//        console.log("**************");
+//        console.log(tmpImage);
 //        console.log(article);
 //        console.log(req.body.isNewArticle);
-        console.log("**************");
+//        console.log("**************");
         var fileDir;
         if(isNew == true || isNew == 'true'){
             fileDir= config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' + req.body.appId + '/src/assets/images/thirdNavi/';
@@ -248,7 +248,7 @@ module.exports = {
             fileDir= config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId+ '/img/article/';
          }
 
-        console.log(article.tempImageArray);
+//        console.log(article.tempImageArray);
         if (typeof article.tempImageArray == 'undefined') {
             article.tempImageArray = [];
         }
