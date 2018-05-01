@@ -26,7 +26,7 @@
         $log.debug("catName " + $scope.catName);
 
         // Characters length config (Article)
-        $scope.maxArticleTitle = 40;
+        // $scope.maxArticleTitle = 40;
         $scope.maxArticleDesc = 200;
 
         $scope.myImage = '';
@@ -398,13 +398,13 @@
                 return;
             }
 
-            // If article title not undefined, check maximum letter length is exceed
-            if ((typeof article.title != 'undefined') && (article.title.length > $scope.maxArticleTitle)) {
-                toastr.error('Article Title should be less than ' + $scope.maxArticleTitle + ' letters.',
-                    'Warning', { closeButton: true }
-                );
-                return;
-            }
+            // // If article title not undefined, check maximum letter length is exceed
+            // if ((typeof article.title != 'undefined') && (article.title.length > $scope.maxArticleTitle)) {
+            //     toastr.error('Article Title should be less than ' + $scope.maxArticleTitle + ' letters.',
+            //         'Warning', { closeButton: true }
+            //     );
+            //     return;
+            // }
             if ($scope.tmpImage[0].img == null) {
                 toastr.error('Please upload an image', 'Warning', {
                     closeButton: true

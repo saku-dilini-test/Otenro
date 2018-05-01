@@ -23,14 +23,14 @@
                     <label>Title</label>
                     <input class="input-shadow-border" type="text" name="title" ng-model="article.title" max-length="maxArticleTitle"
                            required />
-                    <br />
-                    <!--<span ng-show="articleForm.title.$error.pattern" class="error">No symbols</span>-->
-                    <div ng-hide="article.title.length > maxArticleTitle">
-                        <span class="information">Characters left: {{maxArticleTitle - article.title.length}}</span>
-                    </div>
-                    <div ng-show="article.title.length > maxArticleTitle">
-                        <span class="information">Characters left: {{maxArticleTitle - article.title.length}} </span>
-                    </div>
+                    <!--<br />-->
+                    <span ng-show="articleForm.title.$dirty && articleForm.title.$error.required" class="error">Titile is required</span>
+                    <!--<div ng-hide="article.title.length > maxArticleTitle">-->
+                        <!--<span class="information">Characters left: {{maxArticleTitle - article.title.length}}</span>-->
+                    <!--</div>-->
+                    <!--<div ng-show="article.title.length > maxArticleTitle">-->
+                        <!--<span class="information">Characters left: {{maxArticleTitle - article.title.length}} </span>-->
+                    <!--</div>-->
                 </fieldset>
                 <span ng-show="articleForm.title.$error.maxlength" class="error">Too lengthy</span>
 
