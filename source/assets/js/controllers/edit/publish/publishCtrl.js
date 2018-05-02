@@ -140,7 +140,7 @@
                                 fullDescription: $scope.existingData[0].fullDescription,
                                 email: $scope.existingData[0].email,
                                 keyword: $scope.existingData[0].keyword,
-                                serviceID: $scope.existingData[0].serviceID,
+//                                serviceID: $scope.existingData[0].serviceID,
                                 port: $scope.existingData[0].port,
                                 price: $scope.existingData[0].price
 
@@ -159,7 +159,7 @@
             if(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
                 playStoreData.language == null ||
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
-                playStoreData.email==null || playStoreData.keyword==null || playStoreData.serviceID==null || playStoreData.port==null
+                playStoreData.email==null || playStoreData.keyword==null || playStoreData.port==null
                 || playStoreData.price==null){
 
                         toastr.error('Please fill all fields  ', 'Warning', {
