@@ -43,7 +43,7 @@ export class ProductComponent implements OnInit {
         }else{
             id = res2[1];
         }
-        URL = "https://www.youtube.com/embed/" + id + "?rel=0&color=white&version=3&enablejsapi=1"
+        URL = "https://www.youtube.com/embed/" + id + "?rel=0&autoplay=1"
         return this.sanitizer.bypassSecurityTrustResourceUrl(URL);
     }
 
