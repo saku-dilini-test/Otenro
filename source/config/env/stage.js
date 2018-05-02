@@ -1,7 +1,7 @@
 /**
- * Production environment settings
+ * Development environment settings
  *
- * This file can include shared settings for a production environment,
+ * This file can include shared settings for a development team,
  * such as API keys or remote database passwords.  If you're using
  * a version control solution for your Sails app, this file will
  * be committed to your repository unless you add it to your .gitignore
@@ -11,48 +11,31 @@
  */
 
 module.exports = {
-  hookTimeout: 90000,
+
   /***************************************************************************
-   * Set the default database connection for models in the production        *
+   * Set the default database connection for models in the development       *
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
   models: {
-    connection: 'stagingMongodbServer'
+    connection: 'developmentMongodbServer'
   },
-
-  /***************************************************************************
-   * Set the port in the production environment to 80                        *
-   ***************************************************************************/
-
-  port: 1448,
-
-  ssl: {
-    ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
-    key: require('fs').readFileSync(__dirname + '/ssl/private.key'),
-    cert: require('fs').readFileSync(__dirname + '/ssl/certificate.crt')
-  },
-
-  /***************************************************************************
-   * Set the log level in production environment to "silent"                 *
-   ***************************************************************************/
-
+  port: 1338,
   log: {
-    level: "silent"
+    level: "debug"
   },
-
+  KEYWORD_LENGTH : 5,
   /** ****** Custom Config ****** **/
   // HOST URL
-  HOST_URL : 'https://testdashboard.otenro.com:1448',
+  HOST_URL : 'http://173.82.153.215:1338',
   // ME SERVER Config
-  ME_SERVER_URL : 'https://testcdn.otenro.com/temp/',
-  ME_SERVER : '/home/admin/web/testcdn.otenro.com/public_html/temp/',
-  ME_SERVER_PORT : 8081,
+  ME_SERVER_URL : 'http://173.82.153.215:80/meServer/temp/',
+  ME_SERVER : '/var/www/html/meServer/temp/',
+  ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : '/home/otenro/OtenroTest/appFileServer/',
-  CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
-  TEMPLATES_PATH : '/home/otenro/OtenroTest/Otenro/initData/templates/',
-  PROGRESSIVE_TEMPLATES_PATH : '/home/otenro/OtenroTest/Otenro/initData/progressiveTemplates/',
-  REDIRECT_URL : 'https://testdashboard.otenro.com:1448'
-
+  APP_FILE_SERVER : '/var/www/html/meServer/temp/',
+  CLIENT_SECRET : '44f4f3be572ec33711a40a5b8b4',
+  TEMPLATES_PATH : '/home/Otenro/initData/templates/',
+  PROGRESSIVE_TEMPLATES_PATH : '/home/Otenro/initData/progressiveTemplates/',
+  REDIRECT_URL : 'http://173.82.153.215:1338',
 };
