@@ -37,7 +37,7 @@ export class HomepageComponent implements OnInit {
                 private router: Router, private categoryService: CategoriesService,
                 private title: TitleService,private  push: CordovaPluginFirebaseService) {
 
-        this.title.changeTitle("Home");
+        this.title.changeTitle(data.name);
         homePageCmp = this;
     }
 

@@ -28,7 +28,7 @@
                 return $mdDialog.show({
                     controller: 'ArticleCtrl',
                     templateUrl: 'user/edit/article/publishArticleView.html',
-                    clickOutsideToClose: true,
+                    clickOutsideToClose: false,
                     locals : {
                         initialData : data
                     }

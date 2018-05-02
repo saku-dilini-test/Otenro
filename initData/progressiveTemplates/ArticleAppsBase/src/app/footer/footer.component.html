@@ -11,7 +11,7 @@
     <button type="button" class="btn btn-default" aria-label="Contact" (click)="navigate('contact')">
       <i class="fa fa-phone fa-lg"></i>
     </button>
-    <button type="button" class="btn btn-default" aria-label="My Account"  data-toggle="modal" data-target="#myAccountModel">
+    <button *ngIf="subscriptionStatus" type="button" class="btn btn-default" aria-label="My Account"  data-toggle="modal" data-target="#myAccountModel">
       <i class="fa fa-user fa-lg"></i>
     </button>
   </div>
@@ -29,7 +29,7 @@
         <h3 class="padding-bottom">My Account</h3>
         <p>Rs.20+tax per day</p>
         <h4>
-          Are you sure you want to unsubscribe from this service?Are you sure you want to unsubscribe from this service?
+          Are you sure you want to unsubscribe from this service?
         </h4>
         <button type="button" class="btn sub-button-sub btn-block"> Unsubscibe Now</button>
         <button type="button" class="btn sub-button-cancel btn-block" data-dismiss="modal">Cancel</button>

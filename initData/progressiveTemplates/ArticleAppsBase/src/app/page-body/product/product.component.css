@@ -2,8 +2,28 @@
   padding-bottom: 60px;
 }
 .carousel-control{
-  height: 86%;
+  height: 50px;
+  top: 41%;
+  opacity: 0.5;
 }
 .page-container{
   padding-top: 69px;
+}
+.ytp-endscreen-previous{
+  display: none;
+  opacity: 0;
+}
+.ytp-endscreen-next{
+  display: none;
+  opacity: 0;
+}
+.ytp-button{
+  display: none;
+  opacity: 0;
+}
+.ytp-endscreen-paginate {
+  display: none;
+}
+.carousel-control:focus{
+  opacity: 0.5
 }
