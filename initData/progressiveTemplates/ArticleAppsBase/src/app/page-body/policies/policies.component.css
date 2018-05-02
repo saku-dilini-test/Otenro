@@ -1,3 +1,6 @@
+.row:first-child{
+  padding-top: 60px;
+}
 .row:last-child{
   padding-bottom: 60px;
 }

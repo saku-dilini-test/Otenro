@@ -16,7 +16,7 @@
 }
 
 div .row:last-child{
-  padding-bottom: 60px;
+  padding-bottom: 60px !important;
 }
 
 .prod img{
