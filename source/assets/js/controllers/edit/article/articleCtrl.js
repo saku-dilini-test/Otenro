@@ -445,7 +445,7 @@
                     var expiryDate = new Date(article.expiryDate);
                     var publishDate = new Date(article.publishDate);
 
-                    if (expiryDate<publishDate){
+                    if (expiryDate <= publishDate){
 
                         toastr.error('Invalid date range', 'Warning', {
                             closeButton: true
