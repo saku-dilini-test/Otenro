@@ -2881,7 +2881,7 @@ table.md-calendar-day-header{
     }
 }
 .no-padding{
-    padding:0;
+    padding:0 !important;
 }
 .padding-left{
     padding-left: 16px;
@@ -2964,7 +2964,7 @@ table.md-calendar-day-header{
     background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
     border: 1px solid #999;
     border-radius: 3px;
-    padding: 5px 8px;
+    padding: 5px 4px;
     outline: none;
     white-space: nowrap;
     -webkit-user-select: none;
