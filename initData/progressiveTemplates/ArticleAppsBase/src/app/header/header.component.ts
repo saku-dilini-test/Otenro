@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit{
 
   constructor(private subscription:SubscribedDataService, private router: Router, private dataService: PagebodyServiceModule,private titleServ: TitleService,private location: Location) {
     this.cartNo = this.dataService.cart.cartItems.length;
-    this.title = 'Your Horoscope';
+    this.title = data.name;
 
       router.events.subscribe((val) => {
         // see also
@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit{
 
 
   navigate(route: string, name: string) {
-    this.title = name;
+    this.title = data.name;
     this.router.navigate([route]);
      document.getElementById("mySidenav").style.width = "0";
   }
