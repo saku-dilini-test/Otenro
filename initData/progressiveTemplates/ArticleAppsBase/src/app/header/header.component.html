@@ -46,8 +46,8 @@
   <div id="mySidenav" class="sidenav  main-navigation">
     <div  class="closebtn" (click)="closeNav()">&times;</div>
     <a (click)="navigate('','Your Horoscope')">Home</a>
-    <a data-toggle="modal" data-target="#registerModel">Register</a>
-    <a  data-toggle="modal" data-target="#myAccountModel">My Account</a>
+    <a *ngIf = "!subscriptionStatus" data-toggle="modal" data-target="#registerModel">Register</a>
+    <a *ngIf = "subscriptionStatus" data-toggle="modal" data-target="#myAccountModel">My Account</a>
     <a (click)="navigate('contact','Contact us')">Contact Us</a>
     <a (click)="navigate('policies','Privacy Policy')">Privacy Policy</a>
     <div class="navbar-brand text-center"   (click)="navigate('')"><img src="assets/images/logo.png"></div>

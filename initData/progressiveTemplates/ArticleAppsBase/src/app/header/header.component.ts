@@ -4,6 +4,7 @@ import { PagebodyServiceModule } from '../page-body/page-body.service';
 import * as data from './../madeEasy.json';
 import { TitleService } from "../services/title.service";
 import {Location} from '@angular/common';
+import { SubscribedDataService } from '../services/subscribed-data/subscribed-data.service'
 
 @Component({
   selector: 'app-header',
@@ -17,7 +18,9 @@ export class HeaderComponent implements OnInit{
   private cartNo: number;
   public title:string;
   public hideBackOnHome:boolean;
-  constructor(private router: Router, private dataService: PagebodyServiceModule,private titleServ: TitleService,private location: Location) {
+  private subscriptionStatus;
+
+  constructor(private subscription:SubscribedDataService, private router: Router, private dataService: PagebodyServiceModule,private titleServ: TitleService,private location: Location) {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Your Horoscope';
 
@@ -34,6 +37,13 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit() {
+
+    this.subscription.getSubscribedData().subscribe(data =>{
+      console.log(data);
+      this.subscriptionStatus = data.isSubscribed;
+  })
+
+
     this.titleServ.currentTitle.subscribe(message => this.title = message);
 
     $(".navbar-2").on('show.bs.collapse', function(){

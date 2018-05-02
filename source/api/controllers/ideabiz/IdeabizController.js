@@ -13,8 +13,8 @@ module.exports = {
         var query = {
             'msisdn': msisdn,
             'appID': appID,
-            'status': config.APP_USER_STATUS.ACTIVE,
-            'subscriptionStatus': config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED
+//            'status': config.APP_USER_STATUS.ACTIVE,
+//            'subscriptionStatus': config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED
         };
 
         AppUser.findOne(query).exec(function(err, appUser){
@@ -29,7 +29,7 @@ module.exports = {
                 isSubscribed = true;
             }
 
-            res.ok({ 'isSubscribed': isSubscribed });
+            res.ok({ 'isSubscribed': isSubscribed, 'msisdn':msisdn});
         });
 
 

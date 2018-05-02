@@ -334,7 +334,7 @@ module.exports.routes = {
     'GET /templates/getArticleViewDataInfo': 'template/AnalyticsController.getArticleViewDataInfo',
     'GET /templates/getAppVisitDataInfo': 'template/AnalyticsController.getAppVisitDataInfo',
 
-
+    'GET /templates/getSubscribedData' : 'ideabiz/IdeabizController.isSubscribed',
 
     /**
     * Pay by authorizeNet in templates
