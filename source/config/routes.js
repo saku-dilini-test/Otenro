@@ -203,6 +203,7 @@ module.exports.routes = {
     'POST /edit/updateSliderData': 'edit/commerce/SliderController.UpdateSlider',
 
     'GET /edit/getContactUs': 'edit/setting/ContactUsController.getContactUs',
+    'GET /edit/getPublishDetails': 'edit/publish/publishDetailController.getPublishDetails',
     'POST /edit/setPublishDetails': 'edit/publish/publishDetailController.setPublishDetails',
     'POST /edit/uploadPublishFiles': 'edit/publish/publishDetailController.uploadPublishFiles',
     
@@ -439,9 +440,26 @@ module.exports.routes = {
 
     'POST /reports/getSubscribeUsersCount': 'reports/AnalyticsController.getSubscribeUsersCount',
     'POST /reports/getSubscribeUsersCountForDateRange': 'reports/AnalyticsController.getSubscribeUsersCountForDateRange',
-    'POST /reports/getArticleViewDataForDateRange': 'reports/AnalyticsController.getArticleViewDataForDateRange'
+    'POST /reports/getArticleViewDataForDateRange': 'reports/AnalyticsController.getArticleViewDataForDateRange',
 
+    /**
+     * IdeabizController (ideaDroid)
+     */
 
+    'POST /ideabiz/isSubscribed': 'ideabiz/IdeabizController.isSubscribed',
+
+    /**
+     * IdeabizSMSController (ideaDroid)
+     */
+
+    'POST /sms/report': 'ideabiz/IdeabizSMSController.onReceivingSMS',
+
+    /**
+     * IdeabizAdminapiController (ideaDroid)
+     */
+
+    'POST /adminapi/index': 'ideabiz/IdeabizAdminapiController.takeAction',
+    'POST /adminapi/push': 'ideabiz/IdeabizAdminapiController.sendPushMessage'
 
 
 

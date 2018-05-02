@@ -26,6 +26,7 @@ import { SubscribedDataService } from './services/subscribed-data/subscribed-dat
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import {SMSService} from "./services/cordova-plugin-services/sms.service";
 import {CordovaPluginFirebaseService} from "./services/cordova-plugin-services/cordova-plugin-firebase.service";
+import {CordovaPluginDeviceService} from "./services/cordova-plugin-services/cordova-plugin-device.service";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {CordovaPluginFirebaseService} from "./services/cordova-plugin-services/c
     TitleService,
     SubscribedDataService,
     SMSService,
-    CordovaPluginFirebaseService
+    CordovaPluginFirebaseService,
+    CordovaPluginDeviceService
     ],
   bootstrap: [AppComponent]
 })
