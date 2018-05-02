@@ -94,7 +94,7 @@
                                                     />
                                                     <img id="2" ng-click="defImg(1)" ng-if="tmpImage[1].img !== null" ngf-src="tmpImage[1].img" width="80" height="80" />
                                                 </div>
-                                                <md-checkbox ng-change="chng(tmpImage[1].url, 1)" id="chk_videoUrl2" class="padding-top" ng-model="tmpImage[1].url" aria-label="Checkbox 1">
+                                                <md-checkbox ng-change="chng(tmpImage[1].url, 1)" ng-disabled = "!tmpImage[0].img && !tmpImage[2]" id="chk_videoUrl2" class="padding-top" ng-model="tmpImage[1].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
                                                 <input placeholder="https://www.youtube.com" ng-pattern="/^(https\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/" ng-disabled="!tmpImage[1].url" class="input-shadow-border article-youtube" type="text" id="videoUrl2" name="videoUrl2"
