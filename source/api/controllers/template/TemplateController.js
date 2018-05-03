@@ -253,11 +253,17 @@ module.exports = {
             //sails.log.info(result);
 
             result.forEach(function(article) {
-                if(new Date(new Date(dateFormat(article.publishDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) <= new Date(new Date().toLocaleString())){
-                    if(new Date(new Date(dateFormat(article.expiryDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) >= new Date(new Date().toLocaleString())) {
-                        articalData.push(article);
-                    }
+                if (new Date(new Date(dateFormat(article.publishDate, "yyyy-mm-dd hh:MM:ss TT"))) <= new Date(new Date())) {
+                        if (new Date(new Date(dateFormat(article.expiryDate, "yyyy-mm-dd hh:MM:ss TT"))) >= new Date(new Date())) {
+                            articalData.push(article);
+
+                        }
                 }
+//                if(new Date(new Date(dateFormat(article.publishDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) <= new Date(new Date().toLocaleString())){
+//                    if(new Date(new Date(dateFormat(article.expiryDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) >= new Date(new Date().toLocaleString())) {
+//                        articalData.push(article);
+//                    }
+//                }
             });
 
             res.json(articalData);
@@ -442,19 +448,21 @@ module.exports = {
         //var data = req.body
         var deviceId =  req.param('deviceId');
         var appId = req.param('appId');
+        var uuid = req.param('uuid');
         var searchQuery  = {
             deviceId : deviceId,
-            appId : appId
+            appId : appId,
+            deviceUUID : uuid
         };
 
-        sails.log.info("deviceId " + deviceId);
+        sails.log.info("Exec postDeviceId with params, deviceId: " + deviceId + " uuid: " + uuid + " appId: " + appId);
         // check device id already have in db
         DeviceId.find(searchQuery).exec(function(err,result) {
             if (err) return sails.log.info(err);
             // if not device ID in db collections
             if (result.length == 0) {
                 // create new Device ID Collection
-                DeviceId.create({appId:appId,deviceId:deviceId,lastAccessTime:new Date().toLocaleString()}).exec(function(err,result) {
+                DeviceId.create({appId:appId,deviceId:deviceId,lastAccessTime:new Date().toLocaleString(),deviceUUID: uuid}).exec(function(err,result) {
                     if(err) return console.error(err);
                     res.send("success");
                 });

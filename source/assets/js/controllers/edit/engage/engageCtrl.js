@@ -236,6 +236,20 @@
             message.appId = $rootScope.appId;
             message.userId = $auth.getPayload().id;
 
+            var now = new Date();
+
+                if (message.date){
+
+                    var sdDate = new Date(message.date);
+
+                    if (sdDate < now){
+
+                        toastr.error('Invalid date selection', 'Warning', {
+                            closeButton: true
+                        });
+                        return ;
+                    }
+                }
 
                 engageService.saveSchedulePushMassage(message)
                   .success(function(data){
@@ -297,6 +311,27 @@
         $scope.addNewSalesAndPromotions = function () {
             return engageService.showPromotionsAndSalesAddNewDialog();
         };
-    };
+
+        $scope.pushDateDisable = false;
+
+        $scope.dateChanged = function (date) {
+            // if(dateYear dateMonth dateDay)
+            // {
+                var dateDay = new Date().getDay();
+                var dateX = new Date();
+                var dateMonth = new Date().getFullYear();
+                var dateYear = new Date().getMonth();
+
+                console.log(dateDay);
+                console.log(dateMonth);
+                console.log(dateYear);
+                console.log(dateX);
+                console.log(date);
+                console.log(date.day);
+                console.log(date.year);
+                console.log(date.month);
+            // }
+        };
+    }
 
 })();

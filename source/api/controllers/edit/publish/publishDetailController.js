@@ -243,6 +243,17 @@ module.exports = {
     getKeywordLength : function(req,res){
         console.log(config.KEYWORD_LENGTH);
         res.json({length:config.KEYWORD_LENGTH});
+    },
+
+    getPublishDetails : function(req,res){
+        var appId = req.param('appId');
+        var searchApp = {
+            appId: appId
+        };
+        PublishDetails.findOne(searchApp, function(err, app) {
+            if (err) return done(err);
+            res.send(app)
+        });
     }
 
 }
