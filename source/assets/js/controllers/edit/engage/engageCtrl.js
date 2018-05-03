@@ -236,6 +236,20 @@
             message.appId = $rootScope.appId;
             message.userId = $auth.getPayload().id;
 
+            var now = new Date();
+
+                if (message.date){
+
+                    var sdDate = new Date(message.date);
+
+                    if (sdDate < now){
+
+                        toastr.error('Invalid date selection', 'Warning', {
+                            closeButton: true
+                        });
+                        return ;
+                    }
+                }
 
                 engageService.saveSchedulePushMassage(message)
                   .success(function(data){
@@ -299,6 +313,7 @@
         };
 
         $scope.pushDateDisable = false;
+
         $scope.dateChanged = function (date) {
             // if(dateYear dateMonth dateDay)
             // {
@@ -306,6 +321,7 @@
                 var dateX = new Date();
                 var dateMonth = new Date().getFullYear();
                 var dateYear = new Date().getMonth();
+
                 console.log(dateDay);
                 console.log(dateMonth);
                 console.log(dateYear);
