@@ -21,10 +21,18 @@ module.exports = {
     status:{
         type: 'string'
     },
+    subscriptionStatus:{
+        type: 'string'
+    },
     lastAccessTime:{
         type: 'date'
     },
     registeredDate:{
+
+      type:'string'
+
+    },
+    deviceUUID:{
 
       type:'string'
 

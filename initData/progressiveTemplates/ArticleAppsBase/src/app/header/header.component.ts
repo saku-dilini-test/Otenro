@@ -3,8 +3,13 @@ import { Router } from '@angular/router';
 import { PagebodyServiceModule } from '../page-body/page-body.service';
 import * as data from './../madeEasy.json';
 import { TitleService } from "../services/title.service";
+import {SMSService} from "../services/cordova-plugin-services/sms.service";
+import {CordovaPluginDeviceService} from "../services/cordova-plugin-services/cordova-plugin-device.service";
 import {Location} from '@angular/common';
 import { SubscribedDataService } from '../services/subscribed-data/subscribed-data.service'
+import {AppDataService} from "../services/appdata-info/appdata-info.service";
+
+var headerCmp;
 
 @Component({
   selector: 'app-header',
@@ -19,10 +24,19 @@ export class HeaderComponent implements OnInit{
   public title:string;
   public hideBackOnHome:boolean;
   private subscriptionStatus;
+  private deviceUUID;
+  private appPublishDetails;
 
-  constructor(private subscription:SubscribedDataService, private router: Router, private dataService: PagebodyServiceModule,private titleServ: TitleService,private location: Location) {
+  constructor(private subscription:SubscribedDataService,
+              private router: Router,
+              private dataService: PagebodyServiceModule,
+              private titleServ: TitleService,
+              private location: Location,
+              private sms: SMSService,
+              private device: CordovaPluginDeviceService,
+              private appDataService: AppDataService) {
     this.cartNo = this.dataService.cart.cartItems.length;
-    this.title = data.name;
+    this.title = 'Your Horoscope';
 
       router.events.subscribe((val) => {
         // see also
@@ -34,6 +48,8 @@ export class HeaderComponent implements OnInit{
         }
     });
 
+    headerCmp = this;
+
   }
 
   ngOnInit() {
@@ -41,8 +57,13 @@ export class HeaderComponent implements OnInit{
     this.subscription.getSubscribedData().subscribe(data =>{
       console.log(data);
       this.subscriptionStatus = data.isSubscribed;
-  })
+    })
 
+
+    this.appDataService.getPublishDetails().subscribe(data =>{
+      console.log(data);
+      this.appPublishDetails = data;
+    })
 
     this.titleServ.currentTitle.subscribe(message => this.title = message);
 
@@ -84,4 +105,41 @@ export class HeaderComponent implements OnInit{
       document.getElementById("mySidenav").style.width = "0";
   }
 
+  onSubscribe(){
+    this.getDeviceUUID();
+  }
+
+  deviceUUIDCallback(uuid: any){
+    console.log("UUID: " + uuid);
+
+    headerCmp.deviceUUID = uuid;
+    headerCmp.sendSMS();
+  }
+
+  getDeviceUUID(){
+    this.device.getUUID(this.deviceUUIDCallback);
+  }
+
+  smsSuccessCallback(results: any){
+    console.log("pushSMSSuccessCallback: " + results);
+    $('#myAccountModel').modal('hide');
+  }
+
+  smsErrorCallback(error: any){
+    console.log("pushSMSErrorCallback=>" + error);
+  }
+
+  sendSMS(){
+    var options = {
+      replaceLineBreaks: false,
+      android: {
+        // intent: 'INTENT'
+      }
+    };
+
+    var smsBody = headerCmp.appPublishDetails.keyword + " Reg";
+
+    console.log("appPublishDetails=>" + headerCmp.appPublishDetails.toString() + " uuid: " + headerCmp.deviceUUID);
+    this.sms.send(headerCmp.appPublishDetails.port,smsBody,options,this.smsSuccessCallback,this.smsErrorCallback);
+  }
 }
