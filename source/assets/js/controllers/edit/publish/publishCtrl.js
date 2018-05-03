@@ -83,20 +83,20 @@
                //alert("MainMenu Loading Error : " + err);
            });
 
-       // publishService.getAllPorts().
-       //     success(function(data){
-       //         $scope.Ports = data.ports;
-       //     }).error(function(err){
-       //         //alert("MainMenu Loading Error : " + err);
-       // });
-       //
-       // publishService.getAllPrice().
-       //     success(function(data){
-       //         $scope.Price = data.price;
-       //     }).error(function(err){
-       //         //alert("MainMenu Loading Error : " + err);
-       // });
-       //
+       publishService.getAllPorts().
+           success(function(data){
+               $scope.Ports = data.ports;
+           }).error(function(err){
+               //alert("MainMenu Loading Error : " + err);
+       });
+
+       publishService.getAllPrice().
+           success(function(data){
+               $scope.Price = data.price;
+           }).error(function(err){
+               //alert("MainMenu Loading Error : " + err);
+       });
+
        publishService.getKeywordLength().
            success(function(data){
            console.log(data);
