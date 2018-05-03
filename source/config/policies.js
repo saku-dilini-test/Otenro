@@ -63,7 +63,8 @@ module.exports.policies = {
     '*': ['jwtAuth']
   },
   'edit/publish/publishDetailController':{
-   '*': ['jwtAuth']
+   '*': ['jwtAuth'],
+    getPublishDetails: true
   },
 
   'edit/article/articleController':{
@@ -130,5 +131,13 @@ module.exports.policies = {
       /*  '*': ['jwtAuth'],*/
         getSubscribeUsersCount:true
 
-    }
+    },
+
+    'IdeabizController':{
+        registerUser:true
+    },
+
+    'IdeabizAdminapiController':{
+        '*': true
+    },
 };

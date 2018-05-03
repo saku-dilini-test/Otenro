@@ -61,6 +61,9 @@
             console.log(asd,index);
             if(asd == false && !$scope.tmpImage[index].img){
                 $scope.tmpImage.splice(index, 1);
+                if ($scope.article.tempImageArray && $scope.article.tempImageArray.length > 0){
+                   $scope.article.tempImageArray.splice(index, 1);
+               }
             }else if(asd == false && $scope.tmpImage[index].img){
             console.log("else if");
                 $scope.tmpImage[index].videoUrl = null;

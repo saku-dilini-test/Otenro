@@ -12,6 +12,9 @@ module.exports = {
             },
             lastAccessTime:{
                 type:'string'
+            },
+            deviceUUID: {
+                type: 'string'
             }
         }
 }
