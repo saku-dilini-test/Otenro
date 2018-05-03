@@ -222,20 +222,18 @@ module.exports = {
     },
 
     getAllPorts : function(req,res){
-
-
-       fs1.readFile('./api/services/port.json', (err, data) => {
-           if (err) throw err;
-            let ports = JSON.parse(data);
+       fs.readFile('./api/services/port.json', function(err, data) {
+           if (err)  res.send(err);
+            var ports = JSON.parse(data);
            res.send(ports);
        });
     },
 
     getAllPrice : function(req,res){
 
-       fs1.readFile('./api/services/price.json', (err, data) => {
-           if (err) throw err;
-            let price = JSON.parse(data);
+       fs.readFile('./api/services/price.json', function(err, data) {
+           if (err)  res.send(err);
+            var price = JSON.parse(data);
            res.send(price);
        });
     },
