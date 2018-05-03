@@ -222,7 +222,7 @@ module.exports = {
     },
 
     getAllPorts : function(req,res){
-       fs.readFile('./api/services/port.json', function(err, data) {
+       fs.readFile(sails.config.appPath+'/api/services/port.json', function(err, data) {
            if (err)  res.send(err);
             var ports = JSON.parse(data);
            res.send(ports);
@@ -231,7 +231,7 @@ module.exports = {
 
     getAllPrice : function(req,res){
 
-       fs.readFile('./api/services/price.json', function(err, data) {
+       fs.readFile(sails.config.appPath+'/api/services/price.json', function(err, data) {
            if (err)  res.send(err);
             var price = JSON.parse(data);
            res.send(price);
