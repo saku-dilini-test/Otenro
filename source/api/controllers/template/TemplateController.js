@@ -253,11 +253,17 @@ module.exports = {
             //sails.log.info(result);
 
             result.forEach(function(article) {
-                if(new Date(new Date(dateFormat(article.publishDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) <= new Date(new Date().toLocaleString())){
-                    if(new Date(new Date(dateFormat(article.expiryDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) >= new Date(new Date().toLocaleString())) {
-                        articalData.push(article);
-                    }
+                if (new Date(new Date(dateFormat(article.publishDate, "yyyy-mm-dd hh:MM:ss TT"))) <= new Date(new Date())) {
+                        if (new Date(new Date(dateFormat(article.expiryDate, "yyyy-mm-dd hh:MM:ss TT"))) >= new Date(new Date())) {
+                            articalData.push(article);
+
+                        }
                 }
+//                if(new Date(new Date(dateFormat(article.publishDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) <= new Date(new Date().toLocaleString())){
+//                    if(new Date(new Date(dateFormat(article.expiryDate, "yyyy-mm-dd hh:mm:ss")).toLocaleString()) >= new Date(new Date().toLocaleString())) {
+//                        articalData.push(article);
+//                    }
+//                }
             });
 
             res.json(articalData);
