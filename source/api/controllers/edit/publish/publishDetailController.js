@@ -230,7 +230,6 @@ module.exports = {
     },
 
     getAllPrice : function(req,res){
-
        fs.readFile(sails.config.appPath+'/api/services/price.json', function(err, data) {
            if (err)  res.send(err);
             var price = JSON.parse(data);
@@ -239,7 +238,6 @@ module.exports = {
     },
 
     getKeywordLength : function(req,res){
-        console.log(config.KEYWORD_LENGTH);
         res.json({length:config.KEYWORD_LENGTH});
     },
 
