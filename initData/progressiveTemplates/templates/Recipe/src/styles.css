@@ -801,7 +801,7 @@ label{
 @media (max-width: 767px)
 {
   .page-container{
-    overflow-x: hidden;
+    overflow: hidden;
     position:relative;
   }
   h1,h2,h3,h4,h5,h6,p,#disqus_thread{
