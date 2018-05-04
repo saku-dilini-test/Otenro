@@ -40,6 +40,8 @@ export class ProductComponent implements OnInit {
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
     private player: Player;
+    private readMore = false;
+    desPart1;desPart2;desPart1_demo;
 
     constructor(public sanitizer: DomSanitizer, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
         this.sanitizer = sanitizer;
@@ -47,6 +49,13 @@ export class ProductComponent implements OnInit {
         this.init();
         this.isBuyBtnDisable = true;
         console.log(this.Data.tempImageArray);
+
+        if (this.Data.detailedDesc.length > 250) {
+            this.desPart2 = this.Data.detailedDesc.slice(250, this.Data.detailedDesc.length);
+            this.desPart1  = this.Data.detailedDesc.slice(0, 250) + "...";
+            this.desPart1_demo  = this.Data.detailedDesc.slice(0, 250);
+
+        }
     }
 
     cleanURL(oldURL: string): SafeResourceUrl {
@@ -59,7 +68,15 @@ export class ProductComponent implements OnInit {
     tests;
     @ViewChild('iframePlayer') playerContainer;
 
+    readMoreFunct() {
+
+        this.desPart1 = this.desPart1_demo.concat(this.desPart2);
+        this.readMore = true;
+    }
+
     ngOnInit() {
+
+
         this.CurrencyService.getCurrencies().subscribe(data => {
             this.currency = data.sign;
         }, error => {
@@ -179,15 +196,15 @@ export class ProductComponent implements OnInit {
 
         $(".carousel").swipe({
 
-            swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+            swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
 
-              if (direction == 'left') $(this).carousel('next');
-              if (direction == 'right') $(this).carousel('prev');
+                if (direction == 'left') $(this).carousel('next');
+                if (direction == 'right') $(this).carousel('prev');
 
             },
-            allowPageScroll:"vertical"
+            allowPageScroll: "vertical"
 
-          });
+        });
         // console.log(document.getElementById('iframePlayer'));
         // this.player = new Player(this.playerContainer.nativeElement);
     }
@@ -235,7 +252,7 @@ export class ProductComponent implements OnInit {
             autoplay: true
         };
         if (id) {
-            var player = new Player('player' + index,options);
+            var player = new Player('player' + index, options);
             console.log(player);
 
             player.ready().then(function () {
@@ -275,10 +292,10 @@ export class ProductComponent implements OnInit {
                 //     console.log('played the video!');
                 // });
 
-                player.play().then(function() {
+                player.play().then(function () {
                     // the video was played
                     console.log('vido played');
-                }).catch(function(error) {
+                }).catch(function (error) {
                     switch (error.name) {
                         case 'PasswordError':
                             // the video is password-protected and the viewer needs to enter the

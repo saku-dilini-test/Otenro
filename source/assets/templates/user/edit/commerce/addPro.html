@@ -52,20 +52,20 @@
 
                                     <md-input-container class="md-block">
                                         <label>Name</label>
-                                        <input md-maxlength="15"  ng-required="true" name="name" ng-model="product.name">
+                                        <input md-maxlength="30"  ng-required="true" name="name" ng-model="product.name">
                                         <div ng-messages="productForm.name.$error" ng-show="productForm.name.$dirty">
                                             <div ng-message="required">Name is required.</div>
-                                            <div ng-message="md-maxlength">The name must be less than 15 characters long.</div>
+                                            <div ng-message="md-maxlength">The name must be less than 30 characters long.</div>
                                         </div>
                                     </md-input-container>
 
                                     <md-input-container class="md-block">
                                         <label>Description</label>
-                                        <textarea type="area" required  md-maxlength="100" name="detailedDesc" rows="1"  ng-model="product.detailedDesc" > </textarea>
+                                        <textarea type="area" required  md-maxlength="500" name="detailedDesc" rows="1"  ng-model="product.detailedDesc" > </textarea>
 
                                         <div ng-messages="productForm.detailedDesc.$error" ng-show="productForm.detailedDesc.$dirty">
                                             <div ng-message="required">Description is required.</div>
-                                            <div ng-message="md-maxlength">The description must be less than 100 characters long.</div>
+                                            <div ng-message="md-maxlength">The description must be less than 500 characters long.</div>
                                         </div>
                                     </md-input-container>
 

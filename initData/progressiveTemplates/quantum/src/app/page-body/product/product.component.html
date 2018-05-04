@@ -57,9 +57,11 @@
                     <br>
                   </h3>
                 </div>
-                <p class=" text-left product-detail main-content-font" id="details">
-                  {{Data.detailedDesc}}
-                </p>
+                  <div class=" text-left product-detail main-content-font"  id="details">
+                    {{desPart1}}
+                  </div>
+                  <a class=" text-left product-detail main-content-font" *ngIf="!readMore" (click)="readMoreFunct()">Read More</a>
+
                 <div class="panel-heading">
                   <h3 class="mg-clear main-header-font">
                     {{Data.name}}
