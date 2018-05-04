@@ -758,7 +758,7 @@ module.exports = {
                                         console.log('next move cd and execute jarsigner')
 
                                         shell.mv('-n', 'my-release-key.keystore', appPath + 'platforms/android/build/outputs/apk/release/');
-                                        shell.cd(appPath + '/platforms/android/build/outputs/apk/release');
+                                        shell.cd(appPath + 'platforms/android/build/outputs/apk/release/');
                                         shell.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg ' +
                                             'SHA1 -keystore my-release-key.keystore app-release-unsigned.apk ' +
                                             // 'SHA1 -keystore my-release-key.keystore android-release-unsigned.apk ' +
