@@ -768,7 +768,8 @@ module.exports = {
                                             if (code4 == 0) {
                                                 console.log('exec ziplign')
 
-                                                fs.stat(appPath + '/platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk', function (err, fileStat) {
+                                                // fs.stat(appPath + '/platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk', function (err, fileStat) {
+                                                fs.stat(appPath + '/platforms/android/app/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk', function (err, fileStat) {
                                                     if (err) {
                                                         if (err.code == 'ENOENT') {
                                                             sails.log.info('Does not exist.');
