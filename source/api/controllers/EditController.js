@@ -802,6 +802,7 @@ module.exports = {
                                                                 if (err.code == 'ENOENT') {
                                                                     shell.exit(1);
                                                                     sails.log.info('Does not exist.');
+                                                                    res.send(err);
                                                                 }
                                                             } else {
                                                                 if (fileStat.isFile()) {
@@ -814,17 +815,18 @@ module.exports = {
                                                         fs.copy(resourcesPath, publishPath, function (err) {
                                                             if (err) {
                                                                 shell.exit(1);
-                                                                throw err;
+                                                                res.send(err);
                                                             } else {
                                                                 fs.copy(file, publishPath + "/" + appName.replace(/\s/g, '') + '.apk', function (err) {
                                                                     if (err) {
                                                                         shell.exit(1);
-                                                                        throw err;
+                                                                        res.send(err);
                                                                     } else {
                                                                         zipFolder(publishPath, zipFile, function (err) {
                                                                             if (err) {
                                                                                 shell.exit(1);
                                                                                 sails.log.info('Zipping error!', err);
+                                                                                res.send(err);
                                                                             } else {
 
                                                                                 var searchAppData = {
