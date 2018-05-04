@@ -772,6 +772,7 @@ module.exports = {
                                                 fs.stat(appPath + '/platforms/android/app/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk', function (err, fileStat) {
                                                     if (err) {
                                                         if (err.code == 'ENOENT') {
+                                                            shell.exit(1);
                                                             sails.log.info('Does not exist.');
                                                         }
                                                     } else {
@@ -799,6 +800,7 @@ module.exports = {
                                                         fs.stat(zipFile, function (err, fileStat) {
                                                             if (err) {
                                                                 if (err.code == 'ENOENT') {
+                                                                    shell.exit(1);
                                                                     sails.log.info('Does not exist.');
                                                                 }
                                                             } else {
@@ -811,14 +813,17 @@ module.exports = {
                                                         });
                                                         fs.copy(resourcesPath, publishPath, function (err) {
                                                             if (err) {
+                                                                shell.exit(1);
                                                                 throw err;
                                                             } else {
                                                                 fs.copy(file, publishPath + "/" + appName.replace(/\s/g, '') + '.apk', function (err) {
                                                                     if (err) {
+                                                                        shell.exit(1);
                                                                         throw err;
                                                                     } else {
                                                                         zipFolder(publishPath, zipFile, function (err) {
                                                                             if (err) {
+                                                                                shell.exit(1);
                                                                                 sails.log.info('Zipping error!', err);
                                                                             } else {
 
@@ -827,7 +832,10 @@ module.exports = {
                                                                                 }
 
                                                                                 Application.update(searchAppData, {status: "UPLOADING"}).exec(function (err, app) {
-                                                                                    if (err) res.send(err);
+                                                                                    if (err){
+                                                                                        shell.exit(1);
+                                                                                        res.send(err);
+                                                                                    }
                                                                                     else {
                                                                                         var filename = path.basename(zipFile);
                                                                                         var mimetype = mime.lookup(zipFile);
@@ -836,9 +844,9 @@ module.exports = {
                                                                                         res.setHeader('Content-type', mimetype);
 
                                                                                         var filestream = fs.createReadStream(zipFile);
-
-                                                                                        filestream.pipe(res);
+                                                                                        shell.exit(1);
                                                                                         sails.log.info('EXCELLENT');
+                                                                                        filestream.pipe(res);
                                                                                     }
                                                                                 });
 
@@ -852,28 +860,44 @@ module.exports = {
                                                         });
                                                         /*res.json('ok');*/
                                                     } else {
-                                                        if (stderr) return res.negotiate(stderr);
+                                                        if (stderr){
+                                                            shell.exit(1);
+                                                            return res.negotiate(stderr);
+                                                        }
                                                     }
                                                     shell.code;
                                                 });
                                             } else {
-                                                if (stderr) return res.negotiate(stderr);
+                                                if (stderr){
+
+                                                    return res.negotiate(stderr);
+                                                }
                                             }
                                             shell.code;
                                         });
                                     } else {
-                                        if (stderr) return res.negotiate(stderr);
+                                        if (stderr){
+                                            shell.exit(1);
+                                            return res.negotiate(stderr);
+                                        }
                                     }
                                     shell.code;
                                 });
                             } else {
-                                if (stderr) return res.negotiate(stderr);
+                                if (stderr){
+                                    shell.exit(1);
+                                    return res.negotiate(stderr);
+                                }
+
                             }
                             shell.code;
                         });
 
                     } else {
-                        if (stderr) return res.negotiate(stderr);
+                        if (stderr){
+                            shell.exit(1);
+                            return res.negotiate(stderr);
+                        }
                     }
                     shell.code;
                 });
