@@ -802,7 +802,6 @@ module.exports = {
                                                                 if (err.code == 'ENOENT') {
                                                                     sails.log.info('Does not exist.');
                                                                     res.send(err);
-                                                                    shell.exit(1);
                                                                 }
                                                             } else {
                                                                 if (fileStat.isFile()) {
@@ -848,7 +847,6 @@ module.exports = {
                                                                                         var filestream = fs.createReadStream(zipFile);
                                                                                         sails.log.info('EXCELLENT');
                                                                                         filestream.pipe(res);
-                                                                                        shell.exit(1);
                                                                                     }
                                                                                 });
 
