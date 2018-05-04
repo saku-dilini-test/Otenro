@@ -46,6 +46,7 @@
     // map tells the System loader where to look for things
     // defaultJSExtensions: true,
     map: {
+      '@vimeo/player':'npm:@vimeo/player/dist/player.js',
       lodash: 'npm:lodash/lodash.js',
       'ng4-loading-spinner':'npm:ng4-loading-spinner/index.js',
       // our app is within the app folder
