@@ -757,8 +757,10 @@ module.exports = {
                                     if (code2 == 0) {
                                         console.log('next move cd and execute jarsigner')
 
-                                        shell.mv('-n', 'my-release-key.keystore', appPath + 'platforms/android/build/outputs/apk/release/');
-                                        shell.cd(appPath + 'platforms/android/build/outputs/apk/release/');
+                                        // shell.mv('-n', 'my-release-key.keystore', appPath + 'platforms/android/build/outputs/apk/release/');
+                                        // shell.cd(appPath + 'platforms/android/build/outputs/apk/release/');
+                                        shell.mv('-n', 'my-release-key.keystore', appPath + 'platforms/android/app/build/outputs/apk/release/');
+                                        shell.cd(appPath + 'platforms/android/app/build/outputs/apk/release/');
                                         shell.exec('jarsigner -verbose -sigalg SHA1withRSA -digestalg ' +
                                             'SHA1 -keystore my-release-key.keystore app-release-unsigned.apk ' +
                                             // 'SHA1 -keystore my-release-key.keystore android-release-unsigned.apk ' +
@@ -773,7 +775,8 @@ module.exports = {
                                                         }
                                                     } else {
                                                         if (fileStat.isFile()) {
-                                                            fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk');
+                                                            // fs.unlinkSync(appPath + '/platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk');
+                                                            fs.unlinkSync(appPath + '/platforms/android/app/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk');
                                                         } else if (fileStat.isDirectory()) {
                                                             sails.log.info('Directory found.');
                                                         }
@@ -784,7 +787,8 @@ module.exports = {
                                                  shell.exec('/opt/android-sdk-linux/build-tools/26.0.2/zipalign -v 4 android-release-unsigned.apk ' + appName.replace(/\s/g, '') + '.apk', {async: true}, function (code5, stdout, stderr) {
                                                      if (code5 == 0) {
 
-                                                        var file = appPath + 'platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
+                                                        // var file = appPath + 'platforms/android/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
+                                                        var file = appPath + 'platforms/android/app/build/outputs/apk/release/' + appName.replace(/\s/g, '') + '.apk';
                                                         var resourcesPath = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' +
                                                             appId + '/src/assets/images/publish/';
                                                         var publishPath = config.ME_SERVER + userId + '/buildProg/' + appId + '/publish';
