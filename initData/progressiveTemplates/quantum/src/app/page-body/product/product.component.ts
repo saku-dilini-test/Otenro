@@ -55,6 +55,9 @@ export class ProductComponent implements OnInit {
             this.desPart1  = this.Data.detailedDesc.slice(0, 250) + "...";
             this.desPart1_demo  = this.Data.detailedDesc.slice(0, 250);
 
+        }else{
+            this.desPart1 = this.Data.detailedDesc;
+            this.readMore = true;
         }
     }
 
@@ -606,8 +609,8 @@ export class ProductComponent implements OnInit {
                             qty: this.selectedVariant.buyQuantity,
                             sku: this.selectedVariant.sku,
                             totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
-                            price: this.selectedVariant.price,
-                            total: this.selectedVariant.price,
+                            price: this.selectedVariant.price.toFixed(2),
+                            total: this.selectedVariant.price.toFixed(2),
                             imgURL: this.Data.tempImageArray,
                             variant: this.selectedVariant.selection,
                             totalQty: this.selectedVariant.quantity,
@@ -634,8 +637,8 @@ export class ProductComponent implements OnInit {
                     qty: this.selectedVariant.buyQuantity,
                     sku: this.selectedVariant.sku,
                     totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
-                    price: this.selectedVariant.price,
-                    total: this.selectedVariant.price,
+                    price: this.selectedVariant.price.toFixed(2),
+                    total: this.selectedVariant.price.toFixed(2),
                     imgURL: this.Data.tempImageArray,
                     variant: this.selectedVariant.selection,
                     totalQty: this.selectedVariant.quantity,

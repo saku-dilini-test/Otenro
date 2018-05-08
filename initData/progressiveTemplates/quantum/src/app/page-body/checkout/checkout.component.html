@@ -294,7 +294,7 @@
           <td> {{itm.name}}&nbsp;</td>
           <td> {{itm.qty}}&nbsp;</td>
           <td>
-            <span>{{sign}}{{(itm.total)*(itm.qty)}}</span>
+            <span>{{sign}}{{itemPriceCal(itm.total,itm.qty)}}</span>
           </td>
         </tr>
       </tbody>
@@ -302,7 +302,7 @@
         <tr *ngIf='hideShipping'>
           <th>Shipping</th>
           <td></td>
-          <td>{{sign}}{{chkShippingCost}}</td>
+          <td >{{sign}}{{chkShippingCost}}</td>
         </tr>
         <tr *ngIf='chkPickupCost > 0'>
           <th>Pick up cost</th>

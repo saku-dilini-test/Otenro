@@ -101,7 +101,7 @@ export class CheckoutComponent implements OnInit {
     private spinner: Ng4LoadingSpinnerService) {
 
     this.title.changeTitle("Checkout");
-
+    this.spinner.show();
 
     if (this.dataService.userData == null) {
       var userData = {
@@ -259,6 +259,11 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  itemPriceCal(price, qty){
+    let tot = price*qty
+    return tot.toFixed(2);
+  }
+
 
   getTotal() {
     var total = 0;
@@ -271,6 +276,7 @@ export class CheckoutComponent implements OnInit {
     }
     tax = total * this.tax / 100;
     this.taxTotal = total * this.tax / 100;
+    this.taxTotal = this.taxTotal.toFixed(2);
     if (tax > 0) {
       total = total + tax;
       this.dataService.cart.totalPrice = total;
@@ -510,8 +516,9 @@ export class CheckoutComponent implements OnInit {
           if (tax > 0) {
             total = total + tax;
             this.totalPrice = total;
+            this.totalPrice = this.totalPrice.toFixed(2);
           } else {
-            this.cart.totalPrice = total;
+            this.cart.totalPrice = total.toFixed(2);
           }
         } else {
           tax = total * this.chkTax / 100;
@@ -526,21 +533,27 @@ export class CheckoutComponent implements OnInit {
             if (this.chkPickupCost == 0) {
               if (this.chkShippingCost) {
                 this.totalPrice = total + parseInt(this.chkShippingCost);
+                this.totalPrice = this.totalPrice.toFixed(2);
               } else {
                 this.totalPrice = total;
+                this.totalPrice = this.totalPrice.toFixed(2);
               }
             } else {
               this.totalPrice = total + parseInt(this.chkPickupCost);
+              this.totalPrice = this.totalPrice.toFixed(2);
             }
           } else {
             if (this.chkPickupCost == 0) {
               if (this.chkShippingCost) {
                 this.totalPrice = total + parseInt(this.chkShippingCost);
+                this.totalPrice = this.totalPrice.toFixed(2);
               } else {
                 this.totalPrice = total;
+                this.totalPrice = this.totalPrice.toFixed(2);
               }
             } else {
               this.totalPrice = total + parseInt(this.chkPickupCost);
+              this.totalPrice = this.totalPrice.toFixed(2);
             }
           }
         }

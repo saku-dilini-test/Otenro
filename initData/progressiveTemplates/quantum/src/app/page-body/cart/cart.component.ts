@@ -70,6 +70,11 @@ export class CartComponent implements OnInit {
 
   }
 
+  itemPriceCal(price, qty){
+    let tot = price*qty
+    return tot.toFixed(2);
+  }
+
   getTotal = function () {
     var total = 0;
     var amount = 0;
@@ -80,15 +85,16 @@ export class CartComponent implements OnInit {
       total += (amount * product.qty);
 
     }
-    tax = total * this.tax / 100;
+    tax = (total * this.tax / 100);
     this.taxTotal = total * this.tax / 100;
+    this.taxTotal = this.taxTotal.toFixed(2);
     if (tax > 0) {
       //total = total + tax;
       this.dataService.cart.totalPrice = total;
-      return total;
+      return total.toFixed(2);;
     } else {
       this.dataService.cart.totalPrice = total;
-      return total;
+      return total.toFixed(2);;
     }
   };
 
