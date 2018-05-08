@@ -384,5 +384,9 @@ module.exports.routes = {
 
     'POST /payment/savePaymentUserData': 'payment/PaymentController.savePaymentUserData'
 
+ /**
+     * App maker user landing page.
+     */
+    'POST /user/addLandingPageDetails' : 'LandingPageController.addLandingPageDetails'
 
 };

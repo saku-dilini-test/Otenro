@@ -89,6 +89,10 @@ module.exports.policies = {
 
   },
 
+ 'LandingPageController' : {
+    addLandingPageDetails : true
+  },
+
   'template/TemplateAuthController': {
     //'*': ['jwtAuth'],
     authenticate : true,
