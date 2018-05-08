@@ -20,8 +20,10 @@ export class AboutusComponent implements OnInit {
   private openWeekdays = "we are closed";
   private openSunday = "we are closed";
   private openSaturday = "we are closed";
+  private aboutUsUrl = SERVER_URL + "/templates/viewWebImages?userId="
+    + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=';
 
-  constructor(private http: HttpClient, private appdataService: AppDataService,private title: TitleService) {
+  constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {
     this.title.changeTitle("About Us");
   }
 
@@ -83,8 +85,6 @@ export class AboutusComponent implements OnInit {
         // }
 
 
-        this.aboutUsUrl = SERVER_URL + "/templates/viewWebImages?userId="
-          + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=';
 
       }, (err) => {
         console.log(err);
