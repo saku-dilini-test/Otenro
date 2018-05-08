@@ -382,7 +382,7 @@ module.exports.routes = {
     'POST /reports/getChartData': 'reports/StoreAnalyticsController.getChartData',
 
 
-    'POST /payment/savePaymentUserData': 'payment/PaymentController.savePaymentUserData'
+    'POST /payment/savePaymentUserData': 'payment/PaymentController.savePaymentUserData',
 
  /**
      * App maker user landing page.
