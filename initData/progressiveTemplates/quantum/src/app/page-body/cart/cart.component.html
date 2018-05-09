@@ -1,7 +1,7 @@
 
 
 <div class="container">
-  <div class="row cart" *ngFor="let item of cartItems">
+  <div class="row cart" *ngFor="let item of cartItems ; let i = index">
     <div class="col-md-1 col-xs-2 no-m-padding">
       <img src="{{imageUrl}}/{{item.imgURL[0].img}}">
     </div>
@@ -29,14 +29,14 @@
         </div>
 
         <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
-        <div class="col" *ngIf="item.qty > cartItems[0].totalQty && cartItems[0].totalQty > 1">
-          <span>
-            Please enter a quantity of {{cartItems[0].totalQty}} or less.
+        <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty > 1">
+          <span style="color:rgb(180, 30, 30)">
+            Enter a quantity of {{cartItems[0].totalQty}} or less.
           </span>
         </div>
-        <div class="col" *ngIf="item.qty > cartItems[0].totalQty && cartItems[0].totalQty == 1">
-          <span>
-            Please enter a quantity of {{cartItems[0].totalQty}}.
+        <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty == 1">
+          <span style="color:rgb(180, 30, 30)">
+            Enter a quantity of {{cartItems[0].totalQty}}.
           </span>
         </div>
       </div>
@@ -78,6 +78,10 @@
     <div class=" bloc-sm">
     </div>
   </div>
+</div>
+
+<div class="col-sm-12" style="margin: 10px 0">
+  <ngb-alert *ngIf="successMessage" type="warning" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
 </div>
 
 

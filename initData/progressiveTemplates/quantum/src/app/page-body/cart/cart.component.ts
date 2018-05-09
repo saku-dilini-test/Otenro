@@ -8,6 +8,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { TaxService } from '../../services/tax/tax.service';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
+import { debounceTime } from 'rxjs/operator/debounceTime';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-cart',
@@ -16,15 +18,22 @@ import { TitleService } from '../../services/title.service';
 })
 export class CartComponent implements OnInit {
 
-  public appId = (<any>data).appId;
-  public userId = (<any>data).userId;
-  public shippingData;
-  public amount;
+  private appId = (<any>data).appId;
+  private userId = (<any>data).userId;
+  private shippingData;
+  private amount;
+  private buyButtonDisable;
   hide: any;
   tax: any;
   user;
+
+  private _success = new Subject<string>();
+
+  staticAlertClosed = false;
+  successMessage: string;
+
   constructor(private currencyService: CurrencyService, private taxService: TaxService, private localStorageService: LocalStorageService,
-              private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
+    private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
     this.title.changeTitle("Shopping Cart");
   }
   cartItems = this.dataService.cart.cartItems;
@@ -70,8 +79,8 @@ export class CartComponent implements OnInit {
 
   }
 
-  itemPriceCal(price, qty){
-    let tot = price*qty
+  itemPriceCal(price, qty) {
+    let tot = price * qty
     return tot.toFixed(2);
   }
 
@@ -133,35 +142,67 @@ export class CartComponent implements OnInit {
   }
   delivery(deliverItems) {
 
-    if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
-      this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
-      this.router.navigate(['checkout', 'delivery']);
-      this.dataService.deliverItems = deliverItems
+    let proceed = true;;
+    for (let i = 0; i < deliverItems.length; i++) {
+      if (deliverItems[i].qty > deliverItems[i].totalQty) {
+        proceed = false;
+      }
     }
-    else {
-      this.dataService.userData = null;
-      this.router.navigate(['checkout', 'delivery']);
-      this.dataService.deliverItems = deliverItems
+    if (proceed == false) {
 
-      // let status = 'delivery'
-      // this.router.navigate(['login', status]);
-      // $state.go('app.login', { item:status });
+      this._success.subscribe((message) => this.successMessage = message);
+      debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+      this._success.next("Please check item quantity!");
+      setTimeout(() => { }, 3100)
+
+    } else {
+      if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
+        this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
+        this.router.navigate(['checkout', 'delivery']);
+        this.dataService.deliverItems = deliverItems
+      }
+      else {
+        this.dataService.userData = null;
+        this.router.navigate(['checkout', 'delivery']);
+        this.dataService.deliverItems = deliverItems
+
+        // let status = 'delivery'
+        // this.router.navigate(['login', status]);
+        // $state.go('app.login', { item:status });
+      }
     }
   }
 
   pickupDetails(deliverItems) {
+
+
     // this.router.navigate(['checkout', 'pickup']);
     // this.dataService.deliverItems = deliverItems;
-    if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
-      this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
-      this.router.navigate(['checkout', 'pickup']);
-      this.dataService.deliverItems = deliverItems;
-
+    let proceed = true;;
+    for (let i = 0; i < deliverItems.length; i++) {
+      if (deliverItems[i].qty > deliverItems[i].totalQty) {
+        proceed = false;
+      }
     }
-    else {
-      let status = 'pickup'
-      this.router.navigate(['login', status]);
-      // $state.go('app.login', { item: $scope.status });
+    if (proceed == false) {
+
+      this._success.subscribe((message) => this.successMessage = message);
+      debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+      this._success.next("Please check item quantity!");
+      setTimeout(() => { }, 3100)
+
+    } else {
+      if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
+        this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
+        this.router.navigate(['checkout', 'pickup']);
+        this.dataService.deliverItems = deliverItems;
+
+      }
+      else {
+        let status = 'pickup'
+        this.router.navigate(['login', status]);
+        // $state.go('app.login', { item: $scope.status });
+      }
     }
   }
 
