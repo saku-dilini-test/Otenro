@@ -66,6 +66,7 @@
                     if($scope.weightRate.weightRanges.length > 0) {
                         var lastEndWeight = parseFloat($scope.weightRate.weightRanges[$scope.size].endWeight);
                         lastEndWeight = lastEndWeight + 0.1 + "";
+                        lastEndWeight =  Math.round(lastEndWeight * 100) / 100;
                         angular.element(document.getElementById('startWeight' + $scope.size))[0].disabled = true;
                         angular.element(document.getElementById('endWeight' + $scope.size))[0].disabled = true;
                         $scope.weightRate.weightRanges.push({startWeight: lastEndWeight, endWeight: '', cost: ''});
