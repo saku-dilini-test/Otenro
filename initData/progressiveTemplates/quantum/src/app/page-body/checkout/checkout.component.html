@@ -279,7 +279,7 @@
 
 
 
-  <div *ngIf='isSelected && complexForm.valid || isSelected && pickupForm.valid'>
+  <div *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
     <h3 class="main-header-font">Your order</h3>
     <table class="table table-responsive">
       <thead class="main-header-font">

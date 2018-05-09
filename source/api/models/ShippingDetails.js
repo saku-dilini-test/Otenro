@@ -24,10 +24,10 @@ module.exports = {
             type: 'string'
         },
         preOrderFee:{
-            type: 'integer'
+            type: 'float'
         },
         feePerItem:{
-            type: 'integer'
+            type: 'float'
         },
         weightRanges : {
             type : 'json'
