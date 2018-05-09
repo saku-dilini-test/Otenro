@@ -129,7 +129,7 @@
 
         $scope.addGooglePlayInfo = function(file, playStoreData, splash) {
              $scope.isValidFormData = true;
-             $scope.count = 0;
+
             if(splash[0] == null || splash[1] == null|| splash[6] == null|| playStoreData.title == null || playStoreData.shortDescription == null ||
                 playStoreData.language == null ||
                 playStoreData.primaryCat == null || playStoreData.fullDescription == null  ||
@@ -151,17 +151,17 @@
                             closeButton: true
                         });
                     });
-
-                    splash.forEach(function(splash){
+                    console.log(splash);
+                    splash.forEach(function(splash,i){
                         if (JSON.stringify(splash).match("blobUrl")){
-                            publishService.uploadPublishFiles(splash,$scope.count,$rootScope.tempNew)
+                            publishService.uploadPublishFiles(splash,i,$rootScope.tempNew)
                                 .success(function (data, status, headers, config) {
 
                                 }).error(function (data, status, headers, config) {
 
                             });
                         }
-                        $scope.count ++;
+
                     })
                 $mdDialog.hide();
             }
