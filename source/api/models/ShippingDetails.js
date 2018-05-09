@@ -51,7 +51,7 @@ module.exports = {
             type: 'string'
         },
         cost : {
-            type :'integer'
+            type :'float'
         },
         countryRestriction: {
             type : 'json'
