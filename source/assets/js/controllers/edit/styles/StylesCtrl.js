@@ -497,6 +497,10 @@
 
         }
 
+        $scope.deleteImg = function (index) {
+            $scope.tmpLogo[0] = null;
+        };
+
         $scope.uploadLogo = function(logo){
             if(angular.element('#fileInput').val() == ''){
                 toastr.error('Please choose an logo to upload', 'Warning', {
