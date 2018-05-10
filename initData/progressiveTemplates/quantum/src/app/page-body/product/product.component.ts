@@ -47,6 +47,7 @@ export class ProductComponent implements OnInit {
     constructor(private localStorageService: LocalStorageService,public sanitizer: DomSanitizer, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
         this.sanitizer = sanitizer;
         this.Data = this.dataService.data;
+
         this.init();
         this.isBuyBtnDisable = true;
         console.log(this.Data.tempImageArray);

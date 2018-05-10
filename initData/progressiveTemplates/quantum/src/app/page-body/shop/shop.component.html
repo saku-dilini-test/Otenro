@@ -58,8 +58,13 @@
                     </label>
                   </div>
 
-                  <div class="text-center button-margin">
+                  <div *ngIf = "results[i].variants.length == 1 && (results[i].variants[0].quantity != 0) || results[i].variants.length == 2 && (results[i].variants[0].quantity != 0 || results[i].variants[1].quantity != 0) || results[i].variants.length == 3 && (results[i].variants[0].quantity != 0 || results[i].variants[1].quantity != 0 || results[i].variants[2].quantity != 0) || results[i].variants.length == 4 && (results[i].variants[0].quantity != 0 || results[i].variants[1].quantity != 0 || results[i].variants[2].quantity != 0 || results[i].variants[3].quantity != 0)"
+                   class="text-center button-margin">
                     <a (click)="navigateProd('product',results[i])" class="btn btn-d btn-lg main-button">BUY</a>
+                  </div>
+                  <div *ngIf = "results[i].variants.length == 1 && results[i].variants[0].quantity == 0 || results[i].variants.length == 2 && (results[i].variants[0].quantity == 0 && results[i].variants[1].quantity == 0) || results[i].variants.length == 3 && (results[i].variants[0].quantity == 0 && results[i].variants[1].quantity == 0 && results[i].variants[2].quantity == 0) || results[i].variants.length == 4 && (results[i].variants[0].quantity == 0 && results[i].variants[1].quantity == 0 && results[i].variants[2].quantity == 0  && results[i].variants[3].quantity == 0)"
+                   class="text-center button-margin">
+                    <h2 href="#" class="text-warning">Sold Out!</h2>
                   </div>
               </div>
             </div>
@@ -82,9 +87,14 @@
                   </label>
                 </div>
 
-                <div class="text-center button-margin">
-                  <a (click)="navigateProd('product',results[i+1])" class="btn btn-d btn-lg main-button">BUY</a>
-                </div>
+                <div *ngIf = "results[i+1].variants.length == 1 && (results[i+1].variants[0].quantity != 0) || results[i+1].variants.length == 2 && (results[i+1].variants[0].quantity != 0 || results[i+1].variants[1].quantity != 0) || results[i+1].variants.length == 3 && (results[i+1].variants[0].quantity != 0 || results[i+1].variants[1].quantity != 0 || results[i+1].variants[2].quantity != 0) || results[i+1].variants.length == 4 && (results[i+1].variants[0].quantity != 0 || results[i+1].variants[1].quantity != 0 || results[i+1].variants[2].quantity != 0 || results[i+1].variants[3].quantity != 0)"
+                class="text-center button-margin">
+                 <a (click)="navigateProd('product',results[i+1])" class="btn btn-d btn-lg main-button">BUY</a>
+               </div>
+               <div *ngIf = "results[i+1].variants.length == 1 && results[i+1].variants[0].quantity == 0 || results[i+1].variants.length == 2 && (results[i+1].variants[0].quantity == 0 && results[i+1].variants[1].quantity == 0) || results[i+1].variants.length == 3 && (results[i+1].variants[0].quantity == 0 && results[i+1].variants[1].quantity == 0 && results[i+1].variants[2].quantity == 0) || results[i+1].variants.length == 4 && (results[i+1].variants[0].quantity == 0 && results[i+1].variants[1].quantity == 0 && results[i+1].variants[2].quantity == 0  && results[i+1].variants[3].quantity == 0)"
+                class="text-center button-margin">
+                 <h2 href="#" class="text-warning">Sold Out!</h2>
+               </div>
               </div>
               <div *ngIf="results[i+1].defaultImage != undefined" class="col-xs-6 col-sm-6">
                 <img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{results[i+1].tempImageArray[results[i+1].defaultImage].img}}" class="lazyload" width="100%" height="100%"/>
