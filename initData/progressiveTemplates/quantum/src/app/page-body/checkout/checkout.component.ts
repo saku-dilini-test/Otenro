@@ -259,7 +259,7 @@ export class CheckoutComponent implements OnInit {
 
   itemPriceCal(price, qty){
     let tot = price*qty
-    return tot.toFixed(2);
+    return Math.round(tot * 100) / 100;
   }
 
 
@@ -274,7 +274,7 @@ export class CheckoutComponent implements OnInit {
     }
     tax = total * this.tax / 100;
     this.taxTotal = total * this.tax / 100;
-    this.taxTotal = this.taxTotal.toFixed(2);
+    this.taxTotal = Math.round(this.taxTotal * 100) / 100;
     if (tax > 0) {
       total = total + tax;
       this.dataService.cart.totalPrice = total;
@@ -514,9 +514,9 @@ export class CheckoutComponent implements OnInit {
           if (tax > 0) {
             total = total + tax;
             this.totalPrice = total;
-            this.totalPrice = this.totalPrice.toFixed(2);
+            this.totalPrice = Math.round(this.totalPrice * 100) / 100;
           } else {
-            this.cart.totalPrice = total.toFixed(2);
+            this.cart.totalPrice = Math.round(total * 100) / 100;
           }
         } else {
           tax = total * this.chkTax / 100;
@@ -531,27 +531,27 @@ export class CheckoutComponent implements OnInit {
             if (this.chkPickupCost == 0) {
               if (this.chkShippingCost) {
                 this.totalPrice = total + parseFloat(this.chkShippingCost);
-                this.totalPrice = this.totalPrice.toFixed(2);
+                this.totalPrice = Math.round(this.totalPrice * 100) / 100;
               } else {
                 this.totalPrice = total;
-                this.totalPrice = this.totalPrice.toFixed(2);
+                this.totalPrice = Math.round(this.totalPrice * 100) / 100;
               }
             } else {
               this.totalPrice = total + parseFloat(this.chkPickupCost);
-              this.totalPrice = this.totalPrice.toFixed(2);
+              this.totalPrice = Math.round(this.totalPrice * 100) / 100;
             }
           } else {
             if (this.chkPickupCost == 0) {
               if (this.chkShippingCost) {
                 this.totalPrice = total + parseFloat(this.chkShippingCost);
-                this.totalPrice = this.totalPrice.toFixed(2);
+                this.totalPrice = Math.round(this.totalPrice * 100) / 100;
               } else {
                 this.totalPrice = total;
-                this.totalPrice = this.totalPrice.toFixed(2);
+                this.totalPrice = Math.round(this.totalPrice * 100) / 100;
               }
             } else {
               this.totalPrice = total + parseFloat(this.chkPickupCost);
-              this.totalPrice = this.totalPrice.toFixed(2);
+              this.totalPrice = Math.round(this.totalPrice * 100) / 100;
             }
           }
         }
@@ -766,6 +766,14 @@ export class CheckoutComponent implements OnInit {
             this.dataService.cart.totalPrice = 0;
             this.dataService.cart.totalQuantity = 0;
 
+            let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+            if(appUser){
+              if(this.localStorageService.get("cart" + appUser.registeredUser)){
+                this.localStorageService.remove("cart" + appUser.registeredUser);
+              }
+            }
+
             // //Pushing into order purchase history
             // if (this.localStorageService.get("history" + this.appId + this.user.registeredUser) != null) {
             //   this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
@@ -883,6 +891,13 @@ export class CheckoutComponent implements OnInit {
             this.dataService.cart.totalPrice = 0;
             this.dataService.cart.totalQuantity = 0;
 
+            let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+            if(appUser){
+              if(this.localStorageService.get("cart" + appUser.registeredUser)){
+                this.localStorageService.remove("cart" + appUser.registeredUser);
+              }
+            }
             //Pushing into order purchase history
             // if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
             //   this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));

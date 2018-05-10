@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit {
           "registeredUser": res.user.sub
         };
         this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+        this.dataService.appUserId = requestParams.registeredUser;
         this.dataService.isUserLoggedIn.check = true;
         this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 

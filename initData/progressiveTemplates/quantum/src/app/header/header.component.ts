@@ -14,13 +14,13 @@ import { TitleService } from "../services/title.service";
   host: { '[@fadeInAnimation]': '' }
 })
 
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private cartNo: number;
-  public title:string;
+  public title: string;
   public loginStatus;
-  constructor(private localStorageService: LocalStorageService, private router: Router, private dataService: PagebodyServiceModule,private titleServ: TitleService) {
+  constructor(private localStorageService: LocalStorageService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Home';
   }
@@ -28,20 +28,21 @@ export class HeaderComponent implements OnInit{
   ngOnInit() {
     this.titleServ.currentTitle.subscribe(message => this.title = message);
 
-    $(".navbar-2").on('show.bs.collapse', function(){
+    $(".navbar-2").on('show.bs.collapse', function () {
       $('.mobileTitle').removeClass('visible-xs');
       $('.mobileTitle').addClass('hidden');
     });
 
-    $(".navbar-2").on('hide.bs.collapse', function(){
+    $(".navbar-2").on('hide.bs.collapse', function () {
       $('.mobileTitle').addClass('visible-xs');
       $('.mobileTitle').removeClass('hidden');
     });
   }
 
   ngAfterContentChecked() {
-    this.cartNo = this.dataService.cart.cartItems.length;
-
+    if (this.dataService.cart.cartItems) {
+      this.cartNo = this.dataService.cart.cartItems.length;
+    }
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.loginStatus = true;
     } else {

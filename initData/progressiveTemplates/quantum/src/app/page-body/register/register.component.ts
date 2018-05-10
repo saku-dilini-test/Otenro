@@ -121,6 +121,7 @@ export class RegisterComponent implements OnInit {
                 };
 
                 this.localStorageService.set('appLocalStorageUser'+this.appId,(requestParams));
+                this.dataService.appUserId = requestParams.registeredUser;
                 this.dataService.isUserLoggedIn.check = true;
                 this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 

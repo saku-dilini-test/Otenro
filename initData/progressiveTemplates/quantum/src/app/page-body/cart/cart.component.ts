@@ -81,7 +81,7 @@ export class CartComponent implements OnInit {
 
   itemPriceCal(price, qty) {
     let tot = price * qty
-    return tot.toFixed(2);
+    return Math.round(tot * 100) / 100;
   }
 
   getTotal = function () {
@@ -96,14 +96,14 @@ export class CartComponent implements OnInit {
     }
     tax = (total * this.tax / 100);
     this.taxTotal = total * this.tax / 100;
-    this.taxTotal = this.taxTotal.toFixed(2);
+    this.taxTotal = Math.round(this.taxTotal * 100) / 100;
     if (tax > 0) {
       //total = total + tax;
       this.dataService.cart.totalPrice = total;
-      return total.toFixed(2);;
+      return Math.round(total * 100) / 100;
     } else {
       this.dataService.cart.totalPrice = total;
-      return total.toFixed(2);;
+      return Math.round(total * 100) / 100;
     }
   };
 
@@ -122,6 +122,8 @@ export class CartComponent implements OnInit {
     this.dataService.parseIndex = this.dataService.parseIndex - 1;
     this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
     this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+    this.localStorageService.set("cart" + this.dataService.appUserId,(this.dataService.cart));
+
   };
 
   buttonDisable = function (qty, totalQty, index) {

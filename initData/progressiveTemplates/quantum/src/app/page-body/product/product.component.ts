@@ -9,6 +9,7 @@ import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import * as Player from '@vimeo/player';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
     selector: 'app-product',
@@ -41,9 +42,9 @@ export class ProductComponent implements OnInit {
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
     private player: Player;
     private readMore = false;
-    desPart1;desPart2;desPart1_demo;
+    desPart1; desPart2; desPart1_demo;
 
-    constructor(public sanitizer: DomSanitizer, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
+    constructor(private localStorageService: LocalStorageService,public sanitizer: DomSanitizer, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
         this.sanitizer = sanitizer;
         this.Data = this.dataService.data;
         this.init();
@@ -52,10 +53,10 @@ export class ProductComponent implements OnInit {
 
         if (this.Data.detailedDesc.length > 250) {
             this.desPart2 = this.Data.detailedDesc.slice(250, this.Data.detailedDesc.length);
-            this.desPart1  = this.Data.detailedDesc.slice(0, 250) + "...";
-            this.desPart1_demo  = this.Data.detailedDesc.slice(0, 250);
+            this.desPart1 = this.Data.detailedDesc.slice(0, 250) + "...";
+            this.desPart1_demo = this.Data.detailedDesc.slice(0, 250);
 
-        }else{
+        } else {
             this.desPart1 = this.Data.detailedDesc;
             this.readMore = true;
         }
@@ -609,8 +610,8 @@ export class ProductComponent implements OnInit {
                             qty: this.selectedVariant.buyQuantity,
                             sku: this.selectedVariant.sku,
                             totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
-                            price: this.selectedVariant.price.toFixed(2),
-                            total: this.selectedVariant.price.toFixed(2),
+                            price: Math.round(this.selectedVariant.price * 100) / 100,
+                            total: Math.round(this.selectedVariant.price * 100) / 100,
                             imgURL: this.Data.tempImageArray,
                             variant: this.selectedVariant.selection,
                             totalQty: this.selectedVariant.quantity,
@@ -628,6 +629,9 @@ export class ProductComponent implements OnInit {
                     }
                     i++;
                 }
+                if(this.dataService.appUserId){
+                this.localStorageService.set("cart" + this.dataService.appUserId,(this.dataService.cart));
+                }
             }
             else {
 
@@ -637,8 +641,8 @@ export class ProductComponent implements OnInit {
                     qty: this.selectedVariant.buyQuantity,
                     sku: this.selectedVariant.sku,
                     totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
-                    price: this.selectedVariant.price.toFixed(2),
-                    total: this.selectedVariant.price.toFixed(2),
+                    price: Math.round(this.selectedVariant.price * 100) / 100,
+                    total: Math.round(this.selectedVariant.price * 100) / 100,
                     imgURL: this.Data.tempImageArray,
                     variant: this.selectedVariant.selection,
                     totalQty: this.selectedVariant.quantity,
@@ -649,6 +653,10 @@ export class ProductComponent implements OnInit {
                 this.parentobj.cartSize = this.dataService.cart.cartSize;
                 this.dataService.parseWeight = this.selectedVariant.weight;
                 // $state.go('app.category');
+
+                if(this.dataService.appUserId){
+                    this.localStorageService.set("cart" + this.dataService.appUserId,(this.dataService.cart));
+                    }
                 if (navi == "buyNowCart") {
                     this.route.navigate(['cart']);
                 }

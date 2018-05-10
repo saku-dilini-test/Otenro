@@ -8,6 +8,7 @@ import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { ProductsService } from '../../services/products/products.service';
 import { SliderService } from '../../services/slider/slider.service';
 import { TitleService } from '../../services/title.service';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-homepage',
@@ -35,7 +36,7 @@ export class HomepageComponent implements OnInit {
   private isSliderDataAvailable: boolean = false;
   private isRandomProducts;
 
-  constructor(private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
+  constructor(private localStorageService: LocalStorageService, private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
       if (data.length > 0) {
@@ -69,8 +70,16 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
 
+    let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+    if (appUser) {
+      if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+        this.dataService.cart = this.localStorageService.get("cart" + appUser.registeredUser);
+      }
+    }
+
     $(".carousel").swipe({
-      swipe:  (event, direction, distance, duration, fingerCount, fingerData) => {
+      swipe: (event, direction, distance, duration, fingerCount, fingerData) => {
         console.log(direction);
         if (direction == 'left') $(this).carousel('next');
         if (direction == 'right') $(this).carousel('prev');
@@ -85,7 +94,7 @@ export class HomepageComponent implements OnInit {
       var carouselEl = $('.carousel');
       var carouselItems = carouselEl.find('.item');
       carouselEl.carousel({
-          interval: 100000
+        interval: 100000
       }).on('slid.bs.carousel', (event) => {
         console.log(event);
       });
