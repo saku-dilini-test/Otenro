@@ -24,33 +24,40 @@ module.exports = {
                     var stripe = require('stripe')(result.stripeKey);
 
                     // Create a new customer and then a new charge for that customer:
-                    stripe.customers.create({
-                        email: userData.email
-                    }).then(function(customer){
-                        return stripe.customers.createSource(customer.id, {
-                            source: {
-                                object: 'card',
-                                exp_month: req.body.exp_month,
-                                exp_year: req.body.exp_year,
-                                number: req.body.number,
-                                cvc: req.body.cvc
-                            }
-                        });
-                    }).then(function(source) {
-                        return stripe.charges.create({
-                            amount: req.body.amount * 100,   //A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge
-                            currency: 'usd',
-                            customer: source.customer
-                        });
-                    }).then(function(charge) {
-                        // New charge created on a new customer
-                        console.log("success : "+JSON.stringify(charge));
-                        res.send(charge);
-                    }).catch(function(err) {
-                        // Deal with an error
-                        console.log("this is error .................. " + err);
-                        res.send(err);
+                    stripe.tokens.create({
+                      card: {
+                            "number": req.body.number,
+                            "exp_month": parseInt(req.body.exp_month),
+                            "exp_year": parseInt(req.body.exp_year),
+                            "cvc": req.body.cvc
+                      }
+                    }, function(err, token) {
+                    console.log(token);
+                      // asynchronously called
+                         stripe.customers.create({
+                                              email: userData.email
+                                          }).then(function(customer){
+                                              return stripe.customers.createSource(customer.id, {
+                                                  source: token.id
+                                              });
+                                          }).then(function(source) {
+                                              return stripe.charges.create({
+                                                  amount: req.body.amount * 100,   //A positive integer in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge
+                                                  currency: 'usd',
+                                                  customer: source.customer
+                                              });
+                                          }).then(function(charge) {
+                                              // New charge created on a new customer
+                                              console.log("success : "+JSON.stringify(charge));
+                                              res.send(charge);
+                                          }).catch(function(err) {
+                                              // Deal with an error
+                                              console.log("this is error .................. " + err);
+                                              res.send(err);
+                                          });
                     });
+
+
                 }
             });
 

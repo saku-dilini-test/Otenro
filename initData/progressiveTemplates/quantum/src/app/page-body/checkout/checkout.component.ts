@@ -660,8 +660,10 @@ export class CheckoutComponent implements OnInit {
         if (res.status == 'succeeded') {
           this.orderProcess();
         } else {
-          console.log("makeStripePayment failed");
-
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 5000).subscribe(() => this.errorMessage = null);
+          this._success.next("Failed to make payment!,\n Please check your data");
+          setTimeout(() => { }, 3100);
         }
       }, (err) => {
         alert('makeStripePayment failed');
