@@ -29,6 +29,7 @@ export class CheckoutComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
   nullMessage: string;
+  private showSpinner;
 
   complexForm: FormGroup;
   pickupForm: FormGroup;
@@ -650,12 +651,16 @@ export class CheckoutComponent implements OnInit {
 
   makeStripePaymentMethod(cardInformation) {
 
+    this.showSpinner = true;
+
     cardInformation.amount = this.card.amount;
     cardInformation.appId = this.appId;
     cardInformation.userId = this.userId;
     this.http.post(SERVER_URL + '/templates/makeStripePayment', cardInformation)
 
       .subscribe((res: any) => {
+
+        this.showSpinner = false;
 
         if (res.status == 'succeeded') {
           this.orderProcess();
@@ -673,11 +678,15 @@ export class CheckoutComponent implements OnInit {
 
   authorizeCreditCardMethod(cardInformation) {
 
+    this.showSpinner = true;
+
     cardInformation.amount = this.card.amount;
     cardInformation.appId = this.appId;
 
     this.http.post(SERVER_URL + "/templateController/authorizeNetPay", cardInformation)
       .subscribe((res: any) => {
+
+        this.showSpinner = false;
 
         if (res.status == 'ok') {
           this.orderProcess();

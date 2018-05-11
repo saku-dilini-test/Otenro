@@ -470,7 +470,9 @@
       </div>
 
       <div class="form-group col-sm-12">
-        <button type="submit" class="btn  main-button btn-lg" [disabled]='myForm.valid == false'>Make Payment</button>
+        <button *ngIf = "!showSpinner" type="submit" class="btn  main-button btn-lg" [disabled]='myForm.valid == false'>Make Payment</button>
+        <div *ngIf = "showSpinner" class="loader"></div> <p *ngIf = "showSpinner">Processing...</p>
+
         <!-- <button *ngIf="paymentType == 'authorizeNet'" type="submit" (click)='authorizeCreditCardMethod(card)' class="btn btn-primary btn-lg">MAKE PAYMENT</button> -->
         <div class="col-sm-12" style="margin: 10px 0">
           <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
