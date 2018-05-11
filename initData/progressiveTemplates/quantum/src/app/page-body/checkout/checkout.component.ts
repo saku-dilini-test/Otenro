@@ -27,6 +27,9 @@ export class CheckoutComponent implements OnInit {
 
   staticAlertClosed = false;
   successMessage: string;
+  errorMessage: string;
+  nullMessage: string;
+
   complexForm: FormGroup;
   pickupForm: FormGroup;
 
@@ -669,21 +672,29 @@ export class CheckoutComponent implements OnInit {
   authorizeCreditCardMethod(cardInformation) {
 
     cardInformation.amount = this.card.amount;
-    cardInformation.appId = this.appId
+    cardInformation.appId = this.appId;
 
     this.http.post(SERVER_URL + "/templateController/authorizeNetPay", cardInformation)
       .subscribe((res: any) => {
-        // var alertPopup = $ionicPopup.alert({
-        //     subTitle: res.data.data,
-        //     cssClass: 'ionicPopUp',
-        //     buttons:[
-        //         {text:'OK',
-        //             type:'made-easy-button-setting'},
-        //     ]
-        // });
+
         if (res.status == 'ok') {
           this.orderProcess();
+        }else if(res.data == "Null Response"){
+
+          this._success.subscribe((message) => this.nullMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.nullMessage = null);
+          this._success.next("Please provide card details!");
+          setTimeout(() => { }, 3100);
+
+        }else if(res.data == "Failed Transaction"){
+
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next("Invalid Card details!, Please check your data");
+          setTimeout(() => { }, 3100);
+
         }
+
       }, (err) => {
         alert('authorizeCreditCard' + err)
       })
@@ -758,7 +769,7 @@ export class CheckoutComponent implements OnInit {
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails, { responseType: 'text' })
       .subscribe((res) => {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
-        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.pickupData.cart, { responseType: 'text' })
+        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe((res) => {
             this.dataService.cart.cartItems = [];
             this.dataService.cart.cartSize = 0;
@@ -790,7 +801,7 @@ export class CheckoutComponent implements OnInit {
             this._success.next('Your Order has been successfully processed');
 
             this._success.subscribe((message) => this.successMessage = message);
-            debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+            debounceTime.call(this._success, 4000).subscribe(() => this.successMessage = null);
             this._success.next("Thank You, Your order has been successfully processed");
             setTimeout(() => { this.router.navigate(['home']); }, 3100)
 

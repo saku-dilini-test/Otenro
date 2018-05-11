@@ -78,7 +78,8 @@
         && complexForm.controls['fName'].touched && complexForm.controls['fName'].dirty" class="alert alert-danger">
           You must include a First name.
         </div>
-        <div *ngIf="!complexForm.controls['fName'].valid && complexForm.controls['fName'].touched && complexForm.controls['fName'].dirty" class="alert alert-danger">
+        <div *ngIf="!complexForm.controls['fName'].valid && complexForm.controls['fName'].touched && complexForm.controls['fName'].dirty"
+          class="alert alert-danger">
           First Name must only include Alphabetic character and no spaces.
         </div>
         <!-- <div *ngIf="complexForm.controls['fName'].hasError('minlength')
@@ -100,7 +101,8 @@
         && complexForm.controls['lName'].touched && complexForm.controls['lName'].dirty" class="alert alert-danger">
           You must include a Last name.
         </div>
-        <div *ngIf="!complexForm.controls['lName'].valid && complexForm.controls['lName'].touched && complexForm.controls['lName'].dirty" class="alert alert-danger">
+        <div *ngIf="!complexForm.controls['lName'].valid && complexForm.controls['lName'].touched && complexForm.controls['lName'].dirty"
+          class="alert alert-danger">
           Last Name must only include Alphabetic character and no spaces.
         </div>
         <!-- <div *ngIf="complexForm.controls['lName'].hasError('minlength')
@@ -122,7 +124,8 @@
         && complexForm.controls['email'].touched && complexForm.controls['email'].dirty" class="alert alert-danger">
           You must include an email.
         </div>
-        <div *ngIf="!complexForm.controls['email'].valid && complexForm.controls['email'].touched && complexForm.controls['email'].dirty" class="alert alert-danger">
+        <div *ngIf="!complexForm.controls['email'].valid && complexForm.controls['email'].touched && complexForm.controls['email'].dirty"
+          class="alert alert-danger">
           invalid Email
         </div>
 
@@ -136,7 +139,8 @@
         && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty" class="alert alert-danger">
           You must include a Phone Number.
         </div>
-        <div *ngIf="!complexForm.controls['phone'].valid && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty" class="alert alert-danger">
+        <div *ngIf="!complexForm.controls['phone'].valid && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty"
+          class="alert alert-danger">
           Enter a valid Phone Number (ex: +94123456789)
         </div>
 
@@ -182,7 +186,8 @@
         && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty" class="alert alert-danger">
           You must include zip code.
         </div>
-        <div *ngIf="!complexForm.controls['zip'].valid && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty" class="alert alert-danger">
+        <div *ngIf="!complexForm.controls['zip'].valid && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty"
+          class="alert alert-danger">
           invalid zip code
         </div>
       </div>
@@ -220,13 +225,13 @@
           <input class="form-control" name="name" id="name" placeholder="Arstina" [formControl]="pickupForm.controls['name']">
         </div>
         <div *ngIf="pickupForm.controls['name'].dirty || pickupForm.controls['name'].touched">
-        <div *ngIf="pickupForm.controls['name'].hasError('required')
+          <div *ngIf="pickupForm.controls['name'].hasError('required')
         && pickupForm.controls['name'].touched" class="alert alert-danger">
-          You must include a Name.
-        </div>
-        <div *ngIf="!pickupForm.controls['name'].valid" class="alert alert-danger">
-          Name must only include Alphabetic character
-        </div>
+            You must include a Name.
+          </div>
+          <div *ngIf="!pickupForm.controls['name'].valid" class="alert alert-danger">
+            Name must only include Alphabetic character
+          </div>
         </div>
       </div>
 
@@ -236,13 +241,13 @@
           <input class="form-control" type="text" maxlength="16" placeholder="+94712345678" [formControl]="pickupForm.controls['phone']">
         </div>
         <div *ngIf="pickupForm.controls['phone'].dirty || pickupForm.controls['phone'].touched">
-        <div *ngIf="pickupForm.controls['phone'].hasError('required')
+          <div *ngIf="pickupForm.controls['phone'].hasError('required')
         && pickupForm.controls['phone'].touched" class="alert alert-danger">
-          You must include a Phone Number.
-        </div>
-        <div *ngIf="!pickupForm.controls['phone'].valid" class="alert alert-danger">
-          Enter a valid Phone Number (ex: +94123456789)
-        </div>
+            You must include a Phone Number.
+          </div>
+          <div *ngIf="!pickupForm.controls['phone'].valid" class="alert alert-danger">
+            Enter a valid Phone Number (ex: +94123456789)
+          </div>
         </div>
       </div>
 
@@ -285,14 +290,14 @@
       <thead class="main-header-font">
         <tr>
           <th width="89%">Item</th>
-          <th width="100%" style = "text-align: center">Qty</th>
+          <th width="100%" style="text-align: center">Qty</th>
           <th width="100%">Price</th>
         </tr>
       </thead>
       <tbody class="main-content-font">
         <tr *ngFor="let itm of cartItems">
           <td> {{itm.name}}&nbsp;</td>
-          <td style = "text-align: right"> {{itm.qty}}&nbsp;</td>
+          <td style="text-align: right"> {{itm.qty}}&nbsp;</td>
           <td>
             <span>{{sign}}{{itemPriceCal(itm.total,itm.qty)}}</span>
           </td>
@@ -302,7 +307,7 @@
         <tr *ngIf='hideShipping'>
           <th>Shipping</th>
           <td></td>
-          <td >{{sign}}{{chkShippingCost}}</td>
+          <td>{{sign}}{{chkShippingCost}}</td>
         </tr>
         <tr *ngIf='chkPickupCost > 0'>
           <th>Pick up cost</th>
@@ -427,7 +432,7 @@
 
       <label class="form-group col-sm-6">
         <label>Card Number</label>
-        <input class="form-control" minlength="15" maxlength="19" placeholder="Card Number*" pattern="[0-9]+" type="text" name="cardNumber"
+        <input class="form-control" minlength="15" maxlength="19" placeholder="Card Number*" pattern="[0-9]+" type="text" name="number"
           #number='ngModel' cc-type="card.cardType" ngModel required>
         <div [hidden]="number.valid || number.pristine" class="alert alert-danger">
           <div [hidden]="!number.hasError('required')">Credit card required</div>
@@ -451,13 +456,13 @@
         <div class="row form-group col-sm-12">
           <div class="form-group col-sm-6">
             <label>Month :</label>
-            <select name="month" class="form-control" id="selectedMonth" ngModel required>
+            <select name="exp_month" class="form-control" id="selectedMonth" ngModel required>
               <option *ngFor="let m of months" [ngValue]="m">{{m}} </option>
             </select>
           </div>
           <div class="form-group col-sm-6">
             <label>Year :</label>
-            <select name="year" class="form-control" id="selectedYear" ngModel required>
+            <select name="exp_year" class="form-control" id="selectedYear" ngModel required>
               <option *ngFor="let y of years" [ngValue]="y">{{y}} </option>
             </select>
           </div>
@@ -467,6 +472,15 @@
       <div class="form-group col-sm-12">
         <button type="submit" class="btn  main-button btn-lg" [disabled]='myForm.valid == false'>Make Payment</button>
         <!-- <button *ngIf="paymentType == 'authorizeNet'" type="submit" (click)='authorizeCreditCardMethod(card)' class="btn btn-primary btn-lg">MAKE PAYMENT</button> -->
+        <div class="col-sm-12" style="margin: 10px 0">
+          <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+        </div>
+        <div class="col-sm-12" style="margin: 10px 0">
+          <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+        </div>
+        <div class="col-sm-12" style="margin: 10px 0">
+          <ngb-alert *ngIf="nullMessage" type="info" (close)="nullMessage = null">{{ nullMessage }}</ngb-alert>
+        </div>
       </div>
     </form>
 
