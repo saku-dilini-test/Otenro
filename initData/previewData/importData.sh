@@ -57,6 +57,7 @@ mongoimport --db $DB --collection article --file dataFiles/article.json
 mongoimport --db $DB --collection articlecategory --file dataFiles/articlecategory.json
 mongoimport --db $DB --collection secondnavigation --file dataFiles/secondnavigation.json
 mongoimport --db $DB --collection thirdnavigation --file dataFiles/thirdnavigation.json
+mongoimport --db $DB --collection maincategory --file dataFiles/maincategory.json
 mongoimport --db $DB --collection slider --file dataFiles/slider.json
 
 #for export data
@@ -80,6 +81,7 @@ mongoimport --db $DB --collection slider --file dataFiles/slider.json
 #mongoexport --db $DB --collection article --out article.json
 #mongoexport --db $DB --collection articlecategory --out articlecategory.json
 #mongoexport --db $DB --collection secondnavigation --out secondnavigation.json
+#mongoexport --db $DB --collection maincategory --out maincategory.json
 #mongoexport --db $DB --collection thirdnavigation --out thirdnavigation.json
 #mongoimport --db $DB --collection slider --out slider.json
 

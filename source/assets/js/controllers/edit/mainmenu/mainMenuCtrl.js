@@ -2,10 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("MainMenuCtrl", ['oblMenuService','$scope', '$mdDialog', '$rootScope',
         'mainMenuService','$http','commerceService','toastr','mySharedService','SERVER_URL','ME_APP_SERVER','$auth'
-        ,'dashboardService','articleService','initialData','$log', MainMenuCtrl]);
+        ,'dashboardService','articleService','initialData','$log','$filter', MainMenuCtrl]);
 
     function MainMenuCtrl(oblMenuService,$scope, $mdDialog, $rootScope, mainMenuService,$http,commerceService,toastr,
-                          mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log) {
+                          mySharedService,SERVER_URL,ME_APP_SERVER,$auth,dashboardService,articleService,initialData,$log,$filter) {
 
         $scope.tmpImage = [];
         $scope.mainImg = null;
@@ -69,6 +69,39 @@
                      $scope.imageSelected = true;
                      $scope.buttonName = "Browse Image";
                 };
+
+        $scope.newMenuItems = [];
+        $scope.makeCategoryArray = function (parentNodes) {
+            // console.log("makeCategoryArray");
+            // console.log(JSON.stringify($scope.menuItems, null, 2));
+            for(var i = 0; i < parentNodes.length; i++){
+                var parentNode = parentNodes[i];
+                parentNode.childNodes = [];
+                var parentNodeWithChillds = $scope.attachChildCategoriesByParentNode(parentNode);
+                $scope.newMenuItems.push(parentNodeWithChillds);
+            }
+             // console.log("newMenuItems=> " + JSON.stringify($scope.newMenuItems, null, 2));
+        }
+
+
+        $scope.attachChildCategoriesByParentNode = function (parentNode) {
+            // console.log("attachChildCategoriesByParentNode :: " + parentNode.id);
+            if(parentNode.nodes && parentNode.nodes.length>0){
+                var childNodes = parentNode.nodes;
+                for(var i = 0; i < childNodes.length; i++){
+                    // console.log("process child node :: " + childNodes[i]);
+                    var childNodeArray = $filter('filter')($scope.menuItems, {"id": childNodes[i]});
+                    var childNode = childNodeArray[0];//Will contains only one item
+                    childNode.childNodes = [];
+                    // console.log("childNode=>" + JSON.stringify(childNode, null, 2));
+                    parentNode.childNodes.push($scope.attachChildCategoriesByParentNode(childNode));
+                    // console.log("end push");
+                }
+            }
+            // console.log("parentNode=>" + JSON.stringify(parentNode, null, 2));
+            return parentNode;
+        }
+
 
 
         // Main Menu view
@@ -136,7 +169,7 @@
                  imageURL= SERVER_URL +"templates/viewImages?" +
                     "userId="+ $auth.getPayload().id +
                     "&appId="+$rootScope.appId+"&"+new Date().getTime()+
-                    "&img="+imgLocation+"/"+$scope.menu.imageUrl;
+                    "&img="+secondNavi+"/"+$scope.menu.imageUrl;
                 }
                 $scope.tmpImage[0] = imageURL;
                 $scope.picFile     = imageURL;

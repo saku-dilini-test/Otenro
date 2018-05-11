@@ -1,12 +1,3 @@
-.category a{
-  position: relative;
-}
-.category a div{
-  position: absolute;
-  z-index: 1;
-  padding: 10px;
-}
-
 .button-hover {
     position: absolute;
     top: 0%;

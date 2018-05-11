@@ -2,10 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService','productService','inventoryService', '$rootScope', '$auth', 'SERVER_URL','initialData',
-        'mainMenuService','$log','$q', ProductCtrl]);
+        'mainMenuService','$log','$q','categoryMaintenanceService', ProductCtrl]);
 
     function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService,inventoryService, $rootScope,  $auth, SERVER_URL,initialData,
-    mainMenuService,$log,$q) {
+    mainMenuService,$log,$q,categoryMaintenanceService) {
         var size, weight;
         var variants;
         $scope.defaultImage;
@@ -304,40 +304,49 @@
                 toastr.error('Loading Error', 'Warning', {
                     closeButton: true
                 });
-            })
+            });
         }
 
-        if (typeof $scope.mainMenu == 'undefined') {
-            commerceService.getMainMenuList()
-                .success(function (result) {
-                    if (result == '') {
-                        $scope.mainMenuHide = true;
-                        commerceService.getCategoryList()
-                            .success(function (secondResult) {
-                                $scope.child = secondResult;
+        // if (typeof $scope.mainMenu == 'undefined') {
+        //     commerceService.getMainMenuList()
+        //         .success(function (result) {
+        //             if (result == '') {
+        //                 $scope.mainMenuHide = true;
+        //                 commerceService.getCategoryList()
+        //                     .success(function (secondResult) {
+        //                         $scope.child = secondResult;
+        //                         console.log(secondResult)
+        //                     }).error(function (error) {
+        //                     toastr.error('Loading Error', 'Warning', {
+        //                         closeButton: true
+        //                     });
+        //                 })
+        //             }
+        //             else {
+        //                 $scope.mainMenuHide = false;
+        //                 $scope.childMenuHide = false;
+        //                 $scope.mainMenu = result;
+        //             }
+        //
+        //         }).error(function (error) {
+        //         toastr.error('Loading Error', 'Warning', {
+        //             closeButton: true
+        //         });
+        //     })
+        // }
 
-                                if (secondResult[0].templateName == 'foodDemoApp' || secondResult[0].templateName == 'foodDemoApp2'
-                                    || secondResult[0].templateName == 'clothingApp' || secondResult[0].templateName == 'ECommerceApp') {
-                                    $scope.childMenuHide = false;
-                                }
-                            }).error(function (error) {
-                            toastr.error('Loading Error', 'Warning', {
-                                closeButton: true
-                            });
-                        })
-                    }
-                    else {
-                        $scope.mainMenuHide = false;
-                        $scope.childMenuHide = false;
-                        $scope.mainMenu = result;
-                    }
-
-                }).error(function (error) {
-                toastr.error('Loading Error', 'Warning', {
-                    closeButton: true
-                });
-            })
+        var data = {
+            appId:$rootScope.appId
         }
+        categoryMaintenanceService.getAllCategoryWithoutMakingCommerce(data).success(function (results) {
+            $scope.child = results;
+        }).error(function (error) {
+            toastr.error('Category loading error', 'Warning', {
+                closeButton: true
+            });
+        });
+
+
 
 
         

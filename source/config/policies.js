@@ -49,6 +49,11 @@ module.exports.policies = {
   'edit/commerce/MainNavigationController': {
     '*': ['jwtAuth']
   },
+  'edit/commerce/MainCategoryController': {
+      '*': ['jwtAuth'],
+      getCategoryList : true,
+      getCategoryListPlusProducts : true,
+  },
 
   'edit/commerce/SecondNavigationController': {
     '*': ['jwtAuth']

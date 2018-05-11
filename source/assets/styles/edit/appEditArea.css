@@ -255,14 +255,7 @@
 /********************************
 *************Menu Tree***********
 ********************************/
-.tree-node-content a{
-    border-radius: 0;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-}
+
 
 .menu-add-button{
     background: #E9E8E9 url("/images/menu-add-icon.png") no-repeat 8px center;
@@ -366,16 +359,15 @@
     margin-left: 12px;
 }
 
-.glyphicon{
-    font-size: 20px;
-    line-height: 2em !important;
-    top: 6px;
-}
+/*.glyphicon{*/
+    /*font-size: 20px;*/
+    /*line-height: 2em !important;*/
+    /*top: 6px;*/
+/*}*/
 
 .angular-ui-tree-handle {
     background: #f8faff;
     border: 1px solid #dae2ea;
-    color: #7c9eb2;
 }
 
 .angular-ui-tree-handle:hover {
@@ -402,11 +394,8 @@ tr.angular-ui-tree-empty {
 }
 
 /* --- Tree --- */
-.tree-node {
-    border: 1px solid #f1f1f2;
-    background-color: #f1f1f2;
-    color: #7c9eb2;
-    margin-bottom: 1px;
+.tree-node a.btn{
+    color:#fff !important;
 }
 
 .tree-node input[type='text']{
@@ -425,8 +414,7 @@ tr.angular-ui-tree-empty {
 }
 
 .tree-node-content {
-    padding: 0 10px 0 0;
-    position: relative;
+    padding: 5px 3px;
 }
 
 .tree-handle {

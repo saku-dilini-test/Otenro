@@ -4,12 +4,12 @@
 (function() {
     angular.module('appEdit').service('oblMenuService', ['stylesService', 'contactUsService', 'commerceService',
         'shippingService','taxService','articleService','mainMenuService', 'currencyService', 'publishService',
-        'engageService', 'logoAndTittleService','ipgService','comingSoonService','$log'
+        'engageService', 'logoAndTittleService','ipgService','comingSoonService','$log','categoryMaintenanceService'
         , oblMenuService]);
 
     function oblMenuService(stylesService, contactUsService, commerceService,shippingService,
                             taxService,articleService ,mainMenuService,currencyService, publishService,
-                            engageService, logoAndTittleService,ipgService,comingSoonService,$log) {
+                            engageService, logoAndTittleService,ipgService,comingSoonService,$log,categoryMaintenanceService) {
 
         this.mockData = false;
 
@@ -47,6 +47,11 @@
                         if (ctrlFun=='showAddCategoriesDialog') {
                             this.mockData = false;
                             return mainMenuService.showMainMenuDialog(ctrlFun);
+                        }
+
+                        if (ctrlFun=='showCategoriesMaintenance') {
+                            this.mockData = false;
+                            return categoryMaintenanceService.showCategoryMaintenanceDialog(ctrlFun);
                         }
 
                         if (ctrlFun == 'showOrderDialog') {

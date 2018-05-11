@@ -35,7 +35,7 @@ export class HomepageComponent implements OnInit {
   private catName;
   private isSliderDataAvailable: boolean = false;
   private isRandomProducts;
-
+  private categories:any
   constructor(private localStorageService: LocalStorageService, private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
@@ -61,6 +61,11 @@ export class HomepageComponent implements OnInit {
         imageUrl: 'lazyload-ph.png'
       });
     }
+    this.categoryService.getCategories().subscribe(data => {
+        this.categories =data;
+      }, err => {
+        console.log(err);
+      });
 
     this.title.changeTitle("Home");
 
@@ -108,25 +113,6 @@ export class HomepageComponent implements OnInit {
 
     this.imageUrlSlider = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
-
-    this.categoryService.getCategories().subscribe(data => {
-      if (data.length > 0) {
-        // Read the result field from the JSON response.
-        this.results = data;
-        this.dataService.searchArray = [];
-        data.forEach(element => {
-          this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
-        });
-      } else {
-        this.results = null;
-      }
-
-
-    },
-      error => {
-        console.log('Error retrieving categories');
-      });
-
 
     let max;
 
@@ -179,12 +165,6 @@ export class HomepageComponent implements OnInit {
     if (vw < 768 && length - 1 === index && length % 2 === 1) {
       return styles;
     }
-  }
-
-  // Routing Method
-  navigateShop(val: string, id, name) {
-    this.dataService.catId = id;
-    this.router.navigate(['/' + val, id, name]);
   }
 
   navigateFeaturedProd(val, item) {
