@@ -17,7 +17,7 @@
           You must include a First name.
         </div>
         <div *ngIf="!userEditForm.controls['fName'].valid" class="alert alert-danger">
-          First Name must only include Alphabetic character
+          First Name must only include Alphabetic character and no spaces.
         </div>
       </div>
       <div class="form-group col-xs-6">
@@ -30,7 +30,7 @@
           You must include a Last name.
         </div>
         <div *ngIf="!userEditForm.controls['lName'].valid" class="alert alert-danger">
-          Last Name must only include Alphabetic character
+          Last Name must only include Alphabetic character and no spaces.
         </div>
        </div>
     </div>

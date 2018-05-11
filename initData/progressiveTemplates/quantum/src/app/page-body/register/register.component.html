@@ -14,7 +14,7 @@
                  ngModel required>
           <div [hidden]="fname.valid || fname.pristine" class="alert alert-danger">
             <div [hidden]="!fname.hasError('required')">First Name is required</div>
-            <div [hidden]="!fname.hasError('pattern')">Only alphabetsallowed and no spaces</div>
+            <div [hidden]="!fname.hasError('pattern')">Last Name must only include Alphabetic character and no spaces.</div>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
                  ngModel required>
           <div [hidden]="lname.valid || lname.pristine" class="alert alert-danger">
             <div [hidden]="!lname.hasError('required')">Last Name is required</div>
-            <div [hidden]="!lname.hasError('pattern')">Only alphabetsallowed  and no spaces</div>
+            <div [hidden]="!lname.hasError('pattern')">Last Name must only include Alphabetic character and no spaces.</div>
           </div>
         </div>
       </div>
