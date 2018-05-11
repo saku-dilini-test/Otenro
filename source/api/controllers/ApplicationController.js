@@ -421,13 +421,13 @@ module.exports = {
                                   /**
                                    * add Second Navigation
                                    */
-                                  var secondNaviList = appInitData.secondNavi;
+                                  var secondNaviList = appInitData.mainCategory;
                                   secondNaviList.forEach(function(secondNavi){
                                       var scondNaviAttribute = secondNavi.attribute;
                                       scondNaviAttribute.templateName = appInitData.templateName;
                                       scondNaviAttribute.appId = app.id;
                                       var thirdNaviList = secondNavi.thirdNavi;
-                                      SecondNavigation.create(scondNaviAttribute).exec(function (err, secondN) {
+                                      MainCategory.create(scondNaviAttribute).exec(function (err, secondN) {
                                           if (err) return err;
                                           /**
                                            * Add Third Navigation
