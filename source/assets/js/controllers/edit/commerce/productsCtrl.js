@@ -18,6 +18,76 @@
         //$scope.isNewProduct = true;
         $scope.skuFieldEnable = false;
         $scope.isNew = $rootScope.tempNew;
+        $scope.myVariants = [];
+        $scope.tmpSku = [];
+
+        if(initialData.product.variants){
+//            for(var i = 0;i < $scope.product.variants.length;i++){
+//                $scope.myVariants.push($scope.product.variants[i]);
+//            }
+//            console.log($scope.myVariants);
+            feedSku($scope.product.variants, false);
+        }
+
+        function feedSku(array, isNew){
+
+            if(!isNew){
+                for(var i =0;i < array.length;i++){
+                    $scope.myVariants.push(array[i].sku);
+                }
+
+                for(var j =0; j < 8 ;j++){
+                    $scope.tmpSku[j] = $scope.myVariants;
+                }
+            }else{
+                $scope.tmpSku = [];
+                $scope.myVariants = [];
+
+                for(var i =0;i < $scope.product.variants.length;i++){
+                    $scope.myVariants.push($scope.product.variants[i].sku);
+                }
+                for(var j =0; j < 8 ;j++){
+                    $scope.tmpSku[j] = $scope.myVariants;
+                }
+            }
+            console.log($scope.tmpSku);
+            console.log($scope.myVariants);
+
+        }
+
+        $scope.test = function(sku,index){
+        console.log(sku);
+        console.log(index);
+            var skuLength = sku.length;
+            var tempArr = [];
+                for(var i = 0;i < skuLength;i++){
+                console.log(sku[i]);
+                    for(var k = 0;k < $scope.tmpSku[1].length; k++){
+                        if($scope.tmpSku[1][k] == sku[i]){
+                             $scope.tmpSku[1].splice(k, 1);
+                        }
+                    }
+//
+//                    for(var j = 0; j < 8;j ++){
+//
+//                        if(j !== index){
+//                        console.log(j);
+//                            for(var k = 0;k < $scope.tmpSku[j].length; k++){
+//
+//                                console.log($scope.tmpSku[j][k]);
+//                                if($scope.tmpSku[j][k] == sku[i]){
+//                                    $scope.tmpSku[j].splice(k, 1);
+//                                }
+//
+//                            }
+//
+//                        }
+//                    }
+
+                }
+                console.log($scope.tmpSku);
+
+        }
 
         if(initialData.isNewItem)
         {
@@ -70,14 +140,21 @@
                 var tempImageUrl = tempImagePath + initialData.product.tempImageArray[i].img;
 
                 var tempVideoUrl;
+                var tempVideoSku;
                 if(!initialData.product.tempImageArray[i].videoUrl){
                     tempVideoUrl = initialData.product.tempImageArray[i].videoUrl;
                 }else{
                     tempVideoUrl = null;
                 }
 
+                if(!initialData.product.tempImageArray[i].sku){
+                    tempVideoSku = initialData.product.tempImageArray[i].sku;
+                }else{
+                    tempVideoSku = null;
+                }
 
-                $scope.tmpImage.push({'img':tempImageUrl,'videoUrl':tempVideoUrl});
+
+                $scope.tmpImage.push({'img':tempImageUrl,'videoUrl':tempVideoUrl,'sku':tempVideoSku});
             }
         }
 
@@ -230,6 +307,7 @@
              return el.sku === sku;
            });
            if (!found) {
+           console.log($scope.inserted);
                $scope.product.variants.push($scope.inserted);
            }
            else{
@@ -282,6 +360,7 @@
         };
 
         $scope.addProductVariants = function ( variants,current) {
+            feedSku(variants,true);
                 if($scope.product.selection == undefined){
                      $scope.product.selection = [];
                 }

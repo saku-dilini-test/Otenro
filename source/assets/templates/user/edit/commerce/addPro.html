@@ -427,6 +427,11 @@
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
                                         <img id="1" ng-class="{special: defaultImage == 0}" ng-click="defImg(0,tmpImage[0].videoUrl)" ng-if="tmpImage[0].img !== null" ngf-src="tmpImage[0].img"
                                              width="80" height="80"/>
+                                        <md-input-container>
+                                            <md-select ng-change = "test(tmpImage[0].sku, 0)" ng-model="tmpImage[0].sku" placeholder="Select sku" multiple="">
+                                                <md-option  ng-value="variants" ng-repeat="variants in tmpSku[0]">{{ variants }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
                                     </div>
                                     <div class="old-image">
                                         <input type="button" ng-click="deleteImg(1)" value='delete'
@@ -435,6 +440,11 @@
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
                                         <img  id="2" ng-class="{special: defaultImage == 1}"  ng-click="defImg(1,tmpImage[1].videoUrl)" ng-if="tmpImage[1].img !== null" ngf-src="tmpImage[1].img"
                                               width="80" height="80"/>
+                                        <md-input-container>
+                                            <md-select ng-change = "test(tmpImage[1].sku, 1)" ng-model="tmpImage[1].sku" placeholder="Select sku" multiple="">
+                                                <md-option  ng-value="variants" ng-repeat="variants in tmpSku[1]">{{ variants }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
                                     </div>
                                     <div class="old-image">
                                         <input type="button" ng-click="deleteImg(2)" value='delete'
@@ -443,6 +453,11 @@
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
                                         <img id="3" ng-class="{special: defaultImage == 2}"  ng-click="defImg(2,tmpImage[2].videoUrl)" ng-if="tmpImage[2].img !== null" ngf-src="tmpImage[2].img"
                                              width="80" height="80"/>
+                                        <md-input-container>
+                                            <md-select ng-change = "test(tmpImage[2].sku, 2)" ng-model="tmpImage[2].sku" placeholder="Select sku" multiple="">
+                                                <md-option  ng-value="variants" ng-repeat="variants in tmpSku[2]">{{ variants }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
                                     </div>
                                     <div class="old-image">
                                         <input type="button" ng-click="deleteImg(3)" value='delete'
@@ -451,6 +466,11 @@
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
                                         <img id="4" ng-class="{special: defaultImage == 3}"  ng-click="defImg(3,tmpImage[3].videoUrl)" ng-if="tmpImage[3].img !== null" ngf-src="tmpImage[3].img"
                                              width="80" height="80"/>
+                                        <md-input-container>
+                                            <md-select ng-change = "test(tmpImage[3].sku, 3)" ng-model="tmpImage[3].sku" placeholder="Select sku" multiple="">
+                                                <md-option  ng-value="variants" ng-repeat="variants in tmpSku[3]">{{ variants }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
                                     </div>
                                     <div class="old-image">
                                         <input type="button" ng-click="deleteImg(4)" value='delete'
@@ -459,6 +479,11 @@
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
                                         <img id="5" ng-class="{special: defaultImage == 4}"  ng-click="defImg(4,tmpImage[4].videoUrl)" ng-if="tmpImage[4].img !== null" ngf-src="tmpImage[4].img"
                                              width="80" height="80"/>
+                                        <md-input-container>
+                                            <md-select ng-change = "test(tmpImage[4].sku, 4)" ng-model="tmpImage[4].sku" placeholder="Select sku" multiple="">
+                                                <md-option  ng-value="variants" ng-repeat="variants in tmpSku[4]">{{ variants }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
                                     </div>
                                     <div class="old-image">
                                         <input type="button" ng-click="deleteImg(5)" value='delete'
@@ -467,6 +492,11 @@
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
                                         <img id="6" ng-class="{special: defaultImage == 5}"  ng-click="defImg(5,tmpImage[5].videoUrl)" ng-if="tmpImage[5].img !== null" ngf-src="tmpImage[5].img"
                                              width="80" height="80"/>
+                                        <md-input-container>
+                                            <md-select ng-change = "test(tmpImage[5].sku, 5)" ng-model="tmpImage[4].sku" placeholder="Select sku" multiple="">
+                                                <md-option  ng-value="variants" ng-repeat="variants in tmpSku[5]">{{ variants }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
                                     </div>
                                     <div class="old-image">
                                         <input type="button" ng-click="deleteImg(6)" value='delete'
@@ -475,6 +505,11 @@
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
                                         <img id="7" ng-class="{special: defaultImage == 6}"  ng-click="defImg(6,tmpImage[6].videoUrl)" ng-if="tmpImage[6].img !== null" ngf-src="tmpImage[6].img"
                                              width="80" height="80"/>
+                                        <md-input-container>
+                                            <md-select ng-change = "test(tmpImage[6].sku, 6)" ng-model="tmpImage[4].sku" placeholder="Select sku" multiple="">
+                                                <md-option  ng-value="variants" ng-repeat="variants in tmpSku[6]">{{ variants }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
                                     </div>
                                     <div class="old-image">
                                         <input type="button" ng-click="deleteImg(7)" value='delete'
@@ -483,6 +518,11 @@
                                              src="../../../images/small-placeholder.png" width="80" height="80"/>
                                         <img id="8" ng-class="{special: defaultImage == 7}"  ng-click="defImg(7,tmpImage[7].videoUrl)" ng-if="tmpImage[7].img !== null" ngf-src="tmpImage[7].img"
                                              width="80" height="80"/>
+                                        <md-input-container>
+                                            <md-select ng-change = "test(tmpImage[7].sku, 7)" ng-model="tmpImage[4].sku" placeholder="Select sku" multiple="">
+                                                <md-option  ng-value="variants" ng-repeat="variants in tmpSku[7]">{{ variants }}</md-option>
+                                            </md-select>
+                                        </md-input-container>
                                     </div>
 
                                 </div>

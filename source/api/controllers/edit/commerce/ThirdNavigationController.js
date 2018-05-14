@@ -54,6 +54,7 @@ module.exports = {
 
         var  finelImages = [];
         var  tmpImage = req.body.productImages;
+        console.log(tmpImage);
         var  product =  req.body.product;
         var isNew = req.body.isNew;
             product.defaultImage = defImg;
