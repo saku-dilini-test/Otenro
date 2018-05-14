@@ -273,13 +273,22 @@ module.exports = {
                 templateCategory = req.body.templateCategory,
                 userId = req.body.userId,
                 tempAppDirPath = config.ME_SERVER + userId + '/progressiveTemplates/',
-                templatePath = config.PROGRESSIVE_TEMPLATES_PATH + templateName,
+                appBasePath = config.PROGRESSIVE_TEMPLATES_PATH,
+                templatePath = config.PROGRESSIVE_TEMPLATES_PATH + '/templates/' + templateName,
                 appName = req.body.appName,
                 serverTmp="http://localhost:port",
                 serverOrg=config.server.host,
                 isAppNameAvailable=false;
 
-            var appQuery = { 
+                if(templateCategory === "2") {
+                  appBasePath += 'ECommerceAppsBase';
+                }else if(templateCategory === "3"){
+                  appBasePath += 'ArticleAppsBase';
+                }
+
+                var appCtrl = this;
+
+                var appQuery = { 
                     "userId":userId, 
                     "appName":req.body.appName
                  }
@@ -360,46 +369,25 @@ module.exports = {
                           if (err) res.negotiate(err);
 
 
-                          fs.copy(templatePath, tempAppDirPath + app.id, function(err) {
+                          fs.copy(appBasePath, tempAppDirPath + app.id, function(err) {
+                              if (err) res.send.error(err);
 
-                              if (err) return console.error(err);
-                              var madeEasyFilePath = tempAppDirPath +app.id+'/src/app/madeEasy.json';
+                              console.log("coppied appsBase");
+
                               var madeEasyFileContent = {
                                   name : appName,
                                   appId : app.id,
                                   userId : userId,
                                   serviceApi: config.server
                               };
-                              fs.outputJson(madeEasyFilePath,madeEasyFileContent, function (err) {
-                                  if(err) return console.error(err);
-                              });
-
-                              fs.readFile(tempAppDirPath +app.id+'/src/app/constantsService.ts', 'utf-8',
-                                  function(err, data) {
-                                      if (err) return res.negotiate(err);
-                                      fs.writeFile(tempAppDirPath +app.id+'/src/app/constantsService.ts', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
-                                          if (err) return res.negotiate(err);
-                                      });
-                                  });
-
-
-                              /** config -|- copy template images to App File Server
-                               * TODO : future development, Template dummy data move to another folder
-                               * **/
-                              var appFileServerPath  = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + app.id +'/';
-                              var tempDummyImagesPath = templatePath + '/src/assets/images/';
-                              var tempDummyImagesDesPath = appFileServerPath +  '/src/assets/images/';
-                              /** Copy Template Dummy Images to APP File Server for given userID & appID **/
-                              fs.copy(tempDummyImagesPath,tempDummyImagesDesPath,function (err) {
-                                      if (err) return res.negotiate(err);
-                                      sails.log('Third-navigation images copy to app-File-Server');
-                                      res.send({
-                                          appId: app.id,
-                                          message: "New Application has been created"
-                                      });
+                              fs.copy(templatePath, tempAppDirPath + app.id, function(err) {
+                                  if (err) {
+                                      console.error("Nothing to override in: " + templatePath);
                                   }
-                              );
 
+                                  console.log("copyied the template");
+                                  appCtrl.createProgWebAppCont(res,tempAppDirPath,app.id,madeEasyFileContent,serverTmp,serverOrg,userId,templatePath);
+                              });
                           });
                           /**
                            * Add Main Navigation
@@ -491,6 +479,39 @@ module.exports = {
                 }
             });
         },
+    createProgWebAppCont :function(res,tempAppDirPath,appId,madeEasyFileContent,serverTmp,serverOrg,userId,templatePath){
+      var madeEasyFilePath = tempAppDirPath + appId +'/src/app/madeEasy.json';
+
+      fs.outputJson(madeEasyFilePath,madeEasyFileContent, function (err) {
+          if(err) return console.error(err);
+      });
+
+      fs.readFile(tempAppDirPath + appId +'/src/app/constantsService.ts', 'utf-8',
+          function(err, data) {
+              if (err) return res.negotiate(err);
+              fs.writeFile(tempAppDirPath +appId+'/src/app/constantsService.ts', data.replace(serverTmp,serverOrg),'utf-8',function(err) {
+                  if (err) return res.negotiate(err);
+              });
+          });
+
+
+      /** config -|- copy template images to App File Server
+       * TODO : future development, Template dummy data move to another folder
+       * **/
+      var appFileServerPath  = config.APP_FILE_SERVER + userId + '/progressiveTemplates/' + appId +'/';
+      var tempDummyImagesPath = templatePath + '/src/assets/images/';
+      var tempDummyImagesDesPath = appFileServerPath +  '/src/assets/images/';
+      /** Copy Template Dummy Images to APP File Server for given userID & appID **/
+      fs.copy(tempDummyImagesPath,tempDummyImagesDesPath,function (err) {
+              if (err) return res.negotiate(err);
+              sails.log('Third-navigation images copy to app-File-Server');
+              res.send({
+                  appId: appId,
+                  message: "New Application has been created"
+              });
+          }
+      );
+    },
 
     getApplicationData :function(req,res){
     Application.findOne({'id':req.param('appId')}).exec(function(err, application) {

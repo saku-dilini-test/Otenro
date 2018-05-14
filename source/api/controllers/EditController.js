@@ -124,7 +124,7 @@ module.exports = {
         console.log(searchApp);
 
         sails.log.info(searchApp);
-        SecondNavigation.destroy(searchApp).exec(function (err, app) {
+        mainCategory.destroy(searchApp).exec(function (err, app) {
 
             var data = app;
 

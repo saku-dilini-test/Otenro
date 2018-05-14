@@ -85,7 +85,6 @@ export class HomepageComponent implements OnInit {
 
     $(".carousel").swipe({
       swipe: (event, direction, distance, duration, fingerCount, fingerData) => {
-        console.log(direction);
         if (direction == 'left') $(this).carousel('next');
         if (direction == 'right') $(this).carousel('prev');
 
@@ -101,7 +100,6 @@ export class HomepageComponent implements OnInit {
       carouselEl.carousel({
         interval: 100000
       }).on('slid.bs.carousel', (event) => {
-        console.log(event);
       });
     });
 
