@@ -1,4 +1,4 @@
-<p (click)="goToPreviousCategory()" *ngIf="prevCategories.length != 0">Back to previous category</p>	
+<p (click)="goToPreviousCategory()" *ngIf="prevCategories.length != 0">Back to previous category</p>
 
 <!-- <div *ngFor="let node of categories">
     <p>{{node.id}}</p>
@@ -10,7 +10,7 @@
 			<div class="row category margin-top">
 				<div class="col-xs-6 col-sm-3" *ngIf="categories[i]" [ngStyle]="getWidth(i,categories.length)">
 					<a (click)="goToNextSubCategory(categories[i].childNodes, categories)">
-				      <div class="main-header-font">{{categories[i].name}}{{categories[i].imageUrl}}</div>
+				      <div class="main-header-font">{{categories[i].name}}</div>
 						<img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{categories[i].imageUrl}}" alt="product" class="img-responsive animated puffIn animDelay02 lazyload"
 						 width="100%" height="100%">
 					</a>
@@ -34,7 +34,7 @@
 				      <div class="main-header-font">{{categories[i+3].name}}</div>
 				      <img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{categories[i+3].imageUrl}}" alt="product"  class="img-responsive animated puffIn animDelay08 lazyload"
 						 width="100%" height="100%">
-					</a>		
+					</a>
 				</div>
 			</div>
 	</ng-template>
