@@ -36,15 +36,20 @@
 
 
         // Delete Categories
-        $scope.deleteNodes = function(nodeId){
+        $scope.deleteNodes = function(node){
             var data = {
-                id:nodeId
+               data:node
             }
             return $mdDialog.show({
                 controllerAs: 'dialogCtrl',
                 controller: function($mdDialog){
                     this.confirm = function click(){
                             categoryMaintenanceService.deleteNodes(data).success(function(data) {
+                                if(data === 'ok'){
+                                    toastr.success('Deleted all the related categories and products', 'Deleted!', {
+                                        closeButton: true
+                                    });
+                                }
                                 var urlPath;
 
                                 if($rootScope.tempNew == 'true'){
@@ -79,7 +84,7 @@
                 '</div>'+
                 '<br>'+
                 '<div style="text-align:center">' +
-                '<lable>Are you sure, you want to the selected Category?</lable>' +
+                '<lable>Are you sure, you want to delete the selected Category?</lable>' +
                 '<div>Note: It will delete all the related child categories and relevent products</div>' +
                 '</div>' +
                 '<br>' +

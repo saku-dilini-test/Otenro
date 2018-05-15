@@ -188,15 +188,7 @@ module.exports = {
                 res.send('ok');
             });
     },
-    deleteNodes : function(req,res){
-        MainCategory.find({id :req.body.id}).exec(function(err,found) {
-                if (err) res.send(err);
-                if(found) {
-                    console.log(found.nodes);
-                    res.send("not implemented yet");
-                }
-            });
-    },
+
     getAllCategoryWithoutMakingCommerce: function (req, res) {
         MainCategory.find(req.body).exec(function(err,found) {
             if (err) res.send(err);
@@ -205,42 +197,38 @@ module.exports = {
             }
         });
     },
-
-    getCategoryListPlusProducts : function(req,res){
-
+    deleteNodes : function(req,res) {
         var mainCatCtrl = this;
-        var appId = req.param('appId');
-        var searchApp = {
-            appId: appId
-        };
-        MainCategory.find(searchApp, function(err, list) {
-            if (err) return done(err);
+        // console.log(req.body.data);
 
-            if(list){
+        var categoryArray = [];
+        var productArray = [];
 
-                // var parentMenuItems =[];
-                // for(var i = 0; i < list.length; i++){
-                //     if(!list[i].parentId){
-                //         parentMenuItems.push(list[i]);
-                //     }
-                // }
-                // var madeCategories = mainCatCtrl.makeCategoryArray(parentMenuItems, list);
+        categoryArray.push(mainCatCtrl.getToDeleteCategoryArray(req.body.data,categoryArray,productArray));
 
-                ThirdNavigation.find(searchApp, function(err, products) {
-                    if (err) return done(err);
+        MainCategory.destroy({id:{'$in':categoryArray}}).exec(function (err) {
+            if (err) res.send(err);
 
-                    if(products){
-                        for(var i=0; i<products.length; i++){
-                            products[i].childId = list.id
-                        }
-                    }
-                });
-            }
-
-            // res.send(app);
+            ThirdNavigation.destroy({id:{'$in':productArray}}).exec(function (err) {
+                if (err) res.send(err);
+                res.send('ok');
+            });
         });
-
     },
 
+    getToDeleteCategoryArray: function(node,categoryArray,productArray) {
+        var mainCatCtrl = this;
 
+        if(node.products && node.products.length !== 0){
+            for(var i=0; i< node.products.length; i++){
+               productArray.push(node.products[i].id);
+            }
+        }
+        if(node.childNodes && node.childNodes.length !== 0){
+                for(var i=0; i< node.childNodes.length; i++){
+                    categoryArray.push(mainCatCtrl.getToDeleteCategoryArray(node.childNodes[i],categoryArray,productArray));
+                }
+        }
+        return node.id;
+    },
 };
