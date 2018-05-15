@@ -75,10 +75,11 @@ module.exports = {
         var searchApp = {
             appId: appId
         };
-        MainCategory.find(searchApp, function(err, list) {
-            if (err) return done(err);
+        MainCategory.find(searchApp).sort({ updatedAt: -1 }).exec(function(err, list) {
+            if (err) throw err;
 
             if(list){
+                console.log(list)
                 ThirdNavigation.find(searchApp, function(err, products) {
                     if (err) return done(err);
 
