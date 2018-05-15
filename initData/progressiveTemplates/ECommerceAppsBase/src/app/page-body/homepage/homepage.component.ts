@@ -151,9 +151,9 @@ export class HomepageComponent implements OnInit {
 
   }
 
-  ngAfterViewInit() {
+  // ngAfterViewInit() {
 
-  }
+  // }
 
   getWidth(index, length) {
     let styles = {

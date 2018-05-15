@@ -1,36 +1,51 @@
-<p (click)="goToPreviousCategory()" *ngIf="prevCategories.length != 0">Back to previous category</p>
+<button (click)="goToPreviousCategory()" *ngIf="prevCategories.length != 0">Back to previous category</button>
+	<div class="bloc bgc-white l-bloc">
+ <owl-carousel *ngIf=products  [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme']">
+	       <div *ngFor="let prod of products">
+	          <section>
+	              <div>
+	              	<a> <img src="{{imageUrl1}}/{{prod.imageUrl}}" width="150px" /></a>
+		              <div class="hover-des">
+	  						<h4 class="padding-left main-header-font">{{prod.name}}</h4>
 
-<!-- <div *ngFor="let node of categories">
-    <p>{{node.id}}</p>
-    <div>{{node.name}}</div>
-  <button class="main-button" *ngIf="node.childNodes.length != 0" (click)="goToNextSubCategory(node.childNodes, categories)">next</button>
-</div> -->
+			                <div class="name-price main-content-font padding-left">
+			               		 $ {{prod.variants[0].price}}
+			               		  <a class="btn main-button btn-sm" (click)="navigateProd('product',prod, node.name )">buy</a>
+			                </div>
+	                  	</div>
+	              </div>
+	            </section>
+	       </div>
+	    </owl-carousel>
+		</div>
+
  <div class="bloc bgc-white l-bloc">
 	<ng-template *ngFor="let node of categories;let i = index" [ngIf]="i % 4 === 0">
+
 			<div class="row category margin-top">
 				<div class="col-xs-6 col-sm-3" *ngIf="categories[i]" [ngStyle]="getWidth(i,categories.length)">
-					<a (click)="goToNextSubCategory(categories[i].childNodes, categories)">
+					<a (click)="goToNextSubCategory(categories[i].childNodes, categories, categories[i].products)">
 				      <div class="main-header-font">{{categories[i].name}}</div>
 						<img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{categories[i].imageUrl}}" alt="product" class="img-responsive animated puffIn animDelay02 lazyload"
 						 width="100%" height="100%">
 					</a>
 				</div>
 				<div class="col-xs-6 col-sm-3" *ngIf="categories[i+1]">
-					<a (click)="goToNextSubCategory(categories[i+1].childNodes, categories)">
+					<a (click)="goToNextSubCategory(categories[i+1].childNodes, categories, categories[i+1].products)">
 				      <div  class="main-header-font">{{categories[i+1].name}}</div>
 				      <img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{categories[i+1].imageUrl}}" alt="product"  class="img-responsive animated puffIn animDelay04 lazyload"
 						 width="100%" height="100%">
 					</a>
 				</div>
 				<div class="col-xs-6 col-sm-3" *ngIf="categories[i+2]" [ngStyle]="getWidth(i+2,categories.length)">
-					<a (click)="goToNextSubCategory(categories[i+2].childNodes, categories)">
+					<a (click)="goToNextSubCategory(categories[i+2].childNodes, categories, categories[i+2].products)">
 					      <div class="main-header-font">{{categories[i+2].name}}</div>
 					      <img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{categories[i+2].imageUrl}}" alt="product"  class="img-responsive animated puffIn animDelay06 lazyload"
 						 width="100%" height="100%">
 					</a>
 				</div>
 				<div class="col-xs-6 col-sm-3" *ngIf="categories[i+3]">
-					<a (click)="goToNextSubCategory(categories[i+3].childNodes, categories)">
+					<a (click)="goToNextSubCategory(categories[i+3].childNodes, categories, categories[i+3].products)">
 				      <div class="main-header-font">{{categories[i+3].name}}</div>
 				      <img src="./assets/images/lazyload-ph.png" data-src="{{imageUrl}}/{{categories[i+3].imageUrl}}" alt="product"  class="img-responsive animated puffIn animDelay08 lazyload"
 						 width="100%" height="100%">

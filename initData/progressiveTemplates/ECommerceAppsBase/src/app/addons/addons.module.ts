@@ -10,14 +10,17 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 
+import { OwlModule } from 'angular-owl-carousel';
 
 @NgModule({
   imports: [
     CommonModule,
-    NgbModule
+    NgbModule,
+    OwlModule
   ],
    exports:[
     CarouselComponent,
+
     MarketingOption1LeftComponent,
     MarketingOption1RightComponent,
     NewsletterComponent,
