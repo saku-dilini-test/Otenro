@@ -12,7 +12,7 @@
 
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, printf,colorize } = format;
-var moment = require('moment');
+var moment = require('moment-timezone');
 
 const myCustomLevels = {
  levels: {
