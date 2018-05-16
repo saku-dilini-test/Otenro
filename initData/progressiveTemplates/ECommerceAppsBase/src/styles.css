@@ -227,8 +227,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 
 .navbar{
 	margin-bottom: 0;
-	/*z-index:1;*/
-  /*width: 100%;*/
+    border: 0
 }
 .navbar-brand{
 	height:auto;
@@ -312,9 +311,9 @@ a:hover{text-decoration: none; cursor:pointer;}
 
 @media (min-width: 768px){
 	.site-navigation{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
+	    display: flex;
+	    justify-content: space-around;
+	    width: 100%;
 	}
 	.nav > li .dropdown-menu a,.nav > li .dropdown-menu a:hover{
 		color:#484848;
@@ -1129,6 +1128,8 @@ label{
   }
   .main-navigation a{
     color: inherit !important;
+    font-size: 14px;
+    text-transform: uppercase;
   }
 
   .main-button{

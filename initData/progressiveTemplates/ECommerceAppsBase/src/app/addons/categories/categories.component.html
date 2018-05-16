@@ -1,6 +1,6 @@
-<button (click)="goToPreviousCategory()" *ngIf="prevCategories.length != 0">Back to previous category</button>
+<button class="btn main-button margin-vertical" (click)="goToPreviousCategory()" *ngIf="prevCategories.length != 0">Back to previous category</button>
 	<div class="bloc bgc-white l-bloc">
- <owl-carousel *ngIf=products  [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme']">
+      <owl-carousel *ngIf=products  [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme']">
 	       <div *ngFor="let prod of products">
 	          <section>
 	              <div>
@@ -17,7 +17,7 @@
 	            </section>
 	       </div>
 	    </owl-carousel>
-		</div>
+      </div>
 
  <div class="bloc bgc-white l-bloc">
 	<ng-template *ngFor="let node of categories;let i = index" [ngIf]="i % 4 === 0">

@@ -34,3 +34,7 @@
 .logo img{
   margin: auto;
 }
+
+ul li a i{
+  font-size: 18px;
+}

@@ -22,37 +22,45 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li>
-              <a class="nav-link" (click)="navigate('aboutus')">About Us</a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="nav-link" (click)="navigate('aboutus')">About Us</a>
+                </li>
+                 <li>
+                  <a class="nav-link" (click)="navigate('policies')">Policies</a>
+                </li>
+                <li>
+                  <a class="nav-link" (click)="navigate('terms')">Terms & Conditions</a>
+                </li>
+              </ul>
             </li>
-            <li>
-              <a class="nav-link" (click)="navigate('shop')">Store</a>
+            <li class="dropdown" *ngIf="loginStatus">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li *ngIf="loginStatus">
+                  <a class="nav-link" (click)="navigate('appUser')">My Account</a>
+                </li>
+                 <li *ngIf="loginStatus">
+                  <a class="nav-link" (click)="navigate('order-history')">Order History</a>
+                </li>
+              </ul>
             </li>
             <li>
               <a class="nav-link" (click)="navigate('contact')">Contact Us</a>
             </li>
+
+
             <li>
-              <a class="nav-link" (click)="navigate('policies')">Policies</a>
-            </li>
-            <li>
-              <a class="nav-link" (click)="navigate('terms')">Terms & Conditions</a>
+              <a class="nav-link" (click)="navigate('cart')"><i class="fa fa-shopping-cart" title="Shopping Cart"></i></a>
             </li>
             <li *ngIf="loginStatus">
-              <a class="nav-link" (click)="navigate('order-history')">Order History</a>
-            </li>
-            <li>
-              <a class="nav-link" (click)="navigate('cart')">Cart</a>
-            </li>
-            <li *ngIf="loginStatus">
-              <a class="nav-link" (click)="navigate('appUser')">My Account</a>
-            </li>
-            <li *ngIf="loginStatus">
-              <a class="nav-link" (click)="logout()">Log Out</a>
+              <a class="nav-link" (click)="logout()"><i class="fa fa-sign-out" title="Sign out"></i></a>
             </li>
             <li *ngIf="!loginStatus">
-              <a class="nav-link" (click)="navigate('login/home')">Sign In</a>
+              <a class="nav-link" (click)="navigate('login/home')"><i title="Sign in" class="fa fa-sign-in"></i></a>
             </li>
-
           </ul>
         </div>
         <div class="collapse navbar-collapse navbar-2">
@@ -64,9 +72,6 @@
             </li>
             <li>
               <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('aboutus','About Us')">About Us</a>
-            </li>
-            <li>
-              <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('shop', '')">Store</a>
             </li>
             <li>
               <a data-toggle="collapse" data-target=".navbar-collapse" class="nav-link" (click)="navigate('contact', 'Contact Us')">Contact Us</a>
