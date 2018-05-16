@@ -96,7 +96,7 @@ export class ProductComponent implements OnInit {
             var carouselEl = $('.carousel');
             var carouselItems = carouselEl.find('.item');
             carouselEl.carousel({
-                interval: 100000
+                interval: false
             }).on('slid.bs.carousel', (event) => {
                 // console.log(event);
                 let index;
@@ -613,7 +613,7 @@ export class ProductComponent implements OnInit {
                             totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
                             price: Math.round(this.selectedVariant.price * 100) / 100,
                             total: Math.round(this.selectedVariant.price * 100) / 100,
-                            imgURL: this.Data.tempImageArray,
+                            imgURL: this.selectedVariant.imageUrl,
                             variant: this.selectedVariant.selection,
                             totalQty: this.selectedVariant.quantity,
                             weight: this.selectedVariant.weight  //(new) added weight of each product
@@ -644,7 +644,7 @@ export class ProductComponent implements OnInit {
                     totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
                     price: Math.round(this.selectedVariant.price * 100) / 100,
                     total: Math.round(this.selectedVariant.price * 100) / 100,
-                    imgURL: this.Data.tempImageArray,
+                    imgURL: this.selectedVariant.imageUrl,
                     variant: this.selectedVariant.selection,
                     totalQty: this.selectedVariant.quantity,
                     weight: this.selectedVariant.weight //(new) added weight of each product

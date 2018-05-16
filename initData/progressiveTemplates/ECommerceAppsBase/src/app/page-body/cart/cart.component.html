@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row cart" *ngFor="let item of cartItems ; let i = index">
     <div class="col-md-1 col-xs-2 no-m-padding">
-      <img src="{{imageUrl}}/{{item.imgURL[0].img}}">
+      <img src="{{imageUrl}}/{{item.imgURL}}">
     </div>
     <div class="col-md-8 col-xs-6">
       <div *ngIf="cartItems.length > 0" class="row">

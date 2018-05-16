@@ -37,6 +37,7 @@ export class CartComponent implements OnInit {
     this.title.changeTitle("Shopping Cart");
   }
   cartItems = this.dataService.cart.cartItems;
+
   currency: string;
 
   imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
