@@ -83,7 +83,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   navigateProd(val: String, item: any, catName: String) {
-    console.log(catName)
       this.catName = catName;
       this.dataService.data = item;
       this.router.navigate([val, this.catName]);

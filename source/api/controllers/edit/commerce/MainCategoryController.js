@@ -191,9 +191,11 @@ module.exports = {
     },
 
     getAllCategoryWithoutMakingCommerce: function (req, res) {
-        MainCategory.find(req.body).exec(function(err,found) {
+        var appId = req.param('appId');
+        MainCategory.find({appId:appId}).exec(function(err,found) {
             if (err) res.send(err);
             if(found) {
+                console.log(found)
                 res.send(found);
             }
         });
