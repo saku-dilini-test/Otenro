@@ -124,7 +124,7 @@ module.exports = {
         console.log(searchApp);
 
         sails.log.info(searchApp);
-        mainCategory.destroy(searchApp).exec(function (err, app) {
+        MainCategory.destroy(searchApp).exec(function (err, app) {
 
             var data = app;
 

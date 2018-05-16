@@ -98,7 +98,7 @@ export class ProductComponent implements OnInit {
             carouselEl.carousel({
                 interval: 100000
             }).on('slid.bs.carousel', (event) => {
-                console.log(event);
+                // console.log(event);
                 let index;
                 let playerIndex;
 
@@ -180,7 +180,7 @@ export class ProductComponent implements OnInit {
                 // }).catch(function (error) {
                 //     // an error occurred
                 // });
-                console.log(index);
+                // console.log(index);
             })
         })
         // console.log(this.clicked);
@@ -214,10 +214,10 @@ export class ProductComponent implements OnInit {
         // this.player = new Player(this.playerContainer.nativeElement);
     }
 
-    video(index, id) {
+    video(index, ids) {
 
-        console.log(index);
-        console.log(id);
+        // console.log(index);
+        // console.log(ids);
 
         // console.log(document.getElementById('image' + index).style.display);
         document.getElementById('image' + index).style.display = 'none';
@@ -250,18 +250,18 @@ export class ProductComponent implements OnInit {
         // });
 
         var options = {
-            id: id,
+            id: ids,
             width: 360,
             height: 360,
             loop: true,
             autoplay: true
         };
-        if (id) {
+        if (ids) {
             var player = new Player('player' + index, options);
-            console.log(player);
+            // console.log(player);
 
             player.ready().then(function () {
-                console.log('player is ready');
+                // console.log('player is ready');
                 // player.getVideoEmbedCode().then(function(embedCode) {
                 //     // embedCode = <iframe> embed code
                 //     console.log(embedCode);
@@ -299,7 +299,7 @@ export class ProductComponent implements OnInit {
 
                 player.play().then(function () {
                     // the video was played
-                    console.log('vido played');
+                    // console.log('vido played');
                 }).catch(function (error) {
                     switch (error.name) {
                         case 'PasswordError':
