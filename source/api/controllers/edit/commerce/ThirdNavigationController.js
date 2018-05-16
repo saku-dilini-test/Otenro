@@ -54,6 +54,7 @@ module.exports = {
 
         var  finelImages = [];
         var  tmpImage = req.body.productImages;
+        console.log(tmpImage);
         var  product =  req.body.product;
         var isNew = req.body.isNew;
             product.defaultImage = defImg;
@@ -90,17 +91,44 @@ module.exports = {
                     });
                 }
                  var videoUrl;
+                 var sku;
 
                                 if(tmpImage[i].videoUrl){
                                     videoUrl = tmpImage[i].videoUrl
                                 }else{
                                     videoUrl = null;
                                 }
-                product.tempImageArray.push({img:imgeFileName,videoUrl:videoUrl});
+
+                                if(tmpImage[i].sku){
+                                    sku = tmpImage[i].sku
+                                }else{
+                                    sku = null;
+                                }
+                product.tempImageArray.push({img:imgeFileName,videoUrl:videoUrl,sku:sku});
                 product.imageUrl = imgeFileName;
                 finelImages = null;
+            }else{
+
+                if(tmpImage[i].sku){
+                    product.tempImageArray[i].sku = tmpImage[i].sku;
+                }
+
             }
        }
+
+            product.variants.forEach(function(img, i){
+                product.variants[i].imageUrl = null;
+            });
+
+
+           for(var i = 0;i < product.selectedSku.length;i++){
+           console.log("sku: " + product.selectedSku[i].sku)
+                for(var k = 0;k < product.variants.length;k++){
+                    if(product.variants[k].sku == product.selectedSku[i].sku){
+                        product.variants[k].imageUrl = product.tempImageArray[product.selectedSku[i].index].img;
+                    }
+                }
+           }
 
         var searchQuery = {
             id : req.body.product.id

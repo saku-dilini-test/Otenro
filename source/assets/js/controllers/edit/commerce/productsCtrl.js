@@ -2,10 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService','productService','inventoryService', '$rootScope', '$auth', 'SERVER_URL','initialData',
-        'mainMenuService','$log','$q','categoryMaintenanceService', ProductCtrl]);
+        'mainMenuService','$log','$q','categoryMaintenanceService','$filter', ProductCtrl]);
 
     function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService,inventoryService, $rootScope,  $auth, SERVER_URL,initialData,
-    mainMenuService,$log,$q,categoryMaintenanceService) {
+    mainMenuService,$log,$q,categoryMaintenanceService,$filter) {
         var size, weight;
         var variants;
         $scope.defaultImage;
@@ -18,6 +18,101 @@
         //$scope.isNewProduct = true;
         $scope.skuFieldEnable = false;
         $scope.isNew = $rootScope.tempNew;
+        $scope.myVariants = [];
+        $scope.tmpSku = [];
+        $scope.originalSku = [];
+
+        console.log($scope.product);
+
+        if(!$scope.product.selectedSku){
+            $scope.selectedSku = [];
+        }else{
+            $scope.selectedSku = $scope.product.selectedSku;
+        }
+
+        if(initialData.product.variants){
+//            for(var i = 0;i < $scope.product.variants.length;i++){
+//                $scope.myVariants.push($scope.product.variants[i]);
+//            }
+//            console.log($scope.myVariants);
+            feedSku($scope.product.variants, false);
+        }
+
+        function feedSku(array, isNew){
+        console.log("feedSku");
+
+            if(!isNew){
+                for(var i =0;i < array.length;i++){
+//                    $scope.myVariants.push(array[i].sku);
+                $scope.originalSku.push(array[i].sku);
+                }
+
+//                for(var j =0; j < 8 ;j++){
+//                    $scope.tmpSku[j] = $scope.myVariants;
+//                }
+            }else{
+                $scope.originalSku = [];
+                $scope.myVariants = [];
+
+                for(var i =0;i < $scope.product.variants.length;i++){
+//                    $scope.myVariants.push($scope.product.variants[i].sku);
+                    $scope.originalSku.push($scope.product.variants[i].sku);
+
+                }
+//                for(var j =0; j < 8 ;j++){
+//                    $scope.tmpSku[j] = $scope.myVariants;
+//                }
+            }
+//            console.log($scope.tmpSku);
+            console.log("orginal sku: " + JSON.stringify($scope.originalSku));
+
+        }
+
+        $scope.getSku = function(index){
+//            console.log("inside get sku method: " + index);
+            var newSku = [];
+           $scope.originalSku.forEach(function(sku){
+
+               var skus = $filter('filter')($scope.selectedSku, {'sku':sku});
+
+                if(skus.length == 0){
+                    newSku.push(sku);
+                }else{
+                    if(skus[0].index == index){
+                        newSku.push(sku);
+                    }
+                }
+           });
+//           console.log("newSku: " + newSku);
+           return newSku;
+        }
+
+        $scope.onChange = function(sku,index){
+        console.log("Index: " + index + " sku: " + sku);
+
+            var selectedSku = $scope.selectedSku;
+
+            selectedSku.forEach(function(sku, i){
+                if(sku.index == index){
+                    console.log(selectedSku.splice(i,1));
+                }
+            });
+
+
+
+//            selectedSku = $filter('filter')(selectedSku, {'index':!index});
+            console.log("selectedSku removed: ");
+            console.log( selectedSku);
+
+            sku.forEach(function(sku){
+                selectedSku.push({'sku':sku,'index':index});
+            });
+
+            console.log("selectedSku: ");
+            console.log( selectedSku);
+            console.log( $scope.selectedSku);
+
+        }
 
         if(initialData.isNewItem)
         {
@@ -66,18 +161,27 @@
             disableTabs(0, false, true, true, true);
 
         if (initialData.product.tempImageArray){
+        console.log(initialData.product.tempImageArray);
             for (var i=0; i<initialData.product.tempImageArray.length; i++) {
                 var tempImageUrl = tempImagePath + initialData.product.tempImageArray[i].img;
 
                 var tempVideoUrl;
-                if(!initialData.product.tempImageArray[i].videoUrl){
+                var tempImageSku;
+                if(initialData.product.tempImageArray[i].videoUrl){
                     tempVideoUrl = initialData.product.tempImageArray[i].videoUrl;
                 }else{
                     tempVideoUrl = null;
                 }
 
+                if(initialData.product.tempImageArray[i].sku){
+                    tempImageSku = initialData.product.tempImageArray[i].sku;
+                }else{
+                    tempImageSku = null;
+                }
 
-                $scope.tmpImage.push({'img':tempImageUrl,'videoUrl':tempVideoUrl});
+
+                $scope.tmpImage.push({'img':tempImageUrl,'videoUrl':tempVideoUrl,'sku':tempImageSku});
+                console.log($scope.tmpImage);
             }
         }
 
@@ -282,6 +386,7 @@
         };
 
         $scope.addProductVariants = function ( variants,current) {
+            feedSku(variants,true);
                 if($scope.product.selection == undefined){
                      $scope.product.selection = [];
                 }
@@ -407,6 +512,7 @@
 
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'NO';
+                  $scope.product.selectedSku = $scope.selectedSku;
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product,'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage}).success(function (result) {
                       toastr.success('Product added successfully', 'Awsome!', {
                           closeButton: true
@@ -448,6 +554,7 @@
 
                   $scope.product.selection = $scope.selection;
                   $scope.product.published = 'YES';
+                  $scope.product.selectedSku = $scope.selectedSku;
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product, 'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage}).success(function (result) {
                       toastr.success('Product added successfully', 'Awesome!', {
                           closeButton: true
