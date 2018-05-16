@@ -522,6 +522,25 @@ button{
 	background-image: none;
 }
 
+::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-track{
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+}
+
 
 /* ScrollToTop button */
 
