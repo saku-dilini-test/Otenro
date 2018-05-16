@@ -100,7 +100,7 @@
                 return $http.get(SERVER_URL + 'edit/getCategoryListCommerce?appId=' + $rootScope.appId);
             },
             getAllCategoryWithoutMakingCommerce: function (appId) {
-                return $http.get(SERVER_URL + 'edit/getAllCategoryWithoutMakingCommerce', appId);
+                return $http.get(SERVER_URL + 'edit/getAllCategoryWithoutMakingCommerce?appId='+ appId);
             },
             deleteNodes : function(id){
                 return $http.post(SERVER_URL+ 'edit/deleteNodes',id);

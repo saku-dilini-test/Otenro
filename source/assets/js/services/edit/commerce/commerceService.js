@@ -217,7 +217,7 @@
                 return $http.get(SERVER_URL + 'edit/getMainNavigation?appId=' + $rootScope.appId);
             },
             getCategoryList: function () {
-                return $http.get(SERVER_URL + 'edit/getSecondNavigation?appId=' + $rootScope.appId);
+                return $http.get(SERVER_URL + 'edit/getAllCategoryWithoutMakingCommerce?appId='+ $rootScope.appId);
             },
             getProductList: function () {
                 return $http.get(SERVER_URL + 'edit/getThirdNavigation?appId=' + $rootScope.appId);

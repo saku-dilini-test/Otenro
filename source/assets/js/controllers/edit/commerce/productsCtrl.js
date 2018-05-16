@@ -22,8 +22,6 @@
         $scope.tmpSku = [];
         $scope.originalSku = [];
 
-        console.log($scope.product);
-
         if(!$scope.product.selectedSku){
             $scope.selectedSku = [];
         }else{
@@ -440,10 +438,7 @@
         //     })
         // }
 
-        var data = {
-            appId:$rootScope.appId
-        }
-        categoryMaintenanceService.getAllCategoryWithoutMakingCommerce(data).success(function (results) {
+        categoryMaintenanceService.getAllCategoryWithoutMakingCommerce($rootScope.appId).success(function (results) {
             $scope.child = results;
         }).error(function (error) {
             toastr.error('Category loading error', 'Warning', {
