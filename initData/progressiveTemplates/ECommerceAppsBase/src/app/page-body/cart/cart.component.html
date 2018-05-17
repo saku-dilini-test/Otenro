@@ -3,7 +3,8 @@
 <div class="container">
   <div class="row cart" *ngFor="let item of cartItems ; let i = index">
     <div class="col-md-1 col-xs-2 no-m-padding">
-      <img src="{{imageUrl}}/{{item.imgURL}}">
+      <img *ngIf = "item.imgURL" src="{{imageUrl}}/{{item.imgURL}}">
+      <img *ngIf = "!item.imgURL" src="{{imageUrl}}/{{item.imgDefault}}">
     </div>
     <div class="col-md-8 col-xs-6">
       <div *ngIf="cartItems.length > 0" class="row">

@@ -45,7 +45,7 @@ export class ProductComponent implements OnInit {
     desPart1; desPart2; desPart1_demo;
     carouselEl;
 
-    constructor(private localStorageService: LocalStorageService,public sanitizer: DomSanitizer, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
+    constructor(private localStorageService: LocalStorageService, public sanitizer: DomSanitizer, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
         this.sanitizer = sanitizer;
         this.Data = this.dataService.data;
 
@@ -81,6 +81,11 @@ export class ProductComponent implements OnInit {
 
     ngOnInit() {
 
+        let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+        if (appUser) {
+            this.dataService.appUserId = appUser.registeredUser;
+        }
 
         this.CurrencyService.getCurrencies().subscribe(data => {
             this.currency = data.sign;
@@ -373,13 +378,15 @@ export class ProductComponent implements OnInit {
         }
     }
 
-    getIndex(sku){
-        let index;
+    getIndex(sku) {
+
+        let index = this.Data.defaultImage;
         this.Data.selectedSku.forEach(element => {
-            if(element.sku == sku){
+            if (element.sku == sku) {
                 index = element.index;
             }
         });
+
         return index;
     }
 
@@ -627,6 +634,7 @@ export class ProductComponent implements OnInit {
                             price: Math.round(this.selectedVariant.price * 100) / 100,
                             total: Math.round(this.selectedVariant.price * 100) / 100,
                             imgURL: this.selectedVariant.imageUrl,
+                            imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
                             variant: this.selectedVariant.selection,
                             totalQty: this.selectedVariant.quantity,
                             weight: this.selectedVariant.weight  //(new) added weight of each product
@@ -643,8 +651,8 @@ export class ProductComponent implements OnInit {
                     }
                     i++;
                 }
-                if(this.dataService.appUserId){
-                this.localStorageService.set("cart" + this.dataService.appUserId,(this.dataService.cart));
+                if (this.dataService.appUserId) {
+                    this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
                 }
             }
             else {
@@ -658,6 +666,7 @@ export class ProductComponent implements OnInit {
                     price: Math.round(this.selectedVariant.price * 100) / 100,
                     total: Math.round(this.selectedVariant.price * 100) / 100,
                     imgURL: this.selectedVariant.imageUrl,
+                    imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
                     variant: this.selectedVariant.selection,
                     totalQty: this.selectedVariant.quantity,
                     weight: this.selectedVariant.weight //(new) added weight of each product
@@ -668,9 +677,9 @@ export class ProductComponent implements OnInit {
                 this.dataService.parseWeight = this.selectedVariant.weight;
                 // $state.go('app.category');
 
-                if(this.dataService.appUserId){
-                    this.localStorageService.set("cart" + this.dataService.appUserId,(this.dataService.cart));
-                    }
+                if (this.dataService.appUserId) {
+                    this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
+                }
                 if (navi == "buyNowCart") {
                     this.route.navigate(['cart']);
                 }
