@@ -96,7 +96,17 @@
   width:87%;
   height: 100%;
 }
-
+.video-h8{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  opacity: 0.5;
+  color: #fff;
+  font-size: 20px;
+}
 
 @media (max-width: 767px){
     .list-inlineli, .list-inlinei{

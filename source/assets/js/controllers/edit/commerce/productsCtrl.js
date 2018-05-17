@@ -37,7 +37,6 @@
         }
 
         function feedSku(array, isNew){
-        console.log("feedSku");
 
             if(!isNew){
                 for(var i =0;i < array.length;i++){
@@ -62,7 +61,6 @@
 //                }
             }
 //            console.log($scope.tmpSku);
-            console.log("orginal sku: " + JSON.stringify($scope.originalSku));
 
         }
 
@@ -159,7 +157,6 @@
             disableTabs(0, false, true, true, true);
 
         if (initialData.product.tempImageArray){
-        console.log(initialData.product.tempImageArray);
             for (var i=0; i<initialData.product.tempImageArray.length; i++) {
                 var tempImageUrl = tempImagePath + initialData.product.tempImageArray[i].img;
 
@@ -179,7 +176,6 @@
 
 
                 $scope.tmpImage.push({'img':tempImageUrl,'videoUrl':tempVideoUrl,'sku':tempImageSku});
-                console.log($scope.tmpImage);
             }
         }
 
@@ -654,7 +650,6 @@
         };
 
         $scope.addImage = function (img,url) {
-        console.log(url);
 
             if($scope.tmpImage.length < 8 && img && angular.element('#fileInput').val()!=''){
                 $scope.tmpImage.push({'img':img, 'videoUrl':url});
@@ -1058,7 +1053,14 @@
                         if ($scope.product.selection == undefined){
                             $scope.product.selection= [];
                         }else{
-                            n = $scope.product.selection.length - 1;
+                            if( $scope.vTypeRemove){
+                                for(var i = 0; i< $scope.product.selection.length; i++){
+                                    if($scope.vTypeRemove == $scope.product.selection[i].name){
+                                        n = i;
+                                    }
+                                }
+                            }
+
                         }
                         this.confirm = function click(vName){
                             if(!vName){
@@ -1078,19 +1080,18 @@
 
                                 }
                             }else if($scope.product.selection.length > 0 ){
-                                for (var i = n; i < $scope.product.selection.length; i++){
-                                   if( $scope.product.selection[i].name.toLowerCase() ==  $scope.vType.toLowerCase()){
+                                // for (var i = n; i < $scope.product.selection.length; i++){
+                                   if( $scope.vTypeRemove && vName.toLowerCase() ==  $scope.vTypeRemove.toLowerCase()){
                                          toastr.error('Cannot rename or add by the same name', 'Error!', {
                                               closeButton: true
                                          });
-                                         break;
-                                   }else if( $scope.product.selection[i].name ==  $scope.vTypeRemove){
-                                        $scope.product.selection[i].name = vName;
+                                         // break;
+                                   }else if( $scope.vTypeRemove &&  $scope.product.selection[n].name ==  $scope.vTypeRemove){
+
+                                        $scope.product.selection[n].name = vName;
                                         for(var j=0;j<$scope.product.variants.length;j++){
-                                            for(var k=0;k<$scope.product.variants[0].selection.length;k++){
-                                                $scope.product.variants[j].selection[k].name = vName;
-                                            }
-                                        }
+                                               $scope.product.variants[j].selection[n].name = vName;
+                                       }
                                         toastr.success('Variant renamed', 'Success!', {
                                             closeButton: true
                                         });
@@ -1102,7 +1103,7 @@
                                                return commerceService.showAddProductsDialog($scope.product, $scope.isNewProduct, $scope.product.variants, null ,true);
 
                                         }
-                                        break;
+                                        // break;
                                    }else{
 
                                          $scope.product.selection.push({
@@ -1124,9 +1125,9 @@
                                         }else{
                                             return commerceService.showAddProductsDialog($scope.product,$scope.isNewProduct, $scope.product.variants,null, true);
                                         }
-                                        break;
+                                        // break;
                                    }
-                                 }
+                                 // }
                             }else{
                                 $scope.product.selection.push({
                                     name:vName,
