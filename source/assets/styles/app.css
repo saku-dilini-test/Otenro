@@ -18,7 +18,7 @@ a.feature01{
 .md-dialog-main .file-upload-wrapper2{
     margin-bottom: 15px;
 	width: 36%;
-	margin-left:45px;
+	margin-left:20px;
 	float:left;
 	display:block;
 	text-align:center;
@@ -567,7 +567,7 @@ overriding pull-left changes other styles too therefor commented
 
 .image-upload{
     float: left !important;
-    width: 58%;
+    width: 62%;
     padding: 0 21px;
     margin-top: unset !important;
 }
