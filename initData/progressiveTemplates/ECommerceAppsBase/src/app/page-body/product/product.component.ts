@@ -637,6 +637,7 @@ export class ProductComponent implements OnInit {
                             imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
                             variant: this.selectedVariant.selection,
                             totalQty: this.selectedVariant.quantity,
+                            unlimited: this.selectedVariant.unlimited,
                             weight: this.selectedVariant.weight  //(new) added weight of each product
 
                         });
@@ -669,6 +670,7 @@ export class ProductComponent implements OnInit {
                     imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
                     variant: this.selectedVariant.selection,
                     totalQty: this.selectedVariant.quantity,
+                    unlimited: this.selectedVariant.unlimited,
                     weight: this.selectedVariant.weight //(new) added weight of each product
 
                 });

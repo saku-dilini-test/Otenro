@@ -123,7 +123,7 @@ export class CartComponent implements OnInit {
     this.dataService.parseIndex = this.dataService.parseIndex - 1;
     this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
     this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-    this.localStorageService.set("cart" + this.user.registeredUser,(this.dataService.cart));
+    this.localStorageService.set("cart" + this.user.registeredUser, (this.dataService.cart));
 
   };
 
@@ -144,13 +144,14 @@ export class CartComponent implements OnInit {
     // }
   }
   delivery(deliverItems) {
+    let proceed = true;
 
-    let proceed = true;;
-    for (let i = 0; i < deliverItems.length; i++) {
-      if (deliverItems[i].qty > deliverItems[i].totalQty) {
-        proceed = false;
+      for (let i = 0; i < deliverItems.length; i++) {
+        if (deliverItems[i].qty > deliverItems[i].totalQty && !deliverItems[i].unlimited) {
+          proceed = false;
+        }
       }
-    }
+
     if (proceed == false) {
 
       this._success.subscribe((message) => this.successMessage = message);
@@ -178,15 +179,15 @@ export class CartComponent implements OnInit {
 
   pickupDetails(deliverItems) {
 
-
     // this.router.navigate(['checkout', 'pickup']);
     // this.dataService.deliverItems = deliverItems;
-    let proceed = true;;
-    for (let i = 0; i < deliverItems.length; i++) {
-      if (deliverItems[i].qty > deliverItems[i].totalQty) {
-        proceed = false;
+    let proceed = true;
+
+      for (let i = 0; i < deliverItems.length; i++) {
+        if (deliverItems[i].qty > deliverItems[i].totalQty && !deliverItems[i].unlimited) {
+          proceed = false;
+        }
       }
-    }
     if (proceed == false) {
 
       this._success.subscribe((message) => this.successMessage = message);

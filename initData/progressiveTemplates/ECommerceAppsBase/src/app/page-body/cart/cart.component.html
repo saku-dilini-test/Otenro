@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-3">
           <div class="variants text-center no-m-margin main-content-font">
-            <span *ngFor="let v of item.variant">{{v.name}} : {{v.vType}}<br></span>
+            <span data-slide-to="1" data-target="#myCarousel" *ngFor="let v of item.variant">{{v.name}} : {{v.vType}}<br></span>
           </div>
         </div>
         <div class="col-md-3">
@@ -32,12 +32,12 @@
         <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
         <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty > 1">
           <span style="color:rgb(180, 30, 30)">
-            Enter a quantity of {{cartItems[0].totalQty}} or less.
+            Enter a quantity of {{cartItems[i].totalQty}} or less.
           </span>
         </div>
         <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty == 1">
           <span style="color:rgb(180, 30, 30)">
-            Enter a quantity of {{cartItems[0].totalQty}}.
+            Enter a quantity of {{cartItems[i].totalQty}}.
           </span>
         </div>
       </div>
