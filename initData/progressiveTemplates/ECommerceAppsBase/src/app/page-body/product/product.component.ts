@@ -43,6 +43,7 @@ export class ProductComponent implements OnInit {
     private player: Player;
     private readMore = false;
     desPart1; desPart2; desPart1_demo;
+    carouselEl;
 
     constructor(private localStorageService: LocalStorageService,public sanitizer: DomSanitizer, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
         this.sanitizer = sanitizer;
@@ -50,7 +51,6 @@ export class ProductComponent implements OnInit {
 
         this.init();
         this.isBuyBtnDisable = true;
-        console.log(this.Data.tempImageArray);
 
         if (this.Data.detailedDesc.length > 250) {
             this.desPart2 = this.Data.detailedDesc.slice(250, this.Data.detailedDesc.length);
@@ -93,9 +93,9 @@ export class ProductComponent implements OnInit {
         });
 
         $(() => {
-            var carouselEl = $('.carousel');
-            var carouselItems = carouselEl.find('.item');
-            carouselEl.carousel({
+            this.carouselEl = $('.carousel');
+            var carouselItems = this.carouselEl.find('.item');
+            this.carouselEl.carousel({
                 interval: false
             }).on('slid.bs.carousel', (event) => {
                 // console.log(event);
@@ -371,7 +371,16 @@ export class ProductComponent implements OnInit {
                 }
             }
         }
+    }
 
+    getIndex(sku){
+        let index;
+        this.Data.selectedSku.forEach(element => {
+            if(element.sku == sku){
+                index = element.index;
+            }
+        });
+        return index;
     }
 
     changeVariant(variant1) {
@@ -392,6 +401,7 @@ export class ProductComponent implements OnInit {
         }
 
         if (this.foodInfo.selection.length == 1 && variant1 != 'PleaseSelect') {
+
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selectedVariant = this.foodInfo.variants[i];
@@ -400,6 +410,7 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.lockBuyButton = true;
+            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
         } else {
 
             if (variant1 == "Please Select") {
@@ -414,7 +425,6 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.selection1 = _.uniqBy(this.selection1, 'vType');
-
         }
 
     };
@@ -443,6 +453,7 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.lockBuyButton = true;
+            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
 
         } else {
             if (variant2 != 'PleaseSelect') {
@@ -483,6 +494,7 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.lockBuyButton = true;
+            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
 
         } else {
             if (variant3 != 'PleaseSelect') {
@@ -524,6 +536,7 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.lockBuyButton = true;
+            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
         }
     };
 
