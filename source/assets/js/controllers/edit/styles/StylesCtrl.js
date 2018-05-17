@@ -150,7 +150,7 @@
 
             $scope.tmpImage[0] = $scope.path+data.userId+"/templates/"+data.id+"/img/background.jpg";
             if($rootScope.tempNew === 'true' || $rootScope.tempNew === true){
-                $scope.tmpLogo[0] = $scope.path+data.userId+"/progressiveTemplates/"+data.id+"/src/assets/images/logo.png";
+                $scope.tmpLogo[0] = $scope.path+data.userId+"/progressiveTemplates/"+data.id+"/src/assets/images/logo.png?dummy="+new Date().toISOString();
             }else {
                 $scope.tmpLogo[0] = $scope.path+data.userId+"/templates/"+data.id+"/img/logo.png";
             }
