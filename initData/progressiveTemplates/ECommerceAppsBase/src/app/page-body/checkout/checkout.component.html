@@ -337,7 +337,7 @@
 
     <div class="form-check">
       <label>
-        <input type="checkbox" [(ngModel)]="note" name="check"> <span class="label-text"> Add special Note(optional)</span>
+        <input type="checkbox" (change) = "checkNote(note)" [(ngModel)]="note" name="check"> <span class="label-text"> Add special Note(optional)</span>
       </label>
       <div *ngIf = "note">
         <input type="text" value="noteDes" [(ngModel)]="noteDes">

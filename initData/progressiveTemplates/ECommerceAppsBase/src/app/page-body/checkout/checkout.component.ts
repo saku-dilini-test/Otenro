@@ -95,7 +95,7 @@ export class CheckoutComponent implements OnInit {
   private years = [];
   private months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
   private emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-
+  noteDes;
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
     private currencyService: CurrencyService,
@@ -254,6 +254,13 @@ export class CheckoutComponent implements OnInit {
 
 
   }
+
+  checkNote(note){
+    if(!note){
+      this.noteDes = "";
+    }
+  }
+
   ngAfterContentChecked() {
     if (this.formType == "pickup" && !this.pickupForm.valid) {
       this.isSelected = false;
