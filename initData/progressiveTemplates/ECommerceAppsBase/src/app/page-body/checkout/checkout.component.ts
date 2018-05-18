@@ -647,17 +647,17 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-  submit(data, type) {
+  submit(data, type,note) {
 
     if (type == 'creditcard') {
-      this.makeStripePaymentMethod(data);
+      this.makeStripePaymentMethod(data,note);
     } else {
-      this.authorizeCreditCardMethod(data);
+      this.authorizeCreditCardMethod(data,note);
     }
 
   }
 
-  makeStripePaymentMethod(cardInformation) {
+  makeStripePaymentMethod(cardInformation,note) {
 
     this.showSpinner = true;
 
@@ -671,7 +671,7 @@ export class CheckoutComponent implements OnInit {
         this.showSpinner = false;
 
         if (res.status == 'succeeded') {
-          this.orderProcess();
+          this.orderProcess(note);
         } else {
           this._success.subscribe((message) => this.errorMessage = message);
           debounceTime.call(this._success, 5000).subscribe(() => this.errorMessage = null);
@@ -684,7 +684,7 @@ export class CheckoutComponent implements OnInit {
 
   };
 
-  authorizeCreditCardMethod(cardInformation) {
+  authorizeCreditCardMethod(cardInformation,note) {
 
     this.showSpinner = true;
 
@@ -697,15 +697,15 @@ export class CheckoutComponent implements OnInit {
         this.showSpinner = false;
 
         if (res.status == 'ok') {
-          this.orderProcess();
-        }else if(res.data == "Null Response"){
+          this.orderProcess(note);
+        } else if (res.data == "Null Response") {
 
           this._success.subscribe((message) => this.nullMessage = message);
           debounceTime.call(this._success, 4000).subscribe(() => this.nullMessage = null);
           this._success.next("Please provide card details!");
           setTimeout(() => { }, 3100);
 
-        }else if(res.data == "Failed Transaction"){
+        } else if (res.data == "Failed Transaction") {
 
           this._success.subscribe((message) => this.errorMessage = message);
           debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
@@ -719,7 +719,10 @@ export class CheckoutComponent implements OnInit {
       })
   }
 
-  orderProcess() {
+  orderProcess(note) {
+    if(note){
+      note = note.trim();
+    }
     if (this.formType == "delivery") {
 
       if (this.user) {
@@ -742,7 +745,8 @@ export class CheckoutComponent implements OnInit {
           'email': this.payInfo.userEmail,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note
         };
 
       } else {
@@ -765,7 +769,8 @@ export class CheckoutComponent implements OnInit {
           'email': this.payInfo.userEmail,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note
         };
       }
     } else {
@@ -782,7 +787,8 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.payInfo.userEmail,
           "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode
+          "promotionCode": this.payInfo.promotionCode,
+          'note': note
         }
       }else{
         this.orderDetails = {
@@ -797,7 +803,8 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.payInfo.userEmail,
           "currency": this.dataService.paypalCurrency,
-          "promotionCode": this.payInfo.promotionCode
+          "promotionCode": this.payInfo.promotionCode,
+          'note': note
         }
       }
 
@@ -861,7 +868,10 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-  confirmCashPayment() {
+  confirmCashPayment(note) {
+    if(note){
+      note = note.trim();
+    }
     if (this.formType == "delivery") {
       if (this.user) {
         this.orderDetails = {
@@ -883,7 +893,8 @@ export class CheckoutComponent implements OnInit {
           'email': this.payInfo.userEmail,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note
         };
 
       } else {
@@ -906,7 +917,8 @@ export class CheckoutComponent implements OnInit {
           'email': this.payInfo.userEmail,
           'currency': this.dataService.currency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note
         };
       }
 
@@ -926,7 +938,8 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.payInfo.userEmail,
           "currency": this.dataService.currency,
-          "promotionCode": this.payInfo.promotionCode
+          "promotionCode": this.payInfo.promotionCode,
+          'note': note
         }
       } else {
         this.orderDetails = {
@@ -941,11 +954,12 @@ export class CheckoutComponent implements OnInit {
           "pickupCost": this.chkPickupCost,
           "email": this.payInfo.userEmail,
           "currency": this.dataService.currency,
-          "promotionCode": this.payInfo.promotionCode
+          "promotionCode": this.payInfo.promotionCode,
+          'note': note
         }
       }
     }
-
+// console.log(note);
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails), { responseType: 'text' })
       .subscribe((res) => {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
@@ -1004,7 +1018,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   // Buy With PayPal
-  buyWithPayPal() {
+  buyWithPayPal(note) {
+    if(note){
+      note = note.trim();
+    }
     if (this.formType == "delivery") {
       if (this.user) {
         this.orderDetails = {
@@ -1027,7 +1044,8 @@ export class CheckoutComponent implements OnInit {
           'email': this.payInfo.userEmail,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note
         };
 
       } else {
@@ -1051,7 +1069,8 @@ export class CheckoutComponent implements OnInit {
           'email': this.payInfo.userEmail,
           'currency': this.dataService.paypalCurrency,
           'puckupId': null,
-          'promotionCode': this.payInfo.promotionCode
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note
         };
       }
 
@@ -1069,7 +1088,8 @@ export class CheckoutComponent implements OnInit {
         "pickupCost": this.chkPickupCost,
         "email": this.payInfo.userEmail,
         "currency": this.dataService.paypalCurrency,
-        "promotionCode": this.payInfo.promotionCode
+        "promotionCode": this.payInfo.promotionCode,
+        'note': note
       }
     }else{
       this.orderDetails = {
@@ -1084,7 +1104,8 @@ export class CheckoutComponent implements OnInit {
         "pickupCost": this.chkPickupCost,
         "email": this.payInfo.userEmail,
         "currency": this.dataService.paypalCurrency,
-        "promotionCode": this.payInfo.promotionCode
+        "promotionCode": this.payInfo.promotionCode,
+        'note': note
       }
     }
     }

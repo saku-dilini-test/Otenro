@@ -333,7 +333,20 @@
       </tfoot>
     </table>
 
+    <br>
+
+    <div class="form-check">
+      <label>
+        <input type="checkbox" [(ngModel)]="note" name="check"> <span class="label-text"> Add special Note(optional)</span>
+      </label>
+      <div *ngIf = "note">
+        <input type="text" value="noteDes" [(ngModel)]="noteDes">
+      </div>
+    </div>
+
   </div>
+
+
 
 
   <br>
@@ -362,7 +375,7 @@
     <div *ngIf="paypalShow" class="mt-3">
       <div class="radio">
         <label>
-          <input type="radio" name="paypalShow" value="paypal" (click)="buyWithPayPal()" [(ngModel)]="paymentType" (ngModelChange)="ps=true"
+          <input type="radio" name="paypalShow" value="paypal" (click)="buyWithPayPal(noteDes)" [(ngModel)]="paymentType" (ngModelChange)="ps=true"
             class="custom-control-input"> PayPal
         </label>
       </div>
@@ -396,7 +409,7 @@
       <div class="col-sm-12 margin-left">
         <h5 *ngIf="paymentType == 'cashOnDelivery'">Confirm payment by cash on delivery</h5>
         <h5 *ngIf="paymentType == 'cashOnPickup'">Confirm payment by cash on pickup</h5>
-        <button class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="confirmCashPayment()">Confirm</button>
+        <button class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="confirmCashPayment(noteDes)">Confirm</button>
       </div>
       <div class="col-sm-12" style="margin: 10px 0">
         <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
@@ -411,7 +424,7 @@
     </form>
 
 
-    <form #myForm="ngForm" (ngSubmit)="submit(myForm.value,paymentType)" novalidate class="row margin-vertical" *ngIf="paymentType == 'creditcard' || paymentType == 'authorizeNet'">
+    <form #myForm="ngForm" (ngSubmit)="submit(myForm.value,paymentType,noteDes)" novalidate class="row margin-vertical" *ngIf="paymentType == 'creditcard' || paymentType == 'authorizeNet'">
 
       <!-- <p>Is "myForm" valid? {{myForm.valid}}</p> -->
 

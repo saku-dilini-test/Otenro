@@ -104,6 +104,9 @@ module.exports = {
         },
         pickupCost:{
             type: 'float'
+        },
+        note:{
+            type: 'string'
         }
     }
 };
