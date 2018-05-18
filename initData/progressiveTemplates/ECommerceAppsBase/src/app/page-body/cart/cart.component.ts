@@ -203,8 +203,11 @@ export class CartComponent implements OnInit {
 
       }
       else {
-        let status = 'pickup'
-        this.router.navigate(['login', status]);
+        this.dataService.userData = null;
+        this.router.navigate(['checkout', 'pickup']);
+        this.dataService.deliverItems = deliverItems
+        // let status = 'pickup'
+        // this.router.navigate(['login', status]);
         // $state.go('app.login', { item: $scope.status });
       }
     }

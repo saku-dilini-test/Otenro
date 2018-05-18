@@ -261,8 +261,8 @@ export class CheckoutComponent implements OnInit {
 
   }
 
-  itemPriceCal(price, qty){
-    let tot = price*qty
+  itemPriceCal(price, qty) {
+    let tot = price * qty
     return Math.round(tot * 100) / 100;
   }
 
@@ -439,6 +439,7 @@ export class CheckoutComponent implements OnInit {
     this.pickupData = {
       item: this.dataService.deliverItems,
       delivery: { location: "Pick up", method: "Pick up" },
+      country: data.country,
       pickupId: data.id,
       pickupCost: data.cost,
       deliverDetails: { name: details.name, number: details.phone },
@@ -476,7 +477,14 @@ export class CheckoutComponent implements OnInit {
     if (this.localData) {
       this.chkCountry = this.localData.country;
     } else {
-      this.chkCountry = this.country;
+      if (this.formType == 'delivery') {
+        this.chkCountry = this.country;
+      } else {
+        if (final.country) {
+          this.chkCountry = final.country
+          console.log(this.chkCountry);
+        }
+      }
     }
 
     var param = {
@@ -761,20 +769,38 @@ export class CheckoutComponent implements OnInit {
         };
       }
     } else {
-      this.orderDetails = {
-        "appId": this.appId,
-        "registeredUser": this.user.registeredUser,
-        "item": this.payInfo.cart,
-        "amount": this.payInfo.amount,
-        "customerName": this.payInfo.item.deliverDetails.name,
-        "telNumber": this.payInfo.item.deliverDetails.number,
-        "tax": this.payInfo.taxTotal,
-        "pickupId": this.payInfo.item.pickupId,
-        "pickupCost": this.chkPickupCost,
-        "email": this.payInfo.userEmail,
-        "currency": this.dataService.paypalCurrency,
-        "promotionCode": this.payInfo.promotionCode
+      if (this.user) {
+        this.orderDetails = {
+          "appId": this.appId,
+          "registeredUser": this.user.registeredUser,
+          "item": this.payInfo.cart,
+          "amount": this.payInfo.amount,
+          "customerName": this.payInfo.item.deliverDetails.name,
+          "telNumber": this.payInfo.item.deliverDetails.number,
+          "tax": this.payInfo.taxTotal,
+          "pickupId": this.payInfo.item.pickupId,
+          "pickupCost": this.chkPickupCost,
+          "email": this.payInfo.userEmail,
+          "currency": this.dataService.paypalCurrency,
+          "promotionCode": this.payInfo.promotionCode
+        }
+      }else{
+        this.orderDetails = {
+          "appId": this.appId,
+          "registeredUser": 'Unknown User',
+          "item": this.payInfo.cart,
+          "amount": this.payInfo.amount,
+          "customerName": this.payInfo.item.deliverDetails.name,
+          "telNumber": this.payInfo.item.deliverDetails.number,
+          "tax": this.payInfo.taxTotal,
+          "pickupId": this.payInfo.item.pickupId,
+          "pickupCost": this.chkPickupCost,
+          "email": this.payInfo.userEmail,
+          "currency": this.dataService.paypalCurrency,
+          "promotionCode": this.payInfo.promotionCode
+        }
       }
+
     }
 
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", this.orderDetails, { responseType: 'text' })
@@ -790,8 +816,8 @@ export class CheckoutComponent implements OnInit {
 
             let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
-            if(appUser){
-              if(this.localStorageService.get("cart" + appUser.registeredUser)){
+            if (appUser) {
+              if (this.localStorageService.get("cart" + appUser.registeredUser)) {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
             }
@@ -886,19 +912,37 @@ export class CheckoutComponent implements OnInit {
 
 
     } else {
-      this.orderDetails = {
-        "appId": this.appId,
-        "registeredUser": this.user.registeredUser,
-        "item": this.payInfo.cart,
-        "amount": this.payInfo.amount,
-        "customerName": this.payInfo.item.deliverDetails.name,
-        "telNumber": this.payInfo.item.deliverDetails.number,
-        "tax": this.payInfo.taxTotal,
-        "pickupId": this.payInfo.item.pickupId,
-        "pickupCost": this.chkPickupCost,
-        "email": this.payInfo.userEmail,
-        "currency": this.dataService.currency,
-        "promotionCode": this.payInfo.promotionCode
+      if (this.user) {
+        this.orderDetails = {
+
+          "appId": this.appId,
+          "registeredUser": this.user.registeredUser,
+          "item": this.payInfo.cart,
+          "amount": this.payInfo.amount,
+          "customerName": this.payInfo.item.deliverDetails.name,
+          "telNumber": this.payInfo.item.deliverDetails.number,
+          "tax": this.payInfo.taxTotal,
+          "pickupId": this.payInfo.item.pickupId,
+          "pickupCost": this.chkPickupCost,
+          "email": this.payInfo.userEmail,
+          "currency": this.dataService.currency,
+          "promotionCode": this.payInfo.promotionCode
+        }
+      } else {
+        this.orderDetails = {
+          "appId": this.appId,
+          "registeredUser": 'Unknown User',
+          "item": this.payInfo.cart,
+          "amount": this.payInfo.amount,
+          "customerName": this.payInfo.item.deliverDetails.name,
+          "telNumber": this.payInfo.item.deliverDetails.number,
+          "tax": this.payInfo.taxTotal,
+          "pickupId": this.payInfo.item.pickupId,
+          "pickupCost": this.chkPickupCost,
+          "email": this.payInfo.userEmail,
+          "currency": this.dataService.currency,
+          "promotionCode": this.payInfo.promotionCode
+        }
       }
     }
 
@@ -915,8 +959,8 @@ export class CheckoutComponent implements OnInit {
 
             let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
-            if(appUser){
-              if(this.localStorageService.get("cart" + appUser.registeredUser)){
+            if (appUser) {
+              if (this.localStorageService.get("cart" + appUser.registeredUser)) {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
             }
@@ -1012,6 +1056,7 @@ export class CheckoutComponent implements OnInit {
       }
 
     } else {
+      if (this.user) {
       this.orderDetails = {
         "appId": this.appId,
         "registeredUser": this.user.registeredUser,
@@ -1026,6 +1071,22 @@ export class CheckoutComponent implements OnInit {
         "currency": this.dataService.paypalCurrency,
         "promotionCode": this.payInfo.promotionCode
       }
+    }else{
+      this.orderDetails = {
+        "appId": this.appId,
+        "registeredUser": 'Unknown User',
+        "item": this.payInfo.cart,
+        "amount": this.payInfo.amount,
+        "customerName": this.payInfo.item.deliverDetails.name,
+        "telNumber": this.payInfo.item.deliverDetails.number,
+        "tax": this.payInfo.taxTotal,
+        "pickupId": this.payInfo.item.pickupId,
+        "pickupCost": this.chkPickupCost,
+        "email": this.payInfo.userEmail,
+        "currency": this.dataService.paypalCurrency,
+        "promotionCode": this.payInfo.promotionCode
+      }
+    }
     }
 
     this.dataService.payPalDetails = this.orderDetails;
