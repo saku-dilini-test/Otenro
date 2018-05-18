@@ -680,6 +680,32 @@
             if ($scope.product.tempImageArray&&$scope.product.tempImageArray.length > 0){
                 $scope.product.tempImageArray.splice(index, 1);
             }
+            $scope.selectedSku.forEach(function(sku, i){
+                if(sku.index == index){
+                    $scope.selectedSku.splice(i, 1);
+                }
+            });
+
+            $scope.selectedSku.forEach(function(sku, i){
+                if(sku.index > index){
+                    if(sku.index == 1){
+                        sku.index = 0;
+                    }else if(sku.index == 2){
+                        sku.index = 1;
+                    }else if(sku.index == 3){
+                        sku.index = 2;
+                    }else if(sku.index == 4){
+                        sku.index = 3;
+                    }else if(sku.index == 5){
+                        sku.index = 4;
+                    }else if(sku.index == 6){
+                        sku.index = 5;
+                    }else if(sku.index == 7){
+                        sku.index = 6;
+                    }
+                }
+            });
+
         };
 
 

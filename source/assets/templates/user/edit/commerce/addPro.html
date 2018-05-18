@@ -398,7 +398,7 @@
                                         <br>
                                         <md-input-container>
                                             <md-select class="img-sku-w" ng-disabled="!tmpImage[0].img" ng-change = "onChange(tmpImage[0].sku, 0)" ng-model="tmpImage[0].sku" placeholder="Select sku" multiple="">
-                                                <md-option mg-selected="tmpImage[0].sku" ng-value="variants" ng-repeat="variants in getSku(0)">{{ variants }}</md-option>
+                                                <md-option ng-value="variants" ng-repeat="variants in getSku(0)">{{ variants }}</md-option>
                                             </md-select>
                                         </md-input-container>
                                     </div>
