@@ -205,7 +205,7 @@
           <label>
             <input id="delivery" #r name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping"
               (change)='addShipping(ship,$event,complexForm.value)' [ngModelOptions]="{standalone: true}"> {{ship.optionName}}
-            <span>({{ship.shippingOption}})</span>
+            <!-- <span>({{ship.shippingOption}})</span> -->
           </label>
         </div>
       </div>
@@ -339,8 +339,8 @@
       <label>
         <input type="checkbox" (change) = "checkNote(note)" [(ngModel)]="note" name="check"> <span class="label-text"> Add special Note(optional)</span>
       </label>
-      <div *ngIf = "note">
-        <input type="text" value="noteDes" [(ngModel)]="noteDes">
+      <div class="form-group" *ngIf = "note">
+        <textarea type="text" class="form-control" value="noteDes" [(ngModel)]="noteDes"></textarea>
       </div>
     </div>
 
