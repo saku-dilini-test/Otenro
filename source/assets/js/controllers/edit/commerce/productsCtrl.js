@@ -21,11 +21,15 @@
         $scope.myVariants = [];
         $scope.tmpSku = [];
         $scope.originalSku = [];
+        var selectedSkuStored = $scope.product.selectedSkuStored;
 
-        if(!$scope.product.selectedSku){
+        $scope.selectedSku = [];
+
+        if(!selectedSkuStored){
+        console.log($scope.product);
             $scope.selectedSku = [];
         }else{
-            $scope.selectedSku = $scope.product.selectedSku;
+            $scope.selectedSku = selectedSkuStored;
         }
 
         if(initialData.product.variants){
@@ -66,6 +70,7 @@
 
         $scope.getSku = function(index){
 //            console.log("inside get sku method: " + index);
+
             var newSku = [];
            $scope.originalSku.forEach(function(sku){
 
@@ -79,35 +84,27 @@
                     }
                 }
            });
-//           console.log("newSku: " + newSku);
+
            return newSku;
         }
 
         $scope.onChange = function(sku,index){
         console.log("Index: " + index + " sku: " + sku);
 
-            var selectedSku = $scope.selectedSku;
+            var mySku = $scope.selectedSku;
 
-            selectedSku.forEach(function(sku, i){
-                if(sku.index == index){
-                    console.log(selectedSku.splice(i,1));
+            for(i=mySku.length-1; i>=0;i--){
+                console.log("skuMy index: " + i);
+                if(mySku[i].index == index){
+                    mySku.splice(i,1);
                 }
-            });
-
-
-
-//            selectedSku = $filter('filter')(selectedSku, {'index':!index});
-            console.log("selectedSku removed: ");
-            console.log( selectedSku);
+            }
 
             sku.forEach(function(sku){
-                selectedSku.push({'sku':sku,'index':index});
+                mySku.push({'sku':sku,'index':index});
             });
 
-            console.log("selectedSku: ");
-            console.log( selectedSku);
-            console.log( $scope.selectedSku);
-
+            $scope.selectedSku = mySku;
         }
 
         if(initialData.isNewItem)
@@ -680,6 +677,7 @@
             if ($scope.product.tempImageArray&&$scope.product.tempImageArray.length > 0){
                 $scope.product.tempImageArray.splice(index, 1);
             }
+
             $scope.selectedSku.forEach(function(sku, i){
                 if(sku.index == index){
                     $scope.selectedSku.splice(i, 1);
