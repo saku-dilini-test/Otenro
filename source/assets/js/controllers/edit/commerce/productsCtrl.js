@@ -678,11 +678,15 @@
                 $scope.product.tempImageArray.splice(index, 1);
             }
 
-            $scope.selectedSku.forEach(function(sku, i){
-                if(sku.index == index){
-                    $scope.selectedSku.splice(i, 1);
+            var delSku = $scope.selectedSku;
+
+            for(i=delSku.length-1; i>=0;i--){
+                console.log("skuMy index: " + i);
+                if(delSku[i].index == index){
+                    delSku.splice(i,1);
                 }
-            });
+            }
+
 
             $scope.selectedSku.forEach(function(sku, i){
                 if(sku.index > index){
@@ -703,6 +707,8 @@
                     }
                 }
             });
+
+            $scope.selectedSku = delSku;
 
         };
 

@@ -387,7 +387,7 @@
                         <div class="uploaded-section image-upload clearfix">
                            <div class="uploaded-old-images">
                                 <p>Uploaded Product Images</p>
-                                <div class="old-images clearfix">{{selectedSku}}
+                                <div class="old-images clearfix">
                                     <div class="old-image">
                                         <input type="button" ng-click="deleteImg(0)" value='delete'
                                                class="image-delete-button"/>
@@ -396,7 +396,7 @@
                                         <img id="1" ng-class="{special: defaultImage == 0}" ng-click="defImg(0,tmpImage[0].videoUrl)" ng-if="tmpImage[0].img !== null" ngf-src="tmpImage[0].img"
                                              width="119px" height="119px"/>
                                         <br>
-                                        <md-input-container>{{tmpImage[0].sku}}
+                                        <md-input-container>
                                             <md-select class="img-sku-w" ng-disabled="!tmpImage[0].img" ng-change = "onChange(tmpImage[0].sku, 0)" ng-model="tmpImage[0].sku" placeholder="Select sku" multiple="">
                                                 <md-option ng-value="variants" ng-repeat="variants in getSku(0)">{{ variants }}</md-option>
                                             </md-select>
@@ -410,7 +410,7 @@
                                         <img  id="2" ng-class="{special: defaultImage == 1}"  ng-click="defImg(1,tmpImage[1].videoUrl)" ng-if="tmpImage[1].img !== null" ngf-src="tmpImage[1].img"
                                               width="119px" height="119px"/>
                                         <br>
-                                        <md-input-container>{{tmpImage[1].sku}}
+                                        <md-input-container>
                                             <md-select class="img-sku-w" ng-disabled="!tmpImage[1].img" ng-change = "onChange(tmpImage[1].sku, 1)" ng-model="tmpImage[1].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(1)">{{ variants }}</md-option>
                                             </md-select>
