@@ -9,7 +9,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class HomePage {
   private iframeSrc: any;
   sanitizer: DomSanitizer;
-  url: string = 'http://192.168.8.112/meServer/temp/5b036f2b898c60f612e9cf42/progressiveTemplates/5b039820c0e48edc1b353fd6/src/';
+  url: string = 'set the url here';
 
   constructor(public navCtrl: NavController,
               sanitizer: DomSanitizer) {
