@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
+
   <!-- <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script> -->
 
   <meta charset="utf-8" http-equiv="Content-Security-Policy" content="default-src * gap:; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src *; img-src * data: blob: android-webview-video-poster:; style-src * 'unsafe-inline';">
+
   <title>Quantumn</title>
   <base href="./">
 
@@ -18,6 +20,9 @@
   <link rel="stylesheet" href="../src/assets/css/owl.carousel.min.css" />
   <!--custom style sheet -->
   <link rel="stylesheet" href="../src/styles.css" />
+
+
+
   <link rel="stylesheet" type="text/css" href="../src/assets/css/animate.min.css">
     <!-- font awesome  -->
 
@@ -35,7 +40,22 @@
   <link rel="apple-touch-icon" href="images/icons/icon-152x152.png">
   <meta name="msapplication-TileImage" content="assets/icons/icon-144x144.png">
   <meta name="msapplication-TileColor" content="#e0e0e0">
+  ​<script>
+      var dummy = new Date().getTime();
+      function addCss(fileName) {
 
+        var head = document.head;
+        var link = document.createElement("link");
+
+        link.type = "text/css";
+        link.rel = "stylesheet";
+        link.href = fileName;
+
+        head.appendChild(link);
+      }
+      var x = '../src/main.css?dummy='+dummy;
+      addCss(x);
+  </script>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
 	<script src="../src/assets/js/jquery-2.1.0.min.js"></script>
   <script src="../src/assets/js/bootstrap.min.js"></script>
 	<script src="../src/assets/js/owl.carousel.min.js"></script>
@@ -64,6 +84,7 @@
     <!--});-->
   <!--}-->
   <!--</script>-->
+
 </head>
 
 <body class="main-background">
