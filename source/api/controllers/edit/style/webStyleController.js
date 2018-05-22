@@ -541,7 +541,7 @@ module.exports = {
     addWebStyleColor : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/main.css';
         var styleColor = req.body.styleColor;
         var type = req.body.type;
         var colorTypeCss = '';
@@ -736,7 +736,7 @@ module.exports = {
     addWebStyleFontFamily : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/main.css';
         var styleFontFamily = req.body.styleFontFamily;
         var type = req.body.type;
         var fontFamilyCss = '';
@@ -826,7 +826,7 @@ module.exports = {
     addWebStyleFontSize : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/main.css';
         var styleFontSize = req.body.styleFontSize;
         var type = req.body.type;
         var data = {};
@@ -928,7 +928,7 @@ module.exports = {
     addWebStyleFontWeight : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/main.css';
         var styleFontWeight = req.body.styleFontWeight;
         var type = req.body.type;
         var fontWeightCss = '';
@@ -1015,7 +1015,7 @@ module.exports = {
     addWebStyleButtonBorderWidth : function(req,res){
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/main.css';
         var buttonBorderWidth = req.body.styleButtonBorderWidth;
         var buttonBorderWidthCss = '.main-button';
 
@@ -1077,7 +1077,7 @@ module.exports = {
         sails.log.info(req.body);
         var userId = req.body.userId;
         var appId = req.body.appId;
-        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/styles.css';
+        var mainCssFile = config.ME_SERVER + userId + '/progressiveTemplates/' + appId + '/src/main.css';
         var buttonBorderRadius = req.body.styleButtonBorderRadius;
         var buttonBorderRadiusCss = '.main-button';
 
