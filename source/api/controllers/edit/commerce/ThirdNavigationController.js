@@ -54,11 +54,9 @@ module.exports = {
 
         var  finelImages = [];
         var  tmpImage = req.body.productImages;
-        console.log(tmpImage);
         var  product =  req.body.product;
         var isNew = req.body.isNew;
             product.defaultImage = defImg;
-        console.log("data :  " + isNew);
         if ( typeof product.tempImageArray == 'undefined'){
              product.tempImageArray=[];
         }
@@ -68,13 +66,10 @@ module.exports = {
 
             if (!tmpImage[i].img.match("http")){
                 var imgeFileName = randomstring.generate()+".png";
-                console.log("imgeFileName :  " + imgeFileName);
                 var data = tmpImage[i].img.replace(/^data:image\/\w+;base64,/, "");
                 var buf = new Buffer(data, 'base64');
                 // product images copy to app file server
                 if(isNew == 'true' || isNew == true){
-                    console.log(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
-                        req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName);
                     fs.writeFile(config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/' +
                         req.body.product.appId + '/src/assets/images/thirdNavi/' + imgeFileName, buf, function (err) {
                         if (err) {
@@ -82,7 +77,6 @@ module.exports = {
                         }
                     });
                 }else {
-                    console.log("inside template ")
                     fs.writeFile(config.APP_FILE_SERVER + req.userId + '/templates/' +
                         req.body.product.appId + '/img/thirdNavi/' + imgeFileName, buf, function (err) {
                         if (err) {
@@ -122,7 +116,6 @@ module.exports = {
 
 
            for(var i = 0;i < product.selectedSku.length;i++){
-           console.log("sku: " + product.selectedSku[i].sku)
                 for(var k = 0;k < product.variants.length;k++){
                     if(product.variants[k].sku == product.selectedSku[i].sku){
                         product.variants[k].imageUrl = product.tempImageArray[product.selectedSku[i].index].img;
@@ -139,8 +132,6 @@ module.exports = {
         var sku =[];
         if(typeof req.body.product.id != 'undefined'){
             delete product["id"];
-            console.log( "product  :");
-            console.log(product);
             ThirdNavigation.update(searchQuery,product,function(err,main) {
                 if (err) {
                     return res.send(err);
@@ -229,7 +220,7 @@ module.exports = {
         var skuQuery = {productId:item.id};
         var thirdNaviPath = config.APP_FILE_SERVER + req.userId + '/progressiveTemplates/';
         var thirdNaviPath2 = '/src/assets/images/thirdNavi/';
-        console.log(req.userId);
+
 
         //Variant of a Product
         if(item.sku){
