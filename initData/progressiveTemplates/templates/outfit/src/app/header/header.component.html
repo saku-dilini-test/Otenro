@@ -1,6 +1,6 @@
 <!-- <div class="page-container"> -->
 
-  <!-- bloc-1 -->
+<!-- bloc-1 -->
 
 <!--   <div class="bloc bgc-white l-bloc main-navigation" id="bloc-1">
     <div class="container">
@@ -105,80 +105,119 @@
       </nav>
     </div>
   </div> -->
-  <!-- bloc-1 END -->
+<!-- bloc-1 END -->
 
-  <!-- ScrollToTop Button -->
- <!--  <a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')">
+<!-- ScrollToTop Button -->
+<!--  <a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')">
     <span class="fa fa-chevron-up"></span>
   </a> -->
-  <!-- ScrollToTop Button END-->
+<!-- ScrollToTop Button END-->
 
 <!-- </div> -->
 <!-- bloc-2 END -->
 
 
 <div class="bloc bgc-outer-space d-bloc" id="bloc-0">
-	<div class="container bloc-sm">
-		<nav class="navbar row">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="index.html"><span class="special-tag-for-editing-text-with-html"></span><img src="./assets/images/hf_logo__.png" alt="logo" /></a>
-				<button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
-					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-				</button>
-			</div>
-			<div class="collapse navbar-collapse navbar-1">
-				<ul class="site-navigation nav navbar-nav">
-					<li>
-						<a (click)="navigate('')">Home
+  <div class="container bloc-sm">
+    <nav class="navbar row">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">
+          <span class="special-tag-for-editing-text-with-html"></span>
+          <img src="./assets/images/hf_logo__.png" alt="logo" />
+        </a>
+        <button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse navbar-1">
+        <ul class="site-navigation nav navbar-nav">
+          <li>
+            <a (click)="navigate('')">Home
               <span class="sr-only">(current)</span>
             </a>
-					</li>
-					<li>
-						<div class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Category<span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<div class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Womens<span class="caret"></span></a>
-										<ul class="dropdown-menu" role="menu">
-											<li>
-												<a href="index.html">Office Attire</a>
-											</li>
-											<li>
-												<a href="index.html">Summer Collection</a>
-											</li>
-											<li>
-												<a href="cut-sleves.html">Short sleeves</a>
-											</li>
-											<li>
-												<a href="index.html">Formal Wear</a>
-											</li>
-											<li>
-												<a href="index.html">Shoes</a>
-											</li>
-										</ul>
-									</div>
-								</li>
-								<li>
-									<a href="index.html">Mens</a>
-								</li>
-								<li>
-									<a href="index.html">Kids</a>
-								</li>
-								<li>
-									<a href="index.html">Unisex</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a *ngIf="!loginStatus" (click)="navigate('login/home')"><span class="ion ion-person icon-md"></span></a>
-					</li>
-					<li>
-						<a (click)="navigate('cart', 'Shopping Cart')"><span class="ion ion-android-cart icon-md"></span></a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</div>
+          </li>
+          <li>
+            <a (click)="navigate('contact', 'Contact Us')">Contact Us
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="navigate('aboutus','About Us')">About Us
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="navigate('policies', 'Policies')">Policies
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li>
+            <a (click)="navigate('terms', 'Terms & Conditions')">Terms & Conditions
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li>
+            <div class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Category
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Womens
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li>
+                        <a href="index.html">Office Attire</a>
+                      </li>
+                      <li>
+                        <a href="index.html">Summer Collection</a>
+                      </li>
+                      <li>
+                        <a href="cut-sleves.html">Short sleeves</a>
+                      </li>
+                      <li>
+                        <a href="index.html">Formal Wear</a>
+                      </li>
+                      <li>
+                        <a href="index.html">Shoes</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <a href="index.html">Mens</a>
+                </li>
+                <li>
+                  <a href="index.html">Kids</a>
+                </li>
+                <li>
+                  <a href="index.html">Unisex</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a *ngIf="loginStatus" (click)="logout()">
+              <span class="ion ion-log-out icon-md"></span>
+            </a>
+          </li>
+          <li>
+            <a *ngIf="!loginStatus" (click)="navigate('login/home')">
+              <span class="ion ion-log-in icon-md"></span>
+            </a>
+          </li>
+          <li>
+            <a (click)="navigate('cart', 'Shopping Cart')">
+              <span class="ion ion-android-cart icon-md"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </div>
