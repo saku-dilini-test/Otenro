@@ -21,15 +21,15 @@
         $scope.myVariants = [];
         $scope.tmpSku = [];
         $scope.originalSku = [];
-        var selectedSkuStored = $scope.product.selectedSkuStored;
+        var selectedSku = $scope.product.selectedSku;
 
         $scope.selectedSku = [];
 
-        if(!selectedSkuStored){
+        if(!selectedSku){
         console.log($scope.product);
             $scope.selectedSku = [];
         }else{
-            $scope.selectedSku = selectedSkuStored;
+            $scope.selectedSku = selectedSku;
         }
 
         if(initialData.product.variants){

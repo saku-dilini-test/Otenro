@@ -62,7 +62,7 @@ module.exports = {
         defaultImage:{
             type : 'integer'
         },
-        selectedSkuStored:{
+        selectedSku:{
             type: 'json'
         }
     }
