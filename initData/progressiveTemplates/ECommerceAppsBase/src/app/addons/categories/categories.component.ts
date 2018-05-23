@@ -53,6 +53,27 @@ export class CategoriesComponent implements OnInit {
 
   }
 
+  checkSoldOut(product) {
+
+    let count = 0;
+    let isSoldOut = false;
+    if (product) {
+      let variantsLength = product.variants.length;
+
+      for (let i = 0; i < variantsLength; i++) {
+        if (product.variants[i].quantity == 0) {
+          count++;
+        }
+      }
+
+      if (count == variantsLength) {
+        isSoldOut = true;
+      } else {
+        isSoldOut = false;
+      }
+    }
+    return isSoldOut;
+  }
 
   getWidth(index, length) {
     let styles = {
