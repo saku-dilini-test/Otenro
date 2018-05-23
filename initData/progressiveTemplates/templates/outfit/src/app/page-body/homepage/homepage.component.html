@@ -117,3 +117,61 @@
 <app-categories [categories]="categories"></app-categories>
 
 <!-- bloc-2 END -->
+
+<!-- Newly Added Forgot password START -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Enter Your New Password</h4>
+			</div>
+			<div class="modal-body">
+
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<label for="password" class="col-2 col-form-label">Password</label>
+						<div class="col-10">
+							<input class="form-control" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$" type="password" #password='ngModel' name="password"
+								   id="password" ngModel required>
+							<div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+								<div [hidden]="!password.hasError('required')">Password is required</div>
+								<div [hidden]="!password.hasError('pattern')">Your password should be at least 8 characters long and should contain UpperCase, LowerCase and Number</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group col-xs-6">
+						<label for="passwordCon" class="col-2 col-form-label">Confirm Password</label>
+						<div class="col-10">
+							<input class="form-control" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" type="password" #passwordCon='ngModel' name="passwordCon"
+								   id="passwordCon" ngModel required>
+							<div [hidden]="passwordCon.valid || passwordCon.pristine" class="alert alert-danger">
+								<div [hidden]="!passwordCon.hasError('required')">Password is required</div>
+								<div [hidden]="!passwordCon.hasError('pattern')">Your password should be at least 8 characters long and should contain UpperCase, LowerCase and Number</div>
+							</div>
+							<div class="alert alert-danger"  [hidden]="passwordCon.pristine || password.value == passwordCon.value">
+								<div> Passwords do not match.</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetPassword(password.value, passwordCon.value)">Reset</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<div class="col-sm-12" style="margin: 10px 0">
+	<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+</div>
+<div class="col-sm-12" style="margin: 10px 0">
+	<ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+</div>
+<!-- Newly Added Forgot password END -->
