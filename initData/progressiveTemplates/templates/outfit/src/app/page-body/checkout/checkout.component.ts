@@ -97,6 +97,7 @@ export class CheckoutComponent implements OnInit {
   private emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   noteDes;showUser;
   private oldUser;
+  private loggedUserData;
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
     private currencyService: CurrencyService,
@@ -110,6 +111,8 @@ export class CheckoutComponent implements OnInit {
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.oldUser = true;
       this.showUser = true;
+      this.loggedUserData = this.localStorageService.get('appLocalStorageUser' + this.appId);
+      console.log(this.loggedUserData);
     }else{
       this.oldUser = false;
     }
@@ -141,7 +144,7 @@ export class CheckoutComponent implements OnInit {
       'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
       'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
       'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])),
-      'country': new FormControl(null)
+      'country': new FormControl(this.dataService.userData.country)
 
     });
     this.complexForm.controls['country'].setValue(this.dataService.userData.country, { onlySelf: true });

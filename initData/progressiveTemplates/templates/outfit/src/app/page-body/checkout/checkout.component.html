@@ -152,16 +152,16 @@
                 <div class="col-sm-6" *ngIf="showUser">
                   <div class="radio">
                     <label>
-                      <input type="radio" name="radioOld" value="oldUser" id="showLoggedUser" (change)="check('oldUser')" [checked]="oldUser" />JONE DOE
+                      <input type="radio" name="radioOld" value="oldUser" id="showLoggedUser" (change)="check('oldUser')" [checked]="oldUser" />{{loggedUserData.name}}&nbsp;{{loggedUserData.lname}}
                     </label>
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
                       <p>
-                        488 &nbsp;Rajagaha Mawatha,&nbsp;
-                        <br>Colombo 07, Western 100100
-                        <br>Sri Lanka
-                        <br> Phone: +94 715-480-412&nbsp;
+                        {{loggedUserData.streetNumber}} &nbsp;{{loggedUserData.streetName}},&nbsp;
+                        <br>{{loggedUserData.city}}, {{loggedUserData.zip}}
+                        <br>{{loggedUserData.country}}
+                        <br> Phone: {{loggedUserData.phone}}&nbsp;
                         <br>
                         <br>
                       </p>
@@ -673,4 +673,4 @@
 
 <!--<app-newsletter></app-newsletter>-->
 
-<hr class="featurette-divider">
+<!-- <hr class="featurette-divider"> -->
