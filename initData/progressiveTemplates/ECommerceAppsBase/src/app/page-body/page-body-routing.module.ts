@@ -21,6 +21,9 @@ const routes: Routes = [
    component: HomepageComponent,
     pathMatch: 'full'
   },
+  { path: ':email',
+    component: HomepageComponent,
+  },
   {
     path: 'login/:type',
     component: LoginComponent,

@@ -105,7 +105,9 @@ module.exports.policies = {
     authenticate : true,
     register: true,
     facebookAuth : true,
-    googleAuth: true
+    googleAuth: true,
+      sendPasswordResetEmail: true,
+      resetPassword: true,
   },
 
   'mobileViewer/MobileController' : {

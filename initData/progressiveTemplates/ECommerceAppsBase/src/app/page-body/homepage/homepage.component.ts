@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { fadeInAnimation } from '../../animations/fade-in.animation';
@@ -9,6 +9,9 @@ import { ProductsService } from '../../services/products/products.service';
 import { SliderService } from '../../services/slider/slider.service';
 import { TitleService } from '../../services/title.service';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { HttpClient } from '@angular/common/http';
+import { debounceTime } from 'rxjs/operator/debounceTime';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-homepage',
@@ -19,6 +22,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 
 })
 export class HomepageComponent implements OnInit {
+
+  private _success = new Subject<string>();
 
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
@@ -35,8 +40,13 @@ export class HomepageComponent implements OnInit {
   private catName;
   private isSliderDataAvailable: boolean = false;
   private isRandomProducts;
-  private categories:any
-  constructor(private localStorageService: LocalStorageService, private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
+  private categories:any;
+  private newPassword = '';
+  private confirmPassword = '';
+  private FPEmail;
+  private successMessage;
+  private errorMessage;
+  constructor(private localStorageService: LocalStorageService, private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService, private aRouter: ActivatedRoute, private http: HttpClient) {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
       if (data.length > 0) {
@@ -75,7 +85,14 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
 
-    let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+    // forgot password email
+    this.FPEmail = this.aRouter.snapshot.queryParams['email'];
+    if (this.FPEmail !== undefined) {
+      $("#myModal").modal();
+    }
+
+
+    let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId);
 
     if (appUser) {
       if (this.localStorageService.get("cart" + appUser.registeredUser)) {
@@ -184,5 +201,53 @@ export class HomepageComponent implements OnInit {
       this.route.navigate([val, this.catName]);
     }
 
+  }
+
+  /**
+   * Reset password
+   * @param password - password
+   * @param passwordCon - confirm password
+   **/
+  resetPassword(password, passwordCon){
+    if (this.isPasswordOk(password, passwordCon)) {
+      let data = { email: this.FPEmail, appId: this.appId, password: password };
+      this.http.post(SERVER_URL + '/templatesAuth/resetPassword', data)
+        .subscribe(res => {
+
+          // if password change success
+          if (res.message === 'success') {
+            this._success.subscribe((message) => this.successMessage = message);
+            debounceTime.call(this._success, 4000).subscribe(() => this.successMessage = null);
+            this._success.next('Password changed successfully');
+            setTimeout(() => {}, 3100);
+
+          } else {
+            this._success.subscribe((message) => this.errorMessage = message);
+            debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+            this._success.next('Failed to change password');
+            setTimeout(() => {}, 3100);
+          }
+        });
+    }
+  }
+
+  /**
+   * check password is valid
+   * @param password - password
+   * @param passwordCon - confirm password
+   **/
+  isPasswordOk(password, passwordCon) {
+    let PASSWORD_PATTERN = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/;
+    // if password length and equality of password and confirm password
+    if(password.length >= 8 && (password == passwordCon)) {
+      // if password pattern is ok
+      if (password.match(PASSWORD_PATTERN)) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 }
