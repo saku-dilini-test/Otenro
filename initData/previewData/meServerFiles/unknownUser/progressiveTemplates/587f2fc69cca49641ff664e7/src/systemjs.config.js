@@ -5,6 +5,9 @@
  * Adjust as necessary for your application needs.
  */
 (function (global) {
+  System
+    .import('main.ts')
+    .then(null, console.error.bind(console));
   System.config({
     // DEMO ONLY! REAL CODE SHOULD NOT TRANSPILE IN THE BROWSER
     transpiler: 'ts',
@@ -43,7 +46,9 @@
     // map tells the System loader where to look for things
     // defaultJSExtensions: true,
     map: {
+      '@vimeo/player':'npm:@vimeo/player/dist/player.js',
       lodash: 'npm:lodash/lodash.js',
+      'ng4-loading-spinner':'npm:ng4-loading-spinner/index.js',
       // our app is within the app folder
       'angular-2-local-storage': 'npm:angular-2-local-storage/dist',
       'app': 'app',
@@ -67,10 +72,8 @@
        'owl.carousel': 'npm:owl.carousel/dist/owl.carousel.js',
        'angular-owl-carousel': 'npm:angular-owl-carousel/',
        '@agm/core': 'npm:@agm/core/core.umd.js',
-       'nouislider': 'npm:nouislider',
        '@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
        'tslib': 'npm:tslib/tslib.js',
-      'ng2-nouislider': 'npm:ng2-nouislider',
       // other libraries
       'rxjs':                      'npm:rxjs',
       // 'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
@@ -95,9 +98,7 @@
        main: './index.js',
        defaultExtension: 'js'
       },
-      'environments': {defaultExtension: 'ts'},
-      'nouislider': { main: 'distribute/nouislider.js', defaultExtension: 'js' },
-      'ng2-nouislider': { main: 'src/nouislider.js', defaultExtension: 'js' },
+      'environments': {defaultExtension: 'ts'}
     }
   });
 

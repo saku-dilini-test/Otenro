@@ -8,6 +8,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { TaxService } from '../../services/tax/tax.service';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
+import { debounceTime } from 'rxjs/operator/debounceTime';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-cart',
@@ -16,18 +18,26 @@ import { TitleService } from '../../services/title.service';
 })
 export class CartComponent implements OnInit {
 
-  public appId = (<any>data).appId;
-  public userId = (<any>data).userId;
-  public shippingData;
-  public amount;
+  private appId = (<any>data).appId;
+  private userId = (<any>data).userId;
+  private shippingData;
+  private amount;
+  private buyButtonDisable;
   hide: any;
   tax: any;
   user;
+
+  private _success = new Subject<string>();
+
+  staticAlertClosed = false;
+  successMessage: string;
+
   constructor(private currencyService: CurrencyService, private taxService: TaxService, private localStorageService: LocalStorageService,
-              private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
+    private http: HttpClient, private router: Router, private dataService: PagebodyServiceModule, private title: TitleService) {
     this.title.changeTitle("Shopping Cart");
   }
   cartItems = this.dataService.cart.cartItems;
+
   currency: string;
 
   imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
@@ -52,10 +62,9 @@ export class CartComponent implements OnInit {
     this.taxService.getShippingInfo().subscribe(data => {
       this.shippingData = data;
     }, err => {
-      alert({
-        title: 'Policies Data loading error!',
-        template: 'Please check your connection!'
-      });
+      alert(
+        'Error loading shippingInfo!\n Please check your connection.'
+      );
     });
 
 
@@ -71,6 +80,11 @@ export class CartComponent implements OnInit {
 
   }
 
+  itemPriceCal(price, qty) {
+    let tot = price * qty
+    return Math.round(tot * 100) / 100;
+  }
+
   getTotal = function () {
     var total = 0;
     var amount = 0;
@@ -81,15 +95,16 @@ export class CartComponent implements OnInit {
       total += (amount * product.qty);
 
     }
-    tax = total * this.tax / 100;
+    tax = (total * this.tax / 100);
     this.taxTotal = total * this.tax / 100;
+    this.taxTotal = Math.round(this.taxTotal * 100) / 100;
     if (tax > 0) {
       //total = total + tax;
       this.dataService.cart.totalPrice = total;
-      return total;
+      return Math.round(total * 100) / 100;
     } else {
       this.dataService.cart.totalPrice = total;
-      return total;
+      return Math.round(total * 100) / 100;
     }
   };
 
@@ -108,6 +123,8 @@ export class CartComponent implements OnInit {
     this.dataService.parseIndex = this.dataService.parseIndex - 1;
     this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
     this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+    this.localStorageService.set("cart" + this.user.registeredUser, (this.dataService.cart));
+
   };
 
   buttonDisable = function (qty, totalQty, index) {
@@ -127,31 +144,72 @@ export class CartComponent implements OnInit {
     // }
   }
   delivery(deliverItems) {
+    let proceed = true;
 
+      for (let i = 0; i < deliverItems.length; i++) {
+        if (deliverItems[i].qty > deliverItems[i].totalQty && !deliverItems[i].unlimited) {
+          proceed = false;
+        }
+      }
 
-    if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
-      this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
-      this.router.navigate(['checkout', 'delivery']);
-      this.dataService.deliverItems = deliverItems
-    }
-    else {
-      let status = 'delivery'
-      this.router.navigate(['login', status]);
-      // $state.go('app.login', { item:status });
+    if (proceed == false) {
+
+      this._success.subscribe((message) => this.successMessage = message);
+      debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+      this._success.next("Please check item quantity!");
+      setTimeout(() => { }, 3100)
+
+    } else {
+      if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
+        this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
+        this.router.navigate(['checkout', 'delivery']);
+        this.dataService.deliverItems = deliverItems
+      }
+      else {
+        this.dataService.userData = null;
+        this.router.navigate(['checkout', 'delivery']);
+        this.dataService.deliverItems = deliverItems
+
+        // let status = 'delivery'
+        // this.router.navigate(['login', status]);
+        // $state.go('app.login', { item:status });
+      }
     }
   }
 
   pickupDetails(deliverItems) {
-    if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
-      this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
-      this.router.navigate(['checkout', 'pickup']);
-      this.dataService.deliverItems = deliverItems;
 
-    }
-    else {
-      let status = 'pickup'
-      this.router.navigate(['login', status]);
-      // $state.go('app.login', { item: $scope.status });
+    // this.router.navigate(['checkout', 'pickup']);
+    // this.dataService.deliverItems = deliverItems;
+    let proceed = true;
+
+      for (let i = 0; i < deliverItems.length; i++) {
+        if (deliverItems[i].qty > deliverItems[i].totalQty && !deliverItems[i].unlimited) {
+          proceed = false;
+        }
+      }
+    if (proceed == false) {
+
+      this._success.subscribe((message) => this.successMessage = message);
+      debounceTime.call(this._success, 3000).subscribe(() => this.successMessage = null);
+      this._success.next("Please check item quantity!");
+      setTimeout(() => { }, 3100)
+
+    } else {
+      if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
+        this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
+        this.router.navigate(['checkout', 'pickup']);
+        this.dataService.deliverItems = deliverItems;
+
+      }
+      else {
+        this.dataService.userData = null;
+        this.router.navigate(['checkout', 'pickup']);
+        this.dataService.deliverItems = deliverItems
+        // let status = 'pickup'
+        // this.router.navigate(['login', status]);
+        // $state.go('app.login', { item: $scope.status });
+      }
     }
   }
 

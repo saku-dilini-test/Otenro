@@ -9,7 +9,7 @@
 :host  /deep/ .carousel-caption {
   z-index: 10;
   bottom: 3rem;
-  height: 55%;  
+  height: 55%;
 }
 
 /* Declare heights because of positioning of img element */
@@ -20,7 +20,7 @@
  :host  /deep/ .carousel-item > img {
   min-width: 100%;
   height: 100%;
-  object-fit: cover;	
+  object-fit: cover;
 }
 
 :host  /deep/ .carousel-control-prev, :host  /deep/ .carousel-control-next, :host  /deep/ .carousel-indicators{
@@ -47,5 +47,24 @@
 }
 :host /deep/ ngb-accordion .card-header{
   border:0;
-  padding: 0px 1.25rem ;  
+  padding: 0px 1.25rem ;
+}
+.loader {
+  border: 15px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 15px solid #3498db;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 1.5s linear infinite;
+}
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

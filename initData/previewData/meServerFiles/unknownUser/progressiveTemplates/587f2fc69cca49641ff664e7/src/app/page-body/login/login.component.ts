@@ -14,9 +14,11 @@ import { TitleService } from '../../services/title.service';
 })
 export class LoginComponent implements OnInit {
 
-  public appId = (<any>data).appId;
-  public userId = (<any>data).userId;
-  public params = [];
+  private appId = (<any>data).appId;
+  private userId = (<any>data).userId;
+  private params = [];
+  private loginclicked;
+
   name; pass; gate: boolean; navigate;
   ifInvalidUserPassword:boolean;
   constructor(private localStorageService: LocalStorageService, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private http: HttpClient,
@@ -33,6 +35,7 @@ export class LoginComponent implements OnInit {
 
   login = function (myForm) {
 
+    this.loginclicked = true;
     this.name = myForm.userEmail
     this.password = myForm.password;
 
@@ -52,6 +55,7 @@ export class LoginComponent implements OnInit {
           "token": res.token,
           "email": data.email,
           "name": res.user.name,
+          "lname": res.user.lname,
           "phone": res.user.phone,
           "streetNumber": res.user.streetNumber,
           "streetName": res.user.streetName,
@@ -63,6 +67,7 @@ export class LoginComponent implements OnInit {
           "registeredUser": res.user.sub
         };
         this.localStorageService.set('appLocalStorageUser' + this.appId, (requestParams));
+        this.dataService.appUserId = requestParams.registeredUser;
         this.dataService.isUserLoggedIn.check = true;
         this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 
@@ -80,6 +85,7 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
+    this.loginclicked = false;
     this.route.navigate(['register', this.navigate]);
   }
 

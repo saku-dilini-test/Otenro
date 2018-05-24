@@ -27,3 +27,14 @@
 .navbar-2 ul, .navbar-2 li{
   border: 0;
 }
+
+.logo a{
+  width: 100%;
+}
+.logo img{
+  margin: auto;
+}
+
+ul li a i{
+  font-size: 18px;
+}

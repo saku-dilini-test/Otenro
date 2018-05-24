@@ -13,9 +13,10 @@ declare var userId : string;
 if (environment.production) {
   enableProdMode();
 }
-
 // appId = (<any>data).appId;
 // userId = (<any>data).userId;
+// console.log( (<any>data).appId);
+// console.log( appId);
 
 // Notification.requestPermission(function(status) {
 //   console.log('Notification permission status:', status);
@@ -51,7 +52,7 @@ if (environment.production) {
 //       },err=>{
 //         console.log('registration error occured: ' + err);
 //       });
-
+//
 //     })
 //   }).catch(function (err) {
 //     // registration failed :(
@@ -59,5 +60,4 @@ if (environment.production) {
 //   });
 // }
 
-console.log('main . ts')
 platformBrowserDynamic().bootstrapModule(AppModule);

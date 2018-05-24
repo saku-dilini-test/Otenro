@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { CurrencyService } from '../../services/currency/currency.service';
 import { ProductsService } from '../../services/products/products.service';
-import * as _ from 'lodash';
+// import * as _ from 'lodash';
 import { TitleService } from '../../services/title.service';
 
 @Component({
@@ -25,17 +25,15 @@ export class ShopComponent implements OnInit {
   private catName: any;
   private catImage: any;
   private slides: any;
-  private array;
+  private categories;
   private colorArray = ["CFBDAC", "D0DDDE", "EEEEEE", "FFDE8B", "DEBBAF", "C6D3E4"]
 
   constructor(private currencyService: CurrencyService, private productService: ProductsService,
     private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
     private title: TitleService) {
-
-    this.array = this.dataService.searchArray;
-
+    this.categories = this.dataService.searchArray;
     //use loadash to filter by unique by name
-    this.array = _.uniqBy(this.array, 'name');
+    // this.array = _.uniqBy(this.array, 'name');
 
     this.router.params.subscribe(params => {
       let catName = params['name'];
@@ -45,7 +43,7 @@ export class ShopComponent implements OnInit {
       }else{
         this.title.changeTitle("Store");
       }
-    }); 
+    });
 
   }
 
@@ -94,9 +92,9 @@ export class ShopComponent implements OnInit {
 
   }
 
-  print(test) {
-    this.dataService.catId = test.id;
-    this.catName = test.name;
+  filterProducts(cat) {
+    this.dataService.catId = cat.id;
+    this.catName = cat.name;
     this.productService.getProducts().subscribe(data => {
       this.results = data;
     })

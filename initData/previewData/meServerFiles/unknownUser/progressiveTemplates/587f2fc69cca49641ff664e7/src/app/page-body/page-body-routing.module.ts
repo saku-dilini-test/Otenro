@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component'
 import { OrderHistoryComponent } from './order-history/order-history.component'
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component'
+import { AppUserComponent } from './app-user/app-user.component';
 
 const routes: Routes = [
  { path: '',
@@ -69,6 +70,11 @@ const routes: Routes = [
     path: 'order-history',
     component: OrderHistoryComponent,
     data:{title:'Order-History Page'}
+  },
+  {
+    path: 'appUser',
+    component: AppUserComponent,
+    data:{title:'Edit User Details'}
   },
   {
     path: 'product/:catName',

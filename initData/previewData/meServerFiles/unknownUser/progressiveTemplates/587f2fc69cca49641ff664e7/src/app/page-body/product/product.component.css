@@ -93,15 +93,33 @@
   margin: 20px 0;
 }
 .product-carousel img{
-  width:100%;
+  width:87%;
   height: 100%;
 }
-
+.video-h8{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  opacity: 0.5;
+  color: #fff;
+  font-size: 20px;
+}
 
 @media (max-width: 767px){
     .list-inlineli, .list-inlinei{
         margin-bottom: 0;
         padding-left: 0;
+    }
+
+    .product-carousel img{
+      width:100%;
+    }
+
+    .product-carousel, .panel-detail{
+        margin:0;
     }
 }
 @media (max-width: 1200px){
@@ -114,7 +132,8 @@
     #carousel-custom {
       height: auto;
     }
-}
+
+
 @media (max-width: 400px){
     #carousel-custom .carousel-indicators li img {
         width: 50px;

@@ -33,6 +33,7 @@ export class RegisterComponent implements OnInit {
   private selectedCountry = null;
   private phone;
   private myForm: FormGroup;
+  private isEmailDuplicate;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
               private title: TitleService) {
@@ -64,6 +65,12 @@ export class RegisterComponent implements OnInit {
 
   }
 
+  modelChanged(e){
+    this.isEmailDuplicate = false;
+    if(e == this.email){
+      this.isEmailDuplicate = true;
+    }
+  }
 
 
   signUp=function(myForm) {
@@ -94,8 +101,6 @@ export class RegisterComponent implements OnInit {
         appId: this.appId
     };
 
-    this.localStorageService.set('appLocalStorageUser'+this.appId, (data))
-
     this.http.post(SERVER_URL+"/templatesAuth/register",data)
         .subscribe((res) =>{
 
@@ -116,6 +121,7 @@ export class RegisterComponent implements OnInit {
                 };
 
                 this.localStorageService.set('appLocalStorageUser'+this.appId,(requestParams));
+                this.dataService.appUserId = requestParams.registeredUser;
                 this.dataService.isUserLoggedIn.check = true;
                 this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
 
@@ -124,9 +130,11 @@ export class RegisterComponent implements OnInit {
                 }else{
                   this.route.navigate(['cart']);
                 }
-            },
-            function(err){
-                alert("signup error");
+            },err =>{
+
+              if(err.status == 409){
+                this.isEmailDuplicate = true;
+              }
             });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { PagebodyServiceModule } from '../../page-body/page-body.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -7,6 +7,9 @@ import * as data from '../../madeEasy.json';
 import * as _ from 'lodash';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import * as Player from '@vimeo/player';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
     selector: 'app-product',
@@ -31,26 +34,61 @@ export class ProductComponent implements OnInit {
     private selection2 = [];
     private selection3 = [];
     private Data;
-    private isBuyBtnDisable:boolean;
+    private isBuyBtnDisable: boolean;
     private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
     private lockBuyButton = false;
-
+    private dialogVariants;
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
+    private player: Player;
+    private readMore = false;
+    desPart1; desPart2; desPart1_demo;
+    carouselEl;
 
-    constructor(private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router,private title: TitleService) {
-
+    constructor(private localStorageService: LocalStorageService, public sanitizer: DomSanitizer, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
+        this.sanitizer = sanitizer;
         this.Data = this.dataService.data;
+
         this.init();
         this.isBuyBtnDisable = true;
+
+        if (this.Data.detailedDesc.length > 250) {
+            this.desPart2 = this.Data.detailedDesc.slice(250, this.Data.detailedDesc.length);
+            this.desPart1 = this.Data.detailedDesc.slice(0, 250) + "...";
+            this.desPart1_demo = this.Data.detailedDesc.slice(0, 250);
+
+        } else {
+            this.desPart1 = this.Data.detailedDesc;
+            this.readMore = true;
+        }
+    }
+
+    cleanURL(oldURL: string): SafeResourceUrl {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(oldURL);
     }
 
     currency: string;
+    clicked = false;
+    slided = false;
+    tests;
+    @ViewChild('iframePlayer') playerContainer;
+
+    readMoreFunct() {
+
+        this.desPart1 = this.desPart1_demo.concat(this.desPart2);
+        this.readMore = true;
+    }
 
     ngOnInit() {
 
+        let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+        if (appUser) {
+            this.dataService.appUserId = appUser.registeredUser;
+        }
+
         this.CurrencyService.getCurrencies().subscribe(data => {
-            this.currency = data.currency;
+            this.currency = data.sign;
         }, error => {
             console.log('Error retrieving currency');
         });
@@ -59,14 +97,262 @@ export class ProductComponent implements OnInit {
             this.catName = params['catName'];
         });
 
+        $(() => {
+            this.carouselEl = $('.carousel');
+            var carouselItems = this.carouselEl.find('.item');
+            this.carouselEl.carousel({
+                interval: false
+            }).on('slid.bs.carousel', (event) => {
+                // console.log(event);
+                let index;
+                let playerIndex;
+
+                if (event.direction == 'right') {
+
+                    if (carouselItems.siblings('.active').index() == (this.Data.tempImageArray.length - 1)) {
+                        // console.log('inside if');
+                        playerIndex = 0;
+                        index = this.Data.tempImageArray.length - 1
+                        document.getElementById('player' + playerIndex).style.display = 'none';
+                        document.getElementById('image' + playerIndex).style.display = 'block';
+
+                        var iframePlayer = new Player('player' + playerIndex);
+                        iframePlayer.unload().then(function () {
+                            // the video was unloaded
+                            console.log('player unloaded if');
+                        }).catch(function (error) {
+                            // an error occurred
+                        });
+
+                    } else {
+                        // console.log('inside else');
+                        index = carouselItems.siblings('.active').index();
+                        if (carouselItems.siblings('.active').index() == -1) {
+                            index = 0;
+                            playerIndex = index + 1;
+                        } else {
+                            index = carouselItems.siblings('.active').index();
+                            playerIndex = index + 1;
+                        }
+                        document.getElementById('player' + playerIndex).style.display = 'none';
+                        document.getElementById('image' + playerIndex).style.display = 'block';
+
+                        var iframePlayer = new Player('player' + playerIndex);
+                        iframePlayer.unload().then(function () {
+                            // the video was unloaded
+                            console.log('player unloaded else');
+                        }).catch(function (error) {
+                            // an error occurred
+                        });
+                    }
+
+                } else {
+
+                    if (carouselItems.siblings('.active').index() == -1) {
+                        index = 0;
+                        playerIndex = this.Data.tempImageArray.length - 1;
+                        document.getElementById('player' + (this.Data.tempImageArray.length - 1)).style.display = 'none';
+                        document.getElementById('image' + (this.Data.tempImageArray.length - 1)).style.display = 'block';
+                    } else {
+                        index = carouselItems.siblings('.active').index();
+                        playerIndex = index - 1;
+                        document.getElementById('player' + (index - 1)).style.display = 'none';
+                        document.getElementById('image' + (index - 1)).style.display = 'block';
+                    }
+
+                    // console.log(document.getElementById('image' + index).style);
+                    // console.log(document.getElementById('player' + index).style);
+                    var iframePlayer = new Player('player' + playerIndex);
+                    iframePlayer.unload().then(function () {
+                        // the video was unloaded
+                        console.log('player unloaded left');
+                    }).catch(function (error) {
+                        // an error occurred
+                    });
+
+
+                }
+
+
+                // var iframe = document.querySelector('iframe');
+                // // console.log(iframe);
+                // var iframePlayer = new Player(iframe);
+                // // console.log(iframePlayer);
+
+                // iframePlayer.unload().then(function () {
+                //     // the video was unloaded
+                //     console.log('player unloaded');
+                // }).catch(function (error) {
+                //     // an error occurred
+                // });
+                // console.log(index);
+            })
+        })
+        // console.log(this.clicked);
+    }
+
+    ngAfterContentChecked() {
+    }
+
+    ngAfterViewChecked() {
+    }
+
+    ngOnChanges() {
+    }
+
+    ngAfterViewInit() {
+        this.clicked = false;
+        this.slided = true;
+
+        $(".carousel").swipe({
+
+            swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
+
+                if (direction == 'left') $(this).carousel('next');
+                if (direction == 'right') $(this).carousel('prev');
+
+            },
+            allowPageScroll: "vertical"
+
+        });
+        // console.log(document.getElementById('iframePlayer'));
+        // this.player = new Player(this.playerContainer.nativeElement);
+    }
+
+    video(index, ids) {
+
+        // console.log(index);
+        // console.log(ids);
+
+        // console.log(document.getElementById('image' + index).style.display);
+        document.getElementById('image' + index).style.display = 'none';
+        document.getElementById('player' + index).style.display = 'block';
+
+        // this.player = new Player(document.getElementById('handstick'));
+
+        // this.player.play().then(function (id) {
+        //     // the video successfully loaded
+        //     console.log('video successfully loaded');
+        // }).catch(function (error) {
+        //     switch (error.name) {
+        //         case 'TypeError':
+        //             // the id was not a number
+        //             break;
+
+        //         case 'PasswordError':
+        //             // the video is password-protected and the viewer needs to enter the
+        //             // password first
+        //             break;
+
+        //         case 'PrivacyError':
+        //             // the video is password-protected or private
+        //             break;
+
+        //         default:
+        //             // some other error occurred
+        //             break;
+        //     }
+        // });
+
+        var options = {
+            id: ids,
+            width: 360,
+            height: 360,
+            loop: true,
+            autoplay: true
+        };
+        if (ids) {
+            var player = new Player('player' + index, options);
+            // console.log(player);
+
+            player.ready().then(function () {
+                // console.log('player is ready');
+                // player.getVideoEmbedCode().then(function(embedCode) {
+                //     // embedCode = <iframe> embed code
+                //     console.log(embedCode);
+                // }).catch(function(error) {
+                //     // an error occurred
+                // });
+                // player.loadVideo(id).then(function (id) {
+
+                //     console.log('video loaded');
+                //     // player.play();
+                //     // the video successfully loaded
+                // }).catch(function (error) {
+                //     switch (error.name) {
+                //         case 'TypeError':
+                //             // the id was not a number
+                //             break;
+
+                //         case 'PasswordError':
+                //             // the video is password-protected and the viewer needs to enter the
+                //             // password first
+                //             break;
+
+                //         case 'PrivacyError':
+                //             // the video is password-protected or private
+                //             break;
+
+                //         default:
+                //             // some other error occurred
+                //             break;
+                //     }
+                // });
+                // player.on('play', function() {
+                //     console.log('played the video!');
+                // });
+
+                player.play().then(function () {
+                    // the video was played
+                    // console.log('vido played');
+                }).catch(function (error) {
+                    switch (error.name) {
+                        case 'PasswordError':
+                            // the video is password-protected and the viewer needs to enter the
+                            // password first
+                            break;
+
+                        case 'PrivacyError':
+                            // the video is private
+                            break;
+
+                        default:
+                            // some other error occurred
+                            break;
+                    }
+                });
+
+            });
+        }
+
+        // player.setVolume(0);
+
+        // player.on('play',  ()=> {
+        //     console.log('played the video!');
+        // },err=>{
+        //     console.log(err);
+        // });
+
+        // var iframe = document.querySelector('iframe');
+        // var player = new Player(iframe);
+
+        // this.clicked = true;
+        // this.slided = false;
+
+        // this.player.on('play', function () {
+        //     console.log('played the video!');
+        // });
+
+
 
     }
+
 
 
     init() {
         if (this.Data) {
             this.foodInfo = this.Data;
-            this.title.changeTitle(this.foodInfo.name);
+            this.title.changeTitle(" ");
             this.images = this.Data.tempImageArray;
 
             if (this.Data.variants.length > 0) {
@@ -90,33 +376,54 @@ export class ProductComponent implements OnInit {
                 }
             }
         }
+    }
 
+    getIndex(sku) {
+
+        let index = this.Data.defaultImage;
+        if (this.Data.selectedSku) {
+            this.Data.selectedSku.forEach(element => {
+                if (element.sku == sku) {
+                    index = element.index;
+                }
+            });
+        }
+
+        return index;
     }
 
     changeVariant(variant1) {
-        this.lockBuyButton = false;
         this.selection1 = [];
         this.selection2 = [];
         this.selection3 = [];
 
-        if(variant1){
-        this.selectedVariant1 = variant1;
-        this.selectedVariant2 = null;
-        this.selectedVariant.buyQuantity = '';
+        variant1 = variant1.replace(/\s/g, '');
+
+        if (variant1) {
+            if (variant1 == "PleaseSelect") {
+                this.lockBuyButton = false;
+                this.isBuyBtnDisable = true;
+            }
+            this.selectedVariant1 = variant1;
+            this.selectedVariant2 = null;
+            this.selectedVariant.buyQuantity = '';
         }
 
-        if (this.foodInfo.selection.length == 1) {
+        if (this.foodInfo.selection.length == 1 && variant1 != 'PleaseSelect') {
+
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selectedVariant = this.foodInfo.variants[i];
 
-                    this.lockBuyButton = true;
+
                 }
             }
+            this.lockBuyButton = true;
+            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
         } else {
 
-            if(variant1 == "Please Select"){
-            }else{
+            if (variant1 == "Please Select") {
+            } else {
                 this.selection1.push({ 'vType': 'Please Select' });
             }
 
@@ -127,33 +434,40 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.selection1 = _.uniqBy(this.selection1, 'vType');
-
         }
 
     };
 
     changeVariant2(variant2) {
-        this.lockBuyButton = false;
         this.selection2 = [];
         this.selection3 = [];
+        //for IE specific issue
+        variant2 = variant2.replace(/\s/g, '');
 
         if (variant2) {
+            if (variant2 == "PleaseSelect") {
+                this.lockBuyButton = false;
+                this.isBuyBtnDisable = true;
+
+            }
             this.selectedVariant2 = variant2;
             this.selectedVariant.buyQuantity = '';
-
         }
 
-        if (this.foodInfo.selection.length == 2) {
+        if (this.foodInfo.selection.length == 2 && variant2 != 'PleaseSelect') {
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
                     this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
                     this.selectedVariant = this.foodInfo.variants[i];
-                    this.lockBuyButton = true;
                 }
             }
+            this.lockBuyButton = true;
+            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
 
         } else {
-            this.selection2.push({ 'vType': 'Please Select' });
+            if (variant2 != 'PleaseSelect') {
+                this.selection2.push({ 'vType': 'Please Select' });
+            }
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[1].vType == variant2 && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1) {
                     this.selection2.push({ 'vType': this.foodInfo.variants[i].selection[2].vType });
@@ -166,25 +480,35 @@ export class ProductComponent implements OnInit {
     };
 
     changeVariant3(variant3) {
-        this.lockBuyButton = false;
+
+        //for IE specific issue
+        variant3 = variant3.replace(/\s/g, '');
         this.selection3 = [];
 
         if (variant3) {
+            if (variant3 == 'PleaseSelect') {
+                this.lockBuyButton = false;
+                this.isBuyBtnDisable = true;
+            }
             this.selectedVariant3 = variant3;
             this.selectedVariant.buyQuantity = '';
         }
 
-        if (this.foodInfo.selection.length == 3) {
+        if (this.foodInfo.selection.length == 3 && variant3 != 'PleaseSelect') {
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
                     this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
                     this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3) {
                     this.selectedVariant = this.foodInfo.variants[i];
-                    this.lockBuyButton = true;
                 }
             }
+            this.lockBuyButton = true;
+            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
+
         } else {
-            this.selection3.push({ 'vType': 'Please Select' });
+            if (variant3 != 'PleaseSelect') {
+                this.selection3.push({ 'vType': 'Please Select' });
+            }
             for (var i = 0; i < this.foodInfo.variants.length; i++) {
                 if (this.foodInfo.variants[i].selection[2].vType == variant3 && this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 && this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2) {
                     this.selection3.push({ 'vType': this.foodInfo.variants[i].selection[3].vType });
@@ -194,21 +518,34 @@ export class ProductComponent implements OnInit {
         }
     };
     changeVariant4(variant4) {
+        //for IE specific issue
+        variant4 = variant4.replace(/\s/g, '');
+
         if (variant4) {
+            if (variant4 == 'PleaseSelect') {
+                this.lockBuyButton = false;
+                this.isBuyBtnDisable = true;
+
+            }
             this.selectedVariant4 = variant4;
             this.selectedVariant.buyQuantity = '';
 
         }
 
-        for (var i = 0; i < this.foodInfo.variants.length; i++) {
-            if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
-                this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
-                this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3 &&
-                this.foodInfo.variants[i].selection[3].vType == this.selectedVariant4) {
-                this.selectedVariant = this.foodInfo.variants[i];
-                this.lockBuyButton = true;
+        if (this.foodInfo.selection.length == 4 && variant4 != 'PleaseSelect') {
 
+
+            for (var i = 0; i < this.foodInfo.variants.length; i++) {
+                if (this.foodInfo.variants[i].selection[0].vType == this.selectedVariant1 &&
+                    this.foodInfo.variants[i].selection[1].vType == this.selectedVariant2 &&
+                    this.foodInfo.variants[i].selection[2].vType == this.selectedVariant3 &&
+                    this.foodInfo.variants[i].selection[3].vType == this.selectedVariant4) {
+                    this.selectedVariant = this.foodInfo.variants[i];
+
+                }
             }
+            this.lockBuyButton = true;
+            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
         }
     };
 
@@ -229,7 +566,7 @@ export class ProductComponent implements OnInit {
     changeBuyQuantity(buyQty) {
 
         // default : Buy button set as Disable
-         this.isBuyBtnDisable = true;
+        this.isBuyBtnDisable = true;
 
         // if buyQty value greater than 0
         if (buyQty > 0) {
@@ -237,21 +574,39 @@ export class ProductComponent implements OnInit {
             var selectVariantAvailableQty = this.selectedVariant.quantity;
             //If quantity is unlimited enable buy button
             if (this.selectedVariant.unlimited == true) {
-                 this.isBuyBtnDisable = false;
+                this.isBuyBtnDisable = false;
             }
             else if (typeof selectVariantAvailableQty != 'undefined') {
                 // If buyQty less than or equal Selected-Variant-Qty, buy button enable
                 if (buyQty <= selectVariantAvailableQty) {
-                     this.isBuyBtnDisable = false;
+                    this.isBuyBtnDisable = false;
                 }
             }
         }
     };
+    test(data) {
+        this.dialogVariants = data;
+        $('#myModal').modal('show')
+    }
+    close() {
+        $('#myModal').modal('hide')
+    }
 
+    goToHome() {
+        $('#myModal').on('hidden.bs.modal', (e) => {
+            this.route.navigate(['home']);
+        })
+    }
+    goToCart() {
+        $('#myModal').on('hidden.bs.modal', (e) => {
+            this.route.navigate(['cart']);
+        })
+    }
 
-    addToCart() {
+    addToCart(navi) {
+
         if (this.selectedVariant.buyQuantity == null) {
-            console.log(' error');
+            console.log(' error please select buy quantity');
         } else {
             if (this.dataService.cart.cartItems.length != 0) {
                 var i = 0;
@@ -265,7 +620,9 @@ export class ProductComponent implements OnInit {
                         this.parentobj.cartSize = this.dataService.cart.cartSize;
                         this.dataService.parseWeight = this.selectedVariant.weight;
                         // $state.go('app.category');
-                        this.route.navigate(['home']);
+                        if (navi == "buyNowCart") {
+                            this.route.navigate(['cart']);
+                        }
                         break;
                     }
                     else if (i == (this.dataService.cart.cartItems.length - 1)) {
@@ -276,11 +633,13 @@ export class ProductComponent implements OnInit {
                             qty: this.selectedVariant.buyQuantity,
                             sku: this.selectedVariant.sku,
                             totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
-                            price: this.selectedVariant.price,
-                            total: this.selectedVariant.price,
-                            imgURL: this.Data.tempImageArray,
+                            price: Math.round(this.selectedVariant.price * 100) / 100,
+                            total: Math.round(this.selectedVariant.price * 100) / 100,
+                            imgURL: this.selectedVariant.imageUrl,
+                            imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
                             variant: this.selectedVariant.selection,
                             totalQty: this.selectedVariant.quantity,
+                            unlimited: this.selectedVariant.unlimited,
                             weight: this.selectedVariant.weight  //(new) added weight of each product
 
                         });
@@ -288,24 +647,32 @@ export class ProductComponent implements OnInit {
                         this.parentobj.cartSize = this.dataService.cart.cartSize;
                         this.dataService.parseWeight = this.selectedVariant.weight;
                         //  $state.go('app.category');
-                        this.route.navigate(['home']);
+                        if (navi == "buyNowCart") {
+                            this.route.navigate(['cart']);
+                        }
                         break;
                     }
                     i++;
                 }
+                if (this.dataService.appUserId) {
+                    this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
+                }
             }
             else {
+
                 this.dataService.cart.cartItems.push({
                     id: this.foodInfo.id,
                     name: this.foodInfo.name,
                     qty: this.selectedVariant.buyQuantity,
                     sku: this.selectedVariant.sku,
                     totWeight: this.selectedVariant.weight * this.selectedVariant.buyQuantity,
-                    price: this.selectedVariant.price,
-                    total: this.selectedVariant.price,
-                    imgURL: this.Data.tempImageArray,
+                    price: Math.round(this.selectedVariant.price * 100) / 100,
+                    total: Math.round(this.selectedVariant.price * 100) / 100,
+                    imgURL: this.selectedVariant.imageUrl,
+                    imgDefault: this.Data.tempImageArray[this.Data.defaultImage].img,
                     variant: this.selectedVariant.selection,
                     totalQty: this.selectedVariant.quantity,
+                    unlimited: this.selectedVariant.unlimited,
                     weight: this.selectedVariant.weight //(new) added weight of each product
 
                 });
@@ -313,8 +680,13 @@ export class ProductComponent implements OnInit {
                 this.parentobj.cartSize = this.dataService.cart.cartSize;
                 this.dataService.parseWeight = this.selectedVariant.weight;
                 // $state.go('app.category');
-                this.route.navigate(['home']);
 
+                if (this.dataService.appUserId) {
+                    this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
+                }
+                if (navi == "buyNowCart") {
+                    this.route.navigate(['cart']);
+                }
             }
         }
 

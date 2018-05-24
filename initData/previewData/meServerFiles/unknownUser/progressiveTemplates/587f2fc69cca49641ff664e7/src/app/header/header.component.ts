@@ -14,24 +14,37 @@ import { TitleService } from "../services/title.service";
   host: { '[@fadeInAnimation]': '' }
 })
 
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private cartNo: number;
-  public title:string;
+  public title: string;
   public loginStatus;
-  constructor(private localStorageService: LocalStorageService, private router: Router, private dataService: PagebodyServiceModule,private titleServ: TitleService) {
+  private dummy: date;
+  constructor(private localStorageService: LocalStorageService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Home';
+    this.dummy = new Date().toISOString();
   }
 
   ngOnInit() {
-    this.titleServ.currentTitle.subscribe(message => this.title = message)
+    this.titleServ.currentTitle.subscribe(message => this.title = message);
+
+    $(".navbar-2").on('show.bs.collapse', function () {
+      $('.mobileTitle').removeClass('visible-xs');
+      $('.mobileTitle').addClass('hidden');
+    });
+
+    $(".navbar-2").on('hide.bs.collapse', function () {
+      $('.mobileTitle').addClass('visible-xs');
+      $('.mobileTitle').removeClass('hidden');
+    });
   }
 
   ngAfterContentChecked() {
-    this.cartNo = this.dataService.cart.cartItems.length;
-
+    if (this.dataService.cart.cartItems) {
+      this.cartNo = this.dataService.cart.cartItems.length;
+    }
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
       this.loginStatus = true;
     } else {
@@ -43,6 +56,7 @@ export class HeaderComponent implements OnInit{
   logout() {
     this.localStorageService.remove('appLocalStorageUser' + this.appId);
     this.dataService.isUserLoggedIn.check = false;
+    this.dataService.cart.cartItems = [];
     this.router.navigate(['home']);
   }
 
@@ -50,6 +64,14 @@ export class HeaderComponent implements OnInit{
     this.title = name;
 
     this.router.navigate([route]);
+  }
+
+  manualToggle() {
+
+    this.titleServ.changeTitle("Shopping Cart");
+    $('.navbar-2').removeClass('in');
+    $('.mobileTitle').addClass('visible-xs');
+    $('.mobileTitle').removeClass('hidden');
   }
 
 }

@@ -19,8 +19,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { OwlModule } from 'angular-owl-carousel';
 // https://angular-maps.com/guides/getting-started/
 import { AgmCoreModule } from '@agm/core';
-// http://tb.github.io/ng2-nouislider/
-import { NouisliderModule } from 'ng2-nouislider';
 import { PagebodyServiceModule } from './page-body/page-body.service';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { GithubAuthInterceptor } from './githubauth.interceptor';
@@ -38,6 +36,7 @@ import { AppDataService } from './services/appdata-info/appdata-info.service';
 import { OrdersService } from './services/orders/orders.service';
 import { SliderService } from './services/slider/slider.service';
 import { TitleService } from './services/title.service';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 @NgModule({
   declarations: [
@@ -63,8 +62,8 @@ import { TitleService } from './services/title.service';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBanVJ_9ViC-HeJruJzhetGXUERg1eYXag'
     }),
-    NouisliderModule,
     BrowserAnimationsModule,
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [PagebodyServiceModule,PushNotificationService,
     CategoriesService,

@@ -19,8 +19,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { OwlModule } from 'angular-owl-carousel';
 // https://angular-maps.com/guides/getting-started/
 import { AgmCoreModule } from '@agm/core';
-// http://tb.github.io/ng2-nouislider/
-import { NouisliderModule } from 'ng2-nouislider';
 import { PagebodyServiceModule } from './page-body/page-body.service';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { GithubAuthInterceptor } from './githubauth.interceptor';
@@ -63,7 +61,6 @@ import { TitleService } from './services/title.service';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBanVJ_9ViC-HeJruJzhetGXUERg1eYXag'
     }),
-    NouisliderModule,
     BrowserAnimationsModule,
   ],
   providers: [PagebodyServiceModule,PushNotificationService,

@@ -14,12 +14,12 @@ import { TermsComponent } from './terms/terms.component';
 import { ContactComponent } from './contact/contact.component';
 import { AgmCoreModule } from '@agm/core';
 import { ShopComponent } from './shop/shop.component';
-import { NouisliderModule } from 'ng2-nouislider';
 import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { RegisterComponent } from './register/register.component';
 import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.component';
+import { AppUserComponent } from './app-user/app-user.component';
 
 
 @NgModule({
@@ -30,7 +30,6 @@ import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.componen
     NgbModule,
     OwlModule,
     AgmCoreModule,
-    NouisliderModule,
     FormsModule,
     ReactiveFormsModule
 
@@ -38,6 +37,6 @@ import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.componen
    exports:[
     PageBodyComponent
   ],
-  declarations: [HomepageComponent, PageBodyComponent, AboutusComponent, PoliciesComponent, TermsComponent, ContactComponent, ShopComponent, ProductComponent, CartComponent, CheckoutComponent, RegisterComponent,PaypalPaymentComponent]
+  declarations: [HomepageComponent, PageBodyComponent, AboutusComponent, PoliciesComponent, TermsComponent, ContactComponent, ShopComponent, ProductComponent, CartComponent, CheckoutComponent, RegisterComponent,PaypalPaymentComponent, AppUserComponent]
 })
 export class PageBodyModule { }

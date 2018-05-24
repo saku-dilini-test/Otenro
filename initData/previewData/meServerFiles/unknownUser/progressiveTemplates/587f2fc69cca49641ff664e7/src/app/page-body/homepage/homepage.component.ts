@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { HttpClient } from '@angular/common/http';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { fadeInAnimation } from '../../animations/fade-in.animation';
 import { CategoriesService } from '../../services/categories/categories.service'
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
-import { forEach } from '@angular/router/src/utils/collection';
 import { ProductsService } from '../../services/products/products.service';
 import { SliderService } from '../../services/slider/slider.service';
 import { TitleService } from '../../services/title.service';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-homepage',
@@ -37,8 +35,8 @@ export class HomepageComponent implements OnInit {
   private catName;
   private isSliderDataAvailable: boolean = false;
   private isRandomProducts;
-
-  constructor(private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
+  private categories:any
+  constructor(private localStorageService: LocalStorageService, private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
       if (data.length > 0) {
@@ -63,6 +61,11 @@ export class HomepageComponent implements OnInit {
         imageUrl: 'lazyload-ph.png'
       });
     }
+    this.categoryService.getCategories().subscribe(data => {
+        this.categories =data;
+      }, err => {
+        console.log(err);
+      });
 
     this.title.changeTitle("Home");
 
@@ -72,7 +75,33 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
 
+    let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
+    if (appUser) {
+      if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+        this.dataService.cart = this.localStorageService.get("cart" + appUser.registeredUser);
+      }
+    }
+
+    $(".carousel").swipe({
+      swipe: (event, direction, distance, duration, fingerCount, fingerData) => {
+        if (direction == 'left') $(this).carousel('next');
+        if (direction == 'right') $(this).carousel('prev');
+
+      },
+      allowPageScroll: "vertical"
+
+    });
+
+
+    $(() => {
+      var carouselEl = $('.carousel');
+      var carouselItems = carouselEl.find('.item');
+      carouselEl.carousel({
+        interval: 100000
+      }).on('slid.bs.carousel', (event) => {
+      });
+    });
 
     this.imageUrlProd = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
@@ -82,24 +111,6 @@ export class HomepageComponent implements OnInit {
 
     this.imageUrlSlider = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
-
-    this.categoryService.getCategories().subscribe(data => {
-      if (data.length > 0) {
-        // Read the result field from the JSON response.
-        this.results = data;
-        data.forEach(element => {
-          this.dataService.searchArray.push({ 'name': element.name, 'id': element.id });
-        });
-      } else {
-        this.results = null;
-      }
-
-
-    },
-      error => {
-        console.log('Error retrieving categories');
-      });
-
 
     let max;
 
@@ -140,6 +151,9 @@ export class HomepageComponent implements OnInit {
 
   }
 
+  // ngAfterViewInit() {
+
+  // }
 
   getWidth(index, length) {
     let styles = {
@@ -147,15 +161,8 @@ export class HomepageComponent implements OnInit {
     };
     let vw = window.innerWidth;
     if (vw < 768 && length - 1 === index && length % 2 === 1) {
-      console.log("returned")
       return styles;
     }
-  }
-
-  // Routing Method
-  navigateShop(val: string, id, name) {
-    this.dataService.catId = id;
-    this.router.navigate(['/' + val, id, name]);
   }
 
   navigateFeaturedProd(val, item) {
@@ -171,20 +178,11 @@ export class HomepageComponent implements OnInit {
   }
 
   navigateSliderProd(val, item) {
-    if(item.optionals.length == 2){
+    if (item.optionals.length == 2) {
       this.catName = item.optionals[0].name
       this.dataService.data = item.optionals[1];
       this.route.navigate([val, this.catName]);
     }
-
-
-    // this.productService.getCategoryData(item.childId).subscribe((data: any) => {
-    //   this.catName = data[0].name
-    //   this.dataService.data = item;
-    //   this.route.navigate([val, this.catName]);
-    // }), err => {
-    //   console.log(err)
-    // }
 
   }
 }

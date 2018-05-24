@@ -67,10 +67,8 @@
        'owl.carousel': 'npm:owl.carousel/dist/owl.carousel.js',
        'angular-owl-carousel': 'npm:angular-owl-carousel/',
        '@agm/core': 'npm:@agm/core/core.umd.js',
-       'nouislider': 'npm:nouislider',
        '@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
        'tslib': 'npm:tslib/tslib.js',
-      'ng2-nouislider': 'npm:ng2-nouislider',
       // other libraries
       'rxjs':                      'npm:rxjs',
       // 'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
@@ -96,8 +94,6 @@
        defaultExtension: 'js'
       },
       'environments': {defaultExtension: 'ts'},
-      'nouislider': { main: 'distribute/nouislider.js', defaultExtension: 'js' },
-      'ng2-nouislider': { main: 'src/nouislider.js', defaultExtension: 'js' },
     }
   });
 

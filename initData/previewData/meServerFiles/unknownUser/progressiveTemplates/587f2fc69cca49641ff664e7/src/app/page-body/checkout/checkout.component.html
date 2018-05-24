@@ -1,243 +1,380 @@
 <div class="container">
   <!--<app-carousel [slides]="slides"></app-carousel>-->
-
+  <!-- 
   <div *ngIf='formType == "delivery"'>
-
-    <!-- <div class="row padding-vertical">
-            <form name="test" #myForm="ngForm" (ngSubmit)="test()" class="container main-content-font" novalidate>
-                <p>Is "myForm" valid? {{myForm.valid}}</p>
-      <div class="col-md-7">
-        <div class="row main-content-font">
-          <h3 class="col-sm-12 main-header-font">Billing Details</h3>
-          <div class="form-group col-sm-6 mt-3">
-            <label for="fname">First Name</label>
-            <div>
-                <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" type="text" #fname='ngModel' name="fname" id="fname" placeholder="Arstina"
-                       ngModel required>
-                <div [hidden]="fname.valid || fname.pristine" class="alert alert-danger">
-                  <div [hidden]="!fname.hasError('required')">First Name is required</div>
-                  <div [hidden]="!fname.hasError('pattern')">Only alphabetsallowed</div>
-                </div>
-              </div>          </div>
-          <div class="form-group col-sm-6 mt-3">
-            <label for="lname">Last Name</label>
-            <input type="text" class="form-control" [(ngModel)]='lname' name="lname" [value]="lname" id="lname" aria-describedby="lname">
-          </div>
-          <div class="form-group col-sm-6">
-            <label for="email">Email address</label>
-            <input type="email" [(ngModel)]='email' name="address" [value]="email" class="form-control" id="email" aria-describedby="emailHelp">
-          </div>
-          <div class="form-group col-sm-6">
-            <label for="phone">Phone</label>
-            <input type="tel" [(ngModel)]='phone' name="phone" [value]="phone" class="form-control" id="phone" aria-describedby="phone">
-          </div>
-          <div class="form-group col-sm-6">
-            <label for="phone">House/Apartment Number</label>
-            <input type="text" [(ngModel)]='streetNumber' name="streetNo" [value]="streetNumber" class="form-control" id="streetNumber" aria-describedby="streetNumber">
-          </div>
-          <div class="form-group col-sm-6">
-            <label for="email">street Name</label>
-            <input type="email" [(ngModel)]='streetName' name="streetName" [value]="streetName" class="form-control" id="streetName" aria-describedby="streetName">
-          </div>
-          <div class="form-group col-sm-6">
-            <label for="cname">City</label>
-            <input type="text" [(ngModel)]='city' name="city" [value]="city" class="form-control" id="cname" aria-describedby="cname">
-          </div>
-          <div class="form-group col-sm-6">
-            <label for="phone">Postal Code/ZIP</label>
-            <input type="number" [(ngModel)]='zip' name="postal" [value]="zip" class="form-control" id="zip" aria-describedby="zip">
-          </div>
-          <div class="form-group col-sm-12">
-            <select name="country" [(ngModel)]="country" (ngModelChange)="countryChanged(country)" class="form-control">
-              <option *ngFor="let c of countries" [selected]="country==c.countryName" value = '{{c.countryName}}'> {{c.countryName}} </option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-5">
-        <h3 class="main-header-font">Shipping Options</h3>
-
-        <div class="radio main-content-font" *ngFor="let ship of shippingData, let idx = index">
-          <label>
-            <input  #r  name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping" (change)='addShipping(ship,$event)'>
-            {{ship.optionName}} <span>({{ship.shippingOption}})</span>
-          </label>
-        </div>
-      </div>
-    </form>
-    </div> -->
 
     <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
       <div class="form-group">
         <label>First Name:</label>
-        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+
         <input id=fname class="form-control" type="text" placeholder="Arstina" [formControl]="complexForm.controls['fName']" required>
 
         <div *ngIf="complexForm.controls['fName'].hasError('required')
-        && complexForm.controls['fName'].touched" class="alert alert-danger">
+        && complexForm.controls['fName'].touched && complexForm.controls['fName'].dirty" class="alert alert-danger">
           You must include a First name.
         </div>
-        <!-- <div *ngIf="complexForm.controls['fName'].hasError('minlength')
-        && complexForm.controls['fName'].touched" class="alert alert-danger">
-          Your first name must be at least 4 characters long.
+        <div *ngIf="!complexForm.controls['fName'].valid && complexForm.controls['fName'].touched && complexForm.controls['fName'].dirty"
+          class="alert alert-danger">
+          First Name must only include Alphabetic character and no spaces.
         </div>
-        <div *ngIf="complexForm.controls['fName'].hasError('maxlength')
-        && complexForm.controls['fName'].touched" class="alert alert-danger">
-          Your last name cannot exceed 10 characters.
-        </div> -->
 
       </div>
       <div class="form-group">
         <label>Last Name:</label>
-        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+
         <input class="form-control" type="text" placeholder="kale" [formControl]="complexForm.controls['lName']">
 
         <div *ngIf="complexForm.controls['lName'].hasError('required')
-        && complexForm.controls['lName'].touched" class="alert alert-danger">
+        && complexForm.controls['lName'].touched && complexForm.controls['lName'].dirty" class="alert alert-danger">
           You must include a Last name.
         </div>
-        <!-- <div *ngIf="complexForm.controls['lName'].hasError('minlength')
-        && complexForm.controls['lName'].touched" class="alert alert-danger">
-          Your first name must be at least 4 characters long.
+        <div *ngIf="!complexForm.controls['lName'].valid && complexForm.controls['lName'].touched && complexForm.controls['lName'].dirty"
+          class="alert alert-danger">
+          Last Name must only include Alphabetic character and no spaces.
         </div>
-        <div *ngIf="complexForm.controls['lName'].hasError('maxlength')
-        && complexForm.controls['lName'].touched" class="alert alert-danger">
-          Your last name cannot exceed 10 characters.
-        </div> -->
+
+        
 
       </div>
       <div class="form-group">
         <label>Email:</label>
-        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+
         <input class="form-control" type="text" placeholder="you@example.com" [formControl]="complexForm.controls['email']">
 
         <div *ngIf="complexForm.controls['email'].hasError('required')
-        && complexForm.controls['email'].touched" class="alert alert-danger">
+        && complexForm.controls['email'].touched && complexForm.controls['email'].dirty" class="alert alert-danger">
           You must include an email.
         </div>
-        <div *ngIf = "!complexForm.controls['email'].valid" class="alert alert-danger">
-            invalid Email
+        <div *ngIf="!complexForm.controls['email'].valid && complexForm.controls['email'].touched && complexForm.controls['email'].dirty"
+          class="alert alert-danger">
+          invalid Email
         </div>
 
       </div>
       <div class="form-group">
         <label>Phone:</label>
-        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
-        <input class="form-control" type="text" placeholder="+94712345678" [formControl]="complexForm.controls['phone']">
+
+        <input class="form-control" type="text" placeholder="+94712345678" maxlength="16" [formControl]="complexForm.controls['phone']">
 
         <div *ngIf="complexForm.controls['phone'].hasError('required')
-        && complexForm.controls['phone'].touched" class="alert alert-danger">
+        && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty" class="alert alert-danger">
           You must include a Phone Number.
         </div>
-        <div *ngIf = "!complexForm.controls['phone'].valid" class="alert alert-danger">
-            Enter a valid Phone Number (ex: +94123456789)
+        <div *ngIf="!complexForm.controls['phone'].valid && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty"
+          class="alert alert-danger">
+          Enter a valid Phone Number (ex: +94123456789)
         </div>
 
       </div>
       <div class="form-group">
         <label>House/Apartment Number:</label>
-        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+
         <input class="form-control" type="text" placeholder="#244 A" [formControl]="complexForm.controls['streetNo']">
 
         <div *ngIf="complexForm.controls['streetNo'].hasError('required')
-        && complexForm.controls['streetNo'].touched" class="alert alert-danger">
+        && complexForm.controls['streetNo'].touched && complexForm.controls['streetNo'].dirty" class="alert alert-danger">
           You must include Street Number.
         </div>
 
       </div>
       <div class="form-group">
-        <label>street Name:</label>
-        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+        <label>Street Name:</label>
+
         <input class="form-control" type="text" placeholder="Your Road" [formControl]="complexForm.controls['streetName']">
 
         <div *ngIf="complexForm.controls['streetName'].hasError('required')
-        && complexForm.controls['streetName'].touched" class="alert alert-danger">
+        && complexForm.controls['streetName'].touched  && complexForm.controls['streetName'].dirty" class="alert alert-danger">
           You must include Street Name.
         </div>
       </div>
       <div class="form-group">
         <label>City:</label>
-        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+
         <input class="form-control" type="text" placeholder="Your City" [formControl]="complexForm.controls['city']">
 
         <div *ngIf="complexForm.controls['city'].hasError('required')
-        && complexForm.controls['city'].touched" class="alert alert-danger">
+        && complexForm.controls['city'].touched && complexForm.controls['city'].dirty" class="alert alert-danger">
           You must include a City.
         </div>
 
       </div>
       <div class="form-group">
         <label>Postal Code/ZIP:</label>
-        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+
         <input class="form-control" type="text" placeholder="70000" [formControl]="complexForm.controls['zip']">
 
         <div *ngIf="complexForm.controls['zip'].hasError('required')
-        && complexForm.controls['zip'].touched" class="alert alert-danger">
+        && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty" class="alert alert-danger">
           You must include zip code.
         </div>
-        <div *ngIf = "!complexForm.controls['zip'].valid" class="alert alert-danger">
-            invalid zip code
+        <div *ngIf="!complexForm.controls['zip'].valid && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty"
+          class="alert alert-danger">
+          invalid zip code
         </div>
       </div>
+      <label>Country:</label>
       <select id="country" class="form-control" formControlName="country" (change)="countryChanged()">
         <option *ngFor="let c of countries" [ngValue]="c.countryName">
           {{c.countryName}}
         </option>
       </select>
       <br>
-      <div class="col-md-5" *ngIf = "complexForm.valid">
+      <div class="col-md-5" *ngIf="complexForm.valid">
         <h3 class="main-header-font">Shipping Options</h3>
 
         <div class="radio main-content-font" *ngFor="let ship of shippingData, let idx = index">
           <label>
             <input id="delivery" #r name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping"
               (change)='addShipping(ship,$event,complexForm.value)' [ngModelOptions]="{standalone: true}"> {{ship.optionName}}
-            <span>({{ship.shippingOption}})</span>
-          </label>
+
+            </label>
         </div>
       </div>
     </form>
 
+  </div> -->
+
+
+  <div *ngIf='formType == "delivery"'>
+    <div class="bloc b-parallax bgc-white" id="bloc-14">
+      <div class="container bloc-lg">
+        <div class="row bgc-white padding mobile-margin">
+          <div class="col-sm-3">
+            <a class="a-btn a-block links link-spacing-top color animated fadeInUp hidden-xs">BILLING ADDRESS</a>
+            <a class="a-btn a-block links color animated fadeInUp animDelay02 hidden-xs">REVIEW AND PAYMENT</a>
+          </div>
+          <div class="col-sm-9">
+            <h2 class="mg-md header-text-h1 spacing-top-text">
+              SHIPPING ADDRESS
+            </h2>
+            <div>
+              <div class="row">
+                <div class="col-sm-6" *ngIf="showUser">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="radioOld" value="oldUser" id="showLoggedUser" (change)="check('oldUser')" [checked]="oldUser" />{{loggedUserData.name}}&nbsp;{{loggedUserData.lname}}
+                    </label>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <p>
+                        {{loggedUserData.streetNumber}} &nbsp;{{loggedUserData.streetName}},&nbsp;
+                        <br>{{loggedUserData.city}}, {{loggedUserData.zip}}
+                        <br>{{loggedUserData.country}}
+                        <br> Phone: {{loggedUserData.phone}}&nbsp;
+                        <br>
+                        <br>
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-sm-6">
+                  <a (click) = "register()" class="a-btn a-block color">Click here to register if you are a new customer</a>
+                </div>
+              </div>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="radioNew" value="newUser" id="showNewUser" (ngModelChange)="check('newUser')" [(ngModel)]="newUser"
+                  [checked]="!showUser" />Enter a new address
+              </label>
+            </div>
+            <form [formGroup]="complexForm" *ngIf="newUser" (ngSubmit)="submitForm(complexForm.value)" id="form_28872" novalidate class="spacing-form animated fadeInUp animDelay04">
+
+              <div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="sub-header-text-h2">
+                        FIRST NAME
+                      </label>
+                      <input id=fname class="form-control" type="text" placeholder="Arstina" [formControl]="complexForm.controls['fName']" required>
+                      <div *ngIf="complexForm.controls['fName'].hasError('required')
+                    && complexForm.controls['fName'].touched && complexForm.controls['fName'].dirty" class="alert alert-danger">
+                        You must include a First name.
+                      </div>
+                      <div *ngIf="!complexForm.controls['fName'].valid && complexForm.controls['fName'].touched && complexForm.controls['fName'].dirty"
+                        class="alert alert-danger">
+                        First Name must only include Alphabetic character and no spaces.
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="sub-header-text-h2">
+                        LAST NAME
+                      </label>
+                      <input class="form-control" type="text" placeholder="kale" [formControl]="complexForm.controls['lName']">
+                      <div *ngIf="complexForm.controls['lName'].hasError('required')
+                    && complexForm.controls['lName'].touched && complexForm.controls['lName'].dirty" class="alert alert-danger">
+                        You must include a Last name.
+                      </div>
+                      <div *ngIf="!complexForm.controls['lName'].valid && complexForm.controls['lName'].touched && complexForm.controls['lName'].dirty"
+                        class="alert alert-danger">
+                        Last Name must only include Alphabetic character and no spaces.
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="sub-header-text-h2">
+                        HOUSE/APARTMENT NUMBER
+                      </label>
+                      <input class="form-control" type="text" placeholder="#244 A" [formControl]="complexForm.controls['streetNo']">
+
+                      <div *ngIf="complexForm.controls['streetNo'].hasError('required')
+                    && complexForm.controls['streetNo'].touched && complexForm.controls['streetNo'].dirty" class="alert alert-danger">
+                        You must include Street Number.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label class="sub-header-text-h2">
+                        STREET NAME
+                      </label>
+                      <input class="form-control" type="text" placeholder="Your Road" [formControl]="complexForm.controls['streetName']">
+
+                      <div *ngIf="complexForm.controls['streetName'].hasError('required')
+                    && complexForm.controls['streetName'].touched  && complexForm.controls['streetName'].dirty" class="alert alert-danger">
+                        You must include Street Name.
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="sub-header-text-h2">
+                        CITY
+                      </label>
+                      <input class="form-control" type="text" placeholder="Your City" [formControl]="complexForm.controls['city']">
+
+                      <div *ngIf="complexForm.controls['city'].hasError('required')
+                    && complexForm.controls['city'].touched && complexForm.controls['city'].dirty" class="alert alert-danger">
+                        You must include a City.
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="sub-header-text-h2">
+                        POSTAL CODE/ZIP
+                      </label>
+                      <input class="form-control" type="text" placeholder="70000" [formControl]="complexForm.controls['zip']">
+
+                      <div *ngIf="complexForm.controls['zip'].hasError('required')
+                    && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty" class="alert alert-danger">
+                        You must include zip code.
+                      </div>
+                      <div *ngIf="!complexForm.controls['zip'].valid && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty"
+                        class="alert alert-danger">
+                        invalid zip code
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="form-group">
+              <label class="sub-header-text-h2">
+                POSTAL CODE
+              </label>
+              <input class="form-control" id="input_2544" />
+            </div> -->
+              <div class="form-group">
+                <label class="sub-header-text-h2">
+                  COUNTRY
+                </label>
+                <select id="country" class="form-control" formControlName="country" (change)="countryChanged()">
+                  <option *ngFor="let c of countries" [ngValue]="c.countryName">
+                    {{c.countryName}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="sub-header-text-h2">
+                  E-MAIL ADDRESS
+                </label>
+                <input class="form-control" type="text" placeholder="you@example.com" [formControl]="complexForm.controls['email']">
+
+                <div *ngIf="complexForm.controls['email'].hasError('required')
+              && complexForm.controls['email'].touched && complexForm.controls['email'].dirty" class="alert alert-danger">
+                  You must include an email.
+                </div>
+                <div *ngIf="!complexForm.controls['email'].valid && complexForm.controls['email'].touched && complexForm.controls['email'].dirty"
+                  class="alert alert-danger">
+                  invalid Email
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="sub-header-text-h2">
+                  TELEPHONE
+                </label>
+                <input class="form-control" type="text" placeholder="+94712345678" maxlength="16" [formControl]="complexForm.controls['phone']">
+
+                <div *ngIf="complexForm.controls['phone'].hasError('required')
+              && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty" class="alert alert-danger">
+                  You must include a Phone Number.
+                </div>
+                <div *ngIf="!complexForm.controls['phone'].valid && complexForm.controls['phone'].touched && complexForm.controls['phone'].dirty"
+                  class="alert alert-danger">
+                  Enter a valid Phone Number (ex: +94123456789)
+                </div>
+              </div>
+              <br>
+              <!-- <a href="index.html" class="btn btn-d btn-lg button-buy pull-right">Continue</a> -->
+            </form>
+            <div class="col-md-5" *ngIf="newUser && complexForm.valid || oldUser">
+              <h3 class="main-header-font">Shipping Options</h3>
+              <div class="radio main-content-font" *ngFor="let ship of shippingData, let idx = index">
+                <label>
+                  <input id="delivery" #r name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping"
+                    (change)='addShipping(ship,$event,complexForm.value)' [ngModelOptions]="{standalone: true}"> {{ship.optionName}}
+                  <!-- <span>({{ship.shippingOption}})</span> -->
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 
-  <div class="row main-content-font" *ngIf='formType == "pickup"'>
-
+  <!-- <div class="row main-content-font" *ngIf='formType == "pickup"'>
     <h3 class="col-sm-12 mb-4 main-header-font">Pickup Details</h3>
-
-    <form name="test" #myForm="ngForm" (ngSubmit)="signUp(myForm.value)" class="container main-content-font" novalidate>
-      <!-- <p>Is "myForm" valid? {{myForm.valid}}</p> -->
+    <form [formGroup]="pickupForm" (ngSubmit)="submitForm(pickupForm.value)">
       <div class="form-group">
         <label for="name" class="col-2 col-form-label">Name</label>
         <div class="col-10">
-          <input class="form-control" pattern="[a-zA-Z][a-zA-Z ]+" type="text" #name='ngModel'
-            name="name" id="name" placeholder="Arstina" ngModel required>
-          <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-            <div [hidden]="!name.hasError('required')">First Name is required</div>
-            <div [hidden]="!name.hasError('pattern')">Only alphabetsallowed</div>
+          <input class="form-control" name="name" id="name" placeholder="Arstina" [formControl]="pickupForm.controls['name']">
+        </div>
+        <div *ngIf="pickupForm.controls['name'].dirty || pickupForm.controls['name'].touched">
+          <div *ngIf="pickupForm.controls['name'].hasError('required')
+        && pickupForm.controls['name'].touched" class="alert alert-danger">
+            You must include a Name.
+          </div>
+          <div *ngIf="!pickupForm.controls['name'].valid" class="alert alert-danger">
+            Name must only include Alphabetic character
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="pkPhone" class="col-2 col-form-label">Phone Number</label>
+        <label for="pkPhone" class="col-2 col-form-label">Phone</label>
         <div class="col-10">
-          <input class="form-control" #pkPhone='ngModel' type="tel" id="pkPhone" name="pkPhone"
-            pattern="^[().+\d -]{10,15}$" name="phone" placeholder="+94712345678" ngModel required>
-          <div [hidden]="pkPhone.valid || pkPhone.pristine" class="alert alert-danger">
-            <div [hidden]="!pkPhone.hasError('required')">Phone Number is required</div>
-            <div [hidden]="!pkPhone.hasError('pattern')">Invalid Phone number (+94123456789)</div>
+          <input class="form-control" type="text" maxlength="16" placeholder="+94712345678" [formControl]="pickupForm.controls['phone']">
+        </div>
+        <div *ngIf="pickupForm.controls['phone'].dirty || pickupForm.controls['phone'].touched">
+          <div *ngIf="pickupForm.controls['phone'].hasError('required')
+        && pickupForm.controls['phone'].touched" class="alert alert-danger">
+            You must include a Phone Number.
+          </div>
+          <div *ngIf="!pickupForm.controls['phone'].valid" class="alert alert-danger">
+            Enter a valid Phone Number (ex: +94123456789)
           </div>
         </div>
       </div>
 
-      <div class="col-sm-12" *ngIf="myForm.valid">
+      <div class="col-sm-12" *ngIf="pickupForm.valid">
         <h4 class="my-3 main-header-font">Select a Location</h4>
         <div class="row main-content-font">
           <div class="radio" *ngFor="let pick of pickup, let idx = index">
             <label>
-              <input id="pickup" #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx],myForm.value,myForm.valid)'>
+              <input id="pickup" #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx],pickupForm.value)'>
               <b>{{pick.locationName}}</b>
               <div>{{pick.number}}, {{pick.streetAddress}}, {{pick.city}}, {{pick.postalCode}}, {{pick.country}}.</div>
             </label>
@@ -246,68 +383,112 @@
 
       </div>
     </form>
-    <!-- <div class="form-group col-sm-6">
-      <label for="name">Name</label>
-      <input type="text" [(ngModel)]='name' class="form-control" id="name" aria-describedby="name" required>
+  </div> -->
+
+  <div class="row main-content-font" *ngIf='formType == "pickup"'>
+    <div class="col-sm-9">
+      <h2 class="mg-md header-text-h1 spacing-top-text">
+        PICKUP ADDRESS
+      </h2>
+      <form [formGroup]="pickupForm" (ngSubmit)="submitForm(pickupForm.value)" novalidate class="spacing-form animated fadeInUp animDelay04">
+        <div>
+          <div class="row">
+            <div class="col-sm-6">
+              <label class="sub-header-text-h2">
+                NAME
+              </label>
+              <input class="form-control" name="name" id="name" placeholder="Arstina" [formControl]="pickupForm.controls['name']">
+              <div *ngIf="pickupForm.controls['name'].dirty || pickupForm.controls['name'].touched">
+                  <div *ngIf="pickupForm.controls['name'].hasError('required')
+                && pickupForm.controls['name'].touched" class="alert alert-danger">
+                    You must include a Name.
+                  </div>
+                  <div *ngIf="!pickupForm.controls['name'].valid" class="alert alert-danger">
+                    Name must only include Alphabetic character
+                  </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="sub-header-text-h2">
+                TELEPHONE
+              </label>
+              <input class="form-control" type="text" maxlength="16" placeholder="+94712345678" [formControl]="pickupForm.controls['phone']">
+              <div *ngIf="pickupForm.controls['phone'].dirty || pickupForm.controls['phone'].touched">
+                <div *ngIf="pickupForm.controls['phone'].hasError('required')
+                && pickupForm.controls['phone'].touched" class="alert alert-danger">
+                  You must include a Phone Number.
+                </div>
+                <div *ngIf="!pickupForm.controls['phone'].valid" class="alert alert-danger">
+                  Enter a valid Phone Number (ex: +94123456789)
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-12" *ngIf="pickupForm.valid">
+                <h4 class="my-3 main-header-font">Select a Location</h4>
+                <div class="row main-content-font">
+                  <div class="radio" *ngFor="let pick of pickup, let idx = index">
+                    <label>
+                      <input id="pickup" #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx],pickupForm.value)'>
+                      <b>{{pick.locationName}}</b>
+                      <div>{{pick.number}}, {{pick.streetAddress}}, {{pick.city}}, {{pick.postalCode}}, {{pick.country}}.</div>
+                    </label>
+                  </div>
+                </div>
+        
+              </div>
+
+          </div>
+        </div>
+      </form>
     </div>
-
-    <div class="form-group col-sm-6">
-      <label for="pkPhone">Phone</label>
-      <input type="tel" [(ngModel)]='pkPhone' class="form-control" id="pkPhone" aria-describedby="pkPhone" required>
-    </div> -->
-
-
-
   </div>
-
 
   <hr class="featurette-divider">
 
-
-
-  <div *ngIf='isSelected && complexForm.valid'>
+  <div *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
     <h3 class="main-header-font">Your order</h3>
     <table class="table table-responsive">
       <thead class="main-header-font">
         <tr>
-          <th width="89%">Item</th>
-          <th width="100%">Qty</th>
-          <th width="100%">Price</th>
+          <th width="89%" style="text-align: left">Item</th>
+          <th width="100%" style="text-align: center">Qty</th>
+          <th width="100%" style="text-align: right">Price</th>
         </tr>
       </thead>
       <tbody class="main-content-font">
         <tr *ngFor="let itm of cartItems">
-          <td> {{itm.name}}&nbsp;</td>
-          <td> {{itm.qty}}&nbsp;</td>
-          <td>
-            <span>{{sign}}{{(itm.total)*(itm.qty)}}</span>
+          <td style="text-align: left"> {{itm.name}}&nbsp;</td>
+          <td style="text-align: center"> {{itm.qty}}&nbsp;</td>
+          <td style="text-align: right">
+            <span>{{sign}}{{itemPriceCal(itm.total,itm.qty)}}</span>
           </td>
         </tr>
       </tbody>
       <tfoot>
         <tr *ngIf='hideShipping'>
-          <th>Shipping</th>
+          <th style="text-align: left">Shipping</th>
           <td></td>
-          <td>{{sign}}{{chkShippingCost}}</td>
+          <td style="text-align: right">{{sign}}{{chkShippingCost}}</td>
         </tr>
         <tr *ngIf='chkPickupCost > 0'>
-          <th>Pick up cost</th>
+          <th style="text-align: left">Pick up cost</th>
           <td></td>
-          <td>{{sign}}{{chkPickupCost}}</td>
+          <td style="text-align: right">{{sign}}{{chkPickupCost}}</td>
         </tr>
         <tr>
-          <th>Tax({{chkTax}}%)</th>
+          <th style="text-align: left">Tax({{chkTax}}%)</th>
           <td></td>
-          <td>{{sign}}{{taxTotal}}</td>
+          <td style="text-align: right">{{sign}}{{taxTotal}}</td>
         </tr>
         <tr class="order-total">
-          <th class="main-header-font">Total</th>
-          <td>
+          <th style="text-align: left" class="main-header-font">Total</th>
+          <td style="text-align: center">
             <strong>
               <span class="main-header-font">{{totalQuantity}}</span>
             </strong>
           </td>
-          <td>
+          <td style="text-align: right">
             <strong>
               <span class="main-header-font">{{sign}}{{totalPrice}}</span>
             </strong>
@@ -316,14 +497,28 @@
       </tfoot>
     </table>
 
+    <br>
+
+    <div class="form-check">
+      <label>
+        <input type="checkbox" (change)="checkNote(note)" [(ngModel)]="note" name="check">
+        <span class="label-text"> Add special Note(optional)</span>
+      </label>
+      <div class="form-group" *ngIf="note">
+        <textarea type="text" class="form-control" value="noteDes" [(ngModel)]="noteDes"></textarea>
+      </div>
+    </div>
+
   </div>
+
+
 
 
   <br>
   <div *ngIf="overWeight">Over weight. Cannot ship</div>
   <div *ngIf="underWeight">Under weight. Cannot ship</div>
 
-  <div class="custom-controls-stacked main-content-font" *ngIf="isSelected && !(overWeight || underWeight) && complexForm.valid">
+  <div class="custom-controls-stacked main-content-font" *ngIf="isSelected && !(overWeight || underWeight) && complexForm.valid || isSelected && !(overWeight || underWeight) && pickupForm.valid">
     <h3 class="main-header-font">Select Payment Type</h3>
     <div *ngIf="deliveryShow" class="mt-3">
 
@@ -345,7 +540,7 @@
     <div *ngIf="paypalShow" class="mt-3">
       <div class="radio">
         <label>
-          <input type="radio" name="paypalShow" value="paypal" (click)="buyWithPayPal()" [(ngModel)]="paymentType" (ngModelChange)="ps=true"
+          <input type="radio" name="paypalShow" value="paypal" (click)="buyWithPayPal(noteDes)" [(ngModel)]="paymentType" (ngModelChange)="ps=true"
             class="custom-control-input"> PayPal
         </label>
       </div>
@@ -379,7 +574,7 @@
       <div class="col-sm-12 margin-left">
         <h5 *ngIf="paymentType == 'cashOnDelivery'">Confirm payment by cash on delivery</h5>
         <h5 *ngIf="paymentType == 'cashOnPickup'">Confirm payment by cash on pickup</h5>
-        <button class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="confirmCashPayment()">Confirm</button>
+        <button class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="confirmCashPayment(noteDes)">Confirm</button>
       </div>
       <div class="col-sm-12" style="margin: 10px 0">
         <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
@@ -394,7 +589,7 @@
     </form>
 
 
-    <form #myForm="ngForm" (ngSubmit)="submit(myForm.value,paymentType)" novalidate class="row margin-vertical" *ngIf="paymentType == 'creditcard' || paymentType == 'authorizeNet'">
+    <form #myForm="ngForm" (ngSubmit)="submit(myForm.value,paymentType,noteDes)" novalidate class="row margin-vertical" *ngIf="paymentType == 'creditcard' || paymentType == 'authorizeNet'">
 
       <!-- <p>Is "myForm" valid? {{myForm.valid}}</p> -->
 
@@ -413,7 +608,7 @@
 
       <label class="form-group col-sm-6">
         <label>Card Number</label>
-        <input class="form-control" minlength="15" maxlength="19" placeholder="Card Number*" pattern="[0-9]+" type="text" name="cardNumber"
+        <input class="form-control" minlength="15" maxlength="19" placeholder="Card Number*" pattern="[0-9]+" type="text" name="number"
           #number='ngModel' cc-type="card.cardType" ngModel required>
         <div [hidden]="number.valid || number.pristine" class="alert alert-danger">
           <div [hidden]="!number.hasError('required')">Credit card required</div>
@@ -437,13 +632,13 @@
         <div class="row form-group col-sm-12">
           <div class="form-group col-sm-6">
             <label>Month :</label>
-            <select name="month" class="form-control" id="selectedMonth" ngModel required>
+            <select name="exp_month" class="form-control" id="selectedMonth" ngModel required>
               <option *ngFor="let m of months" [ngValue]="m">{{m}} </option>
             </select>
           </div>
           <div class="form-group col-sm-6">
             <label>Year :</label>
-            <select name="year" class="form-control" id="selectedYear" ngModel required>
+            <select name="exp_year" class="form-control" id="selectedYear" ngModel required>
               <option *ngFor="let y of years" [ngValue]="y">{{y}} </option>
             </select>
           </div>
@@ -451,8 +646,20 @@
       </div>
 
       <div class="form-group col-sm-12">
-        <button type="submit" class="btn  main-button btn-lg" [disabled]='myForm.valid == false'>Make Payment</button>
+        <button *ngIf="!showSpinner" type="submit" class="btn  main-button btn-lg" [disabled]='myForm.valid == false'>Make Payment</button>
+        <div *ngIf="showSpinner" class="loader"></div>
+        <p *ngIf="showSpinner">Processing...</p>
+
         <!-- <button *ngIf="paymentType == 'authorizeNet'" type="submit" (click)='authorizeCreditCardMethod(card)' class="btn btn-primary btn-lg">MAKE PAYMENT</button> -->
+        <div class="col-sm-12" style="margin: 10px 0">
+          <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+        </div>
+        <div class="col-sm-12" style="margin: 10px 0">
+          <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+        </div>
+        <div class="col-sm-12" style="margin: 10px 0">
+          <ngb-alert *ngIf="nullMessage" type="info" (close)="nullMessage = null">{{ nullMessage }}</ngb-alert>
+        </div>
       </div>
     </form>
 
@@ -466,4 +673,4 @@
 
 <!--<app-newsletter></app-newsletter>-->
 
-<hr class="featurette-divider">
+<!-- <hr class="featurette-divider"> -->

@@ -14,7 +14,6 @@ import { TermsComponent } from './terms/terms.component';
 import { ContactComponent } from './contact/contact.component';
 import { AgmCoreModule } from '@agm/core';
 import { ShopComponent } from './shop/shop.component';
-import { NouisliderModule } from 'ng2-nouislider';
 import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
@@ -30,7 +29,6 @@ import { PaypalPaymentComponent } from './paypal-payment/paypal-payment.componen
     NgbModule,
     OwlModule,
     AgmCoreModule,
-    NouisliderModule,
     FormsModule,
     ReactiveFormsModule
 

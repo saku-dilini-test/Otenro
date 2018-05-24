@@ -16,7 +16,7 @@ export class ContactComponent {
   private googleMap;
   lat; lng;
   finish: boolean;
-  CONTACNTINFO=[];
+  CONTACNTINFO = [];
   constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {
 
     this.appdataService.getContactUs().subscribe(data => {
@@ -26,7 +26,7 @@ export class ContactComponent {
       this.lng = data.coords.longitude;
 
     }), ((err) => {
-      alert('warning' + " Unable to get contact us info");
+      alert('warning!' + " Unable to get contact us info\n Please check your connection.");
     });
 
     this.title.changeTitle("Contact Us");
