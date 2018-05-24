@@ -370,7 +370,7 @@ module.exports = {
 
 
                           fs.copy(appBasePath, tempAppDirPath + app.id, function(err) {
-                              if (err) res.send.error(err);
+                              if (err) res.send(err);
 
                               console.log("coppied appsBase");
 
