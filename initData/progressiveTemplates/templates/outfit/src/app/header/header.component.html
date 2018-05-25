@@ -1,19 +1,18 @@
 <div class="bloc main-navigation d-bloc" id="bloc-0">
   <div class="container bloc-sm">
     <nav class="navbar row">
-      <div class="navbar-header">
-        <a class="navbar-brand">
-          <span class="special-tag-for-editing-text-with-html"></span>
-          <img src="./assets/images/logo.png?dummy={{dummy}}" alt="logo" />
-        </a>
-        <button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse navbar-1">
+         <div class="navbar-header">
+          <a class="navbar-brand hidden-xs">
+            <span class="special-tag-for-editing-text-with-html"></span>
+            <img src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" />
+          </a>
+          <button aria-label="menu" id="nav-toggle" type="button" class="pull-left ui-navbar-toggle navbar-toggle main-navigation" data-toggle="collapse" data-target=".navbar-2">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="mobile-title visible-xs mobileTitle" >{{title}}</div>
+          <div class="mobile-cart visible-xs" ><i class="fa fa-shopping-cart"  (click)="navigate('cart','Shopping Cart');manualToggle()"></i> <span class="badge main-navigation"  (click)="navigate('cart','Shopping Cart');manualToggle()">{{cartNo}}</span></div>
+        </div>
+      <div class="collapse navbar-collapse navbar-1 hidden-xs">
         <ul class="site-navigation nav navbar-nav">
           <li>
             <a (click)="navigate('')">Home
@@ -71,6 +70,65 @@
               <span class="ion ion-android-cart icon-md"></span>
             </a>
           </li>
+        </ul>
+      </div>
+      <div class="collapse navbar-collapse navbar-2">
+
+      <ul class="site-navigation nav navbar-nav  hidden-lg hidden-md hidden-sm">
+          <li>
+            <a  data-toggle="collapse" data-target=".navbar-collapse"  (click)="navigate('','Home')">Home
+
+            </a>
+          </li>
+           <li>
+            <a  data-toggle="collapse" data-target=".navbar-collapse"  (click)="navigate('contact', 'Contact Us')">Contact Us
+            </a>
+          </li>
+           <li>
+            <div class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu  main-navigation"  role="menu">
+                <li>
+                  <a  data-toggle="collapse" data-target=".navbar-collapse"  class="nav-link" (click)="navigate('aboutus','About Us')">About Us</a>
+                </li>
+                 <li>
+                  <a  data-toggle="collapse" data-target=".navbar-collapse"  class="nav-link" (click)="navigate('policies', 'Policies')">Policies</a>
+                </li>
+                <li>
+                  <a  data-toggle="collapse" data-target=".navbar-collapse"  class="nav-link" (click)="navigate('terms', 'Terms & Conditions')">Terms & Conditions</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li  *ngIf="loginStatus">
+            <div class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu main-navigation"  role="menu">
+                <li>
+                  <a  data-toggle="collapse" data-target=".navbar-collapse"  (click)="navigate('order-history','Order History')">Order History</a>
+                </li>
+                 <li>
+                  <a  data-toggle="collapse" data-target=".navbar-collapse"  (click)="navigate('appUser','My Account')">My Account</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a  data-toggle="collapse" data-target=".navbar-collapse"  *ngIf="loginStatus" (click)="logout()">
+             Sign Out
+            </a>
+          </li>
+          <li>
+            <a  data-toggle="collapse" data-target=".navbar-collapse"  *ngIf="!loginStatus" (click)="navigate('login/home')">
+              Sign In
+            </a>
+          </li>
+           <li class="logo">
+              <a class="navbar-brand text-center" (click)="navigate('','Home')"><img width="100%" src="{{imageUrl}}/logo.png&dummy={{dummy}}"></a>
+            </li>
         </ul>
       </div>
     </nav>

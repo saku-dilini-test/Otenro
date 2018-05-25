@@ -5,6 +5,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import * as data from './../madeEasy.json';
 import { fadeInAnimation } from '../animations/fade-in.animation';
 import { TitleService } from "../services/title.service";
+import { CategoriesService } from '../services/categories/categories.service'
+import { SERVER_URL } from '../constantsService';
 
 @Component({
   selector: 'app-header',
@@ -21,13 +23,25 @@ export class HeaderComponent implements OnInit {
   public title: string;
   public loginStatus;
   private dummy: any;
-  constructor(private localStorageService: LocalStorageService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
+  private categories:any
+  private catName: any;
+  private imageUrl:any;
+  constructor(private localStorageService: LocalStorageService,private categoryService: CategoriesService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Home';
     this.dummy = new Date().getTime();
+
+    this.categoryService.getCategories().subscribe(data => {
+        this.categories =data;
+      }, err => {
+        console.log(err);
+      });
   }
 
   ngOnInit() {
+   this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
+        + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=";
+
     this.titleServ.currentTitle.subscribe(message => this.title = message);
 
     $(".navbar-2").on('show.bs.collapse', function () {
@@ -67,11 +81,15 @@ export class HeaderComponent implements OnInit {
   }
 
   manualToggle() {
-
     this.titleServ.changeTitle("Shopping Cart");
     $('.navbar-2').removeClass('in');
     $('.mobileTitle').addClass('visible-xs');
     $('.mobileTitle').removeClass('hidden');
   }
 
+ navigateProd(val: String, item: any, catName: String) {
+    this.catName = catName;
+    this.dataService.data = item;
+    this.router.navigate([val, this.catName]);
+  }
 }
