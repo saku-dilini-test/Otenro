@@ -20,11 +20,11 @@ export class HeaderComponent implements OnInit {
   private cartNo: number;
   public title: string;
   public loginStatus;
-  private dummy: date;
+  private dummy: any;
   constructor(private localStorageService: LocalStorageService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Home';
-    this.dummy = new Date().toISOString();
+    this.dummy = new Date().getTime();
   }
 
   ngOnInit() {
