@@ -22,8 +22,11 @@ export class ContactComponent {
     this.appdataService.getContactUs().subscribe(data => {
 
       this.CONTACNTINFO.push(data);
-      this.lat = data.coords.latitude;
-      this.lng = data.coords.longitude;
+      if(data.coords){
+        this.lat = data.coords.latitude;
+        this.lng = data.coords.longitude;
+      }
+
 
     }), ((err) => {
       alert('warning!' + " Unable to get contact us info\n Please check your connection.");

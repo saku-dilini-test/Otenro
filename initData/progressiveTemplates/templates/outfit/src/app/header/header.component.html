@@ -2,9 +2,9 @@
   <div class="container bloc-sm">
     <nav class="navbar row">
       <div class="navbar-header">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand">
           <span class="special-tag-for-editing-text-with-html"></span>
-          <img src="./assets/images/hf_logo__.png" alt="logo" />
+          <img src="./assets/images/logo.png?dummy={{dummy}}" alt="logo" />
         </a>
         <button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
           <span class="sr-only">Toggle navigation</span>
@@ -22,7 +22,7 @@
           </li>
            <li>
             <div class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Abouts
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About
               <span class="caret"></span></a>
               <ul class="dropdown-menu"  role="menu">
                 <li>
@@ -47,48 +47,6 @@
           <li *ngIf="loginStatus">
             <a (click)="navigate('appUser','My Account')">My Account
             </a>
-          </li>
-          <li>
-            <div class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Category
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li>
-                  <div class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Womens
-                      <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li>
-                        <a href="index.html">Office Attire</a>
-                      </li>
-                      <li>
-                        <a href="index.html">Summer Collection</a>
-                      </li>
-                      <li>
-                        <a href="cut-sleves.html">Short sleeves</a>
-                      </li>
-                      <li>
-                        <a href="index.html">Formal Wear</a>
-                      </li>
-                      <li>
-                        <a href="index.html">Shoes</a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li>
-                  <a href="index.html">Mens</a>
-                </li>
-                <li>
-                  <a href="index.html">Kids</a>
-                </li>
-                <li>
-                  <a href="index.html">Unisex</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li>
             <a *ngIf="loginStatus" (click)="logout()">

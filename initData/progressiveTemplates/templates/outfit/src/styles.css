@@ -611,11 +611,7 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 .divider{
 	padding-top:0px;
 }
-.header-image{
-	background-image:url("./assets/images/cum-sa-te-imbraci-elegant.jpg");
-	background-position:center top;
-	background-repeat:no-repeat;
-}
+
 .hero-block-text-shadow{
 	text-shadow:0px 3px 4px rgba(0,0,0,0.5);
 }
@@ -1054,7 +1050,7 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
         padding-right: 0;
     }
     .bloc-xxl,.bloc-xl,.bloc-lg{
-        padding: 40px 0;
+        padding: 0px 0 40px 0;
     }
     .bloc-sm,.bloc-md{
         padding-left: 0; 
@@ -1154,16 +1150,11 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 .bloc-mob-center-text{
 	text-align:center;
 }
-.header-image-mobile{
-	background-image:url("./assets/images/cum-sa-te-imbraci-elegant.jpg");
-	background-position:right center;
-}
+
 .hero-block-text-shadow{
 	text-shadow:0px 2px 2px #000000;
 }
-.header-image{
-	background-position:right center;
-}
+
 .img{
 	background-image:url("img/3.jpg");
 	background-size:100% auto;

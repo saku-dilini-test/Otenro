@@ -1,0 +1,14 @@
+@media (max-width: 767px) {
+   .carousel{
+    height: 35vh;
+  }
+
+  .carousel img{
+    height: 35vh;
+    object-fit: cover;
+  }
+}
+
+
+
+
