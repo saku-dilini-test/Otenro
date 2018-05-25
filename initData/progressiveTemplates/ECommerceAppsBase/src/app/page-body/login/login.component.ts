@@ -6,6 +6,8 @@ import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { TitleService } from '../../services/title.service';
+import { debounceTime } from 'rxjs/operator/debounceTime';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +16,12 @@ import { TitleService } from '../../services/title.service';
 })
 export class LoginComponent implements OnInit {
 
+  private _success = new Subject<string>();
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
   private params = [];
   private loginclicked;
+  private errorMessage;
 
   name; pass; gate: boolean; navigate;
   ifInvalidUserPassword:boolean;
@@ -51,7 +55,13 @@ export class LoginComponent implements OnInit {
     this.http.post(SERVER_URL + "/templatesAuth/authenticateForApp", data)
       .subscribe((res) => {
 
-        requestParams = {
+        if (res.message === 'email not verified') {
+             this._success.subscribe((message) => this.errorMessage = message);
+            debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+            this._success.next('Email is not verified');
+            setTimeout(() => {}, 3100);
+        } else {
+                  requestParams = {
           "token": res.token,
           "email": data.email,
           "name": res.user.name,
@@ -75,6 +85,7 @@ export class LoginComponent implements OnInit {
           this.route.navigate(['home']);
         } else {
           this.route.navigate(['cart']);
+        }
         }
       },
       function (err) {

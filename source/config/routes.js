@@ -343,6 +343,7 @@ module.exports.routes = {
     'POST /templatesAuth/register': 'template/TemplateAuthController.register',
     'POST /templatesAuth/facebook': 'template/TemplateAuthController.facebookAuth',
     'POST /templatesAuth/google': 'template/TemplateAuthController.googleAuth',
+    'POST /templatesAuth/verifyAppUserEmail': 'template/TemplateAuthController.verifyAppUserEmail',
 
 
 

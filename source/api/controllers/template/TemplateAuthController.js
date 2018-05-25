@@ -9,7 +9,10 @@ var JWT = require('machinepack-jwt'),
     GoogleAPIsOAuth2v2 = require('machinepack-googleapisoauth2v2'),
     Facebook = require('machinepack-facebook'),
     request = require('request'),
-    config = require('../../services/config');
+    config = require('../../services/config'),
+    emailService = require('../../services/emailService'),
+    Cryptr = require('cryptr'),
+    cryptr = new Cryptr('OtenroEncryptSecretKey');
 
 module.exports = {
 
@@ -21,42 +24,46 @@ module.exports = {
         }, function foundUser(err, user) {
             if (err) return res.negotiate(err);
             if (!user) return res.notFound();
+            if (user.isEmailVerified === true) {
 
-            Passwords.checkPassword({
-                passwordAttempt: req.body.password,
-                encryptedPassword: user.password
-            }).exec({
+                Passwords.checkPassword({
+                    passwordAttempt: req.body.password,
+                    encryptedPassword: user.password
+                }).exec({
 
-                error: function (err){
-                    sails.log.info(err);
-                    return res.negotiate(err);
-                },
+                    error: function (err){
+                        sails.log.info(err);
+                        return res.negotiate(err);
+                    },
 
-                incorrect: function (){
-                    return res.notFound();
-                },
+                    incorrect: function (){
+                        return res.notFound();
+                    },
 
-                success: function (){
+                    success: function (){
 
-                    JWT.encode({
-                        secret: config.CLIENT_SECRET,
-                        payload: {
-                            id :  user.id,
-                            email:  user.email
-                        },
-                        algorithm: 'HS256'
-                    }).exec({
-                        // An unexpected error occurred.
-                        error: function (err){
-                            return err;
-                        },
-                        // OK.
-                        success: function (result){
-                            res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,streetName : user.streetName,city : user.city, country : user.country, phone: user.phone, name: user.firstName,lname:user.lastName, zip: user.zip },token : result });
-                        }
-                    });
-                }
-            });
+                        JWT.encode({
+                            secret: config.CLIENT_SECRET,
+                            payload: {
+                                id :  user.id,
+                                email:  user.email
+                            },
+                            algorithm: 'HS256'
+                        }).exec({
+                            // An unexpected error occurred.
+                            error: function (err){
+                                return err;
+                            },
+                            // OK.
+                            success: function (result){
+                                res.status(200).json({user : { appId: user.appId, email : user.email , sub : user.id, streetNumber : user.streetNumber,streetName : user.streetName,city : user.city, country : user.country, phone: user.phone, name: user.firstName,lname:user.lastName, zip: user.zip },token : result });
+                            }
+                        });
+                    }
+                });
+            } else {
+                return res.json({ message : 'email not verified'});
+            }
         });
     },
 
@@ -107,7 +114,6 @@ module.exports = {
     },
 
     register: function(req, res) {
-        sails.log.info(req.body);
         /*AppUser.create(req.body).exec(function(err, user) {
             if (err) {
                 return res.negotiate(err);
@@ -140,20 +146,26 @@ module.exports = {
                     return res.negotiate(err);
                 }
                 if (user) {
-                    JWT.encode({
-                        secret: config.CLIENT_SECRET,
-                        payload: {
-                            id :  user.id,
-                            email:  user.email
-                        },
-                        algorithm: 'HS256'
-                    }).exec({
-                        error: function (err){
-                            return err;
-                        },
-                        success: function (result){
-                            sails.log.info(result);
-                            res.status(200).json({user : { email : user.email , sub : user.id  },token : result });
+                    // Encrypt the email
+                    encryptedEmail = cryptr.encrypt(user.email);
+                    url = req.body.url;
+                    var data = {
+                        email: user.email,
+                        title: 'Click the link below to Verify your email!',
+                        link: url+ '?emailID=' + encryptedEmail
+                    };
+                    emailService.sendAppUserVerificationEmail(data, function (callback) {
+                        if (callback.message === 'success') {
+                            AppUser.update({ id: user.id}, { regToken: encryptedEmail })
+                                .exec(function (err, updatedUser) {
+                                if (err) return res.send({ message: 'error' });
+                                else if (updatedUser.length === 1)  return res.send({ message: 'success' });
+                                else return res.send({ message: 'failed' });
+                            });
+                        } else if (callback.message === 'error') {
+                            return res.send({ message: 'error' });
+                        } else if (callback.message === 'failed') {
+                            return res.send({ message: 'failed' });
                         }
                     });
                 }
@@ -426,6 +438,48 @@ module.exports = {
                 });
             });
 
+    },
+
+    /**
+     * Responsible for verifying app user email
+     * @param req
+     * @param res
+     **/
+    verifyAppUserEmail: function (req, res) {
+        'use strict';
+        var appId = req.body.appId,
+            emailID = req.body.emailID,
+            decryptedEmail = cryptr.decrypt(emailID),
+            criteria = { email: decryptedEmail, appId: appId };
+        AppUser.findOne(criteria)
+            .exec(function (err, user) {
+            if (err) return res.json({ message: 'error'});
+            else if (user) {
+                if ( user.regToken === emailID ) {
+                    AppUser.update(criteria, { isEmailVerified: true }).exec(function (err) {
+                        if (err) sails.log.info(err);
+                    });
+                    JWT.encode({
+                        secret: config.CLIENT_SECRET,
+                        payload: {
+                            id :  user.id,
+                            email:  user.email
+                        },
+                        algorithm: 'HS256'
+                    }).exec({
+                        error: function (err){
+                            return err;
+                        },
+                        success: function (result){
+                            return res.status(200).json({ message: 'success', user : { email : user.email , sub : user.id  },token : result, data: user });
+                        }
+                    });
+                } else {
+                    return res.json({ message: 'token mismatch'});
+                }
+            }
+            else return res.json({ message: 'failed'});
+        });
     }
 };
 

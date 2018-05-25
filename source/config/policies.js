@@ -104,6 +104,7 @@ module.exports.policies = {
     //'*': ['jwtAuth'],
     authenticate : true,
     register: true,
+    verifyAppUserEmail: true,
     facebookAuth : true,
     googleAuth: true
   },

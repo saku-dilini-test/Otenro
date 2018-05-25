@@ -7,6 +7,8 @@ import * as data from '../../madeEasy.json';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { FormGroup, FormControl, FormArray, NgForm } from '@angular/forms';
 import { TitleService } from '../../services/title.service';
+import { debounceTime } from 'rxjs/operator/debounceTime';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +17,7 @@ import { TitleService } from '../../services/title.service';
 })
 export class RegisterComponent implements OnInit {
   // data = {};
+  private _success = new Subject<string>();
   passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
@@ -34,6 +37,7 @@ export class RegisterComponent implements OnInit {
   private phone;
   private myForm: FormGroup;
   private isEmailDuplicate;
+  private successMessage;
 
   constructor(private localStorageService: LocalStorageService, private http: HttpClient,private dataService : PagebodyServiceModule, private router: ActivatedRoute, private route: Router,
               private title: TitleService) {
@@ -85,6 +89,8 @@ export class RegisterComponent implements OnInit {
     this.streetName = myForm.streetName;
     this.streetNumber = myForm.streetNumber;
     this.zip = myForm.zip;
+    // Redirect url from the user email to app
+    let url = 'http://localhost/meServer/temp/' + this.userId + '/progressiveTemplates/' + this.appId + '/src';
 
 
     var data = {
@@ -98,38 +104,24 @@ export class RegisterComponent implements OnInit {
         zip: this.zip,
         country: this.selectedCountry,
         phone: this.phone,
-        appId: this.appId
+        appId: this.appId,
+        url: url
     };
 
     this.http.post(SERVER_URL+"/templatesAuth/register",data)
         .subscribe((res) =>{
-
-                var requestParams = {
-                    "token": res.token,
-                    "email": data.email,
-                    "name": data.firstName,
-                    "lname": data.lastName,
-                    "phone": data.phone,
-                    "streetNumber": data.streetNumber,
-                    "streetName": data.streetName,
-                    "country": data.country,
-                    "city": data.city,
-                    "zip": data.zip,
-                    "type": 'internal',
-                    "appId":data.appId,
-                    "registeredUser": res.user.sub
-                };
-
-                this.localStorageService.set('appLocalStorageUser'+this.appId,(requestParams));
-                this.dataService.appUserId = requestParams.registeredUser;
-                this.dataService.isUserLoggedIn.check = true;
-                this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
-
+          if (res.message === 'success') {
+            this._success.subscribe((message) => this.successMessage = message);
+            debounceTime.call(this._success, 4000).subscribe(() => this.successMessage = null);
+            this._success.next('Please check your email to verify your email address.');
+            setTimeout(() => {
                 if(this.navigate == 'home'){
                     this.route.navigate(['home']);
                 }else{
                   this.route.navigate(['cart']);
                 }
+            }, 3100);
+          }
             },err =>{
 
               if(err.status == 409){

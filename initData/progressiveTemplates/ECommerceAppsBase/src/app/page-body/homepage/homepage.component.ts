@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SERVER_URL } from '../../constantsService';
 import * as data from '../../madeEasy.json';
 import { fadeInAnimation } from '../../animations/fade-in.animation';
@@ -9,6 +9,7 @@ import { ProductsService } from '../../services/products/products.service';
 import { SliderService } from '../../services/slider/slider.service';
 import { TitleService } from '../../services/title.service';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-homepage',
@@ -35,8 +36,9 @@ export class HomepageComponent implements OnInit {
   private catName;
   private isSliderDataAvailable: boolean = false;
   private isRandomProducts;
-  private categories:any
-  constructor(private localStorageService: LocalStorageService, private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
+  private categories:any;
+  private verificationEmail;
+  constructor(private localStorageService: LocalStorageService, private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService,  private aRouter: ActivatedRoute, private http: HttpClient) {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
       if (data.length > 0) {
@@ -74,6 +76,39 @@ export class HomepageComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.verificationEmail = this.aRouter.snapshot.queryParams['emailID'];
+
+    if (this.verificationEmail !== undefined) {
+      const data = {
+        appId: this.appId,
+        emailID: this.verificationEmail
+      };
+      this.http.post(SERVER_URL+"/templatesAuth/verifyAppUserEmail",data)
+          .subscribe((res) => {
+            if (res.message === 'success') {
+              var requestParams = {
+                    "token": res.token,
+                    "email": res.data.email,
+                    "name": res.data.firstName,
+                    "lname": res.data.lastName,
+                    "phone": res.data.phone,
+                    "streetNumber": res.data.streetNumber,
+                    "streetName": res.data.streetName,
+                    "country": res.data.country,
+                    "city": res.data.city,
+                    "zip": res.data.zip,
+                    "type": 'internal',
+                    "appId":res.data.appId,
+                    "registeredUser": res.user.sub
+                };
+                this.localStorageService.set('appLocalStorageUser'+this.appId,(requestParams));
+                this.dataService.appUserId = requestParams.registeredUser;
+                this.dataService.isUserLoggedIn.check = true;
+                this.dataService.parentobj.userLog = this.dataService.isUserLoggedIn.check;
+            }
+          });
+    }
 
     let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
 
