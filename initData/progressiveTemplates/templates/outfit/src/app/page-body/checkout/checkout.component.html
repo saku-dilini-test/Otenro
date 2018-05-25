@@ -137,14 +137,14 @@
 
   <div *ngIf='formType == "delivery"'>
     <div class="bloc b-parallax bgc-white" id="bloc-14">
-      <div class="container bloc-lg">
+      <div class="container bloc-lg padding-vertical">
         <div class="row bgc-white padding mobile-margin">
           <div class="col-sm-3">
             <a class="a-btn a-block links link-spacing-top color animated fadeInUp hidden-xs">BILLING ADDRESS</a>
             <a class="a-btn a-block links color animated fadeInUp animDelay02 hidden-xs">REVIEW AND PAYMENT</a>
           </div>
           <div class="col-sm-9">
-            <h2 class="mg-md header-text-h1 spacing-top-text">
+            <h2 class="mg-md header-text-h1 spacing-top-text main-header-font">
               SHIPPING ADDRESS
             </h2>
             <div>
@@ -202,6 +202,31 @@
 
                     <div class="form-group">
                       <label class="sub-header-text-h2">
+                        HOUSE/APARTMENT NUMBER
+                      </label>
+                      <input class="form-control" type="text" placeholder="#244 A" [formControl]="complexForm.controls['streetNo']">
+
+                      <div *ngIf="complexForm.controls['streetNo'].hasError('required')
+                    && complexForm.controls['streetNo'].touched && complexForm.controls['streetNo'].dirty" class="alert alert-danger">
+                        You must include Street Number.
+                      </div>
+                    </div>
+                     <div class="form-group">
+                      <label class="sub-header-text-h2">
+                        CITY
+                      </label>
+                      <input class="form-control" type="text" placeholder="Your City" [formControl]="complexForm.controls['city']">
+
+                      <div *ngIf="complexForm.controls['city'].hasError('required')
+                    && complexForm.controls['city'].touched && complexForm.controls['city'].dirty" class="alert alert-danger">
+                        You must include a City.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+
+                    <div class="form-group">
+                      <label class="sub-header-text-h2">
                         LAST NAME
                       </label>
                       <input class="form-control" type="text" placeholder="kale" [formControl]="complexForm.controls['lName']">
@@ -217,19 +242,6 @@
 
                     <div class="form-group">
                       <label class="sub-header-text-h2">
-                        HOUSE/APARTMENT NUMBER
-                      </label>
-                      <input class="form-control" type="text" placeholder="#244 A" [formControl]="complexForm.controls['streetNo']">
-
-                      <div *ngIf="complexForm.controls['streetNo'].hasError('required')
-                    && complexForm.controls['streetNo'].touched && complexForm.controls['streetNo'].dirty" class="alert alert-danger">
-                        You must include Street Number.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label class="sub-header-text-h2">
                         STREET NAME
                       </label>
                       <input class="form-control" type="text" placeholder="Your Road" [formControl]="complexForm.controls['streetName']">
@@ -239,17 +251,7 @@
                         You must include Street Name.
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="sub-header-text-h2">
-                        CITY
-                      </label>
-                      <input class="form-control" type="text" placeholder="Your City" [formControl]="complexForm.controls['city']">
 
-                      <div *ngIf="complexForm.controls['city'].hasError('required')
-                    && complexForm.controls['city'].touched && complexForm.controls['city'].dirty" class="alert alert-danger">
-                        You must include a City.
-                      </div>
-                    </div>
                     <div class="form-group">
                       <label class="sub-header-text-h2">
                         POSTAL CODE/ZIP
@@ -387,7 +389,7 @@
 
   <div class="row main-content-font" *ngIf='formType == "pickup"'>
     <div class="col-sm-9">
-      <h2 class="mg-md header-text-h1 spacing-top-text">
+      <h2 class="mg-md header-text-h1 spacing-top-text  main-header-font">
         PICKUP ADDRESS
       </h2>
       <form [formGroup]="pickupForm" (ngSubmit)="submitForm(pickupForm.value)" novalidate class="spacing-form animated fadeInUp animDelay04">
@@ -446,7 +448,7 @@
 
   <hr class="featurette-divider">
 
-  <div *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
+  <div class="padding-vertical" *ngIf='isSelected && complexForm.valid && sign && totalPrice || isSelected && pickupForm.valid && sign && totalPrice'>
     <h3 class="main-header-font">Your order</h3>
     <table class="table table-responsive">
       <thead class="main-header-font">
@@ -511,14 +513,10 @@
 
   </div>
 
-
-
-
-  <br>
   <div *ngIf="overWeight">Over weight. Cannot ship</div>
   <div *ngIf="underWeight">Under weight. Cannot ship</div>
 
-  <div class="custom-controls-stacked main-content-font" *ngIf="isSelected && !(overWeight || underWeight) && complexForm.valid || isSelected && !(overWeight || underWeight) && pickupForm.valid">
+  <div class="custom-controls-stacked main-content-font padding-vertical" *ngIf="isSelected && !(overWeight || underWeight) && complexForm.valid || isSelected && !(overWeight || underWeight) && pickupForm.valid">
     <h3 class="main-header-font">Select Payment Type</h3>
     <div *ngIf="deliveryShow" class="mt-3">
 

@@ -12,10 +12,10 @@
                 <!-- <img src="img/lazyload-ph.png" data-src="img/1-5.png" /> -->
               </div>
               <div class="col-xs-6">
-                <h4 class="mg-md header-text-h2 text-left">
+                <h4 class="mg-md header-text-h2 text-left main-header-font">
                   {{item.name}}
                 </h4>
-                <p *ngFor="let v of item.variant" class="sub-header-text-h2 text-justify ">
+                <p *ngFor="let v of item.variant" class="sub-header-text-h2 text-justify main-content-font">
                   {{v.name}} : {{v.vType}}
                 </p>
                 <input class="sub-header-text-h2 text-justify " name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');"
@@ -40,10 +40,10 @@
                     Enter a quantity of {{cartItems[i].totalQty}}.
                   </span>
                 </div><br>
-                <p class="sub-header-text-h2 text-justify ">
+                <p class="sub-header-text-h2 text-justify  main-content-font">
                   Total Price - {{currency}} {{itemPriceCal(item.total,item.qty)}}
                 </p>
-                <a (click)="removeItem(index)" class="btn btn-d btn-lg button-buy pull-left button-mobile spacing-mobile-button">Remove</a>
+                <a (click)="removeItem(index)" class="btn btn-d btn-lg main-button pull-left button-mobile spacing-mobile-button">Remove</a>
 
               </div>
             </div>
@@ -54,7 +54,7 @@
       <div class="col-sm-7">
         <div>
 
-					</div> -->
+					</div>
           <h2 class="mg-md  header-text-h2">
             <strong>Total Payable Amount</strong>
             <br>
@@ -63,7 +63,7 @@
           <div class="row row-no-gutters pricing-table lines">
             <div class="col-xs-6">
               <p class="product-text text-siize ">
-                TOtal amount
+                Total amount
               </p>
             </div>
             <div class="col-xs-6">
@@ -76,10 +76,10 @@
           </div>
           <div class="row spacing">
             <div class="col-sm-6 ">
-              <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg button-buy pull-right" (click)="delivery(cartItems)">Delivery</a>
+              <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg main-button pull-right" (click)="delivery(cartItems)">Delivery</a>
             </div>
             <div class="col-sm-3 ">
-              <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg button-buy pull-right" (click)='pickupDetails(cartItems)'>Pickup</a>
+              <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg main-button pull-right" (click)='pickupDetails(cartItems)'>Pickup</a>
             </div>
           </div>
         </div>

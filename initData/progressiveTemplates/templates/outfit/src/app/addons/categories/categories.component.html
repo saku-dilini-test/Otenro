@@ -17,7 +17,7 @@
 		<div class="row voffset animated fadeInUp">
 			<div class="col-sm-12">
 				<h1 class="mg-md text-center header-text-h1">
-					<a class="header-text-h1" >PRODUCTS</a><br>
+					<a class="header-text-h1 main-header-font" >PRODUCTS</a><br>
 				</h1>
 
 				<div style="display: block; background-color: rgb(10, 10, 20); height: 1px; width: 50%; margin: auto;"></div>
@@ -29,14 +29,14 @@
 			<div class="col-xs-6 col-sm-3" *ngFor="let prod of node;">
 				<div>
 					<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
-					<h2 class="mg-md header-text-h2 text-center">
+					<h2 class="mg-md header-text-h2 text-center main-content-font">
 						{{prod.name}}
 					</h2>
-					<h2 class="mg-md sub-header-text-h2 text-center">
+					<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
 						<strong>₨</strong> {{prod.variants[0].price}}
 					</h2>
 					<div class="text-center">
-						<a class="btn btn-d btn-lg button-buy"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
+						<a class="btn btn-d btn-lg main-button"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
 					</div>
 				</div>
 			</div>
@@ -46,14 +46,14 @@
 			<owl-carousel [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme', 'voffset']">
 				<div *ngFor="let prod of node;">
 					<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
-					<h2 class="mg-md header-text-h2 text-center">
+					<h2 class="mg-md header-text-h2 text-center main-content-font">
 						{{prod.name}}
 					</h2>
-					<h2 class="mg-md sub-header-text-h2 text-center">
+					<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
 						<strong>₨</strong> {{prod.variants[0].price}}
 					</h2>
 					<div class="text-center">
-						<a class="btn btn-d btn-lg button-buy"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
+						<a class="btn btn-d btn-lg main-button"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
 					</div>
 				</div>
 			</owl-carousel>
@@ -71,7 +71,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<h1 class="text-center header-text-h1 voffset">
-						<a (click)="goToNextSubCategory(node.childNodes, categories, node.products, node.name)" class="header-text-h1" >{{node.name}}</a><br>
+						<a (click)="goToNextSubCategory(node.childNodes, categories, node.products, node.name)" class="header-text-h1 main-header-font" >{{node.name}}</a><br>
 					</h1>
 
 					<div style="display: block; background-color: rgb(10, 10, 20); height: 1px; width: 50%; margin: auto;"></div>
@@ -82,14 +82,14 @@
 					<div *ngFor="let prod of node.products;">
 						<div>
 							<img src="{{imageUrl1}}/{{prod.imageUrl}}"  class="img-responsive lazyload" />
-							<h2 class="mg-md header-text-h2 text-center">
+							<h2 class="mg-md header-text-h2 text-center main-content-font">
 								{{prod.name}}
 							</h2>
-							<h2 class="mg-md sub-header-text-h2 text-center">
+							<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
 								<strong>₨</strong> {{prod.variants[0].price}}
 							</h2>
 							<div class="text-center">
-								<a class="btn btn-d btn-lg button-buy"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
+								<a class="btn btn-d btn-lg main-button"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
 							</div>
 						</div>
 					</div>
@@ -108,11 +108,11 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<h1 class="mg-md text-center header-text-h1">
-							<a class="header-text-h1 voffset padding-bottom">CATAGORIES</a>
+							<a class="header-text-h1 voffset padding-bottom main-header-font">CATAGORIES</a>
 							<div class="row voffset">
 								<div class="col-xs-6"  *ngFor="let node of categories" (click)="goToNextSubCategory(node.childNodes, categories, node.products, node.name)">
 										<img src="{{imageUrl}}/{{node.imageUrl}}" width="100%" />
-										<h2 class="mg-md header-text-h2 text-center">
+										<h2 class="mg-md header-text-h2 text-center main-content-font">
 											{{node.name}}
 										</h2>
 								</div>

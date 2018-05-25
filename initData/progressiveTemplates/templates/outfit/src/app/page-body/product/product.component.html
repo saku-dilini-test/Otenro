@@ -36,13 +36,13 @@
         </div>
       </div>
       <div class="col-sm-5">
-        <h3 class="mg-md product-header-h1 animated fadeInUp">
+        <h3 class="mg-md product-header-h1 animated fadeInUp main-header-font">
           {{Data.name}}
         </h3>
-        <p class="text-left" *ngIf="selectedVariant.price">
+        <p class="text-left main-content-font" *ngIf="selectedVariant.price">
           <strong>{{currency}}</strong> {{selectedVariant.price}}
         </p>
-        <p class="text-left" *ngIf="!selectedVariant.price">
+        <p class="text-left main-content-font" *ngIf="!selectedVariant.price">
           <strong>{{currency}}</strong> {{Data.variants[0].price}}
         </p>
         <p class="color">
@@ -55,11 +55,11 @@
 
         <div style="display: block; background-color: rgb(10, 10, 20); height: 1px; width: 100%; margin: auto;"></div>
 
-        <p class="color-black spacing-top-text">
+        <p class="color-black spacing-top-text main-content-font">
           <strong>PRODUCT DESCRIPTION</strong>
           <br>
         </p>
-        <p class="content-product spacing-bottom" id="details">
+        <p class="content-product spacing-bottom  main-content-font" id="details">
           {{desPart1}}
           <a class=" text-left product-detail main-content-font" *ngIf="!readMore" (click)="readMoreFunct()">Read More</a>
         </p>
@@ -72,27 +72,27 @@
             <strong>SELECT SPECIFICATIONS</strong>
           </p>
 
-          <div class="row padding-mobile">
+          <div class="row padding-mobile padding-vertical">
 
-            <div class="col-sm-6" *ngIf="Data.selection[0]">
+            <div class="col-sm-6 main-content-font" *ngIf="Data.selection[0]">
               <select class="btn-group btn-dropdown pull-left" (change)="changeVariant($event.target.value)">
                 <option *ngFor="let v1 of selection" [ngValue]="v1.vType"> {{v1.vType}} </option>
               </select>
             </div>
 
-            <div class="col-sm-6" *ngIf="Data.selection[1]">
+            <div class="col-sm-6 main-content-font" *ngIf="Data.selection[1]">
               <select class="btn-group btn-dropdown pull-left" (change)="changeVariant2($event.target.value)">
                 <option *ngFor="let v2 of selection1" [ngValue]="v2.vType"> {{v2.vType}} </option>
               </select>
             </div>
 
-            <div class="col-sm-6" *ngIf="Data.selection[2]">
+            <div class="col-sm-6 main-content-font" *ngIf="Data.selection[2]">
               <select class="btn-group btn-dropdown pull-left" (change)="changeVariant3($event.target.value)">
                 <option *ngFor="let v3 of selection2" [ngValue]="v3.vType"> {{v3.vType}} </option>
               </select>
             </div>
 
-            <div class="col-sm-6" *ngIf="Data.selection[3]">
+            <div class="col-sm-6 main-content-font" *ngIf="Data.selection[3]">
               <select class="btn-group btn-dropdown pull-left" (change)="changeVariant4($event.target.value)">
                 <option *ngFor="let v4 of selection3" [ngValue]="v4.vType"> {{v4.vType}} </option>
               </select>
@@ -137,16 +137,16 @@
                     </div>
                     <div class="col-xs-7">
                       <h3 class="main-content-font">{{Data.name}}</h3>
-                      <h4 *ngFor="let v of dialogVariants">{{v.name}}:{{v.vType}}</h4>
-                      <h4> {{currency}} {{selectedVariant.price}}</h4>
+                      <h4 class="main-content-font" *ngFor="let v of dialogVariants">{{v.name}}:{{v.vType}}</h4>
+                      <h4 class="main-content-font"> {{currency}} {{selectedVariant.price}}</h4>
                     </div>
                   </div>
                   <div class="modal-footer">
                     <div class="col-sm-6">
-                      <button (click)="close();goToHome();" class="btn btn-d btn-sq btn-lg button-buy animDelay02">Continue Shopping</button>
+                      <button (click)="close();goToHome();" class="btn btn-d btn-sq btn-lg main-button animDelay02">Continue Shopping</button>
                     </div>
                     <div class="col-sm-6">
-                      <button (click)="close();goToCart();" class="btn btn-d btn-sq btn-lg button-buy animDelay02">Checkout</button>
+                      <button (click)="close();goToCart();" class="btn btn-d btn-sq btn-lg  main-button animDelay02">Checkout</button>
                     </div>
                   </div>
                 </div>
@@ -155,10 +155,10 @@
 
             <div class="row row-no-gutters voffset padding-mobile" *ngIf="!(Data.variants.length >= 1 && selectedVariant.quantity == 0 && lockBuyButton)">
               <div class="col-sm-6">
-                <button (click)='addToCart("buyNowCart")' [disabled]="isBuyBtnDisable" class="btn btn-d btn-sq btn-lg button-buy animDelay02">BUY NOW</button>
+                <button (click)='addToCart("buyNowCart")' [disabled]="isBuyBtnDisable" class="btn btn-d btn-sq btn-lg main-button animDelay02">BUY NOW</button>
               </div>
               <div class="col-sm-6">
-                <button (click)="addToCart('');test(this.selectedVariant.selection);" [disabled]="isBuyBtnDisable" class="btn btn-d btn-sq btn-lg button-buy animDelay02">ADD TO CART</button>
+                <button (click)="addToCart('');test(this.selectedVariant.selection);" [disabled]="isBuyBtnDisable" class="btn btn-d btn-sq btn-lg main-button animDelay02">ADD TO CART</button>
               </div>
             </div>
 
