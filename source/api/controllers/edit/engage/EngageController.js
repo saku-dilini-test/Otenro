@@ -287,8 +287,9 @@ module.exports = {
     var userId = req.param('userId');
         var searchApp ={
             appId: appId,
-            userId:userId
-        }
+            userId:userId,
+            sort: 'createdAt DESC'
+        };
         PushMessage.find(searchApp).exec(function(err, app) {
             if (err) return done(err);
             res.send(app);

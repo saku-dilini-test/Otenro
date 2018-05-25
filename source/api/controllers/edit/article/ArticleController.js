@@ -21,7 +21,8 @@ module.exports = {
 		var dateFormat = require('dateformat');
 		var appId = req.param('appId');
 		var searchQuery = {
-			appId: appId
+			appId: appId,
+            sort: 'publishDate DESC'
 		};
 		var articleData = [];
 
