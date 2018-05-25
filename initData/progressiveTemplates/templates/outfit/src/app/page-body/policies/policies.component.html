@@ -27,19 +27,17 @@
 
 <div class="bloc bgc-white l-bloc" id="bloc-15">
   <div class="container bloc-md">
-    <div class="col-sm-3">
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <h2 class="mg-md about-us">
+    <div class="row" *ngIf="privacyPolicy">
+      <div class="col-sm-12">
+        <h2 class="mg-md about-us main-header-font">
           Privacy Policy
         </h2>
         <p class="main-content-font" [innerHTML]="privacyPolicy"> </p>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <h2 class="mg-md about-us">
+    <div class="row" *ngIf="returnPolicy">
+      <div class="col-sm-12">
+        <h2 class="mg-md about-us  main-header-font">
           Return Policy
         </h2>
         <p class="main-content-font" [innerHTML]="returnPolicy"> </p>

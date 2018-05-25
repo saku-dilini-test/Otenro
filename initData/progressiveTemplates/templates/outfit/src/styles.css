@@ -78,9 +78,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 
 /* Dark theme */
 
-.d-bloc{
-	color:rgba(255,255,255,.7);
-}
+
 .d-bloc button:hover{
 	color:rgba(255,255,255,.9);
 }
@@ -90,9 +88,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 .d-bloc .divider-h span{
 	border-color:rgba(255,255,255,.2);
 }
-.d-bloc .a-btn,.d-bloc .navbar a,.d-bloc .navbar-brand, .d-bloc a .icon-sm, .d-bloc a .icon-md, .d-bloc a .icon-lg, .d-bloc a .icon-xl, .d-bloc h1 a, .d-bloc h2 a, .d-bloc h3 a, .d-bloc h4 a, .d-bloc h5 a, .d-bloc h6 a, .d-bloc p a{
-	color:rgba(255,255,255,.6);
-}
+
 .d-bloc .a-btn:hover,.d-bloc .navbar a:hover,.d-bloc .navbar-brand:hover,.d-bloc a:hover .icon-sm, .d-bloc a:hover .icon-md, .d-bloc a:hover .icon-lg, .d-bloc a:hover .icon-xl, .d-bloc h1 a:hover, .d-bloc h2 a:hover, .d-bloc h3 a:hover, .d-bloc h4 a:hover, .d-bloc h5 a:hover, .d-bloc h6 a:hover, .d-bloc p a:hover{
 	color:rgba(255,255,255,1);
 }
@@ -621,7 +617,6 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 	font-size:20px;
 	font-family:"PT Serif Caption";
 	background-color:transparent;
-	color:#5E5E5E!important;
 }
 .sub-header-h1{
 	font-size:18px;
@@ -640,7 +635,6 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 	font-family:"Lato";
 	font-weight:400;
 	text-transform:uppercase;
-	color:#424242!important;
 	font-size:14px;
 }
 .sub-header-text-h2{
