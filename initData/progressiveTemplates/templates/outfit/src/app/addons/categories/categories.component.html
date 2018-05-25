@@ -1,4 +1,4 @@
-<div class="bloc bgc-white l-bloc hidden-xs">
+<div class="bloc bgc-white l-bloc">
 	<div class="container">
 		<ol class="breadcrumb" *ngIf="prevCategories">
 			<li  *ngFor="let prev of prevCategories;let i = index;">
@@ -25,7 +25,24 @@
 
 			</div>
 		</div>
-		<div class="row voffset">
+		<div class="row" *ngIf="categories">
+			<div class="col-xs-6 col-sm-3" *ngFor="let prod of node;">
+				<div>
+					<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
+					<h2 class="mg-md header-text-h2 text-center">
+						{{prod.name}}
+					</h2>
+					<h2 class="mg-md sub-header-text-h2 text-center">
+						<strong>₨</strong> {{prod.variants[0].price}}
+					</h2>
+					<div class="text-center">
+						<a class="btn btn-d btn-lg button-buy"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row voffset" *ngIf="!categories">
 			<owl-carousel [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme', 'voffset']">
 				<div *ngFor="let prod of node;">
 					<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}" class="img-responsive lazyload" />
@@ -48,7 +65,7 @@
 
 
 
-<div class="bloc bgc-white l-bloc" id="bloc-5">
+<div class="bloc bgc-white l-bloc  hidden-xs" id="bloc-5">
 	<div class="container bloc-lg">
 		<div *ngFor="let node of categories;">
 			<div class="row">
@@ -77,6 +94,32 @@
 						</div>
 					</div>
 				</owl-carousel>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- bloc-4 -->
+<div class="bloc bgc-white l-bloc hidden-lg hidden-md hidden-sm" id="bloc-4">
+	<div class="container bloc-lg">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="row">
+					<div class="col-sm-12">
+						<h1 class="mg-md text-center header-text-h1">
+							<a class="header-text-h1 voffset padding-bottom">CATAGORIES</a>
+							<div class="row voffset">
+								<div class="col-xs-6"  *ngFor="let node of categories" (click)="goToNextSubCategory(node.childNodes, categories, node.products, node.name)">
+										<img src="{{imageUrl}}/{{node.imageUrl}}" width="100%" />
+										<h2 class="mg-md header-text-h2 text-center">
+											{{node.name}}
+										</h2>
+								</div>
+							</div>
+						</h1>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -8,11 +8,11 @@
         <a  (click)="navigate('aboutus')"class="a-btn a-block bloc-mob-center-text text-center main-footer-font">The team</a>
         <a (click)="navigate('contact')" class="a-btn a-block bloc-mob-center-text text-center main-footer-font">Contact us</a>
       </div> -->
-      <!--<div class="col-sm-3">-->
-      <!--<h3 class="mg-md bloc-mob-center-text">-->
-      <!--Get the App-->
-      <!--</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">iPhone</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Android</a>-->
-      <!--</div>-->
+<!--<div class="col-sm-3">-->
+<!--<h3 class="mg-md bloc-mob-center-text">-->
+<!--Get the App-->
+<!--</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">iPhone</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Android</a>-->
+<!--</div>-->
 <!--       <div class="col-sm-4">
         <h3 class="mg-md bloc-mob-center-text main-footer-header" *ngIf="isShowFollowUs()">
           Follow Us
@@ -36,18 +36,20 @@
   </div>
 </div> -->
 
-<div class="bloc bgc-dark-jungle-green d-bloc hidden-xs" id="bloc-23">
+<div class="bloc bgc-dark-jungle-green d-bloc" id="bloc-23">
 	<div class="container bloc-sm">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="row">
-					<div class="col-xs-4">
-            <span class="fa fa-facebook icons icon-sm mobile-icons"></span>
-            <span class="fa fa-twitter icons icon-sm mobile-icons"></span>
-            <span class="fa fa-google-plus icon-sm mobile-icons"></span>
+					<div class="col-xs-12 col-sm-6 col-md-4 text-center">
+						<a *ngIf="isFacebookUrlExists()"  href="{{ getFacebookUrl() }}" ><span class="fa fa-facebook icons icon-sm mobile-icons"></span></a>
+						<a  *ngIf="isTwitterUrlExists()" href="{{ getTwitterUrl() }}"><span class="fa fa-twitter icons icon-sm mobile-icons"></span></a>
+						<a  *ngIf="isInstagramUrlExists()" href="{{ getInstagramrUrl() }}"><span class="fa fa-instagram icons icon-sm mobile-icons"></span></a>
+						<a  *ngIf="isPinterestUrlExists()"  href="{{ getPinterestrUrl() }}"><span class="fa fa-pinterest-p icons icon-sm mobile-icons"></span></a>
+						<a *ngIf="isLinkedInUrlExists()" href="{{ getLinkedInUrl() }}"><span class="fa fa-linkedin icons icon-sm mobile-icons"></span></a>
 					</div>
-					<div class="col-xs-4">
-						<p class="text-center mobile-footer">
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<p class="text-center mobile-footer "  (click)="navigate('')">
 							OUTFIT.LK 2018
 						</p>
 					</div>
@@ -58,3 +60,45 @@
 		</div>
 	</div>
 </div>
+
+
+<!-- Footer - bloc-22 -->
+<!-- <div class="bloc bgc-white l-bloc hidden-sm hidden-lg hidden-md bottom-mobie-menu" id="bloc-22">
+  <div class="container">
+    <div class="row row-no-gutters">
+      <div class="col-xs-3" (click)="navigate('')">
+        <div class="text-center">
+          <span class="fa fa-home icon-sm"></span>
+        </div>
+        <h6 class="mg-md text-center-xs">
+          Home
+        </h6>
+      </div>
+      <div class="col-xs-3" *ngIf="loginStatus"  (click)="navigate('appUser','My Account')">
+        <div class="text-center">
+          <span class="fa fa-user icon-sm"></span>
+        </div>
+        <h6 class="mg-md text-center-xs">
+          Profile
+        </h6>
+      </div>
+      <div class="col-xs-3">
+        <div class="text-center">
+          <span class="fa fa-search icon-sm"></span>
+        </div>
+        <h6 class="mg-md text-center-xs">
+          Search<br>
+        </h6>
+      </div>
+      <div class="col-xs-3"  (click)="navigate('contact', 'Contact Us'>
+        <div class="text-center">
+          <span class="fa fa-phone icon-sm"></span>
+        </div>
+        <h6 class="mg-md text-center-xs">
+          Contact
+        </h6>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- Footer - bloc-22 END -->
