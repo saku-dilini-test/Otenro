@@ -323,7 +323,7 @@
                arr.push($scope.product.variants[i]);
            }
            var found = arr.some(function (el) {
-             return el.sku === sku;
+             return el.sku.toUpperCase() === sku.toUpperCase();
            });
            if (!found) {
                $scope.product.variants.push($scope.inserted);
