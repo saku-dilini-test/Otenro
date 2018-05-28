@@ -316,6 +316,7 @@
             Checking if the sku duplicates.
         */
        function duplicateSku(sku) {
+       console.log(sku);
            var length = $scope.product.variants.length;
            var arr = [];
            for(var i = 0; i<length-1; i++){
@@ -819,7 +820,7 @@
                         }else if($scope.product.variants){
                             var count = 0;
                             for(var i=0; i<$scope.product.variants.length; i++){
-                                if($scope.product.variants[i].sku == sku){
+                                if($scope.product.variants[i].sku.toUpperCase() == sku.toUpperCase()){
                                     count = count +1;
                                     if(count == 2) {
                                         $scope.exist = true;

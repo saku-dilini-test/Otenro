@@ -372,6 +372,7 @@ module.exports = {
         check uniqueness of the sku
     */
     checkUniqueSku: function(req,res){
+    console.log(req.body);
         var searchApp={
             userId: req.body.userId
         }
@@ -379,7 +380,7 @@ module.exports = {
             if (err) return done(err);
             for(var i=0; i<app.length; i++){
                 for(var j=0; j<app[i].sku.length; j++){
-                if(app[i].sku[j] == req.body.sku){
+                if(app[i].sku[j].toUpperCase() == req.body.sku.toUpperCase()){
                     return res.send('true');
                     break;
                 }
