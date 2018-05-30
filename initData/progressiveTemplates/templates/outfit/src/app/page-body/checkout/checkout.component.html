@@ -169,8 +169,8 @@
                   </div>
 
                 </div>
-                <div class="col-sm-6">
-                  <a (click) = "register()" class="a-btn a-block color">Click here to register if you are a new customer</a>
+                <div class="col-sm-6" *ngIf = "!showUser">
+                  <a (click) = "login()" class="a-btn a-block color">Returning customer? </a>
                 </div>
               </div>
             </div>
@@ -392,6 +392,11 @@
       <h2 class="mg-md header-text-h1 spacing-top-text  main-header-font">
         PICKUP ADDRESS
       </h2>
+      <br>
+      <div class="col-sm-12" *ngIf = "!showUser">
+        <a (click) = "login()" class="a-btn a-block color">Returning customer? </a>
+      </div>
+      <br><br>
       <form [formGroup]="pickupForm" (ngSubmit)="submitForm(pickupForm.value)" novalidate class="spacing-form animated fadeInUp animDelay04">
         <div>
           <div class="row">

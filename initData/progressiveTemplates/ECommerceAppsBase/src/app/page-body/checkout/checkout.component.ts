@@ -95,7 +95,8 @@ export class CheckoutComponent implements OnInit {
   private years = [];
   private months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
   private emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-  noteDes;
+  noteDes;showUser;
+
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
     private currencyService: CurrencyService,
@@ -105,6 +106,15 @@ export class CheckoutComponent implements OnInit {
     private spinner: Ng4LoadingSpinnerService) {
 
     this.title.changeTitle("Checkout");
+
+    if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
+      this.showUser = true;
+
+      this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
+
+    }else{
+
+    }
 
     if (this.dataService.userData == null) {
       var userData = {
@@ -147,9 +157,10 @@ export class CheckoutComponent implements OnInit {
   }
 
 
-
-
-
+login() {
+  this.router.navigate(['login', this.formType]);
+  console.log(this.dataService.cart);
+}
 
   ngOnInit() {
     let date = (new Date()).getFullYear()

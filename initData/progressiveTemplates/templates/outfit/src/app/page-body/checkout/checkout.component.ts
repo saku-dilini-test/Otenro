@@ -112,6 +112,8 @@ export class CheckoutComponent implements OnInit {
       this.oldUser = true;
       this.showUser = true;
       this.loggedUserData = this.localStorageService.get('appLocalStorageUser' + this.appId);
+      this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
+
       console.log(this.loggedUserData);
     }else{
       this.oldUser = false;
@@ -168,8 +170,9 @@ check(user){
   }
 }
 
-register() {
-  this.router.navigate(['register', ""]);
+login() {
+  this.router.navigate(['login', this.formType]);
+  console.log(this.dataService.cart);
 }
 
 

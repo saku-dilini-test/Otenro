@@ -381,12 +381,13 @@ export class ProductComponent implements OnInit {
     getIndex(sku) {
 
         let index = this.Data.defaultImage;
-        this.Data.selectedSku.forEach(element => {
-            if (element.sku == sku) {
-                index = element.index;
-            }
-        });
-
+        if (this.Data.selectedSku) {
+            this.Data.selectedSku.forEach(element => {
+                if (element.sku == sku) {
+                    index = element.index;
+                }
+            });
+        }
         return index;
     }
 
