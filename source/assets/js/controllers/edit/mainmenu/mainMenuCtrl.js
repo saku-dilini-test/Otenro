@@ -103,7 +103,7 @@
                 });
         }   // Menu-Navigation or Menu-Category (Article Category) -> Add / Update
         else if($scope.initialData){
-            if(initialData.from == 'fromPublishArticle'){
+            if(initialData.from == 'fromPublishArticle' || initialData.menu == 'addNewMenuCategory'){
                 $scope.heading = "Add Category";
 
             }else{

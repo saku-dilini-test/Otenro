@@ -120,18 +120,18 @@
                     </div>
                     <div class="md-dialog-main">
                         <form name="policies" class="clearfix" novalidate>
-                            <fieldset>
-                                <label>return policy</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea maxlength="200" class="input-shadow-border" name="returnPolicy" rows="2" ng-model="storeSettings.returnPolicy"></textarea>
-                                <br />
-                                <div ng-hide="storeSettings.returnPolicy.length > maxReturnPolicy">
-                                    <span class="information">Characters left: {{maxReturnPolicy - storeSettings.returnPolicy.length}}</span>
-                                </div>
-                                <div  ng-show="storeSettings.returnPolicy.length > maxReturnPolicy">
-                                    <span>Characters left: </span> <span class="information"> {{maxReturnPolicy - storeSettings.returnPolicy.length}} </span>
-                                </div>
-                            </fieldset>
+                            <!--<fieldset>-->
+                                <!--<label>return policy</label>-->
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
+                                <!--<textarea maxlength="200" class="input-shadow-border" name="returnPolicy" rows="2" ng-model="storeSettings.returnPolicy"></textarea>-->
+                                <!--<br />-->
+                                <!--<div ng-hide="storeSettings.returnPolicy.length > maxReturnPolicy">-->
+                                    <!--<span class="information">Characters left: {{maxReturnPolicy - storeSettings.returnPolicy.length}}</span>-->
+                                <!--</div>-->
+                                <!--<div  ng-show="storeSettings.returnPolicy.length > maxReturnPolicy">-->
+                                    <!--<span>Characters left: </span> <span class="information"> {{maxReturnPolicy - storeSettings.returnPolicy.length}} </span>-->
+                                <!--</div>-->
+                            <!--</fieldset>-->
                             <fieldset>
                                 <label>terms and conditions</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />

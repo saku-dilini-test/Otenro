@@ -526,7 +526,7 @@
                 template: '<md-dialog aria-label="Edit Child Menu">' +
                     '<md-content >' +
                     '<div class="md-dialog-header">' +
-                    '<h1>Deleting Product </h1>' +
+                    '<h1>Deleting Article </h1>' +
                     '                </div> <br>' +
                     ' <div style="text-align:center"><lable> Are you sure you want to delete this article? </lable></div>' +
                     '<br><br><div class="md-dialog-buttons">' +
