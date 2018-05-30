@@ -127,8 +127,12 @@ export class RegisterComponent implements OnInit {
 
                 if(this.navigate == 'home'){
                     this.route.navigate(['home']);
-                }else{
+                }else if(this.navigate == 'cart'){
                   this.route.navigate(['cart']);
+                }else if(this.navigate == 'delivery'){
+                  this.route.navigate(['checkout','delivery']);
+                }else{
+                  this.route.navigate(['checkout','pickup']);
                 }
             },err =>{
 
