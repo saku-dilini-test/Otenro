@@ -43,7 +43,7 @@ module.exports = {
   
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'http://developer.appmaker.lk/',
+  HOST_URL : 'http://developer.appmaker.lk:1338/',
   // ME SERVER Config
   ME_SERVER_URL : 'http://developer.appmaker.lk:80/temp',
   ME_SERVER : '/home/milhan/public_html/developer/meServer/temp/',
