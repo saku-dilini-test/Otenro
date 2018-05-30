@@ -220,10 +220,18 @@ module.exports = {
         var appId = req.body.appId;
         var userId = req.body.userId;
 
+        var approot = path.resolve();
+        var imgPath = approot + '/assets/images/emailtemplates/';
+
         var data = {
             appId: appId,
             userId: userId
         }
+
+//           var test = sentMails.sendOrderEmail(data, function (msg){
+//              res.send(msg);
+//          });
+
         var searchApp = {
             appId: data.appId
         };
@@ -239,7 +247,15 @@ module.exports = {
             var imagePath =  serverOrg +"/templates/viewImages?userId="+ userId
                 +"&appId="+appId+"&"+new Date().getTime()+"&img=thirdNavi/";
 
-            var  headerImagePath = config.APP_FILE_SERVER + userId + "/templates/"+appId+'/img/email/'+userEmail.orderConfirmedEmailImage;
+            var  headerImagePath;
+
+            if(type == "Order confirm"){
+                headerImagePath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/"+appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
+            }else if(type == "Order Fulfilled"){
+                headerImagePath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/"+appId+'/src/assets/images/email/'+userEmail.orderFulfilledEmailImage;
+            }else if(type == "Order Refund"){
+                headerImagePath = config.APP_FILE_SERVER + userId + "/progressiveTemplates/"+appId+'/src/assets/images/email/'+userEmail.orderRefundedEmailImage;
+            }
 
             var mBody = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'+
                 '<html xmlns="http://www.w3.org/1999/xhtml" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
@@ -310,9 +326,17 @@ module.exports = {
                 '                              <tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
                 '                                  <td class="content-block" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">'+
                 '								<img src="cid:note@example.com"/></td>'+
-                '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
-                '                                   <td '+ userEmail.orderConfirmedEmail.header +  ' </td>'+
-                '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
+                '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">';
+                if(type == "Order confirm") {
+                mBody +='                                   <td '+ userEmail.orderConfirmedEmail.header +  ' </td>';
+                }
+                if(type == "Order Fulfilled") {
+                mBody +='                                   <td '+ userEmail.orderFulfilledEmail.header +  ' </td>';
+                }
+                if(type == "Order Refund") {
+                mBody +='                                   <td '+ userEmail.orderRefundEmail.header +  ' </td>';
+                }
+                mBody +='								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
                 '										<table class="invoice" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 80%; margin: 40px auto;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">';
             if(userEmail.orderConfirmedEmail.delivery==true ) {
                 mBody += '  <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Delivered to</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />John Doe, 488, Kotte Road, Pitakotte';
@@ -332,7 +356,7 @@ module.exports = {
 
 
                 mBody += '<tr  style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top">'+
-                    '															<div style="display: inline-block;padding: 5px"><img  alt="prodcut" src="" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">Superman T-Shir<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: 1 <br>Product Code: 1234	</td>'+
+                    '															<div style="display: inline-block;padding: 5px"><img  alt="prodcut" src="cid:demoProd" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">Superman T-Shir<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: 1 <br>Product Code: 1234	</td>'+
                     '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">'+
                     '															<br><div> $ 25</div></td></tr>';
                 /* }*/
@@ -408,6 +432,11 @@ module.exports = {
                                 ),
 
                                 cid: 'note@example.com' // should be as unique as possible
+                            },
+                            {
+                                filename: 'demo-prod.png',
+                                path: imgPath + 'demo-prod.png',
+                                cid: 'demoProd'
                             }
                         ]// html body,
                     };
@@ -418,7 +447,8 @@ module.exports = {
                 // send mail with defined transport object
                 transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
-                        //return console.log(error);
+                        console.log("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
+                        alert("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
                         return  res.send(500);
                     }
                     console.log('Message sent: %s', info.messageId);

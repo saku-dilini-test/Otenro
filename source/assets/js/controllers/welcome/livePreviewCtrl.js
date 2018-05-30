@@ -182,10 +182,10 @@
                         'userId':$auth.getPayload().id
 
                     };
-                    console.log('live preview is new :  ' + isNew);
+//                    console.log('live preview is new :  ' + isNew);
 
-                    if(isNew == 'true' || isNew == true){
-                        console.log('inside web');
+//                    if(isNew == 'true' || isNew == true){
+//                        console.log('inside web');
 
                         welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
                                             if(data.data.appId == -1)
@@ -205,29 +205,29 @@
                                             }
 
                                         });
-
-                    }else {
-
-                        console.log('inside mobile');
-                        welcomeTemplatesResource.createApp(tempAppParams).then(function (data) {
-                            if (data.data.appId == -1) {
-                                toastr.error(data.data.message, 'Warning', {
-                                    closeButton: true
-                                });
-                            } else {
-                                var url = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
-                                    + '/templates/' + data.data.appId + '/?' + new Date().toISOString();
-
-                                mySharedService.prepForBroadcast(url);
-
-                                var encParam = btoa(data.data.appId);
-                                $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
-                                commerceService.showRemoveDefaultDataDialog("remove");
-
-                            }
-
-                        });
-                    }
+//
+//                    }else {
+//
+//                        console.log('inside mobile');
+//                        welcomeTemplatesResource.createApp(tempAppParams).then(function (data) {
+//                            if (data.data.appId == -1) {
+//                                toastr.error(data.data.message, 'Warning', {
+//                                    closeButton: true
+//                                });
+//                            } else {
+//                                var url = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
+//                                    + '/templates/' + data.data.appId + '/?' + new Date().toISOString();
+//
+//                                mySharedService.prepForBroadcast(url);
+//
+//                                var encParam = btoa(data.data.appId);
+//                                $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
+//                                commerceService.showRemoveDefaultDataDialog("remove");
+//
+//                            }
+//
+//                        });
+//                    }
                     $mdDialog.hide(answer);
                 }else{
                     loginFunction(agentInfo).then(function(id){
@@ -241,7 +241,7 @@
                             'userId':$auth.getPayload().id
                         };
 
-                        if(isNew == 'true' || isNew == true){
+//                        if(isNew == 'true' || isNew == true){
 
                                         welcomeTemplatesResource.createProgApp(tempAppParams).then(function(data){
                                             if(data.data.appId == -1)
@@ -281,45 +281,45 @@
                                             }
                                         });
 
-                        }else {
-
-                            welcomeTemplatesResource.createApp(tempAppParams).then(function (data) {
-                                if (data.data.appId == -1) {
-                                    toastr.error(data.data.message, 'Warning', {
-                                        closeButton: true
-                                    });
-
-                                    var encUserId = 'unknownUser' + "/";
-                                    var encAppId = templateId + "/";
-                                    var encTempUrl = templateUrl + "//";
-                                    var encTempName = templateName + "/";
-                                    var encTempCategory = templateCategory + "/";
-                                    var encIsNew = isNew + "/";
-
-                                    var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory + encIsNew);
-
-                                    $state.go('anon.livePreview', {
-                                        userId: 'unknownUser',
-                                        appId: templateId,
-                                        isNew: isNew,
-                                        tempUrl: templateUrl,
-                                        tempName: templateName,
-                                        tempCategory: templateCategory,
-                                        p: encryptedURL
-                                    });
-
-                                } else {
-                                    var url = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
-                                        + '/templates/' + data.data.appId + '/?' + new Date().toISOString();
-
-                                    mySharedService.prepForBroadcast(url);
-
-                                    var encParam = btoa(data.data.appId);
-                                    $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
-                                    commerceService.showRemoveDefaultDataDialog("remove");
-                                }
-                            });
-                        }
+//                        }else {
+//
+//                            welcomeTemplatesResource.createApp(tempAppParams).then(function (data) {
+//                                if (data.data.appId == -1) {
+//                                    toastr.error(data.data.message, 'Warning', {
+//                                        closeButton: true
+//                                    });
+//
+//                                    var encUserId = 'unknownUser' + "/";
+//                                    var encAppId = templateId + "/";
+//                                    var encTempUrl = templateUrl + "//";
+//                                    var encTempName = templateName + "/";
+//                                    var encTempCategory = templateCategory + "/";
+//                                    var encIsNew = isNew + "/";
+//
+//                                    var encryptedURL = btoa(encUserId + encAppId + encTempUrl + encTempName + encTempCategory + encIsNew);
+//
+//                                    $state.go('anon.livePreview', {
+//                                        userId: 'unknownUser',
+//                                        appId: templateId,
+//                                        isNew: isNew,
+//                                        tempUrl: templateUrl,
+//                                        tempName: templateName,
+//                                        tempCategory: templateCategory,
+//                                        p: encryptedURL
+//                                    });
+//
+//                                } else {
+//                                    var url = ME_APP_SERVER + 'temp/' + $auth.getPayload().id
+//                                        + '/templates/' + data.data.appId + '/?' + new Date().toISOString();
+//
+//                                    mySharedService.prepForBroadcast(url);
+//
+//                                    var encParam = btoa(data.data.appId);
+//                                    $state.go('user.editApp', {isNew:isNew, appId: data.data.appId, p: encParam});
+//                                    commerceService.showRemoveDefaultDataDialog("remove");
+//                                }
+//                            });
+//                        }
                         $mdDialog.hide(answer);
                     });
 
