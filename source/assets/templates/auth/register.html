@@ -93,6 +93,19 @@ chosen link or button. -->
           Enter a proper email
         </span>
       </fieldset>
+      <!--mobile number field-->
+      <fieldset>
+        <label> Contact Number </label>
+        <img src="../../../images/question-mark.svg" width="12" height="12" />
+        <input class="input-shadow-border" name="mobile" type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im"
+               style="float:left;" ng-model="user.mobile" ng-enter ="authSignUp(user);" required/>
+        <span class="error help-block" ng-show="register.mobile.$error.required">
+          *
+        </span>
+        <span class="error help-block" ng-show="register.mobile.$dirty && register.mobile.$invalid">
+          Enter a valid mobile number
+        </span>
+      </fieldset>
       <div class="row password-area-row">
         <fieldset class="password-area">
           <label>Password</label>
@@ -123,6 +136,64 @@ chosen link or button. -->
           </span>
         </fieldset>
       </div>
+      <!--Bank details -->
+      <!--Beneficiary’s Name-->
+      <fieldset>
+        <label>Beneficiary’s Name</label>
+        <img src="../../../images/question-mark.svg" width=" 12" height="12" />
+        <input class="input-shadow-border" type="text" name="beneficiaryName" ng-model="user.beneficiaryName" ng-enter ="authSignUp(user);"
+               required/>
+        <span class="error help-block" ng-show="register.beneficiaryName.$error.required">
+          *
+        </span>
+      </fieldset>
+      <!--Bank Code-->
+      <fieldset>
+        <label> Bank Code </label>
+        <img src="../../../images/question-mark.svg" width="12" height="12" />
+        <input class="input-shadow-border" name="bankCode" type="text" ng-pattern="^[1-9]\d*$"
+               style="float:left;" ng-model="user.bankCode" ng-enter ="authSignUp(user);" required/>
+        <span class="error help-block" ng-show="register.bankCode.$error.required">
+          *
+        </span>
+        <span class="error help-block" ng-show="register.bankCode.$dirty && register.bankCode.$invalid">
+          Enter a valid bank code
+        </span>
+      </fieldset>
+      <!--Bank Branch Code-->
+      <fieldset>
+        <label> Bank Branch Code </label>
+        <img src="../../../images/question-mark.svg" width="12" height="12" />
+        <input class="input-shadow-border" name="branchCode" type="text" ng-pattern="^[1-9]\d*$"
+               style="float:left;" ng-model="user.branchCode" ng-enter ="authSignUp(user);" required/>
+        <span class="error help-block" ng-show="register.branchCode.$error.required">
+          *
+        </span>
+        <span class="error help-block" ng-show="register.branchCode.$dirty && register.branchCode.$invalid">
+          Enter a valid branch code
+        </span>
+      </fieldset>
+      <!--Bank Branch Name-->
+      <fieldset>
+        <label>Bank Branch Name</label>
+        <img src="../../../images/question-mark.svg" width=" 12" height="12" />
+        <input class="input-shadow-border" type="text" name="branchName" ng-model="user.branchName" ng-enter ="authSignUp(user);"
+               required/>
+        <span class="error help-block" ng-show="register.branchName.$error.required">
+          *
+        </span>
+      </fieldset>
+      <!--Bank Account Number-->
+      <fieldset>
+        <label>Bank Account Number</label>
+        <img src="../../../images/question-mark.svg" width=" 12" height="12" />
+        <input class="input-shadow-border" type="text" name="accountNumber" ng-model="user.accountNumber" ng-enter ="authSignUp(user);"
+               required/>
+        <span class="error help-block" ng-show="register.accountNumber.$error.required">
+          *
+        </span>
+      </fieldset>
+
       <fieldset>
         <label>Tell us about yourself</label>
         <img src="../../../images/question-mark.svg" width=" 12" height="12" />

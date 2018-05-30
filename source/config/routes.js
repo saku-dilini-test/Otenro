@@ -52,6 +52,7 @@ module.exports.routes = {
     'GET /fromAddNetwork': 'AuthController.fromAddNetwork',
     'GET /fromAddNetwork2': 'AuthController.fromAddNetwork2',
     'GET /fromAddNetwork3': 'AuthController.fromAddNetwork3',
+    'POST /auth/verifyMobilePin': 'AuthController.verifyMobilePin',
 
     /***
      * Billing Data

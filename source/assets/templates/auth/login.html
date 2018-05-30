@@ -10,17 +10,37 @@
       <fieldset>
         <label>email </label>
         <img src="../../../images/question-mark.svg" width="12" height="12">
-        <input class="input-shadow-border" ng-enter ="submit()" name="email" type="text" ng-model="user.email" required>
-        <span class="help-block" ng-show="register.email.$dirty && register.email.$invalid">
-          <!--{{"login.error.email.required" | translate}}-->
-          Enter a proper email
-        </span>
+        <input class="input-shadow-border" ng-enter ="submit()" name="email" type="text" ng-model="email" />
+        <!--<span class="help-block" ng-show="register.email.$dirty && register.email.$invalid">-->
+          <!--&lt;!&ndash;{{"login.error.email.required" | translate}}&ndash;&gt;-->
+          <!--Enter a proper email-->
+        <!--</span>-->
       </fieldset>
       <fieldset>
         <label>password </label>
         <img src="../../../images/question-mark.svg" width="12" height="12">
-        <input class="input-shadow-border" ng-enter ="submit()" name="password" type="password" value="" ng-model="user.password" required/>
+        <input class="input-shadow-border" ng-enter ="submit()" name="password" type="password" value="" ng-model="password" />
       </fieldset>
+        <div style="text-align: center">
+            -OR-
+        </div>
+      <fieldset>
+        <label>mobile number </label>
+        <img src="../../../images/question-mark.svg" width="12" height="12">
+        <input class="input-shadow-border" ng-enter ="submit()" name="mobile" type="text" ng-model="mobile">
+      </fieldset>
+
+      <div ng-if="isPinReqSuccess">
+        <fieldset>
+          <label>login pin </label>
+          <img src="../../../images/question-mark.svg" width="12" height="12">
+          <input class="input-shadow-border" ng-enter ="submitPin(user.pin)" name="pin" type="text" ng-model="user.pin">
+        </fieldset>
+          <div style="float: right">
+              <input style="background: #0099FF; text-align: center; color: white;" class="input-shadow-border"  ng-click="submitPin(user.pin)" name="continue" value="continue" />
+          </div>
+      </div>
+
       <fieldset>
         <label class="font-size-12 reset-margin">
           <a class="me-guest-reset-link" ui-sref="anon.forgetPassword">forget password?</a>
@@ -28,18 +48,18 @@
       </fieldset>
       <fieldset>
         <label class="font-size-12 reset-margin">
-          not an existing member
+          not an existing user?
           <a class="me-guest-reset-link" ng-click = "register()">sign up</a>
-          here or login with
+          here
         </label>
       </fieldset>
-      <fieldset class="terms">
-        <!--<input class="me-guest-fb-login pull-left" ng-click="authenticate('facebook')"-->
-               <!--type="button"/>-->
-        <input class="me-guest-google-login pull-left" ng-click="authenticate('google')"
-               type="button" src="images/google-plus-icon.png" />
-        <div>By signing in you agree to our  <a class="me-guest-reset-link" target="_blank" href="https://www.otenro.com/terms.pdf">Terms & Conditions</a></div>
-      </fieldset>
+      <!--<fieldset class="terms">-->
+        <!--&lt;!&ndash;<input class="me-guest-fb-login pull-left" ng-click="authenticate('facebook')"&ndash;&gt;-->
+               <!--&lt;!&ndash;type="button"/>&ndash;&gt;-->
+        <!--<input class="me-guest-google-login pull-left" ng-click="authenticate('google')"-->
+               <!--type="button" src="images/google-plus-icon.png" />-->
+        <!--<div>By signing in you agree to our  <a class="me-guest-reset-link" target="_blank" href="https://www.otenro.com/terms.pdf">Terms & Conditions</a></div>-->
+      <!--</fieldset>-->
       <fieldset class="reset-margin text-right">
         <input type="button" class="me-default-button" ng-model="cancel" ng-click="cancel()" name="cancel" value="Cancel" />
         <button ng-disabled="register.$invalid" type="submit" class="me-default-button">

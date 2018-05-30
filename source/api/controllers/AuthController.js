@@ -18,45 +18,99 @@ module.exports = {
 
 	authenticate : function(req, res) {
 
-      User.findOne({
-        email: req.body.email
-      }, function foundUser(err, user) {
-        if (err) return res.negotiate(err);
-        if (!user) return res.notFound();
+	    if (req.body.method === 'email') {
 
-        Passwords.checkPassword({
-          passwordAttempt: req.body.password,
-          encryptedPassword: user.password
-        }).exec({
+            User.findOne({
+                email: req.body.email
+            }, function foundUser(err, user) {
+                if (err) return res.negotiate(err);
+                if (!user) return res.notFound();
 
-          error: function (err){
-            sails.config.logging.custom.error(err);
-            logger.error();
-            return res.negotiate(err);
-          },
+                Passwords.checkPassword({
+                    passwordAttempt: req.body.password,
+                    encryptedPassword: user.password
+                }).exec({
 
-          incorrect: function (){
-            sails.config.logging.custom.warn({message:'Invalid User credentials! emailId:' + req.body.email});
-            return res.notFound();
-          },
+                    error: function (err){
+                        sails.config.logging.custom.error(err);
+                        logger.error();
+                        return res.negotiate(err);
+                    },
 
-          success: function (){
-              var loginCount = 0;
-              if(user.loginCount){
-                  loginCount = user.loginCount + 1;
-              }
-              User.update({email : req.body.email},{lastLoginTime : new Date(), loginCount : loginCount}, function(err1){
-              });
+                    incorrect: function (){
+                        sails.config.logging.custom.warn({message:'Invalid User credentials! emailId:' + req.body.email});
+                        return res.notFound();
+                    },
+
+                    success: function (){
+                        var loginCount = 0;
+                        if(user.loginCount){
+                            loginCount = user.loginCount + 1;
+                        }
+                        User.update({email : req.body.email},{lastLoginTime : new Date(), loginCount : loginCount}, function(err1){
+                        });
 //              logger.info({
 //                      message: 'User Logged in!'
 //              });
-              sails.config.logging.custom.info({message:'User Logged in! emailId:' + req.body.email});
+                        sails.config.logging.custom.info({message:'User Logged in! emailId:' + req.body.email});
 
-            createToken(user,res);
-          }
-        });
-      });
+                        createToken(user,res);
+                    }
+                });
+            });
+        } else if (req.body.method === 'mobile') {
 
+            function pinGenerator() {
+                this.length = 6;
+                this.timestamp = +new Date;
+                var _getRandomInt = function( min, max ) {
+                    return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+                };
+                this.generate = function() {
+                    var ts = this.timestamp.toString();
+                    var parts = ts.split( "" ).reverse();
+                    var pin = "";
+                    for( var i = 0; i < this.length; ++i ) {
+                        var index = _getRandomInt( 0, parts.length - 1 );
+                        pin += parts[index];
+                    }
+                    return pin;
+                }
+            }
+            var pGenerator = new pinGenerator();
+            var loginPin = pGenerator.generate();
+
+            var criteria = { mobile: req.body.mobile };
+            var valuesToUpdate = { loginPin: loginPin };
+            User.findOne(criteria).exec(function (err, user) {
+                if (err) return res.send({ message: 'error' });
+                else if (user) {
+                    url = 'https://sms.textware.lk:5001/sms/send_sms.php';
+                    queryString = {
+                        username: 'simato',
+                        password: 'Si324Mt',
+                        src: 'Balamu',
+                        dst: user.mobile,
+                        msg: 'Your login pin is ' + loginPin,
+                        dr: '1'
+                    };
+                    request({url: url, qs: queryString}, function(err, response, body) {
+                        if (err) {
+                            sails.log(err);
+                            sails.log("Get response: " + response.statusCode);
+                        } else if (response.statusCode === 200) {
+                            User.update(criteria, valuesToUpdate)
+                                .exec(function (err, user) {
+                                    if (err) return res.send({ message: 'error' });
+                                    return res.send({ message: 'success' });
+                            });
+                        }
+                    });
+                } else {
+                    return res.send({ message: 'user not found' });
+                }
+            });
+        }
   },
     updateUserAdNetwork: function(req, res) {
 
@@ -108,7 +162,9 @@ module.exports = {
 //          function (err, httpResponse, body) {
 //              console.log(err, JSON.parse(body));
 //              if (JSON.parse(body).success==true){
-                  User.findOne({email: req.body.email}, function foundUser(err, user) {
+      var findCriteria = { mobile: { 'contains' : req.body.mobile.slice(-9) } };
+
+                  User.findOne( findCriteria, function foundUser(err, user) {
                       if (err) return res.negotiate(err);
                       if (user) return res.status(409).json({error: 'already exists'});
                       var newUserDetails = {
@@ -117,7 +173,13 @@ module.exports = {
                           email     : req.body.email,
                           password  : req.body.password,
                           yourselfReason : req.body.yourselfReason,
-                          lastLoginTime : new Date()
+                          lastLoginTime : new Date(),
+                          mobile: req.body.mobile,
+                          beneficiaryName: req.body.beneficiaryName,
+                          bankCode: req.body.bankCode,
+                          branchCode: req.body.branchCode,
+                          branchName: req.body.branchName,
+                          accountNumber: req.body.accountNumber
                       };
                       if(req.body.adagent){
                           newUserDetails.adagent = req.body.adagent;
@@ -384,6 +446,34 @@ module.exports = {
 
         }
         return res.redirect( baseUrl + '/#/fromAddNetwork3?' + urlParamString );
+    },
+
+    /**
+     * Do user login through mobile pin
+     * @param req
+     * @param res
+     **/
+    verifyMobilePin: function (req, res) {
+        var criteria = { mobile: req.body.mobile },
+            pin = req.body.pin;
+        User.findOne(criteria)
+            .exec(function (err, user) {
+                if (err) return res.send({ message: 'error'});
+                else if (user) {
+                    if (user.loginPin === pin) {
+                        var loginCount = 0;
+                        if(user.loginCount){
+                            loginCount = user.loginCount + 1;
+                        }
+                        User.update({mobile : user.mobile},{lastLoginTime : new Date(), loginCount : loginCount}, function(err1){
+                        });
+                        createToken(user,res);
+                    } else {
+                        return res.send({ message: 'wrong pin'});
+                    }
+                }
+                else return res.send({ message: 'failed' });
+            });
     },
 
 };
