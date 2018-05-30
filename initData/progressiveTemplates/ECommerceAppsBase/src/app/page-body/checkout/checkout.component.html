@@ -236,6 +236,22 @@
       </div>
 
       <div class="form-group">
+        <label>Email:</label>
+        <!-- Rather than set an ngModel, we use the formControl directive to sync our input to the complexForm object. Notice that we are also setting the attribute we wish the corresponding input to sync with. We no longer need the name attribute, but can optionally add it. -->
+        <input class="form-control" type="text" placeholder="you@example.com" [formControl]="pickupForm.controls['email']">
+
+        <div *ngIf="pickupForm.controls['email'].hasError('required')
+        && pickupForm.controls['email'].touched && pickupForm.controls['email'].dirty" class="alert alert-danger">
+          You must include an email.
+        </div>
+        <div *ngIf="!pickupForm.controls['email'].valid && pickupForm.controls['email'].touched && pickupForm.controls['email'].dirty"
+             class="alert alert-danger">
+          invalid Email
+        </div>
+
+      </div>
+
+      <div class="form-group">
         <label for="pkPhone" class="col-2 col-form-label">Phone</label>
         <div class="col-10">
           <input class="form-control" type="text" maxlength="16" placeholder="+94712345678" [formControl]="pickupForm.controls['phone']">

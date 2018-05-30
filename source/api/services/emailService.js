@@ -589,9 +589,9 @@ module.exports = {
 
     sendOrderEmail:function (data,res) {
         var attachment = false;
-        console.log("-------------------------------");
-        console.log(data);
-        console.log(data.paymentStatus);
+//        console.log("-------------------------------");
+//        console.log(data);
+//        console.log(data.paymentStatus);
                 var searchApp = {
                     appId: data.appId
                 };
@@ -599,8 +599,6 @@ module.exports = {
 
 
         UserEmail.findOne(searchApp).exec(function (err, userEmail) {
-
-
 
 
             //console.log(config.APP_FILE_SERVER + data.userId + "/templates/"+data.appId+'/img/email/'+userEmail.orderConfirmedEmailImage);
@@ -629,7 +627,7 @@ module.exports = {
                             headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderFulfilledEmailImage;
                             headerFileName = userEmail.orderFulfilledEmailImage;
                             subject = 'Order fulfilled';
-                            if(userEmail.orderFulfilled.order){
+                            if(userEmail.orderFulfilledEmail.order){
                                 attachment = true;
                             }
                         }
@@ -637,7 +635,7 @@ module.exports = {
                             headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderRefundedEmailImage;
                             headerFileName = userEmail.orderRefundedEmailImage;
                             subject = 'Order Refunded';
-                            if(userEmail.orderRefunded.order){
+                            if(userEmail.orderRefundEmail.order){
                                 attachment = true;
                             }
                         }
@@ -654,16 +652,24 @@ module.exports = {
                               );
 
                         for(var i =0;i<data.item.length;i++){
+
+                        var image;
+
+                        if(data.item[i].imgUrl != null){
+                            image = data.item[i].imgUrl
+                        }else{
+                            image = data.item[i].imgDefault
+                        }
                             test.push({
-                                    filename: data.item[i].imgURL[0].img,
-                                    path: testPath + data.item[i].imgURL[0].img,
+                                    filename: image,
+                                    path: testPath + image,
                                     cid: 'prod'+i
                                 })
                         }
 
-                        console.log("--------------------");
-                        console.log("test=>" + JSON.stringify(test, null, 2));
-                        console.log("-----------------------");
+//                        console.log("--------------------");
+//                        console.log("test=>" + JSON.stringify(test, null, 2));
+//                        console.log("-----------------------");
 
 //                        var serverOrg=config.server.host+':'+config.server.port;
 //                        var emailHeaderImage;
@@ -881,13 +887,14 @@ module.exports = {
 
 
 //                }
-
+//console.log("mailOptions");
+//console.log("-----------------");
+//console.log(mailOptions);
 
                 // send mail with defined transport object
                 transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
                         console.log("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
-                        alert("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
                         return  res.send(500);
                     }
                     console.log('Message sent: %s', info.messageId);

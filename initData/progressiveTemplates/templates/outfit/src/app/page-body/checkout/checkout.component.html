@@ -412,6 +412,21 @@
             </div>
             <div class="col-sm-6">
               <label class="sub-header-text-h2">
+                E-MAIL ADDRESS
+              </label>
+              <input class="form-control" type="text" placeholder="you@example.com" [formControl]="pickupForm.controls['email']">
+
+              <div *ngIf="pickupForm.controls['email'].hasError('required')
+            && pickupForm.controls['email'].touched && pickupForm.controls['email'].dirty" class="alert alert-danger">
+                You must include an email.
+              </div>
+              <div *ngIf="!pickupForm.controls['email'].valid && pickupForm.controls['email'].touched && pickupForm.controls['email'].dirty"
+                class="alert alert-danger">
+                invalid Email
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="sub-header-text-h2">
                 TELEPHONE
               </label>
               <input class="form-control" type="text" maxlength="16" placeholder="+94712345678" [formControl]="pickupForm.controls['phone']">

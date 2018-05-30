@@ -151,6 +151,7 @@ export class CheckoutComponent implements OnInit {
 
     this.pickupForm = fb.group({
       'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
+      'email': new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/), Validators.minLength(12)])),
 
     });
@@ -471,7 +472,7 @@ register() {
       country: data.country,
       pickupId: data.id,
       pickupCost: data.cost,
-      deliverDetails: { name: details.name, number: details.phone },
+      deliverDetails: { name: details.name,email: details.email, number: details.phone },
 
     }
     this.chk(this.pickupData);
@@ -830,7 +831,7 @@ register() {
           "tax": this.payInfo.taxTotal,
           "pickupId": this.payInfo.item.pickupId,
           "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
+          "email": this.payInfo.item.deliverDetails.email,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
           'note': note
@@ -981,7 +982,7 @@ register() {
           "tax": this.payInfo.taxTotal,
           "pickupId": this.payInfo.item.pickupId,
           "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
+          "email": this.payInfo.item.deliverDetails.email,
           "currency": this.dataService.currency,
           "promotionCode": this.payInfo.promotionCode,
           'note': note
@@ -1131,7 +1132,7 @@ register() {
         "tax": this.payInfo.taxTotal,
         "pickupId": this.payInfo.item.pickupId,
         "pickupCost": this.chkPickupCost,
-        "email": this.payInfo.userEmail,
+        "email": this.payInfo.item.deliverDetails.email,
         "currency": this.dataService.paypalCurrency,
         "promotionCode": this.payInfo.promotionCode,
         'note': note
