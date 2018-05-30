@@ -25,13 +25,13 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 1338,
+  port: 80,
 
-  ssl: {
-    ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
-    key: require('fs').readFileSync(__dirname + '/ssl/private.key'),
-    cert: require('fs').readFileSync(__dirname + '/ssl/certificate.crt')
-  },
+  // ssl: {
+  //   ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
+  //   key: require('fs').readFileSync(__dirname + '/ssl/private.key'),
+  //   cert: require('fs').readFileSync(__dirname + '/ssl/certificate.crt')
+  // },
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
@@ -43,16 +43,16 @@ module.exports = {
   
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'https://dashboard.otenro.com',
+  HOST_URL : 'http://developer.appmaker.lk/',
   // ME SERVER Config
-  ME_SERVER_URL : 'https://cdn.otenro.com/temp/',
-  ME_SERVER : '/home/admin/web/cdn.otenro.com/public_html/temp/',
-  ME_SERVER_PORT : 8081,
+  ME_SERVER_URL : 'http://developer.appmaker.lk:8181/temp',
+  ME_SERVER : '/home/milhan/public_html/developer/meServer/temp/',
+  ME_SERVER_PORT : 8181,
   // APP FILE SERVER Config
-  APP_FILE_SERVER : '/home/otenro/appFileServer/',
+  APP_FILE_SERVER : '/home/milhan/public_html/developer/appFileServer/',
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
-  TEMPLATES_PATH : '/home/otenro/sslOtenro3/Otenro/initData/templates/',
-  PROGRESSIVE_TEMPLATES_PATH : '/home/otenro/sslOtenro3/Otenro/initData/progressiveTemplates/',
-  REDIRECT_URL : 'https://dashboard.otenro.com'
+  TEMPLATES_PATH : '/home/Ideadroid/Otenro/initData/templates/',
+  PROGRESSIVE_TEMPLATES_PATH : '/home/Ideadroid/Otenro/initData/progressiveTemplates/',
+  REDIRECT_URL : 'http://developer.appmaker.lk/'
 
 };

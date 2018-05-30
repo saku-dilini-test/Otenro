@@ -3,9 +3,9 @@ echo  'start....'
 
 #leave and comment other env
 #local
-MESERVER='/var/www/html/meServer/temp/';
-NODE='/var/www/html/meServer/node_modules/';
-APPFILESERVER='/var/www/html/meServer/temp/';
+#MESERVER='/var/www/html/meServer/temp/';
+#NODE='/var/www/html/meServer/node_modules/';
+#APPFILESERVER='/var/www/html/meServer/temp/';
 
 #stag
 #MESERVER='/home/admin/web/testcdn.otenro.com/public_html/temp/';
@@ -13,9 +13,9 @@ APPFILESERVER='/var/www/html/meServer/temp/';
 #APPFILESERVER='/home/otenro/OtenroTest/appFileServer/';
 
 #prod
-#MESERVER='/home/admin/web/cdn.otenro.com/public_html/temp/';
-#NODE='/home/admin/web/cdn.otenro.com/public_html/node_modules/';
-#APPFILESERVER='/home/otenro/appFileServer/';
+#MESERVER='/home/milhan/public_html/developer/meServer/temp/';
+#NODE='/home/milhan/public_html/developer/meServer/node_modules/';
+#APPFILESERVER='/home/milhan/public_html/developer/appFileServer/';
 
 ENV='dev'   #this is for development
 #ENV='pro'  #this is for production
@@ -31,8 +31,8 @@ then
 	DB='otenroTest'
 	serverUrl='https://testdashboard.otenro.com:1448'
 else
-	DB='otenro'
-	serverUrl='https://dashboard.otenro.com'
+	DB='appmaker'
+	serverUrl='http://developer.appmaker.lk'
 fi
 echo $DB
 echo $serverUrl
