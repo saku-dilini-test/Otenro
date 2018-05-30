@@ -25,7 +25,7 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 80,
+  port: 1338,
 
   // ssl: {
   //   ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
@@ -45,9 +45,9 @@ module.exports = {
   // HOST URL 
   HOST_URL : 'http://developer.appmaker.lk/',
   // ME SERVER Config
-  ME_SERVER_URL : 'http://developer.appmaker.lk:8181/temp',
+  ME_SERVER_URL : 'http://developer.appmaker.lk:80/temp',
   ME_SERVER : '/home/milhan/public_html/developer/meServer/temp/',
-  ME_SERVER_PORT : 8181,
+  ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
   APP_FILE_SERVER : '/home/milhan/public_html/developer/appFileServer/',
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
