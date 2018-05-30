@@ -92,7 +92,23 @@ module.exports = {
                                 parentMenuItems.push(list[i]);
                             }
                         }
-                        res.send(mainCatCtrl.makeCategoryArray(parentMenuItems, list, products));
+
+                        var arr = mainCatCtrl.makeCategoryArray(parentMenuItems, list, products);
+
+                        arr.forEach(function(cat){
+                            if(cat.childNodes.length > 0 && cat.childNodes.updatedAt){
+                                var childNodesArr=cat.childNodes;
+                                 var childNodesArrSorted = childNodesArr.sort(function(a,b){
+                                     return b.updatedAt - a.updatedAt;
+                                 });
+                                 cat.childNodes = childNodesArrSorted;
+                            }
+                        });
+
+
+
+
+                        res.send(arr);
                     }
                 });
 
