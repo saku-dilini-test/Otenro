@@ -169,8 +169,8 @@
                   </div>
 
                 </div>
-                <div class="col-sm-6" *ngIf = "!showUser">
-                  <a (click) = "login()" class="a-btn a-block color">Returning customer? </a>
+                <div class="col-sm-6" *ngIf="!showUser">
+                  <a (click)="login()" class="a-btn a-block color">Returning customer? </a>
                 </div>
               </div>
             </div>
@@ -211,7 +211,7 @@
                         You must include Street Number.
                       </div>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                       <label class="sub-header-text-h2">
                         CITY
                       </label>
@@ -393,10 +393,11 @@
         PICKUP ADDRESS
       </h2>
       <br>
-      <div class="col-sm-12" *ngIf = "!showUser">
-        <a (click) = "login()" class="a-btn a-block color">Returning customer? </a>
+      <div class="col-sm-12" *ngIf="!showUser">
+        <a (click)="login()" class="a-btn a-block color">Returning customer? </a>
       </div>
-      <br><br>
+      <br>
+      <br>
       <form [formGroup]="pickupForm" (ngSubmit)="submitForm(pickupForm.value)" novalidate class="spacing-form animated fadeInUp animDelay04">
         <div>
           <div class="row">
@@ -406,14 +407,14 @@
               </label>
               <input class="form-control" name="name" id="name" placeholder="Arstina" [formControl]="pickupForm.controls['name']">
               <div *ngIf="pickupForm.controls['name'].dirty || pickupForm.controls['name'].touched">
-                  <div *ngIf="pickupForm.controls['name'].hasError('required')
+                <div *ngIf="pickupForm.controls['name'].hasError('required')
                 && pickupForm.controls['name'].touched" class="alert alert-danger">
-                    You must include a Name.
-                  </div>
-                  <div *ngIf="!pickupForm.controls['name'].valid" class="alert alert-danger">
-                    Name must only include Alphabetic character
-                  </div>
+                  You must include a Name.
                 </div>
+                <div *ngIf="!pickupForm.controls['name'].valid" class="alert alert-danger">
+                  Name must only include Alphabetic character
+                </div>
+              </div>
             </div>
             <div class="col-sm-6">
               <label class="sub-header-text-h2">
@@ -447,18 +448,18 @@
             </div>
 
             <div class="col-sm-12" *ngIf="pickupForm.valid">
-                <h4 class="my-3 main-header-font">Select a Location</h4>
-                <div class="row main-content-font">
-                  <div class="radio" *ngFor="let pick of pickup, let idx = index">
-                    <label>
-                      <input id="pickup" #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx],pickupForm.value)'>
-                      <b>{{pick.locationName}}</b>
-                      <div>{{pick.number}}, {{pick.streetAddress}}, {{pick.city}}, {{pick.postalCode}}, {{pick.country}}.</div>
-                    </label>
-                  </div>
+              <h4 class="my-3 main-header-font">Select a Location</h4>
+              <div class="row main-content-font">
+                <div class="radio" *ngFor="let pick of pickup, let idx = index">
+                  <label>
+                    <input id="pickup" #r type="radio" name="pickup" value="{{pick.locationName}}" class="custom-control-input" (click)='checkout(pickup[idx],pickupForm.value)'>
+                    <b>{{pick.locationName}}</b>
+                    <div>{{pick.number}}, {{pick.streetAddress}}, {{pick.city}}, {{pick.postalCode}}, {{pick.country}}.</div>
+                  </label>
                 </div>
-        
               </div>
+
+            </div>
 
           </div>
         </div>
@@ -588,6 +589,14 @@
       </div>
     </div>
 
+    <div *ngIf="payhere" class="mt-3">
+      <div class="radio">
+        <label>
+          <input type="radio" name="payhere" value="payhere" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input"> PayHere
+        </label>
+      </div>
+    </div>
+
     <form *ngIf="paymentType == 'cashOnPickup' || paymentType == 'cashOnDelivery'" name="cashPaymentFrom" novalidate class="row my-4">
       <div class="col-sm-12 margin-left">
         <h5 *ngIf="paymentType == 'cashOnDelivery'">Confirm payment by cash on delivery</h5>
@@ -597,6 +606,17 @@
       <div class="col-sm-12" style="margin: 10px 0">
         <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
       </div>
+    </form>
+
+    <form name="payHereFrom" *ngIf="paymentType == 'payhere'" novalidate>
+      <div class="col-sm-12 margin-left" >
+        <span class="col input-label" *ngIf="paymentType == 'payhere'">Confirm payment by payHere</span>
+        <div class="row cart-buttons">
+          <div class="col-sm-12"></div>
+          <button class="button button-block button-small made-easy-button-setting" (click)="payHere(noteDes)">Confirm</button>
+        </div>
+      </div>
+
     </form>
 
     <form name="cashPaymentFrom" novalidate class="row my-4" *ngIf="paymentType == 'paypal'">
@@ -680,7 +700,6 @@
         </div>
       </div>
     </form>
-
 
   </div>
 

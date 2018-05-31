@@ -54,6 +54,7 @@ module.exports = {
              //var currency = req.param("currency");
              var currency = "LKR";
              var sever = config.server.host+':'+config.server.port;
+             console.log(sever);
              //var  sever = "http://76c8163f.ngrok.io";
 
         var htmlForm ="<!DOCTYPE html> <html lang=\"en\"> <head> <meta charset=\"utf-8\"> " +
@@ -108,7 +109,7 @@ module.exports = {
 
     payHereSuccess : function (req,res) {
 
-
+        console.log("payhere success");
         var oderId = req.param("orderId");
 
         var searchOrder = {id:oderId};

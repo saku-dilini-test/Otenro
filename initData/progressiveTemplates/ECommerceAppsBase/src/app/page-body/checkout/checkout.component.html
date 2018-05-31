@@ -424,6 +424,13 @@
         </label>
       </div>
     </div>
+    <div *ngIf="payhere" class="mt-3">
+      <div class="radio">
+        <label>
+          <input type="radio" name="payhere" value="payhere" [(ngModel)]="paymentType" (ngModelChange)="ps=true" class="custom-control-input"> PayHere
+        </label>
+      </div>
+    </div>
 
     <form *ngIf="paymentType == 'cashOnPickup' || paymentType == 'cashOnDelivery'" name="cashPaymentFrom" novalidate class="row my-4">
       <div class="col-sm-12 margin-left">
@@ -434,6 +441,17 @@
       <div class="col-sm-12" style="margin: 10px 0">
         <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
       </div>
+    </form>
+
+    <form name="payHereFrom" *ngIf="paymentType == 'payhere'" novalidate>
+      <div class="col-sm-12 margin-left" >
+        <span class="col input-label" *ngIf="paymentType == 'payhere'">Confirm payment by payHere</span>
+        <div class="row cart-buttons">
+          <div class="col-sm-12"></div>
+          <button class="button button-block button-small made-easy-button-setting" (click)="payHere(noteDes)">Confirm</button>
+        </div>
+      </div>
+
     </form>
 
     <form name="cashPaymentFrom" novalidate class="row my-4" *ngIf="paymentType == 'paypal'">

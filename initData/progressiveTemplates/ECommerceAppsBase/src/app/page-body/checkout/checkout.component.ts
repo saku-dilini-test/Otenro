@@ -90,13 +90,15 @@ export class CheckoutComponent implements OnInit {
   private chkPickupCost;
   public makeStripePayment;
   public authorizeCreditCard;
+  private payhere;
   public orderDetails;
   public orderd = false;
   private years = [];
   private months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
   private emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   noteDes;showUser;
-
+  private oldUser;
+  private loggedUserData; private payHereMID;
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
     private currencyService: CurrencyService,
@@ -108,12 +110,14 @@ export class CheckoutComponent implements OnInit {
     this.title.changeTitle("Checkout");
 
     if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
+      this.oldUser = true;
       this.showUser = true;
-
+      this.loggedUserData = this.localStorageService.get('appLocalStorageUser' + this.appId);
       this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
 
+      console.log(this.loggedUserData);
     }else{
-
+      this.oldUser = false;
     }
 
     if (this.dataService.userData == null) {
@@ -143,7 +147,7 @@ export class CheckoutComponent implements OnInit {
       'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
       'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
       'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])),
-      'country': new FormControl(null)
+      'country': new FormControl(this.dataService.userData.country)
 
     });
     this.complexForm.controls['country'].setValue(this.dataService.userData.country, { onlySelf: true });
@@ -156,11 +160,22 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+check(user){
+  console.log(user);
+  if(user == 'oldUser'){
+    this.oldUser = true;
+    this.newUser = false;
+  }
+  if(user == 'newUser'){
+    this.oldUser = false;
+  }
+}
 
 login() {
   this.router.navigate(['login', this.formType]);
   console.log(this.dataService.cart);
 }
+
 
   ngOnInit() {
     let date = (new Date()).getFullYear()
@@ -473,25 +488,13 @@ login() {
 
     this.finalDetails = final;
     this.chkShippingCost = this.finalDetails.shippingCost;
-    // $log.debug(totalWeight);
-    // $log.debug(shippingCost);
-    // $log.debug(shippingDetails.shipping);
-    // $log.debug(this.dataService.cart.cartItems);
-    // $state.go('app.checkout',{item:shippingDetails});
     this.underWeight = this.finalDetails.underWeight;
     this.overWeight = this.finalDetails.overWeight;
 
-    // this.shippingCost = this.dataService.data.shippingCost;
 
     if (typeof this.chkShippingCost == 'undefined') {
       this.hideShipping = false;
     }
-
-    // if (this.finalDetails.delivery.location == "old" || this.finalDetails.item.delivery.location == "Pick up") {
-    //   this.chkCountry = this.localData.country;
-    // } else {
-    //   this.chkCountry = this.finalDetails.delivery.country;
-    // }
 
     if (this.localData) {
       this.chkCountry = this.localData.country;
@@ -651,6 +654,9 @@ login() {
         this.stripeShow = this.paymentData.stripeEnable;
         this.braintreeShow = this.paymentData.braintreeEnable;
         this.authorizeNet = this.paymentData.authorizeNetEnable;
+        this.payhere = this.paymentData.payHereEnable;
+        this.payHereMID = this.paymentData.payHereMerchantId;
+        console.log(this.payHereMID)
       }), (err) => {
         alert('warning!\n Unable to get Products Selected Category,\n Please check your connection!');
       };
@@ -659,9 +665,6 @@ login() {
     this.card = {
       amount: paymentParams.amount
     };
-
-    // this.makeStripePayment = this.makeStripePaymentMethod('');
-    // this.authorizeCreditCard = this.authorizeCreditCardMethod('');
 
   }
 
@@ -848,19 +851,6 @@ login() {
               }
             }
 
-            // //Pushing into order purchase history
-            // if (this.localStorageService.get("history" + this.appId + this.user.registeredUser) != null) {
-            //   this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-            // }
-            // this.orderHistory.push({
-            //   orderHistoryKey: this.appId,
-            //   createdDate: new Date(),
-            //   item: this.payInfo.cart,
-            //   amount: this.payInfo.amount,
-            // });
-
-            // this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
-
             this._success.next('Your Order has been successfully processed');
 
             this._success.subscribe((message) => this.successMessage = message);
@@ -997,18 +987,6 @@ login() {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
             }
-            //Pushing into order purchase history
-            // if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
-            //   this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-            // }
-            // this.orderHistory.push({
-            //   orderHistoryKey: this.appId,
-            //   createdDate: new Date(),
-            //   item: this.payInfo.cart,
-            //   amount: this.payInfo.amount,
-            // });
-
-            // this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
 
             this._success.next('Your Order has been successfully processed');
 
@@ -1131,6 +1109,209 @@ login() {
 
     this.dataService.payPalDetails = this.orderDetails;
 
+  }
+
+  payHere(note){
+
+    if(this.formType == "delivery"){
+      if (this.user) {
+        this.orderDetails = {
+
+          'appId': this.appId,
+          'registeredUser': this.user.registeredUser,
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.user.name,
+          'deliverName': this.fname,
+          'deliveryNo': this.streetNumber,
+          'deliveryStreet': this.streetName,
+          'deliveryCity': this.city,
+          'deliveryCountry': this.country,
+          'deliveryZip': this.zip,
+          'telNumber': this.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.paypalCurrency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note
+        };
+
+      } else {
+        this.orderDetails = {
+
+          'appId': this.appId,
+          'registeredUser': "Unknown User",
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.fname,
+          'deliverName': this.fname,
+          'deliveryNo': this.streetNumber,
+          'deliveryStreet': this.streetName,
+          'deliveryCity': this.city,
+          'deliveryCountry': this.country,
+          'deliveryZip': this.zip,
+          'telNumber': this.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.paypalCurrency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note
+        };
+      }
+  }
+  else{
+    if (this.user) {
+      this.orderDetails = {
+        "appId": this.appId,
+        "registeredUser": this.user.registeredUser,
+        "item": this.payInfo.cart,
+        "amount": this.payInfo.amount,
+        "customerName": this.payInfo.item.deliverDetails.name,
+        "telNumber": this.payInfo.item.deliverDetails.number,
+        "tax": this.payInfo.taxTotal,
+        "pickupId": this.payInfo.item.pickupId,
+        "pickupCost": this.chkPickupCost,
+        "email": this.payInfo.userEmail,
+        "currency": this.dataService.paypalCurrency,
+        "promotionCode": this.payInfo.promotionCode,
+        'note': note
+      }
+    }else{
+      this.orderDetails = {
+        "appId": this.appId,
+        "registeredUser": 'Unknown User',
+        "item": this.payInfo.cart,
+        "amount": this.payInfo.amount,
+        "customerName": this.payInfo.item.deliverDetails.name,
+        "telNumber": this.payInfo.item.deliverDetails.number,
+        "tax": this.payInfo.taxTotal,
+        "pickupId": this.payInfo.item.pickupId,
+        "pickupCost": this.chkPickupCost,
+        "email": this.payInfo.item.deliverDetails.email,
+        "currency": this.dataService.paypalCurrency,
+        "promotionCode": this.payInfo.promotionCode,
+        'note': note
+      }
+    }
+  }
+
+  this.http.post(SERVER_URL+"/templatesOrder/savePendingOrder",this.orderDetails)
+      .subscribe((orderRes:any) =>{
+
+        console.log("done save pending order");
+        console.log("orderRes :" );
+        console.log(orderRes);
+
+              this.http.post(SERVER_URL+"/templatesInventory/updateInventory",this.payInfo.cart)
+                  .subscribe((res) =>{
+                    this.dataService.cart.cartItems = [];
+                    this.dataService.cart.cartSize = 0;
+                    this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+                    this.dataService.cart.totalPrice = 0;
+                    this.dataService.cart.totalQuantity = 0;
+
+                          //Pushing into order purchase history
+                          let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+                          if (appUser) {
+                            if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+                              this.localStorageService.remove("cart" + appUser.registeredUser);
+                            }
+                          }
+
+                          showHelp(SERVER_URL+'/mobile/getPayHereForm/?name='+
+                          this.orderDetails.customerName+"&amount="+
+                          this.orderDetails.amount+"&currency="+
+                              this.currency.symbol+"&email="+
+                              this.orderDetails.email+"&telNumber="+
+                              this.orderDetails.telNumber+"&item="+
+                              this.orderDetails.item[0].name+"&address="+
+                              this.orderDetails.deliveryNo + " "+ this.orderDetails.deliveryStreet  + "&city="+
+                              this.orderDetails.deliveryCity+"&appId="+orderRes.orderData.appId+
+                              "&orderId="+orderRes.orderData.orderId+"&payHereMerchantId=1211173");
+
+                      },
+                      (err)=>{
+                          console.log(err);
+                      });
+
+
+
+          },
+          (err)=>{
+              console.log(err);
+          });
+
+
+  var inAppBrowserRef;
+
+  function showHelp(url) {
+
+      var target = "_blank";
+
+      var options = "location=yes,hidden=yes";
+
+      inAppBrowserRef = window.open (url, target, options);
+
+      inAppBrowserRef.addEventListener('loadstart', loadStartCallBack);
+
+      inAppBrowserRef.addEventListener('loadstop', loadStopCallBack);
+
+      inAppBrowserRef.addEventListener('loaderror', loadErrorCallBack);
+
+  }
+
+  function loadStartCallBack() {
+
+    $('#status-message').text("loading please wait ...");
+
+}
+
+function loadStopCallBack() {
+
+    if (inAppBrowserRef != undefined) {
+
+        inAppBrowserRef.insertCSS({ code: "body{font-size: 25px;" });
+
+        $('#status-message').text("");
+
+        inAppBrowserRef.show();
+    }
+
+}
+
+function loadErrorCallBack(params) {
+
+    $('#status-message').text("");
+
+    var scriptErrorMesssage =
+        "alert('Sorry we cannot open that page. Message from the server is : "
+        + params.message + "');"
+
+    inAppBrowserRef.executeScript({ code: scriptErrorMesssage }, executeScriptCallBack);
+
+    inAppBrowserRef.close();
+
+    inAppBrowserRef = undefined;
+
+}
+
+function executeScriptCallBack(params) {
+
+    if (params[0] == null) {
+
+        $('#status-message').text(
+            "Sorry we couldn't open that page. Message from the server is : '"
+            + params.message + "'");
+    }
+
+}
   }
 
   countryChanged(data) {
