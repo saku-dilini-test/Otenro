@@ -1,0 +1,91 @@
+
+<div class="bloc bgc-white none b-parallax tc-outer-space" id="bloc-12">
+  <div class="container bloc-md">
+    <div class="row bgc-white row-spacing-mobile">
+      <div class="col-sm-5">
+        <div class="div2" *ngFor="let item of cartItems ; let i = index">
+          <div class="div-product-cart-spacing">
+            <div class="row row-no-gutters">
+              <div class="col-xs-6">
+                <img *ngIf="item.imgURL" src="{{imageUrl}}/{{item.imgURL}}" class="img-responsive img-thumb-small-cart center-block lazyload">
+                <img *ngIf="!item.imgURL" src="{{imageUrl}}/{{item.imgDefault}}" class="img-responsive img-thumb-small-cart center-block lazyload">
+                <!-- <img src="img/lazyload-ph.png" data-src="img/1-5.png" /> -->
+              </div>
+              <div class="col-xs-6">
+                <h4 class="mg-md header-text-h2 text-left main-header-font">
+                  {{item.name}}
+                </h4>
+                <p *ngFor="let v of item.variant" class="sub-header-text-h2 text-justify main-content-font">
+                  {{v.name}} : {{v.vType}}
+                </p>
+                <input class="sub-header-text-h2 text-justify " name="qty" id="qty" type="number" min="1" oninput="validity.valid||(value='');"
+                  [(ngModel)]="item.qty" value="{{item.qty}}" (change)="buttonDisable(item.qty,item.totalQty ,cartItems.indexOf(item))"
+                  ngDefaultControl>
+                <br>
+                <!-- Product not available in store -->
+                <div class="col" *ngIf="cartItems[0].totalQty == 0">
+                  <span>
+                    Product not available
+                  </span>
+                </div>
+
+                <!-- If Buy-Qty greater than Selected-Variant-Available Qty -->
+                <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty > 1">
+                  <span style="color:rgb(180, 30, 30)">
+                    Enter a quantity of {{cartItems[i].totalQty}} or less.
+                  </span>
+                </div>
+                <div class="col" *ngIf="item.qty > cartItems[i].totalQty && cartItems[i].totalQty == 1">
+                  <span style="color:rgb(180, 30, 30)">
+                    Enter a quantity of {{cartItems[i].totalQty}}.
+                  </span>
+                </div><br>
+                <p class="sub-header-text-h2 text-justify  main-content-font">
+                  Total Price - {{currency}} {{itemPriceCal(item.total,item.qty)}}
+                </p>
+                <a (click)="removeItem(index)" class="btn btn-d btn-lg main-button pull-left button-mobile spacing-mobile-button">Remove</a>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div>
+
+					</div>
+          <h2 class="mg-md  header-text-h2">
+            <strong>Total Payable Amount</strong>
+            <br>
+          </h2>
+
+          <div class="row row-no-gutters pricing-table lines">
+            <div class="col-xs-6">
+              <p class="product-text text-siize ">
+                Total amount
+              </p>
+            </div>
+            <div class="col-xs-6">
+              <p class="text-right product-text text-siize " *ngIf="cartItems.length > 0" [(ngModel)]="total" ngDefaultControl>
+                {{currency}} {{getTotal()}}
+              </p>
+              <p class="text-right product-text text-siize " *ngIf="cartItems.length == 0">There are no Products added to the cart</p>
+
+            </div>
+          </div>
+          <div class="row spacing">
+            <div class="col-sm-6 ">
+              <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg main-button pull-right" (click)="delivery(cartItems)">Delivery</a>
+            </div>
+            <div class="col-sm-3 ">
+              <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg main-button pull-right" (click)='pickupDetails(cartItems)'>Pickup</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="col-sm-12" style="margin: 10px 0">
+  <ngb-alert *ngIf="successMessage" type="warning" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+</div>
