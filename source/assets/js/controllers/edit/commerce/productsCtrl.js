@@ -654,6 +654,7 @@
                 angular.element('#fileInput').val(null);
                 $scope.picFile = null;
                 $scope.myImage=null;
+                $scope.product.videoUrl = null;
                 toastr.success('Image has been uploaded successfully', 'Awesome', {
                     closeButton: true
                 });
