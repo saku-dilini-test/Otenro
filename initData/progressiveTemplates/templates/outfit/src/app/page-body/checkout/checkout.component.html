@@ -601,10 +601,15 @@
       <div class="col-sm-12 margin-left">
         <h5 *ngIf="paymentType == 'cashOnDelivery'">Confirm payment by cash on delivery</h5>
         <h5 *ngIf="paymentType == 'cashOnPickup'">Confirm payment by cash on pickup</h5>
-        <button class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="confirmCashPayment(noteDes)">Confirm</button>
+        <button *ngIf="!showSpinner" class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="confirmCashPayment(noteDes)">Confirm</button>
+        <div *ngIf="showSpinner" class="loader"></div>
+        <p *ngIf="showSpinner">Processing...</p>
       </div>
       <div class="col-sm-12" style="margin: 10px 0">
         <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+      </div>
+      <div class="col-sm-12" style="margin: 10px 0">
+        <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
       </div>
     </form>
 
@@ -613,7 +618,7 @@
         <span class="col input-label" *ngIf="paymentType == 'payhere'">Confirm payment by payHere</span>
         <div class="row cart-buttons">
           <div class="col-sm-12"></div>
-          <button class="button button-block button-small made-easy-button-setting" (click)="payHere(noteDes)">Confirm</button>
+          <button class="btn main-button btn-lg col-xs-12 col-sm-3" (click)="payHere(noteDes)">Confirm</button>
         </div>
       </div>
 
