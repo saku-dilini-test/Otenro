@@ -71,6 +71,9 @@
 					</h1>
 
 					<div style="display: block; background-color: rgb(10, 10, 20); height: 1px; width: 50%; margin: auto;"></div>
+
+					<img *ngIf="node.childNodes.length > 0 && node.products.length == 0" src="{{imageUrl}}/{{node.imageUrl}}" width="100%" />
+
 				</div>
 			</div>
 			<div class="row voffset">
@@ -97,7 +100,7 @@
 
 
 <!-- bloc-4 -->
-<div class="bloc bgc-white l-bloc hidden-lg hidden-md hidden-sm" id="bloc-4">
+<div class="bloc bgc-white l-bloc hidden-lg hidden-md hidden-sm" id="bloc-4" *ngIf="categories && categories.length != 0">
 	<div class="container bloc-lg">
 		<div class="row">
 			<div class="col-sm-12">
