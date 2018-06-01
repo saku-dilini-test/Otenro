@@ -399,7 +399,7 @@
                                              width="119px" height="119px"/>
                                         <br>
                                         <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[0].img" ng-change = "onChange(tmpImage[0].sku, 0)" ng-model="tmpImage[0].sku" placeholder="Select sku" multiple="">
+                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[0].img|| (originalSku.length == selectedSku.length && (tmpImage[0].sku.length == 0 || !tmpImage[0].sku))" ng-change = "onChange(tmpImage[0].sku, 0)" ng-model="tmpImage[0].sku" placeholder="Select sku" multiple="">
                                                 <md-option ng-value="variants" ng-repeat="variants in getSku(0)">{{ variants }}</md-option>
                                             </md-select>
                                         </md-input-container>
@@ -413,7 +413,7 @@
                                               width="119px" height="119px"/>
                                         <br>
                                         <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[1].img" ng-change = "onChange(tmpImage[1].sku, 1)" ng-model="tmpImage[1].sku" placeholder="Select sku" multiple="">
+                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[1].img || (originalSku.length == selectedSku.length && (tmpImage[1].sku.length == 0 || !tmpImage[1].sku))" ng-change = "onChange(tmpImage[1].sku, 1)" ng-model="tmpImage[1].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(1)">{{ variants }}</md-option>
                                             </md-select>
                                         </md-input-container>
@@ -427,7 +427,7 @@
                                              width="119px" height="119px"/>
                                         <br>
                                         <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[2].img" ng-change = "onChange(tmpImage[2].sku, 2)" ng-model="tmpImage[2].sku" placeholder="Select sku" multiple="">
+                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[2].img || (originalSku.length == selectedSku.length && (tmpImage[2].sku.length == 0 || !tmpImage[2].sku))" ng-change = "onChange(tmpImage[2].sku, 2)" ng-model="tmpImage[2].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(2)">{{ variants }}</md-option>
                                             </md-select>
                                         </md-input-container>
@@ -441,7 +441,7 @@
                                              width="119px" height="119px"/>
                                         <br>
                                         <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[3].img" ng-change = "onChange(tmpImage[3].sku, 3)" ng-model="tmpImage[3].sku" placeholder="Select sku" multiple="">
+                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[3].img || (originalSku.length == selectedSku.length && (tmpImage[3].sku.length == 0 || !tmpImage[3].sku))" ng-change = "onChange(tmpImage[3].sku, 3)" ng-model="tmpImage[3].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(3)">{{ variants }}</md-option>
                                             </md-select>
                                         </md-input-container>
@@ -455,7 +455,7 @@
                                              width="119px" height="119px"/>
                                         <br>
                                         <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[4].img" ng-change = "onChange(tmpImage[4].sku, 4)" ng-model="tmpImage[4].sku" placeholder="Select sku" multiple="">
+                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[4].img || (originalSku.length == selectedSku.length  && (tmpImage[4].sku.length == 0 || !tmpImage[4].sku))" ng-change = "onChange(tmpImage[4].sku, 4)" ng-model="tmpImage[4].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(4)">{{ variants }}</md-option>
                                             </md-select>
                                         </md-input-container>
@@ -469,7 +469,7 @@
                                              width="119px" height="119px"/>
                                         <br>
                                         <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[5].img" ng-change = "onChange(tmpImage[5].sku, 5)" ng-model="tmpImage[5].sku" placeholder="Select sku" multiple="">
+                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[5].img || (originalSku.length == selectedSku.length && (tmpImage[5].sku.length == 0 || !tmpImage[5].sku))" ng-change = "onChange(tmpImage[5].sku, 5)" ng-model="tmpImage[5].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(5)">{{ variants }}</md-option>
                                             </md-select>
                                         </md-input-container>
@@ -483,7 +483,7 @@
                                              width="119px" height="119px"/>
                                         <br>
                                         <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[6].img" ng-change = "onChange(tmpImage[6].sku, 6)" ng-model="tmpImage[6].sku" placeholder="Select sku" multiple="">
+                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[6].img || (originalSku.length == selectedSku.length && (tmpImage[6].sku.length == 0 || !tmpImage[6].sku))" ng-change = "onChange(tmpImage[6].sku, 6)" ng-model="tmpImage[6].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(6)">{{ variants }}</md-option>
                                             </md-select>
                                         </md-input-container>
@@ -497,7 +497,7 @@
                                              width="119px" height="119px"/>
                                         <br>
                                         <md-input-container>
-                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[7].img" ng-change = "onChange(tmpImage[7].sku, 7)" ng-model="tmpImage[7].sku" placeholder="Select sku" multiple="">
+                                            <md-select class="img-sku-w" ng-disabled="!tmpImage[7].img || (originalSku.length == selectedSku.length && (tmpImage[7].sku.length == 0  || !tmpImage[7].sku))" ng-change = "onChange(tmpImage[7].sku, 7)" ng-model="tmpImage[7].sku" placeholder="Select sku" multiple="">
                                                 <md-option  ng-value="variants" ng-repeat="variants in getSku(7)">{{ variants }}</md-option>
                                             </md-select>
                                         </md-input-container>
