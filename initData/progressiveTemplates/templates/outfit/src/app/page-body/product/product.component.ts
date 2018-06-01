@@ -103,92 +103,9 @@ export class ProductComponent implements OnInit {
             this.carouselEl.carousel({
                 interval: false
             }).on('slid.bs.carousel', (event) => {
-                // console.log(event);
-                let index;
-                let playerIndex;
 
-                if (event.direction == 'right') {
-
-                    if (carouselItems.siblings('.active').index() == (this.Data.tempImageArray.length - 1)) {
-                        // console.log('inside if');
-                        playerIndex = 0;
-                        index = this.Data.tempImageArray.length - 1
-                        document.getElementById('player' + playerIndex).style.display = 'none';
-                        document.getElementById('image' + playerIndex).style.display = 'block';
-
-                        var iframePlayer = new Player('player' + playerIndex);
-                        iframePlayer.unload().then(function () {
-                            // the video was unloaded
-                            console.log('player unloaded if');
-                        }).catch(function (error) {
-                            // an error occurred
-                        });
-
-                    } else {
-                        // console.log('inside else');
-                        index = carouselItems.siblings('.active').index();
-                        if (carouselItems.siblings('.active').index() == -1) {
-                            index = 0;
-                            playerIndex = index + 1;
-                        } else {
-                            index = carouselItems.siblings('.active').index();
-                            playerIndex = index + 1;
-                        }
-                        document.getElementById('player' + playerIndex).style.display = 'none';
-                        document.getElementById('image' + playerIndex).style.display = 'block';
-
-                        var iframePlayer = new Player('player' + playerIndex);
-                        iframePlayer.unload().then(function () {
-                            // the video was unloaded
-                            console.log('player unloaded else');
-                        }).catch(function (error) {
-                            // an error occurred
-                        });
-                    }
-
-                } else {
-
-                    if (carouselItems.siblings('.active').index() == -1) {
-                        index = 0;
-                        playerIndex = this.Data.tempImageArray.length - 1;
-                        document.getElementById('player' + (this.Data.tempImageArray.length - 1)).style.display = 'none';
-                        document.getElementById('image' + (this.Data.tempImageArray.length - 1)).style.display = 'block';
-                    } else {
-                        index = carouselItems.siblings('.active').index();
-                        playerIndex = index - 1;
-                        document.getElementById('player' + (index - 1)).style.display = 'none';
-                        document.getElementById('image' + (index - 1)).style.display = 'block';
-                    }
-
-                    // console.log(document.getElementById('image' + index).style);
-                    // console.log(document.getElementById('player' + index).style);
-                    var iframePlayer = new Player('player' + playerIndex);
-                    iframePlayer.unload().then(function () {
-                        // the video was unloaded
-                        console.log('player unloaded left');
-                    }).catch(function (error) {
-                        // an error occurred
-                    });
-
-
-                }
-
-
-                // var iframe = document.querySelector('iframe');
-                // // console.log(iframe);
-                // var iframePlayer = new Player(iframe);
-                // // console.log(iframePlayer);
-
-                // iframePlayer.unload().then(function () {
-                //     // the video was unloaded
-                //     console.log('player unloaded');
-                // }).catch(function (error) {
-                //     // an error occurred
-                // });
-                // console.log(index);
             })
         })
-        // console.log(this.clicked);
     }
 
     ngAfterContentChecked() {
@@ -225,8 +142,8 @@ export class ProductComponent implements OnInit {
         // console.log(ids);
 
         // console.log(document.getElementById('image' + index).style.display);
-        document.getElementById('image' + index).style.display = 'none';
-        document.getElementById('player' + index).style.display = 'block';
+        // document.getElementById('image' + index).style.display = 'none';
+        // document.getElementById('player' + index).style.display = 'block';
 
         // this.player = new Player(document.getElementById('handstick'));
 
@@ -256,16 +173,21 @@ export class ProductComponent implements OnInit {
 
         var options = {
             id: ids,
-            width: 360,
-            height: 360,
             loop: true,
             autoplay: true
         };
         if (ids) {
-            var player = new Player('player' + index, options);
+            var player = new Player('player', options);
             // console.log(player);
 
             player.ready().then(function () {
+
+                // var frame = $('player' + index)[0];
+                // if (frame !== null) {
+                //   frame.style.width = '100%'
+
+                // }
+
                 // console.log('player is ready');
                 // player.getVideoEmbedCode().then(function(embedCode) {
                 //     // embedCode = <iframe> embed code

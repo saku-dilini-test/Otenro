@@ -12,7 +12,7 @@
                 <button *ngIf="Data.tempImageArray[0].videoUrl" type="button" (click)="video(0,Data.tempImageArray[0].videoUrl)" class="video-h8 btn btn-default btn-sm">
                   <span class="glyphicon glyphicon-play"></span> Play</button>
               </div>
-              <div style="display:none;width:100%" id="player0"></div>
+              <!--<div style="display:none;width:100%" id="player0"></div>-->
             </div>
             <div class="item" *ngFor="let item of Data.tempImageArray |slice:1; let i = index">
               <div id="image{{i+1}}" style="display:block">
@@ -20,7 +20,7 @@
                 <button *ngIf="item.videoUrl" type="button" (click)="video(i+1,item.videoUrl)" class="video-h8 btn btn-default btn-sm">
                   <span class="glyphicon glyphicon-play"></span> Play</button>
               </div>
-              <div style="display:none;width:100%" id="player{{i+1}}"></div>
+              <!-- <div data-vimeo-responsive="1" style="display:none;width:300px" id="player{{i+1}}"></div> -->
             </div>
           </div>
 
@@ -112,7 +112,6 @@
           <div class="blocs-custom-html spacing-bottom">
             <div style="display: block; background-color: rgb(10, 10, 20); height: 1px; width: 100%; margin: auto;"></div>
 
-
             <div class="col-xs-12 text-center text-warning" *ngIf="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
               <span>
                 Please enter a quantity of {{selectedVariant.quantity}} or less.
@@ -152,7 +151,6 @@
                 </div>
               </div>
             </div>
-
             <div class="row row-no-gutters voffset padding-mobile" *ngIf="!(Data.variants.length >= 1 && selectedVariant.quantity == 0 && lockBuyButton)">
               <div class="col-sm-6">
                 <button (click)='addToCart("buyNowCart")' [disabled]="isBuyBtnDisable" class="btn btn-d btn-sq btn-lg main-button animDelay02">BUY NOW</button>
@@ -168,3 +166,5 @@
     </div>
   </div>
 </div>
+
+<div data-vimeo-responsive="1" style="width:300px" id="player"></div>
