@@ -93,6 +93,9 @@
                 </div>
               </div>
             </div> -->
+            <div  *ngIf="ifInvalidUserPassword"  class="alert alert-danger row padding text-center">
+              <div><i class="fa fa-exclamation-triangle"></i> Email or password is not correct. Please try again.</div>
+            </div>
             <div class="col-xs-6 text-center">
               <button [disabled]="loading || userEmail.invalid || password.invalid" type="submit" class="btn btn-d btn-lg main-button">Login</button>
             </div>
