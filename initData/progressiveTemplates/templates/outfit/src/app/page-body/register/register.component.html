@@ -91,11 +91,11 @@
               <label class="sub-header-text-h2">
                 Street Name
               </label>
-              <input class="form-control" type="text" #streetName='ngModel' id="streetName" name="streetName" placeholder="Your Road" ngModel
+              <input class="form-control" type="text" pattern="^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$" #streetName='ngModel' id="streetName" name="streetName" placeholder="Your Road" ngModel
                 required>
               <div [hidden]="streetName.valid || streetName.pristine" class="alert alert-danger">
                 <div [hidden]="!streetName.hasError('required')">Street Name is required</div>
-                <div [hidden]="!streetName.hasError('pattern')">Invalid Street name no special Characters.</div>
+                <div [hidden]="!streetName.hasError('pattern')">Invalid Street name, no special Characters & unnecessary spaces .</div>
               </div>
             </div>
 
@@ -103,10 +103,10 @@
               <label class="sub-header-text-h2">
                 City
               </label>
-              <input class="form-control" type="text" #city='ngModel' pattern="^[a-zA-Z ]*$" id="city" name="city" placeholder="Your City" ngModel required>
+              <input class="form-control" type="text" #city='ngModel' pattern="^([a-zA-Z]+\s)*[a-zA-Z]+$" id="city" name="city" placeholder="Your City" ngModel required>
               <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
                 <div [hidden]="!city.hasError('required')">City is required</div>
-                <div [hidden]="!city.hasError('pattern')">City must only include Alphabetic character.</div>
+                <div [hidden]="!city.hasError('pattern')">City must only include Alphabetic character & no unnecessary spaces.</div>
               </div>
             </div>
 

@@ -223,8 +223,7 @@
                       </div>
                       <div *ngIf="!complexForm.controls['city'].valid && complexForm.controls['city'].touched && complexForm.controls['city'].dirty"
                         class="alert alert-danger">
-                        City must only include Alphabetic character.
-                      </div>
+                        City must only include Alphabetic character & no unnecessary spaces.                      </div>
                     </div>
                   </div>
                   <div class="col-sm-6">
@@ -256,8 +255,7 @@
                       </div>
                       <div *ngIf="!complexForm.controls['streetName'].valid && complexForm.controls['streetName'].touched && complexForm.controls['streetName'].dirty"
                         class="alert alert-danger">
-                        Invalid Street name no special Characters.
-                      </div>
+                        Invalid Street name, no special Characters & unnecessary spaces.                      </div>
                     </div>
 
                     <div class="form-group">
