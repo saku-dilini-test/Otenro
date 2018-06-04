@@ -53,7 +53,7 @@
 
 
             <li>
-              <a class="nav-link" (click)="navigate('cart')"><i class="fa fa-shopping-cart" title="Shopping Cart"></i></a>
+              <a class="nav-link" (click)="navigate('cart')"><i class="fa fa-shopping-cart" title="Shopping Cart"></i></a>{{cartNo}}
             </li>
             <li *ngIf="loginStatus">
               <a class="nav-link" (click)="logout()"><i class="fa fa-sign-out" title="Sign out"></i></a>
