@@ -280,7 +280,7 @@
                 <label class="sub-header-text-h2">
                   COUNTRY
                 </label>
-                <select id="country" class="form-control" formControlName="country" (change)="countryChanged()">
+                <select id="country" class="form-control" formControlName="country" [(ngModel)]="selectedCountry" (change)="countryChanged();check('newUser',selectedCountry);">
                   <option *ngFor="let c of countries" [ngValue]="c.countryName">
                     {{c.countryName}}
                   </option>
@@ -319,16 +319,18 @@
               <br>
               <!-- <a href="index.html" class="btn btn-d btn-lg button-buy pull-right">Continue</a> -->
             </form>
+            <form [formGroup]="shippingForm">
             <div class="col-md-5" *ngIf="newUser && complexForm.valid || oldUser">
               <h3 class="main-header-font">Shipping Options</h3>
               <div class="radio main-content-font" *ngFor="let ship of shippingData, let idx = index">
                 <label>
-                  <input id="delivery" #r name="shipping" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping"
-                    (change)='addShipping(ship,$event,complexForm.value)' [ngModelOptions]="{standalone: true}"> {{ship.optionName}}
+                  <input id="delivery" [formControl]="shippingForm.controls['shippingOption']" name="shippingOptions" type="radio" class="custom-control-input" value="{{ship.optionName}}" [(ngModel)]="details.shipping"
+                    (change)='addShipping(ship,$event,complexForm.value)' > {{ship.optionName}}
                   <!-- <span>({{ship.shippingOption}})</span> -->
                 </label>
               </div>
             </div>
+          </form>
           </div>
         </div>
       </div>

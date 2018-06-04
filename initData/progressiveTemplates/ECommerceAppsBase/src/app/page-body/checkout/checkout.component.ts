@@ -33,6 +33,7 @@ export class CheckoutComponent implements OnInit {
 
   complexForm: FormGroup;
   pickupForm: FormGroup;
+  shippingForm: FormGroup;
 
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
@@ -98,7 +99,11 @@ export class CheckoutComponent implements OnInit {
   private emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   noteDes; showUser;
   private oldUser;
-  private loggedUserData; private payHereMID;
+  private loggedUserData;
+  private payHereMID;
+  private isCountryChanged = false;
+  private selectedCountry;
+
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
     private currencyService: CurrencyService,
@@ -136,6 +141,11 @@ export class CheckoutComponent implements OnInit {
       this.dataService.userData = userData;
 
     }
+    this.selectedCountry = this.dataService.userData.country;
+
+    this.shippingForm = fb.group({
+      shippingOption: new FormControl('', )
+    });
 
     this.complexForm = fb.group({
       // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
@@ -159,23 +169,6 @@ export class CheckoutComponent implements OnInit {
 
     });
   }
-
-  check(user) {
-    console.log(user);
-    if (user == 'oldUser') {
-      this.oldUser = true;
-      this.newUser = false;
-    }
-    if (user == 'newUser') {
-      this.oldUser = false;
-    }
-  }
-
-  login() {
-    this.router.navigate(['login', this.formType]);
-    console.log(this.dataService.cart);
-  }
-
 
   ngOnInit() {
     let date = (new Date()).getFullYear()
@@ -232,29 +225,12 @@ export class CheckoutComponent implements OnInit {
 
     // get the shipping options
 
-    var param2 = {
-      'appId': this.appId,
-      'country': this.dataService.userData.country
-    };
+    // if () { }
+
     if (this.formType == 'delivery') {
       this.spinner.show();
-      this.http.post(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
-        .subscribe((data) => {
-          this.spinner.hide();
-          this.shippingDatas = data;
-          // $log.debug($scope.shippingData);
-          for (var i = 0; i < this.shippingDatas.length; i++) {
-            if (this.shippingDatas[i].shippingOption == "Flat Rate" ||
-              this.shippingDatas[i].shippingOption == "Weight Based") {
-              this.shippingData.push(this.shippingDatas[i]);
-            }
-          }
-        }, (err) => {
-          this.spinner.hide();
-          alert(
-            'Error Retrieving shipping details!\n Please check your connection.'
-          );
-        });
+      this.getShippingData(this.appId, this.dataService.userData.country);
+
     } else {
       this.spinner.show();
       this.shippingService.getShippingPickupInfo()
@@ -272,14 +248,93 @@ export class CheckoutComponent implements OnInit {
           );
         });
     }
+
     this.amount = this.getTotal();
 
+  }
 
-    // -------------------pickup--------------------------------------------
+  getShippingData(appId, Country) {
 
+    this.shippingData = [];
 
+    console.log("Country : ");
+    console.log(Country);
+    console.log("appId : " + appId);
 
+    let param2 = {
+      'appId': appId,
+      'country': Country
+    }
 
+    this.http.post(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
+      .subscribe((data) => {
+        this.spinner.hide();
+        this.shippingDatas = data;
+        // $log.debug($scope.shippingData);
+        for (var i = 0; i < this.shippingDatas.length; i++) {
+          if (this.shippingDatas[i].shippingOption == "Flat Rate" ||
+            this.shippingDatas[i].shippingOption == "Weight Based") {
+            this.shippingData.push(this.shippingDatas[i]);
+          }
+        }
+        console.log(this.shippingData);
+      }, (err) => {
+        this.spinner.hide();
+        alert(
+          'Error Retrieving shipping details!\n Please check your connection.'
+        );
+      });
+
+  }
+
+  check(user, newUserCountry) {
+    console.log(user);
+    if (user == 'oldUser') {
+      console.log('oldUser');
+      this.oldUser = true;
+      this.newUser = false;
+      this.getShippingData(this.appId, this.dataService.userData.country);
+      this.isSelected = false;
+      this.shippingForm.controls['shippingOption'].reset();
+    }
+    if (user == 'newUser') {
+      console.log('new Users');
+      this.oldUser = false;
+      if (!newUserCountry) {
+        this.getShippingData(this.appId, this.selectedCountry);
+      } else {
+        this.getShippingData(this.appId, newUserCountry);
+      }
+    }
+    this.isSelected = false;
+    this.shippingForm.controls['shippingOption'].reset();
+  }
+
+  countryChanged(data) {
+    this.hide = true;
+    this.isSelected = false;
+    this.isCountryChanged = true;
+    this.shippingForm.controls['shippingOption'].reset();
+    // var param = {
+    //   'appId': this.appId,
+    //   'country': data
+    // };
+
+    // this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
+    //   if (data == '') {
+    //     this.hide = true;
+    //     this.tax = 0;
+    //   } else {
+    //     this.tax = data[0].taxAmount;
+    //     this.hide = false;
+    //   }
+    // })
+
+  }
+
+  login() {
+    this.router.navigate(['login', this.formType]);
+    console.log(this.dataService.cart);
   }
 
   checkNote(note) {
@@ -497,7 +552,12 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (this.localData) {
-      this.chkCountry = this.localData.country;
+      if (this.oldUser == true) {
+        this.chkCountry = this.localData.country;
+      } else {
+        this.chkCountry = this.selectedCountry;
+      }
+
     } else {
       if (this.formType == 'delivery') {
         this.chkCountry = this.country;
@@ -1365,27 +1425,5 @@ export class CheckoutComponent implements OnInit {
 
     }
   }
-
-  countryChanged(data) {
-    this.hide = true;
-    this.isSelected = false;
-
-    var param = {
-      'appId': this.appId,
-      'country': data
-    };
-
-    this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
-      if (data == '') {
-        this.hide = true;
-        this.tax = 0;
-      } else {
-        this.tax = data[0].taxAmount;
-        this.hide = false;
-      }
-    })
-
-  }
-
 
 }
