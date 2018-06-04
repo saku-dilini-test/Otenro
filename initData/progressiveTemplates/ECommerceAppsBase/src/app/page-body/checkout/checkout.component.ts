@@ -156,7 +156,7 @@ export class CheckoutComponent implements OnInit {
       'streetNo': new FormControl(this.dataService.userData.streetNumber, Validators.compose([Validators.required])),
       'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
       'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
-      'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])),
+      'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$/)])),
       'country': new FormControl(this.dataService.userData.country)
 
     });

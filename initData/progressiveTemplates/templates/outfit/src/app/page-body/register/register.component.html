@@ -121,9 +121,10 @@
               <label class="sub-header-text-h2">
                 Zip/ Postal Code
               </label>
-              <input class="form-control" #zip='ngModel' type="text" id="zip" name="zip" placeholder="70000" ngModel required>
+              <input class="form-control" #zip='ngModel' type="text" id="zip" pattern="^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$" name="zip" placeholder="A-123" ngModel required>
               <div [hidden]="zip.valid || zip.pristine" class="alert alert-danger">
                 <div [hidden]="!zip.hasError('required')">Postal code is required</div>
+                <div [hidden]="!zip.hasError('pattern')">Invalid ZIP code (A-123)</div>
               </div>
             </div>
 

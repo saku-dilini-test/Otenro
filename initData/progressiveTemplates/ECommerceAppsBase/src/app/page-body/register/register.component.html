@@ -120,9 +120,10 @@
       <div class="form-group col-xs-6">
         <label for="zip" class="col-2 col-form-label">Zip/ Postal Code</label>
         <div class="col-10">
-          <input class="form-control" #zip='ngModel' type="text" id="zip" name="zip" placeholder="70000" ngModel required>
+          <input class="form-control" #zip='ngModel' pattern="^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$" type="text" id="zip" name="zip" placeholder="70000" ngModel required>
           <div [hidden]="zip.valid || zip.pristine" class="alert alert-danger">
             <div [hidden]="!zip.hasError('required')">Postal code is required</div>
+            <div [hidden]="!zip.hasError('pattern')">invalid zip code</div>
           </div>
         </div>
       </div>

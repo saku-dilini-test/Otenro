@@ -256,7 +256,7 @@
                       <label class="sub-header-text-h2">
                         POSTAL CODE/ZIP
                       </label>
-                      <input class="form-control" type="text" placeholder="70000" [formControl]="complexForm.controls['zip']">
+                      <input class="form-control" type="text" placeholder="A-123" [formControl]="complexForm.controls['zip']">
 
                       <div *ngIf="complexForm.controls['zip'].hasError('required')
                     && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty" class="alert alert-danger">
@@ -264,7 +264,7 @@
                       </div>
                       <div *ngIf="!complexForm.controls['zip'].valid && complexForm.controls['zip'].touched && complexForm.controls['zip'].dirty"
                         class="alert alert-danger">
-                        invalid zip code
+                        Invalid ZIP code (A-123)
                       </div>
                     </div>
                   </div>
