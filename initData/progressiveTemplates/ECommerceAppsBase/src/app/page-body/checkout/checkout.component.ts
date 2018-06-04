@@ -488,7 +488,7 @@ export class CheckoutComponent implements OnInit {
         }
         if (i != shippingDetails.weightRanges.length - 1) {
           if (weightRange.endWeight < totalWeight && shippingDetails.weightRanges[i + 1].startWeight > totalWeight) {
-            shippingCost = shippingDetails.weightRanges[i].cost;
+            shippingCost = shippingDetails.weightRanges[i+1].cost;
           }
         }
       }
