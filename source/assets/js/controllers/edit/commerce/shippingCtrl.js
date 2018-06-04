@@ -65,14 +65,17 @@
 
                     if($scope.weightRate.weightRanges.length > 0) {
                         var lastEndWeight = parseFloat($scope.weightRate.weightRanges[$scope.size].endWeight);
-                        lastEndWeight = lastEndWeight + 0.1 + "";
-                        lastEndWeight =  Math.round(lastEndWeight * 100) / 100;
+                        if(lastEndWeight % 1 == 0){
+                            lastEndWeight = lastEndWeight + 0.1 + "";
+                        }else{
+                            lastEndWeight = (Math.round(lastEndWeight * 100) / 100).toFixed(1) + "";
+                        }
                         angular.element(document.getElementById('startWeight' + $scope.size))[0].disabled = true;
                         angular.element(document.getElementById('endWeight' + $scope.size))[0].disabled = true;
                         $scope.weightRate.weightRanges.push({startWeight: lastEndWeight, endWeight: '', cost: ''});
                         angular.element(document.getElementById('deleteWeight' + $scope.size)).disabled = true;
                     }else{
-                        $scope.weightRate.weightRanges.push({startWeight: lastEndWeight, endWeight: '', cost: ''});
+                        $scope.weightRate.weightRanges.push({startWeight: Math.round(lastEndWeight * 100) / 100, endWeight: '', cost: ''});
                     }
                 };
                 $scope.validateInputValue = function(startWeight,endWeight,type,index){
@@ -124,7 +127,14 @@
             if($scope.initialData.shippingOption == 'Weight Based'){
                 $scope.weightRate = $scope.initialData;
                 $scope.addNewWeightRange = function(){
-                    var lastEndWeight = parseFloat($scope.initialData.weightRanges[$scope.initialData.weightRanges.length - 1].endWeight)  + 0.1+"";
+
+                    var lastEndWeight = $scope.initialData.weightRanges[$scope.initialData.weightRanges.length - 1].endWeight
+                    if(lastEndWeight % 1 == 0){
+                        lastEndWeight = parseFloat(lastEndWeight + 0.1) + "";
+                    }else{
+                        lastEndWeight = parseFloat((Math.round(lastEndWeight * 100) / 100)).toFixed(1)+"";
+                    }
+
                     $scope.weightRate.weightRanges.push({startWeight : lastEndWeight ,endWeight : '',cost : ''})
                 };
                 $scope.data ={
