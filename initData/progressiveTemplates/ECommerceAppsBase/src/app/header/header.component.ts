@@ -80,6 +80,14 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([route]);
   }
 
+   openNav() {
+      document.getElementById("mySidenav").style.width = "100%";
+  }
+
+  closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+  }
+
   manualToggle() {
     this.titleServ.changeTitle("Shopping Cart");
     $('.navbar-2').removeClass('in');

@@ -1,20 +1,31 @@
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-<div class="bloc bgc-white l-bloc" id="bloc-15">
+<!-- bloc-23 -->
+<div class="bloc bgc-snow l-bloc" id="bloc-23">
 	<div class="container bloc-md">
-		<div class="row">
-			<div class="col-sm-3">
+		<div class="row content-row">
+			<div class="col-sm-12">
+				<p class="header text-center">
+					Contact us
+				</p>
 			</div>
-			<div class="col-sm-6">
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
 				<agm-map [latitude]="lat" [longitude]="lng" [zoom]="17">
 					<agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 				</agm-map>
-				<div class="row">
-					<div class="col-md-6">
-						<app-contact-info [contacts]="contactInfo"></app-contact-info>
-					</div>
-				</div>
+			</div>
+		</div>
+		<div class="row voffset">
+			<div class="col-sm-2">
+			</div>
+			<div class="col-sm-8">
+				<app-contact-info [contacts]="contactInfo"></app-contact-info>
+
+			</div>
+			<div class="col-sm-2">
 			</div>
 		</div>
 	</div>
 </div>
+<!-- bloc-23 END -->
+

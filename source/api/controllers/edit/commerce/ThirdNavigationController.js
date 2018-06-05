@@ -236,37 +236,40 @@ module.exports = {
                     }
                 }
                 Sku.findOne(skuQuery).exec(function(err,skuOutput){
-                    if(err) sails.log.error(new Error("Error while retrieving Sku array by productId : "+ item.id));
-                    var skuArray = skuOutput.sku;
-                    for(var i=0; i<skuArray.length; i++){
-                        if(skuArray[i] == item.sku){
-                            var index = skuArray.indexOf(skuArray[i]);
-                            skuArray.splice(index, 1);
+                    if(err) res.send(err);
+                    if(skuOutput){
+                        var skuArray = skuOutput.sku;
+                        for(var i=0; i<skuArray.length; i++){
+                            if(skuArray[i] == item.sku){
+                                var index = skuArray.indexOf(skuArray[i]);
+                                skuArray.splice(index, 1);
+                            }
                         }
                     }
-                //If Variants has one or more elements
-                if(0 < deleteVariants.length){
-                    ThirdNavigation.update(query,product).exec(function(err,item){
-                        if(err) sails.log.error(new Error("Error while deleting a Variant from a product : "+
-                            JSON.stringify(product)));
-                        sails.log.info("Product update Successfully!!");
-                        Sku.update(skuQuery,skuOutput).exec(function(err,result){
-                            if(err) sails.log.error(new Error("Error while deleting a Variant from sku array : "+
-                                JSON.stringify(skuOutput)));
-                                res.ok({'status':"Success"});
+
+                    //If Variants has one or more elements
+                    if(0 < deleteVariants.length){
+                        ThirdNavigation.update(query,product).exec(function(err,item){
+                            if(err) sails.log.error(new Error("Error while deleting a Variant from a product : "+
+                                JSON.stringify(product)));
+                            sails.log.info("Product update Successfully!!");
+                            Sku.update(skuQuery,skuOutput).exec(function(err,result){
+                                if(err) sails.log.error(new Error("Error while deleting a Variant from sku array : "+
+                                    JSON.stringify(skuOutput)));
+                                    res.ok({'status':"Success"});
+                            })
+                        });
+                    }else{
+                        //Product is deleted if there is no variants in the Variants array
+                        ThirdNavigation.destroy(query).exec(function(err,deletedItem){
+                            if(err) sails.log.error(new Error("Error while deleting the Product by ID : "+ item.id));
+                            sails.log.info("Successfully Delete the Product"+ JSON.stringify(deletedItem));
+                            Sku.destroy(skuQuery).exec(function(err,deletedSku){
+                               if(err) sails.log.error(new Error("Error while deleting the Sku array by productId : "+ item.id));
+                               res.ok({'status':"Success"});
+                            })
                         })
-                    });
-                }else{
-                    //Product is deleted if there is no variants in the Variants array
-                    ThirdNavigation.destroy(query).exec(function(err,deletedItem){
-                        if(err) sails.log.error(new Error("Error while deleting the Product by ID : "+ item.id));
-                        sails.log.info("Successfully Delete the Product"+ JSON.stringify(deletedItem));
-                        Sku.destroy(skuQuery).exec(function(err,deletedSku){
-                           if(err) sails.log.error(new Error("Error while deleting the Sku array by productId : "+ item.id));
-                           res.ok({'status':"Success"});
-                        })
-                    })
-                }
+                    }
                 });
             });
         }else{

@@ -15,10 +15,9 @@
 							<a *ngIf="!checkSoldOut(products[i])"
 							 class="btn main-button btn-sm" (click)="navigateProd('product',prod, prod.name )">buy</a>
 							<!-- <div *ngIf="products[i].variants.length == 1 && products[i].variants[0].quantity == 0 || products[i].variants.length == 2 && (products[i].variants[0].quantity == 0 && products[i].variants[1].quantity == 0) || products[i].variants.length == 3 && (products[i].variants[0].quantity == 0 && products[i].variants[1].quantity == 0 && products[i].variants[2].quantity == 0) || products[i].variants.length == 4 && (products[i].variants[0].quantity == 0 && products[i].variants[1].quantity == 0 && products[i].variants[2].quantity == 0  && products[i].variants[3].quantity == 0)" -->
-								<div *ngIf="checkSoldOut(products[i])"
-								class="text-center button-margin">
-								<h4 href="#" class="text-warning">Sold Out!</h4>
-							</div>
+								<div *ngIf="checkSoldOut(products[i])" class="text-center button-margin">
+                   <h4 href="#" class="text-warning">Sold Out!</h4>
+                </div>
 						</div>
 					</div>
 				</div>

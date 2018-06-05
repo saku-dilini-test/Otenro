@@ -201,18 +201,18 @@
 
   .main-header-font{
     letter-spacing: 0em;
-    color: #5E5E5E!important;
-    font-weight: 500;
-    font-family: "PT Serif Caption";
+    font-weight: bold;
+    font-family: "Helvetica";
     background-color: transparent;
+    color: #5E5E5E!important;
     /*font-size: 20px;*/
   }
   .main-content-font{
-    letter-spacing: 0.1em;
-    color: #424242!important;
+    letter-spacing: 0em;
+    color: #7f7f7f!important;
     font-weight: 400;
-    font-family: "Lato";
-    text-transform: uppercase;
+    font-family: "Helvetica";
+    text-transform: initial;
     /*font-size: 14px;*/
   }
   .main-background{
