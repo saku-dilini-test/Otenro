@@ -8,3 +8,7 @@ mongoimport --db $DB --collection templatemetadata --file dataFiles/templatemeta
 
 db.template.drop()
 mongoimport --db $DB --collection template --file dataFiles/template.json
+
+// Simato 1(30/05/2018) - sudarshana
+change templateViewDesc/templateType --file dataFiles/template.json
+rename menuTitle Preview Article to Manage Articles --file dataFiles/templatemetadata.json

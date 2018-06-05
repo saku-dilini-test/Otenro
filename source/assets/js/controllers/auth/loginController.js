@@ -1,5 +1,12 @@
 (function() {
   'use strict';
+  const EMAIL = 'email';
+  const MOBILE = 'mobile';
+  var loginMethod;
+  var email = '';
+  var password = '';
+  var mobile = '';
+  var user, isPinReqSuccess = false;
   angular.module('app').directive('preventDefault', function() {
     return function(scope, element, attrs) {
       angular.element(element).bind('submit', function(event) {
@@ -37,22 +44,44 @@
      }
 
     $scope.submit = function($event) {
-      Auth.login($scope.user).success(function(response) {
-        if (response.user.email){
-          toastr.success('Login Successful ', 'Message', {
-            closeButton: true
-          });
-          if (response.user.userRoles== 'support'){
-               $state.go('user.technicalSupporter');
-          }else {
-               $state.go('user.dashboard');
-          }
+        if ($scope.isValidationOk()) {
+            if ($scope.loginMethod === EMAIL) {
+                Auth.login($scope.user).success(function(response) {
+                  if (response.user.email){
+                    toastr.success('Login Successful ', 'Message', {
+                      closeButton: true
+                    });
+                    if (response.user.userRoles== 'support'){
+                         $state.go('user.technicalSupporter');
+                    }else {
+                         $state.go('user.dashboard');
+                    }
+                  }
+                }).error(function(err) {
+                  toastr.error('Please check your Email/Password', 'Error', {
+                    closeButton: true
+                  });
+                });
+            } else if ($scope.loginMethod === MOBILE) {
+                Auth.login($scope.user)
+                    .success(function(response) {
+                    if (response.message === 'success') {
+                        $scope.isPinReqSuccess = true;
+                        toastr.success('Check your mobile and enter authentication pin', 'Message', {
+                            closeButton: true
+                        });
+                    } else if (response.message === 'user not found') {
+                        toastr.error('Mobile number is not registered!', 'Error', {
+                            closeButton: true
+                        });
+                    }
+                }).error(function(err) {
+                    toastr.error('Please check your Mobile Number', 'Error', {
+                        closeButton: true
+                    });
+                });
+            }
         }
-      }).error(function(err) {
-        toastr.error('Please check your Email/Password', 'Error', {
-          closeButton: true
-        });
-      });
     };
     $scope.cancel = function () {
       $state.go('anon.welcome');
@@ -64,7 +93,58 @@
               data: adAgentInfo
           });
 
+      };
+
+    $scope.isValidationOk = function () {
+      if ($scope.email !== undefined && $scope.password !== undefined) {
+          $scope.user = {
+              email: $scope.email,
+              password: $scope.password,
+              method: EMAIL
+          };
+          $scope.loginMethod = EMAIL;
+          return true;
+      } else if ($scope.mobile !== undefined) {
+          $scope.user = {
+              mobile: $scope.mobile,
+              method: MOBILE
+          };
+          $scope.loginMethod = MOBILE;
+          return true;
+      } else {
+            toastr.error('Please enter Email/Password or Mobile number', 'Error', {
+              closeButton: true
+            });
+            return false;
       }
+    };
+
+    $scope.submitPin = function (pin) {
+        var user = { mobile: $scope.mobile, pin: pin };
+        Auth.mobileLogin(user)
+            .success(function(response) {
+                if (response.message === 'wrong pin') {
+                    toastr.error('Please Enter Correct Pin', 'Error', {
+                        closeButton: true
+                    });
+                }
+                if (response.user.email){
+                    toastr.success('Login Successful ', 'Message', {
+                        closeButton: true
+                    });
+                    if (response.user.userRoles== 'support'){
+                        $state.go('user.technicalSupporter');
+                    }else {
+                        $state.go('user.dashboard');
+                    }
+                }
+            })
+            .error(function(err) {
+            toastr.error('Please check your Email/Password', 'Error', {
+                closeButton: true
+            });
+        });
+    };
 
     $scope.authenticate = function(provider) {
       $auth.authenticate(provider).then(function(data){

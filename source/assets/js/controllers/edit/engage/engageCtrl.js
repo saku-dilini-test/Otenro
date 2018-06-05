@@ -11,6 +11,9 @@
         $scope.url = SERVER_URL;
         $scope.pushMessage = {};
         $scope.pushMessage.type = "A";
+        $scope.scheduleType = "A";
+        const SEND_NOW = 'send_now';
+        const SCHEDULED = 'scheduled';
         if (initialData){
             $scope.pushMessage = initialData;
         }
@@ -158,11 +161,13 @@
             console.dir(file);
 
             var uploadUrl = SERVER_URL+"edit/saveSchedulePushMassageFile";
+            console.log(uploadUrl);
 
 
             var fd = new FormData();
             fd.append("appId",$rootScope.appId);
             fd.append('file', file);
+            fd.append('type', $scope.scheduleType);
 
             if (file){
                 $http.post(uploadUrl, fd, {
@@ -208,35 +213,42 @@
 
 
         $scope.sendMsgNow = function(message){
-        if(message.date != ""){
-            toastr.error('Clean the schedule message', 'Warning', {
-                closeButton: true
-            });
-        }
-        else{
-        message.appId = $rootScope.appId;
-        message.userId = $auth.getPayload().id;
-            engageService.sendPushMessage(message)
-              .success(function(data){
-                toastr.success('Successfully Saved ', 'Saved', {
+            if ($scope.isPushValidationOk(SEND_NOW, message)) {
+                if(message.date != ""){
+                    toastr.error('Clean the schedule message', 'Warning', {
+                        closeButton: true
+                    });
+                }
+                else{
+                    message.appId = $rootScope.appId;
+                    message.userId = $auth.getPayload().id;
+                    engageService.sendPushMessage(message)
+                        .success(function(data){
+                            toastr.success('Successfully Saved ', 'Saved', {
+                                closeButton: true
+                            });
+                            return engageService.showPushMessageDialog();
+                        })
+                        .error(function(err){
+                            toastr.error('Push massage configuration  not found. Please contact support@otenro.com ', 'Warning', {
+                                closeButton: true
+                            });
+                        })
+                }
+            } else {
+                toastr.error('Please enter the message field before sending.', 'Warning', {
                     closeButton: true
                 });
-                return engageService.showPushMessageDialog();
-              })
-              .error(function(err){
-               toastr.error('Push massage configuration  not found. Please contact support@otenro.com ', 'Warning', {
-                   closeButton: true
-               });
-              })
-        }
+            }
         };
 
         $scope.save = function(message){
 
-            message.appId = $rootScope.appId;
-            message.userId = $auth.getPayload().id;
+            if ($scope.isPushValidationOk(SCHEDULED, message)) {
+                message.appId = $rootScope.appId;
+                message.userId = $auth.getPayload().id;
 
-            var now = new Date();
+                var now = new Date();
 
                 if (message.date){
 
@@ -252,17 +264,49 @@
                 }
 
                 engageService.saveSchedulePushMassage(message)
-                  .success(function(data){
-                    toastr.success('Successfully Saved ', 'Saved', {
-                        closeButton: true
+                    .success(function(data){
+                        toastr.success('Successfully Saved ', 'Saved', {
+                            closeButton: true
+                        });
+                        return engageService.showPushMessageDialog();
+                    })
+                    .error(function(err){
+                        toastr.error('Push massage configuration  not found . Please contact support@otenro.com' , 'Warning', {
+                            closeButton: true
+                        });
                     });
-                    return engageService.showPushMessageDialog();
-                  })
-                  .error(function(err){
-                    toastr.error('Push massage configuration  not found . Please contact support@otenro.com' , 'Warning', {
-                        closeButton: true
-                    });
-                  })
+            } else {
+                toastr.error('Please fill required fields before save.', 'Warning', {
+                    closeButton: true
+                });
+            }
+        };
+
+        /**
+         * Check for push message fields validations
+         *
+         * @param type {String} - message type as a string whether send_now or scheduled
+         * @param message {Json} - push message data
+         *
+         * @return boolean - validations ok or failed status as true or false
+         *
+         **/
+        $scope.isPushValidationOk = function (type, msg) {
+            // If type is send_now
+            if (type === SEND_NOW) {
+                if (msg.message !== "" && msg.message !== undefined) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            } else if (type === SCHEDULED) {
+                if ((msg.message !== "" && msg.message !== undefined) && msg.date !== "") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         };
 
 

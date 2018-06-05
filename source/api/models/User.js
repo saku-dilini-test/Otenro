@@ -82,6 +82,27 @@ module.exports = {
     loginCount:{
       type: 'integer'
     },
+    mobile: {
+        type: 'string'
+    },
+    beneficiaryName: {
+        type: 'string'
+    },
+    bankCode: {
+        type: 'string'
+    },
+    branchCode: {
+        type: 'string'
+    },
+    branchName: {
+        type: 'string'
+    },
+    accountNumber: {
+        type: 'string'
+    },
+    loginPin: {
+        type: 'string'
+    },
 
     toJSON: function() {
       var obj = this.toObject();

@@ -19,11 +19,19 @@ angular.module('app')
         });
         return login;
       },
-        sendAgentInfo: function(agentInfo) {
-        var agent = $http.post('/auth/sendAgentInfo', agentInfo);
-        agent.success(function(result) {
-              console.log(result);
-            });
+      mobileLogin: function (credentials) {
+        var login = $http.post('/auth/verifyMobilePin', credentials);
+          login.success(function(result) {
+              LocalService.set('satellizer_token', result.token );
+              LocalService.set('user', result.user);
+          });
+          return login;
+      },
+      sendAgentInfo: function(agentInfo) {
+      var agent = $http.post('/auth/sendAgentInfo', agentInfo);
+      agent.success(function(result) {
+            console.log(result);
+          });
       },
       getAgentInfo: function(agentName) {
         return $http.get('/edit/getAdNetwork?addname='+agentName);

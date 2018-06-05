@@ -8,7 +8,7 @@
 
     <md-dialog-content>
         <div class="md-dialog-header">
-            <h1>push message</h1>
+            <h1>push messages</h1>
             <ul class="md-dialog-header-nav clearfix">
                 <li>
                     <a class="add-new-item" ng-click="sendPushMessage()">Add New Message</a>
@@ -20,6 +20,14 @@
                                 <input class="custom-file-input  pull-left" ng-model="data.file" type = "file" accept=".csv" file-model = "myFile"/>
                                 <button class="btn-material pull-right"  ng-click = "uploadFile()">UPLOAD CSV FILE</button>
                             </td>
+                        </tr>
+                        <tr>
+                            <fieldset>
+                                <md-radio-group ng-model='scheduleType' layout="row">
+                                    <md-radio-button value="A">All Users</md-radio-button>
+                                    <md-radio-button value="I">Inactive Users </md-radio-button>
+                                </md-radio-group>
+                            </fieldset>
                         </tr>
                         <tr>
                             <td>

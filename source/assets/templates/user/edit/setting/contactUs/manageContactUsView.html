@@ -86,21 +86,21 @@
                                 <br/>
                                 <span class="error" ng-show="basicInfoForm.pinterest.$error.pattern">Invalid url!</span>
                             </fieldset>
-                            <div class="google-map-wrapper">
-                                <md-checkbox aria-label="Show Map" ng-model="webInfo.showMap">
-                                    Show the map on the app
-                                </md-checkbox>
-                                <div class="google-map-container">
-                                    <ui-gmap-google-map  center="map.center" zoom="map.zoom" draggable="true" events="map.events">
-                                        <ui-gmap-marker ng-repeat="mp in map.markers" coords="mp.coords" icon="mp.icon" idkey="mp.id"></ui-gmap-marker>
-                                    </ui-gmap-google-map>
-                                </div>
-                            </div>
-                            <fieldset>
-                                {{map.markers[0].coords.latitude}}
-                                <br />
-                                {{map.markers[0].coords.longitude}}
-                            </fieldset>
+                            <!--<div class="google-map-wrapper">-->
+                                <!--<md-checkbox aria-label="Show Map" ng-model="webInfo.showMap">-->
+                                    <!--Show the map on the app-->
+                                <!--</md-checkbox>-->
+                                <!--<div class="google-map-container">-->
+                                    <!--<ui-gmap-google-map  center="map.center" zoom="map.zoom" draggable="true" events="map.events">-->
+                                        <!--<ui-gmap-marker ng-repeat="mp in map.markers" coords="mp.coords" icon="mp.icon" idkey="mp.id"></ui-gmap-marker>-->
+                                    <!--</ui-gmap-google-map>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<fieldset>-->
+                                <!--{{map.markers[0].coords.latitude}}-->
+                                <!--<br />-->
+                                <!--{{map.markers[0].coords.longitude}}-->
+                            <!--</fieldset>-->
                         </div>
                         <div class="md-dialog-buttons">
                             <div class="inner-section">
@@ -120,18 +120,18 @@
                     </div>
                     <div class="md-dialog-main">
                         <form name="policies" class="clearfix" novalidate>
-                            <fieldset>
-                                <label>return policy</label>
-                                <img src="../../../images/question-mark.svg" width="12" height="12" />
-                                <textarea maxlength="200" class="input-shadow-border" name="returnPolicy" rows="2" ng-model="storeSettings.returnPolicy"></textarea>
-                                <br />
-                                <div ng-hide="storeSettings.returnPolicy.length > maxReturnPolicy">
-                                    <span class="information">Characters left: {{maxReturnPolicy - storeSettings.returnPolicy.length}}</span>
-                                </div>
-                                <div  ng-show="storeSettings.returnPolicy.length > maxReturnPolicy">
-                                    <span>Characters left: </span> <span class="information"> {{maxReturnPolicy - storeSettings.returnPolicy.length}} </span>
-                                </div>
-                            </fieldset>
+                            <!--<fieldset>-->
+                                <!--<label>return policy</label>-->
+                                <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
+                                <!--<textarea maxlength="200" class="input-shadow-border" name="returnPolicy" rows="2" ng-model="storeSettings.returnPolicy"></textarea>-->
+                                <!--<br />-->
+                                <!--<div ng-hide="storeSettings.returnPolicy.length > maxReturnPolicy">-->
+                                    <!--<span class="information">Characters left: {{maxReturnPolicy - storeSettings.returnPolicy.length}}</span>-->
+                                <!--</div>-->
+                                <!--<div  ng-show="storeSettings.returnPolicy.length > maxReturnPolicy">-->
+                                    <!--<span>Characters left: </span> <span class="information"> {{maxReturnPolicy - storeSettings.returnPolicy.length}} </span>-->
+                                <!--</div>-->
+                            <!--</fieldset>-->
                             <fieldset>
                                 <label>terms and conditions</label>
                                 <img src="../../../images/question-mark.svg" width="12" height="12" />
