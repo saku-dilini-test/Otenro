@@ -550,6 +550,11 @@
             $mdDialog.hide();
         };
 
+        $scope.showPublishArticleDialog = function () {
+            $mdDialog.hide();
+            return articleService.showPublishArticleDialog('publishArticle');
+        };
+
         $scope.hide = function () {
             $mdDialog.hide();
         };

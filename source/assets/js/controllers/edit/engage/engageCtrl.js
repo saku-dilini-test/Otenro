@@ -11,6 +11,7 @@
         $scope.url = SERVER_URL;
         $scope.pushMessage = {};
         $scope.pushMessage.type = "A";
+        $scope.scheduleType = "A";
         const SEND_NOW = 'send_now';
         const SCHEDULED = 'scheduled';
         if (initialData){
@@ -160,11 +161,13 @@
             console.dir(file);
 
             var uploadUrl = SERVER_URL+"edit/saveSchedulePushMassageFile";
+            console.log(uploadUrl);
 
 
             var fd = new FormData();
             fd.append("appId",$rootScope.appId);
             fd.append('file', file);
+            fd.append('type', $scope.scheduleType);
 
             if (file){
                 $http.post(uploadUrl, fd, {

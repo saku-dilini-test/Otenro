@@ -26,7 +26,7 @@ module.exports = {
             var isSubscribed = false;
 
             if(appUser){
-                isSubscribed = true;
+                isSubscribed = false;
             }
 
             res.ok({ 'isSubscribed': isSubscribed, 'msisdn':msisdn});

@@ -22,6 +22,14 @@
                             </td>
                         </tr>
                         <tr>
+                            <fieldset>
+                                <md-radio-group ng-model='scheduleType' layout="row">
+                                    <md-radio-button value="A">All Users</md-radio-button>
+                                    <md-radio-button value="I">Inactive Users </md-radio-button>
+                                </md-radio-group>
+                            </fieldset>
+                        </tr>
+                        <tr>
                             <td>
                                 <a class="no-padding" href=""  ng-click = "downLoadSampleFile()">Download csv template</a>
                             </td>

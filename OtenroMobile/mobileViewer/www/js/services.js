@@ -61,7 +61,8 @@ angular.module('starter.services', [])
       //};
       var userData = {
         email: name,
-        password: pw
+        password: pw,
+        method: 'email'
       };
 
       return $q(function(resolve, reject) {

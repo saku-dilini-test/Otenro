@@ -32,7 +32,7 @@ module.exports = {
                 var dt1 = new Date(date1);
                 var dt2 = new Date(date2);
                 return Math.floor((Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) - Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) ) /(1000 * 60 * 60 * 24));
-            }
+            };
 
 
                     var Message = req.body.message;
@@ -315,9 +315,15 @@ module.exports = {
     saveSchedulePushMassageFile : function (req,res) {
 
         var dePath = config.APP_FILE_SERVER + req.userId + '/templates/' + req.body.appId;
+        var type = req.body.type;
         console.log("dePath " + dePath);
-
-        console.log(req.file);
+        var date_diff_indays = function(date1, date2) {
+            console.log("date1 " + date1);
+            console.log("date2" + date2);
+            var dt1 = new Date(date1);
+            var dt2 = new Date(date2);
+            return Math.floor((Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) - Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) ) /(1000 * 60 * 60 * 24));
+        };
 
         req.file('file').upload({
             dirname: require('path').resolve(dePath)
@@ -338,16 +344,17 @@ module.exports = {
                 csv().fromFile(csvFilePath)
                         .on('json',(jsonObj)=>{
 
-                            /*console.log(moment(jsonObj.dateTime, "YYYY/MM/DD HH:mm", true).isValid());*/
+                            // console.log(moment(jsonObj.dateTime, "YYYY/MM/DD HH:mm", true).isValid());
 
-                            if (moment(jsonObj.dateTime, "YYYY/MM/DD HH:mm", true).isValid()&&jsonObj.message.length > 0){
+                    var date = formatDate(new Date(jsonObj.dateTime));
+
+                            if (moment(date, "DD/MM/YYYY HH:mm", true).isValid()&&jsonObj.message.length > 0){
 
                                 console.log(jsonObj.dateTime + "" + jsonObj.message);
-                                var data = {date:jsonObj.dateTime,message:jsonObj.message,appId:req.body.appId,userId:req.userId,type:jsonObj.type};
+                                var data = {date:jsonObj.dateTime,message:jsonObj.message,appId:req.body.appId,userId:req.userId,type:type};
 
                                 PushMessage.create(data).exec(function(err,data){
                                     if(err) return res.send((500,{message:"Invalid csv file. Please use sample csv template"}));
-
                                     var shedDate = new Date(data.date);
                                     var date = new Date(shedDate.getUTCFullYear(), shedDate.getMonth(), shedDate.getDate(),
                                         shedDate.getHours(), shedDate.getMinutes(),0).toLocaleString();
@@ -378,28 +385,54 @@ module.exports = {
                                                         for(var i=0; i<deviceArray.length; i++) {
 
                                                             sails.log.info(" deviceArray " + deviceArray[i].deviceId);
-
-                                                            request.post(
-                                                                PushUrl,
-                                                                {
-                                                                    json:{
-                                                                        "to":deviceArray[i].deviceId,
-                                                                        "notification" : {
-                                                                            "body" : message
+                                                            if (type === "I"){
+                                                                var count = date_diff_indays(dateFormat(new Date(),"m/d/yy"),dateFormat(deviceArray[i].lastAccessTime,"m/d/yy"));
+                                                                if (count > 7) {
+                                                                    request.post(
+                                                                        PushUrl,
+                                                                        {
+                                                                            json:{
+                                                                                "to":deviceArray[i].deviceId,
+                                                                                "notification" : {
+                                                                                    "body" : message
+                                                                                }
+                                                                            },
+                                                                            headers:{
+                                                                                'Authorization' : Authorization,
+                                                                                'Content-Type' : 'application/json'
+                                                                            }} , function(error, response, body){
+                                                                            if (error) sails.log.info(error);
+                                                                            if(response.statusCode === 200){
+                                                                                sails.log("push message send success =>", response.statusCode);
+                                                                            }
+                                                                            else{
+                                                                                sails.log("push message send failed =>", response.statusCode);
+                                                                            }
+                                                                        });
+                                                                }
+                                                            } else {
+                                                                request.post(
+                                                                    PushUrl,
+                                                                    {
+                                                                        json:{
+                                                                            "to":deviceArray[i].deviceId,
+                                                                            "notification" : {
+                                                                                "body" : message
+                                                                            }
+                                                                        },
+                                                                        headers:{
+                                                                            'Authorization' : Authorization,
+                                                                            'Content-Type' : 'application/json'
+                                                                        }} , function(error, response, body){
+                                                                        if (error) sails.log.info(error);
+                                                                        if(response.statusCode === 200){
+                                                                            sails.log("push message send success =>", response.statusCode);
                                                                         }
-                                                                    },
-                                                                    headers:{
-                                                                        'Authorization' : Authorization,
-                                                                        'Content-Type' : 'application/json'
-                                                                    }} , function(error, response, body){
-                                                                    if (error) sails.log.info(error);
-                                                                    if(response.statusCode === 200){
-                                                                        sails.log("push message send success =>", response.statusCode);
-                                                                    }
-                                                                    else{
-                                                                        sails.log("push message send failed =>", response.statusCode);
-                                                                    }
-                                                                });
+                                                                        else{
+                                                                            sails.log("push message send failed =>", response.statusCode);
+                                                                        }
+                                                                    });
+                                                            }
                                                         }
                                                     });
                                                     console.log('The world is going to end today.');
@@ -428,6 +461,28 @@ module.exports = {
             });
         });
 
+        function formatDate (date){
+            var year, month, day, hours, minutes;
+            year = date.getFullYear();
+            month = date.getMonth()+1;
+            day = date.getDate();
+            hours = date.getHours();
+            minutes = date.getMinutes();
+            if (month < 10) {
+                month = "0" + month;
+            }
+            if (day < 10) {
+                day = "0" + day
+            }
+            if (hours < 10) {
+                hours = "0" + hours
+            }
+            if (minutes < 10) {
+                minutes = "0" + minutes
+            }
+            return day + '/'+ month + '/' + year + " " + hours + ":" + minutes;
+
+        }
     },
 
     sendSampleFile : function (req,res) {

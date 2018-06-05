@@ -39,10 +39,18 @@ module.exports = {
     addBasicInfo: function (req, res) {
 
         var data = req.body;
+        var isPlusMarkExists = false;
         var searchApp = {
             appId: req.body.appId
         };
-                data.telPhone = "+" + data.telPhone;
+        for (var i = 0; i < data.telPhone.length; i++) {
+            if (data.telPhone.charAt(i) === '+') {
+                isPlusMarkExists = true;
+            }
+        }
+        if (!isPlusMarkExists) {
+            data.telPhone = "+" + data.telPhone;
+        }
         ApplicationContactUs.update(searchApp, data).exec(function (err, app) {
             if(err) return err;
 

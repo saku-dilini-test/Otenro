@@ -1,9 +1,9 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("PublishCtrl", ['$scope', '$mdDialog','item',
-        'toastr', '$rootScope', 'publishService', '$http', 'SERVER_URL','$auth', PublishCtrl]);
+        'toastr', '$rootScope', 'publishService', 'contactUsService', '$http', 'SERVER_URL','$auth', PublishCtrl]);
 
-    function PublishCtrl($scope, $mdDialog, item, toastr, $rootScope, publishService, $http, SERVER_URL,$auth) {
+    function PublishCtrl($scope, $mdDialog, item, toastr, $rootScope, publishService, contactUsService, $http, SERVER_URL,$auth) {
 
         // config
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
@@ -106,6 +106,7 @@
        });
         
         if(item == 'GooglePlay'){
+
            publishService.getExistingData(item).
                 success(function(data){
                      $scope.existingData = data;

@@ -162,7 +162,7 @@ module.exports = {
 //          function (err, httpResponse, body) {
 //              console.log(err, JSON.parse(body));
 //              if (JSON.parse(body).success==true){
-      var findCriteria = { mobile: { 'contains' : req.body.mobile.slice(-9) } };
+      var findCriteria = {or: [{ email: req.body.email }, {mobile: { 'contains' : req.body.mobile.slice(-9) }}]};
 
                   User.findOne( findCriteria, function foundUser(err, user) {
                       if (err) return res.negotiate(err);
@@ -193,7 +193,7 @@ module.exports = {
                           if (user) {
                           var data = {
                               email: user.email
-                          }
+                          };
 
                           var msg = sentMails.sendRegisterConfirmation(data, function (msg){
                                 console.log(msg);
