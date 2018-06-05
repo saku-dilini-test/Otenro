@@ -32,10 +32,10 @@
                             if (result.email !== '' && result.email !== undefined) {
                                 dialogService.showDialog(clickTitle);
                             } else {
-                                toastr.error('Add Contact email before publish','Error', {closeButton: true});
+                                toastr.error('Go to site settings and fill contact us details before publishing your app','Error', {closeButton: true});
                             }
                         } else {
-                            toastr.error('Add Contact email before publish', 'Error', {closeButton: true});
+                            toastr.error('Go to site settings and fill contact us details before publishing your app', 'Error', {closeButton: true});
                         }
                     });
             } else {
