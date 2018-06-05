@@ -605,6 +605,7 @@ export class CheckoutComponent implements OnInit {
           total = total + shipping;
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
+          this.taxTotal = Math.round(this.taxTotal * 100) / 100;
           if (tax > 0) {
             total = total + tax;
             this.totalPrice = total;
@@ -615,6 +616,8 @@ export class CheckoutComponent implements OnInit {
         } else {
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
+          this.taxTotal = Math.round(this.taxTotal * 100) / 100;
+
           if (!this.finalDetails.pickupCost || this.finalDetails.pickupCost == 0) {
             this.chkPickupCost = 0;
           } else {
