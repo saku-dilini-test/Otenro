@@ -4,11 +4,11 @@
 (function(){
     "use strict";
     angular.module('oblMenu').controller('OblMenuCtrl',[
-        '$scope','$rootScope','dialogService','oblMenuService',
+        '$scope','$rootScope','dialogService','oblMenuService', 'contactUsService', 'toastr',
         OblMenuCtrl
     ]);
 
-    function OblMenuCtrl($scope,$rootScope,dialogService,oblMenuService){
+    function OblMenuCtrl($scope,$rootScope,dialogService,oblMenuService, contactUsService, toastr){
 
         $scope.showMenu = true;
 
@@ -25,7 +25,22 @@
         };
 
         this.showAlert = function(clickTitle) {
-            dialogService.showDialog(clickTitle);
+            if (clickTitle === 'googlePlay') {
+                contactUsService.getContactUsInfo()
+                    .success(function(result){
+                        if (result.email) {
+                            if (result.email !== '' && result.email !== undefined) {
+                                dialogService.showDialog(clickTitle);
+                            } else {
+                                toastr.error('Add Contact email before publish','Error', {closeButton: true});
+                            }
+                        } else {
+                            toastr.error('Add Contact email before publish', 'Error', {closeButton: true});
+                        }
+                    });
+            } else {
+                dialogService.showDialog(clickTitle);
+            }
         };
 
         this.goOblMenuService = function(data){
