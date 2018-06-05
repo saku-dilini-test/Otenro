@@ -369,12 +369,17 @@
                             </div>
                             <br>
                             <fieldset>
+                                <div ng-form name="myForm">
                                 <div class="row">
                                         <label class="col-md-12">Video Url (optional)</label>
                                 </div>
                                 <input class="apikey input-shadow-border" type="text" ng-model="product.videoUrl"
-                                       name="url" placeholder="Paste your Vimeo video ID" required />
+                                       name="url" placeholder="Paste your Vimeo video ID" pattern="^\d+$" maxlength="15" required />
+                                    <span class="error" ng-show="myForm.url.$error.pattern">Invalid vimeo ID (ex: 262957229)</span>
+
+                                </div>
                             </fieldset>
+
 
                             <div class="inputField btn-material img-up">
                                 <span >{{buttonName}}</span>
@@ -511,8 +516,8 @@
                         <div class="inner-section">
                             <!--<md-button class="me-default-button" ng-click="answer('cancel')">Cancel</md-button>-->
                             <md-button class="me-default-button" ng-click="back()">Cancel</md-button>
-                            <md-button class="me-default-button" ng-click="addOrUpdateProducts()">save </md-button>
-                            <md-button class="me-default-button" ng-click="saveAndPublishProducts()">save & publish</md-button>
+                            <md-button class="me-default-button" ng-disabled = "myForm.url.$error.pattern" ng-click="addOrUpdateProducts()">save </md-button>
+                            <md-button class="me-default-button" ng-disabled = "myForm.url.$error.pattern" ng-click="saveAndPublishProducts()">save & publish</md-button>
                         </div>
                     </div>
                 </md-tab-body>
