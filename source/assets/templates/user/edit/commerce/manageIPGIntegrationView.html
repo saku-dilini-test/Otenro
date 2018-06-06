@@ -53,7 +53,7 @@
                     </div>
                 </div>
 
-                <input class="apikey input-shadow-border" type="text" ng-model="IPGSettings.paypalKey"
+                <input ng-disabled = "!IPGSettings.paypalEnable" class="apikey input-shadow-border" type="text" ng-model="IPGSettings.paypalKey"
                          name="number" placeholder="Paypal API Key" required />
 
             </fieldset>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
 
-                <input class="apikey input-shadow-border" type="text" ng-model="IPGSettings.stripeKey"
+                <input ng-disabled = "!IPGSettings.stripeEnable" class="apikey input-shadow-border" type="text" ng-model="IPGSettings.stripeKey"
                        name="number" placeholder="Stripe API Key" required />
 
             </fieldset>
@@ -95,9 +95,9 @@
                     </div>
                 </div>
 
-                <input class="apikey input-shadow-border" type="text" ng-model="IPGSettings.apiLoginId"
+                <input ng-disabled = "!IPGSettings.authorizeNetEnable" class="apikey input-shadow-border" type="text" ng-model="IPGSettings.apiLoginId"
                        name="number" placeholder="API login id" required /><br /><br />
-                <input class="apikey input-shadow-border" type="text" ng-model="IPGSettings.transactionKey"
+                <input ng-disabled = "!IPGSettings.authorizeNetEnable" class="apikey input-shadow-border" type="text" ng-model="IPGSettings.transactionKey"
                        name="number" placeholder="Transaction key" required />
 
             </fieldset>
@@ -118,7 +118,7 @@
                     </div>
                 </div>
 
-                <input class="apikey input-shadow-border" type="text" ng-model="IPGSettings.payHereMerchantId"
+                <input ng-disabled = "!IPGSettings.payHereEnable" class="apikey input-shadow-border" type="text" ng-model="IPGSettings.payHereMerchantId"
                        name="number" placeholder="merchant id" required /><br /><br />
 
             </fieldset>

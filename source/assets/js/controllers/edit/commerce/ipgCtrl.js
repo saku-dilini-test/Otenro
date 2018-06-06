@@ -16,30 +16,62 @@
                 });    
         }
 
+
+
         // --/-- save IPG collection --/--
         $scope.saveIGPSettings = function (IPGInfo) {
-            // Set AppID
-            IPGInfo.appId = $rootScope.appId;
-            IPGInfo.userId = $auth.getPayload().id;
-            IPGInfo.isNew = $rootScope.tempNew;
-            IPGInfo.env = '';
 
-            ipgService.updateIPGInfo(IPGInfo)
-                .success(function (result) {
-                    toastr.success(result.message, 'Saved', {
+
+        if(IPGInfo.paypalEnable == true && IPGInfo.paypalKey == null){
+                toastr.error('Please enter PayPal key ', 'Warning', {
+                    closeButton: true
+                });
+        }else if(IPGInfo.stripeEnable == true && IPGInfo.stripeKey == null){
+                toastr.error('Please enter Stripe key ', 'Warning', {
+                    closeButton: true
+                });
+        }else if(IPGInfo.authorizeNetEnable == true && (IPGInfo.apiLoginId == null || IPGInfo.transactionKey == null)){
+                if(IPGInfo.apiLoginId == null){
+                    toastr.error('Please enter authorizeNet API Login Id ', 'Warning', {
                         closeButton: true
                     });
-                    $scope.cancel();
-                }).error(function (error) {
-                    toastr.error('Saving Error', 'Message', {
+                }if(IPGInfo.transactionKey == null){
+                    toastr.error('Please enter authorizeNet transactionKey ', 'Warning', {
                         closeButton: true
                     });
-            })
+                }
+
+        }else if(IPGInfo.payHereEnable == true){
+
+                    toastr.error('Please enter PayHere ID ', 'Warning', {
+                        closeButton: true
+                    });
+
+        }else{
+                // Set AppID
+                IPGInfo.appId = $rootScope.appId;
+                IPGInfo.userId = $auth.getPayload().id;
+                IPGInfo.isNew = $rootScope.tempNew;
+                IPGInfo.env = '';
+
+                ipgService.updateIPGInfo(IPGInfo)
+                    .success(function (result) {
+                        toastr.success(result.message, 'Saved', {
+                            closeButton: true
+                        });
+                        $scope.cancel();
+                    }).error(function (error) {
+                        toastr.error('Saving Error', 'Message', {
+                            closeButton: true
+                        });
+                })
+            }
         };
        
         // --- cancel dialog -----
         $scope.cancel = function () {
             $mdDialog.cancel();
         };
+
     }
 })();
