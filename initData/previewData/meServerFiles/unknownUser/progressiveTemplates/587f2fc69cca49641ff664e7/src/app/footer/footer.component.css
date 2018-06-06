@@ -1,3 +1,11 @@
 .social-media{
   display: flex;
 }
+
+@media (max-width: 767px) {
+	.mobile-footer{
+		margin-top: 30px;
+	}
+}
+
+

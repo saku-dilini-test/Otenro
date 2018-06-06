@@ -9,6 +9,7 @@ import { ProductsService } from '../../services/products/products.service';
 import { SliderService } from '../../services/slider/slider.service';
 import { TitleService } from '../../services/title.service';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { AppDataService } from '../../services/appdata-info/appdata-info.service';
 
 @Component({
   selector: 'app-homepage',
@@ -36,7 +37,10 @@ export class HomepageComponent implements OnInit {
   private isSliderDataAvailable: boolean = false;
   private isRandomProducts;
   private categories:any
-  constructor(private localStorageService: LocalStorageService, private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule, private router: Router, private categoryService: CategoriesService, private title: TitleService) {
+  private header;
+  private content;
+  constructor(private localStorageService: LocalStorageService, private route: Router, private sliderService: SliderService, private productService: ProductsService, private dataService: PagebodyServiceModule,
+   private router: Router, private categoryService: CategoriesService, private title: TitleService,private appdataService: AppDataService) {
 
     this.sliderService.retrieveSliderData().subscribe(data => {
       if (data.length > 0) {
@@ -148,6 +152,15 @@ export class HomepageComponent implements OnInit {
     }, err => {
       console.log('Error retrieving all products');
     })
+
+
+    this.appdataService.getAboutUs()
+      .subscribe((data: any) => {
+        this.header = data.header;
+        this.content = data.content;
+      }, (err) => {
+        console.log(err);
+      });
 
   }
 

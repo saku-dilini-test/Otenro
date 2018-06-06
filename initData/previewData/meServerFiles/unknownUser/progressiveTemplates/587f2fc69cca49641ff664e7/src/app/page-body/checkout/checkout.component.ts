@@ -33,6 +33,7 @@ export class CheckoutComponent implements OnInit {
 
   complexForm: FormGroup;
   pickupForm: FormGroup;
+  shippingForm: FormGroup;
 
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
@@ -90,14 +91,19 @@ export class CheckoutComponent implements OnInit {
   private chkPickupCost;
   public makeStripePayment;
   public authorizeCreditCard;
+  private payhere;
   public orderDetails;
   public orderd = false;
   private years = [];
   private months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
   private emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-  noteDes;showUser;
+  noteDes; showUser;
   private oldUser;
   private loggedUserData;
+  private payHereMID;
+  private isCountryChanged = false;
+  private selectedCountry;
+
   constructor(fb: FormBuilder, private ordersService: OrdersService,
     private shippingService: ShippingService,
     private currencyService: CurrencyService,
@@ -112,12 +118,14 @@ export class CheckoutComponent implements OnInit {
       this.oldUser = true;
       this.showUser = true;
       this.loggedUserData = this.localStorageService.get('appLocalStorageUser' + this.appId);
+      this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
+
       console.log(this.loggedUserData);
-    }else{
+    } else {
       this.oldUser = false;
     }
 
-    if (this.dataService.userData == null) {      
+    if (this.dataService.userData == null) {
       var userData = {
         name: "",
         lname: "",
@@ -133,6 +141,11 @@ export class CheckoutComponent implements OnInit {
       this.dataService.userData = userData;
 
     }
+    this.selectedCountry = this.dataService.userData.country;
+
+    this.shippingForm = fb.group({
+      shippingOption: new FormControl('', )
+    });
 
     this.complexForm = fb.group({
       // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
@@ -141,9 +154,9 @@ export class CheckoutComponent implements OnInit {
       'email': new FormControl(this.dataService.userData.email, Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       'phone': new FormControl(this.dataService.userData.phone, Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/)])),
       'streetNo': new FormControl(this.dataService.userData.streetNumber, Validators.compose([Validators.required])),
-      'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
-      'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)])),
-      'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^\d+$/)])),
+      'streetName': new FormControl(this.dataService.userData.streetName, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/)])),
+      'city': new FormControl(this.dataService.userData.city, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)])),
+      'zip': new FormControl(this.dataService.userData.zip, Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9\-]+\s)*[a-zA-Z0-9\-]+$/)])),
       'country': new FormControl(this.dataService.userData.country)
 
     });
@@ -151,26 +164,11 @@ export class CheckoutComponent implements OnInit {
 
     this.pickupForm = fb.group({
       'name': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[A-z]+$/)])),
+      'email': new FormControl('', Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])),
       'phone': new FormControl('', Validators.compose([Validators.required, Validators.pattern(/^[+]\d{11,15}$/), Validators.minLength(12)])),
 
     });
   }
-
-check(user){
-  console.log(user);
-  if(user == 'oldUser'){
-    this.oldUser = true;
-    this.newUser = false;
-  }
-  if(user == 'newUser'){
-    this.oldUser = false;
-  }
-}
-
-register() {
-  this.router.navigate(['register', ""]);
-}
-
 
   ngOnInit() {
     let date = (new Date()).getFullYear()
@@ -227,29 +225,12 @@ register() {
 
     // get the shipping options
 
-    var param2 = {
-      'appId': this.appId,
-      'country': this.dataService.userData.country
-    };
+    // if () { }
+
     if (this.formType == 'delivery') {
       this.spinner.show();
-      this.http.post(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
-        .subscribe((data) => {
-          this.spinner.hide();
-          this.shippingDatas = data;
-          // $log.debug($scope.shippingData);
-          for (var i = 0; i < this.shippingDatas.length; i++) {
-            if (this.shippingDatas[i].shippingOption == "Flat Rate" ||
-              this.shippingDatas[i].shippingOption == "Weight Based") {
-              this.shippingData.push(this.shippingDatas[i]);
-            }
-          }
-        }, (err) => {
-          this.spinner.hide();
-          alert(
-            'Error Retrieving shipping details!\n Please check your connection.'
-          );
-        });
+      this.getShippingData(this.appId, this.dataService.userData.country);
+
     } else {
       this.spinner.show();
       this.shippingService.getShippingPickupInfo()
@@ -267,18 +248,97 @@ register() {
           );
         });
     }
+
     this.amount = this.getTotal();
-
-
-    // -------------------pickup--------------------------------------------
-
-
-
 
   }
 
-  checkNote(note){
-    if(!note){
+  getShippingData(appId, Country) {
+
+    this.shippingData = [];
+
+    console.log("Country : ");
+    console.log(Country);
+    console.log("appId : " + appId);
+
+    let param2 = {
+      'appId': appId,
+      'country': Country
+    }
+
+    this.http.post(SERVER_URL + "/edit/getShippingInfoByCountry", param2)
+      .subscribe((data) => {
+        this.spinner.hide();
+        this.shippingDatas = data;
+        // $log.debug($scope.shippingData);
+        for (var i = 0; i < this.shippingDatas.length; i++) {
+          if (this.shippingDatas[i].shippingOption == "Flat Rate" ||
+            this.shippingDatas[i].shippingOption == "Weight Based") {
+            this.shippingData.push(this.shippingDatas[i]);
+          }
+        }
+        console.log(this.shippingData);
+      }, (err) => {
+        this.spinner.hide();
+        alert(
+          'Error Retrieving shipping details!\n Please check your connection.'
+        );
+      });
+
+  }
+
+  check(user, newUserCountry) {
+    console.log(user);
+    if (user == 'oldUser') {
+      console.log('oldUser');
+      this.oldUser = true;
+      this.newUser = false;
+      this.getShippingData(this.appId, this.dataService.userData.country);
+      this.isSelected = false;
+      this.shippingForm.controls['shippingOption'].reset();
+    }
+    if (user == 'newUser') {
+      console.log('new Users');
+      this.oldUser = false;
+      if (!newUserCountry) {
+        this.getShippingData(this.appId, this.selectedCountry);
+      } else {
+        this.getShippingData(this.appId, newUserCountry);
+      }
+    }
+    this.isSelected = false;
+    this.shippingForm.controls['shippingOption'].reset();
+  }
+
+  countryChanged(data) {
+    this.hide = true;
+    this.isSelected = false;
+    this.isCountryChanged = true;
+    this.shippingForm.controls['shippingOption'].reset();
+    // var param = {
+    //   'appId': this.appId,
+    //   'country': data
+    // };
+
+    // this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
+    //   if (data == '') {
+    //     this.hide = true;
+    //     this.tax = 0;
+    //   } else {
+    //     this.tax = data[0].taxAmount;
+    //     this.hide = false;
+    //   }
+    // })
+
+  }
+
+  login() {
+    this.router.navigate(['login', this.formType]);
+    console.log(this.dataService.cart);
+  }
+
+  checkNote(note) {
+    if (!note) {
       this.noteDes = "";
     }
   }
@@ -428,7 +488,7 @@ register() {
         }
         if (i != shippingDetails.weightRanges.length - 1) {
           if (weightRange.endWeight < totalWeight && shippingDetails.weightRanges[i + 1].startWeight > totalWeight) {
-            shippingCost = shippingDetails.weightRanges[i].cost;
+            shippingCost = shippingDetails.weightRanges[i+1].cost;
           }
         }
       }
@@ -471,7 +531,7 @@ register() {
       country: data.country,
       pickupId: data.id,
       pickupCost: data.cost,
-      deliverDetails: { name: details.name, number: details.phone },
+      deliverDetails: { name: details.name, email: details.email, number: details.phone },
 
     }
     this.chk(this.pickupData);
@@ -483,28 +543,21 @@ register() {
 
     this.finalDetails = final;
     this.chkShippingCost = this.finalDetails.shippingCost;
-    // $log.debug(totalWeight);
-    // $log.debug(shippingCost);
-    // $log.debug(shippingDetails.shipping);
-    // $log.debug(this.dataService.cart.cartItems);
-    // $state.go('app.checkout',{item:shippingDetails});
     this.underWeight = this.finalDetails.underWeight;
     this.overWeight = this.finalDetails.overWeight;
 
-    // this.shippingCost = this.dataService.data.shippingCost;
 
     if (typeof this.chkShippingCost == 'undefined') {
       this.hideShipping = false;
     }
 
-    // if (this.finalDetails.delivery.location == "old" || this.finalDetails.item.delivery.location == "Pick up") {
-    //   this.chkCountry = this.localData.country;
-    // } else {
-    //   this.chkCountry = this.finalDetails.delivery.country;
-    // }
-
     if (this.localData) {
-      this.chkCountry = this.localData.country;
+      if (this.oldUser == true) {
+        this.chkCountry = this.localData.country;
+      } else {
+        this.chkCountry = this.selectedCountry;
+      }
+
     } else {
       if (this.formType == 'delivery') {
         this.chkCountry = this.country;
@@ -552,6 +605,7 @@ register() {
           total = total + shipping;
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
+          this.taxTotal = Math.round(this.taxTotal * 100) / 100;
           if (tax > 0) {
             total = total + tax;
             this.totalPrice = total;
@@ -562,6 +616,8 @@ register() {
         } else {
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
+          this.taxTotal = Math.round(this.taxTotal * 100) / 100;
+
           if (!this.finalDetails.pickupCost || this.finalDetails.pickupCost == 0) {
             this.chkPickupCost = 0;
           } else {
@@ -661,6 +717,9 @@ register() {
         this.stripeShow = this.paymentData.stripeEnable;
         this.braintreeShow = this.paymentData.braintreeEnable;
         this.authorizeNet = this.paymentData.authorizeNetEnable;
+        this.payhere = this.paymentData.payHereEnable;
+        this.payHereMID = this.paymentData.payHereMerchantId;
+        console.log(this.payHereMID)
       }), (err) => {
         alert('warning!\n Unable to get Products Selected Category,\n Please check your connection!');
       };
@@ -670,23 +729,20 @@ register() {
       amount: paymentParams.amount
     };
 
-    // this.makeStripePayment = this.makeStripePaymentMethod('');
-    // this.authorizeCreditCard = this.authorizeCreditCardMethod('');
-
   }
 
 
-  submit(data, type,note) {
+  submit(data, type, note) {
 
     if (type == 'creditcard') {
-      this.makeStripePaymentMethod(data,note);
+      this.makeStripePaymentMethod(data, note);
     } else {
-      this.authorizeCreditCardMethod(data,note);
+      this.authorizeCreditCardMethod(data, note);
     }
 
   }
 
-  makeStripePaymentMethod(cardInformation,note) {
+  makeStripePaymentMethod(cardInformation, note) {
 
     this.showSpinner = true;
 
@@ -709,11 +765,12 @@ register() {
         }
       }, (err) => {
         alert('makeStripePayment failed');
+        this.showSpinner = false;
       })
 
   };
 
-  authorizeCreditCardMethod(cardInformation,note) {
+  authorizeCreditCardMethod(cardInformation, note) {
 
     this.showSpinner = true;
 
@@ -745,11 +802,13 @@ register() {
 
       }, (err) => {
         alert('authorizeCreditCard' + err)
+        this.showSpinner = false;
       })
   }
 
   orderProcess(note) {
-    if(note){
+
+    if (note) {
       note = note.trim();
     }
     if (this.formType == "delivery") {
@@ -819,7 +878,7 @@ register() {
           "promotionCode": this.payInfo.promotionCode,
           'note': note
         }
-      }else{
+      } else {
         this.orderDetails = {
           "appId": this.appId,
           "registeredUser": 'Unknown User',
@@ -830,7 +889,7 @@ register() {
           "tax": this.payInfo.taxTotal,
           "pickupId": this.payInfo.item.pickupId,
           "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
+          "email": this.payInfo.item.deliverDetails.email,
           "currency": this.dataService.paypalCurrency,
           "promotionCode": this.payInfo.promotionCode,
           'note': note
@@ -844,6 +903,7 @@ register() {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe((res) => {
+
             this.dataService.cart.cartItems = [];
             this.dataService.cart.cartSize = 0;
             this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
@@ -858,19 +918,6 @@ register() {
               }
             }
 
-            // //Pushing into order purchase history
-            // if (this.localStorageService.get("history" + this.appId + this.user.registeredUser) != null) {
-            //   this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-            // }
-            // this.orderHistory.push({
-            //   orderHistoryKey: this.appId,
-            //   createdDate: new Date(),
-            //   item: this.payInfo.cart,
-            //   amount: this.payInfo.amount,
-            // });
-
-            // this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
-
             this._success.next('Your Order has been successfully processed');
 
             this._success.subscribe((message) => this.successMessage = message);
@@ -879,14 +926,20 @@ register() {
             setTimeout(() => { this.router.navigate(['home']); }, 3100)
 
           }, (err: HttpErrorResponse) => {
+
+
             if (err.error instanceof Error) {
+
               console.log("Error Updating Inventory!\n Please check your connection.");
+
             } else {
               console.log("Server-side error occured.");
             }
             console.log(err);
           });
       }, (err: HttpErrorResponse) => {
+
+
         if (err.error instanceof Error) {
           console.log("Error processing order!\n Please check your connection.");
         } else {
@@ -898,9 +951,13 @@ register() {
 
 
   confirmCashPayment(note) {
-    if(note){
+
+    this.showSpinner = true;
+
+    if (note) {
       note = note.trim();
     }
+
     if (this.formType == "delivery") {
       if (this.user) {
         this.orderDetails = {
@@ -981,19 +1038,22 @@ register() {
           "tax": this.payInfo.taxTotal,
           "pickupId": this.payInfo.item.pickupId,
           "pickupCost": this.chkPickupCost,
-          "email": this.payInfo.userEmail,
+          "email": this.payInfo.item.deliverDetails.email,
           "currency": this.dataService.currency,
           "promotionCode": this.payInfo.promotionCode,
           'note': note
         }
       }
     }
-// console.log(note);
+    // console.log(note);
     this.http.post(SERVER_URL + "/templatesOrder/saveOrder", (this.orderDetails), { responseType: 'text' })
       .subscribe((res) => {
         this.orderDetails.id = this.dataService.cart.cartItems[0].id;
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart, { responseType: 'text' })
           .subscribe(res => {
+
+            this.showSpinner = false;
+
             this.dataService.cart.cartItems = [];
             this.dataService.cart.cartSize = 0;
             this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
@@ -1007,18 +1067,6 @@ register() {
                 this.localStorageService.remove("cart" + appUser.registeredUser);
               }
             }
-            //Pushing into order purchase history
-            // if ((this.localStorageService.get("history" + this.appId + this.user.registeredUser)) != null) {
-            //   this.orderHistory = (this.localStorageService.get("history" + this.appId + this.user.registeredUser));
-            // }
-            // this.orderHistory.push({
-            //   orderHistoryKey: this.appId,
-            //   createdDate: new Date(),
-            //   item: this.payInfo.cart,
-            //   amount: this.payInfo.amount,
-            // });
-
-            // this.localStorageService.set("history" + this.appId + this.user.registeredUser, (this.orderHistory));
 
             this._success.next('Your Order has been successfully processed');
 
@@ -1028,19 +1076,50 @@ register() {
             setTimeout(() => { this.router.navigate(['home']); }, 3100)
 
           }, (err: HttpErrorResponse) => {
+
+            this.showSpinner = false;
+
             if (err.error instanceof Error) {
+
               console.log("Error Updating Inventory!\n Please check your connection.");
+
+              this._success.subscribe((message) => this.errorMessage = message);
+              debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+              this._success.next("Error Updating Inventory!\n Please check your connection.");
+              setTimeout(() => { }, 3100);
+
             } else {
               console.log("Server-side error occured.");
+              this._success.subscribe((message) => this.errorMessage = message);
+              debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+              this._success.next("Server-side error occured.");
+              setTimeout(() => { }, 3100);
             }
             console.log(err);
           });
       },
       (err: HttpErrorResponse) => {
+
+        this.showSpinner = false;
+
         if (err.error instanceof Error) {
+
           console.log("Error Processing order!\n Please check your connection.");
+
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next("Error Updating Inventory!\n Please check your connection.");
+          setTimeout(() => { }, 3100);
+
         } else {
+
           console.log("Server-side error occured.");
+
+          this._success.subscribe((message) => this.errorMessage = message);
+          debounceTime.call(this._success, 4000).subscribe(() => this.errorMessage = null);
+          this._success.next("Server-side error occured.");
+          setTimeout(() => { }, 3100);
+
         }
         console.log(err);
       });
@@ -1048,7 +1127,7 @@ register() {
 
   // Buy With PayPal
   buyWithPayPal(note) {
-    if(note){
+    if (note) {
       note = note.trim();
     }
     if (this.formType == "delivery") {
@@ -1105,64 +1184,249 @@ register() {
 
     } else {
       if (this.user) {
-      this.orderDetails = {
-        "appId": this.appId,
-        "registeredUser": this.user.registeredUser,
-        "item": this.payInfo.cart,
-        "amount": this.payInfo.amount,
-        "customerName": this.payInfo.item.deliverDetails.name,
-        "telNumber": this.payInfo.item.deliverDetails.number,
-        "tax": this.payInfo.taxTotal,
-        "pickupId": this.payInfo.item.pickupId,
-        "pickupCost": this.chkPickupCost,
-        "email": this.payInfo.userEmail,
-        "currency": this.dataService.paypalCurrency,
-        "promotionCode": this.payInfo.promotionCode,
-        'note': note
+        this.orderDetails = {
+          "appId": this.appId,
+          "registeredUser": this.user.registeredUser,
+          "item": this.payInfo.cart,
+          "amount": this.payInfo.amount,
+          "customerName": this.payInfo.item.deliverDetails.name,
+          "telNumber": this.payInfo.item.deliverDetails.number,
+          "tax": this.payInfo.taxTotal,
+          "pickupId": this.payInfo.item.pickupId,
+          "pickupCost": this.chkPickupCost,
+          "email": this.payInfo.userEmail,
+          "currency": this.dataService.paypalCurrency,
+          "promotionCode": this.payInfo.promotionCode,
+          'note': note
+        }
+      } else {
+        this.orderDetails = {
+          "appId": this.appId,
+          "registeredUser": 'Unknown User',
+          "item": this.payInfo.cart,
+          "amount": this.payInfo.amount,
+          "customerName": this.payInfo.item.deliverDetails.name,
+          "telNumber": this.payInfo.item.deliverDetails.number,
+          "tax": this.payInfo.taxTotal,
+          "pickupId": this.payInfo.item.pickupId,
+          "pickupCost": this.chkPickupCost,
+          "email": this.payInfo.item.deliverDetails.email,
+          "currency": this.dataService.paypalCurrency,
+          "promotionCode": this.payInfo.promotionCode,
+          'note': note
+        }
       }
-    }else{
-      this.orderDetails = {
-        "appId": this.appId,
-        "registeredUser": 'Unknown User',
-        "item": this.payInfo.cart,
-        "amount": this.payInfo.amount,
-        "customerName": this.payInfo.item.deliverDetails.name,
-        "telNumber": this.payInfo.item.deliverDetails.number,
-        "tax": this.payInfo.taxTotal,
-        "pickupId": this.payInfo.item.pickupId,
-        "pickupCost": this.chkPickupCost,
-        "email": this.payInfo.userEmail,
-        "currency": this.dataService.paypalCurrency,
-        "promotionCode": this.payInfo.promotionCode,
-        'note': note
-      }
-    }
     }
 
     this.dataService.payPalDetails = this.orderDetails;
 
   }
 
-  countryChanged(data) {
-    this.hide = true;
-    this.isSelected = false;
+  payHere(note) {
 
-    var param = {
-      'appId': this.appId,
-      'country': data
-    };
+    if (note) {
+      note = note.trim();
+    }
 
-    this.http.post(SERVER_URL + '/templatesOrder/getTaxInfoByCountry', param).subscribe((data) => {
-      if (data == '') {
-        this.hide = true;
-        this.tax = 0;
+    if (this.formType == "delivery") {
+      if (this.user) {
+        this.orderDetails = {
+
+          'appId': this.appId,
+          'registeredUser': this.user.registeredUser,
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.user.name,
+          'deliverName': this.fname,
+          'deliveryNo': this.streetNumber,
+          'deliveryStreet': this.streetName,
+          'deliveryCity': this.city,
+          'deliveryCountry': this.country,
+          'deliveryZip': this.zip,
+          'telNumber': this.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.paypalCurrency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note
+        };
+
       } else {
-        this.tax = data[0].taxAmount;
-        this.hide = false;
+        this.orderDetails = {
+
+          'appId': this.appId,
+          'registeredUser': "Unknown User",
+          'item': this.payInfo.cart,
+          'amount': this.payInfo.amount,
+          'customerName': this.fname,
+          'deliverName': this.fname,
+          'deliveryNo': this.streetNumber,
+          'deliveryStreet': this.streetName,
+          'deliveryCity': this.city,
+          'deliveryCountry': this.country,
+          'deliveryZip': this.zip,
+          'telNumber': this.phone,
+          'tax': this.payInfo.taxTotal,
+          'shippingCost': this.chkShippingCost,
+          'shippingOpt': this.payInfo.item.shippingOption,
+          'email': this.payInfo.userEmail,
+          'currency': this.dataService.paypalCurrency,
+          'puckupId': null,
+          'promotionCode': this.payInfo.promotionCode,
+          'note': note
+        };
       }
-    })
+    }
+    else {
+      if (this.user) {
+        this.orderDetails = {
+          "appId": this.appId,
+          "registeredUser": this.user.registeredUser,
+          "item": this.payInfo.cart,
+          "amount": this.payInfo.amount,
+          "customerName": this.payInfo.item.deliverDetails.name,
+          "telNumber": this.payInfo.item.deliverDetails.number,
+          "tax": this.payInfo.taxTotal,
+          "pickupId": this.payInfo.item.pickupId,
+          "pickupCost": this.chkPickupCost,
+          "email": this.payInfo.userEmail,
+          "currency": this.dataService.paypalCurrency,
+          "promotionCode": this.payInfo.promotionCode,
+          'note': note
+        }
+      } else {
+        this.orderDetails = {
+          "appId": this.appId,
+          "registeredUser": 'Unknown User',
+          "item": this.payInfo.cart,
+          "amount": this.payInfo.amount,
+          "customerName": this.payInfo.item.deliverDetails.name,
+          "telNumber": this.payInfo.item.deliverDetails.number,
+          "tax": this.payInfo.taxTotal,
+          "pickupId": this.payInfo.item.pickupId,
+          "pickupCost": this.chkPickupCost,
+          "email": this.payInfo.item.deliverDetails.email,
+          "currency": this.dataService.paypalCurrency,
+          "promotionCode": this.payInfo.promotionCode,
+          'note': note
+        }
+      }
+    }
 
+    this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails)
+      .subscribe((orderRes: any) => {
+
+        console.log("done save pending order");
+        console.log("orderRes :");
+        console.log(orderRes);
+
+        this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart)
+          .subscribe((res) => {
+            this.dataService.cart.cartItems = [];
+            this.dataService.cart.cartSize = 0;
+            this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
+            this.dataService.cart.totalPrice = 0;
+            this.dataService.cart.totalQuantity = 0;
+
+            //Pushing into order purchase history
+            let appUser: any = this.localStorageService.get('appLocalStorageUser' + this.appId)
+
+            if (appUser) {
+              if (this.localStorageService.get("cart" + appUser.registeredUser)) {
+                this.localStorageService.remove("cart" + appUser.registeredUser);
+              }
+            }
+
+            showHelp(SERVER_URL + '/mobile/getPayHereForm/?name=' +
+              this.orderDetails.customerName + "&amount=" +
+              this.orderDetails.amount + "&currency=" +
+              this.currency.symbol + "&email=" +
+              this.orderDetails.email + "&telNumber=" +
+              this.orderDetails.telNumber + "&item=" +
+              this.orderDetails.item[0].name + "&address=" +
+              this.orderDetails.deliveryNo + " " + this.orderDetails.deliveryStreet + "&city=" +
+              this.orderDetails.deliveryCity + "&appId=" + orderRes.orderData.appId +
+              "&orderId=" + orderRes.orderData.orderId + "&payHereMerchantId=1211173");
+
+          },
+          (err) => {
+            console.log(err);
+          });
+
+
+
+      },
+      (err) => {
+        console.log(err);
+      });
+
+
+    var inAppBrowserRef;
+
+    function showHelp(url) {
+
+      var target = "_blank";
+
+      var options = "location=yes,hidden=yes";
+
+      inAppBrowserRef = window.open(url, target, options);
+
+      inAppBrowserRef.addEventListener('loadstart', loadStartCallBack);
+
+      inAppBrowserRef.addEventListener('loadstop', loadStopCallBack);
+
+      inAppBrowserRef.addEventListener('loaderror', loadErrorCallBack);
+
+    }
+
+    function loadStartCallBack() {
+
+      $('#status-message').text("loading please wait ...");
+
+    }
+
+    function loadStopCallBack() {
+
+      if (inAppBrowserRef != undefined) {
+
+        inAppBrowserRef.insertCSS({ code: "body{font-size: 25px;" });
+
+        $('#status-message').text("");
+
+        inAppBrowserRef.show();
+      }
+
+    }
+
+    function loadErrorCallBack(params) {
+
+      $('#status-message').text("");
+
+      var scriptErrorMesssage =
+        "alert('Sorry we cannot open that page. Message from the server is : "
+        + params.message + "');"
+
+      inAppBrowserRef.executeScript({ code: scriptErrorMesssage }, executeScriptCallBack);
+
+      inAppBrowserRef.close();
+
+      inAppBrowserRef = undefined;
+
+    }
+
+    function executeScriptCallBack(params) {
+
+      if (params[0] == null) {
+
+        $('#status-message').text(
+          "Sorry we couldn't open that page. Message from the server is : '"
+          + params.message + "'");
+      }
+
+    }
   }
-
 
 }

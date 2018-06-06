@@ -123,7 +123,9 @@ export class CartComponent implements OnInit {
     this.dataService.parseIndex = this.dataService.parseIndex - 1;
     this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
     this.dataService.parentobj.cartSize = this.dataService.cart.cartSize;
-    this.localStorageService.set("cart" + this.user.registeredUser, (this.dataService.cart));
+    if(this.user){
+      this.localStorageService.set("cart" + this.user.registeredUser, (this.dataService.cart));
+    }
 
   };
 

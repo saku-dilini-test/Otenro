@@ -51,7 +51,7 @@ export class ProductComponent implements OnInit {
 
         this.init();
         this.isBuyBtnDisable = true;
-
+        this.title.changeTitle('Details');
         if (this.Data.detailedDesc.length > 250) {
             this.desPart2 = this.Data.detailedDesc.slice(250, this.Data.detailedDesc.length);
             this.desPart1 = this.Data.detailedDesc.slice(0, 250) + "...";

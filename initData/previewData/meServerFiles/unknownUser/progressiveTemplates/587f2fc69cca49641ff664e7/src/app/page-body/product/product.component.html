@@ -1,50 +1,30 @@
-
-
 <div class="bloc bgc-white b-parallax animDelay04" id="bloc-11">
-  <div class="container bloc-lg">
+  <div class="container  bloc-xl">
     <div class="row bgc-white" id="product">
-      <div class="col-sm-7">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner" role="listbox">
-            <div class="item active">
-              <div id="image0">
-                <img src="{{imageUrl}}/{{Data.tempImageArray[0].img}}" alt="{{Data.name}}">
-                <button *ngIf="Data.tempImageArray[0].videoUrl" type="button" (click)="video(0,Data.tempImageArray[0].videoUrl)" class="video-h8 btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-play"></span> Play</button>
+        <div class="col-sm-6">
+             <div id="gallery" style="display:none;">
+                    <ng-template *ngFor="let item of Data.tempImageArray" [ngIf]="item">
+                      <img  *ngIf="item.videoUrl == null" alt="{{item.name}}"
+                         src="{{imageUrl}}/{{item.img}}"
+                         [attr.data-image]="imageUrl/item.img">
+                         
+                      <img  *ngIf="item.videoUrl != null" alt="{{item.name}}"
+                         data-type="vimeo"
+                         src="{{imageUrl}}/{{item.img}}"
+                         [attr.data-image]="imageUrl/item.img"
+                         [attr.data-videoid]="item.videoUrl">
+                    </ng-template>
+                  
               </div>
-              <div style="display:none;width:100%" id="player0"></div>
-            </div>
-            <div class="item" *ngFor="let item of Data.tempImageArray |slice:1; let i = index">
-              <div id="image{{i+1}}" style="display:block">
-                <img src="{{imageUrl}}/{{item.img}}" alt="{{item.name}}">
-                <button *ngIf="item.videoUrl" type="button" (click)="video(i+1,item.videoUrl)" class="video-h8 btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-play"></span> Play</button>
-              </div>
-              <div style="display:none;width:100%" id="player{{i+1}}"></div>
-            </div>
-          </div>
-
-          <!-- Controls -->
-          <a *ngIf="Data.tempImageArray.length > 1" class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a *ngIf="Data.tempImageArray.length > 1" class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
-      </div>
-      <div class="col-sm-5">
-        <h3 class="mg-md product-header-h1 animated fadeInUp">
+      <div class="col-sm-6">
+        <h3 class="mg-md product-header-h1 animated fadeInUp main-header-font">
           {{Data.name}}
         </h3>
-        <p class="text-left" *ngIf="selectedVariant.price">
+        <p class="text-left main-content-font" *ngIf="selectedVariant.price">
           <strong>{{currency}}</strong> {{selectedVariant.price}}
         </p>
-        <p class="text-left" *ngIf="!selectedVariant.price">
+        <p class="text-left main-content-font" *ngIf="!selectedVariant.price">
           <strong>{{currency}}</strong> {{Data.variants[0].price}}
         </p>
         <p class="color">
@@ -57,11 +37,11 @@
 
         <div style="display: block; background-color: rgb(10, 10, 20); height: 1px; width: 100%; margin: auto;"></div>
 
-        <p class="color-black spacing-top-text">
+        <p class="color-black spacing-top-text main-content-font">
           <strong>PRODUCT DESCRIPTION</strong>
           <br>
         </p>
-        <p class="content-product spacing-bottom" id="details">
+        <p class="content-product spacing-bottom  main-content-font" id="details">
           {{desPart1}}
           <a class=" text-left product-detail main-content-font" *ngIf="!readMore" (click)="readMoreFunct()">Read More</a>
         </p>
@@ -74,27 +54,27 @@
             <strong>SELECT SPECIFICATIONS</strong>
           </p>
 
-          <div class="row padding-mobile">
+          <div class="row padding-mobile padding-vertical">
 
-            <div class="col-sm-6" *ngIf="Data.selection[0]">
+            <div class="col-sm-6 main-content-font" *ngIf="Data.selection[0]">
               <select class="btn-group btn-dropdown pull-left" (change)="changeVariant($event.target.value)">
                 <option *ngFor="let v1 of selection" [ngValue]="v1.vType"> {{v1.vType}} </option>
               </select>
             </div>
 
-            <div class="col-sm-6" *ngIf="Data.selection[1]">
+            <div class="col-sm-6 main-content-font" *ngIf="Data.selection[1]">
               <select class="btn-group btn-dropdown pull-left" (change)="changeVariant2($event.target.value)">
                 <option *ngFor="let v2 of selection1" [ngValue]="v2.vType"> {{v2.vType}} </option>
               </select>
             </div>
 
-            <div class="col-sm-6" *ngIf="Data.selection[2]">
+            <div class="col-sm-6 main-content-font" *ngIf="Data.selection[2]">
               <select class="btn-group btn-dropdown pull-left" (change)="changeVariant3($event.target.value)">
                 <option *ngFor="let v3 of selection2" [ngValue]="v3.vType"> {{v3.vType}} </option>
               </select>
             </div>
 
-            <div class="col-sm-6" *ngIf="Data.selection[3]">
+            <div class="col-sm-6 main-content-font" *ngIf="Data.selection[3]">
               <select class="btn-group btn-dropdown pull-left" (change)="changeVariant4($event.target.value)">
                 <option *ngFor="let v4 of selection3" [ngValue]="v4.vType"> {{v4.vType}} </option>
               </select>
@@ -103,7 +83,7 @@
           <div class="row padding-mobile">
             <div class="col-sm-3">
               <div class="form-group">
-                <input class="form-control button-buy size" type="number" min="1" oninput="validity.valid||(value='');" name="qty" placeholder="QTY"
+                <input class="form-control size" type="number" min="1" oninput="validity.valid||(value='');" name="qty" placeholder="QTY"
                   id="qty" value="selectedVariant.buyQuantity" [disabled]="Data.variants.length >= 1 && selectedVariant.quantity == 0 || lockBuyButton == false"
                   [(ngModel)]="selectedVariant.buyQuantity" (ngModelChange)="changeBuyQuantity(selectedVariant.buyQuantity)" />
               </div>
@@ -113,7 +93,6 @@
 
           <div class="blocs-custom-html spacing-bottom">
             <div style="display: block; background-color: rgb(10, 10, 20); height: 1px; width: 100%; margin: auto;"></div>
-
 
             <div class="col-xs-12 text-center text-warning" *ngIf="selectedVariant.buyQuantity > selectedVariant.quantity && selectedVariant.quantity > 1">
               <span>
@@ -139,28 +118,27 @@
                     </div>
                     <div class="col-xs-7">
                       <h3 class="main-content-font">{{Data.name}}</h3>
-                      <h4 *ngFor="let v of dialogVariants">{{v.name}}:{{v.vType}}</h4>
-                      <h4> {{currency}} {{selectedVariant.price}}</h4>
+                      <h4 class="main-content-font" *ngFor="let v of dialogVariants">{{v.name}}:{{v.vType}}</h4>
+                      <h4 class="main-content-font"> {{currency}} {{selectedVariant.price}}</h4>
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <div class="col-sm-6">
-                      <button (click)="close();goToHome();" class="btn btn-d btn-sq btn-lg button-buy animDelay02">Continue Shopping</button>
+                    <div class="col-xs-6">
+                      <button (click)="close();goToHome();" class="btn btn-d btn-sq btn-lg main-button animDelay02">Continue Shopping</button>
                     </div>
-                    <div class="col-sm-6">
-                      <button (click)="close();goToCart();" class="btn btn-d btn-sq btn-lg button-buy animDelay02">Checkout</button>
+                    <div class="col-xs-6">
+                      <button (click)="close();goToCart();" class="btn btn-d btn-sq btn-lg  main-button animDelay02">Checkout</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
             <div class="row row-no-gutters voffset padding-mobile" *ngIf="!(Data.variants.length >= 1 && selectedVariant.quantity == 0 && lockBuyButton)">
-              <div class="col-sm-6">
-                <button (click)='addToCart("buyNowCart")' [disabled]="isBuyBtnDisable" class="btn btn-d btn-sq btn-lg button-buy animDelay02">BUY NOW</button>
+              <div class="col-xs-6">
+                <button (click)='addToCart("buyNowCart")' [disabled]="isBuyBtnDisable" class="btn btn-d btn-sq btn-lg main-button animDelay02 btn-block">BUY NOW</button>
               </div>
-              <div class="col-sm-6">
-                <button (click)="addToCart('');test(this.selectedVariant.selection);" [disabled]="isBuyBtnDisable" class="btn btn-d btn-sq btn-lg button-buy animDelay02">ADD TO CART</button>
+              <div class="col-xs-6">
+                <button (click)="addToCart('');test(this.selectedVariant.selection);" [disabled]="isBuyBtnDisable" class="btn btn-d btn-sq btn-lg main-button animDelay02  btn-block">ADD TO CART</button>
               </div>
             </div>
 
@@ -168,4 +146,5 @@
         </div>
       </div>
     </div>
+  </div>
 </div>

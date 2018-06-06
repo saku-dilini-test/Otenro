@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import * as data from '../madeEasy.json';
 import { AppDataService } from '../services/appdata-info/appdata-info.service';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-footer',
@@ -12,14 +13,26 @@ export class FooterComponent{
 
   private appId = (<any>data).appId;
   private userId = (<any>data).userId;
+  public loginStatus;
   webInfo: any;
 
-  constructor(private router: Router, private appDataService: AppDataService) {
+  constructor(private router: Router, private appDataService: AppDataService, private localStorageService: LocalStorageService) {
     this.appDataService.getContactUs().subscribe((data: any) => {
       this.webInfo = data;
     }),((err) => {
       console.log("Error when fetching ContactUsInfo: " + JSON.stringify(err));
     });
+  }
+
+
+  ngAfterContentChecked() {
+    if (this.localStorageService.get('appLocalStorageUser' + this.appId) !== null) {
+      this.loginStatus = true;
+
+    } else {
+      this.loginStatus = false;
+
+    }
   }
 
   navigate(val: string) {
