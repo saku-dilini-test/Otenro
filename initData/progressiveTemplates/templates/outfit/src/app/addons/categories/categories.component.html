@@ -16,13 +16,9 @@
 	<div class="container bloc-lg" *ngFor="let node of products;">
 		<div class="row voffset animated fadeInUp">
 			<div class="col-sm-12">
-				<h1 class="mg-md text-center header-text-h1">
-					<a class="header-text-h1 main-header-font" >PRODUCTS</a><br>
+				<h1 class="mg-md text-center about-us ">
+					<a class="main-header-font" >PRODUCTS</a><br>
 				</h1>
-
-				<div style="display: block; background-color: rgb(10, 10, 20); height: 1px; width: 50%; margin: auto;"></div>
-
-
 			</div>
 		</div>
 		<div class="row" *ngIf="categories.length == 0">
@@ -66,11 +62,9 @@
 		<div *ngFor="let node of categories;">
 			<div class="row">
 				<div class="col-sm-12">
-					<h1 class="text-center header-text-h1 voffset">
-						<a (click)="goToNextSubCategory(node.childNodes, categories, node.products, node.name)" class="header-text-h1 main-header-font" >{{node.name}}</a><br>
+					<h1 class="text-center about-us  voffset">
+						<a (click)="goToNextSubCategory(node.childNodes, categories, node.products, node.name)" class=" main-header-font" >{{node.name}}</a><br>
 					</h1>
-
-					<div style="display: block; background-color: rgb(10, 10, 20); height: 1px; width: 50%; margin: auto;"></div>
 
 					<img *ngIf="node.childNodes.length > 0 && node.products.length == 0" src="{{imageUrl}}/{{node.imageUrl}}" width="100%" />
 
@@ -106,8 +100,8 @@
 			<div class="col-sm-12">
 				<div class="row">
 					<div class="col-sm-12">
-						<h1 class="mg-md text-center header-text-h1">
-							<a class="header-text-h1 voffset padding-bottom main-header-font">CATEGORIES</a>
+						<h1 class="mg-md text-center about-us ">
+							<a class="voffset padding-bottom main-header-font">CATEGORIES</a>
 							<br>
 							<br>
 							<div class="row voffset">
