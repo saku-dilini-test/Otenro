@@ -318,6 +318,7 @@ module.exports.routes = {
     'GET /templates/postDeviceId': 'template/TemplateController.postDeviceId',
     'GET /templates/getOrdersOfUser': 'template/TemplateController.getOrdersOfUser',
     'GET /templates/getTemplateData' : 'template/TemplateController.getTemplateByPreviewId',
+    'GET /templates/getDefaultTerms' : 'template/TemplateController.getDefaultTerms',
 
     'POST /templates/updateUser' : 'template/TemplateAuthController.editAppUser',
     'POST /templates/updateUserPassword' : 'template/TemplateAuthController.editAppUserPassword',
