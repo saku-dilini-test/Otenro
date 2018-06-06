@@ -5,6 +5,9 @@ import * as data from '../../madeEasy.json';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
+import { ProductsService } from '../../services/products/products.service';
+import { PagebodyServiceModule } from '../../page-body/page-body.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-history',
@@ -16,8 +19,9 @@ export class OrderHistoryComponent implements OnInit {
   public appId = (<any>data).appId;
   public userId = (<any>data).userId;
   currency;imageURL;appUserId;orderHistory;sign;
+  private parentobj = { cartItems: [], cartSize: 0, totalPrice: 0 };
 
-  constructor(private currencyService : CurrencyService,private localStorageService: LocalStorageService,  private title: TitleService) {
+  constructor(private router:Router, private dataService:PagebodyServiceModule,private productsService:ProductsService,private currencyService : CurrencyService,private localStorageService: LocalStorageService,  private title: TitleService) {
     this.title.changeTitle("Order History");
   }
 
@@ -52,5 +56,65 @@ export class OrderHistoryComponent implements OnInit {
         console.log('Unable to get orders');
       });
     }
+  }
+
+  buyAgain(item){
+    console.log("item");
+    console.log(item);
+    // this.dataService.cart.cartItems.push(item);
+
+    if (this.dataService.cart.cartItems.length != 0) {
+      console.log("in if");
+        var i = 0;
+        while (i < this.dataService.cart.cartItems.length) {
+            if (item.id == this.dataService.cart.cartItems[i].id && item.sku == this.dataService.cart.cartItems[i].sku) {
+                this.dataService.position2 = false;
+                //increasing weight when we add same product again.
+                this.dataService.cart.cartItems[i].totWeight += item.weight * item.qty;
+                this.dataService.cart.cartItems[i].qty += item.qty;
+                this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
+                this.parentobj.cartSize = this.dataService.cart.cartSize;
+                this.dataService.parseWeight = item.weight;
+                // $state.go('app.category');
+                this.router.navigate(['cart']);
+
+                break;
+            }
+            else if (i == (this.dataService.cart.cartItems.length - 1)) {
+                this.dataService.position2 = true;
+                this.dataService.cart.cartItems.push({item});
+                this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
+                this.parentobj.cartSize = this.dataService.cart.cartSize;
+                this.dataService.parseWeight = item.weight;
+                //  $state.go('app.category');
+                this.router.navigate(['cart']);
+
+                break;
+            }
+            i++;
+        }
+        if (this.dataService.appUserId) {
+            this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
+        }
+    }else {
+
+      console.log("in else");
+        this.dataService.cart.cartItems.push(item);
+        this.dataService.cart.cartSize = this.dataService.cart.cartItems.length;
+        this.parentobj.cartSize = this.dataService.cart.cartSize;
+        this.dataService.parseWeight = item.weight;
+        // $state.go('app.category');
+
+        // if (this.dataService.appUserId) {
+        //     this.localStorageService.set("cart" + this.dataService.appUserId, (this.dataService.cart));
+        // }
+        this.router.navigate(['cart']);
+    }
+    // this.productsService.getProductById(id).subscribe(data =>{
+    //     console.log("data");
+    //     console.log(data);
+    // }),err =>{
+    //     console.log("err" + err);
+    // }
   }
 }
