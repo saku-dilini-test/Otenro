@@ -43,7 +43,7 @@ module.exports = {
   
   /** ****** Custom Config ****** **/
   // HOST URL 
-  HOST_URL : 'http://developer.appmaker.lk:1338/',
+  HOST_URL : 'http://developer.appmaker.lk/',
   // ME SERVER Config
   ME_SERVER_URL : 'http://developer.appmaker.lk:80/meServer/temp/',
   ME_SERVER : '/home/milhan/public_html/developer/meServer/temp/',
@@ -53,6 +53,6 @@ module.exports = {
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
   TEMPLATES_PATH : '/home/Ideadroid/Otenro/initData/templates/',
   PROGRESSIVE_TEMPLATES_PATH : '/home/Ideadroid/Otenro/initData/progressiveTemplates/',
-  REDIRECT_URL : 'http://developer.appmaker.lk:1338/'
+  REDIRECT_URL : 'http://developer.appmaker.lk/'
 
 };
