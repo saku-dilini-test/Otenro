@@ -174,10 +174,14 @@
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 }).success(function(data){
+                    toastr.success("Upload Success", {
+                        closeButton: true
+                    });
+
                     return engageService.showPushMessageDialog();
 
                 }).error(function(error){
-                    toastr.error(error, 'Warning', {
+                    toastr.error(error.error, 'Error', {
                         closeButton: true
                     });
 
