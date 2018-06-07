@@ -135,9 +135,13 @@ export class ProductComponent implements OnInit {
         // console.log(document.getElementById('iframePlayer'));
         // this.player = new Player(this.playerContainer.nativeElement);
 
-          $("#gallery").unitegallery({
-              theme_enable_text_panel: false,
-          });
+        $("#gallery").unitegallery({
+          theme_enable_text_panel: false,
+          gallery_background_color: "rgba(0,0,0,0)",
+          slider_scale_mode: "fit",
+          slider_textpanel_bg_color:"#000000",
+          slider_textpanel_bg_opacity: 0,
+        });
     }
 
     video(index, ids) {

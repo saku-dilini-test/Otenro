@@ -4,6 +4,7 @@ import * as data from '../../madeEasy.json';
 import { SERVER_URL } from '../../constantsService';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { ProductsService } from '../../services/products/products.service';
+import { CurrencyService } from '../../services/currency/currency.service';
 
 @Component({
   selector: 'app-categories',

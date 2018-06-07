@@ -1,6 +1,6 @@
 <div class="bloc bgc-white l-bloc">
 	<div class="container">
-		<ol class="breadcrumb" *ngIf="prevCategories">
+		<ol class="breadcrumb no-margin" *ngIf="prevCategories">
 			<li  *ngFor="let prev of prevCategories;let i = index;">
 				<a (click)="goToPreviousCategory(i)">
 					<span *ngIf="!prev.catName">Home</span>
@@ -29,7 +29,7 @@
 						{{prod.name}}
 					</h2>
 					<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
-						<strong>₨</strong> {{prod.variants[0].price}}
+						<strong>{{currency}}</strong> {{prod.variants[0].price}}
 					</h2>
 					<div class="text-center">
 						<a class="btn btn-d btn-lg main-button"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
@@ -46,7 +46,7 @@
 						{{prod.name}}
 					</h2>
 					<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
-						<strong>₨</strong> {{prod.variants[0].price}}
+						<strong>{{currency}}</strong> {{prod.variants[0].price}}
 					</h2>
 					<div class="text-center">
 						<a class="btn btn-d btn-lg main-button"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
@@ -74,12 +74,12 @@
 				<owl-carousel *ngIf="node.products.length != 0" [options]="owlOptions" [carouselClasses]="['owl-carousel', 'owl-theme']">
 					<div *ngFor="let prod of node.products;">
 						<div>
-							<img src="{{imageUrl1}}/{{prod.imageUrl}}"  class="img-responsive lazyload" />
+							<img src="{{imageUrl1}}/{{prod.tempImageArray[prod.defaultImage].img}}"  class="img-responsive lazyload" />
 							<h2 class="mg-md header-text-h2 text-center main-content-font">
 								{{prod.name}}
 							</h2>
 							<h2 class="mg-md sub-header-text-h2 text-center main-content-font">
-								<strong>₨</strong> {{prod.variants[0].price}}
+								<strong>{{currency}}</strong> {{prod.variants[0].price}}
 							</h2>
 							<div class="text-center">
 								<a class="btn btn-d btn-lg main-button"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
@@ -100,7 +100,7 @@
 			<div class="col-sm-12">
 				<div class="row">
 					<div class="col-sm-12">
-						<h1 class="mg-md text-center about-us ">
+						<h1 class="mg-md text-center about-us no-padding">
 							<a class="voffset padding-bottom main-header-font">CATEGORIES</a>
 							<br>
 							<br>

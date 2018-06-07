@@ -39,7 +39,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 /* Sizes */
 
 .bloc-xl{
-	padding:150px 50px;
+	padding:100px 50px;
 }
 .bloc-lg{
 	padding:0 50px 150px 50px;
@@ -48,7 +48,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 	padding:50px;
 }
 .bloc-sm{
-	padding:20px 50px;
+	padding:5px 50px;
 }
 
 /* = Full Width Blocs 
@@ -201,12 +201,8 @@ a:hover{text-decoration: none; cursor:pointer;}
 #bloc-17 p{
 	font-size: 12px;
 }
-#bloc-18 h4{
-	font-size: 14px;
-}
-#bloc-18 p{
-	font-size: 12px;
-}
+
+
 #bloc-24 p{
 	font-family: "Josefin Sans";
 }
@@ -479,6 +475,7 @@ button{
 .form-control{
 	border-color:rgba(0,0,0,.1);
 	box-shadow:none;
+	color: inherit;
 }
 
 
@@ -627,10 +624,7 @@ button{
 	font-size:18px;
 	padding-bottom:26px;
 }
-.margin-bottom{
-	border-style:dotted;
-	border-width:0px 0px 1px 0px;
-}
+
 .devider{
 	padding-top:0px;
 	background-color:transparent;
@@ -829,11 +823,6 @@ button{
 .spacing-form{
 	margin-top:0px;
 	margin-bottom:0px;
-}
-.padding{
-    margin-top: 40px;
-	padding:20px 20px 20px 20px;
-	background-color:#FEFFFF;
 }
 .text-links{
 	font-size:17px;
@@ -1423,27 +1412,8 @@ button{
  #bloc-2 h1{
 	line-height: px;
 }
-#bloc-17 p{
-	font-size: 14px;
-}
-#bloc-18 h4{
-	font-size: 12px;
-}
-#bloc-18 p{
-	font-size: 10px;
-}
-#bloc-29 p{
-	font-size: 10px;
-}
-#bloc-30 p{
-	font-size: 10px;
-}
-#bloc-32 h4{
-	font-size: 12px;
-}
-#bloc-32 p{
-	font-size: 10px;
-}
+
+
 /* = Text Mobile Alignment Classes
 -------------------------------------------------------------- */
 .text-center-xs{
@@ -1484,13 +1454,11 @@ header{
   top: 0;
   width: 100%;
 }
-.col-sm-12 {
-    padding-top: 5px;
-}
+
 .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
     text-align: center;
 }
 
 .padding-fit-top{
-	padding-top:93px !important;
+	padding-top:65px !important;
 }
