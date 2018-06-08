@@ -121,6 +121,9 @@
             getUserOrders: function (registeredUser) {
                 return $http.get(SERVER_URL + 'edit/getUserOrders?registeredUser='+registeredUser);
             },
+            getAllArticles: function (registeredUser) {
+                return $http.get(SERVER_URL + 'edit/getAllArticles?appId='+$rootScope.appId);
+            },
             saveSchedulePushMassage :function (data) {
                 return $http.post(SERVER_URL+ 'edit/saveSchedulePushMassage',data);
             },

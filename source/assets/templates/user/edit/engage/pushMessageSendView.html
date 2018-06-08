@@ -1,4 +1,4 @@
-<md-dialog aria-label="Push Message Send">
+ <md-dialog aria-label="Push Message Send">
 
     <!--Google Analytics-->
     <script>
@@ -27,6 +27,23 @@
             <fieldset class="text-right">
                 <md-button class="me-default-button" ng-click="sendMsgNow(pushMessage)">send message now</md-button>
             </fieldset>
+            <hr />
+
+            <fieldset>
+                <md-checkbox type="checkbox" ng-model="linkArticle" value="" ng-change="clearArticle(linkArticle)" >
+                    LINK AN ARTICLE
+                </md-checkbox>
+            </fieldset>
+
+            <md-select ng-disabled = "!linkArticle" class="" placeholder="Select Article" ng-model="pushMessage.article" required>
+                <md-option ng-value="v" ng-repeat="v in articles ">{{v.title}}
+                </md-option>
+                <!--// create new catergory-->
+                <!--<md-option ng-click="newcategory ()">Create New Category</md-option>-->
+            </md-select>
+                <!--<select ng-disabled = "!linkArticle" class="input-shadow-border" ng-model="pushMessage.article" ng-options="v.title for v in articles" ng-change="changeArticleCat(dummyCat.id)"-->
+                        <!--required>-->
+                <!--</select>-->
             <hr />
             <fieldset>
                 <label>Schedule Message</label>

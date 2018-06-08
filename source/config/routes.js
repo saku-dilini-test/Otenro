@@ -283,7 +283,7 @@ module.exports.routes = {
     'POST /edit/saveSchedulePushMassageFile' : 'edit/engage/EngageController.saveSchedulePushMassageFile',
     'POST /edit/sendSampleFile' : 'edit/engage/EngageController.sendSampleFile',
     'POST /edit/deletePushMessage' : 'edit/engage/EngageController.deletePushMessage',
-
+    'GET /edit/getAllArticles' : 'edit/engage/EngageController.getAllArticles',
 
     /**
      * GetAssistanceController

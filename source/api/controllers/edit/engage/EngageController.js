@@ -268,6 +268,21 @@ module.exports = {
         
     },
 
+    getAllArticles : function(req,res){
+        var appId = req.param('appId');
+
+        var searchQuery = {
+            appId: appId
+        };
+
+        Article.find(searchQuery).exec(function(err,data){
+            if(err) return res.send(err);
+            console.log(data);
+            return res.send(data);
+        });
+
+    },
+
     // get registered user Details
 
     getAppUserData : function(req,res){

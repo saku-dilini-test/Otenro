@@ -85,6 +85,19 @@
 
         };
 
+        engageService.getAllArticles().success(function(data){
+
+            console.log(data);
+            $scope.articles = data;
+
+        });
+
+        $scope.clearArticle = function(isAllow){
+            if(!isAllow){
+                $scope.pushMessage.article = null;
+            }
+        };
+
         $scope.delete = function (data) {
 
             return $mdDialog.show({
@@ -248,6 +261,12 @@
 
         $scope.save = function(message){
 
+        if($scope.linkArticle && !$scope.pushMessage.article){
+                toastr.error('Please select an article before save.', 'Warning', {
+                    closeButton: true
+                });
+        }else{
+
             if ($scope.isPushValidationOk(SCHEDULED, message)) {
                 message.appId = $rootScope.appId;
                 message.userId = $auth.getPayload().id;
@@ -284,6 +303,7 @@
                     closeButton: true
                 });
             }
+           }
         };
 
         /**
