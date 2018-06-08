@@ -78,7 +78,12 @@
                 console.log($scope.tmpImage.length);
                 for(var i =0;i<$scope.tmpImage.length;i++){
 
-                    if($scope.tmpImage.length >= 1 && $scope.tmpImage[0].img == null){
+                    if($scope.tmpImage[0].img == null){
+                        console.log('inside if 0 index');
+                        $scope.tmpImage[0].img = img
+                        $scope.addNew = false;
+                        break
+                    }else if($scope.tmpImage.length >= 1 && $scope.tmpImage[0].img == null){
                         console.log('inside if 1');
                         $scope.tmpImage[0].img = img
                         $scope.addNew = false;
@@ -133,6 +138,7 @@
            $scope.deleteImages.push({'img':image});
 
            if(index == 0){
+           console.log("deleted 0th index");
                 $scope.tmpImage[0].img = null;
                 console.log($scope.tmpImage[0].img);
 //                $scope.article.tempImageArray[0].img = null;
