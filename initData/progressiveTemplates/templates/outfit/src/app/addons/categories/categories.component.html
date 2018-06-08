@@ -17,7 +17,7 @@
 		<div class="row voffset animated fadeInUp">
 			<div class="col-sm-12">
 				<h1 class="mg-md text-center about-us ">
-					<a class="main-header-font" >PRODUCTS</a><br>
+					<span class="main-header-font" >PRODUCTS</span><br>
 				</h1>
 			</div>
 		</div>
@@ -63,7 +63,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<h1 class="text-center about-us  voffset">
-						<a (click)="goToNextSubCategory(node.childNodes, categories, node.products, node.name)" class=" main-header-font" >{{node.name}}</a><br>
+						<span (click)="goToNextSubCategory(node.childNodes, categories, node.products, node.name)" class=" main-header-font" >{{node.name}}</span><br>
 					</h1>
 
 					<img *ngIf="node.childNodes.length > 0 && node.products.length == 0" src="{{imageUrl}}/{{node.imageUrl}}" width="100%" />
@@ -101,7 +101,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<h1 class="mg-md text-center about-us no-padding">
-							<a class="voffset padding-bottom main-header-font">CATEGORIES</a>
+							<span class="voffset padding-bottom main-header-font">CATEGORIES</span>
 							<br>
 							<br>
 							<div class="row voffset">

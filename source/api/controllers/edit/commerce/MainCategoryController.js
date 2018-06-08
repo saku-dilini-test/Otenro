@@ -44,7 +44,7 @@ module.exports = {
                                 newParent.nodes.push(newMenu.id);
                                 MainCategory.update({id :req.body.parentId},newParent).exec(function(err) {
                                     if (err) {
-                                        res.send(err)
+                                        res.send(err);
                                     }else{
                                         res.send('ok');
                                     }
@@ -77,7 +77,6 @@ module.exports = {
             if (err) throw err;
 
             if(list){
-                console.log(list)
                 ThirdNavigation.find(searchApp, function(err, products) {
                     if (err) return done(err);
 

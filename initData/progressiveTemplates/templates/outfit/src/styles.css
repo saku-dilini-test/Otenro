@@ -144,12 +144,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 .d-bloc .panel .divider-h span,.l-bloc .divider-h span{
 	border-color:rgba(0,0,0,.1);
 }
-.d-bloc .panel .a-btn,.l-bloc .a-btn,.l-bloc .navbar a,.l-bloc .navbar-brand,.l-bloc a .icon-sm, .l-bloc a .icon-md, .l-bloc a .icon-lg, .l-bloc a .icon-xl, .l-bloc h1 a, .l-bloc h2 a, .l-bloc h3 a, .l-bloc h4 a, .l-bloc h5 a, .l-bloc h6 a, .l-bloc p a{
-	color:rgba(0,0,0,.6);
-}
-.d-bloc .panel .a-btn:hover,.l-bloc .a-btn:hover,.l-bloc .navbar a:hover, .l-bloc .navbar-brand:hover, .l-bloc a:hover .icon-sm, .l-bloc a:hover .icon-md, .l-bloc a:hover .icon-lg, .l-bloc a:hover .icon-xl, .l-bloc h1 a:hover, .l-bloc h2 a:hover, .l-bloc h3 a:hover, .l-bloc h4 a:hover, .l-bloc h5 a:hover, .l-bloc h6 a:hover, .l-bloc p a:hover{
-	color:rgba(0,0,0,1);
-}
+
 .l-bloc .navbar-toggle .icon-bar{
 	color:rgba(0,0,0,.6);
 }
