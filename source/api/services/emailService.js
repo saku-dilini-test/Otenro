@@ -96,7 +96,8 @@ module.exports = {
             transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
 //                return console.log(error);
-                return  res.send(500);
+                sails.log.error(JSON.stringify('sendRegisterConfirmation - emailService.js' + error));
+                return  res.serverError();
             }
 
             console.log('Message sent: %s', info.messageId);
