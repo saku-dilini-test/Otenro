@@ -85,7 +85,7 @@ module.exports = {
             User.findOne(criteria).exec(function (err, user) {
                 if (err) return res.send({ message: 'error' });
                 else if (user) {
-                    url = 'https://220.247.201.241:5001/sms/send_sms.php';
+                    url = 'https://sms.textware.lk:5001/sms/send_sms.php';
                     queryString = {
                         username: 'simato',
                         password: 'Si324Mt',
