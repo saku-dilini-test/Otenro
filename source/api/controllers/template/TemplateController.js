@@ -654,14 +654,8 @@ module.exports = {
 
     getDefaultTerms : function(req,res){
 
-        console.log(path);
-
-//        fs.readFile(__dirname + '/views/user.html', 'utf8', function(err, html){
-//
-//        }
         fs.readFile(path + '/assets/templates/user/edit/commerce/defaultTerms/defaultTerms.html', 'utf8', (err, data) => {
           if (err) throw err;
-          console.log(data);
                   res.send(data);
         });
 
