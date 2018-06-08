@@ -4,7 +4,7 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
-var config = require('../../../services/config');
+var config = require('../../services/config');
 
 module.exports = {
     /**
