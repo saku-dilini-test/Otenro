@@ -197,7 +197,6 @@
 
         // Maximum Product Name, Des and Sku Length Defined
         $scope.maxLengthName = 30;
-        $scope.maxLengthDesc = 500;
         $scope.maxLengthSku = 10;
         $scope.enableTab = "true";
         $scope.productTypes = [
