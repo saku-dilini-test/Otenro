@@ -45,7 +45,7 @@ module.exports = {
   // HOST URL 
   HOST_URL : 'http://173.82.243.121:1338',
   // ME SERVER Config
-  ME_SERVER_URL : 'http://developer.appmaker.lk:8181/meServer/temp/',
+  ME_SERVER_URL : 'http://developer.appmaker.lk:80/meServer/temp/',
   ME_SERVER : '/home/milhan/public_html/developer/meServer/temp/',
   ME_SERVER_PORT : 80,
   // APP FILE SERVER Config
