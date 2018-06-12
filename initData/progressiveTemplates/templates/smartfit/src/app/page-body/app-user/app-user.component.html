@@ -16,7 +16,7 @@
           <div class="col-sm-12">
             <form [formGroup]="userEditForm" class="main-content-font">
 
-            <div class="col-sm-12">
+            <div class=" hidden-xs">
                   <p class="text-center header main-header-font">
                     EDIT USER ACCOUNT
                   </p>
@@ -210,15 +210,13 @@
            
 
 
-            <div class="row">
-              <div class="radio">
-                <label>
-                  <input [checked]="passwordEditable" type="radio" (change)="togglePassword($event)"> Change Password
-                </label>
-              </div>
+            <div class="radio">
+              <label>
+                <input [checked]="passwordEditable" type="radio" (change)="togglePassword($event)"> Change Password
+              </label>
             </div>
 
-            <div *ngIf="passwordEditable" class="row" id="passwordFields">
+            <div *ngIf="passwordEditable" id="passwordFields">
 
               <div class="form-group">
                 <label for="username" class="sub-header-text-h2">
