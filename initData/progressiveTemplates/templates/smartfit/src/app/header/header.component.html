@@ -118,5 +118,5 @@
         <a (click)="navigate('login/home');closeNav()"  *ngIf="!loginStatus">Sign In</a>
         <a (click)="navigate('order-history','Order History');closeNav()" *ngIf="loginStatus">Order History</a>
 		<a (click)="navigate('appUser','My Account');closeNav()" *ngIf="loginStatus">My Account</a>
-	<div class="navbar-brand text-center"   (click)="navigate('');closeNav()"><img src="assets/images/logo.png"></div>
+	<div class="navbar-brand text-center"   (click)="navigate('');closeNav()"><img src="{{imageUrl}}/logo.png&dummy={{dummy}}" width="120"></div>
   </div>
