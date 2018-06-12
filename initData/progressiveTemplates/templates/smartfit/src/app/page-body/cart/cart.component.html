@@ -149,10 +149,10 @@
         <div class="col-sm-6">
         </div>
         <div class="col-sm-3">
-          <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg main-button btn-block" (click)='pickupDetails(cartItems)'>Pick Up</a>
+          <a *ngIf="cartItems.length > 0  && enablePickup" class="btn btn-d btn-lg main-button btn-block" (click)='pickupDetails(cartItems)'>Pick Up</a>
         </div>
         <div class="col-sm-3">
-          <a *ngIf="cartItems.length > 0" (click)="delivery(cartItems)" class="btn btn-d btn-lg main-button btn-block">Delivery</a>
+          <a *ngIf="cartItems.length > 0  && enableDelivery" (click)="delivery(cartItems)" class="btn btn-d btn-lg main-button btn-block">Delivery</a>
         </div>
       </div>
     </div>
@@ -219,10 +219,10 @@
     <div class="row hidden-sm hidden-lg hidden-md">
       <div class="col-sm-12">
         <div class="col-xs-6">
-            <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg main-button btn-block" (click)='pickupDetails(cartItems)'>Pick Up</a>
+            <a *ngIf="cartItems.length > 0  && enablePickup" class="btn btn-d btn-lg main-button btn-block" (click)='pickupDetails(cartItems)'>Pick Up</a>
         </div>
         <div class="col-xs-6">
-            <a *ngIf="cartItems.length > 0" (click)="delivery(cartItems)" class="btn btn-d btn-lg main-button btn-block">Delivery</a>
+            <a *ngIf="cartItems.length > 0  && enableDelivery" (click)="delivery(cartItems)" class="btn btn-d btn-lg main-button btn-block">Delivery</a>
         </div>
       </div>
     </div>

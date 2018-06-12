@@ -65,8 +65,8 @@
               <p class="text-right product-text text-siize " *ngIf="cartItems.length == 0">There are no Products added to the cart</p>
           </div>
           <div class="col-xs-12">
-            <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)="delivery(cartItems)">Delivery</a>
-              <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)='pickupDetails(cartItems)'>Pickup</a>
+            <a *ngIf="cartItems.length > 0  && enableDelivery" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)="delivery(cartItems)">Delivery</a>
+              <a *ngIf="cartItems.length > 0  && enablePickup" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)='pickupDetails(cartItems)'>Pickup</a>
           </div>
         </div>
       </div>
@@ -158,8 +158,8 @@
         </p>
         <p class="text-right product-text text-siize " *ngIf="cartItems.length == 0">There are no Products added to the cart</p>
 
-        <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)="delivery(cartItems)">Delivery</a>
-        <a *ngIf="cartItems.length > 0" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)='pickupDetails(cartItems)'>Pickup</a>
+        <a *ngIf="cartItems.length > 0  && enableDelivery" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)="delivery(cartItems)">Delivery</a>
+        <a *ngIf="cartItems.length > 0  && enablePickup" class="btn btn-d btn-lg pull-right button-spacing-top main-button" (click)='pickupDetails(cartItems)'>Pickup</a>
       </div>
     </div>
   </div>
