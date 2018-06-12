@@ -294,7 +294,7 @@
 
            $scope.sendApkEmail = function(id){
 
-                technicalSupportService.sendApkEmail({email:"dilakshandc123@gmail.com"}).success(function(data){
+                technicalSupportService.sendApkEmail({email:id}).success(function(data){
                     console.log("success");
                 }).error(function(){
                     console.log("error " + error);
