@@ -7,6 +7,7 @@ import { fadeInAnimation } from '../animations/fade-in.animation';
 import { TitleService } from "../services/title.service";
 import { CategoriesService } from '../services/categories/categories.service'
 import { SERVER_URL } from '../constantsService';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -26,7 +27,7 @@ export class HeaderComponent implements OnInit {
   private categories:any
   private catName: any;
   private imageUrl:any;
-  constructor(private localStorageService: LocalStorageService,private categoryService: CategoriesService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
+  constructor(private location: Location,private localStorageService: LocalStorageService,private categoryService: CategoriesService, private router: Router, private dataService: PagebodyServiceModule, private titleServ: TitleService) {
     this.cartNo = this.dataService.cart.cartItems.length;
     this.title = 'Home';
     this.dummy = new Date().getTime();
@@ -79,7 +80,9 @@ export class HeaderComponent implements OnInit {
 
     this.router.navigate([route]);
   }
-
+  goBack() {
+    this.location.back();
+  }
    openNav() {
       document.getElementById("mySidenav").style.width = "100%";
   }
