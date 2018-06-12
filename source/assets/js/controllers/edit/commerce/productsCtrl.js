@@ -2,10 +2,10 @@
     'use strict';
     angular.module("appEdit").controller("ProductCtrl", [
         '$scope', '$mdDialog', 'toastr', 'commerceService','productService','inventoryService', '$rootScope', '$auth', 'SERVER_URL','initialData',
-        'mainMenuService','$log','$q','categoryMaintenanceService','$filter', ProductCtrl]);
+        'mainMenuService','$log','$q','categoryMaintenanceService','$filter','mySharedService', ProductCtrl]);
 
     function ProductCtrl($scope, $mdDialog, toastr, commerceService, productService,inventoryService, $rootScope,  $auth, SERVER_URL,initialData,
-    mainMenuService,$log,$q,categoryMaintenanceService,$filter) {
+    mainMenuService,$log,$q,categoryMaintenanceService,$filter,mySharedService) {
         var size, weight;
         var variants;
         $scope.defaultImage;
@@ -544,29 +544,23 @@
                   $scope.product.published = 'YES';
                   $scope.product.selectedSku = $scope.selectedSku;
                   commerceService.addOrUpdateProducts({'productImages': $scope.tmpImage,'product':$scope.product, 'isNew': $rootScope.tempNew, 'defImg': $scope.defaultImage}).success(function (result) {
-                      toastr.success('Product added successfully', 'Awesome!', {
+                      toastr.success('Products updated successfully', 'Awesome!', {
                           closeButton: true
                       });
-                    var urlPath;
-                      if ($rootScope.tempNew == 'true') {
-                          urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
-                              + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-                          $scope.appTemplateUrl = urlPath +
-                              'src' + new Date().getTime();
-                      } else {
-                          urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
-                              + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
-                          $scope.appTemplateUrl = urlPath + '' +
-                              '#/app/update?' + new Date().getTime();
-                      }
+                      var urlPath;
+                      urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                          + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                      $scope.appTemplateUrl = urlPath +
+                          'src' + new Date().getTime();
+
                       mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
                       if(initialData.product.appId){
                          $mdDialog.hide();
                          return commerceService.showInventoryDialog();
+                      }else{
+                          $mdDialog.hide();
                       }
-
-                      $mdDialog.hide();
 
                   }).error(function (err) {
                       toastr.error('Product creation failed', 'Warning', {
