@@ -262,3 +262,8 @@
   .main-footer-font{
     color:#fff;
   }
+ .banner-cat{
+    height: 35vh;
+    object-fit: cover;
+    object-position: top;
+  }

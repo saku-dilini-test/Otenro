@@ -1047,7 +1047,7 @@ button{
 }
  }
 @media (max-width: 767px){
-	.navbar-toggle{
+.navbar-toggle{
 	width:26px;
 	margin-top:-5px;
 	padding-right:0px;
@@ -1110,5 +1110,11 @@ button{
 .nav-toggle{
 	width:20px;
 }
+.padding-top-0{
+	padding:0;
+}
 }
 
+.breadcumb{
+	background: #eaeaea;
+}
