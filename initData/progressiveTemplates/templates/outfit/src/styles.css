@@ -1185,6 +1185,9 @@ button{
     .bloc-xl {
 	    padding: 65px 50px 100px;
 	}
+	.bloc-xl-mobile{
+		padding-bottom: 100px;
+	}
 }
 
 @media (max-width: 400px)

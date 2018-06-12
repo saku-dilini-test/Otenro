@@ -234,10 +234,10 @@
   }
 
   .main-button{
-    background-color: transparent !important;
-    border-color: #424242 !important;
-    color: rgba(0,0,0,0.6) !important;
-    border-radius: 0px;
+    background-color: #FF9300 !important;
+    border-color: rgba(66, 66, 66, 0) !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 6px;
     border-width: 1px !important;
     border: solid;
 
