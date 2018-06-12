@@ -565,9 +565,8 @@
                          $mdDialog.hide();
                          return commerceService.showInventoryDialog();
                       }
-                      else {
-                          $mdDialog.hide();
-                      }
+
+                      $mdDialog.hide();
 
                   }).error(function (err) {
                       toastr.error('Product creation failed', 'Warning', {
