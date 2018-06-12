@@ -1058,9 +1058,6 @@ button{
 }
 @media (max-width: 767px)
 {
-	.bloc-xl {
-		padding: 65px 50px;
-	}
 
     .page-container{
         overflow-x: hidden;
@@ -1185,6 +1182,9 @@ button{
 	   width: 180px;
 	   height: 320px;
     }
+    .bloc-xl {
+	    padding: 65px 50px 100px;
+	}
 }
 
 @media (max-width: 400px)
