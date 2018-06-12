@@ -34,6 +34,9 @@
 					<div class="text-center">
 						<a class="btn btn-d btn-lg main-button"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
 					</div>
+					<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
+						<h4 class="text-warning">Sold Out!</h4>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -50,6 +53,9 @@
 					</h2>
 					<div class="text-center">
 						<a class="btn btn-d btn-lg main-button"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
+					</div>
+					<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
+						<h4 class="text-warning">Sold Out!</h4>
 					</div>
 				</div>
 			</owl-carousel>
@@ -83,6 +89,9 @@
 							</h2>
 							<div class="text-center">
 								<a class="btn btn-d btn-lg main-button"  (click)="navigateProd('product',prod, prod.name )">Buy now</a>
+							</div>
+							<div  class="text-center" *ngIf="checkSoldOut(prod)" class="text-center button-margin">
+								<h4 class="text-warning">Sold Out!</h4>
 							</div>
 						</div>
 					</div>

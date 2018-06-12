@@ -51,15 +51,11 @@ export class CategoriesComponent implements OnInit {
 
     this.currentViewName = nextName;
     this.categories = nextNode;
-
     this.prevProducts.push(this.products[0]);
-
     this.products[0] = nextProducts;
-
   }
 
   goToPreviousCategory(index){
-
     this.categories = this.prevCategories[index].cat;
     if(index != 0){
       this.currentViewName = this.prevCategories[index].catName;
@@ -70,6 +66,28 @@ export class CategoriesComponent implements OnInit {
     this.products[0] = this.prevProducts[index];
 
     this.prevProducts.splice(index);
+  }
+
+
+  checkSoldOut(product) {
+    let count = 0;
+    let isSoldOut = false;
+    if (product) {
+      let variantsLength = product.variants.length;
+
+      for (let i = 0; i < variantsLength; i++) {
+        if (product.variants[i].quantity == 0) {
+          count++;
+        }
+      }
+
+      if (count == variantsLength) {
+        isSoldOut = true;
+      } else {
+        isSoldOut = false;
+      }
+    }
+    return isSoldOut;
   }
 
 
@@ -87,6 +105,9 @@ export class CategoriesComponent implements OnInit {
   owlOptions = {
     loop:false,
     margin:15,
+    stagePadding: 50,
+    nav:true,
+    dots:true,
     responsiveClass:true,
     responsive:{
       0:{
