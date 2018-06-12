@@ -26,6 +26,7 @@ export class CategoriesComponent implements OnInit {
   private sliderData: any;
   private isSliderDataAvailable: boolean = false;
   private imageUrlSlider;
+  private currentCategory;
   constructor(private router: Router, private dataService: PagebodyServiceModule,private productService: ProductsService, private currencyService: CurrencyService,
     private sliderService: SliderService) {
     this.currentViewName = 'Home';
@@ -69,13 +70,14 @@ export class CategoriesComponent implements OnInit {
   @Input('categories') categories:CategoriesModel;
 
 
-  goToNextSubCategory(nextNode, currentNode, nextProducts, nextName){
+  goToNextSubCategory(nextNode, currentNode, nextProducts, currentCategory){
     this.prevCategories.push({
       cat:currentNode,
-      catName:this.currentViewName
+      catName:this.currentViewName,
+      currentCategory: currentCategory
     });
-
-    this.currentViewName = nextName;
+    this.currentCategory = currentCategory;
+    this.currentViewName = currentCategory.name;
     this.categories = nextNode;
     this.prevProducts.push(this.products[0]);
     this.products[0] = nextProducts;
@@ -85,6 +87,8 @@ export class CategoriesComponent implements OnInit {
     this.categories = this.prevCategories[index].cat;
     if(index != 0){
       this.currentViewName = this.prevCategories[index].catName;
+      this.currentCategory = this.prevCategories[index-1].currentCategory;
+
     }else{
       this.currentViewName = 'Home';
     }
