@@ -5,6 +5,7 @@ import { SERVER_URL } from '../../constantsService';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { ProductsService } from '../../services/products/products.service';
 import { CurrencyService } from '../../services/currency/currency.service';
+import { SliderService } from '../../services/slider/slider.service';
 
 @Component({
   selector: 'app-categories',
@@ -22,11 +23,36 @@ export class CategoriesComponent implements OnInit {
   private products:any = [];
   private currentViewName:string;
   private currency: string;
-  constructor(private router: Router, private dataService: PagebodyServiceModule,private productService: ProductsService, private currencyService: CurrencyService) {
+  private sliderData: any;
+  private isSliderDataAvailable: boolean = false;
+  private imageUrlSlider;
+  constructor(private router: Router, private dataService: PagebodyServiceModule,private productService: ProductsService, private currencyService: CurrencyService,
+    private sliderService: SliderService) {
     this.currentViewName = 'Home';
+
+    this.sliderService.retrieveSliderData().subscribe(data => {
+      if (data.length > 0) {
+        this.sliderData = data;
+        var size = Object.keys(this.sliderData).length;
+        if (size > 0) {
+          this.isSliderDataAvailable = true;
+        } else {
+          this.isSliderDataAvailable = false;
+        }
+      } else {
+        this.sliderData = null;
+        this.isSliderDataAvailable = false;
+      }
+
+    }, err => {
+      console.log(err);
+    });
   }
 
   ngOnInit() {
+    this.imageUrlSlider = SERVER_URL + "/templates/viewWebImages?userId="
+      + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=slider";
+
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
     this.imageUrl1 = SERVER_URL + "/templates/viewWebImages?userId="
