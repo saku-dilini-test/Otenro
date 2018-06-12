@@ -139,7 +139,7 @@
                 </option>
               </select>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
               <div *ngIf="isSuccessDetails" class="alert alert-success animated fadeIn">
                 Successfully Changed!
               </div>
@@ -155,69 +155,67 @@
                 class="btn btn-d main-button">Change Details</button>
             </div>
 
-            <div class="col-sm-6">
+            <div class="padding-bottom">
               <div class="radio">
                 <label>
                   <input [checked]="passwordEditable" type="radio" (change)="togglePassword($event)"> Change Password
                 </label>
               </div>
-            </div>
 
-            <div *ngIf="passwordEditable" class="row">
+              <div *ngIf="passwordEditable">
+                <div class="form-group">
+                  <label for="username" class="sub-header-text-h2">
+                    Current Password
+                  </label>
+                  <input class="form-control" width="50%" type="password" [formControl]="userEditForm.controls['password']">
+                  <div *ngIf="userEditForm.controls['password'].hasError('required')
+                  && userEditForm.controls['password'].touched && userEditForm.controls['password'].dirty" class="alert alert-danger">
+                    You must include the current password.
+                  </div>
+                </div>
 
-              <div class="form-group">
-                <label for="username" class="sub-header-text-h2">
-                  Current Password
-                </label>
-                <input class="form-control" width="50%" type="password" [formControl]="userEditForm.controls['password']">
-                <div *ngIf="userEditForm.controls['password'].hasError('required')
-                && userEditForm.controls['password'].touched && userEditForm.controls['password'].dirty" class="alert alert-danger">
-                  You must include the current password.
+                <div class="form-group">
+                  <label for="username" class="sub-header-text-h2">
+                    New Password
+                  </label>
+                  <input class="form-control" width="50%" type="password" [formControl]="userEditForm.controls['passwordNew']">
+                  <div *ngIf="userEditForm.controls['passwordNew'].hasError('required')
+                  && userEditForm.controls['passwordNew'].touched && userEditForm.controls['passwordNew'].dirty" class="alert alert-danger">
+                    You must include the password.
+                  </div>
+
+                  <div *ngIf=" userEditForm.controls['passwordNew'].touched && userEditForm.controls['passwordNew'].dirty && !userEditForm.controls['passwordNew'].valid"
+                    class="alert alert-danger">
+                    Your password should contain UpperCase, LowerCase and number
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="username" class="sub-header-text-h2">
+                    Confirm Password
+                  </label>
+                  <input class="form-control" width="50%" type="password" [formControl]="userEditForm.controls['passwordConfirm']">
+                  <div *ngIf="userEditForm.controls['passwordConfirm'].hasError('required')
+                  && userEditForm.controls['passwordConfirm'].touched && userEditForm.controls['passwordConfirm'].dirty" class="alert alert-danger">
+                    You must include the password.
+                  </div>
+                  <div *ngIf=" userEditForm.controls['passwordConfirm'].touched && userEditForm.controls['passwordConfirm'].dirty && !userEditForm.controls['passwordConfirm'].valid"
+                    class="alert alert-danger">
+                    Password Missmatch
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div *ngIf="isSuccessPassword" class="alert alert-success animated fadeIn">
+                    Successfully Changed!
+                  </div>
+                  <div *ngIf="isInvalidPassword" class="alert alert-danger animated fadeIn">
+                    Current password is incorrect, Please try again!
+                  </div>
+                  <button class="btn btn-d main-button" (click)="changePassword(userEditForm.value)" [disabled]="!userEditForm.controls['password'].valid || !userEditForm.controls['passwordConfirm'].valid || !userEditForm.controls['passwordNew'].valid">
+                    Change Password</button>
                 </div>
               </div>
-
-              <div class="form-group">
-                <label for="username" class="sub-header-text-h2">
-                  New Password
-                </label>
-                <input class="form-control" width="50%" type="password" [formControl]="userEditForm.controls['passwordNew']">
-                <div *ngIf="userEditForm.controls['passwordNew'].hasError('required')
-                && userEditForm.controls['passwordNew'].touched && userEditForm.controls['passwordNew'].dirty" class="alert alert-danger">
-                  You must include the password.
-                </div>
-
-                <div *ngIf=" userEditForm.controls['passwordNew'].touched && userEditForm.controls['passwordNew'].dirty && !userEditForm.controls['passwordNew'].valid"
-                  class="alert alert-danger">
-                  Your password should contain UpperCase, LowerCase and number
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="username" class="sub-header-text-h2">
-                  Confirm Password
-                </label>
-                <input class="form-control" width="50%" type="password" [formControl]="userEditForm.controls['passwordConfirm']">
-                <div *ngIf="userEditForm.controls['passwordConfirm'].hasError('required')
-                && userEditForm.controls['passwordConfirm'].touched && userEditForm.controls['passwordConfirm'].dirty" class="alert alert-danger">
-                  You must include the password.
-                </div>
-                <div *ngIf=" userEditForm.controls['passwordConfirm'].touched && userEditForm.controls['passwordConfirm'].dirty && !userEditForm.controls['passwordConfirm'].valid"
-                  class="alert alert-danger">
-                  Password Missmatch
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div *ngIf="isSuccessPassword" class="alert alert-success animated fadeIn">
-                  Successfully Changed!
-                </div>
-                <div *ngIf="isInvalidPassword" class="alert alert-danger animated fadeIn">
-                  Current password is incorrect, Please try again!
-                </div>
-                <button class="btn btn-d main-button" (click)="changePassword(userEditForm.value)" [disabled]="!userEditForm.controls['password'].valid || !userEditForm.controls['passwordConfirm'].valid || !userEditForm.controls['passwordNew'].valid">
-                  Change Password</button>
-              </div>
-
             </div>
 
           </form>
