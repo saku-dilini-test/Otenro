@@ -241,7 +241,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 	line-height:44px;
 }
 .navbar-brand img{
-	max-height: 200px;
+	max-height: 70px;
 	margin: 0 5px 0 0;
 	display:inline;
 }
