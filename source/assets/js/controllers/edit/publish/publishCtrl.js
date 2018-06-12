@@ -1,9 +1,9 @@
 (function() {
     'use strict';
     angular.module("appEdit").controller("PublishCtrl", ['$scope', '$mdDialog','item',
-        'toastr', '$rootScope', 'publishService', 'contactUsService', '$http', 'SERVER_URL','$auth', PublishCtrl]);
+        'toastr', '$rootScope', 'publishService', 'contactUsService', '$http', 'SERVER_URL','$auth','$window', PublishCtrl]);
 
-    function PublishCtrl($scope, $mdDialog, item, toastr, $rootScope, publishService, contactUsService, $http, SERVER_URL,$auth) {
+    function PublishCtrl($scope, $mdDialog, item, toastr, $rootScope, publishService, contactUsService, $http, SERVER_URL,$auth,$window) {
 
         // config
         $scope.passwordRegularExpression = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{7,}";
@@ -358,38 +358,42 @@
         }
 
                 $scope.downLoadSampleFile = function () {
+                console.log("im in");
 
-                    $http({
-                        method: 'POST',
-                        url: SERVER_URL+"edit/getApkPath" ,
-                        data: {file:""},
-                        responseType: 'arraybuffer'
-                    }).success(function (data, status, headers) {
-                        headers = headers();
+                    $window.open('http://localhost:1337/getApk'); // Open the file serving route in a new window/tab so we don't navigate away from this page
 
-                        var filename = headers['x-filename'];
-                        var contentType = headers['content-type'];
 
-                        var linkElement = document.createElement('a');
-                        try {
-                            var blob = new Blob([data], {type: contentType});
-                            var url = window.URL.createObjectURL(blob);
-
-                            linkElement.setAttribute('href', url);
-                            linkElement.setAttribute("download", filename);
-
-                            var clickEvent = new MouseEvent("click", {
-                                "view": window,
-                                "bubbles": true,
-                                "cancelable": false
-                            });
-                            linkElement.dispatchEvent(clickEvent);
-                        } catch (ex) {
-                            console.log(ex);
-                        }
-                    }).error(function (data) {
-                        console.log(data);
-                    });
+//                    $http({
+//                        method: 'POST',
+//                        url: SERVER_URL+"edit/getApkPath" ,
+//                        data: {file:""},
+//                        responseType: 'arraybuffer'
+//                    }).success(function (data, status, headers) {
+//                        headers = headers();
+//
+//                        var filename = headers['x-filename'];
+//                        var contentType = headers['content-type'];
+//
+//                        var linkElement = document.createElement('a');
+//                        try {
+//                            var blob = new Blob([data], {type: contentType});
+//                            var url = window.URL.createObjectURL(blob);
+//
+//                            linkElement.setAttribute('href', url);
+//                            linkElement.setAttribute("download", filename);
+//
+//                            var clickEvent = new MouseEvent("click", {
+//                                "view": window,
+//                                "bubbles": true,
+//                                "cancelable": false
+//                            });
+//                            linkElement.dispatchEvent(clickEvent);
+//                        } catch (ex) {
+//                            console.log(ex);
+//                        }
+//                    }).error(function (data) {
+//                        console.log(data);
+//                    });
                 };
 
         //end of AppStore------------------------------//
