@@ -219,6 +219,7 @@ module.exports.routes = {
     'GET /edit/getAllPorts': 'edit/publish/publishDetailController.getAllPorts',
     'GET /edit/getAllPrice': 'edit/publish/publishDetailController.getAllPrice',
     'GET /edit/getKeywordLength': 'edit/publish/publishDetailController.getKeywordLength',
+    'POST /edit/getApkPath' : 'edit/publish/publishDetailController.getApkPath',
 
     /**
      * Edit / Article Data
@@ -402,6 +403,8 @@ module.exports.routes = {
     'GET  /edit/getAllAduserData': 'technicalSupport/TechnicalSupportController.getAllAduserData',
     'GET  /edit/getAllAddNetworksData': 'technicalSupport/TechnicalSupportController.getAllAddNetworks',
     'GET  /edit/getAdNetwork': 'technicalSupport/TechnicalSupportController.getAddNetwork',
+    'POST  /edit/sendApkEmail': 'technicalSupport/TechnicalSupportController.sendApkEmail',
+    'GET /getApk' : 'technicalSupport/TechnicalSupportController.getApk',
 
     /**
      * IPG Controller

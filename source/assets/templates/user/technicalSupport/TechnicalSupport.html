@@ -37,13 +37,14 @@
                 <th>Email</th>
                 <th>Application Status</th>
                 <th>Action</th>
+                <th>Send Email</th>
                 <!--<th>User Details</th>-->
                 </thead>
 
                 <tbody>
                 <tr ng-repeat="app in appList">
                     <td >
-                    <a href="{{serverURL}}templates/viewTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">
+                    <a href="{{serverURL}}templates/viewWebTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">
                         {{app.id}}
                     </a>
                     </td>
@@ -60,6 +61,13 @@
                         <a  ng-if="app.status=='PENDING'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>
                         <a  ng-if="app.status=='PUBLISHED'" data-ng-click="getPublishDetails(app.id,app.userId)">Update</a>
                         <a  ng-if="app.status=='UPLOADING'" data-ng-click="getPublishDetails(app.id,app.userId)">Finish</a>
+                    </td>
+                    <td>
+                        <div data-ng-repeat="user in userList">
+                            <div ng-if="user.id==app.userId">
+                                <a data-ng-click="sendApkEmail(user.email)">Send Email</a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
@@ -92,7 +100,7 @@
                                     /
                                     <a data-ng-click="deleteAdNetwork(app)">Delete</a>
                                 </td>
-                            </tr>
+                               </tr>
                             </tbody>
                         </table>
                         <div><a href="#/viewAdNetworks/"> + Add new network</a></div>
@@ -161,7 +169,8 @@
                 </form> </md-tab-body>
             </md-tab>
             <md-tab ng-disabled="enableTab">
-
+            </md-tab>
+        </md-tabs>
     </div>
 </div>
 
