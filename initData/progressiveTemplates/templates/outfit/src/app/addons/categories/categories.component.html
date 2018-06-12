@@ -61,12 +61,12 @@
 	<div class="container bloc-lg">
 		<div *ngFor="let node of categories;">
 			<div class="row">
-				<div class="col-sm-12">
-					<h1 class="text-center about-us  voffset">
+				<div class="col-sm-12 text-center">
+					<h1 class="text-center about-us  voffset cursor-p">
 						<span (click)="goToNextSubCategory(node.childNodes, categories, node.products, node.name)" class=" main-header-font" >{{node.name}}</span><br>
 					</h1>
 
-					<img *ngIf="node.childNodes.length > 0 && node.products.length == 0" src="{{imageUrl}}/{{node.imageUrl}}" width="100%" />
+					<img class="cursor-p"  (click)="goToNextSubCategory(node.childNodes, categories, node.products, node.name)" *ngIf="node.products.length == 0" src="{{imageUrl}}/{{node.imageUrl}}" width="70%" />
 
 				</div>
 			</div>
