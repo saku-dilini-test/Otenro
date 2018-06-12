@@ -52,10 +52,10 @@ export class ProductComponent implements OnInit {
         this.init();
         this.isBuyBtnDisable = true;
         this.title.changeTitle('Details');
-        if (this.Data.detailedDesc.length > 250) {
-            this.desPart2 = this.Data.detailedDesc.slice(250, this.Data.detailedDesc.length);
-            this.desPart1 = this.Data.detailedDesc.slice(0, 250) + "...";
-            this.desPart1_demo = this.Data.detailedDesc.slice(0, 250);
+        if (this.Data.detailedDesc.length > 400) {
+            this.desPart2 = this.Data.detailedDesc.slice(400, this.Data.detailedDesc.length);
+            this.desPart1 = this.Data.detailedDesc.slice(0, 400) + "...";
+            this.desPart1_demo = this.Data.detailedDesc.slice(0, 400);
 
         } else {
             this.desPart1 = this.Data.detailedDesc;
