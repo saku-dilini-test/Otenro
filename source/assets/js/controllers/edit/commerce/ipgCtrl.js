@@ -41,7 +41,7 @@
                     });
                 }
 
-        }else if(IPGInfo.payHereEnable == true){
+        }else if(IPGInfo.payHereEnable == true && IPGInfo.payHereMerchantId == null){
 
                     toastr.error('Please enter PayHere ID ', 'Warning', {
                         closeButton: true

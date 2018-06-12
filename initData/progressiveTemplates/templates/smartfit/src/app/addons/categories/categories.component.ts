@@ -4,6 +4,7 @@ import * as data from '../../madeEasy.json';
 import { SERVER_URL } from '../../constantsService';
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { ProductsService } from '../../services/products/products.service';
+import { CurrencyService } from '../../services/currency/currency.service';
 
 @Component({
   selector: 'app-categories',
@@ -20,7 +21,8 @@ export class CategoriesComponent implements OnInit {
   private catName: any;
   private products:any = [];
   private currentViewName:string;
-  constructor(private router: Router, private dataService: PagebodyServiceModule,private productService: ProductsService) {
+  private currency: string;
+  constructor(private router: Router, private dataService: PagebodyServiceModule,private productService: ProductsService, private currencyService: CurrencyService) {
     this.currentViewName = 'Home';
   }
 
@@ -29,6 +31,13 @@ export class CategoriesComponent implements OnInit {
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
     this.imageUrl1 = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=thirdNavi";
+
+
+    this.currencyService.getCurrencies().subscribe(data => {
+        this.currency = data.sign;
+    }, error => {
+        console.log('Error retrieving currency');
+    });
   }
 
   @Input('categories') categories:CategoriesModel;
@@ -42,11 +51,8 @@ export class CategoriesComponent implements OnInit {
 
     this.currentViewName = nextName;
     this.categories = nextNode;
-
     this.prevProducts.push(this.products[0]);
-
     this.products[0] = nextProducts;
-
   }
 
   goToPreviousCategory(index){
@@ -101,6 +107,9 @@ export class CategoriesComponent implements OnInit {
   owlOptions = {
     loop:false,
     margin:15,
+    stagePadding: 50,
+    nav:true,
+    dots:true,
     responsiveClass:true,
     responsive:{
       0:{

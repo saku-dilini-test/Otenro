@@ -198,7 +198,7 @@
                   </div>
               </form>
               <form class="row" [formGroup]="shippingForm">
-                <div class="col-md-12" *ngIf="newUser && complexForm.valid || oldUser">
+                <div class="margin-bottom padding-bottom  col-md-12" *ngIf="newUser && complexForm.valid || oldUser">
                     <h3 class="main-header-font">Shipping Options</h3>
                     <div class="radio main-content-font" *ngFor="let ship of shippingData, let idx = index">
                       <label>

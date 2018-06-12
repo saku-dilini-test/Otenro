@@ -262,3 +262,7 @@
   .main-footer-font{
     color:#fff;
   }
+
+  .cursor-p{
+    cursor: pointer;
+  }
