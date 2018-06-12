@@ -25,7 +25,7 @@ export class CartComponent implements OnInit {
   private buyButtonDisable;
   hide: any;
   tax: any;
-  user;
+  user;enableDelivery=false;enablePickup=false;
 
   private _success = new Subject<string>();
 
@@ -61,6 +61,16 @@ export class CartComponent implements OnInit {
 
     this.taxService.getShippingInfo().subscribe(data => {
       this.shippingData = data;
+      this.shippingData.forEach(element => {
+
+        if(element.shippingOption == "Flat Rate" || element.shippingOption == "Weight Based"){
+            this.enableDelivery = true;
+        }else if(element.shippingOption == "Pick up"){
+            this.enablePickup = true;
+        }
+
+      });
+      console.log(this.shippingData);
     }, err => {
       alert(
         'Error loading shippingInfo!\n Please check your connection.'
