@@ -548,28 +548,26 @@
                           closeButton: true
                       });
                     var urlPath;
+                      if ($rootScope.tempNew == 'true') {
+                          urlPath = SERVER_URL + "progressiveTemplates/viewProgUrl?userId=" + $auth.getPayload().id
+                              + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                          $scope.appTemplateUrl = urlPath +
+                              'src' + new Date().getTime();
+                      } else {
+                          urlPath = SERVER_URL + "templates/viewTemplateUrl?userId=" + $auth.getPayload().id
+                              + "&appId=" + $rootScope.appId + "&" + new Date().getTime() + "/";
+                          $scope.appTemplateUrl = urlPath + '' +
+                              '#/app/update?' + new Date().getTime();
+                      }
+                      mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
                       if(initialData.product.appId){
-                             return commerceService.showInventoryDialog();
-                             $mdDialog.hide();
-
+                         $mdDialog.hide();
+                         return commerceService.showInventoryDialog();
                       }
-                      else{
-                        $mdDialog.hide();
+                      else {
+                          $mdDialog.hide();
                       }
-
-                          if($rootScope.tempNew == 'true'){
-                          urlPath =  SERVER_URL +"progressiveTemplates/viewProgUrl?userId="+ $auth.getPayload().id
-                                                                         +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                                                          $scope.appTemplateUrl = urlPath +
-                                                              'src'+new Date().getTime();
-                          }else{
-                          urlPath =  SERVER_URL +"templates/viewTemplateUrl?userId="+ $auth.getPayload().id
-                                                                         +"&appId="+$rootScope.appId+"&"+new Date().getTime()+"/";
-                                                          $scope.appTemplateUrl = urlPath+'' +
-                                                              '#/app/update?'+new Date().getTime();
-                          }
-                          mySharedService.prepForBroadcast($scope.appTemplateUrl);
 
                   }).error(function (err) {
                       toastr.error('Product creation failed', 'Warning', {
