@@ -121,13 +121,13 @@
 						</a>
 					</div>
 				</div> 
-				<div *ngIf="categories && categories.length % 2 == 0" class="col-xs-6" (click)="goToNextSubCategory(categories[ categories.length-1].childNodes, categories, categories[ categories.length-1].products, categories[ categories.length-1].name)" >
+				<!-- <div *ngIf="categories && categories.length % 2 == 0" class="col-xs-6" (click)="goToNextSubCategory(categories[ categories.length-1].childNodes, categories, categories[ categories.length-1].products, categories[ categories.length-1].name)" >
 					<div class="text-center">
 						<a class="btn btn-d btn-lg button-category orbitrack" [ngStyle]="{'background-image': 'url(' + imageUrl+'/'+categories[ categories.length-1].imageUrl + ')'}">
 							{{categories[ categories.length-1].name}}
 						</a>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</ng-template>
 			<div class="row row-no-gutters"  *ngIf="categories && categories.length % 2 == 1">
