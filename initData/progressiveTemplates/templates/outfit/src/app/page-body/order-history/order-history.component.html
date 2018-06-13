@@ -41,6 +41,7 @@
                           <span *ngFor="let v of item.variant"><strong>{{v.name}}</strong> - {{v.vType}}<br><br></span>
                           <strong>PRICE</strong> -  {{sign}} {{item.price}}<br><br>
                           <strong>QTY</strong> -  {{item.qty}}<br><br>
+                           <a  (click)="buyAgain(item)" class="btn btn-d btn-lg button main-button"><span class="ion ion-plus-round icon-spacer"></span>Buy Again</a>
                         </p>
                       </div>
                       <hr class="col-sm-12">
@@ -55,15 +56,6 @@
                           <p class="spacing-2 text-right text-left-xs">
                             <strong>{{sign}} {{order.amount}}</strong>
                           </p>
-                          <!-- <div class="row">
-                            <div class="col-sm-6">
-                            </div>
-                            <div class="col-sm-6">
-                              <div class="text-center">
-                                <a class="btn btn-d btn-lg button spacing-3 main-button"><span class="ion ion-plus-round icon-spacer"></span>Buy Again</a>
-                              </div>
-                            </div>
-                          </div> -->
                         </div>
                   </div>
               </div>
