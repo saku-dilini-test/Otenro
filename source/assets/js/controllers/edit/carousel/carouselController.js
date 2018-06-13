@@ -4,10 +4,10 @@
 
 (function () {
     'use strict';
-    angular.module("appEdit").controller("CarouselCtrl", ['$scope', '$mdDialog', 'toastr', 'mySharedService', 'carouselService', '$rootScope', '$http', 'SERVER_URL', '$auth', 'initialData', CarouselCtrl]);
+    angular.module("appEdit").controller("CarouselCtrl", ['$scope', '$mdDialog', 'toastr','categoryMaintenanceService', 'mySharedService', 'carouselService', '$rootScope', '$http', 'SERVER_URL', '$auth', 'initialData', CarouselCtrl]);
 
 
-    function CarouselCtrl($scope, $mdDialog, toastr, mySharedService, carouselService, $rootScope, $http, SERVER_URL, $auth, initialData) {
+    function CarouselCtrl($scope, $mdDialog, toastr,categoryMaintenanceService, mySharedService, carouselService, $rootScope, $http, SERVER_URL, $auth, initialData) {
 
         $scope.tmpImage = [];
         $scope.mainImg = null;
@@ -64,9 +64,12 @@
 
 
         //retrieving categories data
-        $http.get(SERVER_URL + 'templates/getSpecificChild?appId=' + $rootScope.appId).success(function (data) {
-            $scope.categories = data;
-
+        categoryMaintenanceService.getAllCategoryWithoutMakingCommerce($rootScope.appId).success(function (results) {
+            $scope.categories = results;
+        }).error(function (error) {
+            toastr.error('Category loading error', 'Warning', {
+                closeButton: true
+            });
         });
 
 
