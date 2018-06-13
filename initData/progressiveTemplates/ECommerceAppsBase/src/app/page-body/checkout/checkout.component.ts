@@ -352,7 +352,7 @@ export class CheckoutComponent implements OnInit {
 
   itemPriceCal(price, qty) {
     let tot = price * qty
-    return Math.round(tot * 100) / 100;
+    return (Math.round(tot * 100) / 100).toFixed(2);
   }
 
 
@@ -367,7 +367,7 @@ export class CheckoutComponent implements OnInit {
     }
     tax = total * this.tax / 100;
     this.taxTotal = total * this.tax / 100;
-    this.taxTotal = Math.round(this.taxTotal * 100) / 100;
+    this.taxTotal = (Math.round(this.taxTotal * 100) / 100).toFixed(2);
     if (tax > 0) {
       total = total + tax;
       this.dataService.cart.totalPrice = total;
@@ -542,7 +542,7 @@ export class CheckoutComponent implements OnInit {
   chk(final) {
 
     this.finalDetails = final;
-    this.chkShippingCost = this.finalDetails.shippingCost;
+    this.chkShippingCost = parseFloat(this.finalDetails.shippingCost).toFixed(2);
     this.underWeight = this.finalDetails.underWeight;
     this.overWeight = this.finalDetails.overWeight;
 
@@ -605,7 +605,7 @@ export class CheckoutComponent implements OnInit {
           total = total + shipping;
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
-          this.taxTotal = Math.round(this.taxTotal * 100) / 100;
+          this.taxTotal = (Math.round(this.taxTotal * 100) / 100).toFixed(2);
           if (tax > 0) {
             total = total + tax;
             this.totalPrice = total;
@@ -616,39 +616,39 @@ export class CheckoutComponent implements OnInit {
         } else {
           tax = total * this.chkTax / 100;
           this.taxTotal = total * this.chkTax / 100;
-          this.taxTotal = Math.round(this.taxTotal * 100) / 100;
+          this.taxTotal = (Math.round(this.taxTotal * 100) / 100).toFixed(2);
 
           if (!this.finalDetails.pickupCost || this.finalDetails.pickupCost == 0) {
             this.chkPickupCost = 0;
           } else {
-            this.chkPickupCost = this.finalDetails.pickupCost;
+            this.chkPickupCost = parseFloat(this.finalDetails.pickupCost).toFixed(2);
           }
           if (tax > 0) {
             total = total + tax;
             if (this.chkPickupCost == 0) {
               if (this.chkShippingCost) {
                 this.totalPrice = total + parseFloat(this.chkShippingCost);
-                this.totalPrice = Math.round(this.totalPrice * 100) / 100;
+                this.totalPrice = (Math.round(this.totalPrice * 100) / 100).toFixed(2);
               } else {
                 this.totalPrice = total;
-                this.totalPrice = Math.round(this.totalPrice * 100) / 100;
+                this.totalPrice = (Math.round(this.totalPrice * 100) / 100).toFixed(2);
               }
             } else {
               this.totalPrice = total + parseFloat(this.chkPickupCost);
-              this.totalPrice = Math.round(this.totalPrice * 100) / 100;
+              this.totalPrice = (Math.round(this.totalPrice * 100) / 100).toFixed(2);
             }
           } else {
             if (this.chkPickupCost == 0) {
               if (this.chkShippingCost) {
                 this.totalPrice = total + parseFloat(this.chkShippingCost);
-                this.totalPrice = Math.round(this.totalPrice * 100) / 100;
+                this.totalPrice = (Math.round(this.totalPrice * 100) / 100).toFixed(2);
               } else {
                 this.totalPrice = total;
-                this.totalPrice = Math.round(this.totalPrice * 100) / 100;
+                this.totalPrice = (Math.round(this.totalPrice * 100) / 100).toFixed(2);
               }
             } else {
               this.totalPrice = total + parseFloat(this.chkPickupCost);
-              this.totalPrice = Math.round(this.totalPrice * 100) / 100;
+              this.totalPrice = (Math.round(this.totalPrice * 100) / 100).toFixed(2);
             }
           }
         }
