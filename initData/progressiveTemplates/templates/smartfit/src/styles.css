@@ -23,7 +23,6 @@ a:hover{text-decoration: none; cursor:pointer;}
 	width:100%;
 	clear:both;
 	background: 50% 50% no-repeat;
-	padding:0 50px;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -89,9 +88,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 	border-color:rgba(255,255,255,.2);
 }
 
-.d-bloc .a-btn:hover,.d-bloc .navbar a:hover,.d-bloc .navbar-brand:hover,.d-bloc a:hover .icon-sm, .d-bloc a:hover .icon-md, .d-bloc a:hover .icon-lg, .d-bloc a:hover .icon-xl, .d-bloc h1 a:hover, .d-bloc h2 a:hover, .d-bloc h3 a:hover, .d-bloc h4 a:hover, .d-bloc h5 a:hover, .d-bloc h6 a:hover, .d-bloc p a:hover{
-	color:rgba(255,255,255,1);
-}
+
 .d-bloc .navbar-toggle .icon-bar{
 	background:rgba(255,255,255,1);
 }
@@ -954,7 +951,7 @@ button{
         padding-right: 0;
     }
     .bloc-xxl,.bloc-xl,.bloc-lg{
-        padding: 40px 0;
+        padding: 40px 10px !important;
     }
     .bloc-sm,.bloc-md{
         padding-left: 0;
@@ -1117,4 +1114,5 @@ button{
 
 .breadcrumb{
 	background: #eaeaea;
+	margin-bottom: 0;
 }
