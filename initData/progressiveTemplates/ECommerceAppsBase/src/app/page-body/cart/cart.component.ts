@@ -70,7 +70,6 @@ export class CartComponent implements OnInit {
         }
 
       });
-      console.log(this.shippingData);
     }, err => {
       alert(
         'Error loading shippingInfo!\n Please check your connection.'

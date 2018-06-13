@@ -7,7 +7,6 @@ import * as data from '../../madeEasy.json';
 import * as _ from 'lodash';
 import { CurrencyService } from '../../services/currency/currency.service';
 import { TitleService } from '../../services/title.service';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import * as Player from '@vimeo/player';
 import { LocalStorageService } from 'angular-2-local-storage';
 
@@ -40,13 +39,12 @@ export class ProductComponent implements OnInit {
     private dialogVariants;
     private imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
         + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + '&images=thirdNavi';
-    private player: Player;
     private readMore = false;
     desPart1; desPart2; desPart1_demo;
-    carouselEl; name1; name2; name3; name4;
+    name1; name2; name3; name4;
 
-    constructor(private localStorageService: LocalStorageService, public sanitizer: DomSanitizer, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
-        this.sanitizer = sanitizer;
+    constructor(private localStorageService: LocalStorageService, private CurrencyService: CurrencyService, private http: HttpClient, private dataService: PagebodyServiceModule, private router: ActivatedRoute, private route: Router, private title: TitleService) {
+
         this.Data = this.dataService.data;
 
         this.init();
@@ -63,15 +61,8 @@ export class ProductComponent implements OnInit {
         }
     }
 
-    cleanURL(oldURL: string): SafeResourceUrl {
-        return this.sanitizer.bypassSecurityTrustResourceUrl(oldURL);
-    }
-
     currency: string;
-    clicked = false;
-    slided = false;
     tests;
-    @ViewChild('iframePlayer') playerContainer;
 
     readMoreFunct() {
 
@@ -97,43 +88,11 @@ export class ProductComponent implements OnInit {
             this.catName = params['catName'];
         });
 
-        $(() => {
-            this.carouselEl = $('.carousel');
-            var carouselItems = this.carouselEl.find('.item');
-            this.carouselEl.carousel({
-                interval: false
-            }).on('slid.bs.carousel', (event) => {
 
-            })
-        })
-    }
-
-    ngAfterContentChecked() {
-    }
-
-    ngAfterViewChecked() {
-    }
-
-    ngOnChanges() {
     }
 
     ngAfterViewInit() {
-        this.clicked = false;
-        this.slided = true;
 
-        $(".carousel").swipe({
-
-            swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
-
-                if (direction == 'left') $(this).carousel('next');
-                if (direction == 'right') $(this).carousel('prev');
-
-            },
-            allowPageScroll: "vertical"
-
-        });
-        // console.log(document.getElementById('iframePlayer'));
-        // this.player = new Player(this.playerContainer.nativeElement);
 
         $("#gallery").unitegallery({
           theme_enable_text_panel: false,
@@ -143,140 +102,6 @@ export class ProductComponent implements OnInit {
           slider_textpanel_bg_opacity: 0,
         });
     }
-
-    video(index, ids) {
-
-        // console.log(index);
-        // console.log(ids);
-
-        // console.log(document.getElementById('image' + index).style.display);
-        // document.getElementById('image' + index).style.display = 'none';
-        // document.getElementById('player' + index).style.display = 'block';
-
-        // this.player = new Player(document.getElementById('handstick'));
-
-        // this.player.play().then(function (id) {
-        //     // the video successfully loaded
-        //     console.log('video successfully loaded');
-        // }).catch(function (error) {
-        //     switch (error.name) {
-        //         case 'TypeError':
-        //             // the id was not a number
-        //             break;
-
-        //         case 'PasswordError':
-        //             // the video is password-protected and the viewer needs to enter the
-        //             // password first
-        //             break;
-
-        //         case 'PrivacyError':
-        //             // the video is password-protected or private
-        //             break;
-
-        //         default:
-        //             // some other error occurred
-        //             break;
-        //     }
-        // });
-
-        var options = {
-            id: ids,
-            loop: true,
-            autoplay: true
-        };
-        if (ids) {
-            var player = new Player('player', options);
-            // console.log(player);
-
-            player.ready().then(function () {
-
-                // var frame = $('player' + index)[0];
-                // if (frame !== null) {
-                //   frame.style.width = '100%'
-
-                // }
-
-                // console.log('player is ready');
-                // player.getVideoEmbedCode().then(function(embedCode) {
-                //     // embedCode = <iframe> embed code
-                //     console.log(embedCode);
-                // }).catch(function(error) {
-                //     // an error occurred
-                // });
-                // player.loadVideo(id).then(function (id) {
-
-                //     console.log('video loaded');
-                //     // player.play();
-                //     // the video successfully loaded
-                // }).catch(function (error) {
-                //     switch (error.name) {
-                //         case 'TypeError':
-                //             // the id was not a number
-                //             break;
-
-                //         case 'PasswordError':
-                //             // the video is password-protected and the viewer needs to enter the
-                //             // password first
-                //             break;
-
-                //         case 'PrivacyError':
-                //             // the video is password-protected or private
-                //             break;
-
-                //         default:
-                //             // some other error occurred
-                //             break;
-                //     }
-                // });
-                // player.on('play', function() {
-                //     console.log('played the video!');
-                // });
-
-                player.play().then(function () {
-                    // the video was played
-                    // console.log('vido played');
-                }).catch(function (error) {
-                    switch (error.name) {
-                        case 'PasswordError':
-                            // the video is password-protected and the viewer needs to enter the
-                            // password first
-                            break;
-
-                        case 'PrivacyError':
-                            // the video is private
-                            break;
-
-                        default:
-                            // some other error occurred
-                            break;
-                    }
-                });
-
-            });
-        }
-
-        // player.setVolume(0);
-
-        // player.on('play',  ()=> {
-        //     console.log('played the video!');
-        // },err=>{
-        //     console.log(err);
-        // });
-
-        // var iframe = document.querySelector('iframe');
-        // var player = new Player(iframe);
-
-        // this.clicked = true;
-        // this.slided = false;
-
-        // this.player.on('play', function () {
-        //     console.log('played the video!');
-        // });
-
-
-
-    }
-
 
 
     init() {
@@ -390,7 +215,7 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.lockBuyButton = true;
-            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
+
         } else {
 
             // if (variant1 == "Please Select") {
@@ -443,7 +268,6 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.lockBuyButton = true;
-            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
 
         } else {
             // if (variant2 != 'PleaseSelect') {
@@ -494,7 +318,6 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.lockBuyButton = true;
-            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
 
         } else {
             // if (variant3 != 'PleaseSelect') {
@@ -536,7 +359,6 @@ export class ProductComponent implements OnInit {
                 }
             }
             this.lockBuyButton = true;
-            this.carouselEl.carousel(this.getIndex(this.selectedVariant.sku));
         }
     };
 

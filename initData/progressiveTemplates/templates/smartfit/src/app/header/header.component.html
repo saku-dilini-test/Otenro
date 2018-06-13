@@ -15,31 +15,6 @@
 							          <div class="mobile-title visible-xs mobileTitle" >{{title}}</div>
 							          <div class="mobile-cart visible-xs" ><i class="feather-icon icon-bag icon-sm "  (click)="navigate('cart','Shopping Cart');manualToggle()"></i> <span class="badge main-navigation"  (click)="navigate('cart','Shopping Cart');manualToggle()">{{cartNo}}</span></div>
 							        </div>
-							<div class="collapse navbar-collapse nav-special sidebar-nav navbar-1 " aria-expanded="false">
-								<ul class="site-navigation nav navbar-nav">
-									<li>
-										<a (click)="navigate('','Home')">Home</a>
-									</li>
-									<li>
-										<a (click)="navigate('contact', 'Contact Us')">Contact-Us</a>
-									</li>
-									<li>
-										<a (click)="navigate('policies', 'Policies')">Privacy policy</a>
-									</li>
-									<li>
-										<a  *ngIf="loginStatus" (click)="navigate('order-history','Order History')">Order History</a>
-									</li>
-									<li>
-										<a (click)="navigate('terms', 'Terms & Conditions')">Terms &amp; Conditions</a>
-									</li>
-									<li>
-										<a  *ngIf="loginStatus" (click)="logout()"><span class="ion ion-person icon-sm"></span></a>
-									</li>
-									<li (click)="navigate('cart','Shopping Cart')">
-										<a ><span class="ion ion-android-cart icon-sm"></span></a>
-									</li>
-								</ul>
-							</div>
 						</nav>
 				</div>
 			</div>

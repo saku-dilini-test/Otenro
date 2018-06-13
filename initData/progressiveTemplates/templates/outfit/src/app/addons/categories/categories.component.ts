@@ -158,6 +158,14 @@ export class CategoriesComponent implements OnInit {
     this.router.navigate([val, this.catName]);
   }
 
+    navigateSliderProd(val, item) {
+      if (item.optionals.length == 2) {
+        this.catName = item.optionals[0].name
+        this.dataService.data = item.optionals[1];
+        this.router.navigate([val, this.catName]);
+      }
+    }
+
 }
 
 export class CategoriesModel{
