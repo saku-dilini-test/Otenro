@@ -33,9 +33,16 @@
         }
 
         if(initialData.product.variants){
-//            for(var i = 0;i < $scope.product.variants.length;i++){
-//                $scope.myVariants.push($scope.product.variants[i]);
-//            }
+
+                for(var i = 0;i < initialData.product.variants.length;i++){
+                    if(initialData.product.variants[i].price){
+                    initialData.product.variants[i].price = parseFloat(initialData.product.variants[i].price);
+                    console.log(initialData.product.variants[i].price);
+                    initialData.product.variants[i].price = initialData.product.variants[i].price.toFixed(2);
+                    console.log(initialData.product.variants[i].price);
+
+                    }
+                }
 //            console.log($scope.myVariants);
             feedSku($scope.product.variants, false);
         }
