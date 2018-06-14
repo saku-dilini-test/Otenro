@@ -8,13 +8,13 @@
 
     <md-dialog-content>
         <div class="md-dialog-header">
-            <h1>publish an article</h1>
+            <h1>create page</h1>
         </div>
         <form name="articleForm" novalidate>
             <div class="md-dialog-main clearfix">
 
                 <fieldset>
-                    <label>Article Category</label>
+                    <label>page Category</label>
                     <select class="input-shadow-border" ng-model="dummyCat.id" ng-options="v.name for v in dummyCat" ng-change="changeArticleCat(dummyCat.id)"
                             required>
                     </select>
@@ -73,7 +73,7 @@
 
                         <div class="uploaded-section clearfix">
                             <div class="uploaded-old-images">
-                                <p>Uploaded Product Images/ Videos</p>
+                                <p>Uploaded Images/ Videos</p>
                                 <!--{{tmpImage.length}}-->
                                 <div class="old-images clearfix">
                                     <table>
@@ -171,7 +171,7 @@
                 </fieldset>
 
                 <fieldset style="clear:both">
-                    <label>Description</label>
+                    <label>Add Page Details</label>
                     <div class="custom-trix">
                         <!--<trix-editor class="textEditor input-shadow-border"-->
                         <!--name="editorText"-->
