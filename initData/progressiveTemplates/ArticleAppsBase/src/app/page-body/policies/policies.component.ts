@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppDataService } from '../../services/appdata-info/appdata-info.service';
 import { TitleService } from '../../services/title.service';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { SERVER_URL } from 'app/constantsService';
 
 @Component({
   selector: 'app-policies',
@@ -11,8 +13,8 @@ export class PoliciesComponent implements OnInit {
 
   private privacyPolicy;
   private returnPolicy;
-  private terms;
-  constructor( private appdataService: AppDataService, private title: TitleService) {
+  private terms; defaultTerms;
+  constructor(private http: HttpClient, private appdataService: AppDataService, private title: TitleService) {
     this.title.changeTitle("Policies");
   }
 
@@ -27,5 +29,11 @@ export class PoliciesComponent implements OnInit {
         console.log(err);
       });
 
+    this.http.get(SERVER_URL + "/templates/getDefaultTerms", { responseType: 'text' }).subscribe(res => {
+
+      this.defaultTerms = res;
+
+    })
   }
+
 }

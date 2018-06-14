@@ -48,6 +48,9 @@
             getAdNetworkData : function(adname){
                 return $http.get(SERVER_URL + 'edit/getAdNetwork?addname='+adname);
             },
+            sendApkEmail: function (data) {
+                return $http.post(SERVER_URL + 'edit/sendApkEmail', data);
+            },
         };
     }
 })();

@@ -8,13 +8,13 @@
 
     <md-dialog-content>
         <div class="md-dialog-header">
-            <h1>publish an article</h1>
+            <h1>create page</h1>
         </div>
         <form name="articleForm" novalidate>
             <div class="md-dialog-main clearfix">
 
                 <fieldset>
-                    <label>Article Category</label>
+                    <label>page Category</label>
                     <select class="input-shadow-border" ng-model="dummyCat.id" ng-options="v.name for v in dummyCat" ng-change="changeArticleCat(dummyCat.id)"
                             required>
                     </select>
@@ -37,14 +37,14 @@
                 <fieldset>
                     <label>publish date and time</label>
                     <div class="clearfix">
-                        <adm-dtp ng-disabled="true" ng-model='article.publishDate' options='{multiple:false, calType: "gregorian", default: today}'></adm-dtp>
+                        <adm-dtp ng-disabled="true" ng-model='article.publishDate' options='{multiple:false, calType: "gregorian", default: today, freezeInput:true}' ></adm-dtp>
                         <!-- <input type="date" ng-model='pushMessage.date'>-->
                     </div>
                 </fieldset>
                 <fieldset>
                     <label>Expiry date and time</label>
                     <div class="clearfix">
-                        <adm-dtp ng-disabled="true" ng-model='article.expiryDate' options='{multiple:false, calType: "gregorian", default: today}'></adm-dtp>
+                        <adm-dtp ng-disabled="true" ng-model='article.expiryDate' options='{multiple:false, calType: "gregorian", default: today,  freezeInput:true}' ></adm-dtp>
                         <!-- <input type="date" ng-model='pushMessage.date'>-->
                     </div>
                 </fieldset>
@@ -73,7 +73,7 @@
 
                         <div class="uploaded-section clearfix">
                             <div class="uploaded-old-images">
-                                <p>Uploaded Product Images/ Videos</p>
+                                <p>Uploaded Images/ Videos</p>
                                 <!--{{tmpImage.length}}-->
                                 <div class="old-images clearfix">
                                     <table>
@@ -97,9 +97,8 @@
                                                 <md-checkbox ng-change="chng(tmpImage[1].url, 1)" ng-disabled = "!(tmpImage[0].img) && tmpImage.length <= 1" id="chk_videoUrl2" class="padding-top" ng-model="tmpImage[1].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
-                                                <input placeholder="https://www.youtube.com" ng-pattern="/^(https\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/" ng-disabled="!tmpImage[1].url" class="input-shadow-border article-youtube" type="text" id="videoUrl2" name="videoUrl2"
+                                                <input placeholder="Youtube video ID"  ng-disabled="!tmpImage[1].url" class="input-shadow-border article-youtube" type="text" id="videoUrl2" name="videoUrl2"
                                                       ng-model="tmpImage[1].videoUrl" width="10px" ng-keyup="change()" required />
-                                                <span ng-show="articleForm.videoUrl2.$error.pattern" class="error">Invalid Url</span>
                                                 <span class="error"><p style="color:red;" id="err_videoUrl2"></p></span>
                                             </td>
                                         </tr>
@@ -114,9 +113,8 @@
                                                 <md-checkbox ng-change="chng(tmpImage[2].url, 2)" ng-disabled = "!(tmpImage[1].url || (tmpImage[1].img && tmpImage[1].videoUrl || tmpImage[1].img || tmpImage[2].img))" id="chk_videoUrl3" class="padding-top" ng-model="tmpImage[2].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
-                                                <input  placeholder="https://www.youtube.com" ng-pattern="/^(https\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/" ng-disabled="!tmpImage[2].url" class="input-shadow-border article-youtube" type="text" id="videoUrl3" name="videoUrl3"
+                                                <input  placeholder="Youtube video ID"  ng-disabled="!tmpImage[2].url" class="input-shadow-border article-youtube" type="text" id="videoUrl3" name="videoUrl3"
                                                        ng-model="tmpImage[2].videoUrl" width="10px" ng-keyup="change()" required />
-                                                <span ng-show="articleForm.videoUrl3.$error.pattern" class="error">Invalid Url</span>
                                                 <span class="error"><p style="color:red;" id="err_videoUrl3"></p></span>
                                             </td>
 
@@ -130,9 +128,8 @@
                                                 <md-checkbox ng-change="chng(tmpImage[3].url, 3)" ng-disabled = "!(tmpImage[2].url || (tmpImage[2].img && tmpImage[2].videoUrl || tmpImage[2].img || tmpImage[3].img))" id="chk_videoUrl4" class="padding-top" ng-model="tmpImage[3].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
-                                                <input placeholder="https://www.youtube.com" ng-pattern="/^(https\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/" ng-disabled="!tmpImage[3].url" class="input-shadow-border article-youtube" type="text" id="videoUrl4" name="videoUrl4"
+                                                <input placeholder="Youtube video ID"  ng-disabled="!tmpImage[3].url" class="input-shadow-border article-youtube" type="text" id="videoUrl4" name="videoUrl4"
                                                        ng-model="tmpImage[3].videoUrl" width="10px" ng-keyup="change()" required />
-                                                <span ng-show="articleForm.videoUrl4.$error.pattern" class="error">Invalid Url</span>
                                                 <span class="error"><p style="color:red;" id="err_videoUrl4"></p></span>
                                             </td>
                                         </tr>
@@ -147,9 +144,8 @@
                                                 <md-checkbox ng-change="chng(tmpImage[4].url, 4)" ng-disabled = "!(tmpImage[3].url || (tmpImage[3].img && tmpImage[3].videoUrl || tmpImage[3].img || tmpImage[4].img))" id="chk_videoUrl5" class="padding-top" ng-model="tmpImage[4].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
-                                                <input  placeholder="https://www.youtube.com" ng-pattern="/^(https\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/" ng-disabled="!tmpImage[4].url" class="input-shadow-border article-youtube" type="text" id="videoUrl5" name="videoUrl5"
+                                                <input  placeholder="Youtube video ID" ng-disabled="!tmpImage[4].url" class="input-shadow-border article-youtube" type="text" id="videoUrl5" name="videoUrl5"
                                                        ng-model="tmpImage[4].videoUrl" width="10px" ng-keyup="change()" required/>
-                                                <span ng-show="articleForm.videoUrl5.$error.pattern" class="error">Invalid Url</span>
                                                 <span class="error"><p style="color:red;" id="err_videoUrl5"></p></span>
                                             </td>
                                             <s></s><td>
@@ -162,9 +158,8 @@
                                                 <md-checkbox ng-change="chng(tmpImage[5].url, 5)" ng-disabled = "!(tmpImage[4].url || (tmpImage[4].img && tmpImage[4].videoUrl || tmpImage[4].img || tmpImage[5].img))" id="chk_videoUrl6" class="padding-top" ng-model="tmpImage[5].url" aria-label="Checkbox 1">
                                                     Add Youtube Video
                                                 </md-checkbox>
-                                                <input placeholder="https://www.youtube.com" ng-pattern="/^(https\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/" ng-disabled="!tmpImage[5].url" class="input-shadow-border article-youtube" type="text" id="videoUrl6" name="videoUrl6"
+                                                <input placeholder="Youtube video ID" ng-disabled="!tmpImage[5].url" class="input-shadow-border article-youtube" type="text" id="videoUrl6" name="videoUrl6"
                                                        ng-model="tmpImage[5].videoUrl" width="10px" ng-keyup="change()" required />
-                                            <span ng-show="articleForm.videoUrl6.$error.pattern" class="error">Invalid Url</span>
                                             <span class="error"><p style="color:red;" id="err_videoUrl6"></p></span>
                                             </td>
                                         </tr>
@@ -176,7 +171,7 @@
                 </fieldset>
 
                 <fieldset style="clear:both">
-                    <label>Description</label>
+                    <label>Add Page Details</label>
                     <div class="custom-trix">
                         <!--<trix-editor class="textEditor input-shadow-border"-->
                         <!--name="editorText"-->

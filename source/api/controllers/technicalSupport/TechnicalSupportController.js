@@ -6,6 +6,9 @@ var fs = require('fs-extra'),
     config = require('../../services/config'),
     email  = require('../../../node_modules/emailjs/email');
 
+    const nodemailer = require('nodemailer');
+
+
 
 var server  = email.server.connect({
     user:    "onbilabsttest@gmail.com",
@@ -14,9 +17,20 @@ var server  = email.server.connect({
     ssl:     true
 });
 
+    // create reusable transporter object using the default SMTP transport
+ var transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: 'communications@otenro.com', // generated ethereal user
+            pass: 'R&3%ee=r1'  // generated ethereal password
+        }
+    });
+
+
 module.exports = {
 
-    
     /**
      * get All AppsData
      *
@@ -332,5 +346,39 @@ module.exports = {
                 });
             }
         });
+    },
+
+    sendApkEmail : function(req,res){
+
+    console.log("inside send apk email " + req.body.email);
+    console.log(config.server.host);
+    var apkFile = config.server.host +'/getApk';
+        var email = req.body.email;
+
+                 mailOptions = {
+                    from: 'ideabiz@dialog.lk', // sender address
+                    to: email, // list of receivers
+                    subject: 'Test email', // Subject line
+                    html: "<h1>Test email</h1><br><a href=" + apkFile + ">Download APK</a>"
+
+                };
+
+                    // send mail with defined transport object
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                            //return console.log(error);
+                            console.log(error);
+                            return  res.send(500,error);
+
+                        }
+                        console.log('Message sent: %s', info.messageId);
+                    return res.send('ok');
+                });
+
+
+    },
+
+    getApk : function(req,res){
+        res.sendfile(config.ME_SERVER + "test.apk");
     }
 };

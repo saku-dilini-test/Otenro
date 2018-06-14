@@ -301,9 +301,13 @@ module.exports = {
                         }
 
 
-				    } else if (tmpImage.length > 1 && i == 0 && article.tempImageArray[i + 1]) {
+				    } else if (tmpImage.length >= 1 && i == 0) {
 						console.log("inside video 0 index If");
-						article.tempImageArray[0].img = imgeFileName;
+						if(article.tempImageArray.length >= 1){
+                                article.tempImageArray[0].img = imgeFileName;
+                            }else{
+                                article.tempImageArray.push({ img: imgeFileName, videoUrl: null, url: null });
+						}
 
 				    //if only add video.
 					} else {

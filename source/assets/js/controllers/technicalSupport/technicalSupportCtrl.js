@@ -292,6 +292,17 @@
                
            }
 
+           $scope.sendApkEmail = function(id){
+
+                technicalSupportService.sendApkEmail({email:id}).success(function(data){
+                    console.log("success");
+                }).error(function(){
+                    console.log("error " + error);
+
+                });
+
+           }
+
     }
 
 })();

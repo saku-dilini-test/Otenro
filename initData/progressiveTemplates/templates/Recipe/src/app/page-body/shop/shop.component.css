@@ -11,16 +11,21 @@
 }
 
 .name{
-  padding: 10px 5px 20px 5px;
+  padding: 10px;
     text-transform: uppercase;
 }
 
-div .row:last-child{
-  padding-bottom: 60px !important;
+
+.prod{
+  border-radius: 5px 5px 2px 2px;
+  box-shadow: 0px 0px 3px 2px #dadada;
+}
+.prod img{
+  border-radius: 5px 5px 0px 0px ;
 }
 
-.prod img{
-  border-radius: 5px 5px 2px 2px;
+.prod:last-child{
+  margin-bottom: 76px !important;
 }
 
 .grey{

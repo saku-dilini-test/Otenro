@@ -33,38 +33,18 @@ export class ProductComponent implements OnInit {
         this.Data = this.dataService.data;
     }
 
-    checkUrl(url) {
-
-        let id,URL;
-        let res = url.slice(8);
-        let res2 = res.split(/\/|&|=/);
-        if (res2.length > 2) {
-            id = res2[2];
-        }else{
-            id = res2[1];
-        }
-        URL = "https://www.youtube.com/embed/" + id + "?rel=0&autoplay=1"
-        return this.sanitizer.bypassSecurityTrustResourceUrl(URL);
-    }
 
     ngAfterViewInit() {
-        $(".carousel").swipe({
 
-            swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
-
-                if (direction == 'left') $(this).carousel('next');
-                if (direction == 'right') $(this).carousel('prev');
-
-            },
-            allowPageScroll: "vertical"
-
-        });
+      $("#gallery").unitegallery({
+        theme_enable_text_panel: false,
+        gallery_background_color: "rgba(0,0,0,0)",
+        slider_textpanel_bg_color:"#000000",
+        slider_textpanel_bg_opacity: 0,
+      });
     }
 
-    click(index) {
-        // $('#video')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
-        console.log($('#video' + index)[0])
-    }
+
 
     ngOnInit() {
 
@@ -80,93 +60,6 @@ export class ProductComponent implements OnInit {
                     });
             }
         });
-
-        $(() => {
-            var carouselEl = $('.carousel');
-            var carouselItems = carouselEl.find('.item');
-            carouselEl.carousel({
-                interval: 10000000
-            }).on('slid.bs.carousel', (event) => {
-                console.log(event);
-                let index: any;
-                let playerIndex;
-
-                if (event.direction == 'right') {
-
-                    if (carouselItems.siblings('.active').index() == (this.Data.tempImageArray.length - 1)) {
-                        // console.log('inside if');
-                        playerIndex = 0;
-                        index = this.Data.tempImageArray.length - 1
-                        // document.getElementById('player' + playerIndex).style.display = 'none';
-                        // document.getElementById('image' + playerIndex).style.display = 'block';
-                        // if(this.Data.tempImageArray[index].videoUrl){
-                        //     $('#video'+index)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
-                        // }
-                        // this.click(index);
-                        // $('.myVideoClass').each(()=>{
-                        //     $(this).stopVideo();
-                        //   });
-                    } else {
-                        // console.log('inside else');
-                        if (carouselItems.siblings('.active').index() == -1) {
-                            index = 0;
-                            playerIndex = index + 1;
-                        } else {
-                            index = carouselItems.siblings('.active').index();
-                            playerIndex = index + 1;
-                        }
-                        // document.getElementById('player' + playerIndex).style.display = 'none';
-                        // document.getElementById('image' + playerIndex).style.display = 'block';
-
-                        if (this.Data.tempImageArray[playerIndex].videoUrl && index != this.Data.tempImageArray.length) {
-                            $('#video' + playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
-                            this.click(playerIndex);
-                        }
-                        // $('.myVideoClass').each(()=>{
-                        //     $(this).stopVideo();
-                        //   });
-                    }
-
-                } else {
-                    console.log('im in');
-
-                    if (carouselItems.siblings('.active').index() == -1) {
-                        index = 0;
-                        playerIndex = this.Data.tempImageArray.length - 1;
-                        // document.getElementById('player' + (this.Data.tempImageArray.length - 1)).style.display = 'none';
-                        // document.getElementById('image' + (this.Data.tempImageArray.length - 1)).style.display = 'block';
-
-                        if (this.Data.tempImageArray[playerIndex].videoUrl && index != 1) {
-                            $('#video' + playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
-                            this.click(playerIndex);
-                        }
-
-                        // $('.myVideoClass').each(()=>{
-                        //     $(this).stopVideo();
-                        //   });
-
-                    } else {
-                        index = carouselItems.siblings('.active').index();
-                        playerIndex = index - 1;
-                        // document.getElementById('player' + (index - 1)).style.display = 'none';
-                        // document.getElementById('image' + (index - 1)).style.display = 'block';
-
-                        if (this.Data.tempImageArray[playerIndex].videoUrl && index != 1) {
-                            $('#video' + playerIndex)[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
-                            this.click(playerIndex);
-                        }
-                        // $('.myVideoClass').each(()=>{
-                        //     $(this).stopVideo();
-                        //   });
-                    }
-
-                }
-
-                console.log(index);
-            })
-        })
-
-
 
     }
 

@@ -4,6 +4,8 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var config = require('../../services/config');
+
 module.exports = {
     /**
      * api's refered:
@@ -73,7 +75,8 @@ module.exports = {
                                 var newAppUser = {
                                     'msisdn': msisdn,
                                     'appID': appID,
-                                    'deviceUUID': deviceUUID
+                                    'deviceUUID': deviceUUID,
+                                    'status': config.APP_USER_STATUS.ACTIVE
                                 };
 
                                 AppUser.create(newAppUser).exec(function (err, user) {

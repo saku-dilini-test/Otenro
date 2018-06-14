@@ -24,7 +24,10 @@ schema: true,
                 },
                 id:{
                   type:'ObjectId'
-                }
+                },
+                article:{
+                  type: 'json'
+                },
 
         }
 }
