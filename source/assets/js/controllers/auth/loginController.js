@@ -74,6 +74,10 @@
                         toastr.error('Mobile number is not registered!', 'Error', {
                             closeButton: true
                         });
+                    } else {
+                        toastr.error('Server Error', 'Error', {
+                            closeButton: true
+                        });
                     }
                 }).error(function(err) {
                     toastr.error('Please check your Mobile Number', 'Error', {

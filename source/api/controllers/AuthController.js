@@ -98,12 +98,18 @@ module.exports = {
                         if (err) {
                             sails.log(err);
                             sails.log("Get response: " + response.statusCode);
-                        } else if (response.statusCode === 200) {
-                            User.update(criteria, valuesToUpdate)
-                                .exec(function (err, user) {
-                                    if (err) return res.send({ message: 'error' });
-                                    return res.send({ message: 'success' });
-                            });
+                        } else if (typeof response !== "undefined") {
+                            if (response.statusCode === 200) {
+                                User.update(criteria, valuesToUpdate)
+                                    .exec(function (err, user) {
+                                        if (err) return res.send({ message: 'error' });
+                                        return res.send({ message: 'success' });
+                                    });
+                            } else {
+                                return res.send({ message: 'error' });
+                            }
+                        } else {
+                            return res.send({ message: 'error' });
                         }
                     });
                 } else {
