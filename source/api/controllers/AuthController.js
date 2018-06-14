@@ -97,7 +97,6 @@ module.exports = {
                     request({url: url, qs: queryString}, function(err, response, body) {
                         if (err) {
                             sails.log(err);
-                            sails.log("Get response: " + response.statusCode);
                         } else if (typeof response !== "undefined") {
                             if (response.statusCode === 200) {
                                 User.update(criteria, valuesToUpdate)
