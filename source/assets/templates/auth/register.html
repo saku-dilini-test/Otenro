@@ -65,7 +65,7 @@ chosen link or button. -->
       <legend>Register</legend>
       <fieldset>
         <label>First Name</label>
-        <img src="../../../images/question-mark.svg" width=" 12" height="12" />
+        <!--<img src="../../../images/question-mark.svg" width=" 12" height="12" />-->
         <input class="input-shadow-border" type="text" name="fname" ng-model="user.fname" ng-enter ="authSignUp(user);"
                required/>
         <span class="error help-block" ng-show="register.fname.$error.required">
@@ -74,7 +74,7 @@ chosen link or button. -->
       </fieldset>
       <fieldset>
         <label>Last Name</label>
-        <img src="../../../images/question-mark.svg" width=" 12" height="12" />
+        <!--<img src="../../../images/question-mark.svg" width=" 12" height="12" />-->
         <input class="input-shadow-border" type="text" name="lname" ng-model="user.lname" ng-enter ="authSignUp(user);"
                required/>
         <span class="error help-block" ng-show="register.lname.$error.required">
@@ -83,7 +83,7 @@ chosen link or button. -->
       </fieldset>
       <fieldset>
         <label> Email </label>
-        <img src="../../../images/question-mark.svg" width="12" height="12" />
+        <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
         <input class="input-shadow-border" name="email" type="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                style="float:left;" ng-model="user.email" ng-enter ="authSignUp(user);" required/>
         <span class="error help-block" ng-show="register.email.$error.required">
@@ -96,7 +96,7 @@ chosen link or button. -->
       <!--mobile number field-->
       <fieldset>
         <label> Contact Number </label>
-        <img src="../../../images/question-mark.svg" width="12" height="12" />
+        <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
         <input class="input-shadow-border" name="mobile" type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im"
                style="float:left;" ng-model="user.mobile" ng-enter ="authSignUp(user);" required/>
         <span class="error help-block" ng-show="register.mobile.$error.required">
@@ -109,7 +109,7 @@ chosen link or button. -->
       <div class="row password-area-row">
         <fieldset class="password-area">
           <label>Password</label>
-          <img src="../../../images/question-mark.svg" width=" 12" height="12">
+          <!--<img src="../../../images/question-mark.svg" width=" 12" height="12">-->
           <input class="input-shadow-border"  name="password" ng-enter ="authSignUp(user);" type="password"
                   ng-model="user.password" ng-minlength="7" compare-to="user.password_confirm"
                   ng-pattern="passwordRegularExpression"
@@ -126,7 +126,7 @@ chosen link or button. -->
         </fieldset>
         <fieldset class="password-area reset-margin-right">
           <label> Confirm Password</label>
-          <img src="../../../images/question-mark.svg" width=" 12" height="12" />
+          <!--<img src="../../../images/question-mark.svg" width=" 12" height="12" />-->
           <input class="input-shadow-border"  name="password_confirm" ng-enter ="authSignUp(user);" ng-model="user.password_confirm" type="password" required/>
           <span class="error help-block" ng-show="register.password_confirm.$error.required">
             *
@@ -140,7 +140,7 @@ chosen link or button. -->
       <!--Beneficiary’s Name-->
       <fieldset>
         <label>Beneficiary’s Name</label>
-        <img src="../../../images/question-mark.svg" width=" 12" height="12" />
+        <!--<img src="../../../images/question-mark.svg" width=" 12" height="12" />-->
         <input class="input-shadow-border" type="text" name="beneficiaryName" ng-model="user.beneficiaryName" ng-enter ="authSignUp(user);"
                required/>
         <span class="error help-block" ng-show="register.beneficiaryName.$error.required">
@@ -150,7 +150,7 @@ chosen link or button. -->
       <!--Bank Code-->
       <fieldset>
         <label> Bank Code </label>
-        <img src="../../../images/question-mark.svg" width="12" height="12" />
+        <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
         <input class="input-shadow-border" name="bankCode" type="text" ng-pattern="^[1-9]\d*$"
                style="float:left;" ng-model="user.bankCode" ng-enter ="authSignUp(user);" required/>
         <span class="error help-block" ng-show="register.bankCode.$error.required">
@@ -163,7 +163,7 @@ chosen link or button. -->
       <!--Bank Branch Code-->
       <fieldset>
         <label> Bank Branch Code </label>
-        <img src="../../../images/question-mark.svg" width="12" height="12" />
+        <!--<img src="../../../images/question-mark.svg" width="12" height="12" />-->
         <input class="input-shadow-border" name="branchCode" type="text" ng-pattern="^[1-9]\d*$"
                style="float:left;" ng-model="user.branchCode" ng-enter ="authSignUp(user);" required/>
         <span class="error help-block" ng-show="register.branchCode.$error.required">
@@ -176,7 +176,7 @@ chosen link or button. -->
       <!--Bank Branch Name-->
       <fieldset>
         <label>Bank Branch Name</label>
-        <img src="../../../images/question-mark.svg" width=" 12" height="12" />
+        <!--<img src="../../../images/question-mark.svg" width=" 12" height="12" />-->
         <input class="input-shadow-border" type="text" name="branchName" ng-model="user.branchName" ng-enter ="authSignUp(user);"
                required/>
         <span class="error help-block" ng-show="register.branchName.$error.required">
@@ -186,7 +186,7 @@ chosen link or button. -->
       <!--Bank Account Number-->
       <fieldset>
         <label>Bank Account Number</label>
-        <img src="../../../images/question-mark.svg" width=" 12" height="12" />
+        <!--<img src="../../../images/question-mark.svg" width=" 12" height="12" />-->
         <input class="input-shadow-border" type="text" name="accountNumber" ng-model="user.accountNumber" ng-enter ="authSignUp(user);"
                required/>
         <span class="error help-block" ng-show="register.accountNumber.$error.required">
@@ -194,14 +194,14 @@ chosen link or button. -->
         </span>
       </fieldset>
 
-      <fieldset>
-        <label>Tell us about yourself</label>
-        <img src="../../../images/question-mark.svg" width=" 12" height="12" />
-          <md-select aria-label="Your Self" flex="50" ng-model="user.yourselfReason">
-            <md-option ng-value="yourSelf.reason" ng-repeat="yourSelf in yourselfReasonList">{{yourSelf.reason}}
-            </md-option>
-          </md-select>
-      </fieldset>
+      <!--<fieldset>-->
+        <!--<label>Tell us about yourself</label>-->
+        <!--<img src="../../../images/question-mark.svg" width=" 12" height="12" />-->
+          <!--<md-select aria-label="Your Self" flex="50" ng-model="user.yourselfReason">-->
+            <!--<md-option ng-value="yourSelf.reason" ng-repeat="yourSelf in yourselfReasonList">{{yourSelf.reason}}-->
+            <!--</md-option>-->
+          <!--</md-select>-->
+      <!--</fieldset>-->
 
       <fieldset>
         <md-checkbox ng-model="terms" aria-label="Terms & Conditions" required>
