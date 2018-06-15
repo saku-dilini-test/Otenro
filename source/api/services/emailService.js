@@ -12,21 +12,17 @@ const nodemailer = require('nodemailer');
 var transporter = null;
 
 
-nodemailer.createTestAccount((err, account) => {
-
-    // create reusable transporter object using the default SMTP transport
-     transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-            user: 'communications@otenro.com', // generated ethereal user
-            pass: 'R&3%ee=r1'  // generated ethereal password
-        }
-    });
-
-
-
+var transporter = nodemailer.createTransport({
+    host: 'appmaker.lk',
+    port: 25,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: 'support@appmaker.lk', // generated ethereal user
+        pass: '7hJvsYiU' // generated ethereal password
+    },
+    tls:{
+        rejectUnauthorized: false
+    }
 });
 
 
@@ -35,10 +31,11 @@ nodemailer.createTestAccount((err, account) => {
 
 
 var server  = email.server.connect({
-    user:    "communications@otenro.com",
-    password:"R&3%ee=r1",
-    host:    "smtp.gmail.com",
-    ssl:     true
+    user:    "support@appmaker.lk",
+    password:"7hJvsYiU",
+    host:    "appmaker.lk",
+    tls:false,
+    port: 25
 });
 
 module.exports = {
@@ -49,62 +46,62 @@ module.exports = {
         var approot = path.resolve();
         var imgPath = approot + '/assets/images/emailtemplates/';
 
-                var mailOptions = {
-                    from: "Otenro<communications@otenro.com>",
-                    to: data.email,
-                    subject: "Welcome to Otenro ",
-                    html: {path: approot + '/assets/templates/user/common/emailtemplates/index.html'},
-                    attachments: [
-                    {
-                        filename: 'Otenro-Logo.png',
-                        path: imgPath + 'Otenro-Logo.png',
-                        cid: 'otenrologo'
-                    },{
-                        filename: 'android-platform_318-32015.png',
-                        path: imgPath + 'android-platform_318-32015.png',
-                        cid: 'android'
-                    },{
-                        filename: 'apple_4096_black.png',
-                        path: imgPath + 'apple_4096_black.png',
-                        cid: 'apple'
-                    }
-                    ,{
-                        filename: 'img7.png',
-                        path: imgPath + 'img7.png',
-                        cid: 'img7'
-                    },{
-                        filename: 'img8.png',
-                        path: imgPath + 'img8.png',
-                        cid: 'img8'
-                    },{
-                        filename: 'img9.png',
-                        path: imgPath + 'img9.png',
-                        cid: 'img9'
-                    },{
-                        filename: 'img10.png',
-                        path: imgPath + 'img10.png',
-                        cid: 'img10'
-                    },{
-                        filename: 'img16.jpg',
-                        path: imgPath + 'img16.jpg',
-                        cid: 'img16'
-                    }
-                    ]
-                };
+        var mailOptions = {
+            from: "Otenro<communications@otenro.com>",
+            to: data.email,
+            subject: "Welcome to Otenro ",
+            html: {path: approot + '/assets/templates/user/common/emailtemplates/index.html'},
+            attachments: [
+                {
+                    filename: 'Otenro-Logo.png',
+                    path: imgPath + 'Otenro-Logo.png',
+                    cid: 'otenrologo'
+                },{
+                    filename: 'android-platform_318-32015.png',
+                    path: imgPath + 'android-platform_318-32015.png',
+                    cid: 'android'
+                },{
+                    filename: 'apple_4096_black.png',
+                    path: imgPath + 'apple_4096_black.png',
+                    cid: 'apple'
+                }
+                ,{
+                    filename: 'img7.png',
+                    path: imgPath + 'img7.png',
+                    cid: 'img7'
+                },{
+                    filename: 'img8.png',
+                    path: imgPath + 'img8.png',
+                    cid: 'img8'
+                },{
+                    filename: 'img9.png',
+                    path: imgPath + 'img9.png',
+                    cid: 'img9'
+                },{
+                    filename: 'img10.png',
+                    path: imgPath + 'img10.png',
+                    cid: 'img10'
+                },{
+                    filename: 'img16.jpg',
+                    path: imgPath + 'img16.jpg',
+                    cid: 'img16'
+                }
+            ]
+        };
 
-            // send mail with defined transport object
-            transporter.sendMail(mailOptions, (error, info) => {
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
 //                return console.log(error);
                 return  res.send(500);
             }
 
             console.log('Message sent: %s', info.messageId);
-            // Preview only available when sending through an Ethereal account
+        // Preview only available when sending through an Ethereal account
 //            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-            return res.send('ok');
+        return res.send('ok');
 
-            });
+    });
     },
     sendGetAssistance: function(data, callback){
         console.log(data.appName)
@@ -488,7 +485,7 @@ module.exports = {
                         //sails.log.info(err || message);
                         console.log(err);
                         if (err) {
-                           return callback(err);
+                            return callback(err);
                         }
                         callback(null, 'ok');
                     });
@@ -520,65 +517,67 @@ module.exports = {
         };
         //Find if the email exist(user exist)
         User.find(searchApp).exec(function (err, app) {
-             if (err) return done(err);
-             if(app.length !== 0){
+            if (err) return done(err);
+            if(app.length !== 0){
                 var token = '';
                 //if user exist generate the token
                 JWT.encode({
-                   secret: config.CLIENT_SECRET,
-                   payload: {
-                     id :  app[0].id,
-                     email:  app[0].email
-                   },
-                   algorithm: 'HS256'
+                    secret: config.CLIENT_SECRET,
+                    payload: {
+                        id :  app[0].id,
+                        email:  app[0].email
+                    },
+                    algorithm: 'HS256'
                 }).exec({
-                   error: function (err){
-                     return err;
-                   },
-                   success: function (result){
-                    token = result;
-                    var expires = new Date();
-                    //set the expire time of the token to one hour from the token generated time
-                    expires.setHours(expires.getHours() + 1);
+                    error: function (err){
+                        return err;
+                    },
+                    success: function (result){
+                        token = result;
+                        var expires = new Date();
+                        //set the expire time of the token to one hour from the token generated time
+                        expires.setHours(expires.getHours() + 1);
 
-                    resetToken = [{
-                        token: token,
-                        expires: expires
-                    }];
-                    //update the resetToken in the database
-                    User.update(searchApp,{resetToken:resetToken}).exec(function(err,created){
-                        if(err) console.log(err);
+                        resetToken = [{
+                            token: token,
+                            expires: expires
+                        }];
+                        //update the resetToken in the database
+                        User.update(searchApp,{resetToken:resetToken}).exec(function(err,created){
+                            if(err) console.log(err);
 
-                        var serverOrg=config.server.host;
+                            var serverOrg=config.server.host;
 
-                        var emailDetails = {
-                            text: "Email verification",
-                            from: 'sallayshamila93@gmail.com',
-                            to: data.email,
-                            cc: "",
-                            subject: data.type,
-                            attachment: [
-                                {
-                                    data: "<html>Hello "+app[0].firstName+",<br />"+
-                                          "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click to here for  verify your email address</a></html>",
-                                    alternative: true
-                                }
-                            ]
-                        };
-                        //send the email
-                        server.send(emailDetails, function(err, message) {
-                            if (err) {
-                            console.log(err);
+
+                            var emailBody = "<html>Hello "+app[0].firstName+",<br />"+
+                                "<a href='"+serverOrg+"/#/resetPassword/"+token+"'>Click to here for  verify your email address</a></html>"
+
+                            var mailOptions = {
+                                from: 'support@appmaker.lk', // sender address
+                                to: data.email, // list of receivers
+                                subject: data.type, // Subject line
+                                html: emailBody
                             }
-                            return res({msg:'Check your email for get the verification link'})
+
+
+                            // send mail with defined transport object
+                            transporter.sendMail(mailOptions, (error, info) => {
+                                if (error) {
+                                    return  res.send(500);
+                                }
+                                console.log('Message sent: %s', info.messageId);
+
+                                return res({msg:'Check your email for get the verification link'})
+
+                            });
+
                         });
-                    });
-                   }
+                    }
                 });
-             }
-             else{
+            }
+            else{
                 return res({msg:'Email does not exist'})
-             }
+            }
         });
     },
 
@@ -592,9 +591,9 @@ module.exports = {
         console.log("-------------------------------");
         console.log(data);
         console.log(data.paymentStatus);
-                var searchApp = {
-                    appId: data.appId
-                };
+        var searchApp = {
+            appId: data.appId
+        };
 
 
 
@@ -611,50 +610,50 @@ module.exports = {
 
             }else {
 
-                        var headerImagePath;
-                        var headerFileName;
-                        var subject;
+                var headerImagePath;
+                var headerFileName;
+                var subject;
 
 //                        var imagePath =  serverOrg +"/templates/viewWebImages?userId="+ data.userId
 
-                        if(data.paymentStatus == 'Pending'){
-                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
-                            headerFileName = userEmail.orderConfirmedEmailImage;
-                            subject = 'You have orderd';
-                        }
-                        if(data.paymentStatus == 'Successful'){
-                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderFulfilledEmailImage;
-                            headerFileName = userEmail.orderFulfilledEmailImage;
-                            subject = 'Order fulfilled';
-                        }
-                        if(data.paymentStatus == 'Refunded'){
-                            headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderRefundedEmailImage;
-                            headerFileName = userEmail.orderRefundedEmailImage;
-                            subject = 'Order Refunded';
-                        }
+                if(data.paymentStatus == 'Pending'){
+                    headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
+                    headerFileName = userEmail.orderConfirmedEmailImage;
+                    subject = 'You have orderd';
+                }
+                if(data.paymentStatus == 'Successful'){
+                    headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderFulfilledEmailImage;
+                    headerFileName = userEmail.orderFulfilledEmailImage;
+                    subject = 'Order fulfilled';
+                }
+                if(data.paymentStatus == 'Refunded'){
+                    headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderRefundedEmailImage;
+                    headerFileName = userEmail.orderRefundedEmailImage;
+                    subject = 'Order Refunded';
+                }
 
 
-                        var  testPath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/thirdNavi/';
+                var  testPath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/thirdNavi/';
 
-                        var test = [];
-                        test.push({
-                               filename: headerFileName,
-                               path: headerImagePath,
-                               cid: 'note@example.com' // should be as unique as possible
-                              }
-                              );
+                var test = [];
+                test.push({
+                        filename: headerFileName,
+                        path: headerImagePath,
+                        cid: 'note@example.com' // should be as unique as possible
+                    }
+                );
 
-                        for(var i =0;i<data.item.length;i++){
-                            test.push({
-                                    filename: data.item[i].imgURL[0].img,
-                                    path: testPath + data.item[i].imgURL[0].img,
-                                    cid: 'prod'+i
-                                })
-                        }
+                for(var i =0;i<data.item.length;i++){
+                    test.push({
+                        filename: data.item[i].imgURL[0].img,
+                        path: testPath + data.item[i].imgURL[0].img,
+                        cid: 'prod'+i
+                    })
+                }
 
-                        console.log("--------------------");
-                        console.log("test=>" + JSON.stringify(test, null, 2));
-                        console.log("-----------------------");
+                console.log("--------------------");
+                console.log("test=>" + JSON.stringify(test, null, 2));
+                console.log("-----------------------");
 
 //                        var serverOrg=config.server.host+':'+config.server.port;
 //                        var emailHeaderImage;
@@ -674,163 +673,163 @@ module.exports = {
                 if(typeof userEmail.orderConfirmedEmailImage !=='undefined'){
                     var  headerImagePath = config.APP_FILE_SERVER + data.userId + "/progressiveTemplates/"+data.appId+'/src/assets/images/email/'+userEmail.orderConfirmedEmailImage;
 
-                var mBody = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'+
-                    '<html xmlns="http://www.w3.org/1999/xhtml" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
-                    '<head>'+
-                    '<meta name="viewport" content="width=device-width" />'+
-                    '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'+
-                    '<title>Billing e.g. invoices and receipts</title>'+
-                    ''+
-                    ''+
-                    '<style type="text/css">'+
-                    'img {'+
-                    'max-width: 100%;'+
-                    '}'+
-                    'body {'+
-                    '-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em;'+
-                    '}'+
-                    'body {'+
-                    'background-color: #f6f6f6;'+
-                    '}'+
-                    '@media only screen and (max-width: 640px) {'+
-                    '  body {'+
-                    '    padding: 0 !important;'+
-                    '  }'+
-                    '  h1 {'+
-                    '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
-                    '  }'+
-                    '  h2 {'+
-                    '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
-                    '  }'+
-                    '  h3 {'+
-                    '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
-                    '  }'+
-                    '  h4 {'+
-                    '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
-                    '  }'+
-                    '  h1 {'+
-                    '    font-size: 22px !important;'+
-                    '  }'+
-                    '  h2 {'+
-                    '    font-size: 18px !important;'+
-                    '  }'+
-                    '  h3 {'+
-                    '    font-size: 16px !important;'+
-                    '  }'+
-                    '  .container {'+
-                    '    padding: 0 !important; width: 100% !important;'+
-                    '  }'+
-                    '  .content {'+
-                    '    padding: 0 !important;'+
-                    '  }'+
-                    '  .content-wrap {'+
-                    '    padding: 10px !important;'+
-                    '  }'+
-                    '  .invoice {'+
-                    '    width: 100% !important;'+
-                    '  }'+
-                    '}'+
-                    '</style>'+
-                    '</head>'+
-                    ''+
-                    '<body itemscope itemtype="http://schema.org/EmailMessage" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">'+
-                    ''+
-                    '<table class="body-wrap" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>'+
-                    '		<td class="container" width="600" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top">'+
-                    '			<div class="content" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">'+
-                    '				<table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #e9e9e9;" bgcolor="#fff"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-wrap aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 20px;" align="center" valign="top">'+
-                    '							<table width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
-                    '                              <tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
-                    '                                  <td class="content-block" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">'+
-                    '								<img src="cid:note@example.com"/></td>'+
-                    '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">';
+                    var mBody = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'+
+                        '<html xmlns="http://www.w3.org/1999/xhtml" style="font-family: \'Helvetica Neue\', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
+                        '<head>'+
+                        '<meta name="viewport" content="width=device-width" />'+
+                        '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />'+
+                        '<title>Billing e.g. invoices and receipts</title>'+
+                        ''+
+                        ''+
+                        '<style type="text/css">'+
+                        'img {'+
+                        'max-width: 100%;'+
+                        '}'+
+                        'body {'+
+                        '-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em;'+
+                        '}'+
+                        'body {'+
+                        'background-color: #f6f6f6;'+
+                        '}'+
+                        '@media only screen and (max-width: 640px) {'+
+                        '  body {'+
+                        '    padding: 0 !important;'+
+                        '  }'+
+                        '  h1 {'+
+                        '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
+                        '  }'+
+                        '  h2 {'+
+                        '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
+                        '  }'+
+                        '  h3 {'+
+                        '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
+                        '  }'+
+                        '  h4 {'+
+                        '    font-weight: 800 !important; margin: 20px 0 5px !important;'+
+                        '  }'+
+                        '  h1 {'+
+                        '    font-size: 22px !important;'+
+                        '  }'+
+                        '  h2 {'+
+                        '    font-size: 18px !important;'+
+                        '  }'+
+                        '  h3 {'+
+                        '    font-size: 16px !important;'+
+                        '  }'+
+                        '  .container {'+
+                        '    padding: 0 !important; width: 100% !important;'+
+                        '  }'+
+                        '  .content {'+
+                        '    padding: 0 !important;'+
+                        '  }'+
+                        '  .content-wrap {'+
+                        '    padding: 10px !important;'+
+                        '  }'+
+                        '  .invoice {'+
+                        '    width: 100% !important;'+
+                        '  }'+
+                        '}'+
+                        '</style>'+
+                        '</head>'+
+                        ''+
+                        '<body itemscope itemtype="http://schema.org/EmailMessage" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">'+
+                        ''+
+                        '<table class="body-wrap" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>'+
+                        '		<td class="container" width="600" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top">'+
+                        '			<div class="content" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">'+
+                        '				<table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #e9e9e9;" bgcolor="#fff"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-wrap aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 20px;" align="center" valign="top">'+
+                        '							<table width="100%" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
+                        '                              <tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
+                        '                                  <td class="content-block" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">'+
+                        '								<img src="cid:note@example.com"/></td>'+
+                        '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">';
                     if(data.paymentStatus == 'Pending' && userEmail.orderConfirmedEmail.header){
-                                        mBody += '<td '+ userEmail.orderConfirmedEmail.header +  ' </td>';
+                        mBody += '<td '+ userEmail.orderConfirmedEmail.header +  ' </td>';
 
                     }
-                     if(data.paymentStatus == 'Successful' && userEmail.orderFulfilledEmail.header){
-                                        mBody += '<td '+ userEmail.orderFulfilledEmail.header +  ' </td>';
+                    if(data.paymentStatus == 'Successful' && userEmail.orderFulfilledEmail.header){
+                        mBody += '<td '+ userEmail.orderFulfilledEmail.header +  ' </td>';
 
                     }
                     if(data.paymentStatus == 'Refunded' && userEmail.orderRefundEmail.header){
-                                        mBody += '<td '+ userEmail.orderRefundEmail.header +  ' </td>';
+                        mBody += '<td '+ userEmail.orderRefundEmail.header +  ' </td>';
 
                     }
 
                     mBody +='								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
-                    '										<table class="invoice" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 80%; margin: 40px auto;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">';
-                if(typeof data.deliveryCountry != 'undefined' && data.pickUp == 'undefined' && userEmail.orderConfirmedEmail.delivery == true ) {
-                    mBody += '  <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Delivered to</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />' + data.deliveryNo + '<br>' + data.deliveryStreet + '<br>' + data.deliveryCity + ' <br>' + data.deliveryCountry;
-                }else{
-                    mBody += '  <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Delivered to</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />'+data.pickUp.locationName + '<br>' + data.pickUp.number + '<br>' + data.pickUp.streetAddress + '<br>' + data.pickUp.city+ '<br>' + data.pickUp.country+ '<br>' + data.pickUp.postalCode ;
-                }
-                mBody += '<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />'+ new Date().toJSON().slice(0,10)+'</td>';
-                if(typeof data.shippingOpt != 'undefined'&&userEmail.orderConfirmedEmail.delivery==true) {
-                    mBody += '                                           <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Shipping Details</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />' + data.shippingOpt + '</td>';
-                }else {
-                    mBody += '                                           <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Shipping Details</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />' + data.option + '</td>';
-                }
-                if (userEmail.orderConfirmedEmail.order==true){
-                    mBody += '											</tr>'+
-                        '											<tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
-                        '												<td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top">What you ordred:'+
-                        '													<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />Order number: '+data.id+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" /></td>'+
-                        '											</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td colspan="2" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top">'+
-                        '													<table class="invoice-items" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; margin: 0;">';
-                    for (var j = 0; j < data.item.length; j++) {
-
-
-                        mBody += '<tr  style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top">'+
-                            '															<div style="display: inline-block;padding: 5px"><img src="cid:'+test[j+1].cid+'" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
-                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">'+
-                            '															<br><div> '+data.currency + parseFloat(data.item[j].total).toFixed(2)+'</div></td></tr>';
+                        '										<table class="invoice" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 80%; margin: 40px auto;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">';
+                    if(typeof data.deliveryCountry != 'undefined' && data.pickUp == 'undefined' && userEmail.orderConfirmedEmail.delivery == true ) {
+                        mBody += '  <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Delivered to</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />' + data.deliveryNo + '<br>' + data.deliveryStreet + '<br>' + data.deliveryCity + ' <br>' + data.deliveryCountry;
+                    }else{
+                        mBody += '  <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Delivered to</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />'+data.pickUp.locationName + '<br>' + data.pickUp.number + '<br>' + data.pickUp.streetAddress + '<br>' + data.pickUp.city+ '<br>' + data.pickUp.country+ '<br>' + data.pickUp.postalCode ;
                     }
-                    mBody += '														<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
-                        '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 2px; border-top-color: #333; border-top-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top"></td>'+
-                        '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 2px; border-top-color: #333; border-top-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top"></td>'+
-                        '														</tr>';
-                    if(typeof data.shippingCost != 'undefined'){
+                    mBody += '<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />'+ new Date().toJSON().slice(0,10)+'</td>';
+                    if(typeof data.shippingOpt != 'undefined'&&userEmail.orderConfirmedEmail.delivery==true) {
+                        mBody += '                                           <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Shipping Details</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />' + data.shippingOpt + '</td>';
+                    }else {
+                        mBody += '                                           <td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top"><b>Shipping Details</b><br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />' + data.option + '</td>';
+                    }
+                    if (userEmail.orderConfirmedEmail.order==true){
+                        mBody += '											</tr>'+
+                            '											<tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
+                            '												<td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top">What you ordred:'+
+                            '													<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />Order number: '+data.id+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" /></td>'+
+                            '											</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td colspan="2" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;" valign="top">'+
+                            '													<table class="invoice-items" cellpadding="0" cellspacing="0" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; margin: 0;">';
+                        for (var j = 0; j < data.item.length; j++) {
 
-                        mBody += '															<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
-                            '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Delivery</td>'+
-                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency + parseFloat(data.shippingCost).toFixed(2)+'</td>'+
+
+                            mBody += '<tr  style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" valign="top">'+
+                                '															<div style="display: inline-block;padding: 5px"><img src="cid:'+test[j+1].cid+'" width="60" height="60"></div><div style="display: inline-block;padding: 5px;">'+data.item[j].name+'<br style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" />QTY: '+data.item[j].qty+' <br>Product Code: '+data.item[j].id+'	</td>'+
+                                '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;" align="right" valign="top">'+
+                                '															<br><div> '+data.currency + parseFloat(data.item[j].total).toFixed(2)+'</div></td></tr>';
+                        }
+                        mBody += '														<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
+                            '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 2px; border-top-color: #333; border-top-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top"></td>'+
+                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 2px; border-top-color: #333; border-top-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top"></td>'+
                             '														</tr>';
+                        if(typeof data.shippingCost != 'undefined'){
+
+                            mBody += '															<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
+                                '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Delivery</td>'+
+                                '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency + parseFloat(data.shippingCost).toFixed(2)+'</td>'+
+                                '														</tr>';
+                        }
+                        if(typeof data.tax != 'undefined') {
+                            mBody += '															<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
+                                '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Tax</td>' +
+                                '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">' +data.currency + parseFloat(data.tax).toFixed(2) + '</td>' +
+                                '														</tr>';
+                        }
+                        mBody += '													<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
+                            '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Total</td>'+
+                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency +parseFloat(data.amount).toFixed(2)+'</td>'+
+                            '														</tr>'+
+                            ''+
+                            '													</table></td>'+
+                            '											</tr></table></td>'+
+                            '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
+                            '										'+
+                            '									<img src="https://s3-ap-southeast-1.amazonaws.com/mymagic-startupdb/uploads/Startup/original/ilogos.62522.png" alt="" class="CToWUd"  width="70" height="50" > <br>Powered by otenro.com</td>'+
+                            '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
+                            '								'+
+                            '									</td>'+
+                            '								</tr></table></td>';
                     }
-                    if(typeof data.tax != 'undefined') {
-                        mBody += '															<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">' +
-                            '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Tax</td>' +
-                            '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">' +data.currency + parseFloat(data.tax).toFixed(2) + '</td>' +
-                            '														</tr>';
-                    }
-                    mBody += '													<tr class="total" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">'+
-                        '															<td class="alignright" width="80%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right;  border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">Total</td>'+
-                        '															<td class="alignright" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-bottom-color: #333; border-bottom-width: 2px; border-bottom-style: solid; font-weight: 700; margin: 0; padding: 5px 0;" align="right" valign="top">'+data.currency +parseFloat(data.amount).toFixed(2)+'</td>'+
-                        '														</tr>'+
-                        ''+
-                        '													</table></td>'+
-                        '											</tr></table></td>'+
-                        '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
-                        '										'+
-                        '									<img src="https://s3-ap-southeast-1.amazonaws.com/mymagic-startupdb/uploads/Startup/original/ilogos.62522.png" alt="" class="CToWUd"  width="70" height="50" > <br>Powered by otenro.com</td>'+
-                        '								</tr><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block aligncenter" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">'+
-                        '								'+
-                        '									</td>'+
-                        '								</tr></table></td>';
-                }
-                mBody +='					</tr></table><div class="footer" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;"> '+
-                    '					<table width="100%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="aligncenter content-block" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">Powered by otenro.com</td>'+
-                    '						</tr></table></div></div>'+
-                    '		</td>'+
-                    '		<td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>'+
-                    '	</tr></table></body>'+
-                    '</html>';
+                    mBody +='					</tr></table><div class="footer" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;"> '+
+                        '					<table width="100%" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><tr style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="aligncenter content-block" style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">Powered by otenro.com</td>'+
+                        '						</tr></table></div></div>'+
+                        '		</td>'+
+                        '		<td style="font-family: \'Helvetica Neue\',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>'+
+                        '	</tr></table></body>'+
+                        '</html>';
 
 
 
 
 
 
-                let  mailOptions;
+                    let  mailOptions;
 
 //                if (err){
 //                       console.log('*****************');
@@ -843,7 +842,7 @@ module.exports = {
 //                    };
 //
 //                }else {
-                   console.log('------------------');
+                    console.log('------------------');
 
                     // setup email data with unicode symbols
 
@@ -859,16 +858,16 @@ module.exports = {
 //                }
 
 
-                // send mail with defined transport object
-                transporter.sendMail(mailOptions, (error, info) => {
-                    if (error) {
-                        console.log("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
-                        alert("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
-                        return  res.send(500);
-                    }
-                    console.log('Message sent: %s', info.messageId);
-                return res.send('ok');
-            });
+                    // send mail with defined transport object
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                            console.log("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
+                            alert("email send failed \n id: " + data.email +"\n order: " + data.paymentStatus + "\n error: " + error);
+                            return  res.send(500);
+                        }
+                        console.log('Message sent: %s', info.messageId);
+                    return res.send('ok');
+                });
 
                 }
             }
