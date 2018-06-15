@@ -192,7 +192,9 @@ module.exports = {
                           }
                           if (user) {
                           var data = {
-                              email: user.email
+                              email: user.email,
+                              fName: user.firstName,
+                              lName: user.lastName
                           };
 
                           var msg = sentMails.sendRegisterConfirmation(data, function (msg){

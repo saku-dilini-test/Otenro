@@ -46,45 +46,51 @@ module.exports = {
         var approot = path.resolve();
         var imgPath = approot + '/assets/images/emailtemplates/';
 
+        var emailBody = '<html><body style="padding: 0; margin: 0;" bgcolor="#eeeeee">' +
+                         '<span style="color:transparent !important; overflow:hidden !important; display:none !important; line-height:0px !important; height:0 !important; opacity:0 !important; visibility:hidden !important; width:0 !important; mso-hide:all;">This is your preheader text for this email (Read more about email preheaders here - https://goo.gl/e60hyK)</span>' +
+                         			'<table class="container" border="0" cellpadding="0" cellspacing="0" width="700" bgcolor="#ffffff" style="width: 700px;">' +
+                         					'<table class="container header" border="0" cellpadding="0" cellspacing="0" width="620" style="width: 620px;">' +
+                         						'<tr>' +
+                         							'<td style="padding: 30px 0 30px 0; border-bottom: solid 1px #eeeeee;" align="left">' +
+                         								'<a href="#" style="font-size: 30px; text-decoration: none; color: #000000;"><img src="cid:appmakerLogo" width="120px"></a>'+
+                         							'</td>'+
+                         						'</tr>'+
+                         					'</table>'+
+                         				'</table>'+
+                    '<table class="container hero-subheader" border="0" cellpadding="0" cellspacing="0">'+
+                        '<tr>'+
+                            '<td class="hero-subheader__title" style="font-size: 43px; font-weight: bold; padding: 40px 0 15px 0;" align="left">Welcome to AppMaker!</td>'+
+                        '</tr>'+
+
+                        '<tr>'+
+                         '<td class="hero-subheader__content" style="font-size: 16px; line-height: 20px; color: #969696; padding: 0 60px 50px 0;" align="left">'+
+                                 '<p>Hi '+ data.fName + " " + data.lName + ' Welcome Aboard!</p>'+
+                                 '<p>Thank you for registering for Appmaker, the platform that enables you to create mobile </p>'+
+                                 '<p>applications without any coding. The service is currently in beta, and some features of the</p>'+
+                                 '<p>platform are currently not enabled. </p><br>'+
+                                 '<p>We have created a starter guide to help you build your first application and familiarize </p>'+
+                                 '<p>yourself with the <a href="http://developer.appmaker.lk">Appmaker interface</a>.</p><br>'+
+                                 '<p>As the service is in beta you may encounter bugs or errors. Please report these to</p>'+
+                                 '<p>support@appmaker.lk so that we can ensure they are addressed at launch.</p><br>'+
+                                 '<p>Good luck on your app creation journey!</p>'+
+                                 '<p>The Appmaker Team*</p>'+
+                         '</td>'+
+                        '</tr>'+
+                    '</table>'+
+                         '</body>'+
+                         '</html>';
+
+
         var mailOptions = {
-            from: "Otenro<communications@otenro.com>",
+            from: "support@appmaker.lk",
             to: data.email,
             subject: "Welcome to Otenro ",
-            html: {path: approot + '/assets/templates/user/common/emailtemplates/index.html'},
+            html: emailBody,
             attachments: [
                 {
-                    filename: 'Otenro-Logo.png',
-                    path: imgPath + 'Otenro-Logo.png',
-                    cid: 'otenrologo'
-                },{
-                    filename: 'android-platform_318-32015.png',
-                    path: imgPath + 'android-platform_318-32015.png',
-                    cid: 'android'
-                },{
-                    filename: 'apple_4096_black.png',
-                    path: imgPath + 'apple_4096_black.png',
-                    cid: 'apple'
-                }
-                ,{
-                    filename: 'img7.png',
-                    path: imgPath + 'img7.png',
-                    cid: 'img7'
-                },{
-                    filename: 'img8.png',
-                    path: imgPath + 'img8.png',
-                    cid: 'img8'
-                },{
-                    filename: 'img9.png',
-                    path: imgPath + 'img9.png',
-                    cid: 'img9'
-                },{
-                    filename: 'img10.png',
-                    path: imgPath + 'img10.png',
-                    cid: 'img10'
-                },{
-                    filename: 'img16.jpg',
-                    path: imgPath + 'img16.jpg',
-                    cid: 'img16'
+                    filename: 'appmaker.png',
+                    path: imgPath + 'appmaker.png',
+                    cid: 'appmakerLogo'
                 }
             ]
         };
