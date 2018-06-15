@@ -30,11 +30,11 @@ module.exports = {
                     break;
                 case config.IDEABIZ_ADMIN_API_ACTIONS.HISTORY:
                     sails.log.debug("in history");
-                    return res.serverError("in history: " + body.action);
+                    this.onSearchHistory(req,res);
                     break;
                 case config.IDEABIZ_ADMIN_API_ACTIONS.STATE_CHECK:
                     sails.log.debug("in state check");
-                    return res.serverError("No Action implimented for: " + body.action);
+                    this.onStateCheck(req,res);
                     break;
                 default:
                     sails.log.error("Havent impliment the action: " + body.action);
@@ -46,47 +46,295 @@ module.exports = {
         }
     },
 
+    /**
+     * History Sample api call:
+     * http://192.168.8.112:1337/adminapi/index
+     * JSON Body:
+     * {
+          "action" : "HISTORY",
+          "msisdn" : "94777123456",
+          "serviceID" : "0401f3c2-d2dd-4a25-bb30-4fe4cabbe988",
+          "appID" : "APP001",
+          "offset" : 0,
+          "limit" : 2
+        }
+     **/
+    onSearchHistory: function(req,res){
+        var reqBody = req.body;
+        var msisdn = reqBody.msisdn;
+        var serviceID = reqBody.serviceID;
+        var ideabizAppID = reqBody.appID;
+        var offset = reqBody.offset;
+        var limit = reqBody.limit;
+
+        var notFound = {
+            "subscription": {
+                "number": msisdn,
+                "status": "NOTFOUND"
+            }
+        };
+
+        sails.log.info("Exec onSearchHistory");
+
+        if(!ideabizAppID){
+            sails.log.error("ideabizAppID not found");
+            res.json(notFound);
+            return;
+        }
+
+        if(!msisdn){
+            sails.log.error("msisdn not found");
+            res.json(notFound);
+            return;
+        }
+
+        if(!serviceID){
+            sails.log.error("Service ID not found");
+            res.json(notFound);
+            return;
+        }
+
+        var queryWhere = {
+            where: {
+                'serviceId': serviceID,
+                'msisdn': msisdn
+            },
+            limit: limit,
+            skip: offset,
+            sort: 'date DESC'
+        };
+
+        IdeabizUserHistory.find(queryWhere).exec(function(err,history){
+            if(err){
+                sails.log.error("Error when searching for the history using serviceID: " + serviceID + " msisdn: " + msisdn + " error: " + err);
+                return res.json(notFound);
+            }
+
+            if(!history){
+                sails.log.error("No history in the system for the serviceID: " + serviceID);
+                return res.json(notFound);
+            }
+
+            var responseBody = {
+                "subscriberHistory": {
+                    "msisdn" : msisdn,
+                    "appID" : ideabizAppID,
+                    "serviceID" : serviceID,
+                    "offset" : offset,
+                    "limit" : limit,
+                    "history": []
+                }
+            };
+
+            history.forEach(function(row){
+                responseBody.subscriberHistory.history.push({
+                        "datetime": row.date,
+                        "trigger": "SYSTEM",
+                        "event": row.subscriptionStatus,
+                        "note": row.note,
+                        "status": "SUCCESS",
+                        "serviceID" : serviceID
+                    });
+            });
+
+            return res.json(responseBody);
+        });
+    },
+
+    /**
+     * State check Sample api call:
+     * http://192.168.8.103:1337/adminapi/index
+     * JSON Body:
+     * {
+          "action" : "STATE_CHECK",
+          "msisdn" : "94777123456",
+          "serviceID" : "0401f3c2-d2dd-4a25-bb30-4fe4cabbe988",
+          "appID" : "APP001"
+        }
+    **/
     onStateCheck: function(req,res){
         var reqBody = req.body;
         var msisdn = reqBody.msisdn;
         var serviceID = reqBody.serviceID;
-        var appID = reqBody.appID;
+        var ideabizAppID = reqBody.appID;
+        var thisController = this;
 
-        sails.log.info("msisdn: " + msisdn + " serviceID: " + serviceID + " appID: " + appID);
+        var notFound = {
+            "subscription": {
+                "number": msisdn,
+                "status": "NOTFOUND"
+            }
+        };
 
-        if(appID){
-            res.badRequest("appID not found");
+        sails.log.info("Exec onStateCheck");
+
+        if(!ideabizAppID){
+            sails.log.error("ideabizAppID not found");
+            res.json(notFound);
             return;
         }
 
-
-        if(msisdn){
-            res.badRequest("msisdn not found");
+        if(!msisdn){
+            sails.log.error("msisdn not found");
+            res.json(notFound);
             return;
         }
 
-        if(serviceID){
-            res.badRequest("Service ID not found");
+        if(!serviceID){
+            sails.log.error("Service ID not found");
+            res.json(notFound);
             return;
         }
 
-        var queryApp = { 'serviceID': serviceID };
+        var searchAppUser = {
+            serviceID: serviceID,
+            msisdn: msisdn
+        };
 
-        PublishDetails.findOne(queryApp).exec(function(err,app){
+        //Get the current status of the User
+        AppUser.findOne(searchAppUser).exec(function(err, appUser){
             if(err){
-                sails.log.error("Error when searching for a app using serviceID: " + serviceID + " error: " + err);
-                return res.serverError(err);
+                sails.log.error("There is an error when getting AppUser: " + err);
+                return res.json(notFound);
             }
 
-            if(!app){
-                sails.log.error("No app in the system for the serviceID: " + serviceID);
-                return res.notFound("No app in the system for the serviceID: " + serviceID);
+            //If user not registered
+            if(!appUser){
+                sails.log.error("No user registered for msisdn: " + msisdn + " for the serviceId: " + serviceID);
+                return res.json(notFound);
             }
 
-            var appID = app.appId;
+            //If user already registered
+            var userCurrentStatus = appUser.status;
+
+            //Get all the Subscribed and Unsubscribed history for the User
+
+            var searchQuery = {
+                where: {
+                    OR: [
+                        { subscriptionStatus: config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code },
+                        { subscriptionStatus: config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code}
+                    ],
+                    serviceId: serviceID,
+                    msisdn: msisdn
+                },
+                limit: 10,
+                sort: 'date DESC'
+            };
+
+            IdeabizUserHistory.find(searchQuery).exec(function(err,history) {
+                if (err) {
+                    sails.log.error("Error when searching for the history using serviceID: " + serviceID + " msisdn: " + msisdn + " error: " + err);
+                    return res.json(notFound);
+                }
+
+                if (!history) {
+                    sails.log.error("No history in the system for the serviceID: " + serviceID);
+                    return res.json(notFound);
+                }
+
+                var attrRegLog = "registration-log";
+                var attrUnRegLog = "unregistration-log";
+
+                var responseBody = {
+                    "statusCode": "SUCCESS",
+                    "message": "",
+                    "data": {
+                        "subscription": [{
+                            "msisdn":msisdn,
+                            "appID":ideabizAppID,
+                            "serviceID" : serviceID,
+                            "status":null,
+                            "microSubscriptions" : 0
+                        }]
+                    }
+                };
+
+                var sub = responseBody.data.subscription[0];
+                sub[attrRegLog] = null;
+                sub[attrUnRegLog] = null;
+
+                var count = 0;
+
+                for(var i=0; i<history.length; i++){
+                    var row = history[i];
+
+                    if(sub[attrRegLog] && sub[attrUnRegLog]){
+                        break;
+                    }
+
+                    if(!sub[attrRegLog] && row.subscriptionStatus === config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code){
+                        var regLog_ = {
+                            datetime: row.date,
+                            method: row.method
+                        }
+
+                        sub[attrRegLog] = regLog_;
+
+                        if(count===0) {
+                            sub.status = 'REGISTERED';
+                        }
+                    }
+
+                    if(!sub[attrUnRegLog] && row.subscriptionStatus === config.IDEABIZ_SUBSCRIPTION_STATUS.UNSUBSCRIBED.code){
+                        var unregLog_ = {
+                            datetime: row.date,
+                            method: row.method
+                        };
+
+                        sub[attrUnRegLog] = unregLog_;
+
+                        if(count===0) {
+                            sub.status = 'UNREGISTERED';
+                        }
+                    }
+                    count++;
+                };
+                return res.json(responseBody);
+            });
+        });
+    },
+
+    /**
+     * State Change Sample api call:
+     * http://192.168.8.103:1337/adminapi/index
+     * JSON Body:
+     * {
+          "action":"STATE_CHANGE",
+          "method":"RENTAL",
+          "msisdn":"94777123456",
+          "appID":"545",
+          "serviceID":"0401f3c2-d2dd-4a25-bb30-4fe4cabbe988",
+          "status":"SUBSCRIBED"
+        }
+     **/
+    onActionStateChange : function(req,res){
+        sails.log.debug("onActionStateChange");
+
+        var reqBody = req.body;
+        var msisdn = reqBody.msisdn;
+        var serviceID = reqBody.serviceID;
+        var subscriptionStatus = reqBody.status;
+        var method = reqBody.method;
+        var note = reqBody.note;
+        var actionStateChangeInstance = this;
+        var notFound = {
+            "subscription": {
+                "number": msisdn,
+                "status": "NOTFOUND"
+            }
+        };
+        //Checking the incoming status is valid with our Statuses in config.IDEABIZ_SUBSCRIPTION_STATUS <- Should remove once we impliment the renewal api
+
+        if(!actionStateChangeInstance.isSubscriptionStatusValid(subscriptionStatus)){
+            sails.log.error("Incoming status: " + subscriptionStatus + " is not matching any status in config.IDEABIZ_SUBSCRIPTION_STATUS");
+            return res.badRequest("Invalid status: " + subscriptionStatus);
+        }
+
+        try {
             var queryUser = {
                 'msisdn': msisdn,
-                'appID': appID
+                'serviceID': serviceID
             }
 
             AppUser.findOne(queryUser).exec(function (err, user) {
@@ -94,6 +342,17 @@ module.exports = {
 
                 //Will update the user statuses while receiving a status change call
                 if (user) {
+                    var log = {
+                        'date': new Date(),
+                        'appID': user.appID,
+                        'msisdn': msisdn,
+                        'serviceId': serviceID,
+                        'subscriptionStatus': subscriptionStatus,
+                        'method': method,
+                        'note': note,
+                        'messageBody': reqBody
+                    };
+
                     sails.log.debug("User exists for the msisdn: " + msisdn + " and will update the statuses");
                     var currentSubscriptionStatus = user.subscriptionStatus;
 
@@ -110,125 +369,17 @@ module.exports = {
 
                         sails.log.debug("Update users: " + users.length);
 
+                        actionStateChangeInstance.logStateChange(log);
+
                         //Send the notifications to the AppUser
                         actionStateChangeInstance.notifyUsers(req,res,users,currentSubscriptionStatus,subscriptionStatus);
 
                         return res.ok("Status updated");
                     });
-                }else {
-                    //Will create new User if him self is not a subscribed user in the system before
-                    var newAppUser = {
-                        'msisdn': msisdn,
-                        'appID': appID,
-                        'status': appUserStatus,
-                        'subscriptionStatus': subscriptionStatus,
-                        'lastAccessTime': new Date(),
-                        'registeredDate': new Date().toLocaleString()
-                    };
-
-                    AppUser.create(newAppUser).exec(function (err, user) {
-                        if (err) {
-                            return res.serverError(err);
-                        }
-
-                        sails.log.debug("New user created for the msisdn: " + msisdn);
-
-                        //Send the notifications to the AppUser
-                        actionStateChangeInstance.notifyUsers(req, res, user, currentSubscriptionStatus, subscriptionStatus);
-
-                        return res.created(user);
-                    });
+                }else{
+                    sails.log.error("No user registered for msisdn: " + msisdn + " for the serviceId: " + serviceID);
+                    return res.json(notFound);
                 }
-            });
-        });
-    },
-
-    onActionStateChange : function(req,res){
-        sails.log.debug("onActionStateChange");
-
-        var reqBody = req.body;
-        var msisdn = reqBody.msisdn;
-        var serviceID = reqBody.serviceID;
-        var subscriptionStatus = reqBody.status;
-        var actionStateChangeInstance = this;
-        //Checking the incoming status is valid with our Statuses in config.IDEABIZ_SUBSCRIPTION_STATUS <- Should remove once we impliment the renewal api
-
-        if(!actionStateChangeInstance.isSubscriptionStatusValid(subscriptionStatus)){
-            sails.log.error("Incoming status: " + subscriptionStatus + " is not matching any status in config.IDEABIZ_SUBSCRIPTION_STATUS");
-            return res.notFound("Invalid status: " + subscriptionStatus);
-        }
-
-        var queryApp = { 'serviceID': serviceID };
-
-        try {
-            PublishDetails.findOne(queryApp).exec(function(err,app){
-                if(err){
-                    sails.log.error("Error when searching for a app using serviceID: " + serviceID + " error: " + err);
-                    return res.serverError(err);
-                }
-
-                if(!app){
-                    sails.log.error("No app in the system for the serviceID: " + serviceID);
-                    return res.notFound("No app in the system for the serviceID: " + serviceID);
-                }
-
-                var appID = app.appId;
-                var queryUser = {
-                    'msisdn': msisdn,
-                    'appID': appID
-                }
-
-                AppUser.findOne(queryUser).exec(function (err, user) {
-                    var appUserStatus = actionStateChangeInstance.getAppUserStatus(subscriptionStatus);
-
-                    //Will update the user statuses while receiving a status change call
-                    if (user) {
-                        sails.log.debug("User exists for the msisdn: " + msisdn + " and will update the statuses");
-                        var currentSubscriptionStatus = user.subscriptionStatus;
-
-                        var setFields = {
-                            'status': appUserStatus,
-                            'subscriptionStatus': subscriptionStatus
-                        };
-
-                        AppUser.update(queryUser, setFields).exec(function(err, users){
-                            if(err){
-                                sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
-                                return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
-                            }
-
-                            sails.log.debug("Update users: " + users.length);
-
-                            //Send the notifications to the AppUser
-                            actionStateChangeInstance.notifyUsers(req,res,users,currentSubscriptionStatus,subscriptionStatus);
-
-                            return res.ok("Status updated");
-                        });
-                    }else {
-                        //Will create new User if him self is not a subscribed user in the system before
-                        var newAppUser = {
-                            'msisdn': msisdn,
-                            'appID': appID,
-                            'status': appUserStatus,
-                            'subscriptionStatus': subscriptionStatus,
-                            'lastAccessTime': new Date(),
-                            'registeredDate': new Date().toLocaleString()
-                        };
-
-                        AppUser.create(newAppUser).exec(function (err, user) {
-                            if (err) {
-                                return res.serverError(err);
-                            }
-
-                            sails.log.debug("New user created for the msisdn: " + msisdn);
-
-                            //Send the notifications to the AppUser
-                            actionStateChangeInstance.notifyUsers(req, res, user, currentSubscriptionStatus, subscriptionStatus);
-
-                            return res.created(user);
-                        });
-                    }
-                });
             });
         }catch(err){
             sails.log.error("Exception in registerUser, error: " + err);
@@ -237,7 +388,15 @@ module.exports = {
     },
 
     logApiCall : function(log){
-        IdeabizAPICallLog.create({ 'log': log }).exec(function(err,log){
+        sails.log.info("Exec takeaction body: " + JSON.stringify(log));
+
+        // IdeabizUserHistory.create({ 'log': log }).exec(function(err,log){
+        //     // sails.log.debug("log inserted");
+        // });
+    },
+
+    logStateChange : function(log){
+        IdeabizUserHistory.create(log).exec(function(err,log){
             // sails.log.debug("log inserted");
         });
     },
@@ -255,6 +414,9 @@ module.exports = {
         if(this.isSubscriptionStatusValid(subscriptionStatus)){
             switch (subscriptionStatus){
                 case config.IDEABIZ_SUBSCRIPTION_STATUS.SUBSCRIBED.code:
+                    return config.APP_USER_STATUS.ACTIVE;
+                    break;
+                case config.IDEABIZ_SUBSCRIPTION_STATUS.RENTAL_CHARGED.code:
                     return config.APP_USER_STATUS.ACTIVE;
                     break;
                 default:
