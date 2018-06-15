@@ -132,6 +132,9 @@ module.exports = {
         price:{
             type: 'string'
         },
+        operators:{
+            type: 'json'
+        },
 
         toJSON: function() {
           var obj = this.toObject();

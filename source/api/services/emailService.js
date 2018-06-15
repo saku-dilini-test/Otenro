@@ -14,8 +14,8 @@ var transporter = null;
 
 var transporter = nodemailer.createTransport({
     host: 'appmaker.lk',
-    port: 25,
-    secure: false, // true for 465, false for other ports
+    port: 465,
+    secure: true, // true for 465, false for other ports
     auth: {
         user: 'support@appmaker.lk', // generated ethereal user
         pass: '7hJvsYiU' // generated ethereal password
