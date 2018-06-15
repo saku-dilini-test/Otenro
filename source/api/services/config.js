@@ -37,5 +37,31 @@ module.exports = {
     APP_USER_STATUS: {
         'ACTIVE': 'A',
         'INACTIVE': 'I'
+    },
+    IDEABIZ_USER_ACTIONS:{'states':["APPROVED,REJECTED"]},
+    IDEABIZ_USER_NETWORK_CLIENTS:{
+
+        'Mobitel': {
+            'code': 'MOBITEL',
+            'desc': 'Mobitel',
+            'shareSplit': '40%-60%'
+        },
+        'Dialog': {
+            'code': 'DIALOG',
+            'desc': 'Dialog',
+            'shareSplit': '40%-60%'
+        },
+        'Hutch': {
+            'code': 'HUTCH',
+            'desc': 'Hutch',
+            'shareSplit': '40%-60%'
+        },
+        'Airtel': {
+            'code': 'AIRTEL',
+            'desc': 'Airtel',
+            'shareSplit': '40%-60%'
+        }
+
     }
+
 };

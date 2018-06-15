@@ -12,9 +12,26 @@ var server  = email.server.connect({
 });
 
 var path = require('path');
+const nodemailer = require('nodemailer');
+
 
 var notifyEmailAddressTO = 'udeshika@onbitlabs.com';
 var notifyEmailAddressCSS = '';
+
+
+    // create reusable transporter object using the default SMTP transport
+ var transporter = nodemailer.createTransport({
+        host: 'appmaker.lk',
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: 'support@appmaker.lk', // generated ethereal user
+            pass: '7hJvsYiU'  // generated ethereal password
+        },
+        tls:{
+                rejectUnauthorized: false
+            }
+    });
 
 module.exports = {
 
@@ -29,6 +46,8 @@ module.exports = {
                 id :req.body.appId
             }
 
+            var operators = config.IDEABIZ_USER_NETWORK_CLIENTS;
+            console.log(operators);
 
         PublishDetails.update(searchApp,details).exec(function(err,app) {
                 if (err) res.send(err);
@@ -36,6 +55,65 @@ module.exports = {
                     if (app.length==0) {
                         PublishDetails.create(details).exec(function(err,appDetails) {
                             if (err) res.send(err);
+                        Application.find({id:appDetails.appId}).exec(function(err,appData){
+                            User.find({id:appData[0].userId}).exec(function(err,userData){
+
+                        var email = req.body.email;
+                        var emailBody = "<html><br>Hi,<br><br>" +
+
+                                       "Please create and revert with the service ID for the below service created through<br> Appmaker. Details are as follows:" +
+
+                                        "<br><br><br>Service Name: " +  appDetails.title +
+                                        "<br>Company Name: " +  userData[0].firstName + " " + userData[0].lastName +
+                                        "<br>Revenue share split: <br<br>>";
+
+                                         for (var p in operators) {
+                                           if( operators.hasOwnProperty(p) ) {
+                                             emailBody += p + ":" + operators[p].shareSplit + ",<br>";
+                                           }
+                                         }
+
+
+                                 emailBody = emailBody + "<br><br>Charging Type: Subscription" +
+                                        "<br>Charging Details: " + appDetails.price +
+                                        "<br>Subscription Keyword: reg-" + appDetails.keyword +
+                                        "<br>Un-subscription Keyword: Unreg-" + appDetails.keyword +
+
+                                       "<br><br>Regards," +
+
+                                        "<br><br>Appmaker Support" +
+
+                                        "<br><br>Email : support@appmaker.lk" +
+
+                                        "<br>Contact : " + userData[0].mobile + "</html>";
+
+                                 mailOptions = {
+                                    from: userData[0].email, // sender address
+                                    to: "support@appmaker.lk", // list of receivers
+                                    subject: 'App Publish', // Subject line
+                                    html:emailBody
+
+
+                                };
+
+                                    // send mail with defined transport object
+                                    transporter.sendMail(mailOptions, (error, info) => {
+                                        if (error) {
+                                            //return console.log(error);
+                                            console.log(error);
+                                            return  res.send(500,error);
+
+                                        }
+                                        console.log('Message sent: %s', info.messageId);
+                                    return res.send('ok');
+                                });
+
+                            })
+
+                        })
+
+
+
                         });
                     }
                 }
@@ -51,29 +129,29 @@ module.exports = {
             }
         });
 
-            // Email Subject
-            var emailSubject = 'Ready to Publish : '+details.title;
-            // Email Body
-            var emailBody    =  "<html>" +
-                "<p> appID  :  "+details.appId+  "</p>"+
-                "<p> Title  :  "+details.title+  "</p>"+
-                "<p> AppType:  "+details.appType+"</p>"+
-                "</html>";
-            // Email Content
-            var emailDetails = {
-                from    : "onbilabsttest@gmail.com",
-                to      : notifyEmailAddressTO,
-                cc      : notifyEmailAddressCSS,
-                subject : emailSubject,
-                attachment  :
-                    [
-                        { data : emailBody, alternative : true }
-                    ]
-            };
-            // PublishDetails Update or Create Email Notification Function
-            server.send(emailDetails, function (err, message) {
-                sails.log(err || message);
-            });
+//            // Email Subject
+//            var emailSubject = 'Ready to Publish : '+details.title;
+//            // Email Body
+//            var emailBody    =  "<html>" +
+//                "<p> appID  :  "+details.appId+  "</p>"+
+//                "<p> Title  :  "+details.title+  "</p>"+
+//                "<p> AppType:  "+details.appType+"</p>"+
+//                "</html>";
+//            // Email Content
+//            var emailDetails = {
+//                from    : "onbilabsttest@gmail.com",
+//                to      : notifyEmailAddressTO,
+//                cc      : notifyEmailAddressCSS,
+//                subject : emailSubject,
+//                attachment  :
+//                    [
+//                        { data : emailBody, alternative : true }
+//                    ]
+//            };
+//            // PublishDetails Update or Create Email Notification Function
+//            server.send(emailDetails, function (err, message) {
+//                sails.log(err || message);
+//            });
     },
 
     /* image uploading with validation*/

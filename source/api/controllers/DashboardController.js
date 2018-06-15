@@ -87,7 +87,7 @@ module.exports = {
             firstMenuLabel = 'Commerce'
         }
         if (templateCategoryId == '3') {
-            firstMenuLabel = 'Article'
+            firstMenuLabel = 'Pages'
         }
         if (templateCategoryId == '1') {
             firstMenuLabel = 'Commerce'
