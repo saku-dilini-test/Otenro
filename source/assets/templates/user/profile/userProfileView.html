@@ -49,45 +49,45 @@
                     </div>
                 </md-tab-body>
             </md-tab>
-            <!-- Start billing view-->
-            <md-tab>
-                <md-tab-label>{{viewBilling}}</md-tab-label>
-                <md-tab-body>
-                    <div class="md-dialog-header">
-                        <h1>billing account</h1>
-                        <ul class="md-dialog-header-nav clearfix">
-                            <li ng-if="userRole != 'support'">
-                                <a ng-click="redirectToDashboard()" class="return-to-app">my apps</a>
-                            </li>
-                            <li>
-                                <a ng-click="redirectToLogin()" class="logout">Logout</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="md-dialog-main">
-                        <div class="clearfix">
-                            <fieldset>
-                                <label>Billing Name</label>
-                                <br>
-                                {{billingEdit.fname}}
-                            </fieldset>
-                            <fieldset>
-                                <label>Billing Address</label>
-                                <br>
-                                {{billingEdit.address}}
-                            </fieldset>
-                        </div>
-                        <div class="md-dialog-buttons">
-                            <div class="inner-section">
-                                <md-button class="me-default-button" ng-click="close()">Close</md-button>
-                                <md-button class="me-default-button" ng-click="goToEditView(3)">
-                                    Edit Billing Account
-                                </md-button>
-                            </div>
-                        </div>
-                    </div>
-                </md-tab-body>
-            </md-tab>
+            <!--&lt;!&ndash; Start billing view&ndash;&gt;-->
+            <!--<md-tab>-->
+                <!--<md-tab-label>{{viewBilling}}</md-tab-label>-->
+                <!--<md-tab-body>-->
+                    <!--<div class="md-dialog-header">-->
+                        <!--<h1>billing account</h1>-->
+                        <!--<ul class="md-dialog-header-nav clearfix">-->
+                            <!--<li ng-if="userRole != 'support'">-->
+                                <!--<a ng-click="redirectToDashboard()" class="return-to-app">my apps</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a ng-click="redirectToLogin()" class="logout">Logout</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                    <!--<div class="md-dialog-main">-->
+                        <!--<div class="clearfix">-->
+                            <!--<fieldset>-->
+                                <!--<label>Billing Name</label>-->
+                                <!--<br>-->
+                                <!--{{billingEdit.fname}}-->
+                            <!--</fieldset>-->
+                            <!--<fieldset>-->
+                                <!--<label>Billing Address</label>-->
+                                <!--<br>-->
+                                <!--{{billingEdit.address}}-->
+                            <!--</fieldset>-->
+                        <!--</div>-->
+                        <!--<div class="md-dialog-buttons">-->
+                            <!--<div class="inner-section">-->
+                                <!--<md-button class="me-default-button" ng-click="close()">Close</md-button>-->
+                                <!--<md-button class="me-default-button" ng-click="goToEditView(3)">-->
+                                    <!--Edit Billing Account-->
+                                <!--</md-button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</md-tab-body>-->
+            <!--</md-tab>-->
             <!-- Start profile edit view-->
             <md-tab>
                 <md-tab-label></md-tab-label>
