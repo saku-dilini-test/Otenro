@@ -27,11 +27,11 @@ module.exports = {
 
   port: 1448,
 
-  ssl: {
-    ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
-    key: require('fs').readFileSync(__dirname + '/ssl/private.key'),
-    cert: require('fs').readFileSync(__dirname + '/ssl/certificate.crt')
-  },
+  // ssl: {
+  //   ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
+  //   key: require('fs').readFileSync(__dirname + '/ssl/private.key'),
+  //   cert: require('fs').readFileSync(__dirname + '/ssl/certificate.crt')
+  // },
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
