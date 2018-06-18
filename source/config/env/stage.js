@@ -25,7 +25,7 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 1338,
+  port: 1337,
 
   ssl: {
     ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
