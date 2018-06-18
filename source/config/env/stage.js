@@ -43,9 +43,9 @@ module.exports = {
 
   /** ****** Custom Config ****** **/
   // HOST URL
-  HOST_URL : 'http://testdashboard.otenro.com',
+  HOST_URL : 'https://testdashboard.otenro.com',
   // ME SERVER Config
-  ME_SERVER_URL : 'http://testcdn.otenro.com/temp/',
+  ME_SERVER_URL : 'https://testcdn.otenro.com/temp/',
   ME_SERVER : '/home/admin/web/testcdn.otenro.com/public_html/temp/',
   ME_SERVER_PORT : 8081,
   // APP FILE SERVER Config
@@ -53,6 +53,6 @@ module.exports = {
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
   TEMPLATES_PATH : '/home/otenro/OtenroTest/Otenro/initData/templates/',
   PROGRESSIVE_TEMPLATES_PATH : '/home/otenro/OtenroTest/Otenro/initData/progressiveTemplates/',
-  REDIRECT_URL : 'http://testdashboard.otenro.com'
+  REDIRECT_URL : 'https://testdashboard.otenro.com'
 
 };

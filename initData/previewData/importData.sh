@@ -29,7 +29,7 @@ then
 elif [ $ENV == 'stag' ]
 then
 	DB='otenroTest'
-	serverUrl='http://testdashboard.otenro.com'
+	serverUrl='https://testdashboard.otenro.com'
 else
 	DB='otenro'
 	serverUrl='https://dashboard.otenro.com'
