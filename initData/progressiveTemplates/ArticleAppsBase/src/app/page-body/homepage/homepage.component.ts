@@ -6,6 +6,7 @@ import { CategoriesService } from '../../services/categories/categories.service'
 import { PagebodyServiceModule } from '../../page-body/page-body.service'
 import { TitleService } from '../../services/title.service';
 import {CordovaPluginFirebaseService} from "../../services/cordova-plugin-services/cordova-plugin-firebase.service";
+import {CordovaPluginDeviceService} from "../../services/cordova-plugin-services/cordova-plugin-device.service";
 
 var homePageCmp;
 
@@ -33,16 +34,20 @@ export class HomepageComponent implements OnInit {
   private isSliderDataAvailable: boolean = false;
   private isRandomProducts;
 
-  constructor(private route: Router, private dataService: PagebodyServiceModule,
-              private router: Router, private categoryService: CategoriesService,
-              private title: TitleService,private  push: CordovaPluginFirebaseService) {
+  constructor(private route: Router,
+              private dataService: PagebodyServiceModule,
+              private router: Router,
+              private categoryService: CategoriesService,
+              private device: CordovaPluginDeviceService,
+              private title: TitleService,
+              private  push: CordovaPluginFirebaseService) {
 
     this.title.changeTitle(data.name);
     homePageCmp = this;
   }
 
   ngOnInit() {
-    this.generatePushToken();
+    this.getDeviceUUID();
 
     this.imageUrl = SERVER_URL + "/templates/viewWebImages?userId="
       + this.userId + "&appId=" + this.appId + "&" + new Date().getTime() + "&images=secondNavi";
@@ -74,15 +79,21 @@ export class HomepageComponent implements OnInit {
     this.router.navigate(['/' + val, id, name]);
   }
 
-  pushSuccessCallback(results: any){
+  pushSuccessCallback(token: any){
+    console.log("Push Token: " + token);
+
+    var data = 'deviceId=' + token + '&uuid=' + homePageCmp.uuid;
+
+    console.log(">>>>>>>>>" + data + "<<<<<<<<<<<");
+
     try {
-      homePageCmp.categoryService.sendDeviceToken(results).subscribe(data => {
+          homePageCmp.categoryService.sendDeviceToken(data).subscribe(data => {
         },
         error => {
-          console.log('Error retrieving categories');
+          console.log('error in pushSuccessCallback: ' + error);
         });
     }catch(err){
-      console.log
+      console.log("Exception in pushSuccessCallback: " + err);
     }
   }
 
@@ -91,7 +102,18 @@ export class HomepageComponent implements OnInit {
   }
 
   generatePushToken(){
-    this.push.getToken(this.pushSuccessCallback, this.pushErrorCallback);
+    homePageCmp.push.getToken(homePageCmp.pushSuccessCallback, homePageCmp.pushErrorCallback);
+  }
+
+  deviceUUIDCallback(uuid: any){
+    console.log("UUID: " + uuid);
+    homePageCmp.uuid = uuid;
+
+    homePageCmp.generatePushToken();
+  }
+
+  getDeviceUUID(){
+    this.device.getUUID(homePageCmp.deviceUUIDCallback);
   }
 
 
