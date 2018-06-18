@@ -104,7 +104,7 @@ module.exports = {
             sort: 'date DESC'
         };
 
-        IdeabizUserHistory.find(queryWhere).exec(function(err,history){
+        IdeabizUserHistory.findOne(queryWhere).exec(function(err,history){
             if(err){
                 sails.log.error("Error when searching for the history using serviceID: " + serviceID + " msisdn: " + msisdn + " error: " + err);
                 return res.json(notFound);
@@ -379,7 +379,7 @@ module.exports = {
 
                                 sails.log.debug("Update users: " + users.length);
 
-                                //actionStateChangeInstance.logStateChange(log);
+                                actionStateChangeInstance.logStateChange(log);
 
                                 //Send the notifications to the AppUser
                                 actionStateChangeInstance.notifyUsers(req,res,users,currentSubscriptionStatus,subscriptionStatus);
