@@ -25,7 +25,7 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: 1448,
+  port: 1338,
 
   // ssl: {
   //   ca: require('fs').readFileSync(__dirname + '/ssl/ca_bundle.crt'),
@@ -43,7 +43,7 @@ module.exports = {
 
   /** ****** Custom Config ****** **/
   // HOST URL
-  HOST_URL : 'http://testdashboard.otenro.com:1448',
+  HOST_URL : 'http://testdashboard.otenro.com',
   // ME SERVER Config
   ME_SERVER_URL : 'http://testcdn.otenro.com/temp/',
   ME_SERVER : '/home/admin/web/testcdn.otenro.com/public_html/temp/',
@@ -53,6 +53,6 @@ module.exports = {
   CLIENT_SECRET : 'pro44f4f3be572ec33711a40a5b8b4789',
   TEMPLATES_PATH : '/home/otenro/OtenroTest/Otenro/initData/templates/',
   PROGRESSIVE_TEMPLATES_PATH : '/home/otenro/OtenroTest/Otenro/initData/progressiveTemplates/',
-  REDIRECT_URL : 'http://testdashboard.otenro.com:1448'
+  REDIRECT_URL : 'http://testdashboard.otenro.com'
 
 };
