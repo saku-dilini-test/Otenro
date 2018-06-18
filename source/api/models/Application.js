@@ -53,6 +53,10 @@ module.exports = {
         },
         appUpdateLocationSetting : {
             type : 'json'
+        },
+
+        id:{
+           type:'ObjectId'
         }
     }
 };
