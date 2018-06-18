@@ -318,6 +318,7 @@ module.exports = {
         var method = reqBody.method;
         var note = reqBody.note;
         var actionStateChangeInstance = this;
+
         var notFound = {
             "subscription": {
                 "number": msisdn,
@@ -334,51 +335,63 @@ module.exports = {
         try {
             var queryUser = {
                 'msisdn': msisdn,
-                'serviceID': serviceID
+                'serviceId': serviceID
             }
 
-            AppUser.findOne(queryUser).exec(function (err, user) {
+            console.log(queryUser);
+
+            AppUser.find(queryUser).exec(function (err, user) {
+                console.log(user);
+
                 var appUserStatus = actionStateChangeInstance.getAppUserStatus(subscriptionStatus);
 
                 //Will update the user statuses while receiving a status change call
                 if (user) {
-                    var log = {
-                        'date': new Date(),
-                        'appID': user.appID,
-                        'msisdn': msisdn,
-                        'serviceId': serviceID,
-                        'subscriptionStatus': subscriptionStatus,
-                        'method': method,
-                        'note': note,
-                        'messageBody': reqBody
-                    };
+                            var log = {
+                                'date': new Date(),
+                                'appID': user.appID,
+                                'msisdn': msisdn,
+                                'serviceId': serviceID,
+                                'subscriptionStatus': subscriptionStatus,
+                                'method': method,
+                                'note': note,
+                                'messageBody': reqBody
+                            };
 
-                    sails.log.debug("User exists for the msisdn: " + msisdn + " and will update the statuses");
-                    var currentSubscriptionStatus = user.subscriptionStatus;
+                            sails.log.debug("User exists for the msisdn: " + msisdn + " and will update the statuses");
+                            var currentSubscriptionStatus = user.subscriptionStatus;
 
-                    var setFields = {
-                        'status': appUserStatus,
-                        'subscriptionStatus': subscriptionStatus
-                    };
+                            var setFields = {
+                                'status': appUserStatus,
+                                'subscriptionStatus': subscriptionStatus
+                            };
 
-                    AppUser.update(queryUser, setFields).exec(function(err, users){
-                        if(err){
-                            sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
-                            return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
-                        }
+                            console.log("setFields " + JSON.stringify(setFields));
 
-                        sails.log.debug("Update users: " + users.length);
+                            AppUser.update(queryUser, setFields).exec(function(err, users){
 
-                        actionStateChangeInstance.logStateChange(log);
+                                console.log(users);
 
-                        //Send the notifications to the AppUser
-                        actionStateChangeInstance.notifyUsers(req,res,users,currentSubscriptionStatus,subscriptionStatus);
+                                if(err){
+                                    sails.log.error("Error when update the msisdn: " + msisdn + " error: " + err);
+                                    return res.serverError("Error when update the msisdn: " + msisdn + " error: " + err);
+                                }
 
-                        return res.ok("Status updated");
-                    });
+                                sails.log.debug("Update users: " + users.length);
+
+                                //actionStateChangeInstance.logStateChange(log);
+
+                                //Send the notifications to the AppUser
+                                actionStateChangeInstance.notifyUsers(req,res,users,currentSubscriptionStatus,subscriptionStatus);
+
+                                return res.ok("Status updated");
+                            });
+
+
+
                 }else{
-                    sails.log.error("No user registered for msisdn: " + msisdn + " for the serviceId: " + serviceID);
-                    return res.json(notFound);
+                        sails.log.error("No user registered for msisdn: " + msisdn + " for the serviceId: " + serviceID);
+                        return res.json(notFound);
                 }
             });
         }catch(err){
@@ -428,17 +441,18 @@ module.exports = {
 
     notifyUsers: function(req,res,users,oldSubscriptionStatus,newSubscriptionStatus){
 
-        // DeviceId.findOne
+        console.log(users[0].msisdn);
 
-        var messages =  [
-            {
-                "to": "f1lYHGPvvF0:APA91bFrEPln_eCLmchfTG5iGUzxUc-_Zm70yoboxUNI_-pjfM1sKYNb0UNni4BFHSn2VBtlJd5W5cazzIjFvDXvGM-D2Xv8DFZo2xW2D7sXr6h00n2iI9J-sXQ2LfYnwyIQCFeOh9Gi",
-                "notification": {
-                    "body" : "111111111"
-                }
-            }
-        ];
-        sails.log.debug("Notify users: " + users + " Subscription Status changed from " + oldSubscriptionStatus + " to " + newSubscriptionStatus);
+
+
+        DeviceId.findOne({appId:users[0].appId,deviceUUID:users[0].deviceUUID}).exec(function (err, device) {
+
+            Application.findOne({id:users[0].appId}).exec(function (err, app) {
+
+                pushService.sendPushNotifications(device[0].deviceId , "Your subscription to "+ app.appName + " has been successfully renewed. Click to open " +app.appName );
+            });
+        });
+
     },
 
     sendPushMessage: function(req,res){

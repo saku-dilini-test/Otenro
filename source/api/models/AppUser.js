@@ -4,7 +4,7 @@
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
-var Passwords = require('machinepack-passwords');
+
 
 module.exports = {
 
@@ -13,31 +13,38 @@ module.exports = {
   attributes: {
 
     msisdn:{
+
        type: 'string'
     },
-    appID:{
+    appId:{
         type: 'string'
     },
+
+    serviceId:{
+          type: 'string'
+      },
+
     status:{
+
         type: 'string'
     },
     subscriptionStatus:{
+
         type: 'string'
     },
     lastAccessTime:{
+
         type: 'date'
     },
     registeredDate:{
 
-      type:'string'
-
+        type:'string'
     },
     deviceUUID:{
 
       type:'string'
 
     }
-
   }
 
 

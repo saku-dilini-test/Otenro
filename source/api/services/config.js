@@ -32,6 +32,16 @@ module.exports = {
         'UNSUBSCRIBED': {
             'code': 'UNSUBSCRIBED',
             'desc': 'Unsubscribed'
+        },
+        'RENTAL_CHARGED':{
+
+            'code': 'RENTAL_CHARGED',
+            'desc': 'RentalCharged'
+
+        },'RENTAL_FAILED':{
+
+            'code': 'RENTAL_FAILED',
+            'desc': 'RentalFailed'
         }
     },
     APP_USER_STATUS: {
