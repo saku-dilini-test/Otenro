@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div id="carousel-1" class="carousel no-shadows slide" data-ride="carousel">
-          <div class="carousel-inner">
+          <div class="carousel-inner" role="listbox">
             <div class="item active">
               <img  src="{{imageUrlSlider}}/{{sliderData[0].imageUrl}}" (click)="navigateSliderProd('product',sliderData[0])"  />
 
@@ -38,13 +38,13 @@
 
 
 <!-- bloc-4 -->
-<div class="bloc hidden-xs bgc-white l-bloc" id="bloc-4" *ngIf="products && products[0] && products[0].length != 0">
+<div class="bloc hidden-xs bloc-lg l-bloc" id="bloc-4" *ngIf="products && products[0] && products[0].length != 0">
 	<div class="container" *ngFor="let node of products;">
 		<div class="row content-row">
 			<div class="col-sm-12">
-				<p class="header text-center">
+				<h2 class="header text-center  main-header-font">
 					Products
-				</p>
+				</h2>
 			</div>
 		</div>
 		<div class="row voffset" *ngIf="categories.length != 0">
@@ -55,7 +55,7 @@
 						{{prod.name}}
 					</p>
 					<p class="text-center product-content">
-						Price - {{currency}} {{prod.variants[0].price}}
+						Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
 					</p>
 					<div class="row">
 						<div class="col-sm-12">
@@ -77,7 +77,7 @@
 					{{prod.name}}
 				</p>
 				<p class="text-center product-content">
-					Price - {{currency}} {{prod.variants[0].price}}
+					Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
 				</p>
 				<div class="row">
 					<div class="col-sm-12">
@@ -106,7 +106,7 @@
 						{{prod.name}}
 					</p>
 					<p class="text-center product-content main-content-font">
-						Price - {{currency}} {{prod.variants[0].price}}
+						Price - {{currency}} {{prod.variants[0].price| number: '.2'}}
 					</p>
 					<div class="row">
 						<div class="col-sm-12">
@@ -172,9 +172,9 @@
   <div class="container bloc-lg">
     <div class="row">
       <div class="col-sm-12">
-        <p class="text-center header main-header-font">
+        <h2 class="text-center header main-header-font">
           {{header}}
-        </p>
+        </h2>
         <div class="row">
           <div class="col-sm-12 main-content-font">
             <p class="text-center" [innerHTML]="content">

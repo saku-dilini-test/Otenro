@@ -38,7 +38,7 @@ a:hover{text-decoration: none; cursor:pointer;}
 /* Sizes */
 
 .bloc-lg{
-	padding:100px 50px;
+	padding:50px 50px;
 }
 .bloc-md{
 	padding:50px;
@@ -735,13 +735,15 @@ button{
 	border-radius:2px 2px 2px ;
 }
 .header{
-	font-size:20px;
-	text-transform:uppercase;
-	color:#5E5E5E!important;
-	border-width:0px 0px 1px 0px;
-	border-style:dotted;
-	font-weight:bold;
-	padding-bottom:15px;
+    font-weight: bold;
+    text-align: center;
+    border-style: dotted;
+    border-width: 0px 0px 1px 0px;
+    margin-top: 11px;
+    border-color: rgba(214,214,214,0.7);
+    color: #5E5E5E!important;
+    text-shadow: 1px 2px 0px #EAEAEA;
+    text-transform: uppercase;
 }
 .quote-text{
 	font-size:20px;

@@ -5,16 +5,16 @@
     <div class="container bloc-lg">
       <div class="row">
         <div class="col-sm-12">
-          <p class="text-center header main-header-font" *ngIf="privacyPolicy">
+          <h2 class="text-center header main-header-font" *ngIf="privacyPolicy">
             PRIVACY Policy
-          </p>
+          </h2>
           <div class="row" >
             <div class="col-sm-12">
               <p class="header-spacing-top text-center main-content-font" *ngIf="privacyPolicy"  [innerHTML]="privacyPolicy">
               </p>
-              <p class="text-center header main-header-font header-spacing-top" *ngIf="returnPolicy">
+              <h2 class="text-center header main-header-font header-spacing-top" *ngIf="returnPolicy">
                 Return Policy
-              </p>
+              </h2>
               <p class="header-spacing-top text-center main-content-font" *ngIf="returnPolicy"  [innerHTML]="returnPolicy">
               </p>
             </div>

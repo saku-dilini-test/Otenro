@@ -7,7 +7,7 @@
 <div class="bloc bgc-white l-bloc" id="bloc-14">
   <div class="container bloc-lg">
     <div class="row">
-      <div class="col-sm-3">
+      <div class="col-sm-3 padding">
         <p class="links hidden-xs">
           BILLING ADDRESS
         </p>
@@ -26,9 +26,9 @@
             <div  *ngIf='formType == "pickup"'>
                 <div class="row">
                   <div class="col-sm-12">
-                    <p class="text-center header header-spacing-top">
+                    <h3 class="text-center header header-spacing-top main-header-font">
                       PicK-UP Details
-                    </p>
+                    </h3>
                   </div>
                 </div>
 
@@ -117,9 +117,9 @@
             <div  *ngIf='formType == "delivery"'>
                 <div class="row">
                     <div class="col-sm-12">
-                      <p class="text-center header header-spacing-top">
+                      <h3 class="text-center header header-spacing-top main-header-font">
                         Shipping Address
-                      </p>
+                      </h3>
                     </div>
                 </div>
                 <div class="row" *ngIf="showUser">
@@ -312,9 +312,9 @@
               <form [formGroup]="shippingForm" id="form_21476" novalidate *ngIf="newUser && complexForm.valid || oldUser">
                   <div class="row">
                     <div class="col-sm-12">
-                      <p class="text-center header">
+                      <h3 class="text-center header main-header-font">
                         SHIPPING OPTIONS
-                      </p>
+                      </h3>
                     </div>
                   </div>
                   <div class="row">
@@ -337,9 +337,9 @@
                  <form id="form_33031" novalidate>
                     <div class="row">
                       <div class="col-sm-12">
-                        <p class="text-center header main-header-font">
+                        <h3 class="text-center header main-header-font">
                           YOUR ORDER DETAILS
-                        </p>
+                        </h3>
                         <div class="row form-names-row-">
                           <div class="col-xs-6 col-sm-8">
                             <p>
@@ -370,7 +370,7 @@
                           </div>
                           <div class="col-xs-3 col-sm-2">
                             <p class="text-right">
-                              <strong>{{sign}} {{itemPriceCal(itm.total,itm.qty)}}</strong>
+                              <strong>{{sign}} {{itemPriceCal(itm.total,itm.qty)| number: '.2'}}</strong>
                             </p>
                           </div>
                         </div>
@@ -389,8 +389,8 @@
                           </div>
                           <div class="col-xs-3 col-sm-2">
                             <p class="text-right">
-                              <strong  *ngIf='hideShipping'>{{sign}} {{chkShippingCost}}</strong>
-                              <strong   *ngIf='chkPickupCost > 0'> {{sign}} {{chkPickupCost}}</strong>
+                              <strong  *ngIf='hideShipping'>{{sign}} {{chkShippingCost| number: '.2'}}</strong>
+                              <strong   *ngIf='chkPickupCost > 0'> {{sign}} {{chkPickupCost| number: '.2'}}</strong>
                             </p>
                           </div>
                         </div>
@@ -407,7 +407,7 @@
                           </div>
                           <div class="col-xs-3 col-sm-2">
                             <p class="text-right">
-                              <strong>{{sign}} {{taxTotal}}</strong>
+                              <strong>{{sign}} {{taxTotal| number: '.2'}}</strong>
                             </p>
                           </div>
                         </div>
@@ -424,7 +424,7 @@
                           </div>
                           <div class="col-xs-3 col-sm-2">
                             <p class="text-right">
-                              <strong>{{sign}} {{totalPrice}}</strong>
+                              <strong>{{sign}} {{totalPrice| number: '.2'}}</strong>
                             </p>
                           </div>
                         </div>
@@ -452,9 +452,9 @@
   <div class="custom-controls-stacked main-content-font padding-vertical" *ngIf="isSelected && !(overWeight || underWeight) && complexForm.valid || isSelected && !(overWeight || underWeight) && pickupForm.valid">
     <div class="row">
       <div class="col-sm-12">
-        <p class="text-center header header-spacing-top main-header-font">
+        <h3 class="text-center header header-spacing-top main-header-font">
           PAYMENT OPTIONS
-        </p>
+        </h3>
       </div>
     </div>
     <div *ngIf="deliveryShow" class="mt-3">

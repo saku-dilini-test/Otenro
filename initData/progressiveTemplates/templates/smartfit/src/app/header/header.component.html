@@ -26,15 +26,15 @@
 		<div class="container bloc-sm">
 			<nav class="navbar row">
 				<div class="navbar-header">
-					<a  (click)="navigate('','Home')"><img src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" width="120" /></a>
+					<a  (click)="navigate('','Home')"><img src="{{imageUrl}}/logo.png&dummy={{dummy}}" alt="logo" width="150" /></a>
 				</div>
 					<ul class="site-navigation nav navbar-nav">
 						<li>
 							<a (click)="navigate('','Home')">Home</a>
 						</li>
-						<li>
+						<!-- <li>
 							<a  (click)="navigate('aboutus','About Us')">About-us</a>
-						</li>
+						</li> -->
 						<li>
 							<a  (click)="navigate('contact', 'Contact Us')">Contact-us</a>
 						</li>
@@ -85,7 +85,7 @@
   <div id="mySidenav" class="sidenav  main-navigation">
     <div  class="closebtn" (click)="closeNav()">&times;</div>
 		<a (click)="navigate('','Home');closeNav()">Home</a>
-		<a (click)="navigate('aboutus','About Us');closeNav()">About-us</a>
+		<!-- <a (click)="navigate('aboutus','About Us');closeNav()">About-us</a> -->
 		<a (click)="navigate('contact', 'Contact Us');closeNav()">Contact-us</a>
 		<a (click)="navigate('policies', 'Policies');closeNav()">Privacy policy</a>
 		<a (click)="navigate('terms', 'Terms & Conditions');closeNav()">Terms &amp; Conditions</a>
@@ -93,5 +93,5 @@
         <a (click)="navigate('login/home');closeNav()"  *ngIf="!loginStatus">Sign In</a>
         <a (click)="navigate('order-history','Order History');closeNav()" *ngIf="loginStatus">Order History</a>
 		<a (click)="navigate('appUser','My Account');closeNav()" *ngIf="loginStatus">My Account</a>
-	<div class="navbar-brand text-center"   (click)="navigate('');closeNav()"><img src="{{imageUrl}}/logo.png&dummy={{dummy}}" width="120"></div>
+	<div class="navbar-brand text-center"   (click)="navigate('');closeNav()"><img src="{{imageUrl}}/logo.png&dummy={{dummy}}" width="150"></div>
   </div>

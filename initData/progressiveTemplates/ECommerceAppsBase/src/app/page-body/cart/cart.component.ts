@@ -91,7 +91,7 @@ export class CartComponent implements OnInit {
 
   itemPriceCal(price, qty) {
     let tot = price * qty
-    return (Math.round(tot * 100) / 100).toFixed(2);
+    return (Math.round(tot * 100) / 100);
   }
 
   getTotal = function () {
@@ -110,10 +110,10 @@ export class CartComponent implements OnInit {
     if (tax > 0) {
       //total = total + tax;
       this.dataService.cart.totalPrice = total;
-      return (Math.round(total * 100) / 100).toFixed(2);
+      return (Math.round(total * 100) / 100);
     } else {
       this.dataService.cart.totalPrice = total;
-      return (Math.round(total * 100) / 100).toFixed(2);
+      return (Math.round(total * 100) / 100);
     }
   };
 

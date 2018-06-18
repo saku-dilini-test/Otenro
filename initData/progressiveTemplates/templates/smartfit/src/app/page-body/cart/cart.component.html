@@ -2,13 +2,13 @@
 <div class="page-container bloc-md">
 
   <!-- bloc-10 -->
-  <div class="bloc bgc-white l-bloc" id="bloc-10">
+  <div class="bloc bgc-white l-bloc hidden-xs" id="bloc-10">
     <div class="container">
       <div class="row content-row">
         <div class="col-sm-12">
-          <p class="header text-center main-header-font">
+          <h2 class="header text-center main-header-font">
             SHOPPING CART
-          </p>
+          </h2>
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
                   PRICE
                 </p>
                 <p class="spacing-2 text-right text-left-xs">
-                  <strong>{{currency}} {{itemPriceCal(item.total,item.qty)}}</strong>
+                  <strong>{{currency}} {{itemPriceCal(item.total,item.qty)| number: '.2'}}</strong>
                 </p>
                 <div class="row">
                   <div class="col-sm-6">
@@ -124,7 +124,7 @@
         </div>
         <div class="col-sm-2">
           <p class="text-right">
-            {{currency}} {{itemPriceCal(item.total,item.qty)}}
+            {{currency}} {{itemPriceCal(item.total,item.qty)| number: '.2'}}
           </p>
         </div>
       </div>
@@ -141,7 +141,7 @@
         </div>
         <div class="col-sm-2">
           <p class="text-right">
-            <strong>{{currency}} {{getTotal()}}</strong>
+            <strong>{{currency}} {{getTotal()| number: '.2'}}</strong>
           </p>
         </div>
       </div>
@@ -181,18 +181,18 @@
         </div>
         <div class="row voffset">
           <div class="col-xs-4">
-            <p  *ngFor="let item of cartItems ; let i = index">
+            <p  *ngFor="let item of cartItems">
               {{item.name}}
             </p>
           </div>
           <div class="col-xs-4">
-            <p class="text-right" *ngFor="let item of cartItems ; let i = index">
+            <p class="text-right" *ngFor="let item of cartItems">
               {{item.qty}}
             </p>
           </div>
           <div class="col-xs-4">
-            <p class="text-right text-right-xs"  *ngFor="let item of cartItems ; let i = index">
-              {{currency}} {{itemPriceCal(item.total,item.qty)}}
+            <p class="text-right text-right-xs"  *ngFor="let item of cartItems">
+              {{currency}} {{itemPriceCal(item.total,item.qty)| number: '.2'}}
             </p>
           </div>
         </div>
@@ -209,7 +209,7 @@
           </div>
           <div class="col-xs-4">
             <p class="text-right">
-              <strong>{{currency}} {{getTotal()}}</strong>
+              <strong>{{currency}} {{getTotal()| number: '.2'}}</strong>
             </p>
           </div>
         </div>
