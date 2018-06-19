@@ -120,7 +120,6 @@ export class CheckoutComponent implements OnInit {
       this.loggedUserData = this.localStorageService.get('appLocalStorageUser' + this.appId);
       this.dataService.userData = this.localStorageService.get('appLocalStorageUser' + this.appId);
 
-      console.log(this.loggedUserData);
     } else {
       this.oldUser = false;
     }
@@ -257,10 +256,6 @@ export class CheckoutComponent implements OnInit {
 
     this.shippingData = [];
 
-    console.log("Country : ");
-    console.log(Country);
-    console.log("appId : " + appId);
-
     let param2 = {
       'appId': appId,
       'country': Country
@@ -277,7 +272,6 @@ export class CheckoutComponent implements OnInit {
             this.shippingData.push(this.shippingDatas[i]);
           }
         }
-        console.log(this.shippingData);
       }, (err) => {
         this.spinner.hide();
         alert(
@@ -288,9 +282,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   check(user, newUserCountry) {
-    console.log(user);
     if (user == 'oldUser') {
-      console.log('oldUser');
       this.oldUser = true;
       this.newUser = false;
       this.getShippingData(this.appId, this.dataService.userData.country);
@@ -298,7 +290,6 @@ export class CheckoutComponent implements OnInit {
       this.shippingForm.controls['shippingOption'].reset();
     }
     if (user == 'newUser') {
-      console.log('new Users');
       this.oldUser = false;
       if (!newUserCountry) {
         this.getShippingData(this.appId, this.selectedCountry);
@@ -334,7 +325,6 @@ export class CheckoutComponent implements OnInit {
 
   login() {
     this.router.navigate(['login', this.formType]);
-    console.log(this.dataService.cart);
   }
 
   checkNote(note) {
@@ -563,8 +553,7 @@ export class CheckoutComponent implements OnInit {
         this.chkCountry = this.country;
       } else {
         if (final.country) {
-          this.chkCountry = final.country
-          console.log(this.chkCountry);
+          this.chkCountry = final.country;
         }
       }
     }
@@ -719,7 +708,6 @@ export class CheckoutComponent implements OnInit {
         this.authorizeNet = this.paymentData.authorizeNetEnable;
         this.payhere = this.paymentData.payHereEnable;
         this.payHereMID = this.paymentData.payHereMerchantId;
-        console.log(this.payHereMID)
       }), (err) => {
         alert('warning!\n Unable to get Products Selected Category,\n Please check your connection!');
       };
@@ -1318,10 +1306,6 @@ export class CheckoutComponent implements OnInit {
 
     this.http.post(SERVER_URL + "/templatesOrder/savePendingOrder", this.orderDetails)
       .subscribe((orderRes: any) => {
-
-        console.log("done save pending order");
-        console.log("orderRes :");
-        console.log(orderRes);
 
         this.http.post(SERVER_URL + "/templatesInventory/updateInventory", this.payInfo.cart)
           .subscribe((res) => {

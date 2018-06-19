@@ -97,6 +97,7 @@ export class CategoriesComponent implements OnInit {
     this.categories = nextNode;
     this.prevProducts.push(this.products[0]);
     this.products[0] = nextProducts;
+    window.scrollTo(0, 0);
   }
 
 
@@ -113,6 +114,7 @@ export class CategoriesComponent implements OnInit {
     this.products[0] = this.prevProducts[index];
 
     this.prevProducts.splice(index);
+    window.scrollTo(0, 0);
   }
 
 

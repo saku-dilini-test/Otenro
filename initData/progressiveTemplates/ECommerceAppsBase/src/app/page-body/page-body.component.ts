@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {fadeInAnimation}  from '../animations/fade-in.animation';
-
+import { Router, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-page-body',
   templateUrl: './app/page-body/page-body.component.html',
-  styleUrls: ['./app/page-body/page-body.component.css'],
-  animations:[fadeInAnimation ],
-  host:{ '[@fadeInAnimation]' : ''}
+  styleUrls: ['./app/page-body/page-body.component.css']
 })
 export class PageBodyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  	  this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
   }
 
 }
