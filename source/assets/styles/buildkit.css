@@ -1597,19 +1597,18 @@ md-dialog .md-actions .md-button {
 ******************************************************/
 .me-guest{
     width: 100%;
-    height: 100vh;
-    background-color: rgba(33, 33, 33, 0.48);
+    height: 100%;
+    background-color: rgb(146, 146, 146);
     position: relative;
+    padding: 100px 0;
 }
 
 .me-guest-area{
     background-color: #f9f9f9;
-    position: absolute;
-    top: 100px;
-    left: 50%;
-    margin-left: -250px;
+    position: relative;
     padding: 20px;
     width: 500px;
+    margin: auto;
 }
 
 .me-guest-area img{
