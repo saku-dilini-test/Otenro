@@ -70,6 +70,62 @@ module.exports = {
             'shareSplit': '40%-60%'
         }
 
-    }
+    },
+         IDEABIZ_ADMIN_APP_STATUS:{
+
+             "PUBLISH_STATUSES": [
+                 {
+                   "code": "PENDING",
+                   "description": "Pending",
+                   "nextAvailable": [
+                     "APPROVED",
+                     "REJECTED"
+                   ],
+                   "allowedRoles": [
+                     "admin",
+                     "superAdmin",
+                     "appCreater"
+                   ]
+                 },
+                 {
+                   "code": "APPROVED",
+                   "description": "Approved",
+                   "nextAvailable": [
+                     "SUSPENDED",
+                     "TERMINATED"
+                   ],
+                   "allowedRoles": [
+                     "admin",
+                     "superAdmin"
+                   ]
+                 },
+                 {
+                   "code": "REJECTED",
+                   "description": "Rejected",
+                   "nextAvailable": [],
+                   "allowedRoles": []
+                 },
+                 {
+                   "code": "SUSPENDED",
+                   "description": "Suspended",
+                   "nextAvailable": [
+                     "APPROVED"
+                   ],
+                   "allowedRoles": [
+                     "admin",
+                     "superAdmin"
+                   ]
+                 },
+                 {
+                   "code": "TERMINATED",
+                   "description": "Terminated",
+                   "nextAvailable": [],
+                   "allowedRoles": [
+                     "admin",
+                     "superAdmin"
+                   ]
+                 }
+               ]
+            }
 
 };

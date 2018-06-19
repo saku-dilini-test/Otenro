@@ -883,6 +883,120 @@ module.exports = {
 
 
 
-    }
+    },
+        sendApkEmail : function(data,res){
+
+        console.log("inside send apk email " + data.email);
+        console.log(config.server.host);
+
+        var apkFile = config.server.host +'/getApk';
+            var emailBody,subject;
+
+            var email = data.email;
+
+                           if(data.status == "APPROVED"){
+
+                                emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
+
+                                           "Good news! " + data.appName + " App has been approved for launch! Users can access the web app<br> using the following URL: <a href=" + data.appView + "> App view</a><br><br>" +
+
+                                           "You can download the apk file of the application from " + "<a href=" + apkFile + "> download APK </a><br><br>" +
+
+                                           "<br>If you need any technical support in uploading the app to an app store, please contact<br> us at support@appmaker.lk. To upload the app on Google Play Store you can follow the<br> instructions we have given on publishing page " + "<a href='http://developer.appmaker.lk'>developer.appmaker.lk</a>" +
+
+                                           "<br><br>For any assistance required in marketing the application please contact<br> marketing@appmaker.lk<br><br>" +
+
+                                           "Regards,<br><br>"+
+
+                                           "Appmaker Team</html>";
+
+                                subject = data.appName + " has been approved";
+
+                           }else if(data.status == "SUSPENDED"){
+
+                                emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
+
+                                           "This email is to inform you that " + data.appName + " has been suspended for the below operators:<br><br>";
+
+                                           if(data.operators){
+                                                data.operators.forEach(function(ele){
+                                                    emailBody += "*" + ele + "<br>";
+                                                });
+                                           }
+
+                                           emailBody += "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+
+                                           "Regards,<br>"+
+
+                                           "Appmaker Team</html>";
+
+                                subject = data.appName + " has been suspended";
+
+                           }else if(data.status == "REJECTED"){
+
+                                emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
+
+                                           "This email is to inform you that " + data.appName + " has been rejected for the below operators:<br><br>";
+
+                                           if(data.operators){
+                                                data.operators.forEach(function(ele){
+                                                    emailBody += "*" + ele + "<br>";
+                                                });
+                                           }
+
+                                           emailBody += "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+
+                                           "Regards,<br>"+
+
+                                           "Appmaker Team</html>";
+
+                                subject = data.appName + " has been rejected";
+
+                           }else if(data.status == "TERMINATED"){
+
+                                           emailBody = "<html><br>Hi " +  data.fName + " " + data.lName + ",<br><br>"+
+
+                                                  "This email is to inform you that " + data.appName + " has been terminated for the below operators:<br><br>";
+
+                                                  if(data.operators){
+                                                       data.operators.forEach(function(ele){
+                                                           emailBody += "*" + ele + "<br>";
+                                                       });
+                                                  }
+
+                                                  emailBody += "<br><br>You can re-submit the app for approval after addressing the concerns<br>" +
+
+                                                  "Regards,<br>"+
+
+                                                  "Appmaker Team</html>";
+
+                                subject = data.appName + " has been terminated";
+
+                           }
+
+                     mailOptions = {
+                        from: 'support@appmaker.lk', // sender address
+                        to: email, // list of receivers
+                        subject: subject, // Subject line
+                        html:emailBody
+
+    //                    <h1>Test email</h1><br><a href=" + apkFile + ">Download APK</a>"
+
+                    };
+
+                        // send mail with defined transport object
+                        transporter.sendMail(mailOptions, (error, info) => {
+                            if (error) {
+                                //return console.log(error);
+                                console.log(error);
+                                return  res.send(500,error);
+
+                            }
+                            console.log('Message sent: %s', info.messageId);
+                        return res.send('ok');
+                    });
+
+
+        }
 };
 

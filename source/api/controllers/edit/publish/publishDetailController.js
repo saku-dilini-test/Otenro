@@ -119,7 +119,12 @@ module.exports = {
                 }
         });
 
-        Application.update(searchAppData, {status :"PENDING"}).exec(function(err,app) {
+            var status = {
+                status :"PENDING",
+                publishStatus :"PENDING"
+            }
+
+        Application.update(searchAppData, status).exec(function(err,app) {
             if (err) res.send(err);
             else {
                 res.send({

@@ -27,6 +27,11 @@ module.exports = {
             type: 'string'
 
         },
+         publishStatus: {
+             type: 'string'
+
+         },
+
         displayImage: {
             type: 'string'
             

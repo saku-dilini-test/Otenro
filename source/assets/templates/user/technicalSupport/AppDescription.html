@@ -1,0 +1,117 @@
+<md-dialog aria-label="publish-article">
+
+    <!--Google Analytics-->
+    <script>
+        ga('set', 'page', 'preview-articles');
+        ga('send', 'pageview');
+
+    </script>
+
+    <md-dialog-content>
+        <md-tab-body>
+            <div class="md-dialog-header">
+                <div class="md-dialog-header-nav clearfix">
+                    <h1 class="pull-left">APP DESCRIPTION</h1>
+                    <!--<fieldset class="col-2 pull-right reset-margin">-->
+                    <!--<input type="text" required="" ng-model="search.title" class="me-search-input" name="name">-->
+                    <!--<input type="submit" value="search" class="me-search-button">-->
+                    <!--</fieldset>-->
+                </div>
+            </div>
+
+            <div class="md-dialog-main clearfix">
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p>App Name:</p>
+                    </div>
+                    <div class="col-sm-3">
+                        {{appName}}
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p>App Description:</p>
+                    </div>
+                    <div class="col-sm-3">
+                        {{appDescription}}
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p>App Keyword:</p>
+                    </div>
+                    <div class="col-sm-3">
+                        {{keyword}}
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p>App Price:</p>
+                    </div>
+                    <div class="col-sm-3">
+                        {{price}}
+                    </div>
+
+                </div>
+
+
+
+                <br>
+                <br>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src="{{publishImgUrl}}2.png" height="250" width="150" border="2">
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="{{publishImgUrl}}3.png" height="250" width="150" border="2">
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="{{publishImgUrl}}4.png" height="250" width="150" border="2">
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="{{publishImgUrl}}5.png" height="250" width="150" border="2">
+                    </div>
+                </div>
+                <!--<form class="allItems" novalidate>-->
+                <!--<table class="table">-->
+                <!--<thead>-->
+                <!--<th>Title</th>-->
+                <!--<th>Category</th>-->
+                <!--<th>Status</th>-->
+                <!--<th>Publish<br><font style="font-size:9px">Date & Time</font></th>-->
+                <!--<th>Expiry<br><font style="font-size:9px">Date & Time</font></th>-->
+                <!--<th>Action</th>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr dir-paginate="article in articleList | filter:search | itemsPerPage: pageSize">-->
+                <!--<td>{{article.title}}</td>-->
+                <!--<td>{{article.categoryName}}</td>-->
+                <!--<td>{{article.status}}</td>-->
+                <!--<td>{{article.publishDate}}</td>-->
+                <!--<td>{{article.expiryDate}}</td>-->
+                <!--<td>-->
+                <!--<a data-ng-click="editArticle(article)">Edit</a> /-->
+                <!--<a data-ng-click="deleteArticle($index,article)">Delete</a>-->
+                <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+                <!--</table>-->
+                <!--</form>-->
+                <!--<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="vendor/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>-->
+            </div>
+
+            <div class="md-dialog-buttons">
+                <div class="inner-section">
+                    <!--<md-button class="me-default-button" ng-click="showPublishArticleDialog()">Publish Article</md-button>-->
+                    <md-button class="me-default-button" ng-click="close()">OK</md-button>
+                </div>
+            </div>
+        </md-tab-body>
+
+    </md-dialog-content>
+</md-dialog>

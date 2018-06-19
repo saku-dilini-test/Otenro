@@ -135,6 +135,12 @@ module.exports = {
         operators:{
             type: 'json'
         },
+        comment:{
+            type: 'string'
+        },
+        publishStatus:{
+            type: 'string'
+        },
 
         toJSON: function() {
           var obj = this.toObject();

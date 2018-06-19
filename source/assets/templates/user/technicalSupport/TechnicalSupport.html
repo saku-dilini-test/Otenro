@@ -8,12 +8,17 @@
         <div class="obl-dashboard-header clearfix">
             <h2 ng-hide="welcome"> </h2>
             <p  ng-hide="welcome"> Welcome to the technical support area</p>
+            <fieldset >
+                <input type="text" required="" ng-model="search" class="me-search-input" name="name">
+                <input type="submit" value="search" class="me-search-button">
+            </fieldset>
             <div class="obl-dashboard-settings">
                 <button class="user-settings-button" ng-click="profileView()" type="button">
                     <img src="images/user-icon.svg" alt="User Logo" />
                 </button>
             </div>
         </div>
+
     </div>
 </div>
 
@@ -32,110 +37,140 @@
         <form class="allItems" novalidate>
             <table class="table">
                 <thead class="obl-dashboard-apps">
-                <th>Id</th>
-                <th>Application Name</th>
-                <th>Email</th>
-                <th>Application Status</th>
-                <th>Action</th>
-                <th>Send Email</th>
+                <th width="18%" align="center">App ID</th>
+                <th width="10%">App Name</th>
+                <th width="10%">Email</th>
+                <th width="12%">App Description</th>
+                <th width="6%">Billing</th>
+                <th width="10%">App Status</th>
+                <th width="20%">Action</th>
+                <th width="6%">Comments</th>
+                <th width="10%">Send Email</th>
                 <!--<th>User Details</th>-->
                 </thead>
 
                 <tbody>
                 <tr ng-repeat="app in appList">
-                    <td >
-                    <a href="{{serverURL}}templates/viewWebTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">
+                    <td ng-click="showAppView(app.id,app.userId)">
+                    <!--<a href="{{serverURL}}templates/viewWebTemplateUrl?userId={{app.userId}}&appId={{app.id}}&1493976247494/">-->
                         {{app.id}}
-                    </a>
+                    <!--</a>-->
                     </td>
                     <td>{{app.appName}}</td>
                     <td>
-                        <div data-ng-repeat="user in userList">
+                        <div ng-repeat="user in userList">
                             <div ng-if="user.id==app.userId">
                                 {{user.email}}
                             </div>
                         </div>
                     </td>
-                    <td>{{app.status}}</td>
                     <td>
-                        <a  ng-if="app.status=='PENDING'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>
-                        <a  ng-if="app.status=='PUBLISHED'" data-ng-click="getPublishDetails(app.id,app.userId)">Update</a>
-                        <a  ng-if="app.status=='UPLOADING'" data-ng-click="getPublishDetails(app.id,app.userId)">Finish</a>
+                        <!--<div ng-if="publishApps.appId == app.id" ng-click="appDescriptionView(app.appName,publishApps.fullDescription)">-->
+                            <!--{{publishApps.shortDescription}}-->
+                        <!--</div>-->
+                        <a ng-click="appDescriptionView(app.appName,getDes(app.id,'full'),app.id,app.userId)">{{getDes(app.id,'short')}}</a>
                     </td>
                     <td>
-                        <div data-ng-repeat="user in userList">
-                            <div ng-if="user.id==app.userId">
-                                <a data-ng-click="sendApkEmail(user.email)">Send Email</a>
+                        <button ng-click="approvedOperatorsView(app.id,getDes(app.id,'manage'))" >Manage</button>
+
+                    </td>
+                    <td>{{getStatus(app.status)}}</td>
+                    <td>
+                        <div class="row">
+                            <div data-ng-repeat="user in userList">
+                                <div ng-if="user.id==app.userId">
+                            <div class="col-sm-8">
+                                <select ng-model= "publishStatus">
+                                    <option ng-repeat="sts in getArr(publishStatus,app.publishStatus)" value="{{sts.code}}" >{{sts.description}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <button data-ng-click="apply(app.id,publishStatus,user.email,user.firstName,user.lastName,app.appName,app.userId,getDes(app.id,'manage'))">Apply</button>
+                            </div>
+                                </div>
                             </div>
                         </div>
+
+                        <!--<a  ng-if="app.status=='PENDING'" data-ng-click="getPublishDetails(app.id,app.userId)">Publish</a>-->
+                        <!--<a  ng-if="app.status=='PUBLISHED'" data-ng-click="getPublishDetails(app.id,app.userId)">Update</a>-->
+                        <!--<a  ng-if="app.status=='UPLOADING'" data-ng-click="getPublishDetails(app.id,app.userId)">Finish</a>-->
                     </td>
+                <td align="center">
+                    <u><md-icon ng-click="commentView(app.appName,app.id,getDes(app.id,'comment'),app.createdAt)" md-svg-icon="images/create-icon.svg"></md-icon></u>
+                </td>
+                    <!--<td>-->
+                        <!---->
+                                <!--<a data-ng-click="sendApkEmail(user.email,user.firstName,user.lastName,app.appName,app.id,app.userId)">Send Email</a>-->
+                         <!---->
+                    <!--</td>-->
                 </tr>
                 </tbody>
             </table>
         </form> </md-tab-body>
             </md-tab>
-            <md-tab>
-                <md-tab-label>Ad Networks</md-tab-label>
-                <md-tab-body>
 
-                    <form class="allItems" novalidate>
-                        <table class="table">
-                            <thead class="obl-dashboard-apps">
-                            <th>Add network name</th>
-                            <th>Clickid</th>
-                            <th>AFfid</th>
-                            <th>Return URL</th>
-                            <th>Action</th>
-                            <!--<th>User Details</th>-->
-                            </thead>
+            <!--<md-tab>-->
+                <!--<md-tab-label>Ad Networks</md-tab-label>-->
+                <!--<md-tab-body>-->
 
-                            <tbody>
-                            <tr ng-repeat="app in addNetworkList">
-                                <td>{{app.adagentname}}</td>
-                                <td>{{app.clickid}}</td>
-                                <td>{{app.affid}}</td>
-                                <td>{{app.returnurl}}</td>
-                                <td>
-                                    <a data-ng-click="adNetworkDetails(app)">Edit</a>
-                                    /
-                                    <a data-ng-click="deleteAdNetwork(app)">Delete</a>
-                                </td>
-                               </tr>
-                            </tbody>
-                        </table>
-                        <div><a href="#/viewAdNetworks/"> + Add new network</a></div>
-                    </form> </md-tab-body>
-            </md-tab>
-            <md-tab>
-                <md-tab-label>Users from Ad Networks</md-tab-label>
-                <md-tab-body>
+                    <!--<form class="allItems" novalidate>-->
+                        <!--<table class="table">-->
+                            <!--<thead class="obl-dashboard-apps">-->
+                            <!--<th>Add network name</th>-->
+                            <!--<th>Clickid</th>-->
+                            <!--<th>AFfid</th>-->
+                            <!--<th>Return URL</th>-->
+                            <!--<th>Action</th>-->
+                            <!--&lt;!&ndash;<th>User Details</th>&ndash;&gt;-->
+                            <!--</thead>-->
 
-                    <form class="allItems" novalidate>
-                        <table class="table">
-                            <thead class="obl-dashboard-apps">
-                            <th>User Name</th>
-                            <th>Ad network</th>
-                            <th>AFFID</th>
-                            <th>Created Date</th>
-                            <th>Last login</th>
-                            <th>isActive</th>
-                            <th>Login Count</th>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="app in adUserList">
-                                    <td> {{app.email}} </td>
-                                    <td> {{app.adagent}} </td>
-                                    <td> {{app.affid}} </td>
-                                    <td> {{app.createdAt}} </td>
-                                    <td> {{app.lastLoginTime}} </td>
-                                    <td> {{app.isActive}} </td>
-                                    <td> {{app.loginCount}} </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div><a href="#/viewAdNetworks/"></a></div>
-                    </form> </md-tab-body>
-            </md-tab>
+                            <!--<tbody>-->
+                            <!--<tr ng-repeat="app in addNetworkList">-->
+                                <!--<td>{{app.adagentname}}</td>-->
+                                <!--<td>{{app.clickid}}</td>-->
+                                <!--<td>{{app.affid}}</td>-->
+                                <!--<td>{{app.returnurl}}</td>-->
+                                <!--<td>-->
+                                    <!--<a data-ng-click="adNetworkDetails(app)">Edit</a>-->
+                                    <!--/-->
+                                    <!--<a data-ng-click="deleteAdNetwork(app)">Delete</a>-->
+                                <!--</td>-->
+                               <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+                        <!--<div><a href="#/viewAdNetworks/"> + Add new network</a></div>-->
+                    <!--</form> </md-tab-body>-->
+            <!--</md-tab>-->
+            <!--<md-tab>-->
+                <!--<md-tab-label>Users from Ad Networks</md-tab-label>-->
+                <!--<md-tab-body>-->
+
+                    <!--<form class="allItems" novalidate>-->
+                        <!--<table class="table">-->
+                            <!--<thead class="obl-dashboard-apps">-->
+                            <!--<th>User Name</th>-->
+                            <!--<th>Ad network</th>-->
+                            <!--<th>AFFID</th>-->
+                            <!--<th>Created Date</th>-->
+                            <!--<th>Last login</th>-->
+                            <!--<th>isActive</th>-->
+                            <!--<th>Login Count</th>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--<tr ng-repeat="app in adUserList">-->
+                                    <!--<td> {{app.email}} </td>-->
+                                    <!--<td> {{app.adagent}} </td>-->
+                                    <!--<td> {{app.affid}} </td>-->
+                                    <!--<td> {{app.createdAt}} </td>-->
+                                    <!--<td> {{app.lastLoginTime}} </td>-->
+                                    <!--<td> {{app.isActive}} </td>-->
+                                    <!--<td> {{app.loginCount}} </td>-->
+                            <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+                        <!--<div><a href="#/viewAdNetworks/"></a></div>-->
+                    <!--</form> </md-tab-body>-->
+            <!--</md-tab>-->
             <md-tab ng-disabled="enableTab">
 
                 <md-tab-label>Registered users </md-tab-label>
@@ -143,7 +178,8 @@
                     <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"
                                              template-url="vendor/angularUtils-pagination/dirPagination.tpl.html">
 
-                    </dir-pagination-controls> <form class="allItems" novalidate>
+                    </dir-pagination-controls>
+                    <form class="allItems" novalidate>
                     <table class="table">
                         <thead class="obl-dashboard-apps">
                         <th>User No</th>
@@ -166,9 +202,14 @@
                            </tr>
                            </tbody>
                     </table>
-                </form> </md-tab-body>
+                </form>
+                </md-tab-body>
             </md-tab>
-            <md-tab ng-disabled="enableTab">
+
+            <md-tab ng-disabled="true">
+                <md-tab-label>Reports</md-tab-label>
+                <md-tab-body>
+
             </md-tab>
         </md-tabs>
     </div>

@@ -104,6 +104,16 @@ angular.module('app')
               controller: 'livePreviewCtrl',
               templateUrl : 'user/welcome/LivePreview.html'
 
+          }).state('anon.appView',{
+              url :'/appView/:p',
+              params:{
+                  userId:null,
+                  appId: null,
+                  p:null
+              },
+              controller: 'appViewCtrl',
+              templateUrl : 'user/technicalSupport/AppView.html'
+
           }).state('user.dashboard',{
               url :'/dashboard',
               controller : 'DashboardCtrl',
