@@ -41,6 +41,8 @@ export class CategoriesComponent implements OnInit {
 
       this.prevProducts.push(currentNode.products);
       this.products = nextProducts;
+      window.scrollTo(0, 0);
+
     }
   }
 
@@ -50,8 +52,7 @@ export class CategoriesComponent implements OnInit {
 
     this.products = this.prevProducts[this.prevProducts.length-1];;
     this.prevProducts.splice(this.prevProducts.length-1);
-
-
+    window.scrollTo(0, 0);
   }
 
   checkSoldOut(product) {
